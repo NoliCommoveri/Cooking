@@ -19,7 +19,7 @@ run_worker_first = true
 # Sent-from address for reset and sign-up emails. Its domain must be verified
 # in Resend. RESEND_API_KEY and OPS_TOKEN are secrets, set in the dashboard.
 [vars]
-MAIL_FROM = "Clean Plate Recipes <cook@immotus.app>"
+MAIL_FROM = "Clean Plate Recipes <cleanplate@immotus.app>"
 
 # The database. Paste the id from the Cloudflare dashboard (D1 → the database →
 # its Database ID) in place of the placeholder below, then remove the # at the

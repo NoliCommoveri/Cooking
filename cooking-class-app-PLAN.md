@@ -403,6 +403,8 @@ Do **not** use:
 - **Family recipes** (bonus, §6.10): add the family's own recipes, submit them for the shared library, and add recipes from the community directory
 - **Mark test-cooked:** after cooking a lesson themselves, a parent can mark it test-cooked for their family (§7). Optional; lessons don't need it to be shown to kids
 - **Pantry staples:** a list of ingredients always on hand, which drop off the shopping list
+- **Delete our family** and **Download our data** (§6.14)
+- **Print our progress** (§6.15)
 - **Family settings:** family name, profiles (add, rename, avatar, theme, who's on each), dietary filters (§2.1), default servings, voice step control (off until turned on, §6.12), other parent logins
 
 ### 6.2a Owner features
@@ -673,13 +675,42 @@ The linter must **warn** (without failing the build) when:
 - a lesson reuses a skill from an earlier lesson but has no `learn.callback`
 - an ingredient or tool uses its category's fallback icon
 
+### 6.13 Website and legal pages — Requirement (owner, 2026-10-22)
+The app lives at **`cleanplate.immotus.app`**, and its front door is a simple public website.
+- **Landing page** at `/` for anyone not logged in: what the app is in a few lines (a cooking course for kids, one skill and one real dish per lesson, with biblically clean recipes), a few dish pictures, and **Sign up** and **Log in**. A logged-in device goes straight to the chef's lockers.
+- **Privacy policy** (`/privacy`) and **terms of use** (`/terms`), short and plain, linked from the landing page and the sign-up page. Sign-up says "By signing up you agree to the terms and privacy policy."
+- The words are the owner's. Claude drafts them from the points below, and the owner approves or rewrites them before launch. **They aren't legal advice**, and the owner should have someone qualified read them.
+- **What the privacy policy covers** (what's true of the app as built):
+  - What's stored: parent emails, hashed passwords and PIN, the family name, profile names and avatar colors, theme, diet settings, what each profile has cooked, ratings and reflections, and photos.
+  - Kids don't have accounts. A parent makes each profile and chooses its name; first names or nicknames are enough.
+  - Who sees it: only the family. The owner sees family names, profile counts, and last-active dates, and nothing else.
+  - No ads, no selling or sharing of data, no tracking or analytics scripts.
+  - Services that handle it: Cloudflare (hosting, database, photos) and Resend (email).
+  - How long it's kept: until the family deletes it, or a year after the family was last active (§6.14).
+- **What the terms cover:** the app is free and offered as-is; recipes may not have been test-cooked (§7), so a parent reads a lesson before kids cook it; adults decide supervision, using the safety banners as a guide (§3); families are responsible for their own allergies, and diet filters are a help, not a guarantee; the owner may remove an account that misuses the app.
+- **Recommendation: serve the fonts from the app itself** instead of Google Fonts, so the "no third parties beyond Cloudflare and Resend" line in the privacy policy is true. Today every page load asks Google for the fonts.
+
+### 6.14 Leaving, and inactive accounts — Requirement (owner, 2026-10-22)
+- **Delete our family (self-serve).** In family settings, behind the parent PIN and the account password. It deletes the family, every parent login, every profile, all progress, and all photos. Next to it is **Download our data** (everything about the family, photos included), offered before deleting.
+- **Inactive accounts purge automatically.** A family whose parents haven't used the app for a year (`families.last_active_at`, which any use of a logged-in device refreshes) is deleted the same way. A scheduled job in the Worker runs once a day; Cloudflare runs it, so nothing is set up by hand.
+- **Recommendation:** email every parent in the family 30 days and 7 days before an inactive purge ("log in once to keep your account"). Logging in cancels it.
+- **Recommendation: a 30-day grace period** after a self-serve delete. The family disappears at once (no login, nothing shown to anyone), and the rows and photos are erased after 30 days. During those 30 days the owner can restore it from `/ops` if a parent asks, which keeps the rule that a destructive action has a restore. The privacy policy says so.
+- Removing a family from `/ops` (§8.5) stays as it is.
+
+### 6.15 Print our progress — Requirement (owner, 2026-10-22)
+A printable record of what each profile has cooked, for homeschool records.
+- In the parent area. Pick one profile or all of them.
+- One table per profile, with the profile name at the top: **date, dish, cuisine, skill, and rating** for every lesson that profile has cooked, oldest first.
+- Made as a page styled for paper, printed from the browser (or saved as PDF from the print dialog). It needs no extra software.
+- Recommendation: the same rows as a CSV download, which also answers the "CSV export to the homeschool management system" item in Later (§9).
+
 ---
 
 ## 8. Architecture
 
 ### 8.1 Hosting — Recommendation
 - Use the owner's existing **git → Cloudflare** deploy stack: a **Worker** serving the app and API, **D1** for structured data, and **R2** for photos.
-- Own subdomain, e.g. `cook.immotus.app`. This app is not a game, so it stays separate from the `games.immotus.app` hub.
+- Own subdomain: **`cleanplate.immotus.app`** (owner, 2026-10-22). This app is not a game, so it stays separate from the `games.immotus.app` hub.
 
 A backend is needed because the app is multi-family: each family's progress, queue, and photos must be stored per family and reachable from any of that family's devices.
 
@@ -699,7 +730,7 @@ A backend is needed because the app is multi-family: each family's progress, que
   - The code screen says "We sent a code to …" and "Don't see it? Check your spam folder, or request a new one in 9:59", counting down 10 minutes before a new code can be sent.
   - The family's name and parent PIN are set in the first run, right after.
   - **Beta word:** while testing in the wild, the owner can set a word that sign-up asks for before any email is sent. She can change it or turn it off at any time; off means fully open.
-  - **Planned:** a human check before the email is sent (a "capture thing" or an unscramble-the-letters puzzle). Cloudflare Turnstile is the likely fit: free, and set up in the Cloudflare dashboard.
+  - **Planned (Phase 1c or later):** a human check before the email is sent (a "capture thing" or an unscramble-the-letters puzzle). Cloudflare Turnstile is the likely fit: free, and set up in the Cloudflare dashboard.
 - **Parent login:** email and password. Store passwords hashed with a standard algorithm (PBKDF2 via Web Crypto is available in Workers). Sessions use a long-lived, httpOnly cookie, so kitchen devices stay logged in.
   - **Password reset by email,** sent through **Resend**. "Forgot password" emails a one-time link that expires after an hour. The owner can also set a new password from the owner screens (§6.2a) as a fallback.
   - **Not included, on purpose:** two-factor login, and rate limiting beyond the platform defaults and the 10-minute wait between codes.
@@ -759,15 +790,16 @@ Each phase should be deployed and usable before the next begins.
 | **0b. Second theme** | Chef's Passport: its tokens, its core art set, and its version of every component on the showcase page. Built as soon as Phase 0 is approved | A profile can switch between Kitchen Quest and Chef's Passport, and the owner approves the Passport look |
 | **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
 | **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, open sign-up with an emailed code and the beta word, parent login, sessions, password reset email (Resend), parent PIN, profiles (single or shared) and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up on their own, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
+| **1c. Public launch** | The landing page, privacy policy, and terms (§6.13), fonts served from the app, Delete our family and Download our data, the daily inactive purge with its warning emails (§6.14), and the human check at sign-up (§8.3) if the owner wants it before launch | A visitor reads the landing page, signs up, and deletes their family from the browser. A test family left inactive past the limit is warned and then purged by the daily job. **The sign-up link isn't posted publicly before this phase is done** |
 | **2. Lesson player** | Learn, Prep, Cook mode, kitchen words, food-safety checks, timers, wake lock, tap zone and page-turner remote (§6.12), attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
 | **3. Parent planning & shopping** | Queue (with kid requests), safety review, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
-| **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download | A photo taken on the tablet shows in the gallery on the parent's phone |
+| **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download, Print our progress (§6.15) | A photo taken on the tablet shows in the gallery on the parent's phone |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
 | **8. Helper & first run** | First-run wizard (§6.9) and the helper (§6.8), once both are specced | A new family goes from sign-up to their first queued lesson through the wizard, and kids and parents can each finish a helper task |
 | **9. Family recipes (bonus)** | My recipes with the guided entry flow, submission and owner review, the community directory (§6.10) | A parent enters a recipe through the flow, a kid cooks it, and the owner releases a submitted one to the directory, where another test family finds and adds it |
-| **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, a human check at sign-up (§8.3), voice "next step" (§6.12), CSV export to the homeschool management system | — |
+| **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, voice "next step" (§6.12), CSV export to the homeschool management system | — |
 
 **Testing (every phase):** automated tests run in CI alongside the linter. At minimum they cover family scoping (no endpoint returns another family's rows or photos), lesson patches (the hard block and food-safety checks reject a bad patch, and revert restores the lesson), scaling and rounding, unit conversion, shopping-list merging, and the migration runner.
 

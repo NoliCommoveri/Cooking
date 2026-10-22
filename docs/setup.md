@@ -37,7 +37,7 @@ name below doesn't match, look for the nearest one.
 ## 4. Give it its address
 
 In **Workers & Pages → clean-plate-recipes → Settings → Domains & Routes**,
-add the custom domain **`cook.immotus.app`**.
+add the custom domain **`cleanplate.immotus.app`**.
 
 ## 5. Set up email (Resend)
 
@@ -55,15 +55,15 @@ daily cap), or sign-ups will stall partway through the day.
 3. In the Cloudflare dashboard, add another **Secret** to the Worker (as in
    step 3), named **`RESEND_API_KEY`**, with that key as its value.
 4. The sent-from address is `MAIL_FROM` in `wrangler.toml`. It's set to
-   `Clean Plate Recipes <cook@immotus.app>`. If you verified a different domain,
+   `Clean Plate Recipes <cleanplate@immotus.app>`. If you verified a different domain,
    change it in the GitHub web editor.
 
 ## 6. First run
 
-1. Open **`https://cook.immotus.app/ops`** and sign in with your `OPS_TOKEN`.
+1. Open **`https://cleanplate.immotus.app/ops`** and sign in with your `OPS_TOKEN`.
    The setup list at the top shows what's still missing.
 2. Under **Migrations**, press **Apply pending**.
-3. Open **`https://cook.immotus.app`**, choose **Sign up**, and enter your
+3. Open **`https://cleanplate.immotus.app`**, choose **Sign up**, and enter your
    email and a password. Enter the code from the email, then your family name
    and parent PIN.
 4. Back on `/ops`, type your email under **The owner** and press **Make this

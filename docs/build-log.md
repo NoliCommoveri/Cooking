@@ -817,3 +817,30 @@ The owner reviewed the sample lessons in the preview.
 - Tables `invites` and `signup_requests` are gone; `signup_verifications`
   holds a sign-up until its code is entered. Tests: 87, rewritten for the new
   flow (codes, tries, expiry, the wait, the beta word, no email set up).
+
+---
+
+## 33. 2026-10-22 — Plan: website, leaving, and printing progress
+
+Plan changes only; nothing new is built.
+- **Address:** the app is `cleanplate.immotus.app` (§8.1). `docs/setup.md` and
+  `MAIL_FROM` (now `cleanplate@immotus.app`, still to be confirmed) follow it.
+- **New §6.13, website and legal pages (Requirement):** a simple landing page
+  at `/` for visitors, plus a short privacy policy and terms of use. Claude
+  drafts the words from the points listed there; the owner approves them. A
+  recommendation to serve the fonts from the app instead of Google Fonts, so
+  the privacy policy's list of third parties is true.
+- **New §6.14, leaving and inactive accounts (Requirement):** a self-serve
+  Delete our family, with Download our data beside it, and an automatic
+  purge of families inactive for a year, run by a daily scheduled job in the
+  Worker. Recommendations: warning emails 30 and 7 days before an inactive
+  purge, and a 30-day grace period after a self-serve delete during which the
+  owner can restore it from `/ops`.
+- **New §6.15, Print our progress (Requirement):** per profile, the date,
+  dish, cuisine, skill, and rating of everything cooked, as a page made for
+  printing. Recommendation: the same rows as a CSV. It's in Phase 4, since
+  ratings come from the Reflect stage.
+- **New Phase 1c, public launch:** the landing page and legal pages, fonts
+  served from the app, delete and download, the inactive purge, and the human
+  check at sign-up if the owner wants it before launch. The sign-up link isn't
+  posted publicly until 1c is done.
