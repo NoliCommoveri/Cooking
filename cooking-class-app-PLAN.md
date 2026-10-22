@@ -427,6 +427,7 @@ A first run for a new family, like KennelOS's (End-State guide §11 and "Getting
 - **Family setup:** profiles (one per person, shared, or a mix), each marked **kid or adult**, default servings, diet filters, pantry staples, and the parent PIN (required, §8.3).
 - **A warning for first-time parents:** the recipes haven't all been test-cooked. Read each lesson through before your kids cook it, and mark it test-cooked once you have (§6.2).
 - **Each profile's first run:** it sets up its chef locker and avatar, and picks its theme.
+- **Requirement: a parent tour.** A short set of cards that shows parents how to use the app, one task per card: queue a lesson and pick who it's for, set servings, use the shopping list, review safety and mark a lesson test-cooked, the parent PIN, photos and the gallery, and **Suggest a fix** (how to report something wrong in a lesson, what to write in "what should it say instead", and how the answer comes back, §6.11). Each card can be skipped, and the whole tour can be replayed from family settings.
 - **Then an introduction to the helper** (§6.8).
 
 Until the wizard is built, the test-cook warning shows as a one-time notice on a parent's first sign-in.

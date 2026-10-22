@@ -359,3 +359,14 @@ Owner rulings on open questions:
 - Added `fix_requests` and `lesson_patches` to the data model, a Fix requests
   queue to the owner features, the work and its done-when to Phase 2, and patch
   checks and revert to the tests.
+- At the owner's request, the first-run wizard (§6.9) now has a **parent tour**
+  (Requirement): one card per parent task, including one on Suggest a fix.
+  It can be skipped and replayed from family settings.
+- Showcase: added **Suggest a fix** on the lesson card and every cook step.
+  It asks for the parent PIN (adult profiles skip it), then opens a house-style
+  form: problem type, where, which part, what it says now, and what it should
+  say instead. A new owner fix-request queue shows the current and suggested
+  text side by side, with Apply, Decline, and Revert. Applying a fix really
+  changes the lesson on the page. One sample request is rejected by the
+  food-safety check (an egg target below 160°F), and the blocked-word scan
+  rejects unclean foods.
