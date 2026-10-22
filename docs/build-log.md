@@ -988,3 +988,16 @@ lesson patches. This is 2a.
   `content/course.json`. It's in Phase 1d with the demo.
 - Four open questions are in §10: whether kids see grades, the rubric, overdue
   reminders to kids, and suggested credit.
+
+---
+
+## 43. 2026-10-22 — Homeschool mode rulings
+
+The owner answered the four §6.17 questions:
+- Grades are parent-only; kids never see them.
+- The rubric is the proposed five rows (skill shown, safety and cleanliness,
+  following the recipe, the result, the reflection), each scored 1–4.
+- Overdue shows only to the parent. Kids see the due date and nothing about
+  being late.
+- The syllabus suggests a credit value, worked out from the course's hours
+  once every lesson has its time.

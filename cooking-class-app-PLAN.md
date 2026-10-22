@@ -725,28 +725,24 @@ A public page at **`/demo`** that the owner shares with other moms: no account, 
 - **Skills view:** the same course shown as its unique skills instead of its dishes. Each skill lists the dish that first teaches it and the later dishes that practice it, and marks foundation skills and their pick-one groups (§4.0).
 - **Course data:** the course list and each dish's skills come from one content file, `content/course.json` (number, dish, unit, cuisine, skill ids, the skill line, and its picture), checked by the linter against `skills.json` and the lesson files. Today the 75 dishes live only in the plan's tables (§4), and only the written lessons have skill ids, so this file is written for the demo: a skill id for every planned dish, with any new ids added to `skills.json`. As lessons are written (Phase 7), their files must match it.
 
-### 6.17 Homeschool mode and the syllabus — Requirement (owner, 2026-10-22); details to be specced
+### 6.17 Homeschool mode and the syllabus — Requirement (owner, 2026-10-22)
 Families use the app one of two ways, and the parent picks in family settings (behind the PIN). It can be changed at any time, and switching modes never deletes anything.
 - **Casual mode** (the default): the app as described everywhere else. No due dates, no grades, no transcript.
 - **Homeschool mode** adds, for the parent only:
   - **Course setup per profile:** course name and code, school year, and start date. These feed the transcript (§6.15).
-  - **Due dates:** a queued lesson's planned date (§6.2) becomes its due date. The queue shows what's due this week and what's overdue. Kids see "due Friday" on the lesson card, and nothing that shames them for being late.
+  - **Due dates:** a queued lesson's planned date (§6.2) becomes its due date. The queue shows what's due this week and what's overdue. Kids see "due Friday" on the lesson card. **Overdue shows only to the parent** (owner, 2026-10-22); kids see nothing about being late.
   - **A pacing helper:** pick a start date and lessons per week, and the app suggests due dates for the next several lessons, honoring foundations first (§4.0). The parent can move any of them.
-  - **Optional grading:** after a cook, the parent can grade it with a short rubric (proposed: skill shown, safety and cleanliness, following the recipe, the result, and the reflection, each 1–4), or a single grade, or leave it ungraded. Grades roll up per profile and print on the transcript.
+  - **Optional grading:** after a cook, the parent can grade it with the rubric (owner, 2026-10-22: skill shown, safety and cleanliness, following the recipe, the result, and the reflection, each scored 1–4), give a single grade, or leave it ungraded. Grades roll up per profile and print on the transcript. **Grades are parent-only** (owner, 2026-10-22): kids never see them.
 - **Syllabus page:** a public page, linked from the landing page and the demo page as **"Using this as a homeschool course? Review our syllabus."** It's built from `content/course.json` (§6.16) so it stays current as lessons are written, and prints cleanly. It covers:
   - the course description and who it's for (ages 11–12 with some kitchen experience; the beginner track comes later, §11)
   - learning objectives: knife work, heat control, building flavor, doughs and batters, food safety, and reading and following a recipe
   - the units, each with its skills and dishes, and the foundation skills with their pick-one lessons
   - estimated hours (from each lesson's time) and pacing options, e.g. one lesson a week across a school year
+  - **a suggested credit value** (owner, 2026-10-22), worked out from the course's hours once `content/course.json` has every lesson's time. The common rule of thumb is about 120–180 hours of work for one credit, so the full course likely suggests half a credit; the syllabus shows the hours it's based on, and says the family decides
   - materials: the core tools, and that each lesson lists its own shopping
   - safety: the safety levels and adult supervision (§3)
   - how it can be assessed: the rubric above, the reflection questions, and the transcript
   - the food rules (§2.1) in one plain line, and "published by Immotus Apps"
-- **Open questions for the owner:**
-  1. Do kids see their own grades, or are grades parent-only?
-  2. The rubric: these five rows at 1–4, or something else?
-  3. Does an overdue lesson show any reminder to the kid, or only to the parent?
-  4. Credit: does the syllabus suggest a credit value (e.g. half a credit for the full course), or leave credit to the family?
 
 ---
 
@@ -853,7 +849,6 @@ Each phase should be deployed and usable before the next begins.
 
 ## 10. Open questions
 
-- Homeschool mode (§6.17): whether kids see grades, the rubric, overdue reminders to kids, and suggested credit.
 - The homeschool transcript's details (§6.15).
 
 ---
