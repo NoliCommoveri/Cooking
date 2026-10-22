@@ -113,6 +113,68 @@ Use an Android phone or tablet with Chrome.
 4. A fix that names an unclean food, or lowers a thermometer target, can't be
    applied: the screen says why.
 
+## 12. Check it (the Phase 3a test)
+
+After this update deploys, press **Apply pending** on `/ops` (migration 0006).
+
+1. In a test family, open a lesson from a kid's kitchen and tap **I want to
+   make this**. In **Parents → Queue**, the request is at the top. Open
+   **Safety review**, then **Approve**. The kid's kitchen shows it under
+   **Up next**.
+2. On an adult profile, tap **Cook this**. It goes straight into the queue.
+3. In **Parents → Family**, pick **Homeschool** and save. In **Parents →
+   Courses**, **Set up a course** for two profiles, starting this week, 1 a
+   week. The Queue screen shows this week's lesson, due Friday, and both kids
+   see it.
+4. Press **Cook another recipe**: the next lesson joins this week. **Undo**
+   takes it away. **Skip this recipe** brings in the next one; **Undo** puts
+   it back. **Skip this week** empties the week; **Put this week back**
+   undoes it.
+5. Press **I've test-cooked this** on a lesson. **Unmark** undoes it.
+
+## 13. Check it (the Phase 3b test)
+
+After this update deploys, press **Apply pending** on `/ops` (migrations 0007
+and 0008).
+
+1. In a test family, queue two lessons, or set up a course.
+2. **Parents → Shopping**: **What you'll need** shows the lessons week by week,
+   with the ingredients each week uses.
+3. Under **Make a shopping list**, pick **2 lessons**: their names show. Press
+   **Next**, tick something you have, and press **Create shopping list**.
+4. Tick a few items, close the app, and open the list again: they're still
+   ticked. **You have these** lists what you ticked as on hand; **Put on the
+   list** brings one back.
+5. **Kitchen staples**: tick salt and olive oil, save. On the next list they're
+   grouped under **May already have**, still on the list.
+6. Open a lesson that was on the list from a kid's kitchen and change the
+   serving count: the card says "You shopped for 6."
+
+## 14. Check it (the first part of Phase 4)
+
+After this update deploys, press **Apply pending** on `/ops` (migration 0009).
+
+1. Cook a lesson to the end and press **Plate it**. The Reflect screen asks how
+   it turned out (gems in Kitchen Quest, chef's hats in Chef's Passport), what
+   you'd change, and the optional "what other dish could use this move?".
+   Cooking with someone? Each of you gets your own. **Save**.
+2. **Parents → Progress**: the lesson is there with its rating. **Print**
+   (or save as PDF from the print window), and **Download CSV**.
+3. On `/ops`, each family says **photos off**. **Turn photos on** for your
+   family. Nothing shows yet: the camera and gallery come once the photo
+   storage below exists.
+
+## Before photos: create the photo storage (R2)
+
+Photos need a storage bucket that only you can create:
+
+1. In the Cloudflare dashboard, open **R2 Object Storage**. If it asks, turn R2
+   on for the account (there's a free monthly allowance).
+2. **Create bucket**. Name it `clean-plate-photos`, leave the location on
+   Automatic, and create it.
+3. Tell Claude it's done. The app connects to it in its settings file, so the
+   next deploy picks it up; there's nothing else to set.
+
 ## Backups and recovery
 
 - **Download export.json** saves everything. **Restore from export.json**

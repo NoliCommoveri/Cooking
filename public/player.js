@@ -134,8 +134,13 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // fixes: { suggest({ lesson, stepId, servings, ingredients }), list(lessonId) }
 // for Suggest a fix and what came of this family's fixes (§6.11). labels: the
 // family's lesson numbers from its course plan ({ id: '8a' }); without them,
-// the suggested order's numbers.
-export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null, fixes = null, labels = null, total = null }) {
+// the suggested order's numbers. ask: { status, send() } for "I want to make
+// this" (a kid) or "Cook this" (an adult); status is null, or where the lesson
+// is in the profile's queue, and send() resolves to the new one (§6.1).
+// seed: { servings, with, shopped } from the queued lesson, for a fresh cook;
+// shopped is the serving count its shopping trip bought for (§6.6).
+// onReflect(cookId, reflection): saves one profile's reflection (§3).
+export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null }) {
   const [R, L] = await Promise.all([getRegistry(), getLesson(lessonId)]);
   const num = (id) => (labels ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null;
   // "lesson 8a, Shakshuka", or just the title for a dish the family took out of its plan.
@@ -148,7 +153,10 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
   const view = dietView(L, R.ingredients, family.diet_filters);
   const options = servingOptions(L);
   const pick = (n) => (options.includes(n) ? n : options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a)));
-  const fresh = () => ({ stage: 'card', servings: pick(family.default_servings), learn: 0, quiz: {}, got: [], gear: [], step: 0, timers: [], with: [] });
+  const fresh = () => ({
+    stage: 'card', servings: pick(seed?.servings ?? family.default_servings), learn: 0, quiz: {}, got: [], gear: [], step: 0, timers: [],
+    with: (seed?.with ?? []).filter((id) => crew.some((p) => p.id === id)),
+  });
   let S = readState(profile.id, L.id) || fresh();
   S.with = (S.with ?? []).filter((id) => crew.some((p) => p.id === id));
   // A cook in progress reopens on its lesson card, with Keep going and Start over.
@@ -257,6 +265,11 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
     return `<div class="kwcard" role="note"><b>${esc(t.word)}</b><p>${esc(t.means)}</p>${taught ? `<small>Practiced in ${esc(lessonRef(t.taughtIn, taught))}</small>` : ''}<button type="button" class="kwclose" data-act="term" data-id="">Got it</button></div>`;
   }
 
+  // After shopping, a different count warns and doesn't block (§6.6).
+  const shoppedNote = (cls) => (seed?.shopped && S.servings !== seed.shopped
+    ? `<p class="${cls}" role="note">${ic('i-people')}You shopped for ${seed.shopped}. Check there's enough before you start.</p>`
+    : '');
+
   // ---------- the lesson card ----------
   function cardView() {
     const cu = R.cuisines[L.cuisine]?.name ?? L.cuisine;
@@ -266,11 +279,11 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
       ? `<div class="serve"><span class="lbl">Party size</span>${fixedSizes
         ? `<div class="sizes" role="radiogroup" aria-label="Servings">${options.map((n) => `<button type="button" class="size" role="radio" aria-checked="${n === S.servings}" data-act="serv-set" data-n="${n}">${n}</button>`).join('')}</div>`
         : `<div class="serve-row"><button type="button" class="step" data-act="serv" data-i="-1" aria-label="Fewer servings" ${S.servings <= options[0] ? 'disabled' : ''}>−</button><span class="num" aria-live="polite">${S.servings}</span><button type="button" class="step" data-act="serv" data-i="1" aria-label="More servings" ${S.servings >= options.at(-1) ? 'disabled' : ''}>+</button></div><div class="heads" aria-hidden="true">${ic('i-hat', '').repeat(S.servings)}</div>`}
-        <p class="meta">Your family's usual: ${family.default_servings}</p>${sc.note ? `<p class="pan">${ic('t-pans')}${esc(sc.note)}</p>` : ''}</div>`
+        <p class="meta">Your family's usual: ${family.default_servings}</p>${shoppedNote('warn')}${sc.note ? `<p class="pan">${ic('t-pans')}${esc(sc.note)}</p>` : ''}</div>`
       : `<div class="p-serve">${fixedSizes
         ? `<div class="p-serve-row"><span class="p-lbl">Serves</span>${options.map((n) => `<button type="button" class="p-step" style="width:auto;padding:0 14px" aria-pressed="${n === S.servings}" data-act="serv-set" data-n="${n}">${n}</button>`).join('')}</div>`
         : `<div class="p-serve-row"><span class="p-lbl">Serves</span><button type="button" class="p-step" data-act="serv" data-i="-1" aria-label="Fewer servings" ${S.servings <= options[0] ? 'disabled' : ''}>−</button><span class="p-num" aria-live="polite">${S.servings}</span><button type="button" class="p-step" data-act="serv" data-i="1" aria-label="More servings" ${S.servings >= options.at(-1) ? 'disabled' : ''}>+</button></div><div class="p-plates" aria-hidden="true">${'<svg viewBox="0 0 100 100"><use href="/icons.svg#plate"/></svg>'.repeat(S.servings)}</div>`}
-        <p class="p-small">Your family's usual: ${family.default_servings}</p>${sc.note ? `<p class="p-pan">${ic('t-pans')}${esc(sc.note)}</p>` : ''}</div>`;
+        <p class="p-small">Your family's usual: ${family.default_servings}</p>${shoppedNote('p-pan')}${sc.note ? `<p class="p-pan">${ic('t-pans')}${esc(sc.note)}</p>` : ''}</div>`;
     const changes = [
       ...view.applied.map((x) => `Use ${esc(name(x.use).toLowerCase())} instead of ${esc(name(x.for).toLowerCase())}.`),
       ...view.leftOut.map((id) => `Leave out the ${esc(name(id).toLowerCase())}.`),
@@ -290,7 +303,19 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
           <button type="button" class="p-btn" data-act="start">${!S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
-    return `${top}${fixNotes()}<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${restart}${fixBtn(null)}</div>`;
+    return `${top}${askBox()}${fixNotes()}<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${restart}${fixBtn(null)}</div>`;
+  }
+
+  // ---------- asking for a lesson (§6.1) ----------
+  function askBox() {
+    if (!ask) return '';
+    const st = ask.status;
+    const said = st === 'requested' ? 'You asked a grown-up for this one.'
+      : st ? 'This one is on your list.'
+      : null;
+    return `<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${said
+      ? `<p class="${T.note} askline" style="margin:0">${ic('i-check')}${said}</p>`
+      : `<button type="button" class="${T.back}" data-act="ask">${adult ? 'Cook this' : 'I want to make this'}</button>`}</div>`;
   }
 
   // ---------- Suggest a fix (§6.11) ----------
@@ -447,6 +472,32 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
     return `<div class="whyov" data-act="why-close"><div class="${T.card}" role="dialog" aria-modal="true" aria-label="Why: ${esc(c.title)}">${tape}<p class="${T.kick}">Why? · from the Learn cards</p><h4>${esc(c.title)}</h4><p>${esc(c.body)}</p><button type="button" class="${T.btn}" data-act="why-close">Back to cooking</button></div></div>`;
   }
 
+  // ---------- reflect (§3) ----------
+  // Each profile on the cook rates it and says what they'd change; the last
+  // question is optional. Anyone can add how the eaters liked it.
+  const RATE_WORDS = ['', 'Not again', 'It was OK', 'Pretty good', 'Really good', 'Cook it again!'];
+  const hexPts = (cx, cy, r) => Array.from({ length: 6 }, (_, i) => { const a = (Math.PI / 3) * i - Math.PI / 2; return `${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`; }).join(' ');
+  const onCookNow = () => [profile, ...crew.filter((p) => S.with.includes(p.id))];
+  const rateRow = (key, value, label) => (quest
+    ? `<div class="gems" role="radiogroup" aria-label="${esc(label)}">${[1, 2, 3, 4, 5].map((n) => `<button type="button" class="gem ${n <= value ? 'on' : ''}" data-act="rate" data-k="${esc(key)}" data-n="${n}" role="radio" aria-checked="${n === value}" aria-label="${n} of 5"><svg viewBox="0 0 56 56"><polygon class="f" points="${hexPts(28, 28, 24)}" stroke-width="3"/><polygon class="s" points="${hexPts(28, 22, 9)}" fill="#FFF3C9" opacity=".7"/></svg></button>`).join('')}${value ? `<span class="rate-l">${value} of 5 · ${RATE_WORDS[value]}</span>` : ''}</div>`
+    : `<div class="p-hats" role="radiogroup" aria-label="${esc(label)}">${[1, 2, 3, 4, 5].map((n) => `<button type="button" class="p-hatbtn ${n <= value ? 'on' : ''}" data-act="rate" data-k="${esc(key)}" data-n="${n}" role="radio" aria-checked="${n === value}" aria-label="${n} of 5 chef's hats">${ic('i-hat', '')}</button>`).join('')}${value ? `<span class="p-ratel">${value} of 5 · ${RATE_WORDS[value]}</span>` : ''}</div>`);
+  function reflectView() {
+    S.refl ??= {};
+    const people = onCookNow();
+    const one = people.length === 1;
+    const block = (p) => {
+      const r = (S.refl[p.id] ??= { rating: 0, notes: '', transfer: '' });
+      return `<div class="${quest ? 'refl' : 'p-refl p-card p-lined'}">${one ? '' : `<p class="${T.kick}">${esc(p.name)}</p>`}
+        <h4 class="${T.h}">How did it turn out?</h4>${rateRow(p.id, r.rating, `${p.name}'s rating`)}
+        <label for="refl-n-${esc(p.id)}">What would you change next time?</label><textarea id="refl-n-${esc(p.id)}" data-refl="${esc(p.id)}" data-f="notes" maxlength="1000">${esc(r.notes)}</textarea>
+        <label for="refl-t-${esc(p.id)}">What other dish could use this move? <span>(optional)</span></label><textarea id="refl-t-${esc(p.id)}" data-refl="${esc(p.id)}" data-f="transfer" maxlength="300" placeholder="Like chili, because it starts with spices in oil">${esc(r.transfer)}</textarea></div>`;
+    };
+    return `<article class="${T.card}">${tape}<p class="${T.kick}">${quest ? 'Quest log' : 'Recipe notes'}</p><h4>${esc(L.title)}</h4>
+      ${people.map(block).join('')}
+      <div class="${quest ? 'refl' : 'p-refl'}"><h4 class="${T.h}">How did everyone who ate it like it? <span>optional</span></h4>${rateRow('eaters', S.eater ?? 0, "The eaters' rating")}</div>
+      <div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:14px"><button type="button" class="${T.back}" data-act="reflect-skip">Skip for now</button><button type="button" class="${T.btn}" data-act="reflect-save">Save</button></div></article>`;
+  }
+
   function doneView() {
     return `<article class="${T.card}" style="text-align:center;justify-items:center">${tape}<p class="${T.kick}">${quest ? 'Quest cleared' : 'Dish done'}</p><h4>${esc(L.title)}</h4>
       <div class="${quest ? 'q-win' : 'p-photo'}" style="max-width:220px"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="220" height="220"></div>
@@ -454,7 +505,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
   }
 
   // ---------- drawing and events ----------
-  const STAGES = { card: cardView, learn: learnView, prep: prepView, cook: cookView, done: doneView };
+  const STAGES = { card: cardView, learn: learnView, prep: prepView, cook: cookView, reflect: reflectView, done: doneView };
   let wakeTipShown = false, lastDing = 0;
   async function draw(focusTop = true) {
     if (S.stage !== 'card' && S.stage !== 'done') { S.last = S.stage; save(); }
@@ -533,6 +584,9 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
       case 'serv-set': S.servings = Number(d.n); break;
       case 'start': S.stage = S.started ? S.last || 'learn' : 'learn'; begin(); break;
       case 'restart': S = fresh(); break;
+      case 'ask':
+        b.disabled = true;
+        return ask.send().then((st) => { ask.status = st; draw(false); }, () => { b.disabled = false; });
       case 'crew': S.with = S.with.includes(d.id) ? S.with.filter((x) => x !== d.id) : [...S.with, d.id]; break;
       case 'learn': {
         const next = S.learn + Number(d.i);
@@ -548,7 +602,22 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
         return draw(false);
       }
       case 'step': step(Number(d.i)); break;
-      case 'finish': S.stage = 'done'; S.timers = []; S.finishedAt = new Date().toISOString(); break;
+      // Plate it: the cook is finished and counts; Reflect comes next.
+      case 'finish': S.stage = 'reflect'; S.timers = []; S.finishedAt = new Date().toISOString(); break;
+      case 'rate':
+        if (d.k === 'eaters') S.eater = Number(d.n); else S.refl[d.k].rating = Number(d.n);
+        save();
+        return draw(false);
+      case 'reflect-skip': S.stage = 'done'; break;
+      case 'reflect-save':
+        if (onReflect && S.cookId) {
+          onCookNow().forEach((p, i) => {
+            const r = S.refl?.[p.id] ?? {};
+            onReflect(S.cookId, { profile_id: p.id, rating: r.rating || null, notes: r.notes || null, transfer: r.transfer || null, ...(i === 0 && S.eater ? { eater_rating: S.eater } : {}) });
+          });
+        }
+        S.stage = 'done';
+        break;
       case 'term': term = d.id && d.id !== term ? d.id : null; return draw(false);
       case 'why': why = d.id; return draw(false);
       case 'why-close': why = null; return draw(false);
@@ -583,5 +652,12 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
     draw();
   }
   mount.addEventListener('click', onClick);
+  // Reflection text is kept as it's typed, without redrawing.
+  mount.addEventListener('input', (e) => {
+    const t = e.target.closest?.('[data-refl]');
+    if (!t || !S.refl?.[t.dataset.refl]) return;
+    S.refl[t.dataset.refl][t.dataset.f] = t.value;
+    save();
+  });
   draw();
 }

@@ -14,7 +14,9 @@ async function setup() {
   const b = await family(env, 'Smiths', 'pat@example.com');
   for (const n of ['Ava', 'Eli']) await a.post('/api/profiles', { people: [{ name: n, color: 'tomato' }] });
   await b.post('/api/profiles', { people: [{ name: 'Bea', color: 'sky' }] });
-  const [ava, eli] = (await a.get('/api/profiles')).body.profiles.map((p) => p.id);
+  // By name: profiles made in the same millisecond come back in id order.
+  const { profiles } = (await a.get('/api/profiles')).body;
+  const [ava, eli] = ['Ava', 'Eli'].map((n) => profiles.find((p) => p.name === n).id);
   const bea = (await b.get('/api/profiles')).body.profiles[0].id;
   return { env, a, b, ava, eli, bea };
 }

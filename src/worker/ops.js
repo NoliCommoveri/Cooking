@@ -101,7 +101,7 @@ async function dashboard(env, flash = '') {
   let families = [], owners = 0, error = null;
   if (ready) {
     try {
-      families = (await env.DB.prepare(`SELECT f.id, f.name, f.created_at, f.last_active_at,
+      families = (await env.DB.prepare(`SELECT f.id, f.name, f.created_at, f.last_active_at, f.photos_enabled,
           (SELECT COUNT(*) FROM parents p WHERE p.family_id = f.id) AS parents,
           (SELECT COUNT(*) FROM profiles p WHERE p.family_id = f.id) AS profiles,
           (SELECT GROUP_CONCAT(email, ', ') FROM parents p WHERE p.family_id = f.id) AS emails
@@ -139,8 +139,9 @@ ${ready ? `<form method="post" action="/ops/owner" class="row">
 <h2>Families</h2>
 ${ready ? (families.length ? families.map((f) => `<div class="note">
   <b>${esc(f.name)}</b> <span class="muted">${esc(f.emails ?? '')}</span><br>
-  <span class="muted">${esc(f.parents)} parent login(s) · ${esc(f.profiles)} profile(s) · last active ${esc((f.last_active_at ?? f.created_at).slice(0, 10))}</span>
+  <span class="muted">${esc(f.parents)} parent login(s) · ${esc(f.profiles)} profile(s) · last active ${esc((f.last_active_at ?? f.created_at).slice(0, 10))} · photos ${f.photos_enabled ? 'on' : 'off'}</span>
   <div class="row" style="margin-top:.4rem"><a class="btn" href="/ops/family/${esc(f.id)}.json">Download</a>
+  <form method="post" action="/ops/photos/${esc(f.id)}"><input type="hidden" name="on" value="${f.photos_enabled ? '0' : '1'}"><button type="submit">${f.photos_enabled ? 'Turn photos off' : 'Turn photos on'}</button></form>
   <a class="btn" href="/ops/remove/${esc(f.id)}">Remove…</a></div></div>`).join('') : '<p class="muted">No families yet.</p>')
   + `<form method="post" action="/ops/restore-family" enctype="multipart/form-data" class="row">
   <input type="file" name="file" accept="application/json,.json" required>
@@ -284,6 +285,17 @@ Variables and Secrets → Add, type <em>Secret</em>, name <code>OPS_TOKEN</code>
     if (phrase !== REMOVE_PHRASE) return removePage(env, rm[1], `<p class="bad">Type ${REMOVE_PHRASE} exactly. Nothing was deleted.</p>`);
     const name = await removeFamily(env.DB, rm[1]);
     return dashboard(env, `<p class="ok">Removed ${esc(name)}. Restore a family brings it back from its download.</p>`);
+  }
+
+  // Photos for one family (§2.6). Turning them off hides the photo step,
+  // gallery, and download, and deletes nothing; turning them on brings them back.
+  const ph = path.match(/^\/ops\/photos\/([0-9a-f]{16})$/);
+  if (ph && post) {
+    const on = String((await request.formData()).get('on')) === '1';
+    const fam = await env.DB.prepare('SELECT name FROM families WHERE id = ?').bind(ph[1]).first();
+    if (!fam) throw new Refused('No such family.');
+    await env.DB.prepare('UPDATE families SET photos_enabled = ? WHERE id = ?').bind(on ? 1 : 0, ph[1]).run();
+    return dashboard(env, `<p class="ok">Photos are ${on ? 'on' : 'off'} for ${esc(fam.name)}.${on ? '' : ' Nothing was deleted.'}</p>`);
   }
 
   if (path === '/ops/restore-family' && post) return dashboard(env, restoredNote(await restoreFamily(env.DB, await uploadedJson(request))));
