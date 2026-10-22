@@ -183,3 +183,16 @@ legend{font-weight:800;font-size:15px;margin-bottom:6px;padding:0}
 .done-target .ico{width:30px;height:30px;flex:none}
 .steptxt .ico,.p-steptxt .ico{width:1.3em;height:1.3em;vertical-align:-.25em}
 .k-lib button.lesson{border:0;padding:0;background:none;text-align:left;color:inherit;font:inherit;cursor:pointer;display:block;width:100%}
+
+/* Suggest a fix: a house-style dialog over the lesson */
+.fixov{position:fixed;inset:0;z-index:70;background:rgba(20,22,26,.6);overflow:auto;padding:16px;display:grid;place-items:start center}
+.fixov>.card{width:min(560px,100%);margin-top:4vh;background:var(--h-card);color:var(--h-fg)}
+.fixov h2{margin:0}
+.fixov select,.fixov textarea{font:inherit;width:100%;box-sizing:border-box;padding:10px;border-radius:10px;border:1.5px solid var(--h-line);background:var(--h-bg);color:inherit;min-height:48px}
+.fixnotes p{margin:4px 0 0}
+.fixcard{gap:10px}
+.fixcmp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fixcmp>div{background:var(--h-bg);border-radius:10px;padding:8px 10px}
+.fixcmp p{margin:2px 0 0;font-weight:700;overflow-wrap:anywhere}
+@media (max-width:520px){.fixcmp{grid-template-columns:1fr}}
+.fixov .card .card{border:0;padding:0;background:none}

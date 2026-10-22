@@ -8,6 +8,7 @@
 import { scaleLesson, servingOptions } from './lib/scale.js';
 import { findTerms } from './lib/terms.js';
 import { dietView } from './lib/diet.js';
+import { applyPatches, showValue } from './lib/patch.js';
 import { voiceSupported, createVoice } from './voice.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -21,7 +22,20 @@ async function load(url) {
   return res.json();
 }
 const getRegistry = async () => (registry ??= await load('/content/registry.json'));
-const getLesson = async (id) => (lessons[id] ??= await load(`/content/lessons/${encodeURIComponent(id)}.json`));
+// The owner's fixes (§6.11) sit on top of the lesson files. They're fetched
+// each time a lesson opens; without a connection, the last ones fetched are used.
+let patches = {};
+async function getPatches() {
+  try {
+    const res = await fetch('/api/patches');
+    if (res.ok) patches = (await res.json()).lessons;
+  } catch { /* offline: keep what we have */ }
+  return patches;
+}
+const getLesson = async (id) => {
+  const [file, live] = await Promise.all([lessons[id] ??= load(`/content/lessons/${encodeURIComponent(id)}.json`).catch((e) => { delete lessons[id]; throw e; }), getPatches()]);
+  return applyPatches(file, live[id]);
+};
 
 // ---------- saved state, per profile and lesson ----------
 const key = (pid, lid) => `cpr.cook.${pid}.${lid}`;
@@ -117,8 +131,13 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // mount: the element to draw in. profile: the profile cooking. family: from
 // /api/me. onExit: back to the quest board or recipe box. crew: the family's
 // other profiles, who can join this cook. onCook(id, cook): saves the cook.
-export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null }) {
+// fixes: { suggest({ lesson, stepId, servings, ingredients }), list(lessonId) }
+// for Suggest a fix and what came of this family's fixes (§6.11).
+export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null, fixes = null }) {
   const [R, L] = await Promise.all([getRegistry(), getLesson(lessonId)]);
+  let myFixes = [];
+  const loadFixes = async () => { try { myFixes = fixes ? await fixes.list(L.id) : []; } catch { myFixes = []; } };
+  await loadFixes();
   const quest = profile.theme === 'quest';
   const adult = profile.audience === 'adult';
   const view = dietView(L, R.ingredients, family.diet_filters);
@@ -266,8 +285,28 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
           <button type="button" class="p-btn" data-act="start">${!S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
-    return `${top}<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${restart}</div>`;
+    return `${top}${fixNotes()}<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${restart}${fixBtn(null)}</div>`;
   }
+
+  // ---------- Suggest a fix (§6.11) ----------
+  const fixBtn = (stepId) => (fixes
+    ? `<button type="button" class="${stepId ? (quest ? 'whybtn' : 'p-why') : T.back} fixbtn" data-act="fix" data-step="${esc(stepId ?? '')}">${ic('i-flag')}Suggest a fix</button>`
+    : '');
+  const OUTCOME = {
+    open: () => 'Your fix is waiting for review.',
+    fixed: (f) => {
+      const ing = /^ingredients\.([a-z0-9-]+)\./.exec(f.field ?? '')?.[1];
+      const what = ing ? `${name(ing).toLowerCase()} ${f.field_label.toLowerCase()}` : (f.field_label ?? 'it').toLowerCase();
+      return `Fixed: ${what}${f.where !== 'the lesson' ? ` in ${f.where}` : ''} is now ${showValue(f.field_kind, f.applied)}.`;
+    },
+    declined: () => 'Looked at, and left as it is.',
+    duplicate: () => 'Someone already reported this one.',
+    needs_content_change: () => 'Saved for a bigger lesson update.',
+  };
+  // What came of this family's fixes on this lesson, newest first.
+  const fixNotes = () => (myFixes.length
+    ? `<div class="${T.note} fixnotes" role="note"><b>Your fixes:</b>${myFixes.slice(0, 3).map((f) => `<p>${esc(OUTCOME[f.status]?.(f) ?? '')}${f.owner_reply ? ` <i>"${esc(f.owner_reply)}"</i>` : ''}</p>`).join('')}</div>`
+    : '');
 
   // ---------- Learn (§3): the move, why it works, same move elsewhere, when it goes wrong, quiz ----------
   function learnCards() {
@@ -390,8 +429,8 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
     const nav = `<div class="${quest ? 'q-nav' : 'p-nav'}"><button type="button" class="${T.back}" data-act="step" data-i="-1">${i === 0 ? 'Prep' : 'Back'}</button><button type="button" class="${T.btn}" data-act="${last ? 'finish' : 'step'}" data-i="1">${last ? 'Plate it' : 'Next step'}</button></div>`;
     const body = quest
       ? `<div class="q-cook">${banner(s.safety, s.hazard)}<div class="q-stages" style="grid-template-columns:repeat(${n},1fr)" role="img" aria-label="Stage ${i + 1} of ${n}">${steps.map((_, k) => `<i class="${k < i ? 'done' : k === i ? 'cur' : ''}"></i>`).join('')}</div>
-          <article class="q-panel q-log"><p class="q-kick">Stage ${i + 1} of ${n}</p><p class="steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="logacts">${whyBtn}${voiceBtn()}</div></article>${nav}</div>`
-      : `<div class="p-cook">${banner(s.safety, s.hazard)}<div class="p-cookbody"><article class="p-card p-lined p-stepcard"><p class="p-stepno">Step ${i + 1} of ${n}</p><p class="p-steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="p-acts">${whyBtn}${voiceBtn()}</div></article>
+          <article class="q-panel q-log"><p class="q-kick">Stage ${i + 1} of ${n}</p><p class="steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="logacts">${whyBtn}${voiceBtn()}${fixBtn(s.id)}</div></article>${nav}</div>`
+      : `<div class="p-cook">${banner(s.safety, s.hazard)}<div class="p-cookbody"><article class="p-card p-lined p-stepcard"><p class="p-stepno">Step ${i + 1} of ${n}</p><p class="p-steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="p-acts">${whyBtn}${voiceBtn()}${fixBtn(s.id)}</div></article>
           <div class="p-cup">${cupSVG(i, n)}<span>${i} of ${n} done</span></div></div>${nav}</div>`;
     return body + timerTray();
   }
@@ -521,6 +560,11 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
         save();
         return draw(false);
       }
+      case 'fix':
+        // A parent or an adult learner fills it in; the app gives it the lesson,
+        // step, and serving count. Afterwards the lesson card shows its status.
+        return fixes.suggest({ lesson: L, stepId: d.step || null, servings: S.servings, ingredients: R.ingredients })
+          .then(async (sent) => { if (sent) { await loadFixes(); draw(false); } });
       case 'sound': return unlockSound().then(() => { if (soundReady()) ding(); draw(false); });
       case 'voice':
         voice ??= createVoice({ onCommand: onVoice, onStatus: onVoiceStatus });

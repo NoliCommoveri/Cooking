@@ -3,6 +3,7 @@
 // parsed as markup. Routes live in the hash: #/login, #/kitchen/<id>, #/parent…
 import { openLesson } from './player.js';
 import { saveCook, flushCooks } from './cooks.js';
+import { patchTargets, showValue } from './lib/patch.js';
 
 const app = document.getElementById('app');
 
@@ -40,6 +41,7 @@ async function api(method, path, body) {
   if (!res.ok) {
     const err = new Error(data.message || 'Something went wrong. Try again.');
     err.code = data.error;
+    err.problems = data.problems;
     throw err;
   }
   return data;
@@ -356,6 +358,93 @@ async function lesson(profileId, lessonId) {
   await openLesson(mount, {
     profile: p, family: me.family, lessonId, onExit: () => go(`#/kitchen/${p.id}`),
     crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook,
+    fixes: {
+      suggest: (ctx) => suggestFix(p, ctx),
+      list: async (lid) => (await api('GET', `/api/lessons/${encodeURIComponent(lid)}/fixes`)).fixes,
+    },
+  });
+}
+
+// ---------- Suggest a fix (§6.11) ----------
+
+const FIX_KINDS = { amount: 'Wrong amount or time', unclear: 'Unclear step', safety: 'Safety problem', unclean: 'Unclean ingredient', other: 'Something else' };
+
+// How a value is typed in: timers in minutes, everything else as it's stored.
+const toInput = (kind, v) => (v == null ? '' : kind === 'minutes' ? String(Math.round((v / 60) * 100) / 100) : String(v));
+const fromInput = (kind, v) => {
+  const t = String(v ?? '').trim();
+  if (t === '') return null;
+  if (kind === 'minutes') return Math.round(Number(t) * 60);
+  if (['amount', 'temp', 'int'].includes(kind)) return Number(t);
+  return t;
+};
+const valueInput = (kind, name, value = '') => (kind === 'text'
+  ? el('textarea', { name, rows: 3, maxlength: 600 }, value)
+  : el('input', { name, value, inputmode: kind === 'unit' ? 'text' : 'decimal', autocomplete: 'off' }));
+
+// A dialog over the lesson, in the house style. Resolves true once a fix is
+// sent. A kid profile asks for the parent PIN first; an adult profile doesn't.
+function suggestFix(profile, { lesson, stepId, servings, ingredients }) {
+  return new Promise((resolve) => {
+    const box = el('div', { class: 'card' });
+    const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Suggest a fix' }, box);
+    const close = (sent) => { ov.remove(); resolve(sent); };
+    ov.addEventListener('click', (e) => { if (e.target === ov) close(false); });
+    const cancel = () => el('button', { type: 'button', class: 'hbtn', onclick: () => close(false) }, 'Cancel');
+    const stepNo = stepId ? lesson.steps.findIndex((x) => x.id === stepId) + 1 : 0;
+    const where = `${lesson.title}${stepNo ? `, step ${stepNo}` : ''}`;
+    document.body.append(ov);
+
+    const pinStep = () => {
+      const input = el('input', { name: 'pin', type: 'password', inputmode: 'numeric', autocomplete: 'off', pattern: '[0-9]*', maxlength: 8, 'aria-label': 'Parent PIN' });
+      box.replaceChildren(el('h2', {}, 'Suggest a fix'), el('p', { class: 'mut' }, 'A grown-up fills this in. Enter the parent PIN.'),
+        form([el('div', { class: 'pin' }, input)], 'Unlock', async (v) => {
+          await api('POST', '/api/pin/unlock', { pin: v.pin });
+          await refresh();
+          formStep();
+        }, { extra: [cancel()] }));
+      input.focus();
+    };
+
+    const formStep = () => {
+      const name = (id) => ingredients[id]?.name ?? id;
+      const parts = patchTargets(lesson, stepId).map((t) => ({ ...t, label: t.ingredient ? `${name(t.ingredient)}: ${t.label.toLowerCase()}` : t.label }));
+      const nowBox = el('p', { class: 'mut small', style: 'margin:0' });
+      const instead = el('div', { class: 'stack', style: 'width:100%' });
+      const select = el('select', { name: 'field' },
+        el('option', { value: '' }, 'Something else (say what below)'),
+        parts.map((t) => el('option', { value: t.path }, t.label)));
+      const showPart = () => {
+        const t = parts.find((x) => x.path === select.value);
+        if (!t) { nowBox.replaceChildren(); instead.replaceChildren(); return; }
+        const base = t.ingredient && t.kind === 'amount' ? ` (for ${lesson.servings} servings; you're making ${servings})` : '';
+        nowBox.replaceChildren('Now it says: ', el('b', {}, showValue(t.kind, t.value)), base);
+        instead.replaceChildren(el('label', { class: 'f', style: 'width:100%' }, 'It should say instead',
+          t.kind === 'minutes' ? el('span', { class: 'hint' }, 'In minutes') : t.kind === 'amount' && t.ingredient ? el('span', { class: 'hint' }, `For ${lesson.servings} servings`) : null,
+          valueInput(t.kind, 'suggested', toInput(t.kind, t.value))));
+      };
+      select.addEventListener('change', showPart);
+      const kinds = el('div', { class: 'grid2' }, Object.entries(FIX_KINDS).map(([k, label], i) => el('label', { class: 'choice' },
+        el('input', { type: 'radio', name: 'kind', value: k, checked: i === 0 }), el('span', {}, label))));
+      box.replaceChildren(el('h2', {}, 'Suggest a fix'), el('p', { class: 'mut', style: 'margin:0' }, where),
+        form([
+          el('fieldset', {}, el('legend', {}, "What's the problem?"), kinds),
+          el('label', { class: 'f' }, 'Which part?', select), nowBox, instead,
+          el('label', { class: 'f' }, "What's wrong?", el('span', { class: 'hint' }, 'A sentence or two is plenty'), el('textarea', { name: 'note', rows: 3, maxlength: 1000, required: true })),
+        ], 'Send', async (v) => {
+          const t = parts.find((x) => x.path === v.field);
+          if (!String(v.note ?? '').trim()) throw new Error("Say what's wrong.");
+          await api('POST', '/api/fix-requests', {
+            lesson_id: lesson.id, profile_id: profile.id, step: stepId, servings, kind: v.kind, note: v.note,
+            ...(t ? { field: t.path, suggested_value: fromInput(t.kind, v.suggested) } : {}),
+          });
+          box.replaceChildren(el('h2', {}, 'Thanks'), el('p', {}, 'The fix is on its way to be checked. What comes of it shows on this lesson.'),
+            el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn pri', onclick: () => close(true) }, 'Back to the lesson')));
+        }, { extra: [cancel()] }));
+      if (stepId && parts.length) { select.value = parts[0].path; showPart(); }
+    };
+
+    if (profile.audience === 'adult' || unlocked()) formStep(); else pinStep();
   });
 }
 
@@ -363,7 +452,7 @@ async function lesson(profileId, lessonId) {
 
 function parentTabs(current) {
   const tabs = [['profiles', 'Profiles'], ['family', 'Family'], ['parents', 'Logins']];
-  if (me.parent.is_owner) tabs.push(['owner', 'Owner']);
+  if (me.parent.is_owner) tabs.push(['owner', 'Owner'], ['fixes', 'Fix requests']);
   return el('nav', { class: 'tabs', 'aria-label': 'Parent screens' },
     tabs.map(([k, label]) => el('a', { href: `#/parent/${k}`, 'aria-current': k === current ? 'page' : null }, label)));
 }
@@ -524,6 +613,89 @@ const owner = parentOnly(async (flash) => {
     }));
 });
 
+// ---------- owner: fix requests and lesson patches (§6.11) ----------
+
+const STATUS = { fixed: 'Applied', declined: 'Declined', duplicate: 'Duplicate', needs_content_change: 'Needs a content change' };
+const CLOSE_AS = { declined: 'Decline', duplicate: 'Duplicate', needs_content_change: 'Needs a content change' };
+
+const ownerFixes = parentOnly(async (flash) => {
+  if (!me.parent.is_owner) return go('#/parent');
+  const o = await api('GET', '/api/owner/fixes');
+  const day = (iso) => (iso ? new Date(iso).toLocaleDateString() : '');
+  const again = (msg) => ownerFixes(el('p', { class: 'ok' }, msg));
+  // Shows why a fix can't go live: the checks' own words, one per line.
+  const problemsOf = (err) => (err.problems?.length ? el('ul', { class: 'err' }, err.problems.map((x) => el('li', {}, x))) : null);
+
+  const requestCard = (r) => {
+    const msg = el('div', { role: 'alert' });
+    const show = (err) => msg.replaceChildren(el('p', { class: 'err' }, err.message), problemsOf(err) ?? '');
+    const valueBox = r.field ? valueInput(r.field_kind, 'value', toInput(r.field_kind, r.suggested)) : null;
+    const replyBox = el('input', { name: 'reply', maxlength: 500, autocomplete: 'off' });
+    const act = (label, cls, fn) => el('button', { type: 'button', class: `hbtn ${cls}`, onclick: async (e) => {
+      e.target.disabled = true;
+      try { await fn(); } catch (err) { show(err); } finally { e.target.disabled = false; }
+    } }, label);
+    const close = (status, done) => act(CLOSE_AS[status], '', async () => {
+      await api('POST', `/api/owner/fixes/${r.id}/close`, { status, reply: replyBox.value });
+      again(done);
+    });
+    const changed = r.field && JSON.stringify(r.live) !== JSON.stringify(r.current);
+    return el('div', { class: 'card fixcard' },
+      el('div', {}, el('b', {}, `${r.kind_label} · ${r.where}`), el('small', { class: 'mut' }, ` · sent ${day(r.created_at)}${r.servings ? ` · cooking for ${r.servings}` : ''}`)),
+      el('p', { style: 'margin:0' }, r.note),
+      r.field ? el('div', { class: 'fixcmp' },
+        el('div', {}, el('small', { class: 'mut' }, `${r.field_label}, now`), el('p', {}, showValue(r.field_kind, r.live))),
+        el('div', {}, el('small', { class: 'mut' }, 'Suggested'), el('p', {}, showValue(r.field_kind, r.suggested)))) : null,
+      changed ? el('p', { class: 'mut small', style: 'margin:0' }, `When this was sent it said: ${showValue(r.field_kind, r.current)}`) : null,
+      valueBox ? el('label', { class: 'f' }, 'Apply this', el('span', { class: 'hint' }, r.field_kind === 'minutes' ? 'In minutes. Edit it first if you like.' : 'Edit it first if you like.'), valueBox) : null,
+      el('label', { class: 'f' }, 'Reply to the family', el('span', { class: 'hint' }, 'Optional. They see it on the lesson.'), replyBox),
+      msg,
+      el('div', { class: 'acts' },
+        r.field ? act('Apply', 'pri', async () => {
+          const res = await api('POST', `/api/owner/fixes/${r.id}/apply`, { value: fromInput(r.field_kind, valueBox.value), reply: replyBox.value });
+          again(`Applied. ${r.lesson_title} is now version ${res.version} for every family.`);
+        }) : null,
+        close('declined', 'Declined.'), close('duplicate', 'Marked as a duplicate.'), close('needs_content_change', 'Saved for a content change.')));
+  };
+
+  const byLesson = {};
+  for (const r of o.open) (byLesson[r.lesson_title] ??= []).push(r);
+  const live = o.patches.filter((p) => !p.reverted_at);
+  const reverted = o.patches.filter((p) => p.reverted_at);
+
+  parentScreen('fixes',
+    flash ?? null,
+    el('p', { class: 'mut' }, 'Families suggest fixes from a lesson. Apply puts one live for every family after the same checks as the content linter. Every applied fix has a Revert.'),
+    el('h2', {}, `Waiting (${o.open.length})`),
+    o.open.length ? Object.entries(byLesson).map(([title, list]) => [el('h3', {}, title), list.map(requestCard)])
+      : el('p', { class: 'mut' }, 'Nothing waiting.'),
+
+    el('h2', {}, `Live fixes (${live.length})`),
+    live.length ? el('div', { class: 'card' }, el('div', { class: 'rows' }, live.map((p) => el('div', { class: 'rowi' },
+      el('div', {}, el('b', {}, `${p.lesson_title} · ${p.where} · ${p.field_label}`),
+        el('small', {}, `${showValue(p.field_kind, p.old)} → ${showValue(p.field_kind, p.new)} · applied ${day(p.applied_at)}`)),
+      p.can_revert
+        ? el('button', { type: 'button', class: 'hbtn', onclick: async () => {
+          try {
+            await api('POST', `/api/owner/patches/${p.id}/revert`);
+            again(`Reverted. ${p.lesson_title} is back the way it was, and the request is waiting again.`);
+          } catch (err) { ownerFixes(el('div', {}, el('p', { class: 'err' }, err.message), problemsOf(err))); }
+        } }, 'Revert')
+        : el('small', { class: 'mut' }, 'A later fix changed this part. Revert that one first.')))))
+      : el('p', { class: 'mut' }, 'No fixes are live.'),
+
+    el('h2', {}, 'Answered'),
+    o.closed.length ? el('div', { class: 'card' }, el('div', { class: 'rows' }, o.closed.map((r) => el('div', { class: 'rowi' },
+      el('div', {}, el('b', {}, `${r.lesson_title} · ${r.where} · ${STATUS[r.status]}`), el('small', {}, `${r.note}${r.owner_reply ? ` · You said: ${r.owner_reply}` : ''}`)),
+      r.status === 'fixed' ? el('small', { class: 'mut' }, 'Revert it above') : el('button', { type: 'button', class: 'hbtn', onclick: async () => {
+        await api('POST', `/api/owner/fixes/${r.id}/reopen`);
+        again('Back in the queue.');
+      } }, 'Reopen')))))
+      : el('p', { class: 'mut' }, 'None yet.'),
+    reverted.length ? [el('h2', {}, 'Reverted'), el('div', { class: 'card' }, el('div', { class: 'rows' }, reverted.map((p) => el('div', { class: 'rowi' },
+      el('div', {}, el('b', {}, `${p.lesson_title} · ${p.where} · ${p.field_label}`), el('small', {}, `${showValue(p.field_kind, p.old)} → ${showValue(p.field_kind, p.new)} · reverted ${day(p.reverted_at)}`)), el('span')))))] : null);
+});
+
 // ---------- routing ----------
 
 async function refresh() {
@@ -550,6 +722,7 @@ async function route() {
       if (sub === 'family') return await familySettings();
       if (sub === 'parents') return await parentLogins();
       if (sub === 'owner') return await owner();
+      if (sub === 'fixes') return await ownerFixes();
       return await parentProfiles();
     }
     if (top === 'owner') return go('#/parent/owner');

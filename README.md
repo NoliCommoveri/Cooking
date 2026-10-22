@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [48. 2026-10-22 — Timers you can hear](docs/build-log.md#48-2026-10-22--timers-you-can-hear)
+**Latest build log entry:** [49. 2026-10-22 — Phase 2e: fix requests and lesson patches](docs/build-log.md#49-2026-10-22--phase-2e-fix-requests-and-lesson-patches)
 
 ## Current features
 
@@ -14,6 +14,8 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Chef's lockers and profiles**: one person or several per profile, kid or adult, each with its own theme.
 - **Kitchen**: each profile sees the lesson library as Kitchen Quest quest cards or Chef's Passport recipe cards, filtered by the family's diet settings (with swaps and left-out optional ingredients shown on the card).
 - **Lesson player** (`public/player.js`): each lesson in the profile's theme: the lesson card with the serving picker, Learn cards, Prep checklists, and Cook mode with safety banners, kitchen words, Why? cards, timers that ring until stopped, and the screen kept awake.
+- **Suggest a fix** (`src/content/patch.js`, `src/worker/lessons.js`): parents and adult learners report a problem on a lesson or step with what it should say instead; the family sees what came of it on the lesson.
+- **Fix requests** (owner screens): apply a suggestion as a lesson patch for every family, after the linter's checks; decline, reopen, or revert any of them.
 - **Voice step control** (`public/voice.js`): in cook mode, "next" (moves on and reads the step aloud), "back," and "again" (reads it again). Off until a parent turns it on in family settings; shown only where the browser can recognize speech.
 - **Saved cooks** (`public/cooks.js`): each cook is saved to the family's account for every profile on it, with "Cooking with someone?" on the lesson card. A cook finished offline is sent when the connection returns. Lessons a profile has cooked say so in its kitchen.
 - **Test-cook notice**: each parent sees a one-time note, above the lockers, to read a lesson through before their kids cook it.
@@ -21,7 +23,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Syllabus** (`/syllabus`): the course as a homeschool course, with objectives, units, hours, pacing, a suggested credit, and the rubric. Printable.
 - **Course outline** (`content/course.json`): all 75 planned dishes with their skills, checked by the linter.
 - **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN.
-- **Owner screens**: the beta word, the family list, and setting a parent's password.
+- **Owner screens**: the beta word, the family list, setting a parent's password, and fix requests.
 - **Ops page** (`/ops`): migrations, the owner flag, backup download and restore, clear everything, and remove or restore one family.
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
 - **Dish illustrations** (`content/images/dishes/`): one picture for each of the 75 lessons.

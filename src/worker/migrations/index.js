@@ -4,9 +4,11 @@
 import m0001 from './0001_families.sql';
 import m0002 from './0002_attempts.sql';
 import m0003 from './0003_voice.sql';
+import m0004 from './0004_fixes.sql';
 
 export const MIGRATIONS = [
   { id: '0001', name: 'families', sql: m0001 },
   { id: '0002', name: 'attempts', sql: m0002 },
   { id: '0003', name: 'voice', sql: m0003 },
+  { id: '0004', name: 'fixes', sql: m0004 },
 ];

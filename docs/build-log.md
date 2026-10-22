@@ -1159,3 +1159,64 @@ suggested changes (`public/player.js`):
 - Checked in Chromium with a fake clock and a stand-in for the audio: repeat
   dings, Stop ending them, the spoken line, and the button appearing and going.
 
+---
+
+## 49. 2026-10-22 — Phase 2e: fix requests and lesson patches
+
+Built to §6.11.
+- **Migration 0004** (`src/worker/migrations/0004_fixes.sql`): `fix_requests`
+  and `lesson_patches` from §8.4, plus `closed_at` on a request. **The owner
+  presses Apply pending on `/ops`** after this deploys. A family's requests are
+  in its own export; patches belong to the whole app and are in the full
+  backup.
+- **Field paths** (`src/content/patch.js`, shared with the browser): a patch
+  names one field by stable ids: `totalMinutes`;
+  `ingredients.<id>.amount | unit | text | prep`; and
+  `steps.<id>.text | tip | look | timerSeconds | timerLabel | target.temp |
+  target.look`. Nothing else can be patched: no ingredient, step, title, or
+  safety level.
+- **Suggest a fix** on the lesson card and on every cook step, for the app
+  (not the demo). A kid profile asks for the parent PIN first; an adult
+  profile doesn't. The dialog is in the house style: the problem type (the
+  five in §6.11), which part (the step's own fields, or the lesson's time and
+  ingredient lines), what it says now, what it should say instead (timers in
+  minutes; amounts at the lesson's own serving count, with the size being
+  cooked shown), and what's wrong. The app adds the lesson, its live version,
+  the step, and the servings. A family can have 30 open requests at once.
+- **Safety and unclean-ingredient reports email the owner** right away
+  through Resend. The report is saved even if the email fails.
+- **What came of it** shows on the lesson card for the family that sent it:
+  waiting, "Fixed: timer length in step 7 is now 9 min", left as it is, a
+  duplicate, or saved for a bigger update, with the owner's reply.
+- **Owner screen: Fix requests** (a new tab beside Owner). Waiting requests,
+  grouped by lesson, show the part as it is now beside the suggestion (and
+  what it said when sent, if it has changed since). The owner can edit the
+  value, add a reply, and **Apply**, or **Decline**, mark a **Duplicate**, or
+  **Needs a content change**. The owner sees no family's name. **Live fixes**
+  each have **Revert**; answered requests have **Reopen**.
+- **Checks before a patch goes live** (`src/worker/lessons.js`): the content
+  linter itself runs on the patched lesson (blocked words, units, the
+  food-safety step rules, timers, kitchen words, scaling at every size), so
+  the Worker now bundles the content in `src/worker/content-data.js`, built by
+  `tools/build-library.js`. On top of that, a thermometer target can be raised
+  but never lowered below the one in the lesson file. A fix that fails can't
+  be applied, and the screen lists why. Reverting runs the same checks.
+- **Versions:** a lesson's version is its file's version plus one for every
+  apply and every revert. Cooks record the live version. The player, the demo,
+  and the library list all show lessons with their live fixes
+  (`GET /api/patches`, public, lesson content only).
+- **Revert** works on the newest live fix to a part; an older one waits until
+  the later one is reverted. Its request goes back to Waiting, so Apply puts it
+  live again: Apply and Revert undo each other.
+- **Folding fixes into the files** (§6.11) is done in a session: Claude reads
+  the live fixes from a backup, writes them into the lesson files (and
+  `course.json` for a time), raises each version, runs the linter, and adds a
+  migration that removes the folded fixes from the database, so the owner's
+  only step is Apply pending. Nothing to do until fixes exist.
+- Tests: 120. New ones cover the full loop (suggest, apply, every family sees
+  it, revert puts it back), the live version on a cook, the hard block
+  rejecting a fix even when the owner edits it, the thermometer floor, unit and
+  empty-text checks, the fields a fix can't touch, the PIN rule, the owner
+  email, decline and reopen, scoping, revert order, and a patched time in the
+  library. The loop was also run in Chromium across two families.
+

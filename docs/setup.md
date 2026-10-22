@@ -100,6 +100,19 @@ Use an Android phone or tablet with Chrome.
 4. Turn Wi-Fi off: the button says "Voice paused, no connection" and the
    on-screen buttons still work. Turn it back on and voice picks up again.
 
+## 11. Check it (the Phase 2e test)
+
+1. In a test family (not yours), open a lesson from a kid's kitchen. Tap
+   **Suggest a fix** on a step, enter the parent PIN, pick the part (say, a
+   timer), type what it should be, say what's wrong, and **Send**. The lesson
+   card now says the fix is waiting.
+2. In your family, **Parents → Fix requests**. Press **Apply**. The test
+   family's lesson shows the new value, and its card says "Fixed".
+3. Under **Live fixes**, press **Revert**. The lesson is back the way it was,
+   and the request is waiting again.
+4. A fix that names an unclean food, or lowers a thermometer target, can't be
+   applied: the screen says why.
+
 ## Backups and recovery
 
 - **Download export.json** saves everything. **Restore from export.json**
