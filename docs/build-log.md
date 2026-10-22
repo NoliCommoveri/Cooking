@@ -538,7 +538,9 @@ The owner reviewed the sample lessons in the preview.
   goes hard. The move, the "why cool it back down" card, and the biscuit
   callback now say the liquid butter is stirred over ice water until it
   thickens like frosting.
-- **Biscuits (38), now version 2:** "shaggy" became "lumpy and rough, not
+- **Biscuits (38):** "shaggy" became "lumpy and rough, not
   smooth. That's right, so stop stirring." The first "1 inch thick" also says
   "about as thick as two of your fingers stacked", and the last one says "two
   fingers thick".
+- The owner ruled that version numbers don't go up on lessons that aren't
+  released yet. Biscuits went back to version 1, and §7.3 now says so.

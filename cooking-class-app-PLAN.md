@@ -578,7 +578,7 @@ content/
   ]
 }
 ```
-- `version` goes up whenever the lesson's steps or ingredients change. Attempts record the version they were cooked from.
+- `version` goes up whenever a **released** lesson's steps or ingredients change. Attempts record the version they were cooked from. Before release, lessons stay at version 1 however often they're edited.
 - Step `id`s are stable. Inserting a step never changes another step's `id`, so saved progress in a lesson stays attached to the right step.
 - `scaling` is `{ "mode": "free" }` or `{ "mode": "fixed", "multipliers": [0.5, 1, 2], "notes": { "2": "Use two sheet pans" } }` (§6.6).
 - `substitutions[].reason` is `"availability"` or a diet tag (e.g. `"dairy"`). Diet-reason substitutions are the ones a family filter can apply (§2.1).
