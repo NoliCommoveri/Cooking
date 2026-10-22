@@ -284,3 +284,13 @@ Owner rulings on open questions:
   theme.
 - Mockup page: the rewards table now says a Kitchen Quest dish lights a node on
   the skill tree and a skill earns a crest, to match §5.4a.
+
+---
+
+## 14. 2026-10-22 — Dish art from the owner
+
+- The owner will make the dish illustrations with an AI image tool, several
+  dishes per sheet, and Claude will crop them into one image per dish.
+- §5.3a updated: source sheets go in `content/images/source/`. Claude still
+  draws the rest of the art as SVG. AI-made images get a line in
+  `content/images/LICENSES.md` like any art Claude didn't draw.

@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare.
 
-**Latest build log entry:** [13. 2026-10-22 — Kids chose Kitchen Quest](docs/build-log.md#13-2026-10-22--kids-chose-kitchen-quest)
+**Latest build log entry:** [14. 2026-10-22 — Dish art from the owner](docs/build-log.md#14-2026-10-22--dish-art-from-the-owner)
 
 ## Current features
 

@@ -241,9 +241,10 @@ None of the 50 dishes requires a stand mixer. Lessons that use one in typical re
 The themed components need a lot of art, and every theme added later (§5.2) needs its own set: a dish illustration for every lesson, an icon for every ingredient (they hop into the bowl) and every tool (pegboard), a stamp per region, a pin per skill, and avatar outfits per rank.
 - Phase 0 sets the style and draws the core set: the components in §5.4, one generic icon per store section, and one per tool category.
 - An ingredient or tool without its own icon falls back to its category's generic icon. The linter warns about fallbacks; it doesn't fail on them.
+- **Dish illustrations come from the owner,** made with an AI image tool as sheets of several dishes per image. Claude crops each sheet into one image per dish. Source sheets live in `content/images/source/`.
 - Each new lesson brings its own dish illustration. Stamps, pins, and outfits come with Phase 5.
 - Every image that isn't original carries its license in `content/images/LICENSES.md`, the same as music.
-- **Claude draws the art** as SVG. The Phase 0 showcase is the test: if the owner isn't happy with it there, the other options are a commissioned illustrator or a licensed icon set restyled to match.
+- **Claude draws the rest of the art** as SVG (components, icons, stamps, pins). The Phase 0 showcase is the test: if the owner isn't happy with it there, the other options are a commissioned illustrator or a licensed icon set restyled to match.
 
 ### 5.4 Themed components (Chef's Passport)
 | Component | Treatment |
