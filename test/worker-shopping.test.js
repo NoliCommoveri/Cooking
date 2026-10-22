@@ -2,7 +2,7 @@
 // week, and shopping lists for the next few uncooked lessons.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { makeEnv, family, opsClient } from './helpers/worker.js';
+import { makeEnv, family, opsClient, samplePlan } from './helpers/worker.js';
 import { weekOf, addDays } from '../src/worker/schedule.js';
 
 const today = new Date().toISOString().slice(0, 10);
@@ -23,7 +23,7 @@ const items = (x) => [...x.sections.flatMap((s) => s.items), ...(x.may_have ?? [
 test("what you'll need: undated lessons first, then week by week, with a course's weeks ahead", async () => {
   const { a, ava, eli } = await setup();
   await a.put('/api/family', { name: 'Carsons', default_servings: 6, diet_filters: [], plan_weeks: true });
-  await a.post('/api/courses', { profile_ids: [ava, eli], start_date: sunday, per_week: 1 });
+  await a.post('/api/courses', { profile_ids: [ava, eli], start_date: sunday, per_week: 1, plan: await samplePlan(a) });
   await a.post('/api/queue', { lesson_id: 'brown-butter-cookies', profile_ids: [ava], servings: 6 });
   const d = (await a.get('/api/shopping')).body;
   assert.deepEqual(d.weeks.map((w) => w.week), [null, sunday, addDays(sunday, 7), addDays(sunday, 14), addDays(sunday, 21)]);
@@ -67,7 +67,7 @@ test('a shopping list: preview the next lessons, leave off what is on hand, chec
 test('a list made before a course lesson was queued still says what it was shopped for', async () => {
   const { a, ava } = await setup();
   await a.put('/api/family', { name: 'Carsons', default_servings: 4, diet_filters: [], plan_weeks: true });
-  const c = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1 })).body.id;
+  const c = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1, plan: await samplePlan(a) })).body.id;
   // Shop for the third lesson, two weeks out: not queued until its week comes.
   const p = (await a.post('/api/shopping/preview', { count: 3 })).body;
   const later = p.lessons[2];

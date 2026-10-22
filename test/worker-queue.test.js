@@ -2,7 +2,7 @@
 // schedule, safety review, and test-cooked (plan §6.1, §6.2, §6.17, §6.18).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { makeEnv, family, client, opsClient } from './helpers/worker.js';
+import { makeEnv, family, client, opsClient, samplePlan } from './helpers/worker.js';
 import { weekOf } from '../src/worker/schedule.js';
 
 const today = new Date().toISOString().slice(0, 10);
@@ -98,7 +98,7 @@ test("one family can't see or change another's queue, courses, or requests", asy
   assert.equal((await b.get(`/api/profiles/${ava}/queue`)).status, 404);
   assert.equal((await b.post(`/api/profiles/${ava}/ask`, { lesson_id: 'shakshuka' })).status, 404);
   assert.equal((await b.get('/api/queue')).body.requests.length, 0);
-  const c = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1 })).body.id;
+  const c = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1, plan: await samplePlan(a) })).body.id;
   assert.equal((await b.get('/api/courses')).body.courses.length, 0);
   assert.equal((await b.put(`/api/courses/${c}`, { profile_ids: [bea], start_date: sunday, per_week: 1 })).status, 404);
   assert.equal((await b.post(`/api/courses/${c}/skip-recipe`, { lesson_id: 'shakshuka' })).status, 404);
@@ -108,19 +108,18 @@ test("one family can't see or change another's queue, courses, or requests", asy
 test("a course loads this week's lessons into the queue, for all its profiles", async () => {
   const { a, ava, eli } = await setup();
   await weeksOn(a);
-  const { id } = (await a.post('/api/courses', { profile_ids: [ava, eli], start_date: sunday, per_week: 1 })).body;
+  const { id } = (await a.post('/api/courses', { profile_ids: [ava, eli], start_date: sunday, per_week: 1, plan: await samplePlan(a) })).body;
   let q = (await a.get('/api/queue')).body;
   const c = q.courses.find((x) => x.id === id);
-  // Only the 4 written lessons can be scheduled, in course order.
+  // Only written lessons can be scheduled, in course order.
   assert.equal(c.total, 4);
-  assert.ok(c.unwritten > 0);
   assert.deepEqual(c.this_week.lessons.map((x) => x.lesson_id), ['shakshuka']);
   const kid = (await a.get(`/api/profiles/${eli}/queue`)).body;
   assert.deepEqual(thisWeek(kid.items).map((x) => [x.lesson_id, x.when]), [['shakshuka', 'this-week']]);
   assert.equal(kid.items[0].due, null, 'no due dates in casual mode');
-  // Lesson numbers follow the course plan: shakshuka's pick-one group keeps
-  // one dish, so it loses its letter.
-  assert.equal(kid.labels.shakshuka, '8');
+  // Lesson numbers follow the course plan: only the samples are kept, so
+  // shakshuka is first, and its pick-one group keeps one dish, so no letter.
+  assert.equal(kid.labels.shakshuka, '1');
 
   // Cooked: the week's slot is used; the next lesson waits for next week.
   await finish(a, '00000000000000c2', 'shakshuka', [ava]);
@@ -141,7 +140,7 @@ test("a course loads this week's lessons into the queue, for all its profiles", 
 test('Skip this recipe pulls in the next one, and Put back undoes it', async () => {
   const { a, ava } = await setup();
   await weeksOn(a);
-  const { id } = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1 })).body;
+  const { id } = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1, plan: await samplePlan(a) })).body;
   await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: 'shakshuka' });
   let c = (await a.get('/api/queue')).body.courses[0];
   assert.deepEqual(c.this_week.lessons.map((x) => x.lesson_id), ['beef-bulgogi']);
@@ -156,7 +155,7 @@ test('Skip this recipe pulls in the next one, and Put back undoes it', async () 
 test('Skip this week empties the week and can be put back; past weeks are closed', async () => {
   const { a, ava } = await setup();
   await weeksOn(a);
-  const { id } = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1 })).body;
+  const { id } = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1, plan: await samplePlan(a) })).body;
   await a.post(`/api/courses/${id}/week`, { week: sunday, skipped: true });
   let c = (await a.get('/api/queue')).body.courses[0];
   assert.equal(c.this_week.skipped, true);
@@ -171,7 +170,7 @@ test('Skip this week empties the week and can be put back; past weeks are closed
 
 test('homeschool mode shows kids a due day; weeks stay off in casual mode until turned on', async () => {
   const { a, ava } = await setup();
-  await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1 });
+  await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1, plan: await samplePlan(a) });
   assert.equal(thisWeek((await a.get(`/api/profiles/${ava}/queue`)).body.items).length, 0, 'Plan our weeks is off');
   await weeksOn(a, { plan_weeks: false, mode: 'homeschool' });
   const kid = (await a.get(`/api/profiles/${ava}/queue`)).body;
@@ -184,7 +183,9 @@ test('a profile is on one course at a time; an ended course can be put back', as
   const { a, ava, eli } = await setup();
   await weeksOn(a);
   const first = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 2 })).body.id;
-  assert.equal((await a.post('/api/courses', { profile_ids: [ava, eli], start_date: sunday, per_week: 1 })).status, 409);
+  // The suggested plan keeps dishes that aren't written yet; the schedule passes over them.
+  assert.ok((await a.get('/api/queue')).body.courses[0].unwritten > 0);
+  assert.equal((await a.post('/api/courses', { profile_ids: [ava, eli], start_date: sunday, per_week: 1, plan: await samplePlan(a) })).status, 409);
   assert.equal(thisWeek((await a.get(`/api/profiles/${ava}/queue`)).body.items).length, 2);
   await a.post(`/api/courses/${first}/end`);
   assert.equal(thisWeek((await a.get(`/api/profiles/${ava}/queue`)).body.items).length, 0, 'an ended course leaves the queue');
@@ -196,10 +197,10 @@ test('a profile is on one course at a time; an ended course can be put back', as
 test('a course plan can be reordered, and dishes taken out', async () => {
   const { a, ava } = await setup();
   await weeksOn(a);
-  const { courses, default_plan } = (await a.get('/api/courses')).body;
-  assert.equal(courses.length, 0);
+  assert.equal((await a.get('/api/courses')).body.courses.length, 0);
+  const samples = await samplePlan(a);
   // Bulgogi first, cookies out.
-  const plan = [default_plan.find((x) => x.id === 'beef-bulgogi'), ...default_plan.filter((x) => x.id !== 'beef-bulgogi')]
+  const plan = [samples.find((x) => x.id === 'beef-bulgogi'), ...samples.filter((x) => x.id !== 'beef-bulgogi')]
     .map((x) => (x.id === 'brown-butter-cookies' ? { ...x, removed: true } : x));
   const { id } = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 4, plan })).body;
   const c = (await a.get('/api/queue')).body.courses[0];
@@ -227,7 +228,7 @@ test("the queue and courses are in a family's download; a deleted profile leaves
   await weeksOn(a);
   await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava] });
   await a.post('/api/queue', { lesson_id: 'beef-bulgogi', profile_ids: [ava, eli] });
-  await a.post('/api/courses', { profile_ids: [eli], start_date: sunday, per_week: 1 });
+  await a.post('/api/courses', { profile_ids: [eli], start_date: sunday, per_week: 1, plan: await samplePlan(a) });
   await a.get('/api/queue');
   const ops = await opsClient(env);
   const fid = (await env.DB.prepare("SELECT id FROM families WHERE name = 'Carsons'").first()).id;
@@ -244,7 +245,7 @@ test("the queue and courses are in a family's download; a deleted profile leaves
 test('a request for a lesson the course already loaded shows once to the kid, and the parent is told', async () => {
   const { a, ava } = await setup();
   await weeksOn(a);
-  await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1 });
+  await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1, plan: await samplePlan(a) });
   await a.post(`/api/profiles/${ava}/ask`, { lesson_id: 'shakshuka' });
   const kid = thisWeek((await a.get(`/api/profiles/${ava}/queue`)).body.items);
   assert.deepEqual(kid.map((x) => [x.lesson_id, x.status]), [['shakshuka', 'assigned']]);
@@ -268,7 +269,7 @@ test('a pick-one group can keep more than one dish; one is kept by default', asy
 test('an extra lesson has no due day for kids, even in homeschool mode', async () => {
   const { a, ava } = await setup();
   await weeksOn(a, { plan_weeks: false, mode: 'homeschool' });
-  const { id } = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1 })).body;
+  const { id } = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1, plan: await samplePlan(a) })).body;
   await a.post(`/api/courses/${id}/week`, { extra: 1 });
   const items = thisWeek((await a.get(`/api/profiles/${ava}/queue`)).body.items);
   assert.deepEqual(items.map((x) => [x.lesson_id, Boolean(x.due)]), [['shakshuka', true], ['beef-bulgogi', false]]);

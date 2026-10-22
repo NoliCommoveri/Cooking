@@ -77,3 +77,10 @@ export async function opsClient(env) {
   await c.form('/ops/login', { token: env.OPS_TOKEN });
   return c;
 }
+
+// A course plan with only the four sample lessons kept, so tests that count or
+// order a course's lessons don't change each time another lesson is written.
+export const SAMPLES = ['shakshuka', 'beef-bulgogi', 'buttermilk-biscuits', 'brown-butter-cookies'];
+export async function samplePlan(c) {
+  return (await c.get('/api/courses')).body.default_plan.map((x) => ({ ...x, removed: !SAMPLES.includes(x.id) }));
+}

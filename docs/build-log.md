@@ -1560,3 +1560,53 @@ are replaced):
 - Salt, black pepper, and olive oil play the pretend family's kitchen
   staples, so "May already have" shows. The diet switches still apply.
 - §6.16's description of the preview now says this.
+
+## 64. 2026-10-22 — Unit 1: the three julienne lessons
+
+Content fill (Phase 7) starts with Unit 1, at the owner's request: all three
+pick-one julienne lessons first. 
+- **1a Fresh spring rolls** (`spring-rolls`): poached chicken (165°F), carrot
+  and cucumber matchsticks, rice noodles, mint, rolled in rice paper, with a
+  peanut-hoisin dip. Teaches making a flat side before cutting, cutting
+  planks, then matchsticks. Swaps: sunflower seed butter (peanuts),
+  gluten-free hoisin (gluten). 4 servings, 60 minutes.
+- **1b Chicken fajitas** (`chicken-fajitas`): peppers cut skin side down and
+  onions cut into even strips; thighs rubbed with a spice paste, seared whole
+  (165°F), rested, then sliced, so no raw chicken is cut. Tortillas carry the
+  "check for lard" note; sour cream carries a "check for gelatin" note. Swap:
+  corn tortillas (gluten). 4 servings, 50 minutes.
+- **1c Baked shoestring fries** (`shoestring-fries`): flat side, planks,
+  sticks; soaked, dried, and baked at 425°F on two pans, turned and swapped
+  halfway. 4 servings (up to 8), 70 minutes.
+- **Registries:** 24 new ingredients (chicken breast and thighs, rice paper,
+  rice noodles, produce, spices, tortillas, sour cream, toppings) and 7 tools
+  (medium saucepan, colander, shallow dish, kitchen towels, peeler, paper
+  towels, microwave). Every animal product is from a clean species.
+- **Course outline:** the three dishes carry their real times instead of
+  estimates.
+- **Linter:** a dish in the same pick-one group no longer counts as an
+  "earlier lesson" for the missing-callback warning, since a family cooks only
+  one of them (§7.4 says so now). One new test.
+- **Merged with main** (Phases 3 and 4 so far): the 24 new ingredients got
+  their store sections and package sizes, which main now requires.
+- **Course tests use the four samples:** the queue and shopping tests built
+  courses from the suggested plan, so writing 1a–1c changed which lesson a
+  course starts with. They now keep only the four sample lessons
+  (`samplePlan` in `test/helpers/worker.js`), so lessons written later don't
+  move them. One test still uses the suggested plan, to check that a course
+  passes over dishes not written yet.
+- The demo's Try it tab lists every written lesson, so 1a–1c show there too.
+- Not test-cooked. No intro slides yet (warned, as for the samples).
+- Tests: 168.
+
+## 65. 2026-10-22 — The demo shows one skill's three choices
+
+- **Owner ruling:** the demo shows the three julienne lessons, so visitors see
+  what a foundation skill's choices look like, but lessons written later
+  don't join it.
+- **Try it** now has two groups: "Pick one: three ways to learn julienne"
+  (spring rolls, fajitas, shoestring fries, with a line on how pick-one
+  works), then "More sample lessons" (the four samples). The list lives in
+  `DEMO_TRY` in `public/demo.js`.
+- The demo loads only those seven lessons, and the Course tab marks only
+  them "Try it now". §6.16 says so.

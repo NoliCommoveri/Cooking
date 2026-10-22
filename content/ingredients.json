@@ -721,6 +721,487 @@
       "rawHandling": null,
       "icon": null,
       "watch": null
+    },
+    {
+      "id": "chicken-breast",
+      "name": "Boneless, skinless chicken breasts",
+      "section": "meat-fish",
+      "baseUnit": "g",
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 113.4,
+        "label": "¼ lb",
+        "many": "¼ lb",
+        "byWeight": true
+      },
+      "contains": [
+        "meat"
+      ],
+      "animalSource": "chicken",
+      "animalPart": "meat",
+      "rawHandling": "poultry",
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "chicken-thigh",
+      "name": "Boneless, skinless chicken thighs",
+      "section": "meat-fish",
+      "baseUnit": "g",
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 113.4,
+        "label": "¼ lb",
+        "many": "¼ lb",
+        "byWeight": true
+      },
+      "contains": [
+        "meat"
+      ],
+      "animalSource": "chicken",
+      "animalPart": "meat",
+      "rawHandling": "poultry",
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "rice-paper",
+      "name": "Rice paper wrappers (8½-inch rounds)",
+      "section": "specialty",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "rice paper wrapper",
+        "many": "rice paper wrappers"
+      },
+      "purchaseUnit": {
+        "amount": 30,
+        "label": "12-oz pack of rice paper (about 30)",
+        "many": "12-oz packs of rice paper"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "rice-vermicelli",
+      "name": "Thin rice noodles (rice vermicelli)",
+      "section": "grains-pasta",
+      "baseUnit": "g",
+      "purchaseUnit": {
+        "amount": 227,
+        "label": "8-oz bag",
+        "many": "8-oz bags"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "lettuce-green-leaf",
+      "name": "Green leaf lettuce",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "head of green leaf lettuce",
+        "many": "heads of green leaf lettuce"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "head of green leaf lettuce",
+        "many": "heads of green leaf lettuce"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "carrot",
+      "name": "Carrots",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "large carrot",
+        "many": "large carrots"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "large carrot",
+        "many": "large carrots"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "cucumber",
+      "name": "Cucumber",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "cucumber",
+        "many": "cucumbers"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "cucumber",
+        "many": "cucumbers"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "mint",
+      "name": "Fresh mint",
+      "section": "herbs",
+      "baseUnit": "ml",
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 240,
+        "label": "bunch of mint",
+        "many": "bunches of mint"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "cilantro",
+      "name": "Fresh cilantro",
+      "section": "herbs",
+      "baseUnit": "ml",
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 240,
+        "label": "bunch of cilantro",
+        "many": "bunches of cilantro"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "peanut-butter",
+      "name": "Creamy peanut butter",
+      "section": "sauces",
+      "baseUnit": "g",
+      "conversions": {
+        "cup": 258,
+        "tbsp": 16
+      },
+      "purchaseUnit": {
+        "amount": 454,
+        "label": "16-oz jar",
+        "many": "16-oz jars"
+      },
+      "contains": [
+        "peanuts"
+      ],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "sunflower-butter",
+      "name": "Sunflower seed butter",
+      "section": "sauces",
+      "baseUnit": "g",
+      "conversions": {
+        "cup": 256,
+        "tbsp": 16
+      },
+      "purchaseUnit": {
+        "amount": 454,
+        "label": "16-oz jar",
+        "many": "16-oz jars"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "hoisin-sauce",
+      "name": "Hoisin sauce",
+      "section": "sauces",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 250,
+        "label": "8.5-fl-oz jar",
+        "many": "8.5-fl-oz jars"
+      },
+      "contains": [
+        "gluten"
+      ],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "hoisin-gluten-free",
+      "name": "Gluten-free hoisin sauce",
+      "section": "sauces",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 250,
+        "label": "8.5-fl-oz jar",
+        "many": "8.5-fl-oz jars"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "lime",
+      "name": "Limes",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "lime",
+        "many": "limes"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "lime",
+        "many": "limes"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "bell-pepper-green",
+      "name": "Green bell pepper",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "green bell pepper",
+        "many": "green bell peppers"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "green bell pepper",
+        "many": "green bell peppers"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "chili-powder",
+      "name": "Chili powder",
+      "section": "spices",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 100,
+        "label": "jar of chili powder",
+        "many": "jars of chili powder"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "garlic-powder",
+      "name": "Garlic powder",
+      "section": "spices",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 100,
+        "label": "jar of garlic powder",
+        "many": "jars of garlic powder"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "tortilla-flour",
+      "name": "Flour tortillas (8-inch)",
+      "section": "bread-tortillas",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "flour tortilla",
+        "many": "flour tortillas"
+      },
+      "purchaseUnit": {
+        "amount": 10,
+        "label": "10-pack of flour tortillas",
+        "many": "10-packs of flour tortillas"
+      },
+      "contains": [
+        "gluten"
+      ],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": "Check the label for lard. Most store brands use oil or vegetable shortening instead."
+    },
+    {
+      "id": "tortilla-corn",
+      "name": "Corn tortillas (6-inch)",
+      "section": "bread-tortillas",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "corn tortilla",
+        "many": "corn tortillas"
+      },
+      "purchaseUnit": {
+        "amount": 30,
+        "label": "30-pack of corn tortillas",
+        "many": "30-packs of corn tortillas"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": "Check the label for lard. Most store brands don't use it."
+    },
+    {
+      "id": "sour-cream",
+      "name": "Sour cream",
+      "section": "dairy-eggs",
+      "baseUnit": "ml",
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 473,
+        "label": "16-oz tub",
+        "many": "16-oz tubs"
+      },
+      "contains": [
+        "dairy"
+      ],
+      "animalSource": "cattle",
+      "animalPart": "milk",
+      "rawHandling": null,
+      "icon": null,
+      "watch": "Check the label for gelatin. Pick a brand made without it."
+    },
+    {
+      "id": "salsa",
+      "name": "Jarred salsa",
+      "section": "canned-jarred",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 473,
+        "label": "16-oz jar",
+        "many": "16-oz jars"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "avocado",
+      "name": "Avocados",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "ripe avocado",
+        "many": "ripe avocados"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "ripe avocado",
+        "many": "ripe avocados"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "potato-russet",
+      "name": "Russet potatoes",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "medium russet potato",
+        "many": "medium russet potatoes"
+      },
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "medium russet potato",
+        "many": "medium russet potatoes"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "ketchup",
+      "name": "Ketchup",
+      "section": "sauces",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 567,
+        "label": "20-oz bottle",
+        "many": "20-oz bottles"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
     }
   ]
 }
