@@ -409,3 +409,22 @@ Owner rulings on open questions:
   no PIN. A shared profile with a kid on it still asks (§6.1, §6.9). The
   showcase's tutorial card switches to the adult version when an adult
   profile is picked.
+
+---
+
+## 18. 2026-10-22 — Hands-free step advance
+
+- The owner asked how hard a hands-free voice "next step" would be. Her
+  kitchen device is likely an Android phone; Safari families may come later.
+- Added §6.12 to the plan as a **Recommendation**, on the owner's yes:
+  - A tap zone and Bluetooth page-turner support for every device, moved
+    into Phase 2.
+  - Voice stays in Later: Android Chrome first, shown only where the device
+    supports it, with taps as the fallback.
+  - No "switch to Chrome" prompt on iPhone, because every iOS browser runs on
+    Safari's engine.
+  - Food-safety checks still need a tap.
+- Cook mode in §3 and the Phase 2 and Later rows in §9 now point to §6.12.
+- New open question 1: whether voice needs a parent to turn it on, since
+  Chrome usually sends the audio to Google.
+- Nothing is built.
