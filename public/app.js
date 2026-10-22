@@ -97,6 +97,14 @@ const addDays = (d, n) => { const t = new Date(`${d}T12:00:00Z`); t.setUTCDate(t
 // Weeks run Sunday to Friday; Saturday is the Sabbath (owner, 2026-10-22).
 const weekOf = (d) => addDays(d, -new Date(`${d}T12:00:00Z`).getUTCDay());
 const localToday = () => { const t = new Date(); return new Date(t.getTime() - t.getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
+// Saturday is the Sabbath (owner, 2026-10-22): a banner, and no due dates or grading.
+const isSabbath = () => new Date().getDay() === 6;
+function sabbathBanner() {
+  if (!isSabbath()) return null;
+  return el('aside', { class: 'card notice sabbath', role: 'note' },
+    el('h2', {}, 'Shabbat shalom!'),
+    el('p', {}, "While you're welcome to follow the recipe, please note that grading and due dates are not available on the Sabbath. We hope your family enjoys the rest!"));
+}
 const fmtDay = (d, opts = { weekday: 'short', month: 'short', day: 'numeric' }) => new Date(`${d}T12:00:00`).toLocaleDateString(undefined, opts);
 const DIET = {
   nuts: 'Tree nuts', peanuts: 'Peanuts', dairy: 'Dairy', egg: 'Eggs', gluten: 'Gluten', fish: 'Fish', meat: 'Meat and poultry',
@@ -274,6 +282,7 @@ async function lockers() {
       el('small', {}, THEMES[p.theme]))),
     el('a', { class: 'locker add', href: '#/parent/profiles/new' }, '+ Add a profile'));
   screen(topbar(me.family.name, el('a', { class: 'hbtn', href: '#/parent' }, 'Parents')),
+    sabbathBanner(),
     me.parent.test_cook_notice ? testCookNotice() : null,
     el('h1', {}, "Who's cooking?"), grid);
 }
@@ -353,7 +362,7 @@ async function kitchen(id) {
   // Up next: this profile's queued lessons. Kids see "due Friday" in
   // homeschool mode and never anything about being late (§6.17).
   const when = (x) => (x.status === 'requested' ? 'You asked a grown-up'
-    : x.due ? `Due ${fmtDay(x.due, { weekday: 'long' })}`
+    : x.due && !isSabbath() ? `Due ${fmtDay(x.due, { weekday: 'long' })}`
       : x.when === 'this-week' ? 'This week' : x.when === 'next-week' ? 'For next week'
         : x.planned_date ? fmtDay(x.planned_date) : 'Coming up');
   const upNext = mine.items.length ? [
@@ -367,6 +376,7 @@ async function kitchen(id) {
 
   screen(el('section', { class: 'kitchen', 'data-kt': p.theme },
     el('a', { class: 'back', href: '#/' }, '← Lockers'),
+    sabbathBanner(),
     el('div', { class: 'k-head' }, avatars(p.people),
       el('div', { class: 'grow' }, el('h1', {}, quest ? 'Quest board' : 'Recipe box'), el('div', {}, p.name))),
     el('div', { class: 'acts' },
@@ -502,7 +512,7 @@ function parentScreen(current, ...kids) {
     el('a', { class: 'hbtn', href: '#/' }, 'Lockers'),
     el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/pin/lock'); await refresh(); go('#/'); } }, 'Lock'),
     el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/logout'); store('cpr.profile', null); await start('#/'); } }, 'Log out')),
-  el('h1', {}, 'Parents'), parentTabs(current), ...kids);
+  el('h1', {}, 'Parents'), parentTabs(current), sabbathBanner(), ...kids);
 }
 
 const parentProfiles = parentOnly(async () => {
@@ -693,7 +703,9 @@ const parentQueue = parentOnly(async (flash) => {
     const lessonRow = (x, week) => el('div', { class: x.done ? 'rowi' : 'rowi qrow' },
       el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
         el('small', {}, x.done ? 'Cooked'
-          : [x.overdue ? el('span', { class: 'late' }, 'Overdue · ') : null, homeschool ? `Due ${fmtDay(addDays(week, c.due_day))}` : 'This week'].filter(Boolean)),
+          : x.extra ? 'Extra, this week only'
+            : isSabbath() || !homeschool ? 'This week'
+              : [x.overdue ? el('span', { class: 'late' }, 'Overdue · ') : null, `Due ${fmtDay(addDays(week, c.due_day))}`].filter(Boolean)),
         x.done ? null : el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id))),
       x.done ? el('span', { class: 'mut' }, '✓') : el('div', { class: 'acts' },
         x.queue_id ? servingsPick(x, setServings(x.queue_id)) : null,

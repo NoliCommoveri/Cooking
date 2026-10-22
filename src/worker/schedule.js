@@ -68,19 +68,21 @@ export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
     if (w < start) return { list: [], next: from };
     const cap = skipped(w) ? 0 : per + extra(w);
     const room = Math.max(0, cap - cookedHere.length);
-    return { list: open.slice(from, from + room), next: from + room };
+    // The ones past the pace are this week's extras (Cook another recipe).
+    const paced = skipped(w) ? 0 : Math.max(0, per - cookedHere.length);
+    return { list: open.slice(from, from + room), next: from + room, paced };
   };
   const cookedNow = doneIds.filter((id) => done[id] >= now && done[id] < addDays(now, 7));
   const a = fill(now, 0, cookedNow);
   const next = addDays(now, 7);
   const b = fill(next, a.next, []);
-  const week = (w, list, cooked, overdueCount) => ({
+  const week = (w, list, cooked, overdueCount, paced = list.length) => ({
     week: w,
     skipped: skipped(w),
     extra: extra(w),
     lessons: [
-      ...cooked.map((id) => ({ id, done: true, overdue: false })),
-      ...list.map((id, i) => ({ id, done: false, overdue: i < overdueCount })),
+      ...cooked.map((id) => ({ id, done: true, overdue: false, extra: false })),
+      ...list.map((id, i) => ({ id, done: false, overdue: i < overdueCount, extra: i >= paced })),
     ],
   });
 
@@ -94,7 +96,7 @@ export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
   const weeksBehind = planned && projected && projected > planned ? Math.round((toDate(projected) - toDate(planned)) / (7 * DAY)) : 0;
 
   return {
-    this_week: week(now, now < start ? [] : a.list, cookedNow, now < start ? 0 : behindLessons),
+    this_week: week(now, now < start ? [] : a.list, cookedNow, now < start ? 0 : behindLessons, a.paced),
     next_week: week(next, b.list, [], 0),
     shows_next: today >= addDays(now, PREVIEW_FROM),
     started: now >= start,

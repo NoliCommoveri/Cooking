@@ -264,3 +264,13 @@ test('a pick-one group can keep more than one dish; one is kept by default', asy
   assert.equal(kid.labels['spaghetti-marinara'], '8b');
   assert.equal((await a.get('/api/courses')).body.courses[0].plan.find((x) => x.id === 'spaghetti-marinara').removed, false);
 });
+
+test('an extra lesson has no due day for kids, even in homeschool mode', async () => {
+  const { a, ava } = await setup();
+  await weeksOn(a, { plan_weeks: false, mode: 'homeschool' });
+  const { id } = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1 })).body;
+  await a.post(`/api/courses/${id}/week`, { extra: 1 });
+  const items = thisWeek((await a.get(`/api/profiles/${ava}/queue`)).body.items);
+  assert.deepEqual(items.map((x) => [x.lesson_id, Boolean(x.due)]), [['shakshuka', true], ['beef-bulgogi', false]]);
+  assert.equal((await a.get('/api/queue')).body.courses[0].this_week.lessons[1].extra, true);
+});

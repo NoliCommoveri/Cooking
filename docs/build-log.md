@@ -1401,3 +1401,18 @@ which would have meant reworking the queue later. The owner ruled:
 - Tests: 149. The schedule tests use Sunday weeks and the Thursday preview; a
   new test keeps two dishes of one group. The queue tests no longer depend on
   which weekday they run.
+
+## 57. 2026-10-22 — The Sabbath banner, and extras aren't due
+
+- **Owner ruling: on the Sabbath, opening the app shows a banner** on the
+  lockers, a kitchen, and the parent screens: "Shabbat shalom! While you're
+  welcome to follow the recipe, please note that grading and due dates are not
+  available on the Sabbath. We hope your family enjoys the rest!"
+- That day, kids see no "Due Friday" and parents see no due days or Overdue on
+  the queue. Grading (Phase 4b) won't be offered on the Sabbath; §6.18 and §9
+  say so.
+- The Sabbath is Saturday by the device's calendar, midnight to midnight.
+- **Extra lessons** (Cook another recipe) now say "Extra, this week only" to
+  parents and carry no due day for kids, since they're never due or overdue.
+- Tests: 150 (the extras' flag in the schedule, and no due day for a kid's
+  extra lesson in homeschool mode).

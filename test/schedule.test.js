@@ -59,6 +59,7 @@ test('an extra lesson is this week only, and not overdue if it is not cooked', (
   const weeks = { '2026-09-06': { extra: 1 } };
   const s = schedule({ course, lessons: L, weeks, today: '2026-09-07' });
   assert.deepEqual(ids(s.this_week), ['a', 'b', 'c']);
+  assert.deepEqual(s.this_week.lessons.map((x) => x.extra), [false, false, true]);
   const next = schedule({ course, lessons: L, done: { a: '2026-09-07', b: '2026-09-07' }, weeks, today: '2026-09-14' });
   assert.deepEqual(ids(next.this_week), ['c', 'd']);
   assert.equal(next.lessons_behind, 0);

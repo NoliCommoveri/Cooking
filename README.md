@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [56. 2026-10-22 — Sabbath weeks, and more than one pick-one dish](docs/build-log.md#56-2026-10-22--sabbath-weeks-and-more-than-one-pick-one-dish)
+**Latest build log entry:** [57. 2026-10-22 — The Sabbath banner, and extras aren't due](docs/build-log.md#57-2026-10-22--the-sabbath-banner-and-extras-arent-due)
 
 ## Current features
 
@@ -19,7 +19,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Voice step control** (`public/voice.js`): in cook mode, "next" (moves on and reads the step aloud), "back," and "again" (reads it again). Off until a parent turns it on in family settings; shown only where the browser can recognize speech.
 - **Saved cooks** (`public/cooks.js`): each cook is saved to the family's account for every profile on it, with "Cooking with someone?" on the lesson card. A cook finished offline is sent when the connection returns. Lessons a profile has cooked say so in its kitchen.
 - **Queue** (`src/worker/plan.js`): the one "up next" list. Parents add lessons for one or more profiles, approve kids' requests, check each lesson's safety review, and mark lessons test-cooked. Kids ask with "I want to make this"; adults tap "Cook this".
-- **Courses and the weekly schedule** (`src/worker/schedule.js`): set a course up once for one or more profiles, and each week's lessons load into the queue. Weeks run Sunday to Friday (Saturday is the Sabbath); next week shows from Thursday for shopping. Unfinished lessons roll to next week; Skip this recipe, Cook another recipe, and Skip this week, each with Undo.
+- **Courses and the weekly schedule** (`src/worker/schedule.js`): set a course up once for one or more profiles, and each week's lessons load into the queue. Weeks run Sunday to Friday (Saturday is the Sabbath); next week shows from Thursday for shopping. On the Sabbath a "Shabbat shalom" banner shows and due dates are hidden. Unfinished lessons roll to next week; Skip this recipe, Cook another recipe, and Skip this week, each with Undo.
 - **Casual and homeschool modes**: homeschool adds due days for kids and overdue for parents; casual can turn on Plan our weeks.
 - **Test-cook notice**: each parent sees a one-time note, above the lockers, to read a lesson through before their kids cook it.
 - **Demo page** (`/demo`): no account needed. Try the sample lessons in either theme, preview diet settings and a shopping list, and browse the whole course by dish or by skill.

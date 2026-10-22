@@ -265,7 +265,7 @@ function courseOut(st, fam, rowsByLesson) {
     const q = rowsByLesson[`${course.id}:${x.id}`];
     return {
       lesson_id: x.id, title: L?.title ?? x.id, label: lessons.labels[x.id] ?? null, image: L?.image ?? null, unit: L?.unit ?? null,
-      foundation: Boolean(dishById[x.id]?.pickOne), done: x.done, overdue: fam.mode === 'homeschool' ? x.overdue : false,
+      foundation: Boolean(dishById[x.id]?.pickOne), done: x.done, overdue: fam.mode === 'homeschool' ? x.overdue : false, extra: Boolean(x.extra),
       queue_id: q?.id ?? null, servings: q?.servings ?? null, servings_options: L ? servingOptions(L) : [], status: q?.status ?? null,
     };
   };
@@ -427,6 +427,8 @@ export function register(on) {
     // A profile on a course takes its lesson numbers from the course's plan (§4.1).
     const labels = mine ? mine.lessons.labels : suggestedLabels;
     const thisWeek = weekOf(day);
+    // An extra lesson (Cook another recipe) is this week only, never due.
+    const extras = new Set(mine ? mine.sched.this_week.lessons.filter((x) => x.extra).map((x) => x.id) : []);
     // A request for a lesson that's on the list anyway shows once, as queued.
     const listed = new Set(rows.filter((r) => r.status !== 'requested').map((r) => r.lesson_id));
     return {
@@ -435,7 +437,7 @@ export function register(on) {
         id: r.id, lesson_id: r.lesson_id, title: lessonById[r.lesson_id]?.title ?? r.lesson_id, label: labels[r.lesson_id] ?? null,
         image: lessonById[r.lesson_id]?.image ?? null, status: r.status, servings: r.servings, planned_date: r.planned_date, profile_ids: who[r.id] ?? [],
         when: r.week_start ? (r.week_start <= thisWeek ? 'this-week' : 'next-week') : null,
-        due: r.week_start && r.week_start <= thisWeek && fam.mode === 'homeschool' ? addDays(thisWeek, DUE_DAY) : null,
+        due: r.week_start && r.week_start <= thisWeek && fam.mode === 'homeschool' && !(r.course_id && extras.has(r.lesson_id)) ? addDays(thisWeek, DUE_DAY) : null,
       })),
       labels: mine ? mine.lessons.labels : null,
       total: mine ? mine.lessons.total : null,
