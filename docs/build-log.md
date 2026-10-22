@@ -1646,3 +1646,10 @@ Plan only; nothing built. From the owner's rulings in this session.
   every family or turned on per family; whether its cooks count toward
   progress and the transcript; who sees shared recipes and whether the family
   name shows; and Phase 4c's place.
+
+## 67. 2026-10-22 — Plan: Phase 4c is next
+
+- **Owner ruling:** Phase 4c (Holy Times and shared recipes, §6.19, §6.10)
+  is built next, with family recipes pulled forward from Phase 9. It comes
+  after Phase 4's first part and before the rest of Phase 4 and 4b. §9 says
+  so, and its place is no longer an open question.
