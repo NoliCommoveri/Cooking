@@ -867,7 +867,7 @@ use.pop{animation:dropin .42s cubic-bezier(.3,.7,.4,1) both}
   <header class="hd">
     <img src="img/clean-plate-logo.webp" alt="Clean Plate Recipes logo" width="360" height="360">
     <h1>Theme showcase</h1>
-    <p>Every component in both built themes, in a demo state. Kitchen Quest is approved. Chef's Passport is new in Phase 0b and up for your review. Pick a locker, or change a profile's theme, and every panel below switches. The plainer house style around the panels is what the profile picker and parent screens use. Everything is tappable, and nothing is saved.</p>
+    <p>Every component in both built themes, in a demo state. Both themes are approved. Pick a locker, or change a profile's theme, and every panel below switches. The plainer house style around the panels is what the profile picker and parent screens use. Everything is tappable, and nothing is saved.</p>
   </header>
 
   <nav class="toc" aria-label="On this page">
@@ -978,7 +978,7 @@ use.pop{animation:dropin .42s cubic-bezier(.3,.7,.4,1) both}
     <div class="parent" id="parentStage"></div>
   </section>
 
-  <p class="foot">Phase 0 and 0b showcase for Clean Plate Recipes. Kitchen Quest was approved in Phase 0. Chef's Passport is waiting for your review.</p>
+  <p class="foot">Phase 0 and 0b showcase for Clean Plate Recipes. Kitchen Quest was approved in Phase 0 and Chef's Passport in Phase 0b.</p>
 </div>
 
 <button type="button" class="ask" id="askBtn" data-act="ask" aria-label="Ask the helper"><svg aria-hidden="true"><use href="#guide"/></svg>Ask</button>
@@ -1004,7 +1004,7 @@ const PROFILES=[
 ];
 const THEMES=[
   {k:'quest',n:'Kitchen Quest',s:'Built · approved',icon:'i-shield'},
-  {k:'passport',n:"Chef's Passport",s:'Built in Phase 0b · up for review',icon:'i-book'},
+  {k:'passport',n:"Chef's Passport",s:'Built · approved',icon:'i-book'},
   {k:'truck',n:'Food Truck',s:'Later',off:1},
   {k:'scrap',n:'Recipe Scrapbook',s:'Later',off:1}
 ];
@@ -1428,7 +1428,7 @@ function renderAll(){renderLearn();renderTut();renderQueue();renderPicker();rend
 
 /* ================= Chef's Passport (Phase 0b) ================= */
 const PP=()=>PROFILES[S.prof].theme==='passport';
-const NAMES={1:['Spring rolls','Vietnamese'],2:['Fattoush','Lebanese'],3:['Fish tacos','Mexican'],4:['Shakshuka','North African'],5:['Fried rice','Chinese'],6:['Oyakodon','Japanese'],7:['Chicken adobo','Filipino'],8:['Cacio e pepe','Italian'],9:['Chana masala','Indian'],10:['Misir wot','Ethiopian'],11:['Chicken tagine','Moroccan'],12:['Butter chicken','Indian'],13:['Jerk chicken','Jamaican'],14:['Beef bulgogi','Korean'],15:['Lomo saltado','Peruvian'],16:['Tinga tacos','Mexican'],17:['Pupusas','Salvadoran'],18:['Gyoza','Japanese'],19:['Skillet naan','Indian'],20:['Pão de queijo','Brazilian'],21:['Spanakopita','Greek'],22:['Quiche','French'],23:['Chicken katsu','Japanese'],24:['Swedish meatballs','Swedish'],25:['Churros','Spanish'],26:['Chicken Caesar','American'],27:['Smash burgers','American'],28:['French omelet','American'],29:['Hash browns','American'],30:['Breakfast burritos','American'],31:['Eggs Benedict','American'],32:['Mac and cheese','American'],33:['Beef chili','American'],34:['Jambalaya','Louisiana'],35:['Pulled chicken','American'],36:['Chicken noodle soup','American'],37:['Philly cheesesteak','American'],38:['Biscuits','American'],39:['Biscuits & gravy','American'],40:['Blueberry muffins','American'],41:['Cornbread','American'],42:['Cinnamon rolls','American'],43:['Granola','American'],44:['Meatloaf','American'],45:['Roast chicken','American'],46:['Chicken pot pie','American'],47:['Pot roast','American'],48:['Fried chicken','American'],49:['Cookies','American'],50:['Apple pie','American']};
+const NAMES={1:['Spring rolls','Vietnamese'],2:['Fattoush','Lebanese'],3:['Fish tacos','Mexican'],4:['Shakshuka','North African'],5:['Fried rice','Chinese'],6:['Oyakodon','Japanese'],7:['Chicken adobo','Filipino'],8:['Cacio e pepe','Italian'],9:['Chana masala','Indian'],10:['Misir wot','Ethiopian'],11:['Chicken tagine','Moroccan'],12:['Butter chicken','Indian'],13:['Jerk chicken','Jamaican'],14:['Beef bulgogi','Korean'],15:['Lomo saltado','Peruvian'],16:['Tinga tacos','Mexican'],17:['Pupusas','Salvadoran'],18:['Gyoza','Japanese'],19:['Skillet naan','Indian'],20:['Pão de queijo','Brazilian'],21:['Spanakopita','Greek'],22:['Quiche','French'],23:['Chicken katsu','Japanese'],24:['Swedish meatballs','Swedish'],25:['Churros','Mexican'],26:['Chicken Caesar','American'],27:['Smash burgers','American'],28:['French omelet','American'],29:['Hash browns','American'],30:['Breakfast burritos','American'],31:['Eggs Benedict','American'],32:['Mac and cheese','American'],33:['Beef chili','American'],34:['Jambalaya','Louisiana'],35:['Pulled chicken','American'],36:['Chicken noodle soup','American'],37:['Philly cheesesteak','American'],38:['Biscuits','American'],39:['Biscuits & gravy','American'],40:['Blueberry muffins','American'],41:['Cornbread','American'],42:['Cinnamon rolls','American'],43:['Granola','American'],44:['Meatloaf','American'],45:['Roast chicken','American'],46:['Chicken pot pie','American'],47:['Pot roast','American'],48:['Fried chicken','American'],49:['Cookies','American'],50:['Apple pie','American']};
 const CUIS=[...new Set(Object.values(NAMES).map(x=>x[1]))];
 const DATES={1:'Sep 3',2:'Sep 10',3:'Sep 17',26:'Sep 24',27:'Oct 1',28:'Oct 4',5:'Oct 8',6:'Oct 15'};
 const NEXT=4;
@@ -1437,9 +1437,9 @@ const range=(a,b)=>Array.from({length:b-a+1},(_,k)=>a+k);
 const REGIONS=[
   {id:'easia',n:'East & Southeast Asia',s:'East & SE Asia',d:[1,5,6,7,14,18,23]},
   {id:'mena',n:'Middle East & North Africa',s:'Middle East & N. Africa',d:[2,4,11]},
-  {id:'latam',n:'Latin America & Caribbean',s:'Latin America',d:[3,13,15,16,17,20]},
+  {id:'latam',n:'Latin America & Caribbean',s:'Latin America',d:[3,13,15,16,17,20,25]},
   {id:'usa',n:'United States',s:'United States',d:range(26,50)},
-  {id:'europe',n:'Europe',s:'Europe',d:[8,21,22,24,25]},
+  {id:'europe',n:'Europe',s:'Europe',d:[8,21,22,24]},
   {id:'sasia',n:'South Asia',s:'South Asia',d:[9,12,19]},
   {id:'africa',n:'Sub-Saharan Africa',s:'Africa',d:[10]}
 ];

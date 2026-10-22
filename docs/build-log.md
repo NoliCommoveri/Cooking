@@ -481,3 +481,14 @@ Owner rulings on open questions:
     outlines on top.
 - The source and its layers are listed in `content/images/LICENSES.md`, and
   §5.4 describes the map.
+
+---
+
+## 21. 2026-10-22 — Chef's Passport approved; churros moved
+
+- **The owner approved the Chef's Passport look,** so Phase 0b is done. §5.4
+  is now a Requirement.
+- **Churros (25) moved from the Europe page to Latin America,** at the owner's
+  request, and now earn the Mexican stamp. That leaves 21 cuisine stamps.
+- The showcase now says both themes are approved.
+- Next: Phase 1, the content core.
