@@ -710,3 +710,6 @@ The owner reviewed the sample lessons in the preview.
   `tools/dish-sheets.txt`.
 - Sheet 20 (72–75: ugali with sukuma wiki, malva pudding, koshari,
   kelewele) was split by hand, cropped, and checked, with no unclean foods.
+- Sheet 21 (52–55: shoestring fries, chimichurri steak, tuna salad
+  sandwiches, ratatouille) was cropped and checked. The tuna filling came out
+  pinkish; it's waiting on the owner whether it reads as tuna.

@@ -20,6 +20,7 @@ sheet-15-foundations-1.png 51-chicken-fajitas,retired/52-carrot-apple-slaw,retir
 sheet-16-foundations-2.png 36-matzo-ball-soup,56-minestrone,57-grilled-cheese-tomato-soup,58-challah-french-toast
 sheet-17-foundations-3.png 59-spaghetti-marinara,retired/60-sloppy-joes,retired/61-croque-madame,retired/62-chicken-gumbo
 sheet-18-unit5.png 63-rugelach,64-beef-empanadas,65-challah,66-homemade-pizza
+sheet-21-swaps-1.png 52-shoestring-fries,53-chimichurri-steak,54-tuna-salad-sandwiches,55-ratatouille
 # sheet-19-africa-1.png: its plates touch, so it's split by hand first. Each box (left, top, right, bottom)
 # is cut out onto a white margin, then cropped alone with the same tool:
 #   67-jollof-rice 0,50,532,445   68-chicken-yassa 530,50,1022,445   69-suya 1014,25,1536,440
