@@ -88,6 +88,18 @@ already in the database is changed or removed.
 3. A parent signing in for the first time sees **Before your kids cook** above
    the lockers. **Got it** closes it for that parent, on every device.
 
+## 10. Check it (the Phase 2c test)
+
+Use an Android phone or tablet with Chrome.
+1. In the app, **Parents → Family**, tick **Turn on voice step control** and
+   press **Save**. Until then, no mic button shows anywhere.
+2. Open a lesson and go into cook mode. Tap the mic button on the step card
+   and allow the microphone when Chrome asks.
+3. Say "next," "back," and "again." On the thermometer step, "next" reads the
+   temperature aloud and stays on that step; tap **Next step** to move on.
+4. Turn Wi-Fi off: the button says "Voice paused, no connection" and the
+   on-screen buttons still work. Turn it back on and voice picks up again.
+
 ## Backups and recovery
 
 - **Download export.json** saves everything. **Restore from export.json**

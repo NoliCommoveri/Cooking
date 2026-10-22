@@ -16,7 +16,7 @@ test('the app shell loads its script and styles', () => {
   assert.match(html, /href="app.css"/);
 });
 
-for (const f of ['public/player.js', 'public/cooks.js', 'public/demo.js', 'public/syllabus.js']) {
+for (const f of ['public/player.js', 'public/cooks.js', 'public/voice.js', 'public/demo.js', 'public/syllabus.js']) {
   test(`${f} parses`, () => {
     const r = spawnSync(process.execPath, ['--check', f], { encoding: 'utf8' });
     assert.equal(r.status, 0, r.stderr);
@@ -53,4 +53,18 @@ test('every skill glyph has an icon in the sprite', () => {
   const sprite = readFileSync('public/icons.svg', 'utf8');
   const reg = JSON.parse(readFileSync('public/content/registry.json', 'utf8'));
   for (const s of Object.values(reg.skills)) assert.match(sprite, new RegExp(`<symbol id="g-${s.pin.glyph}"`), `${s.id}: g-${s.pin.glyph}`);
+});
+
+test('voice commands: next, back, and again, the last one heard wins', async () => {
+  const { parseCommand } = await import('../public/voice.js');
+  assert.equal(parseCommand(['Next']), 'next');
+  assert.equal(parseCommand(['next step please']), 'next');
+  assert.equal(parseCommand(['go back']), 'back');
+  assert.equal(parseCommand(['previous']), 'back');
+  assert.equal(parseCommand(['say it again']), 'again');
+  assert.equal(parseCommand(['repeat that']), 'again');
+  assert.equal(parseCommand(['next no wait back']), 'back');
+  assert.equal(parseCommand(['nexus', 'next']), 'next', 'a lower guess is used when the best has no command');
+  assert.equal(parseCommand(['backpack', 'the textbook']), null, 'only whole words count');
+  assert.equal(parseCommand(['stir the onions']), null);
 });

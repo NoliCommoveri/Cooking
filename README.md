@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [45. 2026-10-22 — Phase 2b: cooks saved for every profile on them](docs/build-log.md#45-2026-10-22--phase-2b-cooks-saved-for-every-profile-on-them)
+**Latest build log entry:** [46. 2026-10-22 — Phase 2c: voice step control](docs/build-log.md#46-2026-10-22--phase-2c-voice-step-control)
 
 ## Current features
 
@@ -14,12 +14,13 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Chef's lockers and profiles**: one person or several per profile, kid or adult, each with its own theme.
 - **Kitchen**: each profile sees the lesson library as Kitchen Quest quest cards or Chef's Passport recipe cards, filtered by the family's diet settings (with swaps and left-out optional ingredients shown on the card).
 - **Lesson player** (`public/player.js`): each lesson in the profile's theme: the lesson card with the serving picker, Learn cards, Prep checklists, and Cook mode with safety banners, kitchen words, Why? cards, timers, and the screen kept awake.
+- **Voice step control** (`public/voice.js`): in cook mode, "next," "back," and "again" (read the step aloud). Off until a parent turns it on in family settings; shown only where the browser can recognize speech.
 - **Saved cooks** (`public/cooks.js`): each cook is saved to the family's account for every profile on it, with "Cooking with someone?" on the lesson card. A cook finished offline is sent when the connection returns. Lessons a profile has cooked say so in its kitchen.
 - **Test-cook notice**: each parent sees a one-time note, above the lockers, to read a lesson through before their kids cook it.
 - **Demo page** (`/demo`): no account needed. Try the sample lessons in either theme, preview diet settings and a shopping list, and browse the whole course by dish or by skill.
 - **Syllabus** (`/syllabus`): the course as a homeschool course, with objectives, units, hours, pacing, a suggested credit, and the rubric. Printable.
 - **Course outline** (`content/course.json`): all 75 planned dishes with their skills, checked by the linter.
-- **Parent screens**: profiles, family name, default servings, diet filters, other parent logins, and the PIN.
+- **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN.
 - **Owner screens**: the beta word, the family list, and setting a parent's password.
 - **Ops page** (`/ops`): migrations, the owner flag, backup download and restore, clear everything, and remove or restore one family.
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.

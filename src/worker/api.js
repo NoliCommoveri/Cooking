@@ -65,6 +65,7 @@ const profileOut = (r) => ({
 
 const familyOut = (f) => ({
   name: f.name, default_servings: f.default_servings, diet_filters: JSON.parse(f.diet_filters), pin_set: Boolean(f.parent_pin_hash),
+  voice_enabled: Boolean(f.voice_enabled),
 });
 
 // ---------- routes ----------
@@ -411,8 +412,10 @@ on('PUT', '/api/family', async (req, env, body) => {
   if (!Number.isInteger(servings) || servings < 1 || servings > FREE_MAX) fail(400, 'invalid', `Servings must be 1 to ${FREE_MAX}.`);
   const filters = Array.isArray(body.diet_filters) ? [...new Set(body.diet_filters)] : fail(400, 'invalid', 'diet_filters must be a list.');
   for (const f of filters) oneOf(f, LIBRARY.dietTags, 'Each diet filter');
-  await env.DB.prepare('UPDATE families SET name = ?, default_servings = ?, diet_filters = ? WHERE id = ?')
-    .bind(text(body.name, 'Family name'), servings, JSON.stringify(filters), s.family_id).run();
+  // Voice step control (§6.12) is left as it is when the body doesn't mention it.
+  if (body.voice_enabled !== undefined && typeof body.voice_enabled !== 'boolean') fail(400, 'invalid', 'voice_enabled must be true or false.');
+  await env.DB.prepare('UPDATE families SET name = ?, default_servings = ?, diet_filters = ?, voice_enabled = COALESCE(?, voice_enabled) WHERE id = ?')
+    .bind(text(body.name, 'Family name'), servings, JSON.stringify(filters), body.voice_enabled === undefined ? null : Number(body.voice_enabled), s.family_id).run();
   return { ok: true };
 });
 

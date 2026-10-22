@@ -1084,3 +1084,43 @@ The owner answered the four §6.17 questions:
   family scoping of cooks, deleting a profile, the notice per parent, and a
   cook coming back with Restore a family.
 
+---
+
+## 46. 2026-10-22 — Phase 2c: voice step control
+
+- **Migration 0003** (`src/worker/migrations/0003_voice.sql`):
+  `families.voice_enabled`, off for every family. **The owner presses Apply
+  pending on `/ops`** after this deploys.
+- **Family settings** (behind the parent PIN) has **Turn on voice step
+  control**, with a line saying the browser usually sends what the mic hears
+  to Google. Saving settings from an older screen that doesn't send the field
+  leaves it as it was.
+- **In cook mode** (`public/voice.js`, §6.12), for a family with it on and a
+  device whose browser has speech recognition (checked by feature, so Android
+  Chrome first; nothing shows on iPhone and no "switch to Chrome" prompt):
+  - A mic button on the step card. The mic starts only on a tap, and the
+    button's words say what it's doing: listening, reading out, paused with no
+    connection, or blocked by the browser.
+  - **"next"** moves on, **"back"** goes back, **"again"** reads the step
+    aloud. "Previous" and "repeat" work too, and in "next, no wait, back" the
+    last word wins.
+  - On a **doneness step**, "next" reads the target aloud ("It's done at 160
+    degrees. Tap Next when it is.") and stays put, so a stray "next" can't
+    skip a food-safety check. On the last step, "next" says to tap Plate it.
+  - "back" on the first step does nothing; leaving cook mode takes a tap.
+  - Listening stops while the app reads aloud, then starts again. It also
+    starts again after the browser's own pauses in quiet spells.
+  - When the connection drops, the button says "Voice paused, no connection"
+    and the buttons keep working. Voice picks up when the connection returns,
+    or tries again every 20 seconds.
+  - Leaving cook mode or the lesson turns the mic off.
+- **New icon:** `i-mic` in `public/icons.svg`.
+- The voice wording is a draft for the owner. The demo page has no mic (its
+  sample family has voice off).
+- Tests: 109. New ones cover the setting (off by default, per family, behind
+  the PIN, kept when not sent) and how commands are read from what was heard.
+  The voice flow was also run in Chromium with a stand-in recognizer: steps,
+  the doneness step, read-aloud pausing, the connection dropping and coming
+  back, and the mic stopping when leaving cook mode. It still needs a try on a
+  real Android phone (`docs/setup.md`, section 10).
+

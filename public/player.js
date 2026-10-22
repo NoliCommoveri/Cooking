@@ -8,6 +8,7 @@
 import { scaleLesson, servingOptions } from './lib/scale.js';
 import { findTerms } from './lib/terms.js';
 import { dietView } from './lib/diet.js';
+import { voiceSupported, createVoice } from './voice.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const ic = (id, cls = 'ico') => `<svg class="${cls}" aria-hidden="true"><use href="/icons.svg#${id}"/></svg>`;
@@ -139,6 +140,48 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
     S.cookId = [...b].map((x) => x.toString(16).padStart(2, '0')).join('');
     S.startedAt = new Date().toISOString();
   };
+  // Voice step control (§6.12): only where the family turned it on and the
+  // device can recognize speech. The mic starts on a tap, never on its own.
+  const voiceOk = Boolean(family.voice_enabled) && voiceSupported();
+  let voice = null, voiceStatus = 'off';
+  const VOICE_LABEL = {
+    off: 'Voice: tap to say "next"',
+    listening: 'Listening: say "next," "back," or "again"',
+    speaking: 'Reading it out…',
+    offline: 'Voice paused, no connection',
+    blocked: "The mic is blocked. Allow it in this browser's settings, then tap here",
+  };
+  const voiceBtn = () => (voiceOk
+    ? `<button type="button" class="${quest ? 'q-tstart' : 'p-tstart'} voicebtn" data-act="voice" aria-pressed="${voiceStatus !== 'off' && voiceStatus !== 'blocked'}">${ic('i-mic')}<span data-voice-label>${esc(VOICE_LABEL[voiceStatus])}</span></button>`
+    : '');
+  function onVoiceStatus(st) {
+    voiceStatus = st;
+    const b = mount.querySelector('[data-act="voice"]');
+    if (!b) return;
+    b.setAttribute('aria-pressed', String(st !== 'off' && st !== 'blocked'));
+    b.querySelector('[data-voice-label]').textContent = VOICE_LABEL[st];
+  }
+  // What "next" says on a doneness step instead of moving on, so a stray
+  // "next" can't skip a food-safety check.
+  const targetSpeech = (t) => `${t.temp ? `Check it with the thermometer. It's done at ${t.temp} degrees.` : `It's done when ${t.look}.`} Tap Next when it is.`;
+  function onVoice(cmd) {
+    if (!mount.isConnected) return voice.destroy(); // left by the browser's back button
+    if (S.stage !== 'cook' || why) return;
+    const steps = scaled().steps, i = Math.min(S.step, steps.length - 1), s = steps[i];
+    if (cmd === 'again') return voice.say(s.text);
+    if (cmd === 'next') {
+      if (s.type === 'doneness' && s.target) return voice.say(targetSpeech(s.target));
+      if (i === steps.length - 1) return voice.say('That was the last step. Tap Plate it when you are done.');
+      S.step = i + 1;
+    } else {
+      if (i === 0) return; // "back" doesn't leave cook mode; the Prep button does
+      S.step = i - 1;
+    }
+    term = null;
+    save();
+    sync();
+    draw();
+  }
   const crewNames = () => [profile, ...crew.filter((p) => S.with.includes(p.id))].map((p) => p.name);
 
   const leftOut = new Set(view.leftOut);
@@ -332,8 +375,8 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
     const nav = `<div class="${quest ? 'q-nav' : 'p-nav'}"><button type="button" class="${T.back}" data-act="step" data-i="-1">${i === 0 ? 'Prep' : 'Back'}</button><button type="button" class="${T.btn}" data-act="${last ? 'finish' : 'step'}" data-i="1">${last ? 'Plate it' : 'Next step'}</button></div>`;
     const body = quest
       ? `<div class="q-cook">${banner(s.safety, s.hazard)}<div class="q-stages" style="grid-template-columns:repeat(${n},1fr)" role="img" aria-label="Stage ${i + 1} of ${n}">${steps.map((_, k) => `<i class="${k < i ? 'done' : k === i ? 'cur' : ''}"></i>`).join('')}</div>
-          <article class="q-panel q-log"><p class="q-kick">Stage ${i + 1} of ${n}</p><p class="steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="logacts">${whyBtn}</div></article>${nav}</div>`
-      : `<div class="p-cook">${banner(s.safety, s.hazard)}<div class="p-cookbody"><article class="p-card p-lined p-stepcard"><p class="p-stepno">Step ${i + 1} of ${n}</p><p class="p-steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="p-acts">${whyBtn}</div></article>
+          <article class="q-panel q-log"><p class="q-kick">Stage ${i + 1} of ${n}</p><p class="steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="logacts">${whyBtn}${voiceBtn()}</div></article>${nav}</div>`
+      : `<div class="p-cook">${banner(s.safety, s.hazard)}<div class="p-cookbody"><article class="p-card p-lined p-stepcard"><p class="p-stepno">Step ${i + 1} of ${n}</p><p class="p-steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="p-acts">${whyBtn}${voiceBtn()}</div></article>
           <div class="p-cup">${cupSVG(i, n)}<span>${i} of ${n} done</span></div></div>${nav}</div>`;
     return body + timerTray();
   }
@@ -359,6 +402,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
     const back = `<a class="back" href="#" data-act="exit">← ${quest ? 'Quest board' : 'Recipe box'}</a>`;
     mount.innerHTML = `<section class="kitchen qx player" data-kt="${quest ? 'quest' : 'passport'}">${back}${STAGES[S.stage]()}${whyView()}</section>`;
     if (focusTop) window.scrollTo(0, 0);
+    if (S.stage !== 'cook' && voice?.on) voice.stop();
     const awake = S.stage === 'prep' || S.stage === 'cook';
     const ok = await keepAwake(awake);
     if (awake && !ok && !wakeTipShown && !readFlag('cpr.waketip')) {
@@ -393,6 +437,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
 
   function exit() {
     clearInterval(tick);
+    voice?.destroy();
     keepAwake(false);
     mount.removeEventListener('click', onClick);
     onExit();
@@ -450,6 +495,10 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
         save();
         return draw(false);
       }
+      case 'voice':
+        voice ??= createVoice({ onCommand: onVoice, onStatus: onVoiceStatus });
+        if (voice.on) voice.stop(); else voice.start();
+        return;
       case 'tclear': S.timers = S.timers.filter((x) => x.step !== d.step); save(); return draw(false);
       default: return;
     }

@@ -449,12 +449,18 @@ const familySettings = parentOnly(async () => {
       el('p', { class: 'mut small', style: 'margin:0' }, 'Lessons with these are hidden, unless a lesson has a swap for them.'),
       el('div', { class: 'grid2' }, f.diet_tags.map((t) => el('label', { class: 'choice' },
         el('input', { type: 'checkbox', name: `diet_${t}`, checked: f.family.diet_filters.includes(t) }), el('span', {}, DIET[t] ?? t))))),
+    el('fieldset', {}, el('legend', {}, 'Voice step control'),
+      el('p', { class: 'mut small', style: 'margin:0' },
+        'In cook mode, kids can say "next," "back," or "again" instead of tapping. It works in Chrome on Android, and on other devices whose browser can recognize speech. ',
+        'The browser usually sends what the mic hears to Google to recognize it, so it stays off until you turn it on.'),
+      el('label', { class: 'choice' }, el('input', { type: 'checkbox', name: 'voice_enabled', checked: f.family.voice_enabled }), el('span', {}, 'Turn on voice step control'))),
     saved,
   ], 'Save', async (v) => {
     saved.hidden = true;
     await api('PUT', '/api/family', {
       name: v.name, default_servings: Number(v.default_servings),
       diet_filters: f.diet_tags.filter((t) => v[`diet_${t}`]),
+      voice_enabled: Boolean(v.voice_enabled),
     });
     await refresh();
     saved.hidden = false;
