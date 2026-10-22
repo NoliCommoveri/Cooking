@@ -1,14 +1,14 @@
 // The weekly schedule of a course (plan §6.18). Nothing here is stored: each
 // week's lessons are worked out from the course plan, its pace, the weeks the
 // parent skipped or added to, and which lessons are already cooked. Dates are
-// the family's own calendar days, 'YYYY-MM-DD'; weeks run Monday to Sunday and
-// are named by their Monday.
+// the family's own calendar days, 'YYYY-MM-DD'. Weeks run Sunday to Friday,
+// with Saturday the Sabbath (owner, 2026-10-22), and are named by their Sunday.
 
 const DAY = 24 * 60 * 60 * 1000;
 const toDate = (s) => new Date(`${s}T00:00:00Z`);
 const fromDate = (d) => d.toISOString().slice(0, 10);
 export const addDays = (s, n) => fromDate(new Date(toDate(s).getTime() + n * DAY));
-export const mondayOf = (s) => addDays(s, -((toDate(s).getUTCDay() + 6) % 7));
+export const weekOf = (s) => addDays(s, -toDate(s).getUTCDay());
 export const isDay = (s) => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s) && fromDate(toDate(s)) === s;
 
 // The family's calendar day for a moment, from the browser's offset in minutes
@@ -16,14 +16,16 @@ export const isDay = (s) => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(
 export const localDay = (iso, tzOffset = 0) => fromDate(new Date(Date.parse(iso) - tzOffset * 60 * 1000));
 
 // Next week's lessons show from this weekday of the week before (§6.18), so a
-// parent can shop on the weekend. 4 = Friday, counting Monday as 0.
+// parent can shop before the Sabbath. 4 = Thursday, counting Sunday as 0.
 export const PREVIEW_FROM = 4;
+// A lesson is due on the Friday of its week. 5 = Friday.
+export const DUE_DAY = 5;
 
 // course: { start_date, per_week }
 // lessons: the lesson ids the schedule can use, in plan order (written, kept in
 //   the plan, and not hidden by the family's diet settings)
 // done: { lesson id: the day it was first cooked on this course }
-// weeks: { week monday: { skipped, extra } }
+// weeks: { week's Sunday: { skipped, extra } }
 // today: the family's calendar day
 //
 // Returns this week and next week ({ week, lessons: [{ id, done, overdue }],
@@ -31,8 +33,8 @@ export const PREVIEW_FROM = 4;
 // finish weeks, and how many weeks behind the plan the course is.
 export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
   const per = course.per_week;
-  const start = mondayOf(course.start_date);
-  const now = mondayOf(today);
+  const start = weekOf(course.start_date);
+  const now = weekOf(today);
   const skipped = (w) => Boolean(weeks[w]?.skipped);
   const extra = (w) => (w === now ? weeks[w]?.extra ?? 0 : 0);
 
@@ -84,7 +86,7 @@ export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
 
   // Projected finish: from here on at the pace, with this week's room as it is.
   let projected;
-  if (!open.length) projected = doneIds.length ? mondayOf(doneIds.map((id) => done[id]).sort().at(-1)) : null;
+  if (!open.length) projected = doneIds.length ? weekOf(doneIds.map((id) => done[id]).sort().at(-1)) : null;
   else {
     const thisRoom = now < start || skipped(now) ? 0 : Math.max(0, per + extra(now) - cookedNow.length);
     projected = now < start ? finishFrom(start, open.length) : finishFrom(now, open.length, thisRoom);

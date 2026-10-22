@@ -1383,3 +1383,21 @@ which would have meant reworking the queue later. The owner ruled:
   ending and putting back a course, plan order, safety review, test-cooked,
   and the new tables in a family download).
 - Next: 3b, shopping trips and the pantry.
+
+## 56. 2026-10-22 — Sabbath weeks, and more than one pick-one dish
+
+- **Owner ruling: weeks run Sunday to Friday, and Saturday is the Sabbath**,
+  for every family. Nothing is scheduled, due, or shopped for on Saturday.
+  Courses start on a Sunday, and the schedule names each week by its Sunday.
+- **Next week's lessons show from Thursday** (was Friday), so a parent can
+  shop Thursday or Friday. Kids see them as **"For next week"**, with no due
+  day; only this week's lessons say "Due Friday" in homeschool mode.
+- **Due day stays Friday** (owner). The parent's week reads "Sun to Fri".
+- **Pick-one groups:** one dish is ticked by default, and a parent can tick
+  more than one; each one ticked is scheduled and numbered (8a, 8b). The
+  course editor says so, and §6.18 now does too.
+- Migration 0006 (not yet applied anywhere) now says weeks start on Sunday;
+  the tables are unchanged.
+- Tests: 149. The schedule tests use Sunday weeks and the Thursday preview; a
+  new test keeps two dishes of one group. The queue tests no longer depend on
+  which weekday they run.

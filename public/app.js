@@ -94,7 +94,8 @@ const THEMES = { quest: "Kitchen Quest", passport: "Chef's Passport" };
 // The family's calendar: the queue and schedule work in the device's own days.
 const tz = () => `tz=${new Date().getTimezoneOffset()}`;
 const addDays = (d, n) => { const t = new Date(`${d}T12:00:00Z`); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); };
-const mondayOf = (d) => addDays(d, -((new Date(`${d}T12:00:00Z`).getUTCDay() + 6) % 7));
+// Weeks run Sunday to Friday; Saturday is the Sabbath (owner, 2026-10-22).
+const weekOf = (d) => addDays(d, -new Date(`${d}T12:00:00Z`).getUTCDay());
 const localToday = () => { const t = new Date(); return new Date(t.getTime() - t.getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
 const fmtDay = (d, opts = { weekday: 'short', month: 'short', day: 'numeric' }) => new Date(`${d}T12:00:00`).toLocaleDateString(undefined, opts);
 const DIET = {
@@ -353,7 +354,7 @@ async function kitchen(id) {
   // homeschool mode and never anything about being late (§6.17).
   const when = (x) => (x.status === 'requested' ? 'You asked a grown-up'
     : x.due ? `Due ${fmtDay(x.due, { weekday: 'long' })}`
-      : x.when === 'this-week' ? 'This week' : x.when === 'next-week' ? 'Next week'
+      : x.when === 'this-week' ? 'This week' : x.when === 'next-week' ? 'For next week'
         : x.planned_date ? fmtDay(x.planned_date) : 'Coming up');
   const upNext = mine.items.length ? [
     el('h2', { class: 'k-unit' }, quest ? 'Next quests' : 'Up next'),
@@ -692,7 +693,7 @@ const parentQueue = parentOnly(async (flash) => {
     const lessonRow = (x, week) => el('div', { class: x.done ? 'rowi' : 'rowi qrow' },
       el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
         el('small', {}, x.done ? 'Cooked'
-          : [x.overdue ? el('span', { class: 'late' }, 'Overdue · ') : null, homeschool ? `Due ${fmtDay(addDays(week, 4))}` : 'This week'].filter(Boolean)),
+          : [x.overdue ? el('span', { class: 'late' }, 'Overdue · ') : null, homeschool ? `Due ${fmtDay(addDays(week, c.due_day))}` : 'This week'].filter(Boolean)),
         x.done ? null : el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id))),
       x.done ? el('span', { class: 'mut' }, '✓') : el('div', { class: 'acts' },
         x.queue_id ? servingsPick(x, setServings(x.queue_id)) : null,
@@ -712,7 +713,7 @@ const parentQueue = parentOnly(async (flash) => {
       c.unwritten ? el('p', { class: 'mut small', style: 'margin:0' }, `${c.unwritten} more lesson${c.unwritten === 1 ? ' is' : 's are'} still being written. They join the schedule when they're ready.`) : null,
       c.hidden ? el('p', { class: 'mut small', style: 'margin:0' }, `${c.hidden} lesson${c.hidden === 1 ? ' is' : 's are'} hidden by your diet settings, so ${c.hidden === 1 ? "it isn't" : "they aren't"} scheduled.`) : null,
       c.started ? [
-        el('h4', {}, `This week · ${fmtDay(tw.week)} to ${fmtDay(addDays(tw.week, 6))}`),
+        el('h4', {}, `This week · ${fmtDay(tw.week)} to ${fmtDay(addDays(tw.week, 5))}`),
         tw.skipped ? el('p', { class: 'mut' }, 'Skipped. Everything moved back a week.')
           : tw.lessons.length ? el('div', { class: 'rows' }, tw.lessons.map((x) => lessonRow(x, tw.week)))
             : el('p', { class: 'mut' }, 'Nothing left this week.'),
@@ -842,12 +843,12 @@ const courseEditor = parentOnly(async (cid) => {
   const finishBox = el('p', { class: 'mut small', style: 'margin:0' });
   const notesBox = el('div');
 
-  const startIn = el('input', { type: 'date', name: 'start_date', required: true, value: existing?.start_date ?? mondayOf(localToday()) });
+  const startIn = el('input', { type: 'date', name: 'start_date', required: true, value: existing?.start_date ?? weekOf(localToday()) });
   const perIn = el('input', { type: 'number', name: 'per_week', min: 1, max: data.per_week_max, value: existing?.per_week ?? 1, inputmode: 'numeric' });
 
   const usable = () => plan.filter((x) => !x.removed && written.has(x.id) && !hidden.has(x.id)).length;
   const drawFinish = () => {
-    const n = usable(), per = Math.max(1, Number(perIn.value) || 1), start = mondayOf(startIn.value || localToday());
+    const n = usable(), per = Math.max(1, Number(perIn.value) || 1), start = weekOf(startIn.value || localToday());
     const kept = plan.filter((x) => !x.removed).length;
     finishBox.replaceChildren(n
       ? `${n} lesson${n === 1 ? '' : 's'} ready to cook now, so the schedule runs to the week of ${fmtDay(addDays(start, (Math.ceil(n / per) - 1) * 7))}.`
@@ -885,7 +886,7 @@ const courseEditor = parentOnly(async (cid) => {
       return el('div', { class: `planrow${keptIds.length ? '' : ' out'}` },
         el('div', { class: 'planno' }, num ?? '–'),
         el('div', { class: 'grow' },
-          e.pickOne ? el('div', {}, foundationMark(), el('small', { class: 'mut' }, ' Pick one (or more)')) : null,
+          e.pickOne ? el('div', {}, foundationMark(), el('small', { class: 'mut' }, ' Pick one, or tick more to cook more than one')) : null,
           e.ids.map(dishRow)),
         el('div', { class: 'planmove' },
           el('button', { type: 'button', class: 'hbtn', 'aria-label': 'Move up', disabled: i === 0, onclick: () => move(i, -1) }, '↑'),
@@ -913,11 +914,11 @@ const courseEditor = parentOnly(async (cid) => {
           el('span', {}, p.name, taken.has(p.id) ? el('em', {}, ' On another course') : null))))),
       field('Course name', 'name', { value: existing?.name ?? '', maxlength: 60 }, 'Optional'),
       el('div', { class: 'grid2' },
-        el('label', { class: 'f' }, 'Start date', el('span', { class: 'hint' }, 'Weeks run Monday to Sunday'), startIn),
+        el('label', { class: 'f' }, 'Start date', el('span', { class: 'hint' }, 'Weeks run Sunday to Friday'), startIn),
         el('label', { class: 'f' }, 'Lessons per week', perIn)),
       finishBox,
       el('fieldset', {}, el('legend', {}, 'The lessons, in order'),
-        el('p', { class: 'mut small', style: 'margin:0' }, 'Untick a lesson to leave it out. Foundation skills have a few lessons to pick from; one is enough.'),
+        el('p', { class: 'mut small', style: 'margin:0' }, 'Untick a lesson to leave it out. Foundation skills have a few lessons to pick from: one is ticked, and you can tick more.'),
         notesBox, listBox),
     ], existing ? 'Save course' : 'Start the course', async (v) => {
       const body = {

@@ -6,7 +6,7 @@
 ALTER TABLE families ADD COLUMN mode TEXT NOT NULL DEFAULT 'casual' CHECK (mode IN ('casual', 'homeschool'));
 ALTER TABLE families ADD COLUMN plan_weeks INTEGER NOT NULL DEFAULT 0;
 
--- A course for one or more profiles (§6.18). start_date is a Monday;
+-- A course for one or more profiles (§6.18). start_date is a Sunday (weeks run Sunday to Friday);
 -- per_week is the pace. name, code, and school_year feed the transcript
 -- (Phase 4b). An ended course has archived_at set and can be put back.
 CREATE TABLE IF NOT EXISTS courses (
@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS course_lessons (
 );
 
 -- A week the parent skipped, or added extra lessons to (Cook another recipe).
--- week_start is the week's Monday.
+-- week_start is the week's Sunday.
 CREATE TABLE IF NOT EXISTS course_weeks (
   course_id  TEXT NOT NULL REFERENCES courses(id),
   family_id  TEXT NOT NULL REFERENCES families(id),
