@@ -309,3 +309,26 @@ Owner rulings on open questions:
 - `content/images/LICENSES.md` lists each sheet and the images cropped from it.
 - **Working name: Clean Plate Recipes** (the owner's, not final), added to the
   plan (§1). Its logo is `content/images/brand/clean-plate-logo.png`.
+
+---
+
+## 15. 2026-10-22 — Phase 0: Kitchen Quest showcase
+
+- Built the Phase 0 showcase as a private page, at the owner's choice instead
+  of Cloudflare for now: `mockups/quest-showcase/index.html`, with web-sized
+  dish art in `mockups/quest-showcase/img/`.
+- It shows every §5.4a component in a demo state: lesson card with the
+  test-kitchen seal and a locked "coming up" card, inventory grid, gear
+  loadout, quest log with stage bar, cooldown-ring timer tray, safety banners
+  (all three levels plus the adult-profile version), skill tree at real unit
+  lengths, level and level-up screen, crest collection, gem rating, trophy hall,
+  and the helper's Ask button and dialogue box (look only; the helper isn't
+  specced).
+- House style: the profile picker (chef's lockers, sample kid, shared, and adult
+  profiles) with the per-profile theme switch, where only Kitchen Quest is
+  selectable, and a parent shopping list grouped by store section.
+- Core art set drawn as SVG: 9 store-section icons and 10 tool-category icons,
+  plus an oven mitt for hands-on safety and the helper's guide avatar.
+- Kitchen Quest tokens and type are shown on the page.
+- Nothing is saved, and no app code exists yet. Next: the owner reviews the
+  look; once approved, Phase 0b builds Chef's Passport the same way.
