@@ -61,7 +61,7 @@ Kids, and adults taking the class, use the app through **profiles** (chef locker
   - Carmine or cochineal (an insect-derived red coloring) in some candies, yogurts, and drinks.
   - Suet, in mincemeat, Christmas pudding, some dumplings, and some pastry.
   - Beef tallow, used for frying by some restaurants and in some store-bought fries, pastry, and shortening blends.
-- **Per-family dietary filters** are an extra layer on top of the hard block. Filters are per family, not per kid. Each family can add its own restrictions (e.g. vegetarian, nut-free, dairy-free) using the `contains` tags on the ingredient registry (§7.2). A lesson that conflicts with a family's filters is hidden from that family. If the lesson lists an allowed substitution that resolves the conflict, it is shown with that substitution applied instead.
+- **Per-family dietary filters** are an extra layer on top of the hard block. Filters are per family, not per kid. Each family can add its own restrictions (e.g. vegetarian, nut-free, dairy-free) using the `contains` tags on the ingredient registry (§7.2). A lesson that conflicts with a family's filters is hidden from that family. If the lesson lists an allowed substitution that resolves the conflict, it is shown with that substitution applied instead. **An optional ingredient never hides a lesson** (owner, 2026-10-22): one that conflicts is left out for that family, and the lesson says so.
   - **Recommendation:** start with these tags: nuts, peanuts, dairy, egg, gluten, fish, meat (for vegetarian). Derived products carry their source's tag: gelatin, chicken broth, and beef broth are `meat`; fish sauce, Worcestershire, and dashi are `fish`.
   - **Recommendation:** if a lesson is hidden by a family's filters, it no longer counts as a prerequisite for that family. Lessons that list it unlock as if it were done. Without this, a dairy-free family could never unlock the lessons that require 32.
   - The hard block is not a family filter. A family can add restrictions but cannot remove the hard block.
@@ -85,6 +85,7 @@ Kids, and adults taking the class, use the app through **profiles** (chef locker
 
 ### 2.6 Photos
 - Kids must be able to photograph their finished dishes inside the app. Each photo is attached to the attempt (one cook of one lesson, by one or more profiles, §1).
+- **Requirement: photos are off unless the owner turns them on for a family** (owner, 2026-10-22). Storing every family's photos costs money, and the feature is really for the owner's family. The switch is per family, on `/ops`; families can't turn it on themselves. With photos off, the photo step, the gallery, and the photo download don't show, and everything else (progress, ratings, reflections, Print our progress) works the same.
 
 ---
 
@@ -96,7 +97,7 @@ Each lesson has these stages:
 2. **Learn.** 3–6 short concept cards with a "why it works" angle. An optional quiz of 2–3 questions follows. **The quiz never blocks cooking.** The cards follow a set shape (below) so every lesson teaches how its skill carries over to other dishes.
 3. **Prep (mise en place).** An ingredient checklist with amounts scaled to the chosen servings, then an equipment checklist. Cook mode unlocks once every item is checked.
 4. **Cook mode.** One step per screen. Each step has a checkbox, a big Next control (with hands-free options, §6.12), inline timers where needed (several can run at once), a safety level, and an optional tip or "what it should look like" note. The screen stays awake for the whole cook. Some steps are food-safety checks (below).
-5. **Plate and photo.** The camera opens directly, and the photo saves to this attempt.
+5. **Plate and photo.** The camera opens directly, and the photo saves to this attempt. Only for a family with photos on (§2.6); otherwise this stage is skipped.
 6. **Reflect.** A 1–5 rating, a "what would I change?" note, and an optional rating from whoever ate it.
 
 ### Learn stage: teaching the why (recommendation)
@@ -398,7 +399,7 @@ Do **not** use:
 - **Queue:** assign the next 1–3 lessons per profile, or approve a profile's request (§6.1). Each queued lesson is for one or more profiles (§1), with a serving count (defaults to the family's) and an optional planned date
 - **Shopping list** (§6.3)
 - **Safety review:** before approving a lesson, see every step marked adult-nearby or adult-hands-on
-- **Gallery:** all photos, filterable by profile and lesson, with reflections
+- **Gallery:** all photos, filterable by profile and lesson, with reflections (families with photos on, §2.6)
 - **Download all photos:** the family's photos as a download, so they don't live only in the app
 - **Family recipes** (bonus, §6.10): add the family's own recipes, submit them for the shared library, and add recipes from the community directory
 - **Mark test-cooked:** after cooking a lesson themselves, a parent can mark it test-cooked for their family (§7). Optional; lessons don't need it to be shown to kids
@@ -438,6 +439,7 @@ A lesson queued once for several profiles is one cook, so it's counted once. The
 - Store in object storage (§8), linked to the attempt.
 - If the upload fails (Wi-Fi drop), the photo is kept on the device and retried. It is never lost because the network was down.
 - Photos are only visible to the family that took them (§2.5, §8.3).
+- Only families with photos turned on (§2.6) see any of this.
 
 ### 6.5 Lesson intro slideshows
 **Recommendation:** an in-app slideshow engine driven by each lesson's data, not pre-rendered video files.
@@ -685,6 +687,7 @@ The app lives at **`cleanplate.immotus.app`**, and its front door is a simple pu
   - Kids don't have accounts. A parent makes each profile and chooses its name; first names or nicknames are enough.
   - Who sees it: only the family. The owner sees family names, profile counts, and last-active dates, and nothing else.
   - No ads, no selling or sharing of data, no tracking or analytics scripts.
+  - Photos are kept only for families the owner has turned them on for.
   - Services that handle it: Cloudflare (hosting, database, photos) and Resend (email).
   - How long it's kept: until the family deletes it, or a year after the family was last active (§6.14).
 - **What the terms cover:** the app is free and offered as-is; recipes may not have been test-cooked (§7), so a parent reads a lesson before kids cook it; adults decide supervision, using the safety banners as a guide (§3); families are responsible for their own allergies, and diet filters are a help, not a guarantee; the owner may remove an account that misuses the app.
@@ -709,7 +712,7 @@ A printable record of what each profile has cooked, for homeschool records.
 ## 8. Architecture
 
 ### 8.1 Hosting — Recommendation
-- Use the owner's existing **git → Cloudflare** deploy stack: a **Worker** serving the app and API, **D1** for structured data, and **R2** for photos.
+- Use the owner's existing **git → Cloudflare** deploy stack: a **Worker** serving the app and API, **D1** for structured data, and **R2** for photos. R2 isn't needed until the owner turns photos on for a family (§2.6), so its bucket is set up then, not before.
 - Own subdomain: **`cleanplate.immotus.app`** (owner, 2026-10-22). This app is not a game, so it stays separate from the `games.immotus.app` hub.
 
 A backend is needed because the app is multi-family: each family's progress, queue, and photos must be stored per family and reachable from any of that family's devices.
@@ -744,7 +747,7 @@ A backend is needed because the app is multi-family: each family's progress, que
 
 ### 8.4 Data model (D1)
 Every table holding a family's data carries `family_id`. `families` is the family itself. `signup_verifications`, `settings`, `community_recipes`, and `lesson_patches` belong to the owner or the whole app, not to a family.
-- `families` (id, name, default_servings, diet_filters, parent_pin_hash, created_at)
+- `families` (id, name, default_servings, diet_filters, parent_pin_hash, photos_enabled, created_at). `photos_enabled` is set only from `/ops` (§2.6)
 - `parents` (id, family_id, email, password_hash, is_owner)
 - `password_resets` (token_hash, family_id, parent_id, expires_at, used_at)
 - `signup_verifications` (email, password_hash, code_hash, attempts, sent_at, expires_at). A sign-up waiting on its emailed code; removed when the family is created
@@ -793,7 +796,7 @@ Each phase should be deployed and usable before the next begins.
 | **1c. Public launch** | The landing page, privacy policy, and terms (§6.13), fonts served from the app, Delete our family and Download our data, the inactive purge with its warning emails (§6.14), and the human check at sign-up (§8.3) if the owner wants it before launch | A visitor reads the landing page, signs up, and deletes their family from the browser. A test family left inactive past the limit is warned and then purged by the scheduled job. **The sign-up link isn't posted publicly before this phase is done** |
 | **2. Lesson player** | Learn, Prep, Cook mode, kitchen words, food-safety checks, timers, wake lock, tap zone and page-turner remote (§6.12), attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
 | **3. Parent planning & shopping** | Queue (with kid requests), safety review, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
-| **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download, Print our progress (§6.15) | A photo taken on the tablet shows in the gallery on the parent's phone |
+| **4. Photos & reflect** | The per-family photos switch on `/ops` (§2.6), camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download, Print our progress (§6.15) | In a family with photos on, a photo taken on the tablet shows in the gallery on the parent's phone. A family with photos off cooks and reflects with no photo step |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |

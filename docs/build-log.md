@@ -852,3 +852,20 @@ Plan changes only; nothing new is built.
 - The owner ruled: no daily job. The inactive purge (§6.14) checks every couple
   of weeks, and "a year" is approximate. The app and its privacy policy don't
   promise an exact day.
+
+---
+
+## 35. 2026-10-22 — Optional ingredients don't hide lessons; photos off by default
+
+- **Diet filters (owner ruling, §2.1):** an optional ingredient never hides a
+  lesson. One with a filtered tag is left out for that family, and the lesson
+  card says "Leave out the …". So a dairy-free family keeps shakshuka without
+  its feta. `src/content/diet.js` returns the left-out list, and the library
+  API and both themes' cards show it. One new test; 88 in all.
+- **Photos (owner ruling, §2.6):** off unless the owner turns them on for a
+  family, with a per-family switch on `/ops`, so the app doesn't pay to store
+  hundreds of families' photos. With photos off, the photo step, gallery, and
+  photo download don't show; progress, ratings, and Print our progress work
+  the same. R2 isn't set up until photos are turned on. Plan only; it's built
+  in Phase 4.
+- **Sending address confirmed:** `cleanplate@immotus.app`.

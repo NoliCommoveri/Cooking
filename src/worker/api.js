@@ -306,6 +306,7 @@ on('GET', '/api/library', async (req, env) => {
       id: L.id, number: L.number, unit: L.unit, title: L.title, image: L.image, cuisine: LIBRARY.cuisines[L.cuisine] ?? L.cuisine,
       skill: L.skill, servings: L.servings, totalMinutes: L.totalMinutes,
       substitutions: view.applied.map((x) => ({ for: name(x.for), use: name(x.use) })),
+      left_out: view.leftOut.map(name),
     });
   }
   return { lessons, hidden, units: LIBRARY.units };

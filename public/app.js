@@ -275,6 +275,7 @@ async function kitchen(id) {
 
   const card = (L) => {
     const swaps = L.substitutions.map((s) => `${s.use} instead of ${s.for}`).join('; ');
+    const skip = L.left_out.length ? `Leave out the ${L.left_out.join(', ').toLowerCase()}` : '';
     const time = `${L.totalMinutes} min`;
     if (quest) {
       return el('article', { class: 'q-panel q-card' },
@@ -286,7 +287,8 @@ async function kitchen(id) {
           el('div', {}, el('dt', {}, 'Time'), el('dd', {}, time)),
           el('div', {}, el('dt', {}, 'Serves'), el('dd', {}, L.servings)),
           el('div', {}, el('dt', {}, 'From'), el('dd', {}, L.cuisine))),
-        swaps ? el('p', { class: 'q-swap' }, `Made with ${swaps}`) : null);
+        swaps ? el('p', { class: 'q-swap' }, `Made with ${swaps}`) : null,
+        skip ? el('p', { class: 'q-swap' }, skip) : null);
     }
     return el('article', { class: 'p-card' },
       el('span', { class: 'tape t1' }), el('span', { class: 'tape t2' }),
@@ -294,7 +296,8 @@ async function kitchen(id) {
       el('h3', { class: 'p-title' }, L.title),
       el('p', { class: 'p-skill' }, L.skill),
       el('div', { class: 'p-meta' }, el('span', {}, time), el('span', {}, `Serves ${L.servings}`), el('span', {}, L.cuisine)),
-      swaps ? el('p', { class: 'p-swap' }, `Made with ${swaps}`) : null);
+      swaps ? el('p', { class: 'p-swap' }, `Made with ${swaps}`) : null,
+      skip ? el('p', { class: 'p-swap' }, skip) : null);
   };
 
   const units = [...new Set(lib.lessons.map((l) => l.unit))].sort((a, b) => a - b);

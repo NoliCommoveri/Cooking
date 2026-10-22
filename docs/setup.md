@@ -54,9 +54,11 @@ daily cap), or sign-ups will stall partway through the day.
 2. In Resend, create an **API key** with sending access.
 3. In the Cloudflare dashboard, add another **Secret** to the Worker (as in
    step 3), named **`RESEND_API_KEY`**, with that key as its value.
-4. The sent-from address is `MAIL_FROM` in `wrangler.toml`. It's set to
-   `Clean Plate Recipes <cleanplate@immotus.app>`. If you verified a different domain,
-   change it in the GitHub web editor.
+4. Emails come from `cleanplate@immotus.app`, so the domain you verify in
+   step 1 is **`immotus.app`**.
+
+There's no photo storage (R2) to set up. Photos stay off until you turn them on
+for your own family, and that comes with Phase 4.
 
 ## 6. First run
 

@@ -38,6 +38,13 @@ test('a substitution that brings in another filtered tag does not count', () => 
   assert.equal(v.visible, false);
 });
 
+test('an optional ingredient with a filtered tag is left out, not a reason to hide', () => {
+  const L = { ingredients: [{ ingredient: 'salt' }, { ingredient: 'butter', optional: true }], substitutions: [] };
+  const v = dietView(L, ING, ['dairy']);
+  assert.equal(v.visible, true);
+  assert.deepEqual(v.leftOut, ['butter']);
+});
+
 test('an availability substitution is not a diet swap', () => {
   const v = dietView(lesson(['flour'], [{ for: 'flour', use: 'gf-flour', reason: 'availability' }]), ING, ['gluten']);
   assert.equal(v.visible, false);
@@ -64,5 +71,11 @@ test('the library API applies the family\'s filters', async () => {
   assert.ok(bulgogi, 'bulgogi stays: tamari replaces soy sauce');
   assert.deepEqual(bulgogi.substitutions.map((s) => s.use), ['Tamari']);
   assert.ok(!gf.lessons.some((l) => l.number === 38), 'biscuits have flour and no swap');
+
+  await c.put('/api/family', { name: 'Carsons', default_servings: 6, diet_filters: ['dairy'] });
+  const df = (await c.get('/api/library')).body;
+  const shakshuka = df.lessons.find((l) => l.number === 4);
+  assert.ok(shakshuka, 'shakshuka stays: its feta is optional');
+  assert.ok(shakshuka.left_out.length > 0);
   assert.equal(gf.hidden, all.lessons.length - gf.lessons.length);
 });

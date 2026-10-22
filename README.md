@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [34. 2026-10-22 — Inactive purge runs every couple of weeks](docs/build-log.md#34-2026-10-22--inactive-purge-runs-every-couple-of-weeks)
+**Latest build log entry:** [35. 2026-10-22 — Optional ingredients don't hide lessons; photos off by default](docs/build-log.md#35-2026-10-22--optional-ingredients-dont-hide-lessons-photos-off-by-default)
 
 ## Current features
 
@@ -12,7 +12,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 
 - **Accounts** (`src/worker/`, `public/`): open sign-up with an emailed code, an optional beta word, parent login, password reset by email, and a parent PIN for parent screens.
 - **Chef's lockers and profiles**: one person or several per profile, kid or adult, each with its own theme.
-- **Kitchen**: each profile sees the lesson library as Kitchen Quest quest cards or Chef's Passport recipe cards, filtered by the family's diet settings.
+- **Kitchen**: each profile sees the lesson library as Kitchen Quest quest cards or Chef's Passport recipe cards, filtered by the family's diet settings (with swaps and left-out optional ingredients shown on the card).
 - **Parent screens**: profiles, family name, default servings, diet filters, other parent logins, and the PIN.
 - **Owner screens**: the beta word, the family list, and setting a parent's password.
 - **Ops page** (`/ops`): migrations, the owner flag, backup download and restore, clear everything, and remove or restore one family.
