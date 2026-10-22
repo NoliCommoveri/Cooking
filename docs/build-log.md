@@ -1137,3 +1137,25 @@ The owner answered the four §6.17 questions:
   until pretty much everything else is built. Noted under the phase table in
   §9. The next slice of Phase 2 is 2e, fix requests and lesson patches.
 
+---
+
+## 48. 2026-10-22 — Timers you can hear
+
+The owner asked how the timer-done sound works, then asked for all three
+suggested changes (`public/player.js`):
+- **It keeps ringing.** A ringing timer dings every 4 seconds (with a buzz where
+  the device can) until someone taps Stop. Before, it dinged once.
+- **With voice on, the timer says what's done:** "Time's up: Simmer sauce."
+- **A "Tap here to turn on the timer sound" button** shows above the timers
+  when a timer is going and the browser has sound off: no tap since the lesson
+  opened, or the app came back from the background with sound suspended. Any
+  tap in the player turns sound back on, and the button dings once to show it.
+  Coming back from the background also redraws cook mode, so timers and the
+  button are current.
+- Still true, because browsers can't do otherwise: nothing sounds while the
+  screen is off or the app is in the background (the timer shows "Ended 3 min
+  ago" on return), and an iPhone on silent stays silent. Cook mode keeps the
+  screen awake to avoid the first.
+- Checked in Chromium with a fake clock and a stand-in for the audio: repeat
+  dings, Stop ending them, the spoken line, and the button appearing and going.
+

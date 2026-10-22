@@ -73,11 +73,19 @@ function cupSVG(done, of) {
 }
 
 // ---------- sound and the screen ----------
+// Browsers allow sound only after a tap on the page, and can suspend it again
+// when the app goes to the background. Every tap in the player turns it back on.
 let audio = null;
 function unlockSound() {
-  if (audio) return;
-  try { audio = new (window.AudioContext || window.webkitAudioContext)(); } catch { audio = null; }
+  try {
+    audio ??= new (window.AudioContext || window.webkitAudioContext)();
+    if (audio.state !== 'running') return audio.resume().catch(() => {});
+  } catch { audio = null; }
+  return Promise.resolve();
 }
+const soundReady = () => audio?.state === 'running';
+// A ringing timer dings again this often until someone taps Stop (owner, 2026-10-22).
+const DING_EVERY_MS = 4000;
 function ding() {
   if (!audio) return;
   try {
@@ -339,12 +347,17 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
   }
 
   // ---------- Cook (§3) ----------
+  // While a timer is going and the browser has sound off (no tap since the
+  // lesson opened, or the app came back from the background), say so.
+  const soundNote = (live) => (live.some((t) => t.state === 'run' || t.ringing) && !soundReady()
+    ? `<button type="button" class="${quest ? 'q-tstart' : 'p-tstart'} soundnote" data-act="sound">${ic('i-sound')}Tap here to turn on the timer sound</button>`
+    : '');
   function timerTray() {
     const live = S.timers.filter((t) => t.state !== 'idle');
     const left = (t) => (t.state === 'run' ? Math.max(0, (t.endAt - Date.now()) / 1000) : t.left);
     if (quest) {
       const C = 2 * Math.PI * 40;
-      return `<h3 class="q-h" style="margin-top:14px">Timer tray</h3><div class="q-timers" aria-label="Timers">${live.length ? live.map((t) => `<div class="q-timer ${t.state}${t.ringing ? ' ringing' : ''}">
+      return `<h3 class="q-h" style="margin-top:14px">Timer tray</h3>${soundNote(live)}<div class="q-timers" aria-label="Timers">${live.length ? live.map((t) => `<div class="q-timer ${t.state}${t.ringing ? ' ringing' : ''}">
         <button type="button" class="dial" data-act="${t.state === 'ended' ? 'tclear' : 'ttoggle'}" data-step="${esc(t.step)}" aria-label="${esc(t.label)} timer: ${t.state === 'run' ? 'pause' : t.state === 'paused' ? 'resume' : 'clear'}">
         <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="#1A2042" stroke="#3D4985" stroke-width="9"/>
         <circle data-ring="${esc(t.step)}" cx="50" cy="50" r="40" fill="none" stroke="${t.state === 'paused' ? '#A6AED8' : '#5BD6C8'}" stroke-width="9" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C * (1 - left(t) / t.sec)).toFixed(1)}" transform="rotate(-90 50 50)"/>
@@ -352,7 +365,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
         <span class="lb">${esc(t.label)}${t.state === 'paused' ? '<br>Paused' : ''}${t.state === 'ended' && !t.ringing ? `<br>${ago(t)}` : ''}</span>
         ${t.ringing ? `<button type="button" class="stop" data-act="tclear" data-step="${esc(t.step)}">Stop</button>` : ''}</div>`).join('') : '<span class="empty">No timers running. Start one from a step.</span>'}</div>`;
     }
-    return `<h3 class="p-h" style="margin-top:14px">The counter</h3><div class="p-counter" aria-label="Timers">${live.length ? live.map((t) => `<div class="p-timer ${t.state}${t.ringing ? ' ringing' : ''}">
+    return `<h3 class="p-h" style="margin-top:14px">The counter</h3>${soundNote(live)}<div class="p-counter" aria-label="Timers">${live.length ? live.map((t) => `<div class="p-timer ${t.state}${t.ringing ? ' ringing' : ''}">
       <button type="button" class="dial" data-act="${t.state === 'ended' ? 'tclear' : 'ttoggle'}" data-step="${esc(t.step)}" aria-label="${esc(t.label)} timer: ${t.state === 'run' ? 'pause' : t.state === 'paused' ? 'resume' : 'clear'}">${dialSVG(left(t) / t.sec)}</button>
       <span class="lb">${esc(t.label)}${t.state === 'paused' ? ' · paused' : ''}</span>
       ${t.state === 'ended' ? `<span class="tt">${t.ringing ? "Time's up!" : 'Done'}</span>${t.ringing ? '' : `<span class="ago">${ago(t)}</span>`}` : `<span class="tt" data-left="${esc(t.step)}">${fmt(left(t))}</span>`}
@@ -398,7 +411,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
 
   // ---------- drawing and events ----------
   const STAGES = { card: cardView, learn: learnView, prep: prepView, cook: cookView, done: doneView };
-  let wakeTipShown = false;
+  let wakeTipShown = false, lastDing = 0;
   async function draw(focusTop = true) {
     if (S.stage !== 'card' && S.stage !== 'done') { S.last = S.stage; save(); }
     const back = `<a class="back" href="#" data-act="exit">← ${quest ? 'Quest board' : 'Recipe box'}</a>`;
@@ -418,8 +431,14 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
   function onTick() {
     let changed = false;
     for (const t of S.timers) {
-      if (t.state === 'run' && Date.now() >= t.endAt) { t.state = 'ended'; t.ringing = true; changed = true; ding(); }
+      if (t.state === 'run' && Date.now() >= t.endAt) {
+        t.state = 'ended'; t.ringing = true; changed = true;
+        // With voice on, the timer says what's done.
+        if (voice?.on) voice.say(`Time's up: ${t.label}.`);
+      }
     }
+    // Every ringing timer keeps dinging until it's stopped.
+    if (S.timers.some((t) => t.ringing) && Date.now() - lastDing >= DING_EVERY_MS) { lastDing = Date.now(); ding(); }
     if (changed) { save(); return draw(false); }
     for (const t of S.timers) {
       if (t.state !== 'run') continue;
@@ -437,8 +456,13 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
   function readFlag(k) { try { return localStorage.getItem(k); } catch { return null; } }
   function setFlag(k) { try { localStorage.setItem(k, '1'); } catch { /* not kept */ } }
 
+  // Back from the background: redraw, so the timers and the sound note are current.
+  const onVisible = () => { if (document.visibilityState === 'visible' && S.stage === 'cook' && mount.isConnected) draw(false); };
+  document.addEventListener('visibilitychange', onVisible);
+
   function exit() {
     clearInterval(tick);
+    document.removeEventListener('visibilitychange', onVisible);
     voice?.destroy();
     keepAwake(false);
     mount.removeEventListener('click', onClick);
@@ -446,11 +470,11 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
   }
 
   function onClick(e) {
+    unlockSound();
     const b = e.target.closest('[data-act]');
     if (!b || !mount.contains(b)) return;
     if (b.dataset.act === 'why-close' && b.classList.contains('whyov') && e.target !== b) return;
     e.preventDefault();
-    unlockSound();
     const act = b.dataset.act, d = b.dataset;
     const step = (dir) => {
       const n = L.steps.length;
@@ -497,6 +521,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
         save();
         return draw(false);
       }
+      case 'sound': return unlockSound().then(() => { if (soundReady()) ding(); draw(false); });
       case 'voice':
         voice ??= createVoice({ onCommand: onVoice, onStatus: onVoiceStatus });
         if (voice.on) voice.stop(); else voice.start();
