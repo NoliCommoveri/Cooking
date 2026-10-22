@@ -503,7 +503,10 @@ content/
   ingredients.json        # canonical ingredient registry
   equipment.json          # tools: id, name, icon, category
   skills.json             # skill pins: id, name, pin shape
-  cuisines.json           # cuisine → passport region
+  cuisines.json           # passport regions, and cuisine → region
+  units.json              # unit numbers and names (7 is Desserts)
+  schema/                 # JSON Schemas for the registries and lesson files
+  rules/                  # clean-species allowlist, blocked words, allowed phrases
   lessons/
     01-spring-rolls.json
     ...
@@ -582,6 +585,13 @@ content/
 - `learn.why` cards have ids that steps point to with `why`. The "same move, other dishes" card isn't written by hand; it's built from `skills` across all lessons. `skills.json` holds each skill's one-line idea for the skill detail view.
 - `cuisine` is an ID in `cuisines.json`, which maps it to a passport region. `skills` are IDs in `skills.json` and drive the skill pins. `skill` is the display line.
 
+**Added in Phase 1** (the schemas in `content/schema/` are the full reference):
+- **Steps:** `type` is `step`, `doneness`, or `wash`. `hazard` is the short line an adult profile sees ("Hot stove"), required on every step that isn't solo. `handles` lists the raw ingredients a step touches. A doneness `target` is a thermometer temperature or, for egg-only baking, a `look` (see §7.4).
+- **Step text** can say `{n:egg}` (the scaled count) or `{qty:egg}` (amount and label), so "1 large egg" or "2 large eggs" comes out right at every size.
+- **Ingredient lines:** `"amount": null` with a `text` ("a few grinds") never scales, and `"scale": false` keeps an amount fixed ("for the pan"). `min` sets a count's floor.
+- **Registry:** `countLabel` gives counted items their words ("large egg", "large eggs"). `units` defines package units ("28-oz can"). `"measure": "butter"` shows butter as sticks and tablespoons.
+- `learn.move` is a card with a title and body. Free scaling can carry pan notes from a serving count up (`"notes": [{ "from": 9, "text": "…" }]`).
+
 ### 7.4 Content linter (runs at build time and in CI)
 The linter must reject content when:
 - the JSON doesn't match the schema
@@ -597,7 +607,12 @@ The linter must reject content when:
 - a lesson uses an ingredient with `rawHandling` but has no doneness check step, or has no wash-hands step after the raw-handling step (§3)
 - step IDs within a lesson aren't unique, or a step with a timer has no `timerLabel`
 - a core lesson has no `learn.move`, no `learn.why` card, or no `learn.wrong` entry, or a step's `why` points to a card that doesn't exist
-- a fixed-scaling lesson has no multipliers
+- a fixed-scaling lesson has no multipliers, or they don't include 1×
+- a step that `handles` raw food isn't followed directly by a `wash` step, or a raw ingredient is never marked as handled
+- a lesson with raw meat, poultry, or fish has no doneness step with a thermometer temperature. **Recommendation, waiting on the owner:** a lesson whose only raw ingredient is egg baked into a dough (cookies) may use a visual doneness check instead
+- a step that isn't solo has no `hazard`
+- a callback points to a lesson that doesn't exist
+- the lesson can't be scaled and filled cleanly at every serving size it offers
 
 The linter must **warn** (without failing the build) when:
 - a lesson uses an ingredient with a `watch` note

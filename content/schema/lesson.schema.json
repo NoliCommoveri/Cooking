@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Lesson file (plan §7.3)",
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "text": { "type": "string", "minLength": 1 },
+    "card": { "type": "object", "additionalProperties": false, "required": ["title", "body"],
+      "properties": { "title": { "$ref": "#/$defs/text" }, "body": { "$ref": "#/$defs/text" } } },
+    "line": {
+      "oneOf": [
+        { "type": "object", "additionalProperties": false, "required": ["ingredient", "amount", "unit"],
+          "properties": {
+            "ingredient": { "$ref": "#/$defs/id" }, "amount": { "type": "number", "minimum": 0 }, "unit": { "$ref": "#/$defs/id" },
+            "prep": { "$ref": "#/$defs/text" }, "group": { "$ref": "#/$defs/text" }, "optional": { "type": "boolean" },
+            "round": { "enum": ["up", "down", "nearest"] }, "min": { "type": "number", "minimum": 0 }, "scale": { "type": "boolean" } } },
+        { "type": "object", "additionalProperties": false, "required": ["ingredient", "amount", "text"],
+          "properties": {
+            "ingredient": { "$ref": "#/$defs/id" }, "amount": { "type": "null" }, "text": { "$ref": "#/$defs/text" },
+            "prep": { "$ref": "#/$defs/text" }, "group": { "$ref": "#/$defs/text" }, "optional": { "type": "boolean" } } }
+      ]
+    },
+    "step": {
+      "type": "object", "additionalProperties": false, "required": ["id", "text", "safety"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "type": { "enum": ["step", "doneness", "wash"] },
+        "text": { "$ref": "#/$defs/text" },
+        "safety": { "enum": ["solo", "adult-nearby", "adult-hands-on"] },
+        "hazard": { "$ref": "#/$defs/text" },
+        "tip": { "$ref": "#/$defs/text" },
+        "look": { "$ref": "#/$defs/text" },
+        "why": { "$ref": "#/$defs/id" },
+        "handles": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+        "timerSeconds": { "type": "integer", "minimum": 1 },
+        "timerLabel": { "$ref": "#/$defs/text" },
+        "target": { "oneOf": [
+          { "type": "object", "additionalProperties": false, "required": ["temp", "unit"],
+            "properties": { "temp": { "type": "integer", "minimum": 100, "maximum": 400 }, "unit": { "const": "F" } } },
+          { "type": "object", "additionalProperties": false, "required": ["look"], "properties": { "look": { "$ref": "#/$defs/text" } } }
+        ] }
+      }
+    }
+  },
+  "type": "object", "additionalProperties": false,
+  "required": ["id", "version", "number", "track", "unit", "title", "image", "cuisine", "skill", "skills", "prereqs",
+    "servings", "totalMinutes", "scaling", "learn", "ingredients", "equipment", "steps"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[0-9]{2}-[a-z0-9]+(-[a-z0-9]+)*$" },
+    "version": { "type": "integer", "minimum": 1 },
+    "number": { "type": "integer", "minimum": 1 },
+    "track": { "enum": ["core", "beginner"] },
+    "unit": { "type": "integer", "minimum": 1 },
+    "title": { "$ref": "#/$defs/text" },
+    "image": { "$ref": "#/$defs/text" },
+    "cuisine": { "$ref": "#/$defs/id" },
+    "skill": { "$ref": "#/$defs/text" },
+    "skills": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+    "prereqs": { "type": "array", "items": { "type": "integer", "minimum": 1 } },
+    "servings": { "type": "integer", "minimum": 1 },
+    "totalMinutes": { "type": "integer", "minimum": 1 },
+    "scaling": { "oneOf": [
+      { "type": "object", "additionalProperties": false, "required": ["mode"],
+        "properties": { "mode": { "const": "free" }, "min": { "type": "integer", "minimum": 1 }, "max": { "type": "integer", "minimum": 1 },
+          "notes": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["from", "text"],
+            "properties": { "from": { "type": "integer", "minimum": 1 }, "text": { "$ref": "#/$defs/text" } } } } } },
+      { "type": "object", "additionalProperties": false, "required": ["mode", "multipliers"],
+        "properties": { "mode": { "const": "fixed" }, "multipliers": { "type": "array", "minItems": 1, "items": { "type": "number", "minimum": 0 } },
+          "notes": { "type": "object", "additionalProperties": { "$ref": "#/$defs/text" } } } }
+    ] },
+    "intro": { "type": "object", "additionalProperties": false, "required": ["slides"], "properties": {
+      "slides": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["image", "caption", "seconds"],
+        "properties": { "image": { "$ref": "#/$defs/text" }, "caption": { "$ref": "#/$defs/text" }, "seconds": { "type": "number", "minimum": 1 } } } },
+      "music": { "$ref": "#/$defs/text" } } },
+    "learn": { "type": "object", "additionalProperties": false, "required": ["move", "why", "wrong"], "properties": {
+      "move": { "$ref": "#/$defs/card" },
+      "why": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "title", "body"],
+        "properties": { "id": { "$ref": "#/$defs/id" }, "title": { "$ref": "#/$defs/text" }, "body": { "$ref": "#/$defs/text" } } } },
+      "wrong": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["sign", "fix"],
+        "properties": { "sign": { "$ref": "#/$defs/text" }, "fix": { "$ref": "#/$defs/text" } } } },
+      "callback": { "type": "object", "additionalProperties": false, "required": ["lesson", "body"],
+        "properties": { "lesson": { "type": "integer", "minimum": 1 }, "body": { "$ref": "#/$defs/text" } } },
+      "quiz": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["q", "choices", "answer", "explain"],
+        "properties": { "q": { "$ref": "#/$defs/text" }, "choices": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/text" } },
+          "answer": { "type": "integer", "minimum": 0 }, "explain": { "$ref": "#/$defs/text" } } } }
+    } },
+    "ingredients": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/line" } },
+    "substitutions": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["for", "use", "reason"],
+      "properties": { "for": { "$ref": "#/$defs/id" }, "use": { "$ref": "#/$defs/id" },
+        "reason": { "enum": ["availability", "nuts", "peanuts", "dairy", "egg", "gluten", "fish", "meat"] }, "note": { "$ref": "#/$defs/text" } } } },
+    "equipment": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
+    "steps": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/step" } }
+  }
+}

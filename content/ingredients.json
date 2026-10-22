@@ -1,0 +1,533 @@
+{
+  "ingredients": [
+    {
+      "id": "olive-oil",
+      "name": "Olive oil",
+      "section": "pantry",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "vegetable-oil",
+      "name": "Vegetable oil",
+      "section": "pantry",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "sesame-oil",
+      "name": "Toasted sesame oil",
+      "section": "pantry",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "onion-yellow",
+      "name": "Yellow onion",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "large yellow onion",
+        "many": "large yellow onions"
+      },
+      "perishable": true,
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "bell-pepper-red",
+      "name": "Red bell pepper",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "red bell pepper",
+        "many": "red bell peppers"
+      },
+      "perishable": true,
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "garlic",
+      "name": "Garlic",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "garlic clove",
+        "many": "garlic cloves"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "ginger-fresh",
+      "name": "Fresh ginger",
+      "section": "produce",
+      "baseUnit": "g",
+      "conversions": {
+        "tbsp": 6,
+        "tsp": 2
+      },
+      "perishable": true,
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "green-onion",
+      "name": "Green onion",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "green onion",
+        "many": "green onions"
+      },
+      "perishable": true,
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "parsley",
+      "name": "Fresh parsley",
+      "section": "produce",
+      "baseUnit": "ml",
+      "perishable": true,
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "asian-pear",
+      "name": "Asian pear",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "Asian pear",
+        "many": "Asian pears"
+      },
+      "perishable": true,
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "pear-bosc",
+      "name": "Bosc pear",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "Bosc pear",
+        "many": "Bosc pears"
+      },
+      "perishable": true,
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "cumin-ground",
+      "name": "Ground cumin",
+      "section": "spices",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "paprika-smoked",
+      "name": "Smoked paprika",
+      "section": "spices",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "chili-flakes",
+      "name": "Red chili flakes",
+      "section": "spices",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "black-pepper",
+      "name": "Black pepper",
+      "section": "spices",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "salt",
+      "name": "Salt",
+      "section": "spices",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "flaky-salt",
+      "name": "Flaky sea salt",
+      "section": "spices",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "sesame-seeds",
+      "name": "Sesame seeds",
+      "section": "spices",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "tomatoes-crushed",
+      "name": "Crushed tomatoes",
+      "section": "canned",
+      "baseUnit": "g",
+      "units": {
+        "can": {
+          "amount": 794,
+          "one": "28-oz can",
+          "many": "28-oz cans"
+        }
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "egg",
+      "name": "Eggs",
+      "section": "dairy",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "large egg",
+        "many": "large eggs"
+      },
+      "perishable": true,
+      "contains": [
+        "egg"
+      ],
+      "animalSource": "chicken",
+      "animalPart": "egg",
+      "rawHandling": "egg",
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "feta",
+      "name": "Feta cheese",
+      "section": "dairy",
+      "baseUnit": "g",
+      "conversions": {
+        "cup": 150
+      },
+      "perishable": true,
+      "contains": [
+        "dairy"
+      ],
+      "animalSource": "sheep",
+      "animalPart": "milk",
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "butter-unsalted",
+      "name": "Unsalted butter",
+      "section": "dairy",
+      "baseUnit": "g",
+      "measure": "butter",
+      "conversions": {
+        "tbsp": 14.2,
+        "tsp": 4.7,
+        "cup": 227
+      },
+      "units": {
+        "stick": {
+          "amount": 113,
+          "one": "stick",
+          "many": "sticks"
+        }
+      },
+      "perishable": true,
+      "contains": [
+        "dairy"
+      ],
+      "animalSource": "cattle",
+      "animalPart": "milk",
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "buttermilk",
+      "name": "Buttermilk",
+      "section": "dairy",
+      "baseUnit": "ml",
+      "perishable": true,
+      "contains": [
+        "dairy"
+      ],
+      "animalSource": "cattle",
+      "animalPart": "milk",
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "beef-ribeye",
+      "name": "Beef ribeye",
+      "section": "meat",
+      "baseUnit": "g",
+      "perishable": true,
+      "contains": [
+        "meat"
+      ],
+      "animalSource": "cattle",
+      "animalPart": "meat",
+      "rawHandling": "meat",
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "pita",
+      "name": "Pita bread",
+      "section": "bakery",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "pita",
+        "many": "pitas"
+      },
+      "contains": [
+        "gluten"
+      ],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "rice-white",
+      "name": "White rice",
+      "section": "pantry",
+      "baseUnit": "g",
+      "conversions": {
+        "cup": 185
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "soy-sauce",
+      "name": "Soy sauce",
+      "section": "pantry",
+      "baseUnit": "ml",
+      "contains": [
+        "gluten"
+      ],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "tamari",
+      "name": "Tamari",
+      "section": "pantry",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": "Check the label: most tamari is gluten-free, but not every brand."
+    },
+    {
+      "id": "brown-sugar",
+      "name": "Brown sugar",
+      "section": "pantry",
+      "baseUnit": "g",
+      "conversions": {
+        "cup": 213,
+        "tbsp": 13.3,
+        "tsp": 4.4
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "sugar",
+      "name": "Sugar",
+      "section": "pantry",
+      "baseUnit": "g",
+      "conversions": {
+        "cup": 200,
+        "tbsp": 12.5,
+        "tsp": 4.2
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "flour-ap",
+      "name": "All-purpose flour",
+      "section": "pantry",
+      "baseUnit": "g",
+      "conversions": {
+        "cup": 125,
+        "tbsp": 7.8
+      },
+      "contains": [
+        "gluten"
+      ],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "baking-powder",
+      "name": "Baking powder",
+      "section": "pantry",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "baking-soda",
+      "name": "Baking soda",
+      "section": "pantry",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "vanilla-extract",
+      "name": "Vanilla extract",
+      "section": "pantry",
+      "baseUnit": "ml",
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "chocolate-chips",
+      "name": "Semisweet chocolate chips",
+      "section": "pantry",
+      "baseUnit": "g",
+      "conversions": {
+        "cup": 170
+      },
+      "contains": [
+        "dairy"
+      ],
+      "animalSource": "cattle",
+      "animalPart": "milk",
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    }
+  ]
+}

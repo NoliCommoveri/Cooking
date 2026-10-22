@@ -1,0 +1,11 @@
+{
+  "units": [
+    { "number": 1, "name": "Knife work and assembly" },
+    { "number": 2, "name": "Stovetop basics" },
+    { "number": 3, "name": "Spices and flavor bases" },
+    { "number": 4, "name": "Breaking down and slicing meat, marinades" },
+    { "number": 5, "name": "Dough and batter" },
+    { "number": 6, "name": "Oven, roasting, frying" },
+    { "number": 7, "name": "Desserts" }
+  ]
+}

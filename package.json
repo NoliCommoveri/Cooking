@@ -1,0 +1,12 @@
+{
+  "name": "clean-plate-recipes",
+  "private": true,
+  "type": "module",
+  "description": "Cooking class app. Content, linter, and scaling (Phase 1).",
+  "scripts": {
+    "lint": "node tools/lint-content.js",
+    "test": "node --test",
+    "preview": "node tools/build-preview.js"
+  },
+  "engines": { "node": ">=20" }
+}

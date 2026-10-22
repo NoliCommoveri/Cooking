@@ -1,0 +1,180 @@
+<title>Clean Plate Lesson Preview</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+/* Layout: the project's neutral house style. A lesson strip on top, then one lesson as a read-only recipe sheet: header, serving sizes, ingredients and tools, Learn cards, then the numbered steps. */
+:root{
+  --bg:#F1EFEA; --fg:#1F2328; --mut:#5A606A; --line:#D7D2C8; --card:#FFFFFF; --acc:#2E6B5B; --acc-ink:#FFFFFF;
+  --solo:#2E6B5B; --near:#8A5A00; --hands:#B23A1C; --soft:#E7EFEC;
+  --disp:'Fredoka','Nunito',system-ui,sans-serif; --body:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#14161A; --fg:#ECEDEF; --mut:#A1A7B1; --line:#2B2F36; --card:#1D2025; --acc:#7CC5AE; --acc-ink:#0E1A16; --solo:#7CC5AE; --near:#E8B65A; --hands:#FF8A6B; --soft:#1F2A27; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14161A; --fg:#ECEDEF; --mut:#A1A7B1; --line:#2B2F36; --card:#1D2025; --acc:#7CC5AE; --acc-ink:#0E1A16; --solo:#7CC5AE; --near:#E8B65A; --hands:#FF8A6B; --soft:#1F2A27; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.5}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 64px;display:grid;gap:28px}
+h1,h2,h3{font-family:var(--disp);font-weight:600;margin:0;text-wrap:balance;line-height:1.15}
+h1{font-size:clamp(28px,4.4vw,38px)}
+h2{font-size:22px}
+h3{font-size:18px}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
+.lede{color:var(--mut);max-width:68ch;margin-top:6px}
+.check{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin-top:10px;font-size:14px;color:var(--mut)}
+.check b{color:var(--acc)}
+.check.bad b{color:var(--hands)}
+details{font-size:14px;color:var(--mut)}
+details summary{cursor:pointer;font-weight:700;min-height:32px}
+details ul{margin:6px 0 0;padding-left:18px;max-width:80ch}
+
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:700px){.strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pick{display:grid;grid-template-columns:56px minmax(0,1fr);gap:10px;align-items:center;text-align:left;padding:8px 10px;border:2px solid var(--line);background:var(--card);border-radius:12px;min-height:72px}
+.pick[aria-pressed="true"]{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.pick img{width:56px;height:56px;object-fit:contain}
+.pick small{display:block;color:var(--mut);font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+.pick b{font-weight:800;font-size:15px;line-height:1.2;display:block}
+
+.head{display:grid;grid-template-columns:200px minmax(0,1fr);gap:22px;align-items:center}
+@media (max-width:640px){.head{grid-template-columns:1fr}.head img{width:160px}}
+.head img{width:200px;max-width:100%;height:auto}
+.eyebrow{font-size:13px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+.skill{font-size:17px;margin-top:4px}
+.facts{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:10px;font-size:15px;color:var(--mut)}
+.facts b{color:var(--fg);font-weight:800}
+
+.serve{display:grid;gap:10px;padding:16px;border-radius:14px;background:var(--soft)}
+.sizes{display:flex;flex-wrap:wrap;gap:6px}
+.size{min-width:48px;min-height:48px;padding:4px 10px;border:1.5px solid var(--line);background:var(--card);border-radius:10px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.size small{display:block;font-weight:600;font-size:12px;color:var(--mut)}
+.size[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+.size[aria-pressed="true"] small{color:var(--acc-ink)}
+.note{font-weight:700}
+
+.two{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.list{display:grid;gap:14px}
+.grp{display:grid;gap:2px}
+.grp h3{font-size:13px;font-family:var(--body);font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);margin-bottom:2px}
+.ing{display:grid;grid-template-columns:minmax(0,1fr);padding:8px 0;border-bottom:1px solid var(--line)}
+.ing .amt{font-weight:800}
+.ing small{color:var(--mut);font-size:14px}
+.ing .opt{font-style:italic}
+.subs{display:grid;gap:6px;font-size:15px}
+.subs p b{font-weight:800}
+.tools{margin:0;padding:0;list-style:none;display:grid;gap:0}
+.tools li{padding:7px 0;border-bottom:1px solid var(--line)}
+
+.learn{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.card .k{font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--acc)}
+.card h3{font-size:17px}
+.card ul{margin:0;padding-left:18px;display:grid;gap:4px}
+.card ol{margin:0;padding-left:20px}
+.card .right{font-weight:800}
+
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:step}
+.step{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px}
+.step::before{counter-increment:step;content:counter(step);font-family:var(--disp);font-weight:600;font-size:24px;line-height:1.1;color:var(--mut);font-variant-numeric:tabular-nums}
+.step .body{display:grid;gap:8px;min-width:0}
+.step .txt{font-size:18px;font-weight:700;line-height:1.45}
+.safety{font-size:14px;font-weight:800;border-left:4px solid var(--c);padding-left:8px;color:var(--c)}
+.safety span{font-weight:600;color:var(--mut)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:15px;color:var(--mut)}
+.meta b{color:var(--fg)}
+.step.wash{background:var(--soft)}
+.target{font-weight:800;color:var(--hands)}
+.foot{color:var(--mut);font-size:14px;max-width:80ch}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Lesson preview</h1>
+    <p class="lede">The Phase 1 sample lessons, straight from the content files, read-only. Pick a lesson and a serving size: every amount and every count in the steps changes to match. This is not the kids' screen; that comes in Phase 2.</p>
+    <div id="check"></div>
+  </header>
+  <nav class="strip" id="strip" aria-label="Lessons"></nav>
+  <main id="lesson" style="display:grid;gap:28px"></main>
+  <p class="foot">Built from <code>content/</code> by <code>tools/build-preview.js</code>. Amounts are written for 6 servings and scaled by the same code the app will use.</p>
+</div>
+
+<script>
+"use strict";
+/*__DATA__*/
+/*__CODE__*/
+(function(){
+const $ = s => document.querySelector(s);
+const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const SAFETY = { 'solo': ['Solo', '--solo'], 'adult-nearby': ['Adult nearby', '--near'], 'adult-hands-on': ['Adult hands-on', '--hands'] };
+const S = { i: 0, serv: {} };
+const fmtTime = s => s >= 60 ? `${Math.round(s / 60)} min` : `${s} sec`;
+const sizeLabel = (L, n) => L.scaling.mode === 'fixed' ? ({ 0.5: '½ batch', 1: '1 batch', 2: '2 batches' }[n / L.servings] || `${n / L.servings}×`) : '';
+
+function renderCheck() {
+  const { errors, warnings } = DATA.lint;
+  $('#check').innerHTML = `<p class="check ${errors.length ? 'bad' : ''}"><b>${errors.length ? `${errors.length} linter error${errors.length > 1 ? 's' : ''}` : 'Linter: no errors'}</b><span>${warnings.length} warning${warnings.length === 1 ? '' : 's'}, all expected while the course has only 4 lessons</span></p>
+  <details><summary>Show the linter's notes</summary><ul>${[...errors, ...warnings].map(w => `<li>${esc(w)}</li>`).join('')}</ul></details>`;
+}
+function renderStrip() {
+  $('#strip').innerHTML = DATA.lessons.map((L, i) => `<button type="button" class="pick" data-i="${i}" aria-pressed="${i === S.i}">${DATA.images[L.id] ? `<img src="${DATA.images[L.id]}" alt="">` : '<span></span>'}<span><small>Lesson ${L.number}</small><b>${esc(L.title)}</b></span></button>`).join('');
+}
+function maxSafety(L) {
+  const order = ['solo', 'adult-nearby', 'adult-hands-on'];
+  return L.steps.reduce((m, s) => order.indexOf(s.safety) > order.indexOf(m) ? s.safety : m, 'solo');
+}
+function renderLesson() {
+  const L = DATA.lessons[S.i], opts = servingOptions(L);
+  const n = S.serv[L.id] ?? (opts.includes(4) ? 4 : L.servings);
+  const r = scaleLesson(L, DATA.ingredients, n);
+  const cu = DATA.cuisines[L.cuisine], groups = [];
+  for (const ing of r.ingredients) { const g = ing.group || 'Ingredients'; let x = groups.find(y => y[0] === g); if (!x) groups.push(x = [g, []]); x[1].push(ing); }
+  const why = Object.fromEntries(L.learn.why.map(w => [w.id, w.title]));
+  const ms = maxSafety(L);
+  const cards = [
+    `<div class="card"><span class="k">The move</span><h3>${esc(L.learn.move.title)}</h3><p>${esc(L.learn.move.body)}</p></div>`,
+    ...(L.learn.callback ? [`<div class="card"><span class="k">Callback to lesson ${L.learn.callback.lesson}</span><p>${esc(L.learn.callback.body)}</p></div>`] : []),
+    ...L.learn.why.map(w => `<div class="card"><span class="k">Why it works</span><h3>${esc(w.title)}</h3><p>${esc(w.body)}</p></div>`),
+    `<div class="card"><span class="k">When it goes wrong</span><ul>${L.learn.wrong.map(w => `<li><b>${esc(w.sign)}.</b> ${esc(w.fix)}</li>`).join('')}</ul></div>`,
+    ...(L.learn.quiz || []).map(q => `<div class="card"><span class="k">Quiz · optional</span><h3>${esc(q.q)}</h3><ol>${q.choices.map((c, i) => `<li class="${i === q.answer ? 'right' : ''}">${esc(c)}</li>`).join('')}</ol><p>${esc(q.explain)}</p></div>`)
+  ];
+  $('#lesson').innerHTML = `
+  <section class="head">${DATA.images[L.id] ? `<img src="${DATA.images[L.id]}" alt="${esc(L.title)}">` : ''}
+    <div><p class="eyebrow">Unit ${L.unit} · ${esc(DATA.units[L.unit])}</p><h2 style="font-size:clamp(26px,4vw,34px)">${esc(L.title)}</h2>
+    <p class="skill">${esc(L.skill)}</p>
+    <p class="facts"><span><b>${L.totalMinutes} min</b> total</span><span>${esc(cu.name)} stamp · <b>${esc(DATA.regions[cu.region].name)}</b></span><span>Up to <b>${SAFETY[ms][0].toLowerCase()}</b></span><span>Skill pins: <b>${L.skills.map(s => esc(DATA.skills[s].name)).join(', ')}</b></span></p></div>
+  </section>
+  <section class="serve" aria-label="Serving size"><h2>${L.scaling.mode === 'fixed' ? 'Batch size' : 'Serves'}</h2>
+    <div class="sizes">${opts.map(o => `<button type="button" class="size" data-n="${o}" aria-pressed="${o === n}">${o}${sizeLabel(L, o) ? `<small>${sizeLabel(L, o)}</small>` : ''}</button>`).join('')}</div>
+    ${r.note ? `<p class="note">${esc(r.note)}</p>` : ''}
+  </section>
+  <section class="two">
+    <div class="list"><h2>Ingredients for ${L.scaling.mode === 'fixed' ? sizeLabel(L, n) : n}</h2>
+      ${groups.map(([g, items]) => `<div class="grp">${groups.length > 1 ? `<h3>${esc(g)}</h3>` : ''}${items.map(i => `<div class="ing"><span><span class="amt">${esc(i.line)}</span>${i.prep ? `, ${esc(i.prep)}` : ''}${i.optional ? ' <small class="opt">(optional)</small>' : ''}</span>${DATA.ingredients[i.id].watch ? `<small>${esc(DATA.ingredients[i.id].watch)}</small>` : ''}</div>`).join('')}</div>`).join('')}
+      ${(L.substitutions || []).length ? `<div class="subs"><h3>Swaps</h3>${L.substitutions.map(s => `<p>No ${esc(DATA.ingredients[s.for].name.toLowerCase())}? Use <b>${esc(DATA.ingredients[s.use].name.toLowerCase())}</b>${s.reason === 'availability' ? '' : ` (${esc(s.reason)}-free)`}.${s.note ? ' ' + esc(s.note) : ''}</p>`).join('')}</div>` : ''}
+    </div>
+    <div class="list"><h2>Tools</h2><ul class="tools">${L.equipment.map(e => `<li>${esc(DATA.equipment[e].name)}</li>`).join('')}</ul></div>
+  </section>
+  <section style="display:grid;gap:12px"><h2>Learn</h2><div class="learn">${cards.join('')}</div></section>
+  <section style="display:grid;gap:12px"><h2>Cook</h2>
+    <ol class="steps">${r.steps.map(s => {
+      const [lab, col] = SAFETY[s.safety];
+      const meta = [s.timerSeconds ? `<span>Timer: <b>${esc(s.timerLabel)}, ${fmtTime(s.timerSeconds)}</b></span>` : '', s.why ? `<span>Why? opens <b>${esc(why[s.why])}</b></span>` : ''].join('');
+      return `<li class="step ${s.type === 'wash' ? 'wash' : ''}"><div class="body">
+        <p class="safety" style="--c:var(${col})">${lab}${s.hazard ? ` <span>· an adult profile sees: ${esc(s.hazard)}</span>` : ''}</p>
+        <p class="txt">${esc(s.text)}</p>
+        ${s.type === 'doneness' ? `<p class="target">${s.target.temp ? `Must reach ${s.target.temp}°F on the thermometer before Next unlocks` : `Done when: ${esc(s.target.look)}`}</p>` : ''}
+        ${s.look ? `<p><b>Should look like:</b> ${esc(s.look)}</p>` : ''}${s.tip ? `<p><b>Tip:</b> ${esc(s.tip)}</p>` : ''}
+        ${meta ? `<p class="meta">${meta}</p>` : ''}</div></li>`;
+    }).join('')}</ol>
+  </section>`;
+}
+document.addEventListener('click', e => {
+  const p = e.target.closest('.pick'), sz = e.target.closest('.size');
+  if (p) { S.i = +p.dataset.i; renderStrip(); renderLesson(); }
+  if (sz) { S.serv[DATA.lessons[S.i].id] = +sz.dataset.n; renderLesson(); }
+});
+renderCheck(); renderStrip(); renderLesson();
+})();
+</script>

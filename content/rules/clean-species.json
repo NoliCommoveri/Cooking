@@ -1,0 +1,9 @@
+{
+  "note": "Animals whose meat, milk, or eggs may be used (plan §2.1). Adding a species changes §2.1 and needs the owner's say-so.",
+  "species": [
+    "cattle", "sheep", "goat", "deer", "bison",
+    "chicken", "turkey", "duck", "goose",
+    "salmon", "cod", "tilapia", "tuna", "anchovy", "trout", "bonito", "pollock", "haddock", "halibut", "sardine"
+  ],
+  "fatBlocked": ["cattle", "sheep", "goat"]
+}

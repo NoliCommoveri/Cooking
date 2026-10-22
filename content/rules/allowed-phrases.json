@@ -1,0 +1,10 @@
+{
+  "note": "Exact phrases where a blocked word is fine in context (plan §7.4). Each one is reviewed; this never turns the check off.",
+  "phrases": [
+    "turkey bacon", "beef bacon",
+    "beef chorizo", "chicken chorizo",
+    "chicken andouille", "turkey andouille",
+    "beef salami", "turkey pepperoni", "beef pepperoni",
+    "mushroom stir-fry sauce, not oyster sauce"
+  ]
+}

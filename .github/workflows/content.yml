@@ -1,0 +1,20 @@
+name: Content checks
+
+# Runs the content linter (plan §7.4) and the tests on every push and pull request.
+# A red check here means a lesson or registry file broke a rule; the log names the file and the problem.
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Lint the content
+        run: node tools/lint-content.js
+      - name: Run the tests
+        run: node --test

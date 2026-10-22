@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Content registries: ingredients, equipment, skills, cuisines, units",
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "text": { "type": "string", "minLength": 1 },
+    "dietTag": { "enum": ["nuts", "peanuts", "dairy", "egg", "gluten", "fish", "meat"] },
+    "labels": { "type": "object", "required": ["one", "many"], "additionalProperties": false,
+      "properties": { "one": { "$ref": "#/$defs/text" }, "many": { "$ref": "#/$defs/text" } } },
+    "ingredient": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "name", "section", "baseUnit", "contains", "animalSource", "animalPart", "rawHandling", "icon", "watch"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "$ref": "#/$defs/text" },
+        "section": { "enum": ["produce", "meat", "fish", "dairy", "bakery", "pantry", "spices", "canned", "frozen"] },
+        "baseUnit": { "enum": ["g", "ml", "count"] },
+        "conversions": { "type": "object", "additionalProperties": { "type": "number", "minimum": 0 } },
+        "units": { "type": "object", "additionalProperties": { "type": "object", "required": ["amount", "one", "many"], "additionalProperties": false,
+          "properties": { "amount": { "type": "number", "minimum": 0 }, "one": { "$ref": "#/$defs/text" }, "many": { "$ref": "#/$defs/text" } } } },
+        "countLabel": { "$ref": "#/$defs/labels" },
+        "measure": { "enum": ["butter"] },
+        "purchaseUnit": { "type": "object", "required": ["label", "amount"], "additionalProperties": false,
+          "properties": { "label": { "$ref": "#/$defs/text" }, "amount": { "type": "number", "minimum": 0 } } },
+        "perishable": { "type": "boolean" },
+        "animalSource": { "type": ["string", "null"] },
+        "animalPart": { "enum": ["meat", "fat", "blood", "bone", "egg", "milk", "skin", "organ", null] },
+        "rawHandling": { "enum": ["poultry", "meat", "fish", "egg", null] },
+        "contains": { "type": "array", "items": { "$ref": "#/$defs/dietTag" } },
+        "icon": { "type": ["string", "null"] },
+        "watch": { "type": ["string", "null"] }
+      }
+    }
+  },
+  "type": "object", "additionalProperties": false,
+  "properties": {
+    "ingredients": { "type": "array", "items": { "$ref": "#/$defs/ingredient" } },
+    "equipment": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "name", "category", "icon"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "name": { "$ref": "#/$defs/text" },
+        "category": { "enum": ["knives", "pans", "pots", "bakeware", "measuring", "mixing", "utensils", "openers", "thermometers", "appliances"] },
+        "icon": { "type": ["string", "null"] } } } },
+    "skills": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "name", "idea", "pin"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "name": { "$ref": "#/$defs/text" }, "idea": { "$ref": "#/$defs/text" },
+        "pin": { "type": "object", "additionalProperties": false, "required": ["shape", "color", "glyph"],
+          "properties": { "shape": { "enum": ["circle", "hex", "shield"] }, "color": { "type": "string", "pattern": "^#[0-9A-F]{6}$" }, "glyph": { "$ref": "#/$defs/id" } } } } } },
+    "regions": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "name"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "name": { "$ref": "#/$defs/text" } } } },
+    "cuisines": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "name", "region"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "name": { "$ref": "#/$defs/text" }, "region": { "$ref": "#/$defs/id" } } } },
+    "units": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["number", "name"],
+      "properties": { "number": { "type": "integer", "minimum": 1 }, "name": { "$ref": "#/$defs/text" } } } }
+  }
+}

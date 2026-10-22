@@ -492,3 +492,39 @@ Owner rulings on open questions:
   request, and now earn the Mexican stamp. That leaves 21 cuisine stamps.
 - The showcase now says both themes are approved.
 - Next: Phase 1, the content core.
+
+---
+
+## 22. 2026-10-22 — Phase 1: content core
+
+- **Content as data** (§7). New files: `content/ingredients.json` (35
+  ingredients), `equipment.json` (26 tools), `skills.json`,
+  `cuisines.json` (7 regions, 21 cuisines), `units.json`, JSON Schemas in
+  `content/schema/`, and the rules in `content/rules/`: the clean-species
+  allowlist, the blocked words, and the allowed phrases.
+- **4 sample lessons**, written from scratch: 4 Shakshuka, 14 Beef
+  bulgogi, 38 Buttermilk biscuits, and 49 Brown butter cookies. Each has the
+  Learn stage, safety levels and adult hazards, timers, and the food-safety
+  steps.
+- **Shared code** in `src/content/`, plain modules the Worker and app can
+  use later: units and kitchen-measurable display (`units.js`), scaling and
+  step-text counts (`scale.js`), the hard block (`rules.js`), a small
+  schema checker (`validate.js`), and the linter (`lint.js`).
+- **The linter** (`tools/lint-content.js`) runs every §7.4 check, plus a few
+  added in this phase (listed in §7.4): wash steps after raw food, adult
+  hazards, callbacks, and a check that every lesson renders at every serving
+  size. It passes with 0 errors. The 13 warnings are expected: no intro
+  slides, fallback icons, and skills used by only one sample lesson.
+- **Tests** (`test/`, 29 of them, `node --test`): units, scaling, and the
+  linter. The linter tests break the real content on purpose (an unclean
+  ingredient, a missing wash step, a prerequisite loop, and more) and confirm
+  each is rejected.
+- **CI:** `.github/workflows/content.yml` runs the linter and tests on every
+  push and pull request.
+- **Preview:** `preview/lesson-preview.html`, built by
+  `tools/build-preview.js`, shows each lesson read-only at every allowed
+  size. A test fails if it falls out of date. This meets the Phase 1
+  done-when.
+- **Open for the owner:** cookies have raw egg, and a thermometer in a
+  cookie isn't practical, so their doneness check is visual. §7.4 marks this
+  as a Recommendation waiting on her.

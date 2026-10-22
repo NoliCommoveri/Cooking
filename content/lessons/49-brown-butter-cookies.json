@@ -1,0 +1,68 @@
+{
+  "id": "49-brown-butter-cookies",
+  "version": 1,
+  "number": 49,
+  "track": "core",
+  "unit": 7,
+  "title": "Brown butter chocolate chip cookies",
+  "image": "dishes/49-brown-butter-cookies.png",
+  "cuisine": "american",
+  "skill": "Browning butter, creaming",
+  "skills": ["browning-butter", "creaming"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 75,
+  "scaling": {
+    "mode": "fixed",
+    "multipliers": [0.5, 1, 2],
+    "notes": {
+      "0.5": "Makes 12 cookies, one pan.",
+      "1": "Makes 24 cookies. Bake one pan at a time.",
+      "2": "Makes 48 cookies. Bake one pan at a time, and let the pan cool before the next batch."
+    }
+  },
+  "learn": {
+    "move": { "title": "Brown it, cool it, cream it", "body": "Cook butter until its milk solids turn toasty brown, cool it until it's soft again, then beat it with sugar. The cookies taste like caramel and toasted nuts." },
+    "why": [
+      { "id": "brown-bits", "title": "What browning does", "body": "Butter is mostly fat, plus a little water and milk solids. Once the water bubbles away, the milk solids toast on the bottom of the pan and turn nutty and brown." },
+      { "id": "cool-it", "title": "Why cool it back down", "body": "Melted butter can't hold air. Cooled until it's soft like frosting, it can be beaten with sugar, and the tiny air pockets help the cookies puff." },
+      { "id": "creaming", "title": "Creaming", "body": "Beating soft butter with sugar pushes the sugar crystals through the fat and traps air. The mixture turns paler and fluffier, and that air makes softer cookies." },
+      { "id": "pull-early", "title": "Take them out early", "body": "Cookies keep baking on the hot pan after they leave the oven. Pull them while the middles still look a little soft, and they'll set as they cool." }
+    ],
+    "wrong": [
+      { "sign": "The butter has black flecks and smells burnt", "fix": "Start over. Burnt butter tastes bitter, and it's only seconds away from brown." },
+      { "sign": "The butter won't firm up in the ice water", "fix": "Keep stirring and add more ice. It takes 5 to 10 minutes." },
+      { "sign": "The cookies spread out flat", "fix": "The dough was too warm. Chill the scooped dough for 15 minutes before baking." }
+    ],
+    "callback": { "lesson": 38, "body": "In biscuits you kept the butter ice-cold so it would turn to steam in the oven. Today you do the opposite: melt it, brown it, then cool it just until it's soft." },
+    "quiz": [
+      { "q": "What turns brown when you brown butter?", "choices": ["The fat", "The milk solids", "The water"], "answer": 1, "explain": "The water cooks off and the milk solids toast. The fat carries their flavor into the cookies." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "butter-unsalted", "amount": 16, "unit": "tbsp" },
+    { "ingredient": "brown-sugar", "amount": 1, "unit": "cup", "prep": "packed" },
+    { "ingredient": "sugar", "amount": 0.5, "unit": "cup" },
+    { "ingredient": "egg", "amount": 2, "unit": "count" },
+    { "ingredient": "vanilla-extract", "amount": 2, "unit": "tsp" },
+    { "ingredient": "flour-ap", "amount": 2.25, "unit": "cup" },
+    { "ingredient": "baking-soda", "amount": 1, "unit": "tsp" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp" },
+    { "ingredient": "chocolate-chips", "amount": 2, "unit": "cup" },
+    { "ingredient": "flaky-salt", "amount": null, "text": "a pinch for each cookie", "optional": true }
+  ],
+  "equipment": ["saucepan-light", "silicone-spatula", "mixing-bowl-large", "mixing-bowl-medium", "small-bowl", "wooden-spoon", "measuring-cups", "measuring-spoons", "sheet-pan", "parchment", "oven-mitts", "spatula", "cooling-rack"],
+  "steps": [
+    { "id": "brown", "text": "Melt the butter in the saucepan over medium heat. Keep cooking, swirling the pan often. It will foam, go quiet, then start to brown.", "safety": "adult-nearby", "hazard": "Hot butter", "timerSeconds": 480, "timerLabel": "Brown butter", "why": "brown-bits", "look": "Golden-brown bits on the bottom, and it smells like toasted nuts." },
+    { "id": "ice-bath", "text": "Right away, scrape the butter and all the brown bits into the medium bowl. Set it in the large bowl half full of ice water, and stir until the butter is thick and soft, like frosting.", "safety": "adult-nearby", "hazard": "Hot butter", "timerSeconds": 480, "timerLabel": "Cool butter", "why": "cool-it", "tip": "Scrape out every brown bit. That's where the flavor is." },
+    { "id": "preheat", "text": "Heat the oven to 375°F and line the sheet pan with parchment.", "safety": "adult-nearby", "hazard": "Hot oven" },
+    { "id": "cream", "text": "Lift the butter bowl out of the ice water and dry the outside. Add both sugars and beat hard with the wooden spoon until it's paler and fluffy.", "safety": "solo", "timerSeconds": 180, "timerLabel": "Cream", "why": "creaming", "tip": "Switch arms when one gets tired." },
+    { "id": "eggs", "text": "Crack {qty:egg} into the small bowl. Add to the butter with the vanilla and beat until smooth.", "safety": "solo", "hazard": "Raw egg", "handles": ["egg"] },
+    { "id": "wash-egg", "type": "wash", "text": "Wash your hands with soap.", "safety": "solo", "hazard": "Raw egg" },
+    { "id": "dry", "text": "Stir in the flour, baking soda, and salt just until no flour shows. Stir in the chocolate chips.", "safety": "solo", "tip": "Don't taste the raw dough. Raw flour and raw egg can make you sick." },
+    { "id": "scoop", "text": "Scoop the dough into balls about 2 tablespoons each. Set them 2 inches apart on the pan, 12 to a pan. Sprinkle with flaky salt if you like.", "safety": "solo" },
+    { "id": "bake", "text": "Bake one pan at a time.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 600, "timerLabel": "Cookies", "why": "pull-early" },
+    { "id": "check-cookies", "type": "doneness", "text": "Check the cookies before they come out.", "safety": "adult-nearby", "hazard": "Hot oven", "target": { "look": "Golden-brown edges, and the middles are puffed and no longer shiny." } },
+    { "id": "cool", "text": "Use oven mitts to take out the pan. Let the cookies sit on the pan for 5 minutes, then move them to the rack with the spatula. Bake the rest of the dough the same way.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 300, "timerLabel": "Cool on pan" }
+  ]
+}
