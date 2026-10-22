@@ -704,3 +704,7 @@ The owner reviewed the sample lessons in the preview.
   and meatloaf, the tortilla dishes) stay as they are.
 - Sheet 18 (63–66: rugelach, beef empanadas, challah, pizza) was cropped and
   checked, with no unclean foods.
+- Sheet 19 (67–71: jollof, yassa, suya, peanut stew, bobotie) was cropped
+  and checked, with no unclean foods. Its plates touch, so the tool found
+  only 4 dishes. It was split by hand, and the boxes are recorded in
+  `tools/dish-sheets.txt`.
