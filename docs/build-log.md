@@ -571,3 +571,6 @@ The owner reviewed the sample lessons in the preview.
   4 new tests; 33 in all.
 - Cookies (49): the creaming step now says "cream them", so the word gets
   its card.
+- Shakshuka (4): the knife tip was unclear about which hand makes the claw.
+  It now says the claw is the hand holding the food, with the flat of the
+  blade against the knuckles.
