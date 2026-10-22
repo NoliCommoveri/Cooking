@@ -534,7 +534,7 @@ Kids have messy hands mid-cook, and the main kitchen device is likely an Android
 - **On hold** (owner, 2026-10-22):
   - **Tap zone:** the whole lower half of a cook-mode step advances, so a knuckle or wrist works.
   - **Page-turner remote:** a Bluetooth page-turner (the kind musicians use) acts as a keyboard, so cook mode treats its keys (arrows, Page Up/Down, Space, Enter) as Next and Back. It works offline, with no mic.
-- **Voice — Requirement, Phase 2 (owner, 2026-10-22):** short commands: "next," "back," and "again" (reads the step aloud).
+- **Voice — Requirement, Phase 2 (owner, 2026-10-22):** short commands: "next" (moves on and reads the new step aloud), "back," and "again" (reads the step aloud).
   - **Requirement: voice is off until a parent turns it on** for the family in family settings, behind the parent PIN. Chrome usually sends what the mic hears to Google, so it's the parent's choice.
   - Uses the browser's built-in speech recognition. **Android Chrome first.**
   - The mic button shows only where the device supports recognition, checked by feature, not by browser name. Where it's missing, nothing breaks; the on-screen buttons still work.
@@ -842,6 +842,8 @@ Each phase should be deployed and usable before the next begins.
 | **8. Helper & first run** | First-run wizard (§6.9) and the helper (§6.8), once both are specced | A new family goes from sign-up to their first queued lesson through the wizard, and kids and parents can each finish a helper task |
 | **9. Family recipes (bonus)** | My recipes with the guided entry flow, submission and owner review, the community directory (§6.10) | A parent enters a recipe through the flow, a kid cooks it, and the owner releases a submitted one to the directory, where another test family finds and adds it |
 | **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system | — |
+
+**Phase 2d waits (owner, 2026-10-22):** the installable PWA and cooking offline (Phase 2's slice 2d) are built once pretty much everything else is done, not before Phase 2e. Until then, Phase 2's "Wi-Fi off partway through" check waits with it.
 
 **Testing (every phase):** automated tests run in CI alongside the linter. At minimum they cover family scoping (no endpoint returns another family's rows or photos), lesson patches (the hard block and food-safety checks reject a bad patch, and revert restores the lesson), scaling and rounding, unit conversion, shopping-list merging, and the migration runner.
 

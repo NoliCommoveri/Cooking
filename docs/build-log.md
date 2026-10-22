@@ -1124,3 +1124,16 @@ The owner answered the four §6.17 questions:
   back, and the mic stopping when leaving cook mode. It still needs a try on a
   real Android phone (`docs/setup.md`, section 10).
 
+---
+
+## 47. 2026-10-22 — "next" reads the step; Phase 2d waits
+
+- **Owner ruling:** voice "next" moves on **and reads the new step aloud**, so
+  cooking with voice is hands-free. Built in `public/player.js`; §6.12 updated.
+  "back" still moves without reading, and "again" reads the step on demand.
+  Listening pauses while a step is read, so a "next" said during the reading
+  isn't heard; it's said again once the reading ends.
+- **Owner ruling:** Phase 2d (the installable PWA and cooking offline) waits
+  until pretty much everything else is built. Noted under the phase table in
+  §9. The next slice of Phase 2 is 2e, fix requests and lesson patches.
+

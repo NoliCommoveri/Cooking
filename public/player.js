@@ -181,6 +181,8 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
     save();
     sync();
     draw();
+    // Hands-free: the step "next" moves to is read aloud (owner, 2026-10-22).
+    if (cmd === 'next') voice.say(scaled().steps[S.step].text);
   }
   const crewNames = () => [profile, ...crew.filter((p) => S.with.includes(p.id))].map((p) => p.name);
 
