@@ -1265,3 +1265,11 @@ how far through the course they are.
   a reordered plan with removed dishes, a dish added after a plan was saved,
   prerequisite notes), the new linter checks, and migration 0005.
 
+
+## 51. 2026-10-22 — Steady profile tests
+
+- Two tests (`worker-attempts`, `worker-fixes`) picked the kid and adult
+  profiles by list order. Profiles made in the same millisecond come back in
+  random order, so the kid/adult PIN test failed about half the time in CI.
+  They now pick profiles by name. No app change.
+- Tests: 126, all passing.
