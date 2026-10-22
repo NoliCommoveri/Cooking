@@ -651,3 +651,14 @@ The owner reviewed the sample lessons in the preview.
   shrimp bouillon cubes, common in West African cooking. Egusi soup and
   pepper soup were left out because they usually depend on seafood.
 - Phase 7 is now 71 lessons to write.
+
+---
+
+## 29. 2026-10-22 — Dish art for 51–58
+
+- The owner supplied sheets 15 and 16 (ChatGPT). They're cropped into
+  `content/images/dishes/51-…` through `58-…` with `tools/crop-dish-sheet.py`,
+  and listed in `tools/dish-sheets.txt` and `content/images/LICENSES.md`.
+- Every picture was checked for unclean foods, and none are in them.
+- A review for repeats across all 75 dishes is with the owner. It proposes
+  swapping 52, 53, 54, and 55, among others; these pictures stay either way.
