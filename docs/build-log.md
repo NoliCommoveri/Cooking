@@ -1313,3 +1313,16 @@ which would have meant reworking the queue later. The owner ruled:
   review, and cooks are built once. Data model: `queue` gains `course_id` and
   `source`; new `courses`, `course_profiles`, `course_lessons`, and
   `course_skips` tables (§8.4).
+
+## 54. 2026-10-22 — Skip this recipe, and cook another
+
+- The owner asked for two one-tap controls for a parent on the weekly
+  schedule (§6.18):
+  - **Skip this recipe:** the lesson comes out of the course plan and the next
+    unfinished lesson takes its place this week. Undo is shown, and it can be
+    put back from the plan.
+  - **Cook another recipe:** pulls the next unfinished lesson into this week as
+    an extra, for this week only. Cooked, it moves the schedule up; not
+    cooked, it goes back to its place without being overdue.
+- Data model: `course_skips` (section 53) is now `course_weeks`, which holds a
+  skipped week and a week's extra lessons (§8.4).

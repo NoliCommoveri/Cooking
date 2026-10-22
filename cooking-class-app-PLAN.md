@@ -760,6 +760,8 @@ Set the whole course up once, and the app loads each week's lessons. Always on i
 - **Rollover (owner, 2026-10-22): everything shifts.** A lesson not cooked by the end of its week goes first the next week, and every later lesson moves back a week. The parent sees the planned finish and how far behind it is ("2 weeks behind"); kids don't.
 - **Cooking ahead is fine.** A lesson cooked early counts, and the rest of the schedule moves up.
 - **Skip this week**, for breaks and vacations, pushes everything back a week. A skipped week can be put back.
+- **Skip this recipe** (owner, 2026-10-22), one tap for a parent on a lesson in this week: the lesson comes out of the course plan, and the next unfinished lesson takes its place this week. It shows an Undo, and a skipped lesson can be put back from the plan at any time. Skipping a lesson another one builds on shows the prerequisite note (§4.1).
+- **Cook another recipe** (owner, 2026-10-22), one tap for a parent: pulls the next unfinished lesson into this week as an extra, for this week only. If it's cooked, the rest of the schedule moves up, as with cooking ahead. If it isn't, it goes back to its place, isn't overdue, and nothing shifts.
 - **Changing the plan mid-course** (reorder, remove, add back, change the pace or start date) recomputes the weeks. Cooks already done stay done.
 - A course's lessons are queued for all its profiles together, as one cook (§1). A profile can be on only one course at a time.
 - Switching modes never deletes a course. Turning off Plan our weeks in casual mode keeps the plan and stops loading weeks; the lessons already in the queue stay.
@@ -820,7 +822,7 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `courses` (id, family_id, name, code, school_year, start_date, per_week, created_at, archived_at) (§6.18)
 - `course_profiles` (course_id, family_id, profile_id). A profile is on one active course at most
 - `course_lessons` (course_id, family_id, lesson_id, position, removed)
-- `course_skips` (course_id, family_id, week_start)
+- `course_weeks` (course_id, family_id, week_start, skipped, extra). A skipped week, and how many extra lessons a parent pulled into a week; skipped lessons are `course_lessons.removed`
 - `queue_profiles` (queue_id, family_id, profile_id)
 - `shopping_trips` (id, family_id, created_at, ended_at)
 - `trip_lessons` (trip_id, family_id, queue_id)
