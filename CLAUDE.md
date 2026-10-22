@@ -15,6 +15,24 @@ Rules for every session in this repo. The design lives in
 
 ---
 
+## Requirements and recommendations
+
+- Items marked **Requirement** in the plan do not change without the owner's
+  say-so.
+- Items marked **Recommendation** may be proposed or questioned, but ask the
+  owner before building to one that hasn't been confirmed.
+
+---
+
+## Hard rule: no unclean foods
+
+No lesson, ingredient, substitution, or family setting may include
+biblically unclean foods (Leviticus 11, Deuteronomy 14), for any family. There
+is no override, exception, or setting that turns this off. The plan (§2.1)
+lists what counts and the hidden sources to watch for.
+
+---
+
 ## Browser-only operations
 
 **The owner has no command line.** Every setup, migration, seed, deploy, and
@@ -34,6 +52,10 @@ Migrations are bundled into the Worker and applied by pressing a button on
 - Anything the owner must do by hand in a web console (create a D1 database,
   set a secret, bind an R2 bucket) is a blocker. Say it plainly at the start of
   the session, before building.
+- **Every destructive control on `/ops` has a restore on `/ops`.** Anything
+  the owner can delete or reset from the browser, they must be able to
+  restore from the browser (for example, a backup export with an import
+  beside it). Don't add a destructive control without one.
 
 ---
 
