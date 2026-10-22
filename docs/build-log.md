@@ -713,3 +713,6 @@ The owner reviewed the sample lessons in the preview.
 - Sheet 21 (52–55: shoestring fries, chimichurri steak, tuna salad
   sandwiches, ratatouille) was cropped and checked. The tuna filling came out
   pinkish; it's waiting on the owner whether it reads as tuna.
+- Sheet 22 (60, 61, 62, 34, 48: honey-garlic chicken, crêpes, Japanese
+  curry, red beans and rice, fish and chips) was split by hand, cropped, and
+  checked, with no unclean foods. **All 75 dishes now have a picture.**
