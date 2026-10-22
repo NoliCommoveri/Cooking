@@ -261,6 +261,7 @@ The themed components need a lot of art, and every theme added later (§5.2) nee
 | Course progress | The **passport book** and world map (§5.2) |
 | Skills earned | **Enamel-pin or embroidered-patch** shapes (circles, shields, hexagons) pinned to an apron. Not text chips |
 | Rating | 1–5 **chef hats** or wooden spoons, not stars |
+| Serving picker | A "Serves" line on the recipe card with big − and + buttons and a row of little plates, one per serving (§6.6) |
 | Test-cooked | An inked **test-kitchen stamp** on the lesson card, for a lesson a parent in this family marked test-cooked. Not a pill |
 | Helper | The helper's (§6.8) avatar on a floating **Ask** button, and a chat styled to the theme |
 | Photos | Taking a photo drops a **Polaroid** onto a corkboard. The gallery is a corkboard or scrapbook |
@@ -282,6 +283,7 @@ Drawn from the Phase 0 mockup. Palette: night navy, gold, mana teal, and ember r
 | Course progress | The **skill tree** (§5.2) |
 | Skills earned | **Skill crests**: hexagon, shield, and circle badges in a crest collection. Not text chips |
 | Rating | 1–5 **gold hex gems**, not stars |
+| Serving picker | A **party-size** panel on the quest card: big − and + buttons, the count in the pixel font, and a chef's hat per serving. Fixed-size lessons show their allowed sizes as buttons (§6.6) |
 | Test-cooked | A **gold shield seal** on the quest card. Not a pill |
 | Helper | The helper's (§6.8) avatar as a guide character on a floating **Ask** button, and a chat styled as a dialogue box |
 | Photos | Taking a photo hangs a framed snapshot in a **trophy hall**. The gallery is the trophy hall |
@@ -385,6 +387,8 @@ Scaling isn't plain multiplication. Each lesson declares how it scales (§7.3):
 - **Countable items** (eggs, tortillas, chicken thighs) round to whole units. Each line can set its rounding (up, down, or nearest), with a minimum of 1.
 - **Pan size and time notes** can differ per multiplier, e.g. "at 2×, use two sheet pans" or "add 10 minutes at 2×." Cook mode shows the note for the current multiplier.
 - **"To taste" and "for the pan" lines** don't scale.
+- **The serving picker** sits on the lesson card and starts at the queued serving count, which itself starts at the family default. Changing it updates the prep amounts and any counts in the cook steps ("make 4 wells"). A fixed-multiplier lesson offers only its allowed sizes.
+- **After shopping** (recommendation, approved): if the count changes after the lesson's shopping trip, the picker shows "You shopped for N. Check there's enough before you start." It warns and doesn't block.
 - Amounts display as kitchen-measurable quantities: fractions a measuring set has (⅛, ¼, ⅓, ½, ⅔, ¾), switching to the next unit up when sensible (16 tbsp → 1 cup).
 
 ### 6.7 Units (recommendation)

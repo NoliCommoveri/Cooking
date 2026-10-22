@@ -120,6 +120,26 @@ svg use{transform-box:fill-box;transform-origin:center}
 .q-stats dt .ico{width:16px;height:16px;color:var(--q-gold)}
 .q-stats dd{margin:2px 0 0;font-weight:800;font-size:15px}
 .seal{position:absolute;top:10px;right:10px;width:74px;height:84px;z-index:2;filter:drop-shadow(0 3px 0 rgba(0,0,0,.35))}
+.serve{display:grid;gap:8px;padding:12px;background:var(--q-deep);box-shadow:inset 0 0 0 2px var(--q-edge)}
+.serve-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.serve .lbl{font-family:var(--q-disp);font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--q-mana);margin-right:auto}
+.step{width:56px;height:56px;border:0;background:var(--q-panel);box-shadow:inset 0 0 0 3px var(--q-gold);color:var(--q-gold);font-family:var(--q-disp);font-weight:700;font-size:30px;line-height:1;clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px),0 8px)}
+.step[disabled]{color:#4A5384;box-shadow:inset 0 0 0 3px var(--q-edge);cursor:not-allowed}
+.serve .num{font-family:var(--q-disp);font-weight:700;font-size:40px;line-height:1;color:#fff;min-width:2ch;text-align:center;font-variant-numeric:tabular-nums}
+.heads{display:flex;flex-wrap:wrap;gap:3px;min-height:22px}
+.heads svg{width:20px;height:20px;color:var(--q-gold)}
+.serve .meta{margin:0;font-size:14px;color:var(--q-dim)}
+.serve .warn{display:flex;gap:8px;align-items:flex-start;margin:0;padding:8px 10px;background:#2A1F2F;box-shadow:inset 3px 0 0 var(--q-ember);color:#FFD7CB;font-size:15px;line-height:1.35}
+.serve .warn .ico{width:22px;height:22px;color:var(--q-ember)}
+.serve .pan{display:flex;gap:8px;align-items:flex-start;margin:0;font-size:15px;color:var(--q-text)}
+.serve .pan .ico{width:22px;height:22px;color:var(--q-mana)}
+.sizes{display:flex;gap:8px;flex-wrap:wrap}
+.size{min-width:64px;min-height:56px;border:0;background:var(--q-panel);box-shadow:inset 0 0 0 3px var(--q-edge);color:var(--q-text);font-family:var(--q-disp);font-weight:700;font-size:22px;padding:4px 10px;display:grid;line-height:1.05;clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px),0 8px)}
+.size small{font-family:var(--q-body);font-size:12px;font-weight:700;color:var(--q-dim)}
+.size[aria-checked="true"]{background:#3A3216;box-shadow:inset 0 0 0 3px var(--q-gold);color:var(--q-gold)}
+.fixed{margin-top:12px;padding:14px;display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;align-items:center;max-width:760px}
+.fixed img{width:96px;height:auto}
+.step:focus-visible,.size:focus-visible{outline:3px solid var(--q-mana);outline-offset:2px}
 .minis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 @media (max-width:520px){.minis{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .q-mini{padding:10px;display:grid;gap:4px;align-content:start}
@@ -438,7 +458,7 @@ svg use{transform-box:fill-box;transform-origin:center}
 
   <section class="sec" id="lesson">
     <h2>Lesson card</h2>
-    <p class="lead">The quest card, with the gold test-kitchen seal on a lesson a parent has test-cooked. A lesson whose prerequisites aren't done yet shows as a locked "coming up" card instead of being hidden.</p>
+    <p class="lead">The quest card, with the gold test-kitchen seal on a lesson a parent has test-cooked. A lesson whose prerequisites aren't done yet shows as a locked "coming up" card instead of being hidden. The party-size picker starts at the queued serving count and changes the prep amounts and the cook steps. A baking lesson only offers the sizes its pan allows.</p>
     <div class="qx" id="lessonStage"></div>
   </section>
 
@@ -540,12 +560,26 @@ const THEMES=[
   {k:'truck',n:'Food Truck',s:'Later'},
   {k:'scrap',n:'Recipe Scrapbook',s:'Later'}
 ];
+/* Lesson amounts are written for 6 servings and scale per §6.6 */
+const BASE=6,FAMILY_DEFAULT=4,QUEUED=4,MAX_FREE=12;
 const ING=[
-  {id:'oil',name:'Olive oil',amt:'2 tbsp'},{id:'onion',name:'Yellow onion',amt:'1 medium, diced'},
-  {id:'pepper',name:'Red bell pepper',amt:'1, diced'},{id:'garlic',name:'Garlic',amt:'3 cloves, minced'},
-  {id:'cumin',name:'Ground cumin',amt:'1 tsp'},{id:'paprika',name:'Smoked paprika',amt:'1 tsp'},
-  {id:'tomato',name:'Crushed tomatoes',amt:'1 can (28 oz)'},{id:'egg',name:'Eggs',amt:'6 large'}
+  {id:'oil',name:'Olive oil',q:3,u:'tbsp'},
+  {id:'onion',name:'Yellow onion',q:1.5,u:'n',round:'nearest',one:'medium, diced',many:'medium, diced'},
+  {id:'pepper',name:'Red bell pepper',q:1.5,u:'n',round:'nearest',one:'whole, diced',many:'whole, diced'},
+  {id:'garlic',name:'Garlic',q:4.5,u:'n',round:'up',one:'clove, minced',many:'cloves, minced'},
+  {id:'cumin',name:'Ground cumin',q:1.5,u:'tsp'},{id:'paprika',name:'Smoked paprika',q:1.5,u:'tsp'},
+  {id:'tomato',name:'Crushed tomatoes',q:1.5,u:'half',one:'can (28 oz)',many:'cans (28 oz)'},
+  {id:'egg',name:'Eggs',q:6,u:'n',round:'up',one:'large',many:'large'}
 ];
+const FR=[[0,''],[.125,'⅛'],[.25,'¼'],[1/3,'⅓'],[.5,'½'],[2/3,'⅔'],[.75,'¾'],[1,'']];
+function frac(x){let w=Math.floor(x),f=x-w,best=FR[0];FR.forEach(c=>{if(Math.abs(c[0]-f)<Math.abs(best[0]-f))best=c});if(best[0]===1){w++;best=FR[0]}return(w?w:'')+(best[1])||'0'}
+function measure(tsp){/* show kitchen-measurable spoons: 3 tsp = 1 tbsp */if(tsp>=3){const tb=tsp/3;return frac(tb)+' tbsp'}return frac(tsp)+' tsp'}
+function amt(it,n){const x=it.q*n/BASE;
+  if(it.u==='tsp')return measure(x);
+  if(it.u==='tbsp')return measure(x*3);
+  if(it.u==='half'){const h=Math.max(.5,Math.round(x*2)/2);return frac(h)+' '+(h>1?it.many:it.one)}
+  let c=it.round==='up'?Math.ceil(x-1e-9):Math.round(x);c=Math.max(1,c);return c+' '+(c>1?it.many:it.one)}
+const eggs=n=>Math.max(1,Math.ceil(6*n/BASE-1e-9));
 const GEAR=[
   {id:'skillet',icon:'t-pans',name:'12-inch skillet',amt:'with a lid'},{id:'knife',icon:'t-knives',name:"Chef's knife",amt:'fallback icon'},
   {id:'board',icon:'t-knives',name:'Cutting board',amt:'fallback icon'},{id:'spoon',icon:'t-utensils',name:'Wooden spoon',amt:''},
@@ -555,8 +589,8 @@ const GEAR=[
 const STEPS=[
   {t:"Warm the olive oil in a 12-inch skillet over medium heat. Add the onion and pepper. Cook, stirring now and then, until soft.",timer:{label:"Onion & pepper",sec:360},look:"The onion turns see-through and golden at the edges.",lvl:'nearby',hz:'Hot stove'},
   {t:"Stir in the garlic, cumin, and paprika. Cook just until it smells toasty.",timer:{label:"Spices",sec:60},tip:"Spices burn fast. Keep the spoon moving.",lvl:'nearby',hz:'Hot stove'},
-  {t:"Pour in the tomatoes and ½ teaspoon salt. Let it bubble gently until it thickens.",timer:{label:"Simmer sauce",sec:600},look:"A spoon dragged through the sauce leaves a trail for a second.",lvl:'nearby',hz:'Hot stove'},
-  {t:"Make 6 wells in the sauce with the back of a spoon. Crack an egg into each well.",tip:"Crack each egg into a small cup first, so shell bits stay out of the pan.",lvl:'nearby',hz:'Hot stove'},
+  {t:"Pour in the tomatoes and {salt} salt. Let it bubble gently until it thickens.",timer:{label:"Simmer sauce",sec:600},look:"A spoon dragged through the sauce leaves a trail for a second.",lvl:'nearby',hz:'Hot stove'},
+  {t:"Make {eggs} wells in the sauce with the back of a spoon. Crack an egg into each well.",tip:"Crack each egg into a small cup first, so shell bits stay out of the pan.",lvl:'nearby',hz:'Hot stove'},
   {t:"Wash your hands with soap, and wipe the counter where the eggs were.",tip:"Raw egg can carry germs. Clean hands before you touch anything else.",lvl:'solo',hz:'Raw egg'},
   {t:"Cover the pan and cook until the whites are completely set.",timer:{label:"Eggs",sec:420},check:"I checked an egg white with the thermometer: 160°F",lvl:'nearby',hz:'Hot stove'}
 ];
@@ -587,7 +621,7 @@ const SHOP=[
 ];
 
 /* ---------- state ---------- */
-const S={prof:0,got:new Set(['oil','onion','pepper','garlic','cumin']),gear:new Set(['skillet','spoon','thermo']),hop:null,hopG:null,step:2,confirm:false,flip:false,rating:4,popGem:-1,photos:PHOTOS.length-1,newPhoto:false,chat:0};
+const S={serv:QUEUED,bis:6,prof:0,got:new Set(['oil','onion','pepper','garlic','cumin']),gear:new Set(['skillet','spoon','thermo']),hop:null,hopG:null,step:2,confirm:false,flip:false,rating:4,popGem:-1,photos:PHOTOS.length-1,newPhoto:false,chat:0};
 const now0=Date.now();
 const T=STEPS.map(s=>s.timer?{label:s.timer.label,sec:s.timer.sec,state:'idle',endAt:0,left:s.timer.sec,ringing:false}:null);
 T[0].state='ended';T[0].endAt=now0-3*60e3;T[0].left=0;
@@ -618,22 +652,42 @@ function renderLesson(){
     <div><p class="q-kick">Stovetop path · Quest 4</p><h5 class="q-title">Shakshuka</h5></div>
     <p class="q-skill">Skill: <b>building a sauce, then poaching eggs in it</b></p>
     <dl class="q-stats">
-      <div><dt>${ic('i-clock')}Time</dt><dd>35 min</dd></div><div><dt>${ic('i-people')}Serves</dt><dd>4</dd></div>
+      <div><dt>${ic('i-clock')}Time</dt><dd>35 min</dd></div><div><dt>${ic('i-people')}Serves</dt><dd>${S.serv}</dd></div>
       <div><dt>${ic('i-hat')}Safety</dt><dd>Adult nearby</dd></div><div><dt>${ic('i-flame')}Heat</dt><dd>Stovetop</dd></div>
     </dl>
+    ${servePicker()}
     <button type="button" class="q-btn" data-act="goto" data-to="prep">Start quest</button>
   </article>
   <div class="minis">
     <article class="q-panel q-mini"><img src="img/14-beef-bulgogi.webp" alt="" width="440" height="440"><p class="q-kick">Meat path · 14</p><h5>Beef bulgogi</h5></article>
     <article class="q-panel q-mini"><img src="img/38-buttermilk-biscuits.webp" alt="" width="440" height="440"><p class="q-kick">Dough path · 38</p><h5>Buttermilk biscuits</h5></article>
     <article class="q-panel q-mini locked"><img src="img/39-biscuits-and-gravy.webp" alt="" width="440" height="440"><p class="q-kick">Coming up · 39</p><h5>Biscuits &amp; gravy</h5><p class="q-lock">${ic('i-lock')}Cook Buttermilk biscuits and Mac and cheese first</p></article>
-  </div></div>`;
+  </div></div>
+  <article class="q-panel fixed"><img src="img/38-buttermilk-biscuits.webp" alt="" width="440" height="440"><div class="serve" style="background:none;box-shadow:none;padding:0">
+    <span class="lbl">Fixed sizes · Buttermilk biscuits</span>
+    <p class="meta">Baking only scales to sizes the pan allows, so the picker offers just these.</p>
+    <div class="sizes" role="radiogroup" aria-label="Biscuit batch size">${[[3,'½ batch'],[6,'1 batch'],[12,'2 batches']].map(([n,l])=>`<button type="button" class="size" role="radio" aria-checked="${S.bis===n}" data-act="bis" data-i="${n}">${n}<small>${l}</small></button>`).join('')}</div>
+    ${S.bis===12?`<p class="pan">${ic('t-bakeware')}At 2 batches, use two sheet pans and swap their racks halfway.</p>`:''}
+  </div></article>`;
+}
+function servePicker(){
+  const n=S.serv;
+  return`<div class="serve"><div class="serve-row"><span class="lbl">Party size</span>
+    <button type="button" class="step" data-act="serv" data-i="-1" aria-label="Fewer servings" ${n<=1?'disabled':''}>−</button>
+    <span class="num" aria-live="polite" aria-label="${n} servings">${n}</span>
+    <button type="button" class="step" data-act="serv" data-i="1" aria-label="More servings" ${n>=MAX_FREE?'disabled':''}>+</button></div>
+    <div class="heads" aria-hidden="true">${Array.from({length:n},()=>ic('i-hat','')).join('')}</div>
+    <p class="meta">Family default ${FAMILY_DEFAULT} · Queued for ${QUEUED} · ${eggs(n)} eggs, 1 per person</p>
+    ${n>8?`<p class="pan">${ic('t-pans')}Above 8, cook it in two 12-inch skillets.</p>`:''}
+    ${n!==QUEUED?`<p class="warn">${ic('i-people')}You shopped for ${QUEUED}. Check there's enough before you start.</p>`:''}
+  </div>`;
 }
 function slots(list,set,hop,act,iconOf){return list.map(it=>`<button type="button" class="q-slot ${set.has(it.id)?'on':''} ${hop===it.id?'hop':''}" data-act="${act}" data-id="${it.id}" aria-pressed="${set.has(it.id)}">${ic(iconOf(it),'ii')}<span class="nm">${it.name}</span>${it.amt?`<span class="amt">${it.amt}</span>`:''}</button>`).join('')}
 function meter(n,of){return`<div class="q-meter" style="--n:${of}" aria-hidden="true">${Array.from({length:of},(_,k)=>`<i class="${k<n?'on':''}"></i>`).join('')}</div>`}
 function renderPrep(){
   const allI=S.got.size===ING.length,allG=S.gear.size===GEAR.length;
-  $('#invStage').innerHTML=`<h4 class="q-h">Gather supplies <span>${S.got.size}/${ING.length}</span></h4>${meter(S.got.size,ING.length)}<div class="q-inv">${slots(ING,S.got,S.hop,'toggle',it=>'i-'+it.id)}</div>
+  ING.forEach(it=>it.amt=amt(it,S.serv));
+  $('#invStage').innerHTML=`<h4 class="q-h">Gather supplies <span>${S.got.size}/${ING.length}</span></h4><p class="q-kick" style="margin:-6px 0 10px">For ${S.serv} · change it on the lesson card</p>${meter(S.got.size,ING.length)}<div class="q-inv">${slots(ING,S.got,S.hop,'toggle',it=>'i-'+it.id)}</div>
   ${allI?'<p class="gate">'+ic('i-check')+'Supplies ready.</p>':'<p class="gate">'+ic('i-lock')+'Gather every supply to unlock cook mode</p>'}`;
   $('#gearStage').innerHTML=`<h4 class="q-h">Gear loadout <span>${S.gear.size}/${GEAR.length}</span></h4>${meter(S.gear.size,GEAR.length)}<div class="q-inv">${slots(GEAR,S.gear,S.hopG,'gear',it=>it.icon)}</div>
   ${allI&&allG?`<div class="gate"><button type="button" class="q-btn" data-act="goto" data-to="cook">Enter the kitchen</button></div>`:'<p class="gate">'+ic('i-lock')+'Cook mode unlocks when supplies and gear are full</p>'}`;
@@ -649,7 +703,7 @@ function renderCook(){
   const note=s.look?`<p class="q-note"><b>Should look like:</b> ${s.look}</p>`:s.tip?`<p class="q-note"><b>Tip:</b> ${s.tip}</p>`:'';
   $('#cookStage').innerHTML=`<div class="q-cook">${banner(s.lvl,s.hz)}
   <div class="q-stages" role="img" aria-label="Stage ${S.step+1} of ${STEPS.length}">${STEPS.map((_,k)=>`<i class="${k<S.step?'done':k===S.step?'cur':''}"></i>`).join('')}</div>
-  <article class="q-panel q-log ${S.flip?'flip':''}"><p class="q-kick">Stage ${S.step+1} of ${STEPS.length}</p><p class="steptxt">${s.t}</p>${note}
+  <article class="q-panel q-log ${S.flip?'flip':''}"><p class="q-kick">Stage ${S.step+1} of ${STEPS.length}</p><p class="steptxt">${s.t.replace('{salt}',measure(.75*S.serv/BASE)).replace('{eggs}',eggs(S.serv))}</p>${note}
   ${s.check?`<button type="button" class="chk" data-act="confirm" aria-pressed="${S.confirm}">${ic('i-thermo')}<span class="box">${ic('i-check','')}</span><span>${s.check}</span></button>`:''}
   ${t&&t.state==='idle'?`<button type="button" class="q-tstart" data-act="tstart" data-i="${S.step}">${ic('i-clock')}Start the ${fmt(t.sec)} timer</button>`:''}</article>
   <div class="q-nav"><button type="button" class="q-back" data-act="back" ${S.step===0?'disabled':''}>Back</button><button type="button" class="q-btn" data-act="next" ${dis?'disabled':''}>${last?'Plate it':'Next step'}</button></div></div>`;
@@ -766,6 +820,8 @@ document.addEventListener('click',e=>{
     case'ttoggle':{const t=T[i];if(t.state==='run'){t.left=rem(t);t.state='paused'}else{t.endAt=Date.now()+t.left*1000;t.state='run'}renderTimers();break}
     case'tclear':{const t=T[i];if(t.ringing)t.ringing=false;else{t.state='idle';t.left=t.sec}renderTimers();renderCook();break}
     case'tjump':{let r=T.filter(t=>t&&t.state==='run');if(!r.length){const t=T.find(t=>t&&t.state!=='run');t.state='run';t.ringing=false;r=[t]}r.forEach(t=>t.endAt=Date.now()+5000);renderTimers();renderCook();break}
+    case'serv':S.serv=Math.min(MAX_FREE,Math.max(1,S.serv+i));renderLesson();renderPrep();renderCook();break;
+    case'bis':S.bis=i;renderLesson();break;
     case'rate':S.rating=i;S.popGem=i;renderRate();break;
     case'photo':S.photos++;S.newPhoto=true;renderHall();break;
     case'photoreset':S.photos=PHOTOS.length-1;renderHall();break;

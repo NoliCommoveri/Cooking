@@ -330,5 +330,12 @@ Owner rulings on open questions:
 - Core art set drawn as SVG: 9 store-section icons and 10 tool-category icons,
   plus an oven mitt for hands-on safety and the helper's guide avatar.
 - Kitchen Quest tokens and type are shown on the page.
+- Added a serving picker at the owner's request. It's a party-size panel on
+  the quest card that starts at the queued count and updates the prep amounts
+  and the egg count in the cook steps. It warns "You shopped for 4" when the
+  count changes after shopping, and shows a two-skillet note above 8. A
+  fixed-size baking example (biscuits: 3, 6, or 12) is also shown. In the
+  plan, §6.6 now describes the picker and the after-shopping warning, and
+  §5.4 and §5.4a each gained a serving-picker row.
 - Nothing is saved, and no app code exists yet. Next: the owner reviews the
   look; once approved, Phase 0b builds Chef's Passport the same way.
