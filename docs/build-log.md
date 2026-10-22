@@ -708,3 +708,5 @@ The owner reviewed the sample lessons in the preview.
   and checked, with no unclean foods. Its plates touch, so the tool found
   only 4 dishes. It was split by hand, and the boxes are recorded in
   `tools/dish-sheets.txt`.
+- Sheet 20 (72–75: ugali with sukuma wiki, malva pudding, koshari,
+  kelewele) was split by hand, cropped, and checked, with no unclean foods.

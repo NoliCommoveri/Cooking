@@ -29,6 +29,7 @@ use in this app. Cropped from the source sheets in `source/` with
 | `source/sheet-17-foundations-3.png` | `dishes/59-spaghetti-marinara.png`, `dishes/retired/60-sloppy-joes.png`, `dishes/retired/61-croque-madame.png`, `dishes/retired/62-chicken-gumbo.png` |
 | `source/sheet-18-unit5.png` | `dishes/63-rugelach.png`, `dishes/64-beef-empanadas.png`, `dishes/65-challah.png`, `dishes/66-homemade-pizza.png` |
 | `source/sheet-19-africa-1.png` | `dishes/67-jollof-rice.png`, `dishes/68-chicken-yassa.png`, `dishes/69-suya.png`, `dishes/70-peanut-stew.png`, `dishes/71-bobotie.png` |
+| `source/sheet-20-africa-2.png` | `dishes/72-ugali-sukuma-wiki.png`, `dishes/73-malva-pudding.png`, `dishes/74-koshari.png`, `dishes/75-kelewele.png` |
 
 Dishes a later sheet replaced aren't listed under the earlier sheet. `tools/dish-sheets.txt` has the full map.
 
