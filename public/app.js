@@ -363,7 +363,7 @@ async function kitchen(id) {
   // homeschool mode and never anything about being late (§6.17).
   const when = (x) => (x.status === 'requested' ? 'You asked a grown-up'
     : x.due && !isSabbath() ? `Due ${fmtDay(x.due, { weekday: 'long' })}`
-      : x.when === 'this-week' ? 'This week' : x.when === 'next-week' ? 'For next week'
+      : x.when === 'this-week' ? 'This week'
         : x.planned_date ? fmtDay(x.planned_date) : 'Coming up');
   const upNext = mine.items.length ? [
     el('h2', { class: 'k-unit' }, quest ? 'Next quests' : 'Up next'),
@@ -743,16 +743,15 @@ const parentQueue = parentOnly(async (flash) => {
               }),
             ]),
       ] : null,
-      c.next_week ? [
+      [
         el('h4', {}, `Next week · ${fmtDay(c.next_week.week)}`),
         c.next_week.skipped ? el('p', { class: 'mut' }, 'Skipped.') : el('div', { class: 'rows' }, c.next_week.lessons.map((x) => el('div', { class: 'rowi' },
-          el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null),
-          x.queue_id ? servingsPick(x, setServings(x.queue_id)) : el('span')))),
+          el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null)))),
         el('div', { class: 'acts' }, actBtn(c.next_week.skipped ? 'Put next week back' : 'Skip next week', '', async () => {
           await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: c.next_week.week, skipped: !c.next_week.skipped });
           parentQueue();
         })),
-      ] : el('p', { class: 'mut small' }, `Next week's lessons show here from ${fmtDay(c.next_week_from, { weekday: 'long' })}, so you can shop for them.`),
+      ],
       c.skipped_recipes.length ? [el('h4', {}, 'Skipped recipes'), el('div', { class: 'rows' }, c.skipped_recipes.map((x) => el('div', { class: 'rowi' },
         el('b', {}, x.title), actBtn('Put back', '', async () => { await api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }); again(`${x.title} is back in the course.`); }))))] : null);
   };

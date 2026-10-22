@@ -1693,3 +1693,24 @@ on it.
 - **§10, new open questions:** in homeschool mode, whether a swapped week
   shows as behind, and whether next week can be swapped from Thursday;
   whether the unit's lessons count in the 75.
+
+## 69. 2026-10-22 — No Thursday preview; a swap is never behind
+
+- **Owner ruling: the Thursday preview is gone.** It was there so a parent
+  could shop Thursday or Friday for next week, but section 60 made shopping
+  work from What you'll need, which already shows the weeks ahead. Now each
+  week's course lessons join the queue on its Sunday, and kids no longer see
+  "For next week".
+  - `src/worker/schedule.js`: `PREVIEW_FROM` and `shows_next` removed.
+  - `src/worker/plan.js`: the queue sync loads this week only; the course
+    card always returns next week (for the plan and Skip next week), and a
+    profile's items are "this week" or undated.
+  - `public/app.js`: the parent's course card always shows next week, without
+    the "show here from Thursday" note; the kitchen's "For next week" label
+    is gone.
+  - Plan §6.18 and the README say so. Tests: 168, the Thursday checks removed
+    and the queue tests no longer filter out next week.
+- **Owner ruling: a swap is never behind** (§6.19). The parent approved it,
+  so the remaining lessons move back a week and the planned finish with them;
+  nobody is shown as late. Off the open questions, with the Thursday swap
+  question, which no longer applies.

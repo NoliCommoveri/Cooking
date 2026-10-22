@@ -22,8 +22,6 @@ test('on track: each week holds the next lessons at the pace', () => {
   assert.equal(s.planned_finish, '2026-09-20');
   assert.equal(s.projected_finish, '2026-09-20');
   assert.equal(s.weeks_behind, 0);
-  assert.equal(s.shows_next, false, 'next week shows from Thursday');
-  assert.equal(schedule({ course, lessons: L, today: '2026-09-10' }).shows_next, true);
 });
 
 test('a lesson not cooked goes first next week, and everything shifts', () => {
@@ -65,12 +63,10 @@ test('an extra lesson is this week only, and not overdue if it is not cooked', (
   assert.equal(next.lessons_behind, 0);
 });
 
-test('before the start, nothing is due; the first week shows from the Thursday before', () => {
+test('before the start, nothing is due, and the first week is next week', () => {
   const early = schedule({ course, lessons: L, today: '2026-08-31' });
   assert.deepEqual(ids(early.this_week), []);
   assert.deepEqual(ids(early.next_week), ['a', 'b']);
-  assert.equal(early.shows_next, false);
-  assert.equal(schedule({ course, lessons: L, today: '2026-09-03' }).shows_next, true);
   assert.equal(early.started, false);
 });
 

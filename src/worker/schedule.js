@@ -15,9 +15,6 @@ export const isDay = (s) => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(
 // (Date.getTimezoneOffset: 300 for US Central daylight time).
 export const localDay = (iso, tzOffset = 0) => fromDate(new Date(Date.parse(iso) - tzOffset * 60 * 1000));
 
-// Next week's lessons show from this weekday of the week before (§6.18), so a
-// parent can shop before the Sabbath. 4 = Thursday, counting Sunday as 0.
-export const PREVIEW_FROM = 4;
 // A lesson is due on the Friday of its week. 5 = Friday.
 export const DUE_DAY = 5;
 
@@ -107,7 +104,6 @@ export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
     this_week: week(now, now < start ? [] : a.list, cookedNow, now < start ? 0 : behindLessons, a.paced),
     next_week: week(next, b.list, [], 0),
     ahead,
-    shows_next: today >= addDays(now, PREVIEW_FROM),
     started: now >= start,
     planned_finish: planned,
     projected_finish: projected,

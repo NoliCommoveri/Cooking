@@ -15,7 +15,7 @@ import { liveLesson, livePatches } from './lessons.js';
 import { dietView } from '../content/diet.js';
 import { servingOptions } from '../content/scale.js';
 import { courseEntries, numberCourse } from '../content/course.js';
-import { schedule, weekOf, addDays, localDay, isDay, PREVIEW_FROM, DUE_DAY } from './schedule.js';
+import { schedule, weekOf, addDays, localDay, isDay, DUE_DAY } from './schedule.js';
 
 const id = () => randomHex(8);
 const ACTIVE = ['requested', 'assigned', 'shopped'];
@@ -175,8 +175,7 @@ async function courseState(env, course, fam, day, tz) {
 const activeCourses = async (env, fid) => (await env.DB.prepare('SELECT * FROM courses WHERE family_id = ? AND archived_at IS NULL ORDER BY created_at, id').bind(fid).all()).results;
 
 // Brings the queue's course rows in line with each schedule: this week's
-// unfinished lessons (and next week's, from Thursday) are queued for the course's
-// profiles; a course row that's no longer due goes, unless it was shopped for;
+// unfinished lessons are queued for the course's profiles (§6.18); a course row that's no longer due goes, unless it was shopped for;
 // a cooked one is marked cooked. Nothing happens while weeks aren't planned.
 export async function syncQueue(env, fam, day, tz) {
   const states = [];
@@ -185,9 +184,7 @@ export async function syncQueue(env, fam, day, tz) {
     const st = await courseState(env, course, fam, day, tz);
     states.push(st);
     const due = new Map();
-    for (const w of [st.sched.this_week, ...(st.sched.shows_next ? [st.sched.next_week] : [])]) {
-      for (const x of w.lessons) if (!x.done) due.set(x.id, w.week);
-    }
+    for (const x of st.sched.this_week.lessons) if (!x.done) due.set(x.id, st.sched.this_week.week);
     const { results: rows } = await env.DB.prepare("SELECT * FROM queue WHERE family_id = ? AND course_id = ? AND status IN ('assigned', 'shopped')").bind(fam.id, course.id).all();
     const stmts = [];
     const have = new Set();
@@ -292,7 +289,7 @@ function courseOut(st, fam, rowsByLesson) {
   const week = (w) => ({ week: w.week, skipped: w.skipped, extra: w.extra, lessons: w.lessons.map(lessonOut) });
   return {
     id: course.id, name: course.name, start_date: course.start_date, per_week: course.per_week, profile_ids: profiles,
-    this_week: week(sched.this_week), next_week: sched.shows_next ? week(sched.next_week) : null, next_week_from: addDays(sched.this_week.week, PREVIEW_FROM), due_day: DUE_DAY,
+    this_week: week(sched.this_week), next_week: week(sched.next_week), due_day: DUE_DAY,
     started: sched.started, planned_finish: sched.planned_finish, projected_finish: sched.projected_finish,
     weeks_behind: sched.weeks_behind, lessons_behind: sched.lessons_behind,
     total: sched.total, done: sched.done, unwritten: lessons.unwritten, hidden: lessons.hidden,
@@ -430,8 +427,7 @@ export function register(on) {
   // ---------- a profile's own list, and asking for a lesson (§6.1) ----------
 
   // What a profile has coming up, for its kitchen. Kids see "due Friday" in
-  // homeschool mode and never anything about being late (§6.17); next week's
-  // lessons, shown from Thursday for shopping, say "for next week".
+  // homeschool mode and never anything about being late (§6.17).
   on('GET', '/api/profiles/([0-9a-f]{16})/queue', async (req, env, body, [pid]) => {
     const s = await requireSession(env, req);
     if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) fail(404, 'not_found', 'No such profile.');
@@ -458,7 +454,7 @@ export function register(on) {
         id: r.id, lesson_id: r.lesson_id, title: lessonById[r.lesson_id]?.title ?? r.lesson_id, label: labels[r.lesson_id] ?? null,
         image: lessonById[r.lesson_id]?.image ?? null, status: r.status, servings: r.servings, planned_date: r.planned_date, profile_ids: who[r.id] ?? [],
         shopped_for: shopped[r.id] ?? null,
-        when: r.week_start ? (r.week_start <= thisWeek ? 'this-week' : 'next-week') : null,
+        when: r.week_start ? 'this-week' : null,
         due: r.week_start && r.week_start <= thisWeek && fam.mode === 'homeschool' && !(r.course_id && extras.has(r.lesson_id)) ? addDays(thisWeek, DUE_DAY) : null,
       })),
       labels: mine ? mine.lessons.labels : null,
