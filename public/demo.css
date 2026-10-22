@@ -52,3 +52,7 @@ button.c-dish{cursor:pointer;border-color:var(--h-acc)}
 .sk .mut{font-size:14px}
 .sk .found{font-family:var(--h-body);font-size:13px;font-weight:800;color:var(--h-acc);letter-spacing:.04em;text-transform:uppercase}
 .d-foot{margin-top:40px;color:var(--h-mut);font-size:14px}
+.pitem .q small{display:block;font-size:12px}
+.pitem{grid-template-columns:30px minmax(0,1fr);align-items:start}
+.pitem .bx{margin-top:2px}
+.pitem .q{grid-column:2;text-align:left;color:var(--h-fg);font-weight:800;margin-top:-4px}

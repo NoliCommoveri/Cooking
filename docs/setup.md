@@ -132,6 +132,23 @@ After this update deploys, press **Apply pending** on `/ops` (migration 0006).
    undoes it.
 5. Press **I've test-cooked this** on a lesson. **Unmark** undoes it.
 
+## 13. Check it (the Phase 3b test)
+
+After this update deploys, press **Apply pending** on `/ops` (migration 0007).
+
+1. In a test family, queue three lessons (**Parents → Queue → Add a lesson**).
+2. **Parents → Shopping**: all three are ticked. Press **Make the list**. It's
+   grouped by store section, each line says what to buy (whole packages) and
+   what the recipes use.
+3. Tick a few items, close the app, and open **Shopping** again: they're still
+   ticked.
+4. **Pantry staples**: tick salt and olive oil, save. On the list they move to
+   **You should have**.
+5. **End trip**. The lessons show "Shopped for" on the Queue screen. Open one
+   from a kid's kitchen and change the serving count: the card says "You
+   shopped for 6." **Undo** (or **Reopen** under Recent trips) puts the trip
+   back.
+
 ## Backups and recovery
 
 - **Download export.json** saves everything. **Restore from export.json**

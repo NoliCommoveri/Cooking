@@ -16,6 +16,7 @@ import { dietView } from '../content/diet.js';
 import { FREE_MAX, servingOptions } from '../content/scale.js';
 import { numberCourse } from '../content/course.js';
 import { register as registerPlan, markCooked } from './plan.js';
+import { register as registerTrips } from './trips.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -678,8 +679,10 @@ on('POST', '/api/owner/parent-password', async (req, env, body) => {
   return { ok: true };
 });
 
-// The queue, courses, requests, safety review, and test-cooked (plan.js).
+// The queue, courses, requests, safety review, and test-cooked (plan.js);
+// shopping trips and the pantry (trips.js).
 registerPlan(on);
+registerTrips(on);
 
 // ---------- dispatch ----------
 

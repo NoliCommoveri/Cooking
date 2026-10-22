@@ -434,9 +434,13 @@ The parent starts a **shopping trip** by picking queued lessons. A trip holds it
 5. Remove pantry staples (keep them viewable in a collapsed "you should have" section).
 6. Round up to **purchase units** (e.g. 15 oz can, dozen eggs, bunch, head), with the exact amount used shown alongside.
 7. Group by **store section** (meat & fish, produce, herbs, dairy & eggs, bread & tortillas, grains & pasta, canned & jarred, sauces, oils & vinegars, baking, specialty, frozen, spices).
-8. Mark perishables. If lessons have planned dates, show perishables only for lessons within the next N days (default 7, adjustable). Lessons with no planned date always show their perishables, marked "no date set."
+8. Mark perishables. If lessons have planned dates, show perishables only for lessons within the next N days (default 7, adjustable). A course lesson's date is its week's Sunday (§6.18). Lessons with no planned date always show their perishables, marked "no date set."
 9. Lines with no amount ("salt to taste," "oil for the pan") appear once, with no quantity.
 10. Check-off state persists, so the list survives closing the app mid-shop.
+- A family has one open trip at a time. Starting one ticks every queued lesson not yet shopped for; next week's course lessons are there from Thursday (§6.18). Lessons can be added to or taken off an open trip. **End trip** and **Cancel** each have an undo (Reopen).
+- A course lesson on an open trip, or already shopped for, stays in the queue if the schedule moves it.
+- Package sizes are typical US store sizes, set in `content/ingredients.json` (`purchaseUnit`), for the owner to check.
+
 11. The list works offline. Stores often have weak signal, so the trip is cached on the phone, and check-offs sync when the connection returns. **This waits with Phase 2d** (owner, 2026-10-22); until then check-offs are saved to the account.
 
 A lesson queued once for several profiles is one cook, so it's counted once. The same lesson queued as two separate items is two cooks, and counted twice.
@@ -585,7 +589,7 @@ content/
   "section": "baking",
   "baseUnit": "g",
   "conversions": { "cup": 125, "tbsp": 7.8 },
-  "purchaseUnit": { "label": "5 lb bag", "amount": 2268 },
+  "purchaseUnit": { "label": "5-lb bag", "many": "5-lb bags", "amount": 2268 },
   "perishable": false,
   "animalSource": null,
   "animalPart": null,
@@ -828,8 +832,8 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `course_lessons` (course_id, family_id, lesson_id, position, removed)
 - `course_weeks` (course_id, family_id, week_start, skipped, extra). A skipped week, and how many extra lessons a parent pulled into a week; skipped lessons are `course_lessons.removed`
 - `queue_profiles` (queue_id, family_id, profile_id)
-- `shopping_trips` (id, family_id, created_at, ended_at)
-- `trip_lessons` (trip_id, family_id, queue_id)
+- `shopping_trips` (id, family_id, created_at, ended_at, cancelled_at, perish_days)
+- `trip_lessons` (trip_id, family_id, queue_id, servings). servings is what the trip bought for, for "You shopped for N" (§6.6)
 - `attempts` (id, family_id, queue_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state, eater_rating)
 - `attempt_profiles` (attempt_id, family_id, profile_id, rating, notes). Every profile on the cook, each with its own reflection
 - `test_cooks` (family_id, lesson_id, lesson_version, parent_id, cooked_on)

@@ -4,8 +4,7 @@
 // course, and the skills view.
 import { openLesson } from './player.js';
 import { dietView } from './lib/diet.js';
-import { scaleLesson } from './lib/scale.js';
-import { toBase, formatVolume, formatWeight, formatButter, mixed } from './lib/units.js';
+import { shoppingList } from './lib/shop.js';
 import { numberCourse } from './lib/course.js';
 
 const root = document.getElementById('demo');
@@ -17,8 +16,11 @@ const [R, C] = await Promise.all([getJSON('/content/registry.json'), getJSON('/c
 const lessons = Object.fromEntries(await Promise.all(R.lessons.map(async (l) => [l.id, await getJSON(`/content/lessons/${l.id}.json`)])));
 
 const DIET = { nuts: 'Tree nuts', peanuts: 'Peanuts', dairy: 'Dairy', egg: 'Eggs', gluten: 'Gluten', fish: 'Fish', meat: 'Meat and poultry' };
-const SECTION_ICON = { produce: 's-produce', meat: 's-meat', fish: 's-fish', dairy: 's-dairy', bakery: 's-bakery', pantry: 's-pantry', canned: 's-canned', frozen: 's-frozen', spices: 's-pantry' };
-const SECTION_NAME = { produce: 'Produce', meat: 'Meat', fish: 'Fish', dairy: 'Dairy and eggs', bakery: 'Bakery', pantry: 'Pantry', canned: 'Canned and jarred', frozen: 'Frozen', spices: 'Spices' };
+const SECTION_ICON = {
+  produce: 's-produce', herbs: 's-produce', 'meat-fish': 's-meat', 'dairy-eggs': 's-dairy', 'bread-tortillas': 's-bakery',
+  'grains-pasta': 's-pantry', 'canned-jarred': 's-canned', sauces: 's-canned', 'oils-vinegars': 's-pantry', baking: 's-bakery',
+  spices: 's-pantry', specialty: 's-pantry', frozen: 's-frozen',
+};
 const DEMO_SHOP = ['shakshuka', 'beef-bulgogi'].filter((id) => lessons[id]);
 // Lesson numbers in the suggested course order (a family's own plan can change them).
 const { labels: NUM, total: TOTAL } = numberCourse(C.dishes);
@@ -75,38 +77,15 @@ function tryView() {
     ${hidden.length ? `<p class="d-hidden">Hidden for this diet: ${hidden.map((l) => esc(l.title)).join(', ')}</p>` : ''}</section>`;
 }
 
-// ---------- shopping list preview (§6.3, simplified: merged by ingredient and base unit) ----------
+// ---------- shopping list preview (§6.3, the same list as a real trip) ----------
 function shopView() {
-  const items = new Map(), from = (id, title) => { const it = items.get(id); if (!it.from.includes(title)) it.from.push(title); };
   const shopLessons = DEMO_SHOP.map((id) => lessons[id]).filter((L) => dietView(L, R.ingredients, V.diet).visible);
-  for (const L of shopLessons) {
-    const v = dietView(L, R.ingredients, V.diet);
-    const swap = Object.fromEntries(v.applied.map((x) => [x.for, x.use]));
-    const scaled = scaleLesson(L, R.ingredients, 6);
-    L.ingredients.forEach((line, k) => {
-      if (v.leftOut.includes(line.ingredient)) return;
-      const src = R.ingredients[line.ingredient], id = swap[line.ingredient] ?? line.ingredient, ing = R.ingredients[id];
-      if (!items.has(id)) items.set(id, { id, ing, base: 0, texts: [], from: [] });
-      const it = items.get(id);
-      const base = line.amount == null ? null : toBase(line.scale === false ? line.amount : line.amount * 6 / L.servings, line.unit, src);
-      if (base == null) it.texts.push(scaled.ingredients[k].amount); else it.base += base;
-      from(id, L.title);
-    });
-  }
-  const amount = (it) => {
-    if (!it.base) return it.texts[0] ?? '';
-    const i = it.ing;
-    const shown = i.measure === 'butter' ? formatButter(it.base) : i.baseUnit === 'ml' ? formatVolume(it.base) : i.baseUnit === 'g' ? formatWeight(it.base)
-      : mixed(Math.ceil(it.base));
-    return shown;
-  };
-  const bySection = {};
-  for (const it of items.values()) (bySection[it.ing.section] ??= []).push(it);
-  const order = ['produce', 'meat', 'fish', 'dairy', 'bakery', 'canned', 'pantry', 'spices', 'frozen'];
-  const total = items.size, done = V.checked.filter((id) => items.has(id)).length;
+  const list = shoppingList({ lessons: shopLessons.map((L) => ({ lesson: L, servings: 6, date: null })), registry: R.ingredients, filters: V.diet });
+  const all = list.sections.flatMap((s) => s.items);
+  const total = all.length, done = V.checked.filter((id) => all.some((x) => x.id === id)).length;
   return `<section class="parent"><h3>Shopping trip</h3><p class="sub">${shopLessons.map((L) => `${esc(L.title)} (serves 6)`).join(' and ') || 'Nothing to shop for with this diet'} · ${done} of ${total} in the cart</p>
-    ${order.filter((s) => bySection[s]).map((s) => `<div class="psec"><h4>${ic(SECTION_ICON[s], '')}${SECTION_NAME[s]}</h4>${bySection[s].map((it) => `<button type="button" class="pitem" data-check="${esc(it.id)}" aria-pressed="${V.checked.includes(it.id)}"><span class="bx">${ic('i-check', '')}</span><span class="nm">${esc(it.ing.name)}${it.from.length > 1 ? `<small>For both dishes</small>` : `<small>${esc(it.from[0])}</small>`}</span><span class="q">${esc(amount(it))}</span></button>`).join('')}</div>`).join('')}
-    <p class="small mut" style="margin-top:12px">A preview. The real list also drops pantry staples you always have, rounds to what the store sells, and works offline.</p></section>`;
+    ${list.sections.map((s) => `<div class="psec"><h4>${ic(SECTION_ICON[s.id] ?? 's-pantry', '')}${esc(s.name)}</h4>${s.items.map((it) => `<button type="button" class="pitem" data-check="${esc(it.id)}" aria-pressed="${V.checked.includes(it.id)}"><span class="bx">${ic('i-check', '')}</span><span class="nm">${esc(it.name)}${it.from.length > 1 ? `<small>For both dishes</small>` : `<small>${esc(it.from[0])}</small>`}</span><span class="q">${esc(it.buy ?? it.used ?? '')}${it.buy && it.used && it.used !== it.buy ? `<small>The recipes use ${esc(it.used)}</small>` : ''}</span></button>`).join('')}</div>`).join('')}
+    <p class="small mut" style="margin-top:12px">A preview. A family's list also sets aside the pantry staples they always have, holds perishables until closer to the day, and remembers what's in the cart.</p></section>`;
 }
 
 // ---------- the whole course ----------

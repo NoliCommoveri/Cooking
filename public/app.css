@@ -224,3 +224,21 @@ select{font:inherit;padding:8px 10px;border-radius:10px;border:1.5px solid var(-
 .askline .ico{width:1.3em;height:1.3em;vertical-align:-.25em;margin-right:6px}
 .q-back .ico,.p-back .ico{width:22px;height:22px;vertical-align:-.3em;margin-right:6px}
 .kitchen .sabbath{margin:6px 0 14px;background:var(--h-card);color:var(--h-fg)}
+
+/* Shopping (Phase 3b) */
+.shoplist .sub{margin:0;color:var(--h-mut)}
+.psec{margin-top:6px}
+.psec h4{display:flex;align-items:center;gap:8px;margin:8px 0 4px;font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--h-mut);font-weight:800}
+.psec h4 svg{width:28px;height:28px}
+.psec summary{cursor:pointer;font-weight:800;min-height:44px;display:flex;align-items:center}
+.pitem{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;min-height:56px;border:0;border-bottom:1px solid var(--h-line);background:transparent;color:inherit;text-align:left;padding:6px 2px;font:inherit;cursor:pointer}
+.pitem .bx{width:26px;height:26px;border:2.5px solid var(--h-mut);border-radius:6px;display:grid;place-items:center}
+.pitem .bx svg{width:20px;height:20px;opacity:0;color:var(--h-acc)}
+.pitem[aria-pressed="true"] .bx{border-color:var(--h-acc)}
+.pitem[aria-pressed="true"] .bx svg{opacity:1}
+.pitem[aria-pressed="true"] .nm{text-decoration:line-through;color:var(--h-mut)}
+.pitem .nm small,.pitem .q small{display:block;color:var(--h-mut);font-size:13px;text-decoration:none}
+.pitem .q{font-weight:800;font-size:15px;text-align:right;max-width:45%}
+.pitem{grid-template-columns:30px minmax(0,1fr);align-items:start}
+.pitem .bx{margin-top:2px}
+.pitem .q{grid-column:2;text-align:left;max-width:none;margin-top:-6px}

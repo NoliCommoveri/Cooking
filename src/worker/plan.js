@@ -35,7 +35,7 @@ const placeholders = (list) => list.map(() => '?').join(', ');
 
 // ---------- small helpers ----------
 
-const family = (env, fid) => env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(fid).first();
+export const family = (env, fid) => env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(fid).first();
 export const weeksOn = (fam) => fam.mode === 'homeschool' || Boolean(fam.plan_weeks);
 const visible = (fam) => {
   const filters = JSON.parse(fam.diet_filters);
@@ -48,11 +48,11 @@ const nearestSize = (L, n) => {
 
 // The family's calendar day, from the browser's offset (?tz=300). A missing or
 // odd offset counts as UTC.
-const tzOf = (req) => {
+export const tzOf = (req) => {
   const tz = Number(new URL(req.url).searchParams.get('tz') ?? 0);
   return Number.isInteger(tz) && Math.abs(tz) <= 840 ? tz : 0;
 };
-const today = (req) => localDay(new Date().toISOString(), tzOf(req));
+export const today = (req) => localDay(new Date().toISOString(), tzOf(req));
 
 async function familyProfiles(env, fid, ids) {
   const list = Array.isArray(ids) ? [...new Set(ids.map(String))] : [];
@@ -172,13 +172,17 @@ async function courseState(env, course, fam, day, tz) {
   return { course, profiles, lessons, done, sched: schedule({ course, lessons: lessons.usable, done, weeks, today: day }) };
 }
 
+export const OPEN_TRIP_LESSONS = `SELECT tl.queue_id FROM trip_lessons tl JOIN shopping_trips t ON t.id = tl.trip_id
+  WHERE t.family_id = ? AND t.ended_at IS NULL AND t.cancelled_at IS NULL`;
+const openTripLessons = async (env, fid) => new Set((await env.DB.prepare(OPEN_TRIP_LESSONS).bind(fid).all()).results.map((r) => r.queue_id));
+
 const activeCourses = async (env, fid) => (await env.DB.prepare('SELECT * FROM courses WHERE family_id = ? AND archived_at IS NULL ORDER BY created_at, id').bind(fid).all()).results;
 
 // Brings the queue's course rows in line with each schedule: this week's
 // unfinished lessons (and next week's, from Thursday) are queued for the course's
 // profiles; a course row that's no longer due goes, unless it was shopped for;
 // a cooked one is marked cooked. Nothing happens while weeks aren't planned.
-async function syncQueue(env, fam, day, tz) {
+export async function syncQueue(env, fam, day, tz) {
   const states = [];
   if (!weeksOn(fam)) return states;
   for (const course of await activeCourses(env, fam.id)) {
@@ -191,13 +195,15 @@ async function syncQueue(env, fam, day, tz) {
     const { results: rows } = await env.DB.prepare("SELECT * FROM queue WHERE family_id = ? AND course_id = ? AND status IN ('assigned', 'shopped')").bind(fam.id, course.id).all();
     const stmts = [];
     const have = new Set();
+    // A lesson on an open shopping trip stays, whatever the schedule says now.
+    const onTrip = await openTripLessons(env, fam.id);
     for (const r of rows) {
       have.add(r.lesson_id);
       if (st.done[r.lesson_id]) {
         stmts.push(env.DB.prepare("UPDATE queue SET status = 'cooked', closed_at = ? WHERE id = ?").bind(now(), r.id));
       } else if (due.has(r.lesson_id)) {
         if (r.week_start !== due.get(r.lesson_id)) stmts.push(env.DB.prepare('UPDATE queue SET week_start = ? WHERE id = ?').bind(due.get(r.lesson_id), r.id));
-      } else if (r.status === 'assigned') {
+      } else if (r.status === 'assigned' && !onTrip.has(r.id)) {
         stmts.push(env.DB.prepare('DELETE FROM queue_profiles WHERE queue_id = ? AND family_id = ?').bind(r.id, fam.id));
         stmts.push(env.DB.prepare('DELETE FROM queue WHERE id = ? AND family_id = ?').bind(r.id, fam.id));
       }
@@ -231,9 +237,19 @@ export async function markCooked(env, fid, lessonId, profileIds, attemptId) {
   return q.id;
 }
 
+// How many servings a queued lesson was shopped for, for the "You shopped for
+// N" note on the lesson card (§6.6). From the latest ended trip it was on.
+export async function shoppedFor(env, fid, queueIds) {
+  if (!queueIds.length) return {};
+  const { results } = await env.DB.prepare(`SELECT tl.queue_id, tl.servings, t.ended_at FROM trip_lessons tl JOIN shopping_trips t ON t.id = tl.trip_id
+      WHERE tl.family_id = ? AND t.ended_at IS NOT NULL AND tl.queue_id IN (${placeholders(queueIds)}) ORDER BY t.ended_at`).bind(fid, ...queueIds).all();
+  return Object.fromEntries(results.map((r) => [r.queue_id, r.servings]));
+}
+
+
 // ---------- what the screens get ----------
 
-async function queueProfiles(env, fid, ids) {
+export async function queueProfiles(env, fid, ids) {
   if (!ids.length) return {};
   const out = {};
   // D1 binds 100 values at most.
@@ -247,7 +263,7 @@ async function queueProfiles(env, fid, ids) {
 
 const suggestedLabels = numberCourse(LIBRARY.course).labels;
 
-function itemOut(r, who, labels = suggestedLabels) {
+export function itemOut(r, who, labels = suggestedLabels) {
   const L = lessonById[r.lesson_id];
   return {
     id: r.id, lesson_id: r.lesson_id, title: L?.title ?? dishById[r.lesson_id]?.title ?? r.lesson_id, label: labels[r.lesson_id] ?? null,
@@ -423,6 +439,7 @@ export function register(on) {
         WHERE q.family_id = ? AND qp.profile_id = ? AND q.status IN ('requested', 'assigned', 'shopped') ORDER BY q.week_start IS NULL, q.week_start, q.created_at`,
     ).bind(s.family_id, pid).all();
     const who = await queueProfiles(env, s.family_id, rows.map((r) => r.id));
+    const shopped = await shoppedFor(env, s.family_id, rows.filter((r) => r.status === 'shopped').map((r) => r.id));
     const mine = states.find((st) => st.profiles.includes(pid));
     // A profile on a course takes its lesson numbers from the course's plan (§4.1).
     const labels = mine ? mine.lessons.labels : suggestedLabels;
@@ -436,6 +453,7 @@ export function register(on) {
       items: rows.filter((r) => r.status !== 'requested' || !listed.has(r.lesson_id)).map((r) => ({
         id: r.id, lesson_id: r.lesson_id, title: lessonById[r.lesson_id]?.title ?? r.lesson_id, label: labels[r.lesson_id] ?? null,
         image: lessonById[r.lesson_id]?.image ?? null, status: r.status, servings: r.servings, planned_date: r.planned_date, profile_ids: who[r.id] ?? [],
+        shopped_for: shopped[r.id] ?? null,
         when: r.week_start ? (r.week_start <= thisWeek ? 'this-week' : 'next-week') : null,
         due: r.week_start && r.week_start <= thisWeek && fam.mode === 'homeschool' && !(r.course_id && extras.has(r.lesson_id)) ? addDays(thisWeek, DUE_DAY) : null,
       })),
@@ -579,7 +597,8 @@ export function register(on) {
   on('POST', '/api/courses/([0-9a-f]{16})/end', async (req, env, body, [cid]) => {
     const s = await requireParent(env, req);
     const course = await ownCourse(env, s, cid);
-    const { results: rows } = await env.DB.prepare("SELECT id FROM queue WHERE family_id = ? AND course_id = ? AND status = 'assigned'").bind(s.family_id, course.id).all();
+    const { results: rows } = await env.DB.prepare(`SELECT id FROM queue WHERE family_id = ? AND course_id = ? AND status = 'assigned'
+        AND id NOT IN (${OPEN_TRIP_LESSONS})`).bind(s.family_id, course.id, s.family_id).all();
     await env.DB.batch([
       env.DB.prepare('UPDATE courses SET archived_at = ? WHERE id = ? AND family_id = ?').bind(now(), course.id, s.family_id),
       ...rows.flatMap((r) => [

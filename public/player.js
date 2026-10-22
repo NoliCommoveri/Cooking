@@ -137,7 +137,8 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // the suggested order's numbers. ask: { status, send() } for "I want to make
 // this" (a kid) or "Cook this" (an adult); status is null, or where the lesson
 // is in the profile's queue, and send() resolves to the new one (§6.1).
-// seed: { servings, with } from the queued lesson, for a fresh cook.
+// seed: { servings, with, shopped } from the queued lesson, for a fresh cook;
+// shopped is the serving count its shopping trip bought for (§6.6).
 export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null, fixes = null, labels = null, total = null, ask = null, seed = null }) {
   const [R, L] = await Promise.all([getRegistry(), getLesson(lessonId)]);
   const num = (id) => (labels ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null;
@@ -263,6 +264,11 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
     return `<div class="kwcard" role="note"><b>${esc(t.word)}</b><p>${esc(t.means)}</p>${taught ? `<small>Practiced in ${esc(lessonRef(t.taughtIn, taught))}</small>` : ''}<button type="button" class="kwclose" data-act="term" data-id="">Got it</button></div>`;
   }
 
+  // After shopping, a different count warns and doesn't block (§6.6).
+  const shoppedNote = (cls) => (seed?.shopped && S.servings !== seed.shopped
+    ? `<p class="${cls}" role="note">${ic('i-people')}You shopped for ${seed.shopped}. Check there's enough before you start.</p>`
+    : '');
+
   // ---------- the lesson card ----------
   function cardView() {
     const cu = R.cuisines[L.cuisine]?.name ?? L.cuisine;
@@ -272,11 +278,11 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
       ? `<div class="serve"><span class="lbl">Party size</span>${fixedSizes
         ? `<div class="sizes" role="radiogroup" aria-label="Servings">${options.map((n) => `<button type="button" class="size" role="radio" aria-checked="${n === S.servings}" data-act="serv-set" data-n="${n}">${n}</button>`).join('')}</div>`
         : `<div class="serve-row"><button type="button" class="step" data-act="serv" data-i="-1" aria-label="Fewer servings" ${S.servings <= options[0] ? 'disabled' : ''}>−</button><span class="num" aria-live="polite">${S.servings}</span><button type="button" class="step" data-act="serv" data-i="1" aria-label="More servings" ${S.servings >= options.at(-1) ? 'disabled' : ''}>+</button></div><div class="heads" aria-hidden="true">${ic('i-hat', '').repeat(S.servings)}</div>`}
-        <p class="meta">Your family's usual: ${family.default_servings}</p>${sc.note ? `<p class="pan">${ic('t-pans')}${esc(sc.note)}</p>` : ''}</div>`
+        <p class="meta">Your family's usual: ${family.default_servings}</p>${shoppedNote('warn')}${sc.note ? `<p class="pan">${ic('t-pans')}${esc(sc.note)}</p>` : ''}</div>`
       : `<div class="p-serve">${fixedSizes
         ? `<div class="p-serve-row"><span class="p-lbl">Serves</span>${options.map((n) => `<button type="button" class="p-step" style="width:auto;padding:0 14px" aria-pressed="${n === S.servings}" data-act="serv-set" data-n="${n}">${n}</button>`).join('')}</div>`
         : `<div class="p-serve-row"><span class="p-lbl">Serves</span><button type="button" class="p-step" data-act="serv" data-i="-1" aria-label="Fewer servings" ${S.servings <= options[0] ? 'disabled' : ''}>−</button><span class="p-num" aria-live="polite">${S.servings}</span><button type="button" class="p-step" data-act="serv" data-i="1" aria-label="More servings" ${S.servings >= options.at(-1) ? 'disabled' : ''}>+</button></div><div class="p-plates" aria-hidden="true">${'<svg viewBox="0 0 100 100"><use href="/icons.svg#plate"/></svg>'.repeat(S.servings)}</div>`}
-        <p class="p-small">Your family's usual: ${family.default_servings}</p>${sc.note ? `<p class="p-pan">${ic('t-pans')}${esc(sc.note)}</p>` : ''}</div>`;
+        <p class="p-small">Your family's usual: ${family.default_servings}</p>${shoppedNote('p-pan')}${sc.note ? `<p class="p-pan">${ic('t-pans')}${esc(sc.note)}</p>` : ''}</div>`;
     const changes = [
       ...view.applied.map((x) => `Use ${esc(name(x.use).toLowerCase())} instead of ${esc(name(x.for).toLowerCase())}.`),
       ...view.leftOut.map((id) => `Leave out the ${esc(name(id).toLowerCase())}.`),

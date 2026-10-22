@@ -407,7 +407,7 @@ async function lesson(profileId, lessonId) {
         try { return (await api('POST', `/api/profiles/${p.id}/ask`, { lesson_id: lessonId })).status; } catch (err) { showToast(err.message); throw err; }
       },
     },
-    seed: queued ? { servings: queued.servings, with: (queued.profile_ids ?? []).filter((x) => x !== p.id) } : null,
+    seed: queued ? { servings: queued.servings, with: (queued.profile_ids ?? []).filter((x) => x !== p.id), shopped: queued.shopped_for } : null,
     fixes: {
       suggest: (ctx) => suggestFix(p, ctx),
       list: async (lid) => (await api('GET', `/api/lessons/${encodeURIComponent(lid)}/fixes`)).fixes,
@@ -501,7 +501,7 @@ function suggestFix(profile, { lesson, stepId, servings, ingredients }) {
 // ---------- parent area ----------
 
 function parentTabs(current) {
-  const tabs = [['queue', 'Queue'], ['courses', 'Courses'], ['profiles', 'Profiles'], ['family', 'Family'], ['parents', 'Logins']];
+  const tabs = [['queue', 'Queue'], ['shopping', 'Shopping'], ['courses', 'Courses'], ['profiles', 'Profiles'], ['family', 'Family'], ['parents', 'Logins']];
   if (me.parent.is_owner) tabs.push(['owner', 'Owner'], ['fixes', 'Fix requests']);
   return el('nav', { class: 'tabs', 'aria-label': 'Parent screens' },
     tabs.map(([k, label]) => el('a', { href: `#/parent/${k}`, 'aria-current': k === current ? 'page' : null }, label)));
@@ -943,6 +943,133 @@ const courseEditor = parentOnly(async (cid) => {
     }, { extra }));
 });
 
+// ---------- shopping trips and the pantry (§6.3) ----------
+
+const SECTION_ICON = {
+  produce: 's-produce', herbs: 's-produce', 'meat-fish': 's-meat', 'dairy-eggs': 's-dairy', 'bread-tortillas': 's-bakery',
+  'grains-pasta': 's-pantry', 'canned-jarred': 's-canned', sauces: 's-canned', 'oils-vinegars': 's-pantry', baking: 's-bakery',
+  spices: 's-pantry', specialty: 's-pantry', frozen: 's-frozen',
+};
+const sectionIcon = (sid) => art(`<svg aria-hidden="true"><use href="/icons.svg#${SECTION_ICON[sid] ?? 's-pantry'}"/></svg>`);
+const PERISH_CHOICES = [3, 5, 7, 10, 14];
+
+// One line of the list: what to buy, how much the recipes use, and which lessons.
+const itemNote = (x) => [x.from.join(' · '), x.optional ? 'optional' : null, x.perishable && x.no_date ? 'no date set' : null].filter(Boolean).join(' · ');
+
+const shopping = parentOnly(async (flash) => {
+  const [d, { profiles }] = await Promise.all([api('GET', `/api/trips?${tz()}`), api('GET', '/api/profiles')]);
+  const names = (ids) => ids.map((id) => profiles.find((p) => p.id === id)?.name ?? 'Someone').join(' & ');
+  const again = (msg, undo) => shopping(el('p', { class: 'ok flash', role: 'status' }, msg, ' ',
+    undo ? el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await undo(); shopping(); } }, 'Undo') : null));
+  const when = (x) => (x.date ? fmtDay(x.date) : 'No date set');
+  const lessonLine = (x) => `${x.title} · serves ${x.servings} · ${x.profile_ids.length ? `for ${names(x.profile_ids)} · ` : ''}${when(x)}`;
+  const pantryLink = el('p', { class: 'mut small' }, 'Staples you always have drop to "You should have." ', el('a', { href: '#/parent/pantry' }, 'Pantry staples'));
+
+  // Lessons to pick from, all ticked to start.
+  const picker = (list) => el('div', { class: 'stack' }, list.map((x) => el('label', { class: 'choice' },
+    el('input', { type: 'checkbox', name: `q_${x.id}`, value: x.id, checked: true }),
+    el('span', {}, lessonLine(x)))));
+  const picked = (v, list) => list.filter((x) => v[`q_${x.id}`]).map((x) => x.id);
+  const perishSel = (value, onchange) => el('label', { class: 'f inline' }, 'Perishables for the next',
+    el('select', { name: 'perish_days', onchange }, PERISH_CHOICES.map((n) => el('option', { value: n, selected: n === value }, `${n} days`))));
+
+  const t = d.trip;
+  if (!t) {
+    parentScreen('shopping', flash ?? null,
+      el('h2', {}, 'Start a shopping trip'),
+      d.candidates.length
+        ? form([
+          el('p', { class: 'mut small', style: 'margin:0' }, "Pick the lessons you're shopping for. Next week's course lessons show from Thursday."),
+          picker(d.candidates), perishSel(7),
+        ], 'Make the list', async (v) => {
+          const ids = picked(v, d.candidates);
+          if (!ids.length) throw new Error('Pick at least one lesson.');
+          await api('POST', '/api/trips', { queue_ids: ids, perish_days: Number(v.perish_days) });
+          shopping();
+        })
+        : el('p', { class: 'card mut' }, 'Nothing in the queue is waiting to be shopped for.'),
+      pantryLink,
+      d.recent.length ? [el('h3', {}, 'Recent trips'), el('div', { class: 'card' }, el('div', { class: 'rows' }, d.recent.map((r) => el('div', { class: 'rowi' },
+        el('div', {}, el('b', {}, `Started ${fmtDay(r.created_at.slice(0, 10))}`), el('small', {}, r.cancelled_at ? 'Cancelled' : `Ended ${fmtDay(r.ended_at.slice(0, 10))}`)),
+        actBtn('Reopen', '', async () => { await api('POST', `/api/trips/${r.id}/reopen`); shopping(); })))))] : null);
+    return;
+  }
+
+  const all = t.list.sections.flatMap((s) => s.items);
+  const checked = new Set(t.checked);
+  const count = el('p', { class: 'sub', 'aria-live': 'polite' });
+  const drawCount = () => count.replaceChildren(`${all.filter((x) => checked.has(x.id)).length} of ${all.length} in the cart`);
+  drawCount();
+  const row = (x) => {
+    const b = el('button', { type: 'button', class: 'pitem', 'aria-pressed': String(checked.has(x.id)) },
+      el('span', { class: 'bx' }, art('<svg aria-hidden="true"><use href="/icons.svg#i-check"/></svg>')),
+      el('span', { class: 'nm' }, x.name, el('small', {}, itemNote(x))),
+      el('span', { class: 'q' }, x.buy ?? '', x.used && x.used !== x.buy ? el('small', {}, x.buy ? `The recipes use ${x.used}` : x.used) : null));
+    b.addEventListener('click', async () => {
+      const on = !checked.has(x.id);
+      if (on) checked.add(x.id); else checked.delete(x.id);
+      b.setAttribute('aria-pressed', String(on));
+      drawCount();
+      try { await api('POST', `/api/trips/${t.id}/check`, { ingredient_id: x.id, checked: on }); } catch (err) {
+        if (on) checked.delete(x.id); else checked.add(x.id);
+        b.setAttribute('aria-pressed', String(!on));
+        drawCount();
+        showToast(err.message);
+      }
+    });
+    return b;
+  };
+  const plain = (x) => el('div', { class: 'rowi' }, el('div', {}, el('b', {}, x.name), el('small', {}, itemNote(x))), el('small', {}, x.used ?? ''));
+
+  parentScreen('shopping', flash ?? null,
+    el('section', { class: 'card shoplist' },
+      el('div', {}, el('h2', { style: 'margin:0' }, 'Shopping list'), count),
+      el('div', { class: 'rows' }, t.lessons.map((x) => el('div', { class: 'rowi' },
+        el('small', {}, lessonLine(x)),
+        t.lessons.length > 1 ? el('button', { type: 'button', class: 'hbtn link', 'aria-label': `Take ${x.title} off this trip`, onclick: async () => {
+          await api('PUT', `/api/trips/${t.id}`, { remove_queue_id: x.id });
+          again(`Took ${x.title} off this trip.`, () => api('PUT', `/api/trips/${t.id}`, { add_queue_ids: [x.id] }));
+        } }, 'Remove') : el('span')))),
+      perishSel(t.perish_days, async (e) => { await api('PUT', `/api/trips/${t.id}`, { perish_days: Number(e.target.value) }); shopping(); }),
+      t.list.sections.map((s) => el('div', { class: 'psec' }, el('h4', {}, sectionIcon(s.id), s.name), s.items.map(row))),
+      t.list.have.length ? el('details', { class: 'psec' }, el('summary', {}, `You should have (${t.list.have.length})`), el('div', { class: 'rows' }, t.list.have.map(plain))) : null,
+      t.list.later.length ? el('details', { class: 'psec' }, el('summary', {}, `Buy closer to the day (${t.list.later.length})`),
+        el('p', { class: 'mut small' }, `Perishables for lessons more than ${t.perish_days} days away.`), el('div', { class: 'rows' }, t.list.later.map(plain))) : null,
+      el('div', { class: 'acts' },
+        actBtn('End trip', 'pri', async () => {
+          await api('POST', `/api/trips/${t.id}/end`);
+          again('Trip ended. Its lessons are shopped for.', () => api('POST', `/api/trips/${t.id}/reopen`));
+        }),
+        actBtn('Cancel trip', '', async () => {
+          await api('POST', `/api/trips/${t.id}/cancel`);
+          again('Trip cancelled.', () => api('POST', `/api/trips/${t.id}/reopen`));
+        }))),
+    d.candidates.length ? [el('h3', {}, 'Add lessons to this trip'), form([picker(d.candidates)], 'Add to the list', async (v) => {
+      const ids = picked(v, d.candidates);
+      if (!ids.length) throw new Error('Pick at least one lesson.');
+      await api('PUT', `/api/trips/${t.id}`, { add_queue_ids: ids });
+      shopping();
+    })] : null,
+    pantryLink);
+});
+
+const pantryEditor = parentOnly(async () => {
+  const p = await api('GET', '/api/pantry');
+  const have = new Set(p.pantry);
+  const saved = el('p', { class: 'ok', hidden: true }, 'Saved.');
+  parentScreen('shopping', el('h2', {}, 'Pantry staples'),
+    el('p', { class: 'mut' }, 'Tick what you always have on hand. It moves to "You should have" on every shopping list, where you can still check it.'),
+    form([
+      ...p.sections.map((s) => el('fieldset', {}, el('legend', {}, s.name), el('div', { class: 'grid2' }, s.items.map((i) => el('label', { class: 'choice' },
+        el('input', { type: 'checkbox', name: `i_${i.id}`, checked: have.has(i.id) }), el('span', {}, i.name)))))),
+      saved,
+    ], 'Save', async (v) => {
+      saved.hidden = true;
+      await api('PUT', '/api/pantry', { ingredient_ids: p.sections.flatMap((s) => s.items).filter((i) => v[`i_${i.id}`]).map((i) => i.id) });
+      saved.hidden = false;
+    }, { extra: [el('a', { class: 'hbtn', href: '#/parent/shopping' }, 'Back to shopping')] }));
+});
+
 // ---------- owner screens ----------
 
 const owner = parentOnly(async (flash) => {
@@ -1092,6 +1219,8 @@ async function route() {
       if (sub === 'courses' && extra) return await courseEditor(extra);
       if (sub === 'courses') return await courseList();
       if (sub === 'queue') return await parentQueue();
+      if (sub === 'shopping') return await shopping();
+      if (sub === 'pantry') return await pantryEditor();
       if (sub === 'family') return await familySettings();
       if (sub === 'parents') return await parentLogins();
       if (sub === 'owner') return await owner();

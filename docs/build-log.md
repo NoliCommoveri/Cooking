@@ -1416,3 +1416,45 @@ which would have meant reworking the queue later. The owner ruled:
   parents and carry no due day for kids, since they're never due or overdue.
 - Tests: 150 (the extras' flag in the schedule, and no due day for a kid's
   extra lesson in homeschool mode).
+
+## 58. 2026-10-22 — Phase 3b: shopping trips and the pantry
+
+- **Reviewed against this session first.** Trips start with every queued
+  lesson not yet shopped for ticked, and next week's course lessons are there
+  from Thursday, so a family can shop Thursday or Friday. A course lesson's
+  date for perishables is its week's Sunday. A course lesson on an open trip
+  (or already shopped for) stays in the queue if the schedule moves it. The
+  offline list waits with 2d (section 52); check-offs save as they're tapped.
+- **Store sections and package sizes** (`content/ingredients.json`): the
+  registry's sections are now §6.3's list (produce, herbs, meat and fish,
+  dairy and eggs, bread and tortillas, grains and pasta, canned and jarred,
+  sauces, oils and vinegars, baking, spices, specialty, frozen), and every
+  ingredient has a `purchaseUnit`: a typical US package (a 28-oz can, a dozen
+  eggs, a 5-lb bag), one item for things bought loose, and quarter pounds for
+  meat. The linter requires one. **The sizes are estimates for the owner to
+  check.**
+- **The list** (`src/content/shop.js`, shared by the Worker and the demo):
+  each lesson at its own serving count with the family's diet swaps, left-out
+  ingredients dropped, merged by ingredient, rounded up to whole packages with
+  what the recipes use beside it, grouped by section in store order. Pantry
+  staples move to "You should have"; perishables for lessons further off than
+  the trip's window (7 days to start) move to "Buy closer to the day";
+  undated perishables show, marked "no date set"; lines with no amount show
+  once with no quantity.
+- **Migration 0007** adds shopping trips, the lessons on each (with the
+  serving count bought for), check-offs, and the pantry. Family downloads
+  include them. **The owner presses Apply pending on `/ops`** after this
+  deploys.
+- **Parents → Shopping:** start a trip, tick items off in the store, add or
+  take off lessons, change the perishables window, End trip (the lessons are
+  shopped for) or Cancel, each with Undo; recent trips can be reopened. One
+  trip is open at a time. **Pantry staples** is its own screen.
+- **"You shopped for N"**: a shopped lesson's card warns when its serving
+  count changes after shopping, and doesn't block (§6.6).
+- **The demo's shopping preview** now uses the same list, so it rounds to
+  packages too.
+- Tests: 163. New ones cover the list (merging, packages, pantry, section
+  order, perishables, diet swaps, the linter's package rule) and trips (check-
+  offs kept, End trip and Reopen, Cancel, adding and taking off lessons, the
+  pantry, family scoping, input checks, a course lesson kept on a trip, and
+  the new tables in a family download).
