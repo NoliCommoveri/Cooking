@@ -20,9 +20,6 @@ export const localDay = (iso, tzOffset = 0) => fromDate(new Date(Date.parse(iso)
 export const PREVIEW_FROM = 4;
 // A lesson is due on the Friday of its week. 5 = Friday.
 export const DUE_DAY = 5;
-// The week a shopping trip is for (owner, 2026-10-22): this week until
-// Thursday, then next week.
-export const shopWeek = (today) => (today >= addDays(weekOf(today), PREVIEW_FROM) ? addDays(weekOf(today), 7) : weekOf(today));
 
 // course: { start_date, per_week }
 // lessons: the lesson ids the schedule can use, in plan order (written, kept in
@@ -32,7 +29,8 @@ export const shopWeek = (today) => (today >= addDays(weekOf(today), PREVIEW_FROM
 // today: the family's calendar day
 //
 // Returns this week and next week ({ week, lessons: [{ id, done, overdue }],
-// skipped, extra }), whether next week shows yet, the planned and projected
+// skipped, extra }), the weeks after ({ week, lessons: [ids] }), whether next
+// week shows yet, the planned and projected
 // finish weeks, and how many weeks behind the plan the course is.
 export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
   const per = course.per_week;
@@ -79,6 +77,13 @@ export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
   const a = fill(now, 0, cookedNow);
   const next = addDays(now, 7);
   const b = fill(next, a.next, []);
+  // The weeks after next, at the pace, for the parent's "What you'll need".
+  const ahead = [];
+  for (let w = addDays(next, 7), from = b.next, guard = 0; from < open.length && guard < 520; w = addDays(w, 7), guard++) {
+    if (w < start || skipped(w)) continue;
+    ahead.push({ week: w, lessons: open.slice(from, from + per) });
+    from += per;
+  }
   const week = (w, list, cooked, overdueCount, paced = list.length) => ({
     week: w,
     skipped: skipped(w),
@@ -101,6 +106,7 @@ export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
   return {
     this_week: week(now, now < start ? [] : a.list, cookedNow, now < start ? 0 : behindLessons, a.paced),
     next_week: week(next, b.list, [], 0),
+    ahead,
     shows_next: today >= addDays(now, PREVIEW_FROM),
     started: now >= start,
     planned_finish: planned,

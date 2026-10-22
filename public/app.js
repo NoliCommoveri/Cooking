@@ -943,74 +943,103 @@ const courseEditor = parentOnly(async (cid) => {
     }, { extra }));
 });
 
-// ---------- shopping trips and the pantry (§6.3) ----------
+// ---------- shopping (§6.3): optional; nothing waits on it ----------
 
 const SECTION_ICON = {
   produce: 's-produce', herbs: 's-produce', 'meat-fish': 's-meat', 'dairy-eggs': 's-dairy', 'bread-tortillas': 's-bakery',
   'grains-pasta': 's-pantry', 'canned-jarred': 's-canned', sauces: 's-canned', 'oils-vinegars': 's-pantry', baking: 's-bakery',
   spices: 's-pantry', specialty: 's-pantry', frozen: 's-frozen',
 };
-const sectionIcon = (sid) => art(`<svg aria-hidden="true"><use href="/icons.svg#${SECTION_ICON[sid] ?? 's-pantry'}"/></svg>`);
-const PERISH_CHOICES = [3, 5, 7, 10, 14];
-
-// One line of the list: what to buy, how much the recipes use, and which lessons.
-const itemNote = (x) => [x.from.join(' · '), x.optional ? 'optional' : null, x.perishable && x.no_date ? 'no date set' : null].filter(Boolean).join(' · ');
+const sectionHead = (sid, name) => el('h4', {}, art(`<svg aria-hidden="true"><use href="/icons.svg#${SECTION_ICON[sid] ?? 's-pantry'}"/></svg>`), name);
+const MAY_HAVE = 'May already have';
+const usedLine = (x) => el('div', { class: 'rowi' }, el('div', {}, el('b', {}, x.name), el('small', {}, [x.from.join(' · '), x.optional ? 'optional' : null].filter(Boolean).join(' · '))),
+  el('span', { class: 'amt' }, x.used ?? ''));
 
 const shopping = parentOnly(async (flash) => {
-  const [d, { profiles }] = await Promise.all([api('GET', `/api/trips?${tz()}`), api('GET', '/api/profiles')]);
+  const [d, { profiles }] = await Promise.all([api('GET', `/api/shopping?${tz()}`), api('GET', '/api/profiles')]);
   const names = (ids) => ids.map((id) => profiles.find((p) => p.id === id)?.name ?? 'Someone').join(' & ');
-  const again = (msg, undo) => shopping(el('p', { class: 'ok flash', role: 'status' }, msg, ' ',
-    undo ? el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await undo(); shopping(); } }, 'Undo') : null));
-  const when = (x) => (x.date ? fmtDay(x.date) : 'No date set');
-  const lessonLine = (x) => `${x.title} · serves ${x.servings} · ${x.profile_ids.length ? `for ${names(x.profile_ids)} · ` : ''}${when(x)}`;
-  const pantryLink = el('p', { class: 'mut small' }, 'Staples you always have drop to "You should have." ', el('a', { href: '#/parent/pantry' }, 'Pantry staples'));
+  const weekName = (w) => (w === null ? 'No date set' : w === d.this_week ? `This week · ${fmtDay(w)}` : w === addDays(d.this_week, 7) ? `Next week · ${fmtDay(w)}` : `Week of ${fmtDay(w)}`);
 
-  // Lessons to pick from, all ticked to start.
-  const picker = (list) => el('div', { class: 'stack' }, list.map((x) => el('label', { class: 'choice' },
-    el('input', { type: 'checkbox', name: `q_${x.id}`, value: x.id, checked: true }),
-    el('span', {}, lessonLine(x)))));
-  const picked = (v, list) => list.filter((x) => v[`q_${x.id}`]).map((x) => x.id);
-  const perishSel = (value, onchange) => el('label', { class: 'f inline' }, 'Perishables for the next',
-    el('select', { name: 'perish_days', onchange }, PERISH_CHOICES.map((n) => el('option', { value: n, selected: n === value }, `${n} days`))));
+  // Make a shopping list: how many lessons, then their names.
+  const max = Math.min(d.list_max, d.upcoming.length);
+  const namesBox = el('p', { class: 'mut small', style: 'margin:0', 'aria-live': 'polite' });
+  const countSel = el('select', { name: 'count' }, el('option', { value: '' }, 'Pick a number'),
+    Array.from({ length: max }, (_, i) => el('option', { value: i + 1 }, `${i + 1} lesson${i ? 's' : ''}`)));
+  countSel.addEventListener('change', () => {
+    const n = Number(countSel.value);
+    namesBox.replaceChildren(n ? `For ${d.upcoming.slice(0, n).map((x) => x.title).join(', ')}` : '');
+  });
+  const maker = max
+    ? form([el('label', { class: 'f' }, 'How many lessons are you shopping for?', el('span', { class: 'hint' }, 'Counting from the next lesson not cooked yet'), countSel), namesBox],
+      'Next', async (v) => {
+        if (!v.count) throw new Error('Pick how many lessons.');
+        go(`#/parent/shopping/new/${v.count}`);
+      })
+    : el('p', { class: 'card mut' }, 'Nothing is coming up yet. Queue a lesson, or set up a course.');
 
-  const t = d.trip;
-  if (!t) {
-    parentScreen('shopping', flash ?? null,
-      el('h2', {}, 'Start a shopping trip'),
-      d.candidates.length
-        ? form([
-          el('p', { class: 'mut small', style: 'margin:0' }, `For the week of ${fmtDay(d.shop_week)}. From Thursday, the list is for next week.`),
-          picker(d.candidates), perishSel(7),
-        ], 'Make the list', async (v) => {
-          const ids = picked(v, d.candidates);
-          if (!ids.length) throw new Error('Pick at least one lesson.');
-          await api('POST', '/api/trips', { queue_ids: ids, perish_days: Number(v.perish_days) });
-          shopping();
-        })
-        : el('p', { class: 'card mut' }, `Nothing for the week of ${fmtDay(d.shop_week)} is waiting to be shopped for.`),
-      pantryLink,
-      d.recent.length ? [el('h3', {}, 'Recent trips'), el('div', { class: 'card' }, el('div', { class: 'rows' }, d.recent.map((r) => el('div', { class: 'rowi' },
-        el('div', {}, el('b', {}, `Started ${fmtDay(r.created_at.slice(0, 10))}`), el('small', {}, r.cancelled_at ? 'Cancelled' : `Ended ${fmtDay(r.ended_at.slice(0, 10))}`)),
-        actBtn('Reopen', '', async () => { await api('POST', `/api/trips/${r.id}/reopen`); shopping(); })))))] : null);
-    return;
-  }
+  const open = d.lists.filter((l) => !l.done_at), past = d.lists.filter((l) => l.done_at);
+  const listRow = (l) => el('div', { class: 'rowi' },
+    el('div', {}, el('b', {}, `List from ${fmtDay(l.created_at.slice(0, 10))}`), el('small', {}, `${l.lessons.join(', ')} · ${l.checked} of ${l.total} in the cart`)),
+    el('a', { class: 'hbtn', href: `#/parent/shopping/list/${l.id}` }, 'Open'));
 
-  const all = t.list.sections.flatMap((s) => s.items);
-  const checked = new Set(t.checked);
+  // What you'll need, week by week: this week and next open, later ones folded.
+  const near = new Set([null, d.this_week, addDays(d.this_week, 7)]);
+  const weeks = d.weeks.map((w) => el('details', { class: 'card week', open: near.has(w.week) },
+    el('summary', {}, el('b', {}, weekName(w.week)), el('small', { class: 'mut' }, ` · ${w.lessons.length} lesson${w.lessons.length === 1 ? '' : 's'}`)),
+    el('ul', { class: 'weeklessons' }, w.lessons.map((x) => el('li', {}, el('b', {}, x.title), ` · serves ${x.servings}${x.profile_ids.length ? ` · ${names(x.profile_ids)}` : ''}`))),
+    w.needs.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), el('div', { class: 'rows' }, s.items.map(usedLine)))),
+    w.needs.may_have.length ? el('div', { class: 'psec' }, el('h4', {}, MAY_HAVE), el('div', { class: 'rows' }, w.needs.may_have.map(usedLine))) : null));
+
+  parentScreen('shopping', flash ?? null,
+    el('p', { class: 'mut' }, "Shopping lists are optional. Kids can start any lesson whenever you're ready."),
+    open.length ? [el('h2', {}, 'Your shopping lists'), el('div', { class: 'card' }, el('div', { class: 'rows' }, open.map(listRow)))] : null,
+    el('h2', {}, 'Make a shopping list'), maker,
+    el('h2', {}, "What you'll need"),
+    weeks.length ? weeks : el('p', { class: 'mut' }, 'Nothing is coming up yet.'),
+    el('p', { class: 'mut small' }, `Kitchen staples are grouped under "${MAY_HAVE}" so you can check the cupboard first. `, el('a', { href: '#/parent/pantry' }, 'Kitchen staples')),
+    past.length ? el('details', {}, el('summary', {}, `Done lists (${past.length})`), el('div', { class: 'card' }, el('div', { class: 'rows' }, past.map(listRow)))) : null);
+});
+
+// The preview: tick what's on hand; the rest becomes the list.
+const shoppingPreview = parentOnly(async (count) => {
+  const p = await api('POST', `/api/shopping/preview?${tz()}`, { count: Number(count) });
+  const all = [...p.sections.flatMap((s) => s.items), ...p.may_have];
+  const tick = (x) => el('label', { class: 'choice havebox' },
+    el('input', { type: 'checkbox', name: `h_${x.id}` }),
+    el('span', {}, el('b', {}, x.name), el('small', {}, [x.used ? `Recipes use ${x.used}` : null, x.buy && x.buy !== x.used ? `buy ${x.buy}` : null, x.from.join(' · ')].filter(Boolean).join(' · '))));
+  parentScreen('shopping', el('h2', {}, 'Before you make the list'),
+    el('p', {}, `For ${p.lessons.map((x) => `${x.title} (serves ${x.servings})`).join(', ')}.`),
+    form([
+      el('p', { class: 'mut small', style: 'margin:0' }, "Tick anything you already have. It's left off this list only."),
+      p.sections.map((s) => el('fieldset', { class: 'psec' }, el('legend', {}, s.name), el('div', { class: 'stack' }, s.items.map(tick)))),
+      p.may_have.length ? el('fieldset', { class: 'psec' }, el('legend', {}, MAY_HAVE), el('div', { class: 'stack' }, p.may_have.map(tick))) : null,
+    ], 'Create shopping list', async (v) => {
+      const res = await api('POST', `/api/shopping/lists?${tz()}`, { keys: p.lessons.map((x) => x.key), on_hand: all.filter((x) => v[`h_${x.id}`]).map((x) => x.id) });
+      go(`#/parent/shopping/list/${res.id}`);
+    }, { extra: [el('a', { class: 'hbtn', href: '#/parent/shopping' }, 'Back')] }));
+});
+
+// The list, in the store: tap to check off, saved as it's tapped.
+const shoppingListView = parentOnly(async (lid, flash) => {
+  const { list: l } = await api('GET', `/api/shopping/lists/${lid}`);
+  const again = (msg, undo) => shoppingListView(lid, el('p', { class: 'ok flash', role: 'status' }, msg, ' ',
+    undo ? el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await undo(); shoppingListView(lid); } }, 'Undo') : null));
+  const all = [...l.sections.flatMap((s) => s.items), ...l.may_have];
+  const checked = new Set(l.checked);
   const count = el('p', { class: 'sub', 'aria-live': 'polite' });
   const drawCount = () => count.replaceChildren(`${all.filter((x) => checked.has(x.id)).length} of ${all.length} in the cart`);
   drawCount();
   const row = (x) => {
     const b = el('button', { type: 'button', class: 'pitem', 'aria-pressed': String(checked.has(x.id)) },
       el('span', { class: 'bx' }, art('<svg aria-hidden="true"><use href="/icons.svg#i-check"/></svg>')),
-      el('span', { class: 'nm' }, x.name, el('small', {}, itemNote(x))),
+      el('span', { class: 'nm' }, x.name, el('small', {}, [x.from.join(' · '), x.optional ? 'optional' : null].filter(Boolean).join(' · '))),
       el('span', { class: 'q' }, x.buy ?? '', x.used && x.used !== x.buy ? el('small', {}, x.buy ? `The recipes use ${x.used}` : x.used) : null));
     b.addEventListener('click', async () => {
       const on = !checked.has(x.id);
       if (on) checked.add(x.id); else checked.delete(x.id);
       b.setAttribute('aria-pressed', String(on));
       drawCount();
-      try { await api('POST', `/api/trips/${t.id}/check`, { ingredient_id: x.id, checked: on }); } catch (err) {
+      try { await api('POST', `/api/shopping/lists/${lid}/check`, { ingredient_id: x.id, checked: on }); } catch (err) {
         if (on) checked.delete(x.id); else checked.add(x.id);
         b.setAttribute('aria-pressed', String(!on));
         drawCount();
@@ -1019,46 +1048,36 @@ const shopping = parentOnly(async (flash) => {
     });
     return b;
   };
-  const plain = (x) => el('div', { class: 'rowi' }, el('div', {}, el('b', {}, x.name), el('small', {}, itemNote(x))), el('small', {}, x.used ?? ''));
-
   parentScreen('shopping', flash ?? null,
+    el('a', { class: 'hbtn link', href: '#/parent/shopping' }, '← Shopping'),
     el('section', { class: 'card shoplist' },
-      el('div', {}, el('h2', { style: 'margin:0' }, 'Shopping list'), count),
-      el('div', { class: 'rows' }, t.lessons.map((x) => el('div', { class: 'rowi' },
-        el('small', {}, lessonLine(x)),
-        t.lessons.length > 1 ? el('button', { type: 'button', class: 'hbtn link', 'aria-label': `Take ${x.title} off this trip`, onclick: async () => {
-          await api('PUT', `/api/trips/${t.id}`, { remove_queue_id: x.id });
-          again(`Took ${x.title} off this trip.`, () => api('PUT', `/api/trips/${t.id}`, { add_queue_ids: [x.id] }));
-        } }, 'Remove') : el('span')))),
-      perishSel(t.perish_days, async (e) => { await api('PUT', `/api/trips/${t.id}`, { perish_days: Number(e.target.value) }); shopping(); }),
-      t.list.sections.map((s) => el('div', { class: 'psec' }, el('h4', {}, sectionIcon(s.id), s.name), s.items.map(row))),
-      t.list.have.length ? el('details', { class: 'psec' }, el('summary', {}, `You should have (${t.list.have.length})`), el('div', { class: 'rows' }, t.list.have.map(plain))) : null,
-      t.list.later.length ? el('details', { class: 'psec' }, el('summary', {}, `Buy closer to the day (${t.list.later.length})`),
-        el('p', { class: 'mut small' }, `Perishables for lessons more than ${t.perish_days} days away.`), el('div', { class: 'rows' }, t.list.later.map(plain))) : null,
+      el('div', {}, el('h2', { style: 'margin:0' }, `Shopping list · ${fmtDay(l.created_at.slice(0, 10))}`), count,
+        el('p', { class: 'mut small', style: 'margin:0' }, `For ${l.lessons.map((x) => `${x.title} (serves ${x.servings})`).join(', ')}`)),
+      l.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), s.items.map(row))),
+      l.may_have.length ? el('div', { class: 'psec' }, el('h4', {}, MAY_HAVE), l.may_have.map(row)) : null,
+      l.on_hand.length ? el('details', { class: 'psec' }, el('summary', {}, `You have these (${l.on_hand.length})`),
+        el('div', { class: 'rows' }, l.on_hand.map((x) => el('div', { class: 'rowi' }, el('div', {}, el('b', {}, x.name), el('small', {}, x.used ?? '')),
+          actBtn('Put on the list', '', async () => { await api('POST', `/api/shopping/lists/${lid}/on-hand`, { ingredient_id: x.id, on_hand: false }); shoppingListView(lid); }))))) : null,
       el('div', { class: 'acts' },
-        actBtn('End trip', 'pri', async () => {
-          await api('POST', `/api/trips/${t.id}/end`);
-          again('Trip ended. Its lessons are shopped for.', () => api('POST', `/api/trips/${t.id}/reopen`));
-        }),
-        actBtn('Cancel trip', '', async () => {
-          await api('POST', `/api/trips/${t.id}/cancel`);
-          again('Trip cancelled.', () => api('POST', `/api/trips/${t.id}/reopen`));
-        }))),
-    d.candidates.length ? [el('h3', {}, 'Add lessons to this trip'), form([picker(d.candidates)], 'Add to the list', async (v) => {
-      const ids = picked(v, d.candidates);
-      if (!ids.length) throw new Error('Pick at least one lesson.');
-      await api('PUT', `/api/trips/${t.id}`, { add_queue_ids: ids });
-      shopping();
-    })] : null,
-    pantryLink);
+        l.done_at
+          ? actBtn('Not done yet', '', async () => { await api('POST', `/api/shopping/lists/${lid}/not-done`); shoppingListView(lid); })
+          : actBtn('Done shopping', 'pri', async () => {
+            await api('POST', `/api/shopping/lists/${lid}/done`);
+            again('Marked done. It moves to Done lists.', () => api('POST', `/api/shopping/lists/${lid}/not-done`));
+          }),
+        actBtn('Delete list', '', async () => {
+          await api('POST', `/api/shopping/lists/${lid}/delete`);
+          shopping(el('p', { class: 'ok flash', role: 'status' }, 'List deleted. ',
+            el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await api('POST', `/api/shopping/lists/${lid}/restore`); shoppingListView(lid); } }, 'Undo')));
+        }))));
 });
 
 const pantryEditor = parentOnly(async () => {
   const p = await api('GET', '/api/pantry');
   const have = new Set(p.pantry);
   const saved = el('p', { class: 'ok', hidden: true }, 'Saved.');
-  parentScreen('shopping', el('h2', {}, 'Pantry staples'),
-    el('p', { class: 'mut' }, 'Tick what you always have on hand. It moves to "You should have" on every shopping list, where you can still check it.'),
+  parentScreen('shopping', el('h2', {}, 'Kitchen staples'),
+    el('p', { class: 'mut' }, `Things your kitchen usually has. They stay on every list, grouped under "${MAY_HAVE}" so you can check the cupboard first.`),
     form([
       ...p.sections.map((s) => el('fieldset', {}, el('legend', {}, s.name), el('div', { class: 'grid2' }, s.items.map((i) => el('label', { class: 'choice' },
         el('input', { type: 'checkbox', name: `i_${i.id}`, checked: have.has(i.id) }), el('span', {}, i.name)))))),
@@ -1219,6 +1238,8 @@ async function route() {
       if (sub === 'courses' && extra) return await courseEditor(extra);
       if (sub === 'courses') return await courseList();
       if (sub === 'queue') return await parentQueue();
+      if (sub === 'shopping' && extra === 'new') return await shoppingPreview(parts[3]);
+      if (sub === 'shopping' && extra === 'list') return await shoppingListView(parts[3]);
       if (sub === 'shopping') return await shopping();
       if (sub === 'pantry') return await pantryEditor();
       if (sub === 'family') return await familySettings();

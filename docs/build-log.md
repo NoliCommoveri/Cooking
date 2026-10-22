@@ -1471,3 +1471,36 @@ which would have meant reworking the queue later. The owner ruled:
   another week, when starting a trip or adding to one.
 - Tests: 165 (the week a trip is for, Sunday to Saturday, and a lesson dated
   two weeks out kept off a trip).
+
+## 60. 2026-10-22 — Shopping is optional: What you'll need, and lists by lesson count
+
+The owner reworked shopping before any family used it (sections 58 and 59
+are replaced):
+- **Shopping is optional.** Nothing a learner does waits on it. The point is
+  for a parent to see at a glance what the coming lessons need.
+- **What you'll need** (the Shopping screen): the upcoming uncooked lessons
+  week by week, undated hand-queued lessons first, with a course's weeks
+  worked out ahead (the schedule now returns the weeks after next). This week
+  and next are open, later weeks folded. Ingredients are merged by section, in
+  the amounts the recipes use.
+- **Make a shopping list:** "How many lessons are you shopping for?" counts
+  from the next uncooked lesson (always, even ones on an earlier list:
+  owner), shows their names, then a preview to tick what's on hand (this list
+  only), then **Create shopping list**. Check-offs save as tapped; on-hand
+  items can be put back; Done shopping is optional; Delete has an Undo.
+- **Kitchen staples** (was pantry staples): still on every list, grouped
+  under "May already have" (owner: staples get shopped for too). "You should
+  have" is gone.
+- **No perishable rules** (owner): nothing held back or marked. The trip's
+  perishables window, the one-week trip rule, the Thursday shopping week, and
+  "shopped" as a step are gone.
+- **Migration 0008** replaces 0007's trip tables (no family had used them)
+  with shopping lists, their lessons (as they were, with the serving count
+  for "You shopped for N"), on-hand marks, and check-offs. The pantry table
+  stays. **The owner presses Apply pending on `/ops`.**
+- The demo's preview note now describes this.
+- Tests: 163. New ones cover the weekly view's order and course weeks ahead,
+  the preview and on-hand marks, counting from the next uncooked lesson, "You
+  shopped for" on a course lesson queued after its list, cooking a lesson
+  never shopped for, Done and Delete with their undos, family scoping, input
+  checks, the PIN, and the new tables in a family download.

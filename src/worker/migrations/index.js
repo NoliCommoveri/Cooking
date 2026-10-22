@@ -8,6 +8,7 @@ import m0004 from './0004_fixes.sql';
 import m0005 from './0005_lesson_ids.sql';
 import m0006 from './0006_queue.sql';
 import m0007 from './0007_shopping.sql';
+import m0008 from './0008_shopping_lists.sql';
 
 export const MIGRATIONS = [
   { id: '0001', name: 'families', sql: m0001 },
@@ -17,4 +18,5 @@ export const MIGRATIONS = [
   { id: '0005', name: 'lesson ids', sql: m0005 },
   { id: '0006', name: 'queue and courses', sql: m0006 },
   { id: '0007', name: 'shopping', sql: m0007 },
+  { id: '0008', name: 'shopping lists', sql: m0008 },
 ];

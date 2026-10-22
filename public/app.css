@@ -242,3 +242,9 @@ select{font:inherit;padding:8px 10px;border-radius:10px;border:1.5px solid var(-
 .pitem{grid-template-columns:30px minmax(0,1fr);align-items:start}
 .pitem .bx{margin-top:2px}
 .pitem .q{grid-column:2;text-align:left;max-width:none;margin-top:-6px}
+.week{margin-bottom:10px}
+.week summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.weeklessons{margin:0;padding-left:18px}
+.amt{font-weight:800;text-align:right}
+.havebox span small{display:block;color:var(--h-mut);font-size:13px;font-weight:400}
+fieldset.psec legend{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--h-mut);font-weight:800}

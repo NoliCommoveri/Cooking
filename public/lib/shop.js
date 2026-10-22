@@ -1,8 +1,8 @@
 // Copied from src/content/shop.js by tools/build-library.js. Don't edit here.
-// The shopping list (plan §6.3): a trip's lessons, each at its own serving
-// count with the family's diet swaps, merged by ingredient, pantry staples set
-// aside, rounded up to what the store sells, and grouped by store section.
-// Shared by the Worker (trips), and the demo page's preview.
+// What lessons need, and the shopping list (plan §6.3): lessons each at their
+// own serving count with the family's diet swaps, merged by ingredient,
+// rounded up to what the store sells, and grouped by store section. Shared by
+// the Worker and the demo page's preview.
 import { dietView } from './diet.js';
 import { scaleLesson } from './scale.js';
 import { family, toBase, formatVolume, formatWeight, formatButter, mixed } from './units.js';
@@ -14,9 +14,6 @@ export const SECTIONS = [
   ['sauces', 'Sauces'], ['oils-vinegars', 'Oils and vinegars'], ['baking', 'Baking'], ['spices', 'Spices'],
   ['specialty', 'Specialty'], ['frozen', 'Frozen'],
 ];
-
-const DAY = 24 * 60 * 60 * 1000;
-const daysBetween = (a, b) => Math.round((Date.parse(`${b}T00:00:00Z`) - Date.parse(`${a}T00:00:00Z`)) / DAY);
 
 // How much was used, said the way a cook measures it.
 function usedText(ing, base) {
@@ -44,17 +41,17 @@ function buyText(ing, base) {
   return `${mixed(packs)} ${packs === 1 ? p.label : p.many}`;
 }
 
-// lessons: [{ lesson, servings, date }] where date is the day it's planned
-//   for ('YYYY-MM-DD') or null.
+// lessons: [{ lesson, servings }].
 // registry: ingredients by id. filters: the family's diet filters.
-// pantry: ingredient ids always on hand. today and perishDays: perishables
-//   show only for lessons within this many days (§6.3 step 8).
-// Returns { sections: [{ id, name, items }], have: [items], later: [items] }.
-// An item: { id, name, buy, used, from: [titles], perishable, no_date, optional, amountless }.
-export function shoppingList({ lessons, registry, filters = [], pantry = [], today = null, perishDays = 7 }) {
-  const items = new Map(), later = new Map();
-  const staple = new Set(pantry);
-  for (const { lesson: L, servings, date } of lessons) {
+// staples: the family's kitchen staples. They're still on the list, grouped
+//   last as "May already have" (owner, 2026-10-22): staples get shopped for too.
+// skip: ingredient ids to leave out (what the parent said they have on hand).
+// Returns { sections: [{ id, name, items }], may_have: [items] }.
+// An item: { id, name, buy, used, from: [titles], optional, amountless }.
+export function shoppingList({ lessons, registry, filters = [], staples = [], skip = [] }) {
+  const items = new Map();
+  const staple = new Set(staples), skipped = new Set(skip);
+  for (const { lesson: L, servings } of lessons) {
     const view = dietView(L, registry, filters);
     const swap = Object.fromEntries(view.applied.map((x) => [x.for, x.use]));
     const leftOut = new Set(view.leftOut);
@@ -64,15 +61,11 @@ export function shoppingList({ lessons, registry, filters = [], pantry = [], tod
       if (leftOut.has(line.ingredient)) return;
       const id = swap[line.ingredient] ?? line.ingredient;
       const ing = registry[id];
-      if (!ing) return;
-      // A perishable for a lesson planned past the window waits for a later trip.
-      const far = ing.perishable && date && today && daysBetween(today, date) > perishDays;
-      const into = far ? later : items;
-      if (!into.has(id)) into.set(id, { id, ing, base: 0, texts: [], from: [], optional: true, noDate: false });
-      const it = into.get(id);
+      if (!ing || skipped.has(id)) return;
+      if (!items.has(id)) items.set(id, { id, ing, base: 0, texts: [], from: [], optional: true });
+      const it = items.get(id);
       if (!line.optional) it.optional = false;
       if (!it.from.includes(L.title)) it.from.push(L.title);
-      if (ing.perishable && !date) it.noDate = true;
       if (line.amount == null) { it.texts.push(scaled.ingredients[k].amount); return; }
       const x = line.scale === false ? line.amount : line.amount * f;
       // Counts round the way the recipe does (2.4 eggs is 3 eggs in the bowl).
@@ -82,18 +75,14 @@ export function shoppingList({ lessons, registry, filters = [], pantry = [], tod
       if (base == null) it.texts.push(scaled.ingredients[k].amount); else it.base += base;
     });
   }
-  const out = (it) => ({
+  const all = [...items.values()].map((it) => ({
     id: it.id, name: it.ing.name, section: it.ing.section,
     buy: it.base ? buyText(it.ing, it.base) : null,
     used: it.base ? usedText(it.ing, it.base) : it.texts[0] ?? null,
-    from: it.from, perishable: Boolean(it.ing.perishable), no_date: it.noDate, optional: it.optional, amountless: !it.base,
-  });
-  const all = [...items.values()].map(out);
-  const sections = SECTIONS.map(([id, name]) => ({ id, name, items: all.filter((x) => x.section === id && !staple.has(x.id)) }))
-    .filter((s) => s.items.length);
+    from: it.from, optional: it.optional, amountless: !it.base,
+  }));
   return {
-    sections,
-    have: all.filter((x) => staple.has(x.id)),
-    later: [...later.values()].filter((x) => !items.has(x.id)).map(out),
+    sections: SECTIONS.map(([id, name]) => ({ id, name, items: all.filter((x) => x.section === id && !staple.has(x.id)) })).filter((x) => x.items.length),
+    may_have: all.filter((x) => staple.has(x.id)),
   };
 }

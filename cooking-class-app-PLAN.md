@@ -411,7 +411,7 @@ Do **not** use:
 - **Download all photos:** the family's photos as a download, so they don't live only in the app
 - **Family recipes** (bonus, §6.10): add the family's own recipes, submit them for the shared library, and add recipes from the community directory
 - **Mark test-cooked:** after cooking a lesson themselves, a parent can mark it test-cooked for their family (§7). Optional; lessons don't need it to be shown to kids
-- **Pantry staples:** a list of ingredients always on hand, which drop off the shopping list
+- **Kitchen staples:** ingredients the family usually has, grouped as "May already have" on lists (§6.3)
 - **Delete our family** and **Download our data** (§6.14)
 - **Print our progress** (§6.15)
 - **Family settings:** family name, profiles (add, rename, avatar, theme, who's on each), dietary filters (§2.1), default servings, voice step control (off until turned on, §6.12), other parent logins
@@ -424,26 +424,30 @@ Do **not** use:
 - Set a new password for a parent, as a fallback when the reset email (§8.3) doesn't reach them
 - Remove a family. This is destructive, so it's on `/ops`, beside that family's download and Restore a family (§8.5)
 
-### 6.3 Shopping list logic
-The parent starts a **shopping trip** by picking queued lessons. A trip holds its own check-off state, so changing the queue later doesn't scramble a list mid-shop. Ending the trip marks its lessons `shopped`.
+### 6.3 Shopping — Requirement (owner, 2026-10-22)
+**Shopping is optional.** Nothing a learner does waits on it: any lesson can be started whether or not anyone made a list. What it's for is letting a parent see, at a glance, what the coming lessons need.
 
-1. Collect the ingredient lines from the trip's lessons, with any diet-filter substitutions (§2.1) already applied.
-2. Scale each line to that queue item's serving count (§6.6).
+**What you'll need** (the Shopping screen). The upcoming uncooked lessons, week by week: lessons queued by hand with no date first ("No date set"), then each week, with the course's weeks worked out ahead (§6.18). This week and next week are open; later weeks are folded. Each week lists its lessons and the ingredients they use, merged and grouped by store section, in the amounts the recipes use.
+
+**Make a shopping list** (when the parent wants one):
+1. "How many lessons are you shopping for?", a dropdown counting from the next lesson not cooked yet. Once a number is picked, the names of the lessons it covers show. It always counts from the next uncooked lesson, even ones on an earlier list (owner, 2026-10-22): a parent who already bought something ticks it as on hand.
+2. A preview of everything those lessons need, where the parent ticks what they have on hand. Ticks are for this list only.
+3. **Create shopping list** for the rest. In the store, items are checked off; check-offs are saved as they're tapped, so the list survives closing the app. Something ticked as on hand can be put back on the list. **Done shopping** is optional, and so is everything else here. **Delete list** has an Undo.
+
+**How the list is worked out:**
+1. Collect the ingredient lines from the lessons, with any diet-filter substitutions (§2.1) already applied, and drop ingredients the diet leaves out.
+2. Scale each line to that lesson's serving count (§6.6).
 3. Convert each line to the ingredient's **base unit** using the registry's conversions (e.g. grams per cup of flour).
 4. **Merge by canonical ingredient ID.** This is the main reason the ingredient registry exists.
-5. Remove pantry staples (keep them viewable in a collapsed "you should have" section).
-6. Round up to **purchase units** (e.g. 15 oz can, dozen eggs, bunch, head), with the exact amount used shown alongside.
-7. Group by **store section** (meat & fish, produce, herbs, dairy & eggs, bread & tortillas, grains & pasta, canned & jarred, sauces, oils & vinegars, baking, specialty, frozen, spices).
-8. Mark perishables. If lessons have planned dates, show perishables only for lessons within the next N days (default 7, adjustable). A course lesson's date is its week's Sunday (§6.18). Lessons with no planned date always show their perishables, marked "no date set."
-9. Lines with no amount ("salt to taste," "oil for the pan") appear once, with no quantity.
-10. Check-off state persists, so the list survives closing the app mid-shop.
-- **A trip is for one week** (owner, 2026-10-22): the current week until Thursday, then the upcoming week. Only lessons for that week are offered (by course week or planned date); a lesson queued by hand with no date is always offered. A family has one open trip at a time, and starting one ticks every lesson on offer. Lessons can be added to or taken off an open trip. **End trip** and **Cancel** each have an undo (Reopen).
-- A course lesson on an open trip, or already shopped for, stays in the queue if the schedule moves it.
-- Package sizes are typical US store sizes, set in `content/ingredients.json` (`purchaseUnit`), for the owner to check.
-
-11. The list works offline. Stores often have weak signal, so the trip is cached on the phone, and check-offs sync when the connection returns. **This waits with Phase 2d** (owner, 2026-10-22); until then check-offs are saved to the account.
+5. **Kitchen staples** (salt, oil, and others the family marks) stay on the list, grouped last under **"May already have"** so the parent can check the cupboard first (owner, 2026-10-22: staples get shopped for too).
+6. Round up to **purchase units** (e.g. 28-oz can, dozen eggs, bunch, head), with the amount the recipes use shown alongside. Package sizes are typical US store sizes, set in `content/ingredients.json` (`purchaseUnit`), for the owner to check.
+7. Group by **store section** (produce, herbs, meat & fish, dairy & eggs, bread & tortillas, grains & pasta, canned & jarred, sauces, oils & vinegars, baking, spices, specialty, frozen).
+8. Lines with no amount ("warm, for scooping," "oil for the pan") appear once, with no quantity.
+9. **No perishable rules** (owner, 2026-10-22): parents know what keeps. Nothing is held back or marked.
 
 A lesson queued once for several profiles is one cook, so it's counted once. The same lesson queued as two separate items is two cooks, and counted twice.
+
+**Later:** the list working offline in the store waits with Phase 2d (owner, 2026-10-22).
 
 ### 6.4 Photos
 - Open the camera via file input with `capture`, or an equivalent.
@@ -832,14 +836,15 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `course_lessons` (course_id, family_id, lesson_id, position, removed)
 - `course_weeks` (course_id, family_id, week_start, skipped, extra). A skipped week, and how many extra lessons a parent pulled into a week; skipped lessons are `course_lessons.removed`
 - `queue_profiles` (queue_id, family_id, profile_id)
-- `shopping_trips` (id, family_id, created_at, ended_at, cancelled_at, perish_days)
-- `trip_lessons` (trip_id, family_id, queue_id, servings). servings is what the trip bought for, for "You shopped for N" (§6.6)
+- `shopping_lists` (id, family_id, created_at, done_at, deleted_at)
+- `list_lessons` (list_id, family_id, position, lesson_id, servings, queue_id, course_id). The lessons as they were when the list was made; servings is for "You shopped for N" (§6.6)
+- `list_on_hand` (list_id, family_id, ingredient_id). Left off that list only
+- `list_checks` (list_id, family_id, ingredient_id)
 - `attempts` (id, family_id, queue_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state, eater_rating)
 - `attempt_profiles` (attempt_id, family_id, profile_id, rating, notes). Every profile on the cook, each with its own reflection
 - `test_cooks` (family_id, lesson_id, lesson_version, parent_id, cooked_on)
 - `photos` (id, family_id, attempt_id, r2_key, created_at)
-- `pantry` (family_id, ingredient_id)
-- `shopping_checks` (family_id, trip_id, ingredient_id, checked)
+- `pantry` (family_id, ingredient_id). Kitchen staples
 - Stamps, pins, and rank are computed from `attempts` and the content files, not stored separately (**recommendation**; cache them if it gets slow).
 - The lesson library and ingredient registry are content files shared by all families (§7). They are not stored per family.
 
@@ -867,7 +872,7 @@ Each phase should be deployed and usable before the next begins.
 | **1c. Public launch** | The landing page, privacy policy, and terms (§6.13), fonts served from the app, Delete our family and Download our data, the inactive purge with its warning emails (§6.14), and the human check at sign-up (§8.3) if the owner wants it before launch | A visitor reads the landing page, signs up, and deletes their family from the browser. A test family left inactive past the limit is warned and then purged by the scheduled job. **The sign-up link isn't posted publicly before this phase is done** |
 | **1d. Demo page** (built after 2a, before 2b) | `/demo` (§6.16): theme and kid/adult switches, the sample lessons in the real player, the diet preview, the shopping list preview, the whole course, the skills view, and `content/course.json`; the public syllabus page (§6.17) | A mom with only the link tries a sample lesson in both themes, toggles dairy-free and sees lessons change, and browses the course by dish and by skill, on her phone |
 | **2. Lesson player** | Learn, Prep, Cook mode, kitchen words, food-safety checks, timers, wake lock, voice step control (§6.12), the installable PWA (§8.2), attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
-| **3. Parent planning & shopping** | Course plans and the weekly schedule (§4.1, §6.18), the casual/homeschool switch and due dates (§6.17), the queue (with kid requests), safety review, mark test-cooked, shopping trips with merging and package rounding, pantry, check-off persistence | A parent sets up a course for two siblings, sees this week's lessons in the queue, skips a week, and sees the schedule shift when a lesson isn't cooked. A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
+| **3. Parent planning & shopping** | Course plans and the weekly schedule (§4.1, §6.18), the casual/homeschool switch and due dates (§6.17), the queue (with kid requests), safety review, mark test-cooked, What you'll need and optional shopping lists with merging and package rounding (§6.3), kitchen staples, check-off persistence | A parent sets up a course for two siblings, sees this week's lessons in the queue, skips a week, and sees the schedule shift when a lesson isn't cooked. A parent reviews safety, marks a lesson test-cooked, sees what the next weeks need, then makes a list for 3 lessons and shops from their phone |
 | **4. Photos & reflect** | The per-family photos switch on `/ops` (§2.6), camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download, Print our progress and the homeschool transcript (§6.15) | In a family with photos on, a photo taken on the tablet shows in the gallery on the parent's phone. A family with photos off cooks and reflects with no photo step |
 | **4b. Homeschool mode** | Course details (name, code, school year), optional grading (not offered on the Sabbath, §6.18), and the transcript (§6.15, §6.17) | A parent in homeschool mode grades a cook and prints a transcript; switching back to casual hides it all and loses nothing |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |

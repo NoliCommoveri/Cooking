@@ -1,5 +1,5 @@
-// The shopping list (plan §6.3): merged, rounded to packages, pantry set
-// aside, perishables held for later, grouped by store section.
+// The shopping list (plan §6.3): merged, rounded to packages, kitchen
+// staples grouped as may already have, grouped by store section.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { shoppingList, SECTIONS } from '../src/content/shop.js';
@@ -25,8 +25,8 @@ test('the linter wants a package size on every ingredient', () => {
 });
 
 test('the same ingredient from two lessons is one line, each lesson at its own size', () => {
-  const one = shoppingList({ lessons: [{ lesson: L('buttermilk-biscuits'), servings: 12, date: null }], registry });
-  const two = shoppingList({ lessons: [{ lesson: L('buttermilk-biscuits'), servings: 12, date: null }, { lesson: L('brown-butter-cookies'), servings: 12, date: null }], registry });
+  const one = shoppingList({ lessons: [{ lesson: L('buttermilk-biscuits'), servings: 12 }], registry });
+  const two = shoppingList({ lessons: [{ lesson: L('buttermilk-biscuits'), servings: 12 }, { lesson: L('brown-butter-cookies'), servings: 12 }], registry });
   const butter = find(two, 'butter-unsalted');
   assert.deepEqual(butter.from, ['Buttermilk biscuits', 'Brown butter chocolate chip cookies']);
   assert.ok(two.sections.flatMap((s) => s.items).filter((x) => x.id === 'butter-unsalted').length === 1);
@@ -36,31 +36,23 @@ test('the same ingredient from two lessons is one line, each lesson at its own s
   assert.equal(find(two, 'egg').buy, '1 dozen eggs');
 });
 
-test('pantry staples set aside, sections in store order, amountless lines with no quantity', () => {
-  const list = shoppingList({ lessons: [{ lesson: L('shakshuka'), servings: 6, date: null }], registry, pantry: ['olive-oil'] });
-  assert.deepEqual(list.have.map((x) => x.id), ['olive-oil']);
+test("kitchen staples stay on the list, grouped as may already have; on-hand items are left off", () => {
+  const list = shoppingList({ lessons: [{ lesson: L('shakshuka'), servings: 6 }], registry, staples: ['olive-oil'] });
+  assert.deepEqual(list.may_have.map((x) => x.id), ['olive-oil']);
+  assert.ok(list.may_have[0].buy, 'a staple still says what to buy');
   assert.equal(find(list, 'olive-oil'), undefined);
   const order = SECTIONS.map(([id]) => id);
-  const at = list.sections.map((s) => order.indexOf(s.id));
+  const at = list.sections.map((x) => order.indexOf(x.id));
   assert.deepEqual(at, [...at].sort((a, b) => a - b));
   const pita = find(list, 'pita');
   assert.equal(pita.buy, null);
   assert.equal(pita.amountless, true);
-});
-
-test('perishables for a lesson past the window wait; undated ones show, marked', () => {
-  const list = shoppingList({ lessons: [{ lesson: L('beef-bulgogi'), servings: 6, date: '2026-11-20' }, { lesson: L('shakshuka'), servings: 6, date: null }],
-    registry, today: '2026-10-22', perishDays: 7 });
-  assert.ok(list.later.some((x) => x.id === 'beef-ribeye'));
-  assert.equal(find(list, 'beef-ribeye'), undefined);
-  assert.ok(find(list, 'soy-sauce'), 'non-perishables are on the list');
-  assert.equal(find(list, 'egg').no_date, true);
-  const soon = shoppingList({ lessons: [{ lesson: L('beef-bulgogi'), servings: 6, date: '2026-10-25' }], registry, today: '2026-10-22' });
-  assert.match(find(soon, 'beef-ribeye').buy, /lb$/);
+  const skipped = shoppingList({ lessons: [{ lesson: L('shakshuka'), servings: 6 }], registry, skip: ['egg'] });
+  assert.equal(find(skipped, 'egg'), undefined);
 });
 
 test("diet swaps land on the list, and left-out ingredients don't", () => {
-  const list = shoppingList({ lessons: [{ lesson: L('beef-bulgogi'), servings: 6, date: null }], registry, filters: ['gluten'] });
+  const list = shoppingList({ lessons: [{ lesson: L('beef-bulgogi'), servings: 6 }], registry, filters: ['gluten'] });
   assert.ok(find(list, 'tamari'));
   assert.equal(find(list, 'soy-sauce'), undefined);
 });

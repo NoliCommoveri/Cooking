@@ -85,7 +85,7 @@ function shopView() {
   const total = all.length, done = V.checked.filter((id) => all.some((x) => x.id === id)).length;
   return `<section class="parent"><h3>Shopping trip</h3><p class="sub">${shopLessons.map((L) => `${esc(L.title)} (serves 6)`).join(' and ') || 'Nothing to shop for with this diet'} · ${done} of ${total} in the cart</p>
     ${list.sections.map((s) => `<div class="psec"><h4>${ic(SECTION_ICON[s.id] ?? 's-pantry', '')}${esc(s.name)}</h4>${s.items.map((it) => `<button type="button" class="pitem" data-check="${esc(it.id)}" aria-pressed="${V.checked.includes(it.id)}"><span class="bx">${ic('i-check', '')}</span><span class="nm">${esc(it.name)}${it.from.length > 1 ? `<small>For both dishes</small>` : `<small>${esc(it.from[0])}</small>`}</span><span class="q">${esc(it.buy ?? it.used ?? '')}${it.buy && it.used && it.used !== it.buy ? `<small>The recipes use ${esc(it.used)}</small>` : ''}</span></button>`).join('')}</div>`).join('')}
-    <p class="small mut" style="margin-top:12px">A preview. A family's list also sets aside the pantry staples they always have, holds perishables until closer to the day, and remembers what's in the cart.</p></section>`;
+    <p class="small mut" style="margin-top:12px">A preview. A family picks how many lessons to shop for, ticks what they already have, and the list remembers what's in the cart.</p></section>`;
 }
 
 // ---------- the whole course ----------
