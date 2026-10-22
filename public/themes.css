@@ -417,3 +417,4 @@ use.pop{animation:dropin .42s cubic-bezier(.3,.7,.4,1) both}
   .burst{display:none}
 }
 
+.p-lessonno{margin:0;font-family:var(--p-hand);font-weight:700;font-size:22px;line-height:1;color:var(--p-red)}

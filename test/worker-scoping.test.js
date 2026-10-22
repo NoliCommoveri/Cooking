@@ -74,3 +74,19 @@ test('signed-out requests reach nothing', async () => {
     assert.equal((await anon.get(p)).status, 401, p);
   }
 });
+
+test("voice step control is off until a parent turns it on, and only for that family", async () => {
+  const { a, b } = await twoFamilies();
+  assert.equal((await a.get('/api/me')).body.family.voice_enabled, false);
+  const base = { name: 'Carsons', default_servings: 6, diet_filters: [] };
+  assert.equal((await a.put('/api/family', { ...base, voice_enabled: 'yes' })).status, 400);
+  assert.equal((await a.put('/api/family', { ...base, voice_enabled: true })).status, 200);
+  assert.equal((await a.get('/api/me')).body.family.voice_enabled, true);
+  // Saving settings without the field leaves it as it was.
+  await a.put('/api/family', { ...base, default_servings: 4 });
+  assert.equal((await a.get('/api/family')).body.family.voice_enabled, true);
+  assert.equal((await b.get('/api/me')).body.family.voice_enabled, false);
+  // Behind the parent PIN.
+  await a.post('/api/pin/lock');
+  assert.equal((await a.put('/api/family', { ...base, voice_enabled: false })).status, 403);
+});

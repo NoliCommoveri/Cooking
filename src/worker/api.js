@@ -8,10 +8,13 @@ import {
   startSession, endSession, readSession, requireSession, requireParent, requireOwner,
   pinUnlocked, unlockPin, lockPin,
 } from './auth.js';
-import { sendEmail, emailReady, resetEmail, signupCodeEmail } from './email.js';
+import { sendEmail, emailReady, resetEmail, signupCodeEmail, fixReportEmail } from './email.js';
+import { livePatches, liveLesson, patchProblems } from './lessons.js';
+import { cleanValue, getAt, setAt, patchSpec, showValue } from '../content/patch.js';
 import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
-import { FREE_MAX } from '../content/scale.js';
+import { FREE_MAX, servingOptions } from '../content/scale.js';
+import { numberCourse } from '../content/course.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -65,6 +68,7 @@ const profileOut = (r) => ({
 
 const familyOut = (f) => ({
   name: f.name, default_servings: f.default_servings, diet_filters: JSON.parse(f.diet_filters), pin_set: Boolean(f.parent_pin_hash),
+  voice_enabled: Boolean(f.voice_enabled),
 });
 
 // ---------- routes ----------
@@ -78,7 +82,7 @@ on('GET', '/api/me', async (req, env) => {
   const fam = await env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(s.family_id).first();
   return {
     signed_in: true,
-    parent: { email: s.email, is_owner: s.is_owner },
+    parent: { email: s.email, is_owner: s.is_owner, test_cook_notice: !s.notice_seen_at },
     family: familyOut(fam),
     pin_unlocked_until: pinUnlocked(s) ? s.pin_until : null,
   };
@@ -284,10 +288,19 @@ on('PUT', '/api/profiles/([0-9a-f]{16})/theme', async (req, env, body, [pid]) =>
   return { ok: true };
 });
 
+// A deleted profile comes off every cook it was on. A cook nobody is left on
+// goes with it.
 on('DELETE', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
   const s = await requireParent(env, req);
-  const res = await env.DB.prepare('DELETE FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).run();
-  if (!res.meta.changes) fail(404, 'not_found', 'No such profile.');
+  if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) {
+    fail(404, 'not_found', 'No such profile.');
+  }
+  await env.DB.batch([
+    env.DB.prepare('DELETE FROM attempt_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
+    env.DB.prepare(`DELETE FROM attempts WHERE family_id = ?
+      AND NOT EXISTS (SELECT 1 FROM attempt_profiles ap WHERE ap.attempt_id = attempts.id)`).bind(s.family_id),
+    env.DB.prepare('DELETE FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id),
+  ]);
   return { ok: true };
 });
 
@@ -297,19 +310,293 @@ on('GET', '/api/library', async (req, env) => {
   const fam = await env.DB.prepare('SELECT diet_filters FROM families WHERE id = ?').bind(s.family_id).first();
   const filters = JSON.parse(fam.diet_filters);
   const name = (i) => LIBRARY.ingredients[i]?.name ?? i;
+  // A patched total time shows on the card too (§6.11).
+  const live = await livePatches(env.DB);
+  const minutes = (L) => live[L.id]?.patches.findLast((p) => p.path === 'totalMinutes')?.value ?? L.totalMinutes;
+  // Lesson numbers in the suggested course order (§4.1).
+  const { labels, total } = numberCourse(LIBRARY.course);
   const lessons = [];
   let hidden = 0;
   for (const L of LIBRARY.lessons) {
     const view = dietView(L, LIBRARY.ingredients, filters);
     if (!view.visible) { hidden++; continue; }
     lessons.push({
-      id: L.id, number: L.number, unit: L.unit, title: L.title, image: L.image, cuisine: LIBRARY.cuisines[L.cuisine] ?? L.cuisine,
-      skill: L.skill, servings: L.servings, totalMinutes: L.totalMinutes,
+      id: L.id, label: labels[L.id], unit: L.unit, title: L.title, image: L.image, cuisine: LIBRARY.cuisines[L.cuisine] ?? L.cuisine,
+      skill: L.skill, servings: L.servings, totalMinutes: minutes(L),
       substitutions: view.applied.map((x) => ({ for: name(x.for), use: name(x.use) })),
       left_out: view.leftOut.map(name),
     });
   }
-  return { lessons, hidden, units: LIBRARY.units };
+  return { lessons, hidden, units: LIBRARY.units, labels, total };
+});
+
+// ---------- cooks (attempts, §1, §8.4) ----------
+
+// A cook is saved for every profile on it. The device that starts the cook
+// makes its id, and sends the whole cook each time it changes, so a retry after
+// a dropped connection lands once. A finished cook can't be changed.
+const STATE_MAX = 4000;
+const isoTime = (v, field) => {
+  const t = Date.parse(v);
+  if (typeof v !== 'string' || Number.isNaN(t)) fail(400, 'invalid', `${field} must be a time.`);
+  // A device clock a little ahead is fine; a date far in the future is not.
+  if (t > Date.now() + 24 * 60 * 60 * 1000) fail(400, 'invalid', `${field} is in the future.`);
+  return new Date(t).toISOString();
+};
+
+on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
+  const s = await requireSession(env, req);
+  const L = LIBRARY.lessons.find((x) => x.id === body.lesson_id) ?? fail(400, 'invalid', 'No such lesson.');
+  const servings = Number(body.servings);
+  if (!servingOptions(L).includes(servings)) fail(400, 'invalid', `${L.title} can't be made for ${body.servings}.`);
+  const ids = Array.isArray(body.profile_ids) ? [...new Set(body.profile_ids.map(String))] : [];
+  if (ids.length < 1 || ids.length > 20) fail(400, 'invalid', 'A cook has 1 to 20 profiles on it.');
+  const { results: mine } = await env.DB.prepare(
+    `SELECT id FROM profiles WHERE family_id = ? AND id IN (${ids.map(() => '?').join(', ')})`,
+  ).bind(s.family_id, ...ids).all();
+  if (mine.length !== ids.length) fail(400, 'invalid', 'A profile on this cook is not in your family.');
+  const started = isoTime(body.started_at, 'started_at');
+  const finished = body.finished_at == null ? null : isoTime(body.finished_at, 'finished_at');
+  if (finished && finished < started) fail(400, 'invalid', 'A cook finishes after it starts.');
+  const state = JSON.stringify(body.checklist_state ?? {});
+  if (state.length > STATE_MAX) fail(400, 'invalid', 'checklist_state is too big.');
+
+  const had = await env.DB.prepare('SELECT family_id, lesson_id, finished_at FROM attempts WHERE id = ?').bind(aid).first();
+  // Another family's cook with this id reads as not found, never as theirs.
+  if (had && had.family_id !== s.family_id) fail(404, 'not_found', 'No such cook.');
+  if (had && had.lesson_id !== L.id) fail(409, 'conflict', 'That cook is of another lesson.');
+  if (had?.finished_at) return { ok: true, id: aid, finished_at: had.finished_at };
+  await env.DB.batch([
+    had
+      ? env.DB.prepare('UPDATE attempts SET servings = ?, finished_at = ?, checklist_state = ? WHERE id = ? AND family_id = ? AND finished_at IS NULL')
+        .bind(servings, finished, state, aid, s.family_id)
+      : env.DB.prepare(`INSERT INTO attempts (id, family_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).bind(aid, s.family_id, L.id, (await livePatches(env.DB, L.id))[L.id]?.version ?? L.version, servings, started, finished, state),
+    // Who's on it can change until it's finished; anyone kept keeps their reflection.
+    env.DB.prepare(`DELETE FROM attempt_profiles WHERE attempt_id = ? AND family_id = ?
+      AND profile_id NOT IN (${ids.map(() => '?').join(', ')})`).bind(aid, s.family_id, ...ids),
+    ...ids.map((pid) => env.DB.prepare('INSERT OR IGNORE INTO attempt_profiles (attempt_id, family_id, profile_id) VALUES (?, ?, ?)')
+      .bind(aid, s.family_id, pid)),
+  ]);
+  return { ok: true, id: aid, finished_at: finished };
+});
+
+// The lessons a profile has finished, with how many times and when last.
+on('GET', '/api/profiles/([0-9a-f]{16})/cooks', async (req, env, body, [pid]) => {
+  const s = await requireSession(env, req);
+  if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) {
+    fail(404, 'not_found', 'No such profile.');
+  }
+  const { results } = await env.DB.prepare(
+    `SELECT a.lesson_id, COUNT(*) AS times, MAX(a.finished_at) AS last
+       FROM attempts a JOIN attempt_profiles ap ON ap.attempt_id = a.id
+      WHERE ap.profile_id = ? AND ap.family_id = ? AND a.family_id = ? AND a.finished_at IS NOT NULL
+      GROUP BY a.lesson_id`,
+  ).bind(pid, s.family_id, s.family_id).all();
+  return { cooks: Object.fromEntries(results.map((r) => [r.lesson_id, { times: r.times, last: r.last }])) };
+});
+
+// ---------- the test-cook notice (§6.9) ----------
+
+// Shown once to each parent until the first-run wizard carries it.
+on('POST', '/api/notice/test-cook', async (req, env) => {
+  const s = await requireSession(env, req);
+  await env.DB.prepare('UPDATE parents SET notice_seen_at = ? WHERE id = ? AND notice_seen_at IS NULL').bind(now(), s.parent_id).run();
+  return { ok: true };
+});
+
+// ---------- fix requests and lesson patches (§6.11) ----------
+
+export const FIX_KINDS = { amount: 'Wrong amount or time', unclear: 'Unclear step', safety: 'Safety problem', unclean: 'Unclean ingredient', other: 'Something else' };
+const URGENT = new Set(['safety', 'unclean']);
+const OPEN_MAX = 30; // open requests one family can have at once
+const asJson = (v) => (v === undefined ? null : JSON.stringify(v));
+const fromJson = (v) => (v == null ? null : JSON.parse(v));
+
+// The live lessons' patches, for the player and the demo. Lesson content only,
+// so no login is needed.
+on('GET', '/api/patches', async (req, env) => {
+  const live = await livePatches(env.DB);
+  return { lessons: Object.fromEntries(Object.entries(live).map(([id, e]) => [id, { version: e.version, patches: e.patches.map(({ path, value }) => ({ path, value })) }])) };
+});
+
+// Where a step sits, for people: "step 3".
+const stepWhere = (L, stepId) => {
+  const i = L?.steps.findIndex((s) => s.id === stepId) ?? -1;
+  return i >= 0 ? `step ${i + 1}` : null;
+};
+
+function requestOut(r, L) {
+  const spec = r.field ? patchSpec(r.field) : null;
+  return {
+    id: r.id, lesson_id: r.lesson_id, lesson_title: L?.title ?? r.lesson_id, kind: r.kind, kind_label: FIX_KINDS[r.kind],
+    step: r.step, where: stepWhere(L, r.step) ?? 'the lesson', field: r.field, field_label: spec?.label ?? null, field_kind: spec?.kind ?? null,
+    current: fromJson(r.current_value), suggested: fromJson(r.suggested_value), note: r.note, servings: r.servings,
+    status: r.status, owner_reply: r.owner_reply, created_at: r.created_at, closed_at: r.closed_at,
+  };
+}
+
+// "Suggest a fix" (§6.11). A kid profile's device needs the parent PIN; an
+// adult profile can send one without it.
+on('POST', '/api/fix-requests', async (req, env, body) => {
+  let s = await requireSession(env, req);
+  const profileId = body.profile_id == null ? null : String(body.profile_id);
+  const profile = profileId ? await env.DB.prepare('SELECT id, audience FROM profiles WHERE id = ? AND family_id = ?').bind(profileId, s.family_id).first() : null;
+  if (profileId && !profile) fail(400, 'invalid', 'No such profile.');
+  if (profile?.audience !== 'adult') s = await requireParent(env, req);
+  const L = await liveLesson(env.DB, String(body.lesson_id ?? '')) ?? fail(400, 'invalid', 'No such lesson.');
+  const kind = oneOf(body.kind, Object.keys(FIX_KINDS), 'kind');
+  const step = body.step == null || body.step === '' ? null : String(body.step);
+  if (step && !L.steps.some((x) => x.id === step)) fail(400, 'invalid', 'No such step.');
+  let field = null, current = null, suggested = null;
+  if (body.field) {
+    field = String(body.field);
+    const now = getAt(L, field);
+    if (now === undefined || !patchSpec(field)) fail(400, 'invalid', "That part can't be picked for this lesson.");
+    if (step && !field.startsWith(`steps.${step}.`)) fail(400, 'invalid', 'That part is from another step.');
+    try { suggested = cleanValue(field, body.suggested_value ?? null); } catch (e) { fail(400, 'invalid', e.message); }
+    if (JSON.stringify(suggested) === JSON.stringify(now)) fail(400, 'invalid', 'That is what it says now. Say what it should say instead.');
+    current = now;
+  }
+  const note = text(body.note, "What's wrong", { max: 1000 });
+  const servings = Number.isInteger(body.servings) && body.servings > 0 && body.servings <= 100 ? body.servings : null;
+  const open = (await env.DB.prepare("SELECT COUNT(*) AS n FROM fix_requests WHERE family_id = ? AND status = 'open'").bind(s.family_id).first()).n;
+  if (open >= OPEN_MAX) fail(429, 'too_many', `Your family has ${open} fixes waiting for review. Try again once some are answered.`);
+  const fid = id();
+  await env.DB.prepare(`INSERT INTO fix_requests (id, family_id, reporter_parent_id, reporter_profile_id, lesson_id, lesson_version, step, servings,
+      kind, field, current_value, suggested_value, note, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+    .bind(fid, s.family_id, s.parent_id, profileId, L.id, L.version, step, servings, kind, field, field ? asJson(current) : null, field ? asJson(suggested) : null, note, now()).run();
+  // Safety and unclean-ingredient reports reach the owner right away. The
+  // report is saved either way; email trouble doesn't fail it.
+  if (URGENT.has(kind)) {
+    const owners = (await env.DB.prepare('SELECT email FROM parents WHERE is_owner = 1').all()).results.map((r) => r.email);
+    if (owners.length) {
+      const spec = field ? patchSpec(field) : null;
+      await sendEmail(env, { to: owners, ...fixReportEmail({
+        kind: FIX_KINDS[kind], lesson: L.title, where: stepWhere(L, step) ?? 'the lesson', note,
+        change: spec ? `${spec.label}: "${showValue(spec.kind, current)}" should be "${showValue(spec.kind, suggested)}"` : null,
+      }) });
+    }
+  }
+  return { ok: true, id: fid };
+});
+
+// This family's fixes on one lesson, so they see what came of them.
+on('GET', '/api/lessons/([a-z0-9-]+)/fixes', async (req, env, body, [lid]) => {
+  const s = await requireSession(env, req);
+  const L = await liveLesson(env.DB, lid) ?? fail(404, 'not_found', 'No such lesson.');
+  const { results } = await env.DB.prepare(`SELECT f.*, p.new_value AS applied FROM fix_requests f LEFT JOIN lesson_patches p ON p.id = f.patch_id
+      WHERE f.family_id = ? AND f.lesson_id = ? ORDER BY f.created_at DESC LIMIT 20`).bind(s.family_id, lid).all();
+  // A fixed one says what it says now: the value the owner applied.
+  return { fixes: results.map((r) => ({ ...requestOut(r, L), applied: r.status === 'fixed' ? fromJson(r.applied) : undefined })) };
+});
+
+// The owner's queue. Requests show no family: the owner sees the lesson, the
+// report, and the suggestion, nothing about who sent it (§6.2a).
+on('GET', '/api/owner/fixes', async (req, env) => {
+  await requireOwner(env, req);
+  const lessons = {};
+  const L = async (lid) => (lessons[lid] ??= await liveLesson(env.DB, lid));
+  const out = async (rows) => {
+    const list = [];
+    for (const r of rows) {
+      const o = requestOut(r, await L(r.lesson_id));
+      // What the lesson says now, which may differ from when it was reported.
+      if (r.field && lessons[r.lesson_id]) o.live = getAt(lessons[r.lesson_id], r.field) ?? null;
+      list.push(o);
+    }
+    return list;
+  };
+  const open = (await env.DB.prepare("SELECT * FROM fix_requests WHERE status = 'open' ORDER BY lesson_id, created_at").all()).results;
+  const closed = (await env.DB.prepare("SELECT * FROM fix_requests WHERE status != 'open' ORDER BY closed_at DESC LIMIT 50").all()).results;
+  const patches = (await env.DB.prepare('SELECT * FROM lesson_patches ORDER BY applied_at DESC LIMIT 100').all()).results;
+  // A live patch can be reverted when no later live patch changed the same field.
+  const laterLive = (p) => patches.some((q) => q.lesson_id === p.lesson_id && q.field_path === p.field_path && !q.reverted_at && (q.applied_at > p.applied_at || (q.applied_at === p.applied_at && q.id > p.id)));
+  return {
+    open: await out(open),
+    closed: await out(closed),
+    patches: await Promise.all(patches.map(async (p) => {
+      const spec = patchSpec(p.field_path);
+      const lesson = await L(p.lesson_id);
+      const step = /^steps\.([a-z0-9-]+)\./.exec(p.field_path)?.[1];
+      return {
+        id: p.id, lesson_id: p.lesson_id, lesson_title: lesson?.title ?? p.lesson_id, where: stepWhere(lesson, step) ?? 'the lesson',
+        field_label: spec?.label ?? p.field_path, field_kind: spec?.kind ?? 'text', old: fromJson(p.old_value), new: fromJson(p.new_value),
+        applied_at: p.applied_at, reverted_at: p.reverted_at, can_revert: !p.reverted_at && !laterLive(p),
+      };
+    })),
+    kinds: FIX_KINDS,
+  };
+});
+
+const openRequest = async (env, fid) => {
+  const r = await env.DB.prepare('SELECT * FROM fix_requests WHERE id = ?').bind(fid).first() ?? fail(404, 'not_found', 'No such fix request.');
+  if (r.status !== 'open') fail(409, 'not_open', 'That fix request is already answered.');
+  return r;
+};
+const reply = (v) => (v == null || String(v).trim() === '' ? null : text(v, 'Reply', { max: 500 }));
+
+// Apply: the suggestion as written or as the owner edited it becomes a lesson
+// patch, live for every family, once it passes the checks.
+on('POST', '/api/owner/fixes/([0-9a-f]{16})/apply', async (req, env, body, [fid]) => {
+  const s = await requireOwner(env, req);
+  const r = await openRequest(env, fid);
+  if (!r.field) fail(400, 'no_field', 'This report has no part picked, so there is nothing to apply. Decline it or mark it as needing a content change.');
+  const L = await liveLesson(env.DB, r.lesson_id) ?? fail(409, 'gone', 'That lesson is no longer in the library.');
+  let value;
+  try { value = cleanValue(r.field, body.value === undefined ? fromJson(r.suggested_value) : body.value); } catch (e) { fail(400, 'invalid', e.message); }
+  const old = getAt(L, r.field);
+  if (old === undefined) fail(409, 'gone', 'That part is no longer in the lesson.');
+  if (JSON.stringify(old) === JSON.stringify(value)) fail(400, 'invalid', 'The lesson already says that.');
+  const problems = patchProblems(setAt(L, r.field, value));
+  if (problems.length) return json({ error: 'checks_failed', message: "This fix can't go live:", problems }, 422);
+  const pid = id(), t = now();
+  await env.DB.batch([
+    env.DB.prepare(`INSERT INTO lesson_patches (id, lesson_id, base_version, field_path, old_value, new_value, fix_request_id, applied_by, applied_at)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(pid, r.lesson_id, L.version, r.field, asJson(old), asJson(value), r.id, s.parent_id, t),
+    env.DB.prepare("UPDATE fix_requests SET status = 'fixed', patch_id = ?, owner_reply = ?, closed_at = ? WHERE id = ?").bind(pid, reply(body.reply), t, r.id),
+  ]);
+  return { ok: true, patch_id: pid, version: L.version + 1 };
+});
+
+on('POST', '/api/owner/fixes/([0-9a-f]{16})/close', async (req, env, body, [fid]) => {
+  await requireOwner(env, req);
+  const r = await openRequest(env, fid);
+  const status = oneOf(body.status, ['declined', 'duplicate', 'needs_content_change'], 'status');
+  await env.DB.prepare('UPDATE fix_requests SET status = ?, owner_reply = ?, closed_at = ? WHERE id = ?').bind(status, reply(body.reply), now(), r.id).run();
+  return { ok: true };
+});
+
+// The restore for Decline and the others: back into the queue.
+on('POST', '/api/owner/fixes/([0-9a-f]{16})/reopen', async (req, env, body, [fid]) => {
+  await requireOwner(env, req);
+  const r = await env.DB.prepare('SELECT * FROM fix_requests WHERE id = ?').bind(fid).first() ?? fail(404, 'not_found', 'No such fix request.');
+  if (r.status === 'open') return { ok: true };
+  if (r.status === 'fixed') fail(409, 'is_fixed', 'That one was applied. Revert its patch to undo it.');
+  await env.DB.prepare("UPDATE fix_requests SET status = 'open', closed_at = NULL WHERE id = ?").bind(r.id).run();
+  return { ok: true };
+});
+
+// Revert puts the field back the way it was, for every family. Its fix
+// request goes back to the queue, where Apply can put it live again.
+on('POST', '/api/owner/patches/([0-9a-f]{16})/revert', async (req, env, body, [pid]) => {
+  await requireOwner(env, req);
+  const p = await env.DB.prepare('SELECT * FROM lesson_patches WHERE id = ?').bind(pid).first() ?? fail(404, 'not_found', 'No such patch.');
+  if (p.reverted_at) fail(409, 'reverted', 'That patch is already reverted.');
+  const later = await env.DB.prepare(`SELECT 1 FROM lesson_patches WHERE lesson_id = ? AND field_path = ? AND reverted_at IS NULL AND id != ?
+      AND (applied_at > ? OR (applied_at = ? AND id > ?))`).bind(p.lesson_id, p.field_path, p.id, p.applied_at, p.applied_at, p.id).first();
+  if (later) fail(409, 'later_patch', 'A later fix changed the same part. Revert that one first.');
+  const L = await liveLesson(env.DB, p.lesson_id);
+  if (L) {
+    const problems = patchProblems(setAt(L, p.field_path, fromJson(p.old_value)));
+    if (problems.length) return json({ error: 'checks_failed', message: "Reverting this would leave the lesson failing its checks:", problems }, 422);
+  }
+  const t = now();
+  await env.DB.batch([
+    env.DB.prepare('UPDATE lesson_patches SET reverted_at = ? WHERE id = ?').bind(t, p.id),
+    env.DB.prepare("UPDATE fix_requests SET status = 'open', closed_at = NULL WHERE id = ? AND status = 'fixed'").bind(p.fix_request_id),
+  ]);
+  return { ok: true };
 });
 
 // ---------- family settings ----------
@@ -327,8 +614,10 @@ on('PUT', '/api/family', async (req, env, body) => {
   if (!Number.isInteger(servings) || servings < 1 || servings > FREE_MAX) fail(400, 'invalid', `Servings must be 1 to ${FREE_MAX}.`);
   const filters = Array.isArray(body.diet_filters) ? [...new Set(body.diet_filters)] : fail(400, 'invalid', 'diet_filters must be a list.');
   for (const f of filters) oneOf(f, LIBRARY.dietTags, 'Each diet filter');
-  await env.DB.prepare('UPDATE families SET name = ?, default_servings = ?, diet_filters = ? WHERE id = ?')
-    .bind(text(body.name, 'Family name'), servings, JSON.stringify(filters), s.family_id).run();
+  // Voice step control (§6.12) is left as it is when the body doesn't mention it.
+  if (body.voice_enabled !== undefined && typeof body.voice_enabled !== 'boolean') fail(400, 'invalid', 'voice_enabled must be true or false.');
+  await env.DB.prepare('UPDATE families SET name = ?, default_servings = ?, diet_filters = ?, voice_enabled = COALESCE(?, voice_enabled) WHERE id = ?')
+    .bind(text(body.name, 'Family name'), servings, JSON.stringify(filters), body.voice_enabled === undefined ? null : Number(body.voice_enabled), s.family_id).run();
   return { ok: true };
 });
 

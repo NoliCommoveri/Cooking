@@ -1037,3 +1037,231 @@ The owner answered the four §6.17 questions:
 - The player's file paths are now absolute, so it runs from `/demo/` as well
   as `/`.
 - Tests: 97.
+
+---
+
+## 45. 2026-10-22 — Phase 2b: cooks saved for every profile on them
+
+- **Migration 0002** (`src/worker/migrations/0002_attempts.sql`): the
+  `attempts` and `attempt_profiles` tables from §8.4, and
+  `parents.notice_seen_at`. **The owner presses Apply pending on `/ops`** after
+  this deploys. Backups, family export, Remove a family, and Restore a family
+  pick the new tables up on their own.
+- **Saving a cook** (`PUT /api/attempts/{id}`): the device makes the cook's id
+  when it starts and sends the whole cook (lesson, servings, who's on it,
+  started and finished times, and where it's up to) at each new stage or step,
+  on a servings or "who's cooking" change, and at Plate it. Sending the same
+  cook again updates it rather than saving it twice. A finished cook can't be
+  changed. The server checks the lesson exists, the size is one the lesson
+  offers, and every profile is in the session's family; another family's cook
+  id reads as not found. The lesson's `version` is recorded with the cook
+  (§7.3), so `library-data.js` now carries each lesson's version and scaling.
+  `queue_id` stays empty until the queue (Phase 3); ratings and notes wait for
+  Reflect (Phase 4).
+- **Cooking together** (§1): until the queue picks who a lesson is for, the
+  lesson card has **Cooking with someone?** with the family's other profiles.
+  Each one tapped is on the cook, and it counts for all of them. The done card
+  says who it counts for. Its wording is a draft for the owner.
+- **The outbox** (`public/cooks.js`): each send goes into an outbox on the
+  device first. A send that can't reach the server stays there and goes when
+  the app starts again or the connection returns, so finishing a cook with
+  Wi-Fi off doesn't lose it. This is the cook-saving part of offline sync;
+  caching lessons to cook offline is 2d.
+- **Cooked, in the kitchen**: a lesson a profile has finished shows "Cooked
+  once" or "Cooked N times" on its card (`GET /api/profiles/{id}/cooks`).
+  Stamps and crests replace it with course progress (Phase 5).
+- **Deleting a profile** takes it off every cook it was on; a cook nobody is
+  left on is deleted with it.
+- **The test-cook notice** (§6.9): until the first-run wizard, each parent sees
+  "Before your kids cook" above the lockers until they press Got it, which is
+  kept on the account, not the device. It leaves out "mark it test-cooked"
+  until that button exists (Phase 3). Its wording is a draft for the owner.
+- The demo page saves nothing and shows no "Cooking with someone?".
+- `docs/setup.md` has what to do after an update with a migration, and the
+  Phase 2b check.
+- Tests: 106. New ones cover a shared cook counting for both profiles, a
+  resent cook saving once, a finished cook staying as it was, the input checks,
+  family scoping of cooks, deleting a profile, the notice per parent, and a
+  cook coming back with Restore a family.
+
+---
+
+## 46. 2026-10-22 — Phase 2c: voice step control
+
+- **Migration 0003** (`src/worker/migrations/0003_voice.sql`):
+  `families.voice_enabled`, off for every family. **The owner presses Apply
+  pending on `/ops`** after this deploys.
+- **Family settings** (behind the parent PIN) has **Turn on voice step
+  control**, with a line saying the browser usually sends what the mic hears
+  to Google. Saving settings from an older screen that doesn't send the field
+  leaves it as it was.
+- **In cook mode** (`public/voice.js`, §6.12), for a family with it on and a
+  device whose browser has speech recognition (checked by feature, so Android
+  Chrome first; nothing shows on iPhone and no "switch to Chrome" prompt):
+  - A mic button on the step card. The mic starts only on a tap, and the
+    button's words say what it's doing: listening, reading out, paused with no
+    connection, or blocked by the browser.
+  - **"next"** moves on, **"back"** goes back, **"again"** reads the step
+    aloud. "Previous" and "repeat" work too, and in "next, no wait, back" the
+    last word wins.
+  - On a **doneness step**, "next" reads the target aloud ("It's done at 160
+    degrees. Tap Next when it is.") and stays put, so a stray "next" can't
+    skip a food-safety check. On the last step, "next" says to tap Plate it.
+  - "back" on the first step does nothing; leaving cook mode takes a tap.
+  - Listening stops while the app reads aloud, then starts again. It also
+    starts again after the browser's own pauses in quiet spells.
+  - When the connection drops, the button says "Voice paused, no connection"
+    and the buttons keep working. Voice picks up when the connection returns,
+    or tries again every 20 seconds.
+  - Leaving cook mode or the lesson turns the mic off.
+- **New icon:** `i-mic` in `public/icons.svg`.
+- The voice wording is a draft for the owner. The demo page has no mic (its
+  sample family has voice off).
+- Tests: 109. New ones cover the setting (off by default, per family, behind
+  the PIN, kept when not sent) and how commands are read from what was heard.
+  The voice flow was also run in Chromium with a stand-in recognizer: steps,
+  the doneness step, read-aloud pausing, the connection dropping and coming
+  back, and the mic stopping when leaving cook mode. It still needs a try on a
+  real Android phone (`docs/setup.md`, section 10).
+
+---
+
+## 47. 2026-10-22 — "next" reads the step; Phase 2d waits
+
+- **Owner ruling:** voice "next" moves on **and reads the new step aloud**, so
+  cooking with voice is hands-free. Built in `public/player.js`; §6.12 updated.
+  "back" still moves without reading, and "again" reads the step on demand.
+  Listening pauses while a step is read, so a "next" said during the reading
+  isn't heard; it's said again once the reading ends.
+- **Owner ruling:** Phase 2d (the installable PWA and cooking offline) waits
+  until pretty much everything else is built. Noted under the phase table in
+  §9. The next slice of Phase 2 is 2e, fix requests and lesson patches.
+
+---
+
+## 48. 2026-10-22 — Timers you can hear
+
+The owner asked how the timer-done sound works, then asked for all three
+suggested changes (`public/player.js`):
+- **It keeps ringing.** A ringing timer dings every 4 seconds (with a buzz where
+  the device can) until someone taps Stop. Before, it dinged once.
+- **With voice on, the timer says what's done:** "Time's up: Simmer sauce."
+- **A "Tap here to turn on the timer sound" button** shows above the timers
+  when a timer is going and the browser has sound off: no tap since the lesson
+  opened, or the app came back from the background with sound suspended. Any
+  tap in the player turns sound back on, and the button dings once to show it.
+  Coming back from the background also redraws cook mode, so timers and the
+  button are current.
+- Still true, because browsers can't do otherwise: nothing sounds while the
+  screen is off or the app is in the background (the timer shows "Ended 3 min
+  ago" on return), and an iPhone on silent stays silent. Cook mode keeps the
+  screen awake to avoid the first.
+- Checked in Chromium with a fake clock and a stand-in for the audio: repeat
+  dings, Stop ending them, the spoken line, and the button appearing and going.
+
+---
+
+## 49. 2026-10-22 — Phase 2e: fix requests and lesson patches
+
+Built to §6.11.
+- **Migration 0004** (`src/worker/migrations/0004_fixes.sql`): `fix_requests`
+  and `lesson_patches` from §8.4, plus `closed_at` on a request. **The owner
+  presses Apply pending on `/ops`** after this deploys. A family's requests are
+  in its own export; patches belong to the whole app and are in the full
+  backup.
+- **Field paths** (`src/content/patch.js`, shared with the browser): a patch
+  names one field by stable ids: `totalMinutes`;
+  `ingredients.<id>.amount | unit | text | prep`; and
+  `steps.<id>.text | tip | look | timerSeconds | timerLabel | target.temp |
+  target.look`. Nothing else can be patched: no ingredient, step, title, or
+  safety level.
+- **Suggest a fix** on the lesson card and on every cook step, for the app
+  (not the demo). A kid profile asks for the parent PIN first; an adult
+  profile doesn't. The dialog is in the house style: the problem type (the
+  five in §6.11), which part (the step's own fields, or the lesson's time and
+  ingredient lines), what it says now, what it should say instead (timers in
+  minutes; amounts at the lesson's own serving count, with the size being
+  cooked shown), and what's wrong. The app adds the lesson, its live version,
+  the step, and the servings. A family can have 30 open requests at once.
+- **Safety and unclean-ingredient reports email the owner** right away
+  through Resend. The report is saved even if the email fails.
+- **What came of it** shows on the lesson card for the family that sent it:
+  waiting, "Fixed: timer length in step 7 is now 9 min", left as it is, a
+  duplicate, or saved for a bigger update, with the owner's reply.
+- **Owner screen: Fix requests** (a new tab beside Owner). Waiting requests,
+  grouped by lesson, show the part as it is now beside the suggestion (and
+  what it said when sent, if it has changed since). The owner can edit the
+  value, add a reply, and **Apply**, or **Decline**, mark a **Duplicate**, or
+  **Needs a content change**. The owner sees no family's name. **Live fixes**
+  each have **Revert**; answered requests have **Reopen**.
+- **Checks before a patch goes live** (`src/worker/lessons.js`): the content
+  linter itself runs on the patched lesson (blocked words, units, the
+  food-safety step rules, timers, kitchen words, scaling at every size), so
+  the Worker now bundles the content in `src/worker/content-data.js`, built by
+  `tools/build-library.js`. On top of that, a thermometer target can be raised
+  but never lowered below the one in the lesson file. A fix that fails can't
+  be applied, and the screen lists why. Reverting runs the same checks.
+- **Versions:** a lesson's version is its file's version plus one for every
+  apply and every revert. Cooks record the live version. The player, the demo,
+  and the library list all show lessons with their live fixes
+  (`GET /api/patches`, public, lesson content only).
+- **Revert** works on the newest live fix to a part; an older one waits until
+  the later one is reverted. Its request goes back to Waiting, so Apply puts it
+  live again: Apply and Revert undo each other.
+- **Folding fixes into the files** (§6.11) is done in a session: Claude reads
+  the live fixes from a backup, writes them into the lesson files (and
+  `course.json` for a time), raises each version, runs the linter, and adds a
+  migration that removes the folded fixes from the database, so the owner's
+  only step is Apply pending. Nothing to do until fixes exist.
+- Tests: 120. New ones cover the full loop (suggest, apply, every family sees
+  it, revert puts it back), the live version on a cook, the hard block
+  rejecting a fix even when the owner edits it, the thermometer floor, unit and
+  empty-text checks, the fields a fix can't touch, the PIN rule, the owner
+  email, decline and reopen, scoping, revert order, and a patched time in the
+  library. The loop was also run in Chromium across two families.
+
+---
+
+## 50. 2026-10-22 — Lessons renumbered in course order
+
+The old numbers were the order dishes were added. The owner approved a
+teaching order and asked for numbers that follow it, with pick-one groups
+sharing a number (1a, 1b, 1c), so a family can say what lesson they're on and
+how far through the course they are.
+- **The order** (plan §4, owner-approved): units in order, prerequisites
+  first, easier before harder, cuisines alternated. 75 dishes, 59 numbers
+  (1a Spring rolls … 8a Shakshuka … 27 Beef bulgogi … 40a Buttermilk
+  biscuits … 56 Brown butter cookies … 59 Apple pie). The §4 tables are
+  reordered and renumbered, with every number in their notes updated.
+- **Numbers aren't stored any more** (new §4.1). `content/course.json` lists
+  every dish in order with an `id`; a pick-one group is the dishes next to each
+  other with the same `pickOne`. `src/content/course.js` turns that order into
+  numbers, for the Worker, the app, the demo, the syllabus, and the preview.
+- **Ids and file names lost their numbers:** `04-shakshuka` is `shakshuka`,
+  and so on for the 4 lesson files and all 75 pictures (and their web copies,
+  and `tools/dish-sheets.txt`). Lessons point at each other by id: the
+  cookies' callback names `buttermilk-biscuits`, the 22 kitchen words name a
+  dish, and prerequisites name a dish or `pick:<skill>` for any dish in a
+  pick-one group. The course outline now carries the plan's prerequisites
+  (Eggs Benedict needs cacio e pepe, and so on).
+- **Linter:** drops the number checks; checks ids are unique, pictures are
+  named for their dish, a pick-one group sits together and has at least two
+  dishes, prerequisites exist and come first in the suggested order (and don't
+  loop), each lesson's prerequisites match the outline, and a kitchen word's
+  lesson is a dish in the course.
+- **What people see:** "Quest 8a" on quest cards, "Lesson 8a" on recipe
+  cards, "of 59" on the lesson card in the app, lesson numbers on "same move,
+  other dishes" and kitchen words, and the new numbers in the demo's course
+  and skills views and the syllabus.
+- **Migration 0005** renames the lesson ids already saved on cooks, fix
+  requests, and fixes. **The owner presses Apply pending on `/ops`** after this
+  deploys. A cook in progress on a device when it ships starts over.
+- **Not built yet, at the owner's word:** each family's own course plan (view,
+  reorder, remove, put back), with its numbers following it (§4.1). Until
+  then, every family sees the suggested order's numbers.
+- The build log keeps the old numbers in earlier entries; the approved
+  showcase mockups keep theirs.
+- Tests: 126. New ones cover the numbering (75 dishes, 59 numbers, letters,
+  a reordered plan with removed dishes, a dish added after a plan was saved,
+  prerequisite notes), the new linter checks, and migration 0005.
+

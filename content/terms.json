@@ -9,7 +9,7 @@
         "dicing"
       ],
       "means": "Cut into small cubes about the size of a pea. Try to make them all close to the same size so they cook evenly.",
-      "taughtIn": 3,
+      "taughtIn": "fish-tacos",
       "image": null
     },
     {
@@ -21,7 +21,7 @@
         "mincing"
       ],
       "means": "Chop into tiny bits, smaller than a grain of rice. Keep rocking the knife back and forth over the pile until nothing big is left.",
-      "taughtIn": 2,
+      "taughtIn": "fattoush",
       "image": null
     },
     {
@@ -33,7 +33,7 @@
         "chopping"
       ],
       "means": "Cut into rough, bite-size pieces. They don't have to match.",
-      "taughtIn": 2,
+      "taughtIn": "fattoush",
       "image": null
     },
     {
@@ -46,7 +46,7 @@
         "slicing"
       ],
       "means": "Cut into flat pieces, like slices of bread.",
-      "taughtIn": 14,
+      "taughtIn": "beef-bulgogi",
       "image": null
     },
     {
@@ -57,7 +57,7 @@
         "julienned"
       ],
       "means": "Cut into thin sticks, about the size of a matchstick.",
-      "taughtIn": 1,
+      "taughtIn": "spring-rolls",
       "image": null
     },
     {
@@ -69,7 +69,7 @@
         "grating"
       ],
       "means": "Rub food down a grater so it falls off in shreds. The big holes make shreds. The small holes make a paste.",
-      "taughtIn": 38,
+      "taughtIn": "buttermilk-biscuits",
       "image": null
     },
     {
@@ -93,7 +93,7 @@
         "simmered"
       ],
       "means": "Cook a liquid with small, lazy bubbles that pop now and then. If big bubbles roll all over, turn the heat down.",
-      "taughtIn": 6,
+      "taughtIn": "oyakodon",
       "image": null
     },
     {
@@ -118,7 +118,7 @@
         "poaching"
       ],
       "means": "Cook gently in liquid that's barely bubbling.",
-      "taughtIn": 4,
+      "taughtIn": "shakshuka",
       "image": null
     },
     {
@@ -144,7 +144,7 @@
         "searing"
       ],
       "means": "Cook in a very hot pan without moving the food, so the outside turns deep brown.",
-      "taughtIn": 27,
+      "taughtIn": "smash-burgers",
       "image": null
     },
     {
@@ -156,7 +156,7 @@
         "braising"
       ],
       "means": "Brown the food first, then cook it slowly with a little liquid and the lid on until it's very tender.",
-      "taughtIn": 7,
+      "taughtIn": "chicken-adobo",
       "image": null
     },
     {
@@ -170,7 +170,7 @@
         "marinades"
       ],
       "means": "Soak food in a flavorful liquid, called a marinade, before you cook it.",
-      "taughtIn": 14,
+      "taughtIn": "beef-bulgogi",
       "image": null
     },
     {
@@ -182,7 +182,7 @@
         "whisking"
       ],
       "means": "Stir fast in little circles with a whisk or a fork, to mix things together and add air.",
-      "taughtIn": 26,
+      "taughtIn": "chicken-caesar",
       "image": null
     },
     {
@@ -194,7 +194,7 @@
         "creaming"
       ],
       "means": "Beat soft butter and sugar together hard until the mixture is fluffy and a little paler.",
-      "taughtIn": 49,
+      "taughtIn": "brown-butter-cookies",
       "image": null
     },
     {
@@ -205,7 +205,7 @@
         "fold the dough"
       ],
       "means": "Lay the dough over itself in layers, like folding a letter to fit in an envelope.",
-      "taughtIn": 38,
+      "taughtIn": "buttermilk-biscuits",
       "image": null
     },
     {
@@ -217,7 +217,7 @@
         "kneading"
       ],
       "means": "Push the dough away with the heel of your hand, fold it back, turn it, and repeat until it's smooth and stretchy.",
-      "taughtIn": 42,
+      "taughtIn": "cinnamon-rolls",
       "image": null
     },
     {
@@ -229,7 +229,7 @@
         "dusting"
       ],
       "means": "Sprinkle a thin, light layer, like flour on the counter so dough doesn't stick.",
-      "taughtIn": 38,
+      "taughtIn": "buttermilk-biscuits",
       "image": null
     },
     {
@@ -263,7 +263,7 @@
         "across the grain"
       ],
       "means": "Meat has thin lines running through it, like the lines in wood. Cut across those lines, not along them, so each bite is tender.",
-      "taughtIn": 14,
+      "taughtIn": "beef-bulgogi",
       "image": null
     }
   ]

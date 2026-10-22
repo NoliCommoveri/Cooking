@@ -73,6 +73,46 @@ for your own family, and that comes with Phase 4.
 2. Add a profile in each family. Each family sees only its own lockers.
 3. On `/ops`, press **Download export.json**. That file is a full backup.
 
+## 8. After an update that adds a migration
+
+When an update adds a database change, `/ops` shows it under **Migrations** as
+pending. Press **Download export.json** first, then **Apply pending**. Nothing
+already in the database is changed or removed.
+
+## 9. Check it (the Phase 2b test)
+
+1. In a family with two profiles, open a lesson from one profile's kitchen and
+   tap the other profile under **Cooking with someone?**
+2. Cook it through to **Plate it**. Both profiles' kitchens show **Cooked once**
+   on that lesson.
+3. A parent signing in for the first time sees **Before your kids cook** above
+   the lockers. **Got it** closes it for that parent, on every device.
+
+## 10. Check it (the Phase 2c test)
+
+Use an Android phone or tablet with Chrome.
+1. In the app, **Parents → Family**, tick **Turn on voice step control** and
+   press **Save**. Until then, no mic button shows anywhere.
+2. Open a lesson and go into cook mode. Tap the mic button on the step card
+   and allow the microphone when Chrome asks.
+3. Say "next," "back," and "again." On the thermometer step, "next" reads the
+   temperature aloud and stays on that step; tap **Next step** to move on.
+4. Turn Wi-Fi off: the button says "Voice paused, no connection" and the
+   on-screen buttons still work. Turn it back on and voice picks up again.
+
+## 11. Check it (the Phase 2e test)
+
+1. In a test family (not yours), open a lesson from a kid's kitchen. Tap
+   **Suggest a fix** on a step, enter the parent PIN, pick the part (say, a
+   timer), type what it should be, say what's wrong, and **Send**. The lesson
+   card now says the fix is waiting.
+2. In your family, **Parents → Fix requests**. Press **Apply**. The test
+   family's lesson shows the new value, and its card says "Fixed".
+3. Under **Live fixes**, press **Revert**. The lesson is back the way it was,
+   and the request is waiting again.
+4. A fix that names an unclean food, or lowers a thermometer target, can't be
+   applied: the screen says why.
+
 ## Backups and recovery
 
 - **Download export.json** saves everything. **Restore from export.json**

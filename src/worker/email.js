@@ -33,3 +33,9 @@ export const signupCodeEmail = (code, minutes) => ({
   subject: `${code} is your Clean Plate Recipes code`,
   text: `Your code to finish signing up is:\n\n${code}\n\nEnter it on the sign-up page. It works for ${minutes} minutes.\n\nIf you didn't sign up, ignore this email and nothing happens.${SIGNOFF}`,
 });
+
+// A safety or unclean-ingredient report (§6.11), sent to the owner right away.
+export const fixReportEmail = ({ kind, lesson, where, note, change }) => ({
+  subject: `${kind}: ${lesson}`,
+  text: `A family sent a fix request marked "${kind}" on ${lesson}, ${where}.\n\nWhat's wrong:\n${note}\n${change ? `\nTheir suggestion:\n${change}\n` : ''}\nReview it in the app: Parents, then Owner, then Fix requests.${SIGNOFF}`,
+});

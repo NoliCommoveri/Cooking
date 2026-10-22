@@ -42,12 +42,11 @@
     }
   },
   "type": "object", "additionalProperties": false,
-  "required": ["id", "version", "number", "track", "unit", "title", "image", "cuisine", "skill", "skills", "prereqs",
+  "required": ["id", "version", "track", "unit", "title", "image", "cuisine", "skill", "skills", "prereqs",
     "servings", "totalMinutes", "scaling", "learn", "ingredients", "equipment", "steps"],
   "properties": {
-    "id": { "type": "string", "pattern": "^[0-9]{2}-[a-z0-9]+(-[a-z0-9]+)*$" },
+    "id": { "$ref": "#/$defs/id" },
     "version": { "type": "integer", "minimum": 1 },
-    "number": { "type": "integer", "minimum": 1 },
     "track": { "enum": ["core", "beginner"] },
     "unit": { "type": "integer", "minimum": 1 },
     "title": { "$ref": "#/$defs/text" },
@@ -55,7 +54,7 @@
     "cuisine": { "$ref": "#/$defs/id" },
     "skill": { "$ref": "#/$defs/text" },
     "skills": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
-    "prereqs": { "type": "array", "items": { "type": "integer", "minimum": 1 } },
+    "prereqs": { "type": "array", "items": { "type": "string", "pattern": "^(pick:)?[a-z0-9]+(-[a-z0-9]+)*$" } },
     "servings": { "type": "integer", "minimum": 1 },
     "totalMinutes": { "type": "integer", "minimum": 1 },
     "scaling": { "oneOf": [
@@ -78,7 +77,7 @@
       "wrong": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["sign", "fix"],
         "properties": { "sign": { "$ref": "#/$defs/text" }, "fix": { "$ref": "#/$defs/text" } } } },
       "callback": { "type": "object", "additionalProperties": false, "required": ["lesson", "body"],
-        "properties": { "lesson": { "type": "integer", "minimum": 1 }, "body": { "$ref": "#/$defs/text" } } },
+        "properties": { "lesson": { "$ref": "#/$defs/id" }, "body": { "$ref": "#/$defs/text" } } },
       "quiz": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["q", "choices", "answer", "explain"],
         "properties": { "q": { "$ref": "#/$defs/text" }, "choices": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/text" } },
           "answer": { "type": "integer", "minimum": 0 }, "explain": { "$ref": "#/$defs/text" } } } }

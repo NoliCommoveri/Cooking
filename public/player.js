@@ -3,10 +3,13 @@
 // Content comes from /content/ (lesson files and the registry) and is scaled in
 // the browser with the same code the linter uses. Where a cook is up to is kept
 // on this device, so leaving and coming back picks up at the same step, with
-// timers still counting. Saving cooks to the family's account comes next.
+// timers still counting. In the app, each cook is also saved to the family's
+// account for every profile on it (onCook); the demo saves nothing.
 import { scaleLesson, servingOptions } from './lib/scale.js';
 import { findTerms } from './lib/terms.js';
 import { dietView } from './lib/diet.js';
+import { applyPatches, showValue } from './lib/patch.js';
+import { voiceSupported, createVoice } from './voice.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const ic = (id, cls = 'ico') => `<svg class="${cls}" aria-hidden="true"><use href="/icons.svg#${id}"/></svg>`;
@@ -19,7 +22,20 @@ async function load(url) {
   return res.json();
 }
 const getRegistry = async () => (registry ??= await load('/content/registry.json'));
-const getLesson = async (id) => (lessons[id] ??= await load(`/content/lessons/${encodeURIComponent(id)}.json`));
+// The owner's fixes (§6.11) sit on top of the lesson files. They're fetched
+// each time a lesson opens; without a connection, the last ones fetched are used.
+let patches = {};
+async function getPatches() {
+  try {
+    const res = await fetch('/api/patches');
+    if (res.ok) patches = (await res.json()).lessons;
+  } catch { /* offline: keep what we have */ }
+  return patches;
+}
+const getLesson = async (id) => {
+  const [file, live] = await Promise.all([lessons[id] ??= load(`/content/lessons/${encodeURIComponent(id)}.json`).catch((e) => { delete lessons[id]; throw e; }), getPatches()]);
+  return applyPatches(file, live[id]);
+};
 
 // ---------- saved state, per profile and lesson ----------
 const key = (pid, lid) => `cpr.cook.${pid}.${lid}`;
@@ -44,6 +60,7 @@ const TOOL_ICON = { knives: 't-knives', pans: 't-pans', pots: 't-pots', bakeware
 // The showcase drew these ingredients; everything else uses its store section's icon (§5.3a).
 const OWN_ICON = { 'olive-oil': 'i-oil', 'onion-yellow': 'i-onion', 'bell-pepper-red': 'i-pepper', garlic: 'i-garlic', 'cumin-ground': 'i-cumin', 'paprika-smoked': 'i-paprika', 'tomatoes-crushed': 'i-tomato', egg: 'i-egg' };
 
+const listNames = (n) => (n.length < 3 ? n.join(' and ') : `${n.slice(0, -1).join(', ')}, and ${n.at(-1)}`);
 const fmt = (sec) => { sec = Math.max(0, Math.ceil(sec)); const m = Math.floor(sec / 60), s = sec % 60; return m >= 60 ? `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}:${String(s).padStart(2, '0')}` : `${m}:${String(s).padStart(2, '0')}`; };
 const ago = (t) => { const m = Math.floor((Date.now() - t.endAt) / 60000); return m < 1 ? 'Ended just now' : `Ended ${m} min ago`; };
 function ticks(cx, cy, r1, r2, n, stroke, w) {
@@ -70,11 +87,19 @@ function cupSVG(done, of) {
 }
 
 // ---------- sound and the screen ----------
+// Browsers allow sound only after a tap on the page, and can suspend it again
+// when the app goes to the background. Every tap in the player turns it back on.
 let audio = null;
 function unlockSound() {
-  if (audio) return;
-  try { audio = new (window.AudioContext || window.webkitAudioContext)(); } catch { audio = null; }
+  try {
+    audio ??= new (window.AudioContext || window.webkitAudioContext)();
+    if (audio.state !== 'running') return audio.resume().catch(() => {});
+  } catch { audio = null; }
+  return Promise.resolve();
 }
+const soundReady = () => audio?.state === 'running';
+// A ringing timer dings again this often until someone taps Stop (owner, 2026-10-22).
+const DING_EVERY_MS = 4000;
 function ding() {
   if (!audio) return;
   try {
@@ -104,20 +129,94 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // ---------- the player ----------
 
 // mount: the element to draw in. profile: the profile cooking. family: from
-// /api/me. onExit: back to the quest board or recipe box.
-export async function openLesson(mount, { profile, family, lessonId, onExit }) {
+// /api/me. onExit: back to the quest board or recipe box. crew: the family's
+// other profiles, who can join this cook. onCook(id, cook): saves the cook.
+// fixes: { suggest({ lesson, stepId, servings, ingredients }), list(lessonId) }
+// for Suggest a fix and what came of this family's fixes (§6.11). labels: the
+// family's lesson numbers from its course plan ({ id: '8a' }); without them,
+// the suggested order's numbers.
+export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null, fixes = null, labels = null, total = null }) {
   const [R, L] = await Promise.all([getRegistry(), getLesson(lessonId)]);
+  const num = (id) => (labels ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null;
+  // "lesson 8a, Shakshuka", or just the title for a dish the family took out of its plan.
+  const lessonRef = (id, title) => (num(id) ? `lesson ${num(id)}, ${title}` : title);
+  let myFixes = [];
+  const loadFixes = async () => { try { myFixes = fixes ? await fixes.list(L.id) : []; } catch { myFixes = []; } };
+  await loadFixes();
   const quest = profile.theme === 'quest';
   const adult = profile.audience === 'adult';
   const view = dietView(L, R.ingredients, family.diet_filters);
   const options = servingOptions(L);
   const pick = (n) => (options.includes(n) ? n : options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a)));
-  const fresh = () => ({ stage: 'card', servings: pick(family.default_servings), learn: 0, quiz: {}, got: [], gear: [], step: 0, timers: [] });
+  const fresh = () => ({ stage: 'card', servings: pick(family.default_servings), learn: 0, quiz: {}, got: [], gear: [], step: 0, timers: [], with: [] });
   let S = readState(profile.id, L.id) || fresh();
+  S.with = (S.with ?? []).filter((id) => crew.some((p) => p.id === id));
   // A cook in progress reopens on its lesson card, with Keep going and Start over.
   if (S.stage !== 'done') S.stage = 'card';
   let term = null, why = null, tick = null;
   const save = () => writeState(profile.id, L.id, S);
+  // The whole cook, sent each time it moves on (a new stage or step, servings,
+  // who's on it, Plate it). Check-offs ride along with the next one.
+  const sync = () => {
+    if (!onCook || !S.cookId) return;
+    onCook(S.cookId, {
+      lesson_id: L.id, servings: S.servings, profile_ids: [profile.id, ...S.with], started_at: S.startedAt, finished_at: S.finishedAt ?? null,
+      checklist_state: { stage: S.stage === 'card' ? S.last ?? 'learn' : S.stage, step: S.step, got: S.got, gear: S.gear },
+    });
+  };
+  const begin = () => {
+    S.started = true;
+    if (S.cookId) return;
+    const b = new Uint8Array(8);
+    crypto.getRandomValues(b);
+    S.cookId = [...b].map((x) => x.toString(16).padStart(2, '0')).join('');
+    S.startedAt = new Date().toISOString();
+  };
+  // Voice step control (§6.12): only where the family turned it on and the
+  // device can recognize speech. The mic starts on a tap, never on its own.
+  const voiceOk = Boolean(family.voice_enabled) && voiceSupported();
+  let voice = null, voiceStatus = 'off';
+  const VOICE_LABEL = {
+    off: 'Voice: tap to say "next"',
+    listening: 'Listening: say "next," "back," or "again"',
+    speaking: 'Reading it out…',
+    offline: 'Voice paused, no connection',
+    blocked: "The mic is blocked. Allow it in this browser's settings, then tap here",
+  };
+  const voiceBtn = () => (voiceOk
+    ? `<button type="button" class="${quest ? 'q-tstart' : 'p-tstart'} voicebtn" data-act="voice" aria-pressed="${voiceStatus !== 'off' && voiceStatus !== 'blocked'}">${ic('i-mic')}<span data-voice-label>${esc(VOICE_LABEL[voiceStatus])}</span></button>`
+    : '');
+  function onVoiceStatus(st) {
+    voiceStatus = st;
+    const b = mount.querySelector('[data-act="voice"]');
+    if (!b) return;
+    b.setAttribute('aria-pressed', String(st !== 'off' && st !== 'blocked'));
+    b.querySelector('[data-voice-label]').textContent = VOICE_LABEL[st];
+  }
+  // What "next" says on a doneness step instead of moving on, so a stray
+  // "next" can't skip a food-safety check.
+  const targetSpeech = (t) => `${t.temp ? `Check it with the thermometer. It's done at ${t.temp} degrees.` : `It's done when ${t.look}.`} Tap Next when it is.`;
+  function onVoice(cmd) {
+    if (!mount.isConnected) return voice.destroy(); // left by the browser's back button
+    if (S.stage !== 'cook' || why) return;
+    const steps = scaled().steps, i = Math.min(S.step, steps.length - 1), s = steps[i];
+    if (cmd === 'again') return voice.say(s.text);
+    if (cmd === 'next') {
+      if (s.type === 'doneness' && s.target) return voice.say(targetSpeech(s.target));
+      if (i === steps.length - 1) return voice.say('That was the last step. Tap Plate it when you are done.');
+      S.step = i + 1;
+    } else {
+      if (i === 0) return; // "back" doesn't leave cook mode; the Prep button does
+      S.step = i - 1;
+    }
+    term = null;
+    save();
+    sync();
+    draw();
+    // Hands-free: the step "next" moves to is read aloud (owner, 2026-10-22).
+    if (cmd === 'next') voice.say(scaled().steps[S.step].text);
+  }
+  const crewNames = () => [profile, ...crew.filter((p) => S.with.includes(p.id))].map((p) => p.name);
 
   const leftOut = new Set(view.leftOut);
   const swapFor = Object.fromEntries(view.applied.map((x) => [x.for, x.use]));
@@ -154,8 +253,8 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
     if (!term) return '';
     const t = R.terms.find((x) => x.id === term);
     if (!t) return '';
-    const taught = R.lessons.find((x) => x.number === t.taughtIn);
-    return `<div class="kwcard" role="note"><b>${esc(t.word)}</b><p>${esc(t.means)}</p>${taught ? `<small>Practiced in lesson ${taught.number}, ${esc(taught.title)}</small>` : ''}<button type="button" class="kwclose" data-act="term" data-id="">Got it</button></div>`;
+    const taught = t.taughtIn && R.dishes[t.taughtIn];
+    return `<div class="kwcard" role="note"><b>${esc(t.word)}</b><p>${esc(t.means)}</p>${taught ? `<small>Practiced in ${esc(lessonRef(t.taughtIn, taught))}</small>` : ''}<button type="button" class="kwclose" data-act="term" data-id="">Got it</button></div>`;
   }
 
   // ---------- the lesson card ----------
@@ -177,24 +276,48 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
       ...view.leftOut.map((id) => `Leave out the ${esc(name(id).toLowerCase())}.`),
     ];
     const swaps = changes.length ? `<p class="${T.note}"><b>For your family:</b> ${changes.join(' ')}</p>` : '';
+    // Profiles cooking together share one cook, and it counts for each of them (§1).
+    const who = crew.length
+      ? `<div class="${quest ? 'serve' : 'p-serve'} crew"><span class="${quest ? 'lbl' : 'p-lbl'}">Cooking with someone?</span><div class="${quest ? 'sizes' : 'p-sizes'}" role="group" aria-label="Who's cooking">${crew.map((p) => `<button type="button" class="${quest ? 'size' : 'p-size'}" role="checkbox" aria-checked="${S.with.includes(p.id)}" data-act="crew" data-id="${esc(p.id)}">${esc(p.name)}</button>`).join('')}</div></div>`
+      : '';
     const top = quest
-      ? `<article class="q-panel q-card"><p class="q-kick">Path ${L.unit} · Quest ${L.number}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
+      ? `<article class="q-panel q-card"><p class="q-kick">Path ${L.unit}${num(L.id) ? ` · Quest ${num(L.id)}${total ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
           <h2 class="q-title">${esc(L.title)}</h2><p class="q-skill"><b>${esc(L.skill)}</b></p>
-          <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${swaps}
+          <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${who}${swaps}
           <button type="button" class="q-btn" data-act="start">${!S.started ? 'Start quest' : 'Keep going'}</button></article>`
       : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
-          <h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
-          <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${swaps}
+          ${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
+          <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
           <button type="button" class="p-btn" data-act="start">${!S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
-    return `${top}<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${restart}</div>`;
+    return `${top}${fixNotes()}<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${restart}${fixBtn(null)}</div>`;
   }
+
+  // ---------- Suggest a fix (§6.11) ----------
+  const fixBtn = (stepId) => (fixes
+    ? `<button type="button" class="${stepId ? (quest ? 'whybtn' : 'p-why') : T.back} fixbtn" data-act="fix" data-step="${esc(stepId ?? '')}">${ic('i-flag')}Suggest a fix</button>`
+    : '');
+  const OUTCOME = {
+    open: () => 'Your fix is waiting for review.',
+    fixed: (f) => {
+      const ing = /^ingredients\.([a-z0-9-]+)\./.exec(f.field ?? '')?.[1];
+      const what = ing ? `${name(ing).toLowerCase()} ${f.field_label.toLowerCase()}` : (f.field_label ?? 'it').toLowerCase();
+      return `Fixed: ${what}${f.where !== 'the lesson' ? ` in ${f.where}` : ''} is now ${showValue(f.field_kind, f.applied)}.`;
+    },
+    declined: () => 'Looked at, and left as it is.',
+    duplicate: () => 'Someone already reported this one.',
+    needs_content_change: () => 'Saved for a bigger lesson update.',
+  };
+  // What came of this family's fixes on this lesson, newest first.
+  const fixNotes = () => (myFixes.length
+    ? `<div class="${T.note} fixnotes" role="note"><b>Your fixes:</b>${myFixes.slice(0, 3).map((f) => `<p>${esc(OUTCOME[f.status]?.(f) ?? '')}${f.owner_reply ? ` <i>"${esc(f.owner_reply)}"</i>` : ''}</p>`).join('')}</div>`
+    : '');
 
   // ---------- Learn (§3): the move, why it works, same move elsewhere, when it goes wrong, quiz ----------
   function learnCards() {
     const cards = [];
     if (L.learn.callback) {
-      const cb = R.lessons.find((x) => x.number === L.learn.callback.lesson);
+      const cb = R.lessons.find((x) => x.id === L.learn.callback.lesson);
       cards.push({ kind: 'You did this before', title: cb ? cb.title : '', body: L.learn.callback.body, img: cb?.image });
     }
     cards.push({ kind: 'The move', title: L.learn.move.title, body: L.learn.move.body });
@@ -209,7 +332,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
   function loreCard(c) {
     let body;
     if (c.xfer) {
-      body = `<div class="xfer">${c.xfer.map(({ sk, list }) => `<div class="${quest ? '' : 'p-xfer'}"><h5>${esc(R.skills[sk]?.name ?? sk)}</h5><div class="xdishes">${list.map((d) => `<div class="${quest ? 'xd' : 'p-xd'}"><img src="/${esc(d.image)}" alt="" width="64" height="64">${esc(d.title)}<small>Lesson ${d.number}</small></div>`).join('')}</div></div>`).join('')}</div>`;
+      body = `<div class="xfer">${c.xfer.map(({ sk, list }) => `<div class="${quest ? '' : 'p-xfer'}"><h5>${esc(R.skills[sk]?.name ?? sk)}</h5><div class="xdishes">${list.map((d) => `<div class="${quest ? 'xd' : 'p-xd'}"><img src="/${esc(d.image)}" alt="" width="64" height="64">${esc(d.title)}${num(d.id) ? `<small>Lesson ${num(d.id)}</small>` : ''}</div>`).join('')}</div></div>`).join('')}</div>`;
     } else if (c.wrong) {
       body = `<ul class="${quest ? 'wrongs' : 'p-wrongs'}">${c.wrong.map((w) => `<li><b>${esc(w.sign)}</b>${esc(w.fix)}</li>`).join('')}</ul>`;
     } else if (c.quiz) {
@@ -268,12 +391,17 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
   }
 
   // ---------- Cook (§3) ----------
+  // While a timer is going and the browser has sound off (no tap since the
+  // lesson opened, or the app came back from the background), say so.
+  const soundNote = (live) => (live.some((t) => t.state === 'run' || t.ringing) && !soundReady()
+    ? `<button type="button" class="${quest ? 'q-tstart' : 'p-tstart'} soundnote" data-act="sound">${ic('i-sound')}Tap here to turn on the timer sound</button>`
+    : '');
   function timerTray() {
     const live = S.timers.filter((t) => t.state !== 'idle');
     const left = (t) => (t.state === 'run' ? Math.max(0, (t.endAt - Date.now()) / 1000) : t.left);
     if (quest) {
       const C = 2 * Math.PI * 40;
-      return `<h3 class="q-h" style="margin-top:14px">Timer tray</h3><div class="q-timers" aria-label="Timers">${live.length ? live.map((t) => `<div class="q-timer ${t.state}${t.ringing ? ' ringing' : ''}">
+      return `<h3 class="q-h" style="margin-top:14px">Timer tray</h3>${soundNote(live)}<div class="q-timers" aria-label="Timers">${live.length ? live.map((t) => `<div class="q-timer ${t.state}${t.ringing ? ' ringing' : ''}">
         <button type="button" class="dial" data-act="${t.state === 'ended' ? 'tclear' : 'ttoggle'}" data-step="${esc(t.step)}" aria-label="${esc(t.label)} timer: ${t.state === 'run' ? 'pause' : t.state === 'paused' ? 'resume' : 'clear'}">
         <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="#1A2042" stroke="#3D4985" stroke-width="9"/>
         <circle data-ring="${esc(t.step)}" cx="50" cy="50" r="40" fill="none" stroke="${t.state === 'paused' ? '#A6AED8' : '#5BD6C8'}" stroke-width="9" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C * (1 - left(t) / t.sec)).toFixed(1)}" transform="rotate(-90 50 50)"/>
@@ -281,7 +409,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
         <span class="lb">${esc(t.label)}${t.state === 'paused' ? '<br>Paused' : ''}${t.state === 'ended' && !t.ringing ? `<br>${ago(t)}` : ''}</span>
         ${t.ringing ? `<button type="button" class="stop" data-act="tclear" data-step="${esc(t.step)}">Stop</button>` : ''}</div>`).join('') : '<span class="empty">No timers running. Start one from a step.</span>'}</div>`;
     }
-    return `<h3 class="p-h" style="margin-top:14px">The counter</h3><div class="p-counter" aria-label="Timers">${live.length ? live.map((t) => `<div class="p-timer ${t.state}${t.ringing ? ' ringing' : ''}">
+    return `<h3 class="p-h" style="margin-top:14px">The counter</h3>${soundNote(live)}<div class="p-counter" aria-label="Timers">${live.length ? live.map((t) => `<div class="p-timer ${t.state}${t.ringing ? ' ringing' : ''}">
       <button type="button" class="dial" data-act="${t.state === 'ended' ? 'tclear' : 'ttoggle'}" data-step="${esc(t.step)}" aria-label="${esc(t.label)} timer: ${t.state === 'run' ? 'pause' : t.state === 'paused' ? 'resume' : 'clear'}">${dialSVG(left(t) / t.sec)}</button>
       <span class="lb">${esc(t.label)}${t.state === 'paused' ? ' · paused' : ''}</span>
       ${t.state === 'ended' ? `<span class="tt">${t.ringing ? "Time's up!" : 'Done'}</span>${t.ringing ? '' : `<span class="ago">${ago(t)}</span>`}` : `<span class="tt" data-left="${esc(t.step)}">${fmt(left(t))}</span>`}
@@ -306,8 +434,8 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
     const nav = `<div class="${quest ? 'q-nav' : 'p-nav'}"><button type="button" class="${T.back}" data-act="step" data-i="-1">${i === 0 ? 'Prep' : 'Back'}</button><button type="button" class="${T.btn}" data-act="${last ? 'finish' : 'step'}" data-i="1">${last ? 'Plate it' : 'Next step'}</button></div>`;
     const body = quest
       ? `<div class="q-cook">${banner(s.safety, s.hazard)}<div class="q-stages" style="grid-template-columns:repeat(${n},1fr)" role="img" aria-label="Stage ${i + 1} of ${n}">${steps.map((_, k) => `<i class="${k < i ? 'done' : k === i ? 'cur' : ''}"></i>`).join('')}</div>
-          <article class="q-panel q-log"><p class="q-kick">Stage ${i + 1} of ${n}</p><p class="steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="logacts">${whyBtn}</div></article>${nav}</div>`
-      : `<div class="p-cook">${banner(s.safety, s.hazard)}<div class="p-cookbody"><article class="p-card p-lined p-stepcard"><p class="p-stepno">Step ${i + 1} of ${n}</p><p class="p-steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="p-acts">${whyBtn}</div></article>
+          <article class="q-panel q-log"><p class="q-kick">Stage ${i + 1} of ${n}</p><p class="steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="logacts">${whyBtn}${voiceBtn()}${fixBtn(s.id)}</div></article>${nav}</div>`
+      : `<div class="p-cook">${banner(s.safety, s.hazard)}<div class="p-cookbody"><article class="p-card p-lined p-stepcard"><p class="p-stepno">Step ${i + 1} of ${n}</p><p class="p-steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="p-acts">${whyBtn}${voiceBtn()}${fixBtn(s.id)}</div></article>
           <div class="p-cup">${cupSVG(i, n)}<span>${i} of ${n} done</span></div></div>${nav}</div>`;
     return body + timerTray();
   }
@@ -322,17 +450,18 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
   function doneView() {
     return `<article class="${T.card}" style="text-align:center;justify-items:center">${tape}<p class="${T.kick}">${quest ? 'Quest cleared' : 'Dish done'}</p><h4>${esc(L.title)}</h4>
       <div class="${quest ? 'q-win' : 'p-photo'}" style="max-width:220px"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="220" height="220"></div>
-      <p>Nice cooking. Plate it up and enjoy it.</p><button type="button" class="${T.btn}" data-act="exit-done">${quest ? 'Back to the quest board' : 'Back to the recipe box'}</button></article>`;
+      <p>Nice cooking. Plate it up and enjoy it.</p>${onCook ? `<p class="${T.note}">This cook counts for ${esc(listNames(crewNames()))}.</p>` : ''}<button type="button" class="${T.btn}" data-act="exit-done">${quest ? 'Back to the quest board' : 'Back to the recipe box'}</button></article>`;
   }
 
   // ---------- drawing and events ----------
   const STAGES = { card: cardView, learn: learnView, prep: prepView, cook: cookView, done: doneView };
-  let wakeTipShown = false;
+  let wakeTipShown = false, lastDing = 0;
   async function draw(focusTop = true) {
     if (S.stage !== 'card' && S.stage !== 'done') { S.last = S.stage; save(); }
     const back = `<a class="back" href="#" data-act="exit">← ${quest ? 'Quest board' : 'Recipe box'}</a>`;
     mount.innerHTML = `<section class="kitchen qx player" data-kt="${quest ? 'quest' : 'passport'}">${back}${STAGES[S.stage]()}${whyView()}</section>`;
     if (focusTop) window.scrollTo(0, 0);
+    if (S.stage !== 'cook' && voice?.on) voice.stop();
     const awake = S.stage === 'prep' || S.stage === 'cook';
     const ok = await keepAwake(awake);
     if (awake && !ok && !wakeTipShown && !readFlag('cpr.waketip')) {
@@ -346,8 +475,14 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
   function onTick() {
     let changed = false;
     for (const t of S.timers) {
-      if (t.state === 'run' && Date.now() >= t.endAt) { t.state = 'ended'; t.ringing = true; changed = true; ding(); }
+      if (t.state === 'run' && Date.now() >= t.endAt) {
+        t.state = 'ended'; t.ringing = true; changed = true;
+        // With voice on, the timer says what's done.
+        if (voice?.on) voice.say(`Time's up: ${t.label}.`);
+      }
     }
+    // Every ringing timer keeps dinging until it's stopped.
+    if (S.timers.some((t) => t.ringing) && Date.now() - lastDing >= DING_EVERY_MS) { lastDing = Date.now(); ding(); }
     if (changed) { save(); return draw(false); }
     for (const t of S.timers) {
       if (t.state !== 'run') continue;
@@ -365,19 +500,25 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
   function readFlag(k) { try { return localStorage.getItem(k); } catch { return null; } }
   function setFlag(k) { try { localStorage.setItem(k, '1'); } catch { /* not kept */ } }
 
+  // Back from the background: redraw, so the timers and the sound note are current.
+  const onVisible = () => { if (document.visibilityState === 'visible' && S.stage === 'cook' && mount.isConnected) draw(false); };
+  document.addEventListener('visibilitychange', onVisible);
+
   function exit() {
     clearInterval(tick);
+    document.removeEventListener('visibilitychange', onVisible);
+    voice?.destroy();
     keepAwake(false);
     mount.removeEventListener('click', onClick);
     onExit();
   }
 
   function onClick(e) {
+    unlockSound();
     const b = e.target.closest('[data-act]');
     if (!b || !mount.contains(b)) return;
     if (b.dataset.act === 'why-close' && b.classList.contains('whyov') && e.target !== b) return;
     e.preventDefault();
-    unlockSound();
     const act = b.dataset.act, d = b.dataset;
     const step = (dir) => {
       const n = L.steps.length;
@@ -390,15 +531,16 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
       case 'exit-done': clearState(profile.id, L.id); return exit();
       case 'serv': S.servings = options[Math.max(0, Math.min(options.length - 1, options.indexOf(S.servings) + Number(d.i)))]; break;
       case 'serv-set': S.servings = Number(d.n); break;
-      case 'start': S.stage = S.started ? S.last || 'learn' : 'learn'; S.started = true; break;
+      case 'start': S.stage = S.started ? S.last || 'learn' : 'learn'; begin(); break;
       case 'restart': S = fresh(); break;
+      case 'crew': S.with = S.with.includes(d.id) ? S.with.filter((x) => x !== d.id) : [...S.with, d.id]; break;
       case 'learn': {
         const next = S.learn + Number(d.i);
         if (next < 0) S.stage = 'card'; else S.learn = Math.min(learnCards().length - 1, next);
         break;
       }
       case 'quiz': if (S.quiz[d.q] === undefined) S.quiz[d.q] = Number(d.i); return save(), draw(false);
-      case 'goto': S.stage = d.to; S.started = true; break;
+      case 'goto': S.stage = d.to; begin(); break;
       case 'got': case 'gear': {
         const list = act === 'got' ? S.got : S.gear, at = list.indexOf(d.id);
         if (at >= 0) list.splice(at, 1); else list.push(d.id);
@@ -406,7 +548,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
         return draw(false);
       }
       case 'step': step(Number(d.i)); break;
-      case 'finish': S.stage = 'done'; S.timers = []; break;
+      case 'finish': S.stage = 'done'; S.timers = []; S.finishedAt = new Date().toISOString(); break;
       case 'term': term = d.id && d.id !== term ? d.id : null; return draw(false);
       case 'why': why = d.id; return draw(false);
       case 'why-close': why = null; return draw(false);
@@ -423,10 +565,21 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
         save();
         return draw(false);
       }
+      case 'fix':
+        // A parent or an adult learner fills it in; the app gives it the lesson,
+        // step, and serving count. Afterwards the lesson card shows its status.
+        return fixes.suggest({ lesson: L, stepId: d.step || null, servings: S.servings, ingredients: R.ingredients })
+          .then(async (sent) => { if (sent) { await loadFixes(); draw(false); } });
+      case 'sound': return unlockSound().then(() => { if (soundReady()) ding(); draw(false); });
+      case 'voice':
+        voice ??= createVoice({ onCommand: onVoice, onStatus: onVoiceStatus });
+        if (voice.on) voice.stop(); else voice.start();
+        return;
       case 'tclear': S.timers = S.timers.filter((x) => x.step !== d.step); save(); return draw(false);
       default: return;
     }
     save();
+    sync();
     draw();
   }
   mount.addEventListener('click', onClick);

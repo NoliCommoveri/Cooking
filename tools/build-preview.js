@@ -7,6 +7,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadContent } from './lint-content.js';
 import { lint } from '../src/content/lint.js';
+import { numberCourse } from '../src/content/course.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'preview', 'lesson-preview.html');
@@ -20,11 +21,15 @@ export function buildPreview() {
   const { errors, warnings } = lint(c);
   const images = {};
   for (const { data: L } of c.lessons) {
-    const web = join(ROOT, 'mockups/quest-showcase/img', L.image.replace(/^dishes\//, '').replace(/\.png$/, '.webp'));
+    const web = join(ROOT, 'public/img', L.image.replace(/\.png$/, '.webp'));
     if (existsSync(web)) images[L.id] = 'data:image/webp;base64,' + readFileSync(web).toString('base64');
   }
+  const order = Object.fromEntries(c.course.dishes.map((d, i) => [d.id, i]));
   const data = {
-    lessons: c.lessons.map(l => l.data).sort((a, b) => a.number - b.number),
+    lessons: c.lessons.map(l => l.data).sort((a, b) => order[a.id] - order[b.id]),
+    // Numbers in the suggested course order, and every dish's title (a kitchen word can point at one not written yet).
+    labels: numberCourse(c.course.dishes).labels,
+    dishTitles: Object.fromEntries(c.course.dishes.map(d => [d.id, d.title])),
     ingredients: Object.fromEntries(c.ingredients.map(i => [i.id, i])),
     equipment: Object.fromEntries(c.equipment.map(e => [e.id, e])),
     skills: Object.fromEntries(c.skills.map(s => [s.id, s])),

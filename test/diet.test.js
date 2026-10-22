@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { dietView } from '../src/content/diet.js';
 import { LIBRARY } from '../src/worker/library-data.js';
-import { buildLibrary, buildPublic } from '../tools/build-library.js';
+import { buildLibrary, buildPublic, buildContent } from '../tools/build-library.js';
 import { makeEnv, family } from './helpers/worker.js';
 
 const ING = {
@@ -52,6 +52,7 @@ test('an availability substitution is not a diet swap', () => {
 
 test('src/worker/library-data.js is up to date with the content (run: node tools/build-library.js)', () => {
   assert.equal(readFileSync(new URL('../src/worker/library-data.js', import.meta.url), 'utf8'), buildLibrary());
+  assert.equal(readFileSync(new URL('../src/worker/content-data.js', import.meta.url), 'utf8'), buildContent());
 });
 
 test('public/content and public/lib are up to date (run: node tools/build-library.js)', () => {
@@ -77,14 +78,14 @@ test('the library API applies the family\'s filters', async () => {
 
   await c.put('/api/family', { name: 'Carsons', default_servings: 6, diet_filters: ['gluten'] });
   const gf = (await c.get('/api/library')).body;
-  const bulgogi = gf.lessons.find((l) => l.number === 14);
+  const bulgogi = gf.lessons.find((l) => l.id === 'beef-bulgogi');
   assert.ok(bulgogi, 'bulgogi stays: tamari replaces soy sauce');
   assert.deepEqual(bulgogi.substitutions.map((s) => s.use), ['Tamari']);
-  assert.ok(!gf.lessons.some((l) => l.number === 38), 'biscuits have flour and no swap');
+  assert.ok(!gf.lessons.some((l) => l.id === 'buttermilk-biscuits'), 'biscuits have flour and no swap');
 
   await c.put('/api/family', { name: 'Carsons', default_servings: 6, diet_filters: ['dairy'] });
   const df = (await c.get('/api/library')).body;
-  const shakshuka = df.lessons.find((l) => l.number === 4);
+  const shakshuka = df.lessons.find((l) => l.id === 'shakshuka');
   assert.ok(shakshuka, 'shakshuka stays: its feta is optional');
   assert.ok(shakshuka.left_out.length > 0);
   assert.equal(gf.hidden, all.lessons.length - gf.lessons.length);

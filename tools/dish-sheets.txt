@@ -2,34 +2,34 @@
 # names in reading order (top row left to right, then the next row).
 # '-' marks a dish replaced by a later sheet. retired/ holds pictures of dishes swapped out of the course. Re-crop everything with:
 #   while read f n; do case $f in \#*|'') continue;; esac; python3 tools/crop-dish-sheet.py content/images/source/$f content/images/dishes $n 9; done < tools/dish-sheets.txt
-sheet-01-unit1.png 01-spring-rolls,02-fattoush,03-fish-tacos,-,-
-sheet-02-unit2.png 04-shakshuka,05-chicken-fried-rice,06-oyakodon,07-chicken-adobo,08-cacio-e-pepe
-sheet-03-unit3.png 09-chana-masala,10-misir-wot,11-chicken-tagine,12-butter-chicken,13-jerk-chicken
-sheet-04-units4-5.png -,15-lomo-saltado,16-chicken-tinga-tacos,17-pupusas
-sheet-05-units5-6.png 18-gyoza,19-skillet-naan,20-pao-de-queijo,21-spanakopita
-sheet-06-unit6-desserts.png 22-spinach-mushroom-quiche,23-chicken-katsu,24-swedish-meatballs,25-churros
-sheet-07-unit2-3.png -,33-beef-chili,-,-
-sheet-08-breakfast.png -,29-hash-browns,30-breakfast-burritos,31-eggs-benedict
-sheet-09-baking.png 40-blueberry-muffins,41-skillet-cornbread,42-cinnamon-rolls,43-granola
-sheet-10-units4-5.png retired/36-chicken-noodle-soup,-,38-buttermilk-biscuits,39-biscuits-and-gravy
-sheet-11-unit6.png 44-meatloaf,45-roast-chicken,46-chicken-pot-pie,47-pot-roast
-sheet-12-finale.png retired/48-southern-fried-chicken,49-brown-butter-cookies,50-apple-pie,26-chicken-caesar
-sheet-13-redos-logo.png 37-philly-cheesesteak,28-french-omelet,32-mac-and-cheese,-
-sheet-14-redos.png 14-beef-bulgogi,27-smash-burgers,retired/34-jambalaya,35-bbq-pulled-chicken
-sheet-15-foundations-1.png 51-chicken-fajitas,retired/52-carrot-apple-slaw,retired/53-guacamole-and-chips,retired/54-bruschetta
-sheet-16-foundations-2.png 36-matzo-ball-soup,56-minestrone,57-grilled-cheese-tomato-soup,58-challah-french-toast
-sheet-17-foundations-3.png 59-spaghetti-marinara,retired/60-sloppy-joes,retired/61-croque-madame,retired/62-chicken-gumbo
-sheet-18-unit5.png 63-rugelach,64-beef-empanadas,65-challah,66-homemade-pizza
-sheet-21-swaps-1.png 52-shoestring-fries,53-chimichurri-steak,54-tuna-salad-sandwiches,55-ratatouille
+sheet-01-unit1.png spring-rolls,fattoush,fish-tacos,-,-
+sheet-02-unit2.png shakshuka,chicken-fried-rice,oyakodon,chicken-adobo,cacio-e-pepe
+sheet-03-unit3.png chana-masala,misir-wot,chicken-tagine,butter-chicken,jerk-chicken
+sheet-04-units4-5.png -,lomo-saltado,chicken-tinga-tacos,pupusas
+sheet-05-units5-6.png gyoza,skillet-naan,pao-de-queijo,spanakopita
+sheet-06-unit6-desserts.png spinach-mushroom-quiche,chicken-katsu,swedish-meatballs,churros
+sheet-07-unit2-3.png -,beef-chili,-,-
+sheet-08-breakfast.png -,hash-browns,breakfast-burritos,eggs-benedict
+sheet-09-baking.png blueberry-muffins,skillet-cornbread,cinnamon-rolls,granola
+sheet-10-units4-5.png retired/36-chicken-noodle-soup,-,buttermilk-biscuits,biscuits-and-gravy
+sheet-11-unit6.png meatloaf,roast-chicken,chicken-pot-pie,pot-roast
+sheet-12-finale.png retired/48-southern-fried-chicken,brown-butter-cookies,apple-pie,chicken-caesar
+sheet-13-redos-logo.png philly-cheesesteak,french-omelet,mac-and-cheese,-
+sheet-14-redos.png beef-bulgogi,smash-burgers,retired/34-jambalaya,bbq-pulled-chicken
+sheet-15-foundations-1.png chicken-fajitas,retired/52-carrot-apple-slaw,retired/53-guacamole-and-chips,retired/54-bruschetta
+sheet-16-foundations-2.png matzo-ball-soup,minestrone,grilled-cheese-tomato-soup,challah-french-toast
+sheet-17-foundations-3.png spaghetti-marinara,retired/60-sloppy-joes,retired/61-croque-madame,retired/62-chicken-gumbo
+sheet-18-unit5.png rugelach,beef-empanadas,challah,homemade-pizza
+sheet-21-swaps-1.png shoestring-fries,chimichurri-steak,tuna-salad-sandwiches,ratatouille
 # sheet-19-africa-1.png: its plates touch, so it's split by hand first. Each box (left, top, right, bottom)
 # is cut out onto a white margin, then cropped alone with the same tool:
-#   67-jollof-rice 0,50,532,445   68-chicken-yassa 530,50,1022,445   69-suya 1014,25,1536,440
-#   70-peanut-stew 0,452,650,950  71-bobotie 655,452,1536,990
+#   jollof-rice 0,50,532,445   chicken-yassa 530,50,1022,445   suya 1014,25,1536,440
+#   peanut-stew 0,452,650,950  bobotie 655,452,1536,990
 # sheet-20-africa-2.png: split by hand the same way:
-#   72-ugali-sukuma-wiki 0,0,775,462   73-malva-pudding 835,15,1536,472
-#   74-koshari 0,462,775,1000          75-kelewele 785,472,1536,995
+#   ugali-sukuma-wiki 0,0,775,462   malva-pudding 835,15,1536,472
+#   koshari 0,462,775,1000          kelewele 785,472,1536,995
 # sheet-22-swaps-2.png: split by hand the same way:
-#   60-honey-garlic-chicken 0,65,520,448   61-chicken-spinach-crepes 518,62,1030,448   62-japanese-chicken-curry 1028,72,1536,448
-#   34-red-beans-and-rice 70,470,705,950   48-fish-and-chips 700,450,1536,940
+#   honey-garlic-chicken 0,65,520,448   chicken-spinach-crepes 518,62,1030,448   japanese-chicken-curry 1028,72,1536,448
+#   red-beans-and-rice 70,470,705,950   fish-and-chips 700,450,1536,940
 # The fourth item on sheet 13 is the logo, cropped separately:
 #   python3 tools/crop-dish-sheet.py content/images/source/sheet-13-redos-logo.png content/images/brand -,-,-,clean-plate-logo 9
