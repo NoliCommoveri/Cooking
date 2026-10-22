@@ -370,3 +370,8 @@ Owner rulings on open questions:
   changes the lesson on the page. One sample request is rejected by the
   food-safety check (an egg target below 160°F), and the blocked-word scan
   rejects unclean foods.
+- The first-run wizard (§6.9) also has a **profile intro** (Requirement), at
+  the owner's request: a short, skippable, replayable intro in the profile's
+  own theme. It covers asking for a lesson, servings, Prep, cook mode, the
+  photo and reflection, progress, what to do when something looks wrong (kids
+  tell a grown-up; adults get Suggest a fix), and the helper.
