@@ -132,9 +132,14 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // /api/me. onExit: back to the quest board or recipe box. crew: the family's
 // other profiles, who can join this cook. onCook(id, cook): saves the cook.
 // fixes: { suggest({ lesson, stepId, servings, ingredients }), list(lessonId) }
-// for Suggest a fix and what came of this family's fixes (§6.11).
-export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null, fixes = null }) {
+// for Suggest a fix and what came of this family's fixes (§6.11). labels: the
+// family's lesson numbers from its course plan ({ id: '8a' }); without them,
+// the suggested order's numbers.
+export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null, fixes = null, labels = null, total = null }) {
   const [R, L] = await Promise.all([getRegistry(), getLesson(lessonId)]);
+  const num = (id) => (labels ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null;
+  // "lesson 8a, Shakshuka", or just the title for a dish the family took out of its plan.
+  const lessonRef = (id, title) => (num(id) ? `lesson ${num(id)}, ${title}` : title);
   let myFixes = [];
   const loadFixes = async () => { try { myFixes = fixes ? await fixes.list(L.id) : []; } catch { myFixes = []; } };
   await loadFixes();
@@ -248,8 +253,8 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
     if (!term) return '';
     const t = R.terms.find((x) => x.id === term);
     if (!t) return '';
-    const taught = R.lessons.find((x) => x.number === t.taughtIn);
-    return `<div class="kwcard" role="note"><b>${esc(t.word)}</b><p>${esc(t.means)}</p>${taught ? `<small>Practiced in lesson ${taught.number}, ${esc(taught.title)}</small>` : ''}<button type="button" class="kwclose" data-act="term" data-id="">Got it</button></div>`;
+    const taught = t.taughtIn && R.dishes[t.taughtIn];
+    return `<div class="kwcard" role="note"><b>${esc(t.word)}</b><p>${esc(t.means)}</p>${taught ? `<small>Practiced in ${esc(lessonRef(t.taughtIn, taught))}</small>` : ''}<button type="button" class="kwclose" data-act="term" data-id="">Got it</button></div>`;
   }
 
   // ---------- the lesson card ----------
@@ -276,12 +281,12 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
       ? `<div class="${quest ? 'serve' : 'p-serve'} crew"><span class="${quest ? 'lbl' : 'p-lbl'}">Cooking with someone?</span><div class="${quest ? 'sizes' : 'p-sizes'}" role="group" aria-label="Who's cooking">${crew.map((p) => `<button type="button" class="${quest ? 'size' : 'p-size'}" role="checkbox" aria-checked="${S.with.includes(p.id)}" data-act="crew" data-id="${esc(p.id)}">${esc(p.name)}</button>`).join('')}</div></div>`
       : '';
     const top = quest
-      ? `<article class="q-panel q-card"><p class="q-kick">Path ${L.unit} · Quest ${L.number}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
+      ? `<article class="q-panel q-card"><p class="q-kick">Path ${L.unit}${num(L.id) ? ` · Quest ${num(L.id)}${total ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
           <h2 class="q-title">${esc(L.title)}</h2><p class="q-skill"><b>${esc(L.skill)}</b></p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${who}${swaps}
           <button type="button" class="q-btn" data-act="start">${!S.started ? 'Start quest' : 'Keep going'}</button></article>`
       : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
-          <h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
+          ${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
           <button type="button" class="p-btn" data-act="start">${!S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
@@ -312,7 +317,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
   function learnCards() {
     const cards = [];
     if (L.learn.callback) {
-      const cb = R.lessons.find((x) => x.number === L.learn.callback.lesson);
+      const cb = R.lessons.find((x) => x.id === L.learn.callback.lesson);
       cards.push({ kind: 'You did this before', title: cb ? cb.title : '', body: L.learn.callback.body, img: cb?.image });
     }
     cards.push({ kind: 'The move', title: L.learn.move.title, body: L.learn.move.body });
@@ -327,7 +332,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
   function loreCard(c) {
     let body;
     if (c.xfer) {
-      body = `<div class="xfer">${c.xfer.map(({ sk, list }) => `<div class="${quest ? '' : 'p-xfer'}"><h5>${esc(R.skills[sk]?.name ?? sk)}</h5><div class="xdishes">${list.map((d) => `<div class="${quest ? 'xd' : 'p-xd'}"><img src="/${esc(d.image)}" alt="" width="64" height="64">${esc(d.title)}<small>Lesson ${d.number}</small></div>`).join('')}</div></div>`).join('')}</div>`;
+      body = `<div class="xfer">${c.xfer.map(({ sk, list }) => `<div class="${quest ? '' : 'p-xfer'}"><h5>${esc(R.skills[sk]?.name ?? sk)}</h5><div class="xdishes">${list.map((d) => `<div class="${quest ? 'xd' : 'p-xd'}"><img src="/${esc(d.image)}" alt="" width="64" height="64">${esc(d.title)}${num(d.id) ? `<small>Lesson ${num(d.id)}</small>` : ''}</div>`).join('')}</div></div>`).join('')}</div>`;
     } else if (c.wrong) {
       body = `<ul class="${quest ? 'wrongs' : 'p-wrongs'}">${c.wrong.map((w) => `<li><b>${esc(w.sign)}</b>${esc(w.fix)}</li>`).join('')}</ul>`;
     } else if (c.quiz) {

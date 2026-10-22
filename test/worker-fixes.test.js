@@ -5,7 +5,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { makeEnv, family, client, lastEmailTo } from './helpers/worker.js';
 
-const L = '04-shakshuka';
+const L = 'shakshuka';
 
 async function setup() {
   const env = await makeEnv();

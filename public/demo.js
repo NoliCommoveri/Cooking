@@ -6,6 +6,7 @@ import { openLesson } from './player.js';
 import { dietView } from './lib/diet.js';
 import { scaleLesson } from './lib/scale.js';
 import { toBase, formatVolume, formatWeight, formatButter, mixed } from './lib/units.js';
+import { numberCourse } from './lib/course.js';
 
 const root = document.getElementById('demo');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -18,7 +19,9 @@ const lessons = Object.fromEntries(await Promise.all(R.lessons.map(async (l) => 
 const DIET = { nuts: 'Tree nuts', peanuts: 'Peanuts', dairy: 'Dairy', egg: 'Eggs', gluten: 'Gluten', fish: 'Fish', meat: 'Meat and poultry' };
 const SECTION_ICON = { produce: 's-produce', meat: 's-meat', fish: 's-fish', dairy: 's-dairy', bakery: 's-bakery', pantry: 's-pantry', canned: 's-canned', frozen: 's-frozen', spices: 's-pantry' };
 const SECTION_NAME = { produce: 'Produce', meat: 'Meat', fish: 'Fish', dairy: 'Dairy and eggs', bakery: 'Bakery', pantry: 'Pantry', canned: 'Canned and jarred', frozen: 'Frozen', spices: 'Spices' };
-const DEMO_SHOP = ['04-shakshuka', '14-beef-bulgogi'].filter((id) => lessons[id]);
+const DEMO_SHOP = ['shakshuka', 'beef-bulgogi'].filter((id) => lessons[id]);
+// Lesson numbers in the suggested course order (a family's own plan can change them).
+const { labels: NUM, total: TOTAL } = numberCourse(C.dishes);
 
 // What a visitor has chosen. Kept for this tab only.
 let V = { theme: 'quest', audience: 'kid', diet: [], tab: 'try', checked: [] };
@@ -61,9 +64,9 @@ function tryView() {
     const notes = [...v.applied.map((x) => `Made with ${name(x.use)} instead of ${name(x.for)}`), ...v.leftOut.map((id) => `Leave out the ${name(id)}`)];
     const cu = R.cuisines[L.cuisine]?.name ?? L.cuisine;
     const inner = quest
-      ? `<article class="q-panel q-card"><p class="q-kick">Path ${L.unit} · Quest ${L.number}</p><div class="q-win"><img src="/${esc(l.image)}" alt="" width="230" height="230" loading="lazy"></div><h3 class="q-title">${esc(L.title)}</h3><p class="q-skill">${esc(L.skill)}</p>
+      ? `<article class="q-panel q-card"><p class="q-kick">Path ${L.unit} · Quest ${NUM[L.id]}</p><div class="q-win"><img src="/${esc(l.image)}" alt="" width="230" height="230" loading="lazy"></div><h3 class="q-title">${esc(L.title)}</h3><p class="q-skill">${esc(L.skill)}</p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>Serves</dt><dd>${L.servings}</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div></dl>${notes.map((n) => `<p class="q-swap">${esc(n)}</p>`).join('')}</article>`
-      : `<article class="p-card"><span class="tape t1"></span><span class="tape t2"></span><div class="p-photo"><img src="/${esc(l.image)}" alt="" width="220" height="220" loading="lazy"></div><h3 class="p-title">${esc(L.title)}</h3><p class="p-skill">${esc(L.skill)}</p>
+      : `<article class="p-card"><span class="tape t1"></span><span class="tape t2"></span><div class="p-photo"><img src="/${esc(l.image)}" alt="" width="220" height="220" loading="lazy"></div><p class="p-lessonno">Lesson ${NUM[L.id]}</p><h3 class="p-title">${esc(L.title)}</h3><p class="p-skill">${esc(L.skill)}</p>
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>Serves ${L.servings}</span><span>${esc(cu)}</span></div>${notes.map((n) => `<p class="p-swap">${esc(n)}</p>`).join('')}</article>`;
     return `<button type="button" class="lesson" data-open="${esc(l.id)}" aria-label="Try ${esc(L.title)}">${inner}</button>`;
   };
@@ -107,16 +110,17 @@ function shopView() {
 }
 
 // ---------- the whole course ----------
-const dishByNum = Object.fromEntries(C.dishes.map((d) => [d.number, d]));
+const dishById = Object.fromEntries(C.dishes.map((d) => [d.id, d]));
+const groupOf = (d) => (d.pickOne ? C.dishes.filter((x) => x.pickOne === d.pickOne) : [d]);
 function courseView() {
   const units = [...new Set(C.dishes.map((d) => d.unit))];
   const row = (d) => {
     const cu = R.cuisines[d.cuisine]?.name ?? d.cuisine;
-    const pick = d.pickOneWith ? `<small class="pick">Pick one: ${[d.number, ...d.pickOneWith].sort((a, b) => a - b).map((n) => esc(dishByNum[n].title)).join(' · ')}</small>` : '';
-    const body = `<img src="/${esc(d.image)}" alt="" width="64" height="64" loading="lazy"><span><b>${d.number}. ${esc(d.title)}</b><small>${esc(cu)}${d.breakfast ? ' · breakfast' : ''}</small><small>${esc(d.skill)}</small>${pick}${d.lesson ? `<span class="tag">${ic('i-check', '')}Try it now</span>` : ''}</span>`;
-    return d.lesson ? `<button type="button" class="c-dish" data-open="${esc(d.lesson)}">${body}</button>` : `<div class="c-dish">${body}</div>`;
+    const pick = d.pickOne ? `<small class="pick">Pick one: ${groupOf(d).map((x) => esc(x.title)).join(' · ')}</small>` : '';
+    const body = `<img src="/${esc(d.image)}" alt="" width="64" height="64" loading="lazy"><span><b>${NUM[d.id]}. ${esc(d.title)}</b><small>${esc(cu)}${d.breakfast ? ' · breakfast' : ''}</small><small>${esc(d.skill)}</small>${pick}${d.written ? `<span class="tag">${ic('i-check', '')}Try it now</span>` : ''}</span>`;
+    return d.written ? `<button type="button" class="c-dish" data-open="${esc(d.id)}">${body}</button>` : `<div class="c-dish">${body}</div>`;
   };
-  return `<p class="mut">${C.dishes.length} dishes in ${units.length} units. Each unit teaches a set of skills; the ones marked "Try it now" are written and ready.</p>
+  return `<p class="mut">${C.dishes.length} dishes in ${units.length} units, ${TOTAL} lessons on one cook's path: dishes that share a number, like 1a, 1b, and 1c, are pick-one choices. Each unit teaches a set of skills; the ones marked "Try it now" are written and ready.</p>
     ${units.map((u) => `<h3 class="c-unit">${u === 7 ? 'Desserts' : `Unit ${u}: ${esc(R.units[u])}`}</h3><div class="c-grid">${C.dishes.filter((d) => d.unit === u).map(row).join('')}</div>`).join('')}`;
 }
 
@@ -134,11 +138,11 @@ function skillsView() {
     if (!e) order.push(e = { id: s, teach: [], practice: [] });
     // The first dish with the skill teaches it. When that dish is in a pick-one
     // group, every dish in the group that has the skill teaches it too (§4.0).
-    if (!e.teach.length) e.teach.push(d.number);
-    else if (dishByNum[e.teach[0]].pickOneWith?.includes(d.number)) e.teach.push(d.number);
-    else e.practice.push(d.number);
+    if (!e.teach.length) e.teach.push(d.id);
+    else if (d.pickOne && dishById[e.teach[0]].pickOne === d.pickOne) e.teach.push(d.id);
+    else e.practice.push(d.id);
   }
-  const names = (ns) => ns.map((n) => `${esc(dishByNum[n].title)}${dishByNum[n].lesson ? ' ✓' : ''}`).join(', ');
+  const names = (ids) => ids.map((id) => `${NUM[id]} ${esc(dishById[id].title)}${dishById[id].written ? ' ✓' : ''}`).join(', ');
   return `<p class="mut">${order.length} skills across ${C.dishes.length} dishes, in the order the course first teaches them. ✓ marks a lesson you can try now.</p>
     <div class="sk-list">${order.map((e) => {
       const s = R.skills[e.id];

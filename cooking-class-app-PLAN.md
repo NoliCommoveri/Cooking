@@ -139,132 +139,140 @@ Separate from safety levels, which are about who must be in the kitchen. These a
 
 ## 4. Curriculum (75 dishes)
 
-Lessons are grouped into units by skill. International and American dishes are mixed within each unit, and breakfast dishes are spread across the units. The exact teaching order is still an open content task. **Recommendation:** go through the units in order and alternate cuisines within each unit. The safety levels below are set in the content. Parents can't change them.
+Lessons are grouped into units by skill. International and American dishes are mixed within each unit, and breakfast dishes are spread across the units. The tables below are in course order (owner, 2026-10-22): units in order, prerequisites first, easier before harder, and cuisines alternated within each unit. **A lesson's number is its place in that order**, not something stored on the lesson (§4.1). The safety levels below are set in the content. Parents can't change them.
 
 ### 4.0 Foundation skills and choose-one lessons — Requirement (owner, 2026-10-22)
 - **Foundation skills** are the ones most other lessons build on: the knife cuts (julienne, fine chopping and mincing, dicing, slicing), heat control, building a sauce, a roux, cutting in fat, and a yeast dough.
 - **Every foundation skill is taught by at least two lessons, and a family picks one.** The two dishes come from very different cuisines, so every family can find one it will actually cook, and nobody skips the skill. Either lesson counts as done for the skill.
 - **Knife work comes first, strongly suggested.** Nearly every lesson uses it. The app nudges parents toward a Unit 1 lesson before anything else, but doesn't block them (§6.2).
 - **Parents can see foundations at a glance** (§6.2): foundation lessons are marked in the library and the queue, and choose-one lessons are shown side by side.
-- **Prerequisites:** a lesson that needs a foundation skill unlocks when either lesson teaching it is done. The exception is a lesson built on the dish itself: 39 serves 38's biscuits, so it still needs 38.
-- **Each foundation skill has three lessons to pick from** (owner, 2026-10-22). The added dishes are numbered 51–66 and sit in the same unit as the lesson they pair with; the unit tables mark each group with "pick one with". Slicing is already taught three times (27, 14, 37), so it has no added dishes.
+- **Prerequisites:** a lesson that needs a foundation skill unlocks when either lesson teaching it is done. The exception is a lesson built on the dish itself: 41 serves 40a's biscuits, so it still needs 40a.
+- **Each foundation skill has three lessons to pick from** (owner, 2026-10-22). The added dishes sit beside the lesson they pair with and share its number, with a letter each (1a, 1b, 1c); the unit tables mark each group with "pick one with". Slicing is already taught three times (5, 27, 28), so it has no added dishes.
 
 | Foundation skill | Pick one of |
 |---|---|
-| Julienne | 1 Spring rolls · 51 Chicken fajitas · 52 Baked shoestring fries |
-| Fine chopping | 2 Fattoush · 53 Chimichurri steak · 54 Tuna salad sandwiches |
-| Dicing | 3 Pico + fish tacos · 55 Ratatouille · 56 Minestrone |
-| Heat control | 28 French omelet · 57 Grilled cheese + tomato soup · 58 Challah French toast |
-| Building a sauce | 4 Shakshuka · 59 Spaghetti marinara · 60 Honey-garlic chicken |
-| Roux | 32 Mac and cheese · 61 Chicken and spinach crêpes · 62 Japanese chicken curry |
-| Cutting in fat | 38 Buttermilk biscuits · 63 Rugelach · 64 Baked beef empanadas |
-| Yeast dough | 42 Cinnamon rolls · 65 Challah · 66 Homemade pizza |
-| Slicing | 27, 14, and 37 already teach it |
+| Julienne | 1a Spring rolls · 1b Chicken fajitas · 1c Baked shoestring fries |
+| Fine chopping | 2a Fattoush · 2b Chimichurri steak · 2c Tuna salad sandwiches |
+| Dicing | 3a Pico + fish tacos · 3b Ratatouille · 3c Minestrone |
+| Heat control | 6a French omelet · 6b Grilled cheese + tomato soup · 6c Challah French toast |
+| Building a sauce | 8a Shakshuka · 8b Spaghetti marinara · 8c Honey-garlic chicken |
+| Roux | 15a Mac and cheese · 15b Chicken and spinach crêpes · 15c Japanese chicken curry |
+| Cutting in fat | 40a Buttermilk biscuits · 40b Rugelach · 40c Baked beef empanadas |
+| Yeast dough | 43a Cinnamon rolls · 43b Challah · 43c Homemade pizza |
+| Slicing | 5, 27, and 28 already teach it |
 
-- Prerequisites that name 32, 38, or 42 for the skill now accept any lesson in that group. 39 still needs 38 itself, because it's served on those biscuits.
+- A prerequisite can name a whole pick-one group (any roux lesson, 15a–15c), and then any lesson in it counts. 41 still needs 40a itself, because it's served on those biscuits.
+
+### 4.1 Lesson numbers and the family's course plan — Requirement (owner, 2026-10-22)
+- **A lesson's number is its place in the course**, not a field on the lesson. Ids and picture names carry no number (`shakshuka`, `dishes/shakshuka.png`), and lessons point at each other by id: callbacks, prerequisites, and a kitchen word's "practiced in" lesson.
+- **A pick-one group shares one number**, with a letter for each dish in it: 1a, 1b, 1c. On one cook's path the course is 59 lessons, so a number says how far through it someone is ("Quest 27 of 59").
+- `content/course.json` holds every planned dish in the **suggested order**, which keeps every prerequisite first. A prerequisite names a dish, or `pick:<skill>` for any dish in that pick-one group.
+- **Each family has its own course plan** (not built yet; the owner asked to wait on it, 2026-10-22). A parent can view the whole course, reorder it, remove dishes, and put them back. The family's lesson and quest numbers come from its plan. Removing a dish from a pick-one group drops its letter; a group left with one dish has no letter, and an emptied group has no number.
+- A plan that puts a lesson before one it builds on, or removes one it needs, shows a note. It's a suggestion, not a block, like the knife-work nudge (§4.0).
+- The public demo and syllabus use the suggested order.
 
 ### Unit 1 — Knife work and assembly
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
-| 1 | Fresh spring rolls | Vietnamese | Julienne, rolling rice paper | Adult nearby | Chicken instead of shrimp/pork; peanut + hoisin dip |
-| 2 | Fattoush | Lebanese | Fine chopping, toasting pita | Adult nearby | Sumac sub: lemon zest + salt |
-| 3 | Pico de gallo + Baja fish tacos | Mexican | Dicing; broiling fish | Adult nearby | Cod/tilapia. Broiled, not battered and fried: frying is first taught in 23 |
-| 26 | Chicken Caesar + homemade dressing & croutons | American | Whisked dressing, cubing bread | Adult nearby | Pasteurized eggs or mayo base |
-| 27 | Smash burgers + quick pickles | American | Thin slicing, quick pickle, high-heat sear | Adult nearby | |
-| 51 | Chicken fajitas | Tex-Mex | Julienne: peppers and onions in thin strips · *pick one with 1, 52* | Adult nearby | Check tortillas for lard |
-| 52 | Baked shoestring fries | American | Julienne: potatoes into thin sticks · *pick one with 1, 51* | Adult nearby | Baked, not fried |
-| 53 | Chimichurri steak | Argentine | Fine chopping: parsley, garlic, oregano · *pick one with 2, 54* | Adult nearby | Steak to 145°F |
-| 54 | Tuna salad sandwiches | American | Fine chopping: celery, onion, pickles, herbs · *pick one with 2, 53* | Adult nearby | Tuna is clean (fins and scales) |
-| 55 | Ratatouille | French | Dicing: eggplant, zucchini, pepper, tomato · *pick one with 3, 56* | Adult nearby | |
-| 56 | Minestrone | Italian | Dicing · *pick one with 3, 55* | Adult nearby | |
+| 1a | Fresh spring rolls | Vietnamese | Julienne, rolling rice paper | Adult nearby | Chicken instead of shrimp/pork; peanut + hoisin dip |
+| 1b | Chicken fajitas | Tex-Mex | Julienne: peppers and onions in thin strips · *pick one with 1a, 1c* | Adult nearby | Check tortillas for lard |
+| 1c | Baked shoestring fries | American | Julienne: potatoes into thin sticks · *pick one with 1a, 1b* | Adult nearby | Baked, not fried |
+| 2a | Fattoush | Lebanese | Fine chopping, toasting pita | Adult nearby | Sumac sub: lemon zest + salt |
+| 2b | Chimichurri steak | Argentine | Fine chopping: parsley, garlic, oregano · *pick one with 2a, 2c* | Adult nearby | Steak to 145°F |
+| 2c | Tuna salad sandwiches | American | Fine chopping: celery, onion, pickles, herbs · *pick one with 2a, 2b* | Adult nearby | Tuna is clean (fins and scales) |
+| 3a | Pico de gallo + Baja fish tacos | Mexican | Dicing; broiling fish | Adult nearby | Cod/tilapia. Broiled, not battered and fried: frying is first taught in 53 |
+| 3b | Ratatouille | French | Dicing: eggplant, zucchini, pepper, tomato · *pick one with 3a, 3c* | Adult nearby | |
+| 3c | Minestrone | Italian | Dicing · *pick one with 3a, 3b* | Adult nearby | |
+| 4 | Chicken Caesar + homemade dressing & croutons | American | Whisked dressing, cubing bread | Adult nearby | Pasteurized eggs or mayo base |
+| 5 | Smash burgers + quick pickles | American | Thin slicing, quick pickle, high-heat sear | Adult nearby | |
 
 ### Unit 2 — Stovetop basics
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
-| 4 | Shakshuka | N. African / Middle Eastern | Building a sauce, poaching eggs in it | Adult nearby | |
-| 5 | Chicken fried rice | Chinese | High-heat stir-fry, day-old rice | Adult nearby | Mushroom stir-fry sauce, not oyster sauce |
-| 6 | Oyakodon | Japanese | Simmering, setting egg gently | Adult nearby | Mirin sub: rice vinegar + sugar; dashi sub: chicken broth + soy |
-| 7 | Chicken adobo | Filipino | Braising, reducing | Adult nearby | |
-| 8 | Cacio e pepe | Italian | Emulsion | Adult nearby | |
-| 28 | French-style omelet (breakfast) | American/French | Heat control, rolling an omelet | Adult nearby | |
-| 29 | Crispy hash browns (breakfast) | American | Squeezing out moisture, crisping | Adult nearby | |
-| 30 | Breakfast burritos (breakfast) | American | Timing several components, rolling | Adult nearby | Beef chorizo or turkey sausage; check casings, or use bulk |
-| 31 | Eggs Benedict (breakfast) | American | Poaching eggs, hollandaise | Adult nearby | Turkey bacon or smoked salmon. Pasteurized eggs for the hollandaise. Prereq: 8 |
-| 32 | Stovetop mac and cheese | American | Roux → béchamel → cheese sauce | Adult nearby | Foundation for every roux lesson |
-| 57 | Grilled cheese + tomato soup | American | Heat control · *pick one with 28, 58* | Adult nearby | |
-| 58 | Challah French toast | Jewish | Heat control · *pick one with 28, 57* | Adult nearby | Store-bought challah, or from 65 |
-| 59 | Spaghetti marinara | Italian | Building a sauce · *pick one with 4, 60* | Adult nearby | |
-| 60 | Honey-garlic chicken | Chinese-American | Building a sauce · *pick one with 4, 59* | Adult nearby | Honey is allowed (§2.1) |
-| 61 | Chicken and spinach crêpes | French | Roux → béchamel, crêpe batter · *pick one with 32, 62* | Adult nearby | |
-| 62 | Japanese chicken curry | Japanese | Roux with curry powder, from scratch · *pick one with 32, 61* | Adult nearby | Make the roux from scratch: store-bought curry blocks can contain pork or beef fat |
+| 6a | French-style omelet (breakfast) | American/French | Heat control, rolling an omelet | Adult nearby | |
+| 6b | Grilled cheese + tomato soup | American | Heat control · *pick one with 6a, 6c* | Adult nearby | |
+| 6c | Challah French toast | Jewish | Heat control · *pick one with 6a, 6b* | Adult nearby | Store-bought challah, or from 43b |
+| 7 | Crispy hash browns (breakfast) | American | Squeezing out moisture, crisping | Adult nearby | |
+| 8a | Shakshuka | N. African / Middle Eastern | Building a sauce, poaching eggs in it | Adult nearby | |
+| 8b | Spaghetti marinara | Italian | Building a sauce · *pick one with 8a, 8c* | Adult nearby | |
+| 8c | Honey-garlic chicken | Chinese-American | Building a sauce · *pick one with 8a, 8b* | Adult nearby | Honey is allowed (§2.1) |
+| 9 | Chicken fried rice | Chinese | High-heat stir-fry, day-old rice | Adult nearby | Mushroom stir-fry sauce, not oyster sauce |
+| 10 | Oyakodon | Japanese | Simmering, setting egg gently | Adult nearby | Mirin sub: rice vinegar + sugar; dashi sub: chicken broth + soy |
+| 11 | Chicken adobo | Filipino | Braising, reducing | Adult nearby | |
+| 12 | Breakfast burritos (breakfast) | American | Timing several components, rolling | Adult nearby | Beef chorizo or turkey sausage; check casings, or use bulk |
+| 13 | Cacio e pepe | Italian | Emulsion | Adult nearby | |
+| 14 | Eggs Benedict (breakfast) | American | Poaching eggs, hollandaise | Adult nearby | Turkey bacon or smoked salmon. Pasteurized eggs for the hollandaise. Prereq: 13 |
+| 15a | Stovetop mac and cheese | American | Roux → béchamel → cheese sauce | Adult nearby | Foundation for every roux lesson |
+| 15b | Chicken and spinach crêpes | French | Roux → béchamel, crêpe batter · *pick one with 15a, 15c* | Adult nearby | |
+| 15c | Japanese chicken curry | Japanese | Roux with curry powder, from scratch · *pick one with 15a, 15b* | Adult nearby | Make the roux from scratch: store-bought curry blocks can contain pork or beef fat |
 
 ### Unit 3 — Spices and flavor bases
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
-| 9 | Chana masala | Indian | Blooming spices, onion-tomato base | Adult nearby | Amchur sub: lemon |
-| 10 | Misir wot | Ethiopian | Spiced lentils | Adult nearby | Berbere sub: paprika + cayenne + warm spices; serve with rice |
-| 11 | Chicken tagine with olives | Moroccan | Layered spice braise | Adult nearby | Preserved lemon sub; ras el hanout sub; Dutch oven |
-| 12 | Butter chicken | Indian | Marinating, finishing with cream | Adult nearby | |
-| 13 | Jerk chicken | Jamaican | Wet marinade, broiling | Adult nearby | Habanero or jalapeño |
-| 33 | Beef chili | American | Batch browning, toasting spices | Adult nearby | |
-| 34 | Red beans and rice | Louisiana | Onion/celery/pepper base, simmering beans until creamy | Adult nearby | Chicken andouille instead of ham hock; check casings |
-| 35 | BBQ pulled chicken + coleslaw | American | Dry rub, reducing a sauce | Adult nearby | |
-| 67 | Jollof rice with chicken | Nigerian | Blended pepper base, cooking rice in the sauce | Adult nearby | Scotch bonnet → jalapeño. No dried crayfish or shrimp bouillon |
-| 70 | Peanut stew (maafe) | Malian | Building a one-pot stew | Adult nearby | Peanut butter; carries the peanut tag |
-| 74 | Koshari | Egyptian | Building a dish in layers, crispy onions | Adult nearby | Lentils, rice, pasta, tomato sauce |
+| 16 | Chana masala | Indian | Blooming spices, onion-tomato base | Adult nearby | Amchur sub: lemon |
+| 17 | Beef chili | American | Batch browning, toasting spices | Adult nearby | |
+| 18 | Misir wot | Ethiopian | Spiced lentils | Adult nearby | Berbere sub: paprika + cayenne + warm spices; serve with rice |
+| 19 | Red beans and rice | Louisiana | Onion/celery/pepper base, simmering beans until creamy | Adult nearby | Chicken andouille instead of ham hock; check casings |
+| 20 | Jollof rice with chicken | Nigerian | Blended pepper base, cooking rice in the sauce | Adult nearby | Scotch bonnet → jalapeño. No dried crayfish or shrimp bouillon |
+| 21 | BBQ pulled chicken + coleslaw | American | Dry rub, reducing a sauce | Adult nearby | |
+| 22 | Chicken tagine with olives | Moroccan | Layered spice braise | Adult nearby | Preserved lemon sub; ras el hanout sub; Dutch oven |
+| 23 | Peanut stew (maafe) | Malian | Building a one-pot stew | Adult nearby | Peanut butter; carries the peanut tag |
+| 24 | Koshari | Egyptian | Building a dish in layers, crispy onions | Adult nearby | Lentils, rice, pasta, tomato sauce |
+| 25 | Butter chicken | Indian | Marinating, finishing with cream | Adult nearby | |
+| 26 | Jerk chicken | Jamaican | Wet marinade, broiling | Adult nearby | Habanero or jalapeño |
 
 ### Unit 4 — Breaking down and slicing meat, marinades
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
-| 14 | Beef bulgogi | Korean | Thin slicing (partly frozen), marinating | Adult nearby | Asian pear sub: Bosc pear or apple |
-| 15 | Lomo saltado | Peruvian | Beef stir-fry | Adult nearby | Aji amarillo sub: yellow bell pepper + cayenne |
-| 16 | Chicken tinga tacos | Mexican | Braising, shredding | Adult nearby | |
-| 36 | Matzo ball soup from a whole chicken | Jewish | Breaking down a bird, making stock | Adult nearby | Oil or chicken schmaltz in the matzo balls |
-| 37 | Philly cheesesteak | American | Thin slicing (deliberate repeat of 14) | Adult nearby | Prereq: 14 |
-| 68 | Chicken yassa | Senegalese | Citrus-mustard marinade, slow-cooked onions | Adult nearby | |
-| 69 | Suya (spiced beef skewers) | Nigerian | Thin slicing, dry rub, broiling | Adult nearby | Ground-peanut spice rub; carries the peanut tag |
+| 27 | Beef bulgogi | Korean | Thin slicing (partly frozen), marinating | Adult nearby | Asian pear sub: Bosc pear or apple |
+| 28 | Philly cheesesteak | American | Thin slicing (deliberate repeat of 27) | Adult nearby | Prereq: 27 |
+| 29 | Lomo saltado | Peruvian | Beef stir-fry | Adult nearby | Aji amarillo sub: yellow bell pepper + cayenne |
+| 30 | Suya (spiced beef skewers) | Nigerian | Thin slicing, dry rub, broiling | Adult nearby | Ground-peanut spice rub; carries the peanut tag |
+| 31 | Chicken yassa | Senegalese | Citrus-mustard marinade, slow-cooked onions | Adult nearby | |
+| 32 | Chicken tinga tacos | Mexican | Braising, shredding | Adult nearby | |
+| 33 | Matzo ball soup from a whole chicken | Jewish | Breaking down a bird, making stock | Adult nearby | Oil or chicken schmaltz in the matzo balls |
 
 ### Unit 5 — Dough and batter
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
-| 17 | Pupusas | Salvadoran | Masa dough, griddle | Adult nearby | Lard-free beans |
-| 18 | Gyoza | Japanese | Pleating, fry-then-steam | Adult nearby | Chicken or beef filling |
-| 19 | Skillet naan | Indian | Yogurt dough, high-heat skillet | Adult nearby | |
-| 20 | Pão de queijo | Brazilian | Scalded tapioca dough | Adult nearby | |
-| 38 | Buttermilk biscuits (breakfast) | American | Cutting in cold fat, folding for layers | Adult nearby | Butter, not lard |
-| 39 | Biscuits + sausage gravy (breakfast) | American | Milk gravy on a roux | Adult nearby | Bulk turkey sausage (no casing). Prereq: 38, 32 |
-| 40 | Blueberry muffins (breakfast) | American | Muffin method, avoiding overmixing | Adult nearby | |
-| 41 | Skillet cornbread | American | Preheated skillet | Adult nearby | Pairs with 33 |
-| 42 | Cinnamon rolls (breakfast) | American | First yeast dough: kneading, proofing, shaping | Adult nearby | |
-| 72 | Ugali with sukuma wiki | Kenyan | Stiff cornmeal dough, braised greens | Adult nearby | White cornmeal and collard greens |
-| 63 | Rugelach | Jewish | Cutting in fat · *pick one with 38, 64* | Adult nearby | Butter and cream cheese dough |
-| 64 | Baked beef empanadas | Argentine | Cutting in fat, filling and crimping · *pick one with 38, 63* | Adult nearby | Butter dough, not lard |
-| 65 | Challah | Jewish | Yeast dough: kneading, proofing, braiding · *pick one with 42, 66* | Adult nearby | Honey is allowed (§2.1) |
-| 66 | Homemade pizza | Italian | Yeast dough: kneading, stretching · *pick one with 42, 65* | Adult nearby | Veggie, or turkey pepperoni |
+| 34 | Blueberry muffins (breakfast) | American | Muffin method, avoiding overmixing | Adult nearby | |
+| 35 | Skillet cornbread | American | Preheated skillet | Adult nearby | Pairs with 17 |
+| 36 | Pão de queijo | Brazilian | Scalded tapioca dough | Adult nearby | |
+| 37 | Skillet naan | Indian | Yogurt dough, high-heat skillet | Adult nearby | |
+| 38 | Pupusas | Salvadoran | Masa dough, griddle | Adult nearby | Lard-free beans |
+| 39 | Ugali with sukuma wiki | Kenyan | Stiff cornmeal dough, braised greens | Adult nearby | White cornmeal and collard greens |
+| 40a | Buttermilk biscuits (breakfast) | American | Cutting in cold fat, folding for layers | Adult nearby | Butter, not lard |
+| 40b | Rugelach | Jewish | Cutting in fat · *pick one with 40a, 40c* | Adult nearby | Butter and cream cheese dough |
+| 40c | Baked beef empanadas | Argentine | Cutting in fat, filling and crimping · *pick one with 40a, 40b* | Adult nearby | Butter dough, not lard |
+| 41 | Biscuits + sausage gravy (breakfast) | American | Milk gravy on a roux | Adult nearby | Bulk turkey sausage (no casing). Prereq: 40a, and any roux lesson (15) |
+| 42 | Gyoza | Japanese | Pleating, fry-then-steam | Adult nearby | Chicken or beef filling |
+| 43a | Cinnamon rolls (breakfast) | American | First yeast dough: kneading, proofing, shaping | Adult nearby | |
+| 43b | Challah | Jewish | Yeast dough: kneading, proofing, braiding · *pick one with 43a, 43c* | Adult nearby | Honey is allowed (§2.1) |
+| 43c | Homemade pizza | Italian | Yeast dough: kneading, stretching · *pick one with 43a, 43b* | Adult nearby | Veggie, or turkey pepperoni |
 
 ### Unit 6 — Oven, roasting, frying
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
-| 21 | Spanakopita | Greek | Phyllo, layering | Adult nearby | |
-| 22 | Spinach & mushroom quiche | French | Pastry, blind baking, custard | Adult nearby | No bacon |
-| 23 | Chicken katsu | Japanese | Breading station, shallow frying | **Adult hands-on** | Tonkatsu sauce sub |
-| 24 | Swedish meatballs | Swedish | Browning, roux gravy | Adult nearby | Beef; cranberry for lingonberry. Prereq: 32 |
-| 43 | Homemade granola (breakfast) | American | Oven browning, stirring partway | Adult nearby | Mixing steps are Solo; oven steps make the lesson Adult nearby |
-| 44 | Meatloaf with glaze | American | Binders, thermometer | Adult nearby | |
-| 45 | Roast chicken + pan gravy | American | Roasting, resting, carving, gravy | Adult nearby | Prereq: 32 |
-| 46 | Chicken pot pie | American | Roux filling + pie crust | Adult nearby | Prereq: 32, 22 |
-| 47 | Pot roast | American | Long oven braise | Adult nearby | |
-| 48 | Fish and chips | British | Batter, deep-frying with a thermometer | **Adult hands-on** | Cod or haddock; fry in vegetable oil, never beef dripping |
-| 71 | Bobotie | South African | Spiced ground beef baked under an egg custard | Adult nearby | Ground beef, curry powder, apricot jam |
-| 75 | Kelewele (spiced plantains) | Ghanaian | Shallow frying | **Adult hands-on** | Plantains from the produce aisle |
+| 44 | Homemade granola (breakfast) | American | Oven browning, stirring partway | Adult nearby | Mixing steps are Solo; oven steps make the lesson Adult nearby |
+| 45 | Meatloaf with glaze | American | Binders, thermometer | Adult nearby | |
+| 46 | Swedish meatballs | Swedish | Browning, roux gravy | Adult nearby | Beef; cranberry for lingonberry. Prereq: any roux lesson (15) |
+| 47 | Roast chicken + pan gravy | American | Roasting, resting, carving, gravy | Adult nearby | Prereq: any roux lesson (15) |
+| 48 | Pot roast | American | Long oven braise | Adult nearby | |
+| 49 | Bobotie | South African | Spiced ground beef baked under an egg custard | Adult nearby | Ground beef, curry powder, apricot jam |
+| 50 | Spanakopita | Greek | Phyllo, layering | Adult nearby | |
+| 51 | Spinach & mushroom quiche | French | Pastry, blind baking, custard | Adult nearby | No bacon |
+| 52 | Chicken pot pie | American | Roux filling + pie crust | Adult nearby | Prereq: any roux lesson (15), and 51 |
+| 53 | Chicken katsu | Japanese | Breading station, shallow frying | **Adult hands-on** | Tonkatsu sauce sub |
+| 54 | Kelewele (spiced plantains) | Ghanaian | Shallow frying | **Adult hands-on** | Plantains from the produce aisle |
+| 55 | Fish and chips | British | Batter, deep-frying with a thermometer | **Adult hands-on** | Cod or haddock; fry in vegetable oil, never beef dripping |
 
 ### Desserts
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
-| 25 | Churros with chocolate *(alt: panna cotta)* | Spanish/Mexican *(Italian)* | Choux dough, frying *(gelatin swap)* | **Adult hands-on** *(Adult nearby)* | Panna cotta: beef gelatin or agar-agar |
-| 49 | Brown butter chocolate chip cookies | American | Browning butter, creaming | Adult nearby | |
-| 50 | Apple pie with lattice | American | Advanced pastry | Adult nearby | Prereq: 22 |
-| 73 | Malva pudding | South African | A sponge pudding soaked in a warm butter-cream sauce | Adult nearby | Apricot jam |
+| 56 | Brown butter chocolate chip cookies | American | Browning butter, creaming | Adult nearby | |
+| 57 | Malva pudding | South African | A sponge pudding soaked in a warm butter-cream sauce | Adult nearby | Apricot jam |
+| 58 | Churros with chocolate *(alt: panna cotta)* | Spanish/Mexican *(Italian)* | Choux dough, frying *(gelatin swap)* | **Adult hands-on** *(Adult nearby)* | Panna cotta: beef gelatin or agar-agar |
+| 59 | Apple pie with lattice | American | Advanced pastry | Adult nearby | Prereq: 51 |
 
 ### Capstone
 - **Multi-dish meal timing.** Example: bulgogi + fried rice + spring rolls. Requires a "plan the timeline" stage that the single-dish lessons don't have. Design it after the core lesson player works.
@@ -597,13 +605,12 @@ content/
 ### 7.3 Lesson file (sketch)
 ```json
 {
-  "id": "14-bulgogi",
+  "id": "beef-bulgogi",
   "version": 3,
-  "number": 14,
   "track": "core",
   "unit": 4,
   "title": "Beef Bulgogi",
-  "image": "dishes/bulgogi.svg",
+  "image": "dishes/beef-bulgogi.png",
   "cuisine": "korean",
   "skill": "Thin slicing & marinating",
   "skills": ["thin-slicing", "marinating"],
@@ -616,7 +623,7 @@ content/
     "move": "...",
     "why": [ { "id": "slice-thin", "title": "...", "body": "..." } ],
     "wrong": [ { "sign": "...", "fix": "..." } ],
-    "callback": { "lesson": 28, "body": "..." },
+    "callback": { "lesson": "french-omelet", "body": "..." },
     "quiz": [ { "q": "...", "choices": ["..."], "answer": 0, "explain": "..." } ]
   },
   "ingredients": [
@@ -828,7 +835,7 @@ Each phase should be deployed and usable before the next begins.
 |---|---|---|
 | **0. Look & feel** | Theme mockups for the kids to choose from (§5.2; done, they chose Kitchen Quest), then Kitchen Quest's tokens, the per-profile theme switch, the house style for the picker and parent screens, fonts, the core art set (§5.3a), and a **component showcase page** with every themed component from §5.4 in a demo state | The kids have picked a theme and the owner approves the look. **No features are built before this.** |
 | **0b. Second theme** | Chef's Passport: its tokens, its core art set, and its version of every component on the showcase page. Built as soon as Phase 0 is approved | A profile can switch between Kitchen Quest and Chef's Passport, and the owner approves the Passport look |
-| **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
+| **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (Shakshuka, Bulgogi, Biscuits, Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
 | **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, open sign-up with an emailed code and the beta word, parent login, sessions, password reset email (Resend), parent PIN, profiles (single or shared) and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up on their own, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
 | **1c. Public launch** | The landing page, privacy policy, and terms (§6.13), fonts served from the app, Delete our family and Download our data, the inactive purge with its warning emails (§6.14), and the human check at sign-up (§8.3) if the owner wants it before launch | A visitor reads the landing page, signs up, and deletes their family from the browser. A test family left inactive past the limit is warned and then purged by the scheduled job. **The sign-up link isn't posted publicly before this phase is done** |
 | **1d. Demo page** (built after 2a, before 2b) | `/demo` (§6.16): theme and kid/adult switches, the sample lessons in the real player, the diet preview, the shopping list preview, the whole course, the skills view, and `content/course.json`; the public syllabus page (§6.17) | A mom with only the link tries a sample lesson in both themes, toggles dairy-free and sees lessons change, and browses the course by dish and by skill, on her phone |

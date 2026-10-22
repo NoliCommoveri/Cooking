@@ -6,7 +6,7 @@ import { makeEnv, family, client } from './helpers/worker.js';
 
 const t0 = () => new Date(Date.now() - 60 * 60 * 1000).toISOString();
 const t1 = () => new Date().toISOString();
-const cook = (profile_ids, extra = {}) => ({ lesson_id: '04-shakshuka', servings: 6, profile_ids, started_at: t0(), ...extra });
+const cook = (profile_ids, extra = {}) => ({ lesson_id: 'shakshuka', servings: 6, profile_ids, started_at: t0(), ...extra });
 
 async function setup() {
   const env = await makeEnv();
@@ -26,7 +26,7 @@ test('a cook shared by two profiles counts for both, once finished', async () =>
   assert.deepEqual((await a.get(`/api/profiles/${ava}/cooks`)).body.cooks, {}, 'not cooked until finished');
   const done = await a.put(`/api/attempts/${id}`, cook([ava, eli], { finished_at: t1() }));
   assert.equal(done.status, 200);
-  for (const p of [ava, eli]) assert.equal((await a.get(`/api/profiles/${p}/cooks`)).body.cooks['04-shakshuka'].times, 1);
+  for (const p of [ava, eli]) assert.equal((await a.get(`/api/profiles/${p}/cooks`)).body.cooks['shakshuka'].times, 1);
 });
 
 test('sending the same cook again saves it once, and a finished cook stays as it was', async () => {
@@ -57,7 +57,7 @@ test('a cook is checked: a real lesson, a size it offers, and at least one profi
   const bad = [
     cook([ava], { lesson_id: 'nope' }),
     cook([ava], { servings: 99 }),
-    cook([ava], { lesson_id: '38-buttermilk-biscuits', servings: 7 }),
+    cook([ava], { lesson_id: 'buttermilk-biscuits', servings: 7 }),
     cook([]),
     cook([ava], { started_at: 'yesterday' }),
     cook([ava], { started_at: t1(), finished_at: t0() }),
@@ -85,7 +85,7 @@ test('deleting a profile takes it off its cooks, and a cook left with nobody goe
   assert.equal((await a.del(`/api/profiles/${ava}`)).status, 200);
   const left = (await env.DB.prepare('SELECT id FROM attempts ORDER BY id').all()).results.map((r) => r.id);
   assert.deepEqual(left, ['00000000000000d1']);
-  assert.equal((await a.get(`/api/profiles/${eli}/cooks`)).body.cooks['04-shakshuka'].times, 1);
+  assert.equal((await a.get(`/api/profiles/${eli}/cooks`)).body.cooks['shakshuka'].times, 1);
 });
 
 test('the test-cook notice shows to each parent until they close it', async () => {

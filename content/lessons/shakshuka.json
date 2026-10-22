@@ -1,11 +1,10 @@
 {
-  "id": "04-shakshuka",
+  "id": "shakshuka",
   "version": 1,
-  "number": 4,
   "track": "core",
   "unit": 2,
   "title": "Shakshuka",
-  "image": "dishes/04-shakshuka.png",
+  "image": "dishes/shakshuka.png",
   "cuisine": "north-african",
   "skill": "Building a sauce, then poaching eggs in it",
   "skills": ["building-a-sauce", "poaching-eggs"],

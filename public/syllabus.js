@@ -1,23 +1,25 @@
 // The syllabus page (plan §6.17), built from the course outline so it stays
 // current as lessons are written. The words are a draft for the owner to approve.
+import { numberCourse, courseEntries } from './lib/course.js';
 const root = document.getElementById('syllabus');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const getJSON = async (u) => { const r = await fetch(u); if (!r.ok) throw new Error(`Couldn't load ${u}`); return r.json(); };
 const [R, C] = await Promise.all([getJSON('/content/registry.json'), getJSON('/content/course.json')]);
 
-const byNum = Object.fromEntries(C.dishes.map((d) => [d.number, d]));
+// Lesson numbers follow the course order; a pick-one group shares one (1a, 1b, 1c).
+const NUM = numberCourse(C.dishes).labels;
 const units = [...new Set(C.dishes.map((d) => d.unit))];
 const unitName = (u) => (u === 7 ? 'Desserts' : `Unit ${u}: ${R.units[u]}`);
 
 // Pick-one groups (§4.0) count once on a student's path through the course.
-const groups = [];
-for (const d of C.dishes) if (d.pickOneWith && !groups.some((g) => g.includes(d.number))) groups.push([d.number, ...d.pickOneWith].sort((a, b) => a - b));
+const byId = Object.fromEntries(C.dishes.map((d) => [d.id, d]));
+const groups = courseEntries(C.dishes).filter((e) => e.pickOne).map((e) => e.ids);
 const inGroup = new Set(groups.flat());
-const pathLessons = C.dishes.filter((d) => !inGroup.has(d.number)).length + groups.length;
-const avg = (ns) => ns.reduce((n, x) => n + byNum[x].minutes, 0) / ns.length;
+const pathLessons = C.dishes.filter((d) => !inGroup.has(d.id)).length + groups.length;
+const avg = (ids) => ids.reduce((n, x) => n + byId[x].minutes, 0) / ids.length;
 // Hours: each dish's cooking time, plus about 15 minutes a lesson for Learn and the reflection.
 const EXTRA = 15;
-const pathMinutes = C.dishes.filter((d) => !inGroup.has(d.number)).reduce((n, d) => n + d.minutes + EXTRA, 0)
+const pathMinutes = C.dishes.filter((d) => !inGroup.has(d.id)).reduce((n, d) => n + d.minutes + EXTRA, 0)
   + groups.reduce((n, g) => n + avg(g) + EXTRA, 0);
 const hours = Math.round(pathMinutes / 60);
 // The common rule of thumb is 120–180 hours of work for one credit. Suggest the
@@ -71,7 +73,7 @@ root.innerHTML = `
 ${units.map((u) => {
   const sk = skillsIn(u).map((s) => R.skills[s]?.name ?? s);
   return `<h3>${esc(unitName(u))}</h3>${sk.length ? `<p><b>New skills:</b> ${sk.map(esc).join(', ')}</p>` : ''}
-  <div class="scroll"><table><tr><th>#</th><th>Dish</th><th>Cuisine</th><th>Skill</th><th>Time</th></tr>${C.dishes.filter((d) => d.unit === u).map((d) => `<tr><td>${d.number}</td><td>${esc(d.title)}${d.pickOneWith ? `<br><small class="mut">Pick one with ${d.pickOneWith.map((n) => esc(byNum[n].title)).join(', ')}</small>` : ''}</td><td>${esc(R.cuisines[d.cuisine]?.name ?? d.cuisine)}</td><td>${esc(d.skill)}</td><td>${d.estimated ? '~' : ''}${d.minutes} min</td></tr>`).join('')}</table></div>`;
+  <div class="scroll"><table><tr><th>#</th><th>Dish</th><th>Cuisine</th><th>Skill</th><th>Time</th></tr>${C.dishes.filter((d) => d.unit === u).map((d) => `<tr><td>${NUM[d.id]}</td><td>${esc(d.title)}${d.pickOne ? `<br><small class="mut">Pick one with ${C.dishes.filter((x) => x.pickOne === d.pickOne && x.id !== d.id).map((x) => esc(x.title)).join(', ')}</small>` : ''}</td><td>${esc(R.cuisines[d.cuisine]?.name ?? d.cuisine)}</td><td>${esc(d.skill)}</td><td>${d.estimated ? '~' : ''}${d.minutes} min</td></tr>`).join('')}</table></div>`;
 }).join('')}
 
 <h2>Materials</h2>

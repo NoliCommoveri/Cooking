@@ -14,6 +14,7 @@ import { cleanValue, getAt, setAt, patchSpec, showValue } from '../content/patch
 import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
 import { FREE_MAX, servingOptions } from '../content/scale.js';
+import { numberCourse } from '../content/course.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -312,19 +313,21 @@ on('GET', '/api/library', async (req, env) => {
   // A patched total time shows on the card too (§6.11).
   const live = await livePatches(env.DB);
   const minutes = (L) => live[L.id]?.patches.findLast((p) => p.path === 'totalMinutes')?.value ?? L.totalMinutes;
+  // Lesson numbers in the suggested course order (§4.1).
+  const { labels, total } = numberCourse(LIBRARY.course);
   const lessons = [];
   let hidden = 0;
   for (const L of LIBRARY.lessons) {
     const view = dietView(L, LIBRARY.ingredients, filters);
     if (!view.visible) { hidden++; continue; }
     lessons.push({
-      id: L.id, number: L.number, unit: L.unit, title: L.title, image: L.image, cuisine: LIBRARY.cuisines[L.cuisine] ?? L.cuisine,
+      id: L.id, label: labels[L.id], unit: L.unit, title: L.title, image: L.image, cuisine: LIBRARY.cuisines[L.cuisine] ?? L.cuisine,
       skill: L.skill, servings: L.servings, totalMinutes: minutes(L),
       substitutions: view.applied.map((x) => ({ for: name(x.for), use: name(x.use) })),
       left_out: view.leftOut.map(name),
     });
   }
-  return { lessons, hidden, units: LIBRARY.units };
+  return { lessons, hidden, units: LIBRARY.units, labels, total };
 });
 
 // ---------- cooks (attempts, §1, §8.4) ----------

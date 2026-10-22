@@ -1220,3 +1220,48 @@ Built to §6.11.
   email, decline and reopen, scoping, revert order, and a patched time in the
   library. The loop was also run in Chromium across two families.
 
+---
+
+## 50. 2026-10-22 — Lessons renumbered in course order
+
+The old numbers were the order dishes were added. The owner approved a
+teaching order and asked for numbers that follow it, with pick-one groups
+sharing a number (1a, 1b, 1c), so a family can say what lesson they're on and
+how far through the course they are.
+- **The order** (plan §4, owner-approved): units in order, prerequisites
+  first, easier before harder, cuisines alternated. 75 dishes, 59 numbers
+  (1a Spring rolls … 8a Shakshuka … 27 Beef bulgogi … 40a Buttermilk
+  biscuits … 56 Brown butter cookies … 59 Apple pie). The §4 tables are
+  reordered and renumbered, with every number in their notes updated.
+- **Numbers aren't stored any more** (new §4.1). `content/course.json` lists
+  every dish in order with an `id`; a pick-one group is the dishes next to each
+  other with the same `pickOne`. `src/content/course.js` turns that order into
+  numbers, for the Worker, the app, the demo, the syllabus, and the preview.
+- **Ids and file names lost their numbers:** `04-shakshuka` is `shakshuka`,
+  and so on for the 4 lesson files and all 75 pictures (and their web copies,
+  and `tools/dish-sheets.txt`). Lessons point at each other by id: the
+  cookies' callback names `buttermilk-biscuits`, the 22 kitchen words name a
+  dish, and prerequisites name a dish or `pick:<skill>` for any dish in a
+  pick-one group. The course outline now carries the plan's prerequisites
+  (Eggs Benedict needs cacio e pepe, and so on).
+- **Linter:** drops the number checks; checks ids are unique, pictures are
+  named for their dish, a pick-one group sits together and has at least two
+  dishes, prerequisites exist and come first in the suggested order (and don't
+  loop), each lesson's prerequisites match the outline, and a kitchen word's
+  lesson is a dish in the course.
+- **What people see:** "Quest 8a" on quest cards, "Lesson 8a" on recipe
+  cards, "of 59" on the lesson card in the app, lesson numbers on "same move,
+  other dishes" and kitchen words, and the new numbers in the demo's course
+  and skills views and the syllabus.
+- **Migration 0005** renames the lesson ids already saved on cooks, fix
+  requests, and fixes. **The owner presses Apply pending on `/ops`** after this
+  deploys. A cook in progress on a device when it ships starts over.
+- **Not built yet, at the owner's word:** each family's own course plan (view,
+  reorder, remove, put back), with its numbers following it (§4.1). Until
+  then, every family sees the suggested order's numbers.
+- The build log keeps the old numbers in earlier entries; the approved
+  showcase mockups keep theirs.
+- Tests: 126. New ones cover the numbering (75 dishes, 59 numbers, letters,
+  a reordered plan with removed dishes, a dish added after a plan was saved,
+  prerequisite notes), the new linter checks, and migration 0005.
+

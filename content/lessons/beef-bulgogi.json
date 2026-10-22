@@ -1,11 +1,10 @@
 {
-  "id": "14-beef-bulgogi",
+  "id": "beef-bulgogi",
   "version": 1,
-  "number": 14,
   "track": "core",
   "unit": 4,
   "title": "Beef bulgogi",
-  "image": "dishes/14-beef-bulgogi.png",
+  "image": "dishes/beef-bulgogi.png",
   "cuisine": "korean",
   "skill": "Thin slicing and marinating",
   "skills": ["thin-slicing", "marinating"],

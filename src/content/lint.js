@@ -6,6 +6,7 @@ import { blockedWordsIn, uncleanReasons } from './rules.js';
 import { toBase } from './units.js';
 import { scaleLesson, servingOptions } from './scale.js';
 import { findTerms } from './terms.js';
+import { courseEntries } from './course.js';
 
 // Fields that hold ids or codes, not words a kid reads.
 const CODE_FIELDS = new Set(['id', 'image', 'cuisine', 'ingredient', 'use', 'for', 'unit', 'why', 'glyph', 'reason',
@@ -55,24 +56,29 @@ export function lint(c) {
   const fallbackIcons = c.ingredients.filter(i => !i.icon).length + c.equipment.filter(e => !e.icon).length;
   if (fallbackIcons) warn('icons', `${fallbackIcons} ingredients and tools use their category's fallback icon`);
 
+  // the course outline: every planned dish, in the suggested order (plan §4).
+  // Lessons have no number of their own; numbers come from this order (course.js).
+  const dishes = c.course?.dishes || [];
+  const DISH = {}, pos = {};
+  dishes.forEach((d, i) => { if (DISH[d.id]) err(`course.json ${d.id}`, 'is listed twice'); DISH[d.id] = d; pos[d.id] = i; });
+  const groups = new Set(dishes.filter(d => d.pickOne).map(d => d.pickOne));
+  const prereqOk = p => (p.startsWith('pick:') ? groups.has(p.slice(5)) : !!DISH[p]);
+  // The latest a prerequisite can be in the order: a group counts from its first dish.
+  const prereqAt = p => (p.startsWith('pick:') ? Math.min(...dishes.filter(d => d.pickOne === p.slice(5)).map(d => pos[d.id])) : pos[p]);
+
   // lessons
-  const byNum = {};
+  const byId = {};
   for (const { file, data: L } of c.lessons) {
     const where = `lessons/${file}`;
     const schemaErrs = validate(L, c.schemas.lesson);
-    if (schemaErrs.length) {
-      schemaErrs.forEach(e => err(where, e));
-      if (Number.isInteger(L.number) && !byNum[L.number]) byNum[L.number] = { ...L, malformed: true };
-      continue;
-    }
+    if (schemaErrs.length) { schemaErrs.forEach(e => err(where, e)); continue; }
     if (`${L.id}.json` !== file) err(where, `id "${L.id}" doesn't match the file name`);
-    if (!L.id.startsWith(String(L.number).padStart(2, '0') + '-')) err(where, `id "${L.id}" doesn't start with its number ${L.number}`);
-    if (byNum[L.number]) err(where, `lesson number ${L.number} is also used by ${byNum[L.number].id}`);
-    byNum[L.number] = L;
+    byId[L.id] = L;
   }
-  const lessons = Object.values(byNum).filter(L => !L.malformed).sort((a, b) => a.number - b.number);
+  // In course order, so "earlier lesson" means earlier in the course.
+  const lessons = Object.values(byId).sort((a, b) => (pos[a.id] ?? 1e9) - (pos[b.id] ?? 1e9));
   const skillUse = {};
-  for (const L of lessons) for (const s of L.skills) (skillUse[s] ||= []).push(L.number);
+  for (const L of lessons) for (const s of L.skills) (skillUse[s] ||= []).push(L.id);
 
   for (const L of lessons) {
     const where = `lessons/${L.id}.json`;
@@ -82,9 +88,9 @@ export function lint(c) {
     for (const s of L.skills) if (!SK[s]) e(`skill "${s}" doesn't exist in skills.json`);
     for (const q of L.equipment) if (!EQ[q]) e(`equipment "${q}" doesn't exist in equipment.json`);
     if (c.imageExists && !c.imageExists(L.image)) e(`image ${L.image} isn't in content/images/`);
-    for (const p of L.prereqs) if (!byNum[p]) e(`prerequisite lesson ${p} doesn't exist`);
-    if (L.learn.callback && !byNum[L.learn.callback.lesson]) e(`callback points to lesson ${L.learn.callback.lesson}, which doesn't exist`);
-    if (L.learn.callback && L.learn.callback.lesson === L.number) e('callback points to itself');
+    for (const p of L.prereqs) if (!prereqOk(p)) e(`prerequisite "${p}" isn't a dish or pick-one group in course.json`);
+    if (L.learn.callback && !byId[L.learn.callback.lesson]) e(`callback points to "${L.learn.callback.lesson}", which isn't a written lesson`);
+    if (L.learn.callback && L.learn.callback.lesson === L.id) e('callback points to itself');
     if (!(L.intro && L.intro.slides.length)) w('no intro slides yet');
 
     // learn stage
@@ -98,7 +104,7 @@ export function lint(c) {
     for (const s of L.skills) {
       const uses = skillUse[s] || [];
       if (uses.length === 1) w(`skill "${s}" is only used by this lesson, so its "other dishes" card will be empty`);
-      if (uses.some(n => n < L.number) && !L.learn.callback) w(`reuses skill "${s}" from an earlier lesson but has no learn.callback`);
+      if (uses.some(id => (pos[id] ?? 1e9) < (pos[L.id] ?? 1e9)) && !L.learn.callback) w(`reuses skill "${s}" from an earlier lesson but has no learn.callback`);
     }
 
     // ingredients
@@ -168,22 +174,21 @@ export function lint(c) {
       }
     }
   }
-  // prerequisite loops
-  const seen = {}, visit = (n, stack) => {
-    if (stack.includes(n)) { err(`lessons/${byNum[n].id}.json`, `prerequisites form a loop: ${[...stack, n].join(' → ')}`); return; }
-    if (seen[n] || !byNum[n]) return;
-    seen[n] = 1;
-    for (const p of byNum[n].prereqs || []) visit(p, [...stack, n]);
+  // prerequisite loops, across every planned dish
+  const seen = {}, visit = (id, stack) => {
+    if (stack.includes(id)) { err(`course.json ${id}`, `prerequisites form a loop: ${[...stack, id].join(' → ')}`); return; }
+    if (seen[id] || !DISH[id]) return;
+    seen[id] = 1;
+    for (const p of DISH[id].prereqs || []) for (const q of p.startsWith('pick:') ? dishes.filter(d => d.pickOne === p.slice(5)).map(d => d.id) : [p]) visit(q, [...stack, id]);
   };
-  for (const L of lessons) visit(L.number, []);
-  // the course outline (plan §6.16): every planned dish, written or not
+  for (const d of dishes) visit(d.id, []);
+
+  // the course outline (plan §4, §6.16)
   if (c.course) {
-    const seen = {};
-    for (const d of c.course.dishes || []) {
-      const where = `course.json dish ${d.number}`;
-      for (const f of ['number', 'title', 'unit', 'cuisine', 'skills', 'skill', 'image', 'safety', 'minutes']) if (d[f] == null) err(where, `has no ${f}`);
-      if (seen[d.number]) err(where, 'is listed twice');
-      seen[d.number] = d;
+    for (const d of dishes) {
+      const where = `course.json ${d.id}`;
+      for (const f of ['id', 'title', 'unit', 'cuisine', 'skills', 'skill', 'image', 'safety', 'minutes']) if (d[f] == null) err(where, `has no ${f}`);
+      if (d.image !== `dishes/${d.id}.png`) err(where, `image should be dishes/${d.id}.png`);
       if (!UNITS.has(d.unit)) err(where, `unit ${d.unit} doesn't exist in units.json`);
       if (!CU[d.cuisine]) err(where, `cuisine "${d.cuisine}" doesn't exist in cuisines.json`);
       for (const s of d.skills || []) if (!SK[s]) err(where, `skill "${s}" doesn't exist in skills.json`);
@@ -191,20 +196,30 @@ export function lint(c) {
       if (!['solo', 'adult-nearby', 'adult-hands-on'].includes(d.safety)) err(where, `safety "${d.safety}" isn't a safety level`);
       if (c.imageExists && d.image && !c.imageExists(d.image)) err(where, `image ${d.image} isn't in content/images/`);
       for (const [p, t] of [['title', d.title], ['skill', d.skill]]) for (const w of blockedWordsIn(t || '', rules)) err(where, `${p} names a blocked food ("${w}")`);
+      if (d.pickOne && !SK[d.pickOne]) err(where, `pickOne "${d.pickOne}" isn't a skill in skills.json`);
+      for (const p of d.prereqs || []) {
+        if (!prereqOk(p)) err(where, `prerequisite "${p}" isn't a dish or pick-one group`);
+        // The suggested order is the default for every family, so it keeps prerequisites first.
+        else if (prereqAt(p) >= pos[d.id]) err(where, `comes before its prerequisite "${p}"`);
+      }
     }
-    for (const d of Object.values(seen)) for (const n of d.pickOneWith || []) {
-      if (!seen[n]) err(`course.json dish ${d.number}`, `pickOneWith names dish ${n}, which isn't in the course`);
-      else if (!(seen[n].pickOneWith || []).includes(d.number)) err(`course.json dish ${d.number}`, `pickOneWith names ${n}, but ${n} doesn't name it back`);
+    // A pick-one group's dishes sit together, so they share one number.
+    const keys = courseEntries(dishes).map(e => e.key);
+    for (const g of groups) {
+      const members = dishes.filter(d => d.pickOne === g);
+      if (members.length < 2) err(`course.json pick-one "${g}"`, 'has only one dish');
+      if (keys.filter(k => k === `pick:${g}`).length > 1) err(`course.json pick-one "${g}"`, "its dishes aren't next to each other");
     }
     for (const { file, data: L } of c.lessons) {
-      const d = seen[L.number];
-      if (!d) { err(`lessons/${file}`, `lesson ${L.number} isn't in course.json`); continue; }
-      if (d.lesson !== L.id) err(`course.json dish ${L.number}`, `lesson should be "${L.id}"`);
-      for (const f of ['title', 'unit', 'cuisine']) if (d[f] !== L[f]) err(`course.json dish ${L.number}`, `${f} is "${d[f]}" but the lesson says "${L[f]}"`);
-      if (JSON.stringify(d.skills) !== JSON.stringify(L.skills)) err(`course.json dish ${L.number}`, `skills don't match the lesson's (${L.skills.join(', ')})`);
-      if (d.minutes !== L.totalMinutes || d.estimated) err(`course.json dish ${L.number}`, `minutes should be the lesson's ${L.totalMinutes}, not an estimate`);
+      const d = DISH[L.id];
+      if (!d) { err(`lessons/${file}`, `"${L.id}" isn't in course.json`); continue; }
+      const where = `course.json ${L.id}`;
+      for (const f of ['title', 'unit', 'cuisine', 'image']) if (d[f] !== L[f]) err(where, `${f} is "${d[f]}" but the lesson says "${L[f]}"`);
+      if (JSON.stringify(d.skills) !== JSON.stringify(L.skills)) err(where, `skills don't match the lesson's (${L.skills.join(', ')})`);
+      if (JSON.stringify(d.prereqs || []) !== JSON.stringify(L.prereqs)) err(where, `prereqs don't match the lesson's (${L.prereqs.join(', ') || 'none'})`);
+      if (d.minutes !== L.totalMinutes || d.estimated) err(where, `minutes should be the lesson's ${L.totalMinutes}, not an estimate`);
     }
-    for (const d of Object.values(seen)) if (d.lesson && !c.lessons.some(({ data }) => data.id === d.lesson)) err(`course.json dish ${d.number}`, `lesson "${d.lesson}" has no file in lessons/`);
+    for (const t of c.terms) if (t.taughtIn && !DISH[t.taughtIn]) err(`terms.json ${t.id}`, `taughtIn "${t.taughtIn}" isn't a dish in course.json`);
   }
 
   return { errors, warnings };

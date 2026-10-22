@@ -1,11 +1,10 @@
 {
-  "id": "38-buttermilk-biscuits",
+  "id": "buttermilk-biscuits",
   "version": 1,
-  "number": 38,
   "track": "core",
   "unit": 5,
   "title": "Buttermilk biscuits",
-  "image": "dishes/38-buttermilk-biscuits.png",
+  "image": "dishes/buttermilk-biscuits.png",
   "cuisine": "american",
   "skill": "Cutting in cold fat, folding for layers",
   "skills": ["cutting-in-fat", "folding-layers"],

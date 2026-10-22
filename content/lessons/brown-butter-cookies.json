@@ -1,11 +1,10 @@
 {
-  "id": "49-brown-butter-cookies",
+  "id": "brown-butter-cookies",
   "version": 1,
-  "number": 49,
   "track": "core",
   "unit": 7,
   "title": "Brown butter chocolate chip cookies",
-  "image": "dishes/49-brown-butter-cookies.png",
+  "image": "dishes/brown-butter-cookies.png",
   "cuisine": "american",
   "skill": "Browning butter, creaming",
   "skills": ["browning-butter", "creaming"],
@@ -34,7 +33,7 @@
       { "sign": "The butter won't firm up in the ice water", "fix": "Keep stirring and add more ice. It takes 5 to 10 minutes." },
       { "sign": "The cookies spread out flat", "fix": "The dough was too warm. Chill the scooped dough for 15 minutes before baking." }
     ],
-    "callback": { "lesson": 38, "body": "In biscuits you kept the butter ice-cold so it would turn to steam in the oven. Today you do the opposite: melt it, brown it, then chill it just until it thickens back up, like frosting." },
+    "callback": { "lesson": "buttermilk-biscuits", "body": "In biscuits you kept the butter ice-cold so it would turn to steam in the oven. Today you do the opposite: melt it, brown it, then chill it just until it thickens back up, like frosting." },
     "quiz": [
       { "q": "What turns brown when you brown butter?", "choices": ["The fat", "The milk solids", "The water"], "answer": 1, "explain": "The water cooks off and the milk solids toast. The fat carries their flavor into the cookies." }
     ]

@@ -305,7 +305,7 @@ async function kitchen(id) {
       done.times === 1 ? 'Cooked once' : `Cooked ${done.times} times`) : null;
     if (quest) {
       return el('article', { class: 'q-panel q-card' },
-        el('p', { class: 'q-kick' }, `Path ${L.unit} · Quest ${L.number}`),
+        el('p', { class: 'q-kick' }, `Path ${L.unit} · Quest ${L.label}`),
         el('div', { class: 'q-win' }, el('img', { src: L.image, alt: '', width: 230, height: 230, loading: 'lazy' })),
         el('h3', { class: 'q-title' }, L.title),
         el('p', { class: 'q-skill' }, L.skill),
@@ -320,6 +320,7 @@ async function kitchen(id) {
     return el('article', { class: 'p-card' },
       el('span', { class: 'tape t1' }), el('span', { class: 'tape t2' }),
       el('div', { class: 'p-photo' }, el('img', { src: L.image, alt: '', width: 220, height: 220, loading: 'lazy' })),
+      el('p', { class: 'p-lessonno' }, `Lesson ${L.label}`),
       el('h3', { class: 'p-title' }, L.title),
       el('p', { class: 'p-skill' }, L.skill),
       el('div', { class: 'p-meta' }, el('span', {}, time), el('span', {}, `Serves ${L.servings}`), el('span', {}, L.cuisine)),
@@ -350,14 +351,14 @@ async function kitchen(id) {
 
 // A lesson, played in the profile's theme (player.js).
 async function lesson(profileId, lessonId) {
-  const { profiles } = await api('GET', '/api/profiles');
+  const [{ profiles }, lib] = await Promise.all([api('GET', '/api/profiles'), api('GET', '/api/library')]);
   const p = profiles.find((x) => x.id === profileId);
   if (!p) return go('#/');
   const mount = el('div');
   screen(mount);
   await openLesson(mount, {
     profile: p, family: me.family, lessonId, onExit: () => go(`#/kitchen/${p.id}`),
-    crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook,
+    crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook, labels: lib.labels, total: lib.total,
     fixes: {
       suggest: (ctx) => suggestFix(p, ctx),
       list: async (lid) => (await api('GET', `/api/lessons/${encodeURIComponent(lid)}/fixes`)).fixes,

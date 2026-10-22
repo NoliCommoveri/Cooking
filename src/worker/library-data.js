@@ -2,13 +2,12 @@
 export const LIBRARY = {
  "lessons": [
   {
-   "id": "04-shakshuka",
-   "number": 4,
+   "id": "shakshuka",
    "version": 1,
    "track": "core",
    "unit": 2,
    "title": "Shakshuka",
-   "image": "img/dishes/04-shakshuka.webp",
+   "image": "img/dishes/shakshuka.webp",
    "cuisine": "north-african",
    "skill": "Building a sauce, then poaching eggs in it",
    "servings": 6,
@@ -73,13 +72,12 @@ export const LIBRARY = {
    "substitutions": []
   },
   {
-   "id": "14-beef-bulgogi",
-   "number": 14,
+   "id": "beef-bulgogi",
    "version": 1,
    "track": "core",
    "unit": 4,
    "title": "Beef bulgogi",
-   "image": "img/dishes/14-beef-bulgogi.webp",
+   "image": "img/dishes/beef-bulgogi.webp",
    "cuisine": "korean",
    "skill": "Thin slicing and marinating",
    "servings": 6,
@@ -147,13 +145,12 @@ export const LIBRARY = {
    ]
   },
   {
-   "id": "38-buttermilk-biscuits",
-   "number": 38,
+   "id": "buttermilk-biscuits",
    "version": 1,
    "track": "core",
    "unit": 5,
    "title": "Buttermilk biscuits",
-   "image": "img/dishes/38-buttermilk-biscuits.webp",
+   "image": "img/dishes/buttermilk-biscuits.webp",
    "cuisine": "american",
    "skill": "Cutting in cold fat, folding for layers",
    "servings": 6,
@@ -204,13 +201,12 @@ export const LIBRARY = {
    "substitutions": []
   },
   {
-   "id": "49-brown-butter-cookies",
-   "number": 49,
+   "id": "brown-butter-cookies",
    "version": 1,
    "track": "core",
    "unit": 7,
    "title": "Brown butter chocolate chip cookies",
-   "image": "img/dishes/49-brown-butter-cookies.webp",
+   "image": "img/dishes/brown-butter-cookies.webp",
    "cuisine": "american",
    "skill": "Browning butter, creaming",
    "servings": 6,
@@ -476,5 +472,429 @@ export const LIBRARY = {
   "gluten",
   "fish",
   "meat"
+ ],
+ "course": [
+  {
+   "id": "spring-rolls",
+   "title": "Fresh spring rolls",
+   "unit": 1,
+   "pickOne": "julienne"
+  },
+  {
+   "id": "chicken-fajitas",
+   "title": "Chicken fajitas",
+   "unit": 1,
+   "pickOne": "julienne"
+  },
+  {
+   "id": "shoestring-fries",
+   "title": "Baked shoestring fries",
+   "unit": 1,
+   "pickOne": "julienne"
+  },
+  {
+   "id": "fattoush",
+   "title": "Fattoush",
+   "unit": 1,
+   "pickOne": "fine-chopping"
+  },
+  {
+   "id": "chimichurri-steak",
+   "title": "Chimichurri steak",
+   "unit": 1,
+   "pickOne": "fine-chopping"
+  },
+  {
+   "id": "tuna-salad-sandwiches",
+   "title": "Tuna salad sandwiches",
+   "unit": 1,
+   "pickOne": "fine-chopping"
+  },
+  {
+   "id": "fish-tacos",
+   "title": "Pico de gallo + Baja fish tacos",
+   "unit": 1,
+   "pickOne": "dicing"
+  },
+  {
+   "id": "ratatouille",
+   "title": "Ratatouille",
+   "unit": 1,
+   "pickOne": "dicing"
+  },
+  {
+   "id": "minestrone",
+   "title": "Minestrone",
+   "unit": 1,
+   "pickOne": "dicing"
+  },
+  {
+   "id": "chicken-caesar",
+   "title": "Chicken Caesar + homemade dressing & croutons",
+   "unit": 1
+  },
+  {
+   "id": "smash-burgers",
+   "title": "Smash burgers + quick pickles",
+   "unit": 1
+  },
+  {
+   "id": "french-omelet",
+   "title": "French-style omelet",
+   "unit": 2,
+   "pickOne": "heat-control"
+  },
+  {
+   "id": "grilled-cheese-tomato-soup",
+   "title": "Grilled cheese + tomato soup",
+   "unit": 2,
+   "pickOne": "heat-control"
+  },
+  {
+   "id": "challah-french-toast",
+   "title": "Challah French toast",
+   "unit": 2,
+   "pickOne": "heat-control"
+  },
+  {
+   "id": "hash-browns",
+   "title": "Crispy hash browns",
+   "unit": 2
+  },
+  {
+   "id": "shakshuka",
+   "title": "Shakshuka",
+   "unit": 2,
+   "pickOne": "building-a-sauce"
+  },
+  {
+   "id": "spaghetti-marinara",
+   "title": "Spaghetti marinara",
+   "unit": 2,
+   "pickOne": "building-a-sauce"
+  },
+  {
+   "id": "honey-garlic-chicken",
+   "title": "Honey-garlic chicken",
+   "unit": 2,
+   "pickOne": "building-a-sauce"
+  },
+  {
+   "id": "chicken-fried-rice",
+   "title": "Chicken fried rice",
+   "unit": 2
+  },
+  {
+   "id": "oyakodon",
+   "title": "Oyakodon",
+   "unit": 2
+  },
+  {
+   "id": "chicken-adobo",
+   "title": "Chicken adobo",
+   "unit": 2
+  },
+  {
+   "id": "breakfast-burritos",
+   "title": "Breakfast burritos",
+   "unit": 2
+  },
+  {
+   "id": "cacio-e-pepe",
+   "title": "Cacio e pepe",
+   "unit": 2
+  },
+  {
+   "id": "eggs-benedict",
+   "title": "Eggs Benedict",
+   "unit": 2,
+   "prereqs": [
+    "cacio-e-pepe"
+   ]
+  },
+  {
+   "id": "mac-and-cheese",
+   "title": "Stovetop mac and cheese",
+   "unit": 2,
+   "pickOne": "roux"
+  },
+  {
+   "id": "chicken-spinach-crepes",
+   "title": "Chicken and spinach crêpes",
+   "unit": 2,
+   "pickOne": "roux"
+  },
+  {
+   "id": "japanese-chicken-curry",
+   "title": "Japanese chicken curry",
+   "unit": 2,
+   "pickOne": "roux"
+  },
+  {
+   "id": "chana-masala",
+   "title": "Chana masala",
+   "unit": 3
+  },
+  {
+   "id": "beef-chili",
+   "title": "Beef chili",
+   "unit": 3
+  },
+  {
+   "id": "misir-wot",
+   "title": "Misir wot",
+   "unit": 3
+  },
+  {
+   "id": "red-beans-and-rice",
+   "title": "Red beans and rice",
+   "unit": 3
+  },
+  {
+   "id": "jollof-rice",
+   "title": "Jollof rice with chicken",
+   "unit": 3
+  },
+  {
+   "id": "bbq-pulled-chicken",
+   "title": "BBQ pulled chicken + coleslaw",
+   "unit": 3
+  },
+  {
+   "id": "chicken-tagine",
+   "title": "Chicken tagine with olives",
+   "unit": 3
+  },
+  {
+   "id": "peanut-stew",
+   "title": "Peanut stew (maafe)",
+   "unit": 3
+  },
+  {
+   "id": "koshari",
+   "title": "Koshari",
+   "unit": 3
+  },
+  {
+   "id": "butter-chicken",
+   "title": "Butter chicken",
+   "unit": 3
+  },
+  {
+   "id": "jerk-chicken",
+   "title": "Jerk chicken",
+   "unit": 3
+  },
+  {
+   "id": "beef-bulgogi",
+   "title": "Beef bulgogi",
+   "unit": 4
+  },
+  {
+   "id": "philly-cheesesteak",
+   "title": "Philly cheesesteak",
+   "unit": 4,
+   "prereqs": [
+    "beef-bulgogi"
+   ]
+  },
+  {
+   "id": "lomo-saltado",
+   "title": "Lomo saltado",
+   "unit": 4
+  },
+  {
+   "id": "suya",
+   "title": "Suya (spiced beef skewers)",
+   "unit": 4
+  },
+  {
+   "id": "chicken-yassa",
+   "title": "Chicken yassa",
+   "unit": 4
+  },
+  {
+   "id": "chicken-tinga-tacos",
+   "title": "Chicken tinga tacos",
+   "unit": 4
+  },
+  {
+   "id": "matzo-ball-soup",
+   "title": "Matzo ball soup from a whole chicken",
+   "unit": 4
+  },
+  {
+   "id": "blueberry-muffins",
+   "title": "Blueberry muffins",
+   "unit": 5
+  },
+  {
+   "id": "skillet-cornbread",
+   "title": "Skillet cornbread",
+   "unit": 5
+  },
+  {
+   "id": "pao-de-queijo",
+   "title": "Pão de queijo",
+   "unit": 5
+  },
+  {
+   "id": "skillet-naan",
+   "title": "Skillet naan",
+   "unit": 5
+  },
+  {
+   "id": "pupusas",
+   "title": "Pupusas",
+   "unit": 5
+  },
+  {
+   "id": "ugali-sukuma-wiki",
+   "title": "Ugali with sukuma wiki",
+   "unit": 5
+  },
+  {
+   "id": "buttermilk-biscuits",
+   "title": "Buttermilk biscuits",
+   "unit": 5,
+   "pickOne": "cutting-in-fat"
+  },
+  {
+   "id": "rugelach",
+   "title": "Rugelach",
+   "unit": 5,
+   "pickOne": "cutting-in-fat"
+  },
+  {
+   "id": "beef-empanadas",
+   "title": "Baked beef empanadas",
+   "unit": 5,
+   "pickOne": "cutting-in-fat"
+  },
+  {
+   "id": "biscuits-and-gravy",
+   "title": "Biscuits + sausage gravy",
+   "unit": 5,
+   "prereqs": [
+    "buttermilk-biscuits",
+    "pick:roux"
+   ]
+  },
+  {
+   "id": "gyoza",
+   "title": "Gyoza",
+   "unit": 5
+  },
+  {
+   "id": "cinnamon-rolls",
+   "title": "Cinnamon rolls",
+   "unit": 5,
+   "pickOne": "yeast-dough"
+  },
+  {
+   "id": "challah",
+   "title": "Challah",
+   "unit": 5,
+   "pickOne": "yeast-dough"
+  },
+  {
+   "id": "homemade-pizza",
+   "title": "Homemade pizza",
+   "unit": 5,
+   "pickOne": "yeast-dough"
+  },
+  {
+   "id": "granola",
+   "title": "Homemade granola",
+   "unit": 6
+  },
+  {
+   "id": "meatloaf",
+   "title": "Meatloaf with glaze",
+   "unit": 6
+  },
+  {
+   "id": "swedish-meatballs",
+   "title": "Swedish meatballs",
+   "unit": 6,
+   "prereqs": [
+    "pick:roux"
+   ]
+  },
+  {
+   "id": "roast-chicken",
+   "title": "Roast chicken + pan gravy",
+   "unit": 6,
+   "prereqs": [
+    "pick:roux"
+   ]
+  },
+  {
+   "id": "pot-roast",
+   "title": "Pot roast",
+   "unit": 6
+  },
+  {
+   "id": "bobotie",
+   "title": "Bobotie",
+   "unit": 6
+  },
+  {
+   "id": "spanakopita",
+   "title": "Spanakopita",
+   "unit": 6
+  },
+  {
+   "id": "spinach-mushroom-quiche",
+   "title": "Spinach & mushroom quiche",
+   "unit": 6
+  },
+  {
+   "id": "chicken-pot-pie",
+   "title": "Chicken pot pie",
+   "unit": 6,
+   "prereqs": [
+    "pick:roux",
+    "spinach-mushroom-quiche"
+   ]
+  },
+  {
+   "id": "chicken-katsu",
+   "title": "Chicken katsu",
+   "unit": 6
+  },
+  {
+   "id": "kelewele",
+   "title": "Kelewele (spiced plantains)",
+   "unit": 6
+  },
+  {
+   "id": "fish-and-chips",
+   "title": "Fish and chips",
+   "unit": 6
+  },
+  {
+   "id": "brown-butter-cookies",
+   "title": "Brown butter chocolate chip cookies",
+   "unit": 7
+  },
+  {
+   "id": "malva-pudding",
+   "title": "Malva pudding",
+   "unit": 7
+  },
+  {
+   "id": "churros",
+   "title": "Churros with chocolate",
+   "unit": 7
+  },
+  {
+   "id": "apple-pie",
+   "title": "Apple pie with lattice",
+   "unit": 7,
+   "prereqs": [
+    "spinach-mushroom-quiche"
+   ]
+  }
  ]
 };

@@ -78,14 +78,14 @@ test('the library API applies the family\'s filters', async () => {
 
   await c.put('/api/family', { name: 'Carsons', default_servings: 6, diet_filters: ['gluten'] });
   const gf = (await c.get('/api/library')).body;
-  const bulgogi = gf.lessons.find((l) => l.number === 14);
+  const bulgogi = gf.lessons.find((l) => l.id === 'beef-bulgogi');
   assert.ok(bulgogi, 'bulgogi stays: tamari replaces soy sauce');
   assert.deepEqual(bulgogi.substitutions.map((s) => s.use), ['Tamari']);
-  assert.ok(!gf.lessons.some((l) => l.number === 38), 'biscuits have flour and no swap');
+  assert.ok(!gf.lessons.some((l) => l.id === 'buttermilk-biscuits'), 'biscuits have flour and no swap');
 
   await c.put('/api/family', { name: 'Carsons', default_servings: 6, diet_filters: ['dairy'] });
   const df = (await c.get('/api/library')).body;
-  const shakshuka = df.lessons.find((l) => l.number === 4);
+  const shakshuka = df.lessons.find((l) => l.id === 'shakshuka');
   assert.ok(shakshuka, 'shakshuka stays: its feta is optional');
   assert.ok(shakshuka.left_out.length > 0);
   assert.equal(gf.hidden, all.lessons.length - gf.lessons.length);
