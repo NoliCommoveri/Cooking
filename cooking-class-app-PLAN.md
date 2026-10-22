@@ -207,17 +207,20 @@ None of the 50 dishes requires a stand mixer. Lessons that use one in typical re
 - Target ages **11–12**. It should feel like a **cooking video game**, not a preschool app and not a productivity tool.
 - Playful, warm, and tactile. Avoid baby-ish mascots, a sing-song tone, and anything kids this age would find embarrassing.
 
-### 5.2 Theme
-**Recommendation:** "Chef's Passport" combined with "Kitchen Ranks."
-- **Passport:** each completed dish earns an inked stamp for its cuisine in a passport book. Stamp pages are grouped by region, and the passport's world map lights up as regions fill in.
-- **Ranks:** kids level up through Kitchen Apprentice → Prep Cook → Line Cook → Sous Chef → Head Chef, driven by lessons completed and skills earned. Each rank changes the hat or apron on the profile's chef avatar.
+### 5.2 Themes
+**Requirement: each profile picks its own theme.** Kids choose; there is no single app-wide theme.
 
-**Alternatives:**
-- Kitchen Quest: an RPG-style skill tree with unlockable paths.
-- Food Truck: each lesson adds a menu item to the kid's own food truck.
-- Recipe scrapbook: progress lives in a scrapbook.
+- **Same rewards, different look.** Every theme shows the same progress underneath: a reward per completed dish, a pin per skill, and a rank. Each theme draws them its own way.
+- **Every theme supplies its own treatment for every component in §5.4.** The banned patterns in §5.6 apply to all of them.
+- **The look follows the profile.** On a shared device, the theme switches when a profile is picked from the chef lockers. The profile picker and parent screens use a neutral house style.
+- **Theme tokens are CSS custom properties,** one set per theme, applied at the root when a profile is active.
+- **One theme is built first.** The kids pick it from mockups in Phase 0. The others are added later (§9), and a profile can switch to any built theme at any time.
 
-**Requirement: the kids choose the theme.** They pick from mockups of these options before the theme is built out (Phase 0).
+**Candidate themes** (recommendation):
+- **Chef's Passport + Kitchen Ranks.** Each dish earns an inked stamp for its cuisine in a passport book. Stamp pages are grouped by region, and the world map lights up as regions fill in. Ranks go Kitchen Apprentice → Prep Cook → Line Cook → Sous Chef → Head Chef, and each changes the hat or apron on the chef avatar. §5.4 describes this one.
+- **Kitchen Quest:** an RPG-style skill tree with unlockable paths.
+- **Food Truck:** each lesson adds a menu item to the kid's own food truck.
+- **Recipe Scrapbook:** progress lives in a scrapbook.
 
 ### 5.3 Visual language
 - **Surfaces:** recipe cards with a paper texture, tape on the corners, and a slight rotation. Use a corkboard, a chalkboard menu, or a tile-backsplash texture for backgrounds.
@@ -226,14 +229,14 @@ None of the 50 dishes requires a stand mixer. Lessons that use one in typical re
 - **Icons:** custom SVG illustrations in one consistent style. Don't rely on emoji as the main iconography.
 
 ### 5.3a Art production (recommendation)
-The themed components need a lot of art: a dish illustration for every lesson, an icon for every ingredient (they hop into the bowl) and every tool (pegboard), a stamp per region, a pin per skill, and avatar outfits per rank.
+The themed components need a lot of art, and every theme added later (§5.2) needs its own set: a dish illustration for every lesson, an icon for every ingredient (they hop into the bowl) and every tool (pegboard), a stamp per region, a pin per skill, and avatar outfits per rank.
 - Phase 0 sets the style and draws the core set: the components in §5.4, one generic icon per store section, and one per tool category.
 - An ingredient or tool without its own icon falls back to its category's generic icon. The linter warns about fallbacks; it doesn't fail on them.
 - Each new lesson brings its own dish illustration. Stamps, pins, and outfits come with Phase 5.
 - Every image that isn't original carries its license in `content/images/LICENSES.md`, the same as music.
 - Who draws the art is an open question (§10).
 
-### 5.4 Themed components
+### 5.4 Themed components (Chef's Passport)
 | Component | Treatment |
 |---|---|
 | Lesson card | A taped recipe card showing the dish illustration, title in the display font, and a skill line handwritten underneath |
@@ -293,7 +296,7 @@ Do **not** use:
 - **Family recipes** (bonus, §6.10): add the family's own recipes, submit them for the shared library, and add recipes from the community directory
 - **Mark test-cooked:** after cooking a lesson themselves, a parent can mark it test-cooked for their family (§7). Optional; lessons don't need it to be shown to kids
 - **Pantry staples:** a list of ingredients always on hand, which drop off the shopping list
-- **Family settings:** family name, profiles (add, rename, avatar, who's on each), dietary filters (§2.1), default servings, other parent logins
+- **Family settings:** family name, profiles (add, rename, avatar, theme, who's on each), dietary filters (§2.1), default servings, other parent logins
 
 ### 6.2a Owner features
 - **Sign-up requests:** a queue of families asking to join (§8.3). Approving one emails them a sign-up code; declining sends nothing
@@ -385,7 +388,7 @@ A bonus feature, after the core app works. Families can cook their own recipes i
 A first run for a new family, like KennelOS's (End-State guide §11 and "Getting Started" in §33). It runs after a family signs up with a code or the keyword (§8.3). Each part saves as it's answered and can be skipped.
 - **Family setup:** profiles (one per kid, shared, or a mix), default servings, diet filters, pantry staples, and the parent PIN (required, §8.3).
 - **A warning for first-time parents:** the recipes haven't all been test-cooked. Read each lesson through before your kids cook it, and mark it test-cooked once you have (§6.2).
-- **Kids' first run:** each profile sets up its chef locker and avatar.
+- **Kids' first run:** each profile sets up its chef locker and avatar, and picks its theme.
 - **Then an introduction to the helper** (§6.8).
 
 Until the wizard is built, the test-cook warning shows as a one-time notice on a parent's first sign-in.
@@ -543,7 +546,7 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `recipe_submissions` (id, family_id, family_recipe_id, submitted_at, status: pending → released | declined, community_recipe_id)
 - `community_recipes` (id, title, body_json, released_at, released_by). No `family_id`: released recipes belong to the shared directory, not a family
 - `sessions` (id, parent_id, family_id, created_at, last_seen)
-- `profiles` (id, family_id, name, avatar, track: core | beginner). One kid or several sharing it (§1)
+- `profiles` (id, family_id, name, avatar, theme, track: core | beginner). One kid or several sharing it (§1)
 - `queue` (id, family_id, lesson_id, servings, planned_date, status: requested → assigned → shopped → cooked, requested_by_profile_id)
 - `queue_profiles` (queue_id, family_id, profile_id)
 - `shopping_trips` (id, family_id, created_at, ended_at)
@@ -574,7 +577,7 @@ Each phase should be deployed and usable before the next begins.
 
 | Phase | Scope | Done when |
 |---|---|---|
-| **0. Look & feel** | Theme mockups for the kids to choose from (§5.2), then theme tokens, fonts, the core art set (§5.3a), and a **component showcase page** with every themed component from §5.4 in a demo state | The kids have picked a theme and the owner approves the look. **No features are built before this.** |
+| **0. Look & feel** | Theme mockups for the kids to choose from (§5.2), then the chosen theme's tokens, the per-profile theme switch, the house style for the picker and parent screens, fonts, the core art set (§5.3a), and a **component showcase page** with every themed component from §5.4 in a demo state | The kids have picked a theme and the owner approves the look. **No features are built before this.** |
 | **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
 | **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, sign-up codes, keyword, and the request queue, parent login, sessions, password reset email (Resend), parent PIN, profiles (single or shared) and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up with codes, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
 | **2. Lesson player** | Learn, Prep, Cook mode, food-safety checks, timers, wake lock, attempts saved for every profile on the cook, offline cache and sync | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice |
@@ -585,7 +588,7 @@ Each phase should be deployed and usable before the next begins.
 | **7. Content fill** | The remaining 46 lessons, written in separate content sessions | All 50 lessons pass the linter |
 | **8. Helper & first run** | First-run wizard (§6.9) and the helper (§6.8), once both are specced | A new family goes from sign-up to their first queued lesson through the wizard, and kids and parents can each finish a helper task |
 | **9. Family recipes (bonus)** | My recipes with the guided entry flow, submission and owner review, the community directory (§6.10) | A parent enters a recipe through the flow, a kid cooks it, and the owner releases a submitted one to the directory, where another test family finds and adds it |
-| **Later** | Beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, voice "next step," CSV export to the homeschool management system | — |
+| **Later** | More themes (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, voice "next step," CSV export to the homeschool management system | — |
 
 **Testing (every phase):** automated tests run in CI alongside the linter. At minimum they cover family scoping (no endpoint returns another family's rows or photos), scaling and rounding, unit conversion, shopping-list merging, and the migration runner.
 
@@ -593,9 +596,8 @@ Each phase should be deployed and usable before the next begins.
 
 ## 10. Open questions
 
-1. **Theme per family:** the kids choose the theme (§5.2). With several families, is there one theme for everyone, or can each family pick?
-2. **Other hidden sources:** should the hard block (§2.1) also cover animal rennet or pepsin in cheese (sometimes from pigs), and blood or fat (Leviticus 3 and 17)? Neither is in the rule today.
-3. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
+1. **Other hidden sources:** should the hard block (§2.1) also cover animal rennet or pepsin in cheese (sometimes from pigs), and blood or fat (Leviticus 3 and 17)? Neither is in the rule today.
+2. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
 
 ---
 
@@ -614,9 +616,8 @@ A separate set of simpler lessons for **kids with no prior cooking experience**,
 - **Same food rules:** the hard block in §2.1 applies to beginner lessons with no exceptions.
 
 ### Theme
-- Same theme as the core app (§5), with bigger art, fewer words, and more animation feedback on every tap.
-- Progress uses the same passport or stamp idea, so siblings on different tracks collect the same kind of reward.
-- **Revisit if:** kids on either track find the shared theme a poor fit. The beginner track could get its own skin.
+- Beginner profiles pick from the same themes (§5.2), shown with bigger art, fewer words, and more animation feedback on every tap.
+- Rewards work the same way on both tracks, so siblings on different tracks collect the same kind of reward.
 
 ### Data hooks to include now
 - Lesson files have `track: "core" | "beginner"` (§7.3).

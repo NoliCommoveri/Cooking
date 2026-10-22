@@ -194,3 +194,23 @@ Owner rulings on open questions:
 - Replaced "cook-together mode" in the Later row with "split roles," since
   shared profiles (entry 7) already cover cooking together.
 - Open questions are now 1–3.
+
+---
+
+## 9. 2026-10-22 — Theme per profile
+
+- The owner ruled that **each profile picks its own theme**. This replaces
+  entry 8's open question about one theme for everyone vs. one per family.
+- §5.2 rewritten:
+  - Themes share the same rewards underneath and draw them differently.
+  - Each theme supplies every §5.4 component; §5.4 is now the Chef's Passport
+    treatment.
+  - The theme switches when a profile is picked. The picker and parent screens
+    use a neutral house style.
+  - One theme is built first, chosen by the kids in Phase 0; more come later.
+- `profiles` gained `theme`. Family settings and the kids' first run include
+  picking it.
+- The beginner track no longer says "same theme as core"; beginner profiles
+  pick from the same themes.
+- The art section notes that each added theme needs its own art set.
+- Open questions are now 1–2.
