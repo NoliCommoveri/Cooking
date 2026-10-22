@@ -20,3 +20,4 @@ use in this app. Cropped from the source sheets in `source/` with
 | `source/sheet-08-breakfast.png` | `dishes/28-french-omelet.png`, `dishes/29-hash-browns.png`, `dishes/30-breakfast-burritos.png`, `dishes/31-eggs-benedict.png` |
 | `source/sheet-09-baking.png` | `dishes/40-blueberry-muffins.png`, `dishes/41-skillet-cornbread.png`, `dishes/42-cinnamon-rolls.png`, `dishes/43-granola.png` |
 | `source/sheet-10-units4-5.png` | `dishes/36-chicken-noodle-soup.png`, `dishes/37-philly-cheesesteak.png`, `dishes/38-buttermilk-biscuits.png`, `dishes/39-biscuits-and-gravy.png` |
+| `source/sheet-11-unit6.png` | `dishes/44-meatloaf.png`, `dishes/45-roast-chicken.png`, `dishes/46-chicken-pot-pie.png`, `dishes/47-pot-roast.png` |

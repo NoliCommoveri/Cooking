@@ -395,3 +395,18 @@ Owner rulings on open questions:
   the erosion shrank it. Re-cropped every sheet; all 43 crops were checked
   side by side on the Kitchen Quest background.
 - 43 of 50 dishes now have art.
+
+---
+
+## 22. 2026-10-22 — Dish art sheet 11
+
+- Added sheet 11 from the owner and cropped 4 dishes: 44 meatloaf, 45 roast
+  chicken, 46 chicken pot pie, 47 pot roast. Each is about 620–690 px.
+- Checked for unclean foods: none seen.
+- Fixed `tools/crop-dish-sheet.py`: the pot pie and pot roast kept a pale grey
+  drop shadow. Pale grey now counts as background too; the flood fill still
+  stops at each dish's dark outline. Re-cropped every sheet and checked all 47
+  side by side.
+- Gave the owner the redo list: 14, 26, 27, 34, 35, 37, with 28 and 32
+  optional.
+- 47 of 50 dishes now have art. Still to make: 48, 49, 50.
