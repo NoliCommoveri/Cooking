@@ -696,8 +696,8 @@ The app lives at **`cleanplate.immotus.app`**, and its front door is a simple pu
 ### 6.14 Leaving, and inactive accounts — Requirement (owner, 2026-10-22)
 - **Delete our family (self-serve).** In family settings, behind the parent PIN and the account password. It deletes the family, every parent login, every profile, all progress, and all photos. Next to it is **Download our data** (everything about the family, photos included), offered before deleting.
 - **Inactive accounts purge automatically.** A family whose parents haven't used the app for a year (`families.last_active_at`, which any use of a logged-in device refreshes) is deleted the same way. A scheduled job in the Worker checks every couple of weeks, so "a year" is approximate, and the app never promises an exact date. Cloudflare runs the job, so nothing is set up by hand.
-- **Recommendation:** email every parent in the family 30 days and 7 days before an inactive purge ("log in once to keep your account"). Logging in cancels it.
-- **Recommendation: a 30-day grace period** after a self-serve delete. The family disappears at once (no login, nothing shown to anyone), and the rows and photos are erased after 30 days. During those 30 days the owner can restore it from `/ops` if a parent asks, which keeps the rule that a destructive action has a restore. The privacy policy says so.
+- **Requirement (owner, 2026-10-22):** email every parent in the family 30 days and 7 days before an inactive purge ("log in once to keep your account"). Logging in cancels it.
+- **Requirement (owner, 2026-10-22): a 30-day grace period** after a self-serve delete. The family disappears at once (no login, nothing shown to anyone), and the rows and photos are erased after 30 days. During those 30 days the owner can restore it from `/ops` if a parent asks, which keeps the rule that a destructive action has a restore. The privacy policy says so.
 - Removing a family from `/ops` (§8.5) stays as it is.
 
 ### 6.15 Print our progress — Requirement (owner, 2026-10-22)
@@ -718,7 +718,7 @@ A printable record of what each profile has cooked, for homeschool records.
 A backend is needed because the app is multi-family: each family's progress, queue, and photos must be stored per family and reachable from any of that family's devices.
 
 ### 8.2 Front end — Recommendation
-- Build it as an installable **PWA**, and cache the active lesson so a Wi-Fi drop mid-recipe doesn't break cook mode.
+- Build it as an installable **PWA** (owner, 2026-10-22: the kid app becomes one), and cache the active lesson so a Wi-Fi drop mid-recipe doesn't break cook mode.
 - The framework choice is open: Vite with a lightweight component framework, or plain web components. Use CSS custom properties for theme tokens. CSS animations are fine for most motion; use an animation library only for complex sequences (stamp slam, rank up).
 - **Offline beyond reading:** the active lesson, the current shopping trip, check-offs, attempt progress, and photos waiting to upload are all stored on the device and synced when the connection returns.
 

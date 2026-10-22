@@ -877,3 +877,13 @@ Plan changes only; nothing new is built.
 - The owner created the D1 database. Its ID is in `wrangler.toml`, so the
   next deploy binds it as `DB`. `docs/setup.md` step 2 no longer asks for the
   ID to be pasted.
+
+---
+
+## 37. 2026-10-22 — Purge warnings and the delete grace period confirmed
+
+- The owner confirmed both §6.14 recommendations, now Requirements: warning
+  emails 30 and 7 days before an inactive purge, and a 30-day grace period
+  after a self-serve delete, during which the owner can restore the family
+  from `/ops`.
+- The owner confirmed the kid app becomes an installable PWA (§8.2).
