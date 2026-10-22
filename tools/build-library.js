@@ -17,7 +17,7 @@ import { numberCourse } from '../src/content/course.js';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'src/worker/library-data.js');
 const CONTENT_OUT = join(ROOT, 'src/worker/content-data.js');
-export const BROWSER_LIB = ['units.js', 'scale.js', 'terms.js', 'diet.js', 'patch.js', 'course.js'];
+export const BROWSER_LIB = ['units.js', 'scale.js', 'terms.js', 'diet.js', 'patch.js', 'course.js', 'shop.js'];
 // Lessons in course order (content/course.json), the order their numbers follow.
 const inCourse = (c) => { const at = Object.fromEntries(c.course.dishes.map((d, i) => [d.id, i])); return (a, b) => at[a.id] - at[b.id]; };
 

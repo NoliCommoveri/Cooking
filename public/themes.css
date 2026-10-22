@@ -418,3 +418,30 @@ use.pop{animation:dropin .42s cubic-bezier(.3,.7,.4,1) both}
 }
 
 .p-lessonno{margin:0;font-family:var(--p-hand);font-weight:700;font-size:22px;line-height:1;color:var(--p-red)}
+
+/* Reflect (§3): from the approved showcase. Kitchen Quest rates in gold gems;
+   Chef's Passport in chef's hats, on a lined card. */
+.gems{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.gem{width:56px;height:56px;border:0;background:transparent;padding:0;cursor:pointer}
+.gem svg{width:100%;height:100%}
+.gem .f{fill:#2B3260;stroke:var(--q-edge)}
+.gem.on .f{fill:var(--q-gold);stroke:#FFE3A0}
+.gem.on .s{opacity:1}
+.gem .s{opacity:0}
+.rate-l{font-family:var(--q-disp);color:var(--q-gold);font-size:18px;letter-spacing:.04em;margin-left:6px}
+.refl{display:grid;gap:6px;margin-top:14px;max-width:560px}
+.refl label{font-weight:800;font-size:16px}
+.refl label span{font-weight:600;color:var(--q-dim)}
+.refl textarea{font:inherit;font-size:16px;min-height:64px;padding:10px 12px;background:var(--q-deep);color:var(--q-text);border:0;box-shadow:inset 0 0 0 2px var(--q-edge);resize:vertical}
+.refl .q-h span,.p-refl .p-h span{font-size:14px}
+.p-hats{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.p-hatbtn{width:60px;height:60px;border:0;background:transparent;padding:0;color:#9A8F7A;cursor:pointer}
+.p-hatbtn svg{width:100%;height:100%}
+.p-hatbtn.on{color:var(--p-ink)}
+.p-hatbtn:not(.on) svg{opacity:.5}
+.p-ratel{font-family:var(--p-hand);font-weight:700;font-size:26px;margin-left:6px}
+.p-refl{padding:22px 14px 14px;display:grid;gap:6px;margin-top:16px;max-width:560px}
+.p-refl label{font-weight:800;font-size:16px}
+.p-refl label span{font-weight:600;color:var(--p-muted)}
+.p-refl textarea{font-family:var(--p-hand);font-weight:700;font-size:24px;line-height:28px;min-height:86px;padding:2px 8px;background:repeating-linear-gradient(0deg,transparent 0 27px,rgba(110,160,200,.4) 27px 28px);border:0;border-radius:0;color:var(--p-ink);resize:vertical}
+@media (max-width:420px){.p-hatbtn{width:48px;height:48px}.gem{width:48px;height:48px}}

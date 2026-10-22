@@ -1265,3 +1265,298 @@ how far through the course they are.
   a reordered plan with removed dishes, a dish added after a plan was saved,
   prerequisite notes), the new linter checks, and migration 0005.
 
+
+## 51. 2026-10-22 — Steady profile tests
+
+- Two tests (`worker-attempts`, `worker-fixes`) picked the kid and adult
+  profiles by list order. Profiles made in the same millisecond come back in
+  random order, so the kid/adult PIN test failed about half the time in CI.
+  They now pick profiles by name. No app change.
+- Tests: 126, all passing.
+
+## 52. 2026-10-22 — Phase 3 rulings
+
+Before Phase 3, the owner ruled:
+- **Phase 3 comes next**, before Phase 1c (public launch).
+- **Request a lesson (§6.1):** confirmed. A kid taps "I want to make this," and
+  a parent approves or declines it.
+- **Package rounding (§6.3):** built in Phase 3. Every ingredient gets its
+  store package sizes, and the registry's store sections become §6.3's list.
+- **Offline shopping list (§6.3):** waits with Phase 2d. Until then, check-offs
+  are saved to the account.
+- Phase 3 is built in two slices: 3a, the queue (requests, Cook this, the
+  foundations note, safety review, mark test-cooked); 3b, shopping trips and
+  the pantry.
+
+## 53. 2026-10-22 — Plan: course plans and the weekly schedule
+
+The owner asked that homeschool mode let a parent set the whole course up
+once, with each week's lessons loaded into the queue and unfinished ones
+moved to the next week. The plan had homeschool due dates as dates saved on
+queued lessons, and a pacing helper that suggested dates a few lessons ahead,
+which would have meant reworking the queue later. The owner ruled:
+- **New §6.18, course plans and the weekly schedule.** A course is for one or
+  more profiles, with its dishes in order, a start date, and lessons per week.
+  Each week's lessons are worked out from the plan, not stored, and next
+  week's show in the queue from the Friday before.
+- **Rollover: everything shifts.** An unfinished lesson goes first the next
+  week and the rest move back; the parent sees how far behind the planned
+  finish it is. Skip this week, and putting a skipped week back, are included.
+- **Siblings** can share a course or each have their own.
+- **Casual mode** can turn it on as Plan our weeks (off by default);
+  homeschool mode always has it.
+- **Build order:** course plans and the schedule move into Phase 3 (slice
+  3a, with the queue), which lifts the earlier wait on the family's course
+  plan (§4.1). The pacing helper is gone. Phase 4b keeps course details,
+  grading, and the transcript.
+- The queue stays the one "up next" list in both modes, so shopping, safety
+  review, and cooks are built once. Data model: `queue` gains `course_id` and
+  `source`; new `courses`, `course_profiles`, `course_lessons`, and
+  `course_skips` tables (§8.4).
+
+## 54. 2026-10-22 — Skip this recipe, and cook another
+
+- The owner asked for two one-tap controls for a parent on the weekly
+  schedule (§6.18):
+  - **Skip this recipe:** the lesson comes out of the course plan and the next
+    unfinished lesson takes its place this week. Undo is shown, and it can be
+    put back from the plan.
+  - **Cook another recipe:** pulls the next unfinished lesson into this week as
+    an extra, for this week only. Cooked, it moves the schedule up; not
+    cooked, it goes back to its place without being overdue.
+- Data model: `course_skips` (section 53) is now `course_weeks`, which holds a
+  skipped week and a week's extra lessons (§8.4).
+
+## 55. 2026-10-22 — Phase 3a: the queue, courses, and the weekly schedule
+
+- **Migration 0006** (`src/worker/migrations/0006_queue.sql`) adds the queue
+  and who each lesson is for, courses (their profiles, plan, and skipped or
+  extra weeks), test-cooked marks, and the family's mode and Plan our weeks.
+  Backups and family downloads include the new tables. **The owner presses
+  Apply pending on `/ops`** after this deploys.
+- **The weekly schedule** (`src/worker/schedule.js`) is worked out on each
+  read, never stored: each week holds the next unfinished lessons at the
+  course's pace. An unfinished lesson goes first the next week and everything
+  shifts; a lesson cooked early counts and the rest move up; a skipped week
+  pushes the plan back without counting as behind; an extra (Cook another
+  recipe) is this week only. Next week shows from Friday. The parent sees the
+  planned finish and how many weeks behind.
+- **The queue** (`src/worker/plan.js`) is the one "up next" list. Each read
+  brings a course's rows in line with its schedule: due lessons are queued
+  for all the course's profiles, ones no longer due leave (unless shopped
+  for), and cooked ones close. A finished cook closes the queued lesson it
+  was for, whichever way it got there.
+- **Kids and adults:** "I want to make this" on a kid profile sends a request
+  (5 waiting at most per profile); "Cook this" on an adult profile queues it
+  with no PIN. A kid's kitchen has **Up next** (or **Next quests**), with "due
+  Friday" in homeschool mode and nothing about being late. Opening a queued
+  lesson starts at its serving count with its other profiles picked.
+- **Parents → Queue:** requests with Approve and Not now; each course's week
+  with Skip this recipe, Cook another recipe, and Skip this week (each with
+  Undo); next week's lessons from Friday; skipped recipes with Put back;
+  lessons queued by hand with Remove (and Put back); and Add a lesson, with
+  the knife-work note (§4.0). Every lesson has **Safety review** (the steps an
+  adult is needed for) and **I've test-cooked this**. Foundation lessons are
+  marked with a shield and the word "Foundation". Overdue shows only in
+  homeschool mode, only to parents.
+- **Parents → Courses:** set up a course for one or more profiles: start
+  date, lessons per week, and the plan (every dish in course order, move up or
+  down, untick to leave out; pick-one groups start with their first dish),
+  with the prerequisite notes and the planned finish. End a course, and put
+  it back. A profile is on one course at a time. A profile on a course takes
+  its lesson numbers from the course plan.
+- **Family settings:** Casual or Homeschool, and Plan our weeks for casual
+  mode. Switching never deletes anything.
+- **The test-cook notice** now says a lesson can be marked test-cooked.
+- **Decisions made in building, for the owner to check** (now in §6.18): a
+  lesson's due day is the Friday of its week; only lessons a family can cook
+  are scheduled (today that's the 4 written ones), and the rest join as
+  they're written; ending a course takes its unshopped lessons out of the
+  queue. A request for a lesson the course already queued shows once to the
+  kid, and the parent is told.
+- Fixed in passing: the Suggest a fix flag on the lesson card was drawn huge.
+- Tests: 148. New ones cover the schedule (on track, rollover, cooking ahead,
+  skipped weeks, extras, before the start) and the API (requests and Cook
+  this, approve, decline and put back, remove and put back, the PIN, input
+  checks, family scoping, a course loading the week for two profiles, Skip
+  this recipe, Skip this week, homeschool due days, one course per profile,
+  ending and putting back a course, plan order, safety review, test-cooked,
+  and the new tables in a family download).
+- Next: 3b, shopping trips and the pantry.
+
+## 56. 2026-10-22 — Sabbath weeks, and more than one pick-one dish
+
+- **Owner ruling: weeks run Sunday to Friday, and Saturday is the Sabbath**,
+  for every family. Nothing is scheduled, due, or shopped for on Saturday.
+  Courses start on a Sunday, and the schedule names each week by its Sunday.
+- **Next week's lessons show from Thursday** (was Friday), so a parent can
+  shop Thursday or Friday. Kids see them as **"For next week"**, with no due
+  day; only this week's lessons say "Due Friday" in homeschool mode.
+- **Due day stays Friday** (owner). The parent's week reads "Sun to Fri".
+- **Pick-one groups:** one dish is ticked by default, and a parent can tick
+  more than one; each one ticked is scheduled and numbered (8a, 8b). The
+  course editor says so, and §6.18 now does too.
+- Migration 0006 (not yet applied anywhere) now says weeks start on Sunday;
+  the tables are unchanged.
+- Tests: 149. The schedule tests use Sunday weeks and the Thursday preview; a
+  new test keeps two dishes of one group. The queue tests no longer depend on
+  which weekday they run.
+
+## 57. 2026-10-22 — The Sabbath banner, and extras aren't due
+
+- **Owner ruling: on the Sabbath, opening the app shows a banner** on the
+  lockers, a kitchen, and the parent screens: "Shabbat shalom! While you're
+  welcome to follow the recipe, please note that grading and due dates are not
+  available on the Sabbath. We hope your family enjoys the rest!"
+- That day, kids see no "Due Friday" and parents see no due days or Overdue on
+  the queue. Grading (Phase 4b) won't be offered on the Sabbath; §6.18 and §9
+  say so.
+- The Sabbath is Saturday by the device's calendar, midnight to midnight.
+- **Extra lessons** (Cook another recipe) now say "Extra, this week only" to
+  parents and carry no due day for kids, since they're never due or overdue.
+- Tests: 150 (the extras' flag in the schedule, and no due day for a kid's
+  extra lesson in homeschool mode).
+
+## 58. 2026-10-22 — Phase 3b: shopping trips and the pantry
+
+- **Reviewed against this session first.** Trips start with every queued
+  lesson not yet shopped for ticked, and next week's course lessons are there
+  from Thursday, so a family can shop Thursday or Friday. A course lesson's
+  date for perishables is its week's Sunday. A course lesson on an open trip
+  (or already shopped for) stays in the queue if the schedule moves it. The
+  offline list waits with 2d (section 52); check-offs save as they're tapped.
+- **Store sections and package sizes** (`content/ingredients.json`): the
+  registry's sections are now §6.3's list (produce, herbs, meat and fish,
+  dairy and eggs, bread and tortillas, grains and pasta, canned and jarred,
+  sauces, oils and vinegars, baking, spices, specialty, frozen), and every
+  ingredient has a `purchaseUnit`: a typical US package (a 28-oz can, a dozen
+  eggs, a 5-lb bag), one item for things bought loose, and quarter pounds for
+  meat. The linter requires one. **The sizes are estimates for the owner to
+  check.**
+- **The list** (`src/content/shop.js`, shared by the Worker and the demo):
+  each lesson at its own serving count with the family's diet swaps, left-out
+  ingredients dropped, merged by ingredient, rounded up to whole packages with
+  what the recipes use beside it, grouped by section in store order. Pantry
+  staples move to "You should have"; perishables for lessons further off than
+  the trip's window (7 days to start) move to "Buy closer to the day";
+  undated perishables show, marked "no date set"; lines with no amount show
+  once with no quantity.
+- **Migration 0007** adds shopping trips, the lessons on each (with the
+  serving count bought for), check-offs, and the pantry. Family downloads
+  include them. **The owner presses Apply pending on `/ops`** after this
+  deploys.
+- **Parents → Shopping:** start a trip, tick items off in the store, add or
+  take off lessons, change the perishables window, End trip (the lessons are
+  shopped for) or Cancel, each with Undo; recent trips can be reopened. One
+  trip is open at a time. **Pantry staples** is its own screen.
+- **"You shopped for N"**: a shopped lesson's card warns when its serving
+  count changes after shopping, and doesn't block (§6.6).
+- **The demo's shopping preview** now uses the same list, so it rounds to
+  packages too.
+- Tests: 163. New ones cover the list (merging, packages, pantry, section
+  order, perishables, diet swaps, the linter's package rule) and trips (check-
+  offs kept, End trip and Reopen, Cancel, adding and taking off lessons, the
+  pantry, family scoping, input checks, a course lesson kept on a trip, and
+  the new tables in a family download).
+
+## 59. 2026-10-22 — A shopping trip is for one week
+
+- **Owner ruling:** a shopping list only ever holds the lessons for the
+  current week, or, from Thursday, the upcoming week. Section 58 offered
+  every queued lesson not yet shopped for.
+- A lesson is in the week by its course week or its planned date. A lesson
+  queued by hand with no date is always offered, so a family that doesn't use
+  dates can still shop for it.
+- The Shopping screen says which week it's for. The API refuses a lesson from
+  another week, when starting a trip or adding to one.
+- Tests: 165 (the week a trip is for, Sunday to Saturday, and a lesson dated
+  two weeks out kept off a trip).
+
+## 60. 2026-10-22 — Shopping is optional: What you'll need, and lists by lesson count
+
+The owner reworked shopping before any family used it (sections 58 and 59
+are replaced):
+- **Shopping is optional.** Nothing a learner does waits on it. The point is
+  for a parent to see at a glance what the coming lessons need.
+- **What you'll need** (the Shopping screen): the upcoming uncooked lessons
+  week by week, undated hand-queued lessons first, with a course's weeks
+  worked out ahead (the schedule now returns the weeks after next). This week
+  and next are open, later weeks folded. Ingredients are merged by section, in
+  the amounts the recipes use.
+- **Make a shopping list:** "How many lessons are you shopping for?" counts
+  from the next uncooked lesson (always, even ones on an earlier list:
+  owner), shows their names, then a preview to tick what's on hand (this list
+  only), then **Create shopping list**. Check-offs save as tapped; on-hand
+  items can be put back; Done shopping is optional; Delete has an Undo.
+- **Kitchen staples** (was pantry staples): still on every list, grouped
+  under "May already have" (owner: staples get shopped for too). "You should
+  have" is gone.
+- **No perishable rules** (owner): nothing held back or marked. The trip's
+  perishables window, the one-week trip rule, the Thursday shopping week, and
+  "shopped" as a step are gone.
+- **Migration 0008** replaces 0007's trip tables (no family had used them)
+  with shopping lists, their lessons (as they were, with the serving count
+  for "You shopped for N"), on-hand marks, and check-offs. The pantry table
+  stays. **The owner presses Apply pending on `/ops`.**
+- The demo's preview note now describes this.
+- Tests: 163. New ones cover the weekly view's order and course weeks ahead,
+  the preview and on-hand marks, counting from the next uncooked lesson, "You
+  shopped for" on a course lesson queued after its list, cooking a lesson
+  never shopped for, Done and Delete with their undos, family scoping, input
+  checks, the PIN, and the new tables in a family download.
+
+## 61. 2026-10-22 — Phase 4, first part: Reflect, Print our progress, and the photos switch
+
+- **Owner rulings:** Phase 3 stays on its branch for now (no pull request
+  yet). The homeschool transcript moves to Phase 4b, with grading. Print our
+  progress gets a CSV download. Phase 4 starts with the parts that don't need
+  photo storage.
+- **Blocker for the rest of Phase 4:** the photo storage (an R2 bucket) has to
+  be created by the owner in the Cloudflare dashboard. `docs/setup.md` has the
+  steps. The camera, upload, gallery, and photo download wait for it.
+- **Migration 0009:** `families.photos_enabled`, and `attempt_profiles.transfer`
+  and `reflected_at`. **The owner presses Apply pending on `/ops`.**
+- **Reflect (§3):** Plate it now finishes the cook (it counts at once) and
+  opens Reflect. Each profile on the cook gets its own: a 1 to 5 rating (gold
+  gems in Kitchen Quest, chef's hats in Chef's Passport, from the approved
+  showcase), "What would you change next time?", and the optional "What other
+  dish could use this move?". Then an optional rating from whoever ate it.
+  Save, or Skip for now. Reflections wait in their own outbox on the device
+  and go up after their cook, so a dropped connection doesn't lose them. The
+  demo shows Reflect and saves nothing.
+- **Print our progress (§6.15):** Parents → Progress. Everyone or one profile;
+  a table per profile of date, dish, cuisine, skill, and that profile's
+  rating, oldest first, styled for paper (Print, or save as PDF), and the same
+  rows as a CSV download.
+- **Photos switch (§2.6):** each family on `/ops` says photos on or off, with
+  Turn photos on / Turn photos off beside it. Every family starts off; turning
+  them off deletes nothing.
+- Tests: 167 (reflections per profile and the eater rating, changing one
+  later, input checks and family scoping, the progress rows, parents only, and
+  the photos switch).
+
+## 62. 2026-10-22 — The demo page's opening words
+
+- Phase 4 is paused (owner).
+- The demo page's opening paragraph is the owner's new wording: "A cooking
+  course, but not like any you've ever tried before." (in bold), then that it
+  suits kids, teens, and adults, and is built to be fun, free, and
+  fundamentally rooted in the dietary laws of the Most High, and that beta
+  testing by invitation begins shortly. Two small edits to the text as given:
+  "fundementally" is spelled "fundamentally", and "three things--" became
+  "three things:".
+
+## 63. 2026-10-22 — The demo's Shopping tab follows the real flow
+
+- The demo's Shopping tab was still the old "Shopping trip" checklist. It now
+  walks through the real flow (§6.3) with the sample lessons, saving nothing:
+  - **What you'll need:** the four sample lessons as a pretend family's
+    weeks (this week: shakshuka and bulgogi; next week: biscuits; the week
+    after: cookies), this week and next open, in recipe amounts.
+  - **Make a shopping list:** How many lessons, with their names, then Next.
+  - **Before you make the list:** tick what you have.
+  - **Shopping list:** packages and aisles, check-offs (not kept), what you
+    said you have with Put on the list, and Make another.
+- Salt, black pepper, and olive oil play the pretend family's kitchen
+  staples, so "May already have" shows. The diet switches still apply.
+- §6.16's description of the preview now says this.

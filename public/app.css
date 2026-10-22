@@ -196,3 +196,69 @@ legend{font-weight:800;font-size:15px;margin-bottom:6px;padding:0}
 .fixcmp p{margin:2px 0 0;font-weight:700;overflow-wrap:anywhere}
 @media (max-width:520px){.fixcmp{grid-template-columns:1fr}}
 .fixov .card .card{border:0;padding:0;background:none}
+
+/* The queue and courses (Phase 3a) */
+.found{display:inline-flex;align-items:center;gap:4px;margin-left:8px;font-size:14px;font-weight:800;color:var(--h-acc)}
+.found .ico{width:16px;height:16px}
+.late{color:var(--h-bad);font-weight:800}
+.flash{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.qcard,.qcourse{gap:10px;margin-bottom:12px}
+.qcourse h4{margin:8px 0 0}
+.qtools{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;margin-top:4px}
+.safety summary{cursor:pointer;font-weight:700;min-height:32px;display:flex;align-items:center}
+.safety-list{margin:6px 0 0;padding-left:18px}
+.safety-list li{margin:0 0 6px}
+.safety-list b,.safety-list span{display:block}
+label.f.inline{display:flex;align-items:center;gap:8px;font-weight:700}
+select{font:inherit;padding:8px 10px;border-radius:10px;border:1.5px solid var(--h-line);background:var(--h-bg);color:inherit;min-height:44px}
+.note{background:var(--h-bg);border-radius:10px;padding:8px 10px;margin:0}
+.planrow{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:8px;align-items:start;padding:8px 0;border-bottom:1px solid var(--h-line)}
+.planrow.out{opacity:.6}
+.planno{font-weight:800;font-size:20px;text-align:center;padding-top:8px}
+.planmove{display:flex;gap:4px}
+.planmove .hbtn{min-width:44px;padding:0 10px}
+.k-next{min-height:0}
+.rowi.qrow{grid-template-columns:minmax(0,1fr)}
+.rowi.qrow>.acts,.qcard .acts{justify-content:flex-start}
+.qtools .hbtn.link{padding-left:0;padding-right:0}
+.askline .ico{width:1.3em;height:1.3em;vertical-align:-.25em;margin-right:6px}
+.q-back .ico,.p-back .ico{width:22px;height:22px;vertical-align:-.3em;margin-right:6px}
+.kitchen .sabbath{margin:6px 0 14px;background:var(--h-card);color:var(--h-fg)}
+
+/* Shopping (Phase 3b) */
+.shoplist .sub{margin:0;color:var(--h-mut)}
+.psec{margin-top:6px}
+.psec h4{display:flex;align-items:center;gap:8px;margin:8px 0 4px;font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--h-mut);font-weight:800}
+.psec h4 svg{width:28px;height:28px}
+.psec summary{cursor:pointer;font-weight:800;min-height:44px;display:flex;align-items:center}
+.pitem{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;min-height:56px;border:0;border-bottom:1px solid var(--h-line);background:transparent;color:inherit;text-align:left;padding:6px 2px;font:inherit;cursor:pointer}
+.pitem .bx{width:26px;height:26px;border:2.5px solid var(--h-mut);border-radius:6px;display:grid;place-items:center}
+.pitem .bx svg{width:20px;height:20px;opacity:0;color:var(--h-acc)}
+.pitem[aria-pressed="true"] .bx{border-color:var(--h-acc)}
+.pitem[aria-pressed="true"] .bx svg{opacity:1}
+.pitem[aria-pressed="true"] .nm{text-decoration:line-through;color:var(--h-mut)}
+.pitem .nm small,.pitem .q small{display:block;color:var(--h-mut);font-size:13px;text-decoration:none}
+.pitem .q{font-weight:800;font-size:15px;text-align:right;max-width:45%}
+.pitem{grid-template-columns:30px minmax(0,1fr);align-items:start}
+.pitem .bx{margin-top:2px}
+.pitem .q{grid-column:2;text-align:left;max-width:none;margin-top:-6px}
+.week{margin-bottom:10px}
+.week summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.weeklessons{margin:0;padding-left:18px}
+.amt{font-weight:800;text-align:right}
+.havebox span small{display:block;color:var(--h-mut);font-size:13px;font-weight:400}
+fieldset.psec legend{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--h-mut);font-weight:800}
+
+/* Print our progress (§6.15): a page styled for paper */
+.ptable{margin:14px 0 22px}
+.ptable h3{margin:0 0 6px}
+.ptable table{width:100%;border-collapse:collapse;font-size:15px}
+.ptable th,.ptable td{text-align:left;padding:6px 8px 6px 0;border-bottom:1px solid var(--h-line);vertical-align:top}
+.printout{overflow-x:auto}
+@media print{
+  :root{--h-bg:#fff;--h-fg:#000;--h-line:#999;--h-mut:#333}
+  body{background:#fff;color:#000}
+  .bar,.tabs,.noprint,.sabbath,.toast,#app>h1{display:none!important}
+  .ptable{break-inside:avoid-page}
+  .ptable table{font-size:12px}
+}

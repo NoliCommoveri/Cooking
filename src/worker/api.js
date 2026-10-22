@@ -15,6 +15,8 @@ import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
 import { FREE_MAX, servingOptions } from '../content/scale.js';
 import { numberCourse } from '../content/course.js';
+import { register as registerPlan, markCooked } from './plan.js';
+import { register as registerShopping } from './shopping.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -68,7 +70,7 @@ const profileOut = (r) => ({
 
 const familyOut = (f) => ({
   name: f.name, default_servings: f.default_servings, diet_filters: JSON.parse(f.diet_filters), pin_set: Boolean(f.parent_pin_hash),
-  voice_enabled: Boolean(f.voice_enabled),
+  voice_enabled: Boolean(f.voice_enabled), mode: f.mode, plan_weeks: Boolean(f.plan_weeks), photos_enabled: Boolean(f.photos_enabled),
 });
 
 // ---------- routes ----------
@@ -297,6 +299,11 @@ on('DELETE', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
   }
   await env.DB.batch([
     env.DB.prepare('DELETE FROM attempt_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
+    // Off every queued lesson and course too; a queued lesson nobody is left on goes.
+    env.DB.prepare('DELETE FROM queue_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
+    env.DB.prepare(`DELETE FROM queue WHERE family_id = ?
+      AND NOT EXISTS (SELECT 1 FROM queue_profiles qp WHERE qp.queue_id = queue.id)`).bind(s.family_id),
+    env.DB.prepare('DELETE FROM course_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
     env.DB.prepare(`DELETE FROM attempts WHERE family_id = ?
       AND NOT EXISTS (SELECT 1 FROM attempt_profiles ap WHERE ap.attempt_id = attempts.id)`).bind(s.family_id),
     env.DB.prepare('DELETE FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id),
@@ -378,6 +385,8 @@ on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
     ...ids.map((pid) => env.DB.prepare('INSERT OR IGNORE INTO attempt_profiles (attempt_id, family_id, profile_id) VALUES (?, ?, ?)')
       .bind(aid, s.family_id, pid)),
   ]);
+  // A finished cook closes the queued lesson it was for (§6.2).
+  if (finished) await markCooked(env, s.family_id, L.id, ids, aid);
   return { ok: true, id: aid, finished_at: finished };
 });
 
@@ -394,6 +403,58 @@ on('GET', '/api/profiles/([0-9a-f]{16})/cooks', async (req, env, body, [pid]) =>
       GROUP BY a.lesson_id`,
   ).bind(pid, s.family_id, s.family_id).all();
   return { cooks: Object.fromEntries(results.map((r) => [r.lesson_id, { times: r.times, last: r.last }])) };
+});
+
+// The Reflect stage (§3): each profile on a cook rates it 1 to 5, says what
+// they'd change, and can answer the transfer question; anyone can add how the
+// eaters liked it. Saved after the cook finishes, and can be changed later.
+const rating = (v, field) => {
+  if (v == null || v === '') return null;
+  const n = Number(v);
+  if (!Number.isInteger(n) || n < 1 || n > 5) fail(400, 'invalid', `${field} is 1 to 5.`);
+  return n;
+};
+const note = (v, field, max) => (v == null || String(v).trim() === '' ? null : text(v, field, { max }));
+
+on('PUT', '/api/attempts/([0-9a-f]{16})/reflection', async (req, env, body, [aid]) => {
+  const s = await requireSession(env, req);
+  const cook = await env.DB.prepare('SELECT id FROM attempts WHERE id = ? AND family_id = ?').bind(aid, s.family_id).first() ?? fail(404, 'not_found', 'No such cook.');
+  const pid = String(body.profile_id ?? '');
+  const on = await env.DB.prepare('SELECT 1 FROM attempt_profiles WHERE attempt_id = ? AND family_id = ? AND profile_id = ?').bind(cook.id, s.family_id, pid).first();
+  if (!on) fail(400, 'invalid', "That profile isn't on this cook.");
+  const stmts = [env.DB.prepare('UPDATE attempt_profiles SET rating = ?, notes = ?, transfer = ?, reflected_at = ? WHERE attempt_id = ? AND family_id = ? AND profile_id = ?')
+    .bind(rating(body.rating, 'The rating'), note(body.notes, 'What you would change', 1000), note(body.transfer, 'The other dish', 300), now(), cook.id, s.family_id, pid)];
+  if (body.eater_rating !== undefined) {
+    stmts.push(env.DB.prepare('UPDATE attempts SET eater_rating = ? WHERE id = ? AND family_id = ?').bind(rating(body.eater_rating, "The eaters' rating"), cook.id, s.family_id));
+  }
+  await env.DB.batch(stmts);
+  return { ok: true };
+});
+
+// ---------- Print our progress (§6.15) ----------
+
+// Every lesson each profile has cooked, oldest first: date, dish, cuisine,
+// skill, and that profile's rating. ?tz= gives the family's calendar day.
+on('GET', '/api/progress', async (req, env) => {
+  const s = await requireParent(env, req);
+  const tz = Number(new URL(req.url).searchParams.get('tz') ?? 0);
+  const offset = Number.isInteger(tz) && Math.abs(tz) <= 840 ? tz : 0;
+  const day = (iso) => new Date(Date.parse(iso) - offset * 60 * 1000).toISOString().slice(0, 10);
+  const { results: profiles } = await env.DB.prepare('SELECT * FROM profiles WHERE family_id = ? ORDER BY created_at, id').bind(s.family_id).all();
+  const { results } = await env.DB.prepare(`SELECT ap.profile_id, ap.rating, a.lesson_id, a.finished_at, a.servings FROM attempt_profiles ap
+      JOIN attempts a ON a.id = ap.attempt_id AND a.family_id = ap.family_id
+      WHERE ap.family_id = ? AND a.finished_at IS NOT NULL ORDER BY a.finished_at, a.id`).bind(s.family_id).all();
+  const lesson = (lid) => LIBRARY.lessons.find((L) => L.id === lid);
+  return {
+    family: (await env.DB.prepare('SELECT name FROM families WHERE id = ?').bind(s.family_id).first()).name,
+    profiles: profiles.map((p) => ({
+      id: p.id, name: p.name,
+      rows: results.filter((r) => r.profile_id === p.id).map((r) => {
+        const L = lesson(r.lesson_id);
+        return { date: day(r.finished_at), dish: L?.title ?? r.lesson_id, cuisine: LIBRARY.cuisines[L?.cuisine] ?? L?.cuisine ?? '', skill: L?.skill ?? '', rating: r.rating };
+      }),
+    })),
+  };
 });
 
 // ---------- the test-cook notice (§6.9) ----------
@@ -616,8 +677,13 @@ on('PUT', '/api/family', async (req, env, body) => {
   for (const f of filters) oneOf(f, LIBRARY.dietTags, 'Each diet filter');
   // Voice step control (§6.12) is left as it is when the body doesn't mention it.
   if (body.voice_enabled !== undefined && typeof body.voice_enabled !== 'boolean') fail(400, 'invalid', 'voice_enabled must be true or false.');
-  await env.DB.prepare('UPDATE families SET name = ?, default_servings = ?, diet_filters = ?, voice_enabled = COALESCE(?, voice_enabled) WHERE id = ?')
-    .bind(text(body.name, 'Family name'), servings, JSON.stringify(filters), body.voice_enabled === undefined ? null : Number(body.voice_enabled), s.family_id).run();
+  // So are the mode (§6.17) and Plan our weeks (§6.18). Switching never deletes anything.
+  const mode = body.mode === undefined ? null : oneOf(body.mode, ['casual', 'homeschool'], 'mode');
+  if (body.plan_weeks !== undefined && typeof body.plan_weeks !== 'boolean') fail(400, 'invalid', 'plan_weeks must be true or false.');
+  const keep = (v) => (v === undefined ? null : Number(v));
+  await env.DB.prepare(`UPDATE families SET name = ?, default_servings = ?, diet_filters = ?, voice_enabled = COALESCE(?, voice_enabled),
+      mode = COALESCE(?, mode), plan_weeks = COALESCE(?, plan_weeks) WHERE id = ?`)
+    .bind(text(body.name, 'Family name'), servings, JSON.stringify(filters), keep(body.voice_enabled), mode, keep(body.plan_weeks), s.family_id).run();
   return { ok: true };
 });
 
@@ -664,6 +730,11 @@ on('POST', '/api/owner/parent-password', async (req, env, body) => {
   ]);
   return { ok: true };
 });
+
+// The queue, courses, requests, safety review, and test-cooked (plan.js);
+// shopping and kitchen staples (shopping.js).
+registerPlan(on);
+registerShopping(on);
 
 // ---------- dispatch ----------
 

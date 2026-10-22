@@ -3,8 +3,13 @@
     {
       "id": "olive-oil",
       "name": "Olive oil",
-      "section": "pantry",
+      "section": "oils-vinegars",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 500,
+        "label": "16.9-fl-oz bottle",
+        "many": "16.9-fl-oz bottles"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -15,8 +20,13 @@
     {
       "id": "vegetable-oil",
       "name": "Vegetable oil",
-      "section": "pantry",
+      "section": "oils-vinegars",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 1419,
+        "label": "48-fl-oz bottle",
+        "many": "48-fl-oz bottles"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -27,8 +37,13 @@
     {
       "id": "sesame-oil",
       "name": "Toasted sesame oil",
-      "section": "pantry",
+      "section": "oils-vinegars",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 148,
+        "label": "5-fl-oz bottle",
+        "many": "5-fl-oz bottles"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -46,6 +61,11 @@
         "many": "large yellow onions"
       },
       "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "large yellow onion",
+        "many": "large yellow onions"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -63,6 +83,11 @@
         "many": "red bell peppers"
       },
       "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "red bell pepper",
+        "many": "red bell peppers"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -78,6 +103,11 @@
       "countLabel": {
         "one": "garlic clove",
         "many": "garlic cloves"
+      },
+      "purchaseUnit": {
+        "amount": 10,
+        "label": "head of garlic",
+        "many": "heads of garlic"
       },
       "contains": [],
       "animalSource": null,
@@ -96,6 +126,11 @@
         "tsp": 2
       },
       "perishable": true,
+      "purchaseUnit": {
+        "amount": 57,
+        "label": "2-inch piece of ginger",
+        "many": "2-inch pieces of ginger"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -113,6 +148,11 @@
         "many": "green onions"
       },
       "perishable": true,
+      "purchaseUnit": {
+        "amount": 7,
+        "label": "bunch of green onions",
+        "many": "bunches of green onions"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -123,9 +163,14 @@
     {
       "id": "parsley",
       "name": "Fresh parsley",
-      "section": "produce",
+      "section": "herbs",
       "baseUnit": "ml",
       "perishable": true,
+      "purchaseUnit": {
+        "amount": 240,
+        "label": "bunch of parsley",
+        "many": "bunches of parsley"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -143,6 +188,11 @@
         "many": "Asian pears"
       },
       "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "Asian pear",
+        "many": "Asian pears"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -160,6 +210,11 @@
         "many": "Bosc pears"
       },
       "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "Bosc pear",
+        "many": "Bosc pears"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -172,6 +227,11 @@
       "name": "Ground cumin",
       "section": "spices",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 100,
+        "label": "jar of ground cumin",
+        "many": "jars of ground cumin"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -184,6 +244,11 @@
       "name": "Smoked paprika",
       "section": "spices",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 100,
+        "label": "jar of smoked paprika",
+        "many": "jars of smoked paprika"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -196,6 +261,11 @@
       "name": "Red chili flakes",
       "section": "spices",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 100,
+        "label": "jar of chili flakes",
+        "many": "jars of chili flakes"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -208,6 +278,11 @@
       "name": "Black pepper",
       "section": "spices",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 100,
+        "label": "jar of black pepper",
+        "many": "jars of black pepper"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -220,6 +295,11 @@
       "name": "Salt",
       "section": "spices",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 600,
+        "label": "26-oz canister of salt",
+        "many": "26-oz canisters of salt"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -232,6 +312,11 @@
       "name": "Flaky sea salt",
       "section": "spices",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 500,
+        "label": "8.5-oz box of flaky salt",
+        "many": "8.5-oz boxes of flaky salt"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -244,6 +329,11 @@
       "name": "Sesame seeds",
       "section": "spices",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 125,
+        "label": "jar of sesame seeds",
+        "many": "jars of sesame seeds"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -254,7 +344,7 @@
     {
       "id": "tomatoes-crushed",
       "name": "Crushed tomatoes",
-      "section": "canned",
+      "section": "canned-jarred",
       "baseUnit": "g",
       "units": {
         "can": {
@@ -262,6 +352,11 @@
           "one": "28-oz can",
           "many": "28-oz cans"
         }
+      },
+      "purchaseUnit": {
+        "amount": 794,
+        "label": "28-oz can",
+        "many": "28-oz cans"
       },
       "contains": [],
       "animalSource": null,
@@ -273,13 +368,18 @@
     {
       "id": "egg",
       "name": "Eggs",
-      "section": "dairy",
+      "section": "dairy-eggs",
       "baseUnit": "count",
       "countLabel": {
         "one": "large egg",
         "many": "large eggs"
       },
       "perishable": true,
+      "purchaseUnit": {
+        "amount": 12,
+        "label": "dozen eggs",
+        "many": "dozen eggs"
+      },
       "contains": [
         "egg"
       ],
@@ -292,12 +392,17 @@
     {
       "id": "feta",
       "name": "Feta cheese",
-      "section": "dairy",
+      "section": "dairy-eggs",
       "baseUnit": "g",
       "conversions": {
         "cup": 150
       },
       "perishable": true,
+      "purchaseUnit": {
+        "amount": 170,
+        "label": "6-oz container",
+        "many": "6-oz containers"
+      },
       "contains": [
         "dairy"
       ],
@@ -310,7 +415,7 @@
     {
       "id": "butter-unsalted",
       "name": "Unsalted butter",
-      "section": "dairy",
+      "section": "dairy-eggs",
       "baseUnit": "g",
       "measure": "butter",
       "conversions": {
@@ -326,6 +431,11 @@
         }
       },
       "perishable": true,
+      "purchaseUnit": {
+        "amount": 454,
+        "label": "1-lb box (4 sticks)",
+        "many": "1-lb boxes (4 sticks each)"
+      },
       "contains": [
         "dairy"
       ],
@@ -338,9 +448,14 @@
     {
       "id": "buttermilk",
       "name": "Buttermilk",
-      "section": "dairy",
+      "section": "dairy-eggs",
       "baseUnit": "ml",
       "perishable": true,
+      "purchaseUnit": {
+        "amount": 946,
+        "label": "1-quart carton",
+        "many": "1-quart cartons"
+      },
       "contains": [
         "dairy"
       ],
@@ -353,9 +468,15 @@
     {
       "id": "beef-ribeye",
       "name": "Beef ribeye",
-      "section": "meat",
+      "section": "meat-fish",
       "baseUnit": "g",
       "perishable": true,
+      "purchaseUnit": {
+        "amount": 113.4,
+        "label": "¼ lb",
+        "many": "¼ lb",
+        "byWeight": true
+      },
       "contains": [
         "meat"
       ],
@@ -368,11 +489,16 @@
     {
       "id": "pita",
       "name": "Pita bread",
-      "section": "bakery",
+      "section": "bread-tortillas",
       "baseUnit": "count",
       "countLabel": {
         "one": "pita",
         "many": "pitas"
+      },
+      "purchaseUnit": {
+        "amount": 6,
+        "label": "6-pack of pitas",
+        "many": "6-packs of pitas"
       },
       "contains": [
         "gluten"
@@ -386,10 +512,15 @@
     {
       "id": "rice-white",
       "name": "White rice",
-      "section": "pantry",
+      "section": "grains-pasta",
       "baseUnit": "g",
       "conversions": {
         "cup": 185
+      },
+      "purchaseUnit": {
+        "amount": 907,
+        "label": "2-lb bag",
+        "many": "2-lb bags"
       },
       "contains": [],
       "animalSource": null,
@@ -401,8 +532,13 @@
     {
       "id": "soy-sauce",
       "name": "Soy sauce",
-      "section": "pantry",
+      "section": "sauces",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 444,
+        "label": "15-fl-oz bottle",
+        "many": "15-fl-oz bottles"
+      },
       "contains": [
         "gluten"
       ],
@@ -415,8 +551,13 @@
     {
       "id": "tamari",
       "name": "Tamari",
-      "section": "pantry",
+      "section": "sauces",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 296,
+        "label": "10-fl-oz bottle",
+        "many": "10-fl-oz bottles"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -427,12 +568,17 @@
     {
       "id": "brown-sugar",
       "name": "Brown sugar",
-      "section": "pantry",
+      "section": "baking",
       "baseUnit": "g",
       "conversions": {
         "cup": 213,
         "tbsp": 13.3,
         "tsp": 4.4
+      },
+      "purchaseUnit": {
+        "amount": 907,
+        "label": "2-lb bag",
+        "many": "2-lb bags"
       },
       "contains": [],
       "animalSource": null,
@@ -444,12 +590,17 @@
     {
       "id": "sugar",
       "name": "Sugar",
-      "section": "pantry",
+      "section": "baking",
       "baseUnit": "g",
       "conversions": {
         "cup": 200,
         "tbsp": 12.5,
         "tsp": 4.2
+      },
+      "purchaseUnit": {
+        "amount": 1814,
+        "label": "4-lb bag",
+        "many": "4-lb bags"
       },
       "contains": [],
       "animalSource": null,
@@ -461,11 +612,16 @@
     {
       "id": "flour-ap",
       "name": "All-purpose flour",
-      "section": "pantry",
+      "section": "baking",
       "baseUnit": "g",
       "conversions": {
         "cup": 125,
         "tbsp": 7.8
+      },
+      "purchaseUnit": {
+        "amount": 2268,
+        "label": "5-lb bag",
+        "many": "5-lb bags"
       },
       "contains": [
         "gluten"
@@ -479,8 +635,13 @@
     {
       "id": "baking-powder",
       "name": "Baking powder",
-      "section": "pantry",
+      "section": "baking",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 246,
+        "label": "8-oz can",
+        "many": "8-oz cans"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -491,8 +652,13 @@
     {
       "id": "baking-soda",
       "name": "Baking soda",
-      "section": "pantry",
+      "section": "baking",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 467,
+        "label": "1-lb box",
+        "many": "1-lb boxes"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -502,21 +668,31 @@
     },
     {
       "id": "honey",
-    "name": "Honey",
-    "section": "pantry",
-    "baseUnit": "ml",
-    "contains": [],
-    "animalSource": "honeybee",
-    "animalPart": "honey",
-    "rawHandling": null,
-    "icon": null,
-    "watch": null
-  },
-  {
-    "id": "vanilla-extract",
-      "name": "Vanilla extract",
-      "section": "pantry",
+      "name": "Honey",
+      "section": "baking",
       "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 250,
+        "label": "12-oz bottle",
+        "many": "12-oz bottles"
+      },
+      "contains": [],
+      "animalSource": "honeybee",
+      "animalPart": "honey",
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "vanilla-extract",
+      "name": "Vanilla extract",
+      "section": "baking",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 59,
+        "label": "2-fl-oz bottle",
+        "many": "2-fl-oz bottles"
+      },
       "contains": [],
       "animalSource": null,
       "animalPart": null,
@@ -527,10 +703,15 @@
     {
       "id": "chocolate-chips",
       "name": "Semisweet chocolate chips",
-      "section": "pantry",
+      "section": "baking",
       "baseUnit": "g",
       "conversions": {
         "cup": 170
+      },
+      "purchaseUnit": {
+        "amount": 340,
+        "label": "12-oz bag",
+        "many": "12-oz bags"
       },
       "contains": [
         "dairy"

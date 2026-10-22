@@ -4,8 +4,7 @@
 // course, and the skills view.
 import { openLesson } from './player.js';
 import { dietView } from './lib/diet.js';
-import { scaleLesson } from './lib/scale.js';
-import { toBase, formatVolume, formatWeight, formatButter, mixed } from './lib/units.js';
+import { shoppingList } from './lib/shop.js';
 import { numberCourse } from './lib/course.js';
 
 const root = document.getElementById('demo');
@@ -17,15 +16,22 @@ const [R, C] = await Promise.all([getJSON('/content/registry.json'), getJSON('/c
 const lessons = Object.fromEntries(await Promise.all(R.lessons.map(async (l) => [l.id, await getJSON(`/content/lessons/${l.id}.json`)])));
 
 const DIET = { nuts: 'Tree nuts', peanuts: 'Peanuts', dairy: 'Dairy', egg: 'Eggs', gluten: 'Gluten', fish: 'Fish', meat: 'Meat and poultry' };
-const SECTION_ICON = { produce: 's-produce', meat: 's-meat', fish: 's-fish', dairy: 's-dairy', bakery: 's-bakery', pantry: 's-pantry', canned: 's-canned', frozen: 's-frozen', spices: 's-pantry' };
-const SECTION_NAME = { produce: 'Produce', meat: 'Meat', fish: 'Fish', dairy: 'Dairy and eggs', bakery: 'Bakery', pantry: 'Pantry', canned: 'Canned and jarred', frozen: 'Frozen', spices: 'Spices' };
-const DEMO_SHOP = ['shakshuka', 'beef-bulgogi'].filter((id) => lessons[id]);
+const SECTION_ICON = {
+  produce: 's-produce', herbs: 's-produce', 'meat-fish': 's-meat', 'dairy-eggs': 's-dairy', 'bread-tortillas': 's-bakery',
+  'grains-pasta': 's-pantry', 'canned-jarred': 's-canned', sauces: 's-canned', 'oils-vinegars': 's-pantry', baking: 's-bakery',
+  spices: 's-pantry', specialty: 's-pantry', frozen: 's-frozen',
+};
+// The sample lessons as a pretend family's coming weeks, and a few pretend
+// kitchen staples, for the shopping preview.
+const DEMO_WEEKS = [['This week', ['shakshuka', 'beef-bulgogi']], ['Next week', ['buttermilk-biscuits']], ['The week after', ['brown-butter-cookies']]];
+const DEMO_STAPLES = ['salt', 'black-pepper', 'olive-oil'];
 // Lesson numbers in the suggested course order (a family's own plan can change them).
 const { labels: NUM, total: TOTAL } = numberCourse(C.dishes);
 
 // What a visitor has chosen. Kept for this tab only.
-let V = { theme: 'quest', audience: 'kid', diet: [], tab: 'try', checked: [] };
+let V = { theme: 'quest', audience: 'kid', diet: [], tab: 'try', checked: [], shop: { step: 'needs', count: 0, have: [] } };
 try { V = { ...V, ...JSON.parse(sessionStorage.getItem('cpr.demo')) }; } catch { /* first visit */ }
+V.shop = { step: 'needs', count: 0, have: [], ...(V.shop ?? {}) };
 const keep = () => { try { sessionStorage.setItem('cpr.demo', JSON.stringify(V)); } catch { /* private mode */ } };
 const family = () => ({ diet_filters: V.diet, default_servings: 6 });
 const profile = () => ({ id: `demo-${V.theme}-${V.audience}`, theme: V.theme, audience: V.audience, people: [{ name: 'Demo', color: 'tomato' }] });
@@ -34,7 +40,9 @@ const profile = () => ({ id: `demo-${V.theme}-${V.audience}`, theme: V.theme, au
 function header() {
   return `<section class="d-hero"><img src="/img/logo.webp" alt="" width="110" height="110">
     <h1>Clean Plate Recipes</h1>
-    <p>A cooking course for kids: one real skill and one real dish in every lesson, with recipes that are biblically clean. Try a sample lesson below, in either theme, the way your kids would.</p>
+    <p><b>A cooking course, but not like any you've ever tried before.</b></p>
+    <p>Appropriate for kids, teens, and even adults looking to expand to new culinary horizons, Clean Plate Recipes is built to be three things: fun, free, and fundamentally rooted in the dietary laws of the Most High.</p>
+    <p>Check out the demo below to see our current build progress. Beta testing via invitation will begin shortly.</p>
     <p class="by">By Immotus Apps</p></section>
     <div class="d-cta"><a class="hbtn pri" href="/#/signup">Sign up</a><a class="hbtn" href="/#/login">Log in</a>
     <a class="hbtn link" href="/syllabus/">Using this as a homeschool course? Review our syllabus</a></div>`;
@@ -75,38 +83,48 @@ function tryView() {
     ${hidden.length ? `<p class="d-hidden">Hidden for this diet: ${hidden.map((l) => esc(l.title)).join(', ')}</p>` : ''}</section>`;
 }
 
-// ---------- shopping list preview (§6.3, simplified: merged by ingredient and base unit) ----------
+// ---------- shopping (§6.3): the real flow with the sample lessons, saving nothing ----------
 function shopView() {
-  const items = new Map(), from = (id, title) => { const it = items.get(id); if (!it.from.includes(title)) it.from.push(title); };
-  const shopLessons = DEMO_SHOP.map((id) => lessons[id]).filter((L) => dietView(L, R.ingredients, V.diet).visible);
-  for (const L of shopLessons) {
-    const v = dietView(L, R.ingredients, V.diet);
-    const swap = Object.fromEntries(v.applied.map((x) => [x.for, x.use]));
-    const scaled = scaleLesson(L, R.ingredients, 6);
-    L.ingredients.forEach((line, k) => {
-      if (v.leftOut.includes(line.ingredient)) return;
-      const src = R.ingredients[line.ingredient], id = swap[line.ingredient] ?? line.ingredient, ing = R.ingredients[id];
-      if (!items.has(id)) items.set(id, { id, ing, base: 0, texts: [], from: [] });
-      const it = items.get(id);
-      const base = line.amount == null ? null : toBase(line.scale === false ? line.amount : line.amount * 6 / L.servings, line.unit, src);
-      if (base == null) it.texts.push(scaled.ingredients[k].amount); else it.base += base;
-      from(id, L.title);
-    });
+  const sh = V.shop;
+  const visible = (id) => lessons[id] && dietView(lessons[id], R.ingredients, V.diet).visible;
+  const weeks = DEMO_WEEKS.map(([name, ids]) => [name, ids.filter(visible)]).filter(([, ids]) => ids.length);
+  const upcoming = weeks.flatMap(([, ids]) => ids);
+  const listOf = (ids, skip = []) => shoppingList({ lessons: ids.map((id) => ({ lesson: lessons[id], servings: 6 })), registry: R.ingredients, filters: V.diet, staples: DEMO_STAPLES, skip });
+  const used = (it) => `<div class="drow"><span><b>${esc(it.name)}</b><small>${esc(it.from.join(' · '))}${it.optional ? ' · optional' : ''}</small></span><span class="q">${esc(it.used ?? '')}</span></div>`;
+  const groups = (list, row) => `${list.sections.map((x) => `<div class="psec"><h4>${ic(SECTION_ICON[x.id] ?? 's-pantry', '')}${esc(x.name)}</h4>${x.items.map(row).join('')}</div>`).join('')}${list.may_have.length ? `<div class="psec"><h4>May already have</h4>${list.may_have.map(row).join('')}</div>` : ''}`;
+  const picked = upcoming.slice(0, sh.count);
+  const names = (ids) => ids.map((id) => esc(lessons[id].title)).join(', ');
+  if (!upcoming.length) return '<section class="parent"><h3>Shopping</h3><p class="sub">Nothing to shop for with this diet.</p></section>';
+
+  if (sh.step === 'preview' && picked.length) {
+    const list = listOf(picked);
+    const tick = (it) => `<label class="dhave"><input type="checkbox" data-have="${esc(it.id)}" ${sh.have.includes(it.id) ? 'checked' : ''}><span><b>${esc(it.name)}</b><small>${[it.used ? `Recipes use ${esc(it.used)}` : null, it.buy && it.buy !== it.used ? `buy ${esc(it.buy)}` : null].filter(Boolean).join(' · ')}</small></span></label>`;
+    return `<section class="parent"><h3>Before you make the list</h3><p class="sub">For ${names(picked)} (serves 6 each). Tick anything you already have. It's left off this list only.</p>
+      ${groups(list, tick)}
+      <div class="acts"><button type="button" class="hbtn" data-shop="needs">Back</button><button type="button" class="hbtn pri" data-shop="list">Create shopping list</button></div></section>`;
   }
-  const amount = (it) => {
-    if (!it.base) return it.texts[0] ?? '';
-    const i = it.ing;
-    const shown = i.measure === 'butter' ? formatButter(it.base) : i.baseUnit === 'ml' ? formatVolume(it.base) : i.baseUnit === 'g' ? formatWeight(it.base)
-      : mixed(Math.ceil(it.base));
-    return shown;
-  };
-  const bySection = {};
-  for (const it of items.values()) (bySection[it.ing.section] ??= []).push(it);
-  const order = ['produce', 'meat', 'fish', 'dairy', 'bakery', 'canned', 'pantry', 'spices', 'frozen'];
-  const total = items.size, done = V.checked.filter((id) => items.has(id)).length;
-  return `<section class="parent"><h3>Shopping trip</h3><p class="sub">${shopLessons.map((L) => `${esc(L.title)} (serves 6)`).join(' and ') || 'Nothing to shop for with this diet'} · ${done} of ${total} in the cart</p>
-    ${order.filter((s) => bySection[s]).map((s) => `<div class="psec"><h4>${ic(SECTION_ICON[s], '')}${SECTION_NAME[s]}</h4>${bySection[s].map((it) => `<button type="button" class="pitem" data-check="${esc(it.id)}" aria-pressed="${V.checked.includes(it.id)}"><span class="bx">${ic('i-check', '')}</span><span class="nm">${esc(it.ing.name)}${it.from.length > 1 ? `<small>For both dishes</small>` : `<small>${esc(it.from[0])}</small>`}</span><span class="q">${esc(amount(it))}</span></button>`).join('')}</div>`).join('')}
-    <p class="small mut" style="margin-top:12px">A preview. The real list also drops pantry staples you always have, rounds to what the store sells, and works offline.</p></section>`;
+
+  if (sh.step === 'list' && picked.length) {
+    const list = listOf(picked, sh.have);
+    const all = [...list.sections.flatMap((x) => x.items), ...list.may_have];
+    const done = V.checked.filter((id) => all.some((x) => x.id === id)).length;
+    const row = (it) => `<button type="button" class="pitem" data-check="${esc(it.id)}" aria-pressed="${V.checked.includes(it.id)}"><span class="bx">${ic('i-check', '')}</span><span class="nm">${esc(it.name)}<small>${esc(it.from.join(' · '))}</small></span><span class="q">${esc(it.buy ?? it.used ?? '')}${it.buy && it.used && it.used !== it.buy ? `<small>The recipes use ${esc(it.used)}</small>` : ''}</span></button>`;
+    const had = listOf(picked).sections.flatMap((x) => x.items).concat(listOf(picked).may_have).filter((x) => sh.have.includes(x.id));
+    return `<section class="parent"><h3>Shopping list</h3><p class="sub">For ${names(picked)} · ${done} of ${all.length} in the cart</p>
+      ${groups(list, row)}
+      ${had.length ? `<details class="psec"><summary>You have these (${had.length})</summary>${had.map((it) => `<div class="drow"><span><b>${esc(it.name)}</b></span><button type="button" class="hbtn" data-unhave="${esc(it.id)}">Put on the list</button></div>`).join('')}</details>` : ''}
+      <div class="acts"><button type="button" class="hbtn" data-shop="needs">Make another</button></div>
+      <p class="small mut" style="margin-top:12px">A preview: nothing here is saved. A family's list is kept, check-offs and all, so it survives closing the app.</p></section>`;
+  }
+
+  return `<section class="parent"><h3>Shopping</h3><p class="sub">Shopping lists are optional. Kids can start any lesson whenever you're ready.</p>
+    <div class="psec"><h4>Make a shopping list</h4>
+      <label class="f">How many lessons are you shopping for? <small class="mut">Counting from the next lesson not cooked yet</small>
+        <select data-count><option value="0">Pick a number</option>${upcoming.map((_, i) => `<option value="${i + 1}" ${sh.count === i + 1 ? 'selected' : ''}>${i + 1} lesson${i ? 's' : ''}</option>`).join('')}</select></label>
+      ${picked.length ? `<p class="small mut">For ${names(picked)}</p><div class="acts"><button type="button" class="hbtn pri" data-shop="preview">Next</button></div>` : ''}</div>
+    <h3 style="margin-top:22px">What you'll need</h3>
+    ${weeks.map(([name, ids], k) => `<details class="dweek" ${k < 2 ? 'open' : ''}><summary><b>${esc(name)}</b> · ${names(ids)}</summary>${groups(listOf(ids), used)}</details>`).join('')}
+    <p class="small mut" style="margin-top:12px">A preview with the four sample lessons as a pretend family's next few weeks. Salt, black pepper, and olive oil play its kitchen staples, grouped under "May already have" and still on the list.</p></section>`;
 }
 
 // ---------- the whole course ----------
@@ -173,6 +191,9 @@ root.addEventListener('click', (e) => {
   if (set) { V[set.dataset.set] = set.dataset.v; keep(); return draw(); }
   if (tab) { e.preventDefault(); V.tab = tab.dataset.tab; keep(); return draw(); }
   if (openBtn) return open(openBtn.dataset.open);
+  const shop = t.closest('[data-shop]'), unhave = t.closest('[data-unhave]');
+  if (shop) { V.shop.step = shop.dataset.shop; if (shop.dataset.shop === 'needs') V.shop.have = []; keep(); return draw(); }
+  if (unhave) { V.shop.have = V.shop.have.filter((x) => x !== unhave.dataset.unhave); keep(); return draw(); }
   if (check) {
     const id = check.dataset.check;
     V.checked = V.checked.includes(id) ? V.checked.filter((x) => x !== id) : [...V.checked, id];
@@ -181,6 +202,9 @@ root.addEventListener('click', (e) => {
   }
 });
 root.addEventListener('change', (e) => {
+  if (e.target.matches('[data-count]')) { V.shop.count = Number(e.target.value); keep(); return draw(); }
+  const h = e.target.dataset.have;
+  if (h) { V.shop.have = e.target.checked ? [...new Set([...V.shop.have, h])] : V.shop.have.filter((x) => x !== h); keep(); return; }
   const d = e.target.dataset.diet;
   if (!d) return;
   V.diet = e.target.checked ? [...new Set([...V.diet, d])] : V.diet.filter((x) => x !== d);

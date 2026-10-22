@@ -52,3 +52,17 @@ button.c-dish{cursor:pointer;border-color:var(--h-acc)}
 .sk .mut{font-size:14px}
 .sk .found{font-family:var(--h-body);font-size:13px;font-weight:800;color:var(--h-acc);letter-spacing:.04em;text-transform:uppercase}
 .d-foot{margin-top:40px;color:var(--h-mut);font-size:14px}
+.pitem .q small{display:block;font-size:12px}
+.pitem{grid-template-columns:30px minmax(0,1fr);align-items:start}
+.pitem .bx{margin-top:2px}
+.pitem .q{grid-column:2;text-align:left;color:var(--h-fg);font-weight:800;margin-top:-4px}
+.dweek{margin-top:10px;border:1.5px solid var(--h-line);border-radius:12px;padding:6px 12px 10px;background:var(--h-card)}
+.dweek summary{cursor:pointer;min-height:44px;display:flex;align-items:center;flex-wrap:wrap;gap:4px}
+.drow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--h-line)}
+.drow small,.dhave small{display:block;color:var(--h-mut);font-size:13px}
+.drow .q{font-weight:800;text-align:right}
+.dhave{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--h-line);cursor:pointer}
+.dhave input{width:22px;height:22px;margin-top:2px;flex:none}
+.parent select{font:inherit;padding:8px 10px;border-radius:10px;border:1.5px solid var(--h-line);min-height:44px;display:block;margin-top:6px}
+.parent .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.parent details summary{cursor:pointer}

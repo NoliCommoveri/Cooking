@@ -2,8 +2,9 @@
 // built with el(), which only ever sets text, so nothing a family types is
 // parsed as markup. Routes live in the hash: #/login, #/kitchen/<id>, #/parent…
 import { openLesson } from './player.js';
-import { saveCook, flushCooks } from './cooks.js';
+import { saveCook, saveReflection, flushCooks } from './cooks.js';
 import { patchTargets, showValue } from './lib/patch.js';
+import { courseEntries, prereqNotes } from './lib/course.js';
 
 const app = document.getElementById('app');
 
@@ -89,6 +90,22 @@ const avatar = (color) => art(`<svg viewBox="0 0 56 56" aria-hidden="true"><circ
 const avatars = (people) => el('span', { class: 'av' }, people.slice(0, 3).map((p) => avatar(p.color)));
 
 const THEMES = { quest: "Kitchen Quest", passport: "Chef's Passport" };
+
+// The family's calendar: the queue and schedule work in the device's own days.
+const tz = () => `tz=${new Date().getTimezoneOffset()}`;
+const addDays = (d, n) => { const t = new Date(`${d}T12:00:00Z`); t.setUTCDate(t.getUTCDate() + n); return t.toISOString().slice(0, 10); };
+// Weeks run Sunday to Friday; Saturday is the Sabbath (owner, 2026-10-22).
+const weekOf = (d) => addDays(d, -new Date(`${d}T12:00:00Z`).getUTCDay());
+const localToday = () => { const t = new Date(); return new Date(t.getTime() - t.getTimezoneOffset() * 60000).toISOString().slice(0, 10); };
+// Saturday is the Sabbath (owner, 2026-10-22): a banner, and no due dates or grading.
+const isSabbath = () => new Date().getDay() === 6;
+function sabbathBanner() {
+  if (!isSabbath()) return null;
+  return el('aside', { class: 'card notice sabbath', role: 'note' },
+    el('h2', {}, 'Shabbat shalom!'),
+    el('p', {}, "While you're welcome to follow the recipe, please note that grading and due dates are not available on the Sabbath. We hope your family enjoys the rest!"));
+}
+const fmtDay = (d, opts = { weekday: 'short', month: 'short', day: 'numeric' }) => new Date(`${d}T12:00:00`).toLocaleDateString(undefined, opts);
 const DIET = {
   nuts: 'Tree nuts', peanuts: 'Peanuts', dairy: 'Dairy', egg: 'Eggs', gluten: 'Gluten', fish: 'Fish', meat: 'Meat and poultry',
 };
@@ -265,6 +282,7 @@ async function lockers() {
       el('small', {}, THEMES[p.theme]))),
     el('a', { class: 'locker add', href: '#/parent/profiles/new' }, '+ Add a profile'));
   screen(topbar(me.family.name, el('a', { class: 'hbtn', href: '#/parent' }, 'Parents')),
+    sabbathBanner(),
     me.parent.test_cook_notice ? testCookNotice() : null,
     el('h1', {}, "Who's cooking?"), grid);
 }
@@ -274,6 +292,7 @@ function testCookNotice() {
   const box = el('aside', { class: 'card notice', role: 'note' },
     el('h2', {}, 'Before your kids cook'),
     el('p', {}, "Not every recipe here has been test-cooked yet. Read a lesson all the way through before your kids cook it, and check the safety banners on its steps."),
+    el('p', {}, 'Once you\'ve cooked one yourself, you can mark it test-cooked on the Queue screen.'),
     el('p', { class: 'mut small' }, 'Supervision is your call. The banners are a guide.'),
     el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn pri', onclick: async () => {
       await api('POST', '/api/notice/test-cook');
@@ -289,8 +308,11 @@ async function kitchen(id) {
   const [{ profiles }, lib] = await Promise.all([api('GET', '/api/profiles'), api('GET', '/api/library')]);
   const p = profiles.find((x) => x.id === id);
   if (!p) return go('#/');
-  const { cooks } = await api('GET', `/api/profiles/${p.id}/cooks`);
+  const [{ cooks }, mine] = await Promise.all([api('GET', `/api/profiles/${p.id}/cooks`), api('GET', `/api/profiles/${p.id}/queue?${tz()}`)]);
   store('cpr.profile', p.id);
+  // A profile on a course takes its lesson numbers from the course plan (§4.1).
+  const labels = mine.labels ?? lib.labels;
+  for (const L of lib.lessons) L.label = labels[L.id] ?? L.label;
   const quest = p.theme === 'quest';
   const other = quest ? 'passport' : 'quest';
 
@@ -337,8 +359,24 @@ async function kitchen(id) {
     ])
     : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, 'No lessons match this family\'s diet settings yet.');
 
+  // Up next: this profile's queued lessons. Kids see "due Friday" in
+  // homeschool mode and never anything about being late (§6.17).
+  const when = (x) => (x.status === 'requested' ? 'You asked a grown-up'
+    : x.due && !isSabbath() ? `Due ${fmtDay(x.due, { weekday: 'long' })}`
+      : x.when === 'this-week' ? 'This week' : x.when === 'next-week' ? 'For next week'
+        : x.planned_date ? fmtDay(x.planned_date) : 'Coming up');
+  const upNext = mine.items.length ? [
+    el('h2', { class: 'k-unit' }, quest ? 'Next quests' : 'Up next'),
+    el('div', { class: 'k-lib' }, mine.items.map((x) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${x.title}`, onclick: () => go(`#/kitchen/${p.id}/${x.lesson_id}`) },
+      el('article', { class: quest ? 'q-panel q-card k-next' : 'p-card k-next' },
+        el('p', { class: quest ? 'q-kick' : 'p-lessonno' }, x.label ? `${quest ? 'Quest' : 'Lesson'} ${x.label}` : ''),
+        el('h3', { class: quest ? 'q-title' : 'p-title' }, x.title),
+        el('p', { class: quest ? 'q-swap' : 'p-swap' }, when(x)))))),
+  ] : null;
+
   screen(el('section', { class: 'kitchen', 'data-kt': p.theme },
     el('a', { class: 'back', href: '#/' }, '← Lockers'),
+    sabbathBanner(),
     el('div', { class: 'k-head' }, avatars(p.people),
       el('div', { class: 'grow' }, el('h1', {}, quest ? 'Quest board' : 'Recipe box'), el('div', {}, p.name))),
     el('div', { class: 'acts' },
@@ -346,7 +384,7 @@ async function kitchen(id) {
         await api('PUT', `/api/profiles/${p.id}/theme`, { theme: other });
         kitchen(id);
       } }, `Switch to ${THEMES[other]}`)),
-    body));
+    upNext, body));
 }
 
 // A lesson, played in the profile's theme (player.js).
@@ -354,11 +392,22 @@ async function lesson(profileId, lessonId) {
   const [{ profiles }, lib] = await Promise.all([api('GET', '/api/profiles'), api('GET', '/api/library')]);
   const p = profiles.find((x) => x.id === profileId);
   if (!p) return go('#/');
+  const mine = await api('GET', `/api/profiles/${p.id}/queue?${tz()}`).catch(() => ({ items: [] }));
+  const queued = mine.items.find((x) => x.lesson_id === lessonId);
   const mount = el('div');
   screen(mount);
   await openLesson(mount, {
     profile: p, family: me.family, lessonId, onExit: () => go(`#/kitchen/${p.id}`),
-    crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook, labels: lib.labels, total: lib.total,
+    crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook, onReflect: saveReflection, labels: mine.labels ?? lib.labels, total: mine.total ?? lib.total,
+    // "I want to make this" or "Cook this" (§6.1), and the queued lesson's
+    // servings and who it's for, for a fresh cook.
+    ask: {
+      status: queued?.status ?? null,
+      send: async () => {
+        try { return (await api('POST', `/api/profiles/${p.id}/ask`, { lesson_id: lessonId })).status; } catch (err) { showToast(err.message); throw err; }
+      },
+    },
+    seed: queued ? { servings: queued.servings, with: (queued.profile_ids ?? []).filter((x) => x !== p.id), shopped: queued.shopped_for } : null,
     fixes: {
       suggest: (ctx) => suggestFix(p, ctx),
       list: async (lid) => (await api('GET', `/api/lessons/${encodeURIComponent(lid)}/fixes`)).fixes,
@@ -452,7 +501,7 @@ function suggestFix(profile, { lesson, stepId, servings, ingredients }) {
 // ---------- parent area ----------
 
 function parentTabs(current) {
-  const tabs = [['profiles', 'Profiles'], ['family', 'Family'], ['parents', 'Logins']];
+  const tabs = [['queue', 'Queue'], ['shopping', 'Shopping'], ['courses', 'Courses'], ['progress', 'Progress'], ['profiles', 'Profiles'], ['family', 'Family'], ['parents', 'Logins']];
   if (me.parent.is_owner) tabs.push(['owner', 'Owner'], ['fixes', 'Fix requests']);
   return el('nav', { class: 'tabs', 'aria-label': 'Parent screens' },
     tabs.map(([k, label]) => el('a', { href: `#/parent/${k}`, 'aria-current': k === current ? 'page' : null }, label)));
@@ -463,7 +512,7 @@ function parentScreen(current, ...kids) {
     el('a', { class: 'hbtn', href: '#/' }, 'Lockers'),
     el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/pin/lock'); await refresh(); go('#/'); } }, 'Lock'),
     el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/logout'); store('cpr.profile', null); await start('#/'); } }, 'Log out')),
-  el('h1', {}, 'Parents'), parentTabs(current), ...kids);
+  el('h1', {}, 'Parents'), parentTabs(current), sabbathBanner(), ...kids);
 }
 
 const parentProfiles = parentOnly(async () => {
@@ -539,6 +588,13 @@ const familySettings = parentOnly(async () => {
       el('p', { class: 'mut small', style: 'margin:0' }, 'Lessons with these are hidden, unless a lesson has a swap for them.'),
       el('div', { class: 'grid2' }, f.diet_tags.map((t) => el('label', { class: 'choice' },
         el('input', { type: 'checkbox', name: `diet_${t}`, checked: f.family.diet_filters.includes(t) }), el('span', {}, DIET[t] ?? t))))),
+    el('fieldset', {}, el('legend', {}, 'How you use the app'),
+      el('div', { class: 'grid2' },
+        el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'mode', value: 'casual', checked: f.family.mode !== 'homeschool' }), el('span', {}, 'Casual', el('em', {}, ' Cook when you like'))),
+        el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'mode', value: 'homeschool', checked: f.family.mode === 'homeschool' }), el('span', {}, 'Homeschool', el('em', {}, ' A course with due dates')))),
+      el('label', { class: 'choice' }, el('input', { type: 'checkbox', name: 'plan_weeks', checked: f.family.plan_weeks }),
+        el('span', {}, 'Plan our weeks', el('em', {}, ' In casual mode: set up a course, and each week\'s lessons load into the queue. Homeschool mode always does.'))),
+      el('p', { class: 'mut small', style: 'margin:0' }, 'Switching never deletes anything.')),
     el('fieldset', {}, el('legend', {}, 'Voice step control'),
       el('p', { class: 'mut small', style: 'margin:0' },
         'In cook mode, kids can say "next," "back," or "again" instead of tapping. It works in Chrome on Android, and on other devices whose browser can recognize speech. ',
@@ -551,6 +607,7 @@ const familySettings = parentOnly(async () => {
       name: v.name, default_servings: Number(v.default_servings),
       diet_filters: f.diet_tags.filter((t) => v[`diet_${t}`]),
       voice_enabled: Boolean(v.voice_enabled),
+      mode: v.mode, plan_weeks: Boolean(v.plan_weeks),
     });
     await refresh();
     saved.hidden = false;
@@ -572,6 +629,500 @@ const parentLogins = parentOnly(async () => {
     }),
     el('h2', {}, 'Parent PIN'),
     el('div', { class: 'card' }, el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => forgotPin(() => go('#/parent/parents')) }, 'Change the PIN'))));
+});
+
+// ---------- the queue (§6.2) and courses (§6.18) ----------
+
+const SAFETY = { 'adult-nearby': 'Adult nearby', 'adult-hands-on': 'Adult hands-on', solo: 'On their own' };
+const foundationMark = () => el('span', { class: 'found' }, art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-shield"/></svg>'), 'Foundation');
+const lessonName = (x) => [x.label ? `${x.label} · ` : '', x.title];
+
+// Every step an adult needs to be in the kitchen for, loaded when opened.
+function safetyReview(lessonId) {
+  const box = el('div', { class: 'stack' }, el('p', { class: 'mut small' }, 'Loading…'));
+  const d = el('details', { class: 'safety' }, el('summary', {}, 'Safety review'), box);
+  d.addEventListener('toggle', async () => {
+    if (!d.open || d.dataset.loaded) return;
+    d.dataset.loaded = '1';
+    const s = await api('GET', `/api/lessons/${encodeURIComponent(lessonId)}/safety`);
+    box.replaceChildren(s.steps.length
+      ? el('ul', { class: 'safety-list' }, s.steps.map((x) => el('li', {}, el('b', {}, `Step ${x.n} · ${SAFETY[x.safety] ?? x.safety}${x.hazard ? ` · ${x.hazard}` : ''}`), el('span', {}, x.text))))
+      : el('p', { class: 'mut small' }, 'Every step is one a kid can do on their own.'));
+  });
+  return d;
+}
+
+// A button that runs fn, shows its error, and is off while it runs.
+const actBtn = (label, cls, fn) => el('button', { type: 'button', class: `hbtn ${cls}`, onclick: async (e) => {
+  e.currentTarget.disabled = true;
+  try { await fn(); } catch (err) { showToast(err.message); e.target.disabled = false; }
+} }, label);
+
+const servingsPick = (x, onChange) => (x.servings_options?.length
+  ? el('label', { class: 'f inline' }, 'Serves', el('select', { onchange: (e) => onChange(Number(e.target.value)) },
+    x.servings_options.map((n) => el('option', { value: n, selected: n === x.servings }, n))))
+  : null);
+
+const parentQueue = parentOnly(async (flash) => {
+  const [q, { profiles }] = await Promise.all([api('GET', `/api/queue?${tz()}`), api('GET', '/api/profiles')]);
+  const pname = (id) => profiles.find((p) => p.id === id)?.name ?? 'Someone';
+  const names = (ids) => ids.map(pname).join(' & ') || 'Nobody';
+  const homeschool = q.mode === 'homeschool';
+  // A done-message, with Undo where there is one.
+  const again = (msg, undo) => parentQueue(el('p', { class: 'ok flash', role: 'status' }, msg, ' ',
+    undo ? el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await undo(); parentQueue(); } }, 'Undo') : null));
+  const tested = (lid) => {
+    const t = q.test_cooks[lid];
+    return t
+      ? el('small', { class: 'mut' }, `Test-cooked ${fmtDay(t.cooked_on)}${t.by_me ? ' by you' : ''} · `,
+        el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await api('DELETE', `/api/test-cooks/${lid}`); parentQueue(); } }, 'Unmark'))
+      : el('button', { type: 'button', class: 'hbtn link', onclick: async () => {
+        await api('POST', '/api/test-cooks', { lesson_id: lid, cooked_on: localToday() });
+        again('Marked test-cooked.', () => api('DELETE', `/api/test-cooks/${lid}`));
+      } }, "I've test-cooked this");
+  };
+  const setServings = (qid) => async (n) => { await api('PUT', `/api/queue/${qid}`, { servings: n }); };
+
+  // ---- requests ----
+  const requests = q.requests.map((r) => el('div', { class: 'card qcard' },
+    el('div', {}, el('b', {}, `${pname(r.requested_by)} asked for `, ...lessonName(r)), r.foundation ? foundationMark() : null,
+      el('small', { class: 'mut' }, ` · ${fmtDay(r.created_at.slice(0, 10))}`)),
+    r.already_queued ? el('p', { class: 'mut small', style: 'margin:0' }, `It's already on ${pname(r.requested_by)}'s list, so Not now is fine.`) : null,
+    safetyReview(r.lesson_id), tested(r.lesson_id),
+    el('div', { class: 'acts' },
+      servingsPick(r, setServings(r.id)),
+      actBtn('Approve', 'pri', async () => { await api('POST', `/api/queue/${r.id}/approve`); again(`${r.title} is on ${pname(r.requested_by)}'s list.`); }),
+      actBtn('Not now', '', async () => {
+        await api('POST', `/api/queue/${r.id}/decline`);
+        again(`Not now for ${r.title}.`, () => api('POST', `/api/queue/${r.id}/put-back`));
+      }))));
+
+  // ---- courses ----
+  const courseBox = (c) => {
+    const behind = c.weeks_behind ? `${c.weeks_behind} week${c.weeks_behind === 1 ? '' : 's'} behind` : 'On track';
+    const lessonRow = (x, week) => el('div', { class: x.done ? 'rowi' : 'rowi qrow' },
+      el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
+        el('small', {}, x.done ? 'Cooked'
+          : x.extra ? 'Extra, this week only'
+            : isSabbath() || !homeschool ? 'This week'
+              : [x.overdue ? el('span', { class: 'late' }, 'Overdue · ') : null, `Due ${fmtDay(addDays(week, c.due_day))}`].filter(Boolean)),
+        x.done ? null : el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id))),
+      x.done ? el('span', { class: 'mut' }, '✓') : el('div', { class: 'acts' },
+        x.queue_id ? servingsPick(x, setServings(x.queue_id)) : null,
+        actBtn('Skip this recipe', '', async () => {
+          await api('POST', `/api/courses/${c.id}/skip-recipe`, { lesson_id: x.lesson_id });
+          again(`Skipped ${x.title}. The next lesson takes its place.`, () => api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }));
+        })));
+    const tw = c.this_week;
+    return el('section', { class: 'card qcourse' },
+      el('div', { class: 'rowi' },
+        el('div', {}, el('h3', { style: 'margin:0' }, c.name || `${names(c.profile_ids)}'s course`),
+          el('small', {}, `${names(c.profile_ids)} · ${c.per_week} a week · ${c.done} of ${c.total} cooked`)),
+        el('a', { class: 'hbtn', href: `#/parent/courses/${c.id}` }, 'Edit')),
+      c.total ? el('p', { class: 'mut small', style: 'margin:0' },
+        c.projected_finish ? `Planned finish: week of ${fmtDay(c.planned_finish)}. ${c.started ? behind : `Starts ${fmtDay(c.start_date)}`}.` : 'Every lesson is cooked.')
+        : el('p', { class: 'mut small' }, 'No lessons in this course can be cooked yet.'),
+      c.unwritten ? el('p', { class: 'mut small', style: 'margin:0' }, `${c.unwritten} more lesson${c.unwritten === 1 ? ' is' : 's are'} still being written. They join the schedule when they're ready.`) : null,
+      c.hidden ? el('p', { class: 'mut small', style: 'margin:0' }, `${c.hidden} lesson${c.hidden === 1 ? ' is' : 's are'} hidden by your diet settings, so ${c.hidden === 1 ? "it isn't" : "they aren't"} scheduled.`) : null,
+      c.started ? [
+        el('h4', {}, `This week · ${fmtDay(tw.week)} to ${fmtDay(addDays(tw.week, 5))}`),
+        tw.skipped ? el('p', { class: 'mut' }, 'Skipped. Everything moved back a week.')
+          : tw.lessons.length ? el('div', { class: 'rows' }, tw.lessons.map((x) => lessonRow(x, tw.week)))
+            : el('p', { class: 'mut' }, 'Nothing left this week.'),
+        el('div', { class: 'acts' },
+          tw.skipped
+            ? actBtn('Put this week back', '', async () => { await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, skipped: false }); again('This week is back.'); })
+            : [
+              c.done + tw.lessons.filter((x) => !x.done).length < c.total ? actBtn('Cook another recipe', '', async () => {
+                await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, extra: 1 });
+                again('Added the next lesson to this week, for this week only.', () => api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, extra: -1 }));
+              }) : null,
+              actBtn('Skip this week', '', async () => {
+                await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, skipped: true });
+                again('Skipped this week. Everything moves back a week.', () => api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, skipped: false }));
+              }),
+            ]),
+      ] : null,
+      c.next_week ? [
+        el('h4', {}, `Next week · ${fmtDay(c.next_week.week)}`),
+        c.next_week.skipped ? el('p', { class: 'mut' }, 'Skipped.') : el('div', { class: 'rows' }, c.next_week.lessons.map((x) => el('div', { class: 'rowi' },
+          el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null),
+          x.queue_id ? servingsPick(x, setServings(x.queue_id)) : el('span')))),
+        el('div', { class: 'acts' }, actBtn(c.next_week.skipped ? 'Put next week back' : 'Skip next week', '', async () => {
+          await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: c.next_week.week, skipped: !c.next_week.skipped });
+          parentQueue();
+        })),
+      ] : el('p', { class: 'mut small' }, `Next week's lessons show here from ${fmtDay(c.next_week_from, { weekday: 'long' })}, so you can shop for them.`),
+      c.skipped_recipes.length ? [el('h4', {}, 'Skipped recipes'), el('div', { class: 'rows' }, c.skipped_recipes.map((x) => el('div', { class: 'rowi' },
+        el('b', {}, x.title), actBtn('Put back', '', async () => { await api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }); again(`${x.title} is back in the course.`); }))))] : null);
+  };
+
+  // ---- lessons queued by hand ----
+  const queuedRow = (x) => el('div', { class: 'rowi qrow' },
+    el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
+      el('small', {}, `For ${names(x.profile_ids)}${x.planned_date ? ` · ${fmtDay(x.planned_date)}` : ''}${x.status === 'shopped' ? ' · Shopped for' : ''}`),
+      el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id))),
+    el('div', { class: 'acts' }, servingsPick(x, setServings(x.id)),
+      actBtn('Remove', '', async () => {
+        await api('DELETE', `/api/queue/${x.id}`);
+        again(`Took ${x.title} off the queue.`, () => api('POST', `/api/queue/${x.id}/put-back`));
+      })));
+
+  // ---- add a lesson ----
+  const note = el('p', { class: 'mut small note', hidden: true }, 'Most lessons use knife work. We suggest a Unit 1 lesson first.');
+  const lessonSel = el('select', { name: 'lesson_id', required: true },
+    el('option', { value: '' }, 'Pick a lesson'),
+    q.library.map((L) => el('option', { value: L.id }, `${L.label ? `${L.label} · ` : ''}${L.title}${L.foundation ? ' (foundation)' : ''}`)));
+  const who = el('div', { class: 'grid2' }, profiles.map((p) => el('label', { class: 'choice' },
+    el('input', { type: 'checkbox', name: `p_${p.id}`, value: p.id }), el('span', {}, p.name))));
+  // The knife-work note (§4.0): a suggestion, not a block.
+  const checkNote = () => {
+    const L = q.library.find((x) => x.id === lessonSel.value);
+    const picked = profiles.filter((p) => who.querySelector(`[name="p_${p.id}"]`).checked).map((p) => p.id);
+    note.hidden = !L || L.unit === 1 || !picked.length || picked.some((pid) => q.knife_ok.includes(pid));
+  };
+  lessonSel.addEventListener('change', checkNote);
+  who.addEventListener('change', checkNote);
+  const addForm = form([
+    el('label', { class: 'f' }, 'Lesson', lessonSel),
+    el('fieldset', {}, el('legend', {}, "Who's cooking"), el('p', { class: 'mut small', style: 'margin:0' }, 'Pick more than one to cook it together. It counts for each of them.'), who),
+    note,
+    field('Serves', 'servings', { type: 'number', min: 1, value: q.default_servings, inputmode: 'numeric' }),
+    field('Planned date', 'planned_date', { type: 'date' }, 'Optional'),
+  ], 'Add to the queue', async (v) => {
+    const ids = profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id);
+    if (!v.lesson_id) throw new Error('Pick a lesson.');
+    if (!ids.length) throw new Error("Pick who's cooking.");
+    const L = q.library.find((x) => x.id === v.lesson_id);
+    const n = Number(v.servings);
+    // A lesson with set sizes takes the nearest one it offers.
+    const servings = L.servings_options.includes(n) ? n : L.servings_options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a));
+    await api('POST', '/api/queue', { lesson_id: v.lesson_id, profile_ids: ids, servings, planned_date: v.planned_date || null });
+    again(`${L.title} is in the queue${servings !== n ? `, serving ${servings} (the nearest size it makes)` : ''}.`);
+  });
+
+  const courses = q.weeks_on
+    ? (q.courses.length ? q.courses.map(courseBox)
+      : el('div', { class: 'card' }, el('p', {}, homeschool ? 'Homeschool mode plans your weeks from a course.' : 'Plan our weeks is on.'),
+        el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: '#/parent/courses/new' }, 'Set up a course'))))
+    : null;
+
+  parentScreen('queue',
+    flash ?? null,
+    q.requests.length ? [el('h2', {}, `Requests (${q.requests.length})`), requests] : null,
+    courses ? [el('h2', {}, 'This week'), courses] : null,
+    el('h2', {}, courses ? 'Other lessons in the queue' : 'The queue'),
+    q.queued.length ? el('div', { class: 'card' }, el('div', { class: 'rows' }, q.queued.map(queuedRow)))
+      : el('p', { class: 'mut' }, courses ? 'Nothing else queued.' : 'Nothing queued yet. Add a lesson below, or turn on Plan our weeks in Family.'),
+    q.put_back.length ? [el('h3', {}, 'Recently taken off'), el('div', { class: 'card' }, el('div', { class: 'rows' }, q.put_back.map((x) => el('div', { class: 'rowi' },
+      el('div', {}, el('b', {}, x.title), el('small', {}, `${x.status === 'declined' ? `${pname(x.requested_by)} asked · Not now` : 'Removed'} · ${names(x.profile_ids)}`)),
+      actBtn('Put back', '', async () => { await api('POST', `/api/queue/${x.id}/put-back`); again(`${x.title} is back.`); })))))] : null,
+    el('h2', {}, 'Add a lesson'),
+    addForm);
+});
+
+// ---------- courses: the list and the editor (§6.18) ----------
+
+const courseList = parentOnly(async () => {
+  const [{ courses, weeks_on, mode }, { profiles }] = await Promise.all([api('GET', '/api/courses'), api('GET', '/api/profiles')]);
+  const names = (ids) => ids.map((id) => profiles.find((p) => p.id === id)?.name ?? 'Someone').join(' & ') || 'Nobody';
+  const active = courses.filter((c) => !c.archived_at), ended = courses.filter((c) => c.archived_at);
+  parentScreen('courses',
+    !weeks_on ? el('p', { class: 'card mut' }, 'Plan our weeks is off, so courses don\'t load lessons into the queue. Turn it on in Family, or switch to homeschool mode.') : null,
+    el('p', { class: 'mut' }, mode === 'homeschool'
+      ? 'Set each course up once: the lessons in order, a start date, and how many a week. Each week\'s lessons load into the queue, and an unfinished one moves to the next week.'
+      : 'A course plans your weeks: set it up once, and each week\'s lessons load into the queue.'),
+    el('div', { class: 'card' }, active.length ? el('div', { class: 'rows' }, active.map((c) => el('div', { class: 'rowi' },
+      el('div', {}, el('b', {}, c.name || `${names(c.profile_ids)}'s course`), el('small', {}, `${names(c.profile_ids)} · from ${fmtDay(c.start_date)} · ${c.per_week} a week`)),
+      el('a', { class: 'hbtn', href: `#/parent/courses/${c.id}` }, 'Edit'))))
+      : el('p', { class: 'mut' }, 'No courses yet.'),
+    el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: '#/parent/courses/new' }, 'Set up a course'))),
+    ended.length ? [el('h2', {}, 'Ended courses'), el('div', { class: 'card' }, el('div', { class: 'rows' }, ended.map((c) => el('div', { class: 'rowi' },
+      el('div', {}, el('b', {}, c.name || `${names(c.profile_ids)}'s course`), el('small', {}, `Ended ${fmtDay(c.archived_at.slice(0, 10))}`)),
+      actBtn('Put back', '', async () => { await api('POST', `/api/courses/${c.id}/put-back`); courseList(); })))))] : null);
+});
+
+const courseEditor = parentOnly(async (cid) => {
+  const [data, { profiles }, outline] = await Promise.all([api('GET', '/api/courses'), api('GET', '/api/profiles'), fetch('/content/course.json').then((r) => r.json())]);
+  const existing = cid === 'new' ? null : data.courses.find((c) => c.id === cid);
+  if (cid !== 'new' && !existing) return go('#/parent/courses');
+  const dish = Object.fromEntries(outline.dishes.map((d) => [d.id, d]));
+  const written = new Set(data.written), hidden = new Set(data.hidden);
+  // Profiles already on another active course can't be picked.
+  const taken = new Set(data.courses.filter((c) => !c.archived_at && c.id !== existing?.id).flatMap((c) => c.profile_ids));
+  let plan = (existing?.plan ?? data.default_plan).filter((x) => dish[x.id]).map((x) => ({ ...x }));
+  const listBox = el('div', { class: 'stack plan' });
+  const finishBox = el('p', { class: 'mut small', style: 'margin:0' });
+  const notesBox = el('div');
+
+  const startIn = el('input', { type: 'date', name: 'start_date', required: true, value: existing?.start_date ?? weekOf(localToday()) });
+  const perIn = el('input', { type: 'number', name: 'per_week', min: 1, max: data.per_week_max, value: existing?.per_week ?? 1, inputmode: 'numeric' });
+
+  const usable = () => plan.filter((x) => !x.removed && written.has(x.id) && !hidden.has(x.id)).length;
+  const drawFinish = () => {
+    const n = usable(), per = Math.max(1, Number(perIn.value) || 1), start = weekOf(startIn.value || localToday());
+    const kept = plan.filter((x) => !x.removed).length;
+    finishBox.replaceChildren(n
+      ? `${n} lesson${n === 1 ? '' : 's'} ready to cook now, so the schedule runs to the week of ${fmtDay(addDays(start, (Math.ceil(n / per) - 1) * 7))}.`
+      : 'None of the lessons kept can be cooked yet.',
+    kept > n ? ` ${kept - n} more join the schedule as they're written.` : '');
+  };
+  startIn.addEventListener('input', drawFinish);
+  perIn.addEventListener('input', drawFinish);
+
+  const drawPlan = () => {
+    const entries = courseEntries(plan.map((x) => dish[x.id]));
+    const removed = plan.filter((x) => x.removed).map((x) => x.id);
+    const notes = prereqNotes(outline.dishes, { order: entries.map((e) => e.key), removed });
+    notesBox.replaceChildren(...(notes.length ? [el('div', { class: 'card notice' }, el('b', {}, 'Heads up'), el('ul', {}, notes.map((n) => el('li', {}, n.text))),
+      el('p', { class: 'mut small' }, "These are suggestions. You can keep the order you like."))] : []));
+    let n = 0;
+    const move = (i, dir) => {
+      const j = i + dir;
+      if (j < 0 || j >= entries.length) return;
+      [entries[i], entries[j]] = [entries[j], entries[i]];
+      const byId = Object.fromEntries(plan.map((x) => [x.id, x]));
+      plan = entries.flatMap((e) => e.ids.map((id) => byId[id]));
+      drawPlan();
+    };
+    listBox.replaceChildren(...entries.map((e, i) => {
+      const keptIds = e.ids.filter((id) => !plan.find((x) => x.id === id).removed);
+      const num = keptIds.length ? ++n : null;
+      const dishRow = (id) => {
+        const x = plan.find((y) => y.id === id), d = dish[id];
+        const tag = !written.has(id) ? 'Being written' : hidden.has(id) ? 'Hidden by your diet settings' : null;
+        return el('label', { class: 'choice' },
+          el('input', { type: 'checkbox', checked: !x.removed, onchange: (ev) => { x.removed = !ev.target.checked; drawPlan(); } }),
+          el('span', {}, d.title, el('em', {}, ` ${d.skill ?? ''}`), tag ? el('small', { class: 'mut' }, ` · ${tag}`) : null));
+      };
+      return el('div', { class: `planrow${keptIds.length ? '' : ' out'}` },
+        el('div', { class: 'planno' }, num ?? '–'),
+        el('div', { class: 'grow' },
+          e.pickOne ? el('div', {}, foundationMark(), el('small', { class: 'mut' }, ' Pick one, or tick more to cook more than one')) : null,
+          e.ids.map(dishRow)),
+        el('div', { class: 'planmove' },
+          el('button', { type: 'button', class: 'hbtn', 'aria-label': 'Move up', disabled: i === 0, onclick: () => move(i, -1) }, '↑'),
+          el('button', { type: 'button', class: 'hbtn', 'aria-label': 'Move down', disabled: i === entries.length - 1, onclick: () => move(i, 1) }, '↓')));
+    }));
+    drawFinish();
+  };
+  drawPlan();
+
+  const extra = [el('a', { class: 'hbtn', href: '#/parent/queue' }, 'Cancel')];
+  if (existing && !existing.archived_at) {
+    extra.push(actBtn('End this course', 'bad', async () => {
+      if (!confirm('End this course? Its lessons leave the queue. You can put it back from Courses.')) return;
+      await api('POST', `/api/courses/${existing.id}/end`);
+      go('#/parent/courses');
+    }));
+  }
+
+  parentScreen('courses', el('h2', {}, existing ? 'Edit course' : 'Set up a course'),
+    form([
+      el('fieldset', {}, el('legend', {}, "Who it's for"),
+        el('p', { class: 'mut small', style: 'margin:0' }, 'Siblings can share a course and cook together, or each have their own.'),
+        el('div', { class: 'grid2' }, profiles.map((p) => el('label', { class: 'choice' },
+          el('input', { type: 'checkbox', name: `p_${p.id}`, checked: existing?.profile_ids.includes(p.id), disabled: taken.has(p.id) }),
+          el('span', {}, p.name, taken.has(p.id) ? el('em', {}, ' On another course') : null))))),
+      field('Course name', 'name', { value: existing?.name ?? '', maxlength: 60 }, 'Optional'),
+      el('div', { class: 'grid2' },
+        el('label', { class: 'f' }, 'Start date', el('span', { class: 'hint' }, 'Weeks run Sunday to Friday'), startIn),
+        el('label', { class: 'f' }, 'Lessons per week', perIn)),
+      finishBox,
+      el('fieldset', {}, el('legend', {}, 'The lessons, in order'),
+        el('p', { class: 'mut small', style: 'margin:0' }, 'Untick a lesson to leave it out. Foundation skills have a few lessons to pick from: one is ticked, and you can tick more.'),
+        notesBox, listBox),
+    ], existing ? 'Save course' : 'Start the course', async (v) => {
+      const body = {
+        name: v.name, start_date: startIn.value, per_week: Number(perIn.value),
+        profile_ids: profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id), plan,
+      };
+      if (!body.profile_ids.length) throw new Error('Pick who the course is for.');
+      await api(existing ? 'PUT' : 'POST', existing ? `/api/courses/${existing.id}` : '/api/courses', body);
+      go('#/parent/queue');
+    }, { extra }));
+});
+
+// ---------- shopping (§6.3): optional; nothing waits on it ----------
+
+const SECTION_ICON = {
+  produce: 's-produce', herbs: 's-produce', 'meat-fish': 's-meat', 'dairy-eggs': 's-dairy', 'bread-tortillas': 's-bakery',
+  'grains-pasta': 's-pantry', 'canned-jarred': 's-canned', sauces: 's-canned', 'oils-vinegars': 's-pantry', baking: 's-bakery',
+  spices: 's-pantry', specialty: 's-pantry', frozen: 's-frozen',
+};
+const sectionHead = (sid, name) => el('h4', {}, art(`<svg aria-hidden="true"><use href="/icons.svg#${SECTION_ICON[sid] ?? 's-pantry'}"/></svg>`), name);
+const MAY_HAVE = 'May already have';
+const usedLine = (x) => el('div', { class: 'rowi' }, el('div', {}, el('b', {}, x.name), el('small', {}, [x.from.join(' · '), x.optional ? 'optional' : null].filter(Boolean).join(' · '))),
+  el('span', { class: 'amt' }, x.used ?? ''));
+
+const shopping = parentOnly(async (flash) => {
+  const [d, { profiles }] = await Promise.all([api('GET', `/api/shopping?${tz()}`), api('GET', '/api/profiles')]);
+  const names = (ids) => ids.map((id) => profiles.find((p) => p.id === id)?.name ?? 'Someone').join(' & ');
+  const weekName = (w) => (w === null ? 'No date set' : w === d.this_week ? `This week · ${fmtDay(w)}` : w === addDays(d.this_week, 7) ? `Next week · ${fmtDay(w)}` : `Week of ${fmtDay(w)}`);
+
+  // Make a shopping list: how many lessons, then their names.
+  const max = Math.min(d.list_max, d.upcoming.length);
+  const namesBox = el('p', { class: 'mut small', style: 'margin:0', 'aria-live': 'polite' });
+  const countSel = el('select', { name: 'count' }, el('option', { value: '' }, 'Pick a number'),
+    Array.from({ length: max }, (_, i) => el('option', { value: i + 1 }, `${i + 1} lesson${i ? 's' : ''}`)));
+  countSel.addEventListener('change', () => {
+    const n = Number(countSel.value);
+    namesBox.replaceChildren(n ? `For ${d.upcoming.slice(0, n).map((x) => x.title).join(', ')}` : '');
+  });
+  const maker = max
+    ? form([el('label', { class: 'f' }, 'How many lessons are you shopping for?', el('span', { class: 'hint' }, 'Counting from the next lesson not cooked yet'), countSel), namesBox],
+      'Next', async (v) => {
+        if (!v.count) throw new Error('Pick how many lessons.');
+        go(`#/parent/shopping/new/${v.count}`);
+      })
+    : el('p', { class: 'card mut' }, 'Nothing is coming up yet. Queue a lesson, or set up a course.');
+
+  const open = d.lists.filter((l) => !l.done_at), past = d.lists.filter((l) => l.done_at);
+  const listRow = (l) => el('div', { class: 'rowi' },
+    el('div', {}, el('b', {}, `List from ${fmtDay(l.created_at.slice(0, 10))}`), el('small', {}, `${l.lessons.join(', ')} · ${l.checked} of ${l.total} in the cart`)),
+    el('a', { class: 'hbtn', href: `#/parent/shopping/list/${l.id}` }, 'Open'));
+
+  // What you'll need, week by week: this week and next open, later ones folded.
+  const near = new Set([null, d.this_week, addDays(d.this_week, 7)]);
+  const weeks = d.weeks.map((w) => el('details', { class: 'card week', open: near.has(w.week) },
+    el('summary', {}, el('b', {}, weekName(w.week)), el('small', { class: 'mut' }, ` · ${w.lessons.length} lesson${w.lessons.length === 1 ? '' : 's'}`)),
+    el('ul', { class: 'weeklessons' }, w.lessons.map((x) => el('li', {}, el('b', {}, x.title), ` · serves ${x.servings}${x.profile_ids.length ? ` · ${names(x.profile_ids)}` : ''}`))),
+    w.needs.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), el('div', { class: 'rows' }, s.items.map(usedLine)))),
+    w.needs.may_have.length ? el('div', { class: 'psec' }, el('h4', {}, MAY_HAVE), el('div', { class: 'rows' }, w.needs.may_have.map(usedLine))) : null));
+
+  parentScreen('shopping', flash ?? null,
+    el('p', { class: 'mut' }, "Shopping lists are optional. Kids can start any lesson whenever you're ready."),
+    open.length ? [el('h2', {}, 'Your shopping lists'), el('div', { class: 'card' }, el('div', { class: 'rows' }, open.map(listRow)))] : null,
+    el('h2', {}, 'Make a shopping list'), maker,
+    el('h2', {}, "What you'll need"),
+    weeks.length ? weeks : el('p', { class: 'mut' }, 'Nothing is coming up yet.'),
+    el('p', { class: 'mut small' }, `Kitchen staples are grouped under "${MAY_HAVE}" so you can check the cupboard first. `, el('a', { href: '#/parent/pantry' }, 'Kitchen staples')),
+    past.length ? el('details', {}, el('summary', {}, `Done lists (${past.length})`), el('div', { class: 'card' }, el('div', { class: 'rows' }, past.map(listRow)))) : null);
+});
+
+// The preview: tick what's on hand; the rest becomes the list.
+const shoppingPreview = parentOnly(async (count) => {
+  const p = await api('POST', `/api/shopping/preview?${tz()}`, { count: Number(count) });
+  const all = [...p.sections.flatMap((s) => s.items), ...p.may_have];
+  const tick = (x) => el('label', { class: 'choice havebox' },
+    el('input', { type: 'checkbox', name: `h_${x.id}` }),
+    el('span', {}, el('b', {}, x.name), el('small', {}, [x.used ? `Recipes use ${x.used}` : null, x.buy && x.buy !== x.used ? `buy ${x.buy}` : null, x.from.join(' · ')].filter(Boolean).join(' · '))));
+  parentScreen('shopping', el('h2', {}, 'Before you make the list'),
+    el('p', {}, `For ${p.lessons.map((x) => `${x.title} (serves ${x.servings})`).join(', ')}.`),
+    form([
+      el('p', { class: 'mut small', style: 'margin:0' }, "Tick anything you already have. It's left off this list only."),
+      p.sections.map((s) => el('fieldset', { class: 'psec' }, el('legend', {}, s.name), el('div', { class: 'stack' }, s.items.map(tick)))),
+      p.may_have.length ? el('fieldset', { class: 'psec' }, el('legend', {}, MAY_HAVE), el('div', { class: 'stack' }, p.may_have.map(tick))) : null,
+    ], 'Create shopping list', async (v) => {
+      const res = await api('POST', `/api/shopping/lists?${tz()}`, { keys: p.lessons.map((x) => x.key), on_hand: all.filter((x) => v[`h_${x.id}`]).map((x) => x.id) });
+      go(`#/parent/shopping/list/${res.id}`);
+    }, { extra: [el('a', { class: 'hbtn', href: '#/parent/shopping' }, 'Back')] }));
+});
+
+// The list, in the store: tap to check off, saved as it's tapped.
+const shoppingListView = parentOnly(async (lid, flash) => {
+  const { list: l } = await api('GET', `/api/shopping/lists/${lid}`);
+  const again = (msg, undo) => shoppingListView(lid, el('p', { class: 'ok flash', role: 'status' }, msg, ' ',
+    undo ? el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await undo(); shoppingListView(lid); } }, 'Undo') : null));
+  const all = [...l.sections.flatMap((s) => s.items), ...l.may_have];
+  const checked = new Set(l.checked);
+  const count = el('p', { class: 'sub', 'aria-live': 'polite' });
+  const drawCount = () => count.replaceChildren(`${all.filter((x) => checked.has(x.id)).length} of ${all.length} in the cart`);
+  drawCount();
+  const row = (x) => {
+    const b = el('button', { type: 'button', class: 'pitem', 'aria-pressed': String(checked.has(x.id)) },
+      el('span', { class: 'bx' }, art('<svg aria-hidden="true"><use href="/icons.svg#i-check"/></svg>')),
+      el('span', { class: 'nm' }, x.name, el('small', {}, [x.from.join(' · '), x.optional ? 'optional' : null].filter(Boolean).join(' · '))),
+      el('span', { class: 'q' }, x.buy ?? '', x.used && x.used !== x.buy ? el('small', {}, x.buy ? `The recipes use ${x.used}` : x.used) : null));
+    b.addEventListener('click', async () => {
+      const on = !checked.has(x.id);
+      if (on) checked.add(x.id); else checked.delete(x.id);
+      b.setAttribute('aria-pressed', String(on));
+      drawCount();
+      try { await api('POST', `/api/shopping/lists/${lid}/check`, { ingredient_id: x.id, checked: on }); } catch (err) {
+        if (on) checked.delete(x.id); else checked.add(x.id);
+        b.setAttribute('aria-pressed', String(!on));
+        drawCount();
+        showToast(err.message);
+      }
+    });
+    return b;
+  };
+  parentScreen('shopping', flash ?? null,
+    el('a', { class: 'hbtn link', href: '#/parent/shopping' }, '← Shopping'),
+    el('section', { class: 'card shoplist' },
+      el('div', {}, el('h2', { style: 'margin:0' }, `Shopping list · ${fmtDay(l.created_at.slice(0, 10))}`), count,
+        el('p', { class: 'mut small', style: 'margin:0' }, `For ${l.lessons.map((x) => `${x.title} (serves ${x.servings})`).join(', ')}`)),
+      l.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), s.items.map(row))),
+      l.may_have.length ? el('div', { class: 'psec' }, el('h4', {}, MAY_HAVE), l.may_have.map(row)) : null,
+      l.on_hand.length ? el('details', { class: 'psec' }, el('summary', {}, `You have these (${l.on_hand.length})`),
+        el('div', { class: 'rows' }, l.on_hand.map((x) => el('div', { class: 'rowi' }, el('div', {}, el('b', {}, x.name), el('small', {}, x.used ?? '')),
+          actBtn('Put on the list', '', async () => { await api('POST', `/api/shopping/lists/${lid}/on-hand`, { ingredient_id: x.id, on_hand: false }); shoppingListView(lid); }))))) : null,
+      el('div', { class: 'acts' },
+        l.done_at
+          ? actBtn('Not done yet', '', async () => { await api('POST', `/api/shopping/lists/${lid}/not-done`); shoppingListView(lid); })
+          : actBtn('Done shopping', 'pri', async () => {
+            await api('POST', `/api/shopping/lists/${lid}/done`);
+            again('Marked done. It moves to Done lists.', () => api('POST', `/api/shopping/lists/${lid}/not-done`));
+          }),
+        actBtn('Delete list', '', async () => {
+          await api('POST', `/api/shopping/lists/${lid}/delete`);
+          shopping(el('p', { class: 'ok flash', role: 'status' }, 'List deleted. ',
+            el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await api('POST', `/api/shopping/lists/${lid}/restore`); shoppingListView(lid); } }, 'Undo')));
+        }))));
+});
+
+const pantryEditor = parentOnly(async () => {
+  const p = await api('GET', '/api/pantry');
+  const have = new Set(p.pantry);
+  const saved = el('p', { class: 'ok', hidden: true }, 'Saved.');
+  parentScreen('shopping', el('h2', {}, 'Kitchen staples'),
+    el('p', { class: 'mut' }, `Things your kitchen usually has. They stay on every list, grouped under "${MAY_HAVE}" so you can check the cupboard first.`),
+    form([
+      ...p.sections.map((s) => el('fieldset', {}, el('legend', {}, s.name), el('div', { class: 'grid2' }, s.items.map((i) => el('label', { class: 'choice' },
+        el('input', { type: 'checkbox', name: `i_${i.id}`, checked: have.has(i.id) }), el('span', {}, i.name)))))),
+      saved,
+    ], 'Save', async (v) => {
+      saved.hidden = true;
+      await api('PUT', '/api/pantry', { ingredient_ids: p.sections.flatMap((s) => s.items).filter((i) => v[`i_${i.id}`]).map((i) => i.id) });
+      saved.hidden = false;
+    }, { extra: [el('a', { class: 'hbtn', href: '#/parent/shopping' }, 'Back to shopping')] }));
+});
+
+// ---------- Print our progress (§6.15) ----------
+
+const csvCell = (v) => (/[",\n]/.test(String(v ?? '')) ? `"${String(v).replace(/"/g, '""')}"` : String(v ?? ''));
+
+const progress = parentOnly(async (which = 'all') => {
+  const d = await api('GET', `/api/progress?${tz()}`);
+  const shown = which === 'all' ? d.profiles : d.profiles.filter((p) => p.id === which);
+  const pick = el('select', { 'aria-label': 'Whose progress', onchange: (e) => progress(e.target.value) },
+    el('option', { value: 'all', selected: which === 'all' }, 'Everyone'),
+    d.profiles.map((p) => el('option', { value: p.id, selected: p.id === which }, p.name)));
+  // The same rows as a spreadsheet, for homeschool records.
+  const csv = () => {
+    const lines = [['Profile', 'Date', 'Dish', 'Cuisine', 'Skill', 'Rating'],
+      ...shown.flatMap((p) => p.rows.map((r) => [p.name, r.date, r.dish, r.cuisine, r.skill, r.rating ?? '']))];
+    const blob = new Blob([lines.map((l) => l.map(csvCell).join(',')).join('\r\n') + '\r\n'], { type: 'text/csv' });
+    const a = el('a', { href: URL.createObjectURL(blob), download: `${d.family || 'family'} progress ${localToday()}.csv` });
+    document.body.append(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  };
+  parentScreen('progress',
+    el('div', { class: 'acts noprint' }, el('label', { class: 'f inline' }, 'Show', pick),
+      el('button', { type: 'button', class: 'hbtn pri', onclick: () => window.print() }, 'Print'),
+      el('button', { type: 'button', class: 'hbtn', onclick: csv }, 'Download CSV')),
+    el('p', { class: 'mut small noprint' }, 'Print, or save it as a PDF from the print window.'),
+    el('section', { class: 'printout' },
+      el('h2', {}, `${d.family}: what we've cooked`),
+      el('p', { class: 'mut small' }, `Clean Plate Recipes · printed ${fmtDay(localToday(), { year: 'numeric', month: 'long', day: 'numeric' })}`),
+      shown.map((p) => el('div', { class: 'ptable' }, el('h3', {}, p.name),
+        p.rows.length
+          ? el('table', {}, el('thead', {}, el('tr', {}, ['Date', 'Dish', 'Cuisine', 'Skill', 'Rating'].map((h) => el('th', {}, h)))),
+            el('tbody', {}, p.rows.map((r) => el('tr', {}, el('td', {}, fmtDay(r.date, { year: 'numeric', month: 'short', day: 'numeric' })), el('td', {}, r.dish), el('td', {}, r.cuisine), el('td', {}, r.skill), el('td', {}, r.rating ? `${r.rating} of 5` : '—')))))
+          : el('p', { class: 'mut' }, 'Nothing cooked yet.')))));
 });
 
 // ---------- owner screens ----------
@@ -720,11 +1271,20 @@ async function route() {
     if (top === 'kitchen' && sub) return await kitchen(sub);
     if (top === 'parent') {
       if (sub === 'profiles' && extra) return await profileEditor(extra);
+      if (sub === 'courses' && extra) return await courseEditor(extra);
+      if (sub === 'courses') return await courseList();
+      if (sub === 'queue') return await parentQueue();
+      if (sub === 'shopping' && extra === 'new') return await shoppingPreview(parts[3]);
+      if (sub === 'shopping' && extra === 'list') return await shoppingListView(parts[3]);
+      if (sub === 'shopping') return await shopping();
+      if (sub === 'pantry') return await pantryEditor();
+      if (sub === 'progress') return await progress(extra);
       if (sub === 'family') return await familySettings();
       if (sub === 'parents') return await parentLogins();
       if (sub === 'owner') return await owner();
       if (sub === 'fixes') return await ownerFixes();
-      return await parentProfiles();
+      if (sub === 'profiles') return await parentProfiles();
+      return await parentQueue();
     }
     if (top === 'owner') return go('#/parent/owner');
     return await lockers();
@@ -751,12 +1311,13 @@ async function start(hash) {
 // A button's failed request shows its message instead of failing silently.
 const toast = el('p', { class: 'toast err', role: 'alert', hidden: true });
 document.body.append(toast);
-window.addEventListener('unhandledrejection', (e) => {
-  toast.textContent = e.reason?.message || 'Something went wrong. Try again.';
+function showToast(message) {
+  toast.textContent = message || 'Something went wrong. Try again.';
   toast.hidden = false;
   clearTimeout(toast.timer);
   toast.timer = setTimeout(() => { toast.hidden = true; }, 6000);
-});
+}
+window.addEventListener('unhandledrejection', (e) => showToast(e.reason?.message));
 
 window.addEventListener('hashchange', route);
 start();
