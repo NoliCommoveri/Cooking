@@ -22,10 +22,10 @@
     }
   },
   "learn": {
-    "move": { "title": "Brown it, cool it, cream it", "body": "Cook butter until its milk solids turn toasty brown, cool it until it's soft again, then beat it with sugar. The cookies taste like caramel and toasted nuts." },
+    "move": { "title": "Brown it, cool it, cream it", "body": "Cook butter until its milk solids turn toasty brown. Stir the hot, liquid butter over ice water until it thickens into a soft paste, then beat it with sugar. The cookies taste like caramel and toasted nuts." },
     "why": [
       { "id": "brown-bits", "title": "What browning does", "body": "Butter is mostly fat, plus a little water and milk solids. Once the water bubbles away, the milk solids toast on the bottom of the pan and turn nutty and brown." },
-      { "id": "cool-it", "title": "Why cool it back down", "body": "Melted butter can't hold air. Cooled until it's soft like frosting, it can be beaten with sugar, and the tiny air pockets help the cookies puff." },
+      { "id": "cool-it", "title": "Why cool it back down", "body": "Liquid butter can't hold air. Stirred over ice water until it thickens like frosting, it can be beaten with sugar, and the tiny air pockets help the cookies puff." },
       { "id": "creaming", "title": "Creaming", "body": "Beating soft butter with sugar pushes the sugar crystals through the fat and traps air. The mixture turns paler and fluffier, and that air makes softer cookies." },
       { "id": "pull-early", "title": "Take them out early", "body": "Cookies keep baking on the hot pan after they leave the oven. Pull them while the middles still look a little soft, and they'll set as they cool." }
     ],
@@ -34,7 +34,7 @@
       { "sign": "The butter won't firm up in the ice water", "fix": "Keep stirring and add more ice. It takes 5 to 10 minutes." },
       { "sign": "The cookies spread out flat", "fix": "The dough was too warm. Chill the scooped dough for 15 minutes before baking." }
     ],
-    "callback": { "lesson": 38, "body": "In biscuits you kept the butter ice-cold so it would turn to steam in the oven. Today you do the opposite: melt it, brown it, then cool it just until it's soft." },
+    "callback": { "lesson": 38, "body": "In biscuits you kept the butter ice-cold so it would turn to steam in the oven. Today you do the opposite: melt it, brown it, then chill it just until it thickens back up, like frosting." },
     "quiz": [
       { "q": "What turns brown when you brown butter?", "choices": ["The fat", "The milk solids", "The water"], "answer": 1, "explain": "The water cooks off and the milk solids toast. The fat carries their flavor into the cookies." }
     ]
