@@ -149,6 +149,46 @@
       "id": "british",
       "name": "British",
       "region": "europe"
+    },
+    {
+      "id": "nigerian",
+      "name": "Nigerian",
+      "region": "africa"
+    },
+    {
+      "id": "senegalese",
+      "name": "Senegalese",
+      "region": "africa"
+    },
+    {
+      "id": "malian",
+      "name": "Malian",
+      "region": "africa"
+    },
+    {
+      "id": "south-african",
+      "name": "South African",
+      "region": "africa"
+    },
+    {
+      "id": "kenyan",
+      "name": "Kenyan",
+      "region": "africa"
+    },
+    {
+      "id": "mozambican",
+      "name": "Mozambican",
+      "region": "africa"
+    },
+    {
+      "id": "ghanaian",
+      "name": "Ghanaian",
+      "region": "africa"
+    },
+    {
+      "id": "egyptian",
+      "name": "Egyptian",
+      "region": "mena"
     }
   ]
 }

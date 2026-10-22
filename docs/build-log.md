@@ -631,3 +631,23 @@ The owner reviewed the sample lessons in the preview.
   Jewish (Ashkenazi) dishes. Israeli dishes, if any are added, would get
   their own stamp on the Middle East & North Africa page.
 - Both open questions are closed.
+
+---
+
+## 28. 2026-10-22 — Nine African dishes
+
+- The owner asked for more African dishes that are clean and easy to shop
+  for, then chose all nine proposed. They're added as extra lessons, 67–75,
+  and the course is now 75 dishes:
+  - Unit 3: 67 Jollof rice with chicken (Nigerian), 70 Peanut stew / maafe
+    (Malian), 74 Koshari (Egyptian).
+  - Unit 4: 68 Chicken yassa (Senegalese), 69 Suya (Nigerian).
+  - Unit 5: 72 Chapati (Kenyan).
+  - Unit 6: 71 Bobotie (South African), 73 Peri-peri chicken (Mozambican),
+    75 Kelewele (Ghanaian, adult hands-on for shallow frying).
+- The Africa passport page goes from 1 dish to 9. Koshari goes on the Middle
+  East & North Africa page. 8 cuisines were added to `cuisines.json`.
+- §2.1 hidden sources gained ground dried crayfish, shrimp powder, and
+  shrimp bouillon cubes, common in West African cooking. Egusi soup and
+  pepper soup were left out because they usually depend on seafood.
+- Phase 7 is now 71 lessons to write.

@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [27. 2026-10-22 — Honey allowed; Jewish stamp on the Europe page](docs/build-log.md#27-2026-10-22--honey-allowed-jewish-stamp-on-the-europe-page)
+**Latest build log entry:** [28. 2026-10-22 — Nine African dishes](docs/build-log.md#28-2026-10-22--nine-african-dishes)
 
 ## Current features
 

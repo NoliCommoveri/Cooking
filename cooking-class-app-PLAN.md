@@ -56,6 +56,7 @@ Kids, and adults taking the class, use the app through **profiles** (chef locker
   - Lard, found in some tortillas, refried beans, biscuits, pie crusts, store-bought masa, and some shortening blends.
   - Pork sausage casings, used even on many chicken and turkey sausages. Look for collagen-cased or skinless.
   - Breakfast sausage, andouille, chorizo, bacon, pancetta, guanciale, Canadian bacon (pork by default; use beef or poultry versions).
+  - Ground dried crayfish, shrimp powder, and shrimp-flavored bouillon cubes, which many West African recipes (jollof, egusi, pepper soup) add for flavor. Leave them out; check bouillon labels.
   - Imitation crab (often pollock, but may contain crab or shellfish extract).
   - Carmine or cochineal (an insect-derived red coloring) in some candies, yogurts, and drinks.
   - Suet, in mincemeat, Christmas pudding, some dumplings, and some pastry.
@@ -135,7 +136,7 @@ Separate from safety levels, which are about who must be in the kitchen. These a
 
 ---
 
-## 4. Curriculum (66 dishes)
+## 4. Curriculum (75 dishes)
 
 Lessons are grouped into units by skill. International and American dishes are mixed within each unit, and breakfast dishes are spread across the units. The exact teaching order is still an open content task. **Recommendation:** go through the units in order and alternate cuisines within each unit. The safety levels below are set in the content. Parents can't change them.
 
@@ -207,6 +208,9 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 33 | Beef chili | American | Batch browning, toasting spices | Adult nearby | |
 | 34 | Chicken & sausage jambalaya | Louisiana | Onion/celery/pepper base | Adult nearby | Chicken andouille; check casings; no shrimp |
 | 35 | BBQ pulled chicken + coleslaw | American | Dry rub, reducing a sauce | Adult nearby | |
+| 67 | Jollof rice with chicken | Nigerian | Blended pepper base, cooking rice in the sauce | Adult nearby | Scotch bonnet → jalapeño. No dried crayfish or shrimp bouillon |
+| 70 | Peanut stew (maafe) | Malian | Building a one-pot stew | Adult nearby | Peanut butter; carries the peanut tag |
+| 74 | Koshari | Egyptian | Building a dish in layers, crispy onions | Adult nearby | Lentils, rice, pasta, tomato sauce |
 
 ### Unit 4 — Breaking down and slicing meat, marinades
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -216,6 +220,8 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 16 | Chicken tinga tacos | Mexican | Braising, shredding | Adult nearby | |
 | 36 | Chicken noodle soup from a whole chicken | American | Breaking down a bird, making stock | Adult nearby | |
 | 37 | Philly cheesesteak | American | Thin slicing (deliberate repeat of 14) | Adult nearby | Prereq: 14 |
+| 68 | Chicken yassa | Senegalese | Citrus-mustard marinade, slow-cooked onions | Adult nearby | |
+| 69 | Suya (spiced beef skewers) | Nigerian | Thin slicing, dry rub, broiling | Adult nearby | Ground-peanut spice rub; carries the peanut tag |
 
 ### Unit 5 — Dough and batter
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -229,6 +235,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 40 | Blueberry muffins (breakfast) | American | Muffin method, avoiding overmixing | Adult nearby | |
 | 41 | Skillet cornbread | American | Preheated skillet | Adult nearby | Pairs with 33 |
 | 42 | Cinnamon rolls (breakfast) | American | First yeast dough: kneading, proofing, shaping | Adult nearby | |
+| 72 | Chapati | Kenyan | Rolled, layered flatbread, dry-pan cooking | Adult nearby | Flour, oil, water, salt |
 | 63 | Rugelach | Jewish | Cutting in fat · *pick one with 38, 64* | Adult nearby | Butter and cream cheese dough |
 | 64 | Scones | British | Cutting in fat · *pick one with 38, 63* | Adult nearby | Butter, not lard |
 | 65 | Challah | Jewish | Yeast dough: kneading, proofing, braiding · *pick one with 42, 66* | Adult nearby | Honey is allowed (§2.1) |
@@ -247,6 +254,9 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 46 | Chicken pot pie | American | Roux filling + pie crust | Adult nearby | Prereq: 32, 22 |
 | 47 | Pot roast | American | Long oven braise | Adult nearby | |
 | 48 | Southern fried chicken | American | Buttermilk soak, deep-fry with thermometer | **Adult hands-on** | |
+| 71 | Bobotie | South African | Spiced ground beef baked under an egg custard | Adult nearby | Ground beef, curry powder, apricot jam |
+| 73 | Peri-peri chicken | Mozambican | Chili-lemon marinade, roasting, thermometer | Adult nearby | |
+| 75 | Kelewele (spiced plantains) | Ghanaian | Shallow frying | **Adult hands-on** | Plantains from the produce aisle |
 
 ### Desserts
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -259,7 +269,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 - **Multi-dish meal timing.** Example: bulgogi + fried rice + spring rolls. Requires a "plan the timeline" stage that the single-dish lessons don't have. Design it after the core lesson player works.
 
 ### Equipment note
-None of the 66 dishes requires a stand mixer. Lessons that use one in typical recipes (cinnamon rolls, challah, pizza dough, cookies, churros, pão de queijo) must be written for hand mixing or hand kneading.
+None of the 75 dishes requires a stand mixer. Lessons that use one in typical recipes (cinnamon rolls, challah, pizza dough, cookies, churros, pão de queijo) must be written for hand mixing or hand kneading.
 
 ---
 
@@ -754,7 +764,7 @@ Each phase should be deployed and usable before the next begins.
 | **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download | A photo taken on the tablet shows in the gallery on the parent's phone |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
-| **7. Content fill** | The remaining 62 lessons, written in separate content sessions | All 66 lessons pass the linter |
+| **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
 | **8. Helper & first run** | First-run wizard (§6.9) and the helper (§6.8), once both are specced | A new family goes from sign-up to their first queued lesson through the wizard, and kids and parents can each finish a helper task |
 | **9. Family recipes (bonus)** | My recipes with the guided entry flow, submission and owner review, the community directory (§6.10) | A parent enters a recipe through the flow, a kid cooks it, and the owner releases a submitted one to the directory, where another test family finds and adds it |
 | **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, voice "next step" (§6.12), CSV export to the homeschool management system | — |
