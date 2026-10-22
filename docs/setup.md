@@ -73,6 +73,21 @@ for your own family, and that comes with Phase 4.
 2. Add a profile in each family. Each family sees only its own lockers.
 3. On `/ops`, press **Download export.json**. That file is a full backup.
 
+## 8. After an update that adds a migration
+
+When an update adds a database change, `/ops` shows it under **Migrations** as
+pending. Press **Download export.json** first, then **Apply pending**. Nothing
+already in the database is changed or removed.
+
+## 9. Check it (the Phase 2b test)
+
+1. In a family with two profiles, open a lesson from one profile's kitchen and
+   tap the other profile under **Cooking with someone?**
+2. Cook it through to **Plate it**. Both profiles' kitchens show **Cooked once**
+   on that lesson.
+3. A parent signing in for the first time sees **Before your kids cook** above
+   the lockers. **Got it** closes it for that parent, on every device.
+
 ## Backups and recovery
 
 - **Download export.json** saves everything. **Restore from export.json**

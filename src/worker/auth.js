@@ -34,7 +34,7 @@ export async function readSession(env, request) {
   const token = readCookie(request, SESSION_COOKIE);
   if (!token || !/^[0-9a-f]{64}$/.test(token)) return null;
   const s = await env.DB.prepare(
-    `SELECT s.id, s.parent_id, s.family_id, s.last_seen, s.pin_until, p.email, p.is_owner
+    `SELECT s.id, s.parent_id, s.family_id, s.last_seen, s.pin_until, p.email, p.is_owner, p.notice_seen_at
        FROM sessions s JOIN parents p ON p.id = s.parent_id WHERE s.id = ?`,
   ).bind(await sha256Hex(token)).first();
   if (!s) return null;

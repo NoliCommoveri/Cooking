@@ -125,6 +125,12 @@ legend{font-weight:800;font-size:15px;margin-bottom:6px;padding:0}
 .kitchen[data-kt="passport"] .k-unit{font-family:var(--p-hand);font-weight:700;font-size:30px;color:var(--p-paper);text-shadow:0 2px 0 rgba(0,0,0,.25)}
 .k-lib{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
 .k-empty{padding:18px}
+.k-cooked{display:flex;align-items:center;gap:8px}
+.k-cooked .ico{width:22px;height:22px;flex:none}
+.notice{margin:0 0 18px;border-width:2px}
+.notice h2{margin:0}
+.notice p{margin:0}
+.player .crew .size,.player .crew .p-size{font-size:18px}
 .themebtn{min-height:52px;padding:6px 14px;font-weight:800;font-size:15px;border-radius:10px}
 .kitchen[data-kt="quest"] .themebtn{background:var(--q-panel);border:2px solid var(--q-edge);color:var(--q-text)}
 .kitchen[data-kt="passport"] .themebtn{background:var(--p-paper);border:2.5px solid var(--p-ink);color:var(--p-ink)}

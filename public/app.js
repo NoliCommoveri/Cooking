@@ -2,6 +2,7 @@
 // built with el(), which only ever sets text, so nothing a family types is
 // parsed as markup. Routes live in the hash: #/login, #/kitchen/<id>, #/parent…
 import { openLesson } from './player.js';
+import { saveCook, flushCooks } from './cooks.js';
 
 const app = document.getElementById('app');
 
@@ -262,7 +263,22 @@ async function lockers() {
       el('small', {}, THEMES[p.theme]))),
     el('a', { class: 'locker add', href: '#/parent/profiles/new' }, '+ Add a profile'));
   screen(topbar(me.family.name, el('a', { class: 'hbtn', href: '#/parent' }, 'Parents')),
+    me.parent.test_cook_notice ? testCookNotice() : null,
     el('h1', {}, "Who's cooking?"), grid);
+}
+
+// Shown once to each parent until the first-run wizard carries it (§6.9).
+function testCookNotice() {
+  const box = el('aside', { class: 'card notice', role: 'note' },
+    el('h2', {}, 'Before your kids cook'),
+    el('p', {}, "Not every recipe here has been test-cooked yet. Read a lesson all the way through before your kids cook it, and check the safety banners on its steps."),
+    el('p', { class: 'mut small' }, 'Supervision is your call. The banners are a guide.'),
+    el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn pri', onclick: async () => {
+      await api('POST', '/api/notice/test-cook');
+      me.parent.test_cook_notice = false;
+      box.remove();
+    } }, 'Got it')));
+  return box;
 }
 
 // ---------- a profile's kitchen: the library in its theme ----------
@@ -271,6 +287,7 @@ async function kitchen(id) {
   const [{ profiles }, lib] = await Promise.all([api('GET', '/api/profiles'), api('GET', '/api/library')]);
   const p = profiles.find((x) => x.id === id);
   if (!p) return go('#/');
+  const { cooks } = await api('GET', `/api/profiles/${p.id}/cooks`);
   store('cpr.profile', p.id);
   const quest = p.theme === 'quest';
   const other = quest ? 'passport' : 'quest';
@@ -279,6 +296,11 @@ async function kitchen(id) {
     const swaps = L.substitutions.map((s) => `${s.use} instead of ${s.for}`).join('; ');
     const skip = L.left_out.length ? `Leave out the ${L.left_out.join(', ').toLowerCase()}` : '';
     const time = `${L.totalMinutes} min`;
+    // Stamps and crests for a cooked lesson come with course progress (Phase 5).
+    const done = cooks[L.id];
+    const cooked = done ? el('p', { class: quest ? 'q-swap k-cooked' : 'p-swap k-cooked' },
+      art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"/></svg>'),
+      done.times === 1 ? 'Cooked once' : `Cooked ${done.times} times`) : null;
     if (quest) {
       return el('article', { class: 'q-panel q-card' },
         el('p', { class: 'q-kick' }, `Path ${L.unit} · Quest ${L.number}`),
@@ -290,7 +312,8 @@ async function kitchen(id) {
           el('div', {}, el('dt', {}, 'Serves'), el('dd', {}, L.servings)),
           el('div', {}, el('dt', {}, 'From'), el('dd', {}, L.cuisine))),
         swaps ? el('p', { class: 'q-swap' }, `Made with ${swaps}`) : null,
-        skip ? el('p', { class: 'q-swap' }, skip) : null);
+        skip ? el('p', { class: 'q-swap' }, skip) : null,
+        cooked);
     }
     return el('article', { class: 'p-card' },
       el('span', { class: 'tape t1' }), el('span', { class: 'tape t2' }),
@@ -299,7 +322,8 @@ async function kitchen(id) {
       el('p', { class: 'p-skill' }, L.skill),
       el('div', { class: 'p-meta' }, el('span', {}, time), el('span', {}, `Serves ${L.servings}`), el('span', {}, L.cuisine)),
       swaps ? el('p', { class: 'p-swap' }, `Made with ${swaps}`) : null,
-      skip ? el('p', { class: 'p-swap' }, skip) : null);
+      skip ? el('p', { class: 'p-swap' }, skip) : null,
+      cooked);
   };
 
   const units = [...new Set(lib.lessons.map((l) => l.unit))].sort((a, b) => a - b);
@@ -329,7 +353,10 @@ async function lesson(profileId, lessonId) {
   if (!p) return go('#/');
   const mount = el('div');
   screen(mount);
-  await openLesson(mount, { profile: p, family: me.family, lessonId, onExit: () => go(`#/kitchen/${p.id}`) });
+  await openLesson(mount, {
+    profile: p, family: me.family, lessonId, onExit: () => go(`#/kitchen/${p.id}`),
+    crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook,
+  });
 }
 
 // ---------- parent area ----------
@@ -535,6 +562,8 @@ async function start(hash) {
   } catch (err) {
     return screen(topbar(), el('div', { class: 'card narrow' }, el('h1', {}, 'Not ready yet'), el('p', {}, err.message)));
   }
+  // Cooks saved on this device while offline or signed out go up now.
+  if (me.signed_in) flushCooks();
   if (hash !== undefined && location.hash !== hash) location.hash = hash;
   else route();
 }

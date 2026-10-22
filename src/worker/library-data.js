@@ -4,6 +4,7 @@ export const LIBRARY = {
   {
    "id": "04-shakshuka",
    "number": 4,
+   "version": 1,
    "track": "core",
    "unit": 2,
    "title": "Shakshuka",
@@ -11,6 +12,15 @@ export const LIBRARY = {
    "cuisine": "north-african",
    "skill": "Building a sauce, then poaching eggs in it",
    "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, cook it in two 12-inch skillets side by side."
+     }
+    ]
+   },
    "totalMinutes": 40,
    "ingredients": [
     {
@@ -65,6 +75,7 @@ export const LIBRARY = {
   {
    "id": "14-beef-bulgogi",
    "number": 14,
+   "version": 1,
    "track": "core",
    "unit": 4,
    "title": "Beef bulgogi",
@@ -72,6 +83,15 @@ export const LIBRARY = {
    "cuisine": "korean",
    "skill": "Thin slicing and marinating",
    "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, cook the beef in 3 or 4 batches so the pan stays hot."
+     }
+    ]
+   },
    "totalMinutes": 80,
    "ingredients": [
     {
@@ -129,6 +149,7 @@ export const LIBRARY = {
   {
    "id": "38-buttermilk-biscuits",
    "number": 38,
+   "version": 1,
    "track": "core",
    "unit": 5,
    "title": "Buttermilk biscuits",
@@ -136,6 +157,19 @@ export const LIBRARY = {
    "cuisine": "american",
    "skill": "Cutting in cold fat, folding for layers",
    "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     0.5,
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 6 biscuits.",
+     "2": "Makes 12 biscuits. Use two sheet pans and swap their racks halfway through baking.",
+     "0.5": "Makes 3 biscuits. Pat the dough into a smaller rectangle."
+    }
+   },
    "totalMinutes": 50,
    "ingredients": [
     {
@@ -172,6 +206,7 @@ export const LIBRARY = {
   {
    "id": "49-brown-butter-cookies",
    "number": 49,
+   "version": 1,
    "track": "core",
    "unit": 7,
    "title": "Brown butter chocolate chip cookies",
@@ -179,6 +214,19 @@ export const LIBRARY = {
    "cuisine": "american",
    "skill": "Browning butter, creaming",
    "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     0.5,
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 24 cookies. Bake one pan at a time.",
+     "2": "Makes 48 cookies. Bake one pan at a time, and let the pan cool before the next batch.",
+     "0.5": "Makes 12 cookies, one pan."
+    }
+   },
    "totalMinutes": 75,
    "ingredients": [
     {

@@ -11,7 +11,7 @@ import {
 import { sendEmail, emailReady, resetEmail, signupCodeEmail } from './email.js';
 import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
-import { FREE_MAX } from '../content/scale.js';
+import { FREE_MAX, servingOptions } from '../content/scale.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -78,7 +78,7 @@ on('GET', '/api/me', async (req, env) => {
   const fam = await env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(s.family_id).first();
   return {
     signed_in: true,
-    parent: { email: s.email, is_owner: s.is_owner },
+    parent: { email: s.email, is_owner: s.is_owner, test_cook_notice: !s.notice_seen_at },
     family: familyOut(fam),
     pin_unlocked_until: pinUnlocked(s) ? s.pin_until : null,
   };
@@ -284,10 +284,19 @@ on('PUT', '/api/profiles/([0-9a-f]{16})/theme', async (req, env, body, [pid]) =>
   return { ok: true };
 });
 
+// A deleted profile comes off every cook it was on. A cook nobody is left on
+// goes with it.
 on('DELETE', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
   const s = await requireParent(env, req);
-  const res = await env.DB.prepare('DELETE FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).run();
-  if (!res.meta.changes) fail(404, 'not_found', 'No such profile.');
+  if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) {
+    fail(404, 'not_found', 'No such profile.');
+  }
+  await env.DB.batch([
+    env.DB.prepare('DELETE FROM attempt_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
+    env.DB.prepare(`DELETE FROM attempts WHERE family_id = ?
+      AND NOT EXISTS (SELECT 1 FROM attempt_profiles ap WHERE ap.attempt_id = attempts.id)`).bind(s.family_id),
+    env.DB.prepare('DELETE FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id),
+  ]);
   return { ok: true };
 });
 
@@ -310,6 +319,81 @@ on('GET', '/api/library', async (req, env) => {
     });
   }
   return { lessons, hidden, units: LIBRARY.units };
+});
+
+// ---------- cooks (attempts, §1, §8.4) ----------
+
+// A cook is saved for every profile on it. The device that starts the cook
+// makes its id, and sends the whole cook each time it changes, so a retry after
+// a dropped connection lands once. A finished cook can't be changed.
+const STATE_MAX = 4000;
+const isoTime = (v, field) => {
+  const t = Date.parse(v);
+  if (typeof v !== 'string' || Number.isNaN(t)) fail(400, 'invalid', `${field} must be a time.`);
+  // A device clock a little ahead is fine; a date far in the future is not.
+  if (t > Date.now() + 24 * 60 * 60 * 1000) fail(400, 'invalid', `${field} is in the future.`);
+  return new Date(t).toISOString();
+};
+
+on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
+  const s = await requireSession(env, req);
+  const L = LIBRARY.lessons.find((x) => x.id === body.lesson_id) ?? fail(400, 'invalid', 'No such lesson.');
+  const servings = Number(body.servings);
+  if (!servingOptions(L).includes(servings)) fail(400, 'invalid', `${L.title} can't be made for ${body.servings}.`);
+  const ids = Array.isArray(body.profile_ids) ? [...new Set(body.profile_ids.map(String))] : [];
+  if (ids.length < 1 || ids.length > 20) fail(400, 'invalid', 'A cook has 1 to 20 profiles on it.');
+  const { results: mine } = await env.DB.prepare(
+    `SELECT id FROM profiles WHERE family_id = ? AND id IN (${ids.map(() => '?').join(', ')})`,
+  ).bind(s.family_id, ...ids).all();
+  if (mine.length !== ids.length) fail(400, 'invalid', 'A profile on this cook is not in your family.');
+  const started = isoTime(body.started_at, 'started_at');
+  const finished = body.finished_at == null ? null : isoTime(body.finished_at, 'finished_at');
+  if (finished && finished < started) fail(400, 'invalid', 'A cook finishes after it starts.');
+  const state = JSON.stringify(body.checklist_state ?? {});
+  if (state.length > STATE_MAX) fail(400, 'invalid', 'checklist_state is too big.');
+
+  const had = await env.DB.prepare('SELECT family_id, lesson_id, finished_at FROM attempts WHERE id = ?').bind(aid).first();
+  // Another family's cook with this id reads as not found, never as theirs.
+  if (had && had.family_id !== s.family_id) fail(404, 'not_found', 'No such cook.');
+  if (had && had.lesson_id !== L.id) fail(409, 'conflict', 'That cook is of another lesson.');
+  if (had?.finished_at) return { ok: true, id: aid, finished_at: had.finished_at };
+  await env.DB.batch([
+    had
+      ? env.DB.prepare('UPDATE attempts SET servings = ?, finished_at = ?, checklist_state = ? WHERE id = ? AND family_id = ? AND finished_at IS NULL')
+        .bind(servings, finished, state, aid, s.family_id)
+      : env.DB.prepare(`INSERT INTO attempts (id, family_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).bind(aid, s.family_id, L.id, L.version, servings, started, finished, state),
+    // Who's on it can change until it's finished; anyone kept keeps their reflection.
+    env.DB.prepare(`DELETE FROM attempt_profiles WHERE attempt_id = ? AND family_id = ?
+      AND profile_id NOT IN (${ids.map(() => '?').join(', ')})`).bind(aid, s.family_id, ...ids),
+    ...ids.map((pid) => env.DB.prepare('INSERT OR IGNORE INTO attempt_profiles (attempt_id, family_id, profile_id) VALUES (?, ?, ?)')
+      .bind(aid, s.family_id, pid)),
+  ]);
+  return { ok: true, id: aid, finished_at: finished };
+});
+
+// The lessons a profile has finished, with how many times and when last.
+on('GET', '/api/profiles/([0-9a-f]{16})/cooks', async (req, env, body, [pid]) => {
+  const s = await requireSession(env, req);
+  if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) {
+    fail(404, 'not_found', 'No such profile.');
+  }
+  const { results } = await env.DB.prepare(
+    `SELECT a.lesson_id, COUNT(*) AS times, MAX(a.finished_at) AS last
+       FROM attempts a JOIN attempt_profiles ap ON ap.attempt_id = a.id
+      WHERE ap.profile_id = ? AND ap.family_id = ? AND a.family_id = ? AND a.finished_at IS NOT NULL
+      GROUP BY a.lesson_id`,
+  ).bind(pid, s.family_id, s.family_id).all();
+  return { cooks: Object.fromEntries(results.map((r) => [r.lesson_id, { times: r.times, last: r.last }])) };
+});
+
+// ---------- the test-cook notice (§6.9) ----------
+
+// Shown once to each parent until the first-run wizard carries it.
+on('POST', '/api/notice/test-cook', async (req, env) => {
+  const s = await requireSession(env, req);
+  await env.DB.prepare('UPDATE parents SET notice_seen_at = ? WHERE id = ? AND notice_seen_at IS NULL').bind(now(), s.parent_id).run();
+  return { ok: true };
 });
 
 // ---------- family settings ----------

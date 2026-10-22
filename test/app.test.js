@@ -16,7 +16,7 @@ test('the app shell loads its script and styles', () => {
   assert.match(html, /href="app.css"/);
 });
 
-for (const f of ['public/player.js', 'public/demo.js', 'public/syllabus.js']) {
+for (const f of ['public/player.js', 'public/cooks.js', 'public/demo.js', 'public/syllabus.js']) {
   test(`${f} parses`, () => {
     const r = spawnSync(process.execPath, ['--check', f], { encoding: 'utf8' });
     assert.equal(r.status, 0, r.stderr);

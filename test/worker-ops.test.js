@@ -104,9 +104,12 @@ test('remove a family, then restore it from its own export', async () => {
   await a.post('/api/profiles', { people: [{ name: 'Ava', color: 'tomato' }] });
   await b.post('/api/profiles', { people: [{ name: 'Bea', color: 'sky' }] });
   const aId = (await env.DB.prepare("SELECT family_id FROM parents WHERE email = 'jen@example.com'").first()).family_id;
+  const ava = (await a.get('/api/profiles')).body.profiles[0].id;
+  const t = new Date().toISOString();
+  await a.put('/api/attempts/00000000000000aa', { lesson_id: '04-shakshuka', servings: 6, profile_ids: [ava], started_at: t, finished_at: t });
 
   const out = JSON.parse(JSON.stringify(await exportFamily(env.DB, aId)));
-  assert.deepEqual(Object.keys(out.tables).sort(), ['families', 'parents', 'profiles']);
+  assert.deepEqual(Object.keys(out.tables).sort(), ['attempt_profiles', 'attempts', 'families', 'parents', 'profiles']);
   assert.doesNotMatch(JSON.stringify(out), /Smiths|Bea|pat@example/, 'only this family is in its export');
 
   await removeFamily(env.DB, aId);
@@ -121,6 +124,7 @@ test('remove a family, then restore it from its own export', async () => {
   const c = client(env);
   assert.equal((await c.post('/api/login', { email: 'jen@example.com', password: 'password123' })).status, 200);
   assert.equal((await c.get('/api/profiles')).body.profiles[0].name, 'Ava');
+  assert.equal((await c.get(`/api/profiles/${ava}/cooks`)).body.cooks['04-shakshuka'].times, 1, 'the cook came back too');
   await assert.rejects(restoreFamily(env.DB, out), Refused, 'already back');
 });
 
@@ -157,7 +161,7 @@ test('/ops says when no database is bound', async () => {
 test('/ops: apply pending, the owner, and a download', async () => {
   const env = await makeEnv({ migrate: false });
   const ops = await opsClient(env);
-  assert.match((await ops.get('/ops')).body, /Apply pending \(1\)/);
+  assert.match((await ops.get('/ops')).body, /Apply pending \(2\)/);
   assert.match((await ops.form('/ops/migrate', {})).body, /Applied <code>0001<\/code>/);
 
   const jen = await family(env, 'Carsons', 'jen@example.com');
@@ -183,7 +187,7 @@ test('/ops clear and remove ask for their phrase', async () => {
   assert.match((await ops.form('/ops/clear', { phrase: 'delete' })).body, /Nothing was deleted/);
   assert.match((await ops.get('/ops/clear')).body, /Download export.json first/);
   assert.match((await ops.form('/ops/clear', { phrase: 'DELETE EVERYTHING' })).body, /Cleared \d+ tables/);
-  assert.match((await ops.get('/ops')).body, /Apply pending \(1\)/);
+  assert.match((await ops.get('/ops')).body, /Apply pending \(2\)/);
 });
 
 test('/ops restores from an uploaded file', async () => {

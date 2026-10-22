@@ -3,7 +3,8 @@
 // Content comes from /content/ (lesson files and the registry) and is scaled in
 // the browser with the same code the linter uses. Where a cook is up to is kept
 // on this device, so leaving and coming back picks up at the same step, with
-// timers still counting. Saving cooks to the family's account comes next.
+// timers still counting. In the app, each cook is also saved to the family's
+// account for every profile on it (onCook); the demo saves nothing.
 import { scaleLesson, servingOptions } from './lib/scale.js';
 import { findTerms } from './lib/terms.js';
 import { dietView } from './lib/diet.js';
@@ -44,6 +45,7 @@ const TOOL_ICON = { knives: 't-knives', pans: 't-pans', pots: 't-pots', bakeware
 // The showcase drew these ingredients; everything else uses its store section's icon (§5.3a).
 const OWN_ICON = { 'olive-oil': 'i-oil', 'onion-yellow': 'i-onion', 'bell-pepper-red': 'i-pepper', garlic: 'i-garlic', 'cumin-ground': 'i-cumin', 'paprika-smoked': 'i-paprika', 'tomatoes-crushed': 'i-tomato', egg: 'i-egg' };
 
+const listNames = (n) => (n.length < 3 ? n.join(' and ') : `${n.slice(0, -1).join(', ')}, and ${n.at(-1)}`);
 const fmt = (sec) => { sec = Math.max(0, Math.ceil(sec)); const m = Math.floor(sec / 60), s = sec % 60; return m >= 60 ? `${Math.floor(m / 60)}:${String(m % 60).padStart(2, '0')}:${String(s).padStart(2, '0')}` : `${m}:${String(s).padStart(2, '0')}`; };
 const ago = (t) => { const m = Math.floor((Date.now() - t.endAt) / 60000); return m < 1 ? 'Ended just now' : `Ended ${m} min ago`; };
 function ticks(cx, cy, r1, r2, n, stroke, w) {
@@ -104,20 +106,40 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // ---------- the player ----------
 
 // mount: the element to draw in. profile: the profile cooking. family: from
-// /api/me. onExit: back to the quest board or recipe box.
-export async function openLesson(mount, { profile, family, lessonId, onExit }) {
+// /api/me. onExit: back to the quest board or recipe box. crew: the family's
+// other profiles, who can join this cook. onCook(id, cook): saves the cook.
+export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null }) {
   const [R, L] = await Promise.all([getRegistry(), getLesson(lessonId)]);
   const quest = profile.theme === 'quest';
   const adult = profile.audience === 'adult';
   const view = dietView(L, R.ingredients, family.diet_filters);
   const options = servingOptions(L);
   const pick = (n) => (options.includes(n) ? n : options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a)));
-  const fresh = () => ({ stage: 'card', servings: pick(family.default_servings), learn: 0, quiz: {}, got: [], gear: [], step: 0, timers: [] });
+  const fresh = () => ({ stage: 'card', servings: pick(family.default_servings), learn: 0, quiz: {}, got: [], gear: [], step: 0, timers: [], with: [] });
   let S = readState(profile.id, L.id) || fresh();
+  S.with = (S.with ?? []).filter((id) => crew.some((p) => p.id === id));
   // A cook in progress reopens on its lesson card, with Keep going and Start over.
   if (S.stage !== 'done') S.stage = 'card';
   let term = null, why = null, tick = null;
   const save = () => writeState(profile.id, L.id, S);
+  // The whole cook, sent each time it moves on (a new stage or step, servings,
+  // who's on it, Plate it). Check-offs ride along with the next one.
+  const sync = () => {
+    if (!onCook || !S.cookId) return;
+    onCook(S.cookId, {
+      lesson_id: L.id, servings: S.servings, profile_ids: [profile.id, ...S.with], started_at: S.startedAt, finished_at: S.finishedAt ?? null,
+      checklist_state: { stage: S.stage === 'card' ? S.last ?? 'learn' : S.stage, step: S.step, got: S.got, gear: S.gear },
+    });
+  };
+  const begin = () => {
+    S.started = true;
+    if (S.cookId) return;
+    const b = new Uint8Array(8);
+    crypto.getRandomValues(b);
+    S.cookId = [...b].map((x) => x.toString(16).padStart(2, '0')).join('');
+    S.startedAt = new Date().toISOString();
+  };
+  const crewNames = () => [profile, ...crew.filter((p) => S.with.includes(p.id))].map((p) => p.name);
 
   const leftOut = new Set(view.leftOut);
   const swapFor = Object.fromEntries(view.applied.map((x) => [x.for, x.use]));
@@ -177,14 +199,18 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
       ...view.leftOut.map((id) => `Leave out the ${esc(name(id).toLowerCase())}.`),
     ];
     const swaps = changes.length ? `<p class="${T.note}"><b>For your family:</b> ${changes.join(' ')}</p>` : '';
+    // Profiles cooking together share one cook, and it counts for each of them (§1).
+    const who = crew.length
+      ? `<div class="${quest ? 'serve' : 'p-serve'} crew"><span class="${quest ? 'lbl' : 'p-lbl'}">Cooking with someone?</span><div class="${quest ? 'sizes' : 'p-sizes'}" role="group" aria-label="Who's cooking">${crew.map((p) => `<button type="button" class="${quest ? 'size' : 'p-size'}" role="checkbox" aria-checked="${S.with.includes(p.id)}" data-act="crew" data-id="${esc(p.id)}">${esc(p.name)}</button>`).join('')}</div></div>`
+      : '';
     const top = quest
       ? `<article class="q-panel q-card"><p class="q-kick">Path ${L.unit} · Quest ${L.number}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
           <h2 class="q-title">${esc(L.title)}</h2><p class="q-skill"><b>${esc(L.skill)}</b></p>
-          <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${swaps}
+          <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${who}${swaps}
           <button type="button" class="q-btn" data-act="start">${!S.started ? 'Start quest' : 'Keep going'}</button></article>`
       : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
           <h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
-          <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${swaps}
+          <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
           <button type="button" class="p-btn" data-act="start">${!S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
     return `${top}<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${restart}</div>`;
@@ -322,7 +348,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
   function doneView() {
     return `<article class="${T.card}" style="text-align:center;justify-items:center">${tape}<p class="${T.kick}">${quest ? 'Quest cleared' : 'Dish done'}</p><h4>${esc(L.title)}</h4>
       <div class="${quest ? 'q-win' : 'p-photo'}" style="max-width:220px"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="220" height="220"></div>
-      <p>Nice cooking. Plate it up and enjoy it.</p><button type="button" class="${T.btn}" data-act="exit-done">${quest ? 'Back to the quest board' : 'Back to the recipe box'}</button></article>`;
+      <p>Nice cooking. Plate it up and enjoy it.</p>${onCook ? `<p class="${T.note}">This cook counts for ${esc(listNames(crewNames()))}.</p>` : ''}<button type="button" class="${T.btn}" data-act="exit-done">${quest ? 'Back to the quest board' : 'Back to the recipe box'}</button></article>`;
   }
 
   // ---------- drawing and events ----------
@@ -390,15 +416,16 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
       case 'exit-done': clearState(profile.id, L.id); return exit();
       case 'serv': S.servings = options[Math.max(0, Math.min(options.length - 1, options.indexOf(S.servings) + Number(d.i)))]; break;
       case 'serv-set': S.servings = Number(d.n); break;
-      case 'start': S.stage = S.started ? S.last || 'learn' : 'learn'; S.started = true; break;
+      case 'start': S.stage = S.started ? S.last || 'learn' : 'learn'; begin(); break;
       case 'restart': S = fresh(); break;
+      case 'crew': S.with = S.with.includes(d.id) ? S.with.filter((x) => x !== d.id) : [...S.with, d.id]; break;
       case 'learn': {
         const next = S.learn + Number(d.i);
         if (next < 0) S.stage = 'card'; else S.learn = Math.min(learnCards().length - 1, next);
         break;
       }
       case 'quiz': if (S.quiz[d.q] === undefined) S.quiz[d.q] = Number(d.i); return save(), draw(false);
-      case 'goto': S.stage = d.to; S.started = true; break;
+      case 'goto': S.stage = d.to; begin(); break;
       case 'got': case 'gear': {
         const list = act === 'got' ? S.got : S.gear, at = list.indexOf(d.id);
         if (at >= 0) list.splice(at, 1); else list.push(d.id);
@@ -406,7 +433,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
         return draw(false);
       }
       case 'step': step(Number(d.i)); break;
-      case 'finish': S.stage = 'done'; S.timers = []; break;
+      case 'finish': S.stage = 'done'; S.timers = []; S.finishedAt = new Date().toISOString(); break;
       case 'term': term = d.id && d.id !== term ? d.id : null; return draw(false);
       case 'why': why = d.id; return draw(false);
       case 'why-close': why = null; return draw(false);
@@ -427,6 +454,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
       default: return;
     }
     save();
+    sync();
     draw();
   }
   mount.addEventListener('click', onClick);

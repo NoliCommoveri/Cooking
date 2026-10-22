@@ -53,9 +53,9 @@ export function buildLibrary() {
     for (const x of lines) used.add(x.ingredient);
     for (const s of subs) { used.add(s.for); used.add(s.use); }
     return {
-      id: L.id, number: L.number, track: L.track, unit: L.unit, title: L.title,
+      id: L.id, number: L.number, version: L.version, track: L.track, unit: L.unit, title: L.title,
       image: `img/${L.image.replace(/\.png$/, '.webp')}`, cuisine: L.cuisine, skill: L.skill,
-      servings: L.servings, totalMinutes: L.totalMinutes, ingredients: lines, substitutions: subs,
+      servings: L.servings, scaling: L.scaling, totalMinutes: L.totalMinutes, ingredients: lines, substitutions: subs,
     };
   }).sort((a, b) => a.number - b.number);
   const ingredients = Object.fromEntries(c.ingredients.filter((i) => used.has(i.id))

@@ -1037,3 +1037,50 @@ The owner answered the four §6.17 questions:
 - The player's file paths are now absolute, so it runs from `/demo/` as well
   as `/`.
 - Tests: 97.
+
+---
+
+## 45. 2026-10-22 — Phase 2b: cooks saved for every profile on them
+
+- **Migration 0002** (`src/worker/migrations/0002_attempts.sql`): the
+  `attempts` and `attempt_profiles` tables from §8.4, and
+  `parents.notice_seen_at`. **The owner presses Apply pending on `/ops`** after
+  this deploys. Backups, family export, Remove a family, and Restore a family
+  pick the new tables up on their own.
+- **Saving a cook** (`PUT /api/attempts/{id}`): the device makes the cook's id
+  when it starts and sends the whole cook (lesson, servings, who's on it,
+  started and finished times, and where it's up to) at each new stage or step,
+  on a servings or "who's cooking" change, and at Plate it. Sending the same
+  cook again updates it rather than saving it twice. A finished cook can't be
+  changed. The server checks the lesson exists, the size is one the lesson
+  offers, and every profile is in the session's family; another family's cook
+  id reads as not found. The lesson's `version` is recorded with the cook
+  (§7.3), so `library-data.js` now carries each lesson's version and scaling.
+  `queue_id` stays empty until the queue (Phase 3); ratings and notes wait for
+  Reflect (Phase 4).
+- **Cooking together** (§1): until the queue picks who a lesson is for, the
+  lesson card has **Cooking with someone?** with the family's other profiles.
+  Each one tapped is on the cook, and it counts for all of them. The done card
+  says who it counts for. Its wording is a draft for the owner.
+- **The outbox** (`public/cooks.js`): each send goes into an outbox on the
+  device first. A send that can't reach the server stays there and goes when
+  the app starts again or the connection returns, so finishing a cook with
+  Wi-Fi off doesn't lose it. This is the cook-saving part of offline sync;
+  caching lessons to cook offline is 2d.
+- **Cooked, in the kitchen**: a lesson a profile has finished shows "Cooked
+  once" or "Cooked N times" on its card (`GET /api/profiles/{id}/cooks`).
+  Stamps and crests replace it with course progress (Phase 5).
+- **Deleting a profile** takes it off every cook it was on; a cook nobody is
+  left on is deleted with it.
+- **The test-cook notice** (§6.9): until the first-run wizard, each parent sees
+  "Before your kids cook" above the lockers until they press Got it, which is
+  kept on the account, not the device. It leaves out "mark it test-cooked"
+  until that button exists (Phase 3). Its wording is a draft for the owner.
+- The demo page saves nothing and shows no "Cooking with someone?".
+- `docs/setup.md` has what to do after an update with a migration, and the
+  Phase 2b check.
+- Tests: 106. New ones cover a shared cook counting for both profiles, a
+  resent cook saving once, a finished cook staying as it was, the input checks,
+  family scoping of cooks, deleting a profile, the notice per parent, and a
+  cook coming back with Restore a family.
+
