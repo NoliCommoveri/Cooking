@@ -2,6 +2,209 @@
 export const LIBRARY = {
  "lessons": [
   {
+   "id": "spring-rolls",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Fresh spring rolls",
+   "image": "img/dishes/spring-rolls.webp",
+   "cuisine": "vietnamese",
+   "skill": "Julienne, rolling rice paper",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, set up a second rolling station so two people can roll at once."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "chicken-breast"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "rice-vermicelli"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "lettuce-green-leaf"
+    },
+    {
+     "ingredient": "mint"
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    },
+    {
+     "ingredient": "rice-paper"
+    },
+    {
+     "ingredient": "peanut-butter"
+    },
+    {
+     "ingredient": "hoisin-sauce"
+    },
+    {
+     "ingredient": "lime"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "peanut-butter",
+     "use": "sunflower-butter",
+     "reason": "peanuts"
+    },
+    {
+     "for": "hoisin-sauce",
+     "use": "hoisin-gluten-free",
+     "reason": "gluten"
+    }
+   ]
+  },
+  {
+   "id": "chicken-fajitas",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Chicken fajitas",
+   "image": "img/dishes/chicken-fajitas.webp",
+   "cuisine": "tex-mex",
+   "skill": "Julienne: peppers and onions in thin strips",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, sear the chicken in two batches so the pan stays hot, and cook the vegetables in two batches too."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "chili-powder"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "paprika-smoked"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "bell-pepper-green"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "tortilla-flour"
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    },
+    {
+     "ingredient": "salsa",
+     "optional": true
+    },
+    {
+     "ingredient": "avocado",
+     "optional": true
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "tortilla-flour",
+     "use": "tortilla-corn",
+     "reason": "gluten"
+    }
+   ]
+  },
+  {
+   "id": "shoestring-fries",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Baked shoestring fries",
+   "image": "img/dishes/shoestring-fries.webp",
+   "cuisine": "american",
+   "skill": "Julienne: potatoes into thin sticks",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, bake in two rounds of two pans, so the fries stay spread out."
+     }
+    ]
+   },
+   "totalMinutes": 70,
+   "ingredients": [
+    {
+     "ingredient": "potato-russet"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "garlic-powder",
+     "optional": true
+    },
+    {
+     "ingredient": "paprika-smoked",
+     "optional": true
+    },
+    {
+     "ingredient": "ketchup",
+     "optional": true
+    }
+   ],
+   "substitutions": []
+  },
+  {
    "id": "shakshuka",
    "version": 1,
    "track": "core",
@@ -418,6 +621,114 @@ export const LIBRARY = {
    "contains": [
     "dairy"
    ]
+  },
+  "chicken-breast": {
+   "name": "Boneless, skinless chicken breasts",
+   "contains": [
+    "meat"
+   ]
+  },
+  "chicken-thigh": {
+   "name": "Boneless, skinless chicken thighs",
+   "contains": [
+    "meat"
+   ]
+  },
+  "rice-paper": {
+   "name": "Rice paper wrappers (8½-inch rounds)",
+   "contains": []
+  },
+  "rice-vermicelli": {
+   "name": "Thin rice noodles (rice vermicelli)",
+   "contains": []
+  },
+  "lettuce-green-leaf": {
+   "name": "Green leaf lettuce",
+   "contains": []
+  },
+  "carrot": {
+   "name": "Carrots",
+   "contains": []
+  },
+  "cucumber": {
+   "name": "Cucumber",
+   "contains": []
+  },
+  "mint": {
+   "name": "Fresh mint",
+   "contains": []
+  },
+  "cilantro": {
+   "name": "Fresh cilantro",
+   "contains": []
+  },
+  "peanut-butter": {
+   "name": "Creamy peanut butter",
+   "contains": [
+    "peanuts"
+   ]
+  },
+  "sunflower-butter": {
+   "name": "Sunflower seed butter",
+   "contains": []
+  },
+  "hoisin-sauce": {
+   "name": "Hoisin sauce",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "hoisin-gluten-free": {
+   "name": "Gluten-free hoisin sauce",
+   "contains": []
+  },
+  "lime": {
+   "name": "Limes",
+   "contains": []
+  },
+  "bell-pepper-green": {
+   "name": "Green bell pepper",
+   "contains": []
+  },
+  "chili-powder": {
+   "name": "Chili powder",
+   "contains": []
+  },
+  "garlic-powder": {
+   "name": "Garlic powder",
+   "contains": []
+  },
+  "tortilla-flour": {
+   "name": "Flour tortillas (8-inch)",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "tortilla-corn": {
+   "name": "Corn tortillas (6-inch)",
+   "contains": []
+  },
+  "sour-cream": {
+   "name": "Sour cream",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "salsa": {
+   "name": "Jarred salsa",
+   "contains": []
+  },
+  "avocado": {
+   "name": "Avocados",
+   "contains": []
+  },
+  "potato-russet": {
+   "name": "Russet potatoes",
+   "contains": []
+  },
+  "ketchup": {
+   "name": "Ketchup",
+   "contains": []
   }
  },
  "cuisines": {

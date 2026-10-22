@@ -89,6 +89,13 @@ test('a callback points at a written lesson', () => {
   assert.match(broken((c, L) => { L('brown-butter-cookies').learn.callback.lesson = 'apple-pie'; }), /isn't a written lesson/);
 });
 
+test('a dish in the same pick-one group needs no callback, but a later dish does', () => {
+  assert.doesNotMatch(lint(base).warnings.join('\n'), /chicken-fajitas\.json: reuses skill "julienne"/);
+  const c = structuredClone({ ...base, imageExists: undefined });
+  c.lessons.find(l => l.data.id === 'shakshuka').data.skills.push('julienne');
+  assert.match(lint(c).warnings.join('\n'), /shakshuka\.json: reuses skill "julienne"/);
+});
+
 test('a diet substitution that keeps the tag fails', () => {
   assert.match(broken((c, L) => { L('beef-bulgogi').substitutions[1].use = 'soy-sauce'; }), /still contains gluten/);
 });

@@ -1265,3 +1265,34 @@ how far through the course they are.
   a reordered plan with removed dishes, a dish added after a plan was saved,
   prerequisite notes), the new linter checks, and migration 0005.
 
+
+## 62. 2026-10-22 — Unit 1: the three julienne lessons
+
+Content fill (Phase 7) starts with Unit 1, at the owner's request: all three
+pick-one julienne lessons first. Numbered 62 because another session's branch
+already uses 51–61.
+
+- **1a Fresh spring rolls** (`spring-rolls`): poached chicken (165°F), carrot
+  and cucumber matchsticks, rice noodles, mint, rolled in rice paper, with a
+  peanut-hoisin dip. Teaches making a flat side before cutting, cutting
+  planks, then matchsticks. Swaps: sunflower seed butter (peanuts),
+  gluten-free hoisin (gluten). 4 servings, 60 minutes.
+- **1b Chicken fajitas** (`chicken-fajitas`): peppers cut skin side down and
+  onions cut into even strips; thighs rubbed with a spice paste, seared whole
+  (165°F), rested, then sliced, so no raw chicken is cut. Tortillas carry the
+  "check for lard" note; sour cream carries a "check for gelatin" note. Swap:
+  corn tortillas (gluten). 4 servings, 50 minutes.
+- **1c Baked shoestring fries** (`shoestring-fries`): flat side, planks,
+  sticks; soaked, dried, and baked at 425°F on two pans, turned and swapped
+  halfway. 4 servings (up to 8), 70 minutes.
+- **Registries:** 24 new ingredients (chicken breast and thighs, rice paper,
+  rice noodles, produce, spices, tortillas, sour cream, toppings) and 7 tools
+  (medium saucepan, colander, shallow dish, kitchen towels, peeler, paper
+  towels, microwave). Every animal product is from a clean species.
+- **Course outline:** the three dishes carry their real times instead of
+  estimates.
+- **Linter:** a dish in the same pick-one group no longer counts as an
+  "earlier lesson" for the missing-callback warning, since a family cooks only
+  one of them (§7.4 says so now). One new test.
+- Not test-cooked. No intro slides yet (warned, as for the samples).
+- Tests: 127.

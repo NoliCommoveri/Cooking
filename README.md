@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [50. 2026-10-22 — Lessons renumbered in course order](docs/build-log.md#50-2026-10-22--lessons-renumbered-in-course-order)
+**Latest build log entry:** [62. 2026-10-22 — Unit 1: the three julienne lessons](docs/build-log.md#62-2026-10-22--unit-1-the-three-julienne-lessons)
 
 ## Current features
 
@@ -29,7 +29,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
 - **Dish illustrations** (`content/images/dishes/`): one picture for each of the 75 lessons.
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
-- **Lesson content** (`content/`): 4 sample lessons, and the ingredient, tool, skill (52), and cuisine lists, as JSON.
+- **Lesson content** (`content/`): 7 lessons (the 4 samples, and 1a–1c: spring rolls, chicken fajitas, shoestring fries), and the ingredient, tool, skill (52), and cuisine lists, as JSON.
 - **Content linter** (`tools/lint-content.js`): checks every lesson against the food rules, including the unclean-food block, the food-safety steps, and scaling. Runs on every push.
 - **Scaling** (`src/content/`): amounts and step counts change with the serving size, shown in measuring-cup and spoon amounts.
 - **Lesson preview** (`preview/lesson-preview.html`): each sample lesson, read-only, at every serving size. Tap an underlined kitchen word to see what it means.

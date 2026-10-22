@@ -681,7 +681,7 @@ The linter must **warn** (without failing the build) when:
 - a lesson uses an ingredient with a `watch` note
 - a lesson has no intro slides yet
 - a skill is used by only one lesson, so its "other dishes" card would be empty
-- a lesson reuses a skill from an earlier lesson but has no `learn.callback`
+- a lesson reuses a skill from an earlier lesson but has no `learn.callback` (a dish in the same pick-one group doesn't count as earlier, since a family cooks only one of them)
 - an ingredient or tool uses its category's fallback icon
 
 ### 6.13 Website and legal pages — Requirement (owner, 2026-10-22)

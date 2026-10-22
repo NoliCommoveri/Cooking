@@ -104,7 +104,9 @@ export function lint(c) {
     for (const s of L.skills) {
       const uses = skillUse[s] || [];
       if (uses.length === 1) w(`skill "${s}" is only used by this lesson, so its "other dishes" card will be empty`);
-      if (uses.some(id => (pos[id] ?? 1e9) < (pos[L.id] ?? 1e9)) && !L.learn.callback) w(`reuses skill "${s}" from an earlier lesson but has no learn.callback`);
+      // A family cooks one dish from a pick-one group, so the others in it aren't "earlier lessons".
+      const sibling = id => DISH[L.id]?.pickOne && DISH[id]?.pickOne === DISH[L.id].pickOne;
+      if (uses.some(id => (pos[id] ?? 1e9) < (pos[L.id] ?? 1e9) && !sibling(id)) && !L.learn.callback) w(`reuses skill "${s}" from an earlier lesson but has no learn.callback`);
     }
 
     // ingredients
