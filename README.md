@@ -4,12 +4,18 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [30. 2026-10-22 — Swaps to remove near-repeats](docs/build-log.md#30-2026-10-22--swaps-to-remove-near-repeats)
+**Latest build log entry:** [31. 2026-10-22 — Phase 1b: families and accounts](docs/build-log.md#31-2026-10-22--phase-1b-families-and-accounts)
 
 ## Current features
 
-No app yet. The plan is in `cooking-class-app-PLAN.md`.
+The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are in `docs/setup.md`.
 
+- **Accounts** (`src/worker/`, `public/`): sign-up with a code or the sign-up word, a request form for codes, parent login, password reset by email, and a parent PIN for parent screens.
+- **Chef's lockers and profiles**: one person or several per profile, kid or adult, each with its own theme.
+- **Kitchen**: each profile sees the lesson library as Kitchen Quest quest cards or Chef's Passport recipe cards, filtered by the family's diet settings.
+- **Parent screens**: profiles, family name, default servings, diet filters, other parent logins, and the PIN.
+- **Owner screens**: sign-up requests, codes, the sign-up word, the family list, and setting a parent's password.
+- **Ops page** (`/ops`): migrations, the first sign-up code, the owner flag, backup download and restore, clear everything, and remove or restore one family.
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
 - **Dish illustrations** (`content/images/dishes/`): one picture for each of the 75 lessons.
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.

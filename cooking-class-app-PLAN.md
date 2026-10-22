@@ -1,6 +1,6 @@
 # Kids Cooking Class App — Overview Plan
 
-**Status:** Planning. Nothing is built yet.
+**Status:** Phases 0, 0b, and 1 are done. Phase 1b is built and waits on the owner's dashboard setup (`docs/setup.md`) and test.
 **Audience for this doc:** Claude Code, building the app in phases.
 **How to read this doc:** Items marked **Requirement** come from the owner (Jen) and should not change without her say-so. Items marked **Recommendation** are proposals. Each one lists alternatives and the conditions under which it should be revisited. Treat every recommendation as open to change.
 
@@ -412,7 +412,7 @@ Do **not** use:
 - **Fix requests:** review reports from families, apply a suggested fix as a lesson patch, or revert one (§6.11)
 - See the list of families (name, number of profiles, last active). This is the only cross-family view. The owner never sees other families' kids' names, photos, or progress.
 - Set a new password for a parent, as a fallback when the reset email (§8.3) doesn't reach them
-- Remove a family. This is destructive, so it's paired with a restore (§8.5)
+- Remove a family. This is destructive, so it's on `/ops`, beside that family's download and Restore a family (§8.5)
 
 ### 6.3 Shopping list logic
 The parent starts a **shopping trip** by picking queued lessons. A trip holds its own check-off state, so changing the queue later doesn't scramble a list mid-shop. Ending the trip marks its lessons `shopped`.
@@ -723,8 +723,8 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `lesson_patches` (id, lesson_id, base_version, field_path, old_value, new_value, fix_request_id, applied_by, applied_at, reverted_at). No `family_id`: patches apply to the shared library
 - `recipe_submissions` (id, family_id, family_recipe_id, submitted_at, status: pending → released | declined, community_recipe_id)
 - `community_recipes` (id, title, body_json, released_at, released_by). No `family_id`: released recipes belong to the shared directory, not a family
-- `sessions` (id, parent_id, family_id, created_at, last_seen)
-- `profiles` (id, family_id, name, avatar, theme, audience: kid | adult, track: core | beginner). One person or several sharing it (§1)
+- `sessions` (id, parent_id, family_id, created_at, last_seen, pin_until). `id` is a hash of the cookie's token; `pin_until` is when the parent PIN must be entered again on that device
+- `profiles` (id, family_id, name, avatar, people, theme, audience: kid | adult, track: core | beginner). One person or several sharing it (§1); `people` lists each person's name and avatar color so a shared locker shows everyone
 - `queue` (id, family_id, lesson_id, servings, planned_date, status: requested → assigned → shopped → cooked, requested_by_profile_id)
 - `queue_profiles` (queue_id, family_id, profile_id)
 - `shopping_trips` (id, family_id, created_at, ended_at)

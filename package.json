@@ -5,7 +5,7 @@
   "description": "Cooking class app: content, linter, scaling, and the Worker (families and accounts).",
   "scripts": {
     "lint": "node tools/lint-content.js",
-    "test": "node --import ./test/helpers/register.js --test",
+    "test": "node --import ./test/helpers/register.js --test test/*.test.js",
     "preview": "node tools/build-preview.js",
     "library": "node tools/build-library.js"
   },

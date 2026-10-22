@@ -141,11 +141,11 @@ After that, codes are made and sent from the owner screens in the app.</p>
 </form>` : notReady}
 
 <h2>Families</h2>
-${ready ? (families.length ? `<div class="scroll"><table><tr><th>family</th><th>parents</th><th>profiles</th><th>last active</th><th></th></tr>${families.map((f) => `<tr>
-  <td><b>${esc(f.name)}</b><br><span class="muted">${esc(f.emails ?? '')}</span></td>
-  <td>${esc(f.parents)}</td><td>${esc(f.profiles)}</td><td class="muted">${esc((f.last_active_at ?? f.created_at).slice(0, 10))}</td>
-  <td><div class="row"><a class="btn" href="/ops/family/${esc(f.id)}.json">Download</a>
-  <a class="btn" href="/ops/remove/${esc(f.id)}">Remove…</a></div></td></tr>`).join('')}</table></div>` : '<p class="muted">No families yet.</p>')
+${ready ? (families.length ? families.map((f) => `<div class="note">
+  <b>${esc(f.name)}</b> <span class="muted">${esc(f.emails ?? '')}</span><br>
+  <span class="muted">${esc(f.parents)} parent login(s) · ${esc(f.profiles)} profile(s) · last active ${esc((f.last_active_at ?? f.created_at).slice(0, 10))}</span>
+  <div class="row" style="margin-top:.4rem"><a class="btn" href="/ops/family/${esc(f.id)}.json">Download</a>
+  <a class="btn" href="/ops/remove/${esc(f.id)}">Remove…</a></div></div>`).join('') : '<p class="muted">No families yet.</p>')
   + `<form method="post" action="/ops/restore-family" enctype="multipart/form-data" class="row">
   <input type="file" name="file" accept="application/json,.json" required>
   <button type="submit">Restore a family</button></form>
