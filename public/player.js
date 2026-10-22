@@ -139,7 +139,8 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // is in the profile's queue, and send() resolves to the new one (§6.1).
 // seed: { servings, with, shopped } from the queued lesson, for a fresh cook;
 // shopped is the serving count its shopping trip bought for (§6.6).
-export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null, fixes = null, labels = null, total = null, ask = null, seed = null }) {
+// onReflect(cookId, reflection): saves one profile's reflection (§3).
+export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null }) {
   const [R, L] = await Promise.all([getRegistry(), getLesson(lessonId)]);
   const num = (id) => (labels ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null;
   // "lesson 8a, Shakshuka", or just the title for a dish the family took out of its plan.
@@ -471,6 +472,32 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
     return `<div class="whyov" data-act="why-close"><div class="${T.card}" role="dialog" aria-modal="true" aria-label="Why: ${esc(c.title)}">${tape}<p class="${T.kick}">Why? · from the Learn cards</p><h4>${esc(c.title)}</h4><p>${esc(c.body)}</p><button type="button" class="${T.btn}" data-act="why-close">Back to cooking</button></div></div>`;
   }
 
+  // ---------- reflect (§3) ----------
+  // Each profile on the cook rates it and says what they'd change; the last
+  // question is optional. Anyone can add how the eaters liked it.
+  const RATE_WORDS = ['', 'Not again', 'It was OK', 'Pretty good', 'Really good', 'Cook it again!'];
+  const hexPts = (cx, cy, r) => Array.from({ length: 6 }, (_, i) => { const a = (Math.PI / 3) * i - Math.PI / 2; return `${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`; }).join(' ');
+  const onCookNow = () => [profile, ...crew.filter((p) => S.with.includes(p.id))];
+  const rateRow = (key, value, label) => (quest
+    ? `<div class="gems" role="radiogroup" aria-label="${esc(label)}">${[1, 2, 3, 4, 5].map((n) => `<button type="button" class="gem ${n <= value ? 'on' : ''}" data-act="rate" data-k="${esc(key)}" data-n="${n}" role="radio" aria-checked="${n === value}" aria-label="${n} of 5"><svg viewBox="0 0 56 56"><polygon class="f" points="${hexPts(28, 28, 24)}" stroke-width="3"/><polygon class="s" points="${hexPts(28, 22, 9)}" fill="#FFF3C9" opacity=".7"/></svg></button>`).join('')}${value ? `<span class="rate-l">${value} of 5 · ${RATE_WORDS[value]}</span>` : ''}</div>`
+    : `<div class="p-hats" role="radiogroup" aria-label="${esc(label)}">${[1, 2, 3, 4, 5].map((n) => `<button type="button" class="p-hatbtn ${n <= value ? 'on' : ''}" data-act="rate" data-k="${esc(key)}" data-n="${n}" role="radio" aria-checked="${n === value}" aria-label="${n} of 5 chef's hats">${ic('i-hat', '')}</button>`).join('')}${value ? `<span class="p-ratel">${value} of 5 · ${RATE_WORDS[value]}</span>` : ''}</div>`);
+  function reflectView() {
+    S.refl ??= {};
+    const people = onCookNow();
+    const one = people.length === 1;
+    const block = (p) => {
+      const r = (S.refl[p.id] ??= { rating: 0, notes: '', transfer: '' });
+      return `<div class="${quest ? 'refl' : 'p-refl p-card p-lined'}">${one ? '' : `<p class="${T.kick}">${esc(p.name)}</p>`}
+        <h4 class="${T.h}">How did it turn out?</h4>${rateRow(p.id, r.rating, `${p.name}'s rating`)}
+        <label for="refl-n-${esc(p.id)}">What would you change next time?</label><textarea id="refl-n-${esc(p.id)}" data-refl="${esc(p.id)}" data-f="notes" maxlength="1000">${esc(r.notes)}</textarea>
+        <label for="refl-t-${esc(p.id)}">What other dish could use this move? <span>(optional)</span></label><textarea id="refl-t-${esc(p.id)}" data-refl="${esc(p.id)}" data-f="transfer" maxlength="300" placeholder="Like chili, because it starts with spices in oil">${esc(r.transfer)}</textarea></div>`;
+    };
+    return `<article class="${T.card}">${tape}<p class="${T.kick}">${quest ? 'Quest log' : 'Recipe notes'}</p><h4>${esc(L.title)}</h4>
+      ${people.map(block).join('')}
+      <div class="${quest ? 'refl' : 'p-refl'}"><h4 class="${T.h}">How did everyone who ate it like it? <span>optional</span></h4>${rateRow('eaters', S.eater ?? 0, "The eaters' rating")}</div>
+      <div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:14px"><button type="button" class="${T.back}" data-act="reflect-skip">Skip for now</button><button type="button" class="${T.btn}" data-act="reflect-save">Save</button></div></article>`;
+  }
+
   function doneView() {
     return `<article class="${T.card}" style="text-align:center;justify-items:center">${tape}<p class="${T.kick}">${quest ? 'Quest cleared' : 'Dish done'}</p><h4>${esc(L.title)}</h4>
       <div class="${quest ? 'q-win' : 'p-photo'}" style="max-width:220px"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="220" height="220"></div>
@@ -478,7 +505,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
   }
 
   // ---------- drawing and events ----------
-  const STAGES = { card: cardView, learn: learnView, prep: prepView, cook: cookView, done: doneView };
+  const STAGES = { card: cardView, learn: learnView, prep: prepView, cook: cookView, reflect: reflectView, done: doneView };
   let wakeTipShown = false, lastDing = 0;
   async function draw(focusTop = true) {
     if (S.stage !== 'card' && S.stage !== 'done') { S.last = S.stage; save(); }
@@ -575,7 +602,22 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
         return draw(false);
       }
       case 'step': step(Number(d.i)); break;
-      case 'finish': S.stage = 'done'; S.timers = []; S.finishedAt = new Date().toISOString(); break;
+      // Plate it: the cook is finished and counts; Reflect comes next.
+      case 'finish': S.stage = 'reflect'; S.timers = []; S.finishedAt = new Date().toISOString(); break;
+      case 'rate':
+        if (d.k === 'eaters') S.eater = Number(d.n); else S.refl[d.k].rating = Number(d.n);
+        save();
+        return draw(false);
+      case 'reflect-skip': S.stage = 'done'; break;
+      case 'reflect-save':
+        if (onReflect && S.cookId) {
+          onCookNow().forEach((p, i) => {
+            const r = S.refl?.[p.id] ?? {};
+            onReflect(S.cookId, { profile_id: p.id, rating: r.rating || null, notes: r.notes || null, transfer: r.transfer || null, ...(i === 0 && S.eater ? { eater_rating: S.eater } : {}) });
+          });
+        }
+        S.stage = 'done';
+        break;
       case 'term': term = d.id && d.id !== term ? d.id : null; return draw(false);
       case 'why': why = d.id; return draw(false);
       case 'why-close': why = null; return draw(false);
@@ -610,5 +652,12 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
     draw();
   }
   mount.addEventListener('click', onClick);
+  // Reflection text is kept as it's typed, without redrawing.
+  mount.addEventListener('input', (e) => {
+    const t = e.target.closest?.('[data-refl]');
+    if (!t || !S.refl?.[t.dataset.refl]) return;
+    S.refl[t.dataset.refl][t.dataset.f] = t.value;
+    save();
+  });
   draw();
 }

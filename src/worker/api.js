@@ -70,7 +70,7 @@ const profileOut = (r) => ({
 
 const familyOut = (f) => ({
   name: f.name, default_servings: f.default_servings, diet_filters: JSON.parse(f.diet_filters), pin_set: Boolean(f.parent_pin_hash),
-  voice_enabled: Boolean(f.voice_enabled), mode: f.mode, plan_weeks: Boolean(f.plan_weeks),
+  voice_enabled: Boolean(f.voice_enabled), mode: f.mode, plan_weeks: Boolean(f.plan_weeks), photos_enabled: Boolean(f.photos_enabled),
 });
 
 // ---------- routes ----------
@@ -403,6 +403,58 @@ on('GET', '/api/profiles/([0-9a-f]{16})/cooks', async (req, env, body, [pid]) =>
       GROUP BY a.lesson_id`,
   ).bind(pid, s.family_id, s.family_id).all();
   return { cooks: Object.fromEntries(results.map((r) => [r.lesson_id, { times: r.times, last: r.last }])) };
+});
+
+// The Reflect stage (§3): each profile on a cook rates it 1 to 5, says what
+// they'd change, and can answer the transfer question; anyone can add how the
+// eaters liked it. Saved after the cook finishes, and can be changed later.
+const rating = (v, field) => {
+  if (v == null || v === '') return null;
+  const n = Number(v);
+  if (!Number.isInteger(n) || n < 1 || n > 5) fail(400, 'invalid', `${field} is 1 to 5.`);
+  return n;
+};
+const note = (v, field, max) => (v == null || String(v).trim() === '' ? null : text(v, field, { max }));
+
+on('PUT', '/api/attempts/([0-9a-f]{16})/reflection', async (req, env, body, [aid]) => {
+  const s = await requireSession(env, req);
+  const cook = await env.DB.prepare('SELECT id FROM attempts WHERE id = ? AND family_id = ?').bind(aid, s.family_id).first() ?? fail(404, 'not_found', 'No such cook.');
+  const pid = String(body.profile_id ?? '');
+  const on = await env.DB.prepare('SELECT 1 FROM attempt_profiles WHERE attempt_id = ? AND family_id = ? AND profile_id = ?').bind(cook.id, s.family_id, pid).first();
+  if (!on) fail(400, 'invalid', "That profile isn't on this cook.");
+  const stmts = [env.DB.prepare('UPDATE attempt_profiles SET rating = ?, notes = ?, transfer = ?, reflected_at = ? WHERE attempt_id = ? AND family_id = ? AND profile_id = ?')
+    .bind(rating(body.rating, 'The rating'), note(body.notes, 'What you would change', 1000), note(body.transfer, 'The other dish', 300), now(), cook.id, s.family_id, pid)];
+  if (body.eater_rating !== undefined) {
+    stmts.push(env.DB.prepare('UPDATE attempts SET eater_rating = ? WHERE id = ? AND family_id = ?').bind(rating(body.eater_rating, "The eaters' rating"), cook.id, s.family_id));
+  }
+  await env.DB.batch(stmts);
+  return { ok: true };
+});
+
+// ---------- Print our progress (§6.15) ----------
+
+// Every lesson each profile has cooked, oldest first: date, dish, cuisine,
+// skill, and that profile's rating. ?tz= gives the family's calendar day.
+on('GET', '/api/progress', async (req, env) => {
+  const s = await requireParent(env, req);
+  const tz = Number(new URL(req.url).searchParams.get('tz') ?? 0);
+  const offset = Number.isInteger(tz) && Math.abs(tz) <= 840 ? tz : 0;
+  const day = (iso) => new Date(Date.parse(iso) - offset * 60 * 1000).toISOString().slice(0, 10);
+  const { results: profiles } = await env.DB.prepare('SELECT * FROM profiles WHERE family_id = ? ORDER BY created_at, id').bind(s.family_id).all();
+  const { results } = await env.DB.prepare(`SELECT ap.profile_id, ap.rating, a.lesson_id, a.finished_at, a.servings FROM attempt_profiles ap
+      JOIN attempts a ON a.id = ap.attempt_id AND a.family_id = ap.family_id
+      WHERE ap.family_id = ? AND a.finished_at IS NOT NULL ORDER BY a.finished_at, a.id`).bind(s.family_id).all();
+  const lesson = (lid) => LIBRARY.lessons.find((L) => L.id === lid);
+  return {
+    family: (await env.DB.prepare('SELECT name FROM families WHERE id = ?').bind(s.family_id).first()).name,
+    profiles: profiles.map((p) => ({
+      id: p.id, name: p.name,
+      rows: results.filter((r) => r.profile_id === p.id).map((r) => {
+        const L = lesson(r.lesson_id);
+        return { date: day(r.finished_at), dish: L?.title ?? r.lesson_id, cuisine: LIBRARY.cuisines[L?.cuisine] ?? L?.cuisine ?? '', skill: L?.skill ?? '', rating: r.rating };
+      }),
+    })),
+  };
 });
 
 // ---------- the test-cook notice (§6.9) ----------

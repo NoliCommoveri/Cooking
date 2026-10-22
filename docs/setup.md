@@ -150,6 +150,31 @@ and 0008).
 6. Open a lesson that was on the list from a kid's kitchen and change the
    serving count: the card says "You shopped for 6."
 
+## 14. Check it (the first part of Phase 4)
+
+After this update deploys, press **Apply pending** on `/ops` (migration 0009).
+
+1. Cook a lesson to the end and press **Plate it**. The Reflect screen asks how
+   it turned out (gems in Kitchen Quest, chef's hats in Chef's Passport), what
+   you'd change, and the optional "what other dish could use this move?".
+   Cooking with someone? Each of you gets your own. **Save**.
+2. **Parents → Progress**: the lesson is there with its rating. **Print**
+   (or save as PDF from the print window), and **Download CSV**.
+3. On `/ops`, each family says **photos off**. **Turn photos on** for your
+   family. Nothing shows yet: the camera and gallery come once the photo
+   storage below exists.
+
+## Before photos: create the photo storage (R2)
+
+Photos need a storage bucket that only you can create:
+
+1. In the Cloudflare dashboard, open **R2 Object Storage**. If it asks, turn R2
+   on for the account (there's a free monthly allowance).
+2. **Create bucket**. Name it `clean-plate-photos`, leave the location on
+   Automatic, and create it.
+3. Tell Claude it's done. The app connects to it in its settings file, so the
+   next deploy picks it up; there's nothing else to set.
+
 ## Backups and recovery
 
 - **Download export.json** saves everything. **Restore from export.json**

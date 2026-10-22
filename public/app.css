@@ -248,3 +248,17 @@ select{font:inherit;padding:8px 10px;border-radius:10px;border:1.5px solid var(-
 .amt{font-weight:800;text-align:right}
 .havebox span small{display:block;color:var(--h-mut);font-size:13px;font-weight:400}
 fieldset.psec legend{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--h-mut);font-weight:800}
+
+/* Print our progress (§6.15): a page styled for paper */
+.ptable{margin:14px 0 22px}
+.ptable h3{margin:0 0 6px}
+.ptable table{width:100%;border-collapse:collapse;font-size:15px}
+.ptable th,.ptable td{text-align:left;padding:6px 8px 6px 0;border-bottom:1px solid var(--h-line);vertical-align:top}
+.printout{overflow-x:auto}
+@media print{
+  :root{--h-bg:#fff;--h-fg:#000;--h-line:#999;--h-mut:#333}
+  body{background:#fff;color:#000}
+  .bar,.tabs,.noprint,.sabbath,.toast,#app>h1{display:none!important}
+  .ptable{break-inside:avoid-page}
+  .ptable table{font-size:12px}
+}

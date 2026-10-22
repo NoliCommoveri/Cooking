@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [60. 2026-10-22 — Shopping is optional: What you'll need, and lists by lesson count](docs/build-log.md#60-2026-10-22--shopping-is-optional-what-youll-need-and-lists-by-lesson-count)
+**Latest build log entry:** [61. 2026-10-22 — Phase 4, first part: Reflect, Print our progress, and the photos switch](docs/build-log.md#61-2026-10-22--phase-4-first-part-reflect-print-our-progress-and-the-photos-switch)
 
 ## Current features
 
@@ -23,6 +23,9 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Shopping** (`src/content/shop.js`, `src/worker/shopping.js`), optional: **What you'll need** shows the ingredients for the coming lessons week by week. A parent can make a shopping list for the next few uncooked lessons, tick what's on hand, and check the rest off in the store; it's merged, rounded to store packages, and grouped by aisle.
 - **Kitchen staples**: grouped on lists as "May already have", still on the list.
 - **Casual and homeschool modes**: homeschool adds due days for kids and overdue for parents; casual can turn on Plan our weeks.
+- **Reflect** (`public/player.js`): after Plate it, each profile on the cook rates it (gems or chef's hats), says what they'd change, and can name another dish that uses the move; plus an optional rating from the eaters. Saved even if the connection drops.
+- **Print our progress** (Parents → Progress): what each profile has cooked, with date, dish, cuisine, skill, and rating, printable or as a CSV.
+- **Photos switch** (`/ops`): photos are off for every family until the owner turns them on for one.
 - **Test-cook notice**: each parent sees a one-time note, above the lockers, to read a lesson through before their kids cook it.
 - **Demo page** (`/demo`): no account needed. Try the sample lessons in either theme, preview diet settings and a real shopping list, and browse the whole course by dish or by skill.
 - **Syllabus** (`/syllabus`): the course as a homeschool course, with objectives, units, hours, pacing, a suggested credit, and the rubric. Printable.

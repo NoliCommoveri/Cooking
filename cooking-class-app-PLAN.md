@@ -721,7 +721,7 @@ A printable record of what each profile has cooked, for homeschool records.
 - In the parent area. Pick one profile or all of them.
 - One table per profile, with the profile name at the top: **date, dish, cuisine, skill, and rating** for every lesson that profile has cooked, oldest first.
 - Made as a page styled for paper, printed from the browser (or saved as PDF from the print dialog). It needs no extra software.
-- Recommendation: the same rows as a CSV download, which also answers the "CSV export to the homeschool management system" item in Later (§9).
+- **The same rows as a CSV download** (owner, 2026-10-22), which also answers the "CSV export to the homeschool management system" item in Later (§9).
 - **Homeschool transcript — Requirement (owner, 2026-10-22: "a GREAT idea"); details to be specced with the owner.** A printable course record for a homeschool transcript, built on the same rows. Starting points to confirm:
   - The family names the course and gives it a code (e.g. "Culinary Arts", "HE-101"), a school year, and the student's name, per profile.
   - It lists the lessons cooked with dates, the skills earned, and the hours, totalled from each lesson's time.
@@ -841,7 +841,7 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `list_on_hand` (list_id, family_id, ingredient_id). Left off that list only
 - `list_checks` (list_id, family_id, ingredient_id)
 - `attempts` (id, family_id, queue_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state, eater_rating)
-- `attempt_profiles` (attempt_id, family_id, profile_id, rating, notes). Every profile on the cook, each with its own reflection
+- `attempt_profiles` (attempt_id, family_id, profile_id, rating, notes, transfer, reflected_at). Every profile on the cook, each with its own reflection; transfer is the optional "what other dish could use this move?"
 - `test_cooks` (family_id, lesson_id, lesson_version, parent_id, cooked_on)
 - `photos` (id, family_id, attempt_id, r2_key, created_at)
 - `pantry` (family_id, ingredient_id). Kitchen staples
@@ -873,14 +873,14 @@ Each phase should be deployed and usable before the next begins.
 | **1d. Demo page** (built after 2a, before 2b) | `/demo` (§6.16): theme and kid/adult switches, the sample lessons in the real player, the diet preview, the shopping list preview, the whole course, the skills view, and `content/course.json`; the public syllabus page (§6.17) | A mom with only the link tries a sample lesson in both themes, toggles dairy-free and sees lessons change, and browses the course by dish and by skill, on her phone |
 | **2. Lesson player** | Learn, Prep, Cook mode, kitchen words, food-safety checks, timers, wake lock, voice step control (§6.12), the installable PWA (§8.2), attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
 | **3. Parent planning & shopping** | Course plans and the weekly schedule (§4.1, §6.18), the casual/homeschool switch and due dates (§6.17), the queue (with kid requests), safety review, mark test-cooked, What you'll need and optional shopping lists with merging and package rounding (§6.3), kitchen staples, check-off persistence | A parent sets up a course for two siblings, sees this week's lessons in the queue, skips a week, and sees the schedule shift when a lesson isn't cooked. A parent reviews safety, marks a lesson test-cooked, sees what the next weeks need, then makes a list for 3 lessons and shops from their phone |
-| **4. Photos & reflect** | The per-family photos switch on `/ops` (§2.6), camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download, Print our progress and the homeschool transcript (§6.15) | In a family with photos on, a photo taken on the tablet shows in the gallery on the parent's phone. A family with photos off cooks and reflects with no photo step |
+| **4. Photos & reflect** | The per-family photos switch on `/ops` (§2.6), camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download, Print our progress with its CSV download (§6.15). The transcript moved to 4b (owner, 2026-10-22) | In a family with photos on, a photo taken on the tablet shows in the gallery on the parent's phone. A family with photos off cooks and reflects with no photo step |
 | **4b. Homeschool mode** | Course details (name, code, school year), optional grading (not offered on the Sabbath, §6.18), and the transcript (§6.15, §6.17) | A parent in homeschool mode grades a cook and prints a transcript; switching back to casual hides it all and loses nothing |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
 | **8. Helper & first run** | First-run wizard (§6.9) and the helper (§6.8), once both are specced | A new family goes from sign-up to their first queued lesson through the wizard, and kids and parents can each finish a helper task |
 | **9. Family recipes (bonus)** | My recipes with the guided entry flow, submission and owner review, the community directory (§6.10) | A parent enters a recipe through the flow, a kid cooks it, and the owner releases a submitted one to the directory, where another test family finds and adds it |
-| **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system | — |
+| **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system (Print our progress's CSV covers the basics, §6.15) | — |
 
 **Phase 2d waits (owner, 2026-10-22):** the installable PWA and cooking offline (Phase 2's slice 2d) are built once pretty much everything else is done, not before Phase 2e. Until then, Phase 2's "Wi-Fi off partway through" check waits with it.
 

@@ -2,7 +2,7 @@
 // built with el(), which only ever sets text, so nothing a family types is
 // parsed as markup. Routes live in the hash: #/login, #/kitchen/<id>, #/parent…
 import { openLesson } from './player.js';
-import { saveCook, flushCooks } from './cooks.js';
+import { saveCook, saveReflection, flushCooks } from './cooks.js';
 import { patchTargets, showValue } from './lib/patch.js';
 import { courseEntries, prereqNotes } from './lib/course.js';
 
@@ -398,7 +398,7 @@ async function lesson(profileId, lessonId) {
   screen(mount);
   await openLesson(mount, {
     profile: p, family: me.family, lessonId, onExit: () => go(`#/kitchen/${p.id}`),
-    crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook, labels: mine.labels ?? lib.labels, total: mine.total ?? lib.total,
+    crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook, onReflect: saveReflection, labels: mine.labels ?? lib.labels, total: mine.total ?? lib.total,
     // "I want to make this" or "Cook this" (§6.1), and the queued lesson's
     // servings and who it's for, for a fresh cook.
     ask: {
@@ -501,7 +501,7 @@ function suggestFix(profile, { lesson, stepId, servings, ingredients }) {
 // ---------- parent area ----------
 
 function parentTabs(current) {
-  const tabs = [['queue', 'Queue'], ['shopping', 'Shopping'], ['courses', 'Courses'], ['profiles', 'Profiles'], ['family', 'Family'], ['parents', 'Logins']];
+  const tabs = [['queue', 'Queue'], ['shopping', 'Shopping'], ['courses', 'Courses'], ['progress', 'Progress'], ['profiles', 'Profiles'], ['family', 'Family'], ['parents', 'Logins']];
   if (me.parent.is_owner) tabs.push(['owner', 'Owner'], ['fixes', 'Fix requests']);
   return el('nav', { class: 'tabs', 'aria-label': 'Parent screens' },
     tabs.map(([k, label]) => el('a', { href: `#/parent/${k}`, 'aria-current': k === current ? 'page' : null }, label)));
@@ -1089,6 +1089,42 @@ const pantryEditor = parentOnly(async () => {
     }, { extra: [el('a', { class: 'hbtn', href: '#/parent/shopping' }, 'Back to shopping')] }));
 });
 
+// ---------- Print our progress (§6.15) ----------
+
+const csvCell = (v) => (/[",\n]/.test(String(v ?? '')) ? `"${String(v).replace(/"/g, '""')}"` : String(v ?? ''));
+
+const progress = parentOnly(async (which = 'all') => {
+  const d = await api('GET', `/api/progress?${tz()}`);
+  const shown = which === 'all' ? d.profiles : d.profiles.filter((p) => p.id === which);
+  const pick = el('select', { 'aria-label': 'Whose progress', onchange: (e) => progress(e.target.value) },
+    el('option', { value: 'all', selected: which === 'all' }, 'Everyone'),
+    d.profiles.map((p) => el('option', { value: p.id, selected: p.id === which }, p.name)));
+  // The same rows as a spreadsheet, for homeschool records.
+  const csv = () => {
+    const lines = [['Profile', 'Date', 'Dish', 'Cuisine', 'Skill', 'Rating'],
+      ...shown.flatMap((p) => p.rows.map((r) => [p.name, r.date, r.dish, r.cuisine, r.skill, r.rating ?? '']))];
+    const blob = new Blob([lines.map((l) => l.map(csvCell).join(',')).join('\r\n') + '\r\n'], { type: 'text/csv' });
+    const a = el('a', { href: URL.createObjectURL(blob), download: `${d.family || 'family'} progress ${localToday()}.csv` });
+    document.body.append(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  };
+  parentScreen('progress',
+    el('div', { class: 'acts noprint' }, el('label', { class: 'f inline' }, 'Show', pick),
+      el('button', { type: 'button', class: 'hbtn pri', onclick: () => window.print() }, 'Print'),
+      el('button', { type: 'button', class: 'hbtn', onclick: csv }, 'Download CSV')),
+    el('p', { class: 'mut small noprint' }, 'Print, or save it as a PDF from the print window.'),
+    el('section', { class: 'printout' },
+      el('h2', {}, `${d.family}: what we've cooked`),
+      el('p', { class: 'mut small' }, `Clean Plate Recipes · printed ${fmtDay(localToday(), { year: 'numeric', month: 'long', day: 'numeric' })}`),
+      shown.map((p) => el('div', { class: 'ptable' }, el('h3', {}, p.name),
+        p.rows.length
+          ? el('table', {}, el('thead', {}, el('tr', {}, ['Date', 'Dish', 'Cuisine', 'Skill', 'Rating'].map((h) => el('th', {}, h)))),
+            el('tbody', {}, p.rows.map((r) => el('tr', {}, el('td', {}, fmtDay(r.date, { year: 'numeric', month: 'short', day: 'numeric' })), el('td', {}, r.dish), el('td', {}, r.cuisine), el('td', {}, r.skill), el('td', {}, r.rating ? `${r.rating} of 5` : '—')))))
+          : el('p', { class: 'mut' }, 'Nothing cooked yet.')))));
+});
+
 // ---------- owner screens ----------
 
 const owner = parentOnly(async (flash) => {
@@ -1242,6 +1278,7 @@ async function route() {
       if (sub === 'shopping' && extra === 'list') return await shoppingListView(parts[3]);
       if (sub === 'shopping') return await shopping();
       if (sub === 'pantry') return await pantryEditor();
+      if (sub === 'progress') return await progress(extra);
       if (sub === 'family') return await familySettings();
       if (sub === 'parents') return await parentLogins();
       if (sub === 'owner') return await owner();

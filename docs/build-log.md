@@ -1504,3 +1504,33 @@ are replaced):
   shopped for" on a course lesson queued after its list, cooking a lesson
   never shopped for, Done and Delete with their undos, family scoping, input
   checks, the PIN, and the new tables in a family download.
+
+## 61. 2026-10-22 — Phase 4, first part: Reflect, Print our progress, and the photos switch
+
+- **Owner rulings:** Phase 3 stays on its branch for now (no pull request
+  yet). The homeschool transcript moves to Phase 4b, with grading. Print our
+  progress gets a CSV download. Phase 4 starts with the parts that don't need
+  photo storage.
+- **Blocker for the rest of Phase 4:** the photo storage (an R2 bucket) has to
+  be created by the owner in the Cloudflare dashboard. `docs/setup.md` has the
+  steps. The camera, upload, gallery, and photo download wait for it.
+- **Migration 0009:** `families.photos_enabled`, and `attempt_profiles.transfer`
+  and `reflected_at`. **The owner presses Apply pending on `/ops`.**
+- **Reflect (§3):** Plate it now finishes the cook (it counts at once) and
+  opens Reflect. Each profile on the cook gets its own: a 1 to 5 rating (gold
+  gems in Kitchen Quest, chef's hats in Chef's Passport, from the approved
+  showcase), "What would you change next time?", and the optional "What other
+  dish could use this move?". Then an optional rating from whoever ate it.
+  Save, or Skip for now. Reflections wait in their own outbox on the device
+  and go up after their cook, so a dropped connection doesn't lose them. The
+  demo shows Reflect and saves nothing.
+- **Print our progress (§6.15):** Parents → Progress. Everyone or one profile;
+  a table per profile of date, dish, cuisine, skill, and that profile's
+  rating, oldest first, styled for paper (Print, or save as PDF), and the same
+  rows as a CSV download.
+- **Photos switch (§2.6):** each family on `/ops` says photos on or off, with
+  Turn photos on / Turn photos off beside it. Every family starts off; turning
+  them off deletes nothing.
+- Tests: 167 (reflections per profile and the eater rating, changing one
+  later, input checks and family scoping, the progress rows, parents only, and
+  the photos switch).
