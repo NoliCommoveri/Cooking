@@ -165,3 +165,32 @@ is built.
   Phases 1b and 2.
 - Removed the "cook together or separately" open question. Open questions
   renumbered 1–6.
+
+---
+
+## 8. 2026-10-22 — Theme choice, open sign-up, family recipes
+
+Owner rulings on open questions:
+- **No extra diet filters for the owner's family.** Removed the question;
+  per-family filters stay as a feature for other families.
+- **The kids choose the theme.** §5.2 now states it as a Requirement. Whether
+  each family can pick its own theme is still open.
+- **Open sign-up, gated by a code or keyword.** This replaces invite-only.
+  - Anyone can request a code through a public form; the owner approves it from
+    a queue, which emails a single-use code through Resend.
+  - The owner can also set a shared sign-up keyword, and change it or turn it
+    off.
+  - Added `signup_requests` and `settings`; `invites` gained `email`.
+- **Family recipes, a bonus feature (§6.10, Phase 9).**
+  - Families add their own recipes through a guided step-by-step flow (no CSV
+    or file import) and cook them in the lesson player.
+  - They can submit a recipe for owner review; released recipes go into a
+    searchable community directory any family can add from.
+  - The hard block and diet filters apply to all of it. Typed-in ingredients
+    that aren't in the registry rely on the blocked-word scan alone until the
+    owner adds them; this is stated as a known gap.
+  - Added `family_recipes`, `recipe_submissions`, and `community_recipes`.
+  - Family recipes live in D1; the library stays as content files.
+- Replaced "cook-together mode" in the Later row with "split roles," since
+  shared profiles (entry 7) already cover cooking together.
+- Open questions are now 1–3.
