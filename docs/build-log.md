@@ -339,3 +339,23 @@ Owner rulings on open questions:
   §5.4 and §5.4a each gained a serving-picker row.
 - Nothing is saved, and no app code exists yet. Next: the owner reviews the
   look; once approved, Phase 0b builds Chef's Passport the same way.
+
+---
+
+## 16. 2026-10-22 — Plan: fix requests and lesson patches
+
+- New §6.11 (Recommendation): parents and adult learners send **fix
+  requests** from a lesson or step, and the owner applies them from the browser
+  as **lesson patches** that go live for every family.
+  - The owner said she isn't the cooking expert, so the reporter proposes the
+    correction and the app checks it: the blocked-word scan, unit checks, and
+    food-safety minimums. A patch that fails can't be applied.
+  - Patches can change amounts, units, times, step text, notes, and doneness
+    targets only. Adding or swapping an ingredient needs a content change.
+  - Every patch has a Revert. Safety and unclean-ingredient reports email the
+    owner right away. A patch raises the lesson's version.
+  - Claude folds applied patches into the lesson files in a later session; the
+    owner does nothing for that.
+- Added `fix_requests` and `lesson_patches` to the data model, a Fix requests
+  queue to the owner features, the work and its done-when to Phase 2, and patch
+  checks and revert to the tests.
