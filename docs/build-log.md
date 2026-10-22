@@ -335,3 +335,19 @@ Owner rulings on open questions:
 - Note passed to the owner: the bulgogi beef looks like ground-beef crumbles,
   not thin slices, and thin slicing is that lesson's skill.
 - 19 of 50 dishes now have art.
+
+---
+
+## 18. 2026-10-22 — Dish art sheets 5 and 6
+
+- Added sheets 5 and 6 from the owner and cropped 8 dishes: 18 gyoza, 19
+  skillet naan, 20 pão de queijo, 21 spanakopita, 22 spinach and mushroom
+  quiche, 23 chicken katsu, 24 Swedish meatballs, 25 churros. Each is about
+  550–670 px.
+- Checked for unclean foods: none seen. The quiche has no bacon, the katsu is
+  visibly chicken, and the gyoza filling isn't shown.
+- Fixed `tools/crop-dish-sheet.py`: it put a bottom-row dish ahead of
+  another when one sat a little higher, which swapped 20 and 21. Rows are now
+  grouped by where each dish starts. Re-ran it on sheets 1–4; their crops
+  didn't change.
+- 27 of 50 dishes now have art.

@@ -31,7 +31,12 @@ for y in range(h):
                     if 0<=ny<h and 0<=nx<w and small[ny,nx] and not lab[ny,nx]:
                         lab[ny,nx]=n; q.append((ny,nx))
             if len(ys) > 2000: comps.append((min(ys)*s, min(xs)*s, max(ys)*s+s, max(xs)*s+s, n))
-comps.sort(key=lambda c: (round(c[0]/(H/3)), c[1]))
+# reading order: a dish starts a new row once it begins below the current row's top dish
+comps.sort(key=lambda c: c[0]); rows = []
+for c in comps:
+    if rows and c[0] < min(r[2] for r in rows[-1]) * 0.5 + rows[-1][0][0] * 0.5: rows[-1].append(c)
+    else: rows.append([c])
+comps = [c for r in rows for c in sorted(r, key=lambda c: c[1])]
 print(len(comps), 'dishes found')
 alpha = Image.fromarray((fg*255).astype('uint8')).filter(ImageFilter.GaussianBlur(0.8))
 rgba = im.copy(); rgba.putalpha(alpha)
