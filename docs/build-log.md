@@ -243,3 +243,25 @@ Owner rulings on open questions:
 - The owner ruled that the fat rule covers separable fat only (suet, tallow,
   beef dripping sold as a fat). Marbling and cooking drippings are allowed;
   §2.1 now says so. No lesson changes were needed.
+
+---
+
+## 12. 2026-10-22 — Phase 0: theme mockups
+
+- Started Phase 0 with a theme picker page for the kids:
+  `mockups/theme-picker.html`, published as a private claude.ai page.
+- All four candidate themes from §5.2 are mocked up: Chef's Passport, Kitchen
+  Quest, Food Truck, and Recipe Scrapbook.
+- Each theme shows the same four screens for lesson 4 (Shakshuka, serves 4):
+  lesson library, prep checklist, cook mode with timers, and progress.
+  - They're interactive. Ingredients check off into the theme's container
+    (bowl, inventory, crate, sticker sheet), and Next moves through 6 steps.
+    Timers start, pause, ring, and show "Ended N min ago".
+  - The food-safety check (160°F egg) blocks Next until it's confirmed. A
+    wash-hands step follows the raw-egg step.
+  - The progress screens use sample data: 8 dishes cooked, rank Prep Cook.
+- All art is hand-drawn SVG, as the first test of §5.3a.
+- No pill-shaped labels. Cook-mode tap targets are at least 56px.
+- Nothing is saved. The page is a mockup only, and no app code exists yet.
+- Next: the kids pick a theme. Then the rest of Phase 0 is built for that
+  theme.

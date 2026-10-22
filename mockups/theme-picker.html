@@ -1,0 +1,1127 @@
+<title>Pick Your Kitchen</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Caveat:wght@500;700&family=Fredoka:wght@500;600&family=Kalam:wght@400;700&family=Lilita+One&family=Nunito:wght@400;600;700;800&family=Permanent+Marker&family=Pixelify+Sans:wght@400;600;700&family=Shrikhand&display=swap">
+<style>
+/* Layout: neutral house-style header and theme switcher, then a 2x2 stage of four themed screens (one column on phones). */
+:root{
+  --h-bg:#F2F0EB; --h-fg:#202327; --h-mut:#5B616B; --h-line:#D8D3C9; --h-card:#FFFFFF; --h-acc:#2E6B5B;
+  --h-disp:'Fredoka','Nunito',system-ui,sans-serif; --h-body:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --h-bg:#15171B; --h-fg:#ECEDEF; --h-mut:#A3A9B3; --h-line:#2C3037; --h-card:#1E2126; --h-acc:#7CC5AE; color-scheme:dark}}
+:root[data-theme="dark"]{--h-bg:#15171B; --h-fg:#ECEDEF; --h-mut:#A3A9B3; --h-line:#2C3037; --h-card:#1E2126; --h-acc:#7CC5AE; color-scheme:dark}
+
+body{background:var(--h-bg);color:var(--h-fg);font-family:var(--h-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 48px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--h-acc);outline-offset:3px}
+
+/* ---------- house style ---------- */
+.hd{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px 24px;align-items:end;margin-bottom:22px}
+.hd h1{font-family:var(--h-disp);font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;margin:0;text-wrap:balance}
+.hd p{margin:8px 0 0;color:var(--h-mut);max-width:62ch}
+.snd{display:flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1.5px solid var(--h-line);background:var(--h-card);border-radius:10px;font-weight:700}
+.snd svg{width:20px;height:20px}
+@media (max-width:640px){.hd{grid-template-columns:1fr}.snd{justify-self:start}}
+
+.picker{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:12px}
+@media (max-width:900px){.picker{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tile{display:grid;grid-template-rows:auto auto auto;gap:6px;text-align:left;padding:12px 12px 14px;border:2px solid var(--h-line);border-radius:14px;background:var(--h-card);min-height:56px;position:relative}
+.tile[aria-pressed="true"]{border-color:var(--h-acc);box-shadow:0 0 0 2px var(--h-acc)}
+.tile .sw{height:54px;border-radius:8px;overflow:hidden;display:block}
+.tile .sw svg{width:100%;height:100%;display:block}
+.tile b{font-family:var(--h-disp);font-weight:600;font-size:19px;line-height:1.15}
+.tile small{color:var(--h-mut);font-size:14px;line-height:1.35}
+.tile .on{position:absolute;top:18px;right:18px;width:28px;height:28px;display:none}
+.tile[aria-pressed="true"] .on{display:block}
+.same{color:var(--h-mut);font-size:15px;margin:4px 0 26px;max-width:80ch}
+.same b{color:var(--h-fg)}
+
+.stage{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 26px}
+@media (max-width:960px){.stage{grid-template-columns:minmax(0,1fr)}}
+.shot{display:flex;flex-direction:column;gap:10px;min-width:0;scroll-margin-top:16px}
+.cap{color:var(--h-fg);display:flex;align-items:baseline;gap:10px;margin:0;font-family:var(--h-disp);font-weight:600;font-size:18px}
+.cap span{font-family:var(--h-body);font-weight:800;color:var(--h-mut);font-size:14px;font-variant-numeric:tabular-nums}
+.cap em{font-style:normal;font-family:var(--h-body);font-weight:600;color:var(--h-mut);font-size:14px}
+.scr{flex:1;border-radius:22px;overflow:hidden;position:relative;padding:22px;min-height:440px;box-shadow:0 1px 0 rgba(0,0,0,.05),0 10px 30px -14px rgba(0,0,0,.35)}
+@media (max-width:520px){.scr{padding:16px;border-radius:18px}}
+.demo{font-family:var(--h-body);margin-top:6px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;color:var(--h-mut);font-size:14px}
+.demo button{border:1.5px dashed var(--h-line);background:transparent;border-radius:8px;padding:8px 12px;min-height:40px;font-weight:700;font-size:14px;color:var(--h-mut)}
+
+.cmp{margin-top:44px}
+.cmp h2{font-family:var(--h-disp);font-weight:600;font-size:26px;margin:0 0 6px}
+.cmp p{color:var(--h-mut);margin:0 0 14px;max-width:70ch}
+.cmpt{overflow-x:auto;border:1.5px solid var(--h-line);border-radius:14px;background:var(--h-card)}
+.cmpt table{border-collapse:collapse;width:100%;min-width:640px;font-size:15px}
+.cmpt th,.cmpt td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--h-line);vertical-align:top}
+.cmpt tr:last-child td{border-bottom:0}
+.cmpt thead th{font-family:var(--h-disp);font-weight:600;font-size:16px}
+.cmpt tbody th{font-weight:800;color:var(--h-mut);font-size:13px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.foot{margin-top:28px;color:var(--h-mut);font-size:14px;max-width:80ch}
+
+/* shared icon sizing */
+.ico{width:1.2em;height:1.2em;flex:none;display:inline-block;vertical-align:-.22em}
+svg use{transform-box:fill-box;transform-origin:center}
+
+/* shared motion */
+@keyframes hop{0%{transform:none}35%{transform:translateY(-26px) rotate(-14deg) scale(1.18)}70%{transform:translateY(3px)}100%{transform:none}}
+@keyframes pop{0%{transform:translateY(-46px) scale(.4);opacity:0}65%{transform:translateY(4px) scale(1.06);opacity:1}100%{transform:none;opacity:1}}
+@keyframes flipin{0%{transform:rotateY(88deg);opacity:.4}100%{transform:none;opacity:1}}
+@keyframes pagein{0%{transform:rotateY(-80deg);opacity:.3}100%{transform:none;opacity:1}}
+@keyframes slidein{0%{transform:translateX(110%) rotate(6deg)}70%{transform:translateX(-3%) rotate(-1deg)}100%{transform:none}}
+@keyframes wobble{0%,100%{transform:rotate(0)}20%{transform:rotate(-9deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-6deg)}80%{transform:rotate(5deg)}}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@keyframes glow{0%,100%{box-shadow:0 0 0 2px var(--mana),0 0 14px 2px rgba(91,214,200,.45)}50%{box-shadow:0 0 0 2px var(--mana),0 0 24px 6px rgba(91,214,200,.7)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@keyframes draw{from{stroke-dashoffset:40}to{stroke-dashoffset:0}}
+.hop .ii{animation:hop .34s cubic-bezier(.3,.7,.4,1)}
+use.pop{animation:pop .42s cubic-bezier(.3,.7,.4,1) both}
+
+/* ================= THEME 1: CHEF'S PASSPORT ================= */
+.k-passport{--bg:#C79762;--bg2:#B5844F;--paper:#FFF8E7;--ink:#2B2A28;--red:#D9412B;--butter:#F6C945;--basil:#4E8B3A;--muted:#6E604E;--navy:#22406B;
+  --disp:'Lilita One','Fredoka',sans-serif;--hand:'Caveat',cursive;--body:'Nunito',system-ui,sans-serif;font-family:var(--body);color:var(--ink)}
+.k-passport .scr{background:radial-gradient(circle at 30% 40%,var(--bg2) 1.2px,transparent 1.8px) 0 0/13px 13px,radial-gradient(circle,#D9AE7A 1px,transparent 1.6px) 6px 7px/17px 17px,var(--bg)}
+.pp-card{background:var(--paper);position:relative;box-shadow:0 2px 0 rgba(0,0,0,.08),0 10px 18px -8px rgba(60,30,0,.45);border-radius:3px}
+.pp-card::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 27px,rgba(110,160,200,.18) 27px 28px);pointer-events:none;border-radius:inherit}
+.tape{position:absolute;width:74px;height:24px;background:rgba(246,226,150,.78);box-shadow:0 1px 2px rgba(0,0,0,.15);z-index:2}
+.tape.t1{top:-10px;left:18px;transform:rotate(-8deg)}
+.tape.t2{top:-10px;right:18px;transform:rotate(7deg)}
+.pp-lib{display:grid;gap:26px}
+.pp-main{padding:26px 22px 22px;transform:rotate(-1.2deg);display:grid;gap:6px}
+.pp-dish{width:100%;max-width:300px;height:auto;aspect-ratio:22/15;justify-self:center}
+.pp-tk{position:absolute;right:12px;top:22px;width:92px;height:92px;color:var(--red);opacity:.82;transform:rotate(14deg);mix-blend-mode:multiply;z-index:3}
+.pp-title{font-family:var(--disp);font-size:34px;line-height:1;margin:4px 0 0;font-weight:400;position:relative;z-index:1}
+.pp-skill{font-family:var(--hand);font-size:24px;line-height:1.1;margin:0;color:var(--muted);position:relative;z-index:1}
+.pp-meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-weight:700;font-size:15px;margin:6px 0 10px;position:relative;z-index:1}
+.pp-meta span{display:flex;align-items:center;gap:6px}
+.pp-meta .ico{width:24px;height:24px;color:var(--ink)}
+.pp-btn{position:relative;z-index:1;border:0;background:var(--red);color:#fff;font-family:var(--disp);font-size:22px;letter-spacing:.02em;min-height:58px;border-radius:12px;padding:0 22px;box-shadow:0 4px 0 #8E2416;justify-self:start}
+.pp-btn:active{transform:translateY(3px);box-shadow:0 1px 0 #8E2416}
+.pp-btn[disabled]{background:#B9AD9A;box-shadow:0 4px 0 #8F8472;cursor:not-allowed}
+.pp-minis{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.pp-mini{padding:16px 12px 12px;text-align:center}
+.pp-mini.r1{transform:rotate(1.8deg)}.pp-mini.r2{transform:rotate(-2.2deg)}
+.pp-mini svg{width:100%;height:auto;aspect-ratio:22/15}
+.pp-mini h5{font-family:var(--disp);font-weight:400;font-size:19px;margin:2px 0 0;position:relative;z-index:1}
+.pp-mini p{font-family:var(--hand);font-size:19px;margin:0;color:var(--muted);position:relative;z-index:1}
+
+.pp-prep{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:20px;align-items:start}
+@media (max-width:620px){.pp-prep{grid-template-columns:1fr}}
+.pp-bowlwrap{text-align:center}
+.pp-bowl{width:100%;max-width:280px;height:auto}
+.pp-count{font-family:var(--hand);font-size:28px;margin:0;color:var(--paper);text-shadow:0 1px 0 rgba(0,0,0,.35)}
+.pp-list{padding:22px 14px 14px;display:grid;gap:2px;transform:rotate(.6deg)}
+.pp-h{font-family:var(--disp);font-weight:400;font-size:24px;margin:0 0 6px 6px;position:relative;z-index:1}
+.pp-h .hand{font-family:var(--hand);font-size:22px;color:var(--muted)}
+.pp-item{position:relative;z-index:1;display:grid;grid-template-columns:44px minmax(0,1fr) 34px;align-items:center;gap:10px;min-height:58px;padding:4px 6px;border:0;background:transparent;text-align:left;border-radius:8px}
+.pp-item:hover{background:rgba(246,201,69,.18)}
+.pp-item .ii{width:42px;height:42px}
+.pp-item .nm{font-weight:800;font-size:17px;line-height:1.15}
+.pp-item .nm small{display:block;font-weight:600;font-size:14px;color:var(--muted)}
+.pp-ck{width:32px;height:32px}
+.pp-ck circle{fill:none;stroke:var(--ink);stroke-width:2.5}
+.pp-ck path{fill:none;stroke:var(--basil);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40}
+.pp-item.on .pp-ck path{stroke-dashoffset:0;transition:stroke-dashoffset .25s}
+.pp-item.on .nm{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
+.pp-item.on .ii{opacity:.35}
+.gate{display:flex;gap:10px;align-items:center;margin:10px 6px 2px;position:relative;z-index:1}
+.pp-gate{font-family:var(--hand);font-size:22px;color:var(--muted)}
+.pp-gate .ico{width:26px;height:26px}
+
+.pp-cook{display:grid;gap:16px}
+.pp-banner{display:flex;align-items:center;gap:12px;background:var(--butter);padding:10px 34px 10px 30px;margin:0 -8px;clip-path:polygon(0 0,100% 0,calc(100% - 16px) 50%,100% 100%,0 100%,16px 50%);font-size:15px;line-height:1.3}
+.pp-banner .ico{width:40px;height:40px;color:var(--ink)}
+.pp-banner b{font-family:var(--disp);font-weight:400;font-size:20px;display:block}
+.pp-cookbody{display:grid;grid-template-columns:minmax(0,1fr) 92px;gap:14px;align-items:start;perspective:900px}
+.pp-step{padding:18px 18px 16px;display:grid;gap:10px;transform-origin:left center}
+.pp-step.flip{animation:flipin .32s ease-out}
+.pp-stepno{font-family:var(--hand);font-size:24px;margin:0;color:var(--red);position:relative;z-index:1}
+.steptxt{font-size:21px;line-height:1.45;font-weight:700;margin:0;position:relative;z-index:1}
+.pp-note{font-family:var(--hand);font-size:22px;line-height:1.2;margin:0;color:var(--muted);position:relative;z-index:1}
+.pp-note b{color:var(--ink)}
+.pp-cup{text-align:center;font-family:var(--hand);font-size:19px;line-height:1.1;color:var(--paper);text-shadow:0 1px 0 rgba(0,0,0,.35)}
+.pp-cup svg{width:92px;height:auto}
+.pp-tstart{position:relative;z-index:1;display:flex;align-items:center;gap:10px;min-height:56px;border:2.5px solid var(--ink);background:var(--paper);border-radius:12px;padding:6px 14px;font-weight:800;font-size:16px;justify-self:start;text-align:left}
+.pp-tstart .ico{width:26px;height:26px}
+.chk{position:relative;z-index:1;display:flex;align-items:center;gap:12px;min-height:58px;padding:8px 12px;border-radius:12px;font-weight:800;font-size:16px;text-align:left}
+.pp-chk{border:2.5px dashed var(--red);background:#FFEFE6}
+.pp-chk .ico{width:30px;height:30px;color:var(--red)}
+.chk .box{width:30px;height:30px;flex:none;border:2.5px solid currentColor;border-radius:6px;display:grid;place-items:center}
+.chk .box svg{width:22px;height:22px;opacity:0}
+.chk[aria-pressed="true"] .box svg{opacity:1}
+.pp-nav{display:flex;gap:12px;align-items:center}
+.pp-nav .pp-btn{flex:1;justify-self:auto}
+.pp-back{min-height:58px;padding:0 18px;border:2.5px solid var(--ink);background:var(--paper);border-radius:12px;font-weight:800;font-size:17px}
+.pp-back[disabled]{opacity:.45;cursor:not-allowed}
+.pp-counter{margin:4px -22px -22px;padding:16px 22px 18px;background:linear-gradient(#fff 0 0) 0 0/100% 2px no-repeat,repeating-linear-gradient(90deg,#E9F0F2 0 46px,#D3DEE2 46px 48px),#E9F0F2;border-top:6px solid #9DB3BB;display:flex;gap:18px;flex-wrap:wrap;min-height:120px;align-items:flex-start}
+.pp-counter .empty{font-family:var(--hand);font-size:21px;color:#5C6F76;align-self:center}
+.pp-timer{display:grid;justify-items:center;gap:2px;width:108px;text-align:center}
+.pp-timer .dial{width:84px;height:94px;border:0;background:transparent;padding:0;min-height:56px}
+.pp-timer .dial svg{width:100%;height:100%;overflow:visible}
+.pp-timer.ringing .dial svg{animation:wobble .5s ease-in-out infinite;transform-origin:50% 60%}
+.pp-timer .lb{font-weight:800;font-size:14px;line-height:1.15}
+.pp-timer .tt{font-family:var(--disp);font-size:20px;font-variant-numeric:tabular-nums;line-height:1.1}
+.pp-timer.ended .tt{font-family:var(--hand);font-size:18px;color:var(--red)}
+.pp-timer.paused .tt{color:var(--muted)}
+.pp-timer .stop{border:0;background:var(--red);color:#fff;font-weight:800;border-radius:10px;min-height:44px;padding:4px 12px;margin-top:4px}
+
+.pp-pass{display:grid;gap:18px}
+.pp-book{display:grid;grid-template-columns:1fr 1fr;background:var(--navy);padding:8px;border-radius:10px;gap:0;box-shadow:0 10px 18px -8px rgba(0,0,0,.5)}
+@media (max-width:520px){.pp-book{grid-template-columns:1fr}}
+.pp-page{background:#F4EEDC;padding:12px 10px 14px;min-width:0;background-image:radial-gradient(circle at 50% 50%,rgba(34,64,107,.07) 0 30%,transparent 31%),repeating-radial-gradient(circle at 50% 120%,transparent 0 9px,rgba(34,64,107,.05) 9px 10px)}
+.pp-page:first-child{border-radius:4px 0 0 4px;box-shadow:inset -8px 0 12px -8px rgba(0,0,0,.35)}
+.pp-page:last-child{border-radius:0 4px 4px 0;box-shadow:inset 8px 0 12px -8px rgba(0,0,0,.35)}
+.pp-page h5{font-family:var(--disp);font-weight:400;font-size:16px;margin:0 0 6px;color:var(--navy);letter-spacing:.02em}
+.pp-stamps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 6px}
+.pp-st{display:grid;justify-items:center;text-align:center;font-size:12px;font-weight:700;line-height:1.15;color:var(--ink)}
+.pp-st svg{width:100%;max-width:74px;aspect-ratio:1;transform:rotate(var(--rot,0deg));color:var(--sc,var(--red))}
+.pp-st svg text{font-family:var(--disp);fill:currentColor}
+.pp-st.empty{color:#9A917F}
+.pp-st.next svg{color:var(--red);animation:pulse 1.6s ease-in-out infinite}
+.pp-rank{background:var(--paper);border-radius:3px;padding:14px 14px 12px;box-shadow:0 10px 18px -8px rgba(60,30,0,.45)}
+.pp-rank h5{font-family:var(--disp);font-weight:400;font-size:22px;margin:0}
+.pp-rank p{font-family:var(--hand);font-size:21px;margin:0 0 6px;color:var(--muted)}
+.pp-hats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;align-items:end;text-align:center;font-size:12px;font-weight:800;line-height:1.1}
+.pp-hats svg{width:100%;height:auto;display:block;margin:0 auto 4px}
+.pp-hats .fut{color:#A99D88}
+.pp-hats use.fut{opacity:.55}
+.pp-hats .cur{color:var(--red)}
+.pp-apron{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;background:var(--basil);padding:16px 14px 18px;clip-path:polygon(14% 0,86% 0,86% 18%,100% 30%,100% 100%,0 100%,0 30%,14% 18%);padding-top:34px}
+.pin{display:grid;justify-items:center;width:62px;text-align:center;color:#fff;font-size:11px;font-weight:800;line-height:1.1}
+.pin svg{width:44px;height:44px;filter:drop-shadow(0 2px 0 rgba(0,0,0,.3))}
+
+/* ================= THEME 2: KITCHEN QUEST ================= */
+.k-quest{--bg:#161A31;--panel:#232A4E;--edge:#3D4985;--gold:#F2B640;--mana:#5BD6C8;--ember:#FF7350;--text:#EEF0FF;--dim:#A6AED8;
+  --disp:'Pixelify Sans','Nunito',monospace;--body:'Nunito',system-ui,sans-serif;font-family:var(--body);color:var(--text)}
+.k-quest .scr{background:linear-gradient(rgba(91,214,200,.05) 1px,transparent 1px) 0 0/24px 24px,linear-gradient(90deg,rgba(91,214,200,.05) 1px,transparent 1px) 0 0/24px 24px,radial-gradient(ellipse at 50% 0,#2A2F63,transparent 70%),var(--bg)}
+.q-panel{background:var(--panel);clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 10px,100% calc(100% - 10px),calc(100% - 10px) 100%,10px 100%,0 calc(100% - 10px),0 10px);box-shadow:inset 0 0 0 3px var(--edge);position:relative}
+.q-h{font-family:var(--disp);font-weight:700;font-size:24px;margin:0 0 12px;color:var(--gold);letter-spacing:.04em;display:flex;justify-content:space-between;align-items:baseline;text-transform:uppercase}
+.q-h span{color:var(--mana);font-size:20px}
+.q-kick{font-family:var(--disp);font-size:14px;color:var(--mana);margin:0;letter-spacing:.06em;text-transform:uppercase}
+.q-main{padding:18px;display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.q-win{background:#11152B;box-shadow:inset 0 0 0 3px var(--gold);padding:10px;clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px),0 8px)}
+.q-win svg{width:100%;height:auto;aspect-ratio:22/15;display:block;max-height:190px}
+.q-title{font-family:var(--disp);font-weight:700;font-size:34px;line-height:1;margin:2px 0 0;color:#fff}
+.q-skill{margin:0;font-size:16px;color:var(--dim)}
+.q-skill b{color:var(--gold)}
+.q-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:0}
+@media (max-width:520px){.q-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.q-stats div{background:#1A2042;padding:8px;box-shadow:inset 0 0 0 2px var(--edge)}
+.q-stats dt{font-family:var(--disp);font-size:13px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em;display:flex;gap:6px;align-items:center}
+.q-stats dt .ico{width:16px;height:16px;color:var(--gold)}
+.q-stats dd{margin:2px 0 0;font-weight:800;font-size:15px}
+.q-tk{display:flex;align-items:center;gap:8px;margin:0;font-size:14px;color:var(--dim)}
+.q-tk .ico{width:22px;height:22px;color:var(--gold)}
+.q-btn{border:0;background:var(--gold);color:#241A05;font-family:var(--disp);font-weight:700;font-size:22px;min-height:58px;padding:0 22px;letter-spacing:.04em;text-transform:uppercase;clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px),0 8px);box-shadow:inset 0 -5px 0 #B67E14}
+.q-btn:active{box-shadow:inset 0 3px 0 #B67E14}
+.q-btn[disabled]{background:#4A5384;color:#9DA5D0;box-shadow:inset 0 -5px 0 #353D6A;cursor:not-allowed}
+.q-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.q-mini{padding:12px;display:grid;gap:6px}
+.q-mini svg{width:100%;height:auto;aspect-ratio:22/15}
+.q-mini h5{font-family:var(--disp);font-size:18px;margin:0;font-weight:600}
+.q-mini.locked svg{filter:grayscale(1) brightness(.5)}
+.q-lock{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--dim);margin:0}
+.q-lock .ico{width:18px;height:18px;color:var(--ember)}
+
+.q-meter{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;margin-bottom:14px}
+.q-meter i{height:14px;background:#2B3260;box-shadow:inset 0 0 0 2px var(--edge)}
+.q-meter i.on{background:var(--mana);box-shadow:inset 0 -4px 0 rgba(0,0,0,.25)}
+.q-inv{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.q-inv{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.q-slot{display:grid;justify-items:center;align-content:start;gap:4px;padding:12px 6px 10px;min-height:128px;border:0;background:#1A2042;box-shadow:inset 0 0 0 3px var(--edge);color:var(--text);clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px),0 6px)}
+.q-slot .ii{width:54px;height:54px;filter:grayscale(1) brightness(.45) contrast(1.4);opacity:.6}
+.q-slot .nm{font-weight:800;font-size:15px;line-height:1.1;text-align:center}
+.q-slot .amt{font-size:13px;color:var(--dim);line-height:1.15;text-align:center}
+.q-slot.on{background:#1F3A4A;animation:glow 2.4s ease-in-out infinite}
+.q-slot.on .ii{filter:none;opacity:1}
+.q-slot.hop .ii{animation:hop .34s cubic-bezier(.3,.7,.4,1)}
+.q-gate{color:var(--dim);font-size:15px;margin-top:14px}
+.q-gate .ico{width:24px;height:24px;color:var(--ember)}
+
+.q-cook{display:grid;gap:14px}
+.q-banner{display:flex;align-items:center;gap:12px;padding:10px 14px;background:linear-gradient(90deg,#3B2A12,#2A2140);box-shadow:inset 4px 0 0 var(--gold),inset 0 0 0 2px #5A4420;font-size:15px;line-height:1.3;color:#F6E7C8}
+.q-banner .ico{width:40px;height:40px;color:var(--gold)}
+.q-banner b{font-family:var(--disp);font-size:19px;display:block;color:var(--gold);text-transform:uppercase;letter-spacing:.04em}
+.q-stages{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.q-stages i{height:12px;background:#2B3260;box-shadow:inset 0 0 0 2px var(--edge)}
+.q-stages i.done{background:var(--gold)}
+.q-stages i.cur{background:var(--mana);animation:pulse 1.4s infinite}
+.q-log{padding:18px;display:grid;gap:12px;perspective:800px}
+.q-log.flip{animation:fadein .35s ease-out}
+.q-log.flip .steptxt{animation:slidein .3s ease-out}
+.q-log .steptxt{color:#fff;font-weight:700}
+.q-note{margin:0;font-size:16px;line-height:1.4;color:var(--dim);padding-left:12px;box-shadow:inset 3px 0 0 var(--mana)}
+.q-note b{color:var(--mana);font-family:var(--disp);font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:14px}
+.q-tstart{display:flex;align-items:center;gap:10px;min-height:56px;border:0;background:#1A2042;box-shadow:inset 0 0 0 3px var(--mana);padding:6px 14px;font-weight:800;font-size:16px;justify-self:start;color:var(--mana)}
+.q-tstart .ico{width:24px;height:24px}
+.q-chk{background:#2A1F2F;box-shadow:inset 0 0 0 3px var(--ember);color:#FFD7CB}
+.q-chk .ico{width:28px;height:28px;color:var(--ember)}
+.q-nav{display:flex;gap:10px}
+.q-nav .q-btn{flex:1}
+.q-back{min-height:58px;padding:0 16px;border:0;background:#1A2042;box-shadow:inset 0 0 0 3px var(--edge);font-family:var(--disp);font-size:18px;color:var(--dim);text-transform:uppercase}
+.q-back[disabled]{opacity:.4;cursor:not-allowed}
+.q-timers{display:flex;flex-wrap:wrap;gap:14px;min-height:118px;align-items:flex-start;padding:12px;background:#11152B;box-shadow:inset 0 0 0 2px var(--edge)}
+.q-timers .empty{color:var(--dim);align-self:center;font-size:15px}
+.q-timer{display:grid;justify-items:center;gap:4px;width:104px;text-align:center}
+.q-timer .dial{width:92px;height:92px;border:0;background:transparent;padding:0}
+.q-timer .dial svg{width:100%;height:100%}
+.q-timer .dial text{font-family:var(--disp);font-weight:700;fill:#fff;font-variant-numeric:tabular-nums}
+.q-timer.ended .dial text{fill:var(--ember);font-size:15px}
+.q-timer.ringing .dial{animation:shake .25s linear infinite}
+.q-timer .lb{font-size:13px;font-weight:800;color:var(--dim);line-height:1.15}
+.q-timer .stop{border:0;background:var(--ember);color:#2A0E05;font-family:var(--disp);font-weight:700;min-height:44px;padding:4px 12px;text-transform:uppercase}
+
+.q-tree svg{width:100%;height:auto;display:block}
+.q-tree text{font-family:var(--disp);font-weight:600}
+.q-lvl{padding:14px 16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:center;margin-top:12px}
+.q-lvl svg{width:62px;height:62px;grid-row:span 3}
+.q-lvl b{font-family:var(--disp);font-size:24px;color:var(--gold);line-height:1}
+.q-lvl span{font-size:14px;color:var(--dim)}
+.q-xp{height:16px;background:#1A2042;box-shadow:inset 0 0 0 2px var(--edge);position:relative}
+.q-xp i{position:absolute;inset:3px auto 3px 3px;background:linear-gradient(90deg,var(--mana),#9BF0E4)}
+
+/* ================= THEME 3: FOOD TRUCK ================= */
+.k-truck{--bg:#9ED6D0;--street:#3C4447;--teal:#1E8C8A;--mustard:#F5B72A;--cherry:#E5493E;--chalk:#27352F;--chalkink:#F4F1E8;--steel:#D5DEE2;--ink:#1D2426;--paper:#FFFFFF;
+  --disp:'Bungee','Lilita One',sans-serif;--marker:'Permanent Marker',cursive;--body:'Nunito',system-ui,sans-serif;font-family:var(--body);color:var(--ink)}
+.k-truck .scr{background:linear-gradient(180deg,transparent 78%,#C9C2B4 78% 79%,#B8B0A1 79%),repeating-linear-gradient(90deg,rgba(255,255,255,.22) 0 2px,transparent 2px 60px),var(--bg)}
+.t-board{background:var(--chalk);color:var(--chalkink);padding:18px;border:10px solid #9B6B3D;border-radius:6px;box-shadow:0 10px 20px -8px rgba(0,0,0,.5),inset 0 0 40px rgba(0,0,0,.4);display:grid;gap:6px;position:relative}
+.t-chalkh{font-family:var(--disp);font-size:15px;letter-spacing:.06em;color:var(--mustard);margin:0}
+.t-board svg.dish{width:100%;max-width:300px;height:auto;aspect-ratio:22/15;justify-self:center}
+.t-title{font-family:var(--marker);font-weight:400;font-size:36px;line-height:1.05;margin:0}
+.t-skill{margin:0;font-size:16px;opacity:.85}
+.t-meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-weight:700;font-size:15px;margin:4px 0 8px}
+.t-meta span{display:flex;gap:6px;align-items:center}
+.t-meta .ico{width:24px;height:24px;color:var(--chalkink)}
+.t-tk{position:absolute;top:14px;right:14px;width:84px;height:84px;color:var(--mustard);transform:rotate(-12deg);opacity:.9}
+.t-btn{border:0;background:var(--cherry);color:#fff;font-family:var(--disp);font-size:19px;letter-spacing:.03em;min-height:58px;padding:0 20px;border-radius:6px;box-shadow:0 5px 0 #9B271F;justify-self:start}
+.t-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #9B271F}
+.t-btn[disabled]{background:#9AA5A8;box-shadow:0 5px 0 #6D777A;cursor:not-allowed}
+.t-coming{margin-top:16px;background:var(--paper);padding:12px 16px;border-radius:4px;box-shadow:0 6px 14px -8px rgba(0,0,0,.4)}
+.t-coming h5{font-family:var(--disp);font-size:15px;margin:0 0 4px;color:var(--teal);letter-spacing:.05em}
+.t-coming ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.t-coming li{display:flex;gap:8px;align-items:baseline;font-weight:800;font-size:16px;min-height:32px}
+.t-coming li i{flex:1;border-bottom:2px dotted #A9B5B8;transform:translateY(-4px)}
+.t-coming li span:last-child{font-weight:600;color:#55636A;font-size:14px}
+
+.t-prep{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:620px){.t-prep{grid-template-columns:1fr}}
+.t-crate{text-align:center}
+.t-crate svg{width:100%;max-width:300px;height:auto}
+.t-crate p{font-family:var(--disp);font-size:16px;margin:2px 0 0;color:var(--ink);letter-spacing:.04em}
+.t-clip{background:#B8865A;border-radius:10px;padding:26px 10px 10px;position:relative;box-shadow:0 8px 16px -8px rgba(0,0,0,.45)}
+.t-clip::before{content:"";position:absolute;top:-8px;left:50%;width:90px;height:30px;transform:translateX(-50%);background:linear-gradient(#E3E9EC,#9CA8AD);border-radius:6px 6px 10px 10px;box-shadow:0 2px 0 #6D777A}
+.t-sheet{background:var(--paper);padding:12px 10px;border-radius:2px;display:grid;gap:0}
+.t-sheet h5{font-family:var(--disp);font-size:17px;margin:0 0 4px 4px;color:var(--teal)}
+.t-item{display:grid;grid-template-columns:34px 40px minmax(0,1fr);align-items:center;gap:10px;min-height:56px;padding:3px 4px;border:0;border-bottom:1.5px solid #E2E8EA;background:transparent;text-align:left}
+.t-item .bx{width:30px;height:30px;border:3px solid var(--ink);border-radius:3px;display:grid;place-items:center}
+.t-item .bx svg{width:30px;height:30px;opacity:0;color:var(--cherry)}
+.t-item.on .bx svg{opacity:1}
+.t-item .ii{width:38px;height:38px}
+.t-item .nm{font-weight:800;font-size:16px;line-height:1.15}
+.t-item .nm small{display:block;font-weight:600;font-size:13.5px;color:#55636A}
+.t-gate{font-weight:800;font-size:15px;color:#3E4B50}
+.t-gate .ico{width:24px;height:24px;color:var(--cherry)}
+
+.t-cook{display:grid;gap:14px}
+.t-banner{display:flex;align-items:center;gap:12px;background:var(--mustard);padding:10px 14px;border-radius:4px;font-size:15px;line-height:1.3;box-shadow:inset 0 -6px 0 rgba(0,0,0,.08);border-left:14px solid transparent;border-image:repeating-linear-gradient(45deg,var(--ink) 0 6px,var(--mustard) 6px 12px) 14}
+.t-banner .ico{width:38px;height:38px;color:var(--ink)}
+.t-banner b{font-family:var(--disp);font-size:17px;display:block;letter-spacing:.03em}
+.t-rail{position:relative;padding-top:18px;overflow:hidden}
+.t-rail::before{content:"";position:absolute;top:0;left:0;right:0;height:16px;background:linear-gradient(#F3F6F7,#9CA8AD 70%,#7F8B90);border-radius:4px;box-shadow:0 2px 2px rgba(0,0,0,.25)}
+.t-ticket{background:var(--paper);margin:0 10px;padding:16px 16px 26px;display:grid;gap:10px;position:relative;box-shadow:0 8px 14px -8px rgba(0,0,0,.4);
+  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 12px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/16px 12px repeat-x;
+  mask:linear-gradient(#000 0 0) top/100% calc(100% - 12px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/16px 12px repeat-x}
+.t-ticket::before{content:"";position:absolute;top:-6px;left:50%;width:46px;height:18px;transform:translateX(-50%);background:#7F8B90;border-radius:3px}
+.t-ticket.flip{animation:slidein .38s cubic-bezier(.3,.7,.4,1)}
+.t-tno{display:flex;justify-content:space-between;font-family:'Courier New',monospace;font-weight:700;font-size:15px;border-bottom:2px dashed #C7D0D3;padding-bottom:6px;margin:0}
+.t-note{margin:0;font-size:16px;line-height:1.4;color:#3E4B50}
+.t-note b{font-family:var(--marker);font-weight:400;color:var(--cherry);font-size:18px}
+.t-tstart{display:flex;align-items:center;gap:10px;min-height:56px;border:3px solid var(--ink);background:var(--paper);border-radius:6px;padding:6px 14px;font-weight:800;font-size:16px;justify-self:start}
+.t-tstart .ico{width:24px;height:24px}
+.t-chk{border:3px solid var(--cherry);background:#FFF0EE;border-radius:6px}
+.t-chk .ico{width:28px;height:28px;color:var(--cherry)}
+.t-nav{display:flex;gap:10px}
+.t-nav .t-btn{flex:1}
+.t-back{min-height:58px;padding:0 16px;border:3px solid var(--ink);background:var(--paper);border-radius:6px;font-family:var(--disp);font-size:16px}
+.t-back[disabled]{opacity:.45;cursor:not-allowed}
+.t-timers{display:flex;flex-wrap:wrap;gap:12px;min-height:110px;align-items:flex-start}
+.t-timers .empty{font-weight:700;color:#33545A;align-self:center}
+.t-led{display:grid;gap:4px;width:150px;padding:8px 10px 10px;background:linear-gradient(#E7EDEF,#B9C5CA);border-radius:8px;box-shadow:inset 0 0 0 2px #8B979C,0 4px 8px -4px rgba(0,0,0,.4)}
+.t-led .lb{font-weight:800;font-size:13px;line-height:1.1}
+.t-led .scrn{border:0;background:#1A1414;border-radius:4px;padding:6px 8px;min-height:56px;display:grid;align-items:center;text-align:center;font-family:'Courier New',monospace;font-weight:700;font-size:30px;color:#FF5A47;text-shadow:0 0 8px rgba(255,90,71,.7);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.t-led.paused .scrn{color:#9C5A52;text-shadow:none}
+.t-led.ended .scrn{font-size:15px;color:var(--mustard);text-shadow:0 0 6px rgba(245,183,42,.6)}
+.t-led.ringing{animation:shake .25s linear infinite}
+.t-led .bar{height:6px;background:#8B979C;border-radius:2px;overflow:hidden}
+.t-led .bar i{display:block;height:100%;background:var(--cherry)}
+.t-led .stop{border:0;background:var(--cherry);color:#fff;font-family:var(--disp);font-size:14px;min-height:44px;border-radius:6px}
+.t-spike{display:flex;gap:6px;align-items:center;font-family:var(--disp);font-size:13px;letter-spacing:.04em;color:#2E4B50}
+.t-spike i{width:22px;height:28px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3);opacity:.45}
+.t-spike i.done{opacity:1;background:linear-gradient(#fff 0 0) padding-box,#fff;box-shadow:inset 0 -6px 0 var(--mustard),0 1px 2px rgba(0,0,0,.3)}
+.t-spike i.cur{opacity:1;box-shadow:inset 0 0 0 2px var(--cherry)}
+
+.t-prog{display:grid;gap:14px}
+.t-truck{width:100%;height:auto;display:block}
+.t-truck text{font-family:var(--disp)}
+.t-menu{background:var(--chalk);color:var(--chalkink);border:8px solid #9B6B3D;border-radius:4px;padding:12px 14px}
+.t-menu h5{font-family:var(--disp);font-size:15px;margin:0 0 6px;color:var(--mustard);letter-spacing:.05em}
+.t-menu ol{margin:0;padding:0;list-style:none;columns:2;column-gap:18px;font-family:var(--marker);font-size:17px;line-height:1.45}
+@media (max-width:420px){.t-menu ol{columns:1}}
+.t-menu li.next{opacity:.55}
+.t-tiers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;text-align:center;font-weight:800;font-size:12px;line-height:1.1;background:rgba(255,255,255,.6);padding:10px 6px;border-radius:6px}
+.t-tiers svg{width:100%;height:auto;max-height:46px;display:block;margin:0 auto 4px}
+.t-tiers .fut{opacity:.4}
+.t-tiers .cur{color:var(--cherry)}
+.t-rankline{margin:0;font-weight:800;font-size:16px}
+.t-rankline b{font-family:var(--disp);color:var(--cherry);font-weight:400}
+
+/* ================= THEME 4: RECIPE SCRAPBOOK ================= */
+.k-scrap{--bg:#D3B387;--page:#FBF6EA;--ink:#2F3B4C;--teal:#6FB0B8;--coral:#EE8670;--mustard:#E5BE52;--lilac:#B5A3D6;--line:#CFE0EA;--soft:#6A7381;
+  --disp:'Shrikhand','Lilita One',serif;--hand:'Kalam','Caveat',cursive;--body:'Nunito',system-ui,sans-serif;font-family:var(--body);color:var(--ink)}
+.k-scrap .scr{background:radial-gradient(circle at 20% 30%,rgba(255,255,255,.12),transparent 40%),repeating-linear-gradient(35deg,rgba(120,80,30,.05) 0 2px,transparent 2px 7px),var(--bg)}
+.s-page{background:var(--page);padding:22px 18px 18px;position:relative;box-shadow:0 1px 0 rgba(0,0,0,.06),0 12px 20px -10px rgba(70,40,0,.5);background-image:linear-gradient(90deg,transparent 30px,rgba(238,134,112,.4) 30px 32px,transparent 32px),repeating-linear-gradient(0deg,transparent 0 29px,var(--line) 29px 30px);background-color:var(--page)}
+.washi{position:absolute;height:26px;width:96px;z-index:3;opacity:.88;background:repeating-linear-gradient(45deg,var(--teal) 0 8px,#8CC3CA 8px 16px);-webkit-mask:radial-gradient(circle at 0 50%,#0000 4px,#000 4.5px) left/100% 9px repeat-y;}
+.washi.w1{top:-11px;left:40%;transform:rotate(-4deg)}
+.washi.w2{background:repeating-linear-gradient(90deg,var(--coral) 0 6px,#F4A895 6px 12px);top:-10px;right:20px;transform:rotate(5deg)}
+.washi.w3{background:repeating-radial-gradient(circle at 6px 6px,#fff 0 2px,var(--mustard) 2.5px 12px);top:-12px;left:22px;transform:rotate(-6deg)}
+.s-lib{display:grid;gap:20px}
+.s-head{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:560px){.s-head{grid-template-columns:1fr}}
+.s-pola{background:#fff;padding:10px 10px 0;box-shadow:0 6px 12px -6px rgba(0,0,0,.45);margin:0;transform:rotate(-3deg);position:relative}
+.s-pola svg{width:100%;height:auto;aspect-ratio:1;display:block;background:#E9DCC4}
+.s-pola figcaption{font-family:var(--hand);font-size:20px;text-align:center;padding:4px 0 6px;line-height:1.1}
+.s-title{font-family:var(--disp);font-weight:400;font-size:34px;line-height:1.1;margin:6px 0 2px;color:var(--coral)}
+.s-skill{font-family:var(--hand);font-size:20px;line-height:1.25;margin:0}
+.s-skill svg{width:42px;height:18px;vertical-align:middle}
+.s-meta{display:grid;gap:4px;margin:10px 0 12px;font-weight:700;font-size:15px}
+.s-meta span{display:flex;align-items:center;gap:8px}
+.s-meta .ico{width:24px;height:24px}
+.s-tk{width:84px;height:84px;color:var(--teal);transform:rotate(-10deg);opacity:.9;position:absolute;right:14px;bottom:14px}
+.s-btn{border:0;background:var(--ink);color:var(--page);font-family:var(--disp);font-size:20px;min-height:58px;padding:0 22px;border-radius:4px;box-shadow:4px 4px 0 var(--coral);position:relative;z-index:1}
+.s-btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--coral)}
+.s-btn[disabled]{background:#A8AFB8;box-shadow:4px 4px 0 #D9CDBB;cursor:not-allowed}
+.s-minis{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.s-minis .s-pola{width:min(42%,170px)}
+.s-minis .s-pola:nth-child(2){transform:rotate(4deg)}
+.clipper{position:absolute;top:-14px;left:20px;width:16px;height:40px;border:3px solid #8B949E;border-radius:8px;z-index:3}
+
+.s-prep{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:18px;align-items:start}
+@media (max-width:620px){.s-prep{grid-template-columns:1fr}}
+.s-list{padding:22px 10px 12px 40px}
+.s-list h5{font-family:var(--disp);font-weight:400;font-size:22px;margin:0 0 4px;color:var(--coral)}
+.s-item{display:grid;grid-template-columns:34px minmax(0,1fr);align-items:center;gap:10px;min-height:58px;width:100%;padding:2px 4px;border:0;background:transparent;text-align:left;font-family:var(--hand);font-size:21px;line-height:1.1}
+.s-item small{display:block;font-family:var(--body);font-size:13.5px;color:var(--soft);font-weight:600}
+.s-item svg.bx{width:32px;height:32px}
+.s-item svg.bx .tick{stroke-dasharray:40;stroke-dashoffset:40}
+.s-item.on svg.bx .tick{stroke-dashoffset:0;animation:draw .3s ease-out}
+.s-item.on .nm{text-decoration:line-through wavy var(--coral) 2px}
+.s-sheet{background:#FFFDF8;padding:14px 12px;border:2px dashed #CDBFA5;transform:rotate(1.5deg);position:relative}
+.s-sheet h5{font-family:var(--hand);font-weight:700;font-size:20px;margin:0 0 6px;text-align:center}
+.s-stk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.s-stk span{aspect-ratio:1;display:grid;place-items:center;border:2px dashed #D8CCB6;border-radius:50%}
+.s-stk span.on{border-color:transparent}
+.s-stk svg{width:80%;height:80%;filter:drop-shadow(2.5px 0 0 #fff) drop-shadow(-2.5px 0 0 #fff) drop-shadow(0 2.5px 0 #fff) drop-shadow(0 -2.5px 0 #fff) drop-shadow(1px 3px 2px rgba(0,0,0,.3))}
+.s-stk span:nth-child(odd) svg{transform:rotate(-8deg)}
+.s-stk span:nth-child(even) svg{transform:rotate(7deg)}
+.s-stk span.pop svg{animation:pop .42s cubic-bezier(.3,.7,.4,1) both}
+.s-stk span:not(.on) svg{opacity:.12;filter:grayscale(1)}
+.s-sheet p{font-family:var(--hand);font-size:19px;text-align:center;margin:8px 0 0}
+.s-gate{font-family:var(--hand);font-size:20px;color:var(--soft)}
+.s-gate .ico{width:26px;height:26px}
+
+.s-cook{display:grid;gap:14px;perspective:1000px}
+.s-banner{display:flex;align-items:center;gap:10px;font-size:15px;line-height:1.3;position:relative;padding:12px 40px 14px 36px;color:var(--ink)}
+.s-banner::before{content:"";position:absolute;inset:0;background:var(--mustard);clip-path:polygon(0 8%,4% 0,50% 6%,96% 0,100% 8%,97% 50%,100% 92%,96% 100%,50% 94%,4% 100%,0 92%,3% 50%);z-index:0}
+.s-banner>*{position:relative}
+.s-banner .ico{width:40px;height:40px}
+.s-banner b{font-family:var(--hand);font-weight:700;font-size:22px;display:block;line-height:1}
+.s-journal{padding:20px 16px 18px 44px;display:grid;gap:10px;transform-origin:left center}
+.s-journal.flip{animation:pagein .4s ease-out}
+.s-stepno{font-family:var(--disp);color:var(--coral);font-size:20px;margin:0}
+.s-note{font-family:var(--hand);font-size:20px;line-height:1.25;margin:0;color:var(--soft)}
+.s-note b{color:var(--ink)}
+.s-tstart{display:flex;align-items:center;gap:10px;min-height:56px;border:2.5px solid var(--ink);background:#fff;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;padding:6px 16px;font-family:var(--hand);font-weight:700;font-size:19px;justify-self:start}
+.s-tstart .ico{width:26px;height:26px}
+.s-chk{border:2.5px solid var(--coral);background:#FFF1EC;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;font-family:var(--hand);font-size:19px;font-weight:700}
+.s-chk .ico{width:28px;height:28px;color:var(--coral)}
+.s-nav{display:flex;gap:12px}
+.s-nav .s-btn{flex:1}
+.s-back{min-height:58px;padding:0 16px;border:2.5px solid var(--ink);background:var(--page);border-radius:4px;font-family:var(--hand);font-weight:700;font-size:20px}
+.s-back[disabled]{opacity:.45;cursor:not-allowed}
+.s-tabs{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-top:-4px}
+.s-tabs i{height:16px;border-radius:0 0 6px 6px;background:rgba(255,255,255,.45)}
+.s-tabs i.done{background:var(--teal)}
+.s-tabs i.cur{background:var(--coral)}
+.s-timers{display:flex;flex-wrap:wrap;gap:14px;min-height:112px;align-items:flex-start}
+.s-timers .empty{font-family:var(--hand);font-size:20px;align-self:center}
+.s-timer{display:grid;justify-items:center;gap:0;width:112px;text-align:center;background:#FFFDF8;padding:8px 6px 8px;transform:rotate(-2deg);box-shadow:0 4px 8px -4px rgba(0,0,0,.35)}
+.s-timer:nth-child(even){transform:rotate(2.5deg)}
+.s-timer .dial{width:78px;height:78px;border:0;background:transparent;padding:0}
+.s-timer .dial svg{width:100%;height:100%;overflow:visible}
+.s-timer.ringing .dial svg{animation:wobble .5s ease-in-out infinite}
+.s-timer .lb{font-family:var(--hand);font-size:17px;line-height:1.05}
+.s-timer .tt{font-family:var(--disp);font-size:17px;font-variant-numeric:tabular-nums;color:var(--coral)}
+.s-timer.ended .tt{font-family:var(--hand);font-size:16px}
+.s-timer .stop{border:0;background:var(--coral);color:#fff;font-family:var(--hand);font-weight:700;font-size:17px;min-height:44px;padding:2px 12px;border-radius:4px}
+
+.s-prog{display:grid;gap:16px}
+.s-spread{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 10px;padding:22px 14px 14px}
+@media (max-width:520px){.s-spread{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.s-spread .s-pola{padding:6px 6px 0}
+.s-spread .s-pola figcaption{font-size:15px;padding:2px 0 4px}
+.s-spread .s-pola:nth-child(3n){transform:rotate(3deg)}
+.s-spread .s-pola:nth-child(3n+1){transform:rotate(-2.5deg)}
+.s-spread .s-pola:nth-child(3n+2){transform:rotate(1deg)}
+.s-pola.blank svg{background:transparent;border:2px dashed #C9BBA2}
+.s-stickers{display:flex;flex-wrap:wrap;gap:6px 4px;justify-content:center}
+.s-stickers figure{margin:0;display:grid;justify-items:center;width:72px;font-family:var(--hand);font-size:15px;line-height:1.05;text-align:center}
+.s-stickers svg{width:52px;height:52px;filter:drop-shadow(2.5px 0 0 #fff) drop-shadow(-2.5px 0 0 #fff) drop-shadow(0 2.5px 0 #fff) drop-shadow(0 -2.5px 0 #fff) drop-shadow(1px 3px 2px rgba(0,0,0,.3))}
+.s-stickers figure:nth-child(odd) svg{transform:rotate(-9deg)}
+.s-stickers figure:nth-child(even) svg{transform:rotate(8deg)}
+.s-cover{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center;background:#2F5A63;color:#FBF6EA;padding:14px 16px;border-radius:4px 10px 10px 4px;box-shadow:inset 10px 0 0 #24474F,0 8px 16px -8px rgba(0,0,0,.5)}
+.s-cover svg{width:46px;height:74px}
+.s-cover b{font-family:var(--disp);font-weight:400;font-size:24px;display:block;line-height:1.1}
+.s-cover span{font-family:var(--hand);font-size:19px}
+.s-ranks{display:flex;gap:4px;margin-top:6px}
+.s-ranks i{flex:1;height:8px;background:rgba(255,255,255,.25);border-radius:2px}
+.s-ranks i.on{background:var(--mustard)}
+
+@media (prefers-reduced-motion: reduce){
+  .stage *{animation-name:fadein!important;animation-duration:.2s!important;animation-iteration-count:1!important;transition:none!important}
+}
+</style>
+
+<!-- ===== Art sprite: every illustration on this page is drawn here as SVG ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+  <pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><rect width="6" height="6" fill="#F8C9BC"/><line x1="0" y1="0" x2="0" y2="6" stroke="#EE8670" stroke-width="3"/></pattern>
+</defs>
+<!-- ingredients -->
+<symbol id="i-oil" viewBox="0 0 64 64"><rect x="26" y="2" width="12" height="7" rx="1.5" fill="#2B2A28"/><path d="M27 9h10v6l5 7v34a5 5 0 0 1-5 5H27a5 5 0 0 1-5-5V22l5-7z" fill="#C2C94F" stroke="#2B2A28" stroke-width="2.5" stroke-linejoin="round"/><path d="M22 33h20v15H22z" fill="#FFF3C4" stroke="#2B2A28" stroke-width="2"/><path d="M32 36c3.5 3 3.5 6.5 0 9-3.5-2.5-3.5-6 0-9z" fill="#5E7E25"/><path d="M27 24v6" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".7"/></symbol>
+<symbol id="i-onion" viewBox="0 0 64 64"><path d="M32 6c2 7 6 10 13 15 9 6 10 19 3 27-7 8-25 8-32 0-7-8-6-21 3-27 7-5 11-8 13-15z" fill="#E9B872" stroke="#2B2A28" stroke-width="2.5" stroke-linejoin="round"/><path d="M32 13c-4 10-6 23-3 42M32 13c4 10 6 23 3 42M31 14c-10 8-14 21-11 37M33 14c10 8 14 21 11 37" fill="none" stroke="#B57A36" stroke-width="1.8"/><path d="M27 57c2 3 8 3 10 0" stroke="#2B2A28" stroke-width="2.5" fill="none" stroke-linecap="round"/></symbol>
+<symbol id="i-pepper" viewBox="0 0 64 64"><path d="M32 13c-2-6 0-9 4-10" fill="none" stroke="#3E7A2E" stroke-width="4.5" stroke-linecap="round"/><path d="M20 16c6-4 10 0 12 0s6-4 12 0c8 5 10 16 8 26-2 12-10 18-14 16-3-1-4-3-6-3s-3 2-6 3c-4 2-12-4-14-16-2-10 0-21 8-26z" fill="#E0412F" stroke="#2B2A28" stroke-width="2.5" stroke-linejoin="round"/><path d="M24 23c-3 8-3 19 0 28" stroke="#FF917A" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M24 15c4 3 12 3 16 0" fill="#3E7A2E" stroke="#2B2A28" stroke-width="2"/></symbol>
+<symbol id="i-garlic" viewBox="0 0 64 64"><path d="M32 5c1 7 3 10 8 14 10 6 14 16 10 26-3 9-12 13-18 13s-15-4-18-13c-4-10 0-20 10-26 5-4 7-7 8-14z" fill="#F7F1E3" stroke="#2B2A28" stroke-width="2.5" stroke-linejoin="round"/><path d="M32 19c-6 8-7 26-1 38M32 19c6 8 7 26 1 38M23 25c-6 8-6 21 0 30M41 25c6 8 6 21 0 30" fill="none" stroke="#C7B595" stroke-width="1.8"/><path d="M26 58h12" stroke="#2B2A28" stroke-width="2.5" stroke-linecap="round"/><path d="M30 5c1 3 3 3 4 0" stroke="#8C9A5B" stroke-width="2" fill="none"/></symbol>
+<symbol id="i-cumin" viewBox="0 0 64 64"><rect x="19" y="4" width="26" height="11" rx="2" fill="#2B2A28"/><path d="M17 16h30v40a5 5 0 0 1-5 5H22a5 5 0 0 1-5-5z" fill="#FFFDF6" stroke="#2B2A28" stroke-width="2.5"/><path d="M19.5 34h25v21a3 3 0 0 1-3 3h-19a3 3 0 0 1-3-3z" fill="#A86B32"/><rect x="21" y="21" width="22" height="10" fill="#F6C945" stroke="#2B2A28" stroke-width="1.5"/><path d="M25 26h14" stroke="#2B2A28" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-paprika" viewBox="0 0 64 64"><rect x="19" y="4" width="26" height="11" rx="2" fill="#2B2A28"/><path d="M17 16h30v40a5 5 0 0 1-5 5H22a5 5 0 0 1-5-5z" fill="#FFFDF6" stroke="#2B2A28" stroke-width="2.5"/><path d="M19.5 34h25v21a3 3 0 0 1-3 3h-19a3 3 0 0 1-3-3z" fill="#C8321F"/><rect x="21" y="21" width="22" height="10" fill="#4E8B3A" stroke="#2B2A28" stroke-width="1.5"/><path d="M25 26h14" stroke="#fff" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-tomato" viewBox="0 0 64 64"><ellipse cx="32" cy="12" rx="17" ry="5" fill="#D7DDE0" stroke="#2B2A28" stroke-width="2.5"/><path d="M15 12v40c0 3.5 7.5 6.5 17 6.5s17-3 17-6.5V12" fill="#D7DDE0" stroke="#2B2A28" stroke-width="2.5"/><path d="M15.5 20c0 3.5 7.5 6.5 16.5 6.5s16.5-3 16.5-6.5v26c0 3.5-7.5 6.5-16.5 6.5S15.5 49.5 15.5 46z" fill="#D9412B"/><circle cx="32" cy="38" r="8.5" fill="#F25A40" stroke="#7A1E12" stroke-width="1.5"/><path d="M27.5 31l4.5 3.5 4.5-3.5" stroke="#3E7A2E" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="32" cy="12" rx="11" ry="2.5" fill="none" stroke="#9AA5AA" stroke-width="1.5"/></symbol>
+<symbol id="i-egg" viewBox="0 0 64 64"><path d="M32 5c10 0 19 16 19 30 0 13-8.5 23-19 23S13 48 13 35C13 21 22 5 32 5z" fill="#FFF1DA" stroke="#2B2A28" stroke-width="2.5"/><path d="M22 30c1-8 5-15 9-17" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="40" cy="42" r="1.6" fill="#D9B98C"/><circle cx="36" cy="49" r="1.2" fill="#D9B98C"/></symbol>
+
+<!-- dishes -->
+<symbol id="egg-fried" viewBox="-24 -18 48 36"><path d="M-20-2c0-10 12-15 21-13s18 6 16 15-11 13-21 11-16-4-16-13z" fill="#FFF8EC"/><circle cx="0" cy="-1" r="7.5" fill="#F6B21B"/><circle cx="-2.4" cy="-3.4" r="2.6" fill="#FFD966"/></symbol>
+<symbol id="dish-shak" viewBox="0 0 220 150">
+  <path d="M168 70l46-14a7 7 0 0 1 3 13l-45 16z" fill="#2B2A28"/>
+  <ellipse cx="96" cy="80" rx="90" ry="64" fill="#2B2A28"/>
+  <ellipse cx="96" cy="76" rx="81" ry="56" fill="#45423F"/>
+  <ellipse cx="96" cy="78" rx="74" ry="49" fill="#C2341E"/>
+  <path d="M36 66c14-9 28 5 42-3s28-13 40-3 24 4 32 9M40 96c12 5 26-6 40 0s26 8 38 2 22-6 30-2" stroke="#E25A33" stroke-width="7" fill="none" stroke-linecap="round" opacity=".75"/>
+  <circle cx="70" cy="58" r="2.5" fill="#8E1F12"/><circle cx="124" cy="104" r="2.5" fill="#8E1F12"/><circle cx="44" cy="84" r="2" fill="#8E1F12"/>
+  <use href="#egg-fried" x="34" y="44" width="48" height="36"/>
+  <use href="#egg-fried" x="94" y="36" width="48" height="36"/>
+  <use href="#egg-fried" x="66" y="80" width="48" height="36"/>
+  <use href="#egg-fried" x="120" y="76" width="44" height="33"/>
+  <use href="#egg-fried" x="28" y="80" width="40" height="30"/>
+  <g fill="#3E8B2E"><circle cx="88" cy="70" r="2.6"/><circle cx="140" cy="62" r="2.2"/><circle cx="60" cy="110" r="2.4"/><circle cx="112" cy="116" r="2.2"/><circle cx="150" cy="96" r="2.6"/><path d="M104 74l5-3 1 4z"/><path d="M48 70l4-4 2 4z"/><path d="M132 112l5-2v4z"/></g>
+</symbol>
+<symbol id="dish-bulgogi" viewBox="0 0 220 150">
+  <ellipse cx="110" cy="62" rx="88" ry="22" fill="#F7F3EA" stroke="#2B2A28" stroke-width="3"/>
+  <path d="M40 60c10-24 50-34 72-30s46 8 64 28" fill="#FFFDF8" stroke="#2B2A28" stroke-width="2.5"/>
+  <g stroke="#2B2A28" stroke-width="2" stroke-linejoin="round"><path d="M70 46c10-8 24-6 30 0-8 6-22 6-30 0z" fill="#7B3F1F"/><path d="M96 38c12-6 26-2 30 4-10 4-22 4-30-4z" fill="#8E4A23"/><path d="M118 50c10-6 26-4 32 2-10 6-24 6-32-2z" fill="#6E3518"/><path d="M84 56c10-4 22-2 28 4-10 4-22 2-28-4z" fill="#8E4A23"/></g>
+  <g fill="#5BA33A"><rect x="88" y="44" width="10" height="4" rx="2" transform="rotate(-20 93 46)"/><rect x="126" y="40" width="10" height="4" rx="2" transform="rotate(15 131 42)"/><rect x="106" y="56" width="9" height="4" rx="2"/></g>
+  <g fill="#F7F1E3"><circle cx="78" cy="40" r="1.6"/><circle cx="112" cy="48" r="1.6"/><circle cx="140" cy="46" r="1.6"/></g>
+  <path d="M22 62h176c0 44-38 76-88 76S22 106 22 62z" fill="#2F5D7C" stroke="#2B2A28" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M34 82h152" stroke="#F6C945" stroke-width="5"/>
+  <path d="M150 12l40 46M162 8l36 44" stroke="#B07A45" stroke-width="5" stroke-linecap="round"/>
+</symbol>
+<symbol id="dish-biscuit" viewBox="0 0 220 150">
+  <rect x="14" y="114" width="192" height="18" rx="7" fill="#B07A45" stroke="#2B2A28" stroke-width="3"/>
+  <g stroke="#2B2A28" stroke-width="3" stroke-linejoin="round">
+    <path d="M30 112V82c0-10 12-16 30-16s30 6 30 16v30z" fill="#E7A94F"/>
+    <path d="M128 112V80c0-10 12-16 30-16s30 6 30 16v32z" fill="#E7A94F"/>
+    <path d="M78 76V44c0-10 12-16 32-16s32 6 32 16v32z" fill="#F0B95A"/>
+  </g>
+  <g stroke="#B87A2A" stroke-width="2.5" fill="none"><path d="M34 92h52M34 102h52M132 90h52M132 100h52M82 54h56M82 64h56"/></g>
+  <path d="M90 36c8-4 30-4 40 0" stroke="#FFF1C9" stroke-width="4" stroke-linecap="round"/>
+  <rect x="96" y="86" width="26" height="14" rx="3" fill="#FFE27A" stroke="#2B2A28" stroke-width="2.5" transform="rotate(-6 109 93)"/>
+</symbol>
+<symbol id="plate" viewBox="0 0 100 100"><circle cx="50" cy="52" r="42" fill="#F4F4F0" stroke="#2B2A28" stroke-width="3"/><circle cx="50" cy="52" r="31" fill="none" stroke="#DADAD2" stroke-width="2"/><path d="M27 56c2-14 16-22 28-18s19 14 15 24-20 14-30 10-14-8-13-16z" fill="currentColor" stroke="#2B2A28" stroke-width="2.5"/><circle cx="42" cy="50" r="4" fill="#fff" opacity=".45"/><circle cx="58" cy="60" r="2.5" fill="#fff" opacity=".35"/></symbol>
+
+<!-- small icons (currentColor) -->
+<symbol id="i-clock" viewBox="0 0 48 48"><circle cx="24" cy="25" r="18" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M24 14v11l7 5" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18 4h12" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></symbol>
+<symbol id="i-people" viewBox="0 0 48 48"><circle cx="17" cy="16" r="7" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="33" cy="18" r="6" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M4 40c1-8 6-13 13-13s12 5 13 13M30 29c6 0 12 4 13 11" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></symbol>
+<symbol id="i-hat" viewBox="0 0 48 48"><path d="M13 30c-6-1-9-6-7.5-11s8-6.5 11-4.5C17.5 9 21 6 24 6s6.5 3 7.5 8.5c3-2 9.5-.5 11 4.5S41 29 35 30v10H13z" fill="#fff" stroke="currentColor" stroke-width="3.2" stroke-linejoin="round"/><path d="M13 34.5h22" stroke="currentColor" stroke-width="3.2"/><path d="M20 22v6M28 22v6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></symbol>
+<symbol id="i-spoon" viewBox="0 0 48 48"><ellipse cx="17" cy="14" rx="8" ry="11" transform="rotate(-35 17 14)" fill="#E2B57A" stroke="currentColor" stroke-width="3.2"/><path d="M22 21l20 21" stroke="currentColor" stroke-width="6" stroke-linecap="round"/><path d="M22 21l20 21" stroke="#E2B57A" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="i-lock" viewBox="0 0 48 48"><rect x="9" y="21" width="30" height="22" rx="4" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M15 21v-6a9 9 0 0 1 18 0v6" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="24" cy="31" r="3" fill="currentColor"/><path d="M24 33v4" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+<symbol id="i-thermo" viewBox="0 0 48 48"><circle cx="24" cy="37" r="7" fill="currentColor"/><path d="M20 31V9a4 4 0 0 1 8 0v22" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M24 34V18" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M31 12h5M31 19h5M31 26h5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></symbol>
+<symbol id="i-check" viewBox="0 0 32 32"><path d="M6 17l6 6L26 8" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-shield" viewBox="0 0 48 48"><path d="M24 4l17 6v12c0 11-7 18-17 22C14 40 7 33 7 22V10z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M16 23l6 6 11-12" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-flame" viewBox="0 0 48 48"><path d="M24 4c3 9 13 13 13 25a13 13 0 0 1-26 0c0-7 4-11 7-14 0 5 2 8 5 8-3-6-2-13 1-19z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/></symbol>
+<symbol id="i-sound" viewBox="0 0 48 48"><path d="M8 18h8l11-9v30l-11-9H8z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M33 17c3 4 3 10 0 14M38 12c6 7 6 17 0 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></symbol>
+<symbol id="i-mute" viewBox="0 0 48 48"><path d="M8 18h8l11-9v30l-11-9H8z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M33 19l10 10M43 19L33 29" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></symbol>
+<symbol id="i-wash" viewBox="0 0 48 48"><path d="M10 30c0-6 4-10 9-10h10l6 4c3 2 1 6-2 5l-6-2" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 30v10h20l8-6" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9" r="3" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="27" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="35" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="2.5"/></symbol>
+<!-- skill glyphs (white on enamel) -->
+<symbol id="g-knife" viewBox="0 0 24 24"><path d="M3 17L17 3c2 2 2 6-1 9l-6 6z" fill="currentColor"/><path d="M10 18l-3 3a2 2 0 0 1-3-3l3-3" fill="none" stroke="currentColor" stroke-width="2.4"/></symbol>
+<symbol id="g-flame" viewBox="0 0 24 24"><path d="M12 2c2 5 7 7 7 13a7 7 0 0 1-14 0c0-4 2-6 4-8 0 3 1 4 3 4-2-3-1-6 0-9z" fill="currentColor"/></symbol>
+<symbol id="g-whisk" viewBox="0 0 24 24"><path d="M12 13c-5-3-6-9-3-11s6 5 3 11zm0 0c5-3 6-9 3-11s-6 5-3 11z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 13v9" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
+<symbol id="g-leaf" viewBox="0 0 24 24"><path d="M4 20C4 9 11 3 21 3c0 10-6 17-17 17z" fill="currentColor"/><path d="M4 20L14 10" stroke="#00000033" stroke-width="2"/></symbol>
+<symbol id="g-pot" viewBox="0 0 24 24"><path d="M3 10h18v6a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z" fill="currentColor"/><path d="M1 10h22M9 3c-1 2 1 3 0 5M15 3c-1 2 1 3 0 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></symbol>
+<symbol id="g-drop" viewBox="0 0 24 24"><path d="M12 2c4 6 7 10 7 13a7 7 0 0 1-14 0c0-3 3-7 7-13z" fill="currentColor"/></symbol>
+<symbol id="g-wok" viewBox="0 0 24 24"><path d="M2 10h20a10 8 0 0 1-20 0z" fill="currentColor"/><path d="M22 10l2-3" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M8 7l2-4M13 6l1-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+<symbol id="g-dice" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1.5" fill="currentColor"/><rect x="13" y="3" width="8" height="8" rx="1.5" fill="currentColor"/><rect x="3" y="13" width="8" height="8" rx="1.5" fill="currentColor"/><rect x="13" y="13" width="8" height="8" rx="1.5" fill="currentColor" opacity=".5"/></symbol>
+
+<!-- test-kitchen stamp -->
+<symbol id="stamp-tk" viewBox="0 0 100 100"><g fill="none" stroke="currentColor"><circle cx="50" cy="50" r="47" stroke-width="3.5"/><circle cx="50" cy="50" r="31" stroke-width="2"/></g><path id="tkarc" d="M50 50m-39 0a39 39 0 1 1 78 0a39 39 0 1 1-78 0" fill="none"/><text font-size="9.6" font-weight="800" letter-spacing="1.5" fill="currentColor" font-family="Nunito,sans-serif"><textPath href="#tkarc">TEST KITCHEN • PARENT TESTED •</textPath></text><path d="M36 51l9 9 19-21" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="wrap">
+  <header class="hd">
+    <div>
+      <h1>Pick your kitchen</h1>
+      <p>Four ways the cooking app could look. Tap a kitchen, then try it: check off ingredients, flip through the cook steps, start a timer. Every kitchen earns the same rewards. Pick the one you'd want to cook with.</p>
+    </div>
+    <button class="snd" id="snd" type="button" data-act="sound" aria-pressed="true"></button>
+  </header>
+
+  <nav class="picker" id="picker" aria-label="Kitchens"></nav>
+  <p class="same" id="same"></p>
+
+  <main class="stage" id="stage" aria-live="off"></main>
+
+  <section class="cmp" aria-labelledby="cmp-h">
+    <h2 id="cmp-h">Same rewards, four looks</h2>
+    <p>Underneath, every kitchen tracks the same things. Each one just draws them its own way.</p>
+    <div class="cmpt"><table>
+      <thead><tr><th scope="col"><span class="sr" hidden>What</span></th><th scope="col">Chef's Passport</th><th scope="col">Kitchen Quest</th><th scope="col">Food Truck</th><th scope="col">Recipe Scrapbook</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Each dish</th><td>An inked stamp in your passport</td><td>A cleared quest on the skill tree</td><td>A new item on your truck's menu board</td><td>A photo page in your scrapbook</td></tr>
+        <tr><th scope="row">Each skill</th><td>An enamel pin on your apron</td><td>A lit node on the skill path</td><td>A bumper sticker on the truck</td><td>A sticker on the page</td></tr>
+        <tr><th scope="row">Your rank</th><td>A taller chef's hat</td><td>Your level and title</td><td>A bigger truck</td><td>A new bookmark on the cover</td></tr>
+        <tr><th scope="row">Ranks</th><td colspan="4">Kitchen Apprentice → Prep Cook → Line Cook → Sous Chef → Head Chef, the same in every kitchen</td></tr>
+      </tbody>
+    </table></div>
+  </section>
+
+  <p class="foot">This is a mockup for picking a look. Nothing you tap here is saved. The real app will have the full lesson, and each person in the family can pick a different kitchen.</p>
+</div>
+
+<script>
+(function(){
+"use strict";
+/* ---------- content (lesson 4, Shakshuka, serves 4) ---------- */
+const ING=[
+  {id:'oil',name:'Olive oil',amt:'2 tbsp'},
+  {id:'onion',name:'Yellow onion',amt:'1 medium, diced'},
+  {id:'pepper',name:'Red bell pepper',amt:'1, diced'},
+  {id:'garlic',name:'Garlic',amt:'3 cloves, minced'},
+  {id:'cumin',name:'Ground cumin',amt:'1 tsp'},
+  {id:'paprika',name:'Smoked paprika',amt:'1 tsp'},
+  {id:'tomato',name:'Crushed tomatoes',amt:'1 can (28 oz)'},
+  {id:'egg',name:'Eggs',amt:'6 large'}
+];
+const STEPS=[
+  {t:"Warm the olive oil in a 12-inch skillet over medium heat. Add the onion and pepper. Cook, stirring now and then, until soft.",timer:{label:"Onion & pepper",sec:360},look:"The onion turns see-through and golden at the edges."},
+  {t:"Stir in the garlic, cumin, and paprika. Cook just until it smells toasty.",timer:{label:"Spices",sec:60},tip:"Spices burn fast. Keep the spoon moving."},
+  {t:"Pour in the tomatoes and ½ teaspoon salt. Let it bubble gently until it thickens.",timer:{label:"Simmer sauce",sec:600},look:"A spoon dragged through the sauce leaves a trail for a second."},
+  {t:"Make 6 wells in the sauce with the back of a spoon. Crack an egg into each well.",tip:"Crack each egg into a small cup first, so shell bits stay out of the pan."},
+  {t:"Wash your hands with soap, and wipe the counter where the eggs were.",tip:"Raw egg can carry germs. Clean hands before you touch anything else.",solo:true},
+  {t:"Cover the pan and cook until the whites are completely set.",timer:{label:"Eggs",sec:420},check:"I checked an egg white with the thermometer: 160°F"}
+];
+/* Progress: 8 dishes cooked, Shakshuka is next */
+const DONE=[
+  {n:'Spring rolls',c:'Vietnamese',col:'#8CC084',d:'Sep 3'},
+  {n:'Fattoush',c:'Lebanese',col:'#7DB451',d:'Sep 10'},
+  {n:'Fish tacos',c:'Mexican',col:'#F2A33A',d:'Sep 17'},
+  {n:'Chicken Caesar',c:'American',col:'#C9D96B',d:'Sep 24'},
+  {n:'Smash burgers',c:'American',col:'#8A4B2A',d:'Oct 1'},
+  {n:'French omelet',c:'French',col:'#F6D04D',d:'Oct 4'},
+  {n:'Fried rice',c:'Chinese',col:'#E3B04B',d:'Oct 8'},
+  {n:'Oyakodon',c:'Japanese',col:'#F0C05A',d:'Oct 15'}
+];
+const SKILLS=[
+  {n:'Julienne',g:'g-knife',shape:'circle',col:'#D9412B'},
+  {n:'Fine chopping',g:'g-leaf',shape:'hex',col:'#4E8B3A'},
+  {n:'Dicing',g:'g-dice',shape:'shield',col:'#22406B'},
+  {n:'Whisking',g:'g-whisk',shape:'circle',col:'#C98A1B'},
+  {n:'Thin slicing',g:'g-knife',shape:'hex',col:'#7A3E8E'},
+  {n:'Heat control',g:'g-flame',shape:'shield',col:'#E0612F'},
+  {n:'Stir-fry',g:'g-wok',shape:'circle',col:'#2E7D7A'},
+  {n:'Simmering',g:'g-pot',shape:'hex',col:'#B0412E'}
+];
+const RANKS=['Kitchen Apprentice','Prep Cook','Line Cook','Sous Chef','Head Chef'];
+const RANK_AT=[0,5,15,30,45];
+const cooked=DONE.length, rankIdx=2-1; // Prep Cook
+const toNext=RANK_AT[rankIdx+1]-cooked;
+
+/* ---------- state ---------- */
+const S={theme:'passport',got:new Set(['oil','onion','pepper','garlic','cumin']),step:2,confirm:false,sound:true,fx:{}};
+const now0=Date.now();
+const T=STEPS.map(s=>s.timer?{label:s.timer.label,sec:s.timer.sec,state:'idle',endAt:0,left:s.timer.sec,ringing:false}:null);
+T[0].state='ended';T[0].endAt=now0-3*60e3;T[0].left=0;
+T[2].state='run';T[2].endAt=now0+504e3;
+try{const v=localStorage.getItem('kitchen-sound');if(v==='off')S.sound=false;}catch(e){}
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const ic=(id,cls='ico')=>`<svg class="${cls}" aria-hidden="true"><use href="#${id}"/></svg>`;
+const fmt=s=>{s=Math.ceil(s);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function rem(t){if(t.state==='run')return Math.max(0,(t.endAt-Date.now())/1000);if(t.state==='paused')return t.left;if(t.state==='idle')return t.sec;return 0}
+function tText(t){
+  if(t.state!=='ended')return fmt(rem(t));
+  if(t.ringing)return "Time's up!";
+  const m=Math.floor((Date.now()-t.endAt)/60000);
+  return m<1?'Ended just now':`Ended ${m} min ago`;
+}
+function tCls(t){return t.state+(t.ringing?' ringing':'')}
+function wedge(cx,cy,r,f){
+  if(f<=0.001)return'';
+  if(f>=.999)return`M${cx-r} ${cy}a${r} ${r} 0 1 0 ${2*r} 0a${r} ${r} 0 1 0 ${-2*r} 0`;
+  const a=2*Math.PI*f,x=cx+r*Math.sin(a),y=cy-r*Math.cos(a);
+  return`M${cx} ${cy}L${cx} ${cy-r}A${r} ${r} 0 ${f>.5?1:0} 1 ${x.toFixed(2)} ${y.toFixed(2)}Z`;
+}
+function ticks(cx,cy,r1,r2,n,stroke,w){let o='';for(let i=0;i<n;i++){const a=2*Math.PI*i/n,s=Math.sin(a),c=Math.cos(a);o+=`<line x1="${(cx+r1*s).toFixed(1)}" y1="${(cy-r1*c).toFixed(1)}" x2="${(cx+r2*s).toFixed(1)}" y2="${(cy-r2*c).toFixed(1)}" stroke="${stroke}" stroke-width="${i%(n/4)===0?w*1.8:w}" stroke-linecap="round"/>`}return o}
+function hex(cx,cy,r){let p=[];for(let i=0;i<6;i++){const a=Math.PI/3*i-Math.PI/2;p.push((cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1))}return p.join(' ')}
+const started=()=>T.map((t,i)=>t&&t.state!=='idle'?i:-1).filter(i=>i>=0);
+const allGot=()=>S.got.size===ING.length;
+const stepCanAdvance=()=>!STEPS[S.step].check||S.confirm;
+const safety=s=>s.solo?{icon:'i-spoon',head:'Solo',line:"You've got this one on your own."}:{icon:'i-hat',head:'Adult nearby',line:'A grown-up stays in the kitchen while the stove is on.'};
+function heap(spots,size){let k=0;return ING.filter(i=>S.got.has(i.id)).map(i=>{const[x,y]=spots[k++];return`<use href="#i-${i.id}" x="${x}" y="${y}" width="${size}" height="${size}" class="${S.fx.hop===i.id?'pop':''}"/>`}).join('')}
+function pinShape(shape,col){
+  if(shape==='hex')return`<polygon points="${hex(24,24,22)}" fill="${col}" stroke="#F6C945" stroke-width="3"/>`;
+  if(shape==='shield')return`<path d="M24 2l20 6v14c0 12-9 20-20 24C13 42 4 34 4 22V8z" fill="${col}" stroke="#F6C945" stroke-width="3"/>`;
+  return`<circle cx="24" cy="24" r="21" fill="${col}" stroke="#F6C945" stroke-width="3"/>`;
+}
+function stepNote(s,th){
+  const cls={passport:'pp-note',quest:'q-note',truck:'t-note',scrap:'s-note'}[th];
+  if(s.look)return`<p class="${cls}"><b>Should look like:</b> ${s.look}</p>`;
+  if(s.tip)return`<p class="${cls}"><b>Tip:</b> ${s.tip}</p>`;
+  return'';
+}
+function checkBtn(s,cls){
+  if(!s.check)return'';
+  return`<button type="button" class="chk ${cls}" data-act="confirm" aria-pressed="${S.confirm}">${ic('i-thermo')}<span class="box">${ic('i-check','')}</span><span>${s.check}</span></button>`;
+}
+function startBtn(cls,iconCls){
+  const t=T[S.step];if(!t)return'';
+  if(t.state==='idle')return`<button type="button" class="${cls}" data-act="tstart" data-i="${S.step}">${ic('i-clock')}Start the ${fmt(t.sec)} timer</button>`;
+  return'';
+}
+function navBtns(pre,nextCls){
+  const last=S.step===STEPS.length-1,dis=!stepCanAdvance();
+  return`<div class="${pre}-nav"><button type="button" class="${pre}-back" data-act="back" ${S.step===0?'disabled':''}>Back</button><button type="button" class="${nextCls}" data-act="next" ${dis?'disabled':''}>${last?'Plate it':'Next step'}</button></div>`;
+}
+function gate(cls,lockedText,btnCls,btnText){
+  if(allGot())return`<div class="gate"><button type="button" class="${btnCls}" data-act="goto" data-to="cook">${btnText}</button></div>`;
+  return`<p class="gate ${cls}">${ic('i-lock')}${lockedText}</p>`;
+}
+
+/* ================= THEME 1: CHEF'S PASSPORT ================= */
+const passport={
+  name:"Chef's Passport",blurb:'Collect a stamp for every dish and climb the chef ranks.',
+  sw:`<svg viewBox="0 0 200 54" preserveAspectRatio="xMidYMid slice"><rect width="200" height="54" fill="#C79762"/><rect x="14" y="8" width="70" height="52" fill="#FFF8E7" transform="rotate(-4 49 34)"/><rect x="26" y="4" width="34" height="10" fill="#F6E296" opacity=".85" transform="rotate(-8 43 9)"/><circle cx="140" cy="27" r="19" fill="none" stroke="#D9412B" stroke-width="4"/><circle cx="140" cy="27" r="12" fill="none" stroke="#D9412B" stroke-width="2"/><rect x="170" y="10" width="22" height="34" fill="#22406B"/></svg>`,
+  lib(){return`
+  <div class="pp-lib">
+    <article class="pp-card pp-main">
+      <i class="tape t1"></i><i class="tape t2"></i>
+      <svg class="pp-dish" aria-label="Shakshuka in a skillet"><use href="#dish-shak"/></svg>
+      <svg class="pp-tk" role="img" aria-label="Test-kitchen stamp: a parent cooked this first"><use href="#stamp-tk"/></svg>
+      <h4 class="pp-title">Shakshuka</h4>
+      <p class="pp-skill">Skill: building a sauce, then poaching eggs in it</p>
+      <div class="pp-meta"><span>${ic('i-clock')}35 min</span><span>${ic('i-people')}Serves 4</span><span>${ic('i-hat')}Adult nearby</span></div>
+      <button type="button" class="pp-btn" data-act="goto" data-to="prep">Let's cook</button>
+    </article>
+    <div class="pp-minis">
+      <article class="pp-card pp-mini r1"><i class="tape t1"></i><svg aria-hidden="true"><use href="#dish-bulgogi"/></svg><h5>Beef bulgogi</h5><p>thin slicing</p></article>
+      <article class="pp-card pp-mini r2"><i class="tape t2"></i><svg aria-hidden="true"><use href="#dish-biscuit"/></svg><h5>Buttermilk biscuits</h5><p>cutting in cold butter</p></article>
+    </div>
+  </div>`},
+  prep(){
+    const spots=[[24,52],[68,56],[112,56],[156,52],[46,30],[90,32],[134,30],[90,8]];
+    return`
+  <div class="pp-prep">
+    <div class="pp-bowlwrap">
+      <svg class="pp-bowl" viewBox="0 0 240 182" role="img" aria-label="Mixing bowl with ${S.got.size} of 8 ingredients">
+        <ellipse cx="120" cy="96" rx="104" ry="16" fill="#BFAE8F" stroke="#2B2A28" stroke-width="3"/>
+        <g>${heap(spots,56)}</g>
+        <path d="M14 96H226C226 150 180 178 120 178S14 150 14 96Z" fill="#F4EBD8" stroke="#2B2A28" stroke-width="3" stroke-linejoin="round"/>
+        <path d="M22 116H218" stroke="#D9412B" stroke-width="7"/><path d="M34 132H206" stroke="#D9412B" stroke-width="3"/>
+        <path d="M40 104c10 18 30 30 50 34" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/>
+      </svg>
+      <p class="pp-count">${S.got.size} of 8 in the bowl</p>
+    </div>
+    <div class="pp-card pp-list"><i class="tape t1"></i>
+      <h4 class="pp-h">Ingredients <span class="hand">for 4</span></h4>
+      ${ING.map(it=>`<button type="button" class="pp-item ${S.got.has(it.id)?'on':''} ${S.fx.hop===it.id?'hop':''}" data-act="toggle" data-id="${it.id}" aria-pressed="${S.got.has(it.id)}">${ic('i-'+it.id,'ii')}<span class="nm">${it.name}<small>${it.amt}</small></span><svg class="pp-ck" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M9 16l5 5 9-10"/></svg></button>`).join('')}
+      ${gate('pp-gate','Fill the bowl to unlock cook mode','pp-btn','Start cooking')}
+    </div>
+  </div>`},
+  timer(t,i){
+    const f=rem(t)/t.sec;
+    return`<div class="pp-timer ${tCls(t)}" data-timer="${i}">
+      <button type="button" class="dial" data-act="${t.state==='ended'?'tclear':'ttoggle'}" data-i="${i}" aria-label="${t.label} timer: ${t.state==='run'?'pause':t.state==='paused'?'resume':'clear'}">
+      <svg viewBox="0 0 100 112" aria-hidden="true"><rect x="38" y="0" width="24" height="16" rx="4" fill="#2B2A28"/><circle cx="50" cy="62" r="46" fill="#D9412B" stroke="#2B2A28" stroke-width="3"/><circle cx="50" cy="62" r="38" fill="#FFF8E7"/>
+      <path data-tfrac="${i}" data-kind="wedge" data-cx="50" data-cy="62" data-r="36" fill="#F6C945" d="${wedge(50,62,36,f)}"/>${ticks(50,62,30,36,12,'#2B2A28',2)}<circle cx="50" cy="62" r="7" fill="#2B2A28"/><path d="M50 62V30" stroke="#2B2A28" stroke-width="3" stroke-linecap="round"/></svg></button>
+      <span class="lb">${t.label}</span><span class="tt" data-tdisp="${i}">${tText(t)}</span>
+      ${t.ringing?`<button type="button" class="stop" data-act="tclear" data-i="${i}">Stop</button>`:''}</div>`},
+  cook(){
+    const s=STEPS[S.step],sf=safety(s),f=S.step/STEPS.length,st=started();
+    return`
+  <div class="pp-cook">
+    <div class="pp-banner" role="note">${ic(sf.icon)}<div><b>${sf.head}</b>${sf.line}</div></div>
+    <div class="pp-cookbody">
+      <article class="pp-card pp-step ${S.fx.flip?'flip':''}">
+        <p class="pp-stepno">Step ${S.step+1} of ${STEPS.length}</p>
+        <p class="steptxt">${s.t}</p>
+        ${stepNote(s,'passport')}${checkBtn(s,'pp-chk')}${startBtn('pp-tstart')}
+      </article>
+      <div class="pp-cup"><svg viewBox="0 0 120 150" role="img" aria-label="${S.step} of ${STEPS.length} steps done">
+        <defs><clipPath id="cupclip"><path d="M14 22h78l-7 116H21z"/></clipPath></defs>
+        <path d="M92 44c24 0 26 46 0 50" fill="none" stroke="#2B2A28" stroke-width="9" stroke-linecap="round"/>
+        <path d="M14 22h78l-7 116H21z" fill="rgba(255,255,255,.75)"/>
+        <g clip-path="url(#cupclip)"><rect x="0" y="${(138-116*f).toFixed(1)}" width="120" height="${(116*f+2).toFixed(1)}" fill="#D9412B"/><rect x="0" y="${(138-116*f).toFixed(1)}" width="120" height="5" fill="#F06A50"/></g>
+        <path d="M14 22h78l-7 116H21z" fill="none" stroke="#2B2A28" stroke-width="3.5" stroke-linejoin="round"/>
+        <path d="M22 51h14M22 80h20M22 109h14" stroke="#2B2A28" stroke-width="2.5"/>
+      </svg><span>${S.step} of ${STEPS.length} done</span></div>
+    </div>
+    ${navBtns('pp','pp-btn')}
+    <div class="pp-counter" aria-label="Timers on the counter">${st.length?st.map(i=>this.timer(T[i],i)).join(''):'<span class="empty">No timers going. Start one from a step.</span>'}</div>
+  </div>`},
+  prog(){
+    const stamp=(name,c,done,rot,col,shape,next)=>{
+      if(!done)return`<div class="pp-st empty ${next?'next':''}"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="5 6"/>${next?'<text x="50" y="56" text-anchor="middle" font-size="15">NEXT</text>':''}</svg><span>${name}</span></div>`;
+      const sh=shape==='rect'?`<rect x="10" y="18" width="80" height="64" rx="5" fill="none" stroke="currentColor" stroke-width="4"/><rect x="16" y="24" width="68" height="52" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>`
+        :shape==='hex'?`<polygon points="${hex(50,50,44)}" fill="none" stroke="currentColor" stroke-width="4"/><polygon points="${hex(50,50,37)}" fill="none" stroke="currentColor" stroke-width="1.5"/>`
+        :`<circle cx="50" cy="50" r="43" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" stroke-width="1.5"/>`;
+      return`<div class="pp-st" style="--rot:${rot}deg;--sc:${col}"><svg viewBox="0 0 100 100" aria-hidden="true">${sh}<text x="50" y="48" text-anchor="middle" font-size="${c.length>8?11:14}">${c.toUpperCase()}</text><text x="50" y="64" text-anchor="middle" font-size="11" font-family="Nunito" font-weight="800">${DONE.find(d=>d.n===name)?.d.toUpperCase()||''}</text></svg><span>${name}</span></div>`;
+    };
+    const hat=(k,cls)=>{const w=24+k*5;return`<svg viewBox="0 0 48 48" aria-hidden="true"><use href="#i-hat" x="${(48-w)/2}" y="${48-w}" width="${w}" height="${w}" class="${cls}"/></svg>`};
+    return`
+  <div class="pp-pass">
+    <div class="pp-book" aria-label="Passport pages">
+      <div class="pp-page"><h5>Middle East &amp; North Africa</h5><div class="pp-stamps">
+        ${stamp('Fattoush','Lebanese',1,-8,'#2E7D7A','circle')}${stamp('Shakshuka','',0,0,'',0,1)}${stamp('Chicken tagine','',0,0)}
+      </div></div>
+      <div class="pp-page"><h5>East &amp; Southeast Asia</h5><div class="pp-stamps">
+        ${stamp('Spring rolls','Vietnamese',1,6,'#D9412B','rect')}${stamp('Fried rice','Chinese',1,-5,'#22406B','hex')}${stamp('Oyakodon','Japanese',1,9,'#7A3E8E','circle')}
+        ${stamp('Beef bulgogi','',0,0)}${stamp('Gyoza','',0,0)}
+      </div></div>
+    </div>
+    <div class="pp-rank"><h5>${RANKS[rankIdx]}</h5><p>${cooked} dishes cooked. ${toNext} more to Line Cook.</p>
+      <div class="pp-hats">${RANKS.map((r,k)=>{const cls=k<rankIdx?'got':k===rankIdx?'cur':'fut';return`<div class="${cls}">${hat(k,cls)}${r}</div>`}).join('')}</div>
+    </div>
+    <div class="pp-apron" aria-label="Skill pins">${SKILLS.map(p=>`<div class="pin"><svg viewBox="0 0 48 48" aria-hidden="true">${pinShape(p.shape,p.col)}<use href="#${p.g}" x="13" y="13" width="22" height="22" color="#fff"/></svg>${p.n}</div>`).join('')}</div>
+  </div>`}
+};
+
+/* ================= THEME 2: KITCHEN QUEST ================= */
+const quest={
+  name:'Kitchen Quest',blurb:'Clear quests to light up skill paths and level up.',
+  sw:`<svg viewBox="0 0 200 54" preserveAspectRatio="xMidYMid slice"><rect width="200" height="54" fill="#161A31"/><path d="M40 44L70 22L100 36L130 14L160 30" stroke="#3D4985" stroke-width="4" fill="none"/><g fill="#F2B640"><polygon points="${hex(40,44,9)}"/><polygon points="${hex(70,22,9)}"/><polygon points="${hex(100,36,9)}"/></g><polygon points="${hex(130,14,9)}" fill="#161A31" stroke="#5BD6C8" stroke-width="3"/><polygon points="${hex(160,30,9)}" fill="#232A4E" stroke="#3D4985" stroke-width="3"/></svg>`,
+  lib(){return`
+  <h4 class="q-h">Quest board</h4>
+  <article class="q-panel q-main">
+    <div class="q-win"><svg aria-label="Shakshuka in a skillet"><use href="#dish-shak"/></svg></div>
+    <div><p class="q-kick">Stovetop path · Quest 4</p><h5 class="q-title">Shakshuka</h5></div>
+    <p class="q-skill">Clears the node: <b>Building a sauce</b></p>
+    <dl class="q-stats">
+      <div><dt>${ic('i-clock')}Time</dt><dd>35 min</dd></div>
+      <div><dt>${ic('i-people')}Feeds</dt><dd>4</dd></div>
+      <div><dt>${ic('i-hat')}Safety</dt><dd>Adult nearby</dd></div>
+      <div><dt>${ic('i-flame')}Heat</dt><dd>Stovetop</dd></div>
+    </dl>
+    <p class="q-tk">${ic('i-shield')}Test-cooked by a parent</p>
+    <button type="button" class="q-btn" data-act="goto" data-to="prep">Start quest</button>
+  </article>
+  <div class="q-row">
+    <article class="q-panel q-mini"><svg aria-hidden="true"><use href="#dish-biscuit"/></svg><p class="q-kick">Dough path</p><h5>Buttermilk biscuits</h5></article>
+    <article class="q-panel q-mini locked"><svg aria-hidden="true"><use href="#dish-bulgogi"/></svg><p class="q-kick">Meat path</p><h5>Beef bulgogi</h5><p class="q-lock">${ic('i-lock')}Not on your queue yet</p></article>
+  </div>`},
+  prep(){return`
+  <h4 class="q-h">Gather supplies <span>${S.got.size}/8</span></h4>
+  <div class="q-meter" aria-hidden="true">${ING.map((_,k)=>`<i class="${k<S.got.size?'on':''}"></i>`).join('')}</div>
+  <div class="q-inv">${ING.map(it=>`<button type="button" class="q-slot ${S.got.has(it.id)?'on':''} ${S.fx.hop===it.id?'hop':''}" data-act="toggle" data-id="${it.id}" aria-pressed="${S.got.has(it.id)}">${ic('i-'+it.id,'ii')}<span class="nm">${it.name}</span><span class="amt">${it.amt}</span></button>`).join('')}</div>
+  ${gate('q-gate','The kitchen gate opens when all 8 are gathered','q-btn','Enter the kitchen')}`},
+  timer(t,i){
+    const f=rem(t)/t.sec,C=2*Math.PI*40;
+    return`<div class="q-timer ${tCls(t)}" data-timer="${i}">
+      <button type="button" class="dial" data-act="${t.state==='ended'?'tclear':'ttoggle'}" data-i="${i}" aria-label="${t.label} timer">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="#1A2042" stroke="#3D4985" stroke-width="9"/>
+      <circle data-tfrac="${i}" data-kind="arc" data-c="${C.toFixed(1)}" cx="50" cy="50" r="40" fill="none" stroke="${t.state==='paused'?'#A6AED8':'#5BD6C8'}" stroke-width="9" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C*(1-f)).toFixed(1)}" transform="rotate(-90 50 50)"/>
+      ${ticks(50,50,46,49,8,'#F2B640',2.5)}
+      <text x="50" y="57" text-anchor="middle" font-size="20" data-tdisp="${i}">${t.state==='ended'?(t.ringing?'DONE!':'Done'):fmt(rem(t))}</text></svg></button>
+      <span class="lb">${t.label}${t.state==='ended'&&!t.ringing?`<br><span data-tago="${i}">${tText(t)}</span>`:''}</span>
+      ${t.ringing?`<button type="button" class="stop" data-act="tclear" data-i="${i}">Stop</button>`:''}</div>`},
+  cook(){
+    const s=STEPS[S.step],sf=safety(s),st=started();
+    return`
+  <div class="q-cook">
+    <div class="q-banner" role="note">${ic(sf.icon)}<div><b>${sf.head}</b>${sf.line}</div></div>
+    <div class="q-stages" aria-label="Stage ${S.step+1} of ${STEPS.length}">${STEPS.map((_,k)=>`<i class="${k<S.step?'done':k===S.step?'cur':''}"></i>`).join('')}</div>
+    <article class="q-panel q-log ${S.fx.flip?'flip':''}">
+      <p class="q-kick">Stage ${S.step+1} of ${STEPS.length}</p>
+      <p class="steptxt">${s.t}</p>
+      ${stepNote(s,'quest')}${checkBtn(s,'q-chk')}${startBtn('q-tstart')}
+    </article>
+    ${navBtns('q','q-btn')}
+    <div class="q-timers" aria-label="Timers">${st.length?st.map(i=>this.timer(T[i],i)).join(''):'<span class="empty">No timers running.</span>'}</div>
+  </div>`},
+  prog(){
+    const paths=[
+      {n:'Knife',x:48,nodes:['lit','lit','lit','lit','lit']},
+      {n:'Stovetop',x:136,nodes:['lit','lit','lit','next','off']},
+      {n:'Spices',x:224,nodes:['off','off','off','off','off']},
+      {n:'Dough',x:312,nodes:['off','off','off','off','off']}
+    ];
+    const ys=[236,192,148,104,60];
+    let g='';
+    paths.forEach(p=>{
+      g+=`<path d="M180 290 C180 268 ${p.x} 270 ${p.x} ${ys[0]}" fill="none" stroke="${p.nodes[0]==='lit'?'#F2B640':'#3D4985'}" stroke-width="4"/>`;
+      for(let k=1;k<5;k++)g+=`<line x1="${p.x}" y1="${ys[k-1]}" x2="${p.x}" y2="${ys[k]}" stroke="${p.nodes[k]==='lit'?'#F2B640':p.nodes[k]==='next'?'#5BD6C8':'#3D4985'}" stroke-width="4" ${p.nodes[k]==='off'?'stroke-dasharray="4 5"':''}/>`;
+      p.nodes.forEach((s,k)=>{
+        const fill=s==='lit'?'#F2B640':s==='next'?'#161A31':'#232A4E',stroke=s==='lit'?'#FFE3A0':s==='next'?'#5BD6C8':'#3D4985';
+        g+=`<polygon points="${hex(p.x,ys[k],15)}" fill="${fill}" stroke="${stroke}" stroke-width="3" ${s==='next'?'style="animation:pulse 1.4s infinite"':''}/>`;
+        if(s==='lit')g+=`<use href="#i-check" x="${p.x-8}" y="${ys[k]-8}" width="16" height="16" color="#241A05"/>`;
+        if(s==='off'&&k===0)g+=`<use href="#i-lock" x="${p.x-8}" y="${ys[k]-8}" width="16" height="16" color="#6A74AE"/>`;
+      });
+      g+=`<text x="${p.x}" y="30" text-anchor="middle" font-size="15" fill="${p.nodes[0]==='lit'?'#F2B640':'#6A74AE'}">${p.n.toUpperCase()}</text>`;
+    });
+    return`
+  <h4 class="q-h">Skill tree</h4>
+  <div class="q-tree q-panel" style="padding:10px 6px 0"><svg viewBox="0 0 360 310" role="img" aria-label="Skill tree: Knife path complete, Stovetop path 3 of 5, Spices and Dough paths not started">${g}<polygon points="${hex(180,292,13)}" fill="#5BD6C8"/></svg></div>
+  <div class="q-panel q-lvl">
+    <svg viewBox="0 0 64 64" aria-hidden="true"><polygon points="${hex(32,32,30)}" fill="#2B3260" stroke="#F2B640" stroke-width="3"/><use href="#i-hat" x="14" y="12" width="36" height="36" color="#F2B640"/><text x="32" y="58" text-anchor="middle" font-family="Pixelify Sans" font-weight="700" font-size="12" fill="#5BD6C8">LV ${rankIdx+1}</text></svg>
+    <b>${RANKS[rankIdx]}</b>
+    <div class="q-xp" role="img" aria-label="${cooked} of ${RANK_AT[rankIdx+1]} quests to Line Cook"><i style="width:calc(${((cooked-RANK_AT[rankIdx])/(RANK_AT[rankIdx+1]-RANK_AT[rankIdx])*100).toFixed(0)}% - 6px)"></i></div>
+    <span>${cooked} quests cleared · ${toNext} more to reach Line Cook</span>
+  </div>`}
+};
+
+/* ================= THEME 3: FOOD TRUCK ================= */
+const tierSVG=k=>{
+  const wheel=(x)=>`<circle cx="${x}" cy="40" r="5" fill="#1D2426"/><circle cx="${x}" cy="40" r="2" fill="#D5DEE2"/>`;
+  if(k===0)return`<svg viewBox="0 0 80 48" aria-hidden="true"><rect x="22" y="18" width="30" height="18" rx="2" fill="#F5B72A" stroke="#1D2426" stroke-width="2.5"/><path d="M52 22l14-8" stroke="#1D2426" stroke-width="3" stroke-linecap="round"/>${wheel(37)}</svg>`;
+  if(k===1)return`<svg viewBox="0 0 80 48" aria-hidden="true"><path d="M16 14h48l-4 8H20z" fill="#E5493E" stroke="#1D2426" stroke-width="2.5"/><rect x="20" y="22" width="40" height="16" fill="#1E8C8A" stroke="#1D2426" stroke-width="2.5"/><path d="M20 14v26M60 14v26" stroke="#1D2426" stroke-width="2.5"/>${wheel(28)}${wheel(52)}</svg>`;
+  if(k===2)return`<svg viewBox="0 0 80 48" aria-hidden="true"><rect x="8" y="12" width="46" height="26" rx="3" fill="#1E8C8A" stroke="#1D2426" stroke-width="2.5"/><path d="M54 20h10l8 9v9H54z" fill="#F5B72A" stroke="#1D2426" stroke-width="2.5"/><rect x="16" y="18" width="26" height="10" fill="#27352F"/>${wheel(20)}${wheel(62)}</svg>`;
+  if(k===3)return`<svg viewBox="0 0 80 48" aria-hidden="true"><path d="M6 10c4-4 8 0 12-4s8 0 12-4 8 0 12-4" stroke="#F5B72A" stroke-width="2" fill="none"/><circle cx="12" cy="8" r="2" fill="#F5B72A"/><circle cx="24" cy="4" r="2" fill="#F5B72A"/><circle cx="36" cy="4" r="2" fill="#F5B72A"/><rect x="4" y="12" width="52" height="26" rx="3" fill="#1E8C8A" stroke="#1D2426" stroke-width="2.5"/><path d="M56 20h10l9 9v9H56z" fill="#F5B72A" stroke="#1D2426" stroke-width="2.5"/><rect x="12" y="18" width="34" height="10" fill="#27352F"/>${wheel(16)}${wheel(64)}</svg>`;
+  return`<svg viewBox="0 0 80 48" aria-hidden="true"><rect x="4" y="2" width="56" height="36" rx="4" fill="#E5493E" stroke="#1D2426" stroke-width="2.5"/><path d="M60 16h8l9 10v12H60z" fill="#F5B72A" stroke="#1D2426" stroke-width="2.5"/><rect x="10" y="8" width="44" height="10" fill="#27352F"/><rect x="10" y="22" width="44" height="8" fill="#FFF"/>${wheel(16)}${wheel(48)}${wheel(66)}</svg>`;
+};
+const truck={
+  name:'Food Truck',blurb:'Every dish adds an item to your own food truck menu.',
+  sw:`<svg viewBox="0 0 200 54" preserveAspectRatio="xMidYMid slice"><rect width="200" height="54" fill="#9ED6D0"/><rect y="44" width="200" height="10" fill="#B8B0A1"/><rect x="30" y="10" width="100" height="32" rx="4" fill="#1E8C8A"/><path d="M130 20h22l12 12v10h-34z" fill="#F5B72A"/><rect x="42" y="16" width="56" height="14" fill="#27352F"/><g>${[0,1,2,3,4].map(k=>`<rect x="${40+k*12}" y="8" width="12" height="7" fill="${k%2?'#fff':'#E5493E'}"/>`).join('')}</g><circle cx="55" cy="44" r="7" fill="#1D2426"/><circle cx="145" cy="44" r="7" fill="#1D2426"/></svg>`,
+  lib(){return`
+  <div class="t-board">
+    <p class="t-chalkh">Next on the menu</p>
+    <svg class="dish" aria-label="Shakshuka in a skillet"><use href="#dish-shak"/></svg>
+    <svg class="t-tk" role="img" aria-label="Test-kitchen stamp: a parent cooked this first"><use href="#stamp-tk"/></svg>
+    <h4 class="t-title">Shakshuka</h4>
+    <p class="t-skill">New skill: building a sauce, then poaching eggs in it</p>
+    <div class="t-meta"><span>${ic('i-clock')}35 min</span><span>${ic('i-people')}Serves 4</span><span>${ic('i-hat')}Adult nearby</span></div>
+    <button type="button" class="t-btn" data-act="goto" data-to="prep">Start this order</button>
+  </div>
+  <div class="t-coming"><h5>Coming up</h5><ul>
+    <li><span>Beef bulgogi</span><i></i><span>Korean</span></li>
+    <li><span>Buttermilk biscuits</span><i></i><span>American</span></li>
+    <li><span>Chana masala</span><i></i><span>Indian</span></li>
+  </ul></div>`},
+  prep(){
+    const spots=[[18,40],[64,44],[110,44],[156,40],[40,16],[86,20],[132,16],[86,-4]];
+    return`
+  <div class="t-prep">
+    <div class="t-crate">
+      <svg viewBox="0 -14 240 170" role="img" aria-label="Crate with ${S.got.size} of 8 ingredients">
+        <g>${heap(spots,62)}</g>
+        <rect x="10" y="80" width="220" height="74" fill="#C98E52" stroke="#1D2426" stroke-width="3"/>
+        <path d="M10 104h220M10 128h220" stroke="#8E5B2C" stroke-width="3"/>
+        <rect x="10" y="80" width="18" height="74" fill="#B07A45" stroke="#1D2426" stroke-width="3"/><rect x="212" y="80" width="18" height="74" fill="#B07A45" stroke="#1D2426" stroke-width="3"/>
+        <g fill="#5A3A1C"><circle cx="19" cy="90" r="2.5"/><circle cx="19" cy="144" r="2.5"/><circle cx="221" cy="90" r="2.5"/><circle cx="221" cy="144" r="2.5"/></g>
+        <text x="120" y="124" text-anchor="middle" font-family="Bungee" font-size="20" fill="#5A3A1C" opacity=".75">SHAKSHUKA</text>
+      </svg>
+      <p>${S.got.size} of 8 loaded</p>
+    </div>
+    <div class="t-clip"><div class="t-sheet">
+      <h5>Stock check</h5>
+      ${ING.map(it=>`<button type="button" class="t-item ${S.got.has(it.id)?'on':''} ${S.fx.hop===it.id?'hop':''}" data-act="toggle" data-id="${it.id}" aria-pressed="${S.got.has(it.id)}"><span class="bx">${ic('i-check','')}</span>${ic('i-'+it.id,'ii')}<span class="nm">${it.name}<small>${it.amt}</small></span></button>`).join('')}
+      ${gate('t-gate','Load all 8 to open the kitchen','t-btn','Open the kitchen')}
+    </div></div>
+  </div>`},
+  timer(t,i){
+    const f=rem(t)/t.sec;
+    return`<div class="t-led ${tCls(t)}" data-timer="${i}"><span class="lb">${t.label}</span>
+      <button type="button" class="scrn" data-act="${t.state==='ended'?'tclear':'ttoggle'}" data-i="${i}" aria-label="${t.label} timer"><span data-tdisp="${i}">${tText(t)}</span></button>
+      <span class="bar"><i data-tfrac="${i}" data-kind="bar" style="width:${(f*100).toFixed(1)}%"></i></span>
+      ${t.ringing?`<button type="button" class="stop" data-act="tclear" data-i="${i}">Stop</button>`:''}</div>`},
+  cook(){
+    const s=STEPS[S.step],sf=safety(s),st=started();
+    return`
+  <div class="t-cook">
+    <div class="t-banner" role="note">${ic(sf.icon)}<div><b>${sf.head}</b>${sf.line}</div></div>
+    <div class="t-rail"><article class="t-ticket ${S.fx.flip?'flip':''}">
+      <p class="t-tno"><span>ORDER #004</span><span>STEP ${S.step+1}/${STEPS.length}</span></p>
+      <p class="steptxt">${s.t}</p>
+      ${stepNote(s,'truck')}${checkBtn(s,'t-chk')}${startBtn('t-tstart')}
+    </article></div>
+    ${navBtns('t','t-btn')}
+    <div class="t-spike" aria-label="${S.step} of ${STEPS.length} steps done">${STEPS.map((_,k)=>`<i class="${k<S.step?'done':k===S.step?'cur':''}"></i>`).join('')}<span>&nbsp;${S.step}/${STEPS.length} DONE</span></div>
+    <div class="t-timers" aria-label="Timers">${st.length?st.map(i=>this.timer(T[i],i)).join(''):'<span class="empty">No timers running.</span>'}</div>
+  </div>`},
+  prog(){
+    const stick=SKILLS.map((p,k)=>{const x=30+k*28;return`<circle cx="${x}" cy="136" r="12" fill="${p.col}" stroke="#fff" stroke-width="3"/><use href="#${p.g}" x="${x-7}" y="129" width="14" height="14" color="#fff"/>`}).join('');
+    return`
+  <div class="t-prog">
+    <svg class="t-truck" viewBox="0 0 360 214" role="img" aria-label="Your food truck with ${SKILLS.length} skill stickers">
+      <rect x="10" y="40" width="252" height="134" rx="14" fill="#1E8C8A" stroke="#1D2426" stroke-width="4"/>
+      <path d="M262 82h50c14 0 25 14 31 34l7 22v36h-88z" fill="#F5B72A" stroke="#1D2426" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M274 94h36c8 0 15 10 19 24h-55z" fill="#BFE6F0" stroke="#1D2426" stroke-width="3"/>
+      <rect x="36" y="70" width="170" height="46" fill="#27352F" stroke="#1D2426" stroke-width="3"/>
+      <text x="121" y="90" text-anchor="middle" font-size="14" fill="#F5B72A">NOW SERVING</text>
+      <text x="121" y="108" text-anchor="middle" font-size="12" fill="#F4F1E8">${cooked} DISHES</text>
+      ${[0,1,2,3,4,5,6].map(k=>`<rect x="${30+k*26}" y="50" width="26" height="16" fill="${k%2?'#fff':'#E5493E'}" stroke="#1D2426" stroke-width="2"/>`).join('')}
+      <path d="M30 66${[0,1,2,3,4,5,6].map(k=>`a13 7 0 0 0 26 0`).join('')}" fill="none" stroke="#1D2426" stroke-width="2"/>
+      ${stick}
+      <circle cx="78" cy="178" r="25" fill="#1D2426"/><circle cx="78" cy="178" r="10" fill="#D5DEE2"/>
+      <circle cx="296" cy="178" r="25" fill="#1D2426"/><circle cx="296" cy="178" r="10" fill="#D5DEE2"/>
+    </svg>
+    <div class="t-menu"><h5>Menu board</h5><ol>${DONE.map(d=>`<li>${d.n}</li>`).join('')}<li class="next">Shakshuka (soon)</li></ol></div>
+    <p class="t-rankline">Your truck: <b>${RANKS[rankIdx]}</b> · ${toNext} more dishes to upgrade</p>
+    <div class="t-tiers">${RANKS.map((r,k)=>`<div class="${k<rankIdx?'got':k===rankIdx?'cur':'fut'}">${tierSVG(k)}${r}</div>`).join('')}</div>
+  </div>`}
+};
+
+/* ================= THEME 4: RECIPE SCRAPBOOK ================= */
+const scrap={
+  name:'Recipe Scrapbook',blurb:'Fill a scrapbook with your photos, notes, and stickers.',
+  sw:`<svg viewBox="0 0 200 54" preserveAspectRatio="xMidYMid slice"><rect width="200" height="54" fill="#D3B387"/><rect x="20" y="6" width="80" height="56" fill="#FBF6EA" transform="rotate(2 60 34)"/><rect x="34" y="12" width="40" height="44" fill="#fff" transform="rotate(-6 54 34)"/><rect x="38" y="16" width="32" height="28" fill="#EE8670" transform="rotate(-6 54 30)"/><rect x="44" y="4" width="34" height="10" fill="#6FB0B8" opacity=".85" transform="rotate(-4 60 9)"/><circle cx="140" cy="28" r="14" fill="#E5BE52" stroke="#fff" stroke-width="4"/><circle cx="174" cy="20" r="10" fill="#B5A3D6" stroke="#fff" stroke-width="4"/></svg>`,
+  arrow:`<svg viewBox="0 0 42 18" aria-hidden="true"><path d="M2 12c10-8 24-8 34-2M30 4l7 6-8 4" fill="none" stroke="#2F3B4C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  lib(){return`
+  <div class="s-lib">
+    <div class="s-page"><i class="washi w1"></i>
+      <div class="s-head">
+        <figure class="s-pola"><svg viewBox="-10 -40 240 230" aria-label="Shakshuka in a skillet"><use href="#dish-shak" width="220" height="150"/></svg><figcaption>shakshuka!</figcaption></figure>
+        <div>
+          <h4 class="s-title">Shakshuka</h4>
+          <p class="s-skill">Skill ${this.arrow} building a sauce, then poaching eggs in it</p>
+          <div class="s-meta"><span>${ic('i-clock')}35 min</span><span>${ic('i-people')}Serves 4</span><span>${ic('i-hat')}Adult nearby</span></div>
+          <button type="button" class="s-btn" data-act="goto" data-to="prep">Let's cook</button>
+        </div>
+      </div>
+      <svg class="s-tk" role="img" aria-label="Test-kitchen stamp: a parent cooked this first"><use href="#stamp-tk"/></svg>
+    </div>
+    <div class="s-minis">
+      <figure class="s-pola"><i class="clipper"></i><svg viewBox="-10 -40 240 230" aria-hidden="true"><use href="#dish-bulgogi" width="220" height="150"/></svg><figcaption>bulgogi</figcaption></figure>
+      <figure class="s-pola"><i class="clipper"></i><svg viewBox="-10 -40 240 230" aria-hidden="true"><use href="#dish-biscuit" width="220" height="150"/></svg><figcaption>biscuits</figcaption></figure>
+    </div>
+  </div>`},
+  prep(){return`
+  <div class="s-prep">
+    <div class="s-page s-list"><i class="washi w2"></i>
+      <h5>Shopping bag check</h5>
+      ${ING.map(it=>`<button type="button" class="s-item ${S.got.has(it.id)?'on':''}" data-act="toggle" data-id="${it.id}" aria-pressed="${S.got.has(it.id)}"><svg class="bx" viewBox="0 0 32 32" aria-hidden="true"><path d="M5 6c7-1 15 0 22-1 1 7 0 15 1 21-7 1-15 0-22 1-1-7 0-14-1-21z" fill="none" stroke="#2F3B4C" stroke-width="2.2" stroke-linejoin="round"/><path class="tick" d="M8 17c3 2 5 5 6 7 3-7 8-13 15-19" fill="none" stroke="#EE8670" stroke-width="3.5" stroke-linecap="round"/></svg><span class="nm">${it.name}<small>${it.amt}</small></span></button>`).join('')}
+      ${gate('s-gate','Stick on all 8 to start cooking','s-btn','Start cooking')}
+    </div>
+    <div class="s-sheet"><h5>Sticker sheet</h5>
+      <div class="s-stk">${ING.map(it=>`<span class="${S.got.has(it.id)?'on':''} ${S.fx.hop===it.id?'pop':''}">${ic('i-'+it.id,'')}</span>`).join('')}</div>
+      <p>${S.got.size} of 8 stuck on</p>
+    </div>
+  </div>`},
+  timer(t,i){
+    const f=rem(t)/t.sec;
+    return`<div class="s-timer ${tCls(t)}" data-timer="${i}">
+      <button type="button" class="dial" data-act="${t.state==='ended'?'tclear':'ttoggle'}" data-i="${i}" aria-label="${t.label} timer">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 8c24-1 43 18 42 42S73 93 49 92 7 74 8 50 27 9 50 8z" fill="#fff" stroke="#2F3B4C" stroke-width="2.5"/><path d="M52 11c22 1 38 18 37 40" fill="none" stroke="#2F3B4C" stroke-width="1.2" opacity=".6"/>
+      <path data-tfrac="${i}" data-kind="wedge" data-cx="50" data-cy="50" data-r="34" fill="url(#hatch)" stroke="#EE8670" stroke-width="1.5" d="${wedge(50,50,34,f)}"/>
+      ${ticks(50,50,36,40,12,'#2F3B4C',1.6)}<circle cx="50" cy="50" r="5" fill="#2F3B4C"/></svg></button>
+      <span class="lb">${t.label}</span><span class="tt" data-tdisp="${i}">${tText(t)}</span>
+      ${t.ringing?`<button type="button" class="stop" data-act="tclear" data-i="${i}">Stop</button>`:''}</div>`},
+  cook(){
+    const s=STEPS[S.step],sf=safety(s),st=started();
+    return`
+  <div class="s-cook">
+    <div class="s-banner" role="note">${ic(sf.icon)}<div><b>${sf.head}</b>${sf.line}</div></div>
+    <article class="s-page s-journal ${S.fx.flip?'flip':''}"><i class="washi w3"></i>
+      <p class="s-stepno">Step ${S.step+1}</p>
+      <p class="steptxt">${s.t}</p>
+      ${stepNote(s,'scrap')}${checkBtn(s,'s-chk')}${startBtn('s-tstart')}
+    </article>
+    <div class="s-tabs" aria-label="${S.step} of ${STEPS.length} steps done">${STEPS.map((_,k)=>`<i class="${k<S.step?'done':k===S.step?'cur':''}"></i>`).join('')}</div>
+    ${navBtns('s','s-btn')}
+    <div class="s-timers" aria-label="Timers">${st.length?st.map(i=>this.timer(T[i],i)).join(''):'<span class="empty">No timers running.</span>'}</div>
+  </div>`},
+  prog(){
+    const pol=DONE.map(d=>`<figure class="s-pola"><svg viewBox="0 0 100 100" aria-hidden="true" color="${d.col}"><use href="#plate"/></svg><figcaption>${d.n}</figcaption></figure>`).join('');
+    return`
+  <div class="s-prog">
+    <div class="s-page s-spread"><i class="washi w1"></i>${pol}</div>
+    <div class="s-stickers" aria-label="Skill stickers">${SKILLS.map(p=>`<figure><svg viewBox="0 0 48 48" aria-hidden="true">${pinShape(p.shape,p.col)}<use href="#${p.g}" x="13" y="13" width="22" height="22" color="#fff"/></svg>${p.n}</figure>`).join('')}</div>
+    <div class="s-cover"><svg viewBox="0 0 46 74" aria-hidden="true"><path d="M6 0h34v70l-17-12L6 70z" fill="#EE8670" stroke="#FBF6EA" stroke-width="2.5"/><use href="#i-hat" x="9" y="12" width="28" height="28" color="#2F3B4C"/></svg>
+      <div><b>${RANKS[rankIdx]}</b><span>${cooked} pages filled · ${toNext} more to Line Cook</span>
+      <div class="s-ranks">${RANKS.map((_,k)=>`<i class="${k<=rankIdx?'on':''}"></i>`).join('')}</div></div></div>
+  </div>`}
+};
+
+const THEMES={passport,quest,truck,scrap};
+const KEYS=['passport','quest','truck','scrap'];
+const SCREENS=[['lib','Lesson library','pick a dish'],['prep','Prep','tap to check off'],['cook','Cook mode','try Next and the timers'],['prog','Your progress','8 dishes cooked']];
+
+/* ---------- render ---------- */
+function renderPicker(){
+  $('#picker').innerHTML=KEYS.map(k=>`<button type="button" class="tile" data-act="theme" data-k="${k}" aria-pressed="${S.theme===k}"><span class="sw">${THEMES[k].sw}</span><b>${THEMES[k].name}</b><small>${THEMES[k].blurb}</small><svg class="on" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="15" fill="var(--h-acc)"/><path d="M9 16.5l5 5 9-10" fill="none" stroke="var(--h-card)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`).join('');
+  $('#same').innerHTML=`Showing <b>${THEMES[S.theme].name}</b>. Link to this one: add <b>#${S.theme}</b> to the page address.`;
+  const s=$('#snd');s.setAttribute('aria-pressed',S.sound);s.innerHTML=S.sound?`${ic('i-sound','')}Sound on`:`${ic('i-mute','')}Sound off`;
+}
+function render(){
+  const th=THEMES[S.theme],st=$('#stage');
+  st.className='stage k-'+S.theme;
+  st.innerHTML=SCREENS.map(([k,label,hint],n)=>`<section class="shot" id="shot-${k}"><h3 class="cap"><span>${n+1}</span>${label}<em>${hint}</em></h3><div class="scr">${th[k]()}</div>${k==='cook'?`<div class="demo">Demo:<button type="button" data-act="tjump">Jump the running timer to 0:05</button></div>`:''}</section>`).join('');
+  S.fx={};
+}
+function tick(){
+  let changed=false;
+  T.forEach((t,i)=>{if(t&&t.state==='run'&&Date.now()>=t.endAt){t.state='ended';t.ringing=true;t.left=0;changed=true;ding()}});
+  if(changed){render();return}
+  document.querySelectorAll('[data-tdisp]').forEach(el=>{const t=T[+el.dataset.tdisp];if(S.theme==='quest')el.textContent=t.state==='ended'?(t.ringing?'DONE!':'Done'):fmt(rem(t));else el.textContent=tText(t)});
+  document.querySelectorAll('[data-tago]').forEach(el=>{el.textContent=tText(T[+el.dataset.tago])});
+  document.querySelectorAll('[data-tfrac]').forEach(el=>{
+    const t=T[+el.dataset.tfrac],f=rem(t)/t.sec,k=el.dataset.kind;
+    if(k==='wedge')el.setAttribute('d',wedge(+el.dataset.cx,+el.dataset.cy,+el.dataset.r,f));
+    else if(k==='arc')el.setAttribute('stroke-dashoffset',(+el.dataset.c*(1-f)).toFixed(1));
+    else if(k==='bar')el.style.width=(f*100).toFixed(1)+'%';
+  });
+}
+
+/* ---------- sound ---------- */
+let AC=null;
+function unlock(){if(AC||!S.sound)return;try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){AC=null}}
+function ding(){
+  if(!S.sound||!AC)return;
+  try{[0,.28,.56].forEach(d=>{const o=AC.createOscillator(),g=AC.createGain();o.type='sine';o.frequency.value=1318;g.gain.setValueAtTime(0,AC.currentTime+d);g.gain.linearRampToValueAtTime(.25,AC.currentTime+d+.01);g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+d+.25);o.connect(g).connect(AC.destination);o.start(AC.currentTime+d);o.stop(AC.currentTime+d+.3)})}catch(e){}
+}
+
+/* ---------- actions ---------- */
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]');if(!b||b.disabled)return;
+  unlock();
+  const a=b.dataset.act,i=+b.dataset.i;
+  switch(a){
+    case'theme':S.theme=b.dataset.k;try{history.replaceState(null,'','#'+S.theme)}catch(_){}renderPicker();render();return;
+    case'sound':S.sound=!S.sound;try{localStorage.setItem('kitchen-sound',S.sound?'on':'off')}catch(_){}if(S.sound)unlock();renderPicker();return;
+    case'toggle':{const id=b.dataset.id;if(S.got.has(id))S.got.delete(id);else{S.got.add(id);S.fx.hop=id}break}
+    case'goto':{const el=document.getElementById('shot-'+b.dataset.to);if(el)el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});return}
+    case'next':if(S.step<STEPS.length-1){S.step++;S.confirm=false;S.fx.flip=1}else{S.step=0;S.confirm=false;S.fx.flip=1}break;
+    case'back':if(S.step>0){S.step--;S.confirm=false;S.fx.flip=1}break;
+    case'confirm':S.confirm=!S.confirm;break;
+    case'tstart':{const t=T[i];t.state='run';t.endAt=Date.now()+t.sec*1000;t.ringing=false;break}
+    case'ttoggle':{const t=T[i];if(t.state==='run'){t.left=rem(t);t.state='paused'}else if(t.state==='paused'){t.endAt=Date.now()+t.left*1000;t.state='run'}break}
+    case'tclear':{const t=T[i];if(t.ringing){t.ringing=false}else{t.state='idle';t.left=t.sec}break}
+    case'tjump':{const r=T.filter(t=>t&&t.state==='run');if(!r.length){const t=T[S.step]||T.find(t=>t&&t.state==='idle');if(t){t.state='run';t.endAt=Date.now()+5000}}else r.forEach(t=>t.endAt=Date.now()+5000);break}
+    default:return;
+  }
+  render();
+});
+
+/* ---------- boot ---------- */
+const h=(location.hash||'').slice(1);if(KEYS.includes(h))S.theme=h;
+renderPicker();render();
+setInterval(tick,250);
+})();
+</script>
