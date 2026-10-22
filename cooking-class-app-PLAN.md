@@ -680,6 +680,7 @@ The linter must **warn** (without failing the build) when:
 ### 6.13 Website and legal pages — Requirement (owner, 2026-10-22)
 The app lives at **`cleanplate.immotus.app`**, and its front door is a simple public website.
 - **Landing page** at `/` for anyone not logged in: what the app is in a few lines (a cooking course for kids, one skill and one real dish per lesson, with biblically clean recipes), a few dish pictures, and **Sign up** and **Log in**. A logged-in device goes straight to the chef's lockers.
+- **Publisher: Immotus Apps** (owner, 2026-10-22). The landing page, the demo page, and the privacy policy and terms name it as the publisher.
 - **Privacy policy** (`/privacy`) and **terms of use** (`/terms`), short and plain, linked from the landing page and the sign-up page. Sign-up says "By signing up you agree to the terms and privacy policy."
 - The words are the owner's. Claude drafts them from the points below, and the owner approves or rewrites them before launch. **They aren't legal advice**, and the owner should have someone qualified read them.
 - **What the privacy policy covers** (what's true of the app as built):
@@ -706,10 +707,15 @@ A printable record of what each profile has cooked, for homeschool records.
 - One table per profile, with the profile name at the top: **date, dish, cuisine, skill, and rating** for every lesson that profile has cooked, oldest first.
 - Made as a page styled for paper, printed from the browser (or saved as PDF from the print dialog). It needs no extra software.
 - Recommendation: the same rows as a CSV download, which also answers the "CSV export to the homeschool management system" item in Later (§9).
+- **Homeschool transcript — Requirement (owner, 2026-10-22: "a GREAT idea"); details to be specced with the owner.** A printable course record for a homeschool transcript, built on the same rows. Starting points to confirm:
+  - The family names the course and gives it a code (e.g. "Culinary Arts", "HE-101"), a school year, and the student's name, per profile.
+  - It lists the lessons cooked with dates, the skills earned, and the hours, totalled from each lesson's time.
+  - An optional parent grade or credit line. The app suggests nothing about grades or credits; the family decides.
+  - Printed under the family's own homeschool name, with "Clean Plate Recipes, published by Immotus Apps" as the curriculum.
 
 ### 6.16 Demo page — Requirement (owner, 2026-10-22)
 A public page at **`/demo`** that the owner shares with other moms: no account, no beta word, and nothing saved to any account. It runs the real lesson player, so what moms try is what kids get.
-- **Header:** the logo, two or three lines on what the app is (Claude drafts, the owner approves, as with §6.13), and **Sign up**. Sign-up still asks for the beta word while one is set.
+- **Header:** the logo, two or three lines on what the app is (Claude drafts, the owner approves, as with §6.13), "by Immotus Apps", and **Sign up**. Sign-up still asks for the beta word while one is set.
 - **Theme switch:** Kitchen Quest or Chef's Passport. Everything below redraws in the chosen theme.
 - **Kid or adult switch:** shows how the safety banners read for each (§3).
 - **The sample lessons:** every written lesson as a card. Each opens the full player: lesson card and serving picker, Learn, Prep, Cook, timers, kitchen words, Why? cards. Progress stays on that device only.
@@ -809,7 +815,7 @@ Each phase should be deployed and usable before the next begins.
 | **1d. Demo page** (built after 2a, before 2b) | `/demo` (§6.16): theme and kid/adult switches, the sample lessons in the real player, the diet preview, the shopping list preview, the whole course, the skills view, and `content/course.json` | A mom with only the link tries a sample lesson in both themes, toggles dairy-free and sees lessons change, and browses the course by dish and by skill, on her phone |
 | **2. Lesson player** | Learn, Prep, Cook mode, kitchen words, food-safety checks, timers, wake lock, voice step control (§6.12), the installable PWA (§8.2), attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
 | **3. Parent planning & shopping** | Queue (with kid requests), safety review, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
-| **4. Photos & reflect** | The per-family photos switch on `/ops` (§2.6), camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download, Print our progress (§6.15) | In a family with photos on, a photo taken on the tablet shows in the gallery on the parent's phone. A family with photos off cooks and reflects with no photo step |
+| **4. Photos & reflect** | The per-family photos switch on `/ops` (§2.6), camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download, Print our progress and the homeschool transcript (§6.15) | In a family with photos on, a photo taken on the tablet shows in the gallery on the parent's phone. A family with photos off cooks and reflects with no photo step |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |

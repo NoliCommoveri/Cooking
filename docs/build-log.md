@@ -961,3 +961,15 @@ lesson patches. This is 2a.
   because the 75 dishes live only in the plan's tables today and only the
   written lessons have skill ids. The linter will check it against
   `skills.json` and the lesson files.
+
+---
+
+## 41. 2026-10-22 — Publisher, and a homeschool transcript
+
+- The owner named the publisher: **Immotus Apps**. The landing page, demo page,
+  privacy policy, and terms name it (§6.13, §6.16).
+- **New, to be specced with the owner:** a homeschool transcript (§6.15), a
+  printable course record per profile with the family's course name and code,
+  school year, lessons and dates, skills, and hours. It's in Phase 4 with
+  Print our progress.
+- Assigning lessons to kids is the queue in Phase 3, as planned.
