@@ -364,3 +364,16 @@ Owner rulings on open questions:
   pork. The mac and cheese looks baked with a crumb top rather than stovetop
   creamy, which is minor.
 - 31 of 50 dishes now have art.
+
+---
+
+## 20. 2026-10-22 — Dish art sheet 8
+
+- Added sheet 8 from the owner and cropped 4 breakfast dishes: 28 French
+  omelet, 29 hash browns, 30 breakfast burritos, 31 eggs Benedict. Each is
+  about 670–710 px.
+- Checked for unclean foods: none seen. The Benedict uses smoked salmon, not
+  ham. The burrito filling is crumbled meat with no pork cues.
+- Minor note to the owner: the omelet is an American-style folded half-moon,
+  while the lesson teaches the pale, rolled French style.
+- 35 of 50 dishes now have art.
