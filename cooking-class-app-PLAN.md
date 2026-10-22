@@ -91,11 +91,25 @@ Kids, and adults taking the class, use the app through **profiles** (chef locker
 Each lesson has these stages:
 
 1. **Intro.** A 30–45 second animated slideshow (§6.5): the finished dish, the skill, why it matters, an ingredient preview, time and safety level, and a "Let's cook" button.
-2. **Learn.** 3–6 short concept cards with a "why it works" angle. An optional quiz of 2–3 questions follows. **The quiz never blocks cooking.**
+2. **Learn.** 3–6 short concept cards with a "why it works" angle. An optional quiz of 2–3 questions follows. **The quiz never blocks cooking.** The cards follow a set shape (below) so every lesson teaches how its skill carries over to other dishes.
 3. **Prep (mise en place).** An ingredient checklist with amounts scaled to the chosen servings, then an equipment checklist. Cook mode unlocks once every item is checked.
 4. **Cook mode.** One step per screen. Each step has a checkbox, a big Next control, inline timers where needed (several can run at once), a safety level, and an optional tip or "what it should look like" note. The screen stays awake for the whole cook. Some steps are food-safety checks (below).
 5. **Plate and photo.** The camera opens directly, and the photo saves to this attempt.
 6. **Reflect.** A 1–5 rating, a "what would I change?" note, and an optional rating from whoever ate it.
+
+### Learn stage: teaching the why (recommendation)
+The goal is cooking skill, not 50 memorised recipes, so every Learn stage teaches the same four things:
+- **The move:** what the skill is, in one line.
+- **Why it works:** the food science, kid-sized (e.g. spice flavour dissolves in fat, so spices bloom in oil).
+- **Same move, other dishes:** every other lesson that uses this skill, with cooked ones marked. The app builds this card from each lesson's `skills` tags (§7.3), so it stays current as lessons are added.
+- **When it goes wrong:** how to tell, and how to rescue it.
+
+Around that:
+- **Callbacks.** A lesson that reuses a skill from an earlier lesson opens with a short "You did this in …" card before anything new.
+- **"Why?" in cook mode.** A step can link to one of its Learn cards (`why` on the step). Cook mode shows a **Why?** button that opens that card over the step. It never blocks Next.
+- **Reflect asks one transfer question,** optional: "What other dish could use this move?"
+- **Skills explain themselves.** Tapping a skill (crest, pin, or sticker, per theme) shows the idea behind it and every dish that uses it, cooked or not.
+- **The beginner track** (§11) uses the same shape with fewer, shorter cards.
 
 ### Safety levels (per step; a lesson's level is its highest step)
 | Level | Meaning |
@@ -519,7 +533,13 @@ content/
   "totalMinutes": 60,
   "scaling": { "mode": "free" },
   "intro": { "slides": [ { "image": "...", "caption": "...", "seconds": 5 } ], "music": "upbeat-1" },
-  "learn": { "cards": [ { "title": "...", "body": "..." } ], "quiz": [ { "q": "...", "choices": ["..."], "answer": 0 } ] },
+  "learn": {
+    "move": "...",
+    "why": [ { "id": "slice-thin", "title": "...", "body": "..." } ],
+    "wrong": [ { "sign": "...", "fix": "..." } ],
+    "callback": { "lesson": 28, "body": "..." },
+    "quiz": [ { "q": "...", "choices": ["..."], "answer": 0, "explain": "..." } ]
+  },
   "ingredients": [
     { "ingredient": "beef-sirloin", "amount": 2.5, "unit": "lb", "prep": "sliced thin", "group": "Beef" },
     { "ingredient": "sesame-seeds", "amount": 1, "unit": "tbsp", "optional": true, "group": "To serve" },
@@ -528,7 +548,7 @@ content/
   "substitutions": [ { "for": "asian-pear", "use": "pear-bosc", "reason": "availability", "note": "or a grated apple" } ],
   "equipment": ["chef-knife", "cutting-board", "skillet", "thermometer"],
   "steps": [
-    { "id": "slice-beef", "text": "...", "safety": "adult-nearby", "tip": "..." },
+    { "id": "slice-beef", "text": "...", "safety": "adult-nearby", "tip": "...", "why": "slice-thin" },
     { "id": "marinate", "text": "...", "safety": "solo", "timerSeconds": 1800, "timerLabel": "Marinade" },
     { "id": "check-beef", "type": "doneness", "text": "...", "safety": "adult-nearby", "target": { "temp": 145, "unit": "F" } }
   ]
@@ -538,6 +558,7 @@ content/
 - Step `id`s are stable. Inserting a step never changes another step's `id`, so saved progress in a lesson stays attached to the right step.
 - `scaling` is `{ "mode": "free" }` or `{ "mode": "fixed", "multipliers": [0.5, 1, 2], "notes": { "2": "Use two sheet pans" } }` (§6.6).
 - `substitutions[].reason` is `"availability"` or a diet tag (e.g. `"dairy"`). Diet-reason substitutions are the ones a family filter can apply (§2.1).
+- `learn.why` cards have ids that steps point to with `why`. The "same move, other dishes" card isn't written by hand; it's built from `skills` across all lessons. `skills.json` holds each skill's one-line idea for the skill detail view.
 - `cuisine` is an ID in `cuisines.json`, which maps it to a passport region. `skills` are IDs in `skills.json` and drive the skill pins. `skill` is the display line.
 
 ### 7.4 Content linter (runs at build time and in CI)
@@ -554,11 +575,14 @@ The linter must reject content when:
 - lesson text (steps, tips, cards, notes, substitution notes) names a blocked food from a word list (pork, bacon, ham, lard, suet, tallow, beef dripping, blood sausage, black pudding, shrimp, crab, lobster, clam, oyster, mussel, scallop, squid, octopus, catfish, eel, and so on). A word that's fine in context ("turkey bacon," "mushroom stir-fry sauce, not oyster sauce") is allowed by an exact-phrase allowlist in the content, never by turning the check off
 - a lesson uses an ingredient with `rawHandling` but has no doneness check step, or has no wash-hands step after the raw-handling step (§3)
 - step IDs within a lesson aren't unique, or a step with a timer has no `timerLabel`
+- a core lesson has no `learn.move`, no `learn.why` card, or no `learn.wrong` entry, or a step's `why` points to a card that doesn't exist
 - a fixed-scaling lesson has no multipliers
 
 The linter must **warn** (without failing the build) when:
 - a lesson uses an ingredient with a `watch` note
 - a lesson has no intro slides yet
+- a skill is used by only one lesson, so its "other dishes" card would be empty
+- a lesson reuses a skill from an earlier lesson but has no `learn.callback`
 - an ingredient or tool uses its category's fallback icon
 
 ---

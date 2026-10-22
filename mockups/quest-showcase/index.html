@@ -379,6 +379,49 @@ svg use{transform-box:fill-box;transform-origin:center}
 .path i{width:28px;height:4px;background:var(--q-edge)}
 .path i.on{background:var(--q-gold)}
 .path button{border:0;background:transparent;padding:0;width:44px;height:48px}
+.learn{max-width:680px;display:grid;gap:14px}
+.lore{padding:18px;display:grid;gap:10px;box-shadow:inset 0 0 0 3px var(--q-edge),inset 0 6px 0 var(--q-gold)}
+.lore h4{margin:0;font-family:var(--q-disp);font-size:26px;color:#fff;letter-spacing:.03em;line-height:1.1}
+.lore p{margin:0;font-size:18px;line-height:1.5}
+.lore .callimg{display:grid;grid-template-columns:84px minmax(0,1fr);gap:12px;align-items:center}
+.lore .callimg img{width:84px;height:auto}
+.xfer{display:grid;gap:12px}
+.xfer h5{margin:0 0 6px;font-family:var(--q-disp);font-size:15px;color:var(--q-mana);letter-spacing:.06em;text-transform:uppercase}
+.xdishes{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px}
+.xd{display:grid;justify-items:center;gap:2px;text-align:center;font-size:13px;font-weight:800;line-height:1.15;padding:6px 4px;background:var(--q-deep);box-shadow:inset 0 0 0 2px var(--q-edge);position:relative}
+.xd img{width:64px;height:auto}
+.xd small{font-weight:600;color:var(--q-dim)}
+.xd.cooked{box-shadow:inset 0 0 0 2px var(--q-gold)}
+.xd.cooked small{color:var(--q-gold)}
+.wrongs{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.wrongs li{padding:8px 12px;background:var(--q-deep);box-shadow:inset 3px 0 0 var(--q-ember);font-size:16px;line-height:1.4}
+.wrongs b{display:block;color:#FFD7CB}
+.quiz{display:grid;gap:8px}
+.quiz p.qq{font-weight:800;font-size:17px}
+.qopt{display:flex;gap:10px;align-items:center;text-align:left;min-height:52px;padding:8px 12px;border:0;background:var(--q-deep);box-shadow:inset 0 0 0 2px var(--q-edge);color:var(--q-text);font-weight:700;font-size:16px;width:100%}
+.qopt.right{box-shadow:inset 0 0 0 3px var(--q-mana);background:#1F3A4A}
+.qopt.wrong{box-shadow:inset 0 0 0 3px var(--q-ember)}
+.qopt:focus-visible,.whybtn:focus-visible,.crest:focus-visible{outline:3px solid var(--q-mana);outline-offset:2px}
+.qfb{margin:0;font-size:15px;color:var(--q-dim)}
+.whybtn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:6px 14px;border:0;background:var(--q-deep);box-shadow:inset 0 0 0 2px var(--q-gold);color:var(--q-gold);font-family:var(--q-disp);font-weight:700;font-size:17px;letter-spacing:.04em}
+.whybtn .ico{width:20px;height:20px}
+.logacts{display:flex;gap:6px 12px;flex-wrap:wrap;align-items:center}
+.whyov{position:fixed;inset:0;z-index:65;display:grid;place-items:center;background:rgba(10,12,28,.8);padding:16px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.whyov .lore{width:min(520px,100%);background:var(--q-panel);color:var(--q-text)}
+button.crest{border:0;background:transparent;color:inherit;padding:4px 0;font:inherit;font-size:12.5px;font-weight:800;cursor:pointer}
+button.crest[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(242,182,64,.8))}
+.crestinfo{margin-top:14px;padding:14px;display:grid;gap:8px}
+.crestinfo h5{margin:0;font-family:var(--q-disp);font-size:20px;color:var(--q-gold)}
+.crestinfo p{margin:0;font-size:16px}
+.crestinfo ul{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+.crestinfo li{display:flex;gap:8px;align-items:center;font-size:15px}
+.crestinfo li .ico{width:18px;height:18px;color:var(--q-gold)}
+.crestinfo li.todo{color:var(--q-dim)}
+.crestinfo li.todo .ico{color:var(--q-edge)}
+.refl{display:grid;gap:6px;margin-top:14px;max-width:560px}
+.refl label{font-weight:800;font-size:16px}
+.refl label span{font-weight:600;color:var(--q-dim)}
+.refl textarea{font:inherit;font-size:16px;min-height:64px;padding:10px 12px;background:var(--q-deep);color:var(--q-text);border:0;box-shadow:inset 0 0 0 2px var(--q-edge);resize:vertical}
 .foot{margin-top:40px;color:var(--h-mut);font-size:14px;max-width:80ch}
 
 @keyframes hop{0%{transform:none}35%{transform:translateY(-22px) rotate(-14deg) scale(1.18)}70%{transform:translateY(3px)}100%{transform:none}}
@@ -510,7 +553,7 @@ svg use{transform-box:fill-box;transform-origin:center}
   </header>
 
   <nav class="toc" aria-label="On this page">
-    <a href="#picker">Profile picker</a><a href="#tutorial">Tutorial quest</a><a href="#tokens">Colours &amp; type</a><a href="#lesson">Lesson card</a><a href="#prep">Prep</a><a href="#cook">Cook mode</a><a href="#safety">Safety</a><a href="#progress">Progress</a><a href="#rate">Rating</a><a href="#photos">Photos</a><a href="#helper">Helper</a><a href="#fixes">Fix requests</a><a href="#art">Core art</a><a href="#parent">Parent screen</a>
+    <a href="#picker">Profile picker</a><a href="#tutorial">Tutorial quest</a><a href="#tokens">Colours &amp; type</a><a href="#lesson">Lesson card</a><a href="#learn">Learn</a><a href="#prep">Prep</a><a href="#cook">Cook mode</a><a href="#safety">Safety</a><a href="#progress">Progress</a><a href="#rate">Rating</a><a href="#photos">Photos</a><a href="#helper">Helper</a><a href="#fixes">Fix requests</a><a href="#art">Core art</a><a href="#parent">Parent screen</a>
   </nav>
 
   <section class="sec" id="picker">
@@ -546,6 +589,12 @@ svg use{transform-box:fill-box;transform-origin:center}
     <h2>Lesson card</h2>
     <p class="lead">The quest card, with the gold test-kitchen seal on a lesson a parent has test-cooked. A lesson whose prerequisites aren't done yet shows as a locked "coming up" card instead of being hidden. The party-size picker starts at the queued serving count and changes the prep amounts and the cook steps. A baking lesson only offers the sizes its pan allows.</p>
     <div class="qx" id="lessonStage"></div>
+  </section>
+
+  <section class="sec" id="learn">
+    <h2>Learn: the why, and where else it works</h2>
+    <p class="lead">Before Prep, every lesson teaches the same four things: the move, why it works, the same move in other dishes, and what to do when it goes wrong. A lesson that reuses a skill opens with a callback to where the kid did it before. The "other dishes" card is built from the skill tags, so it lists cooked and not-yet-cooked lessons. The quiz is optional and never blocks cooking. In cook mode, steps with a <b>Why?</b> open the matching card.</p>
+    <div class="qx"><div class="learn" id="learnStage"></div></div>
   </section>
 
   <section class="sec" id="prep">
@@ -585,7 +634,7 @@ svg use{transform-box:fill-box;transform-origin:center}
 
   <section class="sec" id="rate">
     <h2>Rating</h2>
-    <p class="lead">One to five gold gems, never stars. Tap to rate.</p>
+    <p class="lead">One to five gold gems, never stars, then the reflection. Its last question is optional and asks the kid to carry the skill to another dish.</p>
     <div class="qx" id="rateStage"></div>
   </section>
 
@@ -630,6 +679,7 @@ svg use{transform-box:fill-box;transform-origin:center}
 <button type="button" class="ask" data-act="ask" aria-label="Ask the helper"><svg aria-hidden="true"><use href="#guide"/></svg>Ask</button>
 <div class="lvlup" id="lvlup" hidden></div>
 <div class="sheet" id="sheet" hidden></div>
+<div class="whyov" id="whyov" hidden></div>
 
 <script>
 (function(){
@@ -743,6 +793,24 @@ const FIXQ=[
 ];
 const KINDS={amount:['Wrong amount or time','i-clock'],unclear:['Unclear step','i-people'],safety:['Safety problem','i-shield'],unclean:['Unclean ingredient','i-lock'],other:['Something else','i-check']};
 const FX={open:false,stage:'pin',pin:'',where:'L',field:'time',kind:'amount',sug:'',note:'',err:''};
+/* Learn stage (§3): the move, why it works, same move elsewhere, when it goes wrong */
+const LESSONS={1:['01-spring-rolls','Spring rolls'],2:['02-fattoush','Fattoush'],3:['03-fish-tacos','Fish tacos'],4:['04-shakshuka','Shakshuka'],5:['05-chicken-fried-rice','Fried rice'],6:['06-oyakodon','Oyakodon'],7:['07-chicken-adobo','Chicken adobo'],8:['08-cacio-e-pepe','Cacio e pepe'],9:['09-chana-masala','Chana masala'],10:[null,'Misir wot'],11:['11-chicken-tagine','Chicken tagine'],12:['12-butter-chicken','Butter chicken'],14:['14-beef-bulgogi','Beef bulgogi'],15:[null,'Lomo saltado'],16:[null,'Chicken tinga tacos'],26:['26-chicken-caesar','Chicken Caesar'],27:['27-smash-burgers','Smash burgers'],28:['28-french-omelet','French omelet'],29:[null,'Hash browns'],31:['31-eggs-benedict','Eggs Benedict'],32:['32-mac-and-cheese','Mac and cheese'],33:['33-beef-chili','Beef chili'],34:['34-jambalaya','Jambalaya'],37:[null,'Philly cheesesteak'],47:[null,'Pot roast']};
+const COOKED=new Set([1,2,3,26,27,28,5,6]);
+const LEARN=[
+  {kind:'Callback',title:'You did this before',body:'In the French omelet you learned heat control: medium heat, patience, and taking the pan off before the eggs overcook. Today you use that on eggs in a sauce.',dish:28},
+  {kind:'The move',title:'Sauce first, then eggs',body:'Build a spiced tomato sauce in one pan, then cook the eggs gently right in it. One pan, three skills.'},
+  {kind:'Why it works',id:'bloom',title:'Blooming spices',body:"Cumin and paprika's flavour dissolves in fat, not water. A minute in hot oil wakes it up. Much longer and it turns bitter, so keep the spoon moving."},
+  {kind:'Why it works',id:'sauce',title:'Building a sauce',body:"Simmering boils water off, so the sauce gets thicker and the flavour gets stronger. When a spoon dragged through it leaves a trail, it's ready."},
+  {kind:'Why it works',id:'eggs',title:'Gentle eggs',body:'Egg whites set before the yolk. A low simmer under a lid cooks them through without turning them rubbery. The thermometer tells you for sure: 160°F.'},
+  {kind:'Same move, other dishes',title:'Where else you’ll use this',xfer:[['Blooming spices',[9,12,33]],['Building a sauce',[34,11,7]],['Gentle eggs',[6,31]]]},
+  {kind:'When it goes wrong',title:'How to rescue it',wrong:[['Sauce too thin','Simmer a few more minutes before the eggs go in.'],['Spices smell burnt','Start again with fresh oil. Burnt spices make the whole sauce bitter.'],['Whites still runny','Lid back on, two more minutes, then check again.']]},
+  {kind:'Quick quiz · optional',quiz:[
+    {q:'Why do the spices go into the oil before the tomatoes?',c:['Their flavour dissolves in fat','It makes them crunchy','So they don’t float'],a:0,why:'Flavour in cumin and paprika dissolves in fat. That’s why so many curries and chilis start the same way.'},
+    {q:'The sauce is thin and watery. What do you do?',c:['Add more eggs','Simmer it a few more minutes','Turn the heat to high and walk away'],a:1,why:'More simmering boils off water, so it thickens.'}]}
+];
+const L={i:0,ans:{}};
+const WHYSTEP={1:'bloom',2:'sauce',5:'eggs'};
+const SKILLINFO={'Julienne':['Thin matchsticks cook in seconds and roll up neatly.',[1,5]],'Fine chopping':['Small, even pieces mean every bite tastes the same.',[2,3]],'Dicing':['Same-size cubes cook at the same speed.',[3,9]],'Whisking':['Beating in air or oil changes texture: fluffy, or thick and creamy.',[26,31]],'Thin slicing':['Thin slices of beef cook fast and stay tender.',[14,37,27]],'Heat control':['The right heat for the job: high to brown, low to set eggs gently.',[28,4,29]],'Stir-fry':['High heat and constant moving, so nothing steams or sticks.',[5,15]],'Simmering':['Small, lazy bubbles cook food gently and evenly.',[6,7,10]],'Building a sauce':['Layer flavour in one pan: fat, aromatics, spices, liquid, then reduce.',[4,9,12,34]],'Braising':['Brown first, then cook low and slow in a little liquid until tender.',[7,16,47]],'Emulsion':['Shake fat and water together with a helper so they stay creamy.',[8,31]]};
 const RANKS=['Kitchen Apprentice','Prep Cook','Line Cook','Sous Chef','Head Chef'];
 const PHOTOS=[['01-spring-rolls','Spring rolls','Sep 3'],['02-fattoush','Fattoush','Sep 10'],['03-fish-tacos','Fish tacos','Sep 17'],['26-chicken-caesar','Chicken Caesar','Sep 24'],['27-smash-burgers','Smash burgers','Oct 1'],['28-french-omelet','French omelet','Oct 4'],['05-chicken-fried-rice','Fried rice','Oct 8'],['06-oyakodon','Oyakodon','Oct 15']];
 const STORE=[['s-produce','Produce'],['s-meat','Meat & poultry'],['s-fish','Fish'],['s-dairy','Dairy & eggs'],['s-bakery','Bakery'],['s-pantry','Pantry'],['i-paprika','Spices'],['s-canned','Canned & jarred'],['s-frozen','Frozen']];
@@ -756,7 +824,7 @@ const SHOP=[
 ];
 
 /* ---------- state ---------- */
-const S={serv:QUEUED,bis:6,prof:0,got:new Set(['oil','onion','pepper','garlic','cumin']),gear:new Set(['skillet','spoon','thermo']),hop:null,hopG:null,step:2,confirm:false,flip:false,rating:4,popGem:-1,photos:PHOTOS.length-1,newPhoto:false,chat:0};
+const S={crest:null,refl:'',xfer:'',serv:QUEUED,bis:6,prof:0,got:new Set(['oil','onion','pepper','garlic','cumin']),gear:new Set(['skillet','spoon','thermo']),hop:null,hopG:null,step:2,confirm:false,flip:false,rating:4,popGem:-1,photos:PHOTOS.length-1,newPhoto:false,chat:0};
 const now0=Date.now();
 const T=STEPS.map(s=>s.timer?{label:s.timer.label,sec:s.timer.sec,state:'idle',endAt:0,left:s.timer.sec,ringing:false}:null);
 T[0].state='ended';T[0].endAt=now0-3*60e3;T[0].left=0;
@@ -842,7 +910,7 @@ function renderCook(){
   <article class="q-panel q-log ${S.flip?'flip':''}"><p class="q-kick">Stage ${S.step+1} of ${STEPS.length}</p><p class="steptxt">${resolve(stepText(S.step))}</p>${note}
   ${s.check?`<button type="button" class="chk" data-act="confirm" aria-pressed="${S.confirm}">${ic('i-thermo')}<span class="box">${ic('i-check','')}</span><span>${s.check.replace('{target}',target())}</span></button>`:''}
   ${t&&t.state==='idle'?`<button type="button" class="q-tstart" data-act="tstart" data-i="${S.step}">${ic('i-clock')}Start the ${fmt(t.sec)} timer</button>`:''}
-  <button type="button" class="fixbtn" data-act="fixopen" data-w="${S.step}">${ic('i-flag')}Suggest a fix</button></article>
+  <div class="logacts">${WHYSTEP[S.step]?`<button type="button" class="whybtn" data-act="why" data-id="${WHYSTEP[S.step]}">${ic('i-flame')}Why?</button>`:''}<button type="button" class="fixbtn" data-act="fixopen" data-w="${S.step}">${ic('i-flag')}Suggest a fix</button></div></article>
   <div class="q-nav"><button type="button" class="q-back" data-act="back" ${S.step===0?'disabled':''}>Back</button><button type="button" class="q-btn" data-act="next" ${dis?'disabled':''}>${last?'Plate it':'Next step'}</button></div></div>`;
   S.flip=false;
 }
@@ -879,11 +947,15 @@ function crestSVG(p,size){
 }
 function renderCrests(){
   const got=SKILLS.filter(s=>!s.locked).length;
-  $('#crestStage').innerHTML=`<h4 class="q-h">Crests <span>${got}/${SKILLS.length}</span></h4><div class="crests">${SKILLS.map(p=>`<div class="crest ${p.locked?'locked':''}">${crestSVG(p)}${p.n}</div>`).join('')}</div>`;
+  const sel=SKILLS.find(p=>p.n===S.crest),info=sel&&SKILLINFO[sel.n];
+  $('#crestStage').innerHTML=`<h4 class="q-h">Crests <span>${got}/${SKILLS.length}</span></h4><div class="crests">${SKILLS.map(p=>`<button type="button" class="crest ${p.locked?'locked':''}" data-act="crest" data-n="${p.n}" aria-pressed="${S.crest===p.n}">${crestSVG(p)}${p.n}</button>`).join('')}</div>
+  ${info?`<div class="q-panel crestinfo"><h5>${sel.n}${sel.locked?' · not earned yet':''}</h5><p>${info[0]}</p><ul>${info[1].map(n=>`<li class="${COOKED.has(n)?'':'todo'}">${ic(COOKED.has(n)?'i-check':'i-lock')}${LESSONS[n][1]}${COOKED.has(n)?'':' · lesson '+n}</li>`).join('')}</ul></div>`:'<p class="q-note" style="margin-top:12px">Tap a crest to see the idea behind it and every dish that uses it.</p>'}`;
 }
 function renderRate(){
   const words=['','Not again','It was OK','Pretty good','Really good','Cook it again!'];
-  $('#rateStage').innerHTML=`<h4 class="q-h">How did it turn out?</h4><div class="gems" role="radiogroup" aria-label="Rating">${[1,2,3,4,5].map(n=>`<button type="button" class="gem ${n<=S.rating?'on':''} ${n===S.popGem?'pop':''}" data-act="rate" data-i="${n}" role="radio" aria-checked="${n===S.rating}" aria-label="${n} of 5"><svg viewBox="0 0 56 56"><polygon class="f" points="${hex(28,28,24)}" stroke-width="3"/><polygon class="s" points="${hex(28,22,9)}" fill="#FFF3C9" opacity=".7"/></svg></button>`).join('')}<span class="rate-l">${S.rating} of 5 · ${words[S.rating]}</span></div>`;
+  $('#rateStage').innerHTML=`<h4 class="q-h">How did it turn out?</h4><div class="gems" role="radiogroup" aria-label="Rating">${[1,2,3,4,5].map(n=>`<button type="button" class="gem ${n<=S.rating?'on':''} ${n===S.popGem?'pop':''}" data-act="rate" data-i="${n}" role="radio" aria-checked="${n===S.rating}" aria-label="${n} of 5"><svg viewBox="0 0 56 56"><polygon class="f" points="${hex(28,28,24)}" stroke-width="3"/><polygon class="s" points="${hex(28,22,9)}" fill="#FFF3C9" opacity=".7"/></svg></button>`).join('')}<span class="rate-l">${S.rating} of 5 · ${words[S.rating]}</span></div>
+  <div class="refl"><label for="refl-change">What would you change next time?</label><textarea id="refl-change" data-refl="refl">${esc(S.refl)}</textarea>
+  <label for="refl-xfer">What other dish could use this move? <span>(optional)</span></label><textarea id="refl-xfer" data-refl="xfer" placeholder="Like chili, because it starts with spices in oil">${esc(S.xfer)}</textarea></div>`;
   S.popGem=-1;
 }
 function renderHall(){
@@ -996,7 +1068,30 @@ function tutTick(){
   const d=document.querySelector('[data-tutdisp]'),ring=document.querySelector('[data-tutring]');
   if(d)d.textContent=fmt(rm);if(ring)ring.setAttribute('stroke-dashoffset',(+ring.dataset.c*(1-rm/10)).toFixed(1));
 }
-function renderAll(){renderTut();renderQueue();renderPicker();renderLesson();renderPrep();renderCook();renderTimers();renderSafety();renderTree();renderCrests();renderRate();renderHall();renderHelper()}
+function dishTile(n){const [f,name]=LESSONS[n];return`<div class="xd ${COOKED.has(n)?'cooked':''}">${f?`<img src="img/${f}.webp" alt="" width="440" height="440">`:''}${name}<small>${COOKED.has(n)?'Cooked ✓':'Lesson '+n}</small></div>`}
+function loreCard(c){
+  let body='';
+  if(c.dish)body=`<div class="callimg"><img src="img/${LESSONS[c.dish][0]}.webp" alt="" width="440" height="440"><p>${c.body}</p></div>`;
+  else if(c.xfer)body=`<div class="xfer">${c.xfer.map(([sk,ds])=>`<div><h5>${sk}</h5><div class="xdishes">${ds.map(dishTile).join('')}</div></div>`).join('')}</div>`;
+  else if(c.wrong)body=`<ul class="wrongs">${c.wrong.map(([a,b])=>`<li><b>${a}</b>${b}</li>`).join('')}</ul>`;
+  else if(c.quiz)body=c.quiz.map((q,qi)=>{const got=L.ans[qi];return`<div class="quiz"><p class="qq">${q.q}</p>${q.c.map((o,oi)=>`<button type="button" class="qopt ${got===undefined?'':oi===q.a?'right':oi===got?'wrong':''}" data-act="quiz" data-q="${qi}" data-i="${oi}">${o}</button>`).join('')}${got!==undefined?`<p class="qfb">${got===q.a?'Yes! ':'Not quite. '}${q.why}</p>`:''}</div>`}).join('');
+  else body=`<p>${c.body}</p>`;
+  return`<article class="q-panel lore"><p class="q-kick">${c.kind}</p>${c.title?`<h4>${c.title}</h4>`:''}${body}</article>`;
+}
+function renderLearn(){
+  const n=LEARN.length,c=LEARN[L.i];
+  $('#learnStage').innerHTML=`<div class="tut-top"><p class="q-kick">Learn · ${L.i+1} of ${n}</p><button type="button" class="tut-skip" data-act="goto" data-to="prep">Skip to Prep</button></div>
+  <div class="tut-seg" style="--n:${n}" aria-hidden="true">${LEARN.map((_,k)=>`<i class="${k<L.i?'done':k===L.i?'cur':''}"></i>`).join('')}</div>
+  ${loreCard(c)}
+  <div class="tut-nav"><button type="button" class="q-back" data-act="learn-back" ${L.i===0?'disabled':''}>Back</button>${L.i<n-1?`<button type="button" class="q-btn" data-act="learn-fwd">Next card</button>`:`<button type="button" class="q-btn" data-act="goto" data-to="prep">On to Prep</button>`}</div>`;
+}
+function renderWhy(id){
+  const el=$('#whyov');if(!id){el.hidden=true;el.innerHTML='';return}
+  const c=LEARN.find(x=>x.id===id);el.hidden=false;
+  el.innerHTML=`<div class="q-panel lore" role="dialog" aria-modal="true" aria-label="Why: ${c.title}"><p class="q-kick">Why? · from the Learn cards</p><h4>${c.title}</h4><p>${c.body}</p><button type="button" class="q-btn" data-act="why-close">Back to cooking</button></div>`;
+  el.querySelector('button').focus();
+}
+function renderAll(){renderLearn();renderTut();renderQueue();renderPicker();renderLesson();renderPrep();renderCook();renderTimers();renderSafety();renderTree();renderCrests();renderRate();renderHall();renderHelper()}
 
 /* ---------- timers ---------- */
 let AC=null;
@@ -1048,6 +1143,12 @@ document.addEventListener('click',e=>{
     case'tut-timer':if(TU.tState==='idle'){TU.tState='run';TU.tEnd=Date.now()+10000}else if(TU.tState==='done'){TU.tState='idle'}renderTut();break;
     case'tut-gem':TU.gems=i;renderTut();break;
     case'tut-lit':TU.lit=!TU.lit;renderTut();break;
+    case'learn-fwd':L.i=Math.min(LEARN.length-1,L.i+1);renderLearn();break;
+    case'learn-back':L.i=Math.max(0,L.i-1);renderLearn();break;
+    case'quiz':{const q=+b.dataset.q;if(L.ans[q]===undefined){L.ans[q]=i;renderLearn()}break}
+    case'why':renderWhy(b.dataset.id);break;
+    case'why-close':renderWhy(null);break;
+    case'crest':S.crest=S.crest===b.dataset.n?null:b.dataset.n;renderCrests();break;
     case'rate':S.rating=i;S.popGem=i;renderRate();break;
     case'photo':S.photos++;S.newPhoto=true;renderHall();break;
     case'photoreset':S.photos=PHOTOS.length-1;renderHall();break;
@@ -1058,12 +1159,12 @@ document.addEventListener('click',e=>{
     case'pchk':{const id=b.dataset.id;PCHK.has(id)?PCHK.delete(id):PCHK.add(id);renderParent();break}
   }
 });
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#lvlup').hidden)renderLvl(false);if(FX.open){FX.open=false;renderSheet()}}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('#lvlup').hidden)renderLvl(false);if(FX.open){FX.open=false;renderSheet()}if(!$('#whyov').hidden)renderWhy(null)}});
 document.addEventListener('change',e=>{const f=e.target.closest('#fixform');if(!f)return;
   if(e.target.name==='kind')FX.kind=e.target.value;
   if(e.target.name==='where'){FX.where=e.target.value;FX.field=fields(FX.where)[0].f;FX.sug='';renderSheet()}
   if(e.target.name==='field'){FX.field=e.target.value;FX.sug='';renderSheet()}});
-document.addEventListener('input',e=>{if(!e.target.closest('#fixform'))return;if(e.target.name==='sug')FX.sug=e.target.value;if(e.target.name==='note')FX.note=e.target.value});
+document.addEventListener('input',e=>{const rk=e.target.dataset&&e.target.dataset.refl;if(rk){S[rk]=e.target.value;return}if(!e.target.closest('#fixform'))return;if(e.target.name==='sug')FX.sug=e.target.value;if(e.target.name==='note')FX.note=e.target.value});
 document.addEventListener('submit',e=>{if(e.target.id!=='fixform')return;e.preventDefault();
   const f=fields(FX.where).find(x=>x.f===FX.field),fx={id:FIXQ.length+1,family:'Your family',who:adult()?PROFILES[S.prof].name:'Parent',kind:FX.kind,where:String(FX.where),field:FX.field,cur:f.cur(),sug:(FX.sug||f.cur()).trim(),note:FX.note.trim(),status:'open'};
   if(fx.sug===fx.cur){FX.err='Change what it should say first, so the owner has a fix to apply.';renderSheet();return}

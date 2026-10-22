@@ -382,3 +382,25 @@ Owner rulings on open questions:
   something looks wrong (the adult version shows Suggest a fix), and a finish
   card. It has a progress bar, Back and Next, and a Skip that jumps to the
   finish card.
+
+---
+
+## 17. 2026-10-22 — Teaching the why
+
+- The owner pointed out the lessons read as skills practice with no "why".
+  Added to the plan (§3, Recommendation, approved): every Learn stage has a set
+  shape (the move, why it works, same move in other dishes, when it goes
+  wrong), plus callbacks to earlier lessons, a **Why?** button on cook steps,
+  an optional transfer question in Reflect, and skills that explain
+  themselves when tapped.
+- The "other dishes" card is built from lesson `skills` tags, not hand-written.
+  §7.3's lesson sketch gained `learn.move`, `learn.why`, `learn.wrong`,
+  `learn.callback`, quiz `explain`, and a step `why` link. The linter (§7.4)
+  fails a core lesson missing the move, a why card, or a when-it-goes-wrong
+  entry, and warns on single-lesson skills and missing callbacks.
+- Showcase: new Learn section with 8 Shakshuka cards (callback to the French
+  omelet, the move, three why cards, other dishes with cooked ones marked,
+  rescues, and a two-question quiz with explanations). Steps 2, 3, and 6 have
+  Why?. Crests open a detail panel listing every dish that uses the skill.
+  Reflect has the optional transfer question. Nine more dishes were added to
+  the page's images.
