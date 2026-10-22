@@ -844,3 +844,11 @@ Plan changes only; nothing new is built.
   served from the app, delete and download, the inactive purge, and the human
   check at sign-up if the owner wants it before launch. The sign-up link isn't
   posted publicly until 1c is done.
+
+---
+
+## 34. 2026-10-22 — Inactive purge runs every couple of weeks
+
+- The owner ruled: no daily job. The inactive purge (§6.14) checks every couple
+  of weeks, and "a year" is approximate. The app and its privacy policy don't
+  promise an exact day.
