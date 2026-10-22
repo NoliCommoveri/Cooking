@@ -428,3 +428,36 @@ Owner rulings on open questions:
 - New open question 1: whether voice needs a parent to turn it on, since
   Chrome usually sends the audio to Google.
 - Nothing is built.
+
+---
+
+## 19. 2026-10-22 — Kitchen Quest approved; Chef's Passport built (Phase 0b)
+
+- **The owner approved the Kitchen Quest look,** so Phase 0 is done. §5.4a is
+  now a Requirement.
+- **The owner ruled that voice stays off until a parent turns it on** (§6.12,
+  Requirement). The switch is in family settings, behind the parent PIN.
+  Open question 1 is closed; no open questions remain.
+- **Phase 0b: Chef's Passport built** in the same showcase,
+  `mockups/quest-showcase/index.html`, which is now a two-theme page.
+  - Each sample profile has a theme: Ava and the shared profile use Kitchen
+    Quest, and Leo and Mom use Chef's Passport. Picking a locker or changing a
+    profile's theme redraws every panel, which meets the Phase 0b done-when.
+    The page opens on Leo. The Kitchen Quest panels are unchanged.
+  - Every §5.4 component has a Passport version: the taped recipe card with
+    the test-kitchen stamp, the Serves line with a plate per serving, the
+    mixing bowl, the pegboard, the flipping step card with the measuring cup,
+    dial timers on the counter, safety banners, the passport book and world
+    map, rank outfits, apron pins, chef's-hat rating, the Polaroid corkboard,
+    the helper chat, the rank-up, and the welcome tour and Learn cards.
+  - New art, drawn as SVG: a stamp for each of the 22 cuisines, the chef at
+    all five ranks, the helper chef, the passport cover, and a stylized world
+    map.
+  - Passport pages are grouped into 7 regions. Churros (25, Spanish/Mexican)
+    sit on the Europe page.
+  - §5.4 gained the palette, type, regions, map states, and rank outfits.
+  - Fix: the page now hides `hidden` overlays itself. Before this, the
+    Suggest a fix sheet blocked every tap when the file was opened outside the
+    published page.
+- Next: the owner reviews the Passport look. Once it's approved, Phase 1
+  (content core) starts.

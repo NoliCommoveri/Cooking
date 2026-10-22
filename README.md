@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [18. 2026-10-22 — Hands-free step advance](docs/build-log.md#18-2026-10-22--hands-free-step-advance)
+**Latest build log entry:** [19. 2026-10-22 — Kitchen Quest approved; Chef's Passport built (Phase 0b)](docs/build-log.md#19-2026-10-22--kitchen-quest-approved-chefs-passport-built-phase-0b)
 
 ## Current features
 

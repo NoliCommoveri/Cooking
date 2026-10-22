@@ -263,6 +263,12 @@ The themed components need a lot of art, and every theme added later (§5.2) nee
 - **Claude draws the rest of the art** as SVG (components, icons, stamps, pins). The Phase 0 showcase is the test: if the owner isn't happy with it there, the other options are a commissioned illustrator or a licensed icon set restyled to match.
 
 ### 5.4 Themed components (Chef's Passport)
+Built in the Phase 0b showcase, waiting for the owner's approval. Palette: cork, cream paper, ink, tomato red, butter, basil, and passport navy. **Lilita One** for titles; **Caveat** (handwriting) for notes and labels only, never under 20px; body text in **Nunito**, ≥ 20px in cook mode.
+
+- **Stamp pages by region:** East & Southeast Asia, Middle East & North Africa, South Asia, Sub-Saharan Africa, Europe, Latin America & Caribbean, and the United States. Half the course is American, so the US page is the biggest. Each cuisine has one stamp design, so every Japanese dish gets the same stamp with its own date.
+- **World map:** a stylized map, not to scale. A region turns butter when it has its first stamp and basil when every stamp is in.
+- **Rank outfits:** Kitchen Apprentice wears a paper cap and plain apron; Prep Cook a short chef's hat and butter apron; Line Cook a taller hat, red neckerchief, and striped apron; Sous Chef a pleated hat, buttoned jacket, and navy apron; Head Chef the tallest hat with a gold band.
+
 | Component | Treatment |
 |---|---|
 | Lesson card | A taped recipe card showing the dish illustration, title in the display font, and a skill line handwritten underneath |
@@ -272,17 +278,17 @@ The themed components need a lot of art, and every theme added later (§5.2) nee
 | Timers | A **kitchen dial timer** that counts down, wobbles and rings at zero. Several timers sit side by side on a "counter" strip, each labeled with what it's timing |
 | Safety level | An illustrated **banner** across the top of a step (chef-hat helper icon for adult nearby, oven-mitt hands for adult hands-on) with one short line of text. **Not a pill** |
 | Progress within a lesson | A **measuring cup** or pot that fills as steps are completed |
-| Course progress | The **passport book** and world map (§5.2) |
+| Course progress | The **passport book**, one page per region with a tab for each, and the world map (§5.2) |
 | Skills earned | **Enamel-pin or embroidered-patch** shapes (circles, shields, hexagons) pinned to an apron. Not text chips |
 | Rating | 1–5 **chef hats** or wooden spoons, not stars |
 | Serving picker | A "Serves" line on the recipe card with big − and + buttons and a row of little plates, one per serving (§6.6) |
 | Test-cooked | An inked **test-kitchen stamp** on the lesson card, for a lesson a parent in this family marked test-cooked. Not a pill |
-| Helper | The helper's (§6.8) avatar on a floating **Ask** button, and a chat styled to the theme |
-| Photos | Taking a photo drops a **Polaroid** onto a corkboard. The gallery is a corkboard or scrapbook |
+| Helper | The helper's (§6.8) chef avatar on a floating **Ask** button, and a chat on recipe cards (the helper) and sticky notes (the kid) |
+| Photos | Taking a photo pins a **Polaroid** to a corkboard. The gallery is the corkboard |
 | Rank up | A full-screen celebration where the hat upgrades, with a confetti or sprinkles burst |
 | Profile picker | Each profile has a **chef's locker** with its avatar and apron. A shared profile's locker shows everyone on it |
 
-### 5.4a Themed components (Kitchen Quest) — Recommendation
+### 5.4a Themed components (Kitchen Quest) — Requirement (look approved in Phase 0)
 Drawn from the Phase 0 mockup. Palette: night navy, gold, mana teal, and ember red. Pixel-style display font (e.g. **Pixelify Sans**) for headings and labels only; body text stays in **Nunito**, ≥ 20px in cook mode. Panels have cut (octagonal) corners, not rounded ones.
 
 | Component | Treatment |
@@ -346,7 +352,7 @@ Do **not** use:
 - **Family recipes** (bonus, §6.10): add the family's own recipes, submit them for the shared library, and add recipes from the community directory
 - **Mark test-cooked:** after cooking a lesson themselves, a parent can mark it test-cooked for their family (§7). Optional; lessons don't need it to be shown to kids
 - **Pantry staples:** a list of ingredients always on hand, which drop off the shopping list
-- **Family settings:** family name, profiles (add, rename, avatar, theme, who's on each), dietary filters (§2.1), default servings, other parent logins
+- **Family settings:** family name, profiles (add, rename, avatar, theme, who's on each), dietary filters (§2.1), default servings, voice step control (off until turned on, §6.12), other parent logins
 
 ### 6.2a Owner features
 - **Sign-up requests:** a queue of families asking to join (§8.3). Approving one emails them a sign-up code; declining sends nothing
@@ -475,6 +481,7 @@ Kids have messy hands mid-cook, and the main kitchen device is likely an Android
   - **Tap zone:** the whole lower half of a cook-mode step advances, so a knuckle or wrist works.
   - **Page-turner remote:** a Bluetooth page-turner (the kind musicians use) acts as a keyboard, so cook mode treats its keys (arrows, Page Up/Down, Space, Enter) as Next and Back. It works offline, with no mic.
 - **Voice (Later):** short commands: "next," "back," and "again" (reads the step aloud).
+  - **Requirement: voice is off until a parent turns it on** for the family in family settings, behind the parent PIN. Chrome usually sends what the mic hears to Google, so it's the parent's choice.
   - Uses the browser's built-in speech recognition. **Android Chrome first.**
   - The mic button shows only where the device supports recognition, checked by feature, not by browser name. Where it's missing, nothing breaks; the tap zone and remote still work.
   - **No "switch to Chrome" prompt on iPhone or iPad.** Every iOS browser runs on Safari's engine, so Chrome there gains nothing. iPhone voice may be added later as a "try it" feature if Safari families ask for it.
@@ -700,7 +707,7 @@ Each phase should be deployed and usable before the next begins.
 
 ## 10. Open questions
 
-1. **Voice and kids' audio (§6.12).** With voice on, Chrome usually sends what the mic hears to Google. Should voice be off until a parent turns it on for the family?
+None right now.
 
 ---
 
