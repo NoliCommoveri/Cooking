@@ -134,8 +134,11 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // fixes: { suggest({ lesson, stepId, servings, ingredients }), list(lessonId) }
 // for Suggest a fix and what came of this family's fixes (§6.11). labels: the
 // family's lesson numbers from its course plan ({ id: '8a' }); without them,
-// the suggested order's numbers.
-export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null, fixes = null, labels = null, total = null }) {
+// the suggested order's numbers. ask: { status, send() } for "I want to make
+// this" (a kid) or "Cook this" (an adult); status is null, or where the lesson
+// is in the profile's queue, and send() resolves to the new one (§6.1).
+// seed: { servings, with } from the queued lesson, for a fresh cook.
+export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null, fixes = null, labels = null, total = null, ask = null, seed = null }) {
   const [R, L] = await Promise.all([getRegistry(), getLesson(lessonId)]);
   const num = (id) => (labels ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null;
   // "lesson 8a, Shakshuka", or just the title for a dish the family took out of its plan.
@@ -148,7 +151,10 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
   const view = dietView(L, R.ingredients, family.diet_filters);
   const options = servingOptions(L);
   const pick = (n) => (options.includes(n) ? n : options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a)));
-  const fresh = () => ({ stage: 'card', servings: pick(family.default_servings), learn: 0, quiz: {}, got: [], gear: [], step: 0, timers: [], with: [] });
+  const fresh = () => ({
+    stage: 'card', servings: pick(seed?.servings ?? family.default_servings), learn: 0, quiz: {}, got: [], gear: [], step: 0, timers: [],
+    with: (seed?.with ?? []).filter((id) => crew.some((p) => p.id === id)),
+  });
   let S = readState(profile.id, L.id) || fresh();
   S.with = (S.with ?? []).filter((id) => crew.some((p) => p.id === id));
   // A cook in progress reopens on its lesson card, with Keep going and Start over.
@@ -290,7 +296,19 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
           <button type="button" class="p-btn" data-act="start">${!S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
-    return `${top}${fixNotes()}<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${restart}${fixBtn(null)}</div>`;
+    return `${top}${askBox()}${fixNotes()}<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${restart}${fixBtn(null)}</div>`;
+  }
+
+  // ---------- asking for a lesson (§6.1) ----------
+  function askBox() {
+    if (!ask) return '';
+    const st = ask.status;
+    const said = st === 'requested' ? 'You asked a grown-up for this one.'
+      : st ? 'This one is on your list.'
+      : null;
+    return `<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${said
+      ? `<p class="${T.note} askline" style="margin:0">${ic('i-check')}${said}</p>`
+      : `<button type="button" class="${T.back}" data-act="ask">${adult ? 'Cook this' : 'I want to make this'}</button>`}</div>`;
   }
 
   // ---------- Suggest a fix (§6.11) ----------
@@ -533,6 +551,9 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
       case 'serv-set': S.servings = Number(d.n); break;
       case 'start': S.stage = S.started ? S.last || 'learn' : 'learn'; begin(); break;
       case 'restart': S = fresh(); break;
+      case 'ask':
+        b.disabled = true;
+        return ask.send().then((st) => { ask.status = st; draw(false); }, () => { b.disabled = false; });
       case 'crew': S.with = S.with.includes(d.id) ? S.with.filter((x) => x !== d.id) : [...S.with, d.id]; break;
       case 'learn': {
         const next = S.learn + Number(d.i);

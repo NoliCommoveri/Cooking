@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [54. 2026-10-22 — Skip this recipe, and cook another](docs/build-log.md#54-2026-10-22--skip-this-recipe-and-cook-another)
+**Latest build log entry:** [55. 2026-10-22 — Phase 3a: the queue, courses, and the weekly schedule](docs/build-log.md#55-2026-10-22--phase-3a-the-queue-courses-and-the-weekly-schedule)
 
 ## Current features
 
@@ -18,6 +18,9 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Fix requests** (owner screens): apply a suggestion as a lesson patch for every family, after the linter's checks; decline, reopen, or revert any of them.
 - **Voice step control** (`public/voice.js`): in cook mode, "next" (moves on and reads the step aloud), "back," and "again" (reads it again). Off until a parent turns it on in family settings; shown only where the browser can recognize speech.
 - **Saved cooks** (`public/cooks.js`): each cook is saved to the family's account for every profile on it, with "Cooking with someone?" on the lesson card. A cook finished offline is sent when the connection returns. Lessons a profile has cooked say so in its kitchen.
+- **Queue** (`src/worker/plan.js`): the one "up next" list. Parents add lessons for one or more profiles, approve kids' requests, check each lesson's safety review, and mark lessons test-cooked. Kids ask with "I want to make this"; adults tap "Cook this".
+- **Courses and the weekly schedule** (`src/worker/schedule.js`): set a course up once for one or more profiles, and each week's lessons load into the queue. Unfinished lessons roll to next week; Skip this recipe, Cook another recipe, and Skip this week, each with Undo.
+- **Casual and homeschool modes**: homeschool adds due days for kids and overdue for parents; casual can turn on Plan our weeks.
 - **Test-cook notice**: each parent sees a one-time note, above the lockers, to read a lesson through before their kids cook it.
 - **Demo page** (`/demo`): no account needed. Try the sample lessons in either theme, preview diet settings and a shopping list, and browse the whole course by dish or by skill.
 - **Syllabus** (`/syllabus`): the course as a homeschool course, with objectives, units, hours, pacing, a suggested credit, and the rubric. Printable.

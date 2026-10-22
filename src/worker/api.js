@@ -15,6 +15,7 @@ import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
 import { FREE_MAX, servingOptions } from '../content/scale.js';
 import { numberCourse } from '../content/course.js';
+import { register as registerPlan, markCooked } from './plan.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -68,7 +69,7 @@ const profileOut = (r) => ({
 
 const familyOut = (f) => ({
   name: f.name, default_servings: f.default_servings, diet_filters: JSON.parse(f.diet_filters), pin_set: Boolean(f.parent_pin_hash),
-  voice_enabled: Boolean(f.voice_enabled),
+  voice_enabled: Boolean(f.voice_enabled), mode: f.mode, plan_weeks: Boolean(f.plan_weeks),
 });
 
 // ---------- routes ----------
@@ -297,6 +298,11 @@ on('DELETE', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
   }
   await env.DB.batch([
     env.DB.prepare('DELETE FROM attempt_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
+    // Off every queued lesson and course too; a queued lesson nobody is left on goes.
+    env.DB.prepare('DELETE FROM queue_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
+    env.DB.prepare(`DELETE FROM queue WHERE family_id = ?
+      AND NOT EXISTS (SELECT 1 FROM queue_profiles qp WHERE qp.queue_id = queue.id)`).bind(s.family_id),
+    env.DB.prepare('DELETE FROM course_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
     env.DB.prepare(`DELETE FROM attempts WHERE family_id = ?
       AND NOT EXISTS (SELECT 1 FROM attempt_profiles ap WHERE ap.attempt_id = attempts.id)`).bind(s.family_id),
     env.DB.prepare('DELETE FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id),
@@ -378,6 +384,8 @@ on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
     ...ids.map((pid) => env.DB.prepare('INSERT OR IGNORE INTO attempt_profiles (attempt_id, family_id, profile_id) VALUES (?, ?, ?)')
       .bind(aid, s.family_id, pid)),
   ]);
+  // A finished cook closes the queued lesson it was for (§6.2).
+  if (finished) await markCooked(env, s.family_id, L.id, ids, aid);
   return { ok: true, id: aid, finished_at: finished };
 });
 
@@ -616,8 +624,13 @@ on('PUT', '/api/family', async (req, env, body) => {
   for (const f of filters) oneOf(f, LIBRARY.dietTags, 'Each diet filter');
   // Voice step control (§6.12) is left as it is when the body doesn't mention it.
   if (body.voice_enabled !== undefined && typeof body.voice_enabled !== 'boolean') fail(400, 'invalid', 'voice_enabled must be true or false.');
-  await env.DB.prepare('UPDATE families SET name = ?, default_servings = ?, diet_filters = ?, voice_enabled = COALESCE(?, voice_enabled) WHERE id = ?')
-    .bind(text(body.name, 'Family name'), servings, JSON.stringify(filters), body.voice_enabled === undefined ? null : Number(body.voice_enabled), s.family_id).run();
+  // So are the mode (§6.17) and Plan our weeks (§6.18). Switching never deletes anything.
+  const mode = body.mode === undefined ? null : oneOf(body.mode, ['casual', 'homeschool'], 'mode');
+  if (body.plan_weeks !== undefined && typeof body.plan_weeks !== 'boolean') fail(400, 'invalid', 'plan_weeks must be true or false.');
+  const keep = (v) => (v === undefined ? null : Number(v));
+  await env.DB.prepare(`UPDATE families SET name = ?, default_servings = ?, diet_filters = ?, voice_enabled = COALESCE(?, voice_enabled),
+      mode = COALESCE(?, mode), plan_weeks = COALESCE(?, plan_weeks) WHERE id = ?`)
+    .bind(text(body.name, 'Family name'), servings, JSON.stringify(filters), keep(body.voice_enabled), mode, keep(body.plan_weeks), s.family_id).run();
   return { ok: true };
 });
 
@@ -664,6 +677,9 @@ on('POST', '/api/owner/parent-password', async (req, env, body) => {
   ]);
   return { ok: true };
 });
+
+// The queue, courses, requests, safety review, and test-cooked (plan.js).
+registerPlan(on);
 
 // ---------- dispatch ----------
 

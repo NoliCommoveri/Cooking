@@ -210,7 +210,7 @@ test('family settings save, and reject bad values', async () => {
   const c = await family(env, 'Carsons', 'jen@example.com');
   assert.equal((await c.put('/api/family', { name: 'The Carsons', default_servings: 4, diet_filters: ['dairy'] })).status, 200);
   const f = (await c.get('/api/family')).body;
-  assert.deepEqual(f.family, { name: 'The Carsons', default_servings: 4, diet_filters: ['dairy'], pin_set: true, voice_enabled: false });
+  assert.deepEqual(f.family, { name: 'The Carsons', default_servings: 4, diet_filters: ['dairy'], pin_set: true, voice_enabled: false, mode: 'casual', plan_weeks: false });
   assert.deepEqual(f.parents, ['jen@example.com']);
   assert.equal((await c.put('/api/family', { name: 'X', default_servings: 40, diet_filters: [] })).status, 400);
   assert.equal((await c.put('/api/family', { name: 'X', default_servings: 4, diet_filters: ['pork'] })).status, 400);

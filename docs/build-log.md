@@ -1326,3 +1326,60 @@ which would have meant reworking the queue later. The owner ruled:
     cooked, it goes back to its place without being overdue.
 - Data model: `course_skips` (section 53) is now `course_weeks`, which holds a
   skipped week and a week's extra lessons (§8.4).
+
+## 55. 2026-10-22 — Phase 3a: the queue, courses, and the weekly schedule
+
+- **Migration 0006** (`src/worker/migrations/0006_queue.sql`) adds the queue
+  and who each lesson is for, courses (their profiles, plan, and skipped or
+  extra weeks), test-cooked marks, and the family's mode and Plan our weeks.
+  Backups and family downloads include the new tables. **The owner presses
+  Apply pending on `/ops`** after this deploys.
+- **The weekly schedule** (`src/worker/schedule.js`) is worked out on each
+  read, never stored: each week holds the next unfinished lessons at the
+  course's pace. An unfinished lesson goes first the next week and everything
+  shifts; a lesson cooked early counts and the rest move up; a skipped week
+  pushes the plan back without counting as behind; an extra (Cook another
+  recipe) is this week only. Next week shows from Friday. The parent sees the
+  planned finish and how many weeks behind.
+- **The queue** (`src/worker/plan.js`) is the one "up next" list. Each read
+  brings a course's rows in line with its schedule: due lessons are queued
+  for all the course's profiles, ones no longer due leave (unless shopped
+  for), and cooked ones close. A finished cook closes the queued lesson it
+  was for, whichever way it got there.
+- **Kids and adults:** "I want to make this" on a kid profile sends a request
+  (5 waiting at most per profile); "Cook this" on an adult profile queues it
+  with no PIN. A kid's kitchen has **Up next** (or **Next quests**), with "due
+  Friday" in homeschool mode and nothing about being late. Opening a queued
+  lesson starts at its serving count with its other profiles picked.
+- **Parents → Queue:** requests with Approve and Not now; each course's week
+  with Skip this recipe, Cook another recipe, and Skip this week (each with
+  Undo); next week's lessons from Friday; skipped recipes with Put back;
+  lessons queued by hand with Remove (and Put back); and Add a lesson, with
+  the knife-work note (§4.0). Every lesson has **Safety review** (the steps an
+  adult is needed for) and **I've test-cooked this**. Foundation lessons are
+  marked with a shield and the word "Foundation". Overdue shows only in
+  homeschool mode, only to parents.
+- **Parents → Courses:** set up a course for one or more profiles: start
+  date, lessons per week, and the plan (every dish in course order, move up or
+  down, untick to leave out; pick-one groups start with their first dish),
+  with the prerequisite notes and the planned finish. End a course, and put
+  it back. A profile is on one course at a time. A profile on a course takes
+  its lesson numbers from the course plan.
+- **Family settings:** Casual or Homeschool, and Plan our weeks for casual
+  mode. Switching never deletes anything.
+- **The test-cook notice** now says a lesson can be marked test-cooked.
+- **Decisions made in building, for the owner to check** (now in §6.18): a
+  lesson's due day is the Friday of its week; only lessons a family can cook
+  are scheduled (today that's the 4 written ones), and the rest join as
+  they're written; ending a course takes its unshopped lessons out of the
+  queue. A request for a lesson the course already queued shows once to the
+  kid, and the parent is told.
+- Fixed in passing: the Suggest a fix flag on the lesson card was drawn huge.
+- Tests: 148. New ones cover the schedule (on track, rollover, cooking ahead,
+  skipped weeks, extras, before the start) and the API (requests and Cook
+  this, approve, decline and put back, remove and put back, the PIN, input
+  checks, family scoping, a course loading the week for two profiles, Skip
+  this recipe, Skip this week, homeschool due days, one course per profile,
+  ending and putting back a course, plan order, safety review, test-cooked,
+  and the new tables in a family download).
+- Next: 3b, shopping trips and the pantry.

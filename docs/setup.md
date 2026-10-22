@@ -113,6 +113,25 @@ Use an Android phone or tablet with Chrome.
 4. A fix that names an unclean food, or lowers a thermometer target, can't be
    applied: the screen says why.
 
+## 12. Check it (the Phase 3a test)
+
+After this update deploys, press **Apply pending** on `/ops` (migration 0006).
+
+1. In a test family, open a lesson from a kid's kitchen and tap **I want to
+   make this**. In **Parents → Queue**, the request is at the top. Open
+   **Safety review**, then **Approve**. The kid's kitchen shows it under
+   **Up next**.
+2. On an adult profile, tap **Cook this**. It goes straight into the queue.
+3. In **Parents → Family**, pick **Homeschool** and save. In **Parents →
+   Courses**, **Set up a course** for two profiles, starting this week, 1 a
+   week. The Queue screen shows this week's lesson, due Friday, and both kids
+   see it.
+4. Press **Cook another recipe**: the next lesson joins this week. **Undo**
+   takes it away. **Skip this recipe** brings in the next one; **Undo** puts
+   it back. **Skip this week** empties the week; **Put this week back**
+   undoes it.
+5. Press **I've test-cooked this** on a lesson. **Unmark** undoes it.
+
 ## Backups and recovery
 
 - **Download export.json** saves everything. **Restore from export.json**

@@ -196,3 +196,30 @@ legend{font-weight:800;font-size:15px;margin-bottom:6px;padding:0}
 .fixcmp p{margin:2px 0 0;font-weight:700;overflow-wrap:anywhere}
 @media (max-width:520px){.fixcmp{grid-template-columns:1fr}}
 .fixov .card .card{border:0;padding:0;background:none}
+
+/* The queue and courses (Phase 3a) */
+.found{display:inline-flex;align-items:center;gap:4px;margin-left:8px;font-size:14px;font-weight:800;color:var(--h-acc)}
+.found .ico{width:16px;height:16px}
+.late{color:var(--h-bad);font-weight:800}
+.flash{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+.qcard,.qcourse{gap:10px;margin-bottom:12px}
+.qcourse h4{margin:8px 0 0}
+.qtools{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center;margin-top:4px}
+.safety summary{cursor:pointer;font-weight:700;min-height:32px;display:flex;align-items:center}
+.safety-list{margin:6px 0 0;padding-left:18px}
+.safety-list li{margin:0 0 6px}
+.safety-list b,.safety-list span{display:block}
+label.f.inline{display:flex;align-items:center;gap:8px;font-weight:700}
+select{font:inherit;padding:8px 10px;border-radius:10px;border:1.5px solid var(--h-line);background:var(--h-bg);color:inherit;min-height:44px}
+.note{background:var(--h-bg);border-radius:10px;padding:8px 10px;margin:0}
+.planrow{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:8px;align-items:start;padding:8px 0;border-bottom:1px solid var(--h-line)}
+.planrow.out{opacity:.6}
+.planno{font-weight:800;font-size:20px;text-align:center;padding-top:8px}
+.planmove{display:flex;gap:4px}
+.planmove .hbtn{min-width:44px;padding:0 10px}
+.k-next{min-height:0}
+.rowi.qrow{grid-template-columns:minmax(0,1fr)}
+.rowi.qrow>.acts,.qcard .acts{justify-content:flex-start}
+.qtools .hbtn.link{padding-left:0;padding-right:0}
+.askline .ico{width:1.3em;height:1.3em;vertical-align:-.25em;margin-right:6px}
+.q-back .ico,.p-back .ico{width:22px;height:22px;vertical-align:-.3em;margin-right:6px}

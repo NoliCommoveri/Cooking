@@ -764,6 +764,9 @@ Set the whole course up once, and the app loads each week's lessons. Always on i
 - **Cook another recipe** (owner, 2026-10-22), one tap for a parent: pulls the next unfinished lesson into this week as an extra, for this week only. If it's cooked, the rest of the schedule moves up, as with cooking ahead. If it isn't, it goes back to its place, isn't overdue, and nothing shifts.
 - **Changing the plan mid-course** (reorder, remove, add back, change the pace or start date) recomputes the weeks. Cooks already done stay done.
 - A course's lessons are queued for all its profiles together, as one cook (§1). A profile can be on only one course at a time.
+- **A lesson's due day is the Friday of its week** (shown to kids in homeschool mode as "due Friday"); it isn't overdue until the week is over.
+- Only lessons a family can cook are scheduled: written, kept in the plan, and not hidden by its diet settings. The rest join the schedule when they can be cooked, and the parent sees how many are waiting.
+- **Ending a course** takes its lessons not yet shopped for out of the queue. An ended course can be put back from Courses.
 - Switching modes never deletes a course. Turning off Plan our weeks in casual mode keeps the plan and stops loading weeks; the lessons already in the queue stay.
 
 ---
