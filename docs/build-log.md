@@ -235,3 +235,11 @@ Owner rulings on open questions:
   - On adult profiles, safety banners show only the hazard.
   - Added "Adult learner" to the users table.
 - No open questions remain.
+
+---
+
+## 11. 2026-10-22 — Fat rule scope
+
+- The owner ruled that the fat rule covers separable fat only (suet, tallow,
+  beef dripping sold as a fat). Marbling and cooking drippings are allowed;
+  §2.1 now says so. No lesson changes were needed.
