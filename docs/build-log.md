@@ -351,3 +351,16 @@ Owner rulings on open questions:
   grouped by where each dish starts. Re-ran it on sheets 1–4; their crops
   didn't change.
 - 27 of 50 dishes now have art.
+
+---
+
+## 19. 2026-10-22 — Dish art sheet 7
+
+- Added sheet 7 from the owner and cropped 4 dishes: 32 mac and cheese, 33 beef
+  chili, 34 jambalaya, 35 BBQ pulled chicken. Each is about 560–660 px.
+- Checked for unclean foods: nothing that is clearly unclean, but two look like
+  pork and were raised with the owner. The jambalaya's sausage is pink inside
+  like pork kielbasa, and the pulled chicken is dark red-brown like pulled
+  pork. The mac and cheese looks baked with a crumb top rather than stovetop
+  creamy, which is minor.
+- 31 of 50 dishes now have art.

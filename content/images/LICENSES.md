@@ -16,3 +16,4 @@ use in this app. Cropped from the source sheets in `source/` with
 | `source/sheet-04-units4-5.png` | `dishes/14-beef-bulgogi.png`, `dishes/15-lomo-saltado.png`, `dishes/16-chicken-tinga-tacos.png`, `dishes/17-pupusas.png` |
 | `source/sheet-05-units5-6.png` | `dishes/18-gyoza.png`, `dishes/19-skillet-naan.png`, `dishes/20-pao-de-queijo.png`, `dishes/21-spanakopita.png` |
 | `source/sheet-06-unit6-desserts.png` | `dishes/22-spinach-mushroom-quiche.png`, `dishes/23-chicken-katsu.png`, `dishes/24-swedish-meatballs.png`, `dishes/25-churros.png` |
+| `source/sheet-07-unit2-3.png` | `dishes/32-mac-and-cheese.png`, `dishes/33-beef-chili.png`, `dishes/34-jambalaya.png`, `dishes/35-bbq-pulled-chicken.png` |
