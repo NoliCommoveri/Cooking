@@ -100,7 +100,7 @@ Each lesson has these stages:
 5. **Plate and photo.** The camera opens directly, and the photo saves to this attempt. Only for a family with photos on (§2.6); otherwise this stage is skipped.
 6. **Reflect.** A 1–5 rating, a "what would I change?" note, and an optional rating from whoever ate it.
 
-### Learn stage: teaching the why (recommendation)
+### Learn stage: teaching the why — Requirement (owner, 2026-10-22)
 The goal is cooking skill, not 50 memorised recipes, so every Learn stage teaches the same four things:
 - **The move:** what the skill is, in one line.
 - **Why it works:** the food science, kid-sized (e.g. spice flavour dissolves in fat, so spices bloom in oil).
@@ -127,9 +127,9 @@ A safety level is information only. The banner tells the kid who must be in the 
 
 On an **adult profile**, the banner shows only the hazard (hot oil, sharp knife, hot oven), without "an adult must…" wording.
 
-### Food-safety checks (recommendation)
+### Food-safety checks — Requirement (owner, 2026-10-22)
 Separate from safety levels, which are about who must be in the kitchen. These are about the food.
-- **Doneness check.** Any lesson that cooks raw poultry, ground meat, whole cuts, fish, or eggs to a safe point has a check step with a thermometer target (e.g. poultry 165°F, ground beef 160°F, fish 145°F). The kid can't check the step off without entering or confirming the reading. Every such lesson lists a thermometer in its equipment.
+- **Doneness check.** Any lesson that cooks raw poultry, ground meat, whole cuts, fish, or eggs to a safe point has a check step with a thermometer target (e.g. poultry 165°F, ground beef 160°F, fish 145°F). Every such lesson lists a thermometer in its equipment. **The app doesn't require a reading** (owner, 2026-10-22): the step shows the target clearly and is checked off like any other step.
 - **Raw-handling steps.** After a step that handles raw meat, poultry, fish, or eggs, the next step is a wash-hands-and-board step.
 - **Raw and lightly cooked eggs** (Caesar dressing, hollandaise) use pasteurized eggs, or the lesson says why not.
 - **Raw dough.** Lessons with raw flour or raw egg in a dough or batter include a "don't taste the raw dough" tip.
@@ -518,7 +518,7 @@ A first run for a new family, like KennelOS's (End-State guide §11 and "Getting
 
 Until the wizard is built, the test-cook warning shows as a one-time notice on a parent's first sign-in.
 
-### 6.11 Fix requests and lesson patches (recommendation)
+### 6.11 Fix requests and lesson patches — Requirement (owner, 2026-10-22)
 Parents and adult learners report what's wrong in a lesson, and the owner pushes the fix from the browser. **The owner isn't the cooking expert**, so the person reporting proposes the correction, and the app checks it before it goes live.
 - **Suggest a fix.** A "Suggest a fix" control on the lesson card and on each step, behind the parent PIN (adult profiles can use it too). The app fills in the lesson, version, step, and serving count. The reporter picks a type (wrong amount or time, unclear step, safety problem, **unclean ingredient**, or other), writes what's wrong, and says **what it should say instead**: the new amount, time, or wording. They choose from a list of the step's own fields, so the suggestion is already shaped as an edit.
 - **Owner queue.** "Fix requests" on the owner screens (§6.2a), grouped by lesson, showing the current text beside the suggested text. Safety and unclean-ingredient reports also email the owner through Resend right away.
@@ -529,19 +529,19 @@ Parents and adult learners report what's wrong in a lesson, and the owner pushes
 - **Folding patches into the files.** Live patches sit on top of the content files. From time to time, in a session, Claude writes the applied patches into the lesson files, runs the linter, and clears them from the database. The owner doesn't have to do anything for this.
 - **Bigger changes** (a new ingredient, a new step, a different method) are logged on the fix request as "needs a content change" and are made in a session or in the GitHub web editor.
 
-### 6.12 Hands-free step advance — Recommendation
+### 6.12 Hands-free step advance
 Kids have messy hands mid-cook, and the main kitchen device is likely an Android phone propped on the counter.
-- **For every device (Phase 2):**
+- **On hold** (owner, 2026-10-22):
   - **Tap zone:** the whole lower half of a cook-mode step advances, so a knuckle or wrist works.
   - **Page-turner remote:** a Bluetooth page-turner (the kind musicians use) acts as a keyboard, so cook mode treats its keys (arrows, Page Up/Down, Space, Enter) as Next and Back. It works offline, with no mic.
-- **Voice (Later):** short commands: "next," "back," and "again" (reads the step aloud).
+- **Voice — Requirement, Phase 2 (owner, 2026-10-22):** short commands: "next," "back," and "again" (reads the step aloud).
   - **Requirement: voice is off until a parent turns it on** for the family in family settings, behind the parent PIN. Chrome usually sends what the mic hears to Google, so it's the parent's choice.
   - Uses the browser's built-in speech recognition. **Android Chrome first.**
-  - The mic button shows only where the device supports recognition, checked by feature, not by browser name. Where it's missing, nothing breaks; the tap zone and remote still work.
+  - The mic button shows only where the device supports recognition, checked by feature, not by browser name. Where it's missing, nothing breaks; the on-screen buttons still work.
   - **No "switch to Chrome" prompt on iPhone or iPad.** Every iOS browser runs on Safari's engine, so Chrome there gains nothing. iPhone voice may be added later as a "try it" feature if Safari families ask for it.
-  - Chrome usually sends the audio to Google to recognize it. When the connection drops, voice pauses quietly with a small "voice paused, no connection" note, and taps keep working.
+  - Chrome usually sends the audio to Google to recognize it. When the connection drops, voice pauses quietly with a small "voice paused, no connection" note, and the buttons keep working.
   - Listening pauses while the app reads a step aloud, so it doesn't hear itself.
-  - **Food-safety checks (§3) need a tap.** A stray "next" can't pass a doneness check.
+  - **A doneness step (§3) needs a tap.** On it, "next" reads the target temperature aloud instead of moving on, so a stray "next" can't skip it.
 
 ---
 
@@ -794,7 +794,7 @@ Each phase should be deployed and usable before the next begins.
 | **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
 | **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, open sign-up with an emailed code and the beta word, parent login, sessions, password reset email (Resend), parent PIN, profiles (single or shared) and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up on their own, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
 | **1c. Public launch** | The landing page, privacy policy, and terms (§6.13), fonts served from the app, Delete our family and Download our data, the inactive purge with its warning emails (§6.14), and the human check at sign-up (§8.3) if the owner wants it before launch | A visitor reads the landing page, signs up, and deletes their family from the browser. A test family left inactive past the limit is warned and then purged by the scheduled job. **The sign-up link isn't posted publicly before this phase is done** |
-| **2. Lesson player** | Learn, Prep, Cook mode, kitchen words, food-safety checks, timers, wake lock, tap zone and page-turner remote (§6.12), attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
+| **2. Lesson player** | Learn, Prep, Cook mode, kitchen words, food-safety checks, timers, wake lock, voice step control (§6.12), the installable PWA (§8.2), attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
 | **3. Parent planning & shopping** | Queue (with kid requests), safety review, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
 | **4. Photos & reflect** | The per-family photos switch on `/ops` (§2.6), camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download, Print our progress (§6.15) | In a family with photos on, a photo taken on the tablet shows in the gallery on the parent's phone. A family with photos off cooks and reflects with no photo step |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |
@@ -802,7 +802,7 @@ Each phase should be deployed and usable before the next begins.
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
 | **8. Helper & first run** | First-run wizard (§6.9) and the helper (§6.8), once both are specced | A new family goes from sign-up to their first queued lesson through the wizard, and kids and parents can each finish a helper task |
 | **9. Family recipes (bonus)** | My recipes with the guided entry flow, submission and owner review, the community directory (§6.10) | A parent enters a recipe through the flow, a kid cooks it, and the owner releases a submitted one to the directory, where another test family finds and adds it |
-| **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, voice "next step" (§6.12), CSV export to the homeschool management system | — |
+| **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system | — |
 
 **Testing (every phase):** automated tests run in CI alongside the linter. At minimum they cover family scoping (no endpoint returns another family's rows or photos), lesson patches (the hard block and food-safety checks reject a bad patch, and revert restores the lesson), scaling and rounding, unit conversion, shopping-list merging, and the migration runner.
 

@@ -887,3 +887,18 @@ Plan changes only; nothing new is built.
   after a self-serve delete, during which the owner can restore the family
   from `/ops`.
 - The owner confirmed the kid app becomes an installable PWA (§8.2).
+
+---
+
+## 38. 2026-10-22 — Phase 2 rulings
+
+Before Phase 2, the owner ruled on its four open recommendations:
+- **Learn stage (§3):** confirmed as written.
+- **Fix requests and lesson patches (§6.11):** confirmed as written.
+- **Food-safety checks (§3):** doneness steps stay, with their thermometer
+  target shown, but the app doesn't require a reading to check one off. The
+  wash-hands steps after raw food stay. The linter's content checks are
+  unchanged.
+- **Hands-free (§6.12):** voice step control moves from Later into Phase 2;
+  the tap zone and page-turner remote go on hold. On a doneness step, "next"
+  reads the target aloud instead of moving on.
