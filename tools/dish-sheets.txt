@@ -18,5 +18,6 @@ sheet-13-redos-logo.png 37-philly-cheesesteak,28-french-omelet,32-mac-and-cheese
 sheet-14-redos.png 14-beef-bulgogi,27-smash-burgers,34-jambalaya,35-bbq-pulled-chicken
 sheet-15-foundations-1.png 51-chicken-fajitas,52-carrot-apple-slaw,53-guacamole-and-chips,54-bruschetta
 sheet-16-foundations-2.png 55-matzo-ball-soup,56-minestrone,57-grilled-cheese-tomato-soup,58-challah-french-toast
+sheet-17-foundations-3.png 59-spaghetti-marinara,60-sloppy-joes,61-croque-madame,62-chicken-gumbo
 # The fourth item on sheet 13 is the logo, cropped separately:
 #   python3 tools/crop-dish-sheet.py content/images/source/sheet-13-redos-logo.png content/images/brand -,-,-,clean-plate-logo 9

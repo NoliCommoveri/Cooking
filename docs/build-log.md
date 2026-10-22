@@ -662,3 +662,5 @@ The owner reviewed the sample lessons in the preview.
 - Every picture was checked for unclean foods, and none are in them.
 - A review for repeats across all 75 dishes is with the owner. It proposes
   swapping 52, 53, 54, and 55, among others; these pictures stay either way.
+- Sheet 17 (59–62) was cropped the same way. 61 Croque madame needs a redo
+  if it stays: the turkey came out pink and could pass for ham.

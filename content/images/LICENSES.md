@@ -26,6 +26,7 @@ use in this app. Cropped from the source sheets in `source/` with
 | `source/sheet-14-redos.png` | `dishes/14-beef-bulgogi.png`, `dishes/27-smash-burgers.png`, `dishes/34-jambalaya.png`, `dishes/35-bbq-pulled-chicken.png` |
 | `source/sheet-15-foundations-1.png` | `dishes/51-chicken-fajitas.png`, `dishes/52-carrot-apple-slaw.png`, `dishes/53-guacamole-and-chips.png`, `dishes/54-bruschetta.png` |
 | `source/sheet-16-foundations-2.png` | `dishes/55-matzo-ball-soup.png`, `dishes/56-minestrone.png`, `dishes/57-grilled-cheese-tomato-soup.png`, `dishes/58-challah-french-toast.png` |
+| `source/sheet-17-foundations-3.png` | `dishes/59-spaghetti-marinara.png`, `dishes/60-sloppy-joes.png`, `dishes/61-croque-madame.png`, `dishes/62-chicken-gumbo.png` |
 
 Dishes a later sheet replaced aren't listed under the earlier sheet. `tools/dish-sheets.txt` has the full map.
 
