@@ -375,3 +375,10 @@ Owner rulings on open questions:
   own theme. It covers asking for a lesson, servings, Prep, cook mode, the
   photo and reflection, progress, what to do when something looks wrong (kids
   tell a grown-up; adults get Suggest a fix), and the helper.
+- Showcase: added the **tutorial quest**, Kitchen Quest's version of the
+  profile intro. It has 10 cards, each with the guide speaking and a "try it":
+  ask to cook, party size, gather supplies, cook a step, timers and the
+  thermometer, photo and rating, lighting a skill-tree node, what to do if
+  something looks wrong (the adult version shows Suggest a fix), and a finish
+  card. It has a progress bar, Back and Next, and a Skip that jumps to the
+  finish card.

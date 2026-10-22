@@ -316,8 +316,8 @@ svg use{transform-box:fill-box;transform-origin:center}
 .sheetbox .kind:has(input:checked){border-color:var(--h-acc);box-shadow:0 0 0 1px var(--h-acc)}
 .kind input{width:20px;height:20px;min-height:0;accent-color:var(--h-acc)}
 .kind em{font-style:normal;color:var(--h-mut);font-weight:600;font-size:13px}
-.cur{margin:0;padding:10px 12px;border-radius:10px;background:var(--h-bg);color:var(--h-mut);font-size:15px}
-.cur b{color:var(--h-fg)}
+.curval{margin:0;padding:10px 12px;border-radius:10px;background:var(--h-bg);color:var(--h-mut);font-size:15px}
+.curval b{color:var(--h-fg)}
 .acts{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
 .hbtn{min-height:48px;padding:6px 18px;border-radius:10px;border:1.5px solid var(--h-line);background:transparent;font-weight:800;font-size:16px}
 .hbtn.pri{background:var(--h-acc);border-color:var(--h-acc);color:var(--h-acc-ink)}
@@ -347,6 +347,38 @@ svg use{transform-box:fill-box;transform-origin:center}
 .fx .state svg{width:18px;height:18px}
 .fx .state.ok{color:var(--h-acc)}
 .fx .state.bad{color:#C2341E}
+.tut{max-width:640px;display:grid;gap:14px}
+.tut-top{display:flex;align-items:center;gap:12px}
+.tut-top .q-kick{margin-right:auto}
+.tut-skip{border:0;background:transparent;color:var(--q-dim);font-weight:800;font-size:15px;min-height:44px;padding:4px 8px;text-decoration:underline;text-underline-offset:3px}
+.tut-seg{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:4px}
+.tut-seg i{height:10px;background:#2B3260;box-shadow:inset 0 0 0 2px var(--q-edge)}
+.tut-seg i.done{background:var(--q-gold)}
+.tut-seg i.cur{background:var(--q-mana)}
+.tut-say{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:start}
+.tut-say svg{width:64px;height:64px}
+.tut-say .bubble{font-size:18px;line-height:1.45}
+.tut-say h4{margin:0 0 4px;font-family:var(--q-disp);font-size:22px;color:var(--q-gold);letter-spacing:.04em;text-transform:uppercase;line-height:1.1}
+.try{padding:16px;display:grid;gap:12px;justify-items:start}
+.try .tag{font-family:var(--q-disp);font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--q-mana)}
+.try .done{display:flex;gap:8px;align-items:center;font-weight:800;color:var(--q-mana);margin:0}
+.try .done .ico{width:22px;height:22px}
+.mini-q{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;align-items:center;width:100%}
+.mini-q img{width:72px;height:auto}
+.mini-q b{font-family:var(--q-disp);font-size:20px;display:block}
+.mini-q span{color:var(--q-dim);font-size:14px}
+.trio{display:flex;gap:10px;flex-wrap:wrap}
+.trio .q-slot{width:104px;min-height:112px}
+.tut .q-btn{font-size:19px;min-height:56px}
+.tut-nav{display:flex;gap:10px}
+.tut-nav .q-btn{flex:1}
+.mini-ring{width:96px;height:96px;border:0;background:transparent;padding:0}
+.mini-ring.ringing{animation:shake .25s linear infinite}
+.mini-ring text{font-family:var(--q-disp);font-weight:700;fill:#fff}
+.path{display:flex;align-items:center;gap:0}
+.path i{width:28px;height:4px;background:var(--q-edge)}
+.path i.on{background:var(--q-gold)}
+.path button{border:0;background:transparent;padding:0;width:44px;height:48px}
 .foot{margin-top:40px;color:var(--h-mut);font-size:14px;max-width:80ch}
 
 @keyframes hop{0%{transform:none}35%{transform:translateY(-22px) rotate(-14deg) scale(1.18)}70%{transform:translateY(3px)}100%{transform:none}}
@@ -478,7 +510,7 @@ svg use{transform-box:fill-box;transform-origin:center}
   </header>
 
   <nav class="toc" aria-label="On this page">
-    <a href="#picker">Profile picker</a><a href="#tokens">Colours &amp; type</a><a href="#lesson">Lesson card</a><a href="#prep">Prep</a><a href="#cook">Cook mode</a><a href="#safety">Safety</a><a href="#progress">Progress</a><a href="#rate">Rating</a><a href="#photos">Photos</a><a href="#helper">Helper</a><a href="#fixes">Fix requests</a><a href="#art">Core art</a><a href="#parent">Parent screen</a>
+    <a href="#picker">Profile picker</a><a href="#tutorial">Tutorial quest</a><a href="#tokens">Colours &amp; type</a><a href="#lesson">Lesson card</a><a href="#prep">Prep</a><a href="#cook">Cook mode</a><a href="#safety">Safety</a><a href="#progress">Progress</a><a href="#rate">Rating</a><a href="#photos">Photos</a><a href="#helper">Helper</a><a href="#fixes">Fix requests</a><a href="#art">Core art</a><a href="#parent">Parent screen</a>
   </nav>
 
   <section class="sec" id="picker">
@@ -488,6 +520,12 @@ svg use{transform-box:fill-box;transform-origin:center}
       <div class="lockers" id="lockers"></div>
       <div class="prof" id="prof"></div>
     </div>
+  </section>
+
+  <section class="sec" id="tutorial">
+    <h2>Tutorial quest: the profile intro</h2>
+    <p class="lead">What a profile sees right after picking its theme: one card per thing they'll do, each with a quick "try it". Short words, and nothing moves while a card is being read. Any card can be skipped, and the whole thing can be replayed from the profile's locker. Pick Mom above to see the adult version of the last card.</p>
+    <div class="qx"><div class="tut" id="tutStage"></div></div>
   </section>
 
   <section class="sec" id="tokens">
@@ -918,13 +956,47 @@ function renderSheet(){
   <fieldset><legend>What kind of problem?</legend><div class="kinds">${Object.entries(KINDS).map(([k,v])=>`<label class="kind"><input type="radio" name="kind" value="${k}" ${FX.kind===k?'checked':''}>${v[0]}${k==='safety'||k==='unclean'?' <em>· urgent</em>':''}</label>`).join('')}</div></fieldset>
   <div><label for="fx-where">Where</label><select id="fx-where" name="where">${['L',0,1,2,3,4,5].map(w=>`<option value="${w}" ${String(w)===String(FX.where)?'selected':''}>${whereLabel(String(w))}</option>`).join('')}</select></div>
   <div><label for="fx-field">Which part</label><select id="fx-field" name="field">${fl.map(x=>`<option value="${x.f}" ${x.f===FX.field?'selected':''}>${x.label}</option>`).join('')}</select></div>
-  <p class="cur"><b>It says now:</b> ${esc(f.cur())}</p>
+  <p class="curval"><b>It says now:</b> ${esc(f.cur())}</p>
   <div><label for="fx-sug">What should it say instead?</label>${f.num?`<input id="fx-sug" name="sug" inputmode="decimal" value="${esc(FX.sug||f.cur())}">`:`<textarea id="fx-sug" name="sug">${esc(FX.sug||f.cur())}</textarea>`}</div>
   <div><label for="fx-note">What's wrong? <span style="font-weight:600;color:var(--h-mut)">(optional)</span></label><textarea id="fx-note" name="note" placeholder="What happened when you cooked it">${esc(FX.note)}</textarea></div>
   ${FX.err?`<p class="err">${FX.err}</p>`:''}
   <div class="acts"><button type="button" class="hbtn" data-act="fixclose">Cancel</button><button type="submit" class="hbtn pri">Send to the owner</button></div></form>`;
 }
-function renderAll(){renderQueue();renderPicker();renderLesson();renderPrep();renderCook();renderTimers();renderSafety();renderTree();renderCrests();renderRate();renderHall();renderHelper()}
+/* ---------- tutorial quest (profile intro, §6.9) ---------- */
+const TU={i:0,asked:false,serv:4,slots:new Set(),step:0,tEnd:0,tState:'idle',gems:0,lit:false,skipped:false};
+function tutCards(){
+  const ad=adult(),name=PROFILES[S.prof].name;
+  return[
+    {h:`Welcome, ${name}`,say:"Every dish you cook is a quest. I'll show you the moves. It takes about two minutes.",try:()=>`<div class="mini-q"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#guide"/></svg><div><b>Tutorial quest</b><span>${tutCards().length} short cards · skip any of them</span></div></div>`},
+    {h:'Pick a quest',say:"Find a dish on the quest board. Want to make it? Tap Ask to cook it, and a grown-up gets your request.",try:()=>`<div class="mini-q"><img src="img/04-shakshuka.webp" alt="" width="440" height="440"><div><b>Shakshuka</b><span>Stovetop path · Quest 4</span></div></div>${TU.asked?`<p class="done">${ic('i-check')}Request sent to a grown-up</p>`:`<button type="button" class="q-btn" data-act="tut-ask">Ask to cook it</button>`}`},
+    {h:'How many people?',say:"Set the party size before you start. The amounts change to match.",try:()=>`<div class="serve-row"><button type="button" class="step" data-act="tut-serv" data-i="-1" ${TU.serv<=1?'disabled':''} aria-label="Fewer">−</button><span class="num" style="font-family:var(--q-disp);font-size:40px;font-weight:700">${TU.serv}</span><button type="button" class="step" data-act="tut-serv" data-i="1" ${TU.serv>=12?'disabled':''} aria-label="More">+</button></div><p class="q-note" style="margin:0"><b>Eggs</b> ${eggs(TU.serv)} large</p>`},
+    {h:'Gather supplies',say:"Tap each thing as you set it on the counter. When every slot is full, the kitchen opens.",try:()=>`<div class="trio">${['egg','tomato','onion'].map(id=>{const it=ING.find(x=>x.id===id);return`<button type="button" class="q-slot ${TU.slots.has(id)?'on':''}" data-act="tut-slot" data-id="${id}" aria-pressed="${TU.slots.has(id)}">${ic('i-'+id,'ii')}<span class="nm">${it.name}</span></button>`}).join('')}</div>${TU.slots.size===3?`<p class="done">${ic('i-check')}Kitchen open</p>`:''}`},
+    {h:'Cook one step at a time',say:"Read the banner first. It says who needs to be in the kitchen. Do the step, then tap Next.",try:()=>`${banner('nearby','Hot stove')}<p class="steptxt" style="font-size:19px">${TU.step?'Stir in the garlic and spices. Cook just until it smells toasty.':'Warm the oil. Add the onion and pepper.'}</p><button type="button" class="q-btn" data-act="tut-next">${TU.step?'Back to step 1':'Next step'}</button>`},
+    {h:'Timers and the thermometer',say:"Tap a timer to start it. It rings when time's up, and you can run a few at once. Some steps need the thermometer before you can go on.",try:()=>{const rm=TU.tState==='run'?Math.max(0,(TU.tEnd-Date.now())/1000):TU.tState==='done'?0:10,C=2*Math.PI*40;return`<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><button type="button" class="mini-ring ${TU.tState==='done'?'ringing':''}" data-act="tut-timer" aria-label="Practice timer"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="#1A2042" stroke="#3D4985" stroke-width="9"/><circle data-tutring data-c="${C.toFixed(1)}" cx="50" cy="50" r="40" fill="none" stroke="#5BD6C8" stroke-width="9" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C*(1-rm/10)).toFixed(1)}" transform="rotate(-90 50 50)"/><text x="50" y="57" text-anchor="middle" font-size="${TU.tState==='done'?16:20}" data-tutdisp>${TU.tState==='done'?'DONE!':fmt(rm)}</text></svg></button><span style="color:var(--q-dim);font-size:15px">${TU.tState==='idle'?'Tap the ring to start a 10-second practice timer':TU.tState==='run'?'Counting down…':'Tap it again to stop the ring'}</span></div>
+    <div class="chk" style="width:100%">${ic('i-thermo')}<span>Egg white reaches 160°F</span></div>`}},
+    {h:'Snap it and rate it',say:"When it's on the plate, take a photo. It hangs in your trophy hall. Then rate it and write what you'd change next time.",try:()=>`<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><div class="frame" style="width:110px"><div class="fr"><div><img src="img/04-shakshuka.webp" alt="" width="440" height="440"></div></div></div><div class="gems">${[1,2,3,4,5].map(n=>`<button type="button" class="gem ${n<=TU.gems?'on':''}" data-act="tut-gem" data-i="${n}" aria-label="${n} of 5" style="width:44px;height:44px"><svg viewBox="0 0 56 56"><polygon class="f" points="${hex(28,28,24)}" stroke-width="3"/><polygon class="s" points="${hex(28,22,9)}" fill="#FFF3C9" opacity=".7"/></svg></button>`).join('')}</div></div>`},
+    {h:'Level up',say:"Every dish you finish lights a node on your skill tree. New skills earn crests, and enough quests raise your level.",try:()=>`<div class="path">${[0,1,2].map(k=>`${k?`<i class="${k<2||TU.lit?'on':''}"></i>`:''}<button type="button" data-act="tut-lit" aria-label="Clear this quest" ${k<2?'disabled':''}><svg viewBox="0 0 44 48"><polygon points="${hex(22,24,18)}" fill="${k<2||TU.lit?'#F2B640':'#161A31'}" stroke="${k<2||TU.lit?'#FFE3A0':'#5BD6C8'}" stroke-width="3"/></svg></button>`).join('')}</div>${TU.lit?`<p class="done">${ic('i-check')}Quest cleared · node lit</p>`:'<span class="tag">Tap the last node to clear it</span>'}`},
+    ad?{h:'Something wrong?',say:"If an amount, time, or step looks wrong, tap Suggest a fix and say what it should say instead. The owner reviews it, and you'll see the answer on the lesson.",try:()=>`<button type="button" class="fixbtn" style="padding-left:0">${ic('i-flag')}Suggest a fix</button><span class="tag">On every lesson card and cook step</span>`}
+      :{h:'Something looks wrong?',say:"If a step seems strange or unsafe, stop and tell a grown-up. And if you're stuck, tap Ask any time.",try:()=>`<div style="display:flex;gap:10px;align-items:center"><svg viewBox="0 0 64 64" width="56" height="56" aria-hidden="true"><use href="#guide"/></svg><span class="tag">The Ask button is always in the corner</span></div>`},
+    {h:"You're ready",say:"That's the tutorial. Your first real quest is waiting on the board. You can replay this any time from your locker.",try:()=>`${TU.skipped?'<p class="q-note" style="margin:0"><b>Skipped</b> You can replay it from your locker.</p>':''}<button type="button" class="q-btn" data-act="tut-done">Go to the quest board</button>`}
+  ];
+}
+function renderTut(){
+  const C=tutCards(),c=C[TU.i],n=C.length;
+  $('#tutStage').innerHTML=`<div class="tut-top"><p class="q-kick">Tutorial quest · ${TU.i+1} of ${n}</p>${TU.i<n-1?'<button type="button" class="tut-skip" data-act="tut-skip">Skip the tutorial</button>':''}</div>
+  <div class="tut-seg" style="--n:${n}" aria-hidden="true">${C.map((_,k)=>`<i class="${k<TU.i?'done':k===TU.i?'cur':''}"></i>`).join('')}</div>
+  <div class="tut-say"><svg aria-hidden="true"><use href="#guide"/></svg><div class="q-panel bubble"><h4>${c.h}</h4>${c.say}</div></div>
+  <div class="q-panel try"><span class="tag">Try it</span>${c.try()}</div>
+  <div class="tut-nav"><button type="button" class="q-back" data-act="tut-back" ${TU.i===0?'disabled':''}>Back</button>${TU.i<n-1?`<button type="button" class="q-btn" data-act="tut-fwd">${TU.i===0?'Start':'Next card'}</button>`:''}</div>`;
+}
+function tutTick(){
+  if(TU.tState!=='run')return;
+  const rm=Math.max(0,(TU.tEnd-Date.now())/1000);
+  if(rm<=0){TU.tState='done';ding();renderTut();return}
+  const d=document.querySelector('[data-tutdisp]'),ring=document.querySelector('[data-tutring]');
+  if(d)d.textContent=fmt(rm);if(ring)ring.setAttribute('stroke-dashoffset',(+ring.dataset.c*(1-rm/10)).toFixed(1));
+}
+function renderAll(){renderTut();renderQueue();renderPicker();renderLesson();renderPrep();renderCook();renderTimers();renderSafety();renderTree();renderCrests();renderRate();renderHall();renderHelper()}
 
 /* ---------- timers ---------- */
 let AC=null;
@@ -944,7 +1016,7 @@ document.addEventListener('click',e=>{
   const b=e.target.closest('[data-act]');if(!b||b.disabled)return;
   unlock();const a=b.dataset.act,i=+b.dataset.i;
   switch(a){
-    case'prof':S.prof=i;renderPicker();renderCook();break;
+    case'prof':S.prof=i;renderPicker();renderCook();renderTut();break;
     case'goto':{const el=document.getElementById(b.dataset.to);if(el)el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});break}
     case'toggle':{const id=b.dataset.id;if(S.got.has(id))S.got.delete(id);else{S.got.add(id);S.hop=id}renderPrep();break}
     case'gear':{const id=b.dataset.id;if(S.gear.has(id))S.gear.delete(id);else{S.gear.add(id);S.hopG=id}renderPrep();break}
@@ -965,6 +1037,17 @@ document.addEventListener('click',e=>{
     case'fixrevert':{const fx=FIXQ.find(x=>x.id===i);applyPatch(fx,false);fx.status='open';fx.err='';renderQueue();renderLesson();renderCook();renderTimers();break}
     case'fixdecline':{const fx=FIXQ.find(x=>x.id===i);fx.status='declined';fx.err='';renderQueue();break}
     case'fixreopen':{const fx=FIXQ.find(x=>x.id===i);fx.status='open';renderQueue();break}
+    case'tut-fwd':TU.i++;renderTut();break;
+    case'tut-back':TU.i=Math.max(0,TU.i-1);renderTut();break;
+    case'tut-skip':TU.skipped=true;TU.i=tutCards().length-1;renderTut();break;
+    case'tut-done':TU.i=0;TU.skipped=false;renderTut();document.getElementById('lesson').scrollIntoView({behavior:'smooth'});break;
+    case'tut-ask':TU.asked=true;renderTut();break;
+    case'tut-serv':TU.serv=Math.min(12,Math.max(1,TU.serv+i));renderTut();break;
+    case'tut-slot':{const id=b.dataset.id;TU.slots.has(id)?TU.slots.delete(id):TU.slots.add(id);renderTut();break}
+    case'tut-next':TU.step=TU.step?0:1;renderTut();break;
+    case'tut-timer':if(TU.tState==='idle'){TU.tState='run';TU.tEnd=Date.now()+10000}else if(TU.tState==='done'){TU.tState='idle'}renderTut();break;
+    case'tut-gem':TU.gems=i;renderTut();break;
+    case'tut-lit':TU.lit=!TU.lit;renderTut();break;
     case'rate':S.rating=i;S.popGem=i;renderRate();break;
     case'photo':S.photos++;S.newPhoto=true;renderHall();break;
     case'photoreset':S.photos=PHOTOS.length-1;renderHall();break;
@@ -987,6 +1070,6 @@ document.addEventListener('submit',e=>{if(e.target.id!=='fixform')return;e.preve
   FIXQ.push(fx);FX.stage='sent';FX.err='';renderSheet();renderQueue()});
 
 renderTokens();renderAll();renderArt();renderParent();
-setInterval(tick,250);
+setInterval(()=>{tick();tutTick()},250);
 })();
 </script>
