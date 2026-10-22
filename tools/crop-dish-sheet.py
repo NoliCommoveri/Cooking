@@ -2,6 +2,7 @@ import sys, numpy as np
 # Crops a sheet of dish illustrations on a white background into one
 # transparent square PNG per dish, in reading order (top row first).
 # Usage: python3 tools/crop-dish-sheet.py SHEET OUTDIR name1,name2,... [erode]
+# A name of '-' skips that dish. tools/dish-sheets.txt lists every sheet.
 from PIL import Image, ImageDraw, ImageFilter
 from collections import deque
 src, outdir, names = sys.argv[1], sys.argv[2], sys.argv[3].split(',')
@@ -42,6 +43,7 @@ print(len(comps), 'dishes found')
 alpha = Image.fromarray((fg*255).astype('uint8')).filter(ImageFilter.GaussianBlur(0.8))
 rgba = im.copy(); rgba.putalpha(alpha)
 for c, name in zip(comps, names):
+    if name == '-': continue  # superseded by a later sheet
     y0,x0,y1,x1,n = c; pad = 6 + (int(sys.argv[4]) if len(sys.argv)>4 else 9)//2
     box = (max(0,x0-pad), max(0,y0-pad), min(W,x1+pad), min(H,y1+pad))
     own = Image.fromarray(((lab==n)*255).astype('uint8')).resize((w*s,h*s), Image.NEAREST).crop((0,0,W,H)).filter(ImageFilter.MaxFilter((int(sys.argv[4]) if len(sys.argv)>4 else 9) + 6))

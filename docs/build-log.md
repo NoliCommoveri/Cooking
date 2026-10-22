@@ -410,3 +410,18 @@ Owner rulings on open questions:
 - Gave the owner the redo list: 14, 26, 27, 34, 35, 37, with 28 and 32
   optional.
 - 47 of 50 dishes now have art. Still to make: 48, 49, 50.
+
+---
+
+## 23. 2026-10-22 — Dish art complete: all 50
+
+- Added sheet 12 from the owner: 48 Southern fried chicken, 49 brown butter
+  cookies, 50 apple pie, and a redo of 26 chicken Caesar with sliced chicken on
+  top. The new Caesar replaces the one from sheet 1.
+- Checked for unclean foods: none seen.
+- Every lesson now has dish art in `content/images/dishes/`.
+- Added `tools/dish-sheets.txt`, which lists every sheet and which dish each
+  position is, with '-' for a dish a later sheet replaced. Re-cropping all the
+  sheets from it can no longer overwrite a redo with an old picture.
+  `tools/crop-dish-sheet.py` skips '-'.
+- Redos still open with the owner: 14, 27, 34, 35, 37 (28 and 32 optional).
