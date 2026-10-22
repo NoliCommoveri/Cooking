@@ -92,6 +92,8 @@ Each lesson has these stages:
 
 Safety levels must be shown as **illustrated icons or banners, not colored pills** (§5.4).
 
+A safety level is information only. The banner tells the kid who must be in the kitchen; nothing in the app locks a step or waits for an adult.
+
 ### Food-safety checks (recommendation)
 Separate from safety levels, which are about who must be in the kitchen. These are about the food.
 - **Doneness check.** Any lesson that cooks raw poultry, ground meat, whole cuts, fish, or eggs to a safe point has a check step with a thermometer target (e.g. poultry 165°F, ground beef 160°F, fish 145°F). The kid can't check the step off without entering or confirming the reading. Every such lesson lists a thermometer in its equipment.
@@ -104,7 +106,7 @@ Separate from safety levels, which are about who must be in the kitchen. These a
 
 ## 4. Curriculum (50 dishes)
 
-Lessons are grouped into units by skill. International and American dishes are mixed within each unit, and breakfast dishes are spread across the units. The exact teaching order is still an open content task. **Recommendation:** go through the units in order and alternate cuisines within each unit. The safety levels below are suggested defaults. The parent can adjust them per step.
+Lessons are grouped into units by skill. International and American dishes are mixed within each unit, and breakfast dishes are spread across the units. The exact teaching order is still an open content task. **Recommendation:** go through the units in order and alternate cuisines within each unit. The safety levels below are set in the content. Parents can't change them.
 
 ### Unit 1 — Knife work and assembly
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -281,7 +283,6 @@ Do **not** use:
 - **Queue:** assign the next 1–3 lessons per kid, or approve a kid's request (§6.1), each with a serving count (defaults to the family's) and an optional planned date
 - **Shopping list** (§6.3)
 - **Safety review:** before approving a lesson, see every step marked adult-nearby or adult-hands-on
-- **Edit safety levels** per step
 - **Gallery:** all photos, filterable by kid and lesson, with reflections
 - **Download all photos:** the family's photos as a download, so they don't live only in the app
 - **Mark test-cooked:** after cooking a lesson themselves, a parent can mark it test-cooked for their family (§7). Optional; lessons don't need it to be shown to kids
@@ -445,7 +446,7 @@ content/
 }
 ```
 - `version` goes up whenever the lesson's steps or ingredients change. Attempts record the version they were cooked from.
-- Step `id`s are stable. Inserting a step never changes another step's `id`, so parent safety overrides (§8.4) stay attached to the right step.
+- Step `id`s are stable. Inserting a step never changes another step's `id`, so a kid's saved progress in a lesson stays attached to the right step.
 - `scaling` is `{ "mode": "free" }` or `{ "mode": "fixed", "multipliers": [0.5, 1, 2], "notes": { "2": "Use two sheet pans" } }` (§6.6).
 - `substitutions[].reason` is `"availability"` or a diet tag (e.g. `"dairy"`). Diet-reason substitutions are the ones a family filter can apply (§2.1).
 - `cuisine` is an ID in `cuisines.json`, which maps it to a passport region. `skills` are IDs in `skills.json` and drive the skill pins. `skill` is the display line.
@@ -454,7 +455,7 @@ content/
 The linter must reject content when:
 - the JSON doesn't match the schema
 - a lesson references an ingredient ID missing from the registry
-- an ingredient is flagged `unclean` (§2.1). There is no override or exception mechanism for this check
+- an ingredient is unclean under §2.1 (checked through `animalSource` and the blocked-word list below). There is no override or exception mechanism for this check
 - a step has no safety level
 - a prerequisite points to a lesson that doesn't exist, or prerequisites form a loop
 - a unit has no conversion to its ingredient's base unit
@@ -499,7 +500,7 @@ A backend is needed because the app is multi-family: each family's progress, que
   - **Revisit if:** the app opens to families the owner doesn't know.
 - **Kids don't log in.** A device logged in as a family shows the profile picker (chef lockers).
 - **Parent PIN:** optional, per family. If set, parent-only screens on a shared device ask for it. Stored as a hash, but it's a convenience lock, not a security boundary.
-  - Because kitchen devices are logged in as a parent, a kid on a device without a PIN can reach parent screens, including editing safety levels and approving their own requests. Whether the PIN should be required for some screens is open question 8 (§10).
+  - Because kitchen devices are logged in as a parent, a kid on a device without a PIN can reach parent screens, including approving their own lesson requests. Whether the PIN should be required for some screens is open question 6 (§10).
 - **Family scoping:** every API query filters by the logged-in session's `family_id`. No endpoint accepts a family ID from the client.
   - **The one exception** is the owner's endpoints (§6.2a). They're open only to a parent with `is_owner`, and they return family names, kid counts, and last-active dates. Nothing else.
 - **Photos:** stored in R2 under `families/{family_id}/…`, served only through the Worker after checking the session's family. R2 is not exposed publicly.
@@ -519,7 +520,6 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `photos` (id, family_id, attempt_id, r2_key, created_at)
 - `pantry` (family_id, ingredient_id)
 - `shopping_checks` (family_id, trip_id, ingredient_id, checked)
-- `safety_overrides` (family_id, lesson_id, step_id, level)
 - Stamps, pins, and rank are computed from `attempts` and the content files, not stored separately (**recommendation**; cache them if it gets slow).
 - The lesson library and ingredient registry are content files shared by all families (§7). They are not stored per family.
 
@@ -544,7 +544,7 @@ Each phase should be deployed and usable before the next begins.
 | **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
 | **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, invite codes, parent login, sessions, kid profiles and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up with codes, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
 | **2. Lesson player** | Learn, Prep, Cook mode, food-safety checks, timers, wake lock, attempts saved per kid, offline cache and sync | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice |
-| **3. Parent planning & shopping** | Queue (with kid requests), safety review and per-step safety edits, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
+| **3. Parent planning & shopping** | Queue (with kid requests), safety review, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
 | **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download | A photo taken on the tablet shows in the gallery on the parent's phone |
 | **5. Progress & delight** | Passport, ranks, skill pins, celebrations, sound, and the art for them | Completing a lesson earns its stamp and pin with full animation |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
@@ -560,14 +560,12 @@ Each phase should be deployed and usable before the next begins.
 
 1. **Cooking together or separately?** If kids often cook as a pair, attempts need to support two kids and maybe split roles (one preps while the other cooks).
 2. **Allergies:** does the owner's family need any diet flags beyond the hard block on biblically unclean foods?
-3. **Adult hands-on steps:** do these need a parent tap-to-unlock in the app, or is the illustrated banner enough?
-4. **Theme:** do the kids choose between theme mockups (§5.2)? With several families, is there one theme for everyone, or can each family pick?
-5. **Invite-only or open sign-up** (§8.3)?
-6. **Family-authored lessons:** should families be able to add their own recipes, or is the shared library the only content? Not planned for now. Adding it would move lessons from content files into the database.
-7. **Lowering safety levels:** can a parent set a step below its default (e.g. Adult hands-on → Adult nearby), or only raise it?
-8. **Parent screens on kitchen devices:** should the parent PIN be required for safety-level edits and lesson approval? §2.5 keeps security basic, so this needs the owner's say-so. Without it, a kid on a kitchen device can change safety levels (§8.3).
-9. **Other hidden sources:** should the hard block (§2.1) also cover animal rennet or pepsin in cheese (sometimes from pigs), and blood or fat (Leviticus 3 and 17)? Neither is in the rule today.
-10. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
+3. **Theme:** do the kids choose between theme mockups (§5.2)? With several families, is there one theme for everyone, or can each family pick?
+4. **Invite-only or open sign-up** (§8.3)?
+5. **Family-authored lessons:** should families be able to add their own recipes, or is the shared library the only content? Not planned for now. Adding it would move lessons from content files into the database.
+6. **Parent screens on kitchen devices:** should the parent PIN be required for lesson approval? §2.5 keeps security basic, so this needs the owner's say-so. Without it, a kid on a kitchen device can approve their own requests (§8.3).
+7. **Other hidden sources:** should the hard block (§2.1) also cover animal rennet or pepsin in cheese (sometimes from pigs), and blood or fat (Leviticus 3 and 17)? Neither is in the rule today.
+8. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
 
 ---
 

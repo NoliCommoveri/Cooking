@@ -107,3 +107,18 @@ is built.
 - The owner ruled that diet filters are per family, not per kid. §2.1 now
   says so, and the open question on it was removed. The remaining open
   questions were renumbered 7–10.
+
+---
+
+## 5. 2026-10-22 — Safety levels are banners only, set in content
+
+- The owner ruled that the safety banner is enough (nothing locks a step or
+  waits for an adult) and that parents can't change safety levels.
+- Removed "Edit safety levels" from parent features, the `safety_overrides`
+  table, and per-step safety edits from Phase 3. §3 now says a level is
+  information only.
+- Removed the open questions on adult hands-on unlocking and on lowering levels.
+  The PIN question now covers only kids approving their own lesson requests.
+  Open questions renumbered 1–8.
+- Fixed a stale linter line that still named the removed `unclean` flag; it now
+  points to `animalSource` and the blocked-word list.
