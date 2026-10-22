@@ -528,3 +528,17 @@ Owner rulings on open questions:
 - **Open for the owner:** cookies have raw egg, and a thermometer in a
   cookie isn't practical, so their doneness check is visual. §7.4 marks this
   as a Recommendation waiting on her.
+
+---
+
+## 23. 2026-10-22 — Wording a kid can follow
+
+The owner reviewed the sample lessons in the preview.
+- **Cookies (49):** "cool it until it's soft again" read as if browned butter
+  goes hard. The move, the "why cool it back down" card, and the biscuit
+  callback now say the liquid butter is stirred over ice water until it
+  thickens like frosting.
+- **Biscuits (38), now version 2:** "shaggy" became "lumpy and rough, not
+  smooth. That's right, so stop stirring." The first "1 inch thick" also says
+  "about as thick as two of your fingers stacked", and the last one says "two
+  fingers thick".
