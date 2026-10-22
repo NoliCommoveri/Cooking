@@ -31,10 +31,11 @@ export function buildPreview() {
     cuisines: Object.fromEntries(c.cuisines.map(x => [x.id, x])),
     regions: Object.fromEntries(c.regions.map(x => [x.id, x])),
     units: Object.fromEntries(c.units.map(u => [u.number, u.name])),
+    terms: c.terms,
     lint: { errors, warnings }, images
   };
   const page = readFileSync(join(ROOT, 'tools/preview-template.html'), 'utf8')
-    .replace('/*__CODE__*/', () => moduleCode('units.js') + '\n' + moduleCode('scale.js'))
+    .replace('/*__CODE__*/', () => ['units.js', 'scale.js', 'terms.js'].map(moduleCode).join('\n'))
     .replace('/*__DATA__*/', () => 'const DATA = ' + JSON.stringify(data).replace(/</g, '\\u003c') + ';');
   return page;
 }

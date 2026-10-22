@@ -549,3 +549,25 @@ The owner reviewed the sample lessons in the preview.
   ingredient is egg baked into a dough. §7.4 no longer marks it as waiting.
 - **Shakshuka (4):** "mince the garlic" now says what that means: tiny bits,
   smaller than a grain of rice.
+
+---
+
+## 24. 2026-10-22 — Kitchen words
+
+- The owner noticed lessons say "dice" and "mince" but nothing teaches what
+  those look like, and lessons can be cooked in any order. She approved a
+  kitchen words list (§6.1, Recommendation).
+- `content/terms.json` defines 22 words: cuts (dice, mince, chop, slice,
+  julienne, grate, zest), heat (simmer, boil, poach, sauté, sear, braise,
+  shimmer), and moves (marinate, whisk, cream, fold the dough, knead, dust,
+  toss, across the grain). Each has a description a kid can picture, its
+  word forms, and the lesson that practices it. Drawings come later (§5.3a).
+- `src/content/terms.js` finds the words in step text. In the lesson
+  preview they're underlined, and tapping one opens its meaning under the
+  step. Cook mode gets the same in Phase 2, in the profile's theme.
+- New linter rule (§7.4): a step can't use a cooking word listed in
+  `content/rules/kitchen-words.json` (sift, drizzle, deglaze, and others)
+  until `terms.json` defines it, and no two words can claim the same form.
+  4 new tests; 33 in all.
+- Cookies (49): the creaming step now says "cream them", so the word gets
+  its card.

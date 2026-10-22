@@ -47,6 +47,10 @@
       "properties": { "id": { "$ref": "#/$defs/id" }, "name": { "$ref": "#/$defs/text" } } } },
     "cuisines": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "name", "region"],
       "properties": { "id": { "$ref": "#/$defs/id" }, "name": { "$ref": "#/$defs/text" }, "region": { "$ref": "#/$defs/id" } } } },
+    "terms": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "word", "forms", "means", "taughtIn", "image"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "word": { "$ref": "#/$defs/text" },
+        "forms": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } }, "means": { "$ref": "#/$defs/text" },
+        "taughtIn": { "type": ["integer", "null"], "minimum": 1, "maximum": 50 }, "image": { "type": ["string", "null"] } } } },
     "units": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["number", "name"],
       "properties": { "number": { "type": "integer", "minimum": 1 }, "name": { "$ref": "#/$defs/text" } } } }
   }

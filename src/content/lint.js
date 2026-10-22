@@ -5,6 +5,7 @@ import { validate } from './validate.js';
 import { blockedWordsIn, uncleanReasons } from './rules.js';
 import { toBase } from './units.js';
 import { scaleLesson, servingOptions } from './scale.js';
+import { findTerms } from './terms.js';
 
 // Fields that hold ids or codes, not words a kid reads.
 const CODE_FIELDS = new Set(['id', 'image', 'cuisine', 'ingredient', 'use', 'for', 'unit', 'why', 'glyph', 'reason',
@@ -38,7 +39,17 @@ export function lint(c) {
     for (const r of uncleanReasons(ing, rules)) err(`ingredients.json ${ing.id}`, `unclean: ${r}`);
     for (const [u, pkg] of Object.entries(ing.units || {})) if (!pkg.amount) err(`ingredients.json ${ing.id}`, `unit "${u}" has no amount`);
   }
-  for (const [file, list] of [['equipment.json', c.equipment], ['skills.json', c.skills], ['cuisines.json', c.cuisines]])
+  // kitchen words: each form belongs to one term, and every watched word needs a term before a lesson uses it
+  const formOwner = {};
+  for (const t of c.terms) for (const f of t.forms) {
+    const k = f.toLowerCase();
+    if (formOwner[k]) err(`terms.json ${t.id}`, `"${f}" is already a form of ${formOwner[k]}`);
+    formOwner[k] = t.id;
+  }
+  const defined = new Set(Object.keys(formOwner));
+  const undefinedWords = (c.watchedWords || []).filter(w => !defined.has(w.toLowerCase()));
+  const watch = { blockedWords: undefinedWords, allowedPhrases: [] };
+  for (const [file, list] of [['equipment.json', c.equipment], ['skills.json', c.skills], ['cuisines.json', c.cuisines], ['terms.json', c.terms]])
     for (const x of list) for (const [p, s] of strings(x)) for (const w of blockedWordsIn(s, rules)) err(`${file} ${x.id}`, `${p} names a blocked food ("${w}")`);
   for (const cu of c.cuisines) if (!RG[cu.region]) err(`cuisines.json ${cu.id}`, `region "${cu.region}" doesn't exist`);
   const fallbackIcons = c.ingredients.filter(i => !i.icon).length + c.equipment.filter(e => !e.icon).length;
@@ -123,6 +134,7 @@ export function lint(c) {
       if ((st.type === 'doneness') !== !!st.target) e(`${at}: doneness steps need a target, and only they can have one`);
       for (const h of st.handles || []) if (!used.has(h)) e(`${at}: handles "${h}", which the lesson doesn't use`);
       for (const f of ['text', 'tip', 'look']) for (const m of (st[f] || '').matchAll(PLACEHOLDER)) if (!used.has(m[2])) e(`${at}: ${m[0]} names an ingredient the lesson doesn't use`);
+      for (const f of ['text', 'tip', 'look']) for (const word of blockedWordsIn(st[f], watch)) e(`${at}: uses "${word}", which isn't in the kitchen words list (terms.json) yet`);
     }
 
     // food safety (plan §3)

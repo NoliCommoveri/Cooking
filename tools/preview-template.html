@@ -86,13 +86,18 @@ details ul{margin:6px 0 0;padding-left:18px;max-width:80ch}
 .meta b{color:var(--fg)}
 .step.wash{background:var(--soft)}
 .target{font-weight:800;color:var(--hands)}
+.term{border:0;background:none;padding:0;font:inherit;color:inherit;text-decoration:underline dotted var(--acc);text-decoration-thickness:2px;text-underline-offset:4px;cursor:pointer}
+.term[aria-expanded="true"]{color:var(--acc)}
+.word{background:var(--soft);border-radius:10px;padding:10px 12px;font-size:15px}
+.word b{font-family:var(--disp);font-weight:600;font-size:17px;margin-right:6px}
+.word small{display:block;color:var(--mut);margin-top:2px}
 .foot{color:var(--mut);font-size:14px;max-width:80ch}
 </style>
 
 <div class="wrap">
   <header>
     <h1>Lesson preview</h1>
-    <p class="lede">The Phase 1 sample lessons, straight from the content files, read-only. Pick a lesson and a serving size: every amount and every count in the steps changes to match. This is not the kids' screen; that comes in Phase 2.</p>
+    <p class="lede">The Phase 1 sample lessons, straight from the content files, read-only. Pick a lesson and a serving size: every amount and every count in the steps changes to match. Underlined words are kitchen words; tap one to see what it means. This is not the kids' screen; that comes in Phase 2.</p>
     <div id="check"></div>
   </header>
   <nav class="strip" id="strip" aria-label="Lessons"></nav>
@@ -108,7 +113,23 @@ details ul{margin:6px 0 0;padding-left:18px;max-width:80ch}
 const $ = s => document.querySelector(s);
 const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
 const SAFETY = { 'solo': ['Solo', '--solo'], 'adult-nearby': ['Adult nearby', '--near'], 'adult-hands-on': ['Adult hands-on', '--hands'] };
-const S = { i: 0, serv: {} };
+const S = { i: 0, serv: {}, word: null };
+const TERM = Object.fromEntries(DATA.terms.map(t => [t.id, t]));
+const lessonName = n => (DATA.lessons.find(L => L.number === n) || {}).title;
+// step text with each kitchen word as a button that opens its meaning
+function withTerms(text, sid, step) {
+  let out = '', at = 0;
+  for (const h of findTerms(text, DATA.terms)) {
+    const key = sid + ':' + h.start;
+    out += esc(text.slice(at, h.start)) + `<button type="button" class="term" data-w="${key}" data-t="${h.id}" data-s="${step}" aria-expanded="${S.word === key}">${esc(text.slice(h.start, h.end))}</button>`;
+    at = h.end;
+  }
+  return out + esc(text.slice(at));
+}
+function wordCard(id) {
+  const t = TERM[id], by = t.taughtIn ? (lessonName(t.taughtIn) ? `Practiced properly in lesson ${t.taughtIn}, ${esc(lessonName(t.taughtIn))}.` : `Practiced properly in lesson ${t.taughtIn}.`) : '';
+  return `<p class="word" role="note"><b>${esc(t.word)}</b>${esc(t.means)}${by ? `<small>${by}</small>` : ''}</p>`;
+}
 const fmtTime = s => s >= 60 ? `${Math.round(s / 60)} min` : `${s} sec`;
 const sizeLabel = (L, n) => L.scaling.mode === 'fixed' ? ({ 0.5: '½ batch', 1: '1 batch', 2: '2 batches' }[n / L.servings] || `${n / L.servings}×`) : '';
 
@@ -163,16 +184,18 @@ function renderLesson() {
       const meta = [s.timerSeconds ? `<span>Timer: <b>${esc(s.timerLabel)}, ${fmtTime(s.timerSeconds)}</b></span>` : '', s.why ? `<span>Why? opens <b>${esc(why[s.why])}</b></span>` : ''].join('');
       return `<li class="step ${s.type === 'wash' ? 'wash' : ''}"><div class="body">
         <p class="safety" style="--c:var(${col})">${lab}${s.hazard ? ` <span>· an adult profile sees: ${esc(s.hazard)}</span>` : ''}</p>
-        <p class="txt">${esc(s.text)}</p>
+        <p class="txt">${withTerms(s.text, s.id, s.id)}</p>
         ${s.type === 'doneness' ? `<p class="target">${s.target.temp ? `Must reach ${s.target.temp}°F on the thermometer before Next unlocks` : `Done when: ${esc(s.target.look)}`}</p>` : ''}
-        ${s.look ? `<p><b>Should look like:</b> ${esc(s.look)}</p>` : ''}${s.tip ? `<p><b>Tip:</b> ${esc(s.tip)}</p>` : ''}
+        ${s.look ? `<p><b>Should look like:</b> ${withTerms(s.look, s.id + '-look', s.id)}</p>` : ''}${s.tip ? `<p><b>Tip:</b> ${withTerms(s.tip, s.id + '-tip', s.id)}</p>` : ''}
+        ${S.word && S.wordStep === s.id ? wordCard(S.wordId) : ''}
         ${meta ? `<p class="meta">${meta}</p>` : ''}</div></li>`;
     }).join('')}</ol>
   </section>`;
 }
 document.addEventListener('click', e => {
-  const p = e.target.closest('.pick'), sz = e.target.closest('.size');
-  if (p) { S.i = +p.dataset.i; renderStrip(); renderLesson(); }
+  const p = e.target.closest('.pick'), sz = e.target.closest('.size'), tm = e.target.closest('.term');
+  if (tm) { const k = tm.dataset.w; S.word = S.word === k ? null : k; S.wordId = tm.dataset.t; S.wordStep = tm.dataset.s; renderLesson(); const b = document.querySelector(`[data-w="${k}"]`); if (b) b.focus(); return; }
+  if (p) { S.i = +p.dataset.i; S.word = null; renderStrip(); renderLesson(); }
   if (sz) { S.serv[DATA.lessons[S.i].id] = +sz.dataset.n; renderLesson(); }
 });
 renderCheck(); renderStrip(); renderLesson();

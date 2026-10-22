@@ -101,3 +101,11 @@ test('fixed scaling needs multipliers including 1x', () => {
 test('an animal species off the allowlist fails', () => {
   assert.match(broken(c => { c.ingredients.find(i => i.id === 'feta').animalSource = 'camel'; }), /"camel" is not on the clean-species list/);
 });
+
+test('a cooking word with no kitchen-words entry fails', () => {
+  assert.match(broken((c, L) => { L(38).steps[2].text = 'Sift the flour into the bowl.'; }), /"sift", which isn't in the kitchen words list/);
+});
+
+test('a form can belong to only one kitchen word', () => {
+  assert.match(broken(c => { c.terms[1].forms.push('dice'); }), /already a form of dice/);
+});

@@ -254,7 +254,7 @@ None of the 50 dishes requires a stand mixer. Lessons that use one in typical re
 - **Icons:** custom SVG illustrations in one consistent style. Don't rely on emoji as the main iconography.
 
 ### 5.3a Art production (recommendation)
-The themed components need a lot of art, and every theme added later (§5.2) needs its own set: a dish illustration for every lesson, an icon for every ingredient (they hop into the bowl) and every tool (pegboard), a stamp per region, a pin per skill, and avatar outfits per rank.
+The themed components need a lot of art, and every theme added later (§5.2) needs its own set: a dish illustration for every lesson, an icon for every ingredient (they hop into the bowl) and every tool (pegboard), a stamp per region, a pin per skill, a small drawing per kitchen word (§6.1), and avatar outfits per rank.
 - Phase 0 sets the style and draws the core set: the components in §5.4, one generic icon per store section, and one per tool category.
 - An ingredient or tool without its own icon falls back to its category's generic icon. The linter warns about fallbacks; it doesn't fail on them.
 - **Dish illustrations come from the owner,** made with an AI image tool as sheets of several dishes per image. Claude crops each sheet into one image per dish. Source sheets live in `content/images/source/`.
@@ -341,6 +341,7 @@ Do **not** use:
 - **Request a lesson** (recommendation): a kid can tap "I want to make this," which adds a request to the parent's queue to approve or decline
 - **Adult profiles don't ask.** On an adult profile the button is **Cook this**: it queues the lesson for that profile straight away, with no approval and no parent PIN, and it goes on the shopping list like any queued lesson. A shared profile with a kid on it is a kid profile, so it still asks
 - Screen Wake Lock during Prep and Cook
+- **Kitchen words** (recommendation, approved): cooking words in step text (dice, mince, simmer, fold the dough…) are underlined. Tapping one opens a card with what it means in kid terms, including a size or look they can picture ("smaller than a grain of rice"), a small drawing, and the lesson that practices it. The card is drawn by the profile's theme, like the Why? card. The words live in `content/terms.json` (§7.1), and the linter won't let a lesson use a cooking word that isn't defined there (§7.4)
 - Progress, ranks, skills earned, and gallery, drawn by the profile's theme (§5.4, §5.4a)
 
 ### 6.2 Parent features
@@ -503,10 +504,11 @@ content/
   ingredients.json        # canonical ingredient registry
   equipment.json          # tools: id, name, icon, category
   skills.json             # skill pins: id, name, pin shape
+  terms.json              # kitchen words: the word, its forms, what it means, the lesson that teaches it
   cuisines.json           # passport regions, and cuisine → region
   units.json              # unit numbers and names (7 is Desserts)
   schema/                 # JSON Schemas for the registries and lesson files
-  rules/                  # clean-species allowlist, blocked words, allowed phrases
+  rules/                  # clean-species allowlist, blocked words, allowed phrases, cooking words that need a kitchen-words entry
   lessons/
     01-spring-rolls.json
     ...
@@ -613,6 +615,7 @@ The linter must reject content when:
 - a step that isn't solo has no `hazard`
 - a callback points to a lesson that doesn't exist
 - the lesson can't be scaled and filled cleanly at every serving size it offers
+- step text uses a cooking word from `rules/kitchen-words.json` that `terms.json` doesn't define yet, or two kitchen words claim the same form
 
 The linter must **warn** (without failing the build) when:
 - a lesson uses an ingredient with a `watch` note
@@ -706,7 +709,7 @@ Each phase should be deployed and usable before the next begins.
 | **0b. Second theme** | Chef's Passport: its tokens, its core art set, and its version of every component on the showcase page. Built as soon as Phase 0 is approved | A profile can switch between Kitchen Quest and Chef's Passport, and the owner approves the Passport look |
 | **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
 | **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, sign-up codes, keyword, and the request queue, parent login, sessions, password reset email (Resend), parent PIN, profiles (single or shared) and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up with codes, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
-| **2. Lesson player** | Learn, Prep, Cook mode, food-safety checks, timers, wake lock, tap zone and page-turner remote (§6.12), attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
+| **2. Lesson player** | Learn, Prep, Cook mode, kitchen words, food-safety checks, timers, wake lock, tap zone and page-turner remote (§6.12), attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
 | **3. Parent planning & shopping** | Queue (with kid requests), safety review, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
 | **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download | A photo taken on the tablet shows in the gallery on the parent's phone |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |

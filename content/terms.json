@@ -1,0 +1,270 @@
+{
+  "terms": [
+    {
+      "id": "dice",
+      "word": "Dice",
+      "forms": [
+        "dice",
+        "diced",
+        "dicing"
+      ],
+      "means": "Cut into small cubes about the size of a pea. Try to make them all close to the same size so they cook evenly.",
+      "taughtIn": 3,
+      "image": null
+    },
+    {
+      "id": "mince",
+      "word": "Mince",
+      "forms": [
+        "mince",
+        "minced",
+        "mincing"
+      ],
+      "means": "Chop into tiny bits, smaller than a grain of rice. Keep rocking the knife back and forth over the pile until nothing big is left.",
+      "taughtIn": 2,
+      "image": null
+    },
+    {
+      "id": "chop",
+      "word": "Chop",
+      "forms": [
+        "chop",
+        "chopped",
+        "chopping"
+      ],
+      "means": "Cut into rough, bite-size pieces. They don't have to match.",
+      "taughtIn": 2,
+      "image": null
+    },
+    {
+      "id": "slice",
+      "word": "Slice",
+      "forms": [
+        "slice",
+        "slices",
+        "sliced",
+        "slicing"
+      ],
+      "means": "Cut into flat pieces, like slices of bread.",
+      "taughtIn": 14,
+      "image": null
+    },
+    {
+      "id": "julienne",
+      "word": "Julienne",
+      "forms": [
+        "julienne",
+        "julienned"
+      ],
+      "means": "Cut into thin sticks, about the size of a matchstick.",
+      "taughtIn": 1,
+      "image": null
+    },
+    {
+      "id": "grate",
+      "word": "Grate",
+      "forms": [
+        "grate",
+        "grated",
+        "grating"
+      ],
+      "means": "Rub food down a grater so it falls off in shreds. The big holes make shreds. The small holes make a paste.",
+      "taughtIn": 38,
+      "image": null
+    },
+    {
+      "id": "zest",
+      "word": "Zest",
+      "forms": [
+        "zest",
+        "zested"
+      ],
+      "means": "Grate just the colored outside of a lemon or orange peel. Stop when you see white; the white part tastes bitter.",
+      "taughtIn": null,
+      "image": null
+    },
+    {
+      "id": "simmer",
+      "word": "Simmer",
+      "forms": [
+        "simmer",
+        "simmers",
+        "simmering",
+        "simmered"
+      ],
+      "means": "Cook a liquid with small, lazy bubbles that pop now and then. If big bubbles roll all over, turn the heat down.",
+      "taughtIn": 6,
+      "image": null
+    },
+    {
+      "id": "boil",
+      "word": "Boil",
+      "forms": [
+        "boil",
+        "boils",
+        "boiling",
+        "boiled"
+      ],
+      "means": "Big bubbles rolling all over the pot, even while you stir.",
+      "taughtIn": null,
+      "image": null
+    },
+    {
+      "id": "poach",
+      "word": "Poach",
+      "forms": [
+        "poach",
+        "poached",
+        "poaching"
+      ],
+      "means": "Cook gently in liquid that's barely bubbling.",
+      "taughtIn": 4,
+      "image": null
+    },
+    {
+      "id": "saute",
+      "word": "Sauté",
+      "forms": [
+        "sauté",
+        "sautéed",
+        "sautéing",
+        "saute",
+        "sauteed"
+      ],
+      "means": "Cook in a little hot oil or butter, stirring often.",
+      "taughtIn": null,
+      "image": null
+    },
+    {
+      "id": "sear",
+      "word": "Sear",
+      "forms": [
+        "sear",
+        "seared",
+        "searing"
+      ],
+      "means": "Cook in a very hot pan without moving the food, so the outside turns deep brown.",
+      "taughtIn": 27,
+      "image": null
+    },
+    {
+      "id": "braise",
+      "word": "Braise",
+      "forms": [
+        "braise",
+        "braised",
+        "braising"
+      ],
+      "means": "Brown the food first, then cook it slowly with a little liquid and the lid on until it's very tender.",
+      "taughtIn": 7,
+      "image": null
+    },
+    {
+      "id": "marinate",
+      "word": "Marinate",
+      "forms": [
+        "marinate",
+        "marinated",
+        "marinating",
+        "marinade",
+        "marinades"
+      ],
+      "means": "Soak food in a flavorful liquid, called a marinade, before you cook it.",
+      "taughtIn": 14,
+      "image": null
+    },
+    {
+      "id": "whisk",
+      "word": "Whisk",
+      "forms": [
+        "whisk",
+        "whisked",
+        "whisking"
+      ],
+      "means": "Stir fast in little circles with a whisk or a fork, to mix things together and add air.",
+      "taughtIn": 26,
+      "image": null
+    },
+    {
+      "id": "cream",
+      "word": "Cream",
+      "forms": [
+        "cream them",
+        "creamed",
+        "creaming"
+      ],
+      "means": "Beat soft butter and sugar together hard until the mixture is fluffy and a little paler.",
+      "taughtIn": 49,
+      "image": null
+    },
+    {
+      "id": "fold-dough",
+      "word": "Fold the dough",
+      "forms": [
+        "fold it in thirds",
+        "fold the dough"
+      ],
+      "means": "Lay the dough over itself in layers, like folding a letter to fit in an envelope.",
+      "taughtIn": 38,
+      "image": null
+    },
+    {
+      "id": "knead",
+      "word": "Knead",
+      "forms": [
+        "knead",
+        "kneaded",
+        "kneading"
+      ],
+      "means": "Push the dough away with the heel of your hand, fold it back, turn it, and repeat until it's smooth and stretchy.",
+      "taughtIn": 42,
+      "image": null
+    },
+    {
+      "id": "dust",
+      "word": "Dust",
+      "forms": [
+        "dust",
+        "dusted",
+        "dusting"
+      ],
+      "means": "Sprinkle a thin, light layer, like flour on the counter so dough doesn't stick.",
+      "taughtIn": 38,
+      "image": null
+    },
+    {
+      "id": "toss",
+      "word": "Toss",
+      "forms": [
+        "toss",
+        "tossed",
+        "tossing"
+      ],
+      "means": "Gently lift and turn the food so every piece gets coated, like tossing a salad.",
+      "taughtIn": null,
+      "image": null
+    },
+    {
+      "id": "shimmer",
+      "word": "Shimmer",
+      "forms": [
+        "shimmer",
+        "shimmers",
+        "shimmering"
+      ],
+      "means": "Hot oil looks wavy and rippled on top. That means it's hot enough for the food.",
+      "taughtIn": null,
+      "image": null
+    },
+    {
+      "id": "across-the-grain",
+      "word": "Across the grain",
+      "forms": [
+        "across the grain"
+      ],
+      "means": "Meat has thin lines running through it, like the lines in wood. Cut across those lines, not along them, so each bite is tender.",
+      "taughtIn": 14,
+      "image": null
+    }
+  ]
+}
