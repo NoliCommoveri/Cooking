@@ -79,3 +79,23 @@ is built.
   a required PIN, rennet/blood/fat, who test-cooks, who makes the art). The PIN
   and rennet/blood/fat questions touch Requirements (§2.5, §2.1), so they are
   questions rather than changes.
+
+---
+
+## 3. 2026-10-22 — Test-cooking optional; helper and first run added to plan
+
+- **Test-cooking is optional.** The owner reversed entry 2's rule that a
+  lesson had to be test-cooked before kids could see it. Removed the lesson
+  `tested` field, its linter warning, the test-cook conditions in the Phase 1
+  and Phase 7 done-when lines, and the open question on who test-cooks.
+- **Parents can mark a lesson test-cooked** for their own family. It's stored
+  in a new `test_cooks` table and shows as a test-kitchen stamp, not a pill.
+- **First-time parents get a warning** that the recipes may not have been
+  cooked yet. It's part of the first-run wizard, and shows as a one-time notice
+  until the wizard is built.
+- **Helper (§6.8):** a brief entry for a scripted helper modeled on Kels from
+  KennelOS, used by both kids and parents. Full spec later.
+- **First-run wizard (§6.9):** a brief entry modeled on the KennelOS first run
+  and "Getting Started." Full spec later.
+- **Phase 8:** added for the helper and the first-run wizard.
+- Open question "who makes the art" is now number 11.

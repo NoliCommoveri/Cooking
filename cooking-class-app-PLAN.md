@@ -239,6 +239,8 @@ The themed components need a lot of art: a dish illustration for every lesson, a
 | Course progress | The **passport book** and world map (§5.2) |
 | Skills earned | **Enamel-pin or embroidered-patch** shapes (circles, shields, hexagons) pinned to an apron. Not text chips |
 | Rating | 1–5 **chef hats** or wooden spoons, not stars |
+| Test-cooked | An inked **test-kitchen stamp** on the lesson card, for a lesson a parent in this family marked test-cooked. Not a pill |
+| Helper | The helper's (§6.8) avatar on a floating **Ask** button, and a chat styled to the theme |
 | Photos | Taking a photo drops a **Polaroid** onto a corkboard. The gallery is a corkboard or scrapbook |
 | Rank up | A full-screen celebration where the hat upgrades, with a confetti or sprinkles burst |
 | Profile picker | Each kid has a **chef's locker** with their avatar and apron |
@@ -282,6 +284,7 @@ Do **not** use:
 - **Edit safety levels** per step
 - **Gallery:** all photos, filterable by kid and lesson, with reflections
 - **Download all photos:** the family's photos as a download, so they don't live only in the app
+- **Mark test-cooked:** after cooking a lesson themselves, a parent can mark it test-cooked for their family (§7). Optional; lessons don't need it to be shown to kids
 - **Pantry staples:** a list of ingredients always on hand, which drop off the shopping list
 - **Family settings:** family name, kids (add, rename, avatar), dietary filters (§2.1), default servings, other parent logins
 
@@ -345,13 +348,31 @@ Scaling isn't plain multiplication. Each lesson declares how it scales (§7.3):
 - The shopping list shows US purchase units (oz, lb, cans, bunches).
 - **Revisit if** a family wants metric. A per-family unit setting can be added without changing the content files.
 
+### 6.8 Helper (to be specced)
+A guided helper modeled on **Kels** in KennelOS (`NoliCommoveri/KennelOS`: End-State guide §33, `docs/KennelOS_Kels_Roadmap.md`). Used by **both kids and parents**, each with their own menu of tasks.
+- Like Kels, it's a **scripted chat**, not an AI model: every line is written in the task scripts. It opens from a floating **Ask** button.
+- It **walks through tasks one step at a time**, saves each answer as it's given (or keeps a resumable draft), and writes through the same code as the pages.
+- It **finds things** ("where's my shopping list?") and **explains things** (an FAQ with a "Show me" for each answer).
+- Possible kid tasks: pick what to cook next, find a lesson, explain a cooking term.
+- Possible parent tasks: plan the week, set up the pantry, review safety for the queue.
+- Its name, character, and full task list are specced later.
+
+### 6.9 First-run wizard (to be specced)
+A first run for a new family, like KennelOS's (End-State guide §11 and "Getting Started" in §33). It runs after a family signs up with an invite code. Each part saves as it's answered and can be skipped.
+- **Family setup:** kids, default servings, diet filters, pantry staples, and the optional parent PIN.
+- **A warning for first-time parents:** the recipes haven't all been test-cooked. Read each lesson through before your kids cook it, and mark it test-cooked once you have (§6.2).
+- **Kids' first run:** each kid sets up their chef locker and avatar.
+- **Then an introduction to the helper** (§6.8).
+
+Until the wizard is built, the test-cook warning shows as a one-time notice on a parent's first sign-in.
+
 ---
 
 ## 7. Content as data
 
 Lessons, recipes, and ingredients are **JSON files in the repo**, separate from the app code. Adding lessons means adding files, not changing code. Recipe text must be written originally, not copied from published sources.
 
-**Every recipe is cooked before kids see it.** The linter checks that content is well formed, not that a recipe works. Each lesson carries a `tested` record (who cooked it, when, and at what multiplier). An untested lesson can be previewed by a parent but is not shown to kids. Who does the test cooking is an open question (§10).
+**Recipes are not required to be test-cooked.** The linter checks that content is well formed, not that a recipe works. A parent can mark a lesson **test-cooked** after cooking it (§6.2), which puts a test-kitchen stamp on that lesson for their family (§5.4). The first-run wizard (§6.9) tells new parents that recipes may not have been cooked yet, and to read a lesson through before their kids cook it.
 
 ### 7.1 Files
 ```
@@ -407,7 +428,6 @@ content/
   "servings": 6,
   "totalMinutes": 60,
   "scaling": { "mode": "free" },
-  "tested": { "by": "Jen", "on": "2027-01-10", "multiplier": 1 },
   "intro": { "slides": [ { "image": "...", "caption": "...", "seconds": 5 } ], "music": "upbeat-1" },
   "learn": { "cards": [ { "title": "...", "body": "..." } ], "quiz": [ { "q": "...", "choices": ["..."], "answer": 0 } ] },
   "ingredients": [
@@ -449,7 +469,6 @@ The linter must reject content when:
 The linter must **warn** (without failing the build) when:
 - a lesson uses an ingredient with a `watch` note
 - a lesson has no intro slides yet
-- a lesson has no `tested` record
 - an ingredient or tool uses its category's fallback icon
 
 ---
@@ -496,6 +515,7 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `shopping_trips` (id, family_id, created_at, ended_at)
 - `trip_lessons` (trip_id, family_id, queue_id)
 - `attempts` (id, family_id, kid_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state, rating, notes, eater_rating)
+- `test_cooks` (family_id, lesson_id, lesson_version, parent_id, cooked_on)
 - `photos` (id, family_id, attempt_id, r2_key, created_at)
 - `pantry` (family_id, ingredient_id)
 - `shopping_checks` (family_id, trip_id, ingredient_id, checked)
@@ -521,14 +541,15 @@ Each phase should be deployed and usable before the next begins.
 | Phase | Scope | Done when |
 |---|---|---|
 | **0. Look & feel** | Theme mockups for the kids to choose from (§5.2), then theme tokens, fonts, the core art set (§5.3a), and a **component showcase page** with every themed component from §5.4 in a demo state | The kids have picked a theme and the owner approves the look. **No features are built before this.** |
-| **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes, the sample lessons have been test-cooked, and they render read-only at every allowed serving count |
+| **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
 | **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, invite codes, parent login, sessions, kid profiles and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up with codes, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
-| **2. Lesson player** | Learn, Prep, Cook mode, food-safety checks, timers, wake lock, attempts saved per kid, offline cache and sync | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through |
-| **3. Parent planning & shopping** | Queue (with kid requests), safety review and per-step safety edits, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, then shops for 3 queued lessons from their phone |
+| **2. Lesson player** | Learn, Prep, Cook mode, food-safety checks, timers, wake lock, attempts saved per kid, offline cache and sync | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice |
+| **3. Parent planning & shopping** | Queue (with kid requests), safety review and per-step safety edits, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
 | **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download | A photo taken on the tablet shows in the gallery on the parent's phone |
 | **5. Progress & delight** | Passport, ranks, skill pins, celebrations, sound, and the art for them | Completing a lesson earns its stamp and pin with full animation |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
-| **7. Content fill** | The remaining 46 lessons, written in separate content sessions | All 50 lessons pass the linter and have been test-cooked |
+| **7. Content fill** | The remaining 46 lessons, written in separate content sessions | All 50 lessons pass the linter |
+| **8. Helper & first run** | First-run wizard (§6.9) and the helper (§6.8), once both are specced | A new family goes from invite code to their first queued lesson through the wizard, and kids and parents can each finish a helper task |
 | **Later** | Beginner track (§11), capstone meal-timing lessons, cook-together mode, voice "next step," CSV export to the homeschool management system | — |
 
 **Testing (every phase):** automated tests run in CI alongside the linter. At minimum they cover family scoping (no endpoint returns another family's rows or photos), scaling and rounding, unit conversion, shopping-list merging, and the migration runner.
@@ -547,8 +568,7 @@ Each phase should be deployed and usable before the next begins.
 8. **Lowering safety levels:** can a parent set a step below its default (e.g. Adult hands-on → Adult nearby), or only raise it?
 9. **Parent screens on kitchen devices:** should the parent PIN be required for safety-level edits and lesson approval? §2.5 keeps security basic, so this needs the owner's say-so. Without it, a kid on a kitchen device can change safety levels (§8.3).
 10. **Other hidden sources:** should the hard block (§2.1) also cover animal rennet or pepsin in cheese (sometimes from pigs), and blood or fat (Leviticus 3 and 17)? Neither is in the rule today.
-11. **Who test-cooks the recipes** (§7) before kids see them?
-12. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
+11. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
 
 ---
 
