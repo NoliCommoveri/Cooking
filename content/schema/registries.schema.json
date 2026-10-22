@@ -24,7 +24,7 @@
           "properties": { "label": { "$ref": "#/$defs/text" }, "amount": { "type": "number", "minimum": 0 } } },
         "perishable": { "type": "boolean" },
         "animalSource": { "type": ["string", "null"] },
-        "animalPart": { "enum": ["meat", "fat", "blood", "bone", "egg", "milk", "skin", "organ", null] },
+        "animalPart": { "enum": ["meat", "fat", "blood", "bone", "egg", "milk", "skin", "organ", "honey", null] },
         "rawHandling": { "enum": ["poultry", "meat", "fish", "egg", null] },
         "contains": { "type": "array", "items": { "$ref": "#/$defs/dietTag" } },
         "icon": { "type": ["string", "null"] },

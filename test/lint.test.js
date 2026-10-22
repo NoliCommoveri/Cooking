@@ -109,3 +109,9 @@ test('a cooking word with no kitchen-words entry fails', () => {
 test('a form can belong to only one kitchen word', () => {
   assert.match(broken(c => { c.terms[1].forms.push('dice'); }), /already a form of dice/);
 });
+
+test('honey is allowed as a product, but the bee is not a clean species', () => {
+  const r = base.rules, ing = x => ({ id: 'x', name: 'Thing', contains: [], ...x });
+  assert.deepEqual(uncleanReasons(ing({ animalSource: 'honeybee', animalPart: 'honey' }), r), []);
+  assert.match(uncleanReasons(ing({ animalSource: 'honeybee', animalPart: 'meat' }), r).join(), /clean-species/);
+});

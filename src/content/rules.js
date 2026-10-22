@@ -26,6 +26,8 @@ export function uncleanReasons(ing, rules) {
   const src = ing.animalSource, part = ing.animalPart;
   const tagged = (ing.contains || []).some(t => ANIMAL_TAGS.includes(t));
   if (tagged && !src) out.push(`comes from an animal (tags: ${ing.contains.join(', ')}) but has no animalSource`);
+  const product = (rules.allowedProducts || []).some(p => p.source === src && p.part === part);
+  if (src && product) return out.concat(blockedWordsIn(`${ing.name} ${ing.id}`, rules).map(w => `its name contains the blocked word "${w}"`));
   if (src) {
     if (!rules.cleanSpecies.includes(src)) out.push(`animalSource "${src}" is not on the clean-species list`);
     if (!part) out.push('has an animalSource but no animalPart');

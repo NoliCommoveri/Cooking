@@ -45,6 +45,7 @@ Kids, and adults taking the class, use the app through **profiles** (chef locker
   - **Land animals:** allowed only if the animal both chews the cud and has a split hoof (beef, lamb, goat, venison). Blocked: pork in every form, rabbit, and any other animal that fails either test.
   - **Water animals:** allowed only if the animal has both fins and scales (e.g. salmon, cod, tilapia, tuna, anchovy, trout). Blocked: all shellfish (shrimp, crab, lobster, clams, oysters, mussels, scallops), squid, octopus, catfish, eel, shark, and any other animal without both.
   - **Birds:** chicken, turkey, duck, and goose are allowed. The birds listed in Leviticus 11:13–19 are blocked, including birds of prey and scavengers.
+  - **Honey is allowed** (owner ruling, 2026-10-22). The bee itself isn't clean, but its honey is, the way the plan treats milk and eggs from clean animals. The rules file lists it as an allowed product, not a clean species.
   - **Insects:** blocked (the only exceptions in Leviticus 11:22 are certain locusts, which won't appear in this library).
   - **Blood** (Leviticus 3:17, 7:26–27, 17:10–14): blocked as a food or ingredient in any form, e.g. blood sausage, black pudding, morcilla, boudin noir, blood tofu.
   - **Fat** (Leviticus 3:17, 7:23): the fat of cattle, sheep, and goats is blocked, i.e. suet and tallow (including "beef dripping" sold as a fat). Fat within the meat (marbling) and the juices and drippings from cooking it are allowed.
@@ -230,7 +231,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 42 | Cinnamon rolls (breakfast) | American | First yeast dough: kneading, proofing, shaping | Adult nearby | |
 | 63 | Rugelach | Jewish | Cutting in fat · *pick one with 38, 64* | Adult nearby | Butter and cream cheese dough |
 | 64 | Scones | British | Cutting in fat · *pick one with 38, 63* | Adult nearby | Butter, not lard |
-| 65 | Challah | Jewish | Yeast dough: kneading, proofing, braiding · *pick one with 42, 66* | Adult nearby | Honey or sugar: open question |
+| 65 | Challah | Jewish | Yeast dough: kneading, proofing, braiding · *pick one with 42, 66* | Adult nearby | Honey is allowed (§2.1) |
 | 66 | Homemade pizza | Italian | Yeast dough: kneading, stretching · *pick one with 42, 65* | Adult nearby | Veggie, or turkey pepperoni |
 
 ### Unit 6 — Oven, roasting, frying
@@ -764,8 +765,7 @@ Each phase should be deployed and usable before the next begins.
 
 ## 10. Open questions
 
-1. **Honey (65 Challah).** Challah is usually sweetened with honey. Bees aren't on the clean-species list, and adding to it changes §2.1. Allow honey, or use sugar?
-2. **Jewish dishes on the passport (55, 58, 63, 65).** Proposed: a Jewish stamp on the Europe page, since these come from Eastern European Jewish cooking. Or a page of their own?
+None right now.
 
 ---
 

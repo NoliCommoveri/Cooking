@@ -501,7 +501,19 @@
       "watch": null
     },
     {
-      "id": "vanilla-extract",
+      "id": "honey",
+    "name": "Honey",
+    "section": "pantry",
+    "baseUnit": "ml",
+    "contains": [],
+    "animalSource": "honeybee",
+    "animalPart": "honey",
+    "rawHandling": null,
+    "icon": null,
+    "watch": null
+  },
+  {
+    "id": "vanilla-extract",
       "name": "Vanilla extract",
       "section": "pantry",
       "baseUnit": "ml",

@@ -616,3 +616,18 @@ The owner reviewed the sample lessons in the preview.
 - Open question 1: honey in challah.
 - The theme showcase mockup still shows 50 stamps. It's a mockup, and the
   real counts come from the content.
+
+---
+
+## 27. 2026-10-22 — Honey allowed; Jewish stamp on the Europe page
+
+- **Honey is allowed** (owner ruling, §2.1). The bee isn't added as a clean
+  species. `content/rules/clean-species.json` gained `allowedProducts`, with
+  honey from honeybees as its only entry. The linter accepts that exact pair
+  and still rejects any other part of a bee. `honey` was added to the
+  registry, and there's a new test.
+- **The Jewish stamp goes on the Europe page,** as proposed: matzo ball
+  soup, challah French toast, rugelach, and challah are Eastern European
+  Jewish (Ashkenazi) dishes. Israeli dishes, if any are added, would get
+  their own stamp on the Middle East & North Africa page.
+- Both open questions are closed.
