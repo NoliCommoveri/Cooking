@@ -1545,3 +1545,18 @@ are replaced):
   testing by invitation begins shortly. Two small edits to the text as given:
   "fundementally" is spelled "fundamentally", and "three things--" became
   "three things:".
+
+## 63. 2026-10-22 — The demo's Shopping tab follows the real flow
+
+- The demo's Shopping tab was still the old "Shopping trip" checklist. It now
+  walks through the real flow (§6.3) with the sample lessons, saving nothing:
+  - **What you'll need:** the four sample lessons as a pretend family's
+    weeks (this week: shakshuka and bulgogi; next week: biscuits; the week
+    after: cookies), this week and next open, in recipe amounts.
+  - **Make a shopping list:** How many lessons, with their names, then Next.
+  - **Before you make the list:** tick what you have.
+  - **Shopping list:** packages and aisles, check-offs (not kept), what you
+    said you have with Put on the list, and Make another.
+- Salt, black pepper, and olive oil play the pretend family's kitchen
+  staples, so "May already have" shows. The diet switches still apply.
+- §6.16's description of the preview now says this.
