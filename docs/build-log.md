@@ -574,3 +574,21 @@ The owner reviewed the sample lessons in the preview.
 - Shakshuka (4): the knife tip was unclear about which hand makes the claw.
   It now says the claw is the hand holding the food, with the flat of the
   blade against the knuckles.
+
+---
+
+## 25. 2026-10-22 — Foundation skills, choose-one lessons, knife work first
+
+- The owner ruled (new plan §4.0, Requirement):
+  - Foundation skills (the knife cuts, heat control, building a sauce, roux,
+    cutting in fat, yeast dough) each get at least two lessons, from very
+    different cuisines, and a family picks one. Either one counts as done.
+  - Knife work is strongly suggested first. The app nudges toward it but
+    doesn't block.
+  - Parents see foundations clearly: a foundation marker in the library and
+    the queue, choose-one lessons side by side, a nudge in the queue, and a
+    parent tour card (§6.2).
+- Prerequisites unlock on either lesson for a skill, except where a lesson
+  serves the earlier dish itself (39 needs 38's biscuits).
+- The alternate dishes are proposed to the owner and not added yet. They'll
+  be numbered from 51.

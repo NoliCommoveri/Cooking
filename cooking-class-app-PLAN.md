@@ -138,6 +138,14 @@ Separate from safety levels, which are about who must be in the kitchen. These a
 
 Lessons are grouped into units by skill. International and American dishes are mixed within each unit, and breakfast dishes are spread across the units. The exact teaching order is still an open content task. **Recommendation:** go through the units in order and alternate cuisines within each unit. The safety levels below are set in the content. Parents can't change them.
 
+### 4.0 Foundation skills and choose-one lessons — Requirement (owner, 2026-10-22)
+- **Foundation skills** are the ones most other lessons build on: the knife cuts (julienne, fine chopping and mincing, dicing, slicing), heat control, building a sauce, a roux, cutting in fat, and a yeast dough.
+- **Every foundation skill is taught by at least two lessons, and a family picks one.** The two dishes come from very different cuisines, so every family can find one it will actually cook, and nobody skips the skill. Either lesson counts as done for the skill.
+- **Knife work comes first, strongly suggested.** Nearly every lesson uses it. The app nudges parents toward a Unit 1 lesson before anything else, but doesn't block them (§6.2).
+- **Parents can see foundations at a glance** (§6.2): foundation lessons are marked in the library and the queue, and choose-one lessons are shown side by side.
+- **Prerequisites:** a lesson that needs a foundation skill unlocks when either lesson teaching it is done. The exception is a lesson built on the dish itself: 39 serves 38's biscuits, so it still needs 38.
+- The alternate dishes are numbered from 51 on and sit in the same unit as the lesson they pair with. **The list is proposed and waiting on the owner's pick.** Slicing is already taught three times (27, 14, 37), so it doesn't need one.
+
 ### Unit 1 — Knife work and assembly
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
@@ -345,6 +353,7 @@ Do **not** use:
 - Progress, ranks, skills earned, and gallery, drawn by the profile's theme (§5.4, §5.4a)
 
 ### 6.2 Parent features
+- **Foundations first** (§4.0): foundation lessons carry a foundation marker (an icon and a word, never a pill) in the library and the queue. Choose-one lessons sit side by side with "Pick one." A new family's queue suggests a Unit 1 knife lesson first. Queuing anything else before any knife lesson shows a short note: "Most lessons use knife work. We suggest a Unit 1 lesson first." It's a suggestion, not a block. The parent tour (§6.9) has a card on foundations.
 - **Queue:** assign the next 1–3 lessons per profile, or approve a profile's request (§6.1). Each queued lesson is for one or more profiles (§1), with a serving count (defaults to the family's) and an optional planned date
 - **Shopping list** (§6.3)
 - **Safety review:** before approving a lesson, see every step marked adult-nearby or adult-hands-on
