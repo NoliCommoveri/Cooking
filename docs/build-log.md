@@ -1610,3 +1610,46 @@ pick-one julienne lessons first.
   `DEMO_TRY` in `public/demo.js`.
 - The demo loads only those seven lessons, and the Course tab marks only
   them "Try it now". §6.16 says so.
+
+## 66. 2026-10-22 — Plan: Holy Times and sharing recipes
+
+Plan only; nothing built. From the owner's rulings in this session.
+
+- **New §6.19, Holy Times (Requirement):** a seasonal unit beside the
+  numbered course, starting with Passover and the Feast of Unleavened Bread,
+  with lessons we write and a Parent-contributed shelf.
+  - **Leaven** uses the owner's definition: yeast, sourdough, baking powder,
+    baking soda, self-rising flour, and ready-made foods that usually contain
+    them. It's a badge and a filter, not the hard block.
+  - **Badges:** Unleavened (automatic, when every ingredient is in the
+    registry and none is leaven) and Good for Feast Days (when a parent shares
+    a recipe as a feast-day recipe).
+  - **Swap for a Holy Time meal instead:** in every queued lesson's "⋯" menu,
+    all year, parents only. February through April it offers only Unleavened
+    recipes (the unit's lessons, then other library lessons, then parent
+    recipes); the rest of the year, every feast recipe. A swapped-out course
+    lesson rolls over to next week (§6.18).
+  - Placeholder art by meal type for shared recipes without a photo.
+- **§6.10 rewritten:** family recipes are no longer a bonus. Sharing follows
+  one routine for every recipe: recipes that pass the hard block go straight
+  to the directory (typed-in ingredients included); a feast-day recipe
+  flagged for leaven gets the owner's notice with Send for review and Share
+  recipe; a hard-block flag gets Send for review only. Owner review clears
+  false alarms and never lets unclean food through. The guided entry adds
+  meal type, a "why we make this" card, and the doneness rule.
+- **§6.2, §6.2a:** the swap, sharing, and Recipe reviews replace recipe
+  submissions.
+- **§9:** new Phase 4c, Holy Times and shared recipes, with Phase 9's family
+  recipes folded in. Its place in the order is proposed, for the owner to
+  confirm.
+- **§10:** open questions: other appointed times; whether Holy Times is for
+  every family or turned on per family; whether its cooks count toward
+  progress and the transcript; who sees shared recipes and whether the family
+  name shows; and Phase 4c's place.
+
+## 67. 2026-10-22 — Plan: Phase 4c is next
+
+- **Owner ruling:** Phase 4c (Holy Times and shared recipes, §6.19, §6.10)
+  is built next, with family recipes pulled forward from Phase 9. It comes
+  after Phase 4's first part and before the rest of Phase 4 and 4b. §9 says
+  so, and its place is no longer an open question.
