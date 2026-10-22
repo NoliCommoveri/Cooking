@@ -40,20 +40,21 @@ A parent uses the app from their phone. They queue lessons, see a combined **sho
   - Oyster sauce (shellfish). Substitute mushroom stir-fry sauce, or soy sauce plus sugar.
   - Shrimp paste, which hides in many Thai curry pastes and some kimchi.
   - Gelatin (usually pork). Substitute beef gelatin or agar-agar. Gelatin also hides in some yogurts, sour creams, gummies, and marshmallows.
-  - Lard, found in some tortillas, refried beans, biscuits, and pie crusts.
+  - Lard, found in some tortillas, refried beans, biscuits, pie crusts, store-bought masa, and some shortening blends.
   - Pork sausage casings, used even on many chicken and turkey sausages. Look for collagen-cased or skinless.
   - Breakfast sausage, andouille, chorizo, bacon, pancetta, guanciale, Canadian bacon (pork by default; use beef or poultry versions).
   - Imitation crab (often pollock, but may contain crab or shellfish extract).
   - Carmine or cochineal (an insect-derived red coloring) in some candies, yogurts, and drinks.
-- **Per-family dietary filters** are an extra layer on top of the hard block. Each family can add its own restrictions (e.g. vegetarian, nut-free, dairy-free) using `diet` flags on the ingredient registry. A lesson that conflicts with a family's filters is hidden from that family. If the lesson lists an allowed substitution that resolves the conflict, it is shown with that substitution applied instead.
-  - **Recommendation:** start with these flags: nuts, peanuts, dairy, egg, gluten, fish, meat (for vegetarian).
+- **Per-family dietary filters** are an extra layer on top of the hard block. Each family can add its own restrictions (e.g. vegetarian, nut-free, dairy-free) using the `contains` tags on the ingredient registry (§7.2). A lesson that conflicts with a family's filters is hidden from that family. If the lesson lists an allowed substitution that resolves the conflict, it is shown with that substitution applied instead.
+  - **Recommendation:** start with these tags: nuts, peanuts, dairy, egg, gluten, fish, meat (for vegetarian). Derived products carry their source's tag: gelatin, chicken broth, and beef broth are `meat`; fish sauce, Worcestershire, and dashi are `fish`.
+  - **Recommendation:** if a lesson is hidden by a family's filters, it no longer counts as a prerequisite for that family. Lessons that list it unlock as if it were done. Without this, a dairy-free family could never unlock the lessons that require 32.
   - The hard block is not a family filter. A family can add restrictions but cannot remove the hard block.
 - Clean fish and products made from them are allowed: fish sauce (anchovy), Worcestershire (anchovy), and dashi (bonito).
 - Mixing meat and dairy in one dish is allowed.
 - Ingredients should not be hard to find. Where a dish has a hard-to-find ingredient, the lesson must name a common substitute.
 
 ### 2.2 Servings
-- Library recipes are written for **6 servings**. Each family sets its own default serving count, and recipes must scale to it.
+- Library recipes are written for **6 servings**. Each family sets its own default serving count, and recipes must scale to it. How scaling works is in §6.6.
 
 ### 2.3 Fun, kid-appealing UI
 - The UI must be **highly appealing to kids, themed, and playful, not utilitarian.** See §5. This is a primary requirement, not polish to add at the end.
@@ -78,7 +79,7 @@ Each lesson has these stages:
 1. **Intro.** A 30–45 second animated slideshow (§6.5): the finished dish, the skill, why it matters, an ingredient preview, time and safety level, and a "Let's cook" button.
 2. **Learn.** 3–6 short concept cards with a "why it works" angle. An optional quiz of 2–3 questions follows. **The quiz never blocks cooking.**
 3. **Prep (mise en place).** An ingredient checklist with amounts scaled to the chosen servings, then an equipment checklist. Cook mode unlocks once every item is checked.
-4. **Cook mode.** One step per screen. Each step has a checkbox, a big Next control, inline timers where needed (several can run at once), a safety level, and an optional tip or "what it should look like" note. The screen stays awake for the whole cook.
+4. **Cook mode.** One step per screen. Each step has a checkbox, a big Next control, inline timers where needed (several can run at once), a safety level, and an optional tip or "what it should look like" note. The screen stays awake for the whole cook. Some steps are food-safety checks (below).
 5. **Plate and photo.** The camera opens directly, and the photo saves to this attempt.
 6. **Reflect.** A 1–5 rating, a "what would I change?" note, and an optional rating from whoever ate it.
 
@@ -91,6 +92,14 @@ Each lesson has these stages:
 
 Safety levels must be shown as **illustrated icons or banners, not colored pills** (§5.4).
 
+### Food-safety checks (recommendation)
+Separate from safety levels, which are about who must be in the kitchen. These are about the food.
+- **Doneness check.** Any lesson that cooks raw poultry, ground meat, whole cuts, fish, or eggs to a safe point has a check step with a thermometer target (e.g. poultry 165°F, ground beef 160°F, fish 145°F). The kid can't check the step off without entering or confirming the reading. Every such lesson lists a thermometer in its equipment.
+- **Raw-handling steps.** After a step that handles raw meat, poultry, fish, or eggs, the next step is a wash-hands-and-board step.
+- **Raw and lightly cooked eggs** (Caesar dressing, hollandaise) use pasteurized eggs, or the lesson says why not.
+- **Raw dough.** Lessons with raw flour or raw egg in a dough or batter include a "don't taste the raw dough" tip.
+- The linter enforces the first two (§7.4).
+
 ---
 
 ## 4. Curriculum (50 dishes)
@@ -102,7 +111,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 |---|---|---|---|---|---|
 | 1 | Fresh spring rolls | Vietnamese | Julienne, rolling rice paper | Adult nearby | Chicken instead of shrimp/pork; peanut + hoisin dip |
 | 2 | Fattoush | Lebanese | Fine chopping, toasting pita | Adult nearby | Sumac sub: lemon zest + salt |
-| 3 | Pico de gallo + Baja fish tacos | Mexican | Dicing; simple batter or broil | Adult nearby | Cod/tilapia |
+| 3 | Pico de gallo + Baja fish tacos | Mexican | Dicing; broiling fish | Adult nearby | Cod/tilapia. Broiled, not battered and fried: frying is first taught in 23 |
 | 26 | Chicken Caesar + homemade dressing & croutons | American | Whisked dressing, cubing bread | Adult nearby | Pasteurized eggs or mayo base |
 | 27 | Smash burgers + quick pickles | American | Thin slicing, quick pickle, high-heat sear | Adult nearby | |
 
@@ -116,8 +125,8 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 8 | Cacio e pepe | Italian | Emulsion | Adult nearby | |
 | 28 | French-style omelet (breakfast) | American/French | Heat control, rolling an omelet | Adult nearby | |
 | 29 | Crispy hash browns (breakfast) | American | Squeezing out moisture, crisping | Adult nearby | |
-| 30 | Breakfast burritos (breakfast) | American | Timing several components, rolling | Adult nearby | Beef chorizo or turkey sausage |
-| 31 | Eggs Benedict (breakfast) | American | Poaching eggs, hollandaise | Adult nearby | Turkey bacon or smoked salmon. Prereq: 8 |
+| 30 | Breakfast burritos (breakfast) | American | Timing several components, rolling | Adult nearby | Beef chorizo or turkey sausage; check casings, or use bulk |
+| 31 | Eggs Benedict (breakfast) | American | Poaching eggs, hollandaise | Adult nearby | Turkey bacon or smoked salmon. Pasteurized eggs for the hollandaise. Prereq: 8 |
 | 32 | Stovetop mac and cheese | American | Roux → béchamel → cheese sauce | Adult nearby | Foundation for every roux lesson |
 
 ### Unit 3 — Spices and flavor bases
@@ -149,7 +158,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 19 | Skillet naan | Indian | Yogurt dough, high-heat skillet | Adult nearby | |
 | 20 | Pão de queijo | Brazilian | Scalded tapioca dough | Adult nearby | |
 | 38 | Buttermilk biscuits (breakfast) | American | Cutting in cold fat, folding for layers | Adult nearby | Butter, not lard |
-| 39 | Biscuits + sausage gravy (breakfast) | American | Milk gravy on a roux | Adult nearby | Turkey sausage. Prereq: 38, 32 |
+| 39 | Biscuits + sausage gravy (breakfast) | American | Milk gravy on a roux | Adult nearby | Bulk turkey sausage (no casing). Prereq: 38, 32 |
 | 40 | Blueberry muffins (breakfast) | American | Muffin method, avoiding overmixing | Adult nearby | |
 | 41 | Skillet cornbread | American | Preheated skillet | Adult nearby | Pairs with 33 |
 | 42 | Cinnamon rolls (breakfast) | American | First yeast dough: kneading, proofing, shaping | Adult nearby | |
@@ -161,7 +170,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 22 | Spinach & mushroom quiche | French | Pastry, blind baking, custard | Adult nearby | No bacon |
 | 23 | Chicken katsu | Japanese | Breading station, shallow frying | **Adult hands-on** | Tonkatsu sauce sub |
 | 24 | Swedish meatballs | Swedish | Browning, roux gravy | Adult nearby | Beef; cranberry for lingonberry. Prereq: 32 |
-| 43 | Homemade granola (breakfast) | American | Oven browning, stirring partway | Solo / Adult nearby | |
+| 43 | Homemade granola (breakfast) | American | Oven browning, stirring partway | Adult nearby | Mixing steps are Solo; oven steps make the lesson Adult nearby |
 | 44 | Meatloaf with glaze | American | Binders, thermometer | Adult nearby | |
 | 45 | Roast chicken + pan gravy | American | Roasting, resting, carving, gravy | Adult nearby | Prereq: 32 |
 | 46 | Chicken pot pie | American | Roux filling + pie crust | Adult nearby | Prereq: 32, 22 |
@@ -209,6 +218,14 @@ None of the 50 dishes requires a stand mixer. Lessons that use one in typical re
 - **Typography (recommendation):** a chunky, rounded display font for headings (e.g. **Lilita One**, **Fredoka**, or **Baloo 2**), a highly readable body font (e.g. **Nunito**), and a handwritten accent font for notes and reflections (e.g. **Caveat**). All are SIL OFL fonts on Google Fonts. Body text in cook mode must stay readable from about an arm's length away, so the body size there is large (≥ 20px).
 - **Icons:** custom SVG illustrations in one consistent style. Don't rely on emoji as the main iconography.
 
+### 5.3a Art production (recommendation)
+The themed components need a lot of art: a dish illustration for every lesson, an icon for every ingredient (they hop into the bowl) and every tool (pegboard), a stamp per region, a pin per skill, and avatar outfits per rank.
+- Phase 0 sets the style and draws the core set: the components in §5.4, one generic icon per store section, and one per tool category.
+- An ingredient or tool without its own icon falls back to its category's generic icon. The linter warns about fallbacks; it doesn't fail on them.
+- Each new lesson brings its own dish illustration. Stamps, pins, and outfits come with Phase 5.
+- Every image that isn't original carries its license in `content/images/LICENSES.md`, the same as music.
+- Who draws the art is an open question (§10).
+
 ### 5.4 Themed components
 | Component | Treatment |
 |---|---|
@@ -252,39 +269,50 @@ Do **not** use:
 - Profile picker (chef lockers), showing only the kids in this family
 - Lesson browser by unit, with locked lessons whose prerequisites aren't done shown as a "coming up" card (not hidden)
 - Full lesson flow (§3)
-- Serving scaler (default 6)
-- Multiple concurrent timers; the timer keeps running if the kid navigates to another step
+- Serving scaler (defaults to the family's serving count; limits in §6.6)
+- Multiple concurrent timers; a timer keeps running if the kid moves to another step or closes and reopens the app (see §8.2 for iOS limits)
+- **Request a lesson** (recommendation): a kid can tap "I want to make this," which adds a request to the parent's queue to approve or decline
 - Screen Wake Lock during Prep and Cook
 - Passport, ranks, skill pins, gallery
 
 ### 6.2 Parent features
-- **Queue:** assign or approve the next 1–3 lessons per kid, each with an optional planned date
+- **Queue:** assign the next 1–3 lessons per kid, or approve a kid's request (§6.1), each with a serving count (defaults to the family's) and an optional planned date
 - **Shopping list** (§6.3)
 - **Safety review:** before approving a lesson, see every step marked adult-nearby or adult-hands-on
 - **Edit safety levels** per step
 - **Gallery:** all photos, filterable by kid and lesson, with reflections
+- **Download all photos:** the family's photos as a download, so they don't live only in the app
 - **Pantry staples:** a list of ingredients always on hand, which drop off the shopping list
 - **Family settings:** family name, kids (add, rename, avatar), dietary filters (§2.1), default servings, other parent logins
 
 ### 6.2a Owner features
 - Create and revoke invite codes
-- See the list of families (name, number of kids, last active). The owner does **not** see other families' photos or progress by default.
+- See the list of families (name, number of kids, last active). This is the only cross-family view. The owner never sees other families' kids' names, photos, or progress.
+- Set a new password for a parent who forgot theirs (§8.3)
+- Remove a family. This is destructive, so it's paired with a restore (§8.5)
 
 ### 6.3 Shopping list logic
-1. Collect the ingredient lines from the selected queued lessons.
-2. Scale each line to the lesson's serving count.
+The parent starts a **shopping trip** by picking queued lessons. A trip holds its own check-off state, so changing the queue later doesn't scramble a list mid-shop. Ending the trip marks its lessons `shopped`.
+
+1. Collect the ingredient lines from the trip's lessons, with any diet-filter substitutions (§2.1) already applied.
+2. Scale each line to that queue item's serving count (§6.6).
 3. Convert each line to the ingredient's **base unit** using the registry's conversions (e.g. grams per cup of flour).
 4. **Merge by canonical ingredient ID.** This is the main reason the ingredient registry exists.
 5. Remove pantry staples (keep them viewable in a collapsed "you should have" section).
 6. Round up to **purchase units** (e.g. 15 oz can, dozen eggs, bunch, head), with the exact amount used shown alongside.
 7. Group by **store section** (meat & fish, produce, herbs, dairy & eggs, bread & tortillas, grains & pasta, canned & jarred, sauces, oils & vinegars, baking, specialty, frozen, spices).
-8. Mark perishables. If lessons have planned dates, show perishables only for lessons within the next N days (default 7, adjustable).
-9. Check-off state persists, so the list survives closing the app mid-shop.
+8. Mark perishables. If lessons have planned dates, show perishables only for lessons within the next N days (default 7, adjustable). Lessons with no planned date always show their perishables, marked "no date set."
+9. Lines with no amount ("salt to taste," "oil for the pan") appear once, with no quantity.
+10. Check-off state persists, so the list survives closing the app mid-shop.
+11. The list works offline. Stores often have weak signal, so the trip is cached on the phone, and check-offs sync when the connection returns.
+
+If the same lesson is queued for two kids, each queue item counts separately. Whether that's right depends on open question 1 (§10).
 
 ### 6.4 Photos
 - Open the camera via file input with `capture`, or an equivalent.
 - **Resize on the device** before upload (long edge about 1600px, JPEG about 0.8 quality).
 - Store in object storage (§8), linked to the attempt.
+- If the upload fails (Wi-Fi drop), the photo is kept on the device and retried. It is never lost because the network was down.
 - Photos are only visible to the family that took them (§2.5, §8.3).
 
 ### 6.5 Lesson intro slideshows
@@ -302,21 +330,41 @@ Do **not** use:
 
 **Music:** a small set of royalty-free loops (upbeat, calm, baking). The license for each track must be recorded in the repo.
 
+### 6.6 Scaling (recommendation)
+Scaling isn't plain multiplication. Each lesson declares how it scales (§7.3):
+- **Free scaling** (most stovetop dishes): any serving count.
+- **Fixed multipliers** (baking, pastry, yeast doughs, and anything with a set pan size): only the listed multipliers, e.g. 0.5×, 1×, 2×. The scaler shows only the serving counts those allow.
+- **Countable items** (eggs, tortillas, chicken thighs) round to whole units. Each line can set its rounding (up, down, or nearest), with a minimum of 1.
+- **Pan size and time notes** can differ per multiplier, e.g. "at 2×, use two sheet pans" or "add 10 minutes at 2×." Cook mode shows the note for the current multiplier.
+- **"To taste" and "for the pan" lines** don't scale.
+- Amounts display as kitchen-measurable quantities: fractions a measuring set has (⅛, ¼, ⅓, ½, ⅔, ¾), switching to the next unit up when sensible (16 tbsp → 1 cup).
+
+### 6.7 Units (recommendation)
+- Kids see **US customary** measures (cups, spoons, °F) in Prep and Cook, because that's what's in the kitchen drawer.
+- The registry stores base units (g, ml, count) for merging (§6.3).
+- The shopping list shows US purchase units (oz, lb, cans, bunches).
+- **Revisit if** a family wants metric. A per-family unit setting can be added without changing the content files.
+
 ---
 
 ## 7. Content as data
 
 Lessons, recipes, and ingredients are **JSON files in the repo**, separate from the app code. Adding lessons means adding files, not changing code. Recipe text must be written originally, not copied from published sources.
 
+**Every recipe is cooked before kids see it.** The linter checks that content is well formed, not that a recipe works. Each lesson carries a `tested` record (who cooked it, when, and at what multiplier). An untested lesson can be previewed by a parent but is not shown to kids. Who does the test cooking is an open question (§10).
+
 ### 7.1 Files
 ```
 content/
   ingredients.json        # canonical ingredient registry
+  equipment.json          # tools: id, name, icon, category
+  skills.json             # skill pins: id, name, pin shape
+  cuisines.json           # cuisine → passport region
   lessons/
     01-spring-rolls.json
     ...
   music/                  # loops + LICENSES.md
-  images/
+  images/                 # + LICENSES.md
 ```
 
 ### 7.2 Ingredient registry entry (sketch)
@@ -329,35 +377,58 @@ content/
   "conversions": { "cup": 125, "tbsp": 7.8 },
   "purchaseUnit": { "label": "5 lb bag", "amount": 2268 },
   "perishable": false,
-  "unclean": false,
-  "diet": { "dairy": false, "gluten": false },
+  "animalSource": null,
+  "rawHandling": null,
+  "contains": ["gluten"],
+  "icon": null,
   "watch": null
 }
 ```
-For ingredients on the hidden-source list (§2.1), `watch` carries a short note, e.g. `"Check casing: must be collagen or skinless"`.
+- `contains` lists the diet tags (§2.1) the ingredient has. An empty list means none. A family filter hides any lesson using an ingredient whose `contains` includes one of its tags.
+- `animalSource` is **required for anything that comes from an animal**: the species, e.g. `"cattle"`, `"chicken"`, `"anchovy"`, `"bonito"`. `null` means not animal-derived. The linter checks it against the allowlist of clean species (§7.4).
+- `rawHandling` is `"poultry"`, `"meat"`, `"fish"`, or `"egg"` for ingredients that trigger the food-safety checks in §3.
+- `icon` is null when the ingredient uses its section's generic icon (§5.3a).
+- For ingredients on the hidden-source list (§2.1), `watch` carries a short note, e.g. `"Check casing: must be collagen or skinless"`.
 
 ### 7.3 Lesson file (sketch)
 ```json
 {
   "id": "14-bulgogi",
+  "version": 3,
   "number": 14,
   "track": "core",
   "unit": 4,
   "title": "Beef Bulgogi",
-  "cuisine": "Korean",
+  "image": "dishes/bulgogi.svg",
+  "cuisine": "korean",
   "skill": "Thin slicing & marinating",
+  "skills": ["thin-slicing", "marinating"],
   "prereqs": [],
   "servings": 6,
+  "totalMinutes": 60,
+  "scaling": { "mode": "free" },
+  "tested": { "by": "Jen", "on": "2027-01-10", "multiplier": 1 },
   "intro": { "slides": [ { "image": "...", "caption": "...", "seconds": 5 } ], "music": "upbeat-1" },
   "learn": { "cards": [ { "title": "...", "body": "..." } ], "quiz": [ { "q": "...", "choices": ["..."], "answer": 0 } ] },
-  "ingredients": [ { "ingredient": "beef-sirloin", "amount": 2.5, "unit": "lb", "prep": "sliced thin" } ],
-  "substitutions": [ { "for": "asian-pear", "use": "pear-bosc", "note": "or a grated apple" } ],
-  "equipment": ["chef-knife", "cutting-board", "skillet"],
+  "ingredients": [
+    { "ingredient": "beef-sirloin", "amount": 2.5, "unit": "lb", "prep": "sliced thin", "group": "Beef" },
+    { "ingredient": "sesame-seeds", "amount": 1, "unit": "tbsp", "optional": true, "group": "To serve" },
+    { "ingredient": "egg", "amount": 2, "unit": "count", "round": "up" }
+  ],
+  "substitutions": [ { "for": "asian-pear", "use": "pear-bosc", "reason": "availability", "note": "or a grated apple" } ],
+  "equipment": ["chef-knife", "cutting-board", "skillet", "thermometer"],
   "steps": [
-    { "text": "...", "safety": "adult-nearby", "timerSeconds": 0, "tip": "..." }
+    { "id": "slice-beef", "text": "...", "safety": "adult-nearby", "tip": "..." },
+    { "id": "marinate", "text": "...", "safety": "solo", "timerSeconds": 1800, "timerLabel": "Marinade" },
+    { "id": "check-beef", "type": "doneness", "text": "...", "safety": "adult-nearby", "target": { "temp": 145, "unit": "F" } }
   ]
 }
 ```
+- `version` goes up whenever the lesson's steps or ingredients change. Attempts record the version they were cooked from.
+- Step `id`s are stable. Inserting a step never changes another step's `id`, so parent safety overrides (§8.4) stay attached to the right step.
+- `scaling` is `{ "mode": "free" }` or `{ "mode": "fixed", "multipliers": [0.5, 1, 2], "notes": { "2": "Use two sheet pans" } }` (§6.6).
+- `substitutions[].reason` is `"availability"` or a diet tag (e.g. `"dairy"`). Diet-reason substitutions are the ones a family filter can apply (§2.1).
+- `cuisine` is an ID in `cuisines.json`, which maps it to a passport region. `skills` are IDs in `skills.json` and drive the skill pins. `skill` is the display line.
 
 ### 7.4 Content linter (runs at build time and in CI)
 The linter must reject content when:
@@ -367,10 +438,19 @@ The linter must reject content when:
 - a step has no safety level
 - a prerequisite points to a lesson that doesn't exist, or prerequisites form a loop
 - a unit has no conversion to its ingredient's base unit
+- an equipment, skill, or cuisine ID is missing from its registry
+- a substitution's `use` is missing from the registry, is unclean, or (for a diet-reason substitution) doesn't actually remove the conflicting tag
+- an animal-derived ingredient has no `animalSource`, or its `animalSource` isn't on the allowlist of clean species. The allowlist is a content file; adding to it is a change to §2.1 and needs the owner's say-so
+- lesson text (steps, tips, cards, notes, substitution notes) names a blocked food from a word list (pork, bacon, ham, lard, shrimp, crab, lobster, clam, oyster, mussel, scallop, squid, octopus, catfish, eel, and so on). A word that's fine in context ("turkey bacon," "mushroom stir-fry sauce, not oyster sauce") is allowed by an exact-phrase allowlist in the content, never by turning the check off
+- a lesson uses an ingredient with `rawHandling` but has no doneness check step, or has no wash-hands step after the raw-handling step (§3)
+- step IDs within a lesson aren't unique, or a step with a timer has no `timerLabel`
+- a fixed-scaling lesson has no multipliers
 
 The linter must **warn** (without failing the build) when:
 - a lesson uses an ingredient with a `watch` note
 - a lesson has no intro slides yet
+- a lesson has no `tested` record
+- an ingredient or tool uses its category's fallback icon
 
 ---
 
@@ -385,33 +465,52 @@ A backend is needed because the app is multi-family: each family's progress, que
 ### 8.2 Front end — Recommendation
 - Build it as an installable **PWA**, and cache the active lesson so a Wi-Fi drop mid-recipe doesn't break cook mode.
 - The framework choice is open: Vite with a lightweight component framework, or plain web components. Use CSS custom properties for theme tokens. CSS animations are fine for most motion; use an animation library only for complex sequences (stamp slam, rank up).
+- **Offline beyond reading:** the active lesson, the current shopping trip, check-offs, attempt progress, and photos waiting to upload are all stored on the device and synced when the connection returns.
+
+**Platform limits to design around (mostly iOS):**
+- **Timers:** iOS pauses a web app's code when it's in the background or the screen locks. Timers store their end time and compare against the clock, so they show the right time when the app comes back. A ding can't play while the app isn't on screen, so cook mode keeps the screen awake, and the timer strip shows "ended 2 min ago" if one finished while the app was hidden.
+- **Sound:** iOS blocks audio until the user taps something. The first tap in a cook session unlocks sound.
+- **Wake Lock:** older iOS versions don't support it in an installed app. Where it's missing, cook mode shows a one-time tip to raise the device's auto-lock time.
 
 ### 8.3 Accounts and access (basic, per §2.5) — Recommendation
 - **Sign-up by invite code.** The owner creates a code and a new family uses it to create its account. This keeps the app to families the owner knows without building moderation tools.
   - **Alternative:** open sign-up. **Revisit if** the owner wants anyone to be able to join.
 - **Parent login:** email and password. Store passwords hashed with a standard algorithm (PBKDF2 via Web Crypto is available in Workers). Sessions use a long-lived, httpOnly cookie, so kitchen devices stay logged in.
-  - **Not included, on purpose:** email verification, password-reset email flows, two-factor login, rate limiting beyond the platform defaults. A forgotten password is reset by the owner.
+  - **Not included, on purpose:** email verification, password-reset email flows, two-factor login, rate limiting beyond the platform defaults. A forgotten password is reset by the owner, who sets a new one from the owner screens (§6.2a).
   - **Revisit if:** the app opens to families the owner doesn't know.
 - **Kids don't log in.** A device logged in as a family shows the profile picker (chef lockers).
 - **Parent PIN:** optional, per family. If set, parent-only screens on a shared device ask for it. Stored as a hash, but it's a convenience lock, not a security boundary.
+  - Because kitchen devices are logged in as a parent, a kid on a device without a PIN can reach parent screens, including editing safety levels and approving their own requests. Whether the PIN should be required for some screens is open question 9 (§10).
 - **Family scoping:** every API query filters by the logged-in session's `family_id`. No endpoint accepts a family ID from the client.
+  - **The one exception** is the owner's endpoints (§6.2a). They're open only to a parent with `is_owner`, and they return family names, kid counts, and last-active dates. Nothing else.
 - **Photos:** stored in R2 under `families/{family_id}/…`, served only through the Worker after checking the session's family. R2 is not exposed publicly.
 
 ### 8.4 Data model (D1)
-Every table except `families` carries `family_id`.
+Every table holding a family's data carries `family_id`. `families` is the family itself, and `invites` belongs to the owner, not to a family.
 - `families` (id, name, default_servings, diet_filters, parent_pin_hash, created_at)
 - `parents` (id, family_id, email, password_hash, is_owner)
 - `invites` (code, created_by, used_by_family_id, created_at, revoked)
 - `sessions` (id, parent_id, family_id, created_at, last_seen)
-- `kids` (id, family_id, name, avatar, rank, track: core | beginner)
-- `queue` (family_id, kid_id, lesson_id, planned_date, status: assigned → shopped → cooked, approved_by_parent)
-- `attempts` (id, family_id, kid_id, lesson_id, servings, started_at, finished_at, checklist_state, rating, notes, eater_rating)
+- `kids` (id, family_id, name, avatar, track: core | beginner)
+- `queue` (id, family_id, kid_id, lesson_id, servings, planned_date, status: requested → assigned → shopped → cooked, requested_by_kid)
+- `shopping_trips` (id, family_id, created_at, ended_at)
+- `trip_lessons` (trip_id, family_id, queue_id)
+- `attempts` (id, family_id, kid_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state, rating, notes, eater_rating)
 - `photos` (id, family_id, attempt_id, r2_key, created_at)
 - `pantry` (family_id, ingredient_id)
-- `shopping_checks` (family_id, ingredient_id, list_key, checked)
-- `safety_overrides` (family_id, lesson_id, step_index, level)
+- `shopping_checks` (family_id, trip_id, ingredient_id, checked)
+- `safety_overrides` (family_id, lesson_id, step_id, level)
 - Stamps, pins, and rank are computed from `attempts` and the content files, not stored separately (**recommendation**; cache them if it gets slow).
 - The lesson library and ingredient registry are content files shared by all families (§7). They are not stored per family.
+
+### 8.5 Operations from the browser
+The owner has no command line (see `CLAUDE.md`). Everything operational is done on a token-gated **`/ops` page** in the Worker, modeled on the MCCE repo's `src/ops.js` and `src/migrate.js`.
+- `/ops` is reached with a separate `OPS_TOKEN` secret, not a parent login.
+- **Migrations** are SQL files bundled into the Worker. `/ops` lists each one as applied, pending, or drifted, and **Apply pending** runs them in order. Each migration is all-or-nothing, and the runner stops at the first failure and shows the error.
+- **Backup export** downloads every table as one JSON file. **Import** restores from that file.
+- **Every destructive control has a restore beside it.** Resetting the database, or removing a family (§6.2a), is only offered alongside the export that can bring it back. Photos in R2 are covered by the family photo download (§6.2) and kept for a grace period after a family is removed.
+- Deploys are git → Cloudflare Workers Builds. A schema change reaches production by editing a migration file in the GitHub web editor, letting it deploy, and pressing **Apply pending**.
+- Anything that must be set up by hand in the Cloudflare dashboard (the D1 database, the R2 bucket, the `OPS_TOKEN` secret) is listed for the owner before the phase that needs it.
 
 ---
 
@@ -421,16 +520,18 @@ Each phase should be deployed and usable before the next begins.
 
 | Phase | Scope | Done when |
 |---|---|---|
-| **0. Look & feel** | Theme tokens, fonts, SVG icon set, and a **component showcase page** with every themed component from §5.4 in a demo state | The owner approves the look. **No features are built before this.** |
-| **1. Content core** | JSON schema, ingredient registry (including diet flags), linter, and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the lessons render read-only |
-| **1b. Families & accounts** | D1 schema with `family_id` on every table, invite codes, parent login, sessions, kid profiles, family settings, diet filtering of the library | Two test families sign up with codes, and neither can see the other's kids, data, or photos |
-| **2. Lesson player** | Learn, Prep, Cook mode, timers, wake lock, offline cache | A kid can cook a sample lesson start to finish on a tablet |
-| **3. Parent shopping** | Queue, shopping list with merging, pantry, check-off persistence | A parent shops for 3 queued lessons from their phone |
-| **4. Photos & reflect** | Camera, resize, R2 upload, Reflect stage, gallery | A photo taken on the tablet shows in the gallery on the parent's phone |
-| **5. Progress & delight** | Profiles, passport, ranks, skill pins, celebrations, sound | Completing a lesson earns its stamp and pin with full animation |
+| **0. Look & feel** | Theme mockups for the kids to choose from (§5.2), then theme tokens, fonts, the core art set (§5.3a), and a **component showcase page** with every themed component from §5.4 in a demo state | The kids have picked a theme and the owner approves the look. **No features are built before this.** |
+| **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes, the sample lessons have been test-cooked, and they render read-only at every allowed serving count |
+| **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, invite codes, parent login, sessions, kid profiles and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up with codes, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
+| **2. Lesson player** | Learn, Prep, Cook mode, food-safety checks, timers, wake lock, attempts saved per kid, offline cache and sync | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through |
+| **3. Parent planning & shopping** | Queue (with kid requests), safety review and per-step safety edits, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, then shops for 3 queued lessons from their phone |
+| **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download | A photo taken on the tablet shows in the gallery on the parent's phone |
+| **5. Progress & delight** | Passport, ranks, skill pins, celebrations, sound, and the art for them | Completing a lesson earns its stamp and pin with full animation |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
-| **7. Content fill** | The remaining 46 lessons, written in separate content sessions | All 50 lessons pass the linter |
+| **7. Content fill** | The remaining 46 lessons, written in separate content sessions | All 50 lessons pass the linter and have been test-cooked |
 | **Later** | Beginner track (§11), capstone meal-timing lessons, cook-together mode, voice "next step," CSV export to the homeschool management system | — |
+
+**Testing (every phase):** automated tests run in CI alongside the linter. At minimum they cover family scoping (no endpoint returns another family's rows or photos), scaling and rounding, unit conversion, shopping-list merging, and the migration runner.
 
 ---
 
@@ -442,6 +543,12 @@ Each phase should be deployed and usable before the next begins.
 4. **Theme:** do the kids choose between theme mockups (§5.2)? With several families, is there one theme for everyone, or can each family pick?
 5. **Invite-only or open sign-up** (§8.3)?
 6. **Family-authored lessons:** should families be able to add their own recipes, or is the shared library the only content? Not planned for now. Adding it would move lessons from content files into the database.
+7. **Allergies per kid or per family?** Filters are per family now (§2.1). An allergy often belongs to one kid. Per-kid filters would hide a lesson only for that kid, but the shopping list and shared cooking get more complicated.
+8. **Lowering safety levels:** can a parent set a step below its default (e.g. Adult hands-on → Adult nearby), or only raise it?
+9. **Parent screens on kitchen devices:** should the parent PIN be required for safety-level edits and lesson approval? §2.5 keeps security basic, so this needs the owner's say-so. Without it, a kid on a kitchen device can change safety levels (§8.3).
+10. **Other hidden sources:** should the hard block (§2.1) also cover animal rennet or pepsin in cheese (sometimes from pigs), and blood or fat (Leviticus 3 and 17)? Neither is in the rule today.
+11. **Who test-cooks the recipes** (§7) before kids see them?
+12. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
 
 ---
 
