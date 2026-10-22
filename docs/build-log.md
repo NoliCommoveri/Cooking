@@ -287,162 +287,25 @@ Owner rulings on open questions:
 
 ---
 
-## 14. 2026-10-22 — Dish art from the owner
 
-- The owner will make the dish illustrations with an AI image tool, several
-  dishes per sheet, and Claude will crop them into one image per dish.
-- §5.3a updated: source sheets go in `content/images/source/`. Claude still
-  draws the rest of the art as SVG. AI-made images get a line in
-  `content/images/LICENSES.md` like any art Claude didn't draw.
+## 14. 2026-10-22 — Dish art gathered
 
----
-
-## 15. 2026-10-22 — First dish art sheet
-
-- Added the owner's first dish sheet (Unit 1, 5 dishes) as
-  `content/images/source/sheet-01-unit1.png`.
-- Cropped it into transparent square PNGs in `content/images/dishes/`: 01
-  spring rolls, 02 fattoush, 03 fish tacos, 26 chicken Caesar, 27 smash
-  burgers. Each is about 500–600 px.
-- Added `tools/crop-dish-sheet.py`, which Claude runs to cut a sheet into
-  dishes. It removes the white background and drops stray edges of
-  neighbouring dishes.
-- Started `content/images/LICENSES.md` with the sheet and its dishes.
-- Checked for unclean foods: none seen. The Caesar image has no chicken, and
-  the burger is a thick patty with fries, not a smash burger. Raised both with
-  the owner.
-
----
-
-## 16. 2026-10-22 — Dish art sheets 2 and 3
-
-- Added sheets 2 and 3 from the owner and cropped 10 more dishes into
-  `content/images/dishes/`: 04 shakshuka, 05 chicken fried rice, 06 oyakodon,
-  07 chicken adobo, 08 cacio e pepe, 09 chana masala, 10 misir wot, 11 chicken
-  tagine, 12 butter chicken, 13 jerk chicken. Each is about 500–630 px.
-- Checked for unclean foods: none seen. All 10 match their lessons.
-- Small notes passed to the owner: the tagine's lid is cut off at the sheet's
-  edge, and the adobo's peppercorns look a little like eyes.
-- 15 of 50 dishes now have art.
-
----
-
-## 17. 2026-10-22 — Dish art sheet 4
-
-- Added sheet 4 from the owner and cropped 4 dishes: 14 beef bulgogi, 15 lomo
-  saltado, 16 chicken tinga tacos, 17 pupusas. Each is about 520–610 px.
-- Checked for unclean foods: none seen.
-- Note passed to the owner: the bulgogi beef looks like ground-beef crumbles,
-  not thin slices, and thin slicing is that lesson's skill.
-- 19 of 50 dishes now have art.
-
----
-
-## 18. 2026-10-22 — Dish art sheets 5 and 6
-
-- Added sheets 5 and 6 from the owner and cropped 8 dishes: 18 gyoza, 19
-  skillet naan, 20 pão de queijo, 21 spanakopita, 22 spinach and mushroom
-  quiche, 23 chicken katsu, 24 Swedish meatballs, 25 churros. Each is about
-  550–670 px.
-- Checked for unclean foods: none seen. The quiche has no bacon, the katsu is
-  visibly chicken, and the gyoza filling isn't shown.
-- Fixed `tools/crop-dish-sheet.py`: it put a bottom-row dish ahead of
-  another when one sat a little higher, which swapped 20 and 21. Rows are now
-  grouped by where each dish starts. Re-ran it on sheets 1–4; their crops
-  didn't change.
-- 27 of 50 dishes now have art.
-
----
-
-## 19. 2026-10-22 — Dish art sheet 7
-
-- Added sheet 7 from the owner and cropped 4 dishes: 32 mac and cheese, 33 beef
-  chili, 34 jambalaya, 35 BBQ pulled chicken. Each is about 560–660 px.
-- Checked for unclean foods: nothing that is clearly unclean, but two look like
-  pork and were raised with the owner. The jambalaya's sausage is pink inside
-  like pork kielbasa, and the pulled chicken is dark red-brown like pulled
-  pork. The mac and cheese looks baked with a crumb top rather than stovetop
-  creamy, which is minor.
-- 31 of 50 dishes now have art.
-
----
-
-## 20. 2026-10-22 — Dish art sheet 8
-
-- Added sheet 8 from the owner and cropped 4 breakfast dishes: 28 French
-  omelet, 29 hash browns, 30 breakfast burritos, 31 eggs Benedict. Each is
-  about 670–710 px.
-- Checked for unclean foods: none seen. The Benedict uses smoked salmon, not
-  ham. The burrito filling is crumbled meat with no pork cues.
-- Minor note to the owner: the omelet is an American-style folded half-moon,
-  while the lesson teaches the pale, rolled French style.
-- 35 of 50 dishes now have art.
-
----
-
-## 21. 2026-10-22 — Dish art sheets 9 and 10
-
-- Added sheets 9 and 10 from the owner and cropped 8 dishes: 36 chicken noodle
-  soup, 37 Philly cheesesteak, 38 buttermilk biscuits, 39 biscuits and sausage
-  gravy, 40 blueberry muffins, 41 skillet cornbread, 42 cinnamon rolls, 43
-  granola. Each is about 620–740 px.
-- Checked for unclean foods: none seen. The gravy's sausage is pale crumbles
-  with no pork cues.
-- Note to the owner: the cheesesteak beef looks ground, not thin-sliced, and
-  lesson 37 repeats the thin-slicing skill.
-- Fixed `tools/crop-dish-sheet.py`: the muffin crop picked up a sliver of the
-  cinnamon-roll plate below it. Each dish's mask now grows back only as far as
-  the erosion shrank it. Re-cropped every sheet; all 43 crops were checked
-  side by side on the Kitchen Quest background.
-- 43 of 50 dishes now have art.
-
----
-
-## 22. 2026-10-22 — Dish art sheet 11
-
-- Added sheet 11 from the owner and cropped 4 dishes: 44 meatloaf, 45 roast
-  chicken, 46 chicken pot pie, 47 pot roast. Each is about 620–690 px.
-- Checked for unclean foods: none seen.
-- Fixed `tools/crop-dish-sheet.py`: the pot pie and pot roast kept a pale grey
-  drop shadow. Pale grey now counts as background too; the flood fill still
-  stops at each dish's dark outline. Re-cropped every sheet and checked all 47
-  side by side.
-- Gave the owner the redo list: 14, 26, 27, 34, 35, 37, with 28 and 32
-  optional.
-- 47 of 50 dishes now have art. Still to make: 48, 49, 50.
-
----
-
-## 23. 2026-10-22 — Dish art complete: all 50
-
-- Added sheet 12 from the owner: 48 Southern fried chicken, 49 brown butter
-  cookies, 50 apple pie, and a redo of 26 chicken Caesar with sliced chicken on
-  top. The new Caesar replaces the one from sheet 1.
-- Checked for unclean foods: none seen.
-- Every lesson now has dish art in `content/images/dishes/`.
-- Added `tools/dish-sheets.txt`, which lists every sheet and which dish each
-  position is, with '-' for a dish a later sheet replaced. Re-cropping all the
-  sheets from it can no longer overwrite a redo with an old picture.
-  `tools/crop-dish-sheet.py` skips '-'.
-- Redos still open with the owner: 14, 27, 34, 35, 37 (28 and 32 optional).
-
----
-
-## 24. 2026-10-22 — Dish redos and a working name
-
-- Added sheets 13 and 14 from the owner with redos. They replace 14 beef
-  bulgogi, 27 smash burgers, 28 French omelet, 32 mac and cheese, 34 jambalaya,
-  35 BBQ pulled chicken, and 37 Philly cheesesteak.
-  - Fixed: bulgogi now has slices, the burger is a double with no fries, the
-    jambalaya sausage is browned and not pink, the pulled chicken reads as
-    chicken, the omelet is rolled, and the mac and cheese is creamy stovetop.
-  - The cheesesteak beef still looks ground; raised with the owner.
-- Checked for unclean foods: none seen.
-- **Working name: Clean Plate Recipes** (owner's, not final). Added to the plan
-  (§1). The logo from sheet 13 is cropped to
-  `content/images/brand/clean-plate-logo.png`.
-- `tools/crop-dish-sheet.py` now treats any pale grey as background, which
-  removes the drop shadows some sheets have. Re-cropped every sheet and checked
-  all 50 dishes and the logo side by side.
-- `content/images/LICENSES.md` is rebuilt from `tools/dish-sheets.txt`, so it
-  lists only the images in use.
+- **The owner supplies the dish illustrations,** made with ChatGPT as sheets
+  of 4–5 dishes, and Claude crops them. §5.3a updated; Claude still draws the
+  rest of the art as SVG.
+- **All 50 dishes have art** in `content/images/dishes/`, one transparent
+  square PNG per lesson (`04-shakshuka.png` etc.), about 500–740 px each.
+  - 14 source sheets are in `content/images/source/`. Seven dishes were
+    redone for accuracy (14, 26, 27, 28, 32, 34, 35, 37). The redos fixed
+    missing chicken, ground beef where the lesson teaches slicing, sausage and
+    pulled meat that looked like pork, and the wrong style of omelet and mac
+    and cheese.
+  - Every picture was checked for unclean foods; none are in use. 37 Philly
+    cheesesteak still looks like ground beef and is the one open redo.
+- `tools/crop-dish-sheet.py` cuts a sheet into dishes: it removes the white
+  background and drop shadows and drops stray edges of neighbouring dishes.
+  `tools/dish-sheets.txt` maps every sheet position to its dish, with '-' for
+  a dish a later sheet replaced, so re-cropping can't bring back an old one.
+- `content/images/LICENSES.md` lists each sheet and the images cropped from it.
+- **Working name: Clean Plate Recipes** (the owner's, not final), added to the
+  plan (§1). Its logo is `content/images/brand/clean-plate-logo.png`.
