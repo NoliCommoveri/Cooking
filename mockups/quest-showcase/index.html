@@ -567,7 +567,7 @@ button.crest[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(242,182,64
 
   <section class="sec" id="tutorial">
     <h2>Tutorial quest: the profile intro</h2>
-    <p class="lead">What a profile sees right after picking its theme: one card per thing they'll do, each with a quick "try it". Short words, and nothing moves while a card is being read. Any card can be skipped, and the whole thing can be replayed from the profile's locker. Pick Mom above to see the adult version of the last card.</p>
+    <p class="lead">What a profile sees right after picking its theme: one card per thing they'll do, each with a quick "try it". Short words, and nothing moves while a card is being read. Any card can be skipped, and the whole thing can be replayed from the profile's locker. Pick Mom above to see the adult versions: Cook this instead of Ask to cook, and Suggest a fix.</p>
     <div class="qx"><div class="tut" id="tutStage"></div></div>
   </section>
 
@@ -1040,7 +1040,8 @@ function tutCards(){
   const ad=adult(),name=PROFILES[S.prof].name;
   return[
     {h:`Welcome, ${name}`,say:"Every dish you cook is a quest. I'll show you the moves. It takes about two minutes.",try:()=>`<div class="mini-q"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#guide"/></svg><div><b>Tutorial quest</b><span>${tutCards().length} short cards · skip any of them</span></div></div>`},
-    {h:'Pick a quest',say:"Find a dish on the quest board. Want to make it? Tap Ask to cook it, and a grown-up gets your request.",try:()=>`<div class="mini-q"><img src="img/04-shakshuka.webp" alt="" width="440" height="440"><div><b>Shakshuka</b><span>Stovetop path · Quest 4</span></div></div>${TU.asked?`<p class="done">${ic('i-check')}Request sent to a grown-up</p>`:`<button type="button" class="q-btn" data-act="tut-ask">Ask to cook it</button>`}`},
+    ad?{h:'Pick a quest',say:"Find a dish on the quest board and tap Cook this. It goes straight on your queue and the shopping list. No need to ask.",try:()=>`<div class="mini-q"><img src="img/04-shakshuka.webp" alt="" width="440" height="440"><div><b>Shakshuka</b><span>Stovetop path · Quest 4</span></div></div>${TU.asked?`<p class="done">${ic('i-check')}Added to your queue</p>`:`<button type="button" class="q-btn" data-act="tut-ask">Cook this</button>`}`}
+     :{h:'Pick a quest',say:"Find a dish on the quest board. Want to make it? Tap Ask to cook it, and a grown-up gets your request.",try:()=>`<div class="mini-q"><img src="img/04-shakshuka.webp" alt="" width="440" height="440"><div><b>Shakshuka</b><span>Stovetop path · Quest 4</span></div></div>${TU.asked?`<p class="done">${ic('i-check')}Request sent to a grown-up</p>`:`<button type="button" class="q-btn" data-act="tut-ask">Ask to cook it</button>`}`},
     {h:'How many people?',say:"Set the party size before you start. The amounts change to match.",try:()=>`<div class="serve-row"><button type="button" class="step" data-act="tut-serv" data-i="-1" ${TU.serv<=1?'disabled':''} aria-label="Fewer">−</button><span class="num" style="font-family:var(--q-disp);font-size:40px;font-weight:700">${TU.serv}</span><button type="button" class="step" data-act="tut-serv" data-i="1" ${TU.serv>=12?'disabled':''} aria-label="More">+</button></div><p class="q-note" style="margin:0"><b>Eggs</b> ${eggs(TU.serv)} large</p>`},
     {h:'Gather supplies',say:"Tap each thing as you set it on the counter. When every slot is full, the kitchen opens.",try:()=>`<div class="trio">${['egg','tomato','onion'].map(id=>{const it=ING.find(x=>x.id===id);return`<button type="button" class="q-slot ${TU.slots.has(id)?'on':''}" data-act="tut-slot" data-id="${id}" aria-pressed="${TU.slots.has(id)}">${ic('i-'+id,'ii')}<span class="nm">${it.name}</span></button>`}).join('')}</div>${TU.slots.size===3?`<p class="done">${ic('i-check')}Kitchen open</p>`:''}`},
     {h:'Cook one step at a time',say:"Read the banner first. It says who needs to be in the kitchen. Do the step, then tap Next.",try:()=>`${banner('nearby','Hot stove')}<p class="steptxt" style="font-size:19px">${TU.step?'Stir in the garlic and spices. Cook just until it smells toasty.':'Warm the oil. Add the onion and pepper.'}</p><button type="button" class="q-btn" data-act="tut-next">${TU.step?'Back to step 1':'Next step'}</button>`},
@@ -1111,7 +1112,7 @@ document.addEventListener('click',e=>{
   const b=e.target.closest('[data-act]');if(!b||b.disabled)return;
   unlock();const a=b.dataset.act,i=+b.dataset.i;
   switch(a){
-    case'prof':S.prof=i;renderPicker();renderCook();renderTut();break;
+    case'prof':S.prof=i;TU.asked=false;renderPicker();renderCook();renderTut();break;
     case'goto':{const el=document.getElementById(b.dataset.to);if(el)el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});break}
     case'toggle':{const id=b.dataset.id;if(S.got.has(id))S.got.delete(id);else{S.got.add(id);S.hop=id}renderPrep();break}
     case'gear':{const id=b.dataset.id;if(S.gear.has(id))S.gear.delete(id);else{S.gear.add(id);S.hopG=id}renderPrep();break}

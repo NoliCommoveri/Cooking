@@ -404,3 +404,8 @@ Owner rulings on open questions:
   Why?. Crests open a detail panel listing every dish that uses the skill.
   Reflect has the optional transfer question. Nine more dishes were added to
   the page's images.
+- The owner ruled that **adult profiles don't ask to cook**. Their button is
+  "Cook this", which queues the lesson for that profile with no approval and
+  no PIN. A shared profile with a kid on it still asks (§6.1, §6.9). The
+  showcase's tutorial card switches to the adult version when an adult
+  profile is picked.

@@ -333,6 +333,7 @@ Do **not** use:
 - Serving scaler (defaults to the family's serving count; limits in §6.6)
 - Multiple concurrent timers; a timer keeps running if the kid moves to another step or closes and reopens the app (see §8.2 for iOS limits)
 - **Request a lesson** (recommendation): a kid can tap "I want to make this," which adds a request to the parent's queue to approve or decline
+- **Adult profiles don't ask.** On an adult profile the button is **Cook this**: it queues the lesson for that profile straight away, with no approval and no parent PIN, and it goes on the shopping list like any queued lesson. A shared profile with a kid on it is a kid profile, so it still asks
 - Screen Wake Lock during Prep and Cook
 - Progress, ranks, skills earned, and gallery, drawn by the profile's theme (§5.4, §5.4a)
 
@@ -442,7 +443,7 @@ A first run for a new family, like KennelOS's (End-State guide §11 and "Getting
 - **A warning for first-time parents:** the recipes haven't all been test-cooked. Read each lesson through before your kids cook it, and mark it test-cooked once you have (§6.2).
 - **Each profile's first run:** it sets up its chef locker and avatar, and picks its theme.
 - **Requirement: a profile intro.** Right after that, a short intro shows the profile how to use the app from their side, drawn in the theme they just picked (Kitchen Quest's is a "tutorial quest"). One card per thing they'll do, each with a "try it" tap where it helps:
-  - find a lesson and **ask to cook it** (the request goes to a parent)
+  - find a lesson and **ask to cook it** (the request goes to a parent); adult profiles see **Cook this**, which queues it directly
   - the **serving picker**
   - **Prep:** check off ingredients and equipment, and cook mode unlocks
   - **cook mode:** Next and Back, timers (several at once), safety banners, and the thermometer check
