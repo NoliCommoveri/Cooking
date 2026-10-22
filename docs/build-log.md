@@ -1714,3 +1714,12 @@ on it.
   so the remaining lessons move back a week and the planned finish with them;
   nobody is shown as late. Off the open questions, with the Thursday swap
   question, which no longer applies.
+
+## 70. 2026-10-22 — Plan: syllabus hours count one student's path
+
+- **Owner ruling:** the syllabus counts only what a learner is expected to
+  cook. §6.17 now says the hours and suggested credit come from one student's
+  path (59 lessons, each pick-one group once at its average time), which is
+  how `public/syllabus.js` already works. The 75 is only the list of dishes.
+- The Appointed Times unit is optional, so it's listed in its own section and
+  left out of the hours and credit. Off the open questions (§10).

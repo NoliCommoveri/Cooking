@@ -764,8 +764,8 @@ Families use the app one of two ways, and the parent picks in family settings (b
   - the course description and who it's for (ages 11–12 with some kitchen experience; the beginner track comes later, §11)
   - learning objectives: knife work, heat control, building flavor, doughs and batters, food safety, and reading and following a recipe
   - the units, each with its skills and dishes, and the foundation skills with their pick-one lessons
-  - estimated hours (from each lesson's time) and pacing options, e.g. one lesson a week across a school year
-  - **a suggested credit value** (owner, 2026-10-22), worked out from the course's hours once `content/course.json` has every lesson's time. The common rule of thumb is about 120–180 hours of work for one credit, so the full course likely suggests half a credit; the syllabus shows the hours it's based on, and says the family decides
+  - estimated hours and pacing options, e.g. one lesson a week across a school year. **Hours count only what a learner is expected to cook** (owner, 2026-10-22): one student's path (59 lessons, §4.1), with each pick-one group counted once at its dishes' average time. The Appointed Times unit (§6.19) is optional, so it's listed in its own section and left out of the hours and credit
+  - **a suggested credit value** (owner, 2026-10-22), worked out from those hours once `content/course.json` has every lesson's time. The common rule of thumb is about 120–180 hours of work for one credit, so the full course likely suggests half a credit; the syllabus shows the hours it's based on, and says the family decides
   - materials: the core tools, and that each lesson lists its own shopping
   - safety: the safety levels and adult supervision (§3)
   - how it can be assessed: the rubric above, the reflection questions, and the transcript
@@ -927,7 +927,6 @@ Each phase should be deployed and usable before the next begins.
   - Which other appointed times the unit grows to include (Shavuot, Trumpets, Tabernacles, and so on), or only Passover and Unleavened Bread for now.
   - Whether the unit and the swap show for every family or only families that turn Appointed Times on in family settings.
   - Whether Appointed Times cooks count toward progress, ranks, skills, and the homeschool transcript.
-  - Whether the unit's lessons count in the course's 75 dishes and Phase 7's lesson count (§4, §9).
   - Whether shared recipes are visible to every family, and whether the sharing family's name shows on them (§6.10).
 
 ---
