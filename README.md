@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare.
 
-**Latest build log entry:** [15. 2026-10-22 — First dish art sheet](docs/build-log.md#15-2026-10-22--first-dish-art-sheet)
+**Latest build log entry:** [16. 2026-10-22 — Dish art sheets 2 and 3](docs/build-log.md#16-2026-10-22--dish-art-sheets-2-and-3)
 
 ## Current features
 

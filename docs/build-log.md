@@ -311,3 +311,16 @@ Owner rulings on open questions:
 - Checked for unclean foods: none seen. The Caesar image has no chicken, and
   the burger is a thick patty with fries, not a smash burger. Raised both with
   the owner.
+
+---
+
+## 16. 2026-10-22 — Dish art sheets 2 and 3
+
+- Added sheets 2 and 3 from the owner and cropped 10 more dishes into
+  `content/images/dishes/`: 04 shakshuka, 05 chicken fried rice, 06 oyakodon,
+  07 chicken adobo, 08 cacio e pepe, 09 chana masala, 10 misir wot, 11 chicken
+  tagine, 12 butter chicken, 13 jerk chicken. Each is about 500–630 px.
+- Checked for unclean foods: none seen. All 10 match their lessons.
+- Small notes passed to the owner: the tagine's lid is cut off at the sheet's
+  edge, and the adobo's peppercorns look a little like eyes.
+- 15 of 50 dishes now have art.
