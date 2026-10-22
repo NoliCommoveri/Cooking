@@ -15,7 +15,7 @@ A cooking course app for two kids, ages 11 and 12, who already have some cooking
 
 A parent uses the app from their phone. They queue lessons, see a combined **shopping list** before shopping, review the safety requirements of each lesson, and browse their kids' photos.
 
-**Requirement: the app is multi-family.** It was designed first for the owner's family (two kids, ages 11 and 12), but several families must be able to use it. Each family has its own kids, progress, queue, pantry, shopping list, photos, and settings. All families share the same lesson library.
+**Requirement: the app is multi-family.** It was designed first for the owner's family (two kids, ages 11 and 12), but several families must be able to use it. Each family has its own profiles, progress, queue, pantry, shopping list, photos, and settings. All families share the same lesson library.
 
 **Planned: a beginner track.** A simpler track for kids with no prior cooking experience is planned after the core course (§11). It is not built in the first release, but the data model includes the fields it needs from the start, so adding it later doesn't require a migration.
 
@@ -25,6 +25,11 @@ A parent uses the app from their phone. They queue lessons, see a combined **sho
 | Owner (Jen) | Any | Everything a parent can do, plus creating invite codes and managing families |
 | Parent (1+ per family) | Phone | Queue lessons, shopping list, safety review, gallery, family settings |
 | Kid (any number per family) | Tablet or phone in the kitchen | Learn, prep, cook, photograph, reflect, see progress |
+
+### Profiles
+Kids use the app through **profiles** (chef lockers). A profile can be **one kid or several kids sharing it**. The family decides: one profile per kid, one shared profile for all of them, or a mix. Progress (stamps, pins, rank) belongs to the profile.
+
+**A lesson can be for one or more profiles.** When a parent queues a lesson, they pick which profiles it's for. All of those profiles cook it together as one cook: one shopping-list entry, one photo, and every profile on it gets the stamp and pin. Each profile writes its own reflection.
 
 ---
 
@@ -68,7 +73,7 @@ A parent uses the app from their phone. They queue lessons, see a combined **sho
 - The one thing the basic level must still guarantee: **a family sees only its own data and photos.** Other families' kids' photos must never be visible.
 
 ### 2.6 Photos
-- Kids must be able to photograph their finished dishes inside the app. Each photo is attached to that kid's attempt at that lesson.
+- Kids must be able to photograph their finished dishes inside the app. Each photo is attached to the attempt (one cook of one lesson, by one or more profiles, §1).
 
 ---
 
@@ -205,7 +210,7 @@ None of the 50 dishes requires a stand mixer. Lessons that use one in typical re
 ### 5.2 Theme
 **Recommendation:** "Chef's Passport" combined with "Kitchen Ranks."
 - **Passport:** each completed dish earns an inked stamp for its cuisine in a passport book. Stamp pages are grouped by region, and the passport's world map lights up as regions fill in.
-- **Ranks:** kids level up through Kitchen Apprentice → Prep Cook → Line Cook → Sous Chef → Head Chef, driven by lessons completed and skills earned. Each rank changes the hat or apron on the kid's chef avatar.
+- **Ranks:** kids level up through Kitchen Apprentice → Prep Cook → Line Cook → Sous Chef → Head Chef, driven by lessons completed and skills earned. Each rank changes the hat or apron on the profile's chef avatar.
 
 **Alternatives:**
 - Kitchen Quest: an RPG-style skill tree with unlockable paths.
@@ -245,7 +250,7 @@ The themed components need a lot of art: a dish illustration for every lesson, a
 | Helper | The helper's (§6.8) avatar on a floating **Ask** button, and a chat styled to the theme |
 | Photos | Taking a photo drops a **Polaroid** onto a corkboard. The gallery is a corkboard or scrapbook |
 | Rank up | A full-screen celebration where the hat upgrades, with a confetti or sprinkles burst |
-| Profile picker | Each kid has a **chef's locker** with their avatar and apron |
+| Profile picker | Each profile has a **chef's locker** with its avatar and apron. A shared profile's locker shows everyone on it |
 
 ### 5.5 Motion and sound
 - **Small, frequent actions** (check an item, Next): quick and satisfying, about 150–350 ms.
@@ -270,8 +275,8 @@ Do **not** use:
 ## 6. Features
 
 ### 6.1 Kid features
-- Profile picker (chef lockers), showing only the kids in this family
-- Lesson browser by unit, with locked lessons whose prerequisites aren't done shown as a "coming up" card (not hidden)
+- Profile picker (chef lockers), showing only this family's profiles. For a lesson queued for several profiles, any of them can start it, and the cook is shared
+- Lesson browser by unit, with locked lessons whose prerequisites this profile hasn't done shown as a "coming up" card (not hidden)
 - Full lesson flow (§3)
 - Serving scaler (defaults to the family's serving count; limits in §6.6)
 - Multiple concurrent timers; a timer keeps running if the kid moves to another step or closes and reopens the app (see §8.2 for iOS limits)
@@ -280,18 +285,18 @@ Do **not** use:
 - Passport, ranks, skill pins, gallery
 
 ### 6.2 Parent features
-- **Queue:** assign the next 1–3 lessons per kid, or approve a kid's request (§6.1), each with a serving count (defaults to the family's) and an optional planned date
+- **Queue:** assign the next 1–3 lessons per profile, or approve a profile's request (§6.1). Each queued lesson is for one or more profiles (§1), with a serving count (defaults to the family's) and an optional planned date
 - **Shopping list** (§6.3)
 - **Safety review:** before approving a lesson, see every step marked adult-nearby or adult-hands-on
-- **Gallery:** all photos, filterable by kid and lesson, with reflections
+- **Gallery:** all photos, filterable by profile and lesson, with reflections
 - **Download all photos:** the family's photos as a download, so they don't live only in the app
 - **Mark test-cooked:** after cooking a lesson themselves, a parent can mark it test-cooked for their family (§7). Optional; lessons don't need it to be shown to kids
 - **Pantry staples:** a list of ingredients always on hand, which drop off the shopping list
-- **Family settings:** family name, kids (add, rename, avatar), dietary filters (§2.1), default servings, other parent logins
+- **Family settings:** family name, profiles (add, rename, avatar, who's on each), dietary filters (§2.1), default servings, other parent logins
 
 ### 6.2a Owner features
 - Create and revoke invite codes
-- See the list of families (name, number of kids, last active). This is the only cross-family view. The owner never sees other families' kids' names, photos, or progress.
+- See the list of families (name, number of profiles, last active). This is the only cross-family view. The owner never sees other families' kids' names, photos, or progress.
 - Set a new password for a parent, as a fallback when the reset email (§8.3) doesn't reach them
 - Remove a family. This is destructive, so it's paired with a restore (§8.5)
 
@@ -310,7 +315,7 @@ The parent starts a **shopping trip** by picking queued lessons. A trip holds it
 10. Check-off state persists, so the list survives closing the app mid-shop.
 11. The list works offline. Stores often have weak signal, so the trip is cached on the phone, and check-offs sync when the connection returns.
 
-If the same lesson is queued for two kids, each queue item counts separately. Whether that's right depends on open question 1 (§10).
+A lesson queued once for several profiles is one cook, so it's counted once. The same lesson queued as two separate items is two cooks, and counted twice.
 
 ### 6.4 Photos
 - Open the camera via file input with `capture`, or an equivalent.
@@ -323,7 +328,7 @@ If the same lesson is queued for two kids, each queue item counts separately. Wh
 **Recommendation:** an in-app slideshow engine driven by each lesson's data, not pre-rendered video files.
 - Each lesson's `intro` field is a list of slides (image, caption, duration, transition) plus a music loop ID.
 - The app plays it full screen so it looks and feels like a video.
-- It can include the kid's own photo from an earlier lesson ("Last time you made…").
+- It can include the profile's own photo from an earlier lesson ("Last time you made…").
 - Includes a mute toggle and a skip button.
 
 **Alternative:** render an MP4 per lesson from the same slide data.
@@ -360,9 +365,9 @@ A guided helper modeled on **Kels** in KennelOS (`NoliCommoveri/KennelOS`: End-S
 
 ### 6.9 First-run wizard (to be specced)
 A first run for a new family, like KennelOS's (End-State guide §11 and "Getting Started" in §33). It runs after a family signs up with an invite code. Each part saves as it's answered and can be skipped.
-- **Family setup:** kids, default servings, diet filters, pantry staples, and the parent PIN (required, §8.3).
+- **Family setup:** profiles (one per kid, shared, or a mix), default servings, diet filters, pantry staples, and the parent PIN (required, §8.3).
 - **A warning for first-time parents:** the recipes haven't all been test-cooked. Read each lesson through before your kids cook it, and mark it test-cooked once you have (§6.2).
-- **Kids' first run:** each kid sets up their chef locker and avatar.
+- **Kids' first run:** each profile sets up its chef locker and avatar.
 - **Then an introduction to the helper** (§6.8).
 
 Until the wizard is built, the test-cook warning shows as a one-time notice on a parent's first sign-in.
@@ -446,7 +451,7 @@ content/
 }
 ```
 - `version` goes up whenever the lesson's steps or ingredients change. Attempts record the version they were cooked from.
-- Step `id`s are stable. Inserting a step never changes another step's `id`, so a kid's saved progress in a lesson stays attached to the right step.
+- Step `id`s are stable. Inserting a step never changes another step's `id`, so saved progress in a lesson stays attached to the right step.
 - `scaling` is `{ "mode": "free" }` or `{ "mode": "fixed", "multipliers": [0.5, 1, 2], "notes": { "2": "Use two sheet pans" } }` (§6.6).
 - `substitutions[].reason` is `"availability"` or a diet tag (e.g. `"dairy"`). Diet-reason substitutions are the ones a family filter can apply (§2.1).
 - `cuisine` is an ID in `cuisines.json`, which maps it to a passport region. `skills` are IDs in `skills.json` and drive the skill pins. `skill` is the display line.
@@ -513,11 +518,13 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `password_resets` (token_hash, family_id, parent_id, expires_at, used_at)
 - `invites` (code, created_by, used_by_family_id, created_at, revoked)
 - `sessions` (id, parent_id, family_id, created_at, last_seen)
-- `kids` (id, family_id, name, avatar, track: core | beginner)
-- `queue` (id, family_id, kid_id, lesson_id, servings, planned_date, status: requested → assigned → shopped → cooked, requested_by_kid)
+- `profiles` (id, family_id, name, avatar, track: core | beginner). One kid or several sharing it (§1)
+- `queue` (id, family_id, lesson_id, servings, planned_date, status: requested → assigned → shopped → cooked, requested_by_profile_id)
+- `queue_profiles` (queue_id, family_id, profile_id)
 - `shopping_trips` (id, family_id, created_at, ended_at)
 - `trip_lessons` (trip_id, family_id, queue_id)
-- `attempts` (id, family_id, kid_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state, rating, notes, eater_rating)
+- `attempts` (id, family_id, queue_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state, eater_rating)
+- `attempt_profiles` (attempt_id, family_id, profile_id, rating, notes). Every profile on the cook, each with its own reflection
 - `test_cooks` (family_id, lesson_id, lesson_version, parent_id, cooked_on)
 - `photos` (id, family_id, attempt_id, r2_key, created_at)
 - `pantry` (family_id, ingredient_id)
@@ -544,8 +551,8 @@ Each phase should be deployed and usable before the next begins.
 |---|---|---|
 | **0. Look & feel** | Theme mockups for the kids to choose from (§5.2), then theme tokens, fonts, the core art set (§5.3a), and a **component showcase page** with every themed component from §5.4 in a demo state | The kids have picked a theme and the owner approves the look. **No features are built before this.** |
 | **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
-| **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, invite codes, parent login, sessions, password reset email (Resend), parent PIN, kid profiles and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up with codes, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
-| **2. Lesson player** | Learn, Prep, Cook mode, food-safety checks, timers, wake lock, attempts saved per kid, offline cache and sync | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice |
+| **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, invite codes, parent login, sessions, password reset email (Resend), parent PIN, profiles (single or shared) and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up with codes, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
+| **2. Lesson player** | Learn, Prep, Cook mode, food-safety checks, timers, wake lock, attempts saved for every profile on the cook, offline cache and sync | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice |
 | **3. Parent planning & shopping** | Queue (with kid requests), safety review, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
 | **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download | A photo taken on the tablet shows in the gallery on the parent's phone |
 | **5. Progress & delight** | Passport, ranks, skill pins, celebrations, sound, and the art for them | Completing a lesson earns its stamp and pin with full animation |
@@ -560,13 +567,12 @@ Each phase should be deployed and usable before the next begins.
 
 ## 10. Open questions
 
-1. **Cooking together or separately?** If kids often cook as a pair, attempts need to support two kids and maybe split roles (one preps while the other cooks).
-2. **Allergies:** does the owner's family need any diet flags beyond the hard block on biblically unclean foods?
-3. **Theme:** do the kids choose between theme mockups (§5.2)? With several families, is there one theme for everyone, or can each family pick?
-4. **Invite-only or open sign-up** (§8.3)?
-5. **Family-authored lessons:** should families be able to add their own recipes, or is the shared library the only content? Not planned for now. Adding it would move lessons from content files into the database.
-6. **Other hidden sources:** should the hard block (§2.1) also cover animal rennet or pepsin in cheese (sometimes from pigs), and blood or fat (Leviticus 3 and 17)? Neither is in the rule today.
-7. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
+1. **Allergies:** does the owner's family need any diet flags beyond the hard block on biblically unclean foods?
+2. **Theme:** do the kids choose between theme mockups (§5.2)? With several families, is there one theme for everyone, or can each family pick?
+3. **Invite-only or open sign-up** (§8.3)?
+4. **Family-authored lessons:** should families be able to add their own recipes, or is the shared library the only content? Not planned for now. Adding it would move lessons from content files into the database.
+5. **Other hidden sources:** should the hard block (§2.1) also cover animal rennet or pepsin in cheese (sometimes from pigs), and blood or fat (Leviticus 3 and 17)? Neither is in the rule today.
+6. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
 
 ---
 
@@ -591,6 +597,6 @@ A separate set of simpler lessons for **kids with no prior cooking experience**,
 
 ### Data hooks to include now
 - Lesson files have `track: "core" | "beginner"` (§7.3).
-- Kids have `track` (§8.4). A kid's profile shows lessons from their track. A parent can open individual lessons from the other track to a kid.
+- Profiles have `track` (§8.4). A profile shows lessons from its track. A parent can open individual lessons from the other track to a profile. Kids on different tracks need separate profiles.
 - Steps can carry an `image` and an `audioText` field. These are optional for core lessons and required for beginner lessons, which the linter enforces once the beginner track starts.
-- The shopping list already combines lessons across kids, so beginner and core lessons queued the same week merge into one list automatically.
+- The shopping list already combines lessons across profiles, so beginner and core lessons queued the same week merge into one list automatically.

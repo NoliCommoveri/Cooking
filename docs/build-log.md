@@ -140,3 +140,28 @@ is built.
     domain in Resend.
   - Added to Phase 1b.
 - Removed the PIN open question. Open questions renumbered 1–7.
+
+---
+
+## 7. 2026-10-22 — Profiles: single or shared, and lessons for several
+
+- **Profiles can be shared.** The owner ruled that a profile can be one kid
+  or several kids sharing it; the family chooses per kid, shared, or a mix.
+  Before this, every attempt belonged to exactly one kid, so kids cooking
+  together had no way to share credit, and the shopping list bought twice.
+- **A queued lesson can be for one or more profiles**, and they cook it as one
+  cook:
+  - One shopping-list count and one photo.
+  - Every profile on it gets the stamp and pin.
+  - Each profile writes its own reflection.
+- **Data model:**
+  - `kids` became `profiles`.
+  - `queue.kid_id` became a `queue_profiles` join table.
+  - `attempts` lost `kid_id`, `rating`, and `notes`; a new `attempt_profiles`
+    table holds each profile's place on the cook and its reflection.
+- Updated the users section (§1 Profiles), kid and parent features, family
+  settings, the shopping list's counting rule, the first run, the beginner
+  track's data hooks (kids on different tracks need separate profiles), and
+  Phases 1b and 2.
+- Removed the "cook together or separately" open question. Open questions
+  renumbered 1–6.
