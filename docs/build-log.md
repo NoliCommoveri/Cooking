@@ -294,3 +294,20 @@ Owner rulings on open questions:
 - §5.3a updated: source sheets go in `content/images/source/`. Claude still
   draws the rest of the art as SVG. AI-made images get a line in
   `content/images/LICENSES.md` like any art Claude didn't draw.
+
+---
+
+## 15. 2026-10-22 — First dish art sheet
+
+- Added the owner's first dish sheet (Unit 1, 5 dishes) as
+  `content/images/source/sheet-01-unit1.png`.
+- Cropped it into transparent square PNGs in `content/images/dishes/`: 01
+  spring rolls, 02 fattoush, 03 fish tacos, 26 chicken Caesar, 27 smash
+  burgers. Each is about 500–600 px.
+- Added `tools/crop-dish-sheet.py`, which Claude runs to cut a sheet into
+  dishes. It removes the white background and drops stray edges of
+  neighbouring dishes.
+- Started `content/images/LICENSES.md` with the sheet and its dishes.
+- Checked for unclean foods: none seen. The Caesar image has no chicken, and
+  the burger is a thick patty with fries, not a smash burger. Raised both with
+  the owner.
