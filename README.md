@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare.
 
-**Latest build log entry:** [3. 2026-10-22 — Test-cooking optional; helper and first run added to plan](docs/build-log.md#3-2026-10-22--test-cooking-optional-helper-and-first-run-added-to-plan)
+**Latest build log entry:** [4. 2026-10-22 — Allergies are per family](docs/build-log.md#4-2026-10-22--allergies-are-per-family)
 
 ## Current features
 

@@ -45,7 +45,7 @@ A parent uses the app from their phone. They queue lessons, see a combined **sho
   - Breakfast sausage, andouille, chorizo, bacon, pancetta, guanciale, Canadian bacon (pork by default; use beef or poultry versions).
   - Imitation crab (often pollock, but may contain crab or shellfish extract).
   - Carmine or cochineal (an insect-derived red coloring) in some candies, yogurts, and drinks.
-- **Per-family dietary filters** are an extra layer on top of the hard block. Each family can add its own restrictions (e.g. vegetarian, nut-free, dairy-free) using the `contains` tags on the ingredient registry (§7.2). A lesson that conflicts with a family's filters is hidden from that family. If the lesson lists an allowed substitution that resolves the conflict, it is shown with that substitution applied instead.
+- **Per-family dietary filters** are an extra layer on top of the hard block. Filters are per family, not per kid. Each family can add its own restrictions (e.g. vegetarian, nut-free, dairy-free) using the `contains` tags on the ingredient registry (§7.2). A lesson that conflicts with a family's filters is hidden from that family. If the lesson lists an allowed substitution that resolves the conflict, it is shown with that substitution applied instead.
   - **Recommendation:** start with these tags: nuts, peanuts, dairy, egg, gluten, fish, meat (for vegetarian). Derived products carry their source's tag: gelatin, chicken broth, and beef broth are `meat`; fish sauce, Worcestershire, and dashi are `fish`.
   - **Recommendation:** if a lesson is hidden by a family's filters, it no longer counts as a prerequisite for that family. Lessons that list it unlock as if it were done. Without this, a dairy-free family could never unlock the lessons that require 32.
   - The hard block is not a family filter. A family can add restrictions but cannot remove the hard block.
@@ -499,7 +499,7 @@ A backend is needed because the app is multi-family: each family's progress, que
   - **Revisit if:** the app opens to families the owner doesn't know.
 - **Kids don't log in.** A device logged in as a family shows the profile picker (chef lockers).
 - **Parent PIN:** optional, per family. If set, parent-only screens on a shared device ask for it. Stored as a hash, but it's a convenience lock, not a security boundary.
-  - Because kitchen devices are logged in as a parent, a kid on a device without a PIN can reach parent screens, including editing safety levels and approving their own requests. Whether the PIN should be required for some screens is open question 9 (§10).
+  - Because kitchen devices are logged in as a parent, a kid on a device without a PIN can reach parent screens, including editing safety levels and approving their own requests. Whether the PIN should be required for some screens is open question 8 (§10).
 - **Family scoping:** every API query filters by the logged-in session's `family_id`. No endpoint accepts a family ID from the client.
   - **The one exception** is the owner's endpoints (§6.2a). They're open only to a parent with `is_owner`, and they return family names, kid counts, and last-active dates. Nothing else.
 - **Photos:** stored in R2 under `families/{family_id}/…`, served only through the Worker after checking the session's family. R2 is not exposed publicly.
@@ -564,11 +564,10 @@ Each phase should be deployed and usable before the next begins.
 4. **Theme:** do the kids choose between theme mockups (§5.2)? With several families, is there one theme for everyone, or can each family pick?
 5. **Invite-only or open sign-up** (§8.3)?
 6. **Family-authored lessons:** should families be able to add their own recipes, or is the shared library the only content? Not planned for now. Adding it would move lessons from content files into the database.
-7. **Allergies per kid or per family?** Filters are per family now (§2.1). An allergy often belongs to one kid. Per-kid filters would hide a lesson only for that kid, but the shopping list and shared cooking get more complicated.
-8. **Lowering safety levels:** can a parent set a step below its default (e.g. Adult hands-on → Adult nearby), or only raise it?
-9. **Parent screens on kitchen devices:** should the parent PIN be required for safety-level edits and lesson approval? §2.5 keeps security basic, so this needs the owner's say-so. Without it, a kid on a kitchen device can change safety levels (§8.3).
-10. **Other hidden sources:** should the hard block (§2.1) also cover animal rennet or pepsin in cheese (sometimes from pigs), and blood or fat (Leviticus 3 and 17)? Neither is in the rule today.
-11. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
+7. **Lowering safety levels:** can a parent set a step below its default (e.g. Adult hands-on → Adult nearby), or only raise it?
+8. **Parent screens on kitchen devices:** should the parent PIN be required for safety-level edits and lesson approval? §2.5 keeps security basic, so this needs the owner's say-so. Without it, a kid on a kitchen device can change safety levels (§8.3).
+9. **Other hidden sources:** should the hard block (§2.1) also cover animal rennet or pepsin in cheese (sometimes from pigs), and blood or fat (Leviticus 3 and 17)? Neither is in the rule today.
+10. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
 
 ---
 

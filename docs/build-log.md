@@ -99,3 +99,11 @@ is built.
   and "Getting Started." Full spec later.
 - **Phase 8:** added for the helper and the first-run wizard.
 - Open question "who makes the art" is now number 11.
+
+---
+
+## 4. 2026-10-22 — Allergies are per family
+
+- The owner ruled that diet filters are per family, not per kid. §2.1 now
+  says so, and the open question on it was removed. The remaining open
+  questions were renumbered 7–10.
