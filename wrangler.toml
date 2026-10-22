@@ -21,14 +21,11 @@ run_worker_first = true
 [vars]
 MAIL_FROM = "Clean Plate Recipes <cleanplate@immotus.app>"
 
-# The database. Paste the id from the Cloudflare dashboard (D1 → the database →
-# its Database ID) in place of the placeholder below, then remove the # at the
-# start of each of these four lines. Until then the app and /ops say the
-# database isn't connected.
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "clean-plate-recipes"
-# database_id = "PASTE-THE-DATABASE-ID-HERE"
+# The database (Cloudflare dashboard → D1 → clean-plate-recipes).
+[[d1_databases]]
+binding = "DB"
+database_name = "clean-plate-recipes"
+database_id = "b2b7558a-3e9d-4943-a113-cfd56367927b"
 
 # Migration .sql files are bundled into the Worker as text, so they stay real
 # files you can edit in the GitHub web editor.

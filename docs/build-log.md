@@ -869,3 +869,11 @@ Plan changes only; nothing new is built.
   the same. R2 isn't set up until photos are turned on. Plan only; it's built
   in Phase 4.
 - **Sending address confirmed:** `cleanplate@immotus.app`.
+
+---
+
+## 36. 2026-10-22 — Database connected
+
+- The owner created the D1 database. Its ID is in `wrangler.toml`, so the
+  next deploy binds it as `DB`. `docs/setup.md` step 2 no longer asks for the
+  ID to be pasted.
