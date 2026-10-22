@@ -265,3 +265,22 @@ Owner rulings on open questions:
 - Nothing is saved. The page is a mockup only, and no app code exists yet.
 - Next: the kids pick a theme. Then the rest of Phase 0 is built for that
   theme.
+
+---
+
+## 13. 2026-10-22 — Kids chose Kitchen Quest
+
+- The owner ruled: **Kitchen Quest is built first, then Chef's Passport as
+  soon as possible.** Food Truck and Recipe Scrapbook stay for later.
+- §5.2: this is now a Requirement, replacing "the kids pick it in Phase 0."
+  The theme list says which is built first, second, and later. Kitchen Quest's
+  description gained how the skill tree works: a path per unit, a node per
+  dish, and ranks shown as level and title.
+- New §5.4a, Kitchen Quest's treatment of every component, drawn from the
+  mockup (Recommendation). §5.4 stays as the Chef's Passport treatment.
+- §9: Phase 0 now builds Kitchen Quest. New Phase 0b builds Chef's Passport
+  right after Phase 0 is approved. Phase 5 covers rewards in both themes.
+- §6.1's "Passport, ranks…" line now says progress is drawn by the profile's
+  theme.
+- Mockup page: the rewards table now says a Kitchen Quest dish lights a node on
+  the skill tree and a skill earns a crest, to match §5.4a.

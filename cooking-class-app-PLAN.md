@@ -220,16 +220,16 @@ None of the 50 dishes requires a stand mixer. Lessons that use one in typical re
 **Requirement: each profile picks its own theme.** Kids choose; there is no single app-wide theme.
 
 - **Same rewards, different look.** Every theme shows the same progress underneath: a reward per completed dish, a pin per skill, and a rank. Each theme draws them its own way.
-- **Every theme supplies its own treatment for every component in §5.4.** The banned patterns in §5.6 apply to all of them.
+- **Every theme supplies its own treatment for every component in §5.4.** §5.4 gives the Chef's Passport treatment and §5.4a the Kitchen Quest one. The banned patterns in §5.6 apply to all of them.
 - **The look follows the profile.** On a shared device, the theme switches when a profile is picked from the chef lockers. The profile picker and parent screens use a neutral house style.
 - **Theme tokens are CSS custom properties,** one set per theme, applied at the root when a profile is active.
-- **One theme is built first.** The kids pick it from mockups in Phase 0. The others are added later (§9), and a profile can switch to any built theme at any time.
+- **Requirement: Kitchen Quest is built first, then Chef's Passport as soon as possible.** The kids chose from the Phase 0 mockups (`mockups/theme-picker.html`). Food Truck and Recipe Scrapbook come later (§9). A profile can switch to any built theme at any time.
 
-**Candidate themes** (recommendation):
-- **Chef's Passport + Kitchen Ranks.** Each dish earns an inked stamp for its cuisine in a passport book. Stamp pages are grouped by region, and the world map lights up as regions fill in. Ranks go Kitchen Apprentice → Prep Cook → Line Cook → Sous Chef → Head Chef, and each changes the hat or apron on the chef avatar. §5.4 describes this one.
-- **Kitchen Quest:** an RPG-style skill tree with unlockable paths.
-- **Food Truck:** each lesson adds a menu item to the kid's own food truck.
-- **Recipe Scrapbook:** progress lives in a scrapbook.
+**Themes:**
+- **Chef's Passport + Kitchen Ranks.** Each dish earns an inked stamp for its cuisine in a passport book. Stamp pages are grouped by region, and the world map lights up as regions fill in. Ranks go Kitchen Apprentice → Prep Cook → Line Cook → Sous Chef → Head Chef, and each changes the hat or apron on the chef avatar. §5.4 describes this one. Built second.
+- **Kitchen Quest** (built first): an RPG-style skill tree. Each unit is a path, and each dish is a node on it. Clearing a quest lights its node. Ranks show as a level and title (Level 1 Kitchen Apprentice … Level 5 Head Chef). §5.4a describes this one.
+- **Food Truck** (later): each lesson adds a menu item to the kid's own food truck.
+- **Recipe Scrapbook** (later): progress lives in a scrapbook.
 
 ### 5.3 Visual language
 - **Surfaces:** recipe cards with a paper texture, tape on the corners, and a slight rotation. Use a corkboard, a chalkboard menu, or a tile-backsplash texture for backgrounds.
@@ -264,6 +264,27 @@ The themed components need a lot of art, and every theme added later (§5.2) nee
 | Rank up | A full-screen celebration where the hat upgrades, with a confetti or sprinkles burst |
 | Profile picker | Each profile has a **chef's locker** with its avatar and apron. A shared profile's locker shows everyone on it |
 
+### 5.4a Themed components (Kitchen Quest) — Recommendation
+Drawn from the Phase 0 mockup. Palette: night navy, gold, mana teal, and ember red. Pixel-style display font (e.g. **Pixelify Sans**) for headings and labels only; body text stays in **Nunito**, ≥ 20px in cook mode. Panels have cut (octagonal) corners, not rounded ones.
+
+| Component | Treatment |
+|---|---|
+| Lesson card | A **quest card**: the dish in a gold-framed window, the path and quest number, the title in the pixel font, and a small stats grid (time, servings, safety, heat) |
+| Ingredient checklist | An **inventory grid**. Each slot shows the item dimmed; tapping it gathers the item, which lights up and glows. A segmented supply meter fills above the grid |
+| Equipment checklist | A **gear loadout**: the same slot grid for tools |
+| Cook step | A **quest log** panel. Next slides the following stage in |
+| Timers | A **cooldown ring** that drains as time runs down, then shakes and rings at zero. Several sit side by side in a timer tray, each labeled with what it's timing |
+| Safety level | A **banner** across the top with a gold edge (chef-hat icon for adult nearby, oven-mitt hands for adult hands-on) and one short line of text. **Not a pill** |
+| Progress within a lesson | A **segmented stage bar**: done stages gold, the current one teal |
+| Course progress | The **skill tree** (§5.2) |
+| Skills earned | **Skill crests**: hexagon, shield, and circle badges in a crest collection. Not text chips |
+| Rating | 1–5 **gold hex gems**, not stars |
+| Test-cooked | A **gold shield seal** on the quest card. Not a pill |
+| Helper | The helper's (§6.8) avatar as a guide character on a floating **Ask** button, and a chat styled as a dialogue box |
+| Photos | Taking a photo hangs a framed snapshot in a **trophy hall**. The gallery is the trophy hall |
+| Rank up | A full-screen **level-up**: the new title and crest, with a pixel burst |
+| Profile picker | The house-style chef's lockers (§5.2), same as every theme |
+
 ### 5.5 Motion and sound
 - **Small, frequent actions** (check an item, Next): quick and satisfying, about 150–350 ms.
 - **Milestones** (lesson done, stamp earned, rank up): bigger celebrations are fine — a stamp slamming down with an ink splat, steam puffs, a sprinkles burst.
@@ -294,7 +315,7 @@ Do **not** use:
 - Multiple concurrent timers; a timer keeps running if the kid moves to another step or closes and reopens the app (see §8.2 for iOS limits)
 - **Request a lesson** (recommendation): a kid can tap "I want to make this," which adds a request to the parent's queue to approve or decline
 - Screen Wake Lock during Prep and Cook
-- Passport, ranks, skill pins, gallery
+- Progress, ranks, skills earned, and gallery, drawn by the profile's theme (§5.4, §5.4a)
 
 ### 6.2 Parent features
 - **Queue:** assign the next 1–3 lessons per profile, or approve a profile's request (§6.1). Each queued lesson is for one or more profiles (§1), with a serving count (defaults to the family's) and an optional planned date
@@ -588,18 +609,19 @@ Each phase should be deployed and usable before the next begins.
 
 | Phase | Scope | Done when |
 |---|---|---|
-| **0. Look & feel** | Theme mockups for the kids to choose from (§5.2), then the chosen theme's tokens, the per-profile theme switch, the house style for the picker and parent screens, fonts, the core art set (§5.3a), and a **component showcase page** with every themed component from §5.4 in a demo state | The kids have picked a theme and the owner approves the look. **No features are built before this.** |
+| **0. Look & feel** | Theme mockups for the kids to choose from (§5.2; done, they chose Kitchen Quest), then Kitchen Quest's tokens, the per-profile theme switch, the house style for the picker and parent screens, fonts, the core art set (§5.3a), and a **component showcase page** with every themed component from §5.4 in a demo state | The kids have picked a theme and the owner approves the look. **No features are built before this.** |
+| **0b. Second theme** | Chef's Passport: its tokens, its core art set, and its version of every component on the showcase page. Built as soon as Phase 0 is approved | A profile can switch between Kitchen Quest and Chef's Passport, and the owner approves the Passport look |
 | **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
 | **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, sign-up codes, keyword, and the request queue, parent login, sessions, password reset email (Resend), parent PIN, profiles (single or shared) and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up with codes, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
 | **2. Lesson player** | Learn, Prep, Cook mode, food-safety checks, timers, wake lock, attempts saved for every profile on the cook, offline cache and sync | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice |
 | **3. Parent planning & shopping** | Queue (with kid requests), safety review, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
 | **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download | A photo taken on the tablet shows in the gallery on the parent's phone |
-| **5. Progress & delight** | Passport, ranks, skill pins, celebrations, sound, and the art for them | Completing a lesson earns its stamp and pin with full animation |
+| **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
 | **7. Content fill** | The remaining 46 lessons, written in separate content sessions | All 50 lessons pass the linter |
 | **8. Helper & first run** | First-run wizard (§6.9) and the helper (§6.8), once both are specced | A new family goes from sign-up to their first queued lesson through the wizard, and kids and parents can each finish a helper task |
 | **9. Family recipes (bonus)** | My recipes with the guided entry flow, submission and owner review, the community directory (§6.10) | A parent enters a recipe through the flow, a kid cooks it, and the owner releases a submitted one to the directory, where another test family finds and adds it |
-| **Later** | More themes (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, voice "next step," CSV export to the homeschool management system | — |
+| **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, voice "next step," CSV export to the homeschool management system | — |
 
 **Testing (every phase):** automated tests run in CI alongside the linter. At minimum they cover family scoping (no endpoint returns another family's rows or photos), scaling and rounding, unit conversion, shopping-list merging, and the migration runner.
 
