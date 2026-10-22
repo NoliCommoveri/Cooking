@@ -425,3 +425,24 @@ Owner rulings on open questions:
   sheets from it can no longer overwrite a redo with an old picture.
   `tools/crop-dish-sheet.py` skips '-'.
 - Redos still open with the owner: 14, 27, 34, 35, 37 (28 and 32 optional).
+
+---
+
+## 24. 2026-10-22 — Dish redos and a working name
+
+- Added sheets 13 and 14 from the owner with redos. They replace 14 beef
+  bulgogi, 27 smash burgers, 28 French omelet, 32 mac and cheese, 34 jambalaya,
+  35 BBQ pulled chicken, and 37 Philly cheesesteak.
+  - Fixed: bulgogi now has slices, the burger is a double with no fries, the
+    jambalaya sausage is browned and not pink, the pulled chicken reads as
+    chicken, the omelet is rolled, and the mac and cheese is creamy stovetop.
+  - The cheesesteak beef still looks ground; raised with the owner.
+- Checked for unclean foods: none seen.
+- **Working name: Clean Plate Recipes** (owner's, not final). Added to the plan
+  (§1). The logo from sheet 13 is cropped to
+  `content/images/brand/clean-plate-logo.png`.
+- `tools/crop-dish-sheet.py` now treats any pale grey as background, which
+  removes the drop shadows some sheets have. Re-cropped every sheet and checked
+  all 50 dishes and the logo side by side.
+- `content/images/LICENSES.md` is rebuilt from `tools/dish-sheets.txt`, so it
+  lists only the images in use.

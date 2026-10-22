@@ -8,6 +8,8 @@
 
 ## 1. What this is
 
+**Working name: Clean Plate Recipes.** The owner's working name, not final. Its logo is in `content/images/brand/`.
+
 A cooking course app for two kids, ages 11 and 12, who already have some cooking experience. The app does two jobs:
 
 1. **Teaches.** Each lesson pairs one cooking skill with one real dish that uses that skill.

@@ -9,7 +9,7 @@ src, outdir, names = sys.argv[1], sys.argv[2], sys.argv[3].split(',')
 im = Image.open(src).convert('RGB'); a = np.asarray(im).astype(int)
 H, W = a.shape[:2]
 # near-white or pale grey (drop shadows); dishes have dark outlines, so the flood fill stops there
-white = (a.min(axis=2) > 196) & (a.max(axis=2) - a.min(axis=2) < 24)
+white = (a.min(axis=2) > 140) & (a.max(axis=2) - a.min(axis=2) < 28)
 # exterior background = near-white connected to the border (flood fill)
 m = Image.fromarray((white*255).astype('uint8')).copy()
 for x in range(0, W, 8):
