@@ -1,0 +1,30 @@
+{
+  "equipment": [
+    { "id": "chef-knife", "name": "Chef's knife", "category": "knives", "icon": null },
+    { "id": "cutting-board", "name": "Cutting board", "category": "knives", "icon": null },
+    { "id": "skillet-12", "name": "12-inch skillet with a lid", "category": "pans", "icon": null },
+    { "id": "saucepan-light", "name": "Light-colored saucepan", "category": "pots", "icon": null },
+    { "id": "sheet-pan", "name": "Sheet pan", "category": "bakeware", "icon": null },
+    { "id": "parchment", "name": "Parchment paper", "category": "bakeware", "icon": null },
+    { "id": "biscuit-cutter", "name": "3-inch biscuit cutter", "category": "bakeware", "icon": null },
+    { "id": "cooling-rack", "name": "Cooling rack", "category": "bakeware", "icon": null },
+    { "id": "measuring-spoons", "name": "Measuring spoons", "category": "measuring", "icon": null },
+    { "id": "measuring-cups", "name": "Dry measuring cups", "category": "measuring", "icon": null },
+    { "id": "liquid-measuring-cup", "name": "Liquid measuring cup", "category": "measuring", "icon": null },
+    { "id": "mixing-bowl-large", "name": "Large mixing bowl", "category": "mixing", "icon": null },
+    { "id": "mixing-bowl-medium", "name": "Medium mixing bowl", "category": "mixing", "icon": null },
+    { "id": "small-bowl", "name": "Small bowl", "category": "mixing", "icon": null },
+    { "id": "plate", "name": "Clean plate", "category": "mixing", "icon": null },
+    { "id": "wooden-spoon", "name": "Wooden spoon", "category": "utensils", "icon": null },
+    { "id": "silicone-spatula", "name": "Silicone spatula", "category": "utensils", "icon": null },
+    { "id": "spatula", "name": "Flat spatula", "category": "utensils", "icon": null },
+    { "id": "tongs", "name": "Tongs", "category": "utensils", "icon": null },
+    { "id": "whisk", "name": "Whisk", "category": "utensils", "icon": null },
+    { "id": "fork", "name": "Fork", "category": "utensils", "icon": null },
+    { "id": "pastry-brush", "name": "Pastry brush", "category": "utensils", "icon": null },
+    { "id": "oven-mitts", "name": "Oven mitts", "category": "utensils", "icon": null },
+    { "id": "box-grater", "name": "Box grater", "category": "openers", "icon": null },
+    { "id": "can-opener", "name": "Can opener", "category": "openers", "icon": null },
+    { "id": "thermometer", "name": "Instant-read thermometer", "category": "thermometers", "icon": null }
+  ]
+}

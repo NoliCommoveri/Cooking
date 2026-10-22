@@ -1,10 +1,10 @@
-<title>Kitchen Quest Showcase</title>
+<title>Clean Plate Theme Showcase</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700;800&family=Pixelify+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Fredoka:wght@500;600&family=Lilita+One&family=Nunito:wght@400;600;700;800&family=Pixelify+Sans:wght@400;600;700&display=swap">
 <style>
-/* Layout: neutral house-style page (picker, parent screens, captions) framing dark Kitchen Quest stages, one per component. */
+/* Layout: neutral house-style page (picker, parent screens, captions) framing themed stages, one per component. The active profile's theme (Kitchen Quest or Chef's Passport) styles every stage. */
 :root{
   /* house style: neutral, follows the viewer's light/dark setting */
   --h-bg:#F1EFEA; --h-fg:#1F2328; --h-mut:#5A606A; --h-line:#D7D2C8; --h-card:#FFFFFF; --h-acc:#2E6B5B; --h-acc-ink:#FFFFFF;
@@ -13,6 +13,10 @@
   --q-night:#161A31; --q-panel:#232A4E; --q-edge:#3D4985; --q-deep:#1A2042; --q-well:#11152B;
   --q-gold:#F2B640; --q-gold-dk:#B67E14; --q-mana:#5BD6C8; --q-ember:#FF7350; --q-text:#EEF0FF; --q-dim:#A6AED8;
   --q-disp:'Pixelify Sans','Nunito',monospace; --q-body:'Nunito',system-ui,sans-serif;
+  /* Chef's Passport theme tokens */
+  --p-cork:#C79762; --p-cork2:#B5844F; --p-paper:#FFF8E7; --p-page:#F4EEDC; --p-ink:#2B2A28; --p-muted:#6E604E;
+  --p-red:#D9412B; --p-red-dk:#8E2416; --p-butter:#F6C945; --p-basil:#4E8B3A; --p-navy:#22406B;
+  --p-disp:'Lilita One','Fredoka',sans-serif; --p-hand:'Caveat',cursive;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--h-bg:#14161A; --h-fg:#ECEDEF; --h-mut:#A1A7B1; --h-line:#2B2F36; --h-card:#1D2025; --h-acc:#7CC5AE; --h-acc-ink:#0E1A16; color-scheme:dark}}
 :root[data-theme="dark"]{--h-bg:#14161A; --h-fg:#ECEDEF; --h-mut:#A1A7B1; --h-line:#2B2F36; --h-card:#1D2025; --h-acc:#7CC5AE; --h-acc-ink:#0E1A16; color-scheme:dark}
@@ -20,6 +24,7 @@
 body{background:var(--h-bg);color:var(--h-fg);font-family:var(--h-body);font-size:16px;line-height:1.5}
 .wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 96px}
 button{font:inherit;color:inherit;cursor:pointer}
+[hidden]{display:none!important}
 :focus-visible{outline:3px solid var(--h-acc);outline-offset:3px}
 .ico{width:1.2em;height:1.2em;flex:none;display:inline-block;vertical-align:-.22em}
 svg use{transform-box:fill-box;transform-origin:center}
@@ -424,6 +429,318 @@ button.crest[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(242,182,64
 .refl textarea{font:inherit;font-size:16px;min-height:64px;padding:10px 12px;background:var(--q-deep);color:var(--q-text);border:0;box-shadow:inset 0 0 0 2px var(--q-edge);resize:vertical}
 .foot{margin-top:40px;color:var(--h-mut);font-size:14px;max-width:80ch}
 
+/* ---------- Chef's Passport components (Phase 0b) ---------- */
+[data-kt="passport"] .qx{background:radial-gradient(circle at 30% 40%,var(--p-cork2) 1.2px,transparent 1.8px) 0 0/13px 13px,radial-gradient(circle,#D9AE7A 1px,transparent 1.6px) 6px 7px/17px 17px,var(--p-cork);color:var(--p-ink)}
+[data-kt="passport"] .qx :focus-visible{outline:3px solid var(--p-navy);outline-offset:2px}
+[data-kt="passport"] .nowbar{background:var(--p-paper);color:var(--p-ink);box-shadow:inset 0 0 0 2px #D8C9A8}
+[data-kt="passport"] .nowbar b{font-family:var(--p-disp);font-weight:400;color:var(--p-red);letter-spacing:.02em}
+[data-kt="passport"] .fixbtn{color:var(--p-ink)}
+[data-kt="passport"] .fixbtn .ico{color:var(--p-red)}
+[data-kt="passport"] .banners p{color:var(--p-ink);font-weight:700}
+[data-kt="passport"] .sw b{color:var(--p-ink)}
+[data-kt="passport"] .sw code{color:#3A3226}
+[data-kt="passport"] .sw i{box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+[data-kt="passport"] .art{background:var(--p-paper);box-shadow:0 2px 0 rgba(0,0,0,.08),0 6px 12px -6px rgba(60,30,0,.4);border-radius:3px}
+[data-kt="passport"] .art small{color:var(--p-muted)}
+.p-card{background:var(--p-paper);color:var(--p-ink);position:relative;border-radius:3px;box-shadow:0 2px 0 rgba(0,0,0,.08),0 10px 18px -8px rgba(60,30,0,.45)}
+.p-lined{background-image:repeating-linear-gradient(0deg,transparent 0 27px,rgba(110,160,200,.2) 27px 28px)}
+.tape{position:absolute;width:74px;height:24px;background:rgba(246,226,150,.8);box-shadow:0 1px 2px rgba(0,0,0,.15);z-index:2;pointer-events:none}
+.tape.t1{top:-10px;left:18px;transform:rotate(-8deg)}
+.tape.t2{top:-10px;right:18px;transform:rotate(7deg)}
+.p-h{font-family:var(--p-disp);font-weight:400;font-size:26px;line-height:1.1;margin:0 0 12px;color:var(--p-ink);display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.p-h span{font-family:var(--p-hand);font-weight:700;font-size:24px}
+.p-sub{margin:0 0 8px;font-family:var(--p-hand);font-weight:700;font-size:24px;line-height:1.1;color:var(--p-ink)}
+.p-kick{margin:0;font-family:var(--p-hand);font-weight:700;font-size:21px;line-height:1.1;color:var(--p-muted)}
+.p-btn{border:0;background:var(--p-red);color:#fff;font-family:var(--p-disp);font-size:22px;letter-spacing:.02em;min-height:58px;border-radius:12px;padding:0 22px;box-shadow:0 4px 0 var(--p-red-dk)}
+.p-btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--p-red-dk)}
+.p-btn[disabled]{background:#B9AD9A;box-shadow:0 4px 0 #8F8472;cursor:not-allowed;transform:none}
+.p-back{min-height:58px;padding:0 18px;border:2.5px solid var(--p-ink);background:var(--p-paper);color:var(--p-ink);border-radius:12px;font-weight:800;font-size:17px}
+.p-back[disabled]{opacity:.45;cursor:not-allowed}
+.p-done{display:flex;gap:8px;align-items:center;font-weight:800;color:var(--p-basil);margin:0}
+.p-done .ico{width:22px;height:22px}
+
+/* lesson card */
+.p-lib{display:grid;gap:26px;max-width:760px}
+.p-main{padding:26px 20px 18px;transform:rotate(-.8deg);display:grid;gap:8px}
+.p-photo{justify-self:center;width:min(250px,78%)}
+.p-photo img{width:100%;height:auto;display:block}
+.p-tk{position:absolute;right:12px;top:22px;width:96px;height:96px;color:var(--p-red);opacity:.85;transform:rotate(14deg);mix-blend-mode:multiply;z-index:3}
+.p-title{font-family:var(--p-disp);font-weight:400;font-size:36px;line-height:1;margin:0}
+.p-skill{font-family:var(--p-hand);font-weight:700;font-size:25px;line-height:1.1;margin:0;color:var(--p-muted)}
+.p-meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-weight:700;font-size:15px;margin:2px 0}
+.p-meta span{display:flex;align-items:center;gap:6px}
+.p-meta .ico{width:24px;height:24px}
+.p-serve{display:grid;gap:8px;padding:10px 0;border-block:2px dashed #D8C9A8}
+.p-serve-row{display:flex;align-items:center;gap:12px;flex-wrap:nowrap}
+.p-lbl{font-family:var(--p-disp);font-size:22px;line-height:1.1}
+.p-step{width:56px;height:56px;flex:none;border-radius:50%;border:2.5px solid var(--p-ink);background:var(--p-paper);color:var(--p-ink);font-family:var(--p-disp);font-size:30px;line-height:1;box-shadow:0 3px 0 var(--p-ink)}
+.p-step[disabled]{opacity:.35;cursor:not-allowed;box-shadow:none}
+.p-num{font-family:var(--p-disp);font-size:42px;line-height:1;min-width:2ch;text-align:center;font-variant-numeric:tabular-nums}
+.p-plates{display:flex;flex-wrap:wrap;gap:2px;min-height:30px}
+.p-plates svg{width:30px;height:30px;color:var(--p-red)}
+.p-small{margin:0;font-size:14px;color:var(--p-muted)}
+.p-warn{display:flex;gap:8px;align-items:flex-start;margin:0;padding:8px 10px;background:#FFEFE6;border-left:4px solid var(--p-red);font-size:15px;line-height:1.35}
+.p-warn .ico{width:22px;height:22px;color:var(--p-red)}
+.p-pan{display:flex;gap:8px;align-items:flex-start;margin:0;font-size:15px}
+.p-pan .ico{width:22px;height:22px}
+.p-minis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:560px){.p-minis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.p-mini{padding:16px 10px 12px;text-align:center;display:grid;gap:2px;align-content:start}
+.p-mini:nth-child(1){transform:rotate(1.8deg)}
+.p-mini:nth-child(2){transform:rotate(-2.2deg)}
+.p-mini:nth-child(3){transform:rotate(1.2deg)}
+.p-mini img{width:100%;max-height:140px;object-fit:contain;aspect-ratio:1;height:auto}
+.p-mini h5{font-family:var(--p-disp);font-weight:400;font-size:19px;margin:2px 0 0;line-height:1.1}
+.p-mini.locked{background:#E9E0CC}
+.p-mini.locked img{filter:grayscale(1) opacity(.45)}
+.p-lock{display:flex;gap:6px;align-items:flex-start;text-align:left;font-size:13px;color:var(--p-muted);margin:4px 0 0;line-height:1.3}
+.p-lock .ico{width:18px;height:18px;color:var(--p-red)}
+.p-fixed{margin-top:22px;padding:18px 16px 14px;display:grid;grid-template-columns:96px minmax(0,1fr);gap:12px;align-items:center;max-width:760px;transform:rotate(.6deg)}
+.p-fixed img{width:96px;height:auto}
+.p-sizes{display:flex;gap:8px;flex-wrap:wrap}
+.p-size{min-width:72px;min-height:56px;border:2.5px solid var(--p-ink);background:var(--p-paper);color:var(--p-ink);border-radius:10px;font-family:var(--p-disp);font-size:22px;padding:4px 10px;display:grid;line-height:1.05}
+.p-size small{font-family:var(--q-body);font-size:12px;font-weight:700;color:var(--p-muted)}
+.p-size[aria-checked="true"]{background:var(--p-butter);box-shadow:0 3px 0 var(--p-ink)}
+
+/* prep: mixing bowl + pegboard */
+.p-prep{display:grid;gap:14px}
+.p-bowlwrap{text-align:center}
+.p-bowl{width:100%;max-width:250px;height:auto}
+.p-count{font-family:var(--p-hand);font-weight:700;font-size:26px;margin:0;color:var(--p-ink)}
+.p-list{padding:22px 12px 12px;display:grid;gap:2px}
+.p-item{display:grid;grid-template-columns:44px minmax(0,1fr) 34px;align-items:center;gap:10px;min-height:58px;padding:4px 6px;border:0;background:transparent;text-align:left;border-radius:8px;color:var(--p-ink);width:100%}
+.p-item .ii{width:42px;height:42px}
+.p-item .nm{font-weight:800;font-size:17px;line-height:1.15}
+.p-item .nm small{display:block;font-weight:600;font-size:14px;color:var(--p-muted)}
+.p-ck{width:32px;height:32px}
+.p-ck circle{fill:none;stroke:var(--p-ink);stroke-width:2.5}
+.p-ck path{fill:none;stroke:var(--p-basil);stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:40;stroke-dashoffset:40}
+.p-item.on .p-ck path{stroke-dashoffset:0;transition:stroke-dashoffset .25s}
+.p-item.on .nm{text-decoration:line-through;text-decoration-color:var(--p-red);text-decoration-thickness:2px}
+.p-item.on .ii{opacity:.35}
+.p-item.hop .ii{animation:hop .34s cubic-bezier(.3,.7,.4,1)}
+use.pop{animation:dropin .42s cubic-bezier(.3,.7,.4,1) both}
+.p-gate{display:flex;gap:10px;align-items:center;margin:12px 4px 2px;font-family:var(--p-hand);font-weight:700;font-size:22px;line-height:1.15;color:var(--p-ink)}
+.p-gate .ico{width:26px;height:26px;flex:none}
+.p-peg{padding:16px 12px 12px;border-radius:6px;background:radial-gradient(circle,#7C5C34 2.4px,transparent 3px) 0 0/22px 22px,#D7B887;box-shadow:inset 0 0 0 4px #B08E5E,0 10px 18px -8px rgba(60,30,0,.45)}
+.p-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 8px}
+@media (max-width:520px){.p-tools{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.p-tool{display:grid;justify-items:center;align-content:start;gap:4px;padding:0 2px 6px;min-height:124px;border:0;background:transparent;color:var(--p-ink);position:relative}
+.p-tool .hook{width:14px;height:16px;border:3px solid #5A5550;border-top:0;border-radius:0 0 8px 8px;margin-bottom:-4px}
+.p-tool .ii{width:58px;height:58px;transition:transform .3s cubic-bezier(.3,.7,.4,1),filter .3s}
+.p-tool .tag{background:var(--p-paper);padding:3px 6px;border-radius:3px;font-weight:800;font-size:13.5px;line-height:1.15;text-align:center;box-shadow:0 2px 3px rgba(0,0,0,.2)}
+.p-tool .tag small{display:block;font-weight:600;font-size:12px;color:var(--p-muted)}
+.p-tool.on .ii{transform:translateY(-10px) rotate(-6deg);filter:drop-shadow(0 0 7px rgba(255,236,150,.95)) drop-shadow(0 0 2px #fff)}
+.p-tool.on .tag{background:var(--p-butter)}
+.p-tool .got{position:absolute;top:22px;right:6px;width:26px;height:26px;border-radius:50%;background:var(--p-basil);color:#fff;display:none;place-items:center;box-shadow:0 0 0 2px var(--p-paper)}
+.p-tool .got svg{width:18px;height:18px}
+.p-tool.on .got{display:grid}
+
+/* cook */
+.p-cook{display:grid;gap:14px}
+.p-banner{display:flex;align-items:center;gap:12px;background:var(--p-butter);color:var(--p-ink);padding:10px 34px 10px 30px;clip-path:polygon(0 0,100% 0,calc(100% - 16px) 50%,100% 100%,0 100%,16px 50%);font-size:15px;line-height:1.3}
+.p-banner .ico{width:40px;height:40px;flex:none}
+.p-banner b{font-family:var(--p-disp);font-weight:400;font-size:20px;display:block}
+.p-banner.solo{background:#BFD8A8}
+.p-banner.hot{background:var(--p-red);color:#fff}
+.p-cookbody{display:grid;grid-template-columns:minmax(0,1fr) 84px;gap:12px;align-items:start;perspective:900px}
+.p-stepcard{padding:18px 16px 14px;display:grid;gap:10px;transform-origin:left center}
+.p-stepcard.flip{animation:flipin .32s ease-out}
+.p-stepno{font-family:var(--p-hand);font-weight:700;font-size:24px;margin:0;color:var(--p-red)}
+.p-steptxt{font-size:21px;line-height:1.45;font-weight:700;margin:0}
+.p-note{font-family:var(--p-hand);font-weight:700;font-size:23px;line-height:1.2;margin:0;color:var(--p-muted)}
+.p-note b{color:var(--p-ink)}
+.p-cup{text-align:center;font-family:var(--p-hand);font-weight:700;font-size:20px;line-height:1.1}
+.p-cup svg{width:84px;height:auto}
+.p-tstart{display:flex;align-items:center;gap:10px;min-height:56px;border:2.5px solid var(--p-ink);background:var(--p-paper);color:var(--p-ink);border-radius:12px;padding:6px 14px;font-weight:800;font-size:16px;justify-self:start;text-align:left}
+.p-tstart .ico{width:26px;height:26px}
+.p-chk{display:flex;align-items:center;gap:12px;min-height:58px;padding:8px 12px;border-radius:12px;font-weight:800;font-size:16px;text-align:left;border:2.5px dashed var(--p-red);background:#FFEFE6;color:var(--p-ink)}
+.p-chk .ico{width:30px;height:30px;color:var(--p-red)}
+.p-chk .box{width:30px;height:30px;flex:none;border:2.5px solid currentColor;border-radius:6px;display:grid;place-items:center}
+.p-chk .box svg{width:22px;height:22px;opacity:0}
+.p-chk[aria-pressed="true"] .box svg{opacity:1}
+.p-acts{display:flex;gap:6px 12px;flex-wrap:wrap;align-items:center}
+.p-why{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:6px 14px;border:2.5px solid var(--p-navy);background:#E6ECF4;color:var(--p-navy);border-radius:10px;font-family:var(--p-disp);font-size:18px}
+.p-why .ico{width:20px;height:20px}
+.p-nav{display:flex;gap:12px}
+.p-nav .p-btn{flex:1}
+.p-counter{padding:16px 14px 18px;border-radius:6px;background:linear-gradient(#fff 0 0) 0 0/100% 2px no-repeat,repeating-linear-gradient(90deg,#E9F0F2 0 46px,#D3DEE2 46px 48px),#E9F0F2;border-top:6px solid #9DB3BB;display:flex;gap:16px;flex-wrap:wrap;min-height:130px;align-items:flex-start;color:var(--p-ink)}
+.p-counter .empty{font-family:var(--p-hand);font-weight:700;font-size:21px;color:#3F5056;align-self:center}
+.p-timer{display:grid;justify-items:center;gap:2px;width:104px;text-align:center}
+.p-timer .dial,.p-minidial{width:84px;height:94px;border:0;background:transparent;padding:0}
+.p-timer .dial svg,.p-minidial svg{width:100%;height:100%;overflow:visible}
+.p-timer.ringing .dial svg,.p-minidial.ringing svg{animation:wobble .5s ease-in-out infinite;transform-origin:50% 60%}
+.p-timer .lb{font-weight:800;font-size:14px;line-height:1.15}
+.p-timer .tt{font-family:var(--p-disp);font-size:20px;font-variant-numeric:tabular-nums;line-height:1.1}
+.p-timer.ended .tt{font-family:var(--p-hand);font-weight:700;font-size:21px;color:var(--p-red)}
+.p-timer.paused .tt{color:var(--p-muted)}
+.p-timer .ago{font-size:12.5px;color:#3F5056;font-weight:700}
+.p-timer .stop{border:0;background:var(--p-red);color:#fff;font-weight:800;border-radius:10px;min-height:44px;padding:4px 12px;margin-top:4px}
+
+/* progress: map, passport book, rank, pins */
+.p-map{padding:6px;background:#AFD3E4;border-radius:6px;box-shadow:inset 0 0 0 3px #8FB0BC,0 10px 18px -8px rgba(60,30,0,.45)}
+.p-world{position:relative;aspect-ratio:2/1;border-radius:4px;overflow:hidden}
+.p-world img,.p-world span,.p-world i{position:absolute;inset:0;width:100%;height:100%;display:block}
+.p-world i{-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.p-world .sel{filter:drop-shadow(0 0 2px #D9412B) drop-shadow(0 0 2px #D9412B)}
+.p-legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin:8px 2px 0;font-size:13px;font-weight:700;color:var(--p-ink)}
+.p-legend span{display:flex;align-items:center;gap:6px}
+.p-legend i{width:14px;height:14px;border:1.5px solid var(--p-ink);border-radius:2px}
+.p-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0}
+.p-tab{min-height:52px;padding:6px 10px;border:0;border-radius:8px 8px 0 0;background:#E9DFC6;color:var(--p-ink);font-weight:800;font-size:14px;line-height:1.15;text-align:left;box-shadow:inset 0 -3px 0 rgba(0,0,0,.14)}
+.p-tab small{display:block;font-weight:700;color:var(--p-muted);font-size:12.5px}
+.p-tab[aria-pressed="true"]{background:var(--p-page);box-shadow:inset 0 4px 0 var(--p-red)}
+.p-book{background:var(--p-navy);padding:8px;border-radius:0 10px 10px 10px;box-shadow:0 10px 18px -8px rgba(0,0,0,.5)}
+.p-page{background:var(--p-page);padding:12px 12px 14px;border-radius:4px;background-image:repeating-radial-gradient(circle at 50% 120%,transparent 0 9px,rgba(34,64,107,.05) 9px 10px)}
+.p-page h5{font-family:var(--p-disp);font-weight:400;font-size:20px;margin:0;color:var(--p-navy);line-height:1.1}
+.p-page .sub{margin:0 0 10px;font-family:var(--p-hand);font-weight:700;font-size:20px;color:var(--p-muted)}
+.p-stamps{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:8px 6px}
+.p-st{display:grid;justify-items:center;align-content:start;text-align:center;gap:2px;font-size:12.5px;font-weight:800;line-height:1.15;color:var(--p-ink)}
+.p-st svg{width:76px;height:76px;mix-blend-mode:multiply;opacity:.9}
+.p-st.empty{color:#7A7160;font-weight:700}
+.p-st.empty svg{opacity:1;mix-blend-mode:normal}
+.p-st.next svg{animation:pulse 1.6s ease-in-out infinite}
+.p-rank{padding:16px 14px 12px;display:grid;grid-template-columns:88px minmax(0,1fr);gap:6px 14px;align-items:center;margin-top:18px}
+.p-rank>svg{width:88px;height:auto;grid-row:span 3}
+.p-rank b{font-family:var(--p-disp);font-weight:400;font-size:26px;line-height:1}
+.p-rank p{margin:0;font-family:var(--p-hand);font-weight:700;font-size:21px;color:var(--p-muted);line-height:1.1}
+.p-xp{height:16px;border:2.5px solid var(--p-ink);border-radius:8px;background:#fff;overflow:hidden}
+.p-xp i{display:block;height:100%;background:var(--p-red)}
+.p-ladder{grid-column:1/-1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;margin-top:10px;padding-top:10px;border-top:2px dashed #D8C9A8;text-align:center;font-size:12px;font-weight:800;line-height:1.1}
+.p-ladder svg{width:100%;max-width:60px;height:auto;display:block;margin:0 auto 2px}
+.p-ladder .fut{color:#8A8170}
+.p-ladder .fut svg{opacity:.45;filter:grayscale(.7)}
+.p-ladder .cur{color:var(--p-red)}
+.p-apron{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:10px 6px;background:var(--p-basil);padding:46px 14px 22px;clip-path:polygon(20% 0,80% 0,80% 12%,100% 22%,100% 100%,0 100%,0 22%,20% 12%)}
+.p-pin{display:grid;justify-items:center;align-content:start;gap:4px;border:0;background:transparent;color:#fff;font-size:12.5px;font-weight:800;line-height:1.15;text-align:center;padding:4px 0;min-height:56px}
+.p-pin svg{width:52px;height:52px;filter:drop-shadow(0 3px 0 rgba(0,0,0,.3))}
+.p-pin.locked{color:#E2EEDA;font-weight:700}
+.p-pin.locked svg{filter:none;opacity:.75}
+.p-pin[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(255,236,150,.95))}
+.p-pin:focus-visible{outline:3px solid var(--p-butter)!important}
+.p-pininfo{margin-top:18px;padding:20px 14px 12px;display:grid;gap:6px}
+.p-pininfo h5{margin:0;font-family:var(--p-disp);font-weight:400;font-size:22px}
+.p-pininfo p{margin:0;font-size:16px}
+.p-pininfo ul{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+.p-pininfo li{display:flex;gap:8px;align-items:center;font-size:15px}
+.p-pininfo li .ico{width:18px;height:18px;color:var(--p-basil)}
+.p-pininfo li.todo{color:var(--p-muted)}
+.p-pininfo li.todo .ico{color:#B9AD9A}
+.p-hint{margin:12px 0 0;font-family:var(--p-hand);font-weight:700;font-size:22px;color:var(--p-ink)}
+
+/* rating + reflect */
+.p-hats{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.p-hatbtn{width:60px;height:60px;border:0;background:transparent;padding:0;color:#9A8F7A}
+.p-hatbtn svg{width:100%;height:100%}
+.p-hatbtn.on{color:var(--p-ink)}
+.p-hatbtn:not(.on) svg{opacity:.5}
+.p-hatbtn.pop svg{animation:pop .3s cubic-bezier(.3,.7,.4,1)}
+.p-ratel{font-family:var(--p-hand);font-weight:700;font-size:26px;margin-left:6px}
+.p-refl{padding:22px 14px 14px;display:grid;gap:6px;margin-top:16px;max-width:560px}
+.p-refl label{font-weight:800;font-size:16px}
+.p-refl label span{font-weight:600;color:var(--p-muted)}
+.p-refl textarea{font-family:var(--p-hand);font-weight:700;font-size:24px;line-height:28px;min-height:86px;padding:2px 8px;background:repeating-linear-gradient(0deg,transparent 0 27px,rgba(110,160,200,.4) 27px 28px);border:0;border-radius:0;color:var(--p-ink);resize:vertical}
+
+/* photos: corkboard */
+.p-cork{padding:24px 14px 18px;border-radius:6px;background:radial-gradient(circle at 30% 40%,#9C6B3A 1.3px,transparent 2px) 0 0/9px 9px,radial-gradient(circle,#C58F58 1px,transparent 1.6px) 4px 5px/11px 11px,#B07A47;box-shadow:inset 0 0 0 6px #7A5230}
+.p-polas{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:24px 14px}
+@media (max-width:520px){.p-polas{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.p-pola{margin:0;background:#FDFCF8;padding:8px 8px 6px;box-shadow:0 6px 10px -4px rgba(0,0,0,.55);position:relative;transform:rotate(var(--r,0deg))}
+.p-pola::before{content:"";position:absolute;top:-7px;left:50%;width:16px;height:16px;margin-left:-8px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FF8A73,var(--p-red) 60%,#7A1E12);box-shadow:0 2px 2px rgba(0,0,0,.4);z-index:1}
+.p-pola div{background:#EFE7D6;aspect-ratio:1;display:grid;place-items:center}
+.p-pola img{width:92%;height:auto}
+.p-pola figcaption{font-family:var(--p-hand);font-weight:700;font-size:20px;line-height:1.1;text-align:center;padding-top:4px;color:var(--p-ink)}
+.p-pola.new{animation:pindrop .5s cubic-bezier(.3,.7,.4,1)}
+.p-hall-act{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+
+/* helper */
+.p-dlg{display:grid;gap:12px;max-width:640px}
+.p-row{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:start}
+.p-row>svg{width:64px;height:64px}
+.p-bub{padding:14px 14px 12px;font-size:16px;line-height:1.45}
+.p-bub b{display:block;font-family:var(--p-hand);font-weight:700;font-size:22px;color:var(--p-red);line-height:1}
+.p-bub.me{background:#FFF3B0;margin-left:76px;transform:rotate(.6deg)}
+.p-choices{display:flex;flex-wrap:wrap;gap:8px;margin-left:76px}
+.p-choices button{border:2.5px solid var(--p-ink);background:var(--p-paper);color:var(--p-ink);border-radius:10px;font-weight:800;min-height:48px;padding:6px 14px;font-size:15px}
+@media (max-width:520px){.p-bub.me,.p-choices{margin-left:0}}
+.ask.pp{background:var(--p-red);color:#fff;clip-path:none;border-radius:16px;box-shadow:0 4px 0 var(--p-red-dk);font-family:var(--p-disp);font-weight:400;text-transform:none;letter-spacing:.02em;font-size:22px}
+.ask.pp svg{width:50px;height:50px;background:var(--p-paper);border-radius:12px}
+
+/* tutorial + learn */
+.p-top{display:flex;align-items:center;gap:12px}
+.p-top .p-sub{margin:0 auto 0 0}
+.p-skip{border:0;background:transparent;color:var(--p-ink);font-weight:800;font-size:15px;min-height:44px;padding:4px 8px;text-decoration:underline;text-underline-offset:3px}
+.p-dots{display:flex;gap:6px;flex-wrap:wrap}
+.p-dots i{width:14px;height:14px;border-radius:50%;border:2px solid var(--p-ink)}
+.p-dots i.done{background:var(--p-ink)}
+.p-dots i.cur{background:var(--p-red);border-color:var(--p-red)}
+.p-say{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:start}
+.p-say>svg{width:64px;height:64px}
+.p-say .p-bub{font-size:18px}
+.p-say h4{margin:0 0 4px;font-family:var(--p-disp);font-weight:400;font-size:24px;line-height:1.1}
+.p-try{padding:22px 16px 16px;display:grid;gap:12px;justify-items:start}
+.p-try .tag{font-family:var(--p-hand);font-weight:700;font-size:22px;color:var(--p-red);line-height:1}
+.p-tnav{display:flex;gap:10px}
+.p-tnav .p-btn{flex:1}
+.p-cover{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center}
+.p-cover svg{width:64px;height:auto}
+.p-cover b{font-family:var(--p-disp);font-weight:400;font-size:21px;display:block}
+.p-cover span{color:var(--p-muted);font-size:14px}
+.p-recipe{display:grid;grid-template-columns:72px minmax(0,1fr);gap:12px;align-items:center;width:100%}
+.p-recipe img{width:72px;height:auto}
+.p-recipe b{font-family:var(--p-disp);font-weight:400;font-size:21px;display:block}
+.p-recipe span{color:var(--p-muted);font-size:14px}
+.p-stampbtn{border:0;background:transparent;padding:0;width:96px;height:96px;color:#7A7160}
+.p-stampbtn svg{width:100%;height:100%}
+.p-slam{display:block;animation:slam .45s cubic-bezier(.3,.7,.4,1)}
+.p-lore{padding:24px 18px 16px;display:grid;gap:10px}
+.p-lore h4{margin:0;font-family:var(--p-disp);font-weight:400;font-size:28px;line-height:1.1}
+.p-lore p{margin:0;font-size:18px;line-height:1.5}
+.p-lore p.p-kick{font-size:21px;line-height:1.1}
+.p-lore .callimg{display:grid;grid-template-columns:84px minmax(0,1fr);gap:12px;align-items:center}
+.p-lore .callimg img{width:84px;height:auto}
+.p-xfer h5{margin:0 0 6px;font-family:var(--p-hand);font-weight:700;font-size:23px;color:var(--p-red)}
+.p-xd{display:grid;justify-items:center;gap:2px;text-align:center;font-size:13px;font-weight:800;line-height:1.15;padding:6px 4px;background:#fff;border:2px solid #E2D6BC;border-radius:6px}
+.p-xd img{width:64px;height:auto}
+.p-xd small{font-weight:600;color:var(--p-muted)}
+.p-xd.cooked{border-color:var(--p-basil)}
+.p-xd.cooked small{color:var(--p-basil);font-weight:800}
+.p-wrongs{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.p-wrongs li{padding:8px 12px;background:#FFEFE6;border-left:4px solid var(--p-red);font-size:16px;line-height:1.4}
+.p-wrongs b{display:block}
+.p-qopt{display:flex;gap:10px;align-items:center;text-align:left;min-height:52px;padding:8px 12px;border:2.5px solid #D8C9A8;background:#fff;color:var(--p-ink);font-weight:700;font-size:16px;width:100%;border-radius:10px}
+.p-qopt.right{border-color:var(--p-basil);background:#EAF3E2}
+.p-qopt.wrong{border-color:var(--p-red);background:#FFEFE6}
+.p-qfb{margin:0;font-size:15px;color:var(--p-muted)}
+.whyov .p-lore{width:min(520px,100%)}
+
+/* rank up */
+.lvlup.pp{background:rgba(43,32,20,.86)}
+.p-rbox{background:var(--p-paper);color:var(--p-ink);padding:30px 22px 22px;border-radius:4px;text-align:center;display:grid;justify-items:center;gap:8px;position:relative;width:min(420px,100%);box-shadow:0 20px 40px -10px rgba(0,0,0,.6)}
+.p-rbox .rk{font-family:var(--p-disp);font-size:26px;color:var(--p-red);border:4px solid var(--p-red);padding:2px 14px;border-radius:6px;--rot:-6deg;transform:rotate(-6deg);animation:slam .5s .1s cubic-bezier(.3,.7,.4,1) both}
+.p-rbox h2{font-family:var(--p-disp);font-weight:400;font-size:clamp(38px,9vw,60px);margin:0;line-height:1}
+.p-rbox p{margin:0;font-family:var(--p-hand);font-weight:700;font-size:24px;color:var(--p-muted)}
+.p-rbox>svg{width:130px;height:auto;animation:pop .5s cubic-bezier(.3,.7,.4,1)}
+.burst.sp i{width:6px;height:16px;border-radius:3px;animation-name:sprinkle}
+
+/* tokens */
+.p-type{padding:20px 18px 16px;display:grid;gap:12px}
+.p-type small{display:block;font-size:12px;color:var(--p-muted);font-family:var(--q-body);font-weight:600;margin-bottom:2px}
+.p-type .pt1{font-family:var(--p-disp);font-size:38px;line-height:1}
+.p-type .pt2{font-family:var(--p-hand);font-weight:700;font-size:25px;line-height:1.1;color:var(--p-red)}
+.p-type .pt3{font-size:21px;font-weight:700;line-height:1.45;max-width:36ch}
+.p-type .pt4{font-size:15px;color:var(--p-muted);max-width:46ch}
+.p-stampart{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.p-stampart .art svg{width:72px;height:72px;mix-blend-mode:multiply}
+.p-outfits .art svg{width:72px;height:auto}
+
+@keyframes dropin{0%{transform:translateY(-46px) scale(.4);opacity:0}65%{transform:translateY(4px) scale(1.06);opacity:1}100%{transform:none;opacity:1}}
+@keyframes flipin{0%{transform:rotateY(88deg);opacity:.4}100%{transform:none;opacity:1}}
+@keyframes wobble{0%,100%{transform:rotate(0)}20%{transform:rotate(-9deg)}40%{transform:rotate(8deg)}60%{transform:rotate(-6deg)}80%{transform:rotate(5deg)}}
+@keyframes pindrop{0%{transform:translateY(-60px) rotate(-12deg);opacity:0}70%{transform:translateY(4px) rotate(var(--r,0deg))}100%{transform:rotate(var(--r,0deg));opacity:1}}
+@keyframes slam{0%{transform:scale(2.2) rotate(-24deg);opacity:0}60%{transform:scale(.92) rotate(var(--rot,0deg));opacity:1}100%{transform:rotate(var(--rot,0deg));opacity:1}}
+@keyframes sprinkle{0%{transform:translate(0,0) rotate(var(--rot,0deg));opacity:1}100%{transform:translate(var(--x),var(--y)) rotate(calc(var(--rot,0deg) + 220deg));opacity:0}}
+
 @keyframes hop{0%{transform:none}35%{transform:translateY(-22px) rotate(-14deg) scale(1.18)}70%{transform:translateY(3px)}100%{transform:none}}
 @keyframes pop{0%{transform:scale(.4);opacity:0}65%{transform:scale(1.08);opacity:1}100%{transform:none;opacity:1}}
 @keyframes slidein{0%{transform:translateX(40px);opacity:0}100%{transform:none;opacity:1}}
@@ -506,6 +823,7 @@ button.crest[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(242,182,64
 <symbol id="i-sound" viewBox="0 0 48 48"><path d="M8 18h8l11-9v30l-11-9H8z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M33 17c3 4 3 10 0 14M38 12c6 7 6 17 0 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></symbol>
 <symbol id="i-mute" viewBox="0 0 48 48"><path d="M8 18h8l11-9v30l-11-9H8z" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/><path d="M33 19l10 10M43 19L33 29" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></symbol>
 <symbol id="i-wash" viewBox="0 0 48 48"><path d="M10 30c0-6 4-10 9-10h10l6 4c3 2 1 6-2 5l-6-2" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 30v10h20l8-6" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="16" cy="9" r="3" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="27" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="2.5"/><circle cx="35" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="2.5"/></symbol>
+<symbol id="i-book" viewBox="0 0 48 48"><rect x="10" y="5" width="28" height="38" rx="3" fill="none" stroke="currentColor" stroke-width="3.5"/><circle cx="24" cy="21" r="7" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M17 21h14M24 14c-3 4-3 10 0 14M24 14c3 4 3 10 0 14" fill="none" stroke="currentColor" stroke-width="2"/><path d="M17 34h14" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></symbol>
 <!-- skill glyphs (white on enamel) -->
 <symbol id="g-knife" viewBox="0 0 24 24"><path d="M3 17L17 3c2 2 2 6-1 9l-6 6z" fill="currentColor"/><path d="M10 18l-3 3a2 2 0 0 1-3-3l3-3" fill="none" stroke="currentColor" stroke-width="2.4"/></symbol>
 <symbol id="g-flame" viewBox="0 0 24 24"><path d="M12 2c2 5 7 7 7 13a7 7 0 0 1-14 0c0-4 2-6 4-8 0 3 1 4 3 4-2-3-1-6 0-9z" fill="currentColor"/></symbol>
@@ -548,8 +866,8 @@ button.crest[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(242,182,64
 <div class="wrap">
   <header class="hd">
     <img src="img/clean-plate-logo.webp" alt="Clean Plate Recipes logo" width="360" height="360">
-    <h1>Kitchen Quest showcase</h1>
-    <p>Every Kitchen Quest component in a demo state, for approval before any features are built. The plainer house style around the dark panels is what the profile picker and parent screens use. Everything is tappable, and nothing is saved.</p>
+    <h1>Theme showcase</h1>
+    <p>Every component in both built themes, in a demo state. Both themes are approved. Pick a locker, or change a profile's theme, and every panel below switches. The plainer house style around the panels is what the profile picker and parent screens use. Everything is tappable, and nothing is saved.</p>
   </header>
 
   <nav class="toc" aria-label="On this page">
@@ -558,7 +876,7 @@ button.crest[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(242,182,64
 
   <section class="sec" id="picker">
     <h2>Profile picker and theme switch</h2>
-    <p class="lead">House style. Each profile has a chef's locker and picks its own theme, and the look switches when a profile is picked. These four are sample profiles. Pick Mom to see how safety banners read on an adult profile.</p>
+    <p class="lead">House style. Each profile has a chef's locker and picks its own theme, and the look switches when a profile is picked. These four are sample profiles: Ava and the shared profile use Kitchen Quest, and Leo and Mom use Chef's Passport. Switch any profile's theme on the right. Pick Mom to see how safety banners read on an adult profile.</p>
     <div class="pick">
       <div class="lockers" id="lockers"></div>
       <div class="prof" id="prof"></div>
@@ -566,28 +884,20 @@ button.crest[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(242,182,64
   </section>
 
   <section class="sec" id="tutorial">
-    <h2>Tutorial quest: the profile intro</h2>
-    <p class="lead">What a profile sees right after picking its theme: one card per thing they'll do, each with a quick "try it". Short words, and nothing moves while a card is being read. Any card can be skipped, and the whole thing can be replayed from the profile's locker. Pick Mom above to see the adult versions: Cook this instead of Ask to cook, and Suggest a fix.</p>
+    <h2 data-copy="tut-h">Tutorial quest: the profile intro</h2>
+    <p class="lead" data-copy="tut-p">What a profile sees right after picking its theme: one card per thing they'll do, each with a quick "try it". Short words, and nothing moves while a card is being read. Any card can be skipped, and the whole thing can be replayed from the profile's locker. Pick Mom above to see the adult versions: Cook this instead of Ask to cook, and Suggest a fix.</p>
     <div class="qx"><div class="tut" id="tutStage"></div></div>
   </section>
 
   <section class="sec" id="tokens">
-    <h2>Kitchen Quest colours and type</h2>
-    <p class="lead">The theme's tokens. Pixel type is for headings and labels only. Step text stays in the rounded body font at 21px, so it reads from arm's length.</p>
-    <div class="qx tok">
-      <div class="sw" id="swatches"></div>
-      <div class="type">
-        <div><small>Display · Pixelify Sans 700</small><div class="t1">Shakshuka</div></div>
-        <div><small>Label · Pixelify Sans 600, caps</small><div class="t2">Stovetop path · Quest 4</div></div>
-        <div><small>Step text · Nunito 700, 21px</small><div class="t3">Pour in the tomatoes and ½ teaspoon salt.</div></div>
-        <div><small>Notes · Nunito 400, 15px</small><div class="t4">A spoon dragged through the sauce leaves a trail for a second.</div></div>
-      </div>
-    </div>
+    <h2 data-copy="tok-h">Kitchen Quest colours and type</h2>
+    <p class="lead" data-copy="tok-p">The theme's tokens. Pixel type is for headings and labels only. Step text stays in the rounded body font at 21px, so it reads from arm's length.</p>
+    <div class="qx tok" id="tokStage"></div>
   </section>
 
   <section class="sec" id="lesson">
     <h2>Lesson card</h2>
-    <p class="lead">The quest card, with the gold test-kitchen seal on a lesson a parent has test-cooked. A lesson whose prerequisites aren't done yet shows as a locked "coming up" card instead of being hidden. The party-size picker starts at the queued serving count and changes the prep amounts and the cook steps. A baking lesson only offers the sizes its pan allows.</p>
+    <p class="lead" data-copy="les-p">The quest card, with the gold test-kitchen seal on a lesson a parent has test-cooked. A lesson whose prerequisites aren't done yet shows as a locked "coming up" card instead of being hidden. The party-size picker starts at the queued serving count and changes the prep amounts and the cook steps. A baking lesson only offers the sizes its pan allows.</p>
     <div class="qx" id="lessonStage"></div>
   </section>
 
@@ -599,19 +909,19 @@ button.crest[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(242,182,64
 
   <section class="sec" id="prep">
     <h2>Prep: ingredients and gear</h2>
-    <p class="lead">Ingredients fill an inventory grid, and equipment fills a gear loadout. Cook mode unlocks once every slot is filled. The knife and board use their category's icon, the fallback for tools without their own art.</p>
+    <p class="lead" data-copy="prep-p">Ingredients fill an inventory grid, and equipment fills a gear loadout. Cook mode unlocks once every slot is filled. The knife and board use their category's icon, the fallback for tools without their own art.</p>
     <div class="grid2">
-      <div class="comp"><h3>Ingredient checklist <em>inventory grid</em></h3><div class="qx" id="invStage"></div></div>
-      <div class="comp"><h3>Equipment checklist <em>gear loadout</em></h3><div class="qx gear" id="gearStage"></div></div>
+      <div class="comp"><h3 data-copy="prep-a">Ingredient checklist <em>inventory grid</em></h3><div class="qx" id="invStage"></div></div>
+      <div class="comp"><h3 data-copy="prep-b">Equipment checklist <em>gear loadout</em></h3><div class="qx gear" id="gearStage"></div></div>
     </div>
   </section>
 
   <section class="sec" id="cook">
     <h2>Cook mode</h2>
-    <p class="lead">The quest log, one step per screen, with the stage bar for progress within the lesson and the timer tray. Several timers can run at once, and each is labelled. Tap a ring to pause it. The egg step needs the thermometer check before Next unlocks.</p>
+    <p class="lead" data-copy="cook-p">The quest log, one step per screen, with the stage bar for progress within the lesson and the timer tray. Several timers can run at once, and each is labelled. Tap a ring to pause it. The egg step needs the thermometer check before Next unlocks.</p>
     <div class="grid2">
-      <div class="comp"><h3>Cook step <em>quest log + stage bar</em></h3><div class="qx" id="cookStage"></div></div>
-      <div class="comp"><h3>Timers <em>cooldown rings</em></h3><div class="qx" id="timerStage"></div>
+      <div class="comp"><h3 data-copy="cook-a">Cook step <em>quest log + stage bar</em></h3><div class="qx" id="cookStage"></div></div>
+      <div class="comp"><h3 data-copy="cook-b">Timers <em>cooldown rings</em></h3><div class="qx" id="timerStage"></div>
         <div class="demo">Demo:<button type="button" data-act="tjump">Ring the running timer in 5 seconds</button></div></div>
     </div>
   </section>
@@ -624,29 +934,29 @@ button.crest[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(242,182,64
 
   <section class="sec" id="progress">
     <h2>Course progress, skills, and rank</h2>
-    <p class="lead">The skill tree has one path per unit and one node per dish, at their real lengths. Clearing a quest lights its node. Skills earned show as crests. The rank shows as a level and title, and ranking up gets a full-screen level-up. Sample progress: 8 dishes cooked.</p>
+    <p class="lead" data-copy="prog-p">The skill tree has one path per unit and one node per dish, at their real lengths. Clearing a quest lights its node. Skills earned show as crests. The rank shows as a level and title, and ranking up gets a full-screen level-up. Sample progress: 8 dishes cooked.</p>
     <div class="grid2">
-      <div class="comp"><h3>Skill tree and level</h3><div class="qx" id="treeStage"></div>
-        <div class="demo">Demo:<button type="button" data-act="lvlup">Play the level-up</button></div></div>
-      <div class="comp"><h3>Skills earned <em>crest collection</em></h3><div class="qx" id="crestStage"></div></div>
+      <div class="comp"><h3 data-copy="prog-a">Skill tree and level</h3><div class="qx" id="treeStage"></div>
+        <div class="demo">Demo:<button type="button" data-act="lvlup" data-copy="lvl-btn">Play the level-up</button></div></div>
+      <div class="comp"><h3 data-copy="prog-b">Skills earned <em>crest collection</em></h3><div class="qx" id="crestStage"></div></div>
     </div>
   </section>
 
   <section class="sec" id="rate">
     <h2>Rating</h2>
-    <p class="lead">One to five gold gems, never stars, then the reflection. Its last question is optional and asks the kid to carry the skill to another dish.</p>
+    <p class="lead" data-copy="rate-p">One to five gold gems, never stars, then the reflection. Its last question is optional and asks the kid to carry the skill to another dish.</p>
     <div class="qx" id="rateStage"></div>
   </section>
 
   <section class="sec" id="photos">
-    <h2>Photos: the trophy hall</h2>
-    <p class="lead">Each photo hangs in a gold frame, and the gallery is the hall. These use the dish art as stand-ins for real photos.</p>
+    <h2 data-copy="photo-h">Photos: the trophy hall</h2>
+    <p class="lead" data-copy="photo-p">Each photo hangs in a gold frame, and the gallery is the hall. These use the dish art as stand-ins for real photos.</p>
     <div class="qx" id="hallStage"></div>
   </section>
 
   <section class="sec" id="helper">
     <h2>Helper</h2>
-    <p class="lead">The helper hasn't been specced yet. This is only its look: the guide on the floating Ask button (bottom right of this page) and a dialogue box styled to the theme.</p>
+    <p class="lead" data-copy="help-p">The helper hasn't been specced yet. This is only its look: the guide on the floating Ask button (bottom right of this page) and a dialogue box styled to the theme.</p>
     <div class="qx" id="helperStage"></div>
   </section>
 
@@ -658,13 +968,8 @@ button.crest[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(242,182,64
 
   <section class="sec" id="art">
     <h2>Core art set</h2>
-    <p class="lead">One generic icon per store section and per tool category. Any ingredient or tool without its own icon falls back to these. Then the shakshuka ingredients and the dish art.</p>
-    <div class="qx" style="display:grid;gap:18px">
-      <div><p class="q-kick" style="margin-bottom:8px">Store sections</p><div class="artgrid" id="storeArt"></div></div>
-      <div><p class="q-kick" style="margin-bottom:8px">Tool categories</p><div class="artgrid" id="toolArt"></div></div>
-      <div><p class="q-kick" style="margin-bottom:8px">Ingredients (lesson 4)</p><div class="artgrid" id="ingArt"></div></div>
-      <div><p class="q-kick" style="margin-bottom:8px">Dish art (sample)</p><div class="dishes" id="dishArt"></div></div>
-    </div>
+    <p class="lead" data-copy="art-p">One generic icon per store section and per tool category, shared by both themes. Any ingredient or tool without its own icon falls back to these. Then the shakshuka ingredients and the dish art.</p>
+    <div class="qx" id="artStage" style="display:grid;gap:18px"></div>
   </section>
 
   <section class="sec" id="parent">
@@ -673,10 +978,10 @@ button.crest[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(242,182,64
     <div class="parent" id="parentStage"></div>
   </section>
 
-  <p class="foot">Phase 0 showcase for Clean Plate Recipes. Once the look is approved, Phase 0b builds Chef's Passport the same way.</p>
+  <p class="foot">Phase 0 and 0b showcase for Clean Plate Recipes. Kitchen Quest was approved in Phase 0 and Chef's Passport in Phase 0b.</p>
 </div>
 
-<button type="button" class="ask" data-act="ask" aria-label="Ask the helper"><svg aria-hidden="true"><use href="#guide"/></svg>Ask</button>
+<button type="button" class="ask" id="askBtn" data-act="ask" aria-label="Ask the helper"><svg aria-hidden="true"><use href="#guide"/></svg>Ask</button>
 <div class="lvlup" id="lvlup" hidden></div>
 <div class="sheet" id="sheet" hidden></div>
 <div class="whyov" id="whyov" hidden></div>
@@ -692,16 +997,16 @@ function ticks(cx,cy,r1,r2,n,stroke,w){let o='';for(let i=0;i<n;i++){const a=2*M
 
 /* ---------- content ---------- */
 const PROFILES=[
-  {id:'ava',name:'Ava',kind:'kid',people:[{c:'#F2B640'}]},
-  {id:'leo',name:'Leo',kind:'kid',people:[{c:'#5BD6C8'}]},
-  {id:'both',name:'Ava & Leo',kind:'kid',people:[{c:'#F2B640'},{c:'#5BD6C8'}]},
-  {id:'mom',name:'Mom',kind:'adult',people:[{c:'#FF7350'}]}
+  {id:'ava',name:'Ava',kind:'kid',theme:'quest',people:[{c:'#F2B640'}]},
+  {id:'leo',name:'Leo',kind:'kid',theme:'passport',people:[{c:'#5BD6C8'}]},
+  {id:'both',name:'Ava & Leo',kind:'kid',theme:'quest',people:[{c:'#F2B640'},{c:'#5BD6C8'}]},
+  {id:'mom',name:'Mom',kind:'adult',theme:'passport',people:[{c:'#FF7350'}]}
 ];
 const THEMES=[
-  {k:'quest',n:'Kitchen Quest',s:'Built',on:true},
-  {k:'passport',n:"Chef's Passport",s:'Coming next, in Phase 0b'},
-  {k:'truck',n:'Food Truck',s:'Later'},
-  {k:'scrap',n:'Recipe Scrapbook',s:'Later'}
+  {k:'quest',n:'Kitchen Quest',s:'Built · approved',icon:'i-shield'},
+  {k:'passport',n:"Chef's Passport",s:'Built · approved',icon:'i-book'},
+  {k:'truck',n:'Food Truck',s:'Later',off:1},
+  {k:'scrap',n:'Recipe Scrapbook',s:'Later',off:1}
 ];
 /* Lesson amounts are written for 6 servings and scale per §6.6 */
 const BASE=6,FAMILY_DEFAULT=4,QUEUED=4,MAX_FREE=12;
@@ -824,7 +1129,8 @@ const SHOP=[
 ];
 
 /* ---------- state ---------- */
-const S={crest:null,refl:'',xfer:'',serv:QUEUED,bis:6,prof:0,got:new Set(['oil','onion','pepper','garlic','cumin']),gear:new Set(['skillet','spoon','thermo']),hop:null,hopG:null,step:2,confirm:false,flip:false,rating:4,popGem:-1,photos:PHOTOS.length-1,newPhoto:false,chat:0};
+const S={ppReg:'easia',crest:null,refl:'',xfer:'',serv:QUEUED,bis:6,prof:0,got:new Set(['oil','onion','pepper','garlic','cumin']),gear:new Set(['skillet','spoon','thermo']),hop:null,hopG:null,step:2,confirm:false,flip:false,rating:4,popGem:-1,photos:PHOTOS.length-1,newPhoto:false,chat:0};
+S.prof=1;
 const now0=Date.now();
 const T=STEPS.map(s=>s.timer?{label:s.timer.label,sec:s.timer.sec,state:'idle',endAt:0,left:s.timer.sec,ringing:false}:null);
 T[0].state='ended';T[0].endAt=now0-3*60e3;T[0].left=0;
@@ -836,18 +1142,26 @@ function ago(t){const m=Math.floor((Date.now()-t.endAt)/60000);return m<1?'Ended
 /* ---------- renderers ---------- */
 function avatar(c){return`<svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="30" r="22" fill="${c}" stroke="#1F2328" stroke-width="2.5"/><circle cx="21" cy="31" r="2.6" fill="#1F2328"/><circle cx="35" cy="31" r="2.6" fill="#1F2328"/><path d="M21 39c4 3 10 3 14 0" fill="none" stroke="#1F2328" stroke-width="2.5" stroke-linecap="round"/><use href="#i-hat" x="12" y="-2" width="32" height="26" color="#1F2328"/></svg>`}
 function renderPicker(){
-  $('#lockers').innerHTML=PROFILES.map((p,i)=>`<button type="button" class="locker" data-act="prof" data-i="${i}" aria-pressed="${S.prof===i}"><span class="av">${p.people.map(x=>avatar(x.c)).join('')}</span><b>${p.name}</b><small>${p.kind==='adult'?'Adult':p.people.length>1?'Shared · kids':'Kid'}</small><small>${ic('i-shield')}Kitchen Quest</small></button>`).join('');
+  $('#lockers').innerHTML=PROFILES.map((p,i)=>`<button type="button" class="locker" data-act="prof" data-i="${i}" aria-pressed="${S.prof===i}"><span class="av">${p.people.map(x=>avatar(x.c)).join('')}</span><b>${p.name}</b><small>${p.kind==='adult'?'Adult':p.people.length>1?'Shared · kids':'Kid'}</small><small>${ic(THEMES.find(t=>t.k===p.theme).icon)}${THEMES.find(t=>t.k===p.theme).n}</small></button>`).join('');
   const p=PROFILES[S.prof];
   $('#prof').innerHTML=`<h4>${p.name}'s theme</h4><p>${p.people.length>1?'A shared profile picks one theme for everyone on it.':'Each profile picks its own. It can switch to any built theme at any time.'}</p>
-  <div class="themes" role="radiogroup" aria-label="Theme for ${p.name}">${THEMES.map(t=>`<button type="button" class="themeopt" role="radio" aria-checked="${!!t.on}" ${t.on?'':'disabled'}><span class="dot"></span><span><b>${t.n}</b><span>${t.s}</span></span></button>`).join('')}</div>
-  <div class="nowbar">${avatar(p.people[0].c)}<span>Cooking as <b>${p.name}</b> in Kitchen Quest${adult()?'. Safety banners show the hazard only.':''}</span></div>`;
+  <div class="themes" role="radiogroup" aria-label="Theme for ${p.name}">${THEMES.map(t=>`<button type="button" class="themeopt" role="radio" aria-checked="${p.theme===t.k}" data-act="theme" data-k="${t.k}" ${t.off?'disabled':''}><span class="dot"></span><span><b>${t.n}</b><span>${t.s}</span></span></button>`).join('')}</div>
+  <div class="nowbar">${avatar(p.people[0].c)}<span>Cooking as <b>${p.name}</b> in ${THEMES.find(t=>t.k===p.theme).n}${adult()?'. Safety banners show the hazard only.':''}</span></div>`;
 }
 function renderTokens(){
+  if(PP())return ppTokens();
   const sw=[['Night','--q-night','#161A31'],['Panel','--q-panel','#232A4E'],['Edge','--q-edge','#3D4985'],['Gold','--q-gold','#F2B640'],['Mana','--q-mana','#5BD6C8'],['Ember','--q-ember','#FF7350'],['Text','--q-text','#EEF0FF'],['Dim text','--q-dim','#A6AED8']];
-  $('#swatches').innerHTML=sw.map(([n,v,h])=>`<div><i style="background:var(${v})"></i><b>${n}</b><code>${v} ${h}</code></div>`).join('');
+  $('#tokStage').innerHTML=`<div class="sw">${sw.map(([n,v,h])=>`<div><i style="background:var(${v})"></i><b>${n}</b><code>${v} ${h}</code></div>`).join('')}</div>
+  <div class="type">
+    <div><small>Display · Pixelify Sans 700</small><div class="t1">Shakshuka</div></div>
+    <div><small>Label · Pixelify Sans 600, caps</small><div class="t2">Stovetop path · Quest 4</div></div>
+    <div><small>Step text · Nunito 700, 21px</small><div class="t3">Pour in the tomatoes and ½ teaspoon salt.</div></div>
+    <div><small>Notes · Nunito 400, 15px</small><div class="t4">A spoon dragged through the sauce leaves a trail for a second.</div></div>
+  </div>`;
 }
 const SEAL=`<svg class="seal" viewBox="0 0 74 84" role="img" aria-label="Test-cooked by a parent"><path d="M37 3l32 11v24c0 22-14 36-32 43C19 74 5 60 5 38V14z" fill="#F2B640" stroke="#FFE3A0" stroke-width="3"/><path d="M37 11l24 8v19c0 17-10 28-24 34-14-6-24-17-24-34V19z" fill="none" stroke="#8E6512" stroke-width="2"/><use href="#i-hat" x="22" y="16" width="30" height="30" color="#241A05"/><text x="37" y="60" text-anchor="middle" font-family="Pixelify Sans" font-weight="700" font-size="10" fill="#241A05" letter-spacing=".5">TESTED</text></svg>`;
 function renderLesson(){
+  if(PP())return ppLesson();
   $('#lessonStage').innerHTML=`<div class="lib">
   <h4 class="q-h">Quest board</h4>
   <article class="q-panel q-card">
@@ -889,6 +1203,7 @@ function servePicker(){
 function slots(list,set,hop,act,iconOf){return list.map(it=>`<button type="button" class="q-slot ${set.has(it.id)?'on':''} ${hop===it.id?'hop':''}" data-act="${act}" data-id="${it.id}" aria-pressed="${set.has(it.id)}">${ic(iconOf(it),'ii')}<span class="nm">${it.name}</span>${it.amt?`<span class="amt">${it.amt}</span>`:''}</button>`).join('')}
 function meter(n,of){return`<div class="q-meter" style="--n:${of}" aria-hidden="true">${Array.from({length:of},(_,k)=>`<i class="${k<n?'on':''}"></i>`).join('')}</div>`}
 function renderPrep(){
+  if(PP())return ppPrep();
   const allI=S.got.size===ING.length,allG=S.gear.size===GEAR.length;
   ING.forEach(it=>it.amt=amt(it,S.serv));
   $('#invStage').innerHTML=`<h4 class="q-h">Gather supplies <span>${S.got.size}/${ING.length}</span></h4><p class="q-kick" style="margin:-6px 0 10px">For ${S.serv} · change it on the lesson card</p>${meter(S.got.size,ING.length)}<div class="q-inv">${slots(ING,S.got,S.hop,'toggle',it=>'i-'+it.id)}</div>
@@ -903,6 +1218,7 @@ function banner(lvl,hz,forceAdult){
   return`<div class="q-banner ${L.cls}" role="note">${ic(L.icon)}<div><b>${L.head}</b>${L.kid}</div></div>`;
 }
 function renderCook(){
+  if(PP())return ppCook();
   const s=STEPS[S.step],last=S.step===STEPS.length-1,dis=s.check&&!S.confirm,t=T[S.step];
   const nk=noteKey(S.step),note=nk?`<p class="q-note"><b>${nk==='look'?'Should look like:':'Tip:'}</b> ${stepNote(S.step)}</p>`:'';
   $('#cookStage').innerHTML=`<div class="q-cook">${banner(s.lvl,s.hz)}
@@ -915,6 +1231,7 @@ function renderCook(){
   S.flip=false;
 }
 function renderTimers(){
+  if(PP())return ppTimers();
   const st=T.map((t,i)=>t&&t.state!=='idle'?i:-1).filter(i=>i>=0),C=2*Math.PI*40;
   $('#timerStage').innerHTML=`<h4 class="q-h">Timer tray</h4><div class="q-timers" aria-label="Timers">${st.length?st.map(i=>{const t=T[i],f=rem(t)/t.sec;return`<div class="q-timer ${t.state}${t.ringing?' ringing':''}">
     <button type="button" class="dial" data-act="${t.state==='ended'?'tclear':'ttoggle'}" data-i="${i}" aria-label="${t.label} timer: ${t.state==='run'?'pause':t.state==='paused'?'resume':'clear'}">
@@ -925,9 +1242,11 @@ function renderTimers(){
     ${t.ringing?`<button type="button" class="stop" data-act="tclear" data-i="${i}">Stop</button>`:''}</div>`}).join(''):'<span class="empty">No timers running. Start one from a step.</span>'}</div>`;
 }
 function renderSafety(){
+  if(PP())return ppSafety();
   $('#safetyStage').innerHTML=`<div>${banner('solo','Raw egg',false)}<p>Solo</p></div><div>${banner('nearby','Hot stove',false)}<p>Adult nearby</p></div><div>${banner('hands','Hot oil',false)}<p>Adult hands-on</p></div><div>${banner('hands','Hot oil',true)}<p>Adult hands-on, as an adult profile sees it: the hazard only</p></div>`;
 }
 function renderTree(){
+  if(PP())return ppTree();
   const colW=360/UNITS.length,ys=k=>300-k*26,H=330;let g='';
   UNITS.forEach((u,c)=>{const x=colW*(c+.5);
     g+=`<path d="M180 ${H-6} C180 ${H-24} ${x} ${H-14} ${x} ${ys(0)}" fill="none" stroke="${u.done?'#F2B640':'#3D4985'}" stroke-width="3"/>`;
@@ -946,12 +1265,14 @@ function crestSVG(p,size){
   return`<svg viewBox="0 0 60 60" aria-hidden="true">${p.locked?`<polygon points="${hex(30,30,26)}" fill="#232A4E" stroke="#3D4985" stroke-width="3" stroke-dasharray="4 4"/><use href="#i-lock" x="19" y="19" width="22" height="22" color="#6A74AE"/>`:sh+`<use href="#${p.g}" x="17" y="17" width="26" height="26" color="#fff"/>`}</svg>`;
 }
 function renderCrests(){
+  if(PP())return ppPins();
   const got=SKILLS.filter(s=>!s.locked).length;
   const sel=SKILLS.find(p=>p.n===S.crest),info=sel&&SKILLINFO[sel.n];
   $('#crestStage').innerHTML=`<h4 class="q-h">Crests <span>${got}/${SKILLS.length}</span></h4><div class="crests">${SKILLS.map(p=>`<button type="button" class="crest ${p.locked?'locked':''}" data-act="crest" data-n="${p.n}" aria-pressed="${S.crest===p.n}">${crestSVG(p)}${p.n}</button>`).join('')}</div>
   ${info?`<div class="q-panel crestinfo"><h5>${sel.n}${sel.locked?' · not earned yet':''}</h5><p>${info[0]}</p><ul>${info[1].map(n=>`<li class="${COOKED.has(n)?'':'todo'}">${ic(COOKED.has(n)?'i-check':'i-lock')}${LESSONS[n][1]}${COOKED.has(n)?'':' · lesson '+n}</li>`).join('')}</ul></div>`:'<p class="q-note" style="margin-top:12px">Tap a crest to see the idea behind it and every dish that uses it.</p>'}`;
 }
 function renderRate(){
+  if(PP())return ppRate();
   const words=['','Not again','It was OK','Pretty good','Really good','Cook it again!'];
   $('#rateStage').innerHTML=`<h4 class="q-h">How did it turn out?</h4><div class="gems" role="radiogroup" aria-label="Rating">${[1,2,3,4,5].map(n=>`<button type="button" class="gem ${n<=S.rating?'on':''} ${n===S.popGem?'pop':''}" data-act="rate" data-i="${n}" role="radio" aria-checked="${n===S.rating}" aria-label="${n} of 5"><svg viewBox="0 0 56 56"><polygon class="f" points="${hex(28,28,24)}" stroke-width="3"/><polygon class="s" points="${hex(28,22,9)}" fill="#FFF3C9" opacity=".7"/></svg></button>`).join('')}<span class="rate-l">${S.rating} of 5 · ${words[S.rating]}</span></div>
   <div class="refl"><label for="refl-change">What would you change next time?</label><textarea id="refl-change" data-refl="refl">${esc(S.refl)}</textarea>
@@ -959,6 +1280,7 @@ function renderRate(){
   S.popGem=-1;
 }
 function renderHall(){
+  if(PP())return ppHall();
   const list=PHOTOS.slice(0,S.photos);
   $('#hallStage').innerHTML=`<h4 class="q-h">Trophy hall <span>${list.length}</span></h4><div class="hall"><div class="frames">${list.map(([f,n,d],i)=>`<figure class="frame ${S.newPhoto&&i===list.length-1?'new':''}"><div class="fr"><div><img src="img/${f}.webp" alt="${n}" width="440" height="440"></div></div><figcaption>${n} · ${d}</figcaption></figure>`).join('')}</div></div>
   <div class="hall-act">${S.photos<PHOTOS.length?`<button type="button" class="q-btn" data-act="photo">Hang today's photo</button>`:`<button type="button" class="q-back" data-act="photoreset">Take it down</button>`}</div>`;
@@ -970,16 +1292,19 @@ const CHAT=[
   {q:"Can I use a smaller pan?",a:"A 10-inch pan works. The sauce will be deeper, so give the eggs a couple more minutes and check them with the thermometer."}
 ];
 function renderHelper(){
+  if(PP())return ppHelper();
   let h=`<div class="dlg">`;
   for(let i=0;i<=S.chat;i++){const c=CHAT[i];if(c.q)h+=`<div class="q-panel bubble me">${c.q}</div>`;h+=`<div class="row"><svg aria-hidden="true"><use href="#guide"/></svg><div class="q-panel bubble"><b>Guide</b>${c.a}</div></div>`}
   h+=S.chat<CHAT.length-1?`<div class="choices">${CHAT.slice(S.chat+1).map((c,j)=>`<button type="button" data-act="chat" data-i="${S.chat+1+j}">${c.q}</button>`).join('')}</div>`:`<div class="choices"><button type="button" data-act="chat" data-i="0">Start over</button></div>`;
   $('#helperStage').innerHTML=`<h4 class="q-h">Ask the guide</h4>${h}</div>`;
 }
 function renderArt(){
-  $('#storeArt').innerHTML=STORE.map(([id,n])=>`<div class="art">${ic(id,'')}${n}</div>`).join('');
-  $('#toolArt').innerHTML=TOOLS.map(([id,n])=>`<div class="art">${ic(id,'')}${n}</div>`).join('');
-  $('#ingArt').innerHTML=ING.map(it=>`<div class="art">${ic('i-'+it.id,'')}${it.name}</div>`).join('');
-  $('#dishArt').innerHTML=['04-shakshuka','14-beef-bulgogi','38-buttermilk-biscuits','49-brown-butter-cookies','01-spring-rolls','02-fattoush','03-fish-tacos','06-oyakodon'].map(f=>`<img src="img/${f}.webp" alt="" width="440" height="440">`).join('');
+  const h=t=>PP()?`<p class="p-sub">${t}</p>`:`<p class="q-kick" style="margin-bottom:8px">${t}</p>`;
+  $('#artStage').innerHTML=`<div>${h('Store sections')}<div class="artgrid">${STORE.map(([id,n])=>`<div class="art">${ic(id,'')}${n}</div>`).join('')}</div></div>
+  <div>${h('Tool categories')}<div class="artgrid">${TOOLS.map(([id,n])=>`<div class="art">${ic(id,'')}${n}</div>`).join('')}</div></div>
+  <div>${h('Ingredients (lesson 4)')}<div class="artgrid">${ING.map(it=>`<div class="art">${ic('i-'+it.id,'')}${it.name}</div>`).join('')}</div></div>
+  <div>${h('Dish art (sample)')}<div class="dishes">${['04-shakshuka','14-beef-bulgogi','38-buttermilk-biscuits','49-brown-butter-cookies','01-spring-rolls','02-fattoush','03-fish-tacos','06-oyakodon'].map(f=>`<img src="img/${f}.webp" alt="" width="440" height="440">`).join('')}</div></div>
+  ${PP()?ppArt():''}`;
 }
 const PCHK=new Set();
 function renderParent(){
@@ -989,6 +1314,8 @@ function renderParent(){
   <p class="pantry">Already in your pantry: olive oil, cumin, smoked paprika, sesame oil.</p>`;
 }
 function renderLvl(open){
+  if(PP())return ppLvl(open);
+  $('#lvlup').classList.remove('pp');
   const el=$('#lvlup');el.hidden=!open;if(!open){el.innerHTML='';return}
   const cols=['#F2B640','#5BD6C8','#FF7350','#EEF0FF'];let b='';
   for(let i=0;i<28;i++){const a=i/28*Math.PI*2,r=140+(i%3)*50;b+=`<i style="--x:${(Math.cos(a)*r).toFixed(0)}px;--y:${(Math.sin(a)*r).toFixed(0)}px;--c:${cols[i%4]};--d:${(i%5)*40}ms"></i>`}
@@ -1037,6 +1364,7 @@ function renderSheet(){
 /* ---------- tutorial quest (profile intro, §6.9) ---------- */
 const TU={i:0,asked:false,serv:4,slots:new Set(),step:0,tEnd:0,tState:'idle',gems:0,lit:false,skipped:false};
 function tutCards(){
+  if(PP())return ppTutCards();
   const ad=adult(),name=PROFILES[S.prof].name;
   return[
     {h:`Welcome, ${name}`,say:"Every dish you cook is a quest. I'll show you the moves. It takes about two minutes.",try:()=>`<div class="mini-q"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#guide"/></svg><div><b>Tutorial quest</b><span>${tutCards().length} short cards · skip any of them</span></div></div>`},
@@ -1055,6 +1383,7 @@ function tutCards(){
   ];
 }
 function renderTut(){
+  if(PP())return ppTut();
   const C=tutCards(),c=C[TU.i],n=C.length;
   $('#tutStage').innerHTML=`<div class="tut-top"><p class="q-kick">Tutorial quest · ${TU.i+1} of ${n}</p>${TU.i<n-1?'<button type="button" class="tut-skip" data-act="tut-skip">Skip the tutorial</button>':''}</div>
   <div class="tut-seg" style="--n:${n}" aria-hidden="true">${C.map((_,k)=>`<i class="${k<TU.i?'done':k===TU.i?'cur':''}"></i>`).join('')}</div>
@@ -1068,6 +1397,7 @@ function tutTick(){
   if(rm<=0){TU.tState='done';ding();renderTut();return}
   const d=document.querySelector('[data-tutdisp]'),ring=document.querySelector('[data-tutring]');
   if(d)d.textContent=fmt(rm);if(ring)ring.setAttribute('stroke-dashoffset',(+ring.dataset.c*(1-rm/10)).toFixed(1));
+  const w=document.querySelector('[data-tutwedge]');if(w)w.setAttribute('d',wedge(50,62,36,rm/10));
 }
 function dishTile(n){const [f,name]=LESSONS[n];return`<div class="xd ${COOKED.has(n)?'cooked':''}">${f?`<img src="img/${f}.webp" alt="" width="440" height="440">`:''}${name}<small>${COOKED.has(n)?'Cooked ✓':'Lesson '+n}</small></div>`}
 function loreCard(c){
@@ -1080,6 +1410,7 @@ function loreCard(c){
   return`<article class="q-panel lore"><p class="q-kick">${c.kind}</p>${c.title?`<h4>${c.title}</h4>`:''}${body}</article>`;
 }
 function renderLearn(){
+  if(PP())return ppLearn();
   const n=LEARN.length,c=LEARN[L.i];
   $('#learnStage').innerHTML=`<div class="tut-top"><p class="q-kick">Learn · ${L.i+1} of ${n}</p><button type="button" class="tut-skip" data-act="goto" data-to="prep">Skip to Prep</button></div>
   <div class="tut-seg" style="--n:${n}" aria-hidden="true">${LEARN.map((_,k)=>`<i class="${k<L.i?'done':k===L.i?'cur':''}"></i>`).join('')}</div>
@@ -1087,12 +1418,316 @@ function renderLearn(){
   <div class="tut-nav"><button type="button" class="q-back" data-act="learn-back" ${L.i===0?'disabled':''}>Back</button>${L.i<n-1?`<button type="button" class="q-btn" data-act="learn-fwd">Next card</button>`:`<button type="button" class="q-btn" data-act="goto" data-to="prep">On to Prep</button>`}</div>`;
 }
 function renderWhy(id){
+  if(PP())return ppWhy(id);
   const el=$('#whyov');if(!id){el.hidden=true;el.innerHTML='';return}
   const c=LEARN.find(x=>x.id===id);el.hidden=false;
   el.innerHTML=`<div class="q-panel lore" role="dialog" aria-modal="true" aria-label="Why: ${c.title}"><p class="q-kick">Why? · from the Learn cards</p><h4>${c.title}</h4><p>${c.body}</p><button type="button" class="q-btn" data-act="why-close">Back to cooking</button></div>`;
   el.querySelector('button').focus();
 }
 function renderAll(){renderLearn();renderTut();renderQueue();renderPicker();renderLesson();renderPrep();renderCook();renderTimers();renderSafety();renderTree();renderCrests();renderRate();renderHall();renderHelper()}
+
+/* ================= Chef's Passport (Phase 0b) ================= */
+const PP=()=>PROFILES[S.prof].theme==='passport';
+const NAMES={1:['Spring rolls','Vietnamese'],2:['Fattoush','Lebanese'],3:['Fish tacos','Mexican'],4:['Shakshuka','North African'],5:['Fried rice','Chinese'],6:['Oyakodon','Japanese'],7:['Chicken adobo','Filipino'],8:['Cacio e pepe','Italian'],9:['Chana masala','Indian'],10:['Misir wot','Ethiopian'],11:['Chicken tagine','Moroccan'],12:['Butter chicken','Indian'],13:['Jerk chicken','Jamaican'],14:['Beef bulgogi','Korean'],15:['Lomo saltado','Peruvian'],16:['Tinga tacos','Mexican'],17:['Pupusas','Salvadoran'],18:['Gyoza','Japanese'],19:['Skillet naan','Indian'],20:['Pão de queijo','Brazilian'],21:['Spanakopita','Greek'],22:['Quiche','French'],23:['Chicken katsu','Japanese'],24:['Swedish meatballs','Swedish'],25:['Churros','Mexican'],26:['Chicken Caesar','American'],27:['Smash burgers','American'],28:['French omelet','American'],29:['Hash browns','American'],30:['Breakfast burritos','American'],31:['Eggs Benedict','American'],32:['Mac and cheese','American'],33:['Beef chili','American'],34:['Jambalaya','Louisiana'],35:['Pulled chicken','American'],36:['Chicken noodle soup','American'],37:['Philly cheesesteak','American'],38:['Biscuits','American'],39:['Biscuits & gravy','American'],40:['Blueberry muffins','American'],41:['Cornbread','American'],42:['Cinnamon rolls','American'],43:['Granola','American'],44:['Meatloaf','American'],45:['Roast chicken','American'],46:['Chicken pot pie','American'],47:['Pot roast','American'],48:['Fried chicken','American'],49:['Cookies','American'],50:['Apple pie','American']};
+const CUIS=[...new Set(Object.values(NAMES).map(x=>x[1]))];
+const DATES={1:'Sep 3',2:'Sep 10',3:'Sep 17',26:'Sep 24',27:'Oct 1',28:'Oct 4',5:'Oct 8',6:'Oct 15'};
+const NEXT=4;
+const range=(a,b)=>Array.from({length:b-a+1},(_,k)=>a+k);
+/* Map: the owner's world map, split by tools/split-world-map.py into a base, the outlines, and a mask per region */
+const REGIONS=[
+  {id:'easia',n:'East & Southeast Asia',s:'East & SE Asia',d:[1,5,6,7,14,18,23]},
+  {id:'mena',n:'Middle East & North Africa',s:'Middle East & N. Africa',d:[2,4,11]},
+  {id:'latam',n:'Latin America & Caribbean',s:'Latin America',d:[3,13,15,16,17,20,25]},
+  {id:'usa',n:'United States',s:'United States',d:range(26,50)},
+  {id:'europe',n:'Europe',s:'Europe',d:[8,21,22,24]},
+  {id:'sasia',n:'South Asia',s:'South Asia',d:[9,12,19]},
+  {id:'africa',n:'Sub-Saharan Africa',s:'Africa',d:[10]}
+];
+const regDone=r=>r.d.filter(n=>COOKED.has(n)).length;
+const INKS=['#D9412B','#22406B','#4E8B3A','#7A3E8E','#2E7D7A','#B5651D'];
+function stampSVG(n,date){
+  const cu=NAMES[n][1],k=CUIS.indexOf(cu),t=cu.toUpperCase(),shape=['circle','rect','hex','oval'][k%4],col=INKS[k%INKS.length],rot=((k*37)%19)-9;
+  const ring=(a,b)=>`fill="none" stroke="currentColor" stroke-width="${a}"`+(b?'':'');
+  const sh=shape==='rect'?`<rect x="8" y="18" width="84" height="64" rx="5" ${ring(4)}/><rect x="14" y="24" width="72" height="52" rx="2" ${ring(1.5)}/>`
+    :shape==='hex'?`<polygon points="${hex(50,50,45)}" ${ring(4)}/><polygon points="${hex(50,50,38)}" ${ring(1.5)}/>`
+    :shape==='oval'?`<ellipse cx="50" cy="50" rx="46" ry="36" ${ring(4)}/><ellipse cx="50" cy="50" rx="39" ry="29" ${ring(1.5)}/>`
+    :`<circle cx="50" cy="50" r="44" ${ring(4)}/><circle cx="50" cy="50" r="36" ${ring(1.5)}/>`;
+  const fit=t.length>8?`textLength="${shape==='hex'?62:66}" lengthAdjust="spacingAndGlyphs"`:'';
+  return`<svg viewBox="0 0 100 100" aria-hidden="true" style="color:${col};transform:rotate(${rot}deg)">${sh}<text x="50" y="${date?48:55}" text-anchor="middle" font-family="Lilita One,Fredoka,sans-serif" font-size="15" fill="currentColor" ${fit}>${t}</text>${date?`<text x="50" y="63" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="10" fill="currentColor">${date.toUpperCase()}</text>`:''}<path d="M50 ${date?70:66}l2 4h4l-3 3 1 4-4-2-4 2 1-4-3-3h4z" fill="currentColor"/></svg>`;
+}
+const emptyStamp=next=>`<svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="5 6"/>${next?'<text x="50" y="56" text-anchor="middle" font-family="Lilita One,Fredoka,sans-serif" font-size="17" fill="#D9412B">NEXT</text>':''}</svg>`;
+/* The chef: rank sets the hat, the apron, and the extras */
+const APRON=['#EFE6D2','#F6C945','#D9412B','#22406B','#2B2A28'];
+function chefAv(r,cls='',skin='#F2C9A0',crop=0){
+  const top=[0,16,10,4,-2][r],ink='#2B2A28';
+  const hat=r===0?`<path d="M25 38v-7c0-4 7-6 15-6s15 2 15 6v7z" fill="#fff" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/><path d="M27 33c8-3 18-3 26 0" stroke="#CDBE9E" stroke-width="2" fill="none"/>`
+    :`<path d="M28 33V${top+8}C19 ${top+8} 17 ${top-3} 25 ${top-5}C27 ${top-12} 36 ${top-13} 40 ${top-8}C44 ${top-13} 53 ${top-12} 55 ${top-5}C63 ${top-3} 61 ${top+8} 52 ${top+8}V33z" fill="#fff" stroke="${ink}" stroke-width="2.5" stroke-linejoin="round"/>`
+     +(r>=3?`<path d="M34 ${top+10}V32M40 ${top+6}V32M46 ${top+10}V32" stroke="#CDBE9E" stroke-width="2"/>`:'')
+     +`<rect x="27" y="31" width="26" height="7" rx="1.5" fill="${r===4?'#F6C945':'#fff'}" stroke="${ink}" stroke-width="2.5"/>`;
+  return`<svg class="${cls}" viewBox="${crop?'12 -18 56 84':'0 -18 80 120'}" aria-hidden="true">
+  <path d="M14 101c0-18 11-30 26-30s26 12 26 30z" fill="#fff" stroke="${ink}" stroke-width="2.5"/>
+  ${r>=3?`<g fill="${ink}"><circle cx="34" cy="78" r="1.8"/><circle cx="46" cy="78" r="1.8"/></g>`:''}
+  <path d="M30 85l3-12M50 85l-3-12" stroke="${APRON[r]==='#EFE6D2'?'#CDBE9E':APRON[r]}" stroke-width="3"/>
+  <path d="M27 85h26v16H27z" fill="${APRON[r]}" stroke="${r===4?'#F6C945':ink}" stroke-width="2.5"/>
+  ${r===2?'<path d="M33 85v16M40 85v16M47 85v16" stroke="#fff" stroke-width="2.5"/>':''}
+  ${r>=2?`<path d="M33 69h14l-7 8z" fill="${r===3?'#F6C945':'#D9412B'}" stroke="${ink}" stroke-width="2" stroke-linejoin="round"/>`:''}
+  <circle cx="40" cy="52" r="14" fill="${skin}" stroke="${ink}" stroke-width="2.5"/>
+  <circle cx="35" cy="51" r="2" fill="${ink}"/><circle cx="45" cy="51" r="2" fill="${ink}"/>
+  <path d="M35 57c3 3 7 3 10 0" fill="none" stroke="${ink}" stroke-width="2.2" stroke-linecap="round"/>
+  <circle cx="31" cy="56" r="2" fill="#F29B85"/><circle cx="49" cy="56" r="2" fill="#F29B85"/>
+  ${hat}</svg>`;
+}
+const HELPER=c=>chefAv(4,c,'#C98E62',1);
+const COVER=`<svg viewBox="0 0 72 96" aria-hidden="true"><rect x="2" y="2" width="68" height="92" rx="6" fill="#22406B" stroke="#2B2A28" stroke-width="3"/><text x="36" y="22" text-anchor="middle" font-family="Lilita One,Fredoka,sans-serif" font-size="10" fill="#F6C945">CHEF'S</text><text x="36" y="33" text-anchor="middle" font-family="Lilita One,Fredoka,sans-serif" font-size="10" fill="#F6C945">PASSPORT</text><circle cx="36" cy="58" r="16" fill="none" stroke="#F6C945" stroke-width="2.5"/><path d="M20 58h32M36 42c-7 8-7 24 0 32M36 42c7 8 7 24 0 32" stroke="#F6C945" stroke-width="2" fill="none"/><path d="M24 85h24" stroke="#F6C945" stroke-width="2.5"/></svg>`;
+function wedge(cx,cy,r,f){
+  if(f<=0.001)return'M0 0';
+  if(f>=.999)return`M${cx-r} ${cy}a${r} ${r} 0 1 0 ${2*r} 0a${r} ${r} 0 1 0 ${-2*r} 0`;
+  const a=2*Math.PI*f,x=cx+r*Math.sin(a),y=cy-r*Math.cos(a);
+  return`M${cx} ${cy}L${cx} ${cy-r}A${r} ${r} 0 ${f>.5?1:0} 1 ${x.toFixed(2)} ${y.toFixed(2)}Z`;
+}
+const dialSVG=(f,attr)=>`<svg viewBox="0 0 100 112" aria-hidden="true"><rect x="38" y="0" width="24" height="16" rx="4" fill="#2B2A28"/><circle cx="50" cy="62" r="46" fill="#D9412B" stroke="#2B2A28" stroke-width="3"/><circle cx="50" cy="62" r="38" fill="#FFF8E7"/><path ${attr} fill="#F6C945" d="${wedge(50,62,36,f)}"/>${ticks(50,62,30,36,12,'#2B2A28',2)}<circle cx="50" cy="62" r="7" fill="#2B2A28"/><path d="M50 62V30" stroke="#2B2A28" stroke-width="3" stroke-linecap="round"/></svg>`;
+const plates=n=>Array.from({length:n},()=>'<svg viewBox="0 0 100 100"><use href="#plate"/></svg>').join('');
+const pdone=t=>`<p class="p-done">${ic('i-check')}${t}</p>`;
+const pdots=(n,i)=>`<div class="p-dots" aria-hidden="true">${Array.from({length:n},(_,k)=>`<i class="${k<i?'done':k===i?'cur':''}"></i>`).join('')}</div>`;
+function ppBanner(lvl,hz,forceAdult){
+  const L=LVL[lvl],ad=forceAdult??adult();
+  return`<div class="p-banner ${L.cls}" role="note">${ic(L.icon)}<div><b>${ad?hz:L.head}</b>${ad?'':L.kid}</div></div>`;
+}
+function ppServe(){
+  const n=S.serv;
+  return`<div class="p-serve"><div class="p-serve-row"><span class="p-lbl">Serves</span>
+    <button type="button" class="p-step" data-act="serv" data-i="-1" aria-label="Fewer servings" ${n<=1?'disabled':''}>−</button>
+    <span class="p-num" aria-live="polite" aria-label="${n} servings">${n}</span>
+    <button type="button" class="p-step" data-act="serv" data-i="1" aria-label="More servings" ${n>=MAX_FREE?'disabled':''}>+</button></div>
+    <div class="p-plates" aria-hidden="true">${plates(n)}</div>
+    <p class="p-small">Family default ${FAMILY_DEFAULT} · Queued for ${QUEUED} · ${eggs(n)} eggs, 1 per person</p>
+    ${n>8?`<p class="p-pan">${ic('t-pans')}Above 8, cook it in two 12-inch skillets.</p>`:''}
+    ${n!==QUEUED?`<p class="p-warn">${ic('i-people')}You shopped for ${QUEUED}. Check there's enough before you start.</p>`:''}</div>`;
+}
+function ppTokens(){
+  const sw=[['Cork','--p-cork','#C79762'],['Paper','--p-paper','#FFF8E7'],['Ink','--p-ink','#2B2A28'],['Tomato','--p-red','#D9412B'],['Butter','--p-butter','#F6C945'],['Basil','--p-basil','#4E8B3A'],['Passport navy','--p-navy','#22406B'],['Muted ink','--p-muted','#6E604E']];
+  $('#tokStage').innerHTML=`<div class="sw">${sw.map(([n,v,h])=>`<div><i style="background:var(${v})"></i><b>${n}</b><code>${v} ${h}</code></div>`).join('')}</div>
+  <div class="p-card p-type"><i class="tape t1"></i>
+    <div><small>Display · Lilita One</small><div class="pt1">Shakshuka</div></div>
+    <div><small>Notes and labels · Caveat 700, 20px and up</small><div class="pt2">Should look like: a trail for a second</div></div>
+    <div><small>Step text · Nunito 700, 21px</small><div class="pt3">Pour in the tomatoes and ½ teaspoon salt.</div></div>
+    <div><small>Small print · Nunito 400, 15px</small><div class="pt4">Family default 4 · Queued for 4</div></div></div>`;
+}
+function ppLesson(){
+  $('#lessonStage').innerHTML=`<div class="p-lib"><h4 class="p-h">Recipe box</h4>
+  <article class="p-card p-main"><i class="tape t1"></i><i class="tape t2"></i>
+    <div class="p-photo"><img src="img/04-shakshuka.webp" alt="Shakshuka in a skillet" width="440" height="440"></div>
+    <svg class="p-tk" role="img" aria-label="Test-kitchen stamp: a parent in this family test-cooked it"><use href="#stamp-tk"/></svg>
+    <p class="p-kick">Stovetop basics · Lesson 4</p>
+    <h5 class="p-title">Shakshuka</h5>
+    <p class="p-skill">Skill: building a sauce, then poaching eggs in it</p>
+    <div class="p-meta"><span>${ic('i-clock')}${lessonTime()} min</span><span>${ic('i-book')}North African stamp</span><span>${ic('i-hat')}Adult nearby</span><span>${ic('i-flame')}Stovetop</span></div>
+    ${ppServe()}
+    <button type="button" class="p-btn" data-act="goto" data-to="prep" style="justify-self:start">Let's cook</button>
+    <button type="button" class="fixbtn" data-act="fixopen" data-w="L">${ic('i-flag')}Suggest a fix</button>
+  </article>
+  <div class="p-minis">
+    <article class="p-card p-mini"><i class="tape t1"></i><img src="img/14-beef-bulgogi.webp" alt="" width="440" height="440"><p class="p-kick">Lesson 14</p><h5>Beef bulgogi</h5></article>
+    <article class="p-card p-mini"><i class="tape t2"></i><img src="img/38-buttermilk-biscuits.webp" alt="" width="440" height="440"><p class="p-kick">Lesson 38</p><h5>Buttermilk biscuits</h5></article>
+    <article class="p-card p-mini locked"><i class="tape t1"></i><img src="img/39-biscuits-and-gravy.webp" alt="" width="440" height="440"><p class="p-kick">Coming up · 39</p><h5>Biscuits &amp; gravy</h5><p class="p-lock">${ic('i-lock')}Cook Buttermilk biscuits and Mac and cheese first</p></article>
+  </div></div>
+  <article class="p-card p-fixed"><i class="tape t1"></i><img src="img/38-buttermilk-biscuits.webp" alt="" width="440" height="440"><div style="display:grid;gap:8px">
+    <span class="p-lbl">Fixed sizes · Buttermilk biscuits</span>
+    <p class="p-small">Baking only scales to sizes the pan allows, so the card offers just these.</p>
+    <div class="p-sizes" role="radiogroup" aria-label="Biscuit batch size">${[[3,'½ batch'],[6,'1 batch'],[12,'2 batches']].map(([n,l])=>`<button type="button" class="p-size" role="radio" aria-checked="${S.bis===n}" data-act="bis" data-i="${n}">${n}<small>${l}</small></button>`).join('')}</div>
+    ${S.bis===12?`<p class="p-pan">${ic('t-bakeware')}At 2 batches, use two sheet pans and swap their racks halfway.</p>`:''}
+  </div></article>`;
+}
+function ppPrep(){
+  const allI=S.got.size===ING.length,allG=S.gear.size===GEAR.length;
+  ING.forEach(it=>it.amt=amt(it,S.serv));
+  const spots=[[24,52],[68,56],[112,56],[156,52],[46,30],[90,32],[134,30],[90,8]];let k=0;
+  const heap=ING.filter(i=>S.got.has(i.id)).map(i=>{const[x,y]=spots[k++];return`<use href="#i-${i.id}" x="${x}" y="${y}" width="56" height="56" class="${S.hop===i.id?'pop':''}"/>`}).join('');
+  $('#invStage').innerHTML=`<div class="p-prep"><div class="p-bowlwrap">
+    <svg class="p-bowl" viewBox="0 0 240 182" role="img" aria-label="Mixing bowl with ${S.got.size} of ${ING.length} ingredients">
+      <ellipse cx="120" cy="96" rx="104" ry="16" fill="#BFAE8F" stroke="#2B2A28" stroke-width="3"/><g>${heap}</g>
+      <path d="M14 96H226C226 150 180 178 120 178S14 150 14 96Z" fill="#F4EBD8" stroke="#2B2A28" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M22 116H218" stroke="#D9412B" stroke-width="7"/><path d="M34 132H206" stroke="#D9412B" stroke-width="3"/>
+      <path d="M40 104c10 18 30 30 50 34" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/></svg>
+    <p class="p-count">${S.got.size} of ${ING.length} in the bowl</p></div>
+  <div class="p-card p-lined p-list"><i class="tape t1"></i><h4 class="p-h">Ingredients <span>for ${S.serv}</span></h4>
+    ${ING.map(it=>`<button type="button" class="p-item ${S.got.has(it.id)?'on':''} ${S.hop===it.id?'hop':''}" data-act="toggle" data-id="${it.id}" aria-pressed="${S.got.has(it.id)}">${ic('i-'+it.id,'ii')}<span class="nm">${it.name}<small>${it.amt}</small></span><svg class="p-ck" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M9 16l5 5 9-10"/></svg></button>`).join('')}
+    <p class="p-gate">${ic(allI?'i-check':'i-lock')}${allI?'The bowl is full.':'Fill the bowl to unlock cook mode'}</p></div></div>`;
+  $('#gearStage').innerHTML=`<h4 class="p-h">Pegboard <span>${S.gear.size} of ${GEAR.length}</span></h4>
+  <div class="p-peg"><div class="p-tools">${GEAR.map(g=>`<button type="button" class="p-tool ${S.gear.has(g.id)?'on':''}" data-act="gear" data-id="${g.id}" aria-pressed="${S.gear.has(g.id)}"><span class="hook" aria-hidden="true"></span>${ic(g.icon,'ii')}<span class="got" aria-hidden="true">${ic('i-check','')}</span><span class="tag">${g.name}${g.amt?`<small>${g.amt}</small>`:''}</span></button>`).join('')}</div></div>
+  ${allI&&allG?`<div class="p-gate"><button type="button" class="p-btn" data-act="goto" data-to="cook">Start cooking</button></div>`:`<p class="p-gate">${ic('i-lock')}Cook mode unlocks when the bowl and the pegboard are done</p>`}`;
+  S.hop=S.hopG=null;
+}
+function cupSVG(f){
+  return`<svg viewBox="0 0 120 150" role="img" aria-label="${S.step} of ${STEPS.length} steps done"><defs><clipPath id="cupclip"><path d="M14 22h78l-7 116H21z"/></clipPath></defs>
+  <path d="M92 44c24 0 26 46 0 50" fill="none" stroke="#2B2A28" stroke-width="9" stroke-linecap="round"/><path d="M14 22h78l-7 116H21z" fill="rgba(255,255,255,.75)"/>
+  <g clip-path="url(#cupclip)"><rect x="0" y="${(138-116*f).toFixed(1)}" width="120" height="${(116*f+2).toFixed(1)}" fill="#D9412B"/><rect x="0" y="${(138-116*f).toFixed(1)}" width="120" height="5" fill="#F06A50"/></g>
+  <path d="M14 22h78l-7 116H21z" fill="none" stroke="#2B2A28" stroke-width="3.5" stroke-linejoin="round"/><path d="M22 51h14M22 80h20M22 109h14" stroke="#2B2A28" stroke-width="2.5"/></svg>`;
+}
+function ppCook(){
+  const s=STEPS[S.step],last=S.step===STEPS.length-1,dis=s.check&&!S.confirm,t=T[S.step];
+  const nk=noteKey(S.step),note=nk?`<p class="p-note"><b>${nk==='look'?'Should look like:':'Tip:'}</b> ${stepNote(S.step)}</p>`:'';
+  $('#cookStage').innerHTML=`<div class="p-cook">${ppBanner(s.lvl,s.hz)}
+  <div class="p-cookbody"><article class="p-card p-lined p-stepcard ${S.flip?'flip':''}"><p class="p-stepno">Step ${S.step+1} of ${STEPS.length}</p><p class="p-steptxt">${resolve(stepText(S.step))}</p>${note}
+    ${s.check?`<button type="button" class="p-chk" data-act="confirm" aria-pressed="${S.confirm}">${ic('i-thermo')}<span class="box">${ic('i-check','')}</span><span>${s.check.replace('{target}',target())}</span></button>`:''}
+    ${t&&t.state==='idle'?`<button type="button" class="p-tstart" data-act="tstart" data-i="${S.step}">${ic('i-clock')}Start the ${fmt(t.sec)} timer</button>`:''}
+    <div class="p-acts">${WHYSTEP[S.step]?`<button type="button" class="p-why" data-act="why" data-id="${WHYSTEP[S.step]}">${ic('i-flame')}Why?</button>`:''}<button type="button" class="fixbtn" data-act="fixopen" data-w="${S.step}">${ic('i-flag')}Suggest a fix</button></div></article>
+    <div class="p-cup">${cupSVG(S.step/STEPS.length)}<span>${S.step} of ${STEPS.length} done</span></div></div>
+  <div class="p-nav"><button type="button" class="p-back" data-act="back" ${S.step===0?'disabled':''}>Back</button><button type="button" class="p-btn" data-act="next" ${dis?'disabled':''}>${last?'Plate it':'Next step'}</button></div></div>`;
+  S.flip=false;
+}
+function ppTimers(){
+  const st=T.map((t,i)=>t&&t.state!=='idle'?i:-1).filter(i=>i>=0);
+  $('#timerStage').innerHTML=`<h4 class="p-h">The counter</h4><div class="p-counter" aria-label="Timers">${st.length?st.map(i=>{const t=T[i];return`<div class="p-timer ${t.state}${t.ringing?' ringing':''}">
+    <button type="button" class="dial" data-act="${t.state==='ended'?'tclear':'ttoggle'}" data-i="${i}" aria-label="${t.label} timer: ${t.state==='run'?'pause':t.state==='paused'?'resume':'clear'}">${dialSVG(rem(t)/t.sec,`data-tfrac="${i}" data-kind="wedge"`)}</button>
+    <span class="lb">${t.label}${t.state==='paused'?' · paused':''}</span>
+    ${t.state==='ended'?`<span class="tt">${t.ringing?"Time's up!":'Done'}</span>${t.ringing?'':`<span class="ago" data-tago="${i}">${ago(t)}</span>`}`:`<span class="tt" data-tdisp="${i}">${fmt(rem(t))}</span>`}
+    ${t.ringing?`<button type="button" class="stop" data-act="tclear" data-i="${i}">Stop</button>`:''}</div>`}).join(''):'<span class="empty">No timers going. Start one from a step.</span>'}</div>`;
+}
+function ppSafety(){
+  $('#safetyStage').innerHTML=`<div>${ppBanner('solo','Raw egg',false)}<p>Solo</p></div><div>${ppBanner('nearby','Hot stove',false)}<p>Adult nearby</p></div><div>${ppBanner('hands','Hot oil',false)}<p>Adult hands-on</p></div><div>${ppBanner('hands','Hot oil',true)}<p>Adult hands-on, as an adult profile sees it: the hazard only</p></div>`;
+}
+function mapHTML(){
+  const fill=r=>{const d=regDone(r);return d===0?(r.id===S.ppReg?'#F3C6B6':''):d===r.d.length?'#4E8B3A':'#F6C945'};
+  return`<div class="p-world" role="img" aria-label="World map. ${REGIONS.map(r=>`${r.n}: ${regDone(r)} of ${r.d.length}`).join('. ')}.">
+  <img src="img/map/map-base.webp" alt="" width="1100" height="550">
+  ${REGIONS.map(r=>{const f=fill(r),m=`url(img/map/map-${r.id}.png)`;return f?`<span class="${r.id===S.ppReg?'sel':''}"><i style="background:${f};-webkit-mask-image:${m};mask-image:${m}"></i></span>`:''}).join('')}
+  <img src="img/map/map-lines.webp" alt="" width="1100" height="550"></div>`;
+}
+function ppTree(){
+  const reg=REGIONS.find(r=>r.id===S.ppReg),cooked=COOKED.size,ri=1,lo=5,hi=15;
+  $('#treeStage').innerHTML=`<h4 class="p-h">Passport <span>${cooked} of 50 stamped</span></h4>
+  <div class="p-map">${mapHTML()}</div>
+  <div class="p-legend"><span><i style="background:#EFE6D0"></i>Not started</span><span><i style="background:#F6C945"></i>Started</span><span><i style="background:#4E8B3A"></i>Every stamp</span></div>
+  <div class="p-tabs" role="group" aria-label="Passport pages">${REGIONS.map(r=>`<button type="button" class="p-tab" data-act="ppreg" data-id="${r.id}" aria-pressed="${r.id===S.ppReg}">${r.s}<small>${regDone(r)} of ${r.d.length}</small></button>`).join('')}</div>
+  <div class="p-book"><div class="p-page"><h5>${reg.n}</h5><p class="sub">${regDone(reg)} of ${reg.d.length} stamped</p>
+    <div class="p-stamps">${reg.d.map(n=>COOKED.has(n)?`<div class="p-st">${stampSVG(n,DATES[n])}<span>${NAMES[n][0]}</span></div>`:`<div class="p-st empty ${n===NEXT?'next':''}">${emptyStamp(n===NEXT)}<span>${NAMES[n][0]}</span></div>`).join('')}</div></div></div>
+  <div class="p-card p-rank"><i class="tape t2"></i>${chefAv(ri)}<b>${RANKS[ri]}</b>
+    <div class="p-xp" role="img" aria-label="${cooked} of ${hi} dishes to Line Cook"><i style="width:${((cooked-lo)/(hi-lo)*100).toFixed(0)}%"></i></div>
+    <p>${cooked} dishes cooked. ${hi-cooked} more to reach Line Cook.</p>
+    <div class="p-ladder">${RANKS.map((r,k)=>`<div class="${k<ri?'got':k===ri?'cur':'fut'}">${chefAv(k)}${r}</div>`).join('')}</div></div>`;
+}
+function pinSVG(p){
+  if(p.locked)return`<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="20" fill="none" stroke="#E2EEDA" stroke-width="2.5" stroke-dasharray="4 4"/><use href="#i-lock" x="14" y="14" width="20" height="20" color="#E2EEDA"/></svg>`;
+  const sh=p.shape==='hex'?`<polygon points="${hex(24,24,22)}" fill="${p.col}" stroke="#F6C945" stroke-width="3"/>`:p.shape==='shield'?`<path d="M24 2l20 6v14c0 12-9 20-20 24C13 42 4 34 4 22V8z" fill="${p.col}" stroke="#F6C945" stroke-width="3"/>`:`<circle cx="24" cy="24" r="21" fill="${p.col}" stroke="#F6C945" stroke-width="3"/>`;
+  return`<svg viewBox="0 0 48 48" aria-hidden="true">${sh}<use href="#${p.g}" x="13" y="13" width="22" height="22" color="#fff"/></svg>`;
+}
+function ppPins(){
+  const got=SKILLS.filter(s=>!s.locked).length,sel=SKILLS.find(p=>p.n===S.crest),info=sel&&SKILLINFO[sel.n];
+  $('#crestStage').innerHTML=`<h4 class="p-h">Skill pins <span>${got} of ${SKILLS.length}</span></h4>
+  <div class="p-apron">${SKILLS.map(p=>`<button type="button" class="p-pin ${p.locked?'locked':''}" data-act="crest" data-n="${p.n}" aria-pressed="${S.crest===p.n}">${pinSVG(p)}${p.n}</button>`).join('')}</div>
+  ${info?`<div class="p-card p-pininfo"><i class="tape t1"></i><h5>${sel.n}${sel.locked?' · not earned yet':''}</h5><p>${info[0]}</p><ul>${info[1].map(n=>`<li class="${COOKED.has(n)?'':'todo'}">${ic(COOKED.has(n)?'i-check':'i-lock')}${NAMES[n][0]}${COOKED.has(n)?'':' · lesson '+n}</li>`).join('')}</ul></div>`:'<p class="p-hint">Tap a pin to see the idea behind it and every dish that uses it.</p>'}`;
+}
+function ppRate(){
+  const words=['','Not again','It was OK','Pretty good','Really good','Cook it again!'];
+  $('#rateStage').innerHTML=`<h4 class="p-h">How did it turn out?</h4><div class="p-hats" role="radiogroup" aria-label="Rating">${[1,2,3,4,5].map(n=>`<button type="button" class="p-hatbtn ${n<=S.rating?'on':''} ${n===S.popGem?'pop':''}" data-act="rate" data-i="${n}" role="radio" aria-checked="${n===S.rating}" aria-label="${n} of 5 chef's hats">${ic('i-hat','')}</button>`).join('')}<span class="p-ratel">${S.rating} of 5 · ${words[S.rating]}</span></div>
+  <div class="p-card p-refl"><i class="tape t1"></i><label for="refl-change">What would you change next time?</label><textarea id="refl-change" data-refl="refl">${esc(S.refl)}</textarea>
+  <label for="refl-xfer">What other dish could use this move? <span>(optional)</span></label><textarea id="refl-xfer" data-refl="xfer" placeholder="Like chili, because it starts with spices in oil">${esc(S.xfer)}</textarea></div>`;
+  S.popGem=-1;
+}
+const TILT=[-3,2,-1.5,3,-2.5,1.5,-1,2.5,-2];
+function ppHall(){
+  const list=PHOTOS.slice(0,S.photos);
+  $('#hallStage').innerHTML=`<h4 class="p-h">Corkboard <span>${list.length} photos</span></h4><div class="p-cork"><div class="p-polas">${list.map(([f,n,d],i)=>`<figure class="p-pola ${S.newPhoto&&i===list.length-1?'new':''}" style="--r:${TILT[i%TILT.length]}deg"><div><img src="img/${f}.webp" alt="${n}" width="440" height="440"></div><figcaption>${n} · ${d}</figcaption></figure>`).join('')}</div></div>
+  <div class="p-hall-act">${S.photos<PHOTOS.length?`<button type="button" class="p-btn" data-act="photo">Pin today's photo</button>`:`<button type="button" class="p-back" data-act="photoreset">Take it down</button>`}</div>`;
+  S.newPhoto=false;
+}
+function ppHelper(){
+  let h=`<div class="p-dlg">`;
+  for(let i=0;i<=S.chat;i++){const c=CHAT[i];if(c.q)h+=`<div class="p-card p-bub me">${c.q}</div>`;h+=`<div class="p-row">${HELPER('')}<div class="p-card p-bub"><b>Chef</b>${c.a.replace('kitchen guide','kitchen helper')}</div></div>`}
+  h+=S.chat<CHAT.length-1?`<div class="p-choices">${CHAT.slice(S.chat+1).map((c,j)=>`<button type="button" data-act="chat" data-i="${S.chat+1+j}">${c.q}</button>`).join('')}</div>`:`<div class="p-choices"><button type="button" data-act="chat" data-i="0">Start over</button></div>`;
+  $('#helperStage').innerHTML=`<h4 class="p-h">Ask the chef</h4>${h}</div>`;
+}
+function ppArt(){
+  const cu=CUIS.map(c=>+Object.keys(NAMES).find(n=>NAMES[n][1]===c));
+  return`<div><p class="p-sub">Chef's Passport: a stamp for every cuisine (${cu.length})</p><div class="p-stampart">${cu.map(n=>`<div class="art">${stampSVG(n)}${NAMES[n][1]}</div>`).join('')}</div></div>
+  <div><p class="p-sub">Chef's Passport: the chef at each rank</p><div class="artgrid p-outfits">${RANKS.map((r,k)=>`<div class="art">${chefAv(k)}${r}<small>${['Paper cap, plain apron','Short hat, butter apron','Taller hat, neckerchief, striped apron','Pleated hat, buttoned jacket, navy apron','Tallest hat with a gold band'][k]}</small></div>`).join('')}<div class="art">${HELPER('')}Helper<small>The chef on the Ask button</small></div><div class="art">${COVER}Passport cover</div></div></div>`;
+}
+function ppTutCards(){
+  const ad=adult(),name=PROFILES[S.prof].name;
+  const recipe=`<div class="p-recipe"><img src="img/04-shakshuka.webp" alt="" width="440" height="440"><div><b>Shakshuka</b><span>Stovetop basics · Lesson 4</span></div></div>`;
+  return[
+    {h:`Welcome, ${name}`,say:"Every dish you cook earns a stamp in your chef's passport. I'll show you around. It takes about two minutes.",try:()=>`<div class="p-cover">${COVER}<div><b>Your passport</b><span>${ppTutCards().length} short cards · skip any of them</span></div></div>`},
+    ad?{h:'Pick a recipe',say:'Find a dish in the recipe box and tap Cook this. It goes straight on your queue and the shopping list. No need to ask.',try:()=>`${recipe}${TU.asked?pdone('Added to your queue'):'<button type="button" class="p-btn" data-act="tut-ask">Cook this</button>'}`}
+      :{h:'Pick a recipe',say:'Find a dish in the recipe box. Want to make it? Tap Ask to cook it, and a grown-up gets your request.',try:()=>`${recipe}${TU.asked?pdone('Request sent to a grown-up'):'<button type="button" class="p-btn" data-act="tut-ask">Ask to cook it</button>'}`},
+    {h:'How many people?',say:'Set how many it serves before you start. The amounts change to match.',try:()=>`<div class="p-serve-row"><button type="button" class="p-step" data-act="tut-serv" data-i="-1" ${TU.serv<=1?'disabled':''} aria-label="Fewer">−</button><span class="p-num">${TU.serv}</span><button type="button" class="p-step" data-act="tut-serv" data-i="1" ${TU.serv>=12?'disabled':''} aria-label="More">+</button></div><div class="p-plates" aria-hidden="true">${plates(TU.serv)}</div><p class="p-note"><b>Eggs:</b> ${eggs(TU.serv)} large</p>`},
+    {h:'Fill the bowl',say:'Tap each thing as you set it on the counter, and it hops into the bowl. When the bowl is full, the kitchen opens.',try:()=>`<div style="display:grid;gap:2px;width:100%">${['egg','tomato','onion'].map(id=>{const it=ING.find(x=>x.id===id);return`<button type="button" class="p-item ${TU.slots.has(id)?'on':''}" data-act="tut-slot" data-id="${id}" aria-pressed="${TU.slots.has(id)}">${ic('i-'+id,'ii')}<span class="nm">${it.name}</span><svg class="p-ck" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M9 16l5 5 9-10"/></svg></button>`}).join('')}</div>${TU.slots.size===3?pdone('Bowl full. The kitchen is open'):''}`},
+    {h:'One card at a time',say:'Read the banner first. It says who needs to be in the kitchen. Do the step, then tap Next to flip to the next card.',try:()=>`${ppBanner('nearby','Hot stove')}<p class="p-steptxt" style="font-size:19px">${TU.step?'Stir in the garlic and spices. Cook just until it smells toasty.':'Warm the oil. Add the onion and pepper.'}</p><button type="button" class="p-btn" data-act="tut-next">${TU.step?'Back to step 1':'Next step'}</button>`},
+    {h:'Timers and the thermometer',say:"Tap a timer to start it. It rings when time's up, and you can run a few at once. Some steps need the thermometer before you can go on.",try:()=>{const rm=TU.tState==='run'?Math.max(0,(TU.tEnd-Date.now())/1000):TU.tState==='done'?0:10;return`<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><button type="button" class="p-minidial ${TU.tState==='done'?'ringing':''}" data-act="tut-timer" aria-label="Practice timer">${dialSVG(rm/10,'data-tutwedge')}</button><span style="font-size:15px">${TU.tState==='idle'?'Tap the timer to start a 10-second practice':TU.tState==='run'?`Counting down… <b data-tutdisp>${fmt(rm)}</b>`:"Time's up! Tap it again to stop the ring"}</span></div><div class="p-chk" style="width:100%">${ic('i-thermo')}<span>Egg white reaches 160°F</span></div>`}},
+    {h:'Snap it and rate it',say:"When it's on the plate, take a photo. It gets pinned to your corkboard. Then rate it and write what you'd change next time.",try:()=>`<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><figure class="p-pola" style="--r:-3deg;width:110px"><div><img src="img/04-shakshuka.webp" alt="" width="440" height="440"></div><figcaption>Shakshuka</figcaption></figure><div class="p-hats">${[1,2,3,4,5].map(n=>`<button type="button" class="p-hatbtn ${n<=TU.gems?'on':''}" data-act="tut-gem" data-i="${n}" aria-label="${n} of 5 chef's hats" style="width:46px;height:46px">${ic('i-hat','')}</button>`).join('')}</div></div>`},
+    {h:'Collect stamps',say:'Every dish you finish earns a stamp for its cuisine, and the world map fills in. New skills earn pins, and enough dishes raise your rank and your hat.',try:()=>`<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><button type="button" class="p-stampbtn" data-act="tut-lit" aria-label="${TU.lit?'Stamped. Tap to undo':'Stamp it'}">${TU.lit?`<span class="p-slam" style="--rot:0deg">${stampSVG(4,'Today')}</span>`:emptyStamp(true)}</button>${TU.lit?pdone('Shakshuka stamped'):'<span class="tag">Tap the empty spot to stamp it</span>'}</div>`},
+    ad?{h:'Something wrong?',say:"If an amount, time, or step looks wrong, tap Suggest a fix and say what it should say instead. The owner reviews it, and you'll see the answer on the lesson.",try:()=>`<button type="button" class="fixbtn" style="padding-left:0">${ic('i-flag')}Suggest a fix</button><span class="tag">On every recipe card and cook step</span>`}
+      :{h:'Something looks wrong?',say:"If a step seems strange or unsafe, stop and tell a grown-up. And if you're stuck, tap Ask any time.",try:()=>`<div style="display:flex;gap:10px;align-items:center">${HELPER('')}<span class="tag">The Ask button is always in the corner</span></div>`},
+    {h:"You're ready",say:'That was the tour. Your first real recipe is waiting in the box. You can replay this any time from your locker.',try:()=>`${TU.skipped?'<p class="p-note"><b>Skipped.</b> You can replay it from your locker.</p>':''}<button type="button" class="p-btn" data-act="tut-done">Go to the recipe box</button>`}
+  ];
+}
+function ppTut(){
+  const C=ppTutCards(),c=C[TU.i],n=C.length;
+  $('#tutStage').innerHTML=`<div class="p-top"><p class="p-sub">Welcome tour · ${TU.i+1} of ${n}</p>${TU.i<n-1?'<button type="button" class="p-skip" data-act="tut-skip">Skip the tour</button>':''}</div>
+  ${pdots(n,TU.i)}
+  <div class="p-say">${HELPER('')}<div class="p-card p-bub"><h4>${c.h}</h4>${c.say}</div></div>
+  <div class="p-card p-try"><i class="tape t1"></i><span class="tag">Try it</span>${c.try()}</div>
+  <div class="p-tnav"><button type="button" class="p-back" data-act="tut-back" ${TU.i===0?'disabled':''}>Back</button>${TU.i<n-1?`<button type="button" class="p-btn" data-act="tut-fwd">${TU.i===0?'Start':'Next card'}</button>`:''}</div>`;
+}
+function ppDishTile(n){const[f,name]=LESSONS[n];return`<div class="p-xd ${COOKED.has(n)?'cooked':''}">${f?`<img src="img/${f}.webp" alt="" width="440" height="440">`:''}${name}<small>${COOKED.has(n)?'Cooked ✓':'Lesson '+n}</small></div>`}
+function ppLore(c){
+  let body;
+  if(c.dish)body=`<div class="callimg"><img src="img/${LESSONS[c.dish][0]}.webp" alt="" width="440" height="440"><p>${c.body}</p></div>`;
+  else if(c.xfer)body=`<div class="xfer">${c.xfer.map(([sk,ds])=>`<div class="p-xfer"><h5>${sk}</h5><div class="xdishes">${ds.map(ppDishTile).join('')}</div></div>`).join('')}</div>`;
+  else if(c.wrong)body=`<ul class="p-wrongs">${c.wrong.map(([a,b])=>`<li><b>${a}</b>${b}</li>`).join('')}</ul>`;
+  else if(c.quiz)body=c.quiz.map((q,qi)=>{const got=L.ans[qi];return`<div class="quiz"><p class="qq" style="font-weight:800;font-size:17px">${q.q}</p>${q.c.map((o,oi)=>`<button type="button" class="p-qopt ${got===undefined?'':oi===q.a?'right':oi===got?'wrong':''}" data-act="quiz" data-q="${qi}" data-i="${oi}">${o}</button>`).join('')}${got!==undefined?`<p class="p-qfb">${got===q.a?'Yes! ':'Not quite. '}${q.why}</p>`:''}</div>`}).join('');
+  else body=`<p>${c.body}</p>`;
+  return`<article class="p-card p-lore"><i class="tape t1"></i><p class="p-kick">${c.kind}</p>${c.title?`<h4>${c.title}</h4>`:''}${body}</article>`;
+}
+function ppLearn(){
+  const n=LEARN.length,c=LEARN[L.i];
+  $('#learnStage').innerHTML=`<div class="p-top"><p class="p-sub">Learn · card ${L.i+1} of ${n}</p><button type="button" class="p-skip" data-act="goto" data-to="prep">Skip to Prep</button></div>
+  ${pdots(n,L.i)}${ppLore(c)}
+  <div class="p-tnav"><button type="button" class="p-back" data-act="learn-back" ${L.i===0?'disabled':''}>Back</button>${L.i<n-1?'<button type="button" class="p-btn" data-act="learn-fwd">Next card</button>':'<button type="button" class="p-btn" data-act="goto" data-to="prep">On to Prep</button>'}</div>`;
+}
+function ppWhy(id){
+  const el=$('#whyov');if(!id){el.hidden=true;el.innerHTML='';return}
+  const c=LEARN.find(x=>x.id===id);el.hidden=false;
+  el.innerHTML=`<div class="p-card p-lore" role="dialog" aria-modal="true" aria-label="Why: ${c.title}"><i class="tape t1"></i><p class="p-kick">Why? · from the Learn cards</p><h4>${c.title}</h4><p>${c.body}</p><button type="button" class="p-btn" data-act="why-close">Back to cooking</button></div>`;
+  el.querySelector('button').focus();
+}
+function ppLvl(open){
+  const el=$('#lvlup');el.classList.add('pp');el.hidden=!open;if(!open){el.innerHTML='';return}
+  const cols=['#D9412B','#F6C945','#4E8B3A','#22406B','#FFF8E7','#F28AB2'];let b='';
+  for(let i=0;i<34;i++){const a=i/34*Math.PI*2,r=150+(i%3)*55;b+=`<i style="--x:${(Math.cos(a)*r).toFixed(0)}px;--y:${(Math.sin(a)*r).toFixed(0)}px;--c:${cols[i%6]};--d:${(i%5)*40}ms;--rot:${(i*47)%180}deg"></i>`}
+  el.innerHTML=`<div class="p-rbox" role="dialog" aria-modal="true" aria-label="Rank up"><div class="burst sp" aria-hidden="true">${b}</div><i class="tape t1"></i><i class="tape t2"></i>
+  <span class="rk">RANK UP</span>${chefAv(2)}<h2>Line Cook</h2><p>15 dishes cooked. Your hat just got taller.</p>
+  <button type="button" class="p-btn" data-act="lvlclose">Keep cooking</button></div>`;
+  el.querySelector('[data-act="lvlclose"]').focus();
+}
+/* Section text that changes with the theme. Kitchen Quest text is read from the page. */
+const COPYQ={},COPYP={
+  'tut-h':'Welcome tour: the profile intro',
+  'tut-p':'What a Chef\'s Passport profile sees right after picking its theme: one card per thing they\'ll do, each with a quick "try it". Short words, and nothing moves while a card is being read. Any card can be skipped, and the whole tour can be replayed from the profile\'s locker. Pick Mom above to see the adult versions: Cook this instead of Ask to cook it, and Suggest a fix.',
+  'tok-h':'Chef\'s Passport colours and type',
+  'tok-p':'The theme\'s tokens. The chunky display font is for titles. The handwriting font is for notes and labels only, never smaller than 20px. Step text stays in the rounded body font at 21px, so it reads from arm\'s length.',
+  'les-p':'A taped recipe card, with the red test-kitchen stamp on a lesson a parent has test-cooked. A lesson whose prerequisites aren\'t done yet shows as a faded "coming up" card instead of being hidden. The Serves line starts at the queued count, with a plate per serving, and changes the prep amounts and the cook steps. A baking lesson only offers the sizes its pan allows.',
+  'prep-p':'Each checked ingredient hops into the mixing bowl, and the bowl fills up. Tools hang on a pegboard, and a checked tool lifts off its hook and glows. Cook mode unlocks once both are done. The knife and board use their category\'s icon, the fallback for tools without their own art.',
+  'prep-a':'Ingredient checklist <em>mixing bowl</em>','prep-b':'Equipment checklist <em>pegboard</em>',
+  'cook-p':'A big recipe card, one step per card, and Next flips to the following card. The measuring cup beside it fills as steps are done. Timers are kitchen dial timers on the counter, each labelled, and several can run at once. Tap a dial to pause it. The egg step needs the thermometer check before Next unlocks.',
+  'cook-a':'Cook step <em>recipe card + measuring cup</em>','cook-b':'Timers <em>dial timers on the counter</em>',
+  'prog-p':'Every dish earns an inked stamp for its cuisine. Stamp pages are grouped by region, and the world map fills in as the regions do. The rank changes the chef\'s hat and apron, and ranking up gets a full-screen celebration. Skills earned are enamel pins on an apron. Sample progress: 8 dishes cooked. Tap a tab to turn to that page.',
+  'prog-a':'Passport, world map, and rank','prog-b':'Skills earned <em>pins on the apron</em>',
+  'lvl-btn':'Play the rank-up',
+  'rate-p':'One to five chef\'s hats, never stars, then the reflection on a lined card. Its last question is optional and asks the kid to carry the skill to another dish.',
+  'photo-h':'Photos: the corkboard',
+  'photo-p':'Each photo is a Polaroid pinned to the corkboard, and the gallery is the board. These use the dish art as stand-ins for real photos.',
+  'help-p':'The helper hasn\'t been specced yet. This is only its look: the chef on the floating Ask button (bottom right of this page) and a chat on recipe cards and sticky notes.',
+  'art-p':'Shared by both themes: one generic icon per store section and per tool category, the ingredients, and the dish art. Then Chef\'s Passport\'s own set: a stamp for every cuisine in the course, and the chef at each rank.'
+};
+function applyTheme(){
+  const pp=PP();document.body.dataset.kt=pp?'passport':'quest';
+  document.querySelectorAll('[data-copy]').forEach(el=>{const k=el.dataset.copy;if(!(k in COPYQ))COPYQ[k]=el.innerHTML;el.innerHTML=pp&&COPYP[k]?COPYP[k]:COPYQ[k]});
+  const a=$('#askBtn');a.classList.toggle('pp',pp);a.setAttribute('aria-label',pp?'Ask the chef':'Ask the helper');
+  a.innerHTML=pp?`${HELPER('')}Ask`:'<svg aria-hidden="true"><use href="#guide"/></svg>Ask';
+  renderTokens();renderAll();renderArt();
+}
+
 
 /* ---------- timers ---------- */
 let AC=null;
@@ -1104,7 +1739,7 @@ function tick(){
   if(ch){renderTimers();return}
   document.querySelectorAll('[data-tdisp]').forEach(el=>{const t=T[+el.dataset.tdisp];if(t.state!=='ended')el.textContent=fmt(rem(t))});
   document.querySelectorAll('[data-tago]').forEach(el=>{el.textContent=ago(T[+el.dataset.tago])});
-  document.querySelectorAll('[data-tfrac]').forEach(el=>{const t=T[+el.dataset.tfrac];el.setAttribute('stroke-dashoffset',(+el.dataset.c*(1-rem(t)/t.sec)).toFixed(1))});
+  document.querySelectorAll('[data-tfrac]').forEach(el=>{const t=T[+el.dataset.tfrac];if(el.dataset.kind==='wedge')el.setAttribute('d',wedge(50,62,36,rem(t)/t.sec));else el.setAttribute('stroke-dashoffset',(+el.dataset.c*(1-rem(t)/t.sec)).toFixed(1))});
 }
 
 /* ---------- actions ---------- */
@@ -1112,7 +1747,9 @@ document.addEventListener('click',e=>{
   const b=e.target.closest('[data-act]');if(!b||b.disabled)return;
   unlock();const a=b.dataset.act,i=+b.dataset.i;
   switch(a){
-    case'prof':S.prof=i;TU.asked=false;renderPicker();renderCook();renderTut();break;
+    case'prof':S.prof=i;TU.asked=false;applyTheme();break;
+    case'theme':PROFILES[S.prof].theme=b.dataset.k;TU.asked=false;applyTheme();break;
+    case'ppreg':S.ppReg=b.dataset.id;renderTree();break;
     case'goto':{const el=document.getElementById(b.dataset.to);if(el)el.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});break}
     case'toggle':{const id=b.dataset.id;if(S.got.has(id))S.got.delete(id);else{S.got.add(id);S.hop=id}renderPrep();break}
     case'gear':{const id=b.dataset.id;if(S.gear.has(id))S.gear.delete(id);else{S.gear.add(id);S.hopG=id}renderPrep();break}
@@ -1171,7 +1808,7 @@ document.addEventListener('submit',e=>{if(e.target.id!=='fixform')return;e.preve
   if(fx.sug===fx.cur){FX.err='Change what it should say first, so the owner has a fix to apply.';renderSheet();return}
   FIXQ.push(fx);FX.stage='sent';FX.err='';renderSheet();renderQueue()});
 
-renderTokens();renderAll();renderArt();renderParent();
+applyTheme();renderParent();
 setInterval(()=>{tick();tutTick()},250);
 })();
 </script>

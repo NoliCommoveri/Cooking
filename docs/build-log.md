@@ -409,3 +409,310 @@ Owner rulings on open questions:
   no PIN. A shared profile with a kid on it still asks (§6.1, §6.9). The
   showcase's tutorial card switches to the adult version when an adult
   profile is picked.
+
+---
+
+## 18. 2026-10-22 — Hands-free step advance
+
+- The owner asked how hard a hands-free voice "next step" would be. Her
+  kitchen device is likely an Android phone; Safari families may come later.
+- Added §6.12 to the plan as a **Recommendation**, on the owner's yes:
+  - A tap zone and Bluetooth page-turner support for every device, moved
+    into Phase 2.
+  - Voice stays in Later: Android Chrome first, shown only where the device
+    supports it, with taps as the fallback.
+  - No "switch to Chrome" prompt on iPhone, because every iOS browser runs on
+    Safari's engine.
+  - Food-safety checks still need a tap.
+- Cook mode in §3 and the Phase 2 and Later rows in §9 now point to §6.12.
+- New open question 1: whether voice needs a parent to turn it on, since
+  Chrome usually sends the audio to Google.
+- Nothing is built.
+
+---
+
+## 19. 2026-10-22 — Kitchen Quest approved; Chef's Passport built (Phase 0b)
+
+- **The owner approved the Kitchen Quest look,** so Phase 0 is done. §5.4a is
+  now a Requirement.
+- **The owner ruled that voice stays off until a parent turns it on** (§6.12,
+  Requirement). The switch is in family settings, behind the parent PIN.
+  Open question 1 is closed; no open questions remain.
+- **Phase 0b: Chef's Passport built** in the same showcase,
+  `mockups/quest-showcase/index.html`, which is now a two-theme page.
+  - Each sample profile has a theme: Ava and the shared profile use Kitchen
+    Quest, and Leo and Mom use Chef's Passport. Picking a locker or changing a
+    profile's theme redraws every panel, which meets the Phase 0b done-when.
+    The page opens on Leo. The Kitchen Quest panels are unchanged.
+  - Every §5.4 component has a Passport version: the taped recipe card with
+    the test-kitchen stamp, the Serves line with a plate per serving, the
+    mixing bowl, the pegboard, the flipping step card with the measuring cup,
+    dial timers on the counter, safety banners, the passport book and world
+    map, rank outfits, apron pins, chef's-hat rating, the Polaroid corkboard,
+    the helper chat, the rank-up, and the welcome tour and Learn cards.
+  - New art, drawn as SVG: a stamp for each of the 22 cuisines, the chef at
+    all five ranks, the helper chef, the passport cover, and a stylized world
+    map.
+  - Passport pages are grouped into 7 regions. Churros (25, Spanish/Mexican)
+    sit on the Europe page.
+  - §5.4 gained the palette, type, regions, map states, and rank outfits.
+  - Fix: the page now hides `hidden` overlays itself. Before this, the
+    Suggest a fix sheet blocked every tap when the file was opened outside the
+    published page.
+- Next: the owner reviews the Passport look. Once it's approved, Phase 1
+  (content core) starts.
+
+---
+
+## 20. 2026-10-22 — The owner's world map in Chef's Passport
+
+- The owner supplied an illustrated world map
+  (`content/images/source/world-map.png`). It replaces the hand-drawn SVG map
+  in the Passport panel.
+- Its yellow highlighting didn't match the passport regions: China, Korea,
+  North Africa, Europe, and Africa were tan. So the app recolors the regions
+  itself instead of using the owner's colors.
+  - New `tools/split-world-map.py` cuts the map into a tan base, an outline
+    layer, and one mask per region. The Americas follow the owner's yellow,
+    split at the Mexico border. Everywhere else goes to the nearest of a set
+    of hand-placed points, and the Sahara is split with a straight line.
+  - The page stacks the base, one colored mask per region (butter when
+    started, basil when complete, pale red for the open page), and the
+    outlines on top.
+- The source and its layers are listed in `content/images/LICENSES.md`, and
+  §5.4 describes the map.
+
+---
+
+## 21. 2026-10-22 — Chef's Passport approved; churros moved
+
+- **The owner approved the Chef's Passport look,** so Phase 0b is done. §5.4
+  is now a Requirement.
+- **Churros (25) moved from the Europe page to Latin America,** at the owner's
+  request, and now earn the Mexican stamp. That leaves 21 cuisine stamps.
+- The showcase now says both themes are approved.
+- Next: Phase 1, the content core.
+
+---
+
+## 22. 2026-10-22 — Phase 1: content core
+
+- **Content as data** (§7). New files: `content/ingredients.json` (35
+  ingredients), `equipment.json` (26 tools), `skills.json`,
+  `cuisines.json` (7 regions, 21 cuisines), `units.json`, JSON Schemas in
+  `content/schema/`, and the rules in `content/rules/`: the clean-species
+  allowlist, the blocked words, and the allowed phrases.
+- **4 sample lessons**, written from scratch: 4 Shakshuka, 14 Beef
+  bulgogi, 38 Buttermilk biscuits, and 49 Brown butter cookies. Each has the
+  Learn stage, safety levels and adult hazards, timers, and the food-safety
+  steps.
+- **Shared code** in `src/content/`, plain modules the Worker and app can
+  use later: units and kitchen-measurable display (`units.js`), scaling and
+  step-text counts (`scale.js`), the hard block (`rules.js`), a small
+  schema checker (`validate.js`), and the linter (`lint.js`).
+- **The linter** (`tools/lint-content.js`) runs every §7.4 check, plus a few
+  added in this phase (listed in §7.4): wash steps after raw food, adult
+  hazards, callbacks, and a check that every lesson renders at every serving
+  size. It passes with 0 errors. The 13 warnings are expected: no intro
+  slides, fallback icons, and skills used by only one sample lesson.
+- **Tests** (`test/`, 29 of them, `node --test`): units, scaling, and the
+  linter. The linter tests break the real content on purpose (an unclean
+  ingredient, a missing wash step, a prerequisite loop, and more) and confirm
+  each is rejected.
+- **CI:** `.github/workflows/content.yml` runs the linter and tests on every
+  push and pull request.
+- **Preview:** `preview/lesson-preview.html`, built by
+  `tools/build-preview.js`, shows each lesson read-only at every allowed
+  size. A test fails if it falls out of date. This meets the Phase 1
+  done-when.
+- **Open for the owner:** cookies have raw egg, and a thermometer in a
+  cookie isn't practical, so their doneness check is visual. §7.4 marks this
+  as a Recommendation waiting on her.
+
+---
+
+## 23. 2026-10-22 — Wording a kid can follow
+
+The owner reviewed the sample lessons in the preview.
+- **Cookies (49):** "cool it until it's soft again" read as if browned butter
+  goes hard. The move, the "why cool it back down" card, and the biscuit
+  callback now say the liquid butter is stirred over ice water until it
+  thickens like frosting.
+- **Biscuits (38):** "shaggy" became "lumpy and rough, not
+  smooth. That's right, so stop stirring." The first "1 inch thick" also says
+  "about as thick as two of your fingers stacked", and the last one says "two
+  fingers thick".
+- The owner ruled that version numbers don't go up on lessons that aren't
+  released yet. Biscuits went back to version 1, and §7.3 now says so.
+- **Cookies (49):** "2 inches apart" also says "three of your fingers wide".
+- The owner approved visual doneness checks for lessons whose only raw
+  ingredient is egg baked into a dough. §7.4 no longer marks it as waiting.
+- **Shakshuka (4):** "mince the garlic" now says what that means: tiny bits,
+  smaller than a grain of rice.
+
+---
+
+## 24. 2026-10-22 — Kitchen words
+
+- The owner noticed lessons say "dice" and "mince" but nothing teaches what
+  those look like, and lessons can be cooked in any order. She approved a
+  kitchen words list (§6.1, Recommendation).
+- `content/terms.json` defines 22 words: cuts (dice, mince, chop, slice,
+  julienne, grate, zest), heat (simmer, boil, poach, sauté, sear, braise,
+  shimmer), and moves (marinate, whisk, cream, fold the dough, knead, dust,
+  toss, across the grain). Each has a description a kid can picture, its
+  word forms, and the lesson that practices it. Drawings come later (§5.3a).
+- `src/content/terms.js` finds the words in step text. In the lesson
+  preview they're underlined, and tapping one opens its meaning under the
+  step. Cook mode gets the same in Phase 2, in the profile's theme.
+- New linter rule (§7.4): a step can't use a cooking word listed in
+  `content/rules/kitchen-words.json` (sift, drizzle, deglaze, and others)
+  until `terms.json` defines it, and no two words can claim the same form.
+  4 new tests; 33 in all.
+- Cookies (49): the creaming step now says "cream them", so the word gets
+  its card.
+- Shakshuka (4): the knife tip was unclear about which hand makes the claw.
+  It now says the claw is the hand holding the food, with the flat of the
+  blade against the knuckles.
+
+---
+
+## 25. 2026-10-22 — Foundation skills, choose-one lessons, knife work first
+
+- The owner ruled (new plan §4.0, Requirement):
+  - Foundation skills (the knife cuts, heat control, building a sauce, roux,
+    cutting in fat, yeast dough) each get at least two lessons, from very
+    different cuisines, and a family picks one. Either one counts as done.
+  - Knife work is strongly suggested first. The app nudges toward it but
+    doesn't block.
+  - Parents see foundations clearly: a foundation marker in the library and
+    the queue, choose-one lessons side by side, a nudge in the queue, and a
+    parent tour card (§6.2).
+- Prerequisites unlock on either lesson for a skill, except where a lesson
+  serves the earlier dish itself (39 needs 38's biscuits).
+- The alternate dishes are proposed to the owner and not added yet. They'll
+  be numbered from 51.
+
+---
+
+## 26. 2026-10-22 — Three lessons per foundation skill
+
+- The owner liked both proposed options for each foundation skill, so each
+  foundation skill now has three lessons to pick from (§4.0). 16 dishes were
+  added, numbered 51–66, and the course is now 66 dishes:
+  - Unit 1: 51 Chicken fajitas, 52 Carrot-apple slaw, 53 Guacamole and
+    chips, 54 Bruschetta, 55 Matzo ball soup, 56 Minestrone.
+  - Unit 2: 57 Grilled cheese and tomato soup, 58 Challah French toast,
+    59 Spaghetti marinara, 60 Sloppy joes, 61 Croque madame (turkey),
+    62 Chicken gumbo (adult hands-on, for the dark roux).
+  - Unit 5: 63 Rugelach, 64 Scones, 65 Challah, 66 Homemade pizza.
+- §4.0 has the pick-one table. Each new row in the unit tables names its
+  group and its food-rule notes: lard in tortillas, turkey not ham, chicken
+  andouille casings, and no shrimp in the gumbo.
+- Phase 7 is now 62 lessons to write. The stand-mixer note includes challah
+  and pizza dough.
+- New cuisines: Tex-Mex (United States page), Jewish, and British (Europe
+  page). Where the Jewish stamp goes is open question 2.
+- Open question 1: honey in challah.
+- The theme showcase mockup still shows 50 stamps. It's a mockup, and the
+  real counts come from the content.
+
+---
+
+## 27. 2026-10-22 — Honey allowed; Jewish stamp on the Europe page
+
+- **Honey is allowed** (owner ruling, §2.1). The bee isn't added as a clean
+  species. `content/rules/clean-species.json` gained `allowedProducts`, with
+  honey from honeybees as its only entry. The linter accepts that exact pair
+  and still rejects any other part of a bee. `honey` was added to the
+  registry, and there's a new test.
+- **The Jewish stamp goes on the Europe page,** as proposed: matzo ball
+  soup, challah French toast, rugelach, and challah are Eastern European
+  Jewish (Ashkenazi) dishes. Israeli dishes, if any are added, would get
+  their own stamp on the Middle East & North Africa page.
+- Both open questions are closed.
+
+---
+
+## 28. 2026-10-22 — Nine African dishes
+
+- The owner asked for more African dishes that are clean and easy to shop
+  for, then chose all nine proposed. They're added as extra lessons, 67–75,
+  and the course is now 75 dishes:
+  - Unit 3: 67 Jollof rice with chicken (Nigerian), 70 Peanut stew / maafe
+    (Malian), 74 Koshari (Egyptian).
+  - Unit 4: 68 Chicken yassa (Senegalese), 69 Suya (Nigerian).
+  - Unit 5: 72 Chapati (Kenyan).
+  - Unit 6: 71 Bobotie (South African), 73 Peri-peri chicken (Mozambican),
+    75 Kelewele (Ghanaian, adult hands-on for shallow frying).
+- The Africa passport page goes from 1 dish to 9. Koshari goes on the Middle
+  East & North Africa page. 8 cuisines were added to `cuisines.json`.
+- §2.1 hidden sources gained ground dried crayfish, shrimp powder, and
+  shrimp bouillon cubes, common in West African cooking. Egusi soup and
+  pepper soup were left out because they usually depend on seafood.
+- Phase 7 is now 71 lessons to write.
+
+---
+
+## 29. 2026-10-22 — Dish art for 51–58
+
+- The owner supplied sheets 15 and 16 (ChatGPT). They're cropped into
+  `content/images/dishes/51-…` through `58-…` with `tools/crop-dish-sheet.py`,
+  and listed in `tools/dish-sheets.txt` and `content/images/LICENSES.md`.
+- Every picture was checked for unclean foods, and none are in them.
+- A review for repeats across all 75 dishes is with the owner. It proposes
+  swapping 52, 53, 54, and 55, among others; these pictures stay either way.
+- Sheet 17 (59–62) was cropped the same way. 61 Croque madame needs a redo
+  if it stays: the turkey came out pink and could pass for ham.
+
+---
+
+## 30. 2026-10-22 — Swaps to remove near-repeats
+
+- The owner approved swapping every near-repeat found in a check of all 75
+  dishes:
+  - 52 Carrot-apple slaw → **Baked shoestring fries** (repeated 35's
+    coleslaw)
+  - 53 Guacamole → **Chimichurri steak**, Argentine (too close to 3's pico)
+  - 54 Bruschetta → **Tuna salad sandwiches** (raw chopped tomato again)
+  - 36 Chicken noodle soup → **Matzo ball soup from a whole chicken**, and
+    55 → **Ratatouille**, French (two chicken soups)
+  - 60 Sloppy joes → **Honey-garlic chicken**, Chinese-American (repeated
+    33's chili)
+  - 61 Croque madame → **Chicken and spinach crêpes**, French (repeated 57's
+    grilled cheese)
+  - 62 Chicken gumbo → **Japanese chicken curry**, roux made from scratch
+    (repeated 34)
+  - 34 Jambalaya → **Red beans and rice** (repeated 67's jollof)
+  - 64 Scones → **Baked beef empanadas**, Argentine (repeated 38's biscuits)
+  - 72 Chapati → **Ugali with sukuma wiki**, Kenyan (repeated 19's naan)
+  - 73 Peri-peri chicken → **Malva pudding**, South African, now in
+    Desserts (repeated 13's jerk chicken)
+  - 48 Southern fried chicken → **Fish and chips**, British (repeated 23's
+    katsu)
+- The §4.0 pick-one table and the unit tables are updated, with food-rule
+  notes: curry roux from scratch (store blocks can contain pork or beef fat),
+  no lard in empanada dough, chicken andouille in the red beans, and no beef
+  dripping for frying. Gumbo's adult hands-on rating went with it; fish and
+  chips is adult hands-on.
+- Pictures: `55-matzo-ball-soup.png` became `36-matzo-ball-soup.png`.
+  Pictures of dishes swapped out moved to `content/images/dishes/retired/`,
+  and `tools/dish-sheets.txt` and the licenses follow them.
+- Cuisines: Argentine (Latin America page) and Chinese-American (United
+  States page) added; Mozambican removed.
+- The borderline pairs (tinga and pulled chicken, yassa and tagine, bobotie
+  and meatloaf, the tortilla dishes) stay as they are.
+- Sheet 18 (63–66: rugelach, beef empanadas, challah, pizza) was cropped and
+  checked, with no unclean foods.
+- Sheet 19 (67–71: jollof, yassa, suya, peanut stew, bobotie) was cropped
+  and checked, with no unclean foods. Its plates touch, so the tool found
+  only 4 dishes. It was split by hand, and the boxes are recorded in
+  `tools/dish-sheets.txt`.
+- Sheet 20 (72–75: ugali with sukuma wiki, malva pudding, koshari,
+  kelewele) was split by hand, cropped, and checked, with no unclean foods.
+- Sheet 21 (52–55: shoestring fries, chimichurri steak, tuna salad
+  sandwiches, ratatouille) was cropped and checked. The tuna filling came out
+  pinkish; it's waiting on the owner whether it reads as tuna.
+- Sheet 22 (60, 61, 62, 34, 48: honey-garlic chicken, crêpes, Japanese
+  curry, red beans and rice, fish and chips) was split by hand, cropped, and
+  checked, with no unclean foods. **All 75 dishes now have a picture.**

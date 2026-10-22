@@ -1,0 +1,12 @@
+{
+  "skills": [
+    { "id": "building-a-sauce", "name": "Building a sauce", "idea": "Layer flavor in one pan: fat, aromatics, spices, liquid, then simmer it down.", "pin": { "shape": "shield", "color": "#C2341E", "glyph": "pot" } },
+    { "id": "poaching-eggs", "name": "Gentle eggs", "idea": "Low, steady heat sets eggs all the way through without turning them rubbery.", "pin": { "shape": "circle", "color": "#C98A1B", "glyph": "whisk" } },
+    { "id": "thin-slicing", "name": "Thin slicing", "idea": "Thin slices across the grain cook fast and stay tender.", "pin": { "shape": "hex", "color": "#7A3E8E", "glyph": "knife" } },
+    { "id": "marinating", "name": "Marinating", "idea": "A salty, sweet, or tangy soak flavors meat before it ever hits the pan.", "pin": { "shape": "circle", "color": "#2E7D7A", "glyph": "drop" } },
+    { "id": "cutting-in-fat", "name": "Cutting in cold fat", "idea": "Little pieces of cold butter turn to steam in the oven and puff dough into flaky layers.", "pin": { "shape": "shield", "color": "#22406B", "glyph": "dice" } },
+    { "id": "folding-layers", "name": "Folding for layers", "idea": "Folding dough over itself stacks the butter into thin layers.", "pin": { "shape": "hex", "color": "#B5651D", "glyph": "leaf" } },
+    { "id": "browning-butter", "name": "Browning butter", "idea": "Cooking butter past melted toasts its milk solids and makes it taste nutty.", "pin": { "shape": "circle", "color": "#B0412E", "glyph": "flame" } },
+    { "id": "creaming", "name": "Creaming", "idea": "Beating soft butter with sugar traps air, and that air makes baked things softer and lighter.", "pin": { "shape": "hex", "color": "#C9A24A", "glyph": "whisk" } }
+  ]
+}

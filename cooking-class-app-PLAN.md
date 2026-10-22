@@ -45,6 +45,7 @@ Kids, and adults taking the class, use the app through **profiles** (chef locker
   - **Land animals:** allowed only if the animal both chews the cud and has a split hoof (beef, lamb, goat, venison). Blocked: pork in every form, rabbit, and any other animal that fails either test.
   - **Water animals:** allowed only if the animal has both fins and scales (e.g. salmon, cod, tilapia, tuna, anchovy, trout). Blocked: all shellfish (shrimp, crab, lobster, clams, oysters, mussels, scallops), squid, octopus, catfish, eel, shark, and any other animal without both.
   - **Birds:** chicken, turkey, duck, and goose are allowed. The birds listed in Leviticus 11:13–19 are blocked, including birds of prey and scavengers.
+  - **Honey is allowed** (owner ruling, 2026-10-22). The bee itself isn't clean, but its honey is, the way the plan treats milk and eggs from clean animals. The rules file lists it as an allowed product, not a clean species.
   - **Insects:** blocked (the only exceptions in Leviticus 11:22 are certain locusts, which won't appear in this library).
   - **Blood** (Leviticus 3:17, 7:26–27, 17:10–14): blocked as a food or ingredient in any form, e.g. blood sausage, black pudding, morcilla, boudin noir, blood tofu.
   - **Fat** (Leviticus 3:17, 7:23): the fat of cattle, sheep, and goats is blocked, i.e. suet and tallow (including "beef dripping" sold as a fat). Fat within the meat (marbling) and the juices and drippings from cooking it are allowed.
@@ -55,6 +56,7 @@ Kids, and adults taking the class, use the app through **profiles** (chef locker
   - Lard, found in some tortillas, refried beans, biscuits, pie crusts, store-bought masa, and some shortening blends.
   - Pork sausage casings, used even on many chicken and turkey sausages. Look for collagen-cased or skinless.
   - Breakfast sausage, andouille, chorizo, bacon, pancetta, guanciale, Canadian bacon (pork by default; use beef or poultry versions).
+  - Ground dried crayfish, shrimp powder, and shrimp-flavored bouillon cubes, which many West African recipes (jollof, egusi, pepper soup) add for flavor. Leave them out; check bouillon labels.
   - Imitation crab (often pollock, but may contain crab or shellfish extract).
   - Carmine or cochineal (an insect-derived red coloring) in some candies, yogurts, and drinks.
   - Suet, in mincemeat, Christmas pudding, some dumplings, and some pastry.
@@ -93,7 +95,7 @@ Each lesson has these stages:
 1. **Intro.** A 30–45 second animated slideshow (§6.5): the finished dish, the skill, why it matters, an ingredient preview, time and safety level, and a "Let's cook" button.
 2. **Learn.** 3–6 short concept cards with a "why it works" angle. An optional quiz of 2–3 questions follows. **The quiz never blocks cooking.** The cards follow a set shape (below) so every lesson teaches how its skill carries over to other dishes.
 3. **Prep (mise en place).** An ingredient checklist with amounts scaled to the chosen servings, then an equipment checklist. Cook mode unlocks once every item is checked.
-4. **Cook mode.** One step per screen. Each step has a checkbox, a big Next control, inline timers where needed (several can run at once), a safety level, and an optional tip or "what it should look like" note. The screen stays awake for the whole cook. Some steps are food-safety checks (below).
+4. **Cook mode.** One step per screen. Each step has a checkbox, a big Next control (with hands-free options, §6.12), inline timers where needed (several can run at once), a safety level, and an optional tip or "what it should look like" note. The screen stays awake for the whole cook. Some steps are food-safety checks (below).
 5. **Plate and photo.** The camera opens directly, and the photo saves to this attempt.
 6. **Reflect.** A 1–5 rating, a "what would I change?" note, and an optional rating from whoever ate it.
 
@@ -134,9 +136,31 @@ Separate from safety levels, which are about who must be in the kitchen. These a
 
 ---
 
-## 4. Curriculum (50 dishes)
+## 4. Curriculum (75 dishes)
 
 Lessons are grouped into units by skill. International and American dishes are mixed within each unit, and breakfast dishes are spread across the units. The exact teaching order is still an open content task. **Recommendation:** go through the units in order and alternate cuisines within each unit. The safety levels below are set in the content. Parents can't change them.
+
+### 4.0 Foundation skills and choose-one lessons — Requirement (owner, 2026-10-22)
+- **Foundation skills** are the ones most other lessons build on: the knife cuts (julienne, fine chopping and mincing, dicing, slicing), heat control, building a sauce, a roux, cutting in fat, and a yeast dough.
+- **Every foundation skill is taught by at least two lessons, and a family picks one.** The two dishes come from very different cuisines, so every family can find one it will actually cook, and nobody skips the skill. Either lesson counts as done for the skill.
+- **Knife work comes first, strongly suggested.** Nearly every lesson uses it. The app nudges parents toward a Unit 1 lesson before anything else, but doesn't block them (§6.2).
+- **Parents can see foundations at a glance** (§6.2): foundation lessons are marked in the library and the queue, and choose-one lessons are shown side by side.
+- **Prerequisites:** a lesson that needs a foundation skill unlocks when either lesson teaching it is done. The exception is a lesson built on the dish itself: 39 serves 38's biscuits, so it still needs 38.
+- **Each foundation skill has three lessons to pick from** (owner, 2026-10-22). The added dishes are numbered 51–66 and sit in the same unit as the lesson they pair with; the unit tables mark each group with "pick one with". Slicing is already taught three times (27, 14, 37), so it has no added dishes.
+
+| Foundation skill | Pick one of |
+|---|---|
+| Julienne | 1 Spring rolls · 51 Chicken fajitas · 52 Baked shoestring fries |
+| Fine chopping | 2 Fattoush · 53 Chimichurri steak · 54 Tuna salad sandwiches |
+| Dicing | 3 Pico + fish tacos · 55 Ratatouille · 56 Minestrone |
+| Heat control | 28 French omelet · 57 Grilled cheese + tomato soup · 58 Challah French toast |
+| Building a sauce | 4 Shakshuka · 59 Spaghetti marinara · 60 Honey-garlic chicken |
+| Roux | 32 Mac and cheese · 61 Chicken and spinach crêpes · 62 Japanese chicken curry |
+| Cutting in fat | 38 Buttermilk biscuits · 63 Rugelach · 64 Baked beef empanadas |
+| Yeast dough | 42 Cinnamon rolls · 65 Challah · 66 Homemade pizza |
+| Slicing | 27, 14, and 37 already teach it |
+
+- Prerequisites that name 32, 38, or 42 for the skill now accept any lesson in that group. 39 still needs 38 itself, because it's served on those biscuits.
 
 ### Unit 1 — Knife work and assembly
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -146,6 +170,12 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 3 | Pico de gallo + Baja fish tacos | Mexican | Dicing; broiling fish | Adult nearby | Cod/tilapia. Broiled, not battered and fried: frying is first taught in 23 |
 | 26 | Chicken Caesar + homemade dressing & croutons | American | Whisked dressing, cubing bread | Adult nearby | Pasteurized eggs or mayo base |
 | 27 | Smash burgers + quick pickles | American | Thin slicing, quick pickle, high-heat sear | Adult nearby | |
+| 51 | Chicken fajitas | Tex-Mex | Julienne: peppers and onions in thin strips · *pick one with 1, 52* | Adult nearby | Check tortillas for lard |
+| 52 | Baked shoestring fries | American | Julienne: potatoes into thin sticks · *pick one with 1, 51* | Adult nearby | Baked, not fried |
+| 53 | Chimichurri steak | Argentine | Fine chopping: parsley, garlic, oregano · *pick one with 2, 54* | Adult nearby | Steak to 145°F |
+| 54 | Tuna salad sandwiches | American | Fine chopping: celery, onion, pickles, herbs · *pick one with 2, 53* | Adult nearby | Tuna is clean (fins and scales) |
+| 55 | Ratatouille | French | Dicing: eggplant, zucchini, pepper, tomato · *pick one with 3, 56* | Adult nearby | |
+| 56 | Minestrone | Italian | Dicing · *pick one with 3, 55* | Adult nearby | |
 
 ### Unit 2 — Stovetop basics
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -160,6 +190,12 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 30 | Breakfast burritos (breakfast) | American | Timing several components, rolling | Adult nearby | Beef chorizo or turkey sausage; check casings, or use bulk |
 | 31 | Eggs Benedict (breakfast) | American | Poaching eggs, hollandaise | Adult nearby | Turkey bacon or smoked salmon. Pasteurized eggs for the hollandaise. Prereq: 8 |
 | 32 | Stovetop mac and cheese | American | Roux → béchamel → cheese sauce | Adult nearby | Foundation for every roux lesson |
+| 57 | Grilled cheese + tomato soup | American | Heat control · *pick one with 28, 58* | Adult nearby | |
+| 58 | Challah French toast | Jewish | Heat control · *pick one with 28, 57* | Adult nearby | Store-bought challah, or from 65 |
+| 59 | Spaghetti marinara | Italian | Building a sauce · *pick one with 4, 60* | Adult nearby | |
+| 60 | Honey-garlic chicken | Chinese-American | Building a sauce · *pick one with 4, 59* | Adult nearby | Honey is allowed (§2.1) |
+| 61 | Chicken and spinach crêpes | French | Roux → béchamel, crêpe batter · *pick one with 32, 62* | Adult nearby | |
+| 62 | Japanese chicken curry | Japanese | Roux with curry powder, from scratch · *pick one with 32, 61* | Adult nearby | Make the roux from scratch: store-bought curry blocks can contain pork or beef fat |
 
 ### Unit 3 — Spices and flavor bases
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -170,8 +206,11 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 12 | Butter chicken | Indian | Marinating, finishing with cream | Adult nearby | |
 | 13 | Jerk chicken | Jamaican | Wet marinade, broiling | Adult nearby | Habanero or jalapeño |
 | 33 | Beef chili | American | Batch browning, toasting spices | Adult nearby | |
-| 34 | Chicken & sausage jambalaya | Louisiana | Onion/celery/pepper base | Adult nearby | Chicken andouille; check casings; no shrimp |
+| 34 | Red beans and rice | Louisiana | Onion/celery/pepper base, simmering beans until creamy | Adult nearby | Chicken andouille instead of ham hock; check casings |
 | 35 | BBQ pulled chicken + coleslaw | American | Dry rub, reducing a sauce | Adult nearby | |
+| 67 | Jollof rice with chicken | Nigerian | Blended pepper base, cooking rice in the sauce | Adult nearby | Scotch bonnet → jalapeño. No dried crayfish or shrimp bouillon |
+| 70 | Peanut stew (maafe) | Malian | Building a one-pot stew | Adult nearby | Peanut butter; carries the peanut tag |
+| 74 | Koshari | Egyptian | Building a dish in layers, crispy onions | Adult nearby | Lentils, rice, pasta, tomato sauce |
 
 ### Unit 4 — Breaking down and slicing meat, marinades
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -179,8 +218,10 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 14 | Beef bulgogi | Korean | Thin slicing (partly frozen), marinating | Adult nearby | Asian pear sub: Bosc pear or apple |
 | 15 | Lomo saltado | Peruvian | Beef stir-fry | Adult nearby | Aji amarillo sub: yellow bell pepper + cayenne |
 | 16 | Chicken tinga tacos | Mexican | Braising, shredding | Adult nearby | |
-| 36 | Chicken noodle soup from a whole chicken | American | Breaking down a bird, making stock | Adult nearby | |
+| 36 | Matzo ball soup from a whole chicken | Jewish | Breaking down a bird, making stock | Adult nearby | Oil or chicken schmaltz in the matzo balls |
 | 37 | Philly cheesesteak | American | Thin slicing (deliberate repeat of 14) | Adult nearby | Prereq: 14 |
+| 68 | Chicken yassa | Senegalese | Citrus-mustard marinade, slow-cooked onions | Adult nearby | |
+| 69 | Suya (spiced beef skewers) | Nigerian | Thin slicing, dry rub, broiling | Adult nearby | Ground-peanut spice rub; carries the peanut tag |
 
 ### Unit 5 — Dough and batter
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -194,6 +235,11 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 40 | Blueberry muffins (breakfast) | American | Muffin method, avoiding overmixing | Adult nearby | |
 | 41 | Skillet cornbread | American | Preheated skillet | Adult nearby | Pairs with 33 |
 | 42 | Cinnamon rolls (breakfast) | American | First yeast dough: kneading, proofing, shaping | Adult nearby | |
+| 72 | Ugali with sukuma wiki | Kenyan | Stiff cornmeal dough, braised greens | Adult nearby | White cornmeal and collard greens |
+| 63 | Rugelach | Jewish | Cutting in fat · *pick one with 38, 64* | Adult nearby | Butter and cream cheese dough |
+| 64 | Baked beef empanadas | Argentine | Cutting in fat, filling and crimping · *pick one with 38, 63* | Adult nearby | Butter dough, not lard |
+| 65 | Challah | Jewish | Yeast dough: kneading, proofing, braiding · *pick one with 42, 66* | Adult nearby | Honey is allowed (§2.1) |
+| 66 | Homemade pizza | Italian | Yeast dough: kneading, stretching · *pick one with 42, 65* | Adult nearby | Veggie, or turkey pepperoni |
 
 ### Unit 6 — Oven, roasting, frying
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -207,7 +253,9 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 45 | Roast chicken + pan gravy | American | Roasting, resting, carving, gravy | Adult nearby | Prereq: 32 |
 | 46 | Chicken pot pie | American | Roux filling + pie crust | Adult nearby | Prereq: 32, 22 |
 | 47 | Pot roast | American | Long oven braise | Adult nearby | |
-| 48 | Southern fried chicken | American | Buttermilk soak, deep-fry with thermometer | **Adult hands-on** | |
+| 48 | Fish and chips | British | Batter, deep-frying with a thermometer | **Adult hands-on** | Cod or haddock; fry in vegetable oil, never beef dripping |
+| 71 | Bobotie | South African | Spiced ground beef baked under an egg custard | Adult nearby | Ground beef, curry powder, apricot jam |
+| 75 | Kelewele (spiced plantains) | Ghanaian | Shallow frying | **Adult hands-on** | Plantains from the produce aisle |
 
 ### Desserts
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -215,12 +263,13 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 25 | Churros with chocolate *(alt: panna cotta)* | Spanish/Mexican *(Italian)* | Choux dough, frying *(gelatin swap)* | **Adult hands-on** *(Adult nearby)* | Panna cotta: beef gelatin or agar-agar |
 | 49 | Brown butter chocolate chip cookies | American | Browning butter, creaming | Adult nearby | |
 | 50 | Apple pie with lattice | American | Advanced pastry | Adult nearby | Prereq: 22 |
+| 73 | Malva pudding | South African | A sponge pudding soaked in a warm butter-cream sauce | Adult nearby | Apricot jam |
 
 ### Capstone
 - **Multi-dish meal timing.** Example: bulgogi + fried rice + spring rolls. Requires a "plan the timeline" stage that the single-dish lessons don't have. Design it after the core lesson player works.
 
 ### Equipment note
-None of the 50 dishes requires a stand mixer. Lessons that use one in typical recipes (cinnamon rolls, cookies, churros, pão de queijo) must be written for hand mixing or hand kneading.
+None of the 75 dishes requires a stand mixer. Lessons that use one in typical recipes (cinnamon rolls, challah, pizza dough, cookies, churros, pão de queijo) must be written for hand mixing or hand kneading.
 
 ---
 
@@ -254,7 +303,7 @@ None of the 50 dishes requires a stand mixer. Lessons that use one in typical re
 - **Icons:** custom SVG illustrations in one consistent style. Don't rely on emoji as the main iconography.
 
 ### 5.3a Art production (recommendation)
-The themed components need a lot of art, and every theme added later (§5.2) needs its own set: a dish illustration for every lesson, an icon for every ingredient (they hop into the bowl) and every tool (pegboard), a stamp per region, a pin per skill, and avatar outfits per rank.
+The themed components need a lot of art, and every theme added later (§5.2) needs its own set: a dish illustration for every lesson, an icon for every ingredient (they hop into the bowl) and every tool (pegboard), a stamp per region, a pin per skill, a small drawing per kitchen word (§6.1), and avatar outfits per rank.
 - Phase 0 sets the style and draws the core set: the components in §5.4, one generic icon per store section, and one per tool category.
 - An ingredient or tool without its own icon falls back to its category's generic icon. The linter warns about fallbacks; it doesn't fail on them.
 - **Dish illustrations come from the owner,** made with an AI image tool as sheets of several dishes per image. Claude crops each sheet into one image per dish. Source sheets live in `content/images/source/`.
@@ -262,7 +311,13 @@ The themed components need a lot of art, and every theme added later (§5.2) nee
 - Every image that isn't original carries its license in `content/images/LICENSES.md`, the same as music.
 - **Claude draws the rest of the art** as SVG (components, icons, stamps, pins). The Phase 0 showcase is the test: if the owner isn't happy with it there, the other options are a commissioned illustrator or a licensed icon set restyled to match.
 
-### 5.4 Themed components (Chef's Passport)
+### 5.4 Themed components (Chef's Passport) — Requirement (look approved in Phase 0b)
+Palette: cork, cream paper, ink, tomato red, butter, basil, and passport navy. **Lilita One** for titles; **Caveat** (handwriting) for notes and labels only, never under 20px; body text in **Nunito**, ≥ 20px in cook mode.
+
+- **Stamp pages by region:** East & Southeast Asia, Middle East & North Africa, South Asia, Sub-Saharan Africa, Europe, Latin America & Caribbean, and the United States. Half the course is American, so the US page is the biggest. Churros (25, Spanish/Mexican) go on the Latin America page with the Mexican stamp. Each cuisine has one stamp design, so every Japanese dish gets the same stamp with its own date.
+- **World map:** the owner's illustrated map, split into one layer per region by `tools/split-world-map.py`, so the app can color each region. A region turns butter when it has its first stamp and basil when every stamp is in.
+- **Rank outfits:** Kitchen Apprentice wears a paper cap and plain apron; Prep Cook a short chef's hat and butter apron; Line Cook a taller hat, red neckerchief, and striped apron; Sous Chef a pleated hat, buttoned jacket, and navy apron; Head Chef the tallest hat with a gold band.
+
 | Component | Treatment |
 |---|---|
 | Lesson card | A taped recipe card showing the dish illustration, title in the display font, and a skill line handwritten underneath |
@@ -272,17 +327,17 @@ The themed components need a lot of art, and every theme added later (§5.2) nee
 | Timers | A **kitchen dial timer** that counts down, wobbles and rings at zero. Several timers sit side by side on a "counter" strip, each labeled with what it's timing |
 | Safety level | An illustrated **banner** across the top of a step (chef-hat helper icon for adult nearby, oven-mitt hands for adult hands-on) with one short line of text. **Not a pill** |
 | Progress within a lesson | A **measuring cup** or pot that fills as steps are completed |
-| Course progress | The **passport book** and world map (§5.2) |
+| Course progress | The **passport book**, one page per region with a tab for each, and the world map (§5.2) |
 | Skills earned | **Enamel-pin or embroidered-patch** shapes (circles, shields, hexagons) pinned to an apron. Not text chips |
 | Rating | 1–5 **chef hats** or wooden spoons, not stars |
 | Serving picker | A "Serves" line on the recipe card with big − and + buttons and a row of little plates, one per serving (§6.6) |
 | Test-cooked | An inked **test-kitchen stamp** on the lesson card, for a lesson a parent in this family marked test-cooked. Not a pill |
-| Helper | The helper's (§6.8) avatar on a floating **Ask** button, and a chat styled to the theme |
-| Photos | Taking a photo drops a **Polaroid** onto a corkboard. The gallery is a corkboard or scrapbook |
+| Helper | The helper's (§6.8) chef avatar on a floating **Ask** button, and a chat on recipe cards (the helper) and sticky notes (the kid) |
+| Photos | Taking a photo pins a **Polaroid** to a corkboard. The gallery is the corkboard |
 | Rank up | A full-screen celebration where the hat upgrades, with a confetti or sprinkles burst |
 | Profile picker | Each profile has a **chef's locker** with its avatar and apron. A shared profile's locker shows everyone on it |
 
-### 5.4a Themed components (Kitchen Quest) — Recommendation
+### 5.4a Themed components (Kitchen Quest) — Requirement (look approved in Phase 0)
 Drawn from the Phase 0 mockup. Palette: night navy, gold, mana teal, and ember red. Pixel-style display font (e.g. **Pixelify Sans**) for headings and labels only; body text stays in **Nunito**, ≥ 20px in cook mode. Panels have cut (octagonal) corners, not rounded ones.
 
 | Component | Treatment |
@@ -335,9 +390,11 @@ Do **not** use:
 - **Request a lesson** (recommendation): a kid can tap "I want to make this," which adds a request to the parent's queue to approve or decline
 - **Adult profiles don't ask.** On an adult profile the button is **Cook this**: it queues the lesson for that profile straight away, with no approval and no parent PIN, and it goes on the shopping list like any queued lesson. A shared profile with a kid on it is a kid profile, so it still asks
 - Screen Wake Lock during Prep and Cook
+- **Kitchen words** (recommendation, approved): cooking words in step text (dice, mince, simmer, fold the dough…) are underlined. Tapping one opens a card with what it means in kid terms, including a size or look they can picture ("smaller than a grain of rice"), a small drawing, and the lesson that practices it. The card is drawn by the profile's theme, like the Why? card. The words live in `content/terms.json` (§7.1), and the linter won't let a lesson use a cooking word that isn't defined there (§7.4)
 - Progress, ranks, skills earned, and gallery, drawn by the profile's theme (§5.4, §5.4a)
 
 ### 6.2 Parent features
+- **Foundations first** (§4.0): foundation lessons carry a foundation marker (an icon and a word, never a pill) in the library and the queue. Choose-one lessons sit side by side with "Pick one." A new family's queue suggests a Unit 1 knife lesson first. Queuing anything else before any knife lesson shows a short note: "Most lessons use knife work. We suggest a Unit 1 lesson first." It's a suggestion, not a block. The parent tour (§6.9) has a card on foundations.
 - **Queue:** assign the next 1–3 lessons per profile, or approve a profile's request (§6.1). Each queued lesson is for one or more profiles (§1), with a serving count (defaults to the family's) and an optional planned date
 - **Shopping list** (§6.3)
 - **Safety review:** before approving a lesson, see every step marked adult-nearby or adult-hands-on
@@ -346,7 +403,7 @@ Do **not** use:
 - **Family recipes** (bonus, §6.10): add the family's own recipes, submit them for the shared library, and add recipes from the community directory
 - **Mark test-cooked:** after cooking a lesson themselves, a parent can mark it test-cooked for their family (§7). Optional; lessons don't need it to be shown to kids
 - **Pantry staples:** a list of ingredients always on hand, which drop off the shopping list
-- **Family settings:** family name, profiles (add, rename, avatar, theme, who's on each), dietary filters (§2.1), default servings, other parent logins
+- **Family settings:** family name, profiles (add, rename, avatar, theme, who's on each), dietary filters (§2.1), default servings, voice step control (off until turned on, §6.12), other parent logins
 
 ### 6.2a Owner features
 - **Sign-up requests:** a queue of families asking to join (§8.3). Approving one emails them a sign-up code; declining sends nothing
@@ -469,6 +526,20 @@ Parents and adult learners report what's wrong in a lesson, and the owner pushes
 - **Folding patches into the files.** Live patches sit on top of the content files. From time to time, in a session, Claude writes the applied patches into the lesson files, runs the linter, and clears them from the database. The owner doesn't have to do anything for this.
 - **Bigger changes** (a new ingredient, a new step, a different method) are logged on the fix request as "needs a content change" and are made in a session or in the GitHub web editor.
 
+### 6.12 Hands-free step advance — Recommendation
+Kids have messy hands mid-cook, and the main kitchen device is likely an Android phone propped on the counter.
+- **For every device (Phase 2):**
+  - **Tap zone:** the whole lower half of a cook-mode step advances, so a knuckle or wrist works.
+  - **Page-turner remote:** a Bluetooth page-turner (the kind musicians use) acts as a keyboard, so cook mode treats its keys (arrows, Page Up/Down, Space, Enter) as Next and Back. It works offline, with no mic.
+- **Voice (Later):** short commands: "next," "back," and "again" (reads the step aloud).
+  - **Requirement: voice is off until a parent turns it on** for the family in family settings, behind the parent PIN. Chrome usually sends what the mic hears to Google, so it's the parent's choice.
+  - Uses the browser's built-in speech recognition. **Android Chrome first.**
+  - The mic button shows only where the device supports recognition, checked by feature, not by browser name. Where it's missing, nothing breaks; the tap zone and remote still work.
+  - **No "switch to Chrome" prompt on iPhone or iPad.** Every iOS browser runs on Safari's engine, so Chrome there gains nothing. iPhone voice may be added later as a "try it" feature if Safari families ask for it.
+  - Chrome usually sends the audio to Google to recognize it. When the connection drops, voice pauses quietly with a small "voice paused, no connection" note, and taps keep working.
+  - Listening pauses while the app reads a step aloud, so it doesn't hear itself.
+  - **Food-safety checks (§3) need a tap.** A stray "next" can't pass a doneness check.
+
 ---
 
 ## 7. Content as data
@@ -483,7 +554,11 @@ content/
   ingredients.json        # canonical ingredient registry
   equipment.json          # tools: id, name, icon, category
   skills.json             # skill pins: id, name, pin shape
-  cuisines.json           # cuisine → passport region
+  terms.json              # kitchen words: the word, its forms, what it means, the lesson that teaches it
+  cuisines.json           # passport regions, and cuisine → region
+  units.json              # unit numbers and names (7 is Desserts)
+  schema/                 # JSON Schemas for the registries and lesson files
+  rules/                  # clean-species allowlist, blocked words, allowed phrases, cooking words that need a kitchen-words entry
   lessons/
     01-spring-rolls.json
     ...
@@ -555,12 +630,19 @@ content/
   ]
 }
 ```
-- `version` goes up whenever the lesson's steps or ingredients change. Attempts record the version they were cooked from.
+- `version` goes up whenever a **released** lesson's steps or ingredients change. Attempts record the version they were cooked from. Before release, lessons stay at version 1 however often they're edited.
 - Step `id`s are stable. Inserting a step never changes another step's `id`, so saved progress in a lesson stays attached to the right step.
 - `scaling` is `{ "mode": "free" }` or `{ "mode": "fixed", "multipliers": [0.5, 1, 2], "notes": { "2": "Use two sheet pans" } }` (§6.6).
 - `substitutions[].reason` is `"availability"` or a diet tag (e.g. `"dairy"`). Diet-reason substitutions are the ones a family filter can apply (§2.1).
 - `learn.why` cards have ids that steps point to with `why`. The "same move, other dishes" card isn't written by hand; it's built from `skills` across all lessons. `skills.json` holds each skill's one-line idea for the skill detail view.
 - `cuisine` is an ID in `cuisines.json`, which maps it to a passport region. `skills` are IDs in `skills.json` and drive the skill pins. `skill` is the display line.
+
+**Added in Phase 1** (the schemas in `content/schema/` are the full reference):
+- **Steps:** `type` is `step`, `doneness`, or `wash`. `hazard` is the short line an adult profile sees ("Hot stove"), required on every step that isn't solo. `handles` lists the raw ingredients a step touches. A doneness `target` is a thermometer temperature or, for egg-only baking, a `look` (see §7.4).
+- **Step text** can say `{n:egg}` (the scaled count) or `{qty:egg}` (amount and label), so "1 large egg" or "2 large eggs" comes out right at every size.
+- **Ingredient lines:** `"amount": null` with a `text` ("a few grinds") never scales, and `"scale": false` keeps an amount fixed ("for the pan"). `min` sets a count's floor.
+- **Registry:** `countLabel` gives counted items their words ("large egg", "large eggs"). `units` defines package units ("28-oz can"). `"measure": "butter"` shows butter as sticks and tablespoons.
+- `learn.move` is a card with a title and body. Free scaling can carry pan notes from a serving count up (`"notes": [{ "from": 9, "text": "…" }]`).
 
 ### 7.4 Content linter (runs at build time and in CI)
 The linter must reject content when:
@@ -577,7 +659,13 @@ The linter must reject content when:
 - a lesson uses an ingredient with `rawHandling` but has no doneness check step, or has no wash-hands step after the raw-handling step (§3)
 - step IDs within a lesson aren't unique, or a step with a timer has no `timerLabel`
 - a core lesson has no `learn.move`, no `learn.why` card, or no `learn.wrong` entry, or a step's `why` points to a card that doesn't exist
-- a fixed-scaling lesson has no multipliers
+- a fixed-scaling lesson has no multipliers, or they don't include 1×
+- a step that `handles` raw food isn't followed directly by a `wash` step, or a raw ingredient is never marked as handled
+- a lesson with raw meat, poultry, or fish has no doneness step with a thermometer temperature. A lesson whose only raw ingredient is egg baked into a dough (cookies) may use a visual doneness check instead (owner approved)
+- a step that isn't solo has no `hazard`
+- a callback points to a lesson that doesn't exist
+- the lesson can't be scaled and filled cleanly at every serving size it offers
+- step text uses a cooking word from `rules/kitchen-words.json` that `terms.json` doesn't define yet, or two kitchen words claim the same form
 
 The linter must **warn** (without failing the build) when:
 - a lesson uses an ingredient with a `watch` note
@@ -671,15 +759,15 @@ Each phase should be deployed and usable before the next begins.
 | **0b. Second theme** | Chef's Passport: its tokens, its core art set, and its version of every component on the showcase page. Built as soon as Phase 0 is approved | A profile can switch between Kitchen Quest and Chef's Passport, and the owner approves the Passport look |
 | **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
 | **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, sign-up codes, keyword, and the request queue, parent login, sessions, password reset email (Resend), parent PIN, profiles (single or shared) and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up with codes, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
-| **2. Lesson player** | Learn, Prep, Cook mode, food-safety checks, timers, wake lock, attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
+| **2. Lesson player** | Learn, Prep, Cook mode, kitchen words, food-safety checks, timers, wake lock, tap zone and page-turner remote (§6.12), attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
 | **3. Parent planning & shopping** | Queue (with kid requests), safety review, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
 | **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download | A photo taken on the tablet shows in the gallery on the parent's phone |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
-| **7. Content fill** | The remaining 46 lessons, written in separate content sessions | All 50 lessons pass the linter |
+| **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
 | **8. Helper & first run** | First-run wizard (§6.9) and the helper (§6.8), once both are specced | A new family goes from sign-up to their first queued lesson through the wizard, and kids and parents can each finish a helper task |
 | **9. Family recipes (bonus)** | My recipes with the guided entry flow, submission and owner review, the community directory (§6.10) | A parent enters a recipe through the flow, a kid cooks it, and the owner releases a submitted one to the directory, where another test family finds and adds it |
-| **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, voice "next step," CSV export to the homeschool management system | — |
+| **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, voice "next step" (§6.12), CSV export to the homeschool management system | — |
 
 **Testing (every phase):** automated tests run in CI alongside the linter. At minimum they cover family scoping (no endpoint returns another family's rows or photos), lesson patches (the hard block and food-safety checks reject a bad patch, and revert restores the lesson), scaling and rounding, unit conversion, shopping-list merging, and the migration runner.
 

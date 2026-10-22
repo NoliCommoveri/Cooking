@@ -1,0 +1,37 @@
+{
+  "note": "Animals whose meat, milk, or eggs may be used (plan \u00a72.1). allowedProducts are products allowed even though the animal itself isn't. Adding to either list changes \u00a72.1 and needs the owner's say-so.",
+  "species": [
+    "cattle",
+    "sheep",
+    "goat",
+    "deer",
+    "bison",
+    "chicken",
+    "turkey",
+    "duck",
+    "goose",
+    "salmon",
+    "cod",
+    "tilapia",
+    "tuna",
+    "anchovy",
+    "trout",
+    "bonito",
+    "pollock",
+    "haddock",
+    "halibut",
+    "sardine"
+  ],
+  "fatBlocked": [
+    "cattle",
+    "sheep",
+    "goat"
+  ],
+  "allowedProducts": [
+    {
+      "source": "honeybee",
+      "part": "honey",
+      "why": "Owner ruling 2026-10-22: honey is allowed."
+    }
+  ]
+}

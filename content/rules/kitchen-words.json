@@ -1,0 +1,23 @@
+{
+  "note": "Cooking words a step can't use until content/terms.json defines them (plan \u00a77.4). Add a term first, then use the word.",
+  "words": [
+    "sift",
+    "drizzle",
+    "deglaze",
+    "blanch",
+    "baste",
+    "proof",
+    "temper",
+    "caramelize",
+    "emulsify",
+    "roux",
+    "fillet",
+    "butterfly",
+    "score",
+    "render",
+    "reduce the sauce",
+    "al dente",
+    "fold in",
+    "beat in"
+  ]
+}
