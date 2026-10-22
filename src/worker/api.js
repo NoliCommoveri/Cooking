@@ -322,7 +322,9 @@ on('GET', '/api/library', async (req, env) => {
   const live = await livePatches(env.DB);
   const minutes = (L) => live[L.id]?.patches.findLast((p) => p.path === 'totalMinutes')?.value ?? L.totalMinutes;
   // Lesson numbers in the suggested course order (§4.1).
-  const { labels, total } = numberCourse(LIBRARY.course);
+  const { labels: numbered, total } = numberCourse(LIBRARY.course);
+  // Appointed Times lessons are A1, A2… beside the numbered course (§6.19).
+  const labels = { ...numbered, ...LIBRARY.seasonalLabels };
   const lessons = [];
   let hidden = 0;
   for (const L of LIBRARY.lessons) {
@@ -332,10 +334,10 @@ on('GET', '/api/library', async (req, env) => {
       id: L.id, label: labels[L.id], unit: L.unit, title: L.title, image: L.image, cuisine: LIBRARY.cuisines[L.cuisine] ?? L.cuisine,
       skill: L.skill, servings: L.servings, totalMinutes: minutes(L),
       substitutions: view.applied.map((x) => ({ for: name(x.for), use: name(x.use) })),
-      left_out: view.leftOut.map(name),
+      left_out: view.leftOut.map(name), unleavened: L.unleavened,
     });
   }
-  return { lessons, hidden, units: LIBRARY.units, labels, total };
+  return { lessons, hidden, units: LIBRARY.units, seasonal: LIBRARY.seasonal, labels, total };
 });
 
 // ---------- cooks (attempts, §1, §8.4) ----------

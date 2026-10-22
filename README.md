@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [71. 2026-10-22 — Nothing cooked on the Sabbath counts; Appointed Times settled](docs/build-log.md#71-2026-10-22--nothing-cooked-on-the-sabbath-counts-appointed-times-settled)
+**Latest build log entry:** [72. 2026-10-22 — Phase 4c, slice 1: the Appointed Times unit and the leaven check](docs/build-log.md#72-2026-10-22--phase-4c-slice-1-the-appointed-times-unit-and-the-leaven-check)
 
 ## Current features
 
@@ -31,6 +31,8 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Syllabus** (`/syllabus`): the course as a homeschool course, with objectives, units, hours, pacing, a suggested credit, and the rubric. Printable.
 - **Course outline** (`content/course.json`): all 75 planned dishes in teaching order, with their skills and prerequisites, checked by the linter.
 - **Lesson numbers** (`src/content/course.js`): come from the course order; pick-one choices share a number (1a, 1b, 1c), 59 in all.
+- **Appointed Times unit** (unit 8 in `content/units.json`): lessons beside the numbered course, labeled A1, A2: unleavened flatbread and cottage cheese crescent rolls so far.
+- **Unleavened badge** (`src/content/leaven.js`, `content/rules/leaven.json`): on every lesson whose ingredients and steps have no leaven.
 - **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN.
 - **Owner screens**: the beta word, the family list, setting a parent's password, and fix requests.
 - **Ops page** (`/ops`): migrations, the owner flag, backup download and restore, clear everything, and remove or restore one family.

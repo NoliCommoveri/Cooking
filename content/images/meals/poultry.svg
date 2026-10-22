@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Poultry">
+<title>Poultry</title>
+<g stroke="#3b2416" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+<ellipse cx="120" cy="206" rx="92" ry="14" fill="#000" fill-opacity=".10" stroke="none"/>
+<ellipse cx="120" cy="150" rx="98" ry="50" fill="#f4efe6"/><ellipse cx="120" cy="146" rx="74" ry="34" fill="#fffaf2" stroke-width="2"/>
+<path d="M62 146 Q56 104 108 98 Q164 94 176 128 Q182 158 140 166 Q90 172 62 146 Z" fill="#d38b3c"/>
+<path d="M82 132 Q86 110 116 108 Q150 108 160 126" fill="none" stroke="#f0b866" stroke-width="5"/>
+<path d="M168 140 Q192 130 198 148 Q200 162 182 160 Q170 158 166 150 Z" fill="#c97a32"/><circle cx="202" cy="148" r="6" fill="#fffaf2"/>
+<path d="M66 148 Q44 150 42 164 Q44 176 60 170 Q70 164 74 156 Z" fill="#c97a32"/><circle cx="38" cy="168" r="6" fill="#fffaf2"/>
+<g fill="#5b9a4d" stroke-width="2"><ellipse cx="104" cy="172" rx="8" ry="4"/><ellipse cx="128" cy="174" rx="8" ry="4" transform="rotate(15 128 174)"/></g>
+</g>
+</svg>

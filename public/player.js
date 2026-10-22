@@ -142,7 +142,9 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // onReflect(cookId, reflection): saves one profile's reflection (§3).
 export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null }) {
   const [R, L] = await Promise.all([getRegistry(), getLesson(lessonId)]);
-  const num = (id) => (labels ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null;
+  // Appointed Times lessons keep their A1, A2 labels whatever the course plan (§6.19).
+  const seasonal = (id) => R.seasonal?.includes(R.lessons.find((x) => x.id === id)?.unit);
+  const num = (id) => (labels && !seasonal(id) ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null;
   // "lesson 8a, Shakshuka", or just the title for a dish the family took out of its plan.
   const lessonRef = (id, title) => (num(id) ? `lesson ${num(id)}, ${title}` : title);
   let myFixes = [];
@@ -294,12 +296,12 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
       ? `<div class="${quest ? 'serve' : 'p-serve'} crew"><span class="${quest ? 'lbl' : 'p-lbl'}">Cooking with someone?</span><div class="${quest ? 'sizes' : 'p-sizes'}" role="group" aria-label="Who's cooking">${crew.map((p) => `<button type="button" class="${quest ? 'size' : 'p-size'}" role="checkbox" aria-checked="${S.with.includes(p.id)}" data-act="crew" data-id="${esc(p.id)}">${esc(p.name)}</button>`).join('')}</div></div>`
       : '';
     const top = quest
-      ? `<article class="q-panel q-card"><p class="q-kick">Path ${L.unit}${num(L.id) ? ` · Quest ${num(L.id)}${total ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
+      ? `<article class="q-panel q-card"><p class="q-kick">${R.seasonal?.includes(L.unit) ? esc(R.units[L.unit]) : `Path ${L.unit}`}${num(L.id) ? ` · Quest ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
           <h2 class="q-title">${esc(L.title)}</h2><p class="q-skill"><b>${esc(L.skill)}</b></p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${who}${swaps}
           <button type="button" class="q-btn" data-act="start">${!S.started ? 'Start quest' : 'Keep going'}</button></article>`
       : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
-          ${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
+          ${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
           <button type="button" class="p-btn" data-act="start">${!S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';

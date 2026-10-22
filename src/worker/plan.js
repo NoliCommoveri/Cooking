@@ -137,7 +137,7 @@ async function courseLessons(env, course, fam) {
   const kept = numbered.entries.flatMap((e) => e.ids);
   const shown = visible(fam);
   return {
-    plan, labels: numbered.labels, total: numbered.total, kept,
+    plan, labels: { ...numbered.labels, ...LIBRARY.seasonalLabels }, total: numbered.total, kept,
     usable: kept.filter((x) => shown.has(x)),
     unwritten: kept.filter((x) => !lessonById[x]).length,
     hidden: kept.filter((x) => lessonById[x] && !shown.has(x)).length,
@@ -268,7 +268,8 @@ export async function queueProfiles(env, fid, ids) {
   return out;
 }
 
-const suggestedLabels = numberCourse(LIBRARY.course).labels;
+// Appointed Times lessons are A1, A2… whatever the plan (§6.19).
+const suggestedLabels = { ...numberCourse(LIBRARY.course).labels, ...LIBRARY.seasonalLabels };
 
 export function itemOut(r, who, labels = suggestedLabels) {
   const L = lessonById[r.lesson_id];

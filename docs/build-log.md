@@ -1755,3 +1755,37 @@ on it.
   test run as the Friday before, so the suite, which cooks "now", passes on
   any day (checked with the clock set to a Saturday).
 - No migration; nothing for the owner to do.
+
+## 72. 2026-10-22 — Phase 4c, slice 1: the Appointed Times unit and the leaven check
+
+- **Owner rulings:** Phase 4c is being built now (family recipes and the
+  Appointed Times unit; the transcript waits). Cottage cheese crescent rolls
+  join the unit. Its lessons are labeled **A1, A2** (was: no number).
+- **Leaven** (`content/rules/leaven.json`, `src/content/leaven.js`): the
+  owner's list as words (yeast, sourdough, baking powder and soda, baker's
+  ammonia, self-rising flour, and ready-made breads, crackers, and mixes),
+  checked in ingredient names, typed-in names, and step text, with plurals and
+  a few allowed phrases ("unleavened bread", "no yeast"). Beer, soy sauce,
+  vinegar, Worcestershire, and miso aren't on it.
+- **Unleavened badge:** worked out at build time for every lesson (every
+  ingredient from the registry, none leaven), shown on kitchen cards as an
+  icon and a word. Five of the nine lessons have it.
+- **The unit** is unit 8 in `content/units.json`, marked `seasonal`, with a
+  prefix letter and its lessons in order. Its lessons aren't in
+  `course.json`, so the course, its numbers, the demo, and the syllabus are
+  unchanged. The linter checks the list matches the lessons. The kitchen
+  shows "Appointed Times · Quest A1"; course plans keep A labels as they are.
+- **Two lessons:** A1 unleavened flatbread (flour, water, oil, salt; rolled
+  thin, pricked, cooked in a dry pan) and A2 cottage cheese crescent rolls
+  (cottage cheese and butter pastry around cinnamon sugar). Their Learn cards
+  say why they belong to the feast.
+- **Registry:** water (store section `tap`: never on a shopping list, no
+  package, which the linter allows only for tap), small-curd cottage cheese
+  (with the gelatin label note), ground cinnamon, and a rolling pin.
+- **Meal-type pictures** (`content/images/meals/`, copied to
+  `public/img/meals/` by the build): meat, poultry, fish, bread, soup, salad,
+  side, dessert, drink, drawn as SVG. Both new lessons use the bread picture
+  until the owner makes their dish art.
+- Tests: 176 (leaven words, plurals, allowed phrases, the fermented foods that
+  aren't leaven, the badge, A labels, the linter's list check, water never on
+  a list).

@@ -1201,6 +1201,59 @@
       "animalPart": null,
       "rawHandling": null,
       "icon": null,
+            "watch": null
+    },
+    {
+      "id": "water",
+      "name": "Water",
+      "section": "tap",
+      "baseUnit": "ml",
+      "purchaseUnit": null,
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "cottage-cheese",
+      "name": "Small-curd cottage cheese",
+      "section": "dairy-eggs",
+      "baseUnit": "g",
+      "conversions": {
+        "cup": 225
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 454,
+        "label": "16-oz tub",
+        "many": "16-oz tubs"
+      },
+      "contains": [
+        "dairy"
+      ],
+      "animalSource": "cattle",
+      "animalPart": "milk",
+      "rawHandling": null,
+      "icon": null,
+      "watch": "Check the label for gelatin. Pick a brand made without it."
+    },
+    {
+      "id": "cinnamon-ground",
+      "name": "Ground cinnamon",
+      "section": "spices",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 70,
+        "label": "jar of ground cinnamon",
+        "many": "jars of ground cinnamon"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
       "watch": null
     }
   ]

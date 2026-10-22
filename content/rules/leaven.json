@@ -1,0 +1,14 @@
+{
+  "note": "Leaven (plan §6.19, owner's definition): a substance used to produce fermentation in dough, or a material used to produce a gas that lightens dough or batter, and ready-made foods that usually contain one. Checked in ingredient names and step text. Leaven is a badge and a filter, never the hard block. Fermented foods that aren't a raising agent (beer, soy sauce, vinegar, Worcestershire, miso) aren't leaven (owner, 2026-10-22). Plurals are matched too.",
+  "words": [
+    "yeast", "sourdough", "levain",
+    "baking powder", "baking soda", "bicarbonate of soda", "sodium bicarbonate", "baker's ammonia", "bakers ammonia", "ammonium carbonate", "hartshorn",
+    "self-rising", "self-raising",
+    "bread", "breadcrumb", "panko", "pita", "naan", "bagel", "bun", "brioche", "challah", "croissant", "english muffin",
+    "flour tortilla", "cracker", "graham cracker",
+    "cake mix", "brownie mix", "muffin mix", "pancake mix", "biscuit mix", "baking mix", "pizza dough", "pizza crust", "crescent dough"
+  ],
+  "allowedPhrases": [
+    "unleavened bread", "no yeast", "without yeast", "yeast-free", "no baking powder", "no baking soda"
+  ]
+}

@@ -5,21 +5,30 @@
 //   public/content/registry.json   ingredients, tools, skills, kitchen words, cuisines, units, and every lesson's summary
 //   public/content/lessons/*.json  each lesson file, for the lesson player
 //   public/content/course.json     all planned dishes, for the demo and syllabus pages
+//   public/img/meals/*.svg         the meal-type pictures, copied from content/images/meals
 //   public/lib/*.js                the shared scaling, unit, kitchen-word, diet, and patch code
 // The lesson files are served as plain files so the app can keep them for cooking offline.
 // Usage: node tools/build-library.js   (a test fails if any of these is out of date)
-import { writeFileSync, readFileSync, mkdirSync, rmSync } from 'node:fs';
+import { writeFileSync, readFileSync, mkdirSync, rmSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadContent } from './lint-content.js';
-import { numberCourse } from '../src/content/course.js';
+import { numberCourse, seasonalLabels } from '../src/content/course.js';
+import { unleavened } from '../src/content/leaven.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'src/worker/library-data.js');
 const CONTENT_OUT = join(ROOT, 'src/worker/content-data.js');
 export const BROWSER_LIB = ['units.js', 'scale.js', 'terms.js', 'diet.js', 'patch.js', 'course.js', 'shop.js'];
 // Lessons in course order (content/course.json), the order their numbers follow.
-const inCourse = (c) => { const at = Object.fromEntries(c.course.dishes.map((d, i) => [d.id, i])); return (a, b) => at[a.id] - at[b.id]; };
+// Lessons in a seasonal unit (Appointed Times, §6.19) aren't in the course and come after it.
+const inCourse = (c) => {
+  const at = Object.fromEntries([...c.course.dishes.map((d) => d.id), ...c.units.flatMap((u) => u.lessons ?? [])].map((id, i) => [id, i]));
+  return (a, b) => (at[a.id] ?? 1e9) - (at[b.id] ?? 1e9);
+};
+const seasonalUnits = (c) => c.units.filter((u) => u.seasonal).map((u) => u.number);
+// The Unleavened badge (§6.19), worked out from the lesson file.
+const isUnleavened = (c, L) => unleavened(L, Object.fromEntries(c.ingredients.map((i) => [i.id, i])), c.rules.leaven);
 
 // What lint() needs to check one patched lesson against everything else. The
 // registry files were linted at build time, so they're left out, and so is the
@@ -38,12 +47,12 @@ export function buildContent() {
 export function buildPublic() {
   const c = loadContent();
   const files = {};
-  const { labels } = numberCourse(c.course.dishes);
+  const labels = { ...numberCourse(c.course.dishes).labels, ...seasonalLabels(c.units) };
   // label: the lesson's number in the suggested order. The app shows each
   // family's own numbers from its course plan instead.
   const summary = c.lessons.map(({ data: L }) => ({
     id: L.id, label: labels[L.id], title: L.title, unit: L.unit, cuisine: L.cuisine, skill: L.skill, skills: L.skills,
-    image: `img/${L.image.replace(/\.png$/, '.webp')}`,
+    image: `img/${L.image.replace(/\.png$/, '.webp')}`, unleavened: isUnleavened(c, L),
   })).sort(inCourse(c));
   files['public/content/registry.json'] = JSON.stringify({
     ingredients: Object.fromEntries(c.ingredients.map((i) => [i.id, i])),
@@ -53,6 +62,7 @@ export function buildPublic() {
     cuisines: Object.fromEntries(c.cuisines.map((x) => [x.id, x])),
     regions: Object.fromEntries(c.regions.map((x) => [x.id, x])),
     units: Object.fromEntries(c.units.map((u) => [u.number, u.name])),
+    seasonal: seasonalUnits(c),
     lessons: summary,
     // Every planned dish's title, for a kitchen word practiced in a lesson not written yet.
     dishes: Object.fromEntries(c.course.dishes.map((d) => [d.id, d.title])),
@@ -62,6 +72,8 @@ export function buildPublic() {
   files['public/content/course.json'] = JSON.stringify({
     dishes: c.course.dishes.map((d) => ({ ...d, image: `img/${d.image.replace(/\.png$/, '.webp')}`, ...(written.has(d.id) ? { written: true } : {}) })),
   }) + '\n';
+  // Meal-type pictures (§6.19): shared recipes without art, and lessons waiting on theirs.
+  for (const f of readdirSync(join(ROOT, 'content/images/meals'))) files[`public/img/meals/${f}`] = readFileSync(join(ROOT, 'content/images/meals', f), 'utf8');
   for (const f of BROWSER_LIB) {
     files[`public/lib/${f}`] = `// Copied from src/content/${f} by tools/build-library.js. Don't edit here.\n` + readFileSync(join(ROOT, 'src/content', f), 'utf8');
   }
@@ -80,6 +92,7 @@ export function buildLibrary() {
       id: L.id, version: L.version, track: L.track, unit: L.unit, title: L.title,
       image: `img/${L.image.replace(/\.png$/, '.webp')}`, cuisine: L.cuisine, skill: L.skill,
       servings: L.servings, scaling: L.scaling, totalMinutes: L.totalMinutes, ingredients: lines, substitutions: subs,
+      unleavened: isUnleavened(c, L),
     };
   }).sort(inCourse(c));
   const ingredients = Object.fromEntries(c.ingredients.filter((i) => used.has(i.id))
@@ -88,6 +101,8 @@ export function buildLibrary() {
     lessons, ingredients,
     cuisines: Object.fromEntries(c.cuisines.map((x) => [x.id, x.name])),
     units: Object.fromEntries(c.units.map((u) => [u.number, u.name])),
+    seasonal: seasonalUnits(c),
+    seasonalLabels: seasonalLabels(c.units),
     dietTags: c.schemas.registries.$defs.dietTag.enum,
     // Every planned dish, for numbering a family's course plan.
     course: c.course.dishes.map(({ id, title, unit, pickOne, prereqs }) => ({ id, title, unit, ...(pickOne ? { pickOne } : {}), ...(prereqs ? { prereqs } : {}) })),
@@ -99,6 +114,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   writeFileSync(OUT, buildLibrary());
   writeFileSync(CONTENT_OUT, buildContent());
   rmSync(join(ROOT, 'public/content'), { recursive: true, force: true });
+  rmSync(join(ROOT, 'public/img/meals'), { recursive: true, force: true });
   for (const [path, text] of Object.entries(buildPublic())) {
     mkdirSync(dirname(join(ROOT, path)), { recursive: true });
     writeFileSync(join(ROOT, path), text);

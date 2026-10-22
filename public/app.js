@@ -325,9 +325,14 @@ async function kitchen(id) {
     const cooked = done ? el('p', { class: quest ? 'q-swap k-cooked' : 'p-swap k-cooked' },
       art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"/></svg>'),
       done.times === 1 ? 'Cooked once' : `Cooked ${done.times} times`) : null;
+    // The Unleavened badge (§6.19): an icon and a word, never a pill.
+    const unlv = L.unleavened ? el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-cooked` },
+      art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-unleavened"/></svg>'), 'Unleavened') : null;
+    // A seasonal unit (Appointed Times) has its own labels, A1, A2.
+    const seasonal = lib.seasonal?.includes(L.unit);
     if (quest) {
       return el('article', { class: 'q-panel q-card' },
-        el('p', { class: 'q-kick' }, `Path ${L.unit} · Quest ${L.label}`),
+        el('p', { class: 'q-kick' }, `${seasonal ? lib.units[L.unit] : `Path ${L.unit}`} · Quest ${L.label}`),
         el('div', { class: 'q-win' }, el('img', { src: L.image, alt: '', width: 230, height: 230, loading: 'lazy' })),
         el('h3', { class: 'q-title' }, L.title),
         el('p', { class: 'q-skill' }, L.skill),
@@ -337,7 +342,7 @@ async function kitchen(id) {
           el('div', {}, el('dt', {}, 'From'), el('dd', {}, L.cuisine))),
         swaps ? el('p', { class: 'q-swap' }, `Made with ${swaps}`) : null,
         skip ? el('p', { class: 'q-swap' }, skip) : null,
-        cooked);
+        unlv, cooked);
     }
     return el('article', { class: 'p-card' },
       el('span', { class: 'tape t1' }), el('span', { class: 'tape t2' }),
@@ -348,13 +353,13 @@ async function kitchen(id) {
       el('div', { class: 'p-meta' }, el('span', {}, time), el('span', {}, `Serves ${L.servings}`), el('span', {}, L.cuisine)),
       swaps ? el('p', { class: 'p-swap' }, `Made with ${swaps}`) : null,
       skip ? el('p', { class: 'p-swap' }, skip) : null,
-      cooked);
+      unlv, cooked);
   };
 
   const units = [...new Set(lib.lessons.map((l) => l.unit))].sort((a, b) => a - b);
   const body = units.length
     ? units.map((u) => [
-      el('h2', { class: 'k-unit' }, quest ? `Path ${u}: ${lib.units[u]}` : lib.units[u]),
+      el('h2', { class: 'k-unit' }, quest && !lib.seasonal?.includes(u) ? `Path ${u}: ${lib.units[u]}` : lib.units[u]),
       el('div', { class: 'k-lib' }, lib.lessons.filter((l) => l.unit === u).map((L) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${L.title}`, onclick: () => go(`#/kitchen/${p.id}/${L.id}`) }, card(L)))),
     ])
     : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, 'No lessons match this family\'s diet settings yet.');

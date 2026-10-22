@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Side dish">
+<title>Side dish</title>
+<g stroke="#3b2416" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+<ellipse cx="120" cy="206" rx="92" ry="14" fill="#000" fill-opacity=".10" stroke="none"/>
+
+<path d="M40 128 L200 128 L190 176 Q186 186 174 186 L66 186 Q54 186 50 176 Z" fill="#c75b39"/>
+<ellipse cx="120" cy="128" rx="80" ry="18" fill="#e9dccb"/>
+<g stroke-width="2.5"><ellipse cx="78" cy="118" rx="16" ry="12" fill="#e7b75a"/><ellipse cx="108" cy="110" rx="17" ry="12" fill="#f0c66a"/><ellipse cx="142" cy="114" rx="16" ry="12" fill="#e7b75a"/><ellipse cx="166" cy="122" rx="14" ry="10" fill="#d9a147"/><ellipse cx="124" cy="126" rx="15" ry="10" fill="#d9a147"/><ellipse cx="94" cy="128" rx="13" ry="9" fill="#e7b75a"/></g>
+<g fill="#4f8f3f" stroke="none"><circle cx="100" cy="106" r="3"/><circle cx="136" cy="110" r="3"/><circle cx="160" cy="118" r="3"/><circle cx="84" cy="114" r="3"/><circle cx="118" cy="122" r="3"/></g>
+</g>
+</svg>

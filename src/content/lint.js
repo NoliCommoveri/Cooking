@@ -36,9 +36,15 @@ export function lint(c) {
   const ING = index(c.ingredients, 'ingredients.json'), EQ = index(c.equipment, 'equipment.json');
   const SK = index(c.skills, 'skills.json'), CU = index(c.cuisines, 'cuisines.json'), RG = index(c.regions, 'cuisines.json');
   const UNITS = new Set((c.units || []).map(u => u.number));
+  // A seasonal unit (Appointed Times, plan §6.19) sits beside the numbered
+  // course: its lessons aren't in course.json and take no number.
+  const SEASONAL = new Set((c.units || []).filter(u => u.seasonal).map(u => u.number));
+  for (const u of (c.units || []).filter(u => u.seasonal)) if (!u.prefix || !u.lessons) err(`units.json ${u.number}`, 'a seasonal unit needs a prefix letter and its lessons in order');
   for (const ing of c.ingredients) {
     for (const r of uncleanReasons(ing, rules)) err(`ingredients.json ${ing.id}`, `unclean: ${r}`);
     for (const [u, pkg] of Object.entries(ing.units || {})) if (!pkg.amount) err(`ingredients.json ${ing.id}`, `unit "${u}" has no amount`);
+    // Only water from the tap goes without a package size (§6.3).
+    if ((ing.purchaseUnit === null) !== (ing.section === 'tap')) err(`ingredients.json ${ing.id}`, ing.section === 'tap' ? 'a tap ingredient is never bought, so its purchaseUnit is null' : 'needs a purchaseUnit, the package the store sells');
   }
   // kitchen words: each form belongs to one term, and every watched word needs a term before a lesson uses it
   const formOwner = {};
@@ -176,6 +182,11 @@ export function lint(c) {
       }
     }
   }
+  // a seasonal unit lists its lessons in order, for their labels (A1, A2)
+  for (const u of (c.units || []).filter(u => u.seasonal)) {
+    for (const id of u.lessons || []) if (byId[id]?.unit !== u.number) err(`units.json ${u.number}`, `lists "${id}", which isn't a written lesson in this unit`);
+    for (const L of lessons) if (L.unit === u.number && !(u.lessons || []).includes(L.id)) err(`units.json ${u.number}`, `lessons doesn't list "${L.id}", so it has no label`);
+  }
   // prerequisite loops, across every planned dish
   const seen = {}, visit = (id, stack) => {
     if (stack.includes(id)) { err(`course.json ${id}`, `prerequisites form a loop: ${[...stack, id].join(' → ')}`); return; }
@@ -192,6 +203,7 @@ export function lint(c) {
       for (const f of ['id', 'title', 'unit', 'cuisine', 'skills', 'skill', 'image', 'safety', 'minutes']) if (d[f] == null) err(where, `has no ${f}`);
       if (d.image !== `dishes/${d.id}.png`) err(where, `image should be dishes/${d.id}.png`);
       if (!UNITS.has(d.unit)) err(where, `unit ${d.unit} doesn't exist in units.json`);
+      if (SEASONAL.has(d.unit)) err(where, `unit ${d.unit} is seasonal, so its lessons aren't in the numbered course`);
       if (!CU[d.cuisine]) err(where, `cuisine "${d.cuisine}" doesn't exist in cuisines.json`);
       for (const s of d.skills || []) if (!SK[s]) err(where, `skill "${s}" doesn't exist in skills.json`);
       if (!(d.skills || []).length) err(where, 'has no skills');
@@ -213,6 +225,7 @@ export function lint(c) {
       if (keys.filter(k => k === `pick:${g}`).length > 1) err(`course.json pick-one "${g}"`, "its dishes aren't next to each other");
     }
     for (const { file, data: L } of c.lessons) {
+      if (SEASONAL.has(L.unit)) continue;
       const d = DISH[L.id];
       if (!d) { err(`lessons/${file}`, `"${L.id}" isn't in course.json`); continue; }
       const where = `course.json ${L.id}`;

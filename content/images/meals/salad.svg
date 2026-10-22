@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Salad or vegetables">
+<title>Salad or vegetables</title>
+<g stroke="#3b2416" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+<ellipse cx="120" cy="206" rx="92" ry="14" fill="#000" fill-opacity=".10" stroke="none"/>
+
+<path d="M28 116 L212 116 Q206 176 150 188 L90 188 Q34 176 28 116 Z" fill="#f4efe6"/>
+<g stroke-width="2.5"><path d="M44 118 Q50 76 86 84 Q92 104 80 118 Z" fill="#6fb35a"/><path d="M78 116 Q76 66 118 70 Q130 96 116 118 Z" fill="#8cc66d"/><path d="M112 118 Q118 70 160 78 Q166 102 152 118 Z" fill="#5fa34c"/><path d="M146 118 Q160 82 194 94 Q196 110 186 118 Z" fill="#8cc66d"/>
+<circle cx="98" cy="104" r="12" fill="#e2483d"/><circle cx="148" cy="100" r="11" fill="#e2483d"/><circle cx="124" cy="110" r="9" fill="#f08a3c"/><ellipse cx="72" cy="108" rx="10" ry="6" fill="#f2f0d0"/><ellipse cx="172" cy="108" rx="10" ry="6" fill="#f2f0d0"/></g>
+<path d="M28 116 L212 116" fill="none"/>
+</g>
+</svg>

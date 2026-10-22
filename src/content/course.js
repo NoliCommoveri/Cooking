@@ -53,6 +53,14 @@ export function numberCourse(dishes, plan = null) {
   return { entries, labels, total: n };
 }
 
+// A seasonal unit (Appointed Times, §6.19) sits beside the numbered course.
+// Its lessons are labeled with its letter and their place in its list: A1, A2.
+export function seasonalLabels(units) {
+  const labels = {};
+  for (const u of units) if (u.seasonal) (u.lessons || []).forEach((id, i) => { labels[id] = `${u.prefix}${i + 1}`; });
+  return labels;
+}
+
 // Where a plan puts a dish before one it builds on, or leaves out one it needs.
 // A prerequisite is a dish id, or "pick:<skill>" for any dish in that group.
 export function prereqNotes(dishes, plan = null) {
