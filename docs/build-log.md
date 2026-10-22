@@ -1653,3 +1653,43 @@ Plan only; nothing built. From the owner's rulings in this session.
   is built next, with family recipes pulled forward from Phase 9. It comes
   after Phase 4's first part and before the rest of Phase 4 and 4b. §9 says
   so, and its place is no longer an open question.
+
+## 68. 2026-10-22 — Plan: Appointed Times, and the review of sharing
+
+Plan only; nothing built. A review of entries 66–67 and the owner's rulings
+on it.
+
+- **Renamed:** Holy Times is now **Appointed Times** (§6.19), including the
+  unit, the "Swap for an Appointed Time meal instead" menu item, Phase 4c,
+  and the leaven notice ("the spring Appointed Time").
+- **Typed-in ingredients are reviewed** (§6.10). Instant sharing let a
+  typed-in ingredient reach every family with only the blocked-word scan on
+  it, and the scan can't catch everything §2.1 blocks (pepperoni, gelatin,
+  refried beans). Now a recipe with a typed-in ingredient shows only Send for
+  review and can't be shared until the owner clears it, usually by adding the
+  ingredient to the registry. Its family can still cook it meanwhile.
+- **No photos in the directory:** shared recipes always show the meal-type
+  art; a family's own photo stays with that family.
+- **Report and Hide:** any parent can report a directory recipe; the owner
+  can hide any directory recipe and unhide it (the restore rule). New
+  "Reported recipes" on the owner screens (§6.2a).
+- **Send for review and Share recipe** can both be pressed: the recipe is
+  shared without the Unleavened badge and gets it if the review clears it.
+  The leaven notice keeps the owner's wording.
+- **Leaven:** the check reads step text too. Beer is off the list; fermented
+  foods that aren't a raising agent (beer, soy sauce, vinegar, Worcestershire,
+  miso) aren't leaven.
+- **The spring window** runs February 1 through May 15, so the latest years'
+  feast days are covered. Proposed: it goes by the week being swapped.
+- **The swap picker** shows the whole community directory (plus the family's
+  own recipes), with diet filters applied and hidden recipes left out.
+- **Housekeeping:** §1's Users table; §6.10's entry flow (photo stays with
+  the family, typed-in ingredients go to review, hazard line and an added
+  wash-hands step proposed); §8.4 now has `recipe_reviews` (replacing
+  `recipe_submissions`), `community_recipes` with kind, meal type, the
+  Unleavened flag and `hidden_at`, `recipe_reports`, and `queue` and
+  `attempts` that can point at a family recipe, with a swap as a queue row
+  (proposed). §9's 4c row and test cover review, Report and Hide.
+- **§10, new open questions:** in homeschool mode, whether a swapped week
+  shows as behind, and whether next week can be swapped from Thursday;
+  whether the unit's lessons count in the 75.

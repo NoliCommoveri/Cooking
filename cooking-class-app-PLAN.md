@@ -24,7 +24,7 @@ A parent uses the app from their phone. They queue lessons, see a combined **sho
 ### Users
 | User | Device | Main jobs |
 |---|---|---|
-| Owner (Jen) | Any | Everything a parent can do, plus setting the beta word, reviewing submitted recipes, and managing families |
+| Owner (Jen) | Any | Everything a parent can do, plus setting the beta word, reviewing shared recipes (§6.10), and managing families |
 | Parent (1+ per family) | Phone | Queue lessons, shopping list, safety review, gallery, family settings |
 | Kid (any number per family) | Tablet or phone in the kitchen | Learn, prep, cook, photograph, reflect, see progress |
 | Adult learner (any number per family) | Any | The same as a kid: adults can take the class too, through their own profile |
@@ -410,7 +410,7 @@ Do **not** use:
 - **Gallery:** all photos, filterable by profile and lesson, with reflections (families with photos on, §2.6)
 - **Download all photos:** the family's photos as a download, so they don't live only in the app
 - **Family recipes** (§6.10): add the family's own recipes, share them to the community directory, and add recipes from it
-- **Swap for a Holy Time meal instead** (§6.19), in a queued lesson's "⋯" menu
+- **Swap for an Appointed Time meal instead** (§6.19), in a queued lesson's "⋯" menu
 - **Mark test-cooked:** after cooking a lesson themselves, a parent can mark it test-cooked for their family (§7). Optional; lessons don't need it to be shown to kids
 - **Kitchen staples:** ingredients the family usually has, grouped as "May already have" on lists (§6.3)
 - **Delete our family** and **Download our data** (§6.14)
@@ -419,7 +419,8 @@ Do **not** use:
 
 ### 6.2a Owner features
 - Set, change, or turn off the **beta word** (§8.3), and see how many sign-ups are waiting on their email code
-- **Recipe reviews:** recipes a parent sent for review after a leaven or hard-block flag (§6.10); clear or decline each
+- **Recipe reviews:** recipes a parent sent for review after a leaven flag, a hard-block flag, or a typed-in ingredient (§6.10); clear or decline each
+- **Reported recipes:** directory recipes families reported (§6.10), with **Hide** and **Unhide** on each
 - **Fix requests:** review reports from families, apply a suggested fix as a lesson patch, or revert one (§6.11)
 - See the list of families (name, number of profiles, last active). This is the only cross-family view. The owner never sees other families' kids' names, photos, or progress.
 - Set a new password for a parent, as a fallback when the reset email (§8.3) doesn't reach them
@@ -500,23 +501,26 @@ A guided helper modeled on **Kels** in KennelOS (`NoliCommoveri/KennelOS`: End-S
 - Its name, character, and full task list are specced later.
 
 ### 6.10 Family recipes and the community directory
-No longer a bonus (owner, 2026-10-22): sharing recipes is central for the Holy Times unit (§6.19), so this comes with it (Phase 4c). Families can cook their own recipes in the same lesson player.
+No longer a bonus (owner, 2026-10-22): sharing recipes is central for the Appointed Times unit (§6.19), so this comes with it (Phase 4c). Families can cook their own recipes in the same lesson player.
 - **My recipes.** A parent adds a recipe for their own family. Only that family sees it. It runs in the lesson player like any lesson: Prep checklists, cook mode, timers, photo, and reflection. It has no Intro or Learn stage unless the parent adds cards.
 - **Share a recipe — Requirement (owner, 2026-10-22).** A parent can share a recipe at any time, marked **General** or **Feast day** (§6.19). Every shared recipe follows the same routine:
   1. The checks run: the hard block (species check and blocked-word scan, below) and the leaven check (§6.19).
-  2. **Passes the hard block:** it's shared to the community directory right away, with no owner review first. Typed-in ingredients don't hold it back once they pass the blocked-word scan. It gets the Unleavened badge if it earns one, and Good for Feast Days if it was shared as a feast-day recipe.
-  3. **Flagged for leaven** (a feast-day recipe with a leaven ingredient or any typed-in ingredient): the parent sees "Our automated ingredients checker flagged this as possibly containing leaven, so it will not be presented as an appropriate option for the spring Holy Time. If you disagree and would like a human review, please click the \"Send for review\" button." Below it are **Send for review** (greyed out once pressed, "Sent for review") and **Share recipe**, which shares it without the Unleavened badge.
-  4. **Flagged by the hard block:** the parent sees a matching notice with only **Send for review**. It can't be shared until a review clears it.
+  2. **Passes the hard block, every ingredient from the registry:** it's shared to the community directory right away, with no owner review first. It gets the Unleavened badge if it earns one, and Good for Feast Days if it was shared as a feast-day recipe.
+  3. **Has a typed-in ingredient** (owner, 2026-10-22: the owner reviews typed-in ingredients): the parent sees a notice with only **Send for review**. It can't be shared until the owner clears it, usually by adding the ingredient to the registry, where it's species-checked like any other. Its family can still save and cook it meanwhile.
+  4. **Flagged for leaven** (a feast-day recipe with a leaven ingredient, in its ingredients or its step text): the parent sees "Our automated ingredients checker flagged this as possibly containing leaven, so it will not be presented as an appropriate option for the spring Appointed Time. If you disagree and would like a human review, please click the \"Send for review\" button." Below it are **Send for review** (greyed out once pressed, "Sent for review") and **Share recipe**, which shares it now without the Unleavened badge. A parent can press both (owner, 2026-10-22): it's shared without the badge, and gets the badge if the review clears it.
+  5. **Flagged by the hard block:** the parent sees a matching notice with only **Send for review**. It can't be shared until a review clears it.
 - **Owner review.** Recipes sent for review wait on the owner screens (§6.2a). The owner clears one (often by adding a typed-in ingredient to the registry, which then gives it the badge it earned) or declines it with a short note. The parent sees the answer on the recipe, the way fix requests report back (§6.11). **A review only clears a false alarm** (a "crab apple" tripping the word scan, a typed-in "beef bacon"); it never lets unclean food through (§2.1).
-- **Community directory.** Shared recipes go into a searchable directory. Any parent can search it and add a recipe to their family's recipes. Shared recipes carry no profile names or photos from the sharing family (recommendation; whether the family's name shows is an open question, §10).
+- **Community directory.** Shared recipes go into a searchable directory. Any parent can search it and add a recipe to their family's recipes. Shared recipes carry no profile names from the sharing family (recommendation; whether the family's name shows is an open question, §10).
+- **No photos in the directory** (owner, 2026-10-22). A shared recipe never carries a photo, even one the sharing family took; it always shows the placeholder art for its meal type (§6.19).
+- **Report and Hide** (owner, 2026-10-22). Any parent can **Report** a directory recipe, behind the parent PIN, with a type (unclean ingredient, food-safety problem, wrong or unclear, inappropriate, other) and a note. Reports wait on the owner screens (§6.2a), and unclean-ingredient and food-safety reports email the owner right away, as fix requests do (§6.11). The owner can **Hide** any directory recipe, reported or not: it leaves the directory and the swap picker at once. **Unhide** puts it back (the restore rule in `CLAUDE.md`). Copies families already added stay in their recipes, with a note that it was taken out of the directory (recommendation).
 - **Entry is a guided flow, not a file upload.** No CSV or file import. The parent is walked through one thing at a time, and the helper (§6.8) can run the same flow:
-  1. Title, servings, total time, and a photo if they have one
-  2. Ingredients, each picked from the registry by search with amount and unit. An ingredient not in the registry is typed in and flagged for the owner
+  1. Title, servings, total time, and a photo if they have one (families with photos on, §2.6; the photo stays with that family and is never shared)
+  2. Ingredients, each picked from the registry by search with amount and unit. An ingredient not in the registry is typed in, and sharing it then needs the owner's review (above)
   3. Equipment, picked from the registry
-  4. Steps, one at a time, each with its safety level and an optional timer with its label. A doneness step needs its thermometer target, and the safe minimums apply (§3)
+  4. Steps, one at a time, each with its safety level and an optional timer with its label. A doneness step needs its thermometer target, and the safe minimums apply (§3). A step that isn't solo asks for its hazard line, and a step that handles a raw ingredient is followed by a wash-hands step the flow adds for the parent (recommendation, §3, §7.4)
   5. Meal type (for the placeholder art, §6.19) and, optionally, a "why we make this" card, like a lesson's Learn stage
   6. Review, then save or share
-- **The hard block applies** (`CLAUDE.md`, §2.1). Every family recipe runs the same checks as the library: registry ingredients are checked by species, and all text (title, ingredient names, steps, notes) goes through the blocked-word scan. A recipe that fails can't be saved or shared until it's fixed or a review clears a false alarm. A typed-in ingredient can't be species-checked until the owner adds it to the registry, so the blocked-word scan is the only check on it until then. That's a known gap.
+- **The hard block applies** (`CLAUDE.md`, §2.1). Every family recipe runs the same checks as the library: registry ingredients are checked by species, and all text (title, ingredient names, steps, notes) goes through the blocked-word scan. A recipe that fails can't be saved or shared until it's fixed or a review clears a false alarm. A typed-in ingredient can't be species-checked until the owner adds it to the registry, so the blocked-word scan is the only check on it in the family's own recipes. That's why a recipe with one can't be shared until the owner reviews it.
 - **Diet filters** apply to family recipes and directory recipes the same as to library lessons.
 - **Scaling** works for registry ingredients. Typed-in ingredients scale as plain numbers, and the shopping list shows them without merging.
 
@@ -785,19 +789,20 @@ Set the whole course up once, and the app loads each week's lessons. Always on i
 - **Ending a course** takes its lessons not yet shopped for out of the queue. An ended course can be put back from Courses.
 - Switching modes never deletes a course. Turning off Plan our weeks in casual mode keeps the plan and stops loading weeks; the lessons already in the queue stay.
 
-### 6.19 Holy Times — Requirement (owner, 2026-10-22)
-A seasonal unit for the appointed times, starting with Passover and the Feast of Unleavened Bread, and a way to swap a Holy Time meal into any week.
-- **The Holy Times unit** sits beside the numbered course, like the capstone (§4). Its lessons take no lesson number and don't move a family's numbers ("Quest 27 of 59" stays the same). It holds lessons we write (for example from-scratch unleavened flatbread, roast lamb, a bitter-herbs salad, charoset, matzah ball soup, flourless chocolate cake, coconut macaroons) and a **Parent-contributed** shelf of recipes families share (below). Unit lessons follow every rule other lessons do: the hard block (§2.1), diet filters, food-safety checks, and a Learn stage, which can say why the dish belongs to the feast.
-- **Leaven** (owner, 2026-10-22: "a substance (as yeast) used to produce fermentation in dough or a liquid; especially sourdough; a material (as baking powder) used to produce a gas that lightens dough or batter"). An automatic check flags: yeast in every form and sourdough starter; baking powder, baking soda, baker's ammonia, and self-rising flour; and ready-made foods that usually contain leaven (bread, breadcrumbs, panko, pita, flour tortillas, most crackers, cake mixes, beer). Plain flour, matzah, and egg whites whipped for lift aren't leaven. Ready-made foods that are sometimes made without leaven are flagged anyway; a parent can send one for review. The list is a content file beside the blocked words (`content/rules/`). Leaven is a badge and a filter, not the hard block: no setting or review ever lets unclean food through (§2.1), but leaven is only about where a recipe shows.
+### 6.19 Appointed Times — Requirement (owner, 2026-10-22)
+A seasonal unit for the appointed times, starting with Passover and the Feast of Unleavened Bread, and a way to swap an Appointed Time meal into any week.
+- **The Appointed Times unit** sits beside the numbered course, like the capstone (§4). Its lessons take no lesson number and don't move a family's numbers ("Quest 27 of 59" stays the same). It holds lessons we write (for example from-scratch unleavened flatbread, roast lamb, a bitter-herbs salad, charoset, matzah ball soup, flourless chocolate cake, coconut macaroons) and a **Parent-contributed** shelf of recipes families share (below). Unit lessons follow every rule other lessons do: the hard block (§2.1), diet filters, food-safety checks, and a Learn stage, which can say why the dish belongs to the feast.
+- **Leaven** (owner, 2026-10-22: "a substance (as yeast) used to produce fermentation in dough or a liquid; especially sourdough; a material (as baking powder) used to produce a gas that lightens dough or batter"). An automatic check flags: yeast in every form and sourdough starter; baking powder, baking soda, baker's ammonia, and self-rising flour; and ready-made foods that usually contain leaven (bread, breadcrumbs, panko, pita, flour tortillas, most crackers, cake mixes). Plain flour, matzah, and egg whites whipped for lift aren't leaven, and neither are fermented foods and drinks that aren't a raising agent (owner, 2026-10-22): beer, soy sauce, vinegar of any kind, Worcestershire, and miso. Ready-made foods that are sometimes made without leaven are flagged anyway; a parent can send one for review. The list is a content file beside the blocked words (`content/rules/`). The check reads the ingredients and the step text, the way the blocked-word scan does (owner, 2026-10-22), so "a pinch of baking soda" in a step is caught. Leaven is a badge and a filter, not the hard block: no setting or review ever lets unclean food through (§2.1), but leaven is only about where a recipe shows.
 - **Badges:**
   - **Unleavened:** applied automatically when every ingredient is in the registry and none is on the leaven list. A recipe with a typed-in ingredient doesn't get it unless a review clears it. Library lessons are checked the same way.
   - **Good for Feast Days:** applied when a parent shares a recipe as a feast-day recipe (roast lamb, for example). A recipe can carry both.
-- **Swap for a Holy Time meal instead:** an item in the "⋯" menu of every queued lesson, all year, parents only. It's kept out of the way: no button on the card. It opens a picker, and the meal picked takes that lesson's place this week.
+- **Swap for an Appointed Time meal instead:** an item in the "⋯" menu of every queued lesson, all year, parents only. It's kept out of the way: no button on the card. It opens a picker, and the meal picked takes that lesson's place this week.
   - A course lesson it replaces stays in the plan and rolls over like any lesson not cooked that week: it goes first next week, and the rest move back (§6.18). A lesson queued by hand is taken off the queue. Either way the swap shows an Undo.
-  - **February through April** (fixed every year, wide enough for families on different calendars, so there are no dates to set): the picker shows only Unleavened recipes, in this order: the Holy Times unit's lessons, then other library lessons that pass the leaven check, then parent recipes that pass it.
-  - **The rest of the year:** everything shows: the Holy Times unit's lessons and every Good for Feast Days recipe, unleavened or not.
+  - **February 1 through May 15** (fixed every year, wide enough for families on different calendars, so there are no dates to set; extended to mid-May by the owner, 2026-10-22, so the latest years' feast days are covered): the picker shows only Unleavened recipes, in this order: the Appointed Times unit's lessons, then other library lessons that pass the leaven check, then parent recipes that pass it. The window goes by the date of the week being swapped, not the day the parent opens the picker (recommendation).
+  - **The rest of the year:** everything shows: the Appointed Times unit's lessons and every Good for Feast Days recipe, unleavened or not.
+  - **Parent recipes in the picker are the whole community directory** (owner, 2026-10-22), plus the family's own recipes, with the family's diet filters applied. Hidden directory recipes never show. Picking a directory recipe adds it to the family's recipes (recommendation).
 - **Placeholder art by meal type.** A shared recipe with no photo (or in a family with photos off, §2.6) shows a drawing for its meal type: meat, poultry, fish, bread or flatbread, soup, salad or vegetables, side, dessert, drink. Claude draws them as SVG in each built theme, matching the dish art.
-- **Sharing a recipe** follows the routine in §6.10, the same for every recipe, Holy Times or not.
+- **Sharing a recipe** follows the routine in §6.10, the same for every recipe, Appointed Times or not.
 
 ---
 
@@ -844,14 +849,15 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `password_resets` (token_hash, family_id, parent_id, expires_at, used_at)
 - `signup_verifications` (email, password_hash, code_hash, attempts, sent_at, expires_at). A sign-up waiting on its emailed code; removed when the family is created
 - `settings` (key, value). Holds the beta word, among others
-- `family_recipes` (id, family_id, title, servings, total_minutes, body_json, photo_key, created_at, updated_at, source_community_id)
+- `family_recipes` (id, family_id, title, servings, total_minutes, body_json, meal_type, photo_key, created_at, updated_at, source_community_id). `photo_key` is the family's own photo, never shared
 - `fix_requests` (id, family_id, reporter_parent_id, reporter_profile_id, lesson_id, lesson_version, step, servings, kind, field, current_value, suggested_value, note, created_at, status: open → fixed | declined | duplicate | needs_content_change, owner_reply, patch_id)
 - `lesson_patches` (id, lesson_id, base_version, field_path, old_value, new_value, fix_request_id, applied_by, applied_at, reverted_at). No `family_id`: patches apply to the shared library
-- `recipe_submissions` (id, family_id, family_recipe_id, submitted_at, status: pending → released | declined, community_recipe_id)
-- `community_recipes` (id, title, body_json, released_at, released_by). No `family_id`: released recipes belong to the shared directory, not a family
+- `recipe_reviews` (id, family_id, family_recipe_id, reason: typed_in | leaven | hard_block, sent_at, status: pending → cleared | declined, owner_reply, community_recipe_id) (§6.10)
+- `community_recipes` (id, family_recipe_id, kind: general | feast, title, body_json, meal_type, unleavened, shared_at, hidden_at). No `family_id` exposed: shared recipes belong to the directory, and `family_recipe_id` only lets the sharing family update or withdraw theirs. `unleavened` is worked out by the leaven check when it's shared or a review clears it
+- `recipe_reports` (id, family_id, community_recipe_id, kind, note, created_at, status: open → hidden | dismissed) (§6.10)
 - `sessions` (id, parent_id, family_id, created_at, last_seen, pin_until). `id` is a hash of the cookie's token; `pin_until` is when the parent PIN must be entered again on that device
 - `profiles` (id, family_id, name, avatar, people, theme, audience: kid | adult, track: core | beginner). One person or several sharing it (§1); `people` lists each person's name and avatar color so a shared locker shows everyone
-- `queue` (id, family_id, lesson_id, servings, planned_date, status: requested → assigned → shopped → cooked, requested_by_profile_id, course_id, source: manual | request | course). A course's lessons are queued with `course_id` set; their week comes from the schedule, not `planned_date`
+- `queue` (id, family_id, lesson_id, family_recipe_id, servings, planned_date, status: requested → assigned → shopped → cooked, requested_by_profile_id, course_id, source: manual | request | course | swap, swapped_for_queue_id). A queued item is a library lesson or one of the family's recipes (`family_recipe_id`). A swap (§6.19) is a queue row with `source` swap; a course's week counts it in place of one course lesson (recommendation). A course's lessons are queued with `course_id` set; their week comes from the schedule, not `planned_date`
 - `courses` (id, family_id, name, code, school_year, start_date, per_week, created_at, archived_at) (§6.18)
 - `course_profiles` (course_id, family_id, profile_id). A profile is on one active course at most
 - `course_lessons` (course_id, family_id, lesson_id, position, removed)
@@ -861,7 +867,7 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `list_lessons` (list_id, family_id, position, lesson_id, servings, queue_id, course_id). The lessons as they were when the list was made; servings is for "You shopped for N" (§6.6)
 - `list_on_hand` (list_id, family_id, ingredient_id). Left off that list only
 - `list_checks` (list_id, family_id, ingredient_id)
-- `attempts` (id, family_id, queue_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state, eater_rating)
+- `attempts` (id, family_id, queue_id, lesson_id, family_recipe_id, lesson_version, servings, started_at, finished_at, checklist_state, eater_rating)
 - `attempt_profiles` (attempt_id, family_id, profile_id, rating, notes, transfer, reflected_at). Every profile on the cook, each with its own reflection; transfer is the optional "what other dish could use this move?"
 - `test_cooks` (family_id, lesson_id, lesson_version, parent_id, cooked_on)
 - `photos` (id, family_id, attempt_id, r2_key, created_at)
@@ -896,7 +902,7 @@ Each phase should be deployed and usable before the next begins.
 | **3. Parent planning & shopping** | Course plans and the weekly schedule (§4.1, §6.18), the casual/homeschool switch and due dates (§6.17), the queue (with kid requests), safety review, mark test-cooked, What you'll need and optional shopping lists with merging and package rounding (§6.3), kitchen staples, check-off persistence | A parent sets up a course for two siblings, sees this week's lessons in the queue, skips a week, and sees the schedule shift when a lesson isn't cooked. A parent reviews safety, marks a lesson test-cooked, sees what the next weeks need, then makes a list for 3 lessons and shops from their phone |
 | **4. Photos & reflect** | The per-family photos switch on `/ops` (§2.6), camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download, Print our progress with its CSV download (§6.15). The transcript moved to 4b (owner, 2026-10-22) | In a family with photos on, a photo taken on the tablet shows in the gallery on the parent's phone. A family with photos off cooks and reflects with no photo step |
 | **4b. Homeschool mode** | Course details (name, code, school year), optional grading (not offered on the Sabbath, §6.18), and the transcript (§6.15, §6.17) | A parent in homeschool mode grades a cook and prints a transcript; switching back to casual hides it all and loses nothing |
-| **4c. Holy Times and shared recipes** (built next, owner, 2026-10-22) | The Holy Times unit and its first lessons, the leaven list and check, the two badges, Swap for a Holy Time meal instead with the spring filter (§6.19); My recipes with the guided entry flow, sharing with its notices, owner review, the community directory, and the meal-type art (§6.10). Pulled forward from Phase 9 because sharing recipes is central for this unit (owner, 2026-10-22) | A parent enters a recipe through the flow and a kid cooks it; another test family finds it in the directory and adds it. A parent shares a feast-day recipe that passes and one that's flagged; the flagged one is sent for review and cleared from the owner screens; in a test dated in March, Swap shows only Unleavened recipes in the right order, and in June it shows every feast recipe |
+| **4c. Appointed Times and shared recipes** (built next, owner, 2026-10-22) | The Appointed Times unit and its first lessons, the leaven list and check, the two badges, Swap for an Appointed Time meal instead with the spring filter (§6.19); My recipes with the guided entry flow, sharing with its notices, owner review, Report and Hide, the community directory, and the meal-type art (§6.10). Pulled forward from Phase 9 because sharing recipes is central for this unit (owner, 2026-10-22) | A parent enters a recipe through the flow and a kid cooks it; another test family finds it in the directory and adds it. A parent shares a feast-day recipe that passes and one that's flagged; the flagged one is sent for review and cleared from the owner screens; a recipe with a typed-in ingredient can't be shared until the owner clears it; a reported recipe is hidden and unhidden; in a test dated in March or on May 15, Swap shows only Unleavened recipes in the right order, and in June it shows every feast recipe |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
@@ -908,7 +914,7 @@ Each phase should be deployed and usable before the next begins.
 
 **Phase 3 rulings (owner, 2026-10-22):** Phase 3 comes before Phase 1c. Course plans and the weekly schedule (§6.18) move into Phase 3, slice 3a, with the queue; grading and the transcript stay in 4b. Kids' lesson requests are built. Package rounding is in Phase 3: every ingredient gets its store package sizes, and the registry's store sections become §6.3's list. The offline shopping list waits with 2d.
 
-**Phase 4c is next (owner, 2026-10-22):** Holy Times and shared recipes (§6.19, §6.10), with family recipes pulled forward from Phase 9, are built next: after Phase 4's first part (Reflect, Print our progress, the photos switch), before the rest of Phase 4 and before 4b.
+**Phase 4c is next (owner, 2026-10-22):** Appointed Times and shared recipes (§6.19, §6.10), with family recipes pulled forward from Phase 9, are built next: after Phase 4's first part (Reflect, Print our progress, the photos switch), before the rest of Phase 4 and before 4b.
 
 **Testing (every phase):** automated tests run in CI alongside the linter. At minimum they cover family scoping (no endpoint returns another family's rows or photos), lesson patches (the hard block and food-safety checks reject a bad patch, and revert restores the lesson), scaling and rounding, unit conversion, shopping-list merging, and the migration runner.
 
@@ -917,10 +923,12 @@ Each phase should be deployed and usable before the next begins.
 ## 10. Open questions
 
 - The homeschool transcript's details (§6.15).
-- **Holy Times (§6.19):**
+- **Appointed Times (§6.19):**
   - Which other appointed times the unit grows to include (Shavuot, Trumpets, Tabernacles, and so on), or only Passover and Unleavened Bread for now.
-  - Whether the unit and the swap show for every family or only families that turn Holy Times on in family settings.
-  - Whether Holy Times cooks count toward progress, ranks, skills, and the homeschool transcript.
+  - Whether the unit and the swap show for every family or only families that turn Appointed Times on in family settings.
+  - Whether Appointed Times cooks count toward progress, ranks, skills, and the homeschool transcript.
+  - In homeschool mode, whether a swapped week shows as "1 week behind" or as swapped, and whether a swap can be made for next week once it shows on Thursday (§6.18).
+  - Whether the unit's lessons count in the course's 75 dishes and Phase 7's lesson count (§4, §9).
   - Whether shared recipes are visible to every family, and whether the sharing family's name shows on them (§6.10).
 
 ---
