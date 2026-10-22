@@ -1723,3 +1723,35 @@ on it.
   how `public/syllabus.js` already works. The 75 is only the list of dishes.
 - The Appointed Times unit is optional, so it's listed in its own section and
   left out of the hours and credit. Off the open questions (§10).
+
+## 71. 2026-10-22 — Nothing cooked on the Sabbath counts; Appointed Times settled
+
+- **Owner rulings on the Appointed Times questions** (§6.19, off §10):
+  - Recipes can be for any of the Levitical holy days (Leviticus 23), though
+    most will likely be for Unleavened Bread.
+  - The unit and the swap are for every family. None of the app's religious
+    elements can be turned off.
+  - Appointed Times cooks count toward progress, ranks, skills, and the
+    transcript like any other cook, except on the Sabbath.
+  - Shared recipes carry no identifier at all: the directory and the unit's
+    shelf are just "User-shared recipes" (was "Parent-contributed").
+- **Owner ruling: nothing cooked or graded on the Sabbath counts** (§6.18),
+  for any lesson. Built for what exists now:
+  - `src/worker/schedule.js`: `isSabbath(day)`.
+  - `src/worker/plan.js`: a course lesson is finished by its first cook that
+    wasn't on a Saturday.
+  - `src/worker/api.js`: a cook finished on a Saturday is saved but doesn't
+    close its queued lesson; a profile's cooks (the kitchen's "cooked" marks)
+    and Print our progress leave Saturday cooks out.
+  - The day is the family's calendar day, from the device's offset: the cook
+    outbox (`public/cooks.js`) and the kitchen now send `?tz=`. A cook's day
+    is worked out from the offset of the device asking, not stored, so a
+    clock change near midnight can move a cook by an hour.
+  - Grading (Phase 4b) and stamps, pins, and ranks (Phase 5) aren't built
+    yet; the plan says they follow the same rule.
+- **Tests: 170.** New: a Saturday cook leaves its lesson queued and is left
+  off the cooks list and Print our progress, while a Friday cook counts; and
+  `isSabbath`. The test setup (`test/helpers/register.js`) runs a Saturday
+  test run as the Friday before, so the suite, which cooks "now", passes on
+  any day (checked with the clock set to a Saturday).
+- No migration; nothing for the owner to do.

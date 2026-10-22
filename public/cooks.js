@@ -24,7 +24,8 @@ async function sendAll() {
     for (const [id, body] of Object.entries(readBox())) {
       let res;
       try {
-        res = await fetch(`/api/attempts/${id}`, {
+        // The device's calendar decides the Sabbath (§6.18), so the offset goes too.
+        res = await fetch(`/api/attempts/${id}?tz=${new Date().getTimezoneOffset()}`, {
           method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body), credentials: 'same-origin',
           // A dropped connection can leave a request hanging; give up and retry later.
           signal: AbortSignal.timeout(15000),

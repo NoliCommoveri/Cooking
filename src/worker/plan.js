@@ -15,7 +15,7 @@ import { liveLesson, livePatches } from './lessons.js';
 import { dietView } from '../content/diet.js';
 import { servingOptions } from '../content/scale.js';
 import { courseEntries, numberCourse } from '../content/course.js';
-import { schedule, weekOf, addDays, localDay, isDay, DUE_DAY } from './schedule.js';
+import { schedule, weekOf, addDays, localDay, isDay, isSabbath, DUE_DAY } from './schedule.js';
 
 const id = () => randomHex(8);
 const ACTIVE = ['requested', 'assigned', 'shopped'];
@@ -150,13 +150,19 @@ async function courseDone(env, course, profiles, tz) {
   if (!profiles.length) return {};
   const from = [course.created_at, course.start_date].sort()[0];
   const { results } = await env.DB.prepare(
-    `SELECT a.lesson_id, MIN(a.finished_at) AS first FROM attempts a
+    `SELECT a.lesson_id, a.finished_at FROM attempts a
        WHERE a.family_id = ? AND a.finished_at IS NOT NULL AND a.finished_at >= ?
          AND EXISTS (SELECT 1 FROM attempt_profiles ap WHERE ap.attempt_id = a.id AND ap.family_id = a.family_id
            AND ap.profile_id IN (${placeholders(profiles)}))
-       GROUP BY a.lesson_id`,
+       ORDER BY a.finished_at`,
   ).bind(course.family_id, from, ...profiles).all();
-  return Object.fromEntries(results.map((r) => [r.lesson_id, localDay(r.first, tz)]));
+  // The first cook of each lesson that wasn't on the Sabbath.
+  const done = {};
+  for (const r of results) {
+    const day = localDay(r.finished_at, tz);
+    if (!isSabbath(day) && !done[r.lesson_id]) done[r.lesson_id] = day;
+  }
+  return done;
 }
 
 async function courseWeeks(env, course) {

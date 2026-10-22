@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [70. 2026-10-22 — Plan: syllabus hours count one student's path](docs/build-log.md#70-2026-10-22--plan-syllabus-hours-count-one-students-path)
+**Latest build log entry:** [71. 2026-10-22 — Nothing cooked on the Sabbath counts; Appointed Times settled](docs/build-log.md#71-2026-10-22--nothing-cooked-on-the-sabbath-counts-appointed-times-settled)
 
 ## Current features
 
@@ -17,7 +17,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Suggest a fix** (`src/content/patch.js`, `src/worker/lessons.js`): parents and adult learners report a problem on a lesson or step with what it should say instead; the family sees what came of it on the lesson.
 - **Fix requests** (owner screens): apply a suggestion as a lesson patch for every family, after the linter's checks; decline, reopen, or revert any of them.
 - **Voice step control** (`public/voice.js`): in cook mode, "next" (moves on and reads the step aloud), "back," and "again" (reads it again). Off until a parent turns it on in family settings; shown only where the browser can recognize speech.
-- **Saved cooks** (`public/cooks.js`): each cook is saved to the family's account for every profile on it, with "Cooking with someone?" on the lesson card. A cook finished offline is sent when the connection returns. Lessons a profile has cooked say so in its kitchen.
+- **Saved cooks** (`public/cooks.js`): each cook is saved to the family's account for every profile on it, with "Cooking with someone?" on the lesson card. A cook finished offline is sent when the connection returns. Lessons a profile has cooked say so in its kitchen. Nothing cooked on the Sabbath counts: it's saved, but the lesson stays up next and it isn't on Print our progress.
 - **Queue** (`src/worker/plan.js`): the one "up next" list. Parents add lessons for one or more profiles, approve kids' requests, check each lesson's safety review, and mark lessons test-cooked. Kids ask with "I want to make this"; adults tap "Cook this".
 - **Courses and the weekly schedule** (`src/worker/schedule.js`): set a course up once for one or more profiles, and each week's lessons load into the queue. Weeks run Sunday to Friday (Saturday is the Sabbath); each week's lessons join the queue on its Sunday. On the Sabbath a "Shabbat shalom" banner shows and due dates are hidden. Unfinished lessons roll to next week; Skip this recipe, Cook another recipe, and Skip this week, each with Undo.
 - **Shopping** (`src/content/shop.js`, `src/worker/shopping.js`), optional: **What you'll need** shows the ingredients for the coming lessons week by week. A parent can make a shopping list for the next few uncooked lessons, tick what's on hand, and check the rest off in the store; it's merged, rounded to store packages, and grouped by aisle.

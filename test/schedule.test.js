@@ -1,7 +1,7 @@
 // The weekly schedule (plan §6.18): worked out, not stored.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { schedule, weekOf, addDays, localDay } from '../src/worker/schedule.js';
+import { schedule, weekOf, addDays, localDay, isSabbath } from '../src/worker/schedule.js';
 
 const L = ['a', 'b', 'c', 'd', 'e', 'f'];
 const course = { start_date: '2026-09-06', per_week: 2 }; // a Sunday
@@ -74,4 +74,10 @@ test('the weeks after next follow at the pace, past skipped weeks', () => {
   const weeks = { '2026-09-27': { skipped: true } };
   const s = schedule({ course, lessons: [...L, 'g', 'h'], weeks, today: '2026-09-07' });
   assert.deepEqual(s.ahead, [{ week: '2026-09-20', lessons: ['e', 'f'] }, { week: '2026-10-04', lessons: ['g', 'h'] }]);
+});
+
+test('Saturday is the Sabbath', () => {
+  assert.equal(isSabbath('2026-10-24'), true);
+  assert.equal(isSabbath('2026-10-23'), false);
+  assert.equal(isSabbath('2026-10-25'), false);
 });

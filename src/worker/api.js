@@ -15,7 +15,8 @@ import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
 import { FREE_MAX, servingOptions } from '../content/scale.js';
 import { numberCourse } from '../content/course.js';
-import { register as registerPlan, markCooked } from './plan.js';
+import { register as registerPlan, markCooked, tzOf } from './plan.js';
+import { localDay, isSabbath } from './schedule.js';
 import { register as registerShopping } from './shopping.js';
 
 export const THEMES = ['quest', 'passport'];
@@ -385,24 +386,32 @@ on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
     ...ids.map((pid) => env.DB.prepare('INSERT OR IGNORE INTO attempt_profiles (attempt_id, family_id, profile_id) VALUES (?, ?, ?)')
       .bind(aid, s.family_id, pid)),
   ]);
-  // A finished cook closes the queued lesson it was for (§6.2).
-  if (finished) await markCooked(env, s.family_id, L.id, ids, aid);
+  // A finished cook closes the queued lesson it was for (§6.2), unless it was
+  // on the Sabbath: nothing cooked then counts (§6.18), so the lesson stays up next.
+  if (finished && !isSabbath(localDay(finished, tzOf(req)))) await markCooked(env, s.family_id, L.id, ids, aid);
   return { ok: true, id: aid, finished_at: finished };
 });
 
 // The lessons a profile has finished, with how many times and when last.
+// Cooks on the Sabbath don't count (§6.18).
 on('GET', '/api/profiles/([0-9a-f]{16})/cooks', async (req, env, body, [pid]) => {
   const s = await requireSession(env, req);
   if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) {
     fail(404, 'not_found', 'No such profile.');
   }
   const { results } = await env.DB.prepare(
-    `SELECT a.lesson_id, COUNT(*) AS times, MAX(a.finished_at) AS last
+    `SELECT a.lesson_id, a.finished_at
        FROM attempts a JOIN attempt_profiles ap ON ap.attempt_id = a.id
       WHERE ap.profile_id = ? AND ap.family_id = ? AND a.family_id = ? AND a.finished_at IS NOT NULL
-      GROUP BY a.lesson_id`,
+      ORDER BY a.finished_at`,
   ).bind(pid, s.family_id, s.family_id).all();
-  return { cooks: Object.fromEntries(results.map((r) => [r.lesson_id, { times: r.times, last: r.last }])) };
+  const tz = tzOf(req);
+  const cooks = {};
+  for (const r of results) {
+    if (isSabbath(localDay(r.finished_at, tz))) continue;
+    cooks[r.lesson_id] = { times: (cooks[r.lesson_id]?.times ?? 0) + 1, last: r.finished_at };
+  }
+  return { cooks };
 });
 
 // The Reflect stage (§3): each profile on a cook rates it 1 to 5, says what
@@ -435,6 +444,7 @@ on('PUT', '/api/attempts/([0-9a-f]{16})/reflection', async (req, env, body, [aid
 
 // Every lesson each profile has cooked, oldest first: date, dish, cuisine,
 // skill, and that profile's rating. ?tz= gives the family's calendar day.
+// Cooks on the Sabbath don't count, so they aren't listed (§6.18).
 on('GET', '/api/progress', async (req, env) => {
   const s = await requireParent(env, req);
   const tz = Number(new URL(req.url).searchParams.get('tz') ?? 0);
@@ -449,7 +459,7 @@ on('GET', '/api/progress', async (req, env) => {
     family: (await env.DB.prepare('SELECT name FROM families WHERE id = ?').bind(s.family_id).first()).name,
     profiles: profiles.map((p) => ({
       id: p.id, name: p.name,
-      rows: results.filter((r) => r.profile_id === p.id).map((r) => {
+      rows: results.filter((r) => r.profile_id === p.id && !isSabbath(day(r.finished_at))).map((r) => {
         const L = lesson(r.lesson_id);
         return { date: day(r.finished_at), dish: L?.title ?? r.lesson_id, cuisine: LIBRARY.cuisines[L?.cuisine] ?? L?.cuisine ?? '', skill: L?.skill ?? '', rating: r.rating };
       }),

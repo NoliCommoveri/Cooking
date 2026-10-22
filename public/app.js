@@ -308,7 +308,7 @@ async function kitchen(id) {
   const [{ profiles }, lib] = await Promise.all([api('GET', '/api/profiles'), api('GET', '/api/library')]);
   const p = profiles.find((x) => x.id === id);
   if (!p) return go('#/');
-  const [{ cooks }, mine] = await Promise.all([api('GET', `/api/profiles/${p.id}/cooks`), api('GET', `/api/profiles/${p.id}/queue?${tz()}`)]);
+  const [{ cooks }, mine] = await Promise.all([api('GET', `/api/profiles/${p.id}/cooks?${tz()}`), api('GET', `/api/profiles/${p.id}/queue?${tz()}`)]);
   store('cpr.profile', p.id);
   // A profile on a course takes its lesson numbers from the course plan (§4.1).
   const labels = mine.labels ?? lib.labels;

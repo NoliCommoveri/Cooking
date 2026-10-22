@@ -9,6 +9,8 @@ const toDate = (s) => new Date(`${s}T00:00:00Z`);
 const fromDate = (d) => d.toISOString().slice(0, 10);
 export const addDays = (s, n) => fromDate(new Date(toDate(s).getTime() + n * DAY));
 export const weekOf = (s) => addDays(s, -toDate(s).getUTCDay());
+// Nothing cooked or graded on the Sabbath counts (owner, 2026-10-22, §6.18).
+export const isSabbath = (s) => toDate(s).getUTCDay() === 6;
 export const isDay = (s) => typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s) && fromDate(toDate(s)) === s;
 
 // The family's calendar day for a moment, from the browser's offset in minutes

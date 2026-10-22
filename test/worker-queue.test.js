@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { makeEnv, family, client, opsClient, samplePlan } from './helpers/worker.js';
-import { weekOf } from '../src/worker/schedule.js';
+import { weekOf, addDays } from '../src/worker/schedule.js';
 
 const today = new Date().toISOString().slice(0, 10);
 const sunday = weekOf(today);
@@ -272,4 +272,23 @@ test('an extra lesson has no due day for kids, even in homeschool mode', async (
   const items = (await a.get(`/api/profiles/${ava}/queue`)).body.items;
   assert.deepEqual(items.map((x) => [x.lesson_id, Boolean(x.due)]), [['shakshuka', true], ['beef-bulgogi', false]]);
   assert.equal((await a.get('/api/queue')).body.courses[0].this_week.lessons[1].extra, true);
+});
+
+test("nothing cooked on the Sabbath counts: the lesson stays queued, and it isn't in progress", async () => {
+  const { a, mom } = await setup();
+  await a.post(`/api/profiles/${mom}/ask`, { lesson_id: 'beef-bulgogi' });
+  // Last Saturday at noon, by the family's calendar (US Central, tz=300).
+  const sat = `${addDays(sunday, -1)}T17:00:00.000Z`;
+  const cook = (id, finished_at) => a.put(`/api/attempts/${id}?tz=300`, {
+    lesson_id: 'beef-bulgogi', servings: 6, profile_ids: [mom], started_at: new Date(Date.parse(finished_at) - 3600e3).toISOString(), finished_at,
+  });
+  assert.equal((await cook('00000000000005a1', sat)).status, 200);
+  assert.deepEqual((await a.get(`/api/profiles/${mom}/queue?tz=300`)).body.items.map((x) => x.lesson_id), ['beef-bulgogi']);
+  assert.deepEqual((await a.get(`/api/profiles/${mom}/cooks?tz=300`)).body.cooks, {});
+  assert.deepEqual((await a.get('/api/progress?tz=300')).body.profiles.find((p) => p.id === mom).rows, []);
+  // The same cook on Friday counts.
+  await cook('00000000000005a2', `${addDays(sunday, -2)}T17:00:00.000Z`);
+  assert.equal((await a.get(`/api/profiles/${mom}/queue?tz=300`)).body.items.length, 0);
+  assert.equal((await a.get(`/api/profiles/${mom}/cooks?tz=300`)).body.cooks['beef-bulgogi'].times, 1);
+  assert.equal((await a.get('/api/progress?tz=300')).body.profiles.find((p) => p.id === mom).rows.length, 1);
 });
