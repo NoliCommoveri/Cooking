@@ -609,7 +609,7 @@ The linter must reject content when:
 - a core lesson has no `learn.move`, no `learn.why` card, or no `learn.wrong` entry, or a step's `why` points to a card that doesn't exist
 - a fixed-scaling lesson has no multipliers, or they don't include 1×
 - a step that `handles` raw food isn't followed directly by a `wash` step, or a raw ingredient is never marked as handled
-- a lesson with raw meat, poultry, or fish has no doneness step with a thermometer temperature. **Recommendation, waiting on the owner:** a lesson whose only raw ingredient is egg baked into a dough (cookies) may use a visual doneness check instead
+- a lesson with raw meat, poultry, or fish has no doneness step with a thermometer temperature. A lesson whose only raw ingredient is egg baked into a dough (cookies) may use a visual doneness check instead (owner approved)
 - a step that isn't solo has no `hazard`
 - a callback points to a lesson that doesn't exist
 - the lesson can't be scaled and filled cleanly at every serving size it offers

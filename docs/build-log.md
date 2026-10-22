@@ -544,3 +544,6 @@ The owner reviewed the sample lessons in the preview.
   fingers thick".
 - The owner ruled that version numbers don't go up on lessons that aren't
   released yet. Biscuits went back to version 1, and §7.3 now says so.
+- **Cookies (49):** "2 inches apart" also says "three of your fingers wide".
+- The owner approved visual doneness checks for lessons whose only raw
+  ingredient is egg baked into a dough. §7.4 no longer marks it as waiting.
