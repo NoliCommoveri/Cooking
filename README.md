@@ -2,10 +2,14 @@
 
 A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
-Multi-family, on Cloudflare.
+Multi-family, on Cloudflare. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [11. 2026-10-22 — Fat rule scope](docs/build-log.md#11-2026-10-22--fat-rule-scope)
+**Latest build log entry:** [17. 2026-10-22 — Teaching the why](docs/build-log.md#17-2026-10-22--teaching-the-why)
 
 ## Current features
 
-None yet. The app is in planning — see `cooking-class-app-PLAN.md`.
+No app yet. The plan is in `cooking-class-app-PLAN.md`.
+
+- **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
+- **Dish illustrations** (`content/images/dishes/`): one picture for each of the 50 lessons.
+- **Kitchen Quest showcase** (`mockups/quest-showcase/`): every Kitchen Quest component in a demo state, for approval.

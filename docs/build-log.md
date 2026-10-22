@@ -243,3 +243,169 @@ Owner rulings on open questions:
 - The owner ruled that the fat rule covers separable fat only (suet, tallow,
   beef dripping sold as a fat). Marbling and cooking drippings are allowed;
   §2.1 now says so. No lesson changes were needed.
+
+---
+
+## 12. 2026-10-22 — Phase 0: theme mockups
+
+- Started Phase 0 with a theme picker page for the kids:
+  `mockups/theme-picker.html`, published as a private claude.ai page.
+- All four candidate themes from §5.2 are mocked up: Chef's Passport, Kitchen
+  Quest, Food Truck, and Recipe Scrapbook.
+- Each theme shows the same four screens for lesson 4 (Shakshuka, serves 4):
+  lesson library, prep checklist, cook mode with timers, and progress.
+  - They're interactive. Ingredients check off into the theme's container
+    (bowl, inventory, crate, sticker sheet), and Next moves through 6 steps.
+    Timers start, pause, ring, and show "Ended N min ago".
+  - The food-safety check (160°F egg) blocks Next until it's confirmed. A
+    wash-hands step follows the raw-egg step.
+  - The progress screens use sample data: 8 dishes cooked, rank Prep Cook.
+- All art is hand-drawn SVG, as the first test of §5.3a.
+- No pill-shaped labels. Cook-mode tap targets are at least 56px.
+- Nothing is saved. The page is a mockup only, and no app code exists yet.
+- Next: the kids pick a theme. Then the rest of Phase 0 is built for that
+  theme.
+
+---
+
+## 13. 2026-10-22 — Kids chose Kitchen Quest
+
+- The owner ruled: **Kitchen Quest is built first, then Chef's Passport as
+  soon as possible.** Food Truck and Recipe Scrapbook stay for later.
+- §5.2: this is now a Requirement, replacing "the kids pick it in Phase 0."
+  The theme list says which is built first, second, and later. Kitchen Quest's
+  description gained how the skill tree works: a path per unit, a node per
+  dish, and ranks shown as level and title.
+- New §5.4a, Kitchen Quest's treatment of every component, drawn from the
+  mockup (Recommendation). §5.4 stays as the Chef's Passport treatment.
+- §9: Phase 0 now builds Kitchen Quest. New Phase 0b builds Chef's Passport
+  right after Phase 0 is approved. Phase 5 covers rewards in both themes.
+- §6.1's "Passport, ranks…" line now says progress is drawn by the profile's
+  theme.
+- Mockup page: the rewards table now says a Kitchen Quest dish lights a node on
+  the skill tree and a skill earns a crest, to match §5.4a.
+
+---
+
+
+## 14. 2026-10-22 — Dish art gathered
+
+- **The owner supplies the dish illustrations,** made with ChatGPT as sheets
+  of 4–5 dishes, and Claude crops them. §5.3a updated; Claude still draws the
+  rest of the art as SVG.
+- **All 50 dishes have art** in `content/images/dishes/`, one transparent
+  square PNG per lesson (`04-shakshuka.png` etc.), about 500–740 px each.
+  - 14 source sheets are in `content/images/source/`. Seven dishes were
+    redone for accuracy (14, 26, 27, 28, 32, 34, 35, 37). The redos fixed
+    missing chicken, ground beef where the lesson teaches slicing, sausage and
+    pulled meat that looked like pork, and the wrong style of omelet and mac
+    and cheese.
+  - Every picture was checked for unclean foods; none are in use. 37 Philly
+    cheesesteak still looks like ground beef and is the one open redo.
+- `tools/crop-dish-sheet.py` cuts a sheet into dishes: it removes the white
+  background and drop shadows and drops stray edges of neighbouring dishes.
+  `tools/dish-sheets.txt` maps every sheet position to its dish, with '-' for
+  a dish a later sheet replaced, so re-cropping can't bring back an old one.
+- `content/images/LICENSES.md` lists each sheet and the images cropped from it.
+- **Working name: Clean Plate Recipes** (the owner's, not final), added to the
+  plan (§1). Its logo is `content/images/brand/clean-plate-logo.png`.
+
+---
+
+## 15. 2026-10-22 — Phase 0: Kitchen Quest showcase
+
+- Built the Phase 0 showcase as a private page, at the owner's choice instead
+  of Cloudflare for now: `mockups/quest-showcase/index.html`, with web-sized
+  dish art in `mockups/quest-showcase/img/`.
+- It shows every §5.4a component in a demo state: lesson card with the
+  test-kitchen seal and a locked "coming up" card, inventory grid, gear
+  loadout, quest log with stage bar, cooldown-ring timer tray, safety banners
+  (all three levels plus the adult-profile version), skill tree at real unit
+  lengths, level and level-up screen, crest collection, gem rating, trophy hall,
+  and the helper's Ask button and dialogue box (look only; the helper isn't
+  specced).
+- House style: the profile picker (chef's lockers, sample kid, shared, and adult
+  profiles) with the per-profile theme switch, where only Kitchen Quest is
+  selectable, and a parent shopping list grouped by store section.
+- Core art set drawn as SVG: 9 store-section icons and 10 tool-category icons,
+  plus an oven mitt for hands-on safety and the helper's guide avatar.
+- Kitchen Quest tokens and type are shown on the page.
+- Added a serving picker at the owner's request. It's a party-size panel on
+  the quest card that starts at the queued count and updates the prep amounts
+  and the egg count in the cook steps. It warns "You shopped for 4" when the
+  count changes after shopping, and shows a two-skillet note above 8. A
+  fixed-size baking example (biscuits: 3, 6, or 12) is also shown. In the
+  plan, §6.6 now describes the picker and the after-shopping warning, and
+  §5.4 and §5.4a each gained a serving-picker row.
+- Nothing is saved, and no app code exists yet. Next: the owner reviews the
+  look; once approved, Phase 0b builds Chef's Passport the same way.
+
+---
+
+## 16. 2026-10-22 — Plan: fix requests and lesson patches
+
+- New §6.11 (Recommendation): parents and adult learners send **fix
+  requests** from a lesson or step, and the owner applies them from the browser
+  as **lesson patches** that go live for every family.
+  - The owner said she isn't the cooking expert, so the reporter proposes the
+    correction and the app checks it: the blocked-word scan, unit checks, and
+    food-safety minimums. A patch that fails can't be applied.
+  - Patches can change amounts, units, times, step text, notes, and doneness
+    targets only. Adding or swapping an ingredient needs a content change.
+  - Every patch has a Revert. Safety and unclean-ingredient reports email the
+    owner right away. A patch raises the lesson's version.
+  - Claude folds applied patches into the lesson files in a later session; the
+    owner does nothing for that.
+- Added `fix_requests` and `lesson_patches` to the data model, a Fix requests
+  queue to the owner features, the work and its done-when to Phase 2, and patch
+  checks and revert to the tests.
+- At the owner's request, the first-run wizard (§6.9) now has a **parent tour**
+  (Requirement): one card per parent task, including one on Suggest a fix.
+  It can be skipped and replayed from family settings.
+- Showcase: added **Suggest a fix** on the lesson card and every cook step.
+  It asks for the parent PIN (adult profiles skip it), then opens a house-style
+  form: problem type, where, which part, what it says now, and what it should
+  say instead. A new owner fix-request queue shows the current and suggested
+  text side by side, with Apply, Decline, and Revert. Applying a fix really
+  changes the lesson on the page. One sample request is rejected by the
+  food-safety check (an egg target below 160°F), and the blocked-word scan
+  rejects unclean foods.
+- The first-run wizard (§6.9) also has a **profile intro** (Requirement), at
+  the owner's request: a short, skippable, replayable intro in the profile's
+  own theme. It covers asking for a lesson, servings, Prep, cook mode, the
+  photo and reflection, progress, what to do when something looks wrong (kids
+  tell a grown-up; adults get Suggest a fix), and the helper.
+- Showcase: added the **tutorial quest**, Kitchen Quest's version of the
+  profile intro. It has 10 cards, each with the guide speaking and a "try it":
+  ask to cook, party size, gather supplies, cook a step, timers and the
+  thermometer, photo and rating, lighting a skill-tree node, what to do if
+  something looks wrong (the adult version shows Suggest a fix), and a finish
+  card. It has a progress bar, Back and Next, and a Skip that jumps to the
+  finish card.
+
+---
+
+## 17. 2026-10-22 — Teaching the why
+
+- The owner pointed out the lessons read as skills practice with no "why".
+  Added to the plan (§3, Recommendation, approved): every Learn stage has a set
+  shape (the move, why it works, same move in other dishes, when it goes
+  wrong), plus callbacks to earlier lessons, a **Why?** button on cook steps,
+  an optional transfer question in Reflect, and skills that explain
+  themselves when tapped.
+- The "other dishes" card is built from lesson `skills` tags, not hand-written.
+  §7.3's lesson sketch gained `learn.move`, `learn.why`, `learn.wrong`,
+  `learn.callback`, quiz `explain`, and a step `why` link. The linter (§7.4)
+  fails a core lesson missing the move, a why card, or a when-it-goes-wrong
+  entry, and warns on single-lesson skills and missing callbacks.
+- Showcase: new Learn section with 8 Shakshuka cards (callback to the French
+  omelet, the move, three why cards, other dishes with cooked ones marked,
+  rescues, and a two-question quiz with explanations). Steps 2, 3, and 6 have
+  Why?. Crests open a detail panel listing every dish that uses the skill.
+  Reflect has the optional transfer question. Nine more dishes were added to
+  the page's images.
+- The owner ruled that **adult profiles don't ask to cook**. Their button is
+  "Cook this", which queues the lesson for that profile with no approval and
+  no PIN. A shared profile with a kid on it still asks (§6.1, §6.9). The
+  showcase's tutorial card switches to the adult version when an adult
+  profile is picked.
