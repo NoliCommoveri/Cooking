@@ -25,9 +25,12 @@ A parent uses the app from their phone. They queue lessons, see a combined **sho
 | Owner (Jen) | Any | Everything a parent can do, plus approving sign-up requests, reviewing submitted recipes, and managing families |
 | Parent (1+ per family) | Phone | Queue lessons, shopping list, safety review, gallery, family settings |
 | Kid (any number per family) | Tablet or phone in the kitchen | Learn, prep, cook, photograph, reflect, see progress |
+| Adult learner (any number per family) | Any | The same as a kid: adults can take the class too, through their own profile |
 
 ### Profiles
-Kids use the app through **profiles** (chef lockers). A profile can be **one kid or several kids sharing it**. The family decides: one profile per kid, one shared profile for all of them, or a mix. Progress (stamps, pins, rank) belongs to the profile.
+Kids, and adults taking the class, use the app through **profiles** (chef lockers). A profile can be **one person or several sharing it**. The family decides: one profile per person, one shared profile, or a mix. Progress (stamps, pins, rank) belongs to the profile.
+
+**Each profile is marked kid or adult** when it's made (§6.9). A shared profile with any kid on it is a kid profile. The difference is how safety levels read (§3); everything else is the same.
 
 **A lesson can be for one or more profiles.** When a parent queues a lesson, they pick which profiles it's for. All of those profiles cook it together as one cook: one shopping-list entry, one photo, and every profile on it gets the stamp and pin. Each profile writes its own reflection.
 
@@ -41,6 +44,8 @@ Kids use the app through **profiles** (chef lockers). A profile can be **one kid
   - **Water animals:** allowed only if the animal has both fins and scales (e.g. salmon, cod, tilapia, tuna, anchovy, trout). Blocked: all shellfish (shrimp, crab, lobster, clams, oysters, mussels, scallops), squid, octopus, catfish, eel, shark, and any other animal without both.
   - **Birds:** chicken, turkey, duck, and goose are allowed. The birds listed in Leviticus 11:13–19 are blocked, including birds of prey and scavengers.
   - **Insects:** blocked (the only exceptions in Leviticus 11:22 are certain locusts, which won't appear in this library).
+  - **Blood** (Leviticus 3:17, 7:26–27, 17:10–14): blocked as a food or ingredient in any form, e.g. blood sausage, black pudding, morcilla, boudin noir, blood tofu.
+  - **Fat** (Leviticus 3:17, 7:23): the fat of cattle, sheep, and goats is blocked, i.e. suet and tallow (including "beef dripping" sold as a fat).
 - **Hidden sources must be flagged** in the ingredient registry and checked by the content linter (§7.4). Each needs a named substitute or a "check the label" note:
   - Oyster sauce (shellfish). Substitute mushroom stir-fry sauce, or soy sauce plus sugar.
   - Shrimp paste, which hides in many Thai curry pastes and some kimchi.
@@ -50,6 +55,8 @@ Kids use the app through **profiles** (chef lockers). A profile can be **one kid
   - Breakfast sausage, andouille, chorizo, bacon, pancetta, guanciale, Canadian bacon (pork by default; use beef or poultry versions).
   - Imitation crab (often pollock, but may contain crab or shellfish extract).
   - Carmine or cochineal (an insect-derived red coloring) in some candies, yogurts, and drinks.
+  - Suet, in mincemeat, Christmas pudding, some dumplings, and some pastry.
+  - Beef tallow, used for frying by some restaurants and in some store-bought fries, pastry, and shortening blends.
 - **Per-family dietary filters** are an extra layer on top of the hard block. Filters are per family, not per kid. Each family can add its own restrictions (e.g. vegetarian, nut-free, dairy-free) using the `contains` tags on the ingredient registry (§7.2). A lesson that conflicts with a family's filters is hidden from that family. If the lesson lists an allowed substitution that resolves the conflict, it is shown with that substitution applied instead.
   - **Recommendation:** start with these tags: nuts, peanuts, dairy, egg, gluten, fish, meat (for vegetarian). Derived products carry their source's tag: gelatin, chicken broth, and beef broth are `meat`; fish sauce, Worcestershire, and dashi are `fish`.
   - **Recommendation:** if a lesson is hidden by a family's filters, it no longer counts as a prerequisite for that family. Lessons that list it unlock as if it were done. Without this, a dairy-free family could never unlock the lessons that require 32.
@@ -98,6 +105,8 @@ Each lesson has these stages:
 Safety levels must be shown as **illustrated icons or banners, not colored pills** (§5.4).
 
 A safety level is information only. The banner tells the kid who must be in the kitchen; nothing in the app locks a step or waits for an adult.
+
+On an **adult profile**, the banner shows only the hazard (hot oil, sharp knife, hot oven), without "an adult must…" wording.
 
 ### Food-safety checks (recommendation)
 Separate from safety levels, which are about who must be in the kitchen. These are about the food.
@@ -234,7 +243,7 @@ The themed components need a lot of art, and every theme added later (§5.2) nee
 - An ingredient or tool without its own icon falls back to its category's generic icon. The linter warns about fallbacks; it doesn't fail on them.
 - Each new lesson brings its own dish illustration. Stamps, pins, and outfits come with Phase 5.
 - Every image that isn't original carries its license in `content/images/LICENSES.md`, the same as music.
-- Who draws the art is an open question (§10).
+- **Claude draws the art** as SVG. The Phase 0 showcase is the test: if the owner isn't happy with it there, the other options are a commissioned illustrator or a licensed icon set restyled to match.
 
 ### 5.4 Themed components (Chef's Passport)
 | Component | Treatment |
@@ -386,9 +395,9 @@ A bonus feature, after the core app works. Families can cook their own recipes i
 
 ### 6.9 First-run wizard (to be specced)
 A first run for a new family, like KennelOS's (End-State guide §11 and "Getting Started" in §33). It runs after a family signs up with a code or the keyword (§8.3). Each part saves as it's answered and can be skipped.
-- **Family setup:** profiles (one per kid, shared, or a mix), default servings, diet filters, pantry staples, and the parent PIN (required, §8.3).
+- **Family setup:** profiles (one per person, shared, or a mix), each marked **kid or adult**, default servings, diet filters, pantry staples, and the parent PIN (required, §8.3).
 - **A warning for first-time parents:** the recipes haven't all been test-cooked. Read each lesson through before your kids cook it, and mark it test-cooked once you have (§6.2).
-- **Kids' first run:** each profile sets up its chef locker and avatar, and picks its theme.
+- **Each profile's first run:** it sets up its chef locker and avatar, and picks its theme.
 - **Then an introduction to the helper** (§6.8).
 
 Until the wizard is built, the test-cook warning shows as a one-time notice on a parent's first sign-in.
@@ -426,6 +435,7 @@ content/
   "purchaseUnit": { "label": "5 lb bag", "amount": 2268 },
   "perishable": false,
   "animalSource": null,
+  "animalPart": null,
   "rawHandling": null,
   "contains": ["gluten"],
   "icon": null,
@@ -434,6 +444,7 @@ content/
 ```
 - `contains` lists the diet tags (§2.1) the ingredient has. An empty list means none. A family filter hides any lesson using an ingredient whose `contains` includes one of its tags.
 - `animalSource` is **required for anything that comes from an animal**: the species, e.g. `"cattle"`, `"chicken"`, `"anchovy"`, `"bonito"`. `null` means not animal-derived. The linter checks it against the allowlist of clean species (§7.4).
+- `animalPart` is required alongside `animalSource`: `"meat"`, `"fat"`, `"blood"`, `"bone"`, `"egg"`, `"milk"`, and so on. The linter rejects `"blood"` from any animal, and `"fat"` from cattle, sheep, or goats (§2.1). Fat from poultry (e.g. chicken schmaltz) and from fish is allowed.
 - `rawHandling` is `"poultry"`, `"meat"`, `"fish"`, or `"egg"` for ingredients that trigger the food-safety checks in §3.
 - `icon` is null when the ingredient uses its section's generic icon (§5.3a).
 - For ingredients on the hidden-source list (§2.1), `watch` carries a short note, e.g. `"Check casing: must be collagen or skinless"`.
@@ -481,14 +492,14 @@ content/
 The linter must reject content when:
 - the JSON doesn't match the schema
 - a lesson references an ingredient ID missing from the registry
-- an ingredient is unclean under §2.1 (checked through `animalSource` and the blocked-word list below). There is no override or exception mechanism for this check
+- an ingredient is unclean under §2.1 (checked through `animalSource`, `animalPart`, and the blocked-word list below). There is no override or exception mechanism for this check
 - a step has no safety level
 - a prerequisite points to a lesson that doesn't exist, or prerequisites form a loop
 - a unit has no conversion to its ingredient's base unit
 - an equipment, skill, or cuisine ID is missing from its registry
 - a substitution's `use` is missing from the registry, is unclean, or (for a diet-reason substitution) doesn't actually remove the conflicting tag
 - an animal-derived ingredient has no `animalSource`, or its `animalSource` isn't on the allowlist of clean species. The allowlist is a content file; adding to it is a change to §2.1 and needs the owner's say-so
-- lesson text (steps, tips, cards, notes, substitution notes) names a blocked food from a word list (pork, bacon, ham, lard, shrimp, crab, lobster, clam, oyster, mussel, scallop, squid, octopus, catfish, eel, and so on). A word that's fine in context ("turkey bacon," "mushroom stir-fry sauce, not oyster sauce") is allowed by an exact-phrase allowlist in the content, never by turning the check off
+- lesson text (steps, tips, cards, notes, substitution notes) names a blocked food from a word list (pork, bacon, ham, lard, suet, tallow, beef dripping, blood sausage, black pudding, shrimp, crab, lobster, clam, oyster, mussel, scallop, squid, octopus, catfish, eel, and so on). A word that's fine in context ("turkey bacon," "mushroom stir-fry sauce, not oyster sauce") is allowed by an exact-phrase allowlist in the content, never by turning the check off
 - a lesson uses an ingredient with `rawHandling` but has no doneness check step, or has no wash-hands step after the raw-handling step (§3)
 - step IDs within a lesson aren't unique, or a step with a timer has no `timerLabel`
 - a fixed-scaling lesson has no multipliers
@@ -546,7 +557,7 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `recipe_submissions` (id, family_id, family_recipe_id, submitted_at, status: pending → released | declined, community_recipe_id)
 - `community_recipes` (id, title, body_json, released_at, released_by). No `family_id`: released recipes belong to the shared directory, not a family
 - `sessions` (id, parent_id, family_id, created_at, last_seen)
-- `profiles` (id, family_id, name, avatar, theme, track: core | beginner). One kid or several sharing it (§1)
+- `profiles` (id, family_id, name, avatar, theme, audience: kid | adult, track: core | beginner). One person or several sharing it (§1)
 - `queue` (id, family_id, lesson_id, servings, planned_date, status: requested → assigned → shopped → cooked, requested_by_profile_id)
 - `queue_profiles` (queue_id, family_id, profile_id)
 - `shopping_trips` (id, family_id, created_at, ended_at)
@@ -596,8 +607,7 @@ Each phase should be deployed and usable before the next begins.
 
 ## 10. Open questions
 
-1. **Other hidden sources:** should the hard block (§2.1) also cover animal rennet or pepsin in cheese (sometimes from pigs), and blood or fat (Leviticus 3 and 17)? Neither is in the rule today.
-2. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
+None right now.
 
 ---
 

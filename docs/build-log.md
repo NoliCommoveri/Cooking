@@ -214,3 +214,24 @@ Owner rulings on open questions:
   pick from the same themes.
 - The art section notes that each added theme needs its own art set.
 - Open questions are now 1–2.
+
+---
+
+## 10. 2026-10-22 — Blood and fat blocked; Claude draws the art; adult profiles
+
+- **Blood and fat added to the hard block (§2.1).** The owner ruled yes on
+  blood and fat. Rennet and pepsin were not included.
+  - Blood is blocked from any animal. Fat from cattle, sheep, and goats (suet,
+    tallow, beef dripping) is blocked.
+  - Suet and beef tallow were added to the hidden sources.
+  - A new registry field, `animalPart`, lets the linter catch these, since the
+    species check alone passes cattle. The blocked-word list gained suet,
+    tallow, beef dripping, blood sausage, and black pudding.
+- **Claude draws the art** as SVG, judged at the Phase 0 showcase. Removed the
+  open question.
+- **Adults can take the class.**
+  - Each profile is marked kid or adult in the first run (`profiles.audience`);
+    a shared profile with any kid on it is a kid profile.
+  - On adult profiles, safety banners show only the hazard.
+  - Added "Adult learner" to the users table.
+- No open questions remain.
