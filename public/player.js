@@ -9,7 +9,7 @@ import { findTerms } from './lib/terms.js';
 import { dietView } from './lib/diet.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
-const ic = (id, cls = 'ico') => `<svg class="${cls}" aria-hidden="true"><use href="icons.svg#${id}"/></svg>`;
+const ic = (id, cls = 'ico') => `<svg class="${cls}" aria-hidden="true"><use href="/icons.svg#${id}"/></svg>`;
 
 let registry = null;
 const lessons = {};
@@ -18,8 +18,8 @@ async function load(url) {
   if (!res.ok) throw new Error("That lesson couldn't be loaded. Check the connection and try again.");
   return res.json();
 }
-const getRegistry = async () => (registry ??= await load('content/registry.json'));
-const getLesson = async (id) => (lessons[id] ??= await load(`content/lessons/${encodeURIComponent(id)}.json`));
+const getRegistry = async () => (registry ??= await load('/content/registry.json'));
+const getLesson = async (id) => (lessons[id] ??= await load(`/content/lessons/${encodeURIComponent(id)}.json`));
 
 // ---------- saved state, per profile and lesson ----------
 const key = (pid, lid) => `cpr.cook.${pid}.${lid}`;
@@ -170,7 +170,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
         <p class="meta">Your family's usual: ${family.default_servings}</p>${sc.note ? `<p class="pan">${ic('t-pans')}${esc(sc.note)}</p>` : ''}</div>`
       : `<div class="p-serve">${fixedSizes
         ? `<div class="p-serve-row"><span class="p-lbl">Serves</span>${options.map((n) => `<button type="button" class="p-step" style="width:auto;padding:0 14px" aria-pressed="${n === S.servings}" data-act="serv-set" data-n="${n}">${n}</button>`).join('')}</div>`
-        : `<div class="p-serve-row"><span class="p-lbl">Serves</span><button type="button" class="p-step" data-act="serv" data-i="-1" aria-label="Fewer servings" ${S.servings <= options[0] ? 'disabled' : ''}>−</button><span class="p-num" aria-live="polite">${S.servings}</span><button type="button" class="p-step" data-act="serv" data-i="1" aria-label="More servings" ${S.servings >= options.at(-1) ? 'disabled' : ''}>+</button></div><div class="p-plates" aria-hidden="true">${'<svg viewBox="0 0 100 100"><use href="icons.svg#plate"/></svg>'.repeat(S.servings)}</div>`}
+        : `<div class="p-serve-row"><span class="p-lbl">Serves</span><button type="button" class="p-step" data-act="serv" data-i="-1" aria-label="Fewer servings" ${S.servings <= options[0] ? 'disabled' : ''}>−</button><span class="p-num" aria-live="polite">${S.servings}</span><button type="button" class="p-step" data-act="serv" data-i="1" aria-label="More servings" ${S.servings >= options.at(-1) ? 'disabled' : ''}>+</button></div><div class="p-plates" aria-hidden="true">${'<svg viewBox="0 0 100 100"><use href="/icons.svg#plate"/></svg>'.repeat(S.servings)}</div>`}
         <p class="p-small">Your family's usual: ${family.default_servings}</p>${sc.note ? `<p class="p-pan">${ic('t-pans')}${esc(sc.note)}</p>` : ''}</div>`;
     const changes = [
       ...view.applied.map((x) => `Use ${esc(name(x.use).toLowerCase())} instead of ${esc(name(x.for).toLowerCase())}.`),
@@ -178,11 +178,11 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
     ];
     const swaps = changes.length ? `<p class="${T.note}"><b>For your family:</b> ${changes.join(' ')}</p>` : '';
     const top = quest
-      ? `<article class="q-panel q-card"><p class="q-kick">Path ${L.unit} · Quest ${L.number}</p><div class="q-win"><img src="img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
+      ? `<article class="q-panel q-card"><p class="q-kick">Path ${L.unit} · Quest ${L.number}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
           <h2 class="q-title">${esc(L.title)}</h2><p class="q-skill"><b>${esc(L.skill)}</b></p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${swaps}
           <button type="button" class="q-btn" data-act="start">${!S.started ? 'Start quest' : 'Keep going'}</button></article>`
-      : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
+      : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
           <h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${swaps}
           <button type="button" class="p-btn" data-act="start">${!S.started ? "Let's cook" : 'Keep going'}</button></article>`;
@@ -209,7 +209,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
   function loreCard(c) {
     let body;
     if (c.xfer) {
-      body = `<div class="xfer">${c.xfer.map(({ sk, list }) => `<div class="${quest ? '' : 'p-xfer'}"><h5>${esc(R.skills[sk]?.name ?? sk)}</h5><div class="xdishes">${list.map((d) => `<div class="${quest ? 'xd' : 'p-xd'}"><img src="${esc(d.image)}" alt="" width="64" height="64">${esc(d.title)}<small>Lesson ${d.number}</small></div>`).join('')}</div></div>`).join('')}</div>`;
+      body = `<div class="xfer">${c.xfer.map(({ sk, list }) => `<div class="${quest ? '' : 'p-xfer'}"><h5>${esc(R.skills[sk]?.name ?? sk)}</h5><div class="xdishes">${list.map((d) => `<div class="${quest ? 'xd' : 'p-xd'}"><img src="/${esc(d.image)}" alt="" width="64" height="64">${esc(d.title)}<small>Lesson ${d.number}</small></div>`).join('')}</div></div>`).join('')}</div>`;
     } else if (c.wrong) {
       body = `<ul class="${quest ? 'wrongs' : 'p-wrongs'}">${c.wrong.map((w) => `<li><b>${esc(w.sign)}</b>${esc(w.fix)}</li>`).join('')}</ul>`;
     } else if (c.quiz) {
@@ -219,7 +219,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
         return `<div class="quiz"><p class="qq" style="font-weight:800;font-size:17px;margin:0">${esc(q.q)}</p>${q.choices.map((o, oi) => `<button type="button" class="${opt} ${got === undefined ? '' : oi === q.answer ? 'right' : oi === got ? 'wrong' : ''}" data-act="quiz" data-q="${qi}" data-i="${oi}">${esc(o)}</button>`).join('')}${got !== undefined ? `<p class="${quest ? 'qfb' : 'p-qfb'}">${got === q.answer ? 'Yes! ' : 'Not quite. '}${esc(q.explain ?? '')}</p>` : ''}</div>`;
       }).join('');
     } else if (c.img) {
-      body = `<div class="callimg"><img src="${esc(c.img)}" alt="" width="84" height="84"><p>${esc(c.body)}</p></div>`;
+      body = `<div class="callimg"><img src="/${esc(c.img)}" alt="" width="84" height="84"><p>${esc(c.body)}</p></div>`;
     } else {
       body = `<p>${esc(c.body)}</p>`;
     }
@@ -255,7 +255,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
     }
     const inBowl = ing.filter((i) => got.has(i.id));
     const spots = [[24, 52], [68, 56], [112, 56], [156, 52], [46, 30], [90, 32], [134, 30], [90, 8]];
-    const heap = inBowl.slice(0, spots.length).map((i, k) => `<use href="icons.svg#${iconOf(i)}" x="${spots[k][0]}" y="${spots[k][1]}" width="56" height="56"/>`).join('');
+    const heap = inBowl.slice(0, spots.length).map((i, k) => `<use href="/icons.svg#${iconOf(i)}" x="${spots[k][0]}" y="${spots[k][1]}" width="56" height="56"/>`).join('');
     return `<div class="p-prep"><div class="p-bowlwrap"><svg class="p-bowl" viewBox="0 0 240 182" role="img" aria-label="Mixing bowl with ${inBowl.length} of ${ing.length} ingredients">
         <ellipse cx="120" cy="96" rx="104" ry="16" fill="#BFAE8F" stroke="#2B2A28" stroke-width="3"/><g>${heap}</g>
         <path d="M14 96H226C226 150 180 178 120 178S14 150 14 96Z" fill="#F4EBD8" stroke="#2B2A28" stroke-width="3" stroke-linejoin="round"/>
@@ -321,7 +321,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit }) {
 
   function doneView() {
     return `<article class="${T.card}" style="text-align:center;justify-items:center">${tape}<p class="${T.kick}">${quest ? 'Quest cleared' : 'Dish done'}</p><h4>${esc(L.title)}</h4>
-      <div class="${quest ? 'q-win' : 'p-photo'}" style="max-width:220px"><img src="img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="220" height="220"></div>
+      <div class="${quest ? 'q-win' : 'p-photo'}" style="max-width:220px"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="220" height="220"></div>
       <p>Nice cooking. Plate it up and enjoy it.</p><button type="button" class="${T.btn}" data-act="exit-done">${quest ? 'Back to the quest board' : 'Back to the recipe box'}</button></article>`;
   }
 

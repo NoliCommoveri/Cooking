@@ -3,6 +3,7 @@
 //   src/worker/library-data.js     the library list and diet tags, for the API
 //   public/content/registry.json   ingredients, tools, skills, kitchen words, cuisines, units, and every lesson's summary
 //   public/content/lessons/*.json  each lesson file, for the lesson player
+//   public/content/course.json     all planned dishes, for the demo and syllabus pages
 //   public/lib/*.js                the shared scaling, unit, kitchen-word, and diet code
 // The lesson files are served as plain files so the app can keep them for cooking offline.
 // Usage: node tools/build-library.js   (a test fails if any of these is out of date)
@@ -34,6 +35,9 @@ export function buildPublic() {
     lessons: summary,
   }) + '\n';
   for (const { data: L } of c.lessons) files[`public/content/lessons/${L.id}.json`] = JSON.stringify(L) + '\n';
+  files['public/content/course.json'] = JSON.stringify({
+    dishes: c.course.dishes.map((d) => ({ ...d, image: `img/${d.image.replace(/\.png$/, '.webp')}` })),
+  }) + '\n';
   for (const f of BROWSER_LIB) {
     files[`public/lib/${f}`] = `// Copied from src/content/${f} by tools/build-library.js. Don't edit here.\n` + readFileSync(join(ROOT, 'src/content', f), 'utf8');
   }

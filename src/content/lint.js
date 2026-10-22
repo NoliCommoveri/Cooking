@@ -176,5 +176,36 @@ export function lint(c) {
     for (const p of byNum[n].prereqs || []) visit(p, [...stack, n]);
   };
   for (const L of lessons) visit(L.number, []);
+  // the course outline (plan §6.16): every planned dish, written or not
+  if (c.course) {
+    const seen = {};
+    for (const d of c.course.dishes || []) {
+      const where = `course.json dish ${d.number}`;
+      for (const f of ['number', 'title', 'unit', 'cuisine', 'skills', 'skill', 'image', 'safety', 'minutes']) if (d[f] == null) err(where, `has no ${f}`);
+      if (seen[d.number]) err(where, 'is listed twice');
+      seen[d.number] = d;
+      if (!UNITS.has(d.unit)) err(where, `unit ${d.unit} doesn't exist in units.json`);
+      if (!CU[d.cuisine]) err(where, `cuisine "${d.cuisine}" doesn't exist in cuisines.json`);
+      for (const s of d.skills || []) if (!SK[s]) err(where, `skill "${s}" doesn't exist in skills.json`);
+      if (!(d.skills || []).length) err(where, 'has no skills');
+      if (!['solo', 'adult-nearby', 'adult-hands-on'].includes(d.safety)) err(where, `safety "${d.safety}" isn't a safety level`);
+      if (c.imageExists && d.image && !c.imageExists(d.image)) err(where, `image ${d.image} isn't in content/images/`);
+      for (const [p, t] of [['title', d.title], ['skill', d.skill]]) for (const w of blockedWordsIn(t || '', rules)) err(where, `${p} names a blocked food ("${w}")`);
+    }
+    for (const d of Object.values(seen)) for (const n of d.pickOneWith || []) {
+      if (!seen[n]) err(`course.json dish ${d.number}`, `pickOneWith names dish ${n}, which isn't in the course`);
+      else if (!(seen[n].pickOneWith || []).includes(d.number)) err(`course.json dish ${d.number}`, `pickOneWith names ${n}, but ${n} doesn't name it back`);
+    }
+    for (const { file, data: L } of c.lessons) {
+      const d = seen[L.number];
+      if (!d) { err(`lessons/${file}`, `lesson ${L.number} isn't in course.json`); continue; }
+      if (d.lesson !== L.id) err(`course.json dish ${L.number}`, `lesson should be "${L.id}"`);
+      for (const f of ['title', 'unit', 'cuisine']) if (d[f] !== L[f]) err(`course.json dish ${L.number}`, `${f} is "${d[f]}" but the lesson says "${L[f]}"`);
+      if (JSON.stringify(d.skills) !== JSON.stringify(L.skills)) err(`course.json dish ${L.number}`, `skills don't match the lesson's (${L.skills.join(', ')})`);
+      if (d.minutes !== L.totalMinutes || d.estimated) err(`course.json dish ${L.number}`, `minutes should be the lesson's ${L.totalMinutes}, not an estimate`);
+    }
+    for (const d of Object.values(seen)) if (d.lesson && !c.lessons.some(({ data }) => data.id === d.lesson)) err(`course.json dish ${d.number}`, `lesson "${d.lesson}" has no file in lessons/`);
+  }
+
   return { errors, warnings };
 }

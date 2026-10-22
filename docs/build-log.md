@@ -1001,3 +1001,39 @@ The owner answered the four §6.17 questions:
   being late.
 - The syllabus suggests a credit value, worked out from the course's hours
   once every lesson has its time.
+
+---
+
+## 44. 2026-10-22 — Phase 1d: the demo page and the syllabus
+
+- **`/demo`** (§6.16), public, no account, nothing saved to one:
+  - A header with "By Immotus Apps", Sign up, Log in, and the syllabus link.
+    Its wording is a draft for the owner.
+  - **Try it:** the sample lessons in the real player, with the Kitchen Quest
+    or Chef's Passport switch, cooking as a kid or an adult, and the diet
+    switches. A lesson the diet rules out is listed as hidden.
+  - **Shopping:** shakshuka and bulgogi at 6 servings, merged by ingredient
+    and grouped by store section, with check-offs. A preview of Phase 3's list,
+    without pantry staples or package rounding.
+  - **Course:** all 75 dishes by unit, with cuisine, skill, pick-one groups,
+    and "Try it now" on the written lessons.
+  - **Skills:** the 52 skills in the order the course first teaches them, each
+    with its pin, its idea, the dish or dishes that teach it, and the dishes
+    that practice it. Foundation skills are marked "pick one".
+- **`/syllabus`** (§6.17), public and printable (7 pages): about the course,
+  objectives, the course at a glance (75 dishes, 52 skills, 59 lessons on one
+  student's path once pick-one groups count once, about 84 hours), a
+  suggested **½ credit** worked from those hours at 120–180 hours per credit,
+  pacing (two a week is about 30 weeks), the units with their new skills and
+  dishes, materials, safety, and the five-row rubric. Its wording is a draft
+  for the owner.
+- **`content/course.json`**: every planned dish with unit, cuisine, skill ids,
+  the skill line, picture, safety, minutes, and pick-one group. Times for the
+  71 unwritten lessons are estimates and marked so. 44 new skills were added
+  to `skills.json` (52 in all); these tags are a draft for the owner to review
+  in the skills view. The linter checks the file against the registries and
+  the lesson files (one new test), and `tools/build-library.js` serves it to
+  the browser.
+- The player's file paths are now absolute, so it runs from `/demo/` as well
+  as `/`.
+- Tests: 97.

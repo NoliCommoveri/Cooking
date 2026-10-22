@@ -115,3 +115,15 @@ test('honey is allowed as a product, but the bee is not a clean species', () => 
   assert.deepEqual(uncleanReasons(ing({ animalSource: 'honeybee', animalPart: 'honey' }), r), []);
   assert.match(uncleanReasons(ing({ animalSource: 'honeybee', animalPart: 'meat' }), r).join(), /clean-species/);
 });
+
+test('the course outline is checked against the registries and the lessons', () => {
+  const dish = (c, n) => c.course.dishes.find((d) => d.number === n);
+  assert.match(broken((c) => { dish(c, 5).skills = ['juggling']; }), /dish 5: skill "juggling" doesn't exist/);
+  assert.match(broken((c) => { dish(c, 5).cuisine = 'martian'; }), /dish 5: cuisine "martian"/);
+  assert.match(broken((c) => { dish(c, 5).title = 'Shrimp fried rice'; }), /dish 5: title names a blocked food/);
+  assert.match(broken((c) => { dish(c, 51).pickOneWith = [1, 52, 7]; }), /names 7, but 7 doesn't name it back/);
+  assert.match(broken((c) => { dish(c, 4).skills = ['dicing']; }), /dish 4: skills don't match the lesson's/);
+  assert.match(broken((c) => { dish(c, 14).minutes = 10; }), /dish 14: minutes should be the lesson's/);
+  assert.match(broken((c) => { c.course.dishes = c.course.dishes.filter((d) => d.number !== 38); }), /lesson 38 isn't in course.json/);
+  assert.match(broken((c) => { c.course.dishes.push({ ...dish(c, 5) }); }), /dish 5: is listed twice/);
+});
