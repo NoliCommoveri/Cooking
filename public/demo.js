@@ -36,7 +36,9 @@ const profile = () => ({ id: `demo-${V.theme}-${V.audience}`, theme: V.theme, au
 function header() {
   return `<section class="d-hero"><img src="/img/logo.webp" alt="" width="110" height="110">
     <h1>Clean Plate Recipes</h1>
-    <p>A cooking course for kids: one real skill and one real dish in every lesson, with recipes that are biblically clean. Try a sample lesson below, in either theme, the way your kids would.</p>
+    <p><b>A cooking course, but not like any you've ever tried before.</b></p>
+    <p>Appropriate for kids, teens, and even adults looking to expand to new culinary horizons, Clean Plate Recipes is built to be three things: fun, free, and fundamentally rooted in the dietary laws of the Most High.</p>
+    <p>Check out the demo below to see our current build progress. Beta testing via invitation will begin shortly.</p>
     <p class="by">By Immotus Apps</p></section>
     <div class="d-cta"><a class="hbtn pri" href="/#/signup">Sign up</a><a class="hbtn" href="/#/login">Log in</a>
     <a class="hbtn link" href="/syllabus/">Using this as a homeschool course? Review our syllabus</a></div>`;

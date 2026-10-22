@@ -1534,3 +1534,14 @@ are replaced):
 - Tests: 167 (reflections per profile and the eater rating, changing one
   later, input checks and family scoping, the progress rows, parents only, and
   the photos switch).
+
+## 62. 2026-10-22 — The demo page's opening words
+
+- Phase 4 is paused (owner).
+- The demo page's opening paragraph is the owner's new wording: "A cooking
+  course, but not like any you've ever tried before." (in bold), then that it
+  suits kids, teens, and adults, and is built to be fun, free, and
+  fundamentally rooted in the dietary laws of the Most High, and that beta
+  testing by invitation begins shortly. Two small edits to the text as given:
+  "fundementally" is spelled "fundamentally", and "three things--" became
+  "three things:".
