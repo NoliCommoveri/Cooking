@@ -1598,3 +1598,15 @@ pick-one julienne lessons first.
 - The demo's Try it tab lists every written lesson, so 1a–1c show there too.
 - Not test-cooked. No intro slides yet (warned, as for the samples).
 - Tests: 168.
+
+## 65. 2026-10-22 — The demo shows one skill's three choices
+
+- **Owner ruling:** the demo shows the three julienne lessons, so visitors see
+  what a foundation skill's choices look like, but lessons written later
+  don't join it.
+- **Try it** now has two groups: "Pick one: three ways to learn julienne"
+  (spring rolls, fajitas, shoestring fries, with a line on how pick-one
+  works), then "More sample lessons" (the four samples). The list lives in
+  `DEMO_TRY` in `public/demo.js`.
+- The demo loads only those seven lessons, and the Course tab marks only
+  them "Try it now". §6.16 says so.

@@ -66,3 +66,11 @@ button.c-dish{cursor:pointer;border-color:var(--h-acc)}
 .parent select{font:inherit;padding:8px 10px;border-radius:10px;border:1.5px solid var(--h-line);min-height:44px;display:block;margin-top:6px}
 .parent .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .parent details summary{cursor:pointer}
+
+/* Try it: the pick-one group, then the samples */
+.d-group{display:grid;gap:8px;margin-top:18px}
+.d-group:first-of-type{margin-top:4px}
+.d-group h3{margin:0;font-size:22px}
+.d-group p{margin:0 0 6px;max-width:62ch;opacity:.9}
+.kitchen[data-kt="quest"] .d-group h3{font-family:var(--q-disp);font-weight:700;color:var(--q-gold);letter-spacing:.03em}
+.kitchen[data-kt="passport"] .d-group h3{font-family:var(--p-disp);font-weight:400;color:var(--p-paper)}

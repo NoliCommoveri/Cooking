@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [64. 2026-10-22 — Unit 1: the three julienne lessons](docs/build-log.md#64-2026-10-22--unit-1-the-three-julienne-lessons)
+**Latest build log entry:** [65. 2026-10-22 — The demo shows one skill's three choices](docs/build-log.md#65-2026-10-22--the-demo-shows-one-skills-three-choices)
 
 ## Current features
 
@@ -27,7 +27,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Print our progress** (Parents → Progress): what each profile has cooked, with date, dish, cuisine, skill, and rating, printable or as a CSV.
 - **Photos switch** (`/ops`): photos are off for every family until the owner turns them on for one.
 - **Test-cook notice**: each parent sees a one-time note, above the lockers, to read a lesson through before their kids cook it.
-- **Demo page** (`/demo`): no account needed. Try the sample lessons in either theme, preview diet settings and a real shopping list, and browse the whole course by dish or by skill.
+- **Demo page** (`/demo`): no account needed. Try the sample lessons in either theme, including the three choices for julienne, preview diet settings and a real shopping list, and browse the whole course by dish or by skill.
 - **Syllabus** (`/syllabus`): the course as a homeschool course, with objectives, units, hours, pacing, a suggested credit, and the rubric. Printable.
 - **Course outline** (`content/course.json`): all 75 planned dishes in teaching order, with their skills and prerequisites, checked by the linter.
 - **Lesson numbers** (`src/content/course.js`): come from the course order; pick-one choices share a number (1a, 1b, 1c), 59 in all.
