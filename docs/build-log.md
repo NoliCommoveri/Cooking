@@ -324,3 +324,14 @@ Owner rulings on open questions:
 - Small notes passed to the owner: the tagine's lid is cut off at the sheet's
   edge, and the adobo's peppercorns look a little like eyes.
 - 15 of 50 dishes now have art.
+
+---
+
+## 17. 2026-10-22 — Dish art sheet 4
+
+- Added sheet 4 from the owner and cropped 4 dishes: 14 beef bulgogi, 15 lomo
+  saltado, 16 chicken tinga tacos, 17 pupusas. Each is about 520–610 px.
+- Checked for unclean foods: none seen.
+- Note passed to the owner: the bulgogi beef looks like ground-beef crumbles,
+  not thin slices, and thin slicing is that lesson's skill.
+- 19 of 50 dishes now have art.
