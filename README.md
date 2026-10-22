@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [29. 2026-10-22 — Dish art for 51–58](docs/build-log.md#29-2026-10-22--dish-art-for-5158)
+**Latest build log entry:** [30. 2026-10-22 — Swaps to remove near-repeats](docs/build-log.md#30-2026-10-22--swaps-to-remove-near-repeats)
 
 ## Current features
 

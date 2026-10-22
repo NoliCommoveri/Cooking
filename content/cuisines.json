@@ -176,11 +176,6 @@
       "region": "africa"
     },
     {
-      "id": "mozambican",
-      "name": "Mozambican",
-      "region": "africa"
-    },
-    {
       "id": "ghanaian",
       "name": "Ghanaian",
       "region": "africa"
@@ -189,6 +184,16 @@
       "id": "egyptian",
       "name": "Egyptian",
       "region": "mena"
+    },
+    {
+      "id": "argentine",
+      "name": "Argentine",
+      "region": "latam"
+    },
+    {
+      "id": "chinese-american",
+      "name": "Chinese-American",
+      "region": "usa"
     }
   ]
 }

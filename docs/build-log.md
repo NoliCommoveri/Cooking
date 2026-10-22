@@ -664,3 +664,41 @@ The owner reviewed the sample lessons in the preview.
   swapping 52, 53, 54, and 55, among others; these pictures stay either way.
 - Sheet 17 (59–62) was cropped the same way. 61 Croque madame needs a redo
   if it stays: the turkey came out pink and could pass for ham.
+
+---
+
+## 30. 2026-10-22 — Swaps to remove near-repeats
+
+- The owner approved swapping every near-repeat found in a check of all 75
+  dishes:
+  - 52 Carrot-apple slaw → **Baked shoestring fries** (repeated 35's
+    coleslaw)
+  - 53 Guacamole → **Chimichurri steak**, Argentine (too close to 3's pico)
+  - 54 Bruschetta → **Tuna salad sandwiches** (raw chopped tomato again)
+  - 36 Chicken noodle soup → **Matzo ball soup from a whole chicken**, and
+    55 → **Ratatouille**, French (two chicken soups)
+  - 60 Sloppy joes → **Honey-garlic chicken**, Chinese-American (repeated
+    33's chili)
+  - 61 Croque madame → **Chicken and spinach crêpes**, French (repeated 57's
+    grilled cheese)
+  - 62 Chicken gumbo → **Japanese chicken curry**, roux made from scratch
+    (repeated 34)
+  - 34 Jambalaya → **Red beans and rice** (repeated 67's jollof)
+  - 64 Scones → **Baked beef empanadas**, Argentine (repeated 38's biscuits)
+  - 72 Chapati → **Ugali with sukuma wiki**, Kenyan (repeated 19's naan)
+  - 73 Peri-peri chicken → **Malva pudding**, South African, now in
+    Desserts (repeated 13's jerk chicken)
+  - 48 Southern fried chicken → **Fish and chips**, British (repeated 23's
+    katsu)
+- The §4.0 pick-one table and the unit tables are updated, with food-rule
+  notes: curry roux from scratch (store blocks can contain pork or beef fat),
+  no lard in empanada dough, chicken andouille in the red beans, and no beef
+  dripping for frying. Gumbo's adult hands-on rating went with it; fish and
+  chips is adult hands-on.
+- Pictures: `55-matzo-ball-soup.png` became `36-matzo-ball-soup.png`.
+  Pictures of dishes swapped out moved to `content/images/dishes/retired/`,
+  and `tools/dish-sheets.txt` and the licenses follow them.
+- Cuisines: Argentine (Latin America page) and Chinese-American (United
+  States page) added; Mozambican removed.
+- The borderline pairs (tinga and pulled chicken, yassa and tagine, bobotie
+  and meatloaf, the tortilla dishes) stay as they are.

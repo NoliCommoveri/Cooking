@@ -150,13 +150,13 @@ Lessons are grouped into units by skill. International and American dishes are m
 
 | Foundation skill | Pick one of |
 |---|---|
-| Julienne | 1 Spring rolls · 51 Chicken fajitas · 52 Carrot-apple slaw |
-| Fine chopping | 2 Fattoush · 53 Guacamole + chips · 54 Bruschetta |
-| Dicing | 3 Pico + fish tacos · 55 Matzo ball soup · 56 Minestrone |
+| Julienne | 1 Spring rolls · 51 Chicken fajitas · 52 Baked shoestring fries |
+| Fine chopping | 2 Fattoush · 53 Chimichurri steak · 54 Tuna salad sandwiches |
+| Dicing | 3 Pico + fish tacos · 55 Ratatouille · 56 Minestrone |
 | Heat control | 28 French omelet · 57 Grilled cheese + tomato soup · 58 Challah French toast |
-| Building a sauce | 4 Shakshuka · 59 Spaghetti marinara · 60 Sloppy joes |
-| Roux | 32 Mac and cheese · 61 Croque madame · 62 Chicken gumbo |
-| Cutting in fat | 38 Buttermilk biscuits · 63 Rugelach · 64 Scones |
+| Building a sauce | 4 Shakshuka · 59 Spaghetti marinara · 60 Honey-garlic chicken |
+| Roux | 32 Mac and cheese · 61 Chicken and spinach crêpes · 62 Japanese chicken curry |
+| Cutting in fat | 38 Buttermilk biscuits · 63 Rugelach · 64 Baked beef empanadas |
 | Yeast dough | 42 Cinnamon rolls · 65 Challah · 66 Homemade pizza |
 | Slicing | 27, 14, and 37 already teach it |
 
@@ -171,10 +171,10 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 26 | Chicken Caesar + homemade dressing & croutons | American | Whisked dressing, cubing bread | Adult nearby | Pasteurized eggs or mayo base |
 | 27 | Smash burgers + quick pickles | American | Thin slicing, quick pickle, high-heat sear | Adult nearby | |
 | 51 | Chicken fajitas | Tex-Mex | Julienne: peppers and onions in thin strips · *pick one with 1, 52* | Adult nearby | Check tortillas for lard |
-| 52 | Crunchy carrot-apple slaw | American | Julienne · *pick one with 1, 51* | Adult nearby | |
-| 53 | Guacamole + baked tortilla chips | Mexican | Fine chopping · *pick one with 2, 54* | Adult nearby | Chips baked from corn tortillas; check for lard |
-| 54 | Bruschetta | Italian | Fine chopping, toasting bread · *pick one with 2, 53* | Adult nearby | |
-| 55 | Matzo ball soup | Jewish | Dicing · *pick one with 3, 56* | Adult nearby | Store-bought chicken broth; oil or chicken schmaltz in the matzo balls |
+| 52 | Baked shoestring fries | American | Julienne: potatoes into thin sticks · *pick one with 1, 51* | Adult nearby | Baked, not fried |
+| 53 | Chimichurri steak | Argentine | Fine chopping: parsley, garlic, oregano · *pick one with 2, 54* | Adult nearby | Steak to 145°F |
+| 54 | Tuna salad sandwiches | American | Fine chopping: celery, onion, pickles, herbs · *pick one with 2, 53* | Adult nearby | Tuna is clean (fins and scales) |
+| 55 | Ratatouille | French | Dicing: eggplant, zucchini, pepper, tomato · *pick one with 3, 56* | Adult nearby | |
 | 56 | Minestrone | Italian | Dicing · *pick one with 3, 55* | Adult nearby | |
 
 ### Unit 2 — Stovetop basics
@@ -193,9 +193,9 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 57 | Grilled cheese + tomato soup | American | Heat control · *pick one with 28, 58* | Adult nearby | |
 | 58 | Challah French toast | Jewish | Heat control · *pick one with 28, 57* | Adult nearby | Store-bought challah, or from 65 |
 | 59 | Spaghetti marinara | Italian | Building a sauce · *pick one with 4, 60* | Adult nearby | |
-| 60 | Sloppy joes | American | Building a sauce · *pick one with 4, 59* | Adult nearby | Ground beef; Worcestershire is fine (anchovy) |
-| 61 | Croque madame | French | Roux → béchamel · *pick one with 32, 62* | Adult nearby | Turkey, never ham |
-| 62 | Chicken gumbo | Louisiana | Dark roux · *pick one with 32, 61* | **Adult hands-on** | Dark roux is very hot and sticky. Chicken and okra; chicken andouille optional, check casings; no shrimp |
+| 60 | Honey-garlic chicken | Chinese-American | Building a sauce · *pick one with 4, 59* | Adult nearby | Honey is allowed (§2.1) |
+| 61 | Chicken and spinach crêpes | French | Roux → béchamel, crêpe batter · *pick one with 32, 62* | Adult nearby | |
+| 62 | Japanese chicken curry | Japanese | Roux with curry powder, from scratch · *pick one with 32, 61* | Adult nearby | Make the roux from scratch: store-bought curry blocks can contain pork or beef fat |
 
 ### Unit 3 — Spices and flavor bases
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -206,7 +206,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 12 | Butter chicken | Indian | Marinating, finishing with cream | Adult nearby | |
 | 13 | Jerk chicken | Jamaican | Wet marinade, broiling | Adult nearby | Habanero or jalapeño |
 | 33 | Beef chili | American | Batch browning, toasting spices | Adult nearby | |
-| 34 | Chicken & sausage jambalaya | Louisiana | Onion/celery/pepper base | Adult nearby | Chicken andouille; check casings; no shrimp |
+| 34 | Red beans and rice | Louisiana | Onion/celery/pepper base, simmering beans until creamy | Adult nearby | Chicken andouille instead of ham hock; check casings |
 | 35 | BBQ pulled chicken + coleslaw | American | Dry rub, reducing a sauce | Adult nearby | |
 | 67 | Jollof rice with chicken | Nigerian | Blended pepper base, cooking rice in the sauce | Adult nearby | Scotch bonnet → jalapeño. No dried crayfish or shrimp bouillon |
 | 70 | Peanut stew (maafe) | Malian | Building a one-pot stew | Adult nearby | Peanut butter; carries the peanut tag |
@@ -218,7 +218,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 14 | Beef bulgogi | Korean | Thin slicing (partly frozen), marinating | Adult nearby | Asian pear sub: Bosc pear or apple |
 | 15 | Lomo saltado | Peruvian | Beef stir-fry | Adult nearby | Aji amarillo sub: yellow bell pepper + cayenne |
 | 16 | Chicken tinga tacos | Mexican | Braising, shredding | Adult nearby | |
-| 36 | Chicken noodle soup from a whole chicken | American | Breaking down a bird, making stock | Adult nearby | |
+| 36 | Matzo ball soup from a whole chicken | Jewish | Breaking down a bird, making stock | Adult nearby | Oil or chicken schmaltz in the matzo balls |
 | 37 | Philly cheesesteak | American | Thin slicing (deliberate repeat of 14) | Adult nearby | Prereq: 14 |
 | 68 | Chicken yassa | Senegalese | Citrus-mustard marinade, slow-cooked onions | Adult nearby | |
 | 69 | Suya (spiced beef skewers) | Nigerian | Thin slicing, dry rub, broiling | Adult nearby | Ground-peanut spice rub; carries the peanut tag |
@@ -235,9 +235,9 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 40 | Blueberry muffins (breakfast) | American | Muffin method, avoiding overmixing | Adult nearby | |
 | 41 | Skillet cornbread | American | Preheated skillet | Adult nearby | Pairs with 33 |
 | 42 | Cinnamon rolls (breakfast) | American | First yeast dough: kneading, proofing, shaping | Adult nearby | |
-| 72 | Chapati | Kenyan | Rolled, layered flatbread, dry-pan cooking | Adult nearby | Flour, oil, water, salt |
+| 72 | Ugali with sukuma wiki | Kenyan | Stiff cornmeal dough, braised greens | Adult nearby | White cornmeal and collard greens |
 | 63 | Rugelach | Jewish | Cutting in fat · *pick one with 38, 64* | Adult nearby | Butter and cream cheese dough |
-| 64 | Scones | British | Cutting in fat · *pick one with 38, 63* | Adult nearby | Butter, not lard |
+| 64 | Baked beef empanadas | Argentine | Cutting in fat, filling and crimping · *pick one with 38, 63* | Adult nearby | Butter dough, not lard |
 | 65 | Challah | Jewish | Yeast dough: kneading, proofing, braiding · *pick one with 42, 66* | Adult nearby | Honey is allowed (§2.1) |
 | 66 | Homemade pizza | Italian | Yeast dough: kneading, stretching · *pick one with 42, 65* | Adult nearby | Veggie, or turkey pepperoni |
 
@@ -253,9 +253,8 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 45 | Roast chicken + pan gravy | American | Roasting, resting, carving, gravy | Adult nearby | Prereq: 32 |
 | 46 | Chicken pot pie | American | Roux filling + pie crust | Adult nearby | Prereq: 32, 22 |
 | 47 | Pot roast | American | Long oven braise | Adult nearby | |
-| 48 | Southern fried chicken | American | Buttermilk soak, deep-fry with thermometer | **Adult hands-on** | |
+| 48 | Fish and chips | British | Batter, deep-frying with a thermometer | **Adult hands-on** | Cod or haddock; fry in vegetable oil, never beef dripping |
 | 71 | Bobotie | South African | Spiced ground beef baked under an egg custard | Adult nearby | Ground beef, curry powder, apricot jam |
-| 73 | Peri-peri chicken | Mozambican | Chili-lemon marinade, roasting, thermometer | Adult nearby | |
 | 75 | Kelewele (spiced plantains) | Ghanaian | Shallow frying | **Adult hands-on** | Plantains from the produce aisle |
 
 ### Desserts
@@ -264,6 +263,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 25 | Churros with chocolate *(alt: panna cotta)* | Spanish/Mexican *(Italian)* | Choux dough, frying *(gelatin swap)* | **Adult hands-on** *(Adult nearby)* | Panna cotta: beef gelatin or agar-agar |
 | 49 | Brown butter chocolate chip cookies | American | Browning butter, creaming | Adult nearby | |
 | 50 | Apple pie with lattice | American | Advanced pastry | Adult nearby | Prereq: 22 |
+| 73 | Malva pudding | South African | A sponge pudding soaked in a warm butter-cream sauce | Adult nearby | Apricot jam |
 
 ### Capstone
 - **Multi-dish meal timing.** Example: bulgogi + fried rice + spring rolls. Requires a "plan the timeline" stage that the single-dish lessons don't have. Design it after the core lesson player works.
