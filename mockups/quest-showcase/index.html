@@ -121,8 +121,8 @@ svg use{transform-box:fill-box;transform-origin:center}
 .q-stats dd{margin:2px 0 0;font-weight:800;font-size:15px}
 .seal{position:absolute;top:10px;right:10px;width:74px;height:84px;z-index:2;filter:drop-shadow(0 3px 0 rgba(0,0,0,.35))}
 .serve{display:grid;gap:8px;padding:12px;background:var(--q-deep);box-shadow:inset 0 0 0 2px var(--q-edge)}
-.serve-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.serve .lbl{font-family:var(--q-disp);font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--q-mana);margin-right:auto}
+.serve-row{display:flex;align-items:center;gap:12px;flex-wrap:nowrap}
+.serve .lbl{font-family:var(--q-disp);font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--q-mana)}
 .step{width:56px;height:56px;border:0;background:var(--q-panel);box-shadow:inset 0 0 0 3px var(--q-gold);color:var(--q-gold);font-family:var(--q-disp);font-weight:700;font-size:30px;line-height:1;clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 8px,100% calc(100% - 8px),calc(100% - 8px) 100%,8px 100%,0 calc(100% - 8px),0 8px)}
 .step[disabled]{color:#4A5384;box-shadow:inset 0 0 0 3px var(--q-edge);cursor:not-allowed}
 .serve .num{font-family:var(--q-disp);font-weight:700;font-size:40px;line-height:1;color:#fff;min-width:2ch;text-align:center;font-variant-numeric:tabular-nums}
@@ -672,7 +672,7 @@ function renderLesson(){
 }
 function servePicker(){
   const n=S.serv;
-  return`<div class="serve"><div class="serve-row"><span class="lbl">Party size</span>
+  return`<div class="serve"><span class="lbl">Party size</span><div class="serve-row">
     <button type="button" class="step" data-act="serv" data-i="-1" aria-label="Fewer servings" ${n<=1?'disabled':''}>−</button>
     <span class="num" aria-live="polite" aria-label="${n} servings">${n}</span>
     <button type="button" class="step" data-act="serv" data-i="1" aria-label="More servings" ${n>=MAX_FREE?'disabled':''}>+</button></div>
