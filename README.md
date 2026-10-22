@@ -2,14 +2,20 @@
 
 A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
-Multi-family, on Cloudflare. Working name: **Clean Plate Recipes**.
+Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [30. 2026-10-22 — Swaps to remove near-repeats](docs/build-log.md#30-2026-10-22--swaps-to-remove-near-repeats)
+**Latest build log entry:** [35. 2026-10-22 — Optional ingredients don't hide lessons; photos off by default](docs/build-log.md#35-2026-10-22--optional-ingredients-dont-hide-lessons-photos-off-by-default)
 
 ## Current features
 
-No app yet. The plan is in `cooking-class-app-PLAN.md`.
+The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are in `docs/setup.md`.
 
+- **Accounts** (`src/worker/`, `public/`): open sign-up with an emailed code, an optional beta word, parent login, password reset by email, and a parent PIN for parent screens.
+- **Chef's lockers and profiles**: one person or several per profile, kid or adult, each with its own theme.
+- **Kitchen**: each profile sees the lesson library as Kitchen Quest quest cards or Chef's Passport recipe cards, filtered by the family's diet settings (with swaps and left-out optional ingredients shown on the card).
+- **Parent screens**: profiles, family name, default servings, diet filters, other parent logins, and the PIN.
+- **Owner screens**: the beta word, the family list, and setting a parent's password.
+- **Ops page** (`/ops`): migrations, the owner flag, backup download and restore, clear everything, and remove or restore one family.
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
 - **Dish illustrations** (`content/images/dishes/`): one picture for each of the 75 lessons.
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.

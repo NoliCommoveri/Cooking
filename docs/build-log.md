@@ -716,3 +716,156 @@ The owner reviewed the sample lessons in the preview.
 - Sheet 22 (60, 61, 62, 34, 48: honey-garlic chicken, crêpes, Japanese
   curry, red beans and rice, fish and chips) was split by hand, cropped, and
   checked, with no unclean foods. **All 75 dishes now have a picture.**
+
+---
+
+## 31. 2026-10-22 — Phase 1b: families and accounts
+
+- **The Worker** (`src/worker/`, `wrangler.toml`): serves `/ops`, the JSON API,
+  and the app's files in `public/`. The ops page and migration runner follow
+  the MCCE repo's `src/ops.js` and `src/migrate.js`; the SQL splitter and the
+  test database stand-in are copied from it.
+- **Database** (`src/worker/migrations/0001_families.sql`): families, parents,
+  sessions, password resets, invites, sign-up requests, settings, and
+  profiles. Ids are random text, so a removed family can come back without
+  clashing with newer rows. Schema notes beyond the plan's sketch, now in §8.4:
+  `profiles.people` (each person's name and avatar color, for shared lockers)
+  and `sessions.pin_until`. Passwords and the PIN are PBKDF2 hashes.
+- **`/ops`**, behind `OPS_TOKEN`: a setup checklist, migrations with Apply
+  pending, **Make a sign-up code** (for the owner's own first sign-up), **Make
+  this parent the owner**, and the destructive controls, each with its
+  restore: Download export.json / Restore from export.json, Clear everything
+  (type `DELETE EVERYTHING`), and per family Download / Remove… (type
+  `REMOVE`) / Restore a family. Removing a family is on `/ops` rather than the
+  owner screens so its restore sits beside it (§6.2a updated).
+- **Accounts** (§8.3): sign-up with a single-use code or the owner's sign-up
+  word; the public request form (one pending request per email, the owner is
+  emailed); email-and-password login with a 400-day httpOnly cookie; password
+  reset by a one-hour emailed link, which logs out the parent's other
+  devices; the parent PIN, set on first run, unlocks parent screens on that
+  device for 15 minutes, and is reset with the account password. Every family
+  query takes `family_id` from the session.
+- **Email** goes through Resend. Without `RESEND_API_KEY`, nothing is sent:
+  `/ops` and the owner screens say so, and an approved code shows on screen to
+  pass on by hand.
+- **The app** (`public/`): plain ES modules, no build step, so nothing has to
+  run before a deploy. Screens: welcome, log in, sign up, ask for a code,
+  forgot and reset password, set PIN, the chef's lockers, each profile's
+  kitchen (the lesson library as Kitchen Quest quest cards or Chef's Passport
+  recipe cards, with the theme switch), and the parent area behind the PIN
+  (profiles, family settings with diet filters and default servings, parent
+  logins, change PIN, and the owner tab: requests, codes, sign-up word,
+  families, set a parent's password). The lesson cards don't open yet; the
+  lesson player is Phase 2.
+- **Diet filters** (`src/content/diet.js`): a lesson is hidden if it uses an
+  ingredient with a filtered tag, unless a diet-reason substitution clears it,
+  in which case the card says "Made with … instead of …".
+  `tools/build-library.js` bundles what the Worker needs from `content/` into
+  `src/worker/library-data.js`, and a test fails if it's out of date.
+- **Dish pictures for the app**: `tools/build-dish-images.py` writes 480px WebP
+  copies of all 75 to `public/img/dishes/` (3.5 MB). A test checks every
+  lesson has one.
+- **Tests**: 85 in all, run against the real Worker on an in-memory SQLite
+  database. They cover family scoping (no route reaches another family's
+  profiles, settings, or logins, and a family id sent by the browser is
+  ignored), the migration runner (order, drift, an atomic failed migration),
+  a backup restoring cleanly into an empty database, clear-and-restore,
+  remove-and-restore a family, sign-up codes and the word, the request queue,
+  password reset, the PIN, and the owner routes. CI now runs `npm test`.
+  `tools/dev-server.js` runs the app locally for a session's browser checks.
+- **Setup steps for the owner** are in `docs/setup.md`. Phase 1b's done-when
+  (two test families, a clean restore) is proven in tests. It is met live
+  once the dashboard steps are done and the owner runs step 7.
+- **Open for the owner:**
+  - Optional ingredients count for diet filters, as the plan reads. So a
+    dairy-free family loses shakshuka over its optional feta. The other choice
+    is to drop a conflicting optional ingredient from the lesson instead of
+    hiding it.
+  - `MAIL_FROM` is set to `cook@immotus.app`, a guess. It must be on the domain
+    verified in Resend.
+
+---
+
+## 32. 2026-10-22 — Open sign-up with an emailed code
+
+- **The owner ruled (§8.3, now a Requirement):** families join on their own,
+  like any website. She'll post the link to a group of about 3,000 and won't
+  handle sign-ups by hand. This replaces the sign-up codes, the sign-up word,
+  and the request queue built in section 31. None of it had been deployed, so
+  `0001_families.sql` was edited in place, not migrated.
+- **Sign-up now:** email and password, then a six-digit code emailed through
+  Resend. Entering it creates the family and logs in; the first run then asks
+  for the family name and the parent PIN together. A code works for 30
+  minutes and allows 5 tries. The code screen counts down 10 minutes ("request
+  a new one in 9:59") before a new code can be sent; a used-up or expired code
+  can be replaced straight away. Pressing Sign up again inside the wait sends
+  nothing, and keeps the newest password.
+- **Beta word:** set or turned off from the Owner tab. While it's set,
+  sign-up asks for it before any email is sent. The sign-up page learns only
+  whether a word is needed, never the word.
+- **Owner tab** now holds the beta word, the family list (with how many
+  sign-ups are waiting on a code), and setting a parent's password. **`/ops`**
+  lost its "Make a sign-up code" button; the owner signs up like anyone else,
+  then makes herself the owner there.
+- **Email is now required to sign up.** Without `RESEND_API_KEY`, sign-up
+  says it couldn't send the email and stores nothing, and `/ops` says nobody
+  can sign up. `docs/setup.md` puts Resend before the first sign-up and notes
+  Resend's free plan stops at 100 emails a day.
+- **Planned, not built:** a human check before the code email (the owner's
+  "capture thing or unscramble the letters"). Added to §8.3 and the Later row
+  of §9.
+- Tables `invites` and `signup_requests` are gone; `signup_verifications`
+  holds a sign-up until its code is entered. Tests: 87, rewritten for the new
+  flow (codes, tries, expiry, the wait, the beta word, no email set up).
+
+---
+
+## 33. 2026-10-22 — Plan: website, leaving, and printing progress
+
+Plan changes only; nothing new is built.
+- **Address:** the app is `cleanplate.immotus.app` (§8.1). `docs/setup.md` and
+  `MAIL_FROM` (now `cleanplate@immotus.app`, still to be confirmed) follow it.
+- **New §6.13, website and legal pages (Requirement):** a simple landing page
+  at `/` for visitors, plus a short privacy policy and terms of use. Claude
+  drafts the words from the points listed there; the owner approves them. A
+  recommendation to serve the fonts from the app instead of Google Fonts, so
+  the privacy policy's list of third parties is true.
+- **New §6.14, leaving and inactive accounts (Requirement):** a self-serve
+  Delete our family, with Download our data beside it, and an automatic
+  purge of families inactive for a year, run by a daily scheduled job in the
+  Worker. Recommendations: warning emails 30 and 7 days before an inactive
+  purge, and a 30-day grace period after a self-serve delete during which the
+  owner can restore it from `/ops`.
+- **New §6.15, Print our progress (Requirement):** per profile, the date,
+  dish, cuisine, skill, and rating of everything cooked, as a page made for
+  printing. Recommendation: the same rows as a CSV. It's in Phase 4, since
+  ratings come from the Reflect stage.
+- **New Phase 1c, public launch:** the landing page and legal pages, fonts
+  served from the app, delete and download, the inactive purge, and the human
+  check at sign-up if the owner wants it before launch. The sign-up link isn't
+  posted publicly until 1c is done.
+
+---
+
+## 34. 2026-10-22 — Inactive purge runs every couple of weeks
+
+- The owner ruled: no daily job. The inactive purge (§6.14) checks every couple
+  of weeks, and "a year" is approximate. The app and its privacy policy don't
+  promise an exact day.
+
+---
+
+## 35. 2026-10-22 — Optional ingredients don't hide lessons; photos off by default
+
+- **Diet filters (owner ruling, §2.1):** an optional ingredient never hides a
+  lesson. One with a filtered tag is left out for that family, and the lesson
+  card says "Leave out the …". So a dairy-free family keeps shakshuka without
+  its feta. `src/content/diet.js` returns the left-out list, and the library
+  API and both themes' cards show it. One new test; 88 in all.
+- **Photos (owner ruling, §2.6):** off unless the owner turns them on for a
+  family, with a per-family switch on `/ops`, so the app doesn't pay to store
+  hundreds of families' photos. With photos off, the photo step, gallery, and
+  photo download don't show; progress, ratings, and Print our progress work
+  the same. R2 isn't set up until photos are turned on. Plan only; it's built
+  in Phase 4.
+- **Sending address confirmed:** `cleanplate@immotus.app`.
