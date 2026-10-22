@@ -1,10 +1,10 @@
 // Per-family diet filters on the library (plan §2.1).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { dietView } from '../src/content/diet.js';
 import { LIBRARY } from '../src/worker/library-data.js';
-import { buildLibrary } from '../tools/build-library.js';
+import { buildLibrary, buildPublic } from '../tools/build-library.js';
 import { makeEnv, family } from './helpers/worker.js';
 
 const ING = {
@@ -52,6 +52,16 @@ test('an availability substitution is not a diet swap', () => {
 
 test('src/worker/library-data.js is up to date with the content (run: node tools/build-library.js)', () => {
   assert.equal(readFileSync(new URL('../src/worker/library-data.js', import.meta.url), 'utf8'), buildLibrary());
+});
+
+test('public/content and public/lib are up to date (run: node tools/build-library.js)', () => {
+  const files = buildPublic();
+  for (const [path, text] of Object.entries(files)) {
+    assert.ok(existsSync(new URL(`../${path}`, import.meta.url)), `${path} is missing`);
+    assert.equal(readFileSync(new URL(`../${path}`, import.meta.url), 'utf8'), text, `${path} is out of date`);
+  }
+  const lessons = readdirSync(new URL('../public/content/lessons/', import.meta.url));
+  assert.equal(lessons.length, Object.keys(files).filter((p) => p.startsWith('public/content/lessons/')).length, 'no stray lesson files');
 });
 
 test('every lesson has a web picture for the app (run: python3 tools/build-dish-images.py)', () => {

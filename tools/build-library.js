@@ -1,14 +1,48 @@
-// Builds src/worker/library-data.js: the part of the content the Worker needs to
-// list the lesson library and apply each family's diet filters (plan §2.1). The
-// Worker can't read the content folder at run time, so this bundles it.
-// Usage: node tools/build-library.js   (a test fails if the committed file is out of date)
-import { writeFileSync } from 'node:fs';
+// Builds what the Worker and the browser need from content/, which neither can
+// read at run time:
+//   src/worker/library-data.js     the library list and diet tags, for the API
+//   public/content/registry.json   ingredients, tools, skills, kitchen words, cuisines, units, and every lesson's summary
+//   public/content/lessons/*.json  each lesson file, for the lesson player
+//   public/content/course.json     all planned dishes, for the demo and syllabus pages
+//   public/lib/*.js                the shared scaling, unit, kitchen-word, and diet code
+// The lesson files are served as plain files so the app can keep them for cooking offline.
+// Usage: node tools/build-library.js   (a test fails if any of these is out of date)
+import { writeFileSync, readFileSync, mkdirSync, rmSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadContent } from './lint-content.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'src/worker/library-data.js');
+export const BROWSER_LIB = ['units.js', 'scale.js', 'terms.js', 'diet.js'];
+
+// Every generated file except library-data.js, as { path relative to the repo: text }.
+export function buildPublic() {
+  const c = loadContent();
+  const files = {};
+  const summary = c.lessons.map(({ data: L }) => ({
+    id: L.id, number: L.number, title: L.title, unit: L.unit, cuisine: L.cuisine, skill: L.skill, skills: L.skills,
+    image: `img/${L.image.replace(/\.png$/, '.webp')}`,
+  })).sort((a, b) => a.number - b.number);
+  files['public/content/registry.json'] = JSON.stringify({
+    ingredients: Object.fromEntries(c.ingredients.map((i) => [i.id, i])),
+    equipment: Object.fromEntries(c.equipment.map((e) => [e.id, e])),
+    skills: Object.fromEntries(c.skills.map((x) => [x.id, x])),
+    terms: c.terms,
+    cuisines: Object.fromEntries(c.cuisines.map((x) => [x.id, x])),
+    regions: Object.fromEntries(c.regions.map((x) => [x.id, x])),
+    units: Object.fromEntries(c.units.map((u) => [u.number, u.name])),
+    lessons: summary,
+  }) + '\n';
+  for (const { data: L } of c.lessons) files[`public/content/lessons/${L.id}.json`] = JSON.stringify(L) + '\n';
+  files['public/content/course.json'] = JSON.stringify({
+    dishes: c.course.dishes.map((d) => ({ ...d, image: `img/${d.image.replace(/\.png$/, '.webp')}` })),
+  }) + '\n';
+  for (const f of BROWSER_LIB) {
+    files[`public/lib/${f}`] = `// Copied from src/content/${f} by tools/build-library.js. Don't edit here.\n` + readFileSync(join(ROOT, 'src/content', f), 'utf8');
+  }
+  return files;
+}
 
 export function buildLibrary() {
   const c = loadContent();
@@ -37,5 +71,10 @@ export function buildLibrary() {
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   writeFileSync(OUT, buildLibrary());
-  console.log(`wrote ${OUT}`);
+  rmSync(join(ROOT, 'public/content'), { recursive: true, force: true });
+  for (const [path, text] of Object.entries(buildPublic())) {
+    mkdirSync(dirname(join(ROOT, path)), { recursive: true });
+    writeFileSync(join(ROOT, path), text);
+  }
+  console.log('wrote src/worker/library-data.js, public/content/, and public/lib/');
 }

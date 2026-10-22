@@ -1,0 +1,54 @@
+/* The demo page (plan §6.16): house style around a themed lesson area. */
+.d-hero{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 18px;align-items:center;margin-bottom:18px}
+.d-hero img{width:110px;height:auto;grid-row:span 3}
+.d-hero h1{margin:0}
+.d-hero p{margin:0;color:var(--h-mut);max-width:62ch}
+.d-hero .by{font-size:14px}
+@media (max-width:560px){.d-hero{grid-template-columns:1fr;justify-items:start}.d-hero img{width:90px;grid-row:auto}}
+.d-cta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:6px 0 22px}
+.d-controls{display:grid;gap:12px;margin-bottom:16px}
+.d-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.d-row>b{font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--h-mut);min-width:7.5em}
+.seg{display:inline-flex;border:1.5px solid var(--h-line);border-radius:10px;overflow:hidden}
+.seg button{border:0;background:transparent;min-height:48px;padding:6px 14px;font-weight:800;font-size:15px}
+.seg button[aria-pressed="true"]{background:var(--h-acc);color:var(--h-acc-ink)}
+.chips{display:flex;gap:6px 14px;flex-wrap:wrap}
+.chips label{display:flex;gap:8px;align-items:center;min-height:44px;font-weight:700;font-size:15px}
+.chips input{width:22px;height:22px;accent-color:var(--h-acc)}
+.d-hidden{margin:14px 0 0;font-size:15px;opacity:.85}
+
+/* parent shopping list: a grocery notepad (§5.7) */
+.parent{background:var(--h-card);border:1.5px solid var(--h-line);border-radius:14px;padding:16px;max-width:560px}
+.parent h3{margin:0}
+.parent .sub{margin:2px 0 12px;color:var(--h-mut);font-size:14px}
+.psec{margin-top:12px}
+.psec h4{display:flex;align-items:center;gap:8px;margin:0 0 4px;font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--h-mut);font-weight:800;font-family:var(--h-body)}
+.psec h4 svg{width:28px;height:28px}
+.pitem{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;width:100%;min-height:52px;border:0;border-bottom:1px solid var(--h-line);background:transparent;text-align:left;padding:4px 2px;font-size:16px}
+.pitem .bx{width:26px;height:26px;border:2.5px solid var(--h-mut);border-radius:6px;display:grid;place-items:center}
+.pitem .bx svg{width:20px;height:20px;opacity:0;color:var(--h-acc)}
+.pitem[aria-pressed="true"] .bx{border-color:var(--h-acc)}
+.pitem[aria-pressed="true"] .bx svg{opacity:1}
+.pitem[aria-pressed="true"] .nm{text-decoration:line-through;color:var(--h-mut)}
+.pitem .q{color:var(--h-mut);font-size:14px;font-variant-numeric:tabular-nums;text-align:right}
+.pitem small{display:block;color:var(--h-mut);font-size:13px}
+
+/* the whole course and the skills view */
+.c-unit{margin:26px 0 8px}
+.c-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.c-dish{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;align-items:start;background:var(--h-card);border:1.5px solid var(--h-line);border-radius:12px;padding:10px;text-align:left;color:var(--h-fg);font:inherit}
+.c-dish img{width:64px;height:64px;object-fit:contain}
+.c-dish b{display:block;line-height:1.2}
+.c-dish small{display:block;color:var(--h-mut);font-size:13px;line-height:1.3}
+.c-dish .tag{display:inline-flex;gap:5px;align-items:center;font-weight:800;font-size:13px;color:var(--h-acc);margin-top:3px}
+.c-dish .tag svg{width:16px;height:16px}
+button.c-dish{cursor:pointer;border-color:var(--h-acc)}
+.c-dish .pick{color:var(--h-fg);font-weight:700}
+.sk-list{display:grid;gap:10px}
+.sk{background:var(--h-card);border:1.5px solid var(--h-line);border-radius:12px;padding:12px 14px;display:grid;gap:6px}
+.sk h4{margin:0;display:flex;gap:10px;align-items:center;font-family:var(--h-disp);font-weight:600;font-size:19px}
+.sk h4 svg{width:30px;height:30px;flex:none}
+.sk p{margin:0}
+.sk .mut{font-size:14px}
+.sk .found{font-family:var(--h-body);font-size:13px;font-weight:800;color:var(--h-acc);letter-spacing:.04em;text-transform:uppercase}
+.d-foot{margin-top:40px;color:var(--h-mut);font-size:14px}

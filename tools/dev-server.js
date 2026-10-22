@@ -10,11 +10,13 @@ import worker from '../src/worker/index.js';
 import { makeEnv, outbox } from '../test/helpers/worker.js';
 
 const PUBLIC = fileURLToPath(new URL('../public/', import.meta.url));
-const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.webp': 'image/webp', '.png': 'image/png' };
+const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.webp': 'image/webp', '.png': 'image/png', '.svg': 'image/svg+xml', '.json': 'application/json' };
 const env = await makeEnv();
 env.ASSETS = {
   async fetch(req) {
     let path = new URL(req.url).pathname;
+    // Like Cloudflare's assets: /demo goes to /demo/, and a folder serves its index.html.
+    if (!extname(path) && !path.endsWith('/')) return Response.redirect(new URL(path + '/', req.url), 307);
     if (path.endsWith('/')) path += 'index.html';
     try {
       return new Response(await readFile(join(PUBLIC, path)), { headers: { 'content-type': TYPES[extname(path)] ?? 'application/octet-stream' } });

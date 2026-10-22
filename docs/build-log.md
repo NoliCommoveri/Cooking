@@ -877,3 +877,163 @@ Plan changes only; nothing new is built.
 - The owner created the D1 database. Its ID is in `wrangler.toml`, so the
   next deploy binds it as `DB`. `docs/setup.md` step 2 no longer asks for the
   ID to be pasted.
+
+---
+
+## 37. 2026-10-22 — Purge warnings and the delete grace period confirmed
+
+- The owner confirmed both §6.14 recommendations, now Requirements: warning
+  emails 30 and 7 days before an inactive purge, and a 30-day grace period
+  after a self-serve delete, during which the owner can restore the family
+  from `/ops`.
+- The owner confirmed the kid app becomes an installable PWA (§8.2).
+
+---
+
+## 38. 2026-10-22 — Phase 2 rulings
+
+Before Phase 2, the owner ruled on its four open recommendations:
+- **Learn stage (§3):** confirmed as written.
+- **Fix requests and lesson patches (§6.11):** confirmed as written.
+- **Food-safety checks (§3):** doneness steps stay, with their thermometer
+  target shown, but the app doesn't require a reading to check one off. The
+  wash-hands steps after raw food stay. The linter's content checks are
+  unchanged.
+- **Hands-free (§6.12):** voice step control moves from Later into Phase 2;
+  the tap zone and page-turner remote go on hold. On a doneness step, "next"
+  reads the target aloud instead of moving on.
+
+---
+
+## 39. 2026-10-22 — Phase 2a: the lesson player
+
+Phase 2 is split into slices: **2a** the lesson player, **2b** saving cooks for
+every profile on them and the parents' test-cook notice, **2c** voice step
+control, **2d** the installable PWA and cooking offline, **2e** fix requests and
+lesson patches. This is 2a.
+- **Lesson cards open.** Tapping one in a profile's kitchen opens the lesson in
+  that profile's theme, with the showcase's components (§5.4, §5.4a):
+  - **Lesson card:** the dish, skill, time, cuisine, and step count; the
+    serving picker (free sizes, or the fixed sizes a baking lesson allows),
+    starting at the family's default; and any diet swaps or left-out
+    ingredients for this family.
+  - **Learn:** a callback card when the lesson has one, the move, each "why it
+    works" card, "same move, other dishes" (built from every lesson's skills),
+    "when it goes wrong", and the quiz when there is one. Skip to Prep is
+    always there.
+  - **Prep:** the scaled ingredients as the inventory grid or the mixing bowl,
+    then the tools as the gear loadout or the pegboard. Cook mode unlocks when
+    everything is checked.
+  - **Cook:** one step at a time with its safety banner (an adult profile sees
+    only the hazard), the stage bar or measuring cup, tips and "should look
+    like" notes, doneness steps showing the thermometer target (not required,
+    per section 38), wash steps, a Why? button that opens the step's Learn
+    card, and kitchen words that open their meaning under the step.
+  - **Timers:** start from a step, several at once, in the timer tray or on the
+    counter. They keep the end time, so they stay right when the kid moves to
+    another step or leaves and comes back; one that ended while the app was
+    closed shows how long ago. A ding and a buzz at zero.
+  - **The screen stays awake** during Prep and Cook where the browser allows
+    it; elsewhere a one-time tip says to raise the auto-lock time.
+  - Where a cook is up to is kept on the device. Reopening the lesson offers
+    Keep going or Start over. Plate it finishes it; saving the cook to the
+    account is 2b.
+- **Content for the browser:** `tools/build-library.js` now also writes
+  `public/content/` (each lesson file and a registry) and copies the scaling,
+  unit, kitchen-word, and diet code to `public/lib/`, so the app scales lessons
+  with the same code the linter uses. A test fails if any of it is out of date.
+- **Themed styles and icons:** `public/themes.css` and `public/icons.svg` are
+  taken from the approved showcase.
+- Tests: 92. New ones check the player's scripts parse, every icon it draws is
+  in the sprite, and every lesson scales and fills at every size it offers.
+
+---
+
+## 40. 2026-10-22 — Plan: the demo page
+
+- New §6.16 and Phase 1d (built after 2a, before 2b): a public `/demo` page
+  for the owner to share with other moms. No account and nothing saved. It
+  has a theme switch, a kid/adult switch, the sample lessons in the real
+  player, a diet preview, a shopping list preview for two sample lessons, the
+  whole course of 75 dishes, and a skills view: each unique skill with the
+  dish that first teaches it and the dishes that practice it.
+- The course and its skills need one content file, `content/course.json`,
+  because the 75 dishes live only in the plan's tables today and only the
+  written lessons have skill ids. The linter will check it against
+  `skills.json` and the lesson files.
+
+---
+
+## 41. 2026-10-22 — Publisher, and a homeschool transcript
+
+- The owner named the publisher: **Immotus Apps**. The landing page, demo page,
+  privacy policy, and terms name it (§6.13, §6.16).
+- **New, to be specced with the owner:** a homeschool transcript (§6.15), a
+  printable course record per profile with the family's course name and code,
+  school year, lessons and dates, skills, and hours. It's in Phase 4 with
+  Print our progress.
+- Assigning lessons to kids is the queue in Phase 3, as planned.
+
+---
+
+## 42. 2026-10-22 — Plan: homeschool mode and the syllabus
+
+- New §6.17 (Requirement, details to spec): families choose **casual** (the
+  default) or **homeschool** mode in family settings. Homeschool mode adds,
+  for the parent: course setup per profile, due dates from the queue with a
+  pacing helper, optional grading with a proposed five-row rubric, and the
+  transcript. Switching modes never deletes anything. New Phase 4b.
+- A public **syllabus page** ("Using this as a homeschool course? Review our
+  syllabus"), linked from the landing and demo pages and built from
+  `content/course.json`. It's in Phase 1d with the demo.
+- Four open questions are in §10: whether kids see grades, the rubric, overdue
+  reminders to kids, and suggested credit.
+
+---
+
+## 43. 2026-10-22 — Homeschool mode rulings
+
+The owner answered the four §6.17 questions:
+- Grades are parent-only; kids never see them.
+- The rubric is the proposed five rows (skill shown, safety and cleanliness,
+  following the recipe, the result, the reflection), each scored 1–4.
+- Overdue shows only to the parent. Kids see the due date and nothing about
+  being late.
+- The syllabus suggests a credit value, worked out from the course's hours
+  once every lesson has its time.
+
+---
+
+## 44. 2026-10-22 — Phase 1d: the demo page and the syllabus
+
+- **`/demo`** (§6.16), public, no account, nothing saved to one:
+  - A header with "By Immotus Apps", Sign up, Log in, and the syllabus link.
+    Its wording is a draft for the owner.
+  - **Try it:** the sample lessons in the real player, with the Kitchen Quest
+    or Chef's Passport switch, cooking as a kid or an adult, and the diet
+    switches. A lesson the diet rules out is listed as hidden.
+  - **Shopping:** shakshuka and bulgogi at 6 servings, merged by ingredient
+    and grouped by store section, with check-offs. A preview of Phase 3's list,
+    without pantry staples or package rounding.
+  - **Course:** all 75 dishes by unit, with cuisine, skill, pick-one groups,
+    and "Try it now" on the written lessons.
+  - **Skills:** the 52 skills in the order the course first teaches them, each
+    with its pin, its idea, the dish or dishes that teach it, and the dishes
+    that practice it. Foundation skills are marked "pick one".
+- **`/syllabus`** (§6.17), public and printable (7 pages): about the course,
+  objectives, the course at a glance (75 dishes, 52 skills, 59 lessons on one
+  student's path once pick-one groups count once, about 84 hours), a
+  suggested **½ credit** worked from those hours at 120–180 hours per credit,
+  pacing (two a week is about 30 weeks), the units with their new skills and
+  dishes, materials, safety, and the five-row rubric. Its wording is a draft
+  for the owner.
+- **`content/course.json`**: every planned dish with unit, cuisine, skill ids,
+  the skill line, picture, safety, minutes, and pick-one group. Times for the
+  71 unwritten lessons are estimates and marked so. 44 new skills were added
+  to `skills.json` (52 in all); these tags are a draft for the owner to review
+  in the skills view. The linter checks the file against the registries and
+  the lesson files (one new test), and `tools/build-library.js` serves it to
+  the browser.
+- The player's file paths are now absolute, so it runs from `/demo/` as well
+  as `/`.
+- Tests: 97.
