@@ -51,7 +51,7 @@
   ],
   "equipment": ["chef-knife", "cutting-board", "skillet-12", "wooden-spoon", "measuring-spoons", "can-opener", "small-bowl", "thermometer"],
   "steps": [
-    { "id": "chop", "text": "Dice the onion and peppers into pieces about the size of a pea. Mince the garlic and keep it in its own little pile.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Curl your fingertips under, like a claw, so the knife only meets your knuckles." },
+    { "id": "chop", "text": "Dice the onion and peppers into pieces about the size of a pea. Mince the garlic: chop it into tiny bits, smaller than a grain of rice, and keep it in its own little pile.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Curl your fingertips under, like a claw, so the knife only meets your knuckles." },
     { "id": "soften", "text": "Warm the olive oil in the skillet over medium heat. Add the onion and peppers. Cook, stirring now and then, until soft.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 360, "timerLabel": "Onion & peppers", "look": "The onion turns see-through and golden at the edges." },
     { "id": "bloom", "text": "Stir in the garlic, cumin, paprika, and the chili flakes if you're using them. Cook just until it smells toasty, about a minute.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 60, "timerLabel": "Spices", "tip": "Spices burn fast. Keep the spoon moving.", "why": "bloom" },
     { "id": "simmer", "text": "Pour in the tomatoes, {qty:salt} salt, and a few grinds of pepper. Let it bubble gently until it thickens.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 600, "timerLabel": "Simmer sauce", "look": "A spoon dragged across the pan leaves a path for a second.", "why": "reduce" },

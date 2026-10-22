@@ -547,3 +547,5 @@ The owner reviewed the sample lessons in the preview.
 - **Cookies (49):** "2 inches apart" also says "three of your fingers wide".
 - The owner approved visual doneness checks for lessons whose only raw
   ingredient is egg baked into a dough. §7.4 no longer marks it as waiting.
+- **Shakshuka (4):** "mince the garlic" now says what that means: tiny bits,
+  smaller than a grain of rice.
