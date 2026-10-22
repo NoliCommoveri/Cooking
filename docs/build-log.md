@@ -946,3 +946,18 @@ lesson patches. This is 2a.
   taken from the approved showcase.
 - Tests: 92. New ones check the player's scripts parse, every icon it draws is
   in the sprite, and every lesson scales and fills at every size it offers.
+
+---
+
+## 40. 2026-10-22 — Plan: the demo page
+
+- New §6.16 and Phase 1d (built after 2a, before 2b): a public `/demo` page
+  for the owner to share with other moms. No account and nothing saved. It
+  has a theme switch, a kid/adult switch, the sample lessons in the real
+  player, a diet preview, a shopping list preview for two sample lessons, the
+  whole course of 75 dishes, and a skills view: each unique skill with the
+  dish that first teaches it and the dishes that practice it.
+- The course and its skills need one content file, `content/course.json`,
+  because the 75 dishes live only in the plan's tables today and only the
+  written lessons have skill ids. The linter will check it against
+  `skills.json` and the lesson files.
