@@ -702,3 +702,5 @@ The owner reviewed the sample lessons in the preview.
   States page) added; Mozambican removed.
 - The borderline pairs (tinga and pulled chicken, yassa and tagine, bobotie
   and meatloaf, the tortilla dishes) stay as they are.
+- Sheet 18 (63–66: rugelach, beef empanadas, challah, pizza) was cropped and
+  checked, with no unclean foods.
