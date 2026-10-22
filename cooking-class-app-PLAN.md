@@ -396,7 +396,7 @@ Do **not** use:
 - Full lesson flow (§3)
 - Serving scaler (defaults to the family's serving count; limits in §6.6)
 - Multiple concurrent timers; a timer keeps running if the kid moves to another step or closes and reopens the app (see §8.2 for iOS limits)
-- **Request a lesson** (recommendation): a kid can tap "I want to make this," which adds a request to the parent's queue to approve or decline
+- **Request a lesson** (recommendation, approved 2026-10-22): a kid can tap "I want to make this," which adds a request to the parent's queue to approve or decline
 - **Adult profiles don't ask.** On an adult profile the button is **Cook this**: it queues the lesson for that profile straight away, with no approval and no parent PIN, and it goes on the shopping list like any queued lesson. A shared profile with a kid on it is a kid profile, so it still asks
 - Screen Wake Lock during Prep and Cook
 - **Kitchen words** (recommendation, approved): cooking words in step text (dice, mince, simmer, fold the dough…) are underlined. Tapping one opens a card with what it means in kid terms, including a size or look they can picture ("smaller than a grain of rice"), a small drawing, and the lesson that practices it. The card is drawn by the profile's theme, like the Why? card. The words live in `content/terms.json` (§7.1), and the linter won't let a lesson use a cooking word that isn't defined there (§7.4)
@@ -437,7 +437,7 @@ The parent starts a **shopping trip** by picking queued lessons. A trip holds it
 8. Mark perishables. If lessons have planned dates, show perishables only for lessons within the next N days (default 7, adjustable). Lessons with no planned date always show their perishables, marked "no date set."
 9. Lines with no amount ("salt to taste," "oil for the pan") appear once, with no quantity.
 10. Check-off state persists, so the list survives closing the app mid-shop.
-11. The list works offline. Stores often have weak signal, so the trip is cached on the phone, and check-offs sync when the connection returns.
+11. The list works offline. Stores often have weak signal, so the trip is cached on the phone, and check-offs sync when the connection returns. **This waits with Phase 2d** (owner, 2026-10-22); until then check-offs are saved to the account.
 
 A lesson queued once for several profiles is one cook, so it's counted once. The same lesson queued as two separate items is two cooks, and counted twice.
 
@@ -851,6 +851,8 @@ Each phase should be deployed and usable before the next begins.
 | **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system | — |
 
 **Phase 2d waits (owner, 2026-10-22):** the installable PWA and cooking offline (Phase 2's slice 2d) are built once pretty much everything else is done, not before Phase 2e. Until then, Phase 2's "Wi-Fi off partway through" check waits with it.
+
+**Phase 3 rulings (owner, 2026-10-22):** Phase 3 comes before Phase 1c. Kids' lesson requests are built. Package rounding is in Phase 3: every ingredient gets its store package sizes, and the registry's store sections become §6.3's list. The offline shopping list waits with 2d.
 
 **Testing (every phase):** automated tests run in CI alongside the linter. At minimum they cover family scoping (no endpoint returns another family's rows or photos), lesson patches (the hard block and food-safety checks reject a bad patch, and revert restores the lesson), scaling and rounding, unit conversion, shopping-list merging, and the migration runner.
 

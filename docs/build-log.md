@@ -1273,3 +1273,17 @@ how far through the course they are.
   random order, so the kid/adult PIN test failed about half the time in CI.
   They now pick profiles by name. No app change.
 - Tests: 126, all passing.
+
+## 52. 2026-10-22 — Phase 3 rulings
+
+Before Phase 3, the owner ruled:
+- **Phase 3 comes next**, before Phase 1c (public launch).
+- **Request a lesson (§6.1):** confirmed. A kid taps "I want to make this," and
+  a parent approves or declines it.
+- **Package rounding (§6.3):** built in Phase 3. Every ingredient gets its
+  store package sizes, and the registry's store sections become §6.3's list.
+- **Offline shopping list (§6.3):** waits with Phase 2d. Until then, check-offs
+  are saved to the account.
+- Phase 3 is built in two slices: 3a, the queue (requests, Cook this, the
+  foundations note, safety review, mark test-cooked); 3b, shopping trips and
+  the pantry.
