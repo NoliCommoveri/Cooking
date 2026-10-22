@@ -122,3 +122,21 @@ is built.
   Open questions renumbered 1–8.
 - Fixed a stale linter line that still named the removed `unclean` flag; it now
   points to `animalSource` and the blocked-word list.
+
+---
+
+## 6. 2026-10-22 — Required parent PIN; password reset by email
+
+- **Parent PIN is required.** The owner ruled yes on requiring it. Before
+  this it was optional, so a kid on a kitchen device could reach parent
+  screens and approve their own lesson requests. Now:
+  - Every parent-only screen asks for the PIN.
+  - The PIN is set in the first run.
+  - A parent resets a forgotten PIN by entering their account password.
+- **Password reset by email through Resend.** This replaces "reset by the
+  owner only"; the owner's reset stays as a fallback.
+  - New `password_resets` table; the link expires after an hour.
+  - Setup now lists the `RESEND_API_KEY` secret and verifying the sending
+    domain in Resend.
+  - Added to Phase 1b.
+- Removed the PIN open question. Open questions renumbered 1–7.

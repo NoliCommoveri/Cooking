@@ -292,7 +292,7 @@ Do **not** use:
 ### 6.2a Owner features
 - Create and revoke invite codes
 - See the list of families (name, number of kids, last active). This is the only cross-family view. The owner never sees other families' kids' names, photos, or progress.
-- Set a new password for a parent who forgot theirs (§8.3)
+- Set a new password for a parent, as a fallback when the reset email (§8.3) doesn't reach them
 - Remove a family. This is destructive, so it's paired with a restore (§8.5)
 
 ### 6.3 Shopping list logic
@@ -360,7 +360,7 @@ A guided helper modeled on **Kels** in KennelOS (`NoliCommoveri/KennelOS`: End-S
 
 ### 6.9 First-run wizard (to be specced)
 A first run for a new family, like KennelOS's (End-State guide §11 and "Getting Started" in §33). It runs after a family signs up with an invite code. Each part saves as it's answered and can be skipped.
-- **Family setup:** kids, default servings, diet filters, pantry staples, and the optional parent PIN.
+- **Family setup:** kids, default servings, diet filters, pantry staples, and the parent PIN (required, §8.3).
 - **A warning for first-time parents:** the recipes haven't all been test-cooked. Read each lesson through before your kids cook it, and mark it test-cooked once you have (§6.2).
 - **Kids' first run:** each kid sets up their chef locker and avatar.
 - **Then an introduction to the helper** (§6.8).
@@ -496,11 +496,12 @@ A backend is needed because the app is multi-family: each family's progress, que
 - **Sign-up by invite code.** The owner creates a code and a new family uses it to create its account. This keeps the app to families the owner knows without building moderation tools.
   - **Alternative:** open sign-up. **Revisit if** the owner wants anyone to be able to join.
 - **Parent login:** email and password. Store passwords hashed with a standard algorithm (PBKDF2 via Web Crypto is available in Workers). Sessions use a long-lived, httpOnly cookie, so kitchen devices stay logged in.
-  - **Not included, on purpose:** email verification, password-reset email flows, two-factor login, rate limiting beyond the platform defaults. A forgotten password is reset by the owner, who sets a new one from the owner screens (§6.2a).
+  - **Password reset by email,** sent through **Resend**. "Forgot password" emails a one-time link that expires after an hour. The owner can also set a new password from the owner screens (§6.2a) as a fallback.
+  - **Not included, on purpose:** email verification at sign-up, two-factor login, rate limiting beyond the platform defaults.
   - **Revisit if:** the app opens to families the owner doesn't know.
 - **Kids don't log in.** A device logged in as a family shows the profile picker (chef lockers).
-- **Parent PIN:** optional, per family. If set, parent-only screens on a shared device ask for it. Stored as a hash, but it's a convenience lock, not a security boundary.
-  - Because kitchen devices are logged in as a parent, a kid on a device without a PIN can reach parent screens, including approving their own lesson requests. Whether the PIN should be required for some screens is open question 6 (§10).
+- **Parent PIN: required,** one per family, set during the first run (§6.9). Kitchen devices are logged in as a parent, so every parent-only screen asks for the PIN, including approving a kid's lesson request. Stored as a hash. It's a convenience lock, not a security boundary.
+  - A forgotten PIN is reset by a parent entering their account password.
 - **Family scoping:** every API query filters by the logged-in session's `family_id`. No endpoint accepts a family ID from the client.
   - **The one exception** is the owner's endpoints (§6.2a). They're open only to a parent with `is_owner`, and they return family names, kid counts, and last-active dates. Nothing else.
 - **Photos:** stored in R2 under `families/{family_id}/…`, served only through the Worker after checking the session's family. R2 is not exposed publicly.
@@ -509,6 +510,7 @@ A backend is needed because the app is multi-family: each family's progress, que
 Every table holding a family's data carries `family_id`. `families` is the family itself, and `invites` belongs to the owner, not to a family.
 - `families` (id, name, default_servings, diet_filters, parent_pin_hash, created_at)
 - `parents` (id, family_id, email, password_hash, is_owner)
+- `password_resets` (token_hash, family_id, parent_id, expires_at, used_at)
 - `invites` (code, created_by, used_by_family_id, created_at, revoked)
 - `sessions` (id, parent_id, family_id, created_at, last_seen)
 - `kids` (id, family_id, name, avatar, track: core | beginner)
@@ -530,7 +532,7 @@ The owner has no command line (see `CLAUDE.md`). Everything operational is done 
 - **Backup export** downloads every table as one JSON file. **Import** restores from that file.
 - **Every destructive control has a restore beside it.** Resetting the database, or removing a family (§6.2a), is only offered alongside the export that can bring it back. Photos in R2 are covered by the family photo download (§6.2) and kept for a grace period after a family is removed.
 - Deploys are git → Cloudflare Workers Builds. A schema change reaches production by editing a migration file in the GitHub web editor, letting it deploy, and pressing **Apply pending**.
-- Anything that must be set up by hand in the Cloudflare dashboard (the D1 database, the R2 bucket, the `OPS_TOKEN` secret) is listed for the owner before the phase that needs it.
+- Anything that must be set up by hand in the Cloudflare dashboard (the D1 database, the R2 bucket, the `OPS_TOKEN` secret, and the `RESEND_API_KEY` secret) or in Resend (verifying the sending domain, whose DNS records are added in the Cloudflare dashboard) is listed for the owner before the phase that needs it.
 
 ---
 
@@ -542,7 +544,7 @@ Each phase should be deployed and usable before the next begins.
 |---|---|---|
 | **0. Look & feel** | Theme mockups for the kids to choose from (§5.2), then theme tokens, fonts, the core art set (§5.3a), and a **component showcase page** with every themed component from §5.4 in a demo state | The kids have picked a theme and the owner approves the look. **No features are built before this.** |
 | **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
-| **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, invite codes, parent login, sessions, kid profiles and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up with codes, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
+| **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, invite codes, parent login, sessions, password reset email (Resend), parent PIN, kid profiles and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up with codes, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
 | **2. Lesson player** | Learn, Prep, Cook mode, food-safety checks, timers, wake lock, attempts saved per kid, offline cache and sync | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice |
 | **3. Parent planning & shopping** | Queue (with kid requests), safety review, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
 | **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download | A photo taken on the tablet shows in the gallery on the parent's phone |
@@ -563,9 +565,8 @@ Each phase should be deployed and usable before the next begins.
 3. **Theme:** do the kids choose between theme mockups (§5.2)? With several families, is there one theme for everyone, or can each family pick?
 4. **Invite-only or open sign-up** (§8.3)?
 5. **Family-authored lessons:** should families be able to add their own recipes, or is the shared library the only content? Not planned for now. Adding it would move lessons from content files into the database.
-6. **Parent screens on kitchen devices:** should the parent PIN be required for lesson approval? §2.5 keeps security basic, so this needs the owner's say-so. Without it, a kid on a kitchen device can approve their own requests (§8.3).
-7. **Other hidden sources:** should the hard block (§2.1) also cover animal rennet or pepsin in cheese (sometimes from pigs), and blood or fat (Leviticus 3 and 17)? Neither is in the rule today.
-8. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
+6. **Other hidden sources:** should the hard block (§2.1) also cover animal rennet or pepsin in cheese (sometimes from pigs), and blood or fat (Leviticus 3 and 17)? Neither is in the rule today.
+7. **Who makes the art** (§5.3a)? Claude-drawn SVGs, a commissioned illustrator, or a licensed icon set restyled to match?
 
 ---
 
