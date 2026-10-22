@@ -725,6 +725,29 @@ A public page at **`/demo`** that the owner shares with other moms: no account, 
 - **Skills view:** the same course shown as its unique skills instead of its dishes. Each skill lists the dish that first teaches it and the later dishes that practice it, and marks foundation skills and their pick-one groups (§4.0).
 - **Course data:** the course list and each dish's skills come from one content file, `content/course.json` (number, dish, unit, cuisine, skill ids, the skill line, and its picture), checked by the linter against `skills.json` and the lesson files. Today the 75 dishes live only in the plan's tables (§4), and only the written lessons have skill ids, so this file is written for the demo: a skill id for every planned dish, with any new ids added to `skills.json`. As lessons are written (Phase 7), their files must match it.
 
+### 6.17 Homeschool mode and the syllabus — Requirement (owner, 2026-10-22); details to be specced
+Families use the app one of two ways, and the parent picks in family settings (behind the PIN). It can be changed at any time, and switching modes never deletes anything.
+- **Casual mode** (the default): the app as described everywhere else. No due dates, no grades, no transcript.
+- **Homeschool mode** adds, for the parent only:
+  - **Course setup per profile:** course name and code, school year, and start date. These feed the transcript (§6.15).
+  - **Due dates:** a queued lesson's planned date (§6.2) becomes its due date. The queue shows what's due this week and what's overdue. Kids see "due Friday" on the lesson card, and nothing that shames them for being late.
+  - **A pacing helper:** pick a start date and lessons per week, and the app suggests due dates for the next several lessons, honoring foundations first (§4.0). The parent can move any of them.
+  - **Optional grading:** after a cook, the parent can grade it with a short rubric (proposed: skill shown, safety and cleanliness, following the recipe, the result, and the reflection, each 1–4), or a single grade, or leave it ungraded. Grades roll up per profile and print on the transcript.
+- **Syllabus page:** a public page, linked from the landing page and the demo page as **"Using this as a homeschool course? Review our syllabus."** It's built from `content/course.json` (§6.16) so it stays current as lessons are written, and prints cleanly. It covers:
+  - the course description and who it's for (ages 11–12 with some kitchen experience; the beginner track comes later, §11)
+  - learning objectives: knife work, heat control, building flavor, doughs and batters, food safety, and reading and following a recipe
+  - the units, each with its skills and dishes, and the foundation skills with their pick-one lessons
+  - estimated hours (from each lesson's time) and pacing options, e.g. one lesson a week across a school year
+  - materials: the core tools, and that each lesson lists its own shopping
+  - safety: the safety levels and adult supervision (§3)
+  - how it can be assessed: the rubric above, the reflection questions, and the transcript
+  - the food rules (§2.1) in one plain line, and "published by Immotus Apps"
+- **Open questions for the owner:**
+  1. Do kids see their own grades, or are grades parent-only?
+  2. The rubric: these five rows at 1–4, or something else?
+  3. Does an overdue lesson show any reminder to the kid, or only to the parent?
+  4. Credit: does the syllabus suggest a credit value (e.g. half a credit for the full course), or leave credit to the family?
+
 ---
 
 ## 8. Architecture
@@ -812,10 +835,11 @@ Each phase should be deployed and usable before the next begins.
 | **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
 | **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, open sign-up with an emailed code and the beta word, parent login, sessions, password reset email (Resend), parent PIN, profiles (single or shared) and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up on their own, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
 | **1c. Public launch** | The landing page, privacy policy, and terms (§6.13), fonts served from the app, Delete our family and Download our data, the inactive purge with its warning emails (§6.14), and the human check at sign-up (§8.3) if the owner wants it before launch | A visitor reads the landing page, signs up, and deletes their family from the browser. A test family left inactive past the limit is warned and then purged by the scheduled job. **The sign-up link isn't posted publicly before this phase is done** |
-| **1d. Demo page** (built after 2a, before 2b) | `/demo` (§6.16): theme and kid/adult switches, the sample lessons in the real player, the diet preview, the shopping list preview, the whole course, the skills view, and `content/course.json` | A mom with only the link tries a sample lesson in both themes, toggles dairy-free and sees lessons change, and browses the course by dish and by skill, on her phone |
+| **1d. Demo page** (built after 2a, before 2b) | `/demo` (§6.16): theme and kid/adult switches, the sample lessons in the real player, the diet preview, the shopping list preview, the whole course, the skills view, and `content/course.json`; the public syllabus page (§6.17) | A mom with only the link tries a sample lesson in both themes, toggles dairy-free and sees lessons change, and browses the course by dish and by skill, on her phone |
 | **2. Lesson player** | Learn, Prep, Cook mode, kitchen words, food-safety checks, timers, wake lock, voice step control (§6.12), the installable PWA (§8.2), attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
 | **3. Parent planning & shopping** | Queue (with kid requests), safety review, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
 | **4. Photos & reflect** | The per-family photos switch on `/ops` (§2.6), camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download, Print our progress and the homeschool transcript (§6.15) | In a family with photos on, a photo taken on the tablet shows in the gallery on the parent's phone. A family with photos off cooks and reflects with no photo step |
+| **4b. Homeschool mode** | The casual/homeschool switch, course setup per profile, due dates and the pacing helper, optional grading, and the transcript (§6.15, §6.17) | A parent switches to homeschool mode, sets up a course, gets suggested due dates, grades a cook, and prints a transcript; switching back to casual hides it all and loses nothing |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
@@ -829,7 +853,8 @@ Each phase should be deployed and usable before the next begins.
 
 ## 10. Open questions
 
-None right now.
+- Homeschool mode (§6.17): whether kids see grades, the rubric, overdue reminders to kids, and suggested credit.
+- The homeschool transcript's details (§6.15).
 
 ---
 

@@ -973,3 +973,18 @@ lesson patches. This is 2a.
   school year, lessons and dates, skills, and hours. It's in Phase 4 with
   Print our progress.
 - Assigning lessons to kids is the queue in Phase 3, as planned.
+
+---
+
+## 42. 2026-10-22 — Plan: homeschool mode and the syllabus
+
+- New §6.17 (Requirement, details to spec): families choose **casual** (the
+  default) or **homeschool** mode in family settings. Homeschool mode adds,
+  for the parent: course setup per profile, due dates from the queue with a
+  pacing helper, optional grading with a proposed five-row rubric, and the
+  transcript. Switching modes never deletes anything. New Phase 4b.
+- A public **syllabus page** ("Using this as a homeschool course? Review our
+  syllabus"), linked from the landing and demo pages and built from
+  `content/course.json`. It's in Phase 1d with the demo.
+- Four open questions are in §10: whether kids see grades, the rubric, overdue
+  reminders to kids, and suggested credit.
