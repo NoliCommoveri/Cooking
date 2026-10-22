@@ -578,8 +578,11 @@ use.pop{animation:dropin .42s cubic-bezier(.3,.7,.4,1) both}
 .p-timer .stop{border:0;background:var(--p-red);color:#fff;font-weight:800;border-radius:10px;min-height:44px;padding:4px 12px;margin-top:4px}
 
 /* progress: map, passport book, rank, pins */
-.p-map{padding:8px;background:#BFD6DE;border-radius:6px;box-shadow:inset 0 0 0 3px #8FB0BC,0 10px 18px -8px rgba(60,30,0,.45)}
-.p-map svg{width:100%;height:auto;display:block}
+.p-map{padding:6px;background:#AFD3E4;border-radius:6px;box-shadow:inset 0 0 0 3px #8FB0BC,0 10px 18px -8px rgba(60,30,0,.45)}
+.p-world{position:relative;aspect-ratio:2/1;border-radius:4px;overflow:hidden}
+.p-world img,.p-world span,.p-world i{position:absolute;inset:0;width:100%;height:100%;display:block}
+.p-world i{-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.p-world .sel{filter:drop-shadow(0 0 2px #D9412B) drop-shadow(0 0 2px #D9412B)}
 .p-legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin:8px 2px 0;font-size:13px;font-weight:700;color:var(--p-ink)}
 .p-legend span{display:flex;align-items:center;gap:6px}
 .p-legend i{width:14px;height:14px;border:1.5px solid var(--p-ink);border-radius:2px}
@@ -1430,17 +1433,16 @@ const CUIS=[...new Set(Object.values(NAMES).map(x=>x[1]))];
 const DATES={1:'Sep 3',2:'Sep 10',3:'Sep 17',26:'Sep 24',27:'Oct 1',28:'Oct 4',5:'Oct 8',6:'Oct 15'};
 const NEXT=4;
 const range=(a,b)=>Array.from({length:b-a+1},(_,k)=>a+k);
-/* Map: a stylised world, not to scale. Each region is one or more shapes. */
+/* Map: the owner's world map, split by tools/split-world-map.py into a base, the outlines, and a mask per region */
 const REGIONS=[
-  {id:'easia',n:'East & Southeast Asia',s:'East & SE Asia',d:[1,5,6,7,14,18,23],path:'M279 52L290 44L306 40L322 44L326 54L318 62L310 68L304 74L300 82L292 78L286 70L280 64Z M314 45L319 47L318 56L313 58Z M300 72L304 72L305 80L300 79Z M282 90L296 92L298 95L284 94Z M300 93L314 94L314 97L301 97Z'},
-  {id:'mena',n:'Middle East & North Africa',s:'Middle East & N. Africa',d:[2,4,11],path:'M163 62L172 55L190 56L206 54L222 50L236 52L242 61L236 73L224 76L210 70L196 72L180 72L166 70Z'},
-  {id:'latam',n:'Latin America & Caribbean',s:'Latin America',d:[3,13,15,16,17,20],path:'M64 58L80 62L90 66L95 72L101 79L110 79L124 85L142 95L138 109L128 122L118 136L111 146L105 140L103 121L99 104L95 92L97 85L89 80L81 74L71 66Z M100 66L108 67L111 70L102 70Z M113 72L117 72L117 75L113 75Z'},
-  {id:'usa',n:'United States',s:'United States',d:range(26,50),path:'M58 42L112 42L114 49L106 57L100 61L101 67L97 66L93 61L84 60L76 62L70 60L62 56L58 50Z'},
-  {id:'europe',n:'Europe',s:'Europe',d:[8,21,22,24,25],path:'M170 50L172 41L180 37L176 29L186 20L200 17L214 21L221 30L223 43L212 49L201 52L190 54L180 52Z M163 36L168 33L170 40L165 42Z'},
-  {id:'sasia',n:'South Asia',s:'South Asia',d:[9,12,19],path:'M243 58L256 54L270 57L279 63L271 72L262 85L256 80L250 70L244 66Z'},
-  {id:'africa',n:'Sub-Saharan Africa',s:'Africa',d:[10],path:'M166 72L180 73L196 73L210 71L226 77L232 86L222 100L214 113L204 124L196 122L190 108L186 94L174 90L164 82Z M228 104L232 102L234 112L229 114Z'}
+  {id:'easia',n:'East & Southeast Asia',s:'East & SE Asia',d:[1,5,6,7,14,18,23]},
+  {id:'mena',n:'Middle East & North Africa',s:'Middle East & N. Africa',d:[2,4,11]},
+  {id:'latam',n:'Latin America & Caribbean',s:'Latin America',d:[3,13,15,16,17,20]},
+  {id:'usa',n:'United States',s:'United States',d:range(26,50)},
+  {id:'europe',n:'Europe',s:'Europe',d:[8,21,22,24,25]},
+  {id:'sasia',n:'South Asia',s:'South Asia',d:[9,12,19]},
+  {id:'africa',n:'Sub-Saharan Africa',s:'Africa',d:[10]}
 ];
-const LAND='M10 24L36 14L70 9L100 11L118 18L124 28L114 40L112 42L58 42L40 36L22 32Z M128 9L150 5L162 11L152 24L136 22Z M216 28L236 18L268 12L310 14L342 20L352 30L334 40L322 44L306 40L290 44L279 52L270 50L256 54L243 50L236 52L222 50L223 43L221 30Z M300 120L320 112L336 116L342 128L332 140L314 140L302 132Z M346 138L350 136L352 144L347 146Z';
 const regDone=r=>r.d.filter(n=>COOKED.has(n)).length;
 const INKS=['#D9412B','#22406B','#4E8B3A','#7A3E8E','#2E7D7A','#B5651D'];
 function stampSVG(n,date){
@@ -1585,16 +1587,17 @@ function ppTimers(){
 function ppSafety(){
   $('#safetyStage').innerHTML=`<div>${ppBanner('solo','Raw egg',false)}<p>Solo</p></div><div>${ppBanner('nearby','Hot stove',false)}<p>Adult nearby</p></div><div>${ppBanner('hands','Hot oil',false)}<p>Adult hands-on</p></div><div>${ppBanner('hands','Hot oil',true)}<p>Adult hands-on, as an adult profile sees it: the hazard only</p></div>`;
 }
-function mapSVG(){
-  const fill=r=>{const d=regDone(r);return d===0?'#EFE6D0':d===r.d.length?'#4E8B3A':'#F6C945'};
-  return`<svg viewBox="0 0 360 152" role="img" aria-label="World map. ${REGIONS.map(r=>`${r.n}: ${regDone(r)} of ${r.d.length}`).join('. ')}.">
-  <path d="${LAND}" fill="#D9CDB0" stroke="#8A7A5C" stroke-width="1.2" stroke-linejoin="round"/>
-  ${REGIONS.map(r=>`<path d="${r.path}" fill="${fill(r)}" stroke="${r.id===S.ppReg?'#D9412B':'#2B2A28'}" stroke-width="${r.id===S.ppReg?3:1.4}" stroke-linejoin="round"/>`).join('')}</svg>`;
+function mapHTML(){
+  const fill=r=>{const d=regDone(r);return d===0?(r.id===S.ppReg?'#F3C6B6':''):d===r.d.length?'#4E8B3A':'#F6C945'};
+  return`<div class="p-world" role="img" aria-label="World map. ${REGIONS.map(r=>`${r.n}: ${regDone(r)} of ${r.d.length}`).join('. ')}.">
+  <img src="img/map/map-base.webp" alt="" width="1100" height="550">
+  ${REGIONS.map(r=>{const f=fill(r),m=`url(img/map/map-${r.id}.png)`;return f?`<span class="${r.id===S.ppReg?'sel':''}"><i style="background:${f};-webkit-mask-image:${m};mask-image:${m}"></i></span>`:''}).join('')}
+  <img src="img/map/map-lines.webp" alt="" width="1100" height="550"></div>`;
 }
 function ppTree(){
   const reg=REGIONS.find(r=>r.id===S.ppReg),cooked=COOKED.size,ri=1,lo=5,hi=15;
   $('#treeStage').innerHTML=`<h4 class="p-h">Passport <span>${cooked} of 50 stamped</span></h4>
-  <div class="p-map">${mapSVG()}</div>
+  <div class="p-map">${mapHTML()}</div>
   <div class="p-legend"><span><i style="background:#EFE6D0"></i>Not started</span><span><i style="background:#F6C945"></i>Started</span><span><i style="background:#4E8B3A"></i>Every stamp</span></div>
   <div class="p-tabs" role="group" aria-label="Passport pages">${REGIONS.map(r=>`<button type="button" class="p-tab" data-act="ppreg" data-id="${r.id}" aria-pressed="${r.id===S.ppReg}">${r.s}<small>${regDone(r)} of ${r.d.length}</small></button>`).join('')}</div>
   <div class="p-book"><div class="p-page"><h5>${reg.n}</h5><p class="sub">${regDone(reg)} of ${reg.d.length} stamped</p>

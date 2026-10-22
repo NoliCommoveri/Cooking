@@ -461,3 +461,23 @@ Owner rulings on open questions:
     published page.
 - Next: the owner reviews the Passport look. Once it's approved, Phase 1
   (content core) starts.
+
+---
+
+## 20. 2026-10-22 — The owner's world map in Chef's Passport
+
+- The owner supplied an illustrated world map
+  (`content/images/source/world-map.png`). It replaces the hand-drawn SVG map
+  in the Passport panel.
+- Its yellow highlighting didn't match the passport regions: China, Korea,
+  North Africa, Europe, and Africa were tan. So the app recolors the regions
+  itself instead of using the owner's colors.
+  - New `tools/split-world-map.py` cuts the map into a tan base, an outline
+    layer, and one mask per region. The Americas follow the owner's yellow,
+    split at the Mexico border. Everywhere else goes to the nearest of a set
+    of hand-placed points, and the Sahara is split with a straight line.
+  - The page stacks the base, one colored mask per region (butter when
+    started, basil when complete, pale red for the open page), and the
+    outlines on top.
+- The source and its layers are listed in `content/images/LICENSES.md`, and
+  §5.4 describes the map.

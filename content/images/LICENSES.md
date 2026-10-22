@@ -26,3 +26,10 @@ use in this app. Cropped from the source sheets in `source/` with
 | `source/sheet-14-redos.png` | `dishes/14-beef-bulgogi.png`, `dishes/27-smash-burgers.png`, `dishes/34-jambalaya.png`, `dishes/35-bbq-pulled-chicken.png` |
 
 Dishes a later sheet replaced aren't listed under the earlier sheet. `tools/dish-sheets.txt` has the full map.
+
+## World map
+
+`source/world-map.png` was supplied by the owner, made with AI image
+generation, and is owned by the owner for use in this app. The layers in
+`mockups/quest-showcase/img/map/` (base, outlines, and one mask per passport
+region) are cut from it with `tools/split-world-map.py`.

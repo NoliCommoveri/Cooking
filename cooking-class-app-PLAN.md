@@ -266,7 +266,7 @@ The themed components need a lot of art, and every theme added later (§5.2) nee
 Built in the Phase 0b showcase, waiting for the owner's approval. Palette: cork, cream paper, ink, tomato red, butter, basil, and passport navy. **Lilita One** for titles; **Caveat** (handwriting) for notes and labels only, never under 20px; body text in **Nunito**, ≥ 20px in cook mode.
 
 - **Stamp pages by region:** East & Southeast Asia, Middle East & North Africa, South Asia, Sub-Saharan Africa, Europe, Latin America & Caribbean, and the United States. Half the course is American, so the US page is the biggest. Each cuisine has one stamp design, so every Japanese dish gets the same stamp with its own date.
-- **World map:** a stylized map, not to scale. A region turns butter when it has its first stamp and basil when every stamp is in.
+- **World map:** the owner's illustrated map, split into one layer per region by `tools/split-world-map.py`, so the app can color each region. A region turns butter when it has its first stamp and basil when every stamp is in.
 - **Rank outfits:** Kitchen Apprentice wears a paper cap and plain apron; Prep Cook a short chef's hat and butter apron; Line Cook a taller hat, red neckerchief, and striped apron; Sous Chef a pleated hat, buttoned jacket, and navy apron; Head Chef the tallest hat with a gold band.
 
 | Component | Treatment |
