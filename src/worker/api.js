@@ -1,0 +1,404 @@
+// The app's JSON API (plan §8.3, §6.2, §6.2a). Every family query is scoped by
+// the session's family_id; no route takes a family id from the browser. The
+// owner routes are the one cross-family view, and they return family names,
+// profile counts, and last-active dates only.
+import { ApiError, fail, json, now } from './lib/http.js';
+import { hashSecret, verifySecret, randomHex, sha256Hex, signupCode } from './lib/crypto.js';
+import {
+  startSession, endSession, readSession, requireSession, requireParent, requireOwner,
+  pinUnlocked, unlockPin, lockPin,
+} from './auth.js';
+import { sendEmail, emailReady, resetEmail, codeEmail, requestEmail } from './email.js';
+import { LIBRARY } from './library-data.js';
+import { dietView } from '../content/diet.js';
+import { FREE_MAX } from '../content/scale.js';
+
+export const THEMES = ['quest', 'passport'];
+export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
+const RESET_MINUTES = 60;
+const id = () => randomHex(8);
+
+// ---------- input checks ----------
+
+const text = (v, field, { max = 60, min = 1 } = {}) => {
+  const s = String(v ?? '').trim();
+  if (s.length < min) fail(400, 'invalid', `${field} is required.`);
+  if (s.length > max) fail(400, 'invalid', `${field} is too long (${max} characters at most).`);
+  return s;
+};
+const email = (v) => {
+  const s = String(v ?? '').trim().toLowerCase();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) || s.length > 200) fail(400, 'invalid', 'Enter a real email address.');
+  return s;
+};
+const password = (v) => {
+  const s = String(v ?? '');
+  if (s.length < 8) fail(400, 'invalid', 'Passwords need at least 8 characters.');
+  if (s.length > 200) fail(400, 'invalid', 'That password is too long.');
+  return s;
+};
+const pin = (v) => {
+  const s = String(v ?? '').trim();
+  if (!/^\d{4,8}$/.test(s)) fail(400, 'invalid', 'The PIN is 4 to 8 digits.');
+  return s;
+};
+const oneOf = (v, list, field) => (list.includes(v) ? v : fail(400, 'invalid', `${field} must be one of: ${list.join(', ')}.`));
+
+function profileInput(body) {
+  const people = Array.isArray(body.people) ? body.people : [];
+  if (people.length < 1 || people.length > 8) fail(400, 'invalid', 'A profile has 1 to 8 people on it.');
+  const cleanPeople = people.map((p) => ({ name: text(p?.name, 'Each name', { max: 30 }), color: oneOf(p?.color, AVATAR_COLORS, 'color') }));
+  const name = body.name ? text(body.name, 'Locker name', { max: 40 }) : cleanPeople.map((p) => p.name).join(' & ').slice(0, 40);
+  return {
+    name,
+    people: cleanPeople,
+    avatar: cleanPeople[0].color,
+    theme: oneOf(body.theme ?? 'quest', THEMES, 'theme'),
+    // A shared profile with any kid on it is a kid profile (§1); the parent says which.
+    audience: oneOf(body.audience ?? 'kid', ['kid', 'adult'], 'audience'),
+  };
+}
+
+const profileOut = (r) => ({
+  id: r.id, name: r.name, avatar: r.avatar, people: JSON.parse(r.people), theme: r.theme, audience: r.audience, track: r.track,
+});
+
+const familyOut = (f) => ({
+  name: f.name, default_servings: f.default_servings, diet_filters: JSON.parse(f.diet_filters), pin_set: Boolean(f.parent_pin_hash),
+});
+
+// ---------- routes ----------
+
+const routes = [];
+const on = (method, pattern, handler) => routes.push({ method, re: new RegExp(`^${pattern}$`), handler });
+
+on('GET', '/api/me', async (req, env) => {
+  const s = await readSession(env, req);
+  if (!s) return { signed_in: false };
+  const fam = await env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(s.family_id).first();
+  return {
+    signed_in: true,
+    parent: { email: s.email, is_owner: s.is_owner },
+    family: familyOut(fam),
+    pin_unlocked_until: pinUnlocked(s) ? s.pin_until : null,
+  };
+});
+
+on('POST', '/api/login', async (req, env, body) => {
+  const row = await env.DB.prepare('SELECT * FROM parents WHERE email = ?').bind(email(body.email)).first();
+  if (!row || !(await verifySecret(String(body.password ?? ''), row.password_hash))) {
+    fail(401, 'login_failed', "That email and password don't match.");
+  }
+  return json({ ok: true }, 200, { 'set-cookie': await startSession(env, row) });
+});
+
+on('POST', '/api/logout', async (req, env) => json({ ok: true }, 200, { 'set-cookie': await endSession(env, req) }));
+
+// Sign-up needs a single-use code or the owner's keyword (§8.3).
+on('POST', '/api/signup', async (req, env, body) => {
+  const familyName = text(body.family_name, 'Family name');
+  const addr = email(body.email);
+  const pw = password(body.password);
+  if (await env.DB.prepare('SELECT 1 FROM parents WHERE email = ?').bind(addr).first()) {
+    fail(409, 'email_taken', 'That email already has an account. Log in instead.');
+  }
+  const familyId = id();
+  let code = null;
+  if (body.code) {
+    code = String(body.code).trim().toUpperCase().replace(/\s+/g, '');
+    if (/^[A-Z0-9]{8}$/.test(code)) code = `${code.slice(0, 4)}-${code.slice(4)}`;
+    // Claim the code first, so two sign-ups can't share it.
+    const claim = await env.DB.prepare(
+      'UPDATE invites SET used_by_family_id = ? WHERE code = ? AND used_by_family_id IS NULL AND revoked = 0',
+    ).bind(familyId, code).run();
+    if (!claim.meta.changes) fail(403, 'bad_code', "That sign-up code doesn't work. It may be used already.");
+  } else if (body.keyword) {
+    const kw = (await env.DB.prepare("SELECT value FROM settings WHERE key = 'signup_keyword'").first())?.value;
+    if (!kw || String(body.keyword).trim().toLowerCase() !== kw.trim().toLowerCase()) {
+      fail(403, 'bad_keyword', "That sign-up word doesn't match.");
+    }
+  } else {
+    fail(400, 'invalid', 'Enter a sign-up code or the sign-up word.');
+  }
+
+  const t = now();
+  const parent = { id: id(), family_id: familyId };
+  try {
+    await env.DB.batch([
+      env.DB.prepare('INSERT INTO families (id, name, created_at, last_active_at) VALUES (?, ?, ?, ?)').bind(familyId, familyName, t, t),
+      env.DB.prepare('INSERT INTO parents (id, family_id, email, password_hash, created_at) VALUES (?, ?, ?, ?, ?)')
+        .bind(parent.id, familyId, addr, await hashSecret(pw), t),
+    ]);
+  } catch (err) {
+    if (code) await env.DB.prepare('UPDATE invites SET used_by_family_id = NULL WHERE code = ? AND used_by_family_id = ?').bind(code, familyId).run();
+    throw err;
+  }
+  return json({ ok: true }, 200, { 'set-cookie': await startSession(env, parent) });
+});
+
+// The one public form that writes to the database. One pending request per email.
+on('POST', '/api/signup-requests', async (req, env, body) => {
+  const r = { id: id(), name: text(body.name, 'Name'), email: email(body.email), note: text(body.note, 'Note', { min: 0, max: 500 }) };
+  if (await env.DB.prepare("SELECT 1 FROM signup_requests WHERE email = ? AND status = 'pending'").bind(r.email).first()) {
+    return { ok: true, already: true };
+  }
+  await env.DB.prepare('INSERT INTO signup_requests (id, name, email, note, created_at) VALUES (?, ?, ?, ?, ?)')
+    .bind(r.id, r.name, r.email, r.note, now()).run();
+  const owners = (await env.DB.prepare('SELECT email FROM parents WHERE is_owner = 1').all()).results.map((o) => o.email);
+  if (owners.length) await sendEmail(env, { to: owners, ...requestEmail(r, `${new URL(req.url).origin}/#/owner`) });
+  return { ok: true };
+});
+
+// Always answers the same way, so the form doesn't tell anyone who has an account.
+on('POST', '/api/password/forgot', async (req, env, body) => {
+  const row = await env.DB.prepare('SELECT id, family_id FROM parents WHERE email = ?').bind(email(body.email)).first();
+  if (row) {
+    const token = randomHex(32);
+    const expires = new Date(Date.now() + RESET_MINUTES * 60 * 1000).toISOString();
+    await env.DB.prepare('INSERT INTO password_resets (token_hash, family_id, parent_id, expires_at) VALUES (?, ?, ?, ?)')
+      .bind(await sha256Hex(token), row.family_id, row.id, expires).run();
+    await sendEmail(env, { to: email(body.email), ...resetEmail(`${new URL(req.url).origin}/#/reset/${token}`) });
+  }
+  return { ok: true };
+});
+
+on('POST', '/api/password/reset', async (req, env, body) => {
+  const pw = password(body.password);
+  const hash = await sha256Hex(String(body.token ?? ''));
+  const r = await env.DB.prepare('SELECT * FROM password_resets WHERE token_hash = ?').bind(hash).first();
+  if (!r || r.used_at || Date.parse(r.expires_at) < Date.now()) {
+    fail(400, 'bad_link', 'That reset link has expired or was already used. Ask for a new one.');
+  }
+  // A new password logs out every device that used the old one.
+  await env.DB.batch([
+    env.DB.prepare('UPDATE parents SET password_hash = ? WHERE id = ?').bind(await hashSecret(pw), r.parent_id),
+    env.DB.prepare('UPDATE password_resets SET used_at = ? WHERE token_hash = ?').bind(now(), hash),
+    env.DB.prepare('DELETE FROM sessions WHERE parent_id = ?').bind(r.parent_id),
+  ]);
+  const parent = await env.DB.prepare('SELECT id, family_id FROM parents WHERE id = ?').bind(r.parent_id).first();
+  return json({ ok: true }, 200, { 'set-cookie': await startSession(env, parent) });
+});
+
+// ---------- the parent PIN ----------
+
+// Set once, in the first run. Changing it later goes through /api/pin/reset.
+on('POST', '/api/pin/set', async (req, env, body) => {
+  const s = await requireSession(env, req);
+  const p = pin(body.pin);
+  const res = await env.DB.prepare('UPDATE families SET parent_pin_hash = ? WHERE id = ? AND parent_pin_hash IS NULL')
+    .bind(await hashSecret(p), s.family_id).run();
+  if (!res.meta.changes) fail(409, 'pin_set', 'This family already has a PIN.');
+  return { ok: true, pin_unlocked_until: await unlockPin(env, s, p) };
+});
+
+on('POST', '/api/pin/unlock', async (req, env, body) => {
+  const s = await requireSession(env, req);
+  return { ok: true, pin_unlocked_until: await unlockPin(env, s, String(body.pin ?? '')) };
+});
+
+on('POST', '/api/pin/lock', async (req, env) => {
+  await lockPin(env, await requireSession(env, req));
+  return { ok: true };
+});
+
+// A forgotten PIN is reset with the parent's account password (§8.3).
+on('POST', '/api/pin/reset', async (req, env, body) => {
+  const s = await requireSession(env, req);
+  const row = await env.DB.prepare('SELECT password_hash FROM parents WHERE id = ?').bind(s.parent_id).first();
+  if (!(await verifySecret(String(body.password ?? ''), row.password_hash))) fail(403, 'password_wrong', "That password didn't match.");
+  const p = pin(body.pin);
+  await env.DB.prepare('UPDATE families SET parent_pin_hash = ? WHERE id = ?').bind(await hashSecret(p), s.family_id).run();
+  return { ok: true, pin_unlocked_until: await unlockPin(env, s, p) };
+});
+
+// ---------- profiles and the library ----------
+
+on('GET', '/api/profiles', async (req, env) => {
+  const s = await requireSession(env, req);
+  const { results } = await env.DB.prepare('SELECT * FROM profiles WHERE family_id = ? ORDER BY created_at, id').bind(s.family_id).all();
+  return { profiles: results.map(profileOut) };
+});
+
+on('POST', '/api/profiles', async (req, env, body) => {
+  const s = await requireParent(env, req);
+  const p = profileInput(body);
+  const pid = id();
+  await env.DB.prepare('INSERT INTO profiles (id, family_id, name, avatar, people, theme, audience, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
+    .bind(pid, s.family_id, p.name, p.avatar, JSON.stringify(p.people), p.theme, p.audience, now()).run();
+  return { ok: true, id: pid };
+});
+
+on('PUT', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
+  const s = await requireParent(env, req);
+  const p = profileInput(body);
+  const res = await env.DB.prepare('UPDATE profiles SET name = ?, avatar = ?, people = ?, theme = ?, audience = ? WHERE id = ? AND family_id = ?')
+    .bind(p.name, p.avatar, JSON.stringify(p.people), p.theme, p.audience, pid, s.family_id).run();
+  if (!res.meta.changes) fail(404, 'not_found', 'No such profile.');
+  return { ok: true };
+});
+
+// A kid picks their own theme and can switch at any time (§5.2), so this one
+// doesn't ask for the PIN.
+on('PUT', '/api/profiles/([0-9a-f]{16})/theme', async (req, env, body, [pid]) => {
+  const s = await requireSession(env, req);
+  const res = await env.DB.prepare('UPDATE profiles SET theme = ? WHERE id = ? AND family_id = ?')
+    .bind(oneOf(body.theme, THEMES, 'theme'), pid, s.family_id).run();
+  if (!res.meta.changes) fail(404, 'not_found', 'No such profile.');
+  return { ok: true };
+});
+
+on('DELETE', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
+  const s = await requireParent(env, req);
+  const res = await env.DB.prepare('DELETE FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).run();
+  if (!res.meta.changes) fail(404, 'not_found', 'No such profile.');
+  return { ok: true };
+});
+
+// The shared library with this family's diet filters applied (§2.1).
+on('GET', '/api/library', async (req, env) => {
+  const s = await requireSession(env, req);
+  const fam = await env.DB.prepare('SELECT diet_filters FROM families WHERE id = ?').bind(s.family_id).first();
+  const filters = JSON.parse(fam.diet_filters);
+  const name = (i) => LIBRARY.ingredients[i]?.name ?? i;
+  const lessons = [];
+  let hidden = 0;
+  for (const L of LIBRARY.lessons) {
+    const view = dietView(L, LIBRARY.ingredients, filters);
+    if (!view.visible) { hidden++; continue; }
+    lessons.push({
+      id: L.id, number: L.number, unit: L.unit, title: L.title, image: L.image, cuisine: LIBRARY.cuisines[L.cuisine] ?? L.cuisine,
+      skill: L.skill, servings: L.servings, totalMinutes: L.totalMinutes,
+      substitutions: view.applied.map((x) => ({ for: name(x.for), use: name(x.use) })),
+    });
+  }
+  return { lessons, hidden, units: LIBRARY.units };
+});
+
+// ---------- family settings ----------
+
+on('GET', '/api/family', async (req, env) => {
+  const s = await requireParent(env, req);
+  const fam = await env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(s.family_id).first();
+  const parents = (await env.DB.prepare('SELECT email FROM parents WHERE family_id = ? ORDER BY created_at').bind(s.family_id).all()).results;
+  return { family: familyOut(fam), parents: parents.map((p) => p.email), diet_tags: LIBRARY.dietTags, servings_max: FREE_MAX };
+});
+
+on('PUT', '/api/family', async (req, env, body) => {
+  const s = await requireParent(env, req);
+  const servings = Number(body.default_servings);
+  if (!Number.isInteger(servings) || servings < 1 || servings > FREE_MAX) fail(400, 'invalid', `Servings must be 1 to ${FREE_MAX}.`);
+  const filters = Array.isArray(body.diet_filters) ? [...new Set(body.diet_filters)] : fail(400, 'invalid', 'diet_filters must be a list.');
+  for (const f of filters) oneOf(f, LIBRARY.dietTags, 'Each diet filter');
+  await env.DB.prepare('UPDATE families SET name = ?, default_servings = ?, diet_filters = ? WHERE id = ?')
+    .bind(text(body.name, 'Family name'), servings, JSON.stringify(filters), s.family_id).run();
+  return { ok: true };
+});
+
+// Another parent login for the same family.
+on('POST', '/api/parents', async (req, env, body) => {
+  const s = await requireParent(env, req);
+  const addr = email(body.email);
+  if (await env.DB.prepare('SELECT 1 FROM parents WHERE email = ?').bind(addr).first()) fail(409, 'email_taken', 'That email already has an account.');
+  await env.DB.prepare('INSERT INTO parents (id, family_id, email, password_hash, created_at) VALUES (?, ?, ?, ?, ?)')
+    .bind(id(), s.family_id, addr, await hashSecret(password(body.password)), now()).run();
+  return { ok: true };
+});
+
+// ---------- owner screens (§6.2a) ----------
+
+on('GET', '/api/owner', async (req, env) => {
+  await requireOwner(env, req);
+  const all = async (sql) => (await env.DB.prepare(sql).all()).results;
+  return {
+    requests: await all("SELECT id, name, email, note, created_at, status, invite_code FROM signup_requests ORDER BY status = 'pending' DESC, created_at DESC LIMIT 50"),
+    invites: (await all('SELECT code, email, created_at, used_by_family_id, revoked FROM invites ORDER BY created_at DESC LIMIT 50'))
+      .map(({ used_by_family_id, ...i }) => ({ ...i, used: Boolean(used_by_family_id), revoked: Boolean(i.revoked) })),
+    keyword: (await env.DB.prepare("SELECT value FROM settings WHERE key = 'signup_keyword'").first())?.value ?? null,
+    families: await all(`SELECT f.name, f.created_at, f.last_active_at,
+        (SELECT COUNT(*) FROM profiles p WHERE p.family_id = f.id) AS profiles
+      FROM families f ORDER BY f.created_at`),
+    email_ready: emailReady(env),
+  };
+});
+
+async function newInvite(env, createdBy, forEmail = null) {
+  const code = signupCode();
+  await env.DB.prepare('INSERT INTO invites (code, created_by, email, created_at) VALUES (?, ?, ?, ?)').bind(code, createdBy, forEmail, now()).run();
+  return code;
+}
+export { newInvite };
+
+on('POST', '/api/owner/requests/([0-9a-f]{16})/approve', async (req, env, body, [rid]) => {
+  const s = await requireOwner(env, req);
+  const r = await env.DB.prepare("SELECT * FROM signup_requests WHERE id = ? AND status = 'pending'").bind(rid).first();
+  if (!r) fail(404, 'not_found', 'That request is gone or already handled.');
+  const code = await newInvite(env, s.parent_id, r.email);
+  await env.DB.prepare("UPDATE signup_requests SET status = 'approved', invite_code = ? WHERE id = ?").bind(code, rid).run();
+  const mail = await sendEmail(env, { to: r.email, ...codeEmail(r.name, code, new URL(req.url).origin) });
+  return { ok: true, code, emailed: mail.sent, reason: mail.reason ?? null };
+});
+
+// Declining sends nothing.
+on('POST', '/api/owner/requests/([0-9a-f]{16})/decline', async (req, env, body, [rid]) => {
+  await requireOwner(env, req);
+  await env.DB.prepare("UPDATE signup_requests SET status = 'declined' WHERE id = ? AND status = 'pending'").bind(rid).run();
+  return { ok: true };
+});
+
+on('POST', '/api/owner/invites', async (req, env, body) => {
+  const s = await requireOwner(env, req);
+  return { ok: true, code: await newInvite(env, s.parent_id, body.email ? email(body.email) : null) };
+});
+
+on('POST', '/api/owner/invites/([A-Z0-9-]{9})/revoke', async (req, env, body, [code]) => {
+  await requireOwner(env, req);
+  await env.DB.prepare('UPDATE invites SET revoked = 1 WHERE code = ? AND used_by_family_id IS NULL').bind(code).run();
+  return { ok: true };
+});
+
+// null or an empty string turns the keyword off.
+on('PUT', '/api/owner/keyword', async (req, env, body) => {
+  await requireOwner(env, req);
+  const kw = body.keyword == null || String(body.keyword).trim() === '' ? null : text(body.keyword, 'Keyword', { max: 40 });
+  await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('signup_keyword', ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value")
+    .bind(kw).run();
+  return { ok: true, keyword: kw };
+});
+
+// The fallback when a reset email doesn't arrive (§6.2a).
+on('POST', '/api/owner/parent-password', async (req, env, body) => {
+  await requireOwner(env, req);
+  const row = await env.DB.prepare('SELECT id FROM parents WHERE email = ?').bind(email(body.email)).first();
+  if (!row) fail(404, 'not_found', 'No parent has that email.');
+  await env.DB.batch([
+    env.DB.prepare('UPDATE parents SET password_hash = ? WHERE id = ?').bind(await hashSecret(password(body.password)), row.id),
+    env.DB.prepare('DELETE FROM sessions WHERE parent_id = ?').bind(row.id),
+  ]);
+  return { ok: true };
+});
+
+// ---------- dispatch ----------
+
+export async function handleApi(request, env) {
+  const url = new URL(request.url);
+  try {
+    if (!env.DB) fail(503, 'not_ready', 'The database is not connected yet.');
+    const route = routes.find((r) => r.method === request.method && r.re.test(url.pathname));
+    if (!route) fail(404, 'not_found', 'No such API route.');
+    let body = {};
+    if (request.method !== 'GET') {
+      // A JSON body is required, which also keeps other sites' plain forms out.
+      if (!(request.headers.get('content-type') ?? '').startsWith('application/json')) fail(415, 'json_only', 'Send JSON.');
+      const raw = await request.text();
+      try { body = raw ? JSON.parse(raw) : {}; } catch { fail(400, 'invalid', 'That body is not JSON.'); }
+      if (!body || typeof body !== 'object' || Array.isArray(body)) fail(400, 'invalid', 'Send a JSON object.');
+    }
+    const out = await route.handler(request, env, body, url.pathname.match(route.re).slice(1));
+    return out instanceof Response ? out : json(out);
+  } catch (err) {
+    if (err instanceof ApiError) return json({ error: err.code, message: err.message }, err.status);
+    if (/no such table/i.test(String(err?.message))) return json({ error: 'not_ready', message: 'The database is not set up yet. Apply migrations on /ops.' }, 503);
+    console.log(`API error on ${request.method} ${url.pathname}: ${err?.stack ?? err}`);
+    return json({ error: 'internal', message: 'Something went wrong.' }, 500);
+  }
+}

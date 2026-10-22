@@ -1,0 +1,38 @@
+# Cloudflare Worker for Clean Plate Recipes (plan §8.1). Deploys run from GitHub
+# through Workers Builds; nothing here is run by hand. docs/setup.md lists the
+# dashboard steps.
+name = "clean-plate-recipes"
+main = "src/worker/index.js"
+compatibility_date = "2025-09-01"
+
+# The Worker logs are where the owner reads why an email or an ops action failed.
+[observability]
+enabled = true
+
+# Only public/ is served as files. src/ and content/ are not.
+[assets]
+directory = "./public"
+binding = "ASSETS"
+# Every request reaches the Worker first, so /ops and /api always route here.
+run_worker_first = true
+
+# Sent-from address for reset and sign-up emails. Its domain must be verified
+# in Resend. RESEND_API_KEY and OPS_TOKEN are secrets, set in the dashboard.
+[vars]
+MAIL_FROM = "Clean Plate Recipes <cook@immotus.app>"
+
+# The database. Paste the id from the Cloudflare dashboard (D1 → the database →
+# its Database ID) in place of the placeholder below, then remove the # at the
+# start of each of these four lines. Until then the app and /ops say the
+# database isn't connected.
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "clean-plate-recipes"
+# database_id = "PASTE-THE-DATABASE-ID-HERE"
+
+# Migration .sql files are bundled into the Worker as text, so they stay real
+# files you can edit in the GitHub web editor.
+[[rules]]
+type = "Text"
+globs = ["**/*.sql"]
+fallthrough = true

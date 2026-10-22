@@ -1,6 +1,6 @@
 name: Content checks
 
-# Runs the content linter (plan §7.4) and the tests on every push and pull request.
+# Runs the content linter (plan §7.4) and the tests (content and the Worker) on every push and pull request.
 # A red check here means a lesson or registry file broke a rule; the log names the file and the problem.
 on:
   push:
@@ -17,4 +17,4 @@ jobs:
       - name: Lint the content
         run: node tools/lint-content.js
       - name: Run the tests
-        run: node --test
+        run: npm test
