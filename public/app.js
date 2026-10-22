@@ -1,6 +1,8 @@
 // Clean Plate Recipes, the app. Plain ES module, no build step. Screens are
 // built with el(), which only ever sets text, so nothing a family types is
 // parsed as markup. Routes live in the hash: #/login, #/kitchen/<id>, #/parent…
+import { openLesson } from './player.js';
+
 const app = document.getElementById('app');
 
 // ---------- helpers ----------
@@ -304,7 +306,7 @@ async function kitchen(id) {
   const body = units.length
     ? units.map((u) => [
       el('h2', { class: 'k-unit' }, quest ? `Path ${u}: ${lib.units[u]}` : lib.units[u]),
-      el('div', { class: 'k-lib' }, lib.lessons.filter((l) => l.unit === u).map(card)),
+      el('div', { class: 'k-lib' }, lib.lessons.filter((l) => l.unit === u).map((L) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${L.title}`, onclick: () => go(`#/kitchen/${p.id}/${L.id}`) }, card(L)))),
     ])
     : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, 'No lessons match this family\'s diet settings yet.');
 
@@ -318,6 +320,16 @@ async function kitchen(id) {
         kitchen(id);
       } }, `Switch to ${THEMES[other]}`)),
     body));
+}
+
+// A lesson, played in the profile's theme (player.js).
+async function lesson(profileId, lessonId) {
+  const { profiles } = await api('GET', '/api/profiles');
+  const p = profiles.find((x) => x.id === profileId);
+  if (!p) return go('#/');
+  const mount = el('div');
+  screen(mount);
+  await openLesson(mount, { profile: p, family: me.family, lessonId, onExit: () => go(`#/kitchen/${p.id}`) });
 }
 
 // ---------- parent area ----------
@@ -498,6 +510,7 @@ async function route() {
       return welcome();
     }
     if (!me.family.pin_set) return firstRun();
+    if (top === 'kitchen' && sub && extra) return await lesson(sub, decodeURIComponent(extra));
     if (top === 'kitchen' && sub) return await kitchen(sub);
     if (top === 'parent') {
       if (sub === 'profiles' && extra) return await profileEditor(extra);

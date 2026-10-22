@@ -10,7 +10,7 @@ import worker from '../src/worker/index.js';
 import { makeEnv, outbox } from '../test/helpers/worker.js';
 
 const PUBLIC = fileURLToPath(new URL('../public/', import.meta.url));
-const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.webp': 'image/webp', '.png': 'image/png' };
+const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.webp': 'image/webp', '.png': 'image/png', '.svg': 'image/svg+xml', '.json': 'application/json' };
 const env = await makeEnv();
 env.ASSETS = {
   async fetch(req) {

@@ -902,3 +902,47 @@ Before Phase 2, the owner ruled on its four open recommendations:
 - **Hands-free (§6.12):** voice step control moves from Later into Phase 2;
   the tap zone and page-turner remote go on hold. On a doneness step, "next"
   reads the target aloud instead of moving on.
+
+---
+
+## 39. 2026-10-22 — Phase 2a: the lesson player
+
+Phase 2 is split into slices: **2a** the lesson player, **2b** saving cooks for
+every profile on them and the parents' test-cook notice, **2c** voice step
+control, **2d** the installable PWA and cooking offline, **2e** fix requests and
+lesson patches. This is 2a.
+- **Lesson cards open.** Tapping one in a profile's kitchen opens the lesson in
+  that profile's theme, with the showcase's components (§5.4, §5.4a):
+  - **Lesson card:** the dish, skill, time, cuisine, and step count; the
+    serving picker (free sizes, or the fixed sizes a baking lesson allows),
+    starting at the family's default; and any diet swaps or left-out
+    ingredients for this family.
+  - **Learn:** a callback card when the lesson has one, the move, each "why it
+    works" card, "same move, other dishes" (built from every lesson's skills),
+    "when it goes wrong", and the quiz when there is one. Skip to Prep is
+    always there.
+  - **Prep:** the scaled ingredients as the inventory grid or the mixing bowl,
+    then the tools as the gear loadout or the pegboard. Cook mode unlocks when
+    everything is checked.
+  - **Cook:** one step at a time with its safety banner (an adult profile sees
+    only the hazard), the stage bar or measuring cup, tips and "should look
+    like" notes, doneness steps showing the thermometer target (not required,
+    per section 38), wash steps, a Why? button that opens the step's Learn
+    card, and kitchen words that open their meaning under the step.
+  - **Timers:** start from a step, several at once, in the timer tray or on the
+    counter. They keep the end time, so they stay right when the kid moves to
+    another step or leaves and comes back; one that ended while the app was
+    closed shows how long ago. A ding and a buzz at zero.
+  - **The screen stays awake** during Prep and Cook where the browser allows
+    it; elsewhere a one-time tip says to raise the auto-lock time.
+  - Where a cook is up to is kept on the device. Reopening the lesson offers
+    Keep going or Start over. Plate it finishes it; saving the cook to the
+    account is 2b.
+- **Content for the browser:** `tools/build-library.js` now also writes
+  `public/content/` (each lesson file and a registry) and copies the scaling,
+  unit, kitchen-word, and diet code to `public/lib/`, so the app scales lessons
+  with the same code the linter uses. A test fails if any of it is out of date.
+- **Themed styles and icons:** `public/themes.css` and `public/icons.svg` are
+  taken from the approved showcase.
+- Tests: 92. New ones check the player's scripts parse, every icon it draws is
+  in the sprite, and every lesson scales and fills at every size it offers.
