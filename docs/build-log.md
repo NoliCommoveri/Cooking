@@ -1287,3 +1287,29 @@ Before Phase 3, the owner ruled:
 - Phase 3 is built in two slices: 3a, the queue (requests, Cook this, the
   foundations note, safety review, mark test-cooked); 3b, shopping trips and
   the pantry.
+
+## 53. 2026-10-22 — Plan: course plans and the weekly schedule
+
+The owner asked that homeschool mode let a parent set the whole course up
+once, with each week's lessons loaded into the queue and unfinished ones
+moved to the next week. The plan had homeschool due dates as dates saved on
+queued lessons, and a pacing helper that suggested dates a few lessons ahead,
+which would have meant reworking the queue later. The owner ruled:
+- **New §6.18, course plans and the weekly schedule.** A course is for one or
+  more profiles, with its dishes in order, a start date, and lessons per week.
+  Each week's lessons are worked out from the plan, not stored, and next
+  week's show in the queue from the Friday before.
+- **Rollover: everything shifts.** An unfinished lesson goes first the next
+  week and the rest move back; the parent sees how far behind the planned
+  finish it is. Skip this week, and putting a skipped week back, are included.
+- **Siblings** can share a course or each have their own.
+- **Casual mode** can turn it on as Plan our weeks (off by default);
+  homeschool mode always has it.
+- **Build order:** course plans and the schedule move into Phase 3 (slice
+  3a, with the queue), which lifts the earlier wait on the family's course
+  plan (§4.1). The pacing helper is gone. Phase 4b keeps course details,
+  grading, and the transcript.
+- The queue stays the one "up next" list in both modes, so shopping, safety
+  review, and cooks are built once. Data model: `queue` gains `course_id` and
+  `source`; new `courses`, `course_profiles`, `course_lessons`, and
+  `course_skips` tables (§8.4).

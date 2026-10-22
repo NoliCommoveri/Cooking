@@ -167,7 +167,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 - **A lesson's number is its place in the course**, not a field on the lesson. Ids and picture names carry no number (`shakshuka`, `dishes/shakshuka.png`), and lessons point at each other by id: callbacks, prerequisites, and a kitchen word's "practiced in" lesson.
 - **A pick-one group shares one number**, with a letter for each dish in it: 1a, 1b, 1c. On one cook's path the course is 59 lessons, so a number says how far through it someone is ("Quest 27 of 59").
 - `content/course.json` holds every planned dish in the **suggested order**, which keeps every prerequisite first. A prerequisite names a dish, or `pick:<skill>` for any dish in that pick-one group.
-- **Each family has its own course plan** (not built yet; the owner asked to wait on it, 2026-10-22). A parent can view the whole course, reorder it, remove dishes, and put them back. The family's lesson and quest numbers come from its plan. Removing a dish from a pick-one group drops its letter; a group left with one dish has no letter, and an emptied group has no number.
+- **Course plans** (owner, 2026-10-22: built in Phase 3 with the weekly schedule, §6.18). A family can have one or more courses, each for one or more profiles. A parent can view a course's whole plan, reorder it, remove dishes, put them back, and pick the dish for each pick-one group. A profile's lesson and quest numbers come from its course's plan; a profile on no course uses the suggested order. Removing a dish from a pick-one group drops its letter; a group left with one dish has no letter, and an emptied group has no number.
 - A plan that puts a lesson before one it builds on, or removes one it needs, shows a note. It's a suggestion, not a block, like the knife-work nudge (§4.0).
 - The public demo and syllabus use the suggested order.
 
@@ -404,7 +404,7 @@ Do **not** use:
 
 ### 6.2 Parent features
 - **Foundations first** (§4.0): foundation lessons carry a foundation marker (an icon and a word, never a pill) in the library and the queue. Choose-one lessons sit side by side with "Pick one." A new family's queue suggests a Unit 1 knife lesson first. Queuing anything else before any knife lesson shows a short note: "Most lessons use knife work. We suggest a Unit 1 lesson first." It's a suggestion, not a block. The parent tour (§6.9) has a card on foundations.
-- **Queue:** assign the next 1–3 lessons per profile, or approve a profile's request (§6.1). Each queued lesson is for one or more profiles (§1), with a serving count (defaults to the family's) and an optional planned date
+- **Queue:** the one "up next" list in both modes. A parent adds lessons by hand, approves a profile's request (§6.1), or lets a course's weekly schedule fill it (§6.18). Each queued lesson is for one or more profiles (§1), with a serving count (defaults to the family's) and an optional planned date. Shopping, safety review, and cooks all work from the queue the same way, however a lesson got there
 - **Shopping list** (§6.3)
 - **Safety review:** before approving a lesson, see every step marked adult-nearby or adult-hands-on
 - **Gallery:** all photos, filterable by profile and lesson, with reflections (families with photos on, §2.6)
@@ -736,10 +736,11 @@ A public page at **`/demo`** that the owner shares with other moms: no account, 
 Families use the app one of two ways, and the parent picks in family settings (behind the PIN). It can be changed at any time, and switching modes never deletes anything.
 - **Casual mode** (the default): the app as described everywhere else. No due dates, no grades, no transcript.
 - **Homeschool mode** adds, for the parent only:
-  - **Course setup per profile:** course name and code, school year, and start date. These feed the transcript (§6.15).
-  - **Due dates:** a queued lesson's planned date (§6.2) becomes its due date. The queue shows what's due this week and what's overdue. Kids see "due Friday" on the lesson card. **Overdue shows only to the parent** (owner, 2026-10-22); kids see nothing about being late.
-  - **A pacing helper:** pick a start date and lessons per week, and the app suggests due dates for the next several lessons, honoring foundations first (§4.0). The parent can move any of them.
+  - **A course plan with a weekly schedule** (§6.18) for every profile, always on. The parent sets the whole course up once.
+  - **Course details:** course name and code, and school year. These feed the transcript (§6.15).
+  - **Due dates:** a lesson's week in the schedule is its due date. The queue shows what's due this week and what's overdue. Kids see "due Friday" on the lesson card. **Overdue shows only to the parent** (owner, 2026-10-22); kids see nothing about being late.
   - **Optional grading:** after a cook, the parent can grade it with the rubric (owner, 2026-10-22: skill shown, safety and cleanliness, following the recipe, the result, and the reflection, each scored 1–4), give a single grade, or leave it ungraded. Grades roll up per profile and print on the transcript. **Grades are parent-only** (owner, 2026-10-22): kids never see them.
+- **Lessons outside the course** can still be queued by hand or requested. They count as cooked, and don't move the schedule.
 - **Syllabus page:** a public page, linked from the landing page and the demo page as **"Using this as a homeschool course? Review our syllabus."** It's built from `content/course.json` (§6.16) so it stays current as lessons are written, and prints cleanly. It covers:
   - the course description and who it's for (ages 11–12 with some kitchen experience; the beginner track comes later, §11)
   - learning objectives: knife work, heat control, building flavor, doughs and batters, food safety, and reading and following a recipe
@@ -750,6 +751,18 @@ Families use the app one of two ways, and the parent picks in family settings (b
   - safety: the safety levels and adult supervision (§3)
   - how it can be assessed: the rubric above, the reflection questions, and the transcript
   - the food rules (§2.1) in one plain line, and "published by Immotus Apps"
+
+### 6.18 Course plans and the weekly schedule — Requirement (owner, 2026-10-22)
+Set the whole course up once, and the app loads each week's lessons. Always on in homeschool mode. In casual mode it's optional: **Plan our weeks** in family settings, off by default.
+- **Setting up a course:** pick the profiles it's for (one or more; siblings can share a course or each have their own), the dishes and their order (starting from the suggested order, §4.1, with one dish picked from each pick-one group), a start date, and lessons per week. Foundations first (§4.0) is a note, not a block. The setup shows the planned finish date.
+- **Weeks run Monday to Sunday.** Next week's lessons show in the queue from the Friday before, so a parent can shop on the weekend (§6.3).
+- **The schedule is worked out, not stored.** Each week holds the next unfinished lessons in the plan, at the course's pace. A lesson is finished when a cook of it is finished with any of the course's profiles on it.
+- **Rollover (owner, 2026-10-22): everything shifts.** A lesson not cooked by the end of its week goes first the next week, and every later lesson moves back a week. The parent sees the planned finish and how far behind it is ("2 weeks behind"); kids don't.
+- **Cooking ahead is fine.** A lesson cooked early counts, and the rest of the schedule moves up.
+- **Skip this week**, for breaks and vacations, pushes everything back a week. A skipped week can be put back.
+- **Changing the plan mid-course** (reorder, remove, add back, change the pace or start date) recomputes the weeks. Cooks already done stay done.
+- A course's lessons are queued for all its profiles together, as one cook (§1). A profile can be on only one course at a time.
+- Switching modes never deletes a course. Turning off Plan our weeks in casual mode keeps the plan and stops loading weeks; the lessons already in the queue stay.
 
 ---
 
@@ -803,7 +816,11 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `community_recipes` (id, title, body_json, released_at, released_by). No `family_id`: released recipes belong to the shared directory, not a family
 - `sessions` (id, parent_id, family_id, created_at, last_seen, pin_until). `id` is a hash of the cookie's token; `pin_until` is when the parent PIN must be entered again on that device
 - `profiles` (id, family_id, name, avatar, people, theme, audience: kid | adult, track: core | beginner). One person or several sharing it (§1); `people` lists each person's name and avatar color so a shared locker shows everyone
-- `queue` (id, family_id, lesson_id, servings, planned_date, status: requested → assigned → shopped → cooked, requested_by_profile_id)
+- `queue` (id, family_id, lesson_id, servings, planned_date, status: requested → assigned → shopped → cooked, requested_by_profile_id, course_id, source: manual | request | course). A course's lessons are queued with `course_id` set; their week comes from the schedule, not `planned_date`
+- `courses` (id, family_id, name, code, school_year, start_date, per_week, created_at, archived_at) (§6.18)
+- `course_profiles` (course_id, family_id, profile_id). A profile is on one active course at most
+- `course_lessons` (course_id, family_id, lesson_id, position, removed)
+- `course_skips` (course_id, family_id, week_start)
 - `queue_profiles` (queue_id, family_id, profile_id)
 - `shopping_trips` (id, family_id, created_at, ended_at)
 - `trip_lessons` (trip_id, family_id, queue_id)
@@ -840,9 +857,9 @@ Each phase should be deployed and usable before the next begins.
 | **1c. Public launch** | The landing page, privacy policy, and terms (§6.13), fonts served from the app, Delete our family and Download our data, the inactive purge with its warning emails (§6.14), and the human check at sign-up (§8.3) if the owner wants it before launch | A visitor reads the landing page, signs up, and deletes their family from the browser. A test family left inactive past the limit is warned and then purged by the scheduled job. **The sign-up link isn't posted publicly before this phase is done** |
 | **1d. Demo page** (built after 2a, before 2b) | `/demo` (§6.16): theme and kid/adult switches, the sample lessons in the real player, the diet preview, the shopping list preview, the whole course, the skills view, and `content/course.json`; the public syllabus page (§6.17) | A mom with only the link tries a sample lesson in both themes, toggles dairy-free and sees lessons change, and browses the course by dish and by skill, on her phone |
 | **2. Lesson player** | Learn, Prep, Cook mode, kitchen words, food-safety checks, timers, wake lock, voice step control (§6.12), the installable PWA (§8.2), attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
-| **3. Parent planning & shopping** | Queue (with kid requests), safety review, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
+| **3. Parent planning & shopping** | Course plans and the weekly schedule (§4.1, §6.18), the casual/homeschool switch and due dates (§6.17), the queue (with kid requests), safety review, mark test-cooked, shopping trips with merging and package rounding, pantry, check-off persistence | A parent sets up a course for two siblings, sees this week's lessons in the queue, skips a week, and sees the schedule shift when a lesson isn't cooked. A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
 | **4. Photos & reflect** | The per-family photos switch on `/ops` (§2.6), camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download, Print our progress and the homeschool transcript (§6.15) | In a family with photos on, a photo taken on the tablet shows in the gallery on the parent's phone. A family with photos off cooks and reflects with no photo step |
-| **4b. Homeschool mode** | The casual/homeschool switch, course setup per profile, due dates and the pacing helper, optional grading, and the transcript (§6.15, §6.17) | A parent switches to homeschool mode, sets up a course, gets suggested due dates, grades a cook, and prints a transcript; switching back to casual hides it all and loses nothing |
+| **4b. Homeschool mode** | Course details (name, code, school year), optional grading, and the transcript (§6.15, §6.17) | A parent in homeschool mode grades a cook and prints a transcript; switching back to casual hides it all and loses nothing |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
@@ -852,7 +869,7 @@ Each phase should be deployed and usable before the next begins.
 
 **Phase 2d waits (owner, 2026-10-22):** the installable PWA and cooking offline (Phase 2's slice 2d) are built once pretty much everything else is done, not before Phase 2e. Until then, Phase 2's "Wi-Fi off partway through" check waits with it.
 
-**Phase 3 rulings (owner, 2026-10-22):** Phase 3 comes before Phase 1c. Kids' lesson requests are built. Package rounding is in Phase 3: every ingredient gets its store package sizes, and the registry's store sections become §6.3's list. The offline shopping list waits with 2d.
+**Phase 3 rulings (owner, 2026-10-22):** Phase 3 comes before Phase 1c. Course plans and the weekly schedule (§6.18) move into Phase 3, slice 3a, with the queue; grading and the transcript stay in 4b. Kids' lesson requests are built. Package rounding is in Phase 3: every ingredient gets its store package sizes, and the registry's store sections become §6.3's list. The offline shopping list waits with 2d.
 
 **Testing (every phase):** automated tests run in CI alongside the linter. At minimum they cover family scoping (no endpoint returns another family's rows or photos), lesson patches (the hard block and food-safety checks reject a bad patch, and revert restores the lesson), scaling and rounding, unit conversion, shopping-list merging, and the migration runner.
 
