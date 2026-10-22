@@ -43,7 +43,7 @@ rgba = im.copy(); rgba.putalpha(alpha)
 for c, name in zip(comps, names):
     y0,x0,y1,x1,n = c; pad = 6 + (int(sys.argv[4]) if len(sys.argv)>4 else 9)//2
     box = (max(0,x0-pad), max(0,y0-pad), min(W,x1+pad), min(H,y1+pad))
-    own = Image.fromarray(((lab==n)*255).astype('uint8')).resize((w*s,h*s), Image.NEAREST).crop((0,0,W,H)).filter(ImageFilter.MaxFilter(25))
+    own = Image.fromarray(((lab==n)*255).astype('uint8')).resize((w*s,h*s), Image.NEAREST).crop((0,0,W,H)).filter(ImageFilter.MaxFilter((int(sys.argv[4]) if len(sys.argv)>4 else 9) + 6))
     al = np.minimum(np.asarray(alpha), np.asarray(own)).astype('uint8')
     one = im.copy(); one.putalpha(Image.fromarray(al))
     piece = one.crop(box); side = max(piece.size)

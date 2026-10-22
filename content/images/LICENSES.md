@@ -18,3 +18,5 @@ use in this app. Cropped from the source sheets in `source/` with
 | `source/sheet-06-unit6-desserts.png` | `dishes/22-spinach-mushroom-quiche.png`, `dishes/23-chicken-katsu.png`, `dishes/24-swedish-meatballs.png`, `dishes/25-churros.png` |
 | `source/sheet-07-unit2-3.png` | `dishes/32-mac-and-cheese.png`, `dishes/33-beef-chili.png`, `dishes/34-jambalaya.png`, `dishes/35-bbq-pulled-chicken.png` |
 | `source/sheet-08-breakfast.png` | `dishes/28-french-omelet.png`, `dishes/29-hash-browns.png`, `dishes/30-breakfast-burritos.png`, `dishes/31-eggs-benedict.png` |
+| `source/sheet-09-baking.png` | `dishes/40-blueberry-muffins.png`, `dishes/41-skillet-cornbread.png`, `dishes/42-cinnamon-rolls.png`, `dishes/43-granola.png` |
+| `source/sheet-10-units4-5.png` | `dishes/36-chicken-noodle-soup.png`, `dishes/37-philly-cheesesteak.png`, `dishes/38-buttermilk-biscuits.png`, `dishes/39-biscuits-and-gravy.png` |

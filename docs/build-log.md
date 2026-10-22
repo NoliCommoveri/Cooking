@@ -377,3 +377,21 @@ Owner rulings on open questions:
 - Minor note to the owner: the omelet is an American-style folded half-moon,
   while the lesson teaches the pale, rolled French style.
 - 35 of 50 dishes now have art.
+
+---
+
+## 21. 2026-10-22 — Dish art sheets 9 and 10
+
+- Added sheets 9 and 10 from the owner and cropped 8 dishes: 36 chicken noodle
+  soup, 37 Philly cheesesteak, 38 buttermilk biscuits, 39 biscuits and sausage
+  gravy, 40 blueberry muffins, 41 skillet cornbread, 42 cinnamon rolls, 43
+  granola. Each is about 620–740 px.
+- Checked for unclean foods: none seen. The gravy's sausage is pale crumbles
+  with no pork cues.
+- Note to the owner: the cheesesteak beef looks ground, not thin-sliced, and
+  lesson 37 repeats the thin-slicing skill.
+- Fixed `tools/crop-dish-sheet.py`: the muffin crop picked up a sliver of the
+  cinnamon-roll plate below it. Each dish's mask now grows back only as far as
+  the erosion shrank it. Re-cropped every sheet; all 43 crops were checked
+  side by side on the Kitchen Quest background.
+- 43 of 50 dishes now have art.
