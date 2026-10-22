@@ -18,14 +18,7 @@ name below doesn't match, look for the nearest one.
 
 1. In the dashboard, open **Storage & Databases → D1** and choose **Create**.
 2. Name it **`clean-plate-recipes`**.
-3. Open the new database and copy its **Database ID**.
-4. In GitHub, open `wrangler.toml` and press the pencil to edit it. Find the
-   four lines that start with `# [[d1_databases]]`:
-   - remove the `# ` at the start of each of the four lines
-   - replace `PASTE-THE-DATABASE-ID-HERE` with the ID you copied
-5. Commit the change to `main`. Cloudflare deploys it in a minute or two.
-
-(Or send Claude the Database ID, and Claude makes this edit.)
+3. It's already connected: its ID is in `wrangler.toml`.
 
 ## 3. Set the ops password
 
