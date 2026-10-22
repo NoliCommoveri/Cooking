@@ -41,9 +41,12 @@ add the custom domain **`cook.immotus.app`**.
 
 ## 5. Set up email (Resend)
 
-This sends password-reset links, sign-up codes, and your note about each new
-request. The app works without it: you can read codes off the owner screens
-and pass them on yourself.
+Sign-up emails each new family a code, so **nobody can sign up until this
+is done**, you included. It also sends password-reset links.
+
+Resend's free plan stops sending after **100 emails a day**. If you post the
+link to a big group, choose a paid plan in Resend first (its Pro plan has no
+daily cap), or sign-ups will stall partway through the day.
 
 1. In Resend, add your sending domain (for example `immotus.app`). Resend lists
    DNS records. Add each one in the Cloudflare dashboard under **your domain →
@@ -55,21 +58,23 @@ and pass them on yourself.
    `Clean Plate Recipes <cook@immotus.app>`. If you verified a different domain,
    change it in the GitHub web editor.
 
-## 6. First run on /ops
+## 6. First run
 
 1. Open **`https://cook.immotus.app/ops`** and sign in with your `OPS_TOKEN`.
+   The setup list at the top shows what's still missing.
 2. Under **Migrations**, press **Apply pending**.
-3. Press **Make a sign-up code**, and copy the code.
-4. Open **`https://cook.immotus.app`**, choose **Sign up**, and use the code to
-   create your family. Set your parent PIN when it asks.
-5. Back on `/ops`, type your email under **Sign-up codes and the owner** and
-   press **Make this parent the owner**. The **Owner** tab now shows in the
-   app's parent area.
+3. Open **`https://cook.immotus.app`**, choose **Sign up**, and enter your
+   email and a password. Enter the code from the email, then your family name
+   and parent PIN.
+4. Back on `/ops`, type your email under **The owner** and press **Make this
+   parent the owner**. The **Owner** tab now shows in the app's parent area.
+5. To test in the wild first: in the app, **Parents → Owner → Beta word**, set
+   a word and share it only with your testers. Turn it off when you're ready
+   for everyone.
 
 ## 7. Check it (the Phase 1b test)
 
-1. From the Owner tab, make a second code and sign up a test family with it
-   (in a private window, with another email).
+1. In a private window, sign up a second test family with another email.
 2. Add a profile in each family. Each family sees only its own lockers.
 3. On `/ops`, press **Download export.json**. That file is a full backup.
 

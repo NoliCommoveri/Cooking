@@ -1,13 +1,12 @@
 // The token-gated /ops page (plan §8.5), modeled on the MCCE repo's src/ops.js.
 // The owner has no command line, so this page is the whole setup and recovery
-// path: migrations, the first sign-up code, the owner flag, backups, and the
+// path: migrations, the owner flag, backups, and the
 // destructive controls, each with its restore beside it.
 import { migrationStatus, applyPending } from './migrate.js';
 import {
   exportAll, importAll, clearEverything, exportFamily, removeFamily, restoreFamily, tableNames,
   Refused, CLEAR_PHRASE, REMOVE_PHRASE,
 } from './backup.js';
-import { newInvite } from './api.js';
 import { emailReady } from './email.js';
 import { hmacHex, timingSafeEqual } from './lib/crypto.js';
 import { readCookie } from './lib/http.js';
@@ -123,19 +122,16 @@ ${error ? `<p class="bad">A query failed, so part of this page is missing.</p><p
 <ul>
   ${check(true, 'Database connected.', '')}
   ${check(ready, 'Migrations applied.', 'Migrations are not all applied. Press Apply pending below.')}
-  ${check(emailReady(env), 'Email is set up (Resend).', 'Email is not set up: add the RESEND_API_KEY secret and the MAIL_FROM variable. Until then, reset emails and code emails are not sent.')}
-  ${check(owners > 0, 'An owner is set.', 'No owner yet. Sign up with a code from below, then make your email the owner.')}
+  ${check(emailReady(env), 'Email is set up (Resend).', 'Email is not set up: add the RESEND_API_KEY secret and the MAIL_FROM variable. Until then nobody can sign up, because sign-up emails a code.')}
+  ${check(owners > 0, 'An owner is set.', 'No owner yet. Sign up in the app, then make your email the owner below.')}
 </ul>
 
 <h2>Migrations</h2>
 ${migrationTable(migrations)}
 <form method="post" action="/ops/migrate"><button type="submit"${pending ? '' : ' disabled'}>Apply pending${pending ? ` (${pending})` : ''}</button></form>
 
-<h2>Sign-up codes and the owner</h2>
-${ready ? `<form method="post" action="/ops/code"><button type="submit">Make a sign-up code</button></form>
-<p class="muted">A code works once. Use one to sign up your own family, then set your email as the owner here.
-After that, codes are made and sent from the owner screens in the app.</p>
-<form method="post" action="/ops/owner" class="row">
+<h2>The owner</h2>
+${ready ? `<form method="post" action="/ops/owner" class="row">
   <input type="email" name="email" placeholder="parent email" required>
   <button type="submit">Make this parent the owner</button>
 </form>` : notReady}
@@ -253,11 +249,6 @@ Variables and Secrets → Add, type <em>Secret</em>, name <code>OPS_TOKEN</code>
   if (!env.DB) return dashboard(env);
 
   if (path === '/ops/migrate' && post) return dashboard(env, migrateLog(await applyPending(env.DB)));
-
-  if (path === '/ops/code' && post) {
-    const code = await newInvite(env, 'ops');
-    return dashboard(env, `<div class="note">New sign-up code: <span class="code">${esc(code)}</span><br>It works once.</div>`);
-  }
 
   if (path === '/ops/owner' && post) {
     const addr = String((await request.formData()).get('email') ?? '').trim().toLowerCase();

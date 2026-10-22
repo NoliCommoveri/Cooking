@@ -1,12 +1,13 @@
 // Runs the Worker on http://localhost:8787 against an in-memory database, for
 // looking at the app in a browser during a Claude session. Not part of the app.
+// Emails aren't sent: GET /__outbox lists them, so a sign-up code can be read.
 // Usage: node --import ./test/helpers/register.js tools/dev-server.js
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import worker from '../src/worker/index.js';
-import { makeEnv } from '../test/helpers/worker.js';
+import { makeEnv, outbox } from '../test/helpers/worker.js';
 
 const PUBLIC = fileURLToPath(new URL('../public/', import.meta.url));
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.webp': 'image/webp', '.png': 'image/png' };
@@ -24,6 +25,7 @@ env.ASSETS = {
 };
 
 createServer(async (req, res) => {
+  if (req.url === '/__outbox') { res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify(outbox)); }
   const chunks = [];
   for await (const c of req) chunks.push(c);
   const body = chunks.length ? Buffer.concat(chunks) : undefined;

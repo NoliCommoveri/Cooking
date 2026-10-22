@@ -783,3 +783,37 @@ The owner reviewed the sample lessons in the preview.
     hiding it.
   - `MAIL_FROM` is set to `cook@immotus.app`, a guess. It must be on the domain
     verified in Resend.
+
+---
+
+## 32. 2026-10-22 — Open sign-up with an emailed code
+
+- **The owner ruled (§8.3, now a Requirement):** families join on their own,
+  like any website. She'll post the link to a group of about 3,000 and won't
+  handle sign-ups by hand. This replaces the sign-up codes, the sign-up word,
+  and the request queue built in section 31. None of it had been deployed, so
+  `0001_families.sql` was edited in place, not migrated.
+- **Sign-up now:** email and password, then a six-digit code emailed through
+  Resend. Entering it creates the family and logs in; the first run then asks
+  for the family name and the parent PIN together. A code works for 30
+  minutes and allows 5 tries. The code screen counts down 10 minutes ("request
+  a new one in 9:59") before a new code can be sent; a used-up or expired code
+  can be replaced straight away. Pressing Sign up again inside the wait sends
+  nothing, and keeps the newest password.
+- **Beta word:** set or turned off from the Owner tab. While it's set,
+  sign-up asks for it before any email is sent. The sign-up page learns only
+  whether a word is needed, never the word.
+- **Owner tab** now holds the beta word, the family list (with how many
+  sign-ups are waiting on a code), and setting a parent's password. **`/ops`**
+  lost its "Make a sign-up code" button; the owner signs up like anyone else,
+  then makes herself the owner there.
+- **Email is now required to sign up.** Without `RESEND_API_KEY`, sign-up
+  says it couldn't send the email and stores nothing, and `/ops` says nobody
+  can sign up. `docs/setup.md` puts Resend before the first sign-up and notes
+  Resend's free plan stops at 100 emails a day.
+- **Planned, not built:** a human check before the code email (the owner's
+  "capture thing or unscramble the letters"). Added to §8.3 and the Later row
+  of §9.
+- Tables `invites` and `signup_requests` are gone; `signup_verifications`
+  holds a sign-up until its code is entered. Tests: 87, rewritten for the new
+  flow (codes, tries, expiry, the wait, the beta word, no email set up).

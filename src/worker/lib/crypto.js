@@ -33,16 +33,6 @@ export function randomHex(bytes = 32) {
   return hex(buf);
 }
 
-// Sign-up codes are read off an email and typed on a tablet, so they skip the
-// letters and digits that look alike (0/O, 1/I/L).
-const CODE_ALPHABET = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
-export function signupCode() {
-  const buf = new Uint8Array(8);
-  crypto.getRandomValues(buf);
-  const chars = [...buf].map((b) => CODE_ALPHABET[b % CODE_ALPHABET.length]).join('');
-  return `${chars.slice(0, 4)}-${chars.slice(4)}`;
-}
-
 // PBKDF2-SHA256. Passwords and the parent PIN are stored as one string,
 // "pbkdf2$<iterations>$<salt>$<hash>", so the plan's single *_hash column holds
 // everything and the cost can be raised later without breaking old rows.

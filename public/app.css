@@ -22,6 +22,7 @@ body{margin:0;background:var(--h-bg);color:var(--h-fg);font-family:var(--h-body)
 button{font:inherit;color:inherit;cursor:pointer}
 [hidden]{display:none!important}
 :focus-visible{outline:3px solid var(--h-acc);outline-offset:3px}
+h1[tabindex="-1"]:focus{outline:none}
 a{color:var(--h-acc)}
 h1,h2,h3{font-family:var(--h-disp);font-weight:600;line-height:1.1;text-wrap:balance}
 h1{font-size:clamp(28px,5vw,40px);margin:0 0 6px}

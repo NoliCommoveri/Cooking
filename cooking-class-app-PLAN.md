@@ -24,7 +24,7 @@ A parent uses the app from their phone. They queue lessons, see a combined **sho
 ### Users
 | User | Device | Main jobs |
 |---|---|---|
-| Owner (Jen) | Any | Everything a parent can do, plus approving sign-up requests, reviewing submitted recipes, and managing families |
+| Owner (Jen) | Any | Everything a parent can do, plus setting the beta word, reviewing submitted recipes, and managing families |
 | Parent (1+ per family) | Phone | Queue lessons, shopping list, safety review, gallery, family settings |
 | Kid (any number per family) | Tablet or phone in the kitchen | Learn, prep, cook, photograph, reflect, see progress |
 | Adult learner (any number per family) | Any | The same as a kid: adults can take the class too, through their own profile |
@@ -406,8 +406,7 @@ Do **not** use:
 - **Family settings:** family name, profiles (add, rename, avatar, theme, who's on each), dietary filters (§2.1), default servings, voice step control (off until turned on, §6.12), other parent logins
 
 ### 6.2a Owner features
-- **Sign-up requests:** a queue of families asking to join (§8.3). Approving one emails them a sign-up code; declining sends nothing
-- Set, change, or turn off the **sign-up keyword**, and create or revoke codes by hand
+- Set, change, or turn off the **beta word** (§8.3), and see how many sign-ups are waiting on their email code
 - **Recipe submissions:** review recipes families submit (§6.10), and release or decline each
 - **Fix requests:** review reports from families, apply a suggested fix as a lesson patch, or revert one (§6.11)
 - See the list of families (name, number of profiles, last active). This is the only cross-family view. The owner never sees other families' kids' names, photos, or progress.
@@ -495,7 +494,7 @@ A bonus feature, after the core app works. Families can cook their own recipes i
 - **Scaling** works for registry ingredients. Typed-in ingredients scale as plain numbers, and the shopping list shows them without merging.
 
 ### 6.9 First-run wizard (to be specced)
-A first run for a new family, like KennelOS's (End-State guide §11 and "Getting Started" in §33). It runs after a family signs up with a code or the keyword (§8.3). Each part saves as it's answered and can be skipped.
+A first run for a new family, like KennelOS's (End-State guide §11 and "Getting Started" in §33). It runs after a family signs up and enters its emailed code (§8.3). Each part saves as it's answered and can be skipped.
 - **Family setup:** profiles (one per person, shared, or a mix), each marked **kid or adult**, default servings, diet filters, pantry staples, and the parent PIN (required, §8.3).
 - **A warning for first-time parents:** the recipes haven't all been test-cooked. Read each lesson through before your kids cook it, and mark it test-cooked once you have (§6.2).
 - **Each profile's first run:** it sets up its chef locker and avatar, and picks its theme.
@@ -695,14 +694,16 @@ A backend is needed because the app is multi-family: each family's progress, que
 - **Wake Lock:** older iOS versions don't support it in an installed app. Where it's missing, cook mode shows a one-time tip to raise the device's auto-lock time.
 
 ### 8.3 Accounts and access (basic, per §2.5) — Recommendation
-- **Open sign-up, gated by a code or keyword.** Anyone can reach the sign-up page, but creating an account needs one of:
-  - a **sign-up code**, single-use. A family without one fills in a short request form (name, email, a note). The owner gets the request in her queue (§6.2a) and an email about it. Approving emails the family a code through Resend.
-  - the **sign-up keyword**, a word the owner sets and shares however she likes. She can change it or turn it off at any time.
-  - The request form is the one public form that writes to the database. It's limited to one pending request per email address.
+- **Open sign-up, verified by email — Requirement (owner, 2026-10-22).** Families join on their own, like any website; the owner doesn't invite or approve anyone.
+  - Sign up asks for an email and a password. A six-digit code is emailed to that address through Resend, and entering it creates the family. The code works for 30 minutes and allows 5 tries.
+  - The code screen says "We sent a code to …" and "Don't see it? Check your spam folder, or request a new one in 9:59", counting down 10 minutes before a new code can be sent.
+  - The family's name and parent PIN are set in the first run, right after.
+  - **Beta word:** while testing in the wild, the owner can set a word that sign-up asks for before any email is sent. She can change it or turn it off at any time; off means fully open.
+  - **Planned:** a human check before the email is sent (a "capture thing" or an unscramble-the-letters puzzle). Cloudflare Turnstile is the likely fit: free, and set up in the Cloudflare dashboard.
 - **Parent login:** email and password. Store passwords hashed with a standard algorithm (PBKDF2 via Web Crypto is available in Workers). Sessions use a long-lived, httpOnly cookie, so kitchen devices stay logged in.
   - **Password reset by email,** sent through **Resend**. "Forgot password" emails a one-time link that expires after an hour. The owner can also set a new password from the owner screens (§6.2a) as a fallback.
-  - **Not included, on purpose:** email verification at sign-up, two-factor login, rate limiting beyond the platform defaults.
-  - **Revisit if:** the app opens to families the owner doesn't know.
+  - **Not included, on purpose:** two-factor login, and rate limiting beyond the platform defaults and the 10-minute wait between codes.
+  - **Revisit if:** sign-ups are abused (strangers' addresses used to send codes); the human check above is the first answer.
 - **Kids don't log in.** A device logged in as a family shows the profile picker (chef lockers).
 - **Parent PIN: required,** one per family, set during the first run (§6.9). Kitchen devices are logged in as a parent, so every parent-only screen asks for the PIN, including approving a kid's lesson request. Stored as a hash. It's a convenience lock, not a security boundary.
   - A forgotten PIN is reset by a parent entering their account password.
@@ -711,13 +712,12 @@ A backend is needed because the app is multi-family: each family's progress, que
 - **Photos:** stored in R2 under `families/{family_id}/…`, served only through the Worker after checking the session's family. R2 is not exposed publicly.
 
 ### 8.4 Data model (D1)
-Every table holding a family's data carries `family_id`. `families` is the family itself. `invites`, `signup_requests`, `settings`, `community_recipes`, and `lesson_patches` belong to the owner or the whole app, not to a family.
+Every table holding a family's data carries `family_id`. `families` is the family itself. `signup_verifications`, `settings`, `community_recipes`, and `lesson_patches` belong to the owner or the whole app, not to a family.
 - `families` (id, name, default_servings, diet_filters, parent_pin_hash, created_at)
 - `parents` (id, family_id, email, password_hash, is_owner)
 - `password_resets` (token_hash, family_id, parent_id, expires_at, used_at)
-- `invites` (code, created_by, email, used_by_family_id, created_at, revoked)
-- `signup_requests` (id, name, email, note, created_at, status: pending → approved | declined, invite_code)
-- `settings` (key, value). Holds the sign-up keyword, among others
+- `signup_verifications` (email, password_hash, code_hash, attempts, sent_at, expires_at). A sign-up waiting on its emailed code; removed when the family is created
+- `settings` (key, value). Holds the beta word, among others
 - `family_recipes` (id, family_id, title, servings, total_minutes, body_json, photo_key, created_at, updated_at, source_community_id)
 - `fix_requests` (id, family_id, reporter_parent_id, reporter_profile_id, lesson_id, lesson_version, step, servings, kind, field, current_value, suggested_value, note, created_at, status: open → fixed | declined | duplicate | needs_content_change, owner_reply, patch_id)
 - `lesson_patches` (id, lesson_id, base_version, field_path, old_value, new_value, fix_request_id, applied_by, applied_at, reverted_at). No `family_id`: patches apply to the shared library
@@ -758,7 +758,7 @@ Each phase should be deployed and usable before the next begins.
 | **0. Look & feel** | Theme mockups for the kids to choose from (§5.2; done, they chose Kitchen Quest), then Kitchen Quest's tokens, the per-profile theme switch, the house style for the picker and parent screens, fonts, the core art set (§5.3a), and a **component showcase page** with every themed component from §5.4 in a demo state | The kids have picked a theme and the owner approves the look. **No features are built before this.** |
 | **0b. Second theme** | Chef's Passport: its tokens, its core art set, and its version of every component on the showcase page. Built as soon as Phase 0 is approved | A profile can switch between Kitchen Quest and Chef's Passport, and the owner approves the Passport look |
 | **1. Content core** | JSON schema; ingredient, equipment, skill, and cuisine registries; clean-species allowlist and blocked-word list; linter; scaling and unit display (§6.6–6.7); and 4 sample lessons covering different units (suggested: 4 Shakshuka, 14 Bulgogi, 38 Biscuits, 49 Cookies) | The linter passes and the sample lessons render read-only at every allowed serving count |
-| **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, sign-up codes, keyword, and the request queue, parent login, sessions, password reset email (Resend), parent PIN, profiles (single or shared) and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up with codes, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
+| **1b. Families & accounts** | `/ops` page with migrations and backup export/import (§8.5), D1 schema, open sign-up with an emailed code and the beta word, parent login, sessions, password reset email (Resend), parent PIN, profiles (single or shared) and the profile picker, family settings, owner screens, diet filtering of the library | Two test families sign up on their own, and neither can see the other's kids, data, or photos. A backup export restores cleanly into an empty database |
 | **2. Lesson player** | Learn, Prep, Cook mode, kitchen words, food-safety checks, timers, wake lock, tap zone and page-turner remote (§6.12), attempts saved for every profile on the cook, offline cache and sync, fix requests and lesson patches (§6.11) | A kid can cook a sample lesson start to finish on a tablet, including with Wi-Fi off partway through. Parents see the one-time test-cook notice. A parent in a test family suggests a fix, the owner applies it from the browser, every family sees the change, and the owner reverts it |
 | **3. Parent planning & shopping** | Queue (with kid requests), safety review, mark test-cooked, shopping trips with merging, pantry, check-off persistence, offline list | A parent reviews safety, marks a lesson test-cooked, then shops for 3 queued lessons from their phone |
 | **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download | A photo taken on the tablet shows in the gallery on the parent's phone |
@@ -767,7 +767,7 @@ Each phase should be deployed and usable before the next begins.
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
 | **8. Helper & first run** | First-run wizard (§6.9) and the helper (§6.8), once both are specced | A new family goes from sign-up to their first queued lesson through the wizard, and kids and parents can each finish a helper task |
 | **9. Family recipes (bonus)** | My recipes with the guided entry flow, submission and owner review, the community directory (§6.10) | A parent enters a recipe through the flow, a kid cooks it, and the owner releases a submitted one to the directory, where another test family finds and adds it |
-| **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, voice "next step" (§6.12), CSV export to the homeschool management system | — |
+| **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, a human check at sign-up (§8.3), voice "next step" (§6.12), CSV export to the homeschool management system | — |
 
 **Testing (every phase):** automated tests run in CI alongside the linter. At minimum they cover family scoping (no endpoint returns another family's rows or photos), lesson patches (the hard block and food-safety checks reject a bad patch, and revert restores the lesson), scaling and rounding, unit conversion, shopping-list merging, and the migration runner.
 

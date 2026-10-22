@@ -1,51 +1,115 @@
 // Sign-up, login, password reset, the parent PIN, and the owner screens (plan §8.3, §6.2a).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { makeEnv, client, family } from './helpers/worker.js';
-import { newInvite } from '../src/worker/api.js';
+import { makeEnv, client, family, codeFor, lastEmailTo, outbox } from './helpers/worker.js';
 
-const signup = (c, extra) => c.post('/api/signup', { family_name: 'Test', email: 'a@example.com', password: 'password123', ...extra });
+const start = (c, extra) => c.post('/api/signup/start', { email: 'a@example.com', password: 'password123', ...extra });
+const verify = (c, code, addr = 'a@example.com') => c.post('/api/signup/verify', { email: addr, code });
+const ago = (min) => new Date(Date.now() - min * 60 * 1000).toISOString();
 
-test('a sign-up code works once', async () => {
+test('sign-up: email and password, then the emailed code', async () => {
   const env = await makeEnv();
-  const code = await newInvite(env, 'test');
-  assert.equal((await signup(client(env), { code })).status, 200);
-  const again = await signup(client(env), { code, email: 'b@example.com' });
-  assert.equal(again.status, 403);
-  assert.equal(again.body.error, 'bad_code');
+  const c = client(env);
+  const res = await start(c);
+  assert.equal(res.status, 200);
+  const mail = lastEmailTo('a@example.com');
+  assert.match(mail.subject, /^\d{6} is your Clean Plate Recipes code$/);
+  assert.ok(Date.parse(res.body.resend_at) - Date.now() > 9 * 60 * 1000, 'a new code waits about ten minutes');
+  assert.equal((await c.get('/api/me')).body.signed_in, false, 'no account until the code is entered');
+  assert.equal((await verify(c, codeFor('a@example.com'))).status, 200);
+  const me = (await c.get('/api/me')).body;
+  assert.equal(me.signed_in, true);
+  assert.equal(me.family.pin_set, false, 'the first run comes next');
+  assert.equal(me.family.name, '');
+  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM signup_verifications').first()).n, 0);
+  assert.equal((await client(env).post('/api/login', { email: 'a@example.com', password: 'password123' })).status, 200);
 });
 
-test('codes are accepted without the dash and in lower case', async () => {
+test('a wrong code counts down its tries, then stops working', async () => {
   const env = await makeEnv();
-  const code = await newInvite(env, 'test');
-  assert.equal((await signup(client(env), { code: code.replace('-', '').toLowerCase() })).status, 200);
+  const c = client(env);
+  await start(c);
+  const good = codeFor('a@example.com');
+  const bad = good === '000000' ? '111111' : '000000';
+  const first = await verify(c, bad);
+  assert.equal(first.status, 400);
+  assert.match(first.body.message, /4 tries left/);
+  for (let i = 0; i < 4; i++) await verify(c, bad);
+  assert.equal((await verify(c, good)).body.error, 'code_used_up');
+  // A used-up code can be replaced straight away, without the ten-minute wait.
+  assert.equal((await c.post('/api/signup/resend', { email: 'a@example.com' })).status, 200);
+  assert.equal((await verify(c, codeFor('a@example.com'))).status, 200);
 });
 
-test('a revoked code is refused', async () => {
+test('an expired code is refused', async () => {
   const env = await makeEnv();
-  const code = await newInvite(env, 'test');
-  await env.DB.prepare('UPDATE invites SET revoked = 1 WHERE code = ?').bind(code).run();
-  assert.equal((await signup(client(env), { code })).status, 403);
+  const c = client(env);
+  await start(c);
+  await env.DB.prepare('UPDATE signup_verifications SET expires_at = ?').bind(ago(1)).run();
+  assert.equal((await verify(c, codeFor('a@example.com'))).body.error, 'code_expired');
 });
 
-test('a failed sign-up gives its code back', async () => {
+test('a new code waits ten minutes, then replaces the old one', async () => {
   const env = await makeEnv();
-  await family(env, 'First', 'a@example.com');
-  const code = await newInvite(env, 'test');
-  assert.equal((await signup(client(env), { code })).status, 409); // email taken
-  assert.equal((await signup(client(env), { code, email: 'new@example.com' })).status, 200);
+  const c = client(env);
+  await start(c);
+  const before = outbox.length;
+  assert.equal((await c.post('/api/signup/resend', { email: 'a@example.com' })).status, 429);
+  assert.equal((await start(c)).status, 200, 'pressing Sign up again is fine');
+  assert.equal(outbox.length, before, '…but sends nothing inside the wait');
+  const old = codeFor('a@example.com');
+  await env.DB.prepare('UPDATE signup_verifications SET sent_at = ?').bind(ago(11)).run();
+  assert.equal((await c.post('/api/signup/resend', { email: 'a@example.com' })).status, 200);
+  const fresh = codeFor('a@example.com');
+  if (fresh !== old) assert.equal((await verify(c, old)).status, 400, 'the old code stops working');
+  assert.equal((await verify(c, fresh)).status, 200);
 });
 
-test('the sign-up keyword works when set, and not when off', async () => {
+test('sign-up again inside the wait keeps the newest password', async () => {
   const env = await makeEnv();
-  assert.equal((await signup(client(env), { keyword: 'basil' })).status, 403);
-  await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('signup_keyword', 'Basil')").run();
-  assert.equal((await signup(client(env), { keyword: ' basil ' })).status, 200);
+  const c = client(env);
+  await start(c);
+  await start(c, { password: 'second-password' });
+  await verify(c, codeFor('a@example.com'));
+  assert.equal((await client(env).post('/api/login', { email: 'a@example.com', password: 'second-password' })).status, 200);
 });
 
-test('sign-up needs a code or keyword', async () => {
+test('sign-up refuses a taken email, a short password, and a bad address', async () => {
   const env = await makeEnv();
-  assert.equal((await signup(client(env), {})).status, 400);
+  await family(env, 'Carsons', 'a@example.com');
+  assert.equal((await start(client(env))).body.error, 'email_taken');
+  assert.equal((await start(client(env), { email: 'b@example.com', password: 'short' })).status, 400);
+  assert.equal((await start(client(env), { email: 'not-an-email' })).status, 400);
+  assert.equal((await client(env).post('/api/signup/resend', { email: 'nobody@example.com' })).body.error, 'start_again');
+});
+
+test('the beta word, when set, is asked for first', async () => {
+  const env = await makeEnv();
+  assert.equal((await client(env).get('/api/signup')).body.beta_word, false);
+  await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('beta_word', 'Sabbath')").run();
+  assert.equal((await client(env).get('/api/signup')).body.beta_word, true, 'says a word is needed, not what it is');
+  assert.doesNotMatch(JSON.stringify((await client(env).get('/api/signup')).body), /Sabbath/);
+  const before = outbox.length;
+  assert.equal((await start(client(env))).body.error, 'bad_beta_word');
+  assert.equal((await start(client(env), { beta_word: 'nope' })).status, 403);
+  assert.equal(outbox.length, before, 'no email without the word');
+  assert.equal((await start(client(env), { beta_word: ' sabbath ' })).status, 200);
+});
+
+test('without email set up, sign-up says so and stores nothing', async () => {
+  const env = await makeEnv({ RESEND_API_KEY: undefined });
+  const res = await start(client(env));
+  assert.equal(res.status, 503);
+  assert.equal(res.body.error, 'email_failed');
+  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM signup_verifications').first()).n, 0);
+});
+
+test('the first run sets the family name and PIN together', async () => {
+  const env = await makeEnv();
+  const c = await family(env, 'unused', 'a@example.com', { pin: null });
+  assert.equal((await c.post('/api/pin/set', { pin: '1234' })).status, 400, 'needs a family name');
+  assert.equal((await c.post('/api/pin/set', { family_name: 'The Carsons', pin: '1234' })).status, 200);
+  assert.equal((await c.get('/api/me')).body.family.name, 'The Carsons');
 });
 
 test('login, me, and logout', async () => {
@@ -65,8 +129,9 @@ test('login, me, and logout', async () => {
 
 test('a session cookie is httpOnly, Secure, and long-lived', async () => {
   const env = await makeEnv();
-  const code = await newInvite(env, 'test');
-  const res = await signup(client(env), { code });
+  const c = client(env);
+  await start(c);
+  const res = await verify(c, codeFor('a@example.com'));
   const cookie = res.headers.getSetCookie()[0];
   assert.match(cookie, /HttpOnly/);
   assert.match(cookie, /Secure/);
@@ -83,31 +148,21 @@ test('API writes must be JSON', async () => {
 });
 
 test('password reset: email link, one use, logs out other devices', async () => {
-  const sent = [];
-  const realFetch = globalThis.fetch;
-  globalThis.fetch = async (url, init) => { sent.push({ url, body: JSON.parse(init.body) }); return new Response('{}', { status: 200 }); };
-  try {
-    const env = await makeEnv({ RESEND_API_KEY: 'k', MAIL_FROM: 'Cook <c@example.com>' });
-    const first = await family(env, 'Carsons', 'jen@example.com');
+  const env = await makeEnv();
+  const first = await family(env, 'Carsons', 'jen@example.com');
+  const anon = client(env);
+  const before = outbox.length;
+  assert.deepEqual((await anon.post('/api/password/forgot', { email: 'nobody@example.com' })).body, { ok: true });
+  assert.equal(outbox.length, before, 'no account, no email, same answer');
+  await anon.post('/api/password/forgot', { email: 'jen@example.com' });
+  const token = lastEmailTo('jen@example.com').text.match(/#\/reset\/([0-9a-f]{64})/)[1];
 
-    const anon = client(env);
-    assert.deepEqual((await anon.post('/api/password/forgot', { email: 'nobody@example.com' })).body, { ok: true });
-    assert.equal(sent.length, 0);
-    await anon.post('/api/password/forgot', { email: 'jen@example.com' });
-    assert.equal(sent.length, 1);
-    assert.equal(sent[0].url, 'https://api.resend.com/emails');
-    assert.deepEqual(sent[0].body.to, ['jen@example.com']);
-    const token = sent[0].body.text.match(/#\/reset\/([0-9a-f]{64})/)[1];
-
-    assert.equal((await anon.post('/api/password/reset', { token, password: 'short' })).status, 400);
-    assert.equal((await anon.post('/api/password/reset', { token, password: 'new-password' })).status, 200);
-    assert.equal((await anon.get('/api/me')).body.signed_in, true);
-    assert.equal((await first.get('/api/me')).body.signed_in, false, 'the old session is gone');
-    assert.equal((await client(env).post('/api/password/reset', { token, password: 'another-one' })).status, 400, 'one use');
-    assert.equal((await client(env).post('/api/login', { email: 'jen@example.com', password: 'new-password' })).status, 200);
-  } finally {
-    globalThis.fetch = realFetch;
-  }
+  assert.equal((await anon.post('/api/password/reset', { token, password: 'short' })).status, 400);
+  assert.equal((await anon.post('/api/password/reset', { token, password: 'new-password' })).status, 200);
+  assert.equal((await anon.get('/api/me')).body.signed_in, true);
+  assert.equal((await first.get('/api/me')).body.signed_in, false, 'the old session is gone');
+  assert.equal((await client(env).post('/api/password/reset', { token, password: 'another-one' })).status, 400, 'one use');
+  assert.equal((await client(env).post('/api/login', { email: 'jen@example.com', password: 'new-password' })).status, 200);
 });
 
 test('an expired reset link is refused', async () => {
@@ -125,9 +180,9 @@ test('the parent PIN gates parent screens and can be reset with the password', a
   const c = await family(env, 'Carsons', 'jen@example.com', { pin: null });
   assert.equal((await c.get('/api/family')).status, 403);
   assert.equal((await c.post('/api/pin/unlock', { pin: '1234' })).body.error, 'pin_not_set');
-  assert.equal((await c.post('/api/pin/set', { pin: '12' })).status, 400);
-  assert.equal((await c.post('/api/pin/set', { pin: '2468' })).status, 200);
-  assert.equal((await c.post('/api/pin/set', { pin: '1111' })).status, 409, 'set only once');
+  assert.equal((await c.post('/api/pin/set', { family_name: 'Carsons', pin: '12' })).status, 400);
+  assert.equal((await c.post('/api/pin/set', { family_name: 'Carsons', pin: '2468' })).status, 200);
+  assert.equal((await c.post('/api/pin/set', { family_name: 'Carsons', pin: '1111' })).status, 409, 'set only once');
   assert.equal((await c.get('/api/family')).status, 200, 'setting it unlocks');
 
   await c.post('/api/pin/lock');
@@ -197,46 +252,20 @@ test('profiles: add, edit, theme switch without the PIN, delete', async () => {
   assert.equal((await c.get('/api/profiles')).body.profiles.length, 0);
 });
 
-test('a sign-up request: one pending per email, the owner approves or declines', async () => {
-  const env = await makeEnv();
-  const owner = await family(env, 'Carsons', 'jen@example.com');
-  const anon = client(env);
-  assert.equal((await anon.post('/api/signup-requests', { name: 'Pat', email: 'pat@example.com', note: 'From church' })).status, 200);
-  assert.equal((await anon.post('/api/signup-requests', { name: 'Pat', email: 'pat@example.com' })).body.already, true);
-  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM signup_requests').first()).n, 1);
-
-  assert.equal((await owner.get('/api/owner')).body.error, 'not_owner');
-  await env.DB.prepare('UPDATE parents SET is_owner = 1').run();
-  const view = (await owner.get('/api/owner')).body;
-  assert.equal(view.requests[0].name, 'Pat');
-  assert.equal(view.email_ready, false);
-
-  const ok = (await owner.post(`/api/owner/requests/${view.requests[0].id}/approve`)).body;
-  assert.match(ok.code, /^[A-Z2-9]{4}-[A-Z2-9]{4}$/);
-  assert.equal(ok.emailed, false, 'no email key: the owner passes the code on by hand');
-  assert.equal((await signup(client(env), { code: ok.code, email: 'pat@example.com' })).status, 200);
-
-  await anon.post('/api/signup-requests', { name: 'Sam', email: 'sam@example.com' });
-  const sam = (await owner.get('/api/owner')).body.requests.find((r) => r.name === 'Sam');
-  await owner.post(`/api/owner/requests/${sam.id}/decline`);
-  assert.equal((await owner.get('/api/owner')).body.requests.find((r) => r.name === 'Sam').status, 'declined');
-  assert.equal((await anon.post('/api/signup-requests', { name: 'Sam', email: 'sam@example.com' })).body.already, undefined, 'can ask again after a decline');
-});
-
-test('the owner makes and revokes codes, sets the keyword, and resets a password', async () => {
+test('the owner sets and clears the beta word, and resets a password', async () => {
   const env = await makeEnv();
   const owner = await family(env, 'Carsons', 'jen@example.com');
   await family(env, 'Smiths', 'pat@example.com');
+  assert.equal((await owner.get('/api/owner')).body.error, 'not_owner');
   await env.DB.prepare("UPDATE parents SET is_owner = 1 WHERE email = 'jen@example.com'").run();
 
-  const { code } = (await owner.post('/api/owner/invites', {})).body;
-  await owner.post(`/api/owner/invites/${code}/revoke`);
-  assert.equal((await signup(client(env), { code, email: 'x@example.com' })).status, 403);
-
-  assert.equal((await owner.put('/api/owner/keyword', { keyword: 'Basil' })).body.keyword, 'Basil');
-  assert.equal((await signup(client(env), { keyword: 'basil', email: 'y@example.com' })).status, 200);
-  assert.equal((await owner.put('/api/owner/keyword', { keyword: '' })).body.keyword, null);
-  assert.equal((await signup(client(env), { keyword: 'basil', email: 'z@example.com' })).status, 403);
+  assert.equal((await owner.put('/api/owner/beta-word', { beta_word: 'Sabbath' })).body.beta_word, 'Sabbath');
+  assert.equal((await owner.get('/api/owner')).body.beta_word, 'Sabbath');
+  assert.equal((await start(client(env), { email: 'y@example.com' })).status, 403);
+  assert.equal((await start(client(env), { email: 'y@example.com', beta_word: 'sabbath' })).status, 200);
+  assert.equal((await owner.get('/api/owner')).body.waiting, 1, 'one sign-up waiting on its code');
+  assert.equal((await owner.put('/api/owner/beta-word', { beta_word: '' })).body.beta_word, null);
+  assert.equal((await start(client(env), { email: 'z@example.com' })).status, 200, 'open again');
 
   assert.equal((await owner.post('/api/owner/parent-password', { email: 'pat@example.com', password: 'fresh-password' })).status, 200);
   assert.equal((await client(env).post('/api/login', { email: 'pat@example.com', password: 'fresh-password' })).status, 200);

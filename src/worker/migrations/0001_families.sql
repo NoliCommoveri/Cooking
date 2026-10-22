@@ -5,7 +5,7 @@
 
 CREATE TABLE IF NOT EXISTS families (
   id               TEXT PRIMARY KEY,
-  name             TEXT NOT NULL,
+  name             TEXT NOT NULL DEFAULT '',      -- set in the first run
   default_servings INTEGER NOT NULL DEFAULT 6,
   diet_filters     TEXT NOT NULL DEFAULT '[]',   -- JSON list of diet tags (§2.1)
   parent_pin_hash  TEXT,                         -- null until the first run sets it
@@ -43,28 +43,18 @@ CREATE TABLE IF NOT EXISTS password_resets (
   used_at    TEXT
 );
 
--- Owner-level: sign-up codes, requests to join, and app settings.
-CREATE TABLE IF NOT EXISTS invites (
-  code              TEXT PRIMARY KEY,
-  created_by        TEXT NOT NULL,               -- 'ops', or the owner parent's id
-  email             TEXT,                        -- set when made for a request
-  used_by_family_id TEXT,
-  created_at        TEXT NOT NULL,
-  revoked           INTEGER NOT NULL DEFAULT 0
+-- Open sign-up (§8.3): an email and password wait here until the code emailed
+-- to that address is entered. Owner-level, not a family's: no family exists yet.
+CREATE TABLE IF NOT EXISTS signup_verifications (
+  email         TEXT PRIMARY KEY,                -- stored lower-case
+  password_hash TEXT NOT NULL,
+  code_hash     TEXT NOT NULL,
+  attempts      INTEGER NOT NULL DEFAULT 0,
+  sent_at       TEXT NOT NULL,                   -- a new code can be asked for 10 minutes after this
+  expires_at    TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS signup_requests (
-  id          TEXT PRIMARY KEY,
-  name        TEXT NOT NULL,
-  email       TEXT NOT NULL,
-  note        TEXT NOT NULL DEFAULT '',
-  created_at  TEXT NOT NULL,
-  status      TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'approved', 'declined')),
-  invite_code TEXT
-);
--- One pending request per email address (§8.3).
-CREATE UNIQUE INDEX IF NOT EXISTS signup_requests_one_pending ON signup_requests(email) WHERE status = 'pending';
-
+-- App settings, e.g. the beta word.
 CREATE TABLE IF NOT EXISTS settings (
   key   TEXT PRIMARY KEY,
   value TEXT

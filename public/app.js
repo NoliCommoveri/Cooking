@@ -82,9 +82,6 @@ const COLORS = { tomato: '#E2553F', butter: '#F6C945', basil: '#6BA34F', sky: '#
 const HAT = '<path d="M17 22c-4-.7-6-4-5-7.3s5.3-4.3 7.3-3C20 8 22.3 6 24.3 6s4.3 2 5 5.7c2-1.3 6.3-.3 7.3 3S35.7 21.3 31.7 22v6.6H17z" fill="#fff" stroke="#1F2328" stroke-width="2.3" stroke-linejoin="round"/>';
 const avatar = (color) => art(`<svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="32" r="21" fill="${COLORS[color] ?? COLORS.slate}" stroke="#1F2328" stroke-width="2.5"/><circle cx="21" cy="33" r="2.6" fill="#1F2328"/><circle cx="35" cy="33" r="2.6" fill="#1F2328"/><path d="M21 41c4 3 10 3 14 0" fill="none" stroke="#1F2328" stroke-width="2.5" stroke-linecap="round"/><g transform="translate(4 -6)">${HAT}</g></svg>`);
 const avatars = (people) => el('span', { class: 'av' }, people.slice(0, 3).map((p) => avatar(p.color)));
-const CHECK = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-const CROSS = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>';
-const DOT = '<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="5" fill="currentColor"/></svg>';
 
 const THEMES = { quest: "Kitchen Quest", passport: "Chef's Passport" };
 const DIET = {
@@ -103,7 +100,7 @@ function topbar(sub, ...right) {
 }
 
 function screen(...kids) {
-  app.replaceChildren(...kids);
+  app.replaceChildren(...kids.flat(Infinity).filter((k) => k != null && k !== false));
   window.scrollTo(0, 0);
   const h = app.querySelector('h1');
   if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); }
@@ -117,8 +114,7 @@ function welcome() {
     el('h1', {}, 'Clean Plate Recipes'),
     el('div', { class: 'stack' },
       el('a', { class: 'hbtn pri', href: '#/login' }, 'Log in'),
-      el('a', { class: 'hbtn', href: '#/signup' }, 'Sign up'),
-      el('a', { class: 'hbtn link', href: '#/request' }, 'Ask for a sign-up code'))));
+      el('a', { class: 'hbtn', href: '#/signup' }, 'Sign up'))));
 }
 
 function login() {
@@ -133,43 +129,60 @@ function login() {
     el('p', { class: 'mut' }, 'New here? ', el('a', { href: '#/signup' }, 'Sign up'))));
 }
 
-function signup() {
-  let useWord = false;
-  const codeField = field('Sign-up code', 'code', { autocomplete: 'off', autocapitalize: 'characters', placeholder: 'ABCD-EFGH' });
-  const wordField = field('Sign-up word', 'keyword', { autocomplete: 'off' });
-  wordField.hidden = true;
-  const toggle = el('button', { type: 'button', class: 'hbtn link', onclick: () => {
-    useWord = !useWord;
-    codeField.hidden = useWord;
-    wordField.hidden = !useWord;
-    toggle.textContent = useWord ? 'I have a code instead' : 'I have a sign-up word instead';
-  } }, 'I have a sign-up word instead');
+// Sign-up, step 1: email and password (and the beta word while it's on). A
+// code is emailed; step 2 takes it. The pending email is kept for this tab, so
+// a refresh or a trip to the inbox doesn't lose the step.
+const PENDING = 'cpr.signup';
+const pending = () => { try { return JSON.parse(sessionStorage.getItem(PENDING)); } catch { return null; } };
+const setPending = (v) => { try { if (v) sessionStorage.setItem(PENDING, JSON.stringify(v)); else sessionStorage.removeItem(PENDING); } catch { /* private mode */ } };
+
+async function signup() {
+  const { beta_word } = await api('GET', '/api/signup');
   screen(topbar(), el('div', { class: 'narrow' }, el('h1', {}, 'Sign up'),
     form([
-      codeField, wordField, toggle,
-      field('Family name', 'family_name', { autocomplete: 'organization', required: true, maxlength: 60 }),
-      field('Your email', 'email', { type: 'email', autocomplete: 'email', required: true }),
+      beta_word ? field('Beta word', 'beta_word', { autocomplete: 'off', required: true }) : null,
+      field('Email', 'email', { type: 'email', autocomplete: 'email', required: true }),
       field('Password', 'password', { type: 'password', autocomplete: 'new-password', required: true, minlength: 8 }, 'At least 8 characters'),
-    ], 'Create our family', async (v) => {
-      if (useWord) delete v.code; else delete v.keyword;
-      await api('POST', '/api/signup', v);
-      await start('#/');
+    ].filter(Boolean), 'Sign up', async (v) => {
+      const res = await api('POST', '/api/signup/start', v);
+      setPending({ email: res.email, resend_at: res.resend_at });
+      go('#/signup/code');
     }),
-    el('p', { class: 'mut' }, 'No code? ', el('a', { href: '#/request' }, 'Ask for one'), '. Have an account? ', el('a', { href: '#/login' }, 'Log in'))));
+    el('p', { class: 'mut' }, 'Have an account? ', el('a', { href: '#/login' }, 'Log in'))));
 }
 
-function request() {
-  const box = el('div', { class: 'narrow' }, el('h1', {}, 'Ask for a sign-up code'));
-  box.append(form([
-    field('Your name', 'name', { autocomplete: 'name', required: true, maxlength: 60 }),
-    field('Email', 'email', { type: 'email', autocomplete: 'email', required: true }),
-    el('label', { class: 'f' }, 'Note', el('span', { class: 'hint' }, 'Optional'), el('textarea', { name: 'note', maxlength: 500 })),
-  ], 'Send request', async (v, f) => {
-    await api('POST', '/api/signup-requests', v);
-    f.replaceWith(el('div', { class: 'card' }, el('p', { class: 'ok' }, "Sent. If it's approved, the code comes to your email."),
-      el('a', { class: 'hbtn', href: '#/' }, 'Back')));
-  }));
-  screen(topbar(), box);
+// Sign-up, step 2: the emailed code, and the countdown to asking for a new one.
+function signupCode() {
+  const p = pending();
+  if (!p) return go('#/signup');
+  const resendBox = el('p', { class: 'mut' });
+  let timer;
+  const tick = () => {
+    if (!document.body.contains(resendBox)) return clearInterval(timer);
+    const left = Math.max(0, Date.parse(p.resend_at) - Date.now());
+    if (left > 0) {
+      const m = Math.floor(left / 60000), sec = String(Math.floor(left / 1000) % 60).padStart(2, '0');
+      resendBox.replaceChildren(`Don't see it? Check your spam folder, or request a new one in ${m}:${sec}.`);
+    } else {
+      clearInterval(timer);
+      resendBox.replaceChildren("Don't see it? Check your spam folder, or ", el('button', { type: 'button', class: 'hbtn link', onclick: async () => {
+        const res = await api('POST', '/api/signup/resend', { email: p.email });
+        setPending({ email: res.email, resend_at: res.resend_at });
+        signupCode();
+      } }, 'request a new one'), '.');
+    }
+  };
+  screen(topbar(), el('div', { class: 'narrow' }, el('h1', {}, 'Check your email'),
+    el('p', {}, 'We sent a code to ', el('b', {}, p.email), '.'),
+    form([field('Code', 'code', { inputmode: 'numeric', autocomplete: 'one-time-code', pattern: '[0-9]*', maxlength: 6, required: true }, '6 digits')],
+      'Finish signing up', async (v) => {
+        await api('POST', '/api/signup/verify', { email: p.email, code: v.code });
+        setPending(null);
+        await start('#/');
+      }, { extra: [el('button', { type: 'button', class: 'hbtn link', onclick: () => { setPending(null); go('#/signup'); } }, 'Use a different email')] }),
+    resendBox));
+  tick();
+  timer = setInterval(tick, 1000);
 }
 
 function forgot() {
@@ -194,14 +207,15 @@ function reset(token) {
 // ---------- first run: the parent PIN ----------
 
 function firstRun() {
-  screen(topbar(me.family.name), el('div', { class: 'narrow' }, el('h1', {}, 'Set a parent PIN'),
-    el('p', { class: 'mut' }, 'Kitchen devices stay logged in, so parent screens ask for this PIN.'),
+  screen(topbar(), el('div', { class: 'narrow' }, el('h1', {}, 'Your family'),
+    el('p', { class: 'mut' }, 'Kitchen devices stay logged in, so parent screens ask for a parent PIN.'),
     form([
-      field('PIN', 'pin', { inputmode: 'numeric', autocomplete: 'off', pattern: '[0-9]*', maxlength: 8, required: true }, '4 to 8 digits'),
+      field('Family name', 'family_name', { autocomplete: 'organization', required: true, maxlength: 60 }, "Shown on your chef's lockers"),
+      field('Parent PIN', 'pin', { inputmode: 'numeric', autocomplete: 'off', pattern: '[0-9]*', maxlength: 8, required: true }, '4 to 8 digits'),
       field('PIN again', 'again', { inputmode: 'numeric', autocomplete: 'off', pattern: '[0-9]*', maxlength: 8, required: true }),
-    ], 'Set PIN', async (v) => {
+    ], 'Continue', async (v) => {
       if (v.pin !== v.again) throw new Error("The two PINs don't match.");
-      await api('POST', '/api/pin/set', { pin: v.pin });
+      await api('POST', '/api/pin/set', { family_name: v.family_name, pin: v.pin });
       await start('#/parent/profiles/new');
     })));
 }
@@ -424,59 +438,32 @@ const parentLogins = parentOnly(async () => {
 
 // ---------- owner screens ----------
 
-const statusMark = (kind, text) => el('span', { class: 'status', style: `color:${kind === 'ok' ? 'var(--h-acc)' : kind === 'bad' ? 'var(--h-bad)' : 'var(--h-mut)'}` },
-  art(kind === 'ok' ? CHECK : kind === 'bad' ? CROSS : DOT), text);
-
 const owner = parentOnly(async (flash) => {
   if (!me.parent.is_owner) return go('#/parent');
   const o = await api('GET', '/api/owner');
   const day = (iso) => (iso ? new Date(iso).toLocaleDateString() : '—');
-  const pending = o.requests.filter((r) => r.status === 'pending');
-  const done = o.requests.filter((r) => r.status !== 'pending');
-
-  const approve = async (r) => {
-    const res = await api('POST', `/api/owner/requests/${r.id}/approve`);
-    owner(el('div', { class: 'card' }, el('p', { class: 'ok' }, `Approved ${r.name}.`),
-      el('div', {}, 'Their code: ', el('span', { class: 'code' }, res.code)),
-      el('p', { class: res.emailed ? 'mut' : 'err' }, res.emailed ? `Emailed to ${r.email}.` : `Not emailed: ${res.reason} Send them the code yourself.`)));
+  const setWord = async (word) => {
+    const res = await api('PUT', '/api/owner/beta-word', { beta_word: word });
+    owner(el('p', { class: 'ok' }, res.beta_word ? `Beta word saved: sign-up asks for "${res.beta_word}".` : 'Beta word off: anyone can sign up.'));
   };
 
   parentScreen('owner',
     flash ?? null,
-    !o.email_ready ? el('p', { class: 'err' }, 'Email is not set up yet, so codes and reset links are not sent. See /ops.') : null,
+    !o.email_ready ? el('p', { class: 'err' }, "Email is not set up yet, so nobody can sign up. See /ops.") : null,
 
-    el('h2', {}, 'Sign-up requests'),
-    el('div', { class: 'card' }, pending.length ? el('div', { class: 'rows' }, pending.map((r) => el('div', { class: 'rowi' },
-      el('div', {}, el('b', {}, r.name), el('small', {}, `${r.email} · ${day(r.created_at)}`), r.note ? el('small', {}, r.note) : null),
-      el('div', { class: 'acts' },
-        el('button', { type: 'button', class: 'hbtn pri', onclick: () => approve(r) }, 'Approve'),
-        el('button', { type: 'button', class: 'hbtn', onclick: async () => { await api('POST', `/api/owner/requests/${r.id}/decline`); owner(); } }, 'Decline')))))
-      : el('p', { class: 'mut' }, 'No requests waiting.'),
-    done.length ? el('details', {}, el('summary', {}, `Handled (${done.length})`), el('div', { class: 'rows' }, done.map((r) => el('div', { class: 'rowi' },
-      el('div', {}, el('b', {}, r.name), el('small', {}, `${r.email} · ${day(r.created_at)}${r.invite_code ? ` · ${r.invite_code}` : ''}`)),
-      statusMark(r.status === 'approved' ? 'ok' : 'bad', r.status === 'approved' ? 'Approved' : 'Declined'))))) : null),
+    el('h2', {}, 'Beta word'),
+    form([field('Word', 'beta_word', { value: o.beta_word ?? '', autocomplete: 'off', maxlength: 40 },
+      o.beta_word ? 'On. Sign-up asks for this word first.' : 'Off. Anyone can sign up. Type a word to require it.')],
+    'Save word', (v) => setWord(v.beta_word),
+    { extra: o.beta_word ? [el('button', { type: 'button', class: 'hbtn', onclick: () => setWord(null) }, 'Turn off')] : [] }),
 
-    el('h2', {}, 'Sign-up codes'),
+    el('h2', {}, `Families (${o.families.length})`),
     el('div', { class: 'card' },
-      form([field('For (email)', 'email', { type: 'email', autocomplete: 'off' }, 'Optional, for your records')], 'Make a code', async (v) => {
-        const res = await api('POST', '/api/owner/invites', v.email ? { email: v.email } : {});
-        owner(el('div', { class: 'card' }, el('div', {}, 'New code: ', el('span', { class: 'code' }, res.code)), el('p', { class: 'mut' }, 'It works once.')));
-      }),
-      o.invites.length ? el('div', { class: 'rows' }, o.invites.map((i) => el('div', { class: 'rowi' },
-        el('div', {}, el('b', { class: 'code', style: 'font-size:18px' }, i.code), el('small', {}, `${i.email ?? 'No email'} · ${day(i.created_at)}`)),
-        i.used ? statusMark('ok', 'Used') : i.revoked ? statusMark('bad', 'Revoked')
-          : el('button', { type: 'button', class: 'hbtn', onclick: async () => { await api('POST', `/api/owner/invites/${i.code}/revoke`); owner(); } }, 'Revoke'))))
-        : el('p', { class: 'mut' }, 'No codes yet.')),
-
-    el('h2', {}, 'Sign-up word'),
-    form([field('Word', 'keyword', { value: o.keyword ?? '', autocomplete: 'off', maxlength: 40 }, o.keyword ? 'On. Anyone with this word can sign up.' : 'Off. Type a word to turn it on.')],
-      'Save word', async (v) => { await api('PUT', '/api/owner/keyword', { keyword: v.keyword }); owner(); },
-      { extra: o.keyword ? [el('button', { type: 'button', class: 'hbtn', onclick: async () => { await api('PUT', '/api/owner/keyword', { keyword: null }); owner(); } }, 'Turn off')] : [] }),
-
-    el('h2', {}, 'Families'),
-    el('div', { class: 'card' }, el('div', { class: 'rows' }, o.families.map((f) => el('div', { class: 'rowi' },
-      el('div', {}, el('b', {}, f.name), el('small', {}, `${f.profiles} profile${f.profiles === 1 ? '' : 's'} · joined ${day(f.created_at)}`)),
-      el('small', {}, `Active ${day(f.last_active_at)}`))))),
+      o.waiting ? el('p', { class: 'mut', style: 'margin:0' }, `${o.waiting} sign-up${o.waiting === 1 ? '' : 's'} waiting on an email code.`) : null,
+      o.families.length ? el('div', { class: 'rows' }, o.families.map((f) => el('div', { class: 'rowi' },
+        el('div', {}, el('b', {}, f.name || 'Not named yet'), el('small', {}, `${f.profiles} profile${f.profiles === 1 ? '' : 's'} · joined ${day(f.created_at)}`)),
+        el('small', {}, `Active ${day(f.last_active_at)}`))))
+        : el('p', { class: 'mut' }, 'No families yet.')),
 
     el('h2', {}, "Set a parent's password"),
     form([
@@ -502,8 +489,8 @@ async function route() {
     if (top === 'reset' && sub) return reset(sub);
     if (!me?.signed_in) {
       if (top === 'login') return login();
-      if (top === 'signup') return signup();
-      if (top === 'request') return request();
+      if (top === 'signup' && sub === 'code') return signupCode();
+      if (top === 'signup') return await signup();
       if (top === 'forgot') return forgot();
       return welcome();
     }

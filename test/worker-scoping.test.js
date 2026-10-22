@@ -61,7 +61,7 @@ test('one family\'s PIN does not unlock the other', async () => {
 
 test('a non-owner reaches no cross-family route', async () => {
   const { a } = await twoFamilies();
-  for (const [m, p] of [['get', '/api/owner'], ['post', '/api/owner/invites'], ['put', '/api/owner/keyword'], ['post', '/api/owner/parent-password']]) {
+  for (const [m, p] of [['get', '/api/owner'], ['put', '/api/owner/beta-word'], ['post', '/api/owner/parent-password']]) {
     assert.equal((await a[m](p, {})).status, 403, `${m} ${p}`);
   }
 });

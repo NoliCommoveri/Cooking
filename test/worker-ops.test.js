@@ -45,7 +45,7 @@ test('a failing migration lands nothing and stops the run', async () => {
 test('every family table carries family_id', async () => {
   const db = makeDb();
   await applyPending(db);
-  const ownerLevel = new Set(['_migrations', 'families', 'invites', 'signup_requests', 'settings']);
+  const ownerLevel = new Set(['_migrations', 'families', 'signup_verifications', 'settings']);
   for (const t of await tableNames(db)) {
     if (ownerLevel.has(t)) continue;
     const cols = (await db.prepare(`PRAGMA table_info("${t}")`).all()).results.map((c) => c.name);
@@ -58,7 +58,7 @@ test('a backup export restores cleanly into an empty database', async () => {
   const a = await family(env, 'Carsons', 'jen@example.com');
   await family(env, 'Smiths', 'pat@example.com');
   await a.post('/api/profiles', { people: [{ name: 'Ava', color: 'tomato' }, { name: 'Leo', color: 'sky' }] });
-  await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('signup_keyword', 'basil')").run();
+  await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('beta_word', 'basil')").run();
   const backup = JSON.parse(JSON.stringify(await exportAll(env.DB)));
 
   const fresh = makeDb();
@@ -154,15 +154,13 @@ test('/ops says when no database is bound', async () => {
   assert.match((await c.get('/ops')).body, /No database is connected/);
 });
 
-test('/ops: apply pending, a first code, the owner, and a download', async () => {
+test('/ops: apply pending, the owner, and a download', async () => {
   const env = await makeEnv({ migrate: false });
   const ops = await opsClient(env);
   assert.match((await ops.get('/ops')).body, /Apply pending \(1\)/);
   assert.match((await ops.form('/ops/migrate', {})).body, /Applied <code>0001<\/code>/);
 
-  const code = (await ops.form('/ops/code', {})).body.match(/class="code">([A-Z0-9-]+)</)[1];
-  const jen = client(env);
-  assert.equal((await jen.post('/api/signup', { code, family_name: 'Carsons', email: 'jen@example.com', password: 'password123' })).status, 200);
+  const jen = await family(env, 'Carsons', 'jen@example.com');
   assert.match((await ops.form('/ops/owner', { email: 'nobody@example.com' })).body, /Nothing was changed/);
   assert.match((await ops.form('/ops/owner', { email: 'jen@example.com' })).body, /is now the owner/);
   assert.equal((await jen.get('/api/me')).body.parent.is_owner, true);

@@ -3,12 +3,12 @@
 // owner routes are the one cross-family view, and they return family names,
 // profile counts, and last-active dates only.
 import { ApiError, fail, json, now } from './lib/http.js';
-import { hashSecret, verifySecret, randomHex, sha256Hex, signupCode } from './lib/crypto.js';
+import { hashSecret, verifySecret, randomHex, sha256Hex, timingSafeEqual } from './lib/crypto.js';
 import {
   startSession, endSession, readSession, requireSession, requireParent, requireOwner,
   pinUnlocked, unlockPin, lockPin,
 } from './auth.js';
-import { sendEmail, emailReady, resetEmail, codeEmail, requestEmail } from './email.js';
+import { sendEmail, emailReady, resetEmail, signupCodeEmail } from './email.js';
 import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
 import { FREE_MAX } from '../content/scale.js';
@@ -94,62 +94,97 @@ on('POST', '/api/login', async (req, env, body) => {
 
 on('POST', '/api/logout', async (req, env) => json({ ok: true }, 200, { 'set-cookie': await endSession(env, req) }));
 
-// Sign-up needs a single-use code or the owner's keyword (§8.3).
-on('POST', '/api/signup', async (req, env, body) => {
-  const familyName = text(body.family_name, 'Family name');
+// Open sign-up (§8.3). Anyone can sign up with an email and a password. A
+// six-digit code goes to that email, and entering it creates the family. While
+// the beta word is set, sign-up asks for it first.
+export const CODE_MINUTES = 30;      // a code works this long
+export const RESEND_MINUTES = 10;    // a new code can be asked for after this
+export const CODE_TRIES = 5;         // wrong guesses before a code stops working
+
+const betaWord = async (env) => (await env.DB.prepare("SELECT value FROM settings WHERE key = 'beta_word'").first())?.value ?? null;
+const codeHash = (addr, code) => sha256Hex(`${addr}:${code}`);
+const minutesFrom = (iso, m) => new Date(Date.parse(iso) + m * 60 * 1000).toISOString();
+
+function sixDigits() {
+  const buf = new Uint32Array(1);
+  crypto.getRandomValues(buf);
+  return String(buf[0] % 1_000_000).padStart(6, '0');
+}
+
+// Makes a fresh code for this email, replacing any earlier one, and emails it.
+async function sendCode(env, addr, passwordHash) {
+  const code = sixDigits();
+  const t = now();
+  const mail = await sendEmail(env, { to: addr, ...signupCodeEmail(code, CODE_MINUTES) });
+  if (!mail.sent) fail(503, 'email_failed', "We couldn't send the email just now. Try again in a few minutes.");
+  await env.DB.prepare(`INSERT INTO signup_verifications (email, password_hash, code_hash, attempts, sent_at, expires_at)
+      VALUES (?, ?, ?, 0, ?, ?)
+      ON CONFLICT(email) DO UPDATE SET password_hash = excluded.password_hash, code_hash = excluded.code_hash,
+        attempts = 0, sent_at = excluded.sent_at, expires_at = excluded.expires_at`)
+    .bind(addr, passwordHash, await codeHash(addr, code), t, minutesFrom(t, CODE_MINUTES)).run();
+  return { ok: true, email: addr, resend_at: minutesFrom(t, RESEND_MINUTES) };
+}
+
+// A code that has run out or been guessed at too often can be replaced straight away.
+const spent = (row) => Date.parse(row.expires_at) < Date.now() || row.attempts >= CODE_TRIES;
+
+on('GET', '/api/signup', async (req, env) => ({ beta_word: Boolean(await betaWord(env)) }));
+
+on('POST', '/api/signup/start', async (req, env, body) => {
+  const word = await betaWord(env);
+  if (word && String(body.beta_word ?? '').trim().toLowerCase() !== word.trim().toLowerCase()) {
+    fail(403, 'bad_beta_word', "That beta word doesn't match.");
+  }
   const addr = email(body.email);
-  const pw = password(body.password);
+  const pwHash = await hashSecret(password(body.password));
   if (await env.DB.prepare('SELECT 1 FROM parents WHERE email = ?').bind(addr).first()) {
     fail(409, 'email_taken', 'That email already has an account. Log in instead.');
   }
-  const familyId = id();
-  let code = null;
-  if (body.code) {
-    code = String(body.code).trim().toUpperCase().replace(/\s+/g, '');
-    if (/^[A-Z0-9]{8}$/.test(code)) code = `${code.slice(0, 4)}-${code.slice(4)}`;
-    // Claim the code first, so two sign-ups can't share it.
-    const claim = await env.DB.prepare(
-      'UPDATE invites SET used_by_family_id = ? WHERE code = ? AND used_by_family_id IS NULL AND revoked = 0',
-    ).bind(familyId, code).run();
-    if (!claim.meta.changes) fail(403, 'bad_code', "That sign-up code doesn't work. It may be used already.");
-  } else if (body.keyword) {
-    const kw = (await env.DB.prepare("SELECT value FROM settings WHERE key = 'signup_keyword'").first())?.value;
-    if (!kw || String(body.keyword).trim().toLowerCase() !== kw.trim().toLowerCase()) {
-      fail(403, 'bad_keyword', "That sign-up word doesn't match.");
-    }
-  } else {
-    fail(400, 'invalid', 'Enter a sign-up code or the sign-up word.');
+  const row = await env.DB.prepare('SELECT * FROM signup_verifications WHERE email = ?').bind(addr).first();
+  if (row && !spent(row) && Date.now() < Date.parse(minutesFrom(row.sent_at, RESEND_MINUTES))) {
+    // Pressing Sign up again doesn't send another email inside the wait; the
+    // code already sent still works, now with this password.
+    await env.DB.prepare('UPDATE signup_verifications SET password_hash = ? WHERE email = ?').bind(pwHash, addr).run();
+    return { ok: true, email: addr, resend_at: minutesFrom(row.sent_at, RESEND_MINUTES) };
   }
+  return sendCode(env, addr, pwHash);
+});
 
-  const t = now();
-  const parent = { id: id(), family_id: familyId };
-  try {
-    await env.DB.batch([
-      env.DB.prepare('INSERT INTO families (id, name, created_at, last_active_at) VALUES (?, ?, ?, ?)').bind(familyId, familyName, t, t),
-      env.DB.prepare('INSERT INTO parents (id, family_id, email, password_hash, created_at) VALUES (?, ?, ?, ?, ?)')
-        .bind(parent.id, familyId, addr, await hashSecret(pw), t),
-    ]);
-  } catch (err) {
-    if (code) await env.DB.prepare('UPDATE invites SET used_by_family_id = NULL WHERE code = ? AND used_by_family_id = ?').bind(code, familyId).run();
-    throw err;
+on('POST', '/api/signup/resend', async (req, env, body) => {
+  const addr = email(body.email);
+  const row = await env.DB.prepare('SELECT * FROM signup_verifications WHERE email = ?').bind(addr).first();
+  if (!row) fail(404, 'start_again', 'Start sign-up again.');
+  const resendAt = minutesFrom(row.sent_at, RESEND_MINUTES);
+  if (!spent(row) && Date.now() < Date.parse(resendAt)) fail(429, 'wait', 'You can ask for a new code soon.');
+  return sendCode(env, addr, row.password_hash);
+});
+
+on('POST', '/api/signup/verify', async (req, env, body) => {
+  const addr = email(body.email);
+  const code = String(body.code ?? '').replace(/\D/g, '');
+  const row = await env.DB.prepare('SELECT * FROM signup_verifications WHERE email = ?').bind(addr).first();
+  if (!row) fail(404, 'start_again', 'Start sign-up again.');
+  if (Date.parse(row.expires_at) < Date.now()) fail(400, 'code_expired', 'That code has expired. Ask for a new one.');
+  if (row.attempts >= CODE_TRIES) fail(400, 'code_used_up', 'Too many tries. Ask for a new code.');
+  if (code.length !== 6 || !timingSafeEqual(await codeHash(addr, code), row.code_hash)) {
+    await env.DB.prepare('UPDATE signup_verifications SET attempts = attempts + 1 WHERE email = ?').bind(addr).run();
+    const left = CODE_TRIES - row.attempts - 1;
+    fail(400, 'code_wrong', left > 0 ? `That code isn't right. ${left} ${left === 1 ? 'try' : 'tries'} left.` : 'Too many tries. Ask for a new code.');
   }
+  if (await env.DB.prepare('SELECT 1 FROM parents WHERE email = ?').bind(addr).first()) {
+    fail(409, 'email_taken', 'That email already has an account. Log in instead.');
+  }
+  const t = now();
+  const parent = { id: id(), family_id: id() };
+  await env.DB.batch([
+    env.DB.prepare('INSERT INTO families (id, created_at, last_active_at) VALUES (?, ?, ?)').bind(parent.family_id, t, t),
+    env.DB.prepare('INSERT INTO parents (id, family_id, email, password_hash, created_at) VALUES (?, ?, ?, ?, ?)')
+      .bind(parent.id, parent.family_id, addr, row.password_hash, t),
+    env.DB.prepare('DELETE FROM signup_verifications WHERE email = ?').bind(addr),
+  ]);
   return json({ ok: true }, 200, { 'set-cookie': await startSession(env, parent) });
 });
 
-// The one public form that writes to the database. One pending request per email.
-on('POST', '/api/signup-requests', async (req, env, body) => {
-  const r = { id: id(), name: text(body.name, 'Name'), email: email(body.email), note: text(body.note, 'Note', { min: 0, max: 500 }) };
-  if (await env.DB.prepare("SELECT 1 FROM signup_requests WHERE email = ? AND status = 'pending'").bind(r.email).first()) {
-    return { ok: true, already: true };
-  }
-  await env.DB.prepare('INSERT INTO signup_requests (id, name, email, note, created_at) VALUES (?, ?, ?, ?, ?)')
-    .bind(r.id, r.name, r.email, r.note, now()).run();
-  const owners = (await env.DB.prepare('SELECT email FROM parents WHERE is_owner = 1').all()).results.map((o) => o.email);
-  if (owners.length) await sendEmail(env, { to: owners, ...requestEmail(r, `${new URL(req.url).origin}/#/owner`) });
-  return { ok: true };
-});
-
-// Always answers the same way, so the form doesn't tell anyone who has an account.
 on('POST', '/api/password/forgot', async (req, env, body) => {
   const row = await env.DB.prepare('SELECT id, family_id FROM parents WHERE email = ?').bind(email(body.email)).first();
   if (row) {
@@ -182,11 +217,13 @@ on('POST', '/api/password/reset', async (req, env, body) => {
 // ---------- the parent PIN ----------
 
 // Set once, in the first run. Changing it later goes through /api/pin/reset.
+// The first run: the family's name and its parent PIN, set once. Changing the
+// PIN later goes through /api/pin/reset.
 on('POST', '/api/pin/set', async (req, env, body) => {
   const s = await requireSession(env, req);
   const p = pin(body.pin);
-  const res = await env.DB.prepare('UPDATE families SET parent_pin_hash = ? WHERE id = ? AND parent_pin_hash IS NULL')
-    .bind(await hashSecret(p), s.family_id).run();
+  const res = await env.DB.prepare('UPDATE families SET name = ?, parent_pin_hash = ? WHERE id = ? AND parent_pin_hash IS NULL')
+    .bind(text(body.family_name, 'Family name'), await hashSecret(p), s.family_id).run();
   if (!res.meta.changes) fail(409, 'pin_set', 'This family already has a PIN.');
   return { ok: true, pin_unlocked_until: await unlockPin(env, s, p) };
 });
@@ -310,62 +347,23 @@ on('GET', '/api/owner', async (req, env) => {
   await requireOwner(env, req);
   const all = async (sql) => (await env.DB.prepare(sql).all()).results;
   return {
-    requests: await all("SELECT id, name, email, note, created_at, status, invite_code FROM signup_requests ORDER BY status = 'pending' DESC, created_at DESC LIMIT 50"),
-    invites: (await all('SELECT code, email, created_at, used_by_family_id, revoked FROM invites ORDER BY created_at DESC LIMIT 50'))
-      .map(({ used_by_family_id, ...i }) => ({ ...i, used: Boolean(used_by_family_id), revoked: Boolean(i.revoked) })),
-    keyword: (await env.DB.prepare("SELECT value FROM settings WHERE key = 'signup_keyword'").first())?.value ?? null,
+    beta_word: await betaWord(env),
+    waiting: (await env.DB.prepare('SELECT COUNT(*) AS n FROM signup_verifications WHERE expires_at > ?').bind(now()).first()).n,
     families: await all(`SELECT f.name, f.created_at, f.last_active_at,
         (SELECT COUNT(*) FROM profiles p WHERE p.family_id = f.id) AS profiles
-      FROM families f ORDER BY f.created_at`),
+      FROM families f ORDER BY f.created_at DESC`),
     email_ready: emailReady(env),
   };
 });
 
-async function newInvite(env, createdBy, forEmail = null) {
-  const code = signupCode();
-  await env.DB.prepare('INSERT INTO invites (code, created_by, email, created_at) VALUES (?, ?, ?, ?)').bind(code, createdBy, forEmail, now()).run();
-  return code;
-}
-export { newInvite };
-
-on('POST', '/api/owner/requests/([0-9a-f]{16})/approve', async (req, env, body, [rid]) => {
-  const s = await requireOwner(env, req);
-  const r = await env.DB.prepare("SELECT * FROM signup_requests WHERE id = ? AND status = 'pending'").bind(rid).first();
-  if (!r) fail(404, 'not_found', 'That request is gone or already handled.');
-  const code = await newInvite(env, s.parent_id, r.email);
-  await env.DB.prepare("UPDATE signup_requests SET status = 'approved', invite_code = ? WHERE id = ?").bind(code, rid).run();
-  const mail = await sendEmail(env, { to: r.email, ...codeEmail(r.name, code, new URL(req.url).origin) });
-  return { ok: true, code, emailed: mail.sent, reason: mail.reason ?? null };
-});
-
-// Declining sends nothing.
-on('POST', '/api/owner/requests/([0-9a-f]{16})/decline', async (req, env, body, [rid]) => {
+// null or an empty string turns the beta word off, and sign-up is fully open.
+on('PUT', '/api/owner/beta-word', async (req, env, body) => {
   await requireOwner(env, req);
-  await env.DB.prepare("UPDATE signup_requests SET status = 'declined' WHERE id = ? AND status = 'pending'").bind(rid).run();
-  return { ok: true };
+  const word = body.beta_word == null || String(body.beta_word).trim() === '' ? null : text(body.beta_word, 'Beta word', { max: 40 });
+  await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('beta_word', ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value")
+    .bind(word).run();
+  return { ok: true, beta_word: word };
 });
-
-on('POST', '/api/owner/invites', async (req, env, body) => {
-  const s = await requireOwner(env, req);
-  return { ok: true, code: await newInvite(env, s.parent_id, body.email ? email(body.email) : null) };
-});
-
-on('POST', '/api/owner/invites/([A-Z0-9-]{9})/revoke', async (req, env, body, [code]) => {
-  await requireOwner(env, req);
-  await env.DB.prepare('UPDATE invites SET revoked = 1 WHERE code = ? AND used_by_family_id IS NULL').bind(code).run();
-  return { ok: true };
-});
-
-// null or an empty string turns the keyword off.
-on('PUT', '/api/owner/keyword', async (req, env, body) => {
-  await requireOwner(env, req);
-  const kw = body.keyword == null || String(body.keyword).trim() === '' ? null : text(body.keyword, 'Keyword', { max: 40 });
-  await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('signup_keyword', ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value")
-    .bind(kw).run();
-  return { ok: true, keyword: kw };
-});
-
-// The fallback when a reset email doesn't arrive (§6.2a).
 on('POST', '/api/owner/parent-password', async (req, env, body) => {
   await requireOwner(env, req);
   const row = await env.DB.prepare('SELECT id FROM parents WHERE email = ?').bind(email(body.email)).first();

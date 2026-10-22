@@ -2,10 +2,19 @@
 // and a browser-like client per family that keeps its own cookies.
 import worker from '../../src/worker/index.js';
 import { applyPending } from '../../src/worker/migrate.js';
-import { newInvite } from '../../src/worker/api.js';
 import { makeDb } from './d1.js';
 
 export const ORIGIN = 'https://cook.test';
+
+// Every email the Worker sends to Resend lands here instead.
+export const outbox = [];
+globalThis.fetch = async (url, init) => {
+  if (String(url) !== 'https://api.resend.com/emails') throw new Error(`unexpected fetch ${url}`);
+  outbox.push(JSON.parse(init.body));
+  return new Response('{"id":"test"}', { status: 200 });
+};
+export const lastEmailTo = (addr) => [...outbox].reverse().find((m) => m.to.includes(addr));
+export const codeFor = (addr) => lastEmailTo(addr)?.text.match(/\b(\d{6})\b/)?.[1];
 
 export async function makeEnv({ migrate = true, ...extra } = {}) {
   const DB = makeDb();
@@ -13,6 +22,8 @@ export async function makeEnv({ migrate = true, ...extra } = {}) {
   return {
     DB,
     OPS_TOKEN: 'ops-secret',
+    RESEND_API_KEY: 'test-key',
+    MAIL_FROM: 'Clean Plate <cook@example.com>',
     ASSETS: { fetch: async () => new Response('asset', { status: 200 }) },
     ...extra,
   };
@@ -49,13 +60,15 @@ export function client(env) {
   };
 }
 
-// A family signed up with a code, PIN set (so parent screens are unlocked).
+// A family signed up through the emailed code, with its name and PIN set (so
+// parent screens are unlocked). With pin: null it stops before the first run.
 export async function family(env, name, emailAddr, { pin = '1234' } = {}) {
   const c = client(env);
-  const code = await newInvite(env, 'test');
-  const res = await c.post('/api/signup', { code, family_name: name, email: emailAddr, password: 'password123' });
+  const start = await c.post('/api/signup/start', { email: emailAddr, password: 'password123' });
+  if (start.status !== 200) throw new Error(JSON.stringify(start.body));
+  const res = await c.post('/api/signup/verify', { email: emailAddr, code: codeFor(emailAddr) });
   if (res.status !== 200) throw new Error(JSON.stringify(res.body));
-  if (pin) await c.post('/api/pin/set', { pin });
+  if (pin) await c.post('/api/pin/set', { family_name: name, pin });
   return c;
 }
 
