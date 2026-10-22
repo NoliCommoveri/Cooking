@@ -2,9 +2,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { makeEnv, family, opsClient } from './helpers/worker.js';
-import { weekOf } from '../src/worker/schedule.js';
+import { shopWeek, addDays } from '../src/worker/schedule.js';
 
-const sunday = weekOf(new Date().toISOString().slice(0, 10));
+const today = new Date().toISOString().slice(0, 10);
 
 async function setup() {
   const env = await makeEnv();
@@ -104,7 +104,8 @@ test("a course lesson on an open trip stays in the queue when it's skipped", asy
   await a.post('/api/profiles', { people: [{ name: 'Ava', color: 'tomato' }] });
   const ava = (await a.get('/api/profiles')).body.profiles[0].id;
   await a.put('/api/family', { name: 'Carsons', default_servings: 6, diet_filters: [], plan_weeks: true });
-  const c = (await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1 })).body.id;
+  // Starting the week being shopped for, so its first lesson is on offer.
+  const c = (await a.post('/api/courses', { profile_ids: [ava], start_date: shopWeek(today), per_week: 1 })).body.id;
   const d = (await a.get('/api/trips')).body;
   const shak = d.candidates.find((x) => x.lesson_id === 'shakshuka');
   await a.post('/api/trips', { queue_ids: [shak.id] });
@@ -124,4 +125,18 @@ test('trips, their lessons, check-offs, and the pantry are in a family download'
   const res = await ops.get(`/ops/family/${fid}.json`);
   const exported = typeof res.body === 'string' ? JSON.parse(res.body) : res.body;
   for (const t of ['shopping_trips', 'trip_lessons', 'shopping_checks', 'pantry']) assert.ok(exported.tables[t]?.length, t);
+});
+
+test('a trip is for one week: lessons dated for another week are not offered, and cannot be added', async () => {
+  const { a, ava, q1 } = await setup();
+  const week = shopWeek(today);
+  const later = (await a.post('/api/queue', { lesson_id: 'beef-bulgogi', profile_ids: [ava], planned_date: addDays(week, 14) })).body.id;
+  const inWeek = (await a.post('/api/queue', { lesson_id: 'brown-butter-cookies', profile_ids: [ava], servings: 6, planned_date: addDays(week, 2) })).body.id;
+  const d = (await a.get('/api/trips')).body;
+  assert.equal(d.shop_week, week);
+  const ids = d.candidates.map((x) => x.id);
+  assert.ok(ids.includes(inWeek));
+  assert.ok(ids.includes(q1), 'a lesson with no date can always be shopped for');
+  assert.ok(!ids.includes(later));
+  assert.equal((await a.post('/api/trips', { queue_ids: [later] })).status, 400);
 });

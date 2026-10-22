@@ -9,6 +9,7 @@ import { CONTENT } from './content-data.js';
 import { liveLesson } from './lessons.js';
 import { shoppingList, SECTIONS } from '../content/shop.js';
 import { family, syncQueue, queueProfiles, itemOut, today, tzOf } from './plan.js';
+import { addDays, shopWeek } from './schedule.js';
 
 const id = () => randomHex(8);
 const placeholders = (list) => list.map(() => '?').join(', ');
@@ -28,11 +29,20 @@ const perishDays = (v, fallback = 7) => {
 };
 
 // The lessons that can go on a trip: queued and not shopped for yet.
-async function shoppable(env, fid, ids) {
+// A trip is for one week only: this week until Thursday, then next week
+// (owner, 2026-10-22). A lesson is in it by its course week or planned date;
+// one queued by hand with no date can always be shopped for.
+const inShopWeek = (q, week) => {
+  const d = q.week_start ?? q.planned_date;
+  return !d || (d >= week && d <= addDays(week, 6));
+};
+
+async function shoppable(env, fid, ids, week) {
   const list = Array.isArray(ids) ? [...new Set(ids.map(String))] : [];
   if (list.length < 1 || list.length > 40) fail(400, 'invalid', 'Pick 1 to 40 lessons to shop for.');
-  const { results } = await env.DB.prepare(`SELECT id, servings FROM queue WHERE family_id = ? AND status = 'assigned' AND id IN (${placeholders(list)})`).bind(fid, ...list).all();
+  const { results } = await env.DB.prepare(`SELECT id, servings, week_start, planned_date FROM queue WHERE family_id = ? AND status = 'assigned' AND id IN (${placeholders(list)})`).bind(fid, ...list).all();
   if (results.length !== list.length) fail(400, 'invalid', 'A lesson picked is not in your queue, or is already shopped for.');
+  if (results.some((r) => !inShopWeek(r, week))) fail(400, 'not_this_week', "A lesson picked isn't for the week you're shopping for.");
   return results;
 }
 
@@ -68,6 +78,7 @@ export function register(on) {
     // Next week's course lessons join the queue from Thursday, ready to shop for.
     await syncQueue(env, fam, day, tzOf(req));
     const trip = await openTrip(env, s.family_id);
+    const week = shopWeek(day);
     const { results: rows } = await env.DB.prepare(`SELECT * FROM queue WHERE family_id = ? AND status = 'assigned'
         AND id NOT IN (SELECT tl.queue_id FROM trip_lessons tl JOIN shopping_trips t ON t.id = tl.trip_id WHERE t.family_id = ? AND t.ended_at IS NULL AND t.cancelled_at IS NULL)
         ORDER BY week_start IS NULL, week_start, planned_date IS NULL, planned_date, created_at`).bind(s.family_id, s.family_id).all();
@@ -77,7 +88,8 @@ export function register(on) {
     return {
       today: day,
       trip: trip ? await tripOut(env, fam, trip, day) : null,
-      candidates: rows.map((r) => ({ ...itemOut(r, who), date: planned(r) })),
+      shop_week: week,
+      candidates: rows.filter((r) => inShopWeek(r, week)).map((r) => ({ ...itemOut(r, who), date: planned(r) })),
       recent: recent.map((t) => ({ id: t.id, created_at: t.created_at, ended_at: t.ended_at, cancelled_at: t.cancelled_at })),
     };
   });
@@ -85,7 +97,7 @@ export function register(on) {
   on('POST', '/api/trips', async (req, env, body) => {
     const s = await requireParent(env, req);
     if (await openTrip(env, s.family_id)) fail(409, 'trip_open', 'A shopping trip is already open. End it or cancel it first.');
-    const rows = await shoppable(env, s.family_id, body.queue_ids);
+    const rows = await shoppable(env, s.family_id, body.queue_ids, shopWeek(today(req)));
     const tid = id();
     await env.DB.batch([
       env.DB.prepare('INSERT INTO shopping_trips (id, family_id, created_at, perish_days) VALUES (?, ?, ?, ?)').bind(tid, s.family_id, now(), perishDays(body.perish_days)),
@@ -107,7 +119,7 @@ export function register(on) {
     if (trip.ended_at || trip.cancelled_at) fail(409, 'closed', 'That trip is over. Reopen it first.');
     const stmts = [env.DB.prepare('UPDATE shopping_trips SET perish_days = ? WHERE id = ? AND family_id = ?').bind(perishDays(body.perish_days, trip.perish_days), trip.id, s.family_id)];
     if (body.add_queue_ids !== undefined) {
-      const rows = await shoppable(env, s.family_id, body.add_queue_ids);
+      const rows = await shoppable(env, s.family_id, body.add_queue_ids, shopWeek(today(req)));
       for (const r of rows) stmts.push(env.DB.prepare('INSERT OR IGNORE INTO trip_lessons (trip_id, family_id, queue_id, servings) VALUES (?, ?, ?, ?)').bind(trip.id, s.family_id, r.id, r.servings));
     }
     if (body.remove_queue_id !== undefined) {

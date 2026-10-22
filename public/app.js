@@ -979,7 +979,7 @@ const shopping = parentOnly(async (flash) => {
       el('h2', {}, 'Start a shopping trip'),
       d.candidates.length
         ? form([
-          el('p', { class: 'mut small', style: 'margin:0' }, "Pick the lessons you're shopping for. Next week's course lessons show from Thursday."),
+          el('p', { class: 'mut small', style: 'margin:0' }, `For the week of ${fmtDay(d.shop_week)}. From Thursday, the list is for next week.`),
           picker(d.candidates), perishSel(7),
         ], 'Make the list', async (v) => {
           const ids = picked(v, d.candidates);
@@ -987,7 +987,7 @@ const shopping = parentOnly(async (flash) => {
           await api('POST', '/api/trips', { queue_ids: ids, perish_days: Number(v.perish_days) });
           shopping();
         })
-        : el('p', { class: 'card mut' }, 'Nothing in the queue is waiting to be shopped for.'),
+        : el('p', { class: 'card mut' }, `Nothing for the week of ${fmtDay(d.shop_week)} is waiting to be shopped for.`),
       pantryLink,
       d.recent.length ? [el('h3', {}, 'Recent trips'), el('div', { class: 'card' }, el('div', { class: 'rows' }, d.recent.map((r) => el('div', { class: 'rowi' },
         el('div', {}, el('b', {}, `Started ${fmtDay(r.created_at.slice(0, 10))}`), el('small', {}, r.cancelled_at ? 'Cancelled' : `Ended ${fmtDay(r.ended_at.slice(0, 10))}`)),

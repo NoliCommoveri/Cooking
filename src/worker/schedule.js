@@ -20,6 +20,9 @@ export const localDay = (iso, tzOffset = 0) => fromDate(new Date(Date.parse(iso)
 export const PREVIEW_FROM = 4;
 // A lesson is due on the Friday of its week. 5 = Friday.
 export const DUE_DAY = 5;
+// The week a shopping trip is for (owner, 2026-10-22): this week until
+// Thursday, then next week.
+export const shopWeek = (today) => (today >= addDays(weekOf(today), PREVIEW_FROM) ? addDays(weekOf(today), 7) : weekOf(today));
 
 // course: { start_date, per_week }
 // lessons: the lesson ids the schedule can use, in plan order (written, kept in

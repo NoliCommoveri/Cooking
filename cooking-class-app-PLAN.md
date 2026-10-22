@@ -437,7 +437,7 @@ The parent starts a **shopping trip** by picking queued lessons. A trip holds it
 8. Mark perishables. If lessons have planned dates, show perishables only for lessons within the next N days (default 7, adjustable). A course lesson's date is its week's Sunday (§6.18). Lessons with no planned date always show their perishables, marked "no date set."
 9. Lines with no amount ("salt to taste," "oil for the pan") appear once, with no quantity.
 10. Check-off state persists, so the list survives closing the app mid-shop.
-- A family has one open trip at a time. Starting one ticks every queued lesson not yet shopped for; next week's course lessons are there from Thursday (§6.18). Lessons can be added to or taken off an open trip. **End trip** and **Cancel** each have an undo (Reopen).
+- **A trip is for one week** (owner, 2026-10-22): the current week until Thursday, then the upcoming week. Only lessons for that week are offered (by course week or planned date); a lesson queued by hand with no date is always offered. A family has one open trip at a time, and starting one ticks every lesson on offer. Lessons can be added to or taken off an open trip. **End trip** and **Cancel** each have an undo (Reopen).
 - A course lesson on an open trip, or already shopped for, stays in the queue if the schedule moves it.
 - Package sizes are typical US store sizes, set in `content/ingredients.json` (`purchaseUnit`), for the owner to check.
 

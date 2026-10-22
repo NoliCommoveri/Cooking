@@ -1458,3 +1458,16 @@ which would have meant reworking the queue later. The owner ruled:
   offs kept, End trip and Reopen, Cancel, adding and taking off lessons, the
   pantry, family scoping, input checks, a course lesson kept on a trip, and
   the new tables in a family download).
+
+## 59. 2026-10-22 — A shopping trip is for one week
+
+- **Owner ruling:** a shopping list only ever holds the lessons for the
+  current week, or, from Thursday, the upcoming week. Section 58 offered
+  every queued lesson not yet shopped for.
+- A lesson is in the week by its course week or its planned date. A lesson
+  queued by hand with no date is always offered, so a family that doesn't use
+  dates can still shop for it.
+- The Shopping screen says which week it's for. The API refuses a lesson from
+  another week, when starting a trip or adding to one.
+- Tests: 165 (the week a trip is for, Sunday to Saturday, and a lesson dated
+  two weeks out kept off a trip).

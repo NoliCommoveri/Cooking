@@ -1,7 +1,7 @@
 // The weekly schedule (plan §6.18): worked out, not stored.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { schedule, weekOf, addDays, localDay } from '../src/worker/schedule.js';
+import { schedule, weekOf, addDays, localDay, shopWeek } from '../src/worker/schedule.js';
 
 const L = ['a', 'b', 'c', 'd', 'e', 'f'];
 const course = { start_date: '2026-09-06', per_week: 2 }; // a Sunday
@@ -72,4 +72,11 @@ test('before the start, nothing is due; the first week shows from the Thursday b
   assert.equal(early.shows_next, false);
   assert.equal(schedule({ course, lessons: L, today: '2026-09-03' }).shows_next, true);
   assert.equal(early.started, false);
+});
+
+test('shopping is for this week until Thursday, then for next week', () => {
+  assert.equal(shopWeek('2026-09-06'), '2026-09-06'); // Sunday
+  assert.equal(shopWeek('2026-09-09'), '2026-09-06'); // Wednesday
+  assert.equal(shopWeek('2026-09-10'), '2026-09-13'); // Thursday
+  assert.equal(shopWeek('2026-09-12'), '2026-09-13'); // Saturday
 });
