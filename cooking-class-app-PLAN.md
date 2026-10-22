@@ -134,7 +134,7 @@ Separate from safety levels, which are about who must be in the kitchen. These a
 
 ---
 
-## 4. Curriculum (50 dishes)
+## 4. Curriculum (66 dishes)
 
 Lessons are grouped into units by skill. International and American dishes are mixed within each unit, and breakfast dishes are spread across the units. The exact teaching order is still an open content task. **Recommendation:** go through the units in order and alternate cuisines within each unit. The safety levels below are set in the content. Parents can't change them.
 
@@ -144,7 +144,21 @@ Lessons are grouped into units by skill. International and American dishes are m
 - **Knife work comes first, strongly suggested.** Nearly every lesson uses it. The app nudges parents toward a Unit 1 lesson before anything else, but doesn't block them (§6.2).
 - **Parents can see foundations at a glance** (§6.2): foundation lessons are marked in the library and the queue, and choose-one lessons are shown side by side.
 - **Prerequisites:** a lesson that needs a foundation skill unlocks when either lesson teaching it is done. The exception is a lesson built on the dish itself: 39 serves 38's biscuits, so it still needs 38.
-- The alternate dishes are numbered from 51 on and sit in the same unit as the lesson they pair with. **The list is proposed and waiting on the owner's pick.** Slicing is already taught three times (27, 14, 37), so it doesn't need one.
+- **Each foundation skill has three lessons to pick from** (owner, 2026-10-22). The added dishes are numbered 51–66 and sit in the same unit as the lesson they pair with; the unit tables mark each group with "pick one with". Slicing is already taught three times (27, 14, 37), so it has no added dishes.
+
+| Foundation skill | Pick one of |
+|---|---|
+| Julienne | 1 Spring rolls · 51 Chicken fajitas · 52 Carrot-apple slaw |
+| Fine chopping | 2 Fattoush · 53 Guacamole + chips · 54 Bruschetta |
+| Dicing | 3 Pico + fish tacos · 55 Matzo ball soup · 56 Minestrone |
+| Heat control | 28 French omelet · 57 Grilled cheese + tomato soup · 58 Challah French toast |
+| Building a sauce | 4 Shakshuka · 59 Spaghetti marinara · 60 Sloppy joes |
+| Roux | 32 Mac and cheese · 61 Croque madame · 62 Chicken gumbo |
+| Cutting in fat | 38 Buttermilk biscuits · 63 Rugelach · 64 Scones |
+| Yeast dough | 42 Cinnamon rolls · 65 Challah · 66 Homemade pizza |
+| Slicing | 27, 14, and 37 already teach it |
+
+- Prerequisites that name 32, 38, or 42 for the skill now accept any lesson in that group. 39 still needs 38 itself, because it's served on those biscuits.
 
 ### Unit 1 — Knife work and assembly
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -154,6 +168,12 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 3 | Pico de gallo + Baja fish tacos | Mexican | Dicing; broiling fish | Adult nearby | Cod/tilapia. Broiled, not battered and fried: frying is first taught in 23 |
 | 26 | Chicken Caesar + homemade dressing & croutons | American | Whisked dressing, cubing bread | Adult nearby | Pasteurized eggs or mayo base |
 | 27 | Smash burgers + quick pickles | American | Thin slicing, quick pickle, high-heat sear | Adult nearby | |
+| 51 | Chicken fajitas | Tex-Mex | Julienne: peppers and onions in thin strips · *pick one with 1, 52* | Adult nearby | Check tortillas for lard |
+| 52 | Crunchy carrot-apple slaw | American | Julienne · *pick one with 1, 51* | Adult nearby | |
+| 53 | Guacamole + baked tortilla chips | Mexican | Fine chopping · *pick one with 2, 54* | Adult nearby | Chips baked from corn tortillas; check for lard |
+| 54 | Bruschetta | Italian | Fine chopping, toasting bread · *pick one with 2, 53* | Adult nearby | |
+| 55 | Matzo ball soup | Jewish | Dicing · *pick one with 3, 56* | Adult nearby | Store-bought chicken broth; oil or chicken schmaltz in the matzo balls |
+| 56 | Minestrone | Italian | Dicing · *pick one with 3, 55* | Adult nearby | |
 
 ### Unit 2 — Stovetop basics
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -168,6 +188,12 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 30 | Breakfast burritos (breakfast) | American | Timing several components, rolling | Adult nearby | Beef chorizo or turkey sausage; check casings, or use bulk |
 | 31 | Eggs Benedict (breakfast) | American | Poaching eggs, hollandaise | Adult nearby | Turkey bacon or smoked salmon. Pasteurized eggs for the hollandaise. Prereq: 8 |
 | 32 | Stovetop mac and cheese | American | Roux → béchamel → cheese sauce | Adult nearby | Foundation for every roux lesson |
+| 57 | Grilled cheese + tomato soup | American | Heat control · *pick one with 28, 58* | Adult nearby | |
+| 58 | Challah French toast | Jewish | Heat control · *pick one with 28, 57* | Adult nearby | Store-bought challah, or from 65 |
+| 59 | Spaghetti marinara | Italian | Building a sauce · *pick one with 4, 60* | Adult nearby | |
+| 60 | Sloppy joes | American | Building a sauce · *pick one with 4, 59* | Adult nearby | Ground beef; Worcestershire is fine (anchovy) |
+| 61 | Croque madame | French | Roux → béchamel · *pick one with 32, 62* | Adult nearby | Turkey, never ham |
+| 62 | Chicken gumbo | Louisiana | Dark roux · *pick one with 32, 61* | **Adult hands-on** | Dark roux is very hot and sticky. Chicken and okra; chicken andouille optional, check casings; no shrimp |
 
 ### Unit 3 — Spices and flavor bases
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -202,6 +228,10 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 40 | Blueberry muffins (breakfast) | American | Muffin method, avoiding overmixing | Adult nearby | |
 | 41 | Skillet cornbread | American | Preheated skillet | Adult nearby | Pairs with 33 |
 | 42 | Cinnamon rolls (breakfast) | American | First yeast dough: kneading, proofing, shaping | Adult nearby | |
+| 63 | Rugelach | Jewish | Cutting in fat · *pick one with 38, 64* | Adult nearby | Butter and cream cheese dough |
+| 64 | Scones | British | Cutting in fat · *pick one with 38, 63* | Adult nearby | Butter, not lard |
+| 65 | Challah | Jewish | Yeast dough: kneading, proofing, braiding · *pick one with 42, 66* | Adult nearby | Honey or sugar: open question |
+| 66 | Homemade pizza | Italian | Yeast dough: kneading, stretching · *pick one with 42, 65* | Adult nearby | Veggie, or turkey pepperoni |
 
 ### Unit 6 — Oven, roasting, frying
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -228,7 +258,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 - **Multi-dish meal timing.** Example: bulgogi + fried rice + spring rolls. Requires a "plan the timeline" stage that the single-dish lessons don't have. Design it after the core lesson player works.
 
 ### Equipment note
-None of the 50 dishes requires a stand mixer. Lessons that use one in typical recipes (cinnamon rolls, cookies, churros, pão de queijo) must be written for hand mixing or hand kneading.
+None of the 66 dishes requires a stand mixer. Lessons that use one in typical recipes (cinnamon rolls, challah, pizza dough, cookies, churros, pão de queijo) must be written for hand mixing or hand kneading.
 
 ---
 
@@ -723,7 +753,7 @@ Each phase should be deployed and usable before the next begins.
 | **4. Photos & reflect** | Camera, resize, R2 upload with retry, Reflect stage, gallery, family photo download | A photo taken on the tablet shows in the gallery on the parent's phone |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
-| **7. Content fill** | The remaining 46 lessons, written in separate content sessions | All 50 lessons pass the linter |
+| **7. Content fill** | The remaining 62 lessons, written in separate content sessions | All 66 lessons pass the linter |
 | **8. Helper & first run** | First-run wizard (§6.9) and the helper (§6.8), once both are specced | A new family goes from sign-up to their first queued lesson through the wizard, and kids and parents can each finish a helper task |
 | **9. Family recipes (bonus)** | My recipes with the guided entry flow, submission and owner review, the community directory (§6.10) | A parent enters a recipe through the flow, a kid cooks it, and the owner releases a submitted one to the directory, where another test family finds and adds it |
 | **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, voice "next step" (§6.12), CSV export to the homeschool management system | — |
@@ -734,7 +764,8 @@ Each phase should be deployed and usable before the next begins.
 
 ## 10. Open questions
 
-None right now.
+1. **Honey (65 Challah).** Challah is usually sweetened with honey. Bees aren't on the clean-species list, and adding to it changes §2.1. Allow honey, or use sugar?
+2. **Jewish dishes on the passport (55, 58, 63, 65).** Proposed: a Jewish stamp on the Europe page, since these come from Eastern European Jewish cooking. Or a page of their own?
 
 ---
 

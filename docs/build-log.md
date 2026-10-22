@@ -592,3 +592,27 @@ The owner reviewed the sample lessons in the preview.
   serves the earlier dish itself (39 needs 38's biscuits).
 - The alternate dishes are proposed to the owner and not added yet. They'll
   be numbered from 51.
+
+---
+
+## 26. 2026-10-22 — Three lessons per foundation skill
+
+- The owner liked both proposed options for each foundation skill, so each
+  foundation skill now has three lessons to pick from (§4.0). 16 dishes were
+  added, numbered 51–66, and the course is now 66 dishes:
+  - Unit 1: 51 Chicken fajitas, 52 Carrot-apple slaw, 53 Guacamole and
+    chips, 54 Bruschetta, 55 Matzo ball soup, 56 Minestrone.
+  - Unit 2: 57 Grilled cheese and tomato soup, 58 Challah French toast,
+    59 Spaghetti marinara, 60 Sloppy joes, 61 Croque madame (turkey),
+    62 Chicken gumbo (adult hands-on, for the dark roux).
+  - Unit 5: 63 Rugelach, 64 Scones, 65 Challah, 66 Homemade pizza.
+- §4.0 has the pick-one table. Each new row in the unit tables names its
+  group and its food-rule notes: lard in tortillas, turkey not ham, chicken
+  andouille casings, and no shrimp in the gumbo.
+- Phase 7 is now 62 lessons to write. The stand-mixer note includes challah
+  and pizza dough.
+- New cuisines: Tex-Mex (United States page), Jewish, and British (Europe
+  page). Where the Jewish stamp goes is open question 2.
+- Open question 1: honey in challah.
+- The theme showcase mockup still shows 50 stamps. It's a mockup, and the
+  real counts come from the content.
