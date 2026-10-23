@@ -2367,3 +2367,31 @@ the next was started.
   The lesson files were already right; only `tools/preview-template.html`
   and the rebuilt preview changed.
 - Tests: 233.
+
+## 95. 2026-10-23 — Plan: Chef Ruth, the helper, and the first run as her task
+
+- **Owner rulings:**
+  - The helper is **Chef Ruth**, with the owner's picture
+    (`content/images/brand/chef-ruth.png`; a 256 px web copy at
+    `public/img/chef-ruth.webp`, the white around the badge made clear).
+  - **Her most useful job is collecting information** the app keeps on
+    several pages, in one chat.
+  - **The first-run wizard is one of her tasks** (Getting started), not its
+    own flow.
+  - **Parent screens first;** Chef Ruth in the kitchen can wait.
+- **§6.8 rewritten** from KennelOS's Kels (End-State guide §33, the Kels
+  roadmap). Recommendations, to confirm before building: scripted, not AI;
+  saves through the pages' own API calls and shared rules; a floating **Ask
+  Chef Ruth** button on every parent screen; Doing something first, then
+  Finding and Understanding something; one thing at a time, saved as
+  answered, with a draft and a review for tasks that make something new; her
+  voice and opening lines. Her first tasks: Getting started, Add people to our
+  family, Set up our learning path, Plan this week, and Our diet and kitchen,
+  each listed with the pages it saves to.
+- **§6.9 is now Getting started.** Recommendation: the family name and PIN
+  screen stays first and required, then a one-time Meet Chef Ruth card; the
+  parent tour can become her Understanding something. The profile intro stays
+  with the kitchen, for later.
+- **§9 Phase 8** is Chef Ruth on the parent screens. §5.4's helper rows and
+  §6.10 name her.
+- Nothing built yet. Tests: 233.

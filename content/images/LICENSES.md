@@ -42,3 +42,9 @@ Dishes a later sheet replaced aren't listed under the earlier sheet. `tools/dish
 generation, and is owned by the owner for use in this app. The layers in
 `mockups/quest-showcase/img/map/` (base, outlines, and one mask per passport
 region) are cut from it with `tools/split-world-map.py`.
+
+## Chef Ruth
+
+`brand/chef-ruth.png`: Chef Ruth, the helper (plan §6.8). Supplied by the owner
+on 2026-10-23, owned by the owner for use in this app. `public/img/chef-ruth.webp`
+is a 256 px copy with the white background around the badge made clear.
