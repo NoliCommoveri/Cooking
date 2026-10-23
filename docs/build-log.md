@@ -2813,3 +2813,28 @@ Phase 10 (plan §7.5), built.
   picture, moving and hiding lessons, the checks catching a missing picture
   and a split pick-one group, History, and Undo. The publish workflow itself
   runs only on GitHub, so it is first exercised by the owner's first save.
+
+## 115. 2026-10-23 — One schema file, and a fresh database
+
+The owner is clearing the database and signing up again, so the seventeen
+migrations were squashed into one.
+- **`src/worker/migrations/0001_schema.sql`** builds every table the app keeps:
+  families and sign-in, profiles and kid logins, cooks, fix requests and
+  patches, the queue and courses, shopping, family recipes and sharing, and
+  the manager section. Columns that later migrations added are in their
+  tables now, with their notes beside them. 0001_families.sql through
+  0017_manage.sql are gone. A check against a database built from the old
+  files found the same 53 tables and indexes, with the same columns.
+- **Content stays in files.** The owner asked about one table per list
+  (lessons, with recipes split by unit, and ingredients). That was talked
+  through and dropped: lessons and ingredients are repo files the manager
+  section edits (plan §7, §7.5), so a new recipe already needs no migration,
+  and a table per unit would have needed one for each new unit.
+- The two tests that checked old data fixes (0005 renaming lesson ids, 0014
+  marking families set up) went with their migrations; the /ops tests expect
+  one pending migration. Tests: 259, all passing. `docs/setup.md` no longer
+  names migration numbers, and has *Starting over with an empty database*.
+- **Owner steps:** once this deploys, on `/ops`: **Clear everything**, then
+  **Apply pending**, then sign up again and make yourself the owner. A
+  download made before this reset is at schema version 0017 and can't be
+  restored into the new schema.

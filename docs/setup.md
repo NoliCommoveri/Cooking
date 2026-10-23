@@ -79,6 +79,18 @@ When an update adds a database change, `/ops` shows it under **Migrations** as
 pending. Press **Download export.json** first, then **Apply pending**. Nothing
 already in the database is changed or removed.
 
+## 8a. Starting over with an empty database
+
+This wipes every family, sign-in, and cook. The lessons and ingredients aren't
+in the database, so they stay.
+
+1. On `/ops`, press **Download export.json** if you might want anything back.
+2. Press **Clear everything…**, type `DELETE EVERYTHING`, and press **Clear
+   everything**.
+3. Under **Migrations**, press **Apply pending**.
+4. Sign up again and make yourself the owner, as in **6. First run**, steps 3
+   and 4.
+
 ## 9. Check it (the Phase 2b test)
 
 1. In a family with two profiles, open a lesson from one profile's kitchen and
@@ -115,7 +127,7 @@ Use an Android phone or tablet with Chrome.
 
 ## 12. Check it (the Phase 3a test)
 
-After this update deploys, press **Apply pending** on `/ops` (migration 0006).
+After this update deploys, press **Apply pending** on `/ops`.
 
 1. In a test family, open a lesson from a kid's kitchen and tap **I want to
    make this**. In **Parents → Queue**, the request is at the top. Open
@@ -134,8 +146,7 @@ After this update deploys, press **Apply pending** on `/ops` (migration 0006).
 
 ## 13. Check it (the Phase 3b test)
 
-After this update deploys, press **Apply pending** on `/ops` (migrations 0007
-and 0008).
+After this update deploys, press **Apply pending** on `/ops`.
 
 1. In a test family, queue two lessons, or set up a course.
 2. **Parents → Shopping**: **What you'll need** shows the lessons week by week,
@@ -152,7 +163,7 @@ and 0008).
 
 ## 14. Check it (the first part of Phase 4)
 
-After this update deploys, press **Apply pending** on `/ops` (migration 0009).
+After this update deploys, press **Apply pending** on `/ops`.
 
 1. Cook a lesson to the end and press **Plate it**. The Reflect screen asks how
    it turned out (gems in Kitchen Quest, chef's hats in Chef's Passport), what
@@ -166,7 +177,7 @@ After this update deploys, press **Apply pending** on `/ops` (migration 0009).
 
 ## 15. Check it (Didn't make it)
 
-After this update deploys, press **Apply pending** on `/ops` (migration 0015).
+After this update deploys, press **Apply pending** on `/ops`.
 
 1. Queue a lesson for a kid, then cook it to the end from their kitchen.
 2. **Parents → Progress**: the lesson is there. Press **Didn't make it** on
@@ -202,7 +213,7 @@ manager section shows everything but can't save.
    and Secrets** → **Add**.
 7. **Type:** Secret. **Variable name:** `GITHUB_TOKEN`. **Value:** paste the
    token. Save (and **Deploy** if it asks).
-8. Open `/ops` and press **Apply pending** (migration 0017). The Setup list
+8. Open `/ops` and press **Apply pending**. The Setup list
    says **GitHub: Connected to NoliCommoveri/Cooking.**
 
 **Check it (the Phase 10 test):**
