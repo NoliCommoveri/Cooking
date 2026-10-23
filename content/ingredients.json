@@ -1415,6 +1415,178 @@
       "rawHandling": null,
       "icon": null,
       "watch": null
+    },
+    {
+      "id": "tuna-canned",
+      "name": "Canned tuna in water",
+      "section": "canned-jarred",
+      "baseUnit": "g",
+      "units": {
+        "can": {
+          "amount": 142,
+          "one": "5-oz can",
+          "many": "5-oz cans"
+        }
+      },
+      "purchaseUnit": {
+        "amount": 142,
+        "label": "5-oz can",
+        "many": "5-oz cans"
+      },
+      "contains": [
+        "fish"
+      ],
+      "animalSource": "tuna",
+      "animalPart": "meat",
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "mayonnaise",
+      "name": "Mayonnaise",
+      "section": "sauces",
+      "baseUnit": "ml",
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 887,
+        "label": "30-fl-oz jar",
+        "many": "30-fl-oz jars"
+      },
+      "contains": [
+        "egg"
+      ],
+      "animalSource": "chicken",
+      "animalPart": "egg",
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "yogurt-greek",
+      "name": "Plain Greek yogurt",
+      "section": "dairy-eggs",
+      "baseUnit": "ml",
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 907,
+        "label": "32-oz tub",
+        "many": "32-oz tubs"
+      },
+      "contains": [
+        "dairy"
+      ],
+      "animalSource": "cattle",
+      "animalPart": "milk",
+      "rawHandling": null,
+      "icon": null,
+      "watch": "Check the label for gelatin. Pick a brand made without it."
+    },
+    {
+      "id": "celery",
+      "name": "Celery",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "celery rib",
+        "many": "celery ribs"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 8,
+        "label": "bunch of celery",
+        "many": "bunches of celery"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "pickle-dill",
+      "name": "Dill pickles",
+      "section": "canned-jarred",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "whole dill pickle",
+        "many": "whole dill pickles"
+      },
+      "purchaseUnit": {
+        "amount": 8,
+        "label": "24-oz jar of whole dill pickles",
+        "many": "24-oz jars of whole dill pickles"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "mustard-dijon",
+      "name": "Dijon mustard",
+      "section": "sauces",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 340,
+        "label": "12-oz jar",
+        "many": "12-oz jars"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "bread-sandwich",
+      "name": "Sandwich bread",
+      "section": "bread-tortillas",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "slice of sandwich bread",
+        "many": "slices of sandwich bread"
+      },
+      "purchaseUnit": {
+        "amount": 20,
+        "label": "loaf of sandwich bread",
+        "many": "loaves of sandwich bread"
+      },
+      "contains": [
+        "gluten"
+      ],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "bread-gluten-free",
+      "name": "Gluten-free sandwich bread",
+      "section": "bread-tortillas",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "slice of gluten-free bread",
+        "many": "slices of gluten-free bread"
+      },
+      "purchaseUnit": {
+        "amount": 14,
+        "label": "loaf of gluten-free bread",
+        "many": "loaves of gluten-free bread"
+      },
+      "contains": [
+        "egg"
+      ],
+      "animalSource": "chicken",
+      "animalPart": "egg",
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
     }
   ]
 }

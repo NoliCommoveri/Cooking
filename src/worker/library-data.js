@@ -351,6 +351,77 @@ export const LIBRARY = {
    "unleavened": true
   },
   {
+   "id": "tuna-salad-sandwiches",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Tuna salad sandwiches",
+   "image": "img/dishes/tuna-salad-sandwiches.webp",
+   "cuisine": "american",
+   "skill": "Fine chopping: celery, onion, pickles, herbs",
+   "servings": 6,
+   "scaling": {
+    "mode": "free"
+   },
+   "totalMinutes": 25,
+   "ingredients": [
+    {
+     "ingredient": "tuna-canned"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "pickle-dill"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "mayonnaise"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "bread-sandwich"
+    },
+    {
+     "ingredient": "lettuce-green-leaf",
+     "optional": true
+    },
+    {
+     "ingredient": "tomato",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "bread-sandwich",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "mayonnaise",
+     "use": "yogurt-greek",
+     "reason": "egg"
+    }
+   ],
+   "unleavened": false
+  },
+  {
    "id": "shakshuka",
    "version": 1,
    "track": "core",
@@ -1021,6 +1092,48 @@ export const LIBRARY = {
   "vinegar-red-wine": {
    "name": "Red wine vinegar",
    "contains": []
+  },
+  "tuna-canned": {
+   "name": "Canned tuna in water",
+   "contains": [
+    "fish"
+   ]
+  },
+  "mayonnaise": {
+   "name": "Mayonnaise",
+   "contains": [
+    "egg"
+   ]
+  },
+  "yogurt-greek": {
+   "name": "Plain Greek yogurt",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "celery": {
+   "name": "Celery",
+   "contains": []
+  },
+  "pickle-dill": {
+   "name": "Dill pickles",
+   "contains": []
+  },
+  "mustard-dijon": {
+   "name": "Dijon mustard",
+   "contains": []
+  },
+  "bread-sandwich": {
+   "name": "Sandwich bread",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "bread-gluten-free": {
+   "name": "Gluten-free sandwich bread",
+   "contains": [
+    "egg"
+   ]
   }
  },
  "cuisines": {
