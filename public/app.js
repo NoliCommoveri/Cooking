@@ -1031,8 +1031,41 @@ const familySettings = parentOnly(async () => {
     });
     await refresh();
     saved.hidden = false;
-  }, { top: true }));
+  }, { top: true }),
+  el('h2', {}, 'Leave Clean Plate'),
+  el('div', { class: 'card' },
+    el('p', { class: 'mut small', style: 'margin:0' }, 'Download our data saves everything about your family as one file. Delete our family removes your family, every parent login, every profile, and all progress.'),
+    el('div', { class: 'acts' },
+      el('button', { type: 'button', class: 'hbtn', onclick: () => downloadOurData().catch((e) => showToast(e.message)) }, 'Download our data'),
+      el('button', { type: 'button', class: 'hbtn', onclick: deleteOurFamily }, 'Delete our family…'))));
 });
+
+async function downloadOurData() {
+  const data = await api('GET', '/api/family/export');
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const a = el('a', { href: URL.createObjectURL(blob), download: `${me.family.name || 'family'} data ${localToday()}.json` });
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+// Behind the PIN (the page) and this parent's password (§6.14).
+function deleteOurFamily() {
+  let close = () => {};
+  close = modal('Delete our family', form([
+    el('p', {}, 'Your family is gone from Clean Plate right away: every device is logged out and nobody can log in. After 30 days it is erased for good. Until then, the app\'s owner can bring it back if you ask.'),
+    el('p', {}, 'Download our data first if you want a copy.'),
+    el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => downloadOurData().catch((e) => showToast(e.message)) }, 'Download our data')),
+    field('Your password', 'password', { type: 'password', autocomplete: 'current-password', required: true }, `The password you log in with as ${me.parent.email}`),
+  ], 'Delete our family', async (v) => {
+    await api('POST', '/api/family/delete', { password: v.password });
+    close();
+    store('cpr.profile', null);
+    const done = modal('Your family was deleted', el('p', {}, 'Thank you for cooking with us.'),
+      el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn pri', onclick: () => { done(); start('#/'); } }, 'OK')));
+  }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')] }));
+}
 
 const parentLogins = parentOnly(async () => {
   const f = await api('GET', '/api/family');

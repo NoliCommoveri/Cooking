@@ -4,13 +4,14 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [122. 2026-10-23 — Preview from Add a lesson and Our recipes; stacked arrows](docs/build-log.md#122-2026-10-23--preview-from-add-a-lesson-and-our-recipes-stacked-arrows)
+**Latest build log entry:** [123. 2026-10-23 — Delete our family and Download our data](docs/build-log.md#123-2026-10-23--delete-our-family-and-download-our-data)
 
 ## Current features
 
 The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are in `docs/setup.md`.
 
 - **Accounts** (`src/worker/`, `public/`): open sign-up with an emailed code, an optional beta word, parent login, password reset by email, and a parent PIN for parent screens, which locks on its own when a parent leaves them.
+- **Leaving** (Family settings, `src/worker/backup.js`): **Download our data** saves the family as one file; **Delete our family** (PIN and password) logs everyone out and hides the family at once, and a daily job erases it 30 days later.
 - **Chef's lockers and profiles**: one person or several per profile, kid or adult, each with its own theme.
 - **Kitchen**: each profile's own space, in Kitchen Quest or Chef's Passport, with three tabs pinned to the bottom: **Main quest / My journey** (this week and next open, the rest of its path under See more), **Side quests / More recipes** (every unit and recipe shelf, folded shut, with a search by dish or ingredient), and **Skill tree / Passport** (progress and rewards). Cards follow the family's diet settings, with swaps and left-out optional ingredients shown.
 - **Kitchen intro**: Chef Ruth's cards, with screenshots, on the tabs, asking to cook, and each stage of a cook. Opens once for a profile with nothing cooked; **How it works** replays it.
@@ -47,7 +48,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Kid logins** (`src/worker/kidlogin.js`): a parent gives a kid profile a login (first name and last initial, one of 30 cooking pictures, a password). That kid's device opens only their kitchen; the server refuses everything else. A kid login lasts 14 days, renewed each time the app is opened.
 - **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN. Each list's add button is at its top right, and adding opens a dialog (a course or recipe opens its own page); long sections fold shut.
 - **Owner screens**: the beta word, the family list, setting a parent's password, fix requests, recipe reviews, and reported recipes.
-- **Ops page** (`/ops`): migrations, the owner flag, whether GitHub is connected for the manager section, backup download and restore, clear everything, and remove or restore one family.
+- **Ops page** (`/ops`): migrations, the owner flag, whether GitHub is connected for the manager section, backup download and restore, clear everything, remove or restore one family, and Bring back a family its parents deleted, within its 30 days.
 - **Manager section** (`/manage`, `src/worker/manage.js`, `public/manage/`): the owner's own sign-in. Add, rename, reorder, and remove units; add lessons (blank or a copy), move, hide, and unhide them; edit every part of a lesson in a form built from the lesson schema; edit ingredients, tools, skills, kitchen words, cuisines, and the food rules; upload dish pictures. Checked as you type by the content linter. **Preview as a learner** runs a lesson in either theme, unsaved changes included, with no checklist to tick and nothing saved.
 - **Saving content** (`src/worker/github.js`, `.github/workflows/content-publish.yml`): a save is checked again and committed to the `content-edits` branch; GitHub builds, lints, and tests it and puts it on `main`, which deploys. **Saves** shows each one's status, with Undo; a lesson's History loads any earlier version.
 - **Hidden lessons** (`content/hidden.json`): out of the library, the course numbers, and every family's course plan until unhidden.

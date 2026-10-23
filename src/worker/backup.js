@@ -3,6 +3,8 @@
 //   - Download export.json  ↔  Restore from export.json (into an empty database)
 //   - Clear everything      ↔  Apply pending, then Restore from export.json
 //   - Remove a family       ↔  Restore a family (from that family's own export)
+//   - Delete our family     ↔  Bring back (on /ops, for the 30 days before
+//                               the daily job erases it, §6.14)
 // Approach and limits follow the MCCE repo's src/restore.js.
 import { schemaVersion } from './migrate.js';
 
@@ -101,9 +103,49 @@ export async function exportFamily(db, familyId) {
 export async function removeFamily(db, familyId) {
   const fam = await db.prepare('SELECT name FROM families WHERE id = ?').bind(familyId).first();
   if (!fam) throw new Refused('No such family.');
-  const order = (await parentFirst(db, [...(await familyTables(db)), 'families'])).reverse();
-  await db.batch(order.map((t) => db.prepare(`DELETE FROM "${t}" WHERE ${t === 'families' ? 'id' : 'family_id'} = ?`).bind(familyId)));
+  const tables = await familyTables(db);
+  const order = (await parentFirst(db, [...tables, 'families'])).reverse();
+  // Other families' reports on this family's shared recipes go with the
+  // recipes, or the recipes can't be deleted.
+  const reports = tables.includes('recipe_reports') && tables.includes('community_recipes')
+    ? [db.prepare('DELETE FROM recipe_reports WHERE community_recipe_id IN (SELECT id FROM community_recipes WHERE family_id = ?)').bind(familyId)]
+    : [];
+  await db.batch([...reports, ...order.map((t) => db.prepare(`DELETE FROM "${t}" WHERE ${t === 'families' ? 'id' : 'family_id'} = ?`).bind(familyId))]);
   return fam.name;
+}
+
+// ---------- Delete our family (§6.14) ----------
+
+// A family a parent deleted is gone from the app at once: every device is
+// logged out, nobody can log in, and its shared recipes leave the directory.
+// Its rows stay for GRACE_DAYS so the owner can bring it back from /ops, then
+// the Worker's daily job erases them the same way as Remove a family.
+export const GRACE_DAYS = 30;
+export const eraseAfter = (deletedAt) => new Date(Date.parse(deletedAt) + GRACE_DAYS * 24 * 60 * 60 * 1000).toISOString();
+
+export async function deleteFamily(db, familyId) {
+  const t = new Date().toISOString();
+  await db.batch([
+    db.prepare('UPDATE families SET deleted_at = ? WHERE id = ? AND deleted_at IS NULL').bind(t, familyId),
+    ...['sessions', 'kid_sessions', 'manage_sessions', 'password_resets'].map((x) => db.prepare(`DELETE FROM "${x}" WHERE family_id = ?`).bind(familyId)),
+  ]);
+  return t;
+}
+
+// Everything comes back as it was; everyone logs in again.
+export async function undeleteFamily(db, familyId) {
+  const fam = await db.prepare('SELECT name, deleted_at FROM families WHERE id = ?').bind(familyId).first();
+  if (!fam?.deleted_at) throw new Refused('That family is not waiting to be erased.');
+  await db.prepare('UPDATE families SET deleted_at = NULL WHERE id = ?').bind(familyId).run();
+  return fam.name;
+}
+
+// The daily job: erases every family deleted more than GRACE_DAYS ago.
+export async function eraseDeleted(db, at = Date.now()) {
+  const cutoff = new Date(at - GRACE_DAYS * 24 * 60 * 60 * 1000).toISOString();
+  const { results } = await db.prepare('SELECT id FROM families WHERE deleted_at IS NOT NULL AND deleted_at < ?').bind(cutoff).all();
+  for (const f of results) await removeFamily(db, f.id);
+  return results.length;
 }
 
 export async function restoreFamily(db, payload) {
@@ -111,6 +153,8 @@ export async function restoreFamily(db, payload) {
   const tables = await checkPayload(db, payload, 'clean-plate-family');
   const fam = tables.families?.[0];
   if (!fam || tables.families.length !== 1 || fam.id !== payload.family_id) throw new Refused('That file has no family in it.');
+  // A download taken while the family was deleted comes back live.
+  if ('deleted_at' in fam) tables.families = [{ ...fam, deleted_at: null }];
   for (const [t, rows] of Object.entries(tables)) {
     for (const r of rows) {
       if ((t === 'families' ? r.id : r.family_id) !== fam.id) throw new Refused(`"${t}" in that file has rows from another family.`);

@@ -808,6 +808,7 @@ The app lives at **`cleanplate.immotus.app`**, and its front door is a simple pu
 - **Requirement (owner, 2026-10-22):** email every parent in the family 30 days and 7 days before an inactive purge ("log in once to keep your account"). Logging in cancels it.
 - **Requirement (owner, 2026-10-22): a 30-day grace period** after a self-serve delete. The family disappears at once (no login, nothing shown to anyone), and the rows and photos are erased after 30 days. During those 30 days the owner can restore it from `/ops` if a parent asks, which keeps the rule that a destructive action has a restore. The privacy policy says so.
 - Removing a family from `/ops` (§8.5) stays as it is.
+- **Built 2026-10-23** (owner: during the beta): Delete our family and Download our data in family settings, the grace period, Bring back on `/ops`, and the daily erase job. The owner's own family can't be deleted from the app (it holds the owner screens); Remove on `/ops` still can. Photos aren't built yet, so there are none to download or erase. The inactive purge and its warning emails are not built yet.
 
 ### 6.15 Print our progress — Requirement (owner, 2026-10-22)
 A printable record of what each profile has cooked, for homeschool records.

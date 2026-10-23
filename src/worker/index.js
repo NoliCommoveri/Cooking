@@ -4,6 +4,7 @@ import { handleOps } from './ops.js';
 import { handleApi } from './api.js';
 import { handleManage } from './manage.js';
 import { json } from './lib/http.js';
+import { eraseDeleted } from './backup.js';
 
 export default {
   async fetch(request, env) {
@@ -14,5 +15,17 @@ export default {
     // The manager section (plan §7.5): its own app and its own sign-in.
     if (url.pathname === '/manage' || url.pathname.startsWith('/manage/')) return handleManage(request, env);
     return env.ASSETS.fetch(request);
+  },
+
+  // Cloudflare runs this daily (the cron in wrangler.toml): families deleted
+  // more than 30 days ago are erased (plan §6.14). A failure is logged and the
+  // next day tries again.
+  async scheduled(event, env) {
+    try {
+      const n = await eraseDeleted(env.DB);
+      if (n) console.log(`Erased ${n} deleted famil${n === 1 ? 'y' : 'ies'}.`);
+    } catch (err) {
+      console.log(`Erasing deleted families failed: ${err?.stack ?? err}`);
+    }
   },
 };
