@@ -398,7 +398,8 @@ Do **not** use:
 
 ### 6.1 Kid features
 - Profile picker (chef lockers), showing only this family's profiles. For a lesson queued for several profiles, any of them can start it, and the cook is shared
-- Lesson browser by unit, with locked lessons whose prerequisites this profile hasn't done shown as a "coming up" card (not hidden)
+- **The kitchen in two tabs** (owner, 2026-10-23), pinned to the bottom where a thumb is, as in MCCE Kids, drawn by the theme: **Main quest / My journey** (what's queued for this profile, then the next three lessons on its path, a pick-one group counting once) and **Side quests / More recipes** (every unit, the Appointed Times unit with its User-shared shelf, and Our recipes, each folded shut, with a search over dish names and ingredients that opens what matches). Kids never see all the lessons at once. Progress and rewards become a third tab with Phase 5
+- Lesson browser by unit (in More recipes), with locked lessons whose prerequisites this profile hasn't done shown as a "coming up" card (not hidden)
 - Full lesson flow (§3)
 - Serving scaler (defaults to the family's serving count; limits in §6.6)
 - Multiple concurrent timers; a timer keeps running if the kid moves to another step or closes and reopens the app (see §8.2 for iOS limits)

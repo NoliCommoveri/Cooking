@@ -1946,3 +1946,24 @@ on it.
   on every re-run (18 more); it looks like a timing flake already there
   (queue rows created in the same millisecond sort by a random id), not
   this change.
+
+## 78. 2026-10-23 — The kids' kitchen in two tabs, with search
+
+- **Owner ruling:** kids aren't shown a wall of every lesson. After MCCE
+  Kids' bottom tabs, the kitchen has themed tabs pinned to the bottom:
+  - **Main quest** (Kitchen Quest) / **My journey** (Chef's Passport): what's
+    queued for this profile, then the next three lessons on its path (its
+    course plan's order, or the suggested one), with a pick-one group's
+    dishes shown together and counted once, and gone once one is cooked or
+    queued.
+  - **Side quests** / **More recipes**: every unit, then Appointed Times with
+    its User-shared shelf, then Our recipes, each a folded shelf with its
+    count. A search box filters by dish name, skill, cuisine, or any
+    ingredient (every word typed must match) and opens the shelves with
+    matches.
+  - The tab and the search are remembered for this browser tab, so coming
+    back from a lesson lands where the kid was. Progress and rewards join as
+    a third tab with Phase 5.
+- `/api/library`, `/api/recipes`, and `/api/shared` give each card its
+  search words, and lessons their pick-one group.
+- Tests: 201. Checked in a browser in both themes.

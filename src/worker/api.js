@@ -328,6 +328,7 @@ on('GET', '/api/library', async (req, env) => {
   const { labels: numbered, total } = numberCourse(LIBRARY.course);
   // Appointed Times lessons are A1, A2… beside the numbered course (§6.19).
   const labels = { ...numbered, ...LIBRARY.seasonalLabels };
+  const pickOf = Object.fromEntries(LIBRARY.course.filter((d) => d.pickOne).map((d) => [d.id, d.pickOne]));
   const lessons = [];
   let hidden = 0;
   for (const L of LIBRARY.lessons) {
@@ -338,6 +339,10 @@ on('GET', '/api/library', async (req, env) => {
       skill: L.skill, servings: L.servings, totalMinutes: minutes(L),
       substitutions: view.applied.map((x) => ({ for: name(x.for), use: name(x.use) })),
       left_out: view.leftOut.map(name), unleavened: L.unleavened,
+      // The kitchen's search (a name or an ingredient), and the pick-one group
+      // its path counts once.
+      search: [L.title, L.skill, LIBRARY.cuisines[L.cuisine], ...L.ingredients.map((x) => name(x.ingredient))].join(' ').toLowerCase(),
+      pick: pickOf[L.id] ?? null,
     });
   }
   return { lessons, hidden, units: LIBRARY.units, seasonal: LIBRARY.seasonal, labels, total };

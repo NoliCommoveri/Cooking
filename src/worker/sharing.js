@@ -15,7 +15,7 @@ import { randomHex } from './lib/crypto.js';
 import { requireSession, requireParent, requireOwner } from './auth.js';
 import { CONTENT } from './content-data.js';
 import { sendEmail, recipeReportEmail } from './email.js';
-import { recipeRow, stored, clearedOf, REGISTRY, recipeVisible } from './recipes.js';
+import { recipeRow, stored, clearedOf, REGISTRY, recipeVisible, searchText } from './recipes.js';
 import { recipeLesson, recipeCard, blockedWords, MEAL_TYPES } from '../content/recipe.js';
 import { leavenIn } from '../content/leaven.js';
 
@@ -76,7 +76,7 @@ function sharedOut(c, filters, fid, added) {
     id: c.id, title: c.title, kind: c.kind, feast: c.kind === 'feast', unleavened: Boolean(c.unleavened),
     meal: meal(c.meal_type), image: `img/meals/${c.meal_type}.svg`, servings: r.servings, totalMinutes: r.totalMinutes,
     card: recipeCard(r, REGISTRY), visible: recipeVisible({ lesson, extra }, filters),
-    mine: c.family_id === fid, added: added.has(c.id), shared_at: c.shared_at,
+    mine: c.family_id === fid, added: added.has(c.id), shared_at: c.shared_at, search: searchText(r),
   };
 }
 

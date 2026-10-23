@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [77. 2026-10-23 — Phase 4c, slice 4: Swap for an Appointed Time meal](docs/build-log.md#77-2026-10-23--phase-4c-slice-4-swap-for-an-appointed-time-meal)
+**Latest build log entry:** [78. 2026-10-23 — The kids' kitchen in two tabs, with search](docs/build-log.md#78-2026-10-23--the-kids-kitchen-in-two-tabs-with-search)
 
 ## Current features
 
@@ -12,7 +12,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 
 - **Accounts** (`src/worker/`, `public/`): open sign-up with an emailed code, an optional beta word, parent login, password reset by email, and a parent PIN for parent screens.
 - **Chef's lockers and profiles**: one person or several per profile, kid or adult, each with its own theme.
-- **Kitchen**: each profile sees the lesson library as Kitchen Quest quest cards or Chef's Passport recipe cards, filtered by the family's diet settings (with swaps and left-out optional ingredients shown on the card).
+- **Kitchen**: each profile's own space, in Kitchen Quest or Chef's Passport, with two tabs pinned to the bottom: **Main quest / My journey** (what's queued, then the next few lessons on its path) and **Side quests / More recipes** (every unit and recipe shelf, folded shut, with a search by dish or ingredient). Cards follow the family's diet settings, with swaps and left-out optional ingredients shown.
 - **Lesson player** (`public/player.js`): each lesson in the profile's theme: the lesson card with the serving picker, Learn cards, Prep checklists, and Cook mode with safety banners, kitchen words, Why? cards, timers that ring until stopped, and the screen kept awake.
 - **Suggest a fix** (`src/content/patch.js`, `src/worker/lessons.js`): parents and adult learners report a problem on a lesson or step with what it should say instead; the family sees what came of it on the lesson.
 - **Fix requests** (owner screens): apply a suggestion as a lesson patch for every family, after the linter's checks; decline, reopen, or revert any of them.

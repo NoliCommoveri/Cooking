@@ -73,6 +73,9 @@ export async function recipeNames(env, fid) {
 // has no diet tags, so it never hides one.
 export const recipeVisible = ({ lesson, extra }, filters) => dietView(lesson, { ...LIBRARY.ingredients, ...REGISTRY, ...extra }, filters).visible;
 
+// A recipe's words for the kitchen's search: its name and every ingredient.
+export const searchText = (r) => [r.title, ...r.ingredients.map((l) => (l.ingredient ? REGISTRY[l.ingredient]?.name : l.name))].join(' ').toLowerCase();
+
 // share: its directory copy, review: the latest review of it, source: the
 // directory recipe it was added from (§6.10).
 const summary = (row, filters, { share = null, review = null, source = null } = {}) => {
@@ -88,6 +91,7 @@ const summary = (row, filters, { share = null, review = null, source = null } = 
     visible: recipeVisible(L, filters), unleavened: unleavened(r, REGISTRY, CONTENT.rules.leaven),
     typed_in: r.ingredients.filter((l) => !l.ingredient).length, version: row.version, updated_at: row.updated_at,
     card: recipeCard(r, REGISTRY),
+    search: searchText(r),
   };
 };
 
