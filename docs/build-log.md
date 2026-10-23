@@ -2303,3 +2303,56 @@ Built to §8.3a as settled in 90.
   the Adult / Kid choice and Ask an adult to start, with the two-device run
   from 91 passing again.
 
+
+## 93. 2026-10-23 — Unit 1 finished: lessons 2a through 5
+
+Content fill (Phase 7) goes on with the rest of Unit 1, at the owner's
+request: one commit per lesson, each checked in the lesson preview before
+the next was started.
+- **2a Fattoush** (`fattoush`): parsley and mint chopped fine by rocking the
+  knife with the tip on the board; pita squares toasted at 400°F; a whisked
+  lemon-sumac dressing; the pita goes in last. Swaps: lemon zest for sumac
+  (availability), corn tortillas for pita (gluten). 40 minutes.
+- **2b Chimichurri steak** (`chimichurri-steak`): parsley and garlic chopped
+  fine; the sauce sits while a patted-dry sirloin is seared to 145°F, rested,
+  and sliced across the grain. Callback to 1b's sear. 45 minutes.
+- **2c Tuna salad sandwiches** (`tuna-salad-sandwiches`): celery and pickles
+  cut into sticks, then across into tiny bits; tuna pressed dry. No-cook.
+  Swaps: gluten-free bread (gluten), Greek yogurt for mayonnaise (egg).
+  25 minutes.
+- **3a Pico de gallo + Baja fish tacos** (`fish-tacos`): dicing as planks,
+  sticks, cubes; tomatoes seeded so the pico isn't watery; an onion cut toward
+  its root. Spiced cod broiled to 145°F without flipping. Swap: tilapia or
+  another white fish. 50 minutes.
+- **3b Ratatouille** (`ratatouille`): five vegetables diced, round ones halved
+  flat side down first; the eggplant browned alone, then everything simmered
+  lid on, then lid off to thicken. 70 minutes.
+- **3c Minestrone** (`minestrone`): onion, carrots, celery, and zucchini
+  diced, carrots smaller; a soffritto, then tomatoes, broth, and cannellini,
+  with small pasta near the end. Swap: gluten-free pasta. 60 minutes.
+- **4 Chicken Caesar** (`chicken-caesar`): bread cubed and baked into
+  croutons; chicken browned, then cooked with the lid on to 165°F; the dressing
+  is on a store mayonnaise base (pasteurized eggs, per §3), with the oil
+  whisked in slowly. Worcestershire is optional, so a fish-free family keeps
+  the lesson. Callback to 3a. Swaps: gluten-free bread, Greek yogurt for
+  mayonnaise. 50 minutes.
+- **5 Smash burgers + quick pickles** (`smash-burgers`): cucumbers sliced thin
+  into a warm brine; onion sliced paper thin; loose balls of beef smashed
+  through parchment and seared to 160°F, 3 at a time, with a wash step after
+  each batch of raw beef. Cheese is optional. Callback to 1b. Swap:
+  gluten-free buns. 60 minutes.
+- **All eight are written for 6 servings** (§2.2). 1a–1c are written for 4
+  and weren't changed.
+- **Callbacks name one lesson.** When a skill comes from a pick-one group, the
+  callback points at the group's first dish (1b, 3a) and is worded so it reads
+  right whichever one the family cooked.
+- **Registries:** 37 new ingredients (romaine, tomatoes, radishes, lemons,
+  sumac, sirloin, ground beef, cod, tilapia, canned tuna, mayonnaise, Greek
+  yogurt, Worcestershire, parmesan, broth, beans, pasta, breads, and more),
+  each with its store section and package. Every animal product is from a
+  clean species. Gluten-free bread and buns are tagged egg, since many
+  contain it. 4 new tools: aluminum foil, spoon, ladle, and a large heavy pot.
+- **Course outline:** the eight dishes carry their real times instead of
+  estimates.
+- Not test-cooked. No intro slides yet (warned, as for the others).
+- Tests: 233 (no new ones; the linter checks every new lesson).
