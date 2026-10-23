@@ -173,8 +173,8 @@ async function courseDone(env, course, profiles, tz) {
 }
 
 async function courseWeeks(env, course) {
-  const { results } = await env.DB.prepare('SELECT week_start, skipped, extra FROM course_weeks WHERE course_id = ? AND family_id = ?').bind(course.id, course.family_id).all();
-  return Object.fromEntries(results.map((r) => [r.week_start, { skipped: Boolean(r.skipped), extra: r.extra }]));
+  const { results } = await env.DB.prepare('SELECT week_start, skipped, extra, swapped FROM course_weeks WHERE course_id = ? AND family_id = ?').bind(course.id, course.family_id).all();
+  return Object.fromEntries(results.map((r) => [r.week_start, { skipped: Boolean(r.skipped), extra: r.extra, swapped: r.swapped ?? 0 }]));
 }
 
 async function courseState(env, course, fam, day, tz) {
@@ -285,7 +285,7 @@ export function itemOut(r, who, labels = suggestedLabels, names = {}) {
   return {
     id: r.id, lesson_id: r.lesson_id, title: L?.title ?? n?.title ?? dishById[r.lesson_id]?.title ?? r.lesson_id, label: labels[r.lesson_id] ?? null,
     unit: L?.unit ?? dishById[r.lesson_id]?.unit ?? null, image: L?.image ?? n?.image ?? null, foundation: Boolean(dishById[r.lesson_id]?.pickOne),
-    recipe: Boolean(n), servings: r.servings, servings_options: L ? servingOptions(L) : n ? RECIPE_SIZES : [], planned_date: r.planned_date, status: r.status, source: r.source,
+    recipe: Boolean(n), swap: Boolean(r.swap_of), servings: r.servings, servings_options: L ? servingOptions(L) : n ? RECIPE_SIZES : [], planned_date: r.planned_date, status: r.status, source: r.source,
     profile_ids: who[r.id] ?? [], requested_by: r.requested_by_profile_id, course_id: r.course_id, week_start: r.week_start,
     created_at: r.created_at, closed_at: r.closed_at,
   };
@@ -350,7 +350,8 @@ export function register(on) {
         already_queued: active.some((x) => x.status !== 'requested' && x.lesson_id === r.lesson_id && (who[x.id] ?? []).includes(r.requested_by_profile_id)),
       })),
       queued: active.filter((r) => r.status !== 'requested' && !r.course_id).map(out),
-      put_back: rows.filter((r) => !ACTIVE.includes(r.status) && !names[r.lesson_id]?.deleted).map(out),
+      // A lesson a swap took off is put back by the swap's Undo, not here.
+      put_back: rows.filter((r) => !ACTIVE.includes(r.status) && !names[r.lesson_id]?.deleted && !active.some((x) => x.swap_of === `q:${r.id}`)).map(out),
       courses: states.map((st) => courseOut(st, fam, byLesson)),
       knife_ok: [...knifeOk],
       test_cooks: Object.fromEntries(tests.map((t) => [t.lesson_id, { cooked_on: t.cooked_on, by_me: t.parent_id === s.parent_id }])),

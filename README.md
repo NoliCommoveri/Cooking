@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [76. 2026-10-23 — The User-shared shelf in the kitchen](docs/build-log.md#76-2026-10-23--the-user-shared-shelf-in-the-kitchen)
+**Latest build log entry:** [77. 2026-10-23 — Phase 4c, slice 4: Swap for an Appointed Time meal](docs/build-log.md#77-2026-10-23--phase-4c-slice-4-swap-for-an-appointed-time-meal)
 
 ## Current features
 
@@ -35,6 +35,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Family recipes** (Parents → Recipes, `src/content/recipe.js`, `src/worker/recipes.js`): a parent adds the family's own recipes one thing at a time (basics, ingredients from the list or typed in, tools, steps with safety levels and timers, meal type, a "why we make this" card, then review). The same unclean-food and food-safety checks as lessons; a wash-hands step is added after raw food. They show on an "Our recipes" shelf in every kitchen and can be queued, shopped for, and cooked like lessons. Only that family sees them.
 - **Sharing recipes** (`src/worker/sharing.js`): a parent shares a recipe as General or Feast day. One from our ingredient list goes straight into **User-shared recipes**, with no family named; a typed-in ingredient waits for the owner's review; a feast-day recipe flagged for leaven gets the owner's notice with Send for review and Share recipe. Any family can search the directory, add a recipe to its own, and report one.
 - **Owner: Recipe reviews and Reported recipes**: clear or decline a review (deciding the Unleavened badge), and hide or unhide any shared recipe.
+- **Swap for an Appointed Time meal instead** (`src/worker/swap.js`): in a queued lesson's "⋯" menu, parents only. February 1 to May 15 it offers only unleavened meals (the unit's lessons, other lessons, then recipes); the rest of the year, the unit and every feast-day recipe. A course lesson goes first next week and never counts as behind; a hand-queued one comes off. Undo swap puts it back.
 - **Unleavened badge** (`src/content/leaven.js`, `content/rules/leaven.json`): on every lesson whose ingredients and steps have no leaven.
 - **Parent menu**: every parent screen behind one Menu button, in groups: Learning path, Recipes, Setup, and Owner (the owner only).
 - **Dish cards**: on the queue and course screens, a dish's name opens a card with a line about it, its main ingredients, how it cooks, and the time.

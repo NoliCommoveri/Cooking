@@ -20,6 +20,7 @@ import { localDay, isSabbath } from './schedule.js';
 import { register as registerShopping } from './shopping.js';
 import { register as registerRecipes, lessonFor, recipeNames } from './recipes.js';
 import { register as registerSharing } from './sharing.js';
+import { register as registerSwap } from './swap.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -754,6 +755,7 @@ registerPlan(on);
 registerShopping(on);
 registerRecipes(on);
 registerSharing(on);
+registerSwap(on);
 
 // ---------- dispatch ----------
 

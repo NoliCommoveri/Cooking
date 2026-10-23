@@ -1912,3 +1912,37 @@ on it.
   can't be queued or started again, but cooks of it keep its name.
 - The player's kicker reads "User-shared recipe" for these.
 - Tests: 194.
+
+## 77. 2026-10-23 — Phase 4c, slice 4: Swap for an Appointed Time meal
+
+- **The swap** (`src/worker/swap.js`, §6.19): every queued lesson on the
+  parent's queue, and every course lesson in this week's plan, has a "⋯"
+  menu with **Swap for an Appointed Time meal instead**. It opens a picker
+  for the week being swapped (a course lesson's week, a planned date's week,
+  or this week):
+  - **February 1 through May 15** (any day Sunday to Friday of that week in
+    the window): only Unleavened meals, in order: the Appointed Times
+    lessons, other lessons that pass the leaven check, then parent recipes
+    that pass it: the family's own, then User-shared recipes;
+  - **the rest of the year**: the Appointed Times lessons and every Good for
+    Feast Days recipe (the family's own shared as feast day, and the
+    directory's), unleavened or not.
+  - The family's diet settings apply. Picking a User-shared recipe adds it to
+    the family's recipes first.
+- **What a swap does:** the meal is queued for the same profiles and
+  servings (the nearest size it makes). A course lesson stays in the plan
+  and goes first next week, and the rest move back: `course_weeks.swapped`
+  takes a place at the pace for that week, so the planned finish moves back
+  too and the course is never "behind" for it (schedule.js). A lesson queued
+  by hand comes off the queue. **Undo swap** on the swapped-in meal reverses
+  either; the swapped-out lesson isn't offered under Recently taken off.
+- **Migration 0012** adds `queue.swap_of` and `course_weeks.swapped`. **The
+  owner presses Apply pending on `/ops`** after this deploys.
+- Tests: 201 (the window's edges, both pickers' order and contents, diet
+  settings, a hand-queued swap and its Undo, a course swap that moves the
+  lesson to next week and the planned finish with it, picking a shared
+  recipe, family scoping). Checked in a browser.
+- One run of the whole suite failed the shopping-list test once and passed
+  on every re-run (18 more); it looks like a timing flake already there
+  (queue rows created in the same millisecond sort by a random id), not
+  this change.

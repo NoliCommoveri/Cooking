@@ -81,3 +81,21 @@ test('Saturday is the Sabbath', () => {
   assert.equal(isSabbath('2026-10-23'), false);
   assert.equal(isSabbath('2026-10-25'), false);
 });
+
+test('a swap for an Appointed Time meal takes a place this week: the lesson goes first next week, and it never counts as behind', () => {
+  // Week 2, one lesson a week: c is up, and the parent swaps it for a feast meal.
+  const one = { start_date: '2026-09-06', per_week: 1 };
+  const done = { a: '2026-09-07' };
+  const plain = schedule({ course: one, lessons: L, done, today: '2026-09-14' });
+  assert.deepEqual(ids(plain.this_week), ['b']);
+  const weeks = { '2026-09-13': { swapped: 1 } };
+  const s = schedule({ course: one, lessons: L, done, weeks, today: '2026-09-14' });
+  assert.deepEqual(ids(s.this_week), [], 'nothing else is pulled in');
+  assert.deepEqual(ids(s.next_week), ['b'], 'it goes first next week');
+  assert.equal(s.planned_finish, addDays(plain.planned_finish, 7), 'the planned finish moves back a week');
+  // A week later, b not cooked in the swapped week isn't late.
+  const later = schedule({ course: one, lessons: L, done, weeks, today: '2026-09-21' });
+  assert.equal(later.weeks_behind, 0);
+  assert.equal(later.lessons_behind, 0);
+  assert.deepEqual(ids(later.this_week), ['b']);
+});

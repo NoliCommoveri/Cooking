@@ -844,7 +844,8 @@ const parentQueue = parentOnly(async (flash) => {
         actBtn('Skip this recipe', '', async () => {
           await api('POST', `/api/courses/${c.id}/skip-recipe`, { lesson_id: x.lesson_id });
           again(`Skipped ${x.title}. The next lesson takes its place.`, () => api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }));
-        })));
+        }),
+        x.queue_id ? moreMenu(x, x.queue_id) : null));
     const tw = c.this_week;
     return el('section', { class: 'card qcourse' },
       el('div', { class: 'rowi' },
@@ -889,15 +890,44 @@ const parentQueue = parentOnly(async (flash) => {
   };
 
   // ---- lessons queued by hand ----
+  // Swap for an Appointed Time meal instead (§6.19): kept in a "⋯" menu, not on the card.
+  const swapPicker = async (qid, title) => {
+    const d = await api('GET', `/api/queue/${qid}/swap?${tz()}`);
+    const close = () => ov.remove();
+    const groups = [...new Set(d.options.map((o) => o.group))];
+    const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Swap for an Appointed Time meal' },
+      el('div', { class: 'card' },
+        el('h2', {}, 'Swap for an Appointed Time meal'),
+        el('p', { class: 'mut' }, `Instead of ${title}${d.spring ? '. Spring: unleavened meals only.' : '.'}`),
+        groups.length ? groups.map((g) => [el('h3', {}, g), el('div', { class: 'rows' }, d.options.filter((o) => o.group === g).map((o) => el('div', { class: 'rowi with-av' },
+          el('img', { src: o.image, alt: '', width: 48, height: 48 }),
+          el('div', {}, el('b', {}, el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(o.id) }, `${o.label ? `${o.label} · ` : ''}${o.title}`)),
+            o.unleavened || o.feast ? el('div', { class: 'badges' }, o.unleavened ? badge('i-unleavened', 'Unleavened') : null, o.feast ? badge('i-feast', 'Good for Feast Days') : null) : null),
+          el('div', { class: 'acts' }, actBtn('Pick', 'pri', async () => {
+            const res = await api('POST', `/api/queue/${qid}/swap?${tz()}`, { lesson_id: o.id });
+            close();
+            again(`Swapped ${title} for ${o.title}.`, () => api('POST', `/api/queue/${res.id}/unswap`));
+          })))))])
+          : el('p', {}, 'Nothing to offer for that week yet.'),
+        el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: close }, 'Cancel'))));
+    document.body.append(ov);
+  };
+  const moreMenu = (x, qid) => el('details', { class: 'more' },
+    el('summary', { 'aria-label': `More for ${x.title}` }, '⋯'),
+    el('div', { class: 'more-menu' }, el('button', { type: 'button', class: 'hbtn link', onclick: (e) => { e.target.closest('details').open = false; swapPicker(qid, x.title); } }, 'Swap for an Appointed Time meal instead')));
+
   const queuedRow = (x) => el('div', { class: 'rowi qrow' },
     el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
       el('small', {}, `For ${names(x.profile_ids)}${x.planned_date ? ` · ${fmtDay(x.planned_date)}` : ''}${x.status === 'shopped' ? ' · Shopped for' : ''}`),
       el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id))),
     el('div', { class: 'acts' }, servingsPick(x, setServings(x.id)),
-      actBtn('Remove', '', async () => {
-        await api('DELETE', `/api/queue/${x.id}`);
-        again(`Took ${x.title} off the queue.`, () => api('POST', `/api/queue/${x.id}/put-back`));
-      })));
+      x.swap
+        ? actBtn('Undo swap', '', async () => { await api('POST', `/api/queue/${x.id}/unswap`); again(`Undid the swap for ${x.title}.`); })
+        : actBtn('Remove', '', async () => {
+          await api('DELETE', `/api/queue/${x.id}`);
+          again(`Took ${x.title} off the queue.`, () => api('POST', `/api/queue/${x.id}/put-back`));
+        }),
+      x.swap ? null : moreMenu(x, x.id)));
 
   // ---- add a lesson ----
   const note = el('p', { class: 'mut small note', hidden: true }, 'Most lessons use knife work. We suggest a Unit 1 lesson first.');

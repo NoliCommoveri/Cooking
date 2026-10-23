@@ -24,7 +24,7 @@ export const DUE_DAY = 5;
 // lessons: the lesson ids the schedule can use, in plan order (written, kept in
 //   the plan, and not hidden by the family's diet settings)
 // done: { lesson id: the day it was first cooked on this course }
-// weeks: { week's Sunday: { skipped, extra } }
+// weeks: { week's Sunday: { skipped, extra, swapped } }
 // today: the family's calendar day
 //
 // Returns this week and next week ({ week, lessons: [{ id, done, overdue }],
@@ -37,13 +37,18 @@ export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
   const now = weekOf(today);
   const skipped = (w) => Boolean(weeks[w]?.skipped);
   const extra = (w) => (w === now ? weeks[w]?.extra ?? 0 : 0);
+  // A week's course lessons swapped for an Appointed Time meal (§6.19). Each
+  // one takes a place at the pace, so the rest move back and the planned
+  // finish moves with them: a swap never counts as behind (owner, 2026-10-22).
+  const swapped = (w) => weeks[w]?.swapped ?? 0;
+  const capOf = (w) => Math.max(0, per - swapped(w));
 
   // Every lesson at the pace, from the start, skipping the skipped weeks: the
   // week the course was set to finish.
-  const finishFrom = (from, count, firstCap = per) => {
-    let w = from, left = count, cap = firstCap;
+  const finishFrom = (from, count, firstCap) => {
+    let w = from, left = count, cap = firstCap ?? capOf(from);
     if (left <= 0) return null;
-    for (let guard = 0; guard < 1000; guard++, w = addDays(w, 7), cap = per) {
+    for (let guard = 0; guard < 1000; guard++, w = addDays(w, 7), cap = capOf(w)) {
       if (skipped(w)) continue;
       left -= Math.max(0, cap);
       if (left <= 0) return w;
@@ -56,9 +61,9 @@ export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
   // skipped: what was due by now and what got done.
   const doneIds = lessons.filter((id) => done[id]);
   const doneBefore = doneIds.filter((id) => done[id] < now).length;
-  let weeksBefore = 0;
-  for (let w = start; w < now; w = addDays(w, 7)) if (!skipped(w)) weeksBefore++;
-  const behindLessons = Math.max(0, Math.min(lessons.length, per * weeksBefore) - doneBefore);
+  let dueBefore = 0;
+  for (let w = start; w < now; w = addDays(w, 7)) if (!skipped(w)) dueBefore += capOf(w);
+  const behindLessons = Math.max(0, Math.min(lessons.length, dueBefore) - doneBefore);
 
   // This week: what was cooked this week, then the next unfinished lessons up
   // to the week's pace plus any extras. An unfinished lesson from an earlier
@@ -66,10 +71,10 @@ export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
   const open = lessons.filter((id) => !done[id]);
   const fill = (w, from, cookedHere) => {
     if (w < start) return { list: [], next: from };
-    const cap = skipped(w) ? 0 : per + extra(w);
+    const cap = skipped(w) ? 0 : capOf(w) + extra(w);
     const room = Math.max(0, cap - cookedHere.length);
     // The ones past the pace are this week's extras (Cook another recipe).
-    const paced = skipped(w) ? 0 : Math.max(0, per - cookedHere.length);
+    const paced = skipped(w) ? 0 : Math.max(0, capOf(w) - cookedHere.length);
     return { list: open.slice(from, from + room), next: from + room, paced };
   };
   const cookedNow = doneIds.filter((id) => done[id] >= now && done[id] < addDays(now, 7));
@@ -80,13 +85,14 @@ export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
   const ahead = [];
   for (let w = addDays(next, 7), from = b.next, guard = 0; from < open.length && guard < 520; w = addDays(w, 7), guard++) {
     if (w < start || skipped(w)) continue;
-    ahead.push({ week: w, lessons: open.slice(from, from + per) });
-    from += per;
+    ahead.push({ week: w, lessons: open.slice(from, from + capOf(w)) });
+    from += capOf(w);
   }
   const week = (w, list, cooked, overdueCount, paced = list.length) => ({
     week: w,
     skipped: skipped(w),
     extra: extra(w),
+    swapped: swapped(w),
     lessons: [
       ...cooked.map((id) => ({ id, done: true, overdue: false, extra: false })),
       ...list.map((id, i) => ({ id, done: false, overdue: i < overdueCount, extra: i >= paced })),
@@ -97,7 +103,7 @@ export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
   let projected;
   if (!open.length) projected = doneIds.length ? weekOf(doneIds.map((id) => done[id]).sort().at(-1)) : null;
   else {
-    const thisRoom = now < start || skipped(now) ? 0 : Math.max(0, per + extra(now) - cookedNow.length);
+    const thisRoom = now < start || skipped(now) ? 0 : Math.max(0, capOf(now) + extra(now) - cookedNow.length);
     projected = now < start ? finishFrom(start, open.length) : finishFrom(now, open.length, thisRoom);
   }
   const weeksBehind = planned && projected && projected > planned ? Math.round((toDate(projected) - toDate(planned)) / (7 * DAY)) : 0;
