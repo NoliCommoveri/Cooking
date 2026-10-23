@@ -1219,6 +1219,355 @@ export const LIBRARY = {
    "protein": "vegetarian"
   },
   {
+   "id": "honey-garlic-chicken",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Honey-garlic chicken",
+   "image": "img/dishes/honey-garlic-chicken.webp",
+   "cuisine": "chinese-american",
+   "skill": "Building a sauce",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, brown the chicken in three batches instead of two, so the pan never gets crowded."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "cornstarch"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "vinegar-rice"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "sesame-seeds",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "chicken"
+  },
+  {
+   "id": "chicken-fried-rice",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Chicken fried rice",
+   "image": "img/dishes/chicken-fried-rice.webp",
+   "cuisine": "chinese",
+   "skill": "High-heat stir-fry, day-old rice",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "For 7 or 8, the pan is very full. Fry the rice in two batches, and stir half the egg, chicken, and sauce into each."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "chicken-breast"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "peas-carrots-frozen"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "sesame-oil"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "chicken"
+  },
+  {
+   "id": "oyakodon",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Oyakodon",
+   "image": "img/dishes/oyakodon.webp",
+   "cuisine": "japanese",
+   "skill": "Simmering, setting egg gently",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, cook the chicken and egg in two skillets side by side, with half of everything in each."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "mirin"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "green-onion"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "mirin",
+     "use": "vinegar-rice",
+     "reason": "availability"
+    },
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "chicken"
+  },
+  {
+   "id": "chicken-adobo",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Chicken adobo",
+   "image": "img/dishes/chicken-adobo.webp",
+   "cuisine": "filipino",
+   "skill": "Braising, reducing",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, brown the chicken in three batches, and make sure your pot holds it all in about two layers."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "vinegar-white"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "brown-sugar"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "peppercorns-black"
+    },
+    {
+     "ingredient": "green-onion",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "chicken"
+  },
+  {
+   "id": "breakfast-burritos",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Breakfast burritos",
+   "image": "img/dishes/breakfast-burritos.webp",
+   "cuisine": "american",
+   "skill": "Timing several components, rolling",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, cook the potatoes in two batches so they crisp instead of steaming."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "potato-russet"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "turkey-sausage-bulk"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "tortilla-burrito"
+    },
+    {
+     "ingredient": "cheddar-shredded"
+    },
+    {
+     "ingredient": "salsa",
+     "optional": true
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "tortilla-burrito",
+     "use": "tortilla-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "protein": "other"
+  },
+  {
    "id": "beef-bulgogi",
    "version": 1,
    "track": "core",
@@ -1658,6 +2007,10 @@ export const LIBRARY = {
    "name": "Baking soda",
    "contains": []
   },
+  "honey": {
+   "name": "Honey",
+   "contains": []
+  },
   "vanilla-extract": {
    "name": "Vanilla extract",
    "contains": []
@@ -2003,6 +2356,58 @@ export const LIBRARY = {
   },
   "spaghetti-gluten-free": {
    "name": "Gluten-free spaghetti",
+   "contains": []
+  },
+  "cornstarch": {
+   "name": "Cornstarch",
+   "contains": []
+  },
+  "vinegar-rice": {
+   "name": "Rice vinegar",
+   "contains": []
+  },
+  "mirin": {
+   "name": "Mirin (sweet rice cooking wine)",
+   "contains": []
+  },
+  "broth-chicken": {
+   "name": "Chicken broth",
+   "contains": [
+    "meat"
+   ]
+  },
+  "peas-carrots-frozen": {
+   "name": "Frozen peas and carrots",
+   "contains": []
+  },
+  "bay-leaves": {
+   "name": "Dried bay leaves",
+   "contains": []
+  },
+  "peppercorns-black": {
+   "name": "Whole black peppercorns",
+   "contains": []
+  },
+  "turkey-sausage-bulk": {
+   "name": "Bulk turkey breakfast sausage (no casing)",
+   "contains": [
+    "meat"
+   ]
+  },
+  "cheddar-shredded": {
+   "name": "Shredded cheddar cheese",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "tortilla-burrito": {
+   "name": "Burrito-size flour tortillas (10-inch)",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "tortilla-gluten-free": {
+   "name": "Gluten-free tortillas",
    "contains": []
   }
  },

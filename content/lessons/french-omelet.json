@@ -7,7 +7,7 @@
   "image": "dishes/french-omelet.png",
   "cuisine": "french",
   "skill": "Heat control, rolling an omelet",
-  "skills": ["heat-control", "poaching-eggs"],
+  "skills": ["heat-control"],
   "prereqs": [],
   "servings": 6,
   "totalMinutes": 35,
