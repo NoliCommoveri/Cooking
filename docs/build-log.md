@@ -2573,3 +2573,27 @@ the next was started.
   it again (back after 10.0s, then "Ready to see the next screen?"), her
   button bringing her back early, then Stop the tour (only Thanks, Chef Ruth!
   shown, and it closes her chat).
+
+## 105. 2026-10-23 — Chef Ruth's buttons in the chat, and a one-time Getting started
+
+- **Owner ruling: her buttons are part of the chat.** Before, her answer
+  buttons and forms sat in a bar pinned to the bottom of her panel. Now they
+  sit right under her last message, on the parent's side like a reply,
+  outlined in the accent color with a chat-bubble corner, and scroll with
+  the chat. A form (a PIN, a kid login) is a card across the chat. Built in
+  `public/ruth.js` (`chatPanel`: the panel is the last thing in the chat log,
+  and each line lands above it) and `public/app.css`.
+- **Owner ruling: Getting started is one-time.** Run again from her menu, it
+  was always offered. Now **Getting started (change your setup)** leaves her
+  menu once the family has a lesson in the queue (assigned or shopped, or
+  cooked from the queue) or a finished cook that wasn't taken back with
+  Didn't make it. `/api/me` reports it as `family.cooking` (parents only),
+  and her menu asks for `/api/me` again when it opens, so it's current. A
+  removed or declined lesson doesn't count. Until migration 0015 is applied
+  on `/ops` it reads as not cooking, so the button stays. A new family's
+  required Getting started isn't affected.
+- Plan §6.8 and §6.9 say so; README updated.
+- Tests: 244 (one new: the flag across queuing, removing, an unfinished and
+  a finished cook, Didn't make it, and another family). Checked in a browser
+  at phone width on a stubbed app: the buttons are inside the chat log,
+  under her line, and her menu shows Getting started only when not cooking.
