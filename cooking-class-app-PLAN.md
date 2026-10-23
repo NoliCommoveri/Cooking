@@ -400,6 +400,7 @@ Do **not** use:
 
 ### 6.1 Kid features
 - Profile picker (chef lockers), showing only this family's profiles. For a lesson queued for several profiles, any of them can start it, and the cook is shared
+- **Kid login** (owner, 2026-10-23): a kid with their own username and password skips the lockers and lands in their own kitchen, with no parent screens (§8.3a)
 - **The kitchen in two tabs** (owner, 2026-10-23), pinned to the bottom where a thumb is, as in MCCE Kids, drawn by the theme: **Main quest / My journey** (what's queued for this profile, then the next three lessons on its path, a pick-one group counting once) and **Side quests / More recipes** (every unit, the Appointed Times unit with its User-shared shelf, and Our recipes, each folded shut, with a search over dish names and ingredients that opens what matches). Kids never see all the lessons at once. Progress and rewards become a third tab with Phase 5
 - Lesson browser by unit (in More recipes), with locked lessons whose prerequisites this profile hasn't done shown as a "coming up" card (not hidden)
 - Full lesson flow (§3)
@@ -424,7 +425,7 @@ Do **not** use:
 - **Kitchen staples:** ingredients the family usually has, grouped as "May already have" on lists (§6.3)
 - **Delete our family** and **Download our data** (§6.14)
 - **Print our progress** (§6.15)
-- **Family settings:** family name, profiles (add, rename, avatar, theme, who's on each), dietary filters (§2.1), default servings, voice step control (off until turned on, §6.12), other parent logins
+- **Family settings:** family name, profiles (add, rename, avatar, theme, who's on each), dietary filters (§2.1), default servings, voice step control (off until turned on, §6.12), other parent logins, and each kid profile's login: username, password, log out everywhere, turn off (§8.3a)
 
 ### 6.2a Owner features
 - Set, change, or turn off the **beta word** (§8.3), and see how many sign-ups are waiting on their email code
@@ -714,13 +715,13 @@ The linter must **warn** (without failing the build) when:
 
 ### 6.13 Website and legal pages — Requirement (owner, 2026-10-22)
 The app lives at **`cleanplate.immotus.app`**, and its front door is a simple public website.
-- **Landing page** at `/` for anyone not logged in: what the app is in a few lines (a cooking course for kids, one skill and one real dish per lesson, with biblically clean recipes), a few dish pictures, and **Sign up** and **Log in**. A logged-in device goes straight to the chef's lockers.
+- **Landing page** at `/` for anyone not logged in: what the app is in a few lines (a cooking course for kids, one skill and one real dish per lesson, with biblically clean recipes), a few dish pictures, and **Sign up** and **Log in**. A logged-in device goes straight to the chef's lockers, or, on a kid login (§8.3a), straight to that kid's kitchen.
 - **Publisher: Immotus Apps** (owner, 2026-10-22). The landing page, the demo page, and the privacy policy and terms name it as the publisher.
 - **Privacy policy** (`/privacy`) and **terms of use** (`/terms`), short and plain, linked from the landing page and the sign-up page. Sign-up says "By signing up you agree to the terms and privacy policy."
 - The words are the owner's. Claude drafts them from the points below, and the owner approves or rewrites them before launch. **They aren't legal advice**, and the owner should have someone qualified read them.
 - **What the privacy policy covers** (what's true of the app as built):
   - What's stored: parent emails, hashed passwords and PIN, the family name, profile names and avatar colors, theme, diet settings, what each profile has cooked, ratings and reflections, and photos.
-  - Kids don't have accounts. A parent makes each profile and chooses its name; first names or nicknames are enough.
+  - Kids don't have email accounts. A parent makes each profile and chooses its name; first names or nicknames are enough. A parent can give a kid profile a username and password (§8.3a); the password is stored hashed, and no email or other contact detail is asked for.
   - Who sees it: only the family. The owner sees family names, profile counts, and last-active dates, and nothing else.
   - No ads, no selling or sharing of data, no tracking or analytics scripts.
   - Photos are kept only for families the owner has turned them on for.
@@ -848,12 +849,52 @@ A backend is needed because the app is multi-family: each family's progress, que
   - **Password reset by email,** sent through **Resend**. "Forgot password" emails a one-time link that expires after an hour. The owner can also set a new password from the owner screens (§6.2a) as a fallback.
   - **Not included, on purpose:** two-factor login, and rate limiting beyond the platform defaults and the 10-minute wait between codes.
   - **Revisit if:** sign-ups are abused (strangers' addresses used to send codes); the human check above is the first answer.
-- **Kids don't log in.** A device logged in as a family shows the profile picker (chef lockers).
+- **Family devices:** a device logged in as a parent shows the profile picker (chef lockers), as now.
+- **Kid logins** (§8.3a): a kid profile can also have its own username and password, set by a parent. A device logged in that way opens only that kid's kitchen.
 - **Parent PIN: required,** one per family, set during the first run (§6.9). Kitchen devices are logged in as a parent, so every parent-only screen asks for the PIN, including approving a kid's lesson request. Stored as a hash. It's a convenience lock, not a security boundary.
   - A forgotten PIN is reset by a parent entering their account password.
 - **Family scoping:** every API query filters by the logged-in session's `family_id`. No endpoint accepts a family ID from the client.
   - **The one exception** is the owner's endpoints (§6.2a). They're open only to a parent with `is_owner`, and they return family names, kid counts, and last-active dates. Nothing else.
 - **Photos:** stored in R2 under `families/{family_id}/…`, served only through the Worker after checking the session's family. R2 is not exposed publicly.
+
+### 8.3a Kid logins — Requirement (owner, 2026-10-23)
+**What the owner asked for** (Requirement):
+- A kid can have their own login: a **username and password, both set by a parent**.
+- A kid login has **no chef's lockers and no parent screens**. It goes straight to that kid's kitchen.
+- **Parent and adult logins work as they do now:** email and password, the lockers, the parent PIN, and the parent screens.
+
+**How it works** (Recommendation unless marked; ask the owner before building to anything still open in "To confirm" below):
+- **Optional, per profile.** A family that keeps using one parent-logged-in device with the lockers changes nothing. A kid login is something a parent adds to a profile.
+- **Kid profiles only.** Only a profile marked kid (§1) can have a login, a shared profile with a kid on it included; one login per profile, so the kids sharing it share the login. Adult learners keep using the lockers on a parent login (owner: adult logins work as now). Changing a profile to adult turns its login off.
+- **Setting it up** (Parents → Profiles → the profile, behind the PIN): a **Kid login** part of the profile editor with:
+  - **Username:** 3 to 20 letters, numbers, `.`, `-`, or `_`, no `@` (so it can't be mistaken for an email), not case-sensitive. Unique across the whole app, since the login screen has nothing else to tell two families apart; a taken one says "That username is taken. Try another." The parent sees the username on the profile; the app suggests one from the profile's name.
+  - **Password:** at least 6 characters, typed twice, with a Show button. The parent never sees it again after saving; **Change password** sets a new one.
+  - **Turn off login**, which signs the kid out everywhere and removes the username and password. It deletes no cooks, progress, or photos, and the parent can turn it on again at any time with a new password (the restore rule in `CLAUDE.md`).
+  - A line saying where the kid is logged in: "Logged in on 2 devices · Log out everywhere".
+- **Forgotten password:** there's no email, so a parent sets a new one on the profile editor. The login screen tells a kid "Forgot your password? Ask a grown-up to set a new one." The owner's set-a-password fallback (§6.2a) stays for parents only.
+- **Logging in.** The same Log in screen, with its first field relabeled **Email or username**: anything with an `@` is a parent email, anything else a kid username. "Kid? Use the username a grown-up gave you." Wrong details say "That username and password don't match," the same as for parents.
+- **The kid session.** A long-lived httpOnly cookie, like a parent's (§8.3), kept in `kid_sessions` (§8.4) and carrying only the family and that one profile. A device is logged in as a parent or as a kid, never both; logging in as one logs the other out on that device.
+- **What a kid login sees.**
+  - Opening the app goes **straight to that kid's kitchen**, with its three tabs (§6.1), lessons, celebrations, sound, and theme picker. Every other address in the app (the lockers, another profile's kitchen, `#/parent/…`, the first-run wizard) sends them back to it.
+  - **Gone:** the Parents menu and button, the switch-profile or back-to-lockers control, the test-cook notice, Suggest a fix (it's behind the parent PIN), and the "⋯" queue menu.
+  - A small **Log out** in the kitchen's settings, with "Log out of this device?" to confirm. It doesn't ask for the PIN.
+  - Kept: "I want to make this" (the request goes to the parents' Queue, §6.1), cooking a queued lesson, Reflect, and photos where the family has them on.
+  - **Cooking with someone?** still lists the family's other profiles by name and avatar, so siblings can cook together; the cook is saved for each of them, as now.
+- **A grown-up step on a kid's device.** Where a kid profile needs a grown-up today (Ask a grown-up to start, §6.1), the grown-up types the **family PIN** right there and picks Add as an additional assigned meal or Replace an assigned meal. On a kid login the PIN **approves that one action and unlocks nothing else**: it is sent with that request, checked, and never opens a parent screen or sets the session's PIN timer.
+- **The server enforces it, not just the screens.** Every route stays family-scoped (§8.3), and a kid session is further limited to its own profile:
+  - **Allowed:** who am I, logging out, the lesson library and live patches, the family's recipes and the User-shared shelf (read only), the family's profile names and avatars (for Cooking with someone?), and, for **its own profile only**, the kitchen queue, cooks, asking for a lesson, the theme, saving a cook it's on, its reflection, photos on its cooks, and the PIN-approved start above.
+  - **Refused** with "Ask a grown-up," everything else: every parent and owner route, the PIN unlock, another profile's queue or cooks, and a reflection for another profile. A route added later is refused for kid sessions unless it's put on the allowed list.
+- **Ends a kid's sessions:** Change password, Turn off login, Log out everywhere, the profile being deleted or changed to adult, and the family being deleted (§6.14). A family restored from `/ops` within its grace period gets its kid logins back, with everyone logged out.
+- **Offline cooks** (§6.2, Phase 2d): a cook saved on a device for a profile the logged-in session can't send (another profile's cook, left from a parent login) stays on the device until a session that can send it logs in.
+- **Security stays basic** (§2.5): hashed passwords (the same PBKDF2 as parents'), no two-factor, no lockout. **Revisit if** someone guesses a kid's password: a short wait after several wrong tries is the first answer.
+- **Migration:** `kid_logins` and `kid_sessions` (§8.4), bundled with the Worker. After it deploys, the owner presses **Apply pending** on `/ops`. Nothing to set up in the Cloudflare dashboard. The family backup, the full backup, and Download our data include `kid_logins` (password hashes only, as for parents); sessions are never exported.
+- **The parent tour** (§6.9) gets a card: "Give a kid their own login."
+
+**To confirm with the owner before building:**
+1. Usernames unique across the whole app (one plain login box), or unique within a family with a short family code typed in too.
+2. A kid login for kid profiles only, or for adult learners too (then adults would also skip the lockers and parent screens).
+3. Log out on a kid's device without the PIN, or behind it, so a kid can't hand the device to a sibling's login.
+4. At least 6 characters for a kid password, or a shorter minimum, or a picture password.
 
 ### 8.4 Data model (D1)
 Every table holding a family's data carries `family_id`. `families` is the family itself. `signup_verifications`, `settings`, `community_recipes`, and `lesson_patches` belong to the owner or the whole app, not to a family.
@@ -869,6 +910,8 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `community_recipes` (id, family_id, family_recipe_id, kind: general | feast, title, meal_type, body_json, unleavened, shared_at, updated_at, withdrawn_at, hidden_at). The directory's copy of a shared recipe. `family_id` lets the sharing family update or withdraw it and goes with the family; it is never shown to anyone
 - `recipe_reports` (id, family_id, community_recipe_id, kind, note, created_at, status: open → hidden | dismissed, decided_at) (§6.10)
 - `sessions` (id, parent_id, family_id, created_at, last_seen, pin_until). `id` is a hash of the cookie's token; `pin_until` is when the parent PIN must be entered again on that device
+- `kid_logins` (profile_id, family_id, username, password_hash, created_at, updated_at). One per kid profile at most (§8.3a); `username` is stored lowercased and is unique across the whole app
+- `kid_sessions` (id, profile_id, family_id, created_at, last_seen). Like `sessions`, `id` is a hash of the cookie's token. Not in backups, like `sessions`
 - `profiles` (id, family_id, name, avatar, people, theme, audience: kid | adult, track: core | beginner). One person or several sharing it (§1); `people` lists each person's name and avatar color so a shared locker shows everyone
 - `queue` (id, family_id, lesson_id, servings, planned_date, status: requested → assigned → shopped → cooked, requested_by_profile_id, course_id, source: manual | request | course, swap_of). A queued item is a library lesson or one of the family's recipes, whose `lesson_id` is `recipe:<id>` (the same on `attempts` and shopping lists). A swap (§6.19) is a queue row whose `swap_of` names what it replaced: `q:<queue id>` for a lesson queued by hand, or `c:<course id>:<lesson id>` for a course lesson. A course's lessons are queued with `course_id` set; their week comes from the schedule, not `planned_date`
 - `courses` (id, family_id, name, code, school_year, start_date, per_week, created_at, archived_at) (§6.18)
@@ -917,6 +960,7 @@ Each phase should be deployed and usable before the next begins.
 | **4b. Homeschool mode** | Course details (name, code, school year), optional grading (not offered on the Sabbath, §6.18), and the transcript (§6.15, §6.17) | A parent in homeschool mode grades a cook and prints a transcript; switching back to casual hides it all and loses nothing |
 | **4c. Appointed Times and shared recipes** (built next, owner, 2026-10-22) | The Appointed Times unit and its first lessons, the leaven list and check, the two badges, Swap for an Appointed Time meal instead with the spring filter (§6.19); My recipes with the guided entry flow, sharing with its notices, owner review, Report and Hide, the community directory, and the meal-type art (§6.10). Pulled forward from Phase 9 because sharing recipes is central for this unit (owner, 2026-10-22) | A parent enters a recipe through the flow and a kid cooks it; another test family finds it in the directory and adds it. A parent shares a feast-day recipe that passes and one that's flagged; the flagged one is sent for review and cleared from the owner screens; a recipe with a typed-in ingredient can't be shared until the owner clears it; a reported recipe is hidden and unhidden; in a test dated in March or on May 15, Swap shows only Unleavened recipes in the right order, and in June it shows every feast recipe |
 | **5. Progress & delight** | Course progress, ranks, skills earned, celebrations, sound, and the art for them, in both built themes | Completing a lesson earns its reward and skill with full animation in both themes |
+| **5b. Kid logins** (next, owner, 2026-10-23) | A username and password for a kid profile, set by a parent; the kid login session, scoped to that one profile; the login screen taking an email or a username; the kid's device opening straight to their kitchen, with no lockers and no parent screens; the parent's controls on the profile editor; the migration (§8.3a) | A parent gives one of two siblings a login. On a second device, that kid logs in and lands in their kitchen, cooks a queued lesson, and sees the reward. That device can't reach the lockers, the other sibling's kitchen, or any parent screen, by tapping or by typing an address, and the API refuses the parent routes even with the PIN. Off-path cooking still asks a grown-up for the PIN, right there. The parent changes the password and the kid's device is logged out. Parent logins work as before |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
 | **8. Helper & first run** | First-run wizard (§6.9) and the helper (§6.8), once both are specced | A new family goes from sign-up to their first queued lesson through the wizard, and kids and parents can each finish a helper task |
@@ -926,6 +970,8 @@ Each phase should be deployed and usable before the next begins.
 **Phase 2d waits (owner, 2026-10-22):** the installable PWA and cooking offline (Phase 2's slice 2d) are built once pretty much everything else is done, not before Phase 2e. Until then, Phase 2's "Wi-Fi off partway through" check waits with it.
 
 **Phase 3 rulings (owner, 2026-10-22):** Phase 3 comes before Phase 1c. Course plans and the weekly schedule (§6.18) move into Phase 3, slice 3a, with the queue; grading and the transcript stay in 4b. Kids' lesson requests are built. Package rounding is in Phase 3: every ingredient gets its store package sizes, and the registry's store sections become §6.3's list. The offline shopping list waits with 2d.
+
+**Phase 5b is next (owner, 2026-10-23):** kid logins (§8.3a), after Phase 5 and before Phase 6.
 
 **Phase 4c is next (owner, 2026-10-22):** Appointed Times and shared recipes (§6.19, §6.10), with family recipes pulled forward from Phase 9, are built next: after Phase 4's first part (Reflect, Print our progress, the photos switch), before the rest of Phase 4 and before 4b.
 
