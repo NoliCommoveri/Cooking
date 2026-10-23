@@ -2120,3 +2120,31 @@ on it.
 - Tests: 222. Checked in a browser at phone width: the toggle both ways, the
   dialog, and adding a lesson from it.
 
+## 84. 2026-10-23 — Parent screens: add buttons on top, dialogs, folded sections
+
+- **CLAUDE.md:** added the owner's rule, under "Parent screens": adding
+  something new opens in a dialog from a button; a flow too big for a dialog
+  opens as its own page from a button.
+- **Add buttons** sit at the top right of each list (`addHead`): + Add a
+  profile, + Add a parent, + Set up a course, + Add a recipe, + Make a
+  shopping list, beside + Add a lesson on the queue.
+- **In dialogs now:** adding a profile (the form is shared with the edit page,
+  `profileForm`; `#/parent/profiles/new` opens the list with the dialog up),
+  adding a parent, and making a shopping list. Setting up a course and adding
+  a recipe stay pages: the course editor is long and the recipe builder has
+  several steps. A dialog closes when the page changes.
+- **Course editor:** Save and the other buttons are at the top and stay in
+  view while scrolling (`form(..., { top: true })`). A lesson row is tighter:
+  smaller type and line spacing, a smaller number, no box around a dish, and
+  34px move buttons.
+- **Shopping:** every week of "What you'll need" is folded shut, with its
+  lesson count. The page went from about 6,250px tall to about 1,100px at
+  phone width.
+- **Kitchen staples:** each store section folds shut, with "N of M on hand"
+  and Save at the top. The checkboxes are a tight two-column list. About
+  4,700px tall before, about 1,450px now.
+- **Family settings:** Save is at the top; the diet checkboxes are a tight
+  list; the voice control's where-it-works and privacy note is folded.
+- Tests: 222. Checked in a browser at phone width: every parent page, and
+  adding a profile, a parent, and a shopping list from their dialogs.
+

@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [83. 2026-10-23 — The queue: Add a lesson in a dialog, and a Course / Additional toggle](docs/build-log.md#83-2026-10-23--the-queue-add-a-lesson-in-a-dialog-and-a-course--additional-toggle)
+**Latest build log entry:** [84. 2026-10-23 — Parent screens: add buttons on top, dialogs, folded sections](docs/build-log.md#84-2026-10-23--parent-screens-add-buttons-on-top-dialogs-folded-sections)
 
 ## Current features
 
@@ -42,7 +42,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Unleavened badge** (`src/content/leaven.js`, `content/rules/leaven.json`): on every lesson whose ingredients and steps have no leaven.
 - **Parent menu**: every parent screen behind one Menu button, in groups: Learning path, Recipes, Setup, and Owner (the owner only).
 - **Dish cards**: on the queue and course screens, a dish's name opens a card with a line about it, its main ingredients, how it cooks, and the time.
-- **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN.
+- **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN. Each list's add button is at its top right, and adding opens a dialog (a course or recipe opens its own page); long sections fold shut.
 - **Owner screens**: the beta word, the family list, setting a parent's password, fix requests, recipe reviews, and reported recipes.
 - **Ops page** (`/ops`): migrations, the owner flag, backup download and restore, clear everything, and remove or restore one family.
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.

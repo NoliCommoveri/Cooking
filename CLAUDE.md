@@ -59,6 +59,14 @@ Migrations are bundled into the Worker and applied by pressing a button on
 
 ---
 
+## Parent screens
+
+- **Adding something new opens in a dialog** over the page, from a button,
+  not a form on the page. A flow too big for a dialog (several steps, or a
+  long editor) opens as its own page from a button.
+
+---
+
 ## Build log, README, and this file
 
 Each document has one job.

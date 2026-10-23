@@ -347,11 +347,26 @@ details.qweek>.acts{margin-top:8px}
 .planpart>summary b{display:block}
 .planpart>summary small{display:block;color:var(--h-mut);font-size:14px}
 .planpart .planrow:last-child{border-bottom:0}
-.planpart .choice{border:0;padding:4px 0;min-height:44px}
-.planpart .dishpick>.hbtn.link{justify-content:flex-start;text-align:left;font-size:14px;min-height:32px;padding:0 0 6px 34px}
-.planpart .planrow{padding:6px 0}
+.formtop{position:sticky;top:0;z-index:6;background:var(--h-card);padding:8px 0;margin-top:-8px;border-bottom:1px solid var(--h-line)}
+/* The course editor's lessons: tight rows, small move buttons. */
+.planpart .planrow{grid-template-columns:24px minmax(0,1fr) auto;gap:6px;padding:4px 0;align-items:center}
+.planpart .planno{font-size:15px;padding-top:0}
+.planpart .planpick{font-size:13px;line-height:1.2}
+.planpart .planpick small{font-size:12px}
+.planpart .choice{border:0;padding:0;min-height:32px;gap:8px;font-weight:700;font-size:15px;line-height:1.2;letter-spacing:0}
+.planpart .choice input{width:20px;height:20px;margin:0;flex:none}
+.planpart .choice small{font-size:12px;font-weight:600}
+.planpart .dishpick>.hbtn.link{justify-content:flex-start;text-align:left;font-size:12.5px;font-weight:600;line-height:1.2;min-height:0;padding:0 0 4px 28px;text-underline-offset:2px}
+.planpart .planmove{gap:2px}
+.planpart .planmove .hbtn{min-height:34px;min-width:34px;padding:0;font-size:15px;border-radius:8px}
 .pagehead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:8px}
 .pagehead h2{margin:0}
 .seg{display:inline-flex;border:1.5px solid var(--h-line);border-radius:12px;padding:3px;gap:3px;margin:12px 0;background:var(--h-card)}
 .seg button{min-height:44px;padding:6px 16px;border:0;border-radius:9px;background:transparent;color:var(--h-fg);font:inherit;font-weight:800;font-size:15px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--h-acc);color:var(--h-acc-ink)}
+.planpart .choice:has(input:checked){border:0;background:none;box-shadow:none}
+/* Tight checkbox lists (diet settings, kitchen staples). */
+.grid2.tight{gap:4px 12px}
+.grid2.tight .choice{border:0;padding:2px 0;min-height:40px;font-weight:600;line-height:1.2}
+.grid2.tight .choice:has(input:checked){border:0;box-shadow:none}
+.pantrypart .grid2.tight{padding:0 2px 10px}
