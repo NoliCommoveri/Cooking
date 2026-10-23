@@ -2813,3 +2813,44 @@ Phase 10 (plan §7.5), built.
   picture, moving and hiding lessons, the checks catching a missing picture
   and a split pick-one group, History, and Undo. The publish workflow itself
   runs only on GitHub, so it is first exercised by the owner's first save.
+
+## 115. 2026-10-23 — Unit 2 begins: lessons 6a through 8b
+
+Content fill (Phase 7) moves to Unit 2, at the owner's request: the first
+five lessons in course order that weren't written yet (8a Shakshuka was
+already a sample).
+- **6a French-style omelet** (`french-omelet`): eggs whisked smooth, then one
+  omelet per person in an 8-inch nonstick pan over medium-low: butter foams,
+  stir to soft curds, stop, let it set, roll it out seam side down. Lifting
+  the pan off the burner is taught as the fast way to turn the heat down.
+  Checked at 160°F (§3), so it's soft but set, not runny. 35 minutes.
+- **6b Grilled cheese + tomato soup** (`grilled-cheese-tomato-soup`): the
+  soup simmers 20 minutes, then cools 5 and is blended with a stick blender;
+  meanwhile sandwiches are cooked 2 at a time over medium-low, lid on for the
+  first side. Callback to 3b's simmer. Milk is optional. Swap: gluten-free
+  bread. 55 minutes.
+- **6c Challah French toast** (`challah-french-toast`): day-old challah,
+  1 inch thick, soaked 20 seconds a side (turned with a fork, so hands stay
+  off raw egg) and cooked on medium-low; checked at 160°F in the middle, with
+  a wash step after the custard is made and again at cleanup. Swaps:
+  gluten-free bread, oat milk, and oil for butter. 40 minutes.
+- **7 Crispy hash browns** (`hash-browns`): grated into cold water, rinsed
+  clear, squeezed dry in a towel, then cooked in two batches without
+  stirring and flipped in wedges. Callback to 6a's heat control. Swap: oil
+  for butter. 45 minutes.
+- **8b Spaghetti marinara** (`spaghetti-marinara`): onion, then garlic, then
+  crushed tomatoes simmered 20 minutes; salted pasta water (not scaled down,
+  so the pot is always full enough), a cup of it saved, and the spaghetti
+  tossed in the sauce. Callback to 3b's simmer. Parmesan is optional. Swap:
+  gluten-free spaghetti. 50 minutes.
+- **All five are written for 6 servings** (§2.2). Crushed tomatoes scale by
+  the half can, so a small batch doesn't call for a whole 28-oz can.
+- **Registries:** 7 new ingredients (chives, whole milk, oat milk, challah,
+  maple syrup, spaghetti, gluten-free spaghetti); challah is tagged gluten and
+  egg. 3 new tools: an 8-inch nonstick skillet, a stick blender, and a butter
+  knife.
+- **Course outline:** the five dishes carry their real times instead of
+  estimates. Skills are as the outline had them; 6a is still tagged
+  `poaching-eggs`, which now gives 8a a "no callback" warning.
+- Not test-cooked. No intro slides yet (warned, as for the others).
+- Tests: 261 (no new ones; the linter checks every new lesson).

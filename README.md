@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [114. 2026-10-23 — The manager section: the owner edits the content from the browser](docs/build-log.md#114-2026-10-23--the-manager-section-the-owner-edits-the-content-from-the-browser)
+**Latest build log entry:** [115. 2026-10-23 — Unit 2 begins: lessons 6a through 8b](docs/build-log.md#115-2026-10-23--unit-2-begins-lessons-6a-through-8b)
 
 ## Current features
 
@@ -54,7 +54,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
 - **Dish illustrations** (`content/images/dishes/`): one picture for each of the 75 lessons.
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
-- **Lesson content** (`content/`): 17 lessons (the 4 samples, all 11 of Unit 1, and the 2 Appointed Times lessons), and the ingredient, tool, skill (52), and cuisine lists, as JSON.
+- **Lesson content** (`content/`): 22 lessons (the 4 samples, all 11 of Unit 1, 5 more of Unit 2, and the 2 Appointed Times lessons), and the ingredient, tool, skill (52), and cuisine lists, as JSON.
 - **Content linter** (`tools/lint-content.js`): checks every lesson against the food rules, including the unclean-food block, the food-safety steps, and scaling. Runs on every push, on every save from the manager section, and in the browser as the owner edits.
 - **Content file layout** (`tools/format-content.js`): every content file in the one layout the manager section writes.
 - **Scaling** (`src/content/`): amounts and step counts change with the serving size, shown in measuring-cup and spoon amounts.
