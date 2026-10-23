@@ -212,6 +212,10 @@ legend{font-weight:800;font-size:15px;margin-bottom:6px;padding:0}
 /* lesson player extras: kitchen words, doneness targets */
 .player{display:grid;gap:14px;align-content:start}
 .player .learn{display:grid;gap:14px}
+/* The owner's preview strip (§7.5): above the lesson, in the app's own colors */
+.pv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 12px;padding:8px 12px;border:1.5px dashed var(--h-line);border-radius:12px;background:var(--h-card);color:var(--h-fg);font-family:var(--h-body);font-size:15px}
+.pv-bar .seg{margin:0;flex-wrap:wrap}
+.pv-bar .seg button{min-height:40px;padding:4px 12px}
 .kw{border:0;background:none;padding:0;font:inherit;color:inherit;text-decoration:underline dotted;text-decoration-thickness:2px;text-underline-offset:4px;cursor:pointer}
 .kwcard{display:grid;gap:6px;padding:12px 14px;margin:0;font-size:17px;line-height:1.45}
 .kwcard b{font-size:19px}

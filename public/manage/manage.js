@@ -2,7 +2,7 @@
 // the browser. Every change is staged here first (the bar at the bottom counts
 // them), checked by the same content linter GitHub runs, and saved as one
 // commit to the repo, where the publish workflow checks it again and puts it
-// live. Routes live in the hash: #/ (the course), #/lesson/<id>, #/saves,
+// live. Routes live in the hash: #/ (the course), #/lesson/<id>, #/try/<id>, #/saves,
 // #/list/<file>, #/rules, #/fix/<id>.
 import { el, modal } from './dom.js';
 import { field, blank } from './form.js';
@@ -10,7 +10,7 @@ import { lint } from '/lib/lint.js';
 import { contentFromFiles } from '/lib/load.js';
 import { numberCourse, seasonalLabels } from '/lib/course.js';
 import { SAFETY } from '/lib/recipe.js';
-import { lessonPage } from './lesson.js';
+import { lessonPage, previewPage } from './lesson.js';
 import { listPage, rulesPage } from './lists.js';
 import { fixPage } from './fix.js';
 
@@ -286,7 +286,7 @@ export const go = (hash) => { if (location.hash === hash) route(); else location
 
 function bar() {
   const here = location.hash || '#/';
-  const tab = (href, text) => el('a', { href, class: 'mtab', 'aria-current': here === href || (href !== '#/' && here.startsWith(href)) || (href === '#/' && here.startsWith('#/lesson/')) ? 'page' : null }, text);
+  const tab = (href, text) => el('a', { href, class: 'mtab', 'aria-current': here === href || (href !== '#/' && here.startsWith(href)) || (href === '#/' && (here.startsWith('#/lesson/') || here.startsWith('#/try/'))) ? 'page' : null }, text);
   return el('header', { class: 'mbar' },
     el('div', { class: 'bar' }, el('img', { src: '/img/logo.webp', alt: '' }),
       el('div', { class: 'grow' }, el('b', {}, 'Clean Plate manager'), el('small', {}, 'The lessons and everything they use')),
@@ -382,6 +382,7 @@ function coursePage() {
         el('details', { class: 'more' }, el('summary', { 'aria-label': `More for ${title}` }, '⋯'),
           el('div', { class: 'more-menu' },
             written ? el('a', { class: 'hbtn link', href: `#/lesson/${id}` }, 'Edit the lesson') : el('button', { class: 'hbtn link', onclick: () => writePlanned(d) }, 'Write this lesson'),
+            written ? el('a', { class: 'hbtn link', href: `#/try/${id}` }, 'Preview as a learner') : null,
             el('button', { class: 'hbtn link', onclick: () => moveDialog(id, title, unit) }, 'Move to another unit…'),
             el('button', { class: 'hbtn link', onclick: () => { setHidden(id, !isHidden, title); route(); } }, isHidden ? 'Unhide (back for every family)' : 'Hide from every family'),
             !written ? el('button', { class: 'hbtn link', onclick: () => dishDialog(d) }, 'Edit the dish card…') : null))));
@@ -593,6 +594,7 @@ route = async () => {
     if (h === '#/login') return loginPage();
     let m;
     if ((m = h.match(/^#\/lesson\/([a-z0-9-]+)$/))) return lessonPage(m[1]);
+    if ((m = h.match(/^#\/try\/([a-z0-9-]+)$/))) return await previewPage(m[1]);
     if (h === '#/saves') return await savesPage();
     if ((m = h.match(/^#\/list\/([a-z]+\.json)$/))) return listPage(m[1]);
     if (h === '#/rules') return rulesPage();

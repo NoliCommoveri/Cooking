@@ -2986,3 +2986,34 @@ already a sample).
   dish is now written.
 - Not test-cooked. No intro slides yet.
 - Tests: 261.
+
+## 120. 2026-10-23 — The manager's Preview as a learner
+
+The owner asked for a way to go through a lesson the way a learner does,
+without ticking off every ingredient and without it counting.
+- **Preview as a learner** (`public/manage/lesson.js`, route `#/try/<id>`):
+  a button on each lesson's page in the manager, and in its ⋯ menu on the
+  course. It opens the real lesson player on the lesson as it stands in the
+  editor, unsaved changes included, with the editor's ingredients, tools,
+  skills, kitchen words, and cuisines. Kitchen Quest or Chef's Passport, a
+  kid or an adult, remembered on the device.
+- **The player's preview mode** (`public/player.js`, `preview`): Enter the
+  kitchen / Start cooking shows whether or not Prep is checked off; a
+  "Preview · nothing is saved" strip jumps to the lesson card, Learn, Prep,
+  Cook, or Reflect; the end says nothing was saved; Back goes to the lesson.
+  The manager hands it no `onCook` or `onReflect`, so nothing reaches the
+  server, as with the demo. Where it's up to is kept on the device under its
+  own preview profile, apart from any real cook. In the manager, each new
+  stage scrolls to the top of the lesson, not the top of the page.
+  A new `registry` option lets the manager use its own lists.
+- **The player stops on its own** when its screen is replaced without Back
+  (another page, or switching the preview's theme): its ticking and voice
+  stop, so a running timer can't ring from a screen that's gone. This holds
+  in the family app too.
+- The manager's page now loads `themes.css` and the theme fonts.
+- Plan §7.5 has the feature.
+- Tests: 260 (1 new: the manager's preview loads the themes and passes no
+  save callbacks). Checked in a browser at phone width against the dev
+  server: the omelet in both themes, Prep with nothing checked, Cook,
+  Reflect, the end, and Back; the only request sent was the manager
+  sign-in.

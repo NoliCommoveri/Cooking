@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [119. 2026-10-23 — Unit 2 finished: lessons 13 through 15c](docs/build-log.md#119-2026-10-23--unit-2-finished-lessons-13-through-15c)
+**Latest build log entry:** [120. 2026-10-23 — The manager's Preview as a learner](docs/build-log.md#120-2026-10-23--the-managers-preview-as-a-learner)
 
 ## Current features
 
@@ -48,7 +48,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN. Each list's add button is at its top right, and adding opens a dialog (a course or recipe opens its own page); long sections fold shut.
 - **Owner screens**: the beta word, the family list, setting a parent's password, fix requests, recipe reviews, and reported recipes.
 - **Ops page** (`/ops`): migrations, the owner flag, whether GitHub is connected for the manager section, backup download and restore, clear everything, and remove or restore one family.
-- **Manager section** (`/manage`, `src/worker/manage.js`, `public/manage/`): the owner's own sign-in. Add, rename, reorder, and remove units; add lessons (blank or a copy), move, hide, and unhide them; edit every part of a lesson in a form built from the lesson schema; edit ingredients, tools, skills, kitchen words, cuisines, and the food rules; upload dish pictures. Checked as you type by the content linter.
+- **Manager section** (`/manage`, `src/worker/manage.js`, `public/manage/`): the owner's own sign-in. Add, rename, reorder, and remove units; add lessons (blank or a copy), move, hide, and unhide them; edit every part of a lesson in a form built from the lesson schema; edit ingredients, tools, skills, kitchen words, cuisines, and the food rules; upload dish pictures. Checked as you type by the content linter. **Preview as a learner** runs a lesson in either theme, unsaved changes included, with no checklist to tick and nothing saved.
 - **Saving content** (`src/worker/github.js`, `.github/workflows/content-publish.yml`): a save is checked again and committed to the `content-edits` branch; GitHub builds, lints, and tests it and puts it on `main`, which deploys. **Saves** shows each one's status, with Undo; a lesson's History loads any earlier version.
 - **Hidden lessons** (`content/hidden.json`): out of the library, the course numbers, and every family's course plan until unhidden.
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.

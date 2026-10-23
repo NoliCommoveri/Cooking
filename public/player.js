@@ -123,8 +123,13 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // onDone(): the cook is finished and reflected on; the app shows what it earned (Phase 5).
 // lesson: a family recipe already in lesson shape (§6.10), with `extra`, its
 // typed-in ingredients, beside the registry. Otherwise lessonId is loaded.
-export async function openLesson(mount, { profile, family, lessonId, lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null }) {
-  const [R, L] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
+// preview: the owner reading a lesson as a learner (§7.5): cook mode opens
+// without checking off Prep, any stage is a tap away, and nothing is saved
+// (leave out onCook and onReflect). registry: parts of the registry to use
+// instead of the published ones, like the manager's unsaved changes.
+export async function openLesson(mount, { profile, family, lessonId, lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null, preview = false, registry = null }) {
+  const [published, L] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
+  const R = { ...published, ...registry };
   const ING = { ...R.ingredients, ...extra };
   // Appointed Times lessons keep their A1, A2 labels whatever the course plan (§6.19).
   const seasonal = (id) => R.seasonal?.includes(R.lessons.find((x) => x.id === id)?.unit);
@@ -386,8 +391,8 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
     const label = (i) => `${i.line}${i.prep ? `, ${i.prep}` : ''}${i.optional ? ' (optional)' : ''}`;
     const iconOf = (i) => OWN_ICON[i.id] ?? SECTION_ICON[ING[i.id]?.section] ?? 's-pantry';
     const swapNote = (i) => (swapFor[i.id] ? `<small>Use ${esc(name(swapFor[i.id]).toLowerCase())} instead</small>` : '');
-    const unlock = allI && allG
-      ? `<div class="${quest ? 'gate' : 'p-gate'}"><button type="button" class="${T.btn}" data-act="goto" data-to="cook">${quest ? 'Enter the kitchen' : 'Start cooking'}</button></div>`
+    const unlock = allI && allG || preview
+      ? `${preview && !(allI && allG) ? `<p class="${T.note}">Preview: no need to check everything off.</p>` : ''}<div class="${quest ? 'gate' : 'p-gate'}"><button type="button" class="${T.btn}" data-act="goto" data-to="cook">${quest ? 'Enter the kitchen' : 'Start cooking'}</button></div>`
       : `<p class="${quest ? 'gate' : 'p-gate'}">${ic('i-lock')}Check off everything to unlock cook mode</p>`;
     if (quest) {
       const meter = (n, of) => `<div class="q-meter" style="--n:${of}" aria-hidden="true">${Array.from({ length: of }, (_, k) => `<i class="${k < n ? 'on' : ''}"></i>`).join('')}</div>`;
@@ -496,7 +501,14 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
   function doneView() {
     return `<article class="${T.card}" style="text-align:center;justify-items:center">${tape}<p class="${T.kick}">${quest ? 'Quest cleared' : 'Dish done'}</p><h4>${esc(L.title)}</h4>
       <div class="${quest ? 'q-win' : 'p-photo'}" style="max-width:220px"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="220" height="220"></div>
-      <p>Nice cooking. Plate it up and enjoy it.</p>${onCook ? `<p class="${T.note}">This cook counts for ${esc(listNames(crewNames()))}.</p>` : ''}<button type="button" class="${T.btn}" data-act="exit-done">${quest ? 'Back to the quest board' : 'Back to the recipe box'}</button></article>`;
+      <p>${preview ? 'End of the preview. Nothing was saved, and nothing counts.' : 'Nice cooking. Plate it up and enjoy it.'}</p>${onCook ? `<p class="${T.note}">This cook counts for ${esc(listNames(crewNames()))}.</p>` : ''}<button type="button" class="${T.btn}" data-act="exit-done">${preview ? 'Back to the lesson' : quest ? 'Back to the quest board' : 'Back to the recipe box'}</button></article>`;
+  }
+
+  // The owner's preview: a strip to jump to any stage, and a reminder that it doesn't count.
+  function previewBar() {
+    if (!preview) return '';
+    const go = [['card', 'Lesson card'], ['learn', 'Learn'], ['prep', 'Prep'], ['cook', 'Cook'], ['reflect', 'Reflect']];
+    return `<nav class="pv-bar" aria-label="Preview"><b>Preview · nothing is saved</b><span class="seg">${go.map(([k, l]) => `<button type="button" data-act="goto" data-to="${k}" aria-pressed="${S.stage === k}">${l}</button>`).join('')}</span></nav>`;
   }
 
   // ---------- drawing and events ----------
@@ -507,9 +519,10 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
     if (S.stage === 'learn' && !learnCards().length) S.stage = 'prep';
     if (S.stage !== 'card' && S.stage !== 'done') { S.last = S.stage; save(); }
     const muted = isMuted();
-    const back = `<div class="pl-top"><a class="back" href="#" data-act="exit">← ${quest ? 'Quest board' : 'Recipe box'}</a><button type="button" class="mutebtn" data-act="mute" aria-pressed="${muted}" aria-label="${muted ? 'Sound effects off. Turn them on' : 'Sound effects on. Turn them off'}">${ic(muted ? 'i-mute' : 'i-sound')}</button></div>`;
-    mount.innerHTML = `<section class="kitchen qx player" data-kt="${quest ? 'quest' : 'passport'}">${back}${STAGES[S.stage]()}${whyView()}</section>`;
-    if (focusTop) window.scrollTo(0, 0);
+    const back = `<div class="pl-top"><a class="back" href="#" data-act="exit">← ${preview ? 'Back to the lesson' : quest ? 'Quest board' : 'Recipe box'}</a><button type="button" class="mutebtn" data-act="mute" aria-pressed="${muted}" aria-label="${muted ? 'Sound effects off. Turn them on' : 'Sound effects on. Turn them off'}">${ic(muted ? 'i-mute' : 'i-sound')}</button></div>`;
+    mount.innerHTML = `<section class="kitchen qx player" data-kt="${quest ? 'quest' : 'passport'}">${back}${previewBar()}${STAGES[S.stage]()}${whyView()}</section>`;
+    // In the manager's preview the lesson sits under the page's own header, so go to the lesson's top.
+    if (focusTop) { if (preview) mount.scrollIntoView(); else window.scrollTo(0, 0); }
     if (S.stage !== 'cook' && voice?.on) voice.stop();
     const awake = S.stage === 'prep' || S.stage === 'cook';
     const ok = await keepAwake(awake);
@@ -522,6 +535,9 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
     if (S.stage === 'cook' && S.timers.some((t) => t.state === 'run' || t.ringing)) tick = setInterval(onTick, 1000);
   }
   function onTick() {
+    // Its screen was swapped out without Back (another page, or the preview's
+    // theme switch): stop, so its timers don't ring from nowhere.
+    if (!mount.isConnected) { clearInterval(tick); document.removeEventListener('visibilitychange', onVisible); voice?.destroy(); return; }
     let changed = false;
     for (const t of S.timers) {
       if (t.state === 'run' && Date.now() >= t.endAt) {
