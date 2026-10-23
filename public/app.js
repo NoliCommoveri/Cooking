@@ -5,6 +5,8 @@ import { openLesson } from './player.js';
 import { saveCook, saveReflection, flushCooks } from './cooks.js';
 import { patchTargets, showValue } from './lib/patch.js';
 import { courseEntries, prereqNotes } from './lib/course.js';
+import { toBase, mixed } from './lib/units.js';
+import { MEAL_TYPES } from './lib/recipe.js';
 
 const app = document.getElementById('app');
 
@@ -308,7 +310,7 @@ async function kitchen(id) {
   const [{ profiles }, lib] = await Promise.all([api('GET', '/api/profiles'), api('GET', '/api/library')]);
   const p = profiles.find((x) => x.id === id);
   if (!p) return go('#/');
-  const [{ cooks }, mine] = await Promise.all([api('GET', `/api/profiles/${p.id}/cooks?${tz()}`), api('GET', `/api/profiles/${p.id}/queue?${tz()}`)]);
+  const [{ cooks }, mine, { recipes }] = await Promise.all([api('GET', `/api/profiles/${p.id}/cooks?${tz()}`), api('GET', `/api/profiles/${p.id}/queue?${tz()}`), api('GET', '/api/recipes')]);
   store('cpr.profile', p.id);
   // A profile on a course takes its lesson numbers from the course plan (§4.1).
   const labels = mine.labels ?? lib.labels;
@@ -364,6 +366,29 @@ async function kitchen(id) {
     ])
     : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, 'No lessons match this family\'s diet settings yet.');
 
+  // The family's own recipes (§6.10), with their meal-type picture.
+  const recipeCard = (r) => {
+    const done = cooks[r.id];
+    const meta = [`${r.totalMinutes} min`, `Serves ${r.servings}`, r.meal];
+    const marks = [
+      r.unleavened ? el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-cooked` }, art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-unleavened"/></svg>'), 'Unleavened') : null,
+      done ? el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-cooked` }, art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"/></svg>'), done.times === 1 ? 'Cooked once' : `Cooked ${done.times} times`) : null,
+    ];
+    return quest
+      ? el('article', { class: 'q-panel q-card' }, el('p', { class: 'q-kick' }, 'Family recipe'),
+        el('div', { class: 'q-win' }, el('img', { src: r.image, alt: '', width: 230, height: 230, loading: 'lazy' })),
+        el('h3', { class: 'q-title' }, r.title), el('p', { class: 'q-skill' }, meta.join(' · ')), marks)
+      : el('article', { class: 'p-card' }, el('span', { class: 'tape t1' }), el('span', { class: 'tape t2' }),
+        el('div', { class: 'p-photo' }, el('img', { src: r.image, alt: '', width: 220, height: 220, loading: 'lazy' })),
+        el('p', { class: 'p-lessonno' }, 'Family recipe'), el('h3', { class: 'p-title' }, r.title),
+        el('div', { class: 'p-meta' }, meta.map((m) => el('span', {}, m))), marks);
+  };
+  const shown = recipes.filter((r) => r.visible);
+  const ours = shown.length ? [
+    el('h2', { class: 'k-unit' }, 'Our recipes'),
+    el('div', { class: 'k-lib' }, shown.map((r) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${r.title}`, onclick: () => go(`#/kitchen/${p.id}/${r.id}`) }, recipeCard(r)))),
+  ] : null;
+
   // Up next: this profile's queued lessons. Kids see "due Friday" in
   // homeschool mode and never anything about being late (§6.17).
   const when = (x) => (x.status === 'requested' ? 'You asked a grown-up'
@@ -389,7 +414,7 @@ async function kitchen(id) {
         await api('PUT', `/api/profiles/${p.id}/theme`, { theme: other });
         kitchen(id);
       } }, `Switch to ${THEMES[other]}`)),
-    upNext, body));
+    upNext, body, ours));
 }
 
 // A lesson, played in the profile's theme (player.js).
@@ -399,10 +424,12 @@ async function lesson(profileId, lessonId) {
   if (!p) return go('#/');
   const mine = await api('GET', `/api/profiles/${p.id}/queue?${tz()}`).catch(() => ({ items: [] }));
   const queued = mine.items.find((x) => x.lesson_id === lessonId);
+  // A family recipe comes from the API in lesson shape (§6.10).
+  const recipe = /^recipe:/.test(lessonId) ? await api('GET', `/api/recipes/${lessonId.slice(7)}`) : null;
   const mount = el('div');
   screen(mount);
   await openLesson(mount, {
-    profile: p, family: me.family, lessonId, onExit: () => go(`#/kitchen/${p.id}`),
+    profile: p, family: me.family, lessonId, lesson: recipe?.lesson ?? null, extra: recipe?.extra ?? {}, onExit: () => go(`#/kitchen/${p.id}`),
     crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook, onReflect: saveReflection, labels: mine.labels ?? lib.labels, total: mine.total ?? lib.total,
     // "I want to make this" or "Cook this" (§6.1), and the queued lesson's
     // servings and who it's for, for a fresh cook.
@@ -413,7 +440,8 @@ async function lesson(profileId, lessonId) {
       },
     },
     seed: queued ? { servings: queued.servings, with: (queued.profile_ids ?? []).filter((x) => x !== p.id), shopped: queued.shopped_for } : null,
-    fixes: {
+    // Suggest a fix is for library lessons; a family edits its own recipes.
+    fixes: recipe ? null : {
       suggest: (ctx) => suggestFix(p, ctx),
       list: async (lid) => (await api('GET', `/api/lessons/${encodeURIComponent(lid)}/fixes`)).fixes,
     },
@@ -506,7 +534,7 @@ function suggestFix(profile, { lesson, stepId, servings, ingredients }) {
 // ---------- parent area ----------
 
 function parentTabs(current) {
-  const tabs = [['queue', 'Queue'], ['shopping', 'Shopping'], ['courses', 'Courses'], ['progress', 'Progress'], ['profiles', 'Profiles'], ['family', 'Family'], ['parents', 'Logins']];
+  const tabs = [['queue', 'Queue'], ['shopping', 'Shopping'], ['recipes', 'Recipes'], ['courses', 'Courses'], ['progress', 'Progress'], ['profiles', 'Profiles'], ['family', 'Family'], ['parents', 'Logins']];
   if (me.parent.is_owner) tabs.push(['owner', 'Owner'], ['fixes', 'Fix requests']);
   return el('nav', { class: 'tabs', 'aria-label': 'Parent screens' },
     tabs.map(([k, label]) => el('a', { href: `#/parent/${k}`, 'aria-current': k === current ? 'page' : null }, label)));
@@ -776,14 +804,17 @@ const parentQueue = parentOnly(async (flash) => {
   const note = el('p', { class: 'mut small note', hidden: true }, 'Most lessons use knife work. We suggest a Unit 1 lesson first.');
   const lessonSel = el('select', { name: 'lesson_id', required: true },
     el('option', { value: '' }, 'Pick a lesson'),
-    q.library.map((L) => el('option', { value: L.id }, `${L.label ? `${L.label} · ` : ''}${L.title}${L.foundation ? ' (foundation)' : ''}`)));
+    q.library.map((L) => el('option', { value: L.id }, `${L.label ? `${L.label} · ` : ''}${L.title}${L.foundation ? ' (foundation)' : ''}`)),
+    // The family's own recipes (§6.10).
+    q.recipes?.length ? el('optgroup', { label: 'Our recipes' }, q.recipes.map((r) => el('option', { value: r.id }, r.title))) : null);
+  const pickable = [...q.library, ...(q.recipes ?? [])];
   const who = el('div', { class: 'grid2' }, profiles.map((p) => el('label', { class: 'choice' },
     el('input', { type: 'checkbox', name: `p_${p.id}`, value: p.id }), el('span', {}, p.name))));
   // The knife-work note (§4.0): a suggestion, not a block.
   const checkNote = () => {
-    const L = q.library.find((x) => x.id === lessonSel.value);
+    const L = pickable.find((x) => x.id === lessonSel.value);
     const picked = profiles.filter((p) => who.querySelector(`[name="p_${p.id}"]`).checked).map((p) => p.id);
-    note.hidden = !L || L.unit === 1 || !picked.length || picked.some((pid) => q.knife_ok.includes(pid));
+    note.hidden = !L || L.unit === 1 || !L.unit || !picked.length || picked.some((pid) => q.knife_ok.includes(pid));
   };
   lessonSel.addEventListener('change', checkNote);
   who.addEventListener('change', checkNote);
@@ -797,7 +828,7 @@ const parentQueue = parentOnly(async (flash) => {
     const ids = profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id);
     if (!v.lesson_id) throw new Error('Pick a lesson.');
     if (!ids.length) throw new Error("Pick who's cooking.");
-    const L = q.library.find((x) => x.id === v.lesson_id);
+    const L = pickable.find((x) => x.id === v.lesson_id);
     const n = Number(v.servings);
     // A lesson with set sizes takes the nearest one it offers.
     const servings = L.servings_options.includes(n) ? n : L.servings_options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a));
@@ -1254,6 +1285,190 @@ const ownerFixes = parentOnly(async (flash) => {
 
 // ---------- routing ----------
 
+// ---------- family recipes (§6.10) ----------
+
+const UNIT_NAMES = { tsp: 'tsp', tbsp: 'tbsp', cup: 'cup', floz: 'fl oz', ml: 'ml', l: 'liter', oz: 'oz', lb: 'lb', g: 'g', kg: 'kg', count: 'whole (count)' };
+const SAFETY_NAMES = { solo: 'Kid can do it alone', 'adult-nearby': 'An adult in the kitchen', 'adult-hands-on': 'An adult helping' };
+let registryCache = null;
+const contentRegistry = async () => (registryCache ??= await (await fetch('/content/registry.json')).json());
+
+// "1 1/2", "3/4", "2.5" → a number; blank → null ("to taste").
+function parseAmount(v) {
+  const t = String(v ?? '').trim();
+  if (!t) return null;
+  const m = /^(\d+)\s+(\d+)\/(\d+)$/.exec(t);
+  if (m) return Number(m[1]) + Number(m[2]) / Number(m[3]);
+  const f = /^(\d+)\/(\d+)$/.exec(t);
+  if (f) return Number(f[1]) / Number(f[2]);
+  return Number(t);
+}
+
+const parentRecipes = parentOnly(async (flash) => {
+  const { recipes } = await api('GET', '/api/recipes');
+  const again = (msg, undo) => parentRecipes(el('p', { class: 'ok flash', role: 'status' }, msg, ' ',
+    undo ? el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await undo(); parentRecipes(); } }, 'Undo') : null));
+  parentScreen('recipes', flash ?? null,
+    el('div', { class: 'card' },
+      el('h2', {}, 'Our recipes'),
+      el('p', { class: 'mut' }, "Your family's own recipes. They show in every profile's kitchen and cook in the same player as the lessons. Only your family sees them."),
+      recipes.length
+        ? el('div', { class: 'rows' }, recipes.map((r) => el('div', { class: 'rowi' },
+          el('div', {}, el('b', {}, r.title), el('small', {}, [r.meal, `serves ${r.servings}`, `${r.totalMinutes} min`, r.unleavened ? 'Unleavened' : null, r.visible ? null : 'hidden by your diet settings'].filter(Boolean).join(' · '))),
+          el('div', { class: 'acts' },
+            el('a', { class: 'hbtn', href: `#/parent/recipes/${r.id.slice(7)}` }, 'Edit'),
+            actBtn('Delete', 'bad', async () => {
+              await api('DELETE', `/api/recipes/${r.id.slice(7)}`);
+              again(`Deleted ${r.title}.`, () => api('POST', `/api/recipes/${r.id.slice(7)}/restore`));
+            })))))
+        : el('p', {}, 'No recipes yet.'),
+      el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: '#/parent/recipes/new' }, 'Add a recipe'))));
+});
+
+// The guided entry flow: one thing at a time (§6.10). The draft is kept on
+// this device until it's saved, so a closed tab doesn't lose it.
+const recipeEditor = parentOnly(async (rid) => {
+  const R = await contentRegistry();
+  const existing = rid === 'new' ? null : await api('GET', `/api/recipes/${rid}`);
+  const draftKey = `cpr.recipe.${rid}`;
+  let D;
+  try { D = JSON.parse(sessionStorage.getItem(draftKey)); } catch { D = null; }
+  D ??= existing ? structuredClone(existing.recipe) : { title: '', servings: me.family.default_servings, totalMinutes: '', mealType: '', why: null, ingredients: [], equipment: [], steps: [] };
+  // Wash steps are added on the way in, so they aren't edited here.
+  D.steps = D.steps.filter((s) => s.type !== 'wash');
+  let page = 0;
+  const keep = () => { try { sessionStorage.setItem(draftKey, JSON.stringify(D)); } catch { /* the draft just won't survive a reload */ } };
+  const PAGES = ['The basics', 'Ingredients', 'Tools', 'Steps', 'Meal type', 'Review'];
+  const ingByName = new Map(Object.values(R.ingredients).map((i) => [i.name.toLowerCase(), i]));
+  const unitsFor = (id) => {
+    const ing = R.ingredients[id];
+    if (!ing) return Object.keys(UNIT_NAMES);
+    return [...Object.keys(UNIT_NAMES), ...Object.keys(ing.units ?? {})].filter((u) => toBase(1, u, ing) != null);
+  };
+  const unitLabel = (u, id) => UNIT_NAMES[u] ?? R.ingredients[id]?.units?.[u]?.one ?? u;
+  const bind = (obj, key, fn = (v) => v) => (e) => { obj[key] = fn(e.target.type === 'checkbox' ? e.target.checked : e.target.value); keep(); };
+
+  const pages = [
+    // 1. title, servings, time
+    () => [
+      el('label', { class: 'f' }, 'Recipe name', el('input', { value: D.title, maxlength: 80, oninput: bind(D, 'title') })),
+      el('label', { class: 'f' }, 'Serves', el('input', { type: 'number', min: 1, max: 12, inputmode: 'numeric', value: D.servings ?? '', oninput: bind(D, 'servings', Number) })),
+      el('label', { class: 'f' }, 'Total time, in minutes', el('input', { type: 'number', min: 1, inputmode: 'numeric', value: D.totalMinutes ?? '', oninput: bind(D, 'totalMinutes', Number) })),
+      el('p', { class: 'mut small' }, existing ? 'A picture for its meal type shows on its card.' : 'Next, the ingredients. Pick each one from our list when you can, so it can be scaled, merged on shopping lists, and checked.'),
+    ],
+    // 2. ingredients
+    () => {
+      const list = el('datalist', { id: 'ing-names' }, Object.values(R.ingredients).map((i) => el('option', { value: i.name })));
+      const row = (l, i) => {
+        const name = l.ingredient ? R.ingredients[l.ingredient]?.name ?? l.ingredient : l.name ?? '';
+        const unitSel = el('select', { 'aria-label': 'Unit', onchange: bind(l, 'unit') },
+          unitsFor(l.ingredient).map((u) => el('option', { value: u, selected: u === l.unit }, unitLabel(u, l.ingredient))));
+        const nameIn = el('input', { list: 'ing-names', value: name, 'aria-label': 'Ingredient', placeholder: 'Start typing: flour, carrots…', onchange: (e) => {
+          const hit = ingByName.get(e.target.value.trim().toLowerCase());
+          if (hit) { l.ingredient = hit.id; delete l.name; } else { delete l.ingredient; l.name = e.target.value.trim(); }
+          if (!unitsFor(l.ingredient).includes(l.unit)) l.unit = unitsFor(l.ingredient)[0];
+          keep(); draw();
+        } });
+        return el('div', { class: 'card' },
+          el('div', { class: 'acts' }, el('b', { class: 'grow' }, `Ingredient ${i + 1}`),
+            el('button', { type: 'button', class: 'hbtn link', onclick: () => { D.ingredients.splice(i, 1); keep(); draw(); } }, 'Remove')),
+          el('label', { class: 'f' }, 'What', nameIn),
+          l.name ? el('p', { class: 'mut small' }, "That isn't in our ingredient list, so it's kept as you typed it. It won't merge with other recipes on a shopping list.") : null,
+          el('div', { class: 'grid2' },
+            el('label', { class: 'f' }, 'How much', el('span', { class: 'hint' }, 'Like 2, 1/2, or 1 1/2. Leave it blank for "to taste".'),
+              el('input', { inputmode: 'decimal', value: l.amount == null ? '' : String(l.amount), oninput: (e) => { l.amount = parseAmount(e.target.value); if (l.amount != null && !l.unit) l.unit = unitsFor(l.ingredient)[0]; keep(); } })),
+            el('label', { class: 'f' }, 'Unit', unitSel)),
+          el('label', { class: 'f' }, 'How it\'s prepared', el('span', { class: 'hint' }, 'Optional, like "diced" or "softened"'), el('input', { value: l.prep ?? '', maxlength: 60, oninput: bind(l, 'prep') })),
+          el('label', { class: 'choice' }, el('input', { type: 'checkbox', checked: !!l.optional, onchange: bind(l, 'optional') }), el('span', {}, 'Optional')));
+      };
+      return [list, D.ingredients.map(row),
+        el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => { D.ingredients.push({ amount: null, unit: 'cup' }); keep(); draw(); } }, '+ Add an ingredient'))];
+    },
+    // 3. tools
+    () => {
+      const byCat = {};
+      for (const t of Object.values(R.equipment)) (byCat[t.category] ??= []).push(t);
+      return [el('p', {}, 'Tick the tools it needs. They become the tools checklist in Prep.'),
+        el('div', { class: 'grid2' }, Object.values(byCat).flat().map((t) => el('label', { class: 'choice' },
+          el('input', { type: 'checkbox', checked: D.equipment.includes(t.id), onchange: (e) => {
+            D.equipment = e.target.checked ? [...D.equipment, t.id] : D.equipment.filter((x) => x !== t.id); keep();
+          } }), el('span', {}, t.name))))];
+    },
+    // 4. steps
+    () => {
+      const step = (s, i) => {
+        const done = s.target ? (s.target.temp != null ? 'temp' : 'look') : 'none';
+        return el('div', { class: 'card' },
+          el('div', { class: 'acts' }, el('b', { class: 'grow' }, `Step ${i + 1}`),
+            i ? el('button', { type: 'button', class: 'hbtn link', onclick: () => { [D.steps[i - 1], D.steps[i]] = [D.steps[i], D.steps[i - 1]]; keep(); draw(); } }, 'Move up') : null,
+            el('button', { type: 'button', class: 'hbtn link', onclick: () => { D.steps.splice(i, 1); keep(); draw(); } }, 'Remove')),
+          el('label', { class: 'f' }, 'What to do', el('textarea', { rows: 3, maxlength: 400, oninput: bind(s, 'text') }, s.text ?? '')),
+          el('label', { class: 'f' }, 'Who needs to be in the kitchen', el('select', { onchange: (e) => { s.safety = e.target.value; keep(); draw(); } },
+            el('option', { value: '' }, 'Pick one'), Object.entries(SAFETY_NAMES).map(([k, v]) => el('option', { value: k, selected: s.safety === k }, v)))),
+          s.safety && s.safety !== 'solo' ? el('label', { class: 'f' }, 'The hazard', el('span', { class: 'hint' }, 'A few words an adult profile sees, like "Hot oven" or "Sharp knife"'), el('input', { value: s.hazard ?? '', maxlength: 60, oninput: bind(s, 'hazard') })) : null,
+          el('div', { class: 'grid2' },
+            el('label', { class: 'f' }, 'Timer, in minutes', el('span', { class: 'hint' }, 'Optional'), el('input', { type: 'number', min: 0, inputmode: 'decimal', value: s.timerSeconds ? s.timerSeconds / 60 : '', oninput: (e) => { s.timerSeconds = e.target.value ? Math.round(Number(e.target.value) * 60) : null; keep(); } })),
+            el('label', { class: 'f' }, 'Timer name', el('span', { class: 'hint' }, 'Like "Bake bread"'), el('input', { value: s.timerLabel ?? '', maxlength: 60, oninput: bind(s, 'timerLabel') }))),
+          el('label', { class: 'choice' }, el('input', { type: 'checkbox', checked: !!s.raw, onchange: bind(s, 'raw') }),
+            el('span', {}, 'This step handles raw meat, poultry, fish, or eggs', el('em', {}, ' A wash-hands step goes after it.'))),
+          el('label', { class: 'f' }, 'Is this the "is it done?" check', el('select', { onchange: (e) => { s.target = e.target.value === 'temp' ? { temp: '' } : e.target.value === 'look' ? { look: '' } : null; keep(); draw(); } },
+            el('option', { value: 'none', selected: done === 'none' }, 'No'),
+            el('option', { value: 'temp', selected: done === 'temp' }, 'Yes, with a thermometer'),
+            el('option', { value: 'look', selected: done === 'look' }, 'Yes, by how it looks'))),
+          done === 'temp' ? el('label', { class: 'f' }, 'Done at, °F', el('span', { class: 'hint' }, 'Poultry 165, ground meat 160, other meat and fish 145'), el('input', { type: 'number', inputmode: 'numeric', value: s.target.temp ?? '', oninput: (e) => { s.target.temp = e.target.value === '' ? '' : Number(e.target.value); keep(); } })) : null,
+          done === 'look' ? el('label', { class: 'f' }, 'It\'s done when…', el('input', { value: s.target.look ?? '', maxlength: 200, oninput: (e) => { s.target.look = e.target.value; keep(); } })) : null);
+      };
+      return [D.steps.map(step), el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => { D.steps.push({ text: '', safety: '' }); keep(); draw(); } }, '+ Add a step'))];
+    },
+    // 5. meal type and the "why we make this" card
+    () => [
+      el('fieldset', {}, el('legend', {}, 'What kind of dish is it?'), el('p', { class: 'mut small', style: 'margin:0' }, 'It picks the picture on its card.'),
+        el('div', { class: 'grid2' }, MEAL_TYPES.map(([k, v]) => el('label', { class: 'choice' },
+          el('input', { type: 'radio', name: 'meal', value: k, checked: D.mealType === k, onchange: () => { D.mealType = k; keep(); } }),
+          el('img', { src: `img/meals/${k}.svg`, alt: '', width: 40, height: 40 }), el('span', {}, v))))),
+      el('h3', {}, 'Why we make this'),
+      el('p', { class: 'mut small' }, 'Optional. A card your kids see before they cook, like a lesson\'s Learn stage: where the recipe comes from, or why your family makes it.'),
+      el('label', { class: 'f' }, 'Card title', el('input', { value: D.why?.title ?? '', maxlength: 60, oninput: (e) => { D.why = { ...(D.why ?? {}), title: e.target.value }; keep(); } })),
+      el('label', { class: 'f' }, 'Card words', el('textarea', { rows: 4, maxlength: 400, oninput: (e) => { D.why = { ...(D.why ?? {}), body: e.target.value }; keep(); } }, D.why?.body ?? '')),
+    ],
+    // 6. review: the server's checks, then save
+    () => {
+      const box = el('div', {}, el('p', { class: 'mut' }, 'Checking…'));
+      api('POST', '/api/recipes/check', D).then((c) => {
+        const r = c.recipe;
+        box.replaceChildren(
+          c.problems.length
+            ? el('div', { class: 'card notice', role: 'alert' }, el('h3', {}, 'A few things to fix first'), el('ul', {}, c.problems.map((p) => el('li', {}, p))))
+            : el('p', { class: 'ok' }, 'Everything checks out.'),
+          el('h3', {}, r.title || 'Untitled'),
+          el('p', { class: 'mut' }, `Serves ${r.servings} · ${r.totalMinutes} min`),
+          el('ul', {}, r.ingredients.map((l) => el('li', {}, `${l.amount == null ? l.text : `${[8, 3].some((d) => Math.abs(l.amount * d - Math.round(l.amount * d)) < 1e-6) && !/^0$/.test(mixed(l.amount)) ? mixed(l.amount) : l.amount} ${unitLabel(l.unit, l.ingredient)}`} ${l.ingredient ? R.ingredients[l.ingredient]?.name.toLowerCase() : l.name}${l.prep ? `, ${l.prep}` : ''}${l.optional ? ' (optional)' : ''}`))),
+          el('ol', {}, r.steps.map((s) => el('li', {}, s.text, s.type === 'wash' ? el('small', { class: 'mut' }, ' (added for you)') : null))),
+          c.problems.length ? null : el('div', { class: 'acts' }, actBtn(existing ? 'Save changes' : 'Save recipe', 'pri', async () => {
+            const res = existing ? await api('PUT', `/api/recipes/${rid}`, D) : await api('POST', '/api/recipes', D);
+            try { sessionStorage.removeItem(draftKey); } catch { /* nothing kept */ }
+            parentRecipes(el('p', { class: 'ok flash', role: 'status' }, `Saved ${r.title}. It's in every profile's kitchen.`));
+            return res;
+          })));
+      }, (err) => box.replaceChildren(el('p', { class: 'err' }, err.message)));
+      return box;
+    },
+  ];
+
+  const body = el('div', {});
+  function draw() {
+    body.replaceChildren(el('div', { class: 'card' },
+      el('p', { class: 'mut small' }, `${page + 1} of ${PAGES.length}`),
+      el('h2', {}, PAGES[page]),
+      pages[page](),
+      el('div', { class: 'acts' },
+        page ? el('button', { type: 'button', class: 'hbtn', onclick: () => { page--; draw(); window.scrollTo(0, 0); } }, 'Back') : el('a', { class: 'hbtn', href: '#/parent/recipes' }, 'Cancel'),
+        page < PAGES.length - 1 ? el('button', { type: 'button', class: 'hbtn pri', onclick: () => { page++; draw(); window.scrollTo(0, 0); } }, 'Next') : null)));
+  }
+  draw();
+  parentScreen('recipes', el('a', { class: 'hbtn link', href: '#/parent/recipes' }, '← Our recipes'),
+    existing ? null : el('p', { class: 'mut' }, 'Add your family\'s recipe one thing at a time. Nothing is saved until the last step.'), body);
+});
+
 async function refresh() {
   me = await api('GET', '/api/me');
 }
@@ -1276,6 +1491,8 @@ async function route() {
     if (top === 'parent') {
       if (sub === 'profiles' && extra) return await profileEditor(extra);
       if (sub === 'courses' && extra) return await courseEditor(extra);
+      if (sub === 'recipes' && extra) return await recipeEditor(extra);
+      if (sub === 'recipes') return await parentRecipes();
       if (sub === 'courses') return await courseList();
       if (sub === 'queue') return await parentQueue();
       if (sub === 'shopping' && extra === 'new') return await shoppingPreview(parts[3]);

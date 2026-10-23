@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 8,
   "title": "Unleavened flatbread",
-  "image": "meals/bread.svg",
+  "image": "dishes/unleavened-flatbread.png",
   "cuisine": "jewish",
   "skill": "A dough with no leaven, rolled thin and cooked in a dry pan",
   "skills": ["flatbreads"],

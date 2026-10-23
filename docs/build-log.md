@@ -1789,3 +1789,45 @@ on it.
 - Tests: 176 (leaven words, plurals, allowed phrases, the fermented foods that
   aren't leaven, the badge, A labels, the linter's list check, water never on
   a list).
+
+## 73. 2026-10-23 — Phase 4c, slice 2: family recipes
+
+- **The owner's art** for A1 and A2 (`source/sheet-23-appointed-times.png`)
+  is cropped into `dishes/unleavened-flatbread.png` and
+  `dishes/cottage-cheese-crescents.png`, listed in `tools/dish-sheets.txt` and
+  `LICENSES.md`; the two lessons use them instead of the bread picture.
+- **Family recipes** (§6.10), for one family only:
+  - `src/content/recipe.js` (shared with the browser): the stored shape,
+    `normalizeRecipe` (trims, numbers the steps, puts a wash-hands step after
+    each step marked as handling raw meat, poultry, fish, or eggs),
+    `recipeProblems` (the hard block on every registry ingredient and every
+    word, with no exception; amounts and units; safety levels and hazards;
+    timers; and for raw meat, poultry, or fish a doneness check at the safe
+    minimum: poultry 165°F, ground meat 160°F, other meat and fish 145°F), and
+    `recipeLesson` (a recipe in lesson shape; a typed-in ingredient gets its
+    own id, scales as a plain amount, and isn't merged on shopping lists).
+  - `src/worker/recipes.js`: list, one recipe, check, add, edit (the version
+    goes up), delete with Undo. In the queue, on cooks, and on shopping lists a
+    recipe's lesson id is `recipe:<id>`, so the queue, kid requests and Cook
+    this, safety review, shopping, cooks, the Sabbath rule, and Print our
+    progress work for recipes unchanged. Diet filters hide a recipe the same
+    way as a lesson; a typed-in ingredient has no diet tags.
+  - **Migration 0010** adds `family_recipes`. **The owner presses Apply
+    pending on `/ops`** after this deploys.
+- **Screens:** Parents → Recipes (list, Edit, Delete with Undo) and the
+  guided entry: the basics, ingredients (search our list or type one in;
+  amounts like 1/2 or 1 1/2, or blank for "to taste"), tools, steps (who's
+  needed, the hazard, a timer, "handles raw food", and the doneness check),
+  meal type with its picture and an optional "why we make this" card, then a
+  review with the server's checks before Save. The draft is kept on the device
+  until it's saved. Kitchens show an "Our recipes" shelf; the player opens a
+  recipe with its meal-type picture, and goes straight to Prep when there's no
+  card. The queue's Add a lesson lists the family's recipes. Suggest a fix
+  stays off for recipes; the family edits its own.
+- **Not yet:** a recipe's own photo waits for the camera (Phase 4); sharing,
+  reviews, and the directory are slice 3.
+- Tests: 185 (the checks, the wash step, units, the hard block's refusals and
+  allowed phrases, doneness minimums, scoping between families, diet hiding,
+  and a recipe queued, on a shopping list unmerged, cooked, and on Print our
+  progress). Checked in a browser: the entry flow, the kitchen shelf, and the
+  player.

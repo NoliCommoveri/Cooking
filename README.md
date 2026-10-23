@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [72. 2026-10-22 — Phase 4c, slice 1: the Appointed Times unit and the leaven check](docs/build-log.md#72-2026-10-22--phase-4c-slice-1-the-appointed-times-unit-and-the-leaven-check)
+**Latest build log entry:** [73. 2026-10-23 — Phase 4c, slice 2: family recipes](docs/build-log.md#73-2026-10-23--phase-4c-slice-2-family-recipes)
 
 ## Current features
 
@@ -32,6 +32,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Course outline** (`content/course.json`): all 75 planned dishes in teaching order, with their skills and prerequisites, checked by the linter.
 - **Lesson numbers** (`src/content/course.js`): come from the course order; pick-one choices share a number (1a, 1b, 1c), 59 in all.
 - **Appointed Times unit** (unit 8 in `content/units.json`): lessons beside the numbered course, labeled A1, A2: unleavened flatbread and cottage cheese crescent rolls so far.
+- **Family recipes** (Parents → Recipes, `src/content/recipe.js`, `src/worker/recipes.js`): a parent adds the family's own recipes one thing at a time (basics, ingredients from the list or typed in, tools, steps with safety levels and timers, meal type, a "why we make this" card, then review). The same unclean-food and food-safety checks as lessons; a wash-hands step is added after raw food. They show on an "Our recipes" shelf in every kitchen and can be queued, shopped for, and cooked like lessons. Only that family sees them.
 - **Unleavened badge** (`src/content/leaven.js`, `content/rules/leaven.json`): on every lesson whose ingredients and steps have no leaven.
 - **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN.
 - **Owner screens**: the beta word, the family list, setting a parent's password, and fix requests.

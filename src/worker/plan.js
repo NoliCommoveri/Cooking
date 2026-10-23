@@ -16,6 +16,7 @@ import { dietView } from '../content/diet.js';
 import { servingOptions } from '../content/scale.js';
 import { courseEntries, numberCourse } from '../content/course.js';
 import { schedule, weekOf, addDays, localDay, isDay, isSabbath, DUE_DAY } from './schedule.js';
+import { RECIPE_ID, lessonFor, recipeNames, recipeVisible } from './recipes.js';
 
 const id = () => randomHex(8);
 const ACTIVE = ['requested', 'assigned', 'shopped'];
@@ -73,7 +74,13 @@ const plannedDate = (v) => {
   if (!isDay(v)) fail(400, 'invalid', 'The planned date must be a date.');
   return v;
 };
-const queueLesson = (lid, fam) => {
+// A library lesson, or one of the family's recipes ("recipe:<id>", §6.10).
+const queueLesson = async (env, lid, fam) => {
+  if (RECIPE_ID.test(lid)) {
+    const found = await lessonFor(env, fam.id, lid) ?? fail(400, 'invalid', 'No such recipe.');
+    if (!recipeVisible(found, JSON.parse(fam.diet_filters))) fail(400, 'invalid', `${found.lesson.title} is hidden by your family's diet settings.`);
+    return found.lesson;
+  }
   const L = lessonById[lid] ?? fail(400, 'invalid', 'No such lesson.');
   if (!visible(fam).has(L.id)) fail(400, 'invalid', `${L.title} is hidden by your family's diet settings.`);
   return L;
@@ -271,12 +278,14 @@ export async function queueProfiles(env, fid, ids) {
 // Appointed Times lessons are A1, A2… whatever the plan (§6.19).
 const suggestedLabels = { ...numberCourse(LIBRARY.course).labels, ...LIBRARY.seasonalLabels };
 
-export function itemOut(r, who, labels = suggestedLabels) {
-  const L = lessonById[r.lesson_id];
+// names: the family's recipes (recipeNames), for queued family recipes.
+const RECIPE_SIZES = servingOptions({ scaling: { mode: 'free', min: 1, max: 12 } });
+export function itemOut(r, who, labels = suggestedLabels, names = {}) {
+  const L = lessonById[r.lesson_id], n = names[r.lesson_id];
   return {
-    id: r.id, lesson_id: r.lesson_id, title: L?.title ?? dishById[r.lesson_id]?.title ?? r.lesson_id, label: labels[r.lesson_id] ?? null,
-    unit: L?.unit ?? dishById[r.lesson_id]?.unit ?? null, image: L?.image ?? null, foundation: Boolean(dishById[r.lesson_id]?.pickOne),
-    servings: r.servings, servings_options: L ? servingOptions(L) : [], planned_date: r.planned_date, status: r.status, source: r.source,
+    id: r.id, lesson_id: r.lesson_id, title: L?.title ?? n?.title ?? dishById[r.lesson_id]?.title ?? r.lesson_id, label: labels[r.lesson_id] ?? null,
+    unit: L?.unit ?? dishById[r.lesson_id]?.unit ?? null, image: L?.image ?? n?.image ?? null, foundation: Boolean(dishById[r.lesson_id]?.pickOne),
+    recipe: Boolean(n), servings: r.servings, servings_options: L ? servingOptions(L) : n ? RECIPE_SIZES : [], planned_date: r.planned_date, status: r.status, source: r.source,
     profile_ids: who[r.id] ?? [], requested_by: r.requested_by_profile_id, course_id: r.course_id, week_start: r.week_start,
     created_at: r.created_at, closed_at: r.closed_at,
   };
@@ -328,22 +337,29 @@ export function register(on) {
     const knifeOk = new Set(knife.map((r) => r.profile_id));
     for (const r of active) if (unitOne.includes(r.lesson_id)) (who[r.id] ?? []).forEach((p) => knifeOk.add(p));
     const tests = (await env.DB.prepare('SELECT lesson_id, cooked_on, parent_id FROM test_cooks WHERE family_id = ?').bind(s.family_id).all()).results;
+    const names = await recipeNames(env, s.family_id);
+    const out = (r) => itemOut(r, who, suggestedLabels, names);
+    const filters = JSON.parse(fam.diet_filters);
+    const { results: mine } = await env.DB.prepare('SELECT * FROM family_recipes WHERE family_id = ? AND deleted_at IS NULL ORDER BY title COLLATE NOCASE, id').bind(s.family_id).all();
     return {
       today: day, mode: fam.mode, plan_weeks: Boolean(fam.plan_weeks), weeks_on: weeksOn(fam),
       // A request for a lesson already on the asker's list (say the course
       // loaded it since) says so.
       requests: active.filter((r) => r.status === 'requested').map((r) => ({
-        ...itemOut(r, who),
+        ...out(r),
         already_queued: active.some((x) => x.status !== 'requested' && x.lesson_id === r.lesson_id && (who[x.id] ?? []).includes(r.requested_by_profile_id)),
       })),
-      queued: active.filter((r) => r.status !== 'requested' && !r.course_id).map((r) => itemOut(r, who)),
-      put_back: rows.filter((r) => !ACTIVE.includes(r.status)).map((r) => itemOut(r, who)),
+      queued: active.filter((r) => r.status !== 'requested' && !r.course_id).map(out),
+      put_back: rows.filter((r) => !ACTIVE.includes(r.status) && !names[r.lesson_id]?.deleted).map(out),
       courses: states.map((st) => courseOut(st, fam, byLesson)),
       knife_ok: [...knifeOk],
       test_cooks: Object.fromEntries(tests.map((t) => [t.lesson_id, { cooked_on: t.cooked_on, by_me: t.parent_id === s.parent_id }])),
       library: LIBRARY.lessons.filter((L) => visible(fam).has(L.id)).map((L) => ({
         id: L.id, title: L.title, label: suggestedLabels[L.id] ?? null, unit: L.unit, servings_options: servingOptions(L), foundation: Boolean(dishById[L.id]?.pickOne),
       })),
+      // The family's own recipes can be queued like lessons (§6.10).
+      recipes: (await Promise.all(mine.map(async (row) => ({ row, f: await lessonFor(env, s.family_id, `recipe:${row.id}`) }))))
+        .filter(({ f }) => f && recipeVisible(f, filters)).map(({ row }) => ({ id: `recipe:${row.id}`, title: row.title, servings_options: RECIPE_SIZES })),
       default_servings: fam.default_servings,
     };
   });
@@ -352,7 +368,7 @@ export function register(on) {
   on('POST', '/api/queue', async (req, env, body) => {
     const s = await requireParent(env, req);
     const fam = await family(env, s.family_id);
-    const L = queueLesson(String(body.lesson_id ?? ''), fam);
+    const L = await queueLesson(env, String(body.lesson_id ?? ''), fam);
     const pids = await familyProfiles(env, s.family_id, body.profile_ids);
     for (const pid of pids) {
       const n = (await env.DB.prepare(`SELECT COUNT(*) AS n FROM queue q JOIN queue_profiles qp ON qp.queue_id = q.id
@@ -375,7 +391,7 @@ export function register(on) {
     const fam = await family(env, s.family_id);
     const r = await queueRow(env, s.family_id, qid);
     if (!ACTIVE.includes(r.status)) fail(409, 'closed', 'That lesson is no longer in the queue.');
-    const L = lessonById[r.lesson_id] ?? fail(409, 'gone', 'That lesson is no longer in the library.');
+    const L = lessonById[r.lesson_id] ?? (await lessonFor(env, s.family_id, r.lesson_id))?.lesson ?? fail(409, 'gone', 'That lesson is no longer in the library.');
     const stmts = [env.DB.prepare('UPDATE queue SET servings = ?, planned_date = ? WHERE id = ? AND family_id = ?')
       .bind(servingsFor(L, body.servings ?? r.servings, fam), r.course_id ? null : plannedDate(body.planned_date === undefined ? r.planned_date : body.planned_date), r.id, s.family_id)];
     if (body.profile_ids !== undefined && !r.course_id) {
@@ -402,7 +418,7 @@ export function register(on) {
     const fam = await family(env, s.family_id);
     const r = await queueRow(env, s.family_id, qid);
     if (r.status !== 'requested') fail(409, 'not_requested', 'That request is already answered.');
-    const L = queueLesson(r.lesson_id, fam);
+    const L = await queueLesson(env, r.lesson_id, fam);
     const stmts = [env.DB.prepare("UPDATE queue SET status = 'assigned', servings = ?, planned_date = ? WHERE id = ? AND family_id = ?")
       .bind(servingsFor(L, body.servings ?? r.servings, fam), plannedDate(body.planned_date), r.id, s.family_id)];
     if (body.profile_ids !== undefined) {
@@ -455,11 +471,12 @@ export function register(on) {
     const extras = new Set(mine ? mine.sched.this_week.lessons.filter((x) => x.extra).map((x) => x.id) : []);
     // A request for a lesson that's on the list anyway shows once, as queued.
     const listed = new Set(rows.filter((r) => r.status !== 'requested').map((r) => r.lesson_id));
+    const names = await recipeNames(env, s.family_id);
     return {
       mode: fam.mode,
       items: rows.filter((r) => r.status !== 'requested' || !listed.has(r.lesson_id)).map((r) => ({
-        id: r.id, lesson_id: r.lesson_id, title: lessonById[r.lesson_id]?.title ?? r.lesson_id, label: labels[r.lesson_id] ?? null,
-        image: lessonById[r.lesson_id]?.image ?? null, status: r.status, servings: r.servings, planned_date: r.planned_date, profile_ids: who[r.id] ?? [],
+        id: r.id, lesson_id: r.lesson_id, title: lessonById[r.lesson_id]?.title ?? names[r.lesson_id]?.title ?? r.lesson_id, label: labels[r.lesson_id] ?? null,
+        image: lessonById[r.lesson_id]?.image ?? names[r.lesson_id]?.image ?? null, recipe: Boolean(names[r.lesson_id]), status: r.status, servings: r.servings, planned_date: r.planned_date, profile_ids: who[r.id] ?? [],
         shopped_for: shopped[r.id] ?? null,
         when: r.week_start ? 'this-week' : null,
         due: r.week_start && r.week_start <= thisWeek && fam.mode === 'homeschool' && !(r.course_id && extras.has(r.lesson_id)) ? addDays(thisWeek, DUE_DAY) : null,
@@ -475,7 +492,7 @@ export function register(on) {
     const s = await requireSession(env, req);
     const p = await env.DB.prepare('SELECT id, audience FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first() ?? fail(404, 'not_found', 'No such profile.');
     const fam = await family(env, s.family_id);
-    const L = queueLesson(String(body.lesson_id ?? ''), fam);
+    const L = await queueLesson(env, String(body.lesson_id ?? ''), fam);
     const had = await env.DB.prepare(`SELECT q.id, q.status FROM queue q JOIN queue_profiles qp ON qp.queue_id = q.id
         WHERE q.family_id = ? AND qp.profile_id = ? AND q.lesson_id = ? AND q.status IN ('requested', 'assigned', 'shopped') LIMIT 1`).bind(s.family_id, pid, L.id).first();
     if (had) return { ok: true, id: had.id, status: had.status };
@@ -497,9 +514,9 @@ export function register(on) {
   // ---------- safety review and test-cooked (§6.2) ----------
 
   // Every step an adult needs to be in the kitchen for, before approving.
-  on('GET', '/api/lessons/([a-z0-9-]+)/safety', async (req, env, body, [lid]) => {
-    await requireSession(env, req);
-    const L = await liveLesson(env.DB, lid) ?? fail(404, 'not_found', 'No such lesson.');
+  on('GET', '/api/lessons/([a-z0-9-]+|recipe:[0-9a-f]{16})/safety', async (req, env, body, [lid]) => {
+    const s = await requireSession(env, req);
+    const L = (await lessonFor(env, s.family_id, lid))?.lesson ?? fail(404, 'not_found', 'No such lesson.');
     const steps = L.steps.map((x, i) => ({ n: i + 1, text: x.text, safety: x.safety, hazard: x.hazard ?? null })).filter((x) => x.safety !== 'solo');
     const level = steps.some((x) => x.safety === 'adult-hands-on') ? 'adult-hands-on' : steps.length ? 'adult-nearby' : 'solo';
     return { lesson_id: L.id, title: L.title, level, steps };

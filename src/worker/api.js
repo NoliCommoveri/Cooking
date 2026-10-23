@@ -18,6 +18,7 @@ import { numberCourse } from '../content/course.js';
 import { register as registerPlan, markCooked, tzOf } from './plan.js';
 import { localDay, isSabbath } from './schedule.js';
 import { register as registerShopping } from './shopping.js';
+import { register as registerRecipes, lessonFor, recipeNames } from './recipes.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -356,7 +357,9 @@ const isoTime = (v, field) => {
 
 on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
   const s = await requireSession(env, req);
-  const L = LIBRARY.lessons.find((x) => x.id === body.lesson_id) ?? fail(400, 'invalid', 'No such lesson.');
+  // A library lesson, or one of this family's recipes ("recipe:<id>", §6.10).
+  const found = await lessonFor(env, s.family_id, String(body.lesson_id ?? ''), { deleted: true }) ?? fail(400, 'invalid', 'No such lesson.');
+  const L = found.lesson;
   const servings = Number(body.servings);
   if (!servingOptions(L).includes(servings)) fail(400, 'invalid', `${L.title} can't be made for ${body.servings}.`);
   const ids = Array.isArray(body.profile_ids) ? [...new Set(body.profile_ids.map(String))] : [];
@@ -381,7 +384,7 @@ on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
       ? env.DB.prepare('UPDATE attempts SET servings = ?, finished_at = ?, checklist_state = ? WHERE id = ? AND family_id = ? AND finished_at IS NULL')
         .bind(servings, finished, state, aid, s.family_id)
       : env.DB.prepare(`INSERT INTO attempts (id, family_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).bind(aid, s.family_id, L.id, (await livePatches(env.DB, L.id))[L.id]?.version ?? L.version, servings, started, finished, state),
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).bind(aid, s.family_id, L.id, L.recipe ? L.version : (await livePatches(env.DB, L.id))[L.id]?.version ?? L.version, servings, started, finished, state),
     // Who's on it can change until it's finished; anyone kept keeps their reflection.
     env.DB.prepare(`DELETE FROM attempt_profiles WHERE attempt_id = ? AND family_id = ?
       AND profile_id NOT IN (${ids.map(() => '?').join(', ')})`).bind(aid, s.family_id, ...ids),
@@ -456,7 +459,8 @@ on('GET', '/api/progress', async (req, env) => {
   const { results } = await env.DB.prepare(`SELECT ap.profile_id, ap.rating, a.lesson_id, a.finished_at, a.servings FROM attempt_profiles ap
       JOIN attempts a ON a.id = ap.attempt_id AND a.family_id = ap.family_id
       WHERE ap.family_id = ? AND a.finished_at IS NOT NULL ORDER BY a.finished_at, a.id`).bind(s.family_id).all();
-  const lesson = (lid) => LIBRARY.lessons.find((L) => L.id === lid);
+  const recipes = await recipeNames(env, s.family_id);
+  const lesson = (lid) => LIBRARY.lessons.find((L) => L.id === lid) ?? (recipes[lid] && { title: recipes[lid].title, cuisine: null, skill: 'Family recipe' });
   return {
     family: (await env.DB.prepare('SELECT name FROM families WHERE id = ?').bind(s.family_id).first()).name,
     profiles: profiles.map((p) => ({
@@ -747,6 +751,7 @@ on('POST', '/api/owner/parent-password', async (req, env, body) => {
 // shopping and kitchen staples (shopping.js).
 registerPlan(on);
 registerShopping(on);
+registerRecipes(on);
 
 // ---------- dispatch ----------
 

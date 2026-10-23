@@ -514,7 +514,7 @@ No longer a bonus (owner, 2026-10-22): sharing recipes is central for the Appoin
 - **No photos in the directory** (owner, 2026-10-22). A shared recipe never carries a photo, even one the sharing family took; it always shows the placeholder art for its meal type (§6.19).
 - **Report and Hide** (owner, 2026-10-22). Any parent can **Report** a directory recipe, behind the parent PIN, with a type (unclean ingredient, food-safety problem, wrong or unclear, inappropriate, other) and a note. Reports wait on the owner screens (§6.2a), and unclean-ingredient and food-safety reports email the owner right away, as fix requests do (§6.11). The owner can **Hide** any directory recipe, reported or not: it leaves the directory and the swap picker at once. **Unhide** puts it back (the restore rule in `CLAUDE.md`). Copies families already added stay in their recipes, with a note that it was taken out of the directory (recommendation).
 - **Entry is a guided flow, not a file upload.** No CSV or file import. The parent is walked through one thing at a time, and the helper (§6.8) can run the same flow:
-  1. Title, servings, total time, and a photo if they have one (families with photos on, §2.6; the photo stays with that family and is never shared)
+  1. Title, servings, total time, and a photo if they have one (families with photos on, §2.6; the photo stays with that family and is never shared). The photo step comes with the camera (Phase 4); until then a recipe shows its meal-type picture
   2. Ingredients, each picked from the registry by search with amount and unit. An ingredient not in the registry is typed in, and sharing it then needs the owner's review (above)
   3. Equipment, picked from the registry
   4. Steps, one at a time, each with its safety level and an optional timer with its label. A doneness step needs its thermometer target, and the safe minimums apply (§3). A step that isn't solo asks for its hazard line, and a step that handles a raw ingredient is followed by a wash-hands step the flow adds for the parent (recommendation, §3, §7.4)
@@ -852,7 +852,7 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `password_resets` (token_hash, family_id, parent_id, expires_at, used_at)
 - `signup_verifications` (email, password_hash, code_hash, attempts, sent_at, expires_at). A sign-up waiting on its emailed code; removed when the family is created
 - `settings` (key, value). Holds the beta word, among others
-- `family_recipes` (id, family_id, title, servings, total_minutes, body_json, meal_type, photo_key, created_at, updated_at, source_community_id). `photo_key` is the family's own photo, never shared
+- `family_recipes` (id, family_id, title, servings, total_minutes, meal_type, body_json, version, photo_key, source_community_id, created_at, updated_at, deleted_at). `body_json` is the recipe (`src/content/recipe.js`); `version` goes up with each edit; `deleted_at` keeps a deleted recipe for Undo. `photo_key` is the family's own photo, never shared
 - `fix_requests` (id, family_id, reporter_parent_id, reporter_profile_id, lesson_id, lesson_version, step, servings, kind, field, current_value, suggested_value, note, created_at, status: open → fixed | declined | duplicate | needs_content_change, owner_reply, patch_id)
 - `lesson_patches` (id, lesson_id, base_version, field_path, old_value, new_value, fix_request_id, applied_by, applied_at, reverted_at). No `family_id`: patches apply to the shared library
 - `recipe_reviews` (id, family_id, family_recipe_id, reason: typed_in | leaven | hard_block, sent_at, status: pending → cleared | declined, owner_reply, community_recipe_id) (§6.10)
@@ -860,7 +860,7 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `recipe_reports` (id, family_id, community_recipe_id, kind, note, created_at, status: open → hidden | dismissed) (§6.10)
 - `sessions` (id, parent_id, family_id, created_at, last_seen, pin_until). `id` is a hash of the cookie's token; `pin_until` is when the parent PIN must be entered again on that device
 - `profiles` (id, family_id, name, avatar, people, theme, audience: kid | adult, track: core | beginner). One person or several sharing it (§1); `people` lists each person's name and avatar color so a shared locker shows everyone
-- `queue` (id, family_id, lesson_id, family_recipe_id, servings, planned_date, status: requested → assigned → shopped → cooked, requested_by_profile_id, course_id, source: manual | request | course | swap, swapped_for_queue_id). A queued item is a library lesson or one of the family's recipes (`family_recipe_id`). A swap (§6.19) is a queue row with `source` swap; a course's week counts it in place of one course lesson (recommendation). A course's lessons are queued with `course_id` set; their week comes from the schedule, not `planned_date`
+- `queue` (id, family_id, lesson_id, servings, planned_date, status: requested → assigned → shopped → cooked, requested_by_profile_id, course_id, source: manual | request | course | swap, swapped_for_queue_id). A queued item is a library lesson or one of the family's recipes, whose `lesson_id` is `recipe:<id>` (the same on `attempts` and shopping lists). A swap (§6.19) is a queue row with `source` swap; a course's week counts it in place of one course lesson (recommendation). A course's lessons are queued with `course_id` set; their week comes from the schedule, not `planned_date`
 - `courses` (id, family_id, name, code, school_year, start_date, per_week, created_at, archived_at) (§6.18)
 - `course_profiles` (course_id, family_id, profile_id). A profile is on one active course at most
 - `course_lessons` (course_id, family_id, lesson_id, position, removed)
@@ -870,7 +870,7 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `list_lessons` (list_id, family_id, position, lesson_id, servings, queue_id, course_id). The lessons as they were when the list was made; servings is for "You shopped for N" (§6.6)
 - `list_on_hand` (list_id, family_id, ingredient_id). Left off that list only
 - `list_checks` (list_id, family_id, ingredient_id)
-- `attempts` (id, family_id, queue_id, lesson_id, family_recipe_id, lesson_version, servings, started_at, finished_at, checklist_state, eater_rating)
+- `attempts` (id, family_id, queue_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state, eater_rating)
 - `attempt_profiles` (attempt_id, family_id, profile_id, rating, notes, transfer, reflected_at). Every profile on the cook, each with its own reflection; transfer is the optional "what other dish could use this move?"
 - `test_cooks` (family_id, lesson_id, lesson_version, parent_id, cooked_on)
 - `photos` (id, family_id, attempt_id, r2_key, created_at)

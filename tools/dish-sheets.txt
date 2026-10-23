@@ -21,6 +21,7 @@ sheet-16-foundations-2.png matzo-ball-soup,minestrone,grilled-cheese-tomato-soup
 sheet-17-foundations-3.png spaghetti-marinara,retired/60-sloppy-joes,retired/61-croque-madame,retired/62-chicken-gumbo
 sheet-18-unit5.png rugelach,beef-empanadas,challah,homemade-pizza
 sheet-21-swaps-1.png shoestring-fries,chimichurri-steak,tuna-salad-sandwiches,ratatouille
+sheet-23-appointed-times.png unleavened-flatbread,cottage-cheese-crescents
 # sheet-19-africa-1.png: its plates touch, so it's split by hand first. Each box (left, top, right, bottom)
 # is cut out onto a white margin, then cropped alone with the same tool:
 #   jollof-rice 0,50,532,445   chicken-yassa 530,50,1022,445   suya 1014,25,1536,440
