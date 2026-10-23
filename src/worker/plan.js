@@ -90,6 +90,65 @@ async function queueRow(env, fid, qid) {
   return (await env.DB.prepare('SELECT * FROM queue WHERE id = ? AND family_id = ?').bind(qid, fid).first()) ?? fail(404, 'not_found', 'No such queued lesson.');
 }
 
+// The week a queued item is for: a course lesson's week, a planned date's
+// week, or this week.
+export const weekFor = (r, day) => r.week_start ?? (r.planned_date ? weekOf(r.planned_date) : weekOf(day));
+
+// What happens to a queued lesson another one replaces (Swap for an Appointed
+// Time meal, §6.19, and a request approved as "Replace an assigned meal"): a
+// course lesson stays in the plan and goes first next week, and the planned
+// finish moves back with it, so it's never behind; a lesson queued by hand
+// comes off the queue. Returns the replacing row's swap_of and the statements.
+export function replaceStatements(env, fid, r, week, t) {
+  if (r.course_id) {
+    return { swapOf: `c:${r.course_id}:${r.lesson_id}`, stmts: [env.DB.prepare(`INSERT INTO course_weeks (course_id, family_id, week_start, skipped, extra, swapped) VALUES (?, ?, ?, 0, 0, 1)
+        ON CONFLICT(course_id, week_start) DO UPDATE SET swapped = swapped + 1`).bind(r.course_id, fid, week)] };
+  }
+  return { swapOf: `q:${r.id}`, stmts: [env.DB.prepare("UPDATE queue SET status = 'removed', closed_at = ? WHERE id = ? AND family_id = ?").bind(t, r.id, fid)] };
+}
+
+// The meal a request replaces: an assigned lesson on the asker's list that
+// isn't already a swap.
+async function replaceable(env, fid, qid, pid) {
+  const r = await queueRow(env, fid, qid);
+  if (!['assigned', 'shopped'].includes(r.status)) fail(409, 'closed', 'That lesson is no longer in the queue.');
+  if (r.swap_of) fail(409, 'swapped', 'That one already replaced another meal. Pick a different one.');
+  const on = await env.DB.prepare('SELECT 1 FROM queue_profiles WHERE queue_id = ? AND family_id = ? AND profile_id = ?').bind(r.id, fid, pid).first();
+  if (!on) fail(400, 'invalid', "That meal isn't on their list.");
+  return r;
+}
+
+// Approving a request (or a lesson a kid wants to cook now): either an extra
+// assigned meal, or one that replaces an assigned meal (owner, 2026-10-23).
+// Either way it never pushes the course's assigned lessons back (schedule.js).
+// row: the request to approve, or null to make a new one for pid.
+async function approveStatements(env, s, fam, { row, L, pid, replace, servings, req }) {
+  const t = now();
+  const stmts = [];
+  let qid = row?.id ?? id(), who = [pid], week = null, swapOf = null, planned = null;
+  if (replace) {
+    const r = await replaceable(env, s.family_id, String(replace), pid);
+    week = weekFor(r, today(req));
+    who = (await queueProfiles(env, s.family_id, [r.id]))[r.id] ?? [pid];
+    const out = replaceStatements(env, s.family_id, r, week, t);
+    swapOf = out.swapOf;
+    stmts.push(...out.stmts);
+    if (!r.course_id) { week = r.week_start; planned = r.planned_date; }
+    servings ??= r.servings;
+  }
+  const size = servingsFor(L, servings, fam);
+  if (row) {
+    stmts.unshift(env.DB.prepare("UPDATE queue SET status = 'assigned', servings = ?, planned_date = ?, week_start = ?, swap_of = ? WHERE id = ? AND family_id = ?")
+      .bind(size, planned, week, swapOf, row.id, s.family_id));
+  } else {
+    stmts.unshift(env.DB.prepare(`INSERT INTO queue (id, family_id, lesson_id, servings, planned_date, status, source, requested_by_profile_id, week_start, swap_of, created_at)
+        VALUES (?, ?, ?, ?, ?, 'assigned', 'request', ?, ?, ?, ?)`).bind(qid, s.family_id, L.id, size, planned, pid, week, swapOf, t));
+  }
+  stmts.push(env.DB.prepare('DELETE FROM queue_profiles WHERE queue_id = ? AND family_id = ?').bind(qid, s.family_id));
+  for (const p of who) stmts.push(env.DB.prepare('INSERT INTO queue_profiles (queue_id, family_id, profile_id) VALUES (?, ?, ?)').bind(qid, s.family_id, p));
+  return { qid, stmts };
+}
+
 // ---------- course plans ----------
 
 // A course's plan: every dish in the course outline in this course's order,
@@ -153,23 +212,28 @@ async function courseLessons(env, course, fam) {
 
 // The day each lesson was first cooked on this course, by any of its profiles.
 // Cooks from before the course was set up (or before it starts) don't count.
+// free: the lessons whose first cook was through a lesson queued outside the
+// course (schedule.js).
 async function courseDone(env, course, profiles, tz) {
-  if (!profiles.length) return {};
+  if (!profiles.length) return { done: {}, free: new Set() };
   const from = [course.created_at, course.start_date].sort()[0];
   const { results } = await env.DB.prepare(
-    `SELECT a.lesson_id, a.finished_at FROM attempts a
+    `SELECT a.lesson_id, a.finished_at, q.id AS qid, q.course_id FROM attempts a
+       LEFT JOIN queue q ON q.id = a.queue_id AND q.family_id = a.family_id
        WHERE a.family_id = ? AND a.finished_at IS NOT NULL AND a.finished_at >= ?
          AND EXISTS (SELECT 1 FROM attempt_profiles ap WHERE ap.attempt_id = a.id AND ap.family_id = a.family_id
            AND ap.profile_id IN (${placeholders(profiles)}))
        ORDER BY a.finished_at`,
   ).bind(course.family_id, from, ...profiles).all();
   // The first cook of each lesson that wasn't on the Sabbath.
-  const done = {};
+  const done = {}, free = new Set();
   for (const r of results) {
     const day = localDay(r.finished_at, tz);
-    if (!isSabbath(day) && !done[r.lesson_id]) done[r.lesson_id] = day;
+    if (isSabbath(day) || done[r.lesson_id]) continue;
+    done[r.lesson_id] = day;
+    if (r.qid && !r.course_id) free.add(r.lesson_id);
   }
-  return done;
+  return { done, free };
 }
 
 async function courseWeeks(env, course) {
@@ -180,9 +244,9 @@ async function courseWeeks(env, course) {
 async function courseState(env, course, fam, day, tz) {
   const profiles = await courseProfiles(env, course);
   const lessons = await courseLessons(env, course, fam);
-  const done = await courseDone(env, course, profiles, tz);
+  const { done, free } = await courseDone(env, course, profiles, tz);
   const weeks = await courseWeeks(env, course);
-  return { course, profiles, lessons, done, sched: schedule({ course, lessons: lessons.usable, done, weeks, today: day }) };
+  return { course, profiles, lessons, done, sched: schedule({ course, lessons: lessons.usable, done, free, weeks, today: day }) };
 }
 
 const activeCourses = async (env, fid) => (await env.DB.prepare('SELECT * FROM courses WHERE family_id = ? AND archived_at IS NULL ORDER BY created_at, id').bind(fid).all()).results;
@@ -420,6 +484,12 @@ export function register(on) {
     const r = await queueRow(env, s.family_id, qid);
     if (r.status !== 'requested') fail(409, 'not_requested', 'That request is already answered.');
     const L = await queueLesson(env, r.lesson_id, fam);
+    // "Replace an assigned meal": it takes that meal's place (owner, 2026-10-23).
+    if (body.replace) {
+      const { stmts } = await approveStatements(env, s, fam, { row: r, L, pid: r.requested_by_profile_id, replace: body.replace, servings: body.servings, req });
+      await env.DB.batch(stmts);
+      return { ok: true };
+    }
     const stmts = [env.DB.prepare("UPDATE queue SET status = 'assigned', servings = ?, planned_date = ? WHERE id = ? AND family_id = ?")
       .bind(servingsFor(L, body.servings ?? r.servings, fam), plannedDate(body.planned_date), r.id, s.family_id)];
     if (body.profile_ids !== undefined) {
@@ -473,12 +543,21 @@ export function register(on) {
     // A request for a lesson that's on the list anyway shows once, as queued.
     const listed = new Set(rows.filter((r) => r.status !== 'requested').map((r) => r.lesson_id));
     const names = await recipeNames(env, s.family_id);
+    // The course's lessons first, in the course plan's order, then the rest in
+    // the order they were added (§6.18).
+    const at = new Map((mine?.lessons.kept ?? []).map((x, i) => [x, i]));
+    const rank = (r) => (r.course_id && at.has(r.lesson_id) ? at.get(r.lesson_id) : 1e6);
+    rows.sort((a, b) => rank(a) - rank(b));
     return {
       mode: fam.mode,
+      // The profile's path, in its course plan's order (or the suggested one),
+      // for its kitchen's "Coming up" and the early flag (owner, 2026-10-23).
+      order: mine ? mine.lessons.kept : null,
       items: rows.filter((r) => r.status !== 'requested' || !listed.has(r.lesson_id)).map((r) => ({
         id: r.id, lesson_id: r.lesson_id, title: lessonById[r.lesson_id]?.title ?? names[r.lesson_id]?.title ?? r.lesson_id, label: labels[r.lesson_id] ?? null,
         image: lessonById[r.lesson_id]?.image ?? names[r.lesson_id]?.image ?? null, recipe: Boolean(names[r.lesson_id]), status: r.status, servings: r.servings, planned_date: r.planned_date, profile_ids: who[r.id] ?? [],
         shopped_for: shopped[r.id] ?? null,
+        swap: Boolean(r.swap_of),
         when: r.week_start ? 'this-week' : null,
         due: r.week_start && r.week_start <= thisWeek && fam.mode === 'homeschool' && !(r.course_id && extras.has(r.lesson_id)) ? addDays(thisWeek, DUE_DAY) : null,
       })),
@@ -510,6 +589,24 @@ export function register(on) {
       env.DB.prepare('INSERT INTO queue_profiles (queue_id, family_id, profile_id) VALUES (?, ?, ?)').bind(qid, s.family_id, pid),
     ]);
     return { ok: true, id: qid, status };
+  });
+
+  // A kid wants to cook something that isn't on their list now: a parent, with
+  // the PIN, approves it on the spot as an extra assigned meal, or as one that
+  // replaces an assigned meal (owner, 2026-10-23). A request already waiting
+  // for it is the one approved.
+  on('POST', '/api/profiles/([0-9a-f]{16})/approve', async (req, env, body, [pid]) => {
+    const s = await requireParent(env, req);
+    if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) fail(404, 'not_found', 'No such profile.');
+    const fam = await family(env, s.family_id);
+    const L = await queueLesson(env, String(body.lesson_id ?? ''), fam);
+    const rows = (await env.DB.prepare(`SELECT q.* FROM queue q JOIN queue_profiles qp ON qp.queue_id = q.id
+        WHERE q.family_id = ? AND qp.profile_id = ? AND q.lesson_id = ? AND q.status IN ('requested', 'assigned', 'shopped')`).bind(s.family_id, pid, L.id).all()).results;
+    const listed = rows.find((r) => r.status !== 'requested');
+    if (listed) return { ok: true, id: listed.id, status: listed.status };
+    const { qid, stmts } = await approveStatements(env, s, fam, { row: rows[0] ?? null, L, pid, replace: body.replace || null, servings: body.servings, req });
+    await env.DB.batch(stmts);
+    return { ok: true, id: qid, status: 'assigned' };
   });
 
   // ---------- safety review and test-cooked (§6.2) ----------

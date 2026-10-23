@@ -10,6 +10,7 @@ import { findTerms } from './lib/terms.js';
 import { dietView } from './lib/diet.js';
 import { applyPatches, showValue } from './lib/patch.js';
 import { voiceSupported, createVoice } from './voice.js';
+import { unlockSound, soundReady, ding, sizzle, isMuted, setMuted } from './sound.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const ic = (id, cls = 'ico') => `<svg class="${cls}" aria-hidden="true"><use href="/icons.svg#${id}"/></svg>`;
@@ -87,33 +88,9 @@ function cupSVG(done, of) {
 }
 
 // ---------- sound and the screen ----------
-// Browsers allow sound only after a tap on the page, and can suspend it again
-// when the app goes to the background. Every tap in the player turns it back on.
-let audio = null;
-function unlockSound() {
-  try {
-    audio ??= new (window.AudioContext || window.webkitAudioContext)();
-    if (audio.state !== 'running') return audio.resume().catch(() => {});
-  } catch { audio = null; }
-  return Promise.resolve();
-}
-const soundReady = () => audio?.state === 'running';
-// A ringing timer dings again this often until someone taps Stop (owner, 2026-10-22).
+// Sound lives in sound.js (§5.5). A ringing timer dings again this often until
+// someone taps Stop (owner, 2026-10-22).
 const DING_EVERY_MS = 4000;
-function ding() {
-  if (!audio) return;
-  try {
-    [0, 0.28, 0.56].forEach((d) => {
-      const o = audio.createOscillator(), g = audio.createGain();
-      o.frequency.value = 880; o.connect(g); g.connect(audio.destination);
-      g.gain.setValueAtTime(0.0001, audio.currentTime + d);
-      g.gain.exponentialRampToValueAtTime(0.3, audio.currentTime + d + 0.02);
-      g.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + d + 0.25);
-      o.start(audio.currentTime + d); o.stop(audio.currentTime + d + 0.26);
-    });
-  } catch { /* no sound on this device */ }
-  try { navigator.vibrate?.([200, 100, 200]); } catch { /* no vibration */ }
-}
 
 // The screen stays awake during Prep and Cook (§3). Where the browser can't,
 // a one-time tip says to raise the auto-lock time (§8.2).
@@ -137,12 +114,16 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // the suggested order's numbers. ask: { status, send() } for "I want to make
 // this" (a kid) or "Cook this" (an adult); status is null, or where the lesson
 // is in the profile's queue, and send() resolves to the new one (§6.1).
+// ask.approve() asks a grown-up to OK a kid's lesson that isn't on their list,
+// resolving to its new status, or null if they didn't; ask.early says it's
+// later on the kid's path.
 // seed: { servings, with, shopped } from the queued lesson, for a fresh cook;
 // shopped is the serving count its shopping trip bought for (§6.6).
 // onReflect(cookId, reflection): saves one profile's reflection (§3).
+// onDone(): the cook is finished and reflected on; the app shows what it earned (Phase 5).
 // lesson: a family recipe already in lesson shape (§6.10), with `extra`, its
 // typed-in ingredients, beside the registry. Otherwise lessonId is loaded.
-export async function openLesson(mount, { profile, family, lessonId, lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null }) {
+export async function openLesson(mount, { profile, family, lessonId, lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null }) {
   const [R, L] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
   const ING = { ...R.ingredients, ...extra };
   // Appointed Times lessons keep their A1, A2 labels whatever the course plan (§6.19).
@@ -276,6 +257,14 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
     : '');
 
   // ---------- the lesson card ----------
+  // A kid starting something that isn't on their list needs a grown-up: it's
+  // flagged as early (later on their path) or off their path, and starting it
+  // asks for the parent PIN and how to fit it in (owner, 2026-10-23). Adults
+  // just cook. A cook already under way carries on.
+  const gated = () => Boolean(ask?.approve) && !adult && !S.started && !['assigned', 'shopped'].includes(ask.status);
+  const gateNote = () => (gated()
+    ? `<p class="${T.note} earlynote" role="note">${ic('i-lock')}<b>${ask.early ? 'This one is early.' : "This one isn't on your path right now."}</b> ${ask.early ? "It's later on your path." : ''} A grown-up needs to OK it before you start.</p>`
+    : '');
   function cardView() {
     const cu = R.cuisines[L.cuisine]?.name ?? L.cuisine;
     const sc = scaled();
@@ -302,11 +291,11 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
       ? `<article class="q-panel q-card"><p class="q-kick">${L.recipe ? esc(L.kicker ?? 'Family recipe') : R.seasonal?.includes(L.unit) ? esc(R.units[L.unit]) : `Path ${L.unit}`}${num(L.id) ? ` · Quest ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
           <h2 class="q-title">${esc(L.title)}</h2><p class="q-skill"><b>${esc(L.skill)}</b></p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${who}${swaps}
-          <button type="button" class="q-btn" data-act="start">${!S.started ? 'Start quest' : 'Keep going'}</button></article>`
+          ${gateNote()}<button type="button" class="q-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask a grown-up to start' : !S.started ? 'Start quest' : 'Keep going'}</button></article>`
       : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
           ${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
-          <button type="button" class="p-btn" data-act="start">${!S.started ? "Let's cook" : 'Keep going'}</button></article>`;
+          ${gateNote()}<button type="button" class="p-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask a grown-up to start' : !S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
     return `${top}${askBox()}${fixNotes()}<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${restart}${fixBtn(null)}</div>`;
   }
@@ -517,7 +506,8 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
     // A recipe with no Learn cards goes straight to Prep.
     if (S.stage === 'learn' && !learnCards().length) S.stage = 'prep';
     if (S.stage !== 'card' && S.stage !== 'done') { S.last = S.stage; save(); }
-    const back = `<a class="back" href="#" data-act="exit">← ${quest ? 'Quest board' : 'Recipe box'}</a>`;
+    const muted = isMuted();
+    const back = `<div class="pl-top"><a class="back" href="#" data-act="exit">← ${quest ? 'Quest board' : 'Recipe box'}</a><button type="button" class="mutebtn" data-act="mute" aria-pressed="${muted}" aria-label="${muted ? 'Sound effects off. Turn them on' : 'Sound effects on. Turn them off'}">${ic(muted ? 'i-mute' : 'i-sound')}</button></div>`;
     mount.innerHTML = `<section class="kitchen qx player" data-kt="${quest ? 'quest' : 'passport'}">${back}${STAGES[S.stage]()}${whyView()}</section>`;
     if (focusTop) window.scrollTo(0, 0);
     if (S.stage !== 'cook' && voice?.on) voice.stop();
@@ -590,6 +580,13 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
       case 'exit-done': clearState(profile.id, L.id); return exit();
       case 'serv': S.servings = options[Math.max(0, Math.min(options.length - 1, options.indexOf(S.servings) + Number(d.i)))]; break;
       case 'serv-set': S.servings = Number(d.n); break;
+      case 'approve':
+        b.disabled = true;
+        return ask.approve().then((st) => {
+          if (!st) { b.disabled = false; return; }
+          ask.status = st;
+          S.stage = learnCards().length ? 'learn' : 'prep'; begin(); save(); sync(); draw();
+        }, () => { b.disabled = false; });
       case 'start': S.stage = S.started ? S.last || 'learn' : learnCards().length ? 'learn' : 'prep'; begin(); break;
       case 'restart': S = fresh(); break;
       case 'ask':
@@ -609,14 +606,14 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
         save();
         return draw(false);
       }
-      case 'step': step(Number(d.i)); break;
+      case 'step': if (Number(d.i) > 0 && S.stage === 'cook') sizzle(); step(Number(d.i)); break;
       // Plate it: the cook is finished and counts; Reflect comes next.
       case 'finish': S.stage = 'reflect'; S.timers = []; S.finishedAt = new Date().toISOString(); break;
       case 'rate':
         if (d.k === 'eaters') S.eater = Number(d.n); else S.refl[d.k].rating = Number(d.n);
         save();
         return draw(false);
-      case 'reflect-skip': S.stage = 'done'; break;
+      case 'reflect-skip': S.stage = 'done'; onDone?.(); break;
       case 'reflect-save':
         if (onReflect && S.cookId) {
           onCookNow().forEach((p, i) => {
@@ -625,6 +622,7 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
           });
         }
         S.stage = 'done';
+        onDone?.();
         break;
       case 'term': term = d.id && d.id !== term ? d.id : null; return draw(false);
       case 'why': why = d.id; return draw(false);
@@ -647,6 +645,7 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
         // step, and serving count. Afterwards the lesson card shows its status.
         return fixes.suggest({ lesson: L, stepId: d.step || null, servings: S.servings, ingredients: ING })
           .then(async (sent) => { if (sent) { await loadFixes(); draw(false); } });
+      case 'mute': setMuted(!isMuted()); return draw(false);
       case 'sound': return unlockSound().then(() => { if (soundReady()) ding(); draw(false); });
       case 'voice':
         voice ??= createVoice({ onCommand: onVoice, onStatus: onVoiceStatus });

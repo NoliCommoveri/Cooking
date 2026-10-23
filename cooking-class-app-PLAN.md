@@ -294,14 +294,16 @@ None of the 75 dishes requires a stand mixer. Lessons that use one in typical re
 **Requirement: each profile picks its own theme.** Kids choose; there is no single app-wide theme.
 
 - **Same rewards, different look.** Every theme shows the same progress underneath: a reward per completed dish, a pin per skill, and a rank. Each theme draws them its own way.
+- **Ranks — Requirement (owner, 2026-10-23).** Six ranks, by the number of different dishes a profile has cooked: Kitchen Apprentice (0), Prep Cook (5), Line Cook (15), Sous Chef (30), Head Chef (50), and Executive Chef (75, the whole course). Cooking a dish again doesn't count twice, and nothing cooked on the Sabbath counts (§6.18).
+- **Family recipes count toward rank only (owner, 2026-10-23).** A family's own recipe, or a User-shared recipe it cooks (§6.10), counts as a dish toward rank, but earns no stamp, node, or skill, since a recipe has no set cuisine or course skill. Lessons, including the Appointed Times unit's (§6.19), earn all three.
 - **Every theme supplies its own treatment for every component in §5.4.** §5.4 gives the Chef's Passport treatment and §5.4a the Kitchen Quest one. The banned patterns in §5.6 apply to all of them.
 - **The look follows the profile.** On a shared device, the theme switches when a profile is picked from the chef lockers. The profile picker and parent screens use a neutral house style.
 - **Theme tokens are CSS custom properties,** one set per theme, applied at the root when a profile is active.
 - **Requirement: Kitchen Quest is built first, then Chef's Passport as soon as possible.** The kids chose from the Phase 0 mockups (`mockups/theme-picker.html`). Food Truck and Recipe Scrapbook come later (§9). A profile can switch to any built theme at any time.
 
 **Themes:**
-- **Chef's Passport + Kitchen Ranks.** Each dish earns an inked stamp for its cuisine in a passport book. Stamp pages are grouped by region, and the world map lights up as regions fill in. Ranks go Kitchen Apprentice → Prep Cook → Line Cook → Sous Chef → Head Chef, and each changes the hat or apron on the chef avatar. §5.4 describes this one. Built second.
-- **Kitchen Quest** (built first): an RPG-style skill tree. Each unit is a path, and each dish is a node on it. Clearing a quest lights its node. Ranks show as a level and title (Level 1 Kitchen Apprentice … Level 5 Head Chef). §5.4a describes this one.
+- **Chef's Passport + Kitchen Ranks.** Each dish earns an inked stamp for its cuisine in a passport book. Stamp pages are grouped by region, and the world map lights up as regions fill in. Ranks go Kitchen Apprentice → Prep Cook → Line Cook → Sous Chef → Head Chef → Executive Chef, and each changes the hat or apron on the chef avatar. §5.4 describes this one. Built second.
+- **Kitchen Quest** (built first): an RPG-style skill tree. Each unit is a path, and each dish is a node on it. Clearing a quest lights its node. Ranks show as a level and title (Level 1 Kitchen Apprentice … Level 6 Executive Chef). §5.4a describes this one.
 - **Food Truck** (later): each lesson adds a menu item to the kid's own food truck.
 - **Recipe Scrapbook** (later): progress lives in a scrapbook.
 
@@ -325,7 +327,7 @@ Palette: cork, cream paper, ink, tomato red, butter, basil, and passport navy. *
 
 - **Stamp pages by region:** East & Southeast Asia, Middle East & North Africa, South Asia, Sub-Saharan Africa, Europe, Latin America & Caribbean, and the United States. Half the course is American, so the US page is the biggest. Churros (25, Spanish/Mexican) go on the Latin America page with the Mexican stamp. Each cuisine has one stamp design, so every Japanese dish gets the same stamp with its own date.
 - **World map:** the owner's illustrated map, split into one layer per region by `tools/split-world-map.py`, so the app can color each region. A region turns butter when it has its first stamp and basil when every stamp is in.
-- **Rank outfits:** Kitchen Apprentice wears a paper cap and plain apron; Prep Cook a short chef's hat and butter apron; Line Cook a taller hat, red neckerchief, and striped apron; Sous Chef a pleated hat, buttoned jacket, and navy apron; Head Chef the tallest hat with a gold band.
+- **Rank outfits:** Kitchen Apprentice wears a paper cap and plain apron; Prep Cook a short chef's hat and butter apron; Line Cook a taller hat, red neckerchief, and striped apron; Sous Chef a pleated hat, buttoned jacket, and navy apron; Head Chef the tallest hat with a gold band; Executive Chef (owner, 2026-10-23) an even taller hat with a gold band and star, and a black jacket with gold buttons.
 
 | Component | Treatment |
 |---|---|
@@ -373,7 +375,7 @@ Drawn from the Phase 0 mockup. Palette: night navy, gold, mana teal, and ember r
 - **Milestones** (lesson done, stamp earned, rank up): bigger celebrations are fine — a stamp slamming down with an ink splat, steam puffs, a sprinkles burst.
 - **Nothing should animate while a kid is reading a step.** Motion must not pull attention away from the cooking instructions.
 - Honor `prefers-reduced-motion` with simpler fades.
-- **Optional sound effects:** timer ding, a light sizzle on Next, a stamp thunk. Include a mute toggle that is remembered per device.
+- **Optional sound effects:** timer ding, a light sizzle on Next, a stamp thunk. Include a mute toggle that is remembered per device. Sounds are made in the browser, with no audio files (owner, 2026-10-23), and are on until muted. The mute toggle silences the effects but not the timer, which rings until it's stopped (§6.1).
 
 ### 5.6 Banned patterns
 Do **not** use:
@@ -787,6 +789,7 @@ Set the whole course up once, and the app loads each week's lessons. Always on i
 - **The schedule is worked out, not stored.** Each week holds the next unfinished lessons in the plan, at the course's pace. A lesson is finished when a cook of it is finished with any of the course's profiles on it.
 - **Rollover (owner, 2026-10-22): everything shifts.** A lesson not cooked by the end of its week goes first the next week, and every later lesson moves back a week. The parent sees the planned finish and how far behind it is ("2 weeks behind"); kids don't.
 - **Cooking ahead is fine.** A lesson cooked early counts, and the rest of the schedule moves up.
+- **A kid cooking off their list needs a grown-up — Requirement (owner, 2026-10-23).** On a kid profile, a lesson that isn't on their list is flagged as early (later on their path) or off their path, and starting it asks for the parent PIN. The parent picks **Add as an additional assigned meal** or **Replace an assigned meal**, and a request approved on the Queue screen offers the same two choices. Neither pushes the assigned lessons back: an extra counts as done without taking a week's place, and a replaced course lesson goes first next week, as with a swap (§6.19). Adult profiles aren't asked.
 - **Skip this week**, for breaks and vacations, pushes everything back a week. A skipped week can be put back.
 - **Skip this recipe** (owner, 2026-10-22), one tap for a parent on a lesson in this week: the lesson comes out of the course plan, and the next unfinished lesson takes its place this week. It shows an Undo, and a skipped lesson can be put back from the plan at any time. Skipping a lesson another one builds on shows the prerequisite note (§4.1).
 - **Cook another recipe** (owner, 2026-10-22), one tap for a parent: pulls the next unfinished lesson into this week as an extra, for this week only. If it's cooked, the rest of the schedule moves up, as with cooking ahead. If it isn't, it goes back to its place, isn't overdue, and nothing shifts.

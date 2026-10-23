@@ -24,6 +24,10 @@ export const DUE_DAY = 5;
 // lessons: the lesson ids the schedule can use, in plan order (written, kept in
 //   the plan, and not hidden by the family's diet settings)
 // done: { lesson id: the day it was first cooked on this course }
+// free: lesson ids cooked through a lesson queued outside the course (a kid's
+//   approved request, added as an extra or replacing an assigned meal): they
+//   count as done but never take one of a week's places, so cooking one early
+//   doesn't push the week's assigned lessons back (owner, 2026-10-23)
 // weeks: { week's Sunday: { skipped, extra, swapped } }
 // today: the family's calendar day
 //
@@ -31,7 +35,7 @@ export const DUE_DAY = 5;
 // skipped, extra }), the weeks after ({ week, lessons: [ids] }), whether next
 // week shows yet, the planned and projected
 // finish weeks, and how many weeks behind the plan the course is.
-export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
+export function schedule({ course, lessons, done = {}, free = new Set(), weeks = {}, today }) {
   const per = course.per_week;
   const start = weekOf(course.start_date);
   const now = weekOf(today);
@@ -77,7 +81,7 @@ export function schedule({ course, lessons, done = {}, weeks = {}, today }) {
     const paced = skipped(w) ? 0 : Math.max(0, capOf(w) - cookedHere.length);
     return { list: open.slice(from, from + room), next: from + room, paced };
   };
-  const cookedNow = doneIds.filter((id) => done[id] >= now && done[id] < addDays(now, 7));
+  const cookedNow = doneIds.filter((id) => done[id] >= now && done[id] < addDays(now, 7) && !free.has(id));
   const a = fill(now, 0, cookedNow);
   const next = addDays(now, 7);
   const b = fill(next, a.next, []);

@@ -7,6 +7,8 @@ import { patchTargets, showValue } from './lib/patch.js';
 import { courseEntries, prereqNotes } from './lib/course.js';
 import { toBase, mixed } from './lib/units.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
+import { progressView, celebrate } from './rewards.js';
+import { isMuted, setMuted } from './sound.js';
 
 const app = document.getElementById('app');
 
@@ -314,6 +316,8 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const [{ profiles }, lib] = await Promise.all([api('GET', '/api/profiles'), api('GET', '/api/library')]);
   const p = profiles.find((x) => x.id === id);
   if (!p) return go('#/');
+  // A cook just finished goes up first, so its rewards count (a few seconds at most).
+  await Promise.race([flushCooks(), new Promise((ok) => setTimeout(ok, 4000))]);
   const [{ cooks }, mine, { recipes }, { recipes: feastShared }] = await Promise.all([api('GET', `/api/profiles/${p.id}/cooks?${tz()}`), api('GET', `/api/profiles/${p.id}/queue?${tz()}`), api('GET', '/api/recipes'), api('GET', '/api/shared?feast=1')]);
   store('cpr.profile', p.id);
   // A profile on a course takes its lesson numbers from the course plan (§4.1).
@@ -326,7 +330,6 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     const swaps = L.substitutions.map((s) => `${s.use} instead of ${s.for}`).join('; ');
     const skip = L.left_out.length ? `Leave out the ${L.left_out.join(', ').toLowerCase()}` : '';
     const time = `${L.totalMinutes} min`;
-    // Stamps and crests for a cooked lesson come with course progress (Phase 5).
     const done = cooks[L.id];
     const cooked = done ? el('p', { class: quest ? 'q-swap k-cooked' : 'p-swap k-cooked' },
       art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"/></svg>'),
@@ -397,7 +400,10 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     // pick-one group counts once, and once one of its dishes is cooked it's done.
     const doneGroups = new Set(lib.lessons.filter((L) => L.pick && (cooks[L.id] || queued.has(L.id))).map((L) => L.pick));
     const entries = [];
-    for (const L of lib.lessons) {
+    // In the profile's course plan's order when it has one (§6.18).
+    const byId = Object.fromEntries(lib.lessons.map((L) => [L.id, L]));
+    const ordered = mine.order ? mine.order.map((x) => byId[x]).filter(Boolean) : lib.lessons;
+    for (const L of ordered) {
       if (seasonalUnit(L.unit) || cooks[L.id] || queued.has(L.id) || (mine.labels && !mine.labels[L.id])) continue;
       if (L.pick && doneGroups.has(L.pick)) continue;
       const last = entries.at(-1);
@@ -447,8 +453,9 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     return [el('div', { class: 'k-searchrow' }, search), results];
   };
 
-  const tabs = [['path', quest ? 'Main quest' : 'My journey'], ['more', quest ? 'Side quests' : 'More recipes']];
-  const current = tab === 'more' ? 'more' : 'path';
+  // Progress and rewards (Phase 5): the skill tree, or the passport.
+  const tabs = [['path', quest ? 'Main quest' : 'My journey'], ['more', quest ? 'Side quests' : 'More recipes'], ['progress', quest ? 'Skill tree' : 'Passport']];
+  const current = tabs.some(([k]) => k === tab) ? tab : 'path';
   sessionSet(`cpr.tab.${p.id}`, current);
   screen(el('section', { class: 'kitchen k-tabbed', 'data-kt': p.theme },
     el('a', { class: 'back', href: '#/' }, '← Lockers'),
@@ -459,13 +466,20 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
       el('button', { class: 'themebtn', type: 'button', onclick: async () => {
         await api('PUT', `/api/profiles/${p.id}/theme`, { theme: other });
         kitchen(id, current);
-      } }, `Switch to ${THEMES[other]}`)),
-    current === 'more' ? moreView() : pathView(),
-    // Pinned to the bottom, where a thumb is, as in MCCE Kids. Progress and
-    // rewards join them when they're built (Phase 5).
+      } }, `Switch to ${THEMES[other]}`),
+      // Sound effects on or off, remembered on this device (§5.5).
+      el('button', { class: 'themebtn', type: 'button', 'aria-pressed': String(!isMuted()), onclick: (e) => {
+        setMuted(!isMuted());
+        e.currentTarget.setAttribute('aria-pressed', String(!isMuted()));
+        e.currentTarget.textContent = isMuted() ? 'Sound effects: off' : 'Sound effects: on';
+      } }, isMuted() ? 'Sound effects: off' : 'Sound effects: on')),
+    current === 'more' ? moreView() : current === 'progress' ? await progressView(p, cooks) : pathView(),
+    // Pinned to the bottom, where a thumb is, as in MCCE Kids.
     el('nav', { class: `k-tabs ${quest ? 'q' : 'p'}`, 'aria-label': 'Kitchen' }, tabs.map(([k, label]) => el('a', {
       href: `#/kitchen/${p.id}/@${k}`, 'aria-current': k === current ? 'page' : null,
     }, label)))));
+  // Anything earned since this device last showed it: a stamp, a skill, a rank.
+  celebrate(p, cooks);
 }
 
 // A lesson, played in the profile's theme (player.js).
@@ -487,9 +501,18 @@ async function lesson(profileId, lessonId) {
     // servings and who it's for, for a fresh cook.
     ask: {
       status: queued?.status ?? null,
+      // Off their list: later on their path (early), or not on it.
+      early: Boolean(mine.order?.includes(lessonId)),
+      approve: () => approveNow(p, lessonId, recipe?.lesson?.title ?? lib.lessons.find((x) => x.id === lessonId)?.title ?? 'this'),
       send: async () => {
         try { return (await api('POST', `/api/profiles/${p.id}/ask`, { lesson_id: lessonId })).status; } catch (err) { showToast(err.message); throw err; }
       },
+    },
+    // What the cook earned, shown when it's done (Phase 5).
+    onDone: async () => {
+      await Promise.race([flushCooks(), new Promise((ok) => setTimeout(ok, 4000))]);
+      const { cooks } = await api('GET', `/api/profiles/${p.id}/cooks?${tz()}`).catch(() => ({ cooks: null }));
+      if (cooks) await celebrate(p, cooks);
     },
     seed: queued ? { servings: queued.servings, with: (queued.profile_ids ?? []).filter((x) => x !== p.id), shopped: queued.shopped_for } : null,
     // Suggest a fix is for library lessons; a family edits its own recipes.
@@ -516,6 +539,54 @@ const fromInput = (kind, v) => {
 const valueInput = (kind, name, value = '') => (kind === 'text'
   ? el('textarea', { name, rows: 3, maxlength: 600 }, value)
   : el('input', { name, value, inputmode: kind === 'unit' ? 'text' : 'decimal', autocomplete: 'off' }));
+
+// A kid wants to cook something that isn't on their list (owner, 2026-10-23):
+// a grown-up enters the PIN and says how it fits in, as an extra assigned meal
+// or in place of one already assigned. Resolves to the lesson's new status, or
+// null if they cancel.
+function approveNow(profile, lessonId, title) {
+  return new Promise((resolve) => {
+    const box = el('div', { class: 'card' });
+    const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': `OK ${title}` }, box);
+    const close = (st) => { ov.remove(); resolve(st); };
+    ov.addEventListener('click', (e) => { if (e.target === ov) close(null); });
+    const cancel = () => el('button', { type: 'button', class: 'hbtn', onclick: () => close(null) }, 'Cancel');
+    document.body.append(ov);
+
+    const pinStep = () => {
+      const input = el('input', { name: 'pin', type: 'password', inputmode: 'numeric', autocomplete: 'off', pattern: '[0-9]*', maxlength: 8, 'aria-label': 'Parent PIN' });
+      box.replaceChildren(el('h2', {}, `${profile.name} wants to cook ${title}`),
+        el('p', { class: 'mut' }, "It isn't on their list. A grown-up OKs it: enter the parent PIN."),
+        form([el('div', { class: 'pin' }, input)], 'Unlock', async (v) => {
+          await api('POST', '/api/pin/unlock', { pin: v.pin });
+          await refresh();
+          await choiceStep();
+        }, { extra: [cancel()] }));
+      input.focus();
+    };
+
+    const choiceStep = async () => {
+      const mine = await api('GET', `/api/profiles/${profile.id}/queue?${tz()}`);
+      const assigned = mine.items.filter((x) => ['assigned', 'shopped'].includes(x.status) && !x.swap);
+      const pick = el('select', { name: 'replace', 'aria-label': 'The meal it replaces' }, assigned.map((x) => el('option', { value: x.id }, x.title)));
+      const choice = (value, label, hint, checked) => el('label', { class: 'choice' },
+        el('input', { type: 'radio', name: 'how', value, checked, onchange: () => { pick.disabled = value !== 'replace'; } }),
+        el('span', {}, el('b', {}, label), el('small', { class: 'mut' }, ` ${hint}`)));
+      pick.disabled = true;
+      box.replaceChildren(el('h2', {}, `How does ${title} fit in?`),
+        form([
+          choice('extra', 'Add as an additional assigned meal', `${profile.name}'s assigned meals stay where they are.`, true),
+          assigned.length ? choice('replace', 'Replace an assigned meal', 'A course lesson it replaces goes first next week, and nobody is shown as behind.', false) : null,
+          assigned.length ? el('label', { class: 'f' }, 'The meal it replaces', pick) : null,
+        ], 'OK, start cooking', async (v) => {
+          const r = await api('POST', `/api/profiles/${profile.id}/approve`, { lesson_id: lessonId, replace: v.how === 'replace' ? pick.value : null });
+          close(r.status);
+        }, { extra: [cancel()] }));
+    };
+
+    if (unlocked()) choiceStep().catch((err) => { showToast(err.message); close(null); }); else pinStep();
+  });
+}
 
 // A dialog over the lesson, in the house style. Resolves true once a fix is
 // sent. A kid profile asks for the parent PIN first; an adult profile doesn't.
@@ -856,6 +927,19 @@ const parentQueue = parentOnly(async (flash) => {
   const setServings = (qid) => async (n) => { await api('PUT', `/api/queue/${qid}`, { servings: n }); };
 
   // ---- requests ----
+  // A request is approved as an extra meal, or in place of one of the asker's
+  // assigned meals (owner, 2026-10-23).
+  const replaceable = (pid) => [
+    ...q.queued.filter((x) => x.profile_ids.includes(pid) && !x.swap).map((x) => ({ id: x.id, title: x.title })),
+    ...q.courses.filter((c) => c.profile_ids.includes(pid)).flatMap((c) => c.this_week.lessons.filter((x) => x.queue_id && !x.done).map((x) => ({ id: x.queue_id, title: x.title }))),
+  ];
+  const replaceApprove = (r) => {
+    const pick = el('select', { 'aria-label': `The meal ${r.title} replaces` }, replaceable(r.requested_by).map((x) => el('option', { value: x.id }, x.title)));
+    return el('span', { class: 'acts' }, actBtn('Approve, replacing', '', async () => {
+      await api('POST', `/api/queue/${r.id}/approve`, { replace: pick.value });
+      again(`${r.title} replaces ${pick.selectedOptions[0].textContent} on ${pname(r.requested_by)}'s list.`);
+    }), pick);
+  };
   const requests = q.requests.map((r) => el('div', { class: 'card qcard' },
     el('div', {}, el('b', {}, `${pname(r.requested_by)} asked for `, ...lessonName(r)), r.foundation ? foundationMark() : null,
       el('small', { class: 'mut' }, ` · ${fmtDay(r.created_at.slice(0, 10))}`)),
@@ -863,7 +947,8 @@ const parentQueue = parentOnly(async (flash) => {
     safetyReview(r.lesson_id), tested(r.lesson_id),
     el('div', { class: 'acts' },
       servingsPick(r, setServings(r.id)),
-      actBtn('Approve', 'pri', async () => { await api('POST', `/api/queue/${r.id}/approve`); again(`${r.title} is on ${pname(r.requested_by)}'s list.`); }),
+      actBtn('Approve as an extra meal', 'pri', async () => { await api('POST', `/api/queue/${r.id}/approve`); again(`${r.title} is on ${pname(r.requested_by)}'s list as an extra meal.`); }),
+      replaceable(r.requested_by).length ? replaceApprove(r) : null,
       actBtn('Not now', '', async () => {
         await api('POST', `/api/queue/${r.id}/decline`);
         again(`Not now for ${r.title}.`, () => api('POST', `/api/queue/${r.id}/put-back`));

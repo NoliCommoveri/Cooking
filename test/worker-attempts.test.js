@@ -31,6 +31,15 @@ test('a cook shared by two profiles counts for both, once finished', async () =>
   for (const p of [ava, eli]) assert.equal((await a.get(`/api/profiles/${p}/cooks`)).body.cooks['shakshuka'].times, 1);
 });
 
+test('cooks say when a lesson was first and last cooked, for its stamp date', async () => {
+  const { a, ava } = await setup();
+  const first = new Date(Date.UTC(2026, 9, 5, 15)).toISOString(); // a Monday
+  const later = new Date(Date.UTC(2026, 9, 7, 15)).toISOString(); // a Wednesday
+  await a.put('/api/attempts/00000000000000b1', cook([ava], { started_at: first, finished_at: first }));
+  await a.put('/api/attempts/00000000000000b2', cook([ava], { started_at: later, finished_at: later }));
+  assert.deepEqual((await a.get(`/api/profiles/${ava}/cooks`)).body.cooks.shakshuka, { times: 2, first, last: later });
+});
+
 test('sending the same cook again saves it once, and a finished cook stays as it was', async () => {
   const { env, a, ava, eli } = await setup();
   const id = '00000000000000a1';

@@ -185,7 +185,7 @@
 .whyov .lore{width:min(520px,100%);background:var(--q-panel);color:var(--q-text)}
 button.crest{border:0;background:transparent;color:inherit;padding:4px 0;font:inherit;font-size:12.5px;font-weight:800;cursor:pointer}
 button.crest[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(242,182,64,.8))}
-.crestinfo{margin-top:14px;padding:14px;display:grid;gap:8px}
+.crestinfo{margin:14px 0;padding:14px;display:grid;gap:8px}
 .crestinfo h5{margin:0;font-family:var(--q-disp);font-size:20px;color:var(--q-gold)}
 .crestinfo p{margin:0;font-size:16px}
 .crestinfo ul{margin:0;padding:0;list-style:none;display:grid;gap:4px}
@@ -412,6 +412,117 @@ use.pop{animation:dropin .42s cubic-bezier(.3,.7,.4,1) both}
 @keyframes drop{0%{transform:translateY(-60px) rotate(-6deg);opacity:0}70%{transform:translateY(4px)}100%{transform:none;opacity:1}}
 @keyframes burst{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--x),var(--y)) scale(.4);opacity:0}}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
+/* ---------- Progress and rewards (Phase 5): from the approved showcase ---------- */
+/* Kitchen Quest: skill tree, level, crests */
+.q-tree svg{width:100%;height:auto;display:block}
+.q-tree text{font-family:var(--q-disp);font-weight:600}
+.q-lvl{padding:14px 16px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 14px;align-items:center;margin-top:12px}
+.q-lvl svg{width:62px;height:62px;grid-row:span 3}
+.q-lvl b{font-family:var(--q-disp);font-size:24px;color:var(--q-gold);line-height:1}
+.q-lvl span{font-size:14px;color:var(--q-dim)}
+.q-xp{height:16px;background:var(--q-deep);box-shadow:inset 0 0 0 2px var(--q-edge);position:relative}
+.q-xp i{position:absolute;inset:3px auto 3px 3px;background:linear-gradient(90deg,var(--q-mana),#9BF0E4)}
+.crests{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:12px 8px}
+.crest{display:grid;justify-items:center;text-align:center;gap:4px;font-size:12.5px;font-weight:800;line-height:1.15}
+.crest svg{width:58px;height:58px;filter:drop-shadow(0 3px 0 rgba(0,0,0,.4))}
+.crest.locked{color:var(--q-dim);font-weight:600}
+.crest.locked svg{filter:none;opacity:.5}
+.k-pathlist{display:flex;flex-wrap:wrap;gap:4px 14px;margin:8px 0 18px}
+.k-progress .q-h{margin-top:22px}
+.k-progress .q-lvl{margin:6px 0 4px}
+.q-nextnode{animation:pulse 1.4s infinite}
+/* Chef's Passport: map, passport book, rank, pins */
+.p-map{padding:6px;background:#AFD3E4;border-radius:6px;box-shadow:inset 0 0 0 3px #8FB0BC,0 10px 18px -8px rgba(60,30,0,.45)}
+.p-world{position:relative;aspect-ratio:2/1;border-radius:4px;overflow:hidden}
+.p-world img,.p-world span,.p-world i{position:absolute;inset:0;width:100%;height:100%;display:block}
+.p-world i{-webkit-mask-size:100% 100%;mask-size:100% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.p-world .sel{filter:drop-shadow(0 0 2px #D9412B) drop-shadow(0 0 2px #D9412B)}
+.p-legend{display:flex;flex-wrap:wrap;gap:4px 14px;margin:8px 2px 0;font-size:13px;font-weight:700;color:var(--p-ink)}
+.p-legend span{display:flex;align-items:center;gap:6px}
+.p-legend i{width:14px;height:14px;border:1.5px solid var(--p-ink);border-radius:2px}
+.p-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0}
+.p-tab{min-height:52px;padding:6px 10px;border:0;border-radius:8px 8px 0 0;background:#E9DFC6;color:var(--p-ink);font-weight:800;font-size:14px;line-height:1.15;text-align:left;box-shadow:inset 0 -3px 0 rgba(0,0,0,.14)}
+.p-tab small{display:block;font-weight:700;color:var(--p-muted);font-size:12.5px}
+.p-tab[aria-pressed="true"]{background:#F4EEDC;box-shadow:inset 0 4px 0 var(--p-red)}
+.p-book{background:var(--p-navy);padding:8px;border-radius:0 10px 10px 10px;box-shadow:0 10px 18px -8px rgba(0,0,0,.5)}
+.p-page{background:#F4EEDC;padding:12px 12px 14px;border-radius:4px;background-image:repeating-radial-gradient(circle at 50% 120%,transparent 0 9px,rgba(34,64,107,.05) 9px 10px)}
+.p-page h5{font-family:var(--p-disp);font-weight:400;font-size:20px;margin:0;color:var(--p-navy);line-height:1.1}
+.p-page .sub{margin:0 0 10px;font-family:var(--p-hand);font-weight:700;font-size:20px;color:var(--p-muted)}
+.p-stamps{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:8px 6px}
+.p-st{display:grid;justify-items:center;align-content:start;text-align:center;gap:2px;font-size:12.5px;font-weight:800;line-height:1.15;color:var(--p-ink)}
+.p-st svg{width:76px;height:76px;mix-blend-mode:multiply;opacity:.9}
+.p-st.empty{color:#7A7160;font-weight:700}
+.p-st.empty svg{opacity:1;mix-blend-mode:normal}
+.p-st.next svg{animation:pulse 1.6s ease-in-out infinite}
+.p-rank{padding:16px 14px 12px;display:grid;grid-template-columns:88px minmax(0,1fr);gap:6px 14px;align-items:center;margin-top:18px}
+.p-rank>svg{width:88px;height:auto;grid-row:span 3}
+.p-rank b{font-family:var(--p-disp);font-weight:400;font-size:26px;line-height:1}
+.p-rank p{margin:0;font-family:var(--p-hand);font-weight:700;font-size:21px;color:var(--p-muted);line-height:1.1}
+.p-xp{height:16px;border:2.5px solid var(--p-ink);border-radius:8px;background:#fff;overflow:hidden}
+.p-xp i{display:block;height:100%;background:var(--p-red)}
+.p-ladder{grid-column:1/-1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin-top:10px;padding-top:10px;border-top:2px dashed #D8C9A8;text-align:center;font-size:12px;font-weight:800;line-height:1.1}
+.p-ladder svg{width:100%;max-width:60px;height:auto;display:block;margin:0 auto 2px}
+.p-ladder .fut{color:#8A8170}
+.p-ladder .fut svg{opacity:.45;filter:grayscale(.7)}
+.p-ladder .cur{color:var(--p-red)}
+/* The apron's bib is a fixed height, so a long list of pins never falls in its cut corners. */
+.p-apron{display:grid;grid-template-columns:repeat(auto-fill,minmax(78px,1fr));gap:10px 6px;background:var(--p-basil);padding:84px 14px 22px;clip-path:polygon(22% 0,78% 0,78% 36px,100% 72px,100% 100%,0 100%,0 72px,22% 36px)}
+.p-pin{display:grid;justify-items:center;align-content:start;gap:4px;border:0;background:transparent;color:#fff;font-size:12.5px;font-weight:800;line-height:1.15;text-align:center;padding:4px 0;min-height:56px}
+.p-pin svg{width:52px;height:52px;filter:drop-shadow(0 3px 0 rgba(0,0,0,.3))}
+.p-pin.locked{color:#E2EEDA;font-weight:700}
+.p-pin.locked svg{filter:none;opacity:.75}
+.p-pin[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px rgba(255,236,150,.95))}
+.p-pin:focus-visible{outline:3px solid var(--p-butter)!important}
+.p-pininfo{margin:18px 0;padding:20px 14px 12px;display:grid;gap:6px}
+.p-pininfo h5{margin:0;font-family:var(--p-disp);font-weight:400;font-size:22px}
+.p-pininfo p{margin:0;font-size:16px}
+.p-pininfo ul{margin:0;padding:0;list-style:none;display:grid;gap:4px}
+.p-pininfo li{display:flex;gap:8px;align-items:center;font-size:15px}
+.p-pininfo li .ico{width:18px;height:18px;color:var(--p-basil)}
+.p-pininfo li.todo{color:var(--p-muted)}
+.p-hint{margin:12px 0 0;font-family:var(--p-hand);font-weight:700;font-size:22px;color:var(--p-paper)}
+.p-page h4{font-family:var(--p-disp);font-weight:400;font-size:20px;margin:0;color:var(--p-navy);line-height:1.1}
+.p-ladder small{display:block;font-weight:700;color:#8A8170;font-size:11px}
+.k-progress .p-h{margin-top:22px;color:var(--p-paper)}
+.k-progress .p-rank{color:var(--p-ink)}
+.k-progress .p-pininfo{color:var(--p-ink)}
+/* rank up and the celebration after a cook */
+.lvlup{position:fixed;inset:0;z-index:60;display:grid;place-items:center;background:rgba(10,12,28,.96);padding:24px;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
+.lvlbox{text-align:center;display:grid;justify-items:center;gap:10px;color:var(--q-text);position:relative}
+.lvlbox .k{font-family:var(--q-disp);font-size:20px;color:var(--q-mana);letter-spacing:.12em}
+.lvlbox h2{font-family:var(--q-disp);font-weight:700;font-size:clamp(40px,9vw,72px);margin:0;color:var(--q-gold);line-height:1;letter-spacing:.04em;text-shadow:0 4px 0 #6B4A0C}
+.lvlbox p{margin:0;font-size:17px;color:var(--q-dim);max-width:34ch}
+.lvlbox svg.cr{width:150px;height:150px;animation:pop .5s cubic-bezier(.3,.7,.4,1)}
+.burst{position:absolute;left:50%;top:40%;width:0;height:0}
+.burst i{position:absolute;width:12px;height:12px;background:var(--c);animation:burst 1s cubic-bezier(.2,.7,.3,1) both;animation-delay:var(--d)}
+.lvlup.pp{background:rgba(43,32,20,.86)}
+.p-rbox{background:var(--p-paper);color:var(--p-ink);padding:30px 22px 22px;border-radius:4px;text-align:center;display:grid;justify-items:center;gap:8px;position:relative;width:min(420px,100%);box-shadow:0 20px 40px -10px rgba(0,0,0,.6)}
+.p-rbox .rk{font-family:var(--p-disp);font-size:26px;color:var(--p-red);border:4px solid var(--p-red);padding:2px 14px;border-radius:6px;--rot:-6deg;transform:rotate(-6deg);animation:slam .5s .1s cubic-bezier(.3,.7,.4,1) both}
+.p-rbox h2{font-family:var(--p-disp);font-weight:400;font-size:clamp(38px,9vw,60px);margin:0;line-height:1}
+.p-rbox p{margin:0;font-family:var(--p-hand);font-weight:700;font-size:24px;color:var(--p-muted)}
+.p-rbox>svg{width:130px;height:auto;animation:pop .5s cubic-bezier(.3,.7,.4,1)}
+.burst.sp i{width:6px;height:16px;border-radius:3px;animation-name:sprinkle}
+.lvlup .p-btn,.lvlup .q-btn{margin-top:6px}
+.lvlup .p-rbox{max-height:calc(100vh - 48px);overflow:auto}
+.lvlup .burst{pointer-events:none}
+.cel-win{width:160px}
+.cel-win img{width:100%;height:auto}
+.cel-crests,.cel-pins,.cel-stamps{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 16px}
+.cel-crests .crest{color:var(--q-text);width:96px}
+.cel-crests .crest b{color:var(--q-mana);font-family:var(--q-disp);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.cel-pins{background:var(--p-basil);padding:14px 16px;border-radius:6px}
+.cel-pins .p-pin{width:84px}
+.cel-stamps .p-st{width:110px}
+.cel-stamps .p-st svg{width:100px;height:100px}
+.cel-slam svg{animation:slam .5s cubic-bezier(.3,.7,.4,1) both;animation-delay:var(--d,0ms)}
+.cel-pop svg{animation:pindrop .5s cubic-bezier(.3,.7,.4,1) both;animation-delay:var(--d,0ms)}
+/* mute toggle (§5.5) */
+.pl-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.mutebtn{width:52px;height:52px;border:0;border-radius:12px;display:grid;place-items:center;cursor:pointer;background:rgba(255,255,255,.12);color:inherit}
+.mutebtn .ico{width:26px;height:26px}
+.kitchen[data-kt="quest"] .mutebtn{color:var(--q-gold);border-radius:0}
+.kitchen[data-kt="passport"] .mutebtn{color:var(--p-paper)}
+
 @media (prefers-reduced-motion: reduce){
   *{animation-name:fadein!important;animation-duration:.2s!important;animation-iteration-count:1!important;transition:none!important}
   .burst{display:none}

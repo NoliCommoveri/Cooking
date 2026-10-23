@@ -150,6 +150,8 @@ legend{font-weight:800;font-size:15px;margin-bottom:6px;padding:0}
 .k-tabs.p{background:linear-gradient(transparent,rgba(181,132,79,.95) 30%)}
 .k-tabs.p a{background:var(--p-paper);color:var(--p-ink);font-family:var(--p-disp);font-size:20px;border-radius:12px;box-shadow:0 4px 0 rgba(0,0,0,.18);transform:rotate(-1deg)}
 .k-tabs.p a:nth-child(2){transform:rotate(1deg)}
+.k-tabs.p a:nth-child(3){transform:rotate(-.5deg)}
+@media (max-width:480px){.k-tabs{gap:6px;padding-left:8px;padding-right:8px}.k-tabs.q a{font-size:14px;letter-spacing:.02em}.k-tabs.p a{font-size:17px}}
 .k-tabs.p a[aria-current="page"]{background:var(--p-red);color:#fff;box-shadow:0 4px 0 var(--p-red-dk)}
 .k-searchrow{margin:14px 0 6px}
 .k-search{font-size:18px;min-height:56px}

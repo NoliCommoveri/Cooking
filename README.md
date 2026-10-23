@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [78. 2026-10-23 — The kids' kitchen in two tabs, with search](docs/build-log.md#78-2026-10-23--the-kids-kitchen-in-two-tabs-with-search)
+**Latest build log entry:** [80. 2026-10-23 — A kid's list follows the course order; off-path cooks need a grown-up](docs/build-log.md#80-2026-10-23--a-kids-list-follows-the-course-order-off-path-cooks-need-a-grown-up)
 
 ## Current features
 
@@ -12,13 +12,16 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 
 - **Accounts** (`src/worker/`, `public/`): open sign-up with an emailed code, an optional beta word, parent login, password reset by email, and a parent PIN for parent screens.
 - **Chef's lockers and profiles**: one person or several per profile, kid or adult, each with its own theme.
-- **Kitchen**: each profile's own space, in Kitchen Quest or Chef's Passport, with two tabs pinned to the bottom: **Main quest / My journey** (what's queued, then the next few lessons on its path) and **Side quests / More recipes** (every unit and recipe shelf, folded shut, with a search by dish or ingredient). Cards follow the family's diet settings, with swaps and left-out optional ingredients shown.
+- **Kitchen**: each profile's own space, in Kitchen Quest or Chef's Passport, with three tabs pinned to the bottom: **Main quest / My journey** (what's queued, then the next few lessons on its path), **Side quests / More recipes** (every unit and recipe shelf, folded shut, with a search by dish or ingredient), and **Skill tree / Passport** (progress and rewards). Cards follow the family's diet settings, with swaps and left-out optional ingredients shown.
+- **Progress and rewards** (`public/rewards.js`, `src/content/rewards.js`): each dish lights its node on the skill tree or stamps the passport and its world map, and each skill earns a crest or pin. Six ranks, from Kitchen Apprentice to Executive Chef at 75 dishes; family recipes count toward rank only. Worked out from the cooks, never stored.
+- **Celebrations**: after a cook, and on coming back to the kitchen, the new stamp or cleared quest, new skills, and a full-screen rank up, once per device.
+- **Sound** (`public/sound.js`): made in the browser. A sizzle on Next, a stamp thunk, a skill chime, and a rank-up fanfare, with a mute toggle remembered on the device (timers always ring).
 - **Lesson player** (`public/player.js`): each lesson in the profile's theme: the lesson card with the serving picker, Learn cards, Prep checklists, and Cook mode with safety banners, kitchen words, Why? cards, timers that ring until stopped, and the screen kept awake.
 - **Suggest a fix** (`src/content/patch.js`, `src/worker/lessons.js`): parents and adult learners report a problem on a lesson or step with what it should say instead; the family sees what came of it on the lesson.
 - **Fix requests** (owner screens): apply a suggestion as a lesson patch for every family, after the linter's checks; decline, reopen, or revert any of them.
 - **Voice step control** (`public/voice.js`): in cook mode, "next" (moves on and reads the step aloud), "back," and "again" (reads it again). Off until a parent turns it on in family settings; shown only where the browser can recognize speech.
 - **Saved cooks** (`public/cooks.js`): each cook is saved to the family's account for every profile on it, with "Cooking with someone?" on the lesson card. A cook finished offline is sent when the connection returns. Lessons a profile has cooked say so in its kitchen. Nothing cooked on the Sabbath counts: it's saved, but the lesson stays up next and it isn't on Print our progress.
-- **Queue** (`src/worker/plan.js`): the one "up next" list. Parents add lessons for one or more profiles, approve kids' requests, check each lesson's safety review, and mark lessons test-cooked. Kids ask with "I want to make this"; adults tap "Cook this".
+- **Queue** (`src/worker/plan.js`): the one "up next" list. Parents add lessons for one or more profiles, approve kids' requests, check each lesson's safety review, and mark lessons test-cooked. Kids ask with "I want to make this"; adults tap "Cook this". A kid starting a lesson that isn't on their list needs the parent PIN, approved as an extra meal or in place of an assigned one, so assigned lessons never get pushed back.
 - **Courses and the weekly schedule** (`src/worker/schedule.js`): set a course up once for one or more profiles, and each week's lessons load into the queue. Weeks run Sunday to Friday (Saturday is the Sabbath); each week's lessons join the queue on its Sunday. On the Sabbath a "Shabbat shalom" banner shows and due dates are hidden. Unfinished lessons roll to next week; Skip this recipe, Cook another recipe, and Skip this week, each with Undo.
 - **Shopping** (`src/content/shop.js`, `src/worker/shopping.js`), optional: **What you'll need** shows the ingredients for the coming lessons week by week. A parent can make a shopping list for the next few uncooked lessons, tick what's on hand, and check the rest off in the store; it's merged, rounded to store packages, and grouped by aisle.
 - **Kitchen staples**: grouped on lists as "May already have", still on the list.

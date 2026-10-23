@@ -404,7 +404,8 @@ on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
   return { ok: true, id: aid, finished_at: finished };
 });
 
-// The lessons a profile has finished, with how many times and when last.
+// The lessons a profile has finished, with how many times, when first (the
+// date on its stamp, Phase 5), and when last.
 // Cooks on the Sabbath don't count (§6.18).
 on('GET', '/api/profiles/([0-9a-f]{16})/cooks', async (req, env, body, [pid]) => {
   const s = await requireSession(env, req);
@@ -421,7 +422,7 @@ on('GET', '/api/profiles/([0-9a-f]{16})/cooks', async (req, env, body, [pid]) =>
   const cooks = {};
   for (const r of results) {
     if (isSabbath(localDay(r.finished_at, tz))) continue;
-    cooks[r.lesson_id] = { times: (cooks[r.lesson_id]?.times ?? 0) + 1, last: r.finished_at };
+    cooks[r.lesson_id] = { times: (cooks[r.lesson_id]?.times ?? 0) + 1, first: cooks[r.lesson_id]?.first ?? r.finished_at, last: r.finished_at };
   }
   return { cooks };
 });
