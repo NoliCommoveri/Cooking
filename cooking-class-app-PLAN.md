@@ -436,6 +436,7 @@ Do **not** use:
 - **Fix requests:** review reports from families, apply a suggested fix as a lesson patch, or revert one (§6.11)
 - See the list of families (name, number of profiles, last active). This is the only cross-family view. The owner never sees other families' kids' names, photos, or progress.
 - Set a new password for a parent, as a fallback when the reset email (§8.3) doesn't reach them
+- **Content editor:** units, lessons, registries, the food rules, and pictures, saved into the repo files (§7.5)
 - Remove a family. This is destructive, so it's on `/ops`, beside that family's download and Restore a family (§8.5)
 
 ### 6.3 Shopping — Requirement (owner, 2026-10-22)
@@ -548,7 +549,7 @@ No longer a bonus (owner, 2026-10-22): sharing recipes is central for the Appoin
   3. **Has a typed-in ingredient** (owner, 2026-10-22: the owner reviews typed-in ingredients): the parent sees a notice with only **Send for review**. It can't be shared until the owner clears it, usually by adding the ingredient to the registry, where it's species-checked like any other. Its family can still save and cook it meanwhile.
   4. **Flagged for leaven** (a feast-day recipe with a leaven ingredient, in its ingredients or its step text): the parent sees "Our automated ingredients checker flagged this as possibly containing leaven, so it will not be presented as an appropriate option for the spring Appointed Time. If you disagree and would like a human review, please click the \"Send for review\" button." Below it are **Send for review** (greyed out once pressed, "Sent for review") and **Share recipe**, which shares it now without the Unleavened badge. A parent can press both (owner, 2026-10-22): it's shared without the badge, and gets the badge if the review clears it.
   5. **Flagged by the hard block:** the parent sees a matching notice with only **Send for review**. It can't be shared until a review clears it.
-- **Owner review.** Recipes sent for review wait on the owner screens (§6.2a). The owner clears one, deciding the Unleavened badge for a typed-in ingredient or a leaven flag (a cleared review shares the recipe as the parent asked), or declines it with a short note. Adding a typed-in ingredient to the registry is a content change, made in a session. The parent sees the answer on the recipe, the way fix requests report back (§6.11). **A review only clears a false alarm** (a "crab apple" tripping the word scan, a typed-in "beef bacon"); it never lets unclean food through (§2.1).
+- **Owner review.** Recipes sent for review wait on the owner screens (§6.2a). The owner clears one, deciding the Unleavened badge for a typed-in ingredient or a leaven flag (a cleared review shares the recipe as the parent asked), or declines it with a short note. Adding a typed-in ingredient to the registry is done in the content editor (§7.5). The parent sees the answer on the recipe, the way fix requests report back (§6.11). **A review only clears a false alarm** (a "crab apple" tripping the word scan, a typed-in "beef bacon"); it never lets unclean food through (§2.1).
 - **Community directory: "User-shared recipes."** Shared recipes go into a searchable directory, open to every family. Any parent can search it and add a recipe to their family's recipes. **A shared recipe carries no identifier at all** (owner, 2026-10-22): no family name, no profile names, nothing that says who shared it. It's labeled only "User-shared recipes".
 - **No photos in the directory** (owner, 2026-10-22). A shared recipe never carries a photo, even one the sharing family took; it always shows the placeholder art for its meal type (§6.19).
 - **Report and Hide** (owner, 2026-10-22). Any parent can **Report** a directory recipe, behind the parent PIN, with a type (unclean ingredient, food-safety problem, wrong or unclear, inappropriate, other) and a note. Reports wait on the owner screens (§6.2a), and unclean-ingredient and food-safety reports email the owner right away, as fix requests do (§6.11). The owner can **Hide** any directory recipe, reported or not: it leaves the directory and the swap picker at once. **Unhide** puts it back (the restore rule in `CLAUDE.md`). Copies families already added stay in their recipes, with a note that it was taken out of the directory (recommendation).
@@ -609,7 +610,7 @@ Parents and adult learners report what's wrong in a lesson, and the owner pushes
 - **Every patch can be undone.** Each patch has **Revert** beside it on the owner screen (the restore rule in `CLAUDE.md`). Reverting puts the lesson back the way it was.
 - **Versions.** A patch raises the lesson's version, so attempts and test-cooks record exactly what was cooked. The reporter's family sees the outcome on that lesson ("Fixed: eggs now 1 per person"), or the owner's reply if it's declined.
 - **Folding patches into the files.** Live patches sit on top of the content files. From time to time, in a session, Claude writes the applied patches into the lesson files, runs the linter, and clears them from the database. The owner doesn't have to do anything for this.
-- **Bigger changes** (a new ingredient, a new step, a different method) are logged on the fix request as "needs a content change" and are made in a session or in the GitHub web editor.
+- **Bigger changes** (a new ingredient, a new step, a different method) are made in the content editor (§7.5). **Recommendation:** once the editor is built, **Apply** opens the editor with the suggestion filled in and the save goes into the files, replacing patches; the live patches are written into the files in that session.
 
 ### 6.12 Hands-free step advance
 Kids have messy hands mid-cook, and the main kitchen device is likely an Android phone propped on the counter.
@@ -728,7 +729,7 @@ content/
 - **Registry:** `countLabel` gives counted items their words ("large egg", "large eggs"). `units` defines package units ("28-oz can"). `"measure": "butter"` shows butter as sticks and tablespoons.
 - `learn.move` is a card with a title and body. Free scaling can carry pan notes from a serving count up (`"notes": [{ "from": 9, "text": "…" }]`).
 
-### 7.4 Content linter (runs at build time and in CI)
+### 7.4 Content linter (runs at build time, in CI, and on every save in the content editor, §7.5)
 The linter must reject content when:
 - the JSON doesn't match the schema
 - a lesson references an ingredient ID missing from the registry
@@ -757,6 +758,28 @@ The linter must **warn** (without failing the build) when:
 - a skill is used by only one lesson, so its "other dishes" card would be empty
 - a lesson reuses a skill from an earlier lesson but has no `learn.callback` (a dish in the same pick-one group doesn't count as earlier, since a family cooks only one of them)
 - an ingredient or tool uses its category's fallback icon
+
+### 7.5 The content editor — Requirement (owner, 2026-10-23)
+**The owner keeps the content up to date from the browser, with no session.** Anything a session does to `content/` the owner can do on the owner screens (§6.2a), and the change is written into the repo files themselves, not laid on top of them.
+- **What it covers: every file under `content/`.**
+  - **Units:** add a unit, rename one, and reorder units.
+  - **Lessons:** add a new lesson to any unit; edit every part of an existing one (title, cuisine, servings, scaling, time, Learn cards, ingredients, steps, timers, doneness targets, safety levels, hazards, substitutions, prerequisites, callbacks, intro slides); add, delete, and reorder steps; move a lesson to another unit or another position in the course; hide a lesson from every family and unhide it.
+  - **Registries:** ingredients, equipment, skills, kitchen words, cuisines, and measurement units.
+  - **The food rules (§2.1):** the owner marks each ingredient clean or unclean and names its hidden sources, and edits the clean-species list, the blocked words, and the allowed phrases. **The owner's ruling on an ingredient is the final word**; the scan is there to flag things for her, not to decide them.
+  - **Pictures:** a dish picture is uploaded on the lesson's page and committed beside the others in `content/images/` with its license line.
+- **How a save goes live.**
+  1. The editor builds the same JSON the files hold, from forms; raw JSON is there to view, not required.
+  2. On Save, the Worker runs the same checks the linter does (§7.4) and refuses a save that fails, saying which rule and where.
+  3. The Worker commits the changed files to the `content-edits` branch through the GitHub API, using the `GITHUB_TOKEN` Worker secret.
+  4. A GitHub workflow on that branch rebuilds the generated files (`src/worker/library-data.js`, `content-data.js`, dish images), runs the linter and the tests, and only if all pass moves the change onto `main`. Cloudflare Workers Builds deploys it as it deploys everything else, in a few minutes.
+  5. The editor shows the save as **Checking**, **Live**, or **Failed** with the check's own message. A failed save never reaches `main`.
+- **Edits are checked against the latest files.** If the file changed since the editor opened it, Save says so and reloads rather than overwrite.
+- **Every save can be undone.** Each lesson and registry has a **History** with **Revert**, which writes the earlier version back the same way (the restore rule in `CLAUDE.md`).
+- **The hard rule holds.** Nothing the editor offers turns off the §2.1 checks. An ingredient the owner marks unclean, or one with a species off the clean list, can't be put in any lesson, swap, or family recipe. A word the scan flags in a clean context ("turkey bacon") is cleared by adding the exact phrase to the allowed phrases, as now.
+- **New and moved lessons:** the owner picks the unit and the position. Lesson numbers follow from the course order (§4.1), so moving a lesson renumbers the course.
+- **Not covered:** the app's code. A new kind of field, screen, or feature still needs a session; a new lesson, unit, ingredient, rule, or picture never does.
+- **Owner setup, in a browser, before it can save:** a fine-grained GitHub token with read and write access to this repository's contents and read access to its Actions, pasted into the Worker as the `GITHUB_TOKEN` secret on the Cloudflare dashboard (steps in `docs/setup.md`).
+- **Open:** whether a new lesson joins families' existing course plans (§4.1) or only the suggested order; and whether a hidden lesson leaves the courses it is in or stays there and leaves only the library.
 
 ### 6.13 Website and legal pages — Requirement (owner, 2026-10-22)
 The app lives at **`cleanplate.immotus.app`**, and its front door is a simple public website.
@@ -1024,6 +1047,7 @@ Each phase should be deployed and usable before the next begins.
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
 | **8. Chef Ruth** (Getting started built 2026-10-23) | Chef Ruth on the parent screens (§6.8): her chat, Getting started (§6.9), and her first tasks. Chef Ruth in the kitchen comes after | A new family goes from sign-up to their first queued lesson through Getting started, and a parent sets up a course and plans a week in her chat, with everything showing on the pages it belongs to |
 | **9. Family recipes** | Folded into 4c (§6.10) | — |
+| **10. Content editor** (owner, 2026-10-23) | The content editor (§7.5): the GitHub token check on `/ops`, the save path (checks, commit to `content-edits`, the workflow that builds, checks, and moves it to `main`, the save status), History and Revert, then the editors: lessons and units first, then registries and the food rules, then pictures | The owner adds a unit, adds a lesson to it, moves an existing lesson into it, and removes a step, all from the browser; each is live for every family after the deploy with no session. A save that breaks a rule is refused with the reason, and Revert puts a lesson back |
 | **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system (Print our progress's CSV covers the basics, §6.15) | — |
 
 **Phase 2d waits (owner, 2026-10-22):** the installable PWA and cooking offline (Phase 2's slice 2d) are built once pretty much everything else is done, not before Phase 2e. Until then, Phase 2's "Wi-Fi off partway through" check waits with it.

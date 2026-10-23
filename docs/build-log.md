@@ -2698,3 +2698,26 @@ the next was started.
 - Tests: 247, unchanged. Checked in a browser at phone width: the Menu with
   the two commands under the groups; Go to Lockers locked the PIN, and
   opening a parent screen asked for it again; Sign out signed out.
+
+## 111. 2026-10-23 — Plan: the content editor
+
+- **Owner ruling: the owner keeps the content up to date from the browser,
+  with no session.** Plan §7.5 is new: units, lessons (add, edit every part,
+  add, remove, and reorder steps, move to another unit or position, hide),
+  the registries, the food rules, and pictures, all edited on the owner
+  screens and saved into the `content/` files themselves. A save is checked
+  by the linter's rules in the Worker, committed to a `content-edits` branch
+  through the GitHub API, then built, linted, tested, and moved to `main` by
+  a workflow, and deployed. Every save has History and Revert.
+- **Owner ruling: the owner's call on an ingredient is the final word.** She
+  marks ingredients clean or unclean and edits the clean-species list,
+  blocked words, and allowed phrases; the scan flags things for her. The
+  §2.1 checks themselves can't be turned off.
+- Why: lesson patches (§6.11) covered only small fields on top of the files,
+  and everything bigger waited on a session. §6.11's "bigger changes" and
+  §6.10's "made in a session" lines now point at the editor; §6.2a lists it;
+  §9 adds Phase 10. Replacing patches with the editor in fix requests is
+  marked a Recommendation until the owner confirms.
+- Owner setup before it can save: a fine-grained GitHub token, set as the
+  `GITHUB_TOKEN` Worker secret on the Cloudflare dashboard.
+- Nothing built yet. Tests: 247, unchanged.
