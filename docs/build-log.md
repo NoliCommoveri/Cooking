@@ -2854,3 +2854,48 @@ already a sample).
   `poaching-eggs`, which now gives 8a a "no callback" warning.
 - Not test-cooked. No intro slides yet (warned, as for the others).
 - Tests: 261 (no new ones; the linter checks every new lesson).
+
+## 116. 2026-10-23 — Unit 2 goes on: lessons 8c through 12
+
+- **Owner ruling:** the French-style omelet (6a) doesn't teach poaching eggs.
+  `poaching-eggs` is off it in `course.json` and the lesson file, so
+  shakshuka (8a) is again the first lesson with that skill and needs no
+  callback.
+- Five more Unit 2 lessons, in course order:
+  - **8c Honey-garlic chicken** (`honey-garlic-chicken`): thighs cut and
+    tossed in cornstarch, browned in two batches, then glazed in honey, soy,
+    rice vinegar, garlic, and ginger bubbled down until sticky; 165°F. Rice
+    cooked on the stove alongside. Swap: tamari. 45 minutes.
+  - **9 Chicken fried rice** (`chicken-fried-rice`): rice cooked the day
+    before; everything cut before the stove goes on; egg scrambled and set
+    aside (a look check: no wet egg), diced chicken to 165°F, then the rice
+    spread, left, and tossed. Soy sauce poured around the pan's edge. No
+    oyster sauce. Callback to 3a's dicing. Serves up to 8. Swap: tamari.
+    35 minutes.
+  - **10 Oyakodon** (`oyakodon`): onion and chicken simmered in chicken
+    broth, soy, mirin, and sugar (chicken broth in place of dashi, §4);
+    lightly beaten eggs poured over and set under a lid to 160°F, over rice.
+    Callback to 3b's simmer. Swaps: rice vinegar and sugar for mirin
+    (availability), tamari. 45 minutes.
+  - **11 Chicken adobo** (`chicken-adobo`): thighs patted dry and browned in
+    two batches, braised in vinegar, soy, garlic, bay leaves, and
+    peppercorns (no stirring until the vinegar boils), then reduced lid off
+    to a glaze; 165°F; bay leaves fished out. Callback to 8a's thickened
+    sauce. Swap: tamari. 75 minutes.
+  - **12 Breakfast burritos** (`breakfast-burritos`): potatoes steamed then
+    crisped, bulk turkey sausage to 165°F, scrambled eggs to 160°F, all in
+    one pan, slowest first, with the finished parts kept under foil;
+    tortillas warmed in a damp towel and rolled. Callback to 1a's rolling.
+    Swaps: gluten-free tortillas, oil for butter. 50 minutes.
+- **Callbacks name one lesson**, as in Unit 1, worded so they read right
+  whichever dish of a pick-one group the family cooked.
+- **Step amounts that scale:** steps in 8c, 9, 11, 12, and 7 now say "half
+  the oil" or "the salt for the eggs" instead of a fixed spoonful, so they
+  match the ingredient list at every serving size.
+- **Registries:** 11 new ingredients (cornstarch, rice vinegar, mirin,
+  chicken broth, frozen peas and carrots, bay leaves, whole peppercorns, bulk
+  turkey sausage, shredded cheddar, burrito-size and gluten-free tortillas).
+  The turkey sausage carries a casing note, and the tortillas the lard note.
+- **Course outline:** the five dishes carry their real times.
+- Not test-cooked. No intro slides yet.
+- Tests: 261.
