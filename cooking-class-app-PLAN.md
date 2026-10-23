@@ -609,7 +609,7 @@ Parents and adult learners report what's wrong in a lesson, and the owner pushes
 - **Every patch can be undone.** Each patch has **Revert** beside it on the owner screen (the restore rule in `CLAUDE.md`). Reverting puts the lesson back the way it was.
 - **Versions.** A patch raises the lesson's version, so attempts and test-cooks record exactly what was cooked. The reporter's family sees the outcome on that lesson ("Fixed: eggs now 1 per person"), or the owner's reply if it's declined.
 - **Folding patches into the files.** Live patches sit on top of the content files. From time to time, in a session, Claude writes the applied patches into the lesson files, runs the linter, and clears them from the database. The owner doesn't have to do anything for this.
-- **Bigger changes** (a new ingredient, a new step, a different method) are made in the content editor (§7.5). **Recommendation:** once the editor is built, **Apply** opens the editor with the suggestion filled in and the save goes into the files, replacing patches; the live patches are written into the files in that session.
+- **Bigger changes** (a new ingredient, a new step, a different method) are made in the content editor (§7.5). **Owner ruling (2026-10-23):** once the editor is built, **Apply** opens the editor with the suggestion filled in and the save goes into the files, replacing patches; the live patches are written into the files in that session.
 
 ### 6.12 Hands-free step advance
 Kids have messy hands mid-cook, and the main kitchen device is likely an Android phone propped on the counter.
@@ -779,7 +779,7 @@ The linter must **warn** (without failing the build) when:
 - **New and moved lessons:** the owner picks the unit and the position. Lesson numbers follow from the course order (§4.1), so moving a lesson renumbers the course.
 - **Not covered:** the app's code. A new kind of field, screen, or feature still needs a session; a new lesson, unit, ingredient, rule, or picture never does.
 - **Owner setup, in a browser, before it can save:** a fine-grained GitHub token with read and write access to this repository's contents and read access to its Actions, pasted into the Worker as the `GITHUB_TOKEN` secret on the Cloudflare dashboard (steps in `docs/setup.md`).
-- **Open:** whether a new lesson joins families' existing course plans (§4.1) or only the suggested order; and whether a hidden lesson leaves the courses it is in or stays there and leaves only the library.
+- **Course plans (owner, 2026-10-23).** A new lesson joins every family's existing course plans at its place in the order, included (checked), as well as the suggested order. A hidden lesson comes out of every course plan as well as the library; unhiding it puts it back.
 
 ### 6.13 Website and legal pages — Requirement (owner, 2026-10-22)
 The app lives at **`cleanplate.immotus.app`**, and its front door is a simple public website.

@@ -2732,3 +2732,12 @@ the next was started.
 - A subdomain was offered and not chosen: `/manage` needs no setup on the
   Cloudflare dashboard.
 - Nothing built yet. Tests: 247, unchanged.
+
+## 113. 2026-10-23 — Plan: course plans and fix requests under the content editor
+
+- **Owner rulings.** A new lesson joins every family's existing course plans,
+  included, at its place in the order. A hidden lesson comes out of every
+  course plan as well as the library. A fix request's **Apply** opens the
+  editor with the suggestion filled in, replacing lesson patches. Plan §7.5
+  and §6.11 say so; §6.11's line is no longer a Recommendation.
+- Nothing built yet. Tests: 247, unchanged.
