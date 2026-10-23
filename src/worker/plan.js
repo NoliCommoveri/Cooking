@@ -585,6 +585,12 @@ export function register(on) {
       })),
       labels: mine ? mine.lessons.labels : null,
       total: mine ? mine.lessons.total : null,
+      // The week each lesson still to cook on the course falls in, so the
+      // kitchen shows this week and next open and the rest under See more
+      // (owner, 2026-10-23).
+      week: thisWeek,
+      weeks: mine ? Object.fromEntries([mine.sched.this_week, mine.sched.next_week].flatMap((w) => w.lessons.filter((x) => !x.done).map((x) => [x.id, w.week]))
+        .concat(mine.sched.ahead.flatMap((w) => w.lessons.map((x) => [x, w.week])))) : null,
     };
   }, { kid: true });
 

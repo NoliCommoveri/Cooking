@@ -2606,3 +2606,29 @@ the next was started.
   `public/ruth.js` (`chat.peek` default and `showMeAround`). Plan §6.8 says
   so.
 - Tests: 244, unchanged.
+
+## 107. 2026-10-23 — Main quest shows the whole path, and the kitchen intro's first copy
+
+- **Owner ruling: Main quest / My journey shows the whole path, by week.**
+  Before, it showed what was queued, then only the next three lessons on the
+  path, so kids never saw the whole course. Now this week and next show
+  open: what's queued (a lesson with no date counts as current; one a parent
+  dated, by its date's week), then the course's lessons scheduled for next
+  week. Everything later, including lessons a parent dated further out, is
+  under a **See more** expander, in path order, remembered open or shut for
+  this tab. A profile without a course schedule has no weeks, so its whole
+  path is under See more.
+- `GET /api/profiles/:id/queue` now returns `week` (this week's Sunday) and
+  `weeks` (the week each course lesson still to cook falls in; null without a
+  schedule). Built in `src/worker/plan.js` and `pathView` in `public/app.js`.
+- **The kitchen intro (plan §6.9, the profile intro) is being planned.** The
+  owner's copy so far (the three tabs, and asking to cook) is in §6.9. Not
+  built yet.
+- Plan §6.1 and §6.9 say so; README updated.
+- Tests: 244, two checks added to existing tests (the weeks for a course
+  profile, and none without a schedule). Checked in a browser at phone width
+  on a test family: a course profile showed this week's lesson and a
+  parent-dated one next week open, next week's course lesson under Coming up
+  on your path, and a lesson dated three weeks out plus later course lessons
+  under See more (3); a profile with no course showed its 15 path lessons
+  under See more.

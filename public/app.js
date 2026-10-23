@@ -445,39 +445,47 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const seasonalUnit = (u) => lib.seasonal?.includes(u);
   const unitName = (u) => (quest && !seasonalUnit(u) ? `Path ${u}: ${lib.units[u]}` : lib.units[u]);
 
-  // ---- My path (Main quest): what's up next, then the next lessons on this
-  // profile's path, a few at a time, never the whole course.
+  // ---- My path (Main quest): what's up next, then the rest of this profile's
+  // path. This week and next show open; everything later is under See more
+  // (owner, 2026-10-23).
   const pathView = () => {
     const when = (x) => (x.status === 'requested' ? 'You asked an adult'
       : x.due && !isSabbath() ? `Due ${fmtDay(x.due, { weekday: 'long' })}`
         : x.when === 'this-week' ? 'This week'
           : x.planned_date ? fmtDay(x.planned_date) : 'Coming up');
+    // The Sunday two weeks on: anything before it is this week or next. A
+    // queued lesson with no date is current; one a parent dated, by its date.
+    const later = new Date(Date.parse(`${mine.week}T00:00:00Z`) + 14 * 864e5).toISOString().slice(0, 10);
+    const soon = (day) => !day || day < later;
     const queued = new Set(mine.items.map((x) => x.lesson_id));
-    // The next lessons not cooked or queued, in this profile's order: a
-    // pick-one group counts once, and once one of its dishes is cooked it's done.
+    // The lessons not cooked or queued, in this profile's order: a pick-one
+    // group's other dishes drop out once one of them is cooked or queued.
     const doneGroups = new Set(lib.lessons.filter((L) => L.pick && (cooks[L.id] || queued.has(L.id))).map((L) => L.pick));
-    const entries = [];
     // In the profile's course plan's order when it has one (§6.18).
     const byId = Object.fromEntries(lib.lessons.map((L) => [L.id, L]));
     const ordered = mine.order ? mine.order.map((x) => byId[x]).filter(Boolean) : lib.lessons;
-    for (const L of ordered) {
-      if (seasonalUnit(L.unit) || cooks[L.id] || queued.has(L.id) || (mine.labels && !mine.labels[L.id])) continue;
-      if (L.pick && doneGroups.has(L.pick)) continue;
-      const last = entries.at(-1);
-      if (L.pick && last?.pick === L.pick) last.items.push(L); else entries.push({ pick: L.pick, items: [L] });
-    }
-    const next = entries.slice(0, 3).flatMap((e) => e.items);
+    const rest = ordered.filter((L) => !seasonalUnit(L.unit) && !cooks[L.id] && !queued.has(L.id)
+      && !(mine.labels && !mine.labels[L.id]) && !(L.pick && doneGroups.has(L.pick)));
+    // Only a course's schedule puts a lesson in a week; without one, the whole
+    // path is under See more.
+    const next = rest.filter((L) => mine.weeks?.[L.id] && soon(mine.weeks[L.id]));
+    const queuedCard = (x) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${x.title}`, onclick: open(x.lesson_id) },
+      el('article', { class: quest ? 'q-panel q-card k-next' : 'p-card k-next' },
+        x.image ? el('div', { class: quest ? 'q-win' : 'p-photo' }, el('img', { src: x.image, alt: '', width: 160, height: 160, loading: 'lazy' })) : null,
+        el('p', { class: quest ? 'q-kick' : 'p-lessonno' }, x.label ? `${quest ? 'Quest' : 'Lesson'} ${x.label}` : ''),
+        el('h3', { class: quest ? 'q-title' : 'p-title' }, x.title),
+        el('p', { class: quest ? 'q-swap' : 'p-swap' }, when(x))));
+    const now = mine.items.filter((x) => soon(x.planned_date));
+    const more = [...mine.items.filter((x) => !soon(x.planned_date)).map(queuedCard), ...rest.filter((L) => !next.includes(L)).map(lessonBtn)];
+    const key = `cpr.more.${p.id}`;
     return [
       el('h2', { class: 'k-unit' }, quest ? 'Your next quests' : 'Up next'),
-      mine.items.length
-        ? el('div', { class: 'k-lib' }, mine.items.map((x) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${x.title}`, onclick: open(x.lesson_id) },
-          el('article', { class: quest ? 'q-panel q-card k-next' : 'p-card k-next' },
-            x.image ? el('div', { class: quest ? 'q-win' : 'p-photo' }, el('img', { src: x.image, alt: '', width: 160, height: 160, loading: 'lazy' })) : null,
-            el('p', { class: quest ? 'q-kick' : 'p-lessonno' }, x.label ? `${quest ? 'Quest' : 'Lesson'} ${x.label}` : ''),
-            el('h3', { class: quest ? 'q-title' : 'p-title' }, x.title),
-            el('p', { class: quest ? 'q-swap' : 'p-swap' }, when(x))))))
+      now.length
+        ? el('div', { class: 'k-lib' }, now.map(queuedCard))
         : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, quest ? 'No quests queued yet. Ask an adult, or look in Side quests.' : 'Nothing queued yet. Ask an adult, or look in More recipes.'),
       next.length ? [el('h2', { class: 'k-unit' }, quest ? 'Coming up on your path' : 'Next on your journey'), el('div', { class: 'k-lib' }, next.map(lessonBtn))] : null,
+      more.length ? el('details', { class: 'k-shelf', open: sessionGet(key) === '1', ontoggle: (e) => sessionSet(key, e.currentTarget.open ? '1' : '') },
+        el('summary', {}, el('span', {}, 'See more'), el('small', {}, String(more.length))), el('div', { class: 'k-lib' }, more)) : null,
     ];
   };
 

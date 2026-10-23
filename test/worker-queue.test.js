@@ -145,6 +145,12 @@ test("a course loads this week's lessons into the queue, for all its profiles", 
   // Lesson numbers follow the course plan: only the samples are kept, so
   // shakshuka is first, and its pick-one group keeps one dish, so no letter.
   assert.equal(kid.labels.shakshuka, '1');
+  // The week each lesson still to cook falls in, for the kitchen's open weeks
+  // and See more: this week's, next week's, then one a week after.
+  assert.equal(kid.week, sunday);
+  assert.deepEqual(Object.values(kid.weeks), [0, 7, 14, 21].map((n) => addDays(sunday, n)));
+  assert.equal(kid.weeks.shakshuka, sunday);
+  assert.equal((await a.get(`/api/profiles/${ava}/queue`)).body.weeks.shakshuka, sunday);
 
   // Cooked: the week's slot is used; the next lesson waits for next week.
   await finish(a, '00000000000000c2', 'shakshuka', [ava]);
@@ -196,7 +202,9 @@ test('Skip this week empties the week and can be put back; past weeks are closed
 test('homeschool mode shows kids a due day; weeks stay off in casual mode until turned on', async () => {
   const { a, ava } = await setup();
   await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1, plan: await samplePlan(a) });
-  assert.equal((await a.get(`/api/profiles/${ava}/queue`)).body.items.length, 0, 'Plan our weeks is off');
+  const off = (await a.get(`/api/profiles/${ava}/queue`)).body;
+  assert.equal(off.items.length, 0, 'Plan our weeks is off');
+  assert.equal(off.weeks, null, 'no weeks without a schedule');
   await weeksOn(a, { plan_weeks: false, mode: 'homeschool' });
   const kid = (await a.get(`/api/profiles/${ava}/queue`)).body;
   const friday = new Date(Date.parse(sunday) + 5 * 864e5).toISOString().slice(0, 10);
