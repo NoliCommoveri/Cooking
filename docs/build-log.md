@@ -3165,3 +3165,40 @@ since the dish card had neither.
 - Tests: 272 (1 new). Checked in a browser at phone width on the dev server:
   the dish card and the kitchen's Appointed Times shelf with both badges. The
   editor checkbox wasn't opened in a browser.
+
+## 126. 2026-10-23 — Plan: the Levels, Unleavened Bread dates, and family tastes
+
+Design only; no code changed. Owner decisions from this session, written
+into the plan:
+- **Heritage and the Levels (§1, §4, §12):** the 75-lesson course is now
+  the Heritage course, still open to every family. Four Levels (Helper,
+  Apprentice, Cook, Chef) are a companion program in this app, not a
+  separate app, because it shares families, food rules, shopping, the
+  schedule, and the transcript. Level 3 is built first. The Level outlines
+  are the owner's suggestions. The beginner track (§11) is replaced by
+  Levels 1 and 2.
+- **Level 3 unit order:** yeast dough moves from Unit 8 to Unit 2. Taught
+  late, it fell on Unleavened Bread in most years. It needs only food safety,
+  measuring, and the oven; UK schools teach yeast rolls in the first year of
+  secondary school; practice spread over weeks is kept better (weekly
+  challah); and an early success builds confidence. Stock and soup now lands
+  in April. Week 18's beef sausage gets the §2.1 casing note.
+- **Unleavened Bread dates (§6.20):** the fixed February 1 to May 15 window
+  is replaced by each family's dates: one or two standard calendars
+  (`content/calendars.json`, owner to name them), with the family's own first
+  day allowed. Every family keeps the feast; there's no opt-out. Families
+  also say when their house goes unleavened (on the first day, or a date
+  before). Asked in Getting started, Family settings, and every year. §6.19's
+  swap rule now points here.
+- **Family tastes and the recipe pool (§6.21):** proteins, cuisines to skip,
+  spice, time, a $ to $$$ budget band, and how adventurous. Tastes leave
+  dishes out, never skip a skill (closest fit instead), and never touch the
+  hard rule. New recipes are written only as swap-ins for a named skill. A
+  Recipe gaps page counts, with no family named, where tastes leave families
+  short, to drive what gets written next.
+- Data model, phases 11 to 13, and open questions (which calendars;
+  mini-courses set aside) updated.
+- Research behind these: teen cooking standards (FCS, ProStart, UK
+  competences), personalization at meal-kit and planning services, Passover
+  dates for 2027 to 2029, and studies on spaced practice and cooking
+  confidence.
