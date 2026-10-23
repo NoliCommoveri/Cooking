@@ -839,6 +839,244 @@ export const LIBRARY = {
    "protein": "beef"
   },
   {
+   "id": "french-omelet",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "French-style omelet",
+   "image": "img/dishes/french-omelet.webp",
+   "cuisine": "french",
+   "skill": "Heat control, rolling an omelet",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, that's a lot of omelets in a row. Ask another cook to run a second pan next to you."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "chives",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "grilled-cheese-tomato-soup",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Grilled cheese + tomato soup",
+   "image": "img/dishes/grilled-cheese-tomato-soup.webp",
+   "cuisine": "american",
+   "skill": "Heat control",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, the soup needs a very big pot, at least 8 quarts. Cook the sandwiches in two skillets side by side to save time."
+     }
+    ]
+   },
+   "totalMinutes": 55,
+   "ingredients": [
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "broth-vegetable"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "milk-whole",
+     "optional": true
+    },
+    {
+     "ingredient": "bread-sandwich"
+    },
+    {
+     "ingredient": "cheese-sliced"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "basil",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "bread-sandwich",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "challah-french-toast",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Challah French toast",
+   "image": "img/dishes/challah-french-toast.webp",
+   "cuisine": "jewish",
+   "skill": "Heat control",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, use two loaves and cook in two skillets side by side, or keep the finished slices warm under foil while you cook more batches."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "challah"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "vanilla-extract"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "maple-syrup"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "challah",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "milk-whole",
+     "use": "milk-oat",
+     "reason": "dairy"
+    },
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "hash-browns",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Crispy hash browns",
+   "image": "img/dishes/hash-browns.webp",
+   "cuisine": "american",
+   "skill": "Squeezing out moisture, crisping",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, cook the potatoes in three batches instead of two, so the pan isn't crowded."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "potato-russet"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "ketchup",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": true,
+   "protein": "vegetarian"
+  },
+  {
    "id": "shakshuka",
    "version": 1,
    "track": "core",
@@ -908,6 +1146,76 @@ export const LIBRARY = {
    ],
    "substitutions": [],
    "unleavened": false,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "spaghetti-marinara",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Spaghetti marinara",
+   "image": "img/dishes/spaghetti-marinara.webp",
+   "cuisine": "italian",
+   "skill": "Building a sauce",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, cook the spaghetti in two pots, each with the full amount of water and salt, so the water comes back to a boil quickly, and use your biggest pot for the sauce."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "chili-flakes",
+     "optional": true
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "basil"
+    },
+    {
+     "ingredient": "spaghetti"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "parmesan",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "spaghetti",
+     "use": "spaghetti-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
    "protein": "vegetarian"
   },
   {
@@ -1660,6 +1968,41 @@ export const LIBRARY = {
   },
   "vinegar-white": {
    "name": "White vinegar",
+   "contains": []
+  },
+  "chives": {
+   "name": "Fresh chives",
+   "contains": []
+  },
+  "milk-whole": {
+   "name": "Whole milk",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "milk-oat": {
+   "name": "Oat milk, unsweetened",
+   "contains": []
+  },
+  "challah": {
+   "name": "Challah",
+   "contains": [
+    "gluten",
+    "egg"
+   ]
+  },
+  "maple-syrup": {
+   "name": "Maple syrup",
+   "contains": []
+  },
+  "spaghetti": {
+   "name": "Spaghetti",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "spaghetti-gluten-free": {
+   "name": "Gluten-free spaghetti",
    "contains": []
   }
  },

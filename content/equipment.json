@@ -37,6 +37,9 @@
     { "id": "vegetable-peeler", "name": "Vegetable peeler", "category": "knives", "icon": null },
     { "id": "paper-towels", "name": "Paper towels", "category": "utensils", "icon": null },
     { "id": "microwave", "name": "Microwave", "category": "appliances", "icon": null },
-    { "id": "rolling-pin", "name": "Rolling pin", "category": "bakeware", "icon": null }
+    { "id": "rolling-pin", "name": "Rolling pin", "category": "bakeware", "icon": null },
+    { "id": "skillet-nonstick-8", "name": "8-inch nonstick skillet", "category": "pans", "icon": null },
+    { "id": "immersion-blender", "name": "Stick blender (immersion blender)", "category": "appliances", "icon": null },
+    { "id": "table-knife", "name": "Butter knife", "category": "utensils", "icon": null }
   ]
 }
