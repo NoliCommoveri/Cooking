@@ -748,6 +748,86 @@ export const LIBRARY = {
    "unleavened": false
   },
   {
+   "id": "smash-burgers",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Smash burgers + quick pickles",
+   "image": "img/dishes/smash-burgers.webp",
+   "cuisine": "american",
+   "skill": "Thin slicing, quick pickle, high-heat sear",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Cook 3 patties at a time in a 12-inch skillet. For more than 6, keep going in batches of 3, washing the tongs and your hands after each batch of raw beef."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "vinegar-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "cheese-sliced",
+     "optional": true
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "burger-buns"
+    },
+    {
+     "ingredient": "ketchup",
+     "optional": true
+    },
+    {
+     "ingredient": "mustard-dijon",
+     "optional": true
+    },
+    {
+     "ingredient": "lettuce-green-leaf",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "burger-buns",
+     "use": "buns-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false
+  },
+  {
    "id": "shakshuka",
    "version": 1,
    "track": "core",
@@ -1536,6 +1616,34 @@ export const LIBRARY = {
    "contains": [
     "fish"
    ]
+  },
+  "beef-ground": {
+   "name": "Ground beef (80% lean)",
+   "contains": [
+    "meat"
+   ]
+  },
+  "cheese-sliced": {
+   "name": "Sliced cheddar or American cheese",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "burger-buns": {
+   "name": "Hamburger buns",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "buns-gluten-free": {
+   "name": "Gluten-free burger buns",
+   "contains": [
+    "egg"
+   ]
+  },
+  "vinegar-white": {
+   "name": "White vinegar",
+   "contains": []
   }
  },
  "cuisines": {

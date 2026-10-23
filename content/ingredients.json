@@ -1922,6 +1922,115 @@
       "rawHandling": null,
       "icon": null,
       "watch": null
+    },
+    {
+      "id": "beef-ground",
+      "name": "Ground beef (80% lean)",
+      "section": "meat-fish",
+      "baseUnit": "g",
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 454,
+        "label": "1-lb package",
+        "many": "1-lb packages"
+      },
+      "contains": [
+        "meat"
+      ],
+      "animalSource": "cattle",
+      "animalPart": "meat",
+      "rawHandling": "meat",
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "cheese-sliced",
+      "name": "Sliced cheddar or American cheese",
+      "section": "dairy-eggs",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "slice of cheese",
+        "many": "slices of cheese"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 12,
+        "label": "12-slice pack",
+        "many": "12-slice packs"
+      },
+      "contains": [
+        "dairy"
+      ],
+      "animalSource": "cattle",
+      "animalPart": "milk",
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "burger-buns",
+      "name": "Hamburger buns",
+      "section": "bread-tortillas",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "bun",
+        "many": "buns"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 8,
+        "label": "8-pack of buns",
+        "many": "8-packs of buns"
+      },
+      "contains": [
+        "gluten"
+      ],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "buns-gluten-free",
+      "name": "Gluten-free burger buns",
+      "section": "bread-tortillas",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "gluten-free bun",
+        "many": "gluten-free buns"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 4,
+        "label": "4-pack of gluten-free buns",
+        "many": "4-packs of gluten-free buns"
+      },
+      "contains": [
+        "egg"
+      ],
+      "animalSource": "chicken",
+      "animalPart": "egg",
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "vinegar-white",
+      "name": "White vinegar",
+      "section": "oils-vinegars",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 946,
+        "label": "32-fl-oz bottle",
+        "many": "32-fl-oz bottles"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
     }
   ]
 }
