@@ -2546,3 +2546,30 @@ the next was started.
   Show me around through the Queue stop, counting messages every half second
   (one at a time, dots between, buttons only after the last, scrolled to the
   bottom).
+
+## 104. 2026-10-23 — Chef Ruth's tour: another look, and one flow at a time
+
+- **Owner question:** why Chef Ruth showed owner screens. Answer: by design.
+  Show me around adds the four owner screens only for the owner's login, and
+  the owner was signed in as the owner. Nothing changed for that.
+- **Owner ruling: one flow at a time.** While she's in one flow, she doesn't
+  show the button to start the other. Before, finishing or stopping Show me
+  around put her menu back up, with Getting started on it. Now the tour ends
+  with **Thanks, Chef Ruth!**, which closes her chat; her button opens the
+  menu again. Getting started run from her menu already ended this way.
+  **Never mind** at the start of the tour still goes back to her menu, since
+  no flow has started.
+- **Owner ruling: Let me see it again.** It replaces **Show me again** on
+  each tour stop. Before, Show me again stepped aside for 4 seconds and then
+  repeated every how-to line. Now she steps aside for 10 seconds so the
+  parent can click around (her button still brings her back sooner), then
+  comes back and asks "Ready to see the next screen?" ("Ready to finish the
+  tour?" on the last stop), with Next, Let me see it again, and Stop the tour.
+  The how-to lines aren't repeated.
+- **Built** in `public/ruth.js` (`showMeAround` and her menu in `openRuth`).
+  Plan §6.8 says so.
+- Tests: 243, unchanged. Checked in a browser at phone width, with her
+  script on a stubbed app: the menu, the tour through two stops, Let me see
+  it again (back after 10.0s, then "Ready to see the next screen?"), her
+  button bringing her back early, then Stop the tour (only Thanks, Chef Ruth!
+  shown, and it closes her chat).

@@ -504,16 +504,20 @@ async function showMeAround(ctx, chat) {
   if (await chat.choose([['go', "Sounds great, let's start!"], ['no', 'Never mind']]) === 'no') return false;
   for (const [i, t] of stops.entries()) {
     chat.say(`${i ? 'Next' : 'First'}, ${t.called ?? t.name}. ${t.what}`);
-    let pick = 'again';
+    await chat.peek(t.hash);
+    for (const line of t.how) chat.say(line);
+    const next = stops[i + 1];
+    const choices = [
+      ['next', next ? `Next: ${next.name}` : 'Finish the tour'],
+      ['again', 'Let me see it again'],
+      ...(next ? [['stop', 'Stop the tour']] : []),
+    ];
+    // Another look is longer, so they can click around (owner, 2026-10-23).
+    let pick = await chat.choose(choices);
     while (pick === 'again') {
-      await chat.peek(t.hash);
-      for (const line of t.how) chat.say(line);
-      const next = stops[i + 1];
-      pick = await chat.choose([
-        ['next', next ? `Next: ${next.name}` : 'Finish the tour'],
-        ['again', 'Show me again'],
-        ...(next ? [['stop', 'Stop the tour']] : []),
-      ]);
+      await chat.peek(t.hash, 10000);
+      chat.say(next ? 'Ready to see the next screen?' : 'Ready to finish the tour?');
+      pick = await chat.choose(choices);
     }
     if (pick === 'stop') { chat.say('No problem! Every screen is in the Menu button at the top.'); return true; }
   }
@@ -537,7 +541,12 @@ export function openRuth(ctx) {
       const pick = await chat.choose([['tour', 'Show me around'], ['setup', 'Getting started (change your setup)'], ['bye', 'Nothing right now']]);
       if (pick === 'bye') { chat.say('Okay! Tap my button any time.'); return; }
       if (pick === 'setup') return gettingStarted(ctx, { again: true, chat });
-      await showMeAround(ctx, chat);
+      // Once a flow starts, she doesn't offer the other one (owner,
+      // 2026-10-23): the tour ends with a thank-you, not her menu.
+      if (!(await showMeAround(ctx, chat))) continue;
+      await chat.choose([['ok', 'Thanks, Chef Ruth!']]);
+      chat.close();
+      return;
     }
   };
   menu().catch((err) => chat.say(err.message));
