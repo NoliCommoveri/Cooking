@@ -2417,3 +2417,20 @@ the next was started.
 - Still to confirm: optional settings answered with **None for now**; her
   other first tasks and their order; the parent tour as her Understanding
   something.
+
+## 98. 2026-10-23 — Plan: what Getting started asks
+
+- **Owner rulings** (§6.9): Getting started asks only what's required, in
+  this order: family name and PIN, default servings, allergies and diet, the
+  profiles (kid or adult, one person or shared), a login for each kid if the
+  parent wants one (set up right there), casual or homeschool, then an offer
+  to set up a course: who it's for, an optional name, the start date, and
+  lessons per week, with a line that the course can be edited to reorder or
+  drop lessons. Kitchen staples, another parent's login, and other optional
+  settings are left out.
+- **Owner ruling, for all her tasks** (§6.8): before each question, Chef Ruth
+  says in one short line what it's for (a profile can be shared by several
+  kids; each kid can have their own even if they cook together); after the
+  answer, she says where to change it later.
+- Recommendations added, to confirm: in casual mode a yes to the course turns
+  on Plan our weeks; the test-cook warning becomes one of her lines.

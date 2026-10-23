@@ -515,6 +515,7 @@ The helper is **Chef Ruth** (she/her). Her picture is `content/images/brand/chef
 - **Her first message** (owner's wording, 2026-10-23): "Hi, I'm Ruth, your Clean Plate guru! I'm here to help you learn to navigate the app and get your family in the kitchen!" For a new family it goes straight on to Getting started (§6.9). Otherwise it's followed by **Doing something** (her task list, with a search box) and, later, **Finding something** and **Understanding something** (below). An unfinished task is offered first. After a task: "What else can I help with?"
 - **One thing at a time, saved as answered.** Settings save the moment they're answered. A task that makes something new from several answers (a few profiles, a course) keeps a resumable draft and ends with a review to approve, so nothing half-made shows in a kid's kitchen.
 - **Fixes happen in the chat.** If she can collect it in the chat, she does. She sends a parent to a page only for something too big for a chat (a long editor), and says so first.
+- **She explains, then points the way (owner, 2026-10-23).** Before each question, one short line on what it's for; after the answer, where to change it later (§6.9 has examples).
 - **Her voice:** warm and short. Each task opens with a line that says yes to it ("Of course, let's get your family set up!"), then "I'll ask you a few questions and save each answer as we go. You can stop any time and pick up where you left off. Sound good?", answered **Sounds great, let's start!** / **Never mind**. At most one friendly phrase per message; the rest is the task. "Adult," never "grown-up."
 - **Every task has search words** for the task list, written by us.
 
@@ -522,7 +523,7 @@ The helper is **Chef Ruth** (she/her). Her picture is `content/images/brand/chef
 
 | Task | What she collects | Pages it saves to today |
 |---|---|---|
-| **Getting started** | The first run (§6.9) | Profiles, Family settings, Logins & PIN, Shopping → Staples, Courses |
+| **Getting started** | The first run (§6.9): family name and PIN, servings, diet, profiles, kid logins, casual or homeschool, a course | Logins & PIN, Family settings, Profiles, each profile's Kid login, Courses |
 | **Add people to our family** | A roster of names first; then for each, kid or adult, and for a kid, a login if the parent wants one (§8.3a) | Profiles, each profile's Kid login |
 | **Set up our learning path** | Casual or homeschool, Plan our weeks, then a course: who it's for, the start week, the pick-one choices (§4.0), and how many lessons a week | Family settings, Courses |
 | **Plan this week** | What each kid cooks this week (course lessons, extras, swaps), then whether to make a shopping list for it | Queue, Shopping |
@@ -561,10 +562,18 @@ No longer a bonus (owner, 2026-10-22): sharing recipes is central for the Appoin
 ### 6.9 First run: Chef Ruth's Getting started
 **Requirement (owner, 2026-10-23): the first run is Chef Ruth's Getting started task** (§6.8), like Kels's Getting Started in KennelOS (End-State guide §11 and §33).
 - **Straight into her chat (owner, 2026-10-23).** After sign-up, a new family lands on the empty locker screen with Chef Ruth floating on it, and her chat opens on its own. **The family name and parent PIN are her first questions**, replacing today's "Your family" screen.
-- **Getting started can't be skipped (owner, 2026-10-23).** There's no **Never mind** and no way to dismiss it. If the app is closed partway, every answer so far is kept and she picks up at the next question. The lockers and parent screens open once it's done. Afterwards it can be run again from her task list, to change answers. Recommendation (to confirm): optional settings (kitchen staples, another parent's login) are still asked, with **None for now** as an answer.
+- **Getting started can't be skipped (owner, 2026-10-23).** There's no **Never mind** and no way to dismiss it. If the app is closed partway, every answer so far is kept and she picks up at the next question. The lockers and parent screens open once it's done. Afterwards it can be run again from her task list, to change answers.
 - **Her opening for a new family** (owner's wording, 2026-10-23), right after her first message: "Since you're a new user, I'm going to get you all set up! I'll ask you some questions and use your answers to configure your settings, get your little chefs their kitchen profiles, and get the first recipes in their queues! Sound good?", answered **Sounds great, let's start!** only. It takes the place of the standard task opening (§6.8).
-- Each part saves as it's answered. It ends with the first recipes in each kid's queue. Recommended order: family name and parent PIN, profiles (Add people to our family's roster), default servings, diet filters, casual or homeschool, kitchen staples, the test-cook warning, another parent's login, then a handoff to **Set up our learning path** or **Plan this week**.
-- **What it covers:** profiles (one per person, shared, or a mix), each marked **kid or adult**, default servings, diet filters, pantry staples, and the parent PIN (required, §8.3).
+- **What she asks, in order (owner, 2026-10-23).** Each part saves as it's answered. Nothing optional is in it: kitchen staples, another parent's login, and the rest are left to their own pages or her other tasks.
+  1. **Family name and parent PIN** (§8.3).
+  2. **Default servings** (§2.2).
+  3. **Allergies and diet:** the family's diet filters (§2.1).
+  4. **Learners:** the profiles, each kid or adult, one person or shared (§1).
+  5. **Logins for kids:** for each kid profile, whether to give them their own login, and if yes, she sets it up with them: first name and last initial, a picture, a password (§8.3a).
+  6. **Casual or homeschool** (§6.17).
+  7. **Offer to set up a course** (§6.18). If yes: who it's for, a name (optional), the start date, and lessons per week. She tells the parent they can edit the course to change the lesson order or drop lessons. In casual mode, saying yes turns on Plan our weeks, and she says so.
+- **Before and after every question (owner, 2026-10-23).** Before each question she says in one short line what it's for, for example that a profile can be shared by several kids, or that each kid can have their own profile even if they plan to cook together. After the answer, she says where to change it later ("You can change this any time in Menu → Family settings."). This holds for all her tasks (§6.8).
+- **The test-cook warning** (below) is one of her lines near the end, in place of the one-time notice (recommendation, to confirm).
 - **A warning for first-time parents:** the recipes haven't all been test-cooked. Read each lesson through before your kids cook it, and mark it test-cooked once you have (§6.2).
 - **Each profile's first run** (in the kitchen, later with Chef Ruth in the kitchen, §6.8): it sets up its chef locker and avatar, and picks its theme.
 - **Requirement: a profile intro.** Right after that, a short intro shows the profile how to use the app from their side, drawn in the theme they just picked (Kitchen Quest's is a "tutorial quest"). One card per thing they'll do, each with a "try it" tap where it helps:
