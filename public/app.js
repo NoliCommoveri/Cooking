@@ -6,6 +6,7 @@ import { saveCook, saveReflection, flushCooks } from './cooks.js';
 import { patchTargets, showValue } from './lib/patch.js';
 import { courseEntries, prereqNotes } from './lib/course.js';
 import { toBase, mixed } from './lib/units.js';
+import { LOGIN_PICTURES } from './lib/login-pictures.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 import { progressView, celebrate } from './rewards.js';
 import { isMuted, setMuted } from './sound.js';
@@ -149,8 +150,10 @@ function welcome() {
       el('a', { class: 'hbtn', href: '#/signup' }, 'Sign up'))));
 }
 
+// A grown-up logs in with their email; a kid with the name, picture, and
+// password a grown-up set up for them (§8.3a). The choice is remembered here.
 function login() {
-  screen(topbar(), el('div', { class: 'narrow' }, el('h1', {}, 'Log in'),
+  const grownUp = () => [
     form([
       field('Email', 'email', { type: 'email', autocomplete: 'email', required: true }),
       field('Password', 'password', { type: 'password', autocomplete: 'current-password', required: true }),
@@ -158,7 +161,38 @@ function login() {
       await api('POST', '/api/login', v);
       await start('#/');
     }, { extra: [el('a', { class: 'hbtn link', href: '#/forgot' }, 'Forgot password?')] }),
-    el('p', { class: 'mut' }, 'New here? ', el('a', { href: '#/signup' }, 'Sign up'))));
+    el('p', { class: 'mut' }, 'New here? ', el('a', { href: '#/signup' }, 'Sign up')),
+  ];
+  const kid = () => [
+    form([
+      field('Your name', 'name', { autocomplete: 'username', autocapitalize: 'words', required: true, maxlength: 30, placeholder: 'Like: Ava C' }, 'Your first name and the first letter of your last name'),
+      el('fieldset', {}, el('legend', {}, 'Your picture'), pictureGrid('picture')),
+      field('Your password', 'password', { type: 'password', autocomplete: 'current-password', required: true }),
+    ], 'Log in', async (v) => {
+      if (!v.picture) throw new Error('Tap your picture.');
+      const { profile_id } = await api('POST', '/api/kid-login', v);
+      await start(`#/kitchen/${profile_id}`);
+    }),
+    el('p', { class: 'mut' }, "Forgot? Ask a grown-up. They can see your picture and set a new password."),
+  ];
+  const view = el('div', {});
+  const show = (which) => {
+    store('cpr.login', which);
+    view.replaceChildren(...(which === 'kid' ? kid() : grownUp()));
+    toggle.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', String(['grown', 'kid'][i] === which)));
+  };
+  const toggle = el('div', { class: 'seg', role: 'group', 'aria-label': 'Who is logging in' },
+    [['grown', 'Grown-up'], ['kid', 'Kid']].map(([value, label]) => el('button', { type: 'button', onclick: () => show(value) }, label)));
+  screen(topbar(), el('div', { class: 'narrow' }, el('h1', {}, 'Log in'), toggle, view));
+  show(store('cpr.login') === 'kid' ? 'kid' : 'grown');
+}
+
+// The 30 login pictures as a grid of choices (§8.3a). taken: ids another login
+// with the same name has, shown dimmed and not pickable.
+function pictureGrid(name, { checked = null, taken = new Set() } = {}) {
+  return el('div', { class: 'picgrid', role: 'radiogroup' }, LOGIN_PICTURES.map((p) => el('label', { class: 'pic', title: p.name },
+    el('input', { type: 'radio', name, value: p.id, checked: p.id === checked, disabled: taken.has(p.id), 'aria-label': taken.has(p.id) ? `${p.name} (taken)` : p.name }),
+    art(`<svg aria-hidden="true" width="48" height="48"><use href="/icons.svg#lp-${p.id}"/></svg>`))));
 }
 
 // Sign-up, step 1: email and password (and the beta word while it's on). A
@@ -460,7 +494,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const current = tabs.some(([k]) => k === tab) ? tab : 'path';
   sessionSet(`cpr.tab.${p.id}`, current);
   screen(el('section', { class: 'kitchen k-tabbed', 'data-kt': p.theme },
-    el('a', { class: 'back', href: '#/' }, '← Lockers'),
+    me.kid ? null : el('a', { class: 'back', href: '#/' }, '← Lockers'),
     sabbathBanner(),
     el('div', { class: 'k-head' }, avatars(p.people),
       el('div', { class: 'grow' }, el('h1', {}, quest ? 'Quest board' : 'Recipe box'), el('div', {}, p.name))),
@@ -474,7 +508,14 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
         setMuted(!isMuted());
         e.currentTarget.setAttribute('aria-pressed', String(!isMuted()));
         e.currentTarget.textContent = isMuted() ? 'Sound effects: off' : 'Sound effects: on';
-      } }, isMuted() ? 'Sound effects: off' : 'Sound effects: on')),
+      } }, isMuted() ? 'Sound effects: off' : 'Sound effects: on'),
+      // A kid's own login logs out here, no PIN (§8.3a).
+      me.kid ? el('button', { class: 'themebtn', type: 'button', onclick: async () => {
+        if (!confirm('Log out of this device?')) return;
+        await api('POST', '/api/logout');
+        store('cpr.login', 'kid');
+        await start('#/login');
+      } }, 'Log out') : null),
     current === 'more' ? moreView() : current === 'progress' ? await progressView(p, cooks) : pathView(),
     // Pinned to the bottom, where a thumb is, as in MCCE Kids.
     el('nav', { class: `k-tabs ${quest ? 'q' : 'p'}`, 'aria-label': 'Kitchen' }, tabs.map(([k, label]) => el('a', {
@@ -518,7 +559,8 @@ async function lesson(profileId, lessonId) {
     },
     seed: queued ? { servings: queued.servings, with: (queued.profile_ids ?? []).filter((x) => x !== p.id), shopped: queued.shopped_for } : null,
     // Suggest a fix is for library lessons; a family edits its own recipes.
-    fixes: recipe ? null : {
+    // and a kid's own login leaves it out: it's behind the parent PIN (§8.3a).
+    fixes: recipe || me.kid ? null : {
       suggest: (ctx) => suggestFix(p, ctx),
       list: async (lid) => (await api('GET', `/api/lessons/${encodeURIComponent(lid)}/fixes`)).fixes,
     },
@@ -555,13 +597,21 @@ function approveNow(profile, lessonId, title) {
     const cancel = () => el('button', { type: 'button', class: 'hbtn', onclick: () => close(null) }, 'Cancel');
     document.body.append(ov);
 
+    // On a kid's own login the PIN isn't unlocked: it goes with the approval
+    // and OKs this one lesson only (§8.3a).
+    let pin = null;
     const pinStep = () => {
       const input = el('input', { name: 'pin', type: 'password', inputmode: 'numeric', autocomplete: 'off', pattern: '[0-9]*', maxlength: 8, 'aria-label': 'Parent PIN' });
       box.replaceChildren(el('h2', {}, `${profile.name} wants to cook ${title}`),
         el('p', { class: 'mut' }, "It isn't on their list. A grown-up OKs it: enter the parent PIN."),
-        form([el('div', { class: 'pin' }, input)], 'Unlock', async (v) => {
-          await api('POST', '/api/pin/unlock', { pin: v.pin });
-          await refresh();
+        form([el('div', { class: 'pin' }, input)], me.kid ? 'Next' : 'Unlock', async (v) => {
+          if (me.kid) {
+            if (!/^\d{4,8}$/.test(v.pin)) throw new Error('The PIN is 4 to 8 digits.');
+            pin = v.pin;
+          } else {
+            await api('POST', '/api/pin/unlock', { pin: v.pin });
+            await refresh();
+          }
           await choiceStep();
         }, { extra: [cancel()] }));
       input.focus();
@@ -581,7 +631,7 @@ function approveNow(profile, lessonId, title) {
           assigned.length ? choice('replace', 'Replace an assigned meal', 'A course lesson it replaces goes first next week, and nobody is shown as behind.', false) : null,
           assigned.length ? el('label', { class: 'f' }, 'The meal it replaces', pick) : null,
         ], 'OK, start cooking', async (v) => {
-          const r = await api('POST', `/api/profiles/${profile.id}/approve?${tz()}`, { lesson_id: lessonId, replace: v.how === 'replace' ? pick.value : null });
+          const r = await api('POST', `/api/profiles/${profile.id}/approve?${tz()}`, { lesson_id: lessonId, replace: v.how === 'replace' ? pick.value : null, pin });
           close(r.status);
         }, { extra: [cancel()] }));
     };
@@ -798,8 +848,109 @@ const profileEditor = parentOnly(async (id) => {
   const existing = profiles.find((p) => p.id === id);
   if (!existing) return go('#/parent/profiles');
   parentScreen('profiles', el('h2', {}, `Edit ${existing.name}`),
-    profileForm(existing, { cancel: el('a', { class: 'hbtn', href: '#/parent/profiles' }, 'Cancel'), done: () => go('#/parent/profiles') }));
+    profileForm(existing, { cancel: el('a', { class: 'hbtn', href: '#/parent/profiles' }, 'Cancel'), done: () => go('#/parent/profiles') }),
+    existing.audience === 'kid' ? await kidLoginBox(existing) : null);
 });
+
+// A kid profile's own login (§8.3a): first name and last initial, a picture,
+// and a password. Shown as the kid will use it, so a grown-up can tell them.
+async function kidLoginBox(profile) {
+  let login;
+  // Before the update is applied on /ops, the rest of the editor still works.
+  try { ({ login } = await api('GET', `/api/profiles/${profile.id}/login`)); } catch (err) {
+    return el('section', { class: 'card' }, el('h3', { style: 'margin:0' }, 'Kid login'), el('p', { class: 'mut', style: 'margin:0' }, err.message));
+  }
+  const again = () => profileEditor(profile.id);
+  const box = el('section', { class: 'card' }, el('h3', { style: 'margin:0' }, 'Kid login'));
+  if (!login) {
+    box.append(el('p', { class: 'mut', style: 'margin:0' }, `${profile.name} can have their own login on their own device: no lockers and no parent screens, just their kitchen. They log in with their first name and last initial, a picture, and a password you set.`),
+      el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn pri', onclick: () => loginDialog(profile, null, again) }, `+ Give ${profile.name} a login`)));
+    return box;
+  }
+  const pic = LOGIN_PICTURES.find((x) => x.id === login.picture);
+  box.append(
+    el('div', { class: 'loginshow' }, art(`<svg aria-hidden="true" width="56" height="56"><use href="/icons.svg#lp-${login.picture}"/></svg>`),
+      el('div', {}, el('b', {}, login.login_name), el('small', { class: 'mut' }, `Picture: ${pic?.name ?? login.picture} · password set`))),
+    el('p', { class: 'mut small', style: 'margin:0' }, login.devices ? `Logged in on ${plural(login.devices, 'device')}.` : 'Not logged in anywhere right now.'),
+    el('div', { class: 'acts' },
+      el('button', { type: 'button', class: 'hbtn', onclick: () => loginDialog(profile, login, again) }, 'Change name or picture'),
+      el('button', { type: 'button', class: 'hbtn', onclick: () => passwordDialog(profile, again) }, 'Change password'),
+      menu(`More for ${profile.name}'s login`, [
+        login.devices ? ['Log out everywhere', async () => {
+          if (!confirm(`Log ${profile.name} out on every device?`)) return;
+          await api('POST', `/api/profiles/${profile.id}/login/logout-all`);
+          again();
+        }] : null,
+        ['Turn off login', async () => {
+          if (!confirm(`Turn off ${profile.name}'s login? They're logged out everywhere. Nothing they cooked goes, and you can give them a login again.`)) return;
+          await api('DELETE', `/api/profiles/${profile.id}/login`);
+          again();
+        }],
+      ])));
+  return box;
+}
+
+// Set up a login, or change its name or picture. The pictures another login
+// with the same name has show as taken.
+function loginDialog(profile, login, done) {
+  const famInitial = (me.family.name.trim()[0] ?? '').toUpperCase();
+  const first = el('input', { name: 'first', value: login?.first ?? profile.people[0]?.name ?? profile.name, maxlength: 20, autocomplete: 'off', required: true });
+  const initial = el('input', { name: 'initial', value: login?.initial ?? famInitial, maxlength: 1, autocomplete: 'off', required: true, class: 'initial' });
+  const grid = el('div');
+  const shown = el('p', { class: 'mut small', style: 'margin:0', 'aria-live': 'polite' });
+  let picked = login?.picture ?? null;
+  const draw = async () => {
+    const q = new URLSearchParams({ first: first.value, initial: initial.value, profile: profile.id });
+    const d = await api('GET', `/api/login-pictures?${q}`);
+    const taken = new Set(d.pictures.filter((x) => x.taken).map((x) => x.id));
+    if (taken.has(picked)) picked = null;
+    grid.replaceChildren(pictureGrid('picture', { checked: picked, taken }));
+    shown.textContent = d.error ?? `They'll type: ${d.name}${taken.size ? `. Dimmed pictures belong to another ${d.name}.` : ''}`;
+  };
+  grid.addEventListener('change', (e) => { picked = e.target.value; });
+  let timer;
+  for (const x of [first, initial]) x.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(draw, 300); });
+  const pw = login ? [] : passwordFields();
+  let close = () => {};
+  close = modal(login ? `${profile.name}'s login` : `Give ${profile.name} a login`, form([
+    el('div', { class: 'namepair' }, el('label', { class: 'f' }, 'First name', first), el('label', { class: 'f' }, 'Last initial', initial)),
+    shown,
+    el('fieldset', {}, el('legend', {}, 'Their picture'), el('p', { class: 'mut small', style: 'margin:0' }, 'They tap it when they log in.'), grid),
+    ...pw,
+  ], login ? 'Save' : 'Give them a login', async (v) => {
+    if (!v.picture) throw new Error('Pick a picture.');
+    if (!login && v.password !== v.password2) throw new Error("The passwords don't match.");
+    await api('PUT', `/api/profiles/${profile.id}/login`, { first: v.first, initial: v.initial, picture: v.picture, password: login ? undefined : v.password });
+    close();
+    done();
+  }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')] }));
+  draw().catch((err) => showToast(err.message));
+}
+
+// A new password, typed twice, with Show.
+function passwordFields() {
+  const a = el('input', { name: 'password', type: 'password', autocomplete: 'new-password', minlength: 6, required: true });
+  const b = el('input', { name: 'password2', type: 'password', autocomplete: 'new-password', minlength: 6, required: true });
+  const show = el('button', { type: 'button', class: 'hbtn link', onclick: () => {
+    const hidden = a.type === 'password';
+    a.type = b.type = hidden ? 'text' : 'password';
+    show.textContent = hidden ? 'Hide' : 'Show';
+  } }, 'Show');
+  return [el('label', { class: 'f' }, 'Password', el('span', { class: 'hint' }, 'At least 6 characters'), a), el('label', { class: 'f' }, 'Type it again', b), show];
+}
+
+function passwordDialog(profile, done) {
+  let close = () => {};
+  close = modal(`A new password for ${profile.name}`, form([
+    el('p', { class: 'mut small', style: 'margin:0' }, "They're logged out everywhere and log in again with the new one."),
+    ...passwordFields(),
+  ], 'Save', async (v) => {
+    if (v.password !== v.password2) throw new Error("The passwords don't match.");
+    await api('PUT', `/api/profiles/${profile.id}/login`, { password: v.password });
+    close();
+    done();
+  }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')] }));
+}
 
 const familySettings = parentOnly(async () => {
   const f = await api('GET', '/api/family');
@@ -2059,7 +2210,16 @@ async function route() {
       if (top === 'signup' && sub === 'code') return signupCode();
       if (top === 'signup') return await signup();
       if (top === 'forgot') return forgot();
-      return welcome();
+      // A kid's device that was logged out goes back to the kid's Log in.
+      return store('cpr.login') === 'kid' ? login() : welcome();
+    }
+    // A kid's own login opens that kid's kitchen and nothing else (§8.3a).
+    if (me.kid) {
+      const own = me.kid.profile_id;
+      if (top === 'kitchen' && sub === own && extra?.startsWith('@')) return await kitchen(own, extra.slice(1));
+      if (top === 'kitchen' && sub === own && extra) return await lesson(own, decodeURIComponent(extra));
+      if (top === 'kitchen' && sub === own) return await kitchen(own);
+      return go(`#/kitchen/${own}`);
     }
     if (!me.family.pin_set) return firstRun();
     if (top === 'kitchen' && sub && extra?.startsWith('@')) return await kitchen(sub, extra.slice(1));

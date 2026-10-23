@@ -31,8 +31,10 @@ async function sendAll() {
           signal: AbortSignal.timeout(15000),
         });
       } catch { return; } // offline: tried again when the connection comes back
-      // Kept for a retry: server trouble, or signed out (sent once a parent logs back in).
-      if (res.status >= 500 || res.status === 401) continue;
+      // Kept for a retry: server trouble, signed out (sent once a parent logs
+      // back in), or a kid's own login that can't send another profile's cook
+      // (sent once a session that can logs in, §8.3a).
+      if (res.status >= 500 || res.status === 401 || res.status === 403) continue;
       // Saved, or refused for good (a retry can't fix a 400). Dropped only
       // if it hasn't changed since this send began.
       const box = readBox();
@@ -47,7 +49,7 @@ async function sendAll() {
           signal: AbortSignal.timeout(15000),
         });
       } catch { return; }
-      if (res.status >= 500 || res.status === 401) continue;
+      if (res.status >= 500 || res.status === 401 || res.status === 403) continue;
       // Not found while its cook still waits to go up: try again after it.
       if (res.status === 404 && readBox()[cookId]) continue;
       const box = readBox(REFLECT_BOX);

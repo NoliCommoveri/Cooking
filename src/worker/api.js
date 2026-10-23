@@ -406,7 +406,7 @@ on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
   // Another family's cook with this id reads as not found, never as theirs.
   if (had && had.family_id !== s.family_id) fail(404, 'not_found', 'No such cook.');
   if (had && s.kid && !(await env.DB.prepare('SELECT 1 FROM attempt_profiles WHERE attempt_id = ? AND family_id = ? AND profile_id = ?').bind(aid, s.family_id, s.profile_id).first())) {
-    fail(404, 'not_found', 'No such cook.');
+    kidRefused();
   }
   if (had && had.lesson_id !== L.id) fail(409, 'conflict', 'That cook is of another lesson.');
   if (had?.finished_at) return { ok: true, id: aid, finished_at: had.finished_at };

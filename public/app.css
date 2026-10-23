@@ -370,3 +370,15 @@ details.qweek>.acts{margin-top:8px}
 .grid2.tight .choice{border:0;padding:2px 0;min-height:40px;font-weight:600;line-height:1.2}
 .grid2.tight .choice:has(input:checked){border:0;box-shadow:none}
 .week:not([open]){gap:0;padding-top:8px;padding-bottom:8px}
+/* Kid logins (§8.3a): the 30 pictures, on light tiles so they read in both themes. */
+.picgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(60px,1fr));gap:8px}
+.pic{position:relative;display:grid;place-items:center;aspect-ratio:1;background:#FFFDF6;border:2px solid var(--h-line);border-radius:14px;cursor:pointer}
+.pic input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.pic svg{width:70%;height:70%}
+.pic:has(input:checked){border-color:var(--h-acc);box-shadow:0 0 0 3px var(--h-acc)}
+.pic:has(input:focus-visible){outline:3px solid var(--h-acc);outline-offset:2px}
+.pic:has(input:disabled){opacity:.3;cursor:not-allowed}
+.loginshow{display:flex;align-items:center;gap:12px}
+.loginshow svg{background:#FFFDF6;border-radius:12px;padding:4px;border:1.5px solid var(--h-line)}
+.loginshow b{display:block;font-size:20px}
+.namepair{display:grid;grid-template-columns:1fr 96px;gap:10px}

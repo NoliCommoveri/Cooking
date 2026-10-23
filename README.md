@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [90. 2026-10-23 — Plan: kid logins settled (name, picture, password)](docs/build-log.md#90-2026-10-23--plan-kid-logins-settled-name-picture-password)
+**Latest build log entry:** [91. 2026-10-23 — Phase 5b: kid logins](docs/build-log.md#91-2026-10-23--phase-5b-kid-logins)
 
 ## Current features
 
@@ -42,6 +42,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Unleavened badge** (`src/content/leaven.js`, `content/rules/leaven.json`): on every lesson whose ingredients and steps have no leaven.
 - **Parent menu**: every parent screen behind one Menu button, in groups: Learning path, Recipes, Setup, and Owner (the owner only).
 - **Dish cards**: on the queue and course screens, a dish's name opens a card with a line about it, its main ingredients, how it cooks, and the time.
+- **Kid logins** (`src/worker/kidlogin.js`): a parent gives a kid profile a login (first name and last initial, one of 30 cooking pictures, a password). That kid's device opens only their kitchen; the server refuses everything else.
 - **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN. Each list's add button is at its top right, and adding opens a dialog (a course or recipe opens its own page); long sections fold shut.
 - **Owner screens**: the beta word, the family list, setting a parent's password, fix requests, recipe reviews, and reported recipes.
 - **Ops page** (`/ops`): migrations, the owner flag, backup download and restore, clear everything, and remove or restore one family.

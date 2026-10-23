@@ -2233,3 +2233,52 @@ on it.
   `picture`), and the phase table follow.
 - No code changed.
 
+## 91. 2026-10-23 — Phase 5b: kid logins
+
+Built to §8.3a as settled in 90.
+
+- **Owner step:** after this deploys, press **Apply pending** on `/ops` for
+  migration 0013 (`kid_logins`, `kid_sessions`). Nothing to set up in the
+  Cloudflare dashboard. Apply it right after the deploy: until then the
+  profile editor's Kid login part says to apply it, and deleting a profile or
+  changing one to adult fails.
+- **The 30 login pictures:** `src/content/login-pictures.js` (ids and names,
+  copied to `public/lib/` for the app), drawn as `lp-<id>` symbols in
+  `public/icons.svg` in the ingredient icons' style. Egg and pepper reuse those
+  icons; the rest are new. In the app they sit on light tiles, so they read in
+  the dark theme too.
+- **Server:** kid sessions in `auth.js` (cookie `cpr_kid`, hashed in
+  `kid_sessions`; logging in as one kind ends the other on that device).
+  `kidlogin.js` has the kid's log in and the parent's controls: which pictures
+  are taken for a name, set up, change name or picture, change password, log
+  out everywhere, turn off. A route is open to a kid session only if it's
+  registered with `{ kid: true }`; dispatch refuses every other route with
+  "Ask a grown-up." before its handler runs, and the kid routes check the
+  profile is the kid's own (`ownProfile`). `/api/profiles` gives a kid's device
+  only names and avatars for the others. A cook a kid's device isn't on is
+  refused (403), and the app keeps it on the device for a session that can send
+  it. Changing a profile to adult or deleting it removes its login.
+  `kid_sessions` is never in a family's export.
+- **Grown-up step on a kid's device:** Ask a grown-up to start takes the PIN
+  and sends it with that one approval; it never unlocks the PIN on the device.
+- **App:** Log in has a **Grown-up / Kid** choice (remembered on the device);
+  Kid is name, a picture grid, and password. A kid's device opens straight to
+  that kitchen, and every other address goes back to it. No lockers link, no
+  Suggest a fix, and a Log out (no PIN) beside the theme and sound buttons. A
+  logged-out kid's device opens on the kid's Log in. The profile editor has a
+  **Kid login** part for kid profiles: **+ Give Ava a login** opens a dialog
+  (first name from the profile, last initial from the family name, the
+  pictures with taken ones dimmed, the password twice with Show), then it shows
+  "Ava C" and the picture, how many devices, Change name or picture, Change
+  password, and a "⋯" with Log out everywhere and Turn off login.
+- Plan: Phase 5b marked built.
+- Tests: 232 (10 new: the pictures and name matching, set up and log in,
+  uniqueness across families, adult profiles and the PIN, every allowed and
+  refused route with the kid's own profile and a sibling's, cooks and
+  reflections, the PIN-approved start, switching kinds on one device, each thing
+  that ends a kid's sessions, and the export). Checked in a browser at phone
+  width on two devices: the parent sets up a login; the kid logs in (dark
+  theme), lands in the kitchen, is sent back from the parent screens, the
+  lockers, and a sibling's kitchen, and starts an off-path lesson with the PIN;
+  the parent changes the password and the kid's device is logged out.
+

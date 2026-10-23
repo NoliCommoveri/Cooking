@@ -123,7 +123,7 @@ test("a kid's cooks: one it's on, saved; one it isn't on, refused; its own refle
   assert.equal((await k.put('/api/attempts/aaaaaaaaaaaaaaa2/reflection', { profile_id: eli, rating: 1 })).status, 403);
   // A cook made on the parent's device for the sibling alone isn't reachable.
   await a.put('/api/attempts/aaaaaaaaaaaaaaa3', { ...cook, finished_at: null, profile_ids: [eli] });
-  assert.equal((await k.put('/api/attempts/aaaaaaaaaaaaaaa3', { ...cook, profile_ids: [ava] })).status, 404);
+  assert.equal((await k.put('/api/attempts/aaaaaaaaaaaaaaa3', { ...cook, profile_ids: [ava] })).status, 403);
 });
 
 test('Ask a grown-up to start on a kid device: the PIN approves that one thing and unlocks nothing', async () => {
