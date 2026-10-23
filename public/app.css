@@ -369,5 +369,4 @@ details.qweek>.acts{margin-top:8px}
 .grid2.tight{gap:4px 12px}
 .grid2.tight .choice{border:0;padding:2px 0;min-height:40px;font-weight:600;line-height:1.2}
 .grid2.tight .choice:has(input:checked){border:0;box-shadow:none}
-.pantrypart .grid2.tight{padding:0 2px 10px}
 .week:not([open]){gap:0;padding-top:8px;padding-bottom:8px}

@@ -2160,3 +2160,17 @@ on it.
 - Tests: 222. Checked in a browser at phone width with two lists: the order and
   both views.
 
+## 86. 2026-10-23 — Kitchen staples move into Shopping, added by search
+
+- **Shopping** has three views: **Lists**, **Upcoming** (was "Upcoming
+  ingredients", shortened so three fit on a phone), and **Staples**.
+- **Owner ruling: staples are added only by searching.** The Staples view
+  lists only the family's staples, A to Z, each with Remove (and Undo).
+  **+ Add a staple** opens a dialog with a search box: type part of a name, tap
+  Add, and keep going; Done closes it. Names starting with what's typed come
+  first.
+- The Kitchen staples page and its menu entry are gone. `#/parent/pantry` opens
+  Shopping on the Staples view. The API is unchanged.
+- Tests: 222. Checked in a browser at phone width: the old link, searching and
+  adding two staples, and Remove with Undo.
+

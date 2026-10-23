@@ -666,7 +666,6 @@ const PARENT_GROUPS = [['learning', 'Learning path'], ['recipes', 'Recipes'], ['
 const PARENT_PAGES = [
   { key: 'queue', group: 'learning', label: 'Queue' },
   { key: 'shopping', group: 'learning', label: 'Shopping' },
-  { key: 'pantry', group: 'learning', label: 'Kitchen staples' },
   { key: 'progress', group: 'learning', label: 'Progress' },
   { key: 'recipes', group: 'recipes', label: 'Our recipes' },
   { key: 'shared', group: 'recipes', label: 'User-shared recipes' },
@@ -1350,7 +1349,9 @@ const usedLine = (x) => el('div', { class: 'rowi' }, el('div', {}, el('b', {}, x
   el('span', { class: 'amt' }, x.used ?? ''));
 
 const shopping = parentOnly(async (flash) => {
-  const [d, { profiles }] = await Promise.all([api('GET', `/api/shopping?${tz()}`), api('GET', '/api/profiles')]);
+  const [d, { profiles }, pantry] = await Promise.all([api('GET', `/api/shopping?${tz()}`), api('GET', '/api/profiles'), api('GET', '/api/pantry')]);
+  const again = (msg, undo) => shopping(el('p', { class: 'ok flash', role: 'status' }, msg, ' ',
+    undo ? el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await undo(); shopping(); } }, 'Undo') : null));
   const names = (ids) => ids.map((id) => profiles.find((p) => p.id === id)?.name ?? 'Someone').join(' & ');
   const weekName = (w) => (w === null ? 'No date set' : w === d.this_week ? `This week · ${fmtDay(w)}` : w === addDays(d.this_week, 7) ? `Next week · ${fmtDay(w)}` : `Week of ${fmtDay(w)}`);
 
@@ -1394,14 +1395,58 @@ const shopping = parentOnly(async (flash) => {
   ];
   const upcoming = [
     weeks.length ? weeks : el('p', { class: 'mut' }, 'Nothing is coming up yet.'),
-    el('p', { class: 'mut small' }, `Kitchen staples are grouped under "${MAY_HAVE}" so you can check the cupboard first. `, el('a', { href: '#/parent/pantry' }, 'Kitchen staples')),
+    el('p', { class: 'mut small' }, `Kitchen staples are grouped under "${MAY_HAVE}" so you can check the cupboard first.`),
+  ];
+
+  // Kitchen staples: the ones the family keeps, each with Remove; more are
+  // added by searching for them (owner, 2026-10-23).
+  const ingredients = pantry.sections.flatMap((sec) => sec.items.map((i) => ({ ...i, section: sec.name })));
+  const byId = Object.fromEntries(ingredients.map((i) => [i.id, i]));
+  const have = new Set(pantry.pantry.filter((x) => byId[x]));
+  const saveStaples = () => api('PUT', '/api/pantry', { ingredient_ids: [...have] });
+  const addStaples = () => {
+    const search = el('input', { type: 'search', placeholder: 'Search: olive oil, salt, rice…', 'aria-label': 'Search ingredients', autocomplete: 'off' });
+    const results = el('div', { class: 'rows', 'aria-live': 'polite' });
+    const added = [];
+    const draw = () => {
+      const q = search.value.trim().toLowerCase();
+      // Names starting with what's typed first, then a word starting with it, then the rest.
+      const rank = (name) => (name.startsWith(q) ? 0 : new RegExp(`\\b${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`).test(name) ? 1 : 2);
+      const hits = q ? ingredients.filter((i) => !have.has(i.id) && i.name.toLowerCase().includes(q))
+        .sort((a, b) => rank(a.name.toLowerCase()) - rank(b.name.toLowerCase()) || a.name.localeCompare(b.name)).slice(0, 12) : [];
+      results.replaceChildren(...(q && !hits.length ? [el('p', { class: 'mut' }, 'No ingredient by that name, or it\'s a staple already.')]
+        : hits.map((i) => el('div', { class: 'rowi' }, el('div', {}, el('b', {}, i.name), el('small', {}, i.section)),
+          actBtn('Add', 'pri', async () => {
+            have.add(i.id);
+            await saveStaples();
+            added.push(i.name);
+            draw();
+            search.focus();
+          })))));
+    };
+    search.addEventListener('input', draw);
+    const close = modal('Add kitchen staples', search, results,
+      el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn pri', onclick: () => { close(); if (added.length) again(`Added ${added.join(', ')} to your kitchen staples.`); } }, 'Done')));
+    search.focus();
+  };
+  const staples = [
+    addHead(null, 'Add a staple', addStaples),
+    el('p', { class: 'mut small', style: 'margin:0' }, `Things your kitchen usually has. They stay on every list, grouped under "${MAY_HAVE}" so you can check the cupboard first.`),
+    have.size ? el('div', { class: 'card' }, el('div', { class: 'rows' }, [...have].map((x) => byId[x]).sort((a, b) => a.name.localeCompare(b.name)).map((i) => el('div', { class: 'rowi' },
+      el('div', {}, el('b', {}, i.name), el('small', {}, i.section)),
+      actBtn('Remove', '', async () => {
+        have.delete(i.id);
+        await saveStaples();
+        again(`${i.name} is off your kitchen staples.`, () => { have.add(i.id); return saveStaples(); });
+      })))))
+      : el('p', { class: 'mut' }, 'No kitchen staples yet.'),
   ];
   const view = el('div', {});
   const show = (which) => {
-    view.replaceChildren(...[which === 'upcoming' ? upcoming : lists].flat(2).filter(Boolean));
-    toggle.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', String(['lists', 'upcoming'][i] === which)));
+    view.replaceChildren(...[{ upcoming, staples }[which] ?? lists].flat(2).filter(Boolean));
+    toggle.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', String(['lists', 'upcoming', 'staples'][i] === which)));
   };
-  const toggle = viewToggle('cpr.shop.view', [['lists', `Lists${open.length ? ` (${open.length})` : ''}`], ['upcoming', 'Upcoming ingredients']], 'lists', show);
+  const toggle = viewToggle('cpr.shop.view', [['lists', `Lists${open.length ? ` (${open.length})` : ''}`], ['upcoming', 'Upcoming'], ['staples', 'Staples']], 'lists', show);
 
   parentScreen('shopping', flash ?? null,
     el('p', { class: 'mut' }, "Shopping lists are optional. Kids can start any lesson whenever you're ready."),
@@ -1481,30 +1526,8 @@ const shoppingListView = parentOnly(async (lid, flash) => {
         }))));
 });
 
-const pantryEditor = parentOnly(async () => {
-  const p = await api('GET', '/api/pantry');
-  const have = new Set(p.pantry);
-  const saved = el('p', { class: 'ok', hidden: true }, 'Saved.');
-  // Each store section folds shut, with how many are ticked.
-  const section = (s) => {
-    const count = el('small', {});
-    const box = el('details', { class: 'planpart pantrypart' },
-      el('summary', {}, el('span', {}, el('b', {}, s.name), count)),
-      el('div', { class: 'grid2 tight' }, s.items.map((i) => el('label', { class: 'choice' },
-        el('input', { type: 'checkbox', name: `i_${i.id}`, checked: have.has(i.id) }), el('span', {}, i.name)))));
-    const recount = () => { count.textContent = `${box.querySelectorAll('input:checked').length} of ${s.items.length} on hand`; };
-    box.addEventListener('change', recount);
-    recount();
-    return box;
-  };
-  parentScreen('pantry',
-    el('p', { class: 'mut' }, `Things your kitchen usually has. They stay on every list, grouped under "${MAY_HAVE}" so you can check the cupboard first.`),
-    form([...p.sections.map(section), saved], 'Save', async (v) => {
-      saved.hidden = true;
-      await api('PUT', '/api/pantry', { ingredient_ids: p.sections.flatMap((s) => s.items).filter((i) => v[`i_${i.id}`]).map((i) => i.id) });
-      saved.hidden = false;
-    }, { extra: [el('a', { class: 'hbtn', href: '#/parent/shopping' }, 'Back to shopping')], top: true }));
-});
+// Kitchen staples are the Staples view of Shopping now; old links land there.
+const pantryEditor = () => { sessionSet('cpr.shop.view', 'staples'); go('#/parent/shopping'); };
 
 // ---------- Print our progress (§6.15) ----------
 
