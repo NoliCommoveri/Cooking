@@ -603,7 +603,7 @@ export function register(on) {
     if (!adult) {
       const n = (await env.DB.prepare(`SELECT COUNT(*) AS n FROM queue q JOIN queue_profiles qp ON qp.queue_id = q.id
           WHERE q.family_id = ? AND qp.profile_id = ? AND q.status = 'requested'`).bind(s.family_id, pid).first()).n;
-      if (n >= ASK_MAX) fail(429, 'too_many', `You've asked for ${n} already. A grown-up needs to answer those first.`);
+      if (n >= ASK_MAX) fail(429, 'too_many', `You've asked for ${n} already. An adult needs to answer those first.`);
     }
     const qid = id(), status = adult ? 'assigned' : 'requested';
     await env.DB.batch([
@@ -619,7 +619,7 @@ export function register(on) {
   // replaces an assigned meal (owner, 2026-10-23). A request already waiting
   // for it is the one approved. An extra one is planned for today. A course
   // lesson approved early comes out of its later place in the course, so it
-  // isn't queued twice (courseTaken). On a kid's own login the grown-up types
+  // isn't queued twice (courseTaken). On a kid's own login the adult types
   // the PIN with this request: it approves this one thing and unlocks nothing
   // (§8.3a).
   on('POST', '/api/profiles/([0-9a-f]{16})/approve', async (req, env, body, [pid]) => {

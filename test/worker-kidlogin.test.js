@@ -100,7 +100,7 @@ test("a kid's device reaches its own kitchen and nothing else", async () => {
   for (const path of [`/api/profiles/${eli}/queue`, `/api/profiles/${eli}/cooks`, '/api/queue', '/api/family', '/api/courses', '/api/shopping', '/api/progress', '/api/owner', `/api/profiles/${ava}/login`]) {
     const r = await k.get(path);
     assert.equal(r.status, 403, path);
-    assert.equal(r.body.message, 'Ask a grown-up.');
+    assert.equal(r.body.message, 'Ask an adult.');
   }
   assert.equal((await k.post('/api/pin/unlock', { pin: '1234' })).status, 403);
   assert.equal((await k.post(`/api/profiles/${eli}/ask`, { lesson_id: 'shakshuka' })).status, 403);
@@ -126,7 +126,7 @@ test("a kid's cooks: one it's on, saved; one it isn't on, refused; its own refle
   assert.equal((await k.put('/api/attempts/aaaaaaaaaaaaaaa3', { ...cook, profile_ids: [ava] })).status, 403);
 });
 
-test('Ask a grown-up to start on a kid device: the PIN approves that one thing and unlocks nothing', async () => {
+test('Ask an adult to start on a kid device: the PIN approves that one thing and unlocks nothing', async () => {
   const { env, a, ava } = await setup();
   const sunday = weekOf(new Date().toISOString().slice(0, 10));
   await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1, plan: await samplePlan(a) });
@@ -205,4 +205,23 @@ test("a family's export has its kid logins (hashes only) and no kid sessions", a
   assert.match(out.tables.kid_logins[0].password_hash, /\S/);
   assert.notEqual(out.tables.kid_logins[0].password_hash, 'carrot1');
   assert.equal(out.tables.kid_sessions, undefined);
+});
+
+test('a kid login lasts 14 days, and opening the app renews it', async () => {
+  const { env, a, ava } = await setup();
+  await giveLogin(a, ava);
+  const { k, res } = await kidDevice(env);
+  assert.match(res.headers.getSetCookie().find((c) => c.startsWith('cpr_kid=')), /Max-Age=1209600/);
+  const age = (days) => env.DB.prepare('UPDATE kid_sessions SET last_seen = ? WHERE profile_id = ?').bind(new Date(Date.now() - days * 864e5).toISOString(), ava).run();
+  // Opened on day 13: still logged in, and the 14 days start again.
+  await age(13);
+  const me = await k.get('/api/me');
+  assert.equal(me.body.kid.profile_id, ava);
+  assert.match(me.headers.getSetCookie().find((c) => c.startsWith('cpr_kid=')), /Max-Age=1209600/);
+  const seen = (await env.DB.prepare('SELECT last_seen FROM kid_sessions WHERE profile_id = ?').bind(ava).first()).last_seen;
+  assert.ok(Date.now() - Date.parse(seen) < 60000);
+  // Not opened for more than 14 days: logged out.
+  await age(15);
+  assert.equal((await k.get('/api/me')).body.signed_in, false);
+  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM kid_sessions').first()).n, 0);
 });

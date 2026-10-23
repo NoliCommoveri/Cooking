@@ -150,10 +150,10 @@ function welcome() {
       el('a', { class: 'hbtn', href: '#/signup' }, 'Sign up'))));
 }
 
-// A grown-up logs in with their email; a kid with the name, picture, and
-// password a grown-up set up for them (§8.3a). The choice is remembered here.
+// An adult logs in with their email; a kid with the name, picture, and
+// password an adult set up for them (§8.3a). The choice is remembered here.
 function login() {
-  const grownUp = () => [
+  const adultSide = () => [
     form([
       field('Email', 'email', { type: 'email', autocomplete: 'email', required: true }),
       field('Password', 'password', { type: 'password', autocomplete: 'current-password', required: true }),
@@ -173,18 +173,18 @@ function login() {
       const { profile_id } = await api('POST', '/api/kid-login', v);
       await start(`#/kitchen/${profile_id}`);
     }),
-    el('p', { class: 'mut' }, "Forgot? Ask a grown-up. They can see your picture and set a new password."),
+    el('p', { class: 'mut' }, "Forgot? Ask an adult. They can see your picture and set a new password."),
   ];
   const view = el('div', {});
   const show = (which) => {
     store('cpr.login', which);
-    view.replaceChildren(...(which === 'kid' ? kid() : grownUp()));
-    toggle.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', String(['grown', 'kid'][i] === which)));
+    view.replaceChildren(...(which === 'kid' ? kid() : adultSide()));
+    toggle.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', String(['adult', 'kid'][i] === which)));
   };
   const toggle = el('div', { class: 'seg', role: 'group', 'aria-label': 'Who is logging in' },
-    [['grown', 'Grown-up'], ['kid', 'Kid']].map(([value, label]) => el('button', { type: 'button', onclick: () => show(value) }, label)));
+    [['adult', 'Adult'], ['kid', 'Kid']].map(([value, label]) => el('button', { type: 'button', onclick: () => show(value) }, label)));
   screen(topbar(), el('div', { class: 'narrow' }, el('h1', {}, 'Log in'), toggle, view));
-  show(store('cpr.login') === 'kid' ? 'kid' : 'grown');
+  show(store('cpr.login') === 'kid' ? 'kid' : 'adult');
 }
 
 // The 30 login pictures as a grid of choices (§8.3a). taken: ids another login
@@ -427,7 +427,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   // ---- My path (Main quest): what's up next, then the next lessons on this
   // profile's path, a few at a time, never the whole course.
   const pathView = () => {
-    const when = (x) => (x.status === 'requested' ? 'You asked a grown-up'
+    const when = (x) => (x.status === 'requested' ? 'You asked an adult'
       : x.due && !isSabbath() ? `Due ${fmtDay(x.due, { weekday: 'long' })}`
         : x.when === 'this-week' ? 'This week'
           : x.planned_date ? fmtDay(x.planned_date) : 'Coming up');
@@ -455,7 +455,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
             el('p', { class: quest ? 'q-kick' : 'p-lessonno' }, x.label ? `${quest ? 'Quest' : 'Lesson'} ${x.label}` : ''),
             el('h3', { class: quest ? 'q-title' : 'p-title' }, x.title),
             el('p', { class: quest ? 'q-swap' : 'p-swap' }, when(x))))))
-        : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, quest ? 'No quests queued yet. Ask a grown-up, or look in Side quests.' : 'Nothing queued yet. Ask a grown-up, or look in More recipes.'),
+        : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, quest ? 'No quests queued yet. Ask an adult, or look in Side quests.' : 'Nothing queued yet. Ask an adult, or look in More recipes.'),
       next.length ? [el('h2', { class: 'k-unit' }, quest ? 'Coming up on your path' : 'Next on your journey'), el('div', { class: 'k-lib' }, next.map(lessonBtn))] : null,
     ];
   };
@@ -585,7 +585,7 @@ const valueInput = (kind, name, value = '') => (kind === 'text'
   : el('input', { name, value, inputmode: kind === 'unit' ? 'text' : 'decimal', autocomplete: 'off' }));
 
 // A kid wants to cook something that isn't on their list (owner, 2026-10-23):
-// a grown-up enters the PIN and says how it fits in, as an extra assigned meal
+// an adult enters the PIN and says how it fits in, as an extra assigned meal
 // or in place of one already assigned. Resolves to the lesson's new status, or
 // null if they cancel.
 function approveNow(profile, lessonId, title) {
@@ -603,7 +603,7 @@ function approveNow(profile, lessonId, title) {
     const pinStep = () => {
       const input = el('input', { name: 'pin', type: 'password', inputmode: 'numeric', autocomplete: 'off', pattern: '[0-9]*', maxlength: 8, 'aria-label': 'Parent PIN' });
       box.replaceChildren(el('h2', {}, `${profile.name} wants to cook ${title}`),
-        el('p', { class: 'mut' }, "It isn't on their list. A grown-up OKs it: enter the parent PIN."),
+        el('p', { class: 'mut' }, "It isn't on their list. An adult OKs it: enter the parent PIN."),
         form([el('div', { class: 'pin' }, input)], me.kid ? 'Next' : 'Unlock', async (v) => {
           if (me.kid) {
             if (!/^\d{4,8}$/.test(v.pin)) throw new Error('The PIN is 4 to 8 digits.');
@@ -655,7 +655,7 @@ function suggestFix(profile, { lesson, stepId, servings, ingredients }) {
 
     const pinStep = () => {
       const input = el('input', { name: 'pin', type: 'password', inputmode: 'numeric', autocomplete: 'off', pattern: '[0-9]*', maxlength: 8, 'aria-label': 'Parent PIN' });
-      box.replaceChildren(el('h2', {}, 'Suggest a fix'), el('p', { class: 'mut' }, 'A grown-up fills this in. Enter the parent PIN.'),
+      box.replaceChildren(el('h2', {}, 'Suggest a fix'), el('p', { class: 'mut' }, 'An adult fills this in. Enter the parent PIN.'),
         form([el('div', { class: 'pin' }, input)], 'Unlock', async (v) => {
           await api('POST', '/api/pin/unlock', { pin: v.pin });
           await refresh();
@@ -853,7 +853,7 @@ const profileEditor = parentOnly(async (id) => {
 });
 
 // A kid profile's own login (§8.3a): first name and last initial, a picture,
-// and a password. Shown as the kid will use it, so a grown-up can tell them.
+// and a password. Shown as the kid will use it, so an adult can tell them.
 async function kidLoginBox(profile) {
   let login;
   // Before the update is applied on /ops, the rest of the editor still works.

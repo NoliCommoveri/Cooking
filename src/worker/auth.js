@@ -11,6 +11,10 @@ export const SESSION_COOKIE = 'cpr_session';
 // A kid login (§8.3a): its own cookie and table, scoped to one kid profile. A
 // device is logged in as a parent or as a kid, never both.
 export const KID_COOKIE = 'cpr_kid';
+// A kid login lasts 14 days, renewed each time the app is opened (owner,
+// 2026-10-23), so a device left unused logs itself out.
+export const KID_SESSION_DAYS = 14;
+const KID_SESSION_SECONDS = KID_SESSION_DAYS * 24 * 60 * 60;
 // Browsers cap a cookie's life at 400 days, so kitchen devices stay logged in.
 const SESSION_SECONDS = 400 * 24 * 60 * 60;
 // How long the parent PIN stays unlocked on one device.
@@ -35,7 +39,7 @@ export async function startKidSession(env, login, request) {
   await env.DB.prepare('INSERT INTO kid_sessions (id, profile_id, family_id, created_at, last_seen) VALUES (?, ?, ?, ?, ?)')
     .bind(await sha256Hex(token), login.profile_id, login.family_id, t, t).run();
   await dropToken(env, 'sessions', readCookie(request, SESSION_COOKIE));
-  return [setCookie(KID_COOKIE, token, SESSION_SECONDS), clearCookie(SESSION_COOKIE)];
+  return [setCookie(KID_COOKIE, token, KID_SESSION_SECONDS), clearCookie(SESSION_COOKIE)];
 }
 
 async function dropToken(env, table, token) {
@@ -79,6 +83,10 @@ async function readKidSession(env, request) {
        JOIN kid_logins kl ON kl.profile_id = ks.profile_id AND kl.family_id = ks.family_id WHERE ks.id = ?`,
   ).bind(await sha256Hex(token)).first();
   if (!s) return null;
+  if (Date.now() - Date.parse(s.last_seen) > KID_SESSION_SECONDS * 1000) {
+    await env.DB.prepare('DELETE FROM kid_sessions WHERE id = ?').bind(s.id).run();
+    return null;
+  }
   if (Date.now() - Date.parse(s.last_seen) > TOUCH_MS) {
     const t = now();
     await env.DB.batch([
@@ -89,8 +97,19 @@ async function readKidSession(env, request) {
   return { ...s, kid: true, is_owner: false, pin_until: null };
 }
 
-// What a kid session may not do, it's told to ask a grown-up.
-export const kidRefused = () => fail(403, 'kid_login', 'Ask a grown-up.');
+// Opening the app renews a kid's login for another 14 days: the session's
+// last_seen and the cookie's life both start again. Returns the set-cookie.
+export async function renewKidSession(env, s, request) {
+  const t = now();
+  await env.DB.batch([
+    env.DB.prepare('UPDATE kid_sessions SET last_seen = ? WHERE id = ?').bind(t, s.id),
+    env.DB.prepare('UPDATE families SET last_active_at = ? WHERE id = ?').bind(t, s.family_id),
+  ]);
+  return setCookie(KID_COOKIE, readCookie(request, KID_COOKIE), KID_SESSION_SECONDS);
+}
+
+// What a kid session may not do, it's told to ask an adult.
+export const kidRefused = () => fail(403, 'kid_login', 'Ask an adult.');
 // A kid session reaches its own profile only.
 export function ownProfile(s, pid) {
   if (s.kid && s.profile_id !== pid) kidRefused();

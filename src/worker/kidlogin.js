@@ -46,7 +46,7 @@ export function register(on) {
   // The kid's side of the Log in screen. Wrong details get one answer, whatever
   // was wrong.
   on('POST', '/api/kid-login', async (req, env, body) => {
-    const wrong = () => fail(401, 'login_failed', "That name, picture, and password don't match. Ask a grown-up if you're stuck.");
+    const wrong = () => fail(401, 'login_failed', "That name, picture, and password don't match. Ask an adult if you're stuck.");
     const key = loginKey(body.name);
     const picture = String(body.picture ?? '');
     if (!key || !isLoginPicture(picture)) wrong();

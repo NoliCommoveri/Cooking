@@ -2282,3 +2282,24 @@ Built to §8.3a as settled in 90.
   lockers, and a sibling's kitchen, and starts an off-path lesson with the PIN;
   the parent changes the password and the kid's device is logged out.
 
+## 92. 2026-10-23 — Kid logins last 14 days; "adult," not "grown-up"; ages 10 and up
+
+- **Owner ruling: a kid login lasts 14 days and renews each time the app is
+  opened.** The kid cookie's life is 14 days (was 400, like a parent's).
+  Opening the app asks `/api/me`, which for a kid session starts the 14 days
+  again: the session's `last_seen` and the cookie (`renewKidSession` in
+  `auth.js`). A kid session unused for more than 14 days is deleted the next
+  time it's read, and the device shows the kid's Log in. Parent logins are
+  unchanged.
+- **Owner ruling: say "adult," not "grown-up."** Every kid-facing line: Ask an
+  adult to start, You asked an adult, "Ask an adult." when a kid's login is
+  refused, the login's wrong-details and forgot lines, the safety notes in the
+  player ("An adult stays in the kitchen for this step"), and the Log in
+  screen's **Adult / Kid** choice. The plan says so in §5.1.
+- **Owner ruling: the target age is 10 and up** (it was 11–12). The plan's §5.1
+  and the syllabus description (§6.16 and `/syllabus`) say so.
+- Tests: 233 (one new: the 14 days, a launch on day 13 renewing it, and a
+  session unused for 15 days logged out). Checked in a browser at phone width:
+  the Adult / Kid choice and Ask an adult to start, with the two-device run
+  from 91 passing again.
+

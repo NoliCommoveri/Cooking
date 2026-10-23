@@ -6,7 +6,7 @@ import { ApiError, fail, json, now, readCookie } from './lib/http.js';
 import { hashSecret, verifySecret, randomHex, sha256Hex, timingSafeEqual } from './lib/crypto.js';
 import {
   startSession, endSession, readSession, requireSession, requireParent, requireOwner,
-  pinUnlocked, unlockPin, lockPin, ownProfile, kidRefused, endKidSessions, SESSION_COOKIE, KID_COOKIE,
+  pinUnlocked, unlockPin, lockPin, ownProfile, kidRefused, endKidSessions, renewKidSession, SESSION_COOKIE, KID_COOKIE,
 } from './auth.js';
 import { sendEmail, emailReady, resetEmail, signupCodeEmail, fixReportEmail } from './email.js';
 import { livePatches, liveLesson, patchProblems } from './lessons.js';
@@ -92,7 +92,11 @@ on('GET', '/api/me', async (req, env) => {
   if (!s) return { signed_in: false };
   const fam = await env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(s.family_id).first();
   // A kid's device knows only its own profile and the family's settings.
-  if (s.kid) return { signed_in: true, kid: { profile_id: s.profile_id, login_name: s.login_name }, parent: null, family: familyOut(fam), pin_unlocked_until: null };
+  // Each launch asks this, so it renews the kid's login for 14 more days.
+  if (s.kid) {
+    return json({ signed_in: true, kid: { profile_id: s.profile_id, login_name: s.login_name }, parent: null, family: familyOut(fam), pin_unlocked_until: null },
+      200, { 'set-cookie': await renewKidSession(env, s, req) });
+  }
   return {
     signed_in: true,
     parent: { email: s.email, is_owner: s.is_owner, test_cook_notice: !s.notice_seen_at },
