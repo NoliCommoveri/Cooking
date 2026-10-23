@@ -26,7 +26,11 @@ export function ruthButton(ctx, onclick) {
 function chatPanel(ctx, { required, onClose }) {
   const { el } = ctx;
   const log = el('div', { class: 'ruth-log', 'aria-live': 'polite' });
+  // Her buttons and forms sit at the end of the chat, as part of it, and
+  // scroll with it (owner, 2026-10-23): each line lands just above them.
   const panel = el('div', { class: 'ruth-panel' });
+  log.append(panel);
+  const add = (node) => log.insertBefore(node, panel);
   let peeking = null;
   const close = () => { ov.remove(); document.removeEventListener('keydown', esc); onClose?.(); };
   const esc = (e) => { if (e.key === 'Escape' && !required) close(); };
@@ -34,7 +38,7 @@ function chatPanel(ctx, { required, onClose }) {
     el('img', { src: RUTH.photo, alt: '', width: 48, height: 48 }),
     el('b', { class: 'grow' }, RUTH.name),
     required ? null : el('button', { type: 'button', class: 'hbtn', onclick: close }, 'Close'));
-  const box = el('section', { class: 'ruth', role: 'dialog', 'aria-modal': 'true', 'aria-label': RUTH.name }, head, log, panel);
+  const box = el('section', { class: 'ruth', role: 'dialog', 'aria-modal': 'true', 'aria-label': RUTH.name }, head, log);
   const ov = el('div', { class: `ruth-ov${required ? ' required' : ''}` }, box);
   if (!required) ov.addEventListener('click', (e) => { if (e.target === ov) close(); });
   document.addEventListener('keydown', esc);
@@ -51,11 +55,11 @@ function chatPanel(ctx, { required, onClose }) {
     el('img', { src: RUTH.photo, alt: '', width: 36, height: 36 }), el('p', {}, el('i'), el('i'), el('i')));
   const line = async (text, kids) => {
     await wait(500);
-    log.append(typing);
+    add(typing);
     down();
     await wait(Math.min(1600, 700 + text.length * 4));
     typing.remove();
-    log.append(el('div', { class: 'ruth-msg' }, el('img', { src: RUTH.photo, alt: '', width: 36, height: 36 }), el('p', {}, text, ...kids)));
+    add(el('div', { class: 'ruth-msg' }, el('img', { src: RUTH.photo, alt: '', width: 36, height: 36 }), el('p', {}, text, ...kids)));
     down();
   };
 
@@ -83,7 +87,7 @@ function chatPanel(ctx, { required, onClose }) {
       return talking;
     },
     // The parent's answer, on the right.
-    you(text) { log.append(el('div', { class: 'ruth-you' }, el('p', {}, text))); down(); },
+    you(text) { add(el('div', { class: 'ruth-you' }, el('p', {}, text))); down(); },
     // Buttons; resolves with the picked value, and leaves its label as the answer.
     async choose(choices) {
       await talking;
@@ -504,16 +508,20 @@ async function showMeAround(ctx, chat) {
   if (await chat.choose([['go', "Sounds great, let's start!"], ['no', 'Never mind']]) === 'no') return false;
   for (const [i, t] of stops.entries()) {
     chat.say(`${i ? 'Next' : 'First'}, ${t.called ?? t.name}. ${t.what}`);
-    let pick = 'again';
+    await chat.peek(t.hash);
+    for (const line of t.how) chat.say(line);
+    const next = stops[i + 1];
+    const choices = [
+      ['next', next ? `Next: ${next.name}` : 'Finish the tour'],
+      ['again', 'Let me see it again'],
+      ...(next ? [['stop', 'Stop the tour']] : []),
+    ];
+    // Another look is longer, so they can click around (owner, 2026-10-23).
+    let pick = await chat.choose(choices);
     while (pick === 'again') {
-      await chat.peek(t.hash);
-      for (const line of t.how) chat.say(line);
-      const next = stops[i + 1];
-      pick = await chat.choose([
-        ['next', next ? `Next: ${next.name}` : 'Finish the tour'],
-        ['again', 'Show me again'],
-        ...(next ? [['stop', 'Stop the tour']] : []),
-      ]);
+      await chat.peek(t.hash, 10000);
+      chat.say(next ? 'Ready to see the next screen?' : 'Ready to finish the tour?');
+      pick = await chat.choose(choices);
     }
     if (pick === 'stop') { chat.say('No problem! Every screen is in the Menu button at the top.'); return true; }
   }
@@ -532,12 +540,21 @@ export function openRuth(ctx) {
   current = chat;
   chat.say(HELLO);
   const menu = async () => {
+    // Getting started is a one-time flow (owner, 2026-10-23): once there's a
+    // lesson in the queue or a dish cooked, it's off her menu.
+    await ctx.refresh().catch(() => {});
     for (;;) {
       chat.say('What can I help with?');
-      const pick = await chat.choose([['tour', 'Show me around'], ['setup', 'Getting started (change your setup)'], ['bye', 'Nothing right now']]);
+      const pick = await chat.choose([['tour', 'Show me around'],
+        ...(ctx.me().family.cooking ? [] : [['setup', 'Getting started (change your setup)']]), ['bye', 'Nothing right now']]);
       if (pick === 'bye') { chat.say('Okay! Tap my button any time.'); return; }
       if (pick === 'setup') return gettingStarted(ctx, { again: true, chat });
-      await showMeAround(ctx, chat);
+      // Once a flow starts, she doesn't offer the other one (owner,
+      // 2026-10-23): the tour ends with a thank-you, not her menu.
+      if (!(await showMeAround(ctx, chat))) continue;
+      await chat.choose([['ok', 'Thanks, Chef Ruth!']]);
+      chat.close();
+      return;
     }
   };
   menu().catch((err) => chat.say(err.message));

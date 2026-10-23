@@ -132,3 +132,29 @@ test('Show me around visits every parent screen, starting with the Queue, and th
   assert.deepEqual([...family].sort(), pages.filter((m) => !m[2]).map((m) => m[1]).sort());
   for (const t of tourStops(true)) assert.ok(t.what && t.how.length, `${t.name} says what it's for and how to use it`);
 });
+
+test('Getting started is one-time: it leaves her menu once a lesson is queued or a dish is cooked', async () => {
+  const env = await makeEnv();
+  const a = await family(env, 'Carsons', 'jen@example.com');
+  const b = await family(env, 'Smiths', 'pat@example.com');
+  const cooking = async (c) => (await c.get('/api/me')).body.family.cooking;
+  await a.post('/api/profiles', { people: [{ name: 'Ava', color: 'tomato' }] });
+  await b.post('/api/profiles', { people: [{ name: 'Bea', color: 'sky' }] });
+  const ava = (await a.get('/api/profiles')).body.profiles[0].id;
+  const bea = (await b.get('/api/profiles')).body.profiles[0].id;
+  assert.equal(await cooking(a), false);
+
+  const { id: qid } = (await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava] })).body;
+  assert.equal(await cooking(a), true, 'a lesson in the queue');
+  assert.equal(await cooking(b), false, 'not another family\'s');
+  assert.equal((await a.del(`/api/queue/${qid}`)).status, 200);
+  assert.equal(await cooking(a), false, 'a removed lesson isn\'t in the queue');
+
+  const t = new Date().toISOString();
+  await b.put('/api/attempts/00000000000000c1', { lesson_id: 'shakshuka', servings: 4, profile_ids: [bea], started_at: t });
+  assert.equal(await cooking(b), false, 'a cook not finished yet');
+  await b.put('/api/attempts/00000000000000c1', { lesson_id: 'shakshuka', servings: 4, profile_ids: [bea], started_at: t, finished_at: t });
+  assert.equal(await cooking(b), true, 'a dish cooked');
+  await b.post('/api/attempts/00000000000000c1/remove');
+  assert.equal(await cooking(b), false, 'a cook a parent took back doesn\'t count');
+});

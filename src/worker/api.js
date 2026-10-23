@@ -83,6 +83,18 @@ const familyOut = (f) => ({
   setup_needed: f.setup_done_at === null, setup_step: f.setup_step ?? null,
 });
 
+// The family has a lesson in the queue or a dish cooked, so Chef Ruth's
+// Getting started is done for good and leaves her menu (owner, 2026-10-23).
+// Until /ops applies migration 0015 there's no removed_at, and it stays.
+async function cooking(env, fid) {
+  try {
+    return Boolean((await env.DB.prepare(`SELECT EXISTS (SELECT 1 FROM queue WHERE family_id = ? AND status IN ('assigned', 'shopped', 'cooked'))
+        OR EXISTS (SELECT 1 FROM attempts WHERE family_id = ? AND finished_at IS NOT NULL AND removed_at IS NULL) AS yes`).bind(fid, fid).first()).yes);
+  } catch {
+    return false;
+  }
+}
+
 // ---------- routes ----------
 
 // A kid login (§8.3a) reaches a route only if it's registered with { kid: true };
@@ -105,7 +117,7 @@ on('GET', '/api/me', async (req, env) => {
   return {
     signed_in: true,
     parent: { email: s.email, is_owner: s.is_owner, test_cook_notice: !s.notice_seen_at },
-    family: familyOut(fam),
+    family: { ...familyOut(fam), cooking: await cooking(env, s.family_id) },
     pin_unlocked_until: pinUnlocked(s) ? s.pin_until : null,
   };
 }, KID);

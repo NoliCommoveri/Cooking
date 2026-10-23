@@ -2546,3 +2546,54 @@ the next was started.
   Show me around through the Queue stop, counting messages every half second
   (one at a time, dots between, buttons only after the last, scrolled to the
   bottom).
+
+## 104. 2026-10-23 — Chef Ruth's tour: another look, and one flow at a time
+
+- **Owner question:** why Chef Ruth showed owner screens. Answer: by design.
+  Show me around adds the four owner screens only for the owner's login, and
+  the owner was signed in as the owner. Nothing changed for that.
+- **Owner ruling: one flow at a time.** While she's in one flow, she doesn't
+  show the button to start the other. Before, finishing or stopping Show me
+  around put her menu back up, with Getting started on it. Now the tour ends
+  with **Thanks, Chef Ruth!**, which closes her chat; her button opens the
+  menu again. Getting started run from her menu already ended this way.
+  **Never mind** at the start of the tour still goes back to her menu, since
+  no flow has started.
+- **Owner ruling: Let me see it again.** It replaces **Show me again** on
+  each tour stop. Before, Show me again stepped aside for 4 seconds and then
+  repeated every how-to line. Now she steps aside for 10 seconds so the
+  parent can click around (her button still brings her back sooner), then
+  comes back and asks "Ready to see the next screen?" ("Ready to finish the
+  tour?" on the last stop), with Next, Let me see it again, and Stop the tour.
+  The how-to lines aren't repeated.
+- **Built** in `public/ruth.js` (`showMeAround` and her menu in `openRuth`).
+  Plan §6.8 says so.
+- Tests: 243, unchanged. Checked in a browser at phone width, with her
+  script on a stubbed app: the menu, the tour through two stops, Let me see
+  it again (back after 10.0s, then "Ready to see the next screen?"), her
+  button bringing her back early, then Stop the tour (only Thanks, Chef Ruth!
+  shown, and it closes her chat).
+
+## 105. 2026-10-23 — Chef Ruth's buttons in the chat, and a one-time Getting started
+
+- **Owner ruling: her buttons are part of the chat.** Before, her answer
+  buttons and forms sat in a bar pinned to the bottom of her panel. Now they
+  sit right under her last message, on the parent's side like a reply,
+  outlined in the accent color with a chat-bubble corner, and scroll with
+  the chat. A form (a PIN, a kid login) is a card across the chat. Built in
+  `public/ruth.js` (`chatPanel`: the panel is the last thing in the chat log,
+  and each line lands above it) and `public/app.css`.
+- **Owner ruling: Getting started is one-time.** Run again from her menu, it
+  was always offered. Now **Getting started (change your setup)** leaves her
+  menu once the family has a lesson in the queue (assigned or shopped, or
+  cooked from the queue) or a finished cook that wasn't taken back with
+  Didn't make it. `/api/me` reports it as `family.cooking` (parents only),
+  and her menu asks for `/api/me` again when it opens, so it's current. A
+  removed or declined lesson doesn't count. Until migration 0015 is applied
+  on `/ops` it reads as not cooking, so the button stays. A new family's
+  required Getting started isn't affected.
+- Plan §6.8 and §6.9 say so; README updated.
+- Tests: 244 (one new: the flag across queuing, removing, an unfinished and
+  a finished cook, Didn't make it, and another family). Checked in a browser
+  at phone width on a stubbed app: the buttons are inside the chat log,
+  under her line, and her menu shows Getting started only when not cooking.
