@@ -2525,3 +2525,24 @@ the next was started.
 - Tests: 243 (one new: remove and Undo, across profiles, the queue, Progress,
   a resent cook, another family, and the PIN). The migration-count tests now
   expect 15.
+
+## 103. 2026-10-23 — Chef Ruth talks one line at a time
+
+- **Owner ruling:** she's a person in a chat. Typing dots for a second or so
+  before each message, never more than one message at once, and the chat
+  scrolls with each new one. Worst before this in Show me around: coming back
+  from the Queue, five messages landed at once and the parent was left at
+  the bottom.
+- **Built** (`public/ruth.js`, `public/app.css`): `say()` now queues her line
+  instead of showing it. Each line waits a half beat (0.5s), shows three
+  bouncing dots in her bubble (0.7 to 1.6s, longer for longer lines), then
+  the message, and the chat scrolls smoothly to it. Her buttons (`choose`),
+  forms (`ask`), and stepping aside for a tour stop (`peek`) wait until she's
+  finished talking. No script changed: every task still calls `say()` the
+  same way. The dots are labeled "Chef Ruth is typing" for screen readers
+  and hold still with reduced motion.
+- Plan §6.8 says so.
+- Tests: 243, unchanged. Checked in a browser at phone width: her menu, then
+  Show me around through the Queue stop, counting messages every half second
+  (one at a time, dots between, buttons only after the last, scrolled to the
+  bottom).

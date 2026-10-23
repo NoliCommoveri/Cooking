@@ -39,13 +39,32 @@ function chatPanel(ctx, { required, onClose }) {
   if (!required) ov.addEventListener('click', (e) => { if (e.target === ov) close(); });
   document.addEventListener('keydown', esc);
   document.body.append(ov);
-  const down = () => { log.scrollTop = log.scrollHeight; };
+  const down = () => { log.scrollTo({ top: log.scrollHeight, behavior: 'smooth' }); };
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  // She talks like a person in a chat (owner, 2026-10-23): one line at a
+  // time, each after a half beat and a second or so of typing dots, scrolled
+  // into view as it lands. say() queues the line; talking is the queue, and
+  // her buttons, forms, and stepping aside wait until she's done.
+  let talking = Promise.resolve();
+  const typing = el('div', { class: 'ruth-msg ruth-typing', role: 'status', 'aria-label': `${RUTH.name} is typing` },
+    el('img', { src: RUTH.photo, alt: '', width: 36, height: 36 }), el('p', {}, el('i'), el('i'), el('i')));
+  const line = async (text, kids) => {
+    await wait(500);
+    log.append(typing);
+    down();
+    await wait(Math.min(1600, 700 + text.length * 4));
+    typing.remove();
+    log.append(el('div', { class: 'ruth-msg' }, el('img', { src: RUTH.photo, alt: '', width: 36, height: 36 }), el('p', {}, text, ...kids)));
+    down();
+  };
 
   const chat = {
     close,
     // Step aside so the screen behind shows, then come back. Her button, or 4
     // seconds, brings her back (owner, 2026-10-23).
-    peek(hash, ms = 4000) {
+    async peek(hash, ms = 4000) {
+      await talking;
       return new Promise((resolve) => {
         ov.hidden = true;
         let timer;
@@ -60,13 +79,14 @@ function chatPanel(ctx, { required, onClose }) {
     get open() { return ov.isConnected; },
     // Her line, with her picture beside it. kids: extra nodes (a dish picture).
     say(text, ...kids) {
-      log.append(el('div', { class: 'ruth-msg' }, el('img', { src: RUTH.photo, alt: '', width: 36, height: 36 }), el('p', {}, text, ...kids)));
-      down();
+      talking = talking.then(() => line(text, kids));
+      return talking;
     },
     // The parent's answer, on the right.
     you(text) { log.append(el('div', { class: 'ruth-you' }, el('p', {}, text))); down(); },
     // Buttons; resolves with the picked value, and leaves its label as the answer.
-    choose(choices) {
+    async choose(choices) {
+      await talking;
       return new Promise((resolve) => {
         panel.replaceChildren(el('div', { class: 'ruth-choices' }, choices.map(([value, label]) => el('button', {
           type: 'button', class: 'hbtn', onclick: () => { panel.replaceChildren(); chat.you(label); resolve(value); },
@@ -78,7 +98,8 @@ function chatPanel(ctx, { required, onClose }) {
     // A small form. submit(values) saves and returns the answer to show, or
     // throws an Error whose message shows under the form. extra: [[label, fn]]
     // buttons beside the submit; fn returns an answer, or null to stay.
-    ask(fields, submitText, submit, { extra = [] } = {}) {
+    async ask(fields, submitText, submit, { extra = [] } = {}) {
+      await talking;
       return new Promise((resolve) => {
         const msg = el('p', { class: 'err', role: 'alert', hidden: true });
         const btn = el('button', { class: 'hbtn pri', type: 'submit' }, submitText);
