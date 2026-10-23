@@ -473,8 +473,8 @@
       "perishable": true,
       "purchaseUnit": {
         "amount": 113.4,
-        "label": "¼ lb",
-        "many": "¼ lb",
+        "label": "\u00bc lb",
+        "many": "\u00bc lb",
         "byWeight": true
       },
       "contains": [
@@ -730,8 +730,8 @@
       "perishable": true,
       "purchaseUnit": {
         "amount": 113.4,
-        "label": "¼ lb",
-        "many": "¼ lb",
+        "label": "\u00bc lb",
+        "many": "\u00bc lb",
         "byWeight": true
       },
       "contains": [
@@ -751,8 +751,8 @@
       "perishable": true,
       "purchaseUnit": {
         "amount": 113.4,
-        "label": "¼ lb",
-        "many": "¼ lb",
+        "label": "\u00bc lb",
+        "many": "\u00bc lb",
         "byWeight": true
       },
       "contains": [
@@ -766,7 +766,7 @@
     },
     {
       "id": "rice-paper",
-      "name": "Rice paper wrappers (8½-inch rounds)",
+      "name": "Rice paper wrappers (8\u00bd-inch rounds)",
       "section": "specialty",
       "baseUnit": "count",
       "countLabel": {
@@ -1201,7 +1201,7 @@
       "animalPart": null,
       "rawHandling": null,
       "icon": null,
-            "watch": null
+      "watch": null
     },
     {
       "id": "water",
@@ -1248,6 +1248,111 @@
         "amount": 70,
         "label": "jar of ground cinnamon",
         "many": "jars of ground cinnamon"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "romaine",
+      "name": "Romaine lettuce",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "head of romaine lettuce",
+        "many": "heads of romaine lettuce"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "head of romaine lettuce",
+        "many": "heads of romaine lettuce"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "tomato",
+      "name": "Tomatoes",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "medium tomato",
+        "many": "medium tomatoes"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "medium tomato",
+        "many": "medium tomatoes"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "radish",
+      "name": "Radishes",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "radish",
+        "many": "radishes"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 10,
+        "label": "bunch of radishes",
+        "many": "bunches of radishes"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "lemon",
+      "name": "Lemons",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "lemon",
+        "many": "lemons"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "lemon",
+        "many": "lemons"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "sumac",
+      "name": "Ground sumac",
+      "section": "spices",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 100,
+        "label": "jar of ground sumac",
+        "many": "jars of ground sumac"
       },
       "contains": [],
       "animalSource": null,

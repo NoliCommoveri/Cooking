@@ -208,6 +208,90 @@ export const LIBRARY = {
    "unleavened": true
   },
   {
+   "id": "fattoush",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Fattoush",
+   "image": "img/dishes/fattoush.webp",
+   "cuisine": "lebanese",
+   "skill": "Fine chopping, toasting pita",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, toast the pita on two sheet pans, and swap their shelves halfway through."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "pita"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "radish"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "mint"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "sumac"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "sumac",
+     "use": "lemon",
+     "reason": "availability"
+    },
+    {
+     "for": "pita",
+     "use": "tortilla-corn",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false
+  },
+  {
    "id": "shakshuka",
    "version": 1,
    "track": "core",
@@ -843,6 +927,26 @@ export const LIBRARY = {
   },
   "cinnamon-ground": {
    "name": "Ground cinnamon",
+   "contains": []
+  },
+  "romaine": {
+   "name": "Romaine lettuce",
+   "contains": []
+  },
+  "tomato": {
+   "name": "Tomatoes",
+   "contains": []
+  },
+  "radish": {
+   "name": "Radishes",
+   "contains": []
+  },
+  "lemon": {
+   "name": "Lemons",
+   "contains": []
+  },
+  "sumac": {
+   "name": "Ground sumac",
    "contains": []
   }
  },
