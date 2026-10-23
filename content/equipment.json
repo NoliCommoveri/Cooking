@@ -37,6 +37,13 @@
     { "id": "vegetable-peeler", "name": "Vegetable peeler", "category": "knives", "icon": null },
     { "id": "paper-towels", "name": "Paper towels", "category": "utensils", "icon": null },
     { "id": "microwave", "name": "Microwave", "category": "appliances", "icon": null },
-    { "id": "rolling-pin", "name": "Rolling pin", "category": "bakeware", "icon": null }
+    { "id": "rolling-pin", "name": "Rolling pin", "category": "bakeware", "icon": null },
+    { "id": "skillet-nonstick-8", "name": "8-inch nonstick skillet", "category": "pans", "icon": null },
+    { "id": "immersion-blender", "name": "Stick blender (immersion blender)", "category": "appliances", "icon": null },
+    { "id": "table-knife", "name": "Butter knife", "category": "utensils", "icon": null },
+    { "id": "heatproof-bowl", "name": "Heatproof glass or metal bowl that sits on top of the saucepan", "category": "mixing", "icon": null },
+    { "id": "slotted-spoon", "name": "Slotted spoon", "category": "utensils", "icon": null },
+    { "id": "toaster", "name": "Toaster", "category": "appliances", "icon": null },
+    { "id": "baking-dish", "name": "9-by-13-inch baking dish", "category": "bakeware", "icon": null }
   ]
 }

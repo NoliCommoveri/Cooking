@@ -839,6 +839,244 @@ export const LIBRARY = {
    "protein": "beef"
   },
   {
+   "id": "french-omelet",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "French-style omelet",
+   "image": "img/dishes/french-omelet.webp",
+   "cuisine": "french",
+   "skill": "Heat control, rolling an omelet",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, that's a lot of omelets in a row. Ask another cook to run a second pan next to you."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "chives",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "grilled-cheese-tomato-soup",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Grilled cheese + tomato soup",
+   "image": "img/dishes/grilled-cheese-tomato-soup.webp",
+   "cuisine": "american",
+   "skill": "Heat control",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, the soup needs a very big pot, at least 8 quarts. Cook the sandwiches in two skillets side by side to save time."
+     }
+    ]
+   },
+   "totalMinutes": 55,
+   "ingredients": [
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "broth-vegetable"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "milk-whole",
+     "optional": true
+    },
+    {
+     "ingredient": "bread-sandwich"
+    },
+    {
+     "ingredient": "cheese-sliced"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "basil",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "bread-sandwich",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "challah-french-toast",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Challah French toast",
+   "image": "img/dishes/challah-french-toast.webp",
+   "cuisine": "jewish",
+   "skill": "Heat control",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, use two loaves and cook in two skillets side by side, or keep the finished slices warm under foil while you cook more batches."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "challah"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "vanilla-extract"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "maple-syrup"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "challah",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "milk-whole",
+     "use": "milk-oat",
+     "reason": "dairy"
+    },
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "hash-browns",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Crispy hash browns",
+   "image": "img/dishes/hash-browns.webp",
+   "cuisine": "american",
+   "skill": "Squeezing out moisture, crisping",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, cook the potatoes in three batches instead of two, so the pan isn't crowded."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "potato-russet"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "ketchup",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": true,
+   "protein": "vegetarian"
+  },
+  {
    "id": "shakshuka",
    "version": 1,
    "track": "core",
@@ -909,6 +1147,769 @@ export const LIBRARY = {
    "substitutions": [],
    "unleavened": false,
    "protein": "vegetarian"
+  },
+  {
+   "id": "spaghetti-marinara",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Spaghetti marinara",
+   "image": "img/dishes/spaghetti-marinara.webp",
+   "cuisine": "italian",
+   "skill": "Building a sauce",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, cook the spaghetti in two pots, each with the full amount of water and salt, so the water comes back to a boil quickly, and use your biggest pot for the sauce."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "chili-flakes",
+     "optional": true
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "basil"
+    },
+    {
+     "ingredient": "spaghetti"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "parmesan",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "spaghetti",
+     "use": "spaghetti-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "honey-garlic-chicken",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Honey-garlic chicken",
+   "image": "img/dishes/honey-garlic-chicken.webp",
+   "cuisine": "chinese-american",
+   "skill": "Building a sauce",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, brown the chicken in three batches instead of two, so the pan never gets crowded."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "cornstarch"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "vinegar-rice"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "sesame-seeds",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "chicken"
+  },
+  {
+   "id": "chicken-fried-rice",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Chicken fried rice",
+   "image": "img/dishes/chicken-fried-rice.webp",
+   "cuisine": "chinese",
+   "skill": "High-heat stir-fry, day-old rice",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "For 7 or 8, the pan is very full. Fry the rice in two batches, and stir half the egg, chicken, and sauce into each."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "chicken-breast"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "peas-carrots-frozen"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "sesame-oil"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "chicken"
+  },
+  {
+   "id": "oyakodon",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Oyakodon",
+   "image": "img/dishes/oyakodon.webp",
+   "cuisine": "japanese",
+   "skill": "Simmering, setting egg gently",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, cook the chicken and egg in two skillets side by side, with half of everything in each."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "mirin"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "green-onion"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "mirin",
+     "use": "vinegar-rice",
+     "reason": "availability"
+    },
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "chicken"
+  },
+  {
+   "id": "chicken-adobo",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Chicken adobo",
+   "image": "img/dishes/chicken-adobo.webp",
+   "cuisine": "filipino",
+   "skill": "Braising, reducing",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, brown the chicken in three batches, and make sure your pot holds it all in about two layers."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "vinegar-white"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "brown-sugar"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "peppercorns-black"
+    },
+    {
+     "ingredient": "green-onion",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "chicken"
+  },
+  {
+   "id": "breakfast-burritos",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Breakfast burritos",
+   "image": "img/dishes/breakfast-burritos.webp",
+   "cuisine": "american",
+   "skill": "Timing several components, rolling",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, cook the potatoes in two batches so they crisp instead of steaming."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "potato-russet"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "turkey-sausage-bulk"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "tortilla-burrito"
+    },
+    {
+     "ingredient": "cheddar-shredded"
+    },
+    {
+     "ingredient": "salsa",
+     "optional": true
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "tortilla-burrito",
+     "use": "tortilla-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "protein": "other"
+  },
+  {
+   "id": "cacio-e-pepe",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Cacio e pepe",
+   "image": "img/dishes/cacio-e-pepe.webp",
+   "cuisine": "italian",
+   "skill": "Emulsion",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "For 7 or 8, the skillet is very full. Toss slowly, and use the tongs to lift the pasta from the bottom."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "spaghetti"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "pecorino"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pecorino",
+     "use": "parmesan",
+     "reason": "availability"
+    },
+    {
+     "for": "spaghetti",
+     "use": "spaghetti-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "eggs-benedict",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Eggs Benedict",
+   "image": "img/dishes/eggs-benedict.webp",
+   "cuisine": "american",
+   "skill": "Poaching eggs, hollandaise",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, poach the eggs in three or four batches, and keep the finished ones in a bowl of warm water while you cook the rest."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "egg-pasteurized"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "turkey-strips"
+    },
+    {
+     "ingredient": "english-muffin"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "vinegar-white"
+    },
+    {
+     "ingredient": "chives",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "turkey-strips",
+     "use": "salmon-smoked",
+     "reason": "meat"
+    },
+    {
+     "for": "english-muffin",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "protein": "other"
+  },
+  {
+   "id": "mac-and-cheese",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Stovetop mac and cheese",
+   "image": "img/dishes/mac-and-cheese.webp",
+   "cuisine": "american",
+   "skill": "Roux, then béchamel, then cheese sauce",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, make the sauce in the large pot after draining the pasta, so it all fits."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "macaroni-elbow"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "cheddar-shredded"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "mustard-dijon",
+     "optional": true
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "macaroni-elbow",
+     "use": "pasta-small-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "chicken-spinach-crepes",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Chicken and spinach crêpes",
+   "image": "img/dishes/chicken-spinach-crepes.webp",
+   "cuisine": "french",
+   "skill": "Roux, then béchamel, crêpe batter",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, use two baking dishes, and bake them on the same shelf if they fit, or swap shelves halfway."
+     }
+    ]
+   },
+   "totalMinutes": 80,
+   "ingredients": [
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "chicken-breast"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "spinach-baby"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "parmesan"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "protein": "chicken"
+  },
+  {
+   "id": "japanese-chicken-curry",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Japanese chicken curry",
+   "image": "img/dishes/japanese-chicken-curry.webp",
+   "cuisine": "japanese",
+   "skill": "Roux with curry powder, from scratch",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, you'll need a very big pot, at least 8 quarts, and a few more minutes for the potatoes to soften."
+     }
+    ]
+   },
+   "totalMinutes": 65,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "potato-russet"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "ketchup"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "curry-powder"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "chicken"
   },
   {
    "id": "beef-bulgogi",
@@ -1350,6 +2351,10 @@ export const LIBRARY = {
    "name": "Baking soda",
    "contains": []
   },
+  "honey": {
+   "name": "Honey",
+   "contains": []
+  },
   "vanilla-extract": {
    "name": "Vanilla extract",
    "contains": []
@@ -1660,6 +2665,137 @@ export const LIBRARY = {
   },
   "vinegar-white": {
    "name": "White vinegar",
+   "contains": []
+  },
+  "chives": {
+   "name": "Fresh chives",
+   "contains": []
+  },
+  "milk-whole": {
+   "name": "Whole milk",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "milk-oat": {
+   "name": "Oat milk, unsweetened",
+   "contains": []
+  },
+  "challah": {
+   "name": "Challah",
+   "contains": [
+    "gluten",
+    "egg"
+   ]
+  },
+  "maple-syrup": {
+   "name": "Maple syrup",
+   "contains": []
+  },
+  "spaghetti": {
+   "name": "Spaghetti",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "spaghetti-gluten-free": {
+   "name": "Gluten-free spaghetti",
+   "contains": []
+  },
+  "cornstarch": {
+   "name": "Cornstarch",
+   "contains": []
+  },
+  "vinegar-rice": {
+   "name": "Rice vinegar",
+   "contains": []
+  },
+  "mirin": {
+   "name": "Mirin (sweet rice cooking wine)",
+   "contains": []
+  },
+  "broth-chicken": {
+   "name": "Chicken broth",
+   "contains": [
+    "meat"
+   ]
+  },
+  "peas-carrots-frozen": {
+   "name": "Frozen peas and carrots",
+   "contains": []
+  },
+  "bay-leaves": {
+   "name": "Dried bay leaves",
+   "contains": []
+  },
+  "peppercorns-black": {
+   "name": "Whole black peppercorns",
+   "contains": []
+  },
+  "turkey-sausage-bulk": {
+   "name": "Bulk turkey breakfast sausage (no casing)",
+   "contains": [
+    "meat"
+   ]
+  },
+  "cheddar-shredded": {
+   "name": "Shredded cheddar cheese",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "tortilla-burrito": {
+   "name": "Burrito-size flour tortillas (10-inch)",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "tortilla-gluten-free": {
+   "name": "Gluten-free tortillas",
+   "contains": []
+  },
+  "pecorino": {
+   "name": "Pecorino Romano cheese, finely grated",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "egg-pasteurized": {
+   "name": "Pasteurized eggs (in the shell)",
+   "contains": [
+    "egg"
+   ]
+  },
+  "turkey-strips": {
+   "name": "Turkey bacon",
+   "contains": [
+    "meat"
+   ]
+  },
+  "salmon-smoked": {
+   "name": "Smoked salmon (lox)",
+   "contains": [
+    "fish"
+   ]
+  },
+  "english-muffin": {
+   "name": "English muffins",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "macaroni-elbow": {
+   "name": "Elbow macaroni",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "spinach-baby": {
+   "name": "Baby spinach",
+   "contains": []
+  },
+  "curry-powder": {
+   "name": "Curry powder (mild)",
    "contains": []
   }
  },

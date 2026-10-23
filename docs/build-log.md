@@ -2854,3 +2854,206 @@ migrations were squashed into one.
   `/manage` to `/manage/`.
 - Tests: 259, unchanged in number (the test that pages are served at
   `/manage/` now expects the folder).
+
+## 117. 2026-10-23 — Unit 2 begins: lessons 6a through 8b
+
+Content fill (Phase 7) moves to Unit 2, at the owner's request: the first
+five lessons in course order that weren't written yet (8a Shakshuka was
+already a sample).
+- **6a French-style omelet** (`french-omelet`): eggs whisked smooth, then one
+  omelet per person in an 8-inch nonstick pan over medium-low: butter foams,
+  stir to soft curds, stop, let it set, roll it out seam side down. Lifting
+  the pan off the burner is taught as the fast way to turn the heat down.
+  Checked at 160°F (§3), so it's soft but set, not runny. 35 minutes.
+- **6b Grilled cheese + tomato soup** (`grilled-cheese-tomato-soup`): the
+  soup simmers 20 minutes, then cools 5 and is blended with a stick blender;
+  meanwhile sandwiches are cooked 2 at a time over medium-low, lid on for the
+  first side. Callback to 3b's simmer. Milk is optional. Swap: gluten-free
+  bread. 55 minutes.
+- **6c Challah French toast** (`challah-french-toast`): day-old challah,
+  1 inch thick, soaked 20 seconds a side (turned with a fork, so hands stay
+  off raw egg) and cooked on medium-low; checked at 160°F in the middle, with
+  a wash step after the custard is made and again at cleanup. Swaps:
+  gluten-free bread, oat milk, and oil for butter. 40 minutes.
+- **7 Crispy hash browns** (`hash-browns`): grated into cold water, rinsed
+  clear, squeezed dry in a towel, then cooked in two batches without
+  stirring and flipped in wedges. Callback to 6a's heat control. Swap: oil
+  for butter. 45 minutes.
+- **8b Spaghetti marinara** (`spaghetti-marinara`): onion, then garlic, then
+  crushed tomatoes simmered 20 minutes; salted pasta water (not scaled down,
+  so the pot is always full enough), a cup of it saved, and the spaghetti
+  tossed in the sauce. Callback to 3b's simmer. Parmesan is optional. Swap:
+  gluten-free spaghetti. 50 minutes.
+- **All five are written for 6 servings** (§2.2). Crushed tomatoes scale by
+  the half can, so a small batch doesn't call for a whole 28-oz can.
+- **Registries:** 7 new ingredients (chives, whole milk, oat milk, challah,
+  maple syrup, spaghetti, gluten-free spaghetti); challah is tagged gluten and
+  egg. 3 new tools: an 8-inch nonstick skillet, a stick blender, and a butter
+  knife.
+- **Course outline:** the five dishes carry their real times instead of
+  estimates. Skills are as the outline had them; 6a is still tagged
+  `poaching-eggs`, which now gives 8a a "no callback" warning.
+- Not test-cooked. No intro slides yet (warned, as for the others).
+- Tests: 261 (no new ones; the linter checks every new lesson).
+
+## 118. 2026-10-23 — Unit 2 goes on: lessons 8c through 12
+
+- **Owner ruling:** the French-style omelet (6a) doesn't teach poaching eggs.
+  `poaching-eggs` is off it in `course.json` and the lesson file, so
+  shakshuka (8a) is again the first lesson with that skill and needs no
+  callback.
+- Five more Unit 2 lessons, in course order:
+  - **8c Honey-garlic chicken** (`honey-garlic-chicken`): thighs cut and
+    tossed in cornstarch, browned in two batches, then glazed in honey, soy,
+    rice vinegar, garlic, and ginger bubbled down until sticky; 165°F. Rice
+    cooked on the stove alongside. Swap: tamari. 45 minutes.
+  - **9 Chicken fried rice** (`chicken-fried-rice`): rice cooked the day
+    before; everything cut before the stove goes on; egg scrambled and set
+    aside (a look check: no wet egg), diced chicken to 165°F, then the rice
+    spread, left, and tossed. Soy sauce poured around the pan's edge. No
+    oyster sauce. Callback to 3a's dicing. Serves up to 8. Swap: tamari.
+    35 minutes.
+  - **10 Oyakodon** (`oyakodon`): onion and chicken simmered in chicken
+    broth, soy, mirin, and sugar (chicken broth in place of dashi, §4);
+    lightly beaten eggs poured over and set under a lid to 160°F, over rice.
+    Callback to 3b's simmer. Swaps: rice vinegar and sugar for mirin
+    (availability), tamari. 45 minutes.
+  - **11 Chicken adobo** (`chicken-adobo`): thighs patted dry and browned in
+    two batches, braised in vinegar, soy, garlic, bay leaves, and
+    peppercorns (no stirring until the vinegar boils), then reduced lid off
+    to a glaze; 165°F; bay leaves fished out. Callback to 8a's thickened
+    sauce. Swap: tamari. 75 minutes.
+  - **12 Breakfast burritos** (`breakfast-burritos`): potatoes steamed then
+    crisped, bulk turkey sausage to 165°F, scrambled eggs to 160°F, all in
+    one pan, slowest first, with the finished parts kept under foil;
+    tortillas warmed in a damp towel and rolled. Callback to 1a's rolling.
+    Swaps: gluten-free tortillas, oil for butter. 50 minutes.
+- **Callbacks name one lesson**, as in Unit 1, worded so they read right
+  whichever dish of a pick-one group the family cooked.
+- **Step amounts that scale:** steps in 8c, 9, 11, 12, and 7 now say "half
+  the oil" or "the salt for the eggs" instead of a fixed spoonful, so they
+  match the ingredient list at every serving size.
+- **Registries:** 11 new ingredients (cornstarch, rice vinegar, mirin,
+  chicken broth, frozen peas and carrots, bay leaves, whole peppercorns, bulk
+  turkey sausage, shredded cheddar, burrito-size and gluten-free tortillas).
+  The turkey sausage carries a casing note, and the tortillas the lard note.
+- **Course outline:** the five dishes carry their real times.
+- Not test-cooked. No intro slides yet.
+- Tests: 261.
+
+## 119. 2026-10-23 — Unit 2 finished: lessons 13 through 15c
+
+- **Owner ruling:** the new tortilla and pepper entries from 118 stay as
+  they are (burrito-size and gluten-free tortillas, whole peppercorns).
+- The last five Unit 2 lessons:
+  - **13 Cacio e pepe** (`cacio-e-pepe`): less pasta water than usual, so it's
+    starchier; pepper toasted in butter; finely grated pecorino mashed into a
+    paste with warm pasta water and tossed in with the heat off. Serves up to
+    8. Swaps: parmesan for pecorino (availability), gluten-free spaghetti.
+    30 minutes.
+  - **14 Eggs Benedict** (`eggs-benedict`): hollandaise from pasteurized
+    yolks (§3), whisked over simmering water to 160°F, then hot butter
+    whisked in slowly and kept warm off the heat; turkey bacon; eggs poached
+    4 at a time in barely bubbling water with vinegar, whites to 160°F.
+    Prereq 13; callback to 13's emulsion. Swaps: smoked salmon for turkey
+    bacon (meat), gluten-free bread. 60 minutes.
+  - **15a Stovetop mac and cheese** (`mac-and-cheese`): a roux, milk
+    whisked in a little at a time into béchamel, cheese stirred in off the
+    heat. Swap: gluten-free small pasta. 40 minutes.
+  - **15b Chicken and spinach crêpes** (`chicken-spinach-crepes`): crêpe
+    batter rested 15 minutes (with the raw-batter tip), chicken to 165°F with
+    wilted spinach, béchamel with parmesan; crêpes cooked in the 8-inch
+    nonstick pan, filled, rolled, sauced, and baked at 400°F. Callback to
+    6a's heat control. 80 minutes.
+  - **15c Japanese chicken curry** (`japanese-chicken-curry`): the roux
+    made from scratch (§4: store blocks can hold fats we don't use), cooked
+    to light brown; curry powder bloomed in it off the heat, loosened with
+    broth, and stirred into a pot of chicken, carrots, and potatoes; 165°F.
+    Swap: tamari. 65 minutes.
+- **Raw chicken cut, then cooked later** (15b, 15c): the chicken stays on
+  the board, hands are washed, and the board and knife are washed after the
+  chicken goes into the pan, so every raw step is followed by a wash step.
+- **Kitchen word:** `roux` is now defined in `terms.json`, taught in 15a, so
+  steps can use it.
+- **Registries:** 8 new ingredients (pecorino, pasteurized eggs, turkey
+  bacon, smoked salmon, English muffins, elbow macaroni, baby spinach,
+  curry powder) and 4 tools (a heatproof bowl, a slotted spoon, a toaster,
+  and a 9-by-13 baking dish). Turkey bacon's id is `turkey-strips`: the
+  unclean-word check reads ids as well as names, and "turkey bacon" is
+  allowed only as a phrase. Its name stays "Turkey bacon", with a note to
+  pick a fully cooked package.
+- **Course outline:** the five dishes carry their real times. Every Unit 2
+  dish is now written.
+- Not test-cooked. No intro slides yet.
+- Tests: 261.
+
+## 120. 2026-10-23 — The manager's Preview as a learner
+
+The owner asked for a way to go through a lesson the way a learner does,
+without ticking off every ingredient and without it counting.
+- **Preview as a learner** (`public/manage/lesson.js`, route `#/try/<id>`):
+  a button on each lesson's page in the manager, and in its ⋯ menu on the
+  course. It opens the real lesson player on the lesson as it stands in the
+  editor, unsaved changes included, with the editor's ingredients, tools,
+  skills, kitchen words, and cuisines. Kitchen Quest or Chef's Passport, a
+  kid or an adult, remembered on the device.
+- **The player's preview mode** (`public/player.js`, `preview`): Enter the
+  kitchen / Start cooking shows whether or not Prep is checked off; a
+  "Preview · nothing is saved" strip jumps to the lesson card, Learn, Prep,
+  Cook, or Reflect; the end says nothing was saved; Back goes to the lesson.
+  The manager hands it no `onCook` or `onReflect`, so nothing reaches the
+  server, as with the demo. Where it's up to is kept on the device under its
+  own preview profile, apart from any real cook. In the manager, each new
+  stage scrolls to the top of the lesson, not the top of the page.
+  A new `registry` option lets the manager use its own lists.
+- **The player stops on its own** when its screen is replaced without Back
+  (another page, or switching the preview's theme): its ticking and voice
+  stop, so a running timer can't ring from a screen that's gone. This holds
+  in the family app too.
+- The manager's page now loads `themes.css` and the theme fonts.
+- Plan §7.5 has the feature.
+- Tests: 260 (1 new: the manager's preview loads the themes and passes no
+  save callbacks). Checked in a browser at phone width against the dev
+  server: the omelet in both themes, Prep with nothing checked, Cook,
+  Reflect, the end, and Back; the only request sent was the manager
+  sign-in.
+
+## 121. 2026-10-23 — Preview as a learner for parents
+
+At the owner's request, parents get the manager's preview too.
+- **Where:** "Preview as a learner" in the tools of each lesson on the
+  Queue (a kid's request, this week's course lessons, and lessons added by
+  hand), and "Preview" beside each written lesson in the course editor.
+- **How it looks** (`previewLesson` in `public/app.js`): it opens over the
+  page, not as a new page, so closing it (Close, Close preview, Escape, or
+  going to another page) leaves the queue or a course being edited exactly
+  as it was. "See it as" picks one of the family's profiles, and the lesson
+  shows in that profile's theme, as a kid or an adult, with the family's
+  diet swaps; the choice is kept for the visit. A family recipe on the
+  queue previews too.
+- **Nothing is saved or counted:** the player runs in preview mode (§7.5)
+  with no `onCook`, `onReflect`, `onDone`, or `ask`, and keeps where it's up
+  to under its own preview id, apart from the profile's real cooks. Checked:
+  a whole preview sends no request that writes anything.
+- **Player:** `exitLabel` sets what Back says in a preview ("Close
+  preview" for parents, "Back to the lesson" in the manager). A preview no
+  longer scrolls past its own header when it first opens.
+- Plan §6.2 has the feature.
+- Tests: 261 (1 new: the parents' preview passes no save callbacks).
+  Checked in a browser at phone width on the dev server with a family of a
+  kid (Kitchen Quest) and an adult (Chef's Passport): the queue's links,
+  the course editor's, switching between the two, Cook mode as each, and
+  closing back to the page.
+
+## 122. 2026-10-23 — Preview from Add a lesson and Our recipes; stacked arrows
+
+- **Owner request:** Preview as a learner reaches lessons added by hand.
+  Besides the Additional lessons on the Queue (which had it from 121), it's
+  now in the **Add a lesson** dialog, for the lesson picked, and on each of
+  the family's own recipes in **Our recipes** (not one waiting on a review).
+  Escape over the Add a lesson dialog closes the preview only.
+- **Course editor:** each row's ↑ and ↓ are stacked, one above the other,
+  instead of side by side.
+- Tests: 261. Checked in a browser at phone width on the dev server: the
+  Additional tab, Add a lesson, a family recipe in Cook mode, and the
+  course editor; nothing was written.

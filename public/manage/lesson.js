@@ -3,7 +3,7 @@
 // history. Changes are staged (manage.js) until Review and save.
 import { el, modal } from './dom.js';
 import { field } from './form.js';
-import { S, D, api, cur, exists, put, putPicture, page, problems, syncDish, stageLesson, pickers, lessonFile, redraw } from './manage.js';
+import { S, D, api, cur, exists, put, putPicture, page, problems, syncDish, stageLesson, pickers, lessonFile, redraw, go } from './manage.js';
 import { showValue, patchSpec } from '/lib/patch.js';
 
 // The editor's sections, in the order a lesson is written. Anything the schema
@@ -145,7 +145,8 @@ export function lessonPage(id) {
   page(
     el('p', {}, el('a', { href: '#/' }, '← The course')),
     el('div', { class: 'mhead' }, el('h1', {}, L.title),
-      el('div', { class: 'acts' }, el('button', { class: 'hbtn', onclick: () => historyDialog(path, L.title) }, 'History…'),
+      el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: `#/try/${id}` }, 'Preview as a learner'),
+        el('button', { class: 'hbtn', onclick: () => historyDialog(path, L.title) }, 'History…'),
         path in D.files && path in S.files ? el('button', { class: 'hbtn', onclick: () => { stageLesson(structuredClone(S.files[path])); redraw(); } }, 'Undo my changes here') : null)),
     el('p', { class: 'mut' }, `${seasonalUnit ? units.find((u) => u.number === L.unit).name : `Unit ${L.unit}`} · version ${L.version}${!exists('hidden.json') || !(cur('hidden.json').lessons ?? []).includes(id) ? '' : ' · hidden from families'}`),
     patched ? el('p', { class: 'mwarn' }, 'Fixes applied from fix requests are shown here. Saving this lesson writes them into its file for good.') : null,
@@ -202,4 +203,43 @@ async function toPng(file) {
   c.getContext('2d').drawImage(bmp, 0, 0, w, h);
   const url = c.toDataURL('image/png');
   return url.slice(url.indexOf(',') + 1);
+}
+
+// Preview as a learner (plan §7.5): the lesson in the real player, as it stands
+// here with any unsaved changes, in either theme, as a kid or an adult. Prep
+// doesn't need checking off, any stage is a tap away, and nothing is saved
+// to any family or counted anywhere.
+const PREVIEW_KEY = 'cpr-manage-preview';
+export async function previewPage(id) {
+  const path = lessonFile(id);
+  if (!exists(path)) return page(el('p', {}, el('a', { href: '#/' }, '← The course')), el('h1', {}, 'No such lesson'), el('p', {}, `There's no lesson called "${id}".`));
+  let V = { theme: 'quest', audience: 'kid' };
+  try { V = { ...V, ...JSON.parse(localStorage.getItem(PREVIEW_KEY)) }; } catch { /* first time */ }
+  const L = cur(path);
+  const byId = (list) => Object.fromEntries(list.map((x) => [x.id, x]));
+  const seg = (k, opts) => el('div', { class: 'seg', role: 'group' }, opts.map(([v, label]) => el('button', {
+    type: 'button', 'aria-pressed': String(V[k] === v),
+    onclick: () => { V[k] = v; try { localStorage.setItem(PREVIEW_KEY, JSON.stringify(V)); } catch { /* not kept */ } previewPage(id); },
+  }, label)));
+  const mount = el('div');
+  page(
+    el('p', {}, el('a', { href: `#/lesson/${id}` }, `← ${L.title}`)),
+    el('div', { class: 'mhead' }, el('h1', {}, 'Preview as a learner')),
+    el('p', { class: 'mut' }, 'As a family sees it, with your unsaved changes. Nothing is saved or counted.'),
+    el('div', { class: 'acts pv-pick' }, seg('theme', [['quest', 'Kitchen Quest'], ['passport', "Chef's Passport"]]), seg('audience', [['kid', 'A kid'], ['adult', 'An adult']])),
+    mount,
+  );
+  const { openLesson } = await import('/player.js');
+  await openLesson(mount, {
+    // Its own place on this device for where the preview is up to, apart from any real cook.
+    profile: { id: `preview-${V.theme}-${V.audience}`, name: 'Preview', theme: V.theme, audience: V.audience },
+    family: { diet_filters: [], default_servings: L.servings, voice_enabled: true },
+    lesson: L,
+    preview: true,
+    registry: {
+      ingredients: byId(cur('ingredients.json').ingredients), equipment: byId(cur('equipment.json').equipment),
+      skills: byId(cur('skills.json').skills), terms: cur('terms.json').terms, cuisines: byId(cur('cuisines.json').cuisines),
+    },
+    onExit: () => go(`#/lesson/${id}`),
+  });
 }

@@ -28,6 +28,25 @@ test('the demo and syllabus pages load their scripts', () => {
   assert.match(readFileSync('public/syllabus/index.html', 'utf8'), /<script type="module" src="\/syllabus.js">/);
 });
 
+// The owner's Preview as a learner (§7.5) runs the real player, so the manager
+// loads its themes; it never hands over onCook or onReflect, so nothing is saved.
+test("the manager's preview loads the player's styles and saves nothing", () => {
+  assert.match(readFileSync('public/manage/index.html', 'utf8'), /href="\/themes.css"/);
+  const src = readFileSync('public/manage/lesson.js', 'utf8');
+  const call = src.slice(src.indexOf('export async function previewPage'));
+  assert.match(call, /preview: true/);
+  assert.doesNotMatch(call, /onCook|onReflect/);
+});
+
+// Parents' Preview as a learner (§6.2), on the queue and in the course editor:
+// the same player in preview mode, with no save callbacks.
+test("the parents' preview saves nothing", () => {
+  const src = readFileSync('public/app.js', 'utf8');
+  const fn = src.slice(src.indexOf('async function previewLesson'), src.indexOf('const previewBtn'));
+  assert.match(fn, /preview: true/);
+  assert.doesNotMatch(fn, /onCook|onReflect|onDone|ask:/);
+});
+
 test('every icon the player and demo draw is in public/icons.svg', () => {
   const sprite = readFileSync('public/icons.svg', 'utf8');
   const have = new Set([...sprite.matchAll(/<symbol id="([^"]+)"/g)].map((m) => m[1]));

@@ -1,0 +1,110 @@
+{
+  "id": "chicken-spinach-crepes",
+  "version": 1,
+  "track": "core",
+  "unit": 2,
+  "title": "Chicken and spinach crêpes",
+  "image": "dishes/chicken-spinach-crepes.png",
+  "cuisine": "french",
+  "skill": "Roux, then béchamel, crêpe batter",
+  "skills": ["roux", "batters"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 80,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 9, "text": "For more than 8, use two baking dishes, and bake them on the same shelf if they fit, or swap shelves halfway." }
+    ]
+  },
+  "learn": {
+    "callback": {
+      "lesson": "french-omelet",
+      "body": "In your heat-control lesson you watched the pan and turned the heat up or down when the food told you to. Crêpes need that same eye: hot enough to set the batter in a minute, not so hot it burns before you can swirl it."
+    },
+    "move": {
+      "title": "Thin pancakes, creamy filling",
+      "body": "A roux is butter and flour cooked together, and it turns milk into a smooth white sauce called béchamel. Today you'll make béchamel, mix half of it with chicken and spinach, and roll that filling inside crêpes, thin French pancakes you cook one at a time. The rest of the sauce goes on top, and the pan bakes until bubbling."
+    },
+    "why": [
+      { "id": "roux", "title": "Why cook the flour in butter", "body": "Raw flour tastes like paste. A couple of minutes of bubbling in butter cooks away that taste and coats each bit of flour, so it spreads into the milk without lumps. When the milk gets hot, the flour's starch swells and thickens it into a smooth sauce." },
+      { "id": "rest", "title": "Let the batter rest", "body": "Whisking makes flour stretchy and fills the batter with bubbles. Fifteen minutes of rest lets the flour relax and soak up the milk, and the bubbles float out. Rested batter spreads thin and cooks into tender crêpes that don't tear." },
+      { "id": "swirl", "title": "Pour and swirl fast", "body": "The batter starts setting the instant it hits the hot pan. Pour it in the middle and tilt the pan in a circle right away, so it runs out to the edges in a thin layer before it sets." },
+      { "id": "first-one", "title": "The first one is a test", "body": "Cooks say the first crêpe never comes out right, and that's normal. It shows you whether the pan is too hot or too cool and whether the batter is too thick. Fix it, and the rest come out better." }
+    ],
+    "wrong": [
+      { "sign": "The crêpe is thick and won't spread", "fix": "Whisk a spoonful or two of milk into the batter, and tilt the pan faster." },
+      { "sign": "The crêpe tears when you flip it", "fix": "Give it 15 more seconds before flipping, until the edges look dry and lift easily." },
+      { "sign": "Dark brown spots before it sets", "fix": "The pan is too hot. Turn it down a notch and wait a minute before the next one." },
+      { "sign": "The sauce is lumpy", "fix": "Whisk hard for a minute. If lumps are still there, pour it through a strainer." }
+    ],
+    "quiz": [
+      { "q": "Why does the crêpe batter rest for 15 minutes?", "choices": ["The flour relaxes and the bubbles float out", "So it gets cold", "To make it thicker"], "answer": 0, "explain": "Rested batter spreads thin and cooks into tender crêpes." },
+      { "q": "Why tilt the pan right after pouring the batter?", "choices": ["So it spreads thin before it sets", "To cool the pan", "So it slides out"], "answer": 0, "explain": "The batter sets fast on a hot pan, so you spread it right away." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "flour-ap", "amount": 1.5, "unit": "cup", "group": "Crêpes" },
+    { "ingredient": "egg", "amount": 3, "unit": "count", "round": "up", "group": "Crêpes" },
+    { "ingredient": "milk-whole", "amount": 1.75, "unit": "cup", "group": "Crêpes" },
+    { "ingredient": "butter-unsalted", "amount": 3, "unit": "tbsp", "prep": "melted, plus a little for the pan", "group": "Crêpes" },
+    { "ingredient": "salt", "amount": 0.25, "unit": "tsp", "group": "Crêpes" },
+    { "ingredient": "chicken-breast", "amount": 1.5, "unit": "lb", "prep": "diced", "group": "Filling" },
+    { "ingredient": "olive-oil", "amount": 1, "unit": "tbsp", "group": "Filling" },
+    { "ingredient": "garlic", "amount": 2, "unit": "count", "round": "up", "prep": "minced", "group": "Filling" },
+    { "ingredient": "spinach-baby", "amount": 10, "unit": "oz", "group": "Filling" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "butter-unsalted", "amount": 4, "unit": "tbsp", "group": "Béchamel" },
+    { "ingredient": "flour-ap", "amount": 0.25, "unit": "cup", "group": "Béchamel" },
+    { "ingredient": "milk-whole", "amount": 2.5, "unit": "cup", "group": "Béchamel" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Béchamel" },
+    { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Béchamel" },
+    { "ingredient": "parmesan", "amount": 0.75, "unit": "cup", "group": "Béchamel" }
+  ],
+  "equipment": [
+    "mixing-bowl-medium",
+    "whisk",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "microwave",
+    "skillet-nonstick-8",
+    "silicone-spatula",
+    "plate",
+    "chef-knife",
+    "cutting-board",
+    "skillet-12",
+    "wooden-spoon",
+    "saucepan-medium",
+    "mixing-bowl-large",
+    "baking-dish",
+    "oven-mitts",
+    "paper-towels",
+    "thermometer"
+  ],
+  "steps": [
+    { "id": "melt", "text": "Melt the butter for the crêpes in the microwave in a small cup, in 20-second bursts.", "safety": "solo" },
+    { "id": "batter", "text": "In the medium bowl, whisk the flour and {qty:salt} salt. Crack in the {n:egg} eggs and pour in about half the crêpe milk. Whisk into a smooth, thick batter, then whisk in the rest of the milk and the melted butter.", "safety": "solo", "handles": ["egg"], "why": "rest", "tip": "Don't taste the raw batter. Raw flour and raw egg can make you sick." },
+    { "id": "wash-egg", "type": "wash", "text": "Wash your hands with soap, and wipe the counter where the eggs were.", "safety": "solo", "hazard": "Raw egg", "tip": "Raw egg can carry germs. Clean hands before you touch anything else." },
+    { "id": "rest", "text": "Let the batter rest on the counter while you make the filling.", "safety": "solo", "timerSeconds": 900, "timerLabel": "Batter rests", "why": "rest" },
+    { "id": "oven", "text": "Turn the oven on to 400°F.", "safety": "adult-nearby", "hazard": "Hot oven" },
+    { "id": "garlic", "text": "Peel and mince the garlic.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "dice-chicken", "text": "Dice the chicken into small cubes, about ½ inch, and leave it on the cutting board.", "safety": "adult-nearby", "hazard": "Sharp knife, raw chicken", "handles": ["chicken-breast"] },
+    { "id": "wash-hands", "type": "wash", "text": "Wash your hands with soap. Leave the chicken on the board for now.", "safety": "solo", "hazard": "Raw chicken", "tip": "Raw chicken can carry germs. Wash before you touch anything else." },
+    { "id": "chicken-in", "text": "Heat the olive oil in the 12-inch skillet over medium-high heat. Slide the chicken in from the board with the back of the knife and spread it out.", "safety": "adult-nearby", "hazard": "Hot oil, raw chicken", "handles": ["chicken-breast"], "tip": "Slide it in low and close to the pan, so the oil doesn't splash." },
+    { "id": "wash-chicken", "type": "wash", "text": "Wash your hands, the knife, and the cutting board with hot, soapy water.", "safety": "solo", "hazard": "Raw chicken" },
+    { "id": "cook-chicken", "text": "Cook the chicken, stirring now and then, until it's white all over and lightly browned.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 360, "timerLabel": "Chicken" },
+    { "id": "check-chicken", "type": "doneness", "text": "Slide the thermometer into the biggest piece. It needs to read at least 165°F. If it doesn't, cook 1 more minute and check again.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 165, "unit": "F" } },
+    { "id": "spinach", "text": "Add the garlic and stir for 30 seconds. Then add the spinach a big handful at a time, stirring until it wilts, and the filling salt. Scoop it all into the large bowl.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 180, "timerLabel": "Spinach", "tip": "Spinach shrinks a lot. A mountain of leaves cooks down to a small pile." },
+    { "id": "roux", "text": "Melt the béchamel butter in the saucepan over medium heat. Whisk in the flour and keep whisking while it bubbles gently, making a roux.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 120, "timerLabel": "Roux", "why": "roux", "look": "A smooth, bubbling paste the color of pale sand." },
+    { "id": "bechamel", "text": "Pour in a little of the béchamel milk and whisk smooth. Add the rest a little at a time, whisking smooth after each pour. Keep whisking until it bubbles and thickens. Turn off the heat and stir in the salt, pepper, and half the parmesan.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 420, "timerLabel": "Thicken sauce", "why": "roux", "look": "It coats the back of a spoon, and a finger drawn across the spoon leaves a clear line." },
+    { "id": "mix-filling", "text": "Pour about half the sauce over the chicken and spinach and stir to mix.", "safety": "solo" },
+    { "id": "first-crepe", "text": "Heat the nonstick skillet over medium heat and wipe it with a little butter on a paper towel. Pour in about ¼ cup of batter and right away tilt and swirl the pan so it covers the bottom thinly. Cook until the edges look dry and lift up, then flip it with the spatula and cook the other side briefly.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 75, "timerLabel": "Crêpe", "why": "swirl", "tip": "Loosen the edge with the spatula, then use your fingertips on the cool, dry edge to help flip it. Keep fingers away from the pan." },
+    { "id": "check-crepe", "type": "doneness", "text": "Look at the first crêpe.", "safety": "solo", "target": { "look": "No wet batter anywhere, with light golden spots on the first side." }, "why": "first-one", "tip": "If it's thick, thin the batter with a spoonful of milk. If it browned too fast, turn the heat down." },
+    { "id": "more-crepes", "text": "Stack it on the plate and cook the rest of the batter the same way, wiping the pan with butter every few crêpes. You'll get about 2 per person.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "Whisk the batter now and then. The flour settles to the bottom." },
+    { "id": "fill", "text": "Spread a thin layer of sauce over the bottom of the baking dish. Lay a crêpe flat, spoon a line of filling across it just below the middle, and roll it up. Set it seam side down in the dish. Fill and roll the rest.", "safety": "solo" },
+    { "id": "top", "text": "Spoon the rest of the sauce over the crêpes and sprinkle the rest of the parmesan on top.", "safety": "solo" },
+    { "id": "bake", "text": "Put on oven mitts and slide the dish into the oven. Bake until the sauce is bubbling at the edges and the top has golden spots.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 900, "timerLabel": "Bake", "look": "Bubbling at the edges, with golden spots on top." },
+    { "id": "serve", "text": "With oven mitts, take the dish out and set it on the stove. Let it cool for 5 minutes, then lift the crêpes out with the spatula and serve.", "safety": "adult-nearby", "hazard": "Hot dish", "timerSeconds": 300, "timerLabel": "Cool" }
+  ]
+}

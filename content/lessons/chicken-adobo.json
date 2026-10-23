@@ -1,0 +1,97 @@
+{
+  "id": "chicken-adobo",
+  "version": 1,
+  "track": "core",
+  "unit": 2,
+  "title": "Chicken adobo",
+  "image": "dishes/chicken-adobo.png",
+  "cuisine": "filipino",
+  "skill": "Braising, reducing",
+  "skills": ["braising", "reducing"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 75,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 9, "text": "For more than 8, brown the chicken in three batches, and make sure your pot holds it all in about two layers." }
+    ]
+  },
+  "learn": {
+    "callback": {
+      "lesson": "shakshuka",
+      "body": "In your sauce lesson, you let a sauce bubble until it thickened and a spoon dragged through it left a path. That's reducing: boiling off water to make a sauce thicker and stronger. Adobo ends the same way."
+    },
+    "move": {
+      "title": "Brown, braise, reduce",
+      "body": "Braising means browning food first, then cooking it slowly in a little liquid with the lid on until it's tender. Today you'll brown chicken thighs, braise them in vinegar, soy sauce, garlic, and bay leaves the way Filipino cooks do, then take the lid off and boil the liquid down into a glossy sauce for rice."
+    },
+    "why": [
+      { "id": "brown", "title": "Brown first for flavor", "body": "A hot pan turns the outside of the chicken golden brown, and that brown crust has flavors that boiled chicken never gets. The brown bits left stuck in the pot melt into the sauce later." },
+      { "id": "vinegar", "title": "Let the vinegar boil before you stir", "body": "Filipino cooks say: when the vinegar goes in, don't stir until it boils. A few minutes of bubbling lets the sharpest smell of the vinegar cook off. What's left is a mellow, tangy sauce." },
+      { "id": "braise", "title": "Low and slow makes it tender", "body": "With the lid on and the heat low, the chicken cooks gently in the steamy pot. Thighs have lots of connective tissue, the chewy part, and slow cooking melts it until the meat is soft enough to pull apart with a fork." },
+      { "id": "reduce", "title": "Lid off to thicken", "body": "The lid keeps the liquid in. Take it off, turn up the heat, and the water escapes as steam. The sauce gets thicker, darker, and stronger, and coats the chicken in a shiny glaze." }
+    ],
+    "wrong": [
+      { "sign": "It tastes too sour", "fix": "Simmer it uncovered a few more minutes, and stir in a pinch of brown sugar." },
+      { "sign": "It tastes too salty", "fix": "Stir in a few tablespoons of water, and serve it with plenty of rice." },
+      { "sign": "The sauce is almost gone and starting to stick", "fix": "Take the pot off the heat and stir in ¼ cup of water right away." },
+      { "sign": "The chicken is still firm and chewy", "fix": "Put the lid back on and braise 10 more minutes on low." }
+    ],
+    "quiz": [
+      { "q": "What are the steps of a braise?", "choices": ["Brown it, then cook it slowly in a little liquid with a lid", "Boil it hard with no lid", "Bake it with no liquid"], "answer": 0, "explain": "Browning adds flavor, and slow, covered cooking makes it tender." },
+      { "q": "At the end, why take the lid off and turn up the heat?", "choices": ["So water boils off and the sauce thickens", "To cool it down", "So the bay leaves float"], "answer": 0, "explain": "That's reducing: less water means a thicker, stronger sauce." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "rice-white", "amount": 2, "unit": "cup", "group": "Rice" },
+    { "ingredient": "water", "amount": 3, "unit": "cup", "group": "Rice" },
+    { "ingredient": "chicken-thigh", "amount": 2.5, "unit": "lb", "group": "Chicken" },
+    { "ingredient": "vegetable-oil", "amount": 1, "unit": "tbsp", "group": "Chicken" },
+    { "ingredient": "garlic", "amount": 10, "unit": "count", "round": "up", "prep": "peeled and smashed", "group": "Braise" },
+    { "ingredient": "vinegar-white", "amount": 0.5, "unit": "cup", "group": "Braise" },
+    { "ingredient": "soy-sauce", "amount": 5, "unit": "tbsp", "group": "Braise" },
+    { "ingredient": "water", "amount": 1, "unit": "cup", "group": "Braise" },
+    { "ingredient": "brown-sugar", "amount": 1, "unit": "tbsp", "group": "Braise" },
+    { "ingredient": "bay-leaves", "amount": 3, "unit": "count", "round": "up", "group": "Braise" },
+    { "ingredient": "peppercorns-black", "amount": 1, "unit": "tsp", "group": "Braise" },
+    { "ingredient": "green-onion", "amount": 2, "unit": "count", "round": "up", "prep": "sliced", "optional": true, "group": "To serve" }
+  ],
+  "substitutions": [{ "for": "soy-sauce", "use": "tamari", "reason": "gluten" }],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "pot-large",
+    "tongs",
+    "wooden-spoon",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "saucepan-medium",
+    "fork",
+    "spoon",
+    "thermometer"
+  ],
+  "steps": [
+    { "id": "garlic", "text": "Lay each garlic clove on the cutting board, set the flat side of the knife on top, and press down with the heel of your hand until it cracks. Pull off the skin.", "safety": "adult-nearby", "hazard": "Knife", "tip": "Keep the sharp edge facing away from you, and press on the flat side, never near the edge." },
+    { "id": "pat-dry", "text": "Lay the chicken on the cutting board and pat both sides dry with paper towels. Throw the paper towels away.", "safety": "solo", "hazard": "Raw chicken", "handles": ["chicken-thigh"], "why": "brown", "tip": "Dry chicken browns. Wet chicken steams." },
+    { "id": "wash-1", "type": "wash", "text": "Wash your hands with hot, soapy water.", "safety": "solo", "hazard": "Raw chicken", "tip": "Raw chicken can carry germs. Wash before you touch anything else." },
+    { "id": "heat", "text": "Heat the oil in the large pot over medium-high heat until it shimmers.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 120, "timerLabel": "Heat oil" },
+    { "id": "batch-1", "text": "Use the tongs to lay half the chicken in the pot, smooth side down, with space between the pieces.", "safety": "adult-nearby", "hazard": "Hot oil, raw chicken", "handles": ["chicken-thigh"], "tip": "Lay each piece down away from you, so any spatter goes the other way." },
+    { "id": "wash-2", "type": "wash", "text": "Wash your hands with soap.", "safety": "solo", "hazard": "Raw chicken" },
+    { "id": "brown-1", "text": "Leave the chicken alone until it's golden brown underneath, then turn it with the tongs and brown the other side. Move it to the clean plate.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 420, "timerLabel": "Brown first batch", "why": "brown", "look": "Deep golden brown, and it lets go of the pot easily." },
+    { "id": "batch-2", "text": "Lay the rest of the chicken from the cutting board in the pot the same way.", "safety": "adult-nearby", "hazard": "Hot oil, raw chicken", "handles": ["chicken-thigh"] },
+    { "id": "wash-3", "type": "wash", "text": "Wash your hands, and wash the cutting board with hot, soapy water.", "safety": "solo", "hazard": "Raw chicken" },
+    { "id": "brown-2", "text": "Brown the second batch on both sides, the same way.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 420, "timerLabel": "Brown second batch" },
+    { "id": "liquid", "text": "Leave the second batch in the pot and put the first batch back in. Scatter in the garlic. Pour in the vinegar, soy sauce, and the braising water, and add the brown sugar, bay leaves, and peppercorns. Bring it to a boil, and don't stir while it bubbles.", "safety": "adult-nearby", "hazard": "Hot pot, steam", "timerSeconds": 180, "timerLabel": "Boil, no stirring", "why": "vinegar", "tip": "The steam smells strong and sharp. Keep your face back from the pot." },
+    { "id": "braise", "text": "Stir once, scraping up the brown bits from the bottom. Turn the heat to low, put the lid on, and let it simmer gently.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 1500, "timerLabel": "Braise", "why": "braise", "look": "Small, lazy bubbles under the lid." },
+    { "id": "rinse-rice", "text": "While the chicken braises, put the rice in the saucepan and cover it with cold water. Swish it with your hand, then carefully pour off the cloudy water, holding the rice back with your hand. Do this 3 times.", "safety": "solo", "tip": "Rinsing washes off loose starch, so the rice cooks up fluffy instead of gluey." },
+    { "id": "cook-rice", "text": "Add {qty:water} of water to the rice. Bring it to a boil over high heat with the lid off. Then turn the heat to low, put the lid on, and cook without lifting the lid.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 900, "timerLabel": "Rice", "tip": "When the timer rings, turn off the burner and leave the lid on. The rice keeps steaming until you're ready." },
+    { "id": "reduce", "text": "When the braise timer rings, take the lid off the chicken and turn the heat up to medium-high. Turn the chicken over with the tongs. Let it bubble, turning the pieces now and then, until the sauce is thick and glossy and about half is left.", "safety": "adult-nearby", "hazard": "Hot pot, bubbling sauce", "timerSeconds": 600, "timerLabel": "Reduce sauce", "why": "reduce", "look": "The sauce coats the back of a spoon and the chicken looks shiny." },
+    { "id": "check-chicken", "type": "doneness", "text": "Slide the thermometer into the thickest piece of chicken. It needs to read at least 165°F. If it doesn't, cover it and cook 5 more minutes on low, then check again.", "safety": "adult-nearby", "hazard": "Hot pot", "target": { "temp": 165, "unit": "F" } },
+    { "id": "bay", "text": "Turn off the stove. Fish out the bay leaves with the spoon and throw them away.", "safety": "adult-nearby", "hazard": "Hot pot", "tip": "Bay leaves stay stiff and sharp even after cooking, so nobody should eat them." },
+    { "id": "serve", "text": "Fluff the rice with the fork. Serve the chicken over the rice with plenty of sauce spooned on top, and the green onions if you're using them.", "safety": "adult-nearby", "hazard": "Hot pot" }
+  ]
+}
