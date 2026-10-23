@@ -1,7 +1,7 @@
 // The weekly schedule (plan §6.18): worked out, not stored.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { schedule, weekOf, addDays, localDay } from '../src/worker/schedule.js';
+import { schedule, weekOf, addDays, localDay, isSabbath } from '../src/worker/schedule.js';
 
 const L = ['a', 'b', 'c', 'd', 'e', 'f'];
 const course = { start_date: '2026-09-06', per_week: 2 }; // a Sunday
@@ -22,8 +22,6 @@ test('on track: each week holds the next lessons at the pace', () => {
   assert.equal(s.planned_finish, '2026-09-20');
   assert.equal(s.projected_finish, '2026-09-20');
   assert.equal(s.weeks_behind, 0);
-  assert.equal(s.shows_next, false, 'next week shows from Thursday');
-  assert.equal(schedule({ course, lessons: L, today: '2026-09-10' }).shows_next, true);
 });
 
 test('a lesson not cooked goes first next week, and everything shifts', () => {
@@ -65,12 +63,10 @@ test('an extra lesson is this week only, and not overdue if it is not cooked', (
   assert.equal(next.lessons_behind, 0);
 });
 
-test('before the start, nothing is due; the first week shows from the Thursday before', () => {
+test('before the start, nothing is due, and the first week is next week', () => {
   const early = schedule({ course, lessons: L, today: '2026-08-31' });
   assert.deepEqual(ids(early.this_week), []);
   assert.deepEqual(ids(early.next_week), ['a', 'b']);
-  assert.equal(early.shows_next, false);
-  assert.equal(schedule({ course, lessons: L, today: '2026-09-03' }).shows_next, true);
   assert.equal(early.started, false);
 });
 
@@ -78,4 +74,28 @@ test('the weeks after next follow at the pace, past skipped weeks', () => {
   const weeks = { '2026-09-27': { skipped: true } };
   const s = schedule({ course, lessons: [...L, 'g', 'h'], weeks, today: '2026-09-07' });
   assert.deepEqual(s.ahead, [{ week: '2026-09-20', lessons: ['e', 'f'] }, { week: '2026-10-04', lessons: ['g', 'h'] }]);
+});
+
+test('Saturday is the Sabbath', () => {
+  assert.equal(isSabbath('2026-10-24'), true);
+  assert.equal(isSabbath('2026-10-23'), false);
+  assert.equal(isSabbath('2026-10-25'), false);
+});
+
+test('a swap for an Appointed Time meal takes a place this week: the lesson goes first next week, and it never counts as behind', () => {
+  // Week 2, one lesson a week: c is up, and the parent swaps it for a feast meal.
+  const one = { start_date: '2026-09-06', per_week: 1 };
+  const done = { a: '2026-09-07' };
+  const plain = schedule({ course: one, lessons: L, done, today: '2026-09-14' });
+  assert.deepEqual(ids(plain.this_week), ['b']);
+  const weeks = { '2026-09-13': { swapped: 1 } };
+  const s = schedule({ course: one, lessons: L, done, weeks, today: '2026-09-14' });
+  assert.deepEqual(ids(s.this_week), [], 'nothing else is pulled in');
+  assert.deepEqual(ids(s.next_week), ['b'], 'it goes first next week');
+  assert.equal(s.planned_finish, addDays(plain.planned_finish, 7), 'the planned finish moves back a week');
+  // A week later, b not cooked in the swapped week isn't late.
+  const later = schedule({ course: one, lessons: L, done, weeks, today: '2026-09-21' });
+  assert.equal(later.weeks_behind, 0);
+  assert.equal(later.lessons_behind, 0);
+  assert.deepEqual(ids(later.this_week), ['b']);
 });

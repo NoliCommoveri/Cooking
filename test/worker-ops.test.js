@@ -161,7 +161,7 @@ test('/ops says when no database is bound', async () => {
 test('/ops: apply pending, the owner, and a download', async () => {
   const env = await makeEnv({ migrate: false });
   const ops = await opsClient(env);
-  assert.match((await ops.get('/ops')).body, /Apply pending \(9\)/);
+  assert.match((await ops.get('/ops')).body, /Apply pending \(12\)/);
   assert.match((await ops.form('/ops/migrate', {})).body, /Applied <code>0001<\/code>/);
 
   const jen = await family(env, 'Carsons', 'jen@example.com');
@@ -187,7 +187,7 @@ test('/ops clear and remove ask for their phrase', async () => {
   assert.match((await ops.form('/ops/clear', { phrase: 'delete' })).body, /Nothing was deleted/);
   assert.match((await ops.get('/ops/clear')).body, /Download export.json first/);
   assert.match((await ops.form('/ops/clear', { phrase: 'DELETE EVERYTHING' })).body, /Cleared \d+ tables/);
-  assert.match((await ops.get('/ops')).body, /Apply pending \(9\)/);
+  assert.match((await ops.get('/ops')).body, /Apply pending \(12\)/);
 });
 
 test('/ops restores from an uploaded file', async () => {

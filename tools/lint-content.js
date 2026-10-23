@@ -17,7 +17,7 @@ export function loadContent(root = ROOT) {
   return {
     registryFiles, lessons,
     ingredients: all.ingredients, equipment: all.equipment, terms: all.terms, watchedWords: r('rules/kitchen-words.json').words, skills: all.skills, cuisines: all.cuisines, regions: all.regions, units: all.units, course: r('course.json'),
-    rules: { cleanSpecies: species.species, fatBlocked: species.fatBlocked, allowedProducts: species.allowedProducts || [], blockedWords: r('rules/blocked-words.json').words, allowedPhrases: r('rules/allowed-phrases.json').phrases },
+    rules: { cleanSpecies: species.species, fatBlocked: species.fatBlocked, allowedProducts: species.allowedProducts || [], blockedWords: r('rules/blocked-words.json').words, allowedPhrases: r('rules/allowed-phrases.json').phrases, leaven: r('rules/leaven.json') },
     schemas: { registries: r('schema/registries.schema.json'), lesson: r('schema/lesson.schema.json') },
     imageExists: p => existsSync(join(root, 'images', p))
   };

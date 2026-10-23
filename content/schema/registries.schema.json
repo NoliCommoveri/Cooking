@@ -13,14 +13,14 @@
       "properties": {
         "id": { "$ref": "#/$defs/id" },
         "name": { "$ref": "#/$defs/text" },
-        "section": { "enum": ["meat-fish", "produce", "herbs", "dairy-eggs", "bread-tortillas", "grains-pasta", "canned-jarred", "sauces", "oils-vinegars", "baking", "specialty", "frozen", "spices"] },
+        "section": { "enum": ["tap", "meat-fish", "produce", "herbs", "dairy-eggs", "bread-tortillas", "grains-pasta", "canned-jarred", "sauces", "oils-vinegars", "baking", "specialty", "frozen", "spices"] },
         "baseUnit": { "enum": ["g", "ml", "count"] },
         "conversions": { "type": "object", "additionalProperties": { "type": "number", "minimum": 0 } },
         "units": { "type": "object", "additionalProperties": { "type": "object", "required": ["amount", "one", "many"], "additionalProperties": false,
           "properties": { "amount": { "type": "number", "minimum": 0 }, "one": { "$ref": "#/$defs/text" }, "many": { "$ref": "#/$defs/text" } } } },
         "countLabel": { "$ref": "#/$defs/labels" },
         "measure": { "enum": ["butter"] },
-        "purchaseUnit": { "type": "object", "required": ["label", "many", "amount"], "additionalProperties": false,
+        "purchaseUnit": { "type": ["object", "null"], "required": ["label", "many", "amount"], "additionalProperties": false,
           "properties": { "label": { "$ref": "#/$defs/text" }, "many": { "$ref": "#/$defs/text" }, "amount": { "type": "number", "exclusiveMinimum": 0 },
             "byWeight": { "type": "boolean" } } },
         "perishable": { "type": "boolean" },
@@ -53,6 +53,7 @@
         "forms": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/text" } }, "means": { "$ref": "#/$defs/text" },
         "taughtIn": { "type": ["string", "null"], "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" }, "image": { "type": ["string", "null"] } } } },
     "units": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["number", "name"],
-      "properties": { "number": { "type": "integer", "minimum": 1 }, "name": { "$ref": "#/$defs/text" } } } }
+      "properties": { "number": { "type": "integer", "minimum": 1 }, "name": { "$ref": "#/$defs/text" }, "seasonal": { "type": "boolean" },
+        "prefix": { "type": "string", "pattern": "^[A-Z]$" }, "lessons": { "type": "array", "items": { "$ref": "#/$defs/id" } } } } }
   }
 }

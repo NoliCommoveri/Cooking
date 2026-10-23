@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Meat">
+<title>Meat</title>
+<g stroke="#3b2416" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+<ellipse cx="120" cy="206" rx="92" ry="14" fill="#000" fill-opacity=".10" stroke="none"/>
+<ellipse cx="120" cy="150" rx="98" ry="50" fill="#f4efe6"/><ellipse cx="120" cy="146" rx="74" ry="34" fill="#fffaf2" stroke-width="2"/>
+<path d="M62 140 Q60 108 100 102 Q150 96 176 116 Q190 132 176 152 Q150 172 104 168 Q66 164 62 140 Z" fill="#8f4a2a"/>
+<path d="M76 140 Q78 118 104 114 Q146 110 164 126 Q170 140 158 150 Q136 160 104 158 Q80 154 76 140 Z" fill="#a95a35" stroke="none"/>
+<g stroke="#5e2a14" stroke-width="4" fill="none"><path d="M92 120 L84 150"/><path d="M114 114 L106 158"/><path d="M136 114 L128 158"/><path d="M158 122 L150 152"/></g>
+<path d="M170 98 Q190 86 202 92" fill="none" stroke="#3f7a3a" stroke-width="3"/><g fill="#5b9a4d" stroke-width="2"><ellipse cx="184" cy="90" rx="7" ry="4" transform="rotate(-30 184 90)"/><ellipse cx="196" cy="88" rx="7" ry="4" transform="rotate(20 196 88)"/></g>
+</g>
+</svg>

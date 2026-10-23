@@ -13,6 +13,8 @@ const find = (list, id) => list.sections.flatMap((s) => s.items).find((x) => x.i
 test('every ingredient has a store section from the list and a package size', () => {
   const ids = new Set(SECTIONS.map(([id]) => id));
   for (const i of CONTENT.ingredients) {
+    // Water comes from the tap: never bought, so no package.
+    if (i.section === 'tap') { assert.equal(i.purchaseUnit, null, i.id); continue; }
     assert.ok(ids.has(i.section), `${i.id}: ${i.section}`);
     assert.ok(i.purchaseUnit?.amount > 0, i.id);
   }
@@ -55,4 +57,13 @@ test("diet swaps land on the list, and left-out ingredients don't", () => {
   const list = shoppingList({ lessons: [{ lesson: L('beef-bulgogi'), servings: 6 }], registry, filters: ['gluten'] });
   assert.ok(find(list, 'tamari'));
   assert.equal(find(list, 'soy-sauce'), undefined);
+});
+
+test('water from the tap is never on a shopping list', () => {
+  const registry = Object.fromEntries(CONTENT.ingredients.map((i) => [i.id, i]));
+  const L = CONTENT.lessons.find((x) => x.data.id === 'unleavened-flatbread').data;
+  const list = shoppingList({ lessons: [{ lesson: L, servings: 6 }], registry });
+  const ids = list.sections.flatMap((s) => s.items.map((x) => x.id));
+  assert.ok(ids.includes('flour-ap'));
+  assert.ok(!ids.includes('water'));
 });

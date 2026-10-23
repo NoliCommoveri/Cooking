@@ -32,6 +32,7 @@
     { "id": "kitchen-towel", "name": "Clean kitchen towels", "category": "utensils", "icon": null },
     { "id": "vegetable-peeler", "name": "Vegetable peeler", "category": "knives", "icon": null },
     { "id": "paper-towels", "name": "Paper towels", "category": "utensils", "icon": null },
-    { "id": "microwave", "name": "Microwave", "category": "appliances", "icon": null }
+    { "id": "microwave", "name": "Microwave", "category": "appliances", "icon": null },
+    { "id": "rolling-pin", "name": "Rolling pin", "category": "bakeware", "icon": null }
   ]
 }

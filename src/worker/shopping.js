@@ -8,20 +8,24 @@ import { randomHex } from './lib/crypto.js';
 import { requireParent } from './auth.js';
 import { CONTENT } from './content-data.js';
 import { LIBRARY } from './library-data.js';
-import { liveLesson } from './lessons.js';
 import { servingOptions } from '../content/scale.js';
 import { shoppingList, SECTIONS } from '../content/shop.js';
 import { family, syncQueue, queueProfiles, today, tzOf } from './plan.js';
 import { weekOf } from './schedule.js';
+import { isRecipeId, lessonFor, recipeNames, REGISTRY as FULL } from './recipes.js';
 
 const id = () => randomHex(8);
 const placeholders = (list) => list.map(() => '?').join(', ');
 // The full ingredient records: package sizes, conversions, and store sections.
-const REGISTRY = Object.fromEntries(CONTENT.ingredients.map((i) => [i.id, i]));
+const REGISTRY = FULL;
+// Library lessons, and the family's own recipes (§6.10).
 const written = new Set(LIBRARY.lessons.map((L) => L.id));
+const canShop = (lid) => written.has(lid) || isRecipeId(lid);
 const LIST_MAX = 20; // lessons on one list
 const nearestSize = (lid, n) => {
-  const options = servingOptions(LIBRARY.lessons.find((L) => L.id === lid));
+  const L = LIBRARY.lessons.find((x) => x.id === lid);
+  if (!L) return Math.max(1, Math.min(12, n));
+  const options = servingOptions(L);
   return options.includes(n) ? n : options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a));
 };
 
@@ -35,7 +39,8 @@ async function upcoming(env, fam, day, tz) {
   const { results: rows } = await env.DB.prepare("SELECT * FROM queue WHERE family_id = ? AND status IN ('assigned', 'shopped') ORDER BY created_at, id").bind(fam.id).all();
   const who = await queueProfiles(env, fam.id, rows.map((r) => r.id));
   const out = [];
-  const entry = (lid, week, extra) => ({ lesson_id: lid, title: LIBRARY.lessons.find((L) => L.id === lid)?.title ?? lid, week, ...extra });
+  const names = await recipeNames(env, fam.id);
+  const entry = (lid, week, extra) => ({ lesson_id: lid, title: LIBRARY.lessons.find((L) => L.id === lid)?.title ?? names[lid]?.title ?? lid, week, ...extra });
   for (const st of states) {
     const weeks = [
       { week: st.sched.this_week.week, ids: st.sched.this_week.lessons.filter((x) => !x.done).map((x) => x.id) },
@@ -53,7 +58,7 @@ async function upcoming(env, fam, day, tz) {
     }
   }
   for (const r of rows) {
-    if (r.course_id || !written.has(r.lesson_id)) continue;
+    if (r.course_id || !canShop(r.lesson_id)) continue;
     const week = r.planned_date ? (weekOf(r.planned_date) < thisWeek ? thisWeek : weekOf(r.planned_date)) : null;
     out.push(entry(r.lesson_id, week, { key: r.id, queue_id: r.id, course_id: null, servings: r.servings, profile_ids: who[r.id] ?? [], planned_date: r.planned_date }));
   }
@@ -65,11 +70,15 @@ const staplesOf = async (env, fid) => (await env.DB.prepare('SELECT ingredient_i
 
 async function needs(env, fam, entries, { staples = [], skip = [] } = {}) {
   const lessons = [];
+  let registry = REGISTRY;
   for (const e of entries) {
-    const L = await liveLesson(env.DB, e.lesson_id);
-    if (L) lessons.push({ lesson: L, servings: e.servings });
+    // A family recipe's typed-in ingredients sit beside the registry, unmerged.
+    const found = await lessonFor(env, fam.id, e.lesson_id, { deleted: true });
+    if (!found) continue;
+    if (Object.keys(found.extra).length) registry = { ...registry, ...found.extra };
+    lessons.push({ lesson: found.lesson, servings: e.servings });
   }
-  return shoppingList({ lessons, registry: REGISTRY, filters: JSON.parse(fam.diet_filters), staples, skip });
+  return shoppingList({ lessons, registry, filters: JSON.parse(fam.diet_filters), staples, skip });
 }
 
 const ownList = async (env, fid, lid) => (await env.DB.prepare('SELECT * FROM shopping_lists WHERE id = ? AND family_id = ?').bind(lid, fid).first())
@@ -80,12 +89,13 @@ async function listOut(env, fam, list) {
   const onHand = (await env.DB.prepare('SELECT ingredient_id FROM list_on_hand WHERE list_id = ? AND family_id = ?').bind(list.id, fam.id).all()).results.map((r) => r.ingredient_id);
   const checked = (await env.DB.prepare('SELECT ingredient_id FROM list_checks WHERE list_id = ? AND family_id = ?').bind(list.id, fam.id).all()).results.map((r) => r.ingredient_id);
   const staples = await staplesOf(env, fam.id);
+  const names = await recipeNames(env, fam.id);
   const full = await needs(env, fam, lessons, { staples });
   const all = [...full.sections.flatMap((x) => x.items), ...full.may_have];
   const left = await needs(env, fam, lessons, { staples, skip: onHand });
   return {
     id: list.id, created_at: list.created_at, done_at: list.done_at,
-    lessons: lessons.map((l) => ({ lesson_id: l.lesson_id, title: LIBRARY.lessons.find((L) => L.id === l.lesson_id)?.title ?? l.lesson_id, servings: l.servings })),
+    lessons: lessons.map((l) => ({ lesson_id: l.lesson_id, title: LIBRARY.lessons.find((L) => L.id === l.lesson_id)?.title ?? names[l.lesson_id]?.title ?? l.lesson_id, servings: l.servings })),
     sections: left.sections, may_have: left.may_have,
     on_hand: all.filter((x) => onHand.includes(x.id)),
     checked,

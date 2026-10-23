@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Soup">
+<title>Soup</title>
+<g stroke="#3b2416" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+<ellipse cx="120" cy="206" rx="92" ry="14" fill="#000" fill-opacity=".10" stroke="none"/>
+
+<path d="M30 112 L210 112 Q206 172 152 186 L88 186 Q34 172 30 112 Z" fill="#3e7fb5"/>
+<path d="M50 156 Q120 170 190 156" fill="none" stroke="#2e6596" stroke-width="3"/>
+<ellipse cx="120" cy="112" rx="90" ry="22" fill="#dfeaf3"/>
+<ellipse cx="120" cy="114" rx="76" ry="15" fill="#e6b44e" stroke-width="2"/>
+<g stroke-width="2"><circle cx="96" cy="112" r="7" fill="#f2e1b3"/><circle cx="140" cy="116" r="8" fill="#f2e1b3"/><path d="M110 120 l8 -3 M160 110 l7 3" stroke="#e07a2e" stroke-width="4"/><circle cx="122" cy="108" r="3" fill="#4f8f3f"/><circle cx="76" cy="118" r="3" fill="#4f8f3f"/></g>
+<g fill="none" stroke="#b9a99a" stroke-width="3"><path d="M90 84 Q80 70 90 58 Q100 46 90 34"/><path d="M120 80 Q110 64 120 52 Q130 40 120 28"/><path d="M150 84 Q140 70 150 58 Q160 46 150 34"/></g>
+</g>
+</svg>

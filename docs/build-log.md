@@ -1653,3 +1653,317 @@ Plan only; nothing built. From the owner's rulings in this session.
   is built next, with family recipes pulled forward from Phase 9. It comes
   after Phase 4's first part and before the rest of Phase 4 and 4b. §9 says
   so, and its place is no longer an open question.
+
+## 68. 2026-10-22 — Plan: Appointed Times, and the review of sharing
+
+Plan only; nothing built. A review of entries 66–67 and the owner's rulings
+on it.
+
+- **Renamed:** Holy Times is now **Appointed Times** (§6.19), including the
+  unit, the "Swap for an Appointed Time meal instead" menu item, Phase 4c,
+  and the leaven notice ("the spring Appointed Time").
+- **Typed-in ingredients are reviewed** (§6.10). Instant sharing let a
+  typed-in ingredient reach every family with only the blocked-word scan on
+  it, and the scan can't catch everything §2.1 blocks (pepperoni, gelatin,
+  refried beans). Now a recipe with a typed-in ingredient shows only Send for
+  review and can't be shared until the owner clears it, usually by adding the
+  ingredient to the registry. Its family can still cook it meanwhile.
+- **No photos in the directory:** shared recipes always show the meal-type
+  art; a family's own photo stays with that family.
+- **Report and Hide:** any parent can report a directory recipe; the owner
+  can hide any directory recipe and unhide it (the restore rule). New
+  "Reported recipes" on the owner screens (§6.2a).
+- **Send for review and Share recipe** can both be pressed: the recipe is
+  shared without the Unleavened badge and gets it if the review clears it.
+  The leaven notice keeps the owner's wording.
+- **Leaven:** the check reads step text too. Beer is off the list; fermented
+  foods that aren't a raising agent (beer, soy sauce, vinegar, Worcestershire,
+  miso) aren't leaven.
+- **The spring window** runs February 1 through May 15, so the latest years'
+  feast days are covered. Proposed: it goes by the week being swapped.
+- **The swap picker** shows the whole community directory (plus the family's
+  own recipes), with diet filters applied and hidden recipes left out.
+- **Housekeeping:** §1's Users table; §6.10's entry flow (photo stays with
+  the family, typed-in ingredients go to review, hazard line and an added
+  wash-hands step proposed); §8.4 now has `recipe_reviews` (replacing
+  `recipe_submissions`), `community_recipes` with kind, meal type, the
+  Unleavened flag and `hidden_at`, `recipe_reports`, and `queue` and
+  `attempts` that can point at a family recipe, with a swap as a queue row
+  (proposed). §9's 4c row and test cover review, Report and Hide.
+- **§10, new open questions:** in homeschool mode, whether a swapped week
+  shows as behind, and whether next week can be swapped from Thursday;
+  whether the unit's lessons count in the 75.
+
+## 69. 2026-10-22 — No Thursday preview; a swap is never behind
+
+- **Owner ruling: the Thursday preview is gone.** It was there so a parent
+  could shop Thursday or Friday for next week, but section 60 made shopping
+  work from What you'll need, which already shows the weeks ahead. Now each
+  week's course lessons join the queue on its Sunday, and kids no longer see
+  "For next week".
+  - `src/worker/schedule.js`: `PREVIEW_FROM` and `shows_next` removed.
+  - `src/worker/plan.js`: the queue sync loads this week only; the course
+    card always returns next week (for the plan and Skip next week), and a
+    profile's items are "this week" or undated.
+  - `public/app.js`: the parent's course card always shows next week, without
+    the "show here from Thursday" note; the kitchen's "For next week" label
+    is gone.
+  - Plan §6.18 and the README say so. Tests: 168, the Thursday checks removed
+    and the queue tests no longer filter out next week.
+- **Owner ruling: a swap is never behind** (§6.19). The parent approved it,
+  so the remaining lessons move back a week and the planned finish with them;
+  nobody is shown as late. Off the open questions, with the Thursday swap
+  question, which no longer applies.
+
+## 70. 2026-10-22 — Plan: syllabus hours count one student's path
+
+- **Owner ruling:** the syllabus counts only what a learner is expected to
+  cook. §6.17 now says the hours and suggested credit come from one student's
+  path (59 lessons, each pick-one group once at its average time), which is
+  how `public/syllabus.js` already works. The 75 is only the list of dishes.
+- The Appointed Times unit is optional, so it's listed in its own section and
+  left out of the hours and credit. Off the open questions (§10).
+
+## 71. 2026-10-22 — Nothing cooked on the Sabbath counts; Appointed Times settled
+
+- **Owner rulings on the Appointed Times questions** (§6.19, off §10):
+  - Recipes can be for any of the Levitical holy days (Leviticus 23), though
+    most will likely be for Unleavened Bread.
+  - The unit and the swap are for every family. None of the app's religious
+    elements can be turned off.
+  - Appointed Times cooks count toward progress, ranks, skills, and the
+    transcript like any other cook, except on the Sabbath.
+  - Shared recipes carry no identifier at all: the directory and the unit's
+    shelf are just "User-shared recipes" (was "Parent-contributed").
+- **Owner ruling: nothing cooked or graded on the Sabbath counts** (§6.18),
+  for any lesson. Built for what exists now:
+  - `src/worker/schedule.js`: `isSabbath(day)`.
+  - `src/worker/plan.js`: a course lesson is finished by its first cook that
+    wasn't on a Saturday.
+  - `src/worker/api.js`: a cook finished on a Saturday is saved but doesn't
+    close its queued lesson; a profile's cooks (the kitchen's "cooked" marks)
+    and Print our progress leave Saturday cooks out.
+  - The day is the family's calendar day, from the device's offset: the cook
+    outbox (`public/cooks.js`) and the kitchen now send `?tz=`. A cook's day
+    is worked out from the offset of the device asking, not stored, so a
+    clock change near midnight can move a cook by an hour.
+  - Grading (Phase 4b) and stamps, pins, and ranks (Phase 5) aren't built
+    yet; the plan says they follow the same rule.
+- **Tests: 170.** New: a Saturday cook leaves its lesson queued and is left
+  off the cooks list and Print our progress, while a Friday cook counts; and
+  `isSabbath`. The test setup (`test/helpers/register.js`) runs a Saturday
+  test run as the Friday before, so the suite, which cooks "now", passes on
+  any day (checked with the clock set to a Saturday).
+- No migration; nothing for the owner to do.
+
+## 72. 2026-10-22 — Phase 4c, slice 1: the Appointed Times unit and the leaven check
+
+- **Owner rulings:** Phase 4c is being built now (family recipes and the
+  Appointed Times unit; the transcript waits). Cottage cheese crescent rolls
+  join the unit. Its lessons are labeled **A1, A2** (was: no number).
+- **Leaven** (`content/rules/leaven.json`, `src/content/leaven.js`): the
+  owner's list as words (yeast, sourdough, baking powder and soda, baker's
+  ammonia, self-rising flour, and ready-made breads, crackers, and mixes),
+  checked in ingredient names, typed-in names, and step text, with plurals and
+  a few allowed phrases ("unleavened bread", "no yeast"). Beer, soy sauce,
+  vinegar, Worcestershire, and miso aren't on it.
+- **Unleavened badge:** worked out at build time for every lesson (every
+  ingredient from the registry, none leaven), shown on kitchen cards as an
+  icon and a word. Five of the nine lessons have it.
+- **The unit** is unit 8 in `content/units.json`, marked `seasonal`, with a
+  prefix letter and its lessons in order. Its lessons aren't in
+  `course.json`, so the course, its numbers, the demo, and the syllabus are
+  unchanged. The linter checks the list matches the lessons. The kitchen
+  shows "Appointed Times · Quest A1"; course plans keep A labels as they are.
+- **Two lessons:** A1 unleavened flatbread (flour, water, oil, salt; rolled
+  thin, pricked, cooked in a dry pan) and A2 cottage cheese crescent rolls
+  (cottage cheese and butter pastry around cinnamon sugar). Their Learn cards
+  say why they belong to the feast.
+- **Registry:** water (store section `tap`: never on a shopping list, no
+  package, which the linter allows only for tap), small-curd cottage cheese
+  (with the gelatin label note), ground cinnamon, and a rolling pin.
+- **Meal-type pictures** (`content/images/meals/`, copied to
+  `public/img/meals/` by the build): meat, poultry, fish, bread, soup, salad,
+  side, dessert, drink, drawn as SVG. Both new lessons use the bread picture
+  until the owner makes their dish art.
+- Tests: 176 (leaven words, plurals, allowed phrases, the fermented foods that
+  aren't leaven, the badge, A labels, the linter's list check, water never on
+  a list).
+
+## 73. 2026-10-23 — Phase 4c, slice 2: family recipes
+
+- **The owner's art** for A1 and A2 (`source/sheet-23-appointed-times.png`)
+  is cropped into `dishes/unleavened-flatbread.png` and
+  `dishes/cottage-cheese-crescents.png`, listed in `tools/dish-sheets.txt` and
+  `LICENSES.md`; the two lessons use them instead of the bread picture.
+- **Family recipes** (§6.10), for one family only:
+  - `src/content/recipe.js` (shared with the browser): the stored shape,
+    `normalizeRecipe` (trims, numbers the steps, puts a wash-hands step after
+    each step marked as handling raw meat, poultry, fish, or eggs),
+    `recipeProblems` (the hard block on every registry ingredient and every
+    word, with no exception; amounts and units; safety levels and hazards;
+    timers; and for raw meat, poultry, or fish a doneness check at the safe
+    minimum: poultry 165°F, ground meat 160°F, other meat and fish 145°F), and
+    `recipeLesson` (a recipe in lesson shape; a typed-in ingredient gets its
+    own id, scales as a plain amount, and isn't merged on shopping lists).
+  - `src/worker/recipes.js`: list, one recipe, check, add, edit (the version
+    goes up), delete with Undo. In the queue, on cooks, and on shopping lists a
+    recipe's lesson id is `recipe:<id>`, so the queue, kid requests and Cook
+    this, safety review, shopping, cooks, the Sabbath rule, and Print our
+    progress work for recipes unchanged. Diet filters hide a recipe the same
+    way as a lesson; a typed-in ingredient has no diet tags.
+  - **Migration 0010** adds `family_recipes`. **The owner presses Apply
+    pending on `/ops`** after this deploys.
+- **Screens:** Parents → Recipes (list, Edit, Delete with Undo) and the
+  guided entry: the basics, ingredients (search our list or type one in;
+  amounts like 1/2 or 1 1/2, or blank for "to taste"), tools, steps (who's
+  needed, the hazard, a timer, "handles raw food", and the doneness check),
+  meal type with its picture and an optional "why we make this" card, then a
+  review with the server's checks before Save. The draft is kept on the device
+  until it's saved. Kitchens show an "Our recipes" shelf; the player opens a
+  recipe with its meal-type picture, and goes straight to Prep when there's no
+  card. The queue's Add a lesson lists the family's recipes. Suggest a fix
+  stays off for recipes; the family edits its own.
+- **Not yet:** a recipe's own photo waits for the camera (Phase 4); sharing,
+  reviews, and the directory are slice 3.
+- Tests: 185 (the checks, the wash step, units, the hard block's refusals and
+  allowed phrases, doneness minimums, scoping between families, diet hiding,
+  and a recipe queued, on a shopping list unmerged, cooked, and on Print our
+  progress). Checked in a browser: the entry flow, the kitchen shelf, and the
+  player.
+
+## 74. 2026-10-23 — The parent menu, and dish cards
+
+- **Owner ruling: a side menu** for the parent screens, after MCCE's
+  parents app (`public/app.js` in that repo). The row of tabs is gone: a
+  **Menu** button in the bar opens a panel from the side with four groups,
+  one open at a time, opening on the current screen's group; Escape or a tap
+  outside closes it. Learning path (Queue, Shopping, Kitchen staples,
+  Progress), Recipes (Our recipes), Setup (Courses, Profiles, Family settings,
+  Logins & PIN), and Owner for the owner only (Families & beta word, Fix
+  requests). Kitchen staples is its own entry now. Each screen's title is
+  its page name, under its group's. The app's name goes back to the Queue.
+- **Owner ruling: dish cards.** Many dishes are new to families, so on the
+  queue (queued lessons and kids' requests) and the course plan, a dish opens
+  a card: a line about it, its main ingredients (not the flour, salt, and
+  oil), how it cooks, and the time.
+  - `content/course.json`: `about`, `main`, and `method` (stove, oven,
+    stove-oven, no-cook) for all 75 dishes, written this session; the linter
+    requires them and scans them for blocked words. The two Appointed Times
+    lessons carry their own (lesson schema), also required.
+  - Family recipes: the entry flow asks how it cooks; the card's main
+    ingredients come from the recipe (registry pantry sections left out) and
+    its about line from the "why we make this" card.
+- Tests: 185. Checked in a browser: the menu, its groups, and the cards on
+  the queue and the course plan.
+
+## 75. 2026-10-23 — Phase 4c, slice 3: sharing, reviews, and User-shared recipes
+
+- **Sharing** (`src/worker/sharing.js`, §6.10): Share on a recipe asks
+  General or Feast day, then runs the routine:
+  - every ingredient from our list: shared at once, with the Unleavened badge
+    if it earns one and Good for Feast Days if shared as a feast-day recipe;
+  - a typed-in ingredient: a notice with only Send for review; a cleared
+    review shares it, with the badge the owner decides;
+  - a feast-day recipe flagged for leaven (ingredients or step text): the
+    owner's notice word for word, with Send for review (greyed once sent,
+    "Sent for review") and Share recipe, which shares it without the badge;
+    both can be pressed, and clearing the review gives the badge;
+  - a blocked word: the entry flow's Review shows a matching notice and Send
+    for review, which saves the recipe **held** (it can't be cooked, queued,
+    or shared). Clearing it frees the recipe and remembers those words as a
+    false alarm in that recipe only (`cleared_words`); a new blocked word in
+    an edit is refused again. Any other problem beside a blocked word can't
+    be sent, and an unclean registry ingredient never can.
+  - Stop sharing withdraws a recipe; deleting one withdraws it too. An edit
+    after a review needs another review (reviews carry the recipe's version).
+- **User-shared recipes** (Recipes → User-shared recipes): every family's
+  shared recipes, with no family named, filtered by the family's diet
+  settings; search, Good for Feast Days only, the dish card, Add to our
+  recipes (a copy of its own, which keeps the cleared words), and Report
+  (unclean, food safety, wrong, inappropriate, other; unclean and food-safety
+  reports email the owner through Resend).
+- **Owner** (Menu → Owner): Recipe reviews (what was flagged, the whole
+  recipe, the Unleavened badge choice, a note, Clear or Decline) and Reported
+  recipes (open reports with Hide or Dismiss, and every hidden recipe with
+  Unhide). The owner can also Hide any recipe from the directory. Hiding is
+  never undone by the family sharing again. A family's copy of a hidden
+  recipe stays, with a note on Our recipes.
+- Our recipes shows each recipe's badges and where it stands (held, shared,
+  sent for review, a declined review's note).
+- **Migration 0011** adds `recipe_reviews`, `community_recipes`, and
+  `recipe_reports`, and `held` and `cleared_words` on `family_recipes`.
+  **The owner presses Apply pending on `/ops`** after this deploys.
+- **Not built:** a User-shared recipes shelf in the kids' kitchen under
+  Appointed Times; for now a parent adds a shared recipe to Our recipes to
+  cook it. The swap (slice 4) will offer the directory.
+- Tests: 193 (the routine's four paths, both buttons, clearing and declining,
+  held recipes and cleared words, scoping, Report with the email, Hide and
+  Unhide, withdraw and delete). Checked in a browser.
+
+## 76. 2026-10-23 — The User-shared shelf in the kitchen
+
+- **Owner ruling:** the Appointed Times unit gets its User-shared recipes
+  shelf in the kids' kitchen. Under the unit's lessons, every feast-day
+  recipe other families shared (the family's diet settings applied) shows
+  as a card; it opens in the player, and can be asked for, queued, shopped
+  for, and cooked straight from the directory, as `shared:<id>`
+  (`src/worker/recipes.js`, `lessonFor`). Once it's withdrawn or hidden it
+  can't be queued or started again, but cooks of it keep its name.
+- The player's kicker reads "User-shared recipe" for these.
+- Tests: 194.
+
+## 77. 2026-10-23 — Phase 4c, slice 4: Swap for an Appointed Time meal
+
+- **The swap** (`src/worker/swap.js`, §6.19): every queued lesson on the
+  parent's queue, and every course lesson in this week's plan, has a "⋯"
+  menu with **Swap for an Appointed Time meal instead**. It opens a picker
+  for the week being swapped (a course lesson's week, a planned date's week,
+  or this week):
+  - **February 1 through May 15** (any day Sunday to Friday of that week in
+    the window): only Unleavened meals, in order: the Appointed Times
+    lessons, other lessons that pass the leaven check, then parent recipes
+    that pass it: the family's own, then User-shared recipes;
+  - **the rest of the year**: the Appointed Times lessons and every Good for
+    Feast Days recipe (the family's own shared as feast day, and the
+    directory's), unleavened or not.
+  - The family's diet settings apply. Picking a User-shared recipe adds it to
+    the family's recipes first.
+- **What a swap does:** the meal is queued for the same profiles and
+  servings (the nearest size it makes). A course lesson stays in the plan
+  and goes first next week, and the rest move back: `course_weeks.swapped`
+  takes a place at the pace for that week, so the planned finish moves back
+  too and the course is never "behind" for it (schedule.js). A lesson queued
+  by hand comes off the queue. **Undo swap** on the swapped-in meal reverses
+  either; the swapped-out lesson isn't offered under Recently taken off.
+- **Migration 0012** adds `queue.swap_of` and `course_weeks.swapped`. **The
+  owner presses Apply pending on `/ops`** after this deploys.
+- Tests: 201 (the window's edges, both pickers' order and contents, diet
+  settings, a hand-queued swap and its Undo, a course swap that moves the
+  lesson to next week and the planned finish with it, picking a shared
+  recipe, family scoping). Checked in a browser.
+- One run of the whole suite failed the shopping-list test once and passed
+  on every re-run (18 more); it looks like a timing flake already there
+  (queue rows created in the same millisecond sort by a random id), not
+  this change.
+
+## 78. 2026-10-23 — The kids' kitchen in two tabs, with search
+
+- **Owner ruling:** kids aren't shown a wall of every lesson. After MCCE
+  Kids' bottom tabs, the kitchen has themed tabs pinned to the bottom:
+  - **Main quest** (Kitchen Quest) / **My journey** (Chef's Passport): what's
+    queued for this profile, then the next three lessons on its path (its
+    course plan's order, or the suggested one), with a pick-one group's
+    dishes shown together and counted once, and gone once one is cooked or
+    queued.
+  - **Side quests** / **More recipes**: every unit, then Appointed Times with
+    its User-shared shelf, then Our recipes, each a folded shelf with its
+    count. A search box filters by dish name, skill, cuisine, or any
+    ingredient (every word typed must match) and opens the shelves with
+    matches.
+  - The tab and the search are remembered for this browser tab, so coming
+    back from a lesson lands where the kid was. Progress and rewards join as
+    a third tab with Phase 5.
+- `/api/library`, `/api/recipes`, and `/api/shared` give each card its
+  search words, and lessons their pick-one group.
+- Tests: 201. Checked in a browser in both themes.

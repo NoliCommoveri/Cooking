@@ -39,3 +39,10 @@ export const fixReportEmail = ({ kind, lesson, where, note, change }) => ({
   subject: `${kind}: ${lesson}`,
   text: `A family sent a fix request marked "${kind}" on ${lesson}, ${where}.\n\nWhat's wrong:\n${note}\n${change ? `\nTheir suggestion:\n${change}\n` : ''}\nReview it in the app: Parents, then Owner, then Fix requests.${SIGNOFF}`,
 });
+
+// A report on a shared recipe for an unclean ingredient or a food-safety
+// problem (§6.10), sent to the owner right away.
+export const recipeReportEmail = ({ kind, title, note }) => ({
+  subject: `${kind}: ${title} (a user-shared recipe)`,
+  text: `A family reported the user-shared recipe "${title}" as "${kind}".\n\nWhat they said:\n${note}\n\nReview it in the app: Parents, then Menu, then Owner, then Reported recipes.${SIGNOFF}`,
+});

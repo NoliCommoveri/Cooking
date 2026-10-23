@@ -60,7 +60,8 @@ export function shoppingList({ lessons, registry, filters = [], staples = [], sk
       if (leftOut.has(line.ingredient)) return;
       const id = swap[line.ingredient] ?? line.ingredient;
       const ing = registry[id];
-      if (!ing || skipped.has(id)) return;
+      // Water from the tap is never shopped for.
+      if (!ing || skipped.has(id) || ing.section === 'tap') return;
       if (!items.has(id)) items.set(id, { id, ing, base: 0, texts: [], from: [], optional: true });
       const it = items.get(id);
       if (!line.optional) it.optional = false;

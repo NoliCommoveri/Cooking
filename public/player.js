@@ -140,9 +140,14 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // seed: { servings, with, shopped } from the queued lesson, for a fresh cook;
 // shopped is the serving count its shopping trip bought for (§6.6).
 // onReflect(cookId, reflection): saves one profile's reflection (§3).
-export async function openLesson(mount, { profile, family, lessonId, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null }) {
-  const [R, L] = await Promise.all([getRegistry(), getLesson(lessonId)]);
-  const num = (id) => (labels ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null;
+// lesson: a family recipe already in lesson shape (§6.10), with `extra`, its
+// typed-in ingredients, beside the registry. Otherwise lessonId is loaded.
+export async function openLesson(mount, { profile, family, lessonId, lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null }) {
+  const [R, L] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
+  const ING = { ...R.ingredients, ...extra };
+  // Appointed Times lessons keep their A1, A2 labels whatever the course plan (§6.19).
+  const seasonal = (id) => R.seasonal?.includes(R.lessons.find((x) => x.id === id)?.unit);
+  const num = (id) => (labels && !seasonal(id) ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null;
   // "lesson 8a, Shakshuka", or just the title for a dish the family took out of its plan.
   const lessonRef = (id, title) => (num(id) ? `lesson ${num(id)}, ${title}` : title);
   let myFixes = [];
@@ -150,7 +155,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
   await loadFixes();
   const quest = profile.theme === 'quest';
   const adult = profile.audience === 'adult';
-  const view = dietView(L, R.ingredients, family.diet_filters);
+  const view = dietView(L, ING, family.diet_filters);
   const options = servingOptions(L);
   const pick = (n) => (options.includes(n) ? n : options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a)));
   const fresh = () => ({
@@ -228,8 +233,8 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
 
   const leftOut = new Set(view.leftOut);
   const swapFor = Object.fromEntries(view.applied.map((x) => [x.for, x.use]));
-  const name = (id) => R.ingredients[id]?.name ?? id;
-  const scaled = () => scaleLesson(L, R.ingredients, S.servings);
+  const name = (id) => ING[id]?.name ?? id;
+  const scaled = () => scaleLesson(L, ING, S.servings);
   const ingredientsNow = () => scaled().ingredients.filter((i) => !leftOut.has(i.id));
   const tools = L.equipment.map((id) => R.equipment[id] ?? { id, name: id, category: 'utensils' });
 
@@ -294,12 +299,12 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
       ? `<div class="${quest ? 'serve' : 'p-serve'} crew"><span class="${quest ? 'lbl' : 'p-lbl'}">Cooking with someone?</span><div class="${quest ? 'sizes' : 'p-sizes'}" role="group" aria-label="Who's cooking">${crew.map((p) => `<button type="button" class="${quest ? 'size' : 'p-size'}" role="checkbox" aria-checked="${S.with.includes(p.id)}" data-act="crew" data-id="${esc(p.id)}">${esc(p.name)}</button>`).join('')}</div></div>`
       : '';
     const top = quest
-      ? `<article class="q-panel q-card"><p class="q-kick">Path ${L.unit}${num(L.id) ? ` · Quest ${num(L.id)}${total ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
+      ? `<article class="q-panel q-card"><p class="q-kick">${L.recipe ? esc(L.kicker ?? 'Family recipe') : R.seasonal?.includes(L.unit) ? esc(R.units[L.unit]) : `Path ${L.unit}`}${num(L.id) ? ` · Quest ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
           <h2 class="q-title">${esc(L.title)}</h2><p class="q-skill"><b>${esc(L.skill)}</b></p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${who}${swaps}
           <button type="button" class="q-btn" data-act="start">${!S.started ? 'Start quest' : 'Keep going'}</button></article>`
       : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
-          ${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
+          ${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
           <button type="button" class="p-btn" data-act="start">${!S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
@@ -345,7 +350,8 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
       const cb = R.lessons.find((x) => x.id === L.learn.callback.lesson);
       cards.push({ kind: 'You did this before', title: cb ? cb.title : '', body: L.learn.callback.body, img: cb?.image });
     }
-    cards.push({ kind: 'The move', title: L.learn.move.title, body: L.learn.move.body });
+    // A family recipe may have no Learn cards at all, or just its "why we make this" card.
+    if (L.learn.move) cards.push({ kind: L.recipe ? 'Why we make this' : 'The move', title: L.learn.move.title, body: L.learn.move.body });
     for (const w of L.learn.why) cards.push({ kind: 'Why it works', title: w.title, body: w.body });
     // Same move, other dishes: built from the skills across every lesson (§3).
     const others = L.skills.map((sk) => ({ sk, list: R.lessons.filter((x) => x.id !== L.id && x.skills.includes(sk)) })).filter((x) => x.list.length);
@@ -389,7 +395,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
     const ing = ingredientsNow(), got = new Set(S.got), gear = new Set(S.gear);
     const allI = ing.every((i) => got.has(i.id)), allG = tools.every((t) => gear.has(t.id));
     const label = (i) => `${i.line}${i.prep ? `, ${i.prep}` : ''}${i.optional ? ' (optional)' : ''}`;
-    const iconOf = (i) => OWN_ICON[i.id] ?? SECTION_ICON[R.ingredients[i.id]?.section] ?? 's-pantry';
+    const iconOf = (i) => OWN_ICON[i.id] ?? SECTION_ICON[ING[i.id]?.section] ?? 's-pantry';
     const swapNote = (i) => (swapFor[i.id] ? `<small>Use ${esc(name(swapFor[i.id]).toLowerCase())} instead</small>` : '');
     const unlock = allI && allG
       ? `<div class="${quest ? 'gate' : 'p-gate'}"><button type="button" class="${T.btn}" data-act="goto" data-to="cook">${quest ? 'Enter the kitchen' : 'Start cooking'}</button></div>`
@@ -508,6 +514,8 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
   const STAGES = { card: cardView, learn: learnView, prep: prepView, cook: cookView, reflect: reflectView, done: doneView };
   let wakeTipShown = false, lastDing = 0;
   async function draw(focusTop = true) {
+    // A recipe with no Learn cards goes straight to Prep.
+    if (S.stage === 'learn' && !learnCards().length) S.stage = 'prep';
     if (S.stage !== 'card' && S.stage !== 'done') { S.last = S.stage; save(); }
     const back = `<a class="back" href="#" data-act="exit">← ${quest ? 'Quest board' : 'Recipe box'}</a>`;
     mount.innerHTML = `<section class="kitchen qx player" data-kt="${quest ? 'quest' : 'passport'}">${back}${STAGES[S.stage]()}${whyView()}</section>`;
@@ -582,7 +590,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
       case 'exit-done': clearState(profile.id, L.id); return exit();
       case 'serv': S.servings = options[Math.max(0, Math.min(options.length - 1, options.indexOf(S.servings) + Number(d.i)))]; break;
       case 'serv-set': S.servings = Number(d.n); break;
-      case 'start': S.stage = S.started ? S.last || 'learn' : 'learn'; begin(); break;
+      case 'start': S.stage = S.started ? S.last || 'learn' : learnCards().length ? 'learn' : 'prep'; begin(); break;
       case 'restart': S = fresh(); break;
       case 'ask':
         b.disabled = true;
@@ -637,7 +645,7 @@ export async function openLesson(mount, { profile, family, lessonId, onExit, cre
       case 'fix':
         // A parent or an adult learner fills it in; the app gives it the lesson,
         // step, and serving count. Afterwards the lesson card shows its status.
-        return fixes.suggest({ lesson: L, stepId: d.step || null, servings: S.servings, ingredients: R.ingredients })
+        return fixes.suggest({ lesson: L, stepId: d.step || null, servings: S.servings, ingredients: ING })
           .then(async (sent) => { if (sent) { await loadFixes(); draw(false); } });
       case 'sound': return unlockSound().then(() => { if (soundReady()) ding(); draw(false); });
       case 'voice':

@@ -5,6 +5,8 @@ import { openLesson } from './player.js';
 import { saveCook, saveReflection, flushCooks } from './cooks.js';
 import { patchTargets, showValue } from './lib/patch.js';
 import { courseEntries, prereqNotes } from './lib/course.js';
+import { toBase, mixed } from './lib/units.js';
+import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 
 const app = document.getElementById('app');
 
@@ -49,6 +51,10 @@ async function api(method, path, body) {
 }
 
 const go = (hash) => { if (location.hash === hash) route(); else location.hash = hash; };
+
+// This tab only: which kitchen tab a profile was on, and its search.
+function sessionGet(key) { try { return sessionStorage.getItem(key); } catch { return null; } }
+function sessionSet(key, value) { try { sessionStorage.setItem(key, value); } catch { /* fine without it */ } }
 
 function store(key, value) {
   try {
@@ -304,11 +310,11 @@ function testCookNotice() {
 
 // ---------- a profile's kitchen: the library in its theme ----------
 
-async function kitchen(id) {
+async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const [{ profiles }, lib] = await Promise.all([api('GET', '/api/profiles'), api('GET', '/api/library')]);
   const p = profiles.find((x) => x.id === id);
   if (!p) return go('#/');
-  const [{ cooks }, mine] = await Promise.all([api('GET', `/api/profiles/${p.id}/cooks`), api('GET', `/api/profiles/${p.id}/queue?${tz()}`)]);
+  const [{ cooks }, mine, { recipes }, { recipes: feastShared }] = await Promise.all([api('GET', `/api/profiles/${p.id}/cooks?${tz()}`), api('GET', `/api/profiles/${p.id}/queue?${tz()}`), api('GET', '/api/recipes'), api('GET', '/api/shared?feast=1')]);
   store('cpr.profile', p.id);
   // A profile on a course takes its lesson numbers from the course plan (§4.1).
   const labels = mine.labels ?? lib.labels;
@@ -325,9 +331,14 @@ async function kitchen(id) {
     const cooked = done ? el('p', { class: quest ? 'q-swap k-cooked' : 'p-swap k-cooked' },
       art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"/></svg>'),
       done.times === 1 ? 'Cooked once' : `Cooked ${done.times} times`) : null;
+    // The Unleavened badge (§6.19): an icon and a word, never a pill.
+    const unlv = L.unleavened ? el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-cooked` },
+      art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-unleavened"/></svg>'), 'Unleavened') : null;
+    // A seasonal unit (Appointed Times) has its own labels, A1, A2.
+    const seasonal = lib.seasonal?.includes(L.unit);
     if (quest) {
       return el('article', { class: 'q-panel q-card' },
-        el('p', { class: 'q-kick' }, `Path ${L.unit} · Quest ${L.label}`),
+        el('p', { class: 'q-kick' }, `${seasonal ? lib.units[L.unit] : `Path ${L.unit}`} · Quest ${L.label}`),
         el('div', { class: 'q-win' }, el('img', { src: L.image, alt: '', width: 230, height: 230, loading: 'lazy' })),
         el('h3', { class: 'q-title' }, L.title),
         el('p', { class: 'q-skill' }, L.skill),
@@ -337,7 +348,7 @@ async function kitchen(id) {
           el('div', {}, el('dt', {}, 'From'), el('dd', {}, L.cuisine))),
         swaps ? el('p', { class: 'q-swap' }, `Made with ${swaps}`) : null,
         skip ? el('p', { class: 'q-swap' }, skip) : null,
-        cooked);
+        unlv, cooked);
     }
     return el('article', { class: 'p-card' },
       el('span', { class: 'tape t1' }), el('span', { class: 'tape t2' }),
@@ -348,33 +359,98 @@ async function kitchen(id) {
       el('div', { class: 'p-meta' }, el('span', {}, time), el('span', {}, `Serves ${L.servings}`), el('span', {}, L.cuisine)),
       swaps ? el('p', { class: 'p-swap' }, `Made with ${swaps}`) : null,
       skip ? el('p', { class: 'p-swap' }, skip) : null,
-      cooked);
+      unlv, cooked);
   };
 
-  const units = [...new Set(lib.lessons.map((l) => l.unit))].sort((a, b) => a - b);
-  const body = units.length
-    ? units.map((u) => [
-      el('h2', { class: 'k-unit' }, quest ? `Path ${u}: ${lib.units[u]}` : lib.units[u]),
-      el('div', { class: 'k-lib' }, lib.lessons.filter((l) => l.unit === u).map((L) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${L.title}`, onclick: () => go(`#/kitchen/${p.id}/${L.id}`) }, card(L)))),
-    ])
-    : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, 'No lessons match this family\'s diet settings yet.');
+  // The family's own recipes (§6.10), with their meal-type picture.
+  const recipeCard = (r, kick = 'Family recipe') => {
+    const done = cooks[r.id];
+    const meta = [`${r.totalMinutes} min`, `Serves ${r.servings}`, r.meal];
+    const marks = [
+      r.unleavened ? el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-cooked` }, art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-unleavened"/></svg>'), 'Unleavened') : null,
+      done ? el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-cooked` }, art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"/></svg>'), done.times === 1 ? 'Cooked once' : `Cooked ${done.times} times`) : null,
+    ];
+    return quest
+      ? el('article', { class: 'q-panel q-card' }, el('p', { class: 'q-kick' }, kick),
+        el('div', { class: 'q-win' }, el('img', { src: r.image, alt: '', width: 230, height: 230, loading: 'lazy' })),
+        el('h3', { class: 'q-title' }, r.title), el('p', { class: 'q-skill' }, meta.join(' · ')), marks)
+      : el('article', { class: 'p-card' }, el('span', { class: 'tape t1' }), el('span', { class: 'tape t2' }),
+        el('div', { class: 'p-photo' }, el('img', { src: r.image, alt: '', width: 220, height: 220, loading: 'lazy' })),
+        el('p', { class: 'p-lessonno' }, kick), el('h3', { class: 'p-title' }, r.title),
+        el('div', { class: 'p-meta' }, meta.map((m) => el('span', {}, m))), marks);
+  };
+  const open = (lid) => () => go(`#/kitchen/${p.id}/${lid}`);
+  const lessonBtn = (L) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${L.title}`, onclick: open(L.id) }, card(L));
+  const recipeBtn = (r, kick) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${r.title}`, onclick: open(r.id) }, recipeCard(r, kick));
+  const seasonalUnit = (u) => lib.seasonal?.includes(u);
+  const unitName = (u) => (quest && !seasonalUnit(u) ? `Path ${u}: ${lib.units[u]}` : lib.units[u]);
 
-  // Up next: this profile's queued lessons. Kids see "due Friday" in
-  // homeschool mode and never anything about being late (§6.17).
-  const when = (x) => (x.status === 'requested' ? 'You asked a grown-up'
-    : x.due && !isSabbath() ? `Due ${fmtDay(x.due, { weekday: 'long' })}`
-      : x.when === 'this-week' ? 'This week' : x.when === 'next-week' ? 'For next week'
-        : x.planned_date ? fmtDay(x.planned_date) : 'Coming up');
-  const upNext = mine.items.length ? [
-    el('h2', { class: 'k-unit' }, quest ? 'Next quests' : 'Up next'),
-    el('div', { class: 'k-lib' }, mine.items.map((x) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${x.title}`, onclick: () => go(`#/kitchen/${p.id}/${x.lesson_id}`) },
-      el('article', { class: quest ? 'q-panel q-card k-next' : 'p-card k-next' },
-        el('p', { class: quest ? 'q-kick' : 'p-lessonno' }, x.label ? `${quest ? 'Quest' : 'Lesson'} ${x.label}` : ''),
-        el('h3', { class: quest ? 'q-title' : 'p-title' }, x.title),
-        el('p', { class: quest ? 'q-swap' : 'p-swap' }, when(x)))))),
-  ] : null;
+  // ---- My path (Main quest): what's up next, then the next lessons on this
+  // profile's path, a few at a time, never the whole course.
+  const pathView = () => {
+    const when = (x) => (x.status === 'requested' ? 'You asked a grown-up'
+      : x.due && !isSabbath() ? `Due ${fmtDay(x.due, { weekday: 'long' })}`
+        : x.when === 'this-week' ? 'This week'
+          : x.planned_date ? fmtDay(x.planned_date) : 'Coming up');
+    const queued = new Set(mine.items.map((x) => x.lesson_id));
+    // The next lessons not cooked or queued, in this profile's order: a
+    // pick-one group counts once, and once one of its dishes is cooked it's done.
+    const doneGroups = new Set(lib.lessons.filter((L) => L.pick && (cooks[L.id] || queued.has(L.id))).map((L) => L.pick));
+    const entries = [];
+    for (const L of lib.lessons) {
+      if (seasonalUnit(L.unit) || cooks[L.id] || queued.has(L.id) || (mine.labels && !mine.labels[L.id])) continue;
+      if (L.pick && doneGroups.has(L.pick)) continue;
+      const last = entries.at(-1);
+      if (L.pick && last?.pick === L.pick) last.items.push(L); else entries.push({ pick: L.pick, items: [L] });
+    }
+    const next = entries.slice(0, 3).flatMap((e) => e.items);
+    return [
+      el('h2', { class: 'k-unit' }, quest ? 'Your next quests' : 'Up next'),
+      mine.items.length
+        ? el('div', { class: 'k-lib' }, mine.items.map((x) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${x.title}`, onclick: open(x.lesson_id) },
+          el('article', { class: quest ? 'q-panel q-card k-next' : 'p-card k-next' },
+            x.image ? el('div', { class: quest ? 'q-win' : 'p-photo' }, el('img', { src: x.image, alt: '', width: 160, height: 160, loading: 'lazy' })) : null,
+            el('p', { class: quest ? 'q-kick' : 'p-lessonno' }, x.label ? `${quest ? 'Quest' : 'Lesson'} ${x.label}` : ''),
+            el('h3', { class: quest ? 'q-title' : 'p-title' }, x.title),
+            el('p', { class: quest ? 'q-swap' : 'p-swap' }, when(x))))))
+        : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, quest ? 'No quests queued yet. Ask a grown-up, or look in Side quests.' : 'Nothing queued yet. Ask a grown-up, or look in More recipes.'),
+      next.length ? [el('h2', { class: 'k-unit' }, quest ? 'Coming up on your path' : 'Next on your journey'), el('div', { class: 'k-lib' }, next.map(lessonBtn))] : null,
+    ];
+  };
 
-  screen(el('section', { class: 'kitchen', 'data-kt': p.theme },
+  // ---- More recipes (Side quests): every unit, the family's recipes, and the
+  // User-shared shelf, each folded shut, with a search over names and ingredients.
+  const feastShelf = feastShared.filter((r) => r.visible && !r.mine);
+  const ours = recipes.filter((r) => r.visible && !r.held);
+  const moreView = () => {
+    const results = el('div');
+    const search = el('input', { type: 'search', class: 'k-search', placeholder: quest ? 'Search quests: a dish or an ingredient' : 'Search: a dish or an ingredient', 'aria-label': 'Search recipes', value: sessionGet(`cpr.search.${p.id}`) ?? '' });
+    const shelf = (title, items, open) => (items.length ? el('details', { class: 'k-shelf', open }, el('summary', {}, el('span', {}, title), el('small', {}, String(items.length))), el('div', { class: 'k-lib' }, items)) : null);
+    const draw = () => {
+      const q = search.value.trim().toLowerCase();
+      sessionSet(`cpr.search.${p.id}`, search.value);
+      const hit = (x) => !q || q.split(/\s+/).every((w) => x.search?.includes(w));
+      const units = [...new Set(lib.lessons.map((l) => l.unit))].sort((a, b) => a - b);
+      const shelves = [
+        ...units.map((u) => {
+          const items = lib.lessons.filter((L) => L.unit === u && hit(L)).map(lessonBtn);
+          if (seasonalUnit(u)) items.push(...feastShelf.filter(hit).map((r) => recipeBtn({ ...r, id: `shared:${r.id}` }, 'User-shared recipe')));
+          return shelf(unitName(u), items, Boolean(q));
+        }),
+        shelf('Our recipes', ours.filter(hit).map((r) => recipeBtn(r)), Boolean(q)),
+      ].filter(Boolean);
+      results.replaceChildren(...(shelves.length ? shelves
+        : [el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, q ? `Nothing matches "${search.value.trim()}".` : "No lessons match this family's diet settings yet.")]));
+    };
+    search.addEventListener('input', draw);
+    draw();
+    return [el('div', { class: 'k-searchrow' }, search), results];
+  };
+
+  const tabs = [['path', quest ? 'Main quest' : 'My journey'], ['more', quest ? 'Side quests' : 'More recipes']];
+  const current = tab === 'more' ? 'more' : 'path';
+  sessionSet(`cpr.tab.${p.id}`, current);
+  screen(el('section', { class: 'kitchen k-tabbed', 'data-kt': p.theme },
     el('a', { class: 'back', href: '#/' }, '← Lockers'),
     sabbathBanner(),
     el('div', { class: 'k-head' }, avatars(p.people),
@@ -382,9 +458,14 @@ async function kitchen(id) {
     el('div', { class: 'acts' },
       el('button', { class: 'themebtn', type: 'button', onclick: async () => {
         await api('PUT', `/api/profiles/${p.id}/theme`, { theme: other });
-        kitchen(id);
+        kitchen(id, current);
       } }, `Switch to ${THEMES[other]}`)),
-    upNext, body));
+    current === 'more' ? moreView() : pathView(),
+    // Pinned to the bottom, where a thumb is, as in MCCE Kids. Progress and
+    // rewards join them when they're built (Phase 5).
+    el('nav', { class: `k-tabs ${quest ? 'q' : 'p'}`, 'aria-label': 'Kitchen' }, tabs.map(([k, label]) => el('a', {
+      href: `#/kitchen/${p.id}/@${k}`, 'aria-current': k === current ? 'page' : null,
+    }, label)))));
 }
 
 // A lesson, played in the profile's theme (player.js).
@@ -394,10 +475,13 @@ async function lesson(profileId, lessonId) {
   if (!p) return go('#/');
   const mine = await api('GET', `/api/profiles/${p.id}/queue?${tz()}`).catch(() => ({ items: [] }));
   const queued = mine.items.find((x) => x.lesson_id === lessonId);
+  // A family recipe comes from the API in lesson shape (§6.10).
+  const recipe = /^recipe:/.test(lessonId) ? await api('GET', `/api/recipes/${lessonId.slice(7)}`)
+    : /^shared:/.test(lessonId) ? await api('GET', `/api/shared/${lessonId.slice(7)}`) : null;
   const mount = el('div');
   screen(mount);
   await openLesson(mount, {
-    profile: p, family: me.family, lessonId, onExit: () => go(`#/kitchen/${p.id}`),
+    profile: p, family: me.family, lessonId, lesson: recipe?.lesson ?? null, extra: recipe?.extra ?? {}, onExit: () => go(`#/kitchen/${p.id}`),
     crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook, onReflect: saveReflection, labels: mine.labels ?? lib.labels, total: mine.total ?? lib.total,
     // "I want to make this" or "Cook this" (§6.1), and the queued lesson's
     // servings and who it's for, for a fresh cook.
@@ -408,7 +492,8 @@ async function lesson(profileId, lessonId) {
       },
     },
     seed: queued ? { servings: queued.servings, with: (queued.profile_ids ?? []).filter((x) => x !== p.id), shopped: queued.shopped_for } : null,
-    fixes: {
+    // Suggest a fix is for library lessons; a family edits its own recipes.
+    fixes: recipe ? null : {
       suggest: (ctx) => suggestFix(p, ctx),
       list: async (lid) => (await api('GET', `/api/lessons/${encodeURIComponent(lid)}/fixes`)).fixes,
     },
@@ -500,19 +585,70 @@ function suggestFix(profile, { lesson, stepId, servings, ingredients }) {
 
 // ---------- parent area ----------
 
-function parentTabs(current) {
-  const tabs = [['queue', 'Queue'], ['shopping', 'Shopping'], ['courses', 'Courses'], ['progress', 'Progress'], ['profiles', 'Profiles'], ['family', 'Family'], ['parents', 'Logins']];
-  if (me.parent.is_owner) tabs.push(['owner', 'Owner'], ['fixes', 'Fix requests']);
-  return el('nav', { class: 'tabs', 'aria-label': 'Parent screens' },
-    tabs.map(([k, label]) => el('a', { href: `#/parent/${k}`, 'aria-current': k === current ? 'page' : null }, label)));
+// Every parent screen sits behind the Menu button, in a few groups, the way
+// MCCE's parents app does it. One group is open at a time, and the menu opens
+// on the group holding the screen being read. The Owner group shows only to
+// the owner.
+const PARENT_GROUPS = [['learning', 'Learning path'], ['recipes', 'Recipes'], ['setup', 'Setup'], ['owner', 'Owner']];
+const PARENT_PAGES = [
+  { key: 'queue', group: 'learning', label: 'Queue' },
+  { key: 'shopping', group: 'learning', label: 'Shopping' },
+  { key: 'pantry', group: 'learning', label: 'Kitchen staples' },
+  { key: 'progress', group: 'learning', label: 'Progress' },
+  { key: 'recipes', group: 'recipes', label: 'Our recipes' },
+  { key: 'shared', group: 'recipes', label: 'User-shared recipes' },
+  { key: 'courses', group: 'setup', label: 'Courses' },
+  { key: 'profiles', group: 'setup', label: 'Profiles' },
+  { key: 'family', group: 'setup', label: 'Family settings' },
+  { key: 'parents', group: 'setup', label: 'Logins & PIN' },
+  { key: 'owner', group: 'owner', label: 'Families & beta word', owner: true },
+  { key: 'fixes', group: 'owner', label: 'Fix requests', owner: true },
+  { key: 'reviews', group: 'owner', label: 'Recipe reviews', owner: true },
+  { key: 'reports', group: 'owner', label: 'Reported recipes', owner: true },
+];
+
+function parentMenu(current) {
+  const pages = PARENT_PAGES.filter((x) => !x.owner || me.parent.is_owner);
+  const groups = PARENT_GROUPS.filter(([g]) => pages.some((x) => x.group === g));
+  let open = pages.find((x) => x.key === current)?.group ?? groups[0][0];
+  const panel = el('nav', { class: 'drawer-panel', 'aria-label': 'Parent screens' });
+  const drawer = el('div', { class: 'drawer', hidden: true });
+  const button = el('button', { class: 'hbtn drawer-button', type: 'button', 'aria-expanded': 'false' }, '☰ Menu');
+  const draw = () => {
+    panel.replaceChildren(...groups.flatMap(([g, label]) => [
+      el('button', { type: 'button', class: g === open ? 'drawer-group on' : 'drawer-group', 'aria-expanded': String(g === open), onclick: () => { open = g; draw(); } }, label),
+      g === open ? el('div', { class: 'drawer-pages' }, pages.filter((x) => x.group === g).map((x) => el('a', {
+        href: `#/parent/${x.key}`, class: x.key === current ? 'on' : null, 'aria-current': x.key === current ? 'page' : null, onclick: () => show(false),
+      }, x.label))) : null,
+    ].filter(Boolean)));
+  };
+  const onKey = (e) => { if (e.key === 'Escape') show(false); };
+  const show = (on) => {
+    drawer.hidden = !on;
+    button.setAttribute('aria-expanded', String(on));
+    if (on) { document.addEventListener('keydown', onKey); panel.querySelector('button')?.focus(); } else { document.removeEventListener('keydown', onKey); button.focus(); }
+  };
+  button.addEventListener('click', () => show(drawer.hidden));
+  drawer.append(el('div', { class: 'drawer-scrim', onclick: () => show(false) }), panel);
+  draw();
+  return [button, drawer];
 }
 
 function parentScreen(current, ...kids) {
-  screen(topbar(me.family.name,
+  const [button, drawer] = parentMenu(current);
+  const head = topbar(me.family.name,
     el('a', { class: 'hbtn', href: '#/' }, 'Lockers'),
     el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/pin/lock'); await refresh(); go('#/'); } }, 'Lock'),
-    el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/logout'); store('cpr.profile', null); await start('#/'); } }, 'Log out')),
-  el('h1', {}, 'Parents'), parentTabs(current), sabbathBanner(), ...kids);
+    el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/logout'); store('cpr.profile', null); await start('#/'); } }, 'Log out'));
+  head.prepend(button);
+  // The app's name goes back to the Queue, where the Parents button lands.
+  const brand = head.querySelector('.grow b');
+  brand.replaceWith(el('a', { class: 'brand', href: '#/parent/queue' }, brand.textContent));
+  const page = PARENT_PAGES.find((x) => x.key === current);
+  const group = PARENT_GROUPS.find(([g]) => g === page?.group)?.[1];
+  screen(head, drawer,
+    group ? el('p', { class: 'eyebrow' }, group) : null,
+    el('h1', {}, page?.label ?? 'Parents'), sabbathBanner(), ...kids);
 }
 
 const parentProfiles = parentOnly(async () => {
@@ -635,7 +771,43 @@ const parentLogins = parentOnly(async () => {
 
 const SAFETY = { 'adult-nearby': 'Adult nearby', 'adult-hands-on': 'Adult hands-on', solo: 'On their own' };
 const foundationMark = () => el('span', { class: 'found' }, art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-shield"/></svg>'), 'Foundation');
-const lessonName = (x) => [x.label ? `${x.label} · ` : '', x.title];
+// A dish's name, which opens its dish card (below).
+const lessonName = (x) => [x.label ? `${x.label} · ` : '', el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(x.lesson_id ?? x.id) }, x.title)];
+
+// The dish card: what a dish is, at a glance, for a family that has never
+// eaten it. A line about it, its main ingredients, how it cooks, and the time.
+let courseCache = null;
+async function showDish(id) {
+  let d;
+  if (/^recipe:/.test(id)) {
+    const r = await api('GET', `/api/recipes/${id.slice(7)}`);
+    d = { title: r.title, image: r.image, minutes: r.totalMinutes, cuisine: 'Family recipe', ...r.card };
+  } else if (/^shared:/.test(id)) {
+    const r = await api('GET', `/api/shared/${id.slice(7)}`);
+    d = { title: r.title, image: r.image, minutes: r.totalMinutes, cuisine: 'User-shared recipe', ...r.card };
+  } else {
+    const [C, R] = await Promise.all([courseCache ??= fetch('/content/course.json').then((x) => x.json()), contentRegistry()]);
+    const L = R.lessons.find((x) => x.id === id), c = C.dishes.find((x) => x.id === id);
+    const src = L ?? c;
+    if (!src) return;
+    d = { title: src.title, image: src.image, minutes: L?.minutes ?? c?.minutes, estimated: !L && c?.estimated, cuisine: R.cuisines[src.cuisine]?.name ?? src.cuisine,
+      about: L?.about ?? c?.about, main: L?.main ?? c?.main, method: L?.method ?? c?.method, written: Boolean(L) };
+  }
+  const close = () => { ov.remove(); document.removeEventListener('keydown', onKey); };
+  const onKey = (e) => { if (e.key === 'Escape') close(); };
+  const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': d.title, onclick: (e) => { if (e.target === ov) close(); } },
+    el('div', { class: 'card dishcard' },
+      el('img', { src: d.image, alt: '', width: 160, height: 160 }),
+      el('h2', {}, d.title),
+      el('p', { class: 'mut' }, [d.cuisine, d.minutes ? `${d.estimated ? 'about ' : ''}${d.minutes} min` : null, d.method ? METHOD_NAMES[d.method] : null].filter(Boolean).join(' · ')),
+      d.about ? el('p', {}, d.about) : null,
+      d.main?.length ? [el('h3', {}, 'Main ingredients'), el('ul', {}, d.main.map((m) => el('li', {}, m)))] : null,
+      d.written === false ? el('p', { class: 'mut small' }, 'This lesson is still being written.') : null,
+      el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn pri', onclick: close }, 'Close'))));
+  document.addEventListener('keydown', onKey);
+  document.body.append(ov);
+  ov.querySelector('button.pri').focus();
+}
 
 // Every step an adult needs to be in the kitchen for, loaded when opened.
 function safetyReview(lessonId) {
@@ -712,7 +884,8 @@ const parentQueue = parentOnly(async (flash) => {
         actBtn('Skip this recipe', '', async () => {
           await api('POST', `/api/courses/${c.id}/skip-recipe`, { lesson_id: x.lesson_id });
           again(`Skipped ${x.title}. The next lesson takes its place.`, () => api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }));
-        })));
+        }),
+        x.queue_id ? moreMenu(x, x.queue_id) : null));
     const tw = c.this_week;
     return el('section', { class: 'card qcourse' },
       el('div', { class: 'rowi' },
@@ -743,43 +916,74 @@ const parentQueue = parentOnly(async (flash) => {
               }),
             ]),
       ] : null,
-      c.next_week ? [
+      [
         el('h4', {}, `Next week · ${fmtDay(c.next_week.week)}`),
         c.next_week.skipped ? el('p', { class: 'mut' }, 'Skipped.') : el('div', { class: 'rows' }, c.next_week.lessons.map((x) => el('div', { class: 'rowi' },
-          el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null),
-          x.queue_id ? servingsPick(x, setServings(x.queue_id)) : el('span')))),
+          el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null)))),
         el('div', { class: 'acts' }, actBtn(c.next_week.skipped ? 'Put next week back' : 'Skip next week', '', async () => {
           await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: c.next_week.week, skipped: !c.next_week.skipped });
           parentQueue();
         })),
-      ] : el('p', { class: 'mut small' }, `Next week's lessons show here from ${fmtDay(c.next_week_from, { weekday: 'long' })}, so you can shop for them.`),
+      ],
       c.skipped_recipes.length ? [el('h4', {}, 'Skipped recipes'), el('div', { class: 'rows' }, c.skipped_recipes.map((x) => el('div', { class: 'rowi' },
         el('b', {}, x.title), actBtn('Put back', '', async () => { await api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }); again(`${x.title} is back in the course.`); }))))] : null);
   };
 
   // ---- lessons queued by hand ----
+  // Swap for an Appointed Time meal instead (§6.19): kept in a "⋯" menu, not on the card.
+  const swapPicker = async (qid, title) => {
+    const d = await api('GET', `/api/queue/${qid}/swap?${tz()}`);
+    const close = () => ov.remove();
+    const groups = [...new Set(d.options.map((o) => o.group))];
+    const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Swap for an Appointed Time meal' },
+      el('div', { class: 'card' },
+        el('h2', {}, 'Swap for an Appointed Time meal'),
+        el('p', { class: 'mut' }, `Instead of ${title}${d.spring ? '. Spring: unleavened meals only.' : '.'}`),
+        groups.length ? groups.map((g) => [el('h3', {}, g), el('div', { class: 'rows' }, d.options.filter((o) => o.group === g).map((o) => el('div', { class: 'rowi with-av' },
+          el('img', { src: o.image, alt: '', width: 48, height: 48 }),
+          el('div', {}, el('b', {}, el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(o.id) }, `${o.label ? `${o.label} · ` : ''}${o.title}`)),
+            o.unleavened || o.feast ? el('div', { class: 'badges' }, o.unleavened ? badge('i-unleavened', 'Unleavened') : null, o.feast ? badge('i-feast', 'Good for Feast Days') : null) : null),
+          el('div', { class: 'acts' }, actBtn('Pick', 'pri', async () => {
+            const res = await api('POST', `/api/queue/${qid}/swap?${tz()}`, { lesson_id: o.id });
+            close();
+            again(`Swapped ${title} for ${o.title}.`, () => api('POST', `/api/queue/${res.id}/unswap`));
+          })))))])
+          : el('p', {}, 'Nothing to offer for that week yet.'),
+        el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: close }, 'Cancel'))));
+    document.body.append(ov);
+  };
+  const moreMenu = (x, qid) => el('details', { class: 'more' },
+    el('summary', { 'aria-label': `More for ${x.title}` }, '⋯'),
+    el('div', { class: 'more-menu' }, el('button', { type: 'button', class: 'hbtn link', onclick: (e) => { e.target.closest('details').open = false; swapPicker(qid, x.title); } }, 'Swap for an Appointed Time meal instead')));
+
   const queuedRow = (x) => el('div', { class: 'rowi qrow' },
     el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
       el('small', {}, `For ${names(x.profile_ids)}${x.planned_date ? ` · ${fmtDay(x.planned_date)}` : ''}${x.status === 'shopped' ? ' · Shopped for' : ''}`),
       el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id))),
     el('div', { class: 'acts' }, servingsPick(x, setServings(x.id)),
-      actBtn('Remove', '', async () => {
-        await api('DELETE', `/api/queue/${x.id}`);
-        again(`Took ${x.title} off the queue.`, () => api('POST', `/api/queue/${x.id}/put-back`));
-      })));
+      x.swap
+        ? actBtn('Undo swap', '', async () => { await api('POST', `/api/queue/${x.id}/unswap`); again(`Undid the swap for ${x.title}.`); })
+        : actBtn('Remove', '', async () => {
+          await api('DELETE', `/api/queue/${x.id}`);
+          again(`Took ${x.title} off the queue.`, () => api('POST', `/api/queue/${x.id}/put-back`));
+        }),
+      x.swap ? null : moreMenu(x, x.id)));
 
   // ---- add a lesson ----
   const note = el('p', { class: 'mut small note', hidden: true }, 'Most lessons use knife work. We suggest a Unit 1 lesson first.');
   const lessonSel = el('select', { name: 'lesson_id', required: true },
     el('option', { value: '' }, 'Pick a lesson'),
-    q.library.map((L) => el('option', { value: L.id }, `${L.label ? `${L.label} · ` : ''}${L.title}${L.foundation ? ' (foundation)' : ''}`)));
+    q.library.map((L) => el('option', { value: L.id }, `${L.label ? `${L.label} · ` : ''}${L.title}${L.foundation ? ' (foundation)' : ''}`)),
+    // The family's own recipes (§6.10).
+    q.recipes?.length ? el('optgroup', { label: 'Our recipes' }, q.recipes.map((r) => el('option', { value: r.id }, r.title))) : null);
+  const pickable = [...q.library, ...(q.recipes ?? [])];
   const who = el('div', { class: 'grid2' }, profiles.map((p) => el('label', { class: 'choice' },
     el('input', { type: 'checkbox', name: `p_${p.id}`, value: p.id }), el('span', {}, p.name))));
   // The knife-work note (§4.0): a suggestion, not a block.
   const checkNote = () => {
-    const L = q.library.find((x) => x.id === lessonSel.value);
+    const L = pickable.find((x) => x.id === lessonSel.value);
     const picked = profiles.filter((p) => who.querySelector(`[name="p_${p.id}"]`).checked).map((p) => p.id);
-    note.hidden = !L || L.unit === 1 || !picked.length || picked.some((pid) => q.knife_ok.includes(pid));
+    note.hidden = !L || L.unit === 1 || !L.unit || !picked.length || picked.some((pid) => q.knife_ok.includes(pid));
   };
   lessonSel.addEventListener('change', checkNote);
   who.addEventListener('change', checkNote);
@@ -793,7 +997,7 @@ const parentQueue = parentOnly(async (flash) => {
     const ids = profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id);
     if (!v.lesson_id) throw new Error('Pick a lesson.');
     if (!ids.length) throw new Error("Pick who's cooking.");
-    const L = q.library.find((x) => x.id === v.lesson_id);
+    const L = pickable.find((x) => x.id === v.lesson_id);
     const n = Number(v.servings);
     // A lesson with set sizes takes the nearest one it offers.
     const servings = L.servings_options.includes(n) ? n : L.servings_options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a));
@@ -891,9 +1095,11 @@ const courseEditor = parentOnly(async (cid) => {
       const dishRow = (id) => {
         const x = plan.find((y) => y.id === id), d = dish[id];
         const tag = !written.has(id) ? 'Being written' : hidden.has(id) ? 'Hidden by your diet settings' : null;
-        return el('label', { class: 'choice' },
-          el('input', { type: 'checkbox', checked: !x.removed, onchange: (ev) => { x.removed = !ev.target.checked; drawPlan(); } }),
-          el('span', {}, d.title, el('em', {}, ` ${d.skill ?? ''}`), tag ? el('small', { class: 'mut' }, ` · ${tag}`) : null));
+        return el('div', { class: 'dishpick' },
+          el('label', { class: 'choice' },
+            el('input', { type: 'checkbox', checked: !x.removed, onchange: (ev) => { x.removed = !ev.target.checked; drawPlan(); } }),
+            el('span', {}, d.title, el('em', {}, ` ${d.skill ?? ''}`), tag ? el('small', { class: 'mut' }, ` · ${tag}`) : null)),
+          el('button', { type: 'button', class: 'hbtn link', 'aria-label': `What is ${d.title}?`, onclick: () => showDish(id) }, 'What is it?'));
       };
       return el('div', { class: `planrow${keptIds.length ? '' : ' out'}` },
         el('div', { class: 'planno' }, num ?? '–'),
@@ -1076,7 +1282,7 @@ const pantryEditor = parentOnly(async () => {
   const p = await api('GET', '/api/pantry');
   const have = new Set(p.pantry);
   const saved = el('p', { class: 'ok', hidden: true }, 'Saved.');
-  parentScreen('shopping', el('h2', {}, 'Kitchen staples'),
+  parentScreen('pantry',
     el('p', { class: 'mut' }, `Things your kitchen usually has. They stay on every list, grouped under "${MAY_HAVE}" so you can check the cupboard first.`),
     form([
       ...p.sections.map((s) => el('fieldset', {}, el('legend', {}, s.name), el('div', { class: 'grid2' }, s.items.map((i) => el('label', { class: 'choice' },
@@ -1250,6 +1456,360 @@ const ownerFixes = parentOnly(async (flash) => {
 
 // ---------- routing ----------
 
+// ---------- family recipes (§6.10) ----------
+
+const UNIT_NAMES = { tsp: 'tsp', tbsp: 'tbsp', cup: 'cup', floz: 'fl oz', ml: 'ml', l: 'liter', oz: 'oz', lb: 'lb', g: 'g', kg: 'kg', count: 'whole (count)' };
+const SAFETY_NAMES = { solo: 'Kid can do it alone', 'adult-nearby': 'An adult in the kitchen', 'adult-hands-on': 'An adult helping' };
+let registryCache = null;
+const contentRegistry = async () => (registryCache ??= await (await fetch('/content/registry.json')).json());
+
+// "1 1/2", "3/4", "2.5" → a number; blank → null ("to taste").
+function parseAmount(v) {
+  const t = String(v ?? '').trim();
+  if (!t) return null;
+  const m = /^(\d+)\s+(\d+)\/(\d+)$/.exec(t);
+  if (m) return Number(m[1]) + Number(m[2]) / Number(m[3]);
+  const f = /^(\d+)\/(\d+)$/.exec(t);
+  if (f) return Number(f[1]) / Number(f[2]);
+  return Number(t);
+}
+
+// The owner's wording for the leaven flag (§6.10).
+const LEAVEN_NOTICE = 'Our automated ingredients checker flagged this as possibly containing leaven, so it will not be presented as an appropriate option for the spring Appointed Time. If you disagree and would like a human review, please click the "Send for review" button.';
+const TYPED_NOTICE = 'This recipe has an ingredient that isn\'t in our ingredient list, so a person checks it before it\'s shared. Please click the "Send for review" button.';
+const blockedNotice = (words) => `Our automated ingredients checker flagged this as possibly containing an unclean food (${words.join(', ')}), so it can't be saved or shared yet. If it's a false alarm and you would like a human review, please click the "Send for review" button.`;
+const badge = (icon, word) => el('span', { class: 'badge' }, art(`<svg class="ico" aria-hidden="true"><use href="/icons.svg#${icon}"/></svg>`), word);
+
+const parentRecipes = parentOnly(async (flash) => {
+  const { recipes } = await api('GET', '/api/recipes');
+  const again = (msg, undo) => parentRecipes(el('p', { class: 'ok flash', role: 'status' }, msg, ' ',
+    undo ? el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await undo(); parentRecipes(); } }, 'Undo') : null));
+  const hex = (r) => r.id.slice(7);
+  // Where a recipe stands: held, shared, or what came of its review.
+  const status = (r) => {
+    const out = [];
+    if (r.held) out.push('Waiting on a review before it can be cooked or shared');
+    if (r.shared) out.push(r.shared.hidden ? 'Shared, but taken out of the directory by the owner' : `Shared as ${r.shared.kind === 'feast' ? 'a feast-day recipe' : 'a general recipe'}`);
+    if (r.review?.status === 'pending' && !r.held) out.push('Sent for review');
+    if (r.review?.status === 'declined') out.push(`Review declined: "${r.review.owner_reply}"`);
+    if (r.source_hidden) out.push('Added from User-shared recipes; it has since been taken out of the directory');
+    return out;
+  };
+  parentScreen('recipes', flash ?? null,
+    el('div', { class: 'card' },
+      el('p', { class: 'mut' }, "Your family's own recipes. They show in every profile's kitchen and cook in the same player as the lessons. Only your family sees them, unless you share one."),
+      recipes.length
+        ? el('div', { class: 'rows' }, recipes.map((r) => el('div', { class: 'rowi stacked' },
+          el('div', {},
+            el('b', {}, el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(r.id) }, r.title)),
+            el('small', {}, [r.meal, `serves ${r.servings}`, `${r.totalMinutes} min`, r.visible ? null : 'hidden by your diet settings'].filter(Boolean).join(' · ')),
+            r.unleavened || r.shared?.kind === 'feast' ? el('div', { class: 'badges' }, r.unleavened ? badge('i-unleavened', 'Unleavened') : null, r.shared?.kind === 'feast' ? badge('i-feast', 'Good for Feast Days') : null) : null,
+            status(r).map((t) => el('small', {}, t))),
+          el('div', { class: 'acts' },
+            el('a', { class: 'hbtn', href: `#/parent/recipes/${hex(r)}` }, 'Edit'),
+            r.held ? null : r.shared && !r.shared.hidden
+              ? actBtn('Stop sharing', '', async () => { await api('DELETE', `/api/recipes/${hex(r)}/share`); again(`${r.title} is out of the directory.`); })
+              : actBtn('Share', '', () => shareRecipe(r)),
+            actBtn('Delete', 'bad', async () => {
+              await api('DELETE', `/api/recipes/${hex(r)}`);
+              again(`Deleted ${r.title}.`, () => api('POST', `/api/recipes/${hex(r)}/restore`));
+            })))))
+        : el('p', {}, 'No recipes yet.'),
+      el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: '#/parent/recipes/new' }, 'Add a recipe'), el('a', { class: 'hbtn', href: '#/parent/shared' }, 'User-shared recipes'))));
+});
+
+// Share a recipe (§6.10): General or Feast day, then the routine's answer.
+function shareRecipe(r) {
+  const hex = r.id.slice(7);
+  return new Promise((resolve) => {
+    const box = el('div', { class: 'card' });
+    const fill = (...kids) => box.replaceChildren(...kids.filter(Boolean));
+    const close = () => { ov.remove(); resolve(); parentRecipes(); };
+    const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': `Share ${r.title}` }, box);
+    const closeBtn = el('button', { type: 'button', class: 'hbtn', onclick: close }, 'Close');
+    let kind = 'general';
+    const reviewBtn = (reason, review) => {
+      const sent = review === 'pending';
+      const b = el('button', { type: 'button', class: 'hbtn', disabled: sent }, sent ? 'Sent for review' : 'Send for review');
+      b.addEventListener('click', async () => {
+        b.disabled = true;
+        try { await api('POST', `/api/recipes/${hex}/review`, { reason, kind }); b.textContent = 'Sent for review'; } catch (err) { showToast(err.message); b.disabled = false; }
+      });
+      return b;
+    };
+    const answer = (res) => {
+      if (res.status === 'shared') {
+        fill(el('h2', {}, 'Shared'), el('p', {}, `${r.title} is in User-shared recipes${res.unleavened ? ', with the Unleavened badge' : ''}${kind === 'feast' ? ' and Good for Feast Days' : ''}.`), el('div', { class: 'acts' }, closeBtn));
+      } else if (res.status === 'needs_review') {
+        fill(el('h2', {}, 'A review first'), el('p', {}, TYPED_NOTICE),
+          res.review === 'declined' ? el('p', { class: 'err' }, `The last review was declined: "${res.reply}"`) : null,
+          el('div', { class: 'acts' }, reviewBtn('typed_in', res.review), closeBtn));
+      } else if (res.status === 'leaven_flag') {
+        const shareBtn = actBtn('Share recipe', 'pri', async () => answer(await api('POST', `/api/recipes/${hex}/share`, { kind, without_badge: true })));
+        fill(el('h2', {}, 'Possibly leavened'), el('p', {}, LEAVEN_NOTICE),
+          res.found?.length ? el('p', { class: 'mut small' }, `It found: ${res.found.join(', ')}.`) : null,
+          res.review === 'declined' ? el('p', { class: 'err' }, `The last review was declined: "${res.reply}"`) : null,
+          el('div', { class: 'acts' }, reviewBtn('leaven', res.review), shareBtn, closeBtn));
+      }
+    };
+    box.append(el('h2', {}, `Share ${r.title}`),
+      el('p', {}, 'It goes into User-shared recipes for every family, with nothing that says who shared it.'),
+      el('fieldset', {}, el('legend', {}, 'Share it as'),
+        el('div', { class: 'grid2' }, [['general', 'General'], ['feast', 'Feast day']].map(([k, v]) => el('label', { class: 'choice' },
+          el('input', { type: 'radio', name: 'kind', value: k, checked: k === kind, onchange: () => { kind = k; } }), el('span', {}, v))))),
+      el('div', { class: 'acts' }, actBtn('Share', 'pri', async () => answer(await api('POST', `/api/recipes/${hex}/share`, { kind }))), closeBtn));
+    document.body.append(ov);
+  });
+}
+
+// User-shared recipes (§6.10): the directory every family can search and add from.
+const sharedDirectory = parentOnly(async (flash, opts = {}) => {
+  const q = opts.q ?? '', feast = Boolean(opts.feast);
+  const { recipes } = await api('GET', `/api/shared?q=${encodeURIComponent(q)}${feast ? '&feast=1' : ''}`);
+  const reload = (msg) => sharedDirectory(msg ? el('p', { class: 'ok flash', role: 'status' }, msg) : null, { q: search.value, feast: feastBox.checked });
+  const search = el('input', { type: 'search', value: q, placeholder: 'Search by name or ingredient', 'aria-label': 'Search' });
+  const feastBox = el('input', { type: 'checkbox', checked: feast });
+  const shown = recipes.filter((r) => r.visible);
+  parentScreen('shared', flash ?? null,
+    el('form', { class: 'card', onsubmit: (e) => { e.preventDefault(); reload(); } },
+      el('div', { class: 'acts' }, el('div', { class: 'grow' }, search), el('button', { class: 'hbtn pri', type: 'submit' }, 'Search')),
+      el('label', { class: 'choice' }, feastBox, el('span', {}, 'Good for Feast Days only'))),
+    el('div', { class: 'card' },
+      shown.length ? el('div', { class: 'rows' }, shown.map((r) => el('div', { class: 'rowi with-av' },
+        el('img', { src: r.image, alt: '', width: 56, height: 56 }),
+        el('div', {},
+          el('b', {}, el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(`shared:${r.id}`) }, r.title)),
+          el('small', {}, [r.meal, `serves ${r.servings}`, `${r.totalMinutes} min`, r.mine ? 'shared by your family' : null].filter(Boolean).join(' · ')),
+          r.unleavened || r.feast ? el('div', { class: 'badges' }, r.unleavened ? badge('i-unleavened', 'Unleavened') : null, r.feast ? badge('i-feast', 'Good for Feast Days') : null) : null),
+        el('div', { class: 'acts' },
+          r.mine ? null : r.added ? el('small', { class: 'mut' }, 'In our recipes') : actBtn('Add to our recipes', '', async () => { await api('POST', `/api/shared/${r.id}/add`); reload(`${r.title} is in your recipes.`); }),
+          r.mine ? null : actBtn('Report', '', () => reportShared(r, reload)),
+          me.parent.is_owner ? actBtn('Hide', 'bad', async () => { await api('POST', `/api/owner/shared/${r.id}/hide`); reload(`Hid ${r.title}. Reported recipes has Unhide.`); }) : null))))
+        : el('p', {}, recipes.length ? "Nothing here fits your family's diet settings." : 'No recipes yet.')));
+});
+
+// Report a shared recipe: what's wrong, in a few words.
+function reportShared(r, done) {
+  return new Promise((resolve) => {
+    const kinds = { unclean: 'Unclean ingredient', safety: 'Food-safety problem', wrong: 'Wrong or unclear', inappropriate: 'Inappropriate', other: 'Something else' };
+    const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': `Report ${r.title}` });
+    const close = () => { ov.remove(); resolve(); };
+    ov.append(form([
+      el('h2', {}, `Report ${r.title}`),
+      el('label', { class: 'f' }, 'What kind of problem', el('select', { name: 'kind' }, Object.entries(kinds).map(([k, v]) => el('option', { value: k }, v)))),
+      el('label', { class: 'f' }, "What's wrong", el('textarea', { name: 'note', rows: 4, maxlength: 1000 })),
+    ], 'Send report', async (v) => {
+      await api('POST', `/api/shared/${r.id}/report`, v);
+      close();
+      done('Report sent. Thank you.');
+    }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: close }, 'Cancel')] }));
+    document.body.append(ov);
+  });
+}
+
+// ---------- the owner's recipe screens (§6.2a) ----------
+
+const ownerReviews = parentOnly(async (flash) => {
+  const { reviews } = await api('GET', '/api/owner/recipe-reviews');
+  const again = (msg) => ownerReviews(el('p', { class: 'ok flash', role: 'status' }, msg));
+  const REASONS = { typed_in: 'A typed-in ingredient', leaven: 'Flagged for leaven (feast day)', hard_block: 'A blocked word, sent as a false alarm' };
+  const line = (l) => `${l.amount == null ? l.text : `${l.amount} ${l.unit}`} ${l.name ?? l.ingredient}${l.prep ? `, ${l.prep}` : ''}`;
+  parentScreen('reviews', flash ?? null,
+    reviews.length ? reviews.map((v) => {
+      const unlv = el('input', { type: 'checkbox', checked: v.reason === 'leaven' });
+      const note = el('input', { maxlength: 500, placeholder: 'A note for the family' });
+      return el('div', { class: 'card' },
+        el('h2', {}, v.title),
+        el('p', {}, el('b', {}, REASONS[v.reason]), ` · to share as ${v.kind === 'feast' ? 'a feast-day recipe' : 'a general recipe'}${v.stale ? ' · edited since it was sent' : ''}`),
+        v.blocked.length ? el('p', {}, 'Blocked words: ', el('b', {}, v.blocked.join(', '))) : null,
+        v.typed_in.length ? el('p', {}, 'Typed in: ', el('b', {}, v.typed_in.join(', '))) : null,
+        v.leaven.length ? el('p', {}, 'Leaven check found: ', el('b', {}, v.leaven.join(', '))) : null,
+        el('details', {}, el('summary', {}, 'The whole recipe'),
+          el('ul', {}, v.recipe.ingredients.map((l) => el('li', {}, line(l)))),
+          el('ol', {}, v.recipe.steps.map((st) => el('li', {}, st.text)))),
+        v.reason === 'hard_block' ? el('p', { class: 'mut small' }, 'Clear it only if the word is a false alarm. A review never lets unclean food through.') : el('label', { class: 'choice' }, unlv, el('span', {}, 'Give it the Unleavened badge')),
+        el('label', { class: 'f' }, 'Note', note),
+        el('div', { class: 'acts' },
+          actBtn('Clear', 'pri', async () => { await api('POST', `/api/owner/recipe-reviews/${v.id}/clear`, { unleavened: unlv.checked, note: note.value }); again(`Cleared ${v.title}.`); }),
+          actBtn('Decline', 'bad', async () => { await api('POST', `/api/owner/recipe-reviews/${v.id}/decline`, { note: note.value }); again(`Declined ${v.title}.`); })));
+    }) : el('div', { class: 'card' }, el('p', {}, 'No recipes waiting.')));
+});
+
+const ownerReports = parentOnly(async (flash) => {
+  const d = await api('GET', '/api/owner/recipe-reports');
+  const again = (msg) => ownerReports(el('p', { class: 'ok flash', role: 'status' }, msg));
+  parentScreen('reports', flash ?? null,
+    el('div', { class: 'card' }, el('h2', {}, 'Reports'),
+      d.reports.length ? el('div', { class: 'rows' }, d.reports.map((r) => el('div', { class: 'rowi' },
+        el('div', {}, el('b', {}, el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(`shared:${r.recipe_id}`) }, r.title)), el('small', {}, `${r.kind} · ${fmtDay(r.created_at.slice(0, 10))}`), el('p', { style: 'margin:4px 0 0' }, r.note)),
+        el('div', { class: 'acts' },
+          actBtn('Hide', 'bad', async () => { await api('POST', `/api/owner/shared/${r.recipe_id}/hide`); again(`Hid ${r.title}.`); }),
+          actBtn('Dismiss', '', async () => { await api('POST', `/api/owner/recipe-reports/${r.id}/dismiss`); again('Dismissed.'); })))))
+        : el('p', {}, 'No open reports.')),
+    el('div', { class: 'card' }, el('h2', {}, 'Hidden recipes'),
+      d.hidden.length ? el('div', { class: 'rows' }, d.hidden.map((c) => el('div', { class: 'rowi' },
+        el('div', {}, el('b', {}, c.title), el('small', {}, `Hidden ${fmtDay(c.hidden_at.slice(0, 10))}`)),
+        el('div', { class: 'acts' }, actBtn('Unhide', '', async () => { await api('POST', `/api/owner/shared/${c.id}/unhide`); again(`${c.title} is back in the directory.`); })))))
+        : el('p', {}, 'Nothing hidden.')));
+});
+
+// The guided entry flow: one thing at a time (§6.10). The draft is kept on
+// this device until it's saved, so a closed tab doesn't lose it.
+const recipeEditor = parentOnly(async (rid) => {
+  const R = await contentRegistry();
+  const existing = rid === 'new' ? null : await api('GET', `/api/recipes/${rid}`);
+  const draftKey = `cpr.recipe.${rid}`;
+  let D;
+  try { D = JSON.parse(sessionStorage.getItem(draftKey)); } catch { D = null; }
+  D ??= existing ? structuredClone(existing.recipe) : { title: '', servings: me.family.default_servings, totalMinutes: '', mealType: '', why: null, ingredients: [], equipment: [], steps: [] };
+  // Wash steps are added on the way in, so they aren't edited here.
+  D.steps = D.steps.filter((s) => s.type !== 'wash');
+  let page = 0;
+  const keep = () => { try { sessionStorage.setItem(draftKey, JSON.stringify(D)); } catch { /* the draft just won't survive a reload */ } };
+  const PAGES = ['The basics', 'Ingredients', 'Tools', 'Steps', 'Meal type and how it cooks', 'Review'];
+  const ingByName = new Map(Object.values(R.ingredients).map((i) => [i.name.toLowerCase(), i]));
+  const unitsFor = (id) => {
+    const ing = R.ingredients[id];
+    if (!ing) return Object.keys(UNIT_NAMES);
+    return [...Object.keys(UNIT_NAMES), ...Object.keys(ing.units ?? {})].filter((u) => toBase(1, u, ing) != null);
+  };
+  const unitLabel = (u, id) => UNIT_NAMES[u] ?? R.ingredients[id]?.units?.[u]?.one ?? u;
+  const bind = (obj, key, fn = (v) => v) => (e) => { obj[key] = fn(e.target.type === 'checkbox' ? e.target.checked : e.target.value); keep(); };
+
+  const pages = [
+    // 1. title, servings, time
+    () => [
+      el('label', { class: 'f' }, 'Recipe name', el('input', { value: D.title, maxlength: 80, oninput: bind(D, 'title') })),
+      el('label', { class: 'f' }, 'Serves', el('input', { type: 'number', min: 1, max: 12, inputmode: 'numeric', value: D.servings ?? '', oninput: bind(D, 'servings', Number) })),
+      el('label', { class: 'f' }, 'Total time, in minutes', el('input', { type: 'number', min: 1, inputmode: 'numeric', value: D.totalMinutes ?? '', oninput: bind(D, 'totalMinutes', Number) })),
+      el('p', { class: 'mut small' }, existing ? 'A picture for its meal type shows on its card.' : 'Next, the ingredients. Pick each one from our list when you can, so it can be scaled, merged on shopping lists, and checked.'),
+    ],
+    // 2. ingredients
+    () => {
+      const list = el('datalist', { id: 'ing-names' }, Object.values(R.ingredients).map((i) => el('option', { value: i.name })));
+      const row = (l, i) => {
+        const name = l.ingredient ? R.ingredients[l.ingredient]?.name ?? l.ingredient : l.name ?? '';
+        const unitSel = el('select', { 'aria-label': 'Unit', onchange: bind(l, 'unit') },
+          unitsFor(l.ingredient).map((u) => el('option', { value: u, selected: u === l.unit }, unitLabel(u, l.ingredient))));
+        const nameIn = el('input', { list: 'ing-names', value: name, 'aria-label': 'Ingredient', placeholder: 'Start typing: flour, carrots…', onchange: (e) => {
+          const hit = ingByName.get(e.target.value.trim().toLowerCase());
+          if (hit) { l.ingredient = hit.id; delete l.name; } else { delete l.ingredient; l.name = e.target.value.trim(); }
+          if (!unitsFor(l.ingredient).includes(l.unit)) l.unit = unitsFor(l.ingredient)[0];
+          keep(); draw();
+        } });
+        return el('div', { class: 'card' },
+          el('div', { class: 'acts' }, el('b', { class: 'grow' }, `Ingredient ${i + 1}`),
+            el('button', { type: 'button', class: 'hbtn link', onclick: () => { D.ingredients.splice(i, 1); keep(); draw(); } }, 'Remove')),
+          el('label', { class: 'f' }, 'What', nameIn),
+          l.name ? el('p', { class: 'mut small' }, "That isn't in our ingredient list, so it's kept as you typed it. It won't merge with other recipes on a shopping list.") : null,
+          el('div', { class: 'grid2' },
+            el('label', { class: 'f' }, 'How much', el('span', { class: 'hint' }, 'Like 2, 1/2, or 1 1/2. Leave it blank for "to taste".'),
+              el('input', { inputmode: 'decimal', value: l.amount == null ? '' : String(l.amount), oninput: (e) => { l.amount = parseAmount(e.target.value); if (l.amount != null && !l.unit) l.unit = unitsFor(l.ingredient)[0]; keep(); } })),
+            el('label', { class: 'f' }, 'Unit', unitSel)),
+          el('label', { class: 'f' }, 'How it\'s prepared', el('span', { class: 'hint' }, 'Optional, like "diced" or "softened"'), el('input', { value: l.prep ?? '', maxlength: 60, oninput: bind(l, 'prep') })),
+          el('label', { class: 'choice' }, el('input', { type: 'checkbox', checked: !!l.optional, onchange: bind(l, 'optional') }), el('span', {}, 'Optional')));
+      };
+      return [list, D.ingredients.map(row),
+        el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => { D.ingredients.push({ amount: null, unit: 'cup' }); keep(); draw(); } }, '+ Add an ingredient'))];
+    },
+    // 3. tools
+    () => {
+      const byCat = {};
+      for (const t of Object.values(R.equipment)) (byCat[t.category] ??= []).push(t);
+      return [el('p', {}, 'Tick the tools it needs. They become the tools checklist in Prep.'),
+        el('div', { class: 'grid2' }, Object.values(byCat).flat().map((t) => el('label', { class: 'choice' },
+          el('input', { type: 'checkbox', checked: D.equipment.includes(t.id), onchange: (e) => {
+            D.equipment = e.target.checked ? [...D.equipment, t.id] : D.equipment.filter((x) => x !== t.id); keep();
+          } }), el('span', {}, t.name))))];
+    },
+    // 4. steps
+    () => {
+      const step = (s, i) => {
+        const done = s.target ? (s.target.temp != null ? 'temp' : 'look') : 'none';
+        return el('div', { class: 'card' },
+          el('div', { class: 'acts' }, el('b', { class: 'grow' }, `Step ${i + 1}`),
+            i ? el('button', { type: 'button', class: 'hbtn link', onclick: () => { [D.steps[i - 1], D.steps[i]] = [D.steps[i], D.steps[i - 1]]; keep(); draw(); } }, 'Move up') : null,
+            el('button', { type: 'button', class: 'hbtn link', onclick: () => { D.steps.splice(i, 1); keep(); draw(); } }, 'Remove')),
+          el('label', { class: 'f' }, 'What to do', el('textarea', { rows: 3, maxlength: 400, oninput: bind(s, 'text') }, s.text ?? '')),
+          el('label', { class: 'f' }, 'Who needs to be in the kitchen', el('select', { onchange: (e) => { s.safety = e.target.value; keep(); draw(); } },
+            el('option', { value: '' }, 'Pick one'), Object.entries(SAFETY_NAMES).map(([k, v]) => el('option', { value: k, selected: s.safety === k }, v)))),
+          s.safety && s.safety !== 'solo' ? el('label', { class: 'f' }, 'The hazard', el('span', { class: 'hint' }, 'A few words an adult profile sees, like "Hot oven" or "Sharp knife"'), el('input', { value: s.hazard ?? '', maxlength: 60, oninput: bind(s, 'hazard') })) : null,
+          el('div', { class: 'grid2' },
+            el('label', { class: 'f' }, 'Timer, in minutes', el('span', { class: 'hint' }, 'Optional'), el('input', { type: 'number', min: 0, inputmode: 'decimal', value: s.timerSeconds ? s.timerSeconds / 60 : '', oninput: (e) => { s.timerSeconds = e.target.value ? Math.round(Number(e.target.value) * 60) : null; keep(); } })),
+            el('label', { class: 'f' }, 'Timer name', el('span', { class: 'hint' }, 'Like "Bake bread"'), el('input', { value: s.timerLabel ?? '', maxlength: 60, oninput: bind(s, 'timerLabel') }))),
+          el('label', { class: 'choice' }, el('input', { type: 'checkbox', checked: !!s.raw, onchange: bind(s, 'raw') }),
+            el('span', {}, 'This step handles raw meat, poultry, fish, or eggs', el('em', {}, ' A wash-hands step goes after it.'))),
+          el('label', { class: 'f' }, 'Is this the "is it done?" check', el('select', { onchange: (e) => { s.target = e.target.value === 'temp' ? { temp: '' } : e.target.value === 'look' ? { look: '' } : null; keep(); draw(); } },
+            el('option', { value: 'none', selected: done === 'none' }, 'No'),
+            el('option', { value: 'temp', selected: done === 'temp' }, 'Yes, with a thermometer'),
+            el('option', { value: 'look', selected: done === 'look' }, 'Yes, by how it looks'))),
+          done === 'temp' ? el('label', { class: 'f' }, 'Done at, °F', el('span', { class: 'hint' }, 'Poultry 165, ground meat 160, other meat and fish 145'), el('input', { type: 'number', inputmode: 'numeric', value: s.target.temp ?? '', oninput: (e) => { s.target.temp = e.target.value === '' ? '' : Number(e.target.value); keep(); } })) : null,
+          done === 'look' ? el('label', { class: 'f' }, 'It\'s done when…', el('input', { value: s.target.look ?? '', maxlength: 200, oninput: (e) => { s.target.look = e.target.value; keep(); } })) : null);
+      };
+      return [D.steps.map(step), el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => { D.steps.push({ text: '', safety: '' }); keep(); draw(); } }, '+ Add a step'))];
+    },
+    // 5. meal type and the "why we make this" card
+    () => [
+      el('fieldset', {}, el('legend', {}, 'What kind of dish is it?'), el('p', { class: 'mut small', style: 'margin:0' }, 'It picks the picture on its card.'),
+        el('div', { class: 'grid2' }, MEAL_TYPES.map(([k, v]) => el('label', { class: 'choice' },
+          el('input', { type: 'radio', name: 'meal', value: k, checked: D.mealType === k, onchange: () => { D.mealType = k; keep(); } }),
+          el('img', { src: `img/meals/${k}.svg`, alt: '', width: 40, height: 40 }), el('span', {}, v))))),
+      el('fieldset', {}, el('legend', {}, 'How does it cook?'),
+        el('div', { class: 'grid2' }, METHODS.map((k) => el('label', { class: 'choice' },
+          el('input', { type: 'radio', name: 'method', value: k, checked: D.method === k, onchange: () => { D.method = k; keep(); } }), el('span', {}, METHOD_NAMES[k]))))),
+      el('h3', {}, 'Why we make this'),
+      el('p', { class: 'mut small' }, 'Optional. A card your kids see before they cook, like a lesson\'s Learn stage: where the recipe comes from, or why your family makes it.'),
+      el('label', { class: 'f' }, 'Card title', el('input', { value: D.why?.title ?? '', maxlength: 60, oninput: (e) => { D.why = { ...(D.why ?? {}), title: e.target.value }; keep(); } })),
+      el('label', { class: 'f' }, 'Card words', el('textarea', { rows: 4, maxlength: 400, oninput: (e) => { D.why = { ...(D.why ?? {}), body: e.target.value }; keep(); } }, D.why?.body ?? '')),
+    ],
+    // 6. review: the server's checks, then save
+    () => {
+      const box = el('div', {}, el('p', { class: 'mut' }, 'Checking…'));
+      api('POST', '/api/recipes/check', { ...D, id: existing ? rid : undefined }).then((c) => {
+        const r = c.recipe;
+        box.replaceChildren(
+          // Only a blocked word wrong: it may be a false alarm, for the owner to review (§6.10).
+          c.reviewable
+            ? el('div', { class: 'card notice', role: 'alert' }, el('p', {}, blockedNotice(c.blocked)),
+              el('div', { class: 'acts' }, actBtn('Send for review', '', async () => {
+                const res = existing ? await api('PUT', `/api/recipes/${rid}`, { ...D, send_for_review: true }) : await api('POST', '/api/recipes', { ...D, send_for_review: true });
+                try { sessionStorage.removeItem(draftKey); } catch { /* nothing kept */ }
+                parentRecipes(el('p', { class: 'ok flash', role: 'status' }, `Saved ${r.title} and sent it for review. It can be cooked once it's cleared.`));
+                return res;
+              })))
+            : c.problems.length
+              ? el('div', { class: 'card notice', role: 'alert' }, el('h3', {}, 'A few things to fix first'), el('ul', {}, c.problems.map((p) => el('li', {}, p))))
+              : el('p', { class: 'ok' }, 'Everything checks out.'),
+          el('h3', {}, r.title || 'Untitled'),
+          el('p', { class: 'mut' }, `Serves ${r.servings} · ${r.totalMinutes} min`),
+          el('ul', {}, r.ingredients.map((l) => el('li', {}, `${l.amount == null ? l.text : `${[8, 3].some((d) => Math.abs(l.amount * d - Math.round(l.amount * d)) < 1e-6) && !/^0$/.test(mixed(l.amount)) ? mixed(l.amount) : l.amount} ${unitLabel(l.unit, l.ingredient)}`} ${l.ingredient ? R.ingredients[l.ingredient]?.name.toLowerCase() : l.name}${l.prep ? `, ${l.prep}` : ''}${l.optional ? ' (optional)' : ''}`))),
+          el('ol', {}, r.steps.map((s) => el('li', {}, s.text, s.type === 'wash' ? el('small', { class: 'mut' }, ' (added for you)') : null))),
+          c.problems.length ? null : el('div', { class: 'acts' }, actBtn(existing ? 'Save changes' : 'Save recipe', 'pri', async () => {
+            const res = existing ? await api('PUT', `/api/recipes/${rid}`, D) : await api('POST', '/api/recipes', D);
+            try { sessionStorage.removeItem(draftKey); } catch { /* nothing kept */ }
+            parentRecipes(el('p', { class: 'ok flash', role: 'status' }, `Saved ${r.title}. It's in every profile's kitchen.`));
+            return res;
+          })));
+      }, (err) => box.replaceChildren(el('p', { class: 'err' }, err.message)));
+      return box;
+    },
+  ];
+
+  const body = el('div', {});
+  function draw() {
+    body.replaceChildren(el('div', { class: 'card' },
+      el('p', { class: 'mut small' }, `${page + 1} of ${PAGES.length}`),
+      el('h2', {}, PAGES[page]),
+      pages[page](),
+      el('div', { class: 'acts' },
+        page ? el('button', { type: 'button', class: 'hbtn', onclick: () => { page--; draw(); window.scrollTo(0, 0); } }, 'Back') : el('a', { class: 'hbtn', href: '#/parent/recipes' }, 'Cancel'),
+        page < PAGES.length - 1 ? el('button', { type: 'button', class: 'hbtn pri', onclick: () => { page++; draw(); window.scrollTo(0, 0); } }, 'Next') : null)));
+  }
+  draw();
+  parentScreen('recipes', el('a', { class: 'hbtn link', href: '#/parent/recipes' }, '← Our recipes'),
+    existing ? null : el('p', { class: 'mut' }, 'Add your family\'s recipe one thing at a time. Nothing is saved until the last step.'), body);
+});
+
 async function refresh() {
   me = await api('GET', '/api/me');
 }
@@ -1267,11 +1827,17 @@ async function route() {
       return welcome();
     }
     if (!me.family.pin_set) return firstRun();
+    if (top === 'kitchen' && sub && extra?.startsWith('@')) return await kitchen(sub, extra.slice(1));
     if (top === 'kitchen' && sub && extra) return await lesson(sub, decodeURIComponent(extra));
     if (top === 'kitchen' && sub) return await kitchen(sub);
     if (top === 'parent') {
       if (sub === 'profiles' && extra) return await profileEditor(extra);
       if (sub === 'courses' && extra) return await courseEditor(extra);
+      if (sub === 'recipes' && extra) return await recipeEditor(extra);
+      if (sub === 'recipes') return await parentRecipes();
+      if (sub === 'shared') return await sharedDirectory();
+      if (sub === 'reviews') return await ownerReviews();
+      if (sub === 'reports') return await ownerReports();
       if (sub === 'courses') return await courseList();
       if (sub === 'queue') return await parentQueue();
       if (sub === 'shopping' && extra === 'new') return await shoppingPreview(parts[3]);

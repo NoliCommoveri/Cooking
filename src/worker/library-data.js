@@ -71,7 +71,8 @@ export const LIBRARY = {
      "use": "hoisin-gluten-free",
      "reason": "gluten"
     }
-   ]
+   ],
+   "unleavened": true
   },
   {
    "id": "chicken-fajitas",
@@ -156,7 +157,8 @@ export const LIBRARY = {
      "use": "tortilla-corn",
      "reason": "gluten"
     }
-   ]
+   ],
+   "unleavened": false
   },
   {
    "id": "shoestring-fries",
@@ -202,7 +204,8 @@ export const LIBRARY = {
      "optional": true
     }
    ],
-   "substitutions": []
+   "substitutions": [],
+   "unleavened": true
   },
   {
    "id": "shakshuka",
@@ -272,7 +275,8 @@ export const LIBRARY = {
      "optional": true
     }
    ],
-   "substitutions": []
+   "substitutions": [],
+   "unleavened": false
   },
   {
    "id": "beef-bulgogi",
@@ -345,7 +349,8 @@ export const LIBRARY = {
      "use": "tamari",
      "reason": "gluten"
     }
-   ]
+   ],
+   "unleavened": true
   },
   {
    "id": "buttermilk-biscuits",
@@ -401,7 +406,8 @@ export const LIBRARY = {
      "optional": true
     }
    ],
-   "substitutions": []
+   "substitutions": [],
+   "unleavened": false
   },
   {
    "id": "brown-butter-cookies",
@@ -460,7 +466,102 @@ export const LIBRARY = {
      "optional": true
     }
    ],
-   "substitutions": []
+   "substitutions": [],
+   "unleavened": false
+  },
+  {
+   "id": "unleavened-flatbread",
+   "version": 1,
+   "track": "core",
+   "unit": 8,
+   "title": "Unleavened flatbread",
+   "image": "img/dishes/unleavened-flatbread.webp",
+   "cuisine": "jewish",
+   "skill": "A dough with no leaven, rolled thin and cooked in a dry pan",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     0.5,
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 6 rounds.",
+     "2": "Makes 12 rounds. Cook them one at a time.",
+     "0.5": "Makes 3 rounds."
+    }
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "flour-ap"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true
+  },
+  {
+   "id": "cottage-cheese-crescents",
+   "version": 1,
+   "track": "core",
+   "unit": 8,
+   "title": "Cottage cheese crescent rolls",
+   "image": "img/dishes/cottage-cheese-crescents.webp",
+   "cuisine": "jewish",
+   "skill": "A soft cheese pastry with no leaven, rolled into crescents",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     0.5,
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 24 crescents. Bake them on two sheet pans, one at a time.",
+     "2": "Makes 48 crescents. Bake one pan at a time while you shape the next.",
+     "0.5": "Makes 12 crescents. One sheet pan."
+    }
+   },
+   "totalMinutes": 150,
+   "ingredients": [
+    {
+     "ingredient": "cottage-cheese"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "flour-ap"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true
   }
  ],
  "ingredients": {
@@ -729,6 +830,20 @@ export const LIBRARY = {
   "ketchup": {
    "name": "Ketchup",
    "contains": []
+  },
+  "water": {
+   "name": "Water",
+   "contains": []
+  },
+  "cottage-cheese": {
+   "name": "Small-curd cottage cheese",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "cinnamon-ground": {
+   "name": "Ground cinnamon",
+   "contains": []
   }
  },
  "cuisines": {
@@ -773,7 +888,15 @@ export const LIBRARY = {
   "4": "Breaking down and slicing meat, marinades",
   "5": "Dough and batter",
   "6": "Oven, roasting, frying",
-  "7": "Desserts"
+  "7": "Desserts",
+  "8": "Appointed Times"
+ },
+ "seasonal": [
+  8
+ ],
+ "seasonalLabels": {
+  "unleavened-flatbread": "A1",
+  "cottage-cheese-crescents": "A2"
  },
  "dietTags": [
   "nuts",

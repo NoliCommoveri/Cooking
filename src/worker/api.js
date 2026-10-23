@@ -15,8 +15,12 @@ import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
 import { FREE_MAX, servingOptions } from '../content/scale.js';
 import { numberCourse } from '../content/course.js';
-import { register as registerPlan, markCooked } from './plan.js';
+import { register as registerPlan, markCooked, tzOf } from './plan.js';
+import { localDay, isSabbath } from './schedule.js';
 import { register as registerShopping } from './shopping.js';
+import { register as registerRecipes, lessonFor, recipeNames } from './recipes.js';
+import { register as registerSharing } from './sharing.js';
+import { register as registerSwap } from './swap.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -321,7 +325,10 @@ on('GET', '/api/library', async (req, env) => {
   const live = await livePatches(env.DB);
   const minutes = (L) => live[L.id]?.patches.findLast((p) => p.path === 'totalMinutes')?.value ?? L.totalMinutes;
   // Lesson numbers in the suggested course order (§4.1).
-  const { labels, total } = numberCourse(LIBRARY.course);
+  const { labels: numbered, total } = numberCourse(LIBRARY.course);
+  // Appointed Times lessons are A1, A2… beside the numbered course (§6.19).
+  const labels = { ...numbered, ...LIBRARY.seasonalLabels };
+  const pickOf = Object.fromEntries(LIBRARY.course.filter((d) => d.pickOne).map((d) => [d.id, d.pickOne]));
   const lessons = [];
   let hidden = 0;
   for (const L of LIBRARY.lessons) {
@@ -331,10 +338,14 @@ on('GET', '/api/library', async (req, env) => {
       id: L.id, label: labels[L.id], unit: L.unit, title: L.title, image: L.image, cuisine: LIBRARY.cuisines[L.cuisine] ?? L.cuisine,
       skill: L.skill, servings: L.servings, totalMinutes: minutes(L),
       substitutions: view.applied.map((x) => ({ for: name(x.for), use: name(x.use) })),
-      left_out: view.leftOut.map(name),
+      left_out: view.leftOut.map(name), unleavened: L.unleavened,
+      // The kitchen's search (a name or an ingredient), and the pick-one group
+      // its path counts once.
+      search: [L.title, L.skill, LIBRARY.cuisines[L.cuisine], ...L.ingredients.map((x) => name(x.ingredient))].join(' ').toLowerCase(),
+      pick: pickOf[L.id] ?? null,
     });
   }
-  return { lessons, hidden, units: LIBRARY.units, labels, total };
+  return { lessons, hidden, units: LIBRARY.units, seasonal: LIBRARY.seasonal, labels, total };
 });
 
 // ---------- cooks (attempts, §1, §8.4) ----------
@@ -353,7 +364,9 @@ const isoTime = (v, field) => {
 
 on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
   const s = await requireSession(env, req);
-  const L = LIBRARY.lessons.find((x) => x.id === body.lesson_id) ?? fail(400, 'invalid', 'No such lesson.');
+  // A library lesson, or one of this family's recipes ("recipe:<id>", §6.10).
+  const found = await lessonFor(env, s.family_id, String(body.lesson_id ?? ''), { deleted: true }) ?? fail(400, 'invalid', 'No such lesson.');
+  const L = found.lesson;
   const servings = Number(body.servings);
   if (!servingOptions(L).includes(servings)) fail(400, 'invalid', `${L.title} can't be made for ${body.servings}.`);
   const ids = Array.isArray(body.profile_ids) ? [...new Set(body.profile_ids.map(String))] : [];
@@ -378,31 +391,39 @@ on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
       ? env.DB.prepare('UPDATE attempts SET servings = ?, finished_at = ?, checklist_state = ? WHERE id = ? AND family_id = ? AND finished_at IS NULL')
         .bind(servings, finished, state, aid, s.family_id)
       : env.DB.prepare(`INSERT INTO attempts (id, family_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).bind(aid, s.family_id, L.id, (await livePatches(env.DB, L.id))[L.id]?.version ?? L.version, servings, started, finished, state),
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).bind(aid, s.family_id, L.id, L.recipe ? L.version : (await livePatches(env.DB, L.id))[L.id]?.version ?? L.version, servings, started, finished, state),
     // Who's on it can change until it's finished; anyone kept keeps their reflection.
     env.DB.prepare(`DELETE FROM attempt_profiles WHERE attempt_id = ? AND family_id = ?
       AND profile_id NOT IN (${ids.map(() => '?').join(', ')})`).bind(aid, s.family_id, ...ids),
     ...ids.map((pid) => env.DB.prepare('INSERT OR IGNORE INTO attempt_profiles (attempt_id, family_id, profile_id) VALUES (?, ?, ?)')
       .bind(aid, s.family_id, pid)),
   ]);
-  // A finished cook closes the queued lesson it was for (§6.2).
-  if (finished) await markCooked(env, s.family_id, L.id, ids, aid);
+  // A finished cook closes the queued lesson it was for (§6.2), unless it was
+  // on the Sabbath: nothing cooked then counts (§6.18), so the lesson stays up next.
+  if (finished && !isSabbath(localDay(finished, tzOf(req)))) await markCooked(env, s.family_id, L.id, ids, aid);
   return { ok: true, id: aid, finished_at: finished };
 });
 
 // The lessons a profile has finished, with how many times and when last.
+// Cooks on the Sabbath don't count (§6.18).
 on('GET', '/api/profiles/([0-9a-f]{16})/cooks', async (req, env, body, [pid]) => {
   const s = await requireSession(env, req);
   if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) {
     fail(404, 'not_found', 'No such profile.');
   }
   const { results } = await env.DB.prepare(
-    `SELECT a.lesson_id, COUNT(*) AS times, MAX(a.finished_at) AS last
+    `SELECT a.lesson_id, a.finished_at
        FROM attempts a JOIN attempt_profiles ap ON ap.attempt_id = a.id
       WHERE ap.profile_id = ? AND ap.family_id = ? AND a.family_id = ? AND a.finished_at IS NOT NULL
-      GROUP BY a.lesson_id`,
+      ORDER BY a.finished_at`,
   ).bind(pid, s.family_id, s.family_id).all();
-  return { cooks: Object.fromEntries(results.map((r) => [r.lesson_id, { times: r.times, last: r.last }])) };
+  const tz = tzOf(req);
+  const cooks = {};
+  for (const r of results) {
+    if (isSabbath(localDay(r.finished_at, tz))) continue;
+    cooks[r.lesson_id] = { times: (cooks[r.lesson_id]?.times ?? 0) + 1, last: r.finished_at };
+  }
+  return { cooks };
 });
 
 // The Reflect stage (§3): each profile on a cook rates it 1 to 5, says what
@@ -435,6 +456,7 @@ on('PUT', '/api/attempts/([0-9a-f]{16})/reflection', async (req, env, body, [aid
 
 // Every lesson each profile has cooked, oldest first: date, dish, cuisine,
 // skill, and that profile's rating. ?tz= gives the family's calendar day.
+// Cooks on the Sabbath don't count, so they aren't listed (§6.18).
 on('GET', '/api/progress', async (req, env) => {
   const s = await requireParent(env, req);
   const tz = Number(new URL(req.url).searchParams.get('tz') ?? 0);
@@ -444,12 +466,13 @@ on('GET', '/api/progress', async (req, env) => {
   const { results } = await env.DB.prepare(`SELECT ap.profile_id, ap.rating, a.lesson_id, a.finished_at, a.servings FROM attempt_profiles ap
       JOIN attempts a ON a.id = ap.attempt_id AND a.family_id = ap.family_id
       WHERE ap.family_id = ? AND a.finished_at IS NOT NULL ORDER BY a.finished_at, a.id`).bind(s.family_id).all();
-  const lesson = (lid) => LIBRARY.lessons.find((L) => L.id === lid);
+  const recipes = await recipeNames(env, s.family_id);
+  const lesson = (lid) => LIBRARY.lessons.find((L) => L.id === lid) ?? (recipes[lid] && { title: recipes[lid].title, cuisine: null, skill: 'Family recipe' });
   return {
     family: (await env.DB.prepare('SELECT name FROM families WHERE id = ?').bind(s.family_id).first()).name,
     profiles: profiles.map((p) => ({
       id: p.id, name: p.name,
-      rows: results.filter((r) => r.profile_id === p.id).map((r) => {
+      rows: results.filter((r) => r.profile_id === p.id && !isSabbath(day(r.finished_at))).map((r) => {
         const L = lesson(r.lesson_id);
         return { date: day(r.finished_at), dish: L?.title ?? r.lesson_id, cuisine: LIBRARY.cuisines[L?.cuisine] ?? L?.cuisine ?? '', skill: L?.skill ?? '', rating: r.rating };
       }),
@@ -735,6 +758,9 @@ on('POST', '/api/owner/parent-password', async (req, env, body) => {
 // shopping and kitchen staples (shopping.js).
 registerPlan(on);
 registerShopping(on);
+registerRecipes(on);
+registerSharing(on);
+registerSwap(on);
 
 // ---------- dispatch ----------
 
