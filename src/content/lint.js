@@ -7,6 +7,7 @@ import { toBase } from './units.js';
 import { scaleLesson, servingOptions } from './scale.js';
 import { findTerms } from './terms.js';
 import { courseEntries } from './course.js';
+import { METHODS } from './recipe.js';
 
 // Fields that hold ids or codes, not words a kid reads.
 const CODE_FIELDS = new Set(['id', 'image', 'cuisine', 'ingredient', 'use', 'for', 'unit', 'why', 'glyph', 'reason',
@@ -25,6 +26,12 @@ export function lint(c) {
   const err = (where, msg) => errors.push(`${where}: ${msg}`);
   const warn = (where, msg) => warnings.push(`${where}: ${msg}`);
   const rules = c.rules;
+  // The dish card a parent sees on the queue and course screens: a line about
+  // the dish, its main ingredients, and how it cooks.
+  const dishCard = (where, d) => {
+    if (d.method != null && !METHODS.includes(d.method)) err(where, `method "${d.method}" isn't one of ${METHODS.join(', ')}`);
+    if (d.main != null && !(Array.isArray(d.main) && d.main.length && d.main.length <= 6)) err(where, 'main lists 1 to 6 main ingredients');
+  };
 
   // registries
   for (const [file, data] of Object.entries(c.registryFiles)) for (const e of validate(data, c.schemas.registries)) err(file, e);
@@ -182,6 +189,11 @@ export function lint(c) {
       }
     }
   }
+  // a seasonal lesson isn't in course.json, so it carries its own dish card
+  for (const L of lessons) if (SEASONAL.has(L.unit)) {
+    for (const f of ['about', 'main', 'method']) if (L[f] == null) err(`lessons/${L.id}.json`, `a lesson in a seasonal unit needs ${f} for its dish card`);
+    dishCard(`lessons/${L.id}.json`, L);
+  }
   // a seasonal unit lists its lessons in order, for their labels (A1, A2)
   for (const u of (c.units || []).filter(u => u.seasonal)) {
     for (const id of u.lessons || []) if (byId[id]?.unit !== u.number) err(`units.json ${u.number}`, `lists "${id}", which isn't a written lesson in this unit`);
@@ -200,7 +212,8 @@ export function lint(c) {
   if (c.course) {
     for (const d of dishes) {
       const where = `course.json ${d.id}`;
-      for (const f of ['id', 'title', 'unit', 'cuisine', 'skills', 'skill', 'image', 'safety', 'minutes']) if (d[f] == null) err(where, `has no ${f}`);
+      for (const f of ['id', 'title', 'unit', 'cuisine', 'skills', 'skill', 'image', 'safety', 'minutes', 'about', 'main', 'method']) if (d[f] == null) err(where, `has no ${f}`);
+      dishCard(where, d);
       if (d.image !== `dishes/${d.id}.png`) err(where, `image should be dishes/${d.id}.png`);
       if (!UNITS.has(d.unit)) err(where, `unit ${d.unit} doesn't exist in units.json`);
       if (SEASONAL.has(d.unit)) err(where, `unit ${d.unit} is seasonal, so its lessons aren't in the numbered course`);
@@ -209,7 +222,7 @@ export function lint(c) {
       if (!(d.skills || []).length) err(where, 'has no skills');
       if (!['solo', 'adult-nearby', 'adult-hands-on'].includes(d.safety)) err(where, `safety "${d.safety}" isn't a safety level`);
       if (c.imageExists && d.image && !c.imageExists(d.image)) err(where, `image ${d.image} isn't in content/images/`);
-      for (const [p, t] of [['title', d.title], ['skill', d.skill]]) for (const w of blockedWordsIn(t || '', rules)) err(where, `${p} names a blocked food ("${w}")`);
+      for (const [p, t] of [['title', d.title], ['skill', d.skill], ['about', d.about], ['main', (d.main || []).join(', ')]]) for (const w of blockedWordsIn(t || '', rules)) err(where, `${p} names a blocked food ("${w}")`);
       if (d.pickOne && !SK[d.pickOne]) err(where, `pickOne "${d.pickOne}" isn't a skill in skills.json`);
       for (const p of d.prereqs || []) {
         if (!prereqOk(p)) err(where, `prerequisite "${p}" isn't a dish or pick-one group`);

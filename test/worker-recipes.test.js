@@ -16,7 +16,7 @@ const problems = (body) => recipeProblems(normalizeRecipe(body), CTX);
 
 // Grandma's lamb stew: a registry ingredient, a typed-in one, a raw step, and a doneness check.
 const STEW = {
-  title: "Grandma's chicken stew", servings: 4, totalMinutes: 90, mealType: 'poultry',
+  title: "Grandma's chicken stew", servings: 4, totalMinutes: 90, mealType: 'poultry', method: 'stove',
   why: { title: 'Why we make this', body: 'Grandma made it every winter.' },
   ingredients: [
     { ingredient: 'chicken-thigh', amount: 2, unit: 'lb' },

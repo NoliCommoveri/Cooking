@@ -11,7 +11,7 @@ import { requireSession, requireParent } from './auth.js';
 import { CONTENT } from './content-data.js';
 import { LIBRARY } from './library-data.js';
 import { liveLesson } from './lessons.js';
-import { normalizeRecipe, recipeProblems, recipeLesson, MEAL_TYPES } from '../content/recipe.js';
+import { normalizeRecipe, recipeProblems, recipeLesson, recipeCard, MEAL_TYPES } from '../content/recipe.js';
 import { leavenIn, unleavened } from '../content/leaven.js';
 import { dietView } from '../content/diet.js';
 
@@ -62,6 +62,7 @@ const summary = (row, filters) => {
     meal: MEAL_TYPES.find(([k]) => k === row.meal_type)?.[1] ?? '', image: `img/meals/${row.meal_type}.svg`,
     visible: recipeVisible(L, filters), unleavened: unleavened(r, REGISTRY, CONTENT.rules.leaven),
     typed_in: r.ingredients.filter((l) => !l.ingredient).length, version: row.version, updated_at: row.updated_at,
+    card: recipeCard(r, REGISTRY),
   };
 };
 

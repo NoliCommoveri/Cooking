@@ -385,6 +385,12 @@ Do **not** use:
 ### 5.7 Parent view
 - Uses the same theme, but toned down and **built for scanning**. She's in a store, on a phone.
 - The shopping list is styled as a **grocery notepad** with handwritten-style checkmarks, grouped by store section. Still no pills.
+- **The parent menu** (owner, 2026-10-23), modeled on MCCE's parents app: every parent screen sits behind one **Menu** button that opens a panel from the side, in groups, one group open at a time, opening on the group of the screen being read. The app's name goes back to the Queue, where the Parents button lands.
+  - **Learning path:** Queue, Shopping, Kitchen staples, Progress
+  - **Recipes:** Our recipes, User-shared recipes (§6.10)
+  - **Setup:** Courses, Profiles, Family settings, Logins & PIN
+  - **Owner** (the owner only): Families & beta word, Fix requests, Recipe reviews, Reported recipes (§6.2a)
+- **Dish cards** (owner, 2026-10-23): on the queue and the course screens, a dish's name opens a short card, since many dishes are new to families: a line about the dish, its main ingredients (not flour, salt, oil, and the like), how it cooks (stovetop, oven, both, or no cooking), and the time. Every planned dish has them in `content/course.json` (`about`, `main`, `method`); an Appointed Times lesson carries its own; a family recipe's come from its "why we make this" card, its ingredients, and how it cooks, which the entry flow asks.
 
 ---
 
@@ -518,7 +524,7 @@ No longer a bonus (owner, 2026-10-22): sharing recipes is central for the Appoin
   2. Ingredients, each picked from the registry by search with amount and unit. An ingredient not in the registry is typed in, and sharing it then needs the owner's review (above)
   3. Equipment, picked from the registry
   4. Steps, one at a time, each with its safety level and an optional timer with its label. A doneness step needs its thermometer target, and the safe minimums apply (§3). A step that isn't solo asks for its hazard line, and a step that handles a raw ingredient is followed by a wash-hands step the flow adds for the parent (recommendation, §3, §7.4)
-  5. Meal type (for the placeholder art, §6.19) and, optionally, a "why we make this" card, like a lesson's Learn stage
+  5. Meal type (for the placeholder art, §6.19), how it cooks (for its dish card, §5.7), and, optionally, a "why we make this" card, like a lesson's Learn stage
   6. Review, then save or share
 - **The hard block applies** (`CLAUDE.md`, §2.1). Every family recipe runs the same checks as the library: registry ingredients are checked by species, and all text (title, ingredient names, steps, notes) goes through the blocked-word scan. A recipe that fails can't be saved or shared until it's fixed or a review clears a false alarm. A typed-in ingredient can't be species-checked until the owner adds it to the registry, so the blocked-word scan is the only check on it in the family's own recipes. That's why a recipe with one can't be shared until the owner reviews it.
 - **Diet filters** apply to family recipes and directory recipes the same as to library lessons.

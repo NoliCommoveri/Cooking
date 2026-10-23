@@ -18,6 +18,11 @@ export const MEAL_TYPES = [
   ['salad', 'Salad or vegetables'], ['side', 'Side dish'], ['dessert', 'Dessert'], ['drink', 'Drink'],
 ];
 export const SAFETY = ['solo', 'adult-nearby', 'adult-hands-on'];
+// How a dish cooks, for its dish card (stovetop, oven, both, or no cooking).
+export const METHODS = ['stove', 'oven', 'stove-oven', 'no-cook'];
+export const METHOD_NAMES = { stove: 'Stovetop', oven: 'Oven', 'stove-oven': 'Stovetop and oven', 'no-cook': 'No cooking' };
+// Store sections whose ingredients aren't "main" ones on a dish card: flour, salt, oil, and the like.
+const PANTRY_SECTIONS = ['spices', 'oils-vinegars', 'baking', 'tap'];
 // Units a parent can pick. A registry ingredient can also use its own package units.
 export const UNITS = [...Object.keys(VOLUME), ...Object.keys(WEIGHT), 'count'];
 export const LIMITS = { title: 80, text: 400, short: 60, lines: 40, steps: 40, tools: 30, servings: 12, minutes: 24 * 60, timer: 24 * 3600 };
@@ -71,6 +76,7 @@ export function normalizeRecipe(body) {
     servings: num(b.servings),
     totalMinutes: num(b.totalMinutes),
     mealType: String(b.mealType ?? ''),
+    method: String(b.method ?? ''),
     why,
     ingredients: lines,
     equipment: [...new Set((Array.isArray(b.equipment) ? b.equipment : []).map(String))].slice(0, LIMITS.tools),
@@ -102,6 +108,7 @@ export function recipeProblems(r, ctx) {
   if (!Number.isInteger(r.servings) || r.servings < 1 || r.servings > LIMITS.servings) add(`Servings is a whole number from 1 to ${LIMITS.servings}.`);
   if (!Number.isInteger(r.totalMinutes) || r.totalMinutes < 1 || r.totalMinutes > LIMITS.minutes) add('Total time is a number of minutes.');
   if (!MEAL_TYPES.some(([k]) => k === r.mealType)) add('Pick a meal type.');
+  if (!METHODS.includes(r.method)) add('Pick how it cooks: stovetop, oven, both, or no cooking.');
   if (!r.ingredients.length) add('Add at least one ingredient.');
   if (!r.steps.length) add('Add at least one step.');
 
@@ -144,6 +151,20 @@ export function recipeProblems(r, ctx) {
     }
   }
   return out;
+}
+
+// The dish card for a recipe: its "why we make this" words, its main
+// ingredients (not the flour, salt, and oil), and how it cooks.
+export function recipeCard(r, registry) {
+  const main = [];
+  for (const l of r.ingredients) {
+    if (l.optional) continue;
+    const ing = l.ingredient ? registry[l.ingredient] : null;
+    if (ing && PANTRY_SECTIONS.includes(ing.section)) continue;
+    const name = ing ? ing.name : l.name;
+    if (name && !main.includes(name)) main.push(name);
+  }
+  return { about: r.why?.body || null, main: main.slice(0, 6), method: r.method || null };
 }
 
 // A recipe in the shape of a lesson file, for the player, scaling, diet

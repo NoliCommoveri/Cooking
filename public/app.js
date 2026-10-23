@@ -6,7 +6,7 @@ import { saveCook, saveReflection, flushCooks } from './cooks.js';
 import { patchTargets, showValue } from './lib/patch.js';
 import { courseEntries, prereqNotes } from './lib/course.js';
 import { toBase, mixed } from './lib/units.js';
-import { MEAL_TYPES } from './lib/recipe.js';
+import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 
 const app = document.getElementById('app');
 
@@ -533,19 +533,67 @@ function suggestFix(profile, { lesson, stepId, servings, ingredients }) {
 
 // ---------- parent area ----------
 
-function parentTabs(current) {
-  const tabs = [['queue', 'Queue'], ['shopping', 'Shopping'], ['recipes', 'Recipes'], ['courses', 'Courses'], ['progress', 'Progress'], ['profiles', 'Profiles'], ['family', 'Family'], ['parents', 'Logins']];
-  if (me.parent.is_owner) tabs.push(['owner', 'Owner'], ['fixes', 'Fix requests']);
-  return el('nav', { class: 'tabs', 'aria-label': 'Parent screens' },
-    tabs.map(([k, label]) => el('a', { href: `#/parent/${k}`, 'aria-current': k === current ? 'page' : null }, label)));
+// Every parent screen sits behind the Menu button, in a few groups, the way
+// MCCE's parents app does it. One group is open at a time, and the menu opens
+// on the group holding the screen being read. The Owner group shows only to
+// the owner.
+const PARENT_GROUPS = [['learning', 'Learning path'], ['recipes', 'Recipes'], ['setup', 'Setup'], ['owner', 'Owner']];
+const PARENT_PAGES = [
+  { key: 'queue', group: 'learning', label: 'Queue' },
+  { key: 'shopping', group: 'learning', label: 'Shopping' },
+  { key: 'pantry', group: 'learning', label: 'Kitchen staples' },
+  { key: 'progress', group: 'learning', label: 'Progress' },
+  { key: 'recipes', group: 'recipes', label: 'Our recipes' },
+  { key: 'courses', group: 'setup', label: 'Courses' },
+  { key: 'profiles', group: 'setup', label: 'Profiles' },
+  { key: 'family', group: 'setup', label: 'Family settings' },
+  { key: 'parents', group: 'setup', label: 'Logins & PIN' },
+  { key: 'owner', group: 'owner', label: 'Families & beta word', owner: true },
+  { key: 'fixes', group: 'owner', label: 'Fix requests', owner: true },
+];
+
+function parentMenu(current) {
+  const pages = PARENT_PAGES.filter((x) => !x.owner || me.parent.is_owner);
+  const groups = PARENT_GROUPS.filter(([g]) => pages.some((x) => x.group === g));
+  let open = pages.find((x) => x.key === current)?.group ?? groups[0][0];
+  const panel = el('nav', { class: 'drawer-panel', 'aria-label': 'Parent screens' });
+  const drawer = el('div', { class: 'drawer', hidden: true });
+  const button = el('button', { class: 'hbtn drawer-button', type: 'button', 'aria-expanded': 'false' }, '☰ Menu');
+  const draw = () => {
+    panel.replaceChildren(...groups.flatMap(([g, label]) => [
+      el('button', { type: 'button', class: g === open ? 'drawer-group on' : 'drawer-group', 'aria-expanded': String(g === open), onclick: () => { open = g; draw(); } }, label),
+      g === open ? el('div', { class: 'drawer-pages' }, pages.filter((x) => x.group === g).map((x) => el('a', {
+        href: `#/parent/${x.key}`, class: x.key === current ? 'on' : null, 'aria-current': x.key === current ? 'page' : null, onclick: () => show(false),
+      }, x.label))) : null,
+    ].filter(Boolean)));
+  };
+  const onKey = (e) => { if (e.key === 'Escape') show(false); };
+  const show = (on) => {
+    drawer.hidden = !on;
+    button.setAttribute('aria-expanded', String(on));
+    if (on) { document.addEventListener('keydown', onKey); panel.querySelector('button')?.focus(); } else { document.removeEventListener('keydown', onKey); button.focus(); }
+  };
+  button.addEventListener('click', () => show(drawer.hidden));
+  drawer.append(el('div', { class: 'drawer-scrim', onclick: () => show(false) }), panel);
+  draw();
+  return [button, drawer];
 }
 
 function parentScreen(current, ...kids) {
-  screen(topbar(me.family.name,
+  const [button, drawer] = parentMenu(current);
+  const head = topbar(me.family.name,
     el('a', { class: 'hbtn', href: '#/' }, 'Lockers'),
     el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/pin/lock'); await refresh(); go('#/'); } }, 'Lock'),
-    el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/logout'); store('cpr.profile', null); await start('#/'); } }, 'Log out')),
-  el('h1', {}, 'Parents'), parentTabs(current), sabbathBanner(), ...kids);
+    el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/logout'); store('cpr.profile', null); await start('#/'); } }, 'Log out'));
+  head.prepend(button);
+  // The app's name goes back to the Queue, where the Parents button lands.
+  const brand = head.querySelector('.grow b');
+  brand.replaceWith(el('a', { class: 'brand', href: '#/parent/queue' }, brand.textContent));
+  const page = PARENT_PAGES.find((x) => x.key === current);
+  const group = PARENT_GROUPS.find(([g]) => g === page?.group)?.[1];
+  screen(head, drawer,
+    group ? el('p', { class: 'eyebrow' }, group) : null,
+    el('h1', {}, page?.label ?? 'Parents'), sabbathBanner(), ...kids);
 }
 
 const parentProfiles = parentOnly(async () => {
@@ -668,7 +716,40 @@ const parentLogins = parentOnly(async () => {
 
 const SAFETY = { 'adult-nearby': 'Adult nearby', 'adult-hands-on': 'Adult hands-on', solo: 'On their own' };
 const foundationMark = () => el('span', { class: 'found' }, art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-shield"/></svg>'), 'Foundation');
-const lessonName = (x) => [x.label ? `${x.label} · ` : '', x.title];
+// A dish's name, which opens its dish card (below).
+const lessonName = (x) => [x.label ? `${x.label} · ` : '', el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(x.lesson_id ?? x.id) }, x.title)];
+
+// The dish card: what a dish is, at a glance, for a family that has never
+// eaten it. A line about it, its main ingredients, how it cooks, and the time.
+let courseCache = null;
+async function showDish(id) {
+  let d;
+  if (/^recipe:/.test(id)) {
+    const r = await api('GET', `/api/recipes/${id.slice(7)}`);
+    d = { title: r.title, image: r.image, minutes: r.totalMinutes, cuisine: 'Family recipe', ...r.card };
+  } else {
+    const [C, R] = await Promise.all([courseCache ??= fetch('/content/course.json').then((x) => x.json()), contentRegistry()]);
+    const L = R.lessons.find((x) => x.id === id), c = C.dishes.find((x) => x.id === id);
+    const src = L ?? c;
+    if (!src) return;
+    d = { title: src.title, image: src.image, minutes: L?.minutes ?? c?.minutes, estimated: !L && c?.estimated, cuisine: R.cuisines[src.cuisine]?.name ?? src.cuisine,
+      about: L?.about ?? c?.about, main: L?.main ?? c?.main, method: L?.method ?? c?.method, written: Boolean(L) };
+  }
+  const close = () => { ov.remove(); document.removeEventListener('keydown', onKey); };
+  const onKey = (e) => { if (e.key === 'Escape') close(); };
+  const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': d.title, onclick: (e) => { if (e.target === ov) close(); } },
+    el('div', { class: 'card dishcard' },
+      el('img', { src: d.image, alt: '', width: 160, height: 160 }),
+      el('h2', {}, d.title),
+      el('p', { class: 'mut' }, [d.cuisine, d.minutes ? `${d.estimated ? 'about ' : ''}${d.minutes} min` : null, d.method ? METHOD_NAMES[d.method] : null].filter(Boolean).join(' · ')),
+      d.about ? el('p', {}, d.about) : null,
+      d.main?.length ? [el('h3', {}, 'Main ingredients'), el('ul', {}, d.main.map((m) => el('li', {}, m)))] : null,
+      d.written === false ? el('p', { class: 'mut small' }, 'This lesson is still being written.') : null,
+      el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn pri', onclick: close }, 'Close'))));
+  document.addEventListener('keydown', onKey);
+  document.body.append(ov);
+  ov.querySelector('button.pri').focus();
+}
 
 // Every step an adult needs to be in the kitchen for, loaded when opened.
 function safetyReview(lessonId) {
@@ -926,9 +1007,11 @@ const courseEditor = parentOnly(async (cid) => {
       const dishRow = (id) => {
         const x = plan.find((y) => y.id === id), d = dish[id];
         const tag = !written.has(id) ? 'Being written' : hidden.has(id) ? 'Hidden by your diet settings' : null;
-        return el('label', { class: 'choice' },
-          el('input', { type: 'checkbox', checked: !x.removed, onchange: (ev) => { x.removed = !ev.target.checked; drawPlan(); } }),
-          el('span', {}, d.title, el('em', {}, ` ${d.skill ?? ''}`), tag ? el('small', { class: 'mut' }, ` · ${tag}`) : null));
+        return el('div', { class: 'dishpick' },
+          el('label', { class: 'choice' },
+            el('input', { type: 'checkbox', checked: !x.removed, onchange: (ev) => { x.removed = !ev.target.checked; drawPlan(); } }),
+            el('span', {}, d.title, el('em', {}, ` ${d.skill ?? ''}`), tag ? el('small', { class: 'mut' }, ` · ${tag}`) : null)),
+          el('button', { type: 'button', class: 'hbtn link', 'aria-label': `What is ${d.title}?`, onclick: () => showDish(id) }, 'What is it?'));
       };
       return el('div', { class: `planrow${keptIds.length ? '' : ' out'}` },
         el('div', { class: 'planno' }, num ?? '–'),
@@ -1111,7 +1194,7 @@ const pantryEditor = parentOnly(async () => {
   const p = await api('GET', '/api/pantry');
   const have = new Set(p.pantry);
   const saved = el('p', { class: 'ok', hidden: true }, 'Saved.');
-  parentScreen('shopping', el('h2', {}, 'Kitchen staples'),
+  parentScreen('pantry',
     el('p', { class: 'mut' }, `Things your kitchen usually has. They stay on every list, grouped under "${MAY_HAVE}" so you can check the cupboard first.`),
     form([
       ...p.sections.map((s) => el('fieldset', {}, el('legend', {}, s.name), el('div', { class: 'grid2' }, s.items.map((i) => el('label', { class: 'choice' },
@@ -1337,7 +1420,7 @@ const recipeEditor = parentOnly(async (rid) => {
   D.steps = D.steps.filter((s) => s.type !== 'wash');
   let page = 0;
   const keep = () => { try { sessionStorage.setItem(draftKey, JSON.stringify(D)); } catch { /* the draft just won't survive a reload */ } };
-  const PAGES = ['The basics', 'Ingredients', 'Tools', 'Steps', 'Meal type', 'Review'];
+  const PAGES = ['The basics', 'Ingredients', 'Tools', 'Steps', 'Meal type and how it cooks', 'Review'];
   const ingByName = new Map(Object.values(R.ingredients).map((i) => [i.name.toLowerCase(), i]));
   const unitsFor = (id) => {
     const ing = R.ingredients[id];
@@ -1425,6 +1508,9 @@ const recipeEditor = parentOnly(async (rid) => {
         el('div', { class: 'grid2' }, MEAL_TYPES.map(([k, v]) => el('label', { class: 'choice' },
           el('input', { type: 'radio', name: 'meal', value: k, checked: D.mealType === k, onchange: () => { D.mealType = k; keep(); } }),
           el('img', { src: `img/meals/${k}.svg`, alt: '', width: 40, height: 40 }), el('span', {}, v))))),
+      el('fieldset', {}, el('legend', {}, 'How does it cook?'),
+        el('div', { class: 'grid2' }, METHODS.map((k) => el('label', { class: 'choice' },
+          el('input', { type: 'radio', name: 'method', value: k, checked: D.method === k, onchange: () => { D.method = k; keep(); } }), el('span', {}, METHOD_NAMES[k]))))),
       el('h3', {}, 'Why we make this'),
       el('p', { class: 'mut small' }, 'Optional. A card your kids see before they cook, like a lesson\'s Learn stage: where the recipe comes from, or why your family makes it.'),
       el('label', { class: 'f' }, 'Card title', el('input', { value: D.why?.title ?? '', maxlength: 60, oninput: (e) => { D.why = { ...(D.why ?? {}), title: e.target.value }; keep(); } })),

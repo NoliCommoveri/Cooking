@@ -1831,3 +1831,28 @@ on it.
   and a recipe queued, on a shopping list unmerged, cooked, and on Print our
   progress). Checked in a browser: the entry flow, the kitchen shelf, and the
   player.
+
+## 74. 2026-10-23 — The parent menu, and dish cards
+
+- **Owner ruling: a side menu** for the parent screens, after MCCE's
+  parents app (`public/app.js` in that repo). The row of tabs is gone: a
+  **Menu** button in the bar opens a panel from the side with four groups,
+  one open at a time, opening on the current screen's group; Escape or a tap
+  outside closes it. Learning path (Queue, Shopping, Kitchen staples,
+  Progress), Recipes (Our recipes), Setup (Courses, Profiles, Family settings,
+  Logins & PIN), and Owner for the owner only (Families & beta word, Fix
+  requests). Kitchen staples is its own entry now. Each screen's title is
+  its page name, under its group's. The app's name goes back to the Queue.
+- **Owner ruling: dish cards.** Many dishes are new to families, so on the
+  queue (queued lessons and kids' requests) and the course plan, a dish opens
+  a card: a line about it, its main ingredients (not the flour, salt, and
+  oil), how it cooks, and the time.
+  - `content/course.json`: `about`, `main`, and `method` (stove, oven,
+    stove-oven, no-cook) for all 75 dishes, written this session; the linter
+    requires them and scans them for blocked words. The two Appointed Times
+    lessons carry their own (lesson schema), also required.
+  - Family recipes: the entry flow asks how it cooks; the card's main
+    ingredients come from the recipe (registry pantry sections left out) and
+    its about line from the "why we make this" card.
+- Tests: 185. Checked in a browser: the menu, its groups, and the cards on
+  the queue and the course plan.

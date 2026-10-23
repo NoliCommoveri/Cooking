@@ -47,12 +47,15 @@ export function buildContent() {
 export function buildPublic() {
   const c = loadContent();
   const files = {};
+  const dishes = Object.fromEntries(c.course.dishes.map((d) => [d.id, d]));
   const labels = { ...numberCourse(c.course.dishes).labels, ...seasonalLabels(c.units) };
   // label: the lesson's number in the suggested order. The app shows each
   // family's own numbers from its course plan instead.
   const summary = c.lessons.map(({ data: L }) => ({
     id: L.id, label: labels[L.id], title: L.title, unit: L.unit, cuisine: L.cuisine, skill: L.skill, skills: L.skills,
     image: `img/${L.image.replace(/\.png$/, '.webp')}`, unleavened: isUnleavened(c, L),
+    // The dish card (queue and course screens): from course.json, or the lesson itself for Appointed Times.
+    about: L.about ?? dishes[L.id]?.about, main: L.main ?? dishes[L.id]?.main, method: L.method ?? dishes[L.id]?.method, minutes: L.totalMinutes,
   })).sort(inCourse(c));
   files['public/content/registry.json'] = JSON.stringify({
     ingredients: Object.fromEntries(c.ingredients.map((i) => [i.id, i])),
