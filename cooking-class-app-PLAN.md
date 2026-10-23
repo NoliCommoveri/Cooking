@@ -529,9 +529,11 @@ The helper is **Chef Ruth** (she/her). Her picture is `content/images/brand/chef
 | **Plan this week** | What each kid cooks this week (course lessons, extras, swaps), then whether to make a shopping list for it | Queue, Shopping |
 | **Our diet and kitchen** | Diet filters, default servings, kitchen staples | Family settings, Shopping → Staples |
 
+**Show me around (owner, 2026-10-23; built).** A second flow, from her menu, separate from Getting started: she visits every parent screen in the Menu's order, starting with the Queue (the owner's screens last, for the owner only). At each one she says what it's for, steps aside so the screen shows for 4 seconds (her button brings her back sooner), then pops back and says how to use it, with **Next**, **Show me again**, and **Stop the tour**. It's the parent tour (§6.9).
+
 **Later** (recommendation):
 - **Finding something:** a parent types words ("staples", "Ella's login", "PIN") and she says where it is, with a button to it (Kels's Find).
-- **Understanding something:** how the app works, as an FAQ with a **Show me** for each answer. The parent tour (§6.9) can live here.
+- **Understanding something:** how the app works, as an FAQ with a **Show me** for each answer, using Show me around's step-aside.
 - **Chef Ruth in the kitchen:** kid tasks (pick what to cook next, find a lesson, explain a kitchen word) and the profile intro (§6.9).
 - She can also run the family-recipe entry flow (§6.10) once the tasks above are built.
 
@@ -589,7 +591,7 @@ No longer a bonus (owner, 2026-10-22): sharing recipes is central for the Appoin
   - the **Ask** button for Chef Ruth, once she's in the kitchen (§6.8)
 
   A shared profile sees it once, together. Any card can be skipped, and the whole intro can be replayed from the profile's locker. Words stay short and plain, and nothing animates while a card is being read (§5.5).
-- **Requirement: a parent tour.** A short set of cards that shows parents how to use the app, one task per card: queue a lesson and pick who it's for, set servings, use the shopping list, review safety and mark a lesson test-cooked, the parent PIN, photos and the gallery, and **Suggest a fix** (how to report something wrong in a lesson, what to write in "what should it say instead", and how the answer comes back, §6.11). Each card can be skipped, and the whole tour can be replayed from family settings. **Recommendation (to confirm):** the tour becomes Chef Ruth's Understanding something (§6.8), each card an answer with **Show me**.
+- **Requirement: a parent tour.** A short set of cards that shows parents how to use the app, one task per card: queue a lesson and pick who it's for, set servings, use the shopping list, review safety and mark a lesson test-cooked, the parent PIN, photos and the gallery, and **Suggest a fix** (how to report something wrong in a lesson, what to write in "what should it say instead", and how the answer comes back, §6.11). Each card can be skipped, and the whole tour can be replayed from family settings. **Built as Chef Ruth's Show me around** (§6.8, owner, 2026-10-23): a card per parent screen, each shown for a few seconds, replayable from her menu.
 
 Until Getting started is built, the test-cook warning shows as a one-time notice on a parent's first sign-in.
 

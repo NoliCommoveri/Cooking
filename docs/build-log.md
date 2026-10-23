@@ -2481,3 +2481,21 @@ the next was started.
   0014). Checked in a browser at phone and desktop width: a casual family with
   a shared profile, a kid login, and fattoush declined for ratatouille; and a
   homeschool family with a course, closed partway with the PIN locked.
+
+## 101. 2026-10-23 — Chef Ruth's Show me around
+
+- **Owner ruling:** a second flow, apart from Getting started, that shows
+  every parent screen and explains how to use it, starting with the Queue.
+  She steps aside for 4 seconds on each screen, then pops back.
+- **Built** (`public/ruth.js`): **Show me around** in her menu. For each
+  screen, in the Menu's order (Queue, Shopping, Progress, Our recipes,
+  User-shared recipes, Courses, Profiles, Family settings, Logins & PIN, then
+  the owner's four for the owner): a line on what it's for, the screen with
+  her chat tucked away (her button brings her back early), then how to use
+  it, with Next, Show me again, and Stop the tour. Her explanations use the
+  screens' real button names.
+- It's the parent tour §6.9 asked for; §6.8 and §6.9 say so.
+- Tests: 242 (one new: the tour covers every parent screen in `PARENT_PAGES`,
+  starts with the Queue, and keeps the owner's screens for the owner).
+  Checked in a browser at phone width: the Queue stop, Shopping with her
+  button tapped early, and Stop the tour.

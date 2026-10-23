@@ -27,6 +27,7 @@ function chatPanel(ctx, { required, onClose }) {
   const { el } = ctx;
   const log = el('div', { class: 'ruth-log', 'aria-live': 'polite' });
   const panel = el('div', { class: 'ruth-panel' });
+  let peeking = null;
   const close = () => { ov.remove(); document.removeEventListener('keydown', esc); onClose?.(); };
   const esc = (e) => { if (e.key === 'Escape' && !required) close(); };
   const head = el('div', { class: 'ruth-head' },
@@ -42,6 +43,21 @@ function chatPanel(ctx, { required, onClose }) {
 
   const chat = {
     close,
+    // Step aside so the screen behind shows, then come back. Her button, or 4
+    // seconds, brings her back (owner, 2026-10-23).
+    peek(hash, ms = 4000) {
+      return new Promise((resolve) => {
+        ov.hidden = true;
+        let timer;
+        const back = () => { clearTimeout(timer); peeking = null; ov.hidden = false; down(); resolve(); };
+        peeking = back;
+        timer = setTimeout(back, ms);
+        ctx.go(hash);
+      });
+    },
+    // Her button while she's stepped aside: come back now.
+    resume() { peeking?.(); },
+    get open() { return ov.isConnected; },
     // Her line, with her picture beside it. kids: extra nodes (a dish picture).
     say(text, ...kids) {
       log.append(el('div', { class: 'ruth-msg' }, el('img', { src: RUTH.photo, alt: '', width: 36, height: 36 }), el('p', {}, text, ...kids)));
@@ -401,17 +417,106 @@ async function firstLesson(ctx, chat, call, profiles) {
   chat.say(`No problem! ${where}`);
 }
 
+// ---------- Show me around (owner, 2026-10-23) ----------
+
+// Every parent screen, starting with the Queue: she says what it's for, steps
+// aside for a look, then pops back to say how to use it. The owner's screens
+// come last, for the owner only.
+const TOUR = [
+  { hash: '#/parent/queue', name: 'Queue', called: 'the Queue', what: "It's the one \"up next\" list for every learner, and it's where the Parents button takes you.", how: [
+    'Lessons from a course show under Course, and lessons you add yourself under Additional. Tap + Add a lesson to queue any lesson, for one learner or several cooking together.',
+    'When a kid asks to make something, it shows at the top under Requests, for you to approve or say Not now.',
+    "Tap a lesson to open its tools: Safety review lists its safety steps, and I've test-cooked this marks one you've cooked yourself. A course lesson can also be skipped, or swapped for an Appointed Time meal.",
+  ] },
+  { hash: '#/parent/shopping', name: 'Shopping', what: "Everything you'll need for the lessons coming up.", how: [
+    'Upcoming shows the ingredients week by week. Make a shopping list picks the next few lessons, lets you tick what you already have, and rounds the rest to store packages, grouped by aisle, so you can check things off in the store.',
+    "Lists keeps the ones you've made, newest first. Staples are things you always keep at home, like salt and oil: add them by searching, and they show as \"May already have.\"",
+  ] },
+  { hash: '#/parent/progress', name: 'Progress', what: 'What each learner has cooked.', how: [
+    'Pick a learner, or Everyone, to see the date, dish, cuisine, skill, and rating of every cook.',
+    'Tap Print, or save it as a PDF from the print window, or Download CSV for a spreadsheet. Handy for homeschool records.',
+  ] },
+  { hash: '#/parent/recipes', name: 'Our recipes', what: "Your family's own recipes.", how: [
+    'Tap + Add a recipe, and it walks you through one thing at a time: ingredients, tools, steps, then a review. The same food rules and safety checks as our lessons apply.',
+    'Your recipes show on an "Our recipes" shelf in every kitchen, and can be queued and shopped for like any lesson. Tap Share to put one in User-shared recipes for other families, with no family name on it.',
+  ] },
+  { hash: '#/parent/shared', name: 'User-shared recipes', what: 'Recipes other families have shared.', how: [
+    'Search by name or ingredient, and tap Add to our recipes to save one for your family.',
+    'If something in one looks wrong, tap Report and tell us what.',
+  ] },
+  { hash: '#/parent/courses', name: 'Courses', what: 'Where your courses live.', how: [
+    "A course plans your weeks: its lessons in order, a start date, and how many a week. Each week's lessons load into the queue on Sunday, and an unfinished one moves to the next week. In casual mode, Plan our weeks in Family settings needs to be on.",
+    'Tap Set up a course to make one, or Edit to change the lesson order, drop lessons, or pick a different dish where a skill has a few to choose from. End this course stops it, and you can put it back.',
+  ] },
+  { hash: '#/parent/profiles', name: 'Profiles', what: 'Your learners.', how: [
+    'Tap + Add a profile for a new learner, or Edit to change a name, kid or adult, the theme, or who shares it.',
+    "On a kid's profile you'll find Kid login: give them their own login, change their password, or turn it off.",
+  ] },
+  { hash: '#/parent/family', name: 'Family settings', what: 'Settings for the whole family.', how: [
+    'Your family name, default servings, the foods to leave out, casual or homeschool, and Plan our weeks.',
+    'Voice step control is here too: it lets kids say "next," "back," or "again" in cook mode instead of tapping. Change what you like and tap Save.',
+  ] },
+  { hash: '#/parent/parents', name: 'Logins & PIN', what: 'Who can sign in as a parent, and the PIN.', how: [
+    'Tap + Add a parent to give another adult their own login to your family.',
+    'Change the PIN is below. The PIN keeps the parent screens for adults, since kitchen devices stay logged in.',
+  ] },
+  { hash: '#/parent/owner', name: 'Families & beta word', owner: true, what: 'Your owner tools.', how: [
+    'Set or clear the beta word new families need to sign up, see the families using the app, and set a parent\'s password if they\'re locked out.',
+  ] },
+  { hash: '#/parent/fixes', name: 'Fix requests', owner: true, what: 'Suggestions from families to fix a lesson.', how: [
+    "Apply one to change the lesson for every family, after the same checks as our content, or decline it. Anything applied can be reverted.",
+  ] },
+  { hash: '#/parent/reviews', name: 'Recipe reviews', owner: true, what: 'Shared recipes waiting on you.', how: [
+    'Clear or decline each one, and decide whether it gets the Unleavened badge.',
+  ] },
+  { hash: '#/parent/reports', name: 'Reported recipes', owner: true, what: 'Recipes families have reported.', how: [
+    'Hide one to take it out of User-shared recipes, and Unhide to put it back.',
+  ] },
+];
+
+export const tourStops = (isOwner) => TOUR.filter((t) => !t.owner || isOwner);
+
+async function showMeAround(ctx, chat) {
+  const stops = tourStops(ctx.me().parent?.is_owner);
+  chat.say("Love it! I'll take you to each parent screen, starting with the Queue. I'll step aside for a few seconds so you can look around, then pop back and tell you how to use it. Tap my button if you want me back sooner. Sound good?");
+  if (await chat.choose([['go', "Sounds great, let's start!"], ['no', 'Never mind']]) === 'no') return false;
+  for (const [i, t] of stops.entries()) {
+    chat.say(`${i ? 'Next' : 'First'}, ${t.called ?? t.name}. ${t.what}`);
+    let pick = 'again';
+    while (pick === 'again') {
+      await chat.peek(t.hash);
+      for (const line of t.how) chat.say(line);
+      const next = stops[i + 1];
+      pick = await chat.choose([
+        ['next', next ? `Next: ${next.name}` : 'Finish the tour'],
+        ['again', 'Show me again'],
+        ...(next ? [['stop', 'Stop the tour']] : []),
+      ]);
+    }
+    if (pick === 'stop') { chat.say('No problem! Every screen is in the Menu button at the top.'); return true; }
+  }
+  chat.say("That's the tour! Every screen is in the Menu button at the top, and I'm right here if you need a hand.");
+  return true;
+}
+
 // ---------- her menu, from the parent screens ----------
 
+let current = null;
+
 export function openRuth(ctx) {
-  const chat = chatPanel(ctx, { required: false });
+  // Stepped aside for a tour stop: her button brings her back.
+  if (current?.open) { current.resume(); return; }
+  const chat = chatPanel(ctx, { required: false, onClose: () => { current = null; } });
+  current = chat;
   chat.say(HELLO);
   const menu = async () => {
-    chat.say('What can I help with?');
-    const pick = await chat.choose([['setup', 'Getting started (change your setup)'], ['bye', "Nothing right now"]]);
-    if (pick === 'bye') { chat.say('Okay! Tap my button any time.'); return; }
-    await gettingStarted(ctx, { again: true, chat });
+    for (;;) {
+      chat.say('What can I help with?');
+      const pick = await chat.choose([['tour', 'Show me around'], ['setup', 'Getting started (change your setup)'], ['bye', 'Nothing right now']]);
+      if (pick === 'bye') { chat.say('Okay! Tap my button any time.'); return; }
+      if (pick === 'setup') return gettingStarted(ctx, { again: true, chat });
+      await showMeAround(ctx, chat);
+    }
   };
   menu().catch((err) => chat.say(err.message));
 }
-

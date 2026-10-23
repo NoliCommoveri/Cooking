@@ -118,3 +118,17 @@ test('a family that set its PIN before migration 0014 is already set up', async 
     if (MIGRATIONS.at(-1) !== last) MIGRATIONS.push(last);
   }
 });
+
+test('Show me around visits every parent screen, starting with the Queue, and the owner\'s only for the owner', async () => {
+  const { readFileSync } = await import('node:fs');
+  const { tourStops } = await import('../public/ruth.js');
+  const app = readFileSync('public/app.js', 'utf8');
+  const pages = [...app.slice(app.indexOf('const PARENT_PAGES')).matchAll(/\{ key: '([a-z]+)', group: '[a-z]+', label: '[^']+'(, owner: true)? \}/g)];
+  assert.ok(pages.length >= 10, 'found the parent pages');
+  const all = tourStops(true).map((t) => t.hash.replace('#/parent/', ''));
+  assert.equal(all[0], 'queue');
+  assert.deepEqual([...all].sort(), pages.map((m) => m[1]).sort(), 'every parent screen, and nothing else');
+  const family = tourStops(false).map((t) => t.hash.replace('#/parent/', ''));
+  assert.deepEqual([...family].sort(), pages.filter((m) => !m[2]).map((m) => m[1]).sort());
+  for (const t of tourStops(true)) assert.ok(t.what && t.how.length, `${t.name} says what it's for and how to use it`);
+});
