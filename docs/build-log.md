@@ -2899,3 +2899,49 @@ already a sample).
 - **Course outline:** the five dishes carry their real times.
 - Not test-cooked. No intro slides yet.
 - Tests: 261.
+
+## 117. 2026-10-23 — Unit 2 finished: lessons 13 through 15c
+
+- **Owner ruling:** the new tortilla and pepper entries from 116 stay as
+  they are (burrito-size and gluten-free tortillas, whole peppercorns).
+- The last five Unit 2 lessons:
+  - **13 Cacio e pepe** (`cacio-e-pepe`): less pasta water than usual, so it's
+    starchier; pepper toasted in butter; finely grated pecorino mashed into a
+    paste with warm pasta water and tossed in with the heat off. Serves up to
+    8. Swaps: parmesan for pecorino (availability), gluten-free spaghetti.
+    30 minutes.
+  - **14 Eggs Benedict** (`eggs-benedict`): hollandaise from pasteurized
+    yolks (§3), whisked over simmering water to 160°F, then hot butter
+    whisked in slowly and kept warm off the heat; turkey bacon; eggs poached
+    4 at a time in barely bubbling water with vinegar, whites to 160°F.
+    Prereq 13; callback to 13's emulsion. Swaps: smoked salmon for turkey
+    bacon (meat), gluten-free bread. 60 minutes.
+  - **15a Stovetop mac and cheese** (`mac-and-cheese`): a roux, milk
+    whisked in a little at a time into béchamel, cheese stirred in off the
+    heat. Swap: gluten-free small pasta. 40 minutes.
+  - **15b Chicken and spinach crêpes** (`chicken-spinach-crepes`): crêpe
+    batter rested 15 minutes (with the raw-batter tip), chicken to 165°F with
+    wilted spinach, béchamel with parmesan; crêpes cooked in the 8-inch
+    nonstick pan, filled, rolled, sauced, and baked at 400°F. Callback to
+    6a's heat control. 80 minutes.
+  - **15c Japanese chicken curry** (`japanese-chicken-curry`): the roux
+    made from scratch (§4: store blocks can hold fats we don't use), cooked
+    to light brown; curry powder bloomed in it off the heat, loosened with
+    broth, and stirred into a pot of chicken, carrots, and potatoes; 165°F.
+    Swap: tamari. 65 minutes.
+- **Raw chicken cut, then cooked later** (15b, 15c): the chicken stays on
+  the board, hands are washed, and the board and knife are washed after the
+  chicken goes into the pan, so every raw step is followed by a wash step.
+- **Kitchen word:** `roux` is now defined in `terms.json`, taught in 15a, so
+  steps can use it.
+- **Registries:** 8 new ingredients (pecorino, pasteurized eggs, turkey
+  bacon, smoked salmon, English muffins, elbow macaroni, baby spinach,
+  curry powder) and 4 tools (a heatproof bowl, a slotted spoon, a toaster,
+  and a 9-by-13 baking dish). Turkey bacon's id is `turkey-strips`: the
+  unclean-word check reads ids as well as names, and "turkey bacon" is
+  allowed only as a phrase. Its name stays "Turkey bacon", with a note to
+  pick a fully cooked package.
+- **Course outline:** the five dishes carry their real times. Every Unit 2
+  dish is now written.
+- Not test-cooked. No intro slides yet.
+- Tests: 261.
