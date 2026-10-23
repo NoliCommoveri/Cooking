@@ -1443,15 +1443,15 @@ const shopping = parentOnly(async (flash) => {
   ];
   const view = el('div', {});
   const show = (which) => {
-    view.replaceChildren(...[{ upcoming, staples }[which] ?? lists].flat(2).filter(Boolean));
-    toggle.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', String(['lists', 'upcoming', 'staples'][i] === which)));
+    view.replaceChildren(...[{ lists, staples }[which] ?? upcoming].flat(2).filter(Boolean));
+    toggle.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', String(['upcoming', 'lists', 'staples'][i] === which)));
   };
-  const toggle = viewToggle('cpr.shop.view', [['lists', `Lists${open.length ? ` (${open.length})` : ''}`], ['upcoming', 'Upcoming'], ['staples', 'Staples']], 'lists', show);
+  const toggle = viewToggle('cpr.shop.view', [['upcoming', 'Upcoming'], ['lists', `Lists${open.length ? ` (${open.length})` : ''}`], ['staples', 'Staples']], 'upcoming', show);
 
   parentScreen('shopping', flash ?? null,
-    el('p', { class: 'mut' }, "Shopping lists are optional. Kids can start any lesson whenever you're ready."),
+    el('p', { class: 'mut' }, 'See at a glance what ingredients are needed for future queued lessons. You can also generate a shopping list. First select everything you have on-hand already; anything checkmarked will be left off the list.'),
     toggle, view);
-  show(sessionGet('cpr.shop.view') ?? 'lists');
+  show(sessionGet('cpr.shop.view') ?? 'upcoming');
 });
 
 // The preview: tick what's on hand; the rest becomes the list.

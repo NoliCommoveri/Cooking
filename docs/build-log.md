@@ -2174,3 +2174,13 @@ on it.
 - Tests: 222. Checked in a browser at phone width: the old link, searching and
   adding two staples, and Remove with Undo.
 
+## 87. 2026-10-23 — Shopping: Upcoming first, and new intro copy
+
+- Shopping's views are now **Upcoming**, **Lists**, **Staples**, and the page
+  opens on Upcoming.
+- The intro line is the owner's copy: "See at a glance what ingredients are
+  needed for future queued lessons. You can also generate a shopping list.
+  First select everything you have on-hand already; anything checkmarked will
+  be left off the list."
+- Tests: 222. Checked in a browser at phone width.
+
