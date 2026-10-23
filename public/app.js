@@ -11,6 +11,7 @@ import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 import { progressView, celebrate } from './rewards.js';
 import { isMuted, setMuted } from './sound.js';
 import { gettingStarted, openRuth, ruthButton } from './ruth.js';
+import { openIntro } from './intro.js';
 
 const app = document.getElementById('app');
 
@@ -522,12 +523,18 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const tabs = [['path', quest ? 'Main quest' : 'My journey'], ['more', quest ? 'Side quests' : 'More recipes'], ['progress', quest ? 'Skill tree' : 'Passport']];
   const current = tabs.some(([k]) => k === tab) ? tab : 'path';
   sessionSet(`cpr.tab.${p.id}`, current);
-  screen(el('section', { class: 'kitchen k-tabbed', 'data-kt': p.theme },
+  // The kitchen intro (§6.9): How it works replays it. It opens on its own
+  // for a profile with nothing cooked that hasn't finished or skipped it.
+  const intro = () => openIntro({ el, mount: section, profile: p, onDone: () => {
+    if (p.intro === 'new') { p.intro = 'seen'; api('POST', `/api/profiles/${p.id}/intro`).catch(() => {}); }
+  } });
+  const section = el('section', { class: 'kitchen k-tabbed', 'data-kt': p.theme },
     me.kid ? null : el('a', { class: 'back', href: '#/' }, '← Lockers'),
     sabbathBanner(),
     el('div', { class: 'k-head' }, avatars(p.people),
       el('div', { class: 'grow' }, el('h1', {}, quest ? 'Quest board' : 'Recipe box'), el('div', {}, p.name))),
     el('div', { class: 'acts' },
+      el('button', { class: 'themebtn', type: 'button', onclick: intro }, 'How it works'),
       el('button', { class: 'themebtn', type: 'button', onclick: async () => {
         await api('PUT', `/api/profiles/${p.id}/theme`, { theme: other });
         kitchen(id, current);
@@ -549,7 +556,9 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     // Pinned to the bottom, where a thumb is, as in MCCE Kids.
     el('nav', { class: `k-tabs ${quest ? 'q' : 'p'}`, 'aria-label': 'Kitchen' }, tabs.map(([k, label]) => el('a', {
       href: `#/kitchen/${p.id}/@${k}`, 'aria-current': k === current ? 'page' : null,
-    }, label)))));
+    }, label))));
+  screen(section);
+  if (p.intro === 'new' && !Object.keys(cooks).length) intro();
   // Anything earned since this device last showed it: a stamp, a skill, a rank.
   celebrate(p, cooks);
 }

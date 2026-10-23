@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [107. 2026-10-23 — Main quest shows the whole path, and the kitchen intro's first copy](docs/build-log.md#107-2026-10-23--main-quest-shows-the-whole-path-and-the-kitchen-intros-first-copy)
+**Latest build log entry:** [108. 2026-10-23 — The kitchen intro, and the Passport rank ladder on phones](docs/build-log.md#108-2026-10-23--the-kitchen-intro-and-the-passport-rank-ladder-on-phones)
 
 ## Current features
 
@@ -13,6 +13,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Accounts** (`src/worker/`, `public/`): open sign-up with an emailed code, an optional beta word, parent login, password reset by email, and a parent PIN for parent screens.
 - **Chef's lockers and profiles**: one person or several per profile, kid or adult, each with its own theme.
 - **Kitchen**: each profile's own space, in Kitchen Quest or Chef's Passport, with three tabs pinned to the bottom: **Main quest / My journey** (this week and next open, the rest of its path under See more), **Side quests / More recipes** (every unit and recipe shelf, folded shut, with a search by dish or ingredient), and **Skill tree / Passport** (progress and rewards). Cards follow the family's diet settings, with swaps and left-out optional ingredients shown.
+- **Kitchen intro**: Chef Ruth's cards, with screenshots, on the tabs, asking to cook, and each stage of a cook. Opens once for a profile with nothing cooked; **How it works** replays it.
 - **Progress and rewards** (`public/rewards.js`, `src/content/rewards.js`): each dish lights its node on the skill tree or stamps the passport and its world map, and each skill earns a crest or pin. Six ranks, from Kitchen Apprentice to Executive Chef at 75 dishes; family recipes count toward rank only. Worked out from the cooks, never stored.
 - **Celebrations**: after a cook, and on coming back to the kitchen, the new stamp or cleared quest, new skills, and a full-screen rank up, once per device.
 - **Sound** (`public/sound.js`): made in the browser. A sizzle on Next, a stamp thunk, a skill chime, and a rank-up fanfare, with a mute toggle remembered on the device (timers always ring).

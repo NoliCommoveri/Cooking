@@ -2632,3 +2632,42 @@ the next was started.
   on your path, and a lesson dated three weeks out plus later course lessons
   under See more (3); a profile with no course showed its 15 path lessons
   under See more.
+
+## 108. 2026-10-23 — The kitchen intro, and the Passport rank ladder on phones
+
+- **Owner ruling: the kitchen intro is cards, with Chef Ruth's picture.**
+  Twelve cards over the kitchen, drawn in the profile's theme: a welcome,
+  the three tabs, asking to cook (Cook this on an adult profile), one card
+  per cook stage (the lesson card, Learn, Prep, cook mode, Plate it),
+  something looks wrong (kids tell an adult; adults get Suggest a fix), and
+  "You're ready!". Back, Next, and Skip on each, with dots for where you are.
+  The tab and asking-to-cook copy is the owner's; the rest is a draft.
+  Kitchen Quest's Skill tree card says "crests", the word on that screen.
+- **Screenshots with boxes.** Each card but the first and last shows the
+  real screen at phone width in the profile's theme, with boxes drawn by the
+  app around the parts it's about (numbered on cook mode, to match its
+  lines). `tools/intro-shots.js` takes them in a session: it makes a test
+  family on the in-memory database, opens each screen, measures the parts,
+  and writes `public/img/intro/*.webp` (22 images, about 740 KB, loaded only
+  when the intro opens) and `public/intro-shots.js`.
+- **When it opens (owner ruling).** Once, on its own, for a profile with no
+  cooks that hasn't finished or skipped it. **How it works** at the top of
+  the kitchen replays it. No "try it" taps for now.
+- **Migration 0016** adds `profiles.intro_seen_at`; apply it on `/ops`.
+  Until then the intro doesn't open on its own (How it works still works).
+  `/api/profiles` reports `intro` ('new' or 'seen'), and
+  `POST /api/profiles/:id/intro` marks it seen (a kid's own login too).
+  Nothing destructive was added, so there's nothing new to restore.
+- **Fix: the Passport rank ladder on phones.** With large text, "Kitchen
+  Apprentice" ran into "Prep Cook". On screens up to 560px wide the six
+  ranks are now two rows of three, and a long word wraps instead of
+  overlapping. Built in `public/themes.css`.
+- Built in `public/intro.js`, `public/app.js` (`kitchen`),
+  `public/themes.css`, `src/worker/api.js`. Plan §6.9 says so; README
+  updated.
+- Tests: 247 (three new: every card's screenshot in both themes, kid and
+  adult, with a numbered box per line; the buttons the cards name are still
+  in the app; the intro flag, and another family can't set it). Checked in a
+  browser at phone width: all twelve cards in both themes, the intro gone
+  and marked seen after the last card, How it works replaying it, and the
+  ladder in two rows with large text.
