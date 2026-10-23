@@ -19,7 +19,7 @@ A parent uses the app from their phone. They queue lessons, see a combined **sho
 
 **Requirement: the app is multi-family.** It was designed first for the owner's family (two kids, ages 11 and 12), but several families must be able to use it. Each family has its own profiles, progress, queue, pantry, shopping list, photos, and settings. All families share the same lesson library. Each family can also add its own recipes (§6.10).
 
-**Two programs, one app — Requirement (owner, 2026-10-23).** The 75-lesson course in §4 is the **Heritage course**. A companion program of four **Levels** (Helper, Apprentice, Cook, Chef; §12) is built inside this app, beside Heritage, sharing its families, profiles, food rules, shopping, schedule, and transcript. Heritage stays open to every family. Level 3 is built first.
+**Two programs, one app — Requirement (owner, 2026-10-23).** The 75-lesson course in §4 is **Cook Around the World**, offered and marketed to casual families and adults (owner, 2026-10-23). The **Levels** (Helper, Apprentice, Cook, Chef; §12) are **the homeschool curriculum**, built inside this app beside it, sharing its families, profiles, food rules, shopping, schedule, and transcript. Cook Around the World stays open to every family. Level 3 is built first.
 
 **The beginner track (§11) is replaced by Levels 1 and 2** (owner, 2026-10-23).
 
@@ -139,9 +139,9 @@ Separate from safety levels, which are about who must be in the kitchen. These a
 
 ---
 
-## 4. Curriculum: the Heritage course (75 dishes)
+## 4. Curriculum: Cook Around the World (75 dishes)
 
-**Named the Heritage course** (owner, 2026-10-23), beside the Levels (§12). Everything in this section is unchanged by that.
+**Named Cook Around the World** (owner, 2026-10-23): the course for casual families and adults, beside the Levels, which are the homeschool curriculum (§12). Everything in this section is unchanged by that.
 
 
 Lessons are grouped into units by skill. International and American dishes are mixed within each unit, and breakfast dishes are spread across the units. The tables below are in course order (owner, 2026-10-22): units in order, prerequisites first, easier before harder, and cuisines alternated within each unit. **A lesson's number is its place in that order**, not something stored on the lesson (§4.1). The safety levels below are set in the content. Parents can't change them.
@@ -926,7 +926,7 @@ Families tell the app what they like, the app picks dishes to match, and what it
   - **They leave dishes out.** A dish with a protein the family didn't pick, a skipped cuisine, more heat, more time, or a higher price band than the family's isn't picked for them: not in a pick-one group's default (§4.0), a Level week's recipe (§12), Chef Ruth's suggestions, or a swap. A parent can still open any dish and add it by hand.
   - **A skill is never skipped.** When nothing that teaches a needed skill fits, the app offers the closest fit (fewest preferences missed) with a short note ("None of the julienne dishes fit your tastes yet; this one is closest"), and the gap is counted for the owner (below).
   - **They never touch the hard rule.** Every dish has already passed the unclean-food block (§2.1).
-- **New recipes tie to the teaching** (owner, 2026-10-23). Every recipe added to widen the pool is written as a swap-in for a named skill: a Level week (§12) or a Heritage pick-one group. No recipe is added just to be a recipe.
+- **New recipes tie to the teaching** (owner, 2026-10-23). Every recipe added to widen the pool is written as a swap-in for a named skill: a Level week (§12) or a Cook Around the World pick-one group. No recipe is added just to be a recipe.
   - Lesson files gain `budget` (`$`, `$$`, `$$$`, per serving, set by the owner in the editor; recommendation: no ingredient prices, which would need upkeep) and `heat` (mild, some, spicy). Protein, cuisine, and time already exist.
 - **Data collection for the owner** (owner, 2026-10-23: "build data collection tools to drive it"). A **Recipe gaps** page in the owner screens (§6.2a), counts only, no family named:
   - **Gaps:** for each Level week and each pick-one group, how many families have no fitting dish, and which preference left them short ("Week 11, julienne: 6 families; no beef, skip Chinese").
@@ -1062,7 +1062,7 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `pantry` (family_id, ingredient_id). Kitchen staples
 - `unleavened_dates` (family_id, year, calendar, first_day, unleavened_from, confirmed_at) (§6.20). `calendar` is a standard calendar's id; `first_day` may differ from that calendar's date (a deviation); `confirmed_at` is null until the parent confirms the year
 - `families.tastes` (JSON): the family's answers to Our tastes (§6.21)
-- Level courses (§12) reuse `courses` with a `program` (`heritage` or `level-3`, …); a week's chosen recipe, drill, knowledge, and Sabbath task are checked off per profile in `level_tasks` (family_id, course_id, week, part, profile_id, done_at), and a mastery week's "why it worked" is saved with the cook's reflection
+- Level courses (§12) reuse `courses` with a `program` (`world` or `level-3`, …); a week's chosen recipe, drill, knowledge, and Sabbath task are checked off per profile in `level_tasks` (family_id, course_id, week, part, profile_id, done_at), and a mastery week's "why it worked" is saved with the cook's reflection
 - Stamps, pins, and rank are computed from `attempts` and the content files, not stored separately (**recommendation**; cache them if it gets slow).
 - The lesson library and ingredient registry are content files shared by all families (§7). They are not stored per family.
 
@@ -1102,7 +1102,7 @@ Each phase should be deployed and usable before the next begins.
 | **9. Family recipes** | Folded into 4c (§6.10) | — |
 | **10. Content editor** (owner, 2026-10-23; built 2026-10-23) | The manager section at `/manage` with its owner-only sign-in, and the content editor in it (§7.5): the GitHub token check on `/ops`, the save path (checks, commit to `content-edits`, the workflow that builds, checks, and moves it to `main`, the save status), History and Revert, then the editors: lessons and units first, then registries and the food rules, then pictures | The owner adds a unit, adds a lesson to it, moves an existing lesson into it, and removes a step, all from the browser; each is live for every family after the deploy with no session. A save that breaks a rule is refused with the reason, and Revert puts a lesson back |
 | **11. Unleavened Bread dates** (owner, 2026-10-23) | §6.20: the standard calendars file and its editor, the Getting started and Family settings questions, the yearly ask, the migration, and the swap, schedule, and kitchen changes; the fixed window comes out | Two test families on different calendars, one deviating by a day, see Swap go unleavened-only on their own weeks; a leavened course lesson due in the feast moves past it and doesn't count as behind; a family that hasn't confirmed sees the note |
-| **12. Level 3 Cook** (owner, 2026-10-23: Level 3 first) | §12: the Level program beside Heritage, Level 3's 36 weeks with its four parts, mastery weeks, skill-tagged swap-ins, the Level 3 recipes, Progress and transcript changes | A parent puts a teen on Level 3; the kid cooks week 1's recipe, checks off its drill, knowledge, and Sabbath task; a swap-in replaces a week's recipe; a mastery week asks for "why it worked"; the transcript shows Level 3's hours |
+| **12. Level 3 Cook** (owner, 2026-10-23: Level 3 first) | §12: the Level program beside Cook Around the World, Level 3's 36 weeks with its four parts, mastery weeks, skill-tagged swap-ins, the Level 3 recipes, Progress and transcript changes | A parent puts a teen on Level 3; the kid cooks week 1's recipe, checks off its drill, knowledge, and Sabbath task; a swap-in replaces a week's recipe; a mastery week asks for "why it worked"; the transcript shows Level 3's hours |
 | **13. Tastes and the recipe pool** (owner, 2026-10-23) | §6.21: Our tastes, its use in picks and suggestions, `budget` and `heat` on lessons, the closest-fit rule, and the owner's Recipe gaps page | A family that skips seafood and chooses mild gets no fish week default and a closest-fit note; the owner sees that gap counted and opens a new lesson from it |
 | **Later** | Levels 2, 4, and 1 (§12), mini-courses (§10), More themes: Food Truck and Recipe Scrapbook (§5.2), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system (Print our progress's CSV covers the basics, §6.15) | — |
 
@@ -1121,6 +1121,7 @@ Each phase should be deployed and usable before the next begins.
 ## 10. Open questions
 
 - **Which standard calendars** (one or two) Unleavened Bread dates come from (§6.20). The owner names them; Claude fills `content/calendars.json` from them.
+- **Homeschool mode on Cook Around the World:** with the Levels as the homeschool curriculum, does homeschool mode (grades, transcript, due dates; §6.17) stay available on Cook Around the World, or move to the Levels only? Until the owner decides, it stays as built. The public syllabus page (§6.17) and the landing page (§6.13) will need new wording for the two programs either way.
 - **Mini-courses** (themed short courses such as spicy, all-American, eco-fare): proposed 2026-10-23, then set aside for the Levels. A Level's skill-tagged weeks may cover the same need (run Level 3 as American, Mediterranean, or World Tour).
 
 ---
@@ -1153,10 +1154,10 @@ A separate set of simpler lessons for **kids with no prior cooking experience**,
 
 ## 12. Levels: the companion program — Requirement (owner, 2026-10-23)
 
-Four Levels, built inside this app beside the Heritage course (§1, §4). They teach by skill and food literacy, not by dish, and every Level ends with a Sabbath capstone. **The outlines below are the owner's suggestions** (owner, 2026-10-23), open to change, except where marked Requirement.
+Four Levels, the homeschool curriculum (owner, 2026-10-23), built inside this app beside Cook Around the World (§1, §4). They teach by skill and food literacy, not by dish, and every Level ends with a Sabbath capstone. **The outlines below are the owner's suggestions** (owner, 2026-10-23), open to change, except where marked Requirement.
 
-- **Same app, same rules.** Families, profiles, kid logins, the hard block (§2.1), diet filters, tastes (§6.21), shopping, the weekly schedule and the Sabbath (§6.18), Unleavened Bread dates (§6.20), grades, and the transcript all apply as they do for Heritage.
-- **A profile is on one program at a time:** Heritage or a Level, through its course (§6.18). Siblings can be on different Levels. Heritage stays open to every family (owner, 2026-10-23).
+- **Same app, same rules.** Families, profiles, kid logins, the hard block (§2.1), diet filters, tastes (§6.21), shopping, the weekly schedule and the Sabbath (§6.18), Unleavened Bread dates (§6.20), grades, and the transcript all apply as they do for Cook Around the World.
+- **A profile is on one program at a time:** Cook Around the World or a Level, through its course (§6.18). Siblings can be on different Levels. Cook Around the World stays open to every family (owner, 2026-10-23).
 - **Levels go by what a learner can already do, never by age.** §11's rule stands: the app shows no ages. The ages in the owner's outline (6 to 15 and up) are a guide for writing only.
 - **Build order** (owner, 2026-10-23): **Level 3 first**, then (recommendation) Level 2, Level 4, and Level 1, which needs the most new art and reading-light content.
 
@@ -1173,7 +1174,7 @@ Level 1's "Clean and unclean animals" and Level 2's "Labels and hidden unclean i
 ### 12.2 How a Level week works (from the Level 3 plan, owner, 2026-10-23)
 - **Four parts a week:** a **Recipe** (a full dish that applies the unit's skill, through the usual lesson player, §3), a **Drill** (hands-on practice without a full recipe), **Knowledge** (a reading, worksheet, quiz, or real-world task), and a **Sabbath task** (prep-ahead, holding, or planning for the Sabbath meal). Drill, Knowledge, and Sabbath task are short pages a profile checks off; each counts toward hours (§6.15) by its planned time.
 - **Units of four weeks.** Weeks 1–3 teach and practise. **Week 4 is the mastery check:** the student cooks a different recipe with the same skill without help, then writes why it worked. Progress and the transcript mark each mastered unit.
-- **A week names a skill, and its recipe is a default.** Any recipe tagged with that week's skill can be swapped in (§6.21 picks the best fit for the family's tastes), so a family can run the year as American, Mediterranean, or World Tour. Heritage lessons with the skill count as swap-ins too.
+- **A week names a skill, and its recipe is a default.** Any recipe tagged with that week's skill can be swapped in (§6.21 picks the best fit for the family's tastes), so a family can run the year as American, Mediterranean, or World Tour. Cook Around the World lessons with the skill count as swap-ins too.
 - **Sabbath tasks are done before the Sabbath.** Nothing cooked on the Sabbath counts (§6.18), so a Sabbath task and the capstone count when done Sunday to Friday; serving on the Sabbath is fine.
 - **Leaven:** a leavened week landing on the family's unleavened days (§6.20) is passed over like any leavened lesson, and the Sabbath task that week uses an unleavened bread (A1, §6.19).
 
@@ -1233,5 +1234,5 @@ Level 1's "Clean and unclean animals" and Level 2's "Labels and hidden unclean i
 
 The capstone pulls from every unit: safe temperatures (1), challah (2), knife work (3), an aromatic base (4), a grain or legume (5), a roast or fish (6–7), and soup (8).
 
-- **New recipes:** most Level 3 recipes aren't in Heritage (pico de gallo, tabbouleh, garlic green beans, picadillo, mujaddara, shish taouk, the fish weeks, the stocks, the breads, and others). Each is written as that week's default, tagged with its skill (§6.21). Heritage lessons with the same skill (fish tacos for dicing, minestrone and matzo ball soup for soup, challah) are swap-ins.
+- **New recipes:** most Level 3 recipes aren't in Cook Around the World (pico de gallo, tabbouleh, garlic green beans, picadillo, mujaddara, shish taouk, the fish weeks, the stocks, the breads, and others). Each is written as that week's default, tagged with its skill (§6.21). Cook Around the World lessons with the same skill (fish tacos for dicing, minestrone and matzo ball soup for soup, challah) are swap-ins.
 - **Setup checks the calendar** (§6.20): a course whose Unit 2 would touch the family's unleavened days says so when it's set up.

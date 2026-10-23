@@ -3202,3 +3202,13 @@ into the plan:
   competences), personalization at meal-kit and planning services, Passover
   dates for 2027 to 2029, and studies on spaced practice and cooking
   confidence.
+
+## 127. 2026-10-23 — Plan: Cook Around the World
+
+Design only. The owner renamed the 75-lesson course: it's **Cook Around the
+World**, offered and marketed to casual families and adults, and the Levels
+are the homeschool curriculum. "Heritage" (126) didn't fit a course built
+this month. Plan §1, §4, §6.21, §8.4 (`program` is `world` or `level-3`),
+§9, and §12 updated. New open question (§10): whether homeschool mode stays
+on Cook Around the World or moves to the Levels only; the syllabus and
+landing pages need wording for the two programs either way.
