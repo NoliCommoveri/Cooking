@@ -2403,3 +2403,17 @@ the next was started.
   you're a new user, I'm going to get you all set up! …"), in §6.8 and §6.9.
 - A new family's first visit to her goes straight from her first message into
   Getting started, which ends with the first recipes in each kid's queue.
+
+## 97. 2026-10-23 — Plan: Getting started opens on its own and can't be skipped
+
+- **Owner rulings** (§6.8, §6.9):
+  - A new family goes **straight into Chef Ruth's chat** after sign-up. She
+    floats on the empty locker screen, and **the family name and parent PIN
+    are her first questions**, replacing the "Your family" screen.
+  - **Getting started can't be skipped:** no Never mind, no Maybe later card.
+    Answers are kept if the app closes, and she picks up where she stopped.
+    The lockers and parent screens open once it's done.
+  - Her button says **Chef Ruth**.
+- Still to confirm: optional settings answered with **None for now**; her
+  other first tasks and their order; the parent tour as her Understanding
+  something.
