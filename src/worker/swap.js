@@ -11,8 +11,9 @@
 // Unleavened recipes: the Appointed Times lessons, then other library lessons
 // that pass the leaven check, then parent recipes that pass it (the family's
 // own, and the whole directory). The rest of the year it offers the
-// Appointed Times lessons and every Good for Feast Days recipe. Diet
-// settings apply to all of them.
+// Appointed Times lessons, then the other lessons the owner marked Good for
+// Feast Days, then every Good for Feast Days recipe. Diet settings apply to
+// all of them.
 import { fail, now } from './lib/http.js';
 import { randomHex } from './lib/crypto.js';
 import { requireParent } from './auth.js';
@@ -46,9 +47,9 @@ export async function swapOptions(env, fam, week) {
   const spring = springWeek(week);
   const libOk = (L) => dietView(L, LIBRARY.ingredients, filters).visible;
   const out = [];
-  const lesson = (L, group) => ({ id: L.id, title: L.title, label: LABELS[L.id] ?? null, group, image: L.image, unleavened: Boolean(L.unleavened), feast: seasonal.has(L.id) });
+  const lesson = (L, group) => ({ id: L.id, title: L.title, label: LABELS[L.id] ?? null, group, image: L.image, unleavened: Boolean(L.unleavened), feast: Boolean(L.feast) });
   for (const L of LIBRARY.lessons) if (seasonal.has(L.id) && libOk(L) && (!spring || L.unleavened)) out.push(lesson(L, 'Appointed Times lessons'));
-  if (spring) for (const L of LIBRARY.lessons) if (!seasonal.has(L.id) && libOk(L) && L.unleavened) out.push(lesson(L, 'Other lessons'));
+  for (const L of LIBRARY.lessons) if (!seasonal.has(L.id) && libOk(L) && (spring ? L.unleavened : L.feast)) out.push(lesson(L, 'Other lessons'));
 
   // Parent recipes: the family's own, then the directory. One the family
   // already added from the directory is offered as its own copy.

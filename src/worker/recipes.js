@@ -89,6 +89,8 @@ const summary = (row, filters, { share = null, review = null, source = null } = 
     id: `recipe:${row.id}`, title: row.title, servings: row.servings, totalMinutes: row.total_minutes, mealType: row.meal_type,
     meal: MEAL_TYPES.find(([k]) => k === row.meal_type)?.[1] ?? '', image: `img/meals/${row.meal_type}.svg`,
     visible: recipeVisible(L, filters), unleavened: unleavened(r, REGISTRY, CONTENT.rules.leaven),
+    // Good for Feast Days: shared as a feast-day recipe, or added from one (§6.19).
+    feast: Boolean(share && !share.withdrawn_at && share.kind === 'feast') || Boolean(source && !source.withdrawn_at && !source.hidden_at && source.kind === 'feast'),
     typed_in: r.ingredients.filter((l) => !l.ingredient).length, version: row.version, updated_at: row.updated_at,
     card: recipeCard(r, REGISTRY),
     search: searchText(r),
@@ -120,7 +122,7 @@ const holdReview = (env, fid, hex, version) => env.DB.prepare(`INSERT INTO recip
 async function summaryExtras(env, fid) {
   const shares = (await env.DB.prepare('SELECT * FROM community_recipes WHERE family_id = ?').bind(fid).all()).results;
   const reviews = (await env.DB.prepare('SELECT * FROM recipe_reviews WHERE family_id = ? ORDER BY sent_at, id').bind(fid).all()).results;
-  const sources = (await env.DB.prepare(`SELECT c.id, c.hidden_at, c.withdrawn_at FROM community_recipes c
+  const sources = (await env.DB.prepare(`SELECT c.id, c.kind, c.hidden_at, c.withdrawn_at FROM community_recipes c
       JOIN family_recipes f ON f.source_community_id = c.id WHERE f.family_id = ?`).bind(fid).all()).results;
   return (row) => ({
     share: shares.find((x) => x.family_recipe_id === row.id) ?? null,

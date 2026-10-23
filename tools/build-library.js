@@ -32,6 +32,8 @@ const inCourse = (c) => {
 };
 const seasonalUnits = (c) => c.units.filter((u) => u.seasonal).map((u) => u.number);
 // The Unleavened badge (§6.19), worked out from the lesson file.
+// Good for Feast Days (§6.19): an Appointed Times lesson, or one the owner marked.
+const isFeast = (c, L) => Boolean(L.feast) || seasonalUnits(c).includes(L.unit);
 const isUnleavened = (c, L) => unleavened(L, Object.fromEntries(c.ingredients.map((i) => [i.id, i])), c.rules.leaven);
 
 // What families see: hidden lessons (§7.5) are out of the course, the
@@ -81,7 +83,7 @@ export function buildPublic() {
   // family's own numbers from its course plan instead.
   const summary = c.lessons.map(({ data: L }) => ({
     id: L.id, label: labels[L.id], title: L.title, unit: L.unit, cuisine: L.cuisine, skill: L.skill, skills: L.skills,
-    image: `img/${L.image.replace(/\.png$/, '.webp')}`, unleavened: isUnleavened(c, L),
+    image: `img/${L.image.replace(/\.png$/, '.webp')}`, unleavened: isUnleavened(c, L), feast: isFeast(c, L),
     // The dish card (queue and course screens): from course.json, or the lesson itself for Appointed Times.
     about: L.about ?? dishes[L.id]?.about, main: L.main ?? dishes[L.id]?.main, method: L.method ?? dishes[L.id]?.method, minutes: L.totalMinutes,
   })).sort(inCourse(c));
@@ -124,7 +126,7 @@ export function buildLibrary() {
       id: L.id, version: L.version, track: L.track, unit: L.unit, title: L.title,
       image: `img/${L.image.replace(/\.png$/, '.webp')}`, cuisine: L.cuisine, skill: L.skill,
       servings: L.servings, scaling: L.scaling, totalMinutes: L.totalMinutes, ingredients: lines, substitutions: subs,
-      unleavened: isUnleavened(c, L),
+      unleavened: isUnleavened(c, L), feast: isFeast(c, L),
       // What Chef Ruth offers a family with no course (§6.9).
       protein: mainProtein(L, registry),
     };

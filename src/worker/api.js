@@ -406,7 +406,7 @@ on('GET', '/api/library', async (req, env) => {
       id: L.id, label: labels[L.id], unit: L.unit, title: L.title, image: L.image, cuisine: LIBRARY.cuisines[L.cuisine] ?? L.cuisine,
       skill: L.skill, servings: L.servings, totalMinutes: minutes(L),
       substitutions: view.applied.map((x) => ({ for: name(x.for), use: name(x.use) })),
-      left_out: view.leftOut.map(name), unleavened: L.unleavened,
+      left_out: view.leftOut.map(name), unleavened: L.unleavened, feast: L.feast,
       // The kitchen's search (a name or an ingredient), and the pick-one group
       // its path counts once.
       search: [L.title, L.skill, LIBRARY.cuisines[L.cuisine], ...L.ingredients.map((x) => name(x.ingredient))].join(' ').toLowerCase(),

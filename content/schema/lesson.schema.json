@@ -52,6 +52,7 @@
     "about": { "$ref": "#/$defs/text" },
     "main": { "type": "array", "items": { "$ref": "#/$defs/text" } },
     "method": { "enum": ["stove", "oven", "stove-oven", "no-cook"] },
+    "feast": { "type": "boolean" },
     "title": { "$ref": "#/$defs/text" },
     "image": { "$ref": "#/$defs/text" },
     "cuisine": { "$ref": "#/$defs/id" },

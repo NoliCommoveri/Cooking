@@ -3138,3 +3138,30 @@ the deploy until this is done, so its tables go in the same migration).
 - Tests: 271 (5 new). Checked in a browser at phone width on the dev server:
   the Grades page, grading with the rubric and words, Progress's Grade
   column, Edit details, and the transcript on screen and in print.
+
+## 125. 2026-10-23 — Feast-day badges everywhere, and feast-day course lessons
+
+The owner asked where the Unleavened and Good for Feast Days badges show,
+since the dish card had neither.
+- **Owner rulings (2026-10-23):** both badges go on the dish card and the
+  kitchen cards; the owner will mark some course lessons Good for Feast Days
+  (before this, only shared feast-day recipes and the Appointed Times
+  lessons had it). Plan §6.19 updated.
+- **Lesson field:** `feast: true` on a lesson file (`lesson.schema.json`).
+  In the content editor it's a **Good for Feast Days** checkbox on the
+  lesson's dish card section, not on Appointed Times lessons, which always
+  have it. `tools/build-library.js` gives every lesson `feast` (marked, or in
+  a seasonal unit) in `registry.json` and `library-data.js`.
+- **Swap:** outside February 1 to May 15, the picker now also offers the
+  marked course lessons under "Other lessons", after the Appointed Times
+  lessons. In spring they show only if they're unleavened, as before.
+- **Dish card** (`showDish`): both badges, for lessons, family recipes, and
+  shared recipes, in the swap picker's icon-and-word style.
+- **Kitchen cards:** lesson cards and recipe cards (Our recipes and the
+  User-shared shelf) show Good for Feast Days beside Unleavened.
+  `/api/library` lessons and `/api/recipes` summaries carry `feast`; a
+  family recipe has it when it's shared as a feast-day recipe, or was added
+  from one that's still in the directory.
+- Tests: 272 (1 new). Checked in a browser at phone width on the dev server:
+  the dish card and the kitchen's Appointed Times shelf with both badges. The
+  editor checkbox wasn't opened in a browser.
