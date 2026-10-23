@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [74. 2026-10-23 — The parent menu, and dish cards](docs/build-log.md#74-2026-10-23--the-parent-menu-and-dish-cards)
+**Latest build log entry:** [75. 2026-10-23 — Phase 4c, slice 3: sharing, reviews, and User-shared recipes](docs/build-log.md#75-2026-10-23--phase-4c-slice-3-sharing-reviews-and-user-shared-recipes)
 
 ## Current features
 
@@ -33,11 +33,13 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Lesson numbers** (`src/content/course.js`): come from the course order; pick-one choices share a number (1a, 1b, 1c), 59 in all.
 - **Appointed Times unit** (unit 8 in `content/units.json`): lessons beside the numbered course, labeled A1, A2: unleavened flatbread and cottage cheese crescent rolls so far.
 - **Family recipes** (Parents → Recipes, `src/content/recipe.js`, `src/worker/recipes.js`): a parent adds the family's own recipes one thing at a time (basics, ingredients from the list or typed in, tools, steps with safety levels and timers, meal type, a "why we make this" card, then review). The same unclean-food and food-safety checks as lessons; a wash-hands step is added after raw food. They show on an "Our recipes" shelf in every kitchen and can be queued, shopped for, and cooked like lessons. Only that family sees them.
+- **Sharing recipes** (`src/worker/sharing.js`): a parent shares a recipe as General or Feast day. One from our ingredient list goes straight into **User-shared recipes**, with no family named; a typed-in ingredient waits for the owner's review; a feast-day recipe flagged for leaven gets the owner's notice with Send for review and Share recipe. Any family can search the directory, add a recipe to its own, and report one.
+- **Owner: Recipe reviews and Reported recipes**: clear or decline a review (deciding the Unleavened badge), and hide or unhide any shared recipe.
 - **Unleavened badge** (`src/content/leaven.js`, `content/rules/leaven.json`): on every lesson whose ingredients and steps have no leaven.
 - **Parent menu**: every parent screen behind one Menu button, in groups: Learning path, Recipes, Setup, and Owner (the owner only).
 - **Dish cards**: on the queue and course screens, a dish's name opens a card with a line about it, its main ingredients, how it cooks, and the time.
 - **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN.
-- **Owner screens**: the beta word, the family list, setting a parent's password, and fix requests.
+- **Owner screens**: the beta word, the family list, setting a parent's password, fix requests, recipe reviews, and reported recipes.
 - **Ops page** (`/ops`): migrations, the owner flag, backup download and restore, clear everything, and remove or restore one family.
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
 - **Dish illustrations** (`content/images/dishes/`): one picture for each of the 75 lessons.

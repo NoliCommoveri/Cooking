@@ -97,11 +97,21 @@ function* texts(r) {
   for (const [i, s] of r.steps.entries()) if (s.target?.look) yield [`step ${i + 1}`, s.target.look];
 }
 
+// Every blocked word in a recipe's text (§2.1), each once.
+export function blockedWords(r, rules) {
+  const out = new Set();
+  for (const [, t] of texts(r)) for (const w of blockedWordsIn(t, rules)) out.add(w);
+  return [...out];
+}
+
 // What's wrong with a recipe, as sentences a parent can act on. Empty means it
 // can be saved. ctx: { ingredients, equipment (registry maps), rules }.
 // The hard block (CLAUDE.md, §2.1) has no exception: a registry ingredient is
 // checked by species, and every word goes through the blocked-word scan.
-export function recipeProblems(r, ctx) {
+// `cleared` is the words the owner's review found to be a false alarm in this
+// recipe ("crab apple"), the only thing a review can clear (§6.10). A
+// registry ingredient that fails the species check is never clearable.
+export function recipeProblems(r, ctx, { cleared = [] } = {}) {
   const out = [];
   const add = (m) => { if (!out.includes(m)) out.push(m); };
   if (!r.title) add('Give the recipe a title.');
@@ -113,7 +123,7 @@ export function recipeProblems(r, ctx) {
   if (!r.steps.length) add('Add at least one step.');
 
   // the hard block
-  for (const [where, t] of texts(r)) for (const w of blockedWordsIn(t, ctx.rules)) add(`${where[0].toUpperCase()}${where.slice(1)} names "${w}", which is an unclean food. It can't be in any recipe.`);
+  for (const [where, t] of texts(r)) for (const w of blockedWordsIn(t, ctx.rules)) if (!cleared.includes(w)) add(`${where[0].toUpperCase()}${where.slice(1)} names "${w}", which is an unclean food. It can't be in any recipe.`);
   for (const [i, l] of r.ingredients.entries()) {
     const at = `Ingredient ${i + 1}`;
     if (l.ingredient) {

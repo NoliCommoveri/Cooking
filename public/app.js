@@ -383,7 +383,7 @@ async function kitchen(id) {
         el('p', { class: 'p-lessonno' }, 'Family recipe'), el('h3', { class: 'p-title' }, r.title),
         el('div', { class: 'p-meta' }, meta.map((m) => el('span', {}, m))), marks);
   };
-  const shown = recipes.filter((r) => r.visible);
+  const shown = recipes.filter((r) => r.visible && !r.held);
   const ours = shown.length ? [
     el('h2', { class: 'k-unit' }, 'Our recipes'),
     el('div', { class: 'k-lib' }, shown.map((r) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${r.title}`, onclick: () => go(`#/kitchen/${p.id}/${r.id}`) }, recipeCard(r)))),
@@ -544,12 +544,15 @@ const PARENT_PAGES = [
   { key: 'pantry', group: 'learning', label: 'Kitchen staples' },
   { key: 'progress', group: 'learning', label: 'Progress' },
   { key: 'recipes', group: 'recipes', label: 'Our recipes' },
+  { key: 'shared', group: 'recipes', label: 'User-shared recipes' },
   { key: 'courses', group: 'setup', label: 'Courses' },
   { key: 'profiles', group: 'setup', label: 'Profiles' },
   { key: 'family', group: 'setup', label: 'Family settings' },
   { key: 'parents', group: 'setup', label: 'Logins & PIN' },
   { key: 'owner', group: 'owner', label: 'Families & beta word', owner: true },
   { key: 'fixes', group: 'owner', label: 'Fix requests', owner: true },
+  { key: 'reviews', group: 'owner', label: 'Recipe reviews', owner: true },
+  { key: 'reports', group: 'owner', label: 'Reported recipes', owner: true },
 ];
 
 function parentMenu(current) {
@@ -727,6 +730,9 @@ async function showDish(id) {
   if (/^recipe:/.test(id)) {
     const r = await api('GET', `/api/recipes/${id.slice(7)}`);
     d = { title: r.title, image: r.image, minutes: r.totalMinutes, cuisine: 'Family recipe', ...r.card };
+  } else if (/^shared:/.test(id)) {
+    const r = await api('GET', `/api/shared/${id.slice(7)}`);
+    d = { title: r.title, image: r.image, minutes: r.totalMinutes, cuisine: 'User-shared recipe', ...r.card };
   } else {
     const [C, R] = await Promise.all([courseCache ??= fetch('/content/course.json').then((x) => x.json()), contentRegistry()]);
     const L = R.lessons.find((x) => x.id === id), c = C.dishes.find((x) => x.id === id);
@@ -1386,25 +1392,183 @@ function parseAmount(v) {
   return Number(t);
 }
 
+// The owner's wording for the leaven flag (§6.10).
+const LEAVEN_NOTICE = 'Our automated ingredients checker flagged this as possibly containing leaven, so it will not be presented as an appropriate option for the spring Appointed Time. If you disagree and would like a human review, please click the "Send for review" button.';
+const TYPED_NOTICE = 'This recipe has an ingredient that isn\'t in our ingredient list, so a person checks it before it\'s shared. Please click the "Send for review" button.';
+const blockedNotice = (words) => `Our automated ingredients checker flagged this as possibly containing an unclean food (${words.join(', ')}), so it can't be saved or shared yet. If it's a false alarm and you would like a human review, please click the "Send for review" button.`;
+const badge = (icon, word) => el('span', { class: 'badge' }, art(`<svg class="ico" aria-hidden="true"><use href="/icons.svg#${icon}"/></svg>`), word);
+
 const parentRecipes = parentOnly(async (flash) => {
   const { recipes } = await api('GET', '/api/recipes');
   const again = (msg, undo) => parentRecipes(el('p', { class: 'ok flash', role: 'status' }, msg, ' ',
     undo ? el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await undo(); parentRecipes(); } }, 'Undo') : null));
+  const hex = (r) => r.id.slice(7);
+  // Where a recipe stands: held, shared, or what came of its review.
+  const status = (r) => {
+    const out = [];
+    if (r.held) out.push('Waiting on a review before it can be cooked or shared');
+    if (r.shared) out.push(r.shared.hidden ? 'Shared, but taken out of the directory by the owner' : `Shared as ${r.shared.kind === 'feast' ? 'a feast-day recipe' : 'a general recipe'}`);
+    if (r.review?.status === 'pending' && !r.held) out.push('Sent for review');
+    if (r.review?.status === 'declined') out.push(`Review declined: "${r.review.owner_reply}"`);
+    if (r.source_hidden) out.push('Added from User-shared recipes; it has since been taken out of the directory');
+    return out;
+  };
   parentScreen('recipes', flash ?? null,
     el('div', { class: 'card' },
-      el('h2', {}, 'Our recipes'),
-      el('p', { class: 'mut' }, "Your family's own recipes. They show in every profile's kitchen and cook in the same player as the lessons. Only your family sees them."),
+      el('p', { class: 'mut' }, "Your family's own recipes. They show in every profile's kitchen and cook in the same player as the lessons. Only your family sees them, unless you share one."),
       recipes.length
-        ? el('div', { class: 'rows' }, recipes.map((r) => el('div', { class: 'rowi' },
-          el('div', {}, el('b', {}, r.title), el('small', {}, [r.meal, `serves ${r.servings}`, `${r.totalMinutes} min`, r.unleavened ? 'Unleavened' : null, r.visible ? null : 'hidden by your diet settings'].filter(Boolean).join(' · '))),
+        ? el('div', { class: 'rows' }, recipes.map((r) => el('div', { class: 'rowi stacked' },
+          el('div', {},
+            el('b', {}, el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(r.id) }, r.title)),
+            el('small', {}, [r.meal, `serves ${r.servings}`, `${r.totalMinutes} min`, r.visible ? null : 'hidden by your diet settings'].filter(Boolean).join(' · ')),
+            r.unleavened || r.shared?.kind === 'feast' ? el('div', { class: 'badges' }, r.unleavened ? badge('i-unleavened', 'Unleavened') : null, r.shared?.kind === 'feast' ? badge('i-feast', 'Good for Feast Days') : null) : null,
+            status(r).map((t) => el('small', {}, t))),
           el('div', { class: 'acts' },
-            el('a', { class: 'hbtn', href: `#/parent/recipes/${r.id.slice(7)}` }, 'Edit'),
+            el('a', { class: 'hbtn', href: `#/parent/recipes/${hex(r)}` }, 'Edit'),
+            r.held ? null : r.shared && !r.shared.hidden
+              ? actBtn('Stop sharing', '', async () => { await api('DELETE', `/api/recipes/${hex(r)}/share`); again(`${r.title} is out of the directory.`); })
+              : actBtn('Share', '', () => shareRecipe(r)),
             actBtn('Delete', 'bad', async () => {
-              await api('DELETE', `/api/recipes/${r.id.slice(7)}`);
-              again(`Deleted ${r.title}.`, () => api('POST', `/api/recipes/${r.id.slice(7)}/restore`));
+              await api('DELETE', `/api/recipes/${hex(r)}`);
+              again(`Deleted ${r.title}.`, () => api('POST', `/api/recipes/${hex(r)}/restore`));
             })))))
         : el('p', {}, 'No recipes yet.'),
-      el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: '#/parent/recipes/new' }, 'Add a recipe'))));
+      el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: '#/parent/recipes/new' }, 'Add a recipe'), el('a', { class: 'hbtn', href: '#/parent/shared' }, 'User-shared recipes'))));
+});
+
+// Share a recipe (§6.10): General or Feast day, then the routine's answer.
+function shareRecipe(r) {
+  const hex = r.id.slice(7);
+  return new Promise((resolve) => {
+    const box = el('div', { class: 'card' });
+    const fill = (...kids) => box.replaceChildren(...kids.filter(Boolean));
+    const close = () => { ov.remove(); resolve(); parentRecipes(); };
+    const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': `Share ${r.title}` }, box);
+    const closeBtn = el('button', { type: 'button', class: 'hbtn', onclick: close }, 'Close');
+    let kind = 'general';
+    const reviewBtn = (reason, review) => {
+      const sent = review === 'pending';
+      const b = el('button', { type: 'button', class: 'hbtn', disabled: sent }, sent ? 'Sent for review' : 'Send for review');
+      b.addEventListener('click', async () => {
+        b.disabled = true;
+        try { await api('POST', `/api/recipes/${hex}/review`, { reason, kind }); b.textContent = 'Sent for review'; } catch (err) { showToast(err.message); b.disabled = false; }
+      });
+      return b;
+    };
+    const answer = (res) => {
+      if (res.status === 'shared') {
+        fill(el('h2', {}, 'Shared'), el('p', {}, `${r.title} is in User-shared recipes${res.unleavened ? ', with the Unleavened badge' : ''}${kind === 'feast' ? ' and Good for Feast Days' : ''}.`), el('div', { class: 'acts' }, closeBtn));
+      } else if (res.status === 'needs_review') {
+        fill(el('h2', {}, 'A review first'), el('p', {}, TYPED_NOTICE),
+          res.review === 'declined' ? el('p', { class: 'err' }, `The last review was declined: "${res.reply}"`) : null,
+          el('div', { class: 'acts' }, reviewBtn('typed_in', res.review), closeBtn));
+      } else if (res.status === 'leaven_flag') {
+        const shareBtn = actBtn('Share recipe', 'pri', async () => answer(await api('POST', `/api/recipes/${hex}/share`, { kind, without_badge: true })));
+        fill(el('h2', {}, 'Possibly leavened'), el('p', {}, LEAVEN_NOTICE),
+          res.found?.length ? el('p', { class: 'mut small' }, `It found: ${res.found.join(', ')}.`) : null,
+          res.review === 'declined' ? el('p', { class: 'err' }, `The last review was declined: "${res.reply}"`) : null,
+          el('div', { class: 'acts' }, reviewBtn('leaven', res.review), shareBtn, closeBtn));
+      }
+    };
+    box.append(el('h2', {}, `Share ${r.title}`),
+      el('p', {}, 'It goes into User-shared recipes for every family, with nothing that says who shared it.'),
+      el('fieldset', {}, el('legend', {}, 'Share it as'),
+        el('div', { class: 'grid2' }, [['general', 'General'], ['feast', 'Feast day']].map(([k, v]) => el('label', { class: 'choice' },
+          el('input', { type: 'radio', name: 'kind', value: k, checked: k === kind, onchange: () => { kind = k; } }), el('span', {}, v))))),
+      el('div', { class: 'acts' }, actBtn('Share', 'pri', async () => answer(await api('POST', `/api/recipes/${hex}/share`, { kind }))), closeBtn));
+    document.body.append(ov);
+  });
+}
+
+// User-shared recipes (§6.10): the directory every family can search and add from.
+const sharedDirectory = parentOnly(async (flash, opts = {}) => {
+  const q = opts.q ?? '', feast = Boolean(opts.feast);
+  const { recipes } = await api('GET', `/api/shared?q=${encodeURIComponent(q)}${feast ? '&feast=1' : ''}`);
+  const reload = (msg) => sharedDirectory(msg ? el('p', { class: 'ok flash', role: 'status' }, msg) : null, { q: search.value, feast: feastBox.checked });
+  const search = el('input', { type: 'search', value: q, placeholder: 'Search by name or ingredient', 'aria-label': 'Search' });
+  const feastBox = el('input', { type: 'checkbox', checked: feast });
+  const shown = recipes.filter((r) => r.visible);
+  parentScreen('shared', flash ?? null,
+    el('form', { class: 'card', onsubmit: (e) => { e.preventDefault(); reload(); } },
+      el('div', { class: 'acts' }, el('div', { class: 'grow' }, search), el('button', { class: 'hbtn pri', type: 'submit' }, 'Search')),
+      el('label', { class: 'choice' }, feastBox, el('span', {}, 'Good for Feast Days only'))),
+    el('div', { class: 'card' },
+      shown.length ? el('div', { class: 'rows' }, shown.map((r) => el('div', { class: 'rowi with-av' },
+        el('img', { src: r.image, alt: '', width: 56, height: 56 }),
+        el('div', {},
+          el('b', {}, el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(`shared:${r.id}`) }, r.title)),
+          el('small', {}, [r.meal, `serves ${r.servings}`, `${r.totalMinutes} min`, r.mine ? 'shared by your family' : null].filter(Boolean).join(' · ')),
+          r.unleavened || r.feast ? el('div', { class: 'badges' }, r.unleavened ? badge('i-unleavened', 'Unleavened') : null, r.feast ? badge('i-feast', 'Good for Feast Days') : null) : null),
+        el('div', { class: 'acts' },
+          r.mine ? null : r.added ? el('small', { class: 'mut' }, 'In our recipes') : actBtn('Add to our recipes', '', async () => { await api('POST', `/api/shared/${r.id}/add`); reload(`${r.title} is in your recipes.`); }),
+          r.mine ? null : actBtn('Report', '', () => reportShared(r, reload)),
+          me.parent.is_owner ? actBtn('Hide', 'bad', async () => { await api('POST', `/api/owner/shared/${r.id}/hide`); reload(`Hid ${r.title}. Reported recipes has Unhide.`); }) : null))))
+        : el('p', {}, recipes.length ? "Nothing here fits your family's diet settings." : 'No recipes yet.')));
+});
+
+// Report a shared recipe: what's wrong, in a few words.
+function reportShared(r, done) {
+  return new Promise((resolve) => {
+    const kinds = { unclean: 'Unclean ingredient', safety: 'Food-safety problem', wrong: 'Wrong or unclear', inappropriate: 'Inappropriate', other: 'Something else' };
+    const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': `Report ${r.title}` });
+    const close = () => { ov.remove(); resolve(); };
+    ov.append(form([
+      el('h2', {}, `Report ${r.title}`),
+      el('label', { class: 'f' }, 'What kind of problem', el('select', { name: 'kind' }, Object.entries(kinds).map(([k, v]) => el('option', { value: k }, v)))),
+      el('label', { class: 'f' }, "What's wrong", el('textarea', { name: 'note', rows: 4, maxlength: 1000 })),
+    ], 'Send report', async (v) => {
+      await api('POST', `/api/shared/${r.id}/report`, v);
+      close();
+      done('Report sent. Thank you.');
+    }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: close }, 'Cancel')] }));
+    document.body.append(ov);
+  });
+}
+
+// ---------- the owner's recipe screens (§6.2a) ----------
+
+const ownerReviews = parentOnly(async (flash) => {
+  const { reviews } = await api('GET', '/api/owner/recipe-reviews');
+  const again = (msg) => ownerReviews(el('p', { class: 'ok flash', role: 'status' }, msg));
+  const REASONS = { typed_in: 'A typed-in ingredient', leaven: 'Flagged for leaven (feast day)', hard_block: 'A blocked word, sent as a false alarm' };
+  const line = (l) => `${l.amount == null ? l.text : `${l.amount} ${l.unit}`} ${l.name ?? l.ingredient}${l.prep ? `, ${l.prep}` : ''}`;
+  parentScreen('reviews', flash ?? null,
+    reviews.length ? reviews.map((v) => {
+      const unlv = el('input', { type: 'checkbox', checked: v.reason === 'leaven' });
+      const note = el('input', { maxlength: 500, placeholder: 'A note for the family' });
+      return el('div', { class: 'card' },
+        el('h2', {}, v.title),
+        el('p', {}, el('b', {}, REASONS[v.reason]), ` · to share as ${v.kind === 'feast' ? 'a feast-day recipe' : 'a general recipe'}${v.stale ? ' · edited since it was sent' : ''}`),
+        v.blocked.length ? el('p', {}, 'Blocked words: ', el('b', {}, v.blocked.join(', '))) : null,
+        v.typed_in.length ? el('p', {}, 'Typed in: ', el('b', {}, v.typed_in.join(', '))) : null,
+        v.leaven.length ? el('p', {}, 'Leaven check found: ', el('b', {}, v.leaven.join(', '))) : null,
+        el('details', {}, el('summary', {}, 'The whole recipe'),
+          el('ul', {}, v.recipe.ingredients.map((l) => el('li', {}, line(l)))),
+          el('ol', {}, v.recipe.steps.map((st) => el('li', {}, st.text)))),
+        v.reason === 'hard_block' ? el('p', { class: 'mut small' }, 'Clear it only if the word is a false alarm. A review never lets unclean food through.') : el('label', { class: 'choice' }, unlv, el('span', {}, 'Give it the Unleavened badge')),
+        el('label', { class: 'f' }, 'Note', note),
+        el('div', { class: 'acts' },
+          actBtn('Clear', 'pri', async () => { await api('POST', `/api/owner/recipe-reviews/${v.id}/clear`, { unleavened: unlv.checked, note: note.value }); again(`Cleared ${v.title}.`); }),
+          actBtn('Decline', 'bad', async () => { await api('POST', `/api/owner/recipe-reviews/${v.id}/decline`, { note: note.value }); again(`Declined ${v.title}.`); })));
+    }) : el('div', { class: 'card' }, el('p', {}, 'No recipes waiting.')));
+});
+
+const ownerReports = parentOnly(async (flash) => {
+  const d = await api('GET', '/api/owner/recipe-reports');
+  const again = (msg) => ownerReports(el('p', { class: 'ok flash', role: 'status' }, msg));
+  parentScreen('reports', flash ?? null,
+    el('div', { class: 'card' }, el('h2', {}, 'Reports'),
+      d.reports.length ? el('div', { class: 'rows' }, d.reports.map((r) => el('div', { class: 'rowi' },
+        el('div', {}, el('b', {}, el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(`shared:${r.recipe_id}`) }, r.title)), el('small', {}, `${r.kind} · ${fmtDay(r.created_at.slice(0, 10))}`), el('p', { style: 'margin:4px 0 0' }, r.note)),
+        el('div', { class: 'acts' },
+          actBtn('Hide', 'bad', async () => { await api('POST', `/api/owner/shared/${r.recipe_id}/hide`); again(`Hid ${r.title}.`); }),
+          actBtn('Dismiss', '', async () => { await api('POST', `/api/owner/recipe-reports/${r.id}/dismiss`); again('Dismissed.'); })))))
+        : el('p', {}, 'No open reports.')),
+    el('div', { class: 'card' }, el('h2', {}, 'Hidden recipes'),
+      d.hidden.length ? el('div', { class: 'rows' }, d.hidden.map((c) => el('div', { class: 'rowi' },
+        el('div', {}, el('b', {}, c.title), el('small', {}, `Hidden ${fmtDay(c.hidden_at.slice(0, 10))}`)),
+        el('div', { class: 'acts' }, actBtn('Unhide', '', async () => { await api('POST', `/api/owner/shared/${c.id}/unhide`); again(`${c.title} is back in the directory.`); })))))
+        : el('p', {}, 'Nothing hidden.')));
 });
 
 // The guided entry flow: one thing at a time (§6.10). The draft is kept on
@@ -1519,12 +1683,21 @@ const recipeEditor = parentOnly(async (rid) => {
     // 6. review: the server's checks, then save
     () => {
       const box = el('div', {}, el('p', { class: 'mut' }, 'Checking…'));
-      api('POST', '/api/recipes/check', D).then((c) => {
+      api('POST', '/api/recipes/check', { ...D, id: existing ? rid : undefined }).then((c) => {
         const r = c.recipe;
         box.replaceChildren(
-          c.problems.length
-            ? el('div', { class: 'card notice', role: 'alert' }, el('h3', {}, 'A few things to fix first'), el('ul', {}, c.problems.map((p) => el('li', {}, p))))
-            : el('p', { class: 'ok' }, 'Everything checks out.'),
+          // Only a blocked word wrong: it may be a false alarm, for the owner to review (§6.10).
+          c.reviewable
+            ? el('div', { class: 'card notice', role: 'alert' }, el('p', {}, blockedNotice(c.blocked)),
+              el('div', { class: 'acts' }, actBtn('Send for review', '', async () => {
+                const res = existing ? await api('PUT', `/api/recipes/${rid}`, { ...D, send_for_review: true }) : await api('POST', '/api/recipes', { ...D, send_for_review: true });
+                try { sessionStorage.removeItem(draftKey); } catch { /* nothing kept */ }
+                parentRecipes(el('p', { class: 'ok flash', role: 'status' }, `Saved ${r.title} and sent it for review. It can be cooked once it's cleared.`));
+                return res;
+              })))
+            : c.problems.length
+              ? el('div', { class: 'card notice', role: 'alert' }, el('h3', {}, 'A few things to fix first'), el('ul', {}, c.problems.map((p) => el('li', {}, p))))
+              : el('p', { class: 'ok' }, 'Everything checks out.'),
           el('h3', {}, r.title || 'Untitled'),
           el('p', { class: 'mut' }, `Serves ${r.servings} · ${r.totalMinutes} min`),
           el('ul', {}, r.ingredients.map((l) => el('li', {}, `${l.amount == null ? l.text : `${[8, 3].some((d) => Math.abs(l.amount * d - Math.round(l.amount * d)) < 1e-6) && !/^0$/.test(mixed(l.amount)) ? mixed(l.amount) : l.amount} ${unitLabel(l.unit, l.ingredient)}`} ${l.ingredient ? R.ingredients[l.ingredient]?.name.toLowerCase() : l.name}${l.prep ? `, ${l.prep}` : ''}${l.optional ? ' (optional)' : ''}`))),
@@ -1579,6 +1752,9 @@ async function route() {
       if (sub === 'courses' && extra) return await courseEditor(extra);
       if (sub === 'recipes' && extra) return await recipeEditor(extra);
       if (sub === 'recipes') return await parentRecipes();
+      if (sub === 'shared') return await sharedDirectory();
+      if (sub === 'reviews') return await ownerReviews();
+      if (sub === 'reports') return await ownerReports();
       if (sub === 'courses') return await courseList();
       if (sub === 'queue') return await parentQueue();
       if (sub === 'shopping' && extra === 'new') return await shoppingPreview(parts[3]);

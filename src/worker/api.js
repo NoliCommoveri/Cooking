@@ -19,6 +19,7 @@ import { register as registerPlan, markCooked, tzOf } from './plan.js';
 import { localDay, isSabbath } from './schedule.js';
 import { register as registerShopping } from './shopping.js';
 import { register as registerRecipes, lessonFor, recipeNames } from './recipes.js';
+import { register as registerSharing } from './sharing.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -752,6 +753,7 @@ on('POST', '/api/owner/parent-password', async (req, env, body) => {
 registerPlan(on);
 registerShopping(on);
 registerRecipes(on);
+registerSharing(on);
 
 // ---------- dispatch ----------
 

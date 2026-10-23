@@ -1856,3 +1856,47 @@ on it.
     its about line from the "why we make this" card.
 - Tests: 185. Checked in a browser: the menu, its groups, and the cards on
   the queue and the course plan.
+
+## 75. 2026-10-23 — Phase 4c, slice 3: sharing, reviews, and User-shared recipes
+
+- **Sharing** (`src/worker/sharing.js`, §6.10): Share on a recipe asks
+  General or Feast day, then runs the routine:
+  - every ingredient from our list: shared at once, with the Unleavened badge
+    if it earns one and Good for Feast Days if shared as a feast-day recipe;
+  - a typed-in ingredient: a notice with only Send for review; a cleared
+    review shares it, with the badge the owner decides;
+  - a feast-day recipe flagged for leaven (ingredients or step text): the
+    owner's notice word for word, with Send for review (greyed once sent,
+    "Sent for review") and Share recipe, which shares it without the badge;
+    both can be pressed, and clearing the review gives the badge;
+  - a blocked word: the entry flow's Review shows a matching notice and Send
+    for review, which saves the recipe **held** (it can't be cooked, queued,
+    or shared). Clearing it frees the recipe and remembers those words as a
+    false alarm in that recipe only (`cleared_words`); a new blocked word in
+    an edit is refused again. Any other problem beside a blocked word can't
+    be sent, and an unclean registry ingredient never can.
+  - Stop sharing withdraws a recipe; deleting one withdraws it too. An edit
+    after a review needs another review (reviews carry the recipe's version).
+- **User-shared recipes** (Recipes → User-shared recipes): every family's
+  shared recipes, with no family named, filtered by the family's diet
+  settings; search, Good for Feast Days only, the dish card, Add to our
+  recipes (a copy of its own, which keeps the cleared words), and Report
+  (unclean, food safety, wrong, inappropriate, other; unclean and food-safety
+  reports email the owner through Resend).
+- **Owner** (Menu → Owner): Recipe reviews (what was flagged, the whole
+  recipe, the Unleavened badge choice, a note, Clear or Decline) and Reported
+  recipes (open reports with Hide or Dismiss, and every hidden recipe with
+  Unhide). The owner can also Hide any recipe from the directory. Hiding is
+  never undone by the family sharing again. A family's copy of a hidden
+  recipe stays, with a note on Our recipes.
+- Our recipes shows each recipe's badges and where it stands (held, shared,
+  sent for review, a declined review's note).
+- **Migration 0011** adds `recipe_reviews`, `community_recipes`, and
+  `recipe_reports`, and `held` and `cleared_words` on `family_recipes`.
+  **The owner presses Apply pending on `/ops`** after this deploys.
+- **Not built:** a User-shared recipes shelf in the kids' kitchen under
+  Appointed Times; for now a parent adds a shared recipe to Our recipes to
+  cook it. The swap (slice 4) will offer the directory.
+- Tests: 193 (the routine's four paths, both buttons, clearing and declining,
+  held recipes and cleared words, scoping, Report with the email, Hide and
+  Unhide, withdraw and delete). Checked in a browser.
