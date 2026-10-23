@@ -3,9 +3,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { makeEnv, client, family, opsClient } from './helpers/worker.js';
-import { migrationStatus, applyPending, schemaVersion } from '../src/worker/migrate.js';
+import { migrationStatus, applyPending, schemaVersion, reapplyDraft, finalizeDraft, checkDraft } from '../src/worker/migrate.js';
 import { MIGRATIONS } from '../src/worker/migrations/index.js';
-import { exportAll, importAll, clearEverything, exportFamily, removeFamily, restoreFamily, tableNames, Refused } from '../src/worker/backup.js';
+import { exportAll, importAll, clearEverything, exportFamily, removeFamily, restoreFamily, tableNames, importDraftTables, Refused } from '../src/worker/backup.js';
+import { nextReleaseOn } from '../src/worker/release.js';
 import { makeDb } from './helpers/d1.js';
 
 test('migrations apply in order, once, and report their state', async () => {
@@ -14,7 +15,7 @@ test('migrations apply in order, once, and report their state', async () => {
   const first = await applyPending(db);
   assert.equal(first.halted, false);
   assert.equal(first.log.length, MIGRATIONS.length);
-  assert.ok((await migrationStatus(db)).every((m) => m.state === 'applied'));
+  assert.ok((await migrationStatus(db)).every((m) => m.state === (m.draft ? 'draft' : 'applied')));
   assert.equal((await applyPending(db)).log.length, 0);
   assert.equal(await schemaVersion(db), MIGRATIONS.at(-1).id);
 });
@@ -45,7 +46,7 @@ test('a failing migration lands nothing and stops the run', async () => {
 test('every family table carries family_id', async () => {
   const db = makeDb();
   await applyPending(db);
-  const ownerLevel = new Set(['_migrations', 'families', 'signup_verifications', 'settings', 'lesson_patches', 'content_saves']);
+  const ownerLevel = new Set(['_migrations', '_drafts', 'families', 'signup_verifications', 'settings', 'lesson_patches', 'content_saves']);
   for (const t of await tableNames(db)) {
     if (ownerLevel.has(t)) continue;
     const cols = (await db.prepare(`PRAGMA table_info("${t}")`).all()).results.map((c) => c.name);
@@ -207,4 +208,98 @@ test('the API says the database is not ready before migrations', async () => {
   const login = { email: 'a@example.com', password: 'password123' };
   assert.equal((await client(env).post('/api/login', login)).status, 503);
   assert.equal((await client({ ...env, DB: undefined }).post('/api/login', login)).status, 503);
+});
+
+// ---------- the next release (plan §8.6) ----------
+
+const BASE = [{ id: '0001', name: 'base', sql: 'CREATE TABLE families (id TEXT PRIMARY KEY);' }];
+const draftList = (sql) => [...BASE, { id: '0002', name: 'next', sql, draft: true }];
+
+test('a draft may only create new tables and indexes on them', () => {
+  assert.deepEqual(checkDraft('CREATE TABLE a (x); CREATE INDEX ai ON a (x);', [], ['families']).problems, []);
+  assert.equal(checkDraft('ALTER TABLE families ADD COLUMN x TEXT;').problems.length, 1);
+  assert.equal(checkDraft('CREATE TABLE families (id TEXT);', [], ['families']).problems.length, 1, 'not an existing table');
+  assert.equal(checkDraft('CREATE INDEX fi ON families (id);', [], ['families']).problems.length, 1, 'no index on an existing table');
+  assert.deepEqual(checkDraft('CREATE TABLE a (x);', ['a'], ['a']).problems, [], 'its own table again, on re-apply');
+});
+
+test('a draft is edited in place: re-apply rebuilds its tables, finalize freezes it', async () => {
+  const db = makeDb();
+  const v1 = draftList('CREATE TABLE tastes (family_id TEXT, likes TEXT);');
+  await applyPending(db, v1);
+  assert.equal((await migrationStatus(db, v1))[1].state, 'draft');
+  await db.prepare("INSERT INTO tastes VALUES ('f1', 'beef')").run();
+  const backup = await exportAll(db);
+
+  // A refused draft changes nothing.
+  const bad = draftList('CREATE TABLE tastes (family_id TEXT); ALTER TABLE families ADD COLUMN x TEXT;');
+  assert.equal((await reapplyDraft(db, '0002', bad)).ok, false);
+  assert.equal((await db.prepare('SELECT COUNT(*) AS n FROM tastes').first()).n, 1);
+
+  const v2 = draftList('CREATE TABLE tastes (family_id TEXT, likes TEXT, spice TEXT); CREATE TABLE gaps (n INTEGER);');
+  assert.equal((await migrationStatus(db, v2))[1].state, 'draft-edited', 'an edit is not drift');
+  const res = await reapplyDraft(db, '0002', v2);
+  assert.equal(res.ok, true);
+  assert.deepEqual(res.created, ['tastes', 'gaps']);
+  assert.equal((await migrationStatus(db, v2))[1].state, 'draft');
+  assert.equal((await db.prepare('SELECT COUNT(*) AS n FROM tastes').first()).n, 0, 'preview rows go');
+  assert.ok((await tableNames(db)).includes('families'), 'tables from before are untouched');
+
+  // Restore draft tables puts the rows back from the earlier export.
+  await importDraftTables(db, backup, ['tastes', 'gaps']);
+  assert.equal((await db.prepare("SELECT likes FROM tastes WHERE family_id = 'f1'").first()).likes, 'beef');
+  await assert.rejects(importDraftTables(db, backup, ['tastes']), Refused, 'only into empty tables');
+
+  // A table dropped from the draft goes on re-apply.
+  const v3 = draftList('CREATE TABLE tastes (family_id TEXT, likes TEXT);');
+  await reapplyDraft(db, '0002', v3);
+  assert.ok(!(await tableNames(db)).includes('gaps'));
+
+  assert.equal(await finalizeDraft(db, '0002', v2), false, 'an edited draft is re-applied first');
+  assert.equal(await finalizeDraft(db, '0002', v3), true);
+  assert.equal((await migrationStatus(db, v3))[1].state, 'applied');
+  assert.equal((await migrationStatus(db, v2))[1].state, 'drifted', 'after finalize, an edit is drift');
+  assert.equal((await reapplyDraft(db, '0002', v2)).ok, false);
+});
+
+test('/ops: the next release switch, per family and for everyone', async () => {
+  const env = await makeEnv();
+  await family(env, 'Carsons', 'jen@example.com');
+  await family(env, 'Smiths', 'pat@example.com');
+  const id = async (e) => (await env.DB.prepare('SELECT family_id FROM parents WHERE email = ?').bind(e).first()).family_id;
+  const jen = await id('jen@example.com'), pat = await id('pat@example.com');
+  const ops = await opsClient(env);
+  assert.match((await ops.get('/ops')).body, /Next release[\s\S]*Not launched/);
+
+  await ops.form(`/ops/preview/${jen}`, { on: '1' });
+  assert.equal(await nextReleaseOn(env.DB, jen), true);
+  assert.equal(await nextReleaseOn(env.DB, pat), false);
+  const jenApp = client(env);
+  await jenApp.post('/api/login', { email: 'jen@example.com', password: 'password123' });
+  assert.equal((await jenApp.get('/api/me')).body.family.next_release, true);
+  assert.equal((await jenApp.get('/api/me')).body.family.next_release_preview, true);
+  const patApp = client(env);
+  await patApp.post('/api/login', { email: 'pat@example.com', password: 'password123' });
+  assert.equal((await patApp.get('/api/me')).body.family.next_release, false);
+
+  await ops.form('/ops/release', { launched: '1' });
+  assert.equal(await nextReleaseOn(env.DB, pat), true);
+  assert.equal((await jenApp.get('/api/me')).body.family.next_release_preview, false, 'launched: no longer a preview');
+  assert.match((await ops.get('/ops')).body, /Undo launch/);
+  await ops.form('/ops/release', { launched: '0' });
+  assert.equal(await nextReleaseOn(env.DB, pat), false, 'undo launch');
+  assert.equal(await nextReleaseOn(env.DB, jen), true, 'the preview stays');
+  await ops.form(`/ops/preview/${jen}`, { on: '0' });
+  assert.equal(await nextReleaseOn(env.DB, jen), false);
+});
+
+test('/ops: the draft page asks for its phrase', async () => {
+  const env = await makeEnv();
+  const ops = await opsClient(env);
+  const draft = MIGRATIONS.find((m) => m.draft);
+  assert.ok(draft, 'the next release has a draft migration');
+  assert.match((await ops.get(`/ops/draft/${draft.id}`)).body, /Re-apply draft/);
+  assert.match((await ops.form(`/ops/draft/${draft.id}/reapply`, { phrase: 'nope' })).body, /Type REBUILD exactly/);
+  assert.match((await ops.form(`/ops/draft/${draft.id}/reapply`, { phrase: 'REBUILD' })).body, /Re-applied draft/);
+  assert.equal((await ops.get('/ops/draft/0001')).status, 404, 'only a draft');
 });

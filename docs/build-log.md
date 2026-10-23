@@ -3233,3 +3233,36 @@ Design only. Owner decisions:
 - **Homeschool mode stays on both programs:** homeschool families can take
   Cook Around the World as an elective. The open question is closed.
 - Phase 10b (the switch and the draft migration) comes before phases 11–13.
+
+## 129. 2026-10-23 — The Next release switch and the draft migration
+
+Phase 10b (plan §8.6): the way the next release is built inside the live app,
+switched off, with one migration.
+- **Phases reordered (owner, 2026-10-23):** tastes and the recipe pool is
+  now phase 11, built right after the switch; Unleavened Bread dates moves to
+  13. Level 3's calendar check comes with 13.
+- **Next release switch** (`src/worker/release.js`, `/ops`): a "Next release"
+  section with Launch for everyone and Undo launch (back to preview only;
+  nothing is lost), and a preview on/off button on each family. Kept in
+  `settings` under `next_release`, so the switch needs no migration.
+  `/api/me` adds `next_release` and `next_release_preview`; a preview
+  family's parent screens show a Preview note. Nothing else uses it yet.
+- **Draft migrations** (`src/worker/migrate.js`): a migration marked
+  `draft: true` is edited in place. It may only create new tables and
+  indexes on them; anything else is refused before it runs. `_drafts` (made
+  by the runner, like `_migrations`) records the tables each draft made.
+  States: pending, draft, draft-edited (instead of drifted), and applied once
+  finalized. `/ops/draft/<id>`: Re-apply draft (type REBUILD) drops the
+  draft's tables and makes them again in one batch; Restore draft tables
+  (`importDraftTables` in `backup.js`) is its restore, filling the draft's
+  empty tables from an earlier export.json; Finalize (type FINALIZE) freezes
+  an unedited draft. An applied draft counts as ready on `/ops`.
+- **`0003_next_release.sql`** is the draft, with no tables yet. After this
+  deploy the owner presses **Apply pending** on `/ops` (with 0002, if that's
+  still pending).
+- **`content/levels/`** holds the next release's content (a README for now).
+- Tests: 276 (4 new: draft checks; re-apply, restore, and finalize; the
+  switch per family and for everyone; the draft page's phrase). Checked in a
+  browser at phone width on the dev server: the Next release section, a
+  family's preview button, the draft page, and the Preview note on Family
+  settings.

@@ -1,0 +1,4 @@
+-- The next release (plan §8.6): a draft, edited in place for the whole build.
+-- It may only create new tables and indexes on them. Nothing it makes is used
+-- until the Next release switch is on for a family. Press Apply pending on
+-- /ops after the first deploy, and Re-apply draft after each edit to it.

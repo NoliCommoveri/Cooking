@@ -1,12 +1,14 @@
 // The token-gated /ops page (plan §8.5), modeled on the MCCE repo's src/ops.js.
 // The owner has no command line, so this page is the whole setup and recovery
-// path: migrations, the owner flag, backups, and the
-// destructive controls, each with its restore beside it.
-import { migrationStatus, applyPending } from './migrate.js';
+// path: migrations (and the next release's draft, §8.6), the owner flag, the
+// Next release switch, backups, and the destructive controls, each with its
+// restore beside it.
+import { migrationStatus, applyPending, reapplyDraft, finalizeDraft, draftTables } from './migrate.js';
 import {
-  exportAll, importAll, clearEverything, exportFamily, removeFamily, restoreFamily, tableNames,
+  exportAll, importAll, clearEverything, exportFamily, removeFamily, restoreFamily, tableNames, importDraftTables,
   undeleteFamily, eraseAfter, GRACE_DAYS, Refused, CLEAR_PHRASE, REMOVE_PHRASE,
 } from './backup.js';
+import { releaseState, setPreview, setLaunched } from './release.js';
 import { emailReady } from './email.js';
 import { githubCheck } from './github.js';
 import { hmacHex, timingSafeEqual } from './lib/crypto.js';
@@ -69,10 +71,15 @@ ${message ? `<p class="bad">${esc(message)}</p>` : ''}
 </form>`);
 
 const back = '<p><a href="/ops">Back to ops</a></p>';
+const REBUILD_PHRASE = 'REBUILD';
+const FINALIZE_PHRASE = 'FINALIZE';
+// An applied draft (§8.6) counts as ready: the app runs on it as it stands.
+const READY = new Set(['applied', 'draft', 'draft-edited']);
+const STATE_WORDS = { draft: 'draft', 'draft-edited': 'draft, edited since applied' };
 
 const migrationTable = (rows) => `<div class="scroll"><table><tr><th>id</th><th>name</th><th>state</th><th>applied</th></tr>${rows.map((m) => `<tr>
-  <td><code>${esc(m.id)}</code></td><td>${esc(m.name)}</td>
-  <td class="${m.state === 'applied' ? 'ok' : m.state === 'pending' ? '' : 'bad'}"><b>${esc(m.state)}</b></td>
+  <td><code>${esc(m.id)}</code></td><td>${esc(m.name)}${m.draft && m.state === 'pending' ? ' <span class="muted">(draft)</span>' : ''}</td>
+  <td class="${['applied', 'draft'].includes(m.state) ? 'ok' : m.state === 'pending' ? '' : 'bad'}"><b>${esc(STATE_WORDS[m.state] ?? m.state)}</b>${['draft', 'draft-edited'].includes(m.state) ? ` <a href="/ops/draft/${esc(m.id)}">Re-apply or finalize…</a>` : ''}</td>
   <td class="muted">${esc(m.applied_at ?? '—')}</td></tr>`).join('')}</table></div>`;
 
 const migrateLog = ({ log, halted }) => log.map((e) => (e.ok
@@ -94,7 +101,8 @@ async function dashboard(env, flash = '') {
   }
   const migrations = await migrationStatus(env.DB);
   const pending = migrations.filter((m) => m.state === 'pending').length;
-  const ready = migrations.length > 0 && migrations.every((m) => m.state === 'applied');
+  const ready = migrations.length > 0 && migrations.every((m) => READY.has(m.state));
+  const edited = migrations.filter((m) => m.state === 'draft-edited');
 
   // Nothing below the migrations runs until the database matches this deploy,
   // so a deploy that lands before Apply pending never breaks this page, which is
@@ -113,6 +121,7 @@ async function dashboard(env, flash = '') {
     }
   }
   const notReady = '<p class="muted">Apply the pending migrations first.</p>';
+  const release = await releaseState(env.DB);
   const live = families.filter((f) => !f.deleted_at), deleted = families.filter((f) => f.deleted_at);
   // The manager section saves content through GitHub (§7.5).
   const github = await githubCheck(env);
@@ -126,6 +135,7 @@ ${error ? `<p class="bad">A query failed, so part of this page is missing.</p><p
 <ul>
   ${check(true, 'Database connected.', '')}
   ${check(ready, 'Migrations applied.', 'Migrations are not all applied. Press Apply pending below.')}
+  ${edited.map((m) => check(false, '', `The draft migration <code>${esc(m.id)}</code> was edited after it was applied. <a href="/ops/draft/${esc(m.id)}">Re-apply it</a> so the database matches.`)).join('')}
   ${check(emailReady(env), 'Email is set up (Resend).', 'Email is not set up: add the RESEND_API_KEY secret and the MAIL_FROM variable. Until then nobody can sign up, because sign-up emails a code.')}
   ${check(owners > 0, 'An owner is set.', 'No owner yet. Sign up in the app, then make your email the owner below.')}
   ${check(github.ok, `GitHub: ${esc(github.message)} The manager section at <a href="/manage/">/manage</a> can save.`, `GitHub: ${esc(github.message)} Until it's connected, the manager section at <a href="/manage/">/manage</a> can show the content but not save it. docs/setup.md has the steps.`)}
@@ -134,6 +144,16 @@ ${error ? `<p class="bad">A query failed, so part of this page is missing.</p><p
 <h2>Migrations</h2>
 ${migrationTable(migrations)}
 <form method="post" action="/ops/migrate"><button type="submit"${pending ? '' : ' disabled'}>Apply pending${pending ? ` (${pending})` : ''}</button></form>
+
+<h2>Next release</h2>
+<p>The next release is built into the app switched off (plan §8.6). A family sees it once its preview is on (under Families below), or once it's launched for everyone.</p>
+${ready ? (release.launched
+    ? `<p class="ok"><b>Launched for everyone.</b></p>
+<form method="post" action="/ops/release"><input type="hidden" name="launched" value="0"><button type="submit">Undo launch</button></form>
+<p class="muted">Undo launch puts the app back as it was before launch: only the preview families see the next release. Nothing anyone entered is lost.</p>`
+    : `<p><b>Not launched.</b> ${release.preview.length ? `${esc(release.preview.length)} famil${release.preview.length === 1 ? 'y has' : 'ies have'} the preview on.` : 'No family has the preview on.'}</p>
+<form method="post" action="/ops/release"><input type="hidden" name="launched" value="1"><button type="submit">Launch for everyone</button></form>
+<p class="muted">Undo launch is here afterwards, and puts it back.</p>`) : notReady}
 
 <h2>The owner</h2>
 ${ready ? `<form method="post" action="/ops/owner" class="row">
@@ -147,6 +167,7 @@ ${ready ? (live.length ? live.map((f) => `<div class="note">
   <span class="muted">${esc(f.parents)} parent login(s) · ${esc(f.profiles)} profile(s) · last active ${esc((f.last_active_at ?? f.created_at).slice(0, 10))} · photos ${f.photos_enabled ? 'on' : 'off'}</span>
   <div class="row" style="margin-top:.4rem"><a class="btn" href="/ops/family/${esc(f.id)}.json">Download</a>
   <form method="post" action="/ops/photos/${esc(f.id)}"><input type="hidden" name="on" value="${f.photos_enabled ? '0' : '1'}"><button type="submit">${f.photos_enabled ? 'Turn photos off' : 'Turn photos on'}</button></form>
+  <form method="post" action="/ops/preview/${esc(f.id)}"><input type="hidden" name="on" value="${release.preview.includes(f.id) ? '0' : '1'}"><button type="submit">${release.preview.includes(f.id) ? 'Turn next release preview off' : 'Turn next release preview on'}</button></form>
   <a class="btn" href="/ops/remove/${esc(f.id)}">Remove…</a></div></div>`).join('') : '<p class="muted">No families yet.</p>')
   + (deleted.length ? `<h3>Deleted by the family</h3>
 <p class="muted">Gone from the app: nobody can log in and nothing of theirs shows. Each is erased ${GRACE_DAYS} days after it was deleted. Until then, Bring back puts it back as it was, and everyone logs in again.</p>`
@@ -197,6 +218,40 @@ const removePage = async (env, familyId, message = '') => {
   <p><label>Type <code>${REMOVE_PHRASE}</code> to confirm<br><input name="phrase" autocomplete="off" required></label></p>
   <button type="submit" class="danger">Remove this family</button>
 </form>${back}`);
+};
+
+// Re-apply draft drops the draft's tables, so its confirm page has the backup
+// before it and Restore draft tables after it. Finalize is here too.
+const draftPage = async (env, id, message = '') => {
+  const m = (await migrationStatus(env.DB)).find((x) => x.id === id && ['draft', 'draft-edited'].includes(x.state));
+  if (!m) return page('Draft migration', `<h1>No open draft called ${esc(id)}</h1>${back}`, 404);
+  const tables = await draftTables(env.DB, id);
+  const counts = [];
+  for (const t of tables) counts.push([t, (await env.DB.prepare(`SELECT COUNT(*) AS n FROM "${t}"`).first()).n]);
+  return page('Draft migration', `<h1>Draft migration ${esc(id)} ${esc(m.name)}</h1>${message}
+<p>${m.state === 'draft-edited' ? '<span class="bad">The file was edited after it was applied.</span> Re-apply it so the database matches.' : 'The database matches the file.'}</p>
+
+<h2>Re-apply draft</h2>
+<div class="note"><strong>This drops the draft's tables and makes them again from the file.</strong>
+${counts.length ? `Their rows are lost: ${counts.map(([t, n]) => `<code>${esc(t)}</code> (${esc(n)})`).join(', ')}.` : 'It has no tables yet.'}
+Only next-release preview families use them. <a href="/ops/export.json">Download export.json first</a>; Restore draft tables below puts the rows back.</div>
+<form method="post" action="/ops/draft/${esc(id)}/reapply">
+  <p><label>Type <code>${REBUILD_PHRASE}</code> to confirm<br><input name="phrase" autocomplete="off" required></label></p>
+  <button type="submit" class="danger">Re-apply draft</button>
+</form>
+
+<h2>Restore draft tables</h2>
+<p>Fills the draft's tables from an export.json taken before, when they're empty. Columns the edited draft no longer has are refused.</p>
+<form method="post" action="/ops/draft/${esc(id)}/restore" enctype="multipart/form-data" class="row">
+  <input type="file" name="file" accept="application/json,.json" required>
+  <button type="submit">Restore draft tables</button></form>
+
+<h2>Finalize</h2>
+<p>At launch: the draft becomes an ordinary migration. After this, editing the file reads as drifted, and Re-apply is gone. Nothing in the database changes.</p>
+${m.state === 'draft' ? `<form method="post" action="/ops/draft/${esc(id)}/finalize">
+  <p><label>Type <code>${FINALIZE_PHRASE}</code> to confirm<br><input name="phrase" autocomplete="off" required></label></p>
+  <button type="submit">Finalize</button>
+</form>` : '<p class="muted">Re-apply the edited draft first.</p>'}${back}`);
 };
 
 const download = (body, filename) => new Response(JSON.stringify(body, null, 2), {
@@ -316,6 +371,43 @@ Variables and Secrets → Add, type <em>Secret</em>, name <code>OPS_TOKEN</code>
   if (un && post) {
     const name = await undeleteFamily(env.DB, un[1]);
     return dashboard(env, `<p class="ok">${esc(name)} is back. Its parents and kids log in again.</p>`);
+  }
+
+  // The next release (§8.6): the switch, and the draft migration.
+  const pv = path.match(/^\/ops\/preview\/([0-9a-f]{16})$/);
+  if (pv && post) {
+    const on = String((await request.formData()).get('on')) === '1';
+    const fam = await env.DB.prepare('SELECT name FROM families WHERE id = ?').bind(pv[1]).first();
+    if (!fam) throw new Refused('No such family.');
+    await setPreview(env.DB, pv[1], on);
+    return dashboard(env, `<p class="ok">The next release preview is ${on ? 'on' : 'off'} for ${esc(fam.name)}.${on ? '' : ' Nothing they entered was deleted.'}</p>`);
+  }
+  if (path === '/ops/release' && post) {
+    const launched = String((await request.formData()).get('launched')) === '1';
+    await setLaunched(env.DB, launched);
+    return dashboard(env, `<p class="ok">${launched ? 'The next release is on for every family.' : 'Launch undone: only preview families see the next release. Nothing was deleted.'}</p>`);
+  }
+  const dr = path.match(/^\/ops\/draft\/(\d{4})(?:\/(reapply|restore|finalize))?$/);
+  if (dr && !post && !dr[2]) return draftPage(env, dr[1]);
+  if (dr && post && dr[2] === 'reapply') {
+    const phrase = String((await request.formData()).get('phrase') ?? '').trim();
+    if (phrase !== REBUILD_PHRASE) return draftPage(env, dr[1], `<p class="bad">Type ${REBUILD_PHRASE} exactly. Nothing was changed.</p>`);
+    const res = await reapplyDraft(env.DB, dr[1]);
+    if (!res.ok) {
+      return draftPage(env, dr[1], `<p class="bad">Re-apply failed. Nothing was changed.</p><pre>${esc(res.error)}</pre>
+<details><summary>The statements in the draft</summary><pre>${esc(res.statementList.map((st, i) => `${i + 1}.  ${st};`).join('\n\n'))}</pre></details>`);
+    }
+    return dashboard(env, `<p class="ok">Re-applied draft ${esc(dr[1])}: dropped ${esc(res.dropped.length)} table(s), made ${esc(res.created.length)}.</p>`);
+  }
+  if (dr && post && dr[2] === 'restore') {
+    const loaded = await importDraftTables(env.DB, await uploadedJson(request), await draftTables(env.DB, dr[1]));
+    return dashboard(env, restoredNote(loaded));
+  }
+  if (dr && post && dr[2] === 'finalize') {
+    const phrase = String((await request.formData()).get('phrase') ?? '').trim();
+    if (phrase !== FINALIZE_PHRASE) return draftPage(env, dr[1], `<p class="bad">Type ${FINALIZE_PHRASE} exactly. Nothing was changed.</p>`);
+    if (!(await finalizeDraft(env.DB, dr[1]))) throw new Refused('Only an applied, unedited draft can be finalized.');
+    return dashboard(env, `<p class="ok">Draft ${esc(dr[1])} is finalized: an ordinary migration from now on.</p>`);
   }
 
   if (path === '/ops/restore-family' && post) return dashboard(env, restoredNote(await restoreFamily(env.DB, await uploadedJson(request))));

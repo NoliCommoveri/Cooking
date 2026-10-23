@@ -119,6 +119,13 @@ function sabbathBanner() {
     el('h2', {}, 'Shabbat shalom!'),
     el('p', {}, "While you're welcome to follow the recipe, please note that grading and due dates are not available on the Sabbath. We hope your family enjoys the rest!"));
 }
+// The next release (plan §8.6): a family the owner turned the preview on for
+// sees it before everyone else, and the parent screens say so.
+function previewNote() {
+  if (!me?.family?.next_release_preview) return null;
+  return el('aside', { class: 'card notice', role: 'note' },
+    el('p', {}, el('b', {}, 'Preview: '), 'your family sees the next release before other families. Some of it is still being built.'));
+}
 const fmtDay = (d, opts = { weekday: 'short', month: 'short', day: 'numeric' }) => new Date(`${d}T12:00:00`).toLocaleDateString(undefined, opts);
 const DIET = {
   nuts: 'Tree nuts', peanuts: 'Peanuts', dairy: 'Dairy', egg: 'Eggs', gluten: 'Gluten', fish: 'Fish', meat: 'Meat and poultry',
@@ -811,7 +818,7 @@ function parentScreen(current, ...kids) {
   const group = PARENT_GROUPS.find(([g]) => g === page?.group)?.[1];
   screen(head, drawer,
     group ? el('p', { class: 'eyebrow' }, group) : null,
-    el('h1', {}, page?.label ?? 'Parents'), sabbathBanner(), ...kids,
+    el('h1', {}, page?.label ?? 'Parents'), sabbathBanner(), previewNote(), ...kids,
     ruthButton(ruthCtx(), () => openRuth(ruthCtx())));
 }
 
