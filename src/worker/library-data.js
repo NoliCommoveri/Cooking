@@ -657,6 +657,97 @@ export const LIBRARY = {
    "unleavened": true
   },
   {
+   "id": "chicken-caesar",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Chicken Caesar + homemade dressing & croutons",
+   "image": "img/dishes/chicken-caesar.webp",
+   "cuisine": "american",
+   "skill": "Whisked dressing, cubing bread",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, bake the croutons on two sheet pans and swap their shelves halfway, and cook the chicken in two batches."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "baguette"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "chicken-breast"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "mayonnaise"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "worcestershire",
+     "optional": true
+    },
+    {
+     "ingredient": "parmesan"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "parmesan"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "baguette",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "mayonnaise",
+     "use": "yogurt-greek",
+     "reason": "egg"
+    }
+   ],
+   "unleavened": false
+  },
+  {
    "id": "shakshuka",
    "version": 1,
    "track": "core",
@@ -1438,6 +1529,12 @@ export const LIBRARY = {
    "name": "Parmesan cheese",
    "contains": [
     "dairy"
+   ]
+  },
+  "worcestershire": {
+   "name": "Worcestershire sauce",
+   "contains": [
+    "fish"
    ]
   }
  },
