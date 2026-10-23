@@ -7,6 +7,8 @@ import { patchTargets, showValue } from './lib/patch.js';
 import { courseEntries, prereqNotes } from './lib/course.js';
 import { toBase, mixed } from './lib/units.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
+import { progressView, celebrate } from './rewards.js';
+import { isMuted, setMuted } from './sound.js';
 
 const app = document.getElementById('app');
 
@@ -314,6 +316,8 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const [{ profiles }, lib] = await Promise.all([api('GET', '/api/profiles'), api('GET', '/api/library')]);
   const p = profiles.find((x) => x.id === id);
   if (!p) return go('#/');
+  // A cook just finished goes up first, so its rewards count (a few seconds at most).
+  await Promise.race([flushCooks(), new Promise((ok) => setTimeout(ok, 4000))]);
   const [{ cooks }, mine, { recipes }, { recipes: feastShared }] = await Promise.all([api('GET', `/api/profiles/${p.id}/cooks?${tz()}`), api('GET', `/api/profiles/${p.id}/queue?${tz()}`), api('GET', '/api/recipes'), api('GET', '/api/shared?feast=1')]);
   store('cpr.profile', p.id);
   // A profile on a course takes its lesson numbers from the course plan (§4.1).
@@ -326,7 +330,6 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     const swaps = L.substitutions.map((s) => `${s.use} instead of ${s.for}`).join('; ');
     const skip = L.left_out.length ? `Leave out the ${L.left_out.join(', ').toLowerCase()}` : '';
     const time = `${L.totalMinutes} min`;
-    // Stamps and crests for a cooked lesson come with course progress (Phase 5).
     const done = cooks[L.id];
     const cooked = done ? el('p', { class: quest ? 'q-swap k-cooked' : 'p-swap k-cooked' },
       art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"/></svg>'),
@@ -447,8 +450,9 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     return [el('div', { class: 'k-searchrow' }, search), results];
   };
 
-  const tabs = [['path', quest ? 'Main quest' : 'My journey'], ['more', quest ? 'Side quests' : 'More recipes']];
-  const current = tab === 'more' ? 'more' : 'path';
+  // Progress and rewards (Phase 5): the skill tree, or the passport.
+  const tabs = [['path', quest ? 'Main quest' : 'My journey'], ['more', quest ? 'Side quests' : 'More recipes'], ['progress', quest ? 'Skill tree' : 'Passport']];
+  const current = tabs.some(([k]) => k === tab) ? tab : 'path';
   sessionSet(`cpr.tab.${p.id}`, current);
   screen(el('section', { class: 'kitchen k-tabbed', 'data-kt': p.theme },
     el('a', { class: 'back', href: '#/' }, '← Lockers'),
@@ -459,13 +463,20 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
       el('button', { class: 'themebtn', type: 'button', onclick: async () => {
         await api('PUT', `/api/profiles/${p.id}/theme`, { theme: other });
         kitchen(id, current);
-      } }, `Switch to ${THEMES[other]}`)),
-    current === 'more' ? moreView() : pathView(),
-    // Pinned to the bottom, where a thumb is, as in MCCE Kids. Progress and
-    // rewards join them when they're built (Phase 5).
+      } }, `Switch to ${THEMES[other]}`),
+      // Sound effects on or off, remembered on this device (§5.5).
+      el('button', { class: 'themebtn', type: 'button', 'aria-pressed': String(!isMuted()), onclick: (e) => {
+        setMuted(!isMuted());
+        e.currentTarget.setAttribute('aria-pressed', String(!isMuted()));
+        e.currentTarget.textContent = isMuted() ? 'Sound effects: off' : 'Sound effects: on';
+      } }, isMuted() ? 'Sound effects: off' : 'Sound effects: on')),
+    current === 'more' ? moreView() : current === 'progress' ? await progressView(p, cooks) : pathView(),
+    // Pinned to the bottom, where a thumb is, as in MCCE Kids.
     el('nav', { class: `k-tabs ${quest ? 'q' : 'p'}`, 'aria-label': 'Kitchen' }, tabs.map(([k, label]) => el('a', {
       href: `#/kitchen/${p.id}/@${k}`, 'aria-current': k === current ? 'page' : null,
     }, label)))));
+  // Anything earned since this device last showed it: a stamp, a skill, a rank.
+  celebrate(p, cooks);
 }
 
 // A lesson, played in the profile's theme (player.js).
@@ -490,6 +501,12 @@ async function lesson(profileId, lessonId) {
       send: async () => {
         try { return (await api('POST', `/api/profiles/${p.id}/ask`, { lesson_id: lessonId })).status; } catch (err) { showToast(err.message); throw err; }
       },
+    },
+    // What the cook earned, shown when it's done (Phase 5).
+    onDone: async () => {
+      await Promise.race([flushCooks(), new Promise((ok) => setTimeout(ok, 4000))]);
+      const { cooks } = await api('GET', `/api/profiles/${p.id}/cooks?${tz()}`).catch(() => ({ cooks: null }));
+      if (cooks) await celebrate(p, cooks);
     },
     seed: queued ? { servings: queued.servings, with: (queued.profile_ids ?? []).filter((x) => x !== p.id), shopped: queued.shopped_for } : null,
     // Suggest a fix is for library lessons; a family edits its own recipes.

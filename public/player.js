@@ -10,6 +10,7 @@ import { findTerms } from './lib/terms.js';
 import { dietView } from './lib/diet.js';
 import { applyPatches, showValue } from './lib/patch.js';
 import { voiceSupported, createVoice } from './voice.js';
+import { unlockSound, soundReady, ding, sizzle, isMuted, setMuted } from './sound.js';
 
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const ic = (id, cls = 'ico') => `<svg class="${cls}" aria-hidden="true"><use href="/icons.svg#${id}"/></svg>`;
@@ -87,33 +88,9 @@ function cupSVG(done, of) {
 }
 
 // ---------- sound and the screen ----------
-// Browsers allow sound only after a tap on the page, and can suspend it again
-// when the app goes to the background. Every tap in the player turns it back on.
-let audio = null;
-function unlockSound() {
-  try {
-    audio ??= new (window.AudioContext || window.webkitAudioContext)();
-    if (audio.state !== 'running') return audio.resume().catch(() => {});
-  } catch { audio = null; }
-  return Promise.resolve();
-}
-const soundReady = () => audio?.state === 'running';
-// A ringing timer dings again this often until someone taps Stop (owner, 2026-10-22).
+// Sound lives in sound.js (§5.5). A ringing timer dings again this often until
+// someone taps Stop (owner, 2026-10-22).
 const DING_EVERY_MS = 4000;
-function ding() {
-  if (!audio) return;
-  try {
-    [0, 0.28, 0.56].forEach((d) => {
-      const o = audio.createOscillator(), g = audio.createGain();
-      o.frequency.value = 880; o.connect(g); g.connect(audio.destination);
-      g.gain.setValueAtTime(0.0001, audio.currentTime + d);
-      g.gain.exponentialRampToValueAtTime(0.3, audio.currentTime + d + 0.02);
-      g.gain.exponentialRampToValueAtTime(0.0001, audio.currentTime + d + 0.25);
-      o.start(audio.currentTime + d); o.stop(audio.currentTime + d + 0.26);
-    });
-  } catch { /* no sound on this device */ }
-  try { navigator.vibrate?.([200, 100, 200]); } catch { /* no vibration */ }
-}
 
 // The screen stays awake during Prep and Cook (§3). Where the browser can't,
 // a one-time tip says to raise the auto-lock time (§8.2).
@@ -140,9 +117,10 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // seed: { servings, with, shopped } from the queued lesson, for a fresh cook;
 // shopped is the serving count its shopping trip bought for (§6.6).
 // onReflect(cookId, reflection): saves one profile's reflection (§3).
+// onDone(): the cook is finished and reflected on; the app shows what it earned (Phase 5).
 // lesson: a family recipe already in lesson shape (§6.10), with `extra`, its
 // typed-in ingredients, beside the registry. Otherwise lessonId is loaded.
-export async function openLesson(mount, { profile, family, lessonId, lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null }) {
+export async function openLesson(mount, { profile, family, lessonId, lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null }) {
   const [R, L] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
   const ING = { ...R.ingredients, ...extra };
   // Appointed Times lessons keep their A1, A2 labels whatever the course plan (§6.19).
@@ -517,7 +495,8 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
     // A recipe with no Learn cards goes straight to Prep.
     if (S.stage === 'learn' && !learnCards().length) S.stage = 'prep';
     if (S.stage !== 'card' && S.stage !== 'done') { S.last = S.stage; save(); }
-    const back = `<a class="back" href="#" data-act="exit">← ${quest ? 'Quest board' : 'Recipe box'}</a>`;
+    const muted = isMuted();
+    const back = `<div class="pl-top"><a class="back" href="#" data-act="exit">← ${quest ? 'Quest board' : 'Recipe box'}</a><button type="button" class="mutebtn" data-act="mute" aria-pressed="${muted}" aria-label="${muted ? 'Sound effects off. Turn them on' : 'Sound effects on. Turn them off'}">${ic(muted ? 'i-mute' : 'i-sound')}</button></div>`;
     mount.innerHTML = `<section class="kitchen qx player" data-kt="${quest ? 'quest' : 'passport'}">${back}${STAGES[S.stage]()}${whyView()}</section>`;
     if (focusTop) window.scrollTo(0, 0);
     if (S.stage !== 'cook' && voice?.on) voice.stop();
@@ -609,14 +588,14 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
         save();
         return draw(false);
       }
-      case 'step': step(Number(d.i)); break;
+      case 'step': if (Number(d.i) > 0 && S.stage === 'cook') sizzle(); step(Number(d.i)); break;
       // Plate it: the cook is finished and counts; Reflect comes next.
       case 'finish': S.stage = 'reflect'; S.timers = []; S.finishedAt = new Date().toISOString(); break;
       case 'rate':
         if (d.k === 'eaters') S.eater = Number(d.n); else S.refl[d.k].rating = Number(d.n);
         save();
         return draw(false);
-      case 'reflect-skip': S.stage = 'done'; break;
+      case 'reflect-skip': S.stage = 'done'; onDone?.(); break;
       case 'reflect-save':
         if (onReflect && S.cookId) {
           onCookNow().forEach((p, i) => {
@@ -625,6 +604,7 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
           });
         }
         S.stage = 'done';
+        onDone?.();
         break;
       case 'term': term = d.id && d.id !== term ? d.id : null; return draw(false);
       case 'why': why = d.id; return draw(false);
@@ -647,6 +627,7 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
         // step, and serving count. Afterwards the lesson card shows its status.
         return fixes.suggest({ lesson: L, stepId: d.step || null, servings: S.servings, ingredients: ING })
           .then(async (sent) => { if (sent) { await loadFixes(); draw(false); } });
+      case 'mute': setMuted(!isMuted()); return draw(false);
       case 'sound': return unlockSound().then(() => { if (soundReady()) ding(); draw(false); });
       case 'voice':
         voice ??= createVoice({ onCommand: onVoice, onStatus: onVoiceStatus });

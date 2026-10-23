@@ -1967,3 +1967,57 @@ on it.
 - `/api/library`, `/api/recipes`, and `/api/shared` give each card its
   search words, and lessons their pick-one group.
 - Tests: 201. Checked in a browser in both themes.
+
+## 79. 2026-10-23 — Phase 5: progress, ranks, skills, celebrations, and sound
+
+- **Owner rulings:**
+  - Ranks by different dishes cooked: Kitchen Apprentice 0, Prep Cook 5,
+    Line Cook 15, Sous Chef 30, Head Chef 50, and a new sixth rank,
+    **Executive Chef at 75**, the whole course (§5.2, §5.4).
+  - Family recipes (Our recipes, and User-shared recipes a family cooks) count
+    toward rank only: no stamp, node, or skill.
+  - Sound is synthesized in the browser, with no audio files, and on until
+    muted.
+- **The kitchen's third tab** (`public/rewards.js`): **Skill tree** in
+  Kitchen Quest, **Passport** in Chef's Passport. Its art is ported from the
+  approved showcase.
+  - Kitchen Quest: the level badge and XP bar, the skill tree with a path per
+    unit (Appointed Times beside the seven), a node per planned dish lit when
+    cleared and the next one pulsing, and the crest collection.
+  - Chef's Passport: the owner's world map, with regions colored by progress;
+    a tab per region; a stamp page with every planned dish (stamped with its
+    cuisine's stamp and first date, or an empty spot); the chef card with the
+    six-rank ladder; and the skill pins on the apron.
+  - Tapping a crest or pin shows the idea behind it and every dish that uses
+    it, cooked or not (§3).
+- **Executive Chef's outfit:** an even taller hat with a gold band and star,
+  and a black jacket with gold buttons. Level 6 in Kitchen Quest.
+- **Celebrations:** after Plate it (on the done screen) and on arriving in the
+  kitchen, a profile sees what it earned since this device last showed it:
+  - the dish's stamp slamming down (Passport), or Quest Cleared with its dish
+    (Quest);
+  - any new pins or crests;
+  - then a full-screen rank up or level up with a sprinkles or pixel burst.
+  - What's been shown is kept per profile on the device
+    (`cpr.seen.<profile>`). The first visit records what's already earned
+    without celebrating, so rewards from before this change don't all pop at
+    once. A sibling on the same cook sees theirs in their own kitchen.
+  - `prefers-reduced-motion` turns it all into simple fades.
+- **Nothing is stored:** rewards are worked out from the profile's cooks and
+  the content files (`src/content/rewards.js`, shared with the browser as
+  `public/lib/rewards.js`), so no migration. `/api/profiles/<id>/cooks` now
+  also gives each lesson's `first` cook date, for its stamp. Sabbath cooks
+  still don't count.
+- **Sound** (`public/sound.js`): a sizzle on Next in cook mode, a stamp thunk,
+  a chime for new skills, and a rank-up fanfare. A mute toggle on the kitchen
+  and in the player is remembered on this device. It silences the effects but
+  not the timer ding, since a timer rings until it's stopped.
+- The player's sound code moved into `sound.js`. The world-map layers are
+  served from `public/img/map/`.
+- Tests: 211 (ranks and thresholds, stamps and skills from a lesson,
+  recipes counting toward rank only, repeat cooks, the skill tree and passport
+  pages covering every planned dish, what's new since last shown, first-cook
+  dates, and every icon, glyph, and map layer the rewards draw). Checked in a
+  browser at phone width in both themes: the progress tab, tapping crests,
+  pins, and passport pages, the celebration from the kitchen and from the
+  player's done screen, and the rank up.

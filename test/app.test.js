@@ -3,7 +3,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 
 test('public/app.js parses', () => {
   const r = spawnSync(process.execPath, ['--check', 'public/app.js'], { encoding: 'utf8' });
@@ -16,7 +16,7 @@ test('the app shell loads its script and styles', () => {
   assert.match(html, /href="app.css"/);
 });
 
-for (const f of ['public/player.js', 'public/cooks.js', 'public/voice.js', 'public/demo.js', 'public/syllabus.js']) {
+for (const f of ['public/player.js', 'public/cooks.js', 'public/voice.js', 'public/demo.js', 'public/syllabus.js', 'public/rewards.js', 'public/sound.js']) {
   test(`${f} parses`, () => {
     const r = spawnSync(process.execPath, ['--check', f], { encoding: 'utf8' });
     assert.equal(r.status, 0, r.stderr);
@@ -35,6 +35,16 @@ test('every icon the player and demo draw is in public/icons.svg', () => {
   const used = new Set([...player.matchAll(/'((?:i|s|t)-[a-z]+)'/g)].map((m) => m[1]));
   used.add('plate');
   for (const id of used) assert.ok(have.has(id), `icons.svg has no "${id}"`);
+});
+
+test('every icon and skill glyph the rewards draw is in public/icons.svg, with the map beside them', async () => {
+  const sprite = readFileSync('public/icons.svg', 'utf8');
+  const have = new Set([...sprite.matchAll(/<symbol id="([^"]+)"/g)].map((m) => m[1]));
+  const src = readFileSync('public/rewards.js', 'utf8');
+  for (const m of src.matchAll(/icons\.svg#((?:i|g)-[a-z]+)/g)) assert.ok(have.has(m[1]), `icons.svg has no "${m[1]}"`);
+  const { skills, regions } = JSON.parse(readFileSync('public/content/registry.json', 'utf8'));
+  for (const s of Object.values(skills)) assert.ok(have.has(`g-${s.pin.glyph}`), `icons.svg has no glyph for ${s.id}`);
+  for (const r of Object.keys(regions)) assert.ok(existsSync(`public/img/map/map-${r}.png`), `no map layer for ${r}`);
 });
 
 test('the lesson player can scale and show every lesson at every size', async () => {
