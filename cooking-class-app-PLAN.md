@@ -571,7 +571,7 @@ No longer a bonus (owner, 2026-10-22): sharing recipes is central for the Appoin
   4. **Learners:** the profiles, each kid or adult, one person or shared (§1).
   5. **Logins for kids:** for each kid profile, whether to give them their own login, and if yes, she sets it up with them: first name and last initial, a picture, a password (§8.3a).
   6. **Casual or homeschool** (§6.17).
-  7. **Offer to set up a course** (§6.18). If yes: who it's for, a name (optional), the start date, and lessons per week. She tells the parent they can edit the course to change the lesson order or drop lessons. In casual mode, saying yes turns on Plan our weeks, and she says so.
+  7. **Offer to set up a course** (§6.18). If yes: who it's for, a name (optional), the start date, and lessons per week. She tells the parent they can edit the course to change the lesson order or drop lessons. In casual mode, saying yes turns on Plan our weeks, and she says so (recommendation, to confirm).
 - **Before and after every question (owner, 2026-10-23).** Before each question she says in one short line what it's for, for example that a profile can be shared by several kids, or that each kid can have their own profile even if they plan to cook together. After the answer, she says where to change it later ("You can change this any time in Menu → Family settings."). This holds for all her tasks (§6.8).
 - **The test-cook warning** (below) is one of her lines near the end, in place of the one-time notice (recommendation, to confirm).
 - **A warning for first-time parents:** the recipes haven't all been test-cooked. Read each lesson through before your kids cook it, and mark it test-cooked once you have (§6.2).
