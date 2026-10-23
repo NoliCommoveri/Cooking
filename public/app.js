@@ -1827,7 +1827,6 @@ const ownerFixes = parentOnly(async (flash) => {
   const requestCard = (r) => {
     const msg = el('div', { role: 'alert' });
     const show = (err) => msg.replaceChildren(el('p', { class: 'err' }, err.message), problemsOf(err) ?? '');
-    const valueBox = r.field ? valueInput(r.field_kind, 'value', toInput(r.field_kind, r.suggested)) : null;
     const replyBox = el('input', { name: 'reply', maxlength: 500, autocomplete: 'off' });
     const act = (label, cls, fn) => el('button', { type: 'button', class: `hbtn ${cls}`, onclick: async (e) => {
       e.target.disabled = true;
@@ -1845,14 +1844,12 @@ const ownerFixes = parentOnly(async (flash) => {
         el('div', {}, el('small', { class: 'mut' }, `${r.field_label}, now`), el('p', {}, showValue(r.field_kind, r.live))),
         el('div', {}, el('small', { class: 'mut' }, 'Suggested'), el('p', {}, showValue(r.field_kind, r.suggested)))) : null,
       changed ? el('p', { class: 'mut small', style: 'margin:0' }, `When this was sent it said: ${showValue(r.field_kind, r.current)}`) : null,
-      valueBox ? el('label', { class: 'f' }, 'Apply this', el('span', { class: 'hint' }, r.field_kind === 'minutes' ? 'In minutes. Edit it first if you like.' : 'Edit it first if you like.'), valueBox) : null,
-      el('label', { class: 'f' }, 'Reply to the family', el('span', { class: 'hint' }, 'Optional. They see it on the lesson.'), replyBox),
+      el('label', { class: 'f' }, 'Reply to the family', el('span', { class: 'hint' }, 'Optional. They see it on the lesson. To apply it, the manager asks for your reply there.'), replyBox),
       msg,
       el('div', { class: 'acts' },
-        r.field ? act('Apply', 'pri', async () => {
-          const res = await api('POST', `/api/owner/fixes/${r.id}/apply`, { value: fromInput(r.field_kind, valueBox.value), reply: replyBox.value });
-          again(`Applied. ${r.lesson_title} is now version ${res.version} for every family.`);
-        }) : null,
+        // Apply opens the lesson in the manager section with the suggestion
+        // filled in; saving it there marks this fixed (§6.11, §7.5).
+        el('a', { class: 'hbtn pri', href: `/manage/#/fix/${r.id}` }, 'Apply in the manager'),
         close('declined', 'Declined.'), close('duplicate', 'Marked as a duplicate.'), close('needs_content_change', 'Saved for a content change.')));
   };
 
@@ -1863,7 +1860,7 @@ const ownerFixes = parentOnly(async (flash) => {
 
   parentScreen('fixes',
     flash ?? null,
-    el('p', { class: 'mut' }, 'Families suggest fixes from a lesson. Apply puts one live for every family after the same checks as the content linter. Every applied fix has a Revert.'),
+    el('p', { class: 'mut' }, 'Families suggest fixes from a lesson. Apply in the manager opens the lesson there with their suggestion filled in; it goes live for every family when you save it, after the same checks as the content linter.'),
     el('h2', {}, `Waiting (${o.open.length})`),
     o.open.length ? Object.entries(byLesson).map(([title, list]) => [el('h3', {}, title), list.map(requestCard)])
       : el('p', { class: 'mut' }, 'Nothing waiting.'),
@@ -1885,7 +1882,7 @@ const ownerFixes = parentOnly(async (flash) => {
     el('h2', {}, 'Answered'),
     o.closed.length ? el('div', { class: 'card' }, el('div', { class: 'rows' }, o.closed.map((r) => el('div', { class: 'rowi' },
       el('div', {}, el('b', {}, `${r.lesson_title} · ${r.where} · ${STATUS[r.status]}`), el('small', {}, `${r.note}${r.owner_reply ? ` · You said: ${r.owner_reply}` : ''}`)),
-      r.status === 'fixed' ? el('small', { class: 'mut' }, 'Revert it above') : el('button', { type: 'button', class: 'hbtn', onclick: async () => {
+      r.status === 'fixed' ? el('small', { class: 'mut' }, r.patched ? 'Revert it above' : 'Undo it from Saves in the manager') : el('button', { type: 'button', class: 'hbtn', onclick: async () => {
         await api('POST', `/api/owner/fixes/${r.id}/reopen`);
         again('Back in the queue.');
       } }, 'Reopen')))))

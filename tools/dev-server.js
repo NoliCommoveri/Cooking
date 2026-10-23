@@ -1,6 +1,9 @@
 // Runs the Worker on http://localhost:8787 against an in-memory database, for
 // looking at the app in a browser during a Claude session. Not part of the app.
 // Emails aren't sent: GET /__outbox lists them, so a sign-up code can be read.
+// With DEV_GITHUB=1 the manager section (/manage) saves to the tests' stand-in
+// GitHub instead of the real one, and jen@example.com is made the owner once
+// she signs up.
 // Usage: node --import ./test/helpers/register.js tools/dev-server.js
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
@@ -12,6 +15,12 @@ import { makeEnv, outbox } from '../test/helpers/worker.js';
 const PUBLIC = fileURLToPath(new URL('../public/', import.meta.url));
 const TYPES = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.webp': 'image/webp', '.png': 'image/png', '.svg': 'image/svg+xml', '.json': 'application/json' };
 const env = await makeEnv();
+if (process.env.DEV_GITHUB) {
+  const { FakeGitHub } = await import('../test/helpers/github.js');
+  globalThis.devGithub = new FakeGitHub().install();
+  Object.assign(env, { GITHUB_TOKEN: 'dev', GITHUB_REPO: 'NoliCommoveri/Cooking' });
+  setInterval(() => env.DB.prepare("UPDATE parents SET is_owner = 1 WHERE email = 'jen@example.com'").run(), 1000);
+}
 env.ASSETS = {
   async fetch(req) {
     let path = new URL(req.url).pathname;

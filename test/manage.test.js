@@ -305,3 +305,26 @@ test('every content file is in the editor\'s layout (run: node tools/format-cont
     assert.equal(text, formatJson(JSON.parse(text)), f);
   }
 });
+
+test('a fix request answered from the manager is marked fixed, with the reply', async () => {
+  const { env, m } = await setup();
+  const pat = await family(env, 'Smiths', 'pat@example.com');
+  await pat.post('/api/profiles', { people: [{ name: 'Mom', color: 'plum' }], audience: 'adult' });
+  const adult = (await pat.get('/api/profiles')).body.profiles[0].id;
+  await pat.post('/api/fix-requests', { lesson_id: 'shakshuka', kind: 'amount', note: 'Too many eggs.', profile_id: adult, field: 'ingredients.egg.amount', suggested_value: 5 });
+  const fid = (await env.DB.prepare('SELECT id FROM fix_requests').first()).id;
+  const { fix } = (await m.get(`/manage/api/fixes/${fid}`)).body;
+  assert.equal(fix.lesson_id, 'shakshuka');
+  assert.equal(fix.field, 'ingredients.egg.amount');
+
+  const c = await content(m);
+  const L = structuredClone(c.files[lessonPath]);
+  L.ingredients.find((x) => x.ingredient === 'egg').amount = 5;
+  const res = await m.post('/manage/api/save', { files: { [lessonPath]: L }, was: { [lessonPath]: c.blobs[lessonPath] }, fix_id: fid, reply: 'Thanks!' });
+  assert.equal(res.status, 200, JSON.stringify(res.body));
+  const mine = (await pat.get('/api/lessons/shakshuka/fixes')).body.fixes[0];
+  assert.equal(mine.status, 'fixed');
+  assert.equal(mine.owner_reply, 'Thanks!');
+  assert.equal(mine.applied, 5);
+  assert.equal(mine.patched, false);
+});
