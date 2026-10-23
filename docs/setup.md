@@ -164,6 +164,16 @@ After this update deploys, press **Apply pending** on `/ops` (migration 0009).
    family. Nothing shows yet: the camera and gallery come once the photo
    storage below exists.
 
+## 15. Check it (Didn't make it)
+
+After this update deploys, press **Apply pending** on `/ops` (migration 0015).
+
+1. Queue a lesson for a kid, then cook it to the end from their kitchen.
+2. **Parents → Progress**: the lesson is there. Press **Didn't make it** on
+   its row and OK. It's gone from Progress, it's back on the **Queue**, and
+   the kid's kitchen no longer shows it cooked.
+3. Press **Undo**: it's back on Progress, and off the Queue again.
+
 ## Before photos: create the photo storage (R2)
 
 Photos need a storage bucket that only you can create:

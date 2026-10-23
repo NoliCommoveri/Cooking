@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [101. 2026-10-23 — Chef Ruth's Show me around](docs/build-log.md#101-2026-10-23--chef-ruths-show-me-around)
+**Latest build log entry:** [102. 2026-10-23 — Didn't make it](docs/build-log.md#102-2026-10-23--didnt-make-it)
 
 ## Current features
 
@@ -27,7 +27,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Kitchen staples** (Shopping → Staples): added by searching for an ingredient; grouped first as "May already have" in Upcoming and before making a list; on the list itself, in their aisles.
 - **Casual and homeschool modes**: homeschool adds due days for kids and overdue for parents; casual can turn on Plan our weeks.
 - **Reflect** (`public/player.js`): after Plate it, each profile on the cook rates it (gems or chef's hats), says what they'd change, and can name another dish that uses the move; plus an optional rating from the eaters. Saved even if the connection drops.
-- **Print our progress** (Parents → Progress): what each profile has cooked, with date, dish, cuisine, skill, and rating, printable or as a CSV.
+- **Print our progress** (Parents → Progress): what each profile has cooked, with date, dish, cuisine, skill, and rating, printable or as a CSV. **Didn't make it** on a row takes back a cook a kid marked but didn't make, with Undo.
 - **Photos switch** (`/ops`): photos are off for every family until the owner turns them on for one.
 - **Chef Ruth** (`public/ruth.js`, `src/worker/setup.js`): the helper, a scripted chat with a floating button on the parent screens. Her **Getting started** runs on its own for a new family and can't be skipped: family name and PIN, servings, diet, learners, kid logins, casual or homeschool, then a course or a first lesson. It can be run again from her button to change answers. Her **Show me around** tours every parent screen, starting with the Queue: a look at each, then how to use it.
 - **Test-cook notice**: parents from before Getting started see a one-time note, above the lockers, to read a lesson through before their kids cook it; Getting started ends with the same reminder.

@@ -67,6 +67,33 @@ test('a lesson queued for two profiles is one item, and their cook closes it', a
   assert.equal((await a.get('/api/queue')).body.queued.length, 0);
 });
 
+test("a cook a kid didn't make can be removed by a parent, and put back", async () => {
+  const { a, b, ava, eli } = await setup();
+  await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava, eli], servings: 6 });
+  const cook = '00000000000000d1';
+  await finish(a, cook, 'shakshuka', [ava, eli]);
+  assert.equal((await a.get('/api/queue')).body.queued.length, 0);
+  // Another family can't touch it.
+  assert.equal((await b.post(`/api/attempts/${cook}/remove`)).status, 404);
+  assert.equal((await a.post(`/api/attempts/${cook}/remove`)).status, 200);
+  // It counts for nothing, for everyone on it, and the lesson is back up.
+  assert.deepEqual((await a.get(`/api/profiles/${ava}/cooks`)).body.cooks, {});
+  assert.deepEqual((await a.get(`/api/profiles/${eli}/cooks`)).body.cooks, {});
+  assert.ok((await a.get('/api/progress')).body.profiles.every((p) => !p.rows.length));
+  assert.equal((await a.get('/api/queue')).body.queued.length, 1);
+  // A retry from the kid's device doesn't bring it back.
+  await finish(a, cook, 'shakshuka', [ava, eli]);
+  assert.deepEqual((await a.get(`/api/profiles/${ava}/cooks`)).body.cooks, {});
+  // Undo puts it back as it was.
+  assert.equal((await a.post(`/api/attempts/${cook}/restore`)).status, 200);
+  assert.equal((await a.get(`/api/profiles/${ava}/cooks`)).body.cooks.shakshuka.times, 1);
+  assert.equal((await a.get('/api/queue')).body.queued.length, 0);
+  assert.equal((await a.get('/api/progress')).body.profiles.find((p) => p.id === eli).rows[0].cook, cook);
+  // Parents only.
+  await a.post('/api/pin/lock');
+  assert.equal((await a.post(`/api/attempts/${cook}/remove`)).status, 403);
+});
+
 test('a removed lesson can be put back', async () => {
   const { a, ava } = await setup();
   const { id } = (await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava] })).body;

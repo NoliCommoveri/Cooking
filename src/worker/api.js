@@ -449,7 +449,7 @@ on('GET', '/api/profiles/([0-9a-f]{16})/cooks', async (req, env, body, [pid]) =>
   const { results } = await env.DB.prepare(
     `SELECT a.lesson_id, a.finished_at
        FROM attempts a JOIN attempt_profiles ap ON ap.attempt_id = a.id
-      WHERE ap.profile_id = ? AND ap.family_id = ? AND a.family_id = ? AND a.finished_at IS NOT NULL
+      WHERE ap.profile_id = ? AND ap.family_id = ? AND a.family_id = ? AND a.finished_at IS NOT NULL AND a.removed_at IS NULL
       ORDER BY a.finished_at`,
   ).bind(pid, s.family_id, s.family_id).all();
   const tz = tzOf(req);
@@ -488,6 +488,37 @@ on('PUT', '/api/attempts/([0-9a-f]{16})/reflection', async (req, env, body, [aid
   return { ok: true };
 }, KID);
 
+// A parent takes back a cook a kid marked done but didn't make (a test run on
+// the couch). It's removed for everyone on it: it no longer finishes a lesson,
+// earns anything, or shows on Print our progress, and the queued lesson it
+// closed goes back on the queue. Undo puts it back as it was.
+on('POST', '/api/attempts/([0-9a-f]{16})/remove', async (req, env, body, [aid]) => {
+  const s = await requireParent(env, req);
+  const cook = await env.DB.prepare('SELECT * FROM attempts WHERE id = ? AND family_id = ? AND finished_at IS NOT NULL').bind(aid, s.family_id).first()
+    ?? fail(404, 'not_found', 'No such cook.');
+  if (cook.removed_at) return { ok: true };
+  const stmts = [env.DB.prepare('UPDATE attempts SET removed_at = ?, queue_id = NULL WHERE id = ? AND family_id = ?').bind(now(), aid, s.family_id)];
+  if (cook.queue_id) {
+    stmts.push(env.DB.prepare("UPDATE queue SET status = 'assigned', closed_at = NULL WHERE id = ? AND family_id = ? AND status = 'cooked'").bind(cook.queue_id, s.family_id));
+  }
+  await env.DB.batch(stmts);
+  return { ok: true };
+});
+
+on('POST', '/api/attempts/([0-9a-f]{16})/restore', async (req, env, body, [aid]) => {
+  const s = await requireParent(env, req);
+  const cook = await env.DB.prepare('SELECT * FROM attempts WHERE id = ? AND family_id = ? AND finished_at IS NOT NULL').bind(aid, s.family_id).first()
+    ?? fail(404, 'not_found', 'No such cook.');
+  if (!cook.removed_at) return { ok: true };
+  await env.DB.prepare('UPDATE attempts SET removed_at = NULL WHERE id = ? AND family_id = ?').bind(aid, s.family_id).run();
+  // It closes a queued lesson again, as when it was first finished.
+  if (!isSabbath(localDay(cook.finished_at, tzOf(req)))) {
+    const ids = (await env.DB.prepare('SELECT profile_id FROM attempt_profiles WHERE attempt_id = ? AND family_id = ?').bind(aid, s.family_id).all()).results.map((r) => r.profile_id);
+    if (ids.length) await markCooked(env, s.family_id, cook.lesson_id, ids, aid);
+  }
+  return { ok: true };
+});
+
 // ---------- Print our progress (§6.15) ----------
 
 // Every lesson each profile has cooked, oldest first: date, dish, cuisine,
@@ -499,9 +530,9 @@ on('GET', '/api/progress', async (req, env) => {
   const offset = Number.isInteger(tz) && Math.abs(tz) <= 840 ? tz : 0;
   const day = (iso) => new Date(Date.parse(iso) - offset * 60 * 1000).toISOString().slice(0, 10);
   const { results: profiles } = await env.DB.prepare('SELECT * FROM profiles WHERE family_id = ? ORDER BY created_at, id').bind(s.family_id).all();
-  const { results } = await env.DB.prepare(`SELECT ap.profile_id, ap.rating, a.lesson_id, a.finished_at, a.servings FROM attempt_profiles ap
+  const { results } = await env.DB.prepare(`SELECT ap.profile_id, ap.rating, a.id, a.lesson_id, a.finished_at, a.servings FROM attempt_profiles ap
       JOIN attempts a ON a.id = ap.attempt_id AND a.family_id = ap.family_id
-      WHERE ap.family_id = ? AND a.finished_at IS NOT NULL ORDER BY a.finished_at, a.id`).bind(s.family_id).all();
+      WHERE ap.family_id = ? AND a.finished_at IS NOT NULL AND a.removed_at IS NULL ORDER BY a.finished_at, a.id`).bind(s.family_id).all();
   const recipes = await recipeNames(env, s.family_id);
   const lesson = (lid) => LIBRARY.lessons.find((L) => L.id === lid) ?? (recipes[lid] && { title: recipes[lid].title, cuisine: null, skill: 'Family recipe' });
   return {
@@ -510,7 +541,7 @@ on('GET', '/api/progress', async (req, env) => {
       id: p.id, name: p.name,
       rows: results.filter((r) => r.profile_id === p.id && !isSabbath(day(r.finished_at))).map((r) => {
         const L = lesson(r.lesson_id);
-        return { date: day(r.finished_at), dish: L?.title ?? r.lesson_id, cuisine: LIBRARY.cuisines[L?.cuisine] ?? L?.cuisine ?? '', skill: L?.skill ?? '', rating: r.rating };
+        return { cook: r.id, date: day(r.finished_at), dish: L?.title ?? r.lesson_id, cuisine: LIBRARY.cuisines[L?.cuisine] ?? L?.cuisine ?? '', skill: L?.skill ?? '', rating: r.rating };
       }),
     })),
   };

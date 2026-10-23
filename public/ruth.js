@@ -435,6 +435,7 @@ const TOUR = [
   { hash: '#/parent/progress', name: 'Progress', what: 'What each learner has cooked.', how: [
     'Pick a learner, or Everyone, to see the date, dish, cuisine, skill, and rating of every cook.',
     'Tap Print, or save it as a PDF from the print window, or Download CSV for a spreadsheet. Handy for homeschool records.',
+    "If a kid marked a dish done but didn't really make it, tap Didn't make it on that row. It stops counting, and the lesson goes back on the queue. There's an Undo.",
   ] },
   { hash: '#/parent/recipes', name: 'Our recipes', what: "Your family's own recipes.", how: [
     'Tap + Add a recipe, and it walks you through one thing at a time: ingredients, tools, steps, then a review. The same food rules and safety checks as our lessons apply.',

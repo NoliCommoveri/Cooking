@@ -2499,3 +2499,29 @@ the next was started.
   starts with the Queue, and keeps the owner's screens for the owner).
   Checked in a browser at phone width: the Queue stop, Shopping with her
   button tapped early, and Stop the tour.
+
+## 102. 2026-10-23 — Didn't make it
+
+- **Owner ruling:** a way to remove a dish a kid marked done but didn't make.
+  Most kids will do a test run on the couch.
+- **Built:** **Didn't make it** on each row of **Parents → Progress**
+  (parents only, behind the PIN), with a confirm naming everyone on that cook,
+  then a done-message with **Undo**. The button is left off the printout.
+- **How it works:** removing is a soft delete. `POST
+  /api/attempts/:id/remove` sets `attempts.removed_at`, and the queued lesson
+  the cook closed goes back to assigned. Every read that counts cooks skips
+  removed ones: a profile's cooks (kitchen, stamps, ranks, skills), Print our
+  progress, a course's finished lessons, and the knife-lesson note. `POST
+  /api/attempts/:id/restore` clears it and closes the queued lesson again,
+  the way finishing it did (not on the Sabbath). A retry of the cook from the
+  kid's device doesn't bring it back, since a finished cook isn't changed.
+- The whole cook comes off, for everyone on it, since a shared cook is one
+  cook. Its reflections are kept, so Undo loses nothing.
+- **Migration 0015** (`attempts.removed_at`). Until the owner applies it on
+  `/ops`, Progress and the kitchen fail to load, so apply it right after the
+  deploy.
+- Chef Ruth's Show me around mentions it on the Progress stop. Plan §6.15 and
+  §8.4 say so; setup check-it 15.
+- Tests: 243 (one new: remove and Undo, across profiles, the queue, Progress,
+  a resent cook, another family, and the PIN). The migration-count tests now
+  expect 15.

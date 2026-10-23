@@ -221,7 +221,7 @@ async function courseDone(env, course, profiles, tz) {
   const { results } = await env.DB.prepare(
     `SELECT a.lesson_id, a.finished_at, q.id AS qid, q.course_id FROM attempts a
        LEFT JOIN queue q ON q.id = a.queue_id AND q.family_id = a.family_id
-       WHERE a.family_id = ? AND a.finished_at IS NOT NULL AND a.finished_at >= ?
+       WHERE a.family_id = ? AND a.finished_at IS NOT NULL AND a.removed_at IS NULL AND a.finished_at >= ?
          AND EXISTS (SELECT 1 FROM attempt_profiles ap WHERE ap.attempt_id = a.id AND ap.family_id = a.family_id
            AND ap.profile_id IN (${placeholders(profiles)}))
        ORDER BY a.finished_at`,
@@ -417,7 +417,7 @@ export function register(on) {
     // Profiles that have cooked or queued a Unit 1 knife lesson (§4.0).
     const { results: knife } = await env.DB.prepare(
       `SELECT DISTINCT ap.profile_id FROM attempt_profiles ap JOIN attempts a ON a.id = ap.attempt_id
-        WHERE ap.family_id = ? AND a.finished_at IS NOT NULL AND a.lesson_id IN (${placeholders(unitOne)})`,
+        WHERE ap.family_id = ? AND a.finished_at IS NOT NULL AND a.removed_at IS NULL AND a.lesson_id IN (${placeholders(unitOne)})`,
     ).bind(s.family_id, ...unitOne).all();
     const knifeOk = new Set(knife.map((r) => r.profile_id));
     for (const r of active) if (unitOne.includes(r.lesson_id)) (who[r.id] ?? []).forEach((p) => knifeOk.add(p));
