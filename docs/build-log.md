@@ -2445,3 +2445,39 @@ the next was started.
 - Recommendations, to confirm: only written lessons the diet filters allow;
   "matching" is by the main protein in the required ingredients (vegetarian:
   no meat or fish); the lesson goes to every learner.
+
+## 100. 2026-10-23 — Chef Ruth's Getting started
+
+- **Owner rulings:** a yes to a course in casual mode turns on Plan our weeks;
+  the vegetarian first lesson is fattoush, not shoestring fries (sides aren't
+  offered); her last lines are "Great, you're ready to get cooking!" and the
+  beta reminder, in the owner's words, in place of the test-cook notice.
+- **Built** (`public/ruth.js`, `src/worker/setup.js`,
+  `src/content/getting-started.js`): a new family lands on the empty lockers
+  with Chef Ruth's chat open over them. It has no close button. She asks, each
+  with a line on what it's for and, after, where to change it: family name and
+  PIN, default servings, allergies and diet, learners (a roster, shared or
+  not, kid or adult), a login for each kid if wanted, casual or homeschool,
+  then a course (who, an optional name, the start date, lessons per week) or,
+  without one, a first lesson by chicken, beef, fish, or vegetarian (two
+  offers, then where to add one). Every answer saves through the pages' own
+  routes. If the app closes, she picks up at the next part; a PIN that ran out
+  is asked for in the chat, with Forgot PIN.
+- **Her button** ("Chef Ruth", her picture) floats on the setup screen and on
+  every parent screen. From a parent screen it opens her chat with **Getting
+  started (change your setup)**, which walks through it again with the
+  current answers filled in (the PIN stays on Logins & PIN).
+- **Migration 0014** (`families.setup_step`, `families.setup_done_at`). A
+  family that set its PIN before it is marked set up. Until the owner applies
+  it on `/ops`, sign-up keeps the old family-name-and-PIN screen.
+- **First lessons:** each lesson's main protein is worked out at build time
+  (`mainProtein`), and `content/course.json` marks the 16 sides, breads, and
+  desserts `"meal": false` (the linter checks the flag). `GET
+  /api/setup/starters?kind=` lists the matches the family's diet filters allow.
+- A kid's last initial is guessed from the family name without a leading
+  "The" ("The Carsons" is C), on the login dialog too.
+- Tests: 241 (8 new: the parts' order, the protein rule, today's first offers,
+  the routes and their PIN check, the diet filters, and a family from before
+  0014). Checked in a browser at phone and desktop width: a casual family with
+  a shared profile, a kid login, and fattoush declined for ratatouille; and a
+  homeschool family with a course, closed partway with the PIN locked.

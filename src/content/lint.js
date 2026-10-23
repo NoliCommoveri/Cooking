@@ -224,6 +224,8 @@ export function lint(c) {
       if (c.imageExists && d.image && !c.imageExists(d.image)) err(where, `image ${d.image} isn't in content/images/`);
       for (const [p, t] of [['title', d.title], ['skill', d.skill], ['about', d.about], ['main', (d.main || []).join(', ')]]) for (const w of blockedWordsIn(t || '', rules)) err(where, `${p} names a blocked food ("${w}")`);
       if (d.pickOne && !SK[d.pickOne]) err(where, `pickOne "${d.pickOne}" isn't a skill in skills.json`);
+      // A side, bread, or dessert is marked meal: false (Chef Ruth's first lesson, §6.9).
+      if (d.meal !== undefined && d.meal !== false) err(where, 'meal is false for a side, bread, or dessert, or left out');
       for (const p of d.prereqs || []) {
         if (!prereqOk(p)) err(where, `prerequisite "${p}" isn't a dish or pick-one group`);
         // The suggested order is the default for every family, so it keeps prerequisites first.
