@@ -80,7 +80,8 @@ function sharedOut(c, filters, fid, added) {
   };
 }
 
-const live = "withdrawn_at IS NULL AND hidden_at IS NULL";
+// A deleted family's shared recipes leave the directory with it (§6.14).
+const live = "withdrawn_at IS NULL AND hidden_at IS NULL AND family_id NOT IN (SELECT id FROM families WHERE deleted_at IS NOT NULL)";
 const sharedRow = async (env, id) => (await env.DB.prepare(`SELECT * FROM community_recipes WHERE id = ? AND ${live}`).bind(id).first()) ?? fail(404, 'not_found', 'No such shared recipe.');
 
 export function register(on) {

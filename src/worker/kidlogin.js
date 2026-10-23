@@ -50,8 +50,9 @@ export function register(on) {
     const key = loginKey(body.name);
     const picture = String(body.picture ?? '');
     if (!key || !isLoginPicture(picture)) wrong();
+    // A deleted family's logins wait out its grace period, unusable (§6.14).
     const row = await env.DB.prepare(`SELECT kl.* FROM kid_logins kl JOIN profiles p ON p.id = kl.profile_id AND p.family_id = kl.family_id
-        WHERE kl.login_key = ? AND kl.picture = ? AND p.audience = 'kid'`).bind(key, picture).first();
+        JOIN families f ON f.id = kl.family_id WHERE kl.login_key = ? AND kl.picture = ? AND p.audience = 'kid' AND f.deleted_at IS NULL`).bind(key, picture).first();
     if (!row || !(await verifySecret(String(body.password ?? ''), row.password_hash))) wrong();
     return json({ ok: true, profile_id: row.profile_id }, 200, { 'set-cookie': await startKidSession(env, row, req) });
   }, KID);

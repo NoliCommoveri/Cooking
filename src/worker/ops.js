@@ -5,7 +5,7 @@
 import { migrationStatus, applyPending } from './migrate.js';
 import {
   exportAll, importAll, clearEverything, exportFamily, removeFamily, restoreFamily, tableNames,
-  Refused, CLEAR_PHRASE, REMOVE_PHRASE,
+  undeleteFamily, eraseAfter, GRACE_DAYS, Refused, CLEAR_PHRASE, REMOVE_PHRASE,
 } from './backup.js';
 import { emailReady } from './email.js';
 import { githubCheck } from './github.js';
@@ -102,7 +102,7 @@ async function dashboard(env, flash = '') {
   let families = [], owners = 0, error = null;
   if (ready) {
     try {
-      families = (await env.DB.prepare(`SELECT f.id, f.name, f.created_at, f.last_active_at, f.photos_enabled,
+      families = (await env.DB.prepare(`SELECT f.id, f.name, f.created_at, f.last_active_at, f.photos_enabled, f.deleted_at,
           (SELECT COUNT(*) FROM parents p WHERE p.family_id = f.id) AS parents,
           (SELECT COUNT(*) FROM profiles p WHERE p.family_id = f.id) AS profiles,
           (SELECT GROUP_CONCAT(email, ', ') FROM parents p WHERE p.family_id = f.id) AS emails
@@ -113,6 +113,7 @@ async function dashboard(env, flash = '') {
     }
   }
   const notReady = '<p class="muted">Apply the pending migrations first.</p>';
+  const live = families.filter((f) => !f.deleted_at), deleted = families.filter((f) => f.deleted_at);
   // The manager section saves content through GitHub (§7.5).
   const github = await githubCheck(env);
 
@@ -141,12 +142,20 @@ ${ready ? `<form method="post" action="/ops/owner" class="row">
 </form>` : notReady}
 
 <h2>Families</h2>
-${ready ? (families.length ? families.map((f) => `<div class="note">
+${ready ? (live.length ? live.map((f) => `<div class="note">
   <b>${esc(f.name)}</b> <span class="muted">${esc(f.emails ?? '')}</span><br>
   <span class="muted">${esc(f.parents)} parent login(s) · ${esc(f.profiles)} profile(s) · last active ${esc((f.last_active_at ?? f.created_at).slice(0, 10))} · photos ${f.photos_enabled ? 'on' : 'off'}</span>
   <div class="row" style="margin-top:.4rem"><a class="btn" href="/ops/family/${esc(f.id)}.json">Download</a>
   <form method="post" action="/ops/photos/${esc(f.id)}"><input type="hidden" name="on" value="${f.photos_enabled ? '0' : '1'}"><button type="submit">${f.photos_enabled ? 'Turn photos off' : 'Turn photos on'}</button></form>
   <a class="btn" href="/ops/remove/${esc(f.id)}">Remove…</a></div></div>`).join('') : '<p class="muted">No families yet.</p>')
+  + (deleted.length ? `<h3>Deleted by the family</h3>
+<p class="muted">Gone from the app: nobody can log in and nothing of theirs shows. Each is erased ${GRACE_DAYS} days after it was deleted. Until then, Bring back puts it back as it was, and everyone logs in again.</p>`
+    + deleted.map((f) => `<div class="note">
+  <b>${esc(f.name)}</b> <span class="muted">${esc(f.emails ?? '')}</span><br>
+  <span class="muted">Deleted ${esc(f.deleted_at.slice(0, 10))} · erased after ${esc(eraseAfter(f.deleted_at).slice(0, 10))}</span>
+  <div class="row" style="margin-top:.4rem"><a class="btn" href="/ops/family/${esc(f.id)}.json">Download</a>
+  <form method="post" action="/ops/undelete/${esc(f.id)}"><button type="submit">Bring back</button></form>
+  <a class="btn" href="/ops/remove/${esc(f.id)}">Erase now…</a></div></div>`).join('') : '')
   + `<form method="post" action="/ops/restore-family" enctype="multipart/form-data" class="row">
   <input type="file" name="file" accept="application/json,.json" required>
   <button type="submit">Restore a family</button></form>
@@ -300,6 +309,13 @@ Variables and Secrets → Add, type <em>Secret</em>, name <code>OPS_TOKEN</code>
     if (!fam) throw new Refused('No such family.');
     await env.DB.prepare('UPDATE families SET photos_enabled = ? WHERE id = ?').bind(on ? 1 : 0, ph[1]).run();
     return dashboard(env, `<p class="ok">Photos are ${on ? 'on' : 'off'} for ${esc(fam.name)}.${on ? '' : ' Nothing was deleted.'}</p>`);
+  }
+
+  // A family a parent deleted, within its grace period (§6.14).
+  const un = path.match(/^\/ops\/undelete\/([0-9a-f]{16})$/);
+  if (un && post) {
+    const name = await undeleteFamily(env.DB, un[1]);
+    return dashboard(env, `<p class="ok">${esc(name)} is back. Its parents and kids log in again.</p>`);
   }
 
   if (path === '/ops/restore-family' && post) return dashboard(env, restoredNote(await restoreFamily(env.DB, await uploadedJson(request))));

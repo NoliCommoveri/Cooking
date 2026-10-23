@@ -23,7 +23,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'src/worker/library-data.js');
 const CONTENT_OUT = join(ROOT, 'src/worker/content-data.js');
 // lint, validate, load, and format are for the manager section's checks (§7.5).
-export const BROWSER_LIB = ['units.js', 'scale.js', 'terms.js', 'diet.js', 'patch.js', 'course.js', 'shop.js', 'rules.js', 'recipe.js', 'leaven.js', 'rewards.js', 'login-pictures.js', 'getting-started.js', 'lint.js', 'validate.js', 'load.js', 'format.js'];
+export const BROWSER_LIB = ['units.js', 'scale.js', 'terms.js', 'diet.js', 'patch.js', 'course.js', 'shop.js', 'rules.js', 'recipe.js', 'leaven.js', 'rewards.js', 'login-pictures.js', 'getting-started.js', 'lint.js', 'validate.js', 'load.js', 'format.js', 'grades.js'];
 // Lessons in course order (content/course.json), the order their numbers follow.
 // Lessons in a seasonal unit (Appointed Times, §6.19) aren't in the course and come after it.
 const inCourse = (c) => {

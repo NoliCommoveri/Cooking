@@ -23,6 +23,9 @@ import { register as registerSharing } from './sharing.js';
 import { register as registerSwap } from './swap.js';
 import { register as registerKidLogins } from './kidlogin.js';
 import { register as registerSetup } from './setup.js';
+import { register as registerGrades } from './grades.js';
+import { RUBRIC, gradeLine } from '../content/grades.js';
+import { exportFamily, deleteFamily, eraseAfter } from './backup.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -126,10 +129,11 @@ on('GET', '/api/me', async (req, env) => {
 }, KID);
 
 on('POST', '/api/login', async (req, env, body) => {
-  const row = await env.DB.prepare('SELECT * FROM parents WHERE email = ?').bind(email(body.email)).first();
+  const row = await env.DB.prepare('SELECT p.*, f.deleted_at FROM parents p JOIN families f ON f.id = p.family_id WHERE p.email = ?').bind(email(body.email)).first();
   if (!row || !(await verifySecret(String(body.password ?? ''), row.password_hash))) {
     fail(401, 'login_failed', "That email and password don't match.");
   }
+  if (row.deleted_at) fail(403, 'family_deleted', deletedMessage(row.deleted_at));
   return json({ ok: true }, 200, { 'set-cookie': await startSession(env, row, req) });
 }, KID);
 
@@ -166,6 +170,16 @@ async function sendCode(env, addr, passwordHash) {
   return { ok: true, email: addr, resend_at: minutesFrom(t, RESEND_MINUTES) };
 }
 
+// An email already in a family can't sign up. A deleted family's email is
+// free again once the family is erased (§6.14).
+async function emailFree(env, addr) {
+  const had = await env.DB.prepare('SELECT f.deleted_at FROM parents p JOIN families f ON f.id = p.family_id WHERE p.email = ?').bind(addr).first();
+  if (had?.deleted_at) fail(409, 'family_deleted', `${deletedMessage(had.deleted_at)} After that, this email can sign up again.`);
+  if (had) fail(409, 'email_taken', 'That email already has an account. Log in instead.');
+}
+
+const deletedMessage = (deletedAt) => `This family's account was deleted. It's erased for good after ${eraseAfter(deletedAt).slice(0, 10)}; until then, the app's owner can bring it back if you ask.`;
+
 // A code that has run out or been guessed at too often can be replaced straight away.
 const spent = (row) => Date.parse(row.expires_at) < Date.now() || row.attempts >= CODE_TRIES;
 
@@ -178,9 +192,7 @@ on('POST', '/api/signup/start', async (req, env, body) => {
   }
   const addr = email(body.email);
   const pwHash = await hashSecret(password(body.password));
-  if (await env.DB.prepare('SELECT 1 FROM parents WHERE email = ?').bind(addr).first()) {
-    fail(409, 'email_taken', 'That email already has an account. Log in instead.');
-  }
+  await emailFree(env, addr);
   const row = await env.DB.prepare('SELECT * FROM signup_verifications WHERE email = ?').bind(addr).first();
   if (row && !spent(row) && Date.now() < Date.parse(minutesFrom(row.sent_at, RESEND_MINUTES))) {
     // Pressing Sign up again doesn't send another email inside the wait; the
@@ -212,9 +224,7 @@ on('POST', '/api/signup/verify', async (req, env, body) => {
     const left = CODE_TRIES - row.attempts - 1;
     fail(400, 'code_wrong', left > 0 ? `That code isn't right. ${left} ${left === 1 ? 'try' : 'tries'} left.` : 'Too many tries. Ask for a new code.');
   }
-  if (await env.DB.prepare('SELECT 1 FROM parents WHERE email = ?').bind(addr).first()) {
-    fail(409, 'email_taken', 'That email already has an account. Log in instead.');
-  }
+  await emailFree(env, addr);
   const t = now();
   const parent = { id: id(), family_id: id() };
   await env.DB.batch([
@@ -227,7 +237,7 @@ on('POST', '/api/signup/verify', async (req, env, body) => {
 });
 
 on('POST', '/api/password/forgot', async (req, env, body) => {
-  const row = await env.DB.prepare('SELECT id, family_id FROM parents WHERE email = ?').bind(email(body.email)).first();
+  const row = await env.DB.prepare('SELECT p.id, p.family_id FROM parents p JOIN families f ON f.id = p.family_id WHERE p.email = ? AND f.deleted_at IS NULL').bind(email(body.email)).first();
   if (row) {
     const token = randomHex(32);
     const expires = new Date(Date.now() + RESET_MINUTES * 60 * 1000).toISOString();
@@ -241,6 +251,7 @@ on('POST', '/api/password/forgot', async (req, env, body) => {
 on('POST', '/api/password/reset', async (req, env, body) => {
   const pw = password(body.password);
   const hash = await sha256Hex(String(body.token ?? ''));
+  // Deleting a family removes its reset links, so a deleted family has none.
   const r = await env.DB.prepare('SELECT * FROM password_resets WHERE token_hash = ?').bind(hash).first();
   if (!r || r.used_at || Date.parse(r.expires_at) < Date.now()) {
     fail(400, 'bad_link', 'That reset link has expired or was already used. Ask for a new one.');
@@ -357,6 +368,8 @@ on('DELETE', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
     // Its login goes, and every device it was logged in on is logged out (§8.3a).
     endKidSessions(env, s.family_id, pid),
     env.DB.prepare('DELETE FROM kid_logins WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
+    env.DB.prepare('DELETE FROM grades WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
+    env.DB.prepare('DELETE FROM transcripts WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
     env.DB.prepare('DELETE FROM attempt_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
     // Off every queued lesson and course too; a queued lesson nobody is left on goes.
     env.DB.prepare('DELETE FROM queue_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
@@ -557,18 +570,29 @@ on('GET', '/api/progress', async (req, env) => {
   const offset = Number.isInteger(tz) && Math.abs(tz) <= 840 ? tz : 0;
   const day = (iso) => new Date(Date.parse(iso) - offset * 60 * 1000).toISOString().slice(0, 10);
   const { results: profiles } = await env.DB.prepare('SELECT * FROM profiles WHERE family_id = ? ORDER BY created_at, id').bind(s.family_id).all();
-  const { results } = await env.DB.prepare(`SELECT ap.profile_id, ap.rating, a.id, a.lesson_id, a.finished_at, a.servings FROM attempt_profiles ap
+  // Homeschool mode adds each row's grade, for the Grade button (Phase 4b).
+  const fam = await env.DB.prepare('SELECT name, mode FROM families WHERE id = ?').bind(s.family_id).first();
+  const { results } = await env.DB.prepare(`SELECT ap.profile_id, ap.rating, ap.notes, ap.transfer, a.id, a.lesson_id, a.finished_at, a.servings,
+        g.skill AS g_skill, g.safety AS g_safety, g.recipe AS g_recipe, g.result AS g_result, g.reflection AS g_reflection, g.grade_text, g.graded_at
+      FROM attempt_profiles ap
       JOIN attempts a ON a.id = ap.attempt_id AND a.family_id = ap.family_id
+      LEFT JOIN grades g ON g.attempt_id = a.id AND g.profile_id = ap.profile_id AND g.family_id = ap.family_id
       WHERE ap.family_id = ? AND a.finished_at IS NOT NULL AND a.removed_at IS NULL ORDER BY a.finished_at, a.id`).bind(s.family_id).all();
+  const homeschool = fam.mode === 'homeschool';
+  const gradeOf = (r) => (r.graded_at ? Object.fromEntries([...RUBRIC.map((x) => [x.key, r[`g_${x.key}`]]), ['grade_text', r.grade_text]]) : null);
   const recipes = await recipeNames(env, s.family_id);
   const lesson = (lid) => LIBRARY.lessons.find((L) => L.id === lid) ?? (recipes[lid] && { title: recipes[lid].title, cuisine: null, skill: 'Family recipe' });
   return {
-    family: (await env.DB.prepare('SELECT name FROM families WHERE id = ?').bind(s.family_id).first()).name,
+    family: fam.name,
+    homeschool,
     profiles: profiles.map((p) => ({
       id: p.id, name: p.name,
       rows: results.filter((r) => r.profile_id === p.id && !isSabbath(day(r.finished_at))).map((r) => {
         const L = lesson(r.lesson_id);
-        return { cook: r.id, date: day(r.finished_at), dish: L?.title ?? r.lesson_id, cuisine: LIBRARY.cuisines[L?.cuisine] ?? L?.cuisine ?? '', skill: L?.skill ?? '', rating: r.rating };
+        const row = { cook: r.id, date: day(r.finished_at), dish: L?.title ?? r.lesson_id, cuisine: LIBRARY.cuisines[L?.cuisine] ?? L?.cuisine ?? '', skill: L?.skill ?? '', rating: r.rating };
+        if (!homeschool) return row;
+        const g = gradeOf(r);
+        return { ...row, reflection: { rating: r.rating, notes: r.notes, transfer: r.transfer }, grade: g, grade_line: g ? gradeLine(g) : null };
       }),
     })),
   };
@@ -816,6 +840,29 @@ on('POST', '/api/parents', async (req, env, body) => {
   return { ok: true };
 });
 
+// ---------- Download our data and Delete our family (§6.14) ----------
+
+// The family's own copy of everything: the same file /ops downloads for it,
+// so it can also be put back with Restore a family.
+on('GET', '/api/family/export', async (req, env) => {
+  const s = await requireParent(env, req);
+  return exportFamily(env.DB, s.family_id);
+});
+
+// Behind the parent PIN and this parent's password. The family is gone at
+// once, and erased after the grace period (backup.js).
+on('POST', '/api/family/delete', async (req, env, body) => {
+  const s = await requireParent(env, req);
+  const row = await env.DB.prepare('SELECT password_hash FROM parents WHERE id = ?').bind(s.parent_id).first();
+  if (!(await verifySecret(String(body.password ?? ''), row.password_hash))) fail(403, 'password_wrong', "That password didn't match.");
+  // The owner's family holds the owner screens and the manager sign-in.
+  if (await env.DB.prepare('SELECT 1 FROM parents WHERE family_id = ? AND is_owner = 1').bind(s.family_id).first()) {
+    fail(409, 'owner_family', "The owner's family can't be deleted here. Use Remove on /ops.");
+  }
+  const at = await deleteFamily(env.DB, s.family_id);
+  return json({ ok: true, erase_after: eraseAfter(at) }, 200, { 'set-cookie': await endSession(env, req) });
+});
+
 // ---------- owner screens (§6.2a) ----------
 
 on('GET', '/api/owner', async (req, env) => {
@@ -826,7 +873,7 @@ on('GET', '/api/owner', async (req, env) => {
     waiting: (await env.DB.prepare('SELECT COUNT(*) AS n FROM signup_verifications WHERE expires_at > ?').bind(now()).first()).n,
     families: await all(`SELECT f.name, f.created_at, f.last_active_at,
         (SELECT COUNT(*) FROM profiles p WHERE p.family_id = f.id) AS profiles
-      FROM families f ORDER BY f.created_at DESC`),
+      FROM families f WHERE f.deleted_at IS NULL ORDER BY f.created_at DESC`),
     email_ready: emailReady(env),
   };
 });
@@ -859,6 +906,7 @@ registerSharing(on);
 registerSwap(on);
 registerKidLogins(on);
 registerSetup(on);
+registerGrades(on);
 
 // ---------- dispatch ----------
 

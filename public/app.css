@@ -324,10 +324,25 @@ fieldset.psec legend{font-size:13px;letter-spacing:.07em;text-transform:uppercas
 .ptable table{width:100%;border-collapse:collapse;font-size:15px}
 .ptable th,.ptable td{text-align:left;padding:6px 8px 6px 0;border-bottom:1px solid var(--h-line);vertical-align:top}
 .printout{overflow-x:auto}
+/* Grading (Phase 4b): a rubric row and its 1-4 choice. */
+.rubric-row{display:grid;gap:6px;padding:10px 0;border-bottom:1px solid var(--h-line)}
+.rubric-row small{display:block;color:var(--h-mut);font-size:14px}
+.rubric-scores{display:flex;gap:6px}
+.rubric-scores label{flex:1}
+.rubric-scores input{position:absolute;opacity:0;pointer-events:none}
+.rubric-scores span{display:flex;align-items:center;justify-content:center;min-height:44px;border:1px solid var(--h-line);border-radius:10px;font-weight:700;cursor:pointer}
+.rubric-scores input:checked+span{background:var(--h-acc);border-color:var(--h-acc);color:var(--h-acc-ink)}
+.rubric-scores input:focus-visible+span{outline:2px solid var(--h-fg);outline-offset:2px}
+.tr-school{font-weight:800;font-size:20px;margin:0}
+.tr-details{display:grid;gap:2px;margin:8px 0 14px}
+.tr-details>div{display:flex;gap:8px}
+.tr-details dt{font-weight:700;min-width:8em}
+.tr-details dd{margin:0}
+.tr-totals{margin-top:14px}
 @media print{
   :root{--h-bg:#fff;--h-fg:#000;--h-line:#999;--h-mut:#333}
   body{background:#fff;color:#000}
-  .bar,.tabs,.drawer,.eyebrow,.noprint,.sabbath,.toast,#app>h1{display:none!important}
+  .bar,.tabs,.drawer,.eyebrow,.noprint,.sabbath,.toast,.ruth-fab,#app>h1{display:none!important}
   .ptable{break-inside:avoid-page}
   .ptable table{font-size:12px}
 }

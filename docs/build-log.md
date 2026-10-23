@@ -3057,3 +3057,84 @@ At the owner's request, parents get the manager's preview too.
 - Tests: 261. Checked in a browser at phone width on the dev server: the
   Additional tab, Add a lesson, a family recipe in Cook mode, and the
   course editor; nothing was written.
+
+## 123. 2026-10-23 — Delete our family and Download our data
+
+The beta word is out, so the owner asked for parents to be able to delete
+their own family, and for a way to delete families from `/ops`.
+- **`/ops` already had one:** Remove… on each family, with Download beside
+  it and Restore a family. It stays as it was.
+- **Family settings → Leave Clean Plate** (`public/app.js`): **Download our
+  data** saves the family's own export, the same file `/ops` downloads for
+  it, so Restore a family can put it back. **Delete our family…** opens a
+  dialog that says what happens, offers the download again, and asks for the
+  parent's password (the page is already behind the PIN).
+- **What deleting does** (`deleteFamily` in `src/worker/backup.js`,
+  `POST /api/family/delete`): the family gets `deleted_at`, and every parent
+  and kid session, manager session, and reset link of the family is removed.
+  Login, kid login, and Forgot password refuse it; sign-up with one of its
+  emails says it was deleted and when it's erased. Its shared recipes leave
+  the directory, and it leaves the owner's family list.
+- **The owner's family can't delete itself from the app**, because it holds
+  the owner screens; Remove on `/ops` still works for it.
+- **Grace period (§6.14):** on `/ops`, deleted families are listed under
+  "Deleted by the family" with Download, **Bring back** (everything as it
+  was; everyone logs in again), and Erase now… (the Remove page).
+- **Daily erase job** (`scheduled` in `src/worker/index.js`, the cron in
+  `wrangler.toml`, 09:17 UTC): erases families deleted more than 30 days ago
+  the same way as Remove. Cloudflare sets up the cron on deploy.
+- **Fixed in Remove:** a family whose shared recipe another family had
+  reported couldn't be removed (the report pointed at the recipe). Reports
+  on its recipes now go with it.
+- A download taken while a family was deleted restores as a live family.
+- **Migration `0002_family_delete.sql`** adds `families.deleted_at`. After
+  the deploy, the owner presses **Apply pending** on `/ops`; until then,
+  logging in fails.
+- Not built yet: the inactive purge and its warning emails, and photos (so
+  nothing to download or erase there).
+- Plan §6.14 notes what's built.
+- Tests: 266 (5 new; two `/ops` tests now count the migrations instead of
+  assuming one). Checked in a browser at phone width on the dev server: the
+  new section, the dialog, a wrong password, and the delete, which logged
+  the device out.
+
+## 124. 2026-10-23 — Grades and the homeschool transcript
+
+Phase 4b, homeschool mode, built before deploying 123 (the owner is holding
+the deploy until this is done, so its tables go in the same migration).
+- **Owner rulings (2026-10-23):** a single grade is whatever the parent
+  types; the transcript has everything cooked except on the Sabbath; parents
+  grade from a To grade list and from Progress; the app shows the rubric
+  average and the hours, and the parent decides the final grade and credit.
+  Plan §6.15 has the spec; §10's open question is closed.
+- **Migration:** `0002_family_delete.sql` from 123 is renamed
+  `0002_delete_and_grades.sql` and also adds `families.school_name`, a
+  `grades` table (one row per profile per cook: the five rubric scores,
+  `grade_text`, or both), and `transcripts` (one per profile). It was never
+  applied, so editing it is safe.
+- **Rubric** (`src/content/grades.js`, copied to `public/lib/`): the five
+  rows and their descriptions from the syllabus, the rubric average, and the
+  one-line grade ("A- · 3.6 / 4").
+- **API** (`src/worker/grades.js`), homeschool mode and the parent PIN only:
+  `GET /api/grades` (counted cooks with no grade), `PUT
+  /api/attempts/<id>/grade` (the rubric, words, or both; neither takes it
+  off), `GET` and `PUT /api/transcript/<profile>`. Refused on the Sabbath, and
+  for a cook on the Sabbath or one taken back. In casual mode they're refused
+  and grades are kept. `/api/progress` adds each row's grade in homeschool
+  mode. Deleting a profile takes its grades and transcript.
+- **Parent screens** (`public/app.js`), in the Learning path menu in
+  homeschool mode only:
+  - **Grades:** cooks waiting for a grade, newest first, each with Grade.
+  - **Grade dialog:** the profile's reflection, the five rubric rows as 1–4
+    buttons, and a grade in your own words; Remove grade when there's one.
+  - **Progress:** a Grade column (not printed) showing the grade or Grade.
+  - **Transcript:** a student picker, Print, and Edit details (a dialog);
+    on screen only, the cooks, hours, and rubric average for the parent to
+    decide from; printed, the homeschool name, details, the table with hours
+    and grades, skills, totals, the final grade, and the credit.
+- Chef Ruth's button no longer prints on Print our progress or the
+  transcript.
+- Not done: Chef Ruth's tour doesn't show the two new pages yet.
+- Tests: 271 (5 new). Checked in a browser at phone width on the dev server:
+  the Grades page, grading with the rubric and words, Progress's Grade
+  column, Edit details, and the transcript on screen and in print.
