@@ -13,10 +13,15 @@
   "totalMinutes": 50,
   "scaling": {
     "mode": "free",
-    "notes": [{ "from": 7, "text": "For more than 6, sear the chicken in two batches so the pan stays hot, and cook the vegetables in two batches too." }]
+    "notes": [
+      { "from": 7, "text": "For more than 6, sear the chicken in two batches so the pan stays hot, and cook the vegetables in two batches too." }
+    ]
   },
   "learn": {
-    "move": { "title": "Strips, then sizzle", "body": "Julienne means cutting food into thin, even strips. Today you'll cut peppers and onions that way, sear seasoned chicken in a very hot pan, and pile it all into warm tortillas." },
+    "move": {
+      "title": "Strips, then sizzle",
+      "body": "Julienne means cutting food into thin, even strips. Today you'll cut peppers and onions that way, sear seasoned chicken in a very hot pan, and pile it all into warm tortillas."
+    },
     "why": [
       { "id": "skin-down", "title": "Skin side down", "body": "The shiny skin of a pepper is slippery, and a knife can skate right off it. Lay the pepper skin side down and cut into the soft inside instead. The knife grips, and the strips come out even." },
       { "id": "same-size", "title": "Same size, same time", "body": "Thin strips cook faster than thick ones. When every strip is about the same size, they all turn soft and brown at the same moment, with no burnt bits and no raw ones." },
@@ -55,7 +60,19 @@
   "substitutions": [
     { "for": "tortilla-flour", "use": "tortilla-corn", "reason": "gluten", "note": "Warm corn tortillas two at a time, and use two per fajita if they tear." }
   ],
-  "equipment": ["chef-knife", "cutting-board", "small-bowl", "measuring-spoons", "plate", "skillet-12", "tongs", "spatula", "thermometer", "paper-towels", "microwave"],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "measuring-spoons",
+    "plate",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "thermometer",
+    "paper-towels",
+    "microwave"
+  ],
   "steps": [
     { "id": "pepper-open", "text": "Cut the top and bottom off each pepper. Stand it up, cut down one side, and open it out into one long, flat strip. Cut away the seeds and the white ribs.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Hold the food with your hand shaped like a claw: fingertips tucked under, knuckles in front." },
     { "id": "pepper-strips", "text": "Lay each pepper skin side down and julienne it: cut it into thin strips, about as wide as a pencil.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "skin-down", "look": "A pile of strips that are all about the same width." },

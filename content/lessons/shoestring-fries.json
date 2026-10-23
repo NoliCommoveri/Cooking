@@ -17,7 +17,10 @@
     "notes": [{ "from": 5, "text": "For more than 4, bake in two rounds of two pans, so the fries stay spread out." }]
   },
   "learn": {
-    "move": { "title": "Even sticks, hot oven", "body": "Julienne means cutting food into thin, even sticks. Today you'll cut potatoes into shoestrings, then bake them in a hot oven until they're golden and crisp, with no frying." },
+    "move": {
+      "title": "Even sticks, hot oven",
+      "body": "Julienne means cutting food into thin, even sticks. Today you'll cut potatoes into shoestrings, then bake them in a hot oven until they're golden and crisp, with no frying."
+    },
     "why": [
       { "id": "flat-side", "title": "Make a flat side first", "body": "A potato is round, and round things roll under a knife. Slice a thin piece off one side and set the potato on that flat side. Now it can't wobble. Almost every vegetable you cut from now on starts this way." },
       { "id": "same-size", "title": "Same size, same time", "body": "In the oven, thin sticks brown faster than thick ones. If the sizes are mixed, the thin ones burn before the thick ones are done. Even sticks all turn golden at the same moment." },
@@ -42,7 +45,17 @@
     { "ingredient": "paprika-smoked", "amount": 0.5, "unit": "tsp", "optional": true },
     { "ingredient": "ketchup", "amount": null, "text": "for dipping", "optional": true, "group": "To serve" }
   ],
-  "equipment": ["sheet-pan", "parchment", "chef-knife", "cutting-board", "mixing-bowl-large", "kitchen-towel", "measuring-spoons", "spatula", "oven-mitts"],
+  "equipment": [
+    "sheet-pan",
+    "parchment",
+    "chef-knife",
+    "cutting-board",
+    "mixing-bowl-large",
+    "kitchen-towel",
+    "measuring-spoons",
+    "spatula",
+    "oven-mitts"
+  ],
   "steps": [
     { "id": "preheat", "text": "Put one oven rack just above the middle and one just below it. Heat the oven to 425°F. Line 2 sheet pans with parchment.", "safety": "adult-nearby", "hazard": "Hot oven" },
     { "id": "flat-side", "text": "Lay a potato on the cutting board. Slice a thin piece off one long side, and turn the potato so it sits on that flat side.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "flat-side", "tip": "Hold the food with your hand shaped like a claw: fingertips tucked under, knuckles in front. The flat of the knife slides along your knuckles." },

@@ -13,11 +13,19 @@
   "totalMinutes": 45,
   "scaling": {
     "mode": "free",
-    "notes": [{ "from": 7, "text": "For more than 6, sear the steak in two batches so the pan stays hot. Keep the first batch resting on the board while the second cooks." }]
+    "notes": [
+      { "from": 7, "text": "For more than 6, sear the steak in two batches so the pan stays hot. Keep the first batch resting on the board while the second cooks." }
+    ]
   },
   "learn": {
-    "move": { "title": "A green sauce, chopped by hand", "body": "Fine chopping means cutting herbs and garlic into tiny, even bits. Today you'll chop parsley and garlic for chimichurri, a bright Argentine sauce, then sear a steak in a hot pan and spoon the sauce over the slices." },
-    "callback": { "lesson": "chicken-fajitas", "body": "In fajitas you left the chicken alone in a hot pan until a brown crust formed and it let go by itself. Steak works the same way. Don't poke it, and wait for the crust." },
+    "move": {
+      "title": "A green sauce, chopped by hand",
+      "body": "Fine chopping means cutting herbs and garlic into tiny, even bits. Today you'll chop parsley and garlic for chimichurri, a bright Argentine sauce, then sear a steak in a hot pan and spoon the sauce over the slices."
+    },
+    "callback": {
+      "lesson": "chicken-fajitas",
+      "body": "In fajitas you left the chicken alone in a hot pan until a brown crust formed and it let go by itself. Steak works the same way. Don't poke it, and wait for the crust."
+    },
     "why": [
       { "id": "rock-knife", "title": "Keep the tip down", "body": "Rest the tip of the knife on the board and lift only the handle, up and down, like a seesaw. Your other hand presses flat on top of the blade, away from the edge. The tip never leaves the board, so the knife can't jump." },
       { "id": "sauce-sits", "title": "Let the sauce sit", "body": "Salt and vinegar pull flavor out of the garlic and herbs, and the oil carries it around the bowl. Chimichurri made 15 minutes ahead tastes stronger and rounder than chimichurri made a minute ago. Make it first, and let it sit while the steak cooks." },
@@ -49,7 +57,23 @@
     { "ingredient": "black-pepper", "amount": 0.5, "unit": "tsp", "group": "Steak" },
     { "ingredient": "vegetable-oil", "amount": 1, "unit": "tbsp", "scale": false, "group": "For the pan" }
   ],
-  "equipment": ["chef-knife", "cutting-board", "colander", "kitchen-towel", "small-bowl", "fork", "measuring-cups", "measuring-spoons", "plate", "paper-towels", "skillet-12", "tongs", "spatula", "thermometer", "oven-mitts"],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "colander",
+    "kitchen-towel",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "plate",
+    "paper-towels",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "thermometer",
+    "oven-mitts"
+  ],
   "steps": [
     { "id": "parsley-prep", "text": "Rinse the parsley in the colander and roll it up in the kitchen towel to pat it dry. Pull the leaves off the thick stems and push them into a tight pile on the cutting board.", "safety": "solo", "tip": "Dry leaves chop into neat bits. Wet ones turn to mush." },
     { "id": "parsley-chop", "text": "Chop the parsley fine: rest the tip of the knife on the board, press your other hand flat on top of the blade, and rock the handle up and down over the pile. Scrape it back together and go over it again until the bits are small. Put it in the small bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "rock-knife", "look": "Fluffy green bits about the size of a grain of rice." },

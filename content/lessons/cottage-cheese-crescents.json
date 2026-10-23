@@ -18,13 +18,16 @@
     "mode": "fixed",
     "multipliers": [0.5, 1, 2],
     "notes": {
-      "0.5": "Makes 12 crescents. One sheet pan.",
       "1": "Makes 24 crescents. Bake them on two sheet pans, one at a time.",
-      "2": "Makes 48 crescents. Bake one pan at a time while you shape the next."
+      "2": "Makes 48 crescents. Bake one pan at a time while you shape the next.",
+      "0.5": "Makes 12 crescents. One sheet pan."
     }
   },
   "learn": {
-    "move": { "title": "Pastry that puffs with no leaven", "body": "Mash butter and cottage cheese into flour for a soft dough, chill it, roll it out, and wrap wedges of it around cinnamon sugar. Steam from the butter and cheese gives the puff, not yeast." },
+    "move": {
+      "title": "Pastry that puffs with no leaven",
+      "body": "Mash butter and cottage cheese into flour for a soft dough, chill it, roll it out, and wrap wedges of it around cinnamon sugar. Steam from the butter and cheese gives the puff, not yeast."
+    },
     "why": [
       { "id": "no-leaven", "title": "Puffed, but unleavened", "body": "These rolls have no yeast and no baking powder, so they're good for the Feast of Unleavened Bread. They still puff a little: the water in the butter and the cottage cheese turns to steam in the oven and lifts the dough." },
       { "id": "chill", "title": "Why chill the dough", "body": "Soft butter makes a sticky dough that tears. An hour in the fridge firms the butter, so the dough rolls out smooth and holds its shape in the oven." },
@@ -48,7 +51,22 @@
     { "ingredient": "cinnamon-ground", "amount": 1, "unit": "tbsp", "group": "Filling" },
     { "ingredient": "flour-ap", "amount": null, "text": "a little more, for dusting" }
   ],
-  "equipment": ["mixing-bowl-large", "small-bowl", "measuring-cups", "measuring-spoons", "fork", "wooden-spoon", "rolling-pin", "chef-knife", "cutting-board", "sheet-pan", "parchment", "oven-mitts", "spatula", "cooling-rack"],
+  "equipment": [
+    "mixing-bowl-large",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "fork",
+    "wooden-spoon",
+    "rolling-pin",
+    "chef-knife",
+    "cutting-board",
+    "sheet-pan",
+    "parchment",
+    "oven-mitts",
+    "spatula",
+    "cooling-rack"
+  ],
   "steps": [
     { "id": "mash", "text": "Mash the cottage cheese and soft butter together in the large bowl with the fork, until only tiny lumps are left.", "safety": "solo" },
     { "id": "dough", "text": "Stir in the flour and salt with the wooden spoon until a soft dough forms.", "safety": "solo", "why": "no-leaven", "tip": "Don't taste the raw dough. Raw flour can make you sick." },

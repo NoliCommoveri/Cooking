@@ -17,14 +17,13 @@
   "scaling": {
     "mode": "fixed",
     "multipliers": [0.5, 1, 2],
-    "notes": {
-      "0.5": "Makes 3 rounds.",
-      "1": "Makes 6 rounds.",
-      "2": "Makes 12 rounds. Cook them one at a time."
-    }
+    "notes": { "1": "Makes 6 rounds.", "2": "Makes 12 rounds. Cook them one at a time.", "0.5": "Makes 3 rounds." }
   },
   "learn": {
-    "move": { "title": "Bread with no time to rise", "body": "Flour, water, oil, and salt, mixed fast, rolled thin, and cooked in a hot, dry pan. Nothing in it can make it rise, so it bakes flat and crisp." },
+    "move": {
+      "title": "Bread with no time to rise",
+      "body": "Flour, water, oil, and salt, mixed fast, rolled thin, and cooked in a hot, dry pan. Nothing in it can make it rise, so it bakes flat and crisp."
+    },
     "why": [
       { "id": "no-leaven", "title": "Why there's no yeast", "body": "During the Feast of Unleavened Bread, no leaven is eaten for seven days (Leviticus 23:6). When Israel left Egypt, there was no time for the dough to rise, so they baked it flat (Exodus 12:39). This dough has no yeast and no baking powder, so nothing in it makes it puff up." },
       { "id": "holes", "title": "Why poke holes", "body": "The water in the dough turns to steam in the hot pan. Holes from a fork let the steam out, so the bread cooks flat and crisp instead of puffing into one big bubble." },
@@ -47,7 +46,18 @@
     { "ingredient": "water", "amount": 0.667, "unit": "cup" },
     { "ingredient": "flour-ap", "amount": null, "text": "a little more, for dusting" }
   ],
-  "equipment": ["mixing-bowl-large", "measuring-cups", "liquid-measuring-cup", "measuring-spoons", "wooden-spoon", "rolling-pin", "fork", "skillet-12", "spatula", "plate"],
+  "equipment": [
+    "mixing-bowl-large",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "wooden-spoon",
+    "rolling-pin",
+    "fork",
+    "skillet-12",
+    "spatula",
+    "plate"
+  ],
   "steps": [
     { "id": "mix", "text": "Stir the flour and salt together in the bowl. Pour in the oil and water, and stir until it comes together into a rough dough.", "safety": "solo", "why": "no-leaven", "tip": "Don't taste the raw dough. Raw flour can make you sick." },
     { "id": "knead", "text": "Dust the counter with flour. Knead the dough until it's smooth.", "safety": "solo", "timerSeconds": 120, "timerLabel": "Knead", "tip": "Go straight on to the next steps. This dough doesn't need to rest." },

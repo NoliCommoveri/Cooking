@@ -78,7 +78,7 @@ export async function clearEverything(db) {
 // parent's or a kid's) and reset links are left out of a family's export:
 // they're removed with the family and not worth putting back (everyone just
 // logs in again).
-const NOT_EXPORTED = new Set(['sessions', 'kid_sessions', 'password_resets']);
+const NOT_EXPORTED = new Set(['sessions', 'kid_sessions', 'manage_sessions', 'password_resets']);
 
 async function familyTables(db) {
   const out = [];

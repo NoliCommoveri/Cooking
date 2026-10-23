@@ -5,14 +5,20 @@
 
 const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+// The word list's patterns, built once per list rather than once per line of text.
+const compiled = new WeakMap();
+const patterns = (list, make) => {
+  if (!compiled.has(list)) compiled.set(list, list.map(make));
+  return compiled.get(list);
+};
+
 // Blocked words found in `text`. Exact allowed phrases ("turkey bacon") are removed first.
 export function blockedWordsIn(text, rules) {
   if (!text) return [];
   let t = ` ${String(text)} `;
-  for (const p of rules.allowedPhrases) t = t.replace(new RegExp(esc(p).replace(/\s+/g, '\\s+'), 'gi'), ' ');
+  for (const re of patterns(rules.allowedPhrases, (p) => new RegExp(esc(p).replace(/\s+/g, '\\s+'), 'gi'))) t = t.replace(re, ' ');
   const hits = [];
-  for (const w of rules.blockedWords) {
-    const re = new RegExp(`\\b${esc(w).replace(/\s+/g, '\\s+')}(s|es)?\\b`, 'i');
+  for (const re of patterns(rules.blockedWords, (w) => new RegExp(`\\b${esc(w).replace(/\s+/g, '\\s+')}(s|es)?\\b`, 'i'))) {
     const m = t.match(re);
     if (m) hits.push(m[0].trim().toLowerCase());
   }
