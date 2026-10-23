@@ -1694,6 +1694,109 @@
       "rawHandling": null,
       "icon": null,
       "watch": null
+    },
+    {
+      "id": "eggplant",
+      "name": "Eggplant",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "large eggplant",
+        "many": "large eggplants"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "large eggplant",
+        "many": "large eggplants"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "zucchini",
+      "name": "Zucchini",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "medium zucchini",
+        "many": "medium zucchini"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "medium zucchini",
+        "many": "medium zucchini"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "thyme-dried",
+      "name": "Dried thyme",
+      "section": "spices",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 100,
+        "label": "jar of dried thyme",
+        "many": "jars of dried thyme"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "basil",
+      "name": "Fresh basil",
+      "section": "herbs",
+      "baseUnit": "ml",
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 240,
+        "label": "bunch of basil",
+        "many": "bunches of basil"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "baguette",
+      "name": "Baguette",
+      "section": "bread-tortillas",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "baguette",
+        "many": "baguettes"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "baguette",
+        "many": "baguettes"
+      },
+      "contains": [
+        "gluten"
+      ],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
     }
   ]
 }

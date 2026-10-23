@@ -505,6 +505,78 @@ export const LIBRARY = {
    "unleavened": true
   },
   {
+   "id": "ratatouille",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Ratatouille",
+   "image": "img/dishes/ratatouille.webp",
+   "cuisine": "french",
+   "skill": "Dicing: eggplant, zucchini, pepper, tomato",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, brown the eggplant in two batches so it doesn't crowd the pot, and use your biggest pot."
+     }
+    ]
+   },
+   "totalMinutes": 70,
+   "ingredients": [
+    {
+     "ingredient": "eggplant"
+    },
+    {
+     "ingredient": "zucchini"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "basil",
+     "optional": true
+    },
+    {
+     "ingredient": "baguette",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true
+  },
+  {
    "id": "shakshuka",
    "version": 1,
    "track": "core",
@@ -1241,6 +1313,28 @@ export const LIBRARY = {
   "coleslaw-mix": {
    "name": "Shredded cabbage (coleslaw mix)",
    "contains": []
+  },
+  "eggplant": {
+   "name": "Eggplant",
+   "contains": []
+  },
+  "zucchini": {
+   "name": "Zucchini",
+   "contains": []
+  },
+  "thyme-dried": {
+   "name": "Dried thyme",
+   "contains": []
+  },
+  "basil": {
+   "name": "Fresh basil",
+   "contains": []
+  },
+  "baguette": {
+   "name": "Baguette",
+   "contains": [
+    "gluten"
+   ]
   }
  },
  "cuisines": {
