@@ -579,7 +579,7 @@ function approveNow(profile, lessonId, title) {
           assigned.length ? choice('replace', 'Replace an assigned meal', 'A course lesson it replaces goes first next week, and nobody is shown as behind.', false) : null,
           assigned.length ? el('label', { class: 'f' }, 'The meal it replaces', pick) : null,
         ], 'OK, start cooking', async (v) => {
-          const r = await api('POST', `/api/profiles/${profile.id}/approve`, { lesson_id: lessonId, replace: v.how === 'replace' ? pick.value : null });
+          const r = await api('POST', `/api/profiles/${profile.id}/approve?${tz()}`, { lesson_id: lessonId, replace: v.how === 'replace' ? pick.value : null });
           close(r.status);
         }, { extra: [cancel()] }));
     };
@@ -936,7 +936,7 @@ const parentQueue = parentOnly(async (flash) => {
   const replaceApprove = (r) => {
     const pick = el('select', { 'aria-label': `The meal ${r.title} replaces` }, replaceable(r.requested_by).map((x) => el('option', { value: x.id }, x.title)));
     return el('span', { class: 'acts' }, actBtn('Approve, replacing', '', async () => {
-      await api('POST', `/api/queue/${r.id}/approve`, { replace: pick.value });
+      await api('POST', `/api/queue/${r.id}/approve?${tz()}`, { replace: pick.value });
       again(`${r.title} replaces ${pick.selectedOptions[0].textContent} on ${pname(r.requested_by)}'s list.`);
     }), pick);
   };
@@ -947,7 +947,7 @@ const parentQueue = parentOnly(async (flash) => {
     safetyReview(r.lesson_id), tested(r.lesson_id),
     el('div', { class: 'acts' },
       servingsPick(r, setServings(r.id)),
-      actBtn('Approve as an extra meal', 'pri', async () => { await api('POST', `/api/queue/${r.id}/approve`); again(`${r.title} is on ${pname(r.requested_by)}'s list as an extra meal.`); }),
+      actBtn('Approve as an extra meal', 'pri', async () => { await api('POST', `/api/queue/${r.id}/approve?${tz()}`); again(`${r.title} is on ${pname(r.requested_by)}'s list as an extra meal.`); }),
       replaceable(r.requested_by).length ? replaceApprove(r) : null,
       actBtn('Not now', '', async () => {
         await api('POST', `/api/queue/${r.id}/decline`);
@@ -1014,6 +1014,13 @@ const parentQueue = parentOnly(async (flash) => {
         el('b', {}, x.title), actBtn('Put back', '', async () => { await api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }); again(`${x.title} is back in the course.`); }))))] : null);
   };
 
+  const onScreen = (menu) => {
+    menu.style.transform = '';
+    const r = menu.getBoundingClientRect(), gap = 16, w = document.documentElement.clientWidth;
+    const shift = r.left < gap ? gap - r.left : r.right > w - gap ? w - gap - r.right : 0;
+    if (shift) menu.style.transform = `translateX(${Math.round(shift)}px)`;
+  };
+
   // ---- lessons queued by hand ----
   // Swap for an Appointed Time meal instead (§6.19): kept in a "⋯" menu, not on the card.
   const swapPicker = async (qid, title) => {
@@ -1037,7 +1044,8 @@ const parentQueue = parentOnly(async (flash) => {
         el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: close }, 'Cancel'))));
     document.body.append(ov);
   };
-  const moreMenu = (x, qid) => el('details', { class: 'more' },
+  // The menu opens under the "⋯", kept on the screen wherever the button wrapped to.
+  const moreMenu = (x, qid) => el('details', { class: 'more', ontoggle: (e) => { if (e.target.open) onScreen(e.target.querySelector('.more-menu')); } },
     el('summary', { 'aria-label': `More for ${x.title}` }, '⋯'),
     el('div', { class: 'more-menu' }, el('button', { type: 'button', class: 'hbtn link', onclick: (e) => { e.target.closest('details').open = false; swapPicker(qid, x.title); } }, 'Swap for an Appointed Time meal instead')));
 

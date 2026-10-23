@@ -237,7 +237,7 @@ legend{font-weight:800;font-size:15px;margin-bottom:6px;padding:0}
 .more{position:relative}
 .more summary{list-style:none;min-height:52px;min-width:52px;display:grid;place-items:center;border:1.5px solid var(--h-line);border-radius:10px;font-weight:800;font-size:22px;cursor:pointer}
 .more summary::-webkit-details-marker{display:none}
-.more-menu{position:absolute;right:0;top:calc(100% + 4px);z-index:20;background:var(--h-card);border:1.5px solid var(--h-line);border-radius:12px;padding:6px 12px;box-shadow:0 10px 30px -10px rgba(0,0,0,.35);width:max-content;max-width:80vw}
+.more-menu{position:absolute;right:0;top:calc(100% + 4px);z-index:20;background:var(--h-card);border:1.5px solid var(--h-line);border-radius:12px;padding:6px 12px;box-shadow:0 10px 30px -10px rgba(0,0,0,.35);width:max-content;max-width:calc(100vw - 32px)}
 .badges{display:flex;gap:12px;flex-wrap:wrap;margin:2px 0}
 .badge{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:var(--h-acc)}
 .badge .ico{width:20px;height:20px}
