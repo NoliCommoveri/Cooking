@@ -2356,3 +2356,14 @@ the next was started.
   estimates.
 - Not test-cooked. No intro slides yet (warned, as for the others).
 - Tests: 233 (no new ones; the linter checks every new lesson).
+
+## 94. 2026-10-23 — The lesson preview doesn't say a thermometer step locks
+
+- **Owner ruling, restated:** a thermometer check never locks a step. The
+  lesson preview said "Must reach 145°F on the thermometer before Next
+  unlocks" under every doneness step, which wasn't true: §3 says the app
+  doesn't require a reading, and the player shows only the target. The
+  preview now says "Thermometer: at least 145°F", the same as the player.
+  The lesson files were already right; only `tools/preview-template.html`
+  and the rebuilt preview changed.
+- Tests: 233.
