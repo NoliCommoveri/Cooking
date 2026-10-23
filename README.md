@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [123. 2026-10-23 — Delete our family and Download our data](docs/build-log.md#123-2026-10-23--delete-our-family-and-download-our-data)
+**Latest build log entry:** [124. 2026-10-23 — Grades and the homeschool transcript](docs/build-log.md#124-2026-10-23--grades-and-the-homeschool-transcript)
 
 ## Current features
 
@@ -29,6 +29,8 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Kitchen staples** (Shopping → Staples): added by searching for an ingredient; grouped first as "May already have" in Upcoming and before making a list; on the list itself, in their aisles.
 - **Casual and homeschool modes**: homeschool adds due days for kids and overdue for parents; casual can turn on Plan our weeks.
 - **Reflect** (`public/player.js`): after Plate it, each profile on the cook rates it (gems or chef's hats), says what they'd change, and can name another dish that uses the move; plus an optional rating from the eaters. Saved even if the connection drops.
+- **Grades** (homeschool mode, `src/worker/grades.js`): parents grade each cook with the 1–4 rubric, a grade in their own words, or both, from the Grades page or Progress. Kids never see grades; nothing is graded on the Sabbath.
+- **Transcript** (homeschool mode): one profile's printable course record with the homeschool's name, course, school year, dates, every counted cook with hours and grade, skills, and the parent's final grade and credit.
 - **Print our progress** (Parents → Progress): what each profile has cooked, with date, dish, cuisine, skill, and rating, printable or as a CSV. **Didn't make it** on a row takes back a cook a kid marked but didn't make, with Undo.
 - **Photos switch** (`/ops`): photos are off for every family until the owner turns them on for one.
 - **Chef Ruth** (`public/ruth.js`, `src/worker/setup.js`): the helper, a scripted chat with a floating button on the parent screens. Her **Getting started** runs on its own for a new family and can't be skipped: family name and PIN, servings, diet, learners, kid logins, casual or homeschool, then a course or a first lesson. It can be run again from her button to change answers, until there's a lesson in the queue or a dish cooked. Her **Show me around** tours every parent screen, starting with the Queue: a look at each, then how to use it, and Let me see it again for a longer look. She types like a person: typing dots, then one message at a time.

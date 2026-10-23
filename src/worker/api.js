@@ -23,6 +23,8 @@ import { register as registerSharing } from './sharing.js';
 import { register as registerSwap } from './swap.js';
 import { register as registerKidLogins } from './kidlogin.js';
 import { register as registerSetup } from './setup.js';
+import { register as registerGrades } from './grades.js';
+import { RUBRIC, gradeLine } from '../content/grades.js';
 import { exportFamily, deleteFamily, eraseAfter } from './backup.js';
 
 export const THEMES = ['quest', 'passport'];
@@ -366,6 +368,8 @@ on('DELETE', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
     // Its login goes, and every device it was logged in on is logged out (§8.3a).
     endKidSessions(env, s.family_id, pid),
     env.DB.prepare('DELETE FROM kid_logins WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
+    env.DB.prepare('DELETE FROM grades WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
+    env.DB.prepare('DELETE FROM transcripts WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
     env.DB.prepare('DELETE FROM attempt_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
     // Off every queued lesson and course too; a queued lesson nobody is left on goes.
     env.DB.prepare('DELETE FROM queue_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
@@ -566,18 +570,29 @@ on('GET', '/api/progress', async (req, env) => {
   const offset = Number.isInteger(tz) && Math.abs(tz) <= 840 ? tz : 0;
   const day = (iso) => new Date(Date.parse(iso) - offset * 60 * 1000).toISOString().slice(0, 10);
   const { results: profiles } = await env.DB.prepare('SELECT * FROM profiles WHERE family_id = ? ORDER BY created_at, id').bind(s.family_id).all();
-  const { results } = await env.DB.prepare(`SELECT ap.profile_id, ap.rating, a.id, a.lesson_id, a.finished_at, a.servings FROM attempt_profiles ap
+  // Homeschool mode adds each row's grade, for the Grade button (Phase 4b).
+  const fam = await env.DB.prepare('SELECT name, mode FROM families WHERE id = ?').bind(s.family_id).first();
+  const { results } = await env.DB.prepare(`SELECT ap.profile_id, ap.rating, ap.notes, ap.transfer, a.id, a.lesson_id, a.finished_at, a.servings,
+        g.skill AS g_skill, g.safety AS g_safety, g.recipe AS g_recipe, g.result AS g_result, g.reflection AS g_reflection, g.grade_text, g.graded_at
+      FROM attempt_profiles ap
       JOIN attempts a ON a.id = ap.attempt_id AND a.family_id = ap.family_id
+      LEFT JOIN grades g ON g.attempt_id = a.id AND g.profile_id = ap.profile_id AND g.family_id = ap.family_id
       WHERE ap.family_id = ? AND a.finished_at IS NOT NULL AND a.removed_at IS NULL ORDER BY a.finished_at, a.id`).bind(s.family_id).all();
+  const homeschool = fam.mode === 'homeschool';
+  const gradeOf = (r) => (r.graded_at ? Object.fromEntries([...RUBRIC.map((x) => [x.key, r[`g_${x.key}`]]), ['grade_text', r.grade_text]]) : null);
   const recipes = await recipeNames(env, s.family_id);
   const lesson = (lid) => LIBRARY.lessons.find((L) => L.id === lid) ?? (recipes[lid] && { title: recipes[lid].title, cuisine: null, skill: 'Family recipe' });
   return {
-    family: (await env.DB.prepare('SELECT name FROM families WHERE id = ?').bind(s.family_id).first()).name,
+    family: fam.name,
+    homeschool,
     profiles: profiles.map((p) => ({
       id: p.id, name: p.name,
       rows: results.filter((r) => r.profile_id === p.id && !isSabbath(day(r.finished_at))).map((r) => {
         const L = lesson(r.lesson_id);
-        return { cook: r.id, date: day(r.finished_at), dish: L?.title ?? r.lesson_id, cuisine: LIBRARY.cuisines[L?.cuisine] ?? L?.cuisine ?? '', skill: L?.skill ?? '', rating: r.rating };
+        const row = { cook: r.id, date: day(r.finished_at), dish: L?.title ?? r.lesson_id, cuisine: LIBRARY.cuisines[L?.cuisine] ?? L?.cuisine ?? '', skill: L?.skill ?? '', rating: r.rating };
+        if (!homeschool) return row;
+        const g = gradeOf(r);
+        return { ...row, reflection: { rating: r.rating, notes: r.notes, transfer: r.transfer }, grade: g, grade_line: g ? gradeLine(g) : null };
       }),
     })),
   };
@@ -891,6 +906,7 @@ registerSharing(on);
 registerSwap(on);
 registerKidLogins(on);
 registerSetup(on);
+registerGrades(on);
 
 // ---------- dispatch ----------
 

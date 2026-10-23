@@ -3097,3 +3097,44 @@ their own family, and for a way to delete families from `/ops`.
   assuming one). Checked in a browser at phone width on the dev server: the
   new section, the dialog, a wrong password, and the delete, which logged
   the device out.
+
+## 124. 2026-10-23 — Grades and the homeschool transcript
+
+Phase 4b, homeschool mode, built before deploying 123 (the owner is holding
+the deploy until this is done, so its tables go in the same migration).
+- **Owner rulings (2026-10-23):** a single grade is whatever the parent
+  types; the transcript has everything cooked except on the Sabbath; parents
+  grade from a To grade list and from Progress; the app shows the rubric
+  average and the hours, and the parent decides the final grade and credit.
+  Plan §6.15 has the spec; §10's open question is closed.
+- **Migration:** `0002_family_delete.sql` from 123 is renamed
+  `0002_delete_and_grades.sql` and also adds `families.school_name`, a
+  `grades` table (one row per profile per cook: the five rubric scores,
+  `grade_text`, or both), and `transcripts` (one per profile). It was never
+  applied, so editing it is safe.
+- **Rubric** (`src/content/grades.js`, copied to `public/lib/`): the five
+  rows and their descriptions from the syllabus, the rubric average, and the
+  one-line grade ("A- · 3.6 / 4").
+- **API** (`src/worker/grades.js`), homeschool mode and the parent PIN only:
+  `GET /api/grades` (counted cooks with no grade), `PUT
+  /api/attempts/<id>/grade` (the rubric, words, or both; neither takes it
+  off), `GET` and `PUT /api/transcript/<profile>`. Refused on the Sabbath, and
+  for a cook on the Sabbath or one taken back. In casual mode they're refused
+  and grades are kept. `/api/progress` adds each row's grade in homeschool
+  mode. Deleting a profile takes its grades and transcript.
+- **Parent screens** (`public/app.js`), in the Learning path menu in
+  homeschool mode only:
+  - **Grades:** cooks waiting for a grade, newest first, each with Grade.
+  - **Grade dialog:** the profile's reflection, the five rubric rows as 1–4
+    buttons, and a grade in your own words; Remove grade when there's one.
+  - **Progress:** a Grade column (not printed) showing the grade or Grade.
+  - **Transcript:** a student picker, Print, and Edit details (a dialog);
+    on screen only, the cooks, hours, and rubric average for the parent to
+    decide from; printed, the homeschool name, details, the table with hours
+    and grades, skills, totals, the final grade, and the credit.
+- Chef Ruth's button no longer prints on Print our progress or the
+  transcript.
+- Not done: Chef Ruth's tour doesn't show the two new pages yet.
+- Tests: 271 (5 new). Checked in a browser at phone width on the dev server:
+  the Grades page, grading with the rubric and words, Progress's Grade
+  column, Edit details, and the transcript on screen and in print.

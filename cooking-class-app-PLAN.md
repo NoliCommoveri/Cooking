@@ -817,11 +817,11 @@ A printable record of what each profile has cooked, for homeschool records.
 - Made as a page styled for paper, printed from the browser (or saved as PDF from the print dialog). It needs no extra software.
 - **Didn't make it** (owner, 2026-10-23: kids will do a test run on the couch): each row has a button, parents only, that takes back a cook a kid marked done but didn't make. It comes off for everyone on that cook: it doesn't finish a lesson, earn a stamp, pin, rank, or skill, or show on Print our progress, and the queued lesson it closed goes back on the queue. It shows an Undo, which puts it back as it was. Not on paper or in the CSV.
 - **The same rows as a CSV download** (owner, 2026-10-22), which also answers the "CSV export to the homeschool management system" item in Later (§9).
-- **Homeschool transcript — Requirement (owner, 2026-10-22: "a GREAT idea"); details to be specced with the owner.** A printable course record for a homeschool transcript, built on the same rows. Starting points to confirm:
-  - The family names the course and gives it a code (e.g. "Culinary Arts", "HE-101"), a school year, and the student's name, per profile.
-  - It lists the lessons cooked with dates, the skills earned, and the hours, totalled from each lesson's time.
-  - An optional parent grade or credit line. The app suggests nothing about grades or credits; the family decides.
-  - Printed under the family's own homeschool name, with "Clean Plate Recipes, published by Immotus Apps" as the curriculum.
+- **Homeschool transcript — Requirement (owner, 2026-10-22: "a GREAT idea"; specced 2026-10-23).** A printable course record per profile, homeschool mode only, built on the same rows.
+  - **Details**, per profile, set on the transcript page: student name (the profile's name if blank), course name and code, school year, and optional From and To dates to cover one school year. The homeschool's own name is one per family and prints at the top. "Clean Plate Recipes, published by Immotus Apps" prints as the curriculum.
+  - **What's on it** (owner, 2026-10-23): everything cooked that counts, so course lessons, extra lessons, and family recipes, but nothing cooked on the Sabbath (§6.18). Each row: date, dish, cuisine, skill, hours (the lesson's time), and grade. Then the skills, the lessons cooked, and the total hours.
+  - **Final grade and credit** (owner, 2026-10-23): the app shows the parent the rubric average of the cooks graded with the rubric, and the total hours, on screen only; the parent types the final grade and the credit, or leaves them off.
+- **Grading** (owner, 2026-10-23), homeschool mode, parents only: the rubric (§6.17, each row 1–4), a grade in the parent's own words (anything: "A-", "92", "Excellent"), or both. Graded from a **Grades** page listing cooks still waiting for a grade, and from a Grade button on each Progress row (not printed). Nothing is graded on the Sabbath, and a Sabbath cook can't be graded on another day. Built 2026-10-23.
 
 ### 6.16 Demo page — Requirement (owner, 2026-10-22)
 A public page at **`/demo`** that the owner shares with other moms: no account, no beta word, and nothing saved to any account. It runs the real lesson player, so what moms try is what kids get.
@@ -1069,7 +1069,7 @@ Each phase should be deployed and usable before the next begins.
 
 ## 10. Open questions
 
-- The homeschool transcript's details (§6.15).
+- None right now.
 
 ---
 

@@ -8,6 +8,7 @@ import { courseEntries, prereqNotes } from './lib/course.js';
 import { toBase, mixed } from './lib/units.js';
 import { LOGIN_PICTURES } from './lib/login-pictures.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
+import { RUBRIC, GRADE_TEXT_MAX } from './lib/grades.js';
 import { progressView, celebrate } from './rewards.js';
 import { isMuted, setMuted } from './sound.js';
 import { gettingStarted, openRuth, ruthButton } from './ruth.js';
@@ -755,6 +756,8 @@ const PARENT_PAGES = [
   { key: 'queue', group: 'learning', label: 'Queue' },
   { key: 'shopping', group: 'learning', label: 'Shopping' },
   { key: 'progress', group: 'learning', label: 'Progress' },
+  { key: 'grades', group: 'learning', label: 'Grades', homeschool: true },
+  { key: 'transcript', group: 'learning', label: 'Transcript', homeschool: true },
   { key: 'recipes', group: 'recipes', label: 'Our recipes' },
   { key: 'shared', group: 'recipes', label: 'User-shared recipes' },
   { key: 'courses', group: 'setup', label: 'Courses' },
@@ -768,7 +771,7 @@ const PARENT_PAGES = [
 ];
 
 function parentMenu(current) {
-  const pages = PARENT_PAGES.filter((x) => !x.owner || me.parent.is_owner);
+  const pages = PARENT_PAGES.filter((x) => (!x.owner || me.parent.is_owner) && (!x.homeschool || me.family.mode === 'homeschool'));
   const groups = PARENT_GROUPS.filter(([g]) => pages.some((x) => x.group === g));
   let open = pages.find((x) => x.key === current)?.group ?? groups[0][0];
   const panel = el('nav', { class: 'drawer-panel', 'aria-label': 'Parent screens' });
@@ -1850,10 +1853,134 @@ const progress = parentOnly(async (which = 'all', flash) => {
       el('p', { class: 'mut small' }, `Clean Plate Recipes · printed ${fmtDay(localToday(), { year: 'numeric', month: 'long', day: 'numeric' })}`),
       shown.map((p) => el('div', { class: 'ptable' }, el('h3', {}, p.name),
         p.rows.length
-          ? el('table', {}, el('thead', {}, el('tr', {}, ['Date', 'Dish', 'Cuisine', 'Skill', 'Rating'].map((h) => el('th', {}, h)), el('th', { class: 'noprint' }))),
+          ? el('table', {}, el('thead', {}, el('tr', {}, ['Date', 'Dish', 'Cuisine', 'Skill', 'Rating'].map((h) => el('th', {}, h)),
+              d.homeschool ? el('th', { class: 'noprint' }, 'Grade') : null, el('th', { class: 'noprint' }))),
             el('tbody', {}, p.rows.map((r) => el('tr', {}, el('td', {}, fmtDay(r.date, { year: 'numeric', month: 'short', day: 'numeric' })), el('td', {}, r.dish), el('td', {}, r.cuisine), el('td', {}, r.skill), el('td', {}, r.rating ? `${r.rating} of 5` : '—'),
+              // Grades are parent-only and never on this printout (Phase 4b).
+              d.homeschool ? el('td', { class: 'noprint' }, gradeButton({ ...r, profile_id: p.id, profile: p.name }, () => progress(which))) : null,
               el('td', { class: 'noprint' }, el('button', { type: 'button', class: 'hbtn link', onclick: () => notMade(r) }, "Didn't make it"))))))
           : el('p', { class: 'mut' }, 'Nothing cooked yet.')))));
+});
+
+// ---------- grades and the transcript (homeschool mode, Phase 4b) ----------
+
+// A cook's grade, or a button to give one. Nothing is graded on the Sabbath.
+function gradeButton(r, done) {
+  if (isSabbath()) return el('span', {}, r.grade_line || '—');
+  return el('button', { type: 'button', class: 'hbtn link', onclick: () => gradeDialog(r, done) }, r.grade_line || 'Grade');
+}
+
+// The rubric (each row 1 to 4), a grade in the parent's own words, or both.
+function gradeDialog(r, done) {
+  const g = r.grade ?? {};
+  const rf = r.reflection ?? {};
+  const said = [rf.rating ? `Rated it ${rf.rating} of 5.` : null, rf.notes ? `Would change: ${rf.notes}` : null, rf.transfer ? `Could use the skill in: ${rf.transfer}` : null].filter(Boolean);
+  const save = async (body) => {
+    await api('PUT', `/api/attempts/${r.cook}/grade?${tz()}`, { profile_id: r.profile_id, ...body });
+    close();
+    done();
+  };
+  let close = () => {};
+  close = modal(`Grade ${r.profile}: ${r.dish}`,
+    el('p', { class: 'mut small', style: 'margin-top:0' }, `Cooked ${fmtDay(r.date, { weekday: 'long', month: 'long', day: 'numeric' })}. Only parents see grades.`),
+    said.length ? el('div', { class: 'card', style: 'margin:0 0 12px' }, el('b', {}, `${r.profile}'s reflection`), said.map((x) => el('p', { class: 'small', style: 'margin:4px 0 0' }, x))) : null,
+    form([
+      el('fieldset', {}, el('legend', {}, 'Rubric'),
+        el('p', { class: 'mut small', style: 'margin:0' }, 'Score every row 1 (beginning) to 4 (excellent), or leave them all blank.'),
+        RUBRIC.map((x) => el('div', { class: 'rubric-row' },
+          el('div', {}, el('b', {}, x.label), el('small', {}, x.looks)),
+          el('div', { class: 'rubric-scores', role: 'radiogroup', 'aria-label': x.label }, [1, 2, 3, 4].map((n) => el('label', {},
+            el('input', { type: 'radio', name: x.key, value: String(n), checked: g[x.key] === n }), el('span', {}, String(n)))))))),
+      field('Grade in your own words', 'grade_text', { value: g.grade_text ?? '', maxlength: GRADE_TEXT_MAX, autocomplete: 'off' }, 'Optional. Anything you like: A-, 92, Excellent.'),
+    ], 'Save grade', async (v) => {
+      const scored = RUBRIC.filter((x) => v[x.key]);
+      if (scored.length && scored.length < RUBRIC.length) throw new Error('Score every rubric row, or leave them all blank.');
+      if (!scored.length && !String(v.grade_text ?? '').trim()) throw new Error('Score the rubric or write a grade.');
+      await save({ rubric: scored.length ? Object.fromEntries(RUBRIC.map((x) => [x.key, Number(v[x.key])])) : null, grade_text: v.grade_text });
+    }, { extra: [
+      r.grade ? el('button', { type: 'button', class: 'hbtn', onclick: () => save({ rubric: null, grade_text: '' }).catch((e) => showToast(e.message)) }, 'Remove grade') : null,
+      el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel'),
+    ].filter(Boolean) }));
+}
+
+// Every cook that counts and has no grade yet, newest first.
+const gradesPage = parentOnly(async () => {
+  if (me.family.mode !== 'homeschool') return go('#/parent/progress');
+  const d = await api('GET', `/api/grades?${tz()}`);
+  parentScreen('grades',
+    el('p', { class: 'mut' }, 'Cooks waiting for a grade. Grades are for parents only; kids never see them. Grade or change any cook from Progress too.'),
+    el('div', { class: 'card' },
+      d.to_grade.length ? el('div', { class: 'rows' }, d.to_grade.map((r) => el('div', { class: 'rowi' },
+        el('div', {}, el('b', {}, r.dish), el('small', {}, `${r.profile} · ${fmtDay(r.date, { year: 'numeric', month: 'short', day: 'numeric' })}`)),
+        d.sabbath ? el('span') : el('button', { type: 'button', class: 'hbtn', onclick: () => gradeDialog(r, () => gradesPage()) }, 'Grade'))))
+        : el('p', { class: 'mut', style: 'margin:0' }, d.graded ? 'Everything cooked is graded.' : 'Nothing to grade yet. Cooks show here when they\'re finished.')),
+    d.sabbath ? el('p', { class: 'mut small' }, 'Grading opens again after the Sabbath.') : null);
+});
+
+// One profile's transcript, for the printer. The details are the family's own;
+// the app shows the hours and rubric average, and the parent decides the final
+// grade and credit.
+const transcript = parentOnly(async (pid) => {
+  if (me.family.mode !== 'homeschool') return go('#/parent/progress');
+  const { profiles } = await api('GET', '/api/profiles');
+  if (!profiles.length) return parentScreen('transcript', el('p', { class: 'mut' }, 'Add a profile first.'));
+  const p = profiles.find((x) => x.id === pid) ?? profiles[0];
+  const t = await api('GET', `/api/transcript/${p.id}?${tz()}`);
+  const d = t.details;
+  const long = { year: 'numeric', month: 'long', day: 'numeric' };
+  const edit = () => {
+    let close = () => {};
+    close = modal('Transcript details', form([
+      field('Homeschool name', 'school_name', { value: t.school_name, maxlength: 80 }, 'Printed at the top. The same for every student.'),
+      field('Student name', 'student_name', { value: d.student_name, maxlength: 80 }, `Leave blank to use "${p.name}"`),
+      field('Course name', 'course_name', { value: d.course_name, maxlength: 80, placeholder: 'Culinary Arts' }),
+      field('Course code', 'course_code', { value: d.course_code, maxlength: 20, placeholder: 'HE-101' }),
+      field('School year', 'school_year', { value: d.school_year, maxlength: 20, placeholder: '2026–2027' }),
+      el('div', { class: 'grid2' },
+        field('From', 'from_date', { type: 'date', value: d.from_date }, 'Optional'),
+        field('To', 'to_date', { type: 'date', value: d.to_date }, 'Optional')),
+      field('Final grade', 'final_grade', { value: d.final_grade, maxlength: GRADE_TEXT_MAX }, 'Yours to decide. Leave blank to leave it off.'),
+      field('Credit', 'credit', { value: d.credit, maxlength: 20, placeholder: '0.5' }, 'Yours to decide. Leave blank to leave it off.'),
+    ], 'Save', async (v) => {
+      await api('PUT', `/api/transcript/${p.id}`, v);
+      close();
+      transcript(p.id);
+    }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')] }));
+  };
+  const pick = el('select', { 'aria-label': 'Whose transcript', onchange: (e) => transcript(e.target.value) },
+    profiles.map((x) => el('option', { value: x.id, selected: x.id === p.id }, x.name)));
+  const line = (label, value) => (value ? el('div', {}, el('dt', {}, label), el('dd', {}, value)) : null);
+  const hours = (m) => (m ? (Math.round(m / 6) / 10).toString() : '—');
+  parentScreen('transcript',
+    el('div', { class: 'acts noprint' }, el('label', { class: 'f inline' }, 'Student', pick),
+      el('button', { type: 'button', class: 'hbtn pri', onclick: () => window.print() }, 'Print'),
+      el('button', { type: 'button', class: 'hbtn', onclick: edit }, 'Edit details')),
+    el('div', { class: 'card noprint' },
+      el('p', { style: 'margin:0' }, `${t.totals.cooks} cook${t.totals.cooks === 1 ? '' : 's'} · ${t.totals.hours} hours · ${t.totals.graded} graded`),
+      el('p', { class: 'mut small', style: 'margin:4px 0 0' }, t.totals.rubric_average != null
+        ? `Rubric average: ${t.totals.rubric_average.toFixed(1)} of 4, across ${t.totals.rubric_graded} cook${t.totals.rubric_graded === 1 ? '' : 's'} graded with the rubric. For your information only: the final grade and credit are yours to decide, under Edit details.`
+        : 'No cooks graded with the rubric yet. The final grade and credit are yours to decide, under Edit details.')),
+    el('section', { class: 'printout transcript' },
+      t.school_name ? el('p', { class: 'tr-school' }, t.school_name) : null,
+      el('h2', {}, 'Course transcript'),
+      el('dl', { class: 'tr-details' },
+        line('Student', d.student_name || p.name),
+        line('Course', [d.course_name, d.course_code ? `(${d.course_code})` : null].filter(Boolean).join(' ')),
+        line('School year', d.school_year),
+        line('Dates', d.from_date || d.to_date ? `${d.from_date ? fmtDay(d.from_date, long) : 'Start'} to ${d.to_date ? fmtDay(d.to_date, long) : 'now'}` : null),
+        line('Curriculum', 'Clean Plate Recipes, published by Immotus Apps')),
+      t.rows.length
+        ? el('div', { class: 'ptable' }, el('table', {}, el('thead', {}, el('tr', {}, ['Date', 'Dish', 'Cuisine', 'Skill', 'Hours', 'Grade'].map((h) => el('th', {}, h)))),
+          el('tbody', {}, t.rows.map((r) => el('tr', {}, el('td', {}, fmtDay(r.date, { year: 'numeric', month: 'short', day: 'numeric' })), el('td', {}, r.dish),
+            el('td', {}, r.cuisine), el('td', {}, r.skill), el('td', {}, hours(r.minutes)), el('td', {}, r.grade_line || '—'))))))
+        : el('p', { class: 'mut' }, 'Nothing cooked in these dates yet.'),
+      t.skills.length ? [el('h3', {}, 'Skills'), el('p', {}, t.skills.map((x) => x.name).join(' · '))] : null,
+      el('dl', { class: 'tr-details tr-totals' },
+        line('Lessons cooked', String(t.totals.cooks)),
+        line('Total hours', String(t.totals.hours)),
+        line('Final grade', d.final_grade),
+        line('Credit', d.credit)),
+      el('p', { class: 'mut small' }, `Printed ${fmtDay(localToday(), long)}`)));
 });
 
 // ---------- owner screens ----------
@@ -2392,6 +2519,8 @@ async function route() {
       if (sub === 'shopping') return await shopping();
       if (sub === 'pantry') return await pantryEditor();
       if (sub === 'progress') return await progress(extra);
+      if (sub === 'grades') return await gradesPage();
+      if (sub === 'transcript') return await transcript(extra);
       if (sub === 'family') return await familySettings();
       if (sub === 'parents') return await parentLogins();
       if (sub === 'owner') return await owner();
