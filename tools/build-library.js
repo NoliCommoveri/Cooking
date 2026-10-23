@@ -19,7 +19,7 @@ import { unleavened } from '../src/content/leaven.js';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'src/worker/library-data.js');
 const CONTENT_OUT = join(ROOT, 'src/worker/content-data.js');
-export const BROWSER_LIB = ['units.js', 'scale.js', 'terms.js', 'diet.js', 'patch.js', 'course.js', 'shop.js', 'rules.js', 'recipe.js', 'leaven.js', 'rewards.js'];
+export const BROWSER_LIB = ['units.js', 'scale.js', 'terms.js', 'diet.js', 'patch.js', 'course.js', 'shop.js', 'rules.js', 'recipe.js', 'leaven.js', 'rewards.js', 'login-pictures.js'];
 // Lessons in course order (content/course.json), the order their numbers follow.
 // Lessons in a seasonal unit (Appointed Times, §6.19) aren't in the course and come after it.
 const inCourse = (c) => {

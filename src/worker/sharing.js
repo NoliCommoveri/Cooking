@@ -128,7 +128,7 @@ export function register(on) {
     const added = new Set((await env.DB.prepare('SELECT source_community_id FROM family_recipes WHERE family_id = ? AND deleted_at IS NULL AND source_community_id IS NOT NULL').bind(s.family_id).all()).results.map((r) => r.source_community_id));
     const list = results.filter((c) => !q || c.title.toLowerCase().includes(q) || c.body_json.toLowerCase().includes(q));
     return { recipes: list.map((c) => sharedOut(c, filters, s.family_id, added)) };
-  });
+  }, { kid: true });
 
   // One directory recipe, to read before adding it.
   on('GET', '/api/shared/([0-9a-f]{16})', async (req, env, body, [id]) => {
@@ -138,7 +138,7 @@ export function register(on) {
     const { cleared, ...recipe } = JSON.parse(c.body_json);
     // As a lesson too, for the kitchen's User-shared shelf (§6.19).
     return { ...sharedOut(c, filters, s.family_id, new Set()), recipe, ...recipeLesson(`shared:${c.id}`, recipe, 'User-shared recipe') };
-  });
+  }, { kid: true });
 
   // Add a directory recipe to this family's recipes, as its own copy.
   on('POST', '/api/shared/([0-9a-f]{16})/add', async (req, env, body, [id]) => {

@@ -9,7 +9,7 @@
 // line with it.
 import { fail, now } from './lib/http.js';
 import { randomHex } from './lib/crypto.js';
-import { requireSession, requireParent } from './auth.js';
+import { requireSession, requireParent, ownProfile, checkPin } from './auth.js';
 import { LIBRARY } from './library-data.js';
 import { liveLesson, livePatches } from './lessons.js';
 import { dietView } from '../content/diet.js';
@@ -545,6 +545,7 @@ export function register(on) {
   // homeschool mode and never anything about being late (§6.17).
   on('GET', '/api/profiles/([0-9a-f]{16})/queue', async (req, env, body, [pid]) => {
     const s = await requireSession(env, req);
+    ownProfile(s, pid);
     if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) fail(404, 'not_found', 'No such profile.');
     const fam = await family(env, s.family_id);
     const day = today(req);
@@ -585,12 +586,13 @@ export function register(on) {
       labels: mine ? mine.lessons.labels : null,
       total: mine ? mine.lessons.total : null,
     };
-  });
+  }, { kid: true });
 
   // "I want to make this" on a kid profile: a request for a parent to approve.
   // "Cook this" on an adult profile: queued straight away, no PIN (§6.1).
   on('POST', '/api/profiles/([0-9a-f]{16})/ask', async (req, env, body, [pid]) => {
     const s = await requireSession(env, req);
+    ownProfile(s, pid);
     const p = await env.DB.prepare('SELECT id, audience FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first() ?? fail(404, 'not_found', 'No such profile.');
     const fam = await family(env, s.family_id);
     const L = await queueLesson(env, String(body.lesson_id ?? ''), fam);
@@ -610,16 +612,22 @@ export function register(on) {
       env.DB.prepare('INSERT INTO queue_profiles (queue_id, family_id, profile_id) VALUES (?, ?, ?)').bind(qid, s.family_id, pid),
     ]);
     return { ok: true, id: qid, status };
-  });
+  }, { kid: true });
 
   // A kid wants to cook something that isn't on their list now: a parent, with
   // the PIN, approves it on the spot as an extra assigned meal, or as one that
   // replaces an assigned meal (owner, 2026-10-23). A request already waiting
   // for it is the one approved. An extra one is planned for today. A course
   // lesson approved early comes out of its later place in the course, so it
-  // isn't queued twice (courseTaken).
+  // isn't queued twice (courseTaken). On a kid's own login the grown-up types
+  // the PIN with this request: it approves this one thing and unlocks nothing
+  // (§8.3a).
   on('POST', '/api/profiles/([0-9a-f]{16})/approve', async (req, env, body, [pid]) => {
-    const s = await requireParent(env, req);
+    const s = await requireSession(env, req);
+    if (s.kid) {
+      ownProfile(s, pid);
+      await checkPin(env, s.family_id, body.pin);
+    } else await requireParent(env, req);
     if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) fail(404, 'not_found', 'No such profile.');
     const fam = await family(env, s.family_id);
     const L = await queueLesson(env, String(body.lesson_id ?? ''), fam);
@@ -630,7 +638,7 @@ export function register(on) {
     const { qid, stmts } = await approveStatements(env, s, fam, { row: rows[0] ?? null, L, pid, replace: body.replace || null, servings: body.servings, req, day: today(req) });
     await env.DB.batch(stmts);
     return { ok: true, id: qid, status: 'assigned' };
-  });
+  }, { kid: true });
 
   // ---------- safety review and test-cooked (§6.2) ----------
 
@@ -641,7 +649,7 @@ export function register(on) {
     const steps = L.steps.map((x, i) => ({ n: i + 1, text: x.text, safety: x.safety, hazard: x.hazard ?? null })).filter((x) => x.safety !== 'solo');
     const level = steps.some((x) => x.safety === 'adult-hands-on') ? 'adult-hands-on' : steps.length ? 'adult-nearby' : 'solo';
     return { lesson_id: L.id, title: L.title, level, steps };
-  });
+  }, { kid: true });
 
   on('POST', '/api/test-cooks', async (req, env, body) => {
     const s = await requireParent(env, req);
