@@ -2434,3 +2434,14 @@ the next was started.
   answer, she says where to change it later.
 - Recommendations added, to confirm: in casual mode a yes to the course turns
   on Plan our weeks; the test-cook warning becomes one of her lines.
+
+## 99. 2026-10-23 — Plan: a first lesson when there's no course
+
+- **Owner ruling** (§6.9, step 8): a family that doesn't set up a course is
+  offered a first lesson by hand. Chef Ruth asks Chicken, Beef, Fish, or
+  Vegetarian, then offers the first matching lesson in course order with its
+  number, name, and description. A no gets the next match; a second no gets
+  "no problem" and where to add lessons themselves.
+- Recommendations, to confirm: only written lessons the diet filters allow;
+  "matching" is by the main protein in the required ingredients (vegetarian:
+  no meat or fish); the lesson goes to every learner.
