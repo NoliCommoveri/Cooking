@@ -2499,3 +2499,50 @@ the next was started.
   starts with the Queue, and keeps the owner's screens for the owner).
   Checked in a browser at phone width: the Queue stop, Shopping with her
   button tapped early, and Stop the tour.
+
+## 102. 2026-10-23 — Didn't make it
+
+- **Owner ruling:** a way to remove a dish a kid marked done but didn't make.
+  Most kids will do a test run on the couch.
+- **Built:** **Didn't make it** on each row of **Parents → Progress**
+  (parents only, behind the PIN), with a confirm naming everyone on that cook,
+  then a done-message with **Undo**. The button is left off the printout.
+- **How it works:** removing is a soft delete. `POST
+  /api/attempts/:id/remove` sets `attempts.removed_at`, and the queued lesson
+  the cook closed goes back to assigned. Every read that counts cooks skips
+  removed ones: a profile's cooks (kitchen, stamps, ranks, skills), Print our
+  progress, a course's finished lessons, and the knife-lesson note. `POST
+  /api/attempts/:id/restore` clears it and closes the queued lesson again,
+  the way finishing it did (not on the Sabbath). A retry of the cook from the
+  kid's device doesn't bring it back, since a finished cook isn't changed.
+- The whole cook comes off, for everyone on it, since a shared cook is one
+  cook. Its reflections are kept, so Undo loses nothing.
+- **Migration 0015** (`attempts.removed_at`). Until the owner applies it on
+  `/ops`, Progress and the kitchen fail to load, so apply it right after the
+  deploy.
+- Chef Ruth's Show me around mentions it on the Progress stop. Plan §6.15 and
+  §8.4 say so; setup check-it 15.
+- Tests: 243 (one new: remove and Undo, across profiles, the queue, Progress,
+  a resent cook, another family, and the PIN). The migration-count tests now
+  expect 15.
+
+## 103. 2026-10-23 — Chef Ruth talks one line at a time
+
+- **Owner ruling:** she's a person in a chat. Typing dots for a second or so
+  before each message, never more than one message at once, and the chat
+  scrolls with each new one. Worst before this in Show me around: coming back
+  from the Queue, five messages landed at once and the parent was left at
+  the bottom.
+- **Built** (`public/ruth.js`, `public/app.css`): `say()` now queues her line
+  instead of showing it. Each line waits a half beat (0.5s), shows three
+  bouncing dots in her bubble (0.7 to 1.6s, longer for longer lines), then
+  the message, and the chat scrolls smoothly to it. Her buttons (`choose`),
+  forms (`ask`), and stepping aside for a tour stop (`peek`) wait until she's
+  finished talking. No script changed: every task still calls `say()` the
+  same way. The dots are labeled "Chef Ruth is typing" for screen readers
+  and hold still with reduced motion.
+- Plan §6.8 says so.
+- Tests: 243, unchanged. Checked in a browser at phone width: her menu, then
+  Show me around through the Queue stop, counting messages every half second
+  (one at a time, dots between, buttons only after the last, scrolled to the
+  bottom).

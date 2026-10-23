@@ -510,6 +510,7 @@ The helper is **Chef Ruth** (she/her). Her picture is `content/images/brand/chef
 
 **How she works** (recommendations, from Kels; to confirm before building):
 - **Scripted, not AI.** Every line she says is written in her task scripts. Nothing goes to an AI service.
+- **She chats like a person (owner, 2026-10-23).** One message at a time: a half beat, then typing dots for a second or so, then the message, and the chat scrolls to each one as it lands. Her buttons and questions show only once she's done talking, and on a tour she steps aside only after her line is in.
 - **Ordinary saves.** She saves through the same API calls as the pages, and checks answers with the same shared rules (the food rules, the PIN, servings limits). She never gets her own copy of a rule; a rule she needs moves into a shared, tested module that the page uses too.
 - **Where she lives:** a floating **Chef Ruth** button, with her picture, on every parent screen (so it's behind the parent PIN), and on a new family's empty locker screen until Getting started is done (§6.9). It opens her chat as its own parent page, with **Save for later** and **Cancel** in its header. A dot on the button shows while a task is unfinished.
 - **Her first message** (owner's wording, 2026-10-23): "Hi, I'm Ruth, your Clean Plate guru! I'm here to help you learn to navigate the app and get your family in the kitchen!" For a new family it goes straight on to Getting started (§6.9). Otherwise it's followed by **Doing something** (her task list, with a search box) and, later, **Finding something** and **Understanding something** (below). An unfinished task is offered first. After a task: "What else can I help with?"
@@ -782,6 +783,7 @@ A printable record of what each profile has cooked, for homeschool records.
 - In the parent area. Pick one profile or all of them.
 - One table per profile, with the profile name at the top: **date, dish, cuisine, skill, and rating** for every lesson that profile has cooked, oldest first.
 - Made as a page styled for paper, printed from the browser (or saved as PDF from the print dialog). It needs no extra software.
+- **Didn't make it** (owner, 2026-10-23: kids will do a test run on the couch): each row has a button, parents only, that takes back a cook a kid marked done but didn't make. It comes off for everyone on that cook: it doesn't finish a lesson, earn a stamp, pin, rank, or skill, or show on Print our progress, and the queued lesson it closed goes back on the queue. It shows an Undo, which puts it back as it was. Not on paper or in the CSV.
 - **The same rows as a CSV download** (owner, 2026-10-22), which also answers the "CSV export to the homeschool management system" item in Later (§9).
 - **Homeschool transcript — Requirement (owner, 2026-10-22: "a GREAT idea"); details to be specced with the owner.** A printable course record for a homeschool transcript, built on the same rows. Starting points to confirm:
   - The family names the course and gives it a code (e.g. "Culinary Arts", "HE-101"), a school year, and the student's name, per profile.
@@ -975,7 +977,7 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `list_lessons` (list_id, family_id, position, lesson_id, servings, queue_id, course_id). The lessons as they were when the list was made; servings is for "You shopped for N" (§6.6)
 - `list_on_hand` (list_id, family_id, ingredient_id). Left off that list only
 - `list_checks` (list_id, family_id, ingredient_id)
-- `attempts` (id, family_id, queue_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state, eater_rating)
+- `attempts` (id, family_id, queue_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state, eater_rating, removed_at). `removed_at`: a parent took it back with Didn't make it (§6.15); it counts for nothing, and Undo clears it
 - `attempt_profiles` (attempt_id, family_id, profile_id, rating, notes, transfer, reflected_at). Every profile on the cook, each with its own reflection; transfer is the optional "what other dish could use this move?"
 - `test_cooks` (family_id, lesson_id, lesson_version, parent_id, cooked_on)
 - `photos` (id, family_id, attempt_id, r2_key, created_at)

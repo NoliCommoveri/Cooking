@@ -103,19 +103,19 @@ test('a family that set its PIN before migration 0014 is already set up', async 
   const env = await makeEnv({ migrate: false });
   // Apply everything up to 0013, sign a family up, then apply 0014.
   const { MIGRATIONS } = await import('../src/worker/migrations/index.js');
-  const last = MIGRATIONS.pop();
+  const later = MIGRATIONS.splice(MIGRATIONS.findIndex((m) => m.id === '0014'));
   try {
     await applyPending(env.DB);
     const a = await family(env, 'Carsons', 'jen@example.com');
     const before = (await a.get('/api/me')).body.family;
     assert.equal(before.setup_needed, false, 'without the columns, the old first run carries on');
-    MIGRATIONS.push(last);
+    MIGRATIONS.push(...later);
     await applyPending(env.DB);
     assert.equal((await a.get('/api/me')).body.family.setup_needed, false);
     const b = await family(env, 'Smiths', 'pat@example.com');
     assert.equal((await b.get('/api/me')).body.family.setup_needed, true);
   } finally {
-    if (MIGRATIONS.at(-1) !== last) MIGRATIONS.push(last);
+    if (!MIGRATIONS.includes(later[0])) MIGRATIONS.push(...later);
   }
 });
 

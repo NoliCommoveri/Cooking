@@ -1709,8 +1709,17 @@ const pantryEditor = () => { sessionSet('cpr.shop.view', 'staples'); go('#/paren
 
 const csvCell = (v) => (/[",\n]/.test(String(v ?? '')) ? `"${String(v).replace(/"/g, '""')}"` : String(v ?? ''));
 
-const progress = parentOnly(async (which = 'all') => {
+const progress = parentOnly(async (which = 'all', flash) => {
   const d = await api('GET', `/api/progress?${tz()}`);
+  // A cook a kid marked done but didn't make (a test run on the couch) comes
+  // off, for everyone on it, with an Undo.
+  const notMade = async (r) => {
+    const others = d.profiles.filter((p) => p.rows.some((x) => x.cook === r.cook)).map((p) => p.name);
+    if (!confirm(`Remove ${r.dish} from ${others.join(' & ')}'s progress? It won't count, and it goes back on the queue if it was there.`)) return;
+    await api('POST', `/api/attempts/${r.cook}/remove`);
+    progress(which, el('p', { class: 'ok flash noprint', role: 'status' }, `Removed ${r.dish}. `,
+      el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await api('POST', `/api/attempts/${r.cook}/restore?${tz()}`); progress(which); } }, 'Undo')));
+  };
   const shown = which === 'all' ? d.profiles : d.profiles.filter((p) => p.id === which);
   const pick = el('select', { 'aria-label': 'Whose progress', onchange: (e) => progress(e.target.value) },
     el('option', { value: 'all', selected: which === 'all' }, 'Everyone'),
@@ -1727,6 +1736,7 @@ const progress = parentOnly(async (which = 'all') => {
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   };
   parentScreen('progress',
+    flash ?? null,
     el('div', { class: 'acts noprint' }, el('label', { class: 'f inline' }, 'Show', pick),
       el('button', { type: 'button', class: 'hbtn pri', onclick: () => window.print() }, 'Print'),
       el('button', { type: 'button', class: 'hbtn', onclick: csv }, 'Download CSV')),
@@ -1736,8 +1746,9 @@ const progress = parentOnly(async (which = 'all') => {
       el('p', { class: 'mut small' }, `Clean Plate Recipes · printed ${fmtDay(localToday(), { year: 'numeric', month: 'long', day: 'numeric' })}`),
       shown.map((p) => el('div', { class: 'ptable' }, el('h3', {}, p.name),
         p.rows.length
-          ? el('table', {}, el('thead', {}, el('tr', {}, ['Date', 'Dish', 'Cuisine', 'Skill', 'Rating'].map((h) => el('th', {}, h)))),
-            el('tbody', {}, p.rows.map((r) => el('tr', {}, el('td', {}, fmtDay(r.date, { year: 'numeric', month: 'short', day: 'numeric' })), el('td', {}, r.dish), el('td', {}, r.cuisine), el('td', {}, r.skill), el('td', {}, r.rating ? `${r.rating} of 5` : '—')))))
+          ? el('table', {}, el('thead', {}, el('tr', {}, ['Date', 'Dish', 'Cuisine', 'Skill', 'Rating'].map((h) => el('th', {}, h)), el('th', { class: 'noprint' }))),
+            el('tbody', {}, p.rows.map((r) => el('tr', {}, el('td', {}, fmtDay(r.date, { year: 'numeric', month: 'short', day: 'numeric' })), el('td', {}, r.dish), el('td', {}, r.cuisine), el('td', {}, r.skill), el('td', {}, r.rating ? `${r.rating} of 5` : '—'),
+              el('td', { class: 'noprint' }, el('button', { type: 'button', class: 'hbtn link', onclick: () => notMade(r) }, "Didn't make it"))))))
           : el('p', { class: 'mut' }, 'Nothing cooked yet.')))));
 });
 

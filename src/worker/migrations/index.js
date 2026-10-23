@@ -15,6 +15,7 @@ import m0011 from './0011_sharing.sql';
 import m0012 from './0012_swap.sql';
 import m0013 from './0013_kid_logins.sql';
 import m0014 from './0014_getting_started.sql';
+import m0015 from './0015_remove_cook.sql';
 
 export const MIGRATIONS = [
   { id: '0001', name: 'families', sql: m0001 },
@@ -31,4 +32,5 @@ export const MIGRATIONS = [
   { id: '0012', name: 'swap for an appointed time meal', sql: m0012 },
   { id: '0013', name: 'kid logins', sql: m0013 },
   { id: '0014', name: 'getting started', sql: m0014 },
+  { id: '0015', name: 'remove a cook', sql: m0015 },
 ];
