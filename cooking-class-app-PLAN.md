@@ -781,7 +781,7 @@ The linter must **warn** (without failing the build) when:
 - **New and moved lessons:** the owner picks the unit and the place. Lesson numbers follow from the course order (§4.1), so moving a lesson renumbers the course.
 - **Course plans (owner, 2026-10-23).** A new lesson joins every family's existing course plans at its place in the order, included (checked), as well as the suggested order. A hidden lesson comes out of every course plan as well as the library; unhiding it puts it back. Its lesson file is still built, so a cook already started on it still opens.
 - **Not covered:** the app's code. A new kind of field, screen, or feature still needs a session; a new lesson, unit, ingredient, rule, or picture never does.
-- **Owner setup, in a browser, before it can save:** a fine-grained GitHub token with Contents read and write and Actions read on this repository, pasted into the Worker as the `GITHUB_TOKEN` secret on the Cloudflare dashboard, and migration 0017 applied on `/ops` (steps in `docs/setup.md`). `/ops` shows whether GitHub is connected.
+- **Owner setup, in a browser, before it can save:** a fine-grained GitHub token with Contents read and write and Actions read on this repository, pasted into the Worker as the `GITHUB_TOKEN` secret on the Cloudflare dashboard, and **Apply pending** pressed on `/ops` (steps in `docs/setup.md`). `/ops` shows whether GitHub is connected.
 
 ### 6.13 Website and legal pages — Requirement (owner, 2026-10-22)
 The app lives at **`cleanplate.immotus.app`**, and its front door is a simple public website.

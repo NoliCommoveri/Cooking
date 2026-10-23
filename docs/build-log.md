@@ -2814,7 +2814,48 @@ Phase 10 (plan §7.5), built.
   and a split pick-one group, History, and Undo. The publish workflow itself
   runs only on GitHub, so it is first exercised by the owner's first save.
 
-## 115. 2026-10-23 — Unit 2 begins: lessons 6a through 8b
+## 115. 2026-10-23 — One schema file, and a fresh database
+
+The owner is clearing the database and signing up again, so the seventeen
+migrations were squashed into one.
+- **`src/worker/migrations/0001_schema.sql`** builds every table the app keeps:
+  families and sign-in, profiles and kid logins, cooks, fix requests and
+  patches, the queue and courses, shopping, family recipes and sharing, and
+  the manager section. Columns that later migrations added are in their
+  tables now, with their notes beside them. 0001_families.sql through
+  0017_manage.sql are gone. A check against a database built from the old
+  files found the same 53 tables and indexes, with the same columns.
+- **Content stays in files.** The owner asked about one table per list
+  (lessons, with recipes split by unit, and ingredients). That was talked
+  through and dropped: lessons and ingredients are repo files the manager
+  section edits (plan §7, §7.5), so a new recipe already needs no migration,
+  and a table per unit would have needed one for each new unit.
+- The two tests that checked old data fixes (0005 renaming lesson ids, 0014
+  marking families set up) went with their migrations; the /ops tests expect
+  one pending migration. Tests: 259, all passing. `docs/setup.md` no longer
+  names migration numbers, and has *Starting over with an empty database*.
+- **Owner steps:** once this deploys, on `/ops`: **Clear everything**, then
+  **Apply pending**, then sign up again and make yourself the owner. A
+  download made before this reset is at schema version 0017 and can't be
+  restored into the new schema.
+
+## 116. 2026-10-23 — Fix: /manage stuck in a redirect loop
+
+- **Fix: `/manage` didn't open.** For any page under `/manage/` the Worker
+  asked Cloudflare's assets for `/manage/index.html`, and Cloudflare answers
+  that with a redirect back to `/manage/`, which reached the Worker again, so
+  the browser gave up after too many redirects. It now asks for the folder,
+  `/manage/`, which Cloudflare serves. Built in `handleManage` in
+  `src/worker/manage.js`.
+- `tools/dev-server.js` now redirects a `…/index.html` request to its folder
+  the way Cloudflare does, so a loop like this shows up when the app is
+  checked in a session. Checked there: the old code redirected without end,
+  and the fixed code opens the manager's sign-in after the one redirect from
+  `/manage` to `/manage/`.
+- Tests: 259, unchanged in number (the test that pages are served at
+  `/manage/` now expects the folder).
+
+## 117. 2026-10-23 — Unit 2 begins: lessons 6a through 8b
 
 Content fill (Phase 7) moves to Unit 2, at the owner's request: the first
 five lessons in course order that weren't written yet (8a Shakshuka was
@@ -2855,7 +2896,7 @@ already a sample).
 - Not test-cooked. No intro slides yet (warned, as for the others).
 - Tests: 261 (no new ones; the linter checks every new lesson).
 
-## 116. 2026-10-23 — Unit 2 goes on: lessons 8c through 12
+## 118. 2026-10-23 — Unit 2 goes on: lessons 8c through 12
 
 - **Owner ruling:** the French-style omelet (6a) doesn't teach poaching eggs.
   `poaching-eggs` is off it in `course.json` and the lesson file, so
@@ -2900,9 +2941,9 @@ already a sample).
 - Not test-cooked. No intro slides yet.
 - Tests: 261.
 
-## 117. 2026-10-23 — Unit 2 finished: lessons 13 through 15c
+## 119. 2026-10-23 — Unit 2 finished: lessons 13 through 15c
 
-- **Owner ruling:** the new tortilla and pepper entries from 116 stay as
+- **Owner ruling:** the new tortilla and pepper entries from 118 stay as
   they are (burrito-size and gluten-free tortillas, whole peppercorns).
 - The last five Unit 2 lessons:
   - **13 Cacio e pepe** (`cacio-e-pepe`): less pasta water than usual, so it's

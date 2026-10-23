@@ -5,9 +5,6 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { numberCourse, courseEntries, prereqNotes } from '../src/content/course.js';
-import { makeDb } from './helpers/d1.js';
-import { applyPending } from '../src/worker/migrate.js';
-import { MIGRATIONS } from '../src/worker/migrations/index.js';
 
 const C = JSON.parse(readFileSync('content/course.json', 'utf8')).dishes;
 
@@ -49,13 +46,3 @@ test('removing a prerequisite is noted', () => {
   assert.match(notes[0].text, /removed/);
 });
 
-test('migration 0005 renames saved lesson ids', async () => {
-  const db = makeDb();
-  await applyPending(db, MIGRATIONS.filter((m) => m.id < '0005'));
-  await db.prepare("INSERT INTO families (id, created_at) VALUES ('f', 'now')").run();
-  await db.prepare("INSERT INTO attempts (id, family_id, lesson_id, lesson_version, servings, started_at) VALUES ('a', 'f', '04-shakshuka', 1, 6, 'now')").run();
-  await db.prepare("INSERT INTO lesson_patches (id, lesson_id, base_version, field_path, applied_by, applied_at) VALUES ('p', '14-beef-bulgogi', 1, 'totalMinutes', 'x', 'now')").run();
-  await applyPending(db);
-  assert.equal((await db.prepare("SELECT lesson_id FROM attempts WHERE id = 'a'").first()).lesson_id, 'shakshuka');
-  assert.equal((await db.prepare("SELECT lesson_id FROM lesson_patches WHERE id = 'p'").first()).lesson_id, 'beef-bulgogi');
-});
