@@ -906,6 +906,30 @@ const servingsPick = (x, onChange) => (x.servings_options?.length
     x.servings_options.map((n) => el('option', { value: n, selected: n === x.servings }, n))))
   : null);
 
+// Adding something new opens in a dialog over the page (owner, 2026-10-23).
+// Returns close().
+function modal(title, ...body) {
+  const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': title },
+    el('div', { class: 'card' }, el('h2', {}, title), body));
+  const close = () => { ov.remove(); document.removeEventListener('keydown', esc); };
+  const esc = (e) => { if (e.key === 'Escape') close(); };
+  ov.addEventListener('click', (e) => { if (e.target === ov) close(); });
+  document.addEventListener('keydown', esc);
+  document.body.append(ov);
+  ov.querySelector('select, input, textarea, button')?.focus();
+  return close;
+}
+
+// A two-way switch between views of a page; the choice is kept for the visit.
+// options: [[value, label]]
+function viewToggle(key, options, fallback, onPick) {
+  const current = sessionGet(key) ?? fallback;
+  return el('div', { class: 'seg', role: 'group', 'aria-label': 'Show' }, options.map(([value, label]) => el('button', {
+    type: 'button', 'aria-pressed': String(value === current),
+    onclick: () => { sessionSet(key, value); onPick(value); },
+  }, label)));
+}
+
 // A row that opens to show its tools: the summary is one line, and the
 // buttons stay out of the way until it's opened.
 const expander = (summary, ...body) => el('details', { class: 'xrow' }, el('summary', {}, summary), el('div', { class: 'xbody' }, body));
@@ -1090,6 +1114,7 @@ const parentQueue = parentOnly(async (flash) => {
   };
   lessonSel.addEventListener('change', checkNote);
   who.addEventListener('change', checkNote);
+  let closeAdd = () => {};
   const addForm = form([
     el('label', { class: 'f' }, 'Lesson', lessonSel),
     el('fieldset', {}, el('legend', {}, "Who's cooking"), el('p', { class: 'mut small', style: 'margin:0' }, 'Pick more than one to cook it together. It counts for each of them.'), who),
@@ -1105,8 +1130,9 @@ const parentQueue = parentOnly(async (flash) => {
     // A lesson with set sizes takes the nearest one it offers.
     const servings = L.servings_options.includes(n) ? n : L.servings_options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a));
     await api('POST', '/api/queue', { lesson_id: v.lesson_id, profile_ids: ids, servings, planned_date: v.planned_date || null });
+    closeAdd();
     again(`${L.title} is in the queue${servings !== n ? `, serving ${servings} (the nearest size it makes)` : ''}.`);
-  });
+  }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => closeAdd() }, 'Cancel')] });
 
   const courses = q.weeks_on
     ? (q.courses.length ? q.courses.map(courseBox)
@@ -1114,18 +1140,29 @@ const parentQueue = parentOnly(async (flash) => {
         el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: '#/parent/courses/new' }, 'Set up a course'))))
     : null;
 
+  // Course lessons and lessons added by hand, one at a time (owner, 2026-10-23).
+  const extraList = [
+    q.queued.length ? el('div', { class: 'card' }, el('div', { class: 'rows' }, q.queued.map(queuedRow)))
+      : el('p', { class: 'mut' }, courses ? 'No additional lessons assigned.' : 'Nothing queued yet. Add a lesson, or turn on Plan our weeks in Family.'),
+    q.put_back.length ? el('details', { class: 'psec' }, el('summary', {}, `Recently taken off (${q.put_back.length})`), el('div', { class: 'card' }, el('div', { class: 'rows' }, q.put_back.map((x) => el('div', { class: 'rowi' },
+      el('div', {}, el('b', {}, x.title), el('small', {}, `${x.status === 'declined' ? `${pname(x.requested_by)} asked · Not now` : 'Removed'} · ${names(x.profile_ids)}`)),
+      actBtn('Put back', '', async () => { await api('POST', `/api/queue/${x.id}/put-back`); again(`${x.title} is back.`); })))))) : null,
+  ];
+  const view = el('div', {});
+  const show = (which) => {
+    view.replaceChildren(...[which === 'course' && courses ? courses : extraList].flat().filter(Boolean));
+    toggle?.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', String(['course', 'extra'][i] === which)));
+  };
+  const toggle = courses ? viewToggle('cpr.queue.view', [['course', 'Course'], ['extra', `Additional${q.queued.length ? ` (${q.queued.length})` : ''}`]], 'course', show) : null;
+  show(courses ? sessionGet('cpr.queue.view') ?? 'course' : 'extra');
+
   parentScreen('queue',
     flash ?? null,
     q.requests.length ? [el('h2', {}, `Requests (${q.requests.length})`), requests] : null,
-    courses ? [el('h2', {}, 'This week'), courses] : null,
-    el('h2', {}, courses ? 'Other lessons in the queue' : 'The queue'),
-    q.queued.length ? el('div', { class: 'card' }, el('div', { class: 'rows' }, q.queued.map(queuedRow)))
-      : el('p', { class: 'mut' }, courses ? 'Nothing else queued.' : 'Nothing queued yet. Add a lesson below, or turn on Plan our weeks in Family.'),
-    q.put_back.length ? [el('h3', {}, 'Recently taken off'), el('div', { class: 'card' }, el('div', { class: 'rows' }, q.put_back.map((x) => el('div', { class: 'rowi' },
-      el('div', {}, el('b', {}, x.title), el('small', {}, `${x.status === 'declined' ? `${pname(x.requested_by)} asked · Not now` : 'Removed'} · ${names(x.profile_ids)}`)),
-      actBtn('Put back', '', async () => { await api('POST', `/api/queue/${x.id}/put-back`); again(`${x.title} is back.`); })))))] : null,
-    el('h2', {}, 'Add a lesson'),
-    addForm);
+    el('div', { class: 'pagehead' }, el('h2', {}, 'The queue'),
+      el('button', { type: 'button', class: 'hbtn pri', onclick: () => { closeAdd = modal('Add a lesson', addForm); } }, '+ Add a lesson')),
+    toggle,
+    view);
 });
 
 // ---------- courses: the list and the editor (§6.18) ----------

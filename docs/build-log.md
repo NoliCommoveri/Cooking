@@ -2104,3 +2104,19 @@ on it.
   and the course editor opened, folded, and reordered.
 - **Still to do (owner asked):** the rest of the parent side gets the same
   treatment (expanders, menus, and folded sections).
+
+## 83. 2026-10-23 — The queue: Add a lesson in a dialog, and a Course / Additional toggle
+
+- **Owner ruling: adding something new opens in a dialog** over the page,
+  not a form at the bottom of it. A shared `modal()` in `app.js` (Cancel, a tap
+  outside, or Escape closes it).
+- **Queue screen:** **+ Add a lesson** sits at the right of "The queue"
+  heading, above the list, and opens the add form in a dialog.
+- A **Course / Additional** toggle under the heading switches between the
+  course card and the lessons assigned on top of it (added by hand, approved
+  requests, swaps), with a count. The choice is kept for the visit. With no
+  course, only the additional list shows, without the toggle. "Recently taken
+  off" is folded under the additional list.
+- Tests: 222. Checked in a browser at phone width: the toggle both ways, the
+  dialog, and adding a lesson from it.
+
