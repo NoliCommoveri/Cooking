@@ -318,3 +318,35 @@ fieldset.psec legend{font-size:13px;letter-spacing:.07em;text-transform:uppercas
   .ptable{break-inside:avoid-page}
   .ptable table{font-size:12px}
 }
+/* Parent screens: a row that opens to its tools, week sections, and "⋯" menus. */
+.more-menu{display:grid;justify-items:start}
+.xrow{border-bottom:1px solid var(--h-line)}
+.xrow:last-child{border-bottom:0}
+.xrow>summary{list-style:none;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;min-height:52px;padding:10px 2px;cursor:pointer}
+.xrow>summary::-webkit-details-marker{display:none}
+.xrow>summary::after{content:"▸";font-size:20px;color:var(--h-mut)}
+.xrow[open]>summary::after{content:"▾"}
+.xrow>summary b{display:block}
+.xrow>summary small{display:block;color:var(--h-mut);font-size:14px}
+.xbody{display:grid;gap:10px;padding:0 2px 14px}
+.xbody .acts{justify-content:flex-start}
+.qweek{border-top:2px solid var(--h-line);margin-top:6px;padding-top:6px}
+.qweek-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.qcourse .qweek h4{margin:6px 0;font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--h-mut);font-weight:800;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.qweek h4 small{text-transform:none;letter-spacing:0;font-weight:600;font-size:14px}
+details.qweek>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;min-height:48px;cursor:pointer}
+details.qweek>summary::-webkit-details-marker{display:none}
+details.qweek>summary::after{content:"▸";font-size:20px;color:var(--h-mut)}
+details.qweek[open]>summary::after{content:"▾"}
+details.qweek>.acts{margin-top:8px}
+.planpart{border-bottom:1px solid var(--h-line)}
+.planpart>summary{list-style:none;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;min-height:56px;padding:8px 2px;cursor:pointer}
+.planpart>summary::-webkit-details-marker{display:none}
+.planpart>summary::after{content:"▸";font-size:20px;color:var(--h-mut)}
+.planpart[open]>summary::after{content:"▾"}
+.planpart>summary b{display:block}
+.planpart>summary small{display:block;color:var(--h-mut);font-size:14px}
+.planpart .planrow:last-child{border-bottom:0}
+.planpart .choice{border:0;padding:4px 0;min-height:44px}
+.planpart .dishpick>.hbtn.link{justify-content:flex-start;text-align:left;font-size:14px;min-height:32px;padding:0 0 6px 34px}
+.planpart .planrow{padding:6px 0}

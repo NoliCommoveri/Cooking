@@ -2067,3 +2067,40 @@ on it.
   unique app-wide or per family, logins for adult learners too, logging out
   with or without the PIN, and the password minimum.
 - No code changed.
+
+## 82. 2026-10-23 — Course lessons approved early aren't queued twice; a tidier queue and course editor
+
+- **Fix: the ⋯ menu ran off a phone screen.** On a course lesson the "⋯"
+  button wrapped to the left, and its menu ("Swap for an Appointed Time meal
+  instead") was pinned to the button's right edge, so it opened past the left
+  side of the screen. Menus now shift to stay on screen.
+- **Fix: the same dish twice.** A kid's lesson approved early (from the
+  lesson or the Queue screen) that was also later in their course showed in
+  the queue now and again in its course week. A course lesson queued outside
+  the course for its profiles, and not cooked yet, now comes out of its later
+  place (`schedule.js`, `taken`): as an extra, the lessons after it move up;
+  replacing a meal, the replaced one goes first next week and the ones between
+  move down. Taking it off the queue puts it back in its place. This applies to
+  a course lesson a parent queues by hand too.
+- **Fix: a swap bumped the wrong lesson.** With two or more a week, swapping
+  out the first lesson kept it and pushed the last one to next week. A swap now
+  bumps the lesson it replaced (`course_weeks` count plus the swap rows'
+  `swap_of`).
+- An extra meal approved on the spot is planned for today. The approve calls
+  send the family's time zone.
+- **Queue screen, course card:** This week and Next week are separate sections
+  with dividers. Next week and Skipped recipes are folded shut. Each lesson is
+  one line that opens to its tools (safety review, test-cooked, servings, Skip
+  this recipe, Swap for an Appointed Time meal). Cook another recipe and Skip
+  this week moved into a "⋯" menu beside This week. Lessons queued by hand open
+  the same way.
+- **Course editor:** the lessons fold by path ("Path 1: Knife work and
+  assembly · 4 of 10 dishes ticked"), closed until opened; a path stays open
+  while it's being reordered. The rows are lighter: no boxes on unticked
+  dishes, and the skill line is the link to the dish card.
+- Tests: 222 (an early course lesson as an extra and replacing one, its Undo,
+  replacing the first of two, the bumped lesson's order). Checked in a browser at
+  phone width: the menu fix in both themes, the course card, a hand-queued row,
+  and the course editor opened, folded, and reordered.
+- **Still to do (owner asked):** the rest of the parent side gets the same
+  treatment (expanders, menus, and folded sections).

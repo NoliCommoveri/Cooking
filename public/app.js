@@ -906,6 +906,23 @@ const servingsPick = (x, onChange) => (x.servings_options?.length
     x.servings_options.map((n) => el('option', { value: n, selected: n === x.servings }, n))))
   : null);
 
+// A row that opens to show its tools: the summary is one line, and the
+// buttons stay out of the way until it's opened.
+const expander = (summary, ...body) => el('details', { class: 'xrow' }, el('summary', {}, summary), el('div', { class: 'xbody' }, body));
+
+// A "⋯" menu of actions, kept on the screen wherever its button wrapped to.
+// items: [label, onclick] pairs (null ones are left out).
+function onScreen(box) {
+  box.style.transform = '';
+  const r = box.getBoundingClientRect(), gap = 16, w = document.documentElement.clientWidth;
+  const shift = r.left < gap ? gap - r.left : r.right > w - gap ? w - gap - r.right : 0;
+  if (shift) box.style.transform = `translateX(${Math.round(shift)}px)`;
+}
+const menu = (label, items) => el('details', { class: 'more', ontoggle: (e) => { if (e.target.open) onScreen(e.target.querySelector('.more-menu')); } },
+  el('summary', { 'aria-label': label }, '⋯'),
+  el('div', { class: 'more-menu' }, items.filter(Boolean).map(([text, fn]) => el('button', { type: 'button', class: 'hbtn link', onclick: (e) => { e.target.closest('details').open = false; Promise.resolve(fn()).catch((err) => showToast(err.message)); } }, text))));
+const plural = (n, word) => `${n} ${word}${n === 1 ? '' : /(s|sh|ch)$/.test(word) ? 'es' : 's'}`;
+
 const parentQueue = parentOnly(async (flash) => {
   const [q, { profiles }] = await Promise.all([api('GET', `/api/queue?${tz()}`), api('GET', '/api/profiles')]);
   const pname = (id) => profiles.find((p) => p.id === id)?.name ?? 'Someone';
@@ -957,20 +974,23 @@ const parentQueue = parentOnly(async (flash) => {
   // ---- courses ----
   const courseBox = (c) => {
     const behind = c.weeks_behind ? `${c.weeks_behind} week${c.weeks_behind === 1 ? '' : 's'} behind` : 'On track';
-    const lessonRow = (x, week) => el('div', { class: x.done ? 'rowi' : 'rowi qrow' },
-      el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
-        el('small', {}, x.done ? 'Cooked'
-          : x.extra ? 'Extra, this week only'
-            : isSabbath() || !homeschool ? 'This week'
-              : [x.overdue ? el('span', { class: 'late' }, 'Overdue · ') : null, `Due ${fmtDay(addDays(week, c.due_day))}`].filter(Boolean)),
-        x.done ? null : el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id))),
-      x.done ? el('span', { class: 'mut' }, '✓') : el('div', { class: 'acts' },
-        x.queue_id ? servingsPick(x, setServings(x.queue_id)) : null,
-        actBtn('Skip this recipe', '', async () => {
-          await api('POST', `/api/courses/${c.id}/skip-recipe`, { lesson_id: x.lesson_id });
-          again(`Skipped ${x.title}. The next lesson takes its place.`, () => api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }));
-        }),
-        x.queue_id ? moreMenu(x, x.queue_id) : null));
+    // A lesson is one line; its tools open under it, so nothing is tapped by
+    // accident while scrolling.
+    const status = (x, week) => (x.done ? 'Cooked'
+      : x.extra ? 'Extra, this week only'
+        : isSabbath() || !homeschool ? null
+          : [x.overdue ? el('span', { class: 'late' }, 'Overdue · ') : null, `Due ${fmtDay(addDays(week, c.due_day))}`].filter(Boolean));
+    const lessonRow = (x, week) => (x.done
+      ? el('div', { class: 'rowi' }, el('div', {}, el('b', {}, ...lessonName(x)), el('small', {}, 'Cooked')), el('span', { class: 'mut' }, '✓'))
+      : expander(el('span', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null, status(x, week) ? el('small', {}, status(x, week)) : null),
+        el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id)),
+        el('div', { class: 'acts' },
+          x.queue_id ? servingsPick(x, setServings(x.queue_id)) : null,
+          actBtn('Skip this recipe', '', async () => {
+            await api('POST', `/api/courses/${c.id}/skip-recipe`, { lesson_id: x.lesson_id });
+            again(`Skipped ${x.title}. The next lesson takes its place.`, () => api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }));
+          }),
+          x.queue_id ? swapLink(x, x.queue_id) : null)));
     const tw = c.this_week;
     return el('section', { class: 'card qcourse' },
       el('div', { class: 'rowi' },
@@ -982,43 +1002,37 @@ const parentQueue = parentOnly(async (flash) => {
         : el('p', { class: 'mut small' }, 'No lessons in this course can be cooked yet.'),
       c.unwritten ? el('p', { class: 'mut small', style: 'margin:0' }, `${c.unwritten} more lesson${c.unwritten === 1 ? ' is' : 's are'} still being written. They join the schedule when they're ready.`) : null,
       c.hidden ? el('p', { class: 'mut small', style: 'margin:0' }, `${c.hidden} lesson${c.hidden === 1 ? ' is' : 's are'} hidden by your diet settings, so ${c.hidden === 1 ? "it isn't" : "they aren't"} scheduled.`) : null,
-      c.started ? [
-        el('h4', {}, `This week · ${fmtDay(tw.week)} to ${fmtDay(addDays(tw.week, 5))}`),
-        tw.skipped ? el('p', { class: 'mut' }, 'Skipped. Everything moved back a week.')
-          : tw.lessons.length ? el('div', { class: 'rows' }, tw.lessons.map((x) => lessonRow(x, tw.week)))
-            : el('p', { class: 'mut' }, 'Nothing left this week.'),
-        el('div', { class: 'acts' },
-          tw.skipped
-            ? actBtn('Put this week back', '', async () => { await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, skipped: false }); again('This week is back.'); })
+      c.started ? el('section', { class: 'qweek' },
+        el('div', { class: 'qweek-head' },
+          el('h4', {}, 'This week', el('small', {}, `${fmtDay(tw.week)} to ${fmtDay(addDays(tw.week, 5))}`)),
+          menu(`Change this week`, tw.skipped
+            ? [['Put this week back', async () => { await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, skipped: false }); again('This week is back.'); }]]
             : [
-              c.done + tw.lessons.filter((x) => !x.done).length < c.total ? actBtn('Cook another recipe', '', async () => {
+              c.done + tw.lessons.filter((x) => !x.done).length < c.total ? ['Cook another recipe', async () => {
                 await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, extra: 1 });
                 again('Added the next lesson to this week, for this week only.', () => api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, extra: -1 }));
-              }) : null,
-              actBtn('Skip this week', '', async () => {
+              }] : null,
+              ['Skip this week', async () => {
                 await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, skipped: true });
                 again('Skipped this week. Everything moves back a week.', () => api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, skipped: false }));
-              }),
-            ]),
-      ] : null,
-      [
-        el('h4', {}, `Next week · ${fmtDay(c.next_week.week)}`),
+              }],
+            ])),
+        tw.skipped ? el('p', { class: 'mut' }, 'Skipped. Everything moved back a week.')
+          : tw.lessons.length ? el('div', { class: 'rows' }, tw.lessons.map((x) => lessonRow(x, tw.week)))
+            : el('p', { class: 'mut' }, 'Nothing left this week.')) : null,
+      // Next week is a look ahead, closed until it's wanted.
+      el('details', { class: 'qweek' },
+        el('summary', {}, el('h4', {}, c.started ? 'Next week' : 'First week', el('small', {}, `${fmtDay(c.next_week.week)} · ${c.next_week.skipped ? 'skipped' : plural(c.next_week.lessons.length, 'lesson')}`))),
         c.next_week.skipped ? el('p', { class: 'mut' }, 'Skipped.') : el('div', { class: 'rows' }, c.next_week.lessons.map((x) => el('div', { class: 'rowi' },
           el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null)))),
         el('div', { class: 'acts' }, actBtn(c.next_week.skipped ? 'Put next week back' : 'Skip next week', '', async () => {
           await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: c.next_week.week, skipped: !c.next_week.skipped });
           parentQueue();
-        })),
-      ],
-      c.skipped_recipes.length ? [el('h4', {}, 'Skipped recipes'), el('div', { class: 'rows' }, c.skipped_recipes.map((x) => el('div', { class: 'rowi' },
-        el('b', {}, x.title), actBtn('Put back', '', async () => { await api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }); again(`${x.title} is back in the course.`); }))))] : null);
-  };
-
-  const onScreen = (menu) => {
-    menu.style.transform = '';
-    const r = menu.getBoundingClientRect(), gap = 16, w = document.documentElement.clientWidth;
-    const shift = r.left < gap ? gap - r.left : r.right > w - gap ? w - gap - r.right : 0;
-    if (shift) menu.style.transform = `translateX(${Math.round(shift)}px)`;
+        }))),
+      c.skipped_recipes.length ? el('details', { class: 'qweek' },
+        el('summary', {}, el('h4', {}, 'Skipped recipes', el('small', {}, String(c.skipped_recipes.length)))),
+        el('div', { class: 'rows' }, c.skipped_recipes.map((x) => el('div', { class: 'rowi' },
+          el('b', {}, x.title), actBtn('Put back', '', async () => { await api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }); again(`${x.title} is back in the course.`); }))))) : null);
   };
 
   // ---- lessons queued by hand ----
@@ -1044,23 +1058,19 @@ const parentQueue = parentOnly(async (flash) => {
         el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: close }, 'Cancel'))));
     document.body.append(ov);
   };
-  // The menu opens under the "⋯", kept on the screen wherever the button wrapped to.
-  const moreMenu = (x, qid) => el('details', { class: 'more', ontoggle: (e) => { if (e.target.open) onScreen(e.target.querySelector('.more-menu')); } },
-    el('summary', { 'aria-label': `More for ${x.title}` }, '⋯'),
-    el('div', { class: 'more-menu' }, el('button', { type: 'button', class: 'hbtn link', onclick: (e) => { e.target.closest('details').open = false; swapPicker(qid, x.title); } }, 'Swap for an Appointed Time meal instead')));
+  const swapLink = (x, qid) => el('button', { type: 'button', class: 'hbtn link', onclick: () => swapPicker(qid, x.title) }, 'Swap for an Appointed Time meal');
 
-  const queuedRow = (x) => el('div', { class: 'rowi qrow' },
-    el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
-      el('small', {}, `For ${names(x.profile_ids)}${x.planned_date ? ` · ${fmtDay(x.planned_date)}` : ''}${x.status === 'shopped' ? ' · Shopped for' : ''}`),
-      el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id))),
-    el('div', { class: 'acts' }, servingsPick(x, setServings(x.id)),
-      x.swap
-        ? actBtn('Undo swap', '', async () => { await api('POST', `/api/queue/${x.id}/unswap`); again(`Undid the swap for ${x.title}.`); })
-        : actBtn('Remove', '', async () => {
-          await api('DELETE', `/api/queue/${x.id}`);
-          again(`Took ${x.title} off the queue.`, () => api('POST', `/api/queue/${x.id}/put-back`));
-        }),
-      x.swap ? null : moreMenu(x, x.id)));
+  const queuedRow = (x) => expander(el('span', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
+    el('small', {}, `For ${names(x.profile_ids)}${x.planned_date ? ` · ${fmtDay(x.planned_date)}` : ''}${x.status === 'shopped' ? ' · Shopped for' : ''}${x.swap ? ' · Swapped in' : ''}`)),
+  el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id)),
+  el('div', { class: 'acts' }, servingsPick(x, setServings(x.id)),
+    x.swap
+      ? actBtn('Undo swap', '', async () => { await api('POST', `/api/queue/${x.id}/unswap`); again(`Undid the swap for ${x.title}.`); })
+      : actBtn('Remove', '', async () => {
+        await api('DELETE', `/api/queue/${x.id}`);
+        again(`Took ${x.title} off the queue.`, () => api('POST', `/api/queue/${x.id}/put-back`));
+      }),
+    x.swap ? null : swapLink(x, x.id)));
 
   // ---- add a lesson ----
   const note = el('p', { class: 'mut small note', hidden: true }, 'Most lessons use knife work. We suggest a Unit 1 lesson first.');
@@ -1140,7 +1150,7 @@ const courseList = parentOnly(async () => {
 });
 
 const courseEditor = parentOnly(async (cid) => {
-  const [data, { profiles }, outline] = await Promise.all([api('GET', '/api/courses'), api('GET', '/api/profiles'), fetch('/content/course.json').then((r) => r.json())]);
+  const [data, { profiles }, outline, lib] = await Promise.all([api('GET', '/api/courses'), api('GET', '/api/profiles'), fetch('/content/course.json').then((r) => r.json()), api('GET', '/api/library')]);
   const existing = cid === 'new' ? null : data.courses.find((c) => c.id === cid);
   if (cid !== 'new' && !existing) return go('#/parent/courses');
   const dish = Object.fromEntries(outline.dishes.map((d) => [d.id, d]));
@@ -1167,6 +1177,7 @@ const courseEditor = parentOnly(async (cid) => {
   startIn.addEventListener('input', drawFinish);
   perIn.addEventListener('input', drawFinish);
 
+  const openParts = new Set();
   const drawPlan = () => {
     const entries = courseEntries(plan.map((x) => dish[x.id]));
     const removed = plan.filter((x) => x.removed).map((x) => x.id);
@@ -1182,7 +1193,7 @@ const courseEditor = parentOnly(async (cid) => {
       plan = entries.flatMap((e) => e.ids.map((id) => byId[id]));
       drawPlan();
     };
-    listBox.replaceChildren(...entries.map((e, i) => {
+    const row = (e, i) => {
       const keptIds = e.ids.filter((id) => !plan.find((x) => x.id === id).removed);
       const num = keptIds.length ? ++n : null;
       const dishRow = (id) => {
@@ -1191,17 +1202,34 @@ const courseEditor = parentOnly(async (cid) => {
         return el('div', { class: 'dishpick' },
           el('label', { class: 'choice' },
             el('input', { type: 'checkbox', checked: !x.removed, onchange: (ev) => { x.removed = !ev.target.checked; drawPlan(); } }),
-            el('span', {}, d.title, el('em', {}, ` ${d.skill ?? ''}`), tag ? el('small', { class: 'mut' }, ` · ${tag}`) : null)),
-          el('button', { type: 'button', class: 'hbtn link', 'aria-label': `What is ${d.title}?`, onclick: () => showDish(id) }, 'What is it?'));
+            el('span', {}, d.title, tag ? el('small', { class: 'mut' }, ` · ${tag}`) : null)),
+          el('button', { type: 'button', class: 'hbtn link', 'aria-label': `What is ${d.title}?`, onclick: () => showDish(id) }, d.skill ? `${d.skill} ›` : 'What is it? ›'));
       };
       return el('div', { class: `planrow${keptIds.length ? '' : ' out'}` },
         el('div', { class: 'planno' }, num ?? '–'),
         el('div', { class: 'grow' },
-          e.pickOne ? el('div', {}, foundationMark(), el('small', { class: 'mut' }, ' Pick one, or tick more to cook more than one')) : null,
+          e.pickOne ? el('div', {}, foundationMark(), el('small', { class: 'mut' }, ' Pick one, or tick more')) : null,
           e.ids.map(dishRow)),
         el('div', { class: 'planmove' },
           el('button', { type: 'button', class: 'hbtn', 'aria-label': 'Move up', disabled: i === 0, onclick: () => move(i, -1) }, '↑'),
           el('button', { type: 'button', class: 'hbtn', 'aria-label': 'Move down', disabled: i === entries.length - 1, onclick: () => move(i, 1) }, '↓')));
+    };
+    // The lessons fold into their paths, closed until opened, so the plan
+    // isn't one long scroll. A path stays open while it's being worked on.
+    const parts = [];
+    entries.forEach((e, i) => {
+      const unit = dish[e.ids[0]].unit;
+      if (parts.at(-1)?.unit !== unit) parts.push({ unit, items: [] });
+      parts.at(-1).items.push([e, i]);
+    });
+    listBox.replaceChildren(...parts.map((part) => {
+      const rows = part.items.map(([e, i]) => row(e, i));
+      const ids = part.items.flatMap(([e]) => e.ids);
+      const kept = ids.filter((id) => !plan.find((x) => x.id === id).removed).length;
+      return el('details', { class: 'planpart', open: openParts.has(part.unit), ontoggle: (ev) => { if (ev.target.open) openParts.add(part.unit); else openParts.delete(part.unit); } },
+        el('summary', {}, el('span', {}, el('b', {}, `Path ${part.unit}${lib.units?.[part.unit] ? `: ${lib.units[part.unit]}` : ''}`),
+          el('small', {}, `${kept} of ${plural(ids.length, 'dish')} ticked`))),
+        el('div', {}, rows));
     }));
     drawFinish();
   };
