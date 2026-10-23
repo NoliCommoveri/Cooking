@@ -4,15 +4,16 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [105. 2026-10-23 — Chef Ruth's buttons in the chat, and a one-time Getting started](docs/build-log.md#105-2026-10-23--chef-ruths-buttons-in-the-chat-and-a-one-time-getting-started)
+**Latest build log entry:** [110. 2026-10-23 — The PIN locks on its own; Lockers and Sign out in the Menu](docs/build-log.md#110-2026-10-23--the-pin-locks-on-its-own-lockers-and-sign-out-in-the-menu)
 
 ## Current features
 
 The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are in `docs/setup.md`.
 
-- **Accounts** (`src/worker/`, `public/`): open sign-up with an emailed code, an optional beta word, parent login, password reset by email, and a parent PIN for parent screens.
+- **Accounts** (`src/worker/`, `public/`): open sign-up with an emailed code, an optional beta word, parent login, password reset by email, and a parent PIN for parent screens, which locks on its own when a parent leaves them.
 - **Chef's lockers and profiles**: one person or several per profile, kid or adult, each with its own theme.
-- **Kitchen**: each profile's own space, in Kitchen Quest or Chef's Passport, with three tabs pinned to the bottom: **Main quest / My journey** (what's queued, then the next few lessons on its path), **Side quests / More recipes** (every unit and recipe shelf, folded shut, with a search by dish or ingredient), and **Skill tree / Passport** (progress and rewards). Cards follow the family's diet settings, with swaps and left-out optional ingredients shown.
+- **Kitchen**: each profile's own space, in Kitchen Quest or Chef's Passport, with three tabs pinned to the bottom: **Main quest / My journey** (this week and next open, the rest of its path under See more), **Side quests / More recipes** (every unit and recipe shelf, folded shut, with a search by dish or ingredient), and **Skill tree / Passport** (progress and rewards). Cards follow the family's diet settings, with swaps and left-out optional ingredients shown.
+- **Kitchen intro**: Chef Ruth's cards, with screenshots, on the tabs, asking to cook, and each stage of a cook. Opens once for a profile with nothing cooked; **How it works** replays it.
 - **Progress and rewards** (`public/rewards.js`, `src/content/rewards.js`): each dish lights its node on the skill tree or stamps the passport and its world map, and each skill earns a crest or pin. Six ranks, from Kitchen Apprentice to Executive Chef at 75 dishes; family recipes count toward rank only. Worked out from the cooks, never stored.
 - **Celebrations**: after a cook, and on coming back to the kitchen, the new stamp or cleared quest, new skills, and a full-screen rank up, once per device.
 - **Sound** (`public/sound.js`): made in the browser. A sizzle on Next, a stamp thunk, a skill chime, and a rank-up fanfare, with a mute toggle remembered on the device (timers always ring).

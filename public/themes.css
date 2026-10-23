@@ -461,6 +461,9 @@ use.pop{animation:dropin .42s cubic-bezier(.3,.7,.4,1) both}
 .p-xp{height:16px;border:2.5px solid var(--p-ink);border-radius:8px;background:#fff;overflow:hidden}
 .p-xp i{display:block;height:100%;background:var(--p-red)}
 .p-ladder{grid-column:1/-1;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin-top:10px;padding-top:10px;border-top:2px dashed #D8C9A8;text-align:center;font-size:12px;font-weight:800;line-height:1.1}
+.p-ladder>div{min-width:0;overflow-wrap:anywhere;hyphens:auto}
+/* Six ranks don't fit on a phone with large text: two rows of three. */
+@media (max-width:560px){.p-ladder{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:10px}}
 .p-ladder svg{width:100%;max-width:60px;height:auto;display:block;margin:0 auto 2px}
 .p-ladder .fut{color:#8A8170}
 .p-ladder .fut svg{opacity:.45;filter:grayscale(.7)}
@@ -556,3 +559,28 @@ use.pop{animation:dropin .42s cubic-bezier(.3,.7,.4,1) both}
 .p-refl label span{font-weight:600;color:var(--p-muted)}
 .p-refl textarea{font-family:var(--p-hand);font-weight:700;font-size:24px;line-height:28px;min-height:86px;padding:2px 8px;background:repeating-linear-gradient(0deg,transparent 0 27px,rgba(110,160,200,.4) 27px 28px);border:0;border-radius:0;color:var(--p-ink);resize:vertical}
 @media (max-width:420px){.p-hatbtn{width:48px;height:48px}.gem{width:48px;height:48px}}
+
+/* The kitchen intro (§6.9): Chef Ruth's cards, a screenshot each, with boxes
+   around the parts a card is about. */
+.intro-ov{overflow-y:auto;place-items:start center}
+.intro{display:grid;gap:10px;width:min(520px,100%);margin:auto 0;position:relative}
+.intro p,.intro h4,.intro ol{margin:0}
+.intro p,.intro li{font-size:17px;line-height:1.45}
+.intro-ruth{display:flex;gap:12px;align-items:center}
+.intro-ruth img{flex:none;width:48px;height:48px}
+.intro-ruth img[width="96"]{width:96px;height:96px}
+.intro h4{font-size:22px}
+.intro-lines{padding-left:0;list-style:none;display:grid;gap:6px;counter-reset:intro}
+.intro-lines li{display:flex;gap:10px;counter-increment:intro}
+.intro-lines li::before{content:counter(intro);flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:14px;background:var(--intro-box);color:var(--intro-ink)}
+.intro-shot{position:relative;margin:0 auto;border-radius:10px;overflow:hidden;box-shadow:0 0 0 2px var(--intro-edge)}
+.intro-shot img{display:block;width:100%;height:100%}
+.intro-box{position:absolute;border:3px solid var(--intro-box);border-radius:8px;box-shadow:0 0 0 2px rgba(0,0,0,.55),inset 0 0 0 2px rgba(0,0,0,.35)}
+.intro-box span{position:absolute;top:-12px;left:-12px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px;font-style:normal;background:var(--intro-box);color:var(--intro-ink);box-shadow:0 0 0 2px rgba(0,0,0,.55)}
+.intro-dots{display:flex;gap:6px;justify-content:center}
+.intro-dots i{width:8px;height:8px;border-radius:50%;background:var(--intro-edge)}
+.intro-dots i.on{background:var(--intro-box)}
+.intro .q-nav,.intro .p-nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.intro .intro-skip{margin-right:auto}
+.intro{--intro-box:var(--q-gold);--intro-ink:#241A05;--intro-edge:var(--q-edge)}
+[data-kt="passport"] .intro{--intro-box:var(--p-red);--intro-ink:#fff;--intro-edge:#D8C9A8}

@@ -72,6 +72,9 @@ function profileInput(body) {
 
 const profileOut = (r) => ({
   id: r.id, name: r.name, avatar: r.avatar, people: JSON.parse(r.people), theme: r.theme, audience: r.audience, track: r.track,
+  // The kitchen intro (§6.9): 'new' until finished or skipped. Until /ops
+  // applies migration 0016 there's no column, and it doesn't open on its own.
+  intro: r.intro_seen_at === undefined ? null : r.intro_seen_at ? 'seen' : 'new',
 });
 
 const familyOut = (f) => ({
@@ -328,6 +331,18 @@ on('PUT', '/api/profiles/([0-9a-f]{16})/theme', async (req, env, body, [pid]) =>
   const res = await env.DB.prepare('UPDATE profiles SET theme = ? WHERE id = ? AND family_id = ?')
     .bind(oneOf(body.theme, THEMES, 'theme'), pid, s.family_id).run();
   if (!res.meta.changes) fail(404, 'not_found', 'No such profile.');
+  return { ok: true };
+}, KID);
+
+// The kitchen intro was finished or skipped (§6.9): it won't open on its own
+// again. Before migration 0016 there's nowhere to keep it, and that's fine.
+on('POST', '/api/profiles/([0-9a-f]{16})/intro', async (req, env, body, [pid]) => {
+  const s = await requireSession(env, req);
+  ownProfile(s, pid);
+  if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) fail(404, 'not_found', 'No such profile.');
+  try {
+    await env.DB.prepare('UPDATE profiles SET intro_seen_at = COALESCE(intro_seen_at, ?) WHERE id = ? AND family_id = ?').bind(now(), pid, s.family_id).run();
+  } catch { /* not migrated yet */ }
   return { ok: true };
 }, KID);
 

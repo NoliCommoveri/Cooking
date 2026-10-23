@@ -2597,3 +2597,104 @@ the next was started.
   a finished cook, Didn't make it, and another family). Checked in a browser
   at phone width on a stubbed app: the buttons are inside the chat log,
   under her line, and her menu shows Getting started only when not cooking.
+
+## 106. 2026-10-23 — Longer looks on the Show me around tour
+
+- **Owner ruling: Chef Ruth steps aside longer.** On each tour stop she now
+  steps aside for 8 seconds (was 4), and **Let me see it again** steps aside
+  for 15 seconds (was 10). Her button still brings her back sooner. Built in
+  `public/ruth.js` (`chat.peek` default and `showMeAround`). Plan §6.8 says
+  so.
+- Tests: 244, unchanged.
+
+## 107. 2026-10-23 — Main quest shows the whole path, and the kitchen intro's first copy
+
+- **Owner ruling: Main quest / My journey shows the whole path, by week.**
+  Before, it showed what was queued, then only the next three lessons on the
+  path, so kids never saw the whole course. Now this week and next show
+  open: what's queued (a lesson with no date counts as current; one a parent
+  dated, by its date's week), then the course's lessons scheduled for next
+  week. Everything later, including lessons a parent dated further out, is
+  under a **See more** expander, in path order, remembered open or shut for
+  this tab. A profile without a course schedule has no weeks, so its whole
+  path is under See more.
+- `GET /api/profiles/:id/queue` now returns `week` (this week's Sunday) and
+  `weeks` (the week each course lesson still to cook falls in; null without a
+  schedule). Built in `src/worker/plan.js` and `pathView` in `public/app.js`.
+- **The kitchen intro (plan §6.9, the profile intro) is being planned.** The
+  owner's copy so far (the three tabs, and asking to cook) is in §6.9. Not
+  built yet.
+- Plan §6.1 and §6.9 say so; README updated.
+- Tests: 244, two checks added to existing tests (the weeks for a course
+  profile, and none without a schedule). Checked in a browser at phone width
+  on a test family: a course profile showed this week's lesson and a
+  parent-dated one next week open, next week's course lesson under Coming up
+  on your path, and a lesson dated three weeks out plus later course lessons
+  under See more (3); a profile with no course showed its 15 path lessons
+  under See more.
+
+## 108. 2026-10-23 — The kitchen intro, and the Passport rank ladder on phones
+
+- **Owner ruling: the kitchen intro is cards, with Chef Ruth's picture.**
+  Twelve cards over the kitchen, drawn in the profile's theme: a welcome,
+  the three tabs, asking to cook (Cook this on an adult profile), one card
+  per cook stage (the lesson card, Learn, Prep, cook mode, Plate it),
+  something looks wrong (kids tell an adult; adults get Suggest a fix), and
+  "You're ready!". Back, Next, and Skip on each, with dots for where you are.
+  The tab and asking-to-cook copy is the owner's; the rest is a draft.
+  Kitchen Quest's Skill tree card says "crests", the word on that screen.
+- **Screenshots with boxes.** Each card but the first and last shows the
+  real screen at phone width in the profile's theme, with boxes drawn by the
+  app around the parts it's about (numbered on cook mode, to match its
+  lines). `tools/intro-shots.js` takes them in a session: it makes a test
+  family on the in-memory database, opens each screen, measures the parts,
+  and writes `public/img/intro/*.webp` (22 images, about 740 KB, loaded only
+  when the intro opens) and `public/intro-shots.js`.
+- **When it opens (owner ruling).** Once, on its own, for a profile with no
+  cooks that hasn't finished or skipped it. **How it works** at the top of
+  the kitchen replays it. No "try it" taps for now.
+- **Migration 0016** adds `profiles.intro_seen_at`; apply it on `/ops`.
+  Until then the intro doesn't open on its own (How it works still works).
+  `/api/profiles` reports `intro` ('new' or 'seen'), and
+  `POST /api/profiles/:id/intro` marks it seen (a kid's own login too).
+  Nothing destructive was added, so there's nothing new to restore.
+- **Fix: the Passport rank ladder on phones.** With large text, "Kitchen
+  Apprentice" ran into "Prep Cook". On screens up to 560px wide the six
+  ranks are now two rows of three, and a long word wraps instead of
+  overlapping. Built in `public/themes.css`.
+- Built in `public/intro.js`, `public/app.js` (`kitchen`),
+  `public/themes.css`, `src/worker/api.js`. Plan §6.9 says so; README
+  updated.
+- Tests: 247 (three new: every card's screenshot in both themes, kid and
+  adult, with a numbered box per line; the buttons the cards name are still
+  in the app; the intro flag, and another family can't set it). Checked in a
+  browser at phone width: all twelve cards in both themes, the intro gone
+  and marked seen after the last card, How it works replaying it, and the
+  ladder in two rows with large text.
+
+## 109. 2026-10-23 — The intro's progress card says badges
+
+- **Owner ruling: badges, in both themes.** The kitchen intro's Skill tree /
+  Passport card now reads, for every theme, "This is where you track your
+  progress. As you cook, you'll earn badges and rank up." Before, Kitchen
+  Quest's said "crests" and Chef's Passport's said "stamps and skill pins".
+  Badges is a word kids know; the screens keep their own names (crests,
+  skill pins, stamps). Built in `public/intro.js`. Plan §6.9 says so.
+- Tests: 247, unchanged.
+
+## 110. 2026-10-23 — The PIN locks on its own; Lockers and Sign out in the Menu
+
+- **Owner ruling: no Lock button.** The parent screens' top bar had
+  **Lockers**, **Lock**, and **Log out**. Lock is gone: leaving the parent
+  screens (to the lockers, a kitchen, anywhere else) locks the PIN on its
+  own. The app opening anywhere but a parent screen while still unlocked (a
+  tab closed on a parent screen) locks it too. Not during Getting started,
+  which needs the PIN. Built in `route` in `public/app.js`.
+- **Owner ruling: Go to Lockers and Sign out are in the Menu,** as
+  top-level commands below the screen groups. The top bar now has only the
+  Menu button and the app's name. Built in `parentMenu` in `public/app.js`
+  and `public/app.css`.
+- Plan §5.7 and §8.3 say so; README updated.
+- Tests: 247, unchanged. Checked in a browser at phone width: the Menu with
+  the two commands under the groups; Go to Lockers locked the PIN, and
+  opening a parent screen asked for it again; Sign out signed out.

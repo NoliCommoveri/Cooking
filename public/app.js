@@ -11,6 +11,7 @@ import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 import { progressView, celebrate } from './rewards.js';
 import { isMuted, setMuted } from './sound.js';
 import { gettingStarted, openRuth, ruthButton } from './ruth.js';
+import { openIntro } from './intro.js';
 
 const app = document.getElementById('app');
 
@@ -445,39 +446,47 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const seasonalUnit = (u) => lib.seasonal?.includes(u);
   const unitName = (u) => (quest && !seasonalUnit(u) ? `Path ${u}: ${lib.units[u]}` : lib.units[u]);
 
-  // ---- My path (Main quest): what's up next, then the next lessons on this
-  // profile's path, a few at a time, never the whole course.
+  // ---- My path (Main quest): what's up next, then the rest of this profile's
+  // path. This week and next show open; everything later is under See more
+  // (owner, 2026-10-23).
   const pathView = () => {
     const when = (x) => (x.status === 'requested' ? 'You asked an adult'
       : x.due && !isSabbath() ? `Due ${fmtDay(x.due, { weekday: 'long' })}`
         : x.when === 'this-week' ? 'This week'
           : x.planned_date ? fmtDay(x.planned_date) : 'Coming up');
+    // The Sunday two weeks on: anything before it is this week or next. A
+    // queued lesson with no date is current; one a parent dated, by its date.
+    const later = new Date(Date.parse(`${mine.week}T00:00:00Z`) + 14 * 864e5).toISOString().slice(0, 10);
+    const soon = (day) => !day || day < later;
     const queued = new Set(mine.items.map((x) => x.lesson_id));
-    // The next lessons not cooked or queued, in this profile's order: a
-    // pick-one group counts once, and once one of its dishes is cooked it's done.
+    // The lessons not cooked or queued, in this profile's order: a pick-one
+    // group's other dishes drop out once one of them is cooked or queued.
     const doneGroups = new Set(lib.lessons.filter((L) => L.pick && (cooks[L.id] || queued.has(L.id))).map((L) => L.pick));
-    const entries = [];
     // In the profile's course plan's order when it has one (§6.18).
     const byId = Object.fromEntries(lib.lessons.map((L) => [L.id, L]));
     const ordered = mine.order ? mine.order.map((x) => byId[x]).filter(Boolean) : lib.lessons;
-    for (const L of ordered) {
-      if (seasonalUnit(L.unit) || cooks[L.id] || queued.has(L.id) || (mine.labels && !mine.labels[L.id])) continue;
-      if (L.pick && doneGroups.has(L.pick)) continue;
-      const last = entries.at(-1);
-      if (L.pick && last?.pick === L.pick) last.items.push(L); else entries.push({ pick: L.pick, items: [L] });
-    }
-    const next = entries.slice(0, 3).flatMap((e) => e.items);
+    const rest = ordered.filter((L) => !seasonalUnit(L.unit) && !cooks[L.id] && !queued.has(L.id)
+      && !(mine.labels && !mine.labels[L.id]) && !(L.pick && doneGroups.has(L.pick)));
+    // Only a course's schedule puts a lesson in a week; without one, the whole
+    // path is under See more.
+    const next = rest.filter((L) => mine.weeks?.[L.id] && soon(mine.weeks[L.id]));
+    const queuedCard = (x) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${x.title}`, onclick: open(x.lesson_id) },
+      el('article', { class: quest ? 'q-panel q-card k-next' : 'p-card k-next' },
+        x.image ? el('div', { class: quest ? 'q-win' : 'p-photo' }, el('img', { src: x.image, alt: '', width: 160, height: 160, loading: 'lazy' })) : null,
+        el('p', { class: quest ? 'q-kick' : 'p-lessonno' }, x.label ? `${quest ? 'Quest' : 'Lesson'} ${x.label}` : ''),
+        el('h3', { class: quest ? 'q-title' : 'p-title' }, x.title),
+        el('p', { class: quest ? 'q-swap' : 'p-swap' }, when(x))));
+    const now = mine.items.filter((x) => soon(x.planned_date));
+    const more = [...mine.items.filter((x) => !soon(x.planned_date)).map(queuedCard), ...rest.filter((L) => !next.includes(L)).map(lessonBtn)];
+    const key = `cpr.more.${p.id}`;
     return [
       el('h2', { class: 'k-unit' }, quest ? 'Your next quests' : 'Up next'),
-      mine.items.length
-        ? el('div', { class: 'k-lib' }, mine.items.map((x) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${x.title}`, onclick: open(x.lesson_id) },
-          el('article', { class: quest ? 'q-panel q-card k-next' : 'p-card k-next' },
-            x.image ? el('div', { class: quest ? 'q-win' : 'p-photo' }, el('img', { src: x.image, alt: '', width: 160, height: 160, loading: 'lazy' })) : null,
-            el('p', { class: quest ? 'q-kick' : 'p-lessonno' }, x.label ? `${quest ? 'Quest' : 'Lesson'} ${x.label}` : ''),
-            el('h3', { class: quest ? 'q-title' : 'p-title' }, x.title),
-            el('p', { class: quest ? 'q-swap' : 'p-swap' }, when(x))))))
+      now.length
+        ? el('div', { class: 'k-lib' }, now.map(queuedCard))
         : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, quest ? 'No quests queued yet. Ask an adult, or look in Side quests.' : 'Nothing queued yet. Ask an adult, or look in More recipes.'),
       next.length ? [el('h2', { class: 'k-unit' }, quest ? 'Coming up on your path' : 'Next on your journey'), el('div', { class: 'k-lib' }, next.map(lessonBtn))] : null,
+      more.length ? el('details', { class: 'k-shelf', open: sessionGet(key) === '1', ontoggle: (e) => sessionSet(key, e.currentTarget.open ? '1' : '') },
+        el('summary', {}, el('span', {}, 'See more'), el('small', {}, String(more.length))), el('div', { class: 'k-lib' }, more)) : null,
     ];
   };
 
@@ -514,12 +523,18 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const tabs = [['path', quest ? 'Main quest' : 'My journey'], ['more', quest ? 'Side quests' : 'More recipes'], ['progress', quest ? 'Skill tree' : 'Passport']];
   const current = tabs.some(([k]) => k === tab) ? tab : 'path';
   sessionSet(`cpr.tab.${p.id}`, current);
-  screen(el('section', { class: 'kitchen k-tabbed', 'data-kt': p.theme },
+  // The kitchen intro (§6.9): How it works replays it. It opens on its own
+  // for a profile with nothing cooked that hasn't finished or skipped it.
+  const intro = () => openIntro({ el, mount: section, profile: p, onDone: () => {
+    if (p.intro === 'new') { p.intro = 'seen'; api('POST', `/api/profiles/${p.id}/intro`).catch(() => {}); }
+  } });
+  const section = el('section', { class: 'kitchen k-tabbed', 'data-kt': p.theme },
     me.kid ? null : el('a', { class: 'back', href: '#/' }, '← Lockers'),
     sabbathBanner(),
     el('div', { class: 'k-head' }, avatars(p.people),
       el('div', { class: 'grow' }, el('h1', {}, quest ? 'Quest board' : 'Recipe box'), el('div', {}, p.name))),
     el('div', { class: 'acts' },
+      el('button', { class: 'themebtn', type: 'button', onclick: intro }, 'How it works'),
       el('button', { class: 'themebtn', type: 'button', onclick: async () => {
         await api('PUT', `/api/profiles/${p.id}/theme`, { theme: other });
         kitchen(id, current);
@@ -541,7 +556,9 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     // Pinned to the bottom, where a thumb is, as in MCCE Kids.
     el('nav', { class: `k-tabs ${quest ? 'q' : 'p'}`, 'aria-label': 'Kitchen' }, tabs.map(([k, label]) => el('a', {
       href: `#/kitchen/${p.id}/@${k}`, 'aria-current': k === current ? 'page' : null,
-    }, label)))));
+    }, label))));
+  screen(section);
+  if (p.intro === 'new' && !Object.keys(cooks).length) intro();
   // Anything earned since this device last showed it: a stamp, a skill, a rank.
   celebrate(p, cooks);
 }
@@ -763,7 +780,7 @@ function parentMenu(current) {
       g === open ? el('div', { class: 'drawer-pages' }, pages.filter((x) => x.group === g).map((x) => el('a', {
         href: `#/parent/${x.key}`, class: x.key === current ? 'on' : null, 'aria-current': x.key === current ? 'page' : null, onclick: () => show(false),
       }, x.label))) : null,
-    ].filter(Boolean)));
+    ].filter(Boolean)), commands);
   };
   const onKey = (e) => { if (e.key === 'Escape') show(false); };
   const show = (on) => {
@@ -772,6 +789,11 @@ function parentMenu(current) {
     if (on) { document.addEventListener('keydown', onKey); panel.querySelector('button')?.focus(); } else { document.removeEventListener('keydown', onKey); button.focus(); }
   };
   button.addEventListener('click', () => show(drawer.hidden));
+  // The top-level commands, under the screens (owner, 2026-10-23). Leaving
+  // the parent screens locks the PIN on its own (route).
+  const commands = el('div', { class: 'drawer-cmds' },
+    el('a', { href: '#/', onclick: () => show(false) }, 'Go to Lockers'),
+    el('button', { type: 'button', onclick: async () => { await api('POST', '/api/logout'); store('cpr.profile', null); await start('#/'); } }, 'Sign out'));
   drawer.append(el('div', { class: 'drawer-scrim', onclick: () => show(false) }), panel);
   draw();
   return [button, drawer];
@@ -779,10 +801,7 @@ function parentMenu(current) {
 
 function parentScreen(current, ...kids) {
   const [button, drawer] = parentMenu(current);
-  const head = topbar(me.family.name,
-    el('a', { class: 'hbtn', href: '#/' }, 'Lockers'),
-    el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/pin/lock'); await refresh(); go('#/'); } }, 'Lock'),
-    el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/logout'); store('cpr.profile', null); await start('#/'); } }, 'Log out'));
+  const head = topbar(me.family.name);
   head.prepend(button);
   // The app's name goes back to the Queue, where the Parents button lands.
   const brand = head.querySelector('.grow b');
@@ -2236,10 +2255,21 @@ async function refresh() {
   me = await api('GET', '/api/me');
 }
 
+// Whether the last screen was a parent screen: leaving them locks the PIN on
+// its own (owner, 2026-10-23), so a kid can't walk back in. It starts true, so
+// the app opening anywhere else (the tab closed while unlocked) locks too.
+let onParent = true;
+
 async function route() {
   const parts = location.hash.replace(/^#\/?/, '').split('/');
   const [top, sub, extra] = parts;
+  const leaving = onParent && top !== 'parent' && top !== 'owner';
+  onParent = top === 'parent' || top === 'owner';
   try {
+    if (leaving && me?.signed_in && !me.kid && !me.family?.setup_needed && unlocked()) {
+      await api('POST', '/api/pin/lock').catch(() => {});
+      await refresh();
+    }
     if (top === 'reset' && sub) return reset(sub);
     if (!me?.signed_in) {
       if (top === 'login') return login();
