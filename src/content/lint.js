@@ -252,5 +252,9 @@ export function lint(c) {
     for (const t of c.terms) if (t.taughtIn && !DISH[t.taughtIn]) err(`terms.json ${t.id}`, `taughtIn "${t.taughtIn}" isn't a dish in course.json`);
   }
 
+  // hidden lessons (§7.5) name a written lesson or a planned dish
+  for (const id of c.hidden || []) if (!byId[id] && !DISH[id]) err('hidden.json', `"${id}" isn't a lesson or a dish in course.json`);
+  if (new Set(c.hidden || []).size !== (c.hidden || []).length) err('hidden.json', 'a lesson is listed twice');
+
   return { errors, warnings };
 }
