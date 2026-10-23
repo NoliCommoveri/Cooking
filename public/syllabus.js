@@ -9,7 +9,8 @@ const [R, C] = await Promise.all([getJSON('/content/registry.json'), getJSON('/c
 // Lesson numbers follow the course order; a pick-one group shares one (1a, 1b, 1c).
 const NUM = numberCourse(C.dishes).labels;
 const units = [...new Set(C.dishes.map((d) => d.unit))];
-const unitName = (u) => (u === 7 ? 'Desserts' : `Unit ${u}: ${R.units[u]}`);
+// Desserts reads as itself, wherever the owner puts it in the course.
+const unitName = (u) => (R.units[u] === 'Desserts' ? 'Desserts' : `Unit ${u}: ${R.units[u]}`);
 
 // Pick-one groups (§4.0) count once on a student's path through the course.
 const byId = Object.fromEntries(C.dishes.map((d) => [d.id, d]));

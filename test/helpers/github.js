@@ -111,7 +111,10 @@ export class FakeGitHub {
     if (p === '/git/blobs' && method === 'POST') return ok({ sha: this.putBlob(Buffer.from(body.content, 'base64')) }, 201);
     if (p === '/git/trees' && method === 'POST') {
       const files = { ...this.trees.get(body.base_tree) };
-      for (const e of body.tree) { if (e.sha === null) delete files[e.path]; else files[e.path] = e.sha; }
+      for (const e of body.tree) {
+        if (e.sha === null) delete files[e.path];
+        else files[e.path] = 'content' in e ? this.putBlob(Buffer.from(e.content, 'utf8')) : e.sha;
+      }
       const sha = sha1(JSON.stringify(Object.entries(files).sort()));
       this.trees.set(sha, files);
       return ok({ sha }, 201);

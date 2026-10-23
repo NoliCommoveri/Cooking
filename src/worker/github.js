@@ -49,11 +49,15 @@ async function gh(env, method, path, body, { accept = 'application/vnd.github+js
 
 const utf8 = new TextDecoder();
 const fromBase64 = (b64) => Uint8Array.from(atob(b64.replace(/\s/g, '')), (c) => c.charCodeAt(0));
-const toBase64 = (text) => {
-  let bin = '';
-  for (const b of new TextEncoder().encode(text)) bin += String.fromCharCode(b);
-  return btoa(bin);
-};
+// The git id GitHub gives a file with this text (as tools/build-library.js works it out).
+async function blobSha(text) {
+  const body = new TextEncoder().encode(text);
+  const head = new TextEncoder().encode(`blob ${body.length}\0`);
+  const all = new Uint8Array(head.length + body.length);
+  all.set(head);
+  all.set(body, head.length);
+  return [...new Uint8Array(await crypto.subtle.digest('SHA-1', all))].map((b) => b.toString(16).padStart(2, '0')).join('');
+}
 
 export async function branchHead(env, branch) {
   return (await gh(env, 'GET', `/git/ref/heads/${branch}`))?.object.sha ?? null;
@@ -101,17 +105,21 @@ export const fileAt = (env, path, ref) => gh(env, 'GET', `/contents/${path.split
 // refuses and the save is tried again from the new head.
 export async function commitFiles(env, { parent, files, message }) {
   const base = await gh(env, 'GET', `/git/commits/${parent}`);
-  const tree = [];
+  // Text goes inside the tree request, so a save of many files is still a
+  // handful of requests (a Worker may make only so many); a picture is a blob.
+  const tree = [], blobs = {};
   for (const [path, v] of Object.entries(files)) {
-    if (v === null) { tree.push({ path, mode: '100644', type: 'blob', sha: null }); continue; }
-    const blob = await gh(env, 'POST', '/git/blobs', typeof v === 'string' ? { content: toBase64(v), encoding: 'base64' } : { content: v.base64, encoding: 'base64' });
+    if (v === null) { tree.push({ path, mode: '100644', type: 'blob', sha: null }); blobs[path] = null; continue; }
+    if (typeof v === 'string') { tree.push({ path, mode: '100644', type: 'blob', content: v }); blobs[path] = await blobSha(v); continue; }
+    const blob = await gh(env, 'POST', '/git/blobs', { content: v.base64, encoding: 'base64' });
     tree.push({ path, mode: '100644', type: 'blob', sha: blob.sha });
+    blobs[path] = blob.sha;
   }
   const newTree = await gh(env, 'POST', '/git/trees', { base_tree: base.tree.sha, tree });
   const commit = await gh(env, 'POST', '/git/commits', { message, tree: newTree.sha, parents: [parent] });
   if (await branchHead(env, EDIT_BRANCH)) await gh(env, 'PATCH', `/git/refs/heads/${EDIT_BRANCH}`, { sha: commit.sha, force: false });
   else await gh(env, 'POST', '/git/refs', { ref: `refs/heads/${EDIT_BRANCH}`, sha: commit.sha });
-  return { sha: commit.sha, blobs: Object.fromEntries(tree.map((t) => [t.path, t.sha])) };
+  return { sha: commit.sha, blobs };
 }
 
 // The publish workflow's run for a commit, and what it said if it failed.

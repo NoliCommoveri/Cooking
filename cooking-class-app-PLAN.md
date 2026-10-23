@@ -433,7 +433,7 @@ Do **not** use:
 - Set, change, or turn off the **beta word** (§8.3), and see how many sign-ups are waiting on their email code
 - **Recipe reviews:** recipes a parent sent for review after a leaven flag, a hard-block flag, or a typed-in ingredient (§6.10); clear or decline each
 - **Reported recipes:** directory recipes families reported (§6.10), with **Hide** and **Unhide** on each
-- **Fix requests:** review reports from families, apply a suggested fix as a lesson patch, or revert one (§6.11)
+- **Fix requests:** review reports from families; **Apply in the manager** opens the lesson in the manager section with the suggestion filled in (§6.11, §7.5); revert a lesson patch made before the manager section existed
 - See the list of families (name, number of profiles, last active). This is the only cross-family view. The owner never sees other families' kids' names, photos, or progress.
 - Set a new password for a parent, as a fallback when the reset email (§8.3) doesn't reach them
 - Remove a family. This is destructive, so it's on `/ops`, beside that family's download and Restore a family (§8.5)
@@ -604,11 +604,11 @@ Until Getting started is built, the test-cook warning shows as a one-time notice
 Parents and adult learners report what's wrong in a lesson, and the owner pushes the fix from the browser. **The owner isn't the cooking expert**, so the person reporting proposes the correction, and the app checks it before it goes live.
 - **Suggest a fix.** A "Suggest a fix" control on the lesson card and on each step, behind the parent PIN (adult profiles can use it too). The app fills in the lesson, version, step, and serving count. The reporter picks a type (wrong amount or time, unclear step, safety problem, **unclean ingredient**, or other), writes what's wrong, and says **what it should say instead**: the new amount, time, or wording. They choose from a list of the step's own fields, so the suggestion is already shaped as an edit.
 - **Owner queue.** "Fix requests" on the owner screens (§6.2a), grouped by lesson, showing the current text beside the suggested text. Safety and unclean-ingredient reports also email the owner through Resend right away.
-- **Apply from the browser.** The owner can accept a suggestion as written, or edit it first, and press **Apply**. That creates a **lesson patch** that goes live for every family at once. Patches are limited to fields that can't change the dish's makeup: an amount, a unit, a time, a timer length, a step's text, a tip or "should look like" note, or a doneness target. Swapping or adding an ingredient isn't a patch; it needs a content change (below).
+- **Apply from the browser.** **Apply in the manager** opens the lesson in the manager section (§7.5) with the suggestion filled in. The owner can keep it as written or change anything first, add a note back, and save; the save goes live for every family like any other, and marks the request fixed. *Until 2026-10-23 Apply made a **lesson patch** on top of the files instead; patches already live keep working until their lesson is next saved (§7.5).*
 - **Checks before a patch goes live.** The same checks as the linter (§7.4) run in the app: the blocked-word scan on all new text, unit and amount checks, and the food-safety rules (a doneness step keeps its thermometer target, and targets can't go below the safe minimums in §3). A patch that fails can't be applied, and the owner sees why.
-- **Every patch can be undone.** Each patch has **Revert** beside it on the owner screen (the restore rule in `CLAUDE.md`). Reverting puts the lesson back the way it was.
-- **Versions.** A patch raises the lesson's version, so attempts and test-cooks record exactly what was cooked. The reporter's family sees the outcome on that lesson ("Fixed: eggs now 1 per person"), or the owner's reply if it's declined.
-- **Folding patches into the files.** Live patches sit on top of the content files. From time to time, in a session, Claude writes the applied patches into the lesson files, runs the linter, and clears them from the database. The owner doesn't have to do anything for this.
+- **Every fix can be undone.** A save has **Undo** on the manager section's Saves page; a lesson patch from before has **Revert** beside it on the owner screen (the restore rule in `CLAUDE.md`).
+- **Versions.** A fix raises the lesson's version, so attempts and test-cooks record exactly what was cooked. The reporter's family sees the outcome on that lesson ("Fixed: eggs now 1 per person"), or the owner's reply if it's declined.
+- **Folding patches into the files.** A lesson patched before the manager section existed opens in the editor with its patches on it, and saving it writes them into its file (§7.5).
 - **Bigger changes** (a new ingredient, a new step, a different method) are made in the content editor (§7.5). **Owner ruling (2026-10-23):** once the editor is built, **Apply** opens the editor with the suggestion filled in and the save goes into the files, replacing patches; the live patches are written into the files in that session.
 
 ### 6.12 Hands-free step advance
@@ -642,6 +642,7 @@ content/
   terms.json              # kitchen words: the word, its forms, what it means, the lesson that teaches it
   cuisines.json           # passport regions, and cuisine → region
   units.json              # unit numbers and names (7 is Desserts)
+  hidden.json             # lessons the owner hid from every family (§7.5)
   schema/                 # JSON Schemas for the registries and lesson files
   rules/                  # clean-species allowlist, blocked words, allowed phrases, cooking words that need a kitchen-words entry
   lessons/
@@ -758,28 +759,29 @@ The linter must **warn** (without failing the build) when:
 - a lesson reuses a skill from an earlier lesson but has no `learn.callback` (a dish in the same pick-one group doesn't count as earlier, since a family cooks only one of them)
 - an ingredient or tool uses its category's fallback icon
 
-### 7.5 The content editor — Requirement (owner, 2026-10-23)
+### 7.5 The content editor — Requirement (owner, 2026-10-23; built in Phase 10)
 **The owner keeps the content up to date from the browser, with no session.** Anything a session does to `content/` the owner can do in the **manager section**, and the change is written into the repo files themselves, not laid on top of them.
-- **Where: the manager section at `/manage`** (owner, 2026-10-23), its own app at its own address, not part of the owner screens or the family app, with no link to it from either. It has its own sign-in screen, and **only the owner's login** opens it; every `/manage` route checks for the owner, as the owner routes do.
-- **What it covers: every file under `content/`.**
-  - **Units:** add a unit, rename one, and reorder units.
-  - **Lessons:** add a new lesson to any unit; edit every part of an existing one (title, cuisine, servings, scaling, time, Learn cards, ingredients, steps, timers, doneness targets, safety levels, hazards, substitutions, prerequisites, callbacks, intro slides); add, delete, and reorder steps; move a lesson to another unit or another position in the course; hide a lesson from every family and unhide it.
-  - **Registries:** ingredients, equipment, skills, kitchen words, cuisines, and measurement units.
-  - **The food rules (§2.1):** the owner marks each ingredient clean or unclean and names its hidden sources, and edits the clean-species list, the blocked words, and the allowed phrases. **The owner's ruling on an ingredient is the final word**; the scan is there to flag things for her, not to decide them.
-  - **Pictures:** a dish picture is uploaded on the lesson's page and committed beside the others in `content/images/` with its license line.
+- **Where: the manager section at `/manage`** (owner, 2026-10-23), its own app at its own address, not part of the owner screens or the family app, with no link to it from the family app. It has its own sign-in screen and its own cookie, and **only the owner's login** opens it; every `/manage` route checks for the owner. The one way in from the family app is a fix request's **Apply in the manager** on the owner screens (§6.11).
+- **What it covers: every file under `content/` except the schemas** (those change with the code).
+  - **Units:** add a unit, rename one, reorder them, and remove an empty one. Units are numbered 1, 2, 3… in course order with seasonal units after them; adding, moving, or removing a unit renumbers every place a number is (units.json, course.json, and the lesson files).
+  - **Lessons:** add a new lesson to any unit, blank or as a copy of another; write a planned dish; edit every part of a lesson, from a form built from the lesson schema, so a field a session adds shows up on its own; add, delete, and reorder steps, ingredients, cards, and the rest; move a lesson to another unit or another place in the course (a dish that leaves its unit leaves its pick-one group); hide a lesson from every family and unhide it (`content/hidden.json`); edit a dish card. The course entry's copies of the lesson's title, unit, cuisine, skills, picture, time, safety, and prerequisites follow the lesson; its skill line is its own wording.
+  - **Registries:** ingredients, tools, skills, kitchen words, cuisines, and regions.
+  - **The food rules (§2.1):** on each ingredient the owner names the animal and part it comes from (or none), and edits the clean-animal list, the animals whose fat is blocked, the allowed products, the blocked words, the allowed phrases, the leaven words, and the kitchen-word watch list. **The owner's ruling is the final word**; the scan flags things for her, and the checks hold every lesson, swap, and family recipe to what she has set.
+  - **Pictures:** a dish picture is uploaded on the lesson's page, made a PNG of at most 1024 pixels wide in the browser, and saved to `content/images/dishes/`. Every lesson needs its picture before it can be saved.
 - **How a save goes live.**
-  1. The editor builds the same JSON the files hold, from forms; raw JSON is there to view, not required.
-  2. On Save, the Worker runs the same checks the linter does (§7.4) and refuses a save that fails, saying which rule and where.
-  3. The Worker commits the changed files to the `content-edits` branch through the GitHub API, using the `GITHUB_TOKEN` Worker secret.
-  4. A GitHub workflow on that branch rebuilds the generated files (`src/worker/library-data.js`, `content-data.js`, dish images), runs the linter and the tests, and only if all pass moves the change onto `main`. Cloudflare Workers Builds deploys it as it deploys everything else, in a few minutes.
-  5. The editor shows the save as **Checking**, **Live**, or **Failed** with the check's own message. A failed save never reaches `main`.
-- **Edits are checked against the latest files.** If the file changed since the editor opened it, Save says so and reloads rather than overwrite.
-- **Every save can be undone.** Each lesson and registry has a **History** with **Revert**, which writes the earlier version back the same way (the restore rule in `CLAUDE.md`).
-- **The hard rule holds.** Nothing the editor offers turns off the §2.1 checks. An ingredient the owner marks unclean, or one with a species off the clean list, can't be put in any lesson, swap, or family recipe. A word the scan flags in a clean context ("turkey bacon") is cleared by adding the exact phrase to the allowed phrases, as now.
-- **New and moved lessons:** the owner picks the unit and the position. Lesson numbers follow from the course order (§4.1), so moving a lesson renumbers the course.
+  1. Changes are staged in the browser (kept there across a reload) until **Review and save**. The editor runs the content linter (§7.4) as the owner types and lists anything to fix; only problems the changes bring count.
+  2. On Save, the Worker runs the same checks again and refuses a save that fails, saying which rule and where.
+  3. The Worker commits the changed files, in one layout (`src/content/format.js`, also `tools/format-content.js`), to the `content-edits` branch through the GitHub API with the `GITHUB_TOKEN` Worker secret. Once `main` has everything on `content-edits`, the next save starts from `main`, so a session's commits are kept.
+  4. The publish workflow (`.github/workflows/content-publish.yml`) merges `main` in, rebuilds the generated files (`src/worker/library-data.js`, `content-data.js`, `public/content/`, the web copy of a new picture), runs the linter and the tests, and only if all pass pushes the result to `main`. Cloudflare Workers Builds deploys it. If anything fails, `main` is left alone and the reason is posted on the save's commit.
+  5. **Saves** lists each save as **Checking**, **Publishing**, **Live**, **Failed** (with the reason), or **Replaced** (a later save changed the same files).
+- **Edits are checked against the latest files.** If a file changed on GitHub since the editor opened it, Save says so and changes nothing.
+- **Every save can be undone.** **Undo** on Saves puts the files a save changed back the way they were, as a new save checked like any other (the restore rule in `CLAUDE.md`). A lesson's **History** loads any earlier version of it as a staged change.
+- **Versions** (§7.3): a lesson's version goes up when its steps or ingredients change. A lesson patched from a fix request before the editor existed opens with its patches on it; saving it writes them into the file at a version past the patched one, and the patches stop applying once that file is live.
+- **The hard rule holds.** Nothing the editor offers turns off the §2.1 checks. An ingredient from an animal off the clean list can't be saved, nor can any lesson using one. A word the scan flags in a clean context ("turkey bacon") is cleared by adding the exact phrase to the allowed phrases.
+- **New and moved lessons:** the owner picks the unit and the place. Lesson numbers follow from the course order (§4.1), so moving a lesson renumbers the course.
+- **Course plans (owner, 2026-10-23).** A new lesson joins every family's existing course plans at its place in the order, included (checked), as well as the suggested order. A hidden lesson comes out of every course plan as well as the library; unhiding it puts it back. Its lesson file is still built, so a cook already started on it still opens.
 - **Not covered:** the app's code. A new kind of field, screen, or feature still needs a session; a new lesson, unit, ingredient, rule, or picture never does.
-- **Owner setup, in a browser, before it can save:** a fine-grained GitHub token with read and write access to this repository's contents and read access to its Actions, pasted into the Worker as the `GITHUB_TOKEN` secret on the Cloudflare dashboard (steps in `docs/setup.md`).
-- **Course plans (owner, 2026-10-23).** A new lesson joins every family's existing course plans at its place in the order, included (checked), as well as the suggested order. A hidden lesson comes out of every course plan as well as the library; unhiding it puts it back.
+- **Owner setup, in a browser, before it can save:** a fine-grained GitHub token with Contents read and write and Actions read on this repository, pasted into the Worker as the `GITHUB_TOKEN` secret on the Cloudflare dashboard, and migration 0017 applied on `/ops` (steps in `docs/setup.md`). `/ops` shows whether GitHub is connected.
 
 ### 6.13 Website and legal pages — Requirement (owner, 2026-10-22)
 The app lives at **`cleanplate.immotus.app`**, and its front door is a simple public website.
@@ -1020,7 +1022,7 @@ The owner has no command line (see `CLAUDE.md`). Everything operational is done 
 - **Backup export** downloads every table as one JSON file. **Import** restores from that file.
 - **Every destructive control has a restore beside it.** Resetting the database, or removing a family (§6.2a), is only offered alongside the export that can bring it back. Photos in R2 are covered by the family photo download (§6.2) and kept for a grace period after a family is removed.
 - Deploys are git → Cloudflare Workers Builds. A schema change reaches production by editing a migration file in the GitHub web editor, letting it deploy, and pressing **Apply pending**.
-- Anything that must be set up by hand in the Cloudflare dashboard (the D1 database, the R2 bucket, the `OPS_TOKEN` secret, and the `RESEND_API_KEY` secret) or in Resend (verifying the sending domain, whose DNS records are added in the Cloudflare dashboard) is listed for the owner before the phase that needs it.
+- Anything that must be set up by hand in the Cloudflare dashboard (the D1 database, the R2 bucket, the `OPS_TOKEN` secret, the `RESEND_API_KEY` secret, and the `GITHUB_TOKEN` secret for the manager section, §7.5) or in Resend (verifying the sending domain, whose DNS records are added in the Cloudflare dashboard) is listed for the owner before the phase that needs it.
 
 ---
 
@@ -1047,7 +1049,7 @@ Each phase should be deployed and usable before the next begins.
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
 | **8. Chef Ruth** (Getting started built 2026-10-23) | Chef Ruth on the parent screens (§6.8): her chat, Getting started (§6.9), and her first tasks. Chef Ruth in the kitchen comes after | A new family goes from sign-up to their first queued lesson through Getting started, and a parent sets up a course and plans a week in her chat, with everything showing on the pages it belongs to |
 | **9. Family recipes** | Folded into 4c (§6.10) | — |
-| **10. Content editor** (owner, 2026-10-23) | The manager section at `/manage` with its owner-only sign-in, and the content editor in it (§7.5): the GitHub token check on `/ops`, the save path (checks, commit to `content-edits`, the workflow that builds, checks, and moves it to `main`, the save status), History and Revert, then the editors: lessons and units first, then registries and the food rules, then pictures | The owner adds a unit, adds a lesson to it, moves an existing lesson into it, and removes a step, all from the browser; each is live for every family after the deploy with no session. A save that breaks a rule is refused with the reason, and Revert puts a lesson back |
+| **10. Content editor** (owner, 2026-10-23; built 2026-10-23) | The manager section at `/manage` with its owner-only sign-in, and the content editor in it (§7.5): the GitHub token check on `/ops`, the save path (checks, commit to `content-edits`, the workflow that builds, checks, and moves it to `main`, the save status), History and Revert, then the editors: lessons and units first, then registries and the food rules, then pictures | The owner adds a unit, adds a lesson to it, moves an existing lesson into it, and removes a step, all from the browser; each is live for every family after the deploy with no session. A save that breaks a rule is refused with the reason, and Revert puts a lesson back |
 | **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system (Print our progress's CSV covers the basics, §6.15) | — |
 
 **Phase 2d waits (owner, 2026-10-22):** the installable PWA and cooking offline (Phase 2's slice 2d) are built once pretty much everything else is done, not before Phase 2e. Until then, Phase 2's "Wi-Fi off partway through" check waits with it.
