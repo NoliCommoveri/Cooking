@@ -422,6 +422,89 @@ export const LIBRARY = {
    "unleavened": false
   },
   {
+   "id": "fish-tacos",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Pico de gallo + Baja fish tacos",
+   "image": "img/dishes/fish-tacos.webp",
+   "cuisine": "mexican",
+   "skill": "Dicing; broiling fish",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, broil the fish on two sheet pans, one at a time, so each sits right under the heat."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "onion-white"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "jalapeno",
+     "optional": true
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cod"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "chili-powder"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "tortilla-corn"
+    },
+    {
+     "ingredient": "coleslaw-mix",
+     "optional": true
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    },
+    {
+     "ingredient": "lime",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "cod",
+     "use": "tilapia",
+     "reason": "availability"
+    }
+   ],
+   "unleavened": true
+  },
+  {
    "id": "shakshuka",
    "version": 1,
    "track": "core",
@@ -1134,6 +1217,30 @@ export const LIBRARY = {
    "contains": [
     "egg"
    ]
+  },
+  "cod": {
+   "name": "Cod fillets, skinless",
+   "contains": [
+    "fish"
+   ]
+  },
+  "tilapia": {
+   "name": "Tilapia fillets",
+   "contains": [
+    "fish"
+   ]
+  },
+  "onion-white": {
+   "name": "White onion",
+   "contains": []
+  },
+  "jalapeno": {
+   "name": "Jalapeño",
+   "contains": []
+  },
+  "coleslaw-mix": {
+   "name": "Shredded cabbage (coleslaw mix)",
+   "contains": []
   }
  },
  "cuisines": {

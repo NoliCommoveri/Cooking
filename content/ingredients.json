@@ -1587,6 +1587,113 @@
       "rawHandling": null,
       "icon": null,
       "watch": null
+    },
+    {
+      "id": "cod",
+      "name": "Cod fillets, skinless",
+      "section": "meat-fish",
+      "baseUnit": "g",
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 113.4,
+        "label": "\u00bc lb",
+        "many": "\u00bc lb",
+        "byWeight": true
+      },
+      "contains": [
+        "fish"
+      ],
+      "animalSource": "cod",
+      "animalPart": "meat",
+      "rawHandling": "fish",
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "tilapia",
+      "name": "Tilapia fillets",
+      "section": "meat-fish",
+      "baseUnit": "g",
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 113.4,
+        "label": "\u00bc lb",
+        "many": "\u00bc lb",
+        "byWeight": true
+      },
+      "contains": [
+        "fish"
+      ],
+      "animalSource": "tilapia",
+      "animalPart": "meat",
+      "rawHandling": "fish",
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "onion-white",
+      "name": "White onion",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "small white onion",
+        "many": "small white onions"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "small white onion",
+        "many": "small white onions"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "jalapeno",
+      "name": "Jalape\u00f1o",
+      "section": "produce",
+      "baseUnit": "count",
+      "countLabel": {
+        "one": "jalape\u00f1o",
+        "many": "jalape\u00f1os"
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 1,
+        "label": "jalape\u00f1o",
+        "many": "jalape\u00f1os"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "coleslaw-mix",
+      "name": "Shredded cabbage (coleslaw mix)",
+      "section": "produce",
+      "baseUnit": "g",
+      "conversions": {
+        "cup": 70
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 397,
+        "label": "14-oz bag",
+        "many": "14-oz bags"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
     }
   ]
 }
