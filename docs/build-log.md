@@ -2671,3 +2671,13 @@ the next was started.
   browser at phone width: all twelve cards in both themes, the intro gone
   and marked seen after the last card, How it works replaying it, and the
   ladder in two rows with large text.
+
+## 109. 2026-10-23 — The intro's progress card says badges
+
+- **Owner ruling: badges, in both themes.** The kitchen intro's Skill tree /
+  Passport card now reads, for every theme, "This is where you track your
+  progress. As you cook, you'll earn badges and rank up." Before, Kitchen
+  Quest's said "crests" and Chef's Passport's said "stamps and skill pins".
+  Badges is a word kids know; the screens keep their own names (crests,
+  skill pins, stamps). Built in `public/intro.js`. Plan §6.9 says so.
+- Tests: 247, unchanged.

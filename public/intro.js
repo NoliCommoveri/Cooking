@@ -25,8 +25,7 @@ export function introCards({ quest, adult }) {
       "Here are all the recipes available to be cooked in Clean Plate. That's the ones that are part of the main course, plus any that adults have added themselves that are available to your family. You can search by a dish name or an ingredient to see what we have available.",
     ] },
     { title: tabs[2], shot: 'progress', lines: [
-      quest ? "This is where you track your progress. As you cook, you'll earn crests and rank up."
-        : "This is where you track your progress. As you cook, you'll collect stamps and skill pins and rank up.",
+      "This is where you track your progress. As you cook, you'll earn badges and rank up.",
     ] },
     adult
       ? { title: 'Cook this', shot: 'ask-adult', lines: [
