@@ -1568,6 +1568,350 @@ export const LIBRARY = {
    "protein": "other"
   },
   {
+   "id": "cacio-e-pepe",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Cacio e pepe",
+   "image": "img/dishes/cacio-e-pepe.webp",
+   "cuisine": "italian",
+   "skill": "Emulsion",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "For 7 or 8, the skillet is very full. Toss slowly, and use the tongs to lift the pasta from the bottom."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "spaghetti"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "pecorino"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pecorino",
+     "use": "parmesan",
+     "reason": "availability"
+    },
+    {
+     "for": "spaghetti",
+     "use": "spaghetti-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "eggs-benedict",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Eggs Benedict",
+   "image": "img/dishes/eggs-benedict.webp",
+   "cuisine": "american",
+   "skill": "Poaching eggs, hollandaise",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, poach the eggs in three or four batches, and keep the finished ones in a bowl of warm water while you cook the rest."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "egg-pasteurized"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "turkey-strips"
+    },
+    {
+     "ingredient": "english-muffin"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "vinegar-white"
+    },
+    {
+     "ingredient": "chives",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "turkey-strips",
+     "use": "salmon-smoked",
+     "reason": "meat"
+    },
+    {
+     "for": "english-muffin",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "protein": "other"
+  },
+  {
+   "id": "mac-and-cheese",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Stovetop mac and cheese",
+   "image": "img/dishes/mac-and-cheese.webp",
+   "cuisine": "american",
+   "skill": "Roux, then béchamel, then cheese sauce",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, make the sauce in the large pot after draining the pasta, so it all fits."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "macaroni-elbow"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "cheddar-shredded"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "mustard-dijon",
+     "optional": true
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "macaroni-elbow",
+     "use": "pasta-small-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "chicken-spinach-crepes",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Chicken and spinach crêpes",
+   "image": "img/dishes/chicken-spinach-crepes.webp",
+   "cuisine": "french",
+   "skill": "Roux, then béchamel, crêpe batter",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, use two baking dishes, and bake them on the same shelf if they fit, or swap shelves halfway."
+     }
+    ]
+   },
+   "totalMinutes": 80,
+   "ingredients": [
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "chicken-breast"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "spinach-baby"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "parmesan"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "protein": "chicken"
+  },
+  {
+   "id": "japanese-chicken-curry",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Japanese chicken curry",
+   "image": "img/dishes/japanese-chicken-curry.webp",
+   "cuisine": "japanese",
+   "skill": "Roux with curry powder, from scratch",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, you'll need a very big pot, at least 8 quarts, and a few more minutes for the potatoes to soften."
+     }
+    ]
+   },
+   "totalMinutes": 65,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "potato-russet"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "ketchup"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "curry-powder"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "chicken"
+  },
+  {
    "id": "beef-bulgogi",
    "version": 1,
    "track": "core",
@@ -2408,6 +2752,50 @@ export const LIBRARY = {
   },
   "tortilla-gluten-free": {
    "name": "Gluten-free tortillas",
+   "contains": []
+  },
+  "pecorino": {
+   "name": "Pecorino Romano cheese, finely grated",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "egg-pasteurized": {
+   "name": "Pasteurized eggs (in the shell)",
+   "contains": [
+    "egg"
+   ]
+  },
+  "turkey-strips": {
+   "name": "Turkey bacon",
+   "contains": [
+    "meat"
+   ]
+  },
+  "salmon-smoked": {
+   "name": "Smoked salmon (lox)",
+   "contains": [
+    "fish"
+   ]
+  },
+  "english-muffin": {
+   "name": "English muffins",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "macaroni-elbow": {
+   "name": "Elbow macaroni",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "spinach-baby": {
+   "name": "Baby spinach",
+   "contains": []
+  },
+  "curry-powder": {
+   "name": "Curry powder (mild)",
    "contains": []
   }
  },

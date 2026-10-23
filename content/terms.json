@@ -21,6 +21,7 @@
     { "id": "dust", "word": "Dust", "forms": ["dust", "dusted", "dusting"], "means": "Sprinkle a thin, light layer, like flour on the counter so dough doesn't stick.", "taughtIn": "buttermilk-biscuits", "image": null },
     { "id": "toss", "word": "Toss", "forms": ["toss", "tossed", "tossing"], "means": "Gently lift and turn the food so every piece gets coated, like tossing a salad.", "taughtIn": null, "image": null },
     { "id": "shimmer", "word": "Shimmer", "forms": ["shimmer", "shimmers", "shimmering"], "means": "Hot oil looks wavy and rippled on top. That means it's hot enough for the food.", "taughtIn": null, "image": null },
-    { "id": "across-the-grain", "word": "Across the grain", "forms": ["across the grain"], "means": "Meat has thin lines running through it, like the lines in wood. Cut across those lines, not along them, so each bite is tender.", "taughtIn": "beef-bulgogi", "image": null }
+    { "id": "across-the-grain", "word": "Across the grain", "forms": ["across the grain"], "means": "Meat has thin lines running through it, like the lines in wood. Cut across those lines, not along them, so each bite is tender.", "taughtIn": "beef-bulgogi", "image": null },
+    { "id": "roux", "word": "Roux", "forms": ["roux"], "means": "Butter and flour cooked together, stirring, for a few minutes. It thickens milk or broth into a smooth sauce. Say it \"roo.\"", "taughtIn": "mac-and-cheese", "image": null }
   ]
 }
