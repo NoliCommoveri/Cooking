@@ -577,6 +577,86 @@ export const LIBRARY = {
    "unleavened": true
   },
   {
+   "id": "minestrone",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Minestrone",
+   "image": "img/dishes/minestrone.webp",
+   "cuisine": "italian",
+   "skill": "Dicing",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, you'll need a very big pot, at least 8 quarts. Or make it in two pots side by side."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "zucchini"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "broth-vegetable"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "cannellini"
+    },
+    {
+     "ingredient": "pasta-small"
+    },
+    {
+     "ingredient": "parmesan",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pasta-small",
+     "use": "pasta-small-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true
+  },
+  {
    "id": "shakshuka",
    "version": 1,
    "track": "core",
@@ -1334,6 +1414,30 @@ export const LIBRARY = {
    "name": "Baguette",
    "contains": [
     "gluten"
+   ]
+  },
+  "broth-vegetable": {
+   "name": "Vegetable broth",
+   "contains": []
+  },
+  "cannellini": {
+   "name": "Cannellini beans (white kidney beans)",
+   "contains": []
+  },
+  "pasta-small": {
+   "name": "Small pasta (ditalini or small shells)",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "pasta-small-gluten-free": {
+   "name": "Gluten-free small pasta",
+   "contains": []
+  },
+  "parmesan": {
+   "name": "Parmesan cheese",
+   "contains": [
+    "dairy"
    ]
   }
  },

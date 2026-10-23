@@ -23,6 +23,7 @@
     { "id": "whisk", "name": "Whisk", "category": "utensils", "icon": null },
     { "id": "fork", "name": "Fork", "category": "utensils", "icon": null },
     { "id": "spoon", "name": "Spoon", "category": "utensils", "icon": null },
+    { "id": "ladle", "name": "Ladle", "category": "utensils", "icon": null },
     { "id": "pastry-brush", "name": "Pastry brush", "category": "utensils", "icon": null },
     { "id": "oven-mitts", "name": "Oven mitts", "category": "utensils", "icon": null },
     { "id": "box-grater", "name": "Box grater", "category": "openers", "icon": null },

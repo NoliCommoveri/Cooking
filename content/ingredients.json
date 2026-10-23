@@ -1797,6 +1797,112 @@
       "rawHandling": null,
       "icon": null,
       "watch": null
+    },
+    {
+      "id": "broth-vegetable",
+      "name": "Vegetable broth",
+      "section": "canned-jarred",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 946,
+        "label": "32-oz carton",
+        "many": "32-oz cartons"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "cannellini",
+      "name": "Cannellini beans (white kidney beans)",
+      "section": "canned-jarred",
+      "baseUnit": "g",
+      "units": {
+        "can": {
+          "amount": 439,
+          "one": "15.5-oz can",
+          "many": "15.5-oz cans"
+        }
+      },
+      "purchaseUnit": {
+        "amount": 439,
+        "label": "15.5-oz can",
+        "many": "15.5-oz cans"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "pasta-small",
+      "name": "Small pasta (ditalini or small shells)",
+      "section": "grains-pasta",
+      "baseUnit": "g",
+      "conversions": {
+        "cup": 110
+      },
+      "purchaseUnit": {
+        "amount": 454,
+        "label": "1-lb box",
+        "many": "1-lb boxes"
+      },
+      "contains": [
+        "gluten"
+      ],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "pasta-small-gluten-free",
+      "name": "Gluten-free small pasta",
+      "section": "grains-pasta",
+      "baseUnit": "g",
+      "conversions": {
+        "cup": 110
+      },
+      "purchaseUnit": {
+        "amount": 340,
+        "label": "12-oz box",
+        "many": "12-oz boxes"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "parmesan",
+      "name": "Parmesan cheese",
+      "section": "dairy-eggs",
+      "baseUnit": "g",
+      "conversions": {
+        "cup": 90
+      },
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 142,
+        "label": "5-oz container of grated parmesan",
+        "many": "5-oz containers of grated parmesan"
+      },
+      "contains": [
+        "dairy"
+      ],
+      "animalSource": "cattle",
+      "animalPart": "milk",
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
     }
   ]
 }
