@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [87. 2026-10-23 — Shopping: Upcoming first, and new intro copy](docs/build-log.md#87-2026-10-23--shopping-upcoming-first-and-new-intro-copy)
+**Latest build log entry:** [88. 2026-10-23 — Kitchen staples come first on every list](docs/build-log.md#88-2026-10-23--kitchen-staples-come-first-on-every-list)
 
 ## Current features
 
@@ -24,7 +24,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Queue** (`src/worker/plan.js`): the one "up next" list. Parents add lessons for one or more profiles, approve kids' requests, check each lesson's safety review, and mark lessons test-cooked. Kids ask with "I want to make this"; adults tap "Cook this". A kid starting a lesson that isn't on their list needs the parent PIN, approved as an extra meal or in place of an assigned one, so assigned lessons never get pushed back. A course lesson approved early leaves its later place, so it never shows twice. Each queued lesson is one line that opens to its tools. A Course / Additional toggle switches between the course and lessons assigned on top of it; + Add a lesson opens a dialog.
 - **Courses and the weekly schedule** (`src/worker/schedule.js`): set a course up once for one or more profiles, and each week's lessons load into the queue. Weeks run Sunday to Friday (Saturday is the Sabbath); each week's lessons join the queue on its Sunday. On the Sabbath a "Shabbat shalom" banner shows and due dates are hidden. Unfinished lessons roll to next week; Skip this recipe, Cook another recipe, and Skip this week, each with Undo. The course card shows This week open and Next week folded, with the week's changes in a "⋯" menu. The course editor folds its lessons by path.
 - **Shopping** (`src/content/shop.js`, `src/worker/shopping.js`), optional: **What you'll need** shows the ingredients for the coming lessons week by week. A parent can make a shopping list for the next few uncooked lessons, tick what's on hand, and check the rest off in the store; it's merged, rounded to store packages, and grouped by aisle. Three views: Upcoming (the default), Lists (newest first), and Staples.
-- **Kitchen staples** (Shopping → Staples): added by searching for an ingredient; grouped on lists as "May already have", still on the list.
+- **Kitchen staples** (Shopping → Staples): added by searching for an ingredient; first on every list, as "May already have", still on the list.
 - **Casual and homeschool modes**: homeschool adds due days for kids and overdue for parents; casual can turn on Plan our weeks.
 - **Reflect** (`public/player.js`): after Plate it, each profile on the cook rates it (gems or chef's hats), says what they'd change, and can name another dish that uses the move; plus an optional rating from the eaters. Saved even if the connection drops.
 - **Print our progress** (Parents → Progress): what each profile has cooked, with date, dish, cuisine, skill, and rating, printable or as a CSV.

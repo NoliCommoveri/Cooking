@@ -2184,3 +2184,16 @@ on it.
   be left off the list."
 - Tests: 222. Checked in a browser at phone width.
 
+## 88. 2026-10-23 — Kitchen staples come first on every list
+
+- **Owner ruling:** kitchen staples go at the top of every list, not the
+  bottom. The "May already have" group now comes before the store sections on
+  a shopping list, on "Before you make the list", and in each week of
+  Upcoming. Any ingredient added on Staples goes in that group, whatever store
+  section it's normally in (garlic, say, leaves Produce). The server already
+  grouped them that way, so only the order on screen changed.
+- The plan (§6.3, item 5) now says "grouped first", and the staples notes on
+  Shopping say so too.
+- Tests: 222. Checked in a browser at phone width: a list and its preview with
+  salt, olive oil, and garlic as staples.
+

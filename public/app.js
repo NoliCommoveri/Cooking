@@ -1383,8 +1383,8 @@ const shopping = parentOnly(async (flash) => {
   const weeks = d.weeks.map((w) => el('details', { class: 'card week' },
     el('summary', {}, el('b', {}, weekName(w.week)), el('small', { class: 'mut' }, ` · ${w.lessons.length} lesson${w.lessons.length === 1 ? '' : 's'}`)),
     el('ul', { class: 'weeklessons' }, w.lessons.map((x) => el('li', {}, el('b', {}, x.title), ` · serves ${x.servings}${x.profile_ids.length ? ` · ${names(x.profile_ids)}` : ''}`))),
-    w.needs.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), el('div', { class: 'rows' }, s.items.map(usedLine)))),
-    w.needs.may_have.length ? el('div', { class: 'psec' }, el('h4', {}, MAY_HAVE), el('div', { class: 'rows' }, w.needs.may_have.map(usedLine))) : null));
+    w.needs.may_have.length ? el('div', { class: 'psec' }, el('h4', {}, MAY_HAVE), el('div', { class: 'rows' }, w.needs.may_have.map(usedLine))) : null,
+    w.needs.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), el('div', { class: 'rows' }, s.items.map(usedLine))))));
 
   // Lists, newest first, and what's coming up, one at a time (owner, 2026-10-23).
   const newest = (a, b) => (a.created_at < b.created_at ? 1 : a.created_at > b.created_at ? -1 : 0);
@@ -1395,7 +1395,7 @@ const shopping = parentOnly(async (flash) => {
   ];
   const upcoming = [
     weeks.length ? weeks : el('p', { class: 'mut' }, 'Nothing is coming up yet.'),
-    el('p', { class: 'mut small' }, `Kitchen staples are grouped under "${MAY_HAVE}" so you can check the cupboard first.`),
+    el('p', { class: 'mut small' }, `Your kitchen staples come first on every list, under "${MAY_HAVE}", so you can check the cupboard first.`),
   ];
 
   // Kitchen staples: the ones the family keeps, each with Remove; more are
@@ -1431,7 +1431,7 @@ const shopping = parentOnly(async (flash) => {
   };
   const staples = [
     addHead(null, 'Add a staple', addStaples),
-    el('p', { class: 'mut small', style: 'margin:0' }, `Things your kitchen usually has. They stay on every list, grouped under "${MAY_HAVE}" so you can check the cupboard first.`),
+    el('p', { class: 'mut small', style: 'margin:0' }, `Things your kitchen usually has. Any you add here go first on every list, under "${MAY_HAVE}", so you can check the cupboard first.`),
     have.size ? el('div', { class: 'card' }, el('div', { class: 'rows' }, [...have].map((x) => byId[x]).sort((a, b) => a.name.localeCompare(b.name)).map((i) => el('div', { class: 'rowi' },
       el('div', {}, el('b', {}, i.name), el('small', {}, i.section)),
       actBtn('Remove', '', async () => {
@@ -1465,8 +1465,8 @@ const shoppingPreview = parentOnly(async (count) => {
     el('p', {}, `For ${p.lessons.map((x) => `${x.title} (serves ${x.servings})`).join(', ')}.`),
     form([
       el('p', { class: 'mut small', style: 'margin:0' }, "Tick anything you already have. It's left off this list only."),
-      p.sections.map((s) => el('fieldset', { class: 'psec' }, el('legend', {}, s.name), el('div', { class: 'stack' }, s.items.map(tick)))),
       p.may_have.length ? el('fieldset', { class: 'psec' }, el('legend', {}, MAY_HAVE), el('div', { class: 'stack' }, p.may_have.map(tick))) : null,
+      p.sections.map((s) => el('fieldset', { class: 'psec' }, el('legend', {}, s.name), el('div', { class: 'stack' }, s.items.map(tick)))),
     ], 'Create shopping list', async (v) => {
       const res = await api('POST', `/api/shopping/lists?${tz()}`, { keys: p.lessons.map((x) => x.key), on_hand: all.filter((x) => v[`h_${x.id}`]).map((x) => x.id) });
       go(`#/parent/shopping/list/${res.id}`);
@@ -1507,8 +1507,8 @@ const shoppingListView = parentOnly(async (lid, flash) => {
     el('section', { class: 'card shoplist' },
       el('div', {}, el('h2', { style: 'margin:0' }, `Shopping list · ${fmtDay(l.created_at.slice(0, 10))}`), count,
         el('p', { class: 'mut small', style: 'margin:0' }, `For ${l.lessons.map((x) => `${x.title} (serves ${x.servings})`).join(', ')}`)),
-      l.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), s.items.map(row))),
       l.may_have.length ? el('div', { class: 'psec' }, el('h4', {}, MAY_HAVE), l.may_have.map(row)) : null,
+      l.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), s.items.map(row))),
       l.on_hand.length ? el('details', { class: 'psec' }, el('summary', {}, `You have these (${l.on_hand.length})`),
         el('div', { class: 'rows' }, l.on_hand.map((x) => el('div', { class: 'rowi' }, el('div', {}, el('b', {}, x.name), el('small', {}, x.used ?? '')),
           actBtn('Put on the list', '', async () => { await api('POST', `/api/shopping/lists/${lid}/on-hand`, { ingredient_id: x.id, on_hand: false }); shoppingListView(lid); }))))) : null,
