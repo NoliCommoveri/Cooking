@@ -1131,11 +1131,12 @@ async function previewLesson(lessonId) {
       el('p', { class: 'mut small', style: 'margin:0' }, "Go through it the way your cook will see it. Nothing here is saved or counted, and Prep doesn't need checking off."),
       profiles.length > 1 ? el('div', { class: 'pvas' }, el('span', { class: 'mut small' }, 'See it as'), pick) : null,
       mount));
-  const keyFor = (e) => { if (e.key === 'Escape') close(); };
+  // Escape closes the preview only, not a dialog it was opened from.
+  const keyFor = (e) => { if (e.key === 'Escape') { e.stopPropagation(); close(); } };
   const close = () => {
     ov.remove();
     document.body.style.overflow = '';
-    document.removeEventListener('keydown', keyFor);
+    document.removeEventListener('keydown', keyFor, true);
     window.removeEventListener('hashchange', close);
   };
   const open = async () => {
@@ -1151,7 +1152,7 @@ async function previewLesson(lessonId) {
   };
   document.body.append(ov);
   document.body.style.overflow = 'hidden';
-  document.addEventListener('keydown', keyFor);
+  document.addEventListener('keydown', keyFor, true);
   // Going to another page closes it.
   window.addEventListener('hashchange', close);
   await open();
@@ -1385,8 +1386,11 @@ const parentQueue = parentOnly(async (flash) => {
   lessonSel.addEventListener('change', checkNote);
   who.addEventListener('change', checkNote);
   let closeAdd = () => {};
+  const pickPreview = el('button', { type: 'button', class: 'hbtn link', hidden: true, onclick: () => previewLesson(lessonSel.value).catch((err) => showToast(err.message)) }, 'Preview as a learner');
+  lessonSel.addEventListener('change', () => { pickPreview.hidden = !lessonSel.value; });
   const addForm = form([
     el('label', { class: 'f' }, 'Lesson', lessonSel),
+    pickPreview,
     el('fieldset', {}, el('legend', {}, "Who's cooking"), el('p', { class: 'mut small', style: 'margin:0' }, 'Pick more than one to cook it together. It counts for each of them.'), who),
     note,
     field('Serves', 'servings', { type: 'number', min: 1, value: q.default_servings, inputmode: 'numeric' }),
@@ -1993,6 +1997,7 @@ const parentRecipes = parentOnly(async (flash) => {
             status(r).map((t) => el('small', {}, t))),
           el('div', { class: 'acts' },
             el('a', { class: 'hbtn', href: `#/parent/recipes/${hex(r)}` }, 'Edit'),
+            r.held ? null : previewBtn(r.id),
             r.held ? null : r.shared && !r.shared.hidden
               ? actBtn('Stop sharing', '', async () => { await api('DELETE', `/api/recipes/${hex(r)}/share`); again(`${r.title} is out of the directory.`); })
               : actBtn('Share', '', () => shareRecipe(r)),

@@ -3044,3 +3044,16 @@ At the owner's request, parents get the manager's preview too.
   kid (Kitchen Quest) and an adult (Chef's Passport): the queue's links,
   the course editor's, switching between the two, Cook mode as each, and
   closing back to the page.
+
+## 122. 2026-10-23 — Preview from Add a lesson and Our recipes; stacked arrows
+
+- **Owner request:** Preview as a learner reaches lessons added by hand.
+  Besides the Additional lessons on the Queue (which had it from 121), it's
+  now in the **Add a lesson** dialog, for the lesson picked, and on each of
+  the family's own recipes in **Our recipes** (not one waiting on a review).
+  Escape over the Add a lesson dialog closes the preview only.
+- **Course editor:** each row's ↑ and ↓ are stacked, one above the other,
+  instead of side by side.
+- Tests: 261. Checked in a browser at phone width on the dev server: the
+  Additional tab, Add a lesson, a family recipe in Cook mode, and the
+  course editor; nothing was written.

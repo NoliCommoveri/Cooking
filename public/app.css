@@ -284,7 +284,7 @@ select{font:inherit;padding:8px 10px;border-radius:10px;border:1.5px solid var(-
 .planrow{display:grid;grid-template-columns:36px minmax(0,1fr) auto;gap:8px;align-items:start;padding:8px 0;border-bottom:1px solid var(--h-line)}
 .planrow.out{opacity:.6}
 .planno{font-weight:800;font-size:20px;text-align:center;padding-top:8px}
-.planmove{display:flex;gap:4px}
+.planmove{display:flex;flex-direction:column;gap:4px}
 .planmove .hbtn{min-width:44px;padding:0 10px}
 .k-next{min-height:0}
 .rowi.qrow{grid-template-columns:minmax(0,1fr)}

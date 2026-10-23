@@ -424,7 +424,7 @@ Do **not** use:
 - **Family recipes** (§6.10): add the family's own recipes, share them to the community directory, and add recipes from it
 - **Swap for an Appointed Time meal instead** (§6.19), in a queued lesson's "⋯" menu
 - **Mark test-cooked:** after cooking a lesson themselves, a parent can mark it test-cooked for their family (§7). Optional; lessons don't need it to be shown to kids
-- **Preview as a learner** (owner, 2026-10-23): on each lesson on the queue (requests, course lessons, and lessons added by hand) and each written lesson in the course editor, a parent goes through the lesson the way one of their profiles will see it: that profile's theme, kid or adult, and the family's diet swaps. Prep doesn't need checking off, any stage is a tap away, and **nothing is saved or counted**. It opens over the page, so a course being edited isn't lost. The owner has the same in the manager section (§7.5)
+- **Preview as a learner** (owner, 2026-10-23): on each lesson on the queue (requests, course lessons, and lessons added by hand), the lesson picked in Add a lesson, each of the family's own recipes, and each written lesson in the course editor, a parent goes through the lesson the way one of their profiles will see it: that profile's theme, kid or adult, and the family's diet swaps. Prep doesn't need checking off, any stage is a tap away, and **nothing is saved or counted**. It opens over the page, so a course being edited isn't lost. The owner has the same in the manager section (§7.5)
 - **Kitchen staples:** ingredients the family usually has, grouped as "May already have" on lists (§6.3)
 - **Delete our family** and **Download our data** (§6.14)
 - **Print our progress** (§6.15)
