@@ -1360,6 +1360,61 @@
       "rawHandling": null,
       "icon": null,
       "watch": null
+    },
+    {
+      "id": "beef-sirloin",
+      "name": "Beef sirloin steak, about 1 inch thick",
+      "section": "meat-fish",
+      "baseUnit": "g",
+      "perishable": true,
+      "purchaseUnit": {
+        "amount": 113.4,
+        "label": "\u00bc lb",
+        "many": "\u00bc lb",
+        "byWeight": true
+      },
+      "contains": [
+        "meat"
+      ],
+      "animalSource": "cattle",
+      "animalPart": "meat",
+      "rawHandling": "meat",
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "oregano-dried",
+      "name": "Dried oregano",
+      "section": "spices",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 100,
+        "label": "jar of dried oregano",
+        "many": "jars of dried oregano"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
+    },
+    {
+      "id": "vinegar-red-wine",
+      "name": "Red wine vinegar",
+      "section": "oils-vinegars",
+      "baseUnit": "ml",
+      "purchaseUnit": {
+        "amount": 473,
+        "label": "16-fl-oz bottle",
+        "many": "16-fl-oz bottles"
+      },
+      "contains": [],
+      "animalSource": null,
+      "animalPart": null,
+      "rawHandling": null,
+      "icon": null,
+      "watch": null
     }
   ]
 }

@@ -292,6 +292,65 @@ export const LIBRARY = {
    "unleavened": false
   },
   {
+   "id": "chimichurri-steak",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Chimichurri steak",
+   "image": "img/dishes/chimichurri-steak.webp",
+   "cuisine": "argentine",
+   "skill": "Fine chopping: parsley, garlic, oregano",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, sear the steak in two batches so the pan stays hot. Keep the first batch resting on the board while the second cooks."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "vinegar-red-wine"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "chili-flakes",
+     "optional": true
+    },
+    {
+     "ingredient": "beef-sirloin"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true
+  },
+  {
    "id": "shakshuka",
    "version": 1,
    "track": "core",
@@ -947,6 +1006,20 @@ export const LIBRARY = {
   },
   "sumac": {
    "name": "Ground sumac",
+   "contains": []
+  },
+  "beef-sirloin": {
+   "name": "Beef sirloin steak, about 1 inch thick",
+   "contains": [
+    "meat"
+   ]
+  },
+  "oregano-dried": {
+   "name": "Dried oregano",
+   "contains": []
+  },
+  "vinegar-red-wine": {
+   "name": "Red wine vinegar",
    "contains": []
   }
  },
