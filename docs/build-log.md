@@ -2046,3 +2046,24 @@ on it.
   rest of the tap-through still needs a browser check.
 - **Asked, not planned:** kid logins (username and password, no email, no
   parent screens). §8.3 says kids don't log in, and no phase has it.
+
+## 81. 2026-10-23 — Plan: kid logins, Phase 5b
+
+- **Owner ruling:** a kid can have a login, with a username and password set
+  by a parent. A kid login has no chef's lockers and no parent screens; it goes
+  straight to that kid's kitchen. Parent and adult logins work as before.
+  Built next, as **Phase 5b**, after Phase 5 and before Phase 6.
+- **Specced in the plan, §8.3a:** optional and per kid profile; set, changed,
+  and turned off on the profile editor behind the PIN; one Log in screen taking
+  an email or a username; a kid session limited on the server to its own
+  profile, with every other route refused unless it's on the allowed list; a
+  grown-up step on a kid's device (Ask a grown-up to start) takes the PIN for
+  that one action only and opens nothing else; what ends a kid's sessions; and
+  a migration with `kid_logins` and `kid_sessions` (§8.4), applied from `/ops`.
+- **Changed in the plan:** §8.3 no longer says kids don't log in. The landing page and
+  privacy lines (§6.13), §6.1, §6.2, §8.4, and the phase table (§9) now include kid
+  logins.
+- **Four questions for the owner** are listed at the end of §8.3a: usernames
+  unique app-wide or per family, logins for adult learners too, logging out
+  with or without the PIN, and the password minimum.
+- No code changed.
