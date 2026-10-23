@@ -3212,3 +3212,24 @@ this month. Plan §1, §4, §6.21, §8.4 (`program` is `world` or `level-3`),
 §9, and §12 updated. New open question (§10): whether homeschool mode stays
 on Cook Around the World or moves to the Levels only; the syllabus and
 landing pages need wording for the two programs either way.
+
+## 128. 2026-10-23 — Plan: building the next release beside the live app
+
+Design only. Owner decisions:
+- **The next release is built switched off** (plan §8.6). Everything planned
+  today (Unleavened Bread dates, tastes and recipe gaps, the Levels, the
+  Cook Around the World name) goes into the live app behind a Next release
+  switch on `/ops`: preview for chosen families, Launch for everyone, and
+  Turn off for everyone as its restore. New content lives in
+  `content/levels/` and `content/calendars.json`. Chosen over a long-lived
+  branch, which would drift from `main`, couldn't be tried on the live app
+  without a second Worker, and couldn't be edited in the content editor.
+- **One migration for the whole build** ("I don't want 40 migrations"):
+  `0003_next_release.sql` is a draft, edited in place. It may only create new
+  tables; Re-apply draft rebuilds them (preview data only, with the backup
+  beside it); Finalize freezes it at launch. So tastes and course programs
+  move to new tables (`family_tastes`, `course_programs`) instead of new
+  columns. The runner pattern in `CLAUDE.md` is unchanged.
+- **Homeschool mode stays on both programs:** homeschool families can take
+  Cook Around the World as an elective. The open question is closed.
+- Phase 10b (the switch and the draft migration) comes before phases 11–13.

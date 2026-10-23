@@ -911,7 +911,7 @@ The fixed February 1 to May 15 window (§6.19) is replaced by **each family's ow
   - **The schedule** (§6.18, and the Levels, §12): **recommendation:** a leavened lesson isn't scheduled on an unleavened day. The schedule passes it over to the first week after the feast and fills its place with the next lesson that's unleavened, the way a swap moves a lesson, so it never counts as behind. A leavened lesson already in the queue is flagged on the Queue with a one-tap unleavened swap.
   - **The kitchen** (recommendation): a banner on the unleavened days, like the Sabbath's; leavened lessons show "After Unleavened Bread", and starting one asks for the parent PIN, like cooking off the path (§6.18).
   - **Level 3 setup:** a Level course whose bread weeks would land on the unleavened days says so when it's set up (§12).
-- **Stored** in a new table, `unleavened_dates` (§8.4), one row per family per year. Applied with **Apply pending** on `/ops`; nothing to set up by hand.
+- **Stored** in a new table, `unleavened_dates` (§8.4), created by the next release's draft migration (§8.6); nothing to set up by hand.
 
 ### 6.21 Family tastes and the recipe pool — Requirement (owner, 2026-10-23)
 Families tell the app what they like, the app picks dishes to match, and what it can't match tells the owner which recipes to write next. **"We can always add more recipes"** (owner, 2026-10-23): a preference can really leave dishes out; a gap is fixed by writing a dish, not by ignoring the preference.
@@ -935,7 +935,7 @@ Families tell the app what they like, the app picks dishes to match, and what it
   - **Tastes overall:** how many families chose each answer.
   - Each gap can be opened straight into a new lesson in the content editor, with the skill already filled in.
 - **Privacy:** tastes are a family's data, removed with the family (§6.14) and included in Download our data. The privacy policy (§6.13) says the owner sees the counts above, never which family.
-- **Stored** on `families` as `tastes` (JSON), set by the parent (§8.4).
+- **Stored** in a new table, `family_tastes` (§8.4), set by the parent. Built in the next release (§8.6).
 
 ---
 
@@ -1061,8 +1061,10 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `photos` (id, family_id, attempt_id, r2_key, created_at)
 - `pantry` (family_id, ingredient_id). Kitchen staples
 - `unleavened_dates` (family_id, year, calendar, first_day, unleavened_from, confirmed_at) (§6.20). `calendar` is a standard calendar's id; `first_day` may differ from that calendar's date (a deviation); `confirmed_at` is null until the parent confirms the year
-- `families.tastes` (JSON): the family's answers to Our tastes (§6.21)
-- Level courses (§12) reuse `courses` with a `program` (`world` or `level-3`, …); a week's chosen recipe, drill, knowledge, and Sabbath task are checked off per profile in `level_tasks` (family_id, course_id, week, part, profile_id, done_at), and a mastery week's "why it worked" is saved with the cook's reflection
+- `family_tastes` (family_id, answers_json, updated_at): the family's answers to Our tastes (§6.21)
+- `course_programs` (course_id, family_id, program: `level-3`, …): which program a course is (§12). No row means Cook Around the World, so existing courses need no change
+- `level_tasks` (family_id, course_id, week, part, profile_id, done_at): a Level week's recipe, drill, knowledge, and Sabbath task checked off per profile (§12.2); a mastery week's "why it worked" is saved with the cook's reflection
+- **The next release adds tables only** (§8.6): no column is added to, and nothing is dropped from, a table that exists today
 - Stamps, pins, and rank are computed from `attempts` and the content files, not stored separately (**recommendation**; cache them if it gets slow).
 - The lesson library and ingredient registry are content files shared by all families (§7). They are not stored per family.
 
@@ -1072,8 +1074,21 @@ The owner has no command line (see `CLAUDE.md`). Everything operational is done 
 - **Migrations** are SQL files bundled into the Worker. `/ops` lists each one as applied, pending, or drifted, and **Apply pending** runs them in order. Each migration is all-or-nothing, and the runner stops at the first failure and shows the error.
 - **Backup export** downloads every table as one JSON file. **Import** restores from that file.
 - **Every destructive control has a restore beside it.** Resetting the database, or removing a family (§6.2a), is only offered alongside the export that can bring it back. Photos in R2 are covered by the family photo download (§6.2) and kept for a grace period after a family is removed.
-- Deploys are git → Cloudflare Workers Builds. A schema change reaches production by editing a migration file in the GitHub web editor, letting it deploy, and pressing **Apply pending**.
+- Deploys are git → Cloudflare Workers Builds. A schema change reaches production by editing a migration file in the GitHub web editor, letting it deploy, and pressing **Apply pending**. During a big build, changes go into that build's single draft migration instead (§8.6).
 - Anything that must be set up by hand in the Cloudflare dashboard (the D1 database, the R2 bucket, the `OPS_TOKEN` secret, the `RESEND_API_KEY` secret, and the `GITHUB_TOKEN` secret for the manager section, §7.5) or in Resend (verifying the sending domain, whose DNS records are added in the Cloudflare dashboard) is listed for the owner before the phase that needs it.
+
+### 8.6 The next release: built beside the live app — Requirement (owner, 2026-10-23)
+Everything planned on 2026-10-23 (Unleavened Bread dates, §6.20; family tastes and the recipe gaps page, §6.21; the Levels, §12; the Cook Around the World name, §4) is built **into the live app, switched off**, and turned on for everyone at once when it's ready.
+- **The Next release switch** (on `/ops`):
+  - **Preview for chosen families:** the owner turns the next release on for one family at a time (their own, a test family). Those families see the new screens and rules; every other family sees the app as it is.
+  - **Launch for everyone** turns it on for all families. **Turn off for everyone** is beside it, the restore (§8.5): the app goes back to how it was, and nothing the preview families entered is lost.
+  - Until launch, today's behaviour stays for everyone else, including the fixed February 1 to May 15 swap window (§6.19).
+- **New content is kept apart** in `content/levels/` (the Level weeks, drills, knowledge pages, Sabbath tasks, and their recipes) and `content/calendars.json`. The content editor (§7.5) edits them before launch; only preview families see them.
+- **One migration for the whole build** (owner, 2026-10-23: "I don't want 40 migrations during this new build"). The next release's schema is a single **draft** migration, `0003_next_release.sql`, edited in place for the whole build:
+  - **A draft may only create new tables and indexes.** It never alters or drops a table that exists today; the runner refuses a draft that tries. So the new build stores tastes and course programs in new tables (§8.4), not new columns.
+  - **On `/ops` it shows as Draft.** Editing it isn't drift. **Re-apply draft** drops the tables it made and creates them again from the edited file. That loses only preview data, so the backup export and Import sit beside it (§8.5).
+  - **Finalize** (at launch) freezes it into an ordinary applied migration, like `0001` and `0002`. The next big build starts its own single draft the same way.
+  - Tests build the database from every migration, the draft included.
 
 ---
 
@@ -1101,6 +1116,7 @@ Each phase should be deployed and usable before the next begins.
 | **8. Chef Ruth** (Getting started built 2026-10-23) | Chef Ruth on the parent screens (§6.8): her chat, Getting started (§6.9), and her first tasks. Chef Ruth in the kitchen comes after | A new family goes from sign-up to their first queued lesson through Getting started, and a parent sets up a course and plans a week in her chat, with everything showing on the pages it belongs to |
 | **9. Family recipes** | Folded into 4c (§6.10) | — |
 | **10. Content editor** (owner, 2026-10-23; built 2026-10-23) | The manager section at `/manage` with its owner-only sign-in, and the content editor in it (§7.5): the GitHub token check on `/ops`, the save path (checks, commit to `content-edits`, the workflow that builds, checks, and moves it to `main`, the save status), History and Revert, then the editors: lessons and units first, then registries and the food rules, then pictures | The owner adds a unit, adds a lesson to it, moves an existing lesson into it, and removes a step, all from the browser; each is live for every family after the deploy with no session. A save that breaks a rule is refused with the reason, and Revert puts a lesson back |
+| **10b. Next release switch** (owner, 2026-10-23) | §8.6: the switch on `/ops` (preview per family, Launch for everyone, Turn off for everyone), the draft migration with Re-apply and Finalize, and `content/levels/`. Phases 11–13 are built behind it | A preview family sees a test screen that other families don't; Re-apply draft rebuilds an edited draft table; Turn off for everyone puts the app back |
 | **11. Unleavened Bread dates** (owner, 2026-10-23) | §6.20: the standard calendars file and its editor, the Getting started and Family settings questions, the yearly ask, the migration, and the swap, schedule, and kitchen changes; the fixed window comes out | Two test families on different calendars, one deviating by a day, see Swap go unleavened-only on their own weeks; a leavened course lesson due in the feast moves past it and doesn't count as behind; a family that hasn't confirmed sees the note |
 | **12. Level 3 Cook** (owner, 2026-10-23: Level 3 first) | §12: the Level program beside Cook Around the World, Level 3's 36 weeks with its four parts, mastery weeks, skill-tagged swap-ins, the Level 3 recipes, Progress and transcript changes | A parent puts a teen on Level 3; the kid cooks week 1's recipe, checks off its drill, knowledge, and Sabbath task; a swap-in replaces a week's recipe; a mastery week asks for "why it worked"; the transcript shows Level 3's hours |
 | **13. Tastes and the recipe pool** (owner, 2026-10-23) | §6.21: Our tastes, its use in picks and suggestions, `budget` and `heat` on lessons, the closest-fit rule, and the owner's Recipe gaps page | A family that skips seafood and chooses mild gets no fish week default and a closest-fit note; the owner sees that gap counted and opens a new lesson from it |
@@ -1121,7 +1137,6 @@ Each phase should be deployed and usable before the next begins.
 ## 10. Open questions
 
 - **Which standard calendars** (one or two) Unleavened Bread dates come from (§6.20). The owner names them; Claude fills `content/calendars.json` from them.
-- **Homeschool mode on Cook Around the World:** with the Levels as the homeschool curriculum, does homeschool mode (grades, transcript, due dates; §6.17) stay available on Cook Around the World, or move to the Levels only? Until the owner decides, it stays as built. The public syllabus page (§6.17) and the landing page (§6.13) will need new wording for the two programs either way.
 - **Mini-courses** (themed short courses such as spicy, all-American, eco-fare): proposed 2026-10-23, then set aside for the Levels. A Level's skill-tagged weeks may cover the same need (run Level 3 as American, Mediterranean, or World Tour).
 
 ---
@@ -1157,6 +1172,7 @@ A separate set of simpler lessons for **kids with no prior cooking experience**,
 Four Levels, the homeschool curriculum (owner, 2026-10-23), built inside this app beside Cook Around the World (§1, §4). They teach by skill and food literacy, not by dish, and every Level ends with a Sabbath capstone. **The outlines below are the owner's suggestions** (owner, 2026-10-23), open to change, except where marked Requirement.
 
 - **Same app, same rules.** Families, profiles, kid logins, the hard block (§2.1), diet filters, tastes (§6.21), shopping, the weekly schedule and the Sabbath (§6.18), Unleavened Bread dates (§6.20), grades, and the transcript all apply as they do for Cook Around the World.
+- **Homeschool mode works on both programs** (owner, 2026-10-23): the Levels are the homeschool curriculum, and a homeschool family can also take Cook Around the World as an elective, with grades and the transcript (§6.17). The public syllabus page (§6.17) and the landing page (§6.13) get wording for both programs at launch.
 - **A profile is on one program at a time:** Cook Around the World or a Level, through its course (§6.18). Siblings can be on different Levels. Cook Around the World stays open to every family (owner, 2026-10-23).
 - **Levels go by what a learner can already do, never by age.** §11's rule stands: the app shows no ages. The ages in the owner's outline (6 to 15 and up) are a guide for writing only.
 - **Build order** (owner, 2026-10-23): **Level 3 first**, then (recommendation) Level 2, Level 4, and Level 1, which needs the most new art and reading-light content.
