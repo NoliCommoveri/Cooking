@@ -2194,6 +2194,7 @@ on it.
   grouped them that way, so only the order on screen changed.
 - The plan (§6.3, item 5) now says "grouped first", and the staples notes on
   Shopping say so too.
+  The demo page's shopping preview puts them first too.
 - Tests: 222. Checked in a browser at phone width: a list and its preview with
   salt, olive oil, and garlic as staples.
 
