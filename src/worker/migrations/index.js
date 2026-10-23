@@ -13,6 +13,7 @@ import m0009 from './0009_reflect.sql';
 import m0010 from './0010_family_recipes.sql';
 import m0011 from './0011_sharing.sql';
 import m0012 from './0012_swap.sql';
+import m0013 from './0013_kid_logins.sql';
 
 export const MIGRATIONS = [
   { id: '0001', name: 'families', sql: m0001 },
@@ -27,4 +28,5 @@ export const MIGRATIONS = [
   { id: '0010', name: 'family recipes', sql: m0010 },
   { id: '0011', name: 'sharing recipes', sql: m0011 },
   { id: '0012', name: 'swap for an appointed time meal', sql: m0012 },
+  { id: '0013', name: 'kid logins', sql: m0013 },
 ];

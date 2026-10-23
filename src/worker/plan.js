@@ -9,7 +9,7 @@
 // line with it.
 import { fail, now } from './lib/http.js';
 import { randomHex } from './lib/crypto.js';
-import { requireSession, requireParent } from './auth.js';
+import { requireSession, requireParent, ownProfile, checkPin } from './auth.js';
 import { LIBRARY } from './library-data.js';
 import { liveLesson, livePatches } from './lessons.js';
 import { dietView } from '../content/diet.js';
@@ -122,10 +122,11 @@ async function replaceable(env, fid, qid, pid) {
 // assigned meal, or one that replaces an assigned meal (owner, 2026-10-23).
 // Either way it never pushes the course's assigned lessons back (schedule.js).
 // row: the request to approve, or null to make a new one for pid.
-async function approveStatements(env, s, fam, { row, L, pid, replace, servings, req }) {
+// day: the planned date for an extra meal (today, when a kid is cooking it now).
+async function approveStatements(env, s, fam, { row, L, pid, replace, servings, req, day = null }) {
   const t = now();
   const stmts = [];
-  let qid = row?.id ?? id(), who = [pid], week = null, swapOf = null, planned = null;
+  let qid = row?.id ?? id(), who = [pid], week = null, swapOf = null, planned = replace ? null : day;
   if (replace) {
     const r = await replaceable(env, s.family_id, String(replace), pid);
     week = weekFor(r, today(req));
@@ -236,9 +237,28 @@ async function courseDone(env, course, profiles, tz) {
   return { done, free };
 }
 
+// Each week's skips, extras, and swaps. bumped: the course lessons a swap
+// took out that week, from the swap rows (swap_of "c:<course>:<lesson>").
 async function courseWeeks(env, course) {
   const { results } = await env.DB.prepare('SELECT week_start, skipped, extra, swapped FROM course_weeks WHERE course_id = ? AND family_id = ?').bind(course.id, course.family_id).all();
-  return Object.fromEntries(results.map((r) => [r.week_start, { skipped: Boolean(r.skipped), extra: r.extra, swapped: r.swapped ?? 0 }]));
+  const weeks = Object.fromEntries(results.map((r) => [r.week_start, { skipped: Boolean(r.skipped), extra: r.extra, swapped: r.swapped ?? 0, bumped: [] }]));
+  const tag = `c:${course.id}:`;
+  const { results: swaps } = await env.DB.prepare('SELECT week_start, swap_of FROM queue WHERE family_id = ? AND substr(swap_of, 1, ?) = ? ORDER BY created_at, id')
+    .bind(course.family_id, tag.length, tag).all();
+  for (const r of swaps) weeks[r.week_start]?.bumped.push(r.swap_of.slice(tag.length));
+  return weeks;
+}
+
+// The course's lessons queued for its profiles outside the course (a kid's
+// request approved early), not cooked yet: the schedule takes them out of
+// their later place so the same dish isn't queued twice (owner, 2026-10-23).
+async function courseTaken(env, course, profiles, usable) {
+  if (!profiles.length || !usable.length) return new Set();
+  const { results } = await env.DB.prepare(`SELECT DISTINCT q.lesson_id FROM queue q JOIN queue_profiles qp ON qp.queue_id = q.id AND qp.family_id = q.family_id
+      WHERE q.family_id = ? AND q.course_id IS NULL AND q.status IN ('assigned', 'shopped') AND qp.profile_id IN (${placeholders(profiles)})`)
+    .bind(course.family_id, ...profiles).all();
+  const ids = new Set(usable);
+  return new Set(results.map((r) => r.lesson_id).filter((x) => ids.has(x)));
 }
 
 async function courseState(env, course, fam, day, tz) {
@@ -246,7 +266,8 @@ async function courseState(env, course, fam, day, tz) {
   const lessons = await courseLessons(env, course, fam);
   const { done, free } = await courseDone(env, course, profiles, tz);
   const weeks = await courseWeeks(env, course);
-  return { course, profiles, lessons, done, sched: schedule({ course, lessons: lessons.usable, done, free, weeks, today: day }) };
+  const taken = await courseTaken(env, course, profiles, lessons.usable);
+  return { course, profiles, lessons, done, taken, sched: schedule({ course, lessons: lessons.usable, done, free, taken, weeks, today: day }) };
 }
 
 const activeCourses = async (env, fid) => (await env.DB.prepare('SELECT * FROM courses WHERE family_id = ? AND archived_at IS NULL ORDER BY created_at, id').bind(fid).all()).results;
@@ -524,6 +545,7 @@ export function register(on) {
   // homeschool mode and never anything about being late (§6.17).
   on('GET', '/api/profiles/([0-9a-f]{16})/queue', async (req, env, body, [pid]) => {
     const s = await requireSession(env, req);
+    ownProfile(s, pid);
     if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) fail(404, 'not_found', 'No such profile.');
     const fam = await family(env, s.family_id);
     const day = today(req);
@@ -564,12 +586,13 @@ export function register(on) {
       labels: mine ? mine.lessons.labels : null,
       total: mine ? mine.lessons.total : null,
     };
-  });
+  }, { kid: true });
 
   // "I want to make this" on a kid profile: a request for a parent to approve.
   // "Cook this" on an adult profile: queued straight away, no PIN (§6.1).
   on('POST', '/api/profiles/([0-9a-f]{16})/ask', async (req, env, body, [pid]) => {
     const s = await requireSession(env, req);
+    ownProfile(s, pid);
     const p = await env.DB.prepare('SELECT id, audience FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first() ?? fail(404, 'not_found', 'No such profile.');
     const fam = await family(env, s.family_id);
     const L = await queueLesson(env, String(body.lesson_id ?? ''), fam);
@@ -580,7 +603,7 @@ export function register(on) {
     if (!adult) {
       const n = (await env.DB.prepare(`SELECT COUNT(*) AS n FROM queue q JOIN queue_profiles qp ON qp.queue_id = q.id
           WHERE q.family_id = ? AND qp.profile_id = ? AND q.status = 'requested'`).bind(s.family_id, pid).first()).n;
-      if (n >= ASK_MAX) fail(429, 'too_many', `You've asked for ${n} already. A grown-up needs to answer those first.`);
+      if (n >= ASK_MAX) fail(429, 'too_many', `You've asked for ${n} already. An adult needs to answer those first.`);
     }
     const qid = id(), status = adult ? 'assigned' : 'requested';
     await env.DB.batch([
@@ -589,14 +612,22 @@ export function register(on) {
       env.DB.prepare('INSERT INTO queue_profiles (queue_id, family_id, profile_id) VALUES (?, ?, ?)').bind(qid, s.family_id, pid),
     ]);
     return { ok: true, id: qid, status };
-  });
+  }, { kid: true });
 
   // A kid wants to cook something that isn't on their list now: a parent, with
   // the PIN, approves it on the spot as an extra assigned meal, or as one that
   // replaces an assigned meal (owner, 2026-10-23). A request already waiting
-  // for it is the one approved.
+  // for it is the one approved. An extra one is planned for today. A course
+  // lesson approved early comes out of its later place in the course, so it
+  // isn't queued twice (courseTaken). On a kid's own login the adult types
+  // the PIN with this request: it approves this one thing and unlocks nothing
+  // (§8.3a).
   on('POST', '/api/profiles/([0-9a-f]{16})/approve', async (req, env, body, [pid]) => {
-    const s = await requireParent(env, req);
+    const s = await requireSession(env, req);
+    if (s.kid) {
+      ownProfile(s, pid);
+      await checkPin(env, s.family_id, body.pin);
+    } else await requireParent(env, req);
     if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) fail(404, 'not_found', 'No such profile.');
     const fam = await family(env, s.family_id);
     const L = await queueLesson(env, String(body.lesson_id ?? ''), fam);
@@ -604,10 +635,10 @@ export function register(on) {
         WHERE q.family_id = ? AND qp.profile_id = ? AND q.lesson_id = ? AND q.status IN ('requested', 'assigned', 'shopped')`).bind(s.family_id, pid, L.id).all()).results;
     const listed = rows.find((r) => r.status !== 'requested');
     if (listed) return { ok: true, id: listed.id, status: listed.status };
-    const { qid, stmts } = await approveStatements(env, s, fam, { row: rows[0] ?? null, L, pid, replace: body.replace || null, servings: body.servings, req });
+    const { qid, stmts } = await approveStatements(env, s, fam, { row: rows[0] ?? null, L, pid, replace: body.replace || null, servings: body.servings, req, day: today(req) });
     await env.DB.batch(stmts);
     return { ok: true, id: qid, status: 'assigned' };
-  });
+  }, { kid: true });
 
   // ---------- safety review and test-cooked (§6.2) ----------
 
@@ -618,7 +649,7 @@ export function register(on) {
     const steps = L.steps.map((x, i) => ({ n: i + 1, text: x.text, safety: x.safety, hazard: x.hazard ?? null })).filter((x) => x.safety !== 'solo');
     const level = steps.some((x) => x.safety === 'adult-hands-on') ? 'adult-hands-on' : steps.length ? 'adult-nearby' : 'solo';
     return { lesson_id: L.id, title: L.title, level, steps };
-  });
+  }, { kid: true });
 
   on('POST', '/api/test-cooks', async (req, env, body) => {
     const s = await requireParent(env, req);

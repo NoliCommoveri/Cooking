@@ -139,7 +139,7 @@ export function register(on) {
     const { results } = await env.DB.prepare('SELECT * FROM family_recipes WHERE family_id = ? AND deleted_at IS NULL ORDER BY title COLLATE NOCASE, id').bind(s.family_id).all();
     const extras = await summaryExtras(env, s.family_id);
     return { recipes: results.map((r) => summary(r, filters, extras(r))), meal_types: MEAL_TYPES };
-  });
+  }, { kid: true });
 
   // One recipe: as stored (for editing) and as a lesson (for the player).
   on('GET', '/api/recipes/([0-9a-f]{16})', async (req, env, body, [hex]) => {
@@ -147,7 +147,7 @@ export function register(on) {
     const row = await recipeRow(env, s.family_id, hex) ?? fail(404, 'not_found', 'No such recipe.');
     const filters = await familyFilters(env, s.family_id);
     return { ...summary(row, filters, (await summaryExtras(env, s.family_id))(row)), recipe: stored(row), cleared: clearedOf(row), ...rowLesson(row) };
-  });
+  }, { kid: true });
 
   // The entry flow's Review step: what would be saved, and what's wrong with it.
   on('POST', '/api/recipes/check', async (req, env, body) => {

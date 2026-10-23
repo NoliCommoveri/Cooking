@@ -100,9 +100,11 @@ function shopView() {
   const visible = (id) => lessons[id] && dietView(lessons[id], R.ingredients, V.diet).visible;
   const weeks = DEMO_WEEKS.map(([name, ids]) => [name, ids.filter(visible)]).filter(([, ids]) => ids.length);
   const upcoming = weeks.flatMap(([, ids]) => ids);
-  const listOf = (ids, skip = []) => shoppingList({ lessons: ids.map((id) => ({ lesson: lessons[id], servings: 6 })), registry: R.ingredients, filters: V.diet, staples: DEMO_STAPLES, skip });
+  // Staples are grouped first while checking the cupboard; on the list itself
+  // they're in their store aisles.
+  const listOf = (ids, skip = [], staples = DEMO_STAPLES) => shoppingList({ lessons: ids.map((id) => ({ lesson: lessons[id], servings: 6 })), registry: R.ingredients, filters: V.diet, staples, skip });
   const used = (it) => `<div class="drow"><span><b>${esc(it.name)}</b><small>${esc(it.from.join(' · '))}${it.optional ? ' · optional' : ''}</small></span><span class="q">${esc(it.used ?? '')}</span></div>`;
-  const groups = (list, row) => `${list.sections.map((x) => `<div class="psec"><h4>${ic(SECTION_ICON[x.id] ?? 's-pantry', '')}${esc(x.name)}</h4>${x.items.map(row).join('')}</div>`).join('')}${list.may_have.length ? `<div class="psec"><h4>May already have</h4>${list.may_have.map(row).join('')}</div>` : ''}`;
+  const groups = (list, row) => `${list.may_have.length ? `<div class="psec"><h4>May already have</h4>${list.may_have.map(row).join('')}</div>` : ''}${list.sections.map((x) => `<div class="psec"><h4>${ic(SECTION_ICON[x.id] ?? 's-pantry', '')}${esc(x.name)}</h4>${x.items.map(row).join('')}</div>`).join('')}`;
   const picked = upcoming.slice(0, sh.count);
   const names = (ids) => ids.map((id) => esc(lessons[id].title)).join(', ');
   if (!upcoming.length) return '<section class="parent"><h3>Shopping</h3><p class="sub">Nothing to shop for with this diet.</p></section>';
@@ -116,7 +118,7 @@ function shopView() {
   }
 
   if (sh.step === 'list' && picked.length) {
-    const list = listOf(picked, sh.have);
+    const list = listOf(picked, sh.have, []);
     const all = [...list.sections.flatMap((x) => x.items), ...list.may_have];
     const done = V.checked.filter((id) => all.some((x) => x.id === id)).length;
     const row = (it) => `<button type="button" class="pitem" data-check="${esc(it.id)}" aria-pressed="${V.checked.includes(it.id)}"><span class="bx">${ic('i-check', '')}</span><span class="nm">${esc(it.name)}<small>${esc(it.from.join(' · '))}</small></span><span class="q">${esc(it.buy ?? it.used ?? '')}${it.buy && it.used && it.used !== it.buy ? `<small>The recipes use ${esc(it.used)}</small>` : ''}</span></button>`;

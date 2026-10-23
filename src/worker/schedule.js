@@ -28,14 +28,18 @@ export const DUE_DAY = 5;
 //   approved request, added as an extra or replacing an assigned meal): they
 //   count as done but never take one of a week's places, so cooking one early
 //   doesn't push the week's assigned lessons back (owner, 2026-10-23)
-// weeks: { week's Sunday: { skipped, extra, swapped } }
+// taken: lesson ids queued outside the course and not cooked yet (approved
+//   early, as an extra or replacing a meal): they come out of their later
+//   place, and the lessons after them move up, so none shows twice
+// weeks: { week's Sunday: { skipped, extra, swapped, bumped } }; bumped: the
+//   course lessons swapped out that week, which go first the week after
 // today: the family's calendar day
 //
 // Returns this week and next week ({ week, lessons: [{ id, done, overdue }],
 // skipped, extra }), the weeks after ({ week, lessons: [ids] }), whether next
 // week shows yet, the planned and projected
 // finish weeks, and how many weeks behind the plan the course is.
-export function schedule({ course, lessons, done = {}, free = new Set(), weeks = {}, today }) {
+export function schedule({ course, lessons, done = {}, free = new Set(), taken = new Set(), weeks = {}, today }) {
   const per = course.per_week;
   const start = weekOf(course.start_date);
   const now = weekOf(today);
@@ -72,7 +76,10 @@ export function schedule({ course, lessons, done = {}, free = new Set(), weeks =
   // This week: what was cooked this week, then the next unfinished lessons up
   // to the week's pace plus any extras. An unfinished lesson from an earlier
   // week is first in line, so everything after it moves back a week.
-  const open = lessons.filter((id) => !done[id]);
+  let open = lessons.filter((id) => !done[id] && !taken.has(id));
+  // The lessons swapped out this week go first next week, whichever they were.
+  const bumped = (weeks[now]?.bumped ?? []).filter((id) => open.includes(id));
+  open = open.filter((id) => !bumped.includes(id));
   const fill = (w, from, cookedHere) => {
     if (w < start) return { list: [], next: from };
     const cap = skipped(w) ? 0 : capOf(w) + extra(w);
@@ -83,6 +90,7 @@ export function schedule({ course, lessons, done = {}, free = new Set(), weeks =
   };
   const cookedNow = doneIds.filter((id) => done[id] >= now && done[id] < addDays(now, 7) && !free.has(id));
   const a = fill(now, 0, cookedNow);
+  open = [...open.slice(0, a.next), ...bumped, ...open.slice(a.next)];
   const next = addDays(now, 7);
   const b = fill(next, a.next, []);
   // The weeks after next, at the pace, for the parent's "What you'll need".

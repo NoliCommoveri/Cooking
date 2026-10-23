@@ -6,6 +6,7 @@ import { saveCook, saveReflection, flushCooks } from './cooks.js';
 import { patchTargets, showValue } from './lib/patch.js';
 import { courseEntries, prereqNotes } from './lib/course.js';
 import { toBase, mixed } from './lib/units.js';
+import { LOGIN_PICTURES } from './lib/login-pictures.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 import { progressView, celebrate } from './rewards.js';
 import { isMuted, setMuted } from './sound.js';
@@ -67,10 +68,12 @@ function store(key, value) {
 }
 
 // A form whose submit calls fn(values), shows its error, and disables the button while it runs.
-function form(fields, submitText, fn, { extra = [] } = {}) {
+// top: the buttons go first and stay in view, for a long form.
+function form(fields, submitText, fn, { extra = [], top = false } = {}) {
   const msg = el('p', { class: 'err', role: 'alert', hidden: true });
   const btn = el('button', { class: 'hbtn pri', type: 'submit' }, submitText);
-  const f = el('form', { class: 'card', novalidate: true }, ...fields, msg, el('div', { class: 'acts' }, btn, ...extra));
+  const acts = el('div', { class: top ? 'acts formtop' : 'acts' }, btn, ...extra);
+  const f = el('form', { class: 'card', novalidate: true }, ...(top ? [acts, msg, ...fields] : [...fields, msg, acts]));
   f.addEventListener('submit', async (e) => {
     e.preventDefault();
     msg.hidden = true;
@@ -147,8 +150,10 @@ function welcome() {
       el('a', { class: 'hbtn', href: '#/signup' }, 'Sign up'))));
 }
 
+// An adult logs in with their email; a kid with the name, picture, and
+// password an adult set up for them (§8.3a). The choice is remembered here.
 function login() {
-  screen(topbar(), el('div', { class: 'narrow' }, el('h1', {}, 'Log in'),
+  const adultSide = () => [
     form([
       field('Email', 'email', { type: 'email', autocomplete: 'email', required: true }),
       field('Password', 'password', { type: 'password', autocomplete: 'current-password', required: true }),
@@ -156,7 +161,38 @@ function login() {
       await api('POST', '/api/login', v);
       await start('#/');
     }, { extra: [el('a', { class: 'hbtn link', href: '#/forgot' }, 'Forgot password?')] }),
-    el('p', { class: 'mut' }, 'New here? ', el('a', { href: '#/signup' }, 'Sign up'))));
+    el('p', { class: 'mut' }, 'New here? ', el('a', { href: '#/signup' }, 'Sign up')),
+  ];
+  const kid = () => [
+    form([
+      field('Your name', 'name', { autocomplete: 'username', autocapitalize: 'words', required: true, maxlength: 30, placeholder: 'Like: Ava C' }, 'Your first name and the first letter of your last name'),
+      el('fieldset', {}, el('legend', {}, 'Your picture'), pictureGrid('picture')),
+      field('Your password', 'password', { type: 'password', autocomplete: 'current-password', required: true }),
+    ], 'Log in', async (v) => {
+      if (!v.picture) throw new Error('Tap your picture.');
+      const { profile_id } = await api('POST', '/api/kid-login', v);
+      await start(`#/kitchen/${profile_id}`);
+    }),
+    el('p', { class: 'mut' }, "Forgot? Ask an adult. They can see your picture and set a new password."),
+  ];
+  const view = el('div', {});
+  const show = (which) => {
+    store('cpr.login', which);
+    view.replaceChildren(...(which === 'kid' ? kid() : adultSide()));
+    toggle.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', String(['adult', 'kid'][i] === which)));
+  };
+  const toggle = el('div', { class: 'seg', role: 'group', 'aria-label': 'Who is logging in' },
+    [['adult', 'Adult'], ['kid', 'Kid']].map(([value, label]) => el('button', { type: 'button', onclick: () => show(value) }, label)));
+  screen(topbar(), el('div', { class: 'narrow' }, el('h1', {}, 'Log in'), toggle, view));
+  show(store('cpr.login') === 'kid' ? 'kid' : 'adult');
+}
+
+// The 30 login pictures as a grid of choices (§8.3a). taken: ids another login
+// with the same name has, shown dimmed and not pickable.
+function pictureGrid(name, { checked = null, taken = new Set() } = {}) {
+  return el('div', { class: 'picgrid', role: 'radiogroup' }, LOGIN_PICTURES.map((p) => el('label', { class: 'pic', title: p.name },
+    el('input', { type: 'radio', name, value: p.id, checked: p.id === checked, disabled: taken.has(p.id), 'aria-label': taken.has(p.id) ? `${p.name} (taken)` : p.name }),
+    art(`<svg aria-hidden="true" width="48" height="48"><use href="/icons.svg#lp-${p.id}"/></svg>`))));
 }
 
 // Sign-up, step 1: email and password (and the beta word while it's on). A
@@ -391,7 +427,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   // ---- My path (Main quest): what's up next, then the next lessons on this
   // profile's path, a few at a time, never the whole course.
   const pathView = () => {
-    const when = (x) => (x.status === 'requested' ? 'You asked a grown-up'
+    const when = (x) => (x.status === 'requested' ? 'You asked an adult'
       : x.due && !isSabbath() ? `Due ${fmtDay(x.due, { weekday: 'long' })}`
         : x.when === 'this-week' ? 'This week'
           : x.planned_date ? fmtDay(x.planned_date) : 'Coming up');
@@ -419,7 +455,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
             el('p', { class: quest ? 'q-kick' : 'p-lessonno' }, x.label ? `${quest ? 'Quest' : 'Lesson'} ${x.label}` : ''),
             el('h3', { class: quest ? 'q-title' : 'p-title' }, x.title),
             el('p', { class: quest ? 'q-swap' : 'p-swap' }, when(x))))))
-        : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, quest ? 'No quests queued yet. Ask a grown-up, or look in Side quests.' : 'Nothing queued yet. Ask a grown-up, or look in More recipes.'),
+        : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, quest ? 'No quests queued yet. Ask an adult, or look in Side quests.' : 'Nothing queued yet. Ask an adult, or look in More recipes.'),
       next.length ? [el('h2', { class: 'k-unit' }, quest ? 'Coming up on your path' : 'Next on your journey'), el('div', { class: 'k-lib' }, next.map(lessonBtn))] : null,
     ];
   };
@@ -458,7 +494,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const current = tabs.some(([k]) => k === tab) ? tab : 'path';
   sessionSet(`cpr.tab.${p.id}`, current);
   screen(el('section', { class: 'kitchen k-tabbed', 'data-kt': p.theme },
-    el('a', { class: 'back', href: '#/' }, '← Lockers'),
+    me.kid ? null : el('a', { class: 'back', href: '#/' }, '← Lockers'),
     sabbathBanner(),
     el('div', { class: 'k-head' }, avatars(p.people),
       el('div', { class: 'grow' }, el('h1', {}, quest ? 'Quest board' : 'Recipe box'), el('div', {}, p.name))),
@@ -472,7 +508,14 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
         setMuted(!isMuted());
         e.currentTarget.setAttribute('aria-pressed', String(!isMuted()));
         e.currentTarget.textContent = isMuted() ? 'Sound effects: off' : 'Sound effects: on';
-      } }, isMuted() ? 'Sound effects: off' : 'Sound effects: on')),
+      } }, isMuted() ? 'Sound effects: off' : 'Sound effects: on'),
+      // A kid's own login logs out here, no PIN (§8.3a).
+      me.kid ? el('button', { class: 'themebtn', type: 'button', onclick: async () => {
+        if (!confirm('Log out of this device?')) return;
+        await api('POST', '/api/logout');
+        store('cpr.login', 'kid');
+        await start('#/login');
+      } }, 'Log out') : null),
     current === 'more' ? moreView() : current === 'progress' ? await progressView(p, cooks) : pathView(),
     // Pinned to the bottom, where a thumb is, as in MCCE Kids.
     el('nav', { class: `k-tabs ${quest ? 'q' : 'p'}`, 'aria-label': 'Kitchen' }, tabs.map(([k, label]) => el('a', {
@@ -516,7 +559,8 @@ async function lesson(profileId, lessonId) {
     },
     seed: queued ? { servings: queued.servings, with: (queued.profile_ids ?? []).filter((x) => x !== p.id), shopped: queued.shopped_for } : null,
     // Suggest a fix is for library lessons; a family edits its own recipes.
-    fixes: recipe ? null : {
+    // and a kid's own login leaves it out: it's behind the parent PIN (§8.3a).
+    fixes: recipe || me.kid ? null : {
       suggest: (ctx) => suggestFix(p, ctx),
       list: async (lid) => (await api('GET', `/api/lessons/${encodeURIComponent(lid)}/fixes`)).fixes,
     },
@@ -541,7 +585,7 @@ const valueInput = (kind, name, value = '') => (kind === 'text'
   : el('input', { name, value, inputmode: kind === 'unit' ? 'text' : 'decimal', autocomplete: 'off' }));
 
 // A kid wants to cook something that isn't on their list (owner, 2026-10-23):
-// a grown-up enters the PIN and says how it fits in, as an extra assigned meal
+// an adult enters the PIN and says how it fits in, as an extra assigned meal
 // or in place of one already assigned. Resolves to the lesson's new status, or
 // null if they cancel.
 function approveNow(profile, lessonId, title) {
@@ -553,13 +597,21 @@ function approveNow(profile, lessonId, title) {
     const cancel = () => el('button', { type: 'button', class: 'hbtn', onclick: () => close(null) }, 'Cancel');
     document.body.append(ov);
 
+    // On a kid's own login the PIN isn't unlocked: it goes with the approval
+    // and OKs this one lesson only (§8.3a).
+    let pin = null;
     const pinStep = () => {
       const input = el('input', { name: 'pin', type: 'password', inputmode: 'numeric', autocomplete: 'off', pattern: '[0-9]*', maxlength: 8, 'aria-label': 'Parent PIN' });
       box.replaceChildren(el('h2', {}, `${profile.name} wants to cook ${title}`),
-        el('p', { class: 'mut' }, "It isn't on their list. A grown-up OKs it: enter the parent PIN."),
-        form([el('div', { class: 'pin' }, input)], 'Unlock', async (v) => {
-          await api('POST', '/api/pin/unlock', { pin: v.pin });
-          await refresh();
+        el('p', { class: 'mut' }, "It isn't on their list. An adult OKs it: enter the parent PIN."),
+        form([el('div', { class: 'pin' }, input)], me.kid ? 'Next' : 'Unlock', async (v) => {
+          if (me.kid) {
+            if (!/^\d{4,8}$/.test(v.pin)) throw new Error('The PIN is 4 to 8 digits.');
+            pin = v.pin;
+          } else {
+            await api('POST', '/api/pin/unlock', { pin: v.pin });
+            await refresh();
+          }
           await choiceStep();
         }, { extra: [cancel()] }));
       input.focus();
@@ -579,7 +631,7 @@ function approveNow(profile, lessonId, title) {
           assigned.length ? choice('replace', 'Replace an assigned meal', 'A course lesson it replaces goes first next week, and nobody is shown as behind.', false) : null,
           assigned.length ? el('label', { class: 'f' }, 'The meal it replaces', pick) : null,
         ], 'OK, start cooking', async (v) => {
-          const r = await api('POST', `/api/profiles/${profile.id}/approve`, { lesson_id: lessonId, replace: v.how === 'replace' ? pick.value : null });
+          const r = await api('POST', `/api/profiles/${profile.id}/approve?${tz()}`, { lesson_id: lessonId, replace: v.how === 'replace' ? pick.value : null, pin });
           close(r.status);
         }, { extra: [cancel()] }));
     };
@@ -603,7 +655,7 @@ function suggestFix(profile, { lesson, stepId, servings, ingredients }) {
 
     const pinStep = () => {
       const input = el('input', { name: 'pin', type: 'password', inputmode: 'numeric', autocomplete: 'off', pattern: '[0-9]*', maxlength: 8, 'aria-label': 'Parent PIN' });
-      box.replaceChildren(el('h2', {}, 'Suggest a fix'), el('p', { class: 'mut' }, 'A grown-up fills this in. Enter the parent PIN.'),
+      box.replaceChildren(el('h2', {}, 'Suggest a fix'), el('p', { class: 'mut' }, 'An adult fills this in. Enter the parent PIN.'),
         form([el('div', { class: 'pin' }, input)], 'Unlock', async (v) => {
           await api('POST', '/api/pin/unlock', { pin: v.pin });
           await refresh();
@@ -664,7 +716,6 @@ const PARENT_GROUPS = [['learning', 'Learning path'], ['recipes', 'Recipes'], ['
 const PARENT_PAGES = [
   { key: 'queue', group: 'learning', label: 'Queue' },
   { key: 'shopping', group: 'learning', label: 'Shopping' },
-  { key: 'pantry', group: 'learning', label: 'Kitchen staples' },
   { key: 'progress', group: 'learning', label: 'Progress' },
   { key: 'recipes', group: 'recipes', label: 'Our recipes' },
   { key: 'shared', group: 'recipes', label: 'User-shared recipes' },
@@ -722,21 +773,27 @@ function parentScreen(current, ...kids) {
     el('h1', {}, page?.label ?? 'Parents'), sabbathBanner(), ...kids);
 }
 
-const parentProfiles = parentOnly(async () => {
+const parentProfiles = parentOnly(async (adding = false) => {
   const { profiles } = await api('GET', '/api/profiles');
-  parentScreen('profiles', el('div', { class: 'card' },
-    profiles.length ? el('div', { class: 'rows' }, profiles.map((p) => el('div', { class: 'rowi with-av' },
-      avatars(p.people),
-      el('div', {}, el('b', {}, p.name), el('small', {}, `${p.audience === 'adult' ? 'Adult' : 'Kid'} · ${THEMES[p.theme]} · ${p.people.map((x) => x.name).join(', ')}`)),
-      el('a', { class: 'hbtn', href: `#/parent/profiles/${p.id}` }, 'Edit'))))
-      : el('p', { class: 'mut' }, 'No profiles yet.'),
-    el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: '#/parent/profiles/new' }, 'Add a profile'))));
+  const add = () => {
+    let close = () => {};
+    const f = profileForm(null, { cancel: el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel'), done: () => { close(); go('#/parent/profiles'); } });
+    close = modal('Add a profile', f);
+  };
+  parentScreen('profiles',
+    addHead(null, 'Add a profile', add),
+    el('div', { class: 'card' },
+      profiles.length ? el('div', { class: 'rows' }, profiles.map((p) => el('div', { class: 'rowi with-av' },
+        avatars(p.people),
+        el('div', {}, el('b', {}, p.name), el('small', {}, `${p.audience === 'adult' ? 'Adult' : 'Kid'} · ${THEMES[p.theme]} · ${p.people.map((x) => x.name).join(', ')}`)),
+        el('a', { class: 'hbtn', href: `#/parent/profiles/${p.id}` }, 'Edit'))))
+        : el('p', { class: 'mut' }, 'No profiles yet.')));
+  if (adding) add();
 });
 
-const profileEditor = parentOnly(async (id) => {
-  const { profiles } = await api('GET', '/api/profiles');
-  const existing = id === 'new' ? null : profiles.find((p) => p.id === id);
-  if (id !== 'new' && !existing) return go('#/parent/profiles');
+// A profile's form, for adding one (in a dialog) or editing one (its page).
+// cancel: the Cancel button or link; done(): after it saves or is deleted.
+function profileForm(existing, { cancel, done }) {
   const people = existing ? existing.people.map((p) => ({ ...p })) : [{ name: '', color: 'tomato' }];
   const peopleBox = el('div', { class: 'stack', style: 'width:100%' });
 
@@ -758,32 +815,142 @@ const profileEditor = parentOnly(async (id) => {
   const radio = (name, value, label, note, checked) => el('label', { class: 'choice' },
     el('input', { type: 'radio', name, value, checked }), el('span', {}, label, note ? el('em', {}, ` ${note}`) : null));
 
-  const extra = [el('a', { class: 'hbtn', href: '#/parent/profiles' }, 'Cancel')];
+  const extra = [cancel];
   if (existing) {
     extra.push(el('button', { type: 'button', class: 'hbtn bad', onclick: async () => {
       if (!confirm(`Delete ${existing.name}?`)) return;
       await api('DELETE', `/api/profiles/${existing.id}`);
-      go('#/parent/profiles');
+      done();
     } }, 'Delete'));
   }
 
-  parentScreen('profiles', el('h2', {}, existing ? `Edit ${existing.name}` : 'Add a profile'),
-    form([
-      el('fieldset', {}, el('legend', {}, 'Who uses this profile'), peopleBox),
-      field('Locker name', 'name', { value: existing?.name ?? '', maxlength: 40 }, 'Optional. Leave blank to use the names'),
-      el('fieldset', {}, el('legend', {}, 'Kid or adult'),
-        el('div', { class: 'grid2' },
-          radio('audience', 'kid', 'Kid', 'Pick this if any kid shares it', (existing?.audience ?? 'kid') === 'kid'),
-          radio('audience', 'adult', 'Adult', null, existing?.audience === 'adult'))),
-      el('fieldset', {}, el('legend', {}, 'Theme'),
-        el('div', { class: 'grid2' }, Object.entries(THEMES).map(([k, label]) => radio('theme', k, label, null, (existing?.theme ?? 'quest') === k)))),
-    ], existing ? 'Save' : 'Add profile', async (v) => {
-      const body = { name: v.name.trim() || undefined, people: people.map((p) => ({ name: p.name.trim(), color: p.color })), audience: v.audience, theme: v.theme };
-      if (body.people.some((p) => !p.name)) throw new Error('Every person needs a name.');
-      await api(existing ? 'PUT' : 'POST', existing ? `/api/profiles/${existing.id}` : '/api/profiles', body);
-      go('#/parent/profiles');
-    }, { extra }));
+  return form([
+    el('fieldset', {}, el('legend', {}, 'Who uses this profile'), peopleBox),
+    field('Locker name', 'name', { value: existing?.name ?? '', maxlength: 40 }, 'Optional. Leave blank to use the names'),
+    el('fieldset', {}, el('legend', {}, 'Kid or adult'),
+      el('div', { class: 'grid2' },
+        radio('audience', 'kid', 'Kid', 'Pick this if any kid shares it', (existing?.audience ?? 'kid') === 'kid'),
+        radio('audience', 'adult', 'Adult', null, existing?.audience === 'adult'))),
+    el('fieldset', {}, el('legend', {}, 'Theme'),
+      el('div', { class: 'grid2' }, Object.entries(THEMES).map(([k, label]) => radio('theme', k, label, null, (existing?.theme ?? 'quest') === k)))),
+  ], existing ? 'Save' : 'Add profile', async (v) => {
+    const body = { name: v.name.trim() || undefined, people: people.map((p) => ({ name: p.name.trim(), color: p.color })), audience: v.audience, theme: v.theme };
+    if (body.people.some((p) => !p.name)) throw new Error('Every person needs a name.');
+    await api(existing ? 'PUT' : 'POST', existing ? `/api/profiles/${existing.id}` : '/api/profiles', body);
+    done();
+  }, { extra });
+}
+
+// Editing a profile is its own page; adding one opens the dialog on the list.
+const profileEditor = parentOnly(async (id) => {
+  if (id === 'new') return parentProfiles(true);
+  const { profiles } = await api('GET', '/api/profiles');
+  const existing = profiles.find((p) => p.id === id);
+  if (!existing) return go('#/parent/profiles');
+  parentScreen('profiles', el('h2', {}, `Edit ${existing.name}`),
+    profileForm(existing, { cancel: el('a', { class: 'hbtn', href: '#/parent/profiles' }, 'Cancel'), done: () => go('#/parent/profiles') }),
+    existing.audience === 'kid' ? await kidLoginBox(existing) : null);
 });
+
+// A kid profile's own login (§8.3a): first name and last initial, a picture,
+// and a password. Shown as the kid will use it, so an adult can tell them.
+async function kidLoginBox(profile) {
+  let login;
+  // Before the update is applied on /ops, the rest of the editor still works.
+  try { ({ login } = await api('GET', `/api/profiles/${profile.id}/login`)); } catch (err) {
+    return el('section', { class: 'card' }, el('h3', { style: 'margin:0' }, 'Kid login'), el('p', { class: 'mut', style: 'margin:0' }, err.message));
+  }
+  const again = () => profileEditor(profile.id);
+  const box = el('section', { class: 'card' }, el('h3', { style: 'margin:0' }, 'Kid login'));
+  if (!login) {
+    box.append(el('p', { class: 'mut', style: 'margin:0' }, `${profile.name} can have their own login on their own device: no lockers and no parent screens, just their kitchen. They log in with their first name and last initial, a picture, and a password you set.`),
+      el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn pri', onclick: () => loginDialog(profile, null, again) }, `+ Give ${profile.name} a login`)));
+    return box;
+  }
+  const pic = LOGIN_PICTURES.find((x) => x.id === login.picture);
+  box.append(
+    el('div', { class: 'loginshow' }, art(`<svg aria-hidden="true" width="56" height="56"><use href="/icons.svg#lp-${login.picture}"/></svg>`),
+      el('div', {}, el('b', {}, login.login_name), el('small', { class: 'mut' }, `Picture: ${pic?.name ?? login.picture} · password set`))),
+    el('p', { class: 'mut small', style: 'margin:0' }, login.devices ? `Logged in on ${plural(login.devices, 'device')}.` : 'Not logged in anywhere right now.'),
+    el('div', { class: 'acts' },
+      el('button', { type: 'button', class: 'hbtn', onclick: () => loginDialog(profile, login, again) }, 'Change name or picture'),
+      el('button', { type: 'button', class: 'hbtn', onclick: () => passwordDialog(profile, again) }, 'Change password'),
+      menu(`More for ${profile.name}'s login`, [
+        login.devices ? ['Log out everywhere', async () => {
+          if (!confirm(`Log ${profile.name} out on every device?`)) return;
+          await api('POST', `/api/profiles/${profile.id}/login/logout-all`);
+          again();
+        }] : null,
+        ['Turn off login', async () => {
+          if (!confirm(`Turn off ${profile.name}'s login? They're logged out everywhere. Nothing they cooked goes, and you can give them a login again.`)) return;
+          await api('DELETE', `/api/profiles/${profile.id}/login`);
+          again();
+        }],
+      ])));
+  return box;
+}
+
+// Set up a login, or change its name or picture. The pictures another login
+// with the same name has show as taken.
+function loginDialog(profile, login, done) {
+  const famInitial = (me.family.name.trim()[0] ?? '').toUpperCase();
+  const first = el('input', { name: 'first', value: login?.first ?? profile.people[0]?.name ?? profile.name, maxlength: 20, autocomplete: 'off', required: true });
+  const initial = el('input', { name: 'initial', value: login?.initial ?? famInitial, maxlength: 1, autocomplete: 'off', required: true, class: 'initial' });
+  const grid = el('div');
+  const shown = el('p', { class: 'mut small', style: 'margin:0', 'aria-live': 'polite' });
+  let picked = login?.picture ?? null;
+  const draw = async () => {
+    const q = new URLSearchParams({ first: first.value, initial: initial.value, profile: profile.id });
+    const d = await api('GET', `/api/login-pictures?${q}`);
+    const taken = new Set(d.pictures.filter((x) => x.taken).map((x) => x.id));
+    if (taken.has(picked)) picked = null;
+    grid.replaceChildren(pictureGrid('picture', { checked: picked, taken }));
+    shown.textContent = d.error ?? `They'll type: ${d.name}${taken.size ? `. Dimmed pictures belong to another ${d.name}.` : ''}`;
+  };
+  grid.addEventListener('change', (e) => { picked = e.target.value; });
+  let timer;
+  for (const x of [first, initial]) x.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(draw, 300); });
+  const pw = login ? [] : passwordFields();
+  let close = () => {};
+  close = modal(login ? `${profile.name}'s login` : `Give ${profile.name} a login`, form([
+    el('div', { class: 'namepair' }, el('label', { class: 'f' }, 'First name', first), el('label', { class: 'f' }, 'Last initial', initial)),
+    shown,
+    el('fieldset', {}, el('legend', {}, 'Their picture'), el('p', { class: 'mut small', style: 'margin:0' }, 'They tap it when they log in.'), grid),
+    ...pw,
+  ], login ? 'Save' : 'Give them a login', async (v) => {
+    if (!v.picture) throw new Error('Pick a picture.');
+    if (!login && v.password !== v.password2) throw new Error("The passwords don't match.");
+    await api('PUT', `/api/profiles/${profile.id}/login`, { first: v.first, initial: v.initial, picture: v.picture, password: login ? undefined : v.password });
+    close();
+    done();
+  }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')] }));
+  draw().catch((err) => showToast(err.message));
+}
+
+// A new password, typed twice, with Show.
+function passwordFields() {
+  const a = el('input', { name: 'password', type: 'password', autocomplete: 'new-password', minlength: 6, required: true });
+  const b = el('input', { name: 'password2', type: 'password', autocomplete: 'new-password', minlength: 6, required: true });
+  const show = el('button', { type: 'button', class: 'hbtn link', onclick: () => {
+    const hidden = a.type === 'password';
+    a.type = b.type = hidden ? 'text' : 'password';
+    show.textContent = hidden ? 'Hide' : 'Show';
+  } }, 'Show');
+  return [el('label', { class: 'f' }, 'Password', el('span', { class: 'hint' }, 'At least 6 characters'), a), el('label', { class: 'f' }, 'Type it again', b), show];
+}
+
+function passwordDialog(profile, done) {
+  let close = () => {};
+  close = modal(`A new password for ${profile.name}`, form([
+    el('p', { class: 'mut small', style: 'margin:0' }, "They're logged out everywhere and log in again with the new one."),
+    ...passwordFields(),
+  ], 'Save', async (v) => {
+    if (v.password !== v.password2) throw new Error("The passwords don't match.");
+    await api('PUT', `/api/profiles/${profile.id}/login`, { password: v.password });
+    close();
+    done();
+  }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')] }));
+}
 
 const familySettings = parentOnly(async () => {
   const f = await api('GET', '/api/family');
@@ -793,7 +960,7 @@ const familySettings = parentOnly(async () => {
     field('Default servings', 'default_servings', { type: 'number', min: 1, max: f.servings_max, value: f.family.default_servings, inputmode: 'numeric' }, 'Recipes scale to this'),
     el('fieldset', {}, el('legend', {}, 'Leave out'),
       el('p', { class: 'mut small', style: 'margin:0' }, 'Lessons with these are hidden, unless a lesson has a swap for them.'),
-      el('div', { class: 'grid2' }, f.diet_tags.map((t) => el('label', { class: 'choice' },
+      el('div', { class: 'grid2 tight' }, f.diet_tags.map((t) => el('label', { class: 'choice' },
         el('input', { type: 'checkbox', name: `diet_${t}`, checked: f.family.diet_filters.includes(t) }), el('span', {}, DIET[t] ?? t))))),
     el('fieldset', {}, el('legend', {}, 'How you use the app'),
       el('div', { class: 'grid2' },
@@ -803,9 +970,11 @@ const familySettings = parentOnly(async () => {
         el('span', {}, 'Plan our weeks', el('em', {}, ' In casual mode: set up a course, and each week\'s lessons load into the queue. Homeschool mode always does.'))),
       el('p', { class: 'mut small', style: 'margin:0' }, 'Switching never deletes anything.')),
     el('fieldset', {}, el('legend', {}, 'Voice step control'),
-      el('p', { class: 'mut small', style: 'margin:0' },
-        'In cook mode, kids can say "next," "back," or "again" instead of tapping. It works in Chrome on Android, and on other devices whose browser can recognize speech. ',
-        'The browser usually sends what the mic hears to Google to recognize it, so it stays off until you turn it on.'),
+      el('p', { class: 'mut small', style: 'margin:0' }, 'In cook mode, kids can say "next," "back," or "again" instead of tapping.'),
+      el('details', { class: 'psec' }, el('summary', {}, 'Where it works, and privacy'),
+        el('p', { class: 'mut small', style: 'margin:0' },
+          'It works in Chrome on Android, and on other devices whose browser can recognize speech. ',
+          'The browser usually sends what the mic hears to Google to recognize it, so it stays off until you turn it on.')),
       el('label', { class: 'choice' }, el('input', { type: 'checkbox', name: 'voice_enabled', checked: f.family.voice_enabled }), el('span', {}, 'Turn on voice step control'))),
     saved,
   ], 'Save', async (v) => {
@@ -818,22 +987,26 @@ const familySettings = parentOnly(async () => {
     });
     await refresh();
     saved.hidden = false;
-  }));
+  }, { top: true }));
 });
 
 const parentLogins = parentOnly(async () => {
   const f = await api('GET', '/api/family');
-  parentScreen('parents',
-    el('div', { class: 'card' }, el('h3', {}, 'Parent logins'),
-      el('div', { class: 'rows' }, f.parents.map((e) => el('div', { class: 'rowi' }, el('b', {}, e), e === me.parent.email ? el('small', {}, 'You') : el('span'))))),
-    el('h2', {}, 'Add another parent'),
-    form([
+  const add = () => {
+    let close = () => {};
+    close = modal('Add another parent', form([
       field('Their email', 'email', { type: 'email', autocomplete: 'off', required: true }),
       field('A password for them', 'password', { type: 'password', autocomplete: 'new-password', required: true, minlength: 8 }, 'At least 8 characters. They can change it with Forgot password.'),
     ], 'Add parent', async (v) => {
       await api('POST', '/api/parents', v);
+      close();
       parentLogins();
-    }),
+    }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')] }));
+  };
+  parentScreen('parents',
+    addHead('Parent logins', 'Add a parent', add),
+    el('div', { class: 'card' },
+      el('div', { class: 'rows' }, f.parents.map((e) => el('div', { class: 'rowi' }, el('b', {}, e), e === me.parent.email ? el('small', {}, 'You') : el('span'))))),
     el('h2', {}, 'Parent PIN'),
     el('div', { class: 'card' }, el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => forgotPin(() => go('#/parent/parents')) }, 'Change the PIN'))));
 });
@@ -906,6 +1079,54 @@ const servingsPick = (x, onChange) => (x.servings_options?.length
     x.servings_options.map((n) => el('option', { value: n, selected: n === x.servings }, n))))
   : null);
 
+// Adding something new opens in a dialog over the page (owner, 2026-10-23).
+// Returns close().
+function modal(title, ...body) {
+  const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': title },
+    el('div', { class: 'card' }, el('h2', {}, title), body));
+  const close = () => { ov.remove(); document.removeEventListener('keydown', esc); window.removeEventListener('hashchange', close); };
+  const esc = (e) => { if (e.key === 'Escape') close(); };
+  ov.addEventListener('click', (e) => { if (e.target === ov) close(); });
+  document.addEventListener('keydown', esc);
+  // Going to another page closes it.
+  window.addEventListener('hashchange', close);
+  document.body.append(ov);
+  ov.querySelector('select, input, textarea, button')?.focus();
+  return close;
+}
+
+// A two-way switch between views of a page; the choice is kept for the visit.
+// options: [[value, label]]
+function viewToggle(key, options, fallback, onPick) {
+  const current = sessionGet(key) ?? fallback;
+  return el('div', { class: 'seg', role: 'group', 'aria-label': 'Show' }, options.map(([value, label]) => el('button', {
+    type: 'button', 'aria-pressed': String(value === current),
+    onclick: () => { sessionSet(key, value); onPick(value); },
+  }, label)));
+}
+
+// A list's heading with its add button on the right (owner, 2026-10-23).
+// action: an onclick, or a link to the page that adds one.
+const addHead = (title, label, action) => el('div', { class: 'pagehead' }, title ? el('h2', {}, title) : el('span'),
+  typeof action === 'string' ? el('a', { class: 'hbtn pri', href: action }, `+ ${label}`) : el('button', { type: 'button', class: 'hbtn pri', onclick: action }, `+ ${label}`));
+
+// A row that opens to show its tools: the summary is one line, and the
+// buttons stay out of the way until it's opened.
+const expander = (summary, ...body) => el('details', { class: 'xrow' }, el('summary', {}, summary), el('div', { class: 'xbody' }, body));
+
+// A "⋯" menu of actions, kept on the screen wherever its button wrapped to.
+// items: [label, onclick] pairs (null ones are left out).
+function onScreen(box) {
+  box.style.transform = '';
+  const r = box.getBoundingClientRect(), gap = 16, w = document.documentElement.clientWidth;
+  const shift = r.left < gap ? gap - r.left : r.right > w - gap ? w - gap - r.right : 0;
+  if (shift) box.style.transform = `translateX(${Math.round(shift)}px)`;
+}
+const menu = (label, items) => el('details', { class: 'more', ontoggle: (e) => { if (e.target.open) onScreen(e.target.querySelector('.more-menu')); } },
+  el('summary', { 'aria-label': label }, '⋯'),
+  el('div', { class: 'more-menu' }, items.filter(Boolean).map(([text, fn]) => el('button', { type: 'button', class: 'hbtn link', onclick: (e) => { e.target.closest('details').open = false; Promise.resolve(fn()).catch((err) => showToast(err.message)); } }, text))));
+const plural = (n, word) => `${n} ${word}${n === 1 ? '' : /(s|sh|ch)$/.test(word) ? 'es' : 's'}`;
+
 const parentQueue = parentOnly(async (flash) => {
   const [q, { profiles }] = await Promise.all([api('GET', `/api/queue?${tz()}`), api('GET', '/api/profiles')]);
   const pname = (id) => profiles.find((p) => p.id === id)?.name ?? 'Someone';
@@ -936,7 +1157,7 @@ const parentQueue = parentOnly(async (flash) => {
   const replaceApprove = (r) => {
     const pick = el('select', { 'aria-label': `The meal ${r.title} replaces` }, replaceable(r.requested_by).map((x) => el('option', { value: x.id }, x.title)));
     return el('span', { class: 'acts' }, actBtn('Approve, replacing', '', async () => {
-      await api('POST', `/api/queue/${r.id}/approve`, { replace: pick.value });
+      await api('POST', `/api/queue/${r.id}/approve?${tz()}`, { replace: pick.value });
       again(`${r.title} replaces ${pick.selectedOptions[0].textContent} on ${pname(r.requested_by)}'s list.`);
     }), pick);
   };
@@ -947,7 +1168,7 @@ const parentQueue = parentOnly(async (flash) => {
     safetyReview(r.lesson_id), tested(r.lesson_id),
     el('div', { class: 'acts' },
       servingsPick(r, setServings(r.id)),
-      actBtn('Approve as an extra meal', 'pri', async () => { await api('POST', `/api/queue/${r.id}/approve`); again(`${r.title} is on ${pname(r.requested_by)}'s list as an extra meal.`); }),
+      actBtn('Approve as an extra meal', 'pri', async () => { await api('POST', `/api/queue/${r.id}/approve?${tz()}`); again(`${r.title} is on ${pname(r.requested_by)}'s list as an extra meal.`); }),
       replaceable(r.requested_by).length ? replaceApprove(r) : null,
       actBtn('Not now', '', async () => {
         await api('POST', `/api/queue/${r.id}/decline`);
@@ -957,20 +1178,23 @@ const parentQueue = parentOnly(async (flash) => {
   // ---- courses ----
   const courseBox = (c) => {
     const behind = c.weeks_behind ? `${c.weeks_behind} week${c.weeks_behind === 1 ? '' : 's'} behind` : 'On track';
-    const lessonRow = (x, week) => el('div', { class: x.done ? 'rowi' : 'rowi qrow' },
-      el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
-        el('small', {}, x.done ? 'Cooked'
-          : x.extra ? 'Extra, this week only'
-            : isSabbath() || !homeschool ? 'This week'
-              : [x.overdue ? el('span', { class: 'late' }, 'Overdue · ') : null, `Due ${fmtDay(addDays(week, c.due_day))}`].filter(Boolean)),
-        x.done ? null : el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id))),
-      x.done ? el('span', { class: 'mut' }, '✓') : el('div', { class: 'acts' },
-        x.queue_id ? servingsPick(x, setServings(x.queue_id)) : null,
-        actBtn('Skip this recipe', '', async () => {
-          await api('POST', `/api/courses/${c.id}/skip-recipe`, { lesson_id: x.lesson_id });
-          again(`Skipped ${x.title}. The next lesson takes its place.`, () => api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }));
-        }),
-        x.queue_id ? moreMenu(x, x.queue_id) : null));
+    // A lesson is one line; its tools open under it, so nothing is tapped by
+    // accident while scrolling.
+    const status = (x, week) => (x.done ? 'Cooked'
+      : x.extra ? 'Extra, this week only'
+        : isSabbath() || !homeschool ? null
+          : [x.overdue ? el('span', { class: 'late' }, 'Overdue · ') : null, `Due ${fmtDay(addDays(week, c.due_day))}`].filter(Boolean));
+    const lessonRow = (x, week) => (x.done
+      ? el('div', { class: 'rowi' }, el('div', {}, el('b', {}, ...lessonName(x)), el('small', {}, 'Cooked')), el('span', { class: 'mut' }, '✓'))
+      : expander(el('span', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null, status(x, week) ? el('small', {}, status(x, week)) : null),
+        el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id)),
+        el('div', { class: 'acts' },
+          x.queue_id ? servingsPick(x, setServings(x.queue_id)) : null,
+          actBtn('Skip this recipe', '', async () => {
+            await api('POST', `/api/courses/${c.id}/skip-recipe`, { lesson_id: x.lesson_id });
+            again(`Skipped ${x.title}. The next lesson takes its place.`, () => api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }));
+          }),
+          x.queue_id ? swapLink(x, x.queue_id) : null)));
     const tw = c.this_week;
     return el('section', { class: 'card qcourse' },
       el('div', { class: 'rowi' },
@@ -982,36 +1206,37 @@ const parentQueue = parentOnly(async (flash) => {
         : el('p', { class: 'mut small' }, 'No lessons in this course can be cooked yet.'),
       c.unwritten ? el('p', { class: 'mut small', style: 'margin:0' }, `${c.unwritten} more lesson${c.unwritten === 1 ? ' is' : 's are'} still being written. They join the schedule when they're ready.`) : null,
       c.hidden ? el('p', { class: 'mut small', style: 'margin:0' }, `${c.hidden} lesson${c.hidden === 1 ? ' is' : 's are'} hidden by your diet settings, so ${c.hidden === 1 ? "it isn't" : "they aren't"} scheduled.`) : null,
-      c.started ? [
-        el('h4', {}, `This week · ${fmtDay(tw.week)} to ${fmtDay(addDays(tw.week, 5))}`),
-        tw.skipped ? el('p', { class: 'mut' }, 'Skipped. Everything moved back a week.')
-          : tw.lessons.length ? el('div', { class: 'rows' }, tw.lessons.map((x) => lessonRow(x, tw.week)))
-            : el('p', { class: 'mut' }, 'Nothing left this week.'),
-        el('div', { class: 'acts' },
-          tw.skipped
-            ? actBtn('Put this week back', '', async () => { await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, skipped: false }); again('This week is back.'); })
+      c.started ? el('section', { class: 'qweek' },
+        el('div', { class: 'qweek-head' },
+          el('h4', {}, 'This week', el('small', {}, `${fmtDay(tw.week)} to ${fmtDay(addDays(tw.week, 5))}`)),
+          menu(`Change this week`, tw.skipped
+            ? [['Put this week back', async () => { await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, skipped: false }); again('This week is back.'); }]]
             : [
-              c.done + tw.lessons.filter((x) => !x.done).length < c.total ? actBtn('Cook another recipe', '', async () => {
+              c.done + tw.lessons.filter((x) => !x.done).length < c.total ? ['Cook another recipe', async () => {
                 await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, extra: 1 });
                 again('Added the next lesson to this week, for this week only.', () => api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, extra: -1 }));
-              }) : null,
-              actBtn('Skip this week', '', async () => {
+              }] : null,
+              ['Skip this week', async () => {
                 await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, skipped: true });
                 again('Skipped this week. Everything moves back a week.', () => api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, skipped: false }));
-              }),
-            ]),
-      ] : null,
-      [
-        el('h4', {}, `Next week · ${fmtDay(c.next_week.week)}`),
+              }],
+            ])),
+        tw.skipped ? el('p', { class: 'mut' }, 'Skipped. Everything moved back a week.')
+          : tw.lessons.length ? el('div', { class: 'rows' }, tw.lessons.map((x) => lessonRow(x, tw.week)))
+            : el('p', { class: 'mut' }, 'Nothing left this week.')) : null,
+      // Next week is a look ahead, closed until it's wanted.
+      el('details', { class: 'qweek' },
+        el('summary', {}, el('h4', {}, c.started ? 'Next week' : 'First week', el('small', {}, `${fmtDay(c.next_week.week)} · ${c.next_week.skipped ? 'skipped' : plural(c.next_week.lessons.length, 'lesson')}`))),
         c.next_week.skipped ? el('p', { class: 'mut' }, 'Skipped.') : el('div', { class: 'rows' }, c.next_week.lessons.map((x) => el('div', { class: 'rowi' },
           el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null)))),
         el('div', { class: 'acts' }, actBtn(c.next_week.skipped ? 'Put next week back' : 'Skip next week', '', async () => {
           await api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: c.next_week.week, skipped: !c.next_week.skipped });
           parentQueue();
-        })),
-      ],
-      c.skipped_recipes.length ? [el('h4', {}, 'Skipped recipes'), el('div', { class: 'rows' }, c.skipped_recipes.map((x) => el('div', { class: 'rowi' },
-        el('b', {}, x.title), actBtn('Put back', '', async () => { await api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }); again(`${x.title} is back in the course.`); }))))] : null);
+        }))),
+      c.skipped_recipes.length ? el('details', { class: 'qweek' },
+        el('summary', {}, el('h4', {}, 'Skipped recipes', el('small', {}, String(c.skipped_recipes.length)))),
+        el('div', { class: 'rows' }, c.skipped_recipes.map((x) => el('div', { class: 'rowi' },
+          el('b', {}, x.title), actBtn('Put back', '', async () => { await api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }); again(`${x.title} is back in the course.`); }))))) : null);
   };
 
   // ---- lessons queued by hand ----
@@ -1037,22 +1262,19 @@ const parentQueue = parentOnly(async (flash) => {
         el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: close }, 'Cancel'))));
     document.body.append(ov);
   };
-  const moreMenu = (x, qid) => el('details', { class: 'more' },
-    el('summary', { 'aria-label': `More for ${x.title}` }, '⋯'),
-    el('div', { class: 'more-menu' }, el('button', { type: 'button', class: 'hbtn link', onclick: (e) => { e.target.closest('details').open = false; swapPicker(qid, x.title); } }, 'Swap for an Appointed Time meal instead')));
+  const swapLink = (x, qid) => el('button', { type: 'button', class: 'hbtn link', onclick: () => swapPicker(qid, x.title) }, 'Swap for an Appointed Time meal');
 
-  const queuedRow = (x) => el('div', { class: 'rowi qrow' },
-    el('div', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
-      el('small', {}, `For ${names(x.profile_ids)}${x.planned_date ? ` · ${fmtDay(x.planned_date)}` : ''}${x.status === 'shopped' ? ' · Shopped for' : ''}`),
-      el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id))),
-    el('div', { class: 'acts' }, servingsPick(x, setServings(x.id)),
-      x.swap
-        ? actBtn('Undo swap', '', async () => { await api('POST', `/api/queue/${x.id}/unswap`); again(`Undid the swap for ${x.title}.`); })
-        : actBtn('Remove', '', async () => {
-          await api('DELETE', `/api/queue/${x.id}`);
-          again(`Took ${x.title} off the queue.`, () => api('POST', `/api/queue/${x.id}/put-back`));
-        }),
-      x.swap ? null : moreMenu(x, x.id)));
+  const queuedRow = (x) => expander(el('span', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
+    el('small', {}, `For ${names(x.profile_ids)}${x.planned_date ? ` · ${fmtDay(x.planned_date)}` : ''}${x.status === 'shopped' ? ' · Shopped for' : ''}${x.swap ? ' · Swapped in' : ''}`)),
+  el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id)),
+  el('div', { class: 'acts' }, servingsPick(x, setServings(x.id)),
+    x.swap
+      ? actBtn('Undo swap', '', async () => { await api('POST', `/api/queue/${x.id}/unswap`); again(`Undid the swap for ${x.title}.`); })
+      : actBtn('Remove', '', async () => {
+        await api('DELETE', `/api/queue/${x.id}`);
+        again(`Took ${x.title} off the queue.`, () => api('POST', `/api/queue/${x.id}/put-back`));
+      }),
+    x.swap ? null : swapLink(x, x.id)));
 
   // ---- add a lesson ----
   const note = el('p', { class: 'mut small note', hidden: true }, 'Most lessons use knife work. We suggest a Unit 1 lesson first.');
@@ -1072,6 +1294,7 @@ const parentQueue = parentOnly(async (flash) => {
   };
   lessonSel.addEventListener('change', checkNote);
   who.addEventListener('change', checkNote);
+  let closeAdd = () => {};
   const addForm = form([
     el('label', { class: 'f' }, 'Lesson', lessonSel),
     el('fieldset', {}, el('legend', {}, "Who's cooking"), el('p', { class: 'mut small', style: 'margin:0' }, 'Pick more than one to cook it together. It counts for each of them.'), who),
@@ -1087,8 +1310,9 @@ const parentQueue = parentOnly(async (flash) => {
     // A lesson with set sizes takes the nearest one it offers.
     const servings = L.servings_options.includes(n) ? n : L.servings_options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a));
     await api('POST', '/api/queue', { lesson_id: v.lesson_id, profile_ids: ids, servings, planned_date: v.planned_date || null });
+    closeAdd();
     again(`${L.title} is in the queue${servings !== n ? `, serving ${servings} (the nearest size it makes)` : ''}.`);
-  });
+  }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => closeAdd() }, 'Cancel')] });
 
   const courses = q.weeks_on
     ? (q.courses.length ? q.courses.map(courseBox)
@@ -1096,18 +1320,29 @@ const parentQueue = parentOnly(async (flash) => {
         el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: '#/parent/courses/new' }, 'Set up a course'))))
     : null;
 
+  // Course lessons and lessons added by hand, one at a time (owner, 2026-10-23).
+  const extraList = [
+    q.queued.length ? el('div', { class: 'card' }, el('div', { class: 'rows' }, q.queued.map(queuedRow)))
+      : el('p', { class: 'mut' }, courses ? 'No additional lessons assigned.' : 'Nothing queued yet. Add a lesson, or turn on Plan our weeks in Family.'),
+    q.put_back.length ? el('details', { class: 'psec' }, el('summary', {}, `Recently taken off (${q.put_back.length})`), el('div', { class: 'card' }, el('div', { class: 'rows' }, q.put_back.map((x) => el('div', { class: 'rowi' },
+      el('div', {}, el('b', {}, x.title), el('small', {}, `${x.status === 'declined' ? `${pname(x.requested_by)} asked · Not now` : 'Removed'} · ${names(x.profile_ids)}`)),
+      actBtn('Put back', '', async () => { await api('POST', `/api/queue/${x.id}/put-back`); again(`${x.title} is back.`); })))))) : null,
+  ];
+  const view = el('div', {});
+  const show = (which) => {
+    view.replaceChildren(...[which === 'course' && courses ? courses : extraList].flat().filter(Boolean));
+    toggle?.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', String(['course', 'extra'][i] === which)));
+  };
+  const toggle = courses ? viewToggle('cpr.queue.view', [['course', 'Course'], ['extra', `Additional${q.queued.length ? ` (${q.queued.length})` : ''}`]], 'course', show) : null;
+  show(courses ? sessionGet('cpr.queue.view') ?? 'course' : 'extra');
+
   parentScreen('queue',
     flash ?? null,
     q.requests.length ? [el('h2', {}, `Requests (${q.requests.length})`), requests] : null,
-    courses ? [el('h2', {}, 'This week'), courses] : null,
-    el('h2', {}, courses ? 'Other lessons in the queue' : 'The queue'),
-    q.queued.length ? el('div', { class: 'card' }, el('div', { class: 'rows' }, q.queued.map(queuedRow)))
-      : el('p', { class: 'mut' }, courses ? 'Nothing else queued.' : 'Nothing queued yet. Add a lesson below, or turn on Plan our weeks in Family.'),
-    q.put_back.length ? [el('h3', {}, 'Recently taken off'), el('div', { class: 'card' }, el('div', { class: 'rows' }, q.put_back.map((x) => el('div', { class: 'rowi' },
-      el('div', {}, el('b', {}, x.title), el('small', {}, `${x.status === 'declined' ? `${pname(x.requested_by)} asked · Not now` : 'Removed'} · ${names(x.profile_ids)}`)),
-      actBtn('Put back', '', async () => { await api('POST', `/api/queue/${x.id}/put-back`); again(`${x.title} is back.`); })))))] : null,
-    el('h2', {}, 'Add a lesson'),
-    addForm);
+    el('div', { class: 'pagehead' }, el('h2', {}, 'The queue'),
+      el('button', { type: 'button', class: 'hbtn pri', onclick: () => { closeAdd = modal('Add a lesson', addForm); } }, '+ Add a lesson')),
+    toggle,
+    view);
 });
 
 // ---------- courses: the list and the editor (§6.18) ----------
@@ -1117,6 +1352,7 @@ const courseList = parentOnly(async () => {
   const names = (ids) => ids.map((id) => profiles.find((p) => p.id === id)?.name ?? 'Someone').join(' & ') || 'Nobody';
   const active = courses.filter((c) => !c.archived_at), ended = courses.filter((c) => c.archived_at);
   parentScreen('courses',
+    addHead(null, 'Set up a course', '#/parent/courses/new'),
     !weeks_on ? el('p', { class: 'card mut' }, 'Plan our weeks is off, so courses don\'t load lessons into the queue. Turn it on in Family, or switch to homeschool mode.') : null,
     el('p', { class: 'mut' }, mode === 'homeschool'
       ? 'Set each course up once: the lessons in order, a start date, and how many a week. Each week\'s lessons load into the queue, and an unfinished one moves to the next week.'
@@ -1124,15 +1360,14 @@ const courseList = parentOnly(async () => {
     el('div', { class: 'card' }, active.length ? el('div', { class: 'rows' }, active.map((c) => el('div', { class: 'rowi' },
       el('div', {}, el('b', {}, c.name || `${names(c.profile_ids)}'s course`), el('small', {}, `${names(c.profile_ids)} · from ${fmtDay(c.start_date)} · ${c.per_week} a week`)),
       el('a', { class: 'hbtn', href: `#/parent/courses/${c.id}` }, 'Edit'))))
-      : el('p', { class: 'mut' }, 'No courses yet.'),
-    el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: '#/parent/courses/new' }, 'Set up a course'))),
+      : el('p', { class: 'mut' }, 'No courses yet.')),
     ended.length ? [el('h2', {}, 'Ended courses'), el('div', { class: 'card' }, el('div', { class: 'rows' }, ended.map((c) => el('div', { class: 'rowi' },
       el('div', {}, el('b', {}, c.name || `${names(c.profile_ids)}'s course`), el('small', {}, `Ended ${fmtDay(c.archived_at.slice(0, 10))}`)),
       actBtn('Put back', '', async () => { await api('POST', `/api/courses/${c.id}/put-back`); courseList(); })))))] : null);
 });
 
 const courseEditor = parentOnly(async (cid) => {
-  const [data, { profiles }, outline] = await Promise.all([api('GET', '/api/courses'), api('GET', '/api/profiles'), fetch('/content/course.json').then((r) => r.json())]);
+  const [data, { profiles }, outline, lib] = await Promise.all([api('GET', '/api/courses'), api('GET', '/api/profiles'), fetch('/content/course.json').then((r) => r.json()), api('GET', '/api/library')]);
   const existing = cid === 'new' ? null : data.courses.find((c) => c.id === cid);
   if (cid !== 'new' && !existing) return go('#/parent/courses');
   const dish = Object.fromEntries(outline.dishes.map((d) => [d.id, d]));
@@ -1159,6 +1394,7 @@ const courseEditor = parentOnly(async (cid) => {
   startIn.addEventListener('input', drawFinish);
   perIn.addEventListener('input', drawFinish);
 
+  const openParts = new Set();
   const drawPlan = () => {
     const entries = courseEntries(plan.map((x) => dish[x.id]));
     const removed = plan.filter((x) => x.removed).map((x) => x.id);
@@ -1174,7 +1410,7 @@ const courseEditor = parentOnly(async (cid) => {
       plan = entries.flatMap((e) => e.ids.map((id) => byId[id]));
       drawPlan();
     };
-    listBox.replaceChildren(...entries.map((e, i) => {
+    const row = (e, i) => {
       const keptIds = e.ids.filter((id) => !plan.find((x) => x.id === id).removed);
       const num = keptIds.length ? ++n : null;
       const dishRow = (id) => {
@@ -1183,17 +1419,34 @@ const courseEditor = parentOnly(async (cid) => {
         return el('div', { class: 'dishpick' },
           el('label', { class: 'choice' },
             el('input', { type: 'checkbox', checked: !x.removed, onchange: (ev) => { x.removed = !ev.target.checked; drawPlan(); } }),
-            el('span', {}, d.title, el('em', {}, ` ${d.skill ?? ''}`), tag ? el('small', { class: 'mut' }, ` · ${tag}`) : null)),
-          el('button', { type: 'button', class: 'hbtn link', 'aria-label': `What is ${d.title}?`, onclick: () => showDish(id) }, 'What is it?'));
+            el('span', {}, d.title, tag ? el('small', { class: 'mut' }, ` · ${tag}`) : null)),
+          el('button', { type: 'button', class: 'hbtn link', 'aria-label': `What is ${d.title}?`, onclick: () => showDish(id) }, d.skill ? `${d.skill} ›` : 'What is it? ›'));
       };
       return el('div', { class: `planrow${keptIds.length ? '' : ' out'}` },
         el('div', { class: 'planno' }, num ?? '–'),
         el('div', { class: 'grow' },
-          e.pickOne ? el('div', {}, foundationMark(), el('small', { class: 'mut' }, ' Pick one, or tick more to cook more than one')) : null,
+          e.pickOne ? el('div', { class: 'planpick' }, foundationMark(), el('small', { class: 'mut' }, ' Pick one, or tick more')) : null,
           e.ids.map(dishRow)),
         el('div', { class: 'planmove' },
           el('button', { type: 'button', class: 'hbtn', 'aria-label': 'Move up', disabled: i === 0, onclick: () => move(i, -1) }, '↑'),
           el('button', { type: 'button', class: 'hbtn', 'aria-label': 'Move down', disabled: i === entries.length - 1, onclick: () => move(i, 1) }, '↓')));
+    };
+    // The lessons fold into their paths, closed until opened, so the plan
+    // isn't one long scroll. A path stays open while it's being worked on.
+    const parts = [];
+    entries.forEach((e, i) => {
+      const unit = dish[e.ids[0]].unit;
+      if (parts.at(-1)?.unit !== unit) parts.push({ unit, items: [] });
+      parts.at(-1).items.push([e, i]);
+    });
+    listBox.replaceChildren(...parts.map((part) => {
+      const rows = part.items.map(([e, i]) => row(e, i));
+      const ids = part.items.flatMap(([e]) => e.ids);
+      const kept = ids.filter((id) => !plan.find((x) => x.id === id).removed).length;
+      return el('details', { class: 'planpart', open: openParts.has(part.unit), ontoggle: (ev) => { if (ev.target.open) openParts.add(part.unit); else openParts.delete(part.unit); } },
+        el('summary', {}, el('span', {}, el('b', {}, `Path ${part.unit}${lib.units?.[part.unit] ? `: ${lib.units[part.unit]}` : ''}`),
+          el('small', {}, `${kept} of ${plural(ids.length, 'dish')} ticked`))),
+        el('div', {}, rows));
     }));
     drawFinish();
   };
@@ -1231,7 +1484,7 @@ const courseEditor = parentOnly(async (cid) => {
       if (!body.profile_ids.length) throw new Error('Pick who the course is for.');
       await api(existing ? 'PUT' : 'POST', existing ? `/api/courses/${existing.id}` : '/api/courses', body);
       go('#/parent/queue');
-    }, { extra }));
+    }, { extra, top: true }));
 });
 
 // ---------- shopping (§6.3): optional; nothing waits on it ----------
@@ -1247,7 +1500,9 @@ const usedLine = (x) => el('div', { class: 'rowi' }, el('div', {}, el('b', {}, x
   el('span', { class: 'amt' }, x.used ?? ''));
 
 const shopping = parentOnly(async (flash) => {
-  const [d, { profiles }] = await Promise.all([api('GET', `/api/shopping?${tz()}`), api('GET', '/api/profiles')]);
+  const [d, { profiles }, pantry] = await Promise.all([api('GET', `/api/shopping?${tz()}`), api('GET', '/api/profiles'), api('GET', '/api/pantry')]);
+  const again = (msg, undo) => shopping(el('p', { class: 'ok flash', role: 'status' }, msg, ' ',
+    undo ? el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await undo(); shopping(); } }, 'Undo') : null));
   const names = (ids) => ids.map((id) => profiles.find((p) => p.id === id)?.name ?? 'Someone').join(' & ');
   const weekName = (w) => (w === null ? 'No date set' : w === d.this_week ? `This week · ${fmtDay(w)}` : w === addDays(d.this_week, 7) ? `Next week · ${fmtDay(w)}` : `Week of ${fmtDay(w)}`);
 
@@ -1260,12 +1515,14 @@ const shopping = parentOnly(async (flash) => {
     const n = Number(countSel.value);
     namesBox.replaceChildren(n ? `For ${d.upcoming.slice(0, n).map((x) => x.title).join(', ')}` : '');
   });
+  let closeMaker = () => {};
   const maker = max
     ? form([el('label', { class: 'f' }, 'How many lessons are you shopping for?', el('span', { class: 'hint' }, 'Counting from the next lesson not cooked yet'), countSel), namesBox],
       'Next', async (v) => {
         if (!v.count) throw new Error('Pick how many lessons.');
+        closeMaker();
         go(`#/parent/shopping/new/${v.count}`);
-      })
+      }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => closeMaker() }, 'Cancel')] })
     : el('p', { class: 'card mut' }, 'Nothing is coming up yet. Queue a lesson, or set up a course.');
 
   const open = d.lists.filter((l) => !l.done_at), past = d.lists.filter((l) => l.done_at);
@@ -1273,22 +1530,79 @@ const shopping = parentOnly(async (flash) => {
     el('div', {}, el('b', {}, `List from ${fmtDay(l.created_at.slice(0, 10))}`), el('small', {}, `${l.lessons.join(', ')} · ${l.checked} of ${l.total} in the cart`)),
     el('a', { class: 'hbtn', href: `#/parent/shopping/list/${l.id}` }, 'Open'));
 
-  // What you'll need, week by week: this week and next open, later ones folded.
-  const near = new Set([null, d.this_week, addDays(d.this_week, 7)]);
-  const weeks = d.weeks.map((w) => el('details', { class: 'card week', open: near.has(w.week) },
+  // What you'll need, week by week, each folded until it's opened.
+  const weeks = d.weeks.map((w) => el('details', { class: 'card week' },
     el('summary', {}, el('b', {}, weekName(w.week)), el('small', { class: 'mut' }, ` · ${w.lessons.length} lesson${w.lessons.length === 1 ? '' : 's'}`)),
     el('ul', { class: 'weeklessons' }, w.lessons.map((x) => el('li', {}, el('b', {}, x.title), ` · serves ${x.servings}${x.profile_ids.length ? ` · ${names(x.profile_ids)}` : ''}`))),
-    w.needs.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), el('div', { class: 'rows' }, s.items.map(usedLine)))),
-    w.needs.may_have.length ? el('div', { class: 'psec' }, el('h4', {}, MAY_HAVE), el('div', { class: 'rows' }, w.needs.may_have.map(usedLine))) : null));
+    w.needs.may_have.length ? el('div', { class: 'psec' }, el('h4', {}, MAY_HAVE), el('div', { class: 'rows' }, w.needs.may_have.map(usedLine))) : null,
+    w.needs.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), el('div', { class: 'rows' }, s.items.map(usedLine))))));
+
+  // Lists, newest first, and what's coming up, one at a time (owner, 2026-10-23).
+  const newest = (a, b) => (a.created_at < b.created_at ? 1 : a.created_at > b.created_at ? -1 : 0);
+  const lists = [
+    addHead(null, 'Make a shopping list', () => { closeMaker = max ? modal('Make a shopping list', maker) : modal('Make a shopping list', maker, el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => closeMaker() }, 'Close'))); }),
+    open.length ? el('div', { class: 'card' }, el('div', { class: 'rows' }, [...open].sort(newest).map(listRow))) : el('p', { class: 'mut' }, 'No lists open.'),
+    past.length ? [el('h3', {}, 'Done lists'), el('div', { class: 'card' }, el('div', { class: 'rows' }, [...past].sort(newest).map(listRow)))] : null,
+  ];
+  const upcoming = [
+    weeks.length ? weeks : el('p', { class: 'mut' }, 'Nothing is coming up yet.'),
+    el('p', { class: 'mut small' }, `Your kitchen staples come first, under "${MAY_HAVE}", so you can check the cupboard. On a shopping list they're in their aisles.`),
+  ];
+
+  // Kitchen staples: the ones the family keeps, each with Remove; more are
+  // added by searching for them (owner, 2026-10-23).
+  const ingredients = pantry.sections.flatMap((sec) => sec.items.map((i) => ({ ...i, section: sec.name })));
+  const byId = Object.fromEntries(ingredients.map((i) => [i.id, i]));
+  const have = new Set(pantry.pantry.filter((x) => byId[x]));
+  const saveStaples = () => api('PUT', '/api/pantry', { ingredient_ids: [...have] });
+  const addStaples = () => {
+    const search = el('input', { type: 'search', placeholder: 'Search: olive oil, salt, rice…', 'aria-label': 'Search ingredients', autocomplete: 'off' });
+    const results = el('div', { class: 'rows', 'aria-live': 'polite' });
+    const added = [];
+    const draw = () => {
+      const q = search.value.trim().toLowerCase();
+      // Names starting with what's typed first, then a word starting with it, then the rest.
+      const rank = (name) => (name.startsWith(q) ? 0 : new RegExp(`\\b${q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`).test(name) ? 1 : 2);
+      const hits = q ? ingredients.filter((i) => !have.has(i.id) && i.name.toLowerCase().includes(q))
+        .sort((a, b) => rank(a.name.toLowerCase()) - rank(b.name.toLowerCase()) || a.name.localeCompare(b.name)).slice(0, 12) : [];
+      results.replaceChildren(...(q && !hits.length ? [el('p', { class: 'mut' }, 'No ingredient by that name, or it\'s a staple already.')]
+        : hits.map((i) => el('div', { class: 'rowi' }, el('div', {}, el('b', {}, i.name), el('small', {}, i.section)),
+          actBtn('Add', 'pri', async () => {
+            have.add(i.id);
+            await saveStaples();
+            added.push(i.name);
+            draw();
+            search.focus();
+          })))));
+    };
+    search.addEventListener('input', draw);
+    const close = modal('Add kitchen staples', search, results,
+      el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn pri', onclick: () => { close(); if (added.length) again(`Added ${added.join(', ')} to your kitchen staples.`); } }, 'Done')));
+    search.focus();
+  };
+  const staples = [
+    addHead(null, 'Add a staple', addStaples),
+    el('p', { class: 'mut small', style: 'margin:0' }, `Things your kitchen usually has. In Upcoming and before you make a list, they come first under "${MAY_HAVE}" so you can check the cupboard. On the list itself they're in their aisles.`),
+    have.size ? el('div', { class: 'card' }, el('div', { class: 'rows' }, [...have].map((x) => byId[x]).sort((a, b) => a.name.localeCompare(b.name)).map((i) => el('div', { class: 'rowi' },
+      el('div', {}, el('b', {}, i.name), el('small', {}, i.section)),
+      actBtn('Remove', '', async () => {
+        have.delete(i.id);
+        await saveStaples();
+        again(`${i.name} is off your kitchen staples.`, () => { have.add(i.id); return saveStaples(); });
+      })))))
+      : el('p', { class: 'mut' }, 'No kitchen staples yet.'),
+  ];
+  const view = el('div', {});
+  const show = (which) => {
+    view.replaceChildren(...[{ lists, staples }[which] ?? upcoming].flat(2).filter(Boolean));
+    toggle.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', String(['upcoming', 'lists', 'staples'][i] === which)));
+  };
+  const toggle = viewToggle('cpr.shop.view', [['upcoming', 'Upcoming'], ['lists', `Lists${open.length ? ` (${open.length})` : ''}`], ['staples', 'Staples']], 'upcoming', show);
 
   parentScreen('shopping', flash ?? null,
-    el('p', { class: 'mut' }, "Shopping lists are optional. Kids can start any lesson whenever you're ready."),
-    open.length ? [el('h2', {}, 'Your shopping lists'), el('div', { class: 'card' }, el('div', { class: 'rows' }, open.map(listRow)))] : null,
-    el('h2', {}, 'Make a shopping list'), maker,
-    el('h2', {}, "What you'll need"),
-    weeks.length ? weeks : el('p', { class: 'mut' }, 'Nothing is coming up yet.'),
-    el('p', { class: 'mut small' }, `Kitchen staples are grouped under "${MAY_HAVE}" so you can check the cupboard first. `, el('a', { href: '#/parent/pantry' }, 'Kitchen staples')),
-    past.length ? el('details', {}, el('summary', {}, `Done lists (${past.length})`), el('div', { class: 'card' }, el('div', { class: 'rows' }, past.map(listRow)))) : null);
+    el('p', { class: 'mut' }, 'See at a glance what ingredients are needed for future queued lessons. You can also generate a shopping list. First select everything you have on-hand already; anything checkmarked will be left off the list.'),
+    toggle, view);
+  show(sessionGet('cpr.shop.view') ?? 'upcoming');
 });
 
 // The preview: tick what's on hand; the rest becomes the list.
@@ -1302,8 +1616,8 @@ const shoppingPreview = parentOnly(async (count) => {
     el('p', {}, `For ${p.lessons.map((x) => `${x.title} (serves ${x.servings})`).join(', ')}.`),
     form([
       el('p', { class: 'mut small', style: 'margin:0' }, "Tick anything you already have. It's left off this list only."),
-      p.sections.map((s) => el('fieldset', { class: 'psec' }, el('legend', {}, s.name), el('div', { class: 'stack' }, s.items.map(tick)))),
       p.may_have.length ? el('fieldset', { class: 'psec' }, el('legend', {}, MAY_HAVE), el('div', { class: 'stack' }, p.may_have.map(tick))) : null,
+      p.sections.map((s) => el('fieldset', { class: 'psec' }, el('legend', {}, s.name), el('div', { class: 'stack' }, s.items.map(tick)))),
     ], 'Create shopping list', async (v) => {
       const res = await api('POST', `/api/shopping/lists?${tz()}`, { keys: p.lessons.map((x) => x.key), on_hand: all.filter((x) => v[`h_${x.id}`]).map((x) => x.id) });
       go(`#/parent/shopping/list/${res.id}`);
@@ -1344,8 +1658,8 @@ const shoppingListView = parentOnly(async (lid, flash) => {
     el('section', { class: 'card shoplist' },
       el('div', {}, el('h2', { style: 'margin:0' }, `Shopping list · ${fmtDay(l.created_at.slice(0, 10))}`), count,
         el('p', { class: 'mut small', style: 'margin:0' }, `For ${l.lessons.map((x) => `${x.title} (serves ${x.servings})`).join(', ')}`)),
-      l.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), s.items.map(row))),
       l.may_have.length ? el('div', { class: 'psec' }, el('h4', {}, MAY_HAVE), l.may_have.map(row)) : null,
+      l.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), s.items.map(row))),
       l.on_hand.length ? el('details', { class: 'psec' }, el('summary', {}, `You have these (${l.on_hand.length})`),
         el('div', { class: 'rows' }, l.on_hand.map((x) => el('div', { class: 'rowi' }, el('div', {}, el('b', {}, x.name), el('small', {}, x.used ?? '')),
           actBtn('Put on the list', '', async () => { await api('POST', `/api/shopping/lists/${lid}/on-hand`, { ingredient_id: x.id, on_hand: false }); shoppingListView(lid); }))))) : null,
@@ -1363,22 +1677,8 @@ const shoppingListView = parentOnly(async (lid, flash) => {
         }))));
 });
 
-const pantryEditor = parentOnly(async () => {
-  const p = await api('GET', '/api/pantry');
-  const have = new Set(p.pantry);
-  const saved = el('p', { class: 'ok', hidden: true }, 'Saved.');
-  parentScreen('pantry',
-    el('p', { class: 'mut' }, `Things your kitchen usually has. They stay on every list, grouped under "${MAY_HAVE}" so you can check the cupboard first.`),
-    form([
-      ...p.sections.map((s) => el('fieldset', {}, el('legend', {}, s.name), el('div', { class: 'grid2' }, s.items.map((i) => el('label', { class: 'choice' },
-        el('input', { type: 'checkbox', name: `i_${i.id}`, checked: have.has(i.id) }), el('span', {}, i.name)))))),
-      saved,
-    ], 'Save', async (v) => {
-      saved.hidden = true;
-      await api('PUT', '/api/pantry', { ingredient_ids: p.sections.flatMap((s) => s.items).filter((i) => v[`i_${i.id}`]).map((i) => i.id) });
-      saved.hidden = false;
-    }, { extra: [el('a', { class: 'hbtn', href: '#/parent/shopping' }, 'Back to shopping')] }));
-});
+// Kitchen staples are the Staples view of Shopping now; old links land there.
+const pantryEditor = () => { sessionSet('cpr.shop.view', 'staples'); go('#/parent/shopping'); };
 
 // ---------- Print our progress (§6.15) ----------
 
@@ -1581,6 +1881,7 @@ const parentRecipes = parentOnly(async (flash) => {
     return out;
   };
   parentScreen('recipes', flash ?? null,
+    addHead(null, 'Add a recipe', '#/parent/recipes/new'),
     el('div', { class: 'card' },
       el('p', { class: 'mut' }, "Your family's own recipes. They show in every profile's kitchen and cook in the same player as the lessons. Only your family sees them, unless you share one."),
       recipes.length
@@ -1600,7 +1901,7 @@ const parentRecipes = parentOnly(async (flash) => {
               again(`Deleted ${r.title}.`, () => api('POST', `/api/recipes/${hex(r)}/restore`));
             })))))
         : el('p', {}, 'No recipes yet.'),
-      el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: '#/parent/recipes/new' }, 'Add a recipe'), el('a', { class: 'hbtn', href: '#/parent/shared' }, 'User-shared recipes'))));
+      el('div', { class: 'acts' }, el('a', { class: 'hbtn', href: '#/parent/shared' }, 'User-shared recipes'))));
 });
 
 // Share a recipe (§6.10): General or Feast day, then the routine's answer.
@@ -1909,7 +2210,16 @@ async function route() {
       if (top === 'signup' && sub === 'code') return signupCode();
       if (top === 'signup') return await signup();
       if (top === 'forgot') return forgot();
-      return welcome();
+      // A kid's device that was logged out goes back to the kid's Log in.
+      return store('cpr.login') === 'kid' ? login() : welcome();
+    }
+    // A kid's own login opens that kid's kitchen and nothing else (§8.3a).
+    if (me.kid) {
+      const own = me.kid.profile_id;
+      if (top === 'kitchen' && sub === own && extra?.startsWith('@')) return await kitchen(own, extra.slice(1));
+      if (top === 'kitchen' && sub === own && extra) return await lesson(own, decodeURIComponent(extra));
+      if (top === 'kitchen' && sub === own) return await kitchen(own);
+      return go(`#/kitchen/${own}`);
     }
     if (!me.family.pin_set) return firstRun();
     if (top === 'kitchen' && sub && extra?.startsWith('@')) return await kitchen(sub, extra.slice(1));

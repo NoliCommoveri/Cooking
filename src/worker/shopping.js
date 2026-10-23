@@ -92,7 +92,9 @@ async function listOut(env, fam, list) {
   const names = await recipeNames(env, fam.id);
   const full = await needs(env, fam, lessons, { staples });
   const all = [...full.sections.flatMap((x) => x.items), ...full.may_have];
-  const left = await needs(env, fam, lessons, { staples, skip: onHand });
+  // On the list itself a staple is in its store aisle, like everything else
+  // (owner, 2026-10-23): "May already have" is for checking the cupboard first.
+  const left = await needs(env, fam, lessons, { skip: onHand });
   return {
     id: list.id, created_at: list.created_at, done_at: list.done_at,
     lessons: lessons.map((l) => ({ lesson_id: l.lesson_id, title: LIBRARY.lessons.find((L) => L.id === l.lesson_id)?.title ?? names[l.lesson_id]?.title ?? l.lesson_id, servings: l.servings })),

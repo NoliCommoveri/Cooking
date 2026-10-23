@@ -53,8 +53,8 @@ function clearState(pid, lid) {
 // ---------- art and labels ----------
 const LVL = {
   solo: { cls: 'solo', icon: 'i-spoon', head: 'Solo', kid: "You've got this one on your own." },
-  'adult-nearby': { cls: '', icon: 'i-hat', head: 'Adult nearby', kid: 'A grown-up stays in the kitchen for this step.' },
-  'adult-hands-on': { cls: 'hot', icon: 'i-mitt', head: 'Adult hands-on', kid: 'A grown-up helps with this step.' },
+  'adult-nearby': { cls: '', icon: 'i-hat', head: 'Adult nearby', kid: 'An adult stays in the kitchen for this step.' },
+  'adult-hands-on': { cls: 'hot', icon: 'i-mitt', head: 'Adult hands-on', kid: 'An adult helps with this step.' },
 };
 const SECTION_ICON = { produce: 's-produce', meat: 's-meat', fish: 's-fish', dairy: 's-dairy', bakery: 's-bakery', pantry: 's-pantry', canned: 's-canned', frozen: 's-frozen', spices: 's-pantry' };
 const TOOL_ICON = { knives: 't-knives', pans: 't-pans', pots: 't-pots', bakeware: 't-bakeware', measuring: 't-measuring', mixing: 't-mixing', utensils: 't-utensils', openers: 't-opener', thermometers: 't-thermo' };
@@ -114,7 +114,7 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // the suggested order's numbers. ask: { status, send() } for "I want to make
 // this" (a kid) or "Cook this" (an adult); status is null, or where the lesson
 // is in the profile's queue, and send() resolves to the new one (§6.1).
-// ask.approve() asks a grown-up to OK a kid's lesson that isn't on their list,
+// ask.approve() asks an adult to OK a kid's lesson that isn't on their list,
 // resolving to its new status, or null if they didn't; ask.early says it's
 // later on the kid's path.
 // seed: { servings, with, shopped } from the queued lesson, for a fresh cook;
@@ -257,13 +257,13 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
     : '');
 
   // ---------- the lesson card ----------
-  // A kid starting something that isn't on their list needs a grown-up: it's
+  // A kid starting something that isn't on their list needs an adult: it's
   // flagged as early (later on their path) or off their path, and starting it
   // asks for the parent PIN and how to fit it in (owner, 2026-10-23). Adults
   // just cook. A cook already under way carries on.
   const gated = () => Boolean(ask?.approve) && !adult && !S.started && !['assigned', 'shopped'].includes(ask.status);
   const gateNote = () => (gated()
-    ? `<p class="${T.note} earlynote" role="note">${ic('i-lock')}<b>${ask.early ? 'This one is early.' : "This one isn't on your path right now."}</b> ${ask.early ? "It's later on your path." : ''} A grown-up needs to OK it before you start.</p>`
+    ? `<p class="${T.note} earlynote" role="note">${ic('i-lock')}<b>${ask.early ? 'This one is early.' : "This one isn't on your path right now."}</b> ${ask.early ? "It's later on your path." : ''} An adult needs to OK it before you start.</p>`
     : '');
   function cardView() {
     const cu = R.cuisines[L.cuisine]?.name ?? L.cuisine;
@@ -291,11 +291,11 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
       ? `<article class="q-panel q-card"><p class="q-kick">${L.recipe ? esc(L.kicker ?? 'Family recipe') : R.seasonal?.includes(L.unit) ? esc(R.units[L.unit]) : `Path ${L.unit}`}${num(L.id) ? ` · Quest ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
           <h2 class="q-title">${esc(L.title)}</h2><p class="q-skill"><b>${esc(L.skill)}</b></p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${who}${swaps}
-          ${gateNote()}<button type="button" class="q-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask a grown-up to start' : !S.started ? 'Start quest' : 'Keep going'}</button></article>`
+          ${gateNote()}<button type="button" class="q-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask an adult to start' : !S.started ? 'Start quest' : 'Keep going'}</button></article>`
       : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
           ${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
-          ${gateNote()}<button type="button" class="p-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask a grown-up to start' : !S.started ? "Let's cook" : 'Keep going'}</button></article>`;
+          ${gateNote()}<button type="button" class="p-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask an adult to start' : !S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
     return `${top}${askBox()}${fixNotes()}<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${restart}${fixBtn(null)}</div>`;
   }
@@ -304,7 +304,7 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
   function askBox() {
     if (!ask) return '';
     const st = ask.status;
-    const said = st === 'requested' ? 'You asked a grown-up for this one.'
+    const said = st === 'requested' ? 'You asked an adult for this one.'
       : st ? 'This one is on your list.'
       : null;
     return `<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${said

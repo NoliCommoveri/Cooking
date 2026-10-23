@@ -100,3 +100,48 @@ test('a kid\'s list follows the course plan\'s order after it\'s changed', async
   assert.deepEqual(kid.items.map((x) => x.lesson_id), ['beef-bulgogi', 'shakshuka']);
   assert.deepEqual(kid.order.slice(0, 2), ['beef-bulgogi', 'shakshuka']);
 });
+
+// A dish on the kid's path, later on (owner, 2026-10-23): approved now, it
+// isn't listed twice.
+test('a course lesson approved early as an extra isn\'t also in a later week', async () => {
+  const { a, ava, course } = await setup();
+  assert.deepEqual((await course()).next_week.lessons.map((x) => x.lesson_id), ['beef-bulgogi']);
+  const ok = (await a.post(`/api/profiles/${ava}/approve`, { lesson_id: 'beef-bulgogi' })).body;
+  assert.equal(ok.status, 'assigned');
+  const after = await course();
+  assert.deepEqual(after.this_week.lessons.map((x) => x.lesson_id), ['shakshuka']);
+  assert.deepEqual(after.next_week.lessons.map((x) => x.lesson_id), ['buttermilk-biscuits'], 'the rest move up');
+  const kid = (await a.get(`/api/profiles/${ava}/queue`)).body.items;
+  assert.deepEqual(kid.map((x) => x.lesson_id), ['shakshuka', 'beef-bulgogi']);
+  assert.equal(kid[1].planned_date, new Date().toISOString().slice(0, 10), 'planned for today');
+  // Taken off the list, it goes back to its place in the course.
+  await a.del(`/api/queue/${ok.id}`);
+  assert.deepEqual((await course()).next_week.lessons.map((x) => x.lesson_id), ['beef-bulgogi']);
+});
+
+test('a course lesson approved early, replacing this week\'s: the replaced one goes first next week', async () => {
+  const { a, ava, course } = await setup();
+  const [first] = (await course()).this_week.lessons;
+  const ok = (await a.post(`/api/profiles/${ava}/approve`, { lesson_id: 'beef-bulgogi', replace: first.queue_id })).body;
+  const after = await course();
+  assert.deepEqual(after.this_week.lessons, []);
+  assert.deepEqual(after.next_week.lessons.map((x) => x.lesson_id), ['shakshuka']);
+  const kid = (await a.get(`/api/profiles/${ava}/queue`)).body.items;
+  assert.deepEqual(kid.map((x) => x.lesson_id), ['beef-bulgogi'], 'once');
+  await a.post(`/api/queue/${ok.id}/unswap`);
+  const undone = await course();
+  assert.deepEqual(undone.this_week.lessons.map((x) => x.lesson_id), ['shakshuka']);
+  assert.deepEqual(undone.next_week.lessons.map((x) => x.lesson_id), ['beef-bulgogi']);
+});
+
+test('with two a week, replacing the first keeps the second this week', async () => {
+  const { a, ava, course } = await setup(2);
+  const before = await course();
+  assert.deepEqual(before.this_week.lessons.map((x) => x.lesson_id), ['shakshuka', 'beef-bulgogi']);
+  await a.post(`/api/profiles/${ava}/approve`, { lesson_id: 'brown-butter-cookies', replace: before.this_week.lessons[0].queue_id });
+  const after = await course();
+  assert.deepEqual(after.this_week.lessons.map((x) => x.lesson_id), ['beef-bulgogi']);
+  assert.deepEqual(after.next_week.lessons.map((x) => x.lesson_id), ['shakshuka', 'buttermilk-biscuits']);
+  const kid = (await a.get(`/api/profiles/${ava}/queue`)).body.items.map((x) => x.lesson_id);
+  assert.deepEqual(kid, ['beef-bulgogi', 'brown-butter-cookies']);
+});

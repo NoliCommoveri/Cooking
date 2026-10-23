@@ -2,11 +2,11 @@
 // the session's family_id; no route takes a family id from the browser. The
 // owner routes are the one cross-family view, and they return family names,
 // profile counts, and last-active dates only.
-import { ApiError, fail, json, now } from './lib/http.js';
+import { ApiError, fail, json, now, readCookie } from './lib/http.js';
 import { hashSecret, verifySecret, randomHex, sha256Hex, timingSafeEqual } from './lib/crypto.js';
 import {
   startSession, endSession, readSession, requireSession, requireParent, requireOwner,
-  pinUnlocked, unlockPin, lockPin,
+  pinUnlocked, unlockPin, lockPin, ownProfile, kidRefused, endKidSessions, renewKidSession, SESSION_COOKIE, KID_COOKIE,
 } from './auth.js';
 import { sendEmail, emailReady, resetEmail, signupCodeEmail, fixReportEmail } from './email.js';
 import { livePatches, liveLesson, patchProblems } from './lessons.js';
@@ -21,6 +21,7 @@ import { register as registerShopping } from './shopping.js';
 import { register as registerRecipes, lessonFor, recipeNames } from './recipes.js';
 import { register as registerSharing } from './sharing.js';
 import { register as registerSwap } from './swap.js';
+import { register as registerKidLogins } from './kidlogin.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -79,30 +80,40 @@ const familyOut = (f) => ({
 
 // ---------- routes ----------
 
+// A kid login (§8.3a) reaches a route only if it's registered with { kid: true };
+// every other route refuses it before its handler runs. A kid route that takes
+// a profile checks it's the kid's own (ownProfile).
 const routes = [];
-const on = (method, pattern, handler) => routes.push({ method, re: new RegExp(`^${pattern}$`), handler });
+const on = (method, pattern, handler, { kid = false } = {}) => routes.push({ method, re: new RegExp(`^${pattern}$`), handler, kid });
+const KID = { kid: true };
 
 on('GET', '/api/me', async (req, env) => {
   const s = await readSession(env, req);
   if (!s) return { signed_in: false };
   const fam = await env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(s.family_id).first();
+  // A kid's device knows only its own profile and the family's settings.
+  // Each launch asks this, so it renews the kid's login for 14 more days.
+  if (s.kid) {
+    return json({ signed_in: true, kid: { profile_id: s.profile_id, login_name: s.login_name }, parent: null, family: familyOut(fam), pin_unlocked_until: null },
+      200, { 'set-cookie': await renewKidSession(env, s, req) });
+  }
   return {
     signed_in: true,
     parent: { email: s.email, is_owner: s.is_owner, test_cook_notice: !s.notice_seen_at },
     family: familyOut(fam),
     pin_unlocked_until: pinUnlocked(s) ? s.pin_until : null,
   };
-});
+}, KID);
 
 on('POST', '/api/login', async (req, env, body) => {
   const row = await env.DB.prepare('SELECT * FROM parents WHERE email = ?').bind(email(body.email)).first();
   if (!row || !(await verifySecret(String(body.password ?? ''), row.password_hash))) {
     fail(401, 'login_failed', "That email and password don't match.");
   }
-  return json({ ok: true }, 200, { 'set-cookie': await startSession(env, row) });
-});
+  return json({ ok: true }, 200, { 'set-cookie': await startSession(env, row, req) });
+}, KID);
 
-on('POST', '/api/logout', async (req, env) => json({ ok: true }, 200, { 'set-cookie': await endSession(env, req) }));
+on('POST', '/api/logout', async (req, env) => json({ ok: true }, 200, { 'set-cookie': await endSession(env, req) }), KID);
 
 // Open sign-up (§8.3). Anyone can sign up with an email and a password. A
 // six-digit code goes to that email, and entering it creates the family. While
@@ -192,7 +203,7 @@ on('POST', '/api/signup/verify', async (req, env, body) => {
       .bind(parent.id, parent.family_id, addr, row.password_hash, t),
     env.DB.prepare('DELETE FROM signup_verifications WHERE email = ?').bind(addr),
   ]);
-  return json({ ok: true }, 200, { 'set-cookie': await startSession(env, parent) });
+  return json({ ok: true }, 200, { 'set-cookie': await startSession(env, parent, req) });
 });
 
 on('POST', '/api/password/forgot', async (req, env, body) => {
@@ -221,7 +232,7 @@ on('POST', '/api/password/reset', async (req, env, body) => {
     env.DB.prepare('DELETE FROM sessions WHERE parent_id = ?').bind(r.parent_id),
   ]);
   const parent = await env.DB.prepare('SELECT id, family_id FROM parents WHERE id = ?').bind(r.parent_id).first();
-  return json({ ok: true }, 200, { 'set-cookie': await startSession(env, parent) });
+  return json({ ok: true }, 200, { 'set-cookie': await startSession(env, parent, req) });
 });
 
 // ---------- the parent PIN ----------
@@ -260,11 +271,15 @@ on('POST', '/api/pin/reset', async (req, env, body) => {
 
 // ---------- profiles and the library ----------
 
+// A kid's device gets the family's names and avatars (for Cooking with
+// someone?) and its own profile in full.
 on('GET', '/api/profiles', async (req, env) => {
   const s = await requireSession(env, req);
   const { results } = await env.DB.prepare('SELECT * FROM profiles WHERE family_id = ? ORDER BY created_at, id').bind(s.family_id).all();
-  return { profiles: results.map(profileOut) };
-});
+  const out = results.map(profileOut);
+  if (!s.kid) return { profiles: out };
+  return { profiles: out.map((p) => (p.id === s.profile_id ? p : { id: p.id, name: p.name, avatar: p.avatar, people: p.people })) };
+}, KID);
 
 on('POST', '/api/profiles', async (req, env, body) => {
   const s = await requireParent(env, req);
@@ -281,6 +296,10 @@ on('PUT', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
   const res = await env.DB.prepare('UPDATE profiles SET name = ?, avatar = ?, people = ?, theme = ?, audience = ? WHERE id = ? AND family_id = ?')
     .bind(p.name, p.avatar, JSON.stringify(p.people), p.theme, p.audience, pid, s.family_id).run();
   if (!res.meta.changes) fail(404, 'not_found', 'No such profile.');
+  // Kid logins are for kid profiles only (§8.3a): changing to adult turns it off.
+  if (p.audience === 'adult') {
+    await env.DB.batch([endKidSessions(env, s.family_id, pid), env.DB.prepare('DELETE FROM kid_logins WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id)]);
+  }
   return { ok: true };
 });
 
@@ -288,11 +307,12 @@ on('PUT', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
 // doesn't ask for the PIN.
 on('PUT', '/api/profiles/([0-9a-f]{16})/theme', async (req, env, body, [pid]) => {
   const s = await requireSession(env, req);
+  ownProfile(s, pid);
   const res = await env.DB.prepare('UPDATE profiles SET theme = ? WHERE id = ? AND family_id = ?')
     .bind(oneOf(body.theme, THEMES, 'theme'), pid, s.family_id).run();
   if (!res.meta.changes) fail(404, 'not_found', 'No such profile.');
   return { ok: true };
-});
+}, KID);
 
 // A deleted profile comes off every cook it was on. A cook nobody is left on
 // goes with it.
@@ -302,6 +322,9 @@ on('DELETE', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
     fail(404, 'not_found', 'No such profile.');
   }
   await env.DB.batch([
+    // Its login goes, and every device it was logged in on is logged out (§8.3a).
+    endKidSessions(env, s.family_id, pid),
+    env.DB.prepare('DELETE FROM kid_logins WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
     env.DB.prepare('DELETE FROM attempt_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
     // Off every queued lesson and course too; a queued lesson nobody is left on goes.
     env.DB.prepare('DELETE FROM queue_profiles WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id),
@@ -346,7 +369,7 @@ on('GET', '/api/library', async (req, env) => {
     });
   }
   return { lessons, hidden, units: LIBRARY.units, seasonal: LIBRARY.seasonal, labels, total };
-});
+}, KID);
 
 // ---------- cooks (attempts, §1, §8.4) ----------
 
@@ -375,6 +398,8 @@ on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
     `SELECT id FROM profiles WHERE family_id = ? AND id IN (${ids.map(() => '?').join(', ')})`,
   ).bind(s.family_id, ...ids).all();
   if (mine.length !== ids.length) fail(400, 'invalid', 'A profile on this cook is not in your family.');
+  // A kid's device saves cooks the kid is on (§8.3a).
+  if (s.kid && !ids.includes(s.profile_id)) kidRefused();
   const started = isoTime(body.started_at, 'started_at');
   const finished = body.finished_at == null ? null : isoTime(body.finished_at, 'finished_at');
   if (finished && finished < started) fail(400, 'invalid', 'A cook finishes after it starts.');
@@ -384,6 +409,9 @@ on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
   const had = await env.DB.prepare('SELECT family_id, lesson_id, finished_at FROM attempts WHERE id = ?').bind(aid).first();
   // Another family's cook with this id reads as not found, never as theirs.
   if (had && had.family_id !== s.family_id) fail(404, 'not_found', 'No such cook.');
+  if (had && s.kid && !(await env.DB.prepare('SELECT 1 FROM attempt_profiles WHERE attempt_id = ? AND family_id = ? AND profile_id = ?').bind(aid, s.family_id, s.profile_id).first())) {
+    kidRefused();
+  }
   if (had && had.lesson_id !== L.id) fail(409, 'conflict', 'That cook is of another lesson.');
   if (had?.finished_at) return { ok: true, id: aid, finished_at: had.finished_at };
   await env.DB.batch([
@@ -402,13 +430,14 @@ on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
   // on the Sabbath: nothing cooked then counts (§6.18), so the lesson stays up next.
   if (finished && !isSabbath(localDay(finished, tzOf(req)))) await markCooked(env, s.family_id, L.id, ids, aid);
   return { ok: true, id: aid, finished_at: finished };
-});
+}, KID);
 
 // The lessons a profile has finished, with how many times, when first (the
 // date on its stamp, Phase 5), and when last.
 // Cooks on the Sabbath don't count (§6.18).
 on('GET', '/api/profiles/([0-9a-f]{16})/cooks', async (req, env, body, [pid]) => {
   const s = await requireSession(env, req);
+  ownProfile(s, pid);
   if (!(await env.DB.prepare('SELECT 1 FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id).first())) {
     fail(404, 'not_found', 'No such profile.');
   }
@@ -425,7 +454,7 @@ on('GET', '/api/profiles/([0-9a-f]{16})/cooks', async (req, env, body, [pid]) =>
     cooks[r.lesson_id] = { times: (cooks[r.lesson_id]?.times ?? 0) + 1, first: cooks[r.lesson_id]?.first ?? r.finished_at, last: r.finished_at };
   }
   return { cooks };
-});
+}, KID);
 
 // The Reflect stage (§3): each profile on a cook rates it 1 to 5, says what
 // they'd change, and can answer the transfer question; anyone can add how the
@@ -442,6 +471,7 @@ on('PUT', '/api/attempts/([0-9a-f]{16})/reflection', async (req, env, body, [aid
   const s = await requireSession(env, req);
   const cook = await env.DB.prepare('SELECT id FROM attempts WHERE id = ? AND family_id = ?').bind(aid, s.family_id).first() ?? fail(404, 'not_found', 'No such cook.');
   const pid = String(body.profile_id ?? '');
+  ownProfile(s, pid);
   const on = await env.DB.prepare('SELECT 1 FROM attempt_profiles WHERE attempt_id = ? AND family_id = ? AND profile_id = ?').bind(cook.id, s.family_id, pid).first();
   if (!on) fail(400, 'invalid', "That profile isn't on this cook.");
   const stmts = [env.DB.prepare('UPDATE attempt_profiles SET rating = ?, notes = ?, transfer = ?, reflected_at = ? WHERE attempt_id = ? AND family_id = ? AND profile_id = ?')
@@ -451,7 +481,7 @@ on('PUT', '/api/attempts/([0-9a-f]{16})/reflection', async (req, env, body, [aid
   }
   await env.DB.batch(stmts);
   return { ok: true };
-});
+}, KID);
 
 // ---------- Print our progress (§6.15) ----------
 
@@ -503,7 +533,7 @@ const fromJson = (v) => (v == null ? null : JSON.parse(v));
 on('GET', '/api/patches', async (req, env) => {
   const live = await livePatches(env.DB);
   return { lessons: Object.fromEntries(Object.entries(live).map(([id, e]) => [id, { version: e.version, patches: e.patches.map(({ path, value }) => ({ path, value })) }])) };
-});
+}, KID);
 
 // Where a step sits, for people: "step 3".
 const stepWhere = (L, stepId) => {
@@ -574,7 +604,7 @@ on('GET', '/api/lessons/([a-z0-9-]+)/fixes', async (req, env, body, [lid]) => {
       WHERE f.family_id = ? AND f.lesson_id = ? ORDER BY f.created_at DESC LIMIT 20`).bind(s.family_id, lid).all();
   // A fixed one says what it says now: the value the owner applied.
   return { fixes: results.map((r) => ({ ...requestOut(r, L), applied: r.status === 'fixed' ? fromJson(r.applied) : undefined })) };
-});
+}, KID);
 
 // The owner's queue. Requests show no family: the owner sees the lesson, the
 // report, and the suggestion, nothing about who sent it (§6.2a).
@@ -762,6 +792,7 @@ registerShopping(on);
 registerRecipes(on);
 registerSharing(on);
 registerSwap(on);
+registerKidLogins(on);
 
 // ---------- dispatch ----------
 
@@ -771,6 +802,8 @@ export async function handleApi(request, env) {
     if (!env.DB) fail(503, 'not_ready', 'The database is not connected yet.');
     const route = routes.find((r) => r.method === request.method && r.re.test(url.pathname));
     if (!route) fail(404, 'not_found', 'No such API route.');
+    // A kid login is refused everything not on its list (§8.3a).
+    if (!route.kid && readCookie(request, KID_COOKIE) && !readCookie(request, SESSION_COOKIE) && (await readSession(env, request))?.kid) kidRefused();
     let body = {};
     if (request.method !== 'GET') {
       // A JSON body is required, which also keeps other sites' plain forms out.

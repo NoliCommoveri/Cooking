@@ -74,10 +74,11 @@ export async function clearEverything(db) {
 
 // ---------- one family ----------
 
-// Every table with a family_id column holds a family's rows. Sessions and reset
-// links are left out of a family's export: they're removed with the family and
-// not worth putting back (the parents just log in again).
-const NOT_EXPORTED = new Set(['sessions', 'password_resets']);
+// Every table with a family_id column holds a family's rows. Sessions (a
+// parent's or a kid's) and reset links are left out of a family's export:
+// they're removed with the family and not worth putting back (everyone just
+// logs in again).
+const NOT_EXPORTED = new Set(['sessions', 'kid_sessions', 'password_resets']);
 
 async function familyTables(db) {
   const out = [];

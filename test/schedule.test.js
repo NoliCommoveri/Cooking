@@ -99,3 +99,24 @@ test('a swap for an Appointed Time meal takes a place this week: the lesson goes
   assert.equal(later.lessons_behind, 0);
   assert.deepEqual(ids(later.this_week), ['b']);
 });
+
+test('swapping out the first of two lessons keeps the second this week; the swapped one goes first next week', () => {
+  const weeks = { '2026-09-06': { swapped: 1, bumped: ['a'] } };
+  const s = schedule({ course, lessons: L, weeks, today: '2026-09-07' });
+  assert.deepEqual(ids(s.this_week), ['b']);
+  assert.deepEqual(ids(s.next_week), ['a', 'c']);
+  assert.deepEqual(s.ahead[0].lessons, ['d', 'e']);
+});
+
+test('a lesson queued outside the course comes out of its later place, and the rest move up', () => {
+  const s = schedule({ course, lessons: L, taken: new Set(['c']), today: '2026-09-07' });
+  assert.deepEqual(ids(s.this_week), ['a', 'b']);
+  assert.deepEqual(ids(s.next_week), ['d', 'e']);
+  // Replacing b with c: c is taken, b goes first next week, and the lessons
+  // between move down.
+  const weeks = { '2026-09-06': { swapped: 1, bumped: ['b'] } };
+  const r = schedule({ course, lessons: L, taken: new Set(['c']), weeks, today: '2026-09-07' });
+  assert.deepEqual(ids(r.this_week), ['a']);
+  assert.deepEqual(ids(r.next_week), ['b', 'd']);
+  assert.deepEqual(r.ahead[0].lessons, ['e', 'f']);
+});

@@ -26,8 +26,9 @@ test("what you'll need: undated lessons first, then week by week, with a course'
   await a.post('/api/courses', { profile_ids: [ava, eli], start_date: sunday, per_week: 1, plan: await samplePlan(a) });
   await a.post('/api/queue', { lesson_id: 'brown-butter-cookies', profile_ids: [ava], servings: 6 });
   const d = (await a.get('/api/shopping')).body;
-  assert.deepEqual(d.weeks.map((w) => w.week), [null, sunday, addDays(sunday, 7), addDays(sunday, 14), addDays(sunday, 21)]);
-  assert.deepEqual(d.upcoming.map((x) => x.lesson_id), ['brown-butter-cookies', 'shakshuka', 'beef-bulgogi', 'buttermilk-biscuits', 'brown-butter-cookies']);
+  // The cookies are queued by hand, so the course doesn't list them again.
+  assert.deepEqual(d.weeks.map((w) => w.week), [null, sunday, addDays(sunday, 7), addDays(sunday, 14)]);
+  assert.deepEqual(d.upcoming.map((x) => x.lesson_id), ['brown-butter-cookies', 'shakshuka', 'beef-bulgogi', 'buttermilk-biscuits']);
   // A lesson for two siblings is one cook.
   assert.deepEqual(d.weeks[1].lessons[0].profile_ids.sort(), [ava, eli].sort());
   assert.ok(items(d.weeks[1].needs).some((x) => x.id === 'egg'));
@@ -49,7 +50,9 @@ test('a shopping list: preview the next lessons, leave off what is on hand, chec
   assert.deepEqual(l.lessons.map((x) => x.lesson_id), ['shakshuka', 'buttermilk-biscuits']);
   assert.equal(items(l).some((x) => x.id === 'egg'), false);
   assert.deepEqual(l.on_hand.map((x) => x.id), ['egg']);
-  assert.ok(l.may_have.some((x) => x.id === 'olive-oil'), 'staples still need shopping for');
+  // On the list, a staple is in its store aisle, not grouped apart.
+  assert.deepEqual(l.may_have, []);
+  assert.ok(l.sections.find((x) => x.id === 'oils-vinegars').items.some((x) => x.id === 'olive-oil'), 'staples still need shopping for, in their aisle');
 
   await a.post(`/api/shopping/lists/${id}/on-hand`, { ingredient_id: 'egg', on_hand: false });
   await a.post(`/api/shopping/lists/${id}/check`, { ingredient_id: 'egg', checked: true });

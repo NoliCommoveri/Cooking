@@ -2067,3 +2067,239 @@ on it.
   unique app-wide or per family, logins for adult learners too, logging out
   with or without the PIN, and the password minimum.
 - No code changed.
+
+## 82. 2026-10-23 — Course lessons approved early aren't queued twice; a tidier queue and course editor
+
+- **Fix: the ⋯ menu ran off a phone screen.** On a course lesson the "⋯"
+  button wrapped to the left, and its menu ("Swap for an Appointed Time meal
+  instead") was pinned to the button's right edge, so it opened past the left
+  side of the screen. Menus now shift to stay on screen.
+- **Fix: the same dish twice.** A kid's lesson approved early (from the
+  lesson or the Queue screen) that was also later in their course showed in
+  the queue now and again in its course week. A course lesson queued outside
+  the course for its profiles, and not cooked yet, now comes out of its later
+  place (`schedule.js`, `taken`): as an extra, the lessons after it move up;
+  replacing a meal, the replaced one goes first next week and the ones between
+  move down. Taking it off the queue puts it back in its place. This applies to
+  a course lesson a parent queues by hand too.
+- **Fix: a swap bumped the wrong lesson.** With two or more a week, swapping
+  out the first lesson kept it and pushed the last one to next week. A swap now
+  bumps the lesson it replaced (`course_weeks` count plus the swap rows'
+  `swap_of`).
+- An extra meal approved on the spot is planned for today. The approve calls
+  send the family's time zone.
+- **Queue screen, course card:** This week and Next week are separate sections
+  with dividers. Next week and Skipped recipes are folded shut. Each lesson is
+  one line that opens to its tools (safety review, test-cooked, servings, Skip
+  this recipe, Swap for an Appointed Time meal). Cook another recipe and Skip
+  this week moved into a "⋯" menu beside This week. Lessons queued by hand open
+  the same way.
+- **Course editor:** the lessons fold by path ("Path 1: Knife work and
+  assembly · 4 of 10 dishes ticked"), closed until opened; a path stays open
+  while it's being reordered. The rows are lighter: no boxes on unticked
+  dishes, and the skill line is the link to the dish card.
+- Tests: 222 (an early course lesson as an extra and replacing one, its Undo,
+  replacing the first of two, the bumped lesson's order). Checked in a browser at
+  phone width: the menu fix in both themes, the course card, a hand-queued row,
+  and the course editor opened, folded, and reordered.
+- **Still to do (owner asked):** the rest of the parent side gets the same
+  treatment (expanders, menus, and folded sections).
+
+## 83. 2026-10-23 — The queue: Add a lesson in a dialog, and a Course / Additional toggle
+
+- **Owner ruling: adding something new opens in a dialog** over the page,
+  not a form at the bottom of it. A shared `modal()` in `app.js` (Cancel, a tap
+  outside, or Escape closes it).
+- **Queue screen:** **+ Add a lesson** sits at the right of "The queue"
+  heading, above the list, and opens the add form in a dialog.
+- A **Course / Additional** toggle under the heading switches between the
+  course card and the lessons assigned on top of it (added by hand, approved
+  requests, swaps), with a count. The choice is kept for the visit. With no
+  course, only the additional list shows, without the toggle. "Recently taken
+  off" is folded under the additional list.
+- Tests: 222. Checked in a browser at phone width: the toggle both ways, the
+  dialog, and adding a lesson from it.
+
+## 84. 2026-10-23 — Parent screens: add buttons on top, dialogs, folded sections
+
+- **CLAUDE.md:** added the owner's rule, under "Parent screens": adding
+  something new opens in a dialog from a button; a flow too big for a dialog
+  opens as its own page from a button.
+- **Add buttons** sit at the top right of each list (`addHead`): + Add a
+  profile, + Add a parent, + Set up a course, + Add a recipe, + Make a
+  shopping list, beside + Add a lesson on the queue.
+- **In dialogs now:** adding a profile (the form is shared with the edit page,
+  `profileForm`; `#/parent/profiles/new` opens the list with the dialog up),
+  adding a parent, and making a shopping list. Setting up a course and adding
+  a recipe stay pages: the course editor is long and the recipe builder has
+  several steps. A dialog closes when the page changes.
+- **Course editor:** Save and the other buttons are at the top and stay in
+  view while scrolling (`form(..., { top: true })`). A lesson row is tighter:
+  smaller type and line spacing, a smaller number, no box around a dish, and
+  34px move buttons.
+- **Shopping:** every week of "What you'll need" is folded shut, with its
+  lesson count. The page went from about 6,250px tall to about 1,100px at
+  phone width.
+- **Kitchen staples:** each store section folds shut, with "N of M on hand"
+  and Save at the top. The checkboxes are a tight two-column list. About
+  4,700px tall before, about 1,450px now.
+- **Family settings:** Save is at the top; the diet checkboxes are a tight
+  list; the voice control's where-it-works and privacy note is folded.
+- Tests: 222. Checked in a browser at phone width: every parent page, and
+  adding a profile, a parent, and a shopping list from their dialogs.
+
+## 85. 2026-10-23 — Shopping: a Lists / Upcoming ingredients toggle
+
+- **Shopping** has a **Lists / Upcoming ingredients** toggle, like the queue's.
+  The choice is kept for the visit.
+- **Lists:** + Make a shopping list sits above the lists. Open lists show
+  newest first, then Done lists, also newest first.
+- **Upcoming ingredients:** the weeks of "What you'll need", each folded, and
+  the Kitchen staples link. A folded week is a single line, with no empty
+  space under it.
+- Tests: 222. Checked in a browser at phone width with two lists: the order and
+  both views.
+
+## 86. 2026-10-23 — Kitchen staples move into Shopping, added by search
+
+- **Shopping** has three views: **Lists**, **Upcoming** (was "Upcoming
+  ingredients", shortened so three fit on a phone), and **Staples**.
+- **Owner ruling: staples are added only by searching.** The Staples view
+  lists only the family's staples, A to Z, each with Remove (and Undo).
+  **+ Add a staple** opens a dialog with a search box: type part of a name, tap
+  Add, and keep going; Done closes it. Names starting with what's typed come
+  first.
+- The Kitchen staples page and its menu entry are gone. `#/parent/pantry` opens
+  Shopping on the Staples view. The API is unchanged.
+- Tests: 222. Checked in a browser at phone width: the old link, searching and
+  adding two staples, and Remove with Undo.
+
+## 87. 2026-10-23 — Shopping: Upcoming first, and new intro copy
+
+- Shopping's views are now **Upcoming**, **Lists**, **Staples**, and the page
+  opens on Upcoming.
+- The intro line is the owner's copy: "See at a glance what ingredients are
+  needed for future queued lessons. You can also generate a shopping list.
+  First select everything you have on-hand already; anything checkmarked will
+  be left off the list."
+- Tests: 222. Checked in a browser at phone width.
+
+## 88. 2026-10-23 — Kitchen staples come first on every list
+
+- **Owner ruling:** kitchen staples go at the top of every list, not the
+  bottom. The "May already have" group now comes before the store sections on
+  a shopping list, on "Before you make the list", and in each week of
+  Upcoming. Any ingredient added on Staples goes in that group, whatever store
+  section it's normally in (garlic, say, leaves Produce). The server already
+  grouped them that way, so only the order on screen changed.
+- The plan (§6.3, item 5) now says "grouped first", and the staples notes on
+  Shopping say so too.
+  The demo page's shopping preview puts them first too.
+- Tests: 222. Checked in a browser at phone width: a list and its preview with
+  salt, olive oil, and garlic as staples.
+
+## 89. 2026-10-23 — On the shopping list, staples are in their aisles
+
+- **Owner ruling, correcting 88:** "May already have" is for a parent in the
+  kitchen checking cupboards, so it stays first in Upcoming and on "Before
+  you make the list". The finished shopping list is for the store, so each
+  staple goes in its own aisle there, like everything else; the list has no
+  "May already have" group. (Section 88 had put that group first on the list
+  too.)
+- `listOut` in `shopping.js` builds the list without staples; the demo page's
+  list does the same. The notes on Upcoming and Staples say so.
+- The plan (§6.3, item 5) says this now.
+- Tests: 222 (the list test now finds olive oil, a staple, under Oils and
+  vinegars). Checked in a browser at phone width: garlic and salt as staples,
+  grouped first on the preview and in their aisles on the list.
+
+## 90. 2026-10-23 — Plan: kid logins settled (name, picture, password)
+
+- **Owner answers to the four questions in §8.3a:**
+  - No usernames to make up. A kid logs in with their **first name and last
+    initial** ("Ava C"), the way a big homeschool curriculum provider does it,
+    plus **a cooking picture** picked from 30 (each with an id) and a
+    password. The name and picture together are unique across the app; a
+    picture another "Ava C" has shows as taken when the parent sets it up.
+  - Kid profiles only; adult learners keep the lockers.
+  - Logging out on a kid's device needs no PIN.
+  - Passwords are at least 6 characters.
+- **Changed in the plan:** §8.3a rewritten around the name and picture, with
+  the 30 picture ids, a Grown-up / Kid choice on the Log in screen, the
+  set-up dialog on the profile editor, and ten **build steps** for Phase 5b
+  (data, pictures, kid sessions, the allowed-route list, the APIs, the
+  PIN-approved start, the app's three parts, and the checks). §6.1, §6.2,
+  §6.13, §8.3, §8.4 (`kid_logins` now has `login_name`, `login_key`, and
+  `picture`), and the phase table follow.
+- No code changed.
+
+## 91. 2026-10-23 — Phase 5b: kid logins
+
+Built to §8.3a as settled in 90.
+
+- **Owner step:** after this deploys, press **Apply pending** on `/ops` for
+  migration 0013 (`kid_logins`, `kid_sessions`). Nothing to set up in the
+  Cloudflare dashboard. Apply it right after the deploy: until then the
+  profile editor's Kid login part says to apply it, and deleting a profile or
+  changing one to adult fails.
+- **The 30 login pictures:** `src/content/login-pictures.js` (ids and names,
+  copied to `public/lib/` for the app), drawn as `lp-<id>` symbols in
+  `public/icons.svg` in the ingredient icons' style. Egg and pepper reuse those
+  icons; the rest are new. In the app they sit on light tiles, so they read in
+  the dark theme too.
+- **Server:** kid sessions in `auth.js` (cookie `cpr_kid`, hashed in
+  `kid_sessions`; logging in as one kind ends the other on that device).
+  `kidlogin.js` has the kid's log in and the parent's controls: which pictures
+  are taken for a name, set up, change name or picture, change password, log
+  out everywhere, turn off. A route is open to a kid session only if it's
+  registered with `{ kid: true }`; dispatch refuses every other route with
+  "Ask a grown-up." before its handler runs, and the kid routes check the
+  profile is the kid's own (`ownProfile`). `/api/profiles` gives a kid's device
+  only names and avatars for the others. A cook a kid's device isn't on is
+  refused (403), and the app keeps it on the device for a session that can send
+  it. Changing a profile to adult or deleting it removes its login.
+  `kid_sessions` is never in a family's export.
+- **Grown-up step on a kid's device:** Ask a grown-up to start takes the PIN
+  and sends it with that one approval; it never unlocks the PIN on the device.
+- **App:** Log in has a **Grown-up / Kid** choice (remembered on the device);
+  Kid is name, a picture grid, and password. A kid's device opens straight to
+  that kitchen, and every other address goes back to it. No lockers link, no
+  Suggest a fix, and a Log out (no PIN) beside the theme and sound buttons. A
+  logged-out kid's device opens on the kid's Log in. The profile editor has a
+  **Kid login** part for kid profiles: **+ Give Ava a login** opens a dialog
+  (first name from the profile, last initial from the family name, the
+  pictures with taken ones dimmed, the password twice with Show), then it shows
+  "Ava C" and the picture, how many devices, Change name or picture, Change
+  password, and a "⋯" with Log out everywhere and Turn off login.
+- Plan: Phase 5b marked built.
+- Tests: 232 (10 new: the pictures and name matching, set up and log in,
+  uniqueness across families, adult profiles and the PIN, every allowed and
+  refused route with the kid's own profile and a sibling's, cooks and
+  reflections, the PIN-approved start, switching kinds on one device, each thing
+  that ends a kid's sessions, and the export). Checked in a browser at phone
+  width on two devices: the parent sets up a login; the kid logs in (dark
+  theme), lands in the kitchen, is sent back from the parent screens, the
+  lockers, and a sibling's kitchen, and starts an off-path lesson with the PIN;
+  the parent changes the password and the kid's device is logged out.
+
+## 92. 2026-10-23 — Kid logins last 14 days; "adult," not "grown-up"; ages 10 and up
+
+- **Owner ruling: a kid login lasts 14 days and renews each time the app is
+  opened.** The kid cookie's life is 14 days (was 400, like a parent's).
+  Opening the app asks `/api/me`, which for a kid session starts the 14 days
+  again: the session's `last_seen` and the cookie (`renewKidSession` in
+  `auth.js`). A kid session unused for more than 14 days is deleted the next
+  time it's read, and the device shows the kid's Log in. Parent logins are
+  unchanged.
+- **Owner ruling: say "adult," not "grown-up."** Every kid-facing line: Ask an
+  adult to start, You asked an adult, "Ask an adult." when a kid's login is
+  refused, the login's wrong-details and forgot lines, the safety notes in the
+  player ("An adult stays in the kitchen for this step"), and the Log in
+  screen's **Adult / Kid** choice. The plan says so in §5.1.
+- **Owner ruling: the target age is 10 and up** (it was 11–12). The plan's §5.1
+  and the syllabus description (§6.16 and `/syllabus`) say so.
+- Tests: 233 (one new: the 14 days, a launch on day 13 renewing it, and a
+  session unused for 15 days logged out). Checked in a browser at phone width:
+  the Adult / Kid choice and Ask an adult to start, with the two-device run
+  from 91 passing again.
+
