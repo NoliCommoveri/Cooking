@@ -65,9 +65,9 @@ function chatPanel(ctx, { required, onClose }) {
 
   const chat = {
     close,
-    // Step aside so the screen behind shows, then come back. Her button, or 4
+    // Step aside so the screen behind shows, then come back. Her button, or 8
     // seconds, brings her back (owner, 2026-10-23).
-    async peek(hash, ms = 4000) {
+    async peek(hash, ms = 8000) {
       await talking;
       return new Promise((resolve) => {
         ov.hidden = true;
@@ -519,7 +519,7 @@ async function showMeAround(ctx, chat) {
     // Another look is longer, so they can click around (owner, 2026-10-23).
     let pick = await chat.choose(choices);
     while (pick === 'again') {
-      await chat.peek(t.hash, 10000);
+      await chat.peek(t.hash, 15000);
       chat.say(next ? 'Ready to see the next screen?' : 'Ready to finish the tour?');
       pick = await chat.choose(choices);
     }

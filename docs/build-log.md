@@ -2597,3 +2597,12 @@ the next was started.
   a finished cook, Didn't make it, and another family). Checked in a browser
   at phone width on a stubbed app: the buttons are inside the chat log,
   under her line, and her menu shows Getting started only when not cooking.
+
+## 106. 2026-10-23 — Longer looks on the Show me around tour
+
+- **Owner ruling: Chef Ruth steps aside longer.** On each tour stop she now
+  steps aside for 8 seconds (was 4), and **Let me see it again** steps aside
+  for 15 seconds (was 10). Her button still brings her back sooner. Built in
+  `public/ruth.js` (`chat.peek` default and `showMeAround`). Plan §6.8 says
+  so.
+- Tests: 244, unchanged.
