@@ -1395,7 +1395,7 @@ const shopping = parentOnly(async (flash) => {
   ];
   const upcoming = [
     weeks.length ? weeks : el('p', { class: 'mut' }, 'Nothing is coming up yet.'),
-    el('p', { class: 'mut small' }, `Your kitchen staples come first on every list, under "${MAY_HAVE}", so you can check the cupboard first.`),
+    el('p', { class: 'mut small' }, `Your kitchen staples come first, under "${MAY_HAVE}", so you can check the cupboard. On a shopping list they're in their aisles.`),
   ];
 
   // Kitchen staples: the ones the family keeps, each with Remove; more are
@@ -1431,7 +1431,7 @@ const shopping = parentOnly(async (flash) => {
   };
   const staples = [
     addHead(null, 'Add a staple', addStaples),
-    el('p', { class: 'mut small', style: 'margin:0' }, `Things your kitchen usually has. Any you add here go first on every list, under "${MAY_HAVE}", so you can check the cupboard first.`),
+    el('p', { class: 'mut small', style: 'margin:0' }, `Things your kitchen usually has. In Upcoming and before you make a list, they come first under "${MAY_HAVE}" so you can check the cupboard. On the list itself they're in their aisles.`),
     have.size ? el('div', { class: 'card' }, el('div', { class: 'rows' }, [...have].map((x) => byId[x]).sort((a, b) => a.name.localeCompare(b.name)).map((i) => el('div', { class: 'rowi' },
       el('div', {}, el('b', {}, i.name), el('small', {}, i.section)),
       actBtn('Remove', '', async () => {

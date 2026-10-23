@@ -451,7 +451,7 @@ Do **not** use:
 2. Scale each line to that lesson's serving count (§6.6).
 3. Convert each line to the ingredient's **base unit** using the registry's conversions (e.g. grams per cup of flour).
 4. **Merge by canonical ingredient ID.** This is the main reason the ingredient registry exists.
-5. **Kitchen staples** (salt, oil, and others the family adds by searching, on Shopping → Staples) stay on the list, grouped first under **"May already have"** so the parent can check the cupboard first (owner, 2026-10-22: staples get shopped for too; 2026-10-23: first, not last).
+5. **Kitchen staples** (salt, oil, and others the family adds by searching, on Shopping → Staples) are grouped first under **"May already have"** in What you'll need and the list preview, so the parent can check the cupboard first. On the finished list they're in their store aisles like everything else (owner, 2026-10-22: staples get shopped for too; 2026-10-23: grouped first, and in their aisles on the list).
 6. Round up to **purchase units** (e.g. 28-oz can, dozen eggs, bunch, head), with the amount the recipes use shown alongside. Package sizes are typical US store sizes, set in `content/ingredients.json` (`purchaseUnit`), for the owner to check.
 7. Group by **store section** (produce, herbs, meat & fish, dairy & eggs, bread & tortillas, grains & pasta, canned & jarred, sauces, oils & vinegars, baking, spices, specialty, frozen).
 8. Lines with no amount ("warm, for scooping," "oil for the pan") appear once, with no quantity.

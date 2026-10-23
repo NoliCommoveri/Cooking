@@ -42,9 +42,9 @@ function buyText(ing, base) {
 
 // lessons: [{ lesson, servings }].
 // registry: ingredients by id. filters: the family's diet filters.
-// staples: the family's kitchen staples. They're still on the list, grouped
-//   as "May already have", shown first on every list (owner, 2026-10-23):
-//   staples get shopped for too.
+// staples: the family's kitchen staples, grouped first as "May already have"
+//   for checking the cupboard (owner, 2026-10-23). A finished list passes none,
+//   so each is in its store aisle: staples get shopped for too.
 // skip: ingredient ids to leave out (what the parent said they have on hand).
 // Returns { sections: [{ id, name, items }], may_have: [items] }.
 // An item: { id, name, buy, used, from: [titles], optional, amountless }.

@@ -50,7 +50,9 @@ test('a shopping list: preview the next lessons, leave off what is on hand, chec
   assert.deepEqual(l.lessons.map((x) => x.lesson_id), ['shakshuka', 'buttermilk-biscuits']);
   assert.equal(items(l).some((x) => x.id === 'egg'), false);
   assert.deepEqual(l.on_hand.map((x) => x.id), ['egg']);
-  assert.ok(l.may_have.some((x) => x.id === 'olive-oil'), 'staples still need shopping for');
+  // On the list, a staple is in its store aisle, not grouped apart.
+  assert.deepEqual(l.may_have, []);
+  assert.ok(l.sections.find((x) => x.id === 'oils-vinegars').items.some((x) => x.id === 'olive-oil'), 'staples still need shopping for, in their aisle');
 
   await a.post(`/api/shopping/lists/${id}/on-hand`, { ingredient_id: 'egg', on_hand: false });
   await a.post(`/api/shopping/lists/${id}/check`, { ingredient_id: 'egg', checked: true });

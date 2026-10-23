@@ -2198,3 +2198,18 @@ on it.
 - Tests: 222. Checked in a browser at phone width: a list and its preview with
   salt, olive oil, and garlic as staples.
 
+## 89. 2026-10-23 — On the shopping list, staples are in their aisles
+
+- **Owner ruling, correcting 88:** "May already have" is for a parent in the
+  kitchen checking cupboards, so it stays first in Upcoming and on "Before
+  you make the list". The finished shopping list is for the store, so each
+  staple goes in its own aisle there, like everything else; the list has no
+  "May already have" group. (Section 88 had put that group first on the list
+  too.)
+- `listOut` in `shopping.js` builds the list without staples; the demo page's
+  list does the same. The notes on Upcoming and Staples say so.
+- The plan (§6.3, item 5) says this now.
+- Tests: 222 (the list test now finds olive oil, a staple, under Oils and
+  vinegars). Checked in a browser at phone width: garlic and salt as staples,
+  grouped first on the preview and in their aisles on the list.
+
