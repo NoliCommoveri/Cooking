@@ -64,7 +64,8 @@ test('the page is served at /manage/, whatever the address under it', async () =
   await c.get('/manage/');
   await c.get('/manage/lessons/shakshuka');
   await c.get('/manage/manage.js');
-  assert.deepEqual(seen, ['/manage/index.html', '/manage/index.html', '/manage/manage.js']);
+  // The folder, never /manage/index.html, which Cloudflare redirects back to /manage/.
+  assert.deepEqual(seen, ['/manage/', '/manage/', '/manage/manage.js']);
 });
 
 test('without GitHub the content shows from the Worker\'s copy, and nothing saves', async () => {

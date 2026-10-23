@@ -306,7 +306,9 @@ export async function handleManage(request, env) {
   if (!url.pathname.startsWith('/manage/api/')) {
     if (url.pathname === '/manage') return Response.redirect(new URL('/manage/', url), 302);
     if (/\.[a-z0-9]+$/.test(url.pathname)) return env.ASSETS.fetch(request);
-    return env.ASSETS.fetch(new Request(new URL('/manage/index.html', url), request));
+    // The folder, not /manage/index.html: Cloudflare's assets answer that with
+    // a redirect back to /manage/, which would come here again, in a loop.
+    return env.ASSETS.fetch(new Request(new URL('/manage/', url), request));
   }
   try {
     if (!env.DB) fail(503, 'not_ready', 'The database is not connected yet.');

@@ -2838,3 +2838,19 @@ migrations were squashed into one.
   **Apply pending**, then sign up again and make yourself the owner. A
   download made before this reset is at schema version 0017 and can't be
   restored into the new schema.
+
+## 116. 2026-10-23 — Fix: /manage stuck in a redirect loop
+
+- **Fix: `/manage` didn't open.** For any page under `/manage/` the Worker
+  asked Cloudflare's assets for `/manage/index.html`, and Cloudflare answers
+  that with a redirect back to `/manage/`, which reached the Worker again, so
+  the browser gave up after too many redirects. It now asks for the folder,
+  `/manage/`, which Cloudflare serves. Built in `handleManage` in
+  `src/worker/manage.js`.
+- `tools/dev-server.js` now redirects a `…/index.html` request to its folder
+  the way Cloudflare does, so a loop like this shows up when the app is
+  checked in a session. Checked there: the old code redirected without end,
+  and the fixed code opens the manager's sign-in after the one redirect from
+  `/manage` to `/manage/`.
+- Tests: 259, unchanged in number (the test that pages are served at
+  `/manage/` now expects the folder).
