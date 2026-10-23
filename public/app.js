@@ -10,6 +10,7 @@ import { LOGIN_PICTURES } from './lib/login-pictures.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 import { progressView, celebrate } from './rewards.js';
 import { isMuted, setMuted } from './sound.js';
+import { gettingStarted, openRuth, ruthButton } from './ruth.js';
 
 const app = document.getElementById('app');
 
@@ -331,7 +332,27 @@ async function lockers() {
     el('h1', {}, "Who's cooking?"), grid);
 }
 
-// Shown once to each parent until the first-run wizard carries it (§6.9).
+// ---------- Chef Ruth (§6.8) ----------
+
+// What Chef Ruth needs from the app to build her chat and save answers.
+const ruthCtx = () => ({
+  el, api, field, go, refresh, me: () => me, familyInitial, pictureGrid, passwordFields, DIET, LOGIN_PICTURES, weekOf, localToday, fmtDay, tz,
+});
+
+// A new family's first run (§6.9): the empty lockers with Chef Ruth over them.
+// Her chat opens on its own and can't be closed until Getting started is done.
+let setupRunning = false;
+function setupScreen() {
+  screen(topbar(me.family.pin_set ? me.family.name : null),
+    el('h1', {}, "Who's cooking?"),
+    el('div', { class: 'lockers' }, el('div', { class: 'locker empty', 'aria-hidden': 'true' }, el('small', {}, 'Your chefs go here'))),
+    ruthButton(ruthCtx(), () => document.querySelector('.ruth-panel button, .ruth-panel input')?.focus()));
+  if (setupRunning) return;
+  setupRunning = true;
+  gettingStarted(ruthCtx()).catch((err) => showToast(err.message)).finally(() => { setupRunning = false; });
+}
+
+// Shown once to a parent from before Getting started told them (§6.9).
 function testCookNotice() {
   const box = el('aside', { class: 'card notice', role: 'note' },
     el('h2', {}, 'Before your kids cook'),
@@ -770,7 +791,8 @@ function parentScreen(current, ...kids) {
   const group = PARENT_GROUPS.find(([g]) => g === page?.group)?.[1];
   screen(head, drawer,
     group ? el('p', { class: 'eyebrow' }, group) : null,
-    el('h1', {}, page?.label ?? 'Parents'), sabbathBanner(), ...kids);
+    el('h1', {}, page?.label ?? 'Parents'), sabbathBanner(), ...kids,
+    ruthButton(ruthCtx(), () => openRuth(ruthCtx())));
 }
 
 const parentProfiles = parentOnly(async (adding = false) => {
@@ -890,10 +912,13 @@ async function kidLoginBox(profile) {
   return box;
 }
 
+// A kid's last initial, guessed from the family name: "The Carsons" is C.
+const familyInitial = () => (me.family.name.trim().replace(/^the\s+/i, '')[0] ?? '').toUpperCase();
+
 // Set up a login, or change its name or picture. The pictures another login
 // with the same name has show as taken.
 function loginDialog(profile, login, done) {
-  const famInitial = (me.family.name.trim()[0] ?? '').toUpperCase();
+  const famInitial = familyInitial();
   const first = el('input', { name: 'first', value: login?.first ?? profile.people[0]?.name ?? profile.name, maxlength: 20, autocomplete: 'off', required: true });
   const initial = el('input', { name: 'initial', value: login?.initial ?? famInitial, maxlength: 1, autocomplete: 'off', required: true, class: 'initial' });
   const grid = el('div');
@@ -2221,6 +2246,9 @@ async function route() {
       if (top === 'kitchen' && sub === own) return await kitchen(own);
       return go(`#/kitchen/${own}`);
     }
+    // Chef Ruth's Getting started comes first, and can't be skipped (§6.9).
+    if (me.family.setup_needed) return setupScreen();
+    // Before /ops applies migration 0014, the old first run still sets the PIN.
     if (!me.family.pin_set) return firstRun();
     if (top === 'kitchen' && sub && extra?.startsWith('@')) return await kitchen(sub, extra.slice(1));
     if (top === 'kitchen' && sub && extra) return await lesson(sub, decodeURIComponent(extra));

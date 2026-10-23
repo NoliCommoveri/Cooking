@@ -2303,3 +2303,199 @@ Built to §8.3a as settled in 90.
   the Adult / Kid choice and Ask an adult to start, with the two-device run
   from 91 passing again.
 
+
+## 93. 2026-10-23 — Unit 1 finished: lessons 2a through 5
+
+Content fill (Phase 7) goes on with the rest of Unit 1, at the owner's
+request: one commit per lesson, each checked in the lesson preview before
+the next was started.
+- **2a Fattoush** (`fattoush`): parsley and mint chopped fine by rocking the
+  knife with the tip on the board; pita squares toasted at 400°F; a whisked
+  lemon-sumac dressing; the pita goes in last. Swaps: lemon zest for sumac
+  (availability), corn tortillas for pita (gluten). 40 minutes.
+- **2b Chimichurri steak** (`chimichurri-steak`): parsley and garlic chopped
+  fine; the sauce sits while a patted-dry sirloin is seared to 145°F, rested,
+  and sliced across the grain. Callback to 1b's sear. 45 minutes.
+- **2c Tuna salad sandwiches** (`tuna-salad-sandwiches`): celery and pickles
+  cut into sticks, then across into tiny bits; tuna pressed dry. No-cook.
+  Swaps: gluten-free bread (gluten), Greek yogurt for mayonnaise (egg).
+  25 minutes.
+- **3a Pico de gallo + Baja fish tacos** (`fish-tacos`): dicing as planks,
+  sticks, cubes; tomatoes seeded so the pico isn't watery; an onion cut toward
+  its root. Spiced cod broiled to 145°F without flipping. Swap: tilapia or
+  another white fish. 50 minutes.
+- **3b Ratatouille** (`ratatouille`): five vegetables diced, round ones halved
+  flat side down first; the eggplant browned alone, then everything simmered
+  lid on, then lid off to thicken. 70 minutes.
+- **3c Minestrone** (`minestrone`): onion, carrots, celery, and zucchini
+  diced, carrots smaller; a soffritto, then tomatoes, broth, and cannellini,
+  with small pasta near the end. Swap: gluten-free pasta. 60 minutes.
+- **4 Chicken Caesar** (`chicken-caesar`): bread cubed and baked into
+  croutons; chicken browned, then cooked with the lid on to 165°F; the dressing
+  is on a store mayonnaise base (pasteurized eggs, per §3), with the oil
+  whisked in slowly. Worcestershire is optional, so a fish-free family keeps
+  the lesson. Callback to 3a. Swaps: gluten-free bread, Greek yogurt for
+  mayonnaise. 50 minutes.
+- **5 Smash burgers + quick pickles** (`smash-burgers`): cucumbers sliced thin
+  into a warm brine; onion sliced paper thin; loose balls of beef smashed
+  through parchment and seared to 160°F, 3 at a time, with a wash step after
+  each batch of raw beef. Cheese is optional. Callback to 1b. Swap:
+  gluten-free buns. 60 minutes.
+- **All eight are written for 6 servings** (§2.2). 1a–1c are written for 4
+  and weren't changed.
+- **Callbacks name one lesson.** When a skill comes from a pick-one group, the
+  callback points at the group's first dish (1b, 3a) and is worded so it reads
+  right whichever one the family cooked.
+- **Registries:** 37 new ingredients (romaine, tomatoes, radishes, lemons,
+  sumac, sirloin, ground beef, cod, tilapia, canned tuna, mayonnaise, Greek
+  yogurt, Worcestershire, parmesan, broth, beans, pasta, breads, and more),
+  each with its store section and package. Every animal product is from a
+  clean species. Gluten-free bread and buns are tagged egg, since many
+  contain it. 4 new tools: aluminum foil, spoon, ladle, and a large heavy pot.
+- **Course outline:** the eight dishes carry their real times instead of
+  estimates.
+- Not test-cooked. No intro slides yet (warned, as for the others).
+- Tests: 233 (no new ones; the linter checks every new lesson).
+
+## 94. 2026-10-23 — The lesson preview doesn't say a thermometer step locks
+
+- **Owner ruling, restated:** a thermometer check never locks a step. The
+  lesson preview said "Must reach 145°F on the thermometer before Next
+  unlocks" under every doneness step, which wasn't true: §3 says the app
+  doesn't require a reading, and the player shows only the target. The
+  preview now says "Thermometer: at least 145°F", the same as the player.
+  The lesson files were already right; only `tools/preview-template.html`
+  and the rebuilt preview changed.
+- Tests: 233.
+
+## 95. 2026-10-23 — Plan: Chef Ruth, the helper, and the first run as her task
+
+- **Owner rulings:**
+  - The helper is **Chef Ruth**, with the owner's picture
+    (`content/images/brand/chef-ruth.png`; a 256 px web copy at
+    `public/img/chef-ruth.webp`, the white around the badge made clear).
+  - **Her most useful job is collecting information** the app keeps on
+    several pages, in one chat.
+  - **The first-run wizard is one of her tasks** (Getting started), not its
+    own flow.
+  - **Parent screens first;** Chef Ruth in the kitchen can wait.
+- **§6.8 rewritten** from KennelOS's Kels (End-State guide §33, the Kels
+  roadmap). Recommendations, to confirm before building: scripted, not AI;
+  saves through the pages' own API calls and shared rules; a floating **Ask
+  Chef Ruth** button on every parent screen; Doing something first, then
+  Finding and Understanding something; one thing at a time, saved as
+  answered, with a draft and a review for tasks that make something new; her
+  voice and opening lines. Her first tasks: Getting started, Add people to our
+  family, Set up our learning path, Plan this week, and Our diet and kitchen,
+  each listed with the pages it saves to.
+- **§6.9 is now Getting started.** Recommendation: the family name and PIN
+  screen stays first and required, then a one-time Meet Chef Ruth card; the
+  parent tour can become her Understanding something. The profile intro stays
+  with the kitchen, for later.
+- **§9 Phase 8** is Chef Ruth on the parent screens. §5.4's helper rows and
+  §6.10 name her.
+- Nothing built yet. Tests: 233.
+
+## 96. 2026-10-23 — Plan: Chef Ruth's first lines
+
+- **Owner's wording** for Chef Ruth's first message ("Hi, I'm Ruth, your Clean
+  Plate guru! …") and for Getting started's opening to a new family ("Since
+  you're a new user, I'm going to get you all set up! …"), in §6.8 and §6.9.
+- A new family's first visit to her goes straight from her first message into
+  Getting started, which ends with the first recipes in each kid's queue.
+
+## 97. 2026-10-23 — Plan: Getting started opens on its own and can't be skipped
+
+- **Owner rulings** (§6.8, §6.9):
+  - A new family goes **straight into Chef Ruth's chat** after sign-up. She
+    floats on the empty locker screen, and **the family name and parent PIN
+    are her first questions**, replacing the "Your family" screen.
+  - **Getting started can't be skipped:** no Never mind, no Maybe later card.
+    Answers are kept if the app closes, and she picks up where she stopped.
+    The lockers and parent screens open once it's done.
+  - Her button says **Chef Ruth**.
+- Still to confirm: optional settings answered with **None for now**; her
+  other first tasks and their order; the parent tour as her Understanding
+  something.
+
+## 98. 2026-10-23 — Plan: what Getting started asks
+
+- **Owner rulings** (§6.9): Getting started asks only what's required, in
+  this order: family name and PIN, default servings, allergies and diet, the
+  profiles (kid or adult, one person or shared), a login for each kid if the
+  parent wants one (set up right there), casual or homeschool, then an offer
+  to set up a course: who it's for, an optional name, the start date, and
+  lessons per week, with a line that the course can be edited to reorder or
+  drop lessons. Kitchen staples, another parent's login, and other optional
+  settings are left out.
+- **Owner ruling, for all her tasks** (§6.8): before each question, Chef Ruth
+  says in one short line what it's for (a profile can be shared by several
+  kids; each kid can have their own even if they cook together); after the
+  answer, she says where to change it later.
+- Recommendations added, to confirm: in casual mode a yes to the course turns
+  on Plan our weeks; the test-cook warning becomes one of her lines.
+
+## 99. 2026-10-23 — Plan: a first lesson when there's no course
+
+- **Owner ruling** (§6.9, step 8): a family that doesn't set up a course is
+  offered a first lesson by hand. Chef Ruth asks Chicken, Beef, Fish, or
+  Vegetarian, then offers the first matching lesson in course order with its
+  number, name, and description. A no gets the next match; a second no gets
+  "no problem" and where to add lessons themselves.
+- Recommendations, to confirm: only written lessons the diet filters allow;
+  "matching" is by the main protein in the required ingredients (vegetarian:
+  no meat or fish); the lesson goes to every learner.
+
+## 100. 2026-10-23 — Chef Ruth's Getting started
+
+- **Owner rulings:** a yes to a course in casual mode turns on Plan our weeks;
+  the vegetarian first lesson is fattoush, not shoestring fries (sides aren't
+  offered); her last lines are "Great, you're ready to get cooking!" and the
+  beta reminder, in the owner's words, in place of the test-cook notice.
+- **Built** (`public/ruth.js`, `src/worker/setup.js`,
+  `src/content/getting-started.js`): a new family lands on the empty lockers
+  with Chef Ruth's chat open over them. It has no close button. She asks, each
+  with a line on what it's for and, after, where to change it: family name and
+  PIN, default servings, allergies and diet, learners (a roster, shared or
+  not, kid or adult), a login for each kid if wanted, casual or homeschool,
+  then a course (who, an optional name, the start date, lessons per week) or,
+  without one, a first lesson by chicken, beef, fish, or vegetarian (two
+  offers, then where to add one). Every answer saves through the pages' own
+  routes. If the app closes, she picks up at the next part; a PIN that ran out
+  is asked for in the chat, with Forgot PIN.
+- **Her button** ("Chef Ruth", her picture) floats on the setup screen and on
+  every parent screen. From a parent screen it opens her chat with **Getting
+  started (change your setup)**, which walks through it again with the
+  current answers filled in (the PIN stays on Logins & PIN).
+- **Migration 0014** (`families.setup_step`, `families.setup_done_at`). A
+  family that set its PIN before it is marked set up. Until the owner applies
+  it on `/ops`, sign-up keeps the old family-name-and-PIN screen.
+- **First lessons:** each lesson's main protein is worked out at build time
+  (`mainProtein`), and `content/course.json` marks the 16 sides, breads, and
+  desserts `"meal": false` (the linter checks the flag). `GET
+  /api/setup/starters?kind=` lists the matches the family's diet filters allow.
+- A kid's last initial is guessed from the family name without a leading
+  "The" ("The Carsons" is C), on the login dialog too.
+- Tests: 241 (8 new: the parts' order, the protein rule, today's first offers,
+  the routes and their PIN check, the diet filters, and a family from before
+  0014). Checked in a browser at phone and desktop width: a casual family with
+  a shared profile, a kid login, and fattoush declined for ratatouille; and a
+  homeschool family with a course, closed partway with the PIN locked.
+
+## 101. 2026-10-23 — Chef Ruth's Show me around
+
+- **Owner ruling:** a second flow, apart from Getting started, that shows
+  every parent screen and explains how to use it, starting with the Queue.
+  She steps aside for 4 seconds on each screen, then pops back.
+- **Built** (`public/ruth.js`): **Show me around** in her menu. For each
+  screen, in the Menu's order (Queue, Shopping, Progress, Our recipes,
+  User-shared recipes, Courses, Profiles, Family settings, Logins & PIN, then
+  the owner's four for the owner): a line on what it's for, the screen with
+  her chat tucked away (her button brings her back early), then how to use
+  it, with Next, Show me again, and Stop the tour. Her explanations use the
+  screens' real button names.
+- It's the parent tour §6.9 asked for; §6.8 and §6.9 say so.
+- Tests: 242 (one new: the tour covers every parent screen in `PARENT_PAGES`,
+  starts with the Queue, and keeps the owner's screens for the owner).
+  Checked in a browser at phone width: the Queue stop, Shopping with her
+  button tapped early, and Stop the tour.

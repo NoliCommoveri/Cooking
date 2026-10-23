@@ -22,6 +22,7 @@ import { register as registerRecipes, lessonFor, recipeNames } from './recipes.j
 import { register as registerSharing } from './sharing.js';
 import { register as registerSwap } from './swap.js';
 import { register as registerKidLogins } from './kidlogin.js';
+import { register as registerSetup } from './setup.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -76,6 +77,10 @@ const profileOut = (r) => ({
 const familyOut = (f) => ({
   name: f.name, default_servings: f.default_servings, diet_filters: JSON.parse(f.diet_filters), pin_set: Boolean(f.parent_pin_hash),
   voice_enabled: Boolean(f.voice_enabled), mode: f.mode, plan_weeks: Boolean(f.plan_weeks), photos_enabled: Boolean(f.photos_enabled),
+  // Chef Ruth's Getting started (§6.9): still to finish, and the last part done.
+  // Until /ops applies migration 0014 the columns aren't there, and the old
+  // first run (family name and PIN) still works.
+  setup_needed: f.setup_done_at === null, setup_step: f.setup_step ?? null,
 });
 
 // ---------- routes ----------
@@ -793,6 +798,7 @@ registerRecipes(on);
 registerSharing(on);
 registerSwap(on);
 registerKidLogins(on);
+registerSetup(on);
 
 // ---------- dispatch ----------
 

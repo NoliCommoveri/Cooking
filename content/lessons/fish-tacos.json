@@ -1,0 +1,76 @@
+{
+  "id": "fish-tacos",
+  "version": 1,
+  "track": "core",
+  "unit": 1,
+  "title": "Pico de gallo + Baja fish tacos",
+  "image": "dishes/fish-tacos.png",
+  "cuisine": "mexican",
+  "skill": "Dicing; broiling fish",
+  "skills": ["dicing", "broiling"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 50,
+  "scaling": {
+    "mode": "free",
+    "notes": [{ "from": 9, "text": "For more than 8, broil the fish on two sheet pans, one at a time, so each sits right under the heat." }]
+  },
+  "learn": {
+    "move": { "title": "Strips, then cubes", "body": "Dicing means cutting food into small cubes that are all about the same size. Today you'll dice tomato and onion for pico de gallo, a fresh chunky salsa, then broil seasoned fish under the oven's top heat and fold it all into warm tortillas." },
+    "why": [
+      { "id": "grid", "title": "Planks, sticks, cubes", "body": "Every dice works the same way. Cut flat planks, cut the planks into sticks, then cut across the sticks. Each cut across a row of sticks makes a whole row of cubes, and if the planks and sticks were even, the cubes are too." },
+      { "id": "root", "title": "The root holds the onion together", "body": "An onion is made of layers held together at the root end. Leave the root on while you cut strips toward it, and the strips stay joined, so the onion doesn't fall apart under your knife. Cut across the strips, and little cubes fall away." },
+      { "id": "seeds", "title": "Scoop out the wet middle", "body": "The seeds in a tomato sit in watery jelly. Leave them in and the salt pulls that water out, so the pico turns into soup. Scoop them out first, and the pico stays chunky." },
+      { "id": "broil", "title": "Broiling is upside-down grilling", "body": "The broiler is the heating element at the top of the oven. It blasts strong heat straight down, so the top of the food browns fast while the inside cooks. Thin fish cooks through without flipping. Because it's so strong, food under the broiler can go from golden to burnt quickly, so you stay and watch." }
+    ],
+    "wrong": [
+      { "sign": "The pico is watery", "fix": "Tip the bowl and pour off the liquid, or lift the pico out with a slotted spoon. Next time, scoop out the tomato seeds." },
+      { "sign": "The onion falls apart while you cut it", "fix": "The root got cut off. Hold the layers together with your claw hand and cut slowly, or chop the loose pieces smaller." },
+      { "sign": "The fish is browning but isn't 145°F yet", "fix": "Move the pan one shelf lower, away from the broiler, and cook another 2 minutes." },
+      { "sign": "The tortillas crack when you fold them", "fix": "They cooled down. Warm them again in a damp paper towel, and keep them wrapped in a clean towel until you fill them." }
+    ],
+    "quiz": [
+      { "q": "Why do you leave the root on the onion while you cut it?", "choices": ["It tastes good", "It holds the layers together", "It makes you cry less"], "answer": 1, "explain": "The root keeps the strips joined so the onion doesn't fall apart while you dice it." },
+      { "q": "Where does the heat come from when you broil?", "choices": ["The bottom of the oven", "The top of the oven", "The stove"], "answer": 1, "explain": "The broiler blasts heat straight down from the top." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "tomato", "amount": 4, "unit": "count", "round": "up", "group": "Pico de gallo" },
+    { "ingredient": "onion-white", "amount": 1, "unit": "count", "round": "up", "group": "Pico de gallo" },
+    { "ingredient": "cilantro", "amount": 0.5, "unit": "cup", "prep": "leaves and tender stems", "group": "Pico de gallo" },
+    { "ingredient": "jalapeno", "amount": 1, "unit": "count", "round": "up", "optional": true, "group": "Pico de gallo" },
+    { "ingredient": "lime", "amount": 1, "unit": "count", "round": "up", "prep": "juiced", "group": "Pico de gallo" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Pico de gallo" },
+    { "ingredient": "cod", "amount": 1.5, "unit": "lb", "group": "Fish" },
+    { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp", "group": "Fish" },
+    { "ingredient": "chili-powder", "amount": 2, "unit": "tsp", "group": "Fish" },
+    { "ingredient": "cumin-ground", "amount": 1, "unit": "tsp", "group": "Fish" },
+    { "ingredient": "garlic-powder", "amount": 0.5, "unit": "tsp", "group": "Fish" },
+    { "ingredient": "salt", "amount": 0.75, "unit": "tsp", "group": "Fish" },
+    { "ingredient": "tortilla-corn", "amount": 12, "unit": "count", "round": "up", "group": "To serve" },
+    { "ingredient": "coleslaw-mix", "amount": 2, "unit": "cup", "optional": true, "group": "To serve" },
+    { "ingredient": "sour-cream", "amount": 0.5, "unit": "cup", "optional": true, "group": "To serve" },
+    { "ingredient": "lime", "amount": 1, "unit": "count", "round": "up", "prep": "cut into wedges", "optional": true, "group": "To serve" }
+  ],
+  "substitutions": [
+    { "for": "cod", "use": "tilapia", "reason": "availability", "note": "Any firm white fish works: tilapia, haddock, or pollock. Thin pieces may be done a couple of minutes sooner." }
+  ],
+  "equipment": ["chef-knife", "cutting-board", "spoon", "mixing-bowl-medium", "small-bowl", "measuring-cups", "measuring-spoons", "sheet-pan", "foil", "pastry-brush", "oven-mitts", "thermometer", "fork", "paper-towels", "microwave", "kitchen-towel"],
+  "steps": [
+    { "id": "tomato-seeds", "text": "Cut each tomato into quarters from top to bottom. Scoop out the seeds and watery middle with a spoon.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "seeds" },
+    { "id": "tomato-dice", "text": "Lay each quarter skin side down. Cut it into thin strips, then line the strips up and cut across them to dice the tomato into small cubes. Put them in the medium bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "grid", "look": "Cubes about the size of a pea or a little bigger, all close to the same size.", "tip": "Hold the food with your hand shaped like a claw: fingertips tucked under, knuckles in front." },
+    { "id": "onion-strips", "text": "Cut the onion in half from top to bottom, through the root. Peel off the papery skin, but leave the root on. Lay each half flat side down and cut strips from the top end toward the root, stopping just before the root.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "root", "tip": "The flat side keeps the onion half from rolling." },
+    { "id": "onion-dice", "text": "Now cut across the strips, from the top end back toward the root, to dice the onion. Throw away the root end. Add the onion to the bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "grid", "look": "Little onion cubes falling away as you cut." },
+    { "id": "jalapeno", "text": "If you're using the jalapeño, cut it in half the long way and scrape out the seeds and white ribs with the spoon. Cut it into thin strips, then dice it very small. Add it to the bowl, and wash your hands right away.", "safety": "adult-nearby", "hazard": "Sharp knife, hot pepper", "tip": "Don't touch your eyes or face until you've washed your hands. Pepper juice stings." },
+    { "id": "pico", "text": "Chop the cilantro and add it to the bowl with the lime juice and {qty:salt} salt. Stir, and let the pico sit while you make the fish.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "The salt pulls out flavor while it sits. Taste it again before serving." },
+    { "id": "broiler-on", "text": "Move an oven rack to the second-highest spot, about 6 inches below the broiler. Turn the broiler on high. Line the sheet pan with foil.", "safety": "adult-nearby", "hazard": "Hot oven", "why": "broil" },
+    { "id": "spice-mix", "text": "In the small bowl, stir together the olive oil, chili powder, cumin, garlic powder, and the fish's salt.", "safety": "solo" },
+    { "id": "fish-pan", "text": "Pat the fish dry with paper towels and lay the pieces on the foil with space between them. Brush the spice mix over the tops and sides.", "safety": "solo", "hazard": "Raw fish", "handles": ["cod"], "tip": "Tuck any thin ends under so each piece is about the same thickness." },
+    { "id": "wash-fish", "type": "wash", "text": "Throw away the paper towels and wash the brush. Wash your hands with soap, and wipe anything the raw fish or its package touched.", "safety": "solo", "hazard": "Raw fish" },
+    { "id": "broil-fish", "text": "With oven mitts on, slide the pan under the broiler. Stay by the oven and peek through the window while it cooks. Don't flip it.", "safety": "adult-nearby", "hazard": "Hot broiler", "timerSeconds": 480, "timerLabel": "Fish under broiler", "look": "Browned on top, and the fish has turned from see-through to white." },
+    { "id": "check-fish", "type": "doneness", "text": "Pull the pan out with oven mitts and set it on the stove. Slide the thermometer into the thickest piece. It needs to read at least 145°F. If it doesn't, broil 2 more minutes and check again.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 145, "unit": "F" }, "look": "The fish flakes apart easily when you press it with a fork." },
+    { "id": "broiler-off", "text": "Turn off the broiler. Break the fish into big flakes with the fork, right on the pan.", "safety": "adult-nearby", "hazard": "Hot pan" },
+    { "id": "tortillas", "text": "Stack the tortillas, wrap them in a damp paper towel, and microwave until warm and soft. Keep them wrapped in the kitchen towel.", "safety": "solo", "timerSeconds": 60, "timerLabel": "Tortillas", "tip": "The steam inside is hot. Open the paper towel slowly." },
+    { "id": "serve", "text": "Fill each tortilla with fish, a spoonful of pico, and cabbage and sour cream if you're using them. Squeeze a lime wedge over the top.", "safety": "solo", "tip": "Use two tortillas stacked together if they tear." }
+  ]
+}

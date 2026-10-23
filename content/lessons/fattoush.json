@@ -1,0 +1,79 @@
+{
+  "id": "fattoush",
+  "version": 1,
+  "track": "core",
+  "unit": 1,
+  "title": "Fattoush",
+  "image": "dishes/fattoush.png",
+  "cuisine": "lebanese",
+  "skill": "Fine chopping, toasting pita",
+  "skills": ["fine-chopping", "dressings"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 40,
+  "scaling": {
+    "mode": "free",
+    "notes": [{ "from": 9, "text": "For more than 8, toast the pita on two sheet pans, and swap their shelves halfway through." }]
+  },
+  "learn": {
+    "move": { "title": "Rock the knife", "body": "Fine chopping means cutting herbs and vegetables into small, even bits. Today you'll chop parsley and mint by rocking the knife over the pile, chop crunchy vegetables, and toss it all with toasted pita in a lemony dressing." },
+    "why": [
+      { "id": "rock-knife", "title": "Keep the tip down", "body": "Rest the tip of the knife on the board and lift only the handle, up and down, like a seesaw. Your other hand presses flat on top of the blade, away from the edge. The knife walks back and forth over the pile, and the tip never leaves the board, so it can't jump." },
+      { "id": "dry-herbs", "title": "Dry herbs chop clean", "body": "Wet leaves stick to the knife and to each other. Instead of cutting, the knife squashes them into a dark green mush. Herbs patted dry in a towel fall apart into fluffy green bits, and the dressing clings to them." },
+      { "id": "dressing", "title": "Oil and lemon don't mix, at first", "body": "Oil and lemon juice are like oil and water: left alone, they sit in two layers. Whisking breaks the oil into tiny drops that float in the lemon for a while. That's why you whisk the dressing again right before you pour it." },
+      { "id": "crunch-last", "title": "Pita goes in last", "body": "Toasted pita is crunchy because the oven dried it out. The moment it touches dressing, it starts drinking it up and turning soft. Add it right before you eat, and every bite has some crunch." }
+    ],
+    "wrong": [
+      { "sign": "The herbs are dark and mushy", "fix": "They were wet, or the knife went over them too many times. Pat them drier next time, and stop chopping when the bits are small. Mushy herbs still taste good in the salad." },
+      { "sign": "The pita pieces are soggy", "fix": "They went in too early. Toast a little more pita and add it on top right before eating." },
+      { "sign": "Some pita pieces burned at the edges", "fix": "Small pieces brown faster than big ones. Pick out the dark ones; the rest are fine. Next time, cut them the same size and check them a minute early." },
+      { "sign": "The dressing tastes too sour", "fix": "Whisk in a little more olive oil and a pinch of salt, then taste again." }
+    ],
+    "quiz": [
+      { "q": "When you rock the knife over the herbs, what stays on the board?", "choices": ["The handle", "The tip of the knife", "Your fingertips"], "answer": 1, "explain": "The tip stays down and only the handle moves, so the knife can't jump." },
+      { "q": "When do the toasted pita pieces go in?", "choices": ["First, so they soak up the dressing", "Right before you eat", "The next day"], "answer": 1, "explain": "Dressing softens the pita, so it goes in last to stay crunchy." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "pita", "amount": 3, "unit": "count", "round": "up", "group": "Toasted pita" },
+    { "ingredient": "olive-oil", "amount": 3, "unit": "tbsp", "group": "Toasted pita" },
+    { "ingredient": "salt", "amount": 0.25, "unit": "tsp", "group": "Toasted pita" },
+    { "ingredient": "romaine", "amount": 1, "unit": "count", "round": "up", "group": "Salad" },
+    { "ingredient": "tomato", "amount": 3, "unit": "count", "round": "up", "group": "Salad" },
+    { "ingredient": "cucumber", "amount": 1, "unit": "count", "round": "up", "group": "Salad" },
+    { "ingredient": "radish", "amount": 6, "unit": "count", "round": "up", "group": "Salad" },
+    { "ingredient": "green-onion", "amount": 4, "unit": "count", "round": "up", "group": "Salad" },
+    { "ingredient": "parsley", "amount": 1, "unit": "cup", "prep": "leaves, packed", "group": "Salad" },
+    { "ingredient": "mint", "amount": 0.5, "unit": "cup", "prep": "leaves, packed", "group": "Salad" },
+    { "ingredient": "lemon", "amount": 2, "unit": "count", "round": "up", "prep": "juiced", "group": "Dressing" },
+    { "ingredient": "olive-oil", "amount": 0.3333, "unit": "cup", "group": "Dressing" },
+    { "ingredient": "garlic", "amount": 1, "unit": "count", "round": "up", "group": "Dressing" },
+    { "ingredient": "sumac", "amount": 1, "unit": "tbsp", "group": "Dressing" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Dressing" },
+    { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Dressing" }
+  ],
+  "substitutions": [
+    { "for": "sumac", "use": "lemon", "reason": "availability", "note": "Zest one more lemon into the dressing and add an extra pinch of salt." },
+    { "for": "pita", "use": "tortilla-corn", "reason": "gluten", "note": "Use 2 corn tortillas for each pita. Cut into squares and toasted the same way. They crisp a minute or two sooner." }
+  ],
+  "equipment": ["chef-knife", "cutting-board", "sheet-pan", "pastry-brush", "oven-mitts", "spatula", "colander", "kitchen-towel", "mixing-bowl-large", "small-bowl", "fork", "measuring-cups", "measuring-spoons"],
+  "steps": [
+    { "id": "oven-on", "text": "Turn the oven on to 400°F.", "safety": "adult-nearby", "hazard": "Hot oven" },
+    { "id": "pita-cut", "text": "Cut each pita into squares about 1 inch across, and spread them out on the sheet pan in one layer.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Squares the same size all brown at the same time." },
+    { "id": "pita-oil", "text": "Brush the pita squares with {qty:olive-oil} olive oil, turning them so both sides are shiny. Sprinkle them with {qty:salt} salt.", "safety": "solo" },
+    { "id": "pita-toast", "text": "Use oven mitts to put the pan in the oven, and toast the pita.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 300, "timerLabel": "Pita, first side" },
+    { "id": "pita-turn", "text": "With oven mitts on, pull the pan out, stir the pita with a spatula or tongs, and put it back until golden and crisp.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 240, "timerLabel": "Pita, second side", "look": "Golden brown and dry. They get crunchier as they cool.", "tip": "Peek a minute early. Small pieces can go from golden to burnt fast." },
+    { "id": "pita-cool", "text": "Take the pan out, turn the oven off, and leave the pita on the pan to cool while you chop.", "safety": "adult-nearby", "hazard": "Hot pan" },
+    { "id": "wash-produce", "text": "Rinse the lettuce leaves, tomatoes, cucumber, radishes, green onions, parsley, and mint in the colander. Roll the parsley and mint up in the kitchen towel and pat them dry.", "safety": "solo", "why": "dry-herbs" },
+    { "id": "herbs-pick", "text": "Pull the parsley and mint leaves off their thick stems. Push the leaves together into a tight pile on the cutting board.", "safety": "solo", "tip": "Thin parsley stems near the leaves are fine to keep. Mint stems are tough, so pull those off." },
+    { "id": "herbs-chop", "text": "Chop the herbs fine: rest the tip of the knife on the board, press your other hand flat on top of the blade, and rock the handle up and down over the pile. Scrape the pile back together with the knife and go over it again until the bits are small.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "rock-knife", "look": "Fluffy green bits about the size of a grain of rice, not a dark paste." },
+    { "id": "garlic", "text": "Peel the garlic. Mince it: chop it, then rock the knife over it the same way until the bits are tiny. Put it in the small bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Press the clove under the flat of the knife first. The skin cracks and peels right off." },
+    { "id": "tomatoes", "text": "Cut each tomato in half, lay it flat side down, and chop it into small pieces about the size of your fingernail.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Hold the food with your hand shaped like a claw: fingertips tucked under, knuckles in front." },
+    { "id": "cucumber", "text": "Cut the cucumber in half the long way, lay each half flat side down, and chop it the same size as the tomatoes.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "radishes", "text": "Cut the tops and roots off the radishes. Cut each one in half, lay it flat side down, and slice it thin.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "The flat side keeps the little round radish from rolling away." },
+    { "id": "onions-lettuce", "text": "Slice the green onions into thin rings. Chop the lettuce into bite-size pieces. Put all the vegetables and herbs in the large bowl.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "dressing", "text": "Add the lemon juice, sumac, and pepper to the garlic in the small bowl, with the dressing's salt. Whisk with the fork while you slowly pour in the dressing's olive oil.", "safety": "solo", "why": "dressing", "look": "Cloudy and a little thick, with no layer of oil on top." },
+    { "id": "toss", "text": "Whisk the dressing again, pour it over the salad, and toss until everything is shiny.", "safety": "solo" },
+    { "id": "serve", "text": "Right before you eat, scatter the toasted pita over the salad and toss once more.", "safety": "solo", "why": "crunch-last", "tip": "Keep a few pita pieces aside for anyone who wants extra crunch on top." }
+  ]
+}

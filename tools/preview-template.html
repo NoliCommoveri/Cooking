@@ -185,7 +185,7 @@ function renderLesson() {
       return `<li class="step ${s.type === 'wash' ? 'wash' : ''}"><div class="body">
         <p class="safety" style="--c:var(${col})">${lab}${s.hazard ? ` <span>· an adult profile sees: ${esc(s.hazard)}</span>` : ''}</p>
         <p class="txt">${withTerms(s.text, s.id, s.id)}</p>
-        ${s.type === 'doneness' ? `<p class="target">${s.target.temp ? `Must reach ${s.target.temp}°F on the thermometer before Next unlocks` : `Done when: ${esc(s.target.look)}`}</p>` : ''}
+        ${s.type === 'doneness' ? `<p class="target">${s.target.temp ? `Thermometer: at least ${s.target.temp}°F` : `Done when: ${esc(s.target.look)}`}</p>` : ''}
         ${s.look ? `<p><b>Should look like:</b> ${withTerms(s.look, s.id + '-look', s.id)}</p>` : ''}${s.tip ? `<p><b>Tip:</b> ${withTerms(s.tip, s.id + '-tip', s.id)}</p>` : ''}
         ${S.word && S.wordStep === s.id ? wordCard(S.wordId) : ''}
         ${meta ? `<p class="meta">${meta}</p>` : ''}</div></li>`;

@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [92. 2026-10-23 — Kid logins last 14 days; "adult," not "grown-up"; ages 10 and up](docs/build-log.md#92-2026-10-23--kid-logins-last-14-days-adult-not-grown-up-ages-10-and-up)
+**Latest build log entry:** [101. 2026-10-23 — Chef Ruth's Show me around](docs/build-log.md#101-2026-10-23--chef-ruths-show-me-around)
 
 ## Current features
 
@@ -29,7 +29,8 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Reflect** (`public/player.js`): after Plate it, each profile on the cook rates it (gems or chef's hats), says what they'd change, and can name another dish that uses the move; plus an optional rating from the eaters. Saved even if the connection drops.
 - **Print our progress** (Parents → Progress): what each profile has cooked, with date, dish, cuisine, skill, and rating, printable or as a CSV.
 - **Photos switch** (`/ops`): photos are off for every family until the owner turns them on for one.
-- **Test-cook notice**: each parent sees a one-time note, above the lockers, to read a lesson through before their kids cook it.
+- **Chef Ruth** (`public/ruth.js`, `src/worker/setup.js`): the helper, a scripted chat with a floating button on the parent screens. Her **Getting started** runs on its own for a new family and can't be skipped: family name and PIN, servings, diet, learners, kid logins, casual or homeschool, then a course or a first lesson. It can be run again from her button to change answers. Her **Show me around** tours every parent screen, starting with the Queue: a look at each, then how to use it.
+- **Test-cook notice**: parents from before Getting started see a one-time note, above the lockers, to read a lesson through before their kids cook it; Getting started ends with the same reminder.
 - **Demo page** (`/demo`): no account needed. Try the sample lessons in either theme, including the three choices for julienne, preview diet settings and a real shopping list, and browse the whole course by dish or by skill.
 - **Syllabus** (`/syllabus`): the course as a homeschool course, with objectives, units, hours, pacing, a suggested credit, and the rubric. Printable.
 - **Course outline** (`content/course.json`): all 75 planned dishes in teaching order, with their skills and prerequisites, checked by the linter.
@@ -49,7 +50,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
 - **Dish illustrations** (`content/images/dishes/`): one picture for each of the 75 lessons.
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
-- **Lesson content** (`content/`): 7 lessons (the 4 samples, and 1a–1c: spring rolls, chicken fajitas, shoestring fries), and the ingredient, tool, skill (52), and cuisine lists, as JSON.
+- **Lesson content** (`content/`): 17 lessons (the 4 samples, all 11 of Unit 1, and the 2 Appointed Times lessons), and the ingredient, tool, skill (52), and cuisine lists, as JSON.
 - **Content linter** (`tools/lint-content.js`): checks every lesson against the food rules, including the unclean-food block, the food-safety steps, and scaling. Runs on every push.
 - **Scaling** (`src/content/`): amounts and step counts change with the serving size, shown in measuring-cup and spoon amounts.
 - **Lesson preview** (`preview/lesson-preview.html`): each written lesson, read-only, at every serving size. Tap an underlined kitchen word to see what it means.

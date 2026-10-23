@@ -344,7 +344,7 @@ Palette: cork, cream paper, ink, tomato red, butter, basil, and passport navy. *
 | Rating | 1–5 **chef hats** or wooden spoons, not stars |
 | Serving picker | A "Serves" line on the recipe card with big − and + buttons and a row of little plates, one per serving (§6.6) |
 | Test-cooked | An inked **test-kitchen stamp** on the lesson card, for a lesson a parent in this family marked test-cooked. Not a pill |
-| Helper | The helper's (§6.8) chef avatar on a floating **Ask** button, and a chat on recipe cards (the helper) and sticky notes (the kid) |
+| Helper | Chef Ruth (§6.8) on a floating **Ask** button, and a chat on recipe cards (Chef Ruth) and sticky notes (the kid) |
 | Photos | Taking a photo pins a **Polaroid** to a corkboard. The gallery is the corkboard |
 | Rank up | A full-screen celebration where the hat upgrades, with a confetti or sprinkles burst |
 | Profile picker | Each profile has a **chef's locker** with its avatar and apron. A shared profile's locker shows everyone on it |
@@ -366,7 +366,7 @@ Drawn from the Phase 0 mockup. Palette: night navy, gold, mana teal, and ember r
 | Rating | 1–5 **gold hex gems**, not stars |
 | Serving picker | A **party-size** panel on the quest card: big − and + buttons, the count in the pixel font, and a chef's hat per serving. Fixed-size lessons show their allowed sizes as buttons (§6.6) |
 | Test-cooked | A **gold shield seal** on the quest card. Not a pill |
-| Helper | The helper's (§6.8) avatar as a guide character on a floating **Ask** button, and a chat styled as a dialogue box |
+| Helper | Chef Ruth (§6.8) as a guide character on a floating **Ask** button, and a chat styled as a dialogue box |
 | Photos | Taking a photo hangs a framed snapshot in a **trophy hall**. The gallery is the trophy hall |
 | Rank up | A full-screen **level-up**: the new title and crest, with a pixel burst |
 | Profile picker | The house-style chef's lockers (§5.2), same as every theme |
@@ -502,14 +502,40 @@ Scaling isn't plain multiplication. Each lesson declares how it scales (§7.3):
 - The shopping list shows US purchase units (oz, lb, cans, bunches).
 - **Revisit if** a family wants metric. A per-family unit setting can be added without changing the content files.
 
-### 6.8 Helper (to be specced)
-A guided helper modeled on **Kels** in KennelOS (`NoliCommoveri/KennelOS`: End-State guide §33, `docs/KennelOS_Kels_Roadmap.md`). Used by **both kids and parents**, each with their own menu of tasks.
-- Like Kels, it's a **scripted chat**, not an AI model: every line is written in the task scripts. It opens from a floating **Ask** button.
-- It **walks through tasks one step at a time**, saves each answer as it's given (or keeps a resumable draft), and writes through the same code as the pages.
-- It **finds things** ("where's my shopping list?") and **explains things** (an FAQ with a "Show me" for each answer).
-- Possible kid tasks: pick what to cook next, find a lesson, explain a cooking term.
-- Possible parent tasks: plan the week, set up the pantry, review safety for the queue.
-- Its name, character, and full task list are specced later.
+### 6.8 Chef Ruth, the helper — Requirement (owner, 2026-10-23)
+The helper is **Chef Ruth** (she/her). Her picture is `content/images/brand/chef-ruth.png`, supplied by the owner. She's modeled on **Kels** in KennelOS (`NoliCommoveri/KennelOS`: End-State guide §33, `docs/KennelOS_Kels_Roadmap.md`).
+- **Her most useful job is collecting information** that the app keeps on several different pages, in one chat. She asks one thing at a time and saves it where the page would have, so a parent never has to know which screen holds what.
+- **The first-run wizard is one of her tasks** (§6.9), not a separate flow.
+- **Parents first.** She's built on the parent screens first. Chef Ruth in the kitchen, for kids, comes later.
+
+**How she works** (recommendations, from Kels; to confirm before building):
+- **Scripted, not AI.** Every line she says is written in her task scripts. Nothing goes to an AI service.
+- **Ordinary saves.** She saves through the same API calls as the pages, and checks answers with the same shared rules (the food rules, the PIN, servings limits). She never gets her own copy of a rule; a rule she needs moves into a shared, tested module that the page uses too.
+- **Where she lives:** a floating **Chef Ruth** button, with her picture, on every parent screen (so it's behind the parent PIN), and on a new family's empty locker screen until Getting started is done (§6.9). It opens her chat as its own parent page, with **Save for later** and **Cancel** in its header. A dot on the button shows while a task is unfinished.
+- **Her first message** (owner's wording, 2026-10-23): "Hi, I'm Ruth, your Clean Plate guru! I'm here to help you learn to navigate the app and get your family in the kitchen!" For a new family it goes straight on to Getting started (§6.9). Otherwise it's followed by **Doing something** (her task list, with a search box) and, later, **Finding something** and **Understanding something** (below). An unfinished task is offered first. After a task: "What else can I help with?"
+- **One thing at a time, saved as answered.** Settings save the moment they're answered. A task that makes something new from several answers (a few profiles, a course) keeps a resumable draft and ends with a review to approve, so nothing half-made shows in a kid's kitchen.
+- **Fixes happen in the chat.** If she can collect it in the chat, she does. She sends a parent to a page only for something too big for a chat (a long editor), and says so first.
+- **She explains, then points the way (owner, 2026-10-23).** Before each question, one short line on what it's for; after the answer, where to change it later (§6.9 has examples).
+- **Her voice:** warm and short. Each task opens with a line that says yes to it ("Of course, let's get your family set up!"), then "I'll ask you a few questions and save each answer as we go. You can stop any time and pick up where you left off. Sound good?", answered **Sounds great, let's start!** / **Never mind**. At most one friendly phrase per message; the rest is the task. "Adult," never "grown-up."
+- **Every task has search words** for the task list, written by us.
+
+**Her first tasks** (recommendation, in build order; each pulls together what lives on more than one page):
+
+| Task | What she collects | Pages it saves to today |
+|---|---|---|
+| **Getting started** | The first run (§6.9): family name and PIN, servings, diet, profiles, kid logins, casual or homeschool, a course | Logins & PIN, Family settings, Profiles, each profile's Kid login, Courses |
+| **Add people to our family** | A roster of names first; then for each, kid or adult, and for a kid, a login if the parent wants one (§8.3a) | Profiles, each profile's Kid login |
+| **Set up our learning path** | Casual or homeschool, Plan our weeks, then a course: who it's for, the start week, the pick-one choices (§4.0), and how many lessons a week | Family settings, Courses |
+| **Plan this week** | What each kid cooks this week (course lessons, extras, swaps), then whether to make a shopping list for it | Queue, Shopping |
+| **Our diet and kitchen** | Diet filters, default servings, kitchen staples | Family settings, Shopping → Staples |
+
+**Show me around (owner, 2026-10-23; built).** A second flow, from her menu, separate from Getting started: she visits every parent screen in the Menu's order, starting with the Queue (the owner's screens last, for the owner only). At each one she says what it's for, steps aside so the screen shows for 4 seconds (her button brings her back sooner), then pops back and says how to use it, with **Next**, **Show me again**, and **Stop the tour**. It's the parent tour (§6.9).
+
+**Later** (recommendation):
+- **Finding something:** a parent types words ("staples", "Ella's login", "PIN") and she says where it is, with a button to it (Kels's Find).
+- **Understanding something:** how the app works, as an FAQ with a **Show me** for each answer, using Show me around's step-aside.
+- **Chef Ruth in the kitchen:** kid tasks (pick what to cook next, find a lesson, explain a kitchen word) and the profile intro (§6.9).
+- She can also run the family-recipe entry flow (§6.10) once the tasks above are built.
 
 ### 6.10 Family recipes and the community directory
 No longer a bonus (owner, 2026-10-22): sharing recipes is central for the Appointed Times unit (§6.19), so this comes with it (Phase 4c). Families can cook their own recipes in the same lesson player.
@@ -524,7 +550,7 @@ No longer a bonus (owner, 2026-10-22): sharing recipes is central for the Appoin
 - **Community directory: "User-shared recipes."** Shared recipes go into a searchable directory, open to every family. Any parent can search it and add a recipe to their family's recipes. **A shared recipe carries no identifier at all** (owner, 2026-10-22): no family name, no profile names, nothing that says who shared it. It's labeled only "User-shared recipes".
 - **No photos in the directory** (owner, 2026-10-22). A shared recipe never carries a photo, even one the sharing family took; it always shows the placeholder art for its meal type (§6.19).
 - **Report and Hide** (owner, 2026-10-22). Any parent can **Report** a directory recipe, behind the parent PIN, with a type (unclean ingredient, food-safety problem, wrong or unclear, inappropriate, other) and a note. Reports wait on the owner screens (§6.2a), and unclean-ingredient and food-safety reports email the owner right away, as fix requests do (§6.11). The owner can **Hide** any directory recipe, reported or not: it leaves the directory and the swap picker at once. **Unhide** puts it back (the restore rule in `CLAUDE.md`). Copies families already added stay in their recipes, with a note that it was taken out of the directory (recommendation).
-- **Entry is a guided flow, not a file upload.** No CSV or file import. The parent is walked through one thing at a time, and the helper (§6.8) can run the same flow:
+- **Entry is a guided flow, not a file upload.** No CSV or file import. The parent is walked through one thing at a time, and Chef Ruth (§6.8) can run the same flow:
   1. Title, servings, total time, and a photo if they have one (families with photos on, §2.6; the photo stays with that family and is never shared). The photo step comes with the camera (Phase 4); until then a recipe shows its meal-type picture
   2. Ingredients, each picked from the registry by search with amount and unit. An ingredient not in the registry is typed in, and sharing it then needs the owner's review (above)
   3. Equipment, picked from the registry
@@ -535,11 +561,25 @@ No longer a bonus (owner, 2026-10-22): sharing recipes is central for the Appoin
 - **Diet filters** apply to family recipes and directory recipes the same as to library lessons.
 - **Scaling** works for registry ingredients. Typed-in ingredients scale as plain numbers, and the shopping list shows them without merging.
 
-### 6.9 First-run wizard (to be specced)
-A first run for a new family, like KennelOS's (End-State guide §11 and "Getting Started" in §33). It runs after a family signs up and enters its emailed code (§8.3). Each part saves as it's answered and can be skipped.
-- **Family setup:** profiles (one per person, shared, or a mix), each marked **kid or adult**, default servings, diet filters, pantry staples, and the parent PIN (required, §8.3).
+### 6.9 First run: Chef Ruth's Getting started
+**Requirement (owner, 2026-10-23): the first run is Chef Ruth's Getting started task** (§6.8), like Kels's Getting Started in KennelOS (End-State guide §11 and §33).
+- **Straight into her chat (owner, 2026-10-23).** After sign-up, a new family lands on the empty locker screen with Chef Ruth floating on it, and her chat opens on its own. **The family name and parent PIN are her first questions**, replacing today's "Your family" screen.
+- **Getting started can't be skipped (owner, 2026-10-23).** There's no **Never mind** and no way to dismiss it. If the app is closed partway, every answer so far is kept and she picks up at the next question. The lockers and parent screens open once it's done. Afterwards it can be run again from her task list, to change answers.
+- **Her opening for a new family** (owner's wording, 2026-10-23), right after her first message: "Since you're a new user, I'm going to get you all set up! I'll ask you some questions and use your answers to configure your settings, get your little chefs their kitchen profiles, and get the first recipes in their queues! Sound good?", answered **Sounds great, let's start!** only. It takes the place of the standard task opening (§6.8).
+- **What she asks, in order (owner, 2026-10-23).** Each part saves as it's answered. Nothing optional is in it: kitchen staples, another parent's login, and the rest are left to their own pages or her other tasks.
+  1. **Family name and parent PIN** (§8.3).
+  2. **Default servings** (§2.2).
+  3. **Allergies and diet:** the family's diet filters (§2.1).
+  4. **Learners:** the profiles, each kid or adult, one person or shared (§1).
+  5. **Logins for kids:** for each kid profile, whether to give them their own login, and if yes, she sets it up with them: first name and last initial, a picture, a password (§8.3a).
+  6. **Casual or homeschool** (§6.17).
+  7. **Offer to set up a course** (§6.18). If yes: who it's for, a name (optional), the start date, and lessons per week. She tells the parent they can edit the course to change the lesson order or drop lessons. In casual mode, saying yes turns on Plan our weeks, and she says so (owner, 2026-10-23).
+  8. **No course: she offers to add a first lesson by hand (owner, 2026-10-23).** She asks what they'd like to start with: **Chicken**, **Beef**, **Fish**, or **Vegetarian**. She offers the first lesson in course order that matches, with its number, name, and the line about the dish (its dish card, §5.7), to add or not. If they say no, she offers the next matching lesson. If they say no to that one too, she says no problem, and tells them where to add lessons themselves (Menu → Queue → + Add a lesson).
+     - Only written lessons the family's diet filters allow are offered. A lesson "matches" by the main protein in its required ingredients (`mainProtein` in `src/content/getting-started.js`): chicken, beef, or fish, not counting a sauce like fish sauce; vegetarian means nothing required carries meat or fish (an optional ingredient doesn't count). **Sides, breads, and desserts aren't offered** (owner, 2026-10-23: fattoush, not shoestring fries): they're marked `"meal": false` in `content/course.json`. The lesson is added for every learner, and she says it can be changed in the Queue. Today the first offers are 1a Fresh spring rolls (chicken), 2b Chimichurri steak (beef), 2c Tuna salad sandwiches (fish), and 2a Fattoush (vegetarian).
+- **Before and after every question (owner, 2026-10-23).** Before each question she says in one short line what it's for, for example that a profile can be shared by several kids, or that each kid can have their own profile even if they plan to cook together. After the answer, she says where to change it later ("You can change this any time in Menu → Family settings."). This holds for all her tasks (§6.8).
+- **Her last lines (owner's wording, 2026-10-23),** in place of the one-time test-cook notice: "Great, you're ready to get cooking!" and "As a reminder, Clean Plate is still in beta testing. We strongly suggest that you review each recipe with your child as some of them have never been cooked by our team. If you find anything concerning in a recipe,  we appreciate you giving feedback so we can correct it as soon as possible." Then **Let's go!** opens the lockers.
 - **A warning for first-time parents:** the recipes haven't all been test-cooked. Read each lesson through before your kids cook it, and mark it test-cooked once you have (§6.2).
-- **Each profile's first run:** it sets up its chef locker and avatar, and picks its theme.
+- **Each profile's first run** (in the kitchen, later with Chef Ruth in the kitchen, §6.8): it sets up its chef locker and avatar, and picks its theme.
 - **Requirement: a profile intro.** Right after that, a short intro shows the profile how to use the app from their side, drawn in the theme they just picked (Kitchen Quest's is a "tutorial quest"). One card per thing they'll do, each with a "try it" tap where it helps:
   - find a lesson and **ask to cook it** (the request goes to a parent); adult profiles see **Cook this**, which queues it directly
   - the **serving picker**
@@ -548,13 +588,12 @@ A first run for a new family, like KennelOS's (End-State guide §11 and "Getting
   - take the **photo** and write the **reflection**
   - where **progress** shows: their theme's reward per dish, skills, and rank
   - **if something in a lesson looks wrong:** kids are told to tell an adult; adult profiles get the **Suggest a fix** card (§6.11)
-  - the **Ask** button for the helper (§6.8)
+  - the **Ask** button for Chef Ruth, once she's in the kitchen (§6.8)
 
   A shared profile sees it once, together. Any card can be skipped, and the whole intro can be replayed from the profile's locker. Words stay short and plain, and nothing animates while a card is being read (§5.5).
-- **Requirement: a parent tour.** A short set of cards that shows parents how to use the app, one task per card: queue a lesson and pick who it's for, set servings, use the shopping list, review safety and mark a lesson test-cooked, the parent PIN, photos and the gallery, and **Suggest a fix** (how to report something wrong in a lesson, what to write in "what should it say instead", and how the answer comes back, §6.11). Each card can be skipped, and the whole tour can be replayed from family settings.
-- **Then an introduction to the helper** (§6.8).
+- **Requirement: a parent tour.** A short set of cards that shows parents how to use the app, one task per card: queue a lesson and pick who it's for, set servings, use the shopping list, review safety and mark a lesson test-cooked, the parent PIN, photos and the gallery, and **Suggest a fix** (how to report something wrong in a lesson, what to write in "what should it say instead", and how the answer comes back, §6.11). Each card can be skipped, and the whole tour can be replayed from family settings. **Built as Chef Ruth's Show me around** (§6.8, owner, 2026-10-23): a card per parent screen, each shown for a few seconds, replayable from her menu.
 
-Until the wizard is built, the test-cook warning shows as a one-time notice on a parent's first sign-in.
+Until Getting started is built, the test-cook warning shows as a one-time notice on a parent's first sign-in.
 
 ### 6.11 Fix requests and lesson patches — Requirement (owner, 2026-10-22)
 Parents and adult learners report what's wrong in a lesson, and the owner pushes the fix from the browser. **The owner isn't the cooking expert**, so the person reporting proposes the correction, and the app checks it before it goes live.
@@ -587,7 +626,7 @@ Kids have messy hands mid-cook, and the main kitchen device is likely an Android
 
 Library lessons, recipes, and ingredients are **JSON files in the repo**, separate from the app code. Family recipes and the community directory (§6.10) are the exception: they live in D1. Adding lessons means adding files, not changing code. Recipe text must be written originally, not copied from published sources.
 
-**Recipes are not required to be test-cooked.** The linter checks that content is well formed, not that a recipe works. A parent can mark a lesson **test-cooked** after cooking it (§6.2), which puts a test-kitchen stamp on that lesson for their family (§5.4). The first-run wizard (§6.9) tells new parents that recipes may not have been cooked yet, and to read a lesson through before their kids cook it.
+**Recipes are not required to be test-cooked.** The linter checks that content is well formed, not that a recipe works. A parent can mark a lesson **test-cooked** after cooking it (§6.2), which puts a test-kitchen stamp on that lesson for their family (§5.4). Getting started (§6.9) tells new parents that recipes may not have been cooked yet, and to read a lesson through before their kids cook it.
 
 ### 7.1 Files
 ```
@@ -882,7 +921,7 @@ A backend is needed because the app is multi-family: each family's progress, que
 - **Logging in.** The Log in screen has an **Adult / Kid** choice at the top. Adult is email and password, as now. Kid is three steps on one screen, big and tappable: **Your name** ("Ava C"), **Your picture** (the 30 in a grid), and **Your password**. Wrong details say "That name, picture, and password don't match. Ask an adult if you're stuck." The choice is remembered on the device.
 - **The kid session.** A cookie that lasts **14 days and renews each time the app is opened** (owner, 2026-10-23), kept in `kid_sessions` (§8.4) and carrying only the family and that one profile. A device is logged in as a parent or as a kid, never both; logging in as one logs the other out on that device.
 - **What a kid login sees.**
-  - Opening the app goes **straight to that kid's kitchen**, with its tabs (§6.1), lessons, celebrations, sound, and theme picker. Every other address in the app (the lockers, another profile's kitchen, `#/parent/…`, the first-run wizard) sends them back to it.
+  - Opening the app goes **straight to that kid's kitchen**, with its tabs (§6.1), lessons, celebrations, sound, and theme picker. Every other address in the app (the lockers, another profile's kitchen, `#/parent/…`, the first run) sends them back to it.
   - **Gone:** the Parents menu and button, the switch-profile or back-to-lockers control, the test-cook notice, Suggest a fix (it's behind the parent PIN), and the "⋯" queue menu.
   - A small **Log out** in the kitchen's settings, with "Log out of this device?" to confirm. No PIN (Requirement).
   - Kept: "I want to make this" (the request goes to the parents' Queue, §6.1), cooking a queued lesson, Reflect, and photos where the family has them on.
@@ -976,7 +1015,7 @@ Each phase should be deployed and usable before the next begins.
 | **5b. Kid logins** (built 2026-10-23) | A login for a kid profile (first name and last initial, a cooking picture, and a password), set by a parent; the 30 login pictures; the kid login session, scoped to that one profile; the Log in screen's Adult / Kid choice; the kid's device opening straight to their kitchen, with no lockers and no parent screens; the parent's controls on the profile editor; the migration (§8.3a, build steps there) | A parent gives one of two siblings a login. On a second device, that kid logs in with their name, picture, and password and lands in their kitchen, cooks a queued lesson, and sees the reward. That device can't reach the lockers, the other sibling's kitchen, or any parent screen, by tapping or by typing an address, and the API refuses the parent routes even with the PIN. Off-path cooking still asks an adult for the PIN, right there. The parent changes the password and the kid's device is logged out. Parent logins work as before |
 | **6. Intros** | Slideshow engine, music loops, skip/mute | Every sample lesson has a working intro |
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
-| **8. Helper & first run** | First-run wizard (§6.9) and the helper (§6.8), once both are specced | A new family goes from sign-up to their first queued lesson through the wizard, and kids and parents can each finish a helper task |
+| **8. Chef Ruth** (Getting started built 2026-10-23) | Chef Ruth on the parent screens (§6.8): her chat, Getting started (§6.9), and her first tasks. Chef Ruth in the kitchen comes after | A new family goes from sign-up to their first queued lesson through Getting started, and a parent sets up a course and plans a week in her chat, with everything showing on the pages it belongs to |
 | **9. Family recipes** | Folded into 4c (§6.10) | — |
 | **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system (Print our progress's CSV covers the basics, §6.15) | — |
 

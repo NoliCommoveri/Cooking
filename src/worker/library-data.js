@@ -72,7 +72,8 @@ export const LIBRARY = {
      "reason": "gluten"
     }
    ],
-   "unleavened": true
+   "unleavened": true,
+   "protein": "chicken"
   },
   {
    "id": "chicken-fajitas",
@@ -158,7 +159,8 @@ export const LIBRARY = {
      "reason": "gluten"
     }
    ],
-   "unleavened": false
+   "unleavened": false,
+   "protein": "chicken"
   },
   {
    "id": "shoestring-fries",
@@ -205,7 +207,636 @@ export const LIBRARY = {
     }
    ],
    "substitutions": [],
-   "unleavened": true
+   "unleavened": true,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "fattoush",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Fattoush",
+   "image": "img/dishes/fattoush.webp",
+   "cuisine": "lebanese",
+   "skill": "Fine chopping, toasting pita",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, toast the pita on two sheet pans, and swap their shelves halfway through."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "pita"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "radish"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "mint"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "sumac"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "sumac",
+     "use": "lemon",
+     "reason": "availability"
+    },
+    {
+     "for": "pita",
+     "use": "tortilla-corn",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "chimichurri-steak",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Chimichurri steak",
+   "image": "img/dishes/chimichurri-steak.webp",
+   "cuisine": "argentine",
+   "skill": "Fine chopping: parsley, garlic, oregano",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, sear the steak in two batches so the pan stays hot. Keep the first batch resting on the board while the second cooks."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "vinegar-red-wine"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "chili-flakes",
+     "optional": true
+    },
+    {
+     "ingredient": "beef-sirloin"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "protein": "beef"
+  },
+  {
+   "id": "tuna-salad-sandwiches",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Tuna salad sandwiches",
+   "image": "img/dishes/tuna-salad-sandwiches.webp",
+   "cuisine": "american",
+   "skill": "Fine chopping: celery, onion, pickles, herbs",
+   "servings": 6,
+   "scaling": {
+    "mode": "free"
+   },
+   "totalMinutes": 25,
+   "ingredients": [
+    {
+     "ingredient": "tuna-canned"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "pickle-dill"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "mayonnaise"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "bread-sandwich"
+    },
+    {
+     "ingredient": "lettuce-green-leaf",
+     "optional": true
+    },
+    {
+     "ingredient": "tomato",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "bread-sandwich",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "mayonnaise",
+     "use": "yogurt-greek",
+     "reason": "egg"
+    }
+   ],
+   "unleavened": false,
+   "protein": "fish"
+  },
+  {
+   "id": "fish-tacos",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Pico de gallo + Baja fish tacos",
+   "image": "img/dishes/fish-tacos.webp",
+   "cuisine": "mexican",
+   "skill": "Dicing; broiling fish",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, broil the fish on two sheet pans, one at a time, so each sits right under the heat."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "onion-white"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "jalapeno",
+     "optional": true
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cod"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "chili-powder"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "tortilla-corn"
+    },
+    {
+     "ingredient": "coleslaw-mix",
+     "optional": true
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    },
+    {
+     "ingredient": "lime",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "cod",
+     "use": "tilapia",
+     "reason": "availability"
+    }
+   ],
+   "unleavened": true,
+   "protein": "fish"
+  },
+  {
+   "id": "ratatouille",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Ratatouille",
+   "image": "img/dishes/ratatouille.webp",
+   "cuisine": "french",
+   "skill": "Dicing: eggplant, zucchini, pepper, tomato",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, brown the eggplant in two batches so it doesn't crowd the pot, and use your biggest pot."
+     }
+    ]
+   },
+   "totalMinutes": 70,
+   "ingredients": [
+    {
+     "ingredient": "eggplant"
+    },
+    {
+     "ingredient": "zucchini"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "basil",
+     "optional": true
+    },
+    {
+     "ingredient": "baguette",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "minestrone",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Minestrone",
+   "image": "img/dishes/minestrone.webp",
+   "cuisine": "italian",
+   "skill": "Dicing",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, you'll need a very big pot, at least 8 quarts. Or make it in two pots side by side."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "zucchini"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "broth-vegetable"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "cannellini"
+    },
+    {
+     "ingredient": "pasta-small"
+    },
+    {
+     "ingredient": "parmesan",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pasta-small",
+     "use": "pasta-small-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "protein": "vegetarian"
+  },
+  {
+   "id": "chicken-caesar",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Chicken Caesar + homemade dressing & croutons",
+   "image": "img/dishes/chicken-caesar.webp",
+   "cuisine": "american",
+   "skill": "Whisked dressing, cubing bread",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, bake the croutons on two sheet pans and swap their shelves halfway, and cook the chicken in two batches."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "baguette"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "chicken-breast"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "mayonnaise"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "worcestershire",
+     "optional": true
+    },
+    {
+     "ingredient": "parmesan"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "parmesan"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "baguette",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "mayonnaise",
+     "use": "yogurt-greek",
+     "reason": "egg"
+    }
+   ],
+   "unleavened": false,
+   "protein": "chicken"
+  },
+  {
+   "id": "smash-burgers",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Smash burgers + quick pickles",
+   "image": "img/dishes/smash-burgers.webp",
+   "cuisine": "american",
+   "skill": "Thin slicing, quick pickle, high-heat sear",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Cook 3 patties at a time in a 12-inch skillet. For more than 6, keep going in batches of 3, washing the tongs and your hands after each batch of raw beef."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "vinegar-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "cheese-sliced",
+     "optional": true
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "burger-buns"
+    },
+    {
+     "ingredient": "ketchup",
+     "optional": true
+    },
+    {
+     "ingredient": "mustard-dijon",
+     "optional": true
+    },
+    {
+     "ingredient": "lettuce-green-leaf",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "burger-buns",
+     "use": "buns-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "protein": "beef"
   },
   {
    "id": "shakshuka",
@@ -276,7 +907,8 @@ export const LIBRARY = {
     }
    ],
    "substitutions": [],
-   "unleavened": false
+   "unleavened": false,
+   "protein": "vegetarian"
   },
   {
    "id": "beef-bulgogi",
@@ -350,7 +982,8 @@ export const LIBRARY = {
      "reason": "gluten"
     }
    ],
-   "unleavened": true
+   "unleavened": true,
+   "protein": "beef"
   },
   {
    "id": "buttermilk-biscuits",
@@ -407,7 +1040,8 @@ export const LIBRARY = {
     }
    ],
    "substitutions": [],
-   "unleavened": false
+   "unleavened": false,
+   "protein": "vegetarian"
   },
   {
    "id": "brown-butter-cookies",
@@ -467,7 +1101,8 @@ export const LIBRARY = {
     }
    ],
    "substitutions": [],
-   "unleavened": false
+   "unleavened": false,
+   "protein": "vegetarian"
   },
   {
    "id": "unleavened-flatbread",
@@ -511,7 +1146,8 @@ export const LIBRARY = {
     }
    ],
    "substitutions": [],
-   "unleavened": true
+   "unleavened": true,
+   "protein": "vegetarian"
   },
   {
    "id": "cottage-cheese-crescents",
@@ -561,7 +1197,8 @@ export const LIBRARY = {
     }
    ],
    "substitutions": [],
-   "unleavened": true
+   "unleavened": true,
+   "protein": "vegetarian"
   }
  ],
  "ingredients": {
@@ -844,6 +1481,186 @@ export const LIBRARY = {
   "cinnamon-ground": {
    "name": "Ground cinnamon",
    "contains": []
+  },
+  "romaine": {
+   "name": "Romaine lettuce",
+   "contains": []
+  },
+  "tomato": {
+   "name": "Tomatoes",
+   "contains": []
+  },
+  "radish": {
+   "name": "Radishes",
+   "contains": []
+  },
+  "lemon": {
+   "name": "Lemons",
+   "contains": []
+  },
+  "sumac": {
+   "name": "Ground sumac",
+   "contains": []
+  },
+  "beef-sirloin": {
+   "name": "Beef sirloin steak, about 1 inch thick",
+   "contains": [
+    "meat"
+   ]
+  },
+  "oregano-dried": {
+   "name": "Dried oregano",
+   "contains": []
+  },
+  "vinegar-red-wine": {
+   "name": "Red wine vinegar",
+   "contains": []
+  },
+  "tuna-canned": {
+   "name": "Canned tuna in water",
+   "contains": [
+    "fish"
+   ]
+  },
+  "mayonnaise": {
+   "name": "Mayonnaise",
+   "contains": [
+    "egg"
+   ]
+  },
+  "yogurt-greek": {
+   "name": "Plain Greek yogurt",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "celery": {
+   "name": "Celery",
+   "contains": []
+  },
+  "pickle-dill": {
+   "name": "Dill pickles",
+   "contains": []
+  },
+  "mustard-dijon": {
+   "name": "Dijon mustard",
+   "contains": []
+  },
+  "bread-sandwich": {
+   "name": "Sandwich bread",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "bread-gluten-free": {
+   "name": "Gluten-free sandwich bread",
+   "contains": [
+    "egg"
+   ]
+  },
+  "cod": {
+   "name": "Cod fillets, skinless",
+   "contains": [
+    "fish"
+   ]
+  },
+  "tilapia": {
+   "name": "Tilapia fillets",
+   "contains": [
+    "fish"
+   ]
+  },
+  "onion-white": {
+   "name": "White onion",
+   "contains": []
+  },
+  "jalapeno": {
+   "name": "Jalapeño",
+   "contains": []
+  },
+  "coleslaw-mix": {
+   "name": "Shredded cabbage (coleslaw mix)",
+   "contains": []
+  },
+  "eggplant": {
+   "name": "Eggplant",
+   "contains": []
+  },
+  "zucchini": {
+   "name": "Zucchini",
+   "contains": []
+  },
+  "thyme-dried": {
+   "name": "Dried thyme",
+   "contains": []
+  },
+  "basil": {
+   "name": "Fresh basil",
+   "contains": []
+  },
+  "baguette": {
+   "name": "Baguette",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "broth-vegetable": {
+   "name": "Vegetable broth",
+   "contains": []
+  },
+  "cannellini": {
+   "name": "Cannellini beans (white kidney beans)",
+   "contains": []
+  },
+  "pasta-small": {
+   "name": "Small pasta (ditalini or small shells)",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "pasta-small-gluten-free": {
+   "name": "Gluten-free small pasta",
+   "contains": []
+  },
+  "parmesan": {
+   "name": "Parmesan cheese",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "worcestershire": {
+   "name": "Worcestershire sauce",
+   "contains": [
+    "fish"
+   ]
+  },
+  "beef-ground": {
+   "name": "Ground beef (80% lean)",
+   "contains": [
+    "meat"
+   ]
+  },
+  "cheese-sliced": {
+   "name": "Sliced cheddar or American cheese",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "burger-buns": {
+   "name": "Hamburger buns",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "buns-gluten-free": {
+   "name": "Gluten-free burger buns",
+   "contains": [
+    "egg"
+   ]
+  },
+  "vinegar-white": {
+   "name": "White vinegar",
+   "contains": []
   }
  },
  "cuisines": {
@@ -912,136 +1729,162 @@ export const LIBRARY = {
    "id": "spring-rolls",
    "title": "Fresh spring rolls",
    "unit": 1,
+   "about": "Soft rice-paper rolls filled with crunchy vegetables, chicken, noodles, and mint, dipped in a peanut-hoisin sauce. Served cool, not fried.",
    "pickOne": "julienne"
   },
   {
    "id": "chicken-fajitas",
    "title": "Chicken fajitas",
    "unit": 1,
+   "about": "Strips of seared chicken with peppers and onions, wrapped in warm tortillas with salsa and sour cream.",
    "pickOne": "julienne"
   },
   {
    "id": "shoestring-fries",
    "title": "Baked shoestring fries",
    "unit": 1,
-   "pickOne": "julienne"
+   "about": "Thin, crispy potato sticks baked in the oven instead of fried.",
+   "pickOne": "julienne",
+   "meal": false
   },
   {
    "id": "fattoush",
    "title": "Fattoush",
    "unit": 1,
+   "about": "A crunchy Lebanese salad of chopped vegetables, herbs, and toasted pita pieces in a lemony dressing.",
    "pickOne": "fine-chopping"
   },
   {
    "id": "chimichurri-steak",
    "title": "Chimichurri steak",
    "unit": 1,
+   "about": "Seared steak topped with chimichurri, a bright Argentine sauce of chopped parsley, garlic, oregano, and vinegar.",
    "pickOne": "fine-chopping"
   },
   {
    "id": "tuna-salad-sandwiches",
    "title": "Tuna salad sandwiches",
    "unit": 1,
+   "about": "Classic tuna salad with finely chopped celery, onion, pickles, and herbs, on bread.",
    "pickOne": "fine-chopping"
   },
   {
    "id": "fish-tacos",
    "title": "Pico de gallo + Baja fish tacos",
    "unit": 1,
+   "about": "Broiled white fish in tortillas with fresh pico de gallo, a chunky salsa of diced tomato, onion, and cilantro.",
    "pickOne": "dicing"
   },
   {
    "id": "ratatouille",
    "title": "Ratatouille",
    "unit": 1,
+   "about": "A French vegetable stew of diced eggplant, zucchini, peppers, and tomato, cooked slowly with herbs.",
    "pickOne": "dicing"
   },
   {
    "id": "minestrone",
    "title": "Minestrone",
    "unit": 1,
+   "about": "A hearty Italian vegetable soup with beans and small pasta.",
    "pickOne": "dicing"
   },
   {
    "id": "chicken-caesar",
    "title": "Chicken Caesar + homemade dressing & croutons",
-   "unit": 1
+   "unit": 1,
+   "about": "Romaine salad with sliced chicken, a homemade creamy Caesar dressing, and crunchy homemade croutons."
   },
   {
    "id": "smash-burgers",
    "title": "Smash burgers + quick pickles",
-   "unit": 1
+   "unit": 1,
+   "about": "Thin beef patties smashed onto a very hot pan for crispy edges, with quick homemade pickles."
   },
   {
    "id": "french-omelet",
    "title": "French-style omelet",
    "unit": 2,
+   "about": "A soft, pale-yellow rolled omelet cooked gently over low heat. A breakfast dish.",
    "pickOne": "heat-control"
   },
   {
    "id": "grilled-cheese-tomato-soup",
    "title": "Grilled cheese + tomato soup",
    "unit": 2,
+   "about": "Crispy, golden grilled cheese sandwiches with a smooth homemade tomato soup for dipping.",
    "pickOne": "heat-control"
   },
   {
    "id": "challah-french-toast",
    "title": "Challah French toast",
    "unit": 2,
+   "about": "Thick slices of challah soaked in a sweet egg custard and cooked golden. A breakfast dish.",
    "pickOne": "heat-control"
   },
   {
    "id": "hash-browns",
    "title": "Crispy hash browns",
-   "unit": 2
+   "unit": 2,
+   "about": "Shredded potatoes squeezed dry and pan-fried into a crispy golden cake. A breakfast side.",
+   "meal": false
   },
   {
    "id": "shakshuka",
    "title": "Shakshuka",
    "unit": 2,
+   "about": "Eggs gently cooked in a spiced tomato and pepper sauce, served in the pan with bread for dipping.",
    "pickOne": "building-a-sauce"
   },
   {
    "id": "spaghetti-marinara",
    "title": "Spaghetti marinara",
    "unit": 2,
+   "about": "Spaghetti in a simple homemade tomato sauce with garlic and basil.",
    "pickOne": "building-a-sauce"
   },
   {
    "id": "honey-garlic-chicken",
    "title": "Honey-garlic chicken",
    "unit": 2,
+   "about": "Bite-size chicken in a sticky, sweet-savory honey, garlic, and soy sauce, over rice.",
    "pickOne": "building-a-sauce"
   },
   {
    "id": "chicken-fried-rice",
    "title": "Chicken fried rice",
-   "unit": 2
+   "unit": 2,
+   "about": "Day-old rice stir-fried fast with chicken, egg, vegetables, and soy sauce."
   },
   {
    "id": "oyakodon",
    "title": "Oyakodon",
-   "unit": 2
+   "unit": 2,
+   "about": "A Japanese rice bowl of chicken and onion simmered in a sweet soy broth, with egg set gently on top."
   },
   {
    "id": "chicken-adobo",
    "title": "Chicken adobo",
-   "unit": 2
+   "unit": 2,
+   "about": "Filipino chicken braised in vinegar, soy sauce, garlic, and bay leaves until tender, then glazed. Served with rice."
   },
   {
    "id": "breakfast-burritos",
    "title": "Breakfast burritos",
-   "unit": 2
+   "unit": 2,
+   "about": "Flour tortillas rolled around scrambled eggs, crispy potatoes, beef or turkey sausage, and cheese."
   },
   {
    "id": "cacio-e-pepe",
    "title": "Cacio e pepe",
-   "unit": 2
+   "unit": 2,
+   "about": "Roman pasta with a creamy sauce made only from cheese, black pepper, and starchy pasta water."
   },
   {
    "id": "eggs-benedict",
    "title": "Eggs Benedict",
    "unit": 2,
+   "about": "Poached eggs on toasted English muffins with turkey bacon or smoked salmon, under a buttery hollandaise sauce.",
    "prereqs": [
     "cacio-e-pepe"
    ]
@@ -1050,84 +1893,100 @@ export const LIBRARY = {
    "id": "mac-and-cheese",
    "title": "Stovetop mac and cheese",
    "unit": 2,
+   "about": "Creamy macaroni in a homemade cheese sauce, made on the stove.",
    "pickOne": "roux"
   },
   {
    "id": "chicken-spinach-crepes",
    "title": "Chicken and spinach crêpes",
    "unit": 2,
+   "about": "Thin French pancakes wrapped around chicken and spinach in a creamy white sauce.",
    "pickOne": "roux"
   },
   {
    "id": "japanese-chicken-curry",
    "title": "Japanese chicken curry",
    "unit": 2,
+   "about": "A mild, thick Japanese curry with chicken, potatoes, and carrots over rice. The curry sauce is made from scratch.",
    "pickOne": "roux"
   },
   {
    "id": "chana-masala",
    "title": "Chana masala",
-   "unit": 3
+   "unit": 3,
+   "about": "An Indian chickpea curry in a spiced onion and tomato sauce, with rice."
   },
   {
    "id": "beef-chili",
    "title": "Beef chili",
-   "unit": 3
+   "unit": 3,
+   "about": "A thick, hearty beef and bean chili with toasted spices."
   },
   {
    "id": "misir-wot",
    "title": "Misir wot",
-   "unit": 3
+   "unit": 3,
+   "about": "An Ethiopian red lentil stew, warmly spiced with berbere and slow-cooked onions. Served with rice."
   },
   {
    "id": "red-beans-and-rice",
    "title": "Red beans and rice",
-   "unit": 3
+   "unit": 3,
+   "about": "A Louisiana dish of red beans simmered until creamy with onion, celery, pepper, and chicken andouille, over rice."
   },
   {
    "id": "jollof-rice",
    "title": "Jollof rice with chicken",
-   "unit": 3
+   "unit": 3,
+   "about": "West African rice cooked in a blended tomato and pepper sauce until each grain is red and full of flavor, with chicken."
   },
   {
    "id": "bbq-pulled-chicken",
    "title": "BBQ pulled chicken + coleslaw",
-   "unit": 3
+   "unit": 3,
+   "about": "Chicken rubbed with spices, cooked until tender, shredded, and tossed in homemade barbecue sauce, with crunchy coleslaw."
   },
   {
    "id": "chicken-tagine",
    "title": "Chicken tagine with olives",
-   "unit": 3
+   "unit": 3,
+   "about": "A Moroccan stew of chicken slowly braised with spices, lemon, and green olives."
   },
   {
    "id": "peanut-stew",
    "title": "Peanut stew (maafe)",
-   "unit": 3
+   "unit": 3,
+   "about": "Maafe, a West African stew of chicken and vegetables in a rich tomato and peanut-butter sauce, over rice."
   },
   {
    "id": "koshari",
    "title": "Koshari",
-   "unit": 3
+   "unit": 3,
+   "about": "Egypt's favorite street food: lentils, rice, and pasta layered with a spiced tomato sauce and crispy fried onions."
   },
   {
    "id": "butter-chicken",
    "title": "Butter chicken",
-   "unit": 3
+   "unit": 3,
+   "about": "Marinated chicken in a mild, creamy, buttery tomato curry sauce, with rice."
   },
   {
    "id": "jerk-chicken",
    "title": "Jerk chicken",
-   "unit": 3
+   "unit": 3,
+   "about": "Jamaican chicken marinated in a spicy, fragrant paste of peppers, allspice, and thyme, then broiled."
   },
   {
    "id": "beef-bulgogi",
    "title": "Beef bulgogi",
-   "unit": 4
+   "unit": 4,
+   "about": "Korean thin-sliced beef in a sweet soy, pear, and garlic marinade, seared fast and served over rice."
   },
   {
    "id": "philly-cheesesteak",
    "title": "Philly cheesesteak",
    "unit": 4,
+   "about": "Thin-sliced beef cooked with onions and peppers, piled into a roll with melted cheese.",
    "prereqs": [
     "beef-bulgogi"
    ]
@@ -1135,80 +1994,101 @@ export const LIBRARY = {
   {
    "id": "lomo-saltado",
    "title": "Lomo saltado",
-   "unit": 4
+   "unit": 4,
+   "about": "A Peruvian beef stir-fry with onions, tomatoes, and soy sauce, served with fries and rice."
   },
   {
    "id": "suya",
    "title": "Suya (spiced beef skewers)",
-   "unit": 4
+   "unit": 4,
+   "about": "Nigerian beef skewers coated in a spicy ground-peanut rub, broiled and served with onion and tomato."
   },
   {
    "id": "chicken-yassa",
    "title": "Chicken yassa",
-   "unit": 4
+   "unit": 4,
+   "about": "Senegalese chicken marinated in lemon and mustard, cooked with a big pile of soft, sweet onions. Served with rice."
   },
   {
    "id": "chicken-tinga-tacos",
    "title": "Chicken tinga tacos",
-   "unit": 4
+   "unit": 4,
+   "about": "Shredded chicken simmered in a smoky tomato and chipotle sauce, in tortillas."
   },
   {
    "id": "matzo-ball-soup",
    "title": "Matzo ball soup from a whole chicken",
-   "unit": 4
+   "unit": 4,
+   "about": "A whole chicken simmered into golden broth, with soft matzo-meal dumplings."
   },
   {
    "id": "blueberry-muffins",
    "title": "Blueberry muffins",
-   "unit": 5
+   "unit": 5,
+   "about": "Tender, sweet muffins full of blueberries. A breakfast bake.",
+   "meal": false
   },
   {
    "id": "skillet-cornbread",
    "title": "Skillet cornbread",
-   "unit": 5
+   "unit": 5,
+   "about": "Golden cornbread baked in a hot skillet for a crispy edge. Pairs with chili.",
+   "meal": false
   },
   {
    "id": "pao-de-queijo",
    "title": "Pão de queijo",
-   "unit": 5
+   "unit": 5,
+   "about": "Brazilian cheese bread: chewy, puffy little rolls made with tapioca flour and cheese.",
+   "meal": false
   },
   {
    "id": "skillet-naan",
    "title": "Skillet naan",
-   "unit": 5
+   "unit": 5,
+   "about": "Soft Indian flatbread made with a yogurt dough and cooked in a very hot skillet.",
+   "meal": false
   },
   {
    "id": "pupusas",
    "title": "Pupusas",
-   "unit": 5
+   "unit": 5,
+   "about": "Salvadoran stuffed corn cakes filled with cheese and beans, cooked on a griddle, with a tangy cabbage slaw."
   },
   {
    "id": "ugali-sukuma-wiki",
    "title": "Ugali with sukuma wiki",
-   "unit": 5
+   "unit": 5,
+   "about": "Kenyan ugali, a firm cornmeal dish eaten by hand, with greens braised with tomato and onion."
   },
   {
    "id": "buttermilk-biscuits",
    "title": "Buttermilk biscuits",
    "unit": 5,
-   "pickOne": "cutting-in-fat"
+   "about": "Tall, flaky biscuits made with cold butter folded into layers. A breakfast bake.",
+   "pickOne": "cutting-in-fat",
+   "meal": false
   },
   {
    "id": "rugelach",
    "title": "Rugelach",
    "unit": 5,
-   "pickOne": "cutting-in-fat"
+   "about": "Small rolled pastries made with a butter and cream cheese dough, filled with jam, cinnamon sugar, and nuts.",
+   "pickOne": "cutting-in-fat",
+   "meal": false
   },
   {
    "id": "beef-empanadas",
    "title": "Baked beef empanadas",
    "unit": 5,
+   "about": "Hand pies of buttery pastry filled with spiced beef, onion, and egg, crimped and baked.",
    "pickOne": "cutting-in-fat"
   },
   {
    "id": "biscuits-and-gravy",
    "title": "Biscuits + sausage gravy",
    "unit": 5,
+   "about": "Split biscuits smothered in a creamy, peppery gravy made with turkey sausage. A breakfast dish.",
    "prereqs": [
     "buttermilk-biscuits",
     "pick:roux"
@@ -1217,40 +2097,50 @@ export const LIBRARY = {
   {
    "id": "gyoza",
    "title": "Gyoza",
-   "unit": 5
+   "unit": 5,
+   "about": "Japanese dumplings filled with seasoned chicken or beef and cabbage, pleated by hand, then fried and steamed."
   },
   {
    "id": "cinnamon-rolls",
    "title": "Cinnamon rolls",
    "unit": 5,
-   "pickOne": "yeast-dough"
+   "about": "Soft yeast-dough spirals filled with cinnamon sugar and topped with icing. A breakfast bake.",
+   "pickOne": "yeast-dough",
+   "meal": false
   },
   {
    "id": "challah",
    "title": "Challah",
    "unit": 5,
-   "pickOne": "yeast-dough"
+   "about": "A soft, slightly sweet braided bread made with eggs and honey.",
+   "pickOne": "yeast-dough",
+   "meal": false
   },
   {
    "id": "homemade-pizza",
    "title": "Homemade pizza",
    "unit": 5,
+   "about": "Pizza on a homemade yeast crust, stretched by hand, with tomato sauce and cheese.",
    "pickOne": "yeast-dough"
   },
   {
    "id": "granola",
    "title": "Homemade granola",
-   "unit": 6
+   "unit": 6,
+   "about": "Crunchy oven-toasted oats, nuts, and honey. A breakfast dish.",
+   "meal": false
   },
   {
    "id": "meatloaf",
    "title": "Meatloaf with glaze",
-   "unit": 6
+   "unit": 6,
+   "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer."
   },
   {
    "id": "swedish-meatballs",
    "title": "Swedish meatballs",
    "unit": 6,
+   "about": "Small beef meatballs in a creamy brown gravy, with cranberry sauce on the side.",
    "prereqs": [
     "pick:roux"
    ]
@@ -1259,6 +2149,7 @@ export const LIBRARY = {
    "id": "roast-chicken",
    "title": "Roast chicken + pan gravy",
    "unit": 6,
+   "about": "A whole chicken roasted until golden and juicy, carved at the table, with gravy made from the pan drippings.",
    "prereqs": [
     "pick:roux"
    ]
@@ -1266,27 +2157,32 @@ export const LIBRARY = {
   {
    "id": "pot-roast",
    "title": "Pot roast",
-   "unit": 6
+   "unit": 6,
+   "about": "Beef chuck braised for hours in the oven with carrots, potatoes, and onion until fall-apart tender."
   },
   {
    "id": "bobotie",
    "title": "Bobotie",
-   "unit": 6
+   "unit": 6,
+   "about": "South Africa's national dish: curry-spiced ground beef with dried fruit, baked under a golden egg custard."
   },
   {
    "id": "spanakopita",
    "title": "Spanakopita",
-   "unit": 6
+   "unit": 6,
+   "about": "A Greek pie of flaky phyllo pastry layered around a spinach and feta filling."
   },
   {
    "id": "spinach-mushroom-quiche",
    "title": "Spinach & mushroom quiche",
-   "unit": 6
+   "unit": 6,
+   "about": "A savory pie with homemade pastry and a creamy egg filling with spinach and mushrooms."
   },
   {
    "id": "chicken-pot-pie",
    "title": "Chicken pot pie",
    "unit": 6,
+   "about": "Chicken and vegetables in a creamy sauce, baked under a golden pie crust.",
    "prereqs": [
     "pick:roux",
     "spinach-mushroom-quiche"
@@ -1295,40 +2191,52 @@ export const LIBRARY = {
   {
    "id": "chicken-katsu",
    "title": "Chicken katsu",
-   "unit": 6
+   "unit": 6,
+   "about": "Japanese crispy breaded chicken cutlets, shallow-fried, with a tangy sauce and rice."
   },
   {
    "id": "kelewele",
    "title": "Kelewele (spiced plantains)",
-   "unit": 6
+   "unit": 6,
+   "about": "Ghanaian fried plantain cubes tossed in ginger and spice. Sweet, spicy, and crisp.",
+   "meal": false
   },
   {
    "id": "fish-and-chips",
    "title": "Fish and chips",
-   "unit": 6
+   "unit": 6,
+   "about": "British battered white fish deep-fried until crisp, with thick-cut chips."
   },
   {
    "id": "brown-butter-cookies",
    "title": "Brown butter chocolate chip cookies",
-   "unit": 7
+   "unit": 7,
+   "about": "Chocolate chip cookies made with browned butter for a toasty, nutty flavor.",
+   "meal": false
   },
   {
    "id": "malva-pudding",
    "title": "Malva pudding",
-   "unit": 7
+   "unit": 7,
+   "about": "A soft South African sponge cake with apricot jam, soaked in a warm butter-cream sauce.",
+   "meal": false
   },
   {
    "id": "churros",
    "title": "Churros with chocolate",
-   "unit": 7
+   "unit": 7,
+   "about": "Crisp fried dough sticks rolled in cinnamon sugar, with warm chocolate for dipping.",
+   "meal": false
   },
   {
    "id": "apple-pie",
    "title": "Apple pie with lattice",
    "unit": 7,
+   "about": "A classic apple pie with a homemade woven lattice crust.",
    "prereqs": [
     "spinach-mushroom-quiche"
-   ]
+   ],
+   "meal": false
   }
  ]
 };
