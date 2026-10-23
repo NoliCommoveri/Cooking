@@ -2148,3 +2148,15 @@ on it.
 - Tests: 222. Checked in a browser at phone width: every parent page, and
   adding a profile, a parent, and a shopping list from their dialogs.
 
+## 85. 2026-10-23 — Shopping: a Lists / Upcoming ingredients toggle
+
+- **Shopping** has a **Lists / Upcoming ingredients** toggle, like the queue's.
+  The choice is kept for the visit.
+- **Lists:** + Make a shopping list sits above the lists. Open lists show
+  newest first, then Done lists, also newest first.
+- **Upcoming ingredients:** the weeks of "What you'll need", each folded, and
+  the Kitchen staples link. A folded week is a single line, with no empty
+  space under it.
+- Tests: 222. Checked in a browser at phone width with two lists: the order and
+  both views.
+

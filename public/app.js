@@ -1385,14 +1385,28 @@ const shopping = parentOnly(async (flash) => {
     w.needs.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), el('div', { class: 'rows' }, s.items.map(usedLine)))),
     w.needs.may_have.length ? el('div', { class: 'psec' }, el('h4', {}, MAY_HAVE), el('div', { class: 'rows' }, w.needs.may_have.map(usedLine))) : null));
 
-  parentScreen('shopping', flash ?? null,
-    el('p', { class: 'mut' }, "Shopping lists are optional. Kids can start any lesson whenever you're ready."),
-    addHead('Your shopping lists', 'Make a shopping list', () => { closeMaker = max ? modal('Make a shopping list', maker) : modal('Make a shopping list', maker, el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => closeMaker() }, 'Close'))); }),
-    open.length ? el('div', { class: 'card' }, el('div', { class: 'rows' }, open.map(listRow))) : el('p', { class: 'mut' }, 'No lists open.'),
-    el('h2', {}, "What you'll need"),
+  // Lists, newest first, and what's coming up, one at a time (owner, 2026-10-23).
+  const newest = (a, b) => (a.created_at < b.created_at ? 1 : a.created_at > b.created_at ? -1 : 0);
+  const lists = [
+    addHead(null, 'Make a shopping list', () => { closeMaker = max ? modal('Make a shopping list', maker) : modal('Make a shopping list', maker, el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => closeMaker() }, 'Close'))); }),
+    open.length ? el('div', { class: 'card' }, el('div', { class: 'rows' }, [...open].sort(newest).map(listRow))) : el('p', { class: 'mut' }, 'No lists open.'),
+    past.length ? [el('h3', {}, 'Done lists'), el('div', { class: 'card' }, el('div', { class: 'rows' }, [...past].sort(newest).map(listRow)))] : null,
+  ];
+  const upcoming = [
     weeks.length ? weeks : el('p', { class: 'mut' }, 'Nothing is coming up yet.'),
     el('p', { class: 'mut small' }, `Kitchen staples are grouped under "${MAY_HAVE}" so you can check the cupboard first. `, el('a', { href: '#/parent/pantry' }, 'Kitchen staples')),
-    past.length ? el('details', {}, el('summary', {}, `Done lists (${past.length})`), el('div', { class: 'card' }, el('div', { class: 'rows' }, past.map(listRow)))) : null);
+  ];
+  const view = el('div', {});
+  const show = (which) => {
+    view.replaceChildren(...[which === 'upcoming' ? upcoming : lists].flat(2).filter(Boolean));
+    toggle.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', String(['lists', 'upcoming'][i] === which)));
+  };
+  const toggle = viewToggle('cpr.shop.view', [['lists', `Lists${open.length ? ` (${open.length})` : ''}`], ['upcoming', 'Upcoming ingredients']], 'lists', show);
+
+  parentScreen('shopping', flash ?? null,
+    el('p', { class: 'mut' }, "Shopping lists are optional. Kids can start any lesson whenever you're ready."),
+    toggle, view);
+  show(sessionGet('cpr.shop.view') ?? 'lists');
 });
 
 // The preview: tick what's on hand; the rest becomes the list.
