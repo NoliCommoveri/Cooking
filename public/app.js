@@ -1112,6 +1112,52 @@ function safetyReview(lessonId) {
   return d;
 }
 
+// Preview as a learner (§6.2): a parent goes through a lesson the way one of
+// their profiles will see it (its theme, kid or adult, the family's diet
+// swaps), without checking off Prep, and nothing is saved or counted. It opens
+// over the page, so closing it leaves the queue or a course being edited as it was.
+async function previewLesson(lessonId) {
+  const [{ profiles }, lib] = await Promise.all([api('GET', '/api/profiles'), api('GET', '/api/library')]);
+  // A family recipe comes from the API in lesson shape (§6.10).
+  const recipe = /^recipe:/.test(lessonId) ? await api('GET', `/api/recipes/${lessonId.slice(7)}`)
+    : /^shared:/.test(lessonId) ? await api('GET', `/api/shared/${lessonId.slice(7)}`) : null;
+  const ways = profiles.length ? profiles : [{ id: 'family', name: 'A kid', theme: 'quest', audience: 'kid' }];
+  let as = ways.find((x) => x.id === sessionGet('cpr.preview.as')) ?? ways[0];
+  const mount = el('div');
+  const pick = el('div', { class: 'seg', role: 'group', 'aria-label': 'See it as' });
+  const ov = el('div', { class: 'pvov', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Preview as a learner' },
+    el('div', { class: 'wrap' },
+      el('div', { class: 'pagehead' }, el('h2', {}, 'Preview as a learner'), el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Close')),
+      el('p', { class: 'mut small', style: 'margin:0' }, "Go through it the way your cook will see it. Nothing here is saved or counted, and Prep doesn't need checking off."),
+      profiles.length > 1 ? el('div', { class: 'pvas' }, el('span', { class: 'mut small' }, 'See it as'), pick) : null,
+      mount));
+  const keyFor = (e) => { if (e.key === 'Escape') close(); };
+  const close = () => {
+    ov.remove();
+    document.body.style.overflow = '';
+    document.removeEventListener('keydown', keyFor);
+    window.removeEventListener('hashchange', close);
+  };
+  const open = async () => {
+    pick.replaceChildren(...ways.map((x) => el('button', { type: 'button', 'aria-pressed': String(x.id === as.id), onclick: () => { as = x; sessionSet('cpr.preview.as', x.id); open(); } }, x.name)));
+    const fresh = el('div');
+    mount.replaceChildren(fresh);
+    await openLesson(fresh, {
+      // Its own place on this device, apart from the profile's real cooks.
+      profile: { id: `preview-${as.id}`, name: as.name, theme: as.theme, audience: as.audience },
+      family: me.family, lessonId, lesson: recipe?.lesson ?? null, extra: recipe?.extra ?? {}, labels: lib.labels, total: lib.total,
+      preview: true, exitLabel: 'Close preview', onExit: close,
+    });
+  };
+  document.body.append(ov);
+  document.body.style.overflow = 'hidden';
+  document.addEventListener('keydown', keyFor);
+  // Going to another page closes it.
+  window.addEventListener('hashchange', close);
+  await open();
+}
+const previewBtn = (lessonId) => el('button', { type: 'button', class: 'hbtn link', onclick: () => previewLesson(lessonId).catch((err) => showToast(err.message)) }, 'Preview as a learner');
+
 // A button that runs fn, shows its error, and is off while it runs.
 const actBtn = (label, cls, fn) => el('button', { type: 'button', class: `hbtn ${cls}`, onclick: async (e) => {
   e.currentTarget.disabled = true;
@@ -1209,7 +1255,7 @@ const parentQueue = parentOnly(async (flash) => {
     el('div', {}, el('b', {}, `${pname(r.requested_by)} asked for `, ...lessonName(r)), r.foundation ? foundationMark() : null,
       el('small', { class: 'mut' }, ` · ${fmtDay(r.created_at.slice(0, 10))}`)),
     r.already_queued ? el('p', { class: 'mut small', style: 'margin:0' }, `It's already on ${pname(r.requested_by)}'s list, so Not now is fine.`) : null,
-    safetyReview(r.lesson_id), tested(r.lesson_id),
+    el('div', { class: 'qtools' }, safetyReview(r.lesson_id), tested(r.lesson_id), previewBtn(r.lesson_id)),
     el('div', { class: 'acts' },
       servingsPick(r, setServings(r.id)),
       actBtn('Approve as an extra meal', 'pri', async () => { await api('POST', `/api/queue/${r.id}/approve?${tz()}`); again(`${r.title} is on ${pname(r.requested_by)}'s list as an extra meal.`); }),
@@ -1231,7 +1277,7 @@ const parentQueue = parentOnly(async (flash) => {
     const lessonRow = (x, week) => (x.done
       ? el('div', { class: 'rowi' }, el('div', {}, el('b', {}, ...lessonName(x)), el('small', {}, 'Cooked')), el('span', { class: 'mut' }, '✓'))
       : expander(el('span', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null, status(x, week) ? el('small', {}, status(x, week)) : null),
-        el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id)),
+        el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id), previewBtn(x.lesson_id)),
         el('div', { class: 'acts' },
           x.queue_id ? servingsPick(x, setServings(x.queue_id)) : null,
           actBtn('Skip this recipe', '', async () => {
@@ -1310,7 +1356,7 @@ const parentQueue = parentOnly(async (flash) => {
 
   const queuedRow = (x) => expander(el('span', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
     el('small', {}, `For ${names(x.profile_ids)}${x.planned_date ? ` · ${fmtDay(x.planned_date)}` : ''}${x.status === 'shopped' ? ' · Shopped for' : ''}${x.swap ? ' · Swapped in' : ''}`)),
-  el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id)),
+  el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id), previewBtn(x.lesson_id)),
   el('div', { class: 'acts' }, servingsPick(x, setServings(x.id)),
     x.swap
       ? actBtn('Undo swap', '', async () => { await api('POST', `/api/queue/${x.id}/unswap`); again(`Undid the swap for ${x.title}.`); })
@@ -1464,7 +1510,9 @@ const courseEditor = parentOnly(async (cid) => {
           el('label', { class: 'choice' },
             el('input', { type: 'checkbox', checked: !x.removed, onchange: (ev) => { x.removed = !ev.target.checked; drawPlan(); } }),
             el('span', {}, d.title, tag ? el('small', { class: 'mut' }, ` · ${tag}`) : null)),
-          el('button', { type: 'button', class: 'hbtn link', 'aria-label': `What is ${d.title}?`, onclick: () => showDish(id) }, d.skill ? `${d.skill} ›` : 'What is it? ›'));
+          el('span', { class: 'acts' },
+            written.has(id) && !hidden.has(id) ? el('button', { type: 'button', class: 'hbtn link', 'aria-label': `Preview ${d.title} as a learner`, onclick: () => previewLesson(id).catch((err) => showToast(err.message)) }, 'Preview') : null,
+            el('button', { type: 'button', class: 'hbtn link', 'aria-label': `What is ${d.title}?`, onclick: () => showDish(id) }, d.skill ? `${d.skill} ›` : 'What is it? ›')));
       };
       return el('div', { class: `planrow${keptIds.length ? '' : ' out'}` },
         el('div', { class: 'planno' }, num ?? '–'),

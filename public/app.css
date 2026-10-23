@@ -216,6 +216,12 @@ legend{font-weight:800;font-size:15px;margin-bottom:6px;padding:0}
 .pv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:0 0 12px;padding:8px 12px;border:1.5px dashed var(--h-line);border-radius:12px;background:var(--h-card);color:var(--h-fg);font-family:var(--h-body);font-size:15px}
 .pv-bar .seg{margin:0;flex-wrap:wrap}
 .pv-bar .seg button{min-height:40px;padding:4px 12px}
+/* The parents' Preview as a learner (§6.2): over the page, so closing it leaves the page as it was */
+.pvov{position:fixed;inset:0;z-index:70;overflow:auto;background:var(--h-bg);color:var(--h-fg);padding:16px 0 32px}
+.pvov>.wrap{display:grid;gap:12px}
+.pvov .pagehead{margin:0}
+.pvas{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.pvas .seg{margin:0;flex-wrap:wrap}
 .kw{border:0;background:none;padding:0;font:inherit;color:inherit;text-decoration:underline dotted;text-decoration-thickness:2px;text-underline-offset:4px;cursor:pointer}
 .kwcard{display:grid;gap:6px;padding:12px 14px;margin:0;font-size:17px;line-height:1.45}
 .kwcard b{font-size:19px}
@@ -248,7 +254,8 @@ legend{font-weight:800;font-size:15px;margin-bottom:6px;padding:0}
 .badge{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:14px;color:var(--h-acc)}
 .badge .ico{width:20px;height:20px}
 .rowi small{display:block}
-.dishpick>.hbtn.link{justify-self:start;min-height:40px;font-size:15px}
+.dishpick>.acts{gap:0 16px;justify-content:flex-start}
+.dishpick .hbtn.link{justify-self:start;min-height:40px;font-size:15px;text-align:left}
 .eyebrow+h1{margin-top:0}
 .fixov select,.fixov textarea{font:inherit;width:100%;box-sizing:border-box;padding:10px;border-radius:10px;border:1.5px solid var(--h-line);background:var(--h-bg);color:inherit;min-height:48px}
 .fixnotes p{margin:4px 0 0}

@@ -3017,3 +3017,30 @@ without ticking off every ingredient and without it counting.
   server: the omelet in both themes, Prep with nothing checked, Cook,
   Reflect, the end, and Back; the only request sent was the manager
   sign-in.
+
+## 121. 2026-10-23 — Preview as a learner for parents
+
+At the owner's request, parents get the manager's preview too.
+- **Where:** "Preview as a learner" in the tools of each lesson on the
+  Queue (a kid's request, this week's course lessons, and lessons added by
+  hand), and "Preview" beside each written lesson in the course editor.
+- **How it looks** (`previewLesson` in `public/app.js`): it opens over the
+  page, not as a new page, so closing it (Close, Close preview, Escape, or
+  going to another page) leaves the queue or a course being edited exactly
+  as it was. "See it as" picks one of the family's profiles, and the lesson
+  shows in that profile's theme, as a kid or an adult, with the family's
+  diet swaps; the choice is kept for the visit. A family recipe on the
+  queue previews too.
+- **Nothing is saved or counted:** the player runs in preview mode (§7.5)
+  with no `onCook`, `onReflect`, `onDone`, or `ask`, and keeps where it's up
+  to under its own preview id, apart from the profile's real cooks. Checked:
+  a whole preview sends no request that writes anything.
+- **Player:** `exitLabel` sets what Back says in a preview ("Close
+  preview" for parents, "Back to the lesson" in the manager). A preview no
+  longer scrolls past its own header when it first opens.
+- Plan §6.2 has the feature.
+- Tests: 261 (1 new: the parents' preview passes no save callbacks).
+  Checked in a browser at phone width on the dev server with a family of a
+  kid (Kitchen Quest) and an adult (Chef's Passport): the queue's links,
+  the course editor's, switching between the two, Cook mode as each, and
+  closing back to the page.

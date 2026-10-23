@@ -127,7 +127,8 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // without checking off Prep, any stage is a tap away, and nothing is saved
 // (leave out onCook and onReflect). registry: parts of the registry to use
 // instead of the published ones, like the manager's unsaved changes.
-export async function openLesson(mount, { profile, family, lessonId, lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null, preview = false, registry = null }) {
+// exitLabel: what Back says in a preview.
+export async function openLesson(mount, { profile, family, lessonId, lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
   const [published, L] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
   const R = { ...published, ...registry };
   const ING = { ...R.ingredients, ...extra };
@@ -501,7 +502,7 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
   function doneView() {
     return `<article class="${T.card}" style="text-align:center;justify-items:center">${tape}<p class="${T.kick}">${quest ? 'Quest cleared' : 'Dish done'}</p><h4>${esc(L.title)}</h4>
       <div class="${quest ? 'q-win' : 'p-photo'}" style="max-width:220px"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="220" height="220"></div>
-      <p>${preview ? 'End of the preview. Nothing was saved, and nothing counts.' : 'Nice cooking. Plate it up and enjoy it.'}</p>${onCook ? `<p class="${T.note}">This cook counts for ${esc(listNames(crewNames()))}.</p>` : ''}<button type="button" class="${T.btn}" data-act="exit-done">${preview ? 'Back to the lesson' : quest ? 'Back to the quest board' : 'Back to the recipe box'}</button></article>`;
+      <p>${preview ? 'End of the preview. Nothing was saved, and nothing counts.' : 'Nice cooking. Plate it up and enjoy it.'}</p>${onCook ? `<p class="${T.note}">This cook counts for ${esc(listNames(crewNames()))}.</p>` : ''}<button type="button" class="${T.btn}" data-act="exit-done">${preview ? esc(exitLabel) : quest ? 'Back to the quest board' : 'Back to the recipe box'}</button></article>`;
   }
 
   // The owner's preview: a strip to jump to any stage, and a reminder that it doesn't count.
@@ -513,16 +514,17 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
 
   // ---------- drawing and events ----------
   const STAGES = { card: cardView, learn: learnView, prep: prepView, cook: cookView, reflect: reflectView, done: doneView };
-  let wakeTipShown = false, lastDing = 0;
+  let wakeTipShown = false, lastDing = 0, drawn = false;
   async function draw(focusTop = true) {
     // A recipe with no Learn cards goes straight to Prep.
     if (S.stage === 'learn' && !learnCards().length) S.stage = 'prep';
     if (S.stage !== 'card' && S.stage !== 'done') { S.last = S.stage; save(); }
     const muted = isMuted();
-    const back = `<div class="pl-top"><a class="back" href="#" data-act="exit">← ${preview ? 'Back to the lesson' : quest ? 'Quest board' : 'Recipe box'}</a><button type="button" class="mutebtn" data-act="mute" aria-pressed="${muted}" aria-label="${muted ? 'Sound effects off. Turn them on' : 'Sound effects on. Turn them off'}">${ic(muted ? 'i-mute' : 'i-sound')}</button></div>`;
+    const back = `<div class="pl-top"><a class="back" href="#" data-act="exit">← ${preview ? esc(exitLabel) : quest ? 'Quest board' : 'Recipe box'}</a><button type="button" class="mutebtn" data-act="mute" aria-pressed="${muted}" aria-label="${muted ? 'Sound effects off. Turn them on' : 'Sound effects on. Turn them off'}">${ic(muted ? 'i-mute' : 'i-sound')}</button></div>`;
     mount.innerHTML = `<section class="kitchen qx player" data-kt="${quest ? 'quest' : 'passport'}">${back}${previewBar()}${STAGES[S.stage]()}${whyView()}</section>`;
     // In the manager's preview the lesson sits under the page's own header, so go to the lesson's top.
-    if (focusTop) { if (preview) mount.scrollIntoView(); else window.scrollTo(0, 0); }
+    if (focusTop) { if (!preview) window.scrollTo(0, 0); else if (drawn) mount.scrollIntoView(); }
+    drawn = true;
     if (S.stage !== 'cook' && voice?.on) voice.stop();
     const awake = S.stage === 'prep' || S.stage === 'cook';
     const ok = await keepAwake(awake);
