@@ -2395,3 +2395,11 @@ the next was started.
 - **§9 Phase 8** is Chef Ruth on the parent screens. §5.4's helper rows and
   §6.10 name her.
 - Nothing built yet. Tests: 233.
+
+## 96. 2026-10-23 — Plan: Chef Ruth's first lines
+
+- **Owner's wording** for Chef Ruth's first message ("Hi, I'm Ruth, your Clean
+  Plate guru! …") and for Getting started's opening to a new family ("Since
+  you're a new user, I'm going to get you all set up! …"), in §6.8 and §6.9.
+- A new family's first visit to her goes straight from her first message into
+  Getting started, which ends with the first recipes in each kid's queue.
