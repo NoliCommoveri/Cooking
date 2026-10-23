@@ -13,10 +13,15 @@
   "totalMinutes": 60,
   "scaling": {
     "mode": "free",
-    "notes": [{ "from": 9, "text": "For more than 8, you'll need a very big pot, at least 8 quarts. Or make it in two pots side by side." }]
+    "notes": [
+      { "from": 9, "text": "For more than 8, you'll need a very big pot, at least 8 quarts. Or make it in two pots side by side." }
+    ]
   },
   "learn": {
-    "move": { "title": "Small cubes, one big pot", "body": "Dicing means cutting food into small cubes that are all about the same size. Today you'll dice onion, carrots, celery, and zucchini, soften them in olive oil, and simmer them with tomatoes, beans, and little pasta into minestrone, a hearty Italian soup." },
+    "move": {
+      "title": "Small cubes, one big pot",
+      "body": "Dicing means cutting food into small cubes that are all about the same size. Today you'll dice onion, carrots, celery, and zucchini, soften them in olive oil, and simmer them with tomatoes, beans, and little pasta into minestrone, a hearty Italian soup."
+    },
     "why": [
       { "id": "grid", "title": "Planks, sticks, cubes", "body": "Every dice works the same way. Cut flat planks, cut the planks into sticks, then cut across the sticks. Each cut across a row of sticks makes a whole row of cubes, and if the planks and sticks were even, the cubes are too." },
       { "id": "hard-small", "title": "Hard vegetables, smaller cubes", "body": "A carrot is much harder than an onion and takes longer to soften. Cut carrots a little smaller than everything else, and they finish cooking at the same time as the rest." },
@@ -55,7 +60,22 @@
   "substitutions": [
     { "for": "pasta-small", "use": "pasta-small-gluten-free", "reason": "gluten", "note": "Gluten-free pasta gets soft faster. Start checking it a few minutes early." }
   ],
-  "equipment": ["chef-knife", "cutting-board", "vegetable-peeler", "colander", "can-opener", "mixing-bowl-large", "small-bowl", "measuring-cups", "liquid-measuring-cup", "measuring-spoons", "pot-large", "wooden-spoon", "spoon", "ladle"],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "vegetable-peeler",
+    "colander",
+    "can-opener",
+    "mixing-bowl-large",
+    "small-bowl",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "pot-large",
+    "wooden-spoon",
+    "spoon",
+    "ladle"
+  ],
   "steps": [
     { "id": "wash", "text": "Rinse the carrots, celery, and zucchini and dry them.", "safety": "solo" },
     { "id": "onion", "text": "Cut the onion in half through the root and peel it, leaving the root on. Lay each half flat side down, cut strips toward the root without cutting through it, then cut across the strips to dice it. Put it in the large bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "grid", "tip": "The root holds the layers together while you cut." },

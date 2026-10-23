@@ -13,11 +13,19 @@
   "totalMinutes": 60,
   "scaling": {
     "mode": "free",
-    "notes": [{ "from": 7, "text": "Cook 3 patties at a time in a 12-inch skillet. For more than 6, keep going in batches of 3, washing the tongs and your hands after each batch of raw beef." }]
+    "notes": [
+      { "from": 7, "text": "Cook 3 patties at a time in a 12-inch skillet. For more than 6, keep going in batches of 3, washing the tongs and your hands after each batch of raw beef." }
+    ]
   },
   "learn": {
-    "move": { "title": "Thin slices, hard sear", "body": "Thin slicing means cutting food into even slices you can almost see through. Today you'll slice cucumbers thin for quick pickles, slice onion thin for the burgers, then smash balls of beef flat in a very hot pan for burgers with crispy, browned edges." },
-    "callback": { "lesson": "chicken-fajitas", "body": "You've seared before: a hot pan, food laid down and left alone until a brown crust forms. Smash burgers push that idea as far as it goes. Pressing the beef flat puts every bit of it against the hot pan, so it's almost all crust." },
+    "move": {
+      "title": "Thin slices, hard sear",
+      "body": "Thin slicing means cutting food into even slices you can almost see through. Today you'll slice cucumbers thin for quick pickles, slice onion thin for the burgers, then smash balls of beef flat in a very hot pan for burgers with crispy, browned edges."
+    },
+    "callback": {
+      "lesson": "chicken-fajitas",
+      "body": "You've seared before: a hot pan, food laid down and left alone until a brown crust forms. Smash burgers push that idea as far as it goes. Pressing the beef flat puts every bit of it against the hot pan, so it's almost all crust."
+    },
     "why": [
       { "id": "thin-even", "title": "Thin and even", "body": "Thin slices soak up pickle brine in minutes, while thick ones take days. Slices that are all the same thickness pickle at the same speed, so every one is tangy and crunchy. Go slowly: even matters more than fast." },
       { "id": "brine", "title": "How a quick pickle works", "body": "The brine is vinegar, water, salt, and sugar. Salt pulls some water out of the cucumber, and the sour vinegar soaks in to take its place. Warm brine soaks in faster, so the pickles are ready in about half an hour." },
@@ -52,10 +60,23 @@
     { "ingredient": "mustard-dijon", "amount": 2, "unit": "tbsp", "optional": true, "group": "To serve" },
     { "ingredient": "lettuce-green-leaf", "amount": 1, "unit": "count", "round": "up", "optional": true, "group": "To serve" }
   ],
-  "substitutions": [
-    { "for": "burger-buns", "use": "buns-gluten-free", "reason": "gluten" }
+  "substitutions": [{ "for": "burger-buns", "use": "buns-gluten-free", "reason": "gluten" }],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "mixing-bowl-medium",
+    "saucepan-medium",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "wooden-spoon",
+    "plate",
+    "parchment",
+    "skillet-12",
+    "spatula",
+    "tongs",
+    "thermometer",
+    "oven-mitts"
   ],
-  "equipment": ["chef-knife", "cutting-board", "mixing-bowl-medium", "saucepan-medium", "liquid-measuring-cup", "measuring-spoons", "wooden-spoon", "plate", "parchment", "skillet-12", "spatula", "tongs", "thermometer", "oven-mitts"],
   "steps": [
     { "id": "cucumber-slice", "text": "Cut the ends off the cucumbers. Slice them into thin rounds, about as thick as a coin. Put them in the medium bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "thin-even", "tip": "Hold the food with your hand shaped like a claw: fingertips tucked under, knuckles in front. Slide your claw back a little after each slice." },
     { "id": "brine", "text": "In the saucepan, stir together the vinegar, water, sugar, and {qty:salt} salt. Warm it over medium heat, stirring, just until the sugar and salt disappear. Don't let it boil.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 180, "timerLabel": "Warm brine", "look": "Clear liquid with no grains of sugar or salt on the bottom." },

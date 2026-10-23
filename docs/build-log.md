@@ -2698,3 +2698,118 @@ the next was started.
 - Tests: 247, unchanged. Checked in a browser at phone width: the Menu with
   the two commands under the groups; Go to Lockers locked the PIN, and
   opening a parent screen asked for it again; Sign out signed out.
+
+## 111. 2026-10-23 — Plan: the content editor
+
+- **Owner ruling: the owner keeps the content up to date from the browser,
+  with no session.** Plan §7.5 is new: units, lessons (add, edit every part,
+  add, remove, and reorder steps, move to another unit or position, hide),
+  the registries, the food rules, and pictures, all edited on the owner
+  screens and saved into the `content/` files themselves. A save is checked
+  by the linter's rules in the Worker, committed to a `content-edits` branch
+  through the GitHub API, then built, linted, tested, and moved to `main` by
+  a workflow, and deployed. Every save has History and Revert.
+- **Owner ruling: the owner's call on an ingredient is the final word.** She
+  marks ingredients clean or unclean and edits the clean-species list,
+  blocked words, and allowed phrases; the scan flags things for her. The
+  §2.1 checks themselves can't be turned off.
+- Why: lesson patches (§6.11) covered only small fields on top of the files,
+  and everything bigger waited on a session. §6.11's "bigger changes" and
+  §6.10's "made in a session" lines now point at the editor; §6.2a lists it;
+  §9 adds Phase 10. Replacing patches with the editor in fix requests is
+  marked a Recommendation until the owner confirms.
+- Owner setup before it can save: a fine-grained GitHub token, set as the
+  `GITHUB_TOKEN` Worker secret on the Cloudflare dashboard.
+- Nothing built yet. Tests: 247, unchanged.
+
+## 112. 2026-10-23 — Plan: the content editor moves to its own manager section
+
+- **Owner ruling: the content editor is a manager section at `/manage`**, its
+  own app at its own address, not on the owner screens. It has its own
+  sign-in screen, and only the owner's login opens it. Nothing in the family
+  app or the owner screens links to it. Plan §7.5 and §9 (Phase 10) say so;
+  the §6.2a line entry 111 added is removed.
+- A subdomain was offered and not chosen: `/manage` needs no setup on the
+  Cloudflare dashboard.
+- Nothing built yet. Tests: 247, unchanged.
+
+## 113. 2026-10-23 — Plan: course plans and fix requests under the content editor
+
+- **Owner rulings.** A new lesson joins every family's existing course plans,
+  included, at its place in the order. A hidden lesson comes out of every
+  course plan as well as the library. A fix request's **Apply** opens the
+  editor with the suggestion filled in, replacing lesson patches. Plan §7.5
+  and §6.11 say so; §6.11's line is no longer a Recommendation.
+- Nothing built yet. Tests: 247, unchanged.
+
+## 114. 2026-10-23 — The manager section: the owner edits the content from the browser
+
+Phase 10 (plan §7.5), built.
+
+- **The manager section at `/manage`** (`src/worker/manage.js`,
+  `public/manage/`): its own sign-in and cookie (`cpr_manage`, path
+  `/manage`), opened only by the owner's login; table `manage_sessions`
+  (migration 0017).
+  - **The course:** units (add, rename, reorder, remove when empty, with
+    every unit number rewritten across units.json, course.json, and the lesson
+    files), lessons (add blank or as a copy, write a planned dish, move to
+    another unit or place, nudge up and down, hide and unhide, edit a planned
+    dish's card).
+  - **The lesson editor:** a form built from `content/schema/lesson.schema.json`
+    by `public/manage/form.js`, so every field gets a control, folded to one
+    line per step, ingredient, or card; the dish card; the picture (made a
+    PNG in the browser); History with Load this version. Ids for new steps
+    and why cards are made from their words.
+  - **Lists and rules:** ingredients, tools, skills, kitchen words,
+    cuisines and regions, from the registries schema; the food rules (clean
+    animals, fat-blocked animals, allowed products, blocked words, allowed
+    phrases, leaven, the kitchen-word watch list).
+  - Changes are staged in the browser until **Review and save**, and the
+    content linter runs in the browser as the owner edits
+    (`lint.js`, `validate.js`, `load.js`, `format.js` added to `public/lib/`).
+- **Saving** (`src/worker/github.js`): the Worker checks the content with
+  the save on it, refuses only problems the save brings, and commits the
+  changed files to the `content-edits` branch through the GitHub API
+  (`GITHUB_TOKEN` secret, `GITHUB_REPO` variable). A file changed on GitHub
+  since the editor opened it is refused, never overwritten. A lesson's
+  version goes up when its steps or ingredients change. Each save is a row in
+  `content_saves`, with **Undo** (a new save putting the files back) and a
+  status: Checking, Publishing, Live, Failed with GitHub's reason, or
+  Replaced.
+- **Publishing** (`.github/workflows/content-publish.yml`): on a push to
+  `content-edits`, merges `main`, rebuilds the generated files and any new
+  picture's web copy, lints, tests, and pushes to `main`; on a failure it
+  comments the reason on the save's commit and leaves `main` alone.
+  `content.yml` no longer runs on `content-edits`.
+- **Hidden lessons** (`content/hidden.json`): `tools/build-library.js`
+  leaves them out of the library, the course, its numbers, and the seasonal
+  units, so they leave every family's course plan; their lesson files are
+  still built. The linter checks the list names real lessons.
+- **One content layout** (`src/content/format.js`, `tools/format-content.js`):
+  every content file except the schemas was rewritten into it once, so a save
+  from the browser changes only the lines it changes; a test keeps them in it.
+- **One content loader** (`src/content/load.js`): the command-line tools,
+  the Worker, and the browser read the content files the same way.
+  `src/worker/content-data.js` now carries every content file, its git id,
+  and the picture list.
+- **Faster unclean-word scan** (`src/content/rules.js`): its patterns are
+  built once per list. The linter takes `renderOnly`, so a save renders only
+  the lessons it changed; a save's check takes about 40 ms.
+- **Fix requests** (owner ruling): **Apply in the manager** on the owner
+  screens opens the lesson with the suggestion filled in; saving marks the
+  request fixed with the owner's note. A lesson patched before this opens
+  with its patches on, and saving writes them into the file; the patches
+  stop applying once that file is live. Older patches keep Revert.
+- `/ops` shows whether GitHub is connected. The demo and syllabus pages find
+  Desserts by its name, not by unit 7.
+- **Owner steps** (`docs/setup.md`, *The manager section*): make a
+  fine-grained GitHub token (Contents read and write, Actions read, this
+  repository), set it as the `GITHUB_TOKEN` secret on the Cloudflare
+  dashboard, and press **Apply pending** on `/ops` (migration 0017).
+- Tests: 261 (14 new in `test/manage.test.js`, against a stand-in GitHub in
+  `test/helpers/github.js`). Checked in a browser at phone width against the
+  stand-in GitHub (`DEV_GITHUB=1` on `tools/dev-server.js`): sign-in, the
+  course, editing a step and saving, adding a unit and a copied lesson with a
+  picture, moving and hiding lessons, the checks catching a missing picture
+  and a split pick-one group, History, and Undo. The publish workflow itself
+  runs only on GitHub, so it is first exercised by the owner's first save.

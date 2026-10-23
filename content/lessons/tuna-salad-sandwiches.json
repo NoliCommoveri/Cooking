@@ -13,7 +13,10 @@
   "totalMinutes": 25,
   "scaling": { "mode": "free" },
   "learn": {
-    "move": { "title": "Tiny bits, big crunch", "body": "Fine chopping means cutting food into small, even bits. Today you'll chop celery, green onions, pickles, and parsley into tiny pieces, stir them into tuna with a creamy dressing, and build sandwiches." },
+    "move": {
+      "title": "Tiny bits, big crunch",
+      "body": "Fine chopping means cutting food into small, even bits. Today you'll chop celery, green onions, pickles, and parsley into tiny pieces, stir them into tuna with a creamy dressing, and build sandwiches."
+    },
     "why": [
       { "id": "sticks-first", "title": "Sticks first, then across", "body": "Chopping a celery rib bit by bit takes forever, and the pieces come out every size. Cut it the long way into thin sticks first, then line the sticks up and cut across them. Every cut makes a whole row of tiny squares at once, all the same size." },
       { "id": "small-bits", "title": "Why so small", "body": "Big chunks of celery or pickle land in some bites and miss others, and they fall out of the sandwich. Tiny bits spread all through the tuna, so every bite gets a little crunch, a little sour, and a little green." },
@@ -50,7 +53,19 @@
     { "for": "bread-sandwich", "use": "bread-gluten-free", "reason": "gluten" },
     { "for": "mayonnaise", "use": "yogurt-greek", "reason": "egg", "note": "Greek yogurt is a little tangier. Taste before adding the lemon juice, and use less if it's sour enough." }
   ],
-  "equipment": ["can-opener", "fork", "mixing-bowl-large", "chef-knife", "cutting-board", "colander", "paper-towels", "kitchen-towel", "measuring-cups", "measuring-spoons", "wooden-spoon"],
+  "equipment": [
+    "can-opener",
+    "fork",
+    "mixing-bowl-large",
+    "chef-knife",
+    "cutting-board",
+    "colander",
+    "paper-towels",
+    "kitchen-towel",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon"
+  ],
   "steps": [
     { "id": "open-tuna", "text": "Open the cans of tuna with the can opener. Hold each can over the sink and press the lid down into the can to squeeze out all the water.", "safety": "adult-nearby", "hazard": "Sharp can lid", "why": "drain", "tip": "Press with your palm flat on the middle of the lid. The edge of a cut lid is as sharp as a knife." },
     { "id": "flake", "text": "Tip the tuna into the large bowl and break it into small flakes with the fork.", "safety": "solo" },

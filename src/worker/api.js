@@ -611,6 +611,8 @@ function requestOut(r, L) {
     step: r.step, where: stepWhere(L, r.step) ?? 'the lesson', field: r.field, field_label: spec?.label ?? null, field_kind: spec?.kind ?? null,
     current: fromJson(r.current_value), suggested: fromJson(r.suggested_value), note: r.note, servings: r.servings,
     status: r.status, owner_reply: r.owner_reply, created_at: r.created_at, closed_at: r.closed_at,
+    // Fixed by a lesson patch (before the manager section), or by a save in it (§7.5).
+    patched: Boolean(r.patch_id),
   };
 }
 
@@ -666,7 +668,7 @@ on('GET', '/api/lessons/([a-z0-9-]+)/fixes', async (req, env, body, [lid]) => {
   const { results } = await env.DB.prepare(`SELECT f.*, p.new_value AS applied FROM fix_requests f LEFT JOIN lesson_patches p ON p.id = f.patch_id
       WHERE f.family_id = ? AND f.lesson_id = ? ORDER BY f.created_at DESC LIMIT 20`).bind(s.family_id, lid).all();
   // A fixed one says what it says now: the value the owner applied.
-  return { fixes: results.map((r) => ({ ...requestOut(r, L), applied: r.status === 'fixed' ? fromJson(r.applied) : undefined })) };
+  return { fixes: results.map((r) => ({ ...requestOut(r, L), applied: r.status === 'fixed' ? fromJson(r.applied ?? r.suggested_value) : undefined })) };
 }, KID);
 
 // The owner's queue. Requests show no family: the owner sees the lesson, the

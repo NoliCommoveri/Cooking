@@ -1,199 +1,46 @@
 {
   "regions": [
-    {
-      "id": "easia",
-      "name": "East & Southeast Asia"
-    },
-    {
-      "id": "mena",
-      "name": "Middle East & North Africa"
-    },
-    {
-      "id": "sasia",
-      "name": "South Asia"
-    },
-    {
-      "id": "africa",
-      "name": "Sub-Saharan Africa"
-    },
-    {
-      "id": "europe",
-      "name": "Europe"
-    },
-    {
-      "id": "latam",
-      "name": "Latin America & Caribbean"
-    },
-    {
-      "id": "usa",
-      "name": "United States"
-    }
+    { "id": "easia", "name": "East & Southeast Asia" },
+    { "id": "mena", "name": "Middle East & North Africa" },
+    { "id": "sasia", "name": "South Asia" },
+    { "id": "africa", "name": "Sub-Saharan Africa" },
+    { "id": "europe", "name": "Europe" },
+    { "id": "latam", "name": "Latin America & Caribbean" },
+    { "id": "usa", "name": "United States" }
   ],
   "cuisines": [
-    {
-      "id": "vietnamese",
-      "name": "Vietnamese",
-      "region": "easia"
-    },
-    {
-      "id": "chinese",
-      "name": "Chinese",
-      "region": "easia"
-    },
-    {
-      "id": "japanese",
-      "name": "Japanese",
-      "region": "easia"
-    },
-    {
-      "id": "filipino",
-      "name": "Filipino",
-      "region": "easia"
-    },
-    {
-      "id": "korean",
-      "name": "Korean",
-      "region": "easia"
-    },
-    {
-      "id": "lebanese",
-      "name": "Lebanese",
-      "region": "mena"
-    },
-    {
-      "id": "north-african",
-      "name": "North African",
-      "region": "mena"
-    },
-    {
-      "id": "moroccan",
-      "name": "Moroccan",
-      "region": "mena"
-    },
-    {
-      "id": "indian",
-      "name": "Indian",
-      "region": "sasia"
-    },
-    {
-      "id": "ethiopian",
-      "name": "Ethiopian",
-      "region": "africa"
-    },
-    {
-      "id": "italian",
-      "name": "Italian",
-      "region": "europe"
-    },
-    {
-      "id": "greek",
-      "name": "Greek",
-      "region": "europe"
-    },
-    {
-      "id": "french",
-      "name": "French",
-      "region": "europe"
-    },
-    {
-      "id": "swedish",
-      "name": "Swedish",
-      "region": "europe"
-    },
-    {
-      "id": "mexican",
-      "name": "Mexican",
-      "region": "latam"
-    },
-    {
-      "id": "jamaican",
-      "name": "Jamaican",
-      "region": "latam"
-    },
-    {
-      "id": "peruvian",
-      "name": "Peruvian",
-      "region": "latam"
-    },
-    {
-      "id": "salvadoran",
-      "name": "Salvadoran",
-      "region": "latam"
-    },
-    {
-      "id": "brazilian",
-      "name": "Brazilian",
-      "region": "latam"
-    },
-    {
-      "id": "american",
-      "name": "American",
-      "region": "usa"
-    },
-    {
-      "id": "louisiana",
-      "name": "Louisiana",
-      "region": "usa"
-    },
-    {
-      "id": "tex-mex",
-      "name": "Tex-Mex",
-      "region": "usa"
-    },
-    {
-      "id": "jewish",
-      "name": "Jewish",
-      "region": "europe"
-    },
-    {
-      "id": "british",
-      "name": "British",
-      "region": "europe"
-    },
-    {
-      "id": "nigerian",
-      "name": "Nigerian",
-      "region": "africa"
-    },
-    {
-      "id": "senegalese",
-      "name": "Senegalese",
-      "region": "africa"
-    },
-    {
-      "id": "malian",
-      "name": "Malian",
-      "region": "africa"
-    },
-    {
-      "id": "south-african",
-      "name": "South African",
-      "region": "africa"
-    },
-    {
-      "id": "kenyan",
-      "name": "Kenyan",
-      "region": "africa"
-    },
-    {
-      "id": "ghanaian",
-      "name": "Ghanaian",
-      "region": "africa"
-    },
-    {
-      "id": "egyptian",
-      "name": "Egyptian",
-      "region": "mena"
-    },
-    {
-      "id": "argentine",
-      "name": "Argentine",
-      "region": "latam"
-    },
-    {
-      "id": "chinese-american",
-      "name": "Chinese-American",
-      "region": "usa"
-    }
+    { "id": "vietnamese", "name": "Vietnamese", "region": "easia" },
+    { "id": "chinese", "name": "Chinese", "region": "easia" },
+    { "id": "japanese", "name": "Japanese", "region": "easia" },
+    { "id": "filipino", "name": "Filipino", "region": "easia" },
+    { "id": "korean", "name": "Korean", "region": "easia" },
+    { "id": "lebanese", "name": "Lebanese", "region": "mena" },
+    { "id": "north-african", "name": "North African", "region": "mena" },
+    { "id": "moroccan", "name": "Moroccan", "region": "mena" },
+    { "id": "indian", "name": "Indian", "region": "sasia" },
+    { "id": "ethiopian", "name": "Ethiopian", "region": "africa" },
+    { "id": "italian", "name": "Italian", "region": "europe" },
+    { "id": "greek", "name": "Greek", "region": "europe" },
+    { "id": "french", "name": "French", "region": "europe" },
+    { "id": "swedish", "name": "Swedish", "region": "europe" },
+    { "id": "mexican", "name": "Mexican", "region": "latam" },
+    { "id": "jamaican", "name": "Jamaican", "region": "latam" },
+    { "id": "peruvian", "name": "Peruvian", "region": "latam" },
+    { "id": "salvadoran", "name": "Salvadoran", "region": "latam" },
+    { "id": "brazilian", "name": "Brazilian", "region": "latam" },
+    { "id": "american", "name": "American", "region": "usa" },
+    { "id": "louisiana", "name": "Louisiana", "region": "usa" },
+    { "id": "tex-mex", "name": "Tex-Mex", "region": "usa" },
+    { "id": "jewish", "name": "Jewish", "region": "europe" },
+    { "id": "british", "name": "British", "region": "europe" },
+    { "id": "nigerian", "name": "Nigerian", "region": "africa" },
+    { "id": "senegalese", "name": "Senegalese", "region": "africa" },
+    { "id": "malian", "name": "Malian", "region": "africa" },
+    { "id": "south-african", "name": "South African", "region": "africa" },
+    { "id": "kenyan", "name": "Kenyan", "region": "africa" },
+    { "id": "ghanaian", "name": "Ghanaian", "region": "africa" },
+    { "id": "egyptian", "name": "Egyptian", "region": "mena" },
+    { "id": "argentine", "name": "Argentine", "region": "latam" },
+    { "id": "chinese-american", "name": "Chinese-American", "region": "usa" }
   ]
 }

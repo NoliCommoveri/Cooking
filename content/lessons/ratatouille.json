@@ -13,10 +13,15 @@
   "totalMinutes": 70,
   "scaling": {
     "mode": "free",
-    "notes": [{ "from": 9, "text": "For more than 8, brown the eggplant in two batches so it doesn't crowd the pot, and use your biggest pot." }]
+    "notes": [
+      { "from": 9, "text": "For more than 8, brown the eggplant in two batches so it doesn't crowd the pot, and use your biggest pot." }
+    ]
   },
   "learn": {
-    "move": { "title": "A pile of cubes becomes a stew", "body": "Dicing means cutting food into cubes that are all about the same size. Today you'll dice five different vegetables, brown some of them, and let them all simmer together into ratatouille, a French vegetable stew." },
+    "move": {
+      "title": "A pile of cubes becomes a stew",
+      "body": "Dicing means cutting food into cubes that are all about the same size. Today you'll dice five different vegetables, brown some of them, and let them all simmer together into ratatouille, a French vegetable stew."
+    },
     "why": [
       { "id": "grid", "title": "Planks, sticks, cubes", "body": "Every dice works the same way. Cut flat planks, cut the planks into sticks, then cut across the sticks. Each cut across a row of sticks makes a whole row of cubes, and if the planks and sticks were even, the cubes are too." },
       { "id": "flat-first", "title": "Round things get a flat side", "body": "Eggplant and zucchini are round, and round food rolls under a knife. Cut them in half the long way first, then lay the flat side on the board. Now they sit still for every cut that follows." },
@@ -51,7 +56,18 @@
     { "ingredient": "basil", "amount": 0.25, "unit": "cup", "prep": "leaves", "optional": true, "group": "To serve" },
     { "ingredient": "baguette", "amount": 1, "unit": "count", "round": "up", "optional": true, "group": "To serve" }
   ],
-  "equipment": ["chef-knife", "cutting-board", "colander", "mixing-bowl-large", "mixing-bowl-medium", "small-bowl", "measuring-spoons", "pot-large", "wooden-spoon", "oven-mitts"],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "colander",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "measuring-spoons",
+    "pot-large",
+    "wooden-spoon",
+    "oven-mitts"
+  ],
   "steps": [
     { "id": "wash", "text": "Rinse all the vegetables in the colander and dry them.", "safety": "solo" },
     { "id": "eggplant", "text": "Cut the ends off the eggplant. Cut it in half the long way and lay each half flat side down. Cut it into planks about ¾ inch thick, cut the planks into sticks, then cut across the sticks to dice it into cubes. Put them in the medium bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "flat-first", "tip": "These cubes are bigger than a pea, about the size of a game die. Eggplant shrinks a lot as it cooks." },

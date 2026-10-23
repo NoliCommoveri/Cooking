@@ -179,7 +179,9 @@ export function lint(c) {
       if (!s.multipliers.includes(1)) e('fixed scaling must include the 1× size');
       for (const k of Object.keys(s.notes || {})) if (!s.multipliers.includes(Number(k))) e(`scaling note for ${k}× isn't an allowed multiplier`);
     } else if ((s.min ?? 1) > (s.max ?? 12)) e('scaling min is above max');
-    if (!errors.some(x => x.startsWith(where))) {
+    // c.renderOnly (a set of lesson ids) limits this, the slow check, to the
+    // lessons a save in the manager section changed (§7.5).
+    if (!errors.some(x => x.startsWith(where)) && (!c.renderOnly || c.renderOnly.has(L.id))) {
       for (const n of servingOptions(L)) {
         try {
           const r = scaleLesson(L, ING, n);
@@ -251,6 +253,10 @@ export function lint(c) {
     }
     for (const t of c.terms) if (t.taughtIn && !DISH[t.taughtIn]) err(`terms.json ${t.id}`, `taughtIn "${t.taughtIn}" isn't a dish in course.json`);
   }
+
+  // hidden lessons (§7.5) name a written lesson or a planned dish
+  for (const id of c.hidden || []) if (!byId[id] && !DISH[id]) err('hidden.json', `"${id}" isn't a lesson or a dish in course.json`);
+  if (new Set(c.hidden || []).size !== (c.hidden || []).length) err('hidden.json', 'a lesson is listed twice');
 
   return { errors, warnings };
 }

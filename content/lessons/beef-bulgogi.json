@@ -16,7 +16,10 @@
     "notes": [{ "from": 9, "text": "For more than 8, cook the beef in 3 or 4 batches so the pan stays hot." }]
   },
   "learn": {
-    "move": { "title": "Thin slices, big flavor", "body": "Slice the beef thin, soak it in a sweet and salty marinade, and cook it fast in a very hot pan. Thin slices soak up flavor quickly and cook in a couple of minutes." },
+    "move": {
+      "title": "Thin slices, big flavor",
+      "body": "Slice the beef thin, soak it in a sweet and salty marinade, and cook it fast in a very hot pan. Thin slices soak up flavor quickly and cook in a couple of minutes."
+    },
     "why": [
       { "id": "firm-slice", "title": "Why freeze it first", "body": "Raw beef is soft, so the knife slips and squishes it. Thirty minutes in the freezer firms it up just enough to cut thin, even slices." },
       { "id": "across-grain", "title": "Slice across the grain", "body": "Beef is made of long fibers lined up like a bundle of straws. Cutting across them leaves short fibers, so every bite is tender instead of chewy." },
@@ -50,7 +53,20 @@
     { "for": "asian-pear", "use": "pear-bosc", "reason": "availability", "note": "A grated apple works too." },
     { "for": "soy-sauce", "use": "tamari", "reason": "gluten" }
   ],
-  "equipment": ["chef-knife", "cutting-board", "box-grater", "mixing-bowl-large", "measuring-cups", "measuring-spoons", "wooden-spoon", "skillet-12", "tongs", "spatula", "plate", "thermometer"],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "box-grater",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "plate",
+    "thermometer"
+  ],
   "steps": [
     { "id": "freeze", "text": "Put the beef, still in its wrapper, in the freezer.", "safety": "solo", "timerSeconds": 1800, "timerLabel": "Firm up the beef", "why": "firm-slice", "tip": "Make the marinade while it chills." },
     { "id": "grate", "text": "Grate the pear on the large holes of the box grater, right into the big bowl. Grate the garlic and ginger on the small holes.", "safety": "adult-nearby", "hazard": "Sharp grater", "tip": "Stop when your fingers get close to the grater. Chop the last bit with a knife instead." },

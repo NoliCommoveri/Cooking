@@ -15,13 +15,16 @@
     "mode": "fixed",
     "multipliers": [0.5, 1, 2],
     "notes": {
-      "0.5": "Makes 3 biscuits. Pat the dough into a smaller rectangle.",
       "1": "Makes 6 biscuits.",
-      "2": "Makes 12 biscuits. Use two sheet pans and swap their racks halfway through baking."
+      "2": "Makes 12 biscuits. Use two sheet pans and swap their racks halfway through baking.",
+      "0.5": "Makes 3 biscuits. Pat the dough into a smaller rectangle."
     }
   },
   "learn": {
-    "move": { "title": "Cold butter, flaky layers", "body": "Keep the butter cold and in little pieces, then fold the dough over itself. In the hot oven the butter melts and lets off steam, and the steam puffs the layers apart." },
+    "move": {
+      "title": "Cold butter, flaky layers",
+      "body": "Keep the butter cold and in little pieces, then fold the dough over itself. In the hot oven the butter melts and lets off steam, and the steam puffs the layers apart."
+    },
     "why": [
       { "id": "cold-butter", "title": "Why the butter has to be cold", "body": "Cold butter stays in solid little pieces in the flour. In a hot oven those pieces melt fast and turn to steam, which pushes the dough up into flaky pockets. Warm butter just mixes in, and the biscuits come out flat." },
       { "id": "gentle", "title": "Don't overmix", "body": "Stirring flour with liquid builds gluten, which makes dough stretchy and tough. Mix just until it comes together, even if it still looks lumpy and rough." },
@@ -48,7 +51,21 @@
     { "ingredient": "flour-ap", "amount": null, "text": "a little more, for dusting" },
     { "ingredient": "butter-unsalted", "amount": 1, "unit": "tbsp", "prep": "melted, for brushing", "optional": true }
   ],
-  "equipment": ["mixing-bowl-large", "box-grater", "measuring-cups", "liquid-measuring-cup", "measuring-spoons", "whisk", "fork", "biscuit-cutter", "sheet-pan", "parchment", "pastry-brush", "oven-mitts", "cooling-rack"],
+  "equipment": [
+    "mixing-bowl-large",
+    "box-grater",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "whisk",
+    "fork",
+    "biscuit-cutter",
+    "sheet-pan",
+    "parchment",
+    "pastry-brush",
+    "oven-mitts",
+    "cooling-rack"
+  ],
   "steps": [
     { "id": "preheat", "text": "Put a rack in the middle of the oven and heat it to 450°F. Line the sheet pan with parchment.", "safety": "adult-nearby", "hazard": "Hot oven" },
     { "id": "freeze-butter", "text": "Put the butter in the freezer.", "safety": "solo", "timerSeconds": 900, "timerLabel": "Freeze butter", "why": "cold-butter", "tip": "Measure everything else while it chills." },

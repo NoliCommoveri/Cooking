@@ -16,7 +16,10 @@
     "notes": [{ "from": 9, "text": "For more than 8, cook it in two 12-inch skillets side by side." }]
   },
   "learn": {
-    "move": { "title": "Sauce first, then eggs", "body": "Build a spiced tomato sauce in one pan, then cook the eggs gently right in it. One pan, and moves you'll use again and again." },
+    "move": {
+      "title": "Sauce first, then eggs",
+      "body": "Build a spiced tomato sauce in one pan, then cook the eggs gently right in it. One pan, and moves you'll use again and again."
+    },
     "why": [
       { "id": "bloom", "title": "Blooming spices", "body": "Cumin and paprika keep most of their flavor locked up until they meet hot fat. A minute in the oil wakes them up. Much longer and they scorch and turn bitter, so keep the spoon moving." },
       { "id": "reduce", "title": "Simmering to thicken", "body": "As the sauce bubbles, water escapes as steam. Less water means a thicker sauce and a stronger flavor. When a spoon dragged across the pan leaves a path for a second, it's ready." },
@@ -48,7 +51,16 @@
     { "ingredient": "feta", "amount": 0.5, "unit": "cup", "prep": "crumbled", "optional": true, "group": "To serve" },
     { "ingredient": "pita", "amount": null, "text": "warm, for scooping", "optional": true, "group": "To serve" }
   ],
-  "equipment": ["chef-knife", "cutting-board", "skillet-12", "wooden-spoon", "measuring-spoons", "can-opener", "small-bowl", "thermometer"],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "skillet-12",
+    "wooden-spoon",
+    "measuring-spoons",
+    "can-opener",
+    "small-bowl",
+    "thermometer"
+  ],
   "steps": [
     { "id": "chop", "text": "Dice the onion and peppers into pieces about the size of a pea. Mince the garlic: chop it into tiny bits, smaller than a grain of rice, and keep it in its own little pile.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Hold the food with your other hand shaped like a claw: fingertips tucked under, knuckles in front. The flat side of the knife slides along your knuckles, so the blade never gets near your fingertips." },
     { "id": "soften", "text": "Warm the olive oil in the skillet over medium heat. Add the onion and peppers. Cook, stirring now and then, until soft.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 360, "timerLabel": "Onion & peppers", "look": "The onion turns see-through and golden at the edges." },

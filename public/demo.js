@@ -152,7 +152,7 @@ function courseView() {
     return lessons[d.id] ? `<button type="button" class="c-dish" data-open="${esc(d.id)}">${body}</button>` : `<div class="c-dish">${body}</div>`;
   };
   return `<p class="mut">${C.dishes.length} dishes in ${units.length} units, ${TOTAL} lessons on one cook's path: dishes that share a number, like 1a, 1b, and 1c, are pick-one choices. Each unit teaches a set of skills; the ones marked "Try it now" can be tried here.</p>
-    ${units.map((u) => `<h3 class="c-unit">${u === 7 ? 'Desserts' : `Unit ${u}: ${esc(R.units[u])}`}</h3><div class="c-grid">${C.dishes.filter((d) => d.unit === u).map(row).join('')}</div>`).join('')}`;
+    ${units.map((u) => `<h3 class="c-unit">${R.units[u] === 'Desserts' ? 'Desserts' : `Unit ${u}: ${esc(R.units[u])}`}</h3><div class="c-grid">${C.dishes.filter((d) => d.unit === u).map(row).join('')}</div>`).join('')}`;
 }
 
 // ---------- skills: what the course teaches, and where each skill comes back ----------

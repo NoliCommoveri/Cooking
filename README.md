@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [110. 2026-10-23 — The PIN locks on its own; Lockers and Sign out in the Menu](docs/build-log.md#110-2026-10-23--the-pin-locks-on-its-own-lockers-and-sign-out-in-the-menu)
+**Latest build log entry:** [114. 2026-10-23 — The manager section: the owner edits the content from the browser](docs/build-log.md#114-2026-10-23--the-manager-section-the-owner-edits-the-content-from-the-browser)
 
 ## Current features
 
@@ -19,7 +19,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Sound** (`public/sound.js`): made in the browser. A sizzle on Next, a stamp thunk, a skill chime, and a rank-up fanfare, with a mute toggle remembered on the device (timers always ring).
 - **Lesson player** (`public/player.js`): each lesson in the profile's theme: the lesson card with the serving picker, Learn cards, Prep checklists, and Cook mode with safety banners, kitchen words, Why? cards, timers that ring until stopped, and the screen kept awake.
 - **Suggest a fix** (`src/content/patch.js`, `src/worker/lessons.js`): parents and adult learners report a problem on a lesson or step with what it should say instead; the family sees what came of it on the lesson.
-- **Fix requests** (owner screens): apply a suggestion as a lesson patch for every family, after the linter's checks; decline, reopen, or revert any of them.
+- **Fix requests** (owner screens): **Apply in the manager** opens the lesson in the manager section with the suggestion filled in; decline or reopen any of them, and revert an older lesson patch.
 - **Voice step control** (`public/voice.js`): in cook mode, "next" (moves on and reads the step aloud), "back," and "again" (reads it again). Off until a parent turns it on in family settings; shown only where the browser can recognize speech.
 - **Saved cooks** (`public/cooks.js`): each cook is saved to the family's account for every profile on it, with "Cooking with someone?" on the lesson card. A cook finished offline is sent when the connection returns. Lessons a profile has cooked say so in its kitchen. Nothing cooked on the Sabbath counts: it's saved, but the lesson stays up next and it isn't on Print our progress.
 - **Queue** (`src/worker/plan.js`): the one "up next" list. Parents add lessons for one or more profiles, approve kids' requests, check each lesson's safety review, and mark lessons test-cooked. Kids ask with "I want to make this"; adults tap "Cook this". A kid starting a lesson that isn't on their list needs the parent PIN, approved as an extra meal or in place of an assigned one, so assigned lessons never get pushed back. A course lesson approved early leaves its later place, so it never shows twice. Each queued lesson is one line that opens to its tools. A Course / Additional toggle switches between the course and lessons assigned on top of it; + Add a lesson opens a dialog.
@@ -47,12 +47,16 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Kid logins** (`src/worker/kidlogin.js`): a parent gives a kid profile a login (first name and last initial, one of 30 cooking pictures, a password). That kid's device opens only their kitchen; the server refuses everything else. A kid login lasts 14 days, renewed each time the app is opened.
 - **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN. Each list's add button is at its top right, and adding opens a dialog (a course or recipe opens its own page); long sections fold shut.
 - **Owner screens**: the beta word, the family list, setting a parent's password, fix requests, recipe reviews, and reported recipes.
-- **Ops page** (`/ops`): migrations, the owner flag, backup download and restore, clear everything, and remove or restore one family.
+- **Ops page** (`/ops`): migrations, the owner flag, whether GitHub is connected for the manager section, backup download and restore, clear everything, and remove or restore one family.
+- **Manager section** (`/manage`, `src/worker/manage.js`, `public/manage/`): the owner's own sign-in. Add, rename, reorder, and remove units; add lessons (blank or a copy), move, hide, and unhide them; edit every part of a lesson in a form built from the lesson schema; edit ingredients, tools, skills, kitchen words, cuisines, and the food rules; upload dish pictures. Checked as you type by the content linter.
+- **Saving content** (`src/worker/github.js`, `.github/workflows/content-publish.yml`): a save is checked again and committed to the `content-edits` branch; GitHub builds, lints, and tests it and puts it on `main`, which deploys. **Saves** shows each one's status, with Undo; a lesson's History loads any earlier version.
+- **Hidden lessons** (`content/hidden.json`): out of the library, the course numbers, and every family's course plan until unhidden.
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
 - **Dish illustrations** (`content/images/dishes/`): one picture for each of the 75 lessons.
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
 - **Lesson content** (`content/`): 17 lessons (the 4 samples, all 11 of Unit 1, and the 2 Appointed Times lessons), and the ingredient, tool, skill (52), and cuisine lists, as JSON.
-- **Content linter** (`tools/lint-content.js`): checks every lesson against the food rules, including the unclean-food block, the food-safety steps, and scaling. Runs on every push.
+- **Content linter** (`tools/lint-content.js`): checks every lesson against the food rules, including the unclean-food block, the food-safety steps, and scaling. Runs on every push, on every save from the manager section, and in the browser as the owner edits.
+- **Content file layout** (`tools/format-content.js`): every content file in the one layout the manager section writes.
 - **Scaling** (`src/content/`): amounts and step counts change with the serving size, shown in measuring-cup and spoon amounts.
 - **Lesson preview** (`preview/lesson-preview.html`): each written lesson, read-only, at every serving size. Tap an underlined kitchen word to see what it means.
 - **Kitchen words** (`content/terms.json`): what cooking words like dice, mince, and simmer mean, in kid terms. The linter won't let a lesson use one that isn't defined.

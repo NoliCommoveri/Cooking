@@ -8,6 +8,7 @@ import {
   Refused, CLEAR_PHRASE, REMOVE_PHRASE,
 } from './backup.js';
 import { emailReady } from './email.js';
+import { githubCheck } from './github.js';
 import { hmacHex, timingSafeEqual } from './lib/crypto.js';
 import { readCookie } from './lib/http.js';
 import { escapeHtml as esc } from './lib/html.js';
@@ -112,6 +113,8 @@ async function dashboard(env, flash = '') {
     }
   }
   const notReady = '<p class="muted">Apply the pending migrations first.</p>';
+  // The manager section saves content through GitHub (§7.5).
+  const github = await githubCheck(env);
 
   return page('Ops', `<h1>Clean Plate ops</h1>
 <form method="post" action="/ops/logout"><button type="submit">Sign out of ops</button></form>
@@ -124,6 +127,7 @@ ${error ? `<p class="bad">A query failed, so part of this page is missing.</p><p
   ${check(ready, 'Migrations applied.', 'Migrations are not all applied. Press Apply pending below.')}
   ${check(emailReady(env), 'Email is set up (Resend).', 'Email is not set up: add the RESEND_API_KEY secret and the MAIL_FROM variable. Until then nobody can sign up, because sign-up emails a code.')}
   ${check(owners > 0, 'An owner is set.', 'No owner yet. Sign up in the app, then make your email the owner below.')}
+  ${check(github.ok, `GitHub: ${esc(github.message)} The manager section at <a href="/manage/">/manage</a> can save.`, `GitHub: ${esc(github.message)} Until it's connected, the manager section at <a href="/manage/">/manage</a> can show the content but not save it. docs/setup.md has the steps.`)}
 </ul>
 
 <h2>Migrations</h2>

@@ -13,10 +13,15 @@
   "totalMinutes": 50,
   "scaling": {
     "mode": "free",
-    "notes": [{ "from": 9, "text": "For more than 8, broil the fish on two sheet pans, one at a time, so each sits right under the heat." }]
+    "notes": [
+      { "from": 9, "text": "For more than 8, broil the fish on two sheet pans, one at a time, so each sits right under the heat." }
+    ]
   },
   "learn": {
-    "move": { "title": "Strips, then cubes", "body": "Dicing means cutting food into small cubes that are all about the same size. Today you'll dice tomato and onion for pico de gallo, a fresh chunky salsa, then broil seasoned fish under the oven's top heat and fold it all into warm tortillas." },
+    "move": {
+      "title": "Strips, then cubes",
+      "body": "Dicing means cutting food into small cubes that are all about the same size. Today you'll dice tomato and onion for pico de gallo, a fresh chunky salsa, then broil seasoned fish under the oven's top heat and fold it all into warm tortillas."
+    },
     "why": [
       { "id": "grid", "title": "Planks, sticks, cubes", "body": "Every dice works the same way. Cut flat planks, cut the planks into sticks, then cut across the sticks. Each cut across a row of sticks makes a whole row of cubes, and if the planks and sticks were even, the cubes are too." },
       { "id": "root", "title": "The root holds the onion together", "body": "An onion is made of layers held together at the root end. Leave the root on while you cut strips toward it, and the strips stay joined, so the onion doesn't fall apart under your knife. Cut across the strips, and little cubes fall away." },
@@ -55,7 +60,24 @@
   "substitutions": [
     { "for": "cod", "use": "tilapia", "reason": "availability", "note": "Any firm white fish works: tilapia, haddock, or pollock. Thin pieces may be done a couple of minutes sooner." }
   ],
-  "equipment": ["chef-knife", "cutting-board", "spoon", "mixing-bowl-medium", "small-bowl", "measuring-cups", "measuring-spoons", "sheet-pan", "foil", "pastry-brush", "oven-mitts", "thermometer", "fork", "paper-towels", "microwave", "kitchen-towel"],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "spoon",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "sheet-pan",
+    "foil",
+    "pastry-brush",
+    "oven-mitts",
+    "thermometer",
+    "fork",
+    "paper-towels",
+    "microwave",
+    "kitchen-towel"
+  ],
   "steps": [
     { "id": "tomato-seeds", "text": "Cut each tomato into quarters from top to bottom. Scoop out the seeds and watery middle with a spoon.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "seeds" },
     { "id": "tomato-dice", "text": "Lay each quarter skin side down. Cut it into thin strips, then line the strips up and cut across them to dice the tomato into small cubes. Put them in the medium bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "grid", "look": "Cubes about the size of a pea or a little bigger, all close to the same size.", "tip": "Hold the food with your hand shaped like a claw: fingertips tucked under, knuckles in front." },

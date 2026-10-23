@@ -13,10 +13,15 @@
   "totalMinutes": 40,
   "scaling": {
     "mode": "free",
-    "notes": [{ "from": 9, "text": "For more than 8, toast the pita on two sheet pans, and swap their shelves halfway through." }]
+    "notes": [
+      { "from": 9, "text": "For more than 8, toast the pita on two sheet pans, and swap their shelves halfway through." }
+    ]
   },
   "learn": {
-    "move": { "title": "Rock the knife", "body": "Fine chopping means cutting herbs and vegetables into small, even bits. Today you'll chop parsley and mint by rocking the knife over the pile, chop crunchy vegetables, and toss it all with toasted pita in a lemony dressing." },
+    "move": {
+      "title": "Rock the knife",
+      "body": "Fine chopping means cutting herbs and vegetables into small, even bits. Today you'll chop parsley and mint by rocking the knife over the pile, chop crunchy vegetables, and toss it all with toasted pita in a lemony dressing."
+    },
     "why": [
       { "id": "rock-knife", "title": "Keep the tip down", "body": "Rest the tip of the knife on the board and lift only the handle, up and down, like a seesaw. Your other hand presses flat on top of the blade, away from the edge. The knife walks back and forth over the pile, and the tip never leaves the board, so it can't jump." },
       { "id": "dry-herbs", "title": "Dry herbs chop clean", "body": "Wet leaves stick to the knife and to each other. Instead of cutting, the knife squashes them into a dark green mush. Herbs patted dry in a towel fall apart into fluffy green bits, and the dressing clings to them." },
@@ -56,7 +61,21 @@
     { "for": "sumac", "use": "lemon", "reason": "availability", "note": "Zest one more lemon into the dressing and add an extra pinch of salt." },
     { "for": "pita", "use": "tortilla-corn", "reason": "gluten", "note": "Use 2 corn tortillas for each pita. Cut into squares and toasted the same way. They crisp a minute or two sooner." }
   ],
-  "equipment": ["chef-knife", "cutting-board", "sheet-pan", "pastry-brush", "oven-mitts", "spatula", "colander", "kitchen-towel", "mixing-bowl-large", "small-bowl", "fork", "measuring-cups", "measuring-spoons"],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "sheet-pan",
+    "pastry-brush",
+    "oven-mitts",
+    "spatula",
+    "colander",
+    "kitchen-towel",
+    "mixing-bowl-large",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons"
+  ],
   "steps": [
     { "id": "oven-on", "text": "Turn the oven on to 400°F.", "safety": "adult-nearby", "hazard": "Hot oven" },
     { "id": "pita-cut", "text": "Cut each pita into squares about 1 inch across, and spread them out on the sheet pan in one layer.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Squares the same size all brown at the same time." },

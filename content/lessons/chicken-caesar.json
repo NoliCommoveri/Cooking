@@ -13,11 +13,19 @@
   "totalMinutes": 50,
   "scaling": {
     "mode": "free",
-    "notes": [{ "from": 9, "text": "For more than 8, bake the croutons on two sheet pans and swap their shelves halfway, and cook the chicken in two batches." }]
+    "notes": [
+      { "from": 9, "text": "For more than 8, bake the croutons on two sheet pans and swap their shelves halfway, and cook the chicken in two batches." }
+    ]
   },
   "learn": {
-    "move": { "title": "Whisk it, cube it, toss it", "body": "A dressing is a sauce for a salad, and whisking is how you make it smooth. Today you'll whisk a creamy Caesar dressing, cut bread into even cubes and bake them into crunchy croutons, cook chicken, and toss it all with crisp romaine." },
-    "callback": { "lesson": "fish-tacos", "body": "In your dicing lesson you cut planks, then sticks, then cubes. Croutons are the same move with bread, just bigger cubes, about the size of a game die." },
+    "move": {
+      "title": "Whisk it, cube it, toss it",
+      "body": "A dressing is a sauce for a salad, and whisking is how you make it smooth. Today you'll whisk a creamy Caesar dressing, cut bread into even cubes and bake them into crunchy croutons, cook chicken, and toss it all with crisp romaine."
+    },
+    "callback": {
+      "lesson": "fish-tacos",
+      "body": "In your dicing lesson you cut planks, then sticks, then cubes. Croutons are the same move with bread, just bigger cubes, about the size of a game die."
+    },
     "why": [
       { "id": "even-cubes", "title": "Even cubes, even crunch", "body": "Little cubes dry out and brown before big ones. If the bread cubes are all about the same size, every crouton turns golden and crunchy at the same moment, with none burnt and none still soft in the middle." },
       { "id": "croutons", "title": "The oven dries, the oil browns", "body": "Bread is soft because it holds water. In the oven the water dries out, and the bread turns crisp all the way through. The oil on the outside helps it brown and gives it flavor." },
@@ -60,7 +68,24 @@
     { "for": "baguette", "use": "bread-gluten-free", "reason": "gluten", "note": "Use about 6 slices of gluten-free bread for each baguette. It browns faster, so check it a few minutes early." },
     { "for": "mayonnaise", "use": "yogurt-greek", "reason": "egg", "note": "Greek yogurt makes a tangier dressing. Taste it before adding all the lemon juice." }
   ],
-  "equipment": ["chef-knife", "cutting-board", "mixing-bowl-large", "sheet-pan", "oven-mitts", "spatula", "plate", "skillet-12", "tongs", "thermometer", "small-bowl", "whisk", "measuring-cups", "measuring-spoons", "colander", "kitchen-towel"],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "mixing-bowl-large",
+    "sheet-pan",
+    "oven-mitts",
+    "spatula",
+    "plate",
+    "skillet-12",
+    "tongs",
+    "thermometer",
+    "small-bowl",
+    "whisk",
+    "measuring-cups",
+    "measuring-spoons",
+    "colander",
+    "kitchen-towel"
+  ],
   "steps": [
     { "id": "oven-on", "text": "Turn the oven on to 375°F.", "safety": "adult-nearby", "hazard": "Hot oven" },
     { "id": "bread-slice", "text": "Cut the baguette into slices about ¾ inch thick.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Use a gentle back-and-forth sawing motion. Pressing straight down squashes soft bread." },

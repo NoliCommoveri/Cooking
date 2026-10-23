@@ -15,13 +15,16 @@
     "mode": "fixed",
     "multipliers": [0.5, 1, 2],
     "notes": {
-      "0.5": "Makes 12 cookies, one pan.",
       "1": "Makes 24 cookies. Bake one pan at a time.",
-      "2": "Makes 48 cookies. Bake one pan at a time, and let the pan cool before the next batch."
+      "2": "Makes 48 cookies. Bake one pan at a time, and let the pan cool before the next batch.",
+      "0.5": "Makes 12 cookies, one pan."
     }
   },
   "learn": {
-    "move": { "title": "Brown it, cool it, cream it", "body": "Cook butter until its milk solids turn toasty brown. Stir the hot, liquid butter over ice water until it thickens into a soft paste, then beat it with sugar. The cookies taste like caramel and toasted nuts." },
+    "move": {
+      "title": "Brown it, cool it, cream it",
+      "body": "Cook butter until its milk solids turn toasty brown. Stir the hot, liquid butter over ice water until it thickens into a soft paste, then beat it with sugar. The cookies taste like caramel and toasted nuts."
+    },
     "why": [
       { "id": "brown-bits", "title": "What browning does", "body": "Butter is mostly fat, plus a little water and milk solids. Once the water bubbles away, the milk solids toast on the bottom of the pan and turn nutty and brown." },
       { "id": "cool-it", "title": "Why cool it back down", "body": "Liquid butter can't hold air. Stirred over ice water until it thickens like frosting, it can be beaten with sugar, and the tiny air pockets help the cookies puff." },
@@ -33,7 +36,10 @@
       { "sign": "The butter won't firm up in the ice water", "fix": "Keep stirring and add more ice. It takes 5 to 10 minutes." },
       { "sign": "The cookies spread out flat", "fix": "The dough was too warm. Chill the scooped dough for 15 minutes before baking." }
     ],
-    "callback": { "lesson": "buttermilk-biscuits", "body": "In biscuits you kept the butter ice-cold so it would turn to steam in the oven. Today you do the opposite: melt it, brown it, then chill it just until it thickens back up, like frosting." },
+    "callback": {
+      "lesson": "buttermilk-biscuits",
+      "body": "In biscuits you kept the butter ice-cold so it would turn to steam in the oven. Today you do the opposite: melt it, brown it, then chill it just until it thickens back up, like frosting."
+    },
     "quiz": [
       { "q": "What turns brown when you brown butter?", "choices": ["The fat", "The milk solids", "The water"], "answer": 1, "explain": "The water cooks off and the milk solids toast. The fat carries their flavor into the cookies." }
     ]
@@ -50,7 +56,21 @@
     { "ingredient": "chocolate-chips", "amount": 2, "unit": "cup" },
     { "ingredient": "flaky-salt", "amount": null, "text": "a pinch for each cookie", "optional": true }
   ],
-  "equipment": ["saucepan-light", "silicone-spatula", "mixing-bowl-large", "mixing-bowl-medium", "small-bowl", "wooden-spoon", "measuring-cups", "measuring-spoons", "sheet-pan", "parchment", "oven-mitts", "spatula", "cooling-rack"],
+  "equipment": [
+    "saucepan-light",
+    "silicone-spatula",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "wooden-spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "sheet-pan",
+    "parchment",
+    "oven-mitts",
+    "spatula",
+    "cooling-rack"
+  ],
   "steps": [
     { "id": "brown", "text": "Melt the butter in the saucepan over medium heat. Keep cooking, swirling the pan often. It will foam, go quiet, then start to brown.", "safety": "adult-nearby", "hazard": "Hot butter", "timerSeconds": 480, "timerLabel": "Brown butter", "why": "brown-bits", "look": "Golden-brown bits on the bottom, and it smells like toasted nuts." },
     { "id": "ice-bath", "text": "Right away, scrape the butter and all the brown bits into the medium bowl. Set it in the large bowl half full of ice water, and stir until the butter is thick and soft, like frosting.", "safety": "adult-nearby", "hazard": "Hot butter", "timerSeconds": 480, "timerLabel": "Cool butter", "why": "cool-it", "tip": "Scrape out every brown bit. That's where the flavor is." },

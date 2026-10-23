@@ -1,0 +1,88 @@
+/* The manager section (plan §7.5), on the house style in /app.css. Built for a
+   phone first: one column, big tap targets, and the save bar always in reach.
+   No pills (§5.6). */
+.mwrap{padding-bottom:140px}
+.mbar .bar{margin-bottom:10px}
+.mnav{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1.5px solid var(--h-line);margin-bottom:18px}
+.mtab{padding:10px 12px;font-weight:800;text-decoration:none;color:var(--h-mut);border-bottom:3px solid transparent;margin-bottom:-1.5px}
+.mtab[aria-current="page"]{color:var(--h-fg);border-bottom-color:var(--h-acc)}
+.mwarn{background:var(--h-card);border:1.5px solid var(--h-bad);border-radius:10px;padding:10px 14px;margin:0 0 14px;font-weight:700}
+.mmain{display:grid;gap:16px}
+.mmain>h1{margin:0}
+.mhead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.mhead h1,.mhead h2{margin:0}
+.small-btn{min-height:44px;padding:6px 12px;font-size:15px}
+.hbtn.small{font-size:14px;min-height:36px}
+.stack.wide{width:100%}
+
+/* the course */
+.munit{gap:10px}
+.munit-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.munit-head h2{margin:0;font-size:21px}
+.mlist{list-style:none;margin:0;padding:0;display:grid}
+.mrow{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--h-line)}
+.mrow:first-child{border-top:0}
+.mrow .grow{flex:1;min-width:0}
+.mrow small{display:block}
+.mrow.hidden .mtitle{color:var(--h-mut);text-decoration:line-through}
+.mnum{min-width:2.6em;font-weight:800;color:var(--h-mut);text-align:right}
+.mtitle{font-weight:800}
+.mrow-acts{flex-wrap:nowrap;gap:6px}
+.mf-icon{min-width:44px;min-height:44px;border:1.5px solid var(--h-line);border-radius:10px;background:transparent;font-weight:800;font-size:18px}
+.mf-icon.bad{color:var(--h-bad)}
+.mf-icon[disabled]{opacity:.35;cursor:not-allowed}
+.more-menu{display:grid;gap:2px}
+.more-menu .hbtn.link{justify-content:flex-start;text-align:left;min-height:44px}
+
+/* the save bar */
+.msave{position:fixed;left:0;right:0;bottom:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;
+  padding:12px max(16px,env(safe-area-inset-right,0px)) max(12px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  background:var(--h-card);border-top:2px solid var(--h-acc);box-shadow:0 -10px 30px -16px rgba(0,0,0,.35)}
+@media (max-width:560px){.msave .acts{flex:1 1 100%}.msave .acts>*{flex:1}}
+.mprob{margin:6px 0 0;padding-left:20px;display:grid;gap:4px;font-size:15px}
+.mchecks{padding:12px 16px;gap:4px}
+
+/* the editor */
+.msec>summary{cursor:pointer;list-style:none}
+.msec>summary::-webkit-details-marker{display:none}
+.msec>summary h2{margin:0;display:flex;align-items:center;gap:8px}
+.msec>summary h2::before{content:'▸';color:var(--h-mut);font-size:16px}
+.msec[open]>summary h2::before{content:'▾'}
+.msec[open]{gap:14px}
+.mf-field{display:grid;gap:4px}
+.mf-field>.hbtn.link{justify-self:start}
+.mf-obj{display:grid;gap:12px;min-width:0}
+fieldset.mf-obj,fieldset.mf-list{border-left:3px solid var(--h-line);padding-left:12px}
+.mf-list{display:grid;gap:10px;min-width:0}
+.mf-list>legend,.mf-obj>legend{font-family:var(--h-disp);font-weight:600;font-size:18px}
+.mf-item{display:flex;gap:8px;align-items:flex-start;border:1.5px solid var(--h-line);border-radius:12px;padding:10px;background:var(--h-bg)}
+.mf-item.simple{padding:6px;align-items:center}
+.mf-item-body{flex:1;min-width:0;display:grid;gap:10px}
+.mf-item-acts{display:flex;flex-direction:column;gap:4px}
+.mf-item.simple .mf-item-acts{flex-direction:row}
+@media (max-width:560px){.mf-item:not(.simple){flex-direction:column}.mf-item:not(.simple) .mf-item-acts{flex-direction:row;align-self:flex-end}}
+.mf-adds{display:flex;gap:6px;flex-wrap:wrap}
+.mf-variant{display:grid;gap:8px}
+.mf-name{font-weight:800;font-size:15px}
+.mf-check{min-height:44px}
+.mpic{width:200px;height:200px;object-fit:contain;border-radius:12px;background:var(--h-bg)}
+.mfix{border-color:var(--h-acc)}
+.mfix h2{margin:0}
+.mhist,.msaves,.mitems{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.mhist li{display:flex;gap:10px;align-items:center;border-top:1px solid var(--h-line);padding-top:8px}
+.mhist .grow{flex:1;min-width:0}
+
+/* saves */
+.msaveitem{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.msaveitem .grow{flex:1;min-width:220px}
+.mstate{margin:4px 0}
+.mstate.st-live b,.mstate.st-published b{color:var(--h-acc)}
+.mstate.st-failed b{color:var(--h-bad)}
+.mdetail{white-space:pre-wrap;font-size:13px;background:var(--h-bg);border-radius:8px;padding:8px;overflow:auto;max-height:240px}
+
+/* lists */
+.mitem{border-top:1px solid var(--h-line);padding:6px 0}
+.mitem>summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.mitem-body{display:grid;gap:12px;padding:8px 0 4px}
+.mf-fold>summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;align-items:center}
+.mf-fold[open]>summary{margin-bottom:8px;color:var(--h-mut)}

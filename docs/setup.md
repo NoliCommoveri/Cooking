@@ -174,6 +174,52 @@ After this update deploys, press **Apply pending** on `/ops` (migration 0015).
    the kid's kitchen no longer shows it cooked.
 3. Press **Undo**: it's back on Progress, and off the Queue again.
 
+## The manager section
+
+The manager section, at **/manage** on the app's address, is where you change
+the lessons, units, ingredients, and food rules. It saves your changes into the
+lesson files on GitHub, and GitHub checks them and puts them live. For that it
+needs a key to the repository, which only you can make. Until it has one, the
+manager section shows everything but can't save.
+
+**Make the key on GitHub:**
+
+1. On GitHub, open your picture (top right) → **Settings** → **Developer
+   settings** (at the bottom of the left side) → **Personal access tokens** →
+   **Fine-grained tokens** → **Generate new token**.
+2. **Token name:** `Clean Plate manager`. **Expiration:** pick the longest it
+   offers (a year). When it runs out, the manager section says so; make a new
+   one the same way and paste it in again.
+3. **Resource owner:** NoliCommoveri. **Repository access:** **Only select
+   repositories**, and pick **Cooking**.
+4. **Permissions** → **Repository permissions**: set **Contents** to **Read and
+   write**, and **Actions** to **Read-only**. Leave everything else as it is.
+5. **Generate token**, and copy it. GitHub shows it only once.
+
+**Give it to the app, on the Cloudflare dashboard:**
+
+6. **Workers & Pages** → **clean-plate-recipes** → **Settings** → **Variables
+   and Secrets** → **Add**.
+7. **Type:** Secret. **Variable name:** `GITHUB_TOKEN`. **Value:** paste the
+   token. Save (and **Deploy** if it asks).
+8. Open `/ops` and press **Apply pending** (migration 0017). The Setup list
+   says **GitHub: Connected to NoliCommoveri/Cooking.**
+
+**Check it (the Phase 10 test):**
+
+1. Open **/manage**, and sign in with your owner email and password.
+2. Open a lesson, change a word in a step, press **Review and save**, then
+   **Save**. **Saves** shows it as **Checking**, then **Publishing**, then
+   **Live** a few minutes later (press **Refresh**). Open the lesson in the app:
+   the word has changed.
+3. On **Saves**, press **Undo…** on that save. A few minutes later the word is
+   back.
+4. Try to break a rule: type "bacon" into a step. The editor lists it as
+   something to fix, and **Save** stays off.
+
+If a save shows **Failed**, it says why, and nothing changed for families.
+Undo it, or fix the problem and save again.
+
 ## Before photos: create the photo storage (R2)
 
 Photos need a storage bucket that only you can create:
@@ -193,6 +239,9 @@ Photos need a storage bucket that only you can create:
   pending**, then **Restore from export.json**.
 - **Remove…** next to a family deletes that family. Download it first
   (**Download** next to it); **Restore a family** puts it back from that file.
+- Every save from the manager section can be undone from its **Saves** page,
+  and a lesson's **History…** loads any earlier version of it. GitHub keeps
+  every version of every content file.
 - If something on `/ops` fails, the page shows what the database said. The
   Worker's logs (**Workers & Pages → clean-plate-recipes → Logs**) show email
   failures too.

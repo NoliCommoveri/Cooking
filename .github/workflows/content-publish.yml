@@ -1,0 +1,74 @@
+name: Publish content edits
+
+# The manager section (/manage, plan §7.5) saves the owner's changes to content/ as commits on the
+# content-edits branch. This brings in main, builds what the app needs from the content, and runs
+# the linter and the tests. Only if all of that passes does it move the result onto main, which
+# Cloudflare deploys. If anything fails, main is left alone and the reason is posted as a comment
+# on the save's commit, where the manager section shows it.
+on:
+  push:
+    branches: [content-edits]
+
+permissions:
+  contents: write
+
+# One at a time, in order, so each save is checked on top of the one before it.
+concurrency:
+  group: content-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Bring in main
+        run: |
+          set -o pipefail
+          git config user.name "Clean Plate manager"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git merge --no-edit origin/main 2>&1 | tee -a check.log
+      - name: Build the app's copies of the content
+        run: |
+          set -o pipefail
+          pip install --quiet pillow
+          # Only the pictures this brings to main, so the others aren't re-encoded.
+          changed=$(git diff --name-only --diff-filter=AM origin/main...HEAD -- 'content/images/dishes/*.png')
+          if [ -n "$changed" ]; then python3 tools/build-dish-images.py $changed 2>&1 | tee -a check.log; fi
+          node tools/build-library.js 2>&1 | tee -a check.log
+      - name: Check the content
+        run: |
+          set -o pipefail
+          node tools/lint-content.js 2>&1 | tee -a check.log
+      - name: Run the tests
+        run: |
+          set -o pipefail
+          npm test 2>&1 | tee -a check.log
+      - name: Publish to main
+        run: |
+          set -o pipefail
+          git add -A public src/worker
+          git diff --cached --quiet || git commit -m "Build the app's copies of the content"
+          git push origin HEAD:main 2>&1 | tee -a check.log
+      - name: Say what failed
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "**This save didn't pass the checks, so it isn't live.** What they said:"
+            echo
+            echo '```'
+            grep -E "ERROR|^not ok|CONFLICT|error:|rejected|fatal" check.log | head -40 || true
+            echo '```'
+          } > comment.md
+          gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/comments" -F body=@comment.md
