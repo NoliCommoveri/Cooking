@@ -113,6 +113,8 @@ legend{font-weight:800;font-size:15px;margin-bottom:6px;padding:0}
 .drawer-group.on{color:var(--h-fg)}
 .drawer-pages{display:flex;flex-direction:column;padding-bottom:6px}
 .drawer-pages a{min-height:48px;display:flex;align-items:center;padding:8px 18px 8px 26px;font-weight:700;text-decoration:none;color:var(--h-fg);border-left:4px solid transparent}
+.drawer-cmds{display:flex;flex-direction:column;margin-top:10px;padding-top:10px;border-top:1.5px solid var(--h-line)}
+.drawer-cmds a,.drawer-cmds button{min-height:52px;display:flex;align-items:center;padding:8px 18px;border:0;background:none;font:inherit;font-weight:700;text-align:left;text-decoration:none;color:var(--h-fg)}
 .drawer-pages a.on{border-left-color:var(--h-acc);background:var(--h-bg)}
 .eyebrow{margin:8px 0 4px;color:var(--h-mut);font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
 .tabs{display:flex;gap:4px;border-bottom:1.5px solid var(--h-line);margin:0 0 16px;overflow-x:auto}

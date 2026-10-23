@@ -393,6 +393,7 @@ Do **not** use:
   - **Recipes:** Our recipes, User-shared recipes (§6.10)
   - **Setup:** Courses, Profiles, Family settings, Logins & PIN
   - **Owner** (the owner only): Families & beta word, Fix requests, Recipe reviews, Reported recipes (§6.2a)
+  - **Go to Lockers** and **Sign out** (owner, 2026-10-23), below the groups, as top-level commands. There's no Lock button: leaving the parent screens locks the PIN on its own (§8.3).
 - **Dish cards** (owner, 2026-10-23): on the queue and the course screens, a dish's name opens a short card, since many dishes are new to families: a line about the dish, its main ingredients (not flour, salt, oil, and the like), how it cooks (stovetop, oven, both, or no cooking), and the time. Every planned dish has them in `content/course.json` (`about`, `main`, `method`); an Appointed Times lesson carries its own; a family recipe's come from its "why we make this" card, its ingredients, and how it cooks, which the entry flow asks.
 
 ---
@@ -897,6 +898,7 @@ A backend is needed because the app is multi-family: each family's progress, que
 - **Family devices:** a device logged in as a parent shows the profile picker (chef lockers), as now.
 - **Kid logins** (§8.3a): a kid profile can also have its own login (first name and last initial, a cooking picture, and a password), set by a parent. A device logged in that way opens only that kid's kitchen.
 - **Parent PIN: required,** one per family, set during the first run (§6.9). Kitchen devices are logged in as a parent, so every parent-only screen asks for the PIN, including approving a kid's lesson request. Stored as a hash. It's a convenience lock, not a security boundary.
+  - **It locks on its own (owner, 2026-10-23)** when a parent leaves the parent screens (to the lockers, a kitchen, anywhere else), and when the app opens anywhere else while it's still unlocked (a tab closed on a parent screen). Not during Getting started. There's no Lock button.
   - A forgotten PIN is reset by a parent entering their account password.
 - **Family scoping:** every API query filters by the logged-in session's `family_id`. No endpoint accepts a family ID from the client.
   - **The one exception** is the owner's endpoints (§6.2a). They're open only to a parent with `is_owner`, and they return family names, kid counts, and last-active dates. Nothing else.

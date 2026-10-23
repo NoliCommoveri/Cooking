@@ -780,7 +780,7 @@ function parentMenu(current) {
       g === open ? el('div', { class: 'drawer-pages' }, pages.filter((x) => x.group === g).map((x) => el('a', {
         href: `#/parent/${x.key}`, class: x.key === current ? 'on' : null, 'aria-current': x.key === current ? 'page' : null, onclick: () => show(false),
       }, x.label))) : null,
-    ].filter(Boolean)));
+    ].filter(Boolean)), commands);
   };
   const onKey = (e) => { if (e.key === 'Escape') show(false); };
   const show = (on) => {
@@ -789,6 +789,11 @@ function parentMenu(current) {
     if (on) { document.addEventListener('keydown', onKey); panel.querySelector('button')?.focus(); } else { document.removeEventListener('keydown', onKey); button.focus(); }
   };
   button.addEventListener('click', () => show(drawer.hidden));
+  // The top-level commands, under the screens (owner, 2026-10-23). Leaving
+  // the parent screens locks the PIN on its own (route).
+  const commands = el('div', { class: 'drawer-cmds' },
+    el('a', { href: '#/', onclick: () => show(false) }, 'Go to Lockers'),
+    el('button', { type: 'button', onclick: async () => { await api('POST', '/api/logout'); store('cpr.profile', null); await start('#/'); } }, 'Sign out'));
   drawer.append(el('div', { class: 'drawer-scrim', onclick: () => show(false) }), panel);
   draw();
   return [button, drawer];
@@ -796,10 +801,7 @@ function parentMenu(current) {
 
 function parentScreen(current, ...kids) {
   const [button, drawer] = parentMenu(current);
-  const head = topbar(me.family.name,
-    el('a', { class: 'hbtn', href: '#/' }, 'Lockers'),
-    el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/pin/lock'); await refresh(); go('#/'); } }, 'Lock'),
-    el('button', { class: 'hbtn', type: 'button', onclick: async () => { await api('POST', '/api/logout'); store('cpr.profile', null); await start('#/'); } }, 'Log out'));
+  const head = topbar(me.family.name);
   head.prepend(button);
   // The app's name goes back to the Queue, where the Parents button lands.
   const brand = head.querySelector('.grow b');
@@ -2253,10 +2255,21 @@ async function refresh() {
   me = await api('GET', '/api/me');
 }
 
+// Whether the last screen was a parent screen: leaving them locks the PIN on
+// its own (owner, 2026-10-23), so a kid can't walk back in. It starts true, so
+// the app opening anywhere else (the tab closed while unlocked) locks too.
+let onParent = true;
+
 async function route() {
   const parts = location.hash.replace(/^#\/?/, '').split('/');
   const [top, sub, extra] = parts;
+  const leaving = onParent && top !== 'parent' && top !== 'owner';
+  onParent = top === 'parent' || top === 'owner';
   try {
+    if (leaving && me?.signed_in && !me.kid && !me.family?.setup_needed && unlocked()) {
+      await api('POST', '/api/pin/lock').catch(() => {});
+      await refresh();
+    }
     if (top === 'reset' && sub) return reset(sub);
     if (!me?.signed_in) {
       if (top === 'login') return login();

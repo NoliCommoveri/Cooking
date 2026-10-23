@@ -2681,3 +2681,20 @@ the next was started.
   Badges is a word kids know; the screens keep their own names (crests,
   skill pins, stamps). Built in `public/intro.js`. Plan §6.9 says so.
 - Tests: 247, unchanged.
+
+## 110. 2026-10-23 — The PIN locks on its own; Lockers and Sign out in the Menu
+
+- **Owner ruling: no Lock button.** The parent screens' top bar had
+  **Lockers**, **Lock**, and **Log out**. Lock is gone: leaving the parent
+  screens (to the lockers, a kitchen, anywhere else) locks the PIN on its
+  own. The app opening anywhere but a parent screen while still unlocked (a
+  tab closed on a parent screen) locks it too. Not during Getting started,
+  which needs the PIN. Built in `route` in `public/app.js`.
+- **Owner ruling: Go to Lockers and Sign out are in the Menu,** as
+  top-level commands below the screen groups. The top bar now has only the
+  Menu button and the app's name. Built in `parentMenu` in `public/app.js`
+  and `public/app.css`.
+- Plan §5.7 and §8.3 say so; README updated.
+- Tests: 247, unchanged. Checked in a browser at phone width: the Menu with
+  the two commands under the groups; Go to Lockers locked the PIN, and
+  opening a parent screen asked for it again; Sign out signed out.
