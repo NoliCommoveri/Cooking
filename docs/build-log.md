@@ -2213,3 +2213,23 @@ on it.
   vinegars). Checked in a browser at phone width: garlic and salt as staples,
   grouped first on the preview and in their aisles on the list.
 
+## 90. 2026-10-23 — Plan: kid logins settled (name, picture, password)
+
+- **Owner answers to the four questions in §8.3a:**
+  - No usernames to make up. A kid logs in with their **first name and last
+    initial** ("Ava C"), the way a big homeschool curriculum provider does it,
+    plus **a cooking picture** picked from 30 (each with an id) and a
+    password. The name and picture together are unique across the app; a
+    picture another "Ava C" has shows as taken when the parent sets it up.
+  - Kid profiles only; adult learners keep the lockers.
+  - Logging out on a kid's device needs no PIN.
+  - Passwords are at least 6 characters.
+- **Changed in the plan:** §8.3a rewritten around the name and picture, with
+  the 30 picture ids, a Grown-up / Kid choice on the Log in screen, the
+  set-up dialog on the profile editor, and ten **build steps** for Phase 5b
+  (data, pictures, kid sessions, the allowed-route list, the APIs, the
+  PIN-approved start, the app's three parts, and the checks). §6.1, §6.2,
+  §6.13, §8.3, §8.4 (`kid_logins` now has `login_name`, `login_key`, and
+  `picture`), and the phase table follow.
+- No code changed.
+
