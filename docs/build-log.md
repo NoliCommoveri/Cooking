@@ -2721,3 +2721,14 @@ the next was started.
 - Owner setup before it can save: a fine-grained GitHub token, set as the
   `GITHUB_TOKEN` Worker secret on the Cloudflare dashboard.
 - Nothing built yet. Tests: 247, unchanged.
+
+## 112. 2026-10-23 — Plan: the content editor moves to its own manager section
+
+- **Owner ruling: the content editor is a manager section at `/manage`**, its
+  own app at its own address, not on the owner screens. It has its own
+  sign-in screen, and only the owner's login opens it. Nothing in the family
+  app or the owner screens links to it. Plan §7.5 and §9 (Phase 10) say so;
+  the §6.2a line entry 111 added is removed.
+- A subdomain was offered and not chosen: `/manage` needs no setup on the
+  Cloudflare dashboard.
+- Nothing built yet. Tests: 247, unchanged.

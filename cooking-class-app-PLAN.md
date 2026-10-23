@@ -436,7 +436,6 @@ Do **not** use:
 - **Fix requests:** review reports from families, apply a suggested fix as a lesson patch, or revert one (§6.11)
 - See the list of families (name, number of profiles, last active). This is the only cross-family view. The owner never sees other families' kids' names, photos, or progress.
 - Set a new password for a parent, as a fallback when the reset email (§8.3) doesn't reach them
-- **Content editor:** units, lessons, registries, the food rules, and pictures, saved into the repo files (§7.5)
 - Remove a family. This is destructive, so it's on `/ops`, beside that family's download and Restore a family (§8.5)
 
 ### 6.3 Shopping — Requirement (owner, 2026-10-22)
@@ -760,7 +759,8 @@ The linter must **warn** (without failing the build) when:
 - an ingredient or tool uses its category's fallback icon
 
 ### 7.5 The content editor — Requirement (owner, 2026-10-23)
-**The owner keeps the content up to date from the browser, with no session.** Anything a session does to `content/` the owner can do on the owner screens (§6.2a), and the change is written into the repo files themselves, not laid on top of them.
+**The owner keeps the content up to date from the browser, with no session.** Anything a session does to `content/` the owner can do in the **manager section**, and the change is written into the repo files themselves, not laid on top of them.
+- **Where: the manager section at `/manage`** (owner, 2026-10-23), its own app at its own address, not part of the owner screens or the family app, with no link to it from either. It has its own sign-in screen, and **only the owner's login** opens it; every `/manage` route checks for the owner, as the owner routes do.
 - **What it covers: every file under `content/`.**
   - **Units:** add a unit, rename one, and reorder units.
   - **Lessons:** add a new lesson to any unit; edit every part of an existing one (title, cuisine, servings, scaling, time, Learn cards, ingredients, steps, timers, doneness targets, safety levels, hazards, substitutions, prerequisites, callbacks, intro slides); add, delete, and reorder steps; move a lesson to another unit or another position in the course; hide a lesson from every family and unhide it.
@@ -1047,7 +1047,7 @@ Each phase should be deployed and usable before the next begins.
 | **7. Content fill** | The remaining 71 lessons, written in separate content sessions | All 75 lessons pass the linter |
 | **8. Chef Ruth** (Getting started built 2026-10-23) | Chef Ruth on the parent screens (§6.8): her chat, Getting started (§6.9), and her first tasks. Chef Ruth in the kitchen comes after | A new family goes from sign-up to their first queued lesson through Getting started, and a parent sets up a course and plans a week in her chat, with everything showing on the pages it belongs to |
 | **9. Family recipes** | Folded into 4c (§6.10) | — |
-| **10. Content editor** (owner, 2026-10-23) | The content editor (§7.5): the GitHub token check on `/ops`, the save path (checks, commit to `content-edits`, the workflow that builds, checks, and moves it to `main`, the save status), History and Revert, then the editors: lessons and units first, then registries and the food rules, then pictures | The owner adds a unit, adds a lesson to it, moves an existing lesson into it, and removes a step, all from the browser; each is live for every family after the deploy with no session. A save that breaks a rule is refused with the reason, and Revert puts a lesson back |
+| **10. Content editor** (owner, 2026-10-23) | The manager section at `/manage` with its owner-only sign-in, and the content editor in it (§7.5): the GitHub token check on `/ops`, the save path (checks, commit to `content-edits`, the workflow that builds, checks, and moves it to `main`, the save status), History and Revert, then the editors: lessons and units first, then registries and the food rules, then pictures | The owner adds a unit, adds a lesson to it, moves an existing lesson into it, and removes a step, all from the browser; each is live for every family after the deploy with no session. A save that breaks a rule is refused with the reason, and Revert puts a lesson back |
 | **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system (Print our progress's CSV covers the basics, §6.15) | — |
 
 **Phase 2d waits (owner, 2026-10-22):** the installable PWA and cooking offline (Phase 2's slice 2d) are built once pretty much everything else is done, not before Phase 2e. Until then, Phase 2's "Wi-Fi off partway through" check waits with it.
