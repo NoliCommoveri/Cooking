@@ -2021,3 +2021,28 @@ on it.
   browser at phone width in both themes: the progress tab, tapping crests,
   pins, and passport pages, the celebration from the kitchen and from the
   player's done screen, and the rank up.
+
+## 80. 2026-10-23 — A kid's list follows the course order; off-path cooks need a grown-up
+
+- **Fix: course order.** Reordering a course saved and rescheduled correctly,
+  but a kid's list sorted queued lessons by when they were added, and
+  "Coming up on your path" used the suggested order. Both now follow the
+  course plan (`/api/profiles/<id>/queue` gives `order`).
+- **Owner ruling: a kid cooking off their list needs a grown-up.** On a kid
+  profile, a lesson not on their list is flagged ("This one is early" or
+  "isn't on your path right now"), and its start button becomes **Ask a
+  grown-up to start**: the parent PIN, then **Add as an additional assigned
+  meal** or **Replace an assigned meal** (pick which). Adults aren't asked.
+  A request approved on the Queue screen offers the same two choices.
+- **Neither pushes assigned lessons back.** A course lesson cooked through a
+  lesson queued outside the course counts as done but doesn't take a week's
+  place (`schedule.js`, `free`). Before this, cooking a later course lesson
+  early took this week's place and moved an assigned one to next week.
+  Replacing works like the Appointed Time swap (shared `replaceStatements`),
+  with Undo swap.
+- New `POST /api/profiles/<id>/approve`; `POST /api/queue/<id>/approve` takes
+  `replace`.
+- Tests: 217. The browser check got through the flag and the PIN step; the
+  rest of the tap-through still needs a browser check.
+- **Asked, not planned:** kid logins (username and password, no email, no
+  parent screens). §8.3 says kids don't log in, and no phase has it.

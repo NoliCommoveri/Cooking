@@ -21,8 +21,8 @@ import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
 import { servingOptions } from '../content/scale.js';
 import { unleavened } from '../content/leaven.js';
-import { family, queueProfiles, today } from './plan.js';
-import { weekOf, addDays } from './schedule.js';
+import { family, queueProfiles, today, weekFor, replaceStatements } from './plan.js';
+import { addDays } from './schedule.js';
 import { REGISTRY, stored, rowLesson, recipeVisible, lessonFor } from './recipes.js';
 import { recipeLesson } from '../content/recipe.js';
 
@@ -39,10 +39,6 @@ export function springWeek(sunday) {
   }
   return false;
 }
-
-// The week a queued item is for: a course lesson's week, a planned date's
-// week, or this week.
-const weekFor = (r, day) => r.week_start ?? (r.planned_date ? weekOf(r.planned_date) : weekOf(day));
 
 // What the picker offers for a week, in order (§6.19).
 export async function swapOptions(env, fam, week) {
@@ -119,20 +115,15 @@ export function register(on) {
     const L = (await lessonFor(env, s.family_id, lessonId)).lesson;
     const who = (await queueProfiles(env, s.family_id, [r.id]))[r.id] ?? [];
     const nid = randomHex(8), t = now();
-    const stmts = [
+    // The course lesson goes first next week, or a hand-queued one comes off.
+    const { swapOf, stmts: replaced } = replaceStatements(env, s.family_id, r, week, t);
+    await env.DB.batch([
       env.DB.prepare(`INSERT INTO queue (id, family_id, lesson_id, servings, planned_date, status, source, course_id, week_start, swap_of, created_at)
           VALUES (?, ?, ?, ?, ?, 'assigned', 'manual', NULL, ?, ?, ?)`)
-        .bind(nid, s.family_id, lessonId, nearest(L, r.servings), r.course_id ? null : r.planned_date, r.course_id ? week : r.week_start, r.course_id ? `c:${r.course_id}:${r.lesson_id}` : `q:${r.id}`, t),
+        .bind(nid, s.family_id, lessonId, nearest(L, r.servings), r.course_id ? null : r.planned_date, r.course_id ? week : r.week_start, swapOf, t),
       ...who.map((pid) => env.DB.prepare('INSERT INTO queue_profiles (queue_id, family_id, profile_id) VALUES (?, ?, ?)').bind(nid, s.family_id, pid)),
-    ];
-    if (r.course_id) {
-      // The course lesson takes this week's place no longer: it goes first next week.
-      stmts.push(env.DB.prepare(`INSERT INTO course_weeks (course_id, family_id, week_start, skipped, extra, swapped) VALUES (?, ?, ?, 0, 0, 1)
-          ON CONFLICT(course_id, week_start) DO UPDATE SET swapped = swapped + 1`).bind(r.course_id, s.family_id, week));
-    } else {
-      stmts.push(env.DB.prepare("UPDATE queue SET status = 'removed', closed_at = ? WHERE id = ? AND family_id = ?").bind(t, r.id, s.family_id));
-    }
-    await env.DB.batch(stmts);
+      ...replaced,
+    ]);
     return { ok: true, id: nid, title: pick.title };
   });
 

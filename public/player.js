@@ -114,6 +114,9 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // the suggested order's numbers. ask: { status, send() } for "I want to make
 // this" (a kid) or "Cook this" (an adult); status is null, or where the lesson
 // is in the profile's queue, and send() resolves to the new one (§6.1).
+// ask.approve() asks a grown-up to OK a kid's lesson that isn't on their list,
+// resolving to its new status, or null if they didn't; ask.early says it's
+// later on the kid's path.
 // seed: { servings, with, shopped } from the queued lesson, for a fresh cook;
 // shopped is the serving count its shopping trip bought for (§6.6).
 // onReflect(cookId, reflection): saves one profile's reflection (§3).
@@ -254,6 +257,14 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
     : '');
 
   // ---------- the lesson card ----------
+  // A kid starting something that isn't on their list needs a grown-up: it's
+  // flagged as early (later on their path) or off their path, and starting it
+  // asks for the parent PIN and how to fit it in (owner, 2026-10-23). Adults
+  // just cook. A cook already under way carries on.
+  const gated = () => Boolean(ask?.approve) && !adult && !S.started && !['assigned', 'shopped'].includes(ask.status);
+  const gateNote = () => (gated()
+    ? `<p class="${T.note} earlynote" role="note">${ic('i-lock')}<b>${ask.early ? 'This one is early.' : "This one isn't on your path right now."}</b> ${ask.early ? "It's later on your path." : ''} A grown-up needs to OK it before you start.</p>`
+    : '');
   function cardView() {
     const cu = R.cuisines[L.cuisine]?.name ?? L.cuisine;
     const sc = scaled();
@@ -280,11 +291,11 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
       ? `<article class="q-panel q-card"><p class="q-kick">${L.recipe ? esc(L.kicker ?? 'Family recipe') : R.seasonal?.includes(L.unit) ? esc(R.units[L.unit]) : `Path ${L.unit}`}${num(L.id) ? ` · Quest ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
           <h2 class="q-title">${esc(L.title)}</h2><p class="q-skill"><b>${esc(L.skill)}</b></p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${who}${swaps}
-          <button type="button" class="q-btn" data-act="start">${!S.started ? 'Start quest' : 'Keep going'}</button></article>`
+          ${gateNote()}<button type="button" class="q-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask a grown-up to start' : !S.started ? 'Start quest' : 'Keep going'}</button></article>`
       : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
           ${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
-          <button type="button" class="p-btn" data-act="start">${!S.started ? "Let's cook" : 'Keep going'}</button></article>`;
+          ${gateNote()}<button type="button" class="p-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask a grown-up to start' : !S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
     return `${top}${askBox()}${fixNotes()}<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${restart}${fixBtn(null)}</div>`;
   }
@@ -569,6 +580,13 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
       case 'exit-done': clearState(profile.id, L.id); return exit();
       case 'serv': S.servings = options[Math.max(0, Math.min(options.length - 1, options.indexOf(S.servings) + Number(d.i)))]; break;
       case 'serv-set': S.servings = Number(d.n); break;
+      case 'approve':
+        b.disabled = true;
+        return ask.approve().then((st) => {
+          if (!st) { b.disabled = false; return; }
+          ask.status = st;
+          S.stage = learnCards().length ? 'learn' : 'prep'; begin(); save(); sync(); draw();
+        }, () => { b.disabled = false; });
       case 'start': S.stage = S.started ? S.last || 'learn' : learnCards().length ? 'learn' : 'prep'; begin(); break;
       case 'restart': S = fresh(); break;
       case 'ask':

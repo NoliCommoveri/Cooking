@@ -400,7 +400,10 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     // pick-one group counts once, and once one of its dishes is cooked it's done.
     const doneGroups = new Set(lib.lessons.filter((L) => L.pick && (cooks[L.id] || queued.has(L.id))).map((L) => L.pick));
     const entries = [];
-    for (const L of lib.lessons) {
+    // In the profile's course plan's order when it has one (§6.18).
+    const byId = Object.fromEntries(lib.lessons.map((L) => [L.id, L]));
+    const ordered = mine.order ? mine.order.map((x) => byId[x]).filter(Boolean) : lib.lessons;
+    for (const L of ordered) {
       if (seasonalUnit(L.unit) || cooks[L.id] || queued.has(L.id) || (mine.labels && !mine.labels[L.id])) continue;
       if (L.pick && doneGroups.has(L.pick)) continue;
       const last = entries.at(-1);
@@ -498,6 +501,9 @@ async function lesson(profileId, lessonId) {
     // servings and who it's for, for a fresh cook.
     ask: {
       status: queued?.status ?? null,
+      // Off their list: later on their path (early), or not on it.
+      early: Boolean(mine.order?.includes(lessonId)),
+      approve: () => approveNow(p, lessonId, recipe?.lesson?.title ?? lib.lessons.find((x) => x.id === lessonId)?.title ?? 'this'),
       send: async () => {
         try { return (await api('POST', `/api/profiles/${p.id}/ask`, { lesson_id: lessonId })).status; } catch (err) { showToast(err.message); throw err; }
       },
@@ -533,6 +539,54 @@ const fromInput = (kind, v) => {
 const valueInput = (kind, name, value = '') => (kind === 'text'
   ? el('textarea', { name, rows: 3, maxlength: 600 }, value)
   : el('input', { name, value, inputmode: kind === 'unit' ? 'text' : 'decimal', autocomplete: 'off' }));
+
+// A kid wants to cook something that isn't on their list (owner, 2026-10-23):
+// a grown-up enters the PIN and says how it fits in, as an extra assigned meal
+// or in place of one already assigned. Resolves to the lesson's new status, or
+// null if they cancel.
+function approveNow(profile, lessonId, title) {
+  return new Promise((resolve) => {
+    const box = el('div', { class: 'card' });
+    const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': `OK ${title}` }, box);
+    const close = (st) => { ov.remove(); resolve(st); };
+    ov.addEventListener('click', (e) => { if (e.target === ov) close(null); });
+    const cancel = () => el('button', { type: 'button', class: 'hbtn', onclick: () => close(null) }, 'Cancel');
+    document.body.append(ov);
+
+    const pinStep = () => {
+      const input = el('input', { name: 'pin', type: 'password', inputmode: 'numeric', autocomplete: 'off', pattern: '[0-9]*', maxlength: 8, 'aria-label': 'Parent PIN' });
+      box.replaceChildren(el('h2', {}, `${profile.name} wants to cook ${title}`),
+        el('p', { class: 'mut' }, "It isn't on their list. A grown-up OKs it: enter the parent PIN."),
+        form([el('div', { class: 'pin' }, input)], 'Unlock', async (v) => {
+          await api('POST', '/api/pin/unlock', { pin: v.pin });
+          await refresh();
+          await choiceStep();
+        }, { extra: [cancel()] }));
+      input.focus();
+    };
+
+    const choiceStep = async () => {
+      const mine = await api('GET', `/api/profiles/${profile.id}/queue?${tz()}`);
+      const assigned = mine.items.filter((x) => ['assigned', 'shopped'].includes(x.status) && !x.swap);
+      const pick = el('select', { name: 'replace', 'aria-label': 'The meal it replaces' }, assigned.map((x) => el('option', { value: x.id }, x.title)));
+      const choice = (value, label, hint, checked) => el('label', { class: 'choice' },
+        el('input', { type: 'radio', name: 'how', value, checked, onchange: () => { pick.disabled = value !== 'replace'; } }),
+        el('span', {}, el('b', {}, label), el('small', { class: 'mut' }, ` ${hint}`)));
+      pick.disabled = true;
+      box.replaceChildren(el('h2', {}, `How does ${title} fit in?`),
+        form([
+          choice('extra', 'Add as an additional assigned meal', `${profile.name}'s assigned meals stay where they are.`, true),
+          assigned.length ? choice('replace', 'Replace an assigned meal', 'A course lesson it replaces goes first next week, and nobody is shown as behind.', false) : null,
+          assigned.length ? el('label', { class: 'f' }, 'The meal it replaces', pick) : null,
+        ], 'OK, start cooking', async (v) => {
+          const r = await api('POST', `/api/profiles/${profile.id}/approve`, { lesson_id: lessonId, replace: v.how === 'replace' ? pick.value : null });
+          close(r.status);
+        }, { extra: [cancel()] }));
+    };
+
+    if (unlocked()) choiceStep().catch((err) => { showToast(err.message); close(null); }); else pinStep();
+  });
+}
 
 // A dialog over the lesson, in the house style. Resolves true once a fix is
 // sent. A kid profile asks for the parent PIN first; an adult profile doesn't.
@@ -873,6 +927,19 @@ const parentQueue = parentOnly(async (flash) => {
   const setServings = (qid) => async (n) => { await api('PUT', `/api/queue/${qid}`, { servings: n }); };
 
   // ---- requests ----
+  // A request is approved as an extra meal, or in place of one of the asker's
+  // assigned meals (owner, 2026-10-23).
+  const replaceable = (pid) => [
+    ...q.queued.filter((x) => x.profile_ids.includes(pid) && !x.swap).map((x) => ({ id: x.id, title: x.title })),
+    ...q.courses.filter((c) => c.profile_ids.includes(pid)).flatMap((c) => c.this_week.lessons.filter((x) => x.queue_id && !x.done).map((x) => ({ id: x.queue_id, title: x.title }))),
+  ];
+  const replaceApprove = (r) => {
+    const pick = el('select', { 'aria-label': `The meal ${r.title} replaces` }, replaceable(r.requested_by).map((x) => el('option', { value: x.id }, x.title)));
+    return el('span', { class: 'acts' }, actBtn('Approve, replacing', '', async () => {
+      await api('POST', `/api/queue/${r.id}/approve`, { replace: pick.value });
+      again(`${r.title} replaces ${pick.selectedOptions[0].textContent} on ${pname(r.requested_by)}'s list.`);
+    }), pick);
+  };
   const requests = q.requests.map((r) => el('div', { class: 'card qcard' },
     el('div', {}, el('b', {}, `${pname(r.requested_by)} asked for `, ...lessonName(r)), r.foundation ? foundationMark() : null,
       el('small', { class: 'mut' }, ` · ${fmtDay(r.created_at.slice(0, 10))}`)),
@@ -880,7 +947,8 @@ const parentQueue = parentOnly(async (flash) => {
     safetyReview(r.lesson_id), tested(r.lesson_id),
     el('div', { class: 'acts' },
       servingsPick(r, setServings(r.id)),
-      actBtn('Approve', 'pri', async () => { await api('POST', `/api/queue/${r.id}/approve`); again(`${r.title} is on ${pname(r.requested_by)}'s list.`); }),
+      actBtn('Approve as an extra meal', 'pri', async () => { await api('POST', `/api/queue/${r.id}/approve`); again(`${r.title} is on ${pname(r.requested_by)}'s list as an extra meal.`); }),
+      replaceable(r.requested_by).length ? replaceApprove(r) : null,
       actBtn('Not now', '', async () => {
         await api('POST', `/api/queue/${r.id}/decline`);
         again(`Not now for ${r.title}.`, () => api('POST', `/api/queue/${r.id}/put-back`));
