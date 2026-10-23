@@ -181,9 +181,9 @@ export function recipeCard(r, registry) {
 // filters, and the shopping list. A typed-in ingredient gets an id of its own
 // (`typed-<recipe>-<n>`) and an entry in `extra`, which goes beside the
 // registry: it scales as a plain number and isn't merged with anything.
-export function recipeLesson(id, r) {
+export function recipeLesson(id, r, kicker = 'Family recipe') {
   const extra = {};
-  const short = id.replace(/^recipe:/, '');
+  const short = id.replace(/^[a-z]+:/, '');
   const ingredients = r.ingredients.map((l, i) => {
     const { name, ...line } = l;
     if (l.ingredient) return line;
@@ -195,7 +195,7 @@ export function recipeLesson(id, r) {
     return { ...line, ingredient: tid };
   });
   const lesson = {
-    id, version: r.version ?? 1, track: 'family', recipe: true,
+    id, version: r.version ?? 1, track: 'family', recipe: true, kicker,
     title: r.title, image: `meals/${r.mealType}.svg`, cuisine: 'Our family', skill: MEAL_TYPES.find(([k]) => k === r.mealType)?.[1] ?? '',
     skills: [], prereqs: [], servings: r.servings, totalMinutes: r.totalMinutes, scaling: { mode: 'free', min: 1, max: LIMITS.servings },
     learn: { move: r.why ? { title: r.why.title, body: r.why.body } : null, why: [], wrong: [] },

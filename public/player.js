@@ -299,7 +299,7 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
       ? `<div class="${quest ? 'serve' : 'p-serve'} crew"><span class="${quest ? 'lbl' : 'p-lbl'}">Cooking with someone?</span><div class="${quest ? 'sizes' : 'p-sizes'}" role="group" aria-label="Who's cooking">${crew.map((p) => `<button type="button" class="${quest ? 'size' : 'p-size'}" role="checkbox" aria-checked="${S.with.includes(p.id)}" data-act="crew" data-id="${esc(p.id)}">${esc(p.name)}</button>`).join('')}</div></div>`
       : '';
     const top = quest
-      ? `<article class="q-panel q-card"><p class="q-kick">${L.recipe ? 'Family recipe' : R.seasonal?.includes(L.unit) ? esc(R.units[L.unit]) : `Path ${L.unit}`}${num(L.id) ? ` · Quest ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
+      ? `<article class="q-panel q-card"><p class="q-kick">${L.recipe ? esc(L.kicker ?? 'Family recipe') : R.seasonal?.includes(L.unit) ? esc(R.units[L.unit]) : `Path ${L.unit}`}${num(L.id) ? ` · Quest ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
           <h2 class="q-title">${esc(L.title)}</h2><p class="q-skill"><b>${esc(L.skill)}</b></p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${who}${swaps}
           <button type="button" class="q-btn" data-act="start">${!S.started ? 'Start quest' : 'Keep going'}</button></article>`

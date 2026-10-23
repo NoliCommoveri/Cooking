@@ -136,7 +136,8 @@ export function register(on) {
     const c = await sharedRow(env, id);
     const filters = JSON.parse((await env.DB.prepare('SELECT diet_filters FROM families WHERE id = ?').bind(s.family_id).first()).diet_filters);
     const { cleared, ...recipe } = JSON.parse(c.body_json);
-    return { ...sharedOut(c, filters, s.family_id, new Set()), recipe };
+    // As a lesson too, for the kitchen's User-shared shelf (§6.19).
+    return { ...sharedOut(c, filters, s.family_id, new Set()), recipe, ...recipeLesson(`shared:${c.id}`, recipe, 'User-shared recipe') };
   });
 
   // Add a directory recipe to this family's recipes, as its own copy.

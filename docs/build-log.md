@@ -1900,3 +1900,15 @@ on it.
 - Tests: 193 (the routine's four paths, both buttons, clearing and declining,
   held recipes and cleared words, scoping, Report with the email, Hide and
   Unhide, withdraw and delete). Checked in a browser.
+
+## 76. 2026-10-23 — The User-shared shelf in the kitchen
+
+- **Owner ruling:** the Appointed Times unit gets its User-shared recipes
+  shelf in the kids' kitchen. Under the unit's lessons, every feast-day
+  recipe other families shared (the family's diet settings applied) shows
+  as a card; it opens in the player, and can be asked for, queued, shopped
+  for, and cooked straight from the directory, as `shared:<id>`
+  (`src/worker/recipes.js`, `lessonFor`). Once it's withdrawn or hidden it
+  can't be queued or started again, but cooks of it keep its name.
+- The player's kicker reads "User-shared recipe" for these.
+- Tests: 194.

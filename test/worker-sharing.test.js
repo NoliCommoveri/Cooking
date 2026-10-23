@@ -169,3 +169,30 @@ test('a deleted recipe leaves the directory', async () => {
   await a.del(`/api/recipes/${hexOf(id)}`);
   assert.equal((await b.get('/api/shared')).body.recipes.length, 0);
 });
+
+test("the kitchen's shelf: a feast-day shared recipe is cooked, queued, and shopped for straight from the directory", async () => {
+  const { a, b } = await setup();
+  const { id } = (await a.post('/api/recipes', FLAT)).body;
+  await a.post(`/api/recipes/${hexOf(id)}/share`, { kind: 'feast' });
+  await b.post('/api/profiles', { people: [{ name: 'Bea', color: 'sky' }] });
+  const bea = (await b.get('/api/profiles')).body.profiles[0].id;
+  const [c] = (await b.get('/api/shared?feast=1')).body.recipes;
+  const sid = `shared:${c.id}`;
+  const one = (await b.get(`/api/shared/${c.id}`)).body;
+  assert.equal(one.lesson.id, sid);
+  assert.equal(one.lesson.kicker, 'User-shared recipe');
+  // A kid asks for it; a parent can queue it; the cook closes it.
+  assert.equal((await b.post(`/api/profiles/${bea}/ask`, { lesson_id: sid })).body.status, 'requested');
+  const q = await b.post('/api/queue', { lesson_id: sid, profile_ids: [bea] });
+  assert.equal(q.status, 200);
+  assert.equal((await b.get('/api/queue')).body.queued[0].title, 'Quick flatbread');
+  const items = (await b.get('/api/shopping')).body.weeks.flatMap((w) => w.needs.sections.flatMap((s) => s.items));
+  assert.ok(items.some((x) => x.id === 'flour-ap'));
+  const t = new Date().toISOString();
+  assert.equal((await b.put('/api/attempts/00000000000000c9', { lesson_id: sid, servings: 4, profile_ids: [bea], started_at: t, finished_at: t })).status, 200);
+  assert.equal((await b.get(`/api/profiles/${bea}/cooks`)).body.cooks[sid].times, 1);
+  // Withdrawn, it can't be queued again, but the cook keeps its name.
+  await a.del(`/api/recipes/${hexOf(id)}/share`);
+  assert.equal((await b.post('/api/queue', { lesson_id: sid, profile_ids: [bea] })).status, 400);
+  assert.equal((await b.get('/api/progress')).body.profiles[0].rows[0].dish, 'Quick flatbread');
+});

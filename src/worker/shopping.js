@@ -12,7 +12,7 @@ import { servingOptions } from '../content/scale.js';
 import { shoppingList, SECTIONS } from '../content/shop.js';
 import { family, syncQueue, queueProfiles, today, tzOf } from './plan.js';
 import { weekOf } from './schedule.js';
-import { RECIPE_ID, lessonFor, recipeNames, REGISTRY as FULL } from './recipes.js';
+import { isRecipeId, lessonFor, recipeNames, REGISTRY as FULL } from './recipes.js';
 
 const id = () => randomHex(8);
 const placeholders = (list) => list.map(() => '?').join(', ');
@@ -20,7 +20,7 @@ const placeholders = (list) => list.map(() => '?').join(', ');
 const REGISTRY = FULL;
 // Library lessons, and the family's own recipes (§6.10).
 const written = new Set(LIBRARY.lessons.map((L) => L.id));
-const canShop = (lid) => written.has(lid) || RECIPE_ID.test(lid);
+const canShop = (lid) => written.has(lid) || isRecipeId(lid);
 const LIST_MAX = 20; // lessons on one list
 const nearestSize = (lid, n) => {
   const L = LIBRARY.lessons.find((x) => x.id === lid);

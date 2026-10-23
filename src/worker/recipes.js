@@ -17,6 +17,10 @@ import { dietView } from '../content/diet.js';
 
 const RECIPES_MAX = 200;
 export const RECIPE_ID = /^recipe:([0-9a-f]{16})$/;
+// A User-shared recipe, cooked straight from the directory (the Appointed
+// Times shelf in the kitchen, §6.19).
+export const SHARED_ID = /^shared:([0-9a-f]{16})$/;
+export const isRecipeId = (id) => RECIPE_ID.test(id) || SHARED_ID.test(id);
 // The full registry, for the checks, scaling, and the shopping list.
 export const REGISTRY = Object.fromEntries(CONTENT.ingredients.map((i) => [i.id, i]));
 const CTX = { ingredients: REGISTRY, equipment: Object.fromEntries(CONTENT.equipment.map((e) => [e.id, e])), rules: CONTENT.rules };
@@ -35,6 +39,15 @@ export async function recipeRow(env, fid, hex, { deleted = false } = {}) {
 // A library lesson (with the owner's patches) or one of this family's
 // recipes, by its lesson id. Returns { lesson, extra } or null.
 export async function lessonFor(env, fid, lessonId, opts) {
+  const sh = SHARED_ID.exec(lessonId);
+  if (sh) {
+    // Live in the directory; with { deleted: true }, also one since taken out,
+    // so a cook or a shopping list of it still reads.
+    const c = await env.DB.prepare(`SELECT * FROM community_recipes WHERE id = ?${opts?.deleted ? '' : ' AND withdrawn_at IS NULL AND hidden_at IS NULL'}`).bind(sh[1]).first();
+    if (!c) return null;
+    const { cleared, ...r } = JSON.parse(c.body_json);
+    return recipeLesson(lessonId, r, 'User-shared recipe');
+  }
   const m = RECIPE_ID.exec(lessonId);
   if (!m) {
     const L = await liveLesson(env.DB, lessonId);
@@ -49,7 +62,11 @@ export async function lessonFor(env, fid, lessonId, opts) {
 // cook or a queued item of one still has a name.
 export async function recipeNames(env, fid) {
   const { results } = await env.DB.prepare('SELECT id, title, meal_type, deleted_at FROM family_recipes WHERE family_id = ?').bind(fid).all();
-  return Object.fromEntries(results.map((r) => [`recipe:${r.id}`, { title: r.title, image: `img/meals/${r.meal_type}.svg`, deleted: Boolean(r.deleted_at) }]));
+  const { results: shared } = await env.DB.prepare('SELECT id, title, meal_type, hidden_at, withdrawn_at FROM community_recipes').all();
+  return Object.fromEntries([
+    ...results.map((r) => [`recipe:${r.id}`, { title: r.title, image: `img/meals/${r.meal_type}.svg`, deleted: Boolean(r.deleted_at) }]),
+    ...shared.map((c) => [`shared:${c.id}`, { title: c.title, image: `img/meals/${c.meal_type}.svg`, deleted: Boolean(c.hidden_at || c.withdrawn_at) }]),
+  ]);
 }
 
 // Whether a family's diet filters hide a recipe (§2.1). A typed-in ingredient

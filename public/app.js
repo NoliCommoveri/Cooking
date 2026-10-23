@@ -310,7 +310,7 @@ async function kitchen(id) {
   const [{ profiles }, lib] = await Promise.all([api('GET', '/api/profiles'), api('GET', '/api/library')]);
   const p = profiles.find((x) => x.id === id);
   if (!p) return go('#/');
-  const [{ cooks }, mine, { recipes }] = await Promise.all([api('GET', `/api/profiles/${p.id}/cooks?${tz()}`), api('GET', `/api/profiles/${p.id}/queue?${tz()}`), api('GET', '/api/recipes')]);
+  const [{ cooks }, mine, { recipes }, { recipes: feastShared }] = await Promise.all([api('GET', `/api/profiles/${p.id}/cooks?${tz()}`), api('GET', `/api/profiles/${p.id}/queue?${tz()}`), api('GET', '/api/recipes'), api('GET', '/api/shared?feast=1')]);
   store('cpr.profile', p.id);
   // A profile on a course takes its lesson numbers from the course plan (§4.1).
   const labels = mine.labels ?? lib.labels;
@@ -358,16 +358,8 @@ async function kitchen(id) {
       unlv, cooked);
   };
 
-  const units = [...new Set(lib.lessons.map((l) => l.unit))].sort((a, b) => a - b);
-  const body = units.length
-    ? units.map((u) => [
-      el('h2', { class: 'k-unit' }, quest && !lib.seasonal?.includes(u) ? `Path ${u}: ${lib.units[u]}` : lib.units[u]),
-      el('div', { class: 'k-lib' }, lib.lessons.filter((l) => l.unit === u).map((L) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${L.title}`, onclick: () => go(`#/kitchen/${p.id}/${L.id}`) }, card(L)))),
-    ])
-    : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, 'No lessons match this family\'s diet settings yet.');
-
   // The family's own recipes (§6.10), with their meal-type picture.
-  const recipeCard = (r) => {
+  const recipeCard = (r, kick = 'Family recipe') => {
     const done = cooks[r.id];
     const meta = [`${r.totalMinutes} min`, `Serves ${r.servings}`, r.meal];
     const marks = [
@@ -375,14 +367,33 @@ async function kitchen(id) {
       done ? el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-cooked` }, art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"/></svg>'), done.times === 1 ? 'Cooked once' : `Cooked ${done.times} times`) : null,
     ];
     return quest
-      ? el('article', { class: 'q-panel q-card' }, el('p', { class: 'q-kick' }, 'Family recipe'),
+      ? el('article', { class: 'q-panel q-card' }, el('p', { class: 'q-kick' }, kick),
         el('div', { class: 'q-win' }, el('img', { src: r.image, alt: '', width: 230, height: 230, loading: 'lazy' })),
         el('h3', { class: 'q-title' }, r.title), el('p', { class: 'q-skill' }, meta.join(' · ')), marks)
       : el('article', { class: 'p-card' }, el('span', { class: 'tape t1' }), el('span', { class: 'tape t2' }),
         el('div', { class: 'p-photo' }, el('img', { src: r.image, alt: '', width: 220, height: 220, loading: 'lazy' })),
-        el('p', { class: 'p-lessonno' }, 'Family recipe'), el('h3', { class: 'p-title' }, r.title),
+        el('p', { class: 'p-lessonno' }, kick), el('h3', { class: 'p-title' }, r.title),
         el('div', { class: 'p-meta' }, meta.map((m) => el('span', {}, m))), marks);
   };
+  const units = [...new Set(lib.lessons.map((l) => l.unit))].sort((a, b) => a - b);
+  // The Appointed Times unit's User-shared shelf (§6.19): feast-day recipes
+  // other families shared, cooked straight from the directory.
+  const sharedShelf = () => {
+    const list = feastShared.filter((r) => r.visible && !r.mine);
+    return list.length ? [
+      el('h3', { class: 'k-unit k-sub' }, 'User-shared recipes'),
+      el('div', { class: 'k-lib' }, list.map((r) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${r.title}`, onclick: () => go(`#/kitchen/${p.id}/shared:${r.id}`) },
+        recipeCard({ ...r, id: `shared:${r.id}` }, 'User-shared recipe')))),
+    ] : null;
+  };
+  const body = units.length
+    ? units.map((u) => [
+      el('h2', { class: 'k-unit' }, quest && !lib.seasonal?.includes(u) ? `Path ${u}: ${lib.units[u]}` : lib.units[u]),
+      el('div', { class: 'k-lib' }, lib.lessons.filter((l) => l.unit === u).map((L) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${L.title}`, onclick: () => go(`#/kitchen/${p.id}/${L.id}`) }, card(L)))),
+      lib.seasonal?.includes(u) ? sharedShelf() : null,
+    ])
+    : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, 'No lessons match this family\'s diet settings yet.');
+
   const shown = recipes.filter((r) => r.visible && !r.held);
   const ours = shown.length ? [
     el('h2', { class: 'k-unit' }, 'Our recipes'),
@@ -425,7 +436,8 @@ async function lesson(profileId, lessonId) {
   const mine = await api('GET', `/api/profiles/${p.id}/queue?${tz()}`).catch(() => ({ items: [] }));
   const queued = mine.items.find((x) => x.lesson_id === lessonId);
   // A family recipe comes from the API in lesson shape (§6.10).
-  const recipe = /^recipe:/.test(lessonId) ? await api('GET', `/api/recipes/${lessonId.slice(7)}`) : null;
+  const recipe = /^recipe:/.test(lessonId) ? await api('GET', `/api/recipes/${lessonId.slice(7)}`)
+    : /^shared:/.test(lessonId) ? await api('GET', `/api/shared/${lessonId.slice(7)}`) : null;
   const mount = el('div');
   screen(mount);
   await openLesson(mount, {

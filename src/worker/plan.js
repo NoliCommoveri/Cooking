@@ -16,7 +16,7 @@ import { dietView } from '../content/diet.js';
 import { servingOptions } from '../content/scale.js';
 import { courseEntries, numberCourse } from '../content/course.js';
 import { schedule, weekOf, addDays, localDay, isDay, isSabbath, DUE_DAY } from './schedule.js';
-import { RECIPE_ID, lessonFor, recipeNames, recipeVisible } from './recipes.js';
+import { isRecipeId, lessonFor, recipeNames, recipeVisible } from './recipes.js';
 
 const id = () => randomHex(8);
 const ACTIVE = ['requested', 'assigned', 'shopped'];
@@ -76,7 +76,7 @@ const plannedDate = (v) => {
 };
 // A library lesson, or one of the family's recipes ("recipe:<id>", §6.10).
 const queueLesson = async (env, lid, fam) => {
-  if (RECIPE_ID.test(lid)) {
+  if (isRecipeId(lid)) {
     const found = await lessonFor(env, fam.id, lid) ?? fail(400, 'invalid', 'No such recipe.');
     if (!recipeVisible(found, JSON.parse(fam.diet_filters))) fail(400, 'invalid', `${found.lesson.title} is hidden by your family's diet settings.`);
     return found.lesson;
@@ -514,7 +514,7 @@ export function register(on) {
   // ---------- safety review and test-cooked (§6.2) ----------
 
   // Every step an adult needs to be in the kitchen for, before approving.
-  on('GET', '/api/lessons/([a-z0-9-]+|recipe:[0-9a-f]{16})/safety', async (req, env, body, [lid]) => {
+  on('GET', '/api/lessons/([a-z0-9-]+|(?:recipe|shared):[0-9a-f]{16})/safety', async (req, env, body, [lid]) => {
     const s = await requireSession(env, req);
     const L = (await lessonFor(env, s.family_id, lid))?.lesson ?? fail(404, 'not_found', 'No such lesson.');
     const steps = L.steps.map((x, i) => ({ n: i + 1, text: x.text, safety: x.safety, hazard: x.hazard ?? null })).filter((x) => x.safety !== 'solo');
