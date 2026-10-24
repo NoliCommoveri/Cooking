@@ -7859,6 +7859,277 @@ export const LIBRARY = {
    }
   }
  ],
+ "levels": {
+  "level-3": {
+   "id": "level-3",
+   "name": "Level 3 Cook",
+   "hours": 125,
+   "units": [
+    {
+     "number": 1,
+     "name": "Food safety science"
+    },
+    {
+     "number": 2,
+     "name": "Yeast dough"
+    },
+    {
+     "number": 3,
+     "name": "Classic knife cuts and honing"
+    },
+    {
+     "number": 4,
+     "name": "Sautéing and aromatic bases"
+    },
+    {
+     "number": 5,
+     "name": "Legumes and grains"
+    },
+    {
+     "number": 6,
+     "name": "Poultry and roasting"
+    },
+    {
+     "number": 7,
+     "name": "Fish"
+    },
+    {
+     "number": 8,
+     "name": "Stock and soup"
+    },
+    {
+     "number": 9,
+     "name": "Balancing flavor and Sabbath capstone"
+    }
+   ],
+   "weeks": [
+    {
+     "week": 1,
+     "unit": 1,
+     "recipe": "shakshuka"
+    },
+    {
+     "week": 2,
+     "unit": 1,
+     "recipe": "thick-burgers"
+    },
+    {
+     "week": 3,
+     "unit": 1,
+     "recipe": "chicken-fried-rice"
+    },
+    {
+     "week": 4,
+     "unit": 1,
+     "recipe": "meatloaf",
+     "mastery": true
+    },
+    {
+     "week": 5,
+     "unit": 2,
+     "recipe": "pita-bread"
+    },
+    {
+     "week": 6,
+     "unit": 2,
+     "recipe": "sandwich-loaf"
+    },
+    {
+     "week": 7,
+     "unit": 2,
+     "recipe": "dinner-rolls"
+    },
+    {
+     "week": 8,
+     "unit": 2,
+     "recipe": "challah",
+     "mastery": true
+    },
+    {
+     "week": 9,
+     "unit": 3,
+     "recipe": "fish-tacos"
+    },
+    {
+     "week": 10,
+     "unit": 3,
+     "recipe": "tabbouleh"
+    },
+    {
+     "week": 11,
+     "unit": 3,
+     "recipe": "vegetable-stir-fry"
+    },
+    {
+     "week": 12,
+     "unit": 3,
+     "recipe": "israeli-salad",
+     "mastery": true
+    },
+    {
+     "week": 13,
+     "unit": 4,
+     "recipe": "garlic-green-beans"
+    },
+    {
+     "week": 14,
+     "unit": 4,
+     "recipe": "beef-picadillo"
+    },
+    {
+     "week": 15,
+     "unit": 4,
+     "recipe": "cajun-rice-dressing"
+    },
+    {
+     "week": 16,
+     "unit": 4,
+     "recipe": "beef-ragu",
+     "mastery": true
+    },
+    {
+     "week": 17,
+     "unit": 5,
+     "recipe": "red-lentil-soup"
+    },
+    {
+     "week": 18,
+     "unit": 5,
+     "recipe": "red-beans-and-rice"
+    },
+    {
+     "week": 19,
+     "unit": 5,
+     "recipe": "rice-pilaf"
+    },
+    {
+     "week": 20,
+     "unit": 5,
+     "recipe": "mujaddara",
+     "mastery": true
+    },
+    {
+     "week": 21,
+     "unit": 6,
+     "recipe": "roasted-vegetables"
+    },
+    {
+     "week": 22,
+     "unit": 6,
+     "recipe": "shish-taouk"
+    },
+    {
+     "week": 23,
+     "unit": 6,
+     "recipe": "roast-chicken-pieces"
+    },
+    {
+     "week": 24,
+     "unit": 6,
+     "recipe": "roast-chicken",
+     "mastery": true
+    },
+    {
+     "week": 25,
+     "unit": 7,
+     "recipe": "baked-salmon"
+    },
+    {
+     "week": 26,
+     "unit": 7,
+     "recipe": "steamed-fish"
+    },
+    {
+     "week": 27,
+     "unit": 7,
+     "recipe": "poached-cod"
+    },
+    {
+     "week": 28,
+     "unit": 7,
+     "recipe": "pan-seared-trout",
+     "mastery": true
+    },
+    {
+     "week": 29,
+     "unit": 8,
+     "recipe": "vegetable-stock"
+    },
+    {
+     "week": 30,
+     "unit": 8,
+     "recipe": "chicken-stock"
+    },
+    {
+     "week": 31,
+     "unit": 8,
+     "recipe": "matzo-ball-soup"
+    },
+    {
+     "week": 32,
+     "unit": 8,
+     "recipe": "minestrone",
+     "mastery": true
+    },
+    {
+     "week": 33,
+     "unit": 9,
+     "recipe": "chopped-salad-vinaigrette"
+    },
+    {
+     "week": 34,
+     "unit": 9,
+     "recipe": "beef-stew"
+    },
+    {
+     "week": 35,
+     "unit": 9,
+     "kind": "practice"
+    },
+    {
+     "week": 36,
+     "unit": 9,
+     "kind": "capstone"
+    }
+   ],
+   "titles": {
+    "shakshuka": "Shakshuka",
+    "thick-burgers": "Thick beef burgers",
+    "chicken-fried-rice": "Chicken fried rice",
+    "meatloaf": "Meatloaf with glaze",
+    "pita-bread": "Pita bread",
+    "sandwich-loaf": "Sandwich loaf",
+    "dinner-rolls": "Dinner rolls",
+    "challah": "Challah",
+    "fish-tacos": "Pico de gallo + Baja fish tacos",
+    "tabbouleh": "Tabbouleh",
+    "vegetable-stir-fry": "Vegetable stir-fry with tofu",
+    "israeli-salad": "Israeli salad",
+    "garlic-green-beans": "Garlic green beans",
+    "beef-picadillo": "Beef picadillo",
+    "cajun-rice-dressing": "Cajun rice dressing with beef",
+    "beef-ragu": "Beef ragù",
+    "red-lentil-soup": "Red lentil soup (mercimek)",
+    "red-beans-and-rice": "Red beans and rice",
+    "rice-pilaf": "Rice pilaf",
+    "mujaddara": "Mujaddara",
+    "roasted-vegetables": "Roasted vegetables",
+    "shish-taouk": "Shish taouk",
+    "roast-chicken-pieces": "Roast chicken pieces",
+    "roast-chicken": "Roast chicken + pan gravy",
+    "baked-salmon": "Baked salmon with lemon and herbs",
+    "steamed-fish": "Steamed fish with ginger and scallion",
+    "poached-cod": "Cod poached in tomato sauce",
+    "pan-seared-trout": "Pan-seared trout",
+    "vegetable-stock": "Vegetable stock",
+    "chicken-stock": "Chicken stock",
+    "matzo-ball-soup": "Matzo ball soup from a whole chicken",
+    "minestrone": "Minestrone",
+    "chopped-salad-vinaigrette": "Chickpea chopped salad + vinaigrette",
+    "beef-stew": "Beef stew"
+   }
+  }
+ },
  "tastes": {
   "proteins": [
    {

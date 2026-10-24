@@ -3841,3 +3841,34 @@ quests.
 - Tests: 327 (4 new in `test/lint.test.js`; a Level save with a blocked word is refused in `test/manage.test.js`). Checked in a browser at phone width on the dev server: the
   Level 3 page, a week opened, and a drill's minutes changed (the hours and
   the save bar update; no sideways scroll).
+
+## 154. 2026-10-24 — A Level course (slice 12b)
+
+Phase 12, slice 12b (plan §12.4): a course can be Level 3 Cook. Behind the
+Next release switch.
+- **Which program?** opens the course editor for a family with the next
+  release: Cook Around the World or Level 3 Cook. A Level course hides
+  Lessons per week (one Level week a week, Sunday to Friday) and shows the
+  Level's weeks folded by unit, each with its recipe, Preview, mastery
+  check, and "Being written" where it isn't. Editing shows the program; it
+  can't change. Chef Ruth's Getting started asks the same question and skips
+  "How many lessons a week?" for a Level.
+- **`course_programs`** in the draft migration (`0003_next_release.sql`):
+  one row per Level course; no row is Cook Around the World. Press **Re-apply
+  draft** on `/ops` after this deploys.
+- **The plan** (`src/worker/plan.js`): a Level course's `course_lessons` rows
+  are its weeks' recipes, with the week as the position. The schedule, Skip
+  this recipe, Skip this week, rollover, weeks behind, and the planned finish
+  work unchanged. Unwritten recipes and weeks 35 and 36 (no recipe yet) wait
+  like planned dishes.
+- **The course card** says "Level 3 Cook · Week 1 of 36" and names each
+  recipe by its week ("Week 3 · Chicken fried rice"), skipped ones too.
+- **Next release off:** a Level course is left out of the courses, the queue,
+  and the one-course-at-a-time check, and comes back when it's on again.
+- **Library build:** `LIBRARY.levels` has each Level's units, weeks, and
+  recipe titles for the Worker.
+- Tests: 333 (6 new in `test/worker-levels.test.js`). Checked in a browser at
+  phone width on the dev server: Which program?, the Level's weeks, a Level
+  course started, its card on the queue, the course list, and the edit page
+  (no sideways scroll, no errors).
+

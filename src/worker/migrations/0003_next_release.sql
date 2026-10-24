@@ -72,3 +72,15 @@ CREATE TABLE IF NOT EXISTS taste_learned (
   PRIMARY KEY (profile_id, kind, item)
 );
 CREATE INDEX IF NOT EXISTS taste_learned_family ON taste_learned(family_id);
+
+-- Phase 12b (plan §12.4): which program a course is. No row is Cook Around
+-- the World, so courses from before need nothing. program: a Level's id from
+-- content/levels/ ('level-3'). No REFERENCES on course_id, like the tables
+-- above, so nothing here waits on a course's own rows.
+CREATE TABLE IF NOT EXISTS course_programs (
+  course_id  TEXT PRIMARY KEY,
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  program    TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS course_programs_family ON course_programs(family_id);

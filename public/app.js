@@ -1444,12 +1444,17 @@ const parentQueue = parentOnly(async (flash) => {
     return el('section', { class: 'card qcourse' },
       el('div', { class: 'rowi' },
         el('div', {}, el('h3', { style: 'margin:0' }, c.name || `${names(c.profile_ids)}'s course`),
-          el('small', {}, `${names(c.profile_ids)} · ${c.per_week} a week · ${c.done} of ${c.total} cooked`)),
+          el('small', {}, c.level
+            // A Level course says which week it's on (§12.4).
+            ? `${names(c.profile_ids)} · ${c.level.name} · ${c.level.week ? `Week ${c.level.week} of ${c.level.weeks}` : `${c.done} of ${c.total} cooked`}`
+            : `${names(c.profile_ids)} · ${c.per_week} a week · ${c.done} of ${c.total} cooked`)),
         el('a', { class: 'hbtn', href: `#/parent/courses/${c.id}` }, 'Edit')),
       c.total ? el('p', { class: 'mut small', style: 'margin:0' },
         c.projected_finish ? `Planned finish: week of ${fmtDay(c.planned_finish)}. ${c.started ? behind : `Starts ${fmtDay(c.start_date)}`}.` : 'Every lesson is cooked.')
         : el('p', { class: 'mut small' }, 'No lessons in this course can be cooked yet.'),
-      c.unwritten ? el('p', { class: 'mut small', style: 'margin:0' }, `${c.unwritten} more lesson${c.unwritten === 1 ? ' is' : 's are'} still being written. They join the schedule when they're ready.`) : null,
+      c.unwritten ? el('p', { class: 'mut small', style: 'margin:0' }, c.level
+        ? `${c.unwritten} week${c.unwritten === 1 ? "'s recipe is" : "s' recipes are"} still being written. ${c.unwritten === 1 ? 'It joins' : 'They join'} the schedule when ${c.unwritten === 1 ? "it's" : "they're"} ready.`
+        : `${c.unwritten} more lesson${c.unwritten === 1 ? ' is' : 's are'} still being written. They join the schedule when they're ready.`) : null,
       c.hidden ? el('p', { class: 'mut small', style: 'margin:0' }, `${c.hidden} lesson${c.hidden === 1 ? ' is' : 's are'} hidden by your diet settings, so ${c.hidden === 1 ? "it isn't" : "they aren't"} scheduled.`) : null,
       c.started ? el('section', { class: 'qweek' },
         el('div', { class: 'qweek-head' },
@@ -1481,7 +1486,7 @@ const parentQueue = parentOnly(async (flash) => {
       c.skipped_recipes.length ? el('details', { class: 'qweek' },
         el('summary', {}, el('h4', {}, 'Skipped recipes', el('small', {}, String(c.skipped_recipes.length)))),
         el('div', { class: 'rows' }, c.skipped_recipes.map((x) => el('div', { class: 'rowi' },
-          el('b', {}, x.title), actBtn('Put back', '', async () => { await api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }); again(`${x.title} is back in the course.`); }))))) : null);
+          el('b', {}, x.week ? `Week ${x.week} · ${x.title}` : x.title), actBtn('Put back', '', async () => { await api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }); again(`${x.title} is back in the course.`); }))))) : null);
   };
 
   // ---- lessons queued by hand ----
@@ -1625,8 +1630,11 @@ const parentQueue = parentOnly(async (flash) => {
 
 // ---------- courses: the list and the editor (§6.18) ----------
 
+// A course's program (§12.4): a Level by name, or Cook Around the World's pace.
+const programName = (c, levels) => (c.program ? levels.find((V) => V.id === c.program)?.name ?? 'A Level' : `${c.per_week} a week`);
+
 const courseList = parentOnly(async () => {
-  const [{ courses, weeks_on, mode }, { profiles }] = await Promise.all([api('GET', '/api/courses'), api('GET', '/api/profiles')]);
+  const [{ courses, weeks_on, mode, levels }, { profiles }] = await Promise.all([api('GET', '/api/courses'), api('GET', '/api/profiles')]);
   const names = (ids) => ids.map((id) => profiles.find((p) => p.id === id)?.name ?? 'Someone').join(' & ') || 'Nobody';
   const active = courses.filter((c) => !c.archived_at), ended = courses.filter((c) => c.archived_at);
   parentScreen('courses',
@@ -1636,7 +1644,7 @@ const courseList = parentOnly(async () => {
       ? 'Set each course up once: the lessons in order, a start date, and how many a week. Each week\'s lessons load into the queue, and an unfinished one moves to the next week.'
       : 'A course plans your weeks: set it up once, and each week\'s lessons load into the queue.'),
     el('div', { class: 'card' }, active.length ? el('div', { class: 'rows' }, active.map((c) => el('div', { class: 'rowi' },
-      el('div', {}, el('b', {}, c.name || `${names(c.profile_ids)}'s course`), el('small', {}, `${names(c.profile_ids)} · from ${fmtDay(c.start_date)} · ${c.per_week} a week`)),
+      el('div', {}, el('b', {}, c.name || `${names(c.profile_ids)}'s course`), el('small', {}, `${names(c.profile_ids)} · from ${fmtDay(c.start_date)} · ${programName(c, levels)}`)),
       el('a', { class: 'hbtn', href: `#/parent/courses/${c.id}` }, 'Edit'))))
       : el('p', { class: 'mut' }, 'No courses yet.')),
     ended.length ? [el('h2', {}, 'Ended courses'), el('div', { class: 'card' }, el('div', { class: 'rows' }, ended.map((c) => el('div', { class: 'rowi' },
@@ -1676,15 +1684,34 @@ const courseEditor = parentOnly(async (cid) => {
     showToast('Picked the best dish in each group. Save the course to keep it.');
   } }, 'Suggest picks') : null;
   const listBox = el('div', { class: 'stack plan' });
+  const levelBox = el('div', { class: 'stack plan' });
   const finishBox = el('p', { class: 'mut small', style: 'margin:0' });
+  // Which program? (§12.4): Cook Around the World, or a Level with the next
+  // release. It's picked when the course is set up and stays.
+  const levels = data.levels ?? [];
+  let program = existing?.program ?? '';
+  const levelOf = () => levels.find((V) => V.id === program) ?? null;
   const notesBox = el('div');
 
   const startIn = el('input', { type: 'date', name: 'start_date', required: true, value: existing?.start_date ?? weekOf(localToday()) });
   const perIn = el('input', { type: 'number', name: 'per_week', min: 1, max: data.per_week_max, value: existing?.per_week ?? 1, inputmode: 'numeric' });
 
   const usable = () => plan.filter((x) => !x.removed && written.has(x.id) && !hidden.has(x.id)).length;
+  // A Level course's weeks, each with its recipe: the Level's own, or the
+  // one saved on the course.
+  const savedWeek = Object.fromEntries((existing?.program ? existing.plan : []).map((x) => [x.week, x]));
+  const levelWeeks = () => levelOf().weeks.map((w) => ({ ...w, id: savedWeek[w.week]?.id ?? w.recipe ?? null, removed: Boolean(savedWeek[w.week]?.removed) }));
   const drawFinish = () => {
-    const n = usable(), per = Math.max(1, Number(perIn.value) || 1), start = weekOf(startIn.value || localToday());
+    const start = weekOf(startIn.value || localToday());
+    if (levelOf()) {
+      const V = levelOf(), weeks = levelWeeks();
+      const n = weeks.filter((w) => w.id && !w.removed && written.has(w.id) && !hidden.has(w.id)).length;
+      finishBox.replaceChildren(n
+        ? `${n} of ${V.weeks.length} weeks have their recipe ready to cook now, so the schedule runs to the week of ${fmtDay(addDays(start, (n - 1) * 7))}. The others join as they're written.`
+        : 'None of the weeks\' recipes can be cooked yet.');
+      return;
+    }
+    const n = usable(), per = Math.max(1, Number(perIn.value) || 1);
     const kept = plan.filter((x) => !x.removed).length;
     finishBox.replaceChildren(n
       ? `${n} lesson${n === 1 ? '' : 's'} ready to cook now, so the schedule runs to the week of ${fmtDay(addDays(start, (Math.ceil(n / per) - 1) * 7))}.`
@@ -1763,6 +1790,58 @@ const courseEditor = parentOnly(async (cid) => {
   };
   drawPlan();
 
+  // A Level's weeks, folded by unit: each week's recipe and whether it's a
+  // mastery check. Changing a week's recipe comes later (12d).
+  const drawLevel = () => {
+    const V = levelOf();
+    if (!V) return levelBox.replaceChildren();
+    const weeks = levelWeeks();
+    levelBox.replaceChildren(...V.units.map((u) => {
+      const mine = weeks.filter((w) => w.unit === u.number);
+      return el('details', { class: 'planpart' },
+        el('summary', {}, el('span', {}, el('b', {}, `Unit ${u.number}: ${u.name}`), el('small', {}, `Weeks ${mine[0].week} to ${mine.at(-1).week}`))),
+        el('div', {}, mine.map((w) => {
+          const title = w.id ? (w.id === w.recipe ? w.title : dish[w.id]?.title ?? lib.lessons.find((L) => L.id === w.id)?.title ?? w.id)
+            : w.kind === 'capstone' ? 'Capstone: a full Sabbath meal, made ahead' : 'Practice run of one capstone dish';
+          const ready = w.id && written.has(w.id) && !hidden.has(w.id);
+          const tags = [w.mastery ? 'Mastery check' : null, w.removed ? 'Skipped' : !w.id || !written.has(w.id) ? 'Being written' : hidden.has(w.id) ? 'Hidden by your diet settings' : null].filter(Boolean);
+          return el('div', { class: `planrow${w.removed ? ' out' : ''}` },
+            el('div', { class: 'planno' }, w.week),
+            el('div', { class: 'grow' }, el('span', {}, title, tags.length ? el('small', { class: 'mut' }, ` · ${tags.join(' · ')}`) : null)),
+            el('span', { class: 'acts' },
+              ready ? el('button', { type: 'button', class: 'hbtn link', 'aria-label': `Preview ${title} as a learner`, onclick: () => previewLesson(w.id).catch((err) => showToast(err.message)) }, 'Preview') : null,
+              ready || dish[w.id] ? el('button', { type: 'button', class: 'hbtn link', 'aria-label': `What is ${title}?`, onclick: () => showDish(w.id) }, 'What is it? ›') : null));
+        })));
+    }));
+  };
+  const perBox = el('label', { class: 'f' }, 'Lessons per week', perIn);
+  const levelPace = el('p', { class: 'f mut small' }, 'One Level week a week, Sunday to Friday.');
+  const planSet = el('fieldset', {}, el('legend', {}, 'The lessons, in order'),
+    el('p', { class: 'mut small', style: 'margin:0' }, 'Untick a lesson to leave it out. Foundation skills have a few lessons to pick from: one is ticked, and you can tick more.'),
+    me.family.next_release ? el('p', { class: 'mut small', style: 'margin:0' }, 'Each dish shows how well it fits the people the course is for, from Our tastes. Suggest picks ticks the best dish in each group.') : null,
+    suggestBtn ? el('div', { class: 'acts' }, suggestBtn) : null,
+    notesBox, listBox);
+  const levelSet = el('fieldset', {}, el('legend', {}, 'The weeks'),
+    el('p', { class: 'mut small', style: 'margin:0' }, 'Each week has a recipe, a drill, a reading, and a Sabbath task. The last week of each unit is a mastery check. A week is done when its recipe is cooked; one that isn\'t moves to the next week.'),
+    levelBox);
+  const drawProgram = () => {
+    const V = levelOf();
+    perBox.hidden = Boolean(V);
+    levelPace.hidden = !V;
+    planSet.hidden = Boolean(V);
+    levelSet.hidden = !V;
+    drawLevel();
+    drawFinish();
+  };
+  const programSet = !existing && levels.length
+    ? el('fieldset', { onchange: (ev) => { if (ev.target.name === 'program') { program = ev.target.value; drawProgram(); } } }, el('legend', {}, 'Which program?'),
+      el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'program', value: '', checked: true }),
+        el('span', {}, 'Cook Around the World', el('em', {}, ' A dish at a time, each with its skill, at your pace'))),
+      levels.map((V) => el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'program', value: V.id }),
+        el('span', {}, V.name, el('em', {}, ` ${V.weeks.length} weeks, about ${V.hours} hours: a recipe, a drill, a reading, and a Sabbath task each week`)))))
+    : existing?.program ? el('p', { class: 'mut small', style: 'margin:0' }, `Program: ${levelOf()?.name ?? 'a Level'}`) : null;
+  drawProgram();
+
   const extra = [el('a', { class: 'hbtn', href: '#/parent/queue' }, 'Cancel')];
   if (existing && !existing.archived_at) {
     extra.push(actBtn('End this course', 'bad', async () => {
@@ -1774,6 +1853,7 @@ const courseEditor = parentOnly(async (cid) => {
 
   parentScreen('courses', el('h2', {}, existing ? 'Edit course' : 'Set up a course'),
     form([
+      programSet,
       el('fieldset', { onchange: () => loadFits(picked()) }, el('legend', {}, "Who it's for"),
         el('p', { class: 'mut small', style: 'margin:0' }, 'Siblings can share a course and cook together, or each have their own.'),
         el('div', { class: 'grid2' }, profiles.map((p) => el('label', { class: 'choice' },
@@ -1782,18 +1862,14 @@ const courseEditor = parentOnly(async (cid) => {
       field('Course name', 'name', { value: existing?.name ?? '', maxlength: 60 }, 'Optional'),
       el('div', { class: 'grid2' },
         el('label', { class: 'f' }, 'Start date', el('span', { class: 'hint' }, 'Weeks run Sunday to Friday'), startIn),
-        el('label', { class: 'f' }, 'Lessons per week', perIn)),
+        perBox, levelPace),
       finishBox,
-      el('fieldset', {}, el('legend', {}, 'The lessons, in order'),
-        el('p', { class: 'mut small', style: 'margin:0' }, 'Untick a lesson to leave it out. Foundation skills have a few lessons to pick from: one is ticked, and you can tick more.'),
-        me.family.next_release ? el('p', { class: 'mut small', style: 'margin:0' }, 'Each dish shows how well it fits the people the course is for, from Our tastes. Suggest picks ticks the best dish in each group.') : null,
-        suggestBtn ? el('div', { class: 'acts' }, suggestBtn) : null,
-        notesBox, listBox),
+      planSet, levelSet,
     ], existing ? 'Save course' : 'Start the course', async (v) => {
-      const body = {
-        name: v.name, start_date: startIn.value, per_week: Number(perIn.value),
-        profile_ids: profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id), plan,
-      };
+      // A Level course's plan is its weeks, one a week.
+      const body = levelOf()
+        ? { name: v.name, start_date: startIn.value, per_week: 1, profile_ids: profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id), ...(existing ? {} : { program }) }
+        : { name: v.name, start_date: startIn.value, per_week: Number(perIn.value), profile_ids: profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id), plan };
       if (!body.profile_ids.length) throw new Error('Pick who the course is for.');
       await api(existing ? 'PUT' : 'POST', existing ? `/api/courses/${existing.id}` : '/api/courses', body);
       go('#/parent/queue');

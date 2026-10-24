@@ -464,6 +464,14 @@ async function coursePart(ctx, chat, call, { again }) {
   const yes = await chat.choose([['yes', 'Yes, set up a course'], ['no', 'No, not now']]);
   if (yes === 'no') return firstLesson(ctx, chat, call, profiles);
 
+  // Which program? (§12.4), with the next release: Cook Around the World or a Level.
+  let level = null;
+  if (data.levels?.length) {
+    chat.say('Which program? Cook Around the World goes a dish at a time, each with its skill. ' + data.levels.map((V) => `${V.name} is ${V.weeks.length} weeks of a recipe, a drill, a reading, and a Sabbath task each week, about ${V.hours} hours in all.`).join(' '));
+    const pick = await chat.choose([['', 'Cook Around the World'], ...data.levels.map((V) => [V.id, V.name])]);
+    level = data.levels.find((V) => V.id === pick) ?? null;
+  }
+
   chat.say("Who's it for? Siblings can share a course and cook together, or each have their own.");
   let pids = [];
   await chat.ask([el('div', { class: 'grid2' }, profiles.map((p) => el('label', { class: 'choice' },
@@ -490,19 +498,26 @@ async function coursePart(ctx, chat, call, { again }) {
     return ctx.fmtDay(v.start, { weekday: 'long', month: 'long', day: 'numeric' });
   });
 
-  chat.say('How many lessons a week? One or two is a good place to start.');
-  await chat.ask([field('Lessons per week', 'per', { type: 'number', min: 1, max: data.per_week_max, value: 1, inputmode: 'numeric', required: true })], 'Start the course', async (v) => {
-    const per = Number(v.per);
-    if (!Number.isInteger(per) || per < 1 || per > data.per_week_max) throw new Error(`Pick a number from 1 to ${data.per_week_max}.`);
-    await call('POST', '/api/courses', { name, start_date: start, per_week: per, profile_ids: pids });
-    return `${per} a week`;
-  });
+  if (level) {
+    chat.say(`${level.name} runs one week at a time, Sunday to Friday. A week is done when its recipe is cooked, and one that isn't moves to the next week.`);
+    await chat.choose([['go', 'Start the course']]);
+    await call('POST', '/api/courses', { name, start_date: start, per_week: 1, profile_ids: pids, program: level.id });
+  } else {
+    chat.say('How many lessons a week? One or two is a good place to start.');
+    await chat.ask([field('Lessons per week', 'per', { type: 'number', min: 1, max: data.per_week_max, value: 1, inputmode: 'numeric', required: true })], 'Start the course', async (v) => {
+      const per = Number(v.per);
+      if (!Number.isInteger(per) || per < 1 || per > data.per_week_max) throw new Error(`Pick a number from 1 to ${data.per_week_max}.`);
+      await call('POST', '/api/courses', { name, start_date: start, per_week: per, profile_ids: pids });
+      return `${per} a week`;
+    });
+  }
   if (data.mode !== 'homeschool') {
     const { family: f } = await call('GET', '/api/family');
     if (!f.plan_weeks) await call('PUT', '/api/family', { ...f, plan_weeks: true });
     chat.say("I turned on Plan our weeks, so your course loads each week's lessons into the queue.");
   }
-  chat.say(ctx.me().family.next_release
+  if (level) chat.say(`You can see its weeks, change who it's for, or pick another start date in Menu → Courses.`);
+  else chat.say(ctx.me().family.next_release
     ? "Your course follows our suggested order, and where a skill has a few dishes to choose from, I picked the one that fits them best from Our tastes. You can edit it to change the lesson order, drop lessons, or pick a different dish, in Menu → Courses."
     : "Your course follows our suggested order. You can edit it to change the lesson order or drop lessons, and to pick a different dish where a skill has a few to choose from, in Menu → Courses.");
 }

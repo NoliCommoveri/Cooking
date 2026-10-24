@@ -169,6 +169,16 @@ export function buildLibrary() {
     course: c.course.dishes.map(({ id, title, unit, pickOne, prereqs, about, meal, skills, tags, minutes, cuisine }) => ({
       id, title, unit, about, skills, ...(minutes ? { minutes } : {}), ...(cuisine ? { cuisine } : {}), ...(pickOne ? { pickOne } : {}), ...(prereqs ? { prereqs } : {}), ...(meal === false ? { meal } : {}), ...(tags ? { tags } : {}),
     })),
+    // The Levels (§12), next release only: each one's units and weeks, for
+    // a Level course's plan (12b). A week's recipe is a lesson id when it's
+    // written; until then it waits like a planned dish (§6.18).
+    levels: Object.fromEntries((c.levels ?? []).map(({ data: V }) => [V.id, {
+      id: V.id, name: V.name, hours: V.hours, units: V.units.map(({ number, name }) => ({ number, name })),
+      weeks: V.weeks.map(({ week, unit, recipe, mastery, kind }) => ({ week, unit, ...(recipe ? { recipe } : {}), ...(mastery ? { mastery } : {}), ...(kind ? { kind } : {}) })),
+      // Every recipe's title, written or not: the Level's own cards, then the course's dishes.
+      titles: Object.fromEntries(V.weeks.filter((w) => w.recipe).map((w) => [w.recipe,
+        V.recipes.find((r) => r.id === w.recipe)?.title ?? c.course.dishes.find((d) => d.id === w.recipe)?.title ?? c.lessons.find(({ data }) => data.id === w.recipe)?.data.title ?? w.recipe])),
+    }])),
     // What profiles rate (§6.21), by id and name.
     tastes: Object.fromEntries(Object.entries(c.tastes).map(([k, list]) => [k, list.map(({ id, name }) => ({ id, name }))])),
   };

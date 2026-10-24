@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [153. 2026-10-24 — Level 3 content and its checks (slice 12a)](docs/build-log.md#153-2026-10-24--level-3-content-and-its-checks-slice-12a)
+**Latest build log entry:** [154. 2026-10-24 — A Level course (slice 12b)](docs/build-log.md#154-2026-10-24--a-level-course-slice-12b)
 
 ## Current features
 
@@ -60,6 +60,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
 - **Lesson content** (`content/`): 37 lessons (all 12 of Unit 1, all 20 of Unit 2, 3 more samples, and the 2 Appointed Times lessons), and the ingredient, tool, skill (52), and cuisine lists, as JSON.
 - **Level 3 content** (next release only, `content/levels/level-3.json`): Level 3 Cook's 9 units and 36 weeks, each with its skill, recipe, mastery check, and drill, knowledge, and Sabbath task, plus 17 Level-only recipes; edited on the manager's Level 3 page.
+- **Level courses** (next release only, `src/worker/plan.js`): setting up a course asks Which program?, Cook Around the World or Level 3 Cook; a Level course runs one week a week, its recipes in week order, and the course card shows "Week 5 of 36".
 - **Content linter** (`tools/lint-content.js`): checks every lesson against the food rules, including the unclean-food block, the food-safety steps, and scaling. Runs on every push, on every save from the manager section, and in the browser as the owner edits.
 - **Our tastes** (next release only, `src/worker/tastes.js`, `public/tastes.js`): each profile rates proteins, flavors, and key ingredients from 1 to 5 stars (one absolute favorite per list) or Haven't tried, and the family sets its time, budget, tools, and how adventurous. Also in Getting started and as Chef Ruth's "Ask what we like to eat".
 - **Variations** (`src/content/variations.js`, `src/worker/variations.js`): complete versions of a lesson with a preference built in: 9 so far, on 6 lessons (another protein, beans or tofu, or more heat). Edited in the manager section and checked as whole lessons; with the next release, a parent picks the version, and the player and shopping lists use it.
