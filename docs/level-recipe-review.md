@@ -195,14 +195,14 @@ The four defaults are well chosen: one gentle method a week (bake, steam, poach)
 
 **Order after the changes:** baked fish with a side (oven, 145°F, pin bones, timing two things) → steamed fish or parchment packets (gentlest, freshness) → poached cod or moqueca (in a sauce, flaking) → pan-seared trout or blackened cod (searing a fillet, unaided).
 
-**For the owner to decide:**
+**For the owner to decide** (all approved, owner, 2026-10-24):
 
-- [ ] Trim each fish week's options to the ones that use its method (week 25: honey-soy, BBQ salmon; week 26: parchment packets; week 27: moqueca; week 28: blackened cod, pineapple teriyaki)
-- [ ] Serve week 25's baked fish with a side from an earlier unit, and let it use any clean fillet
-- [ ] Write Steamed fish with a foil-ball steamer, with the adult pouring the hot oil
-- [ ] Add a new Fish in parchment packets variation as week 26's option
-- [ ] Change week 28's drill to searing a fillet, and move "Skin a fillet" to Level 4
-- [ ] Drop Coconut-crusted fish from the fish weeks (it stays in Cook Around the World)
+- [x] Trim each fish week's options to the ones that use its method (week 25: honey-soy, BBQ salmon; week 26: parchment packets; week 27: moqueca; week 28: blackened cod, pineapple teriyaki)
+- [x] Serve week 25's baked fish with a side from an earlier unit, and let it use any clean fillet
+- [x] Write Steamed fish with a foil-ball steamer, with the adult pouring the hot oil
+- [x] Add a new Fish in parchment packets variation as week 26's option
+- [x] Change week 28's drill to searing a fillet, and move "Skin a fillet" to Level 4
+- [x] Drop Coconut-crusted fish from the fish weeks (it stays in Cook Around the World)
 
 ## Year progression
 
@@ -272,6 +272,6 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 ## Next session
 
 - Carry on with Unit 8 (Stock and soup), one unit at a time, under the ground rules above.
-- Unit 7's six decisions are open.
+- Unit 7's six decisions are approved (owner, 2026-10-24).
 - Unit 6's three decisions are still open.
 - Nothing here is built yet except Chicken jambalaya (week 15) and Butter chicken (week 22). Once the review is done, the approved changes go into `content/levels/level-3.json`, the lessons, and plan §12.3 and §12.4.

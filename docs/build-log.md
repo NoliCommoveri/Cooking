@@ -4138,3 +4138,9 @@ order, so these two recipes were written.
   The claude.ai working copy couldn't be opened from this session, so the
   repo copy carries Unit 7.
 
+## 169. 2026-10-24 — Unit 7 review decisions approved
+
+- Owner, 2026-10-24: all six Unit 7 (Fish) proposals are approved and ticked
+  in `docs/level-recipe-review.md`. Nothing is built yet; they go in with the
+  rest of the review.
+
