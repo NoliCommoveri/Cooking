@@ -228,15 +228,42 @@ The unit is built well: two stocks, then two soups, and the week 30 stock uses t
 
 **Order after the changes:** vegetable stock (simmer, skim, strain) → chicken stock (bones, cool fast, lift the fat) → matzo ball soup from that stock (a clear soup) → minestrone from homemade stock (a full soup, unaided).
 
+**For the owner to decide** (all approved, owner, 2026-10-24):
+
+- [x] Ladle hot stock into the strainer instead of tipping the pot, and say week 29's stock is for week 32
+- [x] Let Chicken stock start from the frozen carcass or from chicken wings or backs
+- [x] Make lifting off the fat a required step in Beef bone broth (§2.1)
+- [x] Give Matzo ball soup and Chicken noodle soup a Level version made from week 30's stock, with no whole raw bird
+- [x] Give Grilled cheese + tomato soup, Red lentil soup, and Minestrone Level versions that use the student's own stock (Minestrone with dried beans as a choice)
+- [x] Give Beef and barley soup a Level version with ground beef instead of chuck
+- [x] Drop Matzo ball soup from week 32's options
+
+## Level 3 Unit 9: Balancing flavor and Sabbath capstone
+
+Weeks 33 and 34 fit the tasting skill, and the capstone pulls the whole year together. Three things to fix: Beef stew (week 34's default) browns and simmers beef chuck, Level 4's skill; the practice week's Sabbath task shops for the capstone a week early; and the app has no way to finish weeks 35 and 36, which have no recipe. The goal is to taste and correct salt, acid, fat, and heat, and to plan and cook a full Sabbath meal ahead and reheat it safely.
+
+**What a student brings in:** everything. The plan's capstone list: safe temperatures (Unit 1), challah (Unit 2, baked every week since October), knife work (3), an aromatic base (4), a grain or legume (5), a roast or fish (6–7), and soup (8). Unit 1's cooling and reheating comes back for holding a full meal. The unit runs about May, after the feast.
+
+| Week | Dish | Verdict | Why | Proposal |
+| --- | --- | --- | --- | --- |
+| 33 | Chickpea chopped salad + vinaigrette (default, planned) | Keep | A vinaigrette whisked and tasted until it's balanced is the clearest lesson in acid, fat, and salt there is. Light (30 minutes, $), but the unit's hard part is the planning, and the capstone needs a salad. | None. |
+| 33 | Chicken Caesar (option, written) | Keep | A creamy dressing tasted and adjusted, croutons, and chicken seared to 165°F. The harder option (22 steps). Its croutons are leavened, which is fine in May. | None. |
+| 33 | Fattoush (option, written) | Keep | A lemon and sumac dressing balanced by taste, with toasted pita. Also a week 10 option, which is fine. | None. |
+| 34 | Beef stew (default, planned) | Level version | Seasoning in stages is exactly the week's skill. But it browns chunks of beef chuck in batches and simmers them until tender: searing a whole cut and cooking a tough cut, both Level 4 Unit 2 (where Beef stew is week 5's default). | **Level version with chicken thighs**: chicken thighs browned, then simmered with onion, carrots, and potatoes to 165°F, tasted and seasoned at each stage. It reviews Unit 4's base and Unit 6's raw poultry. The chuck version stays for Level 4. |
+| 34 | Beef chili (option, planned) | Keep | Ground beef browned, spices toasted, a long simmer, and heat to balance with acid and a little sugar. Also a week 16 option, which is fine. | None. |
+| 34 | Peanut stew (maafe) (option, planned) | Keep | Sweet, salty, rich, and hot in one pot: a good dish for "how cuisines balance differently". Carries the peanut tag, so a nut-free family won't see it. | None. |
+| 35 | Practice run of one capstone dish (practice) | Keep, fix | Cooking one capstone dish a week early is wise. But its Sabbath task, "Shop and do Thursday prep", is the capstone's own prep: shopping a week early wastes fresh food. | Make week 35's Sabbath task **Serve the practice dish at the Sabbath meal and note what to change**, and move "Shop and do Thursday prep" to week 36. |
+| 36 | Sabbath capstone: main, side, bread, and salad (capstone) | Keep, fix | The whole year in one meal, made ahead and held or reheated safely. Two fixes: the week has two shopping-and-cooking jobs but only one task for them, and the plan (§12.3) also lists a soup, which the week's note leaves out. "Reflection" can only happen after the meal, so on Sunday. | Make week 36's drill **Shop and do Thursday prep** (the meal itself is the unaided run of the kitchen). Make the meal **main, side, bread, and salad, with soup as a choice**, so the plan and the note agree. Say on the reflection page that it's done the Sunday after. |
+| 35, 36 | (the app) | Fix | A Level week is done when its recipe is cooked (12b), but weeks 35 and 36 have no recipe, so they wait as "still being written" and the course can never finish. | When the course reaches week 35, the student picks the practice dish, and for week 36 the meal's dishes, from the Level's recipes. The week is done when they're cooked. This needs building; it isn't content. |
+
+**Order after the changes:** vinaigrette (balance by taste) → chicken stew seasoned in stages (balance as it cooks) → one capstone dish practised and served → the full Sabbath meal, shopped, prepped, cooked ahead, and served.
+
 **For the owner to decide:**
 
-- [ ] Ladle hot stock into the strainer instead of tipping the pot, and say week 29's stock is for week 32
-- [ ] Let Chicken stock start from the frozen carcass or from chicken wings or backs
-- [ ] Make lifting off the fat a required step in Beef bone broth (§2.1)
-- [ ] Give Matzo ball soup and Chicken noodle soup a Level version made from week 30's stock, with no whole raw bird
-- [ ] Give Grilled cheese + tomato soup, Red lentil soup, and Minestrone Level versions that use the student's own stock (Minestrone with dried beans as a choice)
-- [ ] Give Beef and barley soup a Level version with ground beef instead of chuck
-- [ ] Drop Matzo ball soup from week 32's options
+- [ ] Give Beef stew a Level version with chicken thighs for week 34 (the chuck version stays for Level 4)
+- [ ] Change week 35's Sabbath task to serving the practice dish and noting what to change, and move "Shop and do Thursday prep" to week 36's drill
+- [ ] Make the capstone main, side, bread, and salad, with soup as a choice, and do the reflection the Sunday after
+- [ ] Let weeks 35 and 36 pick their dishes from the Level's recipes, done when cooked (a build change, for a later slice)
 
 ## Year progression
 
@@ -252,6 +279,7 @@ The year builds in general, with no early unit overwhelming and no late unit tri
 | 6 Poultry and roasting | 21–24 | 50–120 min | Cutting raw chicken; marinating ahead; two temperatures in one pan; resting and carving a whole bird | Yes: the whole bird is the most involved dish so far |
 | 7 Fish | 25–28 | 25–45 min (more with week 25's side) | Judgment over steps: freshness, a delicate fillet, flaking, and 145°F; searing a fillet unaided | Yes, with week 25's side: the dishes are shorter, but fish is easy to overcook. A small dip, like the knife unit |
 | 8 Stock and soup | 29–32 | 60–240 min, mostly simmering | Planning across weeks (the frozen carcass, stock saved for the soups); straining and cooling big pots of hot liquid; seasoning by taste | Yes: the longest cooks so far, and the first unit where one week's food feeds another's |
+| 9 Balancing flavor and Sabbath capstone | 33–36 | 30–150 min, then a 2½-hour practice and a 5-hour capstone | Tasting and correcting; planning, shopping, a prep timeline, and four dishes ready at once, held or reheated safely | Yes: the capstone is the hardest thing in the Level |
 
 ## Quick reviews from Level 2
 
@@ -284,6 +312,7 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 | 29 | Boil vs. simmer; draining hot liquid safely | Week 19 drill and knowledge; week 17 drill |
 | 31 | Cooking pasta or noodles (chicken noodle soup) | Week 17 recipe |
 | 32 | Cooking pasta | Week 17 recipe |
+| 34 | Browning ground beef (chili) | Week 31 drill |
 
 ## Patterns across units
 
@@ -295,7 +324,7 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 
 - **Level 2 skills taken for granted.** Both units so far rely on Level 2 for something they don't teach again. Those are collected under Quick reviews from Level 2.
 
-- **Searing a whole cut isn't taught in Level 2 or Level 3.** Level 2 sears only ground beef; whole cuts start in Level 4 Unit 2. Watch for it in later Level 3 weeks, such as week 34's beef stew. Week 32's Beef and barley soup is another (chuck chunks).
+- **Searing a whole cut isn't taught in Level 2 or Level 3.** Level 2 sears only ground beef; whole cuts start in Level 4 Unit 2. Watch for it in later Level 3 weeks, such as week 34's beef stew. Week 32's Beef and barley soup and week 34's Beef stew are two more (chuck chunks); both get Level versions.
 
 - **Homemade stock should feed the soups.** Every written soup uses boxed broth, so a student can finish the stock unit without putting their own stock into a soup. Level versions that use it close the loop.
 
@@ -307,11 +336,11 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 
 - [x] Level 3 Unit 7: Fish (weeks 25–28)
 - [x] Level 3 Unit 8: Stock and soup (weeks 29–32)
-- [ ] Level 3 Unit 9: Balancing flavor and Sabbath capstone (weeks 33–36)
+- [x] Level 3 Unit 9: Balancing flavor and Sabbath capstone (weeks 33–36)
 
 ## Next session
 
-- Carry on with Unit 9 (Balancing flavor and Sabbath capstone), the last unit, under the ground rules above.
-- Unit 8's seven decisions are open.
+- Every unit is reviewed. Unit 9's four decisions are open.
+- Unit 8's seven decisions are approved (owner, 2026-10-24).
 - Unit 7's six decisions are approved (owner, 2026-10-24).
 - Nothing here is built yet except Chicken jambalaya (week 15) and Butter chicken (week 22). Once the review is done, the approved changes go into `content/levels/level-3.json`, the lessons, and plan §12.3 and §12.4.

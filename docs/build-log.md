@@ -4158,3 +4158,15 @@ order, so these two recipes were written.
   backs. Beef bone broth's fat step is required (§2.1). Matzo ball soup
   leaves week 32's options. Seven decisions are open.
 
+## 171. 2026-10-24 — Unit 8 decisions approved; Unit 9 reviewed
+
+- Owner, 2026-10-24: Unit 8's seven decisions are approved.
+- **Unit 9 (Balancing flavor and Sabbath capstone) reviewed** in
+  `docs/level-recipe-review.md`, the last unit. Week 33's salads stay. Beef
+  stew gets a chicken-thigh Level version for week 34 (chuck stays for Level
+  4). Week 35's Sabbath task becomes serving the practice dish; "Shop and do
+  Thursday prep" moves to week 36's drill. The capstone is main, side, bread,
+  and salad, with soup as a choice. Weeks 35 and 36 can't finish in the app
+  today (no recipe), so the review proposes picking their dishes from the
+  Level's recipes, as a later build. Four decisions are open.
+
