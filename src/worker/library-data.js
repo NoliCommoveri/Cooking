@@ -7906,190 +7906,622 @@ export const LIBRARY = {
     {
      "week": 1,
      "unit": 1,
-     "recipe": "shakshuka"
+     "recipe": "shakshuka",
+     "drill": {
+      "title": "Calibrate a thermometer in ice water",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Danger zone and how bacteria grow",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Label and date containers",
+      "minutes": 45
+     }
     },
     {
      "week": 2,
      "unit": 1,
-     "recipe": "thick-burgers"
+     "recipe": "thick-burgers",
+     "drill": {
+      "title": "Temp-check thick vs. thin patties",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Safe internal temperatures chart",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Cool a cooked dish in an ice bath",
+      "minutes": 45
+     }
     },
     {
      "week": 3,
      "unit": 1,
-     "recipe": "chicken-fried-rice"
+     "recipe": "chicken-fried-rice",
+     "drill": {
+      "title": "Safe cooling of a batch of rice",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Cross-contamination and board colors",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Store a dish safely for the Sabbath",
+      "minutes": 45
+     }
     },
     {
      "week": 4,
      "unit": 1,
      "recipe": "meatloaf",
-     "mastery": true
+     "mastery": true,
+     "drill": {
+      "title": "Set up a clean station unaided",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Food safety quiz",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Reheat a stored dish to 165°F",
+      "minutes": 45
+     }
     },
     {
      "week": 5,
      "unit": 2,
-     "recipe": "pita-bread"
+     "recipe": "pita-bread",
+     "drill": {
+      "title": "Bloom yeast; test water temperature",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "How yeast makes dough rise",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Bake and freeze pita for the Sabbath",
+      "minutes": 45
+     }
     },
     {
      "week": 6,
      "unit": 2,
-     "recipe": "sandwich-loaf"
+     "recipe": "sandwich-loaf",
+     "drill": {
+      "title": "Knead and windowpane test",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Gluten and kneading",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Bake a loaf Friday morning",
+      "minutes": 45
+     }
     },
     {
      "week": 7,
      "unit": 2,
-     "recipe": "dinner-rolls"
+     "recipe": "dinner-rolls",
+     "drill": {
+      "title": "Shape even rolls by weight",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Proofing: under vs. over",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Shape rolls Thursday; cold proof overnight",
+      "minutes": 45
+     }
     },
     {
      "week": 8,
      "unit": 2,
      "recipe": "challah",
-     "mastery": true
+     "mastery": true,
+     "drill": {
+      "title": "Braid a dough",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Doneness: color, sound, 190°F inside",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Challah for the Sabbath table",
+      "minutes": 45
+     }
     },
     {
      "week": 9,
      "unit": 3,
-     "recipe": "fish-tacos"
+     "recipe": "fish-tacos",
+     "drill": {
+      "title": "Claw grip; dice 3 onions",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Parts of a knife; knife types",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Chop vegetables ahead for the Sabbath meal",
+      "minutes": 45
+     }
     },
     {
      "week": 10,
      "unit": 3,
-     "recipe": "tabbouleh"
+     "recipe": "tabbouleh",
+     "drill": {
+      "title": "Mince parsley and garlic",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Honing vs. sharpening",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Store prepped herbs so they stay fresh",
+      "minutes": 45
+     }
     },
     {
      "week": 11,
      "unit": 3,
-     "recipe": "vegetable-stir-fry"
+     "recipe": "vegetable-stir-fry",
+     "drill": {
+      "title": "Julienne carrots and peppers",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Why even cuts cook evenly",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Prep a full set of stir-fry vegetables ahead",
+      "minutes": 45
+     }
     },
     {
      "week": 12,
      "unit": 3,
      "recipe": "israeli-salad",
-     "mastery": true
+     "mastery": true,
+     "drill": {
+      "title": "Timed dice: one onion, one pepper",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Name and size each classic cut",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Prep and store all salad vegetables for the Sabbath",
+      "minutes": 45
+     }
     },
     {
      "week": 13,
      "unit": 4,
-     "recipe": "garlic-green-beans"
+     "recipe": "garlic-green-beans",
+     "drill": {
+      "title": "Shimmer test for hot oil",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Oils and smoke points",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Blanch and store beans for the Sabbath",
+      "minutes": 45
+     }
     },
     {
      "week": 14,
      "unit": 4,
-     "recipe": "beef-picadillo"
+     "recipe": "beef-picadillo",
+     "drill": {
+      "title": "Sweat vs. brown onions",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Browning and why it adds flavor",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Make and freeze a sofrito batch",
+      "minutes": 45
+     }
     },
     {
      "week": 15,
      "unit": 4,
-     "recipe": "cajun-rice-dressing"
+     "recipe": "cajun-rice-dressing",
+     "drill": {
+      "title": "Deglaze a pan, scrape the fond",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Aromatic bases across cuisines",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Cook rice dressing ahead; cool safely",
+      "minutes": 45
+     }
     },
     {
      "week": 16,
      "unit": 4,
      "recipe": "beef-ragu",
-     "mastery": true
+     "mastery": true,
+     "drill": {
+      "title": "Sauté a mixed vegetable pan unaided",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Explain sweat vs. sauté",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Make ragù ahead for the Sabbath meal",
+      "minutes": 45
+     }
     },
     {
      "week": 17,
      "unit": 5,
-     "recipe": "red-lentil-soup"
+     "recipe": "red-lentil-soup",
+     "drill": {
+      "title": "Rinse and pick over lentils",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Legume types and cook times",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Freeze soup in portions",
+      "minutes": 45
+     }
     },
     {
      "week": 18,
      "unit": 5,
-     "recipe": "red-beans-and-rice"
+     "recipe": "red-beans-and-rice",
+     "drill": {
+      "title": "Quick-soak vs. overnight soak",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Why beans are soaked",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Soak beans Friday for a later meal",
+      "minutes": 45
+     }
     },
     {
      "week": 19,
      "unit": 5,
-     "recipe": "rice-pilaf"
+     "recipe": "rice-pilaf",
+     "drill": {
+      "title": "Toast grains in fat before liquid",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Absorption vs. pasta method; ratios",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Cook grains ahead and reheat with steam",
+      "minutes": 45
+     }
     },
     {
      "week": 20,
      "unit": 5,
      "recipe": "mujaddara",
-     "mastery": true
+     "mastery": true,
+     "drill": {
+      "title": "Cook a grain without a recipe card",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Grains of the world worksheet",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Make a legume dish that holds well for the Sabbath",
+      "minutes": 45
+     }
     },
     {
      "week": 21,
      "unit": 6,
-     "recipe": "roasted-vegetables"
+     "recipe": "roasted-vegetables",
+     "drill": {
+      "title": "Cut vegetables to roast at the same rate",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "How roasting browns food",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Roast a tray of vegetables ahead",
+      "minutes": 45
+     }
     },
     {
      "week": 22,
      "unit": 6,
-     "recipe": "shish-taouk"
+     "recipe": "shish-taouk",
+     "drill": {
+      "title": "Trim and cube chicken safely",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Raw poultry handling",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Marinate chicken Friday for a later meal",
+      "minutes": 45
+     }
     },
     {
      "week": 23,
      "unit": 6,
-     "recipe": "roast-chicken-pieces"
+     "recipe": "roast-chicken-pieces",
+     "drill": {
+      "title": "Temp-check thigh and breast",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Dark vs. white meat",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Roast chicken ahead; hold and reheat",
+      "minutes": 45
+     }
     },
     {
      "week": 24,
      "unit": 6,
      "recipe": "roast-chicken",
-     "mastery": true
+     "mastery": true,
+     "drill": {
+      "title": "Break down a cooked chicken",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Carryover cooking and resting",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Roast chicken as the Sabbath centerpiece",
+      "minutes": 45
+     }
     },
     {
      "week": 25,
      "unit": 7,
-     "recipe": "baked-salmon"
+     "recipe": "baked-salmon",
+     "drill": {
+      "title": "Check a fillet for pin bones",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Fins and scales: clean vs. unclean species",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Plan a fish dish that serves well cold",
+      "minutes": 45
+     }
     },
     {
      "week": 26,
      "unit": 7,
-     "recipe": "steamed-fish"
+     "recipe": "steamed-fish",
+     "drill": {
+      "title": "Judge freshness by smell, eyes, flesh",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Store-bought fish: reading labels and names",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Steam fish and chill for a cold plate",
+      "minutes": 45
+     }
     },
     {
      "week": 27,
      "unit": 7,
-     "recipe": "poached-cod"
+     "recipe": "poached-cod",
+     "drill": {
+      "title": "Test doneness by flaking",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Why fish cooks faster than meat",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Make tomato sauce ahead; poach Friday",
+      "minutes": 45
+     }
     },
     {
      "week": 28,
      "unit": 7,
      "recipe": "pan-seared-trout",
-     "mastery": true
+     "mastery": true,
+     "drill": {
+      "title": "Skin a fillet",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Species ID quiz",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Cold fish salad for the Sabbath table",
+      "minutes": 45
+     }
     },
     {
      "week": 29,
      "unit": 8,
-     "recipe": "vegetable-stock"
+     "recipe": "vegetable-stock",
+     "drill": {
+      "title": "Skim and strain a stock",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Stock vs. broth; why simmer, not boil",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Freeze stock in portions",
+      "minutes": 45
+     }
     },
     {
      "week": 30,
      "unit": 8,
-     "recipe": "chicken-stock"
+     "recipe": "chicken-stock",
+     "drill": {
+      "title": "Cool stock quickly and lift off fat",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Gelatin and body in stock",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Make stock ahead for the week",
+      "minutes": 45
+     }
     },
     {
      "week": 31,
      "unit": 8,
-     "recipe": "matzo-ball-soup"
+     "recipe": "matzo-ball-soup",
+     "drill": {
+      "title": "Season a soup by tasting in stages",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Soup families: clear, thick, puréed",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Soup that improves when made ahead",
+      "minutes": 45
+     }
     },
     {
      "week": 32,
      "unit": 8,
      "recipe": "minestrone",
-     "mastery": true
+     "mastery": true,
+     "drill": {
+      "title": "Make stock without a recipe card",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Clean labels on boxed stock and bouillon",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Soup as the Sabbath starter",
+      "minutes": 45
+     }
     },
     {
      "week": 33,
      "unit": 9,
-     "recipe": "chopped-salad-vinaigrette"
+     "recipe": "chopped-salad-vinaigrette",
+     "drill": {
+      "title": "Fix a dish that's too salty, flat, or sour",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Salt, acid, fat, heat",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Draft the capstone menu",
+      "minutes": 45
+     }
     },
     {
      "week": 34,
      "unit": 9,
-     "recipe": "beef-stew"
+     "recipe": "beef-stew",
+     "drill": {
+      "title": "Blind taste test; name what's missing",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "How cuisines balance differently",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Write the shopping list and prep timeline",
+      "minutes": 45
+     }
     },
     {
      "week": 35,
      "unit": 9,
-     "kind": "practice"
+     "kind": "practice",
+     "drill": {
+      "title": "Taste and adjust without a recipe",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Holding and reheating a full meal",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Shop and do Thursday prep",
+      "minutes": 45
+     }
     },
     {
      "week": 36,
      "unit": 9,
-     "kind": "capstone"
+     "kind": "capstone",
+     "drill": {
+      "title": "Run the kitchen unaided",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Reflection: what worked, what to change",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Serve the meal for the Sabbath",
+      "minutes": 45
+     }
     }
    ],
    "titles": {

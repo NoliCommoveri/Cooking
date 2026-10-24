@@ -295,7 +295,54 @@ async function levelLessons(env, course, fam) {
     usable: kept.filter((x) => shown.has(x)),
     unwritten: kept.filter((x) => !lessonById[x]).length + V.weeks.filter((w) => !w.recipe).length,
     hidden: kept.filter((x) => lessonById[x] && !shown.has(x)).length,
-    level: V, weekOf: Object.fromEntries(plan.weeks.map((x) => [x.id, x.week])),
+    level: V, weekOf: Object.fromEntries(plan.weeks.map((x) => [x.id, x.week])), idOf: Object.fromEntries(plan.weeks.map((x) => [x.week, x.id])),
+  };
+}
+
+// A Level week's three part pages (§12.2), in order.
+const PARTS = ['drill', 'knowledge', 'sabbath'];
+
+// The parts the course's profiles have checked off (12c), not taken back:
+// { "week:part:profile": done_at }. Empty before the draft's table exists.
+async function levelTasks(env, course, profiles) {
+  if (!course.program || !profiles.length) return {};
+  try {
+    const { results } = await env.DB.prepare(`SELECT week, part, profile_id, done_at FROM level_tasks
+        WHERE course_id = ? AND family_id = ? AND removed_at IS NULL AND profile_id IN (${placeholders(profiles)})`).bind(course.id, course.family_id, ...profiles).all();
+    return Object.fromEntries(results.map((r) => [`${r.week}:${r.part}:${r.profile_id}`, r.done_at]));
+  } catch { return {}; }
+}
+
+// The Level week a course is on: this week's first recipe's, or next week's
+// when this one is skipped or empty.
+const levelWeekNow = (st) => {
+  const at = [...st.sched.this_week.lessons, ...st.sched.next_week.lessons][0];
+  return at ? st.lessons.weekOf[at.id] ?? null : null;
+};
+
+// What a profile's kitchen shows of its Level course (12c): this week with
+// its recipe and three parts, and the parts still open from weeks already
+// reached (their recipe cooked). A part not checked off never holds the
+// schedule; it stays open until it is.
+function levelFor(st, pid, day) {
+  const V = st.lessons.level, now = levelWeekNow(st);
+  const unitName = Object.fromEntries(V.units.map((u) => [u.number, u.name]));
+  const partOut = (w, part) => ({ week: w.week, part, ...w[part], done_at: st.tasks[`${w.week}:${part}:${pid}`] ?? null });
+  const weekOut = (w) => {
+    const id = st.lessons.idOf[w.week] ?? null;
+    return {
+      week: w.week, unit: w.unit, unit_name: unitName[w.unit], mastery: Boolean(w.mastery), kind: w.kind ?? null,
+      recipe: id, recipe_title: id ? lessonById[id]?.title ?? V.titles[id] ?? id : null, recipe_written: Boolean(id && lessonById[id]), recipe_done: Boolean(id && st.done[id]),
+      parts: PARTS.map((part) => partOut(w, part)),
+    };
+  };
+  const reached = V.weeks.filter((w) => w.week !== now && st.lessons.idOf[w.week] && st.done[st.lessons.idOf[w.week]]);
+  return {
+    course_id: st.course.id, id: V.id, name: V.name, weeks: V.weeks.length, sabbath: isSabbath(day),
+    week: now ? weekOut(V.weeks.find((w) => w.week === now)) : null,
+    open: reached.flatMap((w) => PARTS.map((part) => partOut(w, part))).filter((x) => !x.done_at),
+    // The recipes of mastery weeks: the player says "cook it on your own" (§12.4).
+    mastery: V.weeks.filter((w) => w.mastery && st.lessons.idOf[w.week]).map((w) => st.lessons.idOf[w.week]),
   };
 }
 
@@ -355,7 +402,8 @@ async function courseState(env, course, fam, day, tz) {
   const { done, free } = await courseDone(env, course, profiles, tz);
   const weeks = await courseWeeks(env, course);
   const taken = await courseTaken(env, course, profiles, lessons.usable);
-  return { course, profiles, lessons, done, taken, sched: schedule({ course, lessons: lessons.usable, done, free, taken, weeks, today: day }) };
+  const tasks = await levelTasks(env, course, profiles);
+  return { course, profiles, lessons, done, taken, tasks, sched: schedule({ course, lessons: lessons.usable, done, free, taken, weeks, today: day }) };
 }
 
 const activeCourses = async (env, fid) => withPrograms(env, fid, (await env.DB.prepare('SELECT * FROM courses WHERE family_id = ? AND archived_at IS NULL ORDER BY created_at, id').bind(fid).all()).results);
@@ -480,12 +528,17 @@ function courseOut(st, fam, rowsByLesson, version = () => null) {
     };
   };
   const week = (w) => ({ week: w.week, skipped: w.skipped, extra: w.extra, lessons: w.lessons.map(lessonOut) });
-  // The Level week the course is on, for "Week 5 of 36": this week's first
-  // recipe, or next week's when this one is skipped or empty.
-  const at = V ? [...sched.this_week.lessons, ...sched.next_week.lessons][0] : null;
+  // The Level week the course is on, for "Week 5 of 36", and who has
+  // checked off each of its parts, for the parent's Take back (12c).
+  const now = V ? levelWeekNow(st) : null;
+  const lw = now ? V.weeks.find((w) => w.week === now) : null;
   return {
     id: course.id, name: course.name, start_date: course.start_date, per_week: course.per_week, profile_ids: profiles,
-    program: course.program, level: V ? { id: V.id, name: V.name, weeks: V.weeks.length, week: at ? lessons.weekOf[at.id] ?? null : null } : null,
+    program: course.program,
+    level: V ? {
+      id: V.id, name: V.name, weeks: V.weeks.length, week: now,
+      parts: lw ? PARTS.map((part) => ({ part, title: lw[part].title, minutes: lw[part].minutes, done: profiles.filter((pid) => st.tasks[`${now}:${part}:${pid}`]) })) : [],
+    } : null,
     this_week: week(sched.this_week), next_week: week(sched.next_week), due_day: DUE_DAY,
     started: sched.started, planned_finish: sched.planned_finish, projected_finish: sched.projected_finish,
     weeks_behind: sched.weeks_behind, lessons_behind: sched.lessons_behind,
@@ -686,6 +739,8 @@ export function register(on) {
       mode: fam.mode,
       versions,
       leave_out: leaveOut,
+      // A profile on a Level course: its week, parts, and mastery recipes (12c).
+      level: mine?.lessons.level ? levelFor(mine, pid, day) : null,
       // The profile's path, in its course plan's order (or the suggested one),
       // for its kitchen's "Coming up" and the early flag (owner, 2026-10-23).
       order: mine ? mine.lessons.kept : null,
@@ -925,6 +980,46 @@ export function register(on) {
     await env.DB.prepare('UPDATE courses SET archived_at = NULL WHERE id = ? AND family_id = ?').bind(course.id, s.family_id).run();
     return { ok: true };
   });
+
+  // ---------- a Level week's parts (12c) ----------
+
+  // The week and part asked for, on a Level course; a page that doesn't exist is refused.
+  const levelPart = (course, body) => {
+    const V = LEVELS[course.program] ?? fail(400, 'invalid', 'That course has no Level weeks.');
+    const week = Number(body.week), part = String(body.part ?? '');
+    if (!V.weeks.some((w) => w.week === week) || !PARTS.includes(part)) fail(400, 'invalid', 'No such page.');
+    return { week, part };
+  };
+
+  // Done on a drill, knowledge, or Sabbath task page, by the profile or its
+  // parent. Nothing checked off on the Sabbath counts, so it isn't taken then
+  // (§12.4, as with grading, §6.18).
+  on('PUT', '/api/profiles/([0-9a-f]{16})/level-tasks', async (req, env, body, [pid]) => {
+    const s = await requireSession(env, req);
+    ownProfile(s, pid);
+    if (isSabbath(today(req))) fail(409, 'sabbath', 'Nothing is checked off on the Sabbath. Check it off on another day.');
+    const { results } = await env.DB.prepare(`SELECT c.* FROM courses c JOIN course_profiles cp ON cp.course_id = c.id
+        WHERE c.family_id = ? AND c.archived_at IS NULL AND cp.profile_id = ?`).bind(s.family_id, pid).all();
+    const course = (await withPrograms(env, s.family_id, results)).find((c) => c.program) ?? fail(404, 'not_found', 'This profile is not on a Level course.');
+    const { week, part } = levelPart(course, body);
+    await env.DB.prepare(`INSERT INTO level_tasks (family_id, course_id, week, part, profile_id, done_at) VALUES (?, ?, ?, ?, ?, ?)
+        ON CONFLICT(course_id, week, part, profile_id) DO UPDATE SET done_at = excluded.done_at, removed_at = NULL`)
+      .bind(s.family_id, course.id, week, part, pid, now()).run();
+    return { ok: true };
+  }, { kid: true });
+
+  // A parent takes a checked-off part back (it counts for nothing), and its Undo.
+  const takeBack = (removed) => async (req, env, body, [cid]) => {
+    const s = await requireParent(env, req);
+    const course = await ownCourse(env, s, cid);
+    const { week, part } = levelPart(course, body);
+    const res = await env.DB.prepare(`UPDATE level_tasks SET removed_at = ? WHERE course_id = ? AND family_id = ? AND week = ? AND part = ? AND profile_id = ?`)
+      .bind(removed ? now() : null, course.id, s.family_id, week, part, String(body.profile_id ?? '')).run();
+    if (!res.meta.changes) fail(404, 'not_found', "That part isn't checked off.");
+    return { ok: true };
+  };
+  on('POST', '/api/courses/([0-9a-f]{16})/level-tasks/take-back', takeBack(true));
+  on('POST', '/api/courses/([0-9a-f]{16})/level-tasks/put-back', takeBack(false));
 
   // Skip this recipe: out of the plan, and the next lesson takes its place.
   // Put back undoes it (§6.18).

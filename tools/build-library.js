@@ -174,7 +174,10 @@ export function buildLibrary() {
     // written; until then it waits like a planned dish (§6.18).
     levels: Object.fromEntries((c.levels ?? []).map(({ data: V }) => [V.id, {
       id: V.id, name: V.name, hours: V.hours, units: V.units.map(({ number, name }) => ({ number, name })),
-      weeks: V.weeks.map(({ week, unit, recipe, mastery, kind }) => ({ week, unit, ...(recipe ? { recipe } : {}), ...(mastery ? { mastery } : {}), ...(kind ? { kind } : {}) })),
+      // Each week's three part pages (12c): title, planned minutes, and what's written of them.
+      weeks: V.weeks.map(({ week, unit, recipe, mastery, kind, drill, knowledge, sabbath }) => ({
+        week, unit, ...(recipe ? { recipe } : {}), ...(mastery ? { mastery } : {}), ...(kind ? { kind } : {}), drill, knowledge, sabbath,
+      })),
       // Every recipe's title, written or not: the Level's own cards, then the course's dishes.
       titles: Object.fromEntries(V.weeks.filter((w) => w.recipe).map((w) => [w.recipe,
         V.recipes.find((r) => r.id === w.recipe)?.title ?? c.course.dishes.find((d) => d.id === w.recipe)?.title ?? c.lessons.find(({ data }) => data.id === w.recipe)?.data.title ?? w.recipe])),

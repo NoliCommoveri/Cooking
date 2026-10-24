@@ -487,6 +487,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     const more = [...mine.items.filter((x) => !soon(x.planned_date)).map(queuedCard), ...rest.filter((L) => !next.includes(L)).map(lessonBtn)];
     const key = `cpr.more.${p.id}`;
     return [
+      levelView(),
       el('h2', { class: 'k-unit' }, quest ? 'Your next quests' : 'Up next'),
       now.length
         ? el('div', { class: 'k-lib' }, now.map(queuedCard))
@@ -495,6 +496,29 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
       more.length ? el('details', { class: 'k-shelf', open: sessionGet(key) === '1', ontoggle: (e) => sessionSet(key, e.currentTarget.open ? '1' : '') },
         el('summary', {}, el('span', {}, 'See more'), el('small', {}, String(more.length))), el('div', { class: 'k-lib' }, more)) : null,
     ];
+  };
+
+  // ---- A Level week (12c): this week's recipe and its three part pages,
+  // then any part still to check off from a week already cooked.
+  const levelView = () => {
+    const lv = mine.level;
+    if (!lv) return null;
+    const w = lv.week;
+    const kick = quest ? 'q-kick' : 'p-lessonno';
+    const row = (label, title, note, onclick, done) => el(onclick ? 'button' : 'div', { ...(onclick ? { type: 'button', onclick } : {}), class: `k-part${done ? ' done' : ''}` },
+      el('span', { class: 'k-part-l' }, label), el('b', {}, title), el('small', {}, note));
+    const partRow = (x) => row(x.week === w?.week ? PART_NAMES[x.part] : `Week ${x.week} · ${PART_NAMES[x.part]}`, x.title, x.done_at ? 'Done ✓' : `${x.minutes} min`,
+      () => go(`#/kitchen/${p.id}/~${x.week}-${x.part}`), Boolean(x.done_at));
+    return el('section', { class: `${quest ? 'q-panel' : 'p-card'} k-level` },
+      el('p', { class: kick }, `${lv.name} · ${w ? `Week ${w.week} of ${lv.weeks}` : 'Every recipe cooked'}`),
+      w ? [
+        el('h2', { class: quest ? 'q-title' : 'p-title' }, `Unit ${w.unit}: ${w.unit_name}`),
+        w.mastery ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, 'Mastery week: cook it on your own') : null,
+        el('div', { class: 'k-parts' },
+          w.recipe_written ? row('Recipe', w.recipe_title, w.recipe_done ? 'Cooked ✓' : 'This week', open(w.recipe), w.recipe_done) : row('Recipe', w.recipe_title ?? 'Being written', 'Coming soon'),
+          w.parts.map(partRow)),
+      ] : null,
+      lv.open.length ? [el('p', { class: kick }, 'Still to check off'), el('div', { class: 'k-parts' }, lv.open.map(partRow))] : null);
   };
 
   // ---- More recipes (Side quests): every unit, the family's recipes, and the
@@ -570,6 +594,54 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   celebrate(p, cooks);
 }
 
+// A Level week's drill, knowledge, or Sabbath task page (12c), in the
+// profile's theme, with Done. Nothing is checked off on the Sabbath.
+const PART_NAMES = { drill: 'Drill', knowledge: 'Knowledge', sabbath: 'Sabbath task' };
+async function levelPage(profileId, key) {
+  const [, week, part] = key.match(/^~(\d+)-(drill|knowledge|sabbath)$/) ?? [];
+  const { profiles } = await api('GET', '/api/profiles');
+  const p = profiles.find((x) => x.id === profileId);
+  if (!p || !week) return go('#/');
+  const mine = await api('GET', `/api/profiles/${p.id}/queue?${tz()}`);
+  const lv = mine.level;
+  const x = [...(lv?.week?.parts ?? []), ...(lv?.open ?? [])].find((y) => y.week === Number(week) && y.part === part);
+  if (!x) return go(`#/kitchen/${p.id}`);
+  const quest = p.theme === 'quest';
+  const back = () => go(`#/kitchen/${p.id}`);
+  const quiz = (x.quiz ?? []).map((q) => {
+    const why = el('p', { hidden: true });
+    return el('div', { class: 'k-pagebody' }, el('b', {}, q.q),
+      el('div', { class: 'k-parts' }, q.choices.map((c, i) => el('button', { type: 'button', class: 'k-part', onclick: () => {
+        why.hidden = false;
+        why.textContent = `${i === q.answer ? 'Yes!' : `Not quite: it's "${q.choices[q.answer]}".`} ${q.explain}`;
+      } }, el('b', {}, c)))), why);
+  });
+  const written = x.body?.length || x.steps?.length || x.quiz?.length;
+  screen(el('section', { class: 'kitchen', 'data-kt': p.theme },
+    el('a', { class: 'back', href: `#/kitchen/${p.id}` }, quest ? '← Quest board' : '← Recipe box'),
+    sabbathBanner(),
+    el('article', { class: `${quest ? 'q-panel' : 'p-card'} k-level` },
+      el('p', { class: quest ? 'q-kick' : 'p-lessonno' }, `${lv.name} · Week ${x.week} · ${PART_NAMES[part]}`),
+      el('h2', { class: quest ? 'q-title' : 'p-title' }, x.title),
+      el('p', {}, `About ${x.minutes} minutes`),
+      el('div', { class: 'k-pagebody' },
+        (x.body ?? []).map((t) => el('p', {}, t)),
+        x.steps?.length ? el('ol', {}, x.steps.map((t) => el('li', {}, t))) : null,
+        quiz,
+        written ? null : el('p', {}, 'This page is still being written. Do what the title says, with an adult if you need one, then tap Done.')),
+      x.done_at ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, `Done ${fmtDay(x.done_at.slice(0, 10))} ✓`)
+        : lv.sabbath || isSabbath() ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, 'Nothing is checked off on the Sabbath. Come back on another day to tap Done.')
+          : el('button', { type: 'button', class: quest ? 'q-btn' : 'p-btn', onclick: async (e) => {
+            const btn = e.currentTarget;
+            btn.disabled = true;
+            try {
+              await api('PUT', `/api/profiles/${p.id}/level-tasks?${tz()}`, { week: x.week, part });
+              showToast(`${PART_NAMES[part]} done!`);
+              back();
+            } catch (err) { showToast(err.message); btn.disabled = false; }
+          } }, 'Done'))));
+}
+
 // A lesson, played in the profile's theme (player.js).
 async function lesson(profileId, lessonId) {
   const [{ profiles }, lib] = await Promise.all([api('GET', '/api/profiles'), api('GET', '/api/library')]);
@@ -585,6 +657,8 @@ async function lesson(profileId, lessonId) {
   await openLesson(mount, {
     profile: p, family: me.family, lessonId, variation: mine.versions?.[lessonId] ?? chosenVersion(lessonId), leaveOut: mine.leave_out?.[lessonId] ?? [], lesson: recipe?.lesson ?? null, extra: recipe?.extra ?? {}, onExit: () => go(`#/kitchen/${p.id}`),
     crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook, onReflect: saveReflection, labels: mine.labels ?? lib.labels, total: mine.total ?? lib.total,
+    // A Level's mastery week (12c): "cook it on your own", and why it worked.
+    mastery: Boolean(mine.level?.mastery.includes(lessonId)),
     // "I want to make this" or "Cook this" (§6.1), and the queued lesson's
     // servings and who it's for, for a fresh cook.
     ask: {
@@ -1471,6 +1545,15 @@ const parentQueue = parentOnly(async (flash) => {
                 again('Skipped this week. Everything moves back a week.', () => api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, skipped: false }));
               }],
             ])),
+        // A Level week's parts (12c): who has checked each off, with Take back.
+        c.level?.parts.length && !tw.skipped ? el('div', { class: 'rows' }, c.level.parts.map((x) => el('div', { class: 'rowi' },
+          el('div', {}, el('b', {}, `Week ${c.level.week} · ${PART_NAMES[x.part]}: ${x.title}`),
+            el('small', {}, x.done.length ? `Done: ${names(x.done)}` : `Not checked off yet · ${x.minutes} min`)),
+          x.done.length ? el('span', { class: 'acts' }, x.done.map((pid) => actBtn(x.done.length > 1 ? `Take back ${names([pid])}` : 'Take back', '', async () => {
+            const body = { week: c.level.week, part: x.part, profile_id: pid };
+            await api('POST', `/api/courses/${c.id}/level-tasks/take-back`, body);
+            again(`Took back ${names([pid])}'s ${PART_NAMES[x.part].replace(/^(Drill|Knowledge)/, (m) => m.toLowerCase())}. It doesn't count now.`, () => api('POST', `/api/courses/${c.id}/level-tasks/put-back`, body));
+          }))) : null))) : null,
         tw.skipped ? el('p', { class: 'mut' }, 'Skipped. Everything moved back a week.')
           : tw.lessons.length ? el('div', { class: 'rows' }, tw.lessons.map((x) => lessonRow(x, tw.week)))
             : el('p', { class: 'mut' }, 'Nothing left this week.')) : null,
@@ -2803,6 +2886,7 @@ async function route() {
     if (me.kid) {
       const own = me.kid.profile_id;
       if (top === 'kitchen' && sub === own && extra?.startsWith('@')) return await kitchen(own, extra.slice(1));
+      if (top === 'kitchen' && sub === own && extra?.startsWith('~')) return await levelPage(own, extra);
       if (top === 'kitchen' && sub === own && extra) return await lesson(own, decodeURIComponent(extra));
       if (top === 'kitchen' && sub === own) return await kitchen(own);
       return go(`#/kitchen/${own}`);
@@ -2812,6 +2896,7 @@ async function route() {
     // Before /ops applies migration 0014, the old first run still sets the PIN.
     if (!me.family.pin_set) return firstRun();
     if (top === 'kitchen' && sub && extra?.startsWith('@')) return await kitchen(sub, extra.slice(1));
+    if (top === 'kitchen' && sub && extra?.startsWith('~')) return await levelPage(sub, extra);
     if (top === 'kitchen' && sub && extra) return await lesson(sub, decodeURIComponent(extra));
     if (top === 'kitchen' && sub) return await kitchen(sub);
     if (top === 'parent') {

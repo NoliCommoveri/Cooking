@@ -3934,3 +3934,31 @@ The owner approved §12.7's table ("go with the table"). No app changes.
 - Group fills, Appointed Times lessons, and variations of course dishes are
   live for every family once written; Level-only recipes wait for the next
   release.
+
+## 159. 2026-10-24 — The kitchen's Level week (slice 12c)
+
+Phase 12, slice 12c (plan §12.4). Behind the Next release switch.
+- **Kitchen** (`public/app.js`): a profile on a Level course gets a Level
+  card at the top of its main tab: the week, the unit, a mastery-week note,
+  the recipe, and the drill, knowledge, and Sabbath task with their minutes
+  or "Done". Parts not checked off from weeks whose recipe is cooked show
+  under "Still to check off"; they never hold the schedule.
+- **Part pages** (`#/kitchen/<profile>/~<week>-<part>`): in the profile's
+  theme, with the page's body, steps, and quiz when written (none are yet,
+  so each says to do what the title says), and **Done**. On the Sabbath,
+  Done isn't offered, and the API refuses it by the family's calendar day.
+- **Parent** (the course card on the Queue): this week's three parts, who
+  checked each off, and **Take back** with Undo.
+- **Mastery** (`public/player.js`): on a mastery week's recipe, the lesson
+  card says "Mastery: cook it on your own", and Reflect asks each profile
+  "Why did it work?", saved with the reflection.
+- **Draft migration:** `level_tasks` (with `removed_at` for Take back) and
+  `mastery_notes`. Press **Re-apply draft** on `/ops` after this deploys.
+- **Library build:** each Level week carries its three part pages.
+- Hours from the parts and the parts on Progress come with 12e.
+- Tests: 338 (5 new in `test/worker-levels.test.js`; one 12b test now checks
+  the course card's new fields). Run on a Saturday, so also run with the
+  clock set to a Monday to cover Done. Checked in a browser at phone width
+  on the dev server, clock set to a Monday: the Level card in both themes, a
+  drill page and Done, a mastery lesson card, and the parent's Take back and
+  Undo (no sideways scroll, no errors).

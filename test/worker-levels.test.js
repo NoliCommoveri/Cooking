@@ -52,7 +52,7 @@ test('a Level course: one week a week, its recipes in week order, "Week 1 of 36"
   assert.deepEqual(c.plan.slice(0, 3).map((x) => [x.week, x.id]), [[1, 'shakshuka'], [2, 'thick-burgers'], [3, 'chicken-fried-rice']]);
 
   const q = await card(a);
-  assert.deepEqual(q.level, { id: 'level-3', name: 'Level 3 Cook', weeks: 36, week: 1 });
+  assert.deepEqual([q.level.id, q.level.name, q.level.weeks, q.level.week], ['level-3', 'Level 3 Cook', 36, 1]);
   assert.deepEqual(q.this_week.lessons.map((x) => [x.lesson_id, x.label]), [['shakshuka', 'Week 1']]);
   // Thick burgers (week 2) isn't written, so week 3's recipe is next, like a planned dish (§6.18).
   assert.deepEqual(q.next_week.lessons.map((x) => [x.lesson_id, x.label]), [['chicken-fried-rice', 'Week 3']]);
@@ -117,4 +117,83 @@ test('a Level course waits out of sight while the next release is off, and comes
   assert.equal((await a.get('/api/queue')).body.courses.length, 0);
   await setPreview(env.DB, fid, true);
   assert.equal((await card(a)).level.week, 1);
+});
+
+// ---------- 12c: the kitchen's Level week ----------
+
+const saturday = new Date().getUTCDay() === 6;
+const kitchen = async (a, pid) => (await a.get(`/api/profiles/${pid}/queue`)).body.level;
+// Checks a part off; on the Sabbath the API refuses, so the row goes in directly.
+async function checkOff(env, a, pid, week, part) {
+  const res = await a.put(`/api/profiles/${pid}/level-tasks`, { week, part });
+  if (!saturday) return assert.equal(res.status, 200);
+  assert.equal(res.status, 409, 'nothing is checked off on the Sabbath');
+  const c = await env.DB.prepare('SELECT course_id, family_id FROM course_profiles WHERE profile_id = ?').bind(pid).first();
+  await env.DB.prepare('INSERT INTO level_tasks (family_id, course_id, week, part, profile_id, done_at) VALUES (?, ?, ?, ?, ?, ?)')
+    .bind(c.family_id, c.course_id, week, part, pid, `${sunday}T12:00:00.000Z`).run();
+}
+
+test("the kitchen shows this week's recipe and three parts, and the mastery recipes", async () => {
+  const { a, ava } = await setup();
+  await level(a, [ava]);
+  const lv = await kitchen(a, ava);
+  assert.equal(lv.week.week, 1);
+  assert.deepEqual([lv.week.unit_name, lv.week.recipe, lv.week.recipe_written, lv.week.recipe_done], ['Food safety science', 'shakshuka', true, false]);
+  assert.deepEqual(lv.week.parts.map((x) => [x.part, x.title, x.minutes, x.done_at]), [
+    ['drill', 'Calibrate a thermometer in ice water', 40, null], ['knowledge', 'Danger zone and how bacteria grow', 35, null], ['sabbath', 'Label and date containers', 45, null]]);
+  assert.ok(lv.mastery.includes('minestrone') && lv.mastery.includes('meatloaf') && !lv.mastery.includes('shakshuka'));
+  assert.equal(lv.sabbath, saturday);
+  assert.deepEqual(lv.open, []);
+});
+
+test('a part is checked off per profile; the parent takes it back, with Undo', async () => {
+  const { env, a, ava, ben } = await setup();
+  const { id } = (await level(a, [ava, ben])).body;
+  assert.equal((await a.put(`/api/profiles/${ava}/level-tasks`, { week: 1, part: 'lunch' })).status, saturday ? 409 : 400);
+  await checkOff(env, a, ava, 1, 'drill');
+  assert.ok((await kitchen(a, ava)).week.parts[0].done_at);
+  assert.equal((await kitchen(a, ben)).week.parts[0].done_at, null, 'each profile checks off its own');
+  let parts = (await card(a)).level.parts;
+  assert.deepEqual(parts.map((x) => x.done), [[ava], [], []]);
+
+  const body = { week: 1, part: 'drill', profile_id: ava };
+  assert.equal((await a.post(`/api/courses/${id}/level-tasks/take-back`, body)).status, 200);
+  assert.deepEqual((await card(a)).level.parts[0].done, []);
+  assert.equal((await kitchen(a, ava)).week.parts[0].done_at, null);
+  assert.equal((await a.post(`/api/courses/${id}/level-tasks/put-back`, body)).status, 200);
+  assert.deepEqual((await card(a)).level.parts[0].done, [ava]);
+  assert.equal((await a.post(`/api/courses/${id}/level-tasks/take-back`, { ...body, part: 'sabbath' })).status, 404, 'nothing to take back');
+});
+
+test("a part not checked off doesn't hold the schedule; it stays open", async () => {
+  const { a, ava } = await setup();
+  await level(a, [ava], addDays(sunday, -7));
+  // Week 1's recipe cooked last Monday; its parts weren't checked off.
+  await a.put('/api/attempts/00000000000012c1', {
+    lesson_id: 'shakshuka', servings: 6, profile_ids: [ava], started_at: `${addDays(sunday, -6)}T00:10:00.000Z`, finished_at: `${addDays(sunday, -6)}T00:40:00.000Z`,
+  });
+  const lv = await kitchen(a, ava);
+  assert.equal(lv.week.week, 3, 'the course moved on');
+  assert.deepEqual(lv.open.map((x) => [x.week, x.part]), [[1, 'drill'], [1, 'knowledge'], [1, 'sabbath']]);
+});
+
+test('a profile not on a Level course, or in another family, checks off nothing', async () => {
+  const { env, a, ava, ben } = await setup();
+  await level(a, [ava]);
+  const b = await family(env, 'Smiths', 'pat@example.com');
+  assert.ok([403, 404].includes((await b.put(`/api/profiles/${ava}/level-tasks`, { week: 1, part: 'drill' })).status));
+  if (!saturday) assert.equal((await a.put(`/api/profiles/${ben}/level-tasks`, { week: 1, part: 'drill' })).status, 404);
+});
+
+test("a mastery week's Why did it work? is kept per profile", async () => {
+  const { env, a, ava } = await setup();
+  await a.put('/api/attempts/00000000000012c2', {
+    lesson_id: 'minestrone', servings: 6, profile_ids: [ava], started_at: `${sunday}T00:10:00.000Z`, finished_at: `${sunday}T00:40:00.000Z`,
+  });
+  const why = (v) => a.put('/api/attempts/00000000000012c2/reflection', { profile_id: ava, rating: 5, why: v });
+  assert.equal((await why('The stock simmered, not boiled, so it stayed clear.')).status, 200);
+  const row = () => env.DB.prepare('SELECT why FROM mastery_notes WHERE attempt_id = ? AND profile_id = ?').bind('00000000000012c2', ava).first();
+  assert.equal((await row()).why, 'The stock simmered, not boiled, so it stayed clear.');
+  await why('');
+  assert.equal(await row(), null, 'emptied, it goes');
 });
