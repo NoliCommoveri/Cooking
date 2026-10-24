@@ -3288,3 +3288,10 @@ Design only. Plan §6.21 rewritten from the owner's decisions:
 - Data model: `profile_ratings`, `family_limits`, `taste_learned` replace
   `family_tastes`. Phase 11 is split into 11a tags, 11b ratings,
   11c variations, 11d scoring and picks, 11e Recipe gaps.
+
+## 131. 2026-10-24 — Plan: five stars and one absolute favorite
+
+Design only. The owner found a 4-star scale confusing: ratings are now
+5 stars (absolute favorite) to 1 (hate), or Haven't tried, and a profile has
+at most one 5-star item in each list (proteins, flavors, ingredients); a new
+5-star asks to move the old one to 4. Plan §6.21 and §8.4 updated.

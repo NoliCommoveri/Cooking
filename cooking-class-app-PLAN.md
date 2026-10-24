@@ -917,7 +917,8 @@ The fixed February 1 to May 15 window (§6.19) is replaced by **each family's ow
 Each person rates what they love and hate, the app picks the best dish or **variation** for the people cooking it, and where nothing scores well tells the owner which recipe to write next. **"We can always add more recipes"** (owner, 2026-10-23): a gap is fixed by writing a variation or a dish, not by ignoring what people said.
 
 **Ratings, not yes or no** (owner, 2026-10-24).
-- **Stars, per profile** (owner, 2026-10-24). Each item is rated **4 stars (love), 3 (like), 2 (okay), 1 (hate)**, or **Haven't tried**. A shared profile rates as one.
+- **Five stars, per profile** (owner, 2026-10-24). Each item is rated **5 stars (absolute favorite), 4 (love), 3 (like), 2 (okay), 1 (hate)**, or **Haven't tried**. A shared profile rates as one.
+  - **One absolute favorite** (owner, 2026-10-24): a profile has at most one 5-star item in each list (proteins, flavors, ingredients). Giving another item 5 stars asks to move the old favorite to 4.
 - **No country list** (owner, 2026-10-24): many people have never tried a cuisine, so they can't say whether they like it. Families rate **flavors**, each shown with example dishes, and cuisines are learned from what they cook (below).
 - **Who answers** (recommendation): a parent rates for any profile in Our tastes; a kid profile can also take a short taste quiz in its own kitchen, drawn in its theme. Either can change it later.
 
@@ -946,7 +947,7 @@ Each person rates what they love and hate, the app picks the best dish or **vari
 
 **Scoring** (recommendation). For the profiles on a cook (a course's profiles, or whoever a lesson is queued for):
 - A version of a dish is **ruled out** if anyone on the cook rates its main protein or a required ingredient 1 star (an optional one that's hated is left out instead, as with diet filters, §2.1), or if it breaks a family limit.
-- The rest are **scored** from everyone's stars for its protein, its key ingredients, and its flavors: love and like raise it, okay is neutral, Haven't tried is a small plus for an adventurous family and a small minus for a familiar one.
+- The rest are **scored** from everyone's stars for its protein, its key ingredients, and its flavors: an absolute favorite raises it most, then love and like; okay is neutral; Haven't tried is a small plus for an adventurous family and a small minus for a familiar one.
 - **Learned over time:** each cook's Reflect rating and eater rating (§3) nudge the scores of its flavors, protein, and cuisine for those profiles. Cuisines are never asked; they're only learned.
 - **A skill is never skipped.** When everything that teaches a needed skill is ruled out, the best-scoring one is offered with a short note ("Nothing for julienne fits everyone yet; this one is closest"), and the gap is counted (below).
 - **The hard rule comes first.** Only dishes that pass the unclean-food block (§2.1) and the family's diet filters are ever scored.
@@ -1100,7 +1101,7 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `photos` (id, family_id, attempt_id, r2_key, created_at)
 - `pantry` (family_id, ingredient_id). Kitchen staples
 - `unleavened_dates` (family_id, year, calendar, first_day, unleavened_from, confirmed_at) (§6.20). `calendar` is a standard calendar's id; `first_day` may differ from that calendar's date (a deviation); `confirmed_at` is null until the parent confirms the year
-- `profile_ratings` (family_id, profile_id, kind: protein | flavor | ingredient, item, stars 1–4 or null for Haven't tried, updated_at) (§6.21)
+- `profile_ratings` (family_id, profile_id, kind: protein | flavor | ingredient, item, stars 1–5 or null for Haven't tried; at most one 5 per profile per kind, updated_at) (§6.21)
 - `family_limits` (family_id, max_minutes, budget, missing_tools, adventurous, updated_at) (§6.21)
 - `taste_learned` (family_id, profile_id, kind: flavor | protein | cuisine, item, adjust, cooks): what Reflect ratings have taught (§6.21), so the gaps page and picks don't recount every cook
 - `course_programs` (course_id, family_id, program: `level-3`, …): which program a course is (§12). No row means Cook Around the World, so existing courses need no change
