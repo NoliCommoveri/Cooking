@@ -207,7 +207,335 @@ export const LIBRARY = {
      "avocado",
      "cilantro"
     ]
-   }
+   },
+   "variations": [
+    {
+     "title": "Steak fajitas",
+     "image": "img/dishes/chicken-fajitas.webp",
+     "cuisine": "tex-mex",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "For more than 6, sear the steak in two batches so the pan stays hot, and cook the vegetables in two batches too."
+       }
+      ]
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "beef-flank"
+      },
+      {
+       "ingredient": "chili-powder"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "garlic-powder"
+      },
+      {
+       "ingredient": "paprika-smoked"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "lime"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "bell-pepper-green"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "tortilla-flour"
+      },
+      {
+       "ingredient": "sour-cream",
+       "optional": true
+      },
+      {
+       "ingredient": "salsa",
+       "optional": true
+      },
+      {
+       "ingredient": "avocado",
+       "optional": true
+      },
+      {
+       "ingredient": "cilantro",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "tortilla-flour",
+       "use": "tortilla-corn",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "beef",
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "lemon-lime",
+       "bell-peppers",
+       "onions"
+      ],
+      "optional": [
+       "sour-cream-yogurt",
+       "avocado",
+       "cilantro"
+      ]
+     },
+     "id": "steak"
+    },
+    {
+     "title": "Black bean fajitas",
+     "image": "img/dishes/chicken-fajitas.webp",
+     "cuisine": "tex-mex",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "For more than 6, cook the vegetables in two batches so they brown instead of steaming."
+       }
+      ]
+     },
+     "totalMinutes": 35,
+     "ingredients": [
+      {
+       "ingredient": "black-beans"
+      },
+      {
+       "ingredient": "chili-powder"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "garlic-powder"
+      },
+      {
+       "ingredient": "paprika-smoked"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "lime"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "bell-pepper-green"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "tortilla-flour"
+      },
+      {
+       "ingredient": "sour-cream",
+       "optional": true
+      },
+      {
+       "ingredient": "salsa",
+       "optional": true
+      },
+      {
+       "ingredient": "avocado",
+       "optional": true
+      },
+      {
+       "ingredient": "cilantro",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "tortilla-flour",
+       "use": "tortilla-corn",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "lemon-lime",
+       "bell-peppers",
+       "onions"
+      ],
+      "optional": [
+       "sour-cream-yogurt",
+       "avocado",
+       "cilantro"
+      ]
+     },
+     "id": "black-bean"
+    },
+    {
+     "title": "Spicy chicken fajitas",
+     "image": "img/dishes/chicken-fajitas.webp",
+     "cuisine": "tex-mex",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "For more than 6, sear the chicken in two batches so the pan stays hot, and cook the vegetables in two batches too."
+       }
+      ]
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "chili-powder"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "garlic-powder"
+      },
+      {
+       "ingredient": "paprika-smoked"
+      },
+      {
+       "ingredient": "cayenne"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "lime"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "bell-pepper-green"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "jalapeno"
+      },
+      {
+       "ingredient": "tortilla-flour"
+      },
+      {
+       "ingredient": "sour-cream",
+       "optional": true
+      },
+      {
+       "ingredient": "salsa",
+       "optional": true
+      },
+      {
+       "ingredient": "avocado",
+       "optional": true
+      },
+      {
+       "ingredient": "cilantro",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "tortilla-flour",
+       "use": "tortilla-corn",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "warm-spices",
+       "chili-heat"
+      ],
+      "heat": "spicy",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "hot-peppers",
+       "lemon-lime",
+       "bell-peppers",
+       "onions"
+      ],
+      "optional": [
+       "sour-cream-yogurt",
+       "avocado",
+       "cilantro"
+      ]
+     },
+     "id": "spicy"
+    }
+   ]
   },
   {
    "id": "shoestring-fries",
@@ -1153,7 +1481,105 @@ export const LIBRARY = {
     "optional": [
      "mustard"
     ]
-   }
+   },
+   "variations": [
+    {
+     "title": "Turkey smash burgers + quick pickles",
+     "image": "img/dishes/smash-burgers.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "Cook 3 patties at a time in a 12-inch skillet. For more than 6, keep going in batches of 3, washing the tongs and your hands after each batch of raw turkey."
+       }
+      ]
+     },
+     "totalMinutes": 60,
+     "ingredients": [
+      {
+       "ingredient": "cucumber"
+      },
+      {
+       "ingredient": "vinegar-white"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "turkey-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "cheese-sliced",
+       "optional": true
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "burger-buns"
+      },
+      {
+       "ingredient": "ketchup",
+       "optional": true
+      },
+      {
+       "ingredient": "mustard-dijon",
+       "optional": true
+      },
+      {
+       "ingredient": "lettuce-green-leaf",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "burger-buns",
+       "use": "buns-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "other",
+     "tags": {
+      "protein": "turkey",
+      "flavors": [
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "cucumber",
+       "onions"
+      ],
+      "optional": [
+       "mustard"
+      ]
+     },
+     "id": "turkey"
+    }
+   ]
   },
   {
    "id": "french-omelet",
@@ -1552,7 +1978,105 @@ export const LIBRARY = {
     "optional": [
      "feta"
     ]
-   }
+   },
+   "variations": [
+    {
+     "title": "Spicy shakshuka",
+     "image": "img/dishes/shakshuka.webp",
+     "cuisine": "north-african",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, cook it in two 12-inch skillets side by side."
+       }
+      ]
+     },
+     "totalMinutes": 40,
+     "ingredients": [
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "jalapeno"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "paprika-smoked"
+      },
+      {
+       "ingredient": "chili-flakes"
+      },
+      {
+       "ingredient": "cayenne"
+      },
+      {
+       "ingredient": "tomatoes-crushed"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "parsley",
+       "optional": true
+      },
+      {
+       "ingredient": "feta",
+       "optional": true
+      },
+      {
+       "ingredient": "pita",
+       "optional": true
+      }
+     ],
+     "substitutions": [],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "eggs",
+      "flavors": [
+       "rich-tomato",
+       "chili-heat"
+      ],
+      "heat": "spicy",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "bell-peppers",
+       "hot-peppers",
+       "garlic",
+       "tomatoes"
+      ],
+      "optional": [
+       "feta"
+      ]
+     },
+     "id": "spicy"
+    }
+   ]
   },
   {
    "id": "spaghetti-marinara",
@@ -1740,7 +2264,193 @@ export const LIBRARY = {
     "optional": [
      "sesame"
     ]
-   }
+   },
+   "variations": [
+    {
+     "title": "Honey-garlic salmon",
+     "image": "img/dishes/honey-garlic-chicken.webp",
+     "cuisine": "chinese-american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, brown the salmon in three batches instead of two, so the pan never gets crowded."
+       }
+      ]
+     },
+     "totalMinutes": 40,
+     "ingredients": [
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "salmon-fillet"
+      },
+      {
+       "ingredient": "cornstarch"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "honey"
+      },
+      {
+       "ingredient": "soy-sauce"
+      },
+      {
+       "ingredient": "vinegar-rice"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "ginger-fresh"
+      },
+      {
+       "ingredient": "green-onion"
+      },
+      {
+       "ingredient": "sesame-seeds",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "soy-sauce",
+       "use": "tamari",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "fish",
+     "tags": {
+      "protein": "salmon",
+      "flavors": [
+       "sweet-savory",
+       "ginger-soy"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "ginger",
+       "onions"
+      ],
+      "optional": [
+       "sesame"
+      ]
+     },
+     "id": "salmon"
+    },
+    {
+     "title": "Honey-garlic tofu",
+     "image": "img/dishes/honey-garlic-chicken.webp",
+     "cuisine": "chinese-american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, brown the tofu in three batches instead of two, so the pan never gets crowded."
+       }
+      ]
+     },
+     "totalMinutes": 55,
+     "ingredients": [
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "tofu-extra-firm"
+      },
+      {
+       "ingredient": "cornstarch"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "honey"
+      },
+      {
+       "ingredient": "soy-sauce"
+      },
+      {
+       "ingredient": "vinegar-rice"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "ginger-fresh"
+      },
+      {
+       "ingredient": "green-onion"
+      },
+      {
+       "ingredient": "sesame-seeds",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "soy-sauce",
+       "use": "tamari",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "tofu",
+      "flavors": [
+       "sweet-savory",
+       "ginger-soy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "ginger",
+       "onions"
+      ],
+      "optional": [
+       "sesame"
+      ]
+     },
+     "id": "tofu"
+    }
+   ]
   },
   {
    "id": "chicken-fried-rice",
@@ -2622,7 +3332,100 @@ export const LIBRARY = {
      "onions"
     ],
     "optional": []
-   }
+   },
+   "variations": [
+    {
+     "title": "Chicken bulgogi",
+     "image": "img/dishes/beef-bulgogi.webp",
+     "cuisine": "korean",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, cook the chicken in 3 or 4 batches so the pan stays hot."
+       }
+      ]
+     },
+     "totalMinutes": 85,
+     "ingredients": [
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "asian-pear"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "ginger-fresh"
+      },
+      {
+       "ingredient": "soy-sauce"
+      },
+      {
+       "ingredient": "brown-sugar"
+      },
+      {
+       "ingredient": "sesame-oil"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "green-onion"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "sesame-seeds",
+       "optional": true
+      },
+      {
+       "ingredient": "rice-white",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "asian-pear",
+       "use": "pear-bosc",
+       "reason": "availability"
+      },
+      {
+       "for": "soy-sauce",
+       "use": "tamari",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "ginger-soy",
+       "sweet-savory"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "ginger",
+       "sesame",
+       "onions"
+      ],
+      "optional": []
+     },
+     "id": "chicken"
+    }
+   ]
   },
   {
    "id": "buttermilk-biscuits",
@@ -2960,6 +3763,10 @@ export const LIBRARY = {
    "name": "Red chili flakes",
    "contains": []
   },
+  "cayenne": {
+   "name": "Ground cayenne pepper",
+   "contains": []
+  },
   "black-pepper": {
    "name": "Black pepper",
    "contains": []
@@ -3214,6 +4021,12 @@ export const LIBRARY = {
     "meat"
    ]
   },
+  "beef-flank": {
+   "name": "Beef flank steak",
+   "contains": [
+    "meat"
+   ]
+  },
   "oregano-dried": {
    "name": "Dried oregano",
    "contains": []
@@ -3270,6 +4083,12 @@ export const LIBRARY = {
     "fish"
    ]
   },
+  "salmon-fillet": {
+   "name": "Salmon fillets, skinless",
+   "contains": [
+    "fish"
+   ]
+  },
   "tilapia": {
    "name": "Tilapia fillets",
    "contains": [
@@ -3318,6 +4137,14 @@ export const LIBRARY = {
    "name": "Cannellini beans (white kidney beans)",
    "contains": []
   },
+  "tofu-extra-firm": {
+   "name": "Extra-firm tofu",
+   "contains": []
+  },
+  "black-beans": {
+   "name": "Black beans",
+   "contains": []
+  },
   "pasta-small": {
    "name": "Small pasta (ditalini or small shells)",
    "contains": [
@@ -3342,6 +4169,12 @@ export const LIBRARY = {
   },
   "beef-ground": {
    "name": "Ground beef (80% lean)",
+   "contains": [
+    "meat"
+   ]
+  },
+  "turkey-ground": {
+   "name": "Ground turkey (93% lean)",
    "contains": [
     "meat"
    ]

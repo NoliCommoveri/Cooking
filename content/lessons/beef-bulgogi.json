@@ -82,5 +82,168 @@
     { "id": "check-beef", "type": "doneness", "text": "Fold a thick slice around the thermometer probe. It needs to read at least 145°F.", "safety": "adult-nearby", "hazard": "Hot stove", "target": { "temp": 145, "unit": "F" } },
     { "id": "next-batch", "text": "Move the cooked beef to the clean plate. Add the rest of the oil and cook the rest of the beef the same way, going back through the last four steps.", "safety": "adult-nearby", "hazard": "Hot oil" },
     { "id": "serve", "text": "Turn off the stove. Let the beef rest for 3 minutes, then sprinkle with sesame seeds and serve over rice.", "safety": "solo", "timerSeconds": 180, "timerLabel": "Rest" }
+  ],
+  "variations": [
+    {
+      "id": "chicken",
+      "title": "Chicken bulgogi",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["ginger-soy", "sweet-savory"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "totalMinutes": 85,
+      "scaling": {
+        "mode": "free",
+        "notes": [{ "from": 9, "text": "For more than 8, cook the chicken in 3 or 4 batches so the pan stays hot." }]
+      },
+      "ingredients": {
+        "drop": ["beef-ribeye@Beef"],
+        "add": [
+          { "ingredient": "chicken-thigh", "amount": 2, "unit": "lb", "prep": "boneless, skinless", "group": "Chicken" }
+        ],
+        "order": [
+          "+0",
+          "asian-pear@Marinade",
+          "garlic@Marinade",
+          "ginger-fresh@Marinade",
+          "soy-sauce@Marinade",
+          "brown-sugar@Marinade",
+          "sesame-oil@Marinade",
+          "black-pepper@Marinade",
+          "green-onion@Marinade",
+          "vegetable-oil@For the pan",
+          "sesame-seeds@To serve",
+          "rice-white@To serve"
+        ]
+      },
+      "steps": {
+        "change": {
+          "freeze": {
+            "id": "freeze",
+            "text": "Put the chicken, still in its package, in the freezer.",
+            "safety": "solo",
+            "timerSeconds": 1800,
+            "timerLabel": "Firm up the chicken",
+            "why": "firm-slice",
+            "tip": "Make the marinade while it chills."
+          },
+          "slice": {
+            "id": "slice",
+            "text": "Unwrap the chicken on the cutting board. Slice each thigh into thin strips, as even as you can, and drop them into the marinade.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife, raw chicken",
+            "handles": ["chicken-thigh"],
+            "why": "even-slices",
+            "tip": "Thinner than a pencil is perfect."
+          },
+          "wash-board": {
+            "id": "wash-board",
+            "type": "wash",
+            "text": "Wash your hands, the knife, and the cutting board with hot, soapy water. Wipe the counter.",
+            "safety": "solo",
+            "hazard": "Raw chicken"
+          },
+          "marinate": {
+            "id": "marinate",
+            "text": "Stir with the wooden spoon so every slice is coated. Cover the bowl, put it in the fridge, and put the spoon in the sink.",
+            "safety": "solo",
+            "hazard": "Raw chicken",
+            "handles": ["chicken-thigh"],
+            "timerSeconds": 1800,
+            "timerLabel": "Marinate"
+          },
+          "wash-spoon": {
+            "id": "wash-spoon",
+            "type": "wash",
+            "text": "Wash your hands with soap.",
+            "safety": "solo",
+            "hazard": "Raw chicken"
+          },
+          "add-beef": {
+            "id": "add-beef",
+            "text": "Use the tongs to lay about half the chicken in the pan in one layer. Set the tongs down on a raw-chicken spot, and don't use them for cooked chicken.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "handles": ["chicken-thigh"],
+            "why": "hot-pan"
+          },
+          "wash-tongs": {
+            "id": "wash-tongs",
+            "type": "wash",
+            "text": "Wash your hands. From here on, use the clean spatula for the chicken in the pan.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove"
+          },
+          "cook": {
+            "id": "cook",
+            "text": "Cook until the bottom is browned, about 3 minutes. Flip the slices with the spatula and cook 2 to 3 minutes more.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "timerSeconds": 180,
+            "timerLabel": "Chicken, first side",
+            "tip": "If the pan smokes or the marinade starts to burn, turn the heat down to medium."
+          },
+          "check-beef": {
+            "id": "check-beef",
+            "type": "doneness",
+            "text": "Slide the thermometer into the thickest slice. It needs to read at least 165°F. If it doesn't, cook 1 more minute and check again.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove",
+            "target": { "temp": 165, "unit": "F" }
+          },
+          "next-batch": {
+            "id": "next-batch",
+            "text": "Move the cooked chicken to the clean plate. Add the rest of the oil and cook the rest of the chicken the same way, going back through the last four steps.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil"
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Turn off the stove. Let the chicken rest for 3 minutes, then sprinkle with sesame seeds and serve over rice.",
+            "safety": "solo",
+            "timerSeconds": 180,
+            "timerLabel": "Rest"
+          }
+        }
+      },
+      "learn": {
+        "move": {
+          "title": "Thin slices, big flavor",
+          "body": "Slice the chicken thin, soak it in a sweet and salty marinade, and cook it fast in a hot pan. Thin slices soak up flavor quickly and cook in a few minutes."
+        },
+        "wrong": [
+          { "sign": "The slices are thick and uneven", "fix": "Put the chicken back in the freezer for 10 minutes, then try again with your sharpest knife." },
+          { "sign": "The chicken is pale and sitting in liquid", "fix": "The pan is too crowded. Cook smaller batches and let the pan heat up again between them." },
+          { "sign": "The marinade is burning in the pan", "fix": "The sugar in it burns fast. Turn the heat down to medium, and add a spoonful of water if the pan looks dry." },
+          { "sign": "It tastes too salty", "fix": "Serve it with more rice, and use a little less soy sauce next time." }
+        ],
+        "quiz": [
+          { "q": "Why does the chicken go in the freezer first?", "choices": ["To keep it fresh", "To firm it up so it slices thin", "To make it cook faster"], "answer": 1, "explain": "Soft raw chicken squishes under the knife. A little time in the freezer firms it up for thin, even slices." }
+        ],
+        "why": {
+          "change": {
+            "firm-slice": {
+              "id": "firm-slice",
+              "title": "Why freeze it first",
+              "body": "Raw chicken is soft and slippery, so the knife slides and squishes it. Thirty minutes in the freezer firms it up just enough to cut thin, even slices."
+            },
+            "hot-pan": {
+              "id": "hot-pan",
+              "title": "Why a very hot pan",
+              "body": "A crowded or cool pan lets the juice pool, so the chicken steams and turns pale. One layer in a hot pan browns it in a few minutes."
+            }
+          },
+          "drop": ["across-grain"],
+          "add": [
+            { "id": "even-slices", "title": "Thin and even", "body": "Slices that are all the same thickness cook in the same time, so none of them dry out while the thick ones catch up. Thin slices also soak up more marinade." }
+          ],
+          "order": ["firm-slice", "+0", "pear", "hot-pan"]
+        }
+      }
+    }
   ]
 }

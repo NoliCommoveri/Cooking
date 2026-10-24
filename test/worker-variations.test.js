@@ -31,7 +31,7 @@ test('a family without the next release can\'t pick a version, and cooks the les
 test('picking a version: only one the lesson has, and the lesson itself is a choice', async () => {
   const { a } = await setup();
   assert.equal((await a.put('/api/variations/chimichurri-steak', { variation: 'tofu' })).status, 400);
-  assert.equal((await a.put('/api/variations/shakshuka', { variation: '' })).status, 404, 'a lesson with no other versions');
+  assert.equal((await a.put('/api/variations/mac-and-cheese', { variation: '' })).status, 404, 'a lesson with no other versions');
   const r = await a.put('/api/variations/chimichurri-steak', { variation: 'chicken' });
   assert.equal(r.body.title, 'Chimichurri chicken');
   assert.deepEqual((await a.get('/api/me')).body.family.variations, { 'chimichurri-steak': 'chicken' });

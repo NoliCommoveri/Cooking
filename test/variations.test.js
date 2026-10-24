@@ -63,6 +63,14 @@ test('the content editor stores only what differs, and it puts back the same les
   assert.deepEqual(applyVariation(L, v), F);
 });
 
+test('the written variations pass, with no warnings of their own', () => {
+  const r = lint(base);
+  assert.deepEqual(r.errors, []);
+  assert.deepEqual(r.warnings.filter((w) => w.includes(' variation ')), [], 'a label note the lesson already has is not repeated');
+  const titles = base.lessons.flatMap((l) => (l.data.variations ?? []).map((v) => v.title));
+  for (const t of ['Chicken bulgogi', 'Steak fajitas', 'Black bean fajitas', 'Spicy chicken fajitas', 'Turkey smash burgers + quick pickles', 'Honey-garlic salmon', 'Honey-garlic tofu', 'Spicy shakshuka']) assert.ok(titles.includes(t), t);
+});
+
 test('the linter checks each variation as a whole lesson', () => {
   const low = lintWith('chimichurri-steak', (L) => { L.variations[0].steps.change['check-steak'].target.temp = 145; return L; });
   assert.match(low.errors.join('\n'), /variation "chicken": the thermometer target is 145°F, below the safe minimum of 165°F for chicken-thigh/);

@@ -3481,3 +3481,43 @@ The owner's rulings on the proposed dishes (plan §4.0, §6.21):
   reducing group, beside chicken adobo and pineapple teriyaki salmon: its pan
   sauce is reduced after searing.
 - Tests: 298 (one more assertion in `test/lint.test.js`).
+
+## 140. 2026-10-24 — Eight more variations
+
+The owner asked for the proposed variations (plan §6.21) whose lesson is
+already written. Each was written as an edited copy of its lesson and stored
+as what differs; times, temperatures, and methods were checked against
+recipes found on the web (sources in the session). All are drafts for the
+owner to review on each lesson's Variations section.
+- **Beef bulgogi → Chicken bulgogi:** thighs, frozen 30 minutes and sliced
+  into thin strips (a "thin and even" card replaces "across the grain"),
+  3 + 2 to 3 minutes a batch, 165°F, a tip and a wrong sign for the sugary
+  marinade burning. $.
+- **Chicken fajitas → Steak fajitas:** flank steak seared whole 4 minutes a
+  side, 145°F, rested, sliced thin across the grain (new card and quiz
+  question). $$.
+- **Chicken fajitas → Black bean fajitas:** no meat steps; two cans of black
+  beans, rinsed (new card on why), warmed with the spice paste after the
+  vegetables. 35 minutes, no thermometer. $.
+- **Chicken fajitas → Spicy chicken fajitas:** jalapeños julienned with the
+  peppers, cayenne in the paste, a card on where a chili's heat is and
+  washing hands after cutting it, and a "too spicy" fix.
+- **Smash burgers → Turkey smash burgers:** 93% lean ground turkey, balls
+  chilled before smashing, more oil, medium-high heat, 3 minutes then 2,
+  165°F; a "turkey is lean" card and a "crumbles" fix.
+- **Honey-garlic chicken → Honey-garlic salmon:** skinless salmon in 1-inch
+  pieces, browned 2 minutes a side and set aside; the sauce reduces alone,
+  then the salmon is turned in it; 145°F; a "gentle with fish" card. $$$.
+- **Honey-garlic chicken → Honey-garlic tofu:** two 14-oz blocks of
+  extra-firm tofu, pressed 15 minutes (new first step and card), no wash or
+  doneness steps since nothing is raw. $.
+- **Shakshuka → Spicy shakshuka:** diced jalapeños, chili flakes no longer
+  optional, cayenne, the heat card, and a "too spicy" fix.
+- **Registry:** salmon fillets, flank steak, ground turkey, extra-firm tofu
+  (14-oz block), black beans (15-oz can), and cayenne; the tastes lists link
+  them to salmon, beef, turkey, tofu, beans, and hot peppers.
+- **Linter:** a variation no longer repeats its lesson's label notes (flour
+  tortillas, sour cream); it warns only for an ingredient it adds.
+- Tests: 299 (a new check that the written variations pass with no warnings
+  of their own). Checked in the manager's learner preview at phone width:
+  Honey-garlic tofu and Spicy shakshuka.

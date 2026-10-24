@@ -99,9 +99,10 @@ export function lint(c) {
   // Every check a lesson gets. A variation (plan §6.21) is checked the same
   // way, as the whole lesson it makes, so it can't get past a rule its lesson
   // follows; it skips only what it shares with its lesson (unit, skills).
-  const checkLesson = (L, where, variation = false) => {
+  // base: the lesson, when L is one of its variations.
+  const checkLesson = (L, where, base = null) => {
     const e = m => err(where, m), w = m => warn(where, m);
-    if (!variation && !UNITS.has(L.unit)) e(`unit ${L.unit} doesn't exist in units.json`);
+    if (!base && !UNITS.has(L.unit)) e(`unit ${L.unit} doesn't exist in units.json`);
     if (!CU[L.cuisine]) e(`cuisine "${L.cuisine}" doesn't exist in cuisines.json`);
     for (const s of L.skills) if (!SK[s]) e(`skill "${s}" doesn't exist in skills.json`);
     for (const q of L.equipment) if (!EQ[q]) e(`equipment "${q}" doesn't exist in equipment.json`);
@@ -109,7 +110,7 @@ export function lint(c) {
     for (const p of L.prereqs) if (!prereqOk(p)) e(`prerequisite "${p}" isn't a dish or pick-one group in course.json`);
     if (L.learn.callback && !byId[L.learn.callback.lesson]) e(`callback points to "${L.learn.callback.lesson}", which isn't a written lesson`);
     if (L.learn.callback && L.learn.callback.lesson === L.id) e('callback points to itself');
-    if (!variation && !(L.intro && L.intro.slides.length)) w('no intro slides yet');
+    if (!base && !(L.intro && L.intro.slides.length)) w('no intro slides yet');
 
     // learn stage
     if (L.track === 'core') {
@@ -119,7 +120,7 @@ export function lint(c) {
     const whyIds = new Set(L.learn.why.map(x => x.id));
     if (whyIds.size !== L.learn.why.length) e('learn.why ids aren\'t unique');
     for (const q of L.learn.quiz || []) if (q.answer >= q.choices.length) e(`quiz "${q.q}" has an answer outside its choices`);
-    if (!variation) for (const s of L.skills) {
+    if (!base) for (const s of L.skills) {
       const uses = skillUse[s] || [];
       if (uses.length === 1) w(`skill "${s}" is only used by this lesson, so its "other dishes" card will be empty`);
       // A family cooks one dish from a pick-one group, so the others in it aren't "earlier lessons".
@@ -133,7 +134,8 @@ export function lint(c) {
       const ing = ING[line.ingredient];
       if (!ing) { e(`ingredient "${line.ingredient}" isn't in the registry`); continue; }
       if (uncleanReasons(ing, rules).length) e(`uses unclean ingredient "${ing.id}"`);
-      if (ing.watch) w(`uses ${ing.id}: ${ing.watch}`);
+      // A variation repeats its lesson's label notes only for what it adds.
+      if (ing.watch && !base?.ingredients.some(l => l.ingredient === ing.id)) w(`uses ${ing.id}: ${ing.watch}`);
       if (line.amount != null && toBase(1, line.unit, ing) == null) e(`${ing.id} is measured in "${line.unit}", which has no conversion to ${ing.baseUnit}`);
     }
     for (const s of L.substitutions || []) {
@@ -216,7 +218,7 @@ export function lint(c) {
       try { V = applyVariation(L, v); } catch (x) { err(vw, `can't be put together: ${x.message}`); continue; }
       const schemaErrs = validate(V, c.schemas.lesson);
       if (schemaErrs.length) { schemaErrs.forEach(x => err(vw, x)); continue; }
-      checkLesson(V, vw, true);
+      checkLesson(V, vw, L);
     }
   }
   // a seasonal lesson isn't in course.json, so it carries its own dish card

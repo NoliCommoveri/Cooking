@@ -90,5 +90,374 @@
     { "id": "glaze", "text": "Put all the chicken back in the pan and turn the heat down to medium. Stir the sauce (the garlic sinks) and pour it in. Let it bubble, stirring often, until it's thick and sticky and coats the chicken.", "safety": "adult-nearby", "hazard": "Hot pan, bubbling sugar", "timerSeconds": 240, "timerLabel": "Glaze", "why": "reduce", "look": "Big, slow, sticky bubbles, and a shiny glaze on every piece.", "tip": "Bubbling honey is hotter than boiling water. Keep your hands back and stir with the long spatula." },
     { "id": "check-chicken", "type": "doneness", "text": "Turn off the heat. Slide the thermometer into the thickest piece of chicken. It needs to read at least 165°F. If it doesn't, cook 2 more minutes on low, stirring, and check again.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 165, "unit": "F" } },
     { "id": "serve", "text": "Fluff the rice with the fork. Spoon the chicken and its glaze over the rice, and sprinkle with green onions and the sesame seeds if you're using them.", "safety": "adult-nearby", "hazard": "Hot pan", "why": "honey-burns" }
+  ],
+  "variations": [
+    {
+      "id": "salmon",
+      "title": "Honey-garlic salmon",
+      "tags": {
+        "protein": "salmon",
+        "flavors": ["sweet-savory", "ginger-soy"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "totalMinutes": 40,
+      "scaling": {
+        "mode": "free",
+        "notes": [
+          { "from": 9, "text": "For more than 8, brown the salmon in three batches instead of two, so the pan never gets crowded." }
+        ]
+      },
+      "ingredients": {
+        "drop": [
+          "chicken-thigh@Chicken",
+          "cornstarch@Chicken",
+          "salt@Chicken",
+          "black-pepper@Chicken",
+          "vegetable-oil@Chicken"
+        ],
+        "add": [
+          { "ingredient": "salmon-fillet", "amount": 2, "unit": "lb", "prep": "cut into 1-inch pieces", "group": "Salmon" },
+          { "ingredient": "cornstarch", "amount": 3, "unit": "tbsp", "group": "Salmon" },
+          { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Salmon" },
+          { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Salmon" },
+          { "ingredient": "vegetable-oil", "amount": 2, "unit": "tbsp", "prep": "half for each batch", "group": "Salmon" }
+        ],
+        "order": [
+          "rice-white@Rice",
+          "water@Rice",
+          "+0",
+          "+1",
+          "+2",
+          "+3",
+          "+4",
+          "honey@Sauce",
+          "soy-sauce@Sauce",
+          "vinegar-rice@Sauce",
+          "garlic@Sauce",
+          "ginger-fresh@Sauce",
+          "green-onion@To serve",
+          "sesame-seeds@To serve"
+        ]
+      },
+      "equipment": { "add": ["paper-towels"] },
+      "steps": {
+        "change": {
+          "cut-chicken": {
+            "id": "cut-chicken",
+            "text": "Pat the salmon dry with paper towels. Cut it into 1-inch pieces and put them in the large bowl. Sprinkle on the cornstarch, {qty:salt} salt, and the pepper, and toss gently with the spoon until every piece is coated.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife, raw fish",
+            "handles": ["salmon-fillet"],
+            "why": "coat"
+          },
+          "wash-1": {
+            "id": "wash-1",
+            "type": "wash",
+            "text": "Wash your hands, the knife, and the cutting board with hot, soapy water.",
+            "safety": "solo",
+            "hazard": "Raw fish",
+            "tip": "Raw fish can carry germs. Wash before you touch anything else."
+          },
+          "batch-1": {
+            "id": "batch-1",
+            "text": "Gently tip half the salmon into the pan and spread it into one layer with the spatula.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil, raw fish",
+            "handles": ["salmon-fillet"],
+            "why": "crowd",
+            "tip": "Tip it in close to the pan, away from you, so the oil doesn't splash."
+          },
+          "wash-2": {
+            "id": "wash-2",
+            "type": "wash",
+            "text": "Wash your hands with soap.",
+            "safety": "solo",
+            "hazard": "Raw fish"
+          },
+          "brown-1": {
+            "id": "brown-1",
+            "text": "Leave the salmon alone until it's golden underneath, about 2 minutes. Turn the pieces gently and brown another side. Move them to the plate.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "timerSeconds": 240,
+            "timerLabel": "First batch",
+            "look": "Golden on two sides, and no longer see-through on the outside."
+          },
+          "batch-2": {
+            "id": "batch-2",
+            "text": "Add the rest of the oil. Gently tip in the rest of the salmon and spread it out.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil, raw fish",
+            "handles": ["salmon-fillet"]
+          },
+          "wash-3": {
+            "id": "wash-3",
+            "type": "wash",
+            "text": "Wash your hands with soap, and wash the bowl the salmon was in.",
+            "safety": "solo",
+            "hazard": "Raw fish"
+          },
+          "brown-2": {
+            "id": "brown-2",
+            "text": "Brown the second batch the same way.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "timerSeconds": 240,
+            "timerLabel": "Second batch"
+          },
+          "glaze": {
+            "id": "glaze",
+            "text": "Turn the heat down to medium. Stir the sauce (the garlic sinks) and pour it into the empty pan. Let it bubble, stirring often, until it's thick and sticky.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan, bubbling sugar",
+            "timerSeconds": 180,
+            "timerLabel": "Glaze",
+            "why": "reduce",
+            "look": "Big, slow, sticky bubbles.",
+            "tip": "Bubbling honey is hotter than boiling water. Keep your hands back and stir with the long spatula."
+          },
+          "check-chicken": {
+            "id": "check-chicken",
+            "type": "doneness",
+            "text": "Turn off the heat. Slide the thermometer into the thickest piece of salmon. It needs to read at least 145°F. If it doesn't, cook 1 more minute on low and check again.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "target": { "temp": 145, "unit": "F" }
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Fluff the rice with the fork. Spoon the salmon and its glaze over the rice, and sprinkle with green onions and the sesame seeds if you're using them.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "why": "honey-burns"
+          }
+        },
+        "add": [
+          { "id": "coat-salmon", "text": "Put all the salmon back in the pan and turn the pieces gently in the glaze until every one is shiny.", "safety": "adult-nearby", "hazard": "Hot pan, bubbling sugar", "timerSeconds": 60, "timerLabel": "Coat the salmon", "why": "gentle-fish" }
+        ],
+        "order": [
+          "rinse-rice",
+          "cook-rice",
+          "sauce",
+          "greens",
+          "cut-chicken",
+          "wash-1",
+          "heat",
+          "batch-1",
+          "wash-2",
+          "brown-1",
+          "batch-2",
+          "wash-3",
+          "brown-2",
+          "glaze",
+          "+0",
+          "check-chicken",
+          "serve"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "Brown it, then glaze it",
+          "body": "Building a sauce means adding flavors one layer at a time. Today you'll brown bite-size salmon, then bubble a honey, soy, and garlic sauce down until it's thick and sticky, and turn the salmon in it. Rice cooks on the next burner."
+        },
+        "wrong": [
+          { "sign": "The salmon is pale and sitting in juice", "fix": "The pan was crowded or not hot enough. Turn the heat up and let the juice boil away. Cook the next batch with fewer pieces." },
+          { "sign": "The sauce is thin and runny", "fix": "Keep it bubbling a minute or two more, stirring. It thickens more as it cools, too." },
+          { "sign": "The sauce smells smoky or looks dark brown", "fix": "Take the pan off the heat and stir in 2 tablespoons of water. Next time, use lower heat once the honey goes in." },
+          { "sign": "It tastes too salty", "fix": "Serve it with more rice, and use a little less soy sauce next time." },
+          { "sign": "The salmon is breaking into flakes", "fix": "It's still good to eat. Turn it more gently, and stir the glaze around it instead of stirring the salmon." }
+        ],
+        "quiz": [
+          { "q": "Why does the salmon brown in two batches?", "choices": ["So it browns instead of steaming", "So it cooks slower", "Because the sauce needs half"], "answer": 0, "explain": "Crowded salmon sits in its own juice and steams. With room, the juice boils off and it browns." },
+          { "q": "How can you tell the sauce has thickened?", "choices": ["The bubbles get big, slow, and sticky", "It turns white", "It stops smelling"], "answer": 0, "explain": "As water boils away, the bubbles slow down and the sauce turns glossy and coats the chicken." }
+        ],
+        "why": {
+          "change": {
+            "coat": {
+              "id": "coat",
+              "title": "A light coat of cornstarch",
+              "body": "Tossing the salmon in cornstarch gives each piece a thin coat. In the hot pan it turns golden and a little crisp. Later, it grabs the sauce, so the glaze sticks instead of sliding off."
+            },
+            "crowd": {
+              "id": "crowd",
+              "title": "Give it room",
+              "body": "Salmon gives off juice as it cooks. With space around each piece, the juice boils away fast and the salmon browns. Crowd the pan and the juice pools, and the salmon steams pale instead. That's why it cooks in two batches."
+            }
+          },
+          "add": [
+            { "id": "gentle-fish", "title": "Gentle with fish", "body": "Salmon is soft, and it flakes apart as it cooks. It also cooks much faster than chicken. Turn the pieces gently with a thin spatula, and take them out as soon as they're golden. The sauce bubbles down on its own, and the salmon goes back in at the end." }
+          ]
+        }
+      }
+    },
+    {
+      "id": "tofu",
+      "title": "Honey-garlic tofu",
+      "tags": {
+        "protein": "tofu",
+        "flavors": ["sweet-savory", "ginger-soy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "totalMinutes": 55,
+      "scaling": {
+        "mode": "free",
+        "notes": [
+          { "from": 9, "text": "For more than 8, brown the tofu in three batches instead of two, so the pan never gets crowded." }
+        ]
+      },
+      "ingredients": {
+        "drop": [
+          "chicken-thigh@Chicken",
+          "cornstarch@Chicken",
+          "salt@Chicken",
+          "black-pepper@Chicken",
+          "vegetable-oil@Chicken"
+        ],
+        "add": [
+          { "ingredient": "tofu-extra-firm", "amount": 2, "unit": "block", "prep": "cut into 1-inch cubes", "group": "Tofu" },
+          { "ingredient": "cornstarch", "amount": 3, "unit": "tbsp", "group": "Tofu" },
+          { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Tofu" },
+          { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Tofu" },
+          { "ingredient": "vegetable-oil", "amount": 2, "unit": "tbsp", "prep": "half for each batch", "group": "Tofu" }
+        ],
+        "order": [
+          "rice-white@Rice",
+          "water@Rice",
+          "+0",
+          "+1",
+          "+2",
+          "+3",
+          "+4",
+          "honey@Sauce",
+          "soy-sauce@Sauce",
+          "vinegar-rice@Sauce",
+          "garlic@Sauce",
+          "ginger-fresh@Sauce",
+          "green-onion@To serve",
+          "sesame-seeds@To serve"
+        ]
+      },
+      "equipment": { "drop": ["thermometer"], "add": ["kitchen-towel"] },
+      "steps": {
+        "change": {
+          "cut-chicken": {
+            "id": "cut-chicken",
+            "text": "Unwrap the tofu and cut it into 1-inch cubes. Put them in the large bowl, sprinkle on the cornstarch, {qty:salt} salt, and the pepper, and toss gently with the spoon until every piece is coated.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "coat"
+          },
+          "batch-1": {
+            "id": "batch-1",
+            "text": "Tip half the tofu into the pan and spread it into one layer with the spatula.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "why": "crowd",
+            "tip": "Tip it in close to the pan, away from you, so the oil doesn't splash."
+          },
+          "brown-1": {
+            "id": "brown-1",
+            "text": "Leave the tofu alone until it's golden underneath, then turn the pieces and brown the other sides. Move it to the plate.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "timerSeconds": 420,
+            "timerLabel": "First batch",
+            "look": "Golden and crisp on most sides."
+          },
+          "batch-2": {
+            "id": "batch-2",
+            "text": "Add the rest of the oil. Tip in the rest of the tofu and spread it out.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil"
+          },
+          "brown-2": {
+            "id": "brown-2",
+            "text": "Brown the second batch the same way.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "timerSeconds": 420,
+            "timerLabel": "Second batch"
+          },
+          "glaze": {
+            "id": "glaze",
+            "text": "Put all the tofu back in the pan and turn the heat down to medium. Stir the sauce (the garlic sinks) and pour it in. Let it bubble, stirring gently, until it's thick and sticky and coats the tofu.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan, bubbling sugar",
+            "timerSeconds": 240,
+            "timerLabel": "Glaze",
+            "why": "reduce",
+            "look": "Big, slow, sticky bubbles, and a shiny glaze on every piece.",
+            "tip": "Bubbling honey is hotter than boiling water. Keep your hands back and stir with the long spatula."
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Turn off the heat. Fluff the rice with the fork. Spoon the tofu and its glaze over the rice, and sprinkle with green onions and the sesame seeds if you're using them.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "why": "honey-burns"
+          }
+        },
+        "drop": ["wash-1", "wash-2", "wash-3", "check-chicken"],
+        "add": [
+          { "id": "press", "text": "Drain the tofu. Wrap each block in the kitchen towel, lay them on a plate, and set a heavy pan on top to press out the water.", "safety": "solo", "timerSeconds": 900, "timerLabel": "Press tofu", "why": "press", "tip": "Start the rice while the tofu presses." }
+        ],
+        "order": [
+          "+0",
+          "rinse-rice",
+          "cook-rice",
+          "sauce",
+          "greens",
+          "cut-chicken",
+          "heat",
+          "batch-1",
+          "brown-1",
+          "batch-2",
+          "brown-2",
+          "glaze",
+          "serve"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "Brown it, then glaze it",
+          "body": "Building a sauce means adding flavors one layer at a time. Today you'll press and brown cubes of tofu, then pour in a honey, soy, and garlic sauce and let it bubble down until it's thick and sticky and clings to every piece. Rice cooks on the next burner."
+        },
+        "wrong": [
+          { "sign": "The tofu is pale and soft", "fix": "It needed more pressing, or the pan was crowded. Turn the heat up and give each piece room. Press the next block longer." },
+          { "sign": "The sauce is thin and runny", "fix": "Keep it bubbling a minute or two more, stirring. It thickens more as it cools, too." },
+          { "sign": "The sauce smells smoky or looks dark brown", "fix": "Take the pan off the heat and stir in 2 tablespoons of water. Next time, use lower heat once the honey goes in." },
+          { "sign": "It tastes too salty", "fix": "Serve it with more rice, and use a little less soy sauce next time." },
+          { "sign": "The tofu is breaking apart", "fix": "Use extra-firm tofu, and turn the pieces gently with the spatula instead of stirring hard." }
+        ],
+        "quiz": [
+          { "q": "Why do you press the tofu first?", "choices": ["To squeeze out water so it browns", "To make it softer", "To make it bigger"], "answer": 0, "explain": "Wet tofu steams. Pressed tofu browns and crisps in the hot pan." },
+          { "q": "How can you tell the sauce has thickened?", "choices": ["The bubbles get big, slow, and sticky", "It turns white", "It stops smelling"], "answer": 0, "explain": "As water boils away, the bubbles slow down and the sauce turns glossy and coats the chicken." }
+        ],
+        "why": {
+          "change": {
+            "coat": {
+              "id": "coat",
+              "title": "A light coat of cornstarch",
+              "body": "Tossing the tofu in cornstarch gives each piece a thin coat. In the hot pan it turns golden and crisp. Later, it grabs the sauce and helps thicken it, so the glaze sticks instead of sliding off."
+            },
+            "crowd": {
+              "id": "crowd",
+              "title": "Give it room",
+              "body": "Tofu still has some water in it. With space around each piece, the water boils away fast and the tofu browns. Crowd the pan and the steam has nowhere to go, so the tofu stays pale and soft. That's why it cooks in two batches."
+            }
+          },
+          "add": [
+            { "id": "press", "title": "Why press the tofu", "body": "Tofu is packed in water, and wet tofu steams in the pan instead of browning. Pressing it under a weight squeezes the water out, so the outside can turn golden and crisp." }
+          ],
+          "order": ["+0", "coat", "crowd", "reduce", "honey-burns"]
+        }
+      }
+    }
   ]
 }
