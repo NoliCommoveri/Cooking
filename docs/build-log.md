@@ -4036,3 +4036,34 @@ The PR's GitHub check failed once and passed on its re-run of the same
 commit: `test/worker-shopping.test.js` queued two lessons back to back, and
 when both got the same millisecond their order came down to their random ids.
 The test now waits a few milliseconds between them. No app changes.
+
+## 165. 2026-10-24 — Level 3 recipe progression review (Units 1–6)
+
+A unit-by-unit review of Level 3's weeks: whether each week's recipe and
+options practise the week's skill, whether the year builds in general, and
+which weeks rely on a skill from a later unit or from Level 2. Units 1–6 are
+done. It lives in `docs/level-recipe-review.md`, a copy of the working doc
+on claude.ai.
+
+- **Owner rulings (2026-10-24):** nobody taking a Level has taken an
+  earlier one, so reusing skills and recipes from Level 2 or earlier units is
+  good review. Bread units are exempt from the difficulty climb. Side dishes
+  and small dips are fine. The same dish can be in two weeks. Level 2 skills
+  get quick reviews, written once Level 2 is. Wholly new recipes are allowed.
+  A Level version of a dish (a variation with easier steps, like jarred
+  garlic) shows for every family. Level 2 gets basic knife safety for
+  chopping. A parent cuts the raw chicken in Unit 1.
+- **Approved changes, Units 1–5:** Unit 1's weeks move to the thermometer
+  skill, with a new cooling-and-reheating skill; Chicken adobo replaces Jollof
+  rice (week 3); Turkey meatloaf replaces Swedish meatballs (week 4);
+  Cinnamon rolls replaces pizza as the week 8 option; Beef tacos with pico
+  becomes week 9's default; Kuku sabzi replaces Chimichurri steak (week 10);
+  Ratatouille replaces the chopped salad (week 12); Chicken jambalaya
+  replaces Lomo saltado (week 15); Ragù bolognese replaces the beef chuck
+  ragù (week 16); Cuban black beans replaces Chana masala (week 18); Bulgur
+  pilaf joins week 19. The full list is in the review.
+- **Open:** Unit 6's three decisions (a pan-juice Level version of Roast
+  chicken, oven-roasted BBQ pulled chicken, a glove step for Jerk chicken),
+  and Units 7–9.
+- Nothing in the app or content changes yet; the approved changes are built
+  after the review.
