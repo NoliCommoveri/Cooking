@@ -86,7 +86,7 @@
     { "id": "second-glaze", "text": "With oven mitts on, pull the pan out onto the stovetop. Spoon the rest of the glaze over the top with a clean spoon, then put it back in the oven.", "safety": "adult-nearby", "hazard": "Hot oven, hot pan", "timerSeconds": 1200, "timerLabel": "Bake with glaze", "why": "glaze-late", "look": "The glaze is shiny and sticky, and the edges of the loaf are browned and sizzling." },
     { "id": "check", "type": "doneness", "text": "With oven mitts on, pull the pan out. Slide the thermometer into the very middle of the loaf, from the end, so the tip is in the center. It needs to read at least 160°F. If it doesn't, bake 5 more minutes and check again.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 160, "unit": "F" }, "why": "middle-last" },
     { "id": "rest", "text": "Turn off the oven. Leave the loaf on the pan to rest.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 600, "timerLabel": "Rest", "why": "rest" },
-    { "id": "serve", "text": "Lift the loaf onto the cutting board with the spatula. Slice it about 1 inch thick with a gentle sawing motion, and serve.", "safety": "adult-nearby", "hazard": "Sharp knife, hot food", "tip": "Leftovers keep in a covered container in the fridge for 3 to 4 days. Reheat slices until they reach 165°F." }
+    { "id": "serve", "text": "Lift the loaf onto the cutting board with the spatula. Slice it about 1 inch thick with a gentle sawing motion, and serve.", "safety": "adult-nearby", "hazard": "Sharp knife, hot food", "tip": "Store leftovers covered in the fridge. The USDA guideline is 3 to 4 days. Reheat slices until they reach 165°F." }
   ],
   "variations": [
     {

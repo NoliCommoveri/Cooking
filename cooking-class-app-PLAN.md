@@ -1361,7 +1361,7 @@ Level 1's "Clean and unclean animals" and Level 2's "Labels and hidden unclean i
 
 | Week | Recipe | Drill | Knowledge | Sabbath task |
 |---|---|---|---|---|
-| 1 | Shakshuka (eggs set fully, checked at 160°F) | Calibrate a thermometer in ice water | Danger zone and how bacteria grow | Label and date containers |
+| 1 | Shakshuka (eggs set fully, checked at 160°F) | Calibrate a thermometer in ice water | Danger zone and how microorganisms grow | Label and date containers |
 | 2 | Thick beef burgers to 160°F | Temp-check thick vs. thin patties | Safe internal temperatures chart | Cool a cooked dish in an ice bath |
 | 3 | Chicken fried rice, from the rice cooled in the drill | Safe cooling of a batch of rice, saved for the fried rice | Cross-contamination and board colors | Store a dish safely for the Sabbath |
 | 4 | **Mastery:** meatloaf, beef kofta to 160°F, or turkey meatloaf to 165°F | Set up a clean station unaided | Food safety quiz | Reheat a stored dish to 165°F |
@@ -1399,6 +1399,8 @@ Level 1's "Clean and unclean animals" and Level 2's "Labels and hidden unclean i
 | 36 | **Capstone:** full Sabbath meal made ahead (main, side, bread, and salad, with soup as a choice) | Shop and do Thursday prep | Reflection, the Sunday after: what worked, what to change | Serve the meal for the Sabbath |
 
 The capstone pulls from every unit: safe temperatures (1), challah (2), knife work (3), an aromatic base (4), a grain or legume (5), a fish or a roast (6–7), and soup (8).
+
+- **Voice — Requirement (owner, 2026-10-24):** Level 3 is written for capable learners (a guide for writing only: about 11 and up; the app shows no ages, §11). It says "adult", never "grown-up", and uses the real terms (microorganisms, pathogens, toxins, Listeria, Bacillus cereus) without explaining them as to a young child. Food-safety pages give the USDA guideline and the reason for it, and say plainly where common practice differs instead of laying down absolutes: an intact whole cut of beef or lamb eaten rare or medium-rare is a far smaller risk than undercooked ground meat (not so for poultry, ground, or tenderized meat); leftovers are 3 to 4 days by the USDA, and a family sets its own limit.
 
 - **New recipes:** most Level 3 recipes aren't in Cook Around the World (pico de gallo, tabbouleh, garlic green beans, picadillo, mujaddara, shish taouk, the fish weeks, the stocks, the breads, and others). Each is written as that week's default, tagged with its skill (§6.21). Cook Around the World lessons with the same skill (fish tacos for dicing, minestrone and matzo ball soup for soup, challah) are swap-ins.
 - **Setup checks the calendar** (§6.20): a course whose Unit 2 would touch the family's unleavened days says so when it's set up. It comes with phase 13 (§9), after Level 3 itself.

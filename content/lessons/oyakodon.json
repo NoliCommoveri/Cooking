@@ -126,7 +126,7 @@
           },
           "cut-chicken": {
             "id": "cut-chicken",
-            "text": "A grown-up cuts the chicken into bite-size pieces, about 1 inch, and leaves them on the cutting board.",
+            "text": "An adult cuts the chicken into bite-size pieces, about 1 inch, and leaves them on the cutting board.",
             "safety": "adult-hands-on",
             "hazard": "Sharp knife, raw chicken",
             "handles": ["chicken-thigh"],

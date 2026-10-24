@@ -130,7 +130,7 @@
           },
           "dice-chicken": {
             "id": "dice-chicken",
-            "text": "A grown-up dices the chicken into small cubes, about ½ inch, and puts them in the small bowl. Sprinkle them with {qty:salt} salt and the pepper.",
+            "text": "An adult dices the chicken into small cubes, about ½ inch, and puts them in the small bowl. Sprinkle them with {qty:salt} salt and the pepper.",
             "safety": "adult-hands-on",
             "hazard": "Sharp knife, raw chicken",
             "handles": ["chicken-breast"],

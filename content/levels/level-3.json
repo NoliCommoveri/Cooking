@@ -25,63 +25,64 @@
         "title": "Calibrate a thermometer in ice water",
         "minutes": 40,
         "body": [
-          "A thermometer is only useful if it tells the truth. Ice water is always 32°F, so it's the easiest way to check one. If yours reads a little off, you can fix it or remember how far off it is.",
-          "This week's drill has a second, short part: a quick review of knife safety, because this unit's recipes dice an onion or a pepper before the knife unit starts in week 9."
+          "Every safe-temperature check this year depends on your thermometer reading correctly. A mixture of ice and water sits at 32°F, which makes it a reliable reference point.",
+          "The second part is a short knife-safety review. This unit's recipes call for diced onion and pepper, and the knife unit doesn't start until week 9."
         ],
         "steps": [
-          "Fill a tall glass to the top with ice. Add cold water until it's just below the ice, and stir. Wait 3 minutes so the water gets as cold as the ice.",
-          "Push the thermometer's stem into the middle of the glass, at least 2 inches deep. Don't let the tip touch the sides or the bottom.",
-          "Wait until the number stops changing, about 30 seconds for a digital one. It should read 32°F.",
-          "If it's off by more than 2°F, fix it: many digital thermometers have a reset or calibrate button (check its instructions), and a dial thermometer has a small nut under the dial that a grown-up can turn with pliers until the needle points to 32°F. If yours can't be fixed, write down how far off it is, and add or subtract that every time you use it.",
-          "Practice reading: check a glass of warm tap water and a glass of cold tap water. Write down all three numbers.",
-          "Wash the stem with hot, soapy water and dry it. Wash it after every use from now on, and before it goes into any food.",
-          "Knife safety review, 5 minutes. Set the cutting board on a damp paper towel so it can't slide. Hold the knife by its handle, never the blade. Hold the food with a claw: fingertips tucked under, knuckles in front.",
-          "Cut one onion in half through the root, lay each half flat side down, and chop it with the claw, sliding your hand back after each cut. Never wave a knife while you talk, and never try to catch a falling knife: step back and let it fall.",
-          "Use the onion this week, in shakshuka or another recipe."
+          "Fill a tall glass with ice, add cold water to just below the top of the ice, and stir. Let it stand 3 minutes.",
+          "Insert the probe at least 2 inches into the center of the glass, clear of the sides and bottom.",
+          "Wait for the reading to settle, about 30 seconds on a digital thermometer. It should read 32°F.",
+          "If it's more than 2°F off, recalibrate: most digital thermometers have a calibrate or reset function (see the manual); on a dial thermometer, an adult turns the nut under the dial with pliers until the needle reads 32°F. If it can't be adjusted, note the offset and correct for it every time.",
+          "Record readings for warm and cold tap water as well, so you get used to how quickly the probe settles.",
+          "Wash the probe in hot, soapy water. From now on, clean it after every use.",
+          "Knife review: set the cutting board on a damp paper towel so it can't slide. Grip the knife at the handle, and hold the food in a claw grip, fingertips curled under.",
+          "Halve an onion through the root, lay the halves flat side down, and chop them, moving your guide hand back with each cut. If the knife falls, step back and let it drop.",
+          "Use the onion in this week's recipe."
         ],
         "quiz": [
-          { "q": "What should a thermometer read in a glass of ice water?", "choices": ["32°F", "0°F", "40°F"], "answer": 0, "explain": "Water with ice in it stays at 32°F, the temperature where it freezes." },
-          { "q": "Where does the tip go when you check the ice water?", "choices": ["In the middle of the glass, not touching the sides", "Touching the bottom of the glass", "Just under the top of the water"], "answer": 0, "explain": "The glass can be warmer than the water. The tip has to be in the water itself." },
-          { "q": "What do you do if a knife starts to fall?", "choices": ["Step back and let it fall", "Catch it by the handle", "Grab it as fast as you can"], "answer": 0, "explain": "A falling knife can cut you wherever you grab it. Let it land, then pick it up." }
+          { "q": "What should a calibrated thermometer read in ice water?", "choices": ["32°F", "0°F", "40°F"], "answer": 0, "explain": "An ice-water mixture stays at the freezing point of water, 32°F." },
+          { "q": "Why keep the probe away from the sides of the glass?", "choices": ["The glass isn't the same temperature as the water", "It can scratch the glass", "The reading takes longer"], "answer": 0, "explain": "You're measuring the water. The glass is warmer, so touching it skews the reading." },
+          { "q": "Your thermometer reads 35°F in ice water and can't be adjusted. A burger reads 162°F. What is it really?", "choices": ["About 159°F, so not done yet", "162°F, done", "About 165°F"], "answer": 0, "explain": "It reads 3°F high, so subtract 3. The burger needs another minute." }
         ]
       },
       "knowledge": {
-        "title": "Danger zone and how bacteria grow",
+        "title": "Danger zone and how microorganisms grow",
         "minutes": 35,
         "body": [
-          "Bacteria are tiny living things, far too small to see. Most are harmless, but some make people sick, and they can be on raw meat, eggs, and even vegetables. You can't see them, smell them, or taste them.",
-          "Bacteria grow fastest between 40°F and 140°F. That range is called the danger zone. In the middle of it, near body temperature, their numbers can double in as little as 20 minutes. At that rate, one becomes over a million in about 7 hours.",
-          "Cold slows them down: a fridge at 40°F or below keeps food safe for a few days, and a freezer at 0°F stops them growing at all (it doesn't kill them). Heat kills them: that's what the thermometer checks. Food kept hot stays safe at 140°F or above.",
-          "Some bacteria leave behind toxins that cooking doesn't destroy. So food that sat in the danger zone too long isn't made safe by heating it again. The rule: cooked food goes in the fridge within 2 hours, or within 1 hour on a hot day above 90°F."
+          "Most foodborne illness comes from microorganisms: bacteria such as Salmonella, E. coli, and Listeria, plus some viruses and parasites. They're common on raw meat, poultry, eggs, and produce, and you can't detect them by look, smell, or taste.",
+          "Bacteria multiply fastest between 40°F and 140°F, the range called the danger zone. Near body temperature, a population can double in as little as 20 minutes, so a few cells can become millions in a few hours.",
+          "Refrigeration (40°F or below) slows growth; freezing (0°F) stops it but doesn't kill anything. Cooking to a safe internal temperature kills most pathogens, and hot food held at 140°F or above stays out of the danger zone.",
+          "Some bacteria produce toxins that cooking doesn't break down, so reheating food that sat out too long doesn't make it safe. The USDA rule: cooked food goes into the fridge within 2 hours, or 1 hour when it's above 90°F."
         ],
         "steps": [
-          "Put your thermometer in a glass of water and leave it on the middle shelf of your fridge for an hour. Write down what it reads. Is your fridge 40°F or below?",
-          "If you can, do the same in the freezer with the thermometer laid on a shelf. Is it 0°F or below?",
-          "Tell a grown-up if either one is too warm. Turning the dial a little colder usually fixes it."
+          "Leave your thermometer in a glass of water on the middle shelf of the fridge for an hour, then read it. Is the fridge at 40°F or below?",
+          "If you can, check the freezer the same way. Is it at 0°F or below?",
+          "If either runs warm, tell an adult. Turning the control a notch colder usually fixes it."
         ],
         "quiz": [
-          { "q": "What is the danger zone?", "choices": ["40°F to 140°F", "0°F to 40°F", "140°F to 212°F"], "answer": 0, "explain": "Bacteria grow fastest between 40°F and 140°F." },
-          { "q": "How long can cooked food sit out on the counter?", "choices": ["Up to 2 hours, or 1 hour on a hot day", "All day if it's covered", "Until it's cold"], "answer": 0, "explain": "After that, bacteria may have grown enough to make someone sick, even if it's reheated." },
-          { "q": "What does the freezer do to bacteria?", "choices": ["Stops them growing, but doesn't kill them", "Kills all of them", "Nothing at all"], "answer": 0, "explain": "Frozen food is safe while frozen. Once it thaws, the bacteria start growing again." }
+          { "q": "What is the danger zone?", "choices": ["40°F to 140°F", "0°F to 40°F", "140°F to 212°F"], "answer": 0, "explain": "Bacteria multiply fastest in this range." },
+          { "q": "How long can cooked food stay at room temperature?", "choices": ["2 hours, or 1 hour above 90°F", "As long as it's covered", "Until it reaches room temperature"], "answer": 0, "explain": "After that, enough growth may have happened to make someone sick." },
+          { "q": "Why doesn't reheating rescue food that sat out all day?", "choices": ["Some bacteria leave toxins that heat doesn't destroy", "Reheating can't reach 165°F", "The food dries out"], "answer": 0, "explain": "Cooking kills the bacteria, but not every toxin they made." }
         ]
       },
       "sabbath": {
         "title": "Label and date containers",
         "minutes": 45,
         "body": [
-          "Getting ready for the Sabbath means food made ahead and kept in the fridge. A fridge full of unlabeled containers is a guessing game: what is it, and when was it made? A label answers both.",
-          "Most cooked food keeps 3 to 4 days in the fridge. In the freezer it stays safe much longer, and tastes best within 2 to 3 months."
+          "Sabbath cooking means food made ahead and stored. Labels tell everyone what a container holds and when it was made, so nothing gets eaten past its time or forgotten in the back.",
+          "The USDA guideline is 3 to 4 days in the fridge for most cooked leftovers. Many families keep some foods closer to a week. Quality drops and risk climbs with each day, mostly because Listeria can grow even at fridge temperatures. Your family decides its own limit; the date on the label is what lets you apply it.",
+          "Frozen food stays safe indefinitely at 0°F, though it tastes best within 2 to 3 months."
         ],
         "steps": [
-          "Make a labeling kit: a roll of masking tape and a marker that won't smear. Keep them in a drawer near the fridge.",
-          "Label every container of leftovers from this week's cooking with what it is and the day it was cooked, like \"Shakshuka, Sun 10/4\".",
-          "Look through the fridge with a grown-up. Anything cooked more than 4 days ago gets thrown out.",
-          "Move the oldest food to the front so it gets eaten first.",
-          "Before the Sabbath, check that everything made for it is labeled."
+          "Put together a labeling kit: masking tape and a permanent marker, kept near the fridge.",
+          "Label every container from this week's cooking with the dish and the date it was cooked, for example \"Shakshuka 10/4\".",
+          "Go through the fridge with an adult and decide what's past your family's limit.",
+          "Move older food to the front so it gets used first.",
+          "Before the Sabbath, check that everything you made for it is labeled."
         ],
         "quiz": [
-          { "q": "How long do most cooked leftovers keep in the fridge?", "choices": ["3 to 4 days", "2 weeks", "1 day"], "answer": 0, "explain": "After about 4 days, throw it out, even if it looks and smells fine." },
-          { "q": "What goes on a label?", "choices": ["What the food is and the day it was cooked", "Only the name of the dish", "Who made it"], "answer": 0, "explain": "The date tells you how long it has left." }
+          { "q": "What is the USDA guideline for most cooked leftovers in the fridge?", "choices": ["3 to 4 days", "2 weeks", "1 day"], "answer": 0, "explain": "Many families go longer for some foods, but this is the official guideline." },
+          { "q": "Why can't you judge old leftovers by smell?", "choices": ["The microorganisms that make food smell bad aren't the ones that make you sick", "Cold food has no smell", "Smell only works on raw food"], "answer": 0, "explain": "Spoilage organisms cause smells and slime; pathogens like Listeria usually don't." }
         ]
       },
       "swapIns": ["huevos-rancheros", "oyakodon"]
@@ -97,60 +98,61 @@
         "title": "Temp-check thick vs. thin patties",
         "minutes": 40,
         "body": [
-          "A thin patty and a thick one take very different times to cook through. This drill shows you how different, by cooking one of each side by side and checking both with the thermometer.",
-          "Buy an extra ½ pound of ground beef for it, or use two of this week's burger patties."
+          "Patty thickness changes cooking time more than most people expect. Cook a thin and a thick patty side by side and track both with the thermometer.",
+          "You'll need an extra ½ pound of ground beef, or two of this week's patties."
         ],
         "steps": [
-          "Divide ½ pound of ground beef in half. Shape one half into a thin patty, about ¼ inch thick. Shape the other into a thick patty, about ¾ inch thick.",
-          "Wash your hands with soap, and wipe anything the raw beef touched.",
-          "Heat a skillet over medium-high heat with 1 teaspoon of oil until it shimmers. Lay both patties in with tongs. Wash the tongs and your hands.",
-          "Cook both until the bottoms are browned, then flip them. Start a timer.",
-          "After the flip, check each patty from the side every minute. Write down the time and temperature each time.",
-          "Take each patty off the heat as soon as it reads 160°F. Write down how many minutes each one took.",
-          "Turn off the stove. Compare: how much longer did the thick patty need? Did it look done before the thermometer said so?"
+          "Split ½ pound of ground beef in two. Shape one patty about ¼ inch thick and one about ¾ inch thick.",
+          "Wash your hands and wipe down anything the raw beef touched.",
+          "Heat a skillet over medium-high with 1 teaspoon of oil until it shimmers. Add both patties with tongs, then wash the tongs and your hands.",
+          "When the undersides are browned, flip both and start a timer.",
+          "Check each patty from the side every minute after the flip, and record time and temperature.",
+          "Pull each patty when it reaches 160°F, and note its total time.",
+          "Compare the two. How much longer did the thick one take? Did either look done before it actually was?"
         ],
         "quiz": [
-          { "q": "Which patty needs longer to reach 160°F?", "choices": ["The thick one", "The thin one", "They take the same time"], "answer": 0, "explain": "Heat has farther to travel to reach the middle of a thick patty." },
-          { "q": "A burger is brown all the way through. Is it safe?", "choices": ["Only if the thermometer reads 160°F", "Yes, brown means done", "Yes, if the juices are clear"], "answer": 0, "explain": "Ground beef can turn brown before it's hot enough to be safe. Only the thermometer can tell you." }
+          { "q": "Which patty takes longer to reach 160°F?", "choices": ["The thick one", "The thin one", "Same time"], "answer": 0, "explain": "Heat has farther to travel to the center." },
+          { "q": "A burger is brown all the way through. Is it done?", "choices": ["Only if it reads 160°F", "Yes", "Yes, if the juices run clear"], "answer": 0, "explain": "Ground beef can brown before it reaches a safe temperature, and can stay pink after it does. Color isn't reliable." }
         ]
       },
       "knowledge": {
         "title": "Safe internal temperatures chart",
         "minutes": 35,
         "body": [
-          "Each kind of food has a safe minimum temperature: the temperature that kills the harmful bacteria in it. The number goes in the thickest part, and the food has to reach it or go higher.",
-          "Poultry, any kind and any cut, ground or whole: 165°F. Ground beef and ground lamb: 160°F. Egg dishes: 160°F. Whole cuts of beef and lamb, like steaks and roasts: 145°F, then a 3-minute rest. Fish: 145°F. Leftovers and anything reheated: 165°F.",
-          "Why is ground beef hotter than steak? Bacteria live on the outside of meat. On a steak, the outside gets very hot, and the inside was never touched. Grinding mixes the outside all the way through, so the middle has to get hot too.",
-          "Taking the temperature: put the tip in the thickest part, away from bone and away from the pan. For a thin piece, go in from the side. Check more than one piece."
+          "The USDA publishes a minimum safe internal temperature for each kind of food, measured in the thickest part.",
+          "Poultry, whole or ground: 165°F. Ground beef and ground lamb: 160°F. Egg dishes: 160°F. Fish: 145°F. Leftovers and reheated food: 165°F. Whole cuts of beef and lamb (steaks, chops, roasts): 145°F with a 3-minute rest, which is medium.",
+          "Plenty of people eat steak rare (about 125°F) or medium-rare (about 135°F). For an intact whole cut, that's a much smaller risk than undercooking ground meat. Pathogens sit on the surface of a whole muscle, and a hard sear kills them, while the interior is close to sterile. Grinding spreads surface bacteria through the whole batch, which is why ground meat has to reach 160°F all the way through.",
+          "That reasoning only holds for intact cuts. It doesn't cover ground meat, poultry, or meat that has been needle-tenderized or injected with a marinade (the label will say so), and it doesn't cover anyone at higher risk: pregnant women, young children, older adults, or anyone with a weakened immune system.",
+          "For an accurate reading, put the tip in the thickest part, away from bone and the pan. With thin pieces, go in from the side, and check more than one piece."
         ],
         "steps": [
-          "Make a temperature card from memory, then check it against the list above: poultry 165°F, ground beef and lamb 160°F, eggs 160°F, whole cuts 145°F, fish 145°F, reheating 165°F.",
-          "Tape the card inside a cupboard door near the stove, where you'll see it when you cook."
+          "Make a temperature card: poultry 165°F, ground beef and lamb 160°F, eggs 160°F, fish 145°F, whole cuts 145°F (USDA), reheating 165°F.",
+          "Post it inside a cupboard door by the stove."
         ],
         "quiz": [
-          { "q": "What temperature is ground turkey safe at?", "choices": ["165°F", "160°F", "145°F"], "answer": 0, "explain": "Turkey is poultry, and all poultry is 165°F, even ground." },
-          { "q": "Why does ground beef need a higher temperature than a steak?", "choices": ["Grinding mixes the bacteria from the outside all through it", "Ground beef is fattier", "Steak is cooked longer"], "answer": 0, "explain": "On a steak the bacteria stay on the outside, which gets hottest. Ground beef carries them into the middle." },
-          { "q": "What temperature do leftovers need when reheated?", "choices": ["165°F", "140°F", "120°F"], "answer": 0, "explain": "Reheated food goes all the way to 165°F." }
+          { "q": "What temperature does ground turkey need to reach?", "choices": ["165°F", "160°F", "145°F"], "answer": 0, "explain": "All poultry, ground or whole, is 165°F." },
+          { "q": "Why is a rare steak lower risk than a rare burger?", "choices": ["Grinding spreads surface bacteria through the meat; a steak's interior is nearly sterile", "Steak is cooked longer", "Burgers are fattier"], "answer": 0, "explain": "Searing kills what's on a steak's surface. A burger's surface bacteria are mixed all the way through." },
+          { "q": "Which of these should never be served rare?", "choices": ["A needle-tenderized steak", "An intact ribeye, well seared", "A whole beef roast"], "answer": 0, "explain": "Tenderizing pushes surface bacteria into the middle, so it needs the same care as ground meat." }
         ]
       },
       "sabbath": {
         "title": "Cool a cooked dish in an ice bath",
         "minutes": 45,
         "body": [
-          "A big pot of hot food cools slowly. The middle can stay in the danger zone for hours, even in the fridge, and a hot pot warms everything around it. The safe way is to cool food fast: from 140°F down to 70°F within 2 hours, then down to 40°F within 4 more.",
-          "An ice bath does it quickly. So does dividing food into shallow containers, no more than 2 inches deep."
+          "A large pot of hot food cools slowly, and its center can stay in the danger zone for hours, even in the fridge. It also warms everything stored around it.",
+          "The standard is two-stage cooling: from 140°F to 70°F within 2 hours, then to 40°F within 4 more. An ice bath handles the first stage; shallow containers, no more than 2 inches deep, handle the second."
         ],
         "steps": [
-          "Cook something to cool: a pot of soup, rice, or this week's leftovers warmed up, or cool a dish you're making ahead for the Sabbath.",
-          "Fill the sink or a large bowl partway with ice and cold water.",
-          "Move the hot food into a metal bowl or pot and set it in the ice water. The water should come up the sides but not spill in.",
-          "Stir every few minutes. Check the temperature in the middle every 10 minutes and write it down.",
-          "Once it reads 70°F or below, spoon it into shallow containers, cover them, label them, and put them in the fridge.",
-          "How long did it take to get from 140°F to 70°F?"
+          "Pick something to cool: a pot of soup or rice, or a dish you're making ahead for the Sabbath.",
+          "Fill the sink or a large bowl partway with ice and water.",
+          "Transfer the hot food to a metal bowl or pot and set it in the ice bath, with the water partway up the sides.",
+          "Stir every few minutes, and take the center temperature every 10 minutes. Record each reading.",
+          "At 70°F or below, divide it into shallow containers, cover, label, and refrigerate.",
+          "Note how long it took to go from 140°F to 70°F."
         ],
         "quiz": [
-          { "q": "How fast should hot food cool from 140°F to 70°F?", "choices": ["Within 2 hours", "Within 6 hours", "Overnight"], "answer": 0, "explain": "Then it has 4 more hours to get to 40°F." },
-          { "q": "Why does a big pot of food cool slowly in the fridge?", "choices": ["The middle holds its heat a long time", "Fridges don't work on hot food", "The lid keeps cold out"], "answer": 0, "explain": "Heat escapes from the outside. Shallow containers and ice baths give the middle less far to go." }
+          { "q": "What is the time limit for cooling food from 140°F to 70°F?", "choices": ["2 hours", "6 hours", "Overnight"], "answer": 0, "explain": "Then 4 more hours to reach 40°F." },
+          { "q": "Why do shallow containers cool faster than one deep one?", "choices": ["The center is closer to the cold surface", "They hold less air", "Plastic conducts cold better"], "answer": 0, "explain": "Less depth means heat has a shorter path out." }
         ]
       }
     },
@@ -164,58 +166,58 @@
         "title": "Safe cooling of a batch of rice, saved for the fried rice",
         "minutes": 40,
         "body": [
-          "Cooked rice is one of the riskiest leftovers. Raw rice can carry a germ that survives cooking, and if the cooked rice sits warm, it makes a toxin that reheating doesn't destroy. Rice that's cooled fast and kept cold is safe.",
-          "Do this drill the day before you cook this week's fried rice, and save the rice for it: fried rice needs cold, day-old rice."
+          "Cooked rice needs particular care. Raw rice often carries spores of Bacillus cereus, which survive cooking. If cooked rice sits warm, they grow and produce a toxin that reheating doesn't destroy. Cooled quickly and kept cold, rice is safe.",
+          "Do this the day before this week's fried rice. Fried rice works best with cold, day-old rice, so this batch goes straight into the recipe."
         ],
         "steps": [
-          "Cook 2 cups of white rice with 3 cups of water, the way you learned: rinse it, bring it to a boil, then cover it on low until the water is gone.",
-          "Spread the hot rice in a thin layer on a sheet pan with a spoon.",
-          "Leave it to cool, uncovered, until it stops steaming, about 20 minutes. Check the temperature in the middle of the layer.",
-          "Once it's below 70°F, or at most 1 hour after cooking, scoop it into a shallow container, cover it, and label it.",
-          "Put it in the fridge. Write down how long it took from the pot to the fridge.",
-          "Use it for the fried rice within a day or two."
+          "Cook 2 cups of white rice in 3 cups of water: rinse, bring to a boil, then cover and cook on low until the water is absorbed.",
+          "Spread the hot rice in a thin layer on a sheet pan.",
+          "Let it cool uncovered until it stops steaming, about 20 minutes, then check the temperature in the middle of the layer.",
+          "Within 1 hour of cooking, and once it's below 70°F, pack it into a shallow container, cover, and label it.",
+          "Refrigerate it, and note the time from pot to fridge.",
+          "Use it in the fried rice within 1 to 2 days."
         ],
         "quiz": [
-          { "q": "Why is cooked rice spread out on a sheet pan?", "choices": ["A thin layer cools much faster", "So it dries out", "So it doesn't stick"], "answer": 0, "explain": "A thin layer loses heat quickly, so the rice spends very little time in the danger zone." },
-          { "q": "Rice sat out warm all afternoon. Will reheating make it safe?", "choices": ["No, the toxin isn't destroyed by heat", "Yes, if it reaches 165°F", "Yes, if it's fried"], "answer": 0, "explain": "Throw it out. Some germs leave toxins that heat can't undo." }
+          { "q": "Why spread cooked rice on a sheet pan?", "choices": ["A thin layer passes through the danger zone quickly", "It dries the rice out", "It stops sticking"], "answer": 0, "explain": "More surface area means faster cooling." },
+          { "q": "Rice sat out warm all afternoon. What do you do?", "choices": ["Throw it out", "Reheat it to 165°F", "Fry it hot"], "answer": 0, "explain": "The Bacillus cereus toxin survives heat." }
         ]
       },
       "knowledge": {
         "title": "Cross-contamination and board colors",
         "minutes": 35,
         "body": [
-          "Cross-contamination is when germs move from one food to another: from raw chicken to the salad, by way of a knife, a cutting board, or a hand. Cooking kills germs in the chicken, but the salad never gets cooked.",
-          "Many kitchens use cutting boards by color: red for raw meat, yellow for raw poultry, blue for raw fish, green for fruits and vegetables. At home, two boards is enough: one only for raw meat, poultry, and fish, and one for everything that won't be cooked.",
-          "With one board, cut in order: vegetables and anything eaten raw first, raw meat last. Then wash the board, the knife, and your hands with hot, soapy water.",
-          "Never rinse raw chicken in the sink: it splashes germs all over. Never put cooked food back on the plate that held it raw. Wash your hands after touching raw meat, eggs, or their packages, every time."
+          "Cross-contamination is the transfer of microorganisms from one food or surface to another, usually from raw meat to something that won't be cooked, by way of hands, knives, boards, or towels.",
+          "Commercial kitchens color-code cutting boards: red for raw meat, yellow for raw poultry, blue for raw fish, green for produce. At home, two boards cover it: one only for raw meat, poultry, and fish, and one for everything else.",
+          "With a single board, work from clean to raw: ready-to-eat foods and produce first, raw meat last, then wash the board, knife, and your hands in hot, soapy water.",
+          "Don't rinse raw poultry; it sprays bacteria around the sink and doesn't remove them. Cooked food goes on a clean plate, never the one that held it raw. Wash your hands after handling raw meat, eggs, or their packaging."
         ],
         "steps": [
-          "Look at the cutting boards in your kitchen. With a grown-up, choose one for raw meat, poultry, and fish only. Mark it with a strip of tape or a sticker.",
-          "Walk through this week's recipe and find every step that touches raw chicken or raw egg. What touches it, and where is it washed?"
+          "Choose one cutting board for raw meat, poultry, and fish only, and mark it.",
+          "Go through this week's recipe and list every step that involves raw chicken or raw egg: what it touches, and where that gets washed."
         ],
         "quiz": [
-          { "q": "You have one cutting board. What do you cut first?", "choices": ["The vegetables, then the raw chicken", "The raw chicken, then the vegetables", "It doesn't matter"], "answer": 0, "explain": "Raw meat goes last, so its germs never touch food that won't be cooked." },
-          { "q": "Should you rinse raw chicken before cooking it?", "choices": ["No, it splashes germs around the sink", "Yes, to wash off germs", "Only if it looks slimy"], "answer": 0, "explain": "Rinsing doesn't make chicken safer. Cooking to 165°F does." },
-          { "q": "The chicken is cooked. Where does it go?", "choices": ["A clean plate", "Back on the plate it came on raw", "The cutting board you used for it raw"], "answer": 0, "explain": "The raw plate still has germs on it." }
+          { "q": "With one cutting board, what order do you work in?", "choices": ["Produce first, raw chicken last", "Raw chicken first, produce last", "Order doesn't matter"], "answer": 0, "explain": "Anything cut after raw meat on the same board picks up its bacteria." },
+          { "q": "Should you rinse raw chicken?", "choices": ["No, it spreads bacteria without removing them", "Yes, it washes bacteria off", "Only if it's slippery"], "answer": 0, "explain": "Cooking to 165°F is what makes chicken safe." },
+          { "q": "The chicken is cooked. Where does it go?", "choices": ["A clean plate", "The plate it sat on raw", "The raw-meat board"], "answer": 0, "explain": "Anything that held raw meat still carries its bacteria." }
         ]
       },
       "sabbath": {
         "title": "Store a dish safely for the Sabbath",
         "minutes": 45,
         "body": [
-          "Food for the Sabbath is cooked before it begins. Some families serve it cold, and some keep dishes hot from before the Sabbath starts. Either way, the safety rules are the same: cold food stays at 40°F or below, and hot food stays at 140°F or above.",
-          "Dishes like chicken adobo get better after a day in the fridge, because the flavors soak in. They're good choices to make ahead."
+          "Sabbath food is cooked before the Sabbath begins. Some families serve it cold, and some keep dishes hot from before sundown. Either way, the rule is the same: cold food at 40°F or below, hot food at 140°F or above.",
+          "Braises like chicken adobo improve after a night in the fridge, which makes them good make-ahead choices."
         ],
         "steps": [
-          "Choose a dish from this week to make ahead: the fried rice, chicken adobo, or another one your family will eat for the Sabbath.",
-          "Cook it Thursday or Friday. Cool it fast (week 2) in shallow containers.",
-          "Cover it, label it with the name and the day (week 1), and put it on a fridge shelf, not in the door, where it's warmer.",
-          "Check the fridge is at 40°F or below (week 1).",
-          "If your family keeps food hot for the Sabbath meal, check it with the thermometer before serving: 140°F or above."
+          "Pick a dish from this week to make ahead: the fried rice, chicken adobo, or something your family will serve on the Sabbath.",
+          "Cook it Thursday or Friday, and cool it quickly in shallow containers (week 2).",
+          "Cover and label it (week 1), and store it on a shelf, not in the door, which runs warmer.",
+          "Confirm the fridge is at 40°F or below.",
+          "If your family keeps food hot for the Sabbath meal, check that it holds at 140°F or above."
         ],
         "quiz": [
-          { "q": "Where in the fridge should make-ahead food go?", "choices": ["On a shelf, not in the door", "In the door, where it's easy to reach", "On top of the fridge"], "answer": 0, "explain": "The door warms up every time it's opened." },
-          { "q": "Food kept hot for a meal needs to stay at what temperature?", "choices": ["140°F or above", "100°F or above", "165°F or above"], "answer": 0, "explain": "Below 140°F it's back in the danger zone." }
+          { "q": "Where should make-ahead food be stored in the fridge?", "choices": ["On a shelf", "In the door", "On top"], "answer": 0, "explain": "The door warms up every time it opens." },
+          { "q": "What temperature does hot-held food need to stay at?", "choices": ["140°F or above", "100°F or above", "165°F or above"], "answer": 0, "explain": "Below 140°F, it's in the danger zone." }
         ]
       },
       "swapIns": ["chicken-adobo"]
@@ -230,59 +232,58 @@
       "drill": {
         "title": "Set up a clean station unaided",
         "minutes": 40,
-        "body": [
-          "A clean station is how every safe cook starts. This week you set one up on your own, the way you've practised. A grown-up watches and checks, but doesn't help."
-        ],
+        "body": ["Set up your own clean station without help. An adult checks it against the list but doesn't step in."],
         "steps": [
-          "Clear the counter of everything you won't use. Wash it with hot, soapy water and dry it with a clean towel or paper towels.",
-          "Wash your hands with soap for 20 seconds, the time it takes to sing \"Happy Birthday\" twice.",
-          "Set out two cutting boards: the raw-meat board and the other one. Put a damp paper towel under each so it can't slide.",
-          "Set out a plate for raw meat, a separate clean plate for cooked food, and a bowl for scraps.",
-          "Put the thermometer where you can reach it, and check it in ice water (week 1).",
-          "Fill one side of the sink, or a dishpan, with hot, soapy water for washing as you go.",
-          "Have the grown-up check your station against this list. Then cook this week's recipe from it."
+          "Clear the counter of anything you won't use. Wash it with hot, soapy water and dry it.",
+          "Wash your hands with soap for at least 20 seconds.",
+          "Set out both cutting boards, raw-meat and general, each on a damp paper towel.",
+          "Set out a plate for raw meat, a separate plate for cooked food, and a bowl for scraps.",
+          "Calibrate the thermometer in ice water (week 1) and keep it within reach.",
+          "Fill one side of the sink or a dishpan with hot, soapy water for washing as you go.",
+          "Have the adult check your setup against this list, then cook this week's recipe from it."
         ],
         "quiz": [
-          { "q": "How long should you wash your hands?", "choices": ["20 seconds", "5 seconds", "2 minutes"], "answer": 0, "explain": "About as long as singing \"Happy Birthday\" twice." },
-          { "q": "Why are there two plates on the station?", "choices": ["One for raw meat, one for cooked food", "One for each person", "In case one breaks"], "answer": 0, "explain": "Cooked food never goes back on the plate that held it raw." }
+          { "q": "How long should you wash your hands?", "choices": ["At least 20 seconds", "5 seconds", "2 minutes"], "answer": 0, "explain": "That's the CDC guideline, with soap, scrubbing every surface." },
+          { "q": "Why two plates?", "choices": ["One for raw meat, one for cooked food", "One per person", "A spare"], "answer": 0, "explain": "Cooked food never goes back on the raw plate." }
         ]
       },
       "knowledge": {
         "title": "Food safety quiz",
         "minutes": 35,
         "body": [
-          "This quiz covers the whole unit: the danger zone, safe temperatures, cooling and storing, cross-contamination, and reheating. Try it without looking back. Then check any you missed in weeks 1 to 3."
+          "This quiz covers the whole unit. Answer from memory, then review anything you missed in weeks 1 to 3."
         ],
         "quiz": [
-          { "q": "What is the danger zone?", "choices": ["40°F to 140°F", "0°F to 40°F", "140°F to 165°F"], "answer": 0, "explain": "Bacteria grow fastest between 40°F and 140°F." },
-          { "q": "What temperature is chicken safe at?", "choices": ["165°F", "160°F", "145°F"], "answer": 0, "explain": "All poultry, ground or whole, is 165°F." },
-          { "q": "What temperature is ground beef safe at?", "choices": ["160°F", "145°F", "165°F"], "answer": 0, "explain": "Ground beef and ground lamb are 160°F." },
-          { "q": "What does ice water read on a correct thermometer?", "choices": ["32°F", "40°F", "0°F"], "answer": 0, "explain": "Ice water is always 32°F, so it's how you check a thermometer." },
-          { "q": "How long can cooked food sit out before it goes in the fridge?", "choices": ["2 hours, or 1 hour above 90°F", "4 hours", "Until it cools down"], "answer": 0, "explain": "After that, throw it out." },
-          { "q": "What's the fastest way to cool a pot of soup?", "choices": ["Set it in an ice bath and stir, then use shallow containers", "Put the whole pot in the fridge", "Leave it on the stove overnight"], "answer": 0, "explain": "Food should drop from 140°F to 70°F within 2 hours." },
-          { "q": "You have one cutting board. In what order do you cut?", "choices": ["Vegetables first, raw meat last", "Raw meat first, vegetables last", "Any order"], "answer": 0, "explain": "Raw meat goes last, then the board is washed." },
-          { "q": "How hot should leftovers get when reheated?", "choices": ["165°F", "140°F", "Warm to the touch"], "answer": 0, "explain": "Reheated food goes all the way to 165°F." },
-          { "q": "How long do most cooked leftovers keep in the fridge?", "choices": ["3 to 4 days", "1 week", "2 weeks"], "answer": 0, "explain": "After about 4 days, throw them out." },
-          { "q": "Rice was left out warm all afternoon. What do you do?", "choices": ["Throw it out", "Reheat it to 165°F", "Fry it"], "answer": 0, "explain": "Some germs in rice leave toxins that reheating can't destroy." }
+          { "q": "What is the danger zone?", "choices": ["40°F to 140°F", "0°F to 40°F", "140°F to 165°F"], "answer": 0, "explain": "Bacteria multiply fastest in this range." },
+          { "q": "What temperature does chicken need to reach?", "choices": ["165°F", "160°F", "145°F"], "answer": 0, "explain": "All poultry, whole or ground." },
+          { "q": "What temperature does ground beef need to reach?", "choices": ["160°F", "145°F", "165°F"], "answer": 0, "explain": "Ground beef and ground lamb are 160°F." },
+          { "q": "Why can a steak be eaten rare when a burger can't?", "choices": ["A steak's bacteria are on the surface, which the sear kills", "Steak is a cleaner meat", "Burgers cook faster"], "answer": 0, "explain": "Grinding mixes surface bacteria through the whole patty." },
+          { "q": "What does a calibrated thermometer read in ice water?", "choices": ["32°F", "40°F", "0°F"], "answer": 0, "explain": "That's the reference point for checking it." },
+          { "q": "How long can cooked food sit out before refrigerating?", "choices": ["2 hours, or 1 hour above 90°F", "4 hours", "Until it's cool"], "answer": 0, "explain": "After that, throw it out." },
+          { "q": "How do you cool a pot of soup quickly?", "choices": ["Ice bath, stirring, then shallow containers", "Put the whole pot in the fridge", "Leave it on the stove overnight"], "answer": 0, "explain": "140°F to 70°F within 2 hours, then 40°F within 4 more." },
+          { "q": "With one cutting board, what goes last?", "choices": ["Raw meat", "Vegetables", "Bread"], "answer": 0, "explain": "Then the board gets washed." },
+          { "q": "How hot should reheated leftovers get?", "choices": ["165°F", "140°F", "Warm to the touch"], "answer": 0, "explain": "Measured in the center." },
+          { "q": "What is the USDA guideline for most cooked leftovers in the fridge?", "choices": ["3 to 4 days", "2 weeks", "1 month"], "answer": 0, "explain": "Risk rises each day after, because Listeria grows even in the fridge." },
+          { "q": "Rice sat out warm all afternoon. What do you do?", "choices": ["Throw it out", "Reheat it to 165°F", "Fry it"], "answer": 0, "explain": "Bacillus cereus toxin survives reheating." }
         ]
       },
       "sabbath": {
         "title": "Reheat a stored dish to 165°F",
         "minutes": 45,
         "body": [
-          "Reheating stored food safely is the last skill of the unit. Leftovers go all the way to 165°F, checked in the middle of the thickest part. Warm isn't the same as hot enough.",
-          "Reheat only what you'll eat, and only once. Food reheated and cooled again loses quality and spends more time in the danger zone."
+          "Reheated leftovers need to reach 165°F at the center of the thickest piece. Warm to the touch isn't the same thing.",
+          "Reheat only what you'll eat. Each round of reheating and cooling costs quality and adds time in the danger zone."
         ],
         "steps": [
-          "Choose a stored dish: this week's meatloaf, or something you made ahead for the Sabbath.",
-          "Oven: put slices or portions in a baking dish with a splash of water or broth, cover with foil, and heat at 350°F. Microwave: cover the dish loosely and stop to stir or turn the food every minute or two.",
-          "Check the temperature in the middle of the thickest piece. It needs to read 165°F. If it doesn't, keep heating and check again.",
-          "Write down how long it took and how you heated it.",
-          "Do this before the Sabbath begins, for food your family will keep hot or serve."
+          "Choose a stored dish: this week's meatloaf, or something made ahead for the Sabbath.",
+          "Oven: portions in a baking dish with a splash of water or broth, covered with foil, at 350°F. Microwave: cover loosely, and stir or rotate every minute or two.",
+          "Check the center of the thickest piece. Keep heating until it reads 165°F.",
+          "Note the method and how long it took.",
+          "Do this before the Sabbath begins for food your family will keep hot or serve."
         ],
         "quiz": [
-          { "q": "How hot do reheated leftovers need to get?", "choices": ["165°F in the middle", "Warm on top", "140°F at the edge"], "answer": 0, "explain": "The middle heats last, so that's where the thermometer goes." },
-          { "q": "Why stir or turn food while it's in the microwave?", "choices": ["Microwaves heat unevenly, leaving cold spots", "To keep it from drying out", "So it browns"], "answer": 0, "explain": "Cold spots can stay in the danger zone even when other parts are hot." }
+          { "q": "Where do you check the temperature of reheated food?", "choices": ["The center of the thickest piece", "The edge", "The top surface"], "answer": 0, "explain": "The center heats last." },
+          { "q": "Why stir or rotate food in the microwave?", "choices": ["Microwaves heat unevenly and leave cold spots", "To keep it moist", "To brown it"], "answer": 0, "explain": "A cold spot can still be in the danger zone." }
         ]
       },
       "swapIns": ["lamb-kofta"]

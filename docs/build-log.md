@@ -4274,3 +4274,26 @@ order, so these two recipes were written.
 - The Unit 1 part pages are in a review doc for the owner, "Level 3 Unit 1
   part pages" (claude.ai), copied from `level-3.json`; changes from the review
   go back into `level-3.json`.
+
+## 176. 2026-10-24 — Level 3 Unit 1 pages rewritten for older learners
+
+- Owner, 2026-10-24: the Unit 1 pages read too young for Level 3's
+  learners. Plan §12.3 now has a Level 3 voice rule: "adult", never
+  "grown-up"; the real terms (microorganisms, pathogens, toxins) without
+  explaining them as to a young child; food-safety pages give the USDA
+  guideline and its reason, and say where common practice differs.
+- All 12 part pages for weeks 1–4 are rewritten in that voice. Week 1's
+  knowledge page is now "Danger zone and how microorganisms grow" and names
+  Salmonella, E. coli, and Listeria. Week 3 names Bacillus cereus.
+- **Steak:** week 2's temperatures page gives the USDA's 145°F for whole cuts
+  (medium), then explains why a well-seared intact steak eaten rare or
+  medium-rare is a much smaller risk than undercooked ground meat, and where
+  that doesn't hold (ground, poultry, needle-tenderized or injected meat, and
+  people at higher risk). Two quiz questions test it.
+- **Leftovers:** the pages give the USDA's 3 to 4 days as the guideline, say
+  many families keep some foods closer to a week, explain why risk rises
+  (Listeria grows in the fridge, and smell doesn't reveal pathogens), and
+  leave the limit to the family. Meatloaf's tip says the same.
+- The Easy-prep Chicken fried rice and Oyakodon say "An adult" cuts the raw
+  chicken.
+- The review doc, "Level 3 Unit 1 part pages", has the new text.
