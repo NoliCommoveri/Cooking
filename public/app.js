@@ -9,7 +9,7 @@ import { toBase, mixed } from './lib/units.js';
 import { LOGIN_PICTURES } from './lib/login-pictures.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 import { RUBRIC, GRADE_TEXT_MAX } from './lib/grades.js';
-import { progressView, celebrate } from './rewards.js';
+import { progressView, levelProgressView, celebrate } from './rewards.js';
 import { isMuted, setMuted } from './sound.js';
 import { gettingStarted, openRuth, ruthButton } from './ruth.js';
 import { openIntro } from './intro.js';
@@ -556,7 +556,9 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   };
 
   // Progress and rewards (Phase 5): the skill tree, or the passport.
-  const tabs = [['path', quest ? 'Main quest' : 'My journey'], ['more', quest ? 'Side quests' : 'More recipes'], ['progress', quest ? 'Skill tree' : 'Passport']];
+  // A profile on a Level sees how far it is on the Level instead (12e).
+  const levelPr = mine.level?.progress ?? null;
+  const tabs = [['path', quest ? 'Main quest' : 'My journey'], ['more', quest ? 'Side quests' : 'More recipes'], ['progress', levelPr ? (quest ? 'Quest map' : 'My Level') : quest ? 'Skill tree' : 'Passport']];
   const current = tabs.some(([k]) => k === tab) ? tab : 'path';
   sessionSet(`cpr.tab.${p.id}`, current);
   // The kitchen intro (§6.9): How it works replays it. It opens on its own
@@ -588,15 +590,16 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
         store('cpr.login', 'kid');
         await start('#/login');
       } }, 'Log out') : null),
-    current === 'more' ? moreView() : current === 'progress' ? await progressView(p, cooks) : pathView(),
+    current === 'more' ? moreView() : current === 'progress' ? (levelPr ? await levelProgressView(p, mine.level, cooks) : await progressView(p, cooks)) : pathView(),
     // Pinned to the bottom, where a thumb is, as in MCCE Kids.
     el('nav', { class: `k-tabs ${quest ? 'q' : 'p'}`, 'aria-label': 'Kitchen' }, tabs.map(([k, label]) => el('a', {
       href: `#/kitchen/${p.id}/@${k}`, 'aria-current': k === current ? 'page' : null,
     }, label))));
   screen(section);
   if (p.intro === 'new' && !Object.keys(cooks).length) intro();
-  // Anything earned since this device last showed it: a stamp, a skill, a rank.
-  celebrate(p, cooks);
+  // Anything earned since this device last showed it: a stamp, a skill, a
+  // rank, or on a Level, a unit mastered or the certificate.
+  celebrate(p, cooks, levelPr);
 }
 
 // A Level week's drill, knowledge, or Beyond the Recipe page (12c), in the
@@ -679,7 +682,9 @@ async function lesson(profileId, lessonId) {
     onDone: async () => {
       await Promise.race([flushCooks(), new Promise((ok) => setTimeout(ok, 4000))]);
       const { cooks } = await api('GET', `/api/profiles/${p.id}/cooks?${tz()}`).catch(() => ({ cooks: null }));
-      if (cooks) await celebrate(p, cooks);
+      // On a Level, its progress since the cook: a unit mastered pops here (12e).
+      const level = mine.level ? (await api('GET', `/api/profiles/${p.id}/queue?${tz()}`).catch(() => null))?.level?.progress ?? null : null;
+      if (cooks) await celebrate(p, cooks, level);
     },
     seed: queued ? { servings: queued.servings, with: (queued.profile_ids ?? []).filter((x) => x !== p.id), shopped: queued.shopped_for } : null,
     // Suggest a fix is for library lessons; a family edits its own recipes.
@@ -2272,15 +2277,38 @@ const progress = parentOnly(async (which = 'all', flash) => {
       el('h2', {}, `${d.family}: what we've cooked`),
       el('p', { class: 'mut small' }, `Clean Plate Recipes · printed ${fmtDay(localToday(), { year: 'numeric', month: 'long', day: 'numeric' })}`),
       shown.map((p) => el('div', { class: 'ptable' }, el('h3', {}, p.name),
+        p.level ? levelBlock(p.level) : null,
         p.rows.length
           ? el('table', {}, el('thead', {}, el('tr', {}, ['Date', 'Dish', 'Cuisine', 'Skill', 'Rating'].map((h) => el('th', {}, h)),
               d.homeschool ? el('th', { class: 'noprint' }, 'Grade') : null, el('th', { class: 'noprint' }))),
             el('tbody', {}, p.rows.map((r) => el('tr', {}, el('td', {}, fmtDay(r.date, { year: 'numeric', month: 'short', day: 'numeric' })), el('td', {}, r.dish), el('td', {}, r.cuisine), el('td', {}, r.skill), el('td', {}, r.rating ? `${r.rating} of 5` : '—'),
               // Grades are parent-only and never on this printout (Phase 4b).
-              d.homeschool ? el('td', { class: 'noprint' }, gradeButton({ ...r, profile_id: p.id, profile: p.name }, () => progress(which))) : null,
-              el('td', { class: 'noprint' }, el('button', { type: 'button', class: 'hbtn link', onclick: () => notMade(r) }, "Didn't make it"))))))
+              // A Level part (12e) is checked off, not graded; the parent takes it back on the course card.
+              d.homeschool ? el('td', { class: 'noprint' }, r.part ? '—' : gradeButton({ ...r, profile_id: p.id, profile: p.name }, () => progress(which))) : null,
+              el('td', { class: 'noprint' }, r.part ? null : el('button', { type: 'button', class: 'hbtn link', onclick: () => notMade(r) }, "Didn't make it"))))))
           : el('p', { class: 'mut' }, 'Nothing cooked yet.')))));
 });
+
+// A profile's Level on Progress (12e): its hours, each unit mastered, and
+// each week's recipe and parts ticked.
+function levelBlock(lv) {
+  const short = { month: 'short', day: 'numeric' };
+  const tick = (day) => (day ? fmtDay(day, short) : '—');
+  return el('div', { class: 'lvl-block' },
+    el('p', {}, el('b', {}, lv.name), ` · ${lv.hours_done} of about ${lv.hours} hours`,
+      lv.complete ? ` · complete ${fmtDay(lv.complete, { year: 'numeric', month: 'short', day: 'numeric' })}` : ''),
+    el('p', { class: 'small' }, lv.units.map((u) => `Unit ${u.number}${u.mastered ? ' ✓' : ''}`).join(' · ')),
+    el('table', { class: 'lvl-weeks' },
+      el('thead', {}, el('tr', {}, ['Week', 'Recipe', 'Cooked', ...Object.values(PART_NAMES)].map((h) => el('th', {}, h)))),
+      el('tbody', {}, lv.units.map((u) => [
+        el('tr', { class: 'lvl-unit' }, el('th', { colspan: 6 }, `Unit ${u.number}: ${u.name}${u.mastered ? ` · mastered ${fmtDay(u.mastered, short)}` : ''}`)),
+        ...lv.weeks.filter((w) => w.unit === u.number).map((w) => el('tr', {},
+          el('td', {}, String(w.week)),
+          el('td', {}, w.title ?? (w.kind === 'capstone' ? 'Capstone' : w.kind === 'practice' ? 'Practice run' : '—'), w.mastery ? el('small', {}, ' (mastery)') : null),
+          el('td', {}, w.recipe ? tick(w.cooked) : ''),
+          Object.keys(PART_NAMES).map((part) => el('td', {}, tick(w.parts[part]))))),
+      ]))));
+}
 
 // ---------- grades and the transcript (homeschool mode, Phase 4b) ----------
 
@@ -2376,7 +2404,7 @@ const transcript = parentOnly(async (pid) => {
       el('button', { type: 'button', class: 'hbtn pri', onclick: () => window.print() }, 'Print'),
       el('button', { type: 'button', class: 'hbtn', onclick: edit }, 'Edit details')),
     el('div', { class: 'card noprint' },
-      el('p', { style: 'margin:0' }, `${t.totals.cooks} cook${t.totals.cooks === 1 ? '' : 's'} · ${t.totals.hours} hours · ${t.totals.graded} graded`),
+      el('p', { style: 'margin:0' }, `${t.totals.cooks} cook${t.totals.cooks === 1 ? '' : 's'}${t.totals.parts ? ` · ${t.totals.parts} Level part${t.totals.parts === 1 ? '' : 's'}` : ''} · ${t.totals.hours} hours · ${t.totals.graded} graded`),
       el('p', { class: 'mut small', style: 'margin:4px 0 0' }, t.totals.rubric_average != null
         ? `Rubric average: ${t.totals.rubric_average.toFixed(1)} of 4, across ${t.totals.rubric_graded} cook${t.totals.rubric_graded === 1 ? '' : 's'} graded with the rubric. For your information only: the final grade and credit are yours to decide, under Edit details.`
         : 'No cooks graded with the rubric yet. The final grade and credit are yours to decide, under Edit details.')),
@@ -2397,7 +2425,11 @@ const transcript = parentOnly(async (pid) => {
       t.skills.length ? [el('h3', {}, 'Skills'), el('p', {}, t.skills.map((x) => x.name).join(' · '))] : null,
       el('dl', { class: 'tr-details tr-totals' },
         line('Lessons cooked', String(t.totals.cooks)),
+        t.totals.parts ? line('Level parts done', String(t.totals.parts)) : null,
         line('Total hours', String(t.totals.hours)),
+        // A Level (12e): its hours so far toward its own, and each unit mastered.
+        t.level ? line(t.level.name, `${t.level.hours_done} of about ${t.level.hours} hours${t.level.complete ? `, complete ${fmtDay(t.level.complete, long)}` : ''}`) : null,
+        t.level?.units.some((u) => u.mastered) ? line('Units mastered', t.level.units.filter((u) => u.mastered).map((u) => `${u.number}. ${u.name}`).join('; ')) : null,
         line('Final grade', d.final_grade),
         line('Credit', d.credit)),
       el('p', { class: 'mut small' }, `Printed ${fmtDay(localToday(), long)}`)));

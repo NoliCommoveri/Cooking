@@ -335,6 +335,18 @@ async function levelLessons(env, course, fam) {
 
 // A Level week's three part pages (§12.2), in order.
 const PARTS = ['drill', 'knowledge', 'sabbath'];
+// What each part is called (the fourth part was the Sabbath task, and is still stored as "sabbath").
+export const PART_NAMES = { drill: 'Drill', knowledge: 'Knowledge', sabbath: 'Beyond the Recipe' };
+
+// A profile's Level progress as Print our progress and the transcript show
+// it (12e): the Level, its hours, and each unit mastered, and each part
+// checked off as a row beside the cooks.
+export function levelSummary(lv) {
+  return lv && { name: lv.name, hours: lv.hours, hours_done: lv.hours_done, complete: lv.complete, units: lv.units.map(({ number, name, mastered }) => ({ number, name, mastered })) };
+}
+export const partRows = (lv) => (lv?.rows ?? []).map((r) => ({
+  part: r.part, week: r.week, date: r.date, dish: r.title, cuisine: '', skill: `${lv.name} · Week ${r.week} ${PART_NAMES[r.part]}`, minutes: r.minutes,
+}));
 
 // The parts the course's profiles have checked off (12c), not taken back:
 // { "week:part:profile": done_at }. Empty before the draft's table exists.
@@ -365,18 +377,115 @@ function levelFor(st, pid, day) {
   const weekOut = (w) => {
     const id = st.lessons.idOf[w.week] ?? null;
     return {
-      week: w.week, unit: w.unit, unit_name: unitName[w.unit], mastery: Boolean(w.mastery), kind: w.kind ?? null,
+      week: w.week, unit: w.unit, unit_name: unitName[w.unit], mastery: Boolean(w.mastery), kind: w.kind ?? null, note: w.kind ? w.note ?? null : null,
       recipe: id, recipe_title: id ? lessonById[id]?.title ?? V.titles[id] ?? id : null, recipe_written: Boolean(id && lessonById[id]), recipe_done: Boolean(id && st.done[id]),
       parts: PARTS.map((part) => partOut(w, part)),
     };
   };
+  // Once every recipe week is cooked or skipped, the practice run and the
+  // capstone come next, each until this profile has checked its parts off.
+  const recipesDone = V.weeks.filter((w) => w.recipe).every((w) => {
+    const id = st.lessons.idOf[w.week];
+    return !id || st.done[id] || st.lessons.plan.skipped.includes(id);
+  });
+  const after = !now && recipesDone ? V.weeks.find((w) => w.kind && PARTS.some((part) => !st.tasks[`${w.week}:${part}:${pid}`])) : null;
   const reached = V.weeks.filter((w) => w.week !== now && st.lessons.idOf[w.week] && st.done[st.lessons.idOf[w.week]]);
   return {
     course_id: st.course.id, id: V.id, name: V.name, weeks: V.weeks.length, sabbath: isSabbath(day),
-    week: now ? weekOut(V.weeks.find((w) => w.week === now)) : null,
+    week: now ? weekOut(V.weeks.find((w) => w.week === now)) : after ? weekOut(after) : null,
     open: reached.flatMap((w) => PARTS.map((part) => partOut(w, part))).filter((x) => !x.done_at),
     // The recipes of mastery weeks: the player says "cook it on your own" (§12.4).
     mastery: V.weeks.filter((w) => w.mastery && st.lessons.idOf[w.week]).map((w) => st.lessons.idOf[w.week]),
+  };
+}
+
+// ---------- a learner's Level progress (12e) ----------
+
+// The minutes a Level week's recipe counts for: its lesson's planned time.
+const recipeMinutes = (id) => lessonById[id]?.totalMinutes ?? 0;
+
+// The Level course a profile is on: its active one, or else its latest
+// archived one, so a finished Level still prints. null without the next
+// release (withPrograms hides it then).
+async function levelCourseOf(env, fid, pid) {
+  const { results } = await env.DB.prepare(`SELECT c.* FROM courses c JOIN course_profiles cp ON cp.course_id = c.id AND cp.family_id = c.family_id
+      WHERE c.family_id = ? AND cp.profile_id = ? ORDER BY c.archived_at IS NOT NULL, c.created_at DESC, c.id`).bind(fid, pid).all();
+  return (await withPrograms(env, fid, results)).find((c) => c.program) ?? null;
+}
+
+// How far one profile is on its Level (12e), by its own work: each week's
+// recipe is ticked when the profile cooked it on the course (a cook that
+// counts: finished, not taken back, not on the Sabbath), and each part when
+// the profile checked it off. A unit is mastered when its mastery week's
+// recipe is cooked with a "why it worked" (§12.4); the last unit, whose last
+// week is the capstone, when the capstone's three parts are checked off, and
+// that completes the Level. A practice or capstone week, which has no
+// recipe, counts its own minutes once its last part (serving the meal) is
+// checked off. Hours are the planned time of what's done, toward the
+// Level's ~125. rows: each part checked off, for Progress and the
+// transcript. Returns null when the profile isn't on a Level course.
+export async function levelProgress(env, fid, pid, tz) {
+  const course = await levelCourseOf(env, fid, pid);
+  if (!course) return null;
+  const V = LEVELS[course.program];
+  const plan = await levelPlanOf(env, course);
+  const idOf = Object.fromEntries(plan.weeks.map((x) => [x.week, x.id]));
+  const tasks = await levelTasks(env, course, [pid]);
+  const from = [course.created_at, course.start_date].sort()[0];
+  const { results: cooks } = await env.DB.prepare(`SELECT a.id, a.lesson_id, a.finished_at FROM attempts a
+      JOIN attempt_profiles ap ON ap.attempt_id = a.id AND ap.family_id = a.family_id
+      WHERE a.family_id = ? AND ap.profile_id = ? AND a.finished_at IS NOT NULL AND a.removed_at IS NULL AND a.finished_at >= ?
+      ORDER BY a.finished_at, a.id`).bind(fid, pid, from).all();
+  let noted = new Set();
+  try {
+    const { results } = await env.DB.prepare('SELECT attempt_id FROM mastery_notes WHERE family_id = ? AND profile_id = ?').bind(fid, pid).all();
+    noted = new Set(results.map((r) => r.attempt_id));
+  } catch { /* the draft isn't applied yet */ }
+  // Each lesson's first counted cook, and its first with a "why it worked".
+  const cooked = {}, why = {};
+  for (const r of cooks) {
+    const day = localDay(r.finished_at, tz);
+    if (isSabbath(day)) continue;
+    cooked[r.lesson_id] ??= day;
+    if (noted.has(r.id)) why[r.lesson_id] ??= day;
+  }
+  const doneOn = (w, part) => {
+    const at = tasks[`${w.week}:${part}:${pid}`];
+    return at ? localDay(at, tz) : null;
+  };
+  let minutes = 0;
+  const rows = [];
+  const weeks = V.weeks.map((w) => {
+    const id = idOf[w.week] ?? null;
+    const parts = Object.fromEntries(PARTS.map((part) => [part, doneOn(w, part)]));
+    for (const part of PARTS) {
+      if (!parts[part]) continue;
+      minutes += w[part].minutes;
+      rows.push({ date: parts[part], week: w.week, part, title: w[part].title, minutes: w[part].minutes });
+    }
+    const recipeOn = id ? cooked[id] ?? null : null;
+    if (recipeOn) minutes += recipeMinutes(id);
+    if (w.kind && parts.sabbath) minutes += w.minutes ?? 0;
+    return {
+      week: w.week, unit: w.unit, mastery: Boolean(w.mastery), kind: w.kind ?? null, minutes: w.kind ? w.minutes ?? 0 : recipeMinutes(id),
+      recipe: id, title: id ? lessonById[id]?.title ?? V.titles[id] ?? id : null, cooked: recipeOn, parts,
+      titles: Object.fromEntries(PARTS.map((part) => [part, w[part].title])),
+    };
+  });
+  const units = V.units.map((u) => {
+    const mine = weeks.filter((w) => w.unit === u.number);
+    const last = mine.at(-1);
+    let mastered = null;
+    if (last?.kind === 'capstone') mastered = PARTS.every((part) => last.parts[part]) ? PARTS.map((part) => last.parts[part]).sort().at(-1) : null;
+    else if (last?.mastery && last.recipe) mastered = why[last.recipe] ?? null;
+    return { number: u.number, name: u.name, goal: u.goal ?? null, mastered, weeks: mine };
+  });
+  const capstone = units.at(-1);
+  return {
+    course_id: course.id, id: V.id, name: V.name, hours: V.hours, weeks: V.weeks.length,
+    hours_done: Math.round(minutes / 6) / 10,
+    complete: capstone?.weeks.at(-1)?.kind === 'capstone' ? capstone.mastered : null,
+    units, rows: rows.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : a.week - b.week)),
   };
 }
 
@@ -774,7 +883,8 @@ export function register(on) {
       versions,
       leave_out: leaveOut,
       // A profile on a Level course: its week, parts, and mastery recipes (12c).
-      level: mine?.lessons.level ? levelFor(mine, pid, day) : null,
+      // Its progress view (12e) comes with it.
+      level: mine?.lessons.level ? { ...levelFor(mine, pid, day), progress: await levelProgress(env, s.family_id, pid, tzOf(req)) } : null,
       // The profile's path, in its course plan's order (or the suggested one),
       // for its kitchen's "Coming up" and the early flag (owner, 2026-10-23).
       order: mine ? mine.lessons.kept : null,

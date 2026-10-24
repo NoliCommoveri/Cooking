@@ -4383,3 +4383,46 @@ Phase 12, the step before 12e (plan §12.4). Behind the Next release switch.
   read it from `levels/recipes/`.
 - Tests: 342. One new test (the shelf and the queue, with and without the next
   release); the Level course tests expect week 2's burgers.
+
+## 183. 2026-10-24 — The Level view, Progress, and the transcript (slice 12e)
+
+Phase 12, slice 12e (plan §12.4). Behind the Next release switch. No new
+tables.
+
+- **A Level learner's progress tab** (`public/rewards.js`): "Quest map" in
+  Kitchen Quest, "My Level" in Chef's Passport. It shows "Level 3 Cook · Week 2
+  of 36", a bar of the 36 weeks in their 9 units, and the hours so far of about
+  125. Then what's left this week, and the units: chapters with a crest
+  (Kitchen Quest) or passport pages with a visa stamp (Chef's Passport). The
+  current unit is open. Each week has its recipe and four ticks (recipe,
+  drill, knowledge, Beyond the Recipe). A finished Level shows its
+  certificate at the top.
+- **My cooking collection** opens the usual skill tree or passport and pins,
+  without the dish-count ranks; Back returns to the Level.
+- **Units are the ranks.** A Level learner gets no rank-up. A unit mastered
+  (its mastery recipe cooked with a "why it worked") pops "Chapter cleared"
+  or "Unit mastered", and finishing the capstone pops the certificate. Each
+  shows once per device, after a cook or when the kitchen opens; the first
+  visit on a device shows nothing, since it's all on the tab.
+- **The server** (`levelProgress` in `src/worker/plan.js`) works it out from
+  the profile's own work: a week's recipe ticks when the profile cooked it on
+  the course (finished, not taken back, not on the Sabbath), and a part when
+  it checked it off. Hours are the planned minutes of what's done. The
+  kitchen's queue response carries it as `level.progress`.
+- **Practice run and capstone:** once every recipe week is cooked or skipped,
+  the kitchen's Level card shows week 35, then week 36, with its note, until
+  the profile checks its parts off.
+- **Proposed, waiting on the owner:** the capstone has no recipe yet, so it's
+  finished when its three parts are checked off, which also masters Unit 9. A
+  practice or capstone week's own cooking time (150 and 300 minutes) counts
+  once its last part, serving the meal, is checked off.
+- **The parent's Progress** shows each Level profile's hours, units mastered,
+  and a table of every week with its recipe and parts ticked. Its rows (and
+  the CSV) add each part checked off ("Level 3 Cook · Week 1 Drill"), with no
+  grade or "Didn't make it".
+- **The transcript** lists the part rows with their planned hours, counts
+  "Level parts done" apart from lessons cooked, and adds the Level's hours
+  toward its ~125 and the units mastered. Parts aren't graded.
+- Tests: 345 (3 new in `test/worker-levels.test.js`: ticks, hours, and a
+  unit mastered; the capstone and the practice week; Progress and the
+  transcript, and that they're gone without the next release).

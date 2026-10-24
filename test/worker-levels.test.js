@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import { makeEnv, family } from './helpers/worker.js';
 import { setPreview } from '../src/worker/release.js';
 import { weekOf, addDays } from '../src/worker/schedule.js';
+import { LIBRARY } from '../src/worker/library-data.js';
 
 const today = new Date().toISOString().slice(0, 10);
 const sunday = weekOf(today);
@@ -273,4 +274,87 @@ test('the parent changes a week; a recipe is in one week only; Swap recipe with 
   await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: 'huevos-rancheros' });
   await a.post(`/api/courses/${id}/level-week`, { week: 1, id: 'shakshuka' });
   assert.deepEqual((await card(a)).skipped_recipes.map((x) => x.lesson_id), ['shakshuka']);
+});
+
+// ---------- 12e: the Level view, Progress, and the transcript ----------
+
+const minutesOf = (id) => LIBRARY.lessons.find((L) => L.id === id).totalMinutes;
+const monday = addDays(sunday, -6);
+const cookOn = (a, id, lesson_id, pids, day = monday) => a.put(`/api/attempts/${id}`, {
+  lesson_id, servings: 6, profile_ids: pids, started_at: `${day}T00:10:00.000Z`, finished_at: `${day}T00:40:00.000Z`,
+});
+// Rows straight into the draft's table, so the Sabbath doesn't refuse them.
+const partDone = (env, fid, courseId, pid, week, part) => env.DB.prepare('INSERT INTO level_tasks (family_id, course_id, week, part, profile_id, done_at) VALUES (?, ?, ?, ?, ?, ?)')
+  .bind(fid, courseId, week, part, pid, `${monday}T12:00:00.000Z`).run();
+
+test("a learner's Level progress: each week ticked, hours, and a unit mastered with why it worked", async () => {
+  const { env, a, ava, ben, fid } = await setup();
+  const { id } = (await level(a, [ava], addDays(sunday, -7))).body;
+  await cookOn(a, '00000000000012e1', 'shakshuka', [ava, ben]);
+  await partDone(env, fid, id, ava, 1, 'drill');
+  let pr = (await kitchen(a, ava)).progress;
+  assert.deepEqual([pr.name, pr.hours, pr.weeks, pr.units.length, pr.complete], ['Level 3 Cook', 125, 36, 9, null]);
+  const w1 = pr.units[0].weeks[0];
+  assert.deepEqual([w1.recipe, w1.cooked, w1.parts.drill, w1.parts.knowledge], ['shakshuka', monday, monday, null]);
+  assert.equal(pr.hours_done, Math.round((minutesOf('shakshuka') + 40) / 6) / 10, "the recipe's and the drill's planned time");
+  assert.equal(pr.units[0].mastered, null);
+
+  // Week 4's Meatloaf is the mastery check: cooked, and mastered once there's a "why it worked".
+  await cookOn(a, '00000000000012e2', 'meatloaf', [ava]);
+  pr = (await kitchen(a, ava)).progress;
+  assert.equal(pr.units[0].weeks[3].cooked, monday);
+  assert.equal(pr.units[0].mastered, null, 'cooked without a why');
+  await a.put('/api/attempts/00000000000012e2/reflection', { profile_id: ava, rating: 5, why: 'The thermometer read 160°F in the middle.' });
+  pr = (await kitchen(a, ava)).progress;
+  assert.equal(pr.units[0].mastered, monday);
+  assert.equal(pr.units[1].mastered, null);
+  assert.equal(pr.rows.length, 1);
+
+  // Ben cooked the shakshuka too, but he isn't on a Level course.
+  const benQ = (await a.get(`/api/profiles/${ben}/queue`)).body;
+  assert.equal(benQ.level, null);
+});
+
+test('the capstone completes the Level; the practice run and capstone come after the last recipe', async () => {
+  const { env, a, ava, fid } = await setup();
+  const { id } = (await level(a, [ava], addDays(sunday, -7))).body;
+  for (const part of ['drill', 'knowledge', 'sabbath']) await partDone(env, fid, id, ava, 36, part);
+  const pr = (await kitchen(a, ava)).progress;
+  assert.equal(pr.complete, monday);
+  assert.equal(pr.units[8].mastered, monday, 'the last unit is mastered by its capstone');
+  assert.equal(pr.hours_done, Math.round((40 + 35 + 45 + 300) / 6) / 10, "the capstone's parts and its own time once it's served");
+
+  // Every recipe week skipped: the practice run is this week's card, with its note.
+  const plan = (await a.get('/api/courses')).body.courses[0].plan;
+  for (const x of plan) await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: x.id });
+  const lv = await kitchen(a, ava);
+  assert.deepEqual([lv.week.week, lv.week.kind, lv.week.recipe], [35, 'practice', null]);
+  assert.match(lv.week.note, /Practice run/);
+});
+
+test('Print our progress and the transcript gain the Level part rows, its hours, and its units', async () => {
+  const { env, a, ava, fid } = await setup();
+  await a.put('/api/family', { name: 'Carsons', default_servings: 6, diet_filters: [], plan_weeks: true, mode: 'homeschool' });
+  const { id } = (await level(a, [ava], addDays(sunday, -7))).body;
+  await cookOn(a, '00000000000012e3', 'shakshuka', [ava]);
+  await partDone(env, fid, id, ava, 1, 'knowledge');
+
+  const p = (await a.get('/api/progress')).body.profiles.find((x) => x.id === ava);
+  assert.deepEqual(p.rows.map((r) => [r.dish, r.skill, Boolean(r.part)]), [
+    ['Shakshuka', LIBRARY.lessons.find((L) => L.id === 'shakshuka').skill, false],
+    [LIBRARY.levels['level-3'].weeks[0].knowledge.title, 'Level 3 Cook · Week 1 Knowledge', true],
+  ]);
+  assert.equal(p.level.weeks.length, 36);
+  assert.equal(p.level.units[0].mastered, null);
+
+  const t = (await a.get(`/api/transcript/${ava}`)).body;
+  assert.deepEqual([t.totals.cooks, t.totals.parts], [1, 1]);
+  assert.equal(t.totals.hours, Math.round((minutesOf('shakshuka') + 35) / 6) / 10);
+  assert.deepEqual([t.level.name, t.level.hours, t.level.hours_done], ['Level 3 Cook', 125, t.totals.hours]);
+  assert.ok(t.rows.find((r) => r.part === 'knowledge' && r.minutes === 35 && r.grade === null));
+
+  // Without the next release, none of it shows.
+  await setPreview(env.DB, fid, false);
+  const off = (await a.get('/api/progress')).body.profiles.find((x) => x.id === ava);
+  assert.deepEqual([off.level, off.rows.length], [null, 1]);
 });

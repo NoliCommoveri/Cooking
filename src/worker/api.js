@@ -15,7 +15,7 @@ import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
 import { FREE_MAX, servingOptions } from '../content/scale.js';
 import { numberCourse } from '../content/course.js';
-import { register as registerPlan, markCooked, tzOf } from './plan.js';
+import { register as registerPlan, markCooked, tzOf, levelProgress, levelSummary, partRows } from './plan.js';
 import { localDay, isSabbath } from './schedule.js';
 import { register as registerShopping } from './shopping.js';
 import { register as registerRecipes, lessonFor, recipeNames } from './recipes.js';
@@ -623,18 +623,23 @@ on('GET', '/api/progress', async (req, env) => {
   const gradeOf = (r) => (r.graded_at ? Object.fromEntries([...RUBRIC.map((x) => [x.key, r[`g_${x.key}`]]), ['grade_text', r.grade_text]]) : null);
   const recipes = await recipeNames(env, s.family_id);
   const lesson = (lid) => LIBRARY.lessons.find((L) => L.id === lid) ?? (recipes[lid] && { title: recipes[lid].title, cuisine: null, skill: 'Family recipe' });
+  // A profile on a Level (12e): its weeks, parts, and units, and its parts
+  // checked off as rows beside its cooks.
+  const levels = Object.fromEntries(await Promise.all(profiles.map(async (p) => [p.id, await levelProgress(env, s.family_id, p.id, offset)])));
+  const byDate = (a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0);
   return {
     family: fam.name,
     homeschool,
     profiles: profiles.map((p) => ({
       id: p.id, name: p.name,
-      rows: results.filter((r) => r.profile_id === p.id && !isSabbath(day(r.finished_at))).map((r) => {
+      level: levels[p.id] && { ...levelSummary(levels[p.id]), weeks: levels[p.id].units.flatMap((u) => u.weeks) },
+      rows: [...results.filter((r) => r.profile_id === p.id && !isSabbath(day(r.finished_at))).map((r) => {
         const L = lesson(r.lesson_id);
         const row = { cook: r.id, date: day(r.finished_at), dish: L?.title ?? r.lesson_id, cuisine: LIBRARY.cuisines[L?.cuisine] ?? L?.cuisine ?? '', skill: L?.skill ?? '', rating: r.rating };
         if (!homeschool) return row;
         const g = gradeOf(r);
         return { ...row, reflection: { rating: r.rating, notes: r.notes, transfer: r.transfer }, grade: g, grade_line: g ? gradeLine(g) : null };
-      }),
+      }), ...partRows(levels[p.id]).map(({ minutes, ...r }) => ({ ...r, rating: null }))].sort(byDate),
     })),
   };
 });

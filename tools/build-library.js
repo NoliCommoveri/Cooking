@@ -193,12 +193,13 @@ export function buildLibrary() {
     levels: Object.fromEntries((c.levels ?? []).map(({ data: V }) => [V.id, {
       id: V.id, name: V.name, hours: V.hours,
       // Its own unit in Side quests (§12.4): "Level 3 recipes", labels L1, L2….
-      side: { number: V.sideUnit.number, name: V.sideUnit.name, prefix: V.sideUnit.prefix }, units: V.units.map(({ number, name }) => ({ number, name })),
+      side: { number: V.sideUnit.number, name: V.sideUnit.name, prefix: V.sideUnit.prefix }, units: V.units.map(({ number, name, goal }) => ({ number, name, goal })),
       // Each week's three part pages (12c): title, planned minutes, and what's written of them.
       // Its options (§12.7): the other recipes best fit picks among (12d).
-      weeks: V.weeks.map(({ week, unit, skill, recipe, swapIns, mastery, kind, drill, knowledge, sabbath }) => ({
+      // A practice or capstone week has no recipe: its own minutes and note instead.
+      weeks: V.weeks.map(({ week, unit, skill, recipe, swapIns, mastery, kind, minutes, note, drill, knowledge, sabbath }) => ({
         week, unit, ...(skill ? { skill } : {}), ...(recipe ? { recipe } : {}), ...(swapIns?.length ? { options: swapIns } : {}),
-        ...(mastery ? { mastery } : {}), ...(kind ? { kind } : {}), drill, knowledge, sabbath,
+        ...(mastery ? { mastery } : {}), ...(kind ? { kind, minutes, note } : {}), drill, knowledge, sabbath,
       })),
       // The Level's own recipe cards, scored by their tags until they're written (12d).
       cards: V.recipes.map(({ id, title, cuisine, skills, minutes, tags, art }) => ({ id, title, cuisine, skills, minutes, tags, art })),

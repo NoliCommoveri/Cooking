@@ -8967,39 +8967,48 @@ export const LIBRARY = {
    "units": [
     {
      "number": 1,
-     "name": "Food safety science"
+     "name": "Food safety science",
+     "goal": "Uses a thermometer, knows the danger zone (40–140°F), and cools and reheats food safely"
     },
     {
      "number": 2,
-     "name": "Yeast dough"
+     "name": "Yeast dough",
+     "goal": "Mixes, kneads, proofs, shapes, and bakes a yeast dough, and judges when it's done"
     },
     {
      "number": 3,
-     "name": "Classic knife cuts and honing"
+     "name": "Classic knife cuts and honing",
+     "goal": "Holds and hones a chef's knife; even dice, mince, and julienne"
     },
     {
      "number": 4,
-     "name": "Sautéing and aromatic bases"
+     "name": "Sautéing and aromatic bases",
+     "goal": "Controls pan heat, sweats vs. browns aromatics, deglazes"
     },
     {
      "number": 5,
-     "name": "Legumes and grains"
+     "name": "Legumes and grains",
+     "goal": "Soaks and cooks dried beans and lentils; grains by absorption and pilaf"
     },
     {
      "number": 6,
-     "name": "Fish"
+     "name": "Fish",
+     "goal": "Identifies clean fish by fins and scales, judges freshness, cooks fish gently until it flakes"
     },
     {
      "number": 7,
-     "name": "Poultry and roasting"
+     "name": "Poultry and roasting",
+     "goal": "Handles raw poultry safely, roasts to 165°F, roasts vegetables evenly"
     },
     {
      "number": 8,
-     "name": "Stock and soup"
+     "name": "Stock and soup",
+     "goal": "Makes a clear stock from bones or vegetables and builds a soup from it"
     },
     {
      "number": 9,
-     "name": "Balancing flavor and Sabbath capstone"
+     "name": "Balancing flavor and Sabbath capstone",
+     "goal": "Tastes and corrects salt, acid, fat, and heat; plans and cooks a full Sabbath meal ahead and reheats it safely"
     }
    ],
    "weeks": [
@@ -10261,6 +10270,8 @@ export const LIBRARY = {
      "week": 35,
      "unit": 9,
      "kind": "practice",
+     "minutes": 150,
+     "note": "Practice run of one capstone dish",
      "drill": {
       "title": "Taste and adjust without a recipe",
       "minutes": 40
@@ -10278,6 +10289,8 @@ export const LIBRARY = {
      "week": 36,
      "unit": 9,
      "kind": "capstone",
+     "minutes": 300,
+     "note": "A full Sabbath meal made ahead: main, side, bread, and salad, with soup as a choice",
      "drill": {
       "title": "Shop and do Thursday prep",
       "minutes": 40
