@@ -467,7 +467,7 @@ async function coursePart(ctx, chat, call, { again }) {
   // Which program? (§12.4), with the next release: Cook Around the World or a Level.
   let level = null;
   if (data.levels?.length) {
-    chat.say('Which program? Cook Around the World goes a dish at a time, each with its skill. ' + data.levels.map((V) => `${V.name} is ${V.weeks.length} weeks of a recipe, a drill, a reading, and a Sabbath task each week, about ${V.hours} hours in all.`).join(' '));
+    chat.say('Which program? Cook Around the World goes a dish at a time, each with its skill. ' + data.levels.map((V) => `${V.name} is ${V.weeks.length} weeks of a recipe, a drill, a reading, and a Beyond the Recipe page each week, about ${V.hours} hours in all.`).join(' '));
     const pick = await chat.choose([['', 'Cook Around the World'], ...data.levels.map((V) => [V.id, V.name])]);
     level = data.levels.find((V) => V.id === pick) ?? null;
   }

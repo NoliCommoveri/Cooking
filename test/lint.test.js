@@ -210,7 +210,7 @@ test('Level 3: 9 units of 4 weeks, about 125 hours, every recipe known', () => {
     assert.ok(L.weeks.some((w) => w.recipe === id), `${id} is a week's recipe`);
     assert.ok(!L.recipes.some((r) => r.id === id), `${id} isn't Level only`);
   }
-  assert.equal(L.recipes.length, 17);
+  assert.equal(L.recipes.length, 21);
   assert.ok(!lint(base).errors.some((e) => e.startsWith('levels/')));
 });
 
@@ -238,7 +238,7 @@ test('the hard rule holds on Level pages and recipes', () => {
 test('a Level recipe written as a lesson is checked like a lesson and matches its card', () => {
   const shak = base.lessons.find((l) => l.data.id === 'shakshuka').data;
   const errs = broken((c) => {
-    const L = { ...structuredClone(shak), id: 'thick-burgers', title: 'Thick beef burgers', unit: 100, cuisine: 'american' };
+    const L = { ...structuredClone(shak), id: 'thick-burgers', title: 'Thick beef burgers', unit: 100, cuisine: 'american', totalMinutes: 41 };
     L.steps[0].text = 'Add the ham.';
     c.levelLessons = [{ file: 'thick-burgers.json', data: L }];
   });

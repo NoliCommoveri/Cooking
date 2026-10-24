@@ -4177,3 +4177,189 @@ order, so these two recipes were written.
   built yet beyond Chicken jambalaya and Butter chicken; the changes go into
   `content/levels/level-3.json`, the lessons, and plan §12.3 and §12.4 next.
 
+
+## 173. 2026-10-24 — Level 3 review applied; Fish before poultry
+
+- **Fish before poultry** (owner, 2026-10-24): Fish is now Unit 6 (weeks
+  21–24) and Poultry and roasting Unit 7 (weeks 25–28). With poultry first,
+  the year dropped from the whole roast chicken to a 30-minute baked fillet.
+  Fish is the gentler first raw protein, the whole bird is now the hardest
+  dish right before the stock unit, and its carcass waits two weeks for week
+  30 instead of six. Plan §12.3 records it; `docs/level-recipe-review.md` is
+  renumbered, with a Fish before poultry section.
+- **The review's week decisions are in `content/levels/level-3.json`:**
+  - Weeks 1, 3, and 4 carry the thermometer skill (`temping-meat`), and
+    Meatloaf (`course.json`) has it too. A new skill, **Cooling and
+    reheating**, is on Chicken fried rice (lesson and card); week 3's note
+    and drill say the drill's cooled rice goes into it.
+  - Options trimmed to the ones that practise each week's skill, with the
+    approved replacements: Chicken adobo (week 3), Cinnamon rolls (week 8),
+    Kuku sabzi (week 10), Ratatouille (week 12), Cuban black beans and rice
+    (week 18), Bulgur pilaf with chickpeas (week 19). Jollof rice, Swedish
+    meatballs, Homemade pizza (week 8), Chimichurri steak, Chickpea chopped
+    salad (week 12), Chana masala (week 18), Matzo ball soup (week 32), and
+    the off-method fish dishes are gone from those weeks.
+  - Week 9's default is Beef tacos with pico de gallo; Fish tacos is an
+    option.
+  - Notes name each Level version (ragù bolognese, pan-juice roast chicken,
+    soups from the student's own stock, ground-beef barley soup, chicken-thigh
+    stew), week 7's braided rolls, week 21's any-fillet baked fish with a
+    side, week 22's foil-ball steamer, and week 30's wings-or-backs stock.
+  - Part titles: week 24's drill is searing a fillet; week 35's Sabbath task
+    is serving the practice dish; week 36's drill is Shop and do Thursday
+    prep, its meal adds soup as a choice, and its reflection is the Sunday
+    after.
+  - Four new Level-only cards (21 in all): Beef tacos with pico de gallo,
+    Kuku sabzi (the Persian cuisine is added), Cuban black beans and rice,
+    and Bulgur pilaf with chickpeas. Baked salmon's card is now Baked fish
+    with lemon and herbs (any clean fillet), and Steamed fish and Chicken
+    stock describe the approved methods.
+- Plan §12.4's recipe table follows the new week numbers, with a note on what
+  the review changed. Cuban black beans and rice could be the third dish in
+  Cook Around the World's dried beans and lentils group (recommendation,
+  waiting on the owner).
+- Tests: Level 3 has 21 Level-only recipes, and a new Level course schedules
+  3 written recipes (Fish tacos left week 9's default), with 33 waiting.
+- **Not built yet:** the Level-version variations, Turkey meatloaf, Fish in
+  parchment packets, the new recipes' lessons, the fixes inside planned
+  lessons, and weeks 35 and 36 picking their dishes. The review's Next
+  session lists them.
+
+## 174. 2026-10-24 — Level 3 Unit 1 content (slice 12f)
+
+- Owner, 2026-10-24: 12f for Unit 1 only, for now.
+- **Meatloaf with glaze** (`content/lessons/meatloaf.json`), week 4's mastery
+  recipe and a Cook Around the World lesson: rolled oats soaked in milk and
+  egg bind the loaf, glazed twice, checked at 160°F in the center, rested.
+  Oats keep it unleavened, with gluten-free oats as the swap. Its card's
+  minutes are no longer an estimate, and its main ingredients say rolled oats.
+  **Turkey meatloaf with glaze** is its variation, to 165°F.
+- **Thick beef burgers** (`content/levels/recipes/thick-burgers.json`), week
+  2's recipe, Level only: thick patties with a dimple, seared on medium-high,
+  flipped once, each checked from the side at 160°F. Its card's minutes are
+  the lesson's.
+- **Easy-prep Level versions** (variations, shown to every family): Shakshuka
+  and Chicken fried rice use jarred minced garlic; in Chicken fried rice and
+  Oyakodon a grown-up cuts the raw chicken (adult hands-on), and Oyakodon's
+  onion is chopped; Smash burgers' pickles and onion are optional.
+- New ingredients: rolled oats, gluten-free rolled oats, jarred minced garlic.
+- **Weeks 1–4's twelve part pages** in `level-3.json`, each with a body, steps,
+  and a quiz, for the owner to review: calibrating a thermometer (with the
+  knife-safety quick review), the danger zone, labeling, thick vs. thin
+  patties, the safe temperatures chart, an ice bath, cooling rice for the
+  fried rice, cross-contamination, storing for the Sabbath, a clean station,
+  the unit quiz, and reheating to 165°F.
+- **Cuban black beans and rice** (owner, 2026-10-24) joins Cook Around the
+  World's dried beans and lentils group. Not moved yet: a course dish needs
+  its picture, `content/images/dishes/cuban-black-beans.png`, which isn't
+  made. Its card stays in `level-3.json` until then.
+- **Not served yet:** lessons in `content/levels/recipes/` are linted but not
+  built into the app's library, so Thick beef burgers isn't cookable and week
+  2 still waits as being written. That needs a build: Level-only lessons in
+  the library for families with the next release.
+- Tests: a new Level course schedules 4 written recipes (Meatloaf is
+  written), with 32 waiting; the Level-lesson lint test sets its own minutes.
+
+## 175. 2026-10-24 — No "holy trinity" in the recipes
+
+- Owner, 2026-10-24: the recipes don't use the term "holy trinity" (or "the
+  trinity"). Chicken jambalaya now says onion, celery, and green pepper: its
+  skill line, Learn card, Why? card ("Sweat the vegetables, don't brown
+  them"), quiz question, ingredient group (Vegetables), and step and timer.
+  The step and Why? card ids changed with them. The same wording is in its
+  `course.json` card, Level 3 week 15's note and the Cajun rice dressing card,
+  plan §4 and §12.3, and the review doc. Earlier build log entries keep the
+  words they had.
+- Week 3's knowledge quiz asks about cooked chicken, not grilled.
+- The Unit 1 part pages are in a review doc for the owner, "Level 3 Unit 1
+  part pages" (claude.ai), copied from `level-3.json`; changes from the review
+  go back into `level-3.json`.
+
+## 176. 2026-10-24 — Level 3 Unit 1 pages rewritten for older learners
+
+- Owner, 2026-10-24: the Unit 1 pages read too young for Level 3's
+  learners. Plan §12.3 now has a Level 3 voice rule: "adult", never
+  "grown-up"; the real terms (microorganisms, pathogens, toxins) without
+  explaining them as to a young child; food-safety pages give the USDA
+  guideline and its reason, and say where common practice differs.
+- All 12 part pages for weeks 1–4 are rewritten in that voice. Week 1's
+  knowledge page is now "Danger zone and how microorganisms grow" and names
+  Salmonella, E. coli, and Listeria. Week 3 names Bacillus cereus.
+- **Steak:** week 2's temperatures page gives the USDA's 145°F for whole cuts
+  (medium), then explains why a well-seared intact steak eaten rare or
+  medium-rare is a much smaller risk than undercooked ground meat, and where
+  that doesn't hold (ground, poultry, needle-tenderized or injected meat, and
+  people at higher risk). Two quiz questions test it.
+- **Leftovers:** the pages give the USDA's 3 to 4 days as the guideline, say
+  many families keep some foods closer to a week, explain why risk rises
+  (Listeria grows in the fridge, and smell doesn't reveal pathogens), and
+  leave the limit to the family. Meatloaf's tip says the same.
+- The Easy-prep Chicken fried rice and Oyakodon say "An adult" cuts the raw
+  chicken.
+- The review doc, "Level 3 Unit 1 part pages", has the new text.
+- Tests: the kitchen test expects week 1's new knowledge title. (The first
+  push of this entry missed it and failed that one test; the follow-up commit
+  fixed it.)
+
+## 177. 2026-10-24 — Leftover times by kind of food
+
+- Owner, 2026-10-24: many leftovers keep a week. Week 1's labeling page and
+  the two leftover quiz questions (weeks 1 and 4) now give the USDA's 3 to 4
+  days for cooked meat, poultry, soups, and stews, say many other leftovers
+  keep longer and hard-cooked eggs keep a week, and leave the limits to the
+  family. The review doc has the same text.
+- Open for the owner: what the Sabbath task part becomes (it teaches
+  Sabbath practice, which families keep differently).
+
+## 178. 2026-10-24 — Beyond the Recipe replaces the Sabbath task
+
+- Owner, 2026-10-24: whether one cooks on the Sabbath is debated among the
+  families the app serves, so Level pages don't teach Sabbath practice. A
+  page may say, as a fact, that many families cook or prep ahead so they can
+  focus on resting. (The rule that nothing done on the Sabbath counts as
+  schoolwork, §6.18, is about school, not cooking, and stays.)
+- A Level week's fourth part is now **Beyond the Recipe**: the kitchen's part
+  page, the Level 3 picker in the course editor and Chef Ruth's Getting
+  started, and the manager's Level 3 page and field label say so. It's still
+  stored as `sabbath` in `level-3.json` and `level_tasks`, so nothing
+  already checked off is lost.
+- Unit 1's four Beyond the Recipe pages are make-ahead storage: labeling
+  (with the note on families prepping ahead to rest), cooling, making a dish
+  ahead and storing it (week 3's new title), and reheating. The Sabbath
+  claims are gone. The review doc has the new text.
+- Plan §12.2 and §12.3 describe the part and the rule, with a proposed split
+  for weeks 5–36, waiting on the owner: 24 make-ahead weeks and 12 weeks of
+  What the Bible says about food. Weeks 5–36 keep their old titles until it's
+  approved. Levels 2 and 4 still say Sabbath task in their outlines.
+
+## 179. 2026-10-24 — Clean land animals in the Beyond the Recipe draft
+
+- Owner, 2026-10-24: a Bible and food page on surprising clean land animals,
+  like week 26's clean birds. The plan §12.3 draft puts it in week 14 (Beef
+  picadillo) in place of freezing a sofrito, since freezing in portions
+  comes up in weeks 5, 17, and 29. The draft is now 23 make-ahead weeks and
+  13 Bible and food weeks, still waiting on the owner.
+
+## 180. 2026-10-24 — More clean animals on the allowlist
+
+- Owner, 2026-10-24: add the clean animals the list was missing.
+  `content/rules/clean-species.json` goes from 20 to 56 species:
+  - Land animals: elk, moose, caribou, reindeer, pronghorn, antelope,
+    gazelle, ibex, bighorn sheep, mountain goat, water buffalo, yak, musk ox,
+    and giraffe.
+  - Birds: quail, pigeon, dove, pheasant, partridge, grouse, and guinea fowl.
+  - Fish: carp, herring, mackerel, smelt, whitefish, perch, walleye, pike,
+    bass, barramundi, mahi-mahi, snapper, grouper, sole, and flounder.
+- Left off as debated: swordfish and sturgeon (their scales), and insects
+  (§2.1 keeps them blocked). Ostrich and emu stay off.
+- Plan §2.1 names the additions. The fat rule still covers only cattle,
+  sheep, and goats; whether it reaches water buffalo and yak is open for the
+  owner. No ingredient uses any of the new species yet.
+
+## 181. 2026-10-24 — Week 2's drill uses a potato
+
+- Owner, 2026-10-24: no extra ground beef just for a drill. Level 3 week 2's
+  drill is now "Thick vs. thin: how size changes cooking time": a ¼-inch
+  slice and a 1-inch chunk of potato roasted at 400°F, each checked every 5
+  minutes until about 205°F. Two of the week's burger patties, one thin and
+  one thick, are the option. Plan §12.3 and the review doc follow.

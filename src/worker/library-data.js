@@ -1936,6 +1936,123 @@ export const LIBRARY = {
       "oven-mitts"
      ],
      "id": "turkey"
+    },
+    {
+     "title": "Easy-prep smash burgers",
+     "image": "img/dishes/smash-burgers.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "Cook 3 patties at a time in a 12-inch skillet. For more than 6, keep going in batches of 3, washing the tongs and your hands after each batch of raw beef."
+       }
+      ]
+     },
+     "totalMinutes": 60,
+     "ingredients": [
+      {
+       "ingredient": "cucumber",
+       "optional": true
+      },
+      {
+       "ingredient": "vinegar-white",
+       "optional": true
+      },
+      {
+       "ingredient": "water",
+       "optional": true
+      },
+      {
+       "ingredient": "sugar",
+       "optional": true
+      },
+      {
+       "ingredient": "salt",
+       "optional": true
+      },
+      {
+       "ingredient": "beef-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "onion-yellow",
+       "optional": true
+      },
+      {
+       "ingredient": "cheese-sliced",
+       "optional": true
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "burger-buns"
+      },
+      {
+       "ingredient": "ketchup",
+       "optional": true
+      },
+      {
+       "ingredient": "mustard-dijon",
+       "optional": true
+      },
+      {
+       "ingredient": "lettuce-green-leaf",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "burger-buns",
+       "use": "buns-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "beef",
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": [
+       "cucumber",
+       "onions",
+       "mustard"
+      ]
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "mixing-bowl-medium",
+      "saucepan-medium",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "wooden-spoon",
+      "plate",
+      "parchment",
+      "skillet-12",
+      "spatula",
+      "tongs",
+      "thermometer",
+      "oven-mitts"
+     ],
+     "id": "easy-prep"
     }
    ]
   },
@@ -2510,6 +2627,105 @@ export const LIBRARY = {
       "spoon"
      ],
      "id": "spicy"
+    },
+    {
+     "title": "Easy-prep shakshuka",
+     "image": "img/dishes/shakshuka.webp",
+     "cuisine": "north-african",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, cook it in two 12-inch skillets side by side."
+       }
+      ]
+     },
+     "totalMinutes": 40,
+     "ingredients": [
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "garlic-minced-jarred"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "paprika-smoked"
+      },
+      {
+       "ingredient": "chili-flakes",
+       "optional": true
+      },
+      {
+       "ingredient": "tomatoes-crushed"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "parsley",
+       "optional": true
+      },
+      {
+       "ingredient": "feta",
+       "optional": true
+      },
+      {
+       "ingredient": "pita",
+       "optional": true
+      }
+     ],
+     "substitutions": [],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "eggs",
+      "flavors": [
+       "rich-tomato",
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "bell-peppers",
+       "tomatoes"
+      ],
+      "optional": [
+       "feta"
+      ]
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "skillet-12",
+      "wooden-spoon",
+      "measuring-spoons",
+      "can-opener",
+      "small-bowl",
+      "thermometer"
+     ],
+     "id": "easy-prep"
     }
    ]
   },
@@ -3049,6 +3265,101 @@ export const LIBRARY = {
     "spatula",
     "plate",
     "thermometer"
+   ],
+   "variations": [
+    {
+     "title": "Easy-prep chicken fried rice",
+     "image": "img/dishes/chicken-fried-rice.webp",
+     "cuisine": "chinese",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "max": 8,
+      "notes": [
+       {
+        "from": 7,
+        "text": "For 7 or 8, the pan is very full. Fry the rice in two batches, and stir half the egg, chicken, and sauce into each."
+       }
+      ]
+     },
+     "totalMinutes": 35,
+     "ingredients": [
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "chicken-breast"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "green-onion"
+      },
+      {
+       "ingredient": "garlic-minced-jarred"
+      },
+      {
+       "ingredient": "peas-carrots-frozen"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "soy-sauce"
+      },
+      {
+       "ingredient": "sesame-oil"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "soy-sauce",
+       "use": "tamari",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "ginger-soy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "peas",
+       "sesame"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "small-bowl",
+      "mixing-bowl-medium",
+      "fork",
+      "measuring-cups",
+      "measuring-spoons",
+      "skillet-12",
+      "spatula",
+      "plate",
+      "thermometer"
+     ],
+     "id": "easy-prep"
+    }
    ]
   },
   {
@@ -3254,6 +3565,102 @@ export const LIBRARY = {
     "wooden-spoon",
     "ladle",
     "thermometer"
+   ],
+   "variations": [
+    {
+     "title": "Easy-prep oyakodon",
+     "image": "img/dishes/oyakodon.webp",
+     "cuisine": "japanese",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, cook the chicken and egg in two skillets side by side, with half of everything in each."
+       }
+      ]
+     },
+     "totalMinutes": 45,
+     "ingredients": [
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "broth-chicken"
+      },
+      {
+       "ingredient": "soy-sauce"
+      },
+      {
+       "ingredient": "mirin"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "green-onion"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "mirin",
+       "use": "vinegar-rice",
+       "reason": "availability"
+      },
+      {
+       "for": "soy-sauce",
+       "use": "tamari",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "ginger-soy",
+       "sweet-savory"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "onions"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "saucepan-medium",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "chef-knife",
+      "cutting-board",
+      "mixing-bowl-medium",
+      "fork",
+      "skillet-12",
+      "wooden-spoon",
+      "ladle",
+      "thermometer"
+     ],
+     "id": "easy-prep"
+    }
    ]
   },
   {
@@ -4308,7 +4715,7 @@ export const LIBRARY = {
    "title": "Chicken jambalaya",
    "image": "img/dishes/chicken-jambalaya.webp",
    "cuisine": "louisiana",
-   "skill": "The trinity, deglazing, rice cooked in the pot",
+   "skill": "An onion, celery, and pepper base, deglazing, rice cooked in the pot",
    "servings": 6,
    "scaling": {
     "mode": "free",
@@ -4891,6 +5298,219 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "meatloaf",
+   "version": 1,
+   "track": "core",
+   "unit": 6,
+   "title": "Meatloaf with glaze",
+   "image": "img/dishes/meatloaf.webp",
+   "cuisine": "american",
+   "skill": "Binders, thermometer",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 12,
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, shape two loaves side by side on the sheet pan, with a hand's width between them, and check each one with the thermometer."
+     }
+    ]
+   },
+   "totalMinutes": 90,
+   "ingredients": [
+    {
+     "ingredient": "oats-rolled"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "ketchup"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "ketchup"
+    },
+    {
+     "ingredient": "brown-sugar"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "oats-rolled",
+     "use": "oats-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "sweet-savory",
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic",
+     "mustard"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "foil",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "fork",
+    "spoon",
+    "oven-mitts",
+    "thermometer",
+    "spatula"
+   ],
+   "variations": [
+    {
+     "title": "Turkey meatloaf with glaze",
+     "image": "img/dishes/meatloaf.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "max": 12,
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, shape two loaves side by side on the sheet pan, with a hand's width between them, and check each one with the thermometer."
+       }
+      ]
+     },
+     "totalMinutes": 90,
+     "ingredients": [
+      {
+       "ingredient": "oats-rolled"
+      },
+      {
+       "ingredient": "milk-whole"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "ketchup"
+      },
+      {
+       "ingredient": "garlic-powder"
+      },
+      {
+       "ingredient": "thyme-dried"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "turkey-ground"
+      },
+      {
+       "ingredient": "ketchup"
+      },
+      {
+       "ingredient": "brown-sugar"
+      },
+      {
+       "ingredient": "mustard-dijon"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "oats-rolled",
+       "use": "oats-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "other",
+     "tags": {
+      "protein": "turkey",
+      "flavors": [
+       "sweet-savory",
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "garlic",
+       "mustard"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "sheet-pan",
+      "foil",
+      "mixing-bowl-large",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "chef-knife",
+      "cutting-board",
+      "small-bowl",
+      "fork",
+      "spoon",
+      "oven-mitts",
+      "thermometer",
+      "spatula"
+     ],
+     "id": "turkey"
+    }
+   ]
+  },
+  {
    "id": "brown-butter-cookies",
    "version": 1,
    "track": "core",
@@ -5255,6 +5875,20 @@ export const LIBRARY = {
    "contains": [
     "gluten"
    ]
+  },
+  "oats-rolled": {
+   "name": "Rolled oats",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "oats-gluten-free": {
+   "name": "Gluten-free rolled oats",
+   "contains": []
+  },
+  "garlic-minced-jarred": {
+   "name": "Jarred minced garlic",
+   "contains": []
   },
   "rice-white": {
    "name": "White rice",
@@ -5875,7 +6509,8 @@ export const LIBRARY = {
   "chinese-american": "Chinese-American",
   "turkish": "Turkish",
   "israeli": "Israeli",
-  "cuban": "Cuban"
+  "cuban": "Cuban",
+  "persian": "Persian"
  },
  "units": {
   "1": "Knife work and assembly",
@@ -6378,7 +7013,8 @@ export const LIBRARY = {
    "about": "Day-old rice stir-fried fast with chicken, egg, vegetables, and soy sauce.",
    "skills": [
     "stir-frying",
-    "dicing"
+    "dicing",
+    "cooling-reheating"
    ],
    "minutes": 35,
    "cuisine": "chinese",
@@ -6868,7 +7504,7 @@ export const LIBRARY = {
    "id": "chicken-jambalaya",
    "title": "Chicken jambalaya",
    "unit": 3,
-   "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, the trinity sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
+   "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, onion, celery, and green pepper sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
    "skills": [
     "flavor-base",
     "sauteing"
@@ -7831,7 +8467,8 @@ export const LIBRARY = {
    "unit": 6,
    "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.",
    "skills": [
-    "binders"
+    "binders",
+    "temping-meat"
    ],
    "minutes": 90,
    "cuisine": "american",
@@ -8255,11 +8892,11 @@ export const LIBRARY = {
     },
     {
      "number": 6,
-     "name": "Poultry and roasting"
+     "name": "Fish"
     },
     {
      "number": 7,
-     "name": "Fish"
+     "name": "Poultry and roasting"
     },
     {
      "number": 8,
@@ -8274,7 +8911,7 @@ export const LIBRARY = {
     {
      "week": 1,
      "unit": 1,
-     "skill": "poaching-eggs",
+     "skill": "temping-meat",
      "recipe": "shakshuka",
      "options": [
       "huevos-rancheros",
@@ -8282,15 +8919,140 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Calibrate a thermometer in ice water",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Every safe-temperature check this year depends on your thermometer reading correctly. A mixture of ice and water sits at 32°F, which makes it a reliable reference point.",
+       "The second part is a short knife-safety review. This unit's recipes call for diced onion and pepper, and the knife unit doesn't start until week 9."
+      ],
+      "steps": [
+       "Fill a tall glass with ice, add cold water to just below the top of the ice, and stir. Let it stand 3 minutes.",
+       "Insert the probe at least 2 inches into the center of the glass, clear of the sides and bottom.",
+       "Wait for the reading to settle, about 30 seconds on a digital thermometer. It should read 32°F.",
+       "If it's more than 2°F off, recalibrate: most digital thermometers have a calibrate or reset function (see the manual); on a dial thermometer, an adult turns the nut under the dial with pliers until the needle reads 32°F. If it can't be adjusted, note the offset and correct for it every time.",
+       "Record readings for warm and cold tap water as well, so you get used to how quickly the probe settles.",
+       "Wash the probe in hot, soapy water. From now on, clean it after every use.",
+       "Knife review: set the cutting board on a damp paper towel so it can't slide. Grip the knife at the handle, and hold the food in a claw grip, fingertips curled under.",
+       "Halve an onion through the root, lay the halves flat side down, and chop them, moving your guide hand back with each cut. If the knife falls, step back and let it drop.",
+       "Use the onion in this week's recipe."
+      ],
+      "quiz": [
+       {
+        "q": "What should a calibrated thermometer read in ice water?",
+        "choices": [
+         "32°F",
+         "0°F",
+         "40°F"
+        ],
+        "answer": 0,
+        "explain": "An ice-water mixture stays at the freezing point of water, 32°F."
+       },
+       {
+        "q": "Why keep the probe away from the sides of the glass?",
+        "choices": [
+         "The glass isn't the same temperature as the water",
+         "It can scratch the glass",
+         "The reading takes longer"
+        ],
+        "answer": 0,
+        "explain": "You're measuring the water. The glass is warmer, so touching it skews the reading."
+       },
+       {
+        "q": "Your thermometer reads 35°F in ice water and can't be adjusted. A burger reads 162°F. What is it really?",
+        "choices": [
+         "About 159°F, so not done yet",
+         "162°F, done",
+         "About 165°F"
+        ],
+        "answer": 0,
+        "explain": "It reads 3°F high, so subtract 3. The burger needs another minute."
+       }
+      ]
      },
      "knowledge": {
-      "title": "Danger zone and how bacteria grow",
-      "minutes": 35
+      "title": "Danger zone and how microorganisms grow",
+      "minutes": 35,
+      "body": [
+       "Most foodborne illness comes from microorganisms: bacteria such as Salmonella, E. coli, and Listeria, plus some viruses and parasites. They're common on raw meat, poultry, eggs, and produce, and you can't detect them by look, smell, or taste.",
+       "Bacteria multiply fastest between 40°F and 140°F, the range called the danger zone. Near body temperature, a population can double in as little as 20 minutes, so a few cells can become millions in a few hours.",
+       "Refrigeration (40°F or below) slows growth; freezing (0°F) stops it but doesn't kill anything. Cooking to a safe internal temperature kills most pathogens, and hot food held at 140°F or above stays out of the danger zone.",
+       "Some bacteria produce toxins that cooking doesn't break down, so reheating food that sat out too long doesn't make it safe. The USDA rule: cooked food goes into the fridge within 2 hours, or 1 hour when it's above 90°F."
+      ],
+      "steps": [
+       "Leave your thermometer in a glass of water on the middle shelf of the fridge for an hour, then read it. Is the fridge at 40°F or below?",
+       "If you can, check the freezer the same way. Is it at 0°F or below?",
+       "If either runs warm, tell an adult. Turning the control a notch colder usually fixes it."
+      ],
+      "quiz": [
+       {
+        "q": "What is the danger zone?",
+        "choices": [
+         "40°F to 140°F",
+         "0°F to 40°F",
+         "140°F to 212°F"
+        ],
+        "answer": 0,
+        "explain": "Bacteria multiply fastest in this range."
+       },
+       {
+        "q": "How long can cooked food stay at room temperature?",
+        "choices": [
+         "2 hours, or 1 hour above 90°F",
+         "As long as it's covered",
+         "Until it reaches room temperature"
+        ],
+        "answer": 0,
+        "explain": "After that, enough growth may have happened to make someone sick."
+       },
+       {
+        "q": "Why doesn't reheating rescue food that sat out all day?",
+        "choices": [
+         "Some bacteria leave toxins that heat doesn't destroy",
+         "Reheating can't reach 165°F",
+         "The food dries out"
+        ],
+        "answer": 0,
+        "explain": "Cooking kills the bacteria, but not every toxin they made."
+       }
+      ]
      },
      "sabbath": {
       "title": "Label and date containers",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Many families cook or prep ingredients ahead so they can spend the Sabbath resting instead of working in the kitchen. Food made ahead only helps if it's stored well, and this unit's Beyond the Recipe pages cover how: labeling, cooling, storing, and reheating.",
+       "Labels tell everyone what a container holds and when it was made, so nothing is eaten past its time or forgotten in the back.",
+       "The USDA guideline is 3 to 4 days in the fridge for cooked meat, poultry, soups, and stews. Many other leftovers keep longer, and hard-cooked eggs keep a week. Risk still climbs with time, because Listeria can grow at fridge temperatures and smell won't reveal it. Your family decides its own limits; the date on the label is what lets you apply them.",
+       "Frozen food stays safe indefinitely at 0°F, though it tastes best within 2 to 3 months."
+      ],
+      "steps": [
+       "Put together a labeling kit: masking tape and a permanent marker, kept near the fridge.",
+       "Label every container from this week's cooking with the dish and the date it was cooked, for example \"Shakshuka 10/4\".",
+       "Go through the fridge with an adult and decide what's past your family's limit.",
+       "Move older food to the front so it gets used first.",
+       "Label anything you make ahead this week the moment it goes into the fridge."
+      ],
+      "quiz": [
+       {
+        "q": "What is the USDA guideline for cooked meat and poultry leftovers in the fridge?",
+        "choices": [
+         "3 to 4 days",
+         "2 weeks",
+         "1 day"
+        ],
+        "answer": 0,
+        "explain": "Other foods vary: many keep longer, and hard-cooked eggs keep a week."
+       },
+       {
+        "q": "Why can't you judge old leftovers by smell?",
+        "choices": [
+         "The microorganisms that make food smell bad aren't the ones that make you sick",
+         "Cold food has no smell",
+         "Smell only works on raw food"
+        ],
+        "answer": 0,
+        "explain": "Spoilage organisms cause smells and slime; pathogens like Listeria usually don't."
+       }
+      ]
      }
     },
     {
@@ -8303,60 +9065,463 @@ export const LIBRARY = {
       "lamb-kofta"
      ],
      "drill": {
-      "title": "Temp-check thick vs. thin patties",
-      "minutes": 40
+      "title": "Thick vs. thin: how size changes cooking time",
+      "minutes": 40,
+      "body": [
+       "Thickness changes cooking time more than most people expect, because heat has to travel from the surface to the center. Cook a thin piece and a thick piece side by side and track both with the thermometer.",
+       "A potato in the oven works as well as beef and costs far less. If you'd rather use beef, shape one of this week's burger patties thin and one thick when you make the recipe."
+      ],
+      "steps": [
+       "Heat the oven to 400°F and line a sheet pan with foil.",
+       "Scrub a russet potato. Cut one slice about ¼ inch thick and one chunk about 1 inch thick. Rub both with a little oil and set them on the pan.",
+       "Bake them, and start a timer.",
+       "Every 5 minutes, pull the pan out with oven mitts and check the center of each piece with the thermometer. Record the time and temperature for both.",
+       "A potato is cooked through at about 205°F, when a fork slides in easily. Take each piece out when it gets there, and note its total time.",
+       "Compare: how much longer did the thick piece take? Did the outside look done before the center was?",
+       "With beef instead: cook a ¼-inch and a ¾-inch patty in a skillet over medium-high, check each from the side every minute after the flip, and pull each at 160°F. Wash your hands and the tongs after handling the raw beef."
+      ],
+      "quiz": [
+       {
+        "q": "A ¼-inch slice and a 1-inch chunk go in the oven together. Which reaches the target temperature first?",
+        "choices": [
+         "The thin slice",
+         "The thick chunk",
+         "They arrive together"
+        ],
+        "answer": 0,
+        "explain": "Heat has a shorter path to the center of a thin piece."
+       },
+       {
+        "q": "A burger is brown all the way through. Is it done?",
+        "choices": [
+         "Only if it reads 160°F",
+         "Yes",
+         "Yes, if the juices run clear"
+        ],
+        "answer": 0,
+        "explain": "Ground beef can brown before it reaches a safe temperature, and can stay pink after it does. Color isn't reliable."
+       }
+      ]
      },
      "knowledge": {
       "title": "Safe internal temperatures chart",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "The USDA publishes a minimum safe internal temperature for each kind of food, measured in the thickest part.",
+       "Poultry, whole or ground: 165°F. Ground beef and ground lamb: 160°F. Egg dishes: 160°F. Fish: 145°F. Leftovers and reheated food: 165°F. Whole cuts of beef and lamb (steaks, chops, roasts): 145°F with a 3-minute rest, which is medium.",
+       "Plenty of people eat steak rare (about 125°F) or medium-rare (about 135°F). For an intact whole cut, that's a much smaller risk than undercooking ground meat. Pathogens sit on the surface of a whole muscle, and a hard sear kills them, while the interior is close to sterile. Grinding spreads surface bacteria through the whole batch, which is why ground meat has to reach 160°F all the way through.",
+       "That reasoning only holds for intact cuts. It doesn't cover ground meat, poultry, or meat that has been needle-tenderized or injected with a marinade (the label will say so), and it doesn't cover anyone at higher risk: pregnant women, young children, older adults, or anyone with a weakened immune system.",
+       "For an accurate reading, put the tip in the thickest part, away from bone and the pan. With thin pieces, go in from the side, and check more than one piece."
+      ],
+      "steps": [
+       "Make a temperature card: poultry 165°F, ground beef and lamb 160°F, eggs 160°F, fish 145°F, whole cuts 145°F (USDA), reheating 165°F.",
+       "Post it inside a cupboard door by the stove."
+      ],
+      "quiz": [
+       {
+        "q": "What temperature does ground turkey need to reach?",
+        "choices": [
+         "165°F",
+         "160°F",
+         "145°F"
+        ],
+        "answer": 0,
+        "explain": "All poultry, ground or whole, is 165°F."
+       },
+       {
+        "q": "Why is a rare steak lower risk than a rare burger?",
+        "choices": [
+         "Grinding spreads surface bacteria through the meat; a steak's interior is nearly sterile",
+         "Steak is cooked longer",
+         "Burgers are fattier"
+        ],
+        "answer": 0,
+        "explain": "Searing kills what's on a steak's surface. A burger's surface bacteria are mixed all the way through."
+       },
+       {
+        "q": "Which of these should never be served rare?",
+        "choices": [
+         "A needle-tenderized steak",
+         "An intact ribeye, well seared",
+         "A whole beef roast"
+        ],
+        "answer": 0,
+        "explain": "Tenderizing pushes surface bacteria into the middle, so it needs the same care as ground meat."
+       }
+      ]
      },
      "sabbath": {
       "title": "Cool a cooked dish in an ice bath",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "A large pot of hot food cools slowly, and its center can stay in the danger zone for hours, even in the fridge. It also warms everything stored around it.",
+       "The standard is two-stage cooling: from 140°F to 70°F within 2 hours, then to 40°F within 4 more. An ice bath handles the first stage; shallow containers, no more than 2 inches deep, handle the second."
+      ],
+      "steps": [
+       "Pick something to cool: a pot of soup or rice, or a dish you're making ahead.",
+       "Fill the sink or a large bowl partway with ice and water.",
+       "Transfer the hot food to a metal bowl or pot and set it in the ice bath, with the water partway up the sides.",
+       "Stir every few minutes, and take the center temperature every 10 minutes. Record each reading.",
+       "At 70°F or below, divide it into shallow containers, cover, label, and refrigerate.",
+       "Note how long it took to go from 140°F to 70°F."
+      ],
+      "quiz": [
+       {
+        "q": "What is the time limit for cooling food from 140°F to 70°F?",
+        "choices": [
+         "2 hours",
+         "6 hours",
+         "Overnight"
+        ],
+        "answer": 0,
+        "explain": "Then 4 more hours to reach 40°F."
+       },
+       {
+        "q": "Why do shallow containers cool faster than one deep one?",
+        "choices": [
+         "The center is closer to the cold surface",
+         "They hold less air",
+         "Plastic conducts cold better"
+        ],
+        "answer": 0,
+        "explain": "Less depth means heat has a shorter path out."
+       }
+      ]
      }
     },
     {
      "week": 3,
      "unit": 1,
-     "skill": "stir-frying",
+     "skill": "temping-meat",
      "recipe": "chicken-fried-rice",
      "options": [
-      "jollof-rice"
+      "chicken-adobo"
      ],
      "drill": {
-      "title": "Safe cooling of a batch of rice",
-      "minutes": 40
+      "title": "Safe cooling of a batch of rice, saved for the fried rice",
+      "minutes": 40,
+      "body": [
+       "Cooked rice needs particular care. Raw rice often carries spores of Bacillus cereus, which survive cooking. If cooked rice sits warm, they grow and produce a toxin that reheating doesn't destroy. Cooled quickly and kept cold, rice is safe.",
+       "Do this the day before this week's fried rice. Fried rice works best with cold, day-old rice, so this batch goes straight into the recipe."
+      ],
+      "steps": [
+       "Cook 2 cups of white rice in 3 cups of water: rinse, bring to a boil, then cover and cook on low until the water is absorbed.",
+       "Spread the hot rice in a thin layer on a sheet pan.",
+       "Let it cool uncovered until it stops steaming, about 20 minutes, then check the temperature in the middle of the layer.",
+       "Within 1 hour of cooking, and once it's below 70°F, pack it into a shallow container, cover, and label it.",
+       "Refrigerate it, and note the time from pot to fridge.",
+       "Use it in the fried rice within 1 to 2 days."
+      ],
+      "quiz": [
+       {
+        "q": "Why spread cooked rice on a sheet pan?",
+        "choices": [
+         "A thin layer passes through the danger zone quickly",
+         "It dries the rice out",
+         "It stops sticking"
+        ],
+        "answer": 0,
+        "explain": "More surface area means faster cooling."
+       },
+       {
+        "q": "Rice sat out warm all afternoon. What do you do?",
+        "choices": [
+         "Throw it out",
+         "Reheat it to 165°F",
+         "Fry it hot"
+        ],
+        "answer": 0,
+        "explain": "The Bacillus cereus toxin survives heat."
+       }
+      ]
      },
      "knowledge": {
       "title": "Cross-contamination and board colors",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Cross-contamination is the transfer of microorganisms from one food or surface to another, usually from raw meat to something that won't be cooked, by way of hands, knives, boards, or towels.",
+       "Commercial kitchens color-code cutting boards: red for raw meat, yellow for raw poultry, blue for raw fish, green for produce. At home, two boards cover it: one only for raw meat, poultry, and fish, and one for everything else.",
+       "With a single board, work from clean to raw: ready-to-eat foods and produce first, raw meat last, then wash the board, knife, and your hands in hot, soapy water.",
+       "Don't rinse raw poultry; it sprays bacteria around the sink and doesn't remove them. Cooked food goes on a clean plate, never the one that held it raw. Wash your hands after handling raw meat, eggs, or their packaging."
+      ],
+      "steps": [
+       "Choose one cutting board for raw meat, poultry, and fish only, and mark it.",
+       "Go through this week's recipe and list every step that involves raw chicken or raw egg: what it touches, and where that gets washed."
+      ],
+      "quiz": [
+       {
+        "q": "With one cutting board, what order do you work in?",
+        "choices": [
+         "Produce first, raw chicken last",
+         "Raw chicken first, produce last",
+         "Order doesn't matter"
+        ],
+        "answer": 0,
+        "explain": "Anything cut after raw meat on the same board picks up its bacteria."
+       },
+       {
+        "q": "Should you rinse raw chicken?",
+        "choices": [
+         "No, it spreads bacteria without removing them",
+         "Yes, it washes bacteria off",
+         "Only if it's slippery"
+        ],
+        "answer": 0,
+        "explain": "Cooking to 165°F is what makes chicken safe."
+       },
+       {
+        "q": "The chicken is cooked. Where does it go?",
+        "choices": [
+         "A clean plate",
+         "The plate it sat on raw",
+         "The raw-meat board"
+        ],
+        "answer": 0,
+        "explain": "Anything that held raw meat still carries its bacteria."
+       }
+      ]
      },
      "sabbath": {
-      "title": "Store a dish safely for the Sabbath",
-      "minutes": 45
+      "title": "Make a dish ahead and store it",
+      "minutes": 45,
+      "body": [
+       "This week puts the unit together: cook a dish ahead, cool it fast, and store it so it's safe and good when it's eaten. Many families do this before the Sabbath so they can rest; it works just as well for a busy weeknight.",
+       "Stored food stays out of the danger zone: cold at 40°F or below, or hot at 140°F or above if it's being held for a meal.",
+       "Braises like chicken adobo improve after a night in the fridge, which makes them good make-ahead choices."
+      ],
+      "steps": [
+       "Pick a dish from this week to make ahead: the fried rice, chicken adobo, or something your family will eat later in the week.",
+       "Cook it a day or two before it's needed, and cool it quickly in shallow containers (week 2).",
+       "Cover and label it (week 1), and store it on a shelf, not in the door, which runs warmer.",
+       "Confirm the fridge is at 40°F or below.",
+       "If your family holds food hot for a meal, check that it stays at 140°F or above."
+      ],
+      "quiz": [
+       {
+        "q": "Where should make-ahead food be stored in the fridge?",
+        "choices": [
+         "On a shelf",
+         "In the door",
+         "On top"
+        ],
+        "answer": 0,
+        "explain": "The door warms up every time it opens."
+       },
+       {
+        "q": "What temperature does hot-held food need to stay at?",
+        "choices": [
+         "140°F or above",
+         "100°F or above",
+         "165°F or above"
+        ],
+        "answer": 0,
+        "explain": "Below 140°F, it's in the danger zone."
+       }
+      ]
      }
     },
     {
      "week": 4,
      "unit": 1,
-     "skill": "binders",
+     "skill": "temping-meat",
      "recipe": "meatloaf",
      "options": [
-      "lamb-kofta",
-      "swedish-meatballs"
+      "lamb-kofta"
      ],
      "mastery": true,
      "drill": {
       "title": "Set up a clean station unaided",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Set up your own clean station without help. An adult checks it against the list but doesn't step in."
+      ],
+      "steps": [
+       "Clear the counter of anything you won't use. Wash it with hot, soapy water and dry it.",
+       "Wash your hands with soap for at least 20 seconds.",
+       "Set out both cutting boards, raw-meat and general, each on a damp paper towel.",
+       "Set out a plate for raw meat, a separate plate for cooked food, and a bowl for scraps.",
+       "Calibrate the thermometer in ice water (week 1) and keep it within reach.",
+       "Fill one side of the sink or a dishpan with hot, soapy water for washing as you go.",
+       "Have the adult check your setup against this list, then cook this week's recipe from it."
+      ],
+      "quiz": [
+       {
+        "q": "How long should you wash your hands?",
+        "choices": [
+         "At least 20 seconds",
+         "5 seconds",
+         "2 minutes"
+        ],
+        "answer": 0,
+        "explain": "That's the CDC guideline, with soap, scrubbing every surface."
+       },
+       {
+        "q": "Why two plates?",
+        "choices": [
+         "One for raw meat, one for cooked food",
+         "One per person",
+         "A spare"
+        ],
+        "answer": 0,
+        "explain": "Cooked food never goes back on the raw plate."
+       }
+      ]
      },
      "knowledge": {
       "title": "Food safety quiz",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "This quiz covers the whole unit. Answer from memory, then review anything you missed in weeks 1 to 3."
+      ],
+      "quiz": [
+       {
+        "q": "What is the danger zone?",
+        "choices": [
+         "40°F to 140°F",
+         "0°F to 40°F",
+         "140°F to 165°F"
+        ],
+        "answer": 0,
+        "explain": "Bacteria multiply fastest in this range."
+       },
+       {
+        "q": "What temperature does chicken need to reach?",
+        "choices": [
+         "165°F",
+         "160°F",
+         "145°F"
+        ],
+        "answer": 0,
+        "explain": "All poultry, whole or ground."
+       },
+       {
+        "q": "What temperature does ground beef need to reach?",
+        "choices": [
+         "160°F",
+         "145°F",
+         "165°F"
+        ],
+        "answer": 0,
+        "explain": "Ground beef and ground lamb are 160°F."
+       },
+       {
+        "q": "Why can a steak be eaten rare when a burger can't?",
+        "choices": [
+         "A steak's bacteria are on the surface, which the sear kills",
+         "Steak is a cleaner meat",
+         "Burgers cook faster"
+        ],
+        "answer": 0,
+        "explain": "Grinding mixes surface bacteria through the whole patty."
+       },
+       {
+        "q": "What does a calibrated thermometer read in ice water?",
+        "choices": [
+         "32°F",
+         "40°F",
+         "0°F"
+        ],
+        "answer": 0,
+        "explain": "That's the reference point for checking it."
+       },
+       {
+        "q": "How long can cooked food sit out before refrigerating?",
+        "choices": [
+         "2 hours, or 1 hour above 90°F",
+         "4 hours",
+         "Until it's cool"
+        ],
+        "answer": 0,
+        "explain": "After that, throw it out."
+       },
+       {
+        "q": "How do you cool a pot of soup quickly?",
+        "choices": [
+         "Ice bath, stirring, then shallow containers",
+         "Put the whole pot in the fridge",
+         "Leave it on the stove overnight"
+        ],
+        "answer": 0,
+        "explain": "140°F to 70°F within 2 hours, then 40°F within 4 more."
+       },
+       {
+        "q": "With one cutting board, what goes last?",
+        "choices": [
+         "Raw meat",
+         "Vegetables",
+         "Bread"
+        ],
+        "answer": 0,
+        "explain": "Then the board gets washed."
+       },
+       {
+        "q": "How hot should reheated leftovers get?",
+        "choices": [
+         "165°F",
+         "140°F",
+         "Warm to the touch"
+        ],
+        "answer": 0,
+        "explain": "Measured in the center."
+       },
+       {
+        "q": "What is the USDA guideline for cooked meat and poultry leftovers in the fridge?",
+        "choices": [
+         "3 to 4 days",
+         "2 weeks",
+         "1 month"
+        ],
+        "answer": 0,
+        "explain": "Many other leftovers keep longer, but risk still rises with time, because Listeria grows even in the fridge."
+       },
+       {
+        "q": "Rice sat out warm all afternoon. What do you do?",
+        "choices": [
+         "Throw it out",
+         "Reheat it to 165°F",
+         "Fry it"
+        ],
+        "answer": 0,
+        "explain": "Bacillus cereus toxin survives reheating."
+       }
+      ]
      },
      "sabbath": {
       "title": "Reheat a stored dish to 165°F",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Reheated leftovers need to reach 165°F at the center of the thickest piece. Warm to the touch isn't the same thing.",
+       "Reheat only what you'll eat. Each round of reheating and cooling costs quality and adds time in the danger zone."
+      ],
+      "steps": [
+       "Choose a stored dish: this week's meatloaf, or something you made ahead.",
+       "Oven: portions in a baking dish with a splash of water or broth, covered with foil, at 350°F. Microwave: cover loosely, and stir or rotate every minute or two.",
+       "Check the center of the thickest piece. Keep heating until it reads 165°F.",
+       "Note the method and how long it took.",
+       "Serve it, or put it back in the fridge within 2 hours. Don't reheat the same portion twice."
+      ],
+      "quiz": [
+       {
+        "q": "Where do you check the temperature of reheated food?",
+        "choices": [
+         "The center of the thickest piece",
+         "The edge",
+         "The top surface"
+        ],
+        "answer": 0,
+        "explain": "The center heats last."
+       },
+       {
+        "q": "Why stir or rotate food in the microwave?",
+        "choices": [
+         "Microwaves heat unevenly and leave cold spots",
+         "To keep it moist",
+         "To brown it"
+        ],
+        "answer": 0,
+        "explain": "A cold spot can still be in the danger zone."
+       }
+      ]
      }
     },
     {
@@ -8425,7 +9590,7 @@ export const LIBRARY = {
      "skill": "yeast-dough",
      "recipe": "challah",
      "options": [
-      "homemade-pizza"
+      "cinnamon-rolls"
      ],
      "mastery": true,
      "drill": {
@@ -8445,8 +9610,9 @@ export const LIBRARY = {
      "week": 9,
      "unit": 3,
      "skill": "dicing",
-     "recipe": "fish-tacos",
+     "recipe": "beef-tacos-pico",
      "options": [
+      "fish-tacos",
       "ratatouille",
       "minestrone"
      ],
@@ -8469,7 +9635,7 @@ export const LIBRARY = {
      "skill": "fine-chopping",
      "recipe": "tabbouleh",
      "options": [
-      "chimichurri-steak",
+      "kuku-sabzi",
       "fattoush"
      ],
      "drill": {
@@ -8513,7 +9679,7 @@ export const LIBRARY = {
      "skill": "dicing",
      "recipe": "israeli-salad",
      "options": [
-      "chopped-salad-vinaigrette"
+      "ratatouille"
      ],
      "mastery": true,
      "drill": {
@@ -8643,7 +9809,7 @@ export const LIBRARY = {
      "skill": "cooking-legumes",
      "recipe": "red-beans-and-rice",
      "options": [
-      "chana-masala"
+      "cuban-black-beans"
      ],
      "drill": {
       "title": "Quick-soak vs. overnight soak",
@@ -8664,7 +9830,8 @@ export const LIBRARY = {
      "skill": "cooking-grains",
      "recipe": "rice-pilaf",
      "options": [
-      "jollof-rice"
+      "jollof-rice",
+      "bulgur-pilaf"
      ],
      "drill": {
       "title": "Toast grains in fat before liquid",
@@ -8704,6 +9871,90 @@ export const LIBRARY = {
     {
      "week": 21,
      "unit": 6,
+     "skill": "cooking-fish",
+     "recipe": "baked-salmon",
+     "options": [
+      "honey-soy-salmon",
+      "bbq-salmon"
+     ],
+     "drill": {
+      "title": "Check a fillet for pin bones",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Fins and scales: clean vs. unclean species",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Plan a fish dish that serves well cold",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 22,
+     "unit": 6,
+     "skill": "cooking-fish",
+     "recipe": "steamed-fish",
+     "drill": {
+      "title": "Judge freshness by smell, eyes, flesh",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Store-bought fish: reading labels and names",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Steam fish and chill for a cold plate",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 23,
+     "unit": 6,
+     "skill": "cooking-fish",
+     "recipe": "poached-cod",
+     "options": [
+      "moqueca"
+     ],
+     "drill": {
+      "title": "Test doneness by flaking",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Why fish cooks faster than meat",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Make tomato sauce ahead; poach Friday",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 24,
+     "unit": 6,
+     "skill": "cooking-fish",
+     "recipe": "pan-seared-trout",
+     "options": [
+      "blackened-cod",
+      "pineapple-teriyaki-salmon"
+     ],
+     "mastery": true,
+     "drill": {
+      "title": "Sear a fillet skin-side down: dry it, press it flat, wait for it to release",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Species ID quiz",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Cold fish salad for the Sabbath table",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 25,
+     "unit": 7,
      "skill": "roasting",
      "recipe": "roasted-vegetables",
      "options": [
@@ -8723,8 +9974,8 @@ export const LIBRARY = {
      }
     },
     {
-     "week": 22,
-     "unit": 6,
+     "week": 26,
+     "unit": 7,
      "skill": "handling-poultry",
      "recipe": "shish-taouk",
      "options": [
@@ -8747,8 +9998,8 @@ export const LIBRARY = {
      }
     },
     {
-     "week": 23,
-     "unit": 6,
+     "week": 27,
+     "unit": 7,
      "skill": "roasting",
      "recipe": "roast-chicken-pieces",
      "options": [
@@ -8768,8 +10019,8 @@ export const LIBRARY = {
      }
     },
     {
-     "week": 24,
-     "unit": 6,
+     "week": 28,
+     "unit": 7,
      "skill": "roasting",
      "recipe": "roast-chicken",
      "mastery": true,
@@ -8783,111 +10034,6 @@ export const LIBRARY = {
      },
      "sabbath": {
       "title": "Roast chicken as the Sabbath centerpiece",
-      "minutes": 45
-     }
-    },
-    {
-     "week": 25,
-     "unit": 7,
-     "skill": "cooking-fish",
-     "recipe": "baked-salmon",
-     "options": [
-      "bbq-salmon",
-      "honey-soy-salmon",
-      "pineapple-teriyaki-salmon",
-      "blackened-cod",
-      "coconut-crusted-fish",
-      "moqueca"
-     ],
-     "drill": {
-      "title": "Check a fillet for pin bones",
-      "minutes": 40
-     },
-     "knowledge": {
-      "title": "Fins and scales: clean vs. unclean species",
-      "minutes": 35
-     },
-     "sabbath": {
-      "title": "Plan a fish dish that serves well cold",
-      "minutes": 45
-     }
-    },
-    {
-     "week": 26,
-     "unit": 7,
-     "skill": "cooking-fish",
-     "recipe": "steamed-fish",
-     "options": [
-      "pineapple-teriyaki-salmon",
-      "honey-soy-salmon",
-      "bbq-salmon",
-      "blackened-cod",
-      "coconut-crusted-fish",
-      "moqueca"
-     ],
-     "drill": {
-      "title": "Judge freshness by smell, eyes, flesh",
-      "minutes": 40
-     },
-     "knowledge": {
-      "title": "Store-bought fish: reading labels and names",
-      "minutes": 35
-     },
-     "sabbath": {
-      "title": "Steam fish and chill for a cold plate",
-      "minutes": 45
-     }
-    },
-    {
-     "week": 27,
-     "unit": 7,
-     "skill": "cooking-fish",
-     "recipe": "poached-cod",
-     "options": [
-      "moqueca",
-      "pineapple-teriyaki-salmon",
-      "honey-soy-salmon",
-      "bbq-salmon",
-      "blackened-cod",
-      "coconut-crusted-fish"
-     ],
-     "drill": {
-      "title": "Test doneness by flaking",
-      "minutes": 40
-     },
-     "knowledge": {
-      "title": "Why fish cooks faster than meat",
-      "minutes": 35
-     },
-     "sabbath": {
-      "title": "Make tomato sauce ahead; poach Friday",
-      "minutes": 45
-     }
-    },
-    {
-     "week": 28,
-     "unit": 7,
-     "skill": "cooking-fish",
-     "recipe": "pan-seared-trout",
-     "options": [
-      "blackened-cod",
-      "coconut-crusted-fish",
-      "pineapple-teriyaki-salmon",
-      "honey-soy-salmon",
-      "bbq-salmon",
-      "moqueca"
-     ],
-     "mastery": true,
-     "drill": {
-      "title": "Skin a fillet",
-      "minutes": 40
-     },
-     "knowledge": {
-      "title": "Species ID quiz",
-      "minutes": 35
-     },
-     "sabbath": {
-      "title": "Cold fish salad for the Sabbath table",
       "minutes": 45
      }
     },
@@ -8956,7 +10102,6 @@ export const LIBRARY = {
      "skill": "building-soup",
      "recipe": "minestrone",
      "options": [
-      "matzo-ball-soup",
       "red-lentil-soup"
      ],
      "mastery": true,
@@ -9030,7 +10175,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Shop and do Thursday prep",
+      "title": "Serve the practice dish at the Sabbath meal and note what to change",
       "minutes": 45
      }
     },
@@ -9039,11 +10184,11 @@ export const LIBRARY = {
      "unit": 9,
      "kind": "capstone",
      "drill": {
-      "title": "Run the kitchen unaided",
+      "title": "Shop and do Thursday prep",
       "minutes": 40
      },
      "knowledge": {
-      "title": "Reflection: what worked, what to change",
+      "title": "Reflection, the Sunday after: what worked, what to change",
       "minutes": 35
      },
      "sabbath": {
@@ -9282,7 +10427,7 @@ export const LIBRARY = {
     },
     {
      "id": "baked-salmon",
-     "title": "Baked salmon with lemon and herbs",
+     "title": "Baked fish with lemon and herbs",
      "cuisine": "american",
      "skills": [
       "cooking-fish"
@@ -9294,7 +10439,7 @@ export const LIBRARY = {
        "herby-lemony"
       ],
       "heat": "mild",
-      "budget": "$$$",
+      "budget": "$$",
       "familiar": "everyday",
       "veggies": "light"
      },
@@ -9402,6 +10547,86 @@ export const LIBRARY = {
       "veggies": "light"
      },
      "art": "soup"
+    },
+    {
+     "id": "beef-tacos-pico",
+     "title": "Beef tacos with pico de gallo",
+     "cuisine": "mexican",
+     "skills": [
+      "dicing"
+     ],
+     "minutes": 45,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "kuku-sabzi",
+     "title": "Kuku sabzi",
+     "cuisine": "persian",
+     "skills": [
+      "fine-chopping"
+     ],
+     "minutes": 60,
+     "tags": {
+      "protein": "eggs",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "adventurous",
+      "veggies": "lots"
+     },
+     "art": "side"
+    },
+    {
+     "id": "cuban-black-beans",
+     "title": "Cuban black beans and rice",
+     "cuisine": "cuban",
+     "skills": [
+      "cooking-legumes"
+     ],
+     "minutes": 120,
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "art": "side"
+    },
+    {
+     "id": "bulgur-pilaf",
+     "title": "Bulgur pilaf with chickpeas",
+     "cuisine": "turkish",
+     "skills": [
+      "cooking-grains"
+     ],
+     "minutes": 40,
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "art": "side"
     }
    ],
    "titles": {
@@ -9412,26 +10637,25 @@ export const LIBRARY = {
     "smash-burgers": "Smash burgers + quick pickles",
     "lamb-kofta": "Lamb kofta with yogurt sauce",
     "chicken-fried-rice": "Chicken fried rice",
-    "jollof-rice": "Jollof rice with chicken",
+    "chicken-adobo": "Chicken adobo",
     "meatloaf": "Meatloaf with glaze",
-    "swedish-meatballs": "Swedish meatballs",
     "pita-bread": "Pita bread",
     "homemade-pizza": "Homemade pizza",
     "sandwich-loaf": "Sandwich loaf",
     "cinnamon-rolls": "Cinnamon rolls",
     "dinner-rolls": "Dinner rolls",
     "challah": "Challah",
+    "beef-tacos-pico": "Beef tacos with pico de gallo",
     "fish-tacos": "Pico de gallo + Baja fish tacos",
     "ratatouille": "Ratatouille",
     "minestrone": "Minestrone",
     "tabbouleh": "Tabbouleh",
-    "chimichurri-steak": "Chimichurri steak",
+    "kuku-sabzi": "Kuku sabzi",
     "fattoush": "Fattoush",
     "vegetable-stir-fry": "Vegetable stir-fry with tofu",
     "spring-rolls": "Fresh spring rolls",
     "chicken-fajitas": "Chicken fajitas",
     "israeli-salad": "Israeli salad",
-    "chopped-salad-vinaigrette": "Chickpea chopped salad + vinaigrette",
     "garlic-green-beans": "Garlic green beans",
     "japchae": "Japchae",
     "beef-picadillo": "Beef picadillo",
@@ -9445,9 +10669,21 @@ export const LIBRARY = {
     "red-lentil-soup": "Red lentil soup (mercimek)",
     "misir-wot": "Misir wot",
     "red-beans-and-rice": "Red beans and rice",
+    "cuban-black-beans": "Cuban black beans and rice",
     "rice-pilaf": "Rice pilaf",
+    "jollof-rice": "Jollof rice with chicken",
+    "bulgur-pilaf": "Bulgur pilaf with chickpeas",
     "mujaddara": "Mujaddara",
     "koshari": "Koshari",
+    "baked-salmon": "Baked fish with lemon and herbs",
+    "honey-soy-salmon": "Broiled honey-soy salmon",
+    "bbq-salmon": "BBQ-rubbed salmon",
+    "steamed-fish": "Steamed fish with ginger and scallion",
+    "poached-cod": "Cod poached in tomato sauce",
+    "moqueca": "Moqueca (Brazilian coconut fish stew)",
+    "pan-seared-trout": "Pan-seared trout",
+    "blackened-cod": "Blackened cod",
+    "pineapple-teriyaki-salmon": "Pineapple teriyaki salmon",
     "roasted-vegetables": "Roasted vegetables",
     "shoestring-fries": "Baked shoestring fries",
     "shish-taouk": "Shish taouk",
@@ -9457,20 +10693,11 @@ export const LIBRARY = {
     "roast-chicken-pieces": "Roast chicken pieces",
     "bbq-pulled-chicken": "BBQ pulled chicken + coleslaw",
     "roast-chicken": "Roast chicken + pan gravy",
-    "baked-salmon": "Baked salmon with lemon and herbs",
-    "bbq-salmon": "BBQ-rubbed salmon",
-    "honey-soy-salmon": "Broiled honey-soy salmon",
-    "pineapple-teriyaki-salmon": "Pineapple teriyaki salmon",
-    "blackened-cod": "Blackened cod",
-    "coconut-crusted-fish": "Coconut-crusted fish with pineapple salsa",
-    "moqueca": "Moqueca (Brazilian coconut fish stew)",
-    "steamed-fish": "Steamed fish with ginger and scallion",
-    "poached-cod": "Cod poached in tomato sauce",
-    "pan-seared-trout": "Pan-seared trout",
     "vegetable-stock": "Vegetable stock",
     "chicken-stock": "Chicken stock",
     "matzo-ball-soup": "Matzo ball soup from a whole chicken",
     "grilled-cheese-tomato-soup": "Grilled cheese + tomato soup",
+    "chopped-salad-vinaigrette": "Chickpea chopped salad + vinaigrette",
     "chicken-caesar": "Chicken Caesar + homemade dressing & croutons",
     "beef-stew": "Beef stew",
     "peanut-stew": "Peanut stew (maafe)"

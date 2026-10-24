@@ -150,6 +150,49 @@
           ]
         }
       }
+    },
+    {
+      "id": "easy-prep",
+      "title": "Easy-prep shakshuka",
+      "tags": {
+        "protein": "eggs",
+        "flavors": ["rich-tomato", "warm-spices"],
+        "heat": "some",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "ingredients": {
+        "drop": ["garlic"],
+        "add": [{ "ingredient": "garlic-minced-jarred", "amount": 2, "unit": "tsp" }],
+        "order": [
+          "olive-oil",
+          "onion-yellow",
+          "bell-pepper-red",
+          "+0",
+          "cumin-ground",
+          "paprika-smoked",
+          "chili-flakes",
+          "tomatoes-crushed",
+          "salt",
+          "black-pepper",
+          "egg",
+          "parsley@To serve",
+          "feta@To serve",
+          "pita@To serve"
+        ]
+      },
+      "steps": {
+        "change": {
+          "chop": {
+            "id": "chop",
+            "text": "Dice the onion and peppers into pieces about the size of a pea. Measure the jarred garlic into its own little pile.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "tip": "Hold the food with your other hand shaped like a claw: fingertips tucked under, knuckles in front. The flat side of the knife slides along your knuckles, so the blade never gets near your fingertips."
+          }
+        }
+      }
     }
   ]
 }

@@ -59,6 +59,7 @@
     { "id": "handling-poultry", "name": "Handling raw poultry", "idea": "Raw chicken goes on its own board, never gets rinsed, and is followed by washing hands and everything it touched.", "pin": { "shape": "shield", "color": "#9A4E2E", "glyph": "knife" } },
     { "id": "cooking-fish", "name": "Cooking fish", "idea": "Fish is delicate and cooks fast; it's done when it turns opaque and flakes, at 145°F.", "pin": { "shape": "circle", "color": "#2E6F8E", "glyph": "drop" } },
     { "id": "building-soup", "name": "Building a soup", "idea": "A soup is built in layers: a base, a good stock, and seasoning tasted at every stage.", "pin": { "shape": "hex", "color": "#7A5A2E", "glyph": "pot" } },
-    { "id": "blanching", "name": "Blanching", "idea": "A quick dip in boiling water, then straight into ice water, keeps a vegetable bright and crisp and stops it cooking.", "pin": { "shape": "circle", "color": "#3E8E4A", "glyph": "drop" } }
+    { "id": "blanching", "name": "Blanching", "idea": "A quick dip in boiling water, then straight into ice water, keeps a vegetable bright and crisp and stops it cooking.", "pin": { "shape": "circle", "color": "#3E8E4A", "glyph": "drop" } },
+    { "id": "cooling-reheating", "name": "Cooling and reheating", "idea": "Cooked food cools fast in shallow containers, goes in the fridge within 2 hours, and is reheated to 165°F.", "pin": { "shape": "hex", "color": "#3A6E8E", "glyph": "drop" } }
   ]
 }

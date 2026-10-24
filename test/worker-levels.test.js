@@ -56,7 +56,7 @@ test('a Level course: one week a week, its recipes in week order, "Week 1 of 36"
   const q = await card(a);
   assert.deepEqual([q.level.id, q.level.name, q.level.weeks, q.level.week], ['level-3', 'Level 3 Cook', 36, 1]);
   assert.deepEqual(q.this_week.lessons.map((x) => [x.lesson_id, x.label]), [['shakshuka', 'Week 1']]);
-  // Thick burgers (week 2) isn't written, so week 3's recipe is next, like a planned dish (§6.18).
+  // Thick burgers (week 2) is a Level-only lesson, not served to the app yet, so week 3's recipe is next, like a planned dish (§6.18).
   assert.deepEqual(q.next_week.lessons.map((x) => [x.lesson_id, x.label]), [['chicken-fried-rice', 'Week 3']]);
   assert.equal(q.total, 4, 'the written recipes are scheduled');
   assert.equal(q.unwritten, 32, 'the rest wait, the weeks with no recipe too');
@@ -142,7 +142,7 @@ test("the kitchen shows this week's recipe and three parts, and the mastery reci
   assert.equal(lv.week.week, 1);
   assert.deepEqual([lv.week.unit_name, lv.week.recipe, lv.week.recipe_written, lv.week.recipe_done], ['Food safety science', 'shakshuka', true, false]);
   assert.deepEqual(lv.week.parts.map((x) => [x.part, x.title, x.minutes, x.done_at]), [
-    ['drill', 'Calibrate a thermometer in ice water', 40, null], ['knowledge', 'Danger zone and how bacteria grow', 35, null], ['sabbath', 'Label and date containers', 45, null]]);
+    ['drill', 'Calibrate a thermometer in ice water', 40, null], ['knowledge', 'Danger zone and how microorganisms grow', 35, null], ['sabbath', 'Label and date containers', 45, null]]);
   assert.ok(lv.mastery.includes('minestrone') && lv.mastery.includes('meatloaf') && !lv.mastery.includes('shakshuka'));
   assert.equal(lv.sabbath, saturday);
   assert.deepEqual(lv.open, []);

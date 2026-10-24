@@ -355,7 +355,7 @@
       "title": "Chicken fried rice",
       "unit": 2,
       "cuisine": "chinese",
-      "skills": ["stir-frying", "dicing"],
+      "skills": ["stir-frying", "dicing", "cooling-reheating"],
       "skill": "High-heat stir-fry, day-old rice",
       "image": "dishes/chicken-fried-rice.png",
       "safety": "adult-nearby",
@@ -757,11 +757,11 @@
       "unit": 3,
       "cuisine": "louisiana",
       "skills": ["flavor-base", "sauteing"],
-      "skill": "The trinity, deglazing, rice cooked in the pot",
+      "skill": "An onion, celery, and pepper base, deglazing, rice cooked in the pot",
       "image": "dishes/chicken-jambalaya.png",
       "safety": "adult-nearby",
       "minutes": 75,
-      "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, the trinity sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
+      "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, onion, celery, and green pepper sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
       "main": ["chicken thighs", "smoked chicken andouille", "onion, celery, green pepper", "rice", "tomatoes"],
       "method": "stove",
       "tags": {
@@ -1572,7 +1572,7 @@
       }
     },
     { "id": "granola", "title": "Homemade granola", "unit": 6, "cuisine": "american", "skills": ["oven-browning"], "skill": "Oven browning, stirring partway", "image": "dishes/granola.png", "safety": "adult-nearby", "minutes": 50, "estimated": true, "about": "Crunchy oven-toasted oats, nuts, and honey. A breakfast dish.", "main": ["rolled oats", "nuts or seeds", "honey", "oil", "dried fruit"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
-    { "id": "meatloaf", "title": "Meatloaf with glaze", "unit": 6, "cuisine": "american", "skills": ["binders"], "skill": "Binders, thermometer", "image": "dishes/meatloaf.png", "safety": "adult-nearby", "minutes": 90, "estimated": true, "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.", "main": ["ground beef", "onion", "eggs", "breadcrumbs", "ketchup"], "method": "oven", "tags": { "protein": "beef", "flavors": ["sweet-savory", "mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" }, "pickOne": "binders" },
+    { "id": "meatloaf", "title": "Meatloaf with glaze", "unit": 6, "cuisine": "american", "skills": ["binders", "temping-meat"], "skill": "Binders, thermometer", "image": "dishes/meatloaf.png", "safety": "adult-nearby", "minutes": 90, "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.", "main": ["ground beef", "onion", "eggs", "rolled oats", "ketchup"], "method": "oven", "tags": { "protein": "beef", "flavors": ["sweet-savory", "mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" }, "pickOne": "binders" },
     {
       "id": "lamb-kofta",
       "title": "Lamb kofta with yogurt sauce",
