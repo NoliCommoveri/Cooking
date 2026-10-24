@@ -89,7 +89,7 @@
 .q-banner.solo .ico{color:var(--q-mana)}
 .banners{display:grid;gap:10px}
 .banners p{margin:2px 0 0;font-size:13px;color:var(--q-dim)}
-.q-cook{display:grid;gap:14px}
+.q-cook{display:grid;gap:14px;scroll-margin-top:10px}
 .q-stages{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
 .q-stages i{height:12px;background:#2B3260;box-shadow:inset 0 0 0 2px var(--q-edge)}
 .q-stages i.done{background:var(--q-gold)}
@@ -307,7 +307,7 @@ use.pop{animation:dropin .42s cubic-bezier(.3,.7,.4,1) both}
 .p-tool.on .got{display:grid}
 
 /* cook */
-.p-cook{display:grid;gap:14px}
+.p-cook{display:grid;gap:14px;scroll-margin-top:10px}
 .p-banner{display:flex;align-items:center;gap:12px;background:var(--p-butter);color:var(--p-ink);padding:10px 34px 10px 30px;clip-path:polygon(0 0,100% 0,calc(100% - 16px) 50%,100% 100%,0 100%,16px 50%);font-size:15px;line-height:1.3}
 .p-banner .ico{width:40px;height:40px;flex:none}
 .p-banner b{font-family:var(--p-disp);font-weight:400;font-size:20px;display:block}

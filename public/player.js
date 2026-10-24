@@ -531,7 +531,7 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
 
   // ---------- drawing and events ----------
   const STAGES = { card: cardView, learn: learnView, prep: prepView, cook: cookView, reflect: reflectView, done: doneView };
-  let wakeTipShown = false, lastDing = 0, drawn = false;
+  let wakeTipShown = false, lastDing = 0, drawn = false, shown = null;
   async function draw(focusTop = true) {
     // A recipe with no Learn cards goes straight to Prep.
     if (S.stage === 'learn' && !learnCards().length) S.stage = 'prep';
@@ -539,9 +539,19 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
     const muted = isMuted();
     const back = `<div class="pl-top"><a class="back" href="#" data-act="exit">← ${preview ? esc(exitLabel) : quest ? 'Quest board' : 'Recipe box'}</a><button type="button" class="mutebtn" data-act="mute" aria-pressed="${muted}" aria-label="${muted ? 'Sound effects off. Turn them on' : 'Sound effects on. Turn them off'}">${ic(muted ? 'i-mute' : 'i-sound')}</button></div>`;
     mount.innerHTML = `<section class="kitchen qx player" data-kt="${quest ? 'quest' : 'passport'}">${back}${previewBar()}${STAGES[S.stage]()}${whyView()}</section>`;
-    // In the manager's preview the lesson sits under the page's own header, so go to the lesson's top.
-    if (focusTop) { if (!preview) window.scrollTo(0, 0); else if (drawn) mount.scrollIntoView(); }
+    // Moving between cook steps keeps the step anchored where it was: the
+    // safety banner at the top of the screen, with Next step under it, not
+    // the page's top (owner, 2026-10-24). A new stage starts at the lesson's
+    // top, which is the page's top in the app; on the demo and in the
+    // manager's preview the lesson sits under the page's own header.
+    if (focusTop) {
+      const cook = S.stage === 'cook' && shown === 'cook' ? mount.querySelector('.q-cook, .p-cook') : null;
+      if (cook) cook.scrollIntoView({ block: 'start' });
+      else if (!preview) window.scrollTo(0, Math.max(0, mount.getBoundingClientRect().top + window.scrollY));
+      else if (drawn) mount.scrollIntoView();
+    }
     drawn = true;
+    shown = S.stage;
     if (S.stage !== 'cook' && voice?.on) voice.stop();
     const awake = S.stage === 'prep' || S.stage === 'cook';
     const ok = await keepAwake(awake);

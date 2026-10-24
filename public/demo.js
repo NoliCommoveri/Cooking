@@ -49,11 +49,11 @@ const { labels: NUM, total: TOTAL } = numberCourse(C.dishes);
 // The two tracks (owner, 2026-10-24): Cook Around the World, recipes only,
 // and Structured Progression, the Levels as full courses.
 const TRACKS = {
-  catw: { name: 'Cook Around the World', tabs: [['try', 'Try it'], ['shop', 'Shopping'], ['course', 'Course'], ['skills', 'Skills']] },
-  sp: { name: 'Structured Progression', tabs: [['week', 'Try a week'], ['levels', 'The Levels'], ['progress', 'Progress']] },
+  catw: { name: 'Cook Around the World', short: 'Recipes from around the world', tabs: [['try', 'Try it'], ['shop', 'Shopping'], ['course', 'Course'], ['skills', 'Skills']] },
+  sp: { name: 'Structured Progression', short: 'Complete courses from the fundamentals', tabs: [['week', 'Try a week'], ['levels', 'The Levels'], ['progress', 'Progress']] },
 };
 // What a visitor has chosen. Kept for this tab only.
-let V = { track: 'catw', theme: 'quest', audience: 'kid', diet: [], tab: 'try', checked: [], shop: { step: 'needs', count: 0, have: [] }, lvWeek: 1, lvDone: [] };
+let V = { track: 'catw', open: null, theme: 'quest', audience: 'kid', diet: [], tab: 'try', checked: [], shop: { step: 'needs', count: 0, have: [] }, lvWeek: 1, lvDone: [] };
 try { V = { ...V, ...JSON.parse(sessionStorage.getItem('cpr.demo')) }; } catch { /* first visit */ }
 V.shop = { step: 'needs', count: 0, have: [], ...(V.shop ?? {}) };
 if (!TRACKS[V.track]?.tabs.some(([k]) => k === V.tab)) V = { ...V, track: 'catw', tab: 'try' };
@@ -71,22 +71,23 @@ function header() {
     <p class="by">By Immotus Apps</p></section>
     <div class="d-cta"><a class="hbtn pri" href="/#/signup">Sign up</a><a class="hbtn" href="/#/login">Log in</a></div>
     <h2 class="d-tracks-h">Two ways to learn</h2>
-    <div class="d-tracks">
-      <article class="d-track ${V.track === 'catw' ? 'on' : ''}"><h3>Cook Around the World</h3>
-        <p class="who">For older teens and adults who want to practise their techniques and experiment with a wide range of dishes.</p>
+    <div class="d-tracks">${Object.entries(TRACKS).map(([k, T]) => `<button type="button" class="d-trackbtn" data-pick="${k}" aria-pressed="${V.track === k}" aria-expanded="${V.open === k}" aria-controls="track-info"><b>${esc(T.name)}</b><small>${esc(T.short)}</small><i aria-hidden="true">${V.open === k ? '▴' : '▾'}</i></button>`).join('')}</div>
+    ${V.open ? trackInfo(V.open) : ''}`;
+}
+// A track's details, opened from its button under the header.
+function trackInfo(k) {
+  const info = k === 'catw'
+    ? `<p class="who">For older teens and adults who want to practise their techniques and experiment with a wide range of dishes.</p>
         <ul><li><b>Recipes only:</b> ${C.dishes.length} dishes from kitchens around the world, each one teaching a skill</li>
           <li>Cook them in order, or pick what sounds good</li>
-          <li>Homeschool families can grade cooks and print a transcript</li></ul>
-        <button type="button" class="hbtn ${V.track === 'catw' ? 'pri' : ''}" data-track="catw" aria-pressed="${V.track === 'catw'}">Explore Cook Around the World</button>
-        <a class="hbtn link" href="/syllabus/">Review its homeschool syllabus</a></article>
-      <article class="d-track ${V.track === 'sp' ? 'on' : ''}"><h3>Structured Progression</h3>
-        <p class="who">For families teaching cooking from the fundamentals onward, even for young cooks.</p>
+          <li>Homeschool families can grade cooks and print a transcript</li></ul>`
+    : `<p class="who">For families teaching cooking from the fundamentals onward, even for young cooks.</p>
         <ul><li><b>Complete, credit-able courses</b> built on best practices, in four Levels of 36 weeks</li>
           <li>Every week: <b>Knowledge, Drill, Recipe, and Beyond the Recipe</b>, for a full culinary and food-science education</li>
-          <li>Mastery checks, hours toward credit, and a transcript</li></ul>
-        <button type="button" class="hbtn ${V.track === 'sp' ? 'pri' : ''}" data-track="sp" aria-pressed="${V.track === 'sp'}">Explore Structured Progression</button>
-        <a class="hbtn link" href="/syllabus/structured-progression/">Review its homeschool syllabus</a></article>
-    </div>`;
+          <li>Mastery checks, hours toward credit, and a transcript</li></ul>`;
+  const syllabus = k === 'catw' ? '/syllabus/' : '/syllabus/structured-progression/';
+  return `<article class="d-track" id="track-info"><h3>${esc(TRACKS[k].name)}</h3>${info}
+    <div class="d-cta"><button type="button" class="hbtn pri" data-track="${k}">Explore ${esc(TRACKS[k].name)}</button><a class="hbtn link" href="${syllabus}">Review its homeschool syllabus</a></div></article>`;
 }
 const seg = (name, value, options) => `<div class="seg" role="group">${options.map(([v, label]) => `<button type="button" data-set="${name}" data-v="${v}" aria-pressed="${value === v}">${esc(label)}</button>`).join('')}</div>`;
 // What each tab can switch: the theme and who's cooking change lessons and
@@ -343,6 +344,15 @@ root.addEventListener('click', (e) => {
   const t = e.target;
   const set = t.closest('[data-set]'), tab = t.closest('[data-tab]'), openBtn = t.closest('[data-open]'), check = t.closest('[data-check]');
   if (set) { V[set.dataset.set] = set.dataset.v; keep(); return draw(); }
+  // A track's button picks it and opens its details; tapped again, they close.
+  const pick = t.closest('[data-pick]');
+  if (pick) {
+    const k = pick.dataset.pick;
+    V.open = V.open === k ? null : k;
+    if (V.track !== k) { V.track = k; V.tab = TRACKS[k].tabs[0][0]; part = ''; }
+    keep();
+    return draw();
+  }
   const track = t.closest('[data-track]');
   if (track) {
     if (V.track !== track.dataset.track) { V.track = track.dataset.track; V.tab = TRACKS[V.track].tabs[0][0]; part = ''; keep(); draw(); }
