@@ -4000,3 +4000,32 @@ beans.
   "Blanching: why vegetables stay green and crisp; oils and smoke points".
   Minutes unchanged.
 - **Plan §12.3 and §12.7** match. Tests: 338; lint clean.
+
+## 163. 2026-10-24 — Best-fit recipes and Swap recipe (slice 12d)
+
+Phase 12, slice 12d (plan §12.4). The owner confirmed the four picking
+rules. Behind the Next release switch.
+- **Options** (`content/levels/level-3.json`): each week's `swapIns` now
+  start with the workbook's options (§12.7), week 13 with Japchae in place
+  of Beef and broccoli; the swap-ins already there follow. The six options
+  that are approved variations wait for their dish.
+- **Library build:** each Level week carries its skill and options, and the
+  Level's recipe cards carry their tags, so a recipe not written yet is
+  scored by its tags.
+- **Picking** (`src/worker/picks.js`, `levelPlan`): in week order, each week
+  keeps its best option not already in an earlier week; one a profile on the
+  course has cooked comes last; within a fit, a written recipe comes first;
+  a week where nothing fits keeps its own recipe, with a note.
+  `GET /api/picks/level` gives every week's options and other recipes with
+  the skill, with their fit.
+- **Courses** (`src/worker/plan.js`): a new Level course takes the parent's
+  weeks or each week's best fit; editing takes changed weeks; a recipe can't
+  be in two weeks, and a week's Skip stays with the week.
+  `GET/POST /api/courses/<id>/level-week` list a week's recipes and swap one.
+- **Screens:** the course editor shows each week's recipe and fit, with
+  **Change** (the week's options, then "Also teaches the skill"); the
+  course card's Level weeks have **Swap recipe** with Undo. Each week's
+  links sit under its name so long names keep the row's width.
+- Tests: 341 (3 new in `test/worker-levels.test.js`; the earlier Level
+  tests ask for every week's own recipe). Checked in a browser at phone
+  width: a new course's picks, Change, Swap recipe, and the edit page.

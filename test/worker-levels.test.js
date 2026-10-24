@@ -23,7 +23,9 @@ async function setup({ preview = true } = {}) {
   const [ava, ben] = ['Ava', 'Ben'].map((n) => profiles.find((p) => p.name === n).id);
   return { env, a, ava, ben, fid };
 }
-const level = (a, pids, start = sunday, extra = {}) => a.post('/api/courses', { program: 'level-3', start_date: start, per_week: 3, profile_ids: pids, ...extra });
+// weeks: [] keeps every week's own recipe, so these tests don't move as
+// recipes are written; best fit picks are tested on their own (12d).
+const level = (a, pids, start = sunday, extra = {}) => a.post('/api/courses', { program: 'level-3', start_date: start, per_week: 3, profile_ids: pids, weeks: [], ...extra });
 const card = async (a) => (await a.get('/api/queue')).body.courses[0];
 // Cooked early this Sunday, so the test passes on the Sabbath too (a cook
 // finished on Saturday never counts, §6.18).
@@ -196,4 +198,63 @@ test("a mastery week's Why did it work? is kept per profile", async () => {
   assert.equal((await row()).why, 'The stock simmered, not boiled, so it stayed clear.');
   await why('');
   assert.equal(await row(), null, 'emptied, it goes');
+});
+
+// ---------- 12d: best-fit recipes and Swap recipe ----------
+
+const rate = (a, pid, kind, item, stars) => a.put(`/api/profiles/${pid}/ratings`, { kind, item, stars });
+const weekIds = async (a) => Object.fromEntries((await a.get('/api/courses')).body.courses[0].plan.map((x) => [x.week, x.id]));
+const bestFit = (a, pid) => a.post('/api/courses', { program: 'level-3', start_date: sunday, per_week: 1, profile_ids: [pid] });
+
+test("a new Level course keeps each week's best fit, written recipes first", async () => {
+  const { a, ava } = await setup();
+  await rate(a, ava, 'protein', 'eggs', 1);
+  assert.equal((await bestFit(a, ava)).status, 200);
+  const w = await weekIds(a);
+  assert.equal(w[1], 'oyakodon', 'eggs rated 1 star: the chicken option');
+  assert.equal(w[2], 'smash-burgers', 'a written option before an unwritten default');
+  assert.equal(w[9], 'fish-tacos');
+  assert.equal(new Set(Object.values(w)).size, Object.keys(w).length, 'a recipe is in one week at most');
+});
+
+test("a recipe they've cooked comes last; a week where nothing fits keeps its own", async () => {
+  const { a, ava } = await setup();
+  await a.put('/api/attempts/00000000000012d1', {
+    lesson_id: 'smash-burgers', servings: 6, profile_ids: [ava], started_at: `${addDays(sunday, -6)}T00:10:00.000Z`, finished_at: `${addDays(sunday, -6)}T00:40:00.000Z`,
+  });
+  await rate(a, ava, 'protein', 'chicken', 1);
+  const p = (await a.get(`/api/picks/level?level=level-3&profiles=${ava}`)).body;
+  assert.equal(p.picks[2], 'thick-burgers', 'smash burgers were cooked, so they come last');
+  assert.equal(p.picks[3], 'chicken-fried-rice', 'both options are chicken: the week keeps its own');
+  assert.match(p.notes[3], /keeps its own recipe/);
+  const w2 = p.weeks.find((x) => x.week === 2);
+  assert.equal(w2.options.at(-1).id, 'smash-burgers');
+  assert.ok(w2.options.at(-1).cooked);
+});
+
+test('the parent changes a week; a recipe is in one week only; Swap recipe with Undo', async () => {
+  const { a, ava } = await setup();
+  const { id } = (await level(a, [ava])).body;
+  const put = (weeks) => a.put(`/api/courses/${id}`, { start_date: sunday, per_week: 1, profile_ids: [ava], weeks });
+  assert.equal((await put([{ week: 1, id: 'huevos-rancheros' }])).status, 200);
+  assert.equal((await weekIds(a))[1], 'huevos-rancheros');
+  assert.equal((await put([{ week: 1, id: 'beef-bulgogi' }])).status, 400, "not one of week 1's recipes");
+  assert.equal((await put([{ week: 9, id: 'minestrone' }])).status, 400, 'minestrone is week 32');
+
+  // Swap recipe on this week's recipe.
+  const opts = (await a.get(`/api/courses/${id}/level-week?week=1`)).body;
+  assert.equal(opts.current, 'huevos-rancheros');
+  assert.deepEqual(opts.options.map((x) => x.id).sort(), ['huevos-rancheros', 'oyakodon', 'shakshuka']);
+  assert.ok(opts.options.find((x) => x.id === 'huevos-rancheros').current);
+  const res = await a.post(`/api/courses/${id}/level-week`, { week: 1, id: 'oyakodon' });
+  assert.equal(res.body.before, 'huevos-rancheros');
+  let q = await card(a);
+  assert.deepEqual(q.this_week.lessons.map((x) => [x.lesson_id, x.label]), [['oyakodon', 'Week 1']]);
+  await a.post(`/api/courses/${id}/level-week`, { week: 1, id: res.body.before });
+  q = await card(a);
+  assert.equal(q.this_week.lessons[0].lesson_id, 'huevos-rancheros');
+  // A week's skipped mark stays with the week when its recipe changes.
+  await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: 'huevos-rancheros' });
+  await a.post(`/api/courses/${id}/level-week`, { week: 1, id: 'shakshuka' });
+  assert.deepEqual((await card(a)).skipped_recipes.map((x) => x.lesson_id), ['shakshuka']);
 });

@@ -17,7 +17,7 @@ import { servingOptions } from '../content/scale.js';
 import { courseEntries, numberCourse } from '../content/course.js';
 import { schedule, weekOf, addDays, localDay, isDay, isSabbath, DUE_DAY } from './schedule.js';
 import { isRecipeId, lessonFor, recipeNames, recipeVisible } from './recipes.js';
-import { tasteContext, versionFor, bestPlan, hatedExtras, versionSummary } from './picks.js';
+import { tasteContext, versionFor, bestPlan, hatedExtras, versionSummary, levelPlan, levelCandidates, cookedBy } from './picks.js';
 import { variationChoices } from './variations.js';
 import { nextReleaseOn } from './release.js';
 
@@ -210,11 +210,38 @@ async function levelPlanOf(env, course) {
   };
 }
 
-const levelPlanStatements = (env, course, V) => [
+// picks: { week: recipe id } (a week not named keeps the Level's own);
+// removed: { week: KEPT | SKIPPED }, kept from the saved plan.
+const levelPlanStatements = (env, course, V, picks = {}, removed = {}) => [
   env.DB.prepare('DELETE FROM course_lessons WHERE course_id = ? AND family_id = ?').bind(course.id, course.family_id),
   ...V.weeks.filter((w) => w.recipe).map((w) => env.DB.prepare('INSERT INTO course_lessons (course_id, family_id, lesson_id, position, removed) VALUES (?, ?, ?, ?, ?)')
-    .bind(course.id, course.family_id, w.recipe, w.week, KEPT)),
+    .bind(course.id, course.family_id, picks[w.week] ?? w.recipe, w.week, removed[w.week] ?? KEPT)),
 ];
+
+// A parent's recipes for a Level's weeks (12d), checked: each is one of the
+// week's recipes (its options, or another with its skill), none is in two
+// weeks, and a mastery week doesn't repeat weeks 1-3 of its unit (owner,
+// 2026-10-24). picks: { week: id } over the plan it changes.
+function levelPicksInput(V, list, base = {}) {
+  if (!Array.isArray(list)) fail(400, 'invalid', "A Level course's weeks list each week's recipe.");
+  const picks = { ...base };
+  for (const x of list) {
+    const w = V.weeks.find((y) => y.week === Number(x?.week) && y.recipe) ?? fail(400, 'invalid', 'No such week.');
+    const id = String(x.id ?? '');
+    const { options, more } = levelCandidates(V, w);
+    if (![...options, ...more].includes(id)) fail(400, 'invalid', `That recipe isn't one of week ${w.week}'s.`);
+    picks[w.week] = id;
+  }
+  const seen = {};
+  for (const w of V.weeks.filter((y) => y.recipe)) {
+    const id = picks[w.week] ?? w.recipe;
+    if (seen[id]) fail(400, 'invalid', `A recipe can be in one week only: ${V.titles[id] ?? lessonById[id]?.title ?? id} is in weeks ${seen[id]} and ${w.week}.`);
+    seen[id] = w.week;
+  }
+  return picks;
+}
+const savedPicks = (plan) => Object.fromEntries(plan.weeks.map((x) => [x.week, x.id]));
+const savedRemoved = (plan) => Object.fromEntries(plan.weeks.map((x) => [x.week, x.removed]));
 
 // Which program each of a family's courses is: a Level's id, or null for
 // Cook Around the World (no row). Empty before the draft's table exists. A
@@ -903,8 +930,12 @@ export function register(on) {
         WHERE cp.family_id = ? AND c.archived_at IS NULL AND c.id != ? AND cp.profile_id IN (${placeholders(pids)})`).bind(s.family_id, courseId ?? '', ...pids).all();
     if ((await withPrograms(env, s.family_id, taken)).length) fail(409, 'on_a_course', 'A profile picked is already on another course. End that course or take them off it first.');
     const name = String(body.name ?? '').trim().slice(0, 60);
-    // A Level's plan is its weeks; changing a week's recipe comes with 12d.
-    return { per, start: weekOf(body.start_date), pids, name, program, plan: program || body.plan === undefined ? null : planInput(body.plan) };
+    // A Level's plan is its weeks, each with its recipe (12d).
+    return {
+      per, start: weekOf(body.start_date), pids, name, program,
+      plan: program || body.plan === undefined ? null : planInput(body.plan),
+      weeks: program && body.weeks !== undefined ? body.weeks : null,
+    };
   };
 
   const ownCourse = async (env, s, cid) => {
@@ -927,11 +958,20 @@ export function register(on) {
       ...profileStatements(env, course, v.pids),
       ...(v.program
         ? [env.DB.prepare('INSERT INTO course_programs (course_id, family_id, program, created_at) VALUES (?, ?, ?, ?)').bind(course.id, s.family_id, v.program, now()),
-          ...levelPlanStatements(env, course, LEVELS[v.program])]
+          ...levelPlanStatements(env, course, LEVELS[v.program], await levelPicksFor(env, s.family_id, v))]
         : planStatements(env, course, v.plan ?? (await defaultFor(env, s.family_id, v.pids)))),
     ]);
     return { ok: true, id: course.id };
   });
+
+  // A new Level course's recipes: the parent's, or each week's best fit for
+  // the profiles it's for (owner, 2026-10-24: best fit picked for them).
+  async function levelPicksFor(env, fid, v) {
+    const V = LEVELS[v.program];
+    if (v.weeks) return levelPicksInput(V, v.weeks);
+    const tc = await tasteContext(env, await family(env, fid));
+    return tc ? levelPlan(tc, V, v.pids, await cookedBy(env, fid, v.pids)).picks : {};
+  }
 
   // The course's lessons already queued follow the change: new profiles are
   // put on them, and the next read reschedules them.
@@ -944,6 +984,10 @@ export function register(on) {
       env.DB.prepare('UPDATE courses SET name = ?, start_date = ?, per_week = ? WHERE id = ? AND family_id = ?').bind(v.name, v.start, v.per, course.id, s.family_id),
       ...profileStatements(env, course, v.pids),
       ...(v.plan ? planStatements(env, course, v.plan) : []),
+      ...(v.weeks ? await (async () => {
+        const plan = await levelPlanOf(env, course);
+        return levelPlanStatements(env, course, LEVELS[course.program], levelPicksInput(LEVELS[course.program], v.weeks, savedPicks(plan)), savedRemoved(plan));
+      })() : []),
       ...rows.flatMap((r) => [
         env.DB.prepare('DELETE FROM queue_profiles WHERE queue_id = ? AND family_id = ?').bind(r.id, s.family_id),
         ...v.pids.map((pid) => env.DB.prepare('INSERT INTO queue_profiles (queue_id, family_id, profile_id) VALUES (?, ?, ?)').bind(r.id, s.family_id, pid)),
@@ -979,6 +1023,38 @@ export function register(on) {
     }
     await env.DB.prepare('UPDATE courses SET archived_at = NULL WHERE id = ? AND family_id = ?').bind(course.id, s.family_id).run();
     return { ok: true };
+  });
+
+  // ---------- a Level week's recipe (12d) ----------
+
+  // Swap recipe on a Level week: every recipe it can hold, its options first,
+  // each best first for the course's profiles, with the one it holds now.
+  on('GET', '/api/courses/([0-9a-f]{16})/level-week', async (req, env, body, [cid]) => {
+    const s = await requireParent(env, req);
+    const course = await ownCourse(env, s, cid);
+    const V = LEVELS[course.program] ?? fail(400, 'invalid', 'That course has no Level weeks.');
+    const week = Number(new URL(req.url).searchParams.get('week'));
+    const plan = await levelPlanOf(env, course);
+    const now = plan.weeks.find((x) => x.week === week) ?? fail(404, 'not_found', 'No such week.');
+    const pids = await courseProfiles(env, course);
+    const tc = await tasteContext(env, await family(env, s.family_id)) ?? fail(404, 'not_available', 'Not available yet.');
+    const fits = levelPlan(tc, V, pids, await cookedBy(env, s.family_id, pids)).weeks.find((x) => x.week === week);
+    // A recipe in another week can't be picked here.
+    const elsewhere = new Set(plan.weeks.filter((x) => x.week !== week).map((x) => x.id));
+    const mark = (x) => ({ ...x, current: x.id === now.id, taken: elsewhere.has(x.id) });
+    return { week, current: now.id, options: fits.options.map(mark), more: fits.more.map(mark) };
+  });
+
+  // Puts a recipe in a Level week; Undo sends the one it held back.
+  on('POST', '/api/courses/([0-9a-f]{16})/level-week', async (req, env, body, [cid]) => {
+    const s = await requireParent(env, req);
+    const course = await ownCourse(env, s, cid);
+    const V = LEVELS[course.program] ?? fail(400, 'invalid', 'That course has no Level weeks.');
+    const plan = await levelPlanOf(env, course);
+    const before = plan.weeks.find((x) => x.week === Number(body.week)) ?? fail(404, 'not_found', 'No such week.');
+    const picks = levelPicksInput(V, [{ week: body.week, id: body.id }], savedPicks(plan));
+    await env.DB.batch(levelPlanStatements(env, course, V, picks, savedRemoved(plan)));
+    return { ok: true, before: before.id };
   });
 
   // ---------- a Level week's parts (12c) ----------

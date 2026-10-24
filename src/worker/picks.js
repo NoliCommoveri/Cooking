@@ -166,6 +166,54 @@ export function bestPlan(tc, pids) {
   return LIBRARY.course.map((d) => ({ id: d.id, removed: Boolean(d.pickOne && keyOf[d.id].pickOne && picks[keyOf[d.id].key] !== d.id) }));
 }
 
+// ---------- Level weeks (12d) ----------
+
+// A Level week's recipes: its options (the default first, §12.7), then any
+// other recipe that teaches its skill, from the course and the Level's cards.
+export function levelCandidates(V, w) {
+  const options = [w.recipe, ...(w.options ?? [])];
+  const skilled = w.skill ? [...LIBRARY.course, ...V.cards].filter((d) => d.skills?.includes(w.skill)).map((d) => d.id) : [];
+  return { options, more: [...new Set(skilled)].filter((id) => !options.includes(id)) };
+}
+
+// How a Level recipe fits: a course dish or lesson as in the course editor, a
+// Level-only card by its tags until it's written.
+function levelFit(tc, ctx, V, id) {
+  if (lessonById[id] || dishById[id]) return dishFit(tc, ctx, id);
+  return { ...scoreDish(V.cards.find((c) => c.id === id) ?? {}, ctx), written: false };
+}
+const titleOf = (V, id) => lessonById[id]?.title ?? V.titles[id] ?? dishById[id]?.title ?? V.cards.find((c) => c.id === id)?.title ?? id;
+
+// Best first within a week: one that fits, then one written (so the week has
+// something to cook now), then by score; one a profile on the course has
+// already cooked comes last (owner, 2026-10-24); then the order given.
+const levelOrder = (a, b) => (Number(a.cooked) - Number(b.cooked)) || (Number(b.fits) - Number(a.fits)) || (Number(b.written) - Number(a.written)) || better(a, b) || a.i - b.i;
+
+// Every week's recipes with their fit for the profiles on a Level course, and
+// the recipe each week keeps (owner, 2026-10-24): the best that isn't kept by
+// an earlier week (a recipe is picked for one week at most, so a mastery week
+// never repeats weeks 1–3 of its unit), or the week's default when nothing
+// fits. cooked: recipes a profile on the course has cooked.
+export function levelPlan(tc, V, pids, cooked = new Set()) {
+  const ctx = cookCtx(tc, pids);
+  const used = new Set(), picks = {}, notes = {}, weeks = [];
+  const out = (x) => ({ id: x.id, title: titleOf(V, x.id), fit: x.fit, label: x.label, fits: x.fits, why: x.why, notes: x.notes, written: x.written, cooked: x.cooked, hidden: Boolean(x.hidden) });
+  for (const w of V.weeks) {
+    if (!w.recipe) continue;
+    const { options, more } = levelCandidates(V, w);
+    const score = (ids) => ids.map((id, i) => ({ id, i, cooked: cooked.has(id), ...levelFit(tc, ctx, V, id) })).sort(levelOrder);
+    const opts = score(options);
+    const free = opts.filter((x) => !used.has(x.id) && !x.hidden);
+    const best = free[0];
+    const pick = best?.fits ? best.id : !used.has(w.recipe) ? w.recipe : best?.id ?? w.recipe;
+    if (best && !best.fits) notes[w.week] = `Nothing for this week fits everyone yet, so it keeps ${pick === w.recipe ? 'its own recipe' : 'the closest'}.`;
+    used.add(pick);
+    picks[w.week] = pick;
+    weeks.push({ week: w.week, options: opts.map(out), more: score(more).map(out) });
+  }
+  return { picks, notes, weeks };
+}
+
 // Every lesson in the library the family's diet settings allow, outside the
 // Appointed Times (Swap has those), best first for the profiles on a cook,
 // each with whether any of them has cooked it or has it queued. For Add a lesson and Chef
@@ -213,6 +261,17 @@ export const versionSummary = (lid, vid) => {
   return (vid && L?.variations?.find((v) => v.id === vid)) || L || null;
 };
 
+// The lessons any of these profiles has cooked (not on the Sabbath, not
+// taken back), for a Level week's pick: those come last (owner, 2026-10-24).
+export async function cookedBy(env, fid, pids) {
+  if (!pids.length) return new Set();
+  const { results } = await env.DB.prepare(`SELECT DISTINCT a.lesson_id, a.finished_at FROM attempts a JOIN attempt_profiles ap ON ap.attempt_id = a.id AND ap.family_id = a.family_id
+      WHERE a.family_id = ? AND a.finished_at IS NOT NULL AND a.removed_at IS NULL AND ap.profile_id IN (${pids.map(() => '?').join(', ')})`).bind(fid, ...pids).all();
+  // By the UTC day: a cook's own Sabbath check needs the family's offset, and
+  // here it only orders the list.
+  return new Set(results.filter((r) => new Date(r.finished_at).getUTCDay() !== 6).map((r) => r.lesson_id));
+}
+
 export function register(on) {
   // Each dish's fit for the profiles a course is for, and the pick for each
   // pick-one group, for the course editor (?profiles=id,id).
@@ -222,6 +281,18 @@ export function register(on) {
     const tc = await tasteContext(env, fam) ?? fail(404, 'not_available', 'Not available yet.');
     const pids = (new URL(req.url).searchParams.get('profiles') ?? '').split(',').filter((p) => tc.profiles.some((x) => x.id === p));
     return courseFits(tc, pids);
+  });
+
+  // A Level's weeks with each recipe's fit for the profiles a course is for,
+  // and each week's pick, for the course editor (?level=level-3&profiles=id,id).
+  on('GET', '/api/picks/level', async (req, env) => {
+    const s = await requireParent(env, req);
+    const fam = await env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(s.family_id).first();
+    const tc = await tasteContext(env, fam) ?? fail(404, 'not_available', 'Not available yet.');
+    const q = new URL(req.url).searchParams;
+    const V = LIBRARY.levels?.[q.get('level')] ?? fail(404, 'not_found', 'No such Level.');
+    const pids = (q.get('profiles') ?? '').split(',').filter((p) => tc.profiles.some((x) => x.id === p));
+    return levelPlan(tc, V, pids, await cookedBy(env, s.family_id, pids));
   });
 
   // The library, best first for the profiles on a cook (?profiles=id,id).
