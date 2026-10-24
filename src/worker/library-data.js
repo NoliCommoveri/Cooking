@@ -5553,7 +5553,10 @@ export const LIBRARY = {
   "ghanaian": "Ghanaian",
   "egyptian": "Egyptian",
   "argentine": "Argentine",
-  "chinese-american": "Chinese-American"
+  "chinese-american": "Chinese-American",
+  "turkish": "Turkish",
+  "israeli": "Israeli",
+  "cuban": "Cuban"
  },
  "units": {
   "1": "Knife work and assembly",
@@ -5840,6 +5843,30 @@ export const LIBRARY = {
    }
   },
   {
+   "id": "chopped-salad-vinaigrette",
+   "title": "Chickpea chopped salad + vinaigrette",
+   "unit": 1,
+   "about": "A big chopped salad of romaine, cucumber, tomato, and chickpeas, tossed with a red wine vinaigrette whisked from scratch and tasted until it's balanced.",
+   "skills": [
+    "dressings",
+    "emulsions"
+   ],
+   "minutes": 30,
+   "cuisine": "american",
+   "pickOne": "dressings",
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "tangy",
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "lots"
+   }
+  },
+  {
    "id": "smash-burgers",
    "title": "Smash burgers + quick pickles",
    "unit": 1,
@@ -6069,6 +6096,29 @@ export const LIBRARY = {
     "budget": "$",
     "familiar": "new-ish",
     "veggies": "some"
+   }
+  },
+  {
+   "id": "vegetable-stir-fry",
+   "title": "Vegetable stir-fry with tofu",
+   "unit": 2,
+   "about": "Carrots, peppers, and snow peas cut into thin matchsticks and stir-fried fast with crisp tofu in a garlic-ginger sauce, over rice.",
+   "skills": [
+    "stir-frying",
+    "julienne"
+   ],
+   "minutes": 35,
+   "cuisine": "chinese",
+   "pickOne": "stir-frying",
+   "tags": {
+    "protein": "tofu",
+    "flavors": [
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "lots"
    }
   },
   {
@@ -6406,10 +6456,12 @@ export const LIBRARY = {
    "about": "An Ethiopian red lentil stew, warmly spiced with berbere and slow-cooked onions. Served with rice.",
    "skills": [
     "blooming-spices",
-    "simmering"
+    "simmering",
+    "cooking-legumes"
    ],
    "minutes": 55,
    "cuisine": "ethiopian",
+   "pickOne": "cooking-legumes",
    "tags": {
     "protein": "beans-lentils",
     "flavors": [
@@ -6423,13 +6475,38 @@ export const LIBRARY = {
    }
   },
   {
+   "id": "red-lentil-soup",
+   "title": "Red lentil soup (mercimek)",
+   "unit": 3,
+   "about": "Turkish red lentil soup: lentils simmered with onion, carrot, and a little tomato until soft, blended smooth, and finished with lemon and a paprika butter.",
+   "skills": [
+    "cooking-legumes",
+    "simmering"
+   ],
+   "minutes": 45,
+   "cuisine": "turkish",
+   "pickOne": "cooking-legumes",
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "warm-spices",
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
+  },
+  {
    "id": "red-beans-and-rice",
    "title": "Red beans and rice",
    "unit": 3,
    "about": "A Louisiana dish of red beans simmered until creamy with onion, celery, pepper, and chicken andouille, over rice.",
    "skills": [
     "flavor-base",
-    "simmering"
+    "simmering",
+    "cooking-legumes"
    ],
    "minutes": 120,
    "cuisine": "louisiana",
@@ -6588,6 +6665,29 @@ export const LIBRARY = {
    }
   },
   {
+   "id": "beef-ragu",
+   "title": "Beef ragù",
+   "unit": 3,
+   "about": "Beef chuck braised for hours in tomato with a soffritto of finely chopped onion, carrot, and celery, then shredded into the sauce and served over pasta.",
+   "skills": [
+    "braising",
+    "flavor-base"
+   ],
+   "minutes": 180,
+   "cuisine": "italian",
+   "pickOne": "braising",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "rich-tomato"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
+  },
+  {
    "id": "peanut-stew",
    "title": "Peanut stew (maafe)",
    "unit": 3,
@@ -6636,16 +6736,41 @@ export const LIBRARY = {
    }
   },
   {
+   "id": "beef-stew",
+   "title": "Beef stew",
+   "unit": 3,
+   "about": "Chunks of beef chuck browned in batches and simmered slowly with onion, carrots, and potatoes until tender, tasted and seasoned as it goes.",
+   "skills": [
+    "one-pot-stews",
+    "searing"
+   ],
+   "minutes": 150,
+   "cuisine": "american",
+   "pickOne": "one-pot-stews",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
+  },
+  {
    "id": "koshari",
    "title": "Koshari",
    "unit": 3,
    "about": "Egypt's favorite street food: lentils, rice, and pasta layered with a spiced tomato sauce and crispy fried onions.",
    "skills": [
     "layering",
-    "crisping"
+    "crisping",
+    "cooking-legumes"
    ],
    "minutes": 75,
    "cuisine": "egyptian",
+   "pickOne": "crisping",
    "tags": {
     "protein": "beans-lentils",
     "flavors": [
@@ -6655,6 +6780,29 @@ export const LIBRARY = {
     "heat": "some",
     "budget": "$",
     "familiar": "adventurous",
+    "veggies": "light"
+   }
+  },
+  {
+   "id": "mujaddara",
+   "title": "Mujaddara",
+   "unit": 3,
+   "about": "Brown lentils and rice cooked together with cumin, topped with a big pile of slowly fried crispy onions and a spoon of yogurt.",
+   "skills": [
+    "cooking-legumes",
+    "crisping"
+   ],
+   "minutes": 60,
+   "cuisine": "lebanese",
+   "pickOne": "crisping",
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "warm-spices"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
     "veggies": "light"
    }
   },
@@ -6727,6 +6875,30 @@ export const LIBRARY = {
     "budget": "$$$",
     "familiar": "new-ish",
     "veggies": "some"
+   }
+  },
+  {
+   "id": "shish-taouk",
+   "title": "Shish taouk",
+   "unit": 3,
+   "about": "Lebanese chicken skewers marinated in yogurt, lemon, and garlic, broiled until charred at the edges and 165°F inside, with a quick garlic sauce.",
+   "skills": [
+    "marinating",
+    "broiling"
+   ],
+   "minutes": 50,
+   "cuisine": "lebanese",
+   "pickOne": "broiling",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "herby-lemony",
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -6993,6 +7165,7 @@ export const LIBRARY = {
    ],
    "minutes": 60,
    "cuisine": "indian",
+   "pickOne": "flatbreads",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -7002,6 +7175,30 @@ export const LIBRARY = {
     "heat": "mild",
     "budget": "$",
     "familiar": "new-ish",
+    "veggies": "light"
+   }
+  },
+  {
+   "id": "pita-bread",
+   "title": "Pita bread",
+   "unit": 5,
+   "about": "Soft pita rolled thin and baked on a very hot sheet until each one puffs into a pocket.",
+   "skills": [
+    "flatbreads",
+    "yeast-dough"
+   ],
+   "minutes": 120,
+   "cuisine": "lebanese",
+   "pickOne": "flatbreads",
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
     "veggies": "light"
    }
   },

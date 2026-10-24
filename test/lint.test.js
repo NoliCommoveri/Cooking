@@ -192,3 +192,57 @@ test('taste items and meat are worked out from the ingredients', () => {
   assert.deepEqual(missingTags({ protein: 'none', flavors: [] }), ['flavors', 'heat', 'budget', 'familiar', 'veggies']);
   assert.deepEqual(tagProblems(undefined, base.tastes), []);
 });
+
+// ---------- the Levels (plan §12) ----------
+
+const level = (c) => c.levels.find((l) => l.data.id === 'level-3').data;
+
+test('Level 3: 9 units of 4 weeks, about 125 hours, every recipe known', () => {
+  const L = level(base);
+  assert.equal(L.units.length, 9);
+  assert.equal(L.weeks.length, 36);
+  assert.deepEqual(L.weeks.filter((w) => w.mastery).map((w) => w.week), [4, 8, 12, 16, 20, 24, 28, 32]);
+  assert.equal(L.weeks.at(-1).kind, 'capstone');
+  const dishes = new Set(base.course.dishes.map((d) => d.id));
+  // The recipes checked against the main course (§12.4) are pick-one dishes there.
+  for (const id of ['vegetable-stir-fry', 'chopped-salad-vinaigrette', 'beef-stew', 'shish-taouk', 'beef-ragu', 'pita-bread', 'mujaddara', 'red-lentil-soup']) {
+    assert.ok(dishes.has(id), id);
+    assert.ok(L.weeks.some((w) => w.recipe === id), `${id} is a week's recipe`);
+    assert.ok(!L.recipes.some((r) => r.id === id), `${id} isn't Level only`);
+  }
+  assert.equal(L.recipes.length, 17);
+  assert.ok(!lint(base).errors.some((e) => e.startsWith('levels/')));
+});
+
+test('a Level week is checked: skill, recipe, mastery, units of four, the hours', () => {
+  const bad = (fn) => broken((c) => fn(level(c)));
+  assert.match(bad((L) => { L.weeks[0].skill = 'no-such-skill'; }), /week 1: skill "no-such-skill" doesn't exist/);
+  assert.match(bad((L) => { L.weeks[0].recipe = 'pork-buns'; }), /week 1: recipe "pork-buns" isn't a dish/);
+  assert.match(bad((L) => { L.weeks[1].recipe = 'shakshuka'; }), /week 2: recipe "shakshuka" is already an earlier week's recipe/);
+  assert.match(bad((L) => { delete L.weeks[3].mastery; }), /week 4: the last week of a unit is its mastery week/);
+  assert.match(bad((L) => { L.weeks[2].mastery = true; }), /week 3: a mastery week is the last week of its unit/);
+  assert.match(bad((L) => { L.weeks[4].unit = 1; }), /unit 1: has 5 weeks; a unit has 4/);
+  assert.match(bad((L) => { L.weeks[34].recipe = 'shakshuka'; }), /week 35: a practice week has no recipe/);
+  assert.match(bad((L) => { L.weeks[0].swapIns = ['no-such-dish']; }), /week 1: swap-in "no-such-dish" isn't a dish/);
+  assert.match(bad((L) => { for (const w of L.weeks) w.drill.minutes = 200; }), /the weeks add up to [\d.]+ hours, not about 125/);
+});
+
+test('the hard rule holds on Level pages and recipes', () => {
+  const bad = (fn) => broken((c) => fn(level(c)));
+  assert.match(bad((L) => { L.weeks[0].knowledge.body = ['Shrimp is safe at 145°F.']; }), /names a blocked food \("shrimp"\)/);
+  assert.match(bad((L) => { L.recipes[0].about = 'Burgers with bacon on top.'; }), /recipe thick-burgers: about names a blocked food \("bacon"\)/);
+  assert.match(bad((L) => { L.units[6].goal = 'Cooks shellfish gently'; }), /names a blocked food \("shellfish"\)/);
+  assert.match(bad((L) => { L.recipes[0].id = 'shakshuka'; }), /has the same id as a Cook Around the World dish/);
+});
+
+test('a Level recipe written as a lesson is checked like a lesson and matches its card', () => {
+  const shak = base.lessons.find((l) => l.data.id === 'shakshuka').data;
+  const errs = broken((c) => {
+    const L = { ...structuredClone(shak), id: 'thick-burgers', title: 'Thick beef burgers', unit: 100, cuisine: 'american' };
+    L.steps[0].text = 'Add the ham.';
+    c.levelLessons = [{ file: 'thick-burgers.json', data: L }];
+  });
+  assert.match(errs, /levels\/recipes\/thick-burgers.json: .*names a blocked food \("ham"\)/);
+  assert.match(errs, /recipe thick-burgers: skills don't match the lesson's/);
+  assert.match(errs, /recipe thick-burgers: minutes should be the lesson's/);
+});

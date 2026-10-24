@@ -54,11 +54,15 @@ test('the owner sees which groups leave families short, why, and what to write n
 test('limits make a low fit, and a new dish is suggested where the group has room', async () => {
   const { own, ava } = await setup();
   await rate(own, ava, 'flavor', 'chili-heat', 5);
+  // Poaching eggs, a two-dish group with both dishes written.
+  await rate(own, ava, 'protein', 'eggs', 2);
+  await rate(own, ava, 'flavor', 'rich-tomato', 1);
   await own.put('/api/tastes/limits', { max_minutes: 30, budget: '$', missing_tools: [], adventurous: 'a-bit' });
   const g = (await own.get('/api/owner/gaps')).body;
   const two = g.gaps.find((x) => x.dishes.length < 3 && x.write_next.kind === 'dish');
   assert.ok(two, 'some two-dish group is short on time or budget');
-  assert.match(two.write_next.text, /^A new .+ dish: chili heat, mild, under 30 minutes, \$$/);
+  assert.equal(two.key, 'pick:poaching-eggs');
+  assert.equal(two.write_next.text, 'A new gentle eggs dish: eggs, chili heat, mild, under 30 minutes, $');
   assert.ok(two.reasons.some((x) => x.code === 'time' || x.code === 'budget'));
   // A full group over the time limit: a quicker version of its quickest dish.
   const dicing = g.gaps.find((x) => x.key === 'pick:dicing');

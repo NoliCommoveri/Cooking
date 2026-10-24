@@ -1,0 +1,306 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "A Level (plan \u00a712): its units, weeks, the four parts of each week, and its own recipes",
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "part": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "minutes"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "minutes": {
+          "type": "integer",
+          "minimum": 5
+        },
+        "body": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        },
+        "quiz": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "q",
+              "choices",
+              "answer",
+              "explain"
+            ],
+            "properties": {
+              "q": {
+                "$ref": "#/$defs/text"
+              },
+              "choices": {
+                "type": "array",
+                "minItems": 2,
+                "items": {
+                  "$ref": "#/$defs/text"
+                }
+              },
+              "answer": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "explain": {
+                "$ref": "#/$defs/text"
+              }
+            }
+          }
+        }
+      }
+    },
+    "week": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "week",
+        "unit",
+        "drill",
+        "knowledge",
+        "sabbath"
+      ],
+      "properties": {
+        "week": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "unit": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "skill": {
+          "$ref": "#/$defs/id"
+        },
+        "recipe": {
+          "$ref": "#/$defs/id"
+        },
+        "note": {
+          "$ref": "#/$defs/text"
+        },
+        "mastery": {
+          "const": true
+        },
+        "kind": {
+          "enum": [
+            "practice",
+            "capstone"
+          ]
+        },
+        "minutes": {
+          "type": "integer",
+          "minimum": 5
+        },
+        "swapIns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "drill": {
+          "$ref": "#/$defs/part"
+        },
+        "knowledge": {
+          "$ref": "#/$defs/part"
+        },
+        "sabbath": {
+          "$ref": "#/$defs/part"
+        }
+      }
+    },
+    "recipe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "cuisine",
+        "skills",
+        "skill",
+        "art",
+        "safety",
+        "minutes",
+        "about",
+        "main",
+        "method",
+        "tags"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "$ref": "#/$defs/text"
+        },
+        "cuisine": {
+          "$ref": "#/$defs/id"
+        },
+        "skills": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/id"
+          }
+        },
+        "skill": {
+          "$ref": "#/$defs/text"
+        },
+        "art": {
+          "enum": [
+            "meat",
+            "poultry",
+            "fish",
+            "bread",
+            "soup",
+            "salad",
+            "side",
+            "dessert",
+            "drink"
+          ]
+        },
+        "safety": {
+          "enum": [
+            "solo",
+            "adult-nearby",
+            "adult-hands-on"
+          ]
+        },
+        "minutes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "estimated": {
+          "const": true
+        },
+        "about": {
+          "$ref": "#/$defs/text"
+        },
+        "main": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/text"
+          }
+        },
+        "method": {
+          "enum": [
+            "stove",
+            "oven",
+            "stove-oven",
+            "no-cook"
+          ]
+        },
+        "meal": {
+          "const": false
+        },
+        "tags": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "name",
+    "hours",
+    "sideUnit",
+    "units",
+    "weeks",
+    "recipes"
+  ],
+  "properties": {
+    "id": {
+      "$ref": "#/$defs/id"
+    },
+    "name": {
+      "$ref": "#/$defs/text"
+    },
+    "hours": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "sideUnit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "number",
+        "name",
+        "prefix"
+      ],
+      "properties": {
+        "number": {
+          "type": "integer",
+          "minimum": 100
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        },
+        "prefix": {
+          "type": "string",
+          "pattern": "^[A-Z]$"
+        }
+      }
+    },
+    "units": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "number",
+          "name",
+          "goal"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "name": {
+            "$ref": "#/$defs/text"
+          },
+          "goal": {
+            "$ref": "#/$defs/text"
+          }
+        }
+      }
+    },
+    "weeks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/week"
+      }
+    },
+    "recipes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/recipe"
+      }
+    }
+  }
+}

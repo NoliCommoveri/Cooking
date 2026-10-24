@@ -153,6 +153,18 @@ test('a save that breaks a rule is refused with the reason, and the hard block h
   assert.equal(res3.status, 422);
   assert.ok(res3.body.problems.some((p) => /doneness/.test(p)));
 
+  // A Level's pages are held to the same rule (§12.4).
+  const levelPath = 'levels/level-3.json';
+  const V = structuredClone(c.files[levelPath]);
+  V.weeks[24].knowledge.body = ['Shrimp and clams have no fins or scales.'];
+  const res4 = await m.post('/manage/api/save', { files: { [levelPath]: V }, was: { [levelPath]: c.blobs[levelPath] } });
+  assert.equal(res4.status, 422);
+  assert.ok(res4.body.problems.some((p) => /levels\/level-3\.json: .*blocked food \("shrimp"\)/.test(p)), res4.body.problems.join('\n'));
+  // A week written properly saves.
+  V.weeks[24].knowledge.body = ['A clean fish has both fins and scales (Leviticus 11:9).'];
+  const ok = await m.post('/manage/api/save', { files: { [levelPath]: V }, was: { [levelPath]: c.blobs[levelPath] } });
+  assert.equal(ok.status, 200, JSON.stringify(ok.body));
+
   // Schemas and paths outside content/ can't be written.
   for (const p of ['schema/lesson.schema.json', '../wrangler.json', 'lessons/../x.json']) {
     assert.equal((await m.post('/manage/api/save', { files: { [p]: {} }, was: {} })).status, 400, p);
