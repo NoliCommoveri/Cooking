@@ -3441,3 +3441,14 @@ lesson with a preference built in, and counts as that lesson.
   the dev server: the Version dialog on the queue, the player showing
   Chimichurri chicken, the Variations section, Add a variation, the variation
   editor (a time change stored as a change, checks passing), and its preview.
+
+## 137. 2026-10-24 — Plan: proposed variations
+
+Design only. A coverage check of the drafted tags (75 planned dishes, 32
+written) found skills taught with one protein only (thin slicing and
+binders: beef; reducing and julienne meals: chicken), no salmon, lamb, or
+tofu dish, and no spicy written meal. Plan §6.21 now lists nine proposed
+variations (chicken bulgogi, chicken cheesesteak, turkey meatloaf, chicken or
+bean empanadas, beef or bean fajitas, turkey smash burgers, honey-garlic
+salmon or tofu, spicy shakshuka, spicy chicken fajitas) with the skill and
+gap each fills and draft tags, as a recommendation waiting on the owner.

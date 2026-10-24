@@ -966,6 +966,20 @@ Each person rates what they love and hate, the app picks the best dish or **vari
 - **Substitutions stay for now** (§2.1). Common ones (a dairy-free mac and cheese) become variations over time.
 - **Built (2026-10-24), slice 11c:** `variations` in the lesson file, each stored as whole values (title, time, scaling, Learn cards) and list changes keyed by step id, why-card id, tool, and ingredient line, so whatever it doesn't change stays shared. The linter puts each one together and checks it as a whole lesson, plus its tags. The content editor has a **Variations** section on each lesson (**+ Add a variation** asks for a name in a dialog, then opens a copy of the lesson as its own page; edits are saved as what differs) and a learner preview of each. Families with the next release: a parent picks the version on each queue and course row (**Version: …**); the player, its cook, and shopping lists use it (a list keeps the version it was made for), and the cook counts as the lesson. Tables `variation_choices`, `attempt_variations`, `list_variations` are in the draft migration. The first variation is **Chimichurri chicken**. Not built yet: the default pick by score (11d), and the "(a version of …)" name in progress, grades, and the transcript, which still show the lesson's title.
 
+**Proposed variations — Recommendation** (Claude, 2026-10-24, from a coverage check of the drafted tags; none written yet, and each waits on the owner's yes). Cheapest first: each opens a skill to a protein that has nothing for it today, or adds heat. Every one is written for the skill its lesson teaches.
+
+| Variation | Of | Skill | Gap it fills | Draft tags |
+|---|---|---|---|---|
+| Chicken bulgogi | Beef bulgogi | Thin slicing | All 5 thin-slicing dishes are beef | chicken; ginger-soy, sweet-savory; mild; $ |
+| Chicken cheesesteak | Philly cheesesteak (not written) | Thin slicing | Same; also brings a $$$ dish to $$ | chicken; creamy-cheesy; mild; $$ |
+| Turkey meatloaf | Meatloaf (not written) | Binders | Binders is beef only | turkey; sweet-savory, mild-buttery; mild; $$ |
+| Chicken empanadas, or black bean and cheese empanadas | Beef empanadas (not written) | Filling and crimping; cutting in fat | Beef is the only main-dish choice for both skills | chicken or beans-lentils; warm-spices; mild; $ |
+| Beef fajitas, or black bean and pepper fajitas | Chicken fajitas | Julienne | Julienne's meals are all chicken | beef or beans-lentils; warm-spices; some; $$ or $ |
+| Turkey smash burgers | Smash burgers | Quick pickling | Quick pickling is beef only | turkey; tangy; mild; $$ |
+| Honey-garlic salmon, or honey-garlic tofu | Honey-garlic chicken | Building a sauce | No salmon or tofu dish anywhere; reducing is chicken only | salmon or tofu; sweet-savory, ginger-soy; mild; $$ |
+| Spicy shakshuka | Shakshuka | Building a sauce | No written meal is spicy | eggs; rich-tomato, chili-heat; spicy; $ |
+| Spicy chicken fajitas | Chicken fajitas | Julienne | Same | chicken; warm-spices, chili-heat; spicy; $$ |
+
 **Tags on every dish and variation** — the shared vocabulary between ratings, picks, and gaps.
 - **Where they live:** beside the dish card, on each dish's `course.json` entry (so all 75 are tagged, written or not), or on the lesson for a seasonal lesson (§6.19), as `tags`.
 - **Set by the owner:** `protein` (one of the proteins, or `none` for a side, bread, or dessert), `flavors` (1 to 3), `heat` (mild, some, spicy), `budget` ($, $$, $$$), `familiar` (everyday, new-ish, adventurous), and `veggies` (light, some, lots; owner, 2026-10-24). Claude drafted all 77 (owner, 2026-10-24: "go"); the owner reviews them on the **Tags** page in the content editor, or on each dish card.
