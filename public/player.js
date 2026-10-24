@@ -130,8 +130,9 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // instead of the published ones, like the manager's unsaved changes.
 // exitLabel: what Back says in a preview. variation: the version of the lesson
 // the family cooks (§6.21), or null for the lesson itself; a cook already
-// under way keeps the version it started in.
-export async function openLesson(mount, { profile, family, lessonId, variation = null, lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
+// under way keeps the version it started in. leaveOut: [{ ingredient, who }],
+// optional ingredients someone cooking rated 1 star, left out (§6.21).
+export async function openLesson(mount, { profile, family, lessonId, variation = null, leaveOut = [], lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
   const [published, B] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
   const kept = readState(profile.id, B.id);
   const L = lessonVersion(B, kept?.cookId ? kept.variation ?? null : variation);
@@ -226,7 +227,10 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
   }
   const crewNames = () => [profile, ...crew.filter((p) => S.with.includes(p.id))].map((p) => p.name);
 
-  const leftOut = new Set(view.leftOut);
+  // Optional ingredients someone cooking rated 1 star are left out too
+  // (§6.21, 11d2), like the diet's; only ones this version has.
+  const hated = leaveOut.filter((x) => L.ingredients.some((i) => i.optional && i.ingredient === x.ingredient) && !view.leftOut.includes(x.ingredient));
+  const leftOut = new Set([...view.leftOut, ...hated.map((x) => x.ingredient)]);
   const swapFor = Object.fromEntries(view.applied.map((x) => [x.for, x.use]));
   const name = (id) => ING[id]?.name ?? id;
   const scaled = () => scaleLesson(L, ING, S.servings);
@@ -295,6 +299,7 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
     const changes = [
       ...view.applied.map((x) => `Use ${esc(name(x.use).toLowerCase())} instead of ${esc(name(x.for).toLowerCase())}.`),
       ...view.leftOut.map((id) => `Leave out the ${esc(name(id).toLowerCase())}.`),
+      ...hated.map((x) => `Leave out the ${esc(name(x.ingredient).toLowerCase())} (${esc(x.who.join(' and '))} ${x.who.length === 1 ? "doesn't" : "don't"} like it).`),
     ];
     const swaps = changes.length ? `<p class="${T.note}"><b>For your family:</b> ${changes.join(' ')}</p>` : '';
     // Profiles cooking together share one cook, and it counts for each of them (§1).

@@ -137,6 +137,8 @@ export function buildLibrary() {
       protein: mainProtein(L, registry),
       // What profiles rate it by (§6.21): its tags, and the key ingredients it uses.
       tags: tagsOf(c, L), tasteItems: tasteItemsIn(L, c.tastes.ingredients),
+      // The tools it needs, checked against the family's missing tools (§6.21).
+      tools: L.equipment ?? [],
     };
   };
   const lessons = c.lessons.map(({ data: L }) => {
@@ -162,9 +164,10 @@ export function buildLibrary() {
     dietTags: c.schemas.registries.$defs.dietTag.enum,
     // Every planned dish, for numbering a family's course plan; its line about
     // the dish and whether it's a meal, for Chef Ruth's first lesson (§6.9).
-    // Its tags too, so a dish not written yet still shows in the gaps (§6.21).
-    course: c.course.dishes.map(({ id, title, unit, pickOne, prereqs, about, meal, skills, tags }) => ({
-      id, title, unit, about, skills, ...(pickOne ? { pickOne } : {}), ...(prereqs ? { prereqs } : {}), ...(meal === false ? { meal } : {}), ...(tags ? { tags } : {}),
+    // Its tags, minutes, and cuisine too, so a dish not written yet still
+    // shows in the gaps and can be scored (§6.21).
+    course: c.course.dishes.map(({ id, title, unit, pickOne, prereqs, about, meal, skills, tags, minutes, cuisine }) => ({
+      id, title, unit, about, skills, ...(minutes ? { minutes } : {}), ...(cuisine ? { cuisine } : {}), ...(pickOne ? { pickOne } : {}), ...(prereqs ? { prereqs } : {}), ...(meal === false ? { meal } : {}), ...(tags ? { tags } : {}),
     })),
     // What profiles rate (§6.21), by id and name.
     tastes: Object.fromEntries(Object.entries(c.tastes).map(([k, list]) => [k, list.map(({ id, name }) => ({ id, name }))])),

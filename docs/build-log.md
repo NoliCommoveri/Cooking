@@ -3585,3 +3585,173 @@ numbers (89 dishes).
 - Plan §4's unit tables and §6.21 updated; `tools/dish-sheets.txt` and
   `content/images/LICENSES.md` list the sheets.
 - Tests: 300.
+
+## 144. 2026-10-24 — Plan: slice 11d in four parts
+
+Design only. Slice 11d (scoring and picks, plan §6.21) is split into four
+parts, as a recommendation waiting on the owner:
+- **11d1 Scoring and default picks:** `src/content/score.js` with draft
+  weights; limits rule a version out (lesson summaries gain their tools);
+  the best version plays by default when the family hasn't picked one; a new
+  course keeps the best dish in each pick-one group; the plan editor shows
+  each dish's fit and has a Suggest picks button. Saved plans don't change.
+- **11d2:** Best for them at the top of Add a lesson; best fit first inside
+  Swap's existing order; Chef Ruth's "What should we cook?"; a hated
+  optional ingredient left out of the player and shopping list.
+- **11d3:** `taste_learned`, rebuilt from a profile's reflections each time
+  one is saved, so an edited reflection isn't counted twice.
+- **11d4:** the kid's taste quiz in the kitchen; the ratings API takes a
+  kid's own session for its own ratings.
+- No written lesson uses mushrooms, so the phase's done-when is tested with
+  a made-up lesson until a mushroom dish is written.
+
+## 145. 2026-10-24 — Plan: the main track ranks, it doesn't rule out
+
+Design only. The owner's ruling: on Cook Around the World, scoring picks the
+best option where there are options, and never keeps a skill's only dish
+off. Plan §6.21 changed:
+- A 1 star on a version's protein or a required ingredient makes it
+  **Doesn't fit**: ranked below every version that fits, but kept.
+- **Family limits never rule a dish out.** Over the time or budget, or a
+  missing tool, takes points off (draft: −1 a 15 minutes over, −1 a $ over,
+  −2 a tool) with a note, so it loses to an option within the limits and is
+  kept when it's the only one.
+- §10 notes the owner's idea of a **custom course from a family's tastes**,
+  which could rule dishes and skills out. Not planned.
+
+## 146. 2026-10-24 — Scoring and default picks (slice 11d1)
+
+Phase 11, slice 11d1 (plan §6.21), all behind the Next release switch
+(§8.6). On the main track nothing is ruled out; dishes are only ranked.
+- **`src/content/score.js`:** scores a dish or version for the profiles on
+  a cook with the draft weights (one `WEIGHTS` object). A 1 star on its
+  protein or a required key ingredient makes it Doesn't fit, ranked last but
+  kept. Time, budget, and missing tools take points off with a note. Fit
+  words: Great fit (2 points or more), Good fit (0.5), Not a great fit; none
+  when nothing it uses has been rated.
+- **Build:** library lesson summaries and variations carry their `tools`;
+  the course outline carries each dish's `minutes`, so planned dishes can be
+  scored.
+- **`src/worker/picks.js`:** reads a family's ratings, limits, and diet
+  settings once a request. A lesson with no saved pick plays its best version
+  for the profiles on the row: the parent's queue and course rows
+  (`version`, with every option's fit and why), the kitchen
+  (`versions` on `/api/profiles/<id>/queue`), and shopping. A version the
+  diet settings hide is never picked. `PUT /api/variations/<lesson>` with
+  `variation: null` takes the family's pick off.
+- **Courses:** `GET /api/picks/course?profiles=…` gives each dish's fit and
+  each pick-one group's best written dish. A new course posted with no plan
+  (Chef Ruth's) keeps those picks; without the next release, the first dish
+  as before. A group where nothing fits keeps its closest, with "Nothing for
+  … fits everyone yet; this one is closest."
+- **Parent screens:** **Version: …** says "(best for Ava)", and its dialog
+  lists the versions best first with their fit, why, and notes, after
+  **The best fit for whoever is cooking**. The course editor shows a fit line
+  under each dish and a **Suggest picks** button; a new course follows the
+  people ticked until a dish in a group is ticked by hand. Chef Ruth says she
+  picked the best dish in each group. The queue no longer loads the content
+  registry, which only the old Version button used.
+- **Plan:** slice **11f, the taste tester** (owner, 2026-10-24): a manager
+  tool for trying sets of preferences and seeing what they pick, built at the
+  end of phase 11.
+- Tests: 309 (5 in `test/score.test.js`, including the mushroom check with
+  a made-up lesson; 4 in `test/worker-picks.test.js`). Checked in a browser
+  at phone width on the dev server: the Version button and dialog on a
+  queued Chimichurri steak (beef 1 star, chicken 4, a 45-minute limit), and
+  a new course's fit lines and picks.
+
+## 147. 2026-10-24 — Add a lesson, Swap, Chef Ruth, and hated extras (slice 11d2)
+
+Phase 11, slice 11d2 (plan §6.21), all behind the Next release switch.
+- **`GET /api/picks/lessons?profiles=…`** (`src/worker/picks.js`): every
+  library lesson the diet settings allow, outside the Appointed Times, best
+  first for the profiles on a cook, each with its fit, why, notes, best
+  version, and whether any of them has cooked it or has it queued.
+- **Add a lesson:** with the next release, Who's cooking comes first. Once
+  it's ticked, the menu starts with **Best for them** (up to 5 Great or Good
+  fits not cooked or queued for them), then every lesson; one that doesn't
+  fit says so, and the picked lesson's fit shows under the menu.
+- **Swap** (`src/worker/swap.js`): inside each part, best fit first for the
+  profiles on the swapped lesson, with each lesson's fit and why. The parts
+  keep §6.19's order; parent recipes keep theirs.
+- **Chef Ruth: "What should we cook?"** on her menu: who's cooking (one
+  profile or everyone), then the 3 best lessons that fit and aren't cooked or
+  queued for them, each added to the queue with one tap.
+- **Hated extras:** an optional ingredient on a protein or key ingredient
+  someone on the cook rated 1 star is left out, like a diet's (§2.1). The
+  kitchen gets `leave_out` per lesson and the player says "Leave out the
+  fresh cilantro (Ava doesn't like it)". What you'll need, the list preview,
+  and saved lists drop it and say what was left out (`shoppingList` takes
+  `leaveOut`); a saved list works it out from the people on each lesson now.
+- **Fixed:** a lesson whose version is the lesson itself (`''`) showed an
+  empty title in What you'll need and on lists (`versionTitle`). It showed
+  for a family that picked the lesson itself in 11c, and for every lesson
+  that 11d1 picked as written.
+- Tests: 314 (5 new in `test/worker-picks.test.js`; its setup now finds
+  profiles by name, since two made in the same millisecond can list either
+  way). Checked in a browser at phone width on the dev server: Add a lesson
+  with Best for them, the Swap picker's fit lines, the player's leave-out
+  note, What you'll need, and Chef Ruth's three suggestions.
+
+## 148. 2026-10-24 — Learning from Reflect (slice 11d3)
+
+Phase 11, slice 11d3 (plan §6.21), behind the Next release switch. The
+owner put 11d4, the kid's taste quiz, on hold.
+- **Draft migration `0003_next_release.sql`:** `taste_learned` (one row per
+  profile per protein, flavor, or cuisine: `adjust` and `cooks`). After the
+  deploy the owner downloads export.json on `/ops`, presses **Re-apply
+  draft** on `/ops/draft/0003`, then **Restore draft tables** to put the
+  ratings and version picks back.
+- **`learnedFrom`** (`src/content/score.js`): each cook counts its own
+  Reflect rating (1 to 5 as −2 to +2) plus half the eaters', capped at ±2;
+  an item adds half of each cook's value, capped at ±2 (`WEIGHTS`). The score
+  adds a profile's learned protein, flavors on average, and cuisine; a
+  cuisine at +1 or more gives "Ava enjoyed cooking Tex-Mex". Cuisines are
+  only learned, never asked. Planned dishes carry their cuisine from the
+  course outline now.
+- **`relearn`** (`src/worker/picks.js`): rebuilds the rows for everyone on a
+  cook from all their finished cooks, using the version each was
+  (`attempt_variations`), whenever a reflection is saved, a cook is taken
+  back or put back, or a profile is deleted. Rebuilt, so a changed
+  reflection never counts twice. Family recipes teach nothing (no tags).
+  Nothing happens before the table exists.
+- Rows go with the profile (`forgetProfile`) and the family, and are in
+  Download our data.
+- Tests: 319 (2 in `test/score.test.js`, 3 in `test/worker-picks.test.js`).
+  Not checked in a browser: nothing new is drawn; what's learned shows in
+  the fit lines and reasons built in 11d1 and 11d2.
+
+## 149. 2026-10-24 — Recipe gaps (slice 11e)
+
+Phase 11, slice 11e (plan §6.21): a page in the owner screens (Menu → Owner
+→ Recipe gaps), counts only, with no family, profile, or name in it.
+- **`src/worker/gaps.js`, `GET /api/owner/gaps`** (owner only). Families with
+  the next release that have rated something or set a limit are counted.
+  Each is checked group by group for the people it cooks for together (each
+  active course, and everyone on no course) and counts once a group:
+  nothing that fits, or only a poor fit. Reasons are counted per family from
+  name-free codes the scorer now returns (`hated`, `over` in
+  `src/content/score.js`).
+- **Write next:** a protein 1 star → a variation in the protein the
+  affected people rate highest; an ingredient → a version without it; a
+  limit in a full group → a quicker, cheaper, or tool-free version of the
+  closest dish; otherwise a new dish for the group with their best-rated
+  protein and flavors, mild, their usual time and budget (in a full group, a
+  version of its first dish). Bread and dessert groups keep no protein.
+- **Open in the manager** (`/manage/#/gap/variation/<lesson>?…` and
+  `#/gap/dish/<group>?…`): Add a variation opens on the lesson with the gap's
+  tags and note; a new dish opens a dialog that places it after the group's
+  last dish with the group's skills, its pick-one group, the target time, and
+  the tags, then opens it in the editor.
+- **Coverage:** each group against the 10 proteins (written versions, and
+  +planned dishes), heat, and how many flavors, in a table that scrolls
+  sideways on a phone. **What people cook** (every family): swapped out
+  most, skipped most, rated low, and average stars by flavor.
+- Chef Ruth's tour has a Recipe gaps stop.
+- Tests: 323 (4 in `test/worker-gaps.test.js`, including a check that no
+  name or email is in the report). Checked in a browser at phone width on
+  the dev server: the page with three gaps and the coverage table, Open in
+  the manager on a variation, and the new-dish dialog placing a dish in the
+  dressings group with its tags. That check also caught Write next suggesting
+  a salmon version of a dish whose only problem was time, now a quicker
+  version.

@@ -4,14 +4,15 @@
 // commit to the repo, where the publish workflow checks it again and puts it
 // live. Routes live in the hash: #/ (the course), #/lesson/<id>, #/lesson/<id>/v/<variation>,
 // #/try/<id>, #/try/<id>/<variation>, #/saves,
-// #/list/<file>, #/rules, #/fix/<id>, #/tags.
+// #/list/<file>, #/rules, #/fix/<id>, #/tags, #/gap/variation/<lesson>?<gap>,
+// #/gap/dish/<pick-one group>?<gap> (Write next, from Recipe gaps).
 import { el, modal } from './dom.js';
 import { field, blank } from './form.js';
 import { lint } from '/lib/lint.js';
 import { contentFromFiles } from '/lib/load.js';
 import { numberCourse, seasonalLabels } from '/lib/course.js';
 import { SAFETY } from '/lib/recipe.js';
-import { lessonPage, previewPage } from './lesson.js';
+import { lessonPage, previewPage, gapVariation } from './lesson.js';
 import { listPage, rulesPage } from './lists.js';
 import { fixPage } from './fix.js';
 import { tagsPage, tagFields } from './tags.js';
@@ -517,6 +518,43 @@ function dishDialog(d) {
       el('button', { class: 'hbtn pri', onclick: () => { put('course.json', c, `Changed the dish card for ${dish.title}`); close(); route(); } }, 'Keep these changes')));
 }
 
+// Write next, from Recipe gaps (§6.21, 11e): a new dish in a pick-one group,
+// after its last dish, teaching the group's skills, with the gap's tags.
+function gapDish(pick, gap) {
+  coursePage();
+  const c = cur('course.json');
+  const group = c.dishes.filter((d) => d.pickOne === pick);
+  if (!group.length) return;
+  const last = group.at(-1);
+  const title = el('input', { maxlength: 80, required: true });
+  const copy = el('select', {}, el('option', { value: '' }, 'Start blank'),
+    group.filter((d) => exists(lessonFile(d.id))).map((d) => el('option', { value: d.id }, `A copy of ${d.title}`)));
+  const err = el('p', { class: 'err', hidden: true });
+  const close = modal(`A new dish beside ${group.map((d) => d.title).join(', ')}`,
+    el('form', {
+      class: 'stack wide', onsubmit: (e) => {
+        e.preventDefault();
+        try {
+          const id = newLesson({ title: title.value.trim(), unit: last.unit, after: last.id, copyOf: copy.value || null });
+          const L = cur(lessonFile(id));
+          Object.assign(L, { skills: [...last.skills], skill: L.skill || last.skill });
+          if (gap.minutes) L.totalMinutes = gap.minutes;
+          stageLesson(L, `Added ${L.title}`);
+          const cc = cur('course.json');
+          Object.assign(cc.dishes.find((d) => d.id === id), { pickOne: pick, ...(gap.tags ? { tags: structuredClone(gap.tags) } : {}) });
+          put('course.json', cc, `Added ${L.title} to the ${pick} group`);
+          close();
+          go(`#/lesson/${id}`);
+        } catch (x) { err.hidden = false; err.textContent = x.message; }
+      },
+    },
+    gap.note ? el('p', { class: 'card notice small' }, el('b', {}, 'From Recipe gaps: '), gap.note, '. It joins the group as another choice, with its tags filled in.') : null,
+    el('label', { class: 'f' }, 'Title', title),
+    el('label', { class: 'f' }, 'Start from', el('span', { class: 'hint' }, 'A copy brings its steps, ingredients, and cards to change.'), copy),
+    err,
+    el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel'), el('button', { class: 'hbtn pri' }, 'Add and edit'))));
+}
+
 // Writing a planned dish: a lesson file started from its dish card.
 function writePlanned(d) {
   const schema = S.files['schema/lesson.schema.json'];
@@ -603,6 +641,11 @@ route = async () => {
     if (h === '#/rules') return rulesPage();
     if (h === '#/tags') return tagsPage();
     if ((m = h.match(/^#\/fix\/([0-9a-f]{16})$/))) return await fixPage(m[1]);
+    if ((m = h.match(/^#\/gap\/(variation|dish)\/([a-z0-9-]+)\?(.*)$/))) {
+      let gap = {};
+      try { gap = JSON.parse(decodeURIComponent(m[3])); } catch { /* a bad link: no tags filled in */ }
+      return m[1] === 'variation' ? gapVariation(m[2], gap) : gapDish(m[2], gap);
+    }
     return coursePage();
   } catch (err) {
     if (err.status === 401) return loginPage();

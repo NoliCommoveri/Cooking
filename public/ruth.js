@@ -414,6 +414,34 @@ async function rateSome(ctx, chat) {
   }
 }
 
+// Her task (§6.21, 11d2): the 3 lessons that fit whoever is cooking best,
+// not cooked or queued for any of them yet, each queued with one tap.
+async function whatToCook(ctx, chat) {
+  const { el } = ctx;
+  const call = caller(ctx, chat);
+  const { profiles } = await call('GET', '/api/profiles');
+  if (!profiles.length) { chat.say('Add a profile first, in Menu → Profiles, then I can suggest something.'); return; }
+  chat.say("Who's cooking?");
+  const who = profiles.length === 1 ? profiles[0].id
+    : await chat.choose([...profiles.map((p) => [p.id, p.name]), ['all', 'Everyone together']]);
+  const pids = who === 'all' ? profiles.map((p) => p.id) : [who];
+  const names = profiles.filter((p) => pids.includes(p.id)).map((p) => p.name);
+  const { lessons } = await call('GET', `/api/picks/lessons?profiles=${pids.join(',')}`);
+  const top = lessons.filter((x) => !x.cooked && !x.queued && x.fits).slice(0, 3);
+  if (!top.length) { chat.say("I couldn't find a lesson they haven't cooked or queued that fits everyone. You can pick any lesson in Menu → Queue → + Add a lesson."); return; }
+  const rated = top.some((x) => x.fit);
+  chat.say(rated ? `These fit ${names.join(' and ')} best, from Our tastes:` : `Nobody has rated much yet, so these are next in the course order. Rate a few things in Our tastes and I can do better!`);
+  for (const x of top) {
+    const why = [x.label, ...x.why, ...x.notes, x.version_title ? `as ${x.version_title}` : null].filter(Boolean).join(' · ');
+    chat.say(`${x.title}${why ? ` — ${why}` : ''}`, el('img', { class: 'ruth-dish', src: x.image, alt: '', width: 120, height: 120 }));
+  }
+  const pick = await chat.choose([...top.map((x) => [x.id, `Add ${x.title}`]), ['none', 'Not now']]);
+  if (pick === 'none') { chat.say('Okay! Any lesson can be added in Menu → Queue → + Add a lesson.'); return; }
+  const L = top.find((x) => x.id === pick);
+  await call('POST', '/api/queue', { lesson_id: L.id, profile_ids: pids, servings: ctx.me().family.default_servings, planned_date: null });
+  chat.say(`Done! ${L.title} is in the queue for ${names.join(' and ')}.`);
+}
+
 async function modePart(ctx, chat, call) {
   const { family: f } = await call('GET', '/api/family');
   chat.say('How will you use Clean Plate? Casual: cook when you like. Homeschool: lessons follow a course with due dates, and you can print a record of what each kid has cooked. Switching later never deletes anything.');
@@ -466,7 +494,7 @@ async function coursePart(ctx, chat, call, { again }) {
   await chat.ask([field('Lessons per week', 'per', { type: 'number', min: 1, max: data.per_week_max, value: 1, inputmode: 'numeric', required: true })], 'Start the course', async (v) => {
     const per = Number(v.per);
     if (!Number.isInteger(per) || per < 1 || per > data.per_week_max) throw new Error(`Pick a number from 1 to ${data.per_week_max}.`);
-    await call('POST', '/api/courses', { name, start_date: start, per_week: per, profile_ids: pids, plan: data.default_plan });
+    await call('POST', '/api/courses', { name, start_date: start, per_week: per, profile_ids: pids });
     return `${per} a week`;
   });
   if (data.mode !== 'homeschool') {
@@ -474,7 +502,9 @@ async function coursePart(ctx, chat, call, { again }) {
     if (!f.plan_weeks) await call('PUT', '/api/family', { ...f, plan_weeks: true });
     chat.say("I turned on Plan our weeks, so your course loads each week's lessons into the queue.");
   }
-  chat.say("Your course follows our suggested order. You can edit it to change the lesson order or drop lessons, and to pick a different dish where a skill has a few to choose from, in Menu → Courses.");
+  chat.say(ctx.me().family.next_release
+    ? "Your course follows our suggested order, and where a skill has a few dishes to choose from, I picked the one that fits them best from Our tastes. You can edit it to change the lesson order, drop lessons, or pick a different dish, in Menu → Courses."
+    : "Your course follows our suggested order. You can edit it to change the lesson order or drop lessons, and to pick a different dish where a skill has a few to choose from, in Menu → Courses.");
 }
 
 // No course: a first lesson by hand (owner, 2026-10-23). She offers the first
@@ -555,6 +585,10 @@ const TOUR = [
   { hash: '#/parent/fixes', name: 'Fix requests', owner: true, what: 'Suggestions from families to fix a lesson.', how: [
     "Apply one to change the lesson for every family, after the same checks as our content, or decline it. Anything applied can be reverted.",
   ] },
+  { hash: '#/parent/gaps', name: 'Recipe gaps', owner: true, what: 'Where the recipes fall short of what families like.', how: [
+    "Each skill that leaves families with nothing that fits, or only a poor fit, shows how many and why, counts only. Write next opens the variation or dish that would help most in the manager, with its tags filled in.",
+    'Coverage shows each skill against protein and heat, and What people cook shows what gets swapped, skipped, or rated low.',
+  ] },
   { hash: '#/parent/reviews', name: 'Recipe reviews', owner: true, what: 'Shared recipes waiting on you.', how: [
     'Clear or decline each one, and decide whether it gets the Unleavened badge.',
   ] },
@@ -609,11 +643,11 @@ export function openRuth(ctx) {
     for (;;) {
       chat.say('What can I help with?');
       const pick = await chat.choose([['tour', 'Show me around'],
-        ...(ctx.me().family.next_release ? [['tastes', 'Ask what we like to eat']] : []),
+        ...(ctx.me().family.next_release ? [['cook', 'What should we cook?'], ['tastes', 'Ask what we like to eat']] : []),
         ...(ctx.me().family.cooking ? [] : [['setup', 'Getting started (change your setup)']]), ['bye', 'Nothing right now']]);
       if (pick === 'bye') { chat.say('Okay! Tap my button any time.'); return; }
-      if (pick === 'tastes') {
-        await rateSome(ctx, chat);
+      if (pick === 'tastes' || pick === 'cook') {
+        await (pick === 'cook' ? whatToCook : rateSome)(ctx, chat);
         await chat.choose([['ok', 'Thanks, Chef Ruth!']]);
         chat.close();
         return;

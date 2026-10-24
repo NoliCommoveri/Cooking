@@ -28,6 +28,8 @@ import { register as registerTastes, forgetProfile } from './tastes.js';
 import { RUBRIC, gradeLine } from '../content/grades.js';
 import { exportFamily, deleteFamily, eraseAfter } from './backup.js';
 import { releaseFor, nextReleaseOn } from './release.js';
+import { register as registerPicks, relearn } from './picks.js';
+import { register as registerGaps } from './gaps.js';
 import { register as registerVariations, variationChoices, recordVariation, hasVariation, forgetCooks } from './variations.js';
 import { lessonVersion } from '../content/variations.js';
 
@@ -387,6 +389,8 @@ on('DELETE', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
   ]);
   await forgetProfile(env, s.family_id, pid);
   await forgetCooks(env, s.family_id);
+  // A cook shared with them may be gone too: what the rest have learned is rebuilt.
+  await relearn(env, s.family_id);
   return { ok: true };
 });
 
@@ -523,6 +527,9 @@ const rating = (v, field) => {
   if (!Number.isInteger(n) || n < 1 || n > 5) fail(400, 'invalid', `${field} is 1 to 5.`);
   return n;
 };
+// Everyone on a cook, for rebuilding what their cooks have taught (11d3).
+const cookProfiles = async (env, fid, aid) => (await env.DB.prepare('SELECT profile_id FROM attempt_profiles WHERE attempt_id = ? AND family_id = ?')
+  .bind(aid, fid).all()).results.map((r) => r.profile_id);
 const note = (v, field, max) => (v == null || String(v).trim() === '' ? null : text(v, field, { max }));
 
 on('PUT', '/api/attempts/([0-9a-f]{16})/reflection', async (req, env, body, [aid]) => {
@@ -538,6 +545,8 @@ on('PUT', '/api/attempts/([0-9a-f]{16})/reflection', async (req, env, body, [aid
     stmts.push(env.DB.prepare('UPDATE attempts SET eater_rating = ? WHERE id = ? AND family_id = ?').bind(rating(body.eater_rating, "The eaters' rating"), cook.id, s.family_id));
   }
   await env.DB.batch(stmts);
+  // The eaters' rating counts for everyone on the cook, so all of them are relearned.
+  await relearn(env, s.family_id, await cookProfiles(env, s.family_id, cook.id));
   return { ok: true };
 }, KID);
 
@@ -555,6 +564,7 @@ on('POST', '/api/attempts/([0-9a-f]{16})/remove', async (req, env, body, [aid]) 
     stmts.push(env.DB.prepare("UPDATE queue SET status = 'assigned', closed_at = NULL WHERE id = ? AND family_id = ? AND status = 'cooked'").bind(cook.queue_id, s.family_id));
   }
   await env.DB.batch(stmts);
+  await relearn(env, s.family_id, await cookProfiles(env, s.family_id, aid));
   return { ok: true };
 });
 
@@ -569,6 +579,7 @@ on('POST', '/api/attempts/([0-9a-f]{16})/restore', async (req, env, body, [aid])
     const ids = (await env.DB.prepare('SELECT profile_id FROM attempt_profiles WHERE attempt_id = ? AND family_id = ?').bind(aid, s.family_id).all()).results.map((r) => r.profile_id);
     if (ids.length) await markCooked(env, s.family_id, cook.lesson_id, ids, aid);
   }
+  await relearn(env, s.family_id, await cookProfiles(env, s.family_id, aid));
   return { ok: true };
 });
 
@@ -922,6 +933,8 @@ registerSetup(on);
 registerGrades(on);
 registerTastes(on);
 registerVariations(on);
+registerPicks(on);
+registerGaps(on);
 
 // ---------- dispatch ----------
 

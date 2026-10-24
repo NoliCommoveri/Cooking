@@ -55,3 +55,20 @@ CREATE TABLE IF NOT EXISTS list_variations (
   PRIMARY KEY (list_id, position)
 );
 CREATE INDEX IF NOT EXISTS list_variations_family ON list_variations(family_id);
+
+-- Phase 11d3 (plan §6.21): what each profile's cooks have taught. Rebuilt for
+-- a profile from all its finished cooks whenever a reflection on one is saved
+-- (its own rating and half the eaters'), so a changed reflection is never
+-- counted twice. kind: the cooked version's flavors, its protein, or the
+-- lesson's cuisine. adjust: added to the score, -2 to 2. Cuisines are never
+-- asked; they're only learned here.
+CREATE TABLE IF NOT EXISTS taste_learned (
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  profile_id TEXT NOT NULL,
+  kind       TEXT NOT NULL CHECK (kind IN ('flavor', 'protein', 'cuisine')),
+  item       TEXT NOT NULL,
+  adjust     REAL NOT NULL,
+  cooks      INTEGER NOT NULL,
+  PRIMARY KEY (profile_id, kind, item)
+);
+CREATE INDEX IF NOT EXISTS taste_learned_family ON taste_learned(family_id);

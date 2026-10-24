@@ -96,7 +96,24 @@ export const LIBRARY = {
     "optional": [
      "cilantro"
     ]
-   }
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "vegetable-peeler",
+    "saucepan-medium",
+    "tongs",
+    "thermometer",
+    "plate",
+    "colander",
+    "mixing-bowl-large",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "shallow-dish",
+    "kitchen-towel"
+   ]
   },
   {
    "id": "chicken-fajitas",
@@ -208,6 +225,19 @@ export const LIBRARY = {
      "cilantro"
     ]
    },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "measuring-spoons",
+    "plate",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "thermometer",
+    "paper-towels",
+    "microwave"
+   ],
    "variations": [
     {
      "title": "Steak fajitas",
@@ -313,6 +343,19 @@ export const LIBRARY = {
        "cilantro"
       ]
      },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "small-bowl",
+      "measuring-spoons",
+      "plate",
+      "skillet-12",
+      "tongs",
+      "spatula",
+      "thermometer",
+      "paper-towels",
+      "microwave"
+     ],
      "id": "steak"
     },
     {
@@ -419,6 +462,19 @@ export const LIBRARY = {
        "cilantro"
       ]
      },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "small-bowl",
+      "measuring-spoons",
+      "skillet-12",
+      "spatula",
+      "paper-towels",
+      "microwave",
+      "colander",
+      "can-opener",
+      "wooden-spoon"
+     ],
      "id": "black-bean"
     },
     {
@@ -533,6 +589,20 @@ export const LIBRARY = {
        "cilantro"
       ]
      },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "small-bowl",
+      "measuring-spoons",
+      "plate",
+      "skillet-12",
+      "tongs",
+      "spatula",
+      "thermometer",
+      "paper-towels",
+      "microwave",
+      "spoon"
+     ],
      "id": "spicy"
     }
    ]
@@ -600,7 +670,18 @@ export const LIBRARY = {
     "optional": [
      "garlic"
     ]
-   }
+   },
+   "tools": [
+    "sheet-pan",
+    "parchment",
+    "chef-knife",
+    "cutting-board",
+    "mixing-bowl-large",
+    "kitchen-towel",
+    "measuring-spoons",
+    "spatula",
+    "oven-mitts"
+   ]
   },
   {
    "id": "fattoush",
@@ -709,7 +790,22 @@ export const LIBRARY = {
      "garlic"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "sheet-pan",
+    "pastry-brush",
+    "oven-mitts",
+    "spatula",
+    "colander",
+    "kitchen-towel",
+    "mixing-bowl-large",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons"
+   ]
   },
   {
    "id": "chimichurri-steak",
@@ -787,6 +883,23 @@ export const LIBRARY = {
     ],
     "optional": []
    },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "colander",
+    "kitchen-towel",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "plate",
+    "paper-towels",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "thermometer",
+    "oven-mitts"
+   ],
    "variations": [
     {
      "title": "Chimichurri chicken",
@@ -858,6 +971,23 @@ export const LIBRARY = {
       ],
       "optional": []
      },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "colander",
+      "kitchen-towel",
+      "small-bowl",
+      "fork",
+      "measuring-cups",
+      "measuring-spoons",
+      "plate",
+      "paper-towels",
+      "skillet-12",
+      "tongs",
+      "spatula",
+      "thermometer",
+      "oven-mitts"
+     ],
      "id": "chicken"
     }
    ]
@@ -956,7 +1086,20 @@ export const LIBRARY = {
     "optional": [
      "tomatoes"
     ]
-   }
+   },
+   "tools": [
+    "can-opener",
+    "fork",
+    "mixing-bowl-large",
+    "chef-knife",
+    "cutting-board",
+    "colander",
+    "paper-towels",
+    "kitchen-towel",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon"
+   ]
   },
   {
    "id": "fish-tacos",
@@ -1065,7 +1208,25 @@ export const LIBRARY = {
      "cabbage",
      "sour-cream-yogurt"
     ]
-   }
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "spoon",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "sheet-pan",
+    "foil",
+    "pastry-brush",
+    "oven-mitts",
+    "thermometer",
+    "fork",
+    "paper-towels",
+    "microwave",
+    "kitchen-towel"
+   ]
   },
   {
    "id": "ratatouille",
@@ -1161,7 +1322,19 @@ export const LIBRARY = {
      "tomatoes"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "colander",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "measuring-spoons",
+    "pot-large",
+    "wooden-spoon",
+    "oven-mitts"
+   ]
   },
   {
    "id": "minestrone",
@@ -1266,7 +1439,23 @@ export const LIBRARY = {
     "optional": [
      "sharp-cheese"
     ]
-   }
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "vegetable-peeler",
+    "colander",
+    "can-opener",
+    "mixing-bowl-large",
+    "small-bowl",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "pot-large",
+    "wooden-spoon",
+    "spoon",
+    "ladle"
+   ]
   },
   {
    "id": "chicken-caesar",
@@ -1380,7 +1569,25 @@ export const LIBRARY = {
      "sharp-cheese"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "mixing-bowl-large",
+    "sheet-pan",
+    "oven-mitts",
+    "spatula",
+    "plate",
+    "skillet-12",
+    "tongs",
+    "thermometer",
+    "small-bowl",
+    "whisk",
+    "measuring-cups",
+    "measuring-spoons",
+    "colander",
+    "kitchen-towel"
+   ]
   },
   {
    "id": "chicken-souvlaki-pitas",
@@ -1482,7 +1689,24 @@ export const LIBRARY = {
      "tomatoes"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "box-grater",
+    "kitchen-towel",
+    "chef-knife",
+    "cutting-board",
+    "mixing-bowl-medium",
+    "mixing-bowl-large",
+    "spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "spatula",
+    "plate",
+    "thermometer",
+    "paper-towels",
+    "microwave"
+   ]
   },
   {
    "id": "smash-burgers",
@@ -1584,6 +1808,22 @@ export const LIBRARY = {
      "mustard"
     ]
    },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "mixing-bowl-medium",
+    "saucepan-medium",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "wooden-spoon",
+    "plate",
+    "parchment",
+    "skillet-12",
+    "spatula",
+    "tongs",
+    "thermometer",
+    "oven-mitts"
+   ],
    "variations": [
     {
      "title": "Turkey smash burgers + quick pickles",
@@ -1679,6 +1919,22 @@ export const LIBRARY = {
        "mustard"
       ]
      },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "mixing-bowl-medium",
+      "saucepan-medium",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "wooden-spoon",
+      "plate",
+      "parchment",
+      "skillet-12",
+      "spatula",
+      "tongs",
+      "thermometer",
+      "oven-mitts"
+     ],
      "id": "turkey"
     }
    ]
@@ -1738,7 +1994,21 @@ export const LIBRARY = {
    "tasteItems": {
     "required": [],
     "optional": []
-   }
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "whisk",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "skillet-nonstick-8",
+    "silicone-spatula",
+    "plate",
+    "paper-towels",
+    "thermometer"
+   ]
   },
   {
    "id": "grilled-cheese-tomato-soup",
@@ -1834,7 +2104,22 @@ export const LIBRARY = {
      "tomatoes"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "can-opener",
+    "pot-large",
+    "wooden-spoon",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "immersion-blender",
+    "ladle",
+    "table-knife",
+    "plate",
+    "skillet-12",
+    "spatula"
+   ]
   },
   {
    "id": "challah-french-toast",
@@ -1919,7 +2204,22 @@ export const LIBRARY = {
    "tasteItems": {
     "required": [],
     "optional": []
-   }
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "shallow-dish",
+    "whisk",
+    "fork",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "skillet-12",
+    "spatula",
+    "plate",
+    "foil",
+    "paper-towels",
+    "thermometer"
+   ]
   },
   {
    "id": "hash-browns",
@@ -1985,7 +2285,19 @@ export const LIBRARY = {
    "tasteItems": {
     "required": [],
     "optional": []
-   }
+   },
+   "tools": [
+    "vegetable-peeler",
+    "box-grater",
+    "mixing-bowl-large",
+    "colander",
+    "kitchen-towel",
+    "measuring-spoons",
+    "skillet-12",
+    "spatula",
+    "plate",
+    "foil"
+   ]
   },
   {
    "id": "shakshuka",
@@ -2081,6 +2393,16 @@ export const LIBRARY = {
      "feta"
     ]
    },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "skillet-12",
+    "wooden-spoon",
+    "measuring-spoons",
+    "can-opener",
+    "small-bowl",
+    "thermometer"
+   ],
    "variations": [
     {
      "title": "Spicy shakshuka",
@@ -2176,6 +2498,17 @@ export const LIBRARY = {
        "feta"
       ]
      },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "skillet-12",
+      "wooden-spoon",
+      "measuring-spoons",
+      "can-opener",
+      "small-bowl",
+      "thermometer",
+      "spoon"
+     ],
      "id": "spicy"
     }
    ]
@@ -2269,7 +2602,20 @@ export const LIBRARY = {
     "optional": [
      "sharp-cheese"
     ]
-   }
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "can-opener",
+    "skillet-12",
+    "wooden-spoon",
+    "measuring-spoons",
+    "measuring-cups",
+    "pot-large",
+    "tongs",
+    "liquid-measuring-cup",
+    "colander"
+   ]
   },
   {
    "id": "honey-garlic-chicken",
@@ -2367,6 +2713,23 @@ export const LIBRARY = {
      "sesame"
     ]
    },
+   "tools": [
+    "saucepan-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "chef-knife",
+    "cutting-board",
+    "box-grater",
+    "spoon",
+    "small-bowl",
+    "mixing-bowl-large",
+    "skillet-12",
+    "spatula",
+    "plate",
+    "fork",
+    "thermometer"
+   ],
    "variations": [
     {
      "title": "Honey-garlic salmon",
@@ -2458,6 +2821,24 @@ export const LIBRARY = {
        "sesame"
       ]
      },
+     "tools": [
+      "saucepan-medium",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "chef-knife",
+      "cutting-board",
+      "box-grater",
+      "spoon",
+      "small-bowl",
+      "mixing-bowl-large",
+      "skillet-12",
+      "spatula",
+      "plate",
+      "fork",
+      "thermometer",
+      "paper-towels"
+     ],
      "id": "salmon"
     },
     {
@@ -2550,6 +2931,23 @@ export const LIBRARY = {
        "sesame"
       ]
      },
+     "tools": [
+      "saucepan-medium",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "chef-knife",
+      "cutting-board",
+      "box-grater",
+      "spoon",
+      "small-bowl",
+      "mixing-bowl-large",
+      "skillet-12",
+      "spatula",
+      "plate",
+      "fork",
+      "kitchen-towel"
+     ],
      "id": "tofu"
     }
    ]
@@ -2638,7 +3036,20 @@ export const LIBRARY = {
      "sesame"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "spatula",
+    "plate",
+    "thermometer"
+   ]
   },
   {
    "id": "turkey-lettuce-wraps",
@@ -2727,7 +3138,24 @@ export const LIBRARY = {
      "sesame"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "vegetable-peeler",
+    "chef-knife",
+    "cutting-board",
+    "can-opener",
+    "colander",
+    "box-grater",
+    "spoon",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "paper-towels",
+    "plate",
+    "skillet-12",
+    "wooden-spoon",
+    "thermometer"
+   ]
   },
   {
    "id": "oyakodon",
@@ -2812,7 +3240,21 @@ export const LIBRARY = {
      "onions"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "saucepan-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "chef-knife",
+    "cutting-board",
+    "mixing-bowl-medium",
+    "fork",
+    "skillet-12",
+    "wooden-spoon",
+    "ladle",
+    "thermometer"
+   ]
   },
   {
    "id": "chicken-adobo",
@@ -2901,7 +3343,23 @@ export const LIBRARY = {
     "optional": [
      "onions"
     ]
-   }
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "pot-large",
+    "tongs",
+    "wooden-spoon",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "saucepan-medium",
+    "fork",
+    "spoon",
+    "thermometer"
+   ]
   },
   {
    "id": "chicken-piccata",
@@ -2989,7 +3447,25 @@ export const LIBRARY = {
      "capers"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "parchment",
+    "rolling-pin",
+    "shallow-dish",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "plate",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "wooden-spoon",
+    "thermometer",
+    "foil",
+    "oven-mitts"
+   ]
   },
   {
    "id": "pineapple-teriyaki-salmon",
@@ -3084,7 +3560,29 @@ export const LIBRARY = {
     "optional": [
      "sesame"
     ]
-   }
+   },
+   "tools": [
+    "saucepan-medium",
+    "saucepan-light",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "can-opener",
+    "colander",
+    "small-bowl",
+    "box-grater",
+    "spoon",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "fork",
+    "thermometer",
+    "oven-mitts"
+   ]
   },
   {
    "id": "breakfast-burritos",
@@ -3173,7 +3671,25 @@ export const LIBRARY = {
     "optional": [
      "sour-cream-yogurt"
     ]
-   }
+   },
+   "tools": [
+    "vegetable-peeler",
+    "chef-knife",
+    "cutting-board",
+    "measuring-spoons",
+    "measuring-cups",
+    "skillet-12",
+    "wooden-spoon",
+    "spatula",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "whisk",
+    "foil",
+    "kitchen-towel",
+    "plate",
+    "microwave",
+    "thermometer"
+   ]
   },
   {
    "id": "cacio-e-pepe",
@@ -3246,7 +3762,18 @@ export const LIBRARY = {
      "sharp-cheese"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "pot-large",
+    "skillet-12",
+    "mixing-bowl-medium",
+    "fork",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "tongs",
+    "oven-mitts"
+   ]
   },
   {
    "id": "eggs-benedict",
@@ -3328,7 +3855,28 @@ export const LIBRARY = {
      "lemon-lime"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "saucepan-medium",
+    "heatproof-bowl",
+    "whisk",
+    "small-bowl",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "microwave",
+    "fork",
+    "skillet-12",
+    "tongs",
+    "paper-towels",
+    "plate",
+    "pot-large",
+    "slotted-spoon",
+    "toaster",
+    "oven-mitts",
+    "chef-knife",
+    "cutting-board",
+    "thermometer"
+   ]
   },
   {
    "id": "huevos-rancheros",
@@ -3400,7 +3948,25 @@ export const LIBRARY = {
      "avocado",
      "cilantro"
     ]
-   }
+   },
+   "tools": [
+    "can-opener",
+    "saucepan-light",
+    "wooden-spoon",
+    "skillet-12",
+    "tongs",
+    "paper-towels",
+    "plate",
+    "measuring-cups",
+    "measuring-spoons",
+    "small-bowl",
+    "spoon",
+    "spatula",
+    "thermometer",
+    "chef-knife",
+    "cutting-board",
+    "oven-mitts"
+   ]
   },
   {
    "id": "mac-and-cheese",
@@ -3485,7 +4051,18 @@ export const LIBRARY = {
     "optional": [
      "mustard"
     ]
-   }
+   },
+   "tools": [
+    "pot-large",
+    "colander",
+    "saucepan-medium",
+    "whisk",
+    "wooden-spoon",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "spoon"
+   ]
   },
   {
    "id": "chicken-spinach-crepes",
@@ -3578,7 +4155,28 @@ export const LIBRARY = {
      "sharp-cheese"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "mixing-bowl-medium",
+    "whisk",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "microwave",
+    "skillet-nonstick-8",
+    "silicone-spatula",
+    "plate",
+    "chef-knife",
+    "cutting-board",
+    "skillet-12",
+    "wooden-spoon",
+    "saucepan-medium",
+    "mixing-bowl-large",
+    "baking-dish",
+    "oven-mitts",
+    "paper-towels",
+    "thermometer"
+   ]
   },
   {
    "id": "japanese-chicken-curry",
@@ -3682,7 +4280,25 @@ export const LIBRARY = {
      "carrots"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "saucepan-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "chef-knife",
+    "cutting-board",
+    "vegetable-peeler",
+    "box-grater",
+    "spoon",
+    "pot-large",
+    "wooden-spoon",
+    "skillet-12",
+    "whisk",
+    "ladle",
+    "fork",
+    "thermometer"
+   ]
   },
   {
    "id": "beef-bulgogi",
@@ -3779,6 +4395,20 @@ export const LIBRARY = {
     ],
     "optional": []
    },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "box-grater",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "plate",
+    "thermometer"
+   ],
    "variations": [
     {
      "title": "Chicken bulgogi",
@@ -3869,6 +4499,20 @@ export const LIBRARY = {
       ],
       "optional": []
      },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "box-grater",
+      "mixing-bowl-large",
+      "measuring-cups",
+      "measuring-spoons",
+      "wooden-spoon",
+      "skillet-12",
+      "tongs",
+      "spatula",
+      "plate",
+      "thermometer"
+     ],
      "id": "chicken"
     }
    ]
@@ -3944,7 +4588,22 @@ export const LIBRARY = {
    "tasteItems": {
     "required": [],
     "optional": []
-   }
+   },
+   "tools": [
+    "mixing-bowl-large",
+    "box-grater",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "whisk",
+    "fork",
+    "biscuit-cutter",
+    "sheet-pan",
+    "parchment",
+    "pastry-brush",
+    "oven-mitts",
+    "cooling-rack"
+   ]
   },
   {
    "id": "brown-butter-cookies",
@@ -4021,7 +4680,22 @@ export const LIBRARY = {
    "tasteItems": {
     "required": [],
     "optional": []
-   }
+   },
+   "tools": [
+    "saucepan-light",
+    "silicone-spatula",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "wooden-spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "sheet-pan",
+    "parchment",
+    "oven-mitts",
+    "spatula",
+    "cooling-rack"
+   ]
   },
   {
    "id": "unleavened-flatbread",
@@ -4081,7 +4755,19 @@ export const LIBRARY = {
    "tasteItems": {
     "required": [],
     "optional": []
-   }
+   },
+   "tools": [
+    "mixing-bowl-large",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "wooden-spoon",
+    "rolling-pin",
+    "fork",
+    "skillet-12",
+    "spatula",
+    "plate"
+   ]
   },
   {
    "id": "cottage-cheese-crescents",
@@ -4149,7 +4835,23 @@ export const LIBRARY = {
      "cottage-cheese"
     ],
     "optional": []
-   }
+   },
+   "tools": [
+    "mixing-bowl-large",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "fork",
+    "wooden-spoon",
+    "rolling-pin",
+    "chef-knife",
+    "cutting-board",
+    "sheet-pan",
+    "parchment",
+    "oven-mitts",
+    "spatula",
+    "cooling-rack"
+   ]
   }
  ],
  "ingredients": {
@@ -4889,6 +5591,8 @@ export const LIBRARY = {
     "julienne",
     "rolling-wrapping"
    ],
+   "minutes": 60,
+   "cuisine": "vietnamese",
    "pickOne": "julienne",
    "tags": {
     "protein": "chicken",
@@ -4910,6 +5614,8 @@ export const LIBRARY = {
     "julienne",
     "searing"
    ],
+   "minutes": 50,
+   "cuisine": "tex-mex",
    "pickOne": "julienne",
    "tags": {
     "protein": "chicken",
@@ -4931,6 +5637,8 @@ export const LIBRARY = {
     "julienne",
     "oven-browning"
    ],
+   "minutes": 70,
+   "cuisine": "american",
    "pickOne": "julienne",
    "meal": false,
    "tags": {
@@ -4953,6 +5661,8 @@ export const LIBRARY = {
     "fine-chopping",
     "dressings"
    ],
+   "minutes": 40,
+   "cuisine": "lebanese",
    "pickOne": "fine-chopping",
    "tags": {
     "protein": "none",
@@ -4975,6 +5685,8 @@ export const LIBRARY = {
     "fine-chopping",
     "searing"
    ],
+   "minutes": 45,
+   "cuisine": "argentine",
    "pickOne": "fine-chopping",
    "tags": {
     "protein": "beef",
@@ -4995,6 +5707,8 @@ export const LIBRARY = {
    "skills": [
     "fine-chopping"
    ],
+   "minutes": 25,
+   "cuisine": "american",
    "pickOne": "fine-chopping",
    "tags": {
     "protein": "tuna",
@@ -5016,6 +5730,8 @@ export const LIBRARY = {
     "dicing",
     "broiling"
    ],
+   "minutes": 50,
+   "cuisine": "mexican",
    "pickOne": "dicing",
    "tags": {
     "protein": "white-fish",
@@ -5037,6 +5753,8 @@ export const LIBRARY = {
     "dicing",
     "simmering"
    ],
+   "minutes": 70,
+   "cuisine": "french",
    "pickOne": "dicing",
    "tags": {
     "protein": "none",
@@ -5059,6 +5777,8 @@ export const LIBRARY = {
     "dicing",
     "simmering"
    ],
+   "minutes": 60,
+   "cuisine": "italian",
    "pickOne": "dicing",
    "tags": {
     "protein": "beans-lentils",
@@ -5080,6 +5800,8 @@ export const LIBRARY = {
     "dressings",
     "dicing"
    ],
+   "minutes": 50,
+   "cuisine": "american",
    "pickOne": "dressings",
    "tags": {
     "protein": "chicken",
@@ -5102,6 +5824,8 @@ export const LIBRARY = {
     "dressings",
     "fine-chopping"
    ],
+   "minutes": 45,
+   "cuisine": "greek",
    "pickOne": "dressings",
    "tags": {
     "protein": "chicken",
@@ -5125,6 +5849,8 @@ export const LIBRARY = {
     "quick-pickling",
     "searing"
    ],
+   "minutes": 60,
+   "cuisine": "american",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -5144,6 +5870,8 @@ export const LIBRARY = {
    "skills": [
     "heat-control"
    ],
+   "minutes": 35,
+   "cuisine": "french",
    "pickOne": "heat-control",
    "tags": {
     "protein": "eggs",
@@ -5165,6 +5893,8 @@ export const LIBRARY = {
     "heat-control",
     "simmering"
    ],
+   "minutes": 55,
+   "cuisine": "american",
    "pickOne": "heat-control",
    "tags": {
     "protein": "none",
@@ -5187,6 +5917,8 @@ export const LIBRARY = {
     "heat-control",
     "batters"
    ],
+   "minutes": 40,
+   "cuisine": "jewish",
    "pickOne": "heat-control",
    "tags": {
     "protein": "eggs",
@@ -5208,6 +5940,8 @@ export const LIBRARY = {
    "skills": [
     "crisping"
    ],
+   "minutes": 45,
+   "cuisine": "american",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -5229,6 +5963,8 @@ export const LIBRARY = {
     "building-a-sauce",
     "poaching-eggs"
    ],
+   "minutes": 40,
+   "cuisine": "north-african",
    "pickOne": "building-a-sauce",
    "tags": {
     "protein": "eggs",
@@ -5251,6 +5987,8 @@ export const LIBRARY = {
     "building-a-sauce",
     "simmering"
    ],
+   "minutes": 50,
+   "cuisine": "italian",
    "pickOne": "building-a-sauce",
    "tags": {
     "protein": "none",
@@ -5272,6 +6010,8 @@ export const LIBRARY = {
     "building-a-sauce",
     "reducing"
    ],
+   "minutes": 45,
+   "cuisine": "chinese-american",
    "pickOne": "building-a-sauce",
    "tags": {
     "protein": "chicken",
@@ -5294,6 +6034,8 @@ export const LIBRARY = {
     "stir-frying",
     "dicing"
    ],
+   "minutes": 35,
+   "cuisine": "chinese",
    "pickOne": "stir-frying",
    "tags": {
     "protein": "chicken",
@@ -5315,6 +6057,8 @@ export const LIBRARY = {
     "stir-frying",
     "dicing"
    ],
+   "minutes": 30,
+   "cuisine": "chinese-american",
    "pickOne": "stir-frying",
    "tags": {
     "protein": "turkey",
@@ -5336,6 +6080,8 @@ export const LIBRARY = {
     "simmering",
     "poaching-eggs"
    ],
+   "minutes": 45,
+   "cuisine": "japanese",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -5357,6 +6103,8 @@ export const LIBRARY = {
     "braising",
     "reducing"
    ],
+   "minutes": 75,
+   "cuisine": "filipino",
    "pickOne": "reducing",
    "tags": {
     "protein": "chicken",
@@ -5379,6 +6127,8 @@ export const LIBRARY = {
     "searing",
     "reducing"
    ],
+   "minutes": 35,
+   "cuisine": "italian",
    "pickOne": "reducing",
    "tags": {
     "protein": "chicken",
@@ -5400,6 +6150,8 @@ export const LIBRARY = {
     "reducing",
     "searing"
    ],
+   "minutes": 40,
+   "cuisine": "hawaiian",
    "pickOne": "reducing",
    "tags": {
     "protein": "salmon",
@@ -5423,6 +6175,8 @@ export const LIBRARY = {
     "timing",
     "rolling-wrapping"
    ],
+   "minutes": 50,
+   "cuisine": "american",
    "tags": {
     "protein": "turkey",
     "flavors": [
@@ -5442,6 +6196,8 @@ export const LIBRARY = {
    "skills": [
     "emulsions"
    ],
+   "minutes": 30,
+   "cuisine": "italian",
    "tags": {
     "protein": "none",
     "flavors": [
@@ -5462,6 +6218,8 @@ export const LIBRARY = {
     "poaching-eggs",
     "emulsions"
    ],
+   "minutes": 60,
+   "cuisine": "american",
    "pickOne": "poaching-eggs",
    "prereqs": [
     "cacio-e-pepe"
@@ -5486,6 +6244,8 @@ export const LIBRARY = {
     "poaching-eggs",
     "heat-control"
    ],
+   "minutes": 35,
+   "cuisine": "mexican",
    "pickOne": "poaching-eggs",
    "tags": {
     "protein": "eggs",
@@ -5507,6 +6267,8 @@ export const LIBRARY = {
    "skills": [
     "roux"
    ],
+   "minutes": 40,
+   "cuisine": "american",
    "pickOne": "roux",
    "tags": {
     "protein": "none",
@@ -5528,6 +6290,8 @@ export const LIBRARY = {
     "roux",
     "batters"
    ],
+   "minutes": 80,
+   "cuisine": "french",
    "pickOne": "roux",
    "tags": {
     "protein": "chicken",
@@ -5549,6 +6313,8 @@ export const LIBRARY = {
     "roux",
     "blooming-spices"
    ],
+   "minutes": 65,
+   "cuisine": "japanese",
    "pickOne": "roux",
    "tags": {
     "protein": "chicken",
@@ -5571,6 +6337,8 @@ export const LIBRARY = {
     "blooming-spices",
     "flavor-base"
    ],
+   "minutes": 45,
+   "cuisine": "indian",
    "pickOne": "blooming-spices",
    "tags": {
     "protein": "beans-lentils",
@@ -5592,6 +6360,8 @@ export const LIBRARY = {
     "blooming-spices",
     "flavor-base"
    ],
+   "minutes": 30,
+   "cuisine": "indian",
    "pickOne": "blooming-spices",
    "tags": {
     "protein": "beans-lentils",
@@ -5615,6 +6385,8 @@ export const LIBRARY = {
     "blooming-spices",
     "simmering"
    ],
+   "minutes": 75,
+   "cuisine": "american",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -5636,6 +6408,8 @@ export const LIBRARY = {
     "blooming-spices",
     "simmering"
    ],
+   "minutes": 55,
+   "cuisine": "ethiopian",
    "tags": {
     "protein": "beans-lentils",
     "flavors": [
@@ -5657,6 +6431,8 @@ export const LIBRARY = {
     "flavor-base",
     "simmering"
    ],
+   "minutes": 120,
+   "cuisine": "louisiana",
    "tags": {
     "protein": "beans-lentils",
     "flavors": [
@@ -5677,6 +6453,8 @@ export const LIBRARY = {
     "flavor-base",
     "simmering"
    ],
+   "minutes": 75,
+   "cuisine": "nigerian",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -5698,6 +6476,8 @@ export const LIBRARY = {
     "spice-rubs",
     "reducing"
    ],
+   "minutes": 90,
+   "cuisine": "american",
    "pickOne": "spice-rubs",
    "tags": {
     "protein": "chicken",
@@ -5720,6 +6500,8 @@ export const LIBRARY = {
     "spice-rubs",
     "searing"
    ],
+   "minutes": 20,
+   "cuisine": "louisiana",
    "pickOne": "spice-rubs",
    "tags": {
     "protein": "white-fish",
@@ -5742,6 +6524,8 @@ export const LIBRARY = {
     "spice-rubs",
     "searing"
    ],
+   "minutes": 25,
+   "cuisine": "american",
    "pickOne": "spice-rubs",
    "tags": {
     "protein": "salmon",
@@ -5764,6 +6548,8 @@ export const LIBRARY = {
     "blooming-spices",
     "braising"
    ],
+   "minutes": 90,
+   "cuisine": "moroccan",
    "pickOne": "braising",
    "tags": {
     "protein": "chicken",
@@ -5786,6 +6572,8 @@ export const LIBRARY = {
     "braising",
     "blooming-spices"
    ],
+   "minutes": 75,
+   "cuisine": "jamaican",
    "pickOne": "braising",
    "tags": {
     "protein": "lamb",
@@ -5808,6 +6596,8 @@ export const LIBRARY = {
     "one-pot-stews",
     "flavor-base"
    ],
+   "minutes": 70,
+   "cuisine": "malian",
    "pickOne": "one-pot-stews",
    "tags": {
     "protein": "chicken",
@@ -5830,6 +6620,8 @@ export const LIBRARY = {
     "one-pot-stews",
     "flavor-base"
    ],
+   "minutes": 30,
+   "cuisine": "brazilian",
    "pickOne": "one-pot-stews",
    "tags": {
     "protein": "white-fish",
@@ -5852,6 +6644,8 @@ export const LIBRARY = {
     "layering",
     "crisping"
    ],
+   "minutes": 75,
+   "cuisine": "egyptian",
    "tags": {
     "protein": "beans-lentils",
     "flavors": [
@@ -5873,6 +6667,8 @@ export const LIBRARY = {
     "marinating",
     "building-a-sauce"
    ],
+   "minutes": 60,
+   "cuisine": "indian",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -5894,6 +6690,8 @@ export const LIBRARY = {
     "marinating",
     "broiling"
    ],
+   "minutes": 60,
+   "cuisine": "jamaican",
    "pickOne": "broiling",
    "tags": {
     "protein": "chicken",
@@ -5916,6 +6714,8 @@ export const LIBRARY = {
     "broiling",
     "marinating"
    ],
+   "minutes": 25,
+   "cuisine": "american",
    "pickOne": "broiling",
    "tags": {
     "protein": "salmon",
@@ -5938,6 +6738,8 @@ export const LIBRARY = {
     "thin-slicing",
     "marinating"
    ],
+   "minutes": 80,
+   "cuisine": "korean",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -5959,6 +6761,8 @@ export const LIBRARY = {
     "thin-slicing",
     "searing"
    ],
+   "minutes": 40,
+   "cuisine": "american",
    "prereqs": [
     "beef-bulgogi"
    ],
@@ -5982,6 +6786,8 @@ export const LIBRARY = {
     "stir-frying",
     "thin-slicing"
    ],
+   "minutes": 45,
+   "cuisine": "peruvian",
    "pickOne": "thin-slicing",
    "tags": {
     "protein": "beef",
@@ -6004,6 +6810,8 @@ export const LIBRARY = {
     "thin-slicing",
     "stir-frying"
    ],
+   "minutes": 25,
+   "cuisine": "chinese-american",
    "pickOne": "thin-slicing",
    "tags": {
     "protein": "beef",
@@ -6026,6 +6834,8 @@ export const LIBRARY = {
     "spice-rubs",
     "broiling"
    ],
+   "minutes": 50,
+   "cuisine": "nigerian",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -6047,6 +6857,8 @@ export const LIBRARY = {
     "marinating",
     "flavor-base"
    ],
+   "minutes": 75,
+   "cuisine": "senegalese",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -6068,6 +6880,8 @@ export const LIBRARY = {
     "braising",
     "shredding"
    ],
+   "minutes": 70,
+   "cuisine": "mexican",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -6089,6 +6903,8 @@ export const LIBRARY = {
     "breaking-down-chicken",
     "making-stock"
    ],
+   "minutes": 180,
+   "cuisine": "jewish",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -6108,6 +6924,8 @@ export const LIBRARY = {
    "skills": [
     "muffin-method"
    ],
+   "minutes": 45,
+   "cuisine": "american",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -6129,6 +6947,8 @@ export const LIBRARY = {
     "skillet-baking",
     "muffin-method"
    ],
+   "minutes": 40,
+   "cuisine": "american",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -6149,6 +6969,8 @@ export const LIBRARY = {
    "skills": [
     "scalded-dough"
    ],
+   "minutes": 50,
+   "cuisine": "brazilian",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -6169,6 +6991,8 @@ export const LIBRARY = {
    "skills": [
     "flatbreads"
    ],
+   "minutes": 60,
+   "cuisine": "indian",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -6189,6 +7013,8 @@ export const LIBRARY = {
    "skills": [
     "masa-dough"
    ],
+   "minutes": 60,
+   "cuisine": "salvadoran",
    "tags": {
     "protein": "beans-lentils",
     "flavors": [
@@ -6210,6 +7036,8 @@ export const LIBRARY = {
     "stiff-porridge",
     "braising"
    ],
+   "minutes": 50,
+   "cuisine": "kenyan",
    "tags": {
     "protein": "none",
     "flavors": [
@@ -6230,6 +7058,8 @@ export const LIBRARY = {
     "cutting-in-fat",
     "folding-layers"
    ],
+   "minutes": 50,
+   "cuisine": "american",
    "pickOne": "cutting-in-fat",
    "meal": false,
    "tags": {
@@ -6252,6 +7082,8 @@ export const LIBRARY = {
     "cutting-in-fat",
     "rolling-wrapping"
    ],
+   "minutes": 120,
+   "cuisine": "jewish",
    "pickOne": "cutting-in-fat",
    "meal": false,
    "tags": {
@@ -6274,6 +7106,8 @@ export const LIBRARY = {
     "cutting-in-fat",
     "filling-crimping"
    ],
+   "minutes": 90,
+   "cuisine": "argentine",
    "pickOne": "cutting-in-fat",
    "tags": {
     "protein": "beef",
@@ -6295,6 +7129,8 @@ export const LIBRARY = {
     "roux",
     "gravy"
    ],
+   "minutes": 40,
+   "cuisine": "american",
    "prereqs": [
     "buttermilk-biscuits",
     "pick:roux"
@@ -6320,6 +7156,8 @@ export const LIBRARY = {
     "pleating",
     "crisping"
    ],
+   "minutes": 75,
+   "cuisine": "japanese",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -6339,6 +7177,8 @@ export const LIBRARY = {
    "skills": [
     "yeast-dough"
    ],
+   "minutes": 180,
+   "cuisine": "american",
    "pickOne": "yeast-dough",
    "meal": false,
    "tags": {
@@ -6360,6 +7200,8 @@ export const LIBRARY = {
    "skills": [
     "yeast-dough"
    ],
+   "minutes": 210,
+   "cuisine": "jewish",
    "pickOne": "yeast-dough",
    "meal": false,
    "tags": {
@@ -6381,6 +7223,8 @@ export const LIBRARY = {
    "skills": [
     "yeast-dough"
    ],
+   "minutes": 120,
+   "cuisine": "italian",
    "pickOne": "yeast-dough",
    "tags": {
     "protein": "none",
@@ -6402,6 +7246,8 @@ export const LIBRARY = {
    "skills": [
     "oven-browning"
    ],
+   "minutes": 50,
+   "cuisine": "american",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -6422,6 +7268,8 @@ export const LIBRARY = {
    "skills": [
     "binders"
    ],
+   "minutes": 90,
+   "cuisine": "american",
    "pickOne": "binders",
    "tags": {
     "protein": "beef",
@@ -6443,6 +7291,8 @@ export const LIBRARY = {
    "skills": [
     "binders"
    ],
+   "minutes": 40,
+   "cuisine": "lebanese",
    "pickOne": "binders",
    "tags": {
     "protein": "lamb",
@@ -6466,6 +7316,8 @@ export const LIBRARY = {
     "roux",
     "gravy"
    ],
+   "minutes": 60,
+   "cuisine": "swedish",
    "prereqs": [
     "pick:roux"
    ],
@@ -6490,6 +7342,8 @@ export const LIBRARY = {
     "roasting",
     "gravy"
    ],
+   "minutes": 120,
+   "cuisine": "american",
    "prereqs": [
     "pick:roux"
    ],
@@ -6513,6 +7367,8 @@ export const LIBRARY = {
    "skills": [
     "braising"
    ],
+   "minutes": 210,
+   "cuisine": "american",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -6533,6 +7389,8 @@ export const LIBRARY = {
     "custards",
     "blooming-spices"
    ],
+   "minutes": 75,
+   "cuisine": "south-african",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -6553,6 +7411,8 @@ export const LIBRARY = {
    "skills": [
     "layered-pastry"
    ],
+   "minutes": 90,
+   "cuisine": "greek",
    "tags": {
     "protein": "none",
     "flavors": [
@@ -6574,6 +7434,8 @@ export const LIBRARY = {
     "pastry",
     "custards"
    ],
+   "minutes": 120,
+   "cuisine": "french",
    "tags": {
     "protein": "eggs",
     "flavors": [
@@ -6594,6 +7456,8 @@ export const LIBRARY = {
     "roux",
     "pastry"
    ],
+   "minutes": 105,
+   "cuisine": "american",
    "prereqs": [
     "pick:roux",
     "spinach-mushroom-quiche"
@@ -6618,6 +7482,8 @@ export const LIBRARY = {
    "skills": [
     "breading-frying"
    ],
+   "minutes": 60,
+   "cuisine": "japanese",
    "pickOne": "breading-frying",
    "tags": {
     "protein": "chicken",
@@ -6639,6 +7505,8 @@ export const LIBRARY = {
    "skills": [
     "breading-frying"
    ],
+   "minutes": 35,
+   "cuisine": "hawaiian",
    "pickOne": "breading-frying",
    "tags": {
     "protein": "white-fish",
@@ -6660,6 +7528,8 @@ export const LIBRARY = {
     "crisping",
     "spice-rubs"
    ],
+   "minutes": 30,
+   "cuisine": "ghanaian",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -6682,6 +7552,8 @@ export const LIBRARY = {
     "batters",
     "deep-frying"
    ],
+   "minutes": 70,
+   "cuisine": "british",
    "tags": {
     "protein": "white-fish",
     "flavors": [
@@ -6703,6 +7575,8 @@ export const LIBRARY = {
     "browning-butter",
     "creaming"
    ],
+   "minutes": 75,
+   "cuisine": "american",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -6725,6 +7599,8 @@ export const LIBRARY = {
     "batters",
     "custards"
    ],
+   "minutes": 70,
+   "cuisine": "south-african",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -6746,6 +7622,8 @@ export const LIBRARY = {
     "scalded-dough",
     "deep-frying"
    ],
+   "minutes": 60,
+   "cuisine": "mexican",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -6766,6 +7644,8 @@ export const LIBRARY = {
    "skills": [
     "pastry"
    ],
+   "minutes": 150,
+   "cuisine": "american",
    "prereqs": [
     "spinach-mushroom-quiche"
    ],
