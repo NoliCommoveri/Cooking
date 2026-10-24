@@ -91,6 +91,20 @@ in the database, so they stay.
 4. Sign up again and make yourself the owner, as in **6. First run**, steps 3
    and 4.
 
+## 8b. After the 2026-10-24 squash (one-time)
+
+The three migrations became one, so `/ops` shows `0001` as drifted and `0002`
+and `0003` as orphaned until you do this once. Everything comes back, logins
+included.
+
+1. On `/ops`, press **Download export.json** and keep the file.
+2. Press **Clear everything…**, type `DELETE EVERYTHING`, and press **Clear
+   everything**.
+3. Under **Migrations**, press **Apply pending**. `0001` shows as applied.
+4. Under backups, choose the file from step 1 in **Restore from export.json**
+   and press restore. Your family, profiles, courses, and the next release
+   preview are back as they were.
+
 ## 9. Check it (the Phase 2b test)
 
 1. In a family with two profiles, open a lesson from one profile's kitchen and

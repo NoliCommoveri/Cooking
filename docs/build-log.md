@@ -4451,3 +4451,30 @@ tables.
 - Tests: 347 (2 new: parts off at setup and on again later, with their hours;
   a skipped part and its take back). Expected Level hours are 126 now, the
   course's own planned total, not the Level's round 125.
+
+## 185. 2026-10-24 — Migrations squashed into one schema
+
+- Owner, 2026-10-24: no beta testers besides the owner are in yet, so the
+  schema changes are squashed. `0001_schema.sql` now holds everything:
+  - the first schema
+  - `0002`'s `deleted_at` and `school_name` columns on `families`, and the
+    `grades` and `transcripts` tables
+  - every table from the next release's draft `0003`: tastes, variations,
+    learning, and the Levels, with this session's `course_programs.parts` and
+    `level_tasks.skipped`
+- `0002` and `0003` are deleted. There's no draft migration now; a later
+  next-release table starts a new one. The draft runner, Re-apply, and
+  Finalize stay for that.
+- **Restore across the squash:** an export taken at `0002` or `0003` restores
+  into the squashed `0001` (`SQUASHED` in `src/worker/migrations/index.js`).
+  An older one is still refused. The column checks still guard every row.
+- **Owner, one time, all on `/ops`** (`docs/setup.md` §8b): Download
+  export.json, Clear everything, Apply pending, then Restore from
+  export.json. Until then `/ops` shows `0001` as drifted and `0002` and `0003`
+  as orphaned.
+- Checked end to end: a database built from the old three migrations, with a
+  next-release family, a Level course, and a checked-off drill, was exported,
+  cleared, migrated, and restored. The course and the drill came back, and
+  `/ops` reads applied.
+- Tests: 348 (one new: an export at 0003 restores and one at 0017 is refused;
+  the /ops draft page test runs only while a draft exists).
