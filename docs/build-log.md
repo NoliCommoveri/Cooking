@@ -3904,3 +3904,22 @@ Owner ruling on §12.7's question 5. No app changes.
   parents not to assign it unless the learner can work independently. The
   owner writes that text.
 - **§12.7:** question 5 marked ruled.
+
+## 157. 2026-10-24 — Plan: week-option rulings and the new dishes checked
+
+The owner took the recommendations on §12.7's other questions ("go with
+your recommendations on the rest"). No app changes.
+- **§12.2:** a week's choices are its options (best fit picks among them;
+  Swap recipe lists them first, then other recipes with the skill), and a
+  leavened week cooks its unleavened backup on the family's unleavened days
+  instead of being passed over; a week with no backup is still passed over.
+- **§12.7 rulings:** the four defaults (L4 wk 3 Chicken fajitas as Steak
+  fajitas, wk 15 hollandaise over asparagus, wk 22 chicken tikka masala; L2
+  wk 33 Chicken fried rice); a reviewed "watch for" list for teaching pages
+  that name unclean foods; live-action clips as a later phase.
+- **New dishes checked against Cook Around the World** (the §12.4
+  Requirement): 59 dishes. Proposed: 2 fill pick-one groups (poaching eggs,
+  breading and frying), 2 go to Appointed Times (matzah brei, roast leg of
+  lamb), 21 are variations, Lasagna for 12 is the lasagna lesson at 12, and
+  33 are Level only, in each Level's own Side quests unit. Waiting on the
+  owner.

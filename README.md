@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [156. 2026-10-24 — Plan: Level 4 learners get adult-style safety notes](docs/build-log.md#156-2026-10-24--plan-level-4-learners-get-adult-style-safety-notes)
+**Latest build log entry:** [157. 2026-10-24 — Plan: week-option rulings and the new dishes checked](docs/build-log.md#157-2026-10-24--plan-week-option-rulings-and-the-new-dishes-checked)
 
 ## Current features
 
