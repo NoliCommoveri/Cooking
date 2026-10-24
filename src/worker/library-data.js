@@ -7004,7 +7004,7 @@ export const LIBRARY = {
    "skills": [
     "thin-slicing",
     "stir-frying",
-    "julienne"
+    "blanching"
    ],
    "minutes": 50,
    "cuisine": "korean",
@@ -8140,11 +8140,11 @@ export const LIBRARY = {
      "unit": 4,
      "recipe": "garlic-green-beans",
      "drill": {
-      "title": "Shimmer test for hot oil",
+      "title": "Blanch and shock green beans and spinach; shimmer test for hot oil",
       "minutes": 40
      },
      "knowledge": {
-      "title": "Oils and smoke points",
+      "title": "Blanching: why vegetables stay green and crisp; oils and smoke points",
       "minutes": 35
      },
      "sabbath": {

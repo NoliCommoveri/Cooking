@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [161. 2026-10-24 — Plan: japchae in Level 3 week 13](docs/build-log.md#161-2026-10-24--plan-japchae-in-level-3-week-13)
+**Latest build log entry:** [162. 2026-10-24 — Blanching in Level 3 week 13](docs/build-log.md#162-2026-10-24--blanching-in-level-3-week-13)
 
 ## Current features
 
@@ -58,7 +58,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
 - **Dish illustrations** (`content/images/dishes/`): one picture for each planned dish.
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
-- **Lesson content** (`content/`): 37 lessons (all 12 of Unit 1, all 20 of Unit 2, 3 more samples, and the 2 Appointed Times lessons), and the ingredient, tool, skill (52), and cuisine lists, as JSON.
+- **Lesson content** (`content/`): 37 lessons (all 12 of Unit 1, all 20 of Unit 2, 3 more samples, and the 2 Appointed Times lessons), and the ingredient, tool, skill (60), and cuisine lists, as JSON.
 - **Level 3 content** (next release only, `content/levels/level-3.json`): Level 3 Cook's 9 units and 36 weeks, each with its skill, recipe, mastery check, and drill, knowledge, and Sabbath task, plus 17 Level-only recipes; edited on the manager's Level 3 page.
 - **Level courses** (next release only, `src/worker/plan.js`): setting up a course asks Which program?, Cook Around the World or Level 3 Cook; a Level course runs one week a week, its recipes in week order, and the course card shows "Week 5 of 36".
 - **The kitchen's Level week** (next release only): this week's recipe and its drill, knowledge, and Sabbath task pages, each checked off with Done (not on the Sabbath); parts still open from earlier weeks; the parent's Take back; and a mastery week's "cook it on your own" and "Why did it work?".

@@ -3982,3 +3982,21 @@ Owner, 2026-10-24. No app changes.
 - **§12.7:** Level 3 week 13 ("Hot oil; a quick sauté") offers Japchae
   (29c) in place of Beef and broccoli: Garlic green beans, Sautéed zucchini,
   and Japchae. The workbook's other options are unchanged.
+
+## 162. 2026-10-24 — Blanching in Level 3 week 13
+
+Owner, 2026-10-24: teach blanching in week 13, for japchae and the green
+beans.
+- **`content/skills.json`:** a Blanching skill (60 skills; the README's
+  count of 52 was out of date).
+- **`content/terms.json`:** the kitchen word "blanch" (cook a minute or two
+  in boiling water, then into ice water), taught in Japchae. Steps may use
+  the word now.
+- **Dish tags:** Japchae (29c) teaches thin slicing, stir-frying, and
+  blanching (julienne taken off); Garlic green beans teaches sautéing and
+  blanching.
+- **`content/levels/level-3.json` week 13:** the drill is "Blanch and shock
+  green beans and spinach; shimmer test for hot oil"; the knowledge page is
+  "Blanching: why vegetables stay green and crisp; oils and smoke points".
+  Minutes unchanged.
+- **Plan §12.3 and §12.7** match. Tests: 338; lint clean.
