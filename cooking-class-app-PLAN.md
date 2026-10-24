@@ -1011,7 +1011,7 @@ Each person rates what they love and hate, the app picks the best dish or **vari
 
 **Jerk salmon is a variation of jerk chicken** (owner, 2026-10-24), not a pick-one dish: the same skills (marinating, broiling), salmon instead of chicken, with a short marinade (fish goes soft in a long one), a mango salsa, and 145°F. Draft tags: salmon; chili-heat, coconut-tropical; some; $$$. It waits on jerk chicken being written.
 
-**Written 2026-10-24** (owner: "write those four groups as lessons"): chicken souvlaki pitas (4b), turkey lettuce wraps (9b), chicken piccata (11b), pineapple teriyaki salmon (11c), and huevos rancheros (14b), in the course as pick-one choices; the course still has 59 numbers. Their pictures are placeholders until the owner's ChatGPT sheet arrives.
+**Written 2026-10-24** (owner: "write those four groups as lessons"): chicken souvlaki pitas (4b), turkey lettuce wraps (9b), chicken piccata (11b), pineapple teriyaki salmon (11c), and huevos rancheros (14b), in the course as pick-one choices; the course still has 59 numbers. Their pictures are from the owner's sheet 24.
 
 Checks for every one, when written: no shrimp, oyster sauce, or seafood stock; labels on curry paste, hoisin, and fish sauce read for shellfish; doneness at the safe minimums (§3), whatever a source says.
 

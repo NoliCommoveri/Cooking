@@ -33,6 +33,7 @@ use in this app. Cropped from the source sheets in `source/` with
 | `source/sheet-21-swaps-1.png` | `dishes/52-shoestring-fries.png`, `dishes/53-chimichurri-steak.png`, `dishes/54-tuna-salad-sandwiches.png`, `dishes/55-ratatouille.png` |
 | `source/sheet-22-swaps-2.png` | `dishes/60-honey-garlic-chicken.png`, `dishes/61-chicken-spinach-crepes.png`, `dishes/62-japanese-chicken-curry.png`, `dishes/34-red-beans-and-rice.png`, `dishes/48-fish-and-chips.png` |
 | `source/sheet-23-appointed-times.png` | `dishes/unleavened-flatbread.png`, `dishes/cottage-cheese-crescents.png` |
+| `source/sheet-24-pick-ones.png` | `dishes/pineapple-teriyaki-salmon.png`, `dishes/chicken-piccata.png`, `dishes/turkey-lettuce-wraps.png`, `dishes/huevos-rancheros.png`, `dishes/chicken-souvlaki-pitas.png` |
 
 Dishes a later sheet replaced aren't listed under the earlier sheet. `tools/dish-sheets.txt` has the full map.
 
@@ -48,10 +49,3 @@ region) are cut from it with `tools/split-world-map.py`.
 `brand/chef-ruth.png`: Chef Ruth, the helper (plan §6.8). Supplied by the owner
 on 2026-10-23, owned by the owner for use in this app. `public/img/chef-ruth.webp`
 is a 256 px copy with the white background around the badge made clear.
-
-## Placeholder dish pictures
-
-`dishes/pineapple-teriyaki-salmon.png`, `dishes/chicken-piccata.png`,
-`dishes/turkey-lettuce-wraps.png`, `dishes/huevos-rancheros.png`, and
-`dishes/chicken-souvlaki-pitas.png` are temporary: Claude's meal-type pictures
-(`meals/`), drawn by Claude, until the owner's ChatGPT sheet replaces them.

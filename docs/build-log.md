@@ -3554,3 +3554,12 @@ the same skills, so the course keeps 59 numbers (now 80 dishes):
 - Tests: 299 (the course test counts 80 dishes; Chicken Caesar is now 4a).
   Checked in the manager's learner preview at phone width: Chicken piccata
   and Huevos rancheros, Learn and Cook.
+
+## 142. 2026-10-24 — Pictures for the five new lessons
+
+The owner supplied sheet 24 (ChatGPT, from Claude's prompt; the first of two
+versions, which had the most space between dishes). Cropped with
+`tools/crop-dish-sheet.py` into the pictures for pineapple teriyaki salmon,
+chicken piccata, turkey lettuce wraps, huevos rancheros, and chicken souvlaki
+pitas, replacing the placeholders; web copies rebuilt.
+`tools/dish-sheets.txt` and `content/images/LICENSES.md` list the sheet.
