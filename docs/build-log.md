@@ -4641,3 +4641,41 @@ tables.
   flour for dusting and flaky salt, still have no amount; each is a pinch or
   a few grinds of something the lesson buys anyway, or a kitchen staple.
 - Tests: 351, all passing.
+
+## 193. 2026-10-24 — Track buttons on the demo, and cook steps stay put
+
+- Owner, 2026-10-24: make "Two ways to learn" two buttons side by side on a
+  phone that expand when tapped; and Next step on a recipe jumped back to
+  the top of the page, so anchor it.
+- **Track buttons (`public/demo.js`, `public/demo.css`):**
+  - **Before:** two full cards, stacked on a phone.
+  - **Now:** two buttons side by side at every width, each with the track's
+    name and a short line. Tapping one picks that track (the tabs below
+    switch to it) and opens its details under the buttons: who it's for,
+    what's in it, Explore, and its syllabus. Tapping it again closes them.
+    Both start closed.
+- **Cook steps (`public/player.js`, `public/themes.css`):**
+  - **Before:** every redraw that moved on scrolled to the page's top. In
+    the app that's the lesson's top; on the demo it's the demo's header.
+  - **Now:** Next step and Back (and "next" and "back" by voice) keep the
+    step where it is: the safety banner at the top of the screen, the step
+    and Next step under it. A new stage starts at the lesson's top, which is
+    the page's top in the app and the lesson's top on the demo.
+- Tests: 351, all passing.
+
+## 194. 2026-10-24 — Try a week: a tab for each part
+
+- Owner, 2026-10-24: Try it should have little tabs to show all four
+  components, not just the recipe. Taken as Structured Progression's Try a
+  week (Cook Around the World is recipe only).
+- **Before:** the week card listed the four parts as rows. A part's row
+  opened its page in place of the tab, with a back link; the recipe's row
+  opened the player.
+- **Now (`public/demo.js`, `public/demo.css`):** under the week's heading,
+  four small tabs in the owner's order, Knowledge, Drill, Recipe, Beyond the
+  Recipe, each with its minutes or "Done ✓". The open tab's page shows right
+  under them in the card: a part's reading, steps, and quiz with Done; the
+  recipe's picture, skill, time, servings, the week's note, and **Cook it**,
+  which opens the real player. Knowledge is open first; the open tab is kept
+  for the visit, like the week. The separate part page is gone.
+- Tests: 351, all passing.
