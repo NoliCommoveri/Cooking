@@ -4339,3 +4339,19 @@ order, so these two recipes were written.
   picadillo) in place of freezing a sofrito, since freezing in portions
   comes up in weeks 5, 17, and 29. The draft is now 23 make-ahead weeks and
   13 Bible and food weeks, still waiting on the owner.
+
+## 180. 2026-10-24 — More clean animals on the allowlist
+
+- Owner, 2026-10-24: add the clean animals the list was missing.
+  `content/rules/clean-species.json` goes from 20 to 56 species:
+  - Land animals: elk, moose, caribou, reindeer, pronghorn, antelope,
+    gazelle, ibex, bighorn sheep, mountain goat, water buffalo, yak, musk ox,
+    and giraffe.
+  - Birds: quail, pigeon, dove, pheasant, partridge, grouse, and guinea fowl.
+  - Fish: carp, herring, mackerel, smelt, whitefish, perch, walleye, pike,
+    bass, barramundi, mahi-mahi, snapper, grouper, sole, and flounder.
+- Left off as debated: swordfish and sturgeon (their scales), and insects
+  (§2.1 keeps them blocked). Ostrich and emu stay off.
+- Plan §2.1 names the additions. The fat rule still covers only cattle,
+  sheep, and goats; whether it reaches water buffalo and yak is open for the
+  owner. No ingredient uses any of the new species yet.
