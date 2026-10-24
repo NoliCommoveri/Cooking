@@ -4509,3 +4509,31 @@ tables.
   first day, unleavened from, and confirmed (plus updated_at). Nothing uses it
   yet. It's in the backup and Download our data automatically, and goes with
   the family.
+
+## 188. 2026-10-24 — Numbered releases
+
+- Owner, 2026-10-24: everything built for the Levels goes live for everyone,
+  and the next release stays for new work. It must allow many next release
+  events, one after another. Asked what's in it, the owner chose everything
+  behind the switch, not only the Levels. That's Our tastes, variations,
+  best-fit picks, Chef Ruth's taste features, and the recipe gaps page too.
+- **Before:** one switch, launched or not. Once launched, anything new built
+  behind it would have been live at once.
+- **Now:** releases are numbered (`RELEASES` in `src/worker/release.js`).
+  Each gated feature calls `releaseOn(db, family, n)` with its release's
+  number. The stored switch keeps `live` (how many releases are launched)
+  and the preview families. A preview family sees every release built.
+  - Everything built so far is release 1.
+  - An old stored `launched: true` reads as release 1 live.
+- **`/ops` → Releases:** a table of releases and whether each is live, then
+  **Launch release N for everyone** (the next in order), and **Undo launch of
+  release N** (the latest launched) as its restore. A resent form does
+  nothing twice. The per-family preview buttons are unchanged.
+- `/api/me` gives `family.release` (the newest release the family sees) in
+  place of the `next_release` true/false. The parent screens check
+  `release >= 1`; a parent page names its release (`release: 1`).
+- **Owner, on `/ops`:** press **Launch release 1 for everyone**. Nothing is
+  live for other families until then.
+- Tests: 349 (the switch test reworked for numbers; one new: the old switch
+  reads as release 1, and a later release previews while an earlier one is
+  live).

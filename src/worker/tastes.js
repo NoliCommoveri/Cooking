@@ -6,7 +6,7 @@
 import { fail, now } from './lib/http.js';
 import { requireParent } from './auth.js';
 import { CONTENT } from './content-data.js';
-import { nextReleaseOn } from './release.js';
+import { releaseOn } from './release.js';
 import {
   STARS, FAVORITE, RATING_KINDS, MAX_MINUTES, BUDGET, ADVENTUROUS, TOOL_CHOICES, HEAT, ratingItems,
 } from '../content/tastes.js';
@@ -15,7 +15,7 @@ const ITEMS = ratingItems(CONTENT.tastes);
 
 async function parentWithRelease(env, req) {
   const s = await requireParent(env, req);
-  if (!(await nextReleaseOn(env.DB, s.family_id))) fail(404, 'not_available', 'Not available yet.');
+  if (!(await releaseOn(env.DB, s.family_id, 1))) fail(404, 'not_available', 'Not available yet.');
   return s;
 }
 
