@@ -3872,3 +3872,23 @@ Next release switch.
   course started, its card on the queue, the course list, and the edit page
   (no sideways scroll, no errors).
 
+
+## 155. 2026-10-24 — Plan: Levels 2 and 4, and the week options
+
+The owner's Level 2 Apprentice and Level 4 Chef plans and the week-options
+workbook (`clean-plate-week-options.xlsx`) go into the plan. No app changes.
+- **§12.1:** Level 2 and Level 4 now point to their own sections. The
+  owner's plans moved quick breads up to Level 2's Unit 4 and pastry and
+  enriched breads up to Level 4's Unit 3, both to keep leavened units away
+  from spring.
+- **§12.5 Level 2 Apprentice** and **§12.6 Level 4 Chef:** how a week is
+  timed, supervision, unit goals, the 36 weeks with their four parts, the
+  unleavened backups, and the media each plan asks for.
+- **§12.7 Week options:** what the workbook holds (270 options, 58 new
+  dishes), the gaps it shows, Claude's check of every dish against the hard
+  rule (none unclean; five hidden sources to write around), the four weeks
+  where the workbook and the plans name different defaults, and seven
+  questions waiting on the owner: what the options are in the app, a
+  leavened week's backup vs. passing it over, the four defaults, teaching
+  pages that name unclean foods, Level 4's independence, live-action clips,
+  and checking the 58 new dishes against the main course first.

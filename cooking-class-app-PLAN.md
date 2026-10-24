@@ -1327,9 +1327,9 @@ Four Levels, the homeschool curriculum (owner, 2026-10-23), built inside this ap
 | Level | Time | Units, in order |
 |---|---|---|
 | **1 Helper** | ~1 hr/week | Clean hands, clean kitchen · Clean and unclean animals · Measuring · Mixing and no-bake recipes · Fruits: washing and soft cuts · Vegetables and salads · Tasting the basic flavors · Bread and baking with an adult · **Capstone:** set the table and help make a Sabbath meal |
-| **2 Apprentice** | ~2 hrs/week | Knife and heat safety · Reading recipes and mise en place · Eggs · Boiling and simmering: rice, pasta · Labels and hidden unclean ingredients · Salt, herbs, and spices · Quick breads · Simple pan cooking · **Capstone:** storage, leftovers, and one Sabbath dish made from a prep list |
+| **2 Apprentice** | ~2 hrs/week | §12.5 (owner's plan, 2026-10-24: quick breads move up to Unit 4) |
 | **3 Cook** | ~3.5 hrs/week | §12.3 |
-| **4 Chef** | ~3.5–4 hrs/week | Precision, speed, and scaling recipes · Braising, stewing, beef and lamb cuts · Foundational sauces · Frying and grilling · Pastry · Flavor profiles by cuisine · Menus, nutrition, and budgeting · Allergens, sourcing, and cooking for groups · **Capstone:** plan, budget, shop for, and cook Sabbath for the household plus guests |
+| **4 Chef** | ~3.75 hrs/week | §12.6 (owner's plan, 2026-10-24: pastry and enriched breads move up to Unit 3) |
 
 Level 1's "Clean and unclean animals" and Level 2's "Labels and hidden unclean ingredients" teach the hard rule (§2.1) from the same rules files the app enforces, so the lessons and the block never disagree. Any Level with a leavened unit is placed away from spring the way §12.3 does (recommendation).
 
@@ -1439,3 +1439,163 @@ The capstone pulls from every unit: safe temperatures (1), challah (2), knife wo
 
 - **Owner rulings on the table (2026-10-24):** all five group fills; the three new pairs; Beef stew takes the one-pot stews place, so Poached cod is Level only; thick burgers are Level only. **The Level-only recipes are a unit of their own in Side quests**, "Level 3 recipes" (labels L1, L2, …), for every family once the next release launches. The eight are in `content/course.json` as planned pick-one dishes (4c, 9c, 18b, 22c, 23c, 24b, 26c, 37b), live for every family like the other planned dishes (§4), with pictures from the owner's sheets 27 and 28. Mujaddara, Koshari, Misir wot, Red lentil soup, and Red beans and rice teach a new skill, cooking dried beans and lentils.
 - **12a built (2026-10-24):** `content/levels/level-3.json` (checked against `content/schema/level.schema.json`): the 9 units with their goals; the 36 weeks, each with its skill, its default recipe, a note, swap-ins (dishes that fit the week without carrying its skill, like the course's fish dishes for Unit 7), mastery on each unit's last week, and its three parts' titles and planned minutes (drill 40, knowledge 35, Sabbath task 45: about 126 hours with the recipes); weeks 35 and 36 are a practice week and the capstone, with their own minutes; and the 17 Level-only recipe cards, each with its meal-type drawing until its lesson is written. Their lesson files go in `content/levels/recipes/`, in the Level's own unit (number 100, apart from `units.json`). Six skills were added for Level weeks (checking meat with a thermometer, sautéing, cooking grains, handling raw poultry, cooking fish, building a soup), and the Israeli, Cuban, and Turkish cuisines. The linter checks every rule above, the hard rule on every page, and the hours; it warns while part pages aren't written. The manager has a **Level 3** page: units, weeks and their parts, and the Level's recipes with their tags.
+
+### 12.5 Level 2 Apprentice: 36 weeks, ~72 hours (owner's plan, 2026-10-24)
+A middle-grades elective, not a high-school credit. **The week tables are the owner's outline**, open to change like §12.1; the rulings waiting in §12.7 come first.
+- **A week:** Recipe ~1 hr, Drill ~20 min, Knowledge ~20 min, Sabbath task ~20 min (helping prepare for the Sabbath meal).
+- **Recipes are short:** about 10 ingredients or fewer, 12 steps or fewer, under 45 minutes hands-on. The owner's plan names ages 9–11; that's a guide for writing only, and the app shows no ages (§12, §11).
+- **Supervision:** an adult is in the kitchen for all stove, oven, and knife work. Students use a paring or nylon knife on soft foods; a chef's knife waits for Level 3.
+- **Mastery week:** a different recipe with the same skill, done with an adult watching but not helping.
+- **Unit order:** quick breads moved up to Unit 4 (weeks 13–16), so the leavened unit is done by winter. Every other leavened recipe has an unleavened backup (below). The capstone dish is any recipe from Units 3–8, so the student picks one they're proud of.
+
+| Unit | Weeks | Goal |
+|---|---|---|
+| 1 Knife and heat safety | 1–4 | Cuts soft foods safely, handles hot pans and the oven with mitts, and knows what to do in a small kitchen fire |
+| 2 Reading recipes and mise en place | 5–8 | Reads a recipe through, gathers and measures everything first, and cleans as they go |
+| 3 Eggs | 9–12 | Cracks and separates eggs cleanly and cooks them scrambled, boiled, and fried to the right doneness |
+| 4 Quick breads | 13–16 | Uses the muffin and biscuit methods, measures flour correctly, and tests doneness with a toothpick |
+| 5 Boiling and simmering | 17–20 | Tells a boil from a simmer, cooks pasta and rice to doneness, and drains safely |
+| 6 Labels and hidden unclean ingredients | 21–24 | Reads an ingredient list and spots ingredients from unclean sources, such as pork gelatin, lard, shellfish, and carmine |
+| 7 Salt, herbs, and spices | 25–28 | Salts food by tasting, tells herbs from spices, and uses each at the right time |
+| 8 Simple pan cooking | 29–32 | Preheats a pan, cooks without crowding, and flips and checks food for doneness |
+| 9 Storage, leftovers, and Sabbath capstone | 33–36 | Stores food safely, reuses leftovers, and prepares one Sabbath dish from a written prep list |
+
+| Week | Recipe | Drill | Knowledge | Sabbath task |
+|---|---|---|---|---|
+| 1 | Fruit salad | Steady the board with a damp towel; slice bananas and strawberries | Knife rules: grip, direction, where to set it down | Wash and cut fruit for the Sabbath table |
+| 2 | Quesadillas | Flip with a spatula; turn pot handles inward | Burns and scalds: causes and first aid | Set the Sabbath table |
+| 3 | Oven-roasted potato wedges | Oven mitts; pull out a rack safely | Fire safety: lid on a pan fire, never water | Prep a vegetable tray ahead |
+| 4 | **Mastery:** cucumber-tomato salad and grilled cheese | Run a safety check before cooking | Safety quiz | Help make one Sabbath side dish |
+| 5 | Hummus | Measure dry vs. wet; level a cup | Parts of a recipe: yield, ingredients, steps | Make hummus ahead for the Sabbath |
+| 6 | Overnight oats | Set up mise en place in small bowls | Recipe abbreviations: tsp, Tbsp, c, oz | Prep breakfast the night before |
+| 7 | Guacamole | Clean-as-you-go: wipe, rinse, stack | Halving and doubling a recipe | Prep dips and store covered |
+| 8 | **Mastery:** tzatziki with pita | Gather and measure a full recipe unaided | Read an unfamiliar recipe and list the tools | Prep a full snack platter for Sabbath |
+| 9 | Soft scrambled eggs | Crack an egg on a flat surface; fish out shell | How heat sets eggs | Boil eggs ahead for the Sabbath |
+| 10 | Boiled eggs, soft and hard | Ice bath and peeling | Freshness: the float test | Make egg salad ahead |
+| 11 | Fried eggs, sunny and over-easy | Separate yolks from whites | Egg safety: washing hands, cooking through | Prep a breakfast egg dish ahead |
+| 12 | **Mastery:** vegetable frittata | Crack 6 eggs without shell | Eggs around the world worksheet | Frittata for a Sabbath breakfast |
+| 13 | Blueberry muffins | Spoon and level flour | Baking soda vs. baking powder | Bake muffins for Sabbath breakfast |
+| 14 | Cornbread | Muffin method: wet into dry, don't overmix | Why overmixing makes bread tough | Bake cornbread ahead |
+| 15 | Drop biscuits | Cut cold butter into flour | Why cold fat makes flaky layers | Bake and freeze biscuits |
+| 16 | **Mastery:** banana bread | Toothpick test for doneness | Quick breads around the world | Banana bread for the Sabbath table |
+| 17 | Buttered pasta with parmesan | Bring water to a boil; salt it | Boil vs. simmer: what the bubbles mean | Cook pasta for a cold pasta salad |
+| 18 | Plain white rice | Measure rice and water; keep the lid on | Why rice needs a set ratio | Cook rice ahead; cool and store |
+| 19 | Simple tomato sauce | Adjust a burner from boil to simmer | Steam burns and draining safely | Make sauce ahead for the Sabbath |
+| 20 | **Mastery:** pasta with tomato sauce | Drain pasta into a colander in the sink | Pasta shapes and what they're for | Pasta salad for the Sabbath table |
+| 21 | Granola bars | Find the ingredient list and allergen line | Leviticus 11: which animals are clean | Check labels on this week's Sabbath groceries |
+| 22 | Beef tacos with homemade seasoning | Compare a seasoning packet to homemade | Hidden sources: gelatin, lard, carmine, shellfish extracts | Make taco filling ahead |
+| 23 | Pizza with clean toppings (beef pepperoni) | Sort 10 products: clean, check, avoid | Certification symbols and what they do and don't tell you | Bake pizza dough or crusts ahead |
+| 24 | **Mastery:** snack mix from label-checked products | Grocery store label hunt | Write a family label-checking guide | Pack a Sabbath snack basket |
+| 25 | Roasted chickpeas, salted two ways | Taste unsalted vs. salted versions | What salt does to flavor | Roast chickpeas ahead as a snack |
+| 26 | Herb butter on corn | Strip and chop soft herbs with kitchen scissors | Herbs vs. spices: leaves vs. seeds, bark, roots | Make herb butter for the Sabbath bread |
+| 27 | Homemade spice blend on oven fries | Toast whole spices in a dry pan | When to add each: early, late, finishing | Mix a spice blend for the week |
+| 28 | **Mastery:** seasoned rice with herbs | Season to taste without measuring | Spice smell test: name 8 spices | Seasoned side dish for Sabbath |
+| 29 | Pancakes | Water-drop test for a hot pan | Why preheating matters | Make and freeze pancakes |
+| 30 | Sautéed zucchini | Don't crowd the pan: one layer only | Nonstick vs. stainless vs. cast iron | Cook a vegetable side ahead |
+| 31 | Pan-cooked ground beef for sloppy joes | Break up and brown ground meat | Ground meat must reach 160°F | Make sloppy joe filling ahead |
+| 32 | **Mastery:** smash burgers | Flip once; check with a thermometer | Reading a thermometer | Burgers prepped as patties for later |
+| 33 | Leftover rice fried with egg and vegetables | Portion and label leftovers | Fridge vs. freezer: what keeps how long | Store Sabbath leftovers correctly |
+| 34 | Baked pasta with meat sauce | Wrap food for the freezer | The 2-hour rule for leftovers | Assemble a baked pasta ahead |
+| 35 | Practice run of the capstone dish | Follow a prep list step by step | Reading a prep list and timeline | Shop for capstone ingredients with an adult |
+| 36 | **Capstone:** one Sabbath dish made ahead from a prep list | Run the prep list with an adult watching | Reflection: what went well, what to change | Serve the dish at the Sabbath meal |
+
+**Unleavened backups** (owner's plan): used on the family's unleavened days; baking powder and soda count as leaven.
+
+| Week | Recipe | Unleavened backup | Skill kept |
+|---|---|---|---|
+| 2 | Quesadillas (flour tortillas) | Quesadillas on corn tortillas | Flipping with a spatula on the stove |
+| 4 | Grilled cheese | Matzah melt in a skillet | Stovetop toasting and flipping |
+| 8 | Tzatziki with pita | Tzatziki with matzah and cucumber spears | Full mise en place, unaided |
+| 23 | Pizza with clean toppings | Matzah pizza | Choosing label-checked toppings |
+| 24 | Snack mix (pretzels, crackers) | Trail mix: nuts, seeds, dried fruit | Reading labels and choosing clean products |
+| 29 | Pancakes | Matzah brei | Preheating and the water-drop test |
+| 31 | Sloppy joes on buns | Sloppy joe filling over rice or in lettuce cups | Browning ground beef to 160°F |
+| 32 | Smash burgers on buns | Smash burgers in lettuce wraps | Flipping once and checking with a thermometer |
+
+**Media:** the owner's plan lists about 24 hands-only live-action clips (30–60 seconds) and 15 illustrations, filmed on the same shoot days as Level 3. See §12.7.
+
+### 12.6 Level 4 Chef: 36 weeks, ~135 hours (owner's plan, 2026-10-24)
+One high-school elective credit in most states. **The week tables are the owner's outline**, open to change like §12.1; the rulings waiting in §12.7 come first.
+- **A week:** Recipe ~2 hrs (a multi-component dish or meal), Drill ~30 min (speed and precision), Knowledge ~45 min, Sabbath task ~30 min (planning, cooking ahead, or hosting).
+- **Students work independently;** the owner's plan says an adult only needs to be home for deep frying and grilling (see §12.7).
+- **Unit order:** pastry and enriched breads moved up to Unit 3 (weeks 9–12), well before spring. Leavened recipes elsewhere have backups (below).
+- **The capstone** draws on at least five units, and the student's written plan, budget, and reflection go into the course portfolio.
+
+| Unit | Weeks | Goal |
+|---|---|---|
+| 1 Precision, speed, and scaling | 1–4 | Cuts fine and fast, weighs ingredients, and scales any recipe up or down accurately |
+| 2 Braising, stewing, beef and lamb cuts | 5–8 | Matches tough cuts to low, slow, moist heat, sears for flavor, and cooks to fork-tender |
+| 3 Pastry and enriched breads | 9–12 | Makes flaky pastry with cold fat, laminates a dough, and shapes an enriched yeast bread |
+| 4 Foundational sauces | 13–16 | Thickens with a roux, builds an emulsion and rescues it if it breaks, and makes a pan sauce from fond |
+| 5 Frying and grilling | 17–20 | Fries at a controlled oil temperature, sets up a breading station, and grills with direct and indirect heat |
+| 6 Flavor profiles by cuisine | 21–24 | Names the core flavors of a cuisine, builds them from scratch, and adapts a dish to clean ingredients |
+| 7 Menus, nutrition, and budgeting | 25–28 | Plans balanced meals, prices them per serving, and stretches ingredients across several meals |
+| 8 Allergens, sourcing, and cooking for groups | 29–32 | Cooks safely for guests with allergies, judges where meat and fish come from, and serves 12 or more |
+| 9 Sabbath capstone for household and guests | 33–36 | Plans, budgets, shops for, and cooks a full Sabbath meal for the household and guests, entirely on their own |
+
+| Week | Recipe | Drill | Knowledge | Sabbath task |
+|---|---|---|---|---|
+| 1 | Ratatouille (even dice) | Timed brunoise | Cut dimensions: brunoise, small dice, batonnet | Prep all vegetables for the Sabbath meal |
+| 2 | Chili scaled from 4 to 12 servings | Scaling worksheet | Scaling factors and what doesn't scale (salt, spice, time) | Scale a Sabbath recipe to the guest count |
+| 3 | Beef fajitas (batonnet, chiffonade) | Weigh vs. measure flour and sugar | Why weight is more accurate than volume | Weigh and portion ingredients ahead |
+| 4 | **Mastery:** salade niçoise with tuna, timed | Plate four components hot and cold together | Yield: trim loss and buying enough | Plan the Sabbath prep timeline |
+| 5 | Beef stew | Sear in batches to build fond | Why tough cuts need slow heat: collagen to gelatin | Make stew ahead; it improves overnight |
+| 6 | Moroccan lamb tagine | Trim silverskin and excess fat | Leviticus 3, 7, and 17: blood and fat rules, and what they mean for sourcing | Cook tagine Friday morning |
+| 7 | Korean braised short ribs | Cube a chuck roast for stew | Beef and lamb primal cuts | Hold braised meat warm safely |
+| 8 | **Mastery:** pot roast or lamb shanks | Fork-tender test | Braise vs. stew | Cholent or hamin: a stew built for the Sabbath |
+| 9 | Chicken pot pie with homemade crust | Roll dough to an even thickness | Pastry vs. bread: keeping gluten weak vs. strong | Assemble pot pie ahead; bake Friday |
+| 10 | Spinach and feta borekas (rough puff) | Lamination folds | Fats: butter vs. shortening; checking labels for lard | Freeze unbaked borekas |
+| 11 | Cinnamon rolls (enriched yeast dough) | Shape and cut rolls evenly | Lean vs. enriched doughs | Cold-proof rolls overnight for Sabbath morning |
+| 12 | **Mastery:** apple pie from scratch | Crimp and vent a top crust | Blind baking and soggy bottoms | Pie for the Sabbath table |
+| 13 | Beef lasagna with béchamel | Cook a roux to white, blond, and brown | The five mother sauces | Assemble lasagna ahead |
+| 14 | Chicken à la king (velouté) over rice | Temper hot liquid into a roux | Thickeners: roux, slurry, reduction | Make velouté ahead; reheat gently |
+| 15 | Hollandaise over asparagus and poached eggs | Rescue a broken emulsion | How emulsions hold together | Plan which sauces hold and which don't |
+| 16 | **Mastery:** seared chicken thighs with pan sauce | Nappe test: coats the back of a spoon | Matching sauces to dishes | A make-ahead sauce for the Sabbath main |
+| 17 | Chicken schnitzel (shallow fry) | Three-step breading station | Smoke points and choosing a frying oil | Fry schnitzel ahead; serve at room temperature |
+| 18 | Cornmeal-fried whiting (deep fry) | Hold oil at 350°F with a thermometer | Oil fire safety; cooling and disposing of oil | Plan a cold fried-fish platter |
+| 19 | Grilled beef kebabs | Set up two grill zones | Direct vs. indirect heat | Grill meat ahead for a cold Sabbath plate |
+| 20 | **Mastery:** fried chicken with grilled vegetables | Drain and hold fried food crisp | Why fried food goes soggy | Grilled vegetables for the Sabbath table |
+| 21 | Chicken tinga tacos on corn tortillas | Toast and rehydrate dried chiles | Mexican flavor pillars | A cuisine-themed Sabbath side |
+| 22 | Chicken tikka masala with basmati rice | Toast and grind a garam masala | Indian flavor pillars; how the spice trade spread flavors | Make curry ahead; it deepens overnight |
+| 23 | Teriyaki salmon with rice | Balance sweet, salty, and sour in a sauce | Adapting recipes: swapping oyster sauce and other unclean ingredients | Marinate fish Thursday |
+| 24 | **Mastery:** student designs a dish in a chosen cuisine | Blind-taste and name a cuisine's spice set | Write a one-page flavor profile | Serve the dish at the Sabbath meal |
+| 25 | Mediterranean chicken bowls | Build a balanced plate | Food groups and macronutrients | Plan a balanced Sabbath menu |
+| 26 | Beans and rice for 6 on a set budget | Calculate cost per serving | Unit pricing at the grocery store | Price the Sabbath menu |
+| 27 | Roast chicken, then a second meal from leftovers | Plan two meals from one shop | Cook once, eat twice | Plan Sabbath leftovers into a weekday meal |
+| 28 | **Mastery:** three-course dinner under a set budget | Write a shopping list by store section | Reading nutrition labels | Shop for the Sabbath within budget |
+| 29 | Dairy-free, gluten-free chicken stir-fry | Clean a station to prevent allergen cross-contact | The nine major food allergens | Ask guests about allergies before the Sabbath |
+| 30 | Lasagna for 12 | Scale equipment: pans, oven space, timing | Cooking for a crowd: what changes | Cook a main for a larger Sabbath table |
+| 31 | Roast leg of lamb from a local source | Visit or call a butcher or farm with questions | Sourcing: slaughter, blood, fat, and certifications | Source meat for the capstone |
+| 32 | **Mastery:** buffet for 12 with allergen labels | Hold buffet food hot above 135°F, cold below 41°F | Food safety for groups | Host guests at a Sabbath meal |
+| 33 | Test the planned main dish | Write the full menu, budget, and guest list | Planning a meal backward from serving time | Send invitations; ask about allergies |
+| 34 | Test the planned sides and dessert | Write the prep timeline from Tuesday to Friday | Which dishes hold, which reheat, which are made fresh | Final menu and shopping list |
+| 35 | Make-ahead dishes: sauce, dessert, stew or braise | Shop within budget | Plating and serving family-style | Thursday prep |
+| 36 | **Capstone:** the full Sabbath meal (main, two sides, bread, dessert) | Run the kitchen alone | Reflection essay: what worked, what to change | Host and serve the Sabbath meal |
+
+**Unleavened backups** (owner's plan). If the capstone falls during the feast, homemade matzah is a skill of its own: mixed, rolled, and baked fast.
+
+| Week | Recipe | Unleavened backup | Skill kept |
+|---|---|---|---|
+| 3 | Beef fajitas (flour tortillas) | Fajitas on corn tortillas | Batonnet and chiffonade cuts |
+| 17 | Chicken schnitzel (breadcrumbs) | Schnitzel coated in matzah meal | Three-step breading station and shallow frying |
+| 20 | Fried chicken (dredge may contain baking powder) | Fried chicken in a plain flour and cornstarch dredge | Frying at a held temperature; keeping food crisp |
+| 36 | Capstone bread (challah) | Homemade matzah | Baking the bread course for the Sabbath table |
+
+**Media:** about 24 hands-only live-action clips and 12 illustrations; most fit the Level 2 and 3 shoot days, and frying and grilling need one more session. See §12.7.
+
+### 12.7 Week options (owner's workbook, 2026-10-24)
+The owner's `clean-plate-week-options.xlsx`, built from the recipe export of 2026-10-24: for Levels 2, 3, and 4, up to three dishes per week that teach the week's skill. Option 1 is the Level's default; options 2 and 3 are alternatives. Each has its library number (or NEW), status, protein, cuisine, minutes, a cost tier by main protein, and a leaven flag.
+- **Size:** 270 options; 58 dishes are new (36 for Level 2, 6 for Level 3, 17 for Level 4, some used twice). Level 2 leans most on new dishes: short recipes like fruit salad, boiled eggs, and pancakes aren't in the library.
+- **Gaps the workbook shows:** weeks where every option is leavened (Level 2: 2, 4, 13–16, 23, 32; Level 3: 2, 4, 5–8; Level 4: 11, 17, 20); weeks with no $ option (Level 2: 22, 31, 32; Level 3: 14 weeks, mostly poultry, fish, and beef; Level 4: 15 weeks); weeks with one protein only. Student-plan weeks (Level 2: 35, 36; Level 3: 35, 36; Level 4: 24, 28, 32–36) have no fixed dish.
+- **Hard rule check (Claude, 2026-10-24):** every dish in the workbook and both plans was read against §2.1. **None is unclean.** Hidden sources to write around: beef pepperoni (L2 wk 23) needs a collagen or no casing; beef bone broth (L3 wk 30) lifts off and throws away the fat, since beef fat is blocked; store-bought phyllo and puff pastry (L4 wk 10) can contain lard; snack mix and granola bars (L2 wk 21, 24) leave out marshmallows, gummies, and red candies (gelatin, carmine); jollof (L4 wk 30) leaves out crayfish and shrimp bouillon. Whiting (L4 wk 18) has fins and scales.
+- **Defaults that differ** between the workbook and the plans: L4 wk 3 (plan: beef fajitas; workbook: chicken fajitas, whose Steak fajitas variation is the beef one); L4 wk 15 (plan: hollandaise over asparagus and poached eggs; workbook: Eggs Benedict, which is leavened); L4 wk 22 (plan: chicken tikka masala, new; workbook: Butter chicken, planned); L2 wk 33 (plan: leftover rice fried with egg and vegetables; workbook: Chicken fried rice, written).
+
+**Waiting on the owner** (recommendations):
+1. **What the options are in the app.** Recommendation: a week's options are its candidate list for best fit (12d), in place of "any recipe tagged with the skill" (§12.2). Swap recipe lists the options first, best fit first, then other recipes with the skill.
+2. **Leaven: backup or pass over.** §12.2 passes a leavened week over on the unleavened days and moves the schedule; the Level 2 and 4 plans swap in a backup that keeps the skill. Recommendation: the backup takes the week's place and nothing moves; a week with no backup (Level 3's Unit 2) is passed over as now.
+3. **The four defaults above.** Recommendation: the plan's dish where it teaches the skill better (hollandaise over asparagus: the emulsion without a leavened muffin; tikka masala, with Butter chicken as option 2), and the library dish where it's the same thing (Chicken fajitas as Steak fajitas; Chicken fried rice).
+4. **Teaching pages that name unclean foods.** Level 2 Unit 6 and Level 4 weeks 6, 10, 23, and 31 teach the hard rule, so their pages name lard, pork gelatin, shellfish, oyster sauce, and carmine. The linter blocks those words on every Level page (12a). Recommendation: a reviewed "watch for" list on a part page may name them, checked so they appear nowhere else on the page and never in a recipe; titles are reworded where it's easy ("checking labels for animal fats").
+5. **"Students work independently" (Level 4).** Each lesson's steps still carry their safety level (adult nearby, adult hands-on), and the player shows them. Recommendation: the lessons' safety levels stand; Level 4's wording says "mostly on their own".
+6. **Live-action clips** (~48 for Levels 2 and 4, plus Level 3's). The app has no video yet; intros are slideshows (§6.5). Recommendation: a later phase: an optional clip on a drill page or a step, stored in R2 and uploaded from the manager section.
+7. **The 58 new dishes** go through the Requirement in §12.4 before any is written: a pick-one group with room, or a variation of a dish already planned. Claude does that check next, as a table like §12.4's, for the owner's ruling.
+
