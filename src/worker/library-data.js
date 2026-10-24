@@ -207,7 +207,335 @@ export const LIBRARY = {
      "avocado",
      "cilantro"
     ]
-   }
+   },
+   "variations": [
+    {
+     "title": "Steak fajitas",
+     "image": "img/dishes/chicken-fajitas.webp",
+     "cuisine": "tex-mex",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "For more than 6, sear the steak in two batches so the pan stays hot, and cook the vegetables in two batches too."
+       }
+      ]
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "beef-flank"
+      },
+      {
+       "ingredient": "chili-powder"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "garlic-powder"
+      },
+      {
+       "ingredient": "paprika-smoked"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "lime"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "bell-pepper-green"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "tortilla-flour"
+      },
+      {
+       "ingredient": "sour-cream",
+       "optional": true
+      },
+      {
+       "ingredient": "salsa",
+       "optional": true
+      },
+      {
+       "ingredient": "avocado",
+       "optional": true
+      },
+      {
+       "ingredient": "cilantro",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "tortilla-flour",
+       "use": "tortilla-corn",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "beef",
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "lemon-lime",
+       "bell-peppers",
+       "onions"
+      ],
+      "optional": [
+       "sour-cream-yogurt",
+       "avocado",
+       "cilantro"
+      ]
+     },
+     "id": "steak"
+    },
+    {
+     "title": "Black bean fajitas",
+     "image": "img/dishes/chicken-fajitas.webp",
+     "cuisine": "tex-mex",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "For more than 6, cook the vegetables in two batches so they brown instead of steaming."
+       }
+      ]
+     },
+     "totalMinutes": 35,
+     "ingredients": [
+      {
+       "ingredient": "black-beans"
+      },
+      {
+       "ingredient": "chili-powder"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "garlic-powder"
+      },
+      {
+       "ingredient": "paprika-smoked"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "lime"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "bell-pepper-green"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "tortilla-flour"
+      },
+      {
+       "ingredient": "sour-cream",
+       "optional": true
+      },
+      {
+       "ingredient": "salsa",
+       "optional": true
+      },
+      {
+       "ingredient": "avocado",
+       "optional": true
+      },
+      {
+       "ingredient": "cilantro",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "tortilla-flour",
+       "use": "tortilla-corn",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "lemon-lime",
+       "bell-peppers",
+       "onions"
+      ],
+      "optional": [
+       "sour-cream-yogurt",
+       "avocado",
+       "cilantro"
+      ]
+     },
+     "id": "black-bean"
+    },
+    {
+     "title": "Spicy chicken fajitas",
+     "image": "img/dishes/chicken-fajitas.webp",
+     "cuisine": "tex-mex",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "For more than 6, sear the chicken in two batches so the pan stays hot, and cook the vegetables in two batches too."
+       }
+      ]
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "chili-powder"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "garlic-powder"
+      },
+      {
+       "ingredient": "paprika-smoked"
+      },
+      {
+       "ingredient": "cayenne"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "lime"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "bell-pepper-green"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "jalapeno"
+      },
+      {
+       "ingredient": "tortilla-flour"
+      },
+      {
+       "ingredient": "sour-cream",
+       "optional": true
+      },
+      {
+       "ingredient": "salsa",
+       "optional": true
+      },
+      {
+       "ingredient": "avocado",
+       "optional": true
+      },
+      {
+       "ingredient": "cilantro",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "tortilla-flour",
+       "use": "tortilla-corn",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "warm-spices",
+       "chili-heat"
+      ],
+      "heat": "spicy",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "hot-peppers",
+       "lemon-lime",
+       "bell-peppers",
+       "onions"
+      ],
+      "optional": [
+       "sour-cream-yogurt",
+       "avocado",
+       "cilantro"
+      ]
+     },
+     "id": "spicy"
+    }
+   ]
   },
   {
    "id": "shoestring-fries",
@@ -458,7 +786,81 @@ export const LIBRARY = {
      "garlic"
     ],
     "optional": []
-   }
+   },
+   "variations": [
+    {
+     "title": "Chimichurri chicken",
+     "image": "img/dishes/chimichurri-steak.webp",
+     "cuisine": "argentine",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "For more than 6, sear the chicken in two batches so the pan stays hot. Keep the first batch resting on the board while the second cooks."
+       }
+      ]
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "parsley"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "oregano-dried"
+      },
+      {
+       "ingredient": "vinegar-red-wine"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "chili-flakes",
+       "optional": true
+      },
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic"
+      ],
+      "optional": []
+     },
+     "id": "chicken"
+    }
+   ]
   },
   {
    "id": "tuna-salad-sandwiches",
@@ -981,6 +1383,108 @@ export const LIBRARY = {
    }
   },
   {
+   "id": "chicken-souvlaki-pitas",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Chicken souvlaki pitas",
+   "image": "img/dishes/chicken-souvlaki-pitas.webp",
+   "cuisine": "greek",
+   "skill": "A yogurt sauce, chopping herbs fine",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, sear the chicken in batches so the pieces have room to brown."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "yogurt-greek"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "dill"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "chicken-breast"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "pita"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "onion-red"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pita",
+     "use": "tortilla-corn",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "herby-lemony",
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "cucumber",
+     "sour-cream-yogurt",
+     "garlic",
+     "lemon-lime",
+     "tomatoes"
+    ],
+    "optional": []
+   }
+  },
+  {
    "id": "smash-burgers",
    "version": 1,
    "track": "core",
@@ -1079,7 +1583,105 @@ export const LIBRARY = {
     "optional": [
      "mustard"
     ]
-   }
+   },
+   "variations": [
+    {
+     "title": "Turkey smash burgers + quick pickles",
+     "image": "img/dishes/smash-burgers.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "Cook 3 patties at a time in a 12-inch skillet. For more than 6, keep going in batches of 3, washing the tongs and your hands after each batch of raw turkey."
+       }
+      ]
+     },
+     "totalMinutes": 60,
+     "ingredients": [
+      {
+       "ingredient": "cucumber"
+      },
+      {
+       "ingredient": "vinegar-white"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "turkey-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "cheese-sliced",
+       "optional": true
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "burger-buns"
+      },
+      {
+       "ingredient": "ketchup",
+       "optional": true
+      },
+      {
+       "ingredient": "mustard-dijon",
+       "optional": true
+      },
+      {
+       "ingredient": "lettuce-green-leaf",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "burger-buns",
+       "use": "buns-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "other",
+     "tags": {
+      "protein": "turkey",
+      "flavors": [
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "cucumber",
+       "onions"
+      ],
+      "optional": [
+       "mustard"
+      ]
+     },
+     "id": "turkey"
+    }
+   ]
   },
   {
    "id": "french-omelet",
@@ -1478,7 +2080,105 @@ export const LIBRARY = {
     "optional": [
      "feta"
     ]
-   }
+   },
+   "variations": [
+    {
+     "title": "Spicy shakshuka",
+     "image": "img/dishes/shakshuka.webp",
+     "cuisine": "north-african",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, cook it in two 12-inch skillets side by side."
+       }
+      ]
+     },
+     "totalMinutes": 40,
+     "ingredients": [
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "jalapeno"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "paprika-smoked"
+      },
+      {
+       "ingredient": "chili-flakes"
+      },
+      {
+       "ingredient": "cayenne"
+      },
+      {
+       "ingredient": "tomatoes-crushed"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "parsley",
+       "optional": true
+      },
+      {
+       "ingredient": "feta",
+       "optional": true
+      },
+      {
+       "ingredient": "pita",
+       "optional": true
+      }
+     ],
+     "substitutions": [],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "eggs",
+      "flavors": [
+       "rich-tomato",
+       "chili-heat"
+      ],
+      "heat": "spicy",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "bell-peppers",
+       "hot-peppers",
+       "garlic",
+       "tomatoes"
+      ],
+      "optional": [
+       "feta"
+      ]
+     },
+     "id": "spicy"
+    }
+   ]
   },
   {
    "id": "spaghetti-marinara",
@@ -1666,7 +2366,193 @@ export const LIBRARY = {
     "optional": [
      "sesame"
     ]
-   }
+   },
+   "variations": [
+    {
+     "title": "Honey-garlic salmon",
+     "image": "img/dishes/honey-garlic-chicken.webp",
+     "cuisine": "chinese-american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, brown the salmon in three batches instead of two, so the pan never gets crowded."
+       }
+      ]
+     },
+     "totalMinutes": 40,
+     "ingredients": [
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "salmon-fillet"
+      },
+      {
+       "ingredient": "cornstarch"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "honey"
+      },
+      {
+       "ingredient": "soy-sauce"
+      },
+      {
+       "ingredient": "vinegar-rice"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "ginger-fresh"
+      },
+      {
+       "ingredient": "green-onion"
+      },
+      {
+       "ingredient": "sesame-seeds",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "soy-sauce",
+       "use": "tamari",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "fish",
+     "tags": {
+      "protein": "salmon",
+      "flavors": [
+       "sweet-savory",
+       "ginger-soy"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "ginger",
+       "onions"
+      ],
+      "optional": [
+       "sesame"
+      ]
+     },
+     "id": "salmon"
+    },
+    {
+     "title": "Honey-garlic tofu",
+     "image": "img/dishes/honey-garlic-chicken.webp",
+     "cuisine": "chinese-american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, brown the tofu in three batches instead of two, so the pan never gets crowded."
+       }
+      ]
+     },
+     "totalMinutes": 55,
+     "ingredients": [
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "tofu-extra-firm"
+      },
+      {
+       "ingredient": "cornstarch"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "honey"
+      },
+      {
+       "ingredient": "soy-sauce"
+      },
+      {
+       "ingredient": "vinegar-rice"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "ginger-fresh"
+      },
+      {
+       "ingredient": "green-onion"
+      },
+      {
+       "ingredient": "sesame-seeds",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "soy-sauce",
+       "use": "tamari",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "tofu",
+      "flavors": [
+       "sweet-savory",
+       "ginger-soy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "ginger",
+       "onions"
+      ],
+      "optional": [
+       "sesame"
+      ]
+     },
+     "id": "tofu"
+    }
+   ]
   },
   {
    "id": "chicken-fried-rice",
@@ -1749,6 +2635,95 @@ export const LIBRARY = {
      "onions",
      "garlic",
      "peas",
+     "sesame"
+    ],
+    "optional": []
+   }
+  },
+  {
+   "id": "turkey-lettuce-wraps",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Turkey lettuce wraps",
+   "image": "img/dishes/turkey-lettuce-wraps.webp",
+   "cuisine": "chinese-american",
+   "skill": "Stir-frying, dicing small",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, brown the turkey in two batches so it browns instead of steaming."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "turkey-ground"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "water-chestnuts"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "hoisin"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "vinegar-rice"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "lettuce-butter"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "other",
+   "tags": {
+    "protein": "turkey",
+    "flavors": [
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "carrots",
+     "onions",
+     "garlic",
+     "ginger",
      "sesame"
     ],
     "optional": []
@@ -1925,6 +2900,189 @@ export const LIBRARY = {
     ],
     "optional": [
      "onions"
+    ]
+   }
+  },
+  {
+   "id": "chicken-piccata",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Chicken piccata",
+   "image": "img/dishes/chicken-piccata.webp",
+   "cuisine": "italian",
+   "skill": "Searing, reducing a pan sauce",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, sear the chicken in batches of 4 pieces, adding a little more oil and butter for each, and keep the cooked ones on the plate under foil."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "chicken-breast"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "capers"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "parsley",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "flour-ap",
+     "use": "cornstarch",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "lemon-lime",
+     "capers"
+    ],
+    "optional": []
+   }
+  },
+  {
+   "id": "pineapple-teriyaki-salmon",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Pineapple teriyaki salmon",
+   "image": "img/dishes/pineapple-teriyaki-salmon.webp",
+   "cuisine": "hawaiian",
+   "skill": "Reducing a glaze, searing fish",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, sear the salmon in two batches so the pieces have room, and keep the first batch on the plate under foil."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "pineapple-chunks"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "brown-sugar"
+    },
+    {
+     "ingredient": "vinegar-rice"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "salmon-fillet"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "sesame-seeds",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": {
+    "protein": "salmon",
+    "flavors": [
+     "sweet-savory",
+     "ginger-soy",
+     "coconut-tropical"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "ginger",
+     "onions"
+    ],
+    "optional": [
+     "sesame"
     ]
    }
   },
@@ -2170,6 +3328,78 @@ export const LIBRARY = {
      "lemon-lime"
     ],
     "optional": []
+   }
+  },
+  {
+   "id": "huevos-rancheros",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Huevos rancheros",
+   "image": "img/dishes/huevos-rancheros.webp",
+   "cuisine": "mexican",
+   "skill": "Cooking eggs gently in salsa",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "A 12-inch skillet holds 8 eggs. For more than 4, cook the eggs in two skillets side by side, or in two batches."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "salsa"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "refried-beans"
+    },
+    {
+     "ingredient": "tortilla-corn"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "avocado",
+     "optional": true
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    },
+    {
+     "ingredient": "queso-fresco",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "eggs",
+    "flavors": [
+     "chili-heat",
+     "rich-tomato"
+    ],
+    "heat": "some",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "avocado",
+     "cilantro"
+    ]
    }
   },
   {
@@ -2548,7 +3778,100 @@ export const LIBRARY = {
      "onions"
     ],
     "optional": []
-   }
+   },
+   "variations": [
+    {
+     "title": "Chicken bulgogi",
+     "image": "img/dishes/beef-bulgogi.webp",
+     "cuisine": "korean",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, cook the chicken in 3 or 4 batches so the pan stays hot."
+       }
+      ]
+     },
+     "totalMinutes": 85,
+     "ingredients": [
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "asian-pear"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "ginger-fresh"
+      },
+      {
+       "ingredient": "soy-sauce"
+      },
+      {
+       "ingredient": "brown-sugar"
+      },
+      {
+       "ingredient": "sesame-oil"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "green-onion"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "sesame-seeds",
+       "optional": true
+      },
+      {
+       "ingredient": "rice-white",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "asian-pear",
+       "use": "pear-bosc",
+       "reason": "availability"
+      },
+      {
+       "for": "soy-sauce",
+       "use": "tamari",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "ginger-soy",
+       "sweet-savory"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "ginger",
+       "sesame",
+       "onions"
+      ],
+      "optional": []
+     },
+     "id": "chicken"
+    }
+   ]
   },
   {
    "id": "buttermilk-biscuits",
@@ -2886,6 +4209,10 @@ export const LIBRARY = {
    "name": "Red chili flakes",
    "contains": []
   },
+  "cayenne": {
+   "name": "Ground cayenne pepper",
+   "contains": []
+  },
   "black-pepper": {
    "name": "Black pepper",
    "contains": []
@@ -2952,6 +4279,10 @@ export const LIBRARY = {
     "gluten"
    ]
   },
+  "hoisin": {
+   "name": "Hoisin sauce",
+   "contains": []
+  },
   "tamari": {
    "name": "Tamari",
    "contains": []
@@ -3016,6 +4347,10 @@ export const LIBRARY = {
    "name": "Green leaf lettuce",
    "contains": []
   },
+  "lettuce-butter": {
+   "name": "Butter lettuce",
+   "contains": []
+  },
   "carrot": {
    "name": "Carrots",
    "contains": []
@@ -3026,6 +4361,10 @@ export const LIBRARY = {
   },
   "mint": {
    "name": "Fresh mint",
+   "contains": []
+  },
+  "dill": {
+   "name": "Fresh dill",
    "contains": []
   },
   "cilantro": {
@@ -3088,6 +4427,18 @@ export const LIBRARY = {
    "name": "Jarred salsa",
    "contains": []
   },
+  "water-chestnuts": {
+   "name": "Sliced water chestnuts",
+   "contains": []
+  },
+  "pineapple-chunks": {
+   "name": "Pineapple chunks in juice",
+   "contains": []
+  },
+  "capers": {
+   "name": "Capers",
+   "contains": []
+  },
   "avocado": {
    "name": "Avocados",
    "contains": []
@@ -3136,6 +4487,12 @@ export const LIBRARY = {
   },
   "beef-sirloin": {
    "name": "Beef sirloin steak, about 1 inch thick",
+   "contains": [
+    "meat"
+   ]
+  },
+  "beef-flank": {
+   "name": "Beef flank steak",
    "contains": [
     "meat"
    ]
@@ -3196,6 +4553,12 @@ export const LIBRARY = {
     "fish"
    ]
   },
+  "salmon-fillet": {
+   "name": "Salmon fillets, skinless",
+   "contains": [
+    "fish"
+   ]
+  },
   "tilapia": {
    "name": "Tilapia fillets",
    "contains": [
@@ -3204,6 +4567,10 @@ export const LIBRARY = {
   },
   "onion-white": {
    "name": "White onion",
+   "contains": []
+  },
+  "onion-red": {
+   "name": "Red onion",
    "contains": []
   },
   "jalapeno": {
@@ -3244,6 +4611,18 @@ export const LIBRARY = {
    "name": "Cannellini beans (white kidney beans)",
    "contains": []
   },
+  "tofu-extra-firm": {
+   "name": "Extra-firm tofu",
+   "contains": []
+  },
+  "black-beans": {
+   "name": "Black beans",
+   "contains": []
+  },
+  "refried-beans": {
+   "name": "Vegetarian refried beans",
+   "contains": []
+  },
   "pasta-small": {
    "name": "Small pasta (ditalini or small shells)",
    "contains": [
@@ -3260,6 +4639,12 @@ export const LIBRARY = {
     "dairy"
    ]
   },
+  "queso-fresco": {
+   "name": "Queso fresco",
+   "contains": [
+    "dairy"
+   ]
+  },
   "worcestershire": {
    "name": "Worcestershire sauce",
    "contains": [
@@ -3268,6 +4653,12 @@ export const LIBRARY = {
   },
   "beef-ground": {
    "name": "Ground beef (80% lean)",
+   "contains": [
+    "meat"
+   ]
+  },
+  "turkey-ground": {
+   "name": "Ground turkey (93% lean)",
    "contains": [
     "meat"
    ]
@@ -3448,6 +4839,7 @@ export const LIBRARY = {
   "brazilian": "Brazilian",
   "american": "American",
   "louisiana": "Louisiana",
+  "hawaiian": "Hawaiian",
   "tex-mex": "Tex-Mex",
   "jewish": "Jewish",
   "british": "British",
@@ -3688,6 +5080,7 @@ export const LIBRARY = {
     "dressings",
     "dicing"
    ],
+   "pickOne": "dressings",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -3698,6 +5091,28 @@ export const LIBRARY = {
     "budget": "$$",
     "familiar": "everyday",
     "veggies": "lots"
+   }
+  },
+  {
+   "id": "chicken-souvlaki-pitas",
+   "title": "Chicken souvlaki pitas",
+   "unit": 1,
+   "about": "Lemon and oregano chicken seared in a skillet and tucked into warm pitas with tomato, onion, and a cool cucumber-yogurt tzatziki.",
+   "skills": [
+    "dressings",
+    "fine-chopping"
+   ],
+   "pickOne": "dressings",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "herby-lemony",
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "some"
    }
   },
   {
@@ -3879,6 +5294,7 @@ export const LIBRARY = {
     "stir-frying",
     "dicing"
    ],
+   "pickOne": "stir-frying",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -3887,6 +5303,27 @@ export const LIBRARY = {
     "heat": "mild",
     "budget": "$",
     "familiar": "everyday",
+    "veggies": "some"
+   }
+  },
+  {
+   "id": "turkey-lettuce-wraps",
+   "title": "Turkey lettuce wraps",
+   "unit": 2,
+   "about": "Ground turkey stir-fried with carrots, water chestnuts, and a hoisin sauce, spooned into cold lettuce cups.",
+   "skills": [
+    "stir-frying",
+    "dicing"
+   ],
+   "pickOne": "stir-frying",
+   "tags": {
+    "protein": "turkey",
+    "flavors": [
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
     "veggies": "some"
    }
   },
@@ -3920,6 +5357,7 @@ export const LIBRARY = {
     "braising",
     "reducing"
    ],
+   "pickOne": "reducing",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -3928,6 +5366,50 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
+  },
+  {
+   "id": "chicken-piccata",
+   "title": "Chicken piccata",
+   "unit": 2,
+   "about": "Thin chicken cutlets seared golden, in a bright lemon and caper pan sauce made in the same skillet.",
+   "skills": [
+    "searing",
+    "reducing"
+   ],
+   "pickOne": "reducing",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
+  },
+  {
+   "id": "pineapple-teriyaki-salmon",
+   "title": "Pineapple teriyaki salmon",
+   "unit": 2,
+   "about": "Seared salmon under a shiny homemade teriyaki glaze of pineapple juice and soy, with warm pineapple and rice.",
+   "skills": [
+    "reducing",
+    "searing"
+   ],
+   "pickOne": "reducing",
+   "tags": {
+    "protein": "salmon",
+    "flavors": [
+     "sweet-savory",
+     "ginger-soy",
+     "coconut-tropical"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
     "familiar": "new-ish",
     "veggies": "light"
    }
@@ -3980,6 +5462,7 @@ export const LIBRARY = {
     "poaching-eggs",
     "emulsions"
    ],
+   "pickOne": "poaching-eggs",
    "prereqs": [
     "cacio-e-pepe"
    ],
@@ -3990,6 +5473,28 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
+  },
+  {
+   "id": "huevos-rancheros",
+   "title": "Huevos rancheros",
+   "unit": 2,
+   "about": "Eggs cooked in simmering salsa, served on crisp corn tortillas with refried beans. A breakfast or supper dish.",
+   "skills": [
+    "poaching-eggs",
+    "heat-control"
+   ],
+   "pickOne": "poaching-eggs",
+   "tags": {
+    "protein": "eggs",
+    "flavors": [
+     "chili-heat",
+     "rich-tomato"
+    ],
+    "heat": "some",
+    "budget": "$",
     "familiar": "new-ish",
     "veggies": "light"
    }
@@ -4066,6 +5571,7 @@ export const LIBRARY = {
     "blooming-spices",
     "flavor-base"
    ],
+   "pickOne": "blooming-spices",
    "tags": {
     "protein": "beans-lentils",
     "flavors": [
@@ -4074,6 +5580,28 @@ export const LIBRARY = {
     "heat": "some",
     "budget": "$",
     "familiar": "adventurous",
+    "veggies": "some"
+   }
+  },
+  {
+   "id": "coconut-chickpea-curry",
+   "title": "Coconut chickpea curry",
+   "unit": 3,
+   "about": "Chickpeas and spinach simmered in a creamy coconut curry sauce with ginger, garlic, and warm spices, with rice or naan.",
+   "skills": [
+    "blooming-spices",
+    "flavor-base"
+   ],
+   "pickOne": "blooming-spices",
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "coconut-tropical",
+     "warm-spices"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
     "veggies": "some"
    }
   },
@@ -4170,6 +5698,7 @@ export const LIBRARY = {
     "spice-rubs",
     "reducing"
    ],
+   "pickOne": "spice-rubs",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -4183,6 +5712,50 @@ export const LIBRARY = {
    }
   },
   {
+   "id": "blackened-cod",
+   "title": "Blackened cod",
+   "unit": 3,
+   "about": "Cod coated in a smoky, peppery spice rub and seared in a hot skillet until a dark crust forms, with lemon and a green salad.",
+   "skills": [
+    "spice-rubs",
+    "searing"
+   ],
+   "pickOne": "spice-rubs",
+   "tags": {
+    "protein": "white-fish",
+    "flavors": [
+     "smoky-bbq",
+     "chili-heat"
+    ],
+    "heat": "spicy",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
+  },
+  {
+   "id": "bbq-salmon",
+   "title": "BBQ-rubbed salmon",
+   "unit": 3,
+   "about": "Salmon rubbed with brown sugar and smoked paprika, seared, then finished in the oven with a barbecue glaze. With corn and coleslaw.",
+   "skills": [
+    "spice-rubs",
+    "searing"
+   ],
+   "pickOne": "spice-rubs",
+   "tags": {
+    "protein": "salmon",
+    "flavors": [
+     "smoky-bbq",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
+  },
+  {
    "id": "chicken-tagine",
    "title": "Chicken tagine with olives",
    "unit": 3,
@@ -4191,6 +5764,7 @@ export const LIBRARY = {
     "blooming-spices",
     "braising"
    ],
+   "pickOne": "braising",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -4204,6 +5778,28 @@ export const LIBRARY = {
    }
   },
   {
+   "id": "caribbean-lamb-chops",
+   "title": "Caribbean coconut curry lamb chops",
+   "unit": 3,
+   "about": "Lamb chops browned and simmered in a coconut curry sauce with thyme, green onions, and a whole hot pepper you can leave out.",
+   "skills": [
+    "braising",
+    "blooming-spices"
+   ],
+   "pickOne": "braising",
+   "tags": {
+    "protein": "lamb",
+    "flavors": [
+     "coconut-tropical",
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$$$",
+    "familiar": "adventurous",
+    "veggies": "light"
+   }
+  },
+  {
    "id": "peanut-stew",
    "title": "Peanut stew (maafe)",
    "unit": 3,
@@ -4212,6 +5808,7 @@ export const LIBRARY = {
     "one-pot-stews",
     "flavor-base"
    ],
+   "pickOne": "one-pot-stews",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -4220,6 +5817,28 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   }
+  },
+  {
+   "id": "moqueca",
+   "title": "Moqueca (Brazilian coconut fish stew)",
+   "unit": 3,
+   "about": "A Brazilian stew of white fish simmered in coconut milk and tomatoes with peppers, onion, and lime, with rice.",
+   "skills": [
+    "one-pot-stews",
+    "flavor-base"
+   ],
+   "pickOne": "one-pot-stews",
+   "tags": {
+    "protein": "white-fish",
+    "flavors": [
+     "coconut-tropical",
+     "rich-tomato"
+    ],
+    "heat": "mild",
+    "budget": "$$",
     "familiar": "adventurous",
     "veggies": "some"
    }
@@ -4275,6 +5894,7 @@ export const LIBRARY = {
     "marinating",
     "broiling"
    ],
+   "pickOne": "broiling",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -4285,6 +5905,28 @@ export const LIBRARY = {
     "budget": "$",
     "familiar": "new-ish",
     "veggies": "light"
+   }
+  },
+  {
+   "id": "honey-soy-salmon",
+   "title": "Broiled honey-soy salmon",
+   "unit": 3,
+   "about": "Salmon in a short honey, soy, and ginger marinade, broiled until the glaze caramelizes at the edges, with green beans.",
+   "skills": [
+    "broiling",
+    "marinating"
+   ],
+   "pickOne": "broiling",
+   "tags": {
+    "protein": "salmon",
+    "flavors": [
+     "sweet-savory",
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "new-ish",
+    "veggies": "some"
    }
   },
   {
@@ -4340,6 +5982,7 @@ export const LIBRARY = {
     "stir-frying",
     "thin-slicing"
    ],
+   "pickOne": "thin-slicing",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -4349,6 +5992,27 @@ export const LIBRARY = {
     "heat": "some",
     "budget": "$$",
     "familiar": "adventurous",
+    "veggies": "some"
+   }
+  },
+  {
+   "id": "beef-and-broccoli",
+   "title": "Beef and broccoli",
+   "unit": 4,
+   "about": "Thinly sliced flank steak and broccoli stir-fried in a glossy soy, ginger, and garlic sauce, over rice.",
+   "skills": [
+    "thin-slicing",
+    "stir-frying"
+   ],
+   "pickOne": "thin-slicing",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
     "veggies": "some"
    }
   },
@@ -4758,6 +6422,7 @@ export const LIBRARY = {
    "skills": [
     "binders"
    ],
+   "pickOne": "binders",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -4768,6 +6433,27 @@ export const LIBRARY = {
     "budget": "$$",
     "familiar": "everyday",
     "veggies": "light"
+   }
+  },
+  {
+   "id": "lamb-kofta",
+   "title": "Lamb kofta with yogurt sauce",
+   "unit": 6,
+   "about": "Ground lamb mixed with onion, parsley, and warm spices, shaped by hand and browned, on flatbread with a yogurt-mint sauce.",
+   "skills": [
+    "binders"
+   ],
+   "pickOne": "binders",
+   "tags": {
+    "protein": "lamb",
+    "flavors": [
+     "warm-spices",
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "adventurous",
+    "veggies": "some"
    }
   },
   {
@@ -4932,11 +6618,32 @@ export const LIBRARY = {
    "skills": [
     "breading-frying"
    ],
+   "pickOne": "breading-frying",
    "tags": {
     "protein": "chicken",
     "flavors": [
      "mild-buttery",
      "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
+  },
+  {
+   "id": "coconut-crusted-fish",
+   "title": "Coconut-crusted fish with pineapple salsa",
+   "unit": 6,
+   "about": "White fish in a crisp shredded-coconut crust, pan-fried and topped with a fresh pineapple and red pepper salsa.",
+   "skills": [
+    "breading-frying"
+   ],
+   "pickOne": "breading-frying",
+   "tags": {
+    "protein": "white-fish",
+    "flavors": [
+     "coconut-tropical"
     ],
     "heat": "mild",
     "budget": "$$",

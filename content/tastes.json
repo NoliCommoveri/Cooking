@@ -1,15 +1,15 @@
 {
   "tasteProteins": [
     { "id": "chicken", "name": "Chicken", "ingredients": ["chicken-breast", "chicken-thigh"] },
-    { "id": "turkey", "name": "Turkey", "ingredients": ["turkey-sausage-bulk", "turkey-strips"] },
-    { "id": "beef", "name": "Beef", "ingredients": ["beef-ribeye", "beef-sirloin", "beef-ground"] },
+    { "id": "turkey", "name": "Turkey", "ingredients": ["turkey-sausage-bulk", "turkey-strips", "turkey-ground"] },
+    { "id": "beef", "name": "Beef", "ingredients": ["beef-ribeye", "beef-sirloin", "beef-ground", "beef-flank"] },
     { "id": "lamb", "name": "Lamb", "ingredients": [] },
     { "id": "white-fish", "name": "White fish (cod, tilapia)", "ingredients": ["cod", "tilapia"] },
-    { "id": "salmon", "name": "Salmon", "ingredients": ["salmon-smoked"] },
+    { "id": "salmon", "name": "Salmon", "ingredients": ["salmon-smoked", "salmon-fillet"] },
     { "id": "tuna", "name": "Tuna", "ingredients": ["tuna-canned"] },
     { "id": "eggs", "name": "Eggs", "ingredients": ["egg", "egg-pasteurized"] },
-    { "id": "beans-lentils", "name": "Beans and lentils", "ingredients": ["cannellini"] },
-    { "id": "tofu", "name": "Tofu", "ingredients": [] }
+    { "id": "beans-lentils", "name": "Beans and lentils", "ingredients": ["cannellini", "black-beans", "refried-beans"] },
+    { "id": "tofu", "name": "Tofu", "ingredients": ["tofu-extra-firm"] }
   ],
   "tasteFlavors": [
     { "id": "warm-spices", "name": "Warm, earthy spices", "hint": "cumin, coriander, turmeric", "examples": ["chicken tikka masala", "chana masala", "beef kofta", "chili con carne"] },
@@ -35,7 +35,7 @@
     { "id": "ginger", "name": "Ginger", "ingredients": ["ginger-fresh"] },
     { "id": "tomatoes", "name": "Tomatoes", "ingredients": ["tomato", "tomatoes-crushed"] },
     { "id": "bell-peppers", "name": "Bell peppers", "ingredients": ["bell-pepper-red", "bell-pepper-green"] },
-    { "id": "hot-peppers", "name": "Hot peppers", "ingredients": ["jalapeno"] },
+    { "id": "hot-peppers", "name": "Hot peppers", "ingredients": ["jalapeno", "cayenne"] },
     { "id": "eggplant", "name": "Eggplant", "ingredients": ["eggplant"] },
     { "id": "zucchini", "name": "Zucchini", "ingredients": ["zucchini"] },
     { "id": "spinach-greens", "name": "Spinach and leafy greens", "ingredients": ["spinach-baby"] },
@@ -59,7 +59,7 @@
     { "id": "mayonnaise", "name": "Mayonnaise", "ingredients": ["mayonnaise"] },
     { "id": "mustard", "name": "Mustard", "ingredients": ["mustard-dijon"] },
     { "id": "pickles", "name": "Pickles", "ingredients": ["pickle-dill"] },
-    { "id": "capers", "name": "Capers", "ingredients": [] },
+    { "id": "capers", "name": "Capers", "ingredients": ["capers"] },
     { "id": "dried-fruit", "name": "Raisins and dried fruit in savory food", "ingredients": [] },
     { "id": "cinnamon-savory", "name": "Cinnamon in savory food", "ingredients": [] },
     { "id": "fish-sauce", "name": "Fish sauce and anchovy", "ingredients": [] },

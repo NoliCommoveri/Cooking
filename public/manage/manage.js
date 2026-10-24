@@ -2,7 +2,8 @@
 // the browser. Every change is staged here first (the bar at the bottom counts
 // them), checked by the same content linter GitHub runs, and saved as one
 // commit to the repo, where the publish workflow checks it again and puts it
-// live. Routes live in the hash: #/ (the course), #/lesson/<id>, #/try/<id>, #/saves,
+// live. Routes live in the hash: #/ (the course), #/lesson/<id>, #/lesson/<id>/v/<variation>,
+// #/try/<id>, #/try/<id>/<variation>, #/saves,
 // #/list/<file>, #/rules, #/fix/<id>, #/tags.
 import { el, modal } from './dom.js';
 import { field, blank } from './form.js';
@@ -595,8 +596,8 @@ route = async () => {
   try {
     if (h === '#/login') return loginPage();
     let m;
-    if ((m = h.match(/^#\/lesson\/([a-z0-9-]+)$/))) return lessonPage(m[1]);
-    if ((m = h.match(/^#\/try\/([a-z0-9-]+)$/))) return await previewPage(m[1]);
+    if ((m = h.match(/^#\/lesson\/([a-z0-9-]+)(?:\/v\/([a-z0-9-]+))?$/))) return lessonPage(m[1], m[2] ?? null);
+    if ((m = h.match(/^#\/try\/([a-z0-9-]+)(?:\/([a-z0-9-]+))?$/))) return await previewPage(m[1], m[2] ?? null);
     if (h === '#/saves') return await savesPage();
     if ((m = h.match(/^#\/list\/([a-z]+\.json)$/))) return listPage(m[1]);
     if (h === '#/rules') return rulesPage();

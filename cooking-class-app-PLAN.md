@@ -152,6 +152,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 - **Knife work comes first, strongly suggested.** Nearly every lesson uses it. The app nudges parents toward a Unit 1 lesson before anything else, but doesn't block them (§6.2).
 - **Parents can see foundations at a glance** (§6.2): foundation lessons are marked in the library and the queue, and choose-one lessons are shown side by side.
 - **Prerequisites:** a lesson that needs a foundation skill unlocks when either lesson teaching it is done. The exception is a lesson built on the dish itself: 41 serves 40a's biscuits, so it still needs 40a.
+- **A pick-one group has at most three dishes** (owner, 2026-10-24); new dishes for a skill go into a group with room, or start one.
 - **Each foundation skill has three lessons to pick from** (owner, 2026-10-22). The added dishes sit beside the lesson they pair with and share its number, with a letter each (1a, 1b, 1c); the unit tables mark each group with "pick one with". Slicing is already taught three times (5, 27, 28), so it has no added dishes.
 
 | Foundation skill | Pick one of |
@@ -188,7 +189,8 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 3a | Pico de gallo + Baja fish tacos | Mexican | Dicing; broiling fish | Adult nearby | Cod/tilapia. Broiled, not battered and fried: frying is first taught in 53 |
 | 3b | Ratatouille | French | Dicing: eggplant, zucchini, pepper, tomato · *pick one with 3a, 3c* | Adult nearby | |
 | 3c | Minestrone | Italian | Dicing · *pick one with 3a, 3b* | Adult nearby | |
-| 4 | Chicken Caesar + homemade dressing & croutons | American | Whisked dressing, cubing bread | Adult nearby | Pasteurized eggs or mayo base |
+| 4a | Chicken Caesar + homemade dressing & croutons | American | Whisked dressing, cubing bread | Adult nearby | Pasteurized eggs or mayo base |
+| 4b | Chicken souvlaki pitas | Greek | A yogurt sauce (tzatziki), chopping herbs fine · *pick one with 4a* | Adult nearby | Added 2026-10-24 |
 | 5 | Smash burgers + quick pickles | American | Thin slicing, quick pickle, high-heat sear | Adult nearby | |
 
 ### Unit 2 — Stovetop basics
@@ -201,12 +203,16 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 8a | Shakshuka | N. African / Middle Eastern | Building a sauce, poaching eggs in it | Adult nearby | |
 | 8b | Spaghetti marinara | Italian | Building a sauce · *pick one with 8a, 8c* | Adult nearby | |
 | 8c | Honey-garlic chicken | Chinese-American | Building a sauce · *pick one with 8a, 8b* | Adult nearby | Honey is allowed (§2.1) |
-| 9 | Chicken fried rice | Chinese | High-heat stir-fry, day-old rice | Adult nearby | Mushroom stir-fry sauce, not oyster sauce |
+| 9a | Chicken fried rice | Chinese | High-heat stir-fry, day-old rice | Adult nearby | Mushroom stir-fry sauce, not oyster sauce |
+| 9b | Turkey lettuce wraps | Chinese-American | Stir-frying, dicing small · *pick one with 9a* | Adult nearby | Hoisin, not oyster sauce. Added 2026-10-24 |
 | 10 | Oyakodon | Japanese | Simmering, setting egg gently | Adult nearby | Mirin sub: rice vinegar + sugar; dashi sub: chicken broth + soy |
-| 11 | Chicken adobo | Filipino | Braising, reducing | Adult nearby | |
+| 11a | Chicken adobo | Filipino | Braising, reducing | Adult nearby | |
+| 11b | Chicken piccata | Italian | Searing, reducing a pan sauce · *pick one with 11a, 11c* | Adult nearby | Broth, no wine. Added 2026-10-24 |
+| 11c | Pineapple teriyaki salmon | Hawaiian | Reducing a glaze, searing fish · *pick one with 11a, 11b* | Adult nearby | Added 2026-10-24 |
 | 12 | Breakfast burritos (breakfast) | American | Timing several components, rolling | Adult nearby | Beef chorizo or turkey sausage; check casings, or use bulk |
 | 13 | Cacio e pepe | Italian | Emulsion | Adult nearby | |
-| 14 | Eggs Benedict (breakfast) | American | Poaching eggs, hollandaise | Adult nearby | Turkey bacon or smoked salmon. Pasteurized eggs for the hollandaise. Prereq: 13 |
+| 14a | Eggs Benedict (breakfast) | American | Poaching eggs, hollandaise | Adult nearby | Turkey bacon or smoked salmon. Pasteurized eggs for the hollandaise. Prereq: 13 |
+| 14b | Huevos rancheros | Mexican | Cooking eggs gently in salsa · *pick one with 14a* | Adult nearby | Vegetarian refried beans (many are made with lard). Added 2026-10-24 |
 | 15a | Stovetop mac and cheese | American | Roux → béchamel → cheese sauce | Adult nearby | Foundation for every roux lesson |
 | 15b | Chicken and spinach crêpes | French | Roux → béchamel, crêpe batter · *pick one with 15a, 15c* | Adult nearby | |
 | 15c | Japanese chicken curry | Japanese | Roux with curry powder, from scratch · *pick one with 15a, 15b* | Adult nearby | Make the roux from scratch: store-bought curry blocks can contain pork or beef fat |
@@ -214,24 +220,31 @@ Lessons are grouped into units by skill. International and American dishes are m
 ### Unit 3 — Spices and flavor bases
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
-| 16 | Chana masala | Indian | Blooming spices, onion-tomato base | Adult nearby | Amchur sub: lemon |
+| 16a | Chana masala | Indian | Blooming spices, onion-tomato base | Adult nearby | Amchur sub: lemon |
+| 16b | Coconut chickpea curry | Indian | Blooming spices, a coconut curry · *pick one with 16a* | Adult nearby | Planned 2026-10-24 |
 | 17 | Beef chili | American | Batch browning, toasting spices | Adult nearby | |
 | 18 | Misir wot | Ethiopian | Spiced lentils | Adult nearby | Berbere sub: paprika + cayenne + warm spices; serve with rice |
 | 19 | Red beans and rice | Louisiana | Onion/celery/pepper base, simmering beans until creamy | Adult nearby | Chicken andouille instead of ham hock; check casings |
 | 20 | Jollof rice with chicken | Nigerian | Blended pepper base, cooking rice in the sauce | Adult nearby | Scotch bonnet → jalapeño. No dried crayfish or shrimp bouillon |
-| 21 | BBQ pulled chicken + coleslaw | American | Dry rub, reducing a sauce | Adult nearby | |
-| 22 | Chicken tagine with olives | Moroccan | Layered spice braise | Adult nearby | Preserved lemon sub; ras el hanout sub; Dutch oven |
-| 23 | Peanut stew (maafe) | Malian | Building a one-pot stew | Adult nearby | Peanut butter; carries the peanut tag |
+| 21a | BBQ pulled chicken + coleslaw | American | Dry rub, reducing a sauce | Adult nearby | |
+| 21b | Blackened cod | Louisiana | A spice rub, searing fish · *pick one with 21a, 21c* | Adult nearby | Planned 2026-10-24 |
+| 21c | BBQ-rubbed salmon | American | A sweet-smoky rub, sear then bake · *pick one with 21a, 21b* | Adult nearby | Planned 2026-10-24 |
+| 22a | Chicken tagine with olives | Moroccan | Layered spice braise | Adult nearby | Preserved lemon sub; ras el hanout sub; Dutch oven |
+| 22b | Caribbean coconut curry lamb chops | Jamaican | Searing, then braising in coconut curry · *pick one with 22a* | Adult nearby | Hot pepper optional. Planned 2026-10-24 |
+| 23a | Peanut stew (maafe) | Malian | Building a one-pot stew | Adult nearby | Peanut butter; carries the peanut tag |
+| 23b | Moqueca (Brazilian coconut fish stew) | Brazilian | A one-pot coconut stew · *pick one with 23a* | Adult nearby | No seafood stock. Planned 2026-10-24 |
 | 24 | Koshari | Egyptian | Building a dish in layers, crispy onions | Adult nearby | Lentils, rice, pasta, tomato sauce |
 | 25 | Butter chicken | Indian | Marinating, finishing with cream | Adult nearby | |
-| 26 | Jerk chicken | Jamaican | Wet marinade, broiling | Adult nearby | Habanero or jalapeño |
+| 26a | Jerk chicken | Jamaican | Wet marinade, broiling | Adult nearby | Habanero or jalapeño |
+| 26b | Broiled honey-soy salmon | American | A quick marinade, broiling · *pick one with 26a* | Adult nearby | 145°F. Planned 2026-10-24 |
 
 ### Unit 4 — Breaking down and slicing meat, marinades
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
 | 27 | Beef bulgogi | Korean | Thin slicing (partly frozen), marinating | Adult nearby | Asian pear sub: Bosc pear or apple |
 | 28 | Philly cheesesteak | American | Thin slicing (deliberate repeat of 27) | Adult nearby | Prereq: 27 |
-| 29 | Lomo saltado | Peruvian | Beef stir-fry | Adult nearby | Aji amarillo sub: yellow bell pepper + cayenne |
+| 29a | Lomo saltado | Peruvian | Beef stir-fry | Adult nearby | Aji amarillo sub: yellow bell pepper + cayenne |
+| 29b | Beef and broccoli | Chinese-American | Thin slicing, a quick stir-fry · *pick one with 29a* | Adult nearby | Soy and broth, not oyster sauce. Planned 2026-10-24 |
 | 30 | Suya (spiced beef skewers) | Nigerian | Thin slicing, dry rub, broiling | Adult nearby | Ground-peanut spice rub; carries the peanut tag |
 | 31 | Chicken yassa | Senegalese | Citrus-mustard marinade, slow-cooked onions | Adult nearby | |
 | 32 | Chicken tinga tacos | Mexican | Braising, shredding | Adult nearby | |
@@ -259,7 +272,8 @@ Lessons are grouped into units by skill. International and American dishes are m
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
 | 44 | Homemade granola (breakfast) | American | Oven browning, stirring partway | Adult nearby | Mixing steps are Solo; oven steps make the lesson Adult nearby |
-| 45 | Meatloaf with glaze | American | Binders, thermometer | Adult nearby | |
+| 45a | Meatloaf with glaze | American | Binders, thermometer | Adult nearby | |
+| 45b | Lamb kofta with yogurt sauce | Lebanese | Binders, shaping by hand · *pick one with 45a* | Adult nearby | Ground lamb, 160°F. Planned 2026-10-24 |
 | 46 | Swedish meatballs | Swedish | Browning, roux gravy | Adult nearby | Beef; cranberry for lingonberry. Prereq: any roux lesson (15) |
 | 47 | Roast chicken + pan gravy | American | Roasting, resting, carving, gravy | Adult nearby | Prereq: any roux lesson (15) |
 | 48 | Pot roast | American | Long oven braise | Adult nearby | |
@@ -267,7 +281,8 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 50 | Spanakopita | Greek | Phyllo, layering | Adult nearby | |
 | 51 | Spinach & mushroom quiche | French | Pastry, blind baking, custard | Adult nearby | No bacon |
 | 52 | Chicken pot pie | American | Roux filling + pie crust | Adult nearby | Prereq: any roux lesson (15), and 51 |
-| 53 | Chicken katsu | Japanese | Breading station, shallow frying | **Adult hands-on** | Tonkatsu sauce sub |
+| 53a | Chicken katsu | Japanese | Breading station, shallow frying | **Adult hands-on** | Tonkatsu sauce sub |
+| 53b | Coconut-crusted fish with pineapple salsa | Hawaiian | A coconut breading, pan-frying · *pick one with 53a* | **Adult hands-on** | Planned 2026-10-24 |
 | 54 | Kelewele (spiced plantains) | Ghanaian | Shallow frying | **Adult hands-on** | Plantains from the produce aisle |
 | 55 | Fish and chips | British | Batter, deep-frying with a thermometer | **Adult hands-on** | Cod or haddock; fry in vegetable oil, never beef dripping |
 
@@ -753,6 +768,9 @@ The linter must reject content when:
 - a fixed-scaling lesson has no multipliers, or they don't include 1×
 - a step that `handles` raw food isn't followed directly by a `wash` step, or a raw ingredient is never marked as handled
 - a lesson with raw meat, poultry, or fish has no doneness step with a thermometer temperature. A lesson whose only raw ingredient is egg baked into a dough (cookies) may use a visual doneness check instead (owner approved)
+- a lesson's highest thermometer target is below the safe minimum (§3) for the raw meat, poultry, or fish in it (added 2026-10-24, so a chicken variation of a steak lesson can't keep 145°F)
+- a pick-one group has more than 3 dishes (§4.0)
+- a variation (§6.21), put together as a whole lesson, fails any of these checks, or has bad tags or its lesson's title
 - a step that isn't solo has no `hazard`
 - a callback points to a lesson that doesn't exist
 - the lesson can't be scaled and filled cleanly at every serving size it offers
@@ -962,6 +980,51 @@ Each person rates what they love and hate, the app picks the best dish or **vari
 - **Each variation is checked as a whole lesson** by the linter (§7.4): the hard block, food safety (doneness targets, wash-hands steps), the leaven check and badges (§6.19), and diet filters. A variation can't get past a rule its lesson follows.
 - **Stored as changes on its lesson** (recommendation): in the lesson file, `variations` lists each one's id, title, tags, and what differs (ingredients, steps, equipment, times, Learn cards). A fix to a step they share reaches every variation. In the content editor (§7.5), **+ Add a variation** opens a copy of the lesson to change.
 - **Substitutions stay for now** (§2.1). Common ones (a dairy-free mac and cheese) become variations over time.
+- **Built (2026-10-24), slice 11c:** `variations` in the lesson file, each stored as whole values (title, time, scaling, Learn cards) and list changes keyed by step id, why-card id, tool, and ingredient line, so whatever it doesn't change stays shared. The linter puts each one together and checks it as a whole lesson, plus its tags. The content editor has a **Variations** section on each lesson (**+ Add a variation** asks for a name in a dialog, then opens a copy of the lesson as its own page; edits are saved as what differs) and a learner preview of each. Families with the next release: a parent picks the version on each queue and course row (**Version: …**); the player, its cook, and shopping lists use it (a list keeps the version it was made for), and the cook counts as the lesson. Tables `variation_choices`, `attempt_variations`, `list_variations` are in the draft migration. The first variation is **Chimichurri chicken**. Not built yet: the default pick by score (11d), and the "(a version of …)" name in progress, grades, and the transcript, which still show the lesson's title.
+
+**Proposed variations — Recommendation** (Claude, 2026-10-24, from a coverage check of the drafted tags). **Written 2026-10-24** (owner: write the ones whose lesson is done): chicken bulgogi, steak fajitas, black bean fajitas, spicy chicken fajitas, turkey smash burgers, honey-garlic salmon, honey-garlic tofu, and spicy shakshuka, each a draft for the owner to review in the content editor. The rest wait on their lesson: chicken cheesesteak, turkey meatloaf, the empanadas, and jerk salmon. Cheapest first: each opens a skill to a protein that has nothing for it today, or adds heat. Every one is written for the skill its lesson teaches.
+
+| Variation | Of | Skill | Gap it fills | Draft tags |
+|---|---|---|---|---|
+| Chicken bulgogi | Beef bulgogi | Thin slicing | All 5 thin-slicing dishes are beef | chicken; ginger-soy, sweet-savory; mild; $ |
+| Chicken cheesesteak | Philly cheesesteak (not written) | Thin slicing | Same; also brings a $$$ dish to $$ | chicken; creamy-cheesy; mild; $$ |
+| Turkey meatloaf | Meatloaf (not written) | Binders | Binders is beef only | turkey; sweet-savory, mild-buttery; mild; $$ |
+| Chicken empanadas, or black bean and cheese empanadas | Beef empanadas (not written) | Filling and crimping; cutting in fat | Beef is the only main-dish choice for both skills | chicken or beans-lentils; warm-spices; mild; $ |
+| Beef fajitas, or black bean and pepper fajitas | Chicken fajitas | Julienne | Julienne's meals are all chicken | beef or beans-lentils; warm-spices; some; $$ or $ |
+| Turkey smash burgers | Smash burgers | Quick pickling | Quick pickling is beef only | turkey; tangy; mild; $$ |
+| Honey-garlic salmon, or honey-garlic tofu | Honey-garlic chicken | Building a sauce | No salmon or tofu dish anywhere; reducing is chicken only | salmon or tofu; sweet-savory, ginger-soy; mild; $$ |
+| Spicy shakshuka | Shakshuka | Building a sauce | No written meal is spicy | eggs; rich-tomato, chili-heat; spicy; $ |
+| Spicy chicken fajitas | Chicken fajitas | Julienne | Same | chicken; warm-spices, chili-heat; spicy; $$ |
+| Jerk salmon with mango salsa | Jerk chicken (not written) | Marinating, broiling | No salmon dish; adds tropical (owner, 2026-10-24) | salmon; chili-heat, coconut-tropical; some; $$$ |
+
+**Proposed pick-one dishes — Recommendation** (Claude, 2026-10-24, from recipes found on the web; none written yet, and each waits on the owner's yes). The owner's direction (2026-10-24): new dishes go in as **pick-one choices beside a dish that teaches the same skills**, not as extra lessons, so the course keeps its numbering and its length; a family cooks one dish from each group (§4.0). They fill the gaps the coverage check found: no salmon, lamb, or tofu, no coconut and tropical dish, thin smoky and BBQ, and only 3 meals of 30 minutes or less. Each is from a store in a mid-sized US city. The sources were read from search results only; amounts are checked when each lesson is written.
+
+| New dish | Beside | Pick-one group (skill) | Time | Draft tags | Notes |
+|---|---|---|---|---|---|
+| Beef and broccoli (flank steak) | Lomo saltado | thin-slicing (new) | 25 | beef; ginger-soy; mild; $$ | No oyster sauce: soy, broth, brown sugar, ginger |
+| Turkey lettuce wraps | Chicken fried rice | stir-frying (new) | 20 | turkey; ginger-soy; mild; $ | Hoisin and soy, not oyster sauce |
+| Coconut chickpea curry | Chana masala | blooming-spices (new) | 30 | beans-lentils; coconut-tropical, warm-spices; mild; $ | First coconut dish; first with chickpeas |
+| Blackened cod or tilapia | BBQ pulled chicken | spice-rubs (new) | 20 | white-fish; smoky-bbq, chili-heat; spicy; $$ | A quick spicy dish |
+| BBQ-rubbed salmon (sear, then bake) | the same group | spice-rubs (new) | 25 | salmon; smoky-bbq, sweet-savory; mild; $$$ | Smoked paprika and brown sugar rub |
+| Broiled honey-soy salmon | Jerk chicken | broiling (new) | 15–25 | salmon; sweet-savory, ginger-soy; mild; $$$ | Doneness 145°F (one source pulls at 125–130°F) |
+| Pineapple teriyaki salmon | Chicken adobo | reducing (new) | 30 | salmon; sweet-savory, ginger-soy, coconut-tropical; mild; $$$ | Reducing a glaze |
+| Chicken piccata (broth, no wine) | the same group | reducing (new) | 30 | chicken; herby-lemony; mild; $$ | First dish with capers; a pan sauce reduced after searing (building-a-sauce already has 3) |
+| Huevos rancheros, eggs cooked in salsa | Eggs Benedict | poaching-eggs (new) | 25 | eggs; chili-heat, rich-tomato; some; $ | Method adapted: covered, until whites and yolks are firm |
+| Chicken souvlaki pitas with tzatziki | Chicken Caesar | dressings (new) | 30 | chicken; herby-lemony, tangy; mild; $$ | Short marinade; 165°F (one source says 160°F) |
+| Moqueca, Brazilian coconut fish stew | Peanut stew | one-pot-stews (new) | 30 | white-fish; coconut-tropical, rich-tomato; mild; $$ | No shrimp, no seafood stock |
+| Coconut-crusted fish with pineapple salsa | Chicken katsu | breading-frying (new) | 35 | white-fish; coconut-tropical; mild; $$ | Mahi-mahi is often frozen; cod or tilapia work |
+| Lamb kofta with yogurt sauce | Meatloaf | binders (new) | 40 | lamb; warm-spices, herby-lemony; mild; $$$ | First lamb dish; ground lamb, 160°F |
+| Caribbean coconut curry lamb chops | Chicken tagine | braising (new) | 75 | lamb; coconut-tropical, warm-spices; some; $$$ | Scotch bonnet optional |
+
+**No pick-one group has more than 3 dishes** (owner, 2026-10-24); the linter refuses a fourth (§7.4).
+
+**Jerk salmon is a variation of jerk chicken** (owner, 2026-10-24), not a pick-one dish: the same skills (marinating, broiling), salmon instead of chicken, with a short marinade (fish goes soft in a long one), a mango salsa, and 145°F. Draft tags: salmon; chili-heat, coconut-tropical; some; $$$. It waits on jerk chicken being written.
+
+**Written 2026-10-24** (owner: "write those four groups as lessons"): chicken souvlaki pitas (4b), turkey lettuce wraps (9b), chicken piccata (11b), pineapple teriyaki salmon (11c), and huevos rancheros (14b), in the course as pick-one choices; the course still has 59 numbers. Their pictures are from the owner's sheet 24.
+
+**In the course outline 2026-10-24** (owner): the other nine are planned pick-one choices in Cook Around the World, with pictures from the owner's sheets 25 and 26, waiting to be written. New dishes are part of the live course for every family, not the next release (owner, 2026-10-24).
+
+Checks for every one, when written: no shrimp, oyster sauce, or seafood stock; labels on curry paste, hoisin, and fish sauce read for shellfish; doneness at the safe minimums (§3), whatever a source says.
 
 **Tags on every dish and variation** — the shared vocabulary between ratings, picks, and gaps.
 - **Where they live:** beside the dish card, on each dish's `course.json` entry (so all 75 are tagged, written or not), or on the lesson for a seasonal lesson (§6.19), as `tags`.
@@ -1109,6 +1172,7 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `unleavened_dates` (family_id, year, calendar, first_day, unleavened_from, confirmed_at) (§6.20). `calendar` is a standard calendar's id; `first_day` may differ from that calendar's date (a deviation); `confirmed_at` is null until the parent confirms the year
 - `profile_ratings` (family_id, profile_id, kind: protein | flavor | ingredient, item, stars 1–5 or null for Haven't tried; at most one 5 per profile per kind, updated_at) (§6.21)
 - `family_limits` (family_id, max_minutes, budget, missing_tools, adventurous, updated_at) (§6.21)
+- `variation_choices` (family_id, lesson_id, variation: a variation id, or '' for the lesson itself, updated_at), `attempt_variations` (attempt_id, family_id, variation), `list_variations` (list_id, family_id, position, variation): which version a family cooks, each cook was, and each list was bought for (§6.21)
 - `taste_learned` (family_id, profile_id, kind: flavor | protein | cuisine, item, adjust, cooks): what Reflect ratings have taught (§6.21), so the gaps page and picks don't recount every cook
 - `course_programs` (course_id, family_id, program: `level-3`, …): which program a course is (§12). No row means Cook Around the World, so existing courses need no change
 - `level_tasks` (family_id, course_id, week, part, profile_id, done_at): a Level week's recipe, drill, knowledge, and Sabbath task checked off per profile (§12.2); a mastery week's "why it worked" is saved with the cook's reflection
@@ -1167,7 +1231,7 @@ Each phase should be deployed and usable before the next begins.
 | **9. Family recipes** | Folded into 4c (§6.10) | — |
 | **10. Content editor** (owner, 2026-10-23; built 2026-10-23) | The manager section at `/manage` with its owner-only sign-in, and the content editor in it (§7.5): the GitHub token check on `/ops`, the save path (checks, commit to `content-edits`, the workflow that builds, checks, and moves it to `main`, the save status), History and Revert, then the editors: lessons and units first, then registries and the food rules, then pictures | The owner adds a unit, adds a lesson to it, moves an existing lesson into it, and removes a step, all from the browser; each is live for every family after the deploy with no session. A save that breaks a rule is refused with the reason, and Revert puts a lesson back |
 | **10b. Next release switch** (owner, 2026-10-23; built 2026-10-23) | §8.6: the switch on `/ops` (preview per family, Launch for everyone, Undo launch), the draft migration with Re-apply and Finalize, and `content/levels/`. Phases 11–13 are built behind it | A preview family sees a test screen that other families don't; Re-apply draft rebuilds an edited draft table; Undo launch puts the app back |
-| **11. Tastes, variations, and the recipe pool** (owner, 2026-10-23: built first, right after the switch) | §6.21, in slices: **11a** tags (built 2026-10-24: protein, flavors, heat, budget, familiar on every dish; `content/tastes.json`; the Tags and Tastes pages in the content editor; Claude's drafted values); **11b** ratings (stars per profile, family limits, Our tastes, the Getting started step, Chef Ruth asking a few at a time, the kid's taste quiz); **11c** variations (lesson files, the editor, the linter, the player and shopping list using the chosen one, counting as the lesson); **11d** scoring and picks (course setup, Add a lesson, Chef Ruth, Swap; learning from Reflect); **11e** Recipe gaps | A preview family with a kid who rates mushrooms 1 star and beef 4 gets the beef variation with no mushrooms by default; a variation with a too-low doneness target is refused by the linter; the owner sees the gap that left another family short and opens a new variation from it, with its tags filled in |
+| **11. Tastes, variations, and the recipe pool** (owner, 2026-10-23: built first, right after the switch) | §6.21, in slices: **11a** tags (built 2026-10-24: protein, flavors, heat, budget, familiar on every dish; `content/tastes.json`; the Tags and Tastes pages in the content editor; Claude's drafted values); **11b** ratings (stars per profile, family limits, Our tastes, the Getting started step, Chef Ruth asking a few at a time, the kid's taste quiz); **11c** variations (built 2026-10-24: lesson files, the editor, the linter, the player and shopping list using the chosen one, counting as the lesson); **11d** scoring and picks (course setup, Add a lesson, Chef Ruth, Swap; learning from Reflect); **11e** Recipe gaps | A preview family with a kid who rates mushrooms 1 star and beef 4 gets the beef variation with no mushrooms by default; a variation with a too-low doneness target is refused by the linter; the owner sees the gap that left another family short and opens a new variation from it, with its tags filled in |
 | **12. Level 3 Cook** (owner, 2026-10-23: Level 3 first) | §12: the Level program beside Cook Around the World, Level 3's 36 weeks with its four parts, mastery weeks, skill-tagged swap-ins, the Level 3 recipes, Progress and transcript changes | A parent puts a teen on Level 3; the kid cooks week 1's recipe, checks off its drill, knowledge, and Sabbath task; a swap-in replaces a week's recipe; a mastery week asks for "why it worked"; the transcript shows Level 3's hours |
 | **13. Unleavened Bread dates** (owner, 2026-10-23) | §6.20: the standard calendars file and its editor, the Getting started and Family settings questions, the yearly ask, the migration, and the swap, schedule, and kitchen changes; the fixed window comes out | Two test families on different calendars, one deviating by a day, see Swap go unleavened-only on their own weeks; a leavened course lesson due in the feast moves past it and doesn't count as behind; a family that hasn't confirmed sees the note |
 | **Later** | Levels 2, 4, and 1 (§12), mini-courses (§10), More themes: Food Truck and Recipe Scrapbook (§5.2), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system (Print our progress's CSV covers the basics, §6.15) | — |

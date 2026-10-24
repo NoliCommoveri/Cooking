@@ -149,6 +149,8 @@ test('the course outline is checked against the registries and the lessons', () 
   // A pick-one group's dishes sit together, and a group has at least two.
   assert.match(broken((c) => { const d = c.course.dishes; d.push(d.splice(d.findIndex((x) => x.id === 'fattoush'), 1)[0]); }), /"fine-chopping"[^\n]*aren't next to each other/);
   assert.match(broken((c) => { dish(c, 'oyakodon').pickOne = 'simmering'; }), /"simmering"[^\n]*has only one dish/);
+  // A fourth dish in a group (owner, 2026-10-24).
+  assert.match(broken((c) => { dish(c, 'french-omelet').pickOne = 'building-a-sauce'; }), /"building-a-sauce"[^\n]*has 4 dishes; a group has 3 at most/);
   assert.match(broken((c) => { c.terms[0].taughtIn = 'nope'; }), /taughtIn "nope" isn't a dish/);
 });
 

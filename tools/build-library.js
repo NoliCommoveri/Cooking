@@ -19,12 +19,13 @@ import { numberCourse, seasonalLabels } from '../src/content/course.js';
 import { unleavened } from '../src/content/leaven.js';
 import { tasteItemsIn } from '../src/content/tastes.js';
 import { mainProtein } from '../src/content/getting-started.js';
+import { applyVariation } from '../src/content/variations.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'src/worker/library-data.js');
 const CONTENT_OUT = join(ROOT, 'src/worker/content-data.js');
 // lint, validate, load, and format are for the manager section's checks (§7.5).
-export const BROWSER_LIB = ['units.js', 'scale.js', 'terms.js', 'diet.js', 'patch.js', 'course.js', 'shop.js', 'rules.js', 'recipe.js', 'leaven.js', 'rewards.js', 'login-pictures.js', 'getting-started.js', 'tastes.js', 'lint.js', 'validate.js', 'load.js', 'format.js', 'grades.js'];
+export const BROWSER_LIB = ['units.js', 'scale.js', 'terms.js', 'diet.js', 'patch.js', 'course.js', 'shop.js', 'rules.js', 'recipe.js', 'leaven.js', 'rewards.js', 'login-pictures.js', 'getting-started.js', 'tastes.js', 'variations.js', 'lint.js', 'validate.js', 'load.js', 'format.js', 'grades.js'];
 // Lessons in course order (content/course.json), the order their numbers follow.
 // Lessons in a seasonal unit (Appointed Times, §6.19) aren't in the course and come after it.
 const inCourse = (c) => {
@@ -89,6 +90,8 @@ export function buildPublic() {
     image: `img/${L.image.replace(/\.png$/, '.webp')}`, unleavened: isUnleavened(c, L), feast: isFeast(c, L),
     // The dish card (queue and course screens): from course.json, or the lesson itself for Appointed Times.
     about: L.about ?? dishes[L.id]?.about, main: L.main ?? dishes[L.id]?.main, method: L.method ?? dishes[L.id]?.method, minutes: L.totalMinutes,
+    // Its variations (§6.21), by id and title.
+    ...(L.variations?.length ? { variations: L.variations.map((v) => ({ id: v.id, title: v.title })) } : {}),
   })).sort(inCourse(c));
   files['public/content/registry.json'] = JSON.stringify({
     ingredients: Object.fromEntries(c.ingredients.map((i) => [i.id, i])),
@@ -120,7 +123,7 @@ export function buildLibrary() {
   const c = visibleContent(loadContent());
   const registry = Object.fromEntries(c.ingredients.map((i) => [i.id, i]));
   const used = new Set();
-  const lessons = c.lessons.map(({ data: L }) => {
+  const summary = (L) => {
     const lines = L.ingredients.map((x) => ({ ingredient: x.ingredient, ...(x.optional ? { optional: true } : {}) }));
     const subs = (L.substitutions || []).map(({ for: f, use, reason }) => ({ for: f, use, reason }));
     for (const x of lines) used.add(x.ingredient);
@@ -135,6 +138,18 @@ export function buildLibrary() {
       // What profiles rate it by (§6.21): its tags, and the key ingredients it uses.
       tags: tagsOf(c, L), tasteItems: tasteItemsIn(L, c.tastes.ingredients),
     };
+  };
+  const lessons = c.lessons.map(({ data: L }) => {
+    const out = summary(L);
+    // Each variation (§6.21) as the lesson it makes: its own ingredients,
+    // time, badges, tags, and key ingredients, for picks and shopping.
+    if (L.variations?.length) {
+      out.variations = L.variations.map((v) => {
+        const { id: _, version, track, unit, skill, feast, ...rest } = summary(applyVariation(L, v));
+        return { ...rest, id: v.id, tags: v.tags ?? null };
+      });
+    }
+    return out;
   }).sort(inCourse(c));
   const ingredients = Object.fromEntries(c.ingredients.filter((i) => used.has(i.id))
     .map((i) => [i.id, { name: i.name, contains: i.contains }]));

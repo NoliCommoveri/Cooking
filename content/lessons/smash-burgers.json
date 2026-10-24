@@ -99,5 +99,183 @@
     { "id": "cook-second", "text": "Smash, sear, flip, and add cheese the same way as the first batch.", "safety": "adult-nearby", "hazard": "Hot pan, spatter", "timerSeconds": 150, "timerLabel": "Sear, second batch", "tip": "If the pan is smoking hard, turn the heat down a little for this batch." },
     { "id": "check-second", "type": "doneness", "text": "Check one patty with the thermometer. It needs to read at least 160°F. Then move them to the buns and turn off the stove.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 160, "unit": "F" } },
     { "id": "serve", "text": "Top each burger with pickles from the bowl, plus lettuce, ketchup, or mustard if you're using them, and the top bun.", "safety": "solo", "tip": "Lift the pickles out with a fork and let the brine drip off first." }
+  ],
+  "variations": [
+    {
+      "id": "turkey",
+      "title": "Turkey smash burgers + quick pickles",
+      "tags": {
+        "protein": "turkey",
+        "flavors": ["tangy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "scaling": {
+        "mode": "free",
+        "notes": [
+          { "from": 7, "text": "Cook 3 patties at a time in a 12-inch skillet. For more than 6, keep going in batches of 3, washing the tongs and your hands after each batch of raw turkey." }
+        ]
+      },
+      "ingredients": {
+        "change": {
+          "vegetable-oil@For the pan": {
+            "ingredient": "vegetable-oil",
+            "amount": 1,
+            "unit": "tbsp",
+            "scale": false,
+            "group": "For the pan"
+          }
+        },
+        "drop": ["beef-ground@Burgers"],
+        "add": [{ "ingredient": "turkey-ground", "amount": 1.5, "unit": "lb", "group": "Burgers" }],
+        "order": [
+          "cucumber@Quick pickles",
+          "vinegar-white@Quick pickles",
+          "water@Quick pickles",
+          "sugar@Quick pickles",
+          "salt@Quick pickles",
+          "+0",
+          "salt@Burgers",
+          "black-pepper@Burgers",
+          "onion-yellow@Burgers",
+          "cheese-sliced@Burgers",
+          "vegetable-oil@For the pan",
+          "burger-buns@To serve",
+          "ketchup@To serve",
+          "mustard-dijon@To serve",
+          "lettuce-green-leaf@To serve"
+        ]
+      },
+      "steps": {
+        "change": {
+          "balls": {
+            "id": "balls",
+            "text": "Divide the turkey into {n:burger-buns} even pieces. Roll each one gently into a loose ball and set them on the plate. Sprinkle them with {qty:black-pepper} pepper and the burgers' salt. Put the plate in the fridge.",
+            "safety": "solo",
+            "hazard": "Raw poultry",
+            "handles": ["turkey-ground"],
+            "why": "loose-balls",
+            "tip": "The balls chill while the buns toast. Cold turkey holds together when you smash it."
+          },
+          "wash-balls": {
+            "id": "wash-balls",
+            "type": "wash",
+            "text": "Wash your hands with soap, and wipe anything the raw turkey or its package touched.",
+            "safety": "solo",
+            "hazard": "Raw poultry"
+          },
+          "heat": {
+            "id": "heat",
+            "text": "Turn the heat up to medium-high. Add the oil and spread it around. Let the pan get hot.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 120,
+            "timerLabel": "Heat pan",
+            "look": "The oil shimmers.",
+            "tip": "Turkey needs a little longer than beef to cook through, so the pan is a little less hot. That way the outside browns without burning."
+          },
+          "add-first": {
+            "id": "add-first",
+            "text": "Use the tongs to set up to 3 turkey balls in the pan, far apart.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "handles": ["turkey-ground"]
+          },
+          "sear-first": {
+            "id": "sear-first",
+            "text": "Leave the patties alone while they sear.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 180,
+            "timerLabel": "Sear, first batch",
+            "look": "The edges are deep brown and lacy, and the top is turning from pink to pale."
+          },
+          "flip-first": {
+            "id": "flip-first",
+            "text": "Push the spatula hard under each patty to scrape up the crust, and flip it, onion side down. Lay a slice of cheese on top if you're using it.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 120,
+            "timerLabel": "Second side",
+            "look": "The underside is browned, and any cheese is soft and melting."
+          },
+          "check-first": {
+            "id": "check-first",
+            "type": "doneness",
+            "text": "Slide the thermometer into one patty from the side. It needs to read at least 165°F. If it doesn't, cook 1 more minute and check again.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "target": { "temp": 165, "unit": "F" }
+          },
+          "add-second": {
+            "id": "add-second",
+            "text": "Use the clean tongs to set the rest of the turkey balls in the pan, far apart.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "handles": ["turkey-ground"]
+          },
+          "wash-second": {
+            "id": "wash-second",
+            "type": "wash",
+            "text": "Put the tongs in the sink, wash your hands, and put the raw-turkey plate in the sink.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove"
+          },
+          "cook-second": {
+            "id": "cook-second",
+            "text": "Smash, sear, flip, and add cheese the same way as the first batch.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan, spatter",
+            "timerSeconds": 180,
+            "timerLabel": "Sear, second batch",
+            "tip": "If the pan is smoking hard, turn the heat down a little for this batch."
+          },
+          "check-second": {
+            "id": "check-second",
+            "type": "doneness",
+            "text": "Check one patty with the thermometer. It needs to read at least 165°F. Then move them to the buns and turn off the stove.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "target": { "temp": 165, "unit": "F" }
+          }
+        }
+      },
+      "learn": {
+        "move": {
+          "title": "Thin slices, hard sear",
+          "body": "Thin slicing means cutting food into even slices you can almost see through. Today you'll slice cucumbers thin for quick pickles, slice onion thin for the burgers, then smash balls of ground turkey flat in a hot pan for burgers with crispy, browned edges."
+        },
+        "callback": {
+          "lesson": "chicken-fajitas",
+          "body": "You've seared before: a hot pan, food laid down and left alone until a brown crust forms. Smash burgers push that idea as far as it goes. Pressing the turkey flat puts every bit of it against the hot pan, so it's almost all crust."
+        },
+        "wrong": [
+          { "sign": "The beef sticks to the spatula when you smash", "fix": "Press through a square of parchment paper. Peel it off once the patty is flat." },
+          { "sign": "The patties are pale, not brown", "fix": "The pan wasn't hot enough. Heat it longer before the next batch, and don't move the patties until the edges look deep brown." },
+          { "sign": "The patty won't come up when you flip it", "fix": "Push the edge of the spatula hard under the patty and scrape. The crust is stuck to the pan, and you want to bring it with you." },
+          { "sign": "The pickle slices are thick and uneven", "fix": "They'll still pickle, just slower. Leave them in the brine longer, or overnight." },
+          { "sign": "The turkey crumbles when you smash it", "fix": "Put the rest of the balls back in the fridge for 10 minutes. Cold turkey holds together." }
+        ],
+        "why": {
+          "change": {
+            "smash": {
+              "id": "smash",
+              "title": "Why smash it",
+              "body": "Browning only happens where meat touches the hot pan. A thick burger touches with one side. A smashed one is thin and wide, with lacy edges, so far more of it browns, and browned meat is where the big flavor is. Smash it once, right at the start, then leave it alone."
+            },
+            "loose-balls": {
+              "id": "loose-balls",
+              "title": "Loose balls stay juicy",
+              "body": "Squeezing ground turkey tight packs it into a dense, tough burger. Roll it gently into loose balls, just enough to hold together, and chill them so they don't crumble when you smash."
+            }
+          },
+          "add": [
+            { "id": "lean-turkey", "title": "Turkey is lean", "body": "Ground turkey has much less fat than ground beef. Fat keeps meat from sticking and drying out, so turkey gets a little more oil in the pan, a cold start from the fridge, and parchment for the smash. Turkey is poultry, so it cooks to 165°F, hotter than beef." }
+          ]
+        }
+      }
+    }
   ]
 }

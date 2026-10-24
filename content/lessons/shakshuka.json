@@ -71,5 +71,85 @@
     { "id": "cover", "text": "Cover the pan and cook on low until the whites are set all the way through.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 420, "timerLabel": "Eggs", "why": "gentle-eggs" },
     { "id": "check-eggs", "type": "doneness", "text": "Slide the thermometer sideways into an egg white. It needs to read at least 160°F before anyone eats.", "safety": "adult-nearby", "hazard": "Hot stove", "target": { "temp": 160, "unit": "F" } },
     { "id": "serve", "text": "Turn off the heat. Scatter the parsley and feta on top if you're using them, and serve straight from the pan with warm pita.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "The handle stays hot for a long time. Leave an oven mitt on it so nobody grabs it bare-handed." }
+  ],
+  "variations": [
+    {
+      "id": "spicy",
+      "title": "Spicy shakshuka",
+      "tags": {
+        "protein": "eggs",
+        "flavors": ["rich-tomato", "chili-heat"],
+        "heat": "spicy",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "ingredients": {
+        "change": { "chili-flakes": { "ingredient": "chili-flakes", "amount": 0.5, "unit": "tsp" } },
+        "add": [
+          { "ingredient": "jalapeno", "amount": 2, "unit": "count", "round": "up", "prep": "seeded and diced" },
+          { "ingredient": "cayenne", "amount": 0.25, "unit": "tsp" }
+        ],
+        "order": [
+          "olive-oil",
+          "onion-yellow",
+          "bell-pepper-red",
+          "+0",
+          "garlic",
+          "cumin-ground",
+          "paprika-smoked",
+          "chili-flakes",
+          "+1",
+          "tomatoes-crushed",
+          "salt",
+          "black-pepper",
+          "egg",
+          "parsley@To serve",
+          "feta@To serve",
+          "pita@To serve"
+        ]
+      },
+      "equipment": { "add": ["spoon"] },
+      "steps": {
+        "change": {
+          "soften": {
+            "id": "soften",
+            "text": "Warm the olive oil in the skillet over medium heat. Add the onion, peppers, and jalapeños. Cook, stirring now and then, until soft.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove",
+            "timerSeconds": 360,
+            "timerLabel": "Onion & peppers",
+            "look": "The onion turns see-through and golden at the edges."
+          },
+          "bloom": {
+            "id": "bloom",
+            "text": "Stir in the garlic, cumin, paprika, chili flakes, and cayenne. Cook just until it smells toasty, about a minute.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove",
+            "timerSeconds": 60,
+            "timerLabel": "Spices",
+            "tip": "Spices burn fast, and hot spices give off a sharp smell when they do. Keep the spoon moving, and keep your face back from the pan.",
+            "why": "bloom"
+          }
+        },
+        "add": [
+          { "id": "jalapeno", "text": "Cut the jalapeños in half from top to bottom. Scrape out the seeds and white ribs with the spoon, then dice them small, smaller than the peppers. Add them to the onion and peppers.", "safety": "adult-nearby", "hazard": "Sharp knife, hot pepper", "why": "chili-heat", "tip": "Wash your hands with soap right after cutting the jalapeño. Its juice stings if it gets in your eyes." }
+        ],
+        "order": ["chop", "+0", "soften", "bloom", "simmer", "crack", "wash-egg", "cover", "check-eggs", "serve"]
+      },
+      "learn": {
+        "wrong": [
+          { "sign": "The sauce is thin and watery", "fix": "Keep simmering a few more minutes before the eggs go in." },
+          { "sign": "The spices smell burnt", "fix": "Start over with fresh oil. Burnt spices make the whole pan bitter." },
+          { "sign": "The whites are still clear and runny", "fix": "Put the lid back on, wait two more minutes, then check again." },
+          { "sign": "It's too spicy", "fix": "Crumble feta over it and eat it with plenty of pita; both cool it down. Next time, scrape out all of the jalapeño ribs and seeds." }
+        ],
+        "why": {
+          "add": [
+            { "id": "chili-heat", "title": "Where the heat is", "body": "Most of a jalapeño's heat is in its white ribs and seeds. Scrape them out and it's warm; leave some in and it's hot. The juice stays on your fingers, so wash your hands right after cutting it, before you touch your eyes or face." }
+          ]
+        }
+      }
+    }
   ]
 }

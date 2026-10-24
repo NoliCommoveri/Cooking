@@ -3385,3 +3385,203 @@ Phase 11, slice 11b (plan §6.21), all behind the Next release switch (§8.6):
   server: Our tastes with the limits, rating, the favorite question and
   moving it, Haven't tried, the Flavors list, and Chef Ruth rating five
   proteins. Getting started's tastes part wasn't run in a browser.
+
+## 136. 2026-10-24 — Variations (slice 11c)
+
+Phase 11, slice 11c (plan §6.21): a variation is a complete version of a
+lesson with a preference built in, and counts as that lesson.
+- **Stored on the lesson** (`variations` in the lesson file,
+  `src/content/variations.js`): title, tags, whole values (time, scaling,
+  servings, intro, substitutions, Learn cards) and list changes (`change`,
+  `drop`, `add`, `order`) for ingredients, tools, steps, and why cards, keyed
+  by stable ids. What a variation doesn't change stays the lesson's, so a fix
+  to a shared step reaches it, and a step added to the lesson later lands in
+  it after the step before. `diffVariation` turns an edited copy back into
+  changes; a test checks the round trip.
+- **First variation: Chimichurri chicken** (thighs, 165°F, longer sear,
+  strips instead of across-the-grain, its own why card, wrong signs, and quiz
+  question).
+- **Linter:** each variation is put together and checked as a whole lesson
+  (schema, unclean block, raw handling and wash steps, doneness, rendering at
+  every size), plus its tags and the protein warning. Refused: duplicate ids,
+  the lesson's own title. Warned: a variation that changes nothing, or names a
+  step the lesson no longer has. **New for every lesson:** the thermometer
+  target must reach the safe minimum for the raw meat, poultry, or fish in it
+  (165°F poultry, 160°F ground meat, 145°F whole cuts and fish). Every
+  current lesson already passes it.
+- **Build:** `library-data.js` carries each variation as a lesson summary
+  (ingredients, time, badges, tags, key ingredients) for picks and shopping;
+  `registry.json` lists each lesson's variations by id and title.
+- **Content editor:** a **Variations** section on each lesson.
+  **+ Add a variation** asks for its name in a dialog, then opens
+  `#/lesson/<id>/v/<variation>`: the whole lesson, with skill, cuisine,
+  prerequisites, and picture locked to the lesson's, its tags, and
+  **Take this version out**. Edits are stored as what differs.
+  **Preview as a learner** works for each variation. A stray "null" under
+  the editor's sections is gone.
+- **Families with the next release** (`src/worker/variations.js`):
+  `PUT /api/variations/<lesson>` saves the family's pick ('' is the lesson
+  itself), and `/api/me` returns them. A **Version: …** button on queue and
+  course rows opens a dialog to pick. The player plays the picked version
+  ("A version of Chimichurri steak" under its title); a cook already under
+  way keeps the version it started in. A cook sends its version and the
+  Worker records it once; an unknown version saves as the lesson itself, so a
+  retry always lands. Shopping buys for the picked version, and a list keeps
+  the version it was made for. Fix-request checks (`patchProblems`) now
+  include the lesson's variations.
+- **Draft migration `0003_next_release.sql`:** `variation_choices`,
+  `attempt_variations`, `list_variations`. After the deploy the owner presses
+  **Re-apply draft** on `/ops/draft/0003` (download export.json first; Restore
+  draft tables puts the ratings back).
+- Not built: the default pick by score (11d); "(a version of …)" in progress,
+  grades, and the transcript; Suggest a fix on a step only a variation has
+  (it would target the lesson's step); a variation's own picture.
+- Tests: 298 (11 new in `test/variations.test.js` and
+  `test/worker-variations.test.js`). Checked in a browser at phone width on
+  the dev server: the Version dialog on the queue, the player showing
+  Chimichurri chicken, the Variations section, Add a variation, the variation
+  editor (a time change stored as a change, checks passing), and its preview.
+
+## 137. 2026-10-24 — Plan: proposed variations
+
+Design only. A coverage check of the drafted tags (75 planned dishes, 32
+written) found skills taught with one protein only (thin slicing and
+binders: beef; reducing and julienne meals: chicken), no salmon, lamb, or
+tofu dish, and no spicy written meal. Plan §6.21 now lists nine proposed
+variations (chicken bulgogi, chicken cheesesteak, turkey meatloaf, chicken or
+bean empanadas, beef or bean fajitas, turkey smash burgers, honey-garlic
+salmon or tofu, spicy shakshuka, spicy chicken fajitas) with the skill and
+gap each fills and draft tags, as a recommendation waiting on the owner.
+
+## 138. 2026-10-24 — Plan: proposed pick-one dishes
+
+Design only. Fifteen new dishes found on the web, recorded in plan §6.21 as
+a recommendation. The owner's direction: each goes in as a pick-one choice
+beside a dish that teaches the same skills, not as an extra lesson, so the
+course keeps its numbering and length. They add the first salmon, lamb, and
+coconut dishes, more smoky and BBQ, and quick meals (eight of 30 minutes or
+less): chicken piccata, beef and broccoli, turkey lettuce wraps, coconut
+chickpea curry, blackened fish, BBQ salmon, broiled honey-soy salmon, jerk
+salmon, pineapple teriyaki salmon, huevos rancheros, chicken souvlaki pitas,
+moqueca, coconut-crusted fish, lamb kofta, and Caribbean coconut curry lamb
+chops. Two groups exist today (building-a-sauce, dicing); the rest would make
+new groups named for their skill. Each lists draft tags and what to watch
+(no shrimp or oyster sauce; doneness at the safe minimums).
+
+## 139. 2026-10-24 — Pick-one groups of three at most; jerk salmon as a variation
+
+The owner's rulings on the proposed dishes (plan §4.0, §6.21):
+- **A pick-one group has at most 3 dishes.** The linter now refuses a fourth
+  (`course.json pick-one "<group>": has 4 dishes`); every group today has 2
+  or 3. Plan §7.4 lists the check.
+- **Jerk salmon becomes a proposed variation of jerk chicken**, since it
+  teaches the same skills (marinating, broiling); it left the dicing group,
+  which is back to 3. It waits on jerk chicken being written.
+- **Chicken piccata moves** from building-a-sauce (already 3) to the new
+  reducing group, beside chicken adobo and pineapple teriyaki salmon: its pan
+  sauce is reduced after searing.
+- Tests: 298 (one more assertion in `test/lint.test.js`).
+
+## 140. 2026-10-24 — Eight more variations
+
+The owner asked for the proposed variations (plan §6.21) whose lesson is
+already written. Each was written as an edited copy of its lesson and stored
+as what differs; times, temperatures, and methods were checked against
+recipes found on the web (sources in the session). All are drafts for the
+owner to review on each lesson's Variations section.
+- **Beef bulgogi → Chicken bulgogi:** thighs, frozen 30 minutes and sliced
+  into thin strips (a "thin and even" card replaces "across the grain"),
+  3 + 2 to 3 minutes a batch, 165°F, a tip and a wrong sign for the sugary
+  marinade burning. $.
+- **Chicken fajitas → Steak fajitas:** flank steak seared whole 4 minutes a
+  side, 145°F, rested, sliced thin across the grain (new card and quiz
+  question). $$.
+- **Chicken fajitas → Black bean fajitas:** no meat steps; two cans of black
+  beans, rinsed (new card on why), warmed with the spice paste after the
+  vegetables. 35 minutes, no thermometer. $.
+- **Chicken fajitas → Spicy chicken fajitas:** jalapeños julienned with the
+  peppers, cayenne in the paste, a card on where a chili's heat is and
+  washing hands after cutting it, and a "too spicy" fix.
+- **Smash burgers → Turkey smash burgers:** 93% lean ground turkey, balls
+  chilled before smashing, more oil, medium-high heat, 3 minutes then 2,
+  165°F; a "turkey is lean" card and a "crumbles" fix.
+- **Honey-garlic chicken → Honey-garlic salmon:** skinless salmon in 1-inch
+  pieces, browned 2 minutes a side and set aside; the sauce reduces alone,
+  then the salmon is turned in it; 145°F; a "gentle with fish" card. $$$.
+- **Honey-garlic chicken → Honey-garlic tofu:** two 14-oz blocks of
+  extra-firm tofu, pressed 15 minutes (new first step and card), no wash or
+  doneness steps since nothing is raw. $.
+- **Shakshuka → Spicy shakshuka:** diced jalapeños, chili flakes no longer
+  optional, cayenne, the heat card, and a "too spicy" fix.
+- **Registry:** salmon fillets, flank steak, ground turkey, extra-firm tofu
+  (14-oz block), black beans (15-oz can), and cayenne; the tastes lists link
+  them to salmon, beef, turkey, tofu, beans, and hot peppers.
+- **Linter:** a variation no longer repeats its lesson's label notes (flour
+  tortillas, sour cream); it warns only for an ingredient it adds.
+- Tests: 299 (a new check that the written variations pass with no warnings
+  of their own). Checked in the manager's learner preview at phone width:
+  Honey-garlic tofu and Spicy shakshuka.
+
+## 141. 2026-10-24 — Five new pick-one lessons
+
+The owner asked for the four proposed pick-one groups whose existing dish is
+already written (plan §6.21). Five new lessons, each beside that dish with
+the same skills, so the course keeps 59 numbers (now 80 dishes):
+- **4b Chicken souvlaki pitas** (dressings, with 4a Chicken Caesar):
+  tzatziki with squeezed cucumber and finely chopped dill, a 20-minute
+  lemon-oregano marinade, chicken seared to 165°F.
+- **9b Turkey lettuce wraps** (stir-frying, with 9a Chicken fried rice):
+  pea-size carrot and water chestnut, ground turkey to 165°F, a hoisin sauce.
+- **11b Chicken piccata** (reducing, with 11a Chicken adobo): chicken pounded
+  even between parchment, floured, seared to 165°F, a broth-lemon pan sauce
+  bubbled down by half, capers and butter. No wine.
+- **11c Pineapple teriyaki salmon** (reducing): pineapple juice, soy, and
+  brown sugar reduced to a glaze in its own pan, salmon seared to 145°F, the
+  pineapple browned in the skillet.
+- **14b Huevos rancheros** (poaching eggs, with 14a Eggs Benedict): eggs
+  cooked covered in simmering salsa to 160°F, crisp corn tortillas, warm
+  refried beans. It calls back to shakshuka.
+- Each earlier dish now has `pickOne`, and the new one sits right after it,
+  so a saved course plan keeps the earlier dish and starts with the new one
+  removed. Tags are set on each new dish.
+- **Registry:** capers, pineapple chunks, water chestnuts, vegetarian refried
+  beans (a label note: many are made with lard), hoisin (a label note for
+  oyster or shrimp extract), butter lettuce, red onion, fresh dill, and queso
+  fresco; a Hawaiian cuisine. Tastes link capers and refried beans.
+- **Pictures:** placeholders made from the meal-type drawings, listed in
+  `content/images/LICENSES.md`, until the owner's ChatGPT sheet arrives. Claude
+  gave the owner the prompt for it.
+- Tests: 299 (the course test counts 80 dishes; Chicken Caesar is now 4a).
+  Checked in the manager's learner preview at phone width: Chicken piccata
+  and Huevos rancheros, Learn and Cook.
+
+## 142. 2026-10-24 — Pictures for the five new lessons
+
+The owner supplied sheet 24 (ChatGPT, from Claude's prompt; the first of two
+versions, which had the most space between dishes). Cropped with
+`tools/crop-dish-sheet.py` into the pictures for pineapple teriyaki salmon,
+chicken piccata, turkey lettuce wraps, huevos rancheros, and chicken souvlaki
+pitas, replacing the placeholders; web copies rebuilt.
+`tools/dish-sheets.txt` and `content/images/LICENSES.md` list the sheet.
+
+## 143. 2026-10-24 — Nine planned pick-one dishes
+
+The owner supplied sheets 25 and 26 (ChatGPT, from Claude's prompts),
+cropped into pictures for the other nine proposed pick-one dishes. They're
+now in Cook Around the World's outline (`content/course.json`) as planned
+dishes, each the second or third choice beside a dish with the same skills,
+with estimated times and tags: 16b coconut chickpea curry, 21b blackened
+cod, 21c BBQ-rubbed salmon, 22b Caribbean coconut curry lamb chops, 23b
+moqueca, 26b broiled honey-soy salmon, 29b beef and broccoli, 45b lamb kofta,
+and 53b coconut-crusted fish. None is written yet. The course still has 59
+numbers (89 dishes).
+- **Not behind the next release** (owner, 2026-10-24): new dishes are part of
+  the live course for every family. A new test checks a family without the
+  next release gets the five new lessons in its library and the planned
+  ones in its default course plan, as second choices.
+- The linter caught "no shrimp" and "no oyster sauce" in two dish cards'
+  descriptions; the blocked-word check doesn't read "no", so those notes stay
+  in the plan only.
+- Plan §4's unit tables and §6.21 updated; `tools/dish-sheets.txt` and
+  `content/images/LICENSES.md` list the sheets.
+- Tests: 300.

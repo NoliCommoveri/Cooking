@@ -91,5 +91,413 @@
     { "id": "tortillas", "text": "Turn off the stove. Stack the tortillas, wrap them in a damp paper towel, and microwave until warm and soft.", "safety": "solo", "timerSeconds": 45, "timerLabel": "Tortillas", "tip": "The steam inside is hot. Open the paper towel slowly." },
     { "id": "slice", "text": "Slice the rested chicken into thin strips.", "safety": "adult-nearby", "hazard": "Sharp knife" },
     { "id": "serve", "text": "Put the chicken back in the pan with the vegetables and stir. Fill the warm tortillas and top them with sour cream, salsa, avocado, or cilantro if you're using them.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "The handle stays hot for a long time. Leave an oven mitt on it so nobody grabs it bare-handed." }
+  ],
+  "variations": [
+    {
+      "id": "steak",
+      "title": "Steak fajitas",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["warm-spices"],
+        "heat": "some",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "scaling": {
+        "mode": "free",
+        "notes": [
+          { "from": 7, "text": "For more than 6, sear the steak in two batches so the pan stays hot, and cook the vegetables in two batches too." }
+        ]
+      },
+      "ingredients": {
+        "drop": [
+          "chicken-thigh@Chicken",
+          "chili-powder@Chicken",
+          "cumin-ground@Chicken",
+          "garlic-powder@Chicken",
+          "paprika-smoked@Chicken",
+          "salt@Chicken",
+          "lime@Chicken",
+          "olive-oil@Chicken"
+        ],
+        "add": [
+          { "ingredient": "beef-flank", "amount": 1.5, "unit": "lb", "group": "Steak" },
+          { "ingredient": "chili-powder", "amount": 1, "unit": "tbsp", "group": "Steak" },
+          { "ingredient": "cumin-ground", "amount": 1, "unit": "tsp", "group": "Steak" },
+          { "ingredient": "garlic-powder", "amount": 1, "unit": "tsp", "group": "Steak" },
+          { "ingredient": "paprika-smoked", "amount": 0.5, "unit": "tsp", "group": "Steak" },
+          { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Steak" },
+          { "ingredient": "lime", "amount": 1, "unit": "count", "round": "up", "prep": "juiced", "group": "Steak" },
+          { "ingredient": "olive-oil", "amount": 1, "unit": "tbsp", "group": "Steak" }
+        ],
+        "order": [
+          "+0",
+          "+1",
+          "+2",
+          "+3",
+          "+4",
+          "+5",
+          "+6",
+          "+7",
+          "vegetable-oil@For the pan",
+          "bell-pepper-red@Vegetables",
+          "bell-pepper-green@Vegetables",
+          "onion-yellow@Vegetables",
+          "tortilla-flour@To serve",
+          "sour-cream@To serve",
+          "salsa@To serve",
+          "avocado@To serve",
+          "cilantro@To serve"
+        ]
+      },
+      "steps": {
+        "change": {
+          "season": {
+            "id": "season",
+            "text": "Lay the steak on the plate and pat it dry with paper towels. Spread the spice paste over both sides with your hands, and leave it there while the pan heats.",
+            "safety": "solo",
+            "hazard": "Raw meat",
+            "handles": ["beef-flank"]
+          },
+          "wash-season": {
+            "id": "wash-season",
+            "type": "wash",
+            "text": "Throw the paper towels away. Wash your hands with soap, and wipe anything the raw steak or its package touched.",
+            "safety": "solo",
+            "hazard": "Raw meat"
+          },
+          "add-chicken": {
+            "id": "add-chicken",
+            "text": "Use the tongs to lay the steak in the pan, laying it down away from you. Put the tongs in the sink, and don't use them again for cooked food.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "handles": ["beef-flank"],
+            "tip": "If the steak is too long for the pan, cut it in half first, before it gets its spice paste."
+          },
+          "wash-pan": {
+            "id": "wash-pan",
+            "type": "wash",
+            "text": "Wash your hands, and put the raw-steak plate in the sink. From here on, use the clean spatula.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove"
+          },
+          "sear": {
+            "id": "sear",
+            "text": "Leave the steak alone. Don't poke it or move it while the bottom browns.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "timerSeconds": 240,
+            "timerLabel": "Steak, first side",
+            "why": "leave-it",
+            "look": "A deep brown crust, and it lets go of the pan when you nudge it."
+          },
+          "flip": {
+            "id": "flip",
+            "text": "Flip the steak with the spatula and sear the other side.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "timerSeconds": 240,
+            "timerLabel": "Steak, second side"
+          },
+          "check-chicken": {
+            "id": "check-chicken",
+            "type": "doneness",
+            "text": "Slide the thermometer into the side of the steak, into the thickest part. It needs to read at least 145°F. If it doesn't, cook 1 more minute on each side and check again.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove",
+            "target": { "temp": 145, "unit": "F" }
+          },
+          "rest": {
+            "id": "rest",
+            "text": "Move the steak to the clean cutting board with the spatula and let it rest.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 300,
+            "timerLabel": "Rest steak",
+            "why": "rest"
+          },
+          "vegetables": {
+            "id": "vegetables",
+            "text": "Add the rest of the vegetable oil to the same pan, then the peppers and onion. Spread them out and let them sizzle, stirring every minute or so, until soft and browned at the edges.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "timerSeconds": 420,
+            "timerLabel": "Peppers & onion",
+            "look": "Soft, bendy strips with brown spots.",
+            "tip": "Scrape up the brown bits the steak left behind. They're full of flavor."
+          },
+          "slice": {
+            "id": "slice",
+            "text": "Look for the thin lines running along the steak. Turn it so they run left to right, and slice it into thin strips, across the lines.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "grain",
+            "look": "Each strip shows short little lines across its cut face, not long strings."
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Put the steak back in the pan with the vegetables and stir. Fill the warm tortillas and top them with sour cream, salsa, avocado, or cilantro if you're using them.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "tip": "The handle stays hot for a long time. Leave an oven mitt on it so nobody grabs it bare-handed."
+          }
+        }
+      },
+      "learn": {
+        "move": {
+          "title": "Strips, then sizzle",
+          "body": "Julienne means cutting food into thin, even strips. Today you'll cut peppers and onions that way, sear a seasoned flank steak in a very hot pan, slice it thin, and pile it all into warm tortillas."
+        },
+        "wrong": [
+          { "sign": "The steak is stuck to the pan", "fix": "Wait another minute. When the bottom is browned, it lets go by itself." },
+          { "sign": "The vegetables are pale and watery", "fix": "The pan is too crowded or not hot enough. Turn up the heat, spread them out, and give them time before you stir." },
+          { "sign": "Some strips burned while others are still crunchy", "fix": "The strips were different sizes. Pull out the done ones and let the rest catch up. Next time, aim for strips the same width." },
+          { "sign": "The steak strips are chewy", "fix": "They were cut along the grain. Turn the steak a quarter turn and slice the rest the other way, thinner." }
+        ],
+        "quiz": [
+          { "q": "Which way up does the pepper go when you cut it?", "choices": ["Skin side up", "Skin side down", "It doesn't matter"], "answer": 1, "explain": "The knife can slip on the shiny skin. Cutting into the soft inside is safer and makes neater strips." },
+          { "q": "Which way do you slice the cooked steak?", "choices": ["Along the lines in the meat", "Across the lines in the meat", "It doesn't matter"], "answer": 1, "explain": "Slicing across the grain makes short fibers, so every strip is tender." }
+        ],
+        "why": {
+          "change": {
+            "leave-it": {
+              "id": "leave-it",
+              "title": "Leave it alone to brown",
+              "body": "Browning happens where the steak touches the hot pan. If you keep moving it, it never gets the chance. At first it sticks, but once a brown crust forms, it lets go by itself. That's how you know it's ready to flip."
+            },
+            "rest": {
+              "id": "rest",
+              "title": "Why the steak rests",
+              "body": "Right out of the pan, the juice inside hot meat is moving around fast. Cut it now and the juice runs out onto the board. Five minutes of rest lets it settle, so it stays in the steak."
+            }
+          },
+          "add": [
+            { "id": "grain", "title": "Across the grain", "body": "Flank steak is made of long fibers, all running the same way, and you can see them as lines. Slice across those lines and every strip has short fibers that are easy to chew. Slice along them and the strips are stringy." }
+          ]
+        }
+      }
+    },
+    {
+      "id": "black-bean",
+      "title": "Black bean fajitas",
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["warm-spices"],
+        "heat": "some",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "totalMinutes": 35,
+      "scaling": {
+        "mode": "free",
+        "notes": [
+          { "from": 7, "text": "For more than 6, cook the vegetables in two batches so they brown instead of steaming." }
+        ]
+      },
+      "ingredients": {
+        "drop": [
+          "chicken-thigh@Chicken",
+          "chili-powder@Chicken",
+          "cumin-ground@Chicken",
+          "garlic-powder@Chicken",
+          "paprika-smoked@Chicken",
+          "salt@Chicken",
+          "lime@Chicken",
+          "olive-oil@Chicken"
+        ],
+        "add": [
+          { "ingredient": "black-beans", "amount": 2, "unit": "can", "prep": "drained and rinsed", "group": "Beans" },
+          { "ingredient": "chili-powder", "amount": 1, "unit": "tbsp", "group": "Beans" },
+          { "ingredient": "cumin-ground", "amount": 1, "unit": "tsp", "group": "Beans" },
+          { "ingredient": "garlic-powder", "amount": 1, "unit": "tsp", "group": "Beans" },
+          { "ingredient": "paprika-smoked", "amount": 0.5, "unit": "tsp", "group": "Beans" },
+          { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Beans" },
+          { "ingredient": "lime", "amount": 1, "unit": "count", "round": "up", "prep": "juiced", "group": "Beans" },
+          { "ingredient": "olive-oil", "amount": 1, "unit": "tbsp", "group": "Beans" }
+        ],
+        "order": [
+          "+0",
+          "+1",
+          "+2",
+          "+3",
+          "+4",
+          "+5",
+          "+6",
+          "+7",
+          "vegetable-oil@For the pan",
+          "bell-pepper-red@Vegetables",
+          "bell-pepper-green@Vegetables",
+          "onion-yellow@Vegetables",
+          "tortilla-flour@To serve",
+          "sour-cream@To serve",
+          "salsa@To serve",
+          "avocado@To serve",
+          "cilantro@To serve"
+        ]
+      },
+      "equipment": { "drop": ["plate", "tongs", "thermometer"], "add": ["colander", "can-opener", "wooden-spoon"] },
+      "steps": {
+        "change": {
+          "heat": {
+            "id": "heat",
+            "text": "Heat the vegetable oil in the skillet over medium-high heat until it shimmers.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil"
+          },
+          "vegetables": {
+            "id": "vegetables",
+            "text": "Add the peppers and onion. Spread them out and let them sizzle, stirring every minute or so, until soft and browned at the edges.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "timerSeconds": 420,
+            "timerLabel": "Peppers & onion",
+            "look": "Soft, bendy strips with brown spots.",
+            "tip": "Give them time before you stir. Brown spots come from sitting still on the hot pan."
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Fill the warm tortillas with the beans and vegetables, and top them with sour cream, salsa, avocado, or cilantro if you're using them.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "tip": "The handle stays hot for a long time. Leave an oven mitt on it so nobody grabs it bare-handed."
+          }
+        },
+        "drop": ["season", "wash-season", "add-chicken", "wash-pan", "sear", "flip", "check-chicken", "rest", "slice"],
+        "add": [
+          { "id": "rinse-beans", "text": "Open the cans of beans and pour them into the colander in the sink. Rinse them with cold water until the bubbles are gone, and let them drain.", "safety": "adult-nearby", "hazard": "Sharp can lid", "why": "rinse", "tip": "Keep your fingers away from the cut edge of the lid. It's as sharp as a knife." },
+          { "id": "beans", "text": "Add the beans and the spice paste to the pan. Stir gently with the wooden spoon until the beans are hot and coated.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 180, "timerLabel": "Warm the beans", "look": "The beans are shiny with spices and steaming hot." }
+        ],
+        "order": [
+          "pepper-open",
+          "pepper-strips",
+          "onion-strips",
+          "+0",
+          "spice-paste",
+          "heat",
+          "vegetables",
+          "+1",
+          "tortillas",
+          "serve"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "Strips, then sizzle",
+          "body": "Julienne means cutting food into thin, even strips. Today you'll cut peppers and onions that way, sizzle them in a hot pan, stir in spiced black beans, and pile it all into warm tortillas."
+        },
+        "wrong": [
+          { "sign": "The beans are mushy and falling apart", "fix": "They only need warming. Stir gently, and take the pan off the heat as soon as they're hot." },
+          { "sign": "The vegetables are pale and watery", "fix": "The pan is too crowded or not hot enough. Turn up the heat, spread them out, and give them time before you stir." },
+          { "sign": "Some strips burned while others are still crunchy", "fix": "The strips were different sizes. Pull out the done ones and let the rest catch up. Next time, aim for strips the same width." }
+        ],
+        "quiz": [
+          { "q": "Which way up does the pepper go when you cut it?", "choices": ["Skin side up", "Skin side down", "It doesn't matter"], "answer": 1, "explain": "The knife can slip on the shiny skin. Cutting into the soft inside is safer and makes neater strips." },
+          { "q": "Why do you rinse canned beans?", "choices": ["To wash off the thick, salty liquid", "To make them cook faster", "To make them softer"], "answer": 0, "explain": "The canning liquid is starchy and salty. Rinsing it off lets your spices flavor the beans." }
+        ],
+        "why": {
+          "drop": ["leave-it", "rest"],
+          "add": [
+            { "id": "rinse", "title": "Why rinse the beans", "body": "The liquid in a can of beans is thick, starchy, and salty. Rinsing it off in the colander lets the spices, not the can, flavor the beans, and keeps the filling from turning gluey." }
+          ]
+        }
+      }
+    },
+    {
+      "id": "spicy",
+      "title": "Spicy chicken fajitas",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["warm-spices", "chili-heat"],
+        "heat": "spicy",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "ingredients": {
+        "add": [
+          { "ingredient": "cayenne", "amount": 0.25, "unit": "tsp", "group": "Chicken" },
+          { "ingredient": "jalapeno", "amount": 2, "unit": "count", "round": "up", "group": "Vegetables" }
+        ],
+        "order": [
+          "chicken-thigh@Chicken",
+          "chili-powder@Chicken",
+          "cumin-ground@Chicken",
+          "garlic-powder@Chicken",
+          "paprika-smoked@Chicken",
+          "+0",
+          "salt@Chicken",
+          "lime@Chicken",
+          "olive-oil@Chicken",
+          "vegetable-oil@For the pan",
+          "bell-pepper-red@Vegetables",
+          "bell-pepper-green@Vegetables",
+          "onion-yellow@Vegetables",
+          "+1",
+          "tortilla-flour@To serve",
+          "sour-cream@To serve",
+          "salsa@To serve",
+          "avocado@To serve",
+          "cilantro@To serve"
+        ]
+      },
+      "equipment": { "add": ["spoon"] },
+      "steps": {
+        "change": {
+          "spice-paste": {
+            "id": "spice-paste",
+            "text": "In the small bowl, stir together the chili powder, cumin, garlic powder, smoked paprika, cayenne, {qty:salt} salt, the lime juice, and {qty:olive-oil} olive oil.",
+            "safety": "solo"
+          },
+          "vegetables": {
+            "id": "vegetables",
+            "text": "Add the rest of the vegetable oil to the same pan, then the peppers, jalapeños, and onion. Spread them out and let them sizzle, stirring every minute or so, until soft and browned at the edges.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "timerSeconds": 420,
+            "timerLabel": "Peppers & onion",
+            "look": "Soft, bendy strips with brown spots.",
+            "tip": "Scrape up the brown bits the chicken left behind. They're full of flavor."
+          }
+        },
+        "add": [
+          { "id": "jalapeno-strips", "text": "Cut the jalapeños in half from top to bottom. Scrape out the seeds and white ribs with the spoon, then julienne each half into thin strips like the peppers.", "safety": "adult-nearby", "hazard": "Sharp knife, hot pepper", "why": "chili-heat", "tip": "Wash your hands with soap right after cutting the jalapeño. Its juice stings if it gets in your eyes." }
+        ],
+        "order": [
+          "pepper-open",
+          "pepper-strips",
+          "onion-strips",
+          "+0",
+          "spice-paste",
+          "season",
+          "wash-season",
+          "heat",
+          "add-chicken",
+          "wash-pan",
+          "sear",
+          "flip",
+          "check-chicken",
+          "rest",
+          "vegetables",
+          "tortillas",
+          "slice",
+          "serve"
+        ]
+      },
+      "learn": {
+        "wrong": [
+          { "sign": "The chicken is stuck to the pan", "fix": "Wait another minute. When the bottom is browned, it lets go by itself." },
+          { "sign": "The vegetables are pale and watery", "fix": "The pan is too crowded or not hot enough. Turn up the heat, spread them out, and give them time before you stir." },
+          { "sign": "Some strips burned while others are still crunchy", "fix": "The strips were different sizes. Pull out the done ones and let the rest catch up. Next time, aim for strips the same width." },
+          { "sign": "It's too spicy", "fix": "Pile on sour cream and avocado; they cool it down. Next time, scrape out all of the jalapeño ribs and seeds and leave out the cayenne." }
+        ],
+        "why": {
+          "add": [
+            { "id": "chili-heat", "title": "Where the heat is", "body": "Most of a jalapeño's heat is in its white ribs and seeds. Scrape them out and it's warm; leave some in and it's hot. The juice stays on your fingers, so wash your hands right after cutting it, before you touch your eyes or face." }
+          ]
+        }
+      }
+    }
   ]
 }

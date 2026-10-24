@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "track": "core",
+  "prereqs": [],
+  "image": "dishes/chicken-souvlaki-pitas.png",
+  "id": "chicken-souvlaki-pitas",
+  "unit": 1,
+  "title": "Chicken souvlaki pitas",
+  "cuisine": "greek",
+  "skill": "A yogurt sauce, chopping herbs fine",
+  "skills": ["dressings", "fine-chopping"],
+  "servings": 4,
+  "totalMinutes": 45,
+  "scaling": {
+    "mode": "free",
+    "notes": [{ "from": 5, "text": "For more than 4, sear the chicken in batches so the pieces have room to brown." }]
+  },
+  "learn": {
+    "move": {
+      "title": "A cool sauce for hot chicken",
+      "body": "Today you'll make tzatziki, a Greek yogurt sauce with cucumber, garlic, lemon, and finely chopped dill. While it chills, lemon-and-oregano chicken soaks up flavor and then sears in a hot pan. Everything gets tucked into warm pitas."
+    },
+    "callback": {
+      "lesson": "fattoush",
+      "body": "In fattoush you whisked a dressing and chopped herbs fine. Tzatziki is a dressing too, made thick with yogurt, and its dill gets the same fine chop."
+    },
+    "why": [
+      { "id": "squeeze", "title": "Squeeze the cucumber", "body": "Cucumber is mostly water. Grated and left in the sauce, it leaks that water and turns tzatziki thin and runny. Squeezing it in a towel first keeps the sauce thick." },
+      { "id": "chill", "title": "Let it sit", "body": "Garlic and dill need a little time in the yogurt to spread their flavor around. Tzatziki that sits in the fridge while the chicken cooks tastes stronger and rounder than tzatziki eaten right away." },
+      { "id": "marinade", "title": "A short marinade", "body": "Lemon juice, oil, garlic, and oregano coat the chicken and flavor the outside. Twenty minutes is plenty. Lemon is sour, and hours in it can make chicken mushy." },
+      { "id": "room", "title": "Room to brown", "body": "Chicken pieces give off juice. With space around each one, the juice boils away and the chicken browns. Crowded pieces sit in their juice and steam pale." }
+    ],
+    "wrong": [
+      { "sign": "The tzatziki is thin and runny", "fix": "The cucumber was too wet. Stir in another spoonful of yogurt, and squeeze harder next time." },
+      { "sign": "The chicken is pale and sitting in juice", "fix": "The pan was crowded. Turn the heat up, and cook the rest in smaller batches." },
+      { "sign": "The pitas crack when you fold them", "fix": "They're too cold or dry. Warm them a little longer, or wrap them in a damp paper towel in the microwave." }
+    ],
+    "quiz": [
+      { "q": "Why do you squeeze the grated cucumber?", "choices": ["To keep the sauce from getting runny", "To make it greener", "To make it sweeter"], "answer": 0, "explain": "Cucumber is mostly water. Squeezing it out keeps the tzatziki thick." },
+      { "q": "How long does the chicken marinate?", "choices": ["About 20 minutes", "All night", "2 seconds"], "answer": 0, "explain": "Lemon is sour. A short soak adds flavor, but a long one can make chicken mushy." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "cucumber", "amount": 1, "unit": "count", "round": "up", "group": "Tzatziki" },
+    { "ingredient": "yogurt-greek", "amount": 1, "unit": "cup", "group": "Tzatziki" },
+    { "ingredient": "garlic", "amount": 1, "unit": "count", "round": "up", "prep": "minced", "group": "Tzatziki" },
+    { "ingredient": "dill", "amount": 1, "unit": "tbsp", "prep": "finely chopped", "group": "Tzatziki" },
+    { "ingredient": "lemon", "amount": 2, "unit": "count", "round": "up", "prep": "juiced", "group": "Tzatziki and chicken" },
+    { "ingredient": "salt", "amount": 0.25, "unit": "tsp", "group": "Tzatziki" },
+    { "ingredient": "chicken-breast", "amount": 1.5, "unit": "lb", "prep": "cut into 1-inch pieces", "group": "Chicken" },
+    { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp", "group": "Chicken" },
+    { "ingredient": "garlic", "amount": 2, "unit": "count", "round": "up", "prep": "minced", "group": "Chicken" },
+    { "ingredient": "oregano-dried", "amount": 2, "unit": "tsp", "group": "Chicken" },
+    { "ingredient": "salt", "amount": 0.75, "unit": "tsp", "group": "Chicken" },
+    { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Chicken" },
+    { "ingredient": "vegetable-oil", "amount": 1, "unit": "tbsp", "scale": false, "group": "For the pan" },
+    { "ingredient": "pita", "amount": 4, "unit": "count", "round": "up", "group": "To serve" },
+    { "ingredient": "tomato", "amount": 2, "unit": "count", "round": "up", "group": "To serve" },
+    { "ingredient": "onion-red", "amount": 0.5, "unit": "count", "round": "up", "group": "To serve" }
+  ],
+  "substitutions": [
+    { "for": "pita", "use": "tortilla-corn", "reason": "gluten", "note": "Warm two corn tortillas for each pita." }
+  ],
+  "equipment": [
+    "box-grater",
+    "kitchen-towel",
+    "chef-knife",
+    "cutting-board",
+    "mixing-bowl-medium",
+    "mixing-bowl-large",
+    "spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "spatula",
+    "plate",
+    "thermometer",
+    "paper-towels",
+    "microwave"
+  ],
+  "steps": [
+    { "id": "cucumber", "text": "Grate the cucumber on the large holes of the grater. Pile it in the middle of the kitchen towel, twist the towel closed, and squeeze hard over the sink until water stops dripping.", "safety": "adult-nearby", "hazard": "Grater", "why": "squeeze", "tip": "Stop grating when the cucumber gets short. Your knuckles are worth more than the last bit." },
+    { "id": "chop", "text": "Peel all the garlic and mince it, and keep it in two piles: 1 clove for the tzatziki, the rest for the chicken. Chop the dill fine: rest the knife tip on the board and rock the handle up and down over the pile until the bits are tiny. Squeeze the lemons.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Hold the food with your hand shaped like a claw: fingertips tucked under, knuckles in front." },
+    { "id": "tzatziki", "text": "In the medium bowl, stir together the yogurt, cucumber, the tzatziki's garlic, the dill, 1 tablespoon of the lemon juice, and {qty:salt} salt. Cover it and put it in the fridge.", "safety": "solo", "why": "chill" },
+    { "id": "marinade", "text": "In the large bowl, stir together the rest of the lemon juice, the olive oil, the chicken's garlic, the oregano, the chicken's salt, and the pepper.", "safety": "solo" },
+    { "id": "cut-chicken", "text": "Cut the chicken into 1-inch pieces and drop them into the bowl. Stir with the spoon until every piece is coated. Cover the bowl and put it in the fridge.", "safety": "adult-nearby", "hazard": "Sharp knife, raw chicken", "handles": ["chicken-breast"], "timerSeconds": 1200, "timerLabel": "Marinate", "why": "marinade" },
+    { "id": "wash-cut", "type": "wash", "text": "Wash your hands, the knife, and the cutting board with hot, soapy water. Wipe the counter.", "safety": "solo", "hazard": "Raw chicken" },
+    { "id": "veg", "text": "While the chicken marinates, cut the tomatoes into small pieces and slice the onion half as thin as you can.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Hold the food with your hand shaped like a claw: fingertips tucked under, knuckles in front." },
+    { "id": "heat", "text": "Heat the vegetable oil in the skillet over medium-high heat until it shimmers.", "safety": "adult-nearby", "hazard": "Hot oil" },
+    { "id": "add-chicken", "text": "Tip the chicken into the pan, leaving the extra marinade in the bowl. Spread it into one layer with the spatula.", "safety": "adult-nearby", "hazard": "Hot oil, raw chicken", "handles": ["chicken-breast"], "why": "room", "tip": "Tip it in close to the pan, away from you, so the oil doesn't splash." },
+    { "id": "wash-pan", "type": "wash", "text": "Pour the leftover marinade down the sink and put the bowl in the sink. Wash your hands with soap.", "safety": "adult-nearby", "hazard": "Hot stove" },
+    { "id": "sear", "text": "Leave the chicken alone until it is browned underneath, then stir and keep cooking until it is golden all over.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 480, "timerLabel": "Chicken", "look": "Golden on most sides, with no pink on the outside." },
+    { "id": "check-chicken", "type": "doneness", "text": "Turn off the heat. Slide the thermometer into the thickest piece. It needs to read at least 165°F. If it doesn't, cook 2 more minutes and check again.", "safety": "adult-nearby", "hazard": "Hot stove", "target": { "temp": 165, "unit": "F" } },
+    { "id": "pitas", "text": "Stack the pitas, wrap them in a damp paper towel, and microwave until warm and soft.", "safety": "solo", "timerSeconds": 45, "timerLabel": "Pitas", "tip": "The steam inside is hot. Open the paper towel slowly." },
+    { "id": "serve", "text": "Fill each pita with chicken, tomato, and onion, and spoon tzatziki over the top.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "The handle stays hot for a long time. Leave an oven mitt on it so nobody grabs it bare-handed." }
+  ]
+}

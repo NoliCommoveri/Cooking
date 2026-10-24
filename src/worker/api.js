@@ -27,7 +27,9 @@ import { register as registerGrades } from './grades.js';
 import { register as registerTastes, forgetProfile } from './tastes.js';
 import { RUBRIC, gradeLine } from '../content/grades.js';
 import { exportFamily, deleteFamily, eraseAfter } from './backup.js';
-import { releaseFor } from './release.js';
+import { releaseFor, nextReleaseOn } from './release.js';
+import { register as registerVariations, variationChoices, recordVariation, hasVariation, forgetCooks } from './variations.js';
+import { lessonVersion } from '../content/variations.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -119,13 +121,14 @@ on('GET', '/api/me', async (req, env) => {
   // A kid's device knows only its own profile and the family's settings.
   // Each launch asks this, so it renews the kid's login for 14 more days.
   if (s.kid) {
-    return json({ signed_in: true, kid: { profile_id: s.profile_id, login_name: s.login_name }, parent: null, family: { ...familyOut(fam), ...(await releaseFor(env.DB, s.family_id)) }, pin_unlocked_until: null },
+    return json({ signed_in: true, kid: { profile_id: s.profile_id, login_name: s.login_name }, parent: null, family: { ...familyOut(fam), ...(await releaseFor(env.DB, s.family_id)), variations: await variationChoices(env, s.family_id) }, pin_unlocked_until: null },
       200, { 'set-cookie': await renewKidSession(env, s, req) });
   }
   return {
     signed_in: true,
     parent: { email: s.email, is_owner: s.is_owner, test_cook_notice: !s.notice_seen_at },
-    family: { ...familyOut(fam), cooking: await cooking(env, s.family_id), ...(await releaseFor(env.DB, s.family_id)) },
+    // variations: the version of each lesson the family cooks (§6.21), next release only.
+    family: { ...familyOut(fam), cooking: await cooking(env, s.family_id), ...(await releaseFor(env.DB, s.family_id)), variations: await variationChoices(env, s.family_id) },
     pin_unlocked_until: pinUnlocked(s) ? s.pin_until : null,
   };
 }, KID);
@@ -383,6 +386,7 @@ on('DELETE', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
     env.DB.prepare('DELETE FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id),
   ]);
   await forgetProfile(env, s.family_id, pid);
+  await forgetCooks(env, s.family_id);
   return { ok: true };
 });
 
@@ -437,7 +441,12 @@ on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
   const s = await requireSession(env, req);
   // A library lesson, or one of this family's recipes ("recipe:<id>", §6.10).
   const found = await lessonFor(env, s.family_id, String(body.lesson_id ?? ''), { deleted: true }) ?? fail(400, 'invalid', 'No such lesson.');
-  const L = found.lesson;
+  // The version cooked (§6.21): a variation of a library lesson, for a family
+  // with the next release. Anything else is a cook of the lesson itself, so a
+  // cook saved again after the variation was taken out still lands.
+  const vid = typeof body.variation === 'string' && body.variation && !found.lesson.recipe && hasVariation(found.lesson.id, body.variation)
+    && (await nextReleaseOn(env.DB, s.family_id)) ? body.variation : '';
+  const L = vid ? lessonVersion(found.lesson, vid) : found.lesson;
   const servings = Number(body.servings);
   if (!servingOptions(L).includes(servings)) fail(400, 'invalid', `${L.title} can't be made for ${body.servings}.`);
   const ids = Array.isArray(body.profile_ids) ? [...new Set(body.profile_ids.map(String))] : [];
@@ -468,6 +477,7 @@ on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
         .bind(servings, finished, state, aid, s.family_id)
       : env.DB.prepare(`INSERT INTO attempts (id, family_id, lesson_id, lesson_version, servings, started_at, finished_at, checklist_state)
           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`).bind(aid, s.family_id, L.id, L.recipe ? L.version : (await livePatches(env.DB, L.id))[L.id]?.version ?? L.version, servings, started, finished, state),
+    ...(!had && vid ? [recordVariation(env, s.family_id, aid, vid)] : []),
     // Who's on it can change until it's finished; anyone kept keeps their reflection.
     env.DB.prepare(`DELETE FROM attempt_profiles WHERE attempt_id = ? AND family_id = ?
       AND profile_id NOT IN (${ids.map(() => '?').join(', ')})`).bind(aid, s.family_id, ...ids),
@@ -911,6 +921,7 @@ registerKidLogins(on);
 registerSetup(on);
 registerGrades(on);
 registerTastes(on);
+registerVariations(on);
 
 // ---------- dispatch ----------
 

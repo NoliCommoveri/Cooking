@@ -33,9 +33,11 @@ export async function liveLesson(db, id) {
 
 // What's wrong with a lesson as a patch would leave it. Empty means it can go live.
 export function patchProblems(after) {
-  const where = `lessons/${after.id}.json: `;
+  const where = `lessons/${after.id}.json`;
   const content = { ...CONTENT, lessons: CONTENT.lessons.map((x) => (x.data.id === after.id ? { file: x.file, data: after } : x)) };
-  const out = lint(content).errors.filter((e) => e.startsWith(where)).map((e) => e.slice(where.length));
+  // A fix to a step a variation shares reaches the variation too (§6.21), so its problems count.
+  const out = lint(content).errors.filter((e) => e.startsWith(`${where}: `) || e.startsWith(`${where} variation `))
+    .map((e) => (e.startsWith(`${where}: `) ? e.slice(where.length + 2) : e.slice(where.length + 1)));
   // The lesson files set each doneness target at its safe minimum (§3), so a
   // fix can raise a target but never lower it.
   for (const orig of fileLesson(after.id).steps) {

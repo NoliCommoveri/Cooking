@@ -9,6 +9,7 @@ import { scaleLesson, servingOptions } from './lib/scale.js';
 import { findTerms } from './lib/terms.js';
 import { dietView } from './lib/diet.js';
 import { applyPatches, showValue } from './lib/patch.js';
+import { lessonVersion } from './lib/variations.js';
 import { voiceSupported, createVoice } from './voice.js';
 import { unlockSound, soundReady, ding, sizzle, isMuted, setMuted } from './sound.js';
 
@@ -127,9 +128,15 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // without checking off Prep, any stage is a tap away, and nothing is saved
 // (leave out onCook and onReflect). registry: parts of the registry to use
 // instead of the published ones, like the manager's unsaved changes.
-// exitLabel: what Back says in a preview.
-export async function openLesson(mount, { profile, family, lessonId, lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
-  const [published, L] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
+// exitLabel: what Back says in a preview. variation: the version of the lesson
+// the family cooks (§6.21), or null for the lesson itself; a cook already
+// under way keeps the version it started in.
+export async function openLesson(mount, { profile, family, lessonId, variation = null, lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
+  const [published, B] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
+  const kept = readState(profile.id, B.id);
+  const L = lessonVersion(B, kept?.cookId ? kept.variation ?? null : variation);
+  // "A version of Chimichurri steak", under a variation's title.
+  const versionOf = (cls) => (L.versionOf ? `<p class="${cls}">A version of ${esc(L.versionOf)}</p>` : '');
   const R = { ...published, ...registry };
   const ING = { ...R.ingredients, ...extra };
   // Appointed Times lessons keep their A1, A2 labels whatever the course plan (§6.19).
@@ -146,10 +153,11 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
   const options = servingOptions(L);
   const pick = (n) => (options.includes(n) ? n : options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a)));
   const fresh = () => ({
-    stage: 'card', servings: pick(seed?.servings ?? family.default_servings), learn: 0, quiz: {}, got: [], gear: [], step: 0, timers: [],
+    variation: L.variation ?? null, stage: 'card', servings: pick(seed?.servings ?? family.default_servings), learn: 0, quiz: {}, got: [], gear: [], step: 0, timers: [],
     with: (seed?.with ?? []).filter((id) => crew.some((p) => p.id === id)),
   });
-  let S = readState(profile.id, L.id) || fresh();
+  let S = kept || fresh();
+  S.variation = L.variation ?? null;
   S.with = (S.with ?? []).filter((id) => crew.some((p) => p.id === id));
   // A cook in progress reopens on its lesson card, with Keep going and Start over.
   if (S.stage !== 'done') S.stage = 'card';
@@ -160,7 +168,7 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
   const sync = () => {
     if (!onCook || !S.cookId) return;
     onCook(S.cookId, {
-      lesson_id: L.id, servings: S.servings, profile_ids: [profile.id, ...S.with], started_at: S.startedAt, finished_at: S.finishedAt ?? null,
+      lesson_id: L.id, ...(S.variation ? { variation: S.variation } : {}), servings: S.servings, profile_ids: [profile.id, ...S.with], started_at: S.startedAt, finished_at: S.finishedAt ?? null,
       checklist_state: { stage: S.stage === 'card' ? S.last ?? 'learn' : S.stage, step: S.step, got: S.got, gear: S.gear },
     });
   };
@@ -295,11 +303,11 @@ export async function openLesson(mount, { profile, family, lessonId, lesson = nu
       : '';
     const top = quest
       ? `<article class="q-panel q-card"><p class="q-kick">${L.recipe ? esc(L.kicker ?? 'Family recipe') : R.seasonal?.includes(L.unit) ? esc(R.units[L.unit]) : `Path ${L.unit}`}${num(L.id) ? ` · Quest ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
-          <h2 class="q-title">${esc(L.title)}</h2><p class="q-skill"><b>${esc(L.skill)}</b></p>
+          <h2 class="q-title">${esc(L.title)}</h2>${versionOf('q-skill')}<p class="q-skill"><b>${esc(L.skill)}</b></p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${who}${swaps}
           ${gateNote()}<button type="button" class="q-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask an adult to start' : !S.started ? 'Start quest' : 'Keep going'}</button></article>`
       : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
-          ${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2><p class="p-skill">${esc(L.skill)}</p>
+          ${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2>${versionOf('p-skill')}<p class="p-skill">${esc(L.skill)}</p>
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
           ${gateNote()}<button type="button" class="p-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask an adult to start' : !S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
