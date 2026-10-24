@@ -159,7 +159,7 @@ test("the kitchen shows this week's recipe and three parts, and the mastery reci
   assert.equal(lv.week.week, 1);
   assert.deepEqual([lv.week.unit_name, lv.week.recipe, lv.week.recipe_written, lv.week.recipe_done], ['Food safety science', 'shakshuka', true, false]);
   assert.deepEqual(lv.week.parts.map((x) => [x.part, x.title, x.minutes, x.done_at]), [
-    ['drill', 'Calibrate a thermometer in ice water', 40, null], ['knowledge', 'Danger zone and how microorganisms grow', 35, null], ['sabbath', 'Label and date containers', 45, null]]);
+    ['knowledge', 'Danger zone and how microorganisms grow', 35, null], ['drill', 'Calibrate a thermometer in ice water', 40, null], ['sabbath', 'Label and date containers', 45, null]]);
   assert.ok(lv.mastery.includes('minestrone') && lv.mastery.includes('meatloaf') && !lv.mastery.includes('shakshuka'));
   assert.equal(lv.sabbath, saturday);
   assert.deepEqual(lv.open, []);
@@ -170,17 +170,17 @@ test('a part is checked off per profile; the parent takes it back, with Undo', a
   const { id } = (await level(a, [ava, ben])).body;
   assert.equal((await a.put(`/api/profiles/${ava}/level-tasks`, { week: 1, part: 'lunch' })).status, saturday ? 409 : 400);
   await checkOff(env, a, ava, 1, 'drill');
-  assert.ok((await kitchen(a, ava)).week.parts[0].done_at);
-  assert.equal((await kitchen(a, ben)).week.parts[0].done_at, null, 'each profile checks off its own');
+  assert.ok((await kitchen(a, ava)).week.parts.find((x) => x.part === 'drill').done_at);
+  assert.equal((await kitchen(a, ben)).week.parts.find((x) => x.part === 'drill').done_at, null, 'each profile checks off its own');
   let parts = (await card(a)).level.parts;
-  assert.deepEqual(parts.map((x) => x.done), [[ava], [], []]);
+  assert.deepEqual(parts.map((x) => [x.part, x.done]), [['knowledge', []], ['drill', [ava]], ['sabbath', []]]);
 
   const body = { week: 1, part: 'drill', profile_id: ava };
   assert.equal((await a.post(`/api/courses/${id}/level-tasks/take-back`, body)).status, 200);
-  assert.deepEqual((await card(a)).level.parts[0].done, []);
-  assert.equal((await kitchen(a, ava)).week.parts[0].done_at, null);
+  assert.deepEqual((await card(a)).level.parts.find((x) => x.part === 'drill').done, []);
+  assert.equal((await kitchen(a, ava)).week.parts.find((x) => x.part === 'drill').done_at, null);
   assert.equal((await a.post(`/api/courses/${id}/level-tasks/put-back`, body)).status, 200);
-  assert.deepEqual((await card(a)).level.parts[0].done, [ava]);
+  assert.deepEqual((await card(a)).level.parts.find((x) => x.part === 'drill').done, [ava]);
   assert.equal((await a.post(`/api/courses/${id}/level-tasks/take-back`, { ...body, part: 'sabbath' })).status, 404, 'nothing to take back');
 });
 
@@ -193,7 +193,7 @@ test("a part not checked off doesn't hold the schedule; it stays open", async ()
   });
   const lv = await kitchen(a, ava);
   assert.equal(lv.week.week, 2, 'the course moved on');
-  assert.deepEqual(lv.open.map((x) => [x.week, x.part]), [[1, 'drill'], [1, 'knowledge'], [1, 'sabbath']]);
+  assert.deepEqual(lv.open.map((x) => [x.week, x.part]), [[1, 'knowledge'], [1, 'drill'], [1, 'sabbath']]);
 });
 
 test('a profile not on a Level course, or in another family, checks off nothing', async () => {
@@ -380,7 +380,7 @@ test('a parent turns parts off at setup or later, and sees the hours that plans 
   // Turned back on later.
   await a.put(`/api/courses/${id}`, { start_date: sunday, per_week: 1, profile_ids: [ava], parts: ['drill', 'knowledge', 'sabbath'] });
   c = (await a.get('/api/courses')).body.courses[0];
-  assert.deepEqual(c.parts, ['drill', 'knowledge', 'sabbath']);
+  assert.deepEqual(c.parts, ['knowledge', 'drill', 'sabbath'], "in the owner's order");
   assert.equal((await card(a)).level.hours, 126);
 });
 

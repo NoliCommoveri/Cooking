@@ -194,7 +194,8 @@ export async function progressView(profile, cooks, { ranks = true } = {}) {
 // tab shows how far they are on the Level: the weeks, the hours, and each
 // unit as a chapter (Kitchen Quest) or a passport page (Chef's Passport),
 // with its crest or visa stamp once mastered. Units are the ranks (§12.4).
-const PARTS = [['drill', 'Drill'], ['knowledge', 'Knowledge'], ['sabbath', 'Beyond the Recipe']];
+// In the order a week is presented (owner, 2026-10-24): Knowledge, Drill, the Recipe, Beyond the Recipe.
+const PARTS = [['knowledge', 'Knowledge'], ['drill', 'Drill'], ['sabbath', 'Beyond the Recipe']];
 const longDay = (d) => new Date(`${d}T12:00:00`).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
 const shortDay = (d) => new Date(`${d}T12:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 // A week counts as done when its recipe is cooked; a practice or capstone
@@ -229,8 +230,12 @@ function weekRow(w, quest) {
   const what = w.title ?? (w.kind === 'capstone' ? 'Capstone' : w.kind === 'practice' ? 'Practice run' : 'Being written');
   const kept = PARTS.filter(([k]) => k in w.parts), skipped = (k) => w.skipped?.includes(k);
   const tick = (on, label, skip = false) => `<i class="${on ? 'on' : skip ? 'skip' : ''}" title="${esc(label)}${on ? ': done' : skip ? ': skipped' : ''}">${on ? ic('i-check') : skip ? '–' : ''}</i>`;
-  const ticks = [w.recipe ? tick(w.cooked, 'Recipe') : '', ...kept.map(([k, label]) => tick(w.parts[k], label, skipped(k)))].join('');
-  const said = [w.recipe ? `Recipe ${w.cooked ? 'cooked' : 'not cooked yet'}` : null, ...kept.map(([k, label]) => `${label} ${w.parts[k] ? 'done' : skipped(k) ? 'skipped' : 'not done yet'}`)].filter(Boolean).join(', ');
+  // The recipe goes before Beyond the Recipe.
+  const before = kept.filter(([k]) => k !== 'sabbath'), after = kept.filter(([k]) => k === 'sabbath');
+  const partTick = ([k, label]) => tick(w.parts[k], label, skipped(k));
+  const partSaid = ([k, label]) => `${label} ${w.parts[k] ? 'done' : skipped(k) ? 'skipped' : 'not done yet'}`;
+  const ticks = [...before.map(partTick), w.recipe ? tick(w.cooked, 'Recipe') : '', ...after.map(partTick)].join('');
+  const said = [...before.map(partSaid), w.recipe ? `Recipe ${w.cooked ? 'cooked' : 'not cooked yet'}` : null, ...after.map(partSaid)].filter(Boolean).join(', ');
   return `<li><span class="wk">${quest ? 'Wk' : 'Week'} ${w.week}</span><span class="t">${esc(what)}${w.mastery ? `<small>${quest ? 'Mastery' : 'Mastery week'}</small>` : ''}</span><span class="tk" role="img" aria-label="${esc(said)}">${ticks}</span></li>`;
 }
 
@@ -238,8 +243,11 @@ function weekRow(w, quest) {
 function leftThisWeek(lv) {
   const w = lv.week;
   if (!w) return [];
-  return [w.recipe && !w.recipe_done ? `${w.recipe_title} isn't cooked yet` : null,
-    ...w.parts.filter((x) => !x.done_at && !x.skipped).map((x) => `${PARTS.find(([k]) => k === x.part)[1]} not done yet`)].filter(Boolean);
+  const open = (x) => !x.done_at && !x.skipped;
+  const said = (x) => `${PARTS.find(([k]) => k === x.part)[1]} not done yet`;
+  return [...w.parts.filter((x) => x.part !== 'sabbath' && open(x)).map(said),
+    w.recipe && !w.recipe_done ? `${w.recipe_title} isn't cooked yet` : null,
+    ...w.parts.filter((x) => x.part === 'sabbath' && open(x)).map(said)].filter(Boolean);
 }
 
 function certificate(pr, profile, quest) {
@@ -255,7 +263,8 @@ function levelHTML(profile, lv, ui) {
   const top = `<div class="${quest ? 'q-panel' : 'p-card'} k-lvtop">${quest ? '' : '<i class="tape t2"></i>'}<span class="${quest ? 'q-kick' : 'p-lessonno'}">${esc(at)}</span>${weeksBar(pr, now)}<b>${pr.hours_done} of about ${pr.hours} hours</b></div>`;
   const openUnit = lv.week?.unit ?? pr.units.find((u) => !u.mastered)?.number;
   // What the ticks are: the recipe, then the parts the course keeps on.
-  const key = `Ticks: ${['recipe', ...PARTS.filter(([k]) => pr.on.includes(k)).map(([, label]) => (label === 'Beyond the Recipe' ? label : label.toLowerCase()))].join(', ')}`;
+  const named = PARTS.filter(([k]) => pr.on.includes(k)).map(([k, label]) => [k, label === 'Beyond the Recipe' ? label : label.toLowerCase()]);
+  const key = `Ticks: ${[...named.filter(([k]) => k !== 'sabbath'), ['', 'recipe'], ...named.filter(([k]) => k === 'sabbath')].map(([, label]) => label).join(', ')}`;
   const units = pr.units.map((u) => {
     const done = u.weeks.filter(weekDone).length;
     const head = quest ? `Chapter ${u.number}: ${u.name}` : `Unit ${u.number}: ${u.name}`;

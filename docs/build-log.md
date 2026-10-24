@@ -4478,3 +4478,26 @@ tables.
   `/ops` reads applied.
 - Tests: 348 (one new: an export at 0003 restores and one at 0017 is refused;
   the /ops draft page test runs only while a draft exists).
+
+## 186. 2026-10-24 — Knowledge, Drill, Recipe, Beyond the Recipe
+
+- Owner, 2026-10-24: a Level week is presented in the order Knowledge, Drill,
+  Recipe, Beyond the Recipe. The order before (Recipe first, then Drill,
+  Knowledge, Beyond) made no sense to the owner.
+- The new order is used everywhere a week shows:
+  - the kitchen's week card
+  - the progress view's ticks, their key, and "Left this week"
+  - the parent's course card and the Level table on Progress
+  - the setup section
+  - Chef Ruth's and the program picker's one-line descriptions
+  - the manager's Level 3 page
+- `PARTS` in `src/content/levels.js` is in this order now.
+- **Setup copy** is the owner's own: the section is "Each week's components".
+  It reads: "Our Level course lessons consist of four components: Knowledge,
+  Drill, Recipe, Beyond the Recipe. If you'd like to skip assigning any of the
+  components, uncheck them below." Under that: "Note: accumulated hours
+  displayed will be adjusted based off selected components." ("unchecked"
+  became "uncheck".)
+- Recipe is listed in its place, ticked and greyed out ("Always included: a
+  week is done when it's cooked"). The hours line says "components".
+- Tests: 348; the Level tests expect the new order.

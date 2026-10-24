@@ -3,10 +3,12 @@
 // Shared by the Worker and the course editor, so the hours a parent sees at
 // setup are the ones the learner's progress counts toward.
 
-// A Level week's three part pages, in order. The fourth part was the Sabbath
-// task, so Beyond the Recipe is still stored as "sabbath".
-export const PARTS = ['drill', 'knowledge', 'sabbath'];
-export const PART_NAMES = { drill: 'Drill', knowledge: 'Knowledge', sabbath: 'Beyond the Recipe' };
+// A Level week's three part pages. Learners and parents see a week in this
+// order (owner, 2026-10-24): Knowledge, Drill, the Recipe, then Beyond the
+// Recipe. Beyond the Recipe was the Sabbath task, so it's still stored as
+// "sabbath".
+export const PARTS = ['knowledge', 'drill', 'sabbath'];
+export const PART_NAMES = { knowledge: 'Knowledge', drill: 'Drill', sabbath: 'Beyond the Recipe' };
 
 // The parts a course keeps on (a parent can turn any off at setup). A
 // practice run or capstone week keeps all three: its parts are the week.

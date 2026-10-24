@@ -7,7 +7,7 @@ import { field, blank } from './form.js';
 import { S, cur, put, page, pickers, problems, redraw } from './manage.js';
 import { tagFields } from './tags.js';
 
-const PARTS = [['drill', 'Drill'], ['knowledge', 'Knowledge'], ['sabbath', 'Beyond the Recipe']];
+const PARTS = [['knowledge', 'Knowledge'], ['drill', 'Drill'], ['sabbath', 'Beyond the Recipe']];
 const slug = (s) => String(s ?? '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 function checksLine() {
