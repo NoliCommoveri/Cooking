@@ -748,7 +748,31 @@
         "budget": "$",
         "familiar": "adventurous",
         "veggies": "some"
-      }
+      },
+      "pickOne": "flavor-base"
+    },
+    {
+      "id": "chicken-jambalaya",
+      "title": "Chicken jambalaya",
+      "unit": 3,
+      "cuisine": "louisiana",
+      "skills": ["flavor-base", "sauteing"],
+      "skill": "The trinity, deglazing, rice cooked in the pot",
+      "image": "dishes/chicken-jambalaya.png",
+      "safety": "adult-nearby",
+      "minutes": 75,
+      "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, the trinity sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
+      "main": ["chicken thighs", "smoked chicken andouille", "onion, celery, green pepper", "rice", "tomatoes"],
+      "method": "stove",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["warm-spices"],
+        "heat": "some",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "pickOne": "flavor-base"
     },
     {
       "id": "bbq-pulled-chicken",
@@ -1023,8 +1047,7 @@
       "skill": "Marinating, finishing with cream",
       "image": "dishes/butter-chicken.png",
       "safety": "adult-nearby",
-      "minutes": 60,
-      "estimated": true,
+      "minutes": 80,
       "about": "Marinated chicken in a mild, creamy, buttery tomato curry sauce, with rice.",
       "main": ["chicken thighs", "yogurt", "tomatoes", "butter and cream", "garam masala"],
       "method": "stove",

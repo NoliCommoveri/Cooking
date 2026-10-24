@@ -4067,3 +4067,113 @@ on claude.ai.
   and Units 7–9.
 - Nothing in the app or content changes yet; the approved changes are built
   after the review.
+
+## 166. 2026-10-24 — Butter chicken and Chicken jambalaya written
+
+The owner's kids wanted to cook a chicken dish for fun, outside the course
+order, so these two recipes were written.
+
+- **Butter chicken** (`content/lessons/butter-chicken.json`): Cook Around the
+  World #25 (Unit 3, "Marinating, finishing with cream"), until now a planned
+  dish. Chicken thighs marinated in yogurt, lemon, and spices, browned in two
+  batches, then simmered in a buttery tomato sauce and finished with cream,
+  over rice. Checked at 165°F. 80 minutes (30 of them marinating), so the
+  dish card's estimate of 60 is replaced. Its callback is Shakshuka's sauce. It
+  is also Level 4 week 22's option 2 (plan §12.7), with chicken tikka masala
+  planned as its variation.
+- **Chicken jambalaya** (`content/levels/recipes/chicken-jambalaya.json`): the
+  new Level 3 week 15 recipe the review approved in place of Lomo saltado
+  (`docs/level-recipe-review.md`, Unit 4). Sausage and chicken browned, the
+  trinity sweated, the pot deglazed with broth, and the rice cooked in it.
+  Checked at 165°F. 75 minutes. Its callback is Chicken adobo's brown bits.
+  It's a Level-only recipe card in `level-3.json` and week 15's option, so it
+  shows only with the next release.
+- **Hard rule:** the sausage is a new registry item, smoked chicken andouille
+  (`chicken-sausage-smoked`), with a "check the label" note for pork casings
+  and pork in the mix. Its id avoids the blocked word; its name uses the
+  allowed phrase "chicken andouille".
+- **New registry items:** garam masala, ground turmeric, sweet paprika,
+  tomato paste, heavy cream, and the sausage. The kitchen word **deglaze**
+  is now defined in `terms.json`, since the jambalaya teaches it.
+- **Picture:** the retired jambalaya picture (chicken, sausage, tomato, and
+  pepper; no shellfish) is back as `dishes/chicken-jambalaya.png`, with
+  `tools/dish-sheets.txt` and the licenses updated.
+- The Level 3 test now counts 18 Level-only recipes. The generated library and
+  preview files were rebuilt.
+
+## 167. 2026-10-24 — Beef kielbasa for the jambalaya's sausage
+
+- Owner, 2026-10-24: beef kielbasa is a swap for the smoked chicken andouille
+  in Chicken jambalaya. It's a new registry item (`beef-kielbasa`), with a
+  "check the label" note: it must be all beef, collagen-cased or skinless,
+  since most kielbasa is pork and many beef ones use pork casings. The
+  jambalaya lists it as a substitution, and the andouille's note names it.
+
+## 168. 2026-10-24 — Add a lesson fixed, jambalaya and butter chicken placed, Unit 7 reviewed
+
+- **Add a lesson showed no lessons with the next release on.** Its menu was
+  filled with `replaceChildren`, which takes nodes, not arrays: when there was
+  no "Best for them" list (before anyone was ticked, or when nothing ranked),
+  the plain list of lessons went in as one array and showed as nothing, and a
+  missing group went in as the text "null". The list is now spread, empty
+  parts are dropped, and a ranked lesson the family's library doesn't have is
+  skipped. Checked in a browser: 38 lessons before ticking anyone, then "Best
+  for them" (5) and "Every lesson" (38) after.
+- **Chicken jambalaya joins Cook Around the World** (owner, 2026-10-24): a
+  pick-one pair with Jollof rice, 20a and 20b, grouped by their shared skill
+  (`flavor-base`). Its lesson moved from `content/levels/recipes/` to
+  `content/lessons/`, its card from `level-3.json` to `course.json`, and
+  Level 3 week 15 still offers it. Level 3 is back to 17 Level-only recipes.
+  Its web picture was made.
+- **Butter chicken is a Level 3 week 22 option** (owner, 2026-10-24), beside
+  Shish taouk's other options: raw thighs cut and marinated, then cooked in
+  a sauce.
+- **Unit 7 (Fish) reviewed** in `docs/level-recipe-review.md`: the four
+  defaults stay; each week's options are trimmed to dishes that use its
+  method; week 25's baked fish gets a side from an earlier unit; Steamed fish
+  is written with a foil-ball steamer and the adult pouring the hot oil; a
+  new Fish in parchment packets variation for week 26; week 28's drill
+  becomes searing a fillet; Coconut-crusted fish leaves the fish weeks
+  (Level 4 frying, leavened panko). Six decisions are open for the owner.
+  The claude.ai working copy couldn't be opened from this session, so the
+  repo copy carries Unit 7.
+
+## 169. 2026-10-24 — Unit 7 review decisions approved
+
+- Owner, 2026-10-24: all six Unit 7 (Fish) proposals are approved and ticked
+  in `docs/level-recipe-review.md`. Nothing is built yet; they go in with the
+  rest of the review.
+
+## 170. 2026-10-24 — Unit 6 decisions approved; Unit 8 reviewed
+
+- Owner, 2026-10-24: Unit 6's three decisions are approved (a pan-juice
+  Level version of Roast chicken and Roast turkey breast, BBQ pulled chicken
+  roasted in the oven, a glove step for Jerk chicken).
+- **Unit 8 (Stock and soup) reviewed** in `docs/level-recipe-review.md`. The
+  written soups use boxed broth, so Level versions use the student's own
+  stock (Matzo ball soup, Chicken noodle soup, Grilled cheese + tomato soup,
+  Red lentil soup, Minestrone). Matzo ball soup's Level version starts from
+  week 30's stock, not a whole raw bird. Beef and barley soup's Level version
+  uses ground beef instead of chuck. Chicken stock can start from wings or
+  backs. Beef bone broth's fat step is required (§2.1). Matzo ball soup
+  leaves week 32's options. Seven decisions are open.
+
+## 171. 2026-10-24 — Unit 8 decisions approved; Unit 9 reviewed
+
+- Owner, 2026-10-24: Unit 8's seven decisions are approved.
+- **Unit 9 (Balancing flavor and Sabbath capstone) reviewed** in
+  `docs/level-recipe-review.md`, the last unit. Week 33's salads stay. Beef
+  stew gets a chicken-thigh Level version for week 34 (chuck stays for Level
+  4). Week 35's Sabbath task becomes serving the practice dish; "Shop and do
+  Thursday prep" moves to week 36's drill. The capstone is main, side, bread,
+  and salad, with soup as a choice. Weeks 35 and 36 can't finish in the app
+  today (no recipe), so the review proposes picking their dishes from the
+  Level's recipes, as a later build. Four decisions are open.
+
+## 172. 2026-10-24 — Unit 9 decisions approved; the review is done
+
+- Owner, 2026-10-24: Unit 9's four decisions are approved. Every unit of the
+  Level 3 recipe progression review is reviewed and approved. None of it is
+  built yet beyond Chicken jambalaya and Butter chicken; the changes go into
+  `content/levels/level-3.json`, the lessons, and plan §12.3 and §12.4 next.
+

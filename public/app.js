@@ -1640,15 +1640,16 @@ const parentQueue = parentOnly(async (flash) => {
   const drawLessons = () => {
     const was = lessonSel.value;
     const fitOf = Object.fromEntries((ranked ?? []).map((x) => [x.id, x]));
-    const best = (ranked ?? []).filter((x) => x.fits && x.fit && x.fit !== 'poor' && !x.cooked && !x.queued).slice(0, 5);
     const byId = Object.fromEntries(q.library.map((L) => [L.id, L]));
+    const best = (ranked ?? []).filter((x) => byId[x.id] && x.fits && x.fit && x.fit !== 'poor' && !x.cooked && !x.queued).slice(0, 5);
     const opt = (L) => el('option', { value: L.id }, `${lessonText(L)}${fitOf[L.id]?.fit === 'none' ? " · doesn't fit" : ''}`);
-    lessonSel.replaceChildren(
+    // replaceChildren takes nodes only: an array or a null would show as text.
+    lessonSel.replaceChildren(...[
       el('option', { value: '' }, 'Pick a lesson'),
-      best.length ? el('optgroup', { label: 'Best for them' }, best.map((x) => opt(byId[x.id]))) : null,
-      best.length ? el('optgroup', { label: 'Every lesson' }, q.library.map(opt)) : q.library.map(opt),
+      ...(best.length ? [el('optgroup', { label: 'Best for them' }, best.map((x) => opt(byId[x.id]))), el('optgroup', { label: 'Every lesson' }, q.library.map(opt))] : q.library.map(opt)),
       // The family's own recipes (§6.10).
-      q.recipes?.length ? el('optgroup', { label: 'Our recipes' }, q.recipes.map((r) => el('option', { value: r.id }, r.title))) : null);
+      q.recipes?.length ? el('optgroup', { label: 'Our recipes' }, q.recipes.map((r) => el('option', { value: r.id }, r.title))) : null,
+    ].filter(Boolean));
     lessonSel.value = was;
     const f = fitOf[lessonSel.value];
     fitBox.replaceChildren(f ? fitNote({ ...f, fit_label: f.label, why: [...f.why, ...(f.version_title ? [`as ${f.version_title}`] : [])] }) ?? '' : '');

@@ -1,0 +1,120 @@
+{
+  "id": "butter-chicken",
+  "version": 1,
+  "track": "core",
+  "unit": 3,
+  "title": "Butter chicken",
+  "image": "dishes/butter-chicken.png",
+  "cuisine": "indian",
+  "skill": "Marinating, finishing with cream",
+  "skills": ["marinating", "building-a-sauce"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 80,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 9, "text": "For more than 8, brown the chicken in three batches, and use your biggest pot so the sauce has room to bubble." }
+    ]
+  },
+  "learn": {
+    "callback": {
+      "lesson": "shakshuka",
+      "body": "In your sauce lesson, you cooked onion and spices in oil, added tomatoes, and let the sauce bubble until it thickened. Butter chicken's sauce starts the same way. Today you add two new moves: a marinade before, and cream at the end."
+    },
+    "move": {
+      "title": "Marinate, brown, simmer, finish",
+      "body": "A marinade is a flavorful mix that food soaks in before it cooks. Today the chicken soaks in yogurt, lemon, and spices. Then you'll brown it, build a buttery tomato sauce with warm Indian spices, simmer the chicken in it, and finish with cream. Butter chicken was first made in Delhi, India, and it's one of the mildest, creamiest curries there is."
+    },
+    "why": [
+      { "id": "marinade", "title": "Yogurt makes it tender", "body": "Yogurt is gently sour. While the chicken soaks, that mild sourness softens the outside of the meat, so it cooks up tender instead of rubbery. The thick yogurt also holds the spices against the chicken, so the flavor goes on before the cooking even starts." },
+      { "id": "brown", "title": "Brown first, finish in the sauce", "body": "A hot pot gives the chicken a browned, slightly charred outside, like it came from a clay oven. It doesn't need to cook through yet. It finishes cooking gently in the sauce, which keeps it juicy." },
+      { "id": "bloom", "title": "Wake up the spices in butter", "body": "Ground spices taste dusty straight from the jar. Stirring them in hot butter for a minute wakes up their flavor and smell. Watch them closely: in a few seconds too long they can burn and turn bitter." },
+      { "id": "cream", "title": "Cream goes in last, on low", "body": "Cream makes the sauce silky and mild and calms the spice. Hard boiling can make it separate into greasy spots, so it goes in at the very end, with the heat turned down to a gentle simmer." }
+    ],
+    "wrong": [
+      { "sign": "The sauce tastes sharp or sour", "fix": "Stir in a pinch more sugar and another splash of cream, and simmer 2 minutes." },
+      { "sign": "It's too spicy for someone", "fix": "Serve theirs with a spoonful of yogurt or extra cream stirred in, and plenty of rice." },
+      { "sign": "The sauce is too thick or starting to stick", "fix": "Stir in a few tablespoons of water and turn the heat down." },
+      { "sign": "Greasy spots float on top after the cream", "fix": "Turn the heat to low and stir well. It still tastes great. Next time, keep it at a gentle simmer after the cream goes in." },
+      { "sign": "The chicken isn't 165°F yet", "fix": "Keep it at a gentle simmer for 5 more minutes, stirring now and then, and check again." }
+    ],
+    "quiz": [
+      { "q": "Why does the chicken soak in yogurt first?", "choices": ["The yogurt makes it tender and holds the spices on", "To cook it all the way", "To keep it cold"], "answer": 0, "explain": "A marinade flavors and tenderizes before cooking. The chicken still has to cook to 165°F." },
+      { "q": "When does the cream go in?", "choices": ["At the very end, on low heat", "First, with the onions", "In the marinade"], "answer": 0, "explain": "Hard boiling can make cream separate, so it goes in last at a gentle simmer." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "chicken-thigh", "amount": 2.5, "unit": "lb", "group": "Marinade" },
+    { "ingredient": "yogurt-greek", "amount": 0.5, "unit": "cup", "group": "Marinade" },
+    { "ingredient": "lemon", "amount": 1, "unit": "count", "round": "up", "prep": "halved", "group": "Marinade" },
+    { "ingredient": "garlic", "amount": 2, "unit": "count", "round": "up", "prep": "grated", "group": "Marinade" },
+    { "ingredient": "ginger-fresh", "amount": 1, "unit": "tsp", "prep": "grated", "group": "Marinade" },
+    { "ingredient": "garam-masala", "amount": 2, "unit": "tsp", "group": "Marinade" },
+    { "ingredient": "paprika-sweet", "amount": 2, "unit": "tsp", "group": "Marinade" },
+    { "ingredient": "turmeric-ground", "amount": 0.5, "unit": "tsp", "group": "Marinade" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Marinade" },
+    { "ingredient": "rice-white", "amount": 2, "unit": "cup", "prep": "basmati if you can find it", "group": "Rice" },
+    { "ingredient": "water", "amount": 3, "unit": "cup", "group": "Rice" },
+    { "ingredient": "vegetable-oil", "amount": 1, "unit": "tbsp", "group": "Sauce" },
+    { "ingredient": "butter-unsalted", "amount": 4, "unit": "tbsp", "group": "Sauce" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "round": "up", "prep": "diced", "group": "Sauce" },
+    { "ingredient": "garlic", "amount": 4, "unit": "count", "round": "up", "prep": "grated", "group": "Sauce" },
+    { "ingredient": "ginger-fresh", "amount": 1, "unit": "tbsp", "prep": "grated", "group": "Sauce" },
+    { "ingredient": "garam-masala", "amount": 2, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "cumin-ground", "amount": 1, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "paprika-sweet", "amount": 2, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "cayenne", "amount": 0.25, "unit": "tsp", "optional": true, "group": "Sauce" },
+    { "ingredient": "tomato-paste", "amount": 2, "unit": "tbsp", "group": "Sauce" },
+    { "ingredient": "tomatoes-crushed", "amount": 1, "unit": "can", "round": "up", "group": "Sauce" },
+    { "ingredient": "water", "amount": 0.5, "unit": "cup", "group": "Sauce" },
+    { "ingredient": "sugar", "amount": 2, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "heavy-cream", "amount": 0.75, "unit": "cup", "group": "Sauce" },
+    { "ingredient": "cilantro", "amount": 0.25, "unit": "cup", "prep": "chopped", "optional": true, "group": "To serve" }
+  ],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "box-grater",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "liquid-measuring-cup",
+    "can-opener",
+    "saucepan-medium",
+    "pot-large",
+    "tongs",
+    "plate",
+    "wooden-spoon",
+    "fork",
+    "spoon",
+    "thermometer"
+  ],
+  "steps": [
+    { "id": "grate", "text": "Peel all the garlic and the ginger. Scrape the ginger's skin off with the edge of a spoon. Grate the garlic and ginger on the smallest holes of the box grater. Put the marinade's garlic and ginger in the mixing bowl, and the rest in the small bowl for the sauce.", "safety": "adult-nearby", "hazard": "Sharp grater", "tip": "When a piece gets small, stop. Fingertips are too close to the grater after that; chop the last bit with the knife instead." },
+    { "id": "marinade", "text": "Add the yogurt to the mixing bowl. Squeeze in the juice of the lemon, catching the seeds with your hand. Add the marinade's garam masala, paprika, turmeric, and salt, and stir it smooth with the spoon.", "safety": "solo", "why": "marinade", "tip": "Turmeric stains bright yellow. Wipe up spills right away." },
+    { "id": "cut-chicken", "text": "Cut the chicken into pieces about 1½ inches across, and drop them into the marinade. Stir with the spoon until every piece is coated.", "safety": "adult-nearby", "hazard": "Knife, raw chicken", "handles": ["chicken-thigh"], "tip": "Curl the fingers of your holding hand under, and let the knife do the work." },
+    { "id": "wash-1", "type": "wash", "text": "Wash your hands, the knife, and the cutting board with hot, soapy water.", "safety": "solo", "hazard": "Raw chicken", "tip": "Raw chicken can carry germs. Wash before you touch anything else." },
+    { "id": "marinate", "text": "Cover the bowl and put it in the fridge to marinate. You can leave it there overnight if you're cooking tomorrow.", "safety": "solo", "timerSeconds": 1800, "timerLabel": "Marinate", "why": "marinade", "tip": "Marinate in the fridge, never on the counter." },
+    { "id": "rinse-rice", "text": "While the chicken marinates, put the rice in the saucepan and cover it with cold water. Swish it with your hand, then carefully pour off the cloudy water, holding the rice back with your hand. Do this 3 times.", "safety": "solo", "tip": "Rinsing washes off loose starch, so the rice cooks up fluffy instead of gluey." },
+    { "id": "dice-onion", "text": "Dice the onion into small pieces.", "safety": "adult-nearby", "hazard": "Knife" },
+    { "id": "cook-rice", "text": "Add {qty:water} of water to the rice. Bring it to a boil over high heat with the lid off. Then turn the heat to low, put the lid on, and cook without lifting the lid.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 900, "timerLabel": "Rice", "tip": "When the timer rings, turn off the burner and leave the lid on. The rice keeps steaming until you're ready." },
+    { "id": "heat", "text": "Heat the oil in the large pot over medium-high heat until it shimmers.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 120, "timerLabel": "Heat oil" },
+    { "id": "batch-1", "text": "Use the tongs to lift half the chicken out of the marinade, letting the extra drip back into the bowl. Lay the pieces in the pot with space between them.", "safety": "adult-nearby", "hazard": "Hot oil, raw chicken", "handles": ["chicken-thigh"], "tip": "Lay each piece down away from you, so any spatter goes the other way." },
+    { "id": "wash-2", "type": "wash", "text": "Wash your hands with soap.", "safety": "solo", "hazard": "Raw chicken" },
+    { "id": "brown-1", "text": "Leave the chicken alone until it's browned underneath, then turn the pieces with the tongs and brown the other side. Move them to the plate. They won't be cooked through yet.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 360, "timerLabel": "Brown first batch", "why": "brown", "look": "Golden brown with a few dark spots, and the pieces let go of the pot easily." },
+    { "id": "batch-2", "text": "Lay the rest of the chicken in the pot the same way. Throw away the marinade left in the bowl.", "safety": "adult-nearby", "hazard": "Hot oil, raw chicken", "handles": ["chicken-thigh"], "tip": "Leftover marinade touched raw chicken, so it never goes into the sauce." },
+    { "id": "wash-3", "type": "wash", "text": "Wash your hands, and wash the marinade bowl with hot, soapy water.", "safety": "solo", "hazard": "Raw chicken" },
+    { "id": "brown-2", "text": "Brown the second batch on both sides, the same way, and move it to the plate.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 360, "timerLabel": "Brown second batch" },
+    { "id": "onion", "text": "Turn the heat to medium and add the butter. When it melts, add the onion and cook, stirring often, until it's soft and golden. Scrape up the brown bits from the chicken as you stir.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 420, "timerLabel": "Cook onion", "look": "Soft, see-through, and golden at the edges." },
+    { "id": "bloom", "text": "Add the sauce's garlic and ginger, the garam masala, cumin, paprika, and the cayenne if you're using it. Stir for 1 minute. Stir in the tomato paste and cook 1 more minute.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 120, "timerLabel": "Wake up the spices", "why": "bloom", "look": "It smells strong and toasty, and the paste turns a darker red." },
+    { "id": "tomatoes", "text": "Pour in the crushed tomatoes and the sauce's water, and stir in the sugar and salt. Bring it to a bubble, then turn the heat to low and let it simmer, stirring now and then.", "safety": "adult-nearby", "hazard": "Hot pot, bubbling sauce", "timerSeconds": 600, "timerLabel": "Simmer sauce", "tip": "Thick tomato sauce spits as it bubbles. Keep the heat low, and stir with a long spoon." },
+    { "id": "chicken-in", "text": "Slide the chicken and any juice on the plate into the sauce. Stir, and simmer gently until the chicken is cooked through.", "safety": "adult-nearby", "hazard": "Hot pot, bubbling sauce", "timerSeconds": 600, "timerLabel": "Simmer chicken" },
+    { "id": "cream", "text": "Stir in the cream. Keep it at a gentle simmer, with small, lazy bubbles, and stir now and then.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 180, "timerLabel": "Finish with cream", "why": "cream", "look": "A smooth, creamy orange sauce." },
+    { "id": "check-chicken", "type": "doneness", "text": "Slide the thermometer into the thickest piece of chicken. It needs to read at least 165°F. If it doesn't, simmer 5 more minutes, then check again.", "safety": "adult-nearby", "hazard": "Hot pot", "target": { "temp": 165, "unit": "F" } },
+    { "id": "taste", "text": "Turn off the stove. Taste the sauce with a clean spoon. Add a pinch more salt if it tastes flat, or a pinch more sugar if it tastes sharp.", "safety": "adult-nearby", "hazard": "Hot sauce", "tip": "Blow on the spoon first. The sauce is very hot." },
+    { "id": "serve", "text": "Fluff the rice with the fork. Serve the chicken and plenty of sauce over the rice, with the cilantro scattered on top if you're using it.", "safety": "adult-nearby", "hazard": "Hot pot" }
+  ]
+}

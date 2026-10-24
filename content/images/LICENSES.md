@@ -23,7 +23,7 @@ use in this app. Cropped from the source sheets in `source/` with
 | `source/sheet-11-unit6.png` | `dishes/44-meatloaf.png`, `dishes/45-roast-chicken.png`, `dishes/46-chicken-pot-pie.png`, `dishes/47-pot-roast.png` |
 | `source/sheet-12-finale.png` | `dishes/retired/48-southern-fried-chicken.png`, `dishes/49-brown-butter-cookies.png`, `dishes/50-apple-pie.png`, `dishes/26-chicken-caesar.png` |
 | `source/sheet-13-redos-logo.png` | `dishes/37-philly-cheesesteak.png`, `dishes/28-french-omelet.png`, `dishes/32-mac-and-cheese.png`, `brand/clean-plate-logo.png` |
-| `source/sheet-14-redos.png` | `dishes/14-beef-bulgogi.png`, `dishes/27-smash-burgers.png`, `dishes/retired/34-jambalaya.png`, `dishes/35-bbq-pulled-chicken.png` |
+| `source/sheet-14-redos.png` | `dishes/14-beef-bulgogi.png`, `dishes/27-smash-burgers.png`, `dishes/chicken-jambalaya.png`, `dishes/35-bbq-pulled-chicken.png` |
 | `source/sheet-15-foundations-1.png` | `dishes/51-chicken-fajitas.png`, `dishes/retired/52-carrot-apple-slaw.png`, `dishes/retired/53-guacamole-and-chips.png`, `dishes/retired/54-bruschetta.png` |
 | `source/sheet-16-foundations-2.png` | `dishes/36-matzo-ball-soup.png`, `dishes/56-minestrone.png`, `dishes/57-grilled-cheese-tomato-soup.png`, `dishes/58-challah-french-toast.png` |
 | `source/sheet-17-foundations-3.png` | `dishes/59-spaghetti-marinara.png`, `dishes/retired/60-sloppy-joes.png`, `dishes/retired/61-croque-madame.png`, `dishes/retired/62-chicken-gumbo.png` |

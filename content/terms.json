@@ -23,6 +23,7 @@
     { "id": "shimmer", "word": "Shimmer", "forms": ["shimmer", "shimmers", "shimmering"], "means": "Hot oil looks wavy and rippled on top. That means it's hot enough for the food.", "taughtIn": null, "image": null },
     { "id": "across-the-grain", "word": "Across the grain", "forms": ["across the grain"], "means": "Meat has thin lines running through it, like the lines in wood. Cut across those lines, not along them, so each bite is tender.", "taughtIn": "beef-bulgogi", "image": null },
     { "id": "roux", "word": "Roux", "forms": ["roux"], "means": "Butter and flour cooked together, stirring, for a few minutes. It thickens milk or broth into a smooth sauce. Say it \"roo.\"", "taughtIn": "mac-and-cheese", "image": null },
-    { "id": "blanch", "word": "Blanch", "forms": ["blanch", "blanched", "blanches", "blanching"], "means": "Cook something for just a minute or two in boiling water, then scoop it straight into a bowl of ice water. The ice water stops the cooking, so it stays bright green and a little crunchy.", "taughtIn": "japchae", "image": null }
+    { "id": "blanch", "word": "Blanch", "forms": ["blanch", "blanched", "blanches", "blanching"], "means": "Cook something for just a minute or two in boiling water, then scoop it straight into a bowl of ice water. The ice water stops the cooking, so it stays bright green and a little crunchy.", "taughtIn": "japchae", "image": null },
+    { "id": "deglaze", "word": "Deglaze", "forms": ["deglaze", "deglazed", "deglazes", "deglazing"], "means": "Pour a little liquid into a hot pan after browning, and scrape up the brown bits stuck to the bottom. They melt into the liquid and give the dish its deep, savory flavor.", "taughtIn": null, "image": null }
   ]
 }

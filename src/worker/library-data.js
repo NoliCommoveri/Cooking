@@ -4301,6 +4301,291 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "chicken-jambalaya",
+   "version": 1,
+   "track": "core",
+   "unit": 3,
+   "title": "Chicken jambalaya",
+   "image": "img/dishes/chicken-jambalaya.webp",
+   "cuisine": "louisiana",
+   "skill": "The trinity, deglazing, rice cooked in the pot",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, brown the chicken in two batches, and make sure the rice and broth fill your pot no more than halfway."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "chicken-sausage-smoked"
+    },
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "paprika-smoked"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "cayenne",
+     "optional": true
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "bell-pepper-green"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "tomato-paste"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "green-onion",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "chicken-sausage-smoked",
+     "use": "beef-kielbasa",
+     "reason": "availability"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "bell-peppers",
+     "celery",
+     "garlic",
+     "tomatoes"
+    ],
+    "optional": [
+     "hot-peppers"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "liquid-measuring-cup",
+    "pot-large",
+    "slotted-spoon",
+    "tongs",
+    "plate",
+    "wooden-spoon",
+    "fork",
+    "thermometer"
+   ]
+  },
+  {
+   "id": "butter-chicken",
+   "version": 1,
+   "track": "core",
+   "unit": 3,
+   "title": "Butter chicken",
+   "image": "img/dishes/butter-chicken.webp",
+   "cuisine": "indian",
+   "skill": "Marinating, finishing with cream",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, brown the chicken in three batches, and use your biggest pot so the sauce has room to bubble."
+     }
+    ]
+   },
+   "totalMinutes": 80,
+   "ingredients": [
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "yogurt-greek"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "garam-masala"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "turmeric-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "garam-masala"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "cayenne",
+     "optional": true
+    },
+    {
+     "ingredient": "tomato-paste"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "heavy-cream"
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices",
+     "creamy-cheesy"
+    ],
+    "heat": "some",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "sour-cream-yogurt",
+     "lemon-lime",
+     "garlic",
+     "ginger",
+     "onions",
+     "tomatoes"
+    ],
+    "optional": [
+     "hot-peppers",
+     "cilantro"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "box-grater",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "liquid-measuring-cup",
+    "can-opener",
+    "saucepan-medium",
+    "pot-large",
+    "tongs",
+    "plate",
+    "wooden-spoon",
+    "fork",
+    "spoon",
+    "thermometer"
+   ]
+  },
+  {
    "id": "beef-bulgogi",
    "version": 1,
    "track": "core",
@@ -5517,6 +5802,40 @@ export const LIBRARY = {
   "curry-powder": {
    "name": "Curry powder (mild)",
    "contains": []
+  },
+  "garam-masala": {
+   "name": "Garam masala",
+   "contains": []
+  },
+  "turmeric-ground": {
+   "name": "Ground turmeric",
+   "contains": []
+  },
+  "paprika-sweet": {
+   "name": "Paprika (sweet)",
+   "contains": []
+  },
+  "tomato-paste": {
+   "name": "Tomato paste",
+   "contains": []
+  },
+  "heavy-cream": {
+   "name": "Heavy cream",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "chicken-sausage-smoked": {
+   "name": "Smoked chicken andouille sausage (fully cooked)",
+   "contains": [
+    "meat"
+   ]
+  },
+  "beef-kielbasa": {
+   "name": "Beef kielbasa (fully cooked)",
+   "contains": [
+    "meat"
+   ]
   }
  },
  "cuisines": {
@@ -6532,6 +6851,7 @@ export const LIBRARY = {
    ],
    "minutes": 75,
    "cuisine": "nigerian",
+   "pickOne": "flavor-base",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -6541,6 +6861,29 @@ export const LIBRARY = {
     "heat": "some",
     "budget": "$",
     "familiar": "adventurous",
+    "veggies": "some"
+   }
+  },
+  {
+   "id": "chicken-jambalaya",
+   "title": "Chicken jambalaya",
+   "unit": 3,
+   "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, the trinity sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
+   "skills": [
+    "flavor-base",
+    "sauteing"
+   ],
+   "minutes": 75,
+   "cuisine": "louisiana",
+   "pickOne": "flavor-base",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$$",
+    "familiar": "new-ish",
     "veggies": "some"
    }
   },
@@ -6815,7 +7158,7 @@ export const LIBRARY = {
     "marinating",
     "building-a-sauce"
    ],
-   "minutes": 60,
+   "minutes": 80,
    "cuisine": "indian",
    "tags": {
     "protein": "chicken",
@@ -8235,7 +8578,7 @@ export const LIBRARY = {
      "skill": "flavor-base",
      "recipe": "cajun-rice-dressing",
      "options": [
-      "lomo-saltado"
+      "chicken-jambalaya"
      ],
      "drill": {
       "title": "Deglaze a pan, scrape the fond",
@@ -8387,7 +8730,8 @@ export const LIBRARY = {
      "options": [
       "chicken-souvlaki-pitas",
       "jerk-chicken",
-      "chicken-yassa"
+      "chicken-yassa",
+      "butter-chicken"
      ],
      "drill": {
       "title": "Trim and cube chicken safely",
@@ -9094,7 +9438,7 @@ export const LIBRARY = {
     "chana-masala": "Chana masala",
     "chicken-yassa": "Chicken yassa",
     "cajun-rice-dressing": "Cajun rice dressing with beef",
-    "lomo-saltado": "Lomo saltado",
+    "chicken-jambalaya": "Chicken jambalaya",
     "beef-ragu": "Beef ragù",
     "beef-chili": "Beef chili",
     "chicken-tagine": "Chicken tagine with olives",
@@ -9109,6 +9453,7 @@ export const LIBRARY = {
     "shish-taouk": "Shish taouk",
     "chicken-souvlaki-pitas": "Chicken souvlaki pitas",
     "jerk-chicken": "Jerk chicken",
+    "butter-chicken": "Butter chicken",
     "roast-chicken-pieces": "Roast chicken pieces",
     "bbq-pulled-chicken": "BBQ pulled chicken + coleslaw",
     "roast-chicken": "Roast chicken + pan gravy",
