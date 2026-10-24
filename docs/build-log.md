@@ -3755,3 +3755,22 @@ Phase 11, slice 11e (plan §6.21): a page in the owner screens (Menu → Owner
   dressings group with its tags. That check also caught Write next suggesting
   a salmon version of a dish whose only problem was time, now a quicker
   version.
+
+## 150. 2026-10-24 — Plan: phase 12, Level 3 Cook
+
+Design only. Plan §12.4 (new), §9, and §8.4 changed.
+- **Owner rulings:** slice 11f, the taste tester, is on hold, and phase 12
+  goes first. A Level week is done when its recipe is cooked. Each week's
+  recipe is the best fit for the family, picked when the course is set up.
+  Phase 12 writes Unit 1's new recipes and all 108 part pages; the other new
+  recipes come in content sessions.
+- **Slices:** 12a Level content (`content/levels/level-3.json`, new recipes
+  in `content/levels/recipes/`) and its linter checks; 12b a Level course
+  (`course_programs`, Which program?, one Level week per calendar week on
+  today's schedule); 12c the kitchen's four parts (`level_tasks`), mastery
+  weeks, and Why did it work?; 12d best-fit recipes at setup and Swap recipe;
+  12e Progress and the transcript; 12f the content.
+- **`mastery_notes`** is planned as its own table: the draft can't add a
+  column to `attempt_profiles`, where §12.2 had put "why it worked".
+- Open for the owner: stamps and pins for Level weeks, and whether Level
+  recipes join Side quests at launch.
