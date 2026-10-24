@@ -4301,6 +4301,137 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "chicken-jambalaya",
+   "version": 1,
+   "track": "core",
+   "unit": 3,
+   "title": "Chicken jambalaya",
+   "image": "img/dishes/chicken-jambalaya.webp",
+   "cuisine": "louisiana",
+   "skill": "The trinity, deglazing, rice cooked in the pot",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, brown the chicken in two batches, and make sure the rice and broth fill your pot no more than halfway."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "chicken-sausage-smoked"
+    },
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "paprika-smoked"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "cayenne",
+     "optional": true
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "bell-pepper-green"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "tomato-paste"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "green-onion",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "chicken-sausage-smoked",
+     "use": "beef-kielbasa",
+     "reason": "availability"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "bell-peppers",
+     "celery",
+     "garlic",
+     "tomatoes"
+    ],
+    "optional": [
+     "hot-peppers"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "liquid-measuring-cup",
+    "pot-large",
+    "slotted-spoon",
+    "tongs",
+    "plate",
+    "wooden-spoon",
+    "fork",
+    "thermometer"
+   ]
+  },
+  {
    "id": "butter-chicken",
    "version": 1,
    "track": "core",
@@ -5693,6 +5824,18 @@ export const LIBRARY = {
    "contains": [
     "dairy"
    ]
+  },
+  "chicken-sausage-smoked": {
+   "name": "Smoked chicken andouille sausage (fully cooked)",
+   "contains": [
+    "meat"
+   ]
+  },
+  "beef-kielbasa": {
+   "name": "Beef kielbasa (fully cooked)",
+   "contains": [
+    "meat"
+   ]
   }
  },
  "cuisines": {
@@ -6708,6 +6851,7 @@ export const LIBRARY = {
    ],
    "minutes": 75,
    "cuisine": "nigerian",
+   "pickOne": "flavor-base",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -6717,6 +6861,29 @@ export const LIBRARY = {
     "heat": "some",
     "budget": "$",
     "familiar": "adventurous",
+    "veggies": "some"
+   }
+  },
+  {
+   "id": "chicken-jambalaya",
+   "title": "Chicken jambalaya",
+   "unit": 3,
+   "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, the trinity sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
+   "skills": [
+    "flavor-base",
+    "sauteing"
+   ],
+   "minutes": 75,
+   "cuisine": "louisiana",
+   "pickOne": "flavor-base",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$$",
+    "familiar": "new-ish",
     "veggies": "some"
    }
   },
@@ -8563,7 +8730,8 @@ export const LIBRARY = {
      "options": [
       "chicken-souvlaki-pitas",
       "jerk-chicken",
-      "chicken-yassa"
+      "chicken-yassa",
+      "butter-chicken"
      ],
      "drill": {
       "title": "Trim and cube chicken safely",
@@ -9051,27 +9219,6 @@ export const LIBRARY = {
      "art": "meat"
     },
     {
-     "id": "chicken-jambalaya",
-     "title": "Chicken jambalaya",
-     "cuisine": "louisiana",
-     "skills": [
-      "flavor-base",
-      "sauteing"
-     ],
-     "minutes": 75,
-     "tags": {
-      "protein": "chicken",
-      "flavors": [
-       "warm-spices"
-      ],
-      "heat": "some",
-      "budget": "$$",
-      "familiar": "new-ish",
-      "veggies": "some"
-     },
-     "art": "poultry"
-    },
-    {
      "id": "rice-pilaf",
      "title": "Rice pilaf",
      "cuisine": "turkish",
@@ -9306,6 +9453,7 @@ export const LIBRARY = {
     "shish-taouk": "Shish taouk",
     "chicken-souvlaki-pitas": "Chicken souvlaki pitas",
     "jerk-chicken": "Jerk chicken",
+    "butter-chicken": "Butter chicken",
     "roast-chicken-pieces": "Roast chicken pieces",
     "bbq-pulled-chicken": "BBQ pulled chicken + coleslaw",
     "roast-chicken": "Roast chicken + pan gravy",

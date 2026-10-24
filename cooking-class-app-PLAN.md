@@ -228,7 +228,8 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 18a | Misir wot | Ethiopian | Spiced lentils | Adult nearby | Berbere sub: paprika + cayenne + warm spices; serve with rice |
 | 18b | Red lentil soup (mercimek) | Turkish | Cooking lentils until they melt · *pick one with 18a* | Adult nearby | Planned 2026-10-24 (Level 3) |
 | 19 | Red beans and rice | Louisiana | Onion/celery/pepper base, simmering beans until creamy | Adult nearby | Chicken andouille instead of ham hock; check casings |
-| 20 | Jollof rice with chicken | Nigerian | Blended pepper base, cooking rice in the sauce | Adult nearby | Scotch bonnet → jalapeño. No dried crayfish or shrimp bouillon |
+| 20a | Jollof rice with chicken | Nigerian | Blended pepper base, cooking rice in the sauce | Adult nearby | Scotch bonnet → jalapeño. No dried crayfish or shrimp bouillon |
+| 20b | Chicken jambalaya | Louisiana | The trinity, deglazing, rice cooked in the pot · *pick one with 20a* | Adult nearby | Chicken andouille or beef kielbasa, collagen-cased or skinless. Added 2026-10-24 (owner); also Level 3 week 15 |
 | 21a | BBQ pulled chicken + coleslaw | American | Dry rub, reducing a sauce | Adult nearby | |
 | 21b | Blackened cod | Louisiana | A spice rub, searing fish · *pick one with 21a, 21c* | Adult nearby | Planned 2026-10-24 |
 | 21c | BBQ-rubbed salmon | American | A sweet-smoky rub, sear then bake · *pick one with 21a, 21b* | Adult nearby | Planned 2026-10-24 |

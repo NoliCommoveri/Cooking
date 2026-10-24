@@ -210,7 +210,7 @@ test('Level 3: 9 units of 4 weeks, about 125 hours, every recipe known', () => {
     assert.ok(L.weeks.some((w) => w.recipe === id), `${id} is a week's recipe`);
     assert.ok(!L.recipes.some((r) => r.id === id), `${id} isn't Level only`);
   }
-  assert.equal(L.recipes.length, 18);
+  assert.equal(L.recipes.length, 17);
   assert.ok(!lint(base).errors.some((e) => e.startsWith('levels/')));
 });
 

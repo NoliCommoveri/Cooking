@@ -8,15 +8,16 @@ import { numberCourse, courseEntries, prereqNotes } from '../src/content/course.
 
 const C = JSON.parse(readFileSync('content/course.json', 'utf8')).dishes;
 
-test('the suggested order: 98 dishes, 59 numbers, pick-one groups lettered', () => {
+test('the suggested order: 99 dishes, 59 numbers, pick-one groups lettered', () => {
   const { labels, total } = numberCourse(C);
   assert.equal(total, 59);
-  assert.equal(Object.keys(labels).length, 98);
+  assert.equal(Object.keys(labels).length, 99);
   assert.deepEqual(['spring-rolls', 'chicken-fajitas', 'shoestring-fries'].map((id) => labels[id]), ['1a', '1b', '1c']);
   assert.equal(labels['chicken-caesar'], '4a');
   assert.equal(labels['chicken-souvlaki-pitas'], '4b', 'a dish added to a group shares its number');
   assert.equal(labels['vegetable-stir-fry'], '9c', 'a Level 3 recipe fills a group with room');
   assert.equal(labels['pita-bread'], labels['skillet-naan'].replace('a', 'b'), 'a new pair shares one number');
+  assert.equal(labels['chicken-jambalaya'], labels['jollof-rice'].replace('a', 'b'), 'jambalaya pairs with jollof');
   assert.equal(labels.shakshuka, '8a');
   assert.equal(labels['beef-bulgogi'], '27');
   assert.equal(labels.japchae, labels['lomo-saltado'].replace('a', 'c'), 'japchae is the third thin-slicing dish');

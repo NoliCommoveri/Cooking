@@ -36,7 +36,7 @@
     { "week": 19, "unit": 5, "skill": "cooking-grains", "recipe": "rice-pilaf", "drill": { "title": "Toast grains in fat before liquid", "minutes": 40 }, "knowledge": { "title": "Absorption vs. pasta method; ratios", "minutes": 35 }, "sabbath": { "title": "Cook grains ahead and reheat with steam", "minutes": 45 }, "swapIns": ["jollof-rice"] },
     { "week": 20, "unit": 5, "skill": "cooking-legumes", "recipe": "mujaddara", "mastery": true, "note": "Lentils and rice", "drill": { "title": "Cook a grain without a recipe card", "minutes": 40 }, "knowledge": { "title": "Grains of the world worksheet", "minutes": 35 }, "sabbath": { "title": "Make a legume dish that holds well for the Sabbath", "minutes": 45 }, "swapIns": ["koshari"] },
     { "week": 21, "unit": 6, "skill": "roasting", "recipe": "roasted-vegetables", "drill": { "title": "Cut vegetables to roast at the same rate", "minutes": 40 }, "knowledge": { "title": "How roasting browns food", "minutes": 35 }, "sabbath": { "title": "Roast a tray of vegetables ahead", "minutes": 45 }, "swapIns": ["shoestring-fries"] },
-    { "week": 22, "unit": 6, "skill": "handling-poultry", "recipe": "shish-taouk", "note": "Chicken thighs", "swapIns": ["chicken-souvlaki-pitas", "jerk-chicken", "chicken-yassa"], "drill": { "title": "Trim and cube chicken safely", "minutes": 40 }, "knowledge": { "title": "Raw poultry handling", "minutes": 35 }, "sabbath": { "title": "Marinate chicken Friday for a later meal", "minutes": 45 } },
+    { "week": 22, "unit": 6, "skill": "handling-poultry", "recipe": "shish-taouk", "note": "Chicken thighs", "swapIns": ["chicken-souvlaki-pitas", "jerk-chicken", "chicken-yassa", "butter-chicken"], "drill": { "title": "Trim and cube chicken safely", "minutes": 40 }, "knowledge": { "title": "Raw poultry handling", "minutes": 35 }, "sabbath": { "title": "Marinate chicken Friday for a later meal", "minutes": 45 } },
     { "week": 23, "unit": 6, "skill": "roasting", "recipe": "roast-chicken-pieces", "drill": { "title": "Temp-check thigh and breast", "minutes": 40 }, "knowledge": { "title": "Dark vs. white meat", "minutes": 35 }, "sabbath": { "title": "Roast chicken ahead; hold and reheat", "minutes": 45 }, "swapIns": ["bbq-pulled-chicken"] },
     { "week": 24, "unit": 6, "skill": "roasting", "recipe": "roast-chicken", "mastery": true, "note": "A whole roast chicken; freeze the carcass for week 30", "drill": { "title": "Break down a cooked chicken", "minutes": 40 }, "knowledge": { "title": "Carryover cooking and resting", "minutes": 35 }, "sabbath": { "title": "Roast chicken as the Sabbath centerpiece", "minutes": 45 } },
     { "week": 25, "unit": 7, "skill": "cooking-fish", "recipe": "baked-salmon", "swapIns": ["bbq-salmon", "honey-soy-salmon", "pineapple-teriyaki-salmon", "blackened-cod", "coconut-crusted-fish", "moqueca"], "drill": { "title": "Check a fillet for pin bones", "minutes": 40 }, "knowledge": { "title": "Fins and scales: clean vs. unclean species", "minutes": 35 }, "sabbath": { "title": "Plan a fish dish that serves well cold", "minutes": 45 } },
@@ -120,27 +120,6 @@
         "flavors": ["warm-spices"],
         "heat": "some",
         "budget": "$",
-        "familiar": "new-ish",
-        "veggies": "some"
-      }
-    },
-    {
-      "id": "chicken-jambalaya",
-      "title": "Chicken jambalaya",
-      "cuisine": "louisiana",
-      "skills": ["flavor-base", "sauteing"],
-      "skill": "The trinity, deglazing, rice cooked in the pot",
-      "art": "poultry",
-      "safety": "adult-nearby",
-      "minutes": 75,
-      "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, the trinity sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
-      "main": ["chicken thighs", "smoked chicken andouille", "onion, celery, green pepper", "rice", "tomatoes"],
-      "method": "stove",
-      "tags": {
-        "protein": "chicken",
-        "flavors": ["warm-spices"],
-        "heat": "some",
-        "budget": "$$",
         "familiar": "new-ish",
         "veggies": "some"
       }
