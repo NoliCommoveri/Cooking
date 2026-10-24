@@ -4578,3 +4578,36 @@ tables.
 - `CLAUDE.md` gains a Screenshots rule (owner, 2026-10-24): every screen
   built or changed is sent to the owner as a screenshot in the session, at
   phone width and in both themes where it matters, and not committed.
+
+## 190. 2026-10-24 — The Structured Progression syllabus
+
+- Owner, 2026-10-24: build the Structured Progression syllabus next.
+- **Before:** one syllabus, `/syllabus`, for Cook Around the World only. It
+  still said a beginner track was planned.
+- **Now:** `/syllabus/structured-progression/` (`public/syllabus-sp.js`):
+  - The program and who it's for, by what a student can do.
+  - The four Levels at a glance: where each starts, time, credit, status.
+  - How a week works: Knowledge, Drill, Recipe, Beyond the Recipe with
+    Level 3's average minutes; mastery weeks; the capstone; best-fit
+    recipes; optional parts.
+  - Level 3 in full: objectives (its unit goals), hours by part with
+    `plannedMinutes` as setup counts them (about 126 with every part), the
+    suggested credit, and each unit's weeks with the recipe and the three
+    part titles.
+  - Levels 1, 2, and 4 as outlines, being written.
+  - Pacing, materials, safety and supervision, and assessment (mastery
+    checks, the rubric, parts checked off, the transcript).
+- `public/content/levels.json` gains each week's `recipeMinutes`, counted
+  the way the Worker counts it (lesson time, else the planned dish's, else
+  the Level card's).
+- The Level outlines moved from `public/demo.js` to `public/level-outlines.js`,
+  shared by the demo and the syllabus.
+- The syllabus pages' styles moved into `public/syllabus.css`. Wide tables
+  stack into labelled rows on a phone; print keeps the table.
+- Links: the demo's Structured Progression card and The Levels tab; Cook
+  Around the World's syllabus now points to Structured Progression in place
+  of the planned beginner track, and the two syllabi link to each other.
+- **For the owner to approve:** all the syllabus wording, including where
+  each Level starts. Level 4's assignment note is still the owner's to write
+  (§12.6); the syllabus says only that Level 4 students work on their own.
+- Tests: 351 (the two new scripts parse; the new page loads its script).

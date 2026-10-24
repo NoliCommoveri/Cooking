@@ -1,0 +1,31 @@
+/* The syllabus pages (plan §6.17): Cook Around the World's and Structured
+   Progression's, house style, and clean when printed. */
+.syl{max-width:820px}
+.syl h2{margin-top:30px}
+.syl table{border-collapse:collapse;width:100%;font-size:15px}
+.syl th,.syl td{text-align:left;padding:7px 8px 7px 0;border-bottom:1px solid var(--h-line);vertical-align:top}
+.syl th{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--h-mut)}
+.syl .scroll{overflow-x:auto}
+.syl ul{padding-left:1.2em}
+.syl li{margin:4px 0}
+.credit{background:var(--h-card);border:2px solid var(--h-acc);border-radius:12px;padding:14px 16px;margin:12px 0}
+.credit b{font-family:var(--h-disp);font-size:22px}
+@media print{
+  :root{--h-bg:#fff;--h-fg:#000;--h-mut:#444;--h-line:#ccc;--h-card:#fff}
+  .noprint{display:none!important}
+  .wrap{padding:0;max-width:none}
+  h2{break-after:avoid}
+  tr,.credit{break-inside:avoid}
+}
+.syl h4{margin:20px 0 4px}
+/* A wide table that stacks into labelled rows on a phone. */
+.syl table.stack .wk{display:none}
+@media screen and (max-width:640px){
+  .syl table.stack,.syl table.stack tbody,.syl table.stack tr,.syl table.stack td{display:block}
+  .syl table.stack tr.hd{display:none}
+  .syl table.stack tr{padding:10px 0;border-bottom:1px solid var(--h-line)}
+  .syl table.stack td{border:0;padding:2px 0}
+  .syl table.stack td.t{font-weight:800;font-size:17px}
+  .syl table.stack .wk{display:inline}
+  .syl table.stack td[data-l]::before{content:attr(data-l) ": ";font-weight:800;color:var(--h-mut);font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+}

@@ -9,6 +9,7 @@ import { dietView } from './lib/diet.js';
 import { shoppingList } from './lib/shop.js';
 import { numberCourse } from './lib/course.js';
 import { levelProgressView } from './rewards.js';
+import { LEVEL_OUTLINES } from './level-outlines.js';
 
 const root = document.getElementById('demo');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -83,7 +84,8 @@ function header() {
         <ul><li><b>Complete, credit-able courses</b> built on best practices, in four Levels of 36 weeks</li>
           <li>Every week: <b>Knowledge, Drill, Recipe, and Beyond the Recipe</b>, for a full culinary and food-science education</li>
           <li>Mastery checks, hours toward credit, and a transcript</li></ul>
-        <button type="button" class="hbtn ${V.track === 'sp' ? 'pri' : ''}" data-track="sp" aria-pressed="${V.track === 'sp'}">Explore Structured Progression</button></article>
+        <button type="button" class="hbtn ${V.track === 'sp' ? 'pri' : ''}" data-track="sp" aria-pressed="${V.track === 'sp'}">Explore Structured Progression</button>
+        <a class="hbtn link" href="/syllabus/structured-progression/">Review its homeschool syllabus</a></article>
     </div>`;
 }
 const seg = (name, value, options) => `<div class="seg" role="group">${options.map(([v, label]) => `<button type="button" data-set="${name}" data-v="${v}" aria-pressed="${value === v}">${esc(label)}</button>`).join('')}</div>`;
@@ -268,37 +270,9 @@ function partView(k) {
     </article></section>`;
 }
 
-// The four Levels (§12.1). Level 3 is built; the others are the owner's
-// outlines, still being written.
-const LEVEL_OUTLINES = [
-  { name: 'Level 1 Helper', week: 'About 1 hour a week', credit: 'Hours tracked for your records', units: ['Clean hands, clean kitchen', 'Clean and unclean animals', 'Measuring', 'Mixing and no-bake recipes', 'Fruits: washing and soft cuts', 'Vegetables and salads', 'Tasting the basic flavors', 'Bread and baking with an adult', 'Capstone: set the table and help make a Sabbath meal'].map((name) => ({ name })) },
-  { name: 'Level 2 Apprentice', week: 'About 2 hours a week', hours: 72, credit: 'A middle-grades elective', units: [
-    ['Knife and heat safety', 'Cuts soft foods safely, handles hot pans and the oven with mitts, and knows what to do in a small kitchen fire'],
-    ['Reading recipes and mise en place', 'Reads a recipe through, gathers and measures everything first, and cleans as they go'],
-    ['Eggs', 'Cracks and separates eggs cleanly and cooks them scrambled, boiled, and fried to the right doneness'],
-    ['Quick breads', 'Uses the muffin and biscuit methods, measures flour correctly, and tests doneness with a toothpick'],
-    ['Boiling and simmering', 'Tells a boil from a simmer, cooks pasta and rice to doneness, and drains safely'],
-    ['Labels and hidden unclean ingredients', 'Reads an ingredient list and spots ingredients from unclean sources'],
-    ['Salt, herbs, and spices', 'Salts food by tasting, tells herbs from spices, and uses each at the right time'],
-    ['Simple pan cooking', 'Preheats a pan, cooks without crowding, and flips and checks food for doneness'],
-    ['Storage, leftovers, and Sabbath capstone', 'Stores food safely, reuses leftovers, and prepares one Sabbath dish from a written prep list'],
-  ].map(([name, goal]) => ({ name, goal })) },
-  { built: true },
-  { name: 'Level 4 Chef', week: 'About 3¾ hours a week', hours: 135, credit: 'One high-school elective credit in most states', note: 'Learners work independently, with adult-style safety notes.', units: [
-    ['Precision, speed, and scaling', 'Cuts fine and fast, weighs ingredients, and scales any recipe up or down accurately'],
-    ['Braising, stewing, beef and lamb cuts', 'Matches tough cuts to low, slow, moist heat, sears for flavor, and cooks to fork-tender'],
-    ['Pastry and enriched breads', 'Makes flaky pastry with cold fat, laminates a dough, and shapes an enriched yeast bread'],
-    ['Foundational sauces', 'Thickens with a roux, builds an emulsion and rescues it if it breaks, and makes a pan sauce from fond'],
-    ['Frying and grilling', 'Fries at a controlled oil temperature, sets up a breading station, and grills with direct and indirect heat'],
-    ['Flavor profiles by cuisine', 'Names the core flavors of a cuisine, builds them from scratch, and adapts a dish to clean ingredients'],
-    ['Menus, nutrition, and budgeting', 'Plans balanced meals, prices them per serving, and stretches ingredients across several meals'],
-    ['Allergens, sourcing, and cooking for groups', 'Cooks safely for guests with allergies, judges where meat and fish come from, and serves 12 or more'],
-    ['Sabbath capstone for household and guests', 'Plans, budgets, shops for, and cooks a full Sabbath meal for the household and guests, entirely on their own'],
-  ].map(([name, goal]) => ({ name, goal })) },
-];
 function levelsView() {
   const card = (o) => {
-    const L = o.built ? { name: LEVEL.name, week: 'About 3½ hours a week', hours: LEVEL.hours, credit: 'One high-school elective credit in most states', units: LEVEL.units } : o;
+    const L = o.built ? { ...o, name: LEVEL.name, hours: LEVEL.hours, units: LEVEL.units } : o;
     const weeksOf = (n) => LEVEL.weeks.filter((w) => w.unit === n);
     const unit = (u, i) => `<li><b>Unit ${i + 1}: ${esc(u.name)}</b>${u.goal ? `<small>${esc(u.goal)}</small>` : ''}${o.built ? `<details><summary>Weeks ${weeksOf(u.number)[0].week}–${weeksOf(u.number).at(-1).week}</summary><ol class="d-wks">${weeksOf(u.number).map((w) => `<li value="${w.week}">${esc(w.title ?? (w.kind === 'capstone' ? 'Capstone' : 'Practice run'))}${w.mastery ? ' <em>Mastery</em>' : ''}</li>`).join('')}</ol></details>` : ''}</li>`;
     return `<article class="d-level ${o.built ? 'built' : ''}"><div class="d-level-h"><h3>${esc(L.name)}</h3><span class="d-badge">${o.built ? 'Ready now' : 'Being written'}</span></div>
@@ -307,7 +281,8 @@ function levelsView() {
       <details ${o.built ? 'open' : ''}><summary>The ${L.units.length} units</summary><ol class="d-units">${L.units.map(unit).join('')}</ol></details></article>`;
   };
   return `<p class="mut d-lede">Four Levels, each a full school year of 36 weeks in units of four: three weeks to learn and practise, then a mastery week cooked on their own. Every Level ends with a Sabbath capstone. Levels go by what a cook can already do, so a family starts wherever fits.</p>
-    <div class="d-levels">${LEVEL_OUTLINES.map(card).join('')}</div>`;
+    <div class="d-levels">${LEVEL_OUTLINES.map(card).join('')}</div>
+    <p><a class="hbtn link" href="/syllabus/structured-progression/">Review the Structured Progression syllabus</a></p>`;
 }
 
 // A pretend learner partway through Level 3, drawn by the real progress view
