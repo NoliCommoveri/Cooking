@@ -5,6 +5,7 @@
 // The app hands her its helpers (ctx), so she builds screens and calls the API
 // the same way the pages do.
 import { STARTERS, nextStep } from './lib/getting-started.js';
+import { starRow, ratingSaver } from './tastes.js';
 
 export const RUTH = { name: 'Chef Ruth', photo: 'img/chef-ruth.webp' };
 
@@ -189,7 +190,7 @@ export async function gettingStarted(ctx, { again = false, chat: given = null } 
     await chat.choose([['go', "Sounds great, let's start!"]]);
   }
 
-  const parts = { family: familyPart, servings: servingsPart, diet: dietPart, learners: learnersPart, logins: loginsPart, mode: modePart, course: coursePart };
+  const parts = { family: familyPart, servings: servingsPart, diet: dietPart, learners: learnersPart, logins: loginsPart, tastes: tastesPart, mode: modePart, course: coursePart };
   while (at) {
     await parts[at](ctx, chat, call, { again });
     await step(at);
@@ -349,6 +350,68 @@ async function loginsPart(ctx, chat, call) {
     chat.say(`Done! On ${p.name}'s device, they tap Log in, then Kid, and use the name, picture, and password you just picked.`);
   }
   chat.say("You can add, change, or turn off a kid's login on their profile, in Menu → Profiles.");
+}
+
+// ---------- tastes (§6.21, the next release) ----------
+
+const KINDS = [['protein', 'proteins'], ['flavor', 'flavors'], ['ingredient', 'foods']];
+
+// A chat form of star rows for one profile; every tap saves. Resolves when
+// the parent taps Done.
+async function rateInChat(ctx, chat, call, profile, kind, items, ratings) {
+  const save = ratingSaver({ ...ctx, api: call }, profile.id);
+  const rows = items.map((item) => starRow(ctx, item, ratings[kind], async (change) => {
+    const next = await save(kind, item.id, change, item.name);
+    if (next) Object.assign(ratings, next);
+    return next?.[kind] ?? null;
+  }));
+  await chat.ask([ctx.el('div', { class: 'rate-list' }, rows)], 'Done', async () => 'Done');
+}
+
+// Getting started: the family's limits, then each person's proteins. The
+// rest waits for Our tastes, or for her to ask a few at a time.
+async function tastesPart(ctx, chat, call) {
+  if (!ctx.me().family.next_release) return;
+  const { el } = ctx;
+  const t = await call('GET', '/api/tastes');
+  chat.say("Now, what your family likes to eat. I'll use it to pick the dishes, and the versions of them, that suit you best. First, a few things for the whole family.");
+  const sel = (label, name, options, none) => el('label', { class: 'f' }, label,
+    el('select', { name }, el('option', { value: '' }, none), options.map(([v, l]) => el('option', { value: v }, l))));
+  await chat.ask([
+    sel('Time on a cooking night', 'max_minutes', t.choices.max_minutes.map((m) => [m, `Up to ${m} minutes`]), 'No limit'),
+    sel('Budget per serving', 'budget', t.choices.budget, 'No limit'),
+    sel('How adventurous', 'adventurous', t.choices.adventurous, 'Not sure yet'),
+  ], 'Save', async (v) => {
+    await call('PUT', '/api/tastes/limits', { ...t.limits, max_minutes: v.max_minutes || null, budget: v.budget || null, adventurous: v.adventurous || null });
+    return [v.max_minutes ? `Up to ${v.max_minutes} minutes` : 'No time limit', v.budget || 'any budget', t.choices.adventurous.find(([a]) => a === v.adventurous)?.[1]].filter(Boolean).join(', ');
+  });
+  if (!t.profiles.length) return;
+  chat.say("Next, each person rates foods with stars: 5 for an absolute favorite (just one), down to 1 for something they hate. Let's start with proteins. Haven't tried it? Tap that instead.");
+  for (const p of t.profiles) {
+    chat.say(`${p.name}:`);
+    await rateInChat(ctx, chat, call, p, 'protein', t.lists.protein, t.ratings[p.id]);
+  }
+  chat.say("Flavors and other foods can wait. Rate them any time in Menu → Our tastes, or ask me and I'll go through a few with you.");
+}
+
+// Her task: a few things a profile hasn't rated yet, proteins first.
+async function rateSome(ctx, chat) {
+  const call = caller(ctx, chat);
+  const t = await call('GET', '/api/tastes');
+  if (!t.profiles.length) { chat.say('Add a profile first, in Menu → Profiles, then I can ask what they like.'); return; }
+  chat.say('Who should I ask about?');
+  const pid = t.profiles.length === 1 ? t.profiles[0].id : await chat.choose(t.profiles.map((p) => [p.id, p.name]));
+  const p = t.profiles.find((x) => x.id === pid);
+  const ratings = t.ratings[pid];
+  for (;;) {
+    const next = KINDS.map(([kind, word]) => [kind, word, t.lists[kind].filter((x) => !(x.id in ratings[kind])).slice(0, 5)]).find(([, , items]) => items.length);
+    if (!next) { chat.say(`${p.name} has rated everything. Change any of it in Menu → Our tastes.`); return; }
+    const [kind, word, items] = next;
+    chat.say(kind === 'flavor' ? `Some flavors for ${p.name}. The dishes are just examples of each one.` : `Some ${word} for ${p.name}:`);
+    await rateInChat(ctx, chat, call, p, kind, items, ratings);
+    const more = await chat.choose([['more', 'A few more'], ['stop', "That's enough for now"]]);
+    if (more === 'stop') { chat.say('Okay! The rest are in Menu → Our tastes.'); return; }
+  }
 }
 
 async function modePart(ctx, chat, call) {
@@ -546,8 +609,15 @@ export function openRuth(ctx) {
     for (;;) {
       chat.say('What can I help with?');
       const pick = await chat.choose([['tour', 'Show me around'],
+        ...(ctx.me().family.next_release ? [['tastes', 'Ask what we like to eat']] : []),
         ...(ctx.me().family.cooking ? [] : [['setup', 'Getting started (change your setup)']]), ['bye', 'Nothing right now']]);
       if (pick === 'bye') { chat.say('Okay! Tap my button any time.'); return; }
+      if (pick === 'tastes') {
+        await rateSome(ctx, chat);
+        await chat.choose([['ok', 'Thanks, Chef Ruth!']]);
+        chat.close();
+        return;
+      }
       if (pick === 'setup') return gettingStarted(ctx, { again: true, chat });
       // Once a flow starts, she doesn't offer the other one (owner,
       // 2026-10-23): the tour ends with a thank-you, not her menu.

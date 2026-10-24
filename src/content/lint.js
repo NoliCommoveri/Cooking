@@ -8,6 +8,7 @@ import { scaleLesson, servingOptions } from './scale.js';
 import { findTerms } from './terms.js';
 import { courseEntries } from './course.js';
 import { METHODS } from './recipe.js';
+import { tagProblems, missingTags, meatProtein } from './tastes.js';
 
 // Fields that hold ids or codes, not words a kid reads.
 const CODE_FIELDS = new Set(['id', 'image', 'cuisine', 'ingredient', 'use', 'for', 'unit', 'why', 'glyph', 'reason',
@@ -252,6 +253,37 @@ export function lint(c) {
       if (d.minutes !== L.totalMinutes || d.estimated) err(where, `minutes should be the lesson's ${L.totalMinutes}, not an estimate`);
     }
     for (const t of c.terms) if (t.taughtIn && !DISH[t.taughtIn]) err(`terms.json ${t.id}`, `taughtIn "${t.taughtIn}" isn't a dish in course.json`);
+  }
+
+  // tastes and tags (plan §6.21): what profiles rate, and the same words on
+  // every dish's card
+  const T = c.tastes;
+  if (T) {
+    const lists = [['proteins', T.proteins], ['flavors', T.flavors], ['ingredients', T.ingredients]];
+    for (const [name, list] of lists) {
+      const where = `tastes.json ${name}`;
+      index(list, where);
+      for (const x of list) {
+        for (const id of x.ingredients ?? []) if (!ING[id]) err(`${where} ${x.id}`, `ingredient "${id}" isn't in the registry`);
+        for (const [p, s] of strings({ name: x.name, hint: x.hint, examples: x.examples })) for (const w of blockedWordsIn(s, rules)) err(`${where} ${x.id}`, `${p} names a blocked food ("${w}")`);
+      }
+    }
+    const untagged = [];
+    const checkTags = (where, id, tags) => {
+      for (const p of tagProblems(tags, T)) err(where, `tags: ${p}`);
+      if (missingTags(tags).length) untagged.push(id);
+      // A written lesson's meat or fish is in its ingredients. The tag usually
+      // agrees; when it doesn't (eggs Benedict is eggs, with turkey on top),
+      // it's the owner's call, so it's a warning.
+      const L = byId[id];
+      if (L && tags?.protein) {
+        const meat = meatProtein(L, ING, T);
+        if (meat && tags.protein !== meat) warn(where, `tags: protein is "${tags.protein}", but the first meat or fish in the lesson is ${meat}`);
+      }
+    };
+    for (const d of dishes) checkTags(`course.json ${d.id}`, d.id, d.tags);
+    for (const L of lessons) if (SEASONAL.has(L.unit)) checkTags(`lessons/${L.id}.json`, L.id, L.tags);
+    if (untagged.length) warn('tags', `${untagged.length} dish${untagged.length === 1 ? ' has' : 'es have'} tags missing: ${untagged.join(', ')}`);
   }
 
   // hidden lessons (§7.5) name a written lesson or a planned dish

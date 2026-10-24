@@ -4,7 +4,8 @@
 
 // The parts, in the order she asks them. A family's progress is the last part
 // it finished (families.setup_step); she picks up at the one after.
-export const SETUP_STEPS = ['family', 'servings', 'diet', 'learners', 'logins', 'mode', 'course'];
+// tastes: the next release's (§6.21, §8.6); skipped for a family that doesn't have it.
+export const SETUP_STEPS = ['family', 'servings', 'diet', 'learners', 'logins', 'tastes', 'mode', 'course'];
 
 // The part after the one finished; null finished = start at the top. After the
 // last part there's none left, so Getting started is done.

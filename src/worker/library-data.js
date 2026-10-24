@@ -74,7 +74,29 @@ export const LIBRARY = {
    ],
    "unleavened": true,
    "feast": false,
-   "protein": "chicken"
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "lots"
+   },
+   "tasteItems": {
+    "required": [
+     "carrots",
+     "cucumber",
+     "mint",
+     "peanuts",
+     "lemon-lime"
+    ],
+    "optional": [
+     "cilantro"
+    ]
+   }
   },
   {
    "id": "chicken-fajitas",
@@ -162,7 +184,30 @@ export const LIBRARY = {
    ],
    "unleavened": false,
    "feast": false,
-   "protein": "chicken"
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "lemon-lime",
+     "bell-peppers",
+     "onions"
+    ],
+    "optional": [
+     "sour-cream-yogurt",
+     "avocado",
+     "cilantro"
+    ]
+   }
   },
   {
    "id": "shoestring-fries",
@@ -211,7 +256,23 @@ export const LIBRARY = {
    "substitutions": [],
    "unleavened": true,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "garlic"
+    ]
+   }
   },
   {
    "id": "fattoush",
@@ -297,7 +358,30 @@ export const LIBRARY = {
    ],
    "unleavened": false,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "herby-lemony",
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "lots"
+   },
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "cucumber",
+     "radish",
+     "onions",
+     "mint",
+     "lemon-lime",
+     "garlic"
+    ],
+    "optional": []
+   }
   },
   {
    "id": "chimichurri-steak",
@@ -358,7 +442,23 @@ export const LIBRARY = {
    "substitutions": [],
    "unleavened": true,
    "feast": false,
-   "protein": "beef"
+   "protein": "beef",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "garlic"
+    ],
+    "optional": []
+   }
   },
   {
    "id": "tuna-salad-sandwiches",
@@ -431,7 +531,30 @@ export const LIBRARY = {
    ],
    "unleavened": false,
    "feast": false,
-   "protein": "fish"
+   "protein": "fish",
+   "tags": {
+    "protein": "tuna",
+    "flavors": [
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "celery",
+     "onions",
+     "pickles",
+     "mayonnaise",
+     "mustard",
+     "lemon-lime"
+    ],
+    "optional": [
+     "tomatoes"
+    ]
+   }
   },
   {
    "id": "fish-tacos",
@@ -516,7 +639,31 @@ export const LIBRARY = {
    ],
    "unleavened": true,
    "feast": false,
-   "protein": "fish"
+   "protein": "fish",
+   "tags": {
+    "protein": "white-fish",
+    "flavors": [
+     "herby-lemony"
+    ],
+    "heat": "some",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "onions",
+     "cilantro",
+     "lemon-lime",
+     "garlic"
+    ],
+    "optional": [
+     "hot-peppers",
+     "cabbage",
+     "sour-cream-yogurt"
+    ]
+   }
   },
   {
    "id": "ratatouille",
@@ -590,7 +737,29 @@ export const LIBRARY = {
    "substitutions": [],
    "unleavened": true,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "rich-tomato",
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "lots"
+   },
+   "tasteItems": {
+    "required": [
+     "eggplant",
+     "zucchini",
+     "bell-peppers",
+     "onions",
+     "garlic",
+     "tomatoes"
+    ],
+    "optional": []
+   }
   },
   {
    "id": "minestrone",
@@ -672,7 +841,30 @@ export const LIBRARY = {
    ],
    "unleavened": true,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "rich-tomato"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "lots"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "carrots",
+     "celery",
+     "zucchini",
+     "garlic",
+     "tomatoes"
+    ],
+    "optional": [
+     "sharp-cheese"
+    ]
+   }
   },
   {
    "id": "chicken-caesar",
@@ -765,7 +957,28 @@ export const LIBRARY = {
    ],
    "unleavened": false,
    "feast": false,
-   "protein": "chicken"
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "tangy",
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "lots"
+   },
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "mayonnaise",
+     "lemon-lime",
+     "mustard",
+     "sharp-cheese"
+    ],
+    "optional": []
+   }
   },
   {
    "id": "smash-burgers",
@@ -847,7 +1060,26 @@ export const LIBRARY = {
    ],
    "unleavened": false,
    "feast": false,
-   "protein": "beef"
+   "protein": "beef",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "cucumber",
+     "onions"
+    ],
+    "optional": [
+     "mustard"
+    ]
+   }
   },
   {
    "id": "french-omelet",
@@ -890,7 +1122,21 @@ export const LIBRARY = {
    "substitutions": [],
    "unleavened": true,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "eggs",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   }
   },
   {
    "id": "grilled-cheese-tomato-soup",
@@ -967,7 +1213,26 @@ export const LIBRARY = {
    ],
    "unleavened": false,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "creamy-cheesy",
+     "rich-tomato"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic",
+     "tomatoes"
+    ],
+    "optional": []
+   }
   },
   {
    "id": "challah-french-toast",
@@ -1037,7 +1302,22 @@ export const LIBRARY = {
    ],
    "unleavened": false,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "eggs",
+    "flavors": [
+     "sweet-treats",
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   }
   },
   {
    "id": "hash-browns",
@@ -1089,7 +1369,21 @@ export const LIBRARY = {
    ],
    "unleavened": true,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   }
   },
   {
    "id": "shakshuka",
@@ -1162,7 +1456,29 @@ export const LIBRARY = {
    "substitutions": [],
    "unleavened": false,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "eggs",
+    "flavors": [
+     "rich-tomato",
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "bell-peppers",
+     "garlic",
+     "tomatoes"
+    ],
+    "optional": [
+     "feta"
+    ]
+   }
   },
   {
    "id": "spaghetti-marinara",
@@ -1233,7 +1549,27 @@ export const LIBRARY = {
    ],
    "unleavened": true,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "rich-tomato"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic",
+     "tomatoes"
+    ],
+    "optional": [
+     "sharp-cheese"
+    ]
+   }
   },
   {
    "id": "honey-garlic-chicken",
@@ -1309,7 +1645,28 @@ export const LIBRARY = {
    ],
    "unleavened": true,
    "feast": false,
-   "protein": "chicken"
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "sweet-savory",
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "ginger",
+     "onions"
+    ],
+    "optional": [
+     "sesame"
+    ]
+   }
   },
   {
    "id": "chicken-fried-rice",
@@ -1376,7 +1733,26 @@ export const LIBRARY = {
    ],
    "unleavened": true,
    "feast": false,
-   "protein": "chicken"
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic",
+     "peas",
+     "sesame"
+    ],
+    "optional": []
+   }
   },
   {
    "id": "oyakodon",
@@ -1444,7 +1820,24 @@ export const LIBRARY = {
    ],
    "unleavened": true,
    "feast": false,
-   "protein": "chicken"
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "ginger-soy",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "onions"
+    ],
+    "optional": []
+   }
   },
   {
    "id": "chicken-adobo",
@@ -1514,7 +1907,26 @@ export const LIBRARY = {
    ],
    "unleavened": true,
    "feast": false,
-   "protein": "chicken"
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "tangy",
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "garlic"
+    ],
+    "optional": [
+     "onions"
+    ]
+   }
   },
   {
    "id": "breakfast-burritos",
@@ -1587,7 +1999,23 @@ export const LIBRARY = {
    ],
    "unleavened": false,
    "feast": false,
-   "protein": "other"
+   "protein": "other",
+   "tags": {
+    "protein": "turkey",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "sour-cream-yogurt"
+    ]
+   }
   },
   {
    "id": "cacio-e-pepe",
@@ -1644,7 +2072,23 @@ export const LIBRARY = {
    ],
    "unleavened": true,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "sharp-cheese"
+    ],
+    "optional": []
+   }
   },
   {
    "id": "eggs-benedict",
@@ -1710,7 +2154,23 @@ export const LIBRARY = {
    ],
    "unleavened": false,
    "feast": false,
-   "protein": "other"
+   "protein": "other",
+   "tags": {
+    "protein": "eggs",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "lemon-lime"
+    ],
+    "optional": []
+   }
   },
   {
    "id": "mac-and-cheese",
@@ -1777,7 +2237,25 @@ export const LIBRARY = {
    ],
    "unleavened": true,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "garlic"
+    ],
+    "optional": [
+     "mustard"
+    ]
+   }
   },
   {
    "id": "chicken-spinach-crepes",
@@ -1852,7 +2330,25 @@ export const LIBRARY = {
    "substitutions": [],
    "unleavened": true,
    "feast": false,
-   "protein": "chicken"
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "spinach-greens",
+     "sharp-cheese"
+    ],
+    "optional": []
+   }
   },
   {
    "id": "japanese-chicken-curry",
@@ -1936,7 +2432,27 @@ export const LIBRARY = {
    ],
    "unleavened": true,
    "feast": false,
-   "protein": "chicken"
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic",
+     "ginger",
+     "carrots"
+    ],
+    "optional": []
+   }
   },
   {
    "id": "beef-bulgogi",
@@ -2012,7 +2528,27 @@ export const LIBRARY = {
    ],
    "unleavened": true,
    "feast": false,
-   "protein": "beef"
+   "protein": "beef",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "ginger-soy",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "ginger",
+     "sesame",
+     "onions"
+    ],
+    "optional": []
+   }
   },
   {
    "id": "buttermilk-biscuits",
@@ -2071,7 +2607,21 @@ export const LIBRARY = {
    "substitutions": [],
    "unleavened": false,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   }
   },
   {
    "id": "brown-butter-cookies",
@@ -2133,7 +2683,22 @@ export const LIBRARY = {
    "substitutions": [],
    "unleavened": false,
    "feast": false,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "sweet-treats",
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   }
   },
   {
    "id": "unleavened-flatbread",
@@ -2179,7 +2744,21 @@ export const LIBRARY = {
    "substitutions": [],
    "unleavened": true,
    "feast": true,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   }
   },
   {
    "id": "cottage-cheese-crescents",
@@ -2231,7 +2810,23 @@ export const LIBRARY = {
    "substitutions": [],
    "unleavened": true,
    "feast": true,
-   "protein": "vegetarian"
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "sweet-treats"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "cottage-cheese"
+    ],
+    "optional": []
+   }
   }
  ],
  "ingredients": {
@@ -2898,513 +3493,1834 @@ export const LIBRARY = {
    "title": "Fresh spring rolls",
    "unit": 1,
    "about": "Soft rice-paper rolls filled with crunchy vegetables, chicken, noodles, and mint, dipped in a peanut-hoisin sauce. Served cool, not fried.",
-   "pickOne": "julienne"
+   "skills": [
+    "julienne",
+    "rolling-wrapping"
+   ],
+   "pickOne": "julienne",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "lots"
+   }
   },
   {
    "id": "chicken-fajitas",
    "title": "Chicken fajitas",
    "unit": 1,
    "about": "Strips of seared chicken with peppers and onions, wrapped in warm tortillas with salsa and sour cream.",
-   "pickOne": "julienne"
+   "skills": [
+    "julienne",
+    "searing"
+   ],
+   "pickOne": "julienne",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
   },
   {
    "id": "shoestring-fries",
    "title": "Baked shoestring fries",
    "unit": 1,
    "about": "Thin, crispy potato sticks baked in the oven instead of fried.",
+   "skills": [
+    "julienne",
+    "oven-browning"
+   ],
    "pickOne": "julienne",
-   "meal": false
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "fattoush",
    "title": "Fattoush",
    "unit": 1,
    "about": "A crunchy Lebanese salad of chopped vegetables, herbs, and toasted pita pieces in a lemony dressing.",
-   "pickOne": "fine-chopping"
+   "skills": [
+    "fine-chopping",
+    "dressings"
+   ],
+   "pickOne": "fine-chopping",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "herby-lemony",
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "lots"
+   }
   },
   {
    "id": "chimichurri-steak",
    "title": "Chimichurri steak",
    "unit": 1,
    "about": "Seared steak topped with chimichurri, a bright Argentine sauce of chopped parsley, garlic, oregano, and vinegar.",
-   "pickOne": "fine-chopping"
+   "skills": [
+    "fine-chopping",
+    "searing"
+   ],
+   "pickOne": "fine-chopping",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "tuna-salad-sandwiches",
    "title": "Tuna salad sandwiches",
    "unit": 1,
    "about": "Classic tuna salad with finely chopped celery, onion, pickles, and herbs, on bread.",
-   "pickOne": "fine-chopping"
+   "skills": [
+    "fine-chopping"
+   ],
+   "pickOne": "fine-chopping",
+   "tags": {
+    "protein": "tuna",
+    "flavors": [
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "fish-tacos",
    "title": "Pico de gallo + Baja fish tacos",
    "unit": 1,
    "about": "Broiled white fish in tortillas with fresh pico de gallo, a chunky salsa of diced tomato, onion, and cilantro.",
-   "pickOne": "dicing"
+   "skills": [
+    "dicing",
+    "broiling"
+   ],
+   "pickOne": "dicing",
+   "tags": {
+    "protein": "white-fish",
+    "flavors": [
+     "herby-lemony"
+    ],
+    "heat": "some",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
   },
   {
    "id": "ratatouille",
    "title": "Ratatouille",
    "unit": 1,
    "about": "A French vegetable stew of diced eggplant, zucchini, peppers, and tomato, cooked slowly with herbs.",
-   "pickOne": "dicing"
+   "skills": [
+    "dicing",
+    "simmering"
+   ],
+   "pickOne": "dicing",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "rich-tomato",
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "lots"
+   }
   },
   {
    "id": "minestrone",
    "title": "Minestrone",
    "unit": 1,
    "about": "A hearty Italian vegetable soup with beans and small pasta.",
-   "pickOne": "dicing"
+   "skills": [
+    "dicing",
+    "simmering"
+   ],
+   "pickOne": "dicing",
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "rich-tomato"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "lots"
+   }
   },
   {
    "id": "chicken-caesar",
    "title": "Chicken Caesar + homemade dressing & croutons",
    "unit": 1,
-   "about": "Romaine salad with sliced chicken, a homemade creamy Caesar dressing, and crunchy homemade croutons."
+   "about": "Romaine salad with sliced chicken, a homemade creamy Caesar dressing, and crunchy homemade croutons.",
+   "skills": [
+    "dressings",
+    "dicing"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "tangy",
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "lots"
+   }
   },
   {
    "id": "smash-burgers",
    "title": "Smash burgers + quick pickles",
    "unit": 1,
-   "about": "Thin beef patties smashed onto a very hot pan for crispy edges, with quick homemade pickles."
+   "about": "Thin beef patties smashed onto a very hot pan for crispy edges, with quick homemade pickles.",
+   "skills": [
+    "thin-slicing",
+    "quick-pickling",
+    "searing"
+   ],
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "french-omelet",
    "title": "French-style omelet",
    "unit": 2,
    "about": "A soft, pale-yellow rolled omelet cooked gently over low heat. A breakfast dish.",
-   "pickOne": "heat-control"
+   "skills": [
+    "heat-control"
+   ],
+   "pickOne": "heat-control",
+   "tags": {
+    "protein": "eggs",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "grilled-cheese-tomato-soup",
    "title": "Grilled cheese + tomato soup",
    "unit": 2,
    "about": "Crispy, golden grilled cheese sandwiches with a smooth homemade tomato soup for dipping.",
-   "pickOne": "heat-control"
+   "skills": [
+    "heat-control",
+    "simmering"
+   ],
+   "pickOne": "heat-control",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "creamy-cheesy",
+     "rich-tomato"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
   },
   {
    "id": "challah-french-toast",
    "title": "Challah French toast",
    "unit": 2,
    "about": "Thick slices of challah soaked in a sweet egg custard and cooked golden. A breakfast dish.",
-   "pickOne": "heat-control"
+   "skills": [
+    "heat-control",
+    "batters"
+   ],
+   "pickOne": "heat-control",
+   "tags": {
+    "protein": "eggs",
+    "flavors": [
+     "sweet-treats",
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "hash-browns",
    "title": "Crispy hash browns",
    "unit": 2,
    "about": "Shredded potatoes squeezed dry and pan-fried into a crispy golden cake. A breakfast side.",
-   "meal": false
+   "skills": [
+    "crisping"
+   ],
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "shakshuka",
    "title": "Shakshuka",
    "unit": 2,
    "about": "Eggs gently cooked in a spiced tomato and pepper sauce, served in the pan with bread for dipping.",
-   "pickOne": "building-a-sauce"
+   "skills": [
+    "building-a-sauce",
+    "poaching-eggs"
+   ],
+   "pickOne": "building-a-sauce",
+   "tags": {
+    "protein": "eggs",
+    "flavors": [
+     "rich-tomato",
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
   },
   {
    "id": "spaghetti-marinara",
    "title": "Spaghetti marinara",
    "unit": 2,
    "about": "Spaghetti in a simple homemade tomato sauce with garlic and basil.",
-   "pickOne": "building-a-sauce"
+   "skills": [
+    "building-a-sauce",
+    "simmering"
+   ],
+   "pickOne": "building-a-sauce",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "rich-tomato"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
   },
   {
    "id": "honey-garlic-chicken",
    "title": "Honey-garlic chicken",
    "unit": 2,
    "about": "Bite-size chicken in a sticky, sweet-savory honey, garlic, and soy sauce, over rice.",
-   "pickOne": "building-a-sauce"
+   "skills": [
+    "building-a-sauce",
+    "reducing"
+   ],
+   "pickOne": "building-a-sauce",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "sweet-savory",
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "chicken-fried-rice",
    "title": "Chicken fried rice",
    "unit": 2,
-   "about": "Day-old rice stir-fried fast with chicken, egg, vegetables, and soy sauce."
+   "about": "Day-old rice stir-fried fast with chicken, egg, vegetables, and soy sauce.",
+   "skills": [
+    "stir-frying",
+    "dicing"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
   },
   {
    "id": "oyakodon",
    "title": "Oyakodon",
    "unit": 2,
-   "about": "A Japanese rice bowl of chicken and onion simmered in a sweet soy broth, with egg set gently on top."
+   "about": "A Japanese rice bowl of chicken and onion simmered in a sweet soy broth, with egg set gently on top.",
+   "skills": [
+    "simmering",
+    "poaching-eggs"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "ginger-soy",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "chicken-adobo",
    "title": "Chicken adobo",
    "unit": 2,
-   "about": "Filipino chicken braised in vinegar, soy sauce, garlic, and bay leaves until tender, then glazed. Served with rice."
+   "about": "Filipino chicken braised in vinegar, soy sauce, garlic, and bay leaves until tender, then glazed. Served with rice.",
+   "skills": [
+    "braising",
+    "reducing"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "tangy",
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "breakfast-burritos",
    "title": "Breakfast burritos",
    "unit": 2,
-   "about": "Flour tortillas rolled around scrambled eggs, crispy potatoes, beef or turkey sausage, and cheese."
+   "about": "Flour tortillas rolled around scrambled eggs, crispy potatoes, beef or turkey sausage, and cheese.",
+   "skills": [
+    "timing",
+    "rolling-wrapping"
+   ],
+   "tags": {
+    "protein": "turkey",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "cacio-e-pepe",
    "title": "Cacio e pepe",
    "unit": 2,
-   "about": "Roman pasta with a creamy sauce made only from cheese, black pepper, and starchy pasta water."
+   "about": "Roman pasta with a creamy sauce made only from cheese, black pepper, and starchy pasta water.",
+   "skills": [
+    "emulsions"
+   ],
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "eggs-benedict",
    "title": "Eggs Benedict",
    "unit": 2,
    "about": "Poached eggs on toasted English muffins with turkey bacon or smoked salmon, under a buttery hollandaise sauce.",
+   "skills": [
+    "poaching-eggs",
+    "emulsions"
+   ],
    "prereqs": [
     "cacio-e-pepe"
-   ]
+   ],
+   "tags": {
+    "protein": "eggs",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "mac-and-cheese",
    "title": "Stovetop mac and cheese",
    "unit": 2,
    "about": "Creamy macaroni in a homemade cheese sauce, made on the stove.",
-   "pickOne": "roux"
+   "skills": [
+    "roux"
+   ],
+   "pickOne": "roux",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "chicken-spinach-crepes",
    "title": "Chicken and spinach crêpes",
    "unit": 2,
    "about": "Thin French pancakes wrapped around chicken and spinach in a creamy white sauce.",
-   "pickOne": "roux"
+   "skills": [
+    "roux",
+    "batters"
+   ],
+   "pickOne": "roux",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
   },
   {
    "id": "japanese-chicken-curry",
    "title": "Japanese chicken curry",
    "unit": 2,
    "about": "A mild, thick Japanese curry with chicken, potatoes, and carrots over rice. The curry sauce is made from scratch.",
-   "pickOne": "roux"
+   "skills": [
+    "roux",
+    "blooming-spices"
+   ],
+   "pickOne": "roux",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
   },
   {
    "id": "chana-masala",
    "title": "Chana masala",
    "unit": 3,
-   "about": "An Indian chickpea curry in a spiced onion and tomato sauce, with rice."
+   "about": "An Indian chickpea curry in a spiced onion and tomato sauce, with rice.",
+   "skills": [
+    "blooming-spices",
+    "flavor-base"
+   ],
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   }
   },
   {
    "id": "beef-chili",
    "title": "Beef chili",
    "unit": 3,
-   "about": "A thick, hearty beef and bean chili with toasted spices."
+   "about": "A thick, hearty beef and bean chili with toasted spices.",
+   "skills": [
+    "searing",
+    "blooming-spices",
+    "simmering"
+   ],
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "warm-spices",
+     "rich-tomato"
+    ],
+    "heat": "some",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
   },
   {
    "id": "misir-wot",
    "title": "Misir wot",
    "unit": 3,
-   "about": "An Ethiopian red lentil stew, warmly spiced with berbere and slow-cooked onions. Served with rice."
+   "about": "An Ethiopian red lentil stew, warmly spiced with berbere and slow-cooked onions. Served with rice.",
+   "skills": [
+    "blooming-spices",
+    "simmering"
+   ],
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "warm-spices",
+     "chili-heat"
+    ],
+    "heat": "spicy",
+    "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   }
   },
   {
    "id": "red-beans-and-rice",
    "title": "Red beans and rice",
    "unit": 3,
-   "about": "A Louisiana dish of red beans simmered until creamy with onion, celery, pepper, and chicken andouille, over rice."
+   "about": "A Louisiana dish of red beans simmered until creamy with onion, celery, pepper, and chicken andouille, over rice.",
+   "skills": [
+    "flavor-base",
+    "simmering"
+   ],
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
   },
   {
    "id": "jollof-rice",
    "title": "Jollof rice with chicken",
    "unit": 3,
-   "about": "West African rice cooked in a blended tomato and pepper sauce until each grain is red and full of flavor, with chicken."
+   "about": "West African rice cooked in a blended tomato and pepper sauce until each grain is red and full of flavor, with chicken.",
+   "skills": [
+    "flavor-base",
+    "simmering"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "rich-tomato",
+     "chili-heat"
+    ],
+    "heat": "some",
+    "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   }
   },
   {
    "id": "bbq-pulled-chicken",
    "title": "BBQ pulled chicken + coleslaw",
    "unit": 3,
-   "about": "Chicken rubbed with spices, cooked until tender, shredded, and tossed in homemade barbecue sauce, with crunchy coleslaw."
+   "about": "Chicken rubbed with spices, cooked until tender, shredded, and tossed in homemade barbecue sauce, with crunchy coleslaw.",
+   "skills": [
+    "spice-rubs",
+    "reducing"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "smoky-bbq",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
   },
   {
    "id": "chicken-tagine",
    "title": "Chicken tagine with olives",
    "unit": 3,
-   "about": "A Moroccan stew of chicken slowly braised with spices, lemon, and green olives."
+   "about": "A Moroccan stew of chicken slowly braised with spices, lemon, and green olives.",
+   "skills": [
+    "blooming-spices",
+    "braising"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices",
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   }
   },
   {
    "id": "peanut-stew",
    "title": "Peanut stew (maafe)",
    "unit": 3,
-   "about": "Maafe, a West African stew of chicken and vegetables in a rich tomato and peanut-butter sauce, over rice."
+   "about": "Maafe, a West African stew of chicken and vegetables in a rich tomato and peanut-butter sauce, over rice.",
+   "skills": [
+    "one-pot-stews",
+    "flavor-base"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "rich-tomato",
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   }
   },
   {
    "id": "koshari",
    "title": "Koshari",
    "unit": 3,
-   "about": "Egypt's favorite street food: lentils, rice, and pasta layered with a spiced tomato sauce and crispy fried onions."
+   "about": "Egypt's favorite street food: lentils, rice, and pasta layered with a spiced tomato sauce and crispy fried onions.",
+   "skills": [
+    "layering",
+    "crisping"
+   ],
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "rich-tomato",
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "light"
+   }
   },
   {
    "id": "butter-chicken",
    "title": "Butter chicken",
    "unit": 3,
-   "about": "Marinated chicken in a mild, creamy, buttery tomato curry sauce, with rice."
+   "about": "Marinated chicken in a mild, creamy, buttery tomato curry sauce, with rice.",
+   "skills": [
+    "marinating",
+    "building-a-sauce"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices",
+     "creamy-cheesy"
+    ],
+    "heat": "some",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "jerk-chicken",
    "title": "Jerk chicken",
    "unit": 3,
-   "about": "Jamaican chicken marinated in a spicy, fragrant paste of peppers, allspice, and thyme, then broiled."
+   "about": "Jamaican chicken marinated in a spicy, fragrant paste of peppers, allspice, and thyme, then broiled.",
+   "skills": [
+    "marinating",
+    "broiling"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "chili-heat",
+     "warm-spices"
+    ],
+    "heat": "spicy",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "beef-bulgogi",
    "title": "Beef bulgogi",
    "unit": 4,
-   "about": "Korean thin-sliced beef in a sweet soy, pear, and garlic marinade, seared fast and served over rice."
+   "about": "Korean thin-sliced beef in a sweet soy, pear, and garlic marinade, seared fast and served over rice.",
+   "skills": [
+    "thin-slicing",
+    "marinating"
+   ],
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "ginger-soy",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "philly-cheesesteak",
    "title": "Philly cheesesteak",
    "unit": 4,
    "about": "Thin-sliced beef cooked with onions and peppers, piled into a roll with melted cheese.",
+   "skills": [
+    "thin-slicing",
+    "searing"
+   ],
    "prereqs": [
     "beef-bulgogi"
-   ]
+   ],
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
   },
   {
    "id": "lomo-saltado",
    "title": "Lomo saltado",
    "unit": 4,
-   "about": "A Peruvian beef stir-fry with onions, tomatoes, and soy sauce, served with fries and rice."
+   "about": "A Peruvian beef stir-fry with onions, tomatoes, and soy sauce, served with fries and rice.",
+   "skills": [
+    "stir-frying",
+    "thin-slicing"
+   ],
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "ginger-soy",
+     "tangy"
+    ],
+    "heat": "some",
+    "budget": "$$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   }
   },
   {
    "id": "suya",
    "title": "Suya (spiced beef skewers)",
    "unit": 4,
-   "about": "Nigerian beef skewers coated in a spicy ground-peanut rub, broiled and served with onion and tomato."
+   "about": "Nigerian beef skewers coated in a spicy ground-peanut rub, broiled and served with onion and tomato.",
+   "skills": [
+    "thin-slicing",
+    "spice-rubs",
+    "broiling"
+   ],
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "chili-heat",
+     "warm-spices"
+    ],
+    "heat": "spicy",
+    "budget": "$$",
+    "familiar": "adventurous",
+    "veggies": "light"
+   }
   },
   {
    "id": "chicken-yassa",
    "title": "Chicken yassa",
    "unit": 4,
-   "about": "Senegalese chicken marinated in lemon and mustard, cooked with a big pile of soft, sweet onions. Served with rice."
+   "about": "Senegalese chicken marinated in lemon and mustard, cooked with a big pile of soft, sweet onions. Served with rice.",
+   "skills": [
+    "marinating",
+    "flavor-base"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "tangy",
+     "herby-lemony"
+    ],
+    "heat": "some",
+    "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   }
   },
   {
    "id": "chicken-tinga-tacos",
    "title": "Chicken tinga tacos",
    "unit": 4,
-   "about": "Shredded chicken simmered in a smoky tomato and chipotle sauce, in tortillas."
+   "about": "Shredded chicken simmered in a smoky tomato and chipotle sauce, in tortillas.",
+   "skills": [
+    "braising",
+    "shredding"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "smoky-bbq",
+     "rich-tomato"
+    ],
+    "heat": "some",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
   },
   {
    "id": "matzo-ball-soup",
    "title": "Matzo ball soup from a whole chicken",
    "unit": 4,
-   "about": "A whole chicken simmered into golden broth, with soft matzo-meal dumplings."
+   "about": "A whole chicken simmered into golden broth, with soft matzo-meal dumplings.",
+   "skills": [
+    "breaking-down-chicken",
+    "making-stock"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
   },
   {
    "id": "blueberry-muffins",
    "title": "Blueberry muffins",
    "unit": 5,
    "about": "Tender, sweet muffins full of blueberries. A breakfast bake.",
-   "meal": false
+   "skills": [
+    "muffin-method"
+   ],
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "sweet-treats"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "skillet-cornbread",
    "title": "Skillet cornbread",
    "unit": 5,
    "about": "Golden cornbread baked in a hot skillet for a crispy edge. Pairs with chili.",
-   "meal": false
+   "skills": [
+    "skillet-baking",
+    "muffin-method"
+   ],
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "pao-de-queijo",
    "title": "Pão de queijo",
    "unit": 5,
    "about": "Brazilian cheese bread: chewy, puffy little rolls made with tapioca flour and cheese.",
-   "meal": false
+   "skills": [
+    "scalded-dough"
+   ],
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "skillet-naan",
    "title": "Skillet naan",
    "unit": 5,
    "about": "Soft Indian flatbread made with a yogurt dough and cooked in a very hot skillet.",
-   "meal": false
+   "skills": [
+    "flatbreads"
+   ],
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "pupusas",
    "title": "Pupusas",
    "unit": 5,
-   "about": "Salvadoran stuffed corn cakes filled with cheese and beans, cooked on a griddle, with a tangy cabbage slaw."
+   "about": "Salvadoran stuffed corn cakes filled with cheese and beans, cooked on a griddle, with a tangy cabbage slaw.",
+   "skills": [
+    "masa-dough"
+   ],
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "creamy-cheesy",
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   }
   },
   {
    "id": "ugali-sukuma-wiki",
    "title": "Ugali with sukuma wiki",
    "unit": 5,
-   "about": "Kenyan ugali, a firm cornmeal dish eaten by hand, with greens braised with tomato and onion."
+   "about": "Kenyan ugali, a firm cornmeal dish eaten by hand, with greens braised with tomato and onion.",
+   "skills": [
+    "stiff-porridge",
+    "braising"
+   ],
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "rich-tomato"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "lots"
+   }
   },
   {
    "id": "buttermilk-biscuits",
    "title": "Buttermilk biscuits",
    "unit": 5,
    "about": "Tall, flaky biscuits made with cold butter folded into layers. A breakfast bake.",
+   "skills": [
+    "cutting-in-fat",
+    "folding-layers"
+   ],
    "pickOne": "cutting-in-fat",
-   "meal": false
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "rugelach",
    "title": "Rugelach",
    "unit": 5,
    "about": "Small rolled pastries made with a butter and cream cheese dough, filled with jam, cinnamon sugar, and nuts.",
+   "skills": [
+    "cutting-in-fat",
+    "rolling-wrapping"
+   ],
    "pickOne": "cutting-in-fat",
-   "meal": false
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "sweet-treats"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "beef-empanadas",
    "title": "Baked beef empanadas",
    "unit": 5,
    "about": "Hand pies of buttery pastry filled with spiced beef, onion, and egg, crimped and baked.",
-   "pickOne": "cutting-in-fat"
+   "skills": [
+    "cutting-in-fat",
+    "filling-crimping"
+   ],
+   "pickOne": "cutting-in-fat",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "warm-spices"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "biscuits-and-gravy",
    "title": "Biscuits + sausage gravy",
    "unit": 5,
    "about": "Split biscuits smothered in a creamy, peppery gravy made with turkey sausage. A breakfast dish.",
+   "skills": [
+    "roux",
+    "gravy"
+   ],
    "prereqs": [
     "buttermilk-biscuits",
     "pick:roux"
-   ]
+   ],
+   "tags": {
+    "protein": "turkey",
+    "flavors": [
+     "mild-buttery",
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "gyoza",
    "title": "Gyoza",
    "unit": 5,
-   "about": "Japanese dumplings filled with seasoned chicken or beef and cabbage, pleated by hand, then fried and steamed."
+   "about": "Japanese dumplings filled with seasoned chicken or beef and cabbage, pleated by hand, then fried and steamed.",
+   "skills": [
+    "pleating",
+    "crisping"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
   },
   {
    "id": "cinnamon-rolls",
    "title": "Cinnamon rolls",
    "unit": 5,
    "about": "Soft yeast-dough spirals filled with cinnamon sugar and topped with icing. A breakfast bake.",
+   "skills": [
+    "yeast-dough"
+   ],
    "pickOne": "yeast-dough",
-   "meal": false
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "sweet-treats"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "challah",
    "title": "Challah",
    "unit": 5,
    "about": "A soft, slightly sweet braided bread made with eggs and honey.",
+   "skills": [
+    "yeast-dough"
+   ],
    "pickOne": "yeast-dough",
-   "meal": false
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "homemade-pizza",
    "title": "Homemade pizza",
    "unit": 5,
    "about": "Pizza on a homemade yeast crust, stretched by hand, with tomato sauce and cheese.",
-   "pickOne": "yeast-dough"
+   "skills": [
+    "yeast-dough"
+   ],
+   "pickOne": "yeast-dough",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "rich-tomato",
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "granola",
    "title": "Homemade granola",
    "unit": 6,
    "about": "Crunchy oven-toasted oats, nuts, and honey. A breakfast dish.",
-   "meal": false
+   "skills": [
+    "oven-browning"
+   ],
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "sweet-treats"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "meatloaf",
    "title": "Meatloaf with glaze",
    "unit": 6,
-   "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer."
+   "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.",
+   "skills": [
+    "binders"
+   ],
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "sweet-savory",
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "swedish-meatballs",
    "title": "Swedish meatballs",
    "unit": 6,
    "about": "Small beef meatballs in a creamy brown gravy, with cranberry sauce on the side.",
+   "skills": [
+    "searing",
+    "roux",
+    "gravy"
+   ],
    "prereqs": [
     "pick:roux"
-   ]
+   ],
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "creamy-cheesy",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "roast-chicken",
    "title": "Roast chicken + pan gravy",
    "unit": 6,
    "about": "A whole chicken roasted until golden and juicy, carved at the table, with gravy made from the pan drippings.",
+   "skills": [
+    "roasting",
+    "gravy"
+   ],
    "prereqs": [
     "pick:roux"
-   ]
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "herby-lemony",
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "pot-roast",
    "title": "Pot roast",
    "unit": 6,
-   "about": "Beef chuck braised for hours in the oven with carrots, potatoes, and onion until fall-apart tender."
+   "about": "Beef chuck braised for hours in the oven with carrots, potatoes, and onion until fall-apart tender.",
+   "skills": [
+    "braising"
+   ],
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
   },
   {
    "id": "bobotie",
    "title": "Bobotie",
    "unit": 6,
-   "about": "South Africa's national dish: curry-spiced ground beef with dried fruit, baked under a golden egg custard."
+   "about": "South Africa's national dish: curry-spiced ground beef with dried fruit, baked under a golden egg custard.",
+   "skills": [
+    "custards",
+    "blooming-spices"
+   ],
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "warm-spices",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "adventurous",
+    "veggies": "light"
+   }
   },
   {
    "id": "spanakopita",
    "title": "Spanakopita",
    "unit": 6,
-   "about": "A Greek pie of flaky phyllo pastry layered around a spinach and feta filling."
+   "about": "A Greek pie of flaky phyllo pastry layered around a spinach and feta filling.",
+   "skills": [
+    "layered-pastry"
+   ],
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "herby-lemony",
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "lots"
+   }
   },
   {
    "id": "spinach-mushroom-quiche",
    "title": "Spinach & mushroom quiche",
    "unit": 6,
-   "about": "A savory pie with homemade pastry and a creamy egg filling with spinach and mushrooms."
+   "about": "A savory pie with homemade pastry and a creamy egg filling with spinach and mushrooms.",
+   "skills": [
+    "pastry",
+    "custards"
+   ],
+   "tags": {
+    "protein": "eggs",
+    "flavors": [
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
   },
   {
    "id": "chicken-pot-pie",
    "title": "Chicken pot pie",
    "unit": 6,
    "about": "Chicken and vegetables in a creamy sauce, baked under a golden pie crust.",
+   "skills": [
+    "roux",
+    "pastry"
+   ],
    "prereqs": [
     "pick:roux",
     "spinach-mushroom-quiche"
-   ]
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "creamy-cheesy",
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   }
   },
   {
    "id": "chicken-katsu",
    "title": "Chicken katsu",
    "unit": 6,
-   "about": "Japanese crispy breaded chicken cutlets, shallow-fried, with a tangy sauce and rice."
+   "about": "Japanese crispy breaded chicken cutlets, shallow-fried, with a tangy sauce and rice.",
+   "skills": [
+    "breading-frying"
+   ],
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "mild-buttery",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
   },
   {
    "id": "kelewele",
    "title": "Kelewele (spiced plantains)",
    "unit": 6,
    "about": "Ghanaian fried plantain cubes tossed in ginger and spice. Sweet, spicy, and crisp.",
-   "meal": false
+   "skills": [
+    "crisping",
+    "spice-rubs"
+   ],
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "chili-heat",
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "light"
+   }
   },
   {
    "id": "fish-and-chips",
    "title": "Fish and chips",
    "unit": 6,
-   "about": "British battered white fish deep-fried until crisp, with thick-cut chips."
+   "about": "British battered white fish deep-fried until crisp, with thick-cut chips.",
+   "skills": [
+    "batters",
+    "deep-frying"
+   ],
+   "tags": {
+    "protein": "white-fish",
+    "flavors": [
+     "mild-buttery",
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "brown-butter-cookies",
    "title": "Brown butter chocolate chip cookies",
    "unit": 7,
    "about": "Chocolate chip cookies made with browned butter for a toasty, nutty flavor.",
-   "meal": false
+   "skills": [
+    "browning-butter",
+    "creaming"
+   ],
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "sweet-treats",
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   },
   {
    "id": "malva-pudding",
    "title": "Malva pudding",
    "unit": 7,
    "about": "A soft South African sponge cake with apricot jam, soaked in a warm butter-cream sauce.",
-   "meal": false
+   "skills": [
+    "batters",
+    "custards"
+   ],
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "sweet-treats"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "light"
+   }
   },
   {
    "id": "churros",
    "title": "Churros with chocolate",
    "unit": 7,
    "about": "Crisp fried dough sticks rolled in cinnamon sugar, with warm chocolate for dipping.",
-   "meal": false
+   "skills": [
+    "scalded-dough",
+    "deep-frying"
+   ],
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "sweet-treats"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   }
   },
   {
    "id": "apple-pie",
    "title": "Apple pie with lattice",
    "unit": 7,
    "about": "A classic apple pie with a homemade woven lattice crust.",
+   "skills": [
+    "pastry"
+   ],
    "prereqs": [
     "spinach-mushroom-quiche"
    ],
-   "meal": false
+   "meal": false,
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "sweet-treats"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "light"
+   }
   }
- ]
+ ],
+ "tastes": {
+  "proteins": [
+   {
+    "id": "chicken",
+    "name": "Chicken"
+   },
+   {
+    "id": "turkey",
+    "name": "Turkey"
+   },
+   {
+    "id": "beef",
+    "name": "Beef"
+   },
+   {
+    "id": "lamb",
+    "name": "Lamb"
+   },
+   {
+    "id": "white-fish",
+    "name": "White fish (cod, tilapia)"
+   },
+   {
+    "id": "salmon",
+    "name": "Salmon"
+   },
+   {
+    "id": "tuna",
+    "name": "Tuna"
+   },
+   {
+    "id": "eggs",
+    "name": "Eggs"
+   },
+   {
+    "id": "beans-lentils",
+    "name": "Beans and lentils"
+   },
+   {
+    "id": "tofu",
+    "name": "Tofu"
+   }
+  ],
+  "flavors": [
+   {
+    "id": "warm-spices",
+    "name": "Warm, earthy spices"
+   },
+   {
+    "id": "chili-heat",
+    "name": "Chili heat"
+   },
+   {
+    "id": "ginger-soy",
+    "name": "Ginger, garlic, and soy"
+   },
+   {
+    "id": "herby-lemony",
+    "name": "Herby and lemony"
+   },
+   {
+    "id": "smoky-bbq",
+    "name": "Smoky and barbecue"
+   },
+   {
+    "id": "creamy-cheesy",
+    "name": "Creamy and cheesy"
+   },
+   {
+    "id": "tangy",
+    "name": "Tangy and pickled"
+   },
+   {
+    "id": "sweet-savory",
+    "name": "Sweet and savory"
+   },
+   {
+    "id": "rich-tomato",
+    "name": "Rich tomato"
+   },
+   {
+    "id": "coconut-tropical",
+    "name": "Coconut and tropical"
+   },
+   {
+    "id": "mild-buttery",
+    "name": "Mild and buttery"
+   },
+   {
+    "id": "sweet-treats",
+    "name": "Sweet treats"
+   }
+  ],
+  "ingredients": [
+   {
+    "id": "mushrooms",
+    "name": "Mushrooms"
+   },
+   {
+    "id": "olives",
+    "name": "Olives"
+   },
+   {
+    "id": "cilantro",
+    "name": "Cilantro"
+   },
+   {
+    "id": "mint",
+    "name": "Mint"
+   },
+   {
+    "id": "onions",
+    "name": "Onions"
+   },
+   {
+    "id": "garlic",
+    "name": "Garlic"
+   },
+   {
+    "id": "ginger",
+    "name": "Ginger"
+   },
+   {
+    "id": "tomatoes",
+    "name": "Tomatoes"
+   },
+   {
+    "id": "bell-peppers",
+    "name": "Bell peppers"
+   },
+   {
+    "id": "hot-peppers",
+    "name": "Hot peppers"
+   },
+   {
+    "id": "eggplant",
+    "name": "Eggplant"
+   },
+   {
+    "id": "zucchini",
+    "name": "Zucchini"
+   },
+   {
+    "id": "spinach-greens",
+    "name": "Spinach and leafy greens"
+   },
+   {
+    "id": "cabbage",
+    "name": "Cabbage and coleslaw"
+   },
+   {
+    "id": "avocado",
+    "name": "Avocado"
+   },
+   {
+    "id": "cucumber",
+    "name": "Cucumber"
+   },
+   {
+    "id": "radish",
+    "name": "Radish"
+   },
+   {
+    "id": "peas",
+    "name": "Peas"
+   },
+   {
+    "id": "carrots",
+    "name": "Carrots"
+   },
+   {
+    "id": "celery",
+    "name": "Celery"
+   },
+   {
+    "id": "corn",
+    "name": "Corn"
+   },
+   {
+    "id": "sweet-potato",
+    "name": "Sweet potato"
+   },
+   {
+    "id": "chickpeas",
+    "name": "Chickpeas"
+   },
+   {
+    "id": "coconut",
+    "name": "Coconut"
+   },
+   {
+    "id": "peanuts",
+    "name": "Peanuts and peanut butter"
+   },
+   {
+    "id": "sesame",
+    "name": "Sesame"
+   },
+   {
+    "id": "feta",
+    "name": "Feta and tangy cheeses"
+   },
+   {
+    "id": "sharp-cheese",
+    "name": "Parmesan and sharp cheeses"
+   },
+   {
+    "id": "cottage-cheese",
+    "name": "Cottage cheese"
+   },
+   {
+    "id": "sour-cream-yogurt",
+    "name": "Sour cream and yogurt"
+   },
+   {
+    "id": "mayonnaise",
+    "name": "Mayonnaise"
+   },
+   {
+    "id": "mustard",
+    "name": "Mustard"
+   },
+   {
+    "id": "pickles",
+    "name": "Pickles"
+   },
+   {
+    "id": "capers",
+    "name": "Capers"
+   },
+   {
+    "id": "dried-fruit",
+    "name": "Raisins and dried fruit in savory food"
+   },
+   {
+    "id": "cinnamon-savory",
+    "name": "Cinnamon in savory food"
+   },
+   {
+    "id": "fish-sauce",
+    "name": "Fish sauce and anchovy"
+   },
+   {
+    "id": "lemon-lime",
+    "name": "Lemon and lime"
+   }
+  ]
+ }
 };

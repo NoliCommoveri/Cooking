@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [129. 2026-10-23 — The Next release switch and the draft migration](docs/build-log.md#129-2026-10-23--the-next-release-switch-and-the-draft-migration)
+**Latest build log entry:** [135. 2026-10-24 — Star ratings and Our tastes (slice 11b)](docs/build-log.md#135-2026-10-24--star-ratings-and-our-tastes-slice-11b)
 
 ## Current features
 
@@ -52,7 +52,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN. Each list's add button is at its top right, and adding opens a dialog (a course or recipe opens its own page); long sections fold shut.
 - **Owner screens**: the beta word, the family list, setting a parent's password, fix requests, recipe reviews, and reported recipes.
 - **Ops page** (`/ops`): migrations (with Re-apply draft, Restore draft tables, and Finalize for the next release's draft migration), the Next release switch (preview per family, Launch for everyone, Undo launch), the owner flag, whether GitHub is connected for the manager section, backup download and restore, clear everything, remove or restore one family, and Bring back a family its parents deleted, within its 30 days.
-- **Manager section** (`/manage`, `src/worker/manage.js`, `public/manage/`): the owner's own sign-in. Add, rename, reorder, and remove units; add lessons (blank or a copy), move, hide, and unhide them; edit every part of a lesson in a form built from the lesson schema; edit ingredients, tools, skills, kitchen words, cuisines, and the food rules; upload dish pictures. Checked as you type by the content linter. **Preview as a learner** runs a lesson in either theme, unsaved changes included, with no checklist to tick and nothing saved.
+- **Manager section** (`/manage`, `src/worker/manage.js`, `public/manage/`): the owner's own sign-in. Add, rename, reorder, and remove units; add lessons (blank or a copy), move, hide, and unhide them; edit every part of a lesson in a form built from the lesson schema; edit ingredients, tools, skills, kitchen words, cuisines, tastes, and the food rules; tag every dish on the Tags page; upload dish pictures. Checked as you type by the content linter. **Preview as a learner** runs a lesson in either theme, unsaved changes included, with no checklist to tick and nothing saved.
 - **Saving content** (`src/worker/github.js`, `.github/workflows/content-publish.yml`): a save is checked again and committed to the `content-edits` branch; GitHub builds, lints, and tests it and puts it on `main`, which deploys. **Saves** shows each one's status, with Undo; a lesson's History loads any earlier version.
 - **Hidden lessons** (`content/hidden.json`): out of the library, the course numbers, and every family's course plan until unhidden.
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
@@ -60,6 +60,8 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
 - **Lesson content** (`content/`): 32 lessons (all 11 of Unit 1, all 16 of Unit 2, 3 more samples, and the 2 Appointed Times lessons), and the ingredient, tool, skill (52), and cuisine lists, as JSON.
 - **Content linter** (`tools/lint-content.js`): checks every lesson against the food rules, including the unclean-food block, the food-safety steps, and scaling. Runs on every push, on every save from the manager section, and in the browser as the owner edits.
+- **Our tastes** (next release only, `src/worker/tastes.js`, `public/tastes.js`): each profile rates proteins, flavors, and key ingredients from 1 to 5 stars (one absolute favorite per list) or Haven't tried, and the family sets its time, budget, tools, and how adventurous. Also in Getting started and as Chef Ruth's "Ask what we like to eat".
+- **Tastes and tags** (`content/tastes.json`, `src/content/tastes.js`): the proteins, flavors (with example dishes), and key ingredients families will rate, and every dish's protein, flavors, heat, budget, familiarity, and vegetables tags. Not shown to families yet.
 - **Content file layout** (`tools/format-content.js`): every content file in the one layout the manager section writes.
 - **Scaling** (`src/content/`): amounts and step counts change with the serving size, shown in measuring-cup and spoon amounts.
 - **Lesson preview** (`preview/lesson-preview.html`): each written lesson, read-only, at every serving size. Tap an underlined kitchen word to see what it means.

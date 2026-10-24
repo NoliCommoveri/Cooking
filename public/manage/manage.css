@@ -87,3 +87,13 @@ fieldset.mf-obj,fieldset.mf-list{border-left:3px solid var(--h-line);padding-lef
 .mf-fold>summary{cursor:pointer;font-weight:700;min-height:40px;display:flex;align-items:center}
 .mf-fold[open]>summary{margin-bottom:8px;color:var(--h-mut)}
 .pv-pick{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.pv-pick .seg{margin:0}
+/* Tags (§6.21): one card per dish on the Tags page, and on each dish card */
+.mtag-list{display:grid;gap:12px}
+.mtag-dish{gap:10px}
+.mtag-dish h2{margin:0;font-size:19px}
+.mtag-fields{display:grid;gap:12px}
+.mtag-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.mtag-grid select{width:100%}
+.mtag-flavors{display:flex;flex-wrap:wrap;gap:6px}
+.mtag-chip{min-height:44px;padding:4px 10px;border:1.5px solid var(--h-line);border-radius:10px}
+.mtag-chip:has(input:disabled){opacity:.5}

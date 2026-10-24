@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { loadContent } from '../tools/lint-content.js';
 import { lint } from '../src/content/lint.js';
 import { blockedWordsIn, uncleanReasons } from '../src/content/rules.js';
+import { tasteItemsIn, meatProtein, tagProblems, missingTags } from '../src/content/tastes.js';
 
 const base = loadContent();
 // A fresh copy of the real content, changed by `fn`, then linted.
@@ -151,3 +152,41 @@ test('the course outline is checked against the registries and the lessons', () 
   assert.match(broken((c) => { c.terms[0].taughtIn = 'nope'; }), /taughtIn "nope" isn't a dish/);
 });
 
+
+// ---------- tastes and tags (plan §6.21) ----------
+
+test('every dish is tagged in the real content', () => {
+  assert.ok(!lint(base).warnings.some((w) => w.startsWith('tags:')), 'no dish is missing tags');
+});
+
+test('tags must use the tastes lists and the fixed levels', () => {
+  const dish = (c, id) => c.course.dishes.find((d) => d.id === id);
+  assert.match(broken((c) => { dish(c, 'shakshuka').tags.flavors = ['bitter']; }), /flavor "bitter" isn't in tastes.json/);
+  assert.match(broken((c) => { dish(c, 'shakshuka').tags.heat = 'volcanic'; }), /heat "volcanic"/);
+  assert.match(broken((c) => { dish(c, 'shakshuka').tags.protein = 'pork'; }), /protein "pork" isn't in tastes.json/);
+  assert.match(broken((c) => { dish(c, 'shakshuka').tags.flavors = ['rich-tomato', 'tangy', 'warm-spices', 'smoky-bbq']; }), /1 to 3 flavors/);
+  assert.match(broken((c) => { dish(c, 'shakshuka').tags.colour = 'red'; }), /"colour" isn't a tag/);
+  assert.match(broken((c) => { dish(c, 'shakshuka').tags.veggies = 'heaps'; }), /veggies "heaps"/);
+});
+
+test('the tastes lists name real ingredients and no unclean food', () => {
+  assert.match(broken((c) => { c.tastes.ingredients[0].ingredients.push('dragonfruit'); }), /ingredient "dragonfruit" isn't in the registry/);
+  assert.match(broken((c) => { c.tastes.flavors[0].examples.push('sweet and sour pork'); }), /names a blocked food \("pork"\)/);
+  assert.match(broken((c) => { c.tastes.proteins.push({ ...c.tastes.proteins[0] }); }), /used twice/);
+});
+
+test('a written lesson\'s meat is checked against its protein tag', () => {
+  const c = structuredClone({ ...base, imageExists: undefined });
+  c.course.dishes.find((d) => d.id === 'beef-bulgogi').tags.protein = 'chicken';
+  assert.ok(lint(c).warnings.some((w) => /beef-bulgogi: tags: protein is "chicken", but the first meat or fish in the lesson is beef/.test(w)));
+});
+
+test('taste items and meat are worked out from the ingredients', () => {
+  const registry = Object.fromEntries(base.ingredients.map((i) => [i.id, i]));
+  const L = { ingredients: [{ ingredient: 'broth-chicken' }, { ingredient: 'beef-ground' }, { ingredient: 'cilantro', optional: true }, { ingredient: 'onion-yellow' }] };
+  assert.equal(meatProtein(L, registry, base.tastes), 'beef', 'broth is not the protein');
+  assert.deepEqual(tasteItemsIn(L, base.tastes.ingredients), { required: ['onions'], optional: ['cilantro'] });
+  assert.equal(meatProtein({ ingredients: [{ ingredient: 'egg' }] }, registry, base.tastes), null);
+  assert.deepEqual(missingTags({ protein: 'none', flavors: [] }), ['flavors', 'heat', 'budget', 'familiar', 'veggies']);
+  assert.deepEqual(tagProblems(undefined, base.tastes), []);
+});

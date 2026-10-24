@@ -52,6 +52,9 @@
     "about": { "$ref": "#/$defs/text" },
     "main": { "type": "array", "items": { "$ref": "#/$defs/text" } },
     "method": { "enum": ["stove", "oven", "stove-oven", "no-cook"] },
+    "tags": { "type": "object", "additionalProperties": false, "properties": {
+      "protein": { "$ref": "#/$defs/id" }, "flavors": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+      "heat": { "enum": ["mild", "some", "spicy"] }, "budget": { "enum": ["$", "$$", "$$$"] }, "familiar": { "enum": ["everyday", "new-ish", "adventurous"] }, "veggies": { "enum": ["light", "some", "lots"] } } },
     "feast": { "type": "boolean" },
     "title": { "$ref": "#/$defs/text" },
     "image": { "$ref": "#/$defs/text" },

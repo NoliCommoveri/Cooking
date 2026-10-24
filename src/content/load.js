@@ -4,8 +4,9 @@
 // `images` lists the pictures under content/images/ ("dishes/shakshuka.png").
 // The command-line tools read the folder from disk, and the Worker reads the
 // same files from its bundle and from GitHub (§7.5), so both check one way.
+import { tastesOf } from './tastes.js';
 
-export const REGISTRY_FILES = ['ingredients.json', 'equipment.json', 'skills.json', 'cuisines.json', 'units.json', 'terms.json'];
+export const REGISTRY_FILES = ['ingredients.json', 'equipment.json', 'skills.json', 'cuisines.json', 'units.json', 'terms.json', 'tastes.json'];
 
 export function contentFromFiles(files, images = null) {
   const r = (f) => {
@@ -23,6 +24,8 @@ export function contentFromFiles(files, images = null) {
     registryFiles, lessons,
     ingredients: all.ingredients, equipment: all.equipment, terms: all.terms, watchedWords: r('rules/kitchen-words.json').words,
     skills: all.skills, cuisines: all.cuisines, regions: all.regions, units: all.units, course: r('course.json'),
+    // What profiles rate, and the words dishes are tagged in (§6.21).
+    tastes: tastesOf(all),
     // Lessons the owner hid from every family (§7.5). Their files stay, so unhiding brings them back.
     hidden: files['hidden.json']?.lessons ?? [],
     rules: {

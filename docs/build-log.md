@@ -3266,3 +3266,122 @@ switched off, with one migration.
   browser at phone width on the dev server: the Next release section, a
   family's preview button, the draft page, and the Preview note on Family
   settings.
+
+## 130. 2026-10-24 — Plan: ratings, variations, and the phase 11 slices
+
+Design only. Plan §6.21 rewritten from the owner's decisions:
+- **Ratings, not yes or no:** 4 stars (love) to 1 (hate), or Haven't tried,
+  **per profile**. No country list, since many people haven't tried a
+  cuisine: profiles rate 11 **flavors, each shown with example dishes**
+  (common dishes, recipe or not, all normally made clean), plus 10 proteins
+  and about 35 key ingredients. Cuisines are learned from Reflect ratings.
+  Time, budget, tools, and how adventurous stay per-family limits. Claude
+  drafted the lists; they'll live in `content/tastes.json` for the owner to
+  edit.
+- **Variations instead of "use this instead":** a full version of a lesson
+  with the preference built in (protein, amounts, doneness target, steps,
+  shopping list), counted as the same lesson, tagged and scored on its own,
+  and linted as a whole lesson.
+- **Scoring:** anyone's 1 star on the main protein or a required ingredient
+  rules a version out; the rest are scored from everyone's stars. The gaps
+  page suggests a variation first when one ingredient is the problem.
+- Data model: `profile_ratings`, `family_limits`, `taste_learned` replace
+  `family_tastes`. Phase 11 is split into 11a tags, 11b ratings,
+  11c variations, 11d scoring and picks, 11e Recipe gaps.
+
+## 131. 2026-10-24 — Plan: five stars and one absolute favorite
+
+Design only. The owner found a 4-star scale confusing: ratings are now
+5 stars (absolute favorite) to 1 (hate), or Haven't tried, and a profile has
+at most one 5-star item in each list (proteins, flavors, ingredients); a new
+5-star asks to move the old one to 4. Plan §6.21 and §8.4 updated.
+
+## 132. 2026-10-24 — Tags and tastes (slice 11a)
+
+Phase 11, slice 11a (plan §6.21): the shared words ratings, picks, and gaps
+will use. Nothing here is shown to families.
+- **`content/tastes.json`**, a new registry file: 10 proteins, 11 flavors
+  (each with a hint and example dishes, all normally made clean), and 38 key
+  ingredients. A protein or key ingredient lists the registry ingredients it
+  covers. Validated by `registries.schema.json` (`tasteProteins`,
+  `tasteFlavors`, `tasteIngredients`).
+- **Tags** (`tags` with `protein`, `flavors`, `heat`, `budget`,
+  `familiar`) on every `course.json` dish and on the two Appointed Times
+  lessons (`lesson.schema.json`). Claude drafted all 77 for the owner to
+  review. Breads and desserts use "Mild and buttery" for now.
+- **`src/content/tastes.js`** (also in `public/lib/`): the fixed levels,
+  tag checks, the key ingredients a lesson uses, and a written lesson's first
+  meat or fish.
+- **Linter:** refuses unknown tags, more than 3 flavors, a taste item naming
+  an ingredient not in the registry, and blocked words in taste names and
+  example dishes; warns when a dish is missing tags, or when a written
+  lesson's protein tag differs from its first meat or fish (eggs Benedict:
+  eggs, with turkey on top).
+- **Build:** `library-data.js` lessons carry `tags` and `tasteItems`; its
+  course list carries each dish's skills and tags; `tastes` lists the ids and
+  names.
+- **Content editor:** a **Tastes** tab (the three lists, with ingredient
+  pickers), a **Tags** tab (every dish as a card: protein, heat, budget, how
+  familiar, and up to 3 flavors; a filter for dishes still to tag), and the
+  same fields on the lesson editor's dish card and the planned-dish dialog.
+- `course.json` now uses the layout `tools/format-content.js` writes for long
+  entries (one field per line), since tagged dishes no longer fit one line.
+- Tests: 281 (5 new). Checked in a browser at phone width on the dev server:
+  the Tags page and a change staging a save, the Tastes list, and the tags on
+  Shakshuka's dish card.
+
+## 133. 2026-10-24 — A Sweet treats flavor
+
+The owner added a 12th flavor, **Sweet treats** (cookies, cakes, pastries,
+sweet breads), so desserts no longer borrow "Mild and buttery". Re-tagged:
+blueberry muffins, rugelach, cinnamon rolls, granola, brown butter cookies,
+malva pudding, churros, apple pie, challah French toast, and cottage cheese
+crescents. Plan §6.21 updated.
+
+## 134. 2026-10-24 — A vegetables tag
+
+Nothing told the app which dishes are mostly vegetables, so a fattoush and a
+mac and cheese looked alike. The owner chose a separate tag over a 13th
+flavor:
+- **`veggies`** (light, some, lots) on every dish's tags, checked by the
+  linter and set on the Tags page and dish cards. Drafted for all 77: lots
+  for 7 (spring rolls, fattoush, ratatouille, minestrone, chicken Caesar,
+  ugali and sukuma wiki, spanakopita), some for 27, light for 43.
+- **Meals heavy on vegetables** (`VEGGIE_RATING` in `src/content/tastes.js`)
+  is the item profiles will rate for it in slice 11b, matched against this
+  tag. Plan §6.21 updated.
+- Tests: 281. Not checked in a browser this time: the new field uses the
+  same select as the others on the Tags page.
+
+## 135. 2026-10-24 — Star ratings and Our tastes (slice 11b)
+
+Phase 11, slice 11b (plan §6.21), all behind the Next release switch (§8.6):
+- **Draft migration `0003_next_release.sql`:** `profile_ratings` (one row per
+  profile per item: 1 to 5 stars, or NULL for Haven't tried) and
+  `family_limits` (time, budget, missing tools, how adventurous). After the
+  deploy the owner presses **Re-apply draft** on `/ops/draft/0003` (it has no
+  rows to lose yet).
+- **API** (`src/worker/tastes.js`), parents only, and 404 for a family
+  without the next release: `GET /api/tastes` (the lists with example
+  dishes, every profile's ratings, the limits, the tool choices),
+  `PUT /api/profiles/<id>/ratings` (one rating; a second absolute favorite
+  in a list is refused with 409 unless `replace`, which moves the old one to
+  4), `PUT /api/tastes/limits`. A deleted profile's ratings go with it; a
+  family's ratings are in Download our data and go with the family.
+- **`src/content/tastes.js`:** the star words, the limits' choices, the tool
+  choices (from the equipment registry), and `ratingItems` (the flavors list
+  ends with Meals heavy on vegetables).
+- **Our tastes** (Menu → Setup, next-release families only): limits, a
+  profile picker, and Proteins, Flavors (each with its examples), and Key
+  ingredients as star rows (`public/tastes.js`). Every tap saves; tapping a
+  rating again clears it.
+- **Getting started:** a new `tastes` part after Logins for kids (skipped
+  for families without the next release): the limits, then each profile's
+  proteins. **Chef Ruth:** "Ask what we like to eat", five unrated items at a
+  time for one profile.
+- Not built: the kid's taste quiz in the kitchen, moved to slice 11d.
+- Tests: 287 (6 new in `test/worker-tastes.test.js`; the Getting started
+  order test updated). Checked in a browser at phone width on the dev
+  server: Our tastes with the limits, rating, the favorite question and
+  moving it, Haven't tried, the Flavors list, and Chef Ruth rating five
+  proteins. Getting started's tastes part wasn't run in a browser.

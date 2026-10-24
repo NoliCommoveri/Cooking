@@ -913,29 +913,75 @@ The fixed February 1 to May 15 window (§6.19) is replaced by **each family's ow
   - **Level 3 setup:** a Level course whose bread weeks would land on the unleavened days says so when it's set up (§12).
 - **Stored** in a new table, `unleavened_dates` (§8.4), created by the next release's draft migration (§8.6); nothing to set up by hand.
 
-### 6.21 Family tastes and the recipe pool — Requirement (owner, 2026-10-23)
-Families tell the app what they like, the app picks dishes to match, and what it can't match tells the owner which recipes to write next. **"We can always add more recipes"** (owner, 2026-10-23): a preference can really leave dishes out; a gap is fixed by writing a dish, not by ignoring the preference.
-- **The questions** (recommendation; asked in Getting started after allergies and diet, and on a **Our tastes** page in Family settings):
-  - **Proteins we like:** chicken, beef, lamb, fish, eggs, beans and lentils (several).
-  - **Cuisines we'd rather skip** (from the cuisine registry).
-  - **Spice:** mild, some heat, spicy.
-  - **Time on a busy night:** 30, 45, 60 minutes, or no limit.
-  - **Budget for a meal:** $, $$, or $$$ (below).
-  - **How adventurous:** stick to what we know, a bit, or bring it on. "Stick to what we know" favors familiar cuisines without skipping any.
-- **What they do.** Diet filters (§2.1) still hide what a family can't eat; tastes choose among what's left:
-  - **They leave dishes out.** A dish with a protein the family didn't pick, a skipped cuisine, more heat, more time, or a higher price band than the family's isn't picked for them: not in a pick-one group's default (§4.0), a Level week's recipe (§12), Chef Ruth's suggestions, or a swap. A parent can still open any dish and add it by hand.
-  - **A skill is never skipped.** When nothing that teaches a needed skill fits, the app offers the closest fit (fewest preferences missed) with a short note ("None of the julienne dishes fit your tastes yet; this one is closest"), and the gap is counted for the owner (below).
-  - **They never touch the hard rule.** Every dish has already passed the unclean-food block (§2.1).
-- **New recipes tie to the teaching** (owner, 2026-10-23). Every recipe added to widen the pool is written as a swap-in for a named skill: a Level week (§12) or a Cook Around the World pick-one group. No recipe is added just to be a recipe.
-  - Lesson files gain `budget` (`$`, `$$`, `$$$`, per serving, set by the owner in the editor; recommendation: no ingredient prices, which would need upkeep) and `heat` (mild, some, spicy). Protein, cuisine, and time already exist.
-- **Data collection for the owner** (owner, 2026-10-23: "build data collection tools to drive it"). A **Recipe gaps** page in the owner screens (§6.2a), counts only, no family named:
-  - **Gaps:** for each Level week and each pick-one group, how many families have no fitting dish, and which preference left them short ("Week 11, julienne: 6 families; no beef, skip Chinese").
-  - **What families pick and drop:** dishes most swapped out, skipped (§6.18), or left off plans, and what they were swapped for.
-  - **How cooks went:** average Reflect rating and eater rating per dish (§3).
-  - **Tastes overall:** how many families chose each answer.
-  - Each gap can be opened straight into a new lesson in the content editor, with the skill already filled in.
-- **Privacy:** tastes are a family's data, removed with the family (§6.14) and included in Download our data. The privacy policy (§6.13) says the owner sees the counts above, never which family.
-- **Stored** in a new table, `family_tastes` (§8.4), set by the parent. Built in the next release (§8.6).
+### 6.21 Family tastes, variations, and the recipe pool — Requirement (owner, 2026-10-23; revised 2026-10-24)
+Each person rates what they love and hate, the app picks the best dish or **variation** for the people cooking it, and where nothing scores well tells the owner which recipe to write next. **"We can always add more recipes"** (owner, 2026-10-23): a gap is fixed by writing a variation or a dish, not by ignoring what people said.
+
+**Ratings, not yes or no** (owner, 2026-10-24).
+- **Five stars, per profile** (owner, 2026-10-24). Each item is rated **5 stars (absolute favorite), 4 (love), 3 (like), 2 (okay), 1 (hate)**, or **Haven't tried**. A shared profile rates as one.
+  - **One absolute favorite** (owner, 2026-10-24): a profile has at most one 5-star item in each list (proteins, flavors, ingredients). Giving another item 5 stars asks to move the old favorite to 4.
+- **No country list** (owner, 2026-10-24): many people have never tried a cuisine, so they can't say whether they like it. Families rate **flavors**, each shown with example dishes, and cuisines are learned from what they cook (below).
+- **Who answers** (recommendation): a parent rates for any profile in Our tastes; a kid profile can also take a short taste quiz in its own kitchen, drawn in its theme. Either can change it later.
+- **Built (2026-10-24), slice 11b:** **Our tastes** (Menu → Setup, next-release families only): the family's limits, then a profile picker and its three lists of star rows; every tap saves, tapping a rating again takes it off, and a second 5 star asks "Make X the favorite?" before moving the old one to 4. **Getting started** has a tastes part after Logins for kids (each person needs a profile first): the limits, then each profile's proteins; flavors and the rest wait. **Chef Ruth's "Ask what we like to eat"** goes through 5 unrated items at a time for one profile, proteins first. Tables `profile_ratings` and `family_limits` are in the draft migration (§8.6). **The kid's taste quiz isn't built yet** (it moves to slice 11d, with the kitchen).
+
+**What's rated** (Claude's draft, owner, 2026-10-24: "draft the lists"; the owner edits them). The lists are a content file, `content/tastes.json` (§8.6), edited in the content editor.
+- **Proteins (10):** chicken, turkey, beef, lamb, white fish (cod, tilapia), salmon, tuna, eggs, beans and lentils, tofu.
+- **Flavors (12), each with example dishes** (owner, 2026-10-24: common dishes that show the flavor, whether or not the app has a recipe for them; every example is one that's normally made without unclean food, §2.1):
+
+| Flavor | Example dishes |
+|---|---|
+| **Warm, earthy spices** (cumin, coriander, turmeric) | chicken tikka masala, chana masala, beef kofta, chili con carne |
+| **Chili heat** | buffalo chicken wings, Nashville hot chicken, spicy salsa, jalapeño poppers |
+| **Ginger, garlic, and soy** | teriyaki chicken, beef and broccoli, chicken fried rice, lo mein |
+| **Herby and lemony** | Greek lemon chicken, tabbouleh, chimichurri steak, pesto pasta |
+| **Smoky and barbecue** | beef brisket, barbecue chicken, smoked-paprika chicken, chipotle beef tacos |
+| **Creamy and cheesy** | mac and cheese, fettuccine Alfredo, chicken pot pie, cream of tomato soup |
+| **Tangy and pickled** | dill pickles, vinegar coleslaw, Greek salad with feta, sauerbraten |
+| **Sweet and savory** | honey-garlic chicken, sweet-and-sour chicken, orange chicken, chicken tagine with apricots |
+| **Rich tomato** | spaghetti and meatballs, shakshuka, beef lasagna, tomato soup |
+| **Coconut and tropical** | chicken coconut curry, coconut rice, jerk chicken with mango salsa |
+| **Mild and buttery** | roast chicken and potatoes, buttered noodles, chicken noodle soup, mashed potatoes |
+| **Sweet treats** (owner, 2026-10-24) | chocolate chip cookies, cinnamon rolls, apple pie, brownies |
+
+
+  "Mild and buttery" is there so a profile that likes plain food can say so.
+- **Meals heavy on vegetables** (owner, 2026-10-24), rated like a flavor (examples: a big chopped salad, vegetable stir-fry, ratatouille, minestrone) and matched against each dish's `veggies` tag rather than its flavors, since how much of a meal is vegetables cuts across flavors.
+- **Key ingredients (38),** the ones people have opinions on. Each lists the registry ingredients it covers (§7.2), so the app can tell which dishes use it; some have none yet and match once their ingredients are added: mushrooms, olives, cilantro, mint, raw onion, garlic, ginger, fresh tomato, bell peppers, hot peppers (jalapeño), eggplant, zucchini, spinach and leafy greens, cabbage and coleslaw, avocado, cucumber, radish, peas, corn, sweet potato, chickpeas, coconut, peanuts and peanut butter, sesame, feta and tangy cheeses, cottage cheese, sour cream and yogurt, mayonnaise, mustard, pickles, capers, raisins and dried fruit in savory food, cinnamon in savory food, fish sauce and anchovy, lemon and lime.
+- **Limits, per family** (asked once, not starred): time on a cooking night (30, 45, 60 minutes, or no limit), budget per serving ($ under $3, $$ $3–6, $$$ over $6; recommendation), tools we don't have (food processor, blender, stand mixer, Dutch oven, cast iron, and other non-basic equipment), and **how adventurous** (stick to the familiar, a bit, bring it on), which decides how "Haven't tried" counts.
+
+**Scoring** (recommendation). For the profiles on a cook (a course's profiles, or whoever a lesson is queued for):
+- A version of a dish is **ruled out** if anyone on the cook rates its main protein or a required ingredient 1 star (an optional one that's hated is left out instead, as with diet filters, §2.1), or if it breaks a family limit.
+- The rest are **scored** from everyone's stars for its protein, its key ingredients, and its flavors: an absolute favorite raises it most, then love and like; okay is neutral; Haven't tried is a small plus for an adventurous family and a small minus for a familiar one.
+- **Learned over time:** each cook's Reflect rating and eater rating (§3) nudge the scores of its flavors, protein, and cuisine for those profiles. Cuisines are never asked; they're only learned.
+- **A skill is never skipped.** When everything that teaches a needed skill is ruled out, the best-scoring one is offered with a short note ("Nothing for julienne fits everyone yet; this one is closest"), and the gap is counted (below).
+- **The hard rule comes first.** Only dishes that pass the unclean-food block (§2.1) and the family's diet filters are ever scored.
+
+**Variations — Requirement (owner, 2026-10-24): real versions of a recipe, not "use this instead".**
+- A **variation** is a complete version of a lesson with the preference built in: its protein, amounts, timing, doneness target (chicken 165°F where the beef was 145°F), steps, equipment, title, and shopping list all change together. "Chimichurri chicken" is a variation of Chimichurri steak.
+- **Same lesson** (owner, 2026-10-24): it teaches the same skill and counts as that lesson in progress, ranks, grades, and the transcript, shown as "Chimichurri chicken (a version of Chimichurri steak)". Its own Learn cards can differ where the food science does.
+- **Each variation is tagged and scored** like a dish. The best one for the people cooking is picked by default; a parent sees the others and can choose.
+- **Each variation is checked as a whole lesson** by the linter (§7.4): the hard block, food safety (doneness targets, wash-hands steps), the leaven check and badges (§6.19), and diet filters. A variation can't get past a rule its lesson follows.
+- **Stored as changes on its lesson** (recommendation): in the lesson file, `variations` lists each one's id, title, tags, and what differs (ingredients, steps, equipment, times, Learn cards). A fix to a step they share reaches every variation. In the content editor (§7.5), **+ Add a variation** opens a copy of the lesson to change.
+- **Substitutions stay for now** (§2.1). Common ones (a dairy-free mac and cheese) become variations over time.
+
+**Tags on every dish and variation** — the shared vocabulary between ratings, picks, and gaps.
+- **Where they live:** beside the dish card, on each dish's `course.json` entry (so all 75 are tagged, written or not), or on the lesson for a seasonal lesson (§6.19), as `tags`.
+- **Set by the owner:** `protein` (one of the proteins, or `none` for a side, bread, or dessert), `flavors` (1 to 3), `heat` (mild, some, spicy), `budget` ($, $$, $$$), `familiar` (everyday, new-ish, adventurous), and `veggies` (light, some, lots; owner, 2026-10-24). Claude drafted all 77 (owner, 2026-10-24: "go"); the owner reviews them on the **Tags** page in the content editor, or on each dish card.
+- **Worked out from a written lesson:** its key ingredients (required and optional, from `tastes.json`), cuisine, time, and equipment. Its protein tag is checked against its first meat or fish: a mismatch is a warning, since it can be on purpose (eggs Benedict is eggs, with turkey on top).
+- **The linter** refuses a tag that isn't in the lists, more than 3 flavors, a taste item naming an ingredient that isn't in the registry, and any taste name or example dish with a blocked word (§2.1); it warns about dishes missing tags.
+- **Built (2026-10-24), slice 11a.** Nothing in it is shown to families.
+
+**New recipes tie to the teaching** (owner, 2026-10-23). Every recipe or variation added is written for a named skill: a Level week (§12) or a Cook Around the World pick-one group. No recipe is added just to be a recipe.
+
+**Recipe gaps** (owner, 2026-10-23: "build data collection tools to drive it"), a page in the owner screens (§6.2a), counts only, no family named:
+- **Slots:** each pick-one group, and each Level week once phase 12 is built.
+- **Gaps:** for each slot, how many families have nothing that fits, or whose best fit scores low, and why ("Julienne: 5 families. Beef 1 star: 3; mushrooms 1 star: 2").
+- **Write next:** the variation or new dish that would help the most of them, with its target tags ("a chicken variation of Chimichurri steak"; "a new julienne dish: chicken or beans, ginger-garlic-soy or herby, mild, under 45 minutes, $"). A variation is suggested first when one protein or ingredient is the problem. One tap opens it in the content editor with the skill and tags filled in.
+- **Coverage,** before many families have rated: a grid of skills against protein, flavor, and heat, showing thin spots.
+- **What people cook:** dishes and variations most swapped out, skipped, or rated low, and average stars by flavor.
+
+**Privacy:** ratings are a family's data, removed with the family (§6.14) and included in Download our data. The privacy policy (§6.13) says the owner sees the counts above, never which family.
+
+**Stored** in new tables (§8.4), from the next release's draft migration (§8.6).
 
 ---
 
@@ -1061,7 +1107,9 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `photos` (id, family_id, attempt_id, r2_key, created_at)
 - `pantry` (family_id, ingredient_id). Kitchen staples
 - `unleavened_dates` (family_id, year, calendar, first_day, unleavened_from, confirmed_at) (§6.20). `calendar` is a standard calendar's id; `first_day` may differ from that calendar's date (a deviation); `confirmed_at` is null until the parent confirms the year
-- `family_tastes` (family_id, answers_json, updated_at): the family's answers to Our tastes (§6.21)
+- `profile_ratings` (family_id, profile_id, kind: protein | flavor | ingredient, item, stars 1–5 or null for Haven't tried; at most one 5 per profile per kind, updated_at) (§6.21)
+- `family_limits` (family_id, max_minutes, budget, missing_tools, adventurous, updated_at) (§6.21)
+- `taste_learned` (family_id, profile_id, kind: flavor | protein | cuisine, item, adjust, cooks): what Reflect ratings have taught (§6.21), so the gaps page and picks don't recount every cook
 - `course_programs` (course_id, family_id, program: `level-3`, …): which program a course is (§12). No row means Cook Around the World, so existing courses need no change
 - `level_tasks` (family_id, course_id, week, part, profile_id, done_at): a Level week's recipe, drill, knowledge, and Sabbath task checked off per profile (§12.2); a mastery week's "why it worked" is saved with the cook's reflection
 - **The next release adds tables only** (§8.6): no column is added to, and nothing is dropped from, a table that exists today
@@ -1086,7 +1134,7 @@ Everything planned on 2026-10-23 (Unleavened Bread dates, §6.20; family tastes 
   - Until launch, today's behaviour stays for everyone else, including the fixed February 1 to May 15 swap window (§6.19).
 - **New content is kept apart** in `content/levels/` (the Level weeks, drills, knowledge pages, Sabbath tasks, and their recipes) and `content/calendars.json`. The content editor (§7.5) edits them before launch; only preview families see them.
 - **One migration for the whole build** (owner, 2026-10-23: "I don't want 40 migrations during this new build"). The next release's schema is a single **draft** migration, `0003_next_release.sql`, edited in place for the whole build:
-  - **A draft may only create new tables and indexes.** It never alters or drops a table that exists today; the runner refuses a draft that tries. So the new build stores tastes and course programs in new tables (§8.4), not new columns.
+  - **A draft may only create new tables and indexes.** It never alters or drops a table that exists today; the runner refuses a draft that tries. So the new build stores ratings, limits, and course programs in new tables (§8.4), not new columns.
   - **On `/ops` it shows as Draft.** Editing it isn't drift. **Re-apply draft** drops the tables it made and creates them again from the edited file. That loses only preview data, so the backup export and Import sit beside it (§8.5).
   - **Finalize** (at launch) freezes it into an ordinary applied migration, like `0001` and `0002`. The next big build starts its own single draft the same way.
   - **Built (2026-10-23):** a migration with `draft: true` in `migrations/index.js` is a draft. The runner keeps the tables each draft made in `_drafts` (and whether it's finalized), and refuses a draft statement that isn't `CREATE TABLE` or `CREATE INDEX` on a table it creates. `/ops/draft/<id>` has Re-apply draft (type REBUILD; the backup link before it), **Restore draft tables** (fills the draft's empty tables from an earlier export.json: the restore for Re-apply), and Finalize (type FINALIZE; only an unedited draft). `0003_next_release.sql` is the draft, empty so far.
@@ -1119,7 +1167,7 @@ Each phase should be deployed and usable before the next begins.
 | **9. Family recipes** | Folded into 4c (§6.10) | — |
 | **10. Content editor** (owner, 2026-10-23; built 2026-10-23) | The manager section at `/manage` with its owner-only sign-in, and the content editor in it (§7.5): the GitHub token check on `/ops`, the save path (checks, commit to `content-edits`, the workflow that builds, checks, and moves it to `main`, the save status), History and Revert, then the editors: lessons and units first, then registries and the food rules, then pictures | The owner adds a unit, adds a lesson to it, moves an existing lesson into it, and removes a step, all from the browser; each is live for every family after the deploy with no session. A save that breaks a rule is refused with the reason, and Revert puts a lesson back |
 | **10b. Next release switch** (owner, 2026-10-23; built 2026-10-23) | §8.6: the switch on `/ops` (preview per family, Launch for everyone, Undo launch), the draft migration with Re-apply and Finalize, and `content/levels/`. Phases 11–13 are built behind it | A preview family sees a test screen that other families don't; Re-apply draft rebuilds an edited draft table; Undo launch puts the app back |
-| **11. Tastes and the recipe pool** (owner, 2026-10-23: built first, right after the switch) | §6.21: Our tastes, its use in picks and suggestions, `budget` and `heat` on lessons, the closest-fit rule, and the owner's Recipe gaps page | A family that skips seafood and chooses mild gets no fish week default and a closest-fit note; the owner sees that gap counted and opens a new lesson from it |
+| **11. Tastes, variations, and the recipe pool** (owner, 2026-10-23: built first, right after the switch) | §6.21, in slices: **11a** tags (built 2026-10-24: protein, flavors, heat, budget, familiar on every dish; `content/tastes.json`; the Tags and Tastes pages in the content editor; Claude's drafted values); **11b** ratings (stars per profile, family limits, Our tastes, the Getting started step, Chef Ruth asking a few at a time, the kid's taste quiz); **11c** variations (lesson files, the editor, the linter, the player and shopping list using the chosen one, counting as the lesson); **11d** scoring and picks (course setup, Add a lesson, Chef Ruth, Swap; learning from Reflect); **11e** Recipe gaps | A preview family with a kid who rates mushrooms 1 star and beef 4 gets the beef variation with no mushrooms by default; a variation with a too-low doneness target is refused by the linter; the owner sees the gap that left another family short and opens a new variation from it, with its tags filled in |
 | **12. Level 3 Cook** (owner, 2026-10-23: Level 3 first) | §12: the Level program beside Cook Around the World, Level 3's 36 weeks with its four parts, mastery weeks, skill-tagged swap-ins, the Level 3 recipes, Progress and transcript changes | A parent puts a teen on Level 3; the kid cooks week 1's recipe, checks off its drill, knowledge, and Sabbath task; a swap-in replaces a week's recipe; a mastery week asks for "why it worked"; the transcript shows Level 3's hours |
 | **13. Unleavened Bread dates** (owner, 2026-10-23) | §6.20: the standard calendars file and its editor, the Getting started and Family settings questions, the yearly ask, the migration, and the swap, schedule, and kitchen changes; the fixed window comes out | Two test families on different calendars, one deviating by a day, see Swap go unleavened-only on their own weeks; a leavened course lesson due in the feast moves past it and doesn't count as behind; a family that hasn't confirmed sees the note |
 | **Later** | Levels 2, 4, and 1 (§12), mini-courses (§10), More themes: Food Truck and Recipe Scrapbook (§5.2), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system (Print our progress's CSV covers the basics, §6.15) | — |
