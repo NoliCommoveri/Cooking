@@ -458,7 +458,81 @@ export const LIBRARY = {
      "garlic"
     ],
     "optional": []
-   }
+   },
+   "variations": [
+    {
+     "title": "Chimichurri chicken",
+     "image": "img/dishes/chimichurri-steak.webp",
+     "cuisine": "argentine",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "For more than 6, sear the chicken in two batches so the pan stays hot. Keep the first batch resting on the board while the second cooks."
+       }
+      ]
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "parsley"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "oregano-dried"
+      },
+      {
+       "ingredient": "vinegar-red-wine"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "chili-flakes",
+       "optional": true
+      },
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic"
+      ],
+      "optional": []
+     },
+     "id": "chicken"
+    }
+   ]
   },
   {
    "id": "tuna-salad-sandwiches",

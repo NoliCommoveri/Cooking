@@ -6,6 +6,7 @@ import { field } from './form.js';
 import { S, D, api, cur, exists, put, putPicture, page, problems, syncDish, stageLesson, pickers, lessonFile, redraw, go } from './manage.js';
 import { showValue, patchSpec } from '/lib/patch.js';
 import { tagFields } from './tags.js';
+import { applyVariation, diffVariation, lessonVersion } from '/lib/variations.js';
 
 // The editor's sections, in the order a lesson is written. Anything the schema
 // has that isn't named here lands in "Everything else", so a new field shows up.
@@ -21,8 +22,11 @@ const SECTIONS = [
 ];
 const SET_FOR_YOU = { id: 'Its name in the files; fixed once made.', version: 'Goes up on its own when steps or ingredients change.', image: 'The picture below.', unit: 'Move it on the Course page.' };
 const DISH_KEYS = ['about', 'main', 'method', 'tags'];
-// Set by the checkbox on the dish card, not as its own field.
-const OWN_CONTROL = ['feast'];
+// Set by the checkbox on the dish card, not as its own field. Variations have
+// their own section.
+const OWN_CONTROL = ['feast', 'variations'];
+// A variation (plan §6.21) teaches what its lesson teaches, so these stay the lesson's.
+const SAME = ['track', 'cuisine', 'skill', 'skills', 'prereqs', 'image'];
 
 const slug = (s) => String(s ?? '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
 
@@ -37,11 +41,17 @@ function giveIds(L) {
   (L.learn?.why ?? []).forEach((w, i) => { if (!w.id && w.title) w.id = unique(L.learn.why, w.title, i); });
 }
 
-export function lessonPage(id) {
+// vid: edit that variation of the lesson instead (§6.21). It's edited as a
+// whole copy of the lesson, and saved into the lesson file as what differs.
+export function lessonPage(id, vid = null) {
   const path = lessonFile(id);
   if (!exists(path)) return page(el('p', {}, el('a', { href: '#/' }, '← The course')), el('h1', {}, 'No such lesson'), el('p', {}, `There's no lesson called "${id}".`));
   const schema = S.files['schema/lesson.schema.json'];
   const L = cur(path);
+  const v = vid ? (L.variations ?? []).find((x) => x.id === vid) : null;
+  if (vid && !v) return page(el('p', {}, el('a', { href: `#/lesson/${id}` }, `← ${L.title}`)), el('h1', {}, 'No such version'), el('p', {}, `${L.title} has no version called "${vid}".`));
+  // What the fields edit: the lesson, or the whole variation.
+  const W = v ? applyVariation(L, v) : L;
   const units = cur('units.json').units;
   const seasonalUnit = units.find((u) => u.number === L.unit)?.seasonal ?? false;
   const course = cur('course.json');
@@ -50,9 +60,16 @@ export function lessonPage(id) {
 
   let typing = null;
   const commit = (structural) => {
-    giveIds(L);
-    put(path, L, `Edited ${L.title}`);
-    if (dish) { syncDish(L, dish); put('course.json', course, `Edited ${L.title}`); }
+    giveIds(W);
+    if (v) {
+      const now = diffVariation(L, W, { id: v.id, tags: v.tags });
+      for (const k of Object.keys(v)) delete v[k];
+      Object.assign(v, now);
+      put(path, L, `Edited ${W.title} (a version of ${L.title})`);
+    } else {
+      put(path, L, `Edited ${L.title}`);
+      if (dish) { syncDish(L, dish); put('course.json', course, `Edited ${L.title}`); }
+    }
     checkSoon();
     if (structural) { const y = scrollY; draw(); scrollTo(0, y); }
   };
@@ -61,10 +78,10 @@ export function lessonPage(id) {
     if (structural) commit(true); else typing = setTimeout(() => commit(false), 300);
   };
   const ctx = {
-    root: schema, onChange, options: (key) => pickers(L)(key),
-    readOnly: (p) => p.length === 1 && p[0] in SET_FOR_YOU,
-    hint: (p) => (p.length === 1 ? SET_FOR_YOU[p[0]] : null),
-    hide: (p) => p.length === 1 && !seasonalUnit && DISH_KEYS.includes(p[0]),
+    root: schema, onChange, options: (key) => pickers(W)(key),
+    readOnly: (p) => p.length === 1 && (p[0] in SET_FOR_YOU || (v && SAME.includes(p[0]))),
+    hint: (p) => (p.length !== 1 ? null : v && SAME.includes(p[0]) ? 'The same as the lesson: every version teaches the same thing.' : SET_FOR_YOU[p[0]]),
+    hide: (p) => p.length === 1 && (v || !seasonalUnit) && DISH_KEYS.includes(p[0]),
   };
 
   const checks = el('div', { class: 'card mchecks', 'aria-live': 'polite' });
@@ -86,17 +103,18 @@ export function lessonPage(id) {
     const sec = (title, keys, startOpen, k = title) => el('details', { class: 'card msec', 'data-k': k, open: first ? startOpen : open.has(k) },
       el('summary', {}, el('h2', {}, title)),
       keys.map((key) => {
-        if (!(key in L) && !(schema.required ?? []).includes(key)) {
-          return ctx.hide([key]) ? null : el('button', { type: 'button', class: 'hbtn small-btn', onclick: () => { L[key] = blankOf(key); onChange(true); } }, `+ Add ${key}`);
+        if (!(key in W) && !(schema.required ?? []).includes(key)) {
+          return ctx.hide([key]) || (v && SAME.includes(key)) ? null : el('button', { type: 'button', class: 'hbtn small-btn', onclick: () => { W[key] = blankOf(key); onChange(true); } }, `+ Add ${key}`);
         }
-        return el('div', { class: 'mf-field' }, field(ctx, L, key, schema.properties[key], []));
+        return el('div', { class: 'mf-field' }, field(ctx, W, key, schema.properties[key], []));
       }));
-    sections.replaceChildren(
+    sections.replaceChildren(...[
       sec('The basics', [...SECTIONS[0][1], 'id', 'version', 'unit'], first ? true : open.has('The basics')),
-      dishCard(),
+      v ? versionCard() : dishCard(),
+      v ? null : variationsCard(),
       ...SECTIONS.slice(1).map(([t, keys, o]) => sec(t, keys, o)),
       extra.length ? sec('Everything else', extra, false) : null,
-    );
+    ].filter(Boolean));
   }
   const blankOf = (key) => {
     const s = schema.properties[key];
@@ -136,6 +154,32 @@ export function lessonPage(id) {
         'Good for Feast Days'));
   }
 
+  // Variations (§6.21): complete versions of this lesson with a preference built in.
+  function variationsCard() {
+    const list = L.variations ?? [];
+    return el('details', { class: 'card msec', 'data-k': 'variations' },
+      el('summary', {}, el('h2', {}, `Variations (${list.length})`)),
+      el('p', { class: 'mut small' }, "Complete versions of this lesson with a preference built in, like Chimichurri chicken for Chimichurri steak. Each one teaches the same skill and counts as this lesson. Whatever a variation doesn't change stays shared with the lesson, so a fix here reaches it too. Each one is checked like a whole lesson."),
+      list.length ? el('ul', { class: 'mvars' }, list.map((x) => el('li', {}, el('a', { href: `#/lesson/${id}/v/${x.id}` }, x.title)))) : null,
+      el('button', { type: 'button', class: 'hbtn small-btn', onclick: () => addVariation(L, dish) }, '+ Add a variation'));
+  }
+  // A variation's own card: its tags, and taking it out.
+  function versionCard() {
+    return el('section', { class: 'card msec' },
+      el('h2', {}, 'This version'),
+      el('p', { class: 'mut small' }, `Its name in the files is "${v.id}". Change anything below that differs from ${L.title}: the protein, amounts, times, doneness target, steps, tools, or Learn cards.`),
+      el('fieldset', { class: 'mf-obj' }, el('legend', {}, 'Tags'),
+        el('p', { class: 'mut small' }, 'Tagged like a dish, so families can be offered the version that suits them.'),
+        tagFields(v, () => onChange(false))),
+      el('button', { type: 'button', class: 'hbtn small-btn', onclick: () => {
+        if (!confirm(`Take ${v.title} out of ${L.title}? Families who picked it go back to ${L.title}. Undo my changes here brings it back until you save.`)) return;
+        L.variations = L.variations.filter((x) => x.id !== v.id);
+        if (!L.variations.length) delete L.variations;
+        put(path, L, `Took ${v.title} out of ${L.title}`);
+        go(`#/lesson/${id}`);
+      } }, 'Take this version out'));
+  }
+
   // The picture: a new one is made a PNG in this browser and saved with the lesson.
   const picPath = L.image.replace(/^dishes\//, 'dishes/');
   const staged = D.pictures[picPath];
@@ -153,6 +197,20 @@ export function lessonPage(id) {
   });
 
   const patched = S.patched[id];
+  if (v) {
+    page(
+      el('p', {}, el('a', { href: `#/lesson/${id}` }, `← ${L.title}`)),
+      el('div', { class: 'mhead' }, el('h1', {}, W.title),
+        el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: `#/try/${id}/${v.id}` }, 'Preview as a learner'),
+          path in D.files && path in S.files ? el('button', { class: 'hbtn', onclick: () => { stageLesson(structuredClone(S.files[path])); redraw(); } }, 'Undo my changes here') : null)),
+      el('p', { class: 'mut' }, `A version of ${L.title} · counts as that lesson`),
+      checks,
+      sections,
+    );
+    draw();
+    showChecks();
+    return;
+  }
   page(
     el('p', {}, el('a', { href: '#/' }, '← The course')),
     el('div', { class: 'mhead' }, el('h1', {}, L.title),
@@ -168,6 +226,33 @@ export function lessonPage(id) {
   );
   draw();
   showChecks();
+}
+
+// + Add a variation (§6.21): it starts as a copy of the lesson, with the
+// dish's tags, and opens in its own editor to change.
+function addVariation(L, dish) {
+  const title = el('input', { maxlength: 80, placeholder: 'Like "Chimichurri chicken" for Chimichurri steak' });
+  const msg = el('p', { class: 'err', role: 'alert' });
+  const close = modal('Add a variation', el('form', { onsubmit: (e) => {
+    e.preventDefault();
+    const t = title.value.trim().replace(/\s+/g, ' ');
+    if (!t) { msg.textContent = 'Give it a name.'; return; }
+    if (t === L.title || (L.variations ?? []).some((x) => x.title === t)) { msg.textContent = 'That name is taken. Give this version its own.'; return; }
+    // "Chimichurri chicken" is "chicken" in the files: the first word of the lesson's title is left off.
+    const first = `${L.title.split(' ')[0]} `.toLowerCase();
+    const base = slug(t.toLowerCase().startsWith(first) ? t.slice(first.length) : t) || 'version';
+    let vid = base;
+    for (let n = 2; (L.variations ?? []).some((x) => x.id === vid); n++) vid = `${base}-${n}`;
+    const tags = dish?.tags ?? L.tags;
+    L.variations = [...(L.variations ?? []), { id: vid, title: t, ...(tags ? { tags: structuredClone(tags) } : {}) }];
+    put(lessonFile(L.id), L, `Added ${t}, a version of ${L.title}`);
+    close();
+    go(`#/lesson/${L.id}/v/${vid}`);
+  } },
+  el('p', { class: 'mut small' }, `A complete version of ${L.title} with a preference built in. It starts as a copy of the lesson; change what differs on the next page.`),
+  el('label', { class: 'f' }, 'Its name, as families see it', title),
+  msg,
+  el('div', { class: 'acts' }, el('button', { type: 'submit', class: 'hbtn pri' }, 'Add and edit it'), el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel'))));
 }
 
 function fixBanner(fix) {
@@ -221,20 +306,22 @@ async function toPng(file) {
 // doesn't need checking off, any stage is a tap away, and nothing is saved
 // to any family or counted anywhere.
 const PREVIEW_KEY = 'cpr-manage-preview';
-export async function previewPage(id) {
+export async function previewPage(id, vid = null) {
   const path = lessonFile(id);
   if (!exists(path)) return page(el('p', {}, el('a', { href: '#/' }, '← The course')), el('h1', {}, 'No such lesson'), el('p', {}, `There's no lesson called "${id}".`));
   let V = { theme: 'quest', audience: 'kid' };
   try { V = { ...V, ...JSON.parse(localStorage.getItem(PREVIEW_KEY)) }; } catch { /* first time */ }
-  const L = cur(path);
+  // A variation previews as the whole lesson it makes (§6.21).
+  const L = lessonVersion(cur(path), vid);
+  const back = vid ? `#/lesson/${id}/v/${vid}` : `#/lesson/${id}`;
   const byId = (list) => Object.fromEntries(list.map((x) => [x.id, x]));
   const seg = (k, opts) => el('div', { class: 'seg', role: 'group' }, opts.map(([v, label]) => el('button', {
     type: 'button', 'aria-pressed': String(V[k] === v),
-    onclick: () => { V[k] = v; try { localStorage.setItem(PREVIEW_KEY, JSON.stringify(V)); } catch { /* not kept */ } previewPage(id); },
+    onclick: () => { V[k] = v; try { localStorage.setItem(PREVIEW_KEY, JSON.stringify(V)); } catch { /* not kept */ } previewPage(id, vid); },
   }, label)));
   const mount = el('div');
   page(
-    el('p', {}, el('a', { href: `#/lesson/${id}` }, `← ${L.title}`)),
+    el('p', {}, el('a', { href: back }, `← ${L.title}`)),
     el('div', { class: 'mhead' }, el('h1', {}, 'Preview as a learner')),
     el('p', { class: 'mut' }, 'As a family sees it, with your unsaved changes. Nothing is saved or counted.'),
     el('div', { class: 'acts pv-pick' }, seg('theme', [['quest', 'Kitchen Quest'], ['passport', "Chef's Passport"]]), seg('audience', [['kid', 'A kid'], ['adult', 'An adult']])),
@@ -251,6 +338,6 @@ export async function previewPage(id) {
       ingredients: byId(cur('ingredients.json').ingredients), equipment: byId(cur('equipment.json').equipment),
       skills: byId(cur('skills.json').skills), terms: cur('terms.json').terms, cuisines: byId(cur('cuisines.json').cuisines),
     },
-    onExit: () => go(`#/lesson/${id}`),
+    onExit: () => go(back),
   });
 }

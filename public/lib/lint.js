@@ -8,8 +8,9 @@ import { toBase } from './units.js';
 import { scaleLesson, servingOptions } from './scale.js';
 import { findTerms } from './terms.js';
 import { courseEntries } from './course.js';
-import { METHODS } from './recipe.js';
+import { METHODS, safeMin } from './recipe.js';
 import { tagProblems, missingTags, meatProtein } from './tastes.js';
+import { applyVariation, changesSomething, staleKeys } from './variations.js';
 
 // Fields that hold ids or codes, not words a kid reads.
 const CODE_FIELDS = new Set(['id', 'image', 'cuisine', 'ingredient', 'use', 'for', 'unit', 'why', 'glyph', 'reason',
@@ -95,10 +96,12 @@ export function lint(c) {
   const skillUse = {};
   for (const L of lessons) for (const s of L.skills) (skillUse[s] ||= []).push(L.id);
 
-  for (const L of lessons) {
-    const where = `lessons/${L.id}.json`;
+  // Every check a lesson gets. A variation (plan §6.21) is checked the same
+  // way, as the whole lesson it makes, so it can't get past a rule its lesson
+  // follows; it skips only what it shares with its lesson (unit, skills).
+  const checkLesson = (L, where, variation = false) => {
     const e = m => err(where, m), w = m => warn(where, m);
-    if (!UNITS.has(L.unit)) e(`unit ${L.unit} doesn't exist in units.json`);
+    if (!variation && !UNITS.has(L.unit)) e(`unit ${L.unit} doesn't exist in units.json`);
     if (!CU[L.cuisine]) e(`cuisine "${L.cuisine}" doesn't exist in cuisines.json`);
     for (const s of L.skills) if (!SK[s]) e(`skill "${s}" doesn't exist in skills.json`);
     for (const q of L.equipment) if (!EQ[q]) e(`equipment "${q}" doesn't exist in equipment.json`);
@@ -106,7 +109,7 @@ export function lint(c) {
     for (const p of L.prereqs) if (!prereqOk(p)) e(`prerequisite "${p}" isn't a dish or pick-one group in course.json`);
     if (L.learn.callback && !byId[L.learn.callback.lesson]) e(`callback points to "${L.learn.callback.lesson}", which isn't a written lesson`);
     if (L.learn.callback && L.learn.callback.lesson === L.id) e('callback points to itself');
-    if (!(L.intro && L.intro.slides.length)) w('no intro slides yet');
+    if (!variation && !(L.intro && L.intro.slides.length)) w('no intro slides yet');
 
     // learn stage
     if (L.track === 'core') {
@@ -116,7 +119,7 @@ export function lint(c) {
     const whyIds = new Set(L.learn.why.map(x => x.id));
     if (whyIds.size !== L.learn.why.length) e('learn.why ids aren\'t unique');
     for (const q of L.learn.quiz || []) if (q.answer >= q.choices.length) e(`quiz "${q.q}" has an answer outside its choices`);
-    for (const s of L.skills) {
+    if (!variation) for (const s of L.skills) {
       const uses = skillUse[s] || [];
       if (uses.length === 1) w(`skill "${s}" is only used by this lesson, so its "other dishes" card will be empty`);
       // A family cooks one dish from a pick-one group, so the others in it aren't "earlier lessons".
@@ -168,6 +171,11 @@ export function lint(c) {
       if (raw.some(id => RAW_NEEDS_TEMP.includes(ING[id].rawHandling)) && !done.some(s => s.target && s.target.temp))
         e('raw meat, poultry, or fish needs a doneness step with a thermometer temperature');
       for (const id of raw) if (!L.steps.some(s => (s.handles || []).includes(id))) e(`uses raw ${id} but no step marks where it's handled`);
+      // The thermometer target reaches the safe minimum for the meat, poultry,
+      // or fish in it (§3): chicken 165°F, ground meat 160°F, whole cuts and fish 145°F.
+      const need = Math.max(0, ...raw.map(id => safeMin(id, ING[id].rawHandling) ?? 0));
+      const top = Math.max(0, ...done.map(s => s.target?.temp ?? 0));
+      if (need && top && top < need) e(`the thermometer target is ${top}°F, below the safe minimum of ${need}°F for ${raw.filter(id => (safeMin(id, ING[id].rawHandling) ?? 0) === need).join(', ')}`);
     }
     L.steps.forEach((st, i) => {
       if (!(st.handles || []).some(id => ING[id] && ING[id].rawHandling)) return;
@@ -191,6 +199,24 @@ export function lint(c) {
           if (/NaN|undefined|Infinity|\{(n|qty):/.test(out)) e(`renders badly at ${n} servings`);
         } catch (x) { e(`can't render at ${n} servings: ${x.message}`); }
       }
+    }
+  };
+  for (const L of lessons) {
+    const where = `lessons/${L.id}.json`;
+    checkLesson(L, where);
+    const vids = new Set();
+    for (const v of L.variations || []) {
+      const vw = `${where} variation "${v.id}"`;
+      if (vids.has(v.id)) err(vw, 'variation ids must be unique');
+      vids.add(v.id);
+      if (v.title === L.title) err(vw, 'needs a title of its own, like "Chimichurri chicken"');
+      if (!changesSomething(v)) warn(vw, 'changes nothing but its title');
+      for (const m of staleKeys(L, v)) warn(vw, m);
+      let V;
+      try { V = applyVariation(L, v); } catch (x) { err(vw, `can't be put together: ${x.message}`); continue; }
+      const schemaErrs = validate(V, c.schemas.lesson);
+      if (schemaErrs.length) { schemaErrs.forEach(x => err(vw, x)); continue; }
+      checkLesson(V, vw, true);
     }
   }
   // a seasonal lesson isn't in course.json, so it carries its own dish card
@@ -284,6 +310,17 @@ export function lint(c) {
     };
     for (const d of dishes) checkTags(`course.json ${d.id}`, d.id, d.tags);
     for (const L of lessons) if (SEASONAL.has(L.unit)) checkTags(`lessons/${L.id}.json`, L.id, L.tags);
+    // Each variation is tagged and scored like a dish (§6.21).
+    for (const L of lessons) for (const v of L.variations || []) {
+      const vw = `lessons/${L.id}.json variation "${v.id}"`;
+      for (const p of tagProblems(v.tags, T)) err(vw, `tags: ${p}`);
+      if (missingTags(v.tags).length) untagged.push(`${L.id} (${v.id})`);
+      if (v.tags?.protein) {
+        let meat = null;
+        try { meat = meatProtein(applyVariation(L, v), ING, T); } catch { /* reported above */ }
+        if (meat && v.tags.protein !== meat) warn(vw, `tags: protein is "${v.tags.protein}", but the first meat or fish in it is ${meat}`);
+      }
+    }
     if (untagged.length) warn('tags', `${untagged.length} dish${untagged.length === 1 ? ' has' : 'es have'} tags missing: ${untagged.join(', ')}`);
   }
 

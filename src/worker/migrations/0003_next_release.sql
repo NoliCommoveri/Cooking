@@ -26,3 +26,32 @@ CREATE TABLE IF NOT EXISTS family_limits (
   adventurous   TEXT CHECK (adventurous IN ('familiar', 'a-bit', 'adventurous')),
   updated_at    TEXT NOT NULL
 );
+
+-- Phase 11c (plan §6.21): variations. Which version of a lesson the family
+-- cooks ('' is the lesson itself), the version each cook was of, and the
+-- version each lesson on a shopping list was bought for. A cook still counts
+-- as its lesson; these only say which version. No REFERENCES on attempt_id or
+-- list_id, so taking a cook or a list away never waits on these rows.
+CREATE TABLE IF NOT EXISTS variation_choices (
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  lesson_id  TEXT NOT NULL,
+  variation  TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  PRIMARY KEY (family_id, lesson_id)
+);
+
+CREATE TABLE IF NOT EXISTS attempt_variations (
+  attempt_id TEXT PRIMARY KEY,
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  variation  TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS attempt_variations_family ON attempt_variations(family_id);
+
+CREATE TABLE IF NOT EXISTS list_variations (
+  list_id   TEXT NOT NULL,
+  family_id TEXT NOT NULL REFERENCES families(id),
+  position  INTEGER NOT NULL,
+  variation TEXT NOT NULL,
+  PRIMARY KEY (list_id, position)
+);
+CREATE INDEX IF NOT EXISTS list_variations_family ON list_variations(family_id);

@@ -19,6 +19,24 @@
             "prep": { "$ref": "#/$defs/text" }, "group": { "$ref": "#/$defs/text" }, "optional": { "type": "boolean" } } }
       ]
     },
+    "tags": { "type": "object", "additionalProperties": false, "properties": {
+      "protein": { "$ref": "#/$defs/id" }, "flavors": { "type": "array", "items": { "$ref": "#/$defs/id" } },
+      "heat": { "enum": ["mild", "some", "spicy"] }, "budget": { "enum": ["$", "$$", "$$$"] }, "familiar": { "enum": ["everyday", "new-ish", "adventurous"] }, "veggies": { "enum": ["light", "some", "lots"] } } },
+    "listChange": { "type": "object", "additionalProperties": false, "properties": {
+      "change": { "type": "object" }, "drop": { "type": "array", "items": { "type": "string" } },
+      "add": { "type": "array" }, "order": { "type": "array", "items": { "type": "string" } } } },
+    "variation": {
+      "type": "object", "additionalProperties": false, "required": ["id", "title"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" }, "title": { "$ref": "#/$defs/text" }, "tags": { "$ref": "#/$defs/tags" },
+        "image": { "$ref": "#/$defs/text" }, "servings": { "type": "integer", "minimum": 1 }, "totalMinutes": { "type": "integer", "minimum": 1 },
+        "scaling": { "type": "object" }, "substitutions": { "type": ["array", "null"] }, "intro": { "type": ["object", "null"] },
+        "learn": { "type": "object", "additionalProperties": false, "properties": {
+          "move": { "$ref": "#/$defs/card" }, "why": { "$ref": "#/$defs/listChange" }, "wrong": { "type": "array" },
+          "callback": { "type": ["object", "null"] }, "quiz": { "type": ["array", "null"] } } },
+        "ingredients": { "$ref": "#/$defs/listChange" }, "equipment": { "$ref": "#/$defs/listChange" }, "steps": { "$ref": "#/$defs/listChange" }
+      }
+    },
     "step": {
       "type": "object", "additionalProperties": false, "required": ["id", "text", "safety"],
       "properties": {
@@ -52,9 +70,7 @@
     "about": { "$ref": "#/$defs/text" },
     "main": { "type": "array", "items": { "$ref": "#/$defs/text" } },
     "method": { "enum": ["stove", "oven", "stove-oven", "no-cook"] },
-    "tags": { "type": "object", "additionalProperties": false, "properties": {
-      "protein": { "$ref": "#/$defs/id" }, "flavors": { "type": "array", "items": { "$ref": "#/$defs/id" } },
-      "heat": { "enum": ["mild", "some", "spicy"] }, "budget": { "enum": ["$", "$$", "$$$"] }, "familiar": { "enum": ["everyday", "new-ish", "adventurous"] }, "veggies": { "enum": ["light", "some", "lots"] } } },
+    "tags": { "$ref": "#/$defs/tags" },
     "feast": { "type": "boolean" },
     "title": { "$ref": "#/$defs/text" },
     "image": { "$ref": "#/$defs/text" },
@@ -94,6 +110,7 @@
       "properties": { "for": { "$ref": "#/$defs/id" }, "use": { "$ref": "#/$defs/id" },
         "reason": { "enum": ["availability", "nuts", "peanuts", "dairy", "egg", "gluten", "fish", "meat"] }, "note": { "$ref": "#/$defs/text" } } } },
     "equipment": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
-    "steps": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/step" } }
+    "steps": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/step" } },
+    "variations": { "type": "array", "items": { "$ref": "#/$defs/variation" } }
   }
 }

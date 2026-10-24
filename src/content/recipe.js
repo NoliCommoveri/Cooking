@@ -28,7 +28,7 @@ export const UNITS = [...Object.keys(VOLUME), ...Object.keys(WEIGHT), 'count'];
 export const LIMITS = { title: 80, text: 400, short: 60, lines: 40, steps: 40, tools: 30, servings: 12, minutes: 24 * 60, timer: 24 * 3600 };
 // Safe minimum temperatures (§3): poultry 165°F, ground meat 160°F, whole cuts and fish 145°F.
 const SAFE_MIN = { poultry: 165, meat: 145, fish: 145 };
-const safeMin = (id, kind) => (kind === 'meat' && /ground/.test(id) ? 160 : SAFE_MIN[kind] ?? null);
+export const safeMin = (id, kind) => (kind === 'meat' && /ground/.test(id) ? 160 : SAFE_MIN[kind] ?? null);
 
 const WASH_TEXT = 'Wash your hands, and wash the board and anything else the raw food touched, with hot, soapy water.';
 

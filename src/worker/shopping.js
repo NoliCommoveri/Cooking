@@ -13,6 +13,8 @@ import { shoppingList, SECTIONS } from '../content/shop.js';
 import { family, syncQueue, queueProfiles, today, tzOf } from './plan.js';
 import { weekOf } from './schedule.js';
 import { isRecipeId, lessonFor, recipeNames, REGISTRY as FULL } from './recipes.js';
+import { variationChoices, versionTitle, listVariations, listVariationRow } from './variations.js';
+import { lessonVersion } from '../content/variations.js';
 
 const id = () => randomHex(8);
 const placeholders = (list) => list.map(() => '?').join(', ');
@@ -40,7 +42,9 @@ async function upcoming(env, fam, day, tz) {
   const who = await queueProfiles(env, fam.id, rows.map((r) => r.id));
   const out = [];
   const names = await recipeNames(env, fam.id);
-  const entry = (lid, week, extra) => ({ lesson_id: lid, title: LIBRARY.lessons.find((L) => L.id === lid)?.title ?? names[lid]?.title ?? lid, week, ...extra });
+  // The version of each lesson the family cooks (§6.21), so it's what gets bought.
+  const choices = await variationChoices(env, fam.id);
+  const entry = (lid, week, extra) => ({ lesson_id: lid, title: versionTitle(lid, choices[lid]) ?? names[lid]?.title ?? lid, week, ...(choices[lid] ? { variation: choices[lid] } : {}), ...extra });
   for (const st of states) {
     const weeks = [
       { week: st.sched.this_week.week, ids: st.sched.this_week.lessons.filter((x) => !x.done).map((x) => x.id) },
@@ -76,7 +80,7 @@ async function needs(env, fam, entries, { staples = [], skip = [] } = {}) {
     const found = await lessonFor(env, fam.id, e.lesson_id, { deleted: true });
     if (!found) continue;
     if (Object.keys(found.extra).length) registry = { ...registry, ...found.extra };
-    lessons.push({ lesson: found.lesson, servings: e.servings });
+    lessons.push({ lesson: e.variation ? lessonVersion(found.lesson, e.variation) : found.lesson, servings: e.servings });
   }
   return shoppingList({ lessons, registry, filters: JSON.parse(fam.diet_filters), staples, skip });
 }
@@ -85,7 +89,10 @@ const ownList = async (env, fid, lid) => (await env.DB.prepare('SELECT * FROM sh
   ?? fail(404, 'not_found', 'No such shopping list.');
 
 async function listOut(env, fam, list) {
-  const lessons = (await env.DB.prepare('SELECT * FROM list_lessons WHERE list_id = ? AND family_id = ? ORDER BY position').bind(list.id, fam.id).all()).results;
+  // Each lesson as it was bought for, in the version chosen then (§6.21).
+  const versions = await listVariations(env, fam.id, list.id);
+  const lessons = (await env.DB.prepare('SELECT * FROM list_lessons WHERE list_id = ? AND family_id = ? ORDER BY position').bind(list.id, fam.id).all()).results
+    .map((l) => (versions[l.position] ? { ...l, variation: versions[l.position] } : l));
   const onHand = (await env.DB.prepare('SELECT ingredient_id FROM list_on_hand WHERE list_id = ? AND family_id = ?').bind(list.id, fam.id).all()).results.map((r) => r.ingredient_id);
   const checked = (await env.DB.prepare('SELECT ingredient_id FROM list_checks WHERE list_id = ? AND family_id = ?').bind(list.id, fam.id).all()).results.map((r) => r.ingredient_id);
   const staples = await staplesOf(env, fam.id);
@@ -97,7 +104,7 @@ async function listOut(env, fam, list) {
   const left = await needs(env, fam, lessons, { skip: onHand });
   return {
     id: list.id, created_at: list.created_at, done_at: list.done_at,
-    lessons: lessons.map((l) => ({ lesson_id: l.lesson_id, title: LIBRARY.lessons.find((L) => L.id === l.lesson_id)?.title ?? names[l.lesson_id]?.title ?? l.lesson_id, servings: l.servings })),
+    lessons: lessons.map((l) => ({ lesson_id: l.lesson_id, title: versionTitle(l.lesson_id, l.variation) ?? names[l.lesson_id]?.title ?? l.lesson_id, servings: l.servings, ...(l.variation ? { variation: l.variation } : {}) })),
     sections: left.sections, may_have: left.may_have,
     on_hand: all.filter((x) => onHand.includes(x.id)),
     checked,
@@ -156,6 +163,7 @@ export function register(on) {
       env.DB.prepare('INSERT INTO shopping_lists (id, family_id, created_at) VALUES (?, ?, ?)').bind(lid, s.family_id, now()),
       ...picked.map((e, i) => env.DB.prepare('INSERT INTO list_lessons (list_id, family_id, position, lesson_id, servings, queue_id, course_id) VALUES (?, ?, ?, ?, ?, ?, ?)')
         .bind(lid, s.family_id, i, e.lesson_id, e.servings, e.queue_id, e.course_id)),
+      ...picked.flatMap((e, i) => (e.variation ? [listVariationRow(env, s.family_id, lid, i, e.variation)] : [])),
       ...onHand.map((x) => env.DB.prepare('INSERT INTO list_on_hand (list_id, family_id, ingredient_id) VALUES (?, ?, ?)').bind(lid, s.family_id, x)),
     ]);
     return { ok: true, id: lid };

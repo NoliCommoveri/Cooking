@@ -3385,3 +3385,59 @@ Phase 11, slice 11b (plan §6.21), all behind the Next release switch (§8.6):
   server: Our tastes with the limits, rating, the favorite question and
   moving it, Haven't tried, the Flavors list, and Chef Ruth rating five
   proteins. Getting started's tastes part wasn't run in a browser.
+
+## 136. 2026-10-24 — Variations (slice 11c)
+
+Phase 11, slice 11c (plan §6.21): a variation is a complete version of a
+lesson with a preference built in, and counts as that lesson.
+- **Stored on the lesson** (`variations` in the lesson file,
+  `src/content/variations.js`): title, tags, whole values (time, scaling,
+  servings, intro, substitutions, Learn cards) and list changes (`change`,
+  `drop`, `add`, `order`) for ingredients, tools, steps, and why cards, keyed
+  by stable ids. What a variation doesn't change stays the lesson's, so a fix
+  to a shared step reaches it, and a step added to the lesson later lands in
+  it after the step before. `diffVariation` turns an edited copy back into
+  changes; a test checks the round trip.
+- **First variation: Chimichurri chicken** (thighs, 165°F, longer sear,
+  strips instead of across-the-grain, its own why card, wrong signs, and quiz
+  question).
+- **Linter:** each variation is put together and checked as a whole lesson
+  (schema, unclean block, raw handling and wash steps, doneness, rendering at
+  every size), plus its tags and the protein warning. Refused: duplicate ids,
+  the lesson's own title. Warned: a variation that changes nothing, or names a
+  step the lesson no longer has. **New for every lesson:** the thermometer
+  target must reach the safe minimum for the raw meat, poultry, or fish in it
+  (165°F poultry, 160°F ground meat, 145°F whole cuts and fish). Every
+  current lesson already passes it.
+- **Build:** `library-data.js` carries each variation as a lesson summary
+  (ingredients, time, badges, tags, key ingredients) for picks and shopping;
+  `registry.json` lists each lesson's variations by id and title.
+- **Content editor:** a **Variations** section on each lesson.
+  **+ Add a variation** asks for its name in a dialog, then opens
+  `#/lesson/<id>/v/<variation>`: the whole lesson, with skill, cuisine,
+  prerequisites, and picture locked to the lesson's, its tags, and
+  **Take this version out**. Edits are stored as what differs.
+  **Preview as a learner** works for each variation. A stray "null" under
+  the editor's sections is gone.
+- **Families with the next release** (`src/worker/variations.js`):
+  `PUT /api/variations/<lesson>` saves the family's pick ('' is the lesson
+  itself), and `/api/me` returns them. A **Version: …** button on queue and
+  course rows opens a dialog to pick. The player plays the picked version
+  ("A version of Chimichurri steak" under its title); a cook already under
+  way keeps the version it started in. A cook sends its version and the
+  Worker records it once; an unknown version saves as the lesson itself, so a
+  retry always lands. Shopping buys for the picked version, and a list keeps
+  the version it was made for. Fix-request checks (`patchProblems`) now
+  include the lesson's variations.
+- **Draft migration `0003_next_release.sql`:** `variation_choices`,
+  `attempt_variations`, `list_variations`. After the deploy the owner presses
+  **Re-apply draft** on `/ops/draft/0003` (download export.json first; Restore
+  draft tables puts the ratings back).
+- Not built: the default pick by score (11d); "(a version of …)" in progress,
+  grades, and the transcript; Suggest a fix on a step only a variation has
+  (it would target the lesson's step); a variation's own picture.
+- Tests: 298 (11 new in `test/variations.test.js` and
+  `test/worker-variations.test.js`). Checked in a browser at phone width on
+  the dev server: the Version dialog on the queue, the player showing
+  Chimichurri chicken, the Variations section, Add a variation, the variation
+  editor (a time change stored as a change, checks passing), and its preview.
