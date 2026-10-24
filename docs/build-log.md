@@ -3975,3 +3975,10 @@ Owner, 2026-10-24: add japchae to the thin-slicing group.
   `content/images/LICENSES.md`, until the owner's next sheet.
 - **Plan §4:** the dish's row. Tests: 338 (the course test counts 98 dishes
   and checks japchae is 29c); the lesson preview rebuilt.
+
+## 161. 2026-10-24 — Plan: japchae in Level 3 week 13
+
+Owner, 2026-10-24. No app changes.
+- **§12.7:** Level 3 week 13 ("Hot oil; a quick sauté") offers Japchae
+  (29c) in place of Beef and broccoli: Garlic green beans, Sautéed zucchini,
+  and Japchae. The workbook's other options are unchanged.
