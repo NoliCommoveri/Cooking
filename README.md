@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [166. 2026-10-24 — Butter chicken and Chicken jambalaya written](docs/build-log.md#166-2026-10-24--butter-chicken-and-chicken-jambalaya-written)
+**Latest build log entry:** [167. 2026-10-24 — Beef kielbasa for the jambalaya's sausage](docs/build-log.md#167-2026-10-24--beef-kielbasa-for-the-jambalayas-sausage)
 
 ## Current features
 

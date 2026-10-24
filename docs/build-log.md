@@ -4101,3 +4101,11 @@ order, so these two recipes were written.
 - The Level 3 test now counts 18 Level-only recipes. The generated library and
   preview files were rebuilt.
 
+## 167. 2026-10-24 — Beef kielbasa for the jambalaya's sausage
+
+- Owner, 2026-10-24: beef kielbasa is a swap for the smoked chicken andouille
+  in Chicken jambalaya. It's a new registry item (`beef-kielbasa`), with a
+  "check the label" note: it must be all beef, collagen-cased or skinless,
+  since most kielbasa is pork and many beef ones use pork casings. The
+  jambalaya lists it as a substitution, and the andouille's note names it.
+

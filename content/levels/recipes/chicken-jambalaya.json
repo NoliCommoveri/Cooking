@@ -66,6 +66,7 @@
     { "ingredient": "bay-leaves", "amount": 2, "unit": "count", "round": "up", "group": "Pot" },
     { "ingredient": "green-onion", "amount": 4, "unit": "count", "round": "up", "prep": "sliced", "optional": true, "group": "To serve" }
   ],
+  "substitutions": [{ "for": "chicken-sausage-smoked", "use": "beef-kielbasa", "reason": "availability" }],
   "equipment": [
     "chef-knife",
     "cutting-board",
