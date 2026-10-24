@@ -14,7 +14,7 @@ import { ratingsOf, limitsOf } from './tastes.js';
 import { dietView } from '../content/diet.js';
 import { courseEntries } from '../content/course.js';
 import { ratingItems } from '../content/tastes.js';
-import { scoreDish, rankVersions, better } from '../content/score.js';
+import { scoreDish, rankVersions, better, learnedFrom } from '../content/score.js';
 
 const lessonById = Object.fromEntries(LIBRARY.lessons.map((L) => [L.id, L]));
 const dishById = Object.fromEntries(LIBRARY.course.map((d) => [d.id, d]));
@@ -23,6 +23,7 @@ const ITEMS = ratingItems(CONTENT.tastes);
 const NAMES = {
   ...Object.fromEntries(Object.entries(ITEMS).map(([k, list]) => [k, Object.fromEntries(list.map((x) => [x.id, x.name]))])),
   tool: Object.fromEntries(CONTENT.equipment.map((e) => [e.id, e.name])),
+  cuisine: LIBRARY.cuisines,
 };
 const missingTable = (err) => /no such table/i.test(String(err?.message));
 
@@ -34,14 +35,65 @@ export async function tasteContext(env, fam) {
   try {
     const { results } = await env.DB.prepare('SELECT id, name FROM profiles WHERE family_id = ? ORDER BY created_at, id').bind(fam.id).all();
     const ratings = await ratingsOf(env, fam.id, results.map((p) => p.id));
+    const learned = await learnedOf(env, fam.id);
     return {
-      profiles: results.map((p) => ({ ...p, ratings: ratings[p.id] })),
+      profiles: results.map((p) => ({ ...p, ratings: ratings[p.id], learned: learned[p.id] ?? null })),
       limits: await limitsOf(env, fam.id),
       filters: JSON.parse(fam.diet_filters ?? '[]'),
     };
   } catch (err) {
     if (missingTable(err)) return null;
     throw err;
+  }
+}
+
+// What each profile's cooks have taught (11d3), as { profile: { kind: { item:
+// adjust } } }. Empty before the draft's taste_learned table exists.
+async function learnedOf(env, fid) {
+  try {
+    const { results } = await env.DB.prepare('SELECT profile_id, kind, item, adjust FROM taste_learned WHERE family_id = ?').bind(fid).all();
+    const out = {};
+    for (const r of results) ((out[r.profile_id] ??= { protein: {}, flavor: {}, cuisine: {} })[r.kind] ??= {})[r.item] = r.adjust;
+    return out;
+  } catch (err) {
+    if (missingTable(err)) return {};
+    throw err;
+  }
+}
+
+// Rebuilds what the profiles' cooks have taught (11d3) from every finished
+// cook each was on: its own Reflect rating and half the eaters', on the
+// cooked version's protein and flavors and the lesson's cuisine. Rebuilt, not
+// added to, so a reflection changed later never counts twice. With no pids,
+// the whole family. Next release only; nothing before its draft is applied.
+export async function relearn(env, fid, pids = null) {
+  if (!(await nextReleaseOn(env.DB, fid))) return;
+  try {
+    if (!pids) pids = (await env.DB.prepare('SELECT id FROM profiles WHERE family_id = ?').bind(fid).all()).results.map((r) => r.id);
+    if (!pids.length) return;
+    const marks = pids.map(() => '?').join(', ');
+    const { results } = await env.DB.prepare(`SELECT ap.profile_id, ap.rating, a.eater_rating, a.lesson_id, av.variation
+        FROM attempts a JOIN attempt_profiles ap ON ap.attempt_id = a.id LEFT JOIN attempt_variations av ON av.attempt_id = a.id
+        WHERE a.family_id = ? AND a.finished_at IS NOT NULL AND a.removed_at IS NULL AND ap.profile_id IN (${marks})`).bind(fid, ...pids).all();
+    const stmts = [env.DB.prepare(`DELETE FROM taste_learned WHERE family_id = ? AND profile_id IN (${marks})`).bind(fid, ...pids)];
+    for (const pid of pids) {
+      // A family recipe has no tags, and teaches nothing here.
+      const cooks = results.filter((r) => r.profile_id === pid && lessonById[r.lesson_id]).map((r) => {
+        const L = lessonById[r.lesson_id];
+        const v = versionSummary(r.lesson_id, r.variation ?? '');
+        return { rating: r.rating, eater: r.eater_rating, tags: v.tags ?? L.tags, cuisine: v.cuisine ?? L.cuisine };
+      });
+      const learned = learnedFrom(cooks);
+      for (const [kind, items] of Object.entries(learned)) {
+        for (const [item, x] of Object.entries(items)) {
+          if (!x.adjust) continue;
+          stmts.push(env.DB.prepare('INSERT INTO taste_learned (family_id, profile_id, kind, item, adjust, cooks) VALUES (?, ?, ?, ?, ?, ?)').bind(fid, pid, kind, item, x.adjust, x.cooks));
+        }
+      }
+    }
+    await env.DB.batch(stmts);
+  } catch (err) {
+    if (!missingTable(err)) throw err;
   }
 }
 

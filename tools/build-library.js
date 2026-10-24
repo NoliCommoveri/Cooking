@@ -164,10 +164,10 @@ export function buildLibrary() {
     dietTags: c.schemas.registries.$defs.dietTag.enum,
     // Every planned dish, for numbering a family's course plan; its line about
     // the dish and whether it's a meal, for Chef Ruth's first lesson (§6.9).
-    // Its tags and minutes too, so a dish not written yet still shows in the
-    // gaps and can be scored (§6.21).
-    course: c.course.dishes.map(({ id, title, unit, pickOne, prereqs, about, meal, skills, tags, minutes }) => ({
-      id, title, unit, about, skills, ...(minutes ? { minutes } : {}), ...(pickOne ? { pickOne } : {}), ...(prereqs ? { prereqs } : {}), ...(meal === false ? { meal } : {}), ...(tags ? { tags } : {}),
+    // Its tags, minutes, and cuisine too, so a dish not written yet still
+    // shows in the gaps and can be scored (§6.21).
+    course: c.course.dishes.map(({ id, title, unit, pickOne, prereqs, about, meal, skills, tags, minutes, cuisine }) => ({
+      id, title, unit, about, skills, ...(minutes ? { minutes } : {}), ...(cuisine ? { cuisine } : {}), ...(pickOne ? { pickOne } : {}), ...(prereqs ? { prereqs } : {}), ...(meal === false ? { meal } : {}), ...(tags ? { tags } : {}),
     })),
     // What profiles rate (§6.21), by id and name.
     tastes: Object.fromEntries(Object.entries(c.tastes).map(([k, list]) => [k, list.map(({ id, name }) => ({ id, name }))])),

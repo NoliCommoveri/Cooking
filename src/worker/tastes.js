@@ -105,11 +105,12 @@ export function register(on) {
   });
 }
 
-// A deleted profile's ratings go with it. Before the next release's draft is
-// applied there's no table, and nothing to delete.
+// A deleted profile's ratings, and what its cooks taught, go with it. Before
+// the next release's draft is applied there's no table, and nothing to delete.
 export async function forgetProfile(env, fid, pid) {
   try {
     await env.DB.prepare('DELETE FROM profile_ratings WHERE profile_id = ? AND family_id = ?').bind(pid, fid).run();
+    await env.DB.prepare('DELETE FROM taste_learned WHERE profile_id = ? AND family_id = ?').bind(pid, fid).run();
   } catch (err) {
     if (!/no such table/i.test(String(err?.message))) throw err;
   }

@@ -72,3 +72,25 @@ test('the cook is everyone on it: the average, and ties go to the least-unhappy'
   const even = [rated('Ava', { protein: { beef: 4, chicken: 3 } }), rated('Ben', { protein: { beef: 2, chicken: 3 } })];
   assert.equal(rankVersions(lesson, ctx(even))[0].id, '');
 });
+
+test('learning from Reflect: own rating plus half the eaters\', capped, rebuilt not added to', async () => {
+  const { learnedFrom } = await import('../src/content/score.js');
+  const tags = { protein: 'chicken', flavors: ['warm-spices'] };
+  // One 5-star cook: +2, times 0.5.
+  assert.deepEqual(learnedFrom([{ rating: 5, eater: null, tags, cuisine: 'tex-mex' }]).cuisine, { 'tex-mex': { adjust: 1, cooks: 1 } });
+  // Own 5 and eaters 5: 2 + 1, capped at 2 for the cook; three such cooks cap at 2.
+  const three = learnedFrom(Array(3).fill({ rating: 5, eater: 5, tags, cuisine: 'tex-mex' }));
+  assert.equal(three.protein.chicken.adjust, 2);
+  // Only the eaters' rating: half of it.
+  assert.equal(learnedFrom([{ rating: null, eater: 1, tags }]).flavor['warm-spices'].adjust, -0.5);
+  // No rating at all teaches nothing.
+  assert.deepEqual(learnedFrom([{ rating: null, eater: null, tags }]).protein, {});
+});
+
+test('what was learned moves the score, and a liked cuisine is a reason', () => {
+  const ava = { ...rated('Ava', {}), learned: { protein: {}, flavor: {}, cuisine: { 'tex-mex': 1 } } };
+  const s = scoreDish({ tags: { protein: 'chicken' }, cuisine: 'tex-mex' }, { profiles: [ava], limits: {}, names: { ...names, cuisine: { 'tex-mex': 'Tex-Mex' } } });
+  assert.equal(s.score, 1);
+  assert.equal(s.label, 'Good fit');
+  assert.deepEqual(s.why, ['Ava enjoyed cooking Tex-Mex']);
+});

@@ -158,3 +158,57 @@ test('without the next release Swap and the queue are as before', async () => {
   assert.deepEqual((await a.get(`/api/profiles/${ava}/queue`)).body.leave_out, {});
   assert.equal((await a.get(`/api/picks/lessons?profiles=${ava}`)).status, 404);
 });
+
+// ---------- 11d3: learning from Reflect ----------
+
+const cookIt = (a, id, lid, pids) => a.put(`/api/attempts/${id}`, {
+  lesson_id: lid, servings: 4, profile_ids: pids, started_at: new Date(Date.now() - 3600e3).toISOString(), finished_at: new Date().toISOString(),
+});
+const learned = async (env, pid) => (await env.DB.prepare('SELECT kind, item, adjust, cooks FROM taste_learned WHERE profile_id = ? ORDER BY kind, item').bind(pid).all()).results.map((r) => ({ ...r }));
+
+test("a reflection teaches the cook's protein, flavors, and cuisine, and changing it doesn't count twice", async () => {
+  const { env, a, ava, ben } = await setup();
+  await cookIt(a, '00000000000000b1', 'chicken-fajitas', [ava, ben]);
+  await a.put('/api/attempts/00000000000000b1/reflection', { profile_id: ava, rating: 5, eater_rating: 5 });
+  assert.deepEqual(await learned(env, ava), [
+    { kind: 'cuisine', item: 'tex-mex', adjust: 1, cooks: 1 },
+    { kind: 'flavor', item: 'warm-spices', adjust: 1, cooks: 1 },
+    { kind: 'protein', item: 'chicken', adjust: 1, cooks: 1 },
+  ]);
+  // Ben didn't reflect, but the eaters' rating counts for him, at half.
+  assert.equal((await learned(env, ben)).find((r) => r.kind === 'cuisine').adjust, 0.5);
+  // It shows in the picks, as a reason.
+  const { lessons } = (await a.get(`/api/picks/lessons?profiles=${ava}`)).body;
+  assert.ok(lessons.find((x) => x.id === 'chicken-fajitas').why.includes('Ava enjoyed cooking Tex-Mex'));
+  // Changed later: rebuilt, not added to.
+  await a.put('/api/attempts/00000000000000b1/reflection', { profile_id: ava, rating: 4, eater_rating: 3 });
+  assert.equal((await learned(env, ava)).find((r) => r.kind === 'cuisine').adjust, 0.5);
+  assert.deepEqual(await learned(env, ben), [], 'eaters at 3 teach nothing');
+  // Taking the cook back takes the learning with it; putting it back restores it.
+  await a.post('/api/attempts/00000000000000b1/remove');
+  assert.deepEqual(await learned(env, ava), []);
+  await a.post('/api/attempts/00000000000000b1/restore');
+  assert.equal((await learned(env, ava)).length, 3);
+  // In Download our data, and gone with the profile.
+  assert.ok((await a.get('/api/family/export')).body.tables.taste_learned.length >= 3);
+  await a.del(`/api/profiles/${ava}`);
+  assert.deepEqual(await learned(env, ava), []);
+});
+
+test('a version cooked teaches its own tags', async () => {
+  const { env, a, ava } = await setup();
+  await a.put(`/api/attempts/00000000000000b2`, {
+    lesson_id: 'chicken-fajitas', variation: 'steak', servings: 4, profile_ids: [ava], started_at: new Date(Date.now() - 3600e3).toISOString(), finished_at: new Date().toISOString(),
+  });
+  await a.put('/api/attempts/00000000000000b2/reflection', { profile_id: ava, rating: 1 });
+  const rows = await learned(env, ava);
+  assert.ok(rows.some((r) => r.kind === 'protein' && r.item === 'beef' && r.adjust === -1));
+  assert.ok(!rows.some((r) => r.item === 'chicken'));
+});
+
+test('without the next release nothing is learned', async () => {
+  const { env, a, ava } = await setup({ preview: false });
+  await cookIt(a, '00000000000000b3', 'chicken-fajitas', [ava]);
+  await a.put('/api/attempts/00000000000000b3/reflection', { profile_id: ava, rating: 5 });
+  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM taste_learned').first()).n, 0);
+});

@@ -3692,3 +3692,31 @@ Phase 11, slice 11d2 (plan §6.21), all behind the Next release switch.
   way). Checked in a browser at phone width on the dev server: Add a lesson
   with Best for them, the Swap picker's fit lines, the player's leave-out
   note, What you'll need, and Chef Ruth's three suggestions.
+
+## 148. 2026-10-24 — Learning from Reflect (slice 11d3)
+
+Phase 11, slice 11d3 (plan §6.21), behind the Next release switch. The
+owner put 11d4, the kid's taste quiz, on hold.
+- **Draft migration `0003_next_release.sql`:** `taste_learned` (one row per
+  profile per protein, flavor, or cuisine: `adjust` and `cooks`). After the
+  deploy the owner downloads export.json on `/ops`, presses **Re-apply
+  draft** on `/ops/draft/0003`, then **Restore draft tables** to put the
+  ratings and version picks back.
+- **`learnedFrom`** (`src/content/score.js`): each cook counts its own
+  Reflect rating (1 to 5 as −2 to +2) plus half the eaters', capped at ±2;
+  an item adds half of each cook's value, capped at ±2 (`WEIGHTS`). The score
+  adds a profile's learned protein, flavors on average, and cuisine; a
+  cuisine at +1 or more gives "Ava enjoyed cooking Tex-Mex". Cuisines are
+  only learned, never asked. Planned dishes carry their cuisine from the
+  course outline now.
+- **`relearn`** (`src/worker/picks.js`): rebuilds the rows for everyone on a
+  cook from all their finished cooks, using the version each was
+  (`attempt_variations`), whenever a reflection is saved, a cook is taken
+  back or put back, or a profile is deleted. Rebuilt, so a changed
+  reflection never counts twice. Family recipes teach nothing (no tags).
+  Nothing happens before the table exists.
+- Rows go with the profile (`forgetProfile`) and the family, and are in
+  Download our data.
+- Tests: 319 (2 in `test/score.test.js`, 3 in `test/worker-picks.test.js`).
+  Not checked in a browser: nothing new is drawn; what's learned shows in
+  the fit lines and reasons built in 11d1 and 11d2.

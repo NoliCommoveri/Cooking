@@ -5592,6 +5592,7 @@ export const LIBRARY = {
     "rolling-wrapping"
    ],
    "minutes": 60,
+   "cuisine": "vietnamese",
    "pickOne": "julienne",
    "tags": {
     "protein": "chicken",
@@ -5614,6 +5615,7 @@ export const LIBRARY = {
     "searing"
    ],
    "minutes": 50,
+   "cuisine": "tex-mex",
    "pickOne": "julienne",
    "tags": {
     "protein": "chicken",
@@ -5636,6 +5638,7 @@ export const LIBRARY = {
     "oven-browning"
    ],
    "minutes": 70,
+   "cuisine": "american",
    "pickOne": "julienne",
    "meal": false,
    "tags": {
@@ -5659,6 +5662,7 @@ export const LIBRARY = {
     "dressings"
    ],
    "minutes": 40,
+   "cuisine": "lebanese",
    "pickOne": "fine-chopping",
    "tags": {
     "protein": "none",
@@ -5682,6 +5686,7 @@ export const LIBRARY = {
     "searing"
    ],
    "minutes": 45,
+   "cuisine": "argentine",
    "pickOne": "fine-chopping",
    "tags": {
     "protein": "beef",
@@ -5703,6 +5708,7 @@ export const LIBRARY = {
     "fine-chopping"
    ],
    "minutes": 25,
+   "cuisine": "american",
    "pickOne": "fine-chopping",
    "tags": {
     "protein": "tuna",
@@ -5725,6 +5731,7 @@ export const LIBRARY = {
     "broiling"
    ],
    "minutes": 50,
+   "cuisine": "mexican",
    "pickOne": "dicing",
    "tags": {
     "protein": "white-fish",
@@ -5747,6 +5754,7 @@ export const LIBRARY = {
     "simmering"
    ],
    "minutes": 70,
+   "cuisine": "french",
    "pickOne": "dicing",
    "tags": {
     "protein": "none",
@@ -5770,6 +5778,7 @@ export const LIBRARY = {
     "simmering"
    ],
    "minutes": 60,
+   "cuisine": "italian",
    "pickOne": "dicing",
    "tags": {
     "protein": "beans-lentils",
@@ -5792,6 +5801,7 @@ export const LIBRARY = {
     "dicing"
    ],
    "minutes": 50,
+   "cuisine": "american",
    "pickOne": "dressings",
    "tags": {
     "protein": "chicken",
@@ -5815,6 +5825,7 @@ export const LIBRARY = {
     "fine-chopping"
    ],
    "minutes": 45,
+   "cuisine": "greek",
    "pickOne": "dressings",
    "tags": {
     "protein": "chicken",
@@ -5839,6 +5850,7 @@ export const LIBRARY = {
     "searing"
    ],
    "minutes": 60,
+   "cuisine": "american",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -5859,6 +5871,7 @@ export const LIBRARY = {
     "heat-control"
    ],
    "minutes": 35,
+   "cuisine": "french",
    "pickOne": "heat-control",
    "tags": {
     "protein": "eggs",
@@ -5881,6 +5894,7 @@ export const LIBRARY = {
     "simmering"
    ],
    "minutes": 55,
+   "cuisine": "american",
    "pickOne": "heat-control",
    "tags": {
     "protein": "none",
@@ -5904,6 +5918,7 @@ export const LIBRARY = {
     "batters"
    ],
    "minutes": 40,
+   "cuisine": "jewish",
    "pickOne": "heat-control",
    "tags": {
     "protein": "eggs",
@@ -5926,6 +5941,7 @@ export const LIBRARY = {
     "crisping"
    ],
    "minutes": 45,
+   "cuisine": "american",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -5948,6 +5964,7 @@ export const LIBRARY = {
     "poaching-eggs"
    ],
    "minutes": 40,
+   "cuisine": "north-african",
    "pickOne": "building-a-sauce",
    "tags": {
     "protein": "eggs",
@@ -5971,6 +5988,7 @@ export const LIBRARY = {
     "simmering"
    ],
    "minutes": 50,
+   "cuisine": "italian",
    "pickOne": "building-a-sauce",
    "tags": {
     "protein": "none",
@@ -5993,6 +6011,7 @@ export const LIBRARY = {
     "reducing"
    ],
    "minutes": 45,
+   "cuisine": "chinese-american",
    "pickOne": "building-a-sauce",
    "tags": {
     "protein": "chicken",
@@ -6016,6 +6035,7 @@ export const LIBRARY = {
     "dicing"
    ],
    "minutes": 35,
+   "cuisine": "chinese",
    "pickOne": "stir-frying",
    "tags": {
     "protein": "chicken",
@@ -6038,6 +6058,7 @@ export const LIBRARY = {
     "dicing"
    ],
    "minutes": 30,
+   "cuisine": "chinese-american",
    "pickOne": "stir-frying",
    "tags": {
     "protein": "turkey",
@@ -6060,6 +6081,7 @@ export const LIBRARY = {
     "poaching-eggs"
    ],
    "minutes": 45,
+   "cuisine": "japanese",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -6082,6 +6104,7 @@ export const LIBRARY = {
     "reducing"
    ],
    "minutes": 75,
+   "cuisine": "filipino",
    "pickOne": "reducing",
    "tags": {
     "protein": "chicken",
@@ -6105,6 +6128,7 @@ export const LIBRARY = {
     "reducing"
    ],
    "minutes": 35,
+   "cuisine": "italian",
    "pickOne": "reducing",
    "tags": {
     "protein": "chicken",
@@ -6127,6 +6151,7 @@ export const LIBRARY = {
     "searing"
    ],
    "minutes": 40,
+   "cuisine": "hawaiian",
    "pickOne": "reducing",
    "tags": {
     "protein": "salmon",
@@ -6151,6 +6176,7 @@ export const LIBRARY = {
     "rolling-wrapping"
    ],
    "minutes": 50,
+   "cuisine": "american",
    "tags": {
     "protein": "turkey",
     "flavors": [
@@ -6171,6 +6197,7 @@ export const LIBRARY = {
     "emulsions"
    ],
    "minutes": 30,
+   "cuisine": "italian",
    "tags": {
     "protein": "none",
     "flavors": [
@@ -6192,6 +6219,7 @@ export const LIBRARY = {
     "emulsions"
    ],
    "minutes": 60,
+   "cuisine": "american",
    "pickOne": "poaching-eggs",
    "prereqs": [
     "cacio-e-pepe"
@@ -6217,6 +6245,7 @@ export const LIBRARY = {
     "heat-control"
    ],
    "minutes": 35,
+   "cuisine": "mexican",
    "pickOne": "poaching-eggs",
    "tags": {
     "protein": "eggs",
@@ -6239,6 +6268,7 @@ export const LIBRARY = {
     "roux"
    ],
    "minutes": 40,
+   "cuisine": "american",
    "pickOne": "roux",
    "tags": {
     "protein": "none",
@@ -6261,6 +6291,7 @@ export const LIBRARY = {
     "batters"
    ],
    "minutes": 80,
+   "cuisine": "french",
    "pickOne": "roux",
    "tags": {
     "protein": "chicken",
@@ -6283,6 +6314,7 @@ export const LIBRARY = {
     "blooming-spices"
    ],
    "minutes": 65,
+   "cuisine": "japanese",
    "pickOne": "roux",
    "tags": {
     "protein": "chicken",
@@ -6306,6 +6338,7 @@ export const LIBRARY = {
     "flavor-base"
    ],
    "minutes": 45,
+   "cuisine": "indian",
    "pickOne": "blooming-spices",
    "tags": {
     "protein": "beans-lentils",
@@ -6328,6 +6361,7 @@ export const LIBRARY = {
     "flavor-base"
    ],
    "minutes": 30,
+   "cuisine": "indian",
    "pickOne": "blooming-spices",
    "tags": {
     "protein": "beans-lentils",
@@ -6352,6 +6386,7 @@ export const LIBRARY = {
     "simmering"
    ],
    "minutes": 75,
+   "cuisine": "american",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -6374,6 +6409,7 @@ export const LIBRARY = {
     "simmering"
    ],
    "minutes": 55,
+   "cuisine": "ethiopian",
    "tags": {
     "protein": "beans-lentils",
     "flavors": [
@@ -6396,6 +6432,7 @@ export const LIBRARY = {
     "simmering"
    ],
    "minutes": 120,
+   "cuisine": "louisiana",
    "tags": {
     "protein": "beans-lentils",
     "flavors": [
@@ -6417,6 +6454,7 @@ export const LIBRARY = {
     "simmering"
    ],
    "minutes": 75,
+   "cuisine": "nigerian",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -6439,6 +6477,7 @@ export const LIBRARY = {
     "reducing"
    ],
    "minutes": 90,
+   "cuisine": "american",
    "pickOne": "spice-rubs",
    "tags": {
     "protein": "chicken",
@@ -6462,6 +6501,7 @@ export const LIBRARY = {
     "searing"
    ],
    "minutes": 20,
+   "cuisine": "louisiana",
    "pickOne": "spice-rubs",
    "tags": {
     "protein": "white-fish",
@@ -6485,6 +6525,7 @@ export const LIBRARY = {
     "searing"
    ],
    "minutes": 25,
+   "cuisine": "american",
    "pickOne": "spice-rubs",
    "tags": {
     "protein": "salmon",
@@ -6508,6 +6549,7 @@ export const LIBRARY = {
     "braising"
    ],
    "minutes": 90,
+   "cuisine": "moroccan",
    "pickOne": "braising",
    "tags": {
     "protein": "chicken",
@@ -6531,6 +6573,7 @@ export const LIBRARY = {
     "blooming-spices"
    ],
    "minutes": 75,
+   "cuisine": "jamaican",
    "pickOne": "braising",
    "tags": {
     "protein": "lamb",
@@ -6554,6 +6597,7 @@ export const LIBRARY = {
     "flavor-base"
    ],
    "minutes": 70,
+   "cuisine": "malian",
    "pickOne": "one-pot-stews",
    "tags": {
     "protein": "chicken",
@@ -6577,6 +6621,7 @@ export const LIBRARY = {
     "flavor-base"
    ],
    "minutes": 30,
+   "cuisine": "brazilian",
    "pickOne": "one-pot-stews",
    "tags": {
     "protein": "white-fish",
@@ -6600,6 +6645,7 @@ export const LIBRARY = {
     "crisping"
    ],
    "minutes": 75,
+   "cuisine": "egyptian",
    "tags": {
     "protein": "beans-lentils",
     "flavors": [
@@ -6622,6 +6668,7 @@ export const LIBRARY = {
     "building-a-sauce"
    ],
    "minutes": 60,
+   "cuisine": "indian",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -6644,6 +6691,7 @@ export const LIBRARY = {
     "broiling"
    ],
    "minutes": 60,
+   "cuisine": "jamaican",
    "pickOne": "broiling",
    "tags": {
     "protein": "chicken",
@@ -6667,6 +6715,7 @@ export const LIBRARY = {
     "marinating"
    ],
    "minutes": 25,
+   "cuisine": "american",
    "pickOne": "broiling",
    "tags": {
     "protein": "salmon",
@@ -6690,6 +6739,7 @@ export const LIBRARY = {
     "marinating"
    ],
    "minutes": 80,
+   "cuisine": "korean",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -6712,6 +6762,7 @@ export const LIBRARY = {
     "searing"
    ],
    "minutes": 40,
+   "cuisine": "american",
    "prereqs": [
     "beef-bulgogi"
    ],
@@ -6736,6 +6787,7 @@ export const LIBRARY = {
     "thin-slicing"
    ],
    "minutes": 45,
+   "cuisine": "peruvian",
    "pickOne": "thin-slicing",
    "tags": {
     "protein": "beef",
@@ -6759,6 +6811,7 @@ export const LIBRARY = {
     "stir-frying"
    ],
    "minutes": 25,
+   "cuisine": "chinese-american",
    "pickOne": "thin-slicing",
    "tags": {
     "protein": "beef",
@@ -6782,6 +6835,7 @@ export const LIBRARY = {
     "broiling"
    ],
    "minutes": 50,
+   "cuisine": "nigerian",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -6804,6 +6858,7 @@ export const LIBRARY = {
     "flavor-base"
    ],
    "minutes": 75,
+   "cuisine": "senegalese",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -6826,6 +6881,7 @@ export const LIBRARY = {
     "shredding"
    ],
    "minutes": 70,
+   "cuisine": "mexican",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -6848,6 +6904,7 @@ export const LIBRARY = {
     "making-stock"
    ],
    "minutes": 180,
+   "cuisine": "jewish",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -6868,6 +6925,7 @@ export const LIBRARY = {
     "muffin-method"
    ],
    "minutes": 45,
+   "cuisine": "american",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -6890,6 +6948,7 @@ export const LIBRARY = {
     "muffin-method"
    ],
    "minutes": 40,
+   "cuisine": "american",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -6911,6 +6970,7 @@ export const LIBRARY = {
     "scalded-dough"
    ],
    "minutes": 50,
+   "cuisine": "brazilian",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -6932,6 +6992,7 @@ export const LIBRARY = {
     "flatbreads"
    ],
    "minutes": 60,
+   "cuisine": "indian",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -6953,6 +7014,7 @@ export const LIBRARY = {
     "masa-dough"
    ],
    "minutes": 60,
+   "cuisine": "salvadoran",
    "tags": {
     "protein": "beans-lentils",
     "flavors": [
@@ -6975,6 +7037,7 @@ export const LIBRARY = {
     "braising"
    ],
    "minutes": 50,
+   "cuisine": "kenyan",
    "tags": {
     "protein": "none",
     "flavors": [
@@ -6996,6 +7059,7 @@ export const LIBRARY = {
     "folding-layers"
    ],
    "minutes": 50,
+   "cuisine": "american",
    "pickOne": "cutting-in-fat",
    "meal": false,
    "tags": {
@@ -7019,6 +7083,7 @@ export const LIBRARY = {
     "rolling-wrapping"
    ],
    "minutes": 120,
+   "cuisine": "jewish",
    "pickOne": "cutting-in-fat",
    "meal": false,
    "tags": {
@@ -7042,6 +7107,7 @@ export const LIBRARY = {
     "filling-crimping"
    ],
    "minutes": 90,
+   "cuisine": "argentine",
    "pickOne": "cutting-in-fat",
    "tags": {
     "protein": "beef",
@@ -7064,6 +7130,7 @@ export const LIBRARY = {
     "gravy"
    ],
    "minutes": 40,
+   "cuisine": "american",
    "prereqs": [
     "buttermilk-biscuits",
     "pick:roux"
@@ -7090,6 +7157,7 @@ export const LIBRARY = {
     "crisping"
    ],
    "minutes": 75,
+   "cuisine": "japanese",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -7110,6 +7178,7 @@ export const LIBRARY = {
     "yeast-dough"
    ],
    "minutes": 180,
+   "cuisine": "american",
    "pickOne": "yeast-dough",
    "meal": false,
    "tags": {
@@ -7132,6 +7201,7 @@ export const LIBRARY = {
     "yeast-dough"
    ],
    "minutes": 210,
+   "cuisine": "jewish",
    "pickOne": "yeast-dough",
    "meal": false,
    "tags": {
@@ -7154,6 +7224,7 @@ export const LIBRARY = {
     "yeast-dough"
    ],
    "minutes": 120,
+   "cuisine": "italian",
    "pickOne": "yeast-dough",
    "tags": {
     "protein": "none",
@@ -7176,6 +7247,7 @@ export const LIBRARY = {
     "oven-browning"
    ],
    "minutes": 50,
+   "cuisine": "american",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -7197,6 +7269,7 @@ export const LIBRARY = {
     "binders"
    ],
    "minutes": 90,
+   "cuisine": "american",
    "pickOne": "binders",
    "tags": {
     "protein": "beef",
@@ -7219,6 +7292,7 @@ export const LIBRARY = {
     "binders"
    ],
    "minutes": 40,
+   "cuisine": "lebanese",
    "pickOne": "binders",
    "tags": {
     "protein": "lamb",
@@ -7243,6 +7317,7 @@ export const LIBRARY = {
     "gravy"
    ],
    "minutes": 60,
+   "cuisine": "swedish",
    "prereqs": [
     "pick:roux"
    ],
@@ -7268,6 +7343,7 @@ export const LIBRARY = {
     "gravy"
    ],
    "minutes": 120,
+   "cuisine": "american",
    "prereqs": [
     "pick:roux"
    ],
@@ -7292,6 +7368,7 @@ export const LIBRARY = {
     "braising"
    ],
    "minutes": 210,
+   "cuisine": "american",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -7313,6 +7390,7 @@ export const LIBRARY = {
     "blooming-spices"
    ],
    "minutes": 75,
+   "cuisine": "south-african",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -7334,6 +7412,7 @@ export const LIBRARY = {
     "layered-pastry"
    ],
    "minutes": 90,
+   "cuisine": "greek",
    "tags": {
     "protein": "none",
     "flavors": [
@@ -7356,6 +7435,7 @@ export const LIBRARY = {
     "custards"
    ],
    "minutes": 120,
+   "cuisine": "french",
    "tags": {
     "protein": "eggs",
     "flavors": [
@@ -7377,6 +7457,7 @@ export const LIBRARY = {
     "pastry"
    ],
    "minutes": 105,
+   "cuisine": "american",
    "prereqs": [
     "pick:roux",
     "spinach-mushroom-quiche"
@@ -7402,6 +7483,7 @@ export const LIBRARY = {
     "breading-frying"
    ],
    "minutes": 60,
+   "cuisine": "japanese",
    "pickOne": "breading-frying",
    "tags": {
     "protein": "chicken",
@@ -7424,6 +7506,7 @@ export const LIBRARY = {
     "breading-frying"
    ],
    "minutes": 35,
+   "cuisine": "hawaiian",
    "pickOne": "breading-frying",
    "tags": {
     "protein": "white-fish",
@@ -7446,6 +7529,7 @@ export const LIBRARY = {
     "spice-rubs"
    ],
    "minutes": 30,
+   "cuisine": "ghanaian",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -7469,6 +7553,7 @@ export const LIBRARY = {
     "deep-frying"
    ],
    "minutes": 70,
+   "cuisine": "british",
    "tags": {
     "protein": "white-fish",
     "flavors": [
@@ -7491,6 +7576,7 @@ export const LIBRARY = {
     "creaming"
    ],
    "minutes": 75,
+   "cuisine": "american",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -7514,6 +7600,7 @@ export const LIBRARY = {
     "custards"
    ],
    "minutes": 70,
+   "cuisine": "south-african",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -7536,6 +7623,7 @@ export const LIBRARY = {
     "deep-frying"
    ],
    "minutes": 60,
+   "cuisine": "mexican",
    "meal": false,
    "tags": {
     "protein": "none",
@@ -7557,6 +7645,7 @@ export const LIBRARY = {
     "pastry"
    ],
    "minutes": 150,
+   "cuisine": "american",
    "prereqs": [
     "spinach-mushroom-quiche"
    ],

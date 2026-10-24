@@ -24,6 +24,10 @@ export const WEIGHTS = {
   minutesStep: 15, perStepOver: -1,
   perBudgetOver: -1,
   perMissingTool: -2,
+  // Learning from Reflect (11d3): each cook counts its own rating (1 to 5 as
+  // -2 to +2) plus half the eaters', capped at ±2, times this; an item's sum
+  // is capped at ±2.
+  learnedPerCook: 0.5, learnedCap: 2,
 };
 // The fit words, from the score (the average over the profiles on the cook).
 export const FITS = [['great', 2, 'Great fit'], ['good', 0.5, 'Good fit'], ['poor', -Infinity, 'Not a great fit']];
@@ -44,7 +48,9 @@ function points(stars, adventurous) {
 
 // Scores one dish or version for the cook.
 //   dish: { tags, tasteItems?, totalMinutes? | minutes?, tools? }
-//   ctx: { profiles: [{ id, name, ratings: { protein, flavor, ingredient } }],
+//   dish.cuisine, when it has one, is matched against what's been learned.
+//   ctx: { profiles: [{ id, name, ratings: { protein, flavor, ingredient },
+//                      learned?: { protein, flavor, cuisine } }],
 //          limits: { max_minutes, budget, missing_tools, adventurous },
 //          names: { protein: { id: name }, flavor, ingredient, tool } }
 // Returns { fits, score, low, fit, label, why: [..], notes: [..], known }:
@@ -62,7 +68,7 @@ export function scoreDish(dish, ctx) {
   const required = dish.tasteItems?.required ?? [];
   const flavors = tags.flavors ?? [];
   const protein = tags.protein && tags.protein !== 'none' ? tags.protein : null;
-  const hates = [], loves = {}, notes = [];
+  const hates = [], loves = {}, notes = [], liked = {};
   let known = false;
   const per = [];
   for (const p of ctx.profiles ?? []) {
@@ -87,6 +93,21 @@ export function scoreDish(dish, ctx) {
       return x.pts;
     }));
     if (WEIGHTS.veggies[tags.veggies]) s += rate('flavor', 'veggie-heavy').pts * WEIGHTS.veggies[tags.veggies];
+    // What Reflect ratings have taught (11d3): its protein, its flavors on
+    // average, and its cuisine. Cuisines are never asked, only learned.
+    const l = p.learned ?? {};
+    const learnt = (kind, id) => {
+      const v = l[kind]?.[id];
+      if (v) known = true;
+      return v ?? 0;
+    };
+    if (protein) s += learnt('protein', protein);
+    s += avg(flavors.map((f) => learnt('flavor', f)));
+    if (dish.cuisine) {
+      const c = learnt('cuisine', dish.cuisine);
+      if (c >= 1) (liked[dish.cuisine] ??= []).push(p.name);
+      s += c;
+    }
     per.push(s);
   }
   let adjust = 0;
@@ -120,11 +141,36 @@ export function scoreDish(dish, ctx) {
       const [kind, id] = key.split(':');
       return `${andList(who)} love${who.length === 1 ? 's' : ''} ${name(kind, id)}`;
     });
+  for (const [c, who] of Object.entries(liked)) if (why.length < 2) why.push(`${andList(who)} enjoyed cooking ${names.cuisine?.[c] ?? c}`);
   return {
     fits, score: Math.round(score * 100) / 100, low: per.length ? Math.min(...per) + adjust : adjust,
     fit, label: fit === 'none' ? NO_FIT : FITS.find(([k]) => k === fit)?.[2] ?? null,
     why: fits ? why : [], notes: [...hates, ...notes], known,
   };
+}
+
+// What a profile's cooks have taught (11d3), from its reflections. cooks:
+// [{ rating, eater, tags, cuisine }], one for each finished cook it was on.
+// Returns { protein: { id: adjust }, flavor: {..}, cuisine: {..} } with cook
+// counts beside: { adjust, cooks } per item.
+export function learnedFrom(cooks) {
+  const out = { protein: {}, flavor: {}, cuisine: {} };
+  const clamp = (v) => Math.max(-WEIGHTS.learnedCap, Math.min(WEIGHTS.learnedCap, v));
+  for (const c of cooks) {
+    if (c.rating == null && c.eater == null) continue;
+    const v = clamp((c.rating == null ? 0 : c.rating - 3) + (c.eater == null ? 0 : (c.eater - 3) / 2));
+    const add = (kind, id) => {
+      const x = (out[kind][id] ??= { sum: 0, cooks: 0 });
+      x.sum += v; x.cooks += 1;
+    };
+    if (c.tags?.protein && c.tags.protein !== 'none') add('protein', c.tags.protein);
+    for (const f of c.tags?.flavors ?? []) add('flavor', f);
+    if (c.cuisine) add('cuisine', c.cuisine);
+  }
+  for (const kind of Object.keys(out)) {
+    for (const [id, x] of Object.entries(out[kind])) out[kind][id] = { adjust: Math.round(clamp(x.sum * WEIGHTS.learnedPerCook) * 100) / 100, cooks: x.cooks };
+  }
+  return out;
 }
 
 // Best first: versions that fit before ones that don't, then by score, then
