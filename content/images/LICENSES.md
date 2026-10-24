@@ -48,3 +48,10 @@ region) are cut from it with `tools/split-world-map.py`.
 `brand/chef-ruth.png`: Chef Ruth, the helper (plan §6.8). Supplied by the owner
 on 2026-10-23, owned by the owner for use in this app. `public/img/chef-ruth.webp`
 is a 256 px copy with the white background around the badge made clear.
+
+## Placeholder dish pictures
+
+`dishes/pineapple-teriyaki-salmon.png`, `dishes/chicken-piccata.png`,
+`dishes/turkey-lettuce-wraps.png`, `dishes/huevos-rancheros.png`, and
+`dishes/chicken-souvlaki-pitas.png` are temporary: Claude's meal-type pictures
+(`meals/`), drawn by Claude, until the owner's ChatGPT sheet replaces them.

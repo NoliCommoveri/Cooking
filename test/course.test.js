@@ -8,12 +8,13 @@ import { numberCourse, courseEntries, prereqNotes } from '../src/content/course.
 
 const C = JSON.parse(readFileSync('content/course.json', 'utf8')).dishes;
 
-test('the suggested order: 75 dishes, 59 numbers, pick-one groups lettered', () => {
+test('the suggested order: 80 dishes, 59 numbers, pick-one groups lettered', () => {
   const { labels, total } = numberCourse(C);
   assert.equal(total, 59);
-  assert.equal(Object.keys(labels).length, 75);
+  assert.equal(Object.keys(labels).length, 80);
   assert.deepEqual(['spring-rolls', 'chicken-fajitas', 'shoestring-fries'].map((id) => labels[id]), ['1a', '1b', '1c']);
-  assert.equal(labels['chicken-caesar'], '4');
+  assert.equal(labels['chicken-caesar'], '4a');
+  assert.equal(labels['chicken-souvlaki-pitas'], '4b', 'a dish added to a group shares its number');
   assert.equal(labels.shakshuka, '8a');
   assert.equal(labels['beef-bulgogi'], '27');
   assert.equal(labels['buttermilk-biscuits'], '40a');
@@ -36,8 +37,8 @@ test("a family's plan: reordered, with dishes removed", () => {
 });
 
 test('a dish added to the course since a plan was saved goes in after the one it follows', () => {
-  const keys = courseEntries(C).map((e) => e.key).filter((k) => k !== 'chicken-caesar');
-  assert.equal(numberCourse(C, { order: keys, removed: [] }).labels['chicken-caesar'], '4');
+  const keys = courseEntries(C).map((e) => e.key).filter((k) => k !== 'smash-burgers');
+  assert.equal(numberCourse(C, { order: keys, removed: [] }).labels['smash-burgers'], '5');
 });
 
 test('removing a prerequisite is noted', () => {

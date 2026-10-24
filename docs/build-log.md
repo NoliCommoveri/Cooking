@@ -3521,3 +3521,36 @@ owner to review on each lesson's Variations section.
 - Tests: 299 (a new check that the written variations pass with no warnings
   of their own). Checked in the manager's learner preview at phone width:
   Honey-garlic tofu and Spicy shakshuka.
+
+## 141. 2026-10-24 — Five new pick-one lessons
+
+The owner asked for the four proposed pick-one groups whose existing dish is
+already written (plan §6.21). Five new lessons, each beside that dish with
+the same skills, so the course keeps 59 numbers (now 80 dishes):
+- **4b Chicken souvlaki pitas** (dressings, with 4a Chicken Caesar):
+  tzatziki with squeezed cucumber and finely chopped dill, a 20-minute
+  lemon-oregano marinade, chicken seared to 165°F.
+- **9b Turkey lettuce wraps** (stir-frying, with 9a Chicken fried rice):
+  pea-size carrot and water chestnut, ground turkey to 165°F, a hoisin sauce.
+- **11b Chicken piccata** (reducing, with 11a Chicken adobo): chicken pounded
+  even between parchment, floured, seared to 165°F, a broth-lemon pan sauce
+  bubbled down by half, capers and butter. No wine.
+- **11c Pineapple teriyaki salmon** (reducing): pineapple juice, soy, and
+  brown sugar reduced to a glaze in its own pan, salmon seared to 145°F, the
+  pineapple browned in the skillet.
+- **14b Huevos rancheros** (poaching eggs, with 14a Eggs Benedict): eggs
+  cooked covered in simmering salsa to 160°F, crisp corn tortillas, warm
+  refried beans. It calls back to shakshuka.
+- Each earlier dish now has `pickOne`, and the new one sits right after it,
+  so a saved course plan keeps the earlier dish and starts with the new one
+  removed. Tags are set on each new dish.
+- **Registry:** capers, pineapple chunks, water chestnuts, vegetarian refried
+  beans (a label note: many are made with lard), hoisin (a label note for
+  oyster or shrimp extract), butter lettuce, red onion, fresh dill, and queso
+  fresco; a Hawaiian cuisine. Tastes link capers and refried beans.
+- **Pictures:** placeholders made from the meal-type drawings, listed in
+  `content/images/LICENSES.md`, until the owner's ChatGPT sheet arrives. Claude
+  gave the owner the prompt for it.
+- Tests: 299 (the course test counts 80 dishes; Chicken Caesar is now 4a).
+  Checked in the manager's learner preview at phone width: Chicken piccata
+  and Huevos rancheros, Learn and Cook.

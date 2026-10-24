@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "track": "core",
+  "prereqs": [],
+  "image": "dishes/turkey-lettuce-wraps.png",
+  "id": "turkey-lettuce-wraps",
+  "unit": 2,
+  "title": "Turkey lettuce wraps",
+  "cuisine": "chinese-american",
+  "skill": "Stir-frying, dicing small",
+  "skills": ["stir-frying", "dicing"],
+  "servings": 4,
+  "totalMinutes": 30,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 7, "text": "For more than 6, brown the turkey in two batches so it browns instead of steaming." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Everything ready, then fast",
+      "body": "Stir-frying is cooking small pieces fast in a hot pan, stirring all the time. Today you'll dice carrots and water chestnuts small, brown ground turkey, toss everything in a hoisin sauce, and spoon it into crisp lettuce cups."
+    },
+    "callback": {
+      "lesson": "fish-tacos",
+      "body": "You learned to dice when you made pico de gallo or a pot of soup: even little cubes that cook in the same time. Today the cubes go even smaller, so they cook in the two minutes a stir-fry gives them."
+    },
+    "why": [
+      { "id": "mise", "title": "Everything ready first", "body": "A stir-fry cooks in about ten minutes, and there's no time to chop once it starts. Cut everything and stir the sauce together before the pan gets hot. Cooks call this having everything in its place." },
+      { "id": "small-dice", "title": "Small dice, same time", "body": "Carrot is hard, so big pieces stay crunchy while everything else is done. Diced as small as a pea, it softens in two minutes. Pieces the same size all finish together." },
+      { "id": "break-up", "title": "Break it up, then let it brown", "body": "Ground turkey goes into the pan as a lump. Break it into small crumbles with the spoon, then let it sit a minute at a time so it browns where it touches the pan, instead of turning gray." },
+      { "id": "crisp-cups", "title": "Dry, cold lettuce", "body": "Lettuce cups hold best when they're cold and dry. Wet leaves make the filling soggy and slip out of your hand. Pat them dry, and keep them in the fridge until the filling is done." }
+    ],
+    "wrong": [
+      { "sign": "The turkey is gray and watery", "fix": "Turn the heat up and stop stirring for a minute. Let the water boil away so the turkey can brown." },
+      { "sign": "The carrots are still hard", "fix": "They were diced too big. Cook 2 more minutes, stirring. Next time, dice them smaller." },
+      { "sign": "The filling is too salty", "fix": "Squeeze a little lime or rice vinegar over it, and serve it with plain rice." },
+      { "sign": "The lettuce leaves tear", "fix": "Use two leaves together as one cup." }
+    ],
+    "quiz": [
+      { "q": "Why is everything chopped before the pan gets hot?", "choices": ["A stir-fry cooks too fast to chop in the middle", "Chopped food tastes better cold", "So the knife stays sharp"], "answer": 0, "explain": "Once a stir-fry starts, it cooks in minutes. Everything has to be ready to go in." },
+      { "q": "How hot does ground turkey need to get?", "choices": ["145°F", "165°F", "120°F"], "answer": 1, "explain": "Turkey is poultry, so it is safe at 165°F." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "turkey-ground", "amount": 1, "unit": "lb", "group": "Filling" },
+    { "ingredient": "carrot", "amount": 1, "unit": "count", "round": "up", "prep": "peeled", "group": "Filling" },
+    { "ingredient": "water-chestnuts", "amount": 1, "unit": "can", "round": "up", "prep": "drained", "group": "Filling" },
+    { "ingredient": "green-onion", "amount": 4, "unit": "count", "round": "up", "group": "Filling" },
+    { "ingredient": "garlic", "amount": 3, "unit": "count", "round": "up", "prep": "minced", "group": "Filling" },
+    { "ingredient": "ginger-fresh", "amount": 1, "unit": "tbsp", "prep": "grated", "group": "Filling" },
+    { "ingredient": "vegetable-oil", "amount": 1, "unit": "tbsp", "scale": false, "group": "For the pan" },
+    { "ingredient": "hoisin", "amount": 0.25, "unit": "cup", "group": "Sauce" },
+    { "ingredient": "soy-sauce", "amount": 1, "unit": "tbsp", "group": "Sauce" },
+    { "ingredient": "vinegar-rice", "amount": 1, "unit": "tbsp", "group": "Sauce" },
+    { "ingredient": "sesame-oil", "amount": 1, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "lettuce-butter", "amount": 1, "unit": "count", "round": "up", "group": "To serve" }
+  ],
+  "substitutions": [
+    { "for": "soy-sauce", "use": "tamari", "reason": "gluten", "note": "Hoisin can have wheat in it too. Check its label." }
+  ],
+  "equipment": [
+    "vegetable-peeler",
+    "chef-knife",
+    "cutting-board",
+    "can-opener",
+    "colander",
+    "box-grater",
+    "spoon",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "paper-towels",
+    "plate",
+    "skillet-12",
+    "wooden-spoon",
+    "thermometer"
+  ],
+  "steps": [
+    { "id": "lettuce", "text": "Pull the leaves off the lettuce, rinse them, and pat them dry with paper towels. Stack them on the plate and put them in the fridge.", "safety": "solo", "why": "crisp-cups" },
+    { "id": "carrot", "text": "Peel the carrot. Cut it into thin sticks, then cut across the sticks into tiny cubes, about the size of a pea.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "small-dice", "tip": "Hold the food with your hand shaped like a claw: fingertips tucked under, knuckles in front." },
+    { "id": "chestnuts", "text": "Open the water chestnuts and drain them in the colander. Dice them about the same size as the carrot.", "safety": "adult-nearby", "hazard": "Sharp knife, sharp can lid", "tip": "Keep your fingers away from the cut edge of the lid. It's as sharp as a knife." },
+    { "id": "aromatics", "text": "Slice the green onions into thin rings. Peel and mince the garlic. Scrape the skin off the ginger with the edge of the spoon and grate it on the small holes of the grater.", "safety": "adult-nearby", "hazard": "Sharp knife, grater" },
+    { "id": "sauce", "text": "In the small bowl, stir together the hoisin, soy sauce, rice vinegar, and sesame oil.", "safety": "solo", "why": "mise" },
+    { "id": "heat", "text": "Heat the vegetable oil in the skillet over medium-high heat until it shimmers.", "safety": "adult-nearby", "hazard": "Hot oil" },
+    { "id": "add-turkey", "text": "Add the turkey to the pan straight from its package.", "safety": "adult-nearby", "hazard": "Hot oil, raw poultry", "handles": ["turkey-ground"], "tip": "Tip it in close to the pan, away from you, so the oil doesn't splash." },
+    { "id": "wash-turkey", "type": "wash", "text": "Throw the package away, and wash your hands with soap.", "safety": "adult-nearby", "hazard": "Hot stove" },
+    { "id": "brown", "text": "Break the turkey into small crumbles with the wooden spoon. Let it sit a minute, stir, and let it sit again, until it is browned and no pink is left.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 360, "timerLabel": "Brown turkey", "why": "break-up", "look": "Small brown crumbles with no pink." },
+    { "id": "check-turkey", "type": "doneness", "text": "Push the turkey into a pile and slide the thermometer into the middle of it. It needs to read at least 165°F. If it doesn't, cook 1 more minute and check again.", "safety": "adult-nearby", "hazard": "Hot stove", "target": { "temp": 165, "unit": "F" } },
+    { "id": "veg", "text": "Add the carrot, garlic, and ginger. Stir-fry, stirring all the time, until the carrot softens.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 120, "timerLabel": "Carrot" },
+    { "id": "toss", "text": "Add the water chestnuts and the sauce, and stir until everything is hot and shiny. Turn off the stove and stir in most of the green onions.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 60, "timerLabel": "Sauce" },
+    { "id": "serve", "text": "Spoon the filling into the cold lettuce leaves, sprinkle the rest of the green onions on top, and eat them with your hands.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "The handle stays hot for a long time. Leave an oven mitt on it so nobody grabs it bare-handed." }
+  ]
+}

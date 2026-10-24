@@ -8,7 +8,7 @@
     { "id": "salmon", "name": "Salmon", "ingredients": ["salmon-smoked", "salmon-fillet"] },
     { "id": "tuna", "name": "Tuna", "ingredients": ["tuna-canned"] },
     { "id": "eggs", "name": "Eggs", "ingredients": ["egg", "egg-pasteurized"] },
-    { "id": "beans-lentils", "name": "Beans and lentils", "ingredients": ["cannellini", "black-beans"] },
+    { "id": "beans-lentils", "name": "Beans and lentils", "ingredients": ["cannellini", "black-beans", "refried-beans"] },
     { "id": "tofu", "name": "Tofu", "ingredients": ["tofu-extra-firm"] }
   ],
   "tasteFlavors": [
@@ -59,7 +59,7 @@
     { "id": "mayonnaise", "name": "Mayonnaise", "ingredients": ["mayonnaise"] },
     { "id": "mustard", "name": "Mustard", "ingredients": ["mustard-dijon"] },
     { "id": "pickles", "name": "Pickles", "ingredients": ["pickle-dill"] },
-    { "id": "capers", "name": "Capers", "ingredients": [] },
+    { "id": "capers", "name": "Capers", "ingredients": ["capers"] },
     { "id": "dried-fruit", "name": "Raisins and dried fruit in savory food", "ingredients": [] },
     { "id": "cinnamon-savory", "name": "Cinnamon in savory food", "ingredients": [] },
     { "id": "fish-sauce", "name": "Fish sauce and anchovy", "ingredients": [] },

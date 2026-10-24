@@ -189,7 +189,8 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 3a | Pico de gallo + Baja fish tacos | Mexican | Dicing; broiling fish | Adult nearby | Cod/tilapia. Broiled, not battered and fried: frying is first taught in 53 |
 | 3b | Ratatouille | French | Dicing: eggplant, zucchini, pepper, tomato · *pick one with 3a, 3c* | Adult nearby | |
 | 3c | Minestrone | Italian | Dicing · *pick one with 3a, 3b* | Adult nearby | |
-| 4 | Chicken Caesar + homemade dressing & croutons | American | Whisked dressing, cubing bread | Adult nearby | Pasteurized eggs or mayo base |
+| 4a | Chicken Caesar + homemade dressing & croutons | American | Whisked dressing, cubing bread | Adult nearby | Pasteurized eggs or mayo base |
+| 4b | Chicken souvlaki pitas | Greek | A yogurt sauce (tzatziki), chopping herbs fine · *pick one with 4a* | Adult nearby | Added 2026-10-24 |
 | 5 | Smash burgers + quick pickles | American | Thin slicing, quick pickle, high-heat sear | Adult nearby | |
 
 ### Unit 2 — Stovetop basics
@@ -202,12 +203,16 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 8a | Shakshuka | N. African / Middle Eastern | Building a sauce, poaching eggs in it | Adult nearby | |
 | 8b | Spaghetti marinara | Italian | Building a sauce · *pick one with 8a, 8c* | Adult nearby | |
 | 8c | Honey-garlic chicken | Chinese-American | Building a sauce · *pick one with 8a, 8b* | Adult nearby | Honey is allowed (§2.1) |
-| 9 | Chicken fried rice | Chinese | High-heat stir-fry, day-old rice | Adult nearby | Mushroom stir-fry sauce, not oyster sauce |
+| 9a | Chicken fried rice | Chinese | High-heat stir-fry, day-old rice | Adult nearby | Mushroom stir-fry sauce, not oyster sauce |
+| 9b | Turkey lettuce wraps | Chinese-American | Stir-frying, dicing small · *pick one with 9a* | Adult nearby | Hoisin, not oyster sauce. Added 2026-10-24 |
 | 10 | Oyakodon | Japanese | Simmering, setting egg gently | Adult nearby | Mirin sub: rice vinegar + sugar; dashi sub: chicken broth + soy |
-| 11 | Chicken adobo | Filipino | Braising, reducing | Adult nearby | |
+| 11a | Chicken adobo | Filipino | Braising, reducing | Adult nearby | |
+| 11b | Chicken piccata | Italian | Searing, reducing a pan sauce · *pick one with 11a, 11c* | Adult nearby | Broth, no wine. Added 2026-10-24 |
+| 11c | Pineapple teriyaki salmon | Hawaiian | Reducing a glaze, searing fish · *pick one with 11a, 11b* | Adult nearby | Added 2026-10-24 |
 | 12 | Breakfast burritos (breakfast) | American | Timing several components, rolling | Adult nearby | Beef chorizo or turkey sausage; check casings, or use bulk |
 | 13 | Cacio e pepe | Italian | Emulsion | Adult nearby | |
-| 14 | Eggs Benedict (breakfast) | American | Poaching eggs, hollandaise | Adult nearby | Turkey bacon or smoked salmon. Pasteurized eggs for the hollandaise. Prereq: 13 |
+| 14a | Eggs Benedict (breakfast) | American | Poaching eggs, hollandaise | Adult nearby | Turkey bacon or smoked salmon. Pasteurized eggs for the hollandaise. Prereq: 13 |
+| 14b | Huevos rancheros | Mexican | Cooking eggs gently in salsa · *pick one with 14a* | Adult nearby | Vegetarian refried beans (many are made with lard). Added 2026-10-24 |
 | 15a | Stovetop mac and cheese | American | Roux → béchamel → cheese sauce | Adult nearby | Foundation for every roux lesson |
 | 15b | Chicken and spinach crêpes | French | Roux → béchamel, crêpe batter · *pick one with 15a, 15c* | Adult nearby | |
 | 15c | Japanese chicken curry | Japanese | Roux with curry powder, from scratch · *pick one with 15a, 15b* | Adult nearby | Make the roux from scratch: store-bought curry blocks can contain pork or beef fat |
@@ -1005,6 +1010,8 @@ Each person rates what they love and hate, the app picks the best dish or **vari
 **No pick-one group has more than 3 dishes** (owner, 2026-10-24); the linter refuses a fourth (§7.4).
 
 **Jerk salmon is a variation of jerk chicken** (owner, 2026-10-24), not a pick-one dish: the same skills (marinating, broiling), salmon instead of chicken, with a short marinade (fish goes soft in a long one), a mango salsa, and 145°F. Draft tags: salmon; chili-heat, coconut-tropical; some; $$$. It waits on jerk chicken being written.
+
+**Written 2026-10-24** (owner: "write those four groups as lessons"): chicken souvlaki pitas (4b), turkey lettuce wraps (9b), chicken piccata (11b), pineapple teriyaki salmon (11c), and huevos rancheros (14b), in the course as pick-one choices; the course still has 59 numbers. Their pictures are placeholders until the owner's ChatGPT sheet arrives.
 
 Checks for every one, when written: no shrimp, oyster sauce, or seafood stock; labels on curry paste, hoisin, and fish sauce read for shellfish; doneness at the safe minimums (§3), whatever a source says.
 

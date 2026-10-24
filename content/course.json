@@ -183,7 +183,31 @@
         "budget": "$$",
         "familiar": "everyday",
         "veggies": "lots"
-      }
+      },
+      "pickOne": "dressings"
+    },
+    {
+      "id": "chicken-souvlaki-pitas",
+      "title": "Chicken souvlaki pitas",
+      "unit": 1,
+      "cuisine": "greek",
+      "skills": ["dressings", "fine-chopping"],
+      "skill": "A yogurt sauce, chopping herbs fine",
+      "image": "dishes/chicken-souvlaki-pitas.png",
+      "safety": "adult-nearby",
+      "minutes": 45,
+      "about": "Lemon and oregano chicken seared in a skillet and tucked into warm pitas with tomato, onion, and a cool cucumber-yogurt tzatziki.",
+      "main": ["chicken breast", "pita", "Greek yogurt", "cucumber", "lemon"],
+      "method": "stove",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["herby-lemony", "tangy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "pickOne": "dressings"
     },
     {
       "id": "smash-burgers",
@@ -302,7 +326,52 @@
         "veggies": "light"
       }
     },
-    { "id": "chicken-fried-rice", "title": "Chicken fried rice", "unit": 2, "cuisine": "chinese", "skills": ["stir-frying", "dicing"], "skill": "High-heat stir-fry, day-old rice", "image": "dishes/chicken-fried-rice.png", "safety": "adult-nearby", "minutes": 35, "about": "Day-old rice stir-fried fast with chicken, egg, vegetables, and soy sauce.", "main": ["cooked rice", "chicken", "eggs", "peas and carrots", "green onions"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["ginger-soy"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "some" } },
+    {
+      "id": "chicken-fried-rice",
+      "title": "Chicken fried rice",
+      "unit": 2,
+      "cuisine": "chinese",
+      "skills": ["stir-frying", "dicing"],
+      "skill": "High-heat stir-fry, day-old rice",
+      "image": "dishes/chicken-fried-rice.png",
+      "safety": "adult-nearby",
+      "minutes": 35,
+      "about": "Day-old rice stir-fried fast with chicken, egg, vegetables, and soy sauce.",
+      "main": ["cooked rice", "chicken", "eggs", "peas and carrots", "green onions"],
+      "method": "stove",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["ginger-soy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "pickOne": "stir-frying"
+    },
+    {
+      "id": "turkey-lettuce-wraps",
+      "title": "Turkey lettuce wraps",
+      "unit": 2,
+      "cuisine": "chinese-american",
+      "skills": ["stir-frying", "dicing"],
+      "skill": "Stir-frying, dicing small",
+      "image": "dishes/turkey-lettuce-wraps.png",
+      "safety": "adult-nearby",
+      "minutes": 30,
+      "about": "Ground turkey stir-fried with carrots, water chestnuts, and a hoisin sauce, spooned into cold lettuce cups.",
+      "main": ["ground turkey", "butter lettuce", "water chestnuts", "carrot", "hoisin sauce"],
+      "method": "stove",
+      "tags": {
+        "protein": "turkey",
+        "flavors": ["ginger-soy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "pickOne": "stir-frying"
+    },
     { "id": "oyakodon", "title": "Oyakodon", "unit": 2, "cuisine": "japanese", "skills": ["simmering", "poaching-eggs"], "skill": "Simmering, setting egg gently", "image": "dishes/oyakodon.png", "safety": "adult-nearby", "minutes": 45, "about": "A Japanese rice bowl of chicken and onion simmered in a sweet soy broth, with egg set gently on top.", "main": ["chicken thighs", "eggs", "onion", "soy sauce", "rice"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["ginger-soy", "sweet-savory"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
     {
       "id": "chicken-adobo",
@@ -324,7 +393,54 @@
         "budget": "$",
         "familiar": "new-ish",
         "veggies": "light"
-      }
+      },
+      "pickOne": "reducing"
+    },
+    {
+      "id": "chicken-piccata",
+      "title": "Chicken piccata",
+      "unit": 2,
+      "cuisine": "italian",
+      "skills": ["searing", "reducing"],
+      "skill": "Searing, reducing a pan sauce",
+      "image": "dishes/chicken-piccata.png",
+      "safety": "adult-nearby",
+      "minutes": 35,
+      "about": "Thin chicken cutlets seared golden, in a bright lemon and caper pan sauce made in the same skillet.",
+      "main": ["chicken breasts", "lemon", "capers", "chicken broth", "butter"],
+      "method": "stove",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["herby-lemony"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "pickOne": "reducing"
+    },
+    {
+      "id": "pineapple-teriyaki-salmon",
+      "title": "Pineapple teriyaki salmon",
+      "unit": 2,
+      "cuisine": "hawaiian",
+      "skills": ["reducing", "searing"],
+      "skill": "Reducing a glaze, searing fish",
+      "image": "dishes/pineapple-teriyaki-salmon.png",
+      "safety": "adult-nearby",
+      "minutes": 40,
+      "about": "Seared salmon under a shiny homemade teriyaki glaze of pineapple juice and soy, with warm pineapple and rice.",
+      "main": ["salmon", "pineapple", "soy sauce", "brown sugar", "rice"],
+      "method": "stove",
+      "tags": {
+        "protein": "salmon",
+        "flavors": ["sweet-savory", "ginger-soy", "coconut-tropical"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "pickOne": "reducing"
     },
     {
       "id": "breakfast-burritos",
@@ -370,7 +486,31 @@
         "budget": "$$",
         "familiar": "new-ish",
         "veggies": "light"
-      }
+      },
+      "pickOne": "poaching-eggs"
+    },
+    {
+      "id": "huevos-rancheros",
+      "title": "Huevos rancheros",
+      "unit": 2,
+      "cuisine": "mexican",
+      "skills": ["poaching-eggs", "heat-control"],
+      "skill": "Cooking eggs gently in salsa",
+      "image": "dishes/huevos-rancheros.png",
+      "safety": "adult-nearby",
+      "minutes": 35,
+      "about": "Eggs cooked in simmering salsa, served on crisp corn tortillas with refried beans. A breakfast or supper dish.",
+      "main": ["eggs", "salsa", "corn tortillas", "refried beans", "avocado"],
+      "method": "stove",
+      "tags": {
+        "protein": "eggs",
+        "flavors": ["chili-heat", "rich-tomato"],
+        "heat": "some",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "pickOne": "poaching-eggs"
     },
     { "id": "mac-and-cheese", "title": "Stovetop mac and cheese", "unit": 2, "cuisine": "american", "skills": ["roux"], "skill": "Roux, then béchamel, then cheese sauce", "image": "dishes/mac-and-cheese.png", "safety": "adult-nearby", "minutes": 40, "pickOne": "roux", "about": "Creamy macaroni in a homemade cheese sauce, made on the stove.", "main": ["elbow macaroni", "cheddar cheese", "milk", "butter"], "method": "stove", "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     {

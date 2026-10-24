@@ -30,6 +30,7 @@
     { "id": "brazilian", "name": "Brazilian", "region": "latam" },
     { "id": "american", "name": "American", "region": "usa" },
     { "id": "louisiana", "name": "Louisiana", "region": "usa" },
+    { "id": "hawaiian", "name": "Hawaiian", "region": "usa" },
     { "id": "tex-mex", "name": "Tex-Mex", "region": "usa" },
     { "id": "jewish", "name": "Jewish", "region": "europe" },
     { "id": "british", "name": "British", "region": "europe" },

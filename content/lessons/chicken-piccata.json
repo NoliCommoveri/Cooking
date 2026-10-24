@@ -1,0 +1,100 @@
+{
+  "version": 1,
+  "track": "core",
+  "prereqs": [],
+  "image": "dishes/chicken-piccata.png",
+  "id": "chicken-piccata",
+  "unit": 2,
+  "title": "Chicken piccata",
+  "cuisine": "italian",
+  "skill": "Searing, reducing a pan sauce",
+  "skills": ["searing", "reducing"],
+  "servings": 4,
+  "totalMinutes": 35,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 5, "text": "For more than 4, sear the chicken in batches of 4 pieces, adding a little more oil and butter for each, and keep the cooked ones on the plate under foil." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Sear, then make a sauce in the same pan",
+      "body": "Today you'll flatten chicken so it cooks evenly, sear it golden, and then make a lemon sauce right in the same pan. Broth and lemon juice bubble down with the brown bits the chicken left behind, then capers and a little butter finish it."
+    },
+    "callback": {
+      "lesson": "chicken-fajitas",
+      "body": "In fajitas you left chicken alone in a hot pan until a brown crust formed and it let go by itself. Do the same here. Those brown bits stuck to the pan after are not a mess: today they become your sauce."
+    },
+    "why": [
+      { "id": "even", "title": "Flat cooks evenly", "body": "A chicken breast is thick at one end and thin at the other, so the thin end dries out before the thick end is done. Pounding it to the same thickness all over means every part is done at the same moment." },
+      { "id": "flour", "title": "A light coat of flour", "body": "A thin dusting of flour helps the chicken brown and keeps it from sticking. Later, a little of that flour stays in the pan and helps the sauce thicken. Shake off the extra, or it turns gummy." },
+      { "id": "fond", "title": "The brown bits are flavor", "body": "When chicken sears, some of it sticks to the pan and browns. Those brown bits are packed with flavor. Pouring in broth loosens them, and scraping with a wooden spoon stirs them into the sauce." },
+      { "id": "reduce", "title": "Bubbling it down", "body": "As the broth and lemon juice bubble, water steams away, so the sauce gets thicker and its flavor gets stronger. When about half of it is gone, it is ready for the butter." }
+    ],
+    "wrong": [
+      { "sign": "The chicken is pale, not golden", "fix": "The pan wasn't hot enough. Let it heat longer before the next batch, and don't move the chicken until it lets go by itself." },
+      { "sign": "The sauce is thin and runny", "fix": "Let it bubble 1 or 2 more minutes before adding the butter." },
+      { "sign": "The sauce tastes too sour", "fix": "Stir in another small piece of butter, or a splash more broth." },
+      { "sign": "The flour coat is gummy", "fix": "There was too much flour. Next time, shake each piece well so only a thin dusting is left." }
+    ],
+    "quiz": [
+      { "q": "Why do you pound the chicken flat?", "choices": ["So it cooks evenly", "So it looks bigger", "So it holds more salt"], "answer": 0, "explain": "Even thickness means the thin parts are not dry before the thick parts are done." },
+      { "q": "What do the brown bits stuck to the pan become?", "choices": ["Part of the sauce", "Trash", "A crust for the bread"], "answer": 0, "explain": "Broth loosens them, and they give the sauce its deep flavor." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "chicken-breast", "amount": 1.5, "unit": "lb", "prep": "2 large breasts", "group": "Chicken" },
+    { "ingredient": "salt", "amount": 0.75, "unit": "tsp", "group": "Chicken" },
+    { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Chicken" },
+    { "ingredient": "flour-ap", "amount": 0.33, "unit": "cup", "group": "Chicken" },
+    { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp", "scale": false, "group": "For the pan" },
+    { "ingredient": "butter-unsalted", "amount": 1, "unit": "tbsp", "scale": false, "group": "For the pan" },
+    { "ingredient": "garlic", "amount": 2, "unit": "count", "round": "up", "prep": "minced", "group": "Sauce" },
+    { "ingredient": "broth-chicken", "amount": 0.75, "unit": "cup", "group": "Sauce" },
+    { "ingredient": "lemon", "amount": 1, "unit": "count", "round": "up", "prep": "juiced", "group": "Sauce" },
+    { "ingredient": "capers", "amount": 2, "unit": "tbsp", "prep": "drained", "group": "Sauce" },
+    { "ingredient": "butter-unsalted", "amount": 2, "unit": "tbsp", "group": "Sauce" },
+    { "ingredient": "parsley", "amount": 2, "unit": "tbsp", "prep": "chopped", "optional": true, "group": "To serve" }
+  ],
+  "substitutions": [
+    { "for": "flour-ap", "use": "cornstarch", "reason": "gluten", "note": "A thin dusting browns well too." }
+  ],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "parchment",
+    "rolling-pin",
+    "shallow-dish",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "plate",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "wooden-spoon",
+    "thermometer",
+    "foil",
+    "oven-mitts"
+  ],
+  "steps": [
+    { "id": "sauce-prep", "text": "Peel and mince the garlic. Cut the lemon in half and squeeze out the juice, catching the seeds with your fingers. Drain the capers. Chop the parsley if you're using it.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Getting the sauce ready now matters. Once the chicken comes out of the pan, the sauce cooks in a few minutes." },
+    { "id": "pound", "text": "Cut each chicken breast in half across the middle, making 4 pieces. Lay them between two sheets of parchment and pound them with the rolling pin until they are all about as thick as your finger.", "safety": "adult-nearby", "hazard": "Sharp knife, raw chicken", "handles": ["chicken-breast"], "why": "even", "tip": "Pound from the middle out, and hit the thick parts more than the thin ones." },
+    { "id": "wash-pound", "type": "wash", "text": "Wash your hands, the knife, the cutting board, and the rolling pin with hot, soapy water. Throw the parchment away.", "safety": "solo", "hazard": "Raw chicken" },
+    { "id": "dredge", "text": "Put the flour in the shallow dish. Sprinkle the chicken with {qty:salt} salt and the pepper. Press each piece into the flour on both sides, shake off the extra, and lay it on the plate.", "safety": "solo", "hazard": "Raw chicken", "handles": ["chicken-breast"], "why": "flour" },
+    { "id": "wash-dredge", "type": "wash", "text": "Throw away the leftover flour. Wash your hands with soap, and wipe the counter.", "safety": "solo", "hazard": "Raw chicken" },
+    { "id": "heat", "text": "Heat the olive oil and 1 tablespoon of butter in the skillet over medium-high heat until the butter stops foaming.", "safety": "adult-nearby", "hazard": "Hot oil" },
+    { "id": "add-chicken", "text": "Use the tongs to lay the chicken in the pan, laying each piece down away from you. Put the tongs in the sink, and don't use them again for cooked food.", "safety": "adult-nearby", "hazard": "Hot oil", "handles": ["chicken-breast"] },
+    { "id": "wash-pan", "type": "wash", "text": "Wash your hands, and put the raw-chicken plate in the sink. From here on, use the clean spatula.", "safety": "adult-nearby", "hazard": "Hot stove" },
+    { "id": "sear", "text": "Leave the chicken alone while the bottom turns golden. Don't poke it or move it.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 240, "timerLabel": "Chicken, first side", "look": "Golden brown, and it lets go of the pan when you nudge it." },
+    { "id": "flip", "text": "Flip each piece with the spatula and cook the other side.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 180, "timerLabel": "Chicken, second side", "tip": "Flip it away from you, so any spatter goes the other way." },
+    { "id": "check-chicken", "type": "doneness", "text": "Slide the thermometer into the side of the thickest piece. It needs to read at least 165°F. If it doesn't, cook 1 more minute on each side and check again.", "safety": "adult-nearby", "hazard": "Hot stove", "target": { "temp": 165, "unit": "F" } },
+    { "id": "rest", "text": "Move the chicken to a clean plate with the spatula and cover it loosely with foil.", "safety": "adult-nearby", "hazard": "Hot pan" },
+    { "id": "garlic", "text": "Turn the heat down to medium. Add the garlic to the pan and stir it for about 30 seconds, just until it smells good.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 30, "timerLabel": "Garlic", "tip": "Garlic burns fast. Keep the spoon moving." },
+    { "id": "broth", "text": "Pour in the broth and lemon juice. Scrape the bottom of the pan with the wooden spoon to loosen all the brown bits.", "safety": "adult-nearby", "hazard": "Hot pan, steam", "why": "fond", "tip": "It hisses and steams when the broth goes in. Pour slowly and keep your face back." },
+    { "id": "reduce", "text": "Let the sauce bubble until about half of it has steamed away.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 240, "timerLabel": "Sauce", "why": "reduce", "look": "About half as much sauce as you started with, and a little thicker." },
+    { "id": "finish", "text": "Turn off the heat. Stir in the capers and the sauce's 2 tablespoons of butter until the butter melts into the sauce.", "safety": "adult-nearby", "hazard": "Hot pan" },
+    { "id": "serve", "text": "Put the chicken back in the pan and spoon the sauce over it. Sprinkle with parsley if you're using it.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "The handle stays hot for a long time. Leave an oven mitt on it so nobody grabs it bare-handed." }
+  ]
+}
