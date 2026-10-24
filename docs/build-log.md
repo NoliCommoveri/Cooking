@@ -4679,3 +4679,11 @@ tables.
   which opens the real player. Knowledge is open first; the open tab is kept
   for the visit, like the week. The separate part page is gone.
 - Tests: 351, all passing.
+
+## 195. 2026-10-24 — Demo header: beta testing is live
+
+- Owner, 2026-10-24: "Beta testing will begin shortly" is out of date.
+- **Before:** "Beta testing via invitation will begin shortly."
+- **Now** (`public/demo.js`), in the owner's words: "Beta testing is now
+  live. To participate, search Clean Plate Recipe App on Facebook."
+- Tests: 351, all passing.
