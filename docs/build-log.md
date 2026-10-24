@@ -4662,3 +4662,20 @@ tables.
     and Next step under it. A new stage starts at the lesson's top, which is
     the page's top in the app and the lesson's top on the demo.
 - Tests: 351, all passing.
+
+## 194. 2026-10-24 — Try a week: a tab for each part
+
+- Owner, 2026-10-24: Try it should have little tabs to show all four
+  components, not just the recipe. Taken as Structured Progression's Try a
+  week (Cook Around the World is recipe only).
+- **Before:** the week card listed the four parts as rows. A part's row
+  opened its page in place of the tab, with a back link; the recipe's row
+  opened the player.
+- **Now (`public/demo.js`, `public/demo.css`):** under the week's heading,
+  four small tabs in the owner's order, Knowledge, Drill, Recipe, Beyond the
+  Recipe, each with its minutes or "Done ✓". The open tab's page shows right
+  under them in the card: a part's reading, steps, and quiz with Done; the
+  recipe's picture, skill, time, servings, the week's note, and **Cook it**,
+  which opens the real player. Knowledge is open first; the open tab is kept
+  for the visit, like the week. The separate part page is gone.
+- Tests: 351, all passing.

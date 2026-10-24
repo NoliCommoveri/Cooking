@@ -2,8 +2,8 @@
 // real lesson player a pretend profile and family, so what moms try is what
 // kids get. It shows the two tracks: Cook Around the World (the sample
 // lessons, the diet preview, a shopping list preview, the whole course, and
-// the skills view) and Structured Progression (a Level week and its part
-// pages, the four Levels, and a pretend learner's progress).
+// the skills view) and Structured Progression (a Level week with a tab for
+// each of its parts, the four Levels, and a pretend learner's progress).
 import { openLesson } from './player.js';
 import { dietView } from './lib/diet.js';
 import { shoppingList } from './lib/shop.js';
@@ -53,7 +53,7 @@ const TRACKS = {
   sp: { name: 'Structured Progression', short: 'Complete courses from the fundamentals', tabs: [['week', 'Try a week'], ['levels', 'The Levels'], ['progress', 'Progress']] },
 };
 // What a visitor has chosen. Kept for this tab only.
-let V = { track: 'catw', open: null, theme: 'quest', audience: 'kid', diet: [], tab: 'try', checked: [], shop: { step: 'needs', count: 0, have: [] }, lvWeek: 1, lvDone: [] };
+let V = { track: 'catw', open: null, theme: 'quest', audience: 'kid', diet: [], tab: 'try', checked: [], shop: { step: 'needs', count: 0, have: [] }, lvWeek: 1, lvPart: 'knowledge', lvDone: [] };
 try { V = { ...V, ...JSON.parse(sessionStorage.getItem('cpr.demo')) }; } catch { /* first visit */ }
 V.shop = { step: 'needs', count: 0, have: [], ...(V.shop ?? {}) };
 if (!TRACKS[V.track]?.tabs.some(([k]) => k === V.tab)) V = { ...V, track: 'catw', tab: 'try' };
@@ -229,46 +229,52 @@ const unitOf = (n) => LEVEL.units.find((u) => u.number === n);
 const weekRecipe = (w) => weekRecipes(w).find((id) => dietView(lessons[id], R.ingredients, V.diet).visible) ?? null;
 const titleOf = (id) => lessons[id]?.title ?? id;
 
-// This week's card, drawn as the kitchen draws it (12c), in the owner's
-// order: Knowledge, Drill, Recipe, Beyond the Recipe. Done is kept for this
-// tab only.
+// This week's card (12c), with a small tab for each of its four parts in
+// the owner's order (Knowledge, Drill, Recipe, Beyond the Recipe), and the
+// open part's page under them: its reading, steps, and quiz with Done, or
+// the recipe with Cook it. Done is kept for this tab only.
+const WEEK_TABS = [['knowledge', 'Knowledge'], ['drill', 'Drill'], ['recipe', 'Recipe'], ['sabbath', 'Beyond the Recipe']];
+const cardOf = (id) => [...R.lessons, ...(R.levelLessons ?? [])].find((l) => l.id === id);
 function weekView() {
   const quest = V.theme === 'quest';
   const w = DEMO_WEEKS_LV.find((x) => x.week === V.lvWeek) ?? DEMO_WEEKS_LV[0];
   const u = unitOf(w.unit), id = weekRecipe(w);
-  const done = (part) => V.lvDone.includes(`${w.week}-${part}`);
-  const row = (label, title, note, attrs, on) => `<button type="button" class="k-part${on ? ' done' : ''}" ${attrs}><span class="k-part-l">${esc(label)}</span><b>${esc(title)}</b><small>${esc(note)}</small></button>`;
-  const part = (k) => row(PART_NAMES[k], w[k].title, done(k) ? 'Done ✓' : `${w[k].minutes} min`, `data-part="${k}"`, done(k));
+  const done = (k) => V.lvDone.includes(`${w.week}-${k}`);
+  const on = WEEK_TABS.some(([k]) => k === V.lvPart) ? V.lvPart : 'knowledge';
   const swapped = id && id !== w.recipe;
-  const recipe = id ? row('Recipe', titleOf(id), `${lessons[id].totalMinutes} min`, `data-open="${esc(id)}"`, false)
-    : `<div class="k-part"><span class="k-part-l">Recipe</span><b>None of this week's recipes fit this diet</b><small>Swap recipe</small></div>`;
-  return `<p class="mut d-lede">A sample from <b>${esc(LEVEL.name)}</b>, Unit ${u.number}: ${esc(u.name)}. Each week of a Level has four parts, and a week is done when its recipe is cooked. Pick a week, then open any part.</p>
+  const tabsRow = `<div class="d-ptabs" role="tablist" aria-label="This week's parts">${WEEK_TABS.map(([k, label]) => `<button type="button" role="tab" id="pt-${k}" aria-controls="pt-panel" aria-selected="${k === on}" data-ptab="${k}"><span>${esc(label)}</span><small>${k === 'recipe' ? (id ? `${lessons[id].totalMinutes} min` : 'Swap') : done(k) ? 'Done ✓' : `${w[k].minutes} min`}</small></button>`).join('')}</div>`;
+  return `<p class="mut d-lede">A sample from <b>${esc(LEVEL.name)}</b>, Unit ${u.number}: ${esc(u.name)}. Each week of a Level has four parts, and a week is done when its recipe is cooked. Pick a week, then tap through its parts.</p>
     <div class="seg d-weeks" role="group" aria-label="Week">${DEMO_WEEKS_LV.map((x) => `<button type="button" data-lvweek="${x.week}" aria-pressed="${x.week === w.week}">Week ${x.week}${x.mastery ? ' · Mastery' : ''}</button>`).join('')}</div>
     <section class="kitchen qx" data-kt="${V.theme}"><article class="${quest ? 'q-panel' : 'p-card'} k-level">
       <p class="${quest ? 'q-kick' : 'p-lessonno'}">${esc(LEVEL.name)} · Week ${w.week} of ${LEVEL.weeks.length}</p>
       <h2 class="${quest ? 'q-title' : 'p-title'}">Unit ${u.number}: ${esc(u.name)}</h2>
       ${w.mastery ? `<p class="${quest ? 'q-swap' : 'p-swap'}">Mastery week: cook it on your own</p>` : ''}
-      ${id ? '' : `<p class="${quest ? 'q-swap' : 'p-swap'}">A parent would use Swap recipe to pick another dish that teaches this week's skill.</p>`}
-      ${swapped ? `<p class="${quest ? 'q-swap' : 'p-swap'}">${esc(titleOf(w.recipe))} doesn't fit this diet, so this week cooks one of its options.</p>` : ''}
-      <div class="k-parts">${part('knowledge')}${part('drill')}${recipe}${part('sabbath')}</div>
+      ${tabsRow}
+      <div class="d-ppanel" role="tabpanel" id="pt-panel" aria-labelledby="pt-${on}">${on === 'recipe' ? recipePanel(w, id, swapped, quest) : partPanel(w, on, quest)}</div>
     </article>
     <p class="d-goal"><b>Unit goal:</b> ${esc(u.goal)}</p></section>`;
 }
 
-// A part's page (12c), with Done and Skip this, saving nothing.
-function partView(k) {
-  const quest = V.theme === 'quest';
-  const w = DEMO_WEEKS_LV.find((x) => x.week === V.lvWeek) ?? DEMO_WEEKS_LV[0];
+// The week's recipe: its card, and Cook it to open the real player.
+function recipePanel(w, id, swapped, quest) {
+  if (!id) return `<h3 class="${quest ? 'q-title' : 'p-title'}">None of this week's recipes fit this diet</h3><p>A parent would use Swap recipe to pick another dish that teaches this week's skill.</p>`;
+  const L = lessons[id], c = cardOf(id);
+  return `${swapped ? `<p class="${quest ? 'q-swap' : 'p-swap'}">${esc(titleOf(w.recipe))} doesn't fit this diet, so this week cooks one of its options.</p>` : ''}
+    <div class="d-precipe">${c?.image ? `<img src="/${esc(c.image)}" alt="" width="120" height="120" loading="lazy">` : ''}<div>
+      <h3 class="${quest ? 'q-title' : 'p-title'}">${esc(L.title)}</h3><p class="${quest ? 'q-skill' : 'p-skill'}">${esc(L.skill)}</p>
+      <p>${L.totalMinutes} min · Serves ${L.servings} · ${esc(R.cuisines[L.cuisine]?.name ?? L.cuisine)}</p></div></div>
+    ${w.note ? `<p><b>This week:</b> ${esc(w.note)}</p>` : ''}
+    <div class="acts"><button type="button" class="${quest ? 'q-btn' : 'p-btn'}" data-open="${esc(id)}">Cook it</button></div>`;
+}
+
+// A drill, knowledge, or Beyond the Recipe page (12c), with Done, saving nothing.
+function partPanel(w, k, quest) {
   const x = w[k], on = V.lvDone.includes(`${w.week}-${k}`);
   const quiz = (x.quiz ?? []).map((q, n) => `<div class="k-pagebody"><b>${esc(q.q)}</b><div class="k-parts">${q.choices.map((c, i) => `<button type="button" class="k-part" data-quiz="${n}-${i}"><b>${esc(c)}</b></button>`).join('')}</div><p data-why="${n}" hidden></p></div>`).join('');
-  return `<section class="kitchen" data-kt="${V.theme}"><button type="button" class="back" data-part="">${quest ? '← Quest board' : '← Recipe box'}</button>
-    <article class="${quest ? 'q-panel' : 'p-card'} k-level">
-      <p class="${quest ? 'q-kick' : 'p-lessonno'}">${esc(LEVEL.name)} · Week ${w.week} · ${PART_NAMES[k]}</p>
-      <h2 class="${quest ? 'q-title' : 'p-title'}">${esc(x.title)}</h2>
-      <p>About ${x.minutes} minutes</p>
-      <div class="k-pagebody">${(x.body ?? []).map((t) => `<p>${esc(t)}</p>`).join('')}${x.steps?.length ? `<ol>${x.steps.map((t) => `<li>${esc(t)}</li>`).join('')}</ol>` : ''}${quiz}</div>
-      ${on ? `<p class="${quest ? 'q-swap' : 'p-swap'}">Done ✓</p>` : `<div class="acts"><button type="button" class="${quest ? 'q-btn' : 'p-btn'}" data-done="${k}">Done</button></div>`}
-    </article></section>`;
+  return `<h3 class="${quest ? 'q-title' : 'p-title'}">${esc(x.title)}</h3>
+    <p>About ${x.minutes} minutes</p>
+    <div class="k-pagebody">${(x.body ?? []).map((t) => `<p>${esc(t)}</p>`).join('')}${x.steps?.length ? `<ol>${x.steps.map((t) => `<li>${esc(t)}</li>`).join('')}</ol>` : ''}${quiz}</div>
+    ${on ? `<p class="${quest ? 'q-swap' : 'p-swap'}">Done ✓</p>` : `<div class="acts"><button type="button" class="${quest ? 'q-btn' : 'p-btn'}" data-done="${k}">Done</button></div>`}`;
 }
 
 function levelsView() {
@@ -323,9 +329,8 @@ function progressView() {
 
 // ---------- drawing ----------
 const VIEWS = { try: tryView, shop: shopView, course: courseView, skills: skillsView, week: weekView, levels: levelsView, progress: progressView };
-let part = '';
 async function draw() {
-  root.innerHTML = `${header()}${tabs()}${part ? '' : controls()}<div id="pane">${part ? partView(part) : VIEWS[V.tab]()}</div>
+  root.innerHTML = `${header()}${tabs()}${controls()}<div id="pane">${VIEWS[V.tab]()}</div>
     <p class="d-foot">Clean Plate Recipes is published by Immotus Apps. Nothing you do here is saved to an account.</p>`;
   const box = document.getElementById('lvprogress');
   if (box) box.append(await levelProgressView(profile(), demoLevel(), demoCooks()));
@@ -349,24 +354,24 @@ root.addEventListener('click', (e) => {
   if (pick) {
     const k = pick.dataset.pick;
     V.open = V.open === k ? null : k;
-    if (V.track !== k) { V.track = k; V.tab = TRACKS[k].tabs[0][0]; part = ''; }
+    if (V.track !== k) { V.track = k; V.tab = TRACKS[k].tabs[0][0]; }
     keep();
     return draw();
   }
   const track = t.closest('[data-track]');
   if (track) {
-    if (V.track !== track.dataset.track) { V.track = track.dataset.track; V.tab = TRACKS[V.track].tabs[0][0]; part = ''; keep(); draw(); }
+    if (V.track !== track.dataset.track) { V.track = track.dataset.track; V.tab = TRACKS[V.track].tabs[0][0]; keep(); draw(); }
     return document.getElementById('track').scrollIntoView({ behavior: 'smooth' });
   }
-  if (tab) { e.preventDefault(); V.tab = tab.dataset.tab; part = ''; keep(); return draw(); }
-  // Structured Progression: a week, a part page, Done, and a quiz answer.
-  const lvweek = t.closest('[data-lvweek]'), partBtn = t.closest('[data-part]'), doneBtn = t.closest('[data-done]'), quiz = t.closest('[data-quiz]');
+  if (tab) { e.preventDefault(); V.tab = tab.dataset.tab; keep(); return draw(); }
+  // Structured Progression: a week, a part's tab, Done, and a quiz answer.
+  const lvweek = t.closest('[data-lvweek]'), ptab = t.closest('[data-ptab]'), doneBtn = t.closest('[data-done]'), quiz = t.closest('[data-quiz]');
   if (lvweek) { V.lvWeek = Number(lvweek.dataset.lvweek); keep(); return draw(); }
-  if (partBtn) { part = partBtn.dataset.part; draw(); return document.getElementById('pane').scrollIntoView(); }
-  if (doneBtn) { V.lvDone = [...new Set([...V.lvDone, `${V.lvWeek}-${doneBtn.dataset.done}`])]; part = ''; keep(); return draw(); }
+  if (ptab) { V.lvPart = ptab.dataset.ptab; keep(); draw(); return root.querySelector('.d-ptabs [aria-selected="true"]').focus({ preventScroll: true }); }
+  if (doneBtn) { V.lvDone = [...new Set([...V.lvDone, `${V.lvWeek}-${doneBtn.dataset.done}`])]; keep(); return draw(); }
   if (quiz) {
     const [n, i] = quiz.dataset.quiz.split('-').map(Number);
-    const w = DEMO_WEEKS_LV.find((x) => x.week === V.lvWeek), q = w[part].quiz[n];
+    const w = DEMO_WEEKS_LV.find((x) => x.week === V.lvWeek), q = w[V.lvPart].quiz[n];
     const why = root.querySelector(`[data-why="${n}"]`);
     why.hidden = false;
     why.textContent = `${i === q.answer ? 'Yes!' : `Not quite: it's "${q.choices[q.answer]}".`} ${q.explain}`;
