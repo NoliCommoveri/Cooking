@@ -3923,3 +3923,14 @@ your recommendations on the rest"). No app changes.
   lamb), 21 are variations, Lasagna for 12 is the lasagna lesson at 12, and
   33 are Level only, in each Level's own Side quests unit. Waiting on the
   owner.
+
+## 158. 2026-10-24 — Plan: the new Level dishes' table approved
+
+The owner approved §12.7's table ("go with the table"). No app changes.
+- Hollandaise over asparagus and Chicken schnitzel fill the poaching-eggs
+  and breading-and-frying groups; matzah brei and roast leg of lamb join
+  Appointed Times; 21 dishes are written as variations; Lasagna for 12 is
+  the lasagna lesson at 12; 33 are Level only.
+- Group fills, Appointed Times lessons, and variations of course dishes are
+  live for every family once written; Level-only recipes wait for the next
+  release.
