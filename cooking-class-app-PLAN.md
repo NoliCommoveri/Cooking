@@ -980,6 +980,28 @@ Each person rates what they love and hate, the app picks the best dish or **vari
 | Spicy shakshuka | Shakshuka | Building a sauce | No written meal is spicy | eggs; rich-tomato, chili-heat; spicy; $ |
 | Spicy chicken fajitas | Chicken fajitas | Julienne | Same | chicken; warm-spices, chili-heat; spicy; $$ |
 
+**Proposed pick-one dishes — Recommendation** (Claude, 2026-10-24, from recipes found on the web; none written yet, and each waits on the owner's yes). The owner's direction (2026-10-24): new dishes go in as **pick-one choices beside a dish that teaches the same skills**, not as extra lessons, so the course keeps its numbering and its length; a family cooks one dish from each group (§4.0). They fill the gaps the coverage check found: no salmon, lamb, or tofu, no coconut and tropical dish, thin smoky and BBQ, and only 3 meals of 30 minutes or less. Each is from a store in a mid-sized US city. The sources were read from search results only; amounts are checked when each lesson is written.
+
+| New dish | Beside | Pick-one group (skill) | Time | Draft tags | Notes |
+|---|---|---|---|---|---|
+| Chicken piccata (broth, no wine) | Shakshuka, spaghetti marinara, honey-garlic chicken | building-a-sauce (existing) | 30 | chicken; herby-lemony; mild; $$ | First dish with capers; teaches a pan sauce after searing |
+| Beef and broccoli (flank steak) | Lomo saltado | thin-slicing (new) | 25 | beef; ginger-soy; mild; $$ | No oyster sauce: soy, broth, brown sugar, ginger |
+| Turkey lettuce wraps | Chicken fried rice | stir-frying (new) | 20 | turkey; ginger-soy; mild; $ | Hoisin and soy, not oyster sauce |
+| Coconut chickpea curry | Chana masala | blooming-spices (new) | 30 | beans-lentils; coconut-tropical, warm-spices; mild; $ | First coconut dish; first with chickpeas |
+| Blackened cod or tilapia | BBQ pulled chicken | spice-rubs (new) | 20 | white-fish; smoky-bbq, chili-heat; spicy; $$ | A quick spicy dish |
+| BBQ-rubbed salmon (sear, then bake) | the same group | spice-rubs (new) | 25 | salmon; smoky-bbq, sweet-savory; mild; $$$ | Smoked paprika and brown sugar rub |
+| Broiled honey-soy salmon | Jerk chicken | broiling (new) | 15–25 | salmon; sweet-savory, ginger-soy; mild; $$$ | Doneness 145°F (one source pulls at 125–130°F) |
+| Jerk salmon with mango salsa | Fish tacos, ratatouille, minestrone | dicing (existing) | 30 | salmon; coconut-tropical, chili-heat; some; $$$ | Dicing the salsa, like fish tacos |
+| Pineapple teriyaki salmon | Chicken adobo | reducing (new) | 30 | salmon; sweet-savory, ginger-soy, coconut-tropical; mild; $$$ | Reducing a glaze |
+| Huevos rancheros, eggs cooked in salsa | Eggs Benedict | poaching-eggs (new) | 25 | eggs; chili-heat, rich-tomato; some; $ | Method adapted: covered, until whites and yolks are firm |
+| Chicken souvlaki pitas with tzatziki | Chicken Caesar | dressings (new) | 30 | chicken; herby-lemony, tangy; mild; $$ | Short marinade; 165°F (one source says 160°F) |
+| Moqueca, Brazilian coconut fish stew | Peanut stew | one-pot-stews (new) | 30 | white-fish; coconut-tropical, rich-tomato; mild; $$ | No shrimp, no seafood stock |
+| Coconut-crusted fish with pineapple salsa | Chicken katsu | breading-frying (new) | 35 | white-fish; coconut-tropical; mild; $$ | Mahi-mahi is often frozen; cod or tilapia work |
+| Lamb kofta with yogurt sauce | Meatloaf | binders (new) | 40 | lamb; warm-spices, herby-lemony; mild; $$$ | First lamb dish; ground lamb, 160°F |
+| Caribbean coconut curry lamb chops | Chicken tagine | braising (new) | 75 | lamb; coconut-tropical, warm-spices; some; $$$ | Scotch bonnet optional |
+
+Checks for every one, when written: no shrimp, oyster sauce, or seafood stock; labels on curry paste, hoisin, and fish sauce read for shellfish; doneness at the safe minimums (§3), whatever a source says.
+
 **Tags on every dish and variation** — the shared vocabulary between ratings, picks, and gaps.
 - **Where they live:** beside the dish card, on each dish's `course.json` entry (so all 75 are tagged, written or not), or on the lesson for a seasonal lesson (§6.19), as `tags`.
 - **Set by the owner:** `protein` (one of the proteins, or `none` for a side, bread, or dessert), `flavors` (1 to 3), `heat` (mild, some, spicy), `budget` ($, $$, $$$), `familiar` (everyday, new-ish, adventurous), and `veggies` (light, some, lots; owner, 2026-10-24). Claude drafted all 77 (owner, 2026-10-24: "go"); the owner reviews them on the **Tags** page in the content editor, or on each dish card.

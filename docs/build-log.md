@@ -3452,3 +3452,18 @@ variations (chicken bulgogi, chicken cheesesteak, turkey meatloaf, chicken or
 bean empanadas, beef or bean fajitas, turkey smash burgers, honey-garlic
 salmon or tofu, spicy shakshuka, spicy chicken fajitas) with the skill and
 gap each fills and draft tags, as a recommendation waiting on the owner.
+
+## 138. 2026-10-24 — Plan: proposed pick-one dishes
+
+Design only. Fifteen new dishes found on the web, recorded in plan §6.21 as
+a recommendation. The owner's direction: each goes in as a pick-one choice
+beside a dish that teaches the same skills, not as an extra lesson, so the
+course keeps its numbering and length. They add the first salmon, lamb, and
+coconut dishes, more smoky and BBQ, and quick meals (eight of 30 minutes or
+less): chicken piccata, beef and broccoli, turkey lettuce wraps, coconut
+chickpea curry, blackened fish, BBQ salmon, broiled honey-soy salmon, jerk
+salmon, pineapple teriyaki salmon, huevos rancheros, chicken souvlaki pitas,
+moqueca, coconut-crusted fish, lamb kofta, and Caribbean coconut curry lamb
+chops. Two groups exist today (building-a-sauce, dicing); the rest would make
+new groups named for their skill. Each lists draft tags and what to watch
+(no shrimp or oyster sauce; doneness at the safe minimums).
