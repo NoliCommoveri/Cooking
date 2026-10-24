@@ -6,7 +6,9 @@ import { CONTENT } from './content-data.js';
 import { lint } from '../content/lint.js';
 import { applyPatches } from '../content/patch.js';
 
-export const fileLesson = (id) => CONTENT.lessons.find((x) => x.data.id === id)?.data ?? null;
+// A Level's own recipes (§12.4) are lesson files too, in levels/recipes/.
+const isLevelLesson = (id) => (CONTENT.levelLessons ?? []).some((x) => x.data.id === id);
+export const fileLesson = (id) => [...CONTENT.lessons, ...(CONTENT.levelLessons ?? [])].find((x) => x.data.id === id)?.data ?? null;
 
 // { lesson id: { version, patches: [{ id, path, value }] } } for every lesson
 // with a patch (or one lesson). Each apply and each revert raises the version.
@@ -33,8 +35,9 @@ export async function liveLesson(db, id) {
 
 // What's wrong with a lesson as a patch would leave it. Empty means it can go live.
 export function patchProblems(after) {
-  const where = `lessons/${after.id}.json`;
-  const content = { ...CONTENT, lessons: CONTENT.lessons.map((x) => (x.data.id === after.id ? { file: x.file, data: after } : x)) };
+  const where = `${isLevelLesson(after.id) ? 'levels/recipes' : 'lessons'}/${after.id}.json`;
+  const swap = (list) => list?.map((x) => (x.data.id === after.id ? { file: x.file, data: after } : x));
+  const content = { ...CONTENT, lessons: swap(CONTENT.lessons), levelLessons: swap(CONTENT.levelLessons) };
   // A fix to a step a variation shares reaches the variation too (§6.21), so its problems count.
   const out = lint(content).errors.filter((e) => e.startsWith(`${where}: `) || e.startsWith(`${where} variation `))
     .map((e) => (e.startsWith(`${where}: `) ? e.slice(where.length + 2) : e.slice(where.length + 1)));

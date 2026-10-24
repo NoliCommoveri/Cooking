@@ -392,6 +392,8 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   for (const L of lib.lessons) L.label = labels[L.id] ?? L.label;
   const quest = p.theme === 'quest';
   const other = quest ? 'passport' : 'quest';
+  // Units named on their own, not "Path 7": Appointed Times, and a Level's recipes.
+  const sideUnit = (u) => lib.seasonal?.includes(u) || lib.level_units?.includes(u);
 
   // The Unleavened and Good for Feast Days badges (§6.19): an icon and a word, never a pill.
   const mark = (icon, word) => el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-cooked` }, art(`<svg class="ico" aria-hidden="true"><use href="/icons.svg#${icon}"/></svg>`), word);
@@ -405,8 +407,9 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
       art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"/></svg>'),
       done.times === 1 ? 'Cooked once' : `Cooked ${done.times} times`) : null;
     const badges = marks(L);
-    // A seasonal unit (Appointed Times) has its own labels, A1, A2.
-    const seasonal = lib.seasonal?.includes(L.unit);
+    // A seasonal unit (Appointed Times) has its own labels, A1, A2, and so
+    // does a Level's own unit, L1, L2 (§12.4).
+    const seasonal = sideUnit(L.unit);
     if (quest) {
       return el('article', { class: 'q-panel q-card' },
         el('p', { class: 'q-kick' }, `${seasonal ? lib.units[L.unit] : `Path ${L.unit}`} · Quest ${L.label}`),
@@ -451,7 +454,8 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const lessonBtn = (L) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${L.title}`, onclick: open(L.id) }, card(L));
   const recipeBtn = (r, kick) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${r.title}`, onclick: open(r.id) }, recipeCard(r, kick));
   const seasonalUnit = (u) => lib.seasonal?.includes(u);
-  const unitName = (u) => (quest && !seasonalUnit(u) ? `Path ${u}: ${lib.units[u]}` : lib.units[u]);
+  const levelUnit = (u) => lib.level_units?.includes(u);
+  const unitName = (u) => (quest && !sideUnit(u) ? `Path ${u}: ${lib.units[u]}` : lib.units[u]);
 
   // ---- My path (Main quest): what's up next, then the rest of this profile's
   // path. This week and next show open; everything later is under See more
@@ -472,7 +476,8 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     // In the profile's course plan's order when it has one (§6.18).
     const byId = Object.fromEntries(lib.lessons.map((L) => [L.id, L]));
     const ordered = mine.order ? mine.order.map((x) => byId[x]).filter(Boolean) : lib.lessons;
-    const rest = ordered.filter((L) => !seasonalUnit(L.unit) && !cooks[L.id] && !queued.has(L.id)
+    // A Level's own recipes are on the path only through a Level course's plan.
+    const rest = ordered.filter((L) => !seasonalUnit(L.unit) && !(levelUnit(L.unit) && !mine.order) && !cooks[L.id] && !queued.has(L.id)
       && !(mine.labels && !mine.labels[L.id]) && !(L.pick && doneGroups.has(L.pick)));
     // Only a course's schedule puts a lesson in a week; without one, the whole
     // path is under See more.

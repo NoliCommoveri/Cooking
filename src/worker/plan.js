@@ -60,11 +60,17 @@ const versionPicker = async (env, fam, tc = undefined) => {
   return (lid, pids) => versionOut(tc, choices, lid, pids);
 };
 
-export const family = (env, fid) => env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(fid).first();
+// The family's row, with whether it sees the next release (§8.6).
+export const family = async (env, fid) => {
+  const fam = await env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(fid).first();
+  return fam && { ...fam, next_release: await nextReleaseOn(env.DB, fid) };
+};
 export const weeksOn = (fam) => fam.mode === 'homeschool' || Boolean(fam.plan_weeks);
+// The lessons a family can cook: its diet settings allow them, and a Level's
+// own recipes (§12.4) only with the next release.
 const visible = (fam) => {
   const filters = JSON.parse(fam.diet_filters);
-  return new Set(LIBRARY.lessons.filter((L) => dietView(L, LIBRARY.ingredients, filters).visible).map((L) => L.id));
+  return new Set(LIBRARY.lessons.filter((L) => (!L.level || fam.next_release) && dietView(L, LIBRARY.ingredients, filters).visible).map((L) => L.id));
 };
 const nearestSize = (L, n) => {
   const options = servingOptions(L);
@@ -106,6 +112,7 @@ const queueLesson = async (env, lid, fam) => {
     return found.lesson;
   }
   const L = lessonById[lid] ?? fail(400, 'invalid', 'No such lesson.');
+  if (L.level && !fam.next_release) fail(400, 'invalid', 'No such lesson.');
   if (!visible(fam).has(L.id)) fail(400, 'invalid', `${L.title} is hidden by your family's diet settings.`);
   return L;
 };
@@ -524,7 +531,7 @@ export async function queueProfiles(env, fid, ids) {
 }
 
 // Appointed Times lessons are A1, A2… whatever the plan (§6.19).
-const suggestedLabels = { ...numberCourse(LIBRARY.course).labels, ...LIBRARY.seasonalLabels };
+const suggestedLabels = { ...numberCourse(LIBRARY.course).labels, ...LIBRARY.seasonalLabels, ...LIBRARY.levelLabels };
 
 // names: the family's recipes (recipeNames), for queued family recipes.
 const RECIPE_SIZES = servingOptions({ scaling: { mode: 'free', min: 1, max: 12 } });

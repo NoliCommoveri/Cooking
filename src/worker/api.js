@@ -399,6 +399,8 @@ on('GET', '/api/library', async (req, env) => {
   const s = await requireSession(env, req);
   const fam = await env.DB.prepare('SELECT diet_filters FROM families WHERE id = ?').bind(s.family_id).first();
   const filters = JSON.parse(fam.diet_filters);
+  // A Level's own recipes (§12.4), in their own unit, with the next release only.
+  const release = await nextReleaseOn(env.DB, s.family_id);
   const name = (i) => LIBRARY.ingredients[i]?.name ?? i;
   // A patched total time shows on the card too (§6.11).
   const live = await livePatches(env.DB);
@@ -406,11 +408,12 @@ on('GET', '/api/library', async (req, env) => {
   // Lesson numbers in the suggested course order (§4.1).
   const { labels: numbered, total } = numberCourse(LIBRARY.course);
   // Appointed Times lessons are A1, A2… beside the numbered course (§6.19).
-  const labels = { ...numbered, ...LIBRARY.seasonalLabels };
+  const labels = { ...numbered, ...LIBRARY.seasonalLabels, ...(release ? LIBRARY.levelLabels : {}) };
   const pickOf = Object.fromEntries(LIBRARY.course.filter((d) => d.pickOne).map((d) => [d.id, d.pickOne]));
   const lessons = [];
   let hidden = 0;
   for (const L of LIBRARY.lessons) {
+    if (L.level && !release) continue;
     const view = dietView(L, LIBRARY.ingredients, filters);
     if (!view.visible) { hidden++; continue; }
     lessons.push({
@@ -424,7 +427,12 @@ on('GET', '/api/library', async (req, env) => {
       pick: pickOf[L.id] ?? null,
     });
   }
-  return { lessons, hidden, units: LIBRARY.units, seasonal: LIBRARY.seasonal, labels, total };
+  const sides = release ? Object.values(LIBRARY.levels ?? {}).map((V) => V.side) : [];
+  return {
+    lessons, hidden, units: { ...LIBRARY.units, ...Object.fromEntries(sides.map((u) => [u.number, u.name])) }, seasonal: LIBRARY.seasonal, labels, total,
+    // The Levels' own units: named like the seasonal ones, not "Path 100".
+    level_units: sides.map((u) => u.number),
+  };
 }, KID);
 
 // ---------- cooks (attempts, §1, §8.4) ----------

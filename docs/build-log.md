@@ -4363,3 +4363,23 @@ order, so these two recipes were written.
   slice and a 1-inch chunk of potato roasted at 400°F, each checked every 5
   minutes until about 205°F. Two of the week's burger patties, one thin and
   one thick, are the option. Plan §12.3 and the review doc follow.
+
+## 182. 2026-10-24 — Level 3 recipes are served
+
+Phase 12, the step before 12e (plan §12.4). Behind the Next release switch.
+
+- **The Level's own recipes are in the app's library.** `tools/build-library.js`
+  builds each written lesson in `content/levels/recipes/` into the library
+  with its Level (`level`), labels them L1, L2… in the order of the Level's
+  recipe cards, and serves their lesson files. Thick beef burgers is L1.
+- **Next release only.** `/api/library`, the parent's lesson picker, the
+  queue, and Swap leave them out for a family without the next release; with
+  it, Side quests has a "Level 3 recipes" shelf, named like Appointed Times
+  rather than "Path 100". They're on a profile's path only through a Level
+  course's plan.
+- **Week 2 is cookable.** A Level 3 course's week 2 is Thick beef burgers now,
+  not "being written": 5 recipes are scheduled and 31 weeks wait.
+- The owner's lesson fixes (§6.11) work on a Level recipe too; their checks
+  read it from `levels/recipes/`.
+- Tests: 342. One new test (the shelf and the queue, with and without the next
+  release); the Level course tests expect week 2's burgers.

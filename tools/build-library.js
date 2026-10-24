@@ -39,6 +39,13 @@ const isFeast = (c, L) => Boolean(L.feast) || seasonalUnits(c).includes(L.unit);
 // A dish's tags (§6.21): on its course.json entry, or on a seasonal lesson.
 const tagsOf = (c, L) => c.course.dishes.find((d) => d.id === L.id)?.tags ?? L.tags ?? null;
 const isUnleavened = (c, L) => unleavened(L, Object.fromEntries(c.ingredients.map((i) => [i.id, i])), c.rules.leaven);
+// The Levels' own written recipes (§12.4), next release only: each with its
+// Level's id and its label in the Level's unit (L1, L2, … in the order of the
+// Level's recipe cards).
+export const levelRecipes = (c) => (c.levels ?? []).flatMap(({ data: V }) => {
+  const at = Object.fromEntries(V.recipes.map((r, i) => [r.id, `${V.sideUnit.prefix}${i + 1}`]));
+  return (c.levelLessons ?? []).filter(({ data: L }) => at[L.id]).map(({ data: L }) => ({ L, level: V.id, label: at[L.id] }));
+});
 
 // What families see: hidden lessons (§7.5) are out of the course, the
 // library, and the seasonal units' lists, so they take no number and leave
@@ -49,6 +56,7 @@ export function visibleContent(c) {
   return {
     ...c,
     lessons: c.lessons.filter(({ data }) => !hidden.has(data.id)),
+    levelLessons: (c.levelLessons ?? []).filter(({ data }) => !hidden.has(data.id)),
     course: { ...c.course, dishes: c.course.dishes.filter((d) => !hidden.has(d.id)) },
     units: c.units.map((u) => (u.lessons ? { ...u, lessons: u.lessons.filter((id) => !hidden.has(id)) } : u)),
   };
@@ -85,14 +93,15 @@ export function buildPublic() {
   const labels = { ...numberCourse(c.course.dishes).labels, ...seasonalLabels(c.units) };
   // label: the lesson's number in the suggested order. The app shows each
   // family's own numbers from its course plan instead.
-  const summary = c.lessons.map(({ data: L }) => ({
-    id: L.id, label: labels[L.id], title: L.title, unit: L.unit, cuisine: L.cuisine, skill: L.skill, skills: L.skills,
+  const card = (L, label) => ({
+    id: L.id, label, title: L.title, unit: L.unit, cuisine: L.cuisine, skill: L.skill, skills: L.skills,
     image: `img/${L.image.replace(/\.png$/, '.webp')}`, unleavened: isUnleavened(c, L), feast: isFeast(c, L),
     // The dish card (queue and course screens): from course.json, or the lesson itself for Appointed Times.
     about: L.about ?? dishes[L.id]?.about, main: L.main ?? dishes[L.id]?.main, method: L.method ?? dishes[L.id]?.method, minutes: L.totalMinutes,
     // Its variations (§6.21), by id and title.
     ...(L.variations?.length ? { variations: L.variations.map((v) => ({ id: v.id, title: v.title })) } : {}),
-  })).sort(inCourse(c));
+  });
+  const summary = c.lessons.map(({ data: L }) => card(L, labels[L.id])).sort(inCourse(c));
   files['public/content/registry.json'] = JSON.stringify({
     ingredients: Object.fromEntries(c.ingredients.map((i) => [i.id, i])),
     equipment: Object.fromEntries(c.equipment.map((e) => [e.id, e])),
@@ -103,10 +112,13 @@ export function buildPublic() {
     units: Object.fromEntries(c.units.map((u) => [u.number, u.name])),
     seasonal: seasonalUnits(c),
     lessons: summary,
+    // The Levels' own recipes (§12.4), apart from the course's lessons: the
+    // app shows them only to a family with the next release.
+    levelLessons: levelRecipes(c).map(({ L, level, label }) => ({ ...card(L, label), level })),
     // Every planned dish's title, for a kitchen word practiced in a lesson not written yet.
     dishes: Object.fromEntries(all.course.dishes.map((d) => [d.id, d.title])),
   }) + '\n';
-  for (const { data: L } of all.lessons) files[`public/content/lessons/${L.id}.json`] = JSON.stringify(L) + '\n';
+  for (const { data: L } of [...all.lessons, ...(all.levelLessons ?? [])]) files[`public/content/lessons/${L.id}.json`] = JSON.stringify(L) + '\n';
   const written = new Set(c.lessons.map(({ data }) => data.id));
   files['public/content/course.json'] = JSON.stringify({
     dishes: c.course.dishes.map((d) => ({ ...d, image: `img/${d.image.replace(/\.png$/, '.webp')}`, ...(written.has(d.id) ? { written: true } : {}) })),
@@ -141,7 +153,7 @@ export function buildLibrary() {
       tools: L.equipment ?? [],
     };
   };
-  const lessons = c.lessons.map(({ data: L }) => {
+  const withVariations = (L) => {
     const out = summary(L);
     // Each variation (§6.21) as the lesson it makes: its own ingredients,
     // time, badges, tags, and key ingredients, for picks and shopping.
@@ -152,7 +164,11 @@ export function buildLibrary() {
       });
     }
     return out;
-  }).sort(inCourse(c));
+  };
+  // The Levels' own recipes come after the course's lessons, each with its
+  // Level (§12.4): only a family with the next release sees them.
+  const lessons = [...c.lessons.map(({ data: L }) => withVariations(L)).sort(inCourse(c)),
+    ...levelRecipes(c).map(({ L, level }) => ({ ...withVariations(L), level }))];
   const ingredients = Object.fromEntries(c.ingredients.filter((i) => used.has(i.id))
     .map((i) => [i.id, { name: i.name, contains: i.contains }]));
   const data = {
@@ -161,6 +177,8 @@ export function buildLibrary() {
     units: Object.fromEntries(c.units.map((u) => [u.number, u.name])),
     seasonal: seasonalUnits(c),
     seasonalLabels: seasonalLabels(c.units),
+    // The Levels' own recipes' labels, L1, L2… (§12.4).
+    levelLabels: Object.fromEntries(levelRecipes(c).map(({ L, label }) => [L.id, label])),
     dietTags: c.schemas.registries.$defs.dietTag.enum,
     // Every planned dish, for numbering a family's course plan; its line about
     // the dish and whether it's a meal, for Chef Ruth's first lesson (§6.9).
@@ -173,7 +191,9 @@ export function buildLibrary() {
     // a Level course's plan (12b). A week's recipe is a lesson id when it's
     // written; until then it waits like a planned dish (§6.18).
     levels: Object.fromEntries((c.levels ?? []).map(({ data: V }) => [V.id, {
-      id: V.id, name: V.name, hours: V.hours, units: V.units.map(({ number, name }) => ({ number, name })),
+      id: V.id, name: V.name, hours: V.hours,
+      // Its own unit in Side quests (§12.4): "Level 3 recipes", labels L1, L2….
+      side: { number: V.sideUnit.number, name: V.sideUnit.name, prefix: V.sideUnit.prefix }, units: V.units.map(({ number, name }) => ({ number, name })),
       // Each week's three part pages (12c): title, planned minutes, and what's written of them.
       // Its options (§12.7): the other recipes best fit picks among (12d).
       weeks: V.weeks.map(({ week, unit, skill, recipe, swapIns, mastery, kind, drill, knowledge, sabbath }) => ({

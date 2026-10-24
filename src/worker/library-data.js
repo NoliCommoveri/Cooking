@@ -5757,6 +5757,93 @@ export const LIBRARY = {
     "spatula",
     "cooling-rack"
    ]
+  },
+  {
+   "id": "thick-burgers",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Thick beef burgers",
+   "image": "img/meals/meat.svg",
+   "cuisine": "american",
+   "skill": "Checking ground beef reaches 160°F",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 5,
+      "text": "Cook 4 patties at a time in a 12-inch skillet. For more than 4, keep the first batch warm on a plate under foil, and wash the tongs and your hands after each batch of raw beef."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "cheese-sliced",
+     "optional": true
+    },
+    {
+     "ingredient": "burger-buns"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "lettuce-green-leaf"
+    },
+    {
+     "ingredient": "ketchup",
+     "optional": true
+    },
+    {
+     "ingredient": "mustard-dijon",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "burger-buns",
+     "use": "buns-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes"
+    ],
+    "optional": [
+     "mustard"
+    ]
+   },
+   "tools": [
+    "cutting-board",
+    "chef-knife",
+    "plate",
+    "measuring-spoons",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "thermometer"
+   ],
+   "level": "level-3"
   }
  ],
  "ingredients": {
@@ -6528,6 +6615,9 @@ export const LIBRARY = {
  "seasonalLabels": {
   "unleavened-flatbread": "A1",
   "cottage-cheese-crescents": "A2"
+ },
+ "levelLabels": {
+  "thick-burgers": "L1"
  },
  "dietTags": [
   "nuts",
@@ -8869,6 +8959,11 @@ export const LIBRARY = {
    "id": "level-3",
    "name": "Level 3 Cook",
    "hours": 125,
+   "side": {
+    "number": 100,
+    "name": "Level 3 recipes",
+    "prefix": "L"
+   },
    "units": [
     {
      "number": 1,
