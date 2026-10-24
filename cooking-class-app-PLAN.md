@@ -1400,7 +1400,7 @@ Level 1's "Clean and unclean animals" and Level 2's "Labels and hidden unclean i
 
 The capstone pulls from every unit: safe temperatures (1), challah (2), knife work (3), an aromatic base (4), a grain or legume (5), a fish or a roast (6–7), and soup (8).
 
-- **Beyond the Recipe across the year (recommendation, waiting on the owner):** Unit 1 is make-ahead throughout (food storage, written 2026-10-24). For weeks 5–36, a make-ahead skill where the week's dish suits one (24 weeks in all), and **What the Bible says about food** in the other 12, so neither is padded. Titles say no more about the Sabbath than that families often prepare ahead.
+- **Beyond the Recipe across the year (recommendation, waiting on the owner):** Unit 1 is make-ahead throughout (food storage, written 2026-10-24). For weeks 5–36, a make-ahead skill where the week's dish suits one (23 weeks in all), and **What the Bible says about food** in the other 13, so neither is padded. Titles say no more about the Sabbath than that families often prepare ahead.
 
 | Week | Kind | Proposed title |
 |---|---|---|
@@ -1413,7 +1413,7 @@ The capstone pulls from every unit: safe temperatures (1), challah (2), knife wo
 | 11 | Bible and food | Gleaning: leaving the edges of the field (Leviticus 19:9–10; Ruth 2) |
 | 12 | Make ahead | Prep and store a full set of salad vegetables |
 | 13 | Make ahead | Blanch and store vegetables |
-| 14 | Make ahead | Make and freeze a sofrito batch |
+| 14 | Bible and food | Clean land animals you might not expect: the two tests, the animals Deuteronomy names, and today's elk, moose, water buffalo, and yak (Leviticus 11:1–8; Deuteronomy 14:3–8) |
 | 15 | Bible and food | Salt (Leviticus 2:13; Matthew 5:13; Colossians 4:6) |
 | 16 | Make ahead | Make a sauce that's better the next day |
 | 17 | Make ahead | Freeze soup in portions |

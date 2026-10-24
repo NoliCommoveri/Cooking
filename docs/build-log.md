@@ -4331,3 +4331,11 @@ order, so these two recipes were written.
   for weeks 5–36, waiting on the owner: 24 make-ahead weeks and 12 weeks of
   What the Bible says about food. Weeks 5–36 keep their old titles until it's
   approved. Levels 2 and 4 still say Sabbath task in their outlines.
+
+## 179. 2026-10-24 — Clean land animals in the Beyond the Recipe draft
+
+- Owner, 2026-10-24: a Bible and food page on surprising clean land animals,
+  like week 26's clean birds. The plan §12.3 draft puts it in week 14 (Beef
+  picadillo) in place of freezing a sofrito, since freezing in portions
+  comes up in weeks 5, 17, and 29. The draft is now 23 make-ahead weeks and
+  13 Bible and food weeks, still waiting on the owner.
