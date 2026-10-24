@@ -5554,7 +5554,9 @@ export const LIBRARY = {
   "egyptian": "Egyptian",
   "argentine": "Argentine",
   "chinese-american": "Chinese-American",
-  "turkish": "Turkish"
+  "turkish": "Turkish",
+  "israeli": "Israeli",
+  "cuban": "Cuban"
  },
  "units": {
   "1": "Knife work and assembly",

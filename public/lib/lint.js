@@ -50,6 +50,9 @@ export function lint(c) {
   // course: its lessons aren't in course.json and take no number.
   const SEASONAL = new Set((c.units || []).filter(u => u.seasonal).map(u => u.number));
   for (const u of (c.units || []).filter(u => u.seasonal)) if (!u.prefix || !u.lessons) err(`units.json ${u.number}`, 'a seasonal unit needs a prefix letter and its lessons in order');
+  // A Level's own recipes sit in a unit of their own beside the course, in
+  // Side quests (owner, 2026-10-24), numbered apart from units.json.
+  const LEVEL_UNITS = new Set((c.levels || []).map(({ data }) => data?.sideUnit?.number).filter(n => n != null));
   for (const ing of c.ingredients) {
     for (const r of uncleanReasons(ing, rules)) err(`ingredients.json ${ing.id}`, `unclean: ${r}`);
     for (const [u, pkg] of Object.entries(ing.units || {})) if (!pkg.amount) err(`ingredients.json ${ing.id}`, `unit "${u}" has no amount`);
@@ -102,7 +105,7 @@ export function lint(c) {
   // base: the lesson, when L is one of its variations.
   const checkLesson = (L, where, base = null) => {
     const e = m => err(where, m), w = m => warn(where, m);
-    if (!base && !UNITS.has(L.unit)) e(`unit ${L.unit} doesn't exist in units.json`);
+    if (!base && !UNITS.has(L.unit) && !LEVEL_UNITS.has(L.unit)) e(`unit ${L.unit} doesn't exist in units.json`);
     if (!CU[L.cuisine]) e(`cuisine "${L.cuisine}" doesn't exist in cuisines.json`);
     for (const s of L.skills) if (!SK[s]) e(`skill "${s}" doesn't exist in skills.json`);
     for (const q of L.equipment) if (!EQ[q]) e(`equipment "${q}" doesn't exist in equipment.json`);
@@ -327,6 +330,101 @@ export function lint(c) {
     }
     if (untagged.length) warn('tags', `${untagged.length} dish${untagged.length === 1 ? ' has' : 'es have'} tags missing: ${untagged.join(', ')}`);
   }
+
+  // the Levels (plan §12): units of four weeks, each week's four parts, and
+  // the Level's own recipes, checked by the same food rules as everything else
+  const levelLessons = {};
+  for (const { file, data: L } of c.levelLessons || []) {
+    const where = `levels/recipes/${file}`;
+    const schemaErrs = validate(L, c.schemas.lesson);
+    if (schemaErrs.length) { schemaErrs.forEach(e => err(where, e)); continue; }
+    if (`${L.id}.json` !== file) err(where, `id "${L.id}" doesn't match the file name`);
+    if (byId[L.id]) err(where, `"${L.id}" is a lesson in lessons/ too`);
+    levelLessons[L.id] = L;
+    checkLesson(L, where);
+  }
+  const placedLessons = new Set();
+  for (const { file, data: V } of c.levels || []) {
+    const where = `levels/${file}`;
+    const schemaErrs = validate(V, c.schemas.level);
+    if (schemaErrs.length) { schemaErrs.forEach(e => err(where, e)); continue; }
+    if (`${V.id}.json` !== file) err(where, `id "${V.id}" doesn't match the file name`);
+    if (UNITS.has(V.sideUnit.number)) err(`${where} sideUnit`, `unit ${V.sideUnit.number} is already a unit in units.json`);
+    const REC = index(V.recipes, `${where} recipes`);
+    // a planned recipe's card, like a planned dish's in course.json
+    for (const r of V.recipes) {
+      const rw = `${where} recipe ${r.id}`;
+      if (DISH[r.id] || byId[r.id]) err(rw, 'has the same id as a Cook Around the World dish');
+      if (!CU[r.cuisine]) err(rw, `cuisine "${r.cuisine}" doesn't exist in cuisines.json`);
+      for (const sk of r.skills) if (!SK[sk]) err(rw, `skill "${sk}" doesn't exist in skills.json`);
+      dishCard(rw, r);
+      if (c.imageExists && !c.imageExists(`meals/${r.art}.svg`)) err(rw, `art meals/${r.art}.svg isn't in content/images/`);
+      for (const [p, t] of [['title', r.title], ['skill', r.skill], ['about', r.about], ['main', r.main.join(', ')]]) for (const w of blockedWordsIn(t, rules)) err(rw, `${p} names a blocked food ("${w}")`);
+      if (c.tastes) for (const p of tagProblems(r.tags, c.tastes)) err(rw, `tags: ${p}`);
+      if (c.tastes && missingTags(r.tags).length) warn(rw, `tags missing: ${missingTags(r.tags).join(', ')}`);
+      const L = levelLessons[r.id];
+      if (L) {
+        placedLessons.add(r.id);
+        if (L.unit !== V.sideUnit.number) err(rw, `the lesson's unit is ${L.unit}, not the Level's own unit ${V.sideUnit.number}`);
+        for (const f of ['title', 'cuisine']) if (r[f] !== L[f]) err(rw, `${f} is "${r[f]}" but the lesson says "${L[f]}"`);
+        if (JSON.stringify(r.skills) !== JSON.stringify(L.skills)) err(rw, `skills don't match the lesson's (${L.skills.join(', ')})`);
+        if (r.minutes !== L.totalMinutes || r.estimated) err(rw, `minutes should be the lesson's ${L.totalMinutes}, not an estimate`);
+      }
+    }
+    // A week's recipe is a Cook Around the World dish, an Appointed Times
+    // lesson, or one of the Level's own recipes.
+    const known = id => DISH[id] || byId[id] || REC[id];
+    const minutesOf = id => (REC[id] ?? DISH[id])?.minutes ?? byId[id]?.totalMinutes ?? 0;
+    V.units.forEach((u, i) => { if (u.number !== i + 1) err(`${where} units`, `unit ${u.number} should be unit ${i + 1}: units are numbered in order`); });
+    const used = new Set();
+    let minutes = 0, unwritten = 0, parts = 0;
+    V.weeks.forEach((w, i) => {
+      const ww = `${where} week ${w.week}`;
+      if (w.week !== i + 1) err(ww, `should be week ${i + 1}: weeks are numbered in order`);
+      if (!V.units.some(u => u.number === w.unit)) err(ww, `unit ${w.unit} isn't one of the Level's units`);
+      if (i && w.unit < V.weeks[i - 1].unit) err(ww, 'comes after a week of a later unit');
+      const unitWeeks = V.weeks.filter(x => x.unit === w.unit);
+      const last = unitWeeks.at(-1) === w;
+      if (w.kind) {
+        for (const f of ['skill', 'recipe', 'mastery', 'swapIns']) if (f in w) err(ww, `a ${w.kind} week has no ${f}: it's cooked from earlier weeks' recipes`);
+        if (!w.minutes) err(ww, `a ${w.kind} week needs its minutes`);
+        if (w.kind === 'capstone' && !last) err(ww, 'the capstone is the last week of its unit');
+        minutes += w.minutes ?? 0;
+      } else {
+        if (!w.skill || !w.recipe) err(ww, 'needs a skill and a recipe');
+        if ('minutes' in w) err(ww, "takes its minutes from its recipe, so it doesn't set its own");
+        if (w.skill && !SK[w.skill]) err(ww, `skill "${w.skill}" doesn't exist in skills.json`);
+        if (w.recipe && !known(w.recipe)) err(ww, `recipe "${w.recipe}" isn't a dish in course.json, a lesson, or one of this Level's recipes`);
+        if (w.recipe && used.has(w.recipe)) err(ww, `recipe "${w.recipe}" is already an earlier week's recipe`);
+        if (w.recipe && c.hidden?.includes(w.recipe)) warn(ww, `recipe "${w.recipe}" is hidden from every family`);
+        used.add(w.recipe);
+        for (const x of w.swapIns || []) {
+          if (!known(x)) err(ww, `swap-in "${x}" isn't a dish in course.json, a lesson, or one of this Level's recipes`);
+          if (x === w.recipe) err(ww, `swap-in "${x}" is already the week's recipe`);
+        }
+        minutes += minutesOf(w.recipe);
+      }
+      // Units of four weeks: the last is the mastery check (§12.2), or the capstone.
+      if (w.mastery && !last) err(ww, 'a mastery week is the last week of its unit');
+      if (last && !w.mastery && w.kind !== 'capstone') err(ww, 'the last week of a unit is its mastery week');
+      for (const k of ['drill', 'knowledge', 'sabbath']) {
+        parts += 1;
+        minutes += w[k].minutes;
+        if (!w[k].body?.length) unwritten += 1;
+        for (const q of w[k].quiz || []) if (q.answer >= q.choices.length) err(`${ww} ${k}`, `quiz "${q.q}" has an answer outside its choices`);
+      }
+    });
+    for (const u of V.units) { const n = V.weeks.filter(w => w.unit === u.number).length; if (n !== 4) err(`${where} unit ${u.number}`, `has ${n} weeks; a unit has 4`); }
+    for (const r of V.recipes) if (!V.weeks.some(w => w.recipe === r.id || (w.swapIns || []).includes(r.id))) warn(`${where} recipe ${r.id}`, "isn't any week's recipe or swap-in");
+    // The words a learner reads: unit names and goals, notes, and the part pages.
+    for (const [p, t] of strings({ name: V.name, sideUnit: V.sideUnit.name, units: V.units, weeks: V.weeks })) for (const w of blockedWordsIn(t, rules)) err(where, `${p} names a blocked food ("${w}")`);
+    // The planned hours (§6.15) add up to about the Level's hours.
+    const hours = minutes / 60, off = Math.abs(hours - V.hours) / V.hours;
+    if (off > 0.1) err(where, `the weeks add up to ${hours.toFixed(1)} hours, not about ${V.hours}`);
+    else if (off > 0.05) warn(where, `the weeks add up to ${hours.toFixed(1)} hours, a little off ${V.hours}`);
+    if (unwritten) warn(where, `${unwritten} of ${parts} part pages aren't written yet`);
+  }
+  for (const id of Object.keys(levelLessons)) if (!placedLessons.has(id)) err(`levels/recipes/${id}.json`, "isn't one of a Level's recipes");
 
   // hidden lessons (§7.5) name a written lesson or a planned dish
   for (const id of c.hidden || []) if (!byId[id] && !DISH[id]) err('hidden.json', `"${id}" isn't a lesson or a dish in course.json`);

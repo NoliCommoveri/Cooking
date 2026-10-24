@@ -37,3 +37,5 @@ sheet-23-appointed-times.png unleavened-flatbread,cottage-cheese-crescents
 sheet-24-pick-ones.png pineapple-teriyaki-salmon,chicken-piccata,turkey-lettuce-wraps,huevos-rancheros,chicken-souvlaki-pitas
 sheet-25-quick-smoky.png beef-and-broccoli,coconut-chickpea-curry,blackened-cod,bbq-salmon,honey-soy-salmon
 sheet-26-tropical-lamb.png moqueca,coconut-crusted-fish,lamb-kofta,caribbean-lamb-chops
+sheet-27-level-pick-ones-1.png chopped-salad-vinaigrette,vegetable-stir-fry,red-lentil-soup,beef-stew
+sheet-28-level-pick-ones-2.png shish-taouk,beef-ragu,mujaddara,pita-bread

@@ -19,10 +19,16 @@ export function contentFromFiles(files, images = null) {
   const all = Object.assign({}, ...Object.values(registryFiles));
   const lessons = Object.keys(files).filter((f) => /^lessons\/[^/]+\.json$/.test(f)).sort()
     .map((f) => ({ file: f.slice('lessons/'.length), data: files[f] }));
+  // The Levels (plan §12): one file per Level, and their own recipes'
+  // lesson files, kept apart from the course until the next release (§8.6).
+  const levels = Object.keys(files).filter((f) => /^levels\/[^/]+\.json$/.test(f)).sort()
+    .map((f) => ({ file: f.slice('levels/'.length), data: files[f] }));
+  const levelLessons = Object.keys(files).filter((f) => /^levels\/recipes\/[^/]+\.json$/.test(f)).sort()
+    .map((f) => ({ file: f.slice('levels/recipes/'.length), data: files[f] }));
   const species = r('rules/clean-species.json');
   const pictures = images && new Set(images);
   return {
-    registryFiles, lessons,
+    registryFiles, lessons, levels, levelLessons,
     ingredients: all.ingredients, equipment: all.equipment, terms: all.terms, watchedWords: r('rules/kitchen-words.json').words,
     skills: all.skills, cuisines: all.cuisines, regions: all.regions, units: all.units, course: r('course.json'),
     // What profiles rate, and the words dishes are tagged in (§6.21).
@@ -33,7 +39,7 @@ export function contentFromFiles(files, images = null) {
       cleanSpecies: species.species, fatBlocked: species.fatBlocked, allowedProducts: species.allowedProducts || [],
       blockedWords: r('rules/blocked-words.json').words, allowedPhrases: r('rules/allowed-phrases.json').phrases, leaven: r('rules/leaven.json'),
     },
-    schemas: { registries: r('schema/registries.schema.json'), lesson: r('schema/lesson.schema.json') },
+    schemas: { registries: r('schema/registries.schema.json'), lesson: r('schema/lesson.schema.json'), level: levels.length ? r('schema/level.schema.json') : null },
     imageExists: pictures ? (p) => pictures.has(p) : undefined,
   };
 }
