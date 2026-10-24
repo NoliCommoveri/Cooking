@@ -26,6 +26,8 @@ import { family, queueProfiles, today, weekFor, replaceStatements } from './plan
 import { addDays } from './schedule.js';
 import { REGISTRY, stored, rowLesson, recipeVisible, lessonFor } from './recipes.js';
 import { recipeLesson } from '../content/recipe.js';
+import { tasteContext, cookCtx, dishFit } from './picks.js';
+import { better } from '../content/score.js';
 
 const ACTIVE = ['assigned', 'shopped'];
 const seasonal = new Set(LIBRARY.lessons.filter((L) => LIBRARY.seasonal.includes(L.unit)).map((L) => L.id));
@@ -41,8 +43,12 @@ export function springWeek(sunday) {
   return false;
 }
 
-// What the picker offers for a week, in order (§6.19).
-export async function swapOptions(env, fam, week) {
+// What the picker offers for a week, in order (§6.19). With the next release,
+// each library lesson has its fit for the profiles on the cook (pids), and
+// within each part the best fit comes first; ones that don't fit go last
+// (§6.21, 11d2). The parts keep their order, and parent recipes, which have
+// no tags, keep theirs.
+export async function swapOptions(env, fam, week, pids = []) {
   const filters = JSON.parse(fam.diet_filters);
   const spring = springWeek(week);
   const libOk = (L) => dietView(L, LIBRARY.ingredients, filters).visible;
@@ -72,6 +78,18 @@ export async function swapOptions(env, fam, week) {
     if (!recipeVisible(recipeLesson(`shared:${c.id}`, r), filters)) continue;
     out.push({ id: `shared:${c.id}`, title: c.title, label: null, group: 'User-shared recipes', image: `img/meals/${c.meal_type}.svg`, unleavened: Boolean(c.unleavened), feast: c.kind === 'feast' });
   }
+  const tc = await tasteContext(env, fam);
+  if (tc) {
+    const ctx = cookCtx(tc, pids);
+    const groups = [...new Set(out.map((o) => o.group))];
+    const scored = out.map((o, i) => {
+      if (o.id.includes(':')) return { o, i };
+      const f = dishFit(tc, ctx, o.id);
+      return { o: { ...o, fit: f.fit, fit_label: f.label, why: f.why, notes: f.notes }, f, i };
+    });
+    scored.sort((a, b) => (groups.indexOf(a.o.group) - groups.indexOf(b.o.group)) || (a.f && b.f ? better(a.f, b.f) : 0) || a.i - b.i);
+    return { spring, week, options: scored.map((x) => x.o) };
+  }
   return { spring, week, options: out };
 }
 
@@ -92,7 +110,7 @@ export function register(on) {
     const fam = await family(env, s.family_id);
     const r = await activeRow(env, s.family_id, qid);
     if (r.swap_of) fail(409, 'swapped', 'This is already a swap. Undo it to pick again.');
-    return swapOptions(env, fam, weekFor(r, today(req)));
+    return swapOptions(env, fam, weekFor(r, today(req)), (await queueProfiles(env, s.family_id, [r.id]))[r.id] ?? []);
   });
 
   on('POST', '/api/queue/([0-9a-f]{16})/swap', async (req, env, body, [qid]) => {

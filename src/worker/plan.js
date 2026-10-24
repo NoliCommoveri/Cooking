@@ -17,7 +17,7 @@ import { servingOptions } from '../content/scale.js';
 import { courseEntries, numberCourse } from '../content/course.js';
 import { schedule, weekOf, addDays, localDay, isDay, isSabbath, DUE_DAY } from './schedule.js';
 import { isRecipeId, lessonFor, recipeNames, recipeVisible } from './recipes.js';
-import { tasteContext, versionFor, bestPlan } from './picks.js';
+import { tasteContext, versionFor, bestPlan, hatedExtras, versionSummary } from './picks.js';
 import { variationChoices } from './variations.js';
 
 const id = () => randomHex(8);
@@ -50,8 +50,8 @@ function versionOut(tc, choices, lid, pids) {
     options: v.options.map(({ id, title, fit, label, why, notes, hidden }) => ({ id, title, fit, label, why, notes, hidden })),
   };
 }
-const versionPicker = async (env, fam) => {
-  const tc = await tasteContext(env, fam);
+const versionPicker = async (env, fam, tc = undefined) => {
+  tc = tc === undefined ? await tasteContext(env, fam) : tc;
   if (!tc) return () => null;
   const choices = await variationChoices(env, fam.id);
   return (lid, pids) => versionOut(tc, choices, lid, pids);
@@ -603,17 +603,22 @@ export function register(on) {
     // The version each lesson with variations plays in this kitchen (§6.21):
     // a queued one's for everyone it's queued for, any other's for this
     // profile alone. The family's own pick wins either way.
-    const version = await versionPicker(env, fam);
-    const versions = {};
-    for (const L of LIBRARY.lessons) {
-      if (!L.variations?.length) continue;
+    // An optional ingredient someone on it rated 1 star is left out (11d2).
+    const tc = await tasteContext(env, fam);
+    const version = await versionPicker(env, fam, tc);
+    const versions = {}, leaveOut = {};
+    for (const L of tc ? LIBRARY.lessons : []) {
       const r = rows.find((x) => x.lesson_id === L.id && x.status !== 'requested');
-      const v = version(L.id, r ? who[r.id] : [pid]);
+      const pids = r ? who[r.id] : [pid];
+      const v = L.variations?.length ? version(L.id, pids) : null;
       if (v) versions[L.id] = v.id;
+      const out = hatedExtras(tc, versionSummary(L.id, v?.id), pids);
+      if (out.length) leaveOut[L.id] = out;
     }
     return {
       mode: fam.mode,
       versions,
+      leave_out: leaveOut,
       // The profile's path, in its course plan's order (or the suggested one),
       // for its kitchen's "Coming up" and the early flag (owner, 2026-10-23).
       order: mine ? mine.lessons.kept : null,

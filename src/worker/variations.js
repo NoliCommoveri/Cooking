@@ -62,7 +62,7 @@ export const listVariationRow = (env, fid, listId, position, vid) => env.DB
 // A lesson's title as the family cooks it: the chosen variation's, or its own.
 export function versionTitle(lid, vid) {
   const L = libraryLesson(lid);
-  return (vid && L?.variations?.find((v) => v.id === vid)?.title) ?? L?.title ?? null;
+  return (vid ? L?.variations?.find((v) => v.id === vid)?.title : null) ?? L?.title ?? null;
 }
 
 // Cooks taken away with a profile leave their version rows behind; this tidies them.

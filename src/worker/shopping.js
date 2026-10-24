@@ -15,7 +15,7 @@ import { weekOf } from './schedule.js';
 import { isRecipeId, lessonFor, recipeNames, REGISTRY as FULL } from './recipes.js';
 import { variationChoices, versionTitle, listVariations, listVariationRow } from './variations.js';
 import { lessonVersion } from '../content/variations.js';
-import { tasteContext, versionFor } from './picks.js';
+import { tasteContext, versionFor, hatedExtras, versionSummary } from './picks.js';
 
 const id = () => randomHex(8);
 const placeholders = (list) => list.map(() => '?').join(', ');
@@ -49,7 +49,9 @@ async function upcoming(env, fam, day, tz) {
   const tc = await tasteContext(env, fam);
   const entry = (lid, week, extra) => {
     const vid = versionFor(tc, choices, lid, extra.profile_ids).variation;
-    return { lesson_id: lid, title: versionTitle(lid, vid) ?? names[lid]?.title ?? lid, week, ...(vid ? { variation: vid } : {}), ...extra };
+    // An optional ingredient someone on the cook rated 1 star isn't bought (11d2).
+    const out = hatedExtras(tc, versionSummary(lid, vid), extra.profile_ids);
+    return { lesson_id: lid, title: versionTitle(lid, vid) ?? names[lid]?.title ?? lid, week, ...(vid ? { variation: vid } : {}), ...(out.length ? { left_out: out } : {}), ...extra };
   };
   for (const st of states) {
     const weeks = [
@@ -86,7 +88,7 @@ async function needs(env, fam, entries, { staples = [], skip = [] } = {}) {
     const found = await lessonFor(env, fam.id, e.lesson_id, { deleted: true });
     if (!found) continue;
     if (Object.keys(found.extra).length) registry = { ...registry, ...found.extra };
-    lessons.push({ lesson: e.variation ? lessonVersion(found.lesson, e.variation) : found.lesson, servings: e.servings });
+    lessons.push({ lesson: e.variation ? lessonVersion(found.lesson, e.variation) : found.lesson, servings: e.servings, leaveOut: (e.left_out ?? []).map((x) => x.ingredient) });
   }
   return shoppingList({ lessons, registry, filters: JSON.parse(fam.diet_filters), staples, skip });
 }
@@ -97,8 +99,19 @@ const ownList = async (env, fid, lid) => (await env.DB.prepare('SELECT * FROM sh
 async function listOut(env, fam, list) {
   // Each lesson as it was bought for, in the version chosen then (§6.21).
   const versions = await listVariations(env, fam.id, list.id);
-  const lessons = (await env.DB.prepare('SELECT * FROM list_lessons WHERE list_id = ? AND family_id = ? ORDER BY position').bind(list.id, fam.id).all()).results
+  const rows = (await env.DB.prepare('SELECT * FROM list_lessons WHERE list_id = ? AND family_id = ? ORDER BY position').bind(list.id, fam.id).all()).results
     .map((l) => (versions[l.position] ? { ...l, variation: versions[l.position] } : l));
+  // What's left out for whoever is on each cook now (11d2): the queued
+  // lesson's profiles, or the course's.
+  const tc = await tasteContext(env, fam);
+  const lessons = [];
+  for (const l of rows) {
+    let pids = [];
+    if (tc && l.queue_id) pids = (await queueProfiles(env, fam.id, [l.queue_id]))[l.queue_id] ?? [];
+    if (tc && !pids.length && l.course_id) pids = (await env.DB.prepare('SELECT profile_id FROM course_profiles WHERE course_id = ? AND family_id = ?').bind(l.course_id, fam.id).all()).results.map((r) => r.profile_id);
+    const out = pids.length ? hatedExtras(tc, versionSummary(l.lesson_id, l.variation), pids) : [];
+    lessons.push(out.length ? { ...l, left_out: out } : l);
+  }
   const onHand = (await env.DB.prepare('SELECT ingredient_id FROM list_on_hand WHERE list_id = ? AND family_id = ?').bind(list.id, fam.id).all()).results.map((r) => r.ingredient_id);
   const checked = (await env.DB.prepare('SELECT ingredient_id FROM list_checks WHERE list_id = ? AND family_id = ?').bind(list.id, fam.id).all()).results.map((r) => r.ingredient_id);
   const staples = await staplesOf(env, fam.id);
@@ -110,7 +123,7 @@ async function listOut(env, fam, list) {
   const left = await needs(env, fam, lessons, { skip: onHand });
   return {
     id: list.id, created_at: list.created_at, done_at: list.done_at,
-    lessons: lessons.map((l) => ({ lesson_id: l.lesson_id, title: versionTitle(l.lesson_id, l.variation) ?? names[l.lesson_id]?.title ?? l.lesson_id, servings: l.servings, ...(l.variation ? { variation: l.variation } : {}) })),
+    lessons: lessons.map((l) => ({ lesson_id: l.lesson_id, title: versionTitle(l.lesson_id, l.variation) ?? names[l.lesson_id]?.title ?? l.lesson_id, servings: l.servings, ...(l.variation ? { variation: l.variation } : {}), ...(l.left_out ? { left_out: l.left_out } : {}) })),
     sections: left.sections, may_have: left.may_have,
     on_hand: all.filter((x) => onHand.includes(x.id)),
     checked,

@@ -3659,3 +3659,36 @@ Phase 11, slice 11d1 (plan §6.21), all behind the Next release switch
   at phone width on the dev server: the Version button and dialog on a
   queued Chimichurri steak (beef 1 star, chicken 4, a 45-minute limit), and
   a new course's fit lines and picks.
+
+## 147. 2026-10-24 — Add a lesson, Swap, Chef Ruth, and hated extras (slice 11d2)
+
+Phase 11, slice 11d2 (plan §6.21), all behind the Next release switch.
+- **`GET /api/picks/lessons?profiles=…`** (`src/worker/picks.js`): every
+  library lesson the diet settings allow, outside the Appointed Times, best
+  first for the profiles on a cook, each with its fit, why, notes, best
+  version, and whether any of them has cooked it or has it queued.
+- **Add a lesson:** with the next release, Who's cooking comes first. Once
+  it's ticked, the menu starts with **Best for them** (up to 5 Great or Good
+  fits not cooked or queued for them), then every lesson; one that doesn't
+  fit says so, and the picked lesson's fit shows under the menu.
+- **Swap** (`src/worker/swap.js`): inside each part, best fit first for the
+  profiles on the swapped lesson, with each lesson's fit and why. The parts
+  keep §6.19's order; parent recipes keep theirs.
+- **Chef Ruth: "What should we cook?"** on her menu: who's cooking (one
+  profile or everyone), then the 3 best lessons that fit and aren't cooked or
+  queued for them, each added to the queue with one tap.
+- **Hated extras:** an optional ingredient on a protein or key ingredient
+  someone on the cook rated 1 star is left out, like a diet's (§2.1). The
+  kitchen gets `leave_out` per lesson and the player says "Leave out the
+  fresh cilantro (Ava doesn't like it)". What you'll need, the list preview,
+  and saved lists drop it and say what was left out (`shoppingList` takes
+  `leaveOut`); a saved list works it out from the people on each lesson now.
+- **Fixed:** a lesson whose version is the lesson itself (`''`) showed an
+  empty title in What you'll need and on lists (`versionTitle`). It showed
+  for a family that picked the lesson itself in 11c, and for every lesson
+  that 11d1 picked as written.
+- Tests: 314 (5 new in `test/worker-picks.test.js`; its setup now finds
+  profiles by name, since two made in the same millisecond can list either
+  way). Checked in a browser at phone width on the dev server: Add a lesson
+  with Best for them, the Swap picker's fit lines, the player's leave-out
+  note, What you'll need, and Chef Ruth's three suggestions.

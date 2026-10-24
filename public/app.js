@@ -583,7 +583,7 @@ async function lesson(profileId, lessonId) {
   const mount = el('div');
   screen(mount);
   await openLesson(mount, {
-    profile: p, family: me.family, lessonId, variation: mine.versions?.[lessonId] ?? chosenVersion(lessonId), lesson: recipe?.lesson ?? null, extra: recipe?.extra ?? {}, onExit: () => go(`#/kitchen/${p.id}`),
+    profile: p, family: me.family, lessonId, variation: mine.versions?.[lessonId] ?? chosenVersion(lessonId), leaveOut: mine.leave_out?.[lessonId] ?? [], lesson: recipe?.lesson ?? null, extra: recipe?.extra ?? {}, onExit: () => go(`#/kitchen/${p.id}`),
     crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook, onReflect: saveReflection, labels: mine.labels ?? lib.labels, total: mine.total ?? lib.total,
     // "I want to make this" or "Cook this" (§6.1), and the queued lesson's
     // servings and who it's for, for a fresh cook.
@@ -1496,7 +1496,8 @@ const parentQueue = parentOnly(async (flash) => {
         groups.length ? groups.map((g) => [el('h3', {}, g), el('div', { class: 'rows' }, d.options.filter((o) => o.group === g).map((o) => el('div', { class: 'rowi with-av' },
           el('img', { src: o.image, alt: '', width: 48, height: 48 }),
           el('div', {}, el('b', {}, el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(o.id) }, `${o.label ? `${o.label} · ` : ''}${o.title}`)),
-            o.unleavened || o.feast ? el('div', { class: 'badges' }, o.unleavened ? badge('i-unleavened', 'Unleavened') : null, o.feast ? badge('i-feast', 'Good for Feast Days') : null) : null),
+            o.unleavened || o.feast ? el('div', { class: 'badges' }, o.unleavened ? badge('i-unleavened', 'Unleavened') : null, o.feast ? badge('i-feast', 'Good for Feast Days') : null) : null,
+            fitNote(o)),
           el('div', { class: 'acts' }, actBtn('Pick', 'pri', async () => {
             const res = await api('POST', `/api/queue/${qid}/swap?${tz()}`, { lesson_id: o.id });
             close();
@@ -1522,11 +1523,31 @@ const parentQueue = parentOnly(async (flash) => {
 
   // ---- add a lesson ----
   const note = el('p', { class: 'mut small note', hidden: true }, 'Most lessons use knife work. We suggest a Unit 1 lesson first.');
-  const lessonSel = el('select', { name: 'lesson_id', required: true },
-    el('option', { value: '' }, 'Pick a lesson'),
-    q.library.map((L) => el('option', { value: L.id }, `${L.label ? `${L.label} · ` : ''}${L.title}${L.foundation ? ' (foundation)' : ''}`)),
-    // The family's own recipes (§6.10).
-    q.recipes?.length ? el('optgroup', { label: 'Our recipes' }, q.recipes.map((r) => el('option', { value: r.id }, r.title))) : null);
+  const lessonSel = el('select', { name: 'lesson_id', required: true });
+  const lessonText = (L) => `${L.label ? `${L.label} · ` : ''}${L.title}${L.foundation ? ' (foundation)' : ''}`;
+  // With the next release, once who's cooking is ticked, the menu starts
+  // with Best for them: up to 5 that fit them, not cooked or queued for them
+  // (§6.21, 11d2). A lesson that doesn't fit says so; it can still be picked.
+  let ranked = null;
+  const fitBox = el('div');
+  const drawLessons = () => {
+    const was = lessonSel.value;
+    const fitOf = Object.fromEntries((ranked ?? []).map((x) => [x.id, x]));
+    const best = (ranked ?? []).filter((x) => x.fits && x.fit && x.fit !== 'poor' && !x.cooked && !x.queued).slice(0, 5);
+    const byId = Object.fromEntries(q.library.map((L) => [L.id, L]));
+    const opt = (L) => el('option', { value: L.id }, `${lessonText(L)}${fitOf[L.id]?.fit === 'none' ? " · doesn't fit" : ''}`);
+    lessonSel.replaceChildren(
+      el('option', { value: '' }, 'Pick a lesson'),
+      best.length ? el('optgroup', { label: 'Best for them' }, best.map((x) => opt(byId[x.id]))) : null,
+      best.length ? el('optgroup', { label: 'Every lesson' }, q.library.map(opt)) : q.library.map(opt),
+      // The family's own recipes (§6.10).
+      q.recipes?.length ? el('optgroup', { label: 'Our recipes' }, q.recipes.map((r) => el('option', { value: r.id }, r.title))) : null);
+    lessonSel.value = was;
+    const f = fitOf[lessonSel.value];
+    fitBox.replaceChildren(f ? fitNote({ ...f, fit_label: f.label, why: [...f.why, ...(f.version_title ? [`as ${f.version_title}`] : [])] }) ?? '' : '');
+  };
+  drawLessons();
+  lessonSel.addEventListener('change', drawLessons);
   const pickable = [...q.library, ...(q.recipes ?? [])];
   const who = el('div', { class: 'grid2' }, profiles.map((p) => el('label', { class: 'choice' },
     el('input', { type: 'checkbox', name: `p_${p.id}`, value: p.id }), el('span', {}, p.name))));
@@ -1538,13 +1559,22 @@ const parentQueue = parentOnly(async (flash) => {
   };
   lessonSel.addEventListener('change', checkNote);
   who.addEventListener('change', checkNote);
+  if (me.family.next_release) {
+    who.addEventListener('change', async () => {
+      const ids = profiles.filter((p) => who.querySelector(`[name="p_${p.id}"]`).checked).map((p) => p.id);
+      ranked = ids.length ? (await api('GET', `/api/picks/lessons?profiles=${ids.join(',')}`).catch(() => null))?.lessons ?? null : null;
+      drawLessons();
+    });
+  }
   let closeAdd = () => {};
   const pickPreview = el('button', { type: 'button', class: 'hbtn link', hidden: true, onclick: () => previewLesson(lessonSel.value).catch((err) => showToast(err.message)) }, 'Preview as a learner');
   lessonSel.addEventListener('change', () => { pickPreview.hidden = !lessonSel.value; });
+  // With the next release, who's cooking comes first, so the lessons can be
+  // sorted for them.
+  const whoBox = el('fieldset', {}, el('legend', {}, "Who's cooking"), el('p', { class: 'mut small', style: 'margin:0' }, 'Pick more than one to cook it together. It counts for each of them.'), who);
+  const lessonBox = [el('label', { class: 'f' }, 'Lesson', lessonSel), fitBox, pickPreview];
   const addForm = form([
-    el('label', { class: 'f' }, 'Lesson', lessonSel),
-    pickPreview,
-    el('fieldset', {}, el('legend', {}, "Who's cooking"), el('p', { class: 'mut small', style: 'margin:0' }, 'Pick more than one to cook it together. It counts for each of them.'), who),
+    ...(me.family.next_release ? [whoBox, ...lessonBox] : [...lessonBox, whoBox]),
     note,
     field('Serves', 'servings', { type: 'number', min: 1, value: q.default_servings, inputmode: 'numeric' }),
     field('Planned date', 'planned_date', { type: 'date' }, 'Optional'),
@@ -1779,6 +1809,15 @@ const SECTION_ICON = {
 };
 const sectionHead = (sid, name) => el('h4', {}, art(`<svg aria-hidden="true"><use href="/icons.svg#${SECTION_ICON[sid] ?? 's-pantry'}"/></svg>`), name);
 const MAY_HAVE = 'May already have';
+// A lesson's fit for the people cooking it, and why (§6.21, 11d2).
+const fitNote = (o) => (o.fit_label ? el('small', { class: `fitline fit-${o.fit}`, style: 'display:block' }, o.fit_label,
+  [...(o.why ?? []), ...(o.notes ?? [])].length ? el('span', { class: 'mut' }, ` · ${[...o.why, ...o.notes].join(' · ')}`) : null) : null);
+// Optional ingredients left out because someone on the cook rated them 1
+// star (§6.21, 11d2): "Left out: olives from Fattoush (Sam doesn't like them)".
+const leftOutNote = (lessons) => {
+  const lines = lessons.flatMap((x) => (x.left_out ?? []).map((o) => `${o.name.toLowerCase()} from ${x.title} (${peopleList(o.who)} ${o.who.length === 1 ? "doesn't" : "don't"} like ${o.name.toLowerCase().endsWith('s') ? 'them' : 'it'})`));
+  return lines.length ? el('p', { class: 'mut small', style: 'margin:0' }, `Left out: ${lines.join('; ')}.`) : null;
+};
 const usedLine = (x) => el('div', { class: 'rowi' }, el('div', {}, el('b', {}, x.name), el('small', {}, [x.from.join(' · '), x.optional ? 'optional' : null].filter(Boolean).join(' · '))),
   el('span', { class: 'amt' }, x.used ?? ''));
 
@@ -1817,6 +1856,7 @@ const shopping = parentOnly(async (flash) => {
   const weeks = d.weeks.map((w) => el('details', { class: 'card week' },
     el('summary', {}, el('b', {}, weekName(w.week)), el('small', { class: 'mut' }, ` · ${w.lessons.length} lesson${w.lessons.length === 1 ? '' : 's'}`)),
     el('ul', { class: 'weeklessons' }, w.lessons.map((x) => el('li', {}, el('b', {}, x.title), ` · serves ${x.servings}${x.profile_ids.length ? ` · ${names(x.profile_ids)}` : ''}`))),
+    leftOutNote(w.lessons),
     w.needs.may_have.length ? el('div', { class: 'psec' }, el('h4', {}, MAY_HAVE), el('div', { class: 'rows' }, w.needs.may_have.map(usedLine))) : null,
     w.needs.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), el('div', { class: 'rows' }, s.items.map(usedLine))))));
 
@@ -1897,6 +1937,7 @@ const shoppingPreview = parentOnly(async (count) => {
     el('span', {}, el('b', {}, x.name), el('small', {}, [x.used ? `Recipes use ${x.used}` : null, x.buy && x.buy !== x.used ? `buy ${x.buy}` : null, x.from.join(' · ')].filter(Boolean).join(' · '))));
   parentScreen('shopping', el('h2', {}, 'Before you make the list'),
     el('p', {}, `For ${p.lessons.map((x) => `${x.title} (serves ${x.servings})`).join(', ')}.`),
+    leftOutNote(p.lessons),
     form([
       el('p', { class: 'mut small', style: 'margin:0' }, "Tick anything you already have. It's left off this list only."),
       p.may_have.length ? el('fieldset', { class: 'psec' }, el('legend', {}, MAY_HAVE), el('div', { class: 'stack' }, p.may_have.map(tick))) : null,
@@ -1940,7 +1981,7 @@ const shoppingListView = parentOnly(async (lid, flash) => {
     el('a', { class: 'hbtn link', href: '#/parent/shopping' }, '← Shopping'),
     el('section', { class: 'card shoplist' },
       el('div', {}, el('h2', { style: 'margin:0' }, `Shopping list · ${fmtDay(l.created_at.slice(0, 10))}`), count,
-        el('p', { class: 'mut small', style: 'margin:0' }, `For ${l.lessons.map((x) => `${x.title} (serves ${x.servings})`).join(', ')}`)),
+        el('p', { class: 'mut small', style: 'margin:0' }, `For ${l.lessons.map((x) => `${x.title} (serves ${x.servings})`).join(', ')}`), leftOutNote(l.lessons)),
       l.may_have.length ? el('div', { class: 'psec' }, el('h4', {}, MAY_HAVE), l.may_have.map(row)) : null,
       l.sections.map((s) => el('div', { class: 'psec' }, sectionHead(s.id, s.name), s.items.map(row))),
       l.on_hand.length ? el('details', { class: 'psec' }, el('summary', {}, `You have these (${l.on_hand.length})`),

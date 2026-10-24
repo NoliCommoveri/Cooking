@@ -47,7 +47,7 @@ export async function tasteContext(env, fam) {
 
 // The scoring input for the profiles on one cook. With no one named (a lesson
 // not queued for anyone yet), everyone in the family.
-function cookCtx(tc, pids) {
+export function cookCtx(tc, pids) {
   const on = pids?.length ? tc.profiles.filter((p) => pids.includes(p.id)) : tc.profiles;
   return { profiles: on, limits: tc.limits, names: NAMES };
 }
@@ -75,7 +75,7 @@ export function versionFor(tc, choices, lid, pids) {
 
 // How well a dish in the course outline fits the profiles on a course: a
 // written one by its best version, a planned one by its tags and minutes.
-function dishFit(tc, ctx, id) {
+export function dishFit(tc, ctx, id) {
   const L = lessonById[id];
   if (!L) return { ...scoreDish(dishById[id], ctx), written: false };
   const versions = [L, ...(L.variations ?? []).map((v) => ({ ...v, tags: v.tags ?? L.tags }))].filter((v) => dietOk(tc, v));
@@ -114,6 +114,53 @@ export function bestPlan(tc, pids) {
   return LIBRARY.course.map((d) => ({ id: d.id, removed: Boolean(d.pickOne && keyOf[d.id].pickOne && picks[keyOf[d.id].key] !== d.id) }));
 }
 
+// Every lesson in the library the family's diet settings allow, outside the
+// Appointed Times (Swap has those), best first for the profiles on a cook,
+// each with whether any of them has cooked it or has it queued. For Add a lesson and Chef
+// Ruth's "What should we cook?" (11d2).
+export async function rankLessons(env, fam, tc, pids) {
+  const ctx = cookCtx(tc, pids);
+  const seasonal = new Set(LIBRARY.seasonal);
+  const cooked = new Set(), queued = new Set();
+  if (pids.length) {
+    const { results } = await env.DB.prepare(`SELECT DISTINCT a.lesson_id FROM attempts a JOIN attempt_profiles ap ON ap.attempt_id = a.id
+        WHERE a.family_id = ? AND a.finished_at IS NOT NULL AND a.removed_at IS NULL AND ap.profile_id IN (${pids.map(() => '?').join(', ')})`).bind(fam.id, ...pids).all();
+    results.forEach((r) => cooked.add(r.lesson_id));
+    const { results: q } = await env.DB.prepare(`SELECT DISTINCT q.lesson_id FROM queue q JOIN queue_profiles qp ON qp.queue_id = q.id
+        WHERE q.family_id = ? AND q.status IN ('requested', 'assigned', 'shopped') AND qp.profile_id IN (${pids.map(() => '?').join(', ')})`).bind(fam.id, ...pids).all();
+    q.forEach((r) => queued.add(r.lesson_id));
+  }
+  return LIBRARY.lessons.filter((L) => !seasonal.has(L.unit) && dietOk(tc, L))
+    .map((L, i) => ({ L, f: dishFit(tc, ctx, L.id), i }))
+    .sort((a, b) => better(a.f, b.f) || a.i - b.i)
+    .map(({ L, f }) => ({
+      id: L.id, title: L.title, image: L.image, fit: f.fit, label: f.label, fits: f.fits, why: f.why, notes: f.notes, score: f.score,
+      ...(f.version ? { version: f.version, version_title: f.version_title } : {}), cooked: cooked.has(L.id), queued: queued.has(L.id),
+    }));
+}
+
+// Optional ingredients someone on the cook rated 1 star (11d2): left out of
+// the lesson and the shopping list, as diet filters leave things out (§2.1).
+// version: a lesson summary, or one of its variations. Returns
+// [{ ingredient, name, who: [names] }].
+const ITEM_LINES = [...CONTENT.tastes.proteins.map((x) => ['protein', x]), ...CONTENT.tastes.ingredients.map((x) => ['ingredient', x])];
+export function hatedExtras(tc, version, pids) {
+  if (!tc || !version) return [];
+  const on = cookCtx(tc, pids).profiles;
+  const out = [];
+  for (const line of version.ingredients ?? []) {
+    if (!line.optional || out.some((x) => x.ingredient === line.ingredient)) continue;
+    const who = on.filter((p) => ITEM_LINES.some(([kind, item]) => item.ingredients.includes(line.ingredient) && p.ratings?.[kind]?.[item.id] === 1)).map((p) => p.name);
+    if (who.length) out.push({ ingredient: line.ingredient, name: LIBRARY.ingredients[line.ingredient]?.name ?? line.ingredient, who });
+  }
+  return out;
+}
+// The lesson summary a version id names ('' is the lesson itself).
+export const versionSummary = (lid, vid) => {
+  const L = lessonById[lid];
+  return (vid && L?.variations?.find((v) => v.id === vid)) || L || null;
+};
+
 export function register(on) {
   // Each dish's fit for the profiles a course is for, and the pick for each
   // pick-one group, for the course editor (?profiles=id,id).
@@ -123,5 +170,14 @@ export function register(on) {
     const tc = await tasteContext(env, fam) ?? fail(404, 'not_available', 'Not available yet.');
     const pids = (new URL(req.url).searchParams.get('profiles') ?? '').split(',').filter((p) => tc.profiles.some((x) => x.id === p));
     return courseFits(tc, pids);
+  });
+
+  // The library, best first for the profiles on a cook (?profiles=id,id).
+  on('GET', '/api/picks/lessons', async (req, env) => {
+    const s = await requireParent(env, req);
+    const fam = await env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(s.family_id).first();
+    const tc = await tasteContext(env, fam) ?? fail(404, 'not_available', 'Not available yet.');
+    const pids = (new URL(req.url).searchParams.get('profiles') ?? '').split(',').filter((p) => tc.profiles.some((x) => x.id === p));
+    return { lessons: await rankLessons(env, fam, tc, pids) };
   });
 }

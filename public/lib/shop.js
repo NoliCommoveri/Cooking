@@ -41,7 +41,8 @@ function buyText(ing, base) {
   return `${mixed(packs)} ${packs === 1 ? p.label : p.many}`;
 }
 
-// lessons: [{ lesson, servings }].
+// lessons: [{ lesson, servings, leaveOut? }]. leaveOut: optional ingredient
+//   ids someone on the cook rated 1 star (plan §6.21), left out like a diet's.
 // registry: ingredients by id. filters: the family's diet filters.
 // staples: the family's kitchen staples, grouped first as "May already have"
 //   for checking the cupboard (owner, 2026-10-23). A finished list passes none,
@@ -52,10 +53,10 @@ function buyText(ing, base) {
 export function shoppingList({ lessons, registry, filters = [], staples = [], skip = [] }) {
   const items = new Map();
   const staple = new Set(staples), skipped = new Set(skip);
-  for (const { lesson: L, servings } of lessons) {
+  for (const { lesson: L, servings, leaveOut = [] } of lessons) {
     const view = dietView(L, registry, filters);
     const swap = Object.fromEntries(view.applied.map((x) => [x.for, x.use]));
-    const leftOut = new Set(view.leftOut);
+    const leftOut = new Set([...view.leftOut, ...leaveOut]);
     const scaled = scaleLesson(L, registry, servings);
     const f = servings / L.servings;
     L.ingredients.forEach((line, k) => {
