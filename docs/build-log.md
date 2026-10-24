@@ -4575,3 +4575,6 @@ tables.
 - Not done: the syllabus page still covers Cook Around the World only;
   Structured Progression has no syllabus link yet.
 - Tests: 349, all passing; screenshots of every view sent in the session.
+- `CLAUDE.md` gains a Screenshots rule (owner, 2026-10-24): every screen
+  built or changed is sent to the owner as a screenshot in the session, at
+  phone width and in both themes where it matters, and not committed.

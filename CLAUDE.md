@@ -67,6 +67,15 @@ Migrations are bundled into the Worker and applied by pressing a button on
 
 ---
 
+## Screenshots
+
+- **Send the owner screenshots of everything built, as it's built** (owner,
+  2026-10-24): every screen added or changed, at phone width, in both themes
+  where the theme changes the look. Send them in the session; don't commit
+  them to the repo.
+
+---
+
 ## Build log, README, and this file
 
 Each document has one job.
