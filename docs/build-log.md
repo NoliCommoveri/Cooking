@@ -3604,3 +3604,17 @@ parts, as a recommendation waiting on the owner:
   kid's own session for its own ratings.
 - No written lesson uses mushrooms, so the phase's done-when is tested with
   a made-up lesson until a mushroom dish is written.
+
+## 145. 2026-10-24 — Plan: the main track ranks, it doesn't rule out
+
+Design only. The owner's ruling: on Cook Around the World, scoring picks the
+best option where there are options, and never keeps a skill's only dish
+off. Plan §6.21 changed:
+- A 1 star on a version's protein or a required ingredient makes it
+  **Doesn't fit**: ranked below every version that fits, but kept.
+- **Family limits never rule a dish out.** Over the time or budget, or a
+  missing tool, takes points off (draft: −1 a 15 minutes over, −1 a $ over,
+  −2 a tool) with a note, so it loses to an option within the limits and is
+  kept when it's the only one.
+- §10 notes the owner's idea of a **custom course from a family's tastes**,
+  which could rule dishes and skills out. Not planned.
