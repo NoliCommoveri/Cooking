@@ -3352,3 +3352,36 @@ flavor:
   tag. Plan §6.21 updated.
 - Tests: 281. Not checked in a browser this time: the new field uses the
   same select as the others on the Tags page.
+
+## 135. 2026-10-24 — Star ratings and Our tastes (slice 11b)
+
+Phase 11, slice 11b (plan §6.21), all behind the Next release switch (§8.6):
+- **Draft migration `0003_next_release.sql`:** `profile_ratings` (one row per
+  profile per item: 1 to 5 stars, or NULL for Haven't tried) and
+  `family_limits` (time, budget, missing tools, how adventurous). After the
+  deploy the owner presses **Re-apply draft** on `/ops/draft/0003` (it has no
+  rows to lose yet).
+- **API** (`src/worker/tastes.js`), parents only, and 404 for a family
+  without the next release: `GET /api/tastes` (the lists with example
+  dishes, every profile's ratings, the limits, the tool choices),
+  `PUT /api/profiles/<id>/ratings` (one rating; a second absolute favorite
+  in a list is refused with 409 unless `replace`, which moves the old one to
+  4), `PUT /api/tastes/limits`. A deleted profile's ratings go with it; a
+  family's ratings are in Download our data and go with the family.
+- **`src/content/tastes.js`:** the star words, the limits' choices, the tool
+  choices (from the equipment registry), and `ratingItems` (the flavors list
+  ends with Meals heavy on vegetables).
+- **Our tastes** (Menu → Setup, next-release families only): limits, a
+  profile picker, and Proteins, Flavors (each with its examples), and Key
+  ingredients as star rows (`public/tastes.js`). Every tap saves; tapping a
+  rating again clears it.
+- **Getting started:** a new `tastes` part after Logins for kids (skipped
+  for families without the next release): the limits, then each profile's
+  proteins. **Chef Ruth:** "Ask what we like to eat", five unrated items at a
+  time for one profile.
+- Not built: the kid's taste quiz in the kitchen, moved to slice 11d.
+- Tests: 293 (6 new in `test/worker-tastes.test.js`; the Getting started
+  order test updated). Checked in a browser at phone width on the dev
+  server: Our tastes with the limits, rating, the favorite question and
+  moving it, Haven't tried, the Flavors list, and Chef Ruth rating five
+  proteins. Getting started's tastes part wasn't run in a browser.

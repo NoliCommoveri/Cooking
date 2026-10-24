@@ -24,6 +24,7 @@ import { register as registerSwap } from './swap.js';
 import { register as registerKidLogins } from './kidlogin.js';
 import { register as registerSetup } from './setup.js';
 import { register as registerGrades } from './grades.js';
+import { register as registerTastes, forgetProfile } from './tastes.js';
 import { RUBRIC, gradeLine } from '../content/grades.js';
 import { exportFamily, deleteFamily, eraseAfter } from './backup.js';
 import { releaseFor } from './release.js';
@@ -381,6 +382,7 @@ on('DELETE', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
       AND NOT EXISTS (SELECT 1 FROM attempt_profiles ap WHERE ap.attempt_id = attempts.id)`).bind(s.family_id),
     env.DB.prepare('DELETE FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id),
   ]);
+  await forgetProfile(env, s.family_id, pid);
   return { ok: true };
 });
 
@@ -908,6 +910,7 @@ registerSwap(on);
 registerKidLogins(on);
 registerSetup(on);
 registerGrades(on);
+registerTastes(on);
 
 // ---------- dispatch ----------
 

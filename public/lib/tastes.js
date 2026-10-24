@@ -16,6 +16,18 @@ export const FAMILIAR = [['everyday', 'Everyday'], ['new-ish', 'New-ish'], ['adv
 export const VEGGIES = [['light', 'Light'], ['some', 'Some'], ['lots', 'Lots']];
 // The one rated item it's matched against: profiles rate it like a flavor.
 export const VEGGIE_RATING = { id: 'veggie-heavy', name: 'Meals heavy on vegetables', examples: ['a big chopped salad', 'vegetable stir-fry', 'ratatouille', 'minestrone'] };
+// The stars (owner, 2026-10-24): one absolute favorite per list per profile.
+export const STARS = [[5, 'Absolute favorite'], [4, 'Love'], [3, 'Like'], [2, 'Okay'], [1, 'Hate']];
+export const FAVORITE = 5;
+export const RATING_KINDS = ['protein', 'flavor', 'ingredient'];
+// A family's limits (§6.21): asked once, not starred.
+export const MAX_MINUTES = [30, 45, 60];
+export const ADVENTUROUS = [['familiar', 'Stick to what we know'], ['a-bit', 'A bit adventurous'], ['adventurous', 'Bring it on']];
+// Tools a family might not have. Basic ones (a knife, a pan) aren't asked.
+export const TOOL_CHOICES = ['immersion-blender', 'rolling-pin', 'box-grater', 'biscuit-cutter', 'pastry-brush', 'cooling-rack', 'baking-dish', 'skillet-nonstick-8', 'microwave', 'toaster'];
+// What a profile rates in each list: the flavors list ends with Meals heavy on
+// vegetables, matched against the veggies tag.
+export const ratingItems = (tastes) => ({ protein: tastes.proteins, flavor: [...tastes.flavors, VEGGIE_RATING], ingredient: tastes.ingredients });
 // A dish with no main protein: a side, a bread, a dessert.
 export const NO_PROTEIN = 'none';
 export const TAG_KEYS = ['protein', 'flavors', 'heat', 'budget', 'familiar', 'veggies'];

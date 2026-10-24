@@ -13,6 +13,7 @@ import { progressView, celebrate } from './rewards.js';
 import { isMuted, setMuted } from './sound.js';
 import { gettingStarted, openRuth, ruthButton } from './ruth.js';
 import { openIntro } from './intro.js';
+import { starRow, ratingSaver, ratedCount } from './tastes.js';
 
 const app = document.getElementById('app');
 
@@ -345,7 +346,7 @@ async function lockers() {
 
 // What Chef Ruth needs from the app to build her chat and save answers.
 const ruthCtx = () => ({
-  el, api, field, go, refresh, me: () => me, familyInitial, pictureGrid, passwordFields, DIET, LOGIN_PICTURES, weekOf, localToday, fmtDay, tz,
+  el, api, field, go, refresh, me: () => me, modal, familyInitial, pictureGrid, passwordFields, DIET, LOGIN_PICTURES, weekOf, localToday, fmtDay, tz,
 });
 
 // A new family's first run (§6.9): the empty lockers with Chef Ruth over them.
@@ -768,6 +769,8 @@ const PARENT_PAGES = [
   { key: 'courses', group: 'setup', label: 'Courses' },
   { key: 'profiles', group: 'setup', label: 'Profiles' },
   { key: 'family', group: 'setup', label: 'Family settings' },
+  // The next release (§8.6): only a family that has it sees it.
+  { key: 'tastes', group: 'setup', label: 'Our tastes', release: true },
   { key: 'parents', group: 'setup', label: 'Logins & PIN' },
   { key: 'owner', group: 'owner', label: 'Families & beta word', owner: true },
   { key: 'fixes', group: 'owner', label: 'Fix requests', owner: true },
@@ -776,7 +779,7 @@ const PARENT_PAGES = [
 ];
 
 function parentMenu(current) {
-  const pages = PARENT_PAGES.filter((x) => (!x.owner || me.parent.is_owner) && (!x.homeschool || me.family.mode === 'homeschool'));
+  const pages = PARENT_PAGES.filter((x) => (!x.owner || me.parent.is_owner) && (!x.homeschool || me.family.mode === 'homeschool') && (!x.release || me.family.next_release));
   const groups = PARENT_GROUPS.filter(([g]) => pages.some((x) => x.group === g));
   let open = pages.find((x) => x.key === current)?.group ?? groups[0][0];
   const panel = el('nav', { class: 'drawer-panel', 'aria-label': 'Parent screens' });
@@ -1003,6 +1006,68 @@ function passwordDialog(profile, done) {
     done();
   }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')] }));
 }
+
+// Our tastes (§6.21, the next release): the family's limits, then each
+// profile's star ratings for proteins, flavors, and key ingredients. Every tap
+// saves.
+const KIND_TITLES = [['protein', 'Proteins'], ['flavor', 'Flavors'], ['ingredient', 'Key ingredients']];
+const ourTastes = parentOnly(async (pid) => {
+  const t = await api('GET', '/api/tastes');
+  const ctx = { el, api, modal };
+  const limitsCard = () => {
+    const sel = (label, name, options, value, none) => el('label', { class: 'f' }, label,
+      el('select', { name }, el('option', { value: '', selected: value == null }, none), options.map(([v, l]) => el('option', { value: v, selected: String(value) === String(v) }, l))));
+    const saved = el('p', { class: 'ok', hidden: true }, 'Saved.');
+    return form([
+      el('h2', {}, 'For the whole family'),
+      el('p', { class: 'mut small', style: 'margin:0' }, 'Dishes outside these are left out of what the app picks for you. You can still add any lesson yourself.'),
+      el('div', { class: 'grid2' },
+        sel('Time on a cooking night', 'max_minutes', t.choices.max_minutes.map((m) => [m, `Up to ${m} minutes`]), t.limits.max_minutes, 'No limit'),
+        sel('Budget per serving', 'budget', t.choices.budget, t.limits.budget, 'No limit'),
+        sel('How adventurous', 'adventurous', t.choices.adventurous, t.limits.adventurous, 'Not set')),
+      el('fieldset', {}, el('legend', {}, "Tools we don't have"),
+        el('div', { class: 'grid2 tight' }, t.choices.tools.map((x) => el('label', { class: 'choice' },
+          el('input', { type: 'checkbox', name: `tool_${x.id}`, checked: t.limits.missing_tools.includes(x.id) }), el('span', {}, x.name))))),
+      saved,
+    ], 'Save', async (v) => {
+      saved.hidden = true;
+      await api('PUT', '/api/tastes/limits', { max_minutes: v.max_minutes || null, budget: v.budget || null, adventurous: v.adventurous || null, missing_tools: t.choices.tools.filter((x) => v[`tool_${x.id}`]).map((x) => x.id) });
+      saved.hidden = false;
+    });
+  };
+  if (!t.profiles.length) {
+    return parentScreen('tastes', limitsCard(), el('div', { class: 'card' }, el('p', {}, 'Add a profile first, then each person can rate what they like.'), el('a', { class: 'hbtn', href: '#/parent/profiles' }, 'Profiles')));
+  }
+  const p = t.profiles.find((x) => x.id === pid) ?? t.profiles[0];
+  let ratings = t.ratings[p.id];
+  const saver = ratingSaver(ctx, p.id);
+  const lists = KIND_TITLES.map(([kind, title]) => {
+    const list = t.lists[kind];
+    const count = el('small', {});
+    const body = el('div', { class: 'rate-list' });
+    const draw = () => {
+      count.textContent = `${ratedCount(list, ratings[kind])} of ${list.length} rated`;
+      body.replaceChildren(...list.map((item) => starRow(ctx, item, ratings[kind], async (change) => {
+        const next = await saver(kind, item.id, change, item.name);
+        if (!next) return null;
+        const moved = list.some((x) => x.id !== item.id && next[kind][x.id] !== ratings[kind][x.id]);
+        ratings = next;
+        if (moved) draw(); else count.textContent = `${ratedCount(list, ratings[kind])} of ${list.length} rated`;
+        return ratings[kind];
+      })));
+    };
+    draw();
+    return el('details', { class: 'card psec', open: kind === 'protein' }, el('summary', {}, el('h2', {}, title, ' ', count)),
+      kind === 'flavor' ? el('p', { class: 'mut small' }, "Rate what each tastes like, even if you've never had the dishes named.") : null, body);
+  });
+  parentScreen('tastes',
+    el('p', { class: 'mut' }, 'Each person rates what they like: 5 stars for an absolute favorite (one in each list), down to 1 for something they hate. The app uses it to pick the best dish, and the best version of it, for whoever is cooking.'),
+    limitsCard(),
+    el('div', { class: 'card' }, el('h2', {}, 'Who is rating?'),
+      el('div', { class: 'grid2' }, t.profiles.map((x) => el('a', { class: `choice${x.id === p.id ? ' on' : ''}`, href: `#/parent/tastes/${x.id}`, 'aria-current': x.id === p.id ? 'true' : null },
+        avatars(x.people), el('span', {}, x.name))))),
+    lists);
+});
 
 const familySettings = parentOnly(async () => {
   const f = await api('GET', '/api/family');
@@ -2528,6 +2593,7 @@ async function route() {
       if (sub === 'grades') return await gradesPage();
       if (sub === 'transcript') return await transcript(extra);
       if (sub === 'family') return await familySettings();
+      if (sub === 'tastes' && me.family.next_release) return await ourTastes(extra);
       if (sub === 'parents') return await parentLogins();
       if (sub === 'owner') return await owner();
       if (sub === 'fixes') return await ownerFixes();
