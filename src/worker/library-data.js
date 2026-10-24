@@ -5875,7 +5875,8 @@ export const LIBRARY = {
   "chinese-american": "Chinese-American",
   "turkish": "Turkish",
   "israeli": "Israeli",
-  "cuban": "Cuban"
+  "cuban": "Cuban",
+  "persian": "Persian"
  },
  "units": {
   "1": "Knife work and assembly",
@@ -6378,7 +6379,8 @@ export const LIBRARY = {
    "about": "Day-old rice stir-fried fast with chicken, egg, vegetables, and soy sauce.",
    "skills": [
     "stir-frying",
-    "dicing"
+    "dicing",
+    "cooling-reheating"
    ],
    "minutes": 35,
    "cuisine": "chinese",
@@ -7831,7 +7833,8 @@ export const LIBRARY = {
    "unit": 6,
    "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.",
    "skills": [
-    "binders"
+    "binders",
+    "temping-meat"
    ],
    "minutes": 90,
    "cuisine": "american",
@@ -8255,11 +8258,11 @@ export const LIBRARY = {
     },
     {
      "number": 6,
-     "name": "Poultry and roasting"
+     "name": "Fish"
     },
     {
      "number": 7,
-     "name": "Fish"
+     "name": "Poultry and roasting"
     },
     {
      "number": 8,
@@ -8274,7 +8277,7 @@ export const LIBRARY = {
     {
      "week": 1,
      "unit": 1,
-     "skill": "poaching-eggs",
+     "skill": "temping-meat",
      "recipe": "shakshuka",
      "options": [
       "huevos-rancheros",
@@ -8318,13 +8321,13 @@ export const LIBRARY = {
     {
      "week": 3,
      "unit": 1,
-     "skill": "stir-frying",
+     "skill": "temping-meat",
      "recipe": "chicken-fried-rice",
      "options": [
-      "jollof-rice"
+      "chicken-adobo"
      ],
      "drill": {
-      "title": "Safe cooling of a batch of rice",
+      "title": "Safe cooling of a batch of rice, saved for the fried rice",
       "minutes": 40
      },
      "knowledge": {
@@ -8339,11 +8342,10 @@ export const LIBRARY = {
     {
      "week": 4,
      "unit": 1,
-     "skill": "binders",
+     "skill": "temping-meat",
      "recipe": "meatloaf",
      "options": [
-      "lamb-kofta",
-      "swedish-meatballs"
+      "lamb-kofta"
      ],
      "mastery": true,
      "drill": {
@@ -8425,7 +8427,7 @@ export const LIBRARY = {
      "skill": "yeast-dough",
      "recipe": "challah",
      "options": [
-      "homemade-pizza"
+      "cinnamon-rolls"
      ],
      "mastery": true,
      "drill": {
@@ -8445,8 +8447,9 @@ export const LIBRARY = {
      "week": 9,
      "unit": 3,
      "skill": "dicing",
-     "recipe": "fish-tacos",
+     "recipe": "beef-tacos-pico",
      "options": [
+      "fish-tacos",
       "ratatouille",
       "minestrone"
      ],
@@ -8469,7 +8472,7 @@ export const LIBRARY = {
      "skill": "fine-chopping",
      "recipe": "tabbouleh",
      "options": [
-      "chimichurri-steak",
+      "kuku-sabzi",
       "fattoush"
      ],
      "drill": {
@@ -8513,7 +8516,7 @@ export const LIBRARY = {
      "skill": "dicing",
      "recipe": "israeli-salad",
      "options": [
-      "chopped-salad-vinaigrette"
+      "ratatouille"
      ],
      "mastery": true,
      "drill": {
@@ -8643,7 +8646,7 @@ export const LIBRARY = {
      "skill": "cooking-legumes",
      "recipe": "red-beans-and-rice",
      "options": [
-      "chana-masala"
+      "cuban-black-beans"
      ],
      "drill": {
       "title": "Quick-soak vs. overnight soak",
@@ -8664,7 +8667,8 @@ export const LIBRARY = {
      "skill": "cooking-grains",
      "recipe": "rice-pilaf",
      "options": [
-      "jollof-rice"
+      "jollof-rice",
+      "bulgur-pilaf"
      ],
      "drill": {
       "title": "Toast grains in fat before liquid",
@@ -8704,6 +8708,90 @@ export const LIBRARY = {
     {
      "week": 21,
      "unit": 6,
+     "skill": "cooking-fish",
+     "recipe": "baked-salmon",
+     "options": [
+      "honey-soy-salmon",
+      "bbq-salmon"
+     ],
+     "drill": {
+      "title": "Check a fillet for pin bones",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Fins and scales: clean vs. unclean species",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Plan a fish dish that serves well cold",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 22,
+     "unit": 6,
+     "skill": "cooking-fish",
+     "recipe": "steamed-fish",
+     "drill": {
+      "title": "Judge freshness by smell, eyes, flesh",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Store-bought fish: reading labels and names",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Steam fish and chill for a cold plate",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 23,
+     "unit": 6,
+     "skill": "cooking-fish",
+     "recipe": "poached-cod",
+     "options": [
+      "moqueca"
+     ],
+     "drill": {
+      "title": "Test doneness by flaking",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Why fish cooks faster than meat",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Make tomato sauce ahead; poach Friday",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 24,
+     "unit": 6,
+     "skill": "cooking-fish",
+     "recipe": "pan-seared-trout",
+     "options": [
+      "blackened-cod",
+      "pineapple-teriyaki-salmon"
+     ],
+     "mastery": true,
+     "drill": {
+      "title": "Sear a fillet skin-side down: dry it, press it flat, wait for it to release",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Species ID quiz",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Cold fish salad for the Sabbath table",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 25,
+     "unit": 7,
      "skill": "roasting",
      "recipe": "roasted-vegetables",
      "options": [
@@ -8723,8 +8811,8 @@ export const LIBRARY = {
      }
     },
     {
-     "week": 22,
-     "unit": 6,
+     "week": 26,
+     "unit": 7,
      "skill": "handling-poultry",
      "recipe": "shish-taouk",
      "options": [
@@ -8747,8 +8835,8 @@ export const LIBRARY = {
      }
     },
     {
-     "week": 23,
-     "unit": 6,
+     "week": 27,
+     "unit": 7,
      "skill": "roasting",
      "recipe": "roast-chicken-pieces",
      "options": [
@@ -8768,8 +8856,8 @@ export const LIBRARY = {
      }
     },
     {
-     "week": 24,
-     "unit": 6,
+     "week": 28,
+     "unit": 7,
      "skill": "roasting",
      "recipe": "roast-chicken",
      "mastery": true,
@@ -8783,111 +8871,6 @@ export const LIBRARY = {
      },
      "sabbath": {
       "title": "Roast chicken as the Sabbath centerpiece",
-      "minutes": 45
-     }
-    },
-    {
-     "week": 25,
-     "unit": 7,
-     "skill": "cooking-fish",
-     "recipe": "baked-salmon",
-     "options": [
-      "bbq-salmon",
-      "honey-soy-salmon",
-      "pineapple-teriyaki-salmon",
-      "blackened-cod",
-      "coconut-crusted-fish",
-      "moqueca"
-     ],
-     "drill": {
-      "title": "Check a fillet for pin bones",
-      "minutes": 40
-     },
-     "knowledge": {
-      "title": "Fins and scales: clean vs. unclean species",
-      "minutes": 35
-     },
-     "sabbath": {
-      "title": "Plan a fish dish that serves well cold",
-      "minutes": 45
-     }
-    },
-    {
-     "week": 26,
-     "unit": 7,
-     "skill": "cooking-fish",
-     "recipe": "steamed-fish",
-     "options": [
-      "pineapple-teriyaki-salmon",
-      "honey-soy-salmon",
-      "bbq-salmon",
-      "blackened-cod",
-      "coconut-crusted-fish",
-      "moqueca"
-     ],
-     "drill": {
-      "title": "Judge freshness by smell, eyes, flesh",
-      "minutes": 40
-     },
-     "knowledge": {
-      "title": "Store-bought fish: reading labels and names",
-      "minutes": 35
-     },
-     "sabbath": {
-      "title": "Steam fish and chill for a cold plate",
-      "minutes": 45
-     }
-    },
-    {
-     "week": 27,
-     "unit": 7,
-     "skill": "cooking-fish",
-     "recipe": "poached-cod",
-     "options": [
-      "moqueca",
-      "pineapple-teriyaki-salmon",
-      "honey-soy-salmon",
-      "bbq-salmon",
-      "blackened-cod",
-      "coconut-crusted-fish"
-     ],
-     "drill": {
-      "title": "Test doneness by flaking",
-      "minutes": 40
-     },
-     "knowledge": {
-      "title": "Why fish cooks faster than meat",
-      "minutes": 35
-     },
-     "sabbath": {
-      "title": "Make tomato sauce ahead; poach Friday",
-      "minutes": 45
-     }
-    },
-    {
-     "week": 28,
-     "unit": 7,
-     "skill": "cooking-fish",
-     "recipe": "pan-seared-trout",
-     "options": [
-      "blackened-cod",
-      "coconut-crusted-fish",
-      "pineapple-teriyaki-salmon",
-      "honey-soy-salmon",
-      "bbq-salmon",
-      "moqueca"
-     ],
-     "mastery": true,
-     "drill": {
-      "title": "Skin a fillet",
-      "minutes": 40
-     },
-     "knowledge": {
-      "title": "Species ID quiz",
-      "minutes": 35
-     },
-     "sabbath": {
-      "title": "Cold fish salad for the Sabbath table",
       "minutes": 45
      }
     },
@@ -8956,7 +8939,6 @@ export const LIBRARY = {
      "skill": "building-soup",
      "recipe": "minestrone",
      "options": [
-      "matzo-ball-soup",
       "red-lentil-soup"
      ],
      "mastery": true,
@@ -9030,7 +9012,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Shop and do Thursday prep",
+      "title": "Serve the practice dish at the Sabbath meal and note what to change",
       "minutes": 45
      }
     },
@@ -9039,11 +9021,11 @@ export const LIBRARY = {
      "unit": 9,
      "kind": "capstone",
      "drill": {
-      "title": "Run the kitchen unaided",
+      "title": "Shop and do Thursday prep",
       "minutes": 40
      },
      "knowledge": {
-      "title": "Reflection: what worked, what to change",
+      "title": "Reflection, the Sunday after: what worked, what to change",
       "minutes": 35
      },
      "sabbath": {
@@ -9282,7 +9264,7 @@ export const LIBRARY = {
     },
     {
      "id": "baked-salmon",
-     "title": "Baked salmon with lemon and herbs",
+     "title": "Baked fish with lemon and herbs",
      "cuisine": "american",
      "skills": [
       "cooking-fish"
@@ -9294,7 +9276,7 @@ export const LIBRARY = {
        "herby-lemony"
       ],
       "heat": "mild",
-      "budget": "$$$",
+      "budget": "$$",
       "familiar": "everyday",
       "veggies": "light"
      },
@@ -9402,6 +9384,86 @@ export const LIBRARY = {
       "veggies": "light"
      },
      "art": "soup"
+    },
+    {
+     "id": "beef-tacos-pico",
+     "title": "Beef tacos with pico de gallo",
+     "cuisine": "mexican",
+     "skills": [
+      "dicing"
+     ],
+     "minutes": 45,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "kuku-sabzi",
+     "title": "Kuku sabzi",
+     "cuisine": "persian",
+     "skills": [
+      "fine-chopping"
+     ],
+     "minutes": 60,
+     "tags": {
+      "protein": "eggs",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "adventurous",
+      "veggies": "lots"
+     },
+     "art": "side"
+    },
+    {
+     "id": "cuban-black-beans",
+     "title": "Cuban black beans and rice",
+     "cuisine": "cuban",
+     "skills": [
+      "cooking-legumes"
+     ],
+     "minutes": 120,
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "art": "side"
+    },
+    {
+     "id": "bulgur-pilaf",
+     "title": "Bulgur pilaf with chickpeas",
+     "cuisine": "turkish",
+     "skills": [
+      "cooking-grains"
+     ],
+     "minutes": 40,
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "art": "side"
     }
    ],
    "titles": {
@@ -9412,26 +9474,25 @@ export const LIBRARY = {
     "smash-burgers": "Smash burgers + quick pickles",
     "lamb-kofta": "Lamb kofta with yogurt sauce",
     "chicken-fried-rice": "Chicken fried rice",
-    "jollof-rice": "Jollof rice with chicken",
+    "chicken-adobo": "Chicken adobo",
     "meatloaf": "Meatloaf with glaze",
-    "swedish-meatballs": "Swedish meatballs",
     "pita-bread": "Pita bread",
     "homemade-pizza": "Homemade pizza",
     "sandwich-loaf": "Sandwich loaf",
     "cinnamon-rolls": "Cinnamon rolls",
     "dinner-rolls": "Dinner rolls",
     "challah": "Challah",
+    "beef-tacos-pico": "Beef tacos with pico de gallo",
     "fish-tacos": "Pico de gallo + Baja fish tacos",
     "ratatouille": "Ratatouille",
     "minestrone": "Minestrone",
     "tabbouleh": "Tabbouleh",
-    "chimichurri-steak": "Chimichurri steak",
+    "kuku-sabzi": "Kuku sabzi",
     "fattoush": "Fattoush",
     "vegetable-stir-fry": "Vegetable stir-fry with tofu",
     "spring-rolls": "Fresh spring rolls",
     "chicken-fajitas": "Chicken fajitas",
     "israeli-salad": "Israeli salad",
-    "chopped-salad-vinaigrette": "Chickpea chopped salad + vinaigrette",
     "garlic-green-beans": "Garlic green beans",
     "japchae": "Japchae",
     "beef-picadillo": "Beef picadillo",
@@ -9445,9 +9506,21 @@ export const LIBRARY = {
     "red-lentil-soup": "Red lentil soup (mercimek)",
     "misir-wot": "Misir wot",
     "red-beans-and-rice": "Red beans and rice",
+    "cuban-black-beans": "Cuban black beans and rice",
     "rice-pilaf": "Rice pilaf",
+    "jollof-rice": "Jollof rice with chicken",
+    "bulgur-pilaf": "Bulgur pilaf with chickpeas",
     "mujaddara": "Mujaddara",
     "koshari": "Koshari",
+    "baked-salmon": "Baked fish with lemon and herbs",
+    "honey-soy-salmon": "Broiled honey-soy salmon",
+    "bbq-salmon": "BBQ-rubbed salmon",
+    "steamed-fish": "Steamed fish with ginger and scallion",
+    "poached-cod": "Cod poached in tomato sauce",
+    "moqueca": "Moqueca (Brazilian coconut fish stew)",
+    "pan-seared-trout": "Pan-seared trout",
+    "blackened-cod": "Blackened cod",
+    "pineapple-teriyaki-salmon": "Pineapple teriyaki salmon",
     "roasted-vegetables": "Roasted vegetables",
     "shoestring-fries": "Baked shoestring fries",
     "shish-taouk": "Shish taouk",
@@ -9457,20 +9530,11 @@ export const LIBRARY = {
     "roast-chicken-pieces": "Roast chicken pieces",
     "bbq-pulled-chicken": "BBQ pulled chicken + coleslaw",
     "roast-chicken": "Roast chicken + pan gravy",
-    "baked-salmon": "Baked salmon with lemon and herbs",
-    "bbq-salmon": "BBQ-rubbed salmon",
-    "honey-soy-salmon": "Broiled honey-soy salmon",
-    "pineapple-teriyaki-salmon": "Pineapple teriyaki salmon",
-    "blackened-cod": "Blackened cod",
-    "coconut-crusted-fish": "Coconut-crusted fish with pineapple salsa",
-    "moqueca": "Moqueca (Brazilian coconut fish stew)",
-    "steamed-fish": "Steamed fish with ginger and scallion",
-    "poached-cod": "Cod poached in tomato sauce",
-    "pan-seared-trout": "Pan-seared trout",
     "vegetable-stock": "Vegetable stock",
     "chicken-stock": "Chicken stock",
     "matzo-ball-soup": "Matzo ball soup from a whole chicken",
     "grilled-cheese-tomato-soup": "Grilled cheese + tomato soup",
+    "chopped-salad-vinaigrette": "Chickpea chopped salad + vinaigrette",
     "chicken-caesar": "Chicken Caesar + homemade dressing & croutons",
     "beef-stew": "Beef stew",
     "peanut-stew": "Peanut stew (maafe)"

@@ -1345,6 +1345,8 @@ Level 1's "Clean and unclean animals" and Level 2's "Labels and hidden unclean i
 ### 12.3 Level 3 Cook: 36 weeks, ~125 hours (one high-school elective credit in most states)
 **Unit order — Requirement (owner, 2026-10-23): yeast dough moves from Unit 8 to Unit 2.** Taught late, it fell on Unleavened Bread in most years (2028 and 2029 overlap; 2027 clears by days, and any skipped week pushes it in). Research supports moving it: it needs only food safety, measuring, and the oven, not the units between; UK schools teach yeast rolls in the first year of secondary school; skills practised over many weeks are kept better than skills practised in a short block, so October bread gets about 28 weeks of Sabbath challah as practice; and an early, visible success builds the confidence teens most often lack. Knife cuts stay directly before sautéing, which uses them. Stock and soup now lands in April, around the feast (matzo ball soup).
 
+**Fish before poultry (owner, 2026-10-24).** The recipe progression review (`docs/level-recipe-review.md`) found the year dipped from the whole roast chicken to a 30-minute baked fillet. Fish is now Unit 6 and Poultry and roasting Unit 7: fish is the gentler first raw protein (short cooks, 145°F), the whole bird becomes the hardest dish before the stock unit, and its carcass waits two weeks for week 30 instead of six.
+
 | Unit | Weeks | Goal |
 |---|---|---|
 | 1 Food safety science | 1–4 | Uses a thermometer, knows the danger zone (40–140°F), and cools and reheats food safely |
@@ -1352,51 +1354,51 @@ Level 1's "Clean and unclean animals" and Level 2's "Labels and hidden unclean i
 | 3 Classic knife cuts and honing | 9–12 | Holds and hones a chef's knife; even dice, mince, and julienne |
 | 4 Sautéing and aromatic bases | 13–16 | Controls pan heat, sweats vs. browns aromatics, deglazes |
 | 5 Legumes and grains | 17–20 | Soaks and cooks dried beans and lentils; grains by absorption and pilaf |
-| 6 Poultry and roasting | 21–24 | Handles raw poultry safely, roasts to 165°F, roasts vegetables evenly |
-| 7 Fish | 25–28 | Identifies clean fish by fins and scales, judges freshness, cooks fish gently until it flakes |
+| 6 Fish | 21–24 | Identifies clean fish by fins and scales, judges freshness, cooks fish gently until it flakes |
+| 7 Poultry and roasting | 25–28 | Handles raw poultry safely, roasts to 165°F, roasts vegetables evenly |
 | 8 Stock and soup | 29–32 | Makes a clear stock from bones or vegetables and builds a soup from it |
 | 9 Balancing flavor and Sabbath capstone | 33–36 | Tastes and corrects salt, acid, fat, and heat; plans and cooks a full Sabbath meal ahead and reheats it safely |
 
 | Week | Recipe | Drill | Knowledge | Sabbath task |
 |---|---|---|---|---|
-| 1 | Shakshuka (eggs set fully) | Calibrate a thermometer in ice water | Danger zone and how bacteria grow | Label and date containers |
-| 2 | Beef burgers to 160°F | Temp-check thick vs. thin patties | Safe internal temperatures chart | Cool a cooked dish in an ice bath |
-| 3 | Fried rice from chilled rice | Safe cooling of a batch of rice | Cross-contamination and board colors | Store a dish safely for the Sabbath |
-| 4 | **Mastery:** beef kofta or meatloaf to 160°F | Set up a clean station unaided | Food safety quiz | Reheat a stored dish to 165°F |
+| 1 | Shakshuka (eggs set fully, checked at 160°F) | Calibrate a thermometer in ice water | Danger zone and how bacteria grow | Label and date containers |
+| 2 | Thick beef burgers to 160°F | Temp-check thick vs. thin patties | Safe internal temperatures chart | Cool a cooked dish in an ice bath |
+| 3 | Chicken fried rice, from the rice cooled in the drill | Safe cooling of a batch of rice, saved for the fried rice | Cross-contamination and board colors | Store a dish safely for the Sabbath |
+| 4 | **Mastery:** meatloaf, beef kofta to 160°F, or turkey meatloaf to 165°F | Set up a clean station unaided | Food safety quiz | Reheat a stored dish to 165°F |
 | 5 | Pita bread | Bloom yeast; test water temperature | How yeast makes dough rise | Bake and freeze pita for the Sabbath |
 | 6 | Sandwich loaf | Knead and windowpane test | Gluten and kneading | Bake a loaf Friday morning |
-| 7 | Dinner rolls | Shape even rolls by weight | Proofing: under vs. over | Shape rolls Thursday; cold proof overnight |
+| 7 | Dinner rolls (2 or 3 shaped as small braids or knots) | Shape even rolls by weight | Proofing: under vs. over | Shape rolls Thursday; cold proof overnight |
 | 8 | **Mastery:** challah | Braid a dough | Doneness: color, sound, 190°F inside | Challah for the Sabbath table (and from here on, recommendation) |
-| 9 | Pico de gallo | Claw grip; dice 3 onions | Parts of a knife; knife types | Chop vegetables ahead for the Sabbath meal |
+| 9 | Beef tacos with pico de gallo | Claw grip; dice 3 onions | Parts of a knife; knife types | Chop vegetables ahead for the Sabbath meal |
 | 10 | Tabbouleh (fine mince) | Mince parsley and garlic | Honing vs. sharpening | Store prepped herbs so they stay fresh |
 | 11 | Vegetable stir-fry (julienne) | Julienne carrots and peppers | Why even cuts cook evenly | Prep a full set of stir-fry vegetables ahead |
 | 12 | **Mastery:** Israeli salad (fine dice) | Timed dice: one onion, one pepper | Name and size each classic cut | Prep and store all salad vegetables for the Sabbath |
 | 13 | Garlic green beans | Blanch and shock green beans and spinach; shimmer test for hot oil | Blanching: why vegetables stay green and crisp; oils and smoke points | Blanch and store beans for the Sabbath |
 | 14 | Beef picadillo (sofrito base) | Sweat vs. brown onions | Browning and why it adds flavor | Make and freeze a sofrito batch |
 | 15 | Cajun rice dressing with beef (trinity) | Deglaze a pan, scrape the fond | Aromatic bases across cuisines | Cook rice dressing ahead; cool safely |
-| 16 | **Mastery:** beef ragù (soffritto base) | Sauté a mixed vegetable pan unaided | Explain sweat vs. sauté | Make ragù ahead for the Sabbath meal |
+| 16 | **Mastery:** ragù bolognese (Beef ragù's ground-beef Level version) | Sauté a mixed vegetable pan unaided | Explain sweat vs. sauté | Make ragù ahead for the Sabbath meal |
 | 17 | Red lentil soup (mercimek) | Rinse and pick over lentils | Legume types and cook times | Freeze soup in portions |
 | 18 | Red beans and rice (beef sausage, collagen-cased or skinless, or none; §2.1) | Quick-soak vs. overnight soak | Why beans are soaked | Soak beans Friday for a later meal |
 | 19 | Rice pilaf | Toast grains in fat before liquid | Absorption vs. pasta method; ratios | Cook grains ahead and reheat with steam |
 | 20 | **Mastery:** mujaddara (lentils and rice) | Cook a grain without a recipe card | Grains of the world worksheet | Make a legume dish that holds well for the Sabbath |
-| 21 | Roasted vegetables | Cut vegetables to roast at the same rate | How roasting browns food | Roast a tray of vegetables ahead |
-| 22 | Shish taouk (chicken thighs) | Trim and cube chicken safely | Raw poultry handling | Marinate chicken Friday for a later meal |
-| 23 | Roast chicken pieces | Temp-check thigh and breast | Dark vs. white meat | Roast chicken ahead; hold and reheat |
-| 24 | **Mastery:** whole roast chicken | Break down a cooked chicken | Carryover cooking and resting | Roast chicken as the Sabbath centerpiece |
-| 25 | Baked salmon with lemon and herbs | Check a fillet for pin bones | Fins and scales: clean vs. unclean species | Plan a fish dish that serves well cold |
-| 26 | Steamed fish with ginger and scallion | Judge freshness by smell, eyes, flesh | Store-bought fish: reading labels and names | Steam fish and chill for a cold plate |
-| 27 | Poached cod in tomato sauce | Test doneness by flaking | Why fish cooks faster than meat | Make tomato sauce ahead; poach Friday |
-| 28 | **Mastery:** pan-seared tilapia or trout | Skin a fillet | Species ID quiz | Cold fish salad for the Sabbath table |
-| 29 | Vegetable stock | Skim and strain a stock | Stock vs. broth; why simmer, not boil | Freeze stock in portions |
-| 30 | Chicken stock from the Unit 6 carcass (freeze it in week 24) | Cool stock quickly and lift off fat | Gelatin and body in stock | Make stock ahead for the week |
-| 31 | Chicken noodle or matzo ball soup | Season a soup by tasting in stages | Soup families: clear, thick, puréed | Soup that improves when made ahead |
-| 32 | **Mastery:** minestrone or beef and barley soup | Make stock without a recipe card | Clean labels on boxed stock and bouillon (§2.1) | Soup as the Sabbath starter |
+| 21 | Baked fish with lemon and herbs (any clean fillet), with a side from an earlier week | Check a fillet for pin bones | Fins and scales: clean vs. unclean species | Plan a fish dish that serves well cold |
+| 22 | Steamed fish with ginger and green onion | Judge freshness by smell, eyes, flesh | Store-bought fish: reading labels and names | Steam fish and chill for a cold plate |
+| 23 | Poached cod in tomato sauce | Test doneness by flaking | Why fish cooks faster than meat | Make tomato sauce ahead; poach Friday |
+| 24 | **Mastery:** pan-seared trout or tilapia | Sear a fillet skin-side down: dry it, press it flat, wait for it to release | Species ID quiz | Cold fish salad for the Sabbath table |
+| 25 | Roasted vegetables | Cut vegetables to roast at the same rate | How roasting browns food | Roast a tray of vegetables ahead |
+| 26 | Shish taouk (chicken thighs) | Trim and cube chicken safely | Raw poultry handling | Marinate chicken Friday for a later meal |
+| 27 | Roast chicken pieces | Temp-check thigh and breast | Dark vs. white meat | Roast chicken ahead; hold and reheat |
+| 28 | **Mastery:** whole roast chicken with pan juices (Level version; freeze the carcass) | Break down a cooked chicken | Carryover cooking and resting | Roast chicken as the Sabbath centerpiece |
+| 29 | Vegetable stock (saved for week 32) | Skim and strain a stock | Stock vs. broth; why simmer, not boil | Freeze stock in portions |
+| 30 | Chicken stock from the week 28 carcass, or chicken wings or backs | Cool stock quickly and lift off fat | Gelatin and body in stock | Make stock ahead for the week |
+| 31 | Matzo ball or chicken noodle soup, from week 30's stock (Level version) | Season a soup by tasting in stages | Soup families: clear, thick, puréed | Soup that improves when made ahead |
+| 32 | **Mastery:** minestrone from homemade stock, or beef and barley soup with ground beef (Level versions) | Make stock without a recipe card | Clean labels on boxed stock and bouillon (§2.1) | Soup as the Sabbath starter |
 | 33 | Vinaigrette and dressed salad | Fix a dish that's too salty, flat, or sour | Salt, acid, fat, heat | Draft the capstone menu |
-| 34 | Beef stew or chili, seasoned in stages | Blind taste test; name what's missing | How cuisines balance differently | Write the shopping list and prep timeline |
-| 35 | Practice run of one capstone dish | Taste and adjust without a recipe | Holding and reheating a full meal | Shop and do Thursday prep |
-| 36 | **Capstone:** full Sabbath meal made ahead (main, side, bread, salad) | Run the kitchen unaided | Reflection: what worked, what to change | Serve the meal for the Sabbath |
+| 34 | Chicken stew (Beef stew's Level version) or chili, seasoned in stages | Blind taste test; name what's missing | How cuisines balance differently | Write the shopping list and prep timeline |
+| 35 | Practice run of one capstone dish | Taste and adjust without a recipe | Holding and reheating a full meal | Serve the practice dish at the Sabbath meal and note what to change |
+| 36 | **Capstone:** full Sabbath meal made ahead (main, side, bread, and salad, with soup as a choice) | Shop and do Thursday prep | Reflection, the Sunday after: what worked, what to change | Serve the meal for the Sabbath |
 
-The capstone pulls from every unit: safe temperatures (1), challah (2), knife work (3), an aromatic base (4), a grain or legume (5), a roast or fish (6–7), and soup (8).
+The capstone pulls from every unit: safe temperatures (1), challah (2), knife work (3), an aromatic base (4), a grain or legume (5), a fish or a roast (6–7), and soup (8).
 
 - **New recipes:** most Level 3 recipes aren't in Cook Around the World (pico de gallo, tabbouleh, garlic green beans, picadillo, mujaddara, shish taouk, the fish weeks, the stocks, the breads, and others). Each is written as that week's default, tagged with its skill (§6.21). Cook Around the World lessons with the same skill (fish tacos for dicing, minestrone and matzo ball soup for soup, challah) are swap-ins.
 - **Setup checks the calendar** (§6.20): a course whose Unit 2 would touch the family's unleavened days says so when it's set up. It comes with phase 13 (§9), after Level 3 itself.
@@ -1422,27 +1424,28 @@ The capstone pulls from every unit: safe temperatures (1), challah (2), knife wo
 | Week | Recipe | Proposed |
 |---|---|---|
 | 1, 3, 32 | Shakshuka, Chicken fried rice, Minestrone | Written already |
-| 4, 8, 18, 24, 31, 34 | Meatloaf, Challah, Red beans and rice, Roast chicken, Matzo ball soup, Beef chili | Planned dishes, written for both programs |
+| 4, 8, 18, 28, 31, 34 | Meatloaf, Challah, Red beans and rice, Roast chicken, Matzo ball soup, Beef chili | Planned dishes, written for both programs |
 | 4 | Beef kofta | A beef variation of Lamb kofta (binders group) |
-| 9 | Pico de gallo | Week 9 uses Pico + Baja fish tacos as its recipe |
+| 9 | Beef tacos with pico de gallo | Level only: the dicing group is full; Pico + Baja fish tacos is a week 9 option |
 | 31 | Chicken noodle soup | A variation of Matzo ball soup (same stock, noodles) |
 | 2 | Thick beef burgers to 160°F | A variation of Smash burgers, or Level only |
 | 11 | Vegetable stir-fry | 3rd dish in the **stir-frying** group |
 | 33 | Vinaigrette and dressed salad | 3rd in **dressings**, as a main salad (with chicken or chickpeas) |
 | 34 | Beef stew | 3rd in **one-pot stews** |
-| 22 | Shish taouk | 3rd in **broiling** |
+| 26 | Shish taouk | 3rd in **broiling** |
 | 16 | Beef ragù | 3rd in **braising** |
-| 27 | Poached cod in tomato sauce | One-pot stews if Beef stew doesn't take the place; otherwise Level only |
+| 23 | Poached cod in tomato sauce | One-pot stews if Beef stew doesn't take the place; otherwise Level only |
 | 5 | Pita bread | A new pick-one pair with Skillet naan (flatbreads) |
 | 20 | Mujaddara | A new pair with Koshari, or Level only |
 | 17 | Red lentil soup | A new pair with Misir wot, or Level only |
 | 6, 7, 10, 12 | Sandwich loaf, Dinner rolls, Tabbouleh, Israeli salad | Level only: their groups (yeast dough, fine chopping, dicing) are full |
-| 14, 15, 23, 25, 26, 28 | Picadillo, Cajun rice dressing, Roast chicken pieces, Baked salmon, Steamed fish, Pan-seared trout | Level only: no group with the skill |
-| 13, 19, 21, 29, 30 | Garlic green beans, Rice pilaf, Roasted vegetables, Vegetable stock, Chicken stock | Level only: sides and stocks, not meals |
+| 14, 15, 21, 22, 24, 27 | Picadillo, Cajun rice dressing, Baked fish, Steamed fish, Pan-seared trout, Roast chicken pieces | Level only: no group with the skill |
+| 13, 19, 25, 29, 30 | Garlic green beans, Rice pilaf, Roasted vegetables, Vegetable stock, Chicken stock | Level only: sides and stocks, not meals |
 | 35, 36 | Practice run, capstone | Made from earlier weeks' recipes; nothing new |
 
 - **Owner rulings on the table (2026-10-24):** all five group fills; the three new pairs; Beef stew takes the one-pot stews place, so Poached cod is Level only; thick burgers are Level only. **The Level-only recipes are a unit of their own in Side quests**, "Level 3 recipes" (labels L1, L2, …), for every family once the next release launches. The eight are in `content/course.json` as planned pick-one dishes (4c, 9c, 18b, 22c, 23c, 24b, 26c, 37b), live for every family like the other planned dishes (§4), with pictures from the owner's sheets 27 and 28. Mujaddara, Koshari, Misir wot, Red lentil soup, and Red beans and rice teach a new skill, cooking dried beans and lentils.
 - **12a built (2026-10-24):** `content/levels/level-3.json` (checked against `content/schema/level.schema.json`): the 9 units with their goals; the 36 weeks, each with its skill, its default recipe, a note, swap-ins (dishes that fit the week without carrying its skill, like the course's fish dishes for Unit 7), mastery on each unit's last week, and its three parts' titles and planned minutes (drill 40, knowledge 35, Sabbath task 45: about 126 hours with the recipes); weeks 35 and 36 are a practice week and the capstone, with their own minutes; and the 17 Level-only recipe cards, each with its meal-type drawing until its lesson is written. Their lesson files go in `content/levels/recipes/`, in the Level's own unit (number 100, apart from `units.json`). Six skills were added for Level weeks (checking meat with a thermometer, sautéing, cooking grains, handling raw poultry, cooking fish, building a soup), and the Israeli, Cuban, and Turkish cuisines. The linter checks every rule above, the hard rule on every page, and the hours; it warns while part pages aren't written. The manager has a **Level 3** page: units, weeks and their parts, and the Level's recipes with their tags.
+- **The recipe progression review, applied to `level-3.json` (owner, 2026-10-24; `docs/level-recipe-review.md`):** Fish and Poultry swapped (§12.3). Weeks 1, 3, and 4 carry the thermometer skill (`temping-meat`), which Meatloaf now has too, and a new skill, cooling and reheating, is on Chicken fried rice. Each week's options are trimmed to dishes that practise its skill, and replacements added: Chicken adobo (week 3), Cinnamon rolls (week 8), Kuku sabzi (week 10), Ratatouille (week 12), Cuban black beans and rice (week 18), Bulgur pilaf with chickpeas (week 19); the fish weeks offer only the dishes that use their method. Four new Level-only cards (21 in all), checked against Cook Around the World first: Beef tacos with pico de gallo (week 9's default; dicing is full), Kuku sabzi (fine chopping is full; the Persian cuisine was added), Bulgur pilaf (no grains group), and Cuban black beans and rice, which could be the third dish in the dried beans and lentils group beside Misir wot and Red lentil soup (recommendation, waiting on the owner). **Level versions** (variations with Level 3's steps, shown to every family as a less-prep choice) are named in their weeks' notes and written with their lessons: ragù bolognese (Beef ragù, week 16), pan juices instead of flour gravy (Roast chicken and Roast turkey breast, week 28), soups from the student's own stock (Matzo ball, Chicken noodle, Grilled cheese + tomato, Red lentil, Minestrone), ground beef in Beef and barley soup, chicken thighs in Beef stew (week 34), and Unit 1's easier cuts (jarred garlic; a parent cuts raw chicken). Turkey meatloaf (week 4) and Fish in parchment packets (week 22) are new variations of Meatloaf and Steamed fish. Weeks 35 and 36 picking their dishes from the Level's recipes is a build change still to come.
 
 ### 12.5 Level 2 Apprentice: 36 weeks, ~72 hours (owner's plan, 2026-10-24)
 A middle-grades elective, not a high-school credit. **The week tables are the owner's outline**, open to change like §12.1; the rulings waiting in §12.7 come first.

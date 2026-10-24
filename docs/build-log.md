@@ -4177,3 +4177,50 @@ order, so these two recipes were written.
   built yet beyond Chicken jambalaya and Butter chicken; the changes go into
   `content/levels/level-3.json`, the lessons, and plan §12.3 and §12.4 next.
 
+
+## 173. 2026-10-24 — Level 3 review applied; Fish before poultry
+
+- **Fish before poultry** (owner, 2026-10-24): Fish is now Unit 6 (weeks
+  21–24) and Poultry and roasting Unit 7 (weeks 25–28). With poultry first,
+  the year dropped from the whole roast chicken to a 30-minute baked fillet.
+  Fish is the gentler first raw protein, the whole bird is now the hardest
+  dish right before the stock unit, and its carcass waits two weeks for week
+  30 instead of six. Plan §12.3 records it; `docs/level-recipe-review.md` is
+  renumbered, with a Fish before poultry section.
+- **The review's week decisions are in `content/levels/level-3.json`:**
+  - Weeks 1, 3, and 4 carry the thermometer skill (`temping-meat`), and
+    Meatloaf (`course.json`) has it too. A new skill, **Cooling and
+    reheating**, is on Chicken fried rice (lesson and card); week 3's note
+    and drill say the drill's cooled rice goes into it.
+  - Options trimmed to the ones that practise each week's skill, with the
+    approved replacements: Chicken adobo (week 3), Cinnamon rolls (week 8),
+    Kuku sabzi (week 10), Ratatouille (week 12), Cuban black beans and rice
+    (week 18), Bulgur pilaf with chickpeas (week 19). Jollof rice, Swedish
+    meatballs, Homemade pizza (week 8), Chimichurri steak, Chickpea chopped
+    salad (week 12), Chana masala (week 18), Matzo ball soup (week 32), and
+    the off-method fish dishes are gone from those weeks.
+  - Week 9's default is Beef tacos with pico de gallo; Fish tacos is an
+    option.
+  - Notes name each Level version (ragù bolognese, pan-juice roast chicken,
+    soups from the student's own stock, ground-beef barley soup, chicken-thigh
+    stew), week 7's braided rolls, week 21's any-fillet baked fish with a
+    side, week 22's foil-ball steamer, and week 30's wings-or-backs stock.
+  - Part titles: week 24's drill is searing a fillet; week 35's Sabbath task
+    is serving the practice dish; week 36's drill is Shop and do Thursday
+    prep, its meal adds soup as a choice, and its reflection is the Sunday
+    after.
+  - Four new Level-only cards (21 in all): Beef tacos with pico de gallo,
+    Kuku sabzi (the Persian cuisine is added), Cuban black beans and rice,
+    and Bulgur pilaf with chickpeas. Baked salmon's card is now Baked fish
+    with lemon and herbs (any clean fillet), and Steamed fish and Chicken
+    stock describe the approved methods.
+- Plan §12.4's recipe table follows the new week numbers, with a note on what
+  the review changed. Cuban black beans and rice could be the third dish in
+  Cook Around the World's dried beans and lentils group (recommendation,
+  waiting on the owner).
+- Tests: Level 3 has 21 Level-only recipes, and a new Level course schedules
+  3 written recipes (Fish tacos left week 9's default), with 33 waiting.
+- **Not built yet:** the Level-version variations, Turkey meatloaf, Fish in
+  parchment packets, the new recipes' lessons, the fixes inside planned
+  lessons, and weeks 35 and 36 picking their dishes. The review's Next
+  session lists them.

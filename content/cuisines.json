@@ -45,6 +45,7 @@
     { "id": "chinese-american", "name": "Chinese-American", "region": "usa" },
     { "id": "turkish", "name": "Turkish", "region": "mena" },
     { "id": "israeli", "name": "Israeli", "region": "mena" },
-    { "id": "cuban", "name": "Cuban", "region": "latam" }
+    { "id": "cuban", "name": "Cuban", "region": "latam" },
+    { "id": "persian", "name": "Persian", "region": "mena" }
   ]
 }

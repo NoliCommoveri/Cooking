@@ -1,6 +1,6 @@
 # Level recipe progression review
 
-Copy of the working review doc ([Level recipe progression review](https://claude.ai/artifact/Pmx2xhA1HpZDsxfmckTnna)), saved 2026-10-24 after Unit 6; Unit 7 was added here on the same day. Its decisions aren't built yet, except Chicken jambalaya (week 15) and Butter chicken (week 22); otherwise the plan and `content/levels/level-3.json` still show the old weeks.
+Copy of the working review doc ([Level recipe progression review](https://claude.ai/artifact/Pmx2xhA1HpZDsxfmckTnna)), saved 2026-10-24 after Unit 6; Units 7–9 were added here on the same day, and Fish and Poultry were swapped after it (below). Its week decisions are in `content/levels/level-3.json` and plan §12.3 (2026-10-24, build log 173); the lessons, Level versions, and new recipes are still to write (Next session).
 
 ## Purpose and ground rules
 
@@ -69,11 +69,11 @@ The unit fits well, and every dish is tagged with the unit's skill (`yeast-dough
 
 ## Level 3 Unit 3: Classic knife cuts and honing
 
-Every option practises the right cut, and the no-cook salads (tabbouleh, Israeli salad) stay: the knife work is the dish. Two dishes rely on later skills: week 9's fish tacos (Unit 7) and week 10's chimichurri steak (whole-cut searing, Level 4). One mastery option misses the skill. The goal is to hold and hone a chef's knife and make an even dice, mince, and julienne. The tags (`dicing`, `fine-chopping`, `julienne`) match the weeks.
+Every option practises the right cut, and the no-cook salads (tabbouleh, Israeli salad) stay: the knife work is the dish. Two dishes rely on later skills: week 9's fish tacos (Unit 6) and week 10's chimichurri steak (whole-cut searing, Level 4). One mastery option misses the skill. The goal is to hold and hone a chef's knife and make an even dice, mince, and julienne. The tags (`dicing`, `fine-chopping`, `julienne`) match the weeks.
 
 | Week | Dish | Verdict | Why | Proposal |
 | --- | --- | --- | --- | --- |
-| 9 | Pico de gallo + Baja fish tacos (default) | Move to option | The pico teaches the dice well, step by step. But it broils fish to 145°F, which is Unit 7's skill, and the owner chose it (2026-10-24) before this review. | **Beef tacos with pico de gallo**: Level 2's beef tacos (week 22, planned) served with this lesson's pico. The same dice, plus ground beef to 160°F as Unit 1 review. Fish tacos stays as an option. |
+| 9 | Pico de gallo + Baja fish tacos (default) | Move to option | The pico teaches the dice well, step by step. But it broils fish to 145°F, which is Unit 6's skill, and the owner chose it (2026-10-24) before this review. | **Beef tacos with pico de gallo**: Level 2's beef tacos (week 22, planned) served with this lesson's pico. The same dice, plus ground beef to 160°F as Unit 1 review. Fish tacos stays as an option. |
 | 9 | Ratatouille (option) | Keep | Dicing five vegetables evenly for a 70-minute stew. The strongest dicing dish in the library. | Also add it to week 12. |
 | 9 | Minestrone (option) | Keep | Dicing carrot, celery, and onion, then a simple soup. It sweats aromatics (Unit 4), but lightly. Also week 32's default, which is fine. | None. |
 | 10 | Tabbouleh (default, not written) | Keep | A big pile of finely minced parsley is the whole dish. It teaches the mince very well. | None. |
@@ -144,23 +144,61 @@ The unit is well chosen and builds on Unit 4's aromatic bases. Two small fit pro
 - [x] Replace Chana masala in week 18 with a new Cuban black beans and rice
 - [x] Add a new Bulgur pilaf with chickpeas to week 19
 
-## Level 3 Unit 6: Poultry and roasting
+## Level 3 Unit 6: Fish
+
+Reviewed as Unit 7 (weeks 25–28); the owner moved Fish ahead of Poultry on 2026-10-24 (see Fish before poultry, below), and its weeks are renumbered here.
+
+The four defaults are well chosen: one gentle method a week (bake, steam, poach), then a sear for mastery. The problems are the options and two fixes. Every week offers the same six course fish dishes, so a fish week can land on pan-frying (Level 4) or a dish that skips the week's method. Week 22 needs a steamer the equipment list doesn't have. Week 24's drill (skin a fillet) works against its recipe (crisp skin). The goal is to identify clean fish by fins and scales, judge freshness, and cook fish gently until it flakes.
+
+**What a student brings in:** the thermometer (Unit 1; fish is 145°F), knife cuts for ginger, green onion, and garlic (Unit 3), an aromatic base (Unit 4, for the poached cod and moqueca sauces), rice by absorption (Unit 5), and raw-protein handling and washing (Unit 1, week 3). The unit runs about February, before the Days of Unleavened Bread; all four defaults are unleavened.
+
+| Week | Dish | Verdict | Why | Proposal |
+| --- | --- | --- | --- | --- |
+| 21 | Baked salmon with lemon and herbs (default, planned) | Keep, add a side | Gentle oven heat, 145°F, and pin bones (the drill). A good first fish. But it's 30 minutes and four ingredients, a step down from mujaddara. And it's $$$. | Serve it with a side from an earlier unit (rice pilaf, week 19, or garlic green beans, week 13), timed to finish together. Let it use any clean fillet (salmon, cod, or tilapia) to bring the cost down. |
+| 21 | Honey-soy salmon (option, planned) | Keep | A short marinade, then broiled to 145°F. The broiler reviews Level 2, and the marinade is a first look ahead of week 26. | None. |
+| 21 | BBQ-rubbed salmon (option, planned) | Keep | A rub, a quick sear, then the oven. A harder option, and a first look at searing a fillet before week 24. Check the barbecue sauce label (§2.1). | None. |
+| 21 | Pineapple teriyaki, blackened cod, coconut-crusted fish, moqueca (options) | Drop here | Each fits another fish week better, or not at all (below). Six options for every fish week is the tag problem from Unit 1: they're there because they're fish, not because they bake. | Week 21's options: Honey-soy salmon and BBQ-rubbed salmon. |
+| 22 | Steamed fish with ginger and green onion (default, planned) | Keep, fix | Steaming is the gentlest method, and freshness matters most when nothing hides it (the drill). Ginger and green onion julienne review Unit 3. Two problems: no steamer is on the equipment list, and the classic finish pours smoking-hot oil over the fish. | Write the steaming with what families have: a heatproof plate on three balls of foil in the large pot, lid on. Warm the oil only until it shimmers, and have the adult pour it (adult hands-on for that step). |
+| 22 | (no fitting option) | Add | None of the six steam. Pineapple teriyaki sears and reduces; honey-soy broils. | **Fish in parchment packets** (new variation of Steamed fish): white fish, ginger, green onion, and soy sealed in parchment and baked, so it steams in its own juices. No steamer and no hot oil, so it's the lighter choice. |
+| 23 | Poached cod in tomato sauce (default, planned) | Keep | A garlic and tomato sauce (Unit 4 review), then cod poached in it until it flakes (the drill). The sauce suits the make-ahead Sabbath task. Olives and capers are fine (§2.1). | None. |
+| 23 | Moqueca (option, planned) | Keep | Fish poached in a coconut and tomato broth over a pepper and onion base: the same method in another cuisine, with rice. No seafood stock (§2.1). | None. |
+| 23 | Pineapple teriyaki, honey-soy, BBQ salmon, blackened cod, coconut-crusted fish (options) | Drop here | None poaches. | Week 23's option: Moqueca. |
+| 24 | Pan-seared trout or tilapia (mastery default, planned) | Keep, fix the drill | Searing a fillet skin-side down until it releases, then judging doneness by flaking and 145°F, unaided: a fair test, and the hardest dish in the unit. But the drill, "Skin a fillet", leaves nothing to crisp. Skinning is precision knife work, Level 4 Unit 1's kind of drill. | Change the drill to **Sear a fillet skin-side down: dry it, press it flat, and wait for it to release**. Move "Skin a fillet" to Level 4. |
+| 24 | Blackened cod (option, planned) | Keep | A spice crust seared hard in a hot skillet, checked by flaking. A fair mastery choice. It smokes, so the lesson needs the fan on and a window open. | Add a ventilation step. |
+| 24 | Pineapple teriyaki salmon (option, written) | Keep | Seared salmon under a reduced glaze, 40 minutes. It reviews Unit 4's reducing. Written already, so the week has something to cook now. | None. |
+| 24 | Coconut-crusted fish (option, planned) | Drop | A breading station and pan-frying in a layer of oil: Level 4 Unit 5. Its panko is leavened, and the week can fall near the Days of Unleavened Bread. | Covered by the two options above. |
+| 24 | Honey-soy salmon, BBQ salmon, moqueca (options) | Drop here | They're options in weeks 21 and 23, and none sears. Keeping them here means the unit could be cooked without searing at all. | None. |
+
+**Order after the changes:** baked fish with a side (oven, 145°F, pin bones, timing two things) → steamed fish or parchment packets (gentlest, freshness) → poached cod or moqueca (in a sauce, flaking) → pan-seared trout or blackened cod (searing a fillet, unaided).
+
+**For the owner to decide** (all approved, owner, 2026-10-24):
+
+- [x] Trim each fish week's options to the ones that use its method (week 21: honey-soy, BBQ salmon; week 22: parchment packets; week 23: moqueca; week 24: blackened cod, pineapple teriyaki)
+- [x] Serve week 21's baked fish with a side from an earlier unit, and let it use any clean fillet
+- [x] Write Steamed fish with a foil-ball steamer, with the adult pouring the hot oil
+- [x] Add a new Fish in parchment packets variation as week 22's option
+- [x] Change week 24's drill to searing a fillet, and move "Skin a fillet" to Level 4
+- [x] Drop Coconut-crusted fish from the fish weeks (it stays in Cook Around the World)
+
+## Level 3 Unit 7: Poultry and roasting
+
+Reviewed as Unit 6 (weeks 21–24); renumbered after the swap. A student now also brings in the fish unit: a delicate protein checked by thermometer, and searing a fillet. The unit runs about March into April, so its leavened options (Chicken souvlaki pitas) can land on the unleavened days and cook their backup.
 
 The unit is well built: a vegetable roast, then raw chicken handled by the student for the first time (a parent cut it in Unit 1), then pieces, then a whole bird. The one catch is the mastery dish's pan gravy, a flour roux, which is Level 4's skill. The goal is to handle raw poultry safely, roast to 165°F, and roast vegetables evenly.
 
 | Week | Dish | Verdict | Why | Proposal |
 | --- | --- | --- | --- | --- |
-| 21 | Roasted vegetables (default, not written) | Keep | Even cuts so everything roasts at the same rate: Unit 3's cuts put to work. A side dish, which is fine. It reviews Level 2's potato wedges. | None. |
-| 21 | Baked shoestring fries (option) | Keep | Even julienne sticks roasted until crisp. Same idea, fussier cuts. | None. |
-| 22 | Shish taouk (default, planned) | Keep | Trimming and cubing raw thighs (the drill), a yogurt marinade made ahead (the Sabbath task), skewered and broiled to 165°F. | None. |
-| 22 | Chicken souvlaki pitas (option) | Keep | Marinated chicken seared in a skillet to 165°F, with tzatziki. Lighter. | None. |
-| 22 | Jerk chicken (option) | Keep | A wet marinade, thighs broiled to 165°F. Hot peppers need gloves; the lesson should say so. | Add a glove step for the hot peppers. |
-| 22 | Chicken yassa (option) | Keep | Marinated thighs, also a week 14 option, which is fine. | None. |
-| 22 | Butter chicken (option, added) | Keep | Owner, 2026-10-24: added. Raw thighs cut and marinated in yogurt, like shish taouk, browned, then simmered in sauce to 165°F. It reviews Unit 4's onion base and bloomed spices. Written 2026-10-24. | None. |
-| 23 | Roast chicken pieces (default, not written) | Keep | Bone-in thighs and breasts roasted together, each checked: the week's drill and its dark vs. white meat lesson. | None. |
-| 23 | BBQ pulled chicken + coleslaw (option, planned) | Keep, check | Rubbed thighs cooked until tender and shredded, with a reduced sauce. Fits if the chicken is roasted in the oven. | Write it with the chicken roasted in the oven. |
-| 24 | Roast chicken + pan gravy (mastery default, planned) | Keep, Level version | A whole bird roasted to 165°F in the thigh, rested, and carved (the drill), with the carcass frozen for week 30. The flour gravy is a roux, which is Level 4's skill. | **Level version with pan juices**: the pan deglazed with broth and reduced, which reviews Unit 4, instead of the flour gravy. |
-| 24 | Roast turkey breast + pan gravy (approved variation) | Keep, Level version | The same skills on a turkey breast. | The same pan-juice Level version. |
+| 25 | Roasted vegetables (default, not written) | Keep | Even cuts so everything roasts at the same rate: Unit 3's cuts put to work. A side dish, which is fine. It reviews Level 2's potato wedges. | None. |
+| 25 | Baked shoestring fries (option) | Keep | Even julienne sticks roasted until crisp. Same idea, fussier cuts. | None. |
+| 26 | Shish taouk (default, planned) | Keep | Trimming and cubing raw thighs (the drill), a yogurt marinade made ahead (the Sabbath task), skewered and broiled to 165°F. | None. |
+| 26 | Chicken souvlaki pitas (option) | Keep | Marinated chicken seared in a skillet to 165°F, with tzatziki. Lighter. | None. |
+| 26 | Jerk chicken (option) | Keep | A wet marinade, thighs broiled to 165°F. Hot peppers need gloves; the lesson should say so. | Add a glove step for the hot peppers. |
+| 26 | Chicken yassa (option) | Keep | Marinated thighs, also a week 14 option, which is fine. | None. |
+| 26 | Butter chicken (option, added) | Keep | Owner, 2026-10-24: added. Raw thighs cut and marinated in yogurt, like shish taouk, browned, then simmered in sauce to 165°F. It reviews Unit 4's onion base and bloomed spices. Written 2026-10-24. | None. |
+| 27 | Roast chicken pieces (default, not written) | Keep | Bone-in thighs and breasts roasted together, each checked: the week's drill and its dark vs. white meat lesson. | None. |
+| 27 | BBQ pulled chicken + coleslaw (option, planned) | Keep, check | Rubbed thighs cooked until tender and shredded, with a reduced sauce. Fits if the chicken is roasted in the oven. | Write it with the chicken roasted in the oven. |
+| 28 | Roast chicken + pan gravy (mastery default, planned) | Keep, Level version | A whole bird roasted to 165°F in the thigh, rested, and carved (the drill), with the carcass frozen for week 30. The flour gravy is a roux, which is Level 4's skill. | **Level version with pan juices**: the pan deglazed with broth and reduced, which reviews Unit 4, instead of the flour gravy. |
+| 28 | Roast turkey breast + pan gravy (approved variation) | Keep, Level version | The same skills on a turkey breast. | The same pan-juice Level version. |
 
 **Order:** roasted vegetables (even cuts, oven) → shish taouk (raw chicken by hand, marinade) → roast chicken pieces (two temperatures, two cuts) → whole roast chicken (all of it, plus resting and carving, unaided).
 
@@ -170,53 +208,19 @@ The unit is well built: a vegetable roast, then raw chicken handled by the stude
 - [x] Write BBQ pulled chicken with the chicken roasted in the oven
 - [x] Add a glove step for the hot peppers in Jerk chicken
 
-## Level 3 Unit 7: Fish
-
-The four defaults are well chosen: one gentle method a week (bake, steam, poach), then a sear for mastery. The problems are the options and two fixes. Every week offers the same six course fish dishes, so a fish week can land on pan-frying (Level 4) or a dish that skips the week's method. Week 26 needs a steamer the equipment list doesn't have. Week 28's drill (skin a fillet) works against its recipe (crisp skin). The goal is to identify clean fish by fins and scales, judge freshness, and cook fish gently until it flakes.
-
-**What a student brings in:** the thermometer (Unit 1; fish is 145°F), knife cuts for ginger, green onion, and garlic (Unit 3), an aromatic base (Unit 4, for the poached cod and moqueca sauces), rice by absorption (Unit 5), and raw-protein handling and washing (Unit 6). The unit runs about March, just before the Days of Unleavened Bread; all four defaults are unleavened.
-
-| Week | Dish | Verdict | Why | Proposal |
-| --- | --- | --- | --- | --- |
-| 25 | Baked salmon with lemon and herbs (default, planned) | Keep, add a side | Gentle oven heat, 145°F, and pin bones (the drill). A good first fish. But it's 30 minutes and four ingredients, a step down from the whole chicken. And it's $$$. | Serve it with a side from an earlier unit (roasted vegetables, week 21, or rice pilaf, week 19), timed to finish together. Let it use any clean fillet (salmon, cod, or tilapia) to bring the cost down. |
-| 25 | Honey-soy salmon (option, planned) | Keep | A short marinade, then broiled to 145°F. The broiler and the marinade review week 22. | None. |
-| 25 | BBQ-rubbed salmon (option, planned) | Keep | A rub, a quick sear, then the oven. A harder option, and a first look at searing a fillet before week 28. Check the barbecue sauce label (§2.1). | None. |
-| 25 | Pineapple teriyaki, blackened cod, coconut-crusted fish, moqueca (options) | Drop here | Each fits another fish week better, or not at all (below). Six options for every fish week is the tag problem from Unit 1: they're there because they're fish, not because they bake. | Week 25's options: Honey-soy salmon and BBQ-rubbed salmon. |
-| 26 | Steamed fish with ginger and green onion (default, planned) | Keep, fix | Steaming is the gentlest method, and freshness matters most when nothing hides it (the drill). Ginger and green onion julienne review Unit 3. Two problems: no steamer is on the equipment list, and the classic finish pours smoking-hot oil over the fish. | Write the steaming with what families have: a heatproof plate on three balls of foil in the large pot, lid on. Warm the oil only until it shimmers, and have the adult pour it (adult hands-on for that step). |
-| 26 | (no fitting option) | Add | None of the six steam. Pineapple teriyaki sears and reduces; honey-soy broils. | **Fish in parchment packets** (new variation of Steamed fish): white fish, ginger, green onion, and soy sealed in parchment and baked, so it steams in its own juices. No steamer and no hot oil, so it's the lighter choice. |
-| 27 | Poached cod in tomato sauce (default, planned) | Keep | A garlic and tomato sauce (Unit 4 review), then cod poached in it until it flakes (the drill). The sauce suits the make-ahead Sabbath task. Olives and capers are fine (§2.1). | None. |
-| 27 | Moqueca (option, planned) | Keep | Fish poached in a coconut and tomato broth over a pepper and onion base: the same method in another cuisine, with rice. No seafood stock (§2.1). | None. |
-| 27 | Pineapple teriyaki, honey-soy, BBQ salmon, blackened cod, coconut-crusted fish (options) | Drop here | None poaches. | Week 27's option: Moqueca. |
-| 28 | Pan-seared trout or tilapia (mastery default, planned) | Keep, fix the drill | Searing a fillet skin-side down until it releases, then judging doneness by flaking and 145°F, unaided: a fair test, and the hardest dish in the unit. But the drill, "Skin a fillet", leaves nothing to crisp. Skinning is precision knife work, Level 4 Unit 1's kind of drill. | Change the drill to **Sear a fillet skin-side down: dry it, press it flat, and wait for it to release**. Move "Skin a fillet" to Level 4. |
-| 28 | Blackened cod (option, planned) | Keep | A spice crust seared hard in a hot skillet, checked by flaking. A fair mastery choice. It smokes, so the lesson needs the fan on and a window open. | Add a ventilation step. |
-| 28 | Pineapple teriyaki salmon (option, written) | Keep | Seared salmon under a reduced glaze, 40 minutes. It reviews Unit 4's reducing. Written already, so the week has something to cook now. | None. |
-| 28 | Coconut-crusted fish (option, planned) | Drop | A breading station and pan-frying in a layer of oil: Level 4 Unit 5. Its panko is leavened, and the week can fall near the Days of Unleavened Bread. | Covered by the two options above. |
-| 28 | Honey-soy salmon, BBQ salmon, moqueca (options) | Drop here | They're options in weeks 25 and 27, and none sears. Keeping them here means the unit could be cooked without searing at all. | None. |
-
-**Order after the changes:** baked fish with a side (oven, 145°F, pin bones, timing two things) → steamed fish or parchment packets (gentlest, freshness) → poached cod or moqueca (in a sauce, flaking) → pan-seared trout or blackened cod (searing a fillet, unaided).
-
-**For the owner to decide** (all approved, owner, 2026-10-24):
-
-- [x] Trim each fish week's options to the ones that use its method (week 25: honey-soy, BBQ salmon; week 26: parchment packets; week 27: moqueca; week 28: blackened cod, pineapple teriyaki)
-- [x] Serve week 25's baked fish with a side from an earlier unit, and let it use any clean fillet
-- [x] Write Steamed fish with a foil-ball steamer, with the adult pouring the hot oil
-- [x] Add a new Fish in parchment packets variation as week 26's option
-- [x] Change week 28's drill to searing a fillet, and move "Skin a fillet" to Level 4
-- [x] Drop Coconut-crusted fish from the fish weeks (it stays in Cook Around the World)
-
 ## Level 3 Unit 8: Stock and soup
 
-The unit is built well: two stocks, then two soups, and the week 30 stock uses the carcass frozen in week 24. The catch is that the written soups use boxed broth, so the student's own stock never goes into a soup. Two recipes also reach ahead: the planned Matzo ball soup breaks down a whole raw chicken, and the Beef and barley variation simmers chunks of chuck (Level 4 Unit 2). The goal is to make a clear stock from bones or vegetables and build a soup from it.
+The unit is built well: two stocks, then two soups, and the week 30 stock uses the carcass frozen in week 28. The catch is that the written soups use boxed broth, so the student's own stock never goes into a soup. Two recipes also reach ahead: the planned Matzo ball soup breaks down a whole raw chicken, and the Beef and barley variation simmers chunks of chuck (Level 4 Unit 2). The goal is to make a clear stock from bones or vegetables and build a soup from it.
 
-**What a student brings in:** cooling and reheating safely (Unit 1, for big pots of stock), the dice (Unit 3), sweating a base (Unit 4), dried beans and grains (Unit 5), the roast chicken carcass (Unit 6, week 24), and seasoning by taste. The unit lands around the Days of Unleavened Bread (April); its defaults are all unleavened, and matzo ball soup suits the feast.
+**What a student brings in:** cooling and reheating safely (Unit 1, for big pots of stock), the dice (Unit 3), sweating a base (Unit 4), dried beans and grains (Unit 5), the roast chicken carcass (Unit 7, week 28), and seasoning by taste. The unit lands around the Days of Unleavened Bread (April); its defaults are all unleavened, and matzo ball soup suits the feast.
 
 | Week | Dish | Verdict | Why | Proposal |
 | --- | --- | --- | --- | --- |
 | 29 | Vegetable stock (default, planned) | Keep, fix | Onion, carrot, celery, and herbs simmered, skimmed, and strained: exactly the drill. Not a meal, which is fine; it's saved for weeks 31 and 32. Straining a full pot of hot liquid is the risky step. | Ladle the stock into the colander over a bowl instead of tipping the pot, and say in the lesson that this stock goes into week 32's soup. |
 | 29 | Mushroom stock (approved variation) | Keep | The same method with mushrooms for a darker, deeper stock. | None. |
-| 30 | Chicken stock from the week 24 carcass (default, planned) | Keep, fix | Bones simmered slowly, strained, cooled fast (Unit 1 review), and the fat lifted off. Chicken fat is allowed (§2.1). About 4 hours, mostly simmering. A family that didn't roast a whole bird in week 24, or didn't freeze the carcass, has nothing to start from. | Let the lesson start from the frozen carcass or from 3 pounds of chicken wings or backs. |
+| 30 | Chicken stock from the week 28 carcass (default, planned) | Keep, fix | Bones simmered slowly, strained, cooled fast (Unit 1 review), and the fat lifted off. Chicken fat is allowed (§2.1). About 4 hours, mostly simmering. A family that didn't roast a whole bird in week 28, or didn't freeze the carcass, has nothing to start from. | Let the lesson start from the frozen carcass or from 3 pounds of chicken wings or backs. |
 | 30 | Beef bone broth (approved variation) | Keep, check | Roasted beef bones simmered long. Beef fat is blocked (§2.1), so lifting off and throwing away the fat is required, not optional. | Make the fat step a required step with a "why" card on the food rule, not a tip. |
-| 31 | Matzo ball soup from a whole chicken (default, planned) | Keep, Level version | The right soup for the week and the season. But as planned for Cook Around the World, it breaks down a whole raw chicken, which Level 3 never teaches (week 24's drill breaks down a cooked one). | **Level version from week 30's stock**: carrots, celery, and onion simmered in the student's own stock, matzo balls cooked in it, and cooked chicken from the stock pulled and added back. |
+| 31 | Matzo ball soup from a whole chicken (default, planned) | Keep, Level version | The right soup for the week and the season. But as planned for Cook Around the World, it breaks down a whole raw chicken, which Level 3 never teaches (week 28's drill breaks down a cooked one). | **Level version from week 30's stock**: carrots, celery, and onion simmered in the student's own stock, matzo balls cooked in it, and cooked chicken from the stock pulled and added back. |
 | 31 | Chicken noodle soup (approved variation of Matzo ball soup) | Keep | The same stock and vegetables with noodles. Noodles aren't leavened. | The same Level version, from week 30's stock. |
 | 31 | Grilled cheese + tomato soup (option, written) | Keep, Level version | A puréed tomato soup, the second soup family in the knowledge page. But it uses boxed broth, and its bread is leavened in a unit that lands near the feast. | **Level version with homemade stock**: the student's vegetable stock in place of the boxed broth. Its leavened bread is handled by the week's unleavened backup, as with any leavened week. |
 | 31 | Red lentil soup (option, planned) | Keep | Week 17's default; a thick, puréed soup that can use the student's stock. A recipe is picked for one week at most, so it's only here if week 17 cooked something else. | Use the student's stock (as week 31's other options). |
@@ -242,14 +246,14 @@ The unit is built well: two stocks, then two soups, and the week 30 stock uses t
 
 Weeks 33 and 34 fit the tasting skill, and the capstone pulls the whole year together. Three things to fix: Beef stew (week 34's default) browns and simmers beef chuck, Level 4's skill; the practice week's Sabbath task shops for the capstone a week early; and the app has no way to finish weeks 35 and 36, which have no recipe. The goal is to taste and correct salt, acid, fat, and heat, and to plan and cook a full Sabbath meal ahead and reheat it safely.
 
-**What a student brings in:** everything. The plan's capstone list: safe temperatures (Unit 1), challah (Unit 2, baked every week since October), knife work (3), an aromatic base (4), a grain or legume (5), a roast or fish (6–7), and soup (8). Unit 1's cooling and reheating comes back for holding a full meal. The unit runs about May, after the feast.
+**What a student brings in:** everything. The plan's capstone list: safe temperatures (Unit 1), challah (Unit 2, baked every week since October), knife work (3), an aromatic base (4), a grain or legume (5), a fish or a roast (6–7), and soup (8). Unit 1's cooling and reheating comes back for holding a full meal. The unit runs about May, after the feast.
 
 | Week | Dish | Verdict | Why | Proposal |
 | --- | --- | --- | --- | --- |
 | 33 | Chickpea chopped salad + vinaigrette (default, planned) | Keep | A vinaigrette whisked and tasted until it's balanced is the clearest lesson in acid, fat, and salt there is. Light (30 minutes, $), but the unit's hard part is the planning, and the capstone needs a salad. | None. |
 | 33 | Chicken Caesar (option, written) | Keep | A creamy dressing tasted and adjusted, croutons, and chicken seared to 165°F. The harder option (22 steps). Its croutons are leavened, which is fine in May. | None. |
 | 33 | Fattoush (option, written) | Keep | A lemon and sumac dressing balanced by taste, with toasted pita. Also a week 10 option, which is fine. | None. |
-| 34 | Beef stew (default, planned) | Level version | Seasoning in stages is exactly the week's skill. But it browns chunks of beef chuck in batches and simmers them until tender: searing a whole cut and cooking a tough cut, both Level 4 Unit 2 (where Beef stew is week 5's default). | **Level version with chicken thighs**: chicken thighs browned, then simmered with onion, carrots, and potatoes to 165°F, tasted and seasoned at each stage. It reviews Unit 4's base and Unit 6's raw poultry. The chuck version stays for Level 4. |
+| 34 | Beef stew (default, planned) | Level version | Seasoning in stages is exactly the week's skill. But it browns chunks of beef chuck in batches and simmers them until tender: searing a whole cut and cooking a tough cut, both Level 4 Unit 2 (where Beef stew is week 5's default). | **Level version with chicken thighs**: chicken thighs browned, then simmered with onion, carrots, and potatoes to 165°F, tasted and seasoned at each stage. It reviews Unit 4's base and Unit 7's raw poultry. The chuck version stays for Level 4. |
 | 34 | Beef chili (option, planned) | Keep | Ground beef browned, spices toasted, a long simmer, and heat to balance with acid and a little sugar. Also a week 16 option, which is fine. | None. |
 | 34 | Peanut stew (maafe) (option, planned) | Keep | Sweet, salty, rich, and hot in one pot: a good dish for "how cuisines balance differently". Carries the peanut tag, so a nut-free family won't see it. | None. |
 | 35 | Practice run of one capstone dish (practice) | Keep, fix | Cooking one capstone dish a week early is wise. But its Sabbath task, "Shop and do Thursday prep", is the capstone's own prep: shopping a week early wastes fresh food. | Make week 35's Sabbath task **Serve the practice dish at the Sabbath meal and note what to change**, and move "Shop and do Thursday prep" to week 36. |
@@ -276,10 +280,14 @@ The year builds in general, with no early unit overwhelming and no late unit tri
 | 3 Classic knife cuts | 9–12 | 25–70 min | Precise, even cuts; the cooking is light | Yes: lighter dishes, but the knife work is the hard part |
 | 4 Sautéing and aromatic bases | 13–16 | 25–90 min (3 hours for the planned ragù) | Managing pan heat; building a base in stages; deglazing | Yes, once week 16's chuck braise (a Level 4 skill) is replaced |
 | 5 Legumes and grains | 17–20 | 35–120 min | Planning ahead (soaking); long simmers; timing a legume and a grain together | Yes: adds planning and timing to Unit 4's bases |
-| 6 Poultry and roasting | 21–24 | 50–120 min | Cutting raw chicken; marinating ahead; two temperatures in one pan; resting and carving a whole bird | Yes: the whole bird is the most involved dish so far |
-| 7 Fish | 25–28 | 25–45 min (more with week 25's side) | Judgment over steps: freshness, a delicate fillet, flaking, and 145°F; searing a fillet unaided | Yes, with week 25's side: the dishes are shorter, but fish is easy to overcook. A small dip, like the knife unit |
+| 6 Fish | 21–24 | 25–45 min (more with week 21's side) | Judgment over steps: freshness, a delicate fillet, flaking, and 145°F; searing a fillet unaided | Yes: shorter dishes, but fish is easy to overcook, and the first raw protein the student handles whole |
+| 7 Poultry and roasting | 25–28 | 50–120 min | Cutting raw chicken; marinating ahead; two temperatures in one pan; resting and carving a whole bird | Yes: the whole bird is the most involved dish so far, right before the stock unit uses its carcass |
 | 8 Stock and soup | 29–32 | 60–240 min, mostly simmering | Planning across weeks (the frozen carcass, stock saved for the soups); straining and cooling big pots of hot liquid; seasoning by taste | Yes: the longest cooks so far, and the first unit where one week's food feeds another's |
 | 9 Balancing flavor and Sabbath capstone | 33–36 | 30–150 min, then a 2½-hour practice and a 5-hour capstone | Tasting and correcting; planning, shopping, a prep timeline, and four dishes ready at once, held or reheated safely | Yes: the capstone is the hardest thing in the Level |
+
+## Fish before poultry
+
+Owner, 2026-10-24: after the review, Fish moved to Unit 6 (weeks 21–24) and Poultry and roasting to Unit 7 (weeks 25–28). With poultry first, the year dipped from the whole roast chicken (week 24) to a 30-minute baked fillet (week 25), its steepest step down after Unit 2. Fish first is the gentler first raw protein (short cooks, 145°F), the whole bird becomes the hardest dish before the stock unit, and its carcass waits two weeks for week 30 instead of six. Each unit's decisions above are unchanged; only their week numbers moved.
 
 ## Quick reviews from Level 2
 
@@ -303,12 +311,12 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 | 18 | Cooking rice by a ratio; boil vs. simmer | Week 18 recipe; week 17 knowledge |
 | 19 | Rice and water ratios; keeping the lid on | Week 18 recipe, drill, and knowledge |
 | 20 | Cooking rice and pasta (koshari) | Week 18 recipe; week 17 recipe |
-| 21 | Oven mitts and racks; roasting potatoes | Week 3 recipe and drill (oven-roasted potato wedges) |
-| 22 | Working under a broiler safely | Week 3 drill and knowledge |
-| 25 | Oven mitts and racks; the broiler (honey-soy salmon) | Week 3 drill and knowledge |
-| 26 | Boiling water and steam burns | Weeks 17 and 20 drills; week 19 knowledge |
-| 27 | Holding a steady simmer | Week 19 drill and knowledge |
-| 28 | Preheating a pan | Week 29 drill (water-drop test) |
+| 21 | Oven mitts and racks; the broiler (honey-soy salmon) | Week 3 drill and knowledge |
+| 22 | Boiling water and steam burns | Weeks 17 and 20 drills; week 19 knowledge |
+| 23 | Holding a steady simmer | Week 19 drill and knowledge |
+| 24 | Preheating a pan | Week 29 drill (water-drop test) |
+| 25 | Oven mitts and racks; roasting potatoes | Week 3 recipe and drill (oven-roasted potato wedges) |
+| 26 | Working under a broiler safely | Week 3 drill and knowledge |
 | 29 | Boil vs. simmer; draining hot liquid safely | Week 19 drill and knowledge; week 17 drill |
 | 31 | Cooking pasta or noodles (chicken noodle soup) | Week 17 recipe |
 | 32 | Cooking pasta | Week 17 recipe |
@@ -318,7 +326,7 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 
 - **Tags stand in for the week's skill.** In Unit 1, three of four weeks carry a dish-level skill (gentle eggs, stir-frying, binders) instead of the unit's, so options picked from those tags drift off-topic (Jollof rice, Swedish meatballs). Only week 2 carries `temping-meat`.
 - **Chef's-knife work before Unit 3.** Owner, 2026-10-24: Level 2 gets basic knife safety for chopping, and Level 3 week 1 brings it in as a quick review. Unit 1's cuts are mostly plain chopping: onion and pepper (shakshuka, meatloaf, kofta), green onion rings, cilantro, avocado, smashed garlic (adobo). Three need more than a chop:
-  - **Raw chicken in pieces** (fried rice, oyakodon): a raw-poultry cut that Unit 6 week 22 teaches. In Unit 1, a parent cuts the chicken (owner, 2026-10-24): the Level version marks that step adult-hands-on.
+  - **Raw chicken in pieces** (fried rice, oyakodon): a raw-poultry cut that Unit 7 week 26 teaches. In Unit 1, a parent cuts the chicken (owner, 2026-10-24): the Level version marks that step adult-hands-on.
   - **Minced garlic** (shakshuka, fried rice): finer than a chop. The Level version uses jarred minced garlic.
   - **Thin slices** (smash burgers' onion and cucumber pickles, oyakodon's half-moons): a rough chop changes the dish. The Level versions make Smash burgers' onion and pickles optional and chop Oyakodon's onion.
 
@@ -328,19 +336,19 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 
 - **Homemade stock should feed the soups.** Every written soup uses boxed broth, so a student can finish the stock unit without putting their own stock into a soup. Level versions that use it close the loop.
 
-- **Every fish week offers every fish dish.** Unit 7's weeks list all six course fish dishes as swap-ins, so best fit and Swap recipe can pick one that skips the week's method (a sear in the steaming week) or relies on Level 4 (pan-frying). Each week should offer only the dishes that use its method, as in Units 1–6.
+- **Every fish week offers every fish dish.** Unit 6's (Fish) weeks list all six course fish dishes as swap-ins, so best fit and Swap recipe can pick one that skips the week's method (a sear in the steaming week) or relies on Level 4 (pan-frying). Each week should offer only the dishes that use its method, as in the other units.
 
 - **Fit problems, not difficulty, drive most changes.** Most proposed changes are dishes that miss the week's skill (Jollof rice in week 3, Lomo saltado in week 15) or rely on a later skill (fish in week 9, whole-cut searing in weeks 10 and 16).
 
 ## Units still to review
 
-- [x] Level 3 Unit 7: Fish (weeks 25–28)
+- [x] Level 3 Unit 6: Fish (weeks 21–24; reviewed as Unit 7, weeks 25–28)
 - [x] Level 3 Unit 8: Stock and soup (weeks 29–32)
 - [x] Level 3 Unit 9: Balancing flavor and Sabbath capstone (weeks 33–36)
 
 ## Next session
 
-- Every unit is reviewed, and every decision is approved (owner, 2026-10-24). Next: build them.
-- Unit 8's seven decisions are approved (owner, 2026-10-24).
-- Unit 7's six decisions are approved (owner, 2026-10-24).
-- Nothing here is built yet except Chicken jambalaya (week 15) and Butter chicken (week 22). Once the review is done, the approved changes go into `content/levels/level-3.json`, the lessons, and plan §12.3 and §12.4.
+- Built (2026-10-24): the Fish and Poultry swap, and every week's skill, default, options, notes, and part titles in `content/levels/level-3.json`; four new Level-only recipe cards (Beef tacos with pico de gallo, Kuku sabzi, Cuban black beans and rice, Bulgur pilaf with chickpeas); the thermometer skill on Meatloaf; a cooling-and-reheating skill on Chicken fried rice; plan §12.3 and §12.4.
+- Still to write, as lessons: the Level versions (Shakshuka, Chicken fried rice, Oyakodon, and Smash burgers' easier cuts; Minestrone and Grilled cheese + tomato soup with homemade stock; and, with their lessons, Beef ragù, Roast chicken, Roast turkey breast, Matzo ball soup, Chicken noodle soup, Red lentil soup, Beef and barley soup, Beef stew); the new variations (Turkey meatloaf, Fish in parchment packets); the new recipes; and the fixes in planned lessons (hot-blending step, the hard boil, the glove step, ventilation, the foil-ball steamer, the ladled strain, wings or backs for stock, the required fat step).
+- Still to build: weeks 35 and 36 picking their dishes from the Level's recipes.
+- For the owner: should Cuban black beans and rice be the third dish in Cook Around the World's dried beans and lentils group (with Misir wot and Red lentil soup), as plan §12.4's rule suggests?

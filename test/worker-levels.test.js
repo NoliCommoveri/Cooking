@@ -58,8 +58,8 @@ test('a Level course: one week a week, its recipes in week order, "Week 1 of 36"
   assert.deepEqual(q.this_week.lessons.map((x) => [x.lesson_id, x.label]), [['shakshuka', 'Week 1']]);
   // Thick burgers (week 2) isn't written, so week 3's recipe is next, like a planned dish (§6.18).
   assert.deepEqual(q.next_week.lessons.map((x) => [x.lesson_id, x.label]), [['chicken-fried-rice', 'Week 3']]);
-  assert.equal(q.total, 4, 'the written recipes are scheduled');
-  assert.equal(q.unwritten, 32, 'the rest wait, the weeks with no recipe too');
+  assert.equal(q.total, 3, 'the written recipes are scheduled');
+  assert.equal(q.unwritten, 33, 'the rest wait, the weeks with no recipe too');
   // Its week's recipe is queued for the course's profiles.
   const mine = (await a.get(`/api/profiles/${ava}/queue`)).body;
   assert.deepEqual(mine.items.map((x) => x.lesson_id), ['shakshuka']);

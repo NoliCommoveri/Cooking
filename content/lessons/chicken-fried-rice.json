@@ -7,7 +7,7 @@
   "image": "dishes/chicken-fried-rice.png",
   "cuisine": "chinese",
   "skill": "High-heat stir-fry, day-old rice",
-  "skills": ["stir-frying", "dicing"],
+  "skills": ["stir-frying", "dicing", "cooling-reheating"],
   "prereqs": [],
   "servings": 6,
   "totalMinutes": 35,
