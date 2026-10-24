@@ -152,6 +152,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 - **Knife work comes first, strongly suggested.** Nearly every lesson uses it. The app nudges parents toward a Unit 1 lesson before anything else, but doesn't block them (§6.2).
 - **Parents can see foundations at a glance** (§6.2): foundation lessons are marked in the library and the queue, and choose-one lessons are shown side by side.
 - **Prerequisites:** a lesson that needs a foundation skill unlocks when either lesson teaching it is done. The exception is a lesson built on the dish itself: 41 serves 40a's biscuits, so it still needs 40a.
+- **A pick-one group has at most three dishes** (owner, 2026-10-24); new dishes for a skill go into a group with room, or start one.
 - **Each foundation skill has three lessons to pick from** (owner, 2026-10-22). The added dishes sit beside the lesson they pair with and share its number, with a letter each (1a, 1b, 1c); the unit tables mark each group with "pick one with". Slicing is already taught three times (5, 27, 28), so it has no added dishes.
 
 | Foundation skill | Pick one of |
@@ -754,6 +755,7 @@ The linter must reject content when:
 - a step that `handles` raw food isn't followed directly by a `wash` step, or a raw ingredient is never marked as handled
 - a lesson with raw meat, poultry, or fish has no doneness step with a thermometer temperature. A lesson whose only raw ingredient is egg baked into a dough (cookies) may use a visual doneness check instead (owner approved)
 - a lesson's highest thermometer target is below the safe minimum (§3) for the raw meat, poultry, or fish in it (added 2026-10-24, so a chicken variation of a steak lesson can't keep 145°F)
+- a pick-one group has more than 3 dishes (§4.0)
 - a variation (§6.21), put together as a whole lesson, fails any of these checks, or has bad tags or its lesson's title
 - a step that isn't solo has no `hazard`
 - a callback points to a lesson that doesn't exist
@@ -979,26 +981,30 @@ Each person rates what they love and hate, the app picks the best dish or **vari
 | Honey-garlic salmon, or honey-garlic tofu | Honey-garlic chicken | Building a sauce | No salmon or tofu dish anywhere; reducing is chicken only | salmon or tofu; sweet-savory, ginger-soy; mild; $$ |
 | Spicy shakshuka | Shakshuka | Building a sauce | No written meal is spicy | eggs; rich-tomato, chili-heat; spicy; $ |
 | Spicy chicken fajitas | Chicken fajitas | Julienne | Same | chicken; warm-spices, chili-heat; spicy; $$ |
+| Jerk salmon with mango salsa | Jerk chicken (not written) | Marinating, broiling | No salmon dish; adds tropical (owner, 2026-10-24) | salmon; chili-heat, coconut-tropical; some; $$$ |
 
 **Proposed pick-one dishes — Recommendation** (Claude, 2026-10-24, from recipes found on the web; none written yet, and each waits on the owner's yes). The owner's direction (2026-10-24): new dishes go in as **pick-one choices beside a dish that teaches the same skills**, not as extra lessons, so the course keeps its numbering and its length; a family cooks one dish from each group (§4.0). They fill the gaps the coverage check found: no salmon, lamb, or tofu, no coconut and tropical dish, thin smoky and BBQ, and only 3 meals of 30 minutes or less. Each is from a store in a mid-sized US city. The sources were read from search results only; amounts are checked when each lesson is written.
 
 | New dish | Beside | Pick-one group (skill) | Time | Draft tags | Notes |
 |---|---|---|---|---|---|
-| Chicken piccata (broth, no wine) | Shakshuka, spaghetti marinara, honey-garlic chicken | building-a-sauce (existing) | 30 | chicken; herby-lemony; mild; $$ | First dish with capers; teaches a pan sauce after searing |
 | Beef and broccoli (flank steak) | Lomo saltado | thin-slicing (new) | 25 | beef; ginger-soy; mild; $$ | No oyster sauce: soy, broth, brown sugar, ginger |
 | Turkey lettuce wraps | Chicken fried rice | stir-frying (new) | 20 | turkey; ginger-soy; mild; $ | Hoisin and soy, not oyster sauce |
 | Coconut chickpea curry | Chana masala | blooming-spices (new) | 30 | beans-lentils; coconut-tropical, warm-spices; mild; $ | First coconut dish; first with chickpeas |
 | Blackened cod or tilapia | BBQ pulled chicken | spice-rubs (new) | 20 | white-fish; smoky-bbq, chili-heat; spicy; $$ | A quick spicy dish |
 | BBQ-rubbed salmon (sear, then bake) | the same group | spice-rubs (new) | 25 | salmon; smoky-bbq, sweet-savory; mild; $$$ | Smoked paprika and brown sugar rub |
 | Broiled honey-soy salmon | Jerk chicken | broiling (new) | 15–25 | salmon; sweet-savory, ginger-soy; mild; $$$ | Doneness 145°F (one source pulls at 125–130°F) |
-| Jerk salmon with mango salsa | Fish tacos, ratatouille, minestrone | dicing (existing) | 30 | salmon; coconut-tropical, chili-heat; some; $$$ | Dicing the salsa, like fish tacos |
 | Pineapple teriyaki salmon | Chicken adobo | reducing (new) | 30 | salmon; sweet-savory, ginger-soy, coconut-tropical; mild; $$$ | Reducing a glaze |
+| Chicken piccata (broth, no wine) | the same group | reducing (new) | 30 | chicken; herby-lemony; mild; $$ | First dish with capers; a pan sauce reduced after searing (building-a-sauce already has 3) |
 | Huevos rancheros, eggs cooked in salsa | Eggs Benedict | poaching-eggs (new) | 25 | eggs; chili-heat, rich-tomato; some; $ | Method adapted: covered, until whites and yolks are firm |
 | Chicken souvlaki pitas with tzatziki | Chicken Caesar | dressings (new) | 30 | chicken; herby-lemony, tangy; mild; $$ | Short marinade; 165°F (one source says 160°F) |
 | Moqueca, Brazilian coconut fish stew | Peanut stew | one-pot-stews (new) | 30 | white-fish; coconut-tropical, rich-tomato; mild; $$ | No shrimp, no seafood stock |
 | Coconut-crusted fish with pineapple salsa | Chicken katsu | breading-frying (new) | 35 | white-fish; coconut-tropical; mild; $$ | Mahi-mahi is often frozen; cod or tilapia work |
 | Lamb kofta with yogurt sauce | Meatloaf | binders (new) | 40 | lamb; warm-spices, herby-lemony; mild; $$$ | First lamb dish; ground lamb, 160°F |
 | Caribbean coconut curry lamb chops | Chicken tagine | braising (new) | 75 | lamb; coconut-tropical, warm-spices; some; $$$ | Scotch bonnet optional |
+
+**No pick-one group has more than 3 dishes** (owner, 2026-10-24); the linter refuses a fourth (§7.4).
+
+**Jerk salmon is a variation of jerk chicken** (owner, 2026-10-24), not a pick-one dish: the same skills (marinating, broiling), salmon instead of chicken, with a short marinade (fish goes soft in a long one), a mango salsa, and 145°F. Draft tags: salmon; chili-heat, coconut-tropical; some; $$$. It waits on jerk chicken being written.
 
 Checks for every one, when written: no shrimp, oyster sauce, or seafood stock; labels on curry paste, hoisin, and fish sauce read for shellfish; doneness at the safe minimums (§3), whatever a source says.
 

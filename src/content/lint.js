@@ -266,6 +266,8 @@ export function lint(c) {
     for (const g of groups) {
       const members = dishes.filter(d => d.pickOne === g);
       if (members.length < 2) err(`course.json pick-one "${g}"`, 'has only one dish');
+      // A family picks one of at most three (owner, 2026-10-24, plan §4.0).
+      if (members.length > 3) err(`course.json pick-one "${g}"`, `has ${members.length} dishes; a group has 3 at most`);
       if (keys.filter(k => k === `pick:${g}`).length > 1) err(`course.json pick-one "${g}"`, "its dishes aren't next to each other");
     }
     for (const { file, data: L } of c.lessons) {

@@ -3467,3 +3467,17 @@ moqueca, coconut-crusted fish, lamb kofta, and Caribbean coconut curry lamb
 chops. Two groups exist today (building-a-sauce, dicing); the rest would make
 new groups named for their skill. Each lists draft tags and what to watch
 (no shrimp or oyster sauce; doneness at the safe minimums).
+
+## 139. 2026-10-24 — Pick-one groups of three at most; jerk salmon as a variation
+
+The owner's rulings on the proposed dishes (plan §4.0, §6.21):
+- **A pick-one group has at most 3 dishes.** The linter now refuses a fourth
+  (`course.json pick-one "<group>": has 4 dishes`); every group today has 2
+  or 3. Plan §7.4 lists the check.
+- **Jerk salmon becomes a proposed variation of jerk chicken**, since it
+  teaches the same skills (marinating, broiling); it left the dicing group,
+  which is back to 3. It waits on jerk chicken being written.
+- **Chicken piccata moves** from building-a-sauce (already 3) to the new
+  reducing group, beside chicken adobo and pineapple teriyaki salmon: its pan
+  sauce is reduced after searing.
+- Tests: 298 (one more assertion in `test/lint.test.js`).
