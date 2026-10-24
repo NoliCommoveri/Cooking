@@ -4310,3 +4310,24 @@ order, so these two recipes were written.
   family. The review doc has the same text.
 - Open for the owner: what the Sabbath task part becomes (it teaches
   Sabbath practice, which families keep differently).
+
+## 178. 2026-10-24 — Beyond the Recipe replaces the Sabbath task
+
+- Owner, 2026-10-24: whether one cooks on the Sabbath is debated among the
+  families the app serves, so Level pages don't teach Sabbath practice. A
+  page may say, as a fact, that many families cook or prep ahead so they can
+  focus on resting. (The rule that nothing done on the Sabbath counts as
+  schoolwork, §6.18, is about school, not cooking, and stays.)
+- A Level week's fourth part is now **Beyond the Recipe**: the kitchen's part
+  page, the Level 3 picker in the course editor and Chef Ruth's Getting
+  started, and the manager's Level 3 page and field label say so. It's still
+  stored as `sabbath` in `level-3.json` and `level_tasks`, so nothing
+  already checked off is lost.
+- Unit 1's four Beyond the Recipe pages are make-ahead storage: labeling
+  (with the note on families prepping ahead to rest), cooling, making a dish
+  ahead and storing it (week 3's new title), and reheating. The Sabbath
+  claims are gone. The review doc has the new text.
+- Plan §12.2 and §12.3 describe the part and the rule, with a proposed split
+  for weeks 5–36, waiting on the owner: 24 make-ahead weeks and 12 weeks of
+  What the Bible says about food. Weeks 5–36 keep their old titles until it's
+  approved. Levels 2 and 4 still say Sabbath task in their outlines.

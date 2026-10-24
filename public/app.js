@@ -594,9 +594,9 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   celebrate(p, cooks);
 }
 
-// A Level week's drill, knowledge, or Sabbath task page (12c), in the
+// A Level week's drill, knowledge, or Beyond the Recipe page (12c), in the
 // profile's theme, with Done. Nothing is checked off on the Sabbath.
-const PART_NAMES = { drill: 'Drill', knowledge: 'Knowledge', sabbath: 'Sabbath task' };
+const PART_NAMES = { drill: 'Drill', knowledge: 'Knowledge', sabbath: 'Beyond the Recipe' };
 async function levelPage(profileId, key) {
   const [, week, part] = key.match(/^~(\d+)-(drill|knowledge|sabbath)$/) ?? [];
   const { profiles } = await api('GET', '/api/profiles');
@@ -1962,7 +1962,7 @@ const courseEditor = parentOnly(async (cid) => {
     suggestBtn ? el('div', { class: 'acts' }, suggestBtn) : null,
     notesBox, listBox);
   const levelSet = el('fieldset', {}, el('legend', {}, 'The weeks'),
-    el('p', { class: 'mut small', style: 'margin:0' }, 'Each week has a recipe, a drill, a reading, and a Sabbath task. The last week of each unit is a mastery check. A week is done when its recipe is cooked; one that isn\'t moves to the next week.'),
+    el('p', { class: 'mut small', style: 'margin:0' }, 'Each week has a recipe, a drill, a reading, and a Beyond the Recipe page. The last week of each unit is a mastery check. A week is done when its recipe is cooked; one that isn\'t moves to the next week.'),
     el('p', { class: 'mut small', style: 'margin:0' }, 'Each week starts with the recipe that fits the people it\'s for best, from Our tastes. Change picks another that teaches the same skill.'),
     levelBox);
   const drawProgram = () => {
@@ -1980,7 +1980,7 @@ const courseEditor = parentOnly(async (cid) => {
       el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'program', value: '', checked: true }),
         el('span', {}, 'Cook Around the World', el('em', {}, ' A dish at a time, each with its skill, at your pace'))),
       levels.map((V) => el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'program', value: V.id }),
-        el('span', {}, V.name, el('em', {}, ` ${V.weeks.length} weeks, about ${V.hours} hours: a recipe, a drill, a reading, and a Sabbath task each week`)))))
+        el('span', {}, V.name, el('em', {}, ` ${V.weeks.length} weeks, about ${V.hours} hours: a recipe, a drill, a reading, and a Beyond the Recipe page each week`)))))
     : existing?.program ? el('p', { class: 'mut small', style: 'margin:0' }, `Program: ${levelOf()?.name ?? 'a Level'}`) : null;
   drawProgram();
 

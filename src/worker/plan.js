@@ -1067,7 +1067,7 @@ export function register(on) {
     return { week, part };
   };
 
-  // Done on a drill, knowledge, or Sabbath task page, by the profile or its
+  // Done on a drill, knowledge, or Beyond the Recipe page, by the profile or its
   // parent. Nothing checked off on the Sabbath counts, so it isn't taken then
   // (§12.4, as with grading, §6.18).
   on('PUT', '/api/profiles/([0-9a-f]{16})/level-tasks', async (req, env, body, [pid]) => {

@@ -20,7 +20,7 @@ const LABELS = {
   sign: 'What you see', fix: 'What to do', baseUnit: 'Base unit', purchaseUnit: 'Store package', animalSource: 'Animal it comes from',
   animalPart: 'Part of the animal', rawHandling: 'Raw handling', countLabel: 'Count words', watch: 'Watch note', idea: 'The idea',
   taughtIn: 'Taught in (lesson)', byWeight: 'Sold by weight', many: 'Plural', one: 'Singular', perishable: 'Perishable', pickOne: 'Pick-one group',
-  main: 'Main ingredients', sabbath: 'Sabbath task', swapIns: 'Swap-ins', about: 'About the dish', meal: 'A full meal', use: 'Use instead', for: 'In place of', reason: 'Because of',
+  main: 'Main ingredients', sabbath: 'Beyond the Recipe', swapIns: 'Swap-ins', about: 'About the dish', meal: 'A full meal', use: 'Use instead', for: 'In place of', reason: 'Because of',
 };
 export const label = (k) => LABELS[k] ?? String(k).replace(/([a-z])([A-Z])/g, '$1 $2').replace(/^./, (c) => c.toUpperCase());
 const LONG = new Set(['body', 'text', 'about', 'idea', 'explain', 'fix', 'sign', 'tip', 'look', 'note', 'caption', 'watch', 'means', 'why']);

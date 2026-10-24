@@ -9019,7 +9019,8 @@ export const LIBRARY = {
       "title": "Label and date containers",
       "minutes": 45,
       "body": [
-       "Sabbath cooking means food made ahead and stored. Labels tell everyone what a container holds and when it was made, so nothing gets eaten past its time or forgotten in the back.",
+       "Many families cook or prep ingredients ahead so they can spend the Sabbath resting instead of working in the kitchen. Food made ahead only helps if it's stored well, and this unit's Beyond the Recipe pages cover how: labeling, cooling, storing, and reheating.",
+       "Labels tell everyone what a container holds and when it was made, so nothing is eaten past its time or forgotten in the back.",
        "The USDA guideline is 3 to 4 days in the fridge for cooked meat, poultry, soups, and stews. Many other leftovers keep longer, and hard-cooked eggs keep a week. Risk still climbs with time, because Listeria can grow at fridge temperatures and smell won't reveal it. Your family decides its own limits; the date on the label is what lets you apply them.",
        "Frozen food stays safe indefinitely at 0°F, though it tastes best within 2 to 3 months."
       ],
@@ -9028,7 +9029,7 @@ export const LIBRARY = {
        "Label every container from this week's cooking with the dish and the date it was cooked, for example \"Shakshuka 10/4\".",
        "Go through the fridge with an adult and decide what's past your family's limit.",
        "Move older food to the front so it gets used first.",
-       "Before the Sabbath, check that everything you made for it is labeled."
+       "Label anything you make ahead this week the moment it goes into the fridge."
       ],
       "quiz": [
        {
@@ -9157,7 +9158,7 @@ export const LIBRARY = {
        "The standard is two-stage cooling: from 140°F to 70°F within 2 hours, then to 40°F within 4 more. An ice bath handles the first stage; shallow containers, no more than 2 inches deep, handle the second."
       ],
       "steps": [
-       "Pick something to cool: a pot of soup or rice, or a dish you're making ahead for the Sabbath.",
+       "Pick something to cool: a pot of soup or rice, or a dish you're making ahead.",
        "Fill the sink or a large bowl partway with ice and water.",
        "Transfer the hot food to a metal bowl or pot and set it in the ice bath, with the water partway up the sides.",
        "Stir every few minutes, and take the center temperature every 10 minutes. Record each reading.",
@@ -9281,18 +9282,19 @@ export const LIBRARY = {
       ]
      },
      "sabbath": {
-      "title": "Store a dish safely for the Sabbath",
+      "title": "Make a dish ahead and store it",
       "minutes": 45,
       "body": [
-       "Sabbath food is cooked before the Sabbath begins. Some families serve it cold, and some keep dishes hot from before sundown. Either way, the rule is the same: cold food at 40°F or below, hot food at 140°F or above.",
+       "This week puts the unit together: cook a dish ahead, cool it fast, and store it so it's safe and good when it's eaten. Many families do this before the Sabbath so they can rest; it works just as well for a busy weeknight.",
+       "Stored food stays out of the danger zone: cold at 40°F or below, or hot at 140°F or above if it's being held for a meal.",
        "Braises like chicken adobo improve after a night in the fridge, which makes them good make-ahead choices."
       ],
       "steps": [
-       "Pick a dish from this week to make ahead: the fried rice, chicken adobo, or something your family will serve on the Sabbath.",
-       "Cook it Thursday or Friday, and cool it quickly in shallow containers (week 2).",
+       "Pick a dish from this week to make ahead: the fried rice, chicken adobo, or something your family will eat later in the week.",
+       "Cook it a day or two before it's needed, and cool it quickly in shallow containers (week 2).",
        "Cover and label it (week 1), and store it on a shelf, not in the door, which runs warmer.",
        "Confirm the fridge is at 40°F or below.",
-       "If your family keeps food hot for the Sabbath meal, check that it holds at 140°F or above."
+       "If your family holds food hot for a meal, check that it stays at 140°F or above."
       ],
       "quiz": [
        {
@@ -9492,11 +9494,11 @@ export const LIBRARY = {
        "Reheat only what you'll eat. Each round of reheating and cooling costs quality and adds time in the danger zone."
       ],
       "steps": [
-       "Choose a stored dish: this week's meatloaf, or something made ahead for the Sabbath.",
+       "Choose a stored dish: this week's meatloaf, or something you made ahead.",
        "Oven: portions in a baking dish with a splash of water or broth, covered with foil, at 350°F. Microwave: cover loosely, and stir or rotate every minute or two.",
        "Check the center of the thickest piece. Keep heating until it reads 165°F.",
        "Note the method and how long it took.",
-       "Do this before the Sabbath begins for food your family will keep hot or serve."
+       "Serve it, or put it back in the fridge within 2 hours. Don't reheat the same portion twice."
       ],
       "quiz": [
        {
