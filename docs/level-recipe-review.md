@@ -1,6 +1,6 @@
 # Level recipe progression review
 
-Copy of the working review doc ([Level recipe progression review](https://claude.ai/artifact/Pmx2xhA1HpZDsxfmckTnna)), saved 2026-10-24 after Unit 6. Its decisions aren't built yet; the plan and `content/levels/level-3.json` still show the old weeks.
+Copy of the working review doc ([Level recipe progression review](https://claude.ai/artifact/Pmx2xhA1HpZDsxfmckTnna)), saved 2026-10-24 after Unit 6. Its decisions aren't built yet, except Chicken jambalaya in week 15 (written 2026-10-24); otherwise the plan and `content/levels/level-3.json` still show the old weeks.
 
 ## Purpose and ground rules
 
@@ -106,7 +106,7 @@ Weeks 13–15 fit well, side dish and all. Two changes: Lomo saltado misses the 
 | 14 | Chana masala (option) | Keep | An onion, ginger, and garlic base browned, spices bloomed, then a tomato simmer. It reviews Level 2's toasted spices. Meatless. | None. |
 | 14 | Chicken yassa (option) | Keep | A big pile of onions cooked slowly until soft and sweet, with chicken thighs to 165°F. A harder option at 75 minutes. | None. |
 | 15 | Cajun rice dressing with beef (default, not written) | Keep | The trinity sweated, ground beef browned, the fond deglazed, cooked rice stirred through. It reviews Unit 1's cooled rice. | None. |
-| 15 | Lomo saltado (option) | Replace | Tagged stir-frying and thin slicing, not the week's skill. It sears beef strips very hot and adds oven fries. It doesn't build or deglaze a base. | **Chicken jambalaya** (new): the trinity, chicken thighs and sausage browned, the fond deglazed, and rice cooked in the pot. The sausage is beef or chicken andouille, collagen-cased or skinless (§2.1). About 75 minutes. |
+| 15 | Lomo saltado (option) | Replace | Tagged stir-frying and thin slicing, not the week's skill. It sears beef strips very hot and adds oven fries. It doesn't build or deglaze a base. | **Chicken jambalaya** (new): the trinity, chicken thighs and sausage browned, the fond deglazed, and rice cooked in the pot. The sausage is beef or chicken andouille, collagen-cased or skinless (§2.1). About 75 minutes. **Written 2026-10-24** (`content/levels/recipes/chicken-jambalaya.json`), and in week 15's options in place of Lomo saltado. |
 | 16 | Beef ragù (mastery default, planned) | Replace | The soffritto is right, but it sears chunks of beef chuck and braises them for 3 hours. That's Level 4 Unit 2 (braising tough cuts), and the dish is tagged braising. | **Ragù bolognese** (new, or the ground-beef variation of Beef ragù): soffritto sweated unaided, ground beef browned, the pan deglazed with broth, and a 1½-hour simmer. It suits the week's make-ahead Sabbath task. |
 | 16 | Beef chili (option, planned) | Keep | An onion base, ground beef browned in batches, spices toasted, a long simmer. Also week 34's default, which is fine. | None. |
 | 16 | Chicken tagine with olives (option, planned) | Keep, check | Chicken thighs browned, onions and spices cooked down, then a covered simmer. It's tagged braising, but chicken thighs simmered in sauce are close to Unit 1's adobo, not a beef braise. | Write it so the chicken is browned and simmered, not a long braise. |
@@ -231,4 +231,4 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 
 - Carry on with Unit 7 (Fish), one unit at a time, under the ground rules above.
 - Unit 6's three decisions are still open.
-- Nothing here is built yet. Once the review is done, the approved changes go into `content/levels/level-3.json`, the lessons, and plan §12.3 and §12.4.
+- Nothing here is built yet except Chicken jambalaya (week 15). Once the review is done, the approved changes go into `content/levels/level-3.json`, the lessons, and plan §12.3 and §12.4.

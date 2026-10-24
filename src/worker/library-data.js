@@ -4301,6 +4301,160 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "butter-chicken",
+   "version": 1,
+   "track": "core",
+   "unit": 3,
+   "title": "Butter chicken",
+   "image": "img/dishes/butter-chicken.webp",
+   "cuisine": "indian",
+   "skill": "Marinating, finishing with cream",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, brown the chicken in three batches, and use your biggest pot so the sauce has room to bubble."
+     }
+    ]
+   },
+   "totalMinutes": 80,
+   "ingredients": [
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "yogurt-greek"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "garam-masala"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "turmeric-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "garam-masala"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "cayenne",
+     "optional": true
+    },
+    {
+     "ingredient": "tomato-paste"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "heavy-cream"
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices",
+     "creamy-cheesy"
+    ],
+    "heat": "some",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "sour-cream-yogurt",
+     "lemon-lime",
+     "garlic",
+     "ginger",
+     "onions",
+     "tomatoes"
+    ],
+    "optional": [
+     "hot-peppers",
+     "cilantro"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "box-grater",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "liquid-measuring-cup",
+    "can-opener",
+    "saucepan-medium",
+    "pot-large",
+    "tongs",
+    "plate",
+    "wooden-spoon",
+    "fork",
+    "spoon",
+    "thermometer"
+   ]
+  },
+  {
    "id": "beef-bulgogi",
    "version": 1,
    "track": "core",
@@ -5517,6 +5671,28 @@ export const LIBRARY = {
   "curry-powder": {
    "name": "Curry powder (mild)",
    "contains": []
+  },
+  "garam-masala": {
+   "name": "Garam masala",
+   "contains": []
+  },
+  "turmeric-ground": {
+   "name": "Ground turmeric",
+   "contains": []
+  },
+  "paprika-sweet": {
+   "name": "Paprika (sweet)",
+   "contains": []
+  },
+  "tomato-paste": {
+   "name": "Tomato paste",
+   "contains": []
+  },
+  "heavy-cream": {
+   "name": "Heavy cream",
+   "contains": [
+    "dairy"
+   ]
   }
  },
  "cuisines": {
@@ -6815,7 +6991,7 @@ export const LIBRARY = {
     "marinating",
     "building-a-sauce"
    ],
-   "minutes": 60,
+   "minutes": 80,
    "cuisine": "indian",
    "tags": {
     "protein": "chicken",
@@ -8235,7 +8411,7 @@ export const LIBRARY = {
      "skill": "flavor-base",
      "recipe": "cajun-rice-dressing",
      "options": [
-      "lomo-saltado"
+      "chicken-jambalaya"
      ],
      "drill": {
       "title": "Deglaze a pan, scrape the fond",
@@ -8875,6 +9051,27 @@ export const LIBRARY = {
      "art": "meat"
     },
     {
+     "id": "chicken-jambalaya",
+     "title": "Chicken jambalaya",
+     "cuisine": "louisiana",
+     "skills": [
+      "flavor-base",
+      "sauteing"
+     ],
+     "minutes": 75,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "art": "poultry"
+    },
+    {
      "id": "rice-pilaf",
      "title": "Rice pilaf",
      "cuisine": "turkish",
@@ -9094,7 +9291,7 @@ export const LIBRARY = {
     "chana-masala": "Chana masala",
     "chicken-yassa": "Chicken yassa",
     "cajun-rice-dressing": "Cajun rice dressing with beef",
-    "lomo-saltado": "Lomo saltado",
+    "chicken-jambalaya": "Chicken jambalaya",
     "beef-ragu": "Beef ragù",
     "beef-chili": "Beef chili",
     "chicken-tagine": "Chicken tagine with olives",

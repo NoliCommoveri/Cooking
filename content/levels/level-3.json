@@ -29,7 +29,7 @@
     { "week": 12, "unit": 3, "skill": "dicing", "recipe": "israeli-salad", "mastery": true, "note": "A fine dice", "drill": { "title": "Timed dice: one onion, one pepper", "minutes": 40 }, "knowledge": { "title": "Name and size each classic cut", "minutes": 35 }, "sabbath": { "title": "Prep and store all salad vegetables for the Sabbath", "minutes": 45 }, "swapIns": ["chopped-salad-vinaigrette"] },
     { "week": 13, "unit": 4, "skill": "sauteing", "recipe": "garlic-green-beans", "drill": { "title": "Blanch and shock green beans and spinach; shimmer test for hot oil", "minutes": 40 }, "knowledge": { "title": "Blanching: why vegetables stay green and crisp; oils and smoke points", "minutes": 35 }, "sabbath": { "title": "Blanch and store beans for the Sabbath", "minutes": 45 }, "swapIns": ["japchae"] },
     { "week": 14, "unit": 4, "skill": "flavor-base", "recipe": "beef-picadillo", "note": "A sofrito base", "drill": { "title": "Sweat vs. brown onions", "minutes": 40 }, "knowledge": { "title": "Browning and why it adds flavor", "minutes": 35 }, "sabbath": { "title": "Make and freeze a sofrito batch", "minutes": 45 }, "swapIns": ["chana-masala", "chicken-yassa"] },
-    { "week": 15, "unit": 4, "skill": "flavor-base", "recipe": "cajun-rice-dressing", "note": "The trinity", "drill": { "title": "Deglaze a pan, scrape the fond", "minutes": 40 }, "knowledge": { "title": "Aromatic bases across cuisines", "minutes": 35 }, "sabbath": { "title": "Cook rice dressing ahead; cool safely", "minutes": 45 }, "swapIns": ["lomo-saltado"] },
+    { "week": 15, "unit": 4, "skill": "flavor-base", "recipe": "cajun-rice-dressing", "note": "The trinity", "drill": { "title": "Deglaze a pan, scrape the fond", "minutes": 40 }, "knowledge": { "title": "Aromatic bases across cuisines", "minutes": 35 }, "sabbath": { "title": "Cook rice dressing ahead; cool safely", "minutes": 45 }, "swapIns": ["chicken-jambalaya"] },
     { "week": 16, "unit": 4, "skill": "flavor-base", "recipe": "beef-ragu", "mastery": true, "note": "A soffritto base", "drill": { "title": "Sauté a mixed vegetable pan unaided", "minutes": 40 }, "knowledge": { "title": "Explain sweat vs. sauté", "minutes": 35 }, "sabbath": { "title": "Make ragù ahead for the Sabbath meal", "minutes": 45 }, "swapIns": ["beef-chili", "chicken-tagine"] },
     { "week": 17, "unit": 5, "skill": "cooking-legumes", "recipe": "red-lentil-soup", "drill": { "title": "Rinse and pick over lentils", "minutes": 40 }, "knowledge": { "title": "Legume types and cook times", "minutes": 35 }, "sabbath": { "title": "Freeze soup in portions", "minutes": 45 }, "swapIns": ["misir-wot"] },
     { "week": 18, "unit": 5, "skill": "cooking-legumes", "recipe": "red-beans-and-rice", "note": "Beef sausage, collagen-cased or skinless, or none", "drill": { "title": "Quick-soak vs. overnight soak", "minutes": 40 }, "knowledge": { "title": "Why beans are soaked", "minutes": 35 }, "sabbath": { "title": "Soak beans Friday for a later meal", "minutes": 45 }, "swapIns": ["chana-masala"] },
@@ -120,6 +120,27 @@
         "flavors": ["warm-spices"],
         "heat": "some",
         "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      }
+    },
+    {
+      "id": "chicken-jambalaya",
+      "title": "Chicken jambalaya",
+      "cuisine": "louisiana",
+      "skills": ["flavor-base", "sauteing"],
+      "skill": "The trinity, deglazing, rice cooked in the pot",
+      "art": "poultry",
+      "safety": "adult-nearby",
+      "minutes": 75,
+      "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, the trinity sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
+      "main": ["chicken thighs", "smoked chicken andouille", "onion, celery, green pepper", "rice", "tomatoes"],
+      "method": "stove",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["warm-spices"],
+        "heat": "some",
+        "budget": "$$",
         "familiar": "new-ish",
         "veggies": "some"
       }

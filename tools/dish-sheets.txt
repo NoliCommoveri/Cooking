@@ -15,7 +15,7 @@ sheet-10-units4-5.png retired/36-chicken-noodle-soup,-,buttermilk-biscuits,biscu
 sheet-11-unit6.png meatloaf,roast-chicken,chicken-pot-pie,pot-roast
 sheet-12-finale.png retired/48-southern-fried-chicken,brown-butter-cookies,apple-pie,chicken-caesar
 sheet-13-redos-logo.png philly-cheesesteak,french-omelet,mac-and-cheese,-
-sheet-14-redos.png beef-bulgogi,smash-burgers,retired/34-jambalaya,bbq-pulled-chicken
+sheet-14-redos.png beef-bulgogi,smash-burgers,chicken-jambalaya,bbq-pulled-chicken
 sheet-15-foundations-1.png chicken-fajitas,retired/52-carrot-apple-slaw,retired/53-guacamole-and-chips,retired/54-bruschetta
 sheet-16-foundations-2.png matzo-ball-soup,minestrone,grilled-cheese-tomato-soup,challah-french-toast
 sheet-17-foundations-3.png spaghetti-marinara,retired/60-sloppy-joes,retired/61-croque-madame,retired/62-chicken-gumbo

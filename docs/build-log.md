@@ -4067,3 +4067,37 @@ on claude.ai.
   and Units 7–9.
 - Nothing in the app or content changes yet; the approved changes are built
   after the review.
+
+## 166. 2026-10-24 — Butter chicken and Chicken jambalaya written
+
+The owner's kids wanted to cook a chicken dish for fun, outside the course
+order, so these two recipes were written.
+
+- **Butter chicken** (`content/lessons/butter-chicken.json`): Cook Around the
+  World #25 (Unit 3, "Marinating, finishing with cream"), until now a planned
+  dish. Chicken thighs marinated in yogurt, lemon, and spices, browned in two
+  batches, then simmered in a buttery tomato sauce and finished with cream,
+  over rice. Checked at 165°F. 80 minutes (30 of them marinating), so the
+  dish card's estimate of 60 is replaced. Its callback is Shakshuka's sauce. It
+  is also Level 4 week 22's option 2 (plan §12.7), with chicken tikka masala
+  planned as its variation.
+- **Chicken jambalaya** (`content/levels/recipes/chicken-jambalaya.json`): the
+  new Level 3 week 15 recipe the review approved in place of Lomo saltado
+  (`docs/level-recipe-review.md`, Unit 4). Sausage and chicken browned, the
+  trinity sweated, the pot deglazed with broth, and the rice cooked in it.
+  Checked at 165°F. 75 minutes. Its callback is Chicken adobo's brown bits.
+  It's a Level-only recipe card in `level-3.json` and week 15's option, so it
+  shows only with the next release.
+- **Hard rule:** the sausage is a new registry item, smoked chicken andouille
+  (`chicken-sausage-smoked`), with a "check the label" note for pork casings
+  and pork in the mix. Its id avoids the blocked word; its name uses the
+  allowed phrase "chicken andouille".
+- **New registry items:** garam masala, ground turmeric, sweet paprika,
+  tomato paste, heavy cream, and the sausage. The kitchen word **deglaze**
+  is now defined in `terms.json`, since the jambalaya teaches it.
+- **Picture:** the retired jambalaya picture (chicken, sausage, tomato, and
+  pepper; no shellfish) is back as `dishes/chicken-jambalaya.png`, with
+  `tools/dish-sheets.txt` and the licenses updated.
+- The Level 3 test now counts 18 Level-only recipes. The generated library and
+  preview files were rebuilt.
+
