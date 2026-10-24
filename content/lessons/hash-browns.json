@@ -49,7 +49,7 @@
     { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp" },
     { "ingredient": "vegetable-oil", "amount": 4, "unit": "tbsp", "prep": "half for each batch", "group": "For the pan" },
     { "ingredient": "butter-unsalted", "amount": 2, "unit": "tbsp", "prep": "half for each batch", "group": "For the pan" },
-    { "ingredient": "ketchup", "amount": null, "text": "for dipping", "optional": true, "group": "To serve" }
+    { "ingredient": "ketchup", "amount": 0.5, "unit": "cup", "prep": "for dipping", "optional": true, "group": "To serve" }
   ],
   "substitutions": [
     { "for": "butter-unsalted", "use": "vegetable-oil", "reason": "dairy", "note": "Use 1 more tablespoon of oil in the pan for each batch." }

@@ -4628,3 +4628,16 @@ tables.
 - The shopping test now checks the pita's amount and uses the ketchup line
   for a line without one. `preview/lesson-preview.html` rebuilt.
 - Tests: 351, all passing.
+
+## 192. 2026-10-24 — Ketchup for dipping is a bottle
+
+- Owner, 2026-10-24: give the ketchup for dipping an amount, one bottle.
+- **Fix (content):** Hash browns (serves 6) and Shoestring fries (serves 4)
+  each list ½ cup ketchup, for dipping, still optional. It scales with the
+  servings like any line, and the shopping list rounds it to **1 × 20-oz
+  bottle** (a bottle is about 2⅓ cups).
+- The shopping test checks the bottle, and now uses French omelet's black
+  pepper ("a few grinds") for a line with no amount. Lines like that, and
+  flour for dusting and flaky salt, still have no amount; each is a pinch or
+  a few grinds of something the lesson buys anyway, or a kitchen staple.
+- Tests: 351, all passing.
