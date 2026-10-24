@@ -169,6 +169,23 @@ export function buildLibrary() {
     course: c.course.dishes.map(({ id, title, unit, pickOne, prereqs, about, meal, skills, tags, minutes, cuisine }) => ({
       id, title, unit, about, skills, ...(minutes ? { minutes } : {}), ...(cuisine ? { cuisine } : {}), ...(pickOne ? { pickOne } : {}), ...(prereqs ? { prereqs } : {}), ...(meal === false ? { meal } : {}), ...(tags ? { tags } : {}),
     })),
+    // The Levels (§12), next release only: each one's units and weeks, for
+    // a Level course's plan (12b). A week's recipe is a lesson id when it's
+    // written; until then it waits like a planned dish (§6.18).
+    levels: Object.fromEntries((c.levels ?? []).map(({ data: V }) => [V.id, {
+      id: V.id, name: V.name, hours: V.hours, units: V.units.map(({ number, name }) => ({ number, name })),
+      // Each week's three part pages (12c): title, planned minutes, and what's written of them.
+      // Its options (§12.7): the other recipes best fit picks among (12d).
+      weeks: V.weeks.map(({ week, unit, skill, recipe, swapIns, mastery, kind, drill, knowledge, sabbath }) => ({
+        week, unit, ...(skill ? { skill } : {}), ...(recipe ? { recipe } : {}), ...(swapIns?.length ? { options: swapIns } : {}),
+        ...(mastery ? { mastery } : {}), ...(kind ? { kind } : {}), drill, knowledge, sabbath,
+      })),
+      // The Level's own recipe cards, scored by their tags until they're written (12d).
+      cards: V.recipes.map(({ id, title, cuisine, skills, minutes, tags, art }) => ({ id, title, cuisine, skills, minutes, tags, art })),
+      // Every recipe's title, written or not: the Level's own cards, then the course's dishes.
+      titles: Object.fromEntries([...new Set(V.weeks.flatMap((w) => (w.recipe ? [w.recipe, ...(w.swapIns ?? [])] : [])))].map((id) => [id,
+        V.recipes.find((r) => r.id === id)?.title ?? c.course.dishes.find((d) => d.id === id)?.title ?? c.lessons.find(({ data }) => data.id === id)?.data.title ?? id])),
+    }])),
     // What profiles rate (§6.21), by id and name.
     tastes: Object.fromEntries(Object.entries(c.tastes).map(([k, list]) => [k, list.map(({ id, name }) => ({ id, name }))])),
   };

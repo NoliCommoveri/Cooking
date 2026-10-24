@@ -6997,6 +6997,31 @@ export const LIBRARY = {
    }
   },
   {
+   "id": "japchae",
+   "title": "Japchae",
+   "unit": 4,
+   "about": "Korean glass noodles made from sweet potato starch, tossed with thin strips of beef, spinach, carrots, and mushrooms in a sweet soy and sesame sauce.",
+   "skills": [
+    "thin-slicing",
+    "stir-frying",
+    "blanching"
+   ],
+   "minutes": 50,
+   "cuisine": "korean",
+   "pickOne": "thin-slicing",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "ginger-soy",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "adventurous",
+    "veggies": "lots"
+   }
+  },
+  {
    "id": "suya",
    "title": "Suya (spiced beef skewers)",
    "unit": 4,
@@ -7859,6 +7884,1254 @@ export const LIBRARY = {
    }
   }
  ],
+ "levels": {
+  "level-3": {
+   "id": "level-3",
+   "name": "Level 3 Cook",
+   "hours": 125,
+   "units": [
+    {
+     "number": 1,
+     "name": "Food safety science"
+    },
+    {
+     "number": 2,
+     "name": "Yeast dough"
+    },
+    {
+     "number": 3,
+     "name": "Classic knife cuts and honing"
+    },
+    {
+     "number": 4,
+     "name": "Sautéing and aromatic bases"
+    },
+    {
+     "number": 5,
+     "name": "Legumes and grains"
+    },
+    {
+     "number": 6,
+     "name": "Poultry and roasting"
+    },
+    {
+     "number": 7,
+     "name": "Fish"
+    },
+    {
+     "number": 8,
+     "name": "Stock and soup"
+    },
+    {
+     "number": 9,
+     "name": "Balancing flavor and Sabbath capstone"
+    }
+   ],
+   "weeks": [
+    {
+     "week": 1,
+     "unit": 1,
+     "skill": "poaching-eggs",
+     "recipe": "shakshuka",
+     "options": [
+      "huevos-rancheros",
+      "oyakodon"
+     ],
+     "drill": {
+      "title": "Calibrate a thermometer in ice water",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Danger zone and how bacteria grow",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Label and date containers",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 2,
+     "unit": 1,
+     "skill": "temping-meat",
+     "recipe": "thick-burgers",
+     "options": [
+      "smash-burgers",
+      "lamb-kofta"
+     ],
+     "drill": {
+      "title": "Temp-check thick vs. thin patties",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Safe internal temperatures chart",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Cool a cooked dish in an ice bath",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 3,
+     "unit": 1,
+     "skill": "stir-frying",
+     "recipe": "chicken-fried-rice",
+     "options": [
+      "jollof-rice"
+     ],
+     "drill": {
+      "title": "Safe cooling of a batch of rice",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Cross-contamination and board colors",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Store a dish safely for the Sabbath",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 4,
+     "unit": 1,
+     "skill": "binders",
+     "recipe": "meatloaf",
+     "options": [
+      "lamb-kofta",
+      "swedish-meatballs"
+     ],
+     "mastery": true,
+     "drill": {
+      "title": "Set up a clean station unaided",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Food safety quiz",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Reheat a stored dish to 165°F",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 5,
+     "unit": 2,
+     "skill": "yeast-dough",
+     "recipe": "pita-bread",
+     "options": [
+      "homemade-pizza"
+     ],
+     "drill": {
+      "title": "Bloom yeast; test water temperature",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "How yeast makes dough rise",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Bake and freeze pita for the Sabbath",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 6,
+     "unit": 2,
+     "skill": "yeast-dough",
+     "recipe": "sandwich-loaf",
+     "options": [
+      "cinnamon-rolls"
+     ],
+     "drill": {
+      "title": "Knead and windowpane test",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Gluten and kneading",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Bake a loaf Friday morning",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 7,
+     "unit": 2,
+     "skill": "yeast-dough",
+     "recipe": "dinner-rolls",
+     "drill": {
+      "title": "Shape even rolls by weight",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Proofing: under vs. over",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Shape rolls Thursday; cold proof overnight",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 8,
+     "unit": 2,
+     "skill": "yeast-dough",
+     "recipe": "challah",
+     "options": [
+      "homemade-pizza"
+     ],
+     "mastery": true,
+     "drill": {
+      "title": "Braid a dough",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Doneness: color, sound, 190°F inside",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Challah for the Sabbath table",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 9,
+     "unit": 3,
+     "skill": "dicing",
+     "recipe": "fish-tacos",
+     "options": [
+      "ratatouille",
+      "minestrone"
+     ],
+     "drill": {
+      "title": "Claw grip; dice 3 onions",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Parts of a knife; knife types",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Chop vegetables ahead for the Sabbath meal",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 10,
+     "unit": 3,
+     "skill": "fine-chopping",
+     "recipe": "tabbouleh",
+     "options": [
+      "chimichurri-steak",
+      "fattoush"
+     ],
+     "drill": {
+      "title": "Mince parsley and garlic",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Honing vs. sharpening",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Store prepped herbs so they stay fresh",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 11,
+     "unit": 3,
+     "skill": "julienne",
+     "recipe": "vegetable-stir-fry",
+     "options": [
+      "spring-rolls",
+      "chicken-fajitas"
+     ],
+     "drill": {
+      "title": "Julienne carrots and peppers",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Why even cuts cook evenly",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Prep a full set of stir-fry vegetables ahead",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 12,
+     "unit": 3,
+     "skill": "dicing",
+     "recipe": "israeli-salad",
+     "options": [
+      "chopped-salad-vinaigrette"
+     ],
+     "mastery": true,
+     "drill": {
+      "title": "Timed dice: one onion, one pepper",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Name and size each classic cut",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Prep and store all salad vegetables for the Sabbath",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 13,
+     "unit": 4,
+     "skill": "sauteing",
+     "recipe": "garlic-green-beans",
+     "options": [
+      "japchae"
+     ],
+     "drill": {
+      "title": "Blanch and shock green beans and spinach; shimmer test for hot oil",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Blanching: why vegetables stay green and crisp; oils and smoke points",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Blanch and store beans for the Sabbath",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 14,
+     "unit": 4,
+     "skill": "flavor-base",
+     "recipe": "beef-picadillo",
+     "options": [
+      "chana-masala",
+      "chicken-yassa"
+     ],
+     "drill": {
+      "title": "Sweat vs. brown onions",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Browning and why it adds flavor",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Make and freeze a sofrito batch",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 15,
+     "unit": 4,
+     "skill": "flavor-base",
+     "recipe": "cajun-rice-dressing",
+     "options": [
+      "lomo-saltado"
+     ],
+     "drill": {
+      "title": "Deglaze a pan, scrape the fond",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Aromatic bases across cuisines",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Cook rice dressing ahead; cool safely",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 16,
+     "unit": 4,
+     "skill": "flavor-base",
+     "recipe": "beef-ragu",
+     "options": [
+      "beef-chili",
+      "chicken-tagine"
+     ],
+     "mastery": true,
+     "drill": {
+      "title": "Sauté a mixed vegetable pan unaided",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Explain sweat vs. sauté",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Make ragù ahead for the Sabbath meal",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 17,
+     "unit": 5,
+     "skill": "cooking-legumes",
+     "recipe": "red-lentil-soup",
+     "options": [
+      "misir-wot"
+     ],
+     "drill": {
+      "title": "Rinse and pick over lentils",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Legume types and cook times",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Freeze soup in portions",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 18,
+     "unit": 5,
+     "skill": "cooking-legumes",
+     "recipe": "red-beans-and-rice",
+     "options": [
+      "chana-masala"
+     ],
+     "drill": {
+      "title": "Quick-soak vs. overnight soak",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Why beans are soaked",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Soak beans Friday for a later meal",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 19,
+     "unit": 5,
+     "skill": "cooking-grains",
+     "recipe": "rice-pilaf",
+     "options": [
+      "jollof-rice"
+     ],
+     "drill": {
+      "title": "Toast grains in fat before liquid",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Absorption vs. pasta method; ratios",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Cook grains ahead and reheat with steam",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 20,
+     "unit": 5,
+     "skill": "cooking-legumes",
+     "recipe": "mujaddara",
+     "options": [
+      "koshari"
+     ],
+     "mastery": true,
+     "drill": {
+      "title": "Cook a grain without a recipe card",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Grains of the world worksheet",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Make a legume dish that holds well for the Sabbath",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 21,
+     "unit": 6,
+     "skill": "roasting",
+     "recipe": "roasted-vegetables",
+     "options": [
+      "shoestring-fries"
+     ],
+     "drill": {
+      "title": "Cut vegetables to roast at the same rate",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "How roasting browns food",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Roast a tray of vegetables ahead",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 22,
+     "unit": 6,
+     "skill": "handling-poultry",
+     "recipe": "shish-taouk",
+     "options": [
+      "chicken-souvlaki-pitas",
+      "jerk-chicken",
+      "chicken-yassa"
+     ],
+     "drill": {
+      "title": "Trim and cube chicken safely",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Raw poultry handling",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Marinate chicken Friday for a later meal",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 23,
+     "unit": 6,
+     "skill": "roasting",
+     "recipe": "roast-chicken-pieces",
+     "options": [
+      "bbq-pulled-chicken"
+     ],
+     "drill": {
+      "title": "Temp-check thigh and breast",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Dark vs. white meat",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Roast chicken ahead; hold and reheat",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 24,
+     "unit": 6,
+     "skill": "roasting",
+     "recipe": "roast-chicken",
+     "mastery": true,
+     "drill": {
+      "title": "Break down a cooked chicken",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Carryover cooking and resting",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Roast chicken as the Sabbath centerpiece",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 25,
+     "unit": 7,
+     "skill": "cooking-fish",
+     "recipe": "baked-salmon",
+     "options": [
+      "bbq-salmon",
+      "honey-soy-salmon",
+      "pineapple-teriyaki-salmon",
+      "blackened-cod",
+      "coconut-crusted-fish",
+      "moqueca"
+     ],
+     "drill": {
+      "title": "Check a fillet for pin bones",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Fins and scales: clean vs. unclean species",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Plan a fish dish that serves well cold",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 26,
+     "unit": 7,
+     "skill": "cooking-fish",
+     "recipe": "steamed-fish",
+     "options": [
+      "pineapple-teriyaki-salmon",
+      "honey-soy-salmon",
+      "bbq-salmon",
+      "blackened-cod",
+      "coconut-crusted-fish",
+      "moqueca"
+     ],
+     "drill": {
+      "title": "Judge freshness by smell, eyes, flesh",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Store-bought fish: reading labels and names",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Steam fish and chill for a cold plate",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 27,
+     "unit": 7,
+     "skill": "cooking-fish",
+     "recipe": "poached-cod",
+     "options": [
+      "moqueca",
+      "pineapple-teriyaki-salmon",
+      "honey-soy-salmon",
+      "bbq-salmon",
+      "blackened-cod",
+      "coconut-crusted-fish"
+     ],
+     "drill": {
+      "title": "Test doneness by flaking",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Why fish cooks faster than meat",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Make tomato sauce ahead; poach Friday",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 28,
+     "unit": 7,
+     "skill": "cooking-fish",
+     "recipe": "pan-seared-trout",
+     "options": [
+      "blackened-cod",
+      "coconut-crusted-fish",
+      "pineapple-teriyaki-salmon",
+      "honey-soy-salmon",
+      "bbq-salmon",
+      "moqueca"
+     ],
+     "mastery": true,
+     "drill": {
+      "title": "Skin a fillet",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Species ID quiz",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Cold fish salad for the Sabbath table",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 29,
+     "unit": 8,
+     "skill": "making-stock",
+     "recipe": "vegetable-stock",
+     "drill": {
+      "title": "Skim and strain a stock",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Stock vs. broth; why simmer, not boil",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Freeze stock in portions",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 30,
+     "unit": 8,
+     "skill": "making-stock",
+     "recipe": "chicken-stock",
+     "drill": {
+      "title": "Cool stock quickly and lift off fat",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Gelatin and body in stock",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Make stock ahead for the week",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 31,
+     "unit": 8,
+     "skill": "building-soup",
+     "recipe": "matzo-ball-soup",
+     "options": [
+      "grilled-cheese-tomato-soup",
+      "red-lentil-soup",
+      "minestrone"
+     ],
+     "drill": {
+      "title": "Season a soup by tasting in stages",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Soup families: clear, thick, puréed",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Soup that improves when made ahead",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 32,
+     "unit": 8,
+     "skill": "building-soup",
+     "recipe": "minestrone",
+     "options": [
+      "matzo-ball-soup",
+      "red-lentil-soup"
+     ],
+     "mastery": true,
+     "drill": {
+      "title": "Make stock without a recipe card",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Clean labels on boxed stock and bouillon",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Soup as the Sabbath starter",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 33,
+     "unit": 9,
+     "skill": "dressings",
+     "recipe": "chopped-salad-vinaigrette",
+     "options": [
+      "chicken-caesar",
+      "fattoush"
+     ],
+     "drill": {
+      "title": "Fix a dish that's too salty, flat, or sour",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Salt, acid, fat, heat",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Draft the capstone menu",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 34,
+     "unit": 9,
+     "skill": "one-pot-stews",
+     "recipe": "beef-stew",
+     "options": [
+      "beef-chili",
+      "peanut-stew"
+     ],
+     "drill": {
+      "title": "Blind taste test; name what's missing",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "How cuisines balance differently",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Write the shopping list and prep timeline",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 35,
+     "unit": 9,
+     "kind": "practice",
+     "drill": {
+      "title": "Taste and adjust without a recipe",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Holding and reheating a full meal",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Shop and do Thursday prep",
+      "minutes": 45
+     }
+    },
+    {
+     "week": 36,
+     "unit": 9,
+     "kind": "capstone",
+     "drill": {
+      "title": "Run the kitchen unaided",
+      "minutes": 40
+     },
+     "knowledge": {
+      "title": "Reflection: what worked, what to change",
+      "minutes": 35
+     },
+     "sabbath": {
+      "title": "Serve the meal for the Sabbath",
+      "minutes": 45
+     }
+    }
+   ],
+   "cards": [
+    {
+     "id": "thick-burgers",
+     "title": "Thick beef burgers",
+     "cuisine": "american",
+     "skills": [
+      "temping-meat",
+      "searing"
+     ],
+     "minutes": 40,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "sandwich-loaf",
+     "title": "Sandwich loaf",
+     "cuisine": "american",
+     "skills": [
+      "yeast-dough"
+     ],
+     "minutes": 210,
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "bread"
+    },
+    {
+     "id": "dinner-rolls",
+     "title": "Dinner rolls",
+     "cuisine": "american",
+     "skills": [
+      "yeast-dough"
+     ],
+     "minutes": 180,
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "bread"
+    },
+    {
+     "id": "tabbouleh",
+     "title": "Tabbouleh",
+     "cuisine": "lebanese",
+     "skills": [
+      "fine-chopping"
+     ],
+     "minutes": 40,
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "lots"
+     },
+     "art": "salad"
+    },
+    {
+     "id": "israeli-salad",
+     "title": "Israeli salad",
+     "cuisine": "israeli",
+     "skills": [
+      "dicing"
+     ],
+     "minutes": 25,
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "lots"
+     },
+     "art": "salad"
+    },
+    {
+     "id": "garlic-green-beans",
+     "title": "Garlic green beans",
+     "cuisine": "american",
+     "skills": [
+      "sauteing",
+      "blanching"
+     ],
+     "minutes": 25,
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "lots"
+     },
+     "art": "side"
+    },
+    {
+     "id": "beef-picadillo",
+     "title": "Beef picadillo",
+     "cuisine": "cuban",
+     "skills": [
+      "flavor-base",
+      "sauteing"
+     ],
+     "minutes": 45,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "sweet-savory",
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "cajun-rice-dressing",
+     "title": "Cajun rice dressing with beef",
+     "cuisine": "louisiana",
+     "skills": [
+      "flavor-base",
+      "sauteing"
+     ],
+     "minutes": 60,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "rice-pilaf",
+     "title": "Rice pilaf",
+     "cuisine": "turkish",
+     "skills": [
+      "cooking-grains"
+     ],
+     "minutes": 35,
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "side"
+    },
+    {
+     "id": "roasted-vegetables",
+     "title": "Roasted vegetables",
+     "cuisine": "american",
+     "skills": [
+      "roasting",
+      "oven-browning"
+     ],
+     "minutes": 50,
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "lots"
+     },
+     "art": "side"
+    },
+    {
+     "id": "roast-chicken-pieces",
+     "title": "Roast chicken pieces",
+     "cuisine": "american",
+     "skills": [
+      "roasting",
+      "handling-poultry"
+     ],
+     "minutes": 60,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "baked-salmon",
+     "title": "Baked salmon with lemon and herbs",
+     "cuisine": "american",
+     "skills": [
+      "cooking-fish"
+     ],
+     "minutes": 30,
+     "tags": {
+      "protein": "salmon",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "fish"
+    },
+    {
+     "id": "steamed-fish",
+     "title": "Steamed fish with ginger and scallion",
+     "cuisine": "chinese",
+     "skills": [
+      "cooking-fish"
+     ],
+     "minutes": 30,
+     "tags": {
+      "protein": "white-fish",
+      "flavors": [
+       "ginger-soy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "art": "fish"
+    },
+    {
+     "id": "poached-cod",
+     "title": "Cod poached in tomato sauce",
+     "cuisine": "italian",
+     "skills": [
+      "cooking-fish",
+      "building-a-sauce"
+     ],
+     "minutes": 40,
+     "tags": {
+      "protein": "white-fish",
+      "flavors": [
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "art": "fish"
+    },
+    {
+     "id": "pan-seared-trout",
+     "title": "Pan-seared trout",
+     "cuisine": "american",
+     "skills": [
+      "cooking-fish",
+      "searing"
+     ],
+     "minutes": 30,
+     "tags": {
+      "protein": "white-fish",
+      "flavors": [
+       "mild-buttery",
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "art": "fish"
+    },
+    {
+     "id": "vegetable-stock",
+     "title": "Vegetable stock",
+     "cuisine": "french",
+     "skills": [
+      "making-stock"
+     ],
+     "minutes": 90,
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "lots"
+     },
+     "art": "soup"
+    },
+    {
+     "id": "chicken-stock",
+     "title": "Chicken stock",
+     "cuisine": "french",
+     "skills": [
+      "making-stock"
+     ],
+     "minutes": 240,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "soup"
+    }
+   ],
+   "titles": {
+    "shakshuka": "Shakshuka",
+    "huevos-rancheros": "Huevos rancheros",
+    "oyakodon": "Oyakodon",
+    "thick-burgers": "Thick beef burgers",
+    "smash-burgers": "Smash burgers + quick pickles",
+    "lamb-kofta": "Lamb kofta with yogurt sauce",
+    "chicken-fried-rice": "Chicken fried rice",
+    "jollof-rice": "Jollof rice with chicken",
+    "meatloaf": "Meatloaf with glaze",
+    "swedish-meatballs": "Swedish meatballs",
+    "pita-bread": "Pita bread",
+    "homemade-pizza": "Homemade pizza",
+    "sandwich-loaf": "Sandwich loaf",
+    "cinnamon-rolls": "Cinnamon rolls",
+    "dinner-rolls": "Dinner rolls",
+    "challah": "Challah",
+    "fish-tacos": "Pico de gallo + Baja fish tacos",
+    "ratatouille": "Ratatouille",
+    "minestrone": "Minestrone",
+    "tabbouleh": "Tabbouleh",
+    "chimichurri-steak": "Chimichurri steak",
+    "fattoush": "Fattoush",
+    "vegetable-stir-fry": "Vegetable stir-fry with tofu",
+    "spring-rolls": "Fresh spring rolls",
+    "chicken-fajitas": "Chicken fajitas",
+    "israeli-salad": "Israeli salad",
+    "chopped-salad-vinaigrette": "Chickpea chopped salad + vinaigrette",
+    "garlic-green-beans": "Garlic green beans",
+    "japchae": "Japchae",
+    "beef-picadillo": "Beef picadillo",
+    "chana-masala": "Chana masala",
+    "chicken-yassa": "Chicken yassa",
+    "cajun-rice-dressing": "Cajun rice dressing with beef",
+    "lomo-saltado": "Lomo saltado",
+    "beef-ragu": "Beef ragù",
+    "beef-chili": "Beef chili",
+    "chicken-tagine": "Chicken tagine with olives",
+    "red-lentil-soup": "Red lentil soup (mercimek)",
+    "misir-wot": "Misir wot",
+    "red-beans-and-rice": "Red beans and rice",
+    "rice-pilaf": "Rice pilaf",
+    "mujaddara": "Mujaddara",
+    "koshari": "Koshari",
+    "roasted-vegetables": "Roasted vegetables",
+    "shoestring-fries": "Baked shoestring fries",
+    "shish-taouk": "Shish taouk",
+    "chicken-souvlaki-pitas": "Chicken souvlaki pitas",
+    "jerk-chicken": "Jerk chicken",
+    "roast-chicken-pieces": "Roast chicken pieces",
+    "bbq-pulled-chicken": "BBQ pulled chicken + coleslaw",
+    "roast-chicken": "Roast chicken + pan gravy",
+    "baked-salmon": "Baked salmon with lemon and herbs",
+    "bbq-salmon": "BBQ-rubbed salmon",
+    "honey-soy-salmon": "Broiled honey-soy salmon",
+    "pineapple-teriyaki-salmon": "Pineapple teriyaki salmon",
+    "blackened-cod": "Blackened cod",
+    "coconut-crusted-fish": "Coconut-crusted fish with pineapple salsa",
+    "moqueca": "Moqueca (Brazilian coconut fish stew)",
+    "steamed-fish": "Steamed fish with ginger and scallion",
+    "poached-cod": "Cod poached in tomato sauce",
+    "pan-seared-trout": "Pan-seared trout",
+    "vegetable-stock": "Vegetable stock",
+    "chicken-stock": "Chicken stock",
+    "matzo-ball-soup": "Matzo ball soup from a whole chicken",
+    "grilled-cheese-tomato-soup": "Grilled cheese + tomato soup",
+    "chicken-caesar": "Chicken Caesar + homemade dressing & croutons",
+    "beef-stew": "Beef stew",
+    "peanut-stew": "Peanut stew (maafe)"
+   }
+  }
+ },
  "tastes": {
   "proteins": [
    {

@@ -72,3 +72,43 @@ CREATE TABLE IF NOT EXISTS taste_learned (
   PRIMARY KEY (profile_id, kind, item)
 );
 CREATE INDEX IF NOT EXISTS taste_learned_family ON taste_learned(family_id);
+
+-- Phase 12b (plan §12.4): which program a course is. No row is Cook Around
+-- the World, so courses from before need nothing. program: a Level's id from
+-- content/levels/ ('level-3'). No REFERENCES on course_id, like the tables
+-- above, so nothing here waits on a course's own rows.
+CREATE TABLE IF NOT EXISTS course_programs (
+  course_id  TEXT PRIMARY KEY,
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  program    TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS course_programs_family ON course_programs(family_id);
+
+-- Phase 12c (plan §12.4): a Level week's drill, knowledge, and Sabbath task,
+-- checked off per profile. week: the Level week (1 to 36); part: which page.
+-- A parent's take back sets removed_at, and its Undo clears it; a row taken
+-- back counts for nothing. Checking a part off again counts it again.
+CREATE TABLE IF NOT EXISTS level_tasks (
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  course_id  TEXT NOT NULL,
+  week       INTEGER NOT NULL,
+  part       TEXT NOT NULL CHECK (part IN ('drill', 'knowledge', 'sabbath')),
+  profile_id TEXT NOT NULL,
+  done_at    TEXT NOT NULL,
+  removed_at TEXT,
+  PRIMARY KEY (course_id, week, part, profile_id)
+);
+CREATE INDEX IF NOT EXISTS level_tasks_family ON level_tasks(family_id, profile_id);
+
+-- Phase 12c: a mastery week's "Why did it work?", one per profile on the
+-- cook. Its own table, since the draft can't add a column to attempt_profiles.
+CREATE TABLE IF NOT EXISTS mastery_notes (
+  attempt_id TEXT NOT NULL,
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  profile_id TEXT NOT NULL,
+  why        TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  PRIMARY KEY (attempt_id, profile_id)
+);
+CREATE INDEX IF NOT EXISTS mastery_notes_family ON mastery_notes(family_id);

@@ -122,6 +122,8 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // shopped is the serving count its shopping trip bought for (§6.6).
 // onReflect(cookId, reflection): saves one profile's reflection (§3).
 // onDone(): the cook is finished and reflected on; the app shows what it earned (Phase 5).
+// mastery: a Level's mastery week (§12.4): the card says to cook it on one's
+// own, and Reflect asks each profile why it worked.
 // lesson: a family recipe already in lesson shape (§6.10), with `extra`, its
 // typed-in ingredients, beside the registry. Otherwise lessonId is loaded.
 // preview: the owner reading a lesson as a learner (§7.5): cook mode opens
@@ -132,7 +134,7 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // the family cooks (§6.21), or null for the lesson itself; a cook already
 // under way keeps the version it started in. leaveOut: [{ ingredient, who }],
 // optional ingredients someone cooking rated 1 star, left out (§6.21).
-export async function openLesson(mount, { profile, family, lessonId, variation = null, leaveOut = [], lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
+export async function openLesson(mount, { profile, family, lessonId, variation = null, leaveOut = [], lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null, mastery = false, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
   const [published, B] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
   const kept = readState(profile.id, B.id);
   const L = lessonVersion(B, kept?.cookId ? kept.variation ?? null : variation);
@@ -301,7 +303,8 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
       ...view.leftOut.map((id) => `Leave out the ${esc(name(id).toLowerCase())}.`),
       ...hated.map((x) => `Leave out the ${esc(name(x.ingredient).toLowerCase())} (${esc(x.who.join(' and '))} ${x.who.length === 1 ? "doesn't" : "don't"} like it).`),
     ];
-    const swaps = changes.length ? `<p class="${T.note}"><b>For your family:</b> ${changes.join(' ')}</p>` : '';
+    const swaps = (changes.length ? `<p class="${T.note}"><b>For your family:</b> ${changes.join(' ')}</p>` : '')
+      + (mastery ? `<p class="${T.note}"><b>Mastery: cook it on your own.</b> This week checks the skill you've practised. Afterwards, say why it worked.</p>` : '');
     // Profiles cooking together share one cook, and it counts for each of them (§1).
     const who = crew.length
       ? `<div class="${quest ? 'serve' : 'p-serve'} crew"><span class="${quest ? 'lbl' : 'p-lbl'}">Cooking with someone?</span><div class="${quest ? 'sizes' : 'p-sizes'}" role="group" aria-label="Who's cooking">${crew.map((p) => `<button type="button" class="${quest ? 'size' : 'p-size'}" role="checkbox" aria-checked="${S.with.includes(p.id)}" data-act="crew" data-id="${esc(p.id)}">${esc(p.name)}</button>`).join('')}</div></div>`
@@ -500,11 +503,12 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
     const people = onCookNow();
     const one = people.length === 1;
     const block = (p) => {
-      const r = (S.refl[p.id] ??= { rating: 0, notes: '', transfer: '' });
+      const r = (S.refl[p.id] ??= { rating: 0, notes: '', transfer: '', why: '' });
       return `<div class="${quest ? 'refl' : 'p-refl p-card p-lined'}">${one ? '' : `<p class="${T.kick}">${esc(p.name)}</p>`}
         <h4 class="${T.h}">How did it turn out?</h4>${rateRow(p.id, r.rating, `${p.name}'s rating`)}
         <label for="refl-n-${esc(p.id)}">What would you change next time?</label><textarea id="refl-n-${esc(p.id)}" data-refl="${esc(p.id)}" data-f="notes" maxlength="1000">${esc(r.notes)}</textarea>
-        <label for="refl-t-${esc(p.id)}">What other dish could use this move? <span>(optional)</span></label><textarea id="refl-t-${esc(p.id)}" data-refl="${esc(p.id)}" data-f="transfer" maxlength="300" placeholder="Like chili, because it starts with spices in oil">${esc(r.transfer)}</textarea></div>`;
+        <label for="refl-t-${esc(p.id)}">What other dish could use this move? <span>(optional)</span></label><textarea id="refl-t-${esc(p.id)}" data-refl="${esc(p.id)}" data-f="transfer" maxlength="300" placeholder="Like chili, because it starts with spices in oil">${esc(r.transfer)}</textarea>${mastery
+          ? `<label for="refl-w-${esc(p.id)}">Mastery: why did it work?</label><textarea id="refl-w-${esc(p.id)}" data-refl="${esc(p.id)}" data-f="why" maxlength="1000" placeholder="What you did, and why it made the dish come out right">${esc(r.why ?? '')}</textarea>` : ''}</div>`;
     };
     return `<article class="${T.card}">${tape}<p class="${T.kick}">${quest ? 'Quest log' : 'Recipe notes'}</p><h4>${esc(L.title)}</h4>
       ${people.map(block).join('')}
@@ -649,7 +653,7 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
         if (onReflect && S.cookId) {
           onCookNow().forEach((p, i) => {
             const r = S.refl?.[p.id] ?? {};
-            onReflect(S.cookId, { profile_id: p.id, rating: r.rating || null, notes: r.notes || null, transfer: r.transfer || null, ...(i === 0 && S.eater ? { eater_rating: S.eater } : {}) });
+            onReflect(S.cookId, { profile_id: p.id, rating: r.rating || null, notes: r.notes || null, transfer: r.transfer || null, ...(mastery ? { why: r.why || '' } : {}), ...(i === 0 && S.eater ? { eater_rating: S.eater } : {}) });
           });
         }
         S.stage = 'done';

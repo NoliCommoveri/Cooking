@@ -19,6 +19,7 @@ async function setup() {
   return { env, a, b, ava, eli };
 }
 const items = (x) => [...x.sections.flatMap((s) => s.items), ...(x.may_have ?? [])];
+const tick = () => new Promise((ok) => setTimeout(ok, 5));
 
 test("what you'll need: undated lessons first, then week by week, with a course's weeks ahead", async () => {
   const { a, ava, eli } = await setup();
@@ -37,6 +38,9 @@ test("what you'll need: undated lessons first, then week by week, with a course'
 test('a shopping list: preview the next lessons, leave off what is on hand, check off the rest', async () => {
   const { a, ava } = await setup();
   await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava], servings: 6 });
+  // The queue goes by when each was added; two added in the same millisecond
+  // would come in either order.
+  await tick();
   await a.post('/api/queue', { lesson_id: 'buttermilk-biscuits', profile_ids: [ava], servings: 12 });
   await a.put('/api/pantry', { ingredient_ids: ['olive-oil'] });
   const p = (await a.post('/api/shopping/preview', { count: 1 })).body;

@@ -17,8 +17,9 @@ import { servingOptions } from '../content/scale.js';
 import { courseEntries, numberCourse } from '../content/course.js';
 import { schedule, weekOf, addDays, localDay, isDay, isSabbath, DUE_DAY } from './schedule.js';
 import { isRecipeId, lessonFor, recipeNames, recipeVisible } from './recipes.js';
-import { tasteContext, versionFor, bestPlan, hatedExtras, versionSummary } from './picks.js';
+import { tasteContext, versionFor, bestPlan, hatedExtras, versionSummary, levelPlan, levelCandidates, cookedBy } from './picks.js';
 import { variationChoices } from './variations.js';
+import { nextReleaseOn } from './release.js';
 
 const id = () => randomHex(8);
 const ACTIVE = ['requested', 'assigned', 'shopped'];
@@ -34,6 +35,8 @@ const unitOne = LIBRARY.course.filter((d) => d.unit === 1).map((d) => d.id);
 
 const lessonById = Object.fromEntries(LIBRARY.lessons.map((L) => [L.id, L]));
 const dishById = Object.fromEntries(LIBRARY.course.map((d) => [d.id, d]));
+// The Levels (§12), by id: what a Level course can be, next release only.
+const LEVELS = LIBRARY.levels ?? {};
 const placeholders = (list) => list.map(() => '?').join(', ');
 
 // ---------- small helpers ----------
@@ -178,6 +181,7 @@ async function approveStatements(env, s, fam, { row, L, pid, replace, servings, 
 // goes where the suggested order puts it, kept unless it's a second choice in
 // a pick-one group.
 async function planOf(env, course) {
+  if (course.program) return levelPlanOf(env, course);
   const { results } = await env.DB.prepare('SELECT lesson_id, position, removed FROM course_lessons WHERE course_id = ? AND family_id = ? ORDER BY position')
     .bind(course.id, course.family_id).all();
   const known = results.filter((r) => dishById[r.lesson_id]);
@@ -187,6 +191,71 @@ async function planOf(env, course) {
   const saved = new Set(known.map((r) => r.lesson_id));
   for (const e of courseEntries(LIBRARY.course)) e.ids.slice(1).forEach((x) => { if (!saved.has(x) && e.pickOne) removed.push(x); });
   return { order, removed, skipped };
+}
+
+// A Level course's plan (§12.4): each week's recipe in week order, one Level
+// week a calendar week, so the schedule works as it does for any course. A
+// row's position is its week; a week with no row keeps the Level's own
+// recipe. The weeks with no recipe yet (the practice run and the capstone)
+// aren't in it.
+async function levelPlanOf(env, course) {
+  const V = LEVELS[course.program];
+  const { results } = await env.DB.prepare('SELECT lesson_id, position, removed FROM course_lessons WHERE course_id = ? AND family_id = ?')
+    .bind(course.id, course.family_id).all();
+  const byWeek = Object.fromEntries(results.map((r) => [r.position, r]));
+  const weeks = V.weeks.filter((w) => w.recipe).map((w) => ({ week: w.week, id: byWeek[w.week]?.lesson_id ?? w.recipe, removed: byWeek[w.week]?.removed ?? KEPT }));
+  return {
+    order: weeks.map((x) => x.id), removed: weeks.filter((x) => x.removed).map((x) => x.id),
+    skipped: weeks.filter((x) => x.removed === SKIPPED).map((x) => x.id), weeks,
+  };
+}
+
+// picks: { week: recipe id } (a week not named keeps the Level's own);
+// removed: { week: KEPT | SKIPPED }, kept from the saved plan.
+const levelPlanStatements = (env, course, V, picks = {}, removed = {}) => [
+  env.DB.prepare('DELETE FROM course_lessons WHERE course_id = ? AND family_id = ?').bind(course.id, course.family_id),
+  ...V.weeks.filter((w) => w.recipe).map((w) => env.DB.prepare('INSERT INTO course_lessons (course_id, family_id, lesson_id, position, removed) VALUES (?, ?, ?, ?, ?)')
+    .bind(course.id, course.family_id, picks[w.week] ?? w.recipe, w.week, removed[w.week] ?? KEPT)),
+];
+
+// A parent's recipes for a Level's weeks (12d), checked: each is one of the
+// week's recipes (its options, or another with its skill), none is in two
+// weeks, and a mastery week doesn't repeat weeks 1-3 of its unit (owner,
+// 2026-10-24). picks: { week: id } over the plan it changes.
+function levelPicksInput(V, list, base = {}) {
+  if (!Array.isArray(list)) fail(400, 'invalid', "A Level course's weeks list each week's recipe.");
+  const picks = { ...base };
+  for (const x of list) {
+    const w = V.weeks.find((y) => y.week === Number(x?.week) && y.recipe) ?? fail(400, 'invalid', 'No such week.');
+    const id = String(x.id ?? '');
+    const { options, more } = levelCandidates(V, w);
+    if (![...options, ...more].includes(id)) fail(400, 'invalid', `That recipe isn't one of week ${w.week}'s.`);
+    picks[w.week] = id;
+  }
+  const seen = {};
+  for (const w of V.weeks.filter((y) => y.recipe)) {
+    const id = picks[w.week] ?? w.recipe;
+    if (seen[id]) fail(400, 'invalid', `A recipe can be in one week only: ${V.titles[id] ?? lessonById[id]?.title ?? id} is in weeks ${seen[id]} and ${w.week}.`);
+    seen[id] = w.week;
+  }
+  return picks;
+}
+const savedPicks = (plan) => Object.fromEntries(plan.weeks.map((x) => [x.week, x.id]));
+const savedRemoved = (plan) => Object.fromEntries(plan.weeks.map((x) => [x.week, x.removed]));
+
+// Which program each of a family's courses is: a Level's id, or null for
+// Cook Around the World (no row). Empty before the draft's table exists. A
+// Level course waits, out of sight, while the next release is off for the
+// family (§8.6): Undo launch puts the app back as it was, and nothing is lost.
+async function withPrograms(env, fid, rows) {
+  let progs = {};
+  try {
+    const { results } = await env.DB.prepare('SELECT course_id, program FROM course_programs WHERE family_id = ?').bind(fid).all();
+    progs = Object.fromEntries(results.filter((r) => LEVELS[r.program]).map((r) => [r.course_id, r.program]));
+  } catch { /* the draft isn't applied yet */ }
+  const out = rows.map((c) => ({ ...c, program: progs[c.id] ?? null }));
+  if (!out.some((c) => c.program) || (await nextReleaseOn(env.DB, fid))) return out;
+  return out.filter((c) => !c.program);
 }
 
 // A new course with no plan sent (Chef Ruth's): the best dish of each
@@ -227,6 +296,7 @@ async function courseProfiles(env, course) {
 // The dishes in a course plan with numbers, and the ones the schedule can use:
 // written, kept, and not hidden by the family's diet settings.
 async function courseLessons(env, course, fam) {
+  if (course.program) return levelLessons(env, course, fam);
   const plan = await planOf(env, course);
   const numbered = numberCourse(LIBRARY.course, plan);
   const kept = numbered.entries.flatMap((e) => e.ids);
@@ -236,6 +306,70 @@ async function courseLessons(env, course, fam) {
     usable: kept.filter((x) => shown.has(x)),
     unwritten: kept.filter((x) => !lessonById[x]).length,
     hidden: kept.filter((x) => lessonById[x] && !shown.has(x)).length,
+  };
+}
+
+// A Level course's recipes (§12.4). They keep the kitchen's usual lesson
+// numbers; the parent sees each one's Level week. unwritten counts the weeks
+// with no recipe yet too.
+async function levelLessons(env, course, fam) {
+  const V = LEVELS[course.program];
+  const plan = await levelPlanOf(env, course);
+  const kept = plan.weeks.filter((x) => !x.removed).map((x) => x.id);
+  const shown = visible(fam);
+  return {
+    plan, labels: suggestedLabels, total: numberCourse(LIBRARY.course).total, kept,
+    usable: kept.filter((x) => shown.has(x)),
+    unwritten: kept.filter((x) => !lessonById[x]).length + V.weeks.filter((w) => !w.recipe).length,
+    hidden: kept.filter((x) => lessonById[x] && !shown.has(x)).length,
+    level: V, weekOf: Object.fromEntries(plan.weeks.map((x) => [x.id, x.week])), idOf: Object.fromEntries(plan.weeks.map((x) => [x.week, x.id])),
+  };
+}
+
+// A Level week's three part pages (§12.2), in order.
+const PARTS = ['drill', 'knowledge', 'sabbath'];
+
+// The parts the course's profiles have checked off (12c), not taken back:
+// { "week:part:profile": done_at }. Empty before the draft's table exists.
+async function levelTasks(env, course, profiles) {
+  if (!course.program || !profiles.length) return {};
+  try {
+    const { results } = await env.DB.prepare(`SELECT week, part, profile_id, done_at FROM level_tasks
+        WHERE course_id = ? AND family_id = ? AND removed_at IS NULL AND profile_id IN (${placeholders(profiles)})`).bind(course.id, course.family_id, ...profiles).all();
+    return Object.fromEntries(results.map((r) => [`${r.week}:${r.part}:${r.profile_id}`, r.done_at]));
+  } catch { return {}; }
+}
+
+// The Level week a course is on: this week's first recipe's, or next week's
+// when this one is skipped or empty.
+const levelWeekNow = (st) => {
+  const at = [...st.sched.this_week.lessons, ...st.sched.next_week.lessons][0];
+  return at ? st.lessons.weekOf[at.id] ?? null : null;
+};
+
+// What a profile's kitchen shows of its Level course (12c): this week with
+// its recipe and three parts, and the parts still open from weeks already
+// reached (their recipe cooked). A part not checked off never holds the
+// schedule; it stays open until it is.
+function levelFor(st, pid, day) {
+  const V = st.lessons.level, now = levelWeekNow(st);
+  const unitName = Object.fromEntries(V.units.map((u) => [u.number, u.name]));
+  const partOut = (w, part) => ({ week: w.week, part, ...w[part], done_at: st.tasks[`${w.week}:${part}:${pid}`] ?? null });
+  const weekOut = (w) => {
+    const id = st.lessons.idOf[w.week] ?? null;
+    return {
+      week: w.week, unit: w.unit, unit_name: unitName[w.unit], mastery: Boolean(w.mastery), kind: w.kind ?? null,
+      recipe: id, recipe_title: id ? lessonById[id]?.title ?? V.titles[id] ?? id : null, recipe_written: Boolean(id && lessonById[id]), recipe_done: Boolean(id && st.done[id]),
+      parts: PARTS.map((part) => partOut(w, part)),
+    };
+  };
+  const reached = V.weeks.filter((w) => w.week !== now && st.lessons.idOf[w.week] && st.done[st.lessons.idOf[w.week]]);
+  return {
+    course_id: st.course.id, id: V.id, name: V.name, weeks: V.weeks.length, sabbath: isSabbath(day),
+    week: now ? weekOut(V.weeks.find((w) => w.week === now)) : null,
+    open: reached.flatMap((w) => PARTS.map((part) => partOut(w, part))).filter((x) => !x.done_at),
+    // The recipes of mastery weeks: the player says "cook it on your own" (§12.4).
+    mastery: V.weeks.filter((w) => w.mastery && st.lessons.idOf[w.week]).map((w) => st.lessons.idOf[w.week]),
   };
 }
 
@@ -295,10 +429,11 @@ async function courseState(env, course, fam, day, tz) {
   const { done, free } = await courseDone(env, course, profiles, tz);
   const weeks = await courseWeeks(env, course);
   const taken = await courseTaken(env, course, profiles, lessons.usable);
-  return { course, profiles, lessons, done, taken, sched: schedule({ course, lessons: lessons.usable, done, free, taken, weeks, today: day }) };
+  const tasks = await levelTasks(env, course, profiles);
+  return { course, profiles, lessons, done, taken, tasks, sched: schedule({ course, lessons: lessons.usable, done, free, taken, weeks, today: day }) };
 }
 
-const activeCourses = async (env, fid) => (await env.DB.prepare('SELECT * FROM courses WHERE family_id = ? AND archived_at IS NULL ORDER BY created_at, id').bind(fid).all()).results;
+const activeCourses = async (env, fid) => withPrograms(env, fid, (await env.DB.prepare('SELECT * FROM courses WHERE family_id = ? AND archived_at IS NULL ORDER BY created_at, id').bind(fid).all()).results);
 
 // Brings the queue's course rows in line with each schedule: this week's
 // unfinished lessons are queued for the course's profiles (§6.18); a course row that's no longer due goes, unless it was shopped for;
@@ -406,25 +541,37 @@ export function itemOut(r, who, labels = suggestedLabels, names = {}) {
 
 function courseOut(st, fam, rowsByLesson, version = () => null) {
   const { course, profiles, lessons, sched } = st;
+  const V = lessons.level;
   const lessonOut = (x) => {
     const L = lessonById[x.id];
     const q = rowsByLesson[`${course.id}:${x.id}`];
+    // A Level week's recipe shows its week, not its lesson number.
+    const week = V ? lessons.weekOf[x.id] ?? null : null;
     return {
-      lesson_id: x.id, title: L?.title ?? x.id, label: lessons.labels[x.id] ?? null, image: L?.image ?? null, unit: L?.unit ?? null,
+      lesson_id: x.id, title: L?.title ?? x.id, label: V ? (week ? `Week ${week}` : null) : lessons.labels[x.id] ?? null, week, image: L?.image ?? null, unit: L?.unit ?? null,
       foundation: Boolean(dishById[x.id]?.pickOne), done: x.done, overdue: fam.mode === 'homeschool' ? x.overdue : false, extra: Boolean(x.extra),
       queue_id: q?.id ?? null, servings: q?.servings ?? null, servings_options: L ? servingOptions(L) : [], status: q?.status ?? null,
       version: version(x.id, profiles),
     };
   };
   const week = (w) => ({ week: w.week, skipped: w.skipped, extra: w.extra, lessons: w.lessons.map(lessonOut) });
+  // The Level week the course is on, for "Week 5 of 36", and who has
+  // checked off each of its parts, for the parent's Take back (12c).
+  const now = V ? levelWeekNow(st) : null;
+  const lw = now ? V.weeks.find((w) => w.week === now) : null;
   return {
     id: course.id, name: course.name, start_date: course.start_date, per_week: course.per_week, profile_ids: profiles,
+    program: course.program,
+    level: V ? {
+      id: V.id, name: V.name, weeks: V.weeks.length, week: now,
+      parts: lw ? PARTS.map((part) => ({ part, title: lw[part].title, minutes: lw[part].minutes, done: profiles.filter((pid) => st.tasks[`${now}:${part}:${pid}`]) })) : [],
+    } : null,
     this_week: week(sched.this_week), next_week: week(sched.next_week), due_day: DUE_DAY,
     started: sched.started, planned_finish: sched.planned_finish, projected_finish: sched.projected_finish,
     weeks_behind: sched.weeks_behind, lessons_behind: sched.lessons_behind,
     total: sched.total, done: sched.done, unwritten: lessons.unwritten, hidden: lessons.hidden,
     // Recipes skipped with Skip this recipe, each with Put back.
-    skipped_recipes: lessons.plan.skipped.map((x) => ({ lesson_id: x, title: lessonById[x]?.title ?? dishById[x]?.title ?? x })),
+    skipped_recipes: lessons.plan.skipped.map((x) => ({ lesson_id: x, title: lessonById[x]?.title ?? dishById[x]?.title ?? V?.titles[x] ?? x, week: V ? lessons.weekOf[x] : null })),
   };
 }
 
@@ -619,6 +766,8 @@ export function register(on) {
       mode: fam.mode,
       versions,
       leave_out: leaveOut,
+      // A profile on a Level course: its week, parts, and mastery recipes (12c).
+      level: mine?.lessons.level ? levelFor(mine, pid, day) : null,
       // The profile's path, in its course plan's order (or the suggested one),
       // for its kitchen's "Coming up" and the early flag (owner, 2026-10-23).
       order: mine ? mine.lessons.kept : null,
@@ -728,13 +877,22 @@ export function register(on) {
     const fam = await family(env, s.family_id);
     const { results } = await env.DB.prepare('SELECT * FROM courses WHERE family_id = ? ORDER BY archived_at IS NOT NULL, created_at, id').bind(s.family_id).all();
     const out = [];
-    for (const c of results) {
+    for (const c of await withPrograms(env, s.family_id, results)) {
       const plan = await planOf(env, c);
+      if (c.program) {
+        const lessons = await courseLessons(env, c, fam);
+        out.push({
+          id: c.id, name: c.name, start_date: c.start_date, per_week: c.per_week, archived_at: c.archived_at, program: c.program,
+          profile_ids: await courseProfiles(env, c), plan: plan.weeks.map((x) => ({ id: x.id, week: x.week, removed: Boolean(x.removed) })),
+          usable: lessons.usable.length, unwritten: lessons.unwritten, hidden: lessons.hidden,
+        });
+        continue;
+      }
       const removed = new Set(plan.removed);
       const order = numberCourse(LIBRARY.course, plan).entries.flatMap((e) => [...e.ids, ...e.removed]);
       const lessons = await courseLessons(env, c, fam);
       out.push({
-        id: c.id, name: c.name, start_date: c.start_date, per_week: c.per_week, archived_at: c.archived_at,
+        id: c.id, name: c.name, start_date: c.start_date, per_week: c.per_week, archived_at: c.archived_at, program: null,
         profile_ids: await courseProfiles(env, c), plan: order.map((x) => ({ id: x, removed: removed.has(x) })),
         usable: lessons.usable.length, unwritten: lessons.unwritten, hidden: lessons.hidden,
       });
@@ -744,20 +902,45 @@ export function register(on) {
       courses: out, mode: fam.mode, weeks_on: weeksOn(fam), default_plan: defaultPlan(),
       written: LIBRARY.lessons.map((L) => L.id), hidden: LIBRARY.lessons.filter((L) => !shown.has(L.id)).map((L) => L.id),
       per_week_max: PER_WEEK_MAX,
+      // The programs a course can be, past Cook Around the World (§12.4):
+      // the Levels, with the next release. Each week with its recipe.
+      levels: (await nextReleaseOn(env.DB, s.family_id)) ? Object.values(LEVELS).map((V) => ({
+        id: V.id, name: V.name, hours: V.hours, units: V.units,
+        weeks: V.weeks.map((w) => ({ ...w, title: w.recipe ? lessonById[w.recipe]?.title ?? V.titles[w.recipe] : null })),
+      })) : [],
     };
   });
 
-  const courseInput = async (env, s, body, courseId = null) => {
-    const per = Number(body.per_week);
+  // course: the one being changed. Its program stays what it was set up as;
+  // a new one is Cook Around the World unless body.program names a Level.
+  const courseInput = async (env, s, body, course = null) => {
+    const courseId = course?.id ?? null;
+    let program = course ? course.program : null;
+    if (!course && body.program) {
+      program = String(body.program);
+      if (!LEVELS[program] || !(await nextReleaseOn(env.DB, s.family_id))) fail(400, 'invalid', 'No such program.');
+    }
+    // A Level course runs one Level week a calendar week (§12.4).
+    const per = program ? 1 : Number(body.per_week);
     if (!Number.isInteger(per) || per < 1 || per > PER_WEEK_MAX) fail(400, 'invalid', `Lessons per week must be 1 to ${PER_WEEK_MAX}.`);
     if (!isDay(body.start_date)) fail(400, 'invalid', 'Pick a start date.');
     const pids = await familyProfiles(env, s.family_id, body.profile_ids);
     // A profile is on one course at a time.
-    const { results: taken } = await env.DB.prepare(`SELECT cp.profile_id FROM course_profiles cp JOIN courses c ON c.id = cp.course_id
+    const { results: taken } = await env.DB.prepare(`SELECT DISTINCT c.id FROM course_profiles cp JOIN courses c ON c.id = cp.course_id
         WHERE cp.family_id = ? AND c.archived_at IS NULL AND c.id != ? AND cp.profile_id IN (${placeholders(pids)})`).bind(s.family_id, courseId ?? '', ...pids).all();
-    if (taken.length) fail(409, 'on_a_course', 'A profile picked is already on another course. End that course or take them off it first.');
+    if ((await withPrograms(env, s.family_id, taken)).length) fail(409, 'on_a_course', 'A profile picked is already on another course. End that course or take them off it first.');
     const name = String(body.name ?? '').trim().slice(0, 60);
-    return { per, start: weekOf(body.start_date), pids, name, plan: body.plan === undefined ? null : planInput(body.plan) };
+    // A Level's plan is its weeks, each with its recipe (12d).
+    return {
+      per, start: weekOf(body.start_date), pids, name, program,
+      plan: program || body.plan === undefined ? null : planInput(body.plan),
+      weeks: program && body.weeks !== undefined ? body.weeks : null,
+    };
+  };
+
+  const ownCourse = async (env, s, cid) => {
+    const row = await env.DB.prepare('SELECT * FROM courses WHERE id = ? AND family_id = ?').bind(cid, s.family_id).first();
+    return (row && (await withPrograms(env, s.family_id, [row]))[0]) ?? fail(404, 'not_found', 'No such course.');
   };
 
   const profileStatements = (env, course, pids) => [
@@ -773,22 +956,38 @@ export function register(on) {
       env.DB.prepare('INSERT INTO courses (id, family_id, name, start_date, per_week, created_at) VALUES (?, ?, ?, ?, ?, ?)')
         .bind(course.id, s.family_id, v.name, v.start, v.per, now()),
       ...profileStatements(env, course, v.pids),
-      ...planStatements(env, course, v.plan ?? (await defaultFor(env, s.family_id, v.pids))),
+      ...(v.program
+        ? [env.DB.prepare('INSERT INTO course_programs (course_id, family_id, program, created_at) VALUES (?, ?, ?, ?)').bind(course.id, s.family_id, v.program, now()),
+          ...levelPlanStatements(env, course, LEVELS[v.program], await levelPicksFor(env, s.family_id, v))]
+        : planStatements(env, course, v.plan ?? (await defaultFor(env, s.family_id, v.pids)))),
     ]);
     return { ok: true, id: course.id };
   });
+
+  // A new Level course's recipes: the parent's, or each week's best fit for
+  // the profiles it's for (owner, 2026-10-24: best fit picked for them).
+  async function levelPicksFor(env, fid, v) {
+    const V = LEVELS[v.program];
+    if (v.weeks) return levelPicksInput(V, v.weeks);
+    const tc = await tasteContext(env, await family(env, fid));
+    return tc ? levelPlan(tc, V, v.pids, await cookedBy(env, fid, v.pids)).picks : {};
+  }
 
   // The course's lessons already queued follow the change: new profiles are
   // put on them, and the next read reschedules them.
   on('PUT', '/api/courses/([0-9a-f]{16})', async (req, env, body, [cid]) => {
     const s = await requireParent(env, req);
-    const course = await env.DB.prepare('SELECT * FROM courses WHERE id = ? AND family_id = ?').bind(cid, s.family_id).first() ?? fail(404, 'not_found', 'No such course.');
-    const v = await courseInput(env, s, body, course.id);
+    const course = await ownCourse(env, s, cid);
+    const v = await courseInput(env, s, body, course);
     const { results: rows } = await env.DB.prepare("SELECT id FROM queue WHERE family_id = ? AND course_id = ? AND status IN ('assigned', 'shopped')").bind(s.family_id, course.id).all();
     await env.DB.batch([
       env.DB.prepare('UPDATE courses SET name = ?, start_date = ?, per_week = ? WHERE id = ? AND family_id = ?').bind(v.name, v.start, v.per, course.id, s.family_id),
       ...profileStatements(env, course, v.pids),
       ...(v.plan ? planStatements(env, course, v.plan) : []),
+      ...(v.weeks ? await (async () => {
+        const plan = await levelPlanOf(env, course);
+        return levelPlanStatements(env, course, LEVELS[course.program], levelPicksInput(LEVELS[course.program], v.weeks, savedPicks(plan)), savedRemoved(plan));
+      })() : []),
       ...rows.flatMap((r) => [
         env.DB.prepare('DELETE FROM queue_profiles WHERE queue_id = ? AND family_id = ?').bind(r.id, s.family_id),
         ...v.pids.map((pid) => env.DB.prepare('INSERT INTO queue_profiles (queue_id, family_id, profile_id) VALUES (?, ?, ?)').bind(r.id, s.family_id, pid)),
@@ -797,7 +996,6 @@ export function register(on) {
     return { ok: true };
   });
 
-  const ownCourse = async (env, s, cid) => (await env.DB.prepare('SELECT * FROM courses WHERE id = ? AND family_id = ?').bind(cid, s.family_id).first()) ?? fail(404, 'not_found', 'No such course.');
 
   // End a course; Put back restores it. Its lessons not yet shopped for leave the queue.
   on('POST', '/api/courses/([0-9a-f]{16})/end', async (req, env, body, [cid]) => {
@@ -827,16 +1025,90 @@ export function register(on) {
     return { ok: true };
   });
 
+  // ---------- a Level week's recipe (12d) ----------
+
+  // Swap recipe on a Level week: every recipe it can hold, its options first,
+  // each best first for the course's profiles, with the one it holds now.
+  on('GET', '/api/courses/([0-9a-f]{16})/level-week', async (req, env, body, [cid]) => {
+    const s = await requireParent(env, req);
+    const course = await ownCourse(env, s, cid);
+    const V = LEVELS[course.program] ?? fail(400, 'invalid', 'That course has no Level weeks.');
+    const week = Number(new URL(req.url).searchParams.get('week'));
+    const plan = await levelPlanOf(env, course);
+    const now = plan.weeks.find((x) => x.week === week) ?? fail(404, 'not_found', 'No such week.');
+    const pids = await courseProfiles(env, course);
+    const tc = await tasteContext(env, await family(env, s.family_id)) ?? fail(404, 'not_available', 'Not available yet.');
+    const fits = levelPlan(tc, V, pids, await cookedBy(env, s.family_id, pids)).weeks.find((x) => x.week === week);
+    // A recipe in another week can't be picked here.
+    const elsewhere = new Set(plan.weeks.filter((x) => x.week !== week).map((x) => x.id));
+    const mark = (x) => ({ ...x, current: x.id === now.id, taken: elsewhere.has(x.id) });
+    return { week, current: now.id, options: fits.options.map(mark), more: fits.more.map(mark) };
+  });
+
+  // Puts a recipe in a Level week; Undo sends the one it held back.
+  on('POST', '/api/courses/([0-9a-f]{16})/level-week', async (req, env, body, [cid]) => {
+    const s = await requireParent(env, req);
+    const course = await ownCourse(env, s, cid);
+    const V = LEVELS[course.program] ?? fail(400, 'invalid', 'That course has no Level weeks.');
+    const plan = await levelPlanOf(env, course);
+    const before = plan.weeks.find((x) => x.week === Number(body.week)) ?? fail(404, 'not_found', 'No such week.');
+    const picks = levelPicksInput(V, [{ week: body.week, id: body.id }], savedPicks(plan));
+    await env.DB.batch(levelPlanStatements(env, course, V, picks, savedRemoved(plan)));
+    return { ok: true, before: before.id };
+  });
+
+  // ---------- a Level week's parts (12c) ----------
+
+  // The week and part asked for, on a Level course; a page that doesn't exist is refused.
+  const levelPart = (course, body) => {
+    const V = LEVELS[course.program] ?? fail(400, 'invalid', 'That course has no Level weeks.');
+    const week = Number(body.week), part = String(body.part ?? '');
+    if (!V.weeks.some((w) => w.week === week) || !PARTS.includes(part)) fail(400, 'invalid', 'No such page.');
+    return { week, part };
+  };
+
+  // Done on a drill, knowledge, or Sabbath task page, by the profile or its
+  // parent. Nothing checked off on the Sabbath counts, so it isn't taken then
+  // (§12.4, as with grading, §6.18).
+  on('PUT', '/api/profiles/([0-9a-f]{16})/level-tasks', async (req, env, body, [pid]) => {
+    const s = await requireSession(env, req);
+    ownProfile(s, pid);
+    if (isSabbath(today(req))) fail(409, 'sabbath', 'Nothing is checked off on the Sabbath. Check it off on another day.');
+    const { results } = await env.DB.prepare(`SELECT c.* FROM courses c JOIN course_profiles cp ON cp.course_id = c.id
+        WHERE c.family_id = ? AND c.archived_at IS NULL AND cp.profile_id = ?`).bind(s.family_id, pid).all();
+    const course = (await withPrograms(env, s.family_id, results)).find((c) => c.program) ?? fail(404, 'not_found', 'This profile is not on a Level course.');
+    const { week, part } = levelPart(course, body);
+    await env.DB.prepare(`INSERT INTO level_tasks (family_id, course_id, week, part, profile_id, done_at) VALUES (?, ?, ?, ?, ?, ?)
+        ON CONFLICT(course_id, week, part, profile_id) DO UPDATE SET done_at = excluded.done_at, removed_at = NULL`)
+      .bind(s.family_id, course.id, week, part, pid, now()).run();
+    return { ok: true };
+  }, { kid: true });
+
+  // A parent takes a checked-off part back (it counts for nothing), and its Undo.
+  const takeBack = (removed) => async (req, env, body, [cid]) => {
+    const s = await requireParent(env, req);
+    const course = await ownCourse(env, s, cid);
+    const { week, part } = levelPart(course, body);
+    const res = await env.DB.prepare(`UPDATE level_tasks SET removed_at = ? WHERE course_id = ? AND family_id = ? AND week = ? AND part = ? AND profile_id = ?`)
+      .bind(removed ? now() : null, course.id, s.family_id, week, part, String(body.profile_id ?? '')).run();
+    if (!res.meta.changes) fail(404, 'not_found', "That part isn't checked off.");
+    return { ok: true };
+  };
+  on('POST', '/api/courses/([0-9a-f]{16})/level-tasks/take-back', takeBack(true));
+  on('POST', '/api/courses/([0-9a-f]{16})/level-tasks/put-back', takeBack(false));
+
   // Skip this recipe: out of the plan, and the next lesson takes its place.
   // Put back undoes it (§6.18).
   const setRemoved = (removed) => async (req, env, body, [cid]) => {
     const s = await requireParent(env, req);
     const course = await ownCourse(env, s, cid);
     const lid = String(body.lesson_id ?? '');
-    if (!dishById[lid]) fail(400, 'invalid', 'No such lesson.');
+    // A Level course's recipe is one of its weeks'; its row's position is the week.
+    const week = course.program ? (await levelPlanOf(env, course)).weeks.find((x) => x.id === lid)?.week : null;
+    if (course.program ? !week : !dishById[lid]) fail(400, 'invalid', 'No such lesson.');
     const res = await env.DB.prepare('UPDATE course_lessons SET removed = ? WHERE course_id = ? AND family_id = ? AND lesson_id = ?').bind(removed, course.id, s.family_id, lid).run();
     if (!res.meta.changes) {
-      const at = LIBRARY.course.findIndex((d) => d.id === lid);
+      const at = week ?? LIBRARY.course.findIndex((d) => d.id === lid);
       await env.DB.prepare('INSERT INTO course_lessons (course_id, family_id, lesson_id, position, removed) VALUES (?, ?, ?, ?, ?)').bind(course.id, s.family_id, lid, at, removed).run();
     }
     return { ok: true };

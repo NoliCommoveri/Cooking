@@ -545,6 +545,15 @@ on('PUT', '/api/attempts/([0-9a-f]{16})/reflection', async (req, env, body, [aid
     stmts.push(env.DB.prepare('UPDATE attempts SET eater_rating = ? WHERE id = ? AND family_id = ?').bind(rating(body.eater_rating, "The eaters' rating"), cook.id, s.family_id));
   }
   await env.DB.batch(stmts);
+  // A mastery week's "Why did it work?" (12c), next release only. Empty takes it away.
+  if (body.why !== undefined && (await nextReleaseOn(env.DB, s.family_id))) {
+    const why = note(body.why, 'Why it worked', 1000);
+    await env.DB.prepare(why
+      ? `INSERT INTO mastery_notes (attempt_id, family_id, profile_id, why, updated_at) VALUES (?, ?, ?, ?, ?)
+          ON CONFLICT(attempt_id, profile_id) DO UPDATE SET why = excluded.why, updated_at = excluded.updated_at`
+      : 'DELETE FROM mastery_notes WHERE attempt_id = ? AND family_id = ? AND profile_id = ?')
+      .bind(...(why ? [cook.id, s.family_id, pid, why, now()] : [cook.id, s.family_id, pid])).run();
+  }
   // The eaters' rating counts for everyone on the cook, so all of them are relearned.
   await relearn(env, s.family_id, await cookProfiles(env, s.family_id, cook.id));
   return { ok: true };

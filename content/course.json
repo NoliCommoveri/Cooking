@@ -1204,6 +1204,36 @@
       "pickOne": "thin-slicing"
     },
     {
+      "id": "japchae",
+      "title": "Japchae",
+      "unit": 4,
+      "cuisine": "korean",
+      "skills": ["thin-slicing", "stir-frying", "blanching"],
+      "skill": "Thin slicing beef, blanching spinach, glass noodles",
+      "image": "dishes/japchae.png",
+      "safety": "adult-nearby",
+      "minutes": 50,
+      "estimated": true,
+      "about": "Korean glass noodles made from sweet potato starch, tossed with thin strips of beef, spinach, carrots, and mushrooms in a sweet soy and sesame sauce.",
+      "main": [
+        "beef sirloin",
+        "sweet potato glass noodles",
+        "spinach",
+        "carrots and mushrooms",
+        "soy sauce and sesame oil"
+      ],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["ginger-soy", "sweet-savory"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "adventurous",
+        "veggies": "lots"
+      },
+      "pickOne": "thin-slicing"
+    },
+    {
       "id": "suya",
       "title": "Suya (spiced beef skewers)",
       "unit": 4,

@@ -3841,3 +3841,198 @@ quests.
 - Tests: 327 (4 new in `test/lint.test.js`; a Level save with a blocked word is refused in `test/manage.test.js`). Checked in a browser at phone width on the dev server: the
   Level 3 page, a week opened, and a drill's minutes changed (the hours and
   the save bar update; no sideways scroll).
+
+## 154. 2026-10-24 — A Level course (slice 12b)
+
+Phase 12, slice 12b (plan §12.4): a course can be Level 3 Cook. Behind the
+Next release switch.
+- **Which program?** opens the course editor for a family with the next
+  release: Cook Around the World or Level 3 Cook. A Level course hides
+  Lessons per week (one Level week a week, Sunday to Friday) and shows the
+  Level's weeks folded by unit, each with its recipe, Preview, mastery
+  check, and "Being written" where it isn't. Editing shows the program; it
+  can't change. Chef Ruth's Getting started asks the same question and skips
+  "How many lessons a week?" for a Level.
+- **`course_programs`** in the draft migration (`0003_next_release.sql`):
+  one row per Level course; no row is Cook Around the World. Press **Re-apply
+  draft** on `/ops` after this deploys.
+- **The plan** (`src/worker/plan.js`): a Level course's `course_lessons` rows
+  are its weeks' recipes, with the week as the position. The schedule, Skip
+  this recipe, Skip this week, rollover, weeks behind, and the planned finish
+  work unchanged. Unwritten recipes and weeks 35 and 36 (no recipe yet) wait
+  like planned dishes.
+- **The course card** says "Level 3 Cook · Week 1 of 36" and names each
+  recipe by its week ("Week 3 · Chicken fried rice"), skipped ones too.
+- **Next release off:** a Level course is left out of the courses, the queue,
+  and the one-course-at-a-time check, and comes back when it's on again.
+- **Library build:** `LIBRARY.levels` has each Level's units, weeks, and
+  recipe titles for the Worker.
+- Tests: 333 (6 new in `test/worker-levels.test.js`). Checked in a browser at
+  phone width on the dev server: Which program?, the Level's weeks, a Level
+  course started, its card on the queue, the course list, and the edit page
+  (no sideways scroll, no errors).
+
+
+## 155. 2026-10-24 — Plan: Levels 2 and 4, and the week options
+
+The owner's Level 2 Apprentice and Level 4 Chef plans and the week-options
+workbook (`clean-plate-week-options.xlsx`) go into the plan. No app changes.
+- **§12.1:** Level 2 and Level 4 now point to their own sections. The
+  owner's plans moved quick breads up to Level 2's Unit 4 and pastry and
+  enriched breads up to Level 4's Unit 3, both to keep leavened units away
+  from spring.
+- **§12.5 Level 2 Apprentice** and **§12.6 Level 4 Chef:** how a week is
+  timed, supervision, unit goals, the 36 weeks with their four parts, the
+  unleavened backups, and the media each plan asks for.
+- **§12.7 Week options:** what the workbook holds (270 options, 58 new
+  dishes), the gaps it shows, Claude's check of every dish against the hard
+  rule (none unclean; five hidden sources to write around), the four weeks
+  where the workbook and the plans name different defaults, and seven
+  questions waiting on the owner: what the options are in the app, a
+  leavened week's backup vs. passing it over, the four defaults, teaching
+  pages that name unclean foods, Level 4's independence, live-action clips,
+  and checking the 58 new dishes against the main course first.
+
+## 156. 2026-10-24 — Plan: Level 4 learners get adult-style safety notes
+
+Owner ruling on §12.7's question 5. No app changes.
+- **§12.6:** a Level 4 learner sees each step's safety banner the way an
+  adult profile does: the hazard, without "an adult stays in the kitchen"
+  or "an adult helps", kid profile or not. The lessons' safety levels don't
+  change.
+- Picking Level 4 under Which program?, and its syllabus wording, tell
+  parents not to assign it unless the learner can work independently. The
+  owner writes that text.
+- **§12.7:** question 5 marked ruled.
+
+## 157. 2026-10-24 — Plan: week-option rulings and the new dishes checked
+
+The owner took the recommendations on §12.7's other questions ("go with
+your recommendations on the rest"). No app changes.
+- **§12.2:** a week's choices are its options (best fit picks among them;
+  Swap recipe lists them first, then other recipes with the skill), and a
+  leavened week cooks its unleavened backup on the family's unleavened days
+  instead of being passed over; a week with no backup is still passed over.
+- **§12.7 rulings:** the four defaults (L4 wk 3 Chicken fajitas as Steak
+  fajitas, wk 15 hollandaise over asparagus, wk 22 chicken tikka masala; L2
+  wk 33 Chicken fried rice); a reviewed "watch for" list for teaching pages
+  that name unclean foods; live-action clips as a later phase.
+- **New dishes checked against Cook Around the World** (the §12.4
+  Requirement): 59 dishes. Proposed: 2 fill pick-one groups (poaching eggs,
+  breading and frying), 2 go to Appointed Times (matzah brei, roast leg of
+  lamb), 21 are variations, Lasagna for 12 is the lasagna lesson at 12, and
+  33 are Level only, in each Level's own Side quests unit. Waiting on the
+  owner.
+
+## 158. 2026-10-24 — Plan: the new Level dishes' table approved
+
+The owner approved §12.7's table ("go with the table"). No app changes.
+- Hollandaise over asparagus and Chicken schnitzel fill the poaching-eggs
+  and breading-and-frying groups; matzah brei and roast leg of lamb join
+  Appointed Times; 21 dishes are written as variations; Lasagna for 12 is
+  the lasagna lesson at 12; 33 are Level only.
+- Group fills, Appointed Times lessons, and variations of course dishes are
+  live for every family once written; Level-only recipes wait for the next
+  release.
+
+## 159. 2026-10-24 — The kitchen's Level week (slice 12c)
+
+Phase 12, slice 12c (plan §12.4). Behind the Next release switch.
+- **Kitchen** (`public/app.js`): a profile on a Level course gets a Level
+  card at the top of its main tab: the week, the unit, a mastery-week note,
+  the recipe, and the drill, knowledge, and Sabbath task with their minutes
+  or "Done". Parts not checked off from weeks whose recipe is cooked show
+  under "Still to check off"; they never hold the schedule.
+- **Part pages** (`#/kitchen/<profile>/~<week>-<part>`): in the profile's
+  theme, with the page's body, steps, and quiz when written (none are yet,
+  so each says to do what the title says), and **Done**. On the Sabbath,
+  Done isn't offered, and the API refuses it by the family's calendar day.
+- **Parent** (the course card on the Queue): this week's three parts, who
+  checked each off, and **Take back** with Undo.
+- **Mastery** (`public/player.js`): on a mastery week's recipe, the lesson
+  card says "Mastery: cook it on your own", and Reflect asks each profile
+  "Why did it work?", saved with the reflection.
+- **Draft migration:** `level_tasks` (with `removed_at` for Take back) and
+  `mastery_notes`. Press **Re-apply draft** on `/ops` after this deploys.
+- **Library build:** each Level week carries its three part pages.
+- Hours from the parts and the parts on Progress come with 12e.
+- Tests: 338 (5 new in `test/worker-levels.test.js`; one 12b test now checks
+  the course card's new fields). Run on a Saturday, so also run with the
+  clock set to a Monday to cover Done. Checked in a browser at phone width
+  on the dev server, clock set to a Monday: the Level card in both themes, a
+  drill page and Done, a mastery lesson card, and the parent's Take back and
+  Undo (no sideways scroll, no errors).
+
+## 160. 2026-10-24 — Japchae in the thin-slicing group
+
+Owner, 2026-10-24: add japchae to the thin-slicing group.
+- **`content/course.json`:** Japchae (29c), a planned pick-one dish after
+  Lomo saltado and Beef and broccoli: thin-sliced beef and julienned
+  vegetables with sweet potato glass noodles in soy and sesame. No oyster
+  sauce and no leaven. Tagged beef, ginger-soy and sweet-savory, mild, $$.
+  The course has 98 dishes, still 59 numbers.
+- **Picture:** a stand-in from the meat drawing, noted in
+  `content/images/LICENSES.md`, until the owner's next sheet.
+- **Plan §4:** the dish's row. Tests: 338 (the course test counts 98 dishes
+  and checks japchae is 29c); the lesson preview rebuilt.
+
+## 161. 2026-10-24 — Plan: japchae in Level 3 week 13
+
+Owner, 2026-10-24. No app changes.
+- **§12.7:** Level 3 week 13 ("Hot oil; a quick sauté") offers Japchae
+  (29c) in place of Beef and broccoli: Garlic green beans, Sautéed zucchini,
+  and Japchae. The workbook's other options are unchanged.
+
+## 162. 2026-10-24 — Blanching in Level 3 week 13
+
+Owner, 2026-10-24: teach blanching in week 13, for japchae and the green
+beans.
+- **`content/skills.json`:** a Blanching skill (60 skills; the README's
+  count of 52 was out of date).
+- **`content/terms.json`:** the kitchen word "blanch" (cook a minute or two
+  in boiling water, then into ice water), taught in Japchae. Steps may use
+  the word now.
+- **Dish tags:** Japchae (29c) teaches thin slicing, stir-frying, and
+  blanching (julienne taken off); Garlic green beans teaches sautéing and
+  blanching.
+- **`content/levels/level-3.json` week 13:** the drill is "Blanch and shock
+  green beans and spinach; shimmer test for hot oil"; the knowledge page is
+  "Blanching: why vegetables stay green and crisp; oils and smoke points".
+  Minutes unchanged.
+- **Plan §12.3 and §12.7** match. Tests: 338; lint clean.
+
+## 163. 2026-10-24 — Best-fit recipes and Swap recipe (slice 12d)
+
+Phase 12, slice 12d (plan §12.4). The owner confirmed the four picking
+rules. Behind the Next release switch.
+- **Options** (`content/levels/level-3.json`): each week's `swapIns` now
+  start with the workbook's options (§12.7), week 13 with Japchae in place
+  of Beef and broccoli; the swap-ins already there follow. The six options
+  that are approved variations wait for their dish.
+- **Library build:** each Level week carries its skill and options, and the
+  Level's recipe cards carry their tags, so a recipe not written yet is
+  scored by its tags.
+- **Picking** (`src/worker/picks.js`, `levelPlan`): in week order, each week
+  keeps its best option not already in an earlier week; one a profile on the
+  course has cooked comes last; within a fit, a written recipe comes first;
+  a week where nothing fits keeps its own recipe, with a note.
+  `GET /api/picks/level` gives every week's options and other recipes with
+  the skill, with their fit.
+- **Courses** (`src/worker/plan.js`): a new Level course takes the parent's
+  weeks or each week's best fit; editing takes changed weeks; a recipe can't
+  be in two weeks, and a week's Skip stays with the week.
+  `GET/POST /api/courses/<id>/level-week` list a week's recipes and swap one.
+- **Screens:** the course editor shows each week's recipe and fit, with
+  **Change** (the week's options, then "Also teaches the skill"); the
+  course card's Level weeks have **Swap recipe** with Undo. Each week's
+  links sit under its name so long names keep the row's width.
+- Tests: 341 (3 new in `test/worker-levels.test.js`; the earlier Level
+  tests ask for every week's own recipe). Checked in a browser at phone
+  width: a new course's picks, Change, Swap recipe, and the edit page.
+
+## 164. 2026-10-24 — A flaky shopping test fixed
+
+The PR's GitHub check failed once and passed on its re-run of the same
+commit: `test/worker-shopping.test.js` queued two lessons back to back, and
+when both got the same millisecond their order came down to their random ids.
+The test now waits a few milliseconds between them. No app changes.
