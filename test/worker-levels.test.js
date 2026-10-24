@@ -142,7 +142,7 @@ test("the kitchen shows this week's recipe and three parts, and the mastery reci
   assert.equal(lv.week.week, 1);
   assert.deepEqual([lv.week.unit_name, lv.week.recipe, lv.week.recipe_written, lv.week.recipe_done], ['Food safety science', 'shakshuka', true, false]);
   assert.deepEqual(lv.week.parts.map((x) => [x.part, x.title, x.minutes, x.done_at]), [
-    ['drill', 'Calibrate a thermometer in ice water', 40, null], ['knowledge', 'Danger zone and how bacteria grow', 35, null], ['sabbath', 'Label and date containers', 45, null]]);
+    ['drill', 'Calibrate a thermometer in ice water', 40, null], ['knowledge', 'Danger zone and how microorganisms grow', 35, null], ['sabbath', 'Label and date containers', 45, null]]);
   assert.ok(lv.mastery.includes('minestrone') && lv.mastery.includes('meatloaf') && !lv.mastery.includes('shakshuka'));
   assert.equal(lv.sabbath, saturday);
   assert.deepEqual(lv.open, []);

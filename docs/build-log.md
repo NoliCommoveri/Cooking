@@ -4297,3 +4297,6 @@ order, so these two recipes were written.
 - The Easy-prep Chicken fried rice and Oyakodon say "An adult" cuts the raw
   chicken.
 - The review doc, "Level 3 Unit 1 part pages", has the new text.
+- Tests: the kitchen test expects week 1's new knowledge title. (The first
+  push of this entry missed it and failed that one test; the follow-up commit
+  fixed it.)
