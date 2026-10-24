@@ -77,10 +77,13 @@ CREATE INDEX IF NOT EXISTS taste_learned_family ON taste_learned(family_id);
 -- the World, so courses from before need nothing. program: a Level's id from
 -- content/levels/ ('level-3'). No REFERENCES on course_id, like the tables
 -- above, so nothing here waits on a course's own rows.
+-- parts: a Level course's parts the parent kept on, as a JSON list of
+-- 'drill', 'knowledge', 'sabbath'; NULL is all three.
 CREATE TABLE IF NOT EXISTS course_programs (
   course_id  TEXT PRIMARY KEY,
   family_id  TEXT NOT NULL REFERENCES families(id),
   program    TEXT NOT NULL,
+  parts      TEXT,
   created_at TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS course_programs_family ON course_programs(family_id);
@@ -89,6 +92,8 @@ CREATE INDEX IF NOT EXISTS course_programs_family ON course_programs(family_id);
 -- checked off per profile. week: the Level week (1 to 36); part: which page.
 -- A parent's take back sets removed_at, and its Undo clears it; a row taken
 -- back counts for nothing. Checking a part off again counts it again.
+-- skipped: 1 when the part was skipped, not done: it's no longer open, and
+-- counts for nothing. done_at is then when it was skipped.
 CREATE TABLE IF NOT EXISTS level_tasks (
   family_id  TEXT NOT NULL REFERENCES families(id),
   course_id  TEXT NOT NULL,
@@ -96,6 +101,7 @@ CREATE TABLE IF NOT EXISTS level_tasks (
   part       TEXT NOT NULL CHECK (part IN ('drill', 'knowledge', 'sabbath')),
   profile_id TEXT NOT NULL,
   done_at    TEXT NOT NULL,
+  skipped    INTEGER NOT NULL DEFAULT 0,
   removed_at TEXT,
   PRIMARY KEY (course_id, week, part, profile_id)
 );

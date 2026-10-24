@@ -648,3 +648,8 @@ use.pop{animation:dropin .42s cubic-bezier(.3,.7,.4,1) both}
 .kitchen[data-kt="passport"] .k-cert{color:var(--p-ink)}
 .kitchen[data-kt="passport"] .k-cert h3{font-family:var(--p-disp);font-weight:400;color:var(--p-navy)}
 .kitchen[data-kt="passport"] .k-cert .rk{font-family:var(--p-hand);font-weight:700;font-size:22px;color:var(--p-red)}
+/* Skip this on a Level part page (§12.4): quieter than Done. */
+.k-skip{min-height:52px;padding:0 20px;font:inherit;font-weight:800;cursor:pointer}
+.kitchen[data-kt="quest"] .k-skip{background:transparent;border:2px solid var(--q-edge);color:var(--q-text);font-family:var(--q-disp);text-transform:uppercase;letter-spacing:.04em}
+.kitchen[data-kt="passport"] .k-skip{background:#fff;border:2px solid var(--p-ink);border-radius:12px;color:var(--p-ink)}
+.kitchen[data-kt="passport"] .k-lvweeks .tk i.skip,.kitchen[data-kt="quest"] .k-lvweeks .tk i.skip{opacity:.55}

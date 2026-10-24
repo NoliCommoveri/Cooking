@@ -9,6 +9,7 @@ import { toBase, mixed } from './lib/units.js';
 import { LOGIN_PICTURES } from './lib/login-pictures.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 import { RUBRIC, GRADE_TEXT_MAX } from './lib/grades.js';
+import { PARTS, plannedMinutes, hoursOf } from './lib/levels.js';
 import { progressView, levelProgressView, celebrate } from './rewards.js';
 import { isMuted, setMuted } from './sound.js';
 import { gettingStarted, openRuth, ruthButton } from './ruth.js';
@@ -512,8 +513,8 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     const kick = quest ? 'q-kick' : 'p-lessonno';
     const row = (label, title, note, onclick, done) => el(onclick ? 'button' : 'div', { ...(onclick ? { type: 'button', onclick } : {}), class: `k-part${done ? ' done' : ''}` },
       el('span', { class: 'k-part-l' }, label), el('b', {}, title), el('small', {}, note));
-    const partRow = (x) => row(x.week === w?.week ? PART_NAMES[x.part] : `Week ${x.week} · ${PART_NAMES[x.part]}`, x.title, x.done_at ? 'Done ✓' : `${x.minutes} min`,
-      () => go(`#/kitchen/${p.id}/~${x.week}-${x.part}`), Boolean(x.done_at));
+    const partRow = (x) => row(x.week === w?.week ? PART_NAMES[x.part] : `Week ${x.week} · ${PART_NAMES[x.part]}`, x.title, x.done_at ? 'Done ✓' : x.skipped ? 'Skipped' : `${x.minutes} min`,
+      () => go(`#/kitchen/${p.id}/~${x.week}-${x.part}`), Boolean(x.done_at || x.skipped));
     return el('section', { class: `${quest ? 'q-panel' : 'p-card'} k-level` },
       el('p', { class: kick }, `${lv.name} · ${w ? `Week ${w.week} of ${lv.weeks}` : 'Every recipe cooked'}`),
       w ? [
@@ -638,16 +639,21 @@ async function levelPage(profileId, key) {
         quiz,
         written ? null : el('p', {}, 'This page is still being written. Do what the title says, with an adult if you need one, then tap Done.')),
       x.done_at ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, `Done ${fmtDay(x.done_at.slice(0, 10))} ✓`)
-        : lv.sabbath || isSabbath() ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, 'Nothing is checked off on the Sabbath. Come back on another day to tap Done.')
-          : el('button', { type: 'button', class: quest ? 'q-btn' : 'p-btn', onclick: async (e) => {
-            const btn = e.currentTarget;
-            btn.disabled = true;
-            try {
-              await api('PUT', `/api/profiles/${p.id}/level-tasks?${tz()}`, { week: x.week, part });
-              showToast(`${PART_NAMES[part]} done!`);
-              back();
-            } catch (err) { showToast(err.message); btn.disabled = false; }
-          } }, 'Done'))));
+        : x.skipped ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, 'Skipped. An adult can take it back.')
+          : el('div', { class: 'acts' },
+            lv.sabbath || isSabbath() ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, 'Nothing is checked off on the Sabbath. Come back on another day to tap Done.')
+              : el('button', { type: 'button', class: quest ? 'q-btn' : 'p-btn', onclick: (e) => mark(e, false) }, 'Done'),
+            // Any part can be skipped (§12.4): it counts for nothing, and isn't left open.
+            el('button', { type: 'button', class: 'k-skip', onclick: (e) => mark(e, true) }, 'Skip this')))));
+  async function mark(e, skip) {
+    const btn = e.currentTarget;
+    btn.disabled = true;
+    try {
+      await api('PUT', `/api/profiles/${p.id}/level-tasks?${tz()}`, { week: x.week, part, ...(skip ? { skip: true } : {}) });
+      showToast(skip ? `Skipped the ${PART_NAMES[part].replace(/^(Drill|Knowledge)/, (m) => m.toLowerCase())}.` : `${PART_NAMES[part]} done!`);
+      back();
+    } catch (err) { showToast(err.message); btn.disabled = false; }
+  }
 }
 
 // A lesson, played in the profile's theme (player.js).
@@ -1573,15 +1579,25 @@ const parentQueue = parentOnly(async (flash) => {
                 again('Skipped this week. Everything moves back a week.', () => api('POST', `/api/courses/${c.id}/week?${tz()}`, { week: tw.week, skipped: false }));
               }],
             ])),
-        // A Level week's parts (12c): who has checked each off, with Take back.
-        c.level?.parts.length && !tw.skipped ? el('div', { class: 'rows' }, c.level.parts.map((x) => el('div', { class: 'rowi' },
-          el('div', {}, el('b', {}, `Week ${c.level.week} · ${PART_NAMES[x.part]}: ${x.title}`),
-            el('small', {}, x.done.length ? `Done: ${names(x.done)}` : `Not checked off yet · ${x.minutes} min`)),
-          x.done.length ? el('span', { class: 'acts' }, x.done.map((pid) => actBtn(x.done.length > 1 ? `Take back ${names([pid])}` : 'Take back', '', async () => {
-            const body = { week: c.level.week, part: x.part, profile_id: pid };
-            await api('POST', `/api/courses/${c.id}/level-tasks/take-back`, body);
-            again(`Took back ${names([pid])}'s ${PART_NAMES[x.part].replace(/^(Drill|Knowledge)/, (m) => m.toLowerCase())}. It doesn't count now.`, () => api('POST', `/api/courses/${c.id}/level-tasks/put-back`, body));
-          }))) : null))) : null,
+        // A Level week's parts (12c): who has checked each off or skipped it,
+        // with Take back, and Skip for anyone who hasn't (§12.4).
+        c.level?.parts.length && !tw.skipped ? el('div', { class: 'rows' }, c.level.parts.map((x) => {
+          const both = [...x.done, ...x.skipped], left = c.profile_ids.filter((pid) => !both.includes(pid));
+          const partWord = PART_NAMES[x.part].replace(/^(Drill|Knowledge)/, (m) => m.toLowerCase());
+          return el('div', { class: 'rowi' },
+            el('div', {}, el('b', {}, `Week ${c.level.week} · ${PART_NAMES[x.part]}: ${x.title}`),
+              el('small', {}, [x.done.length ? `Done: ${names(x.done)}` : null, x.skipped.length ? `Skipped: ${names(x.skipped)}` : null].filter(Boolean).join(' · ') || `Not checked off yet · ${x.minutes} min`)),
+            el('span', { class: 'acts' },
+              both.map((pid) => actBtn(both.length > 1 ? `Take back ${names([pid])}` : 'Take back', '', async () => {
+                const body = { week: c.level.week, part: x.part, profile_id: pid };
+                await api('POST', `/api/courses/${c.id}/level-tasks/take-back`, body);
+                again(`Took back ${names([pid])}'s ${partWord}. It doesn't count now.`, () => api('POST', `/api/courses/${c.id}/level-tasks/put-back`, body));
+              })),
+              left.length ? actBtn('Skip', '', async () => {
+                for (const pid of left) await api('PUT', `/api/profiles/${pid}/level-tasks?${tz()}`, { week: c.level.week, part: x.part, skip: true });
+                again(`Skipped the ${partWord} for ${names(left)}.`, async () => { for (const pid of left) await api('POST', `/api/courses/${c.id}/level-tasks/take-back`, { week: c.level.week, part: x.part, profile_id: pid }); });
+              }) : null));
+        })) : null,
         tw.skipped ? el('p', { class: 'mut' }, 'Skipped. Everything moved back a week.')
           : tw.lessons.length ? el('div', { class: 'rows' }, tw.lessons.map((x) => lessonRow(x, tw.week)))
             : el('p', { class: 'mut' }, 'Nothing left this week.')) : null,
@@ -1824,6 +1840,15 @@ const courseEditor = parentOnly(async (cid) => {
     drawLevel();
     drawFinish();
   };
+  // A Level course's parts kept on (§12.4): all three unless the parent turns some off.
+  let partsOn = existing?.parts ?? [...PARTS];
+  const hoursBox = el('p', { class: 'lvl-hours', role: 'status' });
+  const drawHours = () => {
+    const V = levelOf();
+    if (!V) return;
+    const h = hoursOf(plannedMinutes(levelWeeks(), (rid) => V.minutes?.[rid] ?? 0, partsOn));
+    hoursBox.replaceChildren(el('b', {}, `About ${h} hours`), ` with these parts and recipes. With every part, it's about ${hoursOf(plannedMinutes(levelWeeks(), (rid) => V.minutes?.[rid] ?? 0))}.`);
+  };
   const drawFinish = () => {
     const start = weekOf(startIn.value || localToday());
     if (levelOf()) {
@@ -1832,6 +1857,7 @@ const courseEditor = parentOnly(async (cid) => {
       finishBox.replaceChildren(n
         ? `${n} of ${V.weeks.length} weeks have their recipe ready to cook now, so the schedule runs to the week of ${fmtDay(addDays(start, (n - 1) * 7))}. The others join as they're written.`
         : 'None of the weeks\' recipes can be cooked yet.');
+      drawHours();
       return;
     }
     const n = usable(), per = Math.max(1, Number(perIn.value) || 1);
@@ -1971,8 +1997,19 @@ const courseEditor = parentOnly(async (cid) => {
     me.family.next_release ? el('p', { class: 'mut small', style: 'margin:0' }, 'Each dish shows how well it fits the people the course is for, from Our tastes. Suggest picks ticks the best dish in each group.') : null,
     suggestBtn ? el('div', { class: 'acts' }, suggestBtn) : null,
     notesBox, listBox);
+  // Which parts each week has (§12.4): any can be turned off, here or later, and
+  // a part that's on can still be skipped on the day. The hours follow.
+  const partsSet = el('fieldset', { onchange: (ev) => {
+    if (!PARTS.includes(ev.target.name)) return;
+    partsOn = PARTS.filter((x) => partsSet.querySelector(`input[name="${x}"]`).checked);
+    drawHours();
+  } }, el('legend', {}, 'Each week\'s parts'),
+    el('p', { class: 'mut small', style: 'margin:0' }, 'Every week has its recipe. Untick a part to leave it out of every week; you can change this later. A part that\'s on can still be skipped any week. The practice run and the capstone keep all their parts.'),
+    [['drill', 'Drill', 'Practice the week\'s technique, about 40 min'], ['knowledge', 'Knowledge', 'A reading and quiz, about 35 min'], ['sabbath', 'Beyond the Recipe', 'Make-ahead and storage, or the Bible and food, about 45 min']]
+      .map(([k, label, hint]) => el('label', { class: 'choice' }, el('input', { type: 'checkbox', name: k, checked: partsOn.includes(k) }), el('span', {}, label, el('em', {}, ` ${hint}`)))),
+    hoursBox);
   const levelSet = el('fieldset', {}, el('legend', {}, 'The weeks'),
-    el('p', { class: 'mut small', style: 'margin:0' }, 'Each week has a recipe, a drill, a reading, and a Beyond the Recipe page. The last week of each unit is a mastery check. A week is done when its recipe is cooked; one that isn\'t moves to the next week.'),
+    el('p', { class: 'mut small', style: 'margin:0' }, 'Each week has a recipe, and the parts kept on above. The last week of each unit is a mastery check. A week is done when its recipe is cooked; one that isn\'t moves to the next week.'),
     el('p', { class: 'mut small', style: 'margin:0' }, 'Each week starts with the recipe that fits the people it\'s for best, from Our tastes. Change picks another that teaches the same skill.'),
     levelBox);
   const drawProgram = () => {
@@ -1981,6 +2018,7 @@ const courseEditor = parentOnly(async (cid) => {
     levelPace.hidden = !V;
     planSet.hidden = Boolean(V);
     levelSet.hidden = !V;
+    partsSet.hidden = !V;
     drawLevel();
     drawFinish();
     if (V && !levelFits) loadLevelFits(picked());
@@ -2016,12 +2054,12 @@ const courseEditor = parentOnly(async (cid) => {
         el('label', { class: 'f' }, 'Start date', el('span', { class: 'hint' }, 'Weeks run Sunday to Friday'), startIn),
         perBox, levelPace),
       finishBox,
-      planSet, levelSet,
+      partsSet, planSet, levelSet,
     ], existing ? 'Save course' : 'Start the course', async (v) => {
       // A Level course's plan is its weeks, one a week.
       const body = levelOf()
         ? {
-          name: v.name, start_date: startIn.value, per_week: 1, profile_ids: profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id), ...(existing ? {} : { program }),
+          name: v.name, start_date: startIn.value, per_week: 1, profile_ids: profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id), ...(existing ? {} : { program }), parts: partsOn,
           // Left out, a new course takes each week's best fit on the server.
           ...(Object.keys(levelPicks).length ? { weeks: Object.entries(levelPicks).map(([week, id]) => ({ week: Number(week), id })) } : {}),
         }
@@ -2294,19 +2332,21 @@ const progress = parentOnly(async (which = 'all', flash) => {
 function levelBlock(lv) {
   const short = { month: 'short', day: 'numeric' };
   const tick = (day) => (day ? fmtDay(day, short) : '—');
+  // Only the parts the course keeps on (§12.4).
+  const on = PARTS.filter((part) => lv.on?.includes(part));
   return el('div', { class: 'lvl-block' },
     el('p', {}, el('b', {}, lv.name), ` · ${lv.hours_done} of about ${lv.hours} hours`,
       lv.complete ? ` · complete ${fmtDay(lv.complete, { year: 'numeric', month: 'short', day: 'numeric' })}` : ''),
     el('p', { class: 'small' }, lv.units.map((u) => `Unit ${u.number}${u.mastered ? ' ✓' : ''}`).join(' · ')),
     el('table', { class: 'lvl-weeks' },
-      el('thead', {}, el('tr', {}, ['Week', 'Recipe', 'Cooked', ...Object.values(PART_NAMES)].map((h) => el('th', {}, h)))),
+      el('thead', {}, el('tr', {}, ['Week', 'Recipe', 'Cooked', ...on.map((part) => PART_NAMES[part])].map((h) => el('th', {}, h)))),
       el('tbody', {}, lv.units.map((u) => [
-        el('tr', { class: 'lvl-unit' }, el('th', { colspan: 6 }, `Unit ${u.number}: ${u.name}${u.mastered ? ` · mastered ${fmtDay(u.mastered, short)}` : ''}`)),
+        el('tr', { class: 'lvl-unit' }, el('th', { colspan: 3 + on.length }, `Unit ${u.number}: ${u.name}${u.mastered ? ` · mastered ${fmtDay(u.mastered, short)}` : ''}`)),
         ...lv.weeks.filter((w) => w.unit === u.number).map((w) => el('tr', {},
           el('td', {}, String(w.week)),
           el('td', {}, w.title ?? (w.kind === 'capstone' ? 'Capstone' : w.kind === 'practice' ? 'Practice run' : '—'), w.mastery ? el('small', {}, ' (mastery)') : null),
           el('td', {}, w.recipe ? tick(w.cooked) : ''),
-          Object.keys(PART_NAMES).map((part) => el('td', {}, tick(w.parts[part]))))),
+          on.map((part) => el('td', {}, part in w.parts ? (w.skipped?.includes(part) ? 'skipped' : tick(w.parts[part])) : 'off')))),
       ]))));
 }
 

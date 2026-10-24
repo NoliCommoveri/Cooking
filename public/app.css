@@ -488,3 +488,4 @@ a.choice.on{border-color:var(--h-acc);box-shadow:inset 0 0 0 1.5px var(--h-acc)}
 .kitchen[data-kt="passport"] .k-part{background:#fff;border:2px solid var(--p-ink);border-radius:12px}
 .k-pagebody{display:grid;gap:10px}
 .k-pagebody ol{margin:0;padding-left:22px;display:grid;gap:6px}
+.lvl-hours{margin:8px 0 0}

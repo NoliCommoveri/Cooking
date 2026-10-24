@@ -199,7 +199,8 @@ const longDay = (d) => new Date(`${d}T12:00:00`).toLocaleDateString(undefined, {
 const shortDay = (d) => new Date(`${d}T12:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
 // A week counts as done when its recipe is cooked; a practice or capstone
 // week, which has no recipe, when its three parts are checked off.
-const weekDone = (w) => (w.recipe ? Boolean(w.cooked) : !w.kind ? false : PARTS.every(([k]) => w.parts[k]));
+// A week's parts are the ones its course keeps on; a skipped one counts as dealt with.
+const weekDone = (w) => (w.recipe ? Boolean(w.cooked) : !w.kind ? false : Object.keys(w.parts).every((k) => w.parts[k] || w.skipped?.includes(k)));
 
 // Kitchen Quest's chapter crest: a hex with the unit's number, gold once mastered.
 export function unitCrest(u, cls = '') {
@@ -226,9 +227,10 @@ function weeksBar(pr, now) {
 // A week's row: its recipe and its three parts, ticked.
 function weekRow(w, quest) {
   const what = w.title ?? (w.kind === 'capstone' ? 'Capstone' : w.kind === 'practice' ? 'Practice run' : 'Being written');
-  const tick = (on, label) => `<i class="${on ? 'on' : ''}" title="${esc(label)}${on ? ': done' : ''}">${on ? ic('i-check') : ''}</i>`;
-  const ticks = [w.recipe ? tick(w.cooked, 'Recipe') : '', ...PARTS.map(([k, label]) => tick(w.parts[k], label))].join('');
-  const said = [w.recipe ? `Recipe ${w.cooked ? 'cooked' : 'not cooked yet'}` : null, ...PARTS.map(([k, label]) => `${label} ${w.parts[k] ? 'done' : 'not done yet'}`)].filter(Boolean).join(', ');
+  const kept = PARTS.filter(([k]) => k in w.parts), skipped = (k) => w.skipped?.includes(k);
+  const tick = (on, label, skip = false) => `<i class="${on ? 'on' : skip ? 'skip' : ''}" title="${esc(label)}${on ? ': done' : skip ? ': skipped' : ''}">${on ? ic('i-check') : skip ? '–' : ''}</i>`;
+  const ticks = [w.recipe ? tick(w.cooked, 'Recipe') : '', ...kept.map(([k, label]) => tick(w.parts[k], label, skipped(k)))].join('');
+  const said = [w.recipe ? `Recipe ${w.cooked ? 'cooked' : 'not cooked yet'}` : null, ...kept.map(([k, label]) => `${label} ${w.parts[k] ? 'done' : skipped(k) ? 'skipped' : 'not done yet'}`)].filter(Boolean).join(', ');
   return `<li><span class="wk">${quest ? 'Wk' : 'Week'} ${w.week}</span><span class="t">${esc(what)}${w.mastery ? `<small>${quest ? 'Mastery' : 'Mastery week'}</small>` : ''}</span><span class="tk" role="img" aria-label="${esc(said)}">${ticks}</span></li>`;
 }
 
@@ -237,7 +239,7 @@ function leftThisWeek(lv) {
   const w = lv.week;
   if (!w) return [];
   return [w.recipe && !w.recipe_done ? `${w.recipe_title} isn't cooked yet` : null,
-    ...w.parts.filter((x) => !x.done_at).map((x) => `${PARTS.find(([k]) => k === x.part)[1]} not done yet`)].filter(Boolean);
+    ...w.parts.filter((x) => !x.done_at && !x.skipped).map((x) => `${PARTS.find(([k]) => k === x.part)[1]} not done yet`)].filter(Boolean);
 }
 
 function certificate(pr, profile, quest) {
@@ -252,13 +254,15 @@ function levelHTML(profile, lv, ui) {
   const at = pr.complete ? `${pr.name} · complete` : `${pr.name} · ${now ? `Week ${now} of ${pr.weeks}` : `${pr.weeks} weeks`}`;
   const top = `<div class="${quest ? 'q-panel' : 'p-card'} k-lvtop">${quest ? '' : '<i class="tape t2"></i>'}<span class="${quest ? 'q-kick' : 'p-lessonno'}">${esc(at)}</span>${weeksBar(pr, now)}<b>${pr.hours_done} of about ${pr.hours} hours</b></div>`;
   const openUnit = lv.week?.unit ?? pr.units.find((u) => !u.mastered)?.number;
+  // What the ticks are: the recipe, then the parts the course keeps on.
+  const key = `Ticks: ${['recipe', ...PARTS.filter(([k]) => pr.on.includes(k)).map(([, label]) => (label === 'Beyond the Recipe' ? label : label.toLowerCase()))].join(', ')}`;
   const units = pr.units.map((u) => {
     const done = u.weeks.filter(weekDone).length;
     const head = quest ? `Chapter ${u.number}: ${u.name}` : `Unit ${u.number}: ${u.name}`;
     const note = u.mastered ? `Mastered ${shortDay(u.mastered)}` : `${done} of ${u.weeks.length} weeks`;
     return `<details class="${quest ? 'q-panel' : 'p-page'} k-lvunit ${u.mastered ? 'got' : ''}" data-unit="${u.number}" ${ui.open.has(u.number) || (!ui.touched && u.number === openUnit) ? 'open' : ''}>
       <summary>${quest ? unitCrest(u) : visaStamp(u)}<span><b>${esc(head)}</b><small>${esc(note)}</small></span></summary>
-      ${u.goal ? `<p class="k-lvgoal">${esc(u.goal)}</p>` : ''}<p class="k-lvkey">Ticks: recipe, drill, knowledge, Beyond the Recipe</p><ul class="k-lvweeks">${u.weeks.map((w) => weekRow(w, quest)).join('')}</ul></details>`;
+      ${u.goal ? `<p class="k-lvgoal">${esc(u.goal)}</p>` : ''}<p class="k-lvkey">${esc(key)}</p><ul class="k-lvweeks">${u.weeks.map((w) => weekRow(w, quest)).join('')}</ul></details>`;
   }).join('');
   const left = leftThisWeek(lv);
   return `${pr.complete ? certificate(pr, profile, quest) : ''}${top}

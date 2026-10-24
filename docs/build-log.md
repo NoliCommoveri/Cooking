@@ -4426,3 +4426,28 @@ tables.
 - Tests: 345 (3 new in `test/worker-levels.test.js`: ticks, hours, and a
   unit mastered; the capstone and the practice week; Progress and the
   transcript, and that they're gone without the next release).
+
+## 184. 2026-10-24 — Level parts are optional
+
+- Owner, 2026-10-24: the drill, knowledge, and Beyond the Recipe parts are
+  optional. Parents can turn them off when setting up a course, any part can
+  be skipped even when on, and setup shows the hours the course will add up to.
+- **Each week's parts** in the course editor for a Level: three ticks, all on
+  to start, saved on the course (`course_programs.parts`, in the draft
+  migration) and editable later. A part turned off is out of every week: the
+  kitchen card, the progress ticks, the hours, and the transcript. The practice
+  run and capstone keep all three.
+- **Planned hours:** `src/content/levels.js` adds up a course's recipes
+  (estimates for unwritten ones) and the parts it keeps on. The editor shows it
+  live ("About 106 hours with these parts and recipes. With every part, it's
+  about 126."). The learner's progress counts toward the same number.
+- **Skip:** Skip this on a part page (the learner), and Skip on the course
+  card (the parent, for everyone who hasn't done it). It's allowed any day,
+  the Sabbath included, since it counts for nothing. A skipped part isn't left
+  open, shows as skipped (a dash on the ticks), and Take back undoes it.
+  Stored as `level_tasks.skipped` (in the draft).
+- The capstone is finished when each part is done or skipped, with at least
+  one done.
+- Tests: 347 (2 new: parts off at setup and on again later, with their hours;
+  a skipped part and its take back). Expected Level hours are 126 now, the
+  course's own planned total, not the Level's round 125.

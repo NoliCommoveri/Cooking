@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [183. 2026-10-24 — The Level view, Progress, and the transcript (slice 12e)](docs/build-log.md#183-2026-10-24--the-level-view-progress-and-the-transcript-slice-12e)
+**Latest build log entry:** [184. 2026-10-24 — Level parts are optional](docs/build-log.md#184-2026-10-24--level-parts-are-optional)
 
 ## Current features
 
@@ -62,6 +62,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Level 3 content** (next release only, `content/levels/level-3.json`): Level 3 Cook's 9 units and 36 weeks, each with its skill, recipe, mastery check, and drill, knowledge, and Beyond the Recipe page, plus 21 Level-only recipes and Unit 1's written part pages; edited on the manager's Level 3 page.
 - **Level courses** (next release only, `src/worker/plan.js`): setting up a course asks Which program?, Cook Around the World or Level 3 Cook; a Level course runs one week a week, its recipes in week order, and the course card shows "Week 5 of 36".
 - **Level 3 recipes in Side quests** (next release only): the Level's own written recipes (labels L1, L2…) in their own unit in the kitchen, cookable and queueable like any lesson.
+- **Optional Level parts** (next release only): a Level course's drill, knowledge, and Beyond the Recipe can be turned off at setup or later, with the planned hours shown; any part can be skipped.
 - **Level progress** (next release only): a Level learner's own progress tab (the weeks bar, hours toward ~125, units as chapters or passport pages with a crest or visa stamp, and My cooking collection), level-ups for units mastered, and the completion certificate; the Level's weeks and part rows on Progress, its CSV, and the transcript.
 - **Best-fit Level recipes** (next release only, `src/worker/picks.js`): a new Level course keeps each week's best fit from its options for the people it's for; the parent changes a week in the course editor or with Swap recipe.
 - **The kitchen's Level week** (next release only): this week's recipe and its drill, knowledge, and Beyond the Recipe pages, each checked off with Done (not on the Sabbath); parts still open from earlier weeks; the parent's Take back; and a mastery week's "cook it on your own" and "Why did it work?".
