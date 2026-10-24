@@ -3774,3 +3774,17 @@ Design only. Plan §12.4 (new), §9, and §8.4 changed.
   column to `attempt_profiles`, where §12.2 had put "why it worked".
 - Open for the owner: stamps and pins for Level weeks, and whether Level
   recipes join Side quests at launch.
+
+## 151. 2026-10-24 — Plan: the Level view
+
+Design only. Plan §12.4 (slice 12e) and §9 changed. The owner's ruling: a
+learner on a Level isn't working through 75 dishes, so their progress tab
+shows how far they are in the course.
+- **The Level view:** week and hours at the top, a bar of the 36 weeks by
+  unit, the 9 units as a path with each week's recipe and part ticks, what's
+  left this week, and a certificate at the capstone. Each theme draws it.
+- **Units are the ranks:** a Level learner isn't shown the dish-count ranks;
+  a mastered unit is the step up.
+- **My cooking collection:** a toggle to the usual stamps or skill tree and
+  pins, which every cook keeps earning. This answers the open question on
+  stamps and pins for Level weeks.
