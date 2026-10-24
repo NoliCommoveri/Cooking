@@ -166,9 +166,9 @@ The unit is well built: a vegetable roast, then raw chicken handled by the stude
 
 **For the owner to decide:**
 
-- [ ] Give Roast chicken (and Roast turkey breast) a Level version with pan juices instead of the flour gravy
-- [ ] Write BBQ pulled chicken with the chicken roasted in the oven
-- [ ] Add a glove step for the hot peppers in Jerk chicken
+- [x] Give Roast chicken (and Roast turkey breast) a Level version with pan juices instead of the flour gravy
+- [x] Write BBQ pulled chicken with the chicken roasted in the oven
+- [x] Add a glove step for the hot peppers in Jerk chicken
 
 ## Level 3 Unit 7: Fish
 
@@ -204,6 +204,40 @@ The four defaults are well chosen: one gentle method a week (bake, steam, poach)
 - [x] Change week 28's drill to searing a fillet, and move "Skin a fillet" to Level 4
 - [x] Drop Coconut-crusted fish from the fish weeks (it stays in Cook Around the World)
 
+## Level 3 Unit 8: Stock and soup
+
+The unit is built well: two stocks, then two soups, and the week 30 stock uses the carcass frozen in week 24. The catch is that the written soups use boxed broth, so the student's own stock never goes into a soup. Two recipes also reach ahead: the planned Matzo ball soup breaks down a whole raw chicken, and the Beef and barley variation simmers chunks of chuck (Level 4 Unit 2). The goal is to make a clear stock from bones or vegetables and build a soup from it.
+
+**What a student brings in:** cooling and reheating safely (Unit 1, for big pots of stock), the dice (Unit 3), sweating a base (Unit 4), dried beans and grains (Unit 5), the roast chicken carcass (Unit 6, week 24), and seasoning by taste. The unit lands around the Days of Unleavened Bread (April); its defaults are all unleavened, and matzo ball soup suits the feast.
+
+| Week | Dish | Verdict | Why | Proposal |
+| --- | --- | --- | --- | --- |
+| 29 | Vegetable stock (default, planned) | Keep, fix | Onion, carrot, celery, and herbs simmered, skimmed, and strained: exactly the drill. Not a meal, which is fine; it's saved for weeks 31 and 32. Straining a full pot of hot liquid is the risky step. | Ladle the stock into the colander over a bowl instead of tipping the pot, and say in the lesson that this stock goes into week 32's soup. |
+| 29 | Mushroom stock (approved variation) | Keep | The same method with mushrooms for a darker, deeper stock. | None. |
+| 30 | Chicken stock from the week 24 carcass (default, planned) | Keep, fix | Bones simmered slowly, strained, cooled fast (Unit 1 review), and the fat lifted off. Chicken fat is allowed (§2.1). About 4 hours, mostly simmering. A family that didn't roast a whole bird in week 24, or didn't freeze the carcass, has nothing to start from. | Let the lesson start from the frozen carcass or from 3 pounds of chicken wings or backs. |
+| 30 | Beef bone broth (approved variation) | Keep, check | Roasted beef bones simmered long. Beef fat is blocked (§2.1), so lifting off and throwing away the fat is required, not optional. | Make the fat step a required step with a "why" card on the food rule, not a tip. |
+| 31 | Matzo ball soup from a whole chicken (default, planned) | Keep, Level version | The right soup for the week and the season. But as planned for Cook Around the World, it breaks down a whole raw chicken, which Level 3 never teaches (week 24's drill breaks down a cooked one). | **Level version from week 30's stock**: carrots, celery, and onion simmered in the student's own stock, matzo balls cooked in it, and cooked chicken from the stock pulled and added back. |
+| 31 | Chicken noodle soup (approved variation of Matzo ball soup) | Keep | The same stock and vegetables with noodles. Noodles aren't leavened. | The same Level version, from week 30's stock. |
+| 31 | Grilled cheese + tomato soup (option, written) | Keep, Level version | A puréed tomato soup, the second soup family in the knowledge page. But it uses boxed broth, and its bread is leavened in a unit that lands near the feast. | **Level version with homemade stock**: the student's vegetable stock in place of the boxed broth. Its leavened bread is handled by the week's unleavened backup, as with any leavened week. |
+| 31 | Red lentil soup (option, planned) | Keep | Week 17's default; a thick, puréed soup that can use the student's stock. A recipe is picked for one week at most, so it's only here if week 17 cooked something else. | Use the student's stock (as week 31's other options). |
+| 31 | Minestrone (option, written) | Keep | Week 32's default. Fine as an option. | None. |
+| 32 | Minestrone (mastery default, written) | Keep, Level version | Diced vegetables (Unit 3), a sweated base (Unit 4), beans and pasta, simmered: a good unaided test of building a soup. But the written lesson uses boxed broth and canned beans, so it doesn't test the unit's goal (a soup from your own stock). And the drill, "Make stock without a recipe card", is 40 minutes, while stock takes 90. | **Level version with homemade stock**: the stock from this week's drill (or frozen from week 29) in place of the boxed broth, and dried white beans cooked ahead as a choice (Unit 5 review). Count the drill's 40 minutes as the hands-on part; the stock simmers while the student does other work. |
+| 32 | Beef and barley soup (approved variation of Minestrone) | Keep, Level version | Barley simmered in a beef broth with vegetables. But it simmers chunks of beef chuck until tender, which is Level 4 Unit 2 (tough cuts). | **Level version with ground beef**: ground beef browned (Unit 4 review) instead of chuck, so it cooks in the soup's simmer. |
+| 32 | Matzo ball soup (option) | Drop | Week 31's default. A mastery week never picks a recipe used earlier in its unit (12d), so it can't be chosen here. | Covered by Red lentil soup and the Beef and barley Level version. |
+| 32 | Red lentil soup (option, planned) | Keep | A thick soup built from the student's own stock, unaided. A lighter mastery choice. | None. |
+
+**Order after the changes:** vegetable stock (simmer, skim, strain) → chicken stock (bones, cool fast, lift the fat) → matzo ball soup from that stock (a clear soup) → minestrone from homemade stock (a full soup, unaided).
+
+**For the owner to decide:**
+
+- [ ] Ladle hot stock into the strainer instead of tipping the pot, and say week 29's stock is for week 32
+- [ ] Let Chicken stock start from the frozen carcass or from chicken wings or backs
+- [ ] Make lifting off the fat a required step in Beef bone broth (§2.1)
+- [ ] Give Matzo ball soup and Chicken noodle soup a Level version made from week 30's stock, with no whole raw bird
+- [ ] Give Grilled cheese + tomato soup, Red lentil soup, and Minestrone Level versions that use the student's own stock (Minestrone with dried beans as a choice)
+- [ ] Give Beef and barley soup a Level version with ground beef instead of chuck
+- [ ] Drop Matzo ball soup from week 32's options
+
 ## Year progression
 
 The year builds in general, with no early unit overwhelming and no late unit trivial. Small dips (a side dish, a no-cook salad in the knife unit) are fine. Unit 2 (yeast dough) is exempt.
@@ -217,6 +251,7 @@ The year builds in general, with no early unit overwhelming and no late unit tri
 | 5 Legumes and grains | 17–20 | 35–120 min | Planning ahead (soaking); long simmers; timing a legume and a grain together | Yes: adds planning and timing to Unit 4's bases |
 | 6 Poultry and roasting | 21–24 | 50–120 min | Cutting raw chicken; marinating ahead; two temperatures in one pan; resting and carving a whole bird | Yes: the whole bird is the most involved dish so far |
 | 7 Fish | 25–28 | 25–45 min (more with week 25's side) | Judgment over steps: freshness, a delicate fillet, flaking, and 145°F; searing a fillet unaided | Yes, with week 25's side: the dishes are shorter, but fish is easy to overcook. A small dip, like the knife unit |
+| 8 Stock and soup | 29–32 | 60–240 min, mostly simmering | Planning across weeks (the frozen carcass, stock saved for the soups); straining and cooling big pots of hot liquid; seasoning by taste | Yes: the longest cooks so far, and the first unit where one week's food feeds another's |
 
 ## Quick reviews from Level 2
 
@@ -246,6 +281,9 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 | 26 | Boiling water and steam burns | Weeks 17 and 20 drills; week 19 knowledge |
 | 27 | Holding a steady simmer | Week 19 drill and knowledge |
 | 28 | Preheating a pan | Week 29 drill (water-drop test) |
+| 29 | Boil vs. simmer; draining hot liquid safely | Week 19 drill and knowledge; week 17 drill |
+| 31 | Cooking pasta or noodles (chicken noodle soup) | Week 17 recipe |
+| 32 | Cooking pasta | Week 17 recipe |
 
 ## Patterns across units
 
@@ -257,7 +295,9 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 
 - **Level 2 skills taken for granted.** Both units so far rely on Level 2 for something they don't teach again. Those are collected under Quick reviews from Level 2.
 
-- **Searing a whole cut isn't taught in Level 2 or Level 3.** Level 2 sears only ground beef; whole cuts start in Level 4 Unit 2. Watch for it in later Level 3 weeks, such as week 34's beef stew.
+- **Searing a whole cut isn't taught in Level 2 or Level 3.** Level 2 sears only ground beef; whole cuts start in Level 4 Unit 2. Watch for it in later Level 3 weeks, such as week 34's beef stew. Week 32's Beef and barley soup is another (chuck chunks).
+
+- **Homemade stock should feed the soups.** Every written soup uses boxed broth, so a student can finish the stock unit without putting their own stock into a soup. Level versions that use it close the loop.
 
 - **Every fish week offers every fish dish.** Unit 7's weeks list all six course fish dishes as swap-ins, so best fit and Swap recipe can pick one that skips the week's method (a sear in the steaming week) or relies on Level 4 (pan-frying). Each week should offer only the dishes that use its method, as in Units 1–6.
 
@@ -266,12 +306,12 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 ## Units still to review
 
 - [x] Level 3 Unit 7: Fish (weeks 25–28)
-- [ ] Level 3 Unit 8: Stock and soup (weeks 29–32)
+- [x] Level 3 Unit 8: Stock and soup (weeks 29–32)
 - [ ] Level 3 Unit 9: Balancing flavor and Sabbath capstone (weeks 33–36)
 
 ## Next session
 
-- Carry on with Unit 8 (Stock and soup), one unit at a time, under the ground rules above.
+- Carry on with Unit 9 (Balancing flavor and Sabbath capstone), the last unit, under the ground rules above.
+- Unit 8's seven decisions are open.
 - Unit 7's six decisions are approved (owner, 2026-10-24).
-- Unit 6's three decisions are still open.
 - Nothing here is built yet except Chicken jambalaya (week 15) and Butter chicken (week 22). Once the review is done, the approved changes go into `content/levels/level-3.json`, the lessons, and plan §12.3 and §12.4.

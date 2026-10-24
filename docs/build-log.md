@@ -4144,3 +4144,17 @@ order, so these two recipes were written.
   in `docs/level-recipe-review.md`. Nothing is built yet; they go in with the
   rest of the review.
 
+## 170. 2026-10-24 — Unit 6 decisions approved; Unit 8 reviewed
+
+- Owner, 2026-10-24: Unit 6's three decisions are approved (a pan-juice
+  Level version of Roast chicken and Roast turkey breast, BBQ pulled chicken
+  roasted in the oven, a glove step for Jerk chicken).
+- **Unit 8 (Stock and soup) reviewed** in `docs/level-recipe-review.md`. The
+  written soups use boxed broth, so Level versions use the student's own
+  stock (Matzo ball soup, Chicken noodle soup, Grilled cheese + tomato soup,
+  Red lentil soup, Minestrone). Matzo ball soup's Level version starts from
+  week 30's stock, not a whole raw bird. Beef and barley soup's Level version
+  uses ground beef instead of chuck. Chicken stock can start from wings or
+  backs. Beef bone broth's fat step is required (§2.1). Matzo ball soup
+  leaves week 32's options. Seven decisions are open.
+
