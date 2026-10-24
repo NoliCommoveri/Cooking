@@ -6,7 +6,7 @@
   "title": "Chicken jambalaya",
   "image": "dishes/chicken-jambalaya.png",
   "cuisine": "louisiana",
-  "skill": "The trinity, deglazing, rice cooked in the pot",
+  "skill": "An onion, celery, and pepper base, deglazing, rice cooked in the pot",
   "skills": ["flavor-base", "sauteing"],
   "prereqs": [],
   "servings": 6,
@@ -25,11 +25,11 @@
     },
     "move": {
       "title": "Brown, sweat, deglaze, simmer",
-      "body": "Jambalaya is a one-pot rice dish from Louisiana. Every step builds flavor in the same pot. First you brown sausage and chicken, which leaves brown bits on the bottom. Then you cook the holy trinity, onion, celery, and green pepper, gently until soft. Then you deglaze: pour in broth and scrape the brown bits loose so they melt into it. Last, the rice cooks right in that flavorful broth and soaks it all up."
+      "body": "Jambalaya is a one-pot rice dish from Louisiana. Every step builds flavor in the same pot. First you brown sausage and chicken, which leaves brown bits on the bottom. Then you cook onion, celery, and green pepper gently until soft. Then you deglaze: pour in broth and scrape the brown bits loose so they melt into it. Last, the rice cooks right in that flavorful broth and soaks it all up."
     },
     "why": [
       { "id": "fond", "title": "The brown bits are flavor", "body": "When meat browns, some of its juices stick to the pot and turn dark brown. That's fond. It looks like a mess, but it's packed with deep, savory flavor. Don't wash it away, and don't let it turn black." },
-      { "id": "trinity", "title": "Sweat the trinity, don't brown it", "body": "Onion, celery, and green pepper are Louisiana's holy trinity, the start of many Cajun and Creole dishes. Here you cook them on medium, stirring, until they're soft and sweet. That's sweating. The water that comes out of them starts loosening the fond." },
+      { "id": "sweat-base", "title": "Sweat the vegetables, don't brown them", "body": "Onion, celery, and green pepper, cooked together, are the start of many Cajun and Creole dishes. Here you cook them on medium, stirring, until they're soft and sweet. That's sweating. The water that comes out of them starts loosening the fond." },
       { "id": "deglaze", "title": "Deglaze to lift it all up", "body": "Pour a little broth into the hot pot and it sizzles and steams. Scrape the bottom with a wooden spoon and the stuck brown bits dissolve into the broth. Now the rice can soak up all that flavor." },
       { "id": "lid", "title": "Lid on, hands off", "body": "Rice cooks in the steam trapped under the lid. Lifting the lid lets the steam escape, and stirring breaks the grains and makes them mushy. Set the timer and leave it alone." }
     ],
@@ -41,7 +41,7 @@
       { "sign": "The chicken isn't 165°F yet", "fix": "Put the lid back on and cook 5 more minutes on low, then check again." }
     ],
     "quiz": [
-      { "q": "What's the holy trinity in Louisiana cooking?", "choices": ["Onion, celery, and green pepper", "Garlic, ginger, and green onion", "Carrot, celery, and onion"], "answer": 0, "explain": "Carrot, celery, and onion is the French and Italian base. Louisiana swaps the carrot for green pepper." },
+      { "q": "Which three vegetables start many Louisiana dishes?", "choices": ["Onion, celery, and green pepper", "Garlic, ginger, and green onion", "Carrot, celery, and onion"], "answer": 0, "explain": "Carrot, celery, and onion is the French and Italian base. Louisiana swaps the carrot for green pepper." },
       { "q": "Why pour broth in and scrape the bottom of the pot?", "choices": ["To lift the brown bits so their flavor goes into the dish", "To clean the pot for later", "To cool the pot down"], "answer": 0, "explain": "That's deglazing. The fond melts into the broth, and the rice soaks it up." }
     ]
   },
@@ -55,10 +55,10 @@
     { "ingredient": "black-pepper", "amount": 0.5, "unit": "tsp", "group": "Spice mix" },
     { "ingredient": "cayenne", "amount": 0.25, "unit": "tsp", "optional": true, "group": "Spice mix" },
     { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Spice mix" },
-    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "round": "up", "prep": "diced", "group": "Trinity" },
-    { "ingredient": "bell-pepper-green", "amount": 1, "unit": "count", "round": "up", "prep": "diced", "group": "Trinity" },
-    { "ingredient": "celery", "amount": 2, "unit": "count", "round": "up", "prep": "diced", "group": "Trinity" },
-    { "ingredient": "garlic", "amount": 4, "unit": "count", "round": "up", "prep": "minced", "group": "Trinity" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "round": "up", "prep": "diced", "group": "Vegetables" },
+    { "ingredient": "bell-pepper-green", "amount": 1, "unit": "count", "round": "up", "prep": "diced", "group": "Vegetables" },
+    { "ingredient": "celery", "amount": 2, "unit": "count", "round": "up", "prep": "diced", "group": "Vegetables" },
+    { "ingredient": "garlic", "amount": 4, "unit": "count", "round": "up", "prep": "minced", "group": "Vegetables" },
     { "ingredient": "tomato", "amount": 2, "unit": "count", "round": "up", "prep": "diced", "group": "Pot" },
     { "ingredient": "tomato-paste", "amount": 1, "unit": "tbsp", "group": "Pot" },
     { "ingredient": "broth-chicken", "amount": 3.5, "unit": "cup", "prep": "low-sodium if you can find it", "group": "Pot" },
@@ -94,7 +94,7 @@
     { "id": "chicken-in", "text": "Use the tongs to spread the chicken in the pot in one layer.", "safety": "adult-nearby", "hazard": "Hot oil, raw chicken", "handles": ["chicken-thigh"], "tip": "Lay each piece down away from you, so any spatter goes the other way." },
     { "id": "wash-2", "type": "wash", "text": "Wash your hands, and wash the mixing bowl with hot, soapy water.", "safety": "solo", "hazard": "Raw chicken" },
     { "id": "brown-chicken", "text": "Leave the chicken alone until it's browned underneath, then turn the pieces and brown the other side. Move it to the plate with the sausage. It won't be cooked through yet.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 360, "timerLabel": "Brown chicken", "why": "fond", "look": "Golden brown chicken, and a darker brown layer on the bottom of the pot, but nothing black." },
-    { "id": "trinity", "text": "Turn the heat to medium. Add the onion, green pepper, and celery and cook, stirring often, until they're soft. Scrape at the bottom as you stir.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 480, "timerLabel": "Sweat the trinity", "why": "trinity", "look": "Soft and shiny, not browned." },
+    { "id": "sweat-vegetables", "text": "Turn the heat to medium. Add the onion, green pepper, and celery and cook, stirring often, until they're soft. Scrape at the bottom as you stir.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 480, "timerLabel": "Sweat the vegetables", "why": "sweat-base", "look": "Soft and shiny, not browned." },
     { "id": "garlic", "text": "Add the garlic, the tomato paste, and the rest of the spice mix. Stir for 1 minute.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 60, "timerLabel": "Garlic and spices", "look": "It smells strong and smoky." },
     { "id": "deglaze", "text": "Pour in 1 cup of the broth. It will sizzle. Deglaze the pot: scrape the bottom with the wooden spoon until all the brown bits come loose and the bottom feels smooth.", "safety": "adult-nearby", "hazard": "Hot pot, steam", "why": "deglaze", "tip": "Pour the broth in slowly and keep your face back from the steam.", "look": "The bottom of the pot is clean, and the broth has turned brown." },
     { "id": "rice", "text": "Stir in the rice for 1 minute, until every grain is coated. Pour in the rest of the broth, and add the tomatoes and bay leaves. Put the sausage and chicken back in, with any juice on the plate.", "safety": "adult-nearby", "hazard": "Hot pot" },

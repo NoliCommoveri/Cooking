@@ -4715,7 +4715,7 @@ export const LIBRARY = {
    "title": "Chicken jambalaya",
    "image": "img/dishes/chicken-jambalaya.webp",
    "cuisine": "louisiana",
-   "skill": "The trinity, deglazing, rice cooked in the pot",
+   "skill": "An onion, celery, and pepper base, deglazing, rice cooked in the pot",
    "servings": 6,
    "scaling": {
     "mode": "free",
@@ -7504,7 +7504,7 @@ export const LIBRARY = {
    "id": "chicken-jambalaya",
    "title": "Chicken jambalaya",
    "unit": 3,
-   "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, the trinity sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
+   "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, onion, celery, and green pepper sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
    "skills": [
     "flavor-base",
     "sauteing"
@@ -9267,7 +9267,7 @@ export const LIBRARY = {
         "explain": "Rinsing doesn't make chicken safer. Cooking to 165°F does."
        },
        {
-        "q": "Grilled chicken is done. Where does it go?",
+        "q": "The chicken is cooked. Where does it go?",
         "choices": [
          "A clean plate",
          "Back on the plate it came on raw",

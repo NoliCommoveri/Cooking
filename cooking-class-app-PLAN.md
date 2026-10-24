@@ -229,7 +229,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 18b | Red lentil soup (mercimek) | Turkish | Cooking lentils until they melt · *pick one with 18a* | Adult nearby | Planned 2026-10-24 (Level 3) |
 | 19 | Red beans and rice | Louisiana | Onion/celery/pepper base, simmering beans until creamy | Adult nearby | Chicken andouille instead of ham hock; check casings |
 | 20a | Jollof rice with chicken | Nigerian | Blended pepper base, cooking rice in the sauce | Adult nearby | Scotch bonnet → jalapeño. No dried crayfish or shrimp bouillon |
-| 20b | Chicken jambalaya | Louisiana | The trinity, deglazing, rice cooked in the pot · *pick one with 20a* | Adult nearby | Chicken andouille or beef kielbasa, collagen-cased or skinless. Added 2026-10-24 (owner); also Level 3 week 15 |
+| 20b | Chicken jambalaya | Louisiana | An onion, celery, and pepper base, deglazing, rice cooked in the pot · *pick one with 20a* | Adult nearby | Chicken andouille or beef kielbasa, collagen-cased or skinless. Added 2026-10-24 (owner); also Level 3 week 15 |
 | 21a | BBQ pulled chicken + coleslaw | American | Dry rub, reducing a sauce | Adult nearby | |
 | 21b | Blackened cod | Louisiana | A spice rub, searing fish · *pick one with 21a, 21c* | Adult nearby | Planned 2026-10-24 |
 | 21c | BBQ-rubbed salmon | American | A sweet-smoky rub, sear then bake · *pick one with 21a, 21b* | Adult nearby | Planned 2026-10-24 |
@@ -1375,7 +1375,7 @@ Level 1's "Clean and unclean animals" and Level 2's "Labels and hidden unclean i
 | 12 | **Mastery:** Israeli salad (fine dice) | Timed dice: one onion, one pepper | Name and size each classic cut | Prep and store all salad vegetables for the Sabbath |
 | 13 | Garlic green beans | Blanch and shock green beans and spinach; shimmer test for hot oil | Blanching: why vegetables stay green and crisp; oils and smoke points | Blanch and store beans for the Sabbath |
 | 14 | Beef picadillo (sofrito base) | Sweat vs. brown onions | Browning and why it adds flavor | Make and freeze a sofrito batch |
-| 15 | Cajun rice dressing with beef (trinity) | Deglaze a pan, scrape the fond | Aromatic bases across cuisines | Cook rice dressing ahead; cool safely |
+| 15 | Cajun rice dressing with beef (onion, celery, and bell pepper) | Deglaze a pan, scrape the fond | Aromatic bases across cuisines | Cook rice dressing ahead; cool safely |
 | 16 | **Mastery:** ragù bolognese (Beef ragù's ground-beef Level version) | Sauté a mixed vegetable pan unaided | Explain sweat vs. sauté | Make ragù ahead for the Sabbath meal |
 | 17 | Red lentil soup (mercimek) | Rinse and pick over lentils | Legume types and cook times | Freeze soup in portions |
 | 18 | Red beans and rice (beef sausage, collagen-cased or skinless, or none; §2.1) | Quick-soak vs. overnight soak | Why beans are soaked | Soak beans Friday for a later meal |

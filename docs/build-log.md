@@ -4259,3 +4259,18 @@ order, so these two recipes were written.
   the library for families with the next release.
 - Tests: a new Level course schedules 4 written recipes (Meatloaf is
   written), with 32 waiting; the Level-lesson lint test sets its own minutes.
+
+## 175. 2026-10-24 — No "holy trinity" in the recipes
+
+- Owner, 2026-10-24: the recipes don't use the term "holy trinity" (or "the
+  trinity"). Chicken jambalaya now says onion, celery, and green pepper: its
+  skill line, Learn card, Why? card ("Sweat the vegetables, don't brown
+  them"), quiz question, ingredient group (Vegetables), and step and timer.
+  The step and Why? card ids changed with them. The same wording is in its
+  `course.json` card, Level 3 week 15's note and the Cajun rice dressing card,
+  plan §4 and §12.3, and the review doc. Earlier build log entries keep the
+  words they had.
+- Week 3's knowledge quiz asks about cooked chicken, not grilled.
+- The Unit 1 part pages are in a review doc for the owner, "Level 3 Unit 1
+  part pages" (claude.ai), copied from `level-3.json`; changes from the review
+  go back into `level-3.json`.

@@ -757,11 +757,11 @@
       "unit": 3,
       "cuisine": "louisiana",
       "skills": ["flavor-base", "sauteing"],
-      "skill": "The trinity, deglazing, rice cooked in the pot",
+      "skill": "An onion, celery, and pepper base, deglazing, rice cooked in the pot",
       "image": "dishes/chicken-jambalaya.png",
       "safety": "adult-nearby",
       "minutes": 75,
-      "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, the trinity sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
+      "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, onion, celery, and green pepper sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
       "main": ["chicken thighs", "smoked chicken andouille", "onion, celery, green pepper", "rice", "tomatoes"],
       "method": "stove",
       "tags": {
