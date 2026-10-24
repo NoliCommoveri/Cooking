@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [159. 2026-10-24 — The kitchen's Level week (slice 12c)](docs/build-log.md#159-2026-10-24--the-kitchens-level-week-slice-12c)
+**Latest build log entry:** [160. 2026-10-24 — Japchae in the thin-slicing group](docs/build-log.md#160-2026-10-24--japchae-in-the-thin-slicing-group)
 
 ## Current features
 
@@ -37,7 +37,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Test-cook notice**: parents from before Getting started see a one-time note, above the lockers, to read a lesson through before their kids cook it; Getting started ends with the same reminder.
 - **Demo page** (`/demo`): no account needed. Try the sample lessons in either theme, including the three choices for julienne, preview diet settings and a real shopping list, and browse the whole course by dish or by skill.
 - **Syllabus** (`/syllabus`): the course as a homeschool course, with objectives, units, hours, pacing, a suggested credit, and the rubric. Printable.
-- **Course outline** (`content/course.json`): all 97 planned dishes (59 numbers, with pick-one choices) in teaching order, with their skills and prerequisites, checked by the linter.
+- **Course outline** (`content/course.json`): all 98 planned dishes (59 numbers, with pick-one choices) in teaching order, with their skills and prerequisites, checked by the linter.
 - **Lesson numbers** (`src/content/course.js`): come from the course order; pick-one choices share a number (1a, 1b, 1c), 59 in all.
 - **Appointed Times unit** (unit 8 in `content/units.json`): lessons beside the numbered course, labeled A1, A2: unleavened flatbread and cottage cheese crescent rolls so far.
 - **Family recipes** (Parents → Recipes, `src/content/recipe.js`, `src/worker/recipes.js`): a parent adds the family's own recipes one thing at a time (basics, ingredients from the list or typed in, tools, steps with safety levels and timers, meal type, a "why we make this" card, then review). The same unclean-food and food-safety checks as lessons; a wash-hands step is added after raw food. They show on an "Our recipes" shelf in every kitchen and can be queued, shopped for, and cooked like lessons. Only that family sees them.

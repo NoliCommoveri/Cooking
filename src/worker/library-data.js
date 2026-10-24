@@ -6997,6 +6997,31 @@ export const LIBRARY = {
    }
   },
   {
+   "id": "japchae",
+   "title": "Japchae",
+   "unit": 4,
+   "about": "Korean glass noodles made from sweet potato starch, tossed with thin strips of beef, spinach, carrots, and mushrooms in a sweet soy and sesame sauce.",
+   "skills": [
+    "thin-slicing",
+    "stir-frying",
+    "julienne"
+   ],
+   "minutes": 50,
+   "cuisine": "korean",
+   "pickOne": "thin-slicing",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "ginger-soy",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "adventurous",
+    "veggies": "lots"
+   }
+  },
+  {
    "id": "suya",
    "title": "Suya (spiced beef skewers)",
    "unit": 4,

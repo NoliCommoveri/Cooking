@@ -252,6 +252,7 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 28 | Philly cheesesteak | American | Thin slicing (deliberate repeat of 27) | Adult nearby | Prereq: 27 |
 | 29a | Lomo saltado | Peruvian | Beef stir-fry | Adult nearby | Aji amarillo sub: yellow bell pepper + cayenne |
 | 29b | Beef and broccoli | Chinese-American | Thin slicing, a quick stir-fry · *pick one with 29a* | Adult nearby | Soy and broth, not oyster sauce. Planned 2026-10-24 |
+| 29c | Japchae | Korean | Thin slicing beef, glass noodles · *pick one with 29a, 29b* | Adult nearby | Sweet potato glass noodles, soy, sesame; no oyster sauce, no leaven. Planned 2026-10-24 (owner) |
 | 30 | Suya (spiced beef skewers) | Nigerian | Thin slicing, dry rub, broiling | Adult nearby | Ground-peanut spice rub; carries the peanut tag |
 | 31 | Chicken yassa | Senegalese | Citrus-mustard marinade, slow-cooked onions | Adult nearby | |
 | 32 | Chicken tinga tacos | Mexican | Braising, shredding | Adult nearby | |

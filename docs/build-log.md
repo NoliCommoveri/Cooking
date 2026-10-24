@@ -3962,3 +3962,16 @@ Phase 12, slice 12c (plan §12.4). Behind the Next release switch.
   on the dev server, clock set to a Monday: the Level card in both themes, a
   drill page and Done, a mastery lesson card, and the parent's Take back and
   Undo (no sideways scroll, no errors).
+
+## 160. 2026-10-24 — Japchae in the thin-slicing group
+
+Owner, 2026-10-24: add japchae to the thin-slicing group.
+- **`content/course.json`:** Japchae (29c), a planned pick-one dish after
+  Lomo saltado and Beef and broccoli: thin-sliced beef and julienned
+  vegetables with sweet potato glass noodles in soy and sesame. No oyster
+  sauce and no leaven. Tagged beef, ginger-soy and sweet-savory, mild, $$.
+  The course has 98 dishes, still 59 numbers.
+- **Picture:** a stand-in from the meat drawing, noted in
+  `content/images/LICENSES.md`, until the owner's next sheet.
+- **Plan §4:** the dish's row. Tests: 338 (the course test counts 98 dishes
+  and checks japchae is 29c); the lesson preview rebuilt.

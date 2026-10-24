@@ -39,6 +39,8 @@ use in this app. Cropped from the source sheets in `source/` with
 | `source/sheet-27-level-pick-ones-1.png` | `dishes/chopped-salad-vinaigrette.png`, `dishes/vegetable-stir-fry.png`, `dishes/red-lentil-soup.png`, `dishes/beef-stew.png` |
 | `source/sheet-28-level-pick-ones-2.png` | `dishes/shish-taouk.png`, `dishes/beef-ragu.png`, `dishes/mujaddara.png`, `dishes/pita-bread.png` |
 
+`dishes/japchae.png` is a stand-in made from the meal-type drawing `meals/meat.svg` (drawn for this app) until the owner's next sheet.
+
 Dishes a later sheet replaced aren't listed under the earlier sheet. `tools/dish-sheets.txt` has the full map.
 
 ## World map
