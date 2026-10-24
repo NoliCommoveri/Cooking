@@ -220,24 +220,31 @@ Lessons are grouped into units by skill. International and American dishes are m
 ### Unit 3 — Spices and flavor bases
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
-| 16 | Chana masala | Indian | Blooming spices, onion-tomato base | Adult nearby | Amchur sub: lemon |
+| 16a | Chana masala | Indian | Blooming spices, onion-tomato base | Adult nearby | Amchur sub: lemon |
+| 16b | Coconut chickpea curry | Indian | Blooming spices, a coconut curry · *pick one with 16a* | Adult nearby | Planned 2026-10-24 |
 | 17 | Beef chili | American | Batch browning, toasting spices | Adult nearby | |
 | 18 | Misir wot | Ethiopian | Spiced lentils | Adult nearby | Berbere sub: paprika + cayenne + warm spices; serve with rice |
 | 19 | Red beans and rice | Louisiana | Onion/celery/pepper base, simmering beans until creamy | Adult nearby | Chicken andouille instead of ham hock; check casings |
 | 20 | Jollof rice with chicken | Nigerian | Blended pepper base, cooking rice in the sauce | Adult nearby | Scotch bonnet → jalapeño. No dried crayfish or shrimp bouillon |
-| 21 | BBQ pulled chicken + coleslaw | American | Dry rub, reducing a sauce | Adult nearby | |
-| 22 | Chicken tagine with olives | Moroccan | Layered spice braise | Adult nearby | Preserved lemon sub; ras el hanout sub; Dutch oven |
-| 23 | Peanut stew (maafe) | Malian | Building a one-pot stew | Adult nearby | Peanut butter; carries the peanut tag |
+| 21a | BBQ pulled chicken + coleslaw | American | Dry rub, reducing a sauce | Adult nearby | |
+| 21b | Blackened cod | Louisiana | A spice rub, searing fish · *pick one with 21a, 21c* | Adult nearby | Planned 2026-10-24 |
+| 21c | BBQ-rubbed salmon | American | A sweet-smoky rub, sear then bake · *pick one with 21a, 21b* | Adult nearby | Planned 2026-10-24 |
+| 22a | Chicken tagine with olives | Moroccan | Layered spice braise | Adult nearby | Preserved lemon sub; ras el hanout sub; Dutch oven |
+| 22b | Caribbean coconut curry lamb chops | Jamaican | Searing, then braising in coconut curry · *pick one with 22a* | Adult nearby | Hot pepper optional. Planned 2026-10-24 |
+| 23a | Peanut stew (maafe) | Malian | Building a one-pot stew | Adult nearby | Peanut butter; carries the peanut tag |
+| 23b | Moqueca (Brazilian coconut fish stew) | Brazilian | A one-pot coconut stew · *pick one with 23a* | Adult nearby | No seafood stock. Planned 2026-10-24 |
 | 24 | Koshari | Egyptian | Building a dish in layers, crispy onions | Adult nearby | Lentils, rice, pasta, tomato sauce |
 | 25 | Butter chicken | Indian | Marinating, finishing with cream | Adult nearby | |
-| 26 | Jerk chicken | Jamaican | Wet marinade, broiling | Adult nearby | Habanero or jalapeño |
+| 26a | Jerk chicken | Jamaican | Wet marinade, broiling | Adult nearby | Habanero or jalapeño |
+| 26b | Broiled honey-soy salmon | American | A quick marinade, broiling · *pick one with 26a* | Adult nearby | 145°F. Planned 2026-10-24 |
 
 ### Unit 4 — Breaking down and slicing meat, marinades
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
 | 27 | Beef bulgogi | Korean | Thin slicing (partly frozen), marinating | Adult nearby | Asian pear sub: Bosc pear or apple |
 | 28 | Philly cheesesteak | American | Thin slicing (deliberate repeat of 27) | Adult nearby | Prereq: 27 |
-| 29 | Lomo saltado | Peruvian | Beef stir-fry | Adult nearby | Aji amarillo sub: yellow bell pepper + cayenne |
+| 29a | Lomo saltado | Peruvian | Beef stir-fry | Adult nearby | Aji amarillo sub: yellow bell pepper + cayenne |
+| 29b | Beef and broccoli | Chinese-American | Thin slicing, a quick stir-fry · *pick one with 29a* | Adult nearby | Soy and broth, not oyster sauce. Planned 2026-10-24 |
 | 30 | Suya (spiced beef skewers) | Nigerian | Thin slicing, dry rub, broiling | Adult nearby | Ground-peanut spice rub; carries the peanut tag |
 | 31 | Chicken yassa | Senegalese | Citrus-mustard marinade, slow-cooked onions | Adult nearby | |
 | 32 | Chicken tinga tacos | Mexican | Braising, shredding | Adult nearby | |
@@ -265,7 +272,8 @@ Lessons are grouped into units by skill. International and American dishes are m
 | # | Dish | Cuisine | Skill | Max safety | Notes |
 |---|---|---|---|---|---|
 | 44 | Homemade granola (breakfast) | American | Oven browning, stirring partway | Adult nearby | Mixing steps are Solo; oven steps make the lesson Adult nearby |
-| 45 | Meatloaf with glaze | American | Binders, thermometer | Adult nearby | |
+| 45a | Meatloaf with glaze | American | Binders, thermometer | Adult nearby | |
+| 45b | Lamb kofta with yogurt sauce | Lebanese | Binders, shaping by hand · *pick one with 45a* | Adult nearby | Ground lamb, 160°F. Planned 2026-10-24 |
 | 46 | Swedish meatballs | Swedish | Browning, roux gravy | Adult nearby | Beef; cranberry for lingonberry. Prereq: any roux lesson (15) |
 | 47 | Roast chicken + pan gravy | American | Roasting, resting, carving, gravy | Adult nearby | Prereq: any roux lesson (15) |
 | 48 | Pot roast | American | Long oven braise | Adult nearby | |
@@ -273,7 +281,8 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 50 | Spanakopita | Greek | Phyllo, layering | Adult nearby | |
 | 51 | Spinach & mushroom quiche | French | Pastry, blind baking, custard | Adult nearby | No bacon |
 | 52 | Chicken pot pie | American | Roux filling + pie crust | Adult nearby | Prereq: any roux lesson (15), and 51 |
-| 53 | Chicken katsu | Japanese | Breading station, shallow frying | **Adult hands-on** | Tonkatsu sauce sub |
+| 53a | Chicken katsu | Japanese | Breading station, shallow frying | **Adult hands-on** | Tonkatsu sauce sub |
+| 53b | Coconut-crusted fish with pineapple salsa | Hawaiian | A coconut breading, pan-frying · *pick one with 53a* | **Adult hands-on** | Planned 2026-10-24 |
 | 54 | Kelewele (spiced plantains) | Ghanaian | Shallow frying | **Adult hands-on** | Plantains from the produce aisle |
 | 55 | Fish and chips | British | Batter, deep-frying with a thermometer | **Adult hands-on** | Cod or haddock; fry in vegetable oil, never beef dripping |
 
@@ -1012,6 +1021,8 @@ Each person rates what they love and hate, the app picks the best dish or **vari
 **Jerk salmon is a variation of jerk chicken** (owner, 2026-10-24), not a pick-one dish: the same skills (marinating, broiling), salmon instead of chicken, with a short marinade (fish goes soft in a long one), a mango salsa, and 145°F. Draft tags: salmon; chili-heat, coconut-tropical; some; $$$. It waits on jerk chicken being written.
 
 **Written 2026-10-24** (owner: "write those four groups as lessons"): chicken souvlaki pitas (4b), turkey lettuce wraps (9b), chicken piccata (11b), pineapple teriyaki salmon (11c), and huevos rancheros (14b), in the course as pick-one choices; the course still has 59 numbers. Their pictures are from the owner's sheet 24.
+
+**In the course outline 2026-10-24** (owner): the other nine are planned pick-one choices in Cook Around the World, with pictures from the owner's sheets 25 and 26, waiting to be written. New dishes are part of the live course for every family, not the next release (owner, 2026-10-24).
 
 Checks for every one, when written: no shrimp, oyster sauce, or seafood stock; labels on curry paste, hoisin, and fish sauce read for shellfish; doneness at the safe minimums (§3), whatever a source says.
 

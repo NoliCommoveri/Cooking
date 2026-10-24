@@ -580,7 +580,32 @@
         "budget": "$",
         "familiar": "adventurous",
         "veggies": "some"
-      }
+      },
+      "pickOne": "blooming-spices"
+    },
+    {
+      "id": "coconut-chickpea-curry",
+      "title": "Coconut chickpea curry",
+      "cuisine": "indian",
+      "skills": ["blooming-spices", "flavor-base"],
+      "skill": "Blooming spices, a coconut curry",
+      "image": "dishes/coconut-chickpea-curry.png",
+      "safety": "adult-nearby",
+      "minutes": 30,
+      "estimated": true,
+      "about": "Chickpeas and spinach simmered in a creamy coconut curry sauce with ginger, garlic, and warm spices, with rice or naan.",
+      "main": ["chickpeas", "coconut milk", "spinach", "curry powder", "tomatoes"],
+      "method": "stove",
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["coconut-tropical", "warm-spices"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "unit": 3,
+      "pickOne": "blooming-spices"
     },
     { "id": "beef-chili", "title": "Beef chili", "unit": 3, "cuisine": "american", "skills": ["searing", "blooming-spices", "simmering"], "skill": "Batch browning, toasting spices", "image": "dishes/beef-chili.png", "safety": "adult-nearby", "minutes": 75, "estimated": true, "about": "A thick, hearty beef and bean chili with toasted spices.", "main": ["ground beef", "kidney beans", "tomatoes", "onion", "chili powder"], "method": "stove", "tags": { "protein": "beef", "flavors": ["warm-spices", "rich-tomato"], "heat": "some", "budget": "$$", "familiar": "everyday", "veggies": "some" } },
     {
@@ -673,7 +698,56 @@
         "budget": "$",
         "familiar": "everyday",
         "veggies": "some"
-      }
+      },
+      "pickOne": "spice-rubs"
+    },
+    {
+      "id": "blackened-cod",
+      "title": "Blackened cod",
+      "cuisine": "louisiana",
+      "skills": ["spice-rubs", "searing"],
+      "skill": "A spice rub, searing fish",
+      "image": "dishes/blackened-cod.png",
+      "safety": "adult-nearby",
+      "minutes": 20,
+      "estimated": true,
+      "about": "Cod coated in a smoky, peppery spice rub and seared in a hot skillet until a dark crust forms, with lemon and a green salad.",
+      "main": ["cod", "smoked paprika", "garlic powder", "thyme", "lemon"],
+      "method": "stove",
+      "tags": {
+        "protein": "white-fish",
+        "flavors": ["smoky-bbq", "chili-heat"],
+        "heat": "spicy",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "unit": 3,
+      "pickOne": "spice-rubs"
+    },
+    {
+      "id": "bbq-salmon",
+      "title": "BBQ-rubbed salmon",
+      "cuisine": "american",
+      "skills": ["spice-rubs", "searing"],
+      "skill": "A sweet-smoky rub, sear then bake",
+      "image": "dishes/bbq-salmon.png",
+      "safety": "adult-nearby",
+      "minutes": 25,
+      "estimated": true,
+      "about": "Salmon rubbed with brown sugar and smoked paprika, seared, then finished in the oven with a barbecue glaze. With corn and coleslaw.",
+      "main": ["salmon", "brown sugar", "smoked paprika", "barbecue sauce", "corn"],
+      "method": "stove-oven",
+      "tags": {
+        "protein": "salmon",
+        "flavors": ["smoky-bbq", "sweet-savory"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "unit": 3,
+      "pickOne": "spice-rubs"
     },
     {
       "id": "chicken-tagine",
@@ -696,7 +770,32 @@
         "budget": "$$",
         "familiar": "adventurous",
         "veggies": "some"
-      }
+      },
+      "pickOne": "braising"
+    },
+    {
+      "id": "caribbean-lamb-chops",
+      "title": "Caribbean coconut curry lamb chops",
+      "cuisine": "jamaican",
+      "skills": ["braising", "blooming-spices"],
+      "skill": "Searing, then braising in coconut curry",
+      "image": "dishes/caribbean-lamb-chops.png",
+      "safety": "adult-nearby",
+      "minutes": 75,
+      "estimated": true,
+      "about": "Lamb chops browned and simmered in a coconut curry sauce with thyme, green onions, and a whole hot pepper you can leave out.",
+      "main": ["lamb chops", "coconut milk", "curry powder", "thyme", "green onions"],
+      "method": "stove",
+      "tags": {
+        "protein": "lamb",
+        "flavors": ["coconut-tropical", "warm-spices"],
+        "heat": "some",
+        "budget": "$$$",
+        "familiar": "adventurous",
+        "veggies": "light"
+      },
+      "unit": 3,
+      "pickOne": "braising"
     },
     {
       "id": "peanut-stew",
@@ -719,7 +818,32 @@
         "budget": "$",
         "familiar": "adventurous",
         "veggies": "some"
-      }
+      },
+      "pickOne": "one-pot-stews"
+    },
+    {
+      "id": "moqueca",
+      "title": "Moqueca (Brazilian coconut fish stew)",
+      "cuisine": "brazilian",
+      "skills": ["one-pot-stews", "flavor-base"],
+      "skill": "A one-pot coconut stew",
+      "image": "dishes/moqueca.png",
+      "safety": "adult-nearby",
+      "minutes": 30,
+      "estimated": true,
+      "about": "A Brazilian stew of white fish simmered in coconut milk and tomatoes with peppers, onion, and lime, with rice.",
+      "main": ["cod", "coconut milk", "tomatoes", "bell peppers", "lime"],
+      "method": "stove",
+      "tags": {
+        "protein": "white-fish",
+        "flavors": ["coconut-tropical", "rich-tomato"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "adventurous",
+        "veggies": "some"
+      },
+      "unit": 3,
+      "pickOne": "one-pot-stews"
     },
     {
       "id": "koshari",
@@ -788,7 +912,32 @@
         "budget": "$",
         "familiar": "new-ish",
         "veggies": "light"
-      }
+      },
+      "pickOne": "broiling"
+    },
+    {
+      "id": "honey-soy-salmon",
+      "title": "Broiled honey-soy salmon",
+      "cuisine": "american",
+      "skills": ["broiling", "marinating"],
+      "skill": "A quick marinade, broiling",
+      "image": "dishes/honey-soy-salmon.png",
+      "safety": "adult-nearby",
+      "minutes": 25,
+      "estimated": true,
+      "about": "Salmon in a short honey, soy, and ginger marinade, broiled until the glaze caramelizes at the edges, with green beans.",
+      "main": ["salmon", "honey", "soy sauce", "ginger", "green beans"],
+      "method": "oven",
+      "tags": {
+        "protein": "salmon",
+        "flavors": ["sweet-savory", "ginger-soy"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "unit": 3,
+      "pickOne": "broiling"
     },
     {
       "id": "beef-bulgogi",
@@ -836,7 +985,54 @@
         "veggies": "some"
       }
     },
-    { "id": "lomo-saltado", "title": "Lomo saltado", "unit": 4, "cuisine": "peruvian", "skills": ["stir-frying", "thin-slicing"], "skill": "Beef stir-fry", "image": "dishes/lomo-saltado.png", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "A Peruvian beef stir-fry with onions, tomatoes, and soy sauce, served with fries and rice.", "main": ["beef sirloin", "onion", "tomatoes", "soy sauce", "potatoes"], "method": "stove-oven", "tags": { "protein": "beef", "flavors": ["ginger-soy", "tangy"], "heat": "some", "budget": "$$", "familiar": "adventurous", "veggies": "some" } },
+    {
+      "id": "lomo-saltado",
+      "title": "Lomo saltado",
+      "unit": 4,
+      "cuisine": "peruvian",
+      "skills": ["stir-frying", "thin-slicing"],
+      "skill": "Beef stir-fry",
+      "image": "dishes/lomo-saltado.png",
+      "safety": "adult-nearby",
+      "minutes": 45,
+      "estimated": true,
+      "about": "A Peruvian beef stir-fry with onions, tomatoes, and soy sauce, served with fries and rice.",
+      "main": ["beef sirloin", "onion", "tomatoes", "soy sauce", "potatoes"],
+      "method": "stove-oven",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["ginger-soy", "tangy"],
+        "heat": "some",
+        "budget": "$$",
+        "familiar": "adventurous",
+        "veggies": "some"
+      },
+      "pickOne": "thin-slicing"
+    },
+    {
+      "id": "beef-and-broccoli",
+      "title": "Beef and broccoli",
+      "cuisine": "chinese-american",
+      "skills": ["thin-slicing", "stir-frying"],
+      "skill": "Thin slicing, a quick stir-fry",
+      "image": "dishes/beef-and-broccoli.png",
+      "safety": "adult-nearby",
+      "minutes": 25,
+      "estimated": true,
+      "about": "Thinly sliced flank steak and broccoli stir-fried in a glossy soy, ginger, and garlic sauce, over rice.",
+      "main": ["flank steak", "broccoli", "soy sauce", "ginger and garlic", "rice"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["ginger-soy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "unit": 4,
+      "pickOne": "thin-slicing"
+    },
     {
       "id": "suya",
       "title": "Suya (spiced beef skewers)",
@@ -1128,7 +1324,31 @@
       }
     },
     { "id": "granola", "title": "Homemade granola", "unit": 6, "cuisine": "american", "skills": ["oven-browning"], "skill": "Oven browning, stirring partway", "image": "dishes/granola.png", "safety": "adult-nearby", "minutes": 50, "estimated": true, "about": "Crunchy oven-toasted oats, nuts, and honey. A breakfast dish.", "main": ["rolled oats", "nuts or seeds", "honey", "oil", "dried fruit"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
-    { "id": "meatloaf", "title": "Meatloaf with glaze", "unit": 6, "cuisine": "american", "skills": ["binders"], "skill": "Binders, thermometer", "image": "dishes/meatloaf.png", "safety": "adult-nearby", "minutes": 90, "estimated": true, "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.", "main": ["ground beef", "onion", "eggs", "breadcrumbs", "ketchup"], "method": "oven", "tags": { "protein": "beef", "flavors": ["sweet-savory", "mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "meatloaf", "title": "Meatloaf with glaze", "unit": 6, "cuisine": "american", "skills": ["binders"], "skill": "Binders, thermometer", "image": "dishes/meatloaf.png", "safety": "adult-nearby", "minutes": 90, "estimated": true, "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.", "main": ["ground beef", "onion", "eggs", "breadcrumbs", "ketchup"], "method": "oven", "tags": { "protein": "beef", "flavors": ["sweet-savory", "mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" }, "pickOne": "binders" },
+    {
+      "id": "lamb-kofta",
+      "title": "Lamb kofta with yogurt sauce",
+      "cuisine": "lebanese",
+      "skills": ["binders"],
+      "skill": "Binders, shaping by hand",
+      "image": "dishes/lamb-kofta.png",
+      "safety": "adult-nearby",
+      "minutes": 40,
+      "estimated": true,
+      "about": "Ground lamb mixed with onion, parsley, and warm spices, shaped by hand and browned, on flatbread with a yogurt-mint sauce.",
+      "main": ["ground lamb", "onion", "parsley", "Greek yogurt", "flatbread"],
+      "method": "stove",
+      "tags": {
+        "protein": "lamb",
+        "flavors": ["warm-spices", "herby-lemony"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "adventurous",
+        "veggies": "some"
+      },
+      "unit": 6,
+      "pickOne": "binders"
+    },
     {
       "id": "swedish-meatballs",
       "title": "Swedish meatballs",
@@ -1249,7 +1469,54 @@
         "veggies": "some"
       }
     },
-    { "id": "chicken-katsu", "title": "Chicken katsu", "unit": 6, "cuisine": "japanese", "skills": ["breading-frying"], "skill": "Breading station, shallow frying", "image": "dishes/chicken-katsu.png", "safety": "adult-hands-on", "minutes": 60, "estimated": true, "about": "Japanese crispy breaded chicken cutlets, shallow-fried, with a tangy sauce and rice.", "main": ["chicken breast", "panko", "eggs", "rice", "cabbage"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["mild-buttery", "sweet-savory"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "some" } },
+    {
+      "id": "chicken-katsu",
+      "title": "Chicken katsu",
+      "unit": 6,
+      "cuisine": "japanese",
+      "skills": ["breading-frying"],
+      "skill": "Breading station, shallow frying",
+      "image": "dishes/chicken-katsu.png",
+      "safety": "adult-hands-on",
+      "minutes": 60,
+      "estimated": true,
+      "about": "Japanese crispy breaded chicken cutlets, shallow-fried, with a tangy sauce and rice.",
+      "main": ["chicken breast", "panko", "eggs", "rice", "cabbage"],
+      "method": "stove",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["mild-buttery", "sweet-savory"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "pickOne": "breading-frying"
+    },
+    {
+      "id": "coconut-crusted-fish",
+      "title": "Coconut-crusted fish with pineapple salsa",
+      "cuisine": "hawaiian",
+      "skills": ["breading-frying"],
+      "skill": "A coconut breading, pan-frying",
+      "image": "dishes/coconut-crusted-fish.png",
+      "safety": "adult-hands-on",
+      "minutes": 35,
+      "estimated": true,
+      "about": "White fish in a crisp shredded-coconut crust, pan-fried and topped with a fresh pineapple and red pepper salsa.",
+      "main": ["cod or tilapia", "shredded coconut", "panko", "pineapple", "red bell pepper"],
+      "method": "stove-oven",
+      "tags": {
+        "protein": "white-fish",
+        "flavors": ["coconut-tropical"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "unit": 6,
+      "pickOne": "breading-frying"
+    },
     {
       "id": "kelewele",
       "title": "Kelewele (spiced plantains)",

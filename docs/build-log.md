@@ -3563,3 +3563,25 @@ versions, which had the most space between dishes). Cropped with
 chicken piccata, turkey lettuce wraps, huevos rancheros, and chicken souvlaki
 pitas, replacing the placeholders; web copies rebuilt.
 `tools/dish-sheets.txt` and `content/images/LICENSES.md` list the sheet.
+
+## 143. 2026-10-24 — Nine planned pick-one dishes
+
+The owner supplied sheets 25 and 26 (ChatGPT, from Claude's prompts),
+cropped into pictures for the other nine proposed pick-one dishes. They're
+now in Cook Around the World's outline (`content/course.json`) as planned
+dishes, each the second or third choice beside a dish with the same skills,
+with estimated times and tags: 16b coconut chickpea curry, 21b blackened
+cod, 21c BBQ-rubbed salmon, 22b Caribbean coconut curry lamb chops, 23b
+moqueca, 26b broiled honey-soy salmon, 29b beef and broccoli, 45b lamb kofta,
+and 53b coconut-crusted fish. None is written yet. The course still has 59
+numbers (89 dishes).
+- **Not behind the next release** (owner, 2026-10-24): new dishes are part of
+  the live course for every family. A new test checks a family without the
+  next release gets the five new lessons in its library and the planned
+  ones in its default course plan, as second choices.
+- The linter caught "no shrimp" and "no oyster sauce" in two dish cards'
+  descriptions; the blocked-word check doesn't read "no", so those notes stay
+  in the plan only.
+- Plan §4's unit tables and §6.21 updated; `tools/dish-sheets.txt` and
+  `content/images/LICENSES.md` list the sheets.
+- Tests: 300.

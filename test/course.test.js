@@ -8,10 +8,10 @@ import { numberCourse, courseEntries, prereqNotes } from '../src/content/course.
 
 const C = JSON.parse(readFileSync('content/course.json', 'utf8')).dishes;
 
-test('the suggested order: 80 dishes, 59 numbers, pick-one groups lettered', () => {
+test('the suggested order: 89 dishes, 59 numbers, pick-one groups lettered', () => {
   const { labels, total } = numberCourse(C);
   assert.equal(total, 59);
-  assert.equal(Object.keys(labels).length, 80);
+  assert.equal(Object.keys(labels).length, 89);
   assert.deepEqual(['spring-rolls', 'chicken-fajitas', 'shoestring-fries'].map((id) => labels[id]), ['1a', '1b', '1c']);
   assert.equal(labels['chicken-caesar'], '4a');
   assert.equal(labels['chicken-souvlaki-pitas'], '4b', 'a dish added to a group shares its number');

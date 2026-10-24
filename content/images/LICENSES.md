@@ -34,6 +34,8 @@ use in this app. Cropped from the source sheets in `source/` with
 | `source/sheet-22-swaps-2.png` | `dishes/60-honey-garlic-chicken.png`, `dishes/61-chicken-spinach-crepes.png`, `dishes/62-japanese-chicken-curry.png`, `dishes/34-red-beans-and-rice.png`, `dishes/48-fish-and-chips.png` |
 | `source/sheet-23-appointed-times.png` | `dishes/unleavened-flatbread.png`, `dishes/cottage-cheese-crescents.png` |
 | `source/sheet-24-pick-ones.png` | `dishes/pineapple-teriyaki-salmon.png`, `dishes/chicken-piccata.png`, `dishes/turkey-lettuce-wraps.png`, `dishes/huevos-rancheros.png`, `dishes/chicken-souvlaki-pitas.png` |
+| `source/sheet-25-quick-smoky.png` | `dishes/beef-and-broccoli.png`, `dishes/coconut-chickpea-curry.png`, `dishes/blackened-cod.png`, `dishes/bbq-salmon.png`, `dishes/honey-soy-salmon.png` |
+| `source/sheet-26-tropical-lamb.png` | `dishes/moqueca.png`, `dishes/coconut-crusted-fish.png`, `dishes/lamb-kofta.png`, `dishes/caribbean-lamb-chops.png` |
 
 Dishes a later sheet replaced aren't listed under the earlier sheet. `tools/dish-sheets.txt` has the full map.
 

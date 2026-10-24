@@ -5571,6 +5571,7 @@ export const LIBRARY = {
     "blooming-spices",
     "flavor-base"
    ],
+   "pickOne": "blooming-spices",
    "tags": {
     "protein": "beans-lentils",
     "flavors": [
@@ -5579,6 +5580,28 @@ export const LIBRARY = {
     "heat": "some",
     "budget": "$",
     "familiar": "adventurous",
+    "veggies": "some"
+   }
+  },
+  {
+   "id": "coconut-chickpea-curry",
+   "title": "Coconut chickpea curry",
+   "unit": 3,
+   "about": "Chickpeas and spinach simmered in a creamy coconut curry sauce with ginger, garlic, and warm spices, with rice or naan.",
+   "skills": [
+    "blooming-spices",
+    "flavor-base"
+   ],
+   "pickOne": "blooming-spices",
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "coconut-tropical",
+     "warm-spices"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
     "veggies": "some"
    }
   },
@@ -5675,6 +5698,7 @@ export const LIBRARY = {
     "spice-rubs",
     "reducing"
    ],
+   "pickOne": "spice-rubs",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -5688,6 +5712,50 @@ export const LIBRARY = {
    }
   },
   {
+   "id": "blackened-cod",
+   "title": "Blackened cod",
+   "unit": 3,
+   "about": "Cod coated in a smoky, peppery spice rub and seared in a hot skillet until a dark crust forms, with lemon and a green salad.",
+   "skills": [
+    "spice-rubs",
+    "searing"
+   ],
+   "pickOne": "spice-rubs",
+   "tags": {
+    "protein": "white-fish",
+    "flavors": [
+     "smoky-bbq",
+     "chili-heat"
+    ],
+    "heat": "spicy",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
+  },
+  {
+   "id": "bbq-salmon",
+   "title": "BBQ-rubbed salmon",
+   "unit": 3,
+   "about": "Salmon rubbed with brown sugar and smoked paprika, seared, then finished in the oven with a barbecue glaze. With corn and coleslaw.",
+   "skills": [
+    "spice-rubs",
+    "searing"
+   ],
+   "pickOne": "spice-rubs",
+   "tags": {
+    "protein": "salmon",
+    "flavors": [
+     "smoky-bbq",
+     "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
+  },
+  {
    "id": "chicken-tagine",
    "title": "Chicken tagine with olives",
    "unit": 3,
@@ -5696,6 +5764,7 @@ export const LIBRARY = {
     "blooming-spices",
     "braising"
    ],
+   "pickOne": "braising",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -5709,6 +5778,28 @@ export const LIBRARY = {
    }
   },
   {
+   "id": "caribbean-lamb-chops",
+   "title": "Caribbean coconut curry lamb chops",
+   "unit": 3,
+   "about": "Lamb chops browned and simmered in a coconut curry sauce with thyme, green onions, and a whole hot pepper you can leave out.",
+   "skills": [
+    "braising",
+    "blooming-spices"
+   ],
+   "pickOne": "braising",
+   "tags": {
+    "protein": "lamb",
+    "flavors": [
+     "coconut-tropical",
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$$$",
+    "familiar": "adventurous",
+    "veggies": "light"
+   }
+  },
+  {
    "id": "peanut-stew",
    "title": "Peanut stew (maafe)",
    "unit": 3,
@@ -5717,6 +5808,7 @@ export const LIBRARY = {
     "one-pot-stews",
     "flavor-base"
    ],
+   "pickOne": "one-pot-stews",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -5725,6 +5817,28 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   }
+  },
+  {
+   "id": "moqueca",
+   "title": "Moqueca (Brazilian coconut fish stew)",
+   "unit": 3,
+   "about": "A Brazilian stew of white fish simmered in coconut milk and tomatoes with peppers, onion, and lime, with rice.",
+   "skills": [
+    "one-pot-stews",
+    "flavor-base"
+   ],
+   "pickOne": "one-pot-stews",
+   "tags": {
+    "protein": "white-fish",
+    "flavors": [
+     "coconut-tropical",
+     "rich-tomato"
+    ],
+    "heat": "mild",
+    "budget": "$$",
     "familiar": "adventurous",
     "veggies": "some"
    }
@@ -5780,6 +5894,7 @@ export const LIBRARY = {
     "marinating",
     "broiling"
    ],
+   "pickOne": "broiling",
    "tags": {
     "protein": "chicken",
     "flavors": [
@@ -5790,6 +5905,28 @@ export const LIBRARY = {
     "budget": "$",
     "familiar": "new-ish",
     "veggies": "light"
+   }
+  },
+  {
+   "id": "honey-soy-salmon",
+   "title": "Broiled honey-soy salmon",
+   "unit": 3,
+   "about": "Salmon in a short honey, soy, and ginger marinade, broiled until the glaze caramelizes at the edges, with green beans.",
+   "skills": [
+    "broiling",
+    "marinating"
+   ],
+   "pickOne": "broiling",
+   "tags": {
+    "protein": "salmon",
+    "flavors": [
+     "sweet-savory",
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "new-ish",
+    "veggies": "some"
    }
   },
   {
@@ -5845,6 +5982,7 @@ export const LIBRARY = {
     "stir-frying",
     "thin-slicing"
    ],
+   "pickOne": "thin-slicing",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -5854,6 +5992,27 @@ export const LIBRARY = {
     "heat": "some",
     "budget": "$$",
     "familiar": "adventurous",
+    "veggies": "some"
+   }
+  },
+  {
+   "id": "beef-and-broccoli",
+   "title": "Beef and broccoli",
+   "unit": 4,
+   "about": "Thinly sliced flank steak and broccoli stir-fried in a glossy soy, ginger, and garlic sauce, over rice.",
+   "skills": [
+    "thin-slicing",
+    "stir-frying"
+   ],
+   "pickOne": "thin-slicing",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
     "veggies": "some"
    }
   },
@@ -6263,6 +6422,7 @@ export const LIBRARY = {
    "skills": [
     "binders"
    ],
+   "pickOne": "binders",
    "tags": {
     "protein": "beef",
     "flavors": [
@@ -6273,6 +6433,27 @@ export const LIBRARY = {
     "budget": "$$",
     "familiar": "everyday",
     "veggies": "light"
+   }
+  },
+  {
+   "id": "lamb-kofta",
+   "title": "Lamb kofta with yogurt sauce",
+   "unit": 6,
+   "about": "Ground lamb mixed with onion, parsley, and warm spices, shaped by hand and browned, on flatbread with a yogurt-mint sauce.",
+   "skills": [
+    "binders"
+   ],
+   "pickOne": "binders",
+   "tags": {
+    "protein": "lamb",
+    "flavors": [
+     "warm-spices",
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "adventurous",
+    "veggies": "some"
    }
   },
   {
@@ -6437,11 +6618,32 @@ export const LIBRARY = {
    "skills": [
     "breading-frying"
    ],
+   "pickOne": "breading-frying",
    "tags": {
     "protein": "chicken",
     "flavors": [
      "mild-buttery",
      "sweet-savory"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "some"
+   }
+  },
+  {
+   "id": "coconut-crusted-fish",
+   "title": "Coconut-crusted fish with pineapple salsa",
+   "unit": 6,
+   "about": "White fish in a crisp shredded-coconut crust, pan-fried and topped with a fresh pineapple and red pepper salsa.",
+   "skills": [
+    "breading-frying"
+   ],
+   "pickOne": "breading-frying",
+   "tags": {
+    "protein": "white-fish",
+    "flavors": [
+     "coconut-tropical"
     ],
     "heat": "mild",
     "budget": "$$",
