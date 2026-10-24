@@ -4501,3 +4501,11 @@ tables.
 - Recipe is listed in its place, ticked and greyed out ("Always included: a
   week is done when it's cooked"). The hours line says "components".
 - Tests: 348; the Level tests expect the new order.
+
+## 187. 2026-10-24 — `unleavened_dates` in the schema ahead of phase 13
+
+- So no more schema changes are needed after the squash, Phase 13's table is
+  in `0001_schema.sql` now, as plan §8.4 lists it: family, year, calendar,
+  first day, unleavened from, and confirmed (plus updated_at). Nothing uses it
+  yet. It's in the backup and Download our data automatically, and goes with
+  the family.

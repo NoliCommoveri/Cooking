@@ -634,3 +634,21 @@ CREATE TABLE IF NOT EXISTS mastery_notes (
   PRIMARY KEY (attempt_id, profile_id)
 );
 CREATE INDEX IF NOT EXISTS mastery_notes_family ON mastery_notes(family_id);
+
+-- Phase 13 (plan §6.20): each family's Unleavened Bread dates, one row a
+-- year. Created ahead of the build, at the 2026-10-24 squash, so the phase
+-- needs no schema change; nothing uses it yet. calendar: a standard
+-- calendar's id (content/calendars.json); first_day: the feast's first day,
+-- which may differ from that calendar's (a deviation); unleavened_from: the
+-- day the house stops leavened recipes, on or before first_day; confirmed_at
+-- stays empty until a parent confirms the year.
+CREATE TABLE IF NOT EXISTS unleavened_dates (
+  family_id       TEXT NOT NULL REFERENCES families(id),
+  year            INTEGER NOT NULL,
+  calendar        TEXT NOT NULL,
+  first_day       TEXT NOT NULL,
+  unleavened_from TEXT NOT NULL,
+  confirmed_at    TEXT,
+  updated_at      TEXT NOT NULL,
+  PRIMARY KEY (family_id, year)
+);
