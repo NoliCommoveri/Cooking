@@ -3266,3 +3266,25 @@ switched off, with one migration.
   browser at phone width on the dev server: the Next release section, a
   family's preview button, the draft page, and the Preview note on Family
   settings.
+
+## 130. 2026-10-24 — Plan: ratings, variations, and the phase 11 slices
+
+Design only. Plan §6.21 rewritten from the owner's decisions:
+- **Ratings, not yes or no:** 4 stars (love) to 1 (hate), or Haven't tried,
+  **per profile**. No country list, since many people haven't tried a
+  cuisine: profiles rate 11 **flavors, each shown with example dishes**
+  (common dishes, recipe or not, all normally made clean), plus 10 proteins
+  and about 35 key ingredients. Cuisines are learned from Reflect ratings.
+  Time, budget, tools, and how adventurous stay per-family limits. Claude
+  drafted the lists; they'll live in `content/tastes.json` for the owner to
+  edit.
+- **Variations instead of "use this instead":** a full version of a lesson
+  with the preference built in (protein, amounts, doneness target, steps,
+  shopping list), counted as the same lesson, tagged and scored on its own,
+  and linted as a whole lesson.
+- **Scoring:** anyone's 1 star on the main protein or a required ingredient
+  rules a version out; the rest are scored from everyone's stars. The gaps
+  page suggests a variation first when one ingredient is the problem.
+- Data model: `profile_ratings`, `family_limits`, `taste_learned` replace
+  `family_tastes`. Phase 11 is split into 11a tags, 11b ratings,
+  11c variations, 11d scoring and picks, 11e Recipe gaps.
