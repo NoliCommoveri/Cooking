@@ -97,3 +97,4 @@ fieldset.mf-obj,fieldset.mf-list{border-left:3px solid var(--h-line);padding-lef
 .mtag-flavors{display:flex;flex-wrap:wrap;gap:6px}
 .mtag-chip{min-height:44px;padding:4px 10px;border:1.5px solid var(--h-line);border-radius:10px}
 .mtag-chip:has(input:disabled){opacity:.5}
+.mlevel-tag{color:var(--h-accent,#B5651D)}

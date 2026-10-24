@@ -190,7 +190,8 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 3b | Ratatouille | French | Dicing: eggplant, zucchini, pepper, tomato · *pick one with 3a, 3c* | Adult nearby | |
 | 3c | Minestrone | Italian | Dicing · *pick one with 3a, 3b* | Adult nearby | |
 | 4a | Chicken Caesar + homemade dressing & croutons | American | Whisked dressing, cubing bread | Adult nearby | Pasteurized eggs or mayo base |
-| 4b | Chicken souvlaki pitas | Greek | A yogurt sauce (tzatziki), chopping herbs fine · *pick one with 4a* | Adult nearby | Added 2026-10-24 |
+| 4b | Chicken souvlaki pitas | Greek | A yogurt sauce (tzatziki), chopping herbs fine · *pick one with 4a, 4c* | Adult nearby | Added 2026-10-24 |
+| 4c | Chickpea chopped salad + vinaigrette | American | Whisking a vinaigrette, dressing to taste · *pick one with 4a, 4b* | Adult nearby | Planned 2026-10-24 (Level 3) |
 | 5 | Smash burgers + quick pickles | American | Thin slicing, quick pickle, high-heat sear | Adult nearby | |
 
 ### Unit 2 — Stovetop basics
@@ -204,7 +205,8 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 8b | Spaghetti marinara | Italian | Building a sauce · *pick one with 8a, 8c* | Adult nearby | |
 | 8c | Honey-garlic chicken | Chinese-American | Building a sauce · *pick one with 8a, 8b* | Adult nearby | Honey is allowed (§2.1) |
 | 9a | Chicken fried rice | Chinese | High-heat stir-fry, day-old rice | Adult nearby | Mushroom stir-fry sauce, not oyster sauce |
-| 9b | Turkey lettuce wraps | Chinese-American | Stir-frying, dicing small · *pick one with 9a* | Adult nearby | Hoisin, not oyster sauce. Added 2026-10-24 |
+| 9b | Turkey lettuce wraps | Chinese-American | Stir-frying, dicing small · *pick one with 9a, 9c* | Adult nearby | Hoisin, not oyster sauce. Added 2026-10-24 |
+| 9c | Vegetable stir-fry with tofu | Chinese | Julienned vegetables, stir-frying in batches · *pick one with 9a, 9b* | Adult nearby | Planned 2026-10-24 (Level 3) |
 | 10 | Oyakodon | Japanese | Simmering, setting egg gently | Adult nearby | Mirin sub: rice vinegar + sugar; dashi sub: chicken broth + soy |
 | 11a | Chicken adobo | Filipino | Braising, reducing | Adult nearby | |
 | 11b | Chicken piccata | Italian | Searing, reducing a pan sauce · *pick one with 11a, 11c* | Adult nearby | Broth, no wine. Added 2026-10-24 |
@@ -223,20 +225,25 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 16a | Chana masala | Indian | Blooming spices, onion-tomato base | Adult nearby | Amchur sub: lemon |
 | 16b | Coconut chickpea curry | Indian | Blooming spices, a coconut curry · *pick one with 16a* | Adult nearby | Planned 2026-10-24 |
 | 17 | Beef chili | American | Batch browning, toasting spices | Adult nearby | |
-| 18 | Misir wot | Ethiopian | Spiced lentils | Adult nearby | Berbere sub: paprika + cayenne + warm spices; serve with rice |
+| 18a | Misir wot | Ethiopian | Spiced lentils | Adult nearby | Berbere sub: paprika + cayenne + warm spices; serve with rice |
+| 18b | Red lentil soup (mercimek) | Turkish | Cooking lentils until they melt · *pick one with 18a* | Adult nearby | Planned 2026-10-24 (Level 3) |
 | 19 | Red beans and rice | Louisiana | Onion/celery/pepper base, simmering beans until creamy | Adult nearby | Chicken andouille instead of ham hock; check casings |
 | 20 | Jollof rice with chicken | Nigerian | Blended pepper base, cooking rice in the sauce | Adult nearby | Scotch bonnet → jalapeño. No dried crayfish or shrimp bouillon |
 | 21a | BBQ pulled chicken + coleslaw | American | Dry rub, reducing a sauce | Adult nearby | |
 | 21b | Blackened cod | Louisiana | A spice rub, searing fish · *pick one with 21a, 21c* | Adult nearby | Planned 2026-10-24 |
 | 21c | BBQ-rubbed salmon | American | A sweet-smoky rub, sear then bake · *pick one with 21a, 21b* | Adult nearby | Planned 2026-10-24 |
 | 22a | Chicken tagine with olives | Moroccan | Layered spice braise | Adult nearby | Preserved lemon sub; ras el hanout sub; Dutch oven |
-| 22b | Caribbean coconut curry lamb chops | Jamaican | Searing, then braising in coconut curry · *pick one with 22a* | Adult nearby | Hot pepper optional. Planned 2026-10-24 |
+| 22b | Caribbean coconut curry lamb chops | Jamaican | Searing, then braising in coconut curry · *pick one with 22a, 22c* | Adult nearby | Hot pepper optional. Planned 2026-10-24 |
+| 22c | Beef ragù | Italian | A soffritto base, a long slow braise · *pick one with 22a, 22b* | Adult nearby | Planned 2026-10-24 (Level 3) |
 | 23a | Peanut stew (maafe) | Malian | Building a one-pot stew | Adult nearby | Peanut butter; carries the peanut tag |
-| 23b | Moqueca (Brazilian coconut fish stew) | Brazilian | A one-pot coconut stew · *pick one with 23a* | Adult nearby | No seafood stock. Planned 2026-10-24 |
-| 24 | Koshari | Egyptian | Building a dish in layers, crispy onions | Adult nearby | Lentils, rice, pasta, tomato sauce |
+| 23b | Moqueca (Brazilian coconut fish stew) | Brazilian | A one-pot coconut stew · *pick one with 23a, 23c* | Adult nearby | No seafood stock. Planned 2026-10-24 |
+| 23c | Beef stew | American | Browning in batches, seasoning in stages · *pick one with 23a, 23b* | Adult nearby | Planned 2026-10-24 (Level 3) |
+| 24a | Koshari | Egyptian | Building a dish in layers, crispy onions | Adult nearby | Lentils, rice, pasta, tomato sauce |
+| 24b | Mujaddara | Lebanese | Lentils and rice cooked together, crispy onions · *pick one with 24a* | Adult nearby | Planned 2026-10-24 (Level 3) |
 | 25 | Butter chicken | Indian | Marinating, finishing with cream | Adult nearby | |
 | 26a | Jerk chicken | Jamaican | Wet marinade, broiling | Adult nearby | Habanero or jalapeño |
-| 26b | Broiled honey-soy salmon | American | A quick marinade, broiling · *pick one with 26a* | Adult nearby | 145°F. Planned 2026-10-24 |
+| 26b | Broiled honey-soy salmon | American | A quick marinade, broiling · *pick one with 26a, 26c* | Adult nearby | 145°F. Planned 2026-10-24 |
+| 26c | Shish taouk | Lebanese | A yogurt-garlic marinade, broiling skewers · *pick one with 26a, 26b* | Adult nearby | 165°F. Planned 2026-10-24 (Level 3) |
 
 ### Unit 4 — Breaking down and slicing meat, marinades
 | # | Dish | Cuisine | Skill | Max safety | Notes |
@@ -256,7 +263,8 @@ Lessons are grouped into units by skill. International and American dishes are m
 | 34 | Blueberry muffins (breakfast) | American | Muffin method, avoiding overmixing | Adult nearby | |
 | 35 | Skillet cornbread | American | Preheated skillet | Adult nearby | Pairs with 17 |
 | 36 | Pão de queijo | Brazilian | Scalded tapioca dough | Adult nearby | |
-| 37 | Skillet naan | Indian | Yogurt dough, high-heat skillet | Adult nearby | |
+| 37a | Skillet naan | Indian | Yogurt dough, high-heat skillet | Adult nearby | |
+| 37b | Pita bread | Lebanese | A yeast dough, flatbreads that puff · *pick one with 37a* | Adult nearby | Planned 2026-10-24 (Level 3) |
 | 38 | Pupusas | Salvadoran | Masa dough, griddle | Adult nearby | Lard-free beans |
 | 39 | Ugali with sukuma wiki | Kenyan | Stiff cornmeal dough, braised greens | Adult nearby | White cornmeal and collard greens |
 | 40a | Buttermilk biscuits (breakfast) | American | Cutting in cold fat, folding for layers | Adult nearby | Butter, not lard |
@@ -1255,7 +1263,7 @@ Each phase should be deployed and usable before the next begins.
 | **10. Content editor** (owner, 2026-10-23; built 2026-10-23) | The manager section at `/manage` with its owner-only sign-in, and the content editor in it (§7.5): the GitHub token check on `/ops`, the save path (checks, commit to `content-edits`, the workflow that builds, checks, and moves it to `main`, the save status), History and Revert, then the editors: lessons and units first, then registries and the food rules, then pictures | The owner adds a unit, adds a lesson to it, moves an existing lesson into it, and removes a step, all from the browser; each is live for every family after the deploy with no session. A save that breaks a rule is refused with the reason, and Revert puts a lesson back |
 | **10b. Next release switch** (owner, 2026-10-23; built 2026-10-23) | §8.6: the switch on `/ops` (preview per family, Launch for everyone, Undo launch), the draft migration with Re-apply and Finalize, and `content/levels/`. Phases 11–13 are built behind it | A preview family sees a test screen that other families don't; Re-apply draft rebuilds an edited draft table; Undo launch puts the app back |
 | **11. Tastes, variations, and the recipe pool** (owner, 2026-10-23: built first, right after the switch) | §6.21, in slices: **11a** tags (built 2026-10-24: protein, flavors, heat, budget, familiar on every dish; `content/tastes.json`; the Tags and Tastes pages in the content editor; Claude's drafted values); **11b** ratings (stars per profile, family limits, Our tastes, the Getting started step, Chef Ruth asking a few at a time, the kid's taste quiz); **11c** variations (built 2026-10-24: lesson files, the editor, the linter, the player and shopping list using the chosen one, counting as the lesson); **11d** scoring and picks, in four parts (§6.21): 11d1 scoring and default picks, 11d2 Add a lesson, Swap, Chef Ruth, and hated extras, 11d3 learning from Reflect, 11d4 the kid's taste quiz (11d1–11d3 built 2026-10-24; 11d4 on hold, owner 2026-10-24); **11e** Recipe gaps (built 2026-10-24); **11f** the taste tester, a manager tool for trying sets of preferences (on hold, owner 2026-10-24) | A preview family with a kid who rates mushrooms 1 star and beef 4 gets the beef variation with no mushrooms by default; a variation with a too-low doneness target is refused by the linter; the owner sees the gap that left another family short and opens a new variation from it, with its tags filled in |
-| **12. Level 3 Cook** (owner, 2026-10-23: Level 3 first) | §12: the Level program beside Cook Around the World, Level 3's 36 weeks with its four parts, mastery weeks, skill-tagged swap-ins, the Level 3 recipes, Progress and transcript changes, in slices (§12.4): **12a** Level content and its checks; **12b** a Level course; **12c** the kitchen's Level week; **12d** best-fit recipes and swap-ins; **12e** the Level view (units as ranks, My cooking collection), Progress, and the transcript; **12f** content: Unit 1's new recipes and every week's part pages | A parent puts a teen on Level 3; the kid cooks week 1's recipe, checks off its drill, knowledge, and Sabbath task; a swap-in replaces a week's recipe; a mastery week asks for "why it worked"; the transcript shows Level 3's hours |
+| **12. Level 3 Cook** (owner, 2026-10-23: Level 3 first) | §12: the Level program beside Cook Around the World, Level 3's 36 weeks with its four parts, mastery weeks, skill-tagged swap-ins, the Level 3 recipes, Progress and transcript changes, in slices (§12.4): **12a** Level content and its checks (built 2026-10-24); **12b** a Level course; **12c** the kitchen's Level week; **12d** best-fit recipes and swap-ins; **12e** the Level view (units as ranks, My cooking collection), Progress, and the transcript; **12f** content: Unit 1's new recipes and every week's part pages | A parent puts a teen on Level 3; the kid cooks week 1's recipe, checks off its drill, knowledge, and Sabbath task; a swap-in replaces a week's recipe; a mastery week asks for "why it worked"; the transcript shows Level 3's hours |
 | **13. Unleavened Bread dates** (owner, 2026-10-23) | §6.20: the standard calendars file and its editor, the Getting started and Family settings questions, the yearly ask, the migration, and the swap, schedule, and kitchen changes; the fixed window comes out | Two test families on different calendars, one deviating by a day, see Swap go unleavened-only on their own weeks; a leavened course lesson due in the feast moves past it and doesn't count as behind; a family that hasn't confirmed sees the note |
 | **Later** | Levels 2, 4, and 1 (§12), mini-courses (§10), More themes: Food Truck and Recipe Scrapbook (§5.2), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system (Print our progress's CSV covers the basics, §6.15) | — |
 
@@ -1428,4 +1436,5 @@ The capstone pulls from every unit: safe temperatures (1), challah (2), knife wo
 | 13, 19, 21, 29, 30 | Garlic green beans, Rice pilaf, Roasted vegetables, Vegetable stock, Chicken stock | Level only: sides and stocks, not meals |
 | 35, 36 | Practice run, capstone | Made from earlier weeks' recipes; nothing new |
 
-- **Question for the owner:** whether the Level-only recipes join Side quests for every family at launch.
+- **Owner rulings on the table (2026-10-24):** all five group fills; the three new pairs; Beef stew takes the one-pot stews place, so Poached cod is Level only; thick burgers are Level only. **The Level-only recipes are a unit of their own in Side quests**, "Level 3 recipes" (labels L1, L2, …), for every family once the next release launches. The eight are in `content/course.json` as planned pick-one dishes (4c, 9c, 18b, 22c, 23c, 24b, 26c, 37b), live for every family like the other planned dishes (§4), with pictures from the owner's sheets 27 and 28. Mujaddara, Koshari, Misir wot, Red lentil soup, and Red beans and rice teach a new skill, cooking dried beans and lentils.
+- **12a built (2026-10-24):** `content/levels/level-3.json` (checked against `content/schema/level.schema.json`): the 9 units with their goals; the 36 weeks, each with its skill, its default recipe, a note, swap-ins (dishes that fit the week without carrying its skill, like the course's fish dishes for Unit 7), mastery on each unit's last week, and its three parts' titles and planned minutes (drill 40, knowledge 35, Sabbath task 45: about 126 hours with the recipes); weeks 35 and 36 are a practice week and the capstone, with their own minutes; and the 17 Level-only recipe cards, each with its meal-type drawing until its lesson is written. Their lesson files go in `content/levels/recipes/`, in the Level's own unit (number 100, apart from `units.json`). Six skills were added for Level weeks (checking meat with a thermometer, sautéing, cooking grains, handling raw poultry, cooking fish, building a soup), and the Israeli, Cuban, and Turkish cuisines. The linter checks every rule above, the hard rule on every page, and the hours; it warns while part pages aren't written. The manager has a **Level 3** page: units, weeks and their parts, and the Level's recipes with their tags.

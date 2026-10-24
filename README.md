@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [152. 2026-10-24 — Plan: Level 3 recipes checked against the main course](docs/build-log.md#152-2026-10-24--plan-level-3-recipes-checked-against-the-main-course)
+**Latest build log entry:** [153. 2026-10-24 — Level 3 content and its checks (slice 12a)](docs/build-log.md#153-2026-10-24--level-3-content-and-its-checks-slice-12a)
 
 ## Current features
 
@@ -37,7 +37,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Test-cook notice**: parents from before Getting started see a one-time note, above the lockers, to read a lesson through before their kids cook it; Getting started ends with the same reminder.
 - **Demo page** (`/demo`): no account needed. Try the sample lessons in either theme, including the three choices for julienne, preview diet settings and a real shopping list, and browse the whole course by dish or by skill.
 - **Syllabus** (`/syllabus`): the course as a homeschool course, with objectives, units, hours, pacing, a suggested credit, and the rubric. Printable.
-- **Course outline** (`content/course.json`): all 75 planned dishes in teaching order, with their skills and prerequisites, checked by the linter.
+- **Course outline** (`content/course.json`): all 97 planned dishes (59 numbers, with pick-one choices) in teaching order, with their skills and prerequisites, checked by the linter.
 - **Lesson numbers** (`src/content/course.js`): come from the course order; pick-one choices share a number (1a, 1b, 1c), 59 in all.
 - **Appointed Times unit** (unit 8 in `content/units.json`): lessons beside the numbered course, labeled A1, A2: unleavened flatbread and cottage cheese crescent rolls so far.
 - **Family recipes** (Parents → Recipes, `src/content/recipe.js`, `src/worker/recipes.js`): a parent adds the family's own recipes one thing at a time (basics, ingredients from the list or typed in, tools, steps with safety levels and timers, meal type, a "why we make this" card, then review). The same unclean-food and food-safety checks as lessons; a wash-hands step is added after raw food. They show on an "Our recipes" shelf in every kitchen and can be queued, shopped for, and cooked like lessons. Only that family sees them.
@@ -56,9 +56,10 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Saving content** (`src/worker/github.js`, `.github/workflows/content-publish.yml`): a save is checked again and committed to the `content-edits` branch; GitHub builds, lints, and tests it and puts it on `main`, which deploys. **Saves** shows each one's status, with Undo; a lesson's History loads any earlier version.
 - **Hidden lessons** (`content/hidden.json`): out of the library, the course numbers, and every family's course plan until unhidden.
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
-- **Dish illustrations** (`content/images/dishes/`): one picture for each of the 75 lessons.
+- **Dish illustrations** (`content/images/dishes/`): one picture for each planned dish.
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
 - **Lesson content** (`content/`): 37 lessons (all 12 of Unit 1, all 20 of Unit 2, 3 more samples, and the 2 Appointed Times lessons), and the ingredient, tool, skill (52), and cuisine lists, as JSON.
+- **Level 3 content** (next release only, `content/levels/level-3.json`): Level 3 Cook's 9 units and 36 weeks, each with its skill, recipe, mastery check, and drill, knowledge, and Sabbath task, plus 17 Level-only recipes; edited on the manager's Level 3 page.
 - **Content linter** (`tools/lint-content.js`): checks every lesson against the food rules, including the unclean-food block, the food-safety steps, and scaling. Runs on every push, on every save from the manager section, and in the browser as the owner edits.
 - **Our tastes** (next release only, `src/worker/tastes.js`, `public/tastes.js`): each profile rates proteins, flavors, and key ingredients from 1 to 5 stars (one absolute favorite per list) or Haven't tried, and the family sets its time, budget, tools, and how adventurous. Also in Getting started and as Chef Ruth's "Ask what we like to eat".
 - **Variations** (`src/content/variations.js`, `src/worker/variations.js`): complete versions of a lesson with a preference built in: 9 so far, on 6 lessons (another protein, beans or tofu, or more heat). Edited in the manager section and checked as whole lessons; with the next release, a parent picks the version, and the player and shopping lists use it.

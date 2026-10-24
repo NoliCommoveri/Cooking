@@ -3800,3 +3800,44 @@ thick burgers); 5 fill groups with room (vegetable stir-fry, a dressed
 salad, beef stew, shish taouk, beef ragù); 3 could start new pairs (pita
 with naan, mujaddara with koshari, red lentil soup with misir wot); the rest
 are Level only.
+
+## 153. 2026-10-24 — Level 3 content and its checks (slice 12a)
+
+Phase 12, slice 12a (plan §12.4). The owner's rulings on the recipe table:
+all five group fills, the three new pairs, Beef stew over Poached cod, thick
+burgers Level only, and the Level-only recipes as their own unit in Side
+quests.
+- **Eight new planned pick-one dishes** in `content/course.json`, live for
+  every family like the other planned dishes: 4c Chickpea chopped salad +
+  vinaigrette, 9c Vegetable stir-fry with tofu, 18b Red lentil soup, 22c
+  Beef ragù, 23c Beef stew, 24b Mujaddara, 26c Shish taouk, 37b Pita bread.
+  Misir wot, Koshari, and Skillet naan now start pick-one groups. The course
+  still has 59 numbers (97 dishes). A new skill, cooking dried beans and
+  lentils, is on the five lentil and bean dishes; a Turkish cuisine.
+- **Pictures:** the owner's sheets 27 and 28 (ChatGPT, from Claude's
+  prompts), cropped with `tools/crop-dish-sheet.py`; checked for unclean
+  foods. The meal-type placeholders made earlier in the session are gone.
+- **`content/levels/level-3.json`** and **`content/schema/level.schema.json`**:
+  the units and goals, the 36 weeks (skill, default recipe, note, swap-ins,
+  mastery, and each part's title and planned minutes), weeks 35 and 36 as a
+  practice week and the capstone, and 17 Level-only recipe cards with their
+  tags and meal-type drawings. The Level's unit is number 100, so a unit
+  added in the manager can't take its number (a manager test caught 9).
+- **Registries:** six skills for Level weeks (checking meat with a
+  thermometer, sautéing, cooking grains, handling raw poultry, cooking fish,
+  building a soup); Israeli and Cuban cuisines.
+- **Linter** (`src/content/lint.js`, `src/content/load.js`): units of four
+  weeks with the mastery week last, the capstone last, each recipe and
+  swap-in known and used once, skills in the registry, the planned hours
+  within 10% of 125 (126.6 now), the hard rule on every Level page and recipe
+  card, and lesson files in `content/levels/recipes/` checked as lessons and
+  against their cards. It warns that 108 part pages aren't written yet.
+- **Manager:** a Level 3 page (`public/manage/level.js`): each unit folded,
+  its weeks with their recipe, skill, swap-ins, and three parts, the hours
+  and pages written at the top, and the Level's recipes with their tags and
+  an Add dialog that reminds the owner to check the main course first.
+- **Fixed:** a gaps test relied on stir-frying being a two-dish group; it
+  now uses poaching eggs.
+- Tests: 327 (4 new in `test/lint.test.js`; a Level save with a blocked word is refused in `test/manage.test.js`). Checked in a browser at phone width on the dev server: the
+  Level 3 page, a week opened, and a drill's minutes changed (the hours and
+  the save bar update; no sideways scroll).
