@@ -6,7 +6,7 @@ import { makeEnv, client, family, opsClient } from './helpers/worker.js';
 import { migrationStatus, applyPending, schemaVersion, reapplyDraft, finalizeDraft, checkDraft } from '../src/worker/migrate.js';
 import { MIGRATIONS } from '../src/worker/migrations/index.js';
 import { exportAll, importAll, clearEverything, exportFamily, removeFamily, restoreFamily, tableNames, importDraftTables, Refused } from '../src/worker/backup.js';
-import { nextReleaseOn } from '../src/worker/release.js';
+import { releaseOn, releaseState, releaseOf, LATEST } from '../src/worker/release.js';
 import { makeDb } from './helpers/d1.js';
 
 test('migrations apply in order, once, and report their state', async () => {
@@ -262,35 +262,51 @@ test('a draft is edited in place: re-apply rebuilds its tables, finalize freezes
   assert.equal((await reapplyDraft(db, '0002', v2)).ok, false);
 });
 
-test('/ops: the next release switch, per family and for everyone', async () => {
+test('/ops: numbered releases, per family and for everyone', async () => {
   const env = await makeEnv();
   await family(env, 'Carsons', 'jen@example.com');
   await family(env, 'Smiths', 'pat@example.com');
   const id = async (e) => (await env.DB.prepare('SELECT family_id FROM parents WHERE email = ?').bind(e).first()).family_id;
   const jen = await id('jen@example.com'), pat = await id('pat@example.com');
   const ops = await opsClient(env);
-  assert.match((await ops.get('/ops')).body, /Next release[\s\S]*Not launched/);
+  assert.match((await ops.get('/ops')).body, /Releases[\s\S]*Not launched[\s\S]*Launch release 1 for everyone/);
 
   await ops.form(`/ops/preview/${jen}`, { on: '1' });
-  assert.equal(await nextReleaseOn(env.DB, jen), true);
-  assert.equal(await nextReleaseOn(env.DB, pat), false);
+  assert.equal(await releaseOn(env.DB, jen, LATEST), true, 'a preview family sees every release built');
+  assert.equal(await releaseOn(env.DB, pat, 1), false);
   const jenApp = client(env);
   await jenApp.post('/api/login', { email: 'jen@example.com', password: 'password123' });
-  assert.equal((await jenApp.get('/api/me')).body.family.next_release, true);
+  assert.equal((await jenApp.get('/api/me')).body.family.release, LATEST);
   assert.equal((await jenApp.get('/api/me')).body.family.next_release_preview, true);
   const patApp = client(env);
   await patApp.post('/api/login', { email: 'pat@example.com', password: 'password123' });
-  assert.equal((await patApp.get('/api/me')).body.family.next_release, false);
+  assert.equal((await patApp.get('/api/me')).body.family.release, 0);
 
-  await ops.form('/ops/release', { launched: '1' });
-  assert.equal(await nextReleaseOn(env.DB, pat), true);
-  assert.equal((await jenApp.get('/api/me')).body.family.next_release_preview, false, 'launched: no longer a preview');
-  assert.match((await ops.get('/ops')).body, /Undo launch/);
-  await ops.form('/ops/release', { launched: '0' });
-  assert.equal(await nextReleaseOn(env.DB, pat), false, 'undo launch');
-  assert.equal(await nextReleaseOn(env.DB, jen), true, 'the preview stays');
+  await ops.form('/ops/release', { do: 'launch', n: '1' });
+  assert.equal(await releaseOn(env.DB, pat, 1), true);
+  assert.equal((await patApp.get('/api/me')).body.family.release, 1);
+  assert.equal((await ops.form('/ops/release', { do: 'launch', n: '1' })).body.includes('already done'), true, 'a resent launch does nothing');
+  if (LATEST === 1) assert.equal((await jenApp.get('/api/me')).body.family.next_release_preview, false, 'launched: no longer a preview');
+  assert.match((await ops.get('/ops')).body, /Undo launch of release 1/);
+  await ops.form('/ops/release', { do: 'undo', n: '1' });
+  assert.equal(await releaseOn(env.DB, pat, 1), false, 'undo launch');
+  assert.equal(await releaseOn(env.DB, jen, 1), true, 'the preview stays');
   await ops.form(`/ops/preview/${jen}`, { on: '0' });
-  assert.equal(await nextReleaseOn(env.DB, jen), false);
+  assert.equal(await releaseOn(env.DB, jen, 1), false);
+});
+
+test('releases: a later release previews while an earlier one is live, and the old switch reads as release 1', async () => {
+  const env = await makeEnv();
+  const save = (v) => env.DB.prepare("INSERT INTO settings (key, value) VALUES ('next_release', ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value").bind(JSON.stringify(v)).run();
+  await save({ launched: true, preview: ['aaaaaaaaaaaaaaaa'] });
+  assert.equal((await releaseState(env.DB)).live, 1, 'launched before numbering is release 1');
+  await save({ launched: false, preview: [] });
+  assert.equal((await releaseState(env.DB)).live, 0);
+  // Release 2 under way: everyone has 1, a preview family has 2 as well.
+  const st = { live: 1, preview: ['aaaaaaaaaaaaaaaa'] }, next = 2;
+  assert.equal(releaseOf(st, 'bbbbbbbbbbbbbbbb') >= 1, true);
+  assert.equal(releaseOf(st, 'bbbbbbbbbbbbbbbb') >= next, false);
+  assert.equal(releaseOf({ ...st, live: 1 }, 'aaaaaaaaaaaaaaaa'), LATEST);
 });
 
 test('/ops: the draft page asks for its phrase', async () => {

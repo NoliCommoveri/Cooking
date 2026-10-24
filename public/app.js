@@ -862,7 +862,7 @@ const PARENT_PAGES = [
   { key: 'profiles', group: 'setup', label: 'Profiles' },
   { key: 'family', group: 'setup', label: 'Family settings' },
   // The next release (§8.6): only a family that has it sees it.
-  { key: 'tastes', group: 'setup', label: 'Our tastes', release: true },
+  { key: 'tastes', group: 'setup', label: 'Our tastes', release: 1 },
   { key: 'parents', group: 'setup', label: 'Logins & PIN' },
   { key: 'owner', group: 'owner', label: 'Families & beta word', owner: true },
   { key: 'fixes', group: 'owner', label: 'Fix requests', owner: true },
@@ -872,7 +872,7 @@ const PARENT_PAGES = [
 ];
 
 function parentMenu(current) {
-  const pages = PARENT_PAGES.filter((x) => (!x.owner || me.parent.is_owner) && (!x.homeschool || me.family.mode === 'homeschool') && (!x.release || me.family.next_release));
+  const pages = PARENT_PAGES.filter((x) => (!x.owner || me.parent.is_owner) && (!x.homeschool || me.family.mode === 'homeschool') && (!x.release || me.family.release >= x.release));
   const groups = PARENT_GROUPS.filter(([g]) => pages.some((x) => x.group === g));
   let open = pages.find((x) => x.key === current)?.group ?? groups[0][0];
   const panel = el('nav', { class: 'drawer-panel', 'aria-label': 'Parent screens' });
@@ -1695,7 +1695,7 @@ const parentQueue = parentOnly(async (flash) => {
   };
   lessonSel.addEventListener('change', checkNote);
   who.addEventListener('change', checkNote);
-  if (me.family.next_release) {
+  if (me.family.release >= 1) {
     who.addEventListener('change', async () => {
       const ids = profiles.filter((p) => who.querySelector(`[name="p_${p.id}"]`).checked).map((p) => p.id);
       ranked = ids.length ? (await api('GET', `/api/picks/lessons?profiles=${ids.join(',')}`).catch(() => null))?.lessons ?? null : null;
@@ -1710,7 +1710,7 @@ const parentQueue = parentOnly(async (flash) => {
   const whoBox = el('fieldset', {}, el('legend', {}, "Who's cooking"), el('p', { class: 'mut small', style: 'margin:0' }, 'Pick more than one to cook it together. It counts for each of them.'), who);
   const lessonBox = [el('label', { class: 'f' }, 'Lesson', lessonSel), fitBox, pickPreview];
   const addForm = form([
-    ...(me.family.next_release ? [whoBox, ...lessonBox] : [...lessonBox, whoBox]),
+    ...(me.family.release >= 1 ? [whoBox, ...lessonBox] : [...lessonBox, whoBox]),
     note,
     field('Serves', 'servings', { type: 'number', min: 1, value: q.default_servings, inputmode: 'numeric' }),
     field('Planned date', 'planned_date', { type: 'date' }, 'Optional'),
@@ -1802,13 +1802,13 @@ const courseEditor = parentOnly(async (cid) => {
     for (const x of plan) if (inGroup.has(x.id)) x.removed = !keep.has(x.id);
   };
   const loadFits = async (ids) => {
-    if (!me.family.next_release) return;
+    if (!(me.family.release >= 1)) return;
     if (levelOf()) return loadLevelFits(ids);
     fits = ids.length ? await api('GET', `/api/picks/course?profiles=${ids.join(',')}`).catch(() => null) : null;
     if (fits && !existing && !touched) usePicks();
     drawPlan();
   };
-  const suggestBtn = me.family.next_release ? el('button', { type: 'button', class: 'hbtn', hidden: true, onclick: () => {
+  const suggestBtn = me.family.release >= 1 ? el('button', { type: 'button', class: 'hbtn', hidden: true, onclick: () => {
     if (!fits) return;
     usePicks();
     drawPlan();
@@ -1996,7 +1996,7 @@ const courseEditor = parentOnly(async (cid) => {
   const levelPace = el('p', { class: 'f mut small' }, 'One Level week a week, Sunday to Friday.');
   const planSet = el('fieldset', {}, el('legend', {}, 'The lessons, in order'),
     el('p', { class: 'mut small', style: 'margin:0' }, 'Untick a lesson to leave it out. Foundation skills have a few lessons to pick from: one is ticked, and you can tick more.'),
-    me.family.next_release ? el('p', { class: 'mut small', style: 'margin:0' }, 'Each dish shows how well it fits the people the course is for, from Our tastes. Suggest picks ticks the best dish in each group.') : null,
+    me.family.release >= 1 ? el('p', { class: 'mut small', style: 'margin:0' }, 'Each dish shows how well it fits the people the course is for, from Our tastes. Suggest picks ticks the best dish in each group.') : null,
     suggestBtn ? el('div', { class: 'acts' }, suggestBtn) : null,
     notesBox, listBox);
   // Which parts each week has (§12.4): any can be turned off, here or later, and
@@ -3065,7 +3065,7 @@ async function route() {
       if (sub === 'grades') return await gradesPage();
       if (sub === 'transcript') return await transcript(extra);
       if (sub === 'family') return await familySettings();
-      if (sub === 'tastes' && me.family.next_release) return await ourTastes(extra);
+      if (sub === 'tastes' && me.family.release >= 1) return await ourTastes(extra);
       if (sub === 'parents') return await parentLogins();
       if (sub === 'owner') return await owner();
       if (sub === 'fixes') return await ownerFixes();

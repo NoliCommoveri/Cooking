@@ -9,7 +9,7 @@ import { fail } from './lib/http.js';
 import { requireParent } from './auth.js';
 import { CONTENT } from './content-data.js';
 import { LIBRARY } from './library-data.js';
-import { nextReleaseOn } from './release.js';
+import { releaseOn } from './release.js';
 import { ratingsOf, limitsOf } from './tastes.js';
 import { dietView } from '../content/diet.js';
 import { courseEntries } from '../content/course.js';
@@ -31,7 +31,7 @@ const missingTable = (err) => /no such table/i.test(String(err?.message));
 // profiles' names and ratings, its limits, and its diet filters. null for a
 // family without the next release, or before its draft tables exist.
 export async function tasteContext(env, fam) {
-  if (!(await nextReleaseOn(env.DB, fam.id))) return null;
+  if (!(await releaseOn(env.DB, fam.id, 1))) return null;
   try {
     const { results } = await env.DB.prepare('SELECT id, name FROM profiles WHERE family_id = ? ORDER BY created_at, id').bind(fam.id).all();
     const ratings = await ratingsOf(env, fam.id, results.map((p) => p.id));
@@ -67,7 +67,7 @@ async function learnedOf(env, fid) {
 // added to, so a reflection changed later never counts twice. With no pids,
 // the whole family. Next release only; nothing before its draft is applied.
 export async function relearn(env, fid, pids = null) {
-  if (!(await nextReleaseOn(env.DB, fid))) return;
+  if (!(await releaseOn(env.DB, fid, 1))) return;
   try {
     if (!pids) pids = (await env.DB.prepare('SELECT id FROM profiles WHERE family_id = ?').bind(fid).all()).results.map((r) => r.id);
     if (!pids.length) return;

@@ -8,7 +8,7 @@ import {
   exportAll, importAll, clearEverything, exportFamily, removeFamily, restoreFamily, tableNames, importDraftTables,
   undeleteFamily, eraseAfter, GRACE_DAYS, Refused, CLEAR_PHRASE, REMOVE_PHRASE,
 } from './backup.js';
-import { releaseState, setPreview, setLaunched } from './release.js';
+import { releaseState, setPreview, launch, undoLaunch, RELEASES, LATEST } from './release.js';
 import { emailReady } from './email.js';
 import { githubCheck } from './github.js';
 import { hmacHex, timingSafeEqual } from './lib/crypto.js';
@@ -145,15 +145,14 @@ ${error ? `<p class="bad">A query failed, so part of this page is missing.</p><p
 ${migrationTable(migrations)}
 <form method="post" action="/ops/migrate"><button type="submit"${pending ? '' : ' disabled'}>Apply pending${pending ? ` (${pending})` : ''}</button></form>
 
-<h2>Next release</h2>
-<p>The next release is built into the app switched off (plan §8.6). A family sees it once its preview is on (under Families below), or once it's launched for everyone.</p>
-${ready ? (release.launched
-    ? `<p class="ok"><b>Launched for everyone.</b></p>
-<form method="post" action="/ops/release"><input type="hidden" name="launched" value="0"><button type="submit">Undo launch</button></form>
-<p class="muted">Undo launch puts the app back as it was before launch: only the preview families see the next release. Nothing anyone entered is lost.</p>`
-    : `<p><b>Not launched.</b> ${release.preview.length ? `${esc(release.preview.length)} famil${release.preview.length === 1 ? 'y has' : 'ies have'} the preview on.` : 'No family has the preview on.'}</p>
-<form method="post" action="/ops/release"><input type="hidden" name="launched" value="1"><button type="submit">Launch for everyone</button></form>
-<p class="muted">Undo launch is here afterwards, and puts it back.</p>`) : notReady}
+<h2>Releases</h2>
+<p>New work is built into the app switched off, as a numbered release (plan §8.6). A family sees a release once it's launched for everyone, or before that once its preview is on (under Families below). Releases launch in order.</p>
+${ready ? `<div class="scroll"><table><tr><th>Release</th><th>What's in it</th><th></th></tr>
+${RELEASES.map((r) => `<tr><td>${esc(r.n)}</td><td>${esc(r.name)}</td><td>${r.n <= release.live ? '<span class="ok">Live for everyone</span>' : 'Not launched'}</td></tr>`).join('')}</table></div>
+<p>${release.preview.length ? `${esc(release.preview.length)} famil${release.preview.length === 1 ? 'y has' : 'ies have'} the preview on.` : 'No family has the preview on.'}</p>
+<div class="row">${release.live < LATEST ? `<form method="post" action="/ops/release"><input type="hidden" name="do" value="launch"><input type="hidden" name="n" value="${esc(release.live + 1)}"><button type="submit">Launch release ${esc(release.live + 1)} for everyone</button></form>` : ''}
+${release.live > 0 ? `<form method="post" action="/ops/release"><input type="hidden" name="do" value="undo"><input type="hidden" name="n" value="${esc(release.live)}"><button type="submit">Undo launch of release ${esc(release.live)}</button></form>` : ''}</div>
+<p class="muted">${release.live < LATEST ? '' : `Every release built so far is live. The next build adds release ${esc(LATEST + 1)} here. `}Undo launch takes back the latest release launched: only preview families see it again. Nothing anyone entered is lost.</p>` : notReady}
 
 <h2>The owner</h2>
 ${ready ? `<form method="post" action="/ops/owner" class="row">
@@ -383,9 +382,11 @@ Variables and Secrets → Add, type <em>Secret</em>, name <code>OPS_TOKEN</code>
     return dashboard(env, `<p class="ok">The next release preview is ${on ? 'on' : 'off'} for ${esc(fam.name)}.${on ? '' : ' Nothing they entered was deleted.'}</p>`);
   }
   if (path === '/ops/release' && post) {
-    const launched = String((await request.formData()).get('launched')) === '1';
-    await setLaunched(env.DB, launched);
-    return dashboard(env, `<p class="ok">${launched ? 'The next release is on for every family.' : 'Launch undone: only preview families see the next release. Nothing was deleted.'}</p>`);
+    const form = await request.formData();
+    const undo = String(form.get('do')) === 'undo', n = Number(form.get('n'));
+    const done = undo ? await undoLaunch(env.DB, n) : await launch(env.DB, n);
+    if (!done) return dashboard(env, '<p class="bad">That was already done. Nothing was changed.</p>');
+    return dashboard(env, `<p class="ok">${undo ? `Launch undone: only preview families see release ${esc(n)}. Nothing was deleted.` : `Release ${esc(n)} is on for every family.`}</p>`);
   }
   const dr = path.match(/^\/ops\/draft\/(\d{4})(?:\/(reapply|restore|finalize))?$/);
   if (dr && !post && !dr[2]) return draftPage(env, dr[1]);

@@ -371,7 +371,7 @@ async function rateInChat(ctx, chat, call, profile, kind, items, ratings) {
 // Getting started: the family's limits, then each person's proteins. The
 // rest waits for Our tastes, or for her to ask a few at a time.
 async function tastesPart(ctx, chat, call) {
-  if (!ctx.me().family.next_release) return;
+  if (!(ctx.me().family.release >= 1)) return;
   const { el } = ctx;
   const t = await call('GET', '/api/tastes');
   chat.say("Now, what your family likes to eat. I'll use it to pick the dishes, and the versions of them, that suit you best. First, a few things for the whole family.");
@@ -517,7 +517,7 @@ async function coursePart(ctx, chat, call, { again }) {
     chat.say("I turned on Plan our weeks, so your course loads each week's lessons into the queue.");
   }
   if (level) chat.say(`You can see its weeks, change who it's for, or pick another start date in Menu → Courses.`);
-  else chat.say(ctx.me().family.next_release
+  else chat.say(ctx.me().family.release >= 1
     ? "Your course follows our suggested order, and where a skill has a few dishes to choose from, I picked the one that fits them best from Our tastes. You can edit it to change the lesson order, drop lessons, or pick a different dish, in Menu → Courses."
     : "Your course follows our suggested order. You can edit it to change the lesson order or drop lessons, and to pick a different dish where a skill has a few to choose from, in Menu → Courses.");
 }
@@ -658,7 +658,7 @@ export function openRuth(ctx) {
     for (;;) {
       chat.say('What can I help with?');
       const pick = await chat.choose([['tour', 'Show me around'],
-        ...(ctx.me().family.next_release ? [['cook', 'What should we cook?'], ['tastes', 'Ask what we like to eat']] : []),
+        ...(ctx.me().family.release >= 1 ? [['cook', 'What should we cook?'], ['tastes', 'Ask what we like to eat']] : []),
         ...(ctx.me().family.cooking ? [] : [['setup', 'Getting started (change your setup)']]), ['bye', 'Nothing right now']]);
       if (pick === 'bye') { chat.say('Okay! Tap my button any time.'); return; }
       if (pick === 'tastes' || pick === 'cook') {

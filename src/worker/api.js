@@ -27,7 +27,7 @@ import { register as registerGrades } from './grades.js';
 import { register as registerTastes, forgetProfile } from './tastes.js';
 import { RUBRIC, gradeLine } from '../content/grades.js';
 import { exportFamily, deleteFamily, eraseAfter } from './backup.js';
-import { releaseFor, nextReleaseOn } from './release.js';
+import { releaseFor, releaseOn } from './release.js';
 import { register as registerPicks, relearn } from './picks.js';
 import { register as registerGaps } from './gaps.js';
 import { register as registerVariations, variationChoices, recordVariation, hasVariation, forgetCooks } from './variations.js';
@@ -400,7 +400,7 @@ on('GET', '/api/library', async (req, env) => {
   const fam = await env.DB.prepare('SELECT diet_filters FROM families WHERE id = ?').bind(s.family_id).first();
   const filters = JSON.parse(fam.diet_filters);
   // A Level's own recipes (§12.4), in their own unit, with the next release only.
-  const release = await nextReleaseOn(env.DB, s.family_id);
+  const release = await releaseOn(env.DB, s.family_id, 1);
   const name = (i) => LIBRARY.ingredients[i]?.name ?? i;
   // A patched total time shows on the card too (§6.11).
   const live = await livePatches(env.DB);
@@ -457,7 +457,7 @@ on('PUT', '/api/attempts/([0-9a-f]{16})', async (req, env, body, [aid]) => {
   // with the next release. Anything else is a cook of the lesson itself, so a
   // cook saved again after the variation was taken out still lands.
   const vid = typeof body.variation === 'string' && body.variation && !found.lesson.recipe && hasVariation(found.lesson.id, body.variation)
-    && (await nextReleaseOn(env.DB, s.family_id)) ? body.variation : '';
+    && (await releaseOn(env.DB, s.family_id, 1)) ? body.variation : '';
   const L = vid ? lessonVersion(found.lesson, vid) : found.lesson;
   const servings = Number(body.servings);
   if (!servingOptions(L).includes(servings)) fail(400, 'invalid', `${L.title} can't be made for ${body.servings}.`);
@@ -554,7 +554,7 @@ on('PUT', '/api/attempts/([0-9a-f]{16})/reflection', async (req, env, body, [aid
   }
   await env.DB.batch(stmts);
   // A mastery week's "Why did it work?" (12c), next release only. Empty takes it away.
-  if (body.why !== undefined && (await nextReleaseOn(env.DB, s.family_id))) {
+  if (body.why !== undefined && (await releaseOn(env.DB, s.family_id, 1))) {
     const why = note(body.why, 'Why it worked', 1000);
     await env.DB.prepare(why
       ? `INSERT INTO mastery_notes (attempt_id, family_id, profile_id, why, updated_at) VALUES (?, ?, ?, ?, ?)

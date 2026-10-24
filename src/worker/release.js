@@ -1,35 +1,52 @@
-// The Next release switch (plan §8.6). The next release is built into the live
-// app switched off: a family sees it once the owner turns on its preview on
-// /ops, or once it's launched for everyone. Undo launch puts every family back
-// as it was before launch, previews included, and nothing anyone entered is
-// lost. Kept in settings, so the switch itself needs no migration.
+// Releases (plan §8.6). New work is built into the live app switched off, as a
+// numbered release: each feature checks releaseOn() with its release's number.
+// A family sees a release once it's launched for everyone, or before that once
+// the owner turns on the family's preview on /ops (a preview family sees every
+// release built so far). Releases launch in order, one at a time, and Undo
+// launch takes back the latest one launched; nothing anyone entered is lost.
+// Kept in settings, so the switch itself needs no migration.
 const KEY = 'next_release';
+
+// Every release, in order. The next build adds its own entry here and gates
+// its features with that number.
+export const RELEASES = [
+  { n: 1, name: 'The Levels, Our tastes, recipe variations, best-fit picks, and the recipe gaps page' },
+];
+export const LATEST = RELEASES.at(-1).n;
 
 export async function releaseState(db) {
   try {
     const row = await db.prepare('SELECT value FROM settings WHERE key = ?').bind(KEY).first();
     const v = row ? JSON.parse(row.value) : {};
-    return { launched: Boolean(v.launched), preview: Array.isArray(v.preview) ? v.preview : [] };
+    // Before numbered releases, launched meant release 1.
+    const live = Number.isInteger(v.live) ? v.live : v.launched ? 1 : 0;
+    return { live: Math.max(0, Math.min(LATEST, live)), preview: Array.isArray(v.preview) ? v.preview : [] };
   } catch {
-    // Before the settings table exists (migrations not applied), it's off.
-    return { launched: false, preview: [] };
+    // Before the settings table exists (migrations not applied), nothing is launched.
+    return { live: 0, preview: [] };
   }
 }
 
-const save = (db, state) => db.prepare('INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value')
-  .bind(KEY, JSON.stringify(state)).run();
+const save = (db, { live, preview }) => db.prepare('INSERT INTO settings (key, value) VALUES (?, ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value')
+  .bind(KEY, JSON.stringify({ live, preview })).run();
 
-// Whether this family sees the next release.
-export async function nextReleaseOn(db, familyId) {
-  const st = await releaseState(db);
-  return st.launched || st.preview.includes(familyId);
+// The newest release this family sees.
+export const releaseOf = (st, familyId) => (st.preview.includes(familyId) ? LATEST : st.live);
+export async function familyRelease(db, familyId) {
+  return releaseOf(await releaseState(db), familyId);
 }
 
-// For the app (/api/me): on, and whether it's on only as a preview, so the
-// parent screens can say so.
+// Whether this family sees release n.
+export async function releaseOn(db, familyId, n) {
+  return (await familyRelease(db, familyId)) >= n;
+}
+
+// For the app (/api/me): the newest release the family sees, and whether it
+// sees one before everyone else, so the parent screens can say so.
 export async function releaseFor(db, familyId) {
   const st = await releaseState(db);
-  return { next_release: st.launched || st.preview.includes(familyId), next_release_preview: !st.launched && st.preview.includes(familyId) };
+  const release = releaseOf(st, familyId);
+  return { release, next_release_preview: release > st.live };
 }
 
 export async function setPreview(db, familyId, on) {
@@ -39,6 +56,17 @@ export async function setPreview(db, familyId, on) {
   await save(db, { ...st, preview });
 }
 
-export async function setLaunched(db, launched) {
-  await save(db, { ...(await releaseState(db)), launched });
+// Launch the next release for everyone, or undo the latest launch. n is the
+// release the owner pressed for, so a resent form does nothing twice.
+export async function launch(db, n) {
+  const st = await releaseState(db);
+  if (n !== st.live + 1 || n > LATEST) return false;
+  await save(db, { ...st, live: n });
+  return true;
+}
+export async function undoLaunch(db, n) {
+  const st = await releaseState(db);
+  if (n !== st.live || n < 1) return false;
+  await save(db, { ...st, live: n - 1 });
+  return true;
 }

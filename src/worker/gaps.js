@@ -7,7 +7,7 @@
 import { requireOwner } from './auth.js';
 import { CONTENT } from './content-data.js';
 import { LIBRARY } from './library-data.js';
-import { releaseState } from './release.js';
+import { releaseState, releaseOf } from './release.js';
 import { tasteContext, cookCtx, dishFit } from './picks.js';
 import { courseEntries } from '../content/course.js';
 import { dietView } from '../content/diet.js';
@@ -225,7 +225,7 @@ export async function gapsReport(env) {
   const { results: families } = await env.DB.prepare('SELECT * FROM families WHERE deleted_at IS NULL').all();
   const slots = SLOTS.map((slot) => ({ slot, none: 0, low: 0, reasons: {}, affected: [] }));
   let counted = 0;
-  for (const fam of families.filter((f) => st.launched || st.preview.includes(f.id))) {
+  for (const fam of families.filter((f) => releaseOf(st, f.id) >= 1)) {
     const tc = await tasteContext(env, fam);
     if (!tc || !hasTastes(tc)) continue;
     counted += 1;
