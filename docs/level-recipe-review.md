@@ -258,12 +258,12 @@ Weeks 33 and 34 fit the tasting skill, and the capstone pulls the whole year tog
 
 **Order after the changes:** vinaigrette (balance by taste) → chicken stew seasoned in stages (balance as it cooks) → one capstone dish practised and served → the full Sabbath meal, shopped, prepped, cooked ahead, and served.
 
-**For the owner to decide:**
+**For the owner to decide** (all approved, owner, 2026-10-24):
 
-- [ ] Give Beef stew a Level version with chicken thighs for week 34 (the chuck version stays for Level 4)
-- [ ] Change week 35's Sabbath task to serving the practice dish and noting what to change, and move "Shop and do Thursday prep" to week 36's drill
-- [ ] Make the capstone main, side, bread, and salad, with soup as a choice, and do the reflection the Sunday after
-- [ ] Let weeks 35 and 36 pick their dishes from the Level's recipes, done when cooked (a build change, for a later slice)
+- [x] Give Beef stew a Level version with chicken thighs for week 34 (the chuck version stays for Level 4)
+- [x] Change week 35's Sabbath task to serving the practice dish and noting what to change, and move "Shop and do Thursday prep" to week 36's drill
+- [x] Make the capstone main, side, bread, and salad, with soup as a choice, and do the reflection the Sunday after
+- [x] Let weeks 35 and 36 pick their dishes from the Level's recipes, done when cooked (a build change, for a later slice)
 
 ## Year progression
 
@@ -340,7 +340,7 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 
 ## Next session
 
-- Every unit is reviewed. Unit 9's four decisions are open.
+- Every unit is reviewed, and every decision is approved (owner, 2026-10-24). Next: build them.
 - Unit 8's seven decisions are approved (owner, 2026-10-24).
 - Unit 7's six decisions are approved (owner, 2026-10-24).
 - Nothing here is built yet except Chicken jambalaya (week 15) and Butter chicken (week 22). Once the review is done, the approved changes go into `content/levels/level-3.json`, the lessons, and plan §12.3 and §12.4.

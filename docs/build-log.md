@@ -4170,3 +4170,10 @@ order, so these two recipes were written.
   today (no recipe), so the review proposes picking their dishes from the
   Level's recipes, as a later build. Four decisions are open.
 
+## 172. 2026-10-24 — Unit 9 decisions approved; the review is done
+
+- Owner, 2026-10-24: Unit 9's four decisions are approved. Every unit of the
+  Level 3 recipe progression review is reviewed and approved. None of it is
+  built yet beyond Chicken jambalaya and Butter chicken; the changes go into
+  `content/levels/level-3.json`, the lessons, and plan §12.3 and §12.4 next.
+
