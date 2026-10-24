@@ -943,6 +943,7 @@ Each person rates what they love and hate, the app picks the best dish or **vari
 
 
   "Mild and buttery" is there so a profile that likes plain food can say so.
+- **Meals heavy on vegetables** (owner, 2026-10-24), rated like a flavor (examples: a big chopped salad, vegetable stir-fry, ratatouille, minestrone) and matched against each dish's `veggies` tag rather than its flavors, since how much of a meal is vegetables cuts across flavors.
 - **Key ingredients (38),** the ones people have opinions on. Each lists the registry ingredients it covers (§7.2), so the app can tell which dishes use it; some have none yet and match once their ingredients are added: mushrooms, olives, cilantro, mint, raw onion, garlic, ginger, fresh tomato, bell peppers, hot peppers (jalapeño), eggplant, zucchini, spinach and leafy greens, cabbage and coleslaw, avocado, cucumber, radish, peas, corn, sweet potato, chickpeas, coconut, peanuts and peanut butter, sesame, feta and tangy cheeses, cottage cheese, sour cream and yogurt, mayonnaise, mustard, pickles, capers, raisins and dried fruit in savory food, cinnamon in savory food, fish sauce and anchovy, lemon and lime.
 - **Limits, per family** (asked once, not starred): time on a cooking night (30, 45, 60 minutes, or no limit), budget per serving ($ under $3, $$ $3–6, $$$ over $6; recommendation), tools we don't have (food processor, blender, stand mixer, Dutch oven, cast iron, and other non-basic equipment), and **how adventurous** (stick to the familiar, a bit, bring it on), which decides how "Haven't tried" counts.
 
@@ -963,7 +964,7 @@ Each person rates what they love and hate, the app picks the best dish or **vari
 
 **Tags on every dish and variation** — the shared vocabulary between ratings, picks, and gaps.
 - **Where they live:** beside the dish card, on each dish's `course.json` entry (so all 75 are tagged, written or not), or on the lesson for a seasonal lesson (§6.19), as `tags`.
-- **Set by the owner:** `protein` (one of the proteins, or `none` for a side, bread, or dessert), `flavors` (1 to 3), `heat` (mild, some, spicy), `budget` ($, $$, $$$), and `familiar` (everyday, new-ish, adventurous). Claude drafted all 77 (owner, 2026-10-24: "go"); the owner reviews them on the **Tags** page in the content editor, or on each dish card.
+- **Set by the owner:** `protein` (one of the proteins, or `none` for a side, bread, or dessert), `flavors` (1 to 3), `heat` (mild, some, spicy), `budget` ($, $$, $$$), `familiar` (everyday, new-ish, adventurous), and `veggies` (light, some, lots; owner, 2026-10-24). Claude drafted all 77 (owner, 2026-10-24: "go"); the owner reviews them on the **Tags** page in the content editor, or on each dish card.
 - **Worked out from a written lesson:** its key ingredients (required and optional, from `tastes.json`), cuisine, time, and equipment. Its protein tag is checked against its first meat or fish: a mismatch is a warning, since it can be on purpose (eggs Benedict is eggs, with turkey on top).
 - **The linter** refuses a tag that isn't in the lists, more than 3 flavors, a taste item naming an ingredient that isn't in the registry, and any taste name or example dish with a blocked word (§2.1); it warns about dishes missing tags.
 - **Built (2026-10-24), slice 11a.** Nothing in it is shown to families.

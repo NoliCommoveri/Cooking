@@ -19,7 +19,8 @@
         "flavors": ["herby-lemony"],
         "heat": "mild",
         "budget": "$$",
-        "familiar": "new-ish"
+        "familiar": "new-ish",
+        "veggies": "lots"
       }
     },
     {
@@ -41,11 +42,34 @@
         "flavors": ["warm-spices"],
         "heat": "some",
         "budget": "$$",
-        "familiar": "everyday"
+        "familiar": "everyday",
+        "veggies": "some"
       }
     },
-    { "id": "shoestring-fries", "title": "Baked shoestring fries", "unit": 1, "cuisine": "american", "skills": ["julienne", "oven-browning"], "skill": "Julienne: potatoes into thin sticks", "image": "dishes/shoestring-fries.png", "safety": "adult-nearby", "minutes": 70, "pickOne": "julienne", "about": "Thin, crispy potato sticks baked in the oven instead of fried.", "main": ["russet potatoes"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
-    { "id": "fattoush", "title": "Fattoush", "unit": 1, "cuisine": "lebanese", "skills": ["fine-chopping", "dressings"], "skill": "Fine chopping, toasting pita", "image": "dishes/fattoush.png", "safety": "adult-nearby", "minutes": 40, "pickOne": "fine-chopping", "about": "A crunchy Lebanese salad of chopped vegetables, herbs, and toasted pita pieces in a lemony dressing.", "main": ["pita bread", "tomatoes", "cucumber", "parsley and mint", "lemon"], "method": "oven", "tags": { "protein": "none", "flavors": ["herby-lemony", "tangy"], "heat": "mild", "budget": "$", "familiar": "new-ish" } },
+    { "id": "shoestring-fries", "title": "Baked shoestring fries", "unit": 1, "cuisine": "american", "skills": ["julienne", "oven-browning"], "skill": "Julienne: potatoes into thin sticks", "image": "dishes/shoestring-fries.png", "safety": "adult-nearby", "minutes": 70, "pickOne": "julienne", "about": "Thin, crispy potato sticks baked in the oven instead of fried.", "main": ["russet potatoes"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    {
+      "id": "fattoush",
+      "title": "Fattoush",
+      "unit": 1,
+      "cuisine": "lebanese",
+      "skills": ["fine-chopping", "dressings"],
+      "skill": "Fine chopping, toasting pita",
+      "image": "dishes/fattoush.png",
+      "safety": "adult-nearby",
+      "minutes": 40,
+      "pickOne": "fine-chopping",
+      "about": "A crunchy Lebanese salad of chopped vegetables, herbs, and toasted pita pieces in a lemony dressing.",
+      "main": ["pita bread", "tomatoes", "cucumber", "parsley and mint", "lemon"],
+      "method": "oven",
+      "tags": {
+        "protein": "none",
+        "flavors": ["herby-lemony", "tangy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "lots"
+      }
+    },
     {
       "id": "chimichurri-steak",
       "title": "Chimichurri steak",
@@ -60,9 +84,38 @@
       "about": "Seared steak topped with chimichurri, a bright Argentine sauce of chopped parsley, garlic, oregano, and vinegar.",
       "main": ["beef steak", "parsley", "garlic", "oregano"],
       "method": "stove",
-      "tags": { "protein": "beef", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$$$", "familiar": "new-ish" }
+      "tags": {
+        "protein": "beef",
+        "flavors": ["herby-lemony"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      }
     },
-    { "id": "tuna-salad-sandwiches", "title": "Tuna salad sandwiches", "unit": 1, "cuisine": "american", "skills": ["fine-chopping"], "skill": "Fine chopping: celery, onion, pickles, herbs", "image": "dishes/tuna-salad-sandwiches.png", "safety": "adult-nearby", "minutes": 25, "pickOne": "fine-chopping", "about": "Classic tuna salad with finely chopped celery, onion, pickles, and herbs, on bread.", "main": ["canned tuna", "celery", "pickles", "mayonnaise", "bread"], "method": "no-cook", "tags": { "protein": "tuna", "flavors": ["tangy"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
+    {
+      "id": "tuna-salad-sandwiches",
+      "title": "Tuna salad sandwiches",
+      "unit": 1,
+      "cuisine": "american",
+      "skills": ["fine-chopping"],
+      "skill": "Fine chopping: celery, onion, pickles, herbs",
+      "image": "dishes/tuna-salad-sandwiches.png",
+      "safety": "adult-nearby",
+      "minutes": 25,
+      "pickOne": "fine-chopping",
+      "about": "Classic tuna salad with finely chopped celery, onion, pickles, and herbs, on bread.",
+      "main": ["canned tuna", "celery", "pickles", "mayonnaise", "bread"],
+      "method": "no-cook",
+      "tags": {
+        "protein": "tuna",
+        "flavors": ["tangy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
     {
       "id": "fish-tacos",
       "title": "Pico de gallo + Baja fish tacos",
@@ -82,11 +135,34 @@
         "flavors": ["herby-lemony"],
         "heat": "some",
         "budget": "$$",
-        "familiar": "everyday"
+        "familiar": "everyday",
+        "veggies": "some"
       }
     },
-    { "id": "ratatouille", "title": "Ratatouille", "unit": 1, "cuisine": "french", "skills": ["dicing", "simmering"], "skill": "Dicing: eggplant, zucchini, pepper, tomato", "image": "dishes/ratatouille.png", "safety": "adult-nearby", "minutes": 70, "pickOne": "dicing", "about": "A French vegetable stew of diced eggplant, zucchini, peppers, and tomato, cooked slowly with herbs.", "main": ["eggplant", "zucchini", "bell pepper", "tomatoes"], "method": "stove", "tags": { "protein": "none", "flavors": ["rich-tomato", "herby-lemony"], "heat": "mild", "budget": "$", "familiar": "new-ish" } },
-    { "id": "minestrone", "title": "Minestrone", "unit": 1, "cuisine": "italian", "skills": ["dicing", "simmering"], "skill": "Dicing", "image": "dishes/minestrone.png", "safety": "adult-nearby", "minutes": 60, "pickOne": "dicing", "about": "A hearty Italian vegetable soup with beans and small pasta.", "main": ["carrots, celery, onion", "zucchini", "white beans", "small pasta", "tomatoes"], "method": "stove", "tags": { "protein": "beans-lentils", "flavors": ["rich-tomato"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
+    {
+      "id": "ratatouille",
+      "title": "Ratatouille",
+      "unit": 1,
+      "cuisine": "french",
+      "skills": ["dicing", "simmering"],
+      "skill": "Dicing: eggplant, zucchini, pepper, tomato",
+      "image": "dishes/ratatouille.png",
+      "safety": "adult-nearby",
+      "minutes": 70,
+      "pickOne": "dicing",
+      "about": "A French vegetable stew of diced eggplant, zucchini, peppers, and tomato, cooked slowly with herbs.",
+      "main": ["eggplant", "zucchini", "bell pepper", "tomatoes"],
+      "method": "stove",
+      "tags": {
+        "protein": "none",
+        "flavors": ["rich-tomato", "herby-lemony"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "lots"
+      }
+    },
+    { "id": "minestrone", "title": "Minestrone", "unit": 1, "cuisine": "italian", "skills": ["dicing", "simmering"], "skill": "Dicing", "image": "dishes/minestrone.png", "safety": "adult-nearby", "minutes": 60, "pickOne": "dicing", "about": "A hearty Italian vegetable soup with beans and small pasta.", "main": ["carrots, celery, onion", "zucchini", "white beans", "small pasta", "tomatoes"], "method": "stove", "tags": { "protein": "beans-lentils", "flavors": ["rich-tomato"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "lots" } },
     {
       "id": "chicken-caesar",
       "title": "Chicken Caesar + homemade dressing & croutons",
@@ -105,11 +181,33 @@
         "flavors": ["tangy", "creamy-cheesy"],
         "heat": "mild",
         "budget": "$$",
-        "familiar": "everyday"
+        "familiar": "everyday",
+        "veggies": "lots"
       }
     },
-    { "id": "smash-burgers", "title": "Smash burgers + quick pickles", "unit": 1, "cuisine": "american", "skills": ["thin-slicing", "quick-pickling", "searing"], "skill": "Thin slicing, quick pickle, high-heat sear", "image": "dishes/smash-burgers.png", "safety": "adult-nearby", "minutes": 60, "about": "Thin beef patties smashed onto a very hot pan for crispy edges, with quick homemade pickles.", "main": ["ground beef", "cucumbers", "buns", "cheese", "onion"], "method": "stove", "tags": { "protein": "beef", "flavors": ["tangy"], "heat": "mild", "budget": "$$", "familiar": "everyday" } },
-    { "id": "french-omelet", "title": "French-style omelet", "unit": 2, "cuisine": "french", "skills": ["heat-control"], "skill": "Heat control, rolling an omelet", "image": "dishes/french-omelet.png", "safety": "adult-nearby", "minutes": 35, "pickOne": "heat-control", "about": "A soft, pale-yellow rolled omelet cooked gently over low heat. A breakfast dish.", "main": ["eggs", "butter", "chives"], "method": "stove", "tags": { "protein": "eggs", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
+    {
+      "id": "smash-burgers",
+      "title": "Smash burgers + quick pickles",
+      "unit": 1,
+      "cuisine": "american",
+      "skills": ["thin-slicing", "quick-pickling", "searing"],
+      "skill": "Thin slicing, quick pickle, high-heat sear",
+      "image": "dishes/smash-burgers.png",
+      "safety": "adult-nearby",
+      "minutes": 60,
+      "about": "Thin beef patties smashed onto a very hot pan for crispy edges, with quick homemade pickles.",
+      "main": ["ground beef", "cucumbers", "buns", "cheese", "onion"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["tangy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
+    { "id": "french-omelet", "title": "French-style omelet", "unit": 2, "cuisine": "french", "skills": ["heat-control"], "skill": "Heat control, rolling an omelet", "image": "dishes/french-omelet.png", "safety": "adult-nearby", "minutes": 35, "pickOne": "heat-control", "about": "A soft, pale-yellow rolled omelet cooked gently over low heat. A breakfast dish.", "main": ["eggs", "butter", "chives"], "method": "stove", "tags": { "protein": "eggs", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     {
       "id": "grilled-cheese-tomato-soup",
       "title": "Grilled cheese + tomato soup",
@@ -129,11 +227,34 @@
         "flavors": ["creamy-cheesy", "rich-tomato"],
         "heat": "mild",
         "budget": "$",
-        "familiar": "everyday"
+        "familiar": "everyday",
+        "veggies": "some"
       }
     },
-    { "id": "challah-french-toast", "title": "Challah French toast", "unit": 2, "cuisine": "jewish", "skills": ["heat-control", "batters"], "skill": "Heat control", "image": "dishes/challah-french-toast.png", "safety": "adult-nearby", "minutes": 40, "pickOne": "heat-control", "about": "Thick slices of challah soaked in a sweet egg custard and cooked golden. A breakfast dish.", "main": ["challah bread", "eggs", "milk", "cinnamon"], "method": "stove", "tags": { "protein": "eggs", "flavors": ["sweet-treats", "mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
-    { "id": "hash-browns", "title": "Crispy hash browns", "unit": 2, "cuisine": "american", "skills": ["crisping"], "skill": "Squeezing out moisture, crisping", "image": "dishes/hash-browns.png", "safety": "adult-nearby", "minutes": 45, "about": "Shredded potatoes squeezed dry and pan-fried into a crispy golden cake. A breakfast side.", "main": ["russet potatoes", "butter or oil"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
+    {
+      "id": "challah-french-toast",
+      "title": "Challah French toast",
+      "unit": 2,
+      "cuisine": "jewish",
+      "skills": ["heat-control", "batters"],
+      "skill": "Heat control",
+      "image": "dishes/challah-french-toast.png",
+      "safety": "adult-nearby",
+      "minutes": 40,
+      "pickOne": "heat-control",
+      "about": "Thick slices of challah soaked in a sweet egg custard and cooked golden. A breakfast dish.",
+      "main": ["challah bread", "eggs", "milk", "cinnamon"],
+      "method": "stove",
+      "tags": {
+        "protein": "eggs",
+        "flavors": ["sweet-treats", "mild-buttery"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
+    { "id": "hash-browns", "title": "Crispy hash browns", "unit": 2, "cuisine": "american", "skills": ["crisping"], "skill": "Squeezing out moisture, crisping", "image": "dishes/hash-browns.png", "safety": "adult-nearby", "minutes": 45, "about": "Shredded potatoes squeezed dry and pan-fried into a crispy golden cake. A breakfast side.", "main": ["russet potatoes", "butter or oil"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     {
       "id": "shakshuka",
       "title": "Shakshuka",
@@ -153,10 +274,11 @@
         "flavors": ["rich-tomato", "warm-spices"],
         "heat": "some",
         "budget": "$",
-        "familiar": "new-ish"
+        "familiar": "new-ish",
+        "veggies": "some"
       }
     },
-    { "id": "spaghetti-marinara", "title": "Spaghetti marinara", "unit": 2, "cuisine": "italian", "skills": ["building-a-sauce", "simmering"], "skill": "Building a sauce", "image": "dishes/spaghetti-marinara.png", "safety": "adult-nearby", "minutes": 50, "pickOne": "building-a-sauce", "about": "Spaghetti in a simple homemade tomato sauce with garlic and basil.", "main": ["spaghetti", "canned tomatoes", "garlic", "basil"], "method": "stove", "tags": { "protein": "none", "flavors": ["rich-tomato"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
+    { "id": "spaghetti-marinara", "title": "Spaghetti marinara", "unit": 2, "cuisine": "italian", "skills": ["building-a-sauce", "simmering"], "skill": "Building a sauce", "image": "dishes/spaghetti-marinara.png", "safety": "adult-nearby", "minutes": 50, "pickOne": "building-a-sauce", "about": "Spaghetti in a simple homemade tomato sauce with garlic and basil.", "main": ["spaghetti", "canned tomatoes", "garlic", "basil"], "method": "stove", "tags": { "protein": "none", "flavors": ["rich-tomato"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "some" } },
     {
       "id": "honey-garlic-chicken",
       "title": "Honey-garlic chicken",
@@ -176,14 +298,57 @@
         "flavors": ["sweet-savory", "ginger-soy"],
         "heat": "mild",
         "budget": "$",
-        "familiar": "everyday"
+        "familiar": "everyday",
+        "veggies": "light"
       }
     },
-    { "id": "chicken-fried-rice", "title": "Chicken fried rice", "unit": 2, "cuisine": "chinese", "skills": ["stir-frying", "dicing"], "skill": "High-heat stir-fry, day-old rice", "image": "dishes/chicken-fried-rice.png", "safety": "adult-nearby", "minutes": 35, "about": "Day-old rice stir-fried fast with chicken, egg, vegetables, and soy sauce.", "main": ["cooked rice", "chicken", "eggs", "peas and carrots", "green onions"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["ginger-soy"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
-    { "id": "oyakodon", "title": "Oyakodon", "unit": 2, "cuisine": "japanese", "skills": ["simmering", "poaching-eggs"], "skill": "Simmering, setting egg gently", "image": "dishes/oyakodon.png", "safety": "adult-nearby", "minutes": 45, "about": "A Japanese rice bowl of chicken and onion simmered in a sweet soy broth, with egg set gently on top.", "main": ["chicken thighs", "eggs", "onion", "soy sauce", "rice"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["ginger-soy", "sweet-savory"], "heat": "mild", "budget": "$", "familiar": "new-ish" } },
-    { "id": "chicken-adobo", "title": "Chicken adobo", "unit": 2, "cuisine": "filipino", "skills": ["braising", "reducing"], "skill": "Braising, reducing", "image": "dishes/chicken-adobo.png", "safety": "adult-nearby", "minutes": 75, "about": "Filipino chicken braised in vinegar, soy sauce, garlic, and bay leaves until tender, then glazed. Served with rice.", "main": ["chicken thighs", "vinegar", "soy sauce", "garlic", "bay leaves"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["tangy", "ginger-soy"], "heat": "mild", "budget": "$", "familiar": "new-ish" } },
-    { "id": "breakfast-burritos", "title": "Breakfast burritos", "unit": 2, "cuisine": "american", "skills": ["timing", "rolling-wrapping"], "skill": "Timing several components, rolling", "image": "dishes/breakfast-burritos.png", "safety": "adult-nearby", "minutes": 50, "about": "Flour tortillas rolled around scrambled eggs, crispy potatoes, beef or turkey sausage, and cheese.", "main": ["eggs", "potatoes", "turkey or beef sausage", "cheese", "tortillas"], "method": "stove", "tags": { "protein": "turkey", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday" } },
-    { "id": "cacio-e-pepe", "title": "Cacio e pepe", "unit": 2, "cuisine": "italian", "skills": ["emulsions"], "skill": "Emulsion", "image": "dishes/cacio-e-pepe.png", "safety": "adult-nearby", "minutes": 30, "about": "Roman pasta with a creamy sauce made only from cheese, black pepper, and starchy pasta water.", "main": ["spaghetti", "pecorino or parmesan", "black pepper"], "method": "stove", "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "new-ish" } },
+    { "id": "chicken-fried-rice", "title": "Chicken fried rice", "unit": 2, "cuisine": "chinese", "skills": ["stir-frying", "dicing"], "skill": "High-heat stir-fry, day-old rice", "image": "dishes/chicken-fried-rice.png", "safety": "adult-nearby", "minutes": 35, "about": "Day-old rice stir-fried fast with chicken, egg, vegetables, and soy sauce.", "main": ["cooked rice", "chicken", "eggs", "peas and carrots", "green onions"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["ginger-soy"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "some" } },
+    { "id": "oyakodon", "title": "Oyakodon", "unit": 2, "cuisine": "japanese", "skills": ["simmering", "poaching-eggs"], "skill": "Simmering, setting egg gently", "image": "dishes/oyakodon.png", "safety": "adult-nearby", "minutes": 45, "about": "A Japanese rice bowl of chicken and onion simmered in a sweet soy broth, with egg set gently on top.", "main": ["chicken thighs", "eggs", "onion", "soy sauce", "rice"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["ginger-soy", "sweet-savory"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
+    {
+      "id": "chicken-adobo",
+      "title": "Chicken adobo",
+      "unit": 2,
+      "cuisine": "filipino",
+      "skills": ["braising", "reducing"],
+      "skill": "Braising, reducing",
+      "image": "dishes/chicken-adobo.png",
+      "safety": "adult-nearby",
+      "minutes": 75,
+      "about": "Filipino chicken braised in vinegar, soy sauce, garlic, and bay leaves until tender, then glazed. Served with rice.",
+      "main": ["chicken thighs", "vinegar", "soy sauce", "garlic", "bay leaves"],
+      "method": "stove",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["tangy", "ginger-soy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      }
+    },
+    {
+      "id": "breakfast-burritos",
+      "title": "Breakfast burritos",
+      "unit": 2,
+      "cuisine": "american",
+      "skills": ["timing", "rolling-wrapping"],
+      "skill": "Timing several components, rolling",
+      "image": "dishes/breakfast-burritos.png",
+      "safety": "adult-nearby",
+      "minutes": 50,
+      "about": "Flour tortillas rolled around scrambled eggs, crispy potatoes, beef or turkey sausage, and cheese.",
+      "main": ["eggs", "potatoes", "turkey or beef sausage", "cheese", "tortillas"],
+      "method": "stove",
+      "tags": {
+        "protein": "turkey",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
+    { "id": "cacio-e-pepe", "title": "Cacio e pepe", "unit": 2, "cuisine": "italian", "skills": ["emulsions"], "skill": "Emulsion", "image": "dishes/cacio-e-pepe.png", "safety": "adult-nearby", "minutes": 30, "about": "Roman pasta with a creamy sauce made only from cheese, black pepper, and starchy pasta water.", "main": ["spaghetti", "pecorino or parmesan", "black pepper"], "method": "stove", "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
     {
       "id": "eggs-benedict",
       "title": "Eggs Benedict",
@@ -198,10 +363,39 @@
       "about": "Poached eggs on toasted English muffins with turkey bacon or smoked salmon, under a buttery hollandaise sauce.",
       "main": ["eggs", "English muffins", "turkey bacon or smoked salmon", "butter", "lemon"],
       "method": "stove",
-      "tags": { "protein": "eggs", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "new-ish" }
+      "tags": {
+        "protein": "eggs",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      }
     },
-    { "id": "mac-and-cheese", "title": "Stovetop mac and cheese", "unit": 2, "cuisine": "american", "skills": ["roux"], "skill": "Roux, then béchamel, then cheese sauce", "image": "dishes/mac-and-cheese.png", "safety": "adult-nearby", "minutes": 40, "pickOne": "roux", "about": "Creamy macaroni in a homemade cheese sauce, made on the stove.", "main": ["elbow macaroni", "cheddar cheese", "milk", "butter"], "method": "stove", "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
-    { "id": "chicken-spinach-crepes", "title": "Chicken and spinach crêpes", "unit": 2, "cuisine": "french", "skills": ["roux", "batters"], "skill": "Roux, then béchamel, crêpe batter", "image": "dishes/chicken-spinach-crepes.png", "safety": "adult-nearby", "minutes": 80, "pickOne": "roux", "about": "Thin French pancakes wrapped around chicken and spinach in a creamy white sauce.", "main": ["chicken", "spinach", "milk", "eggs", "butter"], "method": "stove-oven", "tags": { "protein": "chicken", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$$", "familiar": "new-ish" } },
+    { "id": "mac-and-cheese", "title": "Stovetop mac and cheese", "unit": 2, "cuisine": "american", "skills": ["roux"], "skill": "Roux, then béchamel, then cheese sauce", "image": "dishes/mac-and-cheese.png", "safety": "adult-nearby", "minutes": 40, "pickOne": "roux", "about": "Creamy macaroni in a homemade cheese sauce, made on the stove.", "main": ["elbow macaroni", "cheddar cheese", "milk", "butter"], "method": "stove", "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    {
+      "id": "chicken-spinach-crepes",
+      "title": "Chicken and spinach crêpes",
+      "unit": 2,
+      "cuisine": "french",
+      "skills": ["roux", "batters"],
+      "skill": "Roux, then béchamel, crêpe batter",
+      "image": "dishes/chicken-spinach-crepes.png",
+      "safety": "adult-nearby",
+      "minutes": 80,
+      "pickOne": "roux",
+      "about": "Thin French pancakes wrapped around chicken and spinach in a creamy white sauce.",
+      "main": ["chicken", "spinach", "milk", "eggs", "butter"],
+      "method": "stove-oven",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      }
+    },
     {
       "id": "japanese-chicken-curry",
       "title": "Japanese chicken curry",
@@ -221,12 +415,57 @@
         "flavors": ["warm-spices", "sweet-savory"],
         "heat": "mild",
         "budget": "$",
-        "familiar": "new-ish"
+        "familiar": "new-ish",
+        "veggies": "some"
       }
     },
-    { "id": "chana-masala", "title": "Chana masala", "unit": 3, "cuisine": "indian", "skills": ["blooming-spices", "flavor-base"], "skill": "Blooming spices, onion-tomato base", "image": "dishes/chana-masala.png", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "An Indian chickpea curry in a spiced onion and tomato sauce, with rice.", "main": ["chickpeas", "onion", "tomatoes", "ginger and garlic", "garam masala"], "method": "stove", "tags": { "protein": "beans-lentils", "flavors": ["warm-spices"], "heat": "some", "budget": "$", "familiar": "adventurous" } },
-    { "id": "beef-chili", "title": "Beef chili", "unit": 3, "cuisine": "american", "skills": ["searing", "blooming-spices", "simmering"], "skill": "Batch browning, toasting spices", "image": "dishes/beef-chili.png", "safety": "adult-nearby", "minutes": 75, "estimated": true, "about": "A thick, hearty beef and bean chili with toasted spices.", "main": ["ground beef", "kidney beans", "tomatoes", "onion", "chili powder"], "method": "stove", "tags": { "protein": "beef", "flavors": ["warm-spices", "rich-tomato"], "heat": "some", "budget": "$$", "familiar": "everyday" } },
-    { "id": "misir-wot", "title": "Misir wot", "unit": 3, "cuisine": "ethiopian", "skills": ["blooming-spices", "simmering"], "skill": "Spiced lentils", "image": "dishes/misir-wot.png", "safety": "adult-nearby", "minutes": 55, "estimated": true, "about": "An Ethiopian red lentil stew, warmly spiced with berbere and slow-cooked onions. Served with rice.", "main": ["red lentils", "onion", "berbere spice", "garlic and ginger"], "method": "stove", "tags": { "protein": "beans-lentils", "flavors": ["warm-spices", "chili-heat"], "heat": "spicy", "budget": "$", "familiar": "adventurous" } },
+    {
+      "id": "chana-masala",
+      "title": "Chana masala",
+      "unit": 3,
+      "cuisine": "indian",
+      "skills": ["blooming-spices", "flavor-base"],
+      "skill": "Blooming spices, onion-tomato base",
+      "image": "dishes/chana-masala.png",
+      "safety": "adult-nearby",
+      "minutes": 45,
+      "estimated": true,
+      "about": "An Indian chickpea curry in a spiced onion and tomato sauce, with rice.",
+      "main": ["chickpeas", "onion", "tomatoes", "ginger and garlic", "garam masala"],
+      "method": "stove",
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["warm-spices"],
+        "heat": "some",
+        "budget": "$",
+        "familiar": "adventurous",
+        "veggies": "some"
+      }
+    },
+    { "id": "beef-chili", "title": "Beef chili", "unit": 3, "cuisine": "american", "skills": ["searing", "blooming-spices", "simmering"], "skill": "Batch browning, toasting spices", "image": "dishes/beef-chili.png", "safety": "adult-nearby", "minutes": 75, "estimated": true, "about": "A thick, hearty beef and bean chili with toasted spices.", "main": ["ground beef", "kidney beans", "tomatoes", "onion", "chili powder"], "method": "stove", "tags": { "protein": "beef", "flavors": ["warm-spices", "rich-tomato"], "heat": "some", "budget": "$$", "familiar": "everyday", "veggies": "some" } },
+    {
+      "id": "misir-wot",
+      "title": "Misir wot",
+      "unit": 3,
+      "cuisine": "ethiopian",
+      "skills": ["blooming-spices", "simmering"],
+      "skill": "Spiced lentils",
+      "image": "dishes/misir-wot.png",
+      "safety": "adult-nearby",
+      "minutes": 55,
+      "estimated": true,
+      "about": "An Ethiopian red lentil stew, warmly spiced with berbere and slow-cooked onions. Served with rice.",
+      "main": ["red lentils", "onion", "berbere spice", "garlic and ginger"],
+      "method": "stove",
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["warm-spices", "chili-heat"],
+        "heat": "spicy",
+        "budget": "$",
+        "familiar": "adventurous",
+        "veggies": "some"
+      }
+    },
     {
       "id": "red-beans-and-rice",
       "title": "Red beans and rice",
@@ -246,7 +485,8 @@
         "flavors": ["warm-spices"],
         "heat": "some",
         "budget": "$",
-        "familiar": "new-ish"
+        "familiar": "new-ish",
+        "veggies": "some"
       }
     },
     {
@@ -268,7 +508,8 @@
         "flavors": ["rich-tomato", "chili-heat"],
         "heat": "some",
         "budget": "$",
-        "familiar": "adventurous"
+        "familiar": "adventurous",
+        "veggies": "some"
       }
     },
     {
@@ -290,7 +531,8 @@
         "flavors": ["smoky-bbq", "sweet-savory"],
         "heat": "mild",
         "budget": "$",
-        "familiar": "everyday"
+        "familiar": "everyday",
+        "veggies": "some"
       }
     },
     {
@@ -312,7 +554,8 @@
         "flavors": ["warm-spices", "herby-lemony"],
         "heat": "mild",
         "budget": "$$",
-        "familiar": "adventurous"
+        "familiar": "adventurous",
+        "veggies": "some"
       }
     },
     {
@@ -334,7 +577,8 @@
         "flavors": ["rich-tomato", "warm-spices"],
         "heat": "some",
         "budget": "$",
-        "familiar": "adventurous"
+        "familiar": "adventurous",
+        "veggies": "some"
       }
     },
     {
@@ -356,7 +600,8 @@
         "flavors": ["rich-tomato", "warm-spices"],
         "heat": "some",
         "budget": "$",
-        "familiar": "adventurous"
+        "familiar": "adventurous",
+        "veggies": "light"
       }
     },
     {
@@ -378,11 +623,55 @@
         "flavors": ["warm-spices", "creamy-cheesy"],
         "heat": "some",
         "budget": "$$",
-        "familiar": "new-ish"
+        "familiar": "new-ish",
+        "veggies": "light"
       }
     },
-    { "id": "jerk-chicken", "title": "Jerk chicken", "unit": 3, "cuisine": "jamaican", "skills": ["marinating", "broiling"], "skill": "Wet marinade, broiling", "image": "dishes/jerk-chicken.png", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Jamaican chicken marinated in a spicy, fragrant paste of peppers, allspice, and thyme, then broiled.", "main": ["chicken thighs", "hot peppers", "green onions", "allspice", "thyme"], "method": "oven", "tags": { "protein": "chicken", "flavors": ["chili-heat", "warm-spices"], "heat": "spicy", "budget": "$", "familiar": "new-ish" } },
-    { "id": "beef-bulgogi", "title": "Beef bulgogi", "unit": 4, "cuisine": "korean", "skills": ["thin-slicing", "marinating"], "skill": "Thin slicing (partly frozen), marinating", "image": "dishes/beef-bulgogi.png", "safety": "adult-nearby", "minutes": 80, "about": "Korean thin-sliced beef in a sweet soy, pear, and garlic marinade, seared fast and served over rice.", "main": ["beef ribeye", "soy sauce", "Asian pear", "garlic", "rice"], "method": "stove", "tags": { "protein": "beef", "flavors": ["ginger-soy", "sweet-savory"], "heat": "mild", "budget": "$$$", "familiar": "new-ish" } },
+    {
+      "id": "jerk-chicken",
+      "title": "Jerk chicken",
+      "unit": 3,
+      "cuisine": "jamaican",
+      "skills": ["marinating", "broiling"],
+      "skill": "Wet marinade, broiling",
+      "image": "dishes/jerk-chicken.png",
+      "safety": "adult-nearby",
+      "minutes": 60,
+      "estimated": true,
+      "about": "Jamaican chicken marinated in a spicy, fragrant paste of peppers, allspice, and thyme, then broiled.",
+      "main": ["chicken thighs", "hot peppers", "green onions", "allspice", "thyme"],
+      "method": "oven",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["chili-heat", "warm-spices"],
+        "heat": "spicy",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      }
+    },
+    {
+      "id": "beef-bulgogi",
+      "title": "Beef bulgogi",
+      "unit": 4,
+      "cuisine": "korean",
+      "skills": ["thin-slicing", "marinating"],
+      "skill": "Thin slicing (partly frozen), marinating",
+      "image": "dishes/beef-bulgogi.png",
+      "safety": "adult-nearby",
+      "minutes": 80,
+      "about": "Korean thin-sliced beef in a sweet soy, pear, and garlic marinade, seared fast and served over rice.",
+      "main": ["beef ribeye", "soy sauce", "Asian pear", "garlic", "rice"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["ginger-soy", "sweet-savory"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      }
+    },
     {
       "id": "philly-cheesesteak",
       "title": "Philly cheesesteak",
@@ -403,11 +692,34 @@
         "flavors": ["creamy-cheesy"],
         "heat": "mild",
         "budget": "$$$",
-        "familiar": "everyday"
+        "familiar": "everyday",
+        "veggies": "some"
       }
     },
-    { "id": "lomo-saltado", "title": "Lomo saltado", "unit": 4, "cuisine": "peruvian", "skills": ["stir-frying", "thin-slicing"], "skill": "Beef stir-fry", "image": "dishes/lomo-saltado.png", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "A Peruvian beef stir-fry with onions, tomatoes, and soy sauce, served with fries and rice.", "main": ["beef sirloin", "onion", "tomatoes", "soy sauce", "potatoes"], "method": "stove-oven", "tags": { "protein": "beef", "flavors": ["ginger-soy", "tangy"], "heat": "some", "budget": "$$", "familiar": "adventurous" } },
-    { "id": "suya", "title": "Suya (spiced beef skewers)", "unit": 4, "cuisine": "nigerian", "skills": ["thin-slicing", "spice-rubs", "broiling"], "skill": "Thin slicing, dry rub, broiling", "image": "dishes/suya.png", "safety": "adult-nearby", "minutes": 50, "estimated": true, "about": "Nigerian beef skewers coated in a spicy ground-peanut rub, broiled and served with onion and tomato.", "main": ["beef", "ground peanuts", "spices", "onion"], "method": "oven", "tags": { "protein": "beef", "flavors": ["chili-heat", "warm-spices"], "heat": "spicy", "budget": "$$", "familiar": "adventurous" } },
+    { "id": "lomo-saltado", "title": "Lomo saltado", "unit": 4, "cuisine": "peruvian", "skills": ["stir-frying", "thin-slicing"], "skill": "Beef stir-fry", "image": "dishes/lomo-saltado.png", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "A Peruvian beef stir-fry with onions, tomatoes, and soy sauce, served with fries and rice.", "main": ["beef sirloin", "onion", "tomatoes", "soy sauce", "potatoes"], "method": "stove-oven", "tags": { "protein": "beef", "flavors": ["ginger-soy", "tangy"], "heat": "some", "budget": "$$", "familiar": "adventurous", "veggies": "some" } },
+    {
+      "id": "suya",
+      "title": "Suya (spiced beef skewers)",
+      "unit": 4,
+      "cuisine": "nigerian",
+      "skills": ["thin-slicing", "spice-rubs", "broiling"],
+      "skill": "Thin slicing, dry rub, broiling",
+      "image": "dishes/suya.png",
+      "safety": "adult-nearby",
+      "minutes": 50,
+      "estimated": true,
+      "about": "Nigerian beef skewers coated in a spicy ground-peanut rub, broiled and served with onion and tomato.",
+      "main": ["beef", "ground peanuts", "spices", "onion"],
+      "method": "oven",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["chili-heat", "warm-spices"],
+        "heat": "spicy",
+        "budget": "$$",
+        "familiar": "adventurous",
+        "veggies": "light"
+      }
+    },
     {
       "id": "chicken-yassa",
       "title": "Chicken yassa",
@@ -427,10 +739,33 @@
         "flavors": ["tangy", "herby-lemony"],
         "heat": "some",
         "budget": "$",
-        "familiar": "adventurous"
+        "familiar": "adventurous",
+        "veggies": "some"
       }
     },
-    { "id": "chicken-tinga-tacos", "title": "Chicken tinga tacos", "unit": 4, "cuisine": "mexican", "skills": ["braising", "shredding"], "skill": "Braising, shredding", "image": "dishes/chicken-tinga-tacos.png", "safety": "adult-nearby", "minutes": 70, "estimated": true, "about": "Shredded chicken simmered in a smoky tomato and chipotle sauce, in tortillas.", "main": ["chicken", "tomatoes", "chipotle peppers", "onion", "corn tortillas"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["smoky-bbq", "rich-tomato"], "heat": "some", "budget": "$", "familiar": "new-ish" } },
+    {
+      "id": "chicken-tinga-tacos",
+      "title": "Chicken tinga tacos",
+      "unit": 4,
+      "cuisine": "mexican",
+      "skills": ["braising", "shredding"],
+      "skill": "Braising, shredding",
+      "image": "dishes/chicken-tinga-tacos.png",
+      "safety": "adult-nearby",
+      "minutes": 70,
+      "estimated": true,
+      "about": "Shredded chicken simmered in a smoky tomato and chipotle sauce, in tortillas.",
+      "main": ["chicken", "tomatoes", "chipotle peppers", "onion", "corn tortillas"],
+      "method": "stove",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["smoky-bbq", "rich-tomato"],
+        "heat": "some",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      }
+    },
     {
       "id": "matzo-ball-soup",
       "title": "Matzo ball soup from a whole chicken",
@@ -450,16 +785,62 @@
         "flavors": ["mild-buttery"],
         "heat": "mild",
         "budget": "$$",
-        "familiar": "everyday"
+        "familiar": "everyday",
+        "veggies": "some"
       }
     },
-    { "id": "blueberry-muffins", "title": "Blueberry muffins", "unit": 5, "cuisine": "american", "skills": ["muffin-method"], "skill": "Muffin method, avoiding overmixing", "image": "dishes/blueberry-muffins.png", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "Tender, sweet muffins full of blueberries. A breakfast bake.", "main": ["blueberries", "milk", "eggs", "butter"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
-    { "id": "skillet-cornbread", "title": "Skillet cornbread", "unit": 5, "cuisine": "american", "skills": ["skillet-baking", "muffin-method"], "skill": "Preheated skillet", "image": "dishes/skillet-cornbread.png", "safety": "adult-nearby", "minutes": 40, "estimated": true, "about": "Golden cornbread baked in a hot skillet for a crispy edge. Pairs with chili.", "main": ["cornmeal", "buttermilk", "eggs", "butter"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
-    { "id": "pao-de-queijo", "title": "Pão de queijo", "unit": 5, "cuisine": "brazilian", "skills": ["scalded-dough"], "skill": "Scalded tapioca dough", "image": "dishes/pao-de-queijo.png", "safety": "adult-nearby", "minutes": 50, "estimated": true, "about": "Brazilian cheese bread: chewy, puffy little rolls made with tapioca flour and cheese.", "main": ["tapioca flour", "milk", "eggs", "parmesan"], "method": "stove-oven", "meal": false, "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "new-ish" } },
-    { "id": "skillet-naan", "title": "Skillet naan", "unit": 5, "cuisine": "indian", "skills": ["flatbreads"], "skill": "Yogurt dough, high-heat skillet", "image": "dishes/skillet-naan.png", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Soft Indian flatbread made with a yogurt dough and cooked in a very hot skillet.", "main": ["yogurt", "butter", "garlic"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "new-ish" } },
-    { "id": "pupusas", "title": "Pupusas", "unit": 5, "cuisine": "salvadoran", "skills": ["masa-dough"], "skill": "Masa dough, griddle", "image": "dishes/pupusas.png", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Salvadoran stuffed corn cakes filled with cheese and beans, cooked on a griddle, with a tangy cabbage slaw.", "main": ["masa harina", "cheese", "refried beans", "cabbage"], "method": "stove", "tags": { "protein": "beans-lentils", "flavors": ["creamy-cheesy", "tangy"], "heat": "mild", "budget": "$", "familiar": "adventurous" } },
-    { "id": "ugali-sukuma-wiki", "title": "Ugali with sukuma wiki", "unit": 5, "cuisine": "kenyan", "skills": ["stiff-porridge", "braising"], "skill": "Stiff cornmeal dough, braised greens", "image": "dishes/ugali-sukuma-wiki.png", "safety": "adult-nearby", "minutes": 50, "estimated": true, "about": "Kenyan ugali, a firm cornmeal dish eaten by hand, with greens braised with tomato and onion.", "main": ["white cornmeal", "collard greens", "tomatoes", "onion"], "method": "stove", "tags": { "protein": "none", "flavors": ["rich-tomato"], "heat": "mild", "budget": "$", "familiar": "adventurous" } },
-    { "id": "buttermilk-biscuits", "title": "Buttermilk biscuits", "unit": 5, "cuisine": "american", "skills": ["cutting-in-fat", "folding-layers"], "skill": "Cutting in cold fat, folding for layers", "image": "dishes/buttermilk-biscuits.png", "safety": "adult-nearby", "minutes": 50, "pickOne": "cutting-in-fat", "about": "Tall, flaky biscuits made with cold butter folded into layers. A breakfast bake.", "main": ["butter", "buttermilk"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
+    { "id": "blueberry-muffins", "title": "Blueberry muffins", "unit": 5, "cuisine": "american", "skills": ["muffin-method"], "skill": "Muffin method, avoiding overmixing", "image": "dishes/blueberry-muffins.png", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "Tender, sweet muffins full of blueberries. A breakfast bake.", "main": ["blueberries", "milk", "eggs", "butter"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "skillet-cornbread", "title": "Skillet cornbread", "unit": 5, "cuisine": "american", "skills": ["skillet-baking", "muffin-method"], "skill": "Preheated skillet", "image": "dishes/skillet-cornbread.png", "safety": "adult-nearby", "minutes": 40, "estimated": true, "about": "Golden cornbread baked in a hot skillet for a crispy edge. Pairs with chili.", "main": ["cornmeal", "buttermilk", "eggs", "butter"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "pao-de-queijo", "title": "Pão de queijo", "unit": 5, "cuisine": "brazilian", "skills": ["scalded-dough"], "skill": "Scalded tapioca dough", "image": "dishes/pao-de-queijo.png", "safety": "adult-nearby", "minutes": 50, "estimated": true, "about": "Brazilian cheese bread: chewy, puffy little rolls made with tapioca flour and cheese.", "main": ["tapioca flour", "milk", "eggs", "parmesan"], "method": "stove-oven", "meal": false, "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
+    { "id": "skillet-naan", "title": "Skillet naan", "unit": 5, "cuisine": "indian", "skills": ["flatbreads"], "skill": "Yogurt dough, high-heat skillet", "image": "dishes/skillet-naan.png", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Soft Indian flatbread made with a yogurt dough and cooked in a very hot skillet.", "main": ["yogurt", "butter", "garlic"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
+    { "id": "pupusas", "title": "Pupusas", "unit": 5, "cuisine": "salvadoran", "skills": ["masa-dough"], "skill": "Masa dough, griddle", "image": "dishes/pupusas.png", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Salvadoran stuffed corn cakes filled with cheese and beans, cooked on a griddle, with a tangy cabbage slaw.", "main": ["masa harina", "cheese", "refried beans", "cabbage"], "method": "stove", "tags": { "protein": "beans-lentils", "flavors": ["creamy-cheesy", "tangy"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "some" } },
+    {
+      "id": "ugali-sukuma-wiki",
+      "title": "Ugali with sukuma wiki",
+      "unit": 5,
+      "cuisine": "kenyan",
+      "skills": ["stiff-porridge", "braising"],
+      "skill": "Stiff cornmeal dough, braised greens",
+      "image": "dishes/ugali-sukuma-wiki.png",
+      "safety": "adult-nearby",
+      "minutes": 50,
+      "estimated": true,
+      "about": "Kenyan ugali, a firm cornmeal dish eaten by hand, with greens braised with tomato and onion.",
+      "main": ["white cornmeal", "collard greens", "tomatoes", "onion"],
+      "method": "stove",
+      "tags": {
+        "protein": "none",
+        "flavors": ["rich-tomato"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "adventurous",
+        "veggies": "lots"
+      }
+    },
+    {
+      "id": "buttermilk-biscuits",
+      "title": "Buttermilk biscuits",
+      "unit": 5,
+      "cuisine": "american",
+      "skills": ["cutting-in-fat", "folding-layers"],
+      "skill": "Cutting in cold fat, folding for layers",
+      "image": "dishes/buttermilk-biscuits.png",
+      "safety": "adult-nearby",
+      "minutes": 50,
+      "pickOne": "cutting-in-fat",
+      "about": "Tall, flaky biscuits made with cold butter folded into layers. A breakfast bake.",
+      "main": ["butter", "buttermilk"],
+      "method": "oven",
+      "meal": false,
+      "tags": {
+        "protein": "none",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
     {
       "id": "rugelach",
       "title": "Rugelach",
@@ -476,7 +857,14 @@
       "main": ["butter", "cream cheese", "jam", "walnuts", "cinnamon"],
       "method": "oven",
       "meal": false,
-      "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$$", "familiar": "new-ish" }
+      "tags": {
+        "protein": "none",
+        "flavors": ["sweet-treats"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      }
     },
     {
       "id": "beef-empanadas",
@@ -493,7 +881,14 @@
       "about": "Hand pies of buttery pastry filled with spiced beef, onion, and egg, crimped and baked.",
       "main": ["ground beef", "onion", "butter", "eggs", "olives"],
       "method": "stove-oven",
-      "tags": { "protein": "beef", "flavors": ["warm-spices"], "heat": "mild", "budget": "$$", "familiar": "new-ish" }
+      "tags": {
+        "protein": "beef",
+        "flavors": ["warm-spices"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      }
     },
     {
       "id": "biscuits-and-gravy",
@@ -515,10 +910,33 @@
         "flavors": ["mild-buttery", "creamy-cheesy"],
         "heat": "mild",
         "budget": "$",
-        "familiar": "everyday"
+        "familiar": "everyday",
+        "veggies": "light"
       }
     },
-    { "id": "gyoza", "title": "Gyoza", "unit": 5, "cuisine": "japanese", "skills": ["pleating", "crisping"], "skill": "Pleating, fry-then-steam", "image": "dishes/gyoza.png", "safety": "adult-nearby", "minutes": 75, "estimated": true, "about": "Japanese dumplings filled with seasoned chicken or beef and cabbage, pleated by hand, then fried and steamed.", "main": ["dumpling wrappers", "ground chicken or beef", "cabbage", "ginger and garlic", "soy sauce"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["ginger-soy"], "heat": "mild", "budget": "$$", "familiar": "new-ish" } },
+    {
+      "id": "gyoza",
+      "title": "Gyoza",
+      "unit": 5,
+      "cuisine": "japanese",
+      "skills": ["pleating", "crisping"],
+      "skill": "Pleating, fry-then-steam",
+      "image": "dishes/gyoza.png",
+      "safety": "adult-nearby",
+      "minutes": 75,
+      "estimated": true,
+      "about": "Japanese dumplings filled with seasoned chicken or beef and cabbage, pleated by hand, then fried and steamed.",
+      "main": ["dumpling wrappers", "ground chicken or beef", "cabbage", "ginger and garlic", "soy sauce"],
+      "method": "stove",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["ginger-soy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      }
+    },
     {
       "id": "cinnamon-rolls",
       "title": "Cinnamon rolls",
@@ -535,12 +953,42 @@
       "main": ["yeast", "milk", "butter", "cinnamon", "powdered sugar"],
       "method": "oven",
       "meal": false,
-      "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday" }
+      "tags": {
+        "protein": "none",
+        "flavors": ["sweet-treats"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
     },
-    { "id": "challah", "title": "Challah", "unit": 5, "cuisine": "jewish", "skills": ["yeast-dough"], "skill": "Yeast dough: kneading, proofing, braiding", "image": "dishes/challah.png", "safety": "adult-nearby", "minutes": 210, "estimated": true, "pickOne": "yeast-dough", "about": "A soft, slightly sweet braided bread made with eggs and honey.", "main": ["yeast", "eggs", "honey", "oil"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
-    { "id": "homemade-pizza", "title": "Homemade pizza", "unit": 5, "cuisine": "italian", "skills": ["yeast-dough"], "skill": "Yeast dough: kneading, stretching", "image": "dishes/homemade-pizza.png", "safety": "adult-nearby", "minutes": 120, "estimated": true, "pickOne": "yeast-dough", "about": "Pizza on a homemade yeast crust, stretched by hand, with tomato sauce and cheese.", "main": ["yeast", "tomato sauce", "mozzarella", "toppings"], "method": "oven", "tags": { "protein": "none", "flavors": ["rich-tomato", "creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
-    { "id": "granola", "title": "Homemade granola", "unit": 6, "cuisine": "american", "skills": ["oven-browning"], "skill": "Oven browning, stirring partway", "image": "dishes/granola.png", "safety": "adult-nearby", "minutes": 50, "estimated": true, "about": "Crunchy oven-toasted oats, nuts, and honey. A breakfast dish.", "main": ["rolled oats", "nuts or seeds", "honey", "oil", "dried fruit"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday" } },
-    { "id": "meatloaf", "title": "Meatloaf with glaze", "unit": 6, "cuisine": "american", "skills": ["binders"], "skill": "Binders, thermometer", "image": "dishes/meatloaf.png", "safety": "adult-nearby", "minutes": 90, "estimated": true, "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.", "main": ["ground beef", "onion", "eggs", "breadcrumbs", "ketchup"], "method": "oven", "tags": { "protein": "beef", "flavors": ["sweet-savory", "mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday" } },
+    { "id": "challah", "title": "Challah", "unit": 5, "cuisine": "jewish", "skills": ["yeast-dough"], "skill": "Yeast dough: kneading, proofing, braiding", "image": "dishes/challah.png", "safety": "adult-nearby", "minutes": 210, "estimated": true, "pickOne": "yeast-dough", "about": "A soft, slightly sweet braided bread made with eggs and honey.", "main": ["yeast", "eggs", "honey", "oil"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    {
+      "id": "homemade-pizza",
+      "title": "Homemade pizza",
+      "unit": 5,
+      "cuisine": "italian",
+      "skills": ["yeast-dough"],
+      "skill": "Yeast dough: kneading, stretching",
+      "image": "dishes/homemade-pizza.png",
+      "safety": "adult-nearby",
+      "minutes": 120,
+      "estimated": true,
+      "pickOne": "yeast-dough",
+      "about": "Pizza on a homemade yeast crust, stretched by hand, with tomato sauce and cheese.",
+      "main": ["yeast", "tomato sauce", "mozzarella", "toppings"],
+      "method": "oven",
+      "tags": {
+        "protein": "none",
+        "flavors": ["rich-tomato", "creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
+    { "id": "granola", "title": "Homemade granola", "unit": 6, "cuisine": "american", "skills": ["oven-browning"], "skill": "Oven browning, stirring partway", "image": "dishes/granola.png", "safety": "adult-nearby", "minutes": 50, "estimated": true, "about": "Crunchy oven-toasted oats, nuts, and honey. A breakfast dish.", "main": ["rolled oats", "nuts or seeds", "honey", "oil", "dried fruit"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "meatloaf", "title": "Meatloaf with glaze", "unit": 6, "cuisine": "american", "skills": ["binders"], "skill": "Binders, thermometer", "image": "dishes/meatloaf.png", "safety": "adult-nearby", "minutes": 90, "estimated": true, "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.", "main": ["ground beef", "onion", "eggs", "breadcrumbs", "ketchup"], "method": "oven", "tags": { "protein": "beef", "flavors": ["sweet-savory", "mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } },
     {
       "id": "swedish-meatballs",
       "title": "Swedish meatballs",
@@ -561,7 +1009,8 @@
         "flavors": ["creamy-cheesy", "sweet-savory"],
         "heat": "mild",
         "budget": "$$",
-        "familiar": "new-ish"
+        "familiar": "new-ish",
+        "veggies": "light"
       }
     },
     {
@@ -584,10 +1033,11 @@
         "flavors": ["herby-lemony", "mild-buttery"],
         "heat": "mild",
         "budget": "$",
-        "familiar": "everyday"
+        "familiar": "everyday",
+        "veggies": "light"
       }
     },
-    { "id": "pot-roast", "title": "Pot roast", "unit": 6, "cuisine": "american", "skills": ["braising"], "skill": "Long oven braise", "image": "dishes/pot-roast.png", "safety": "adult-nearby", "minutes": 210, "estimated": true, "about": "Beef chuck braised for hours in the oven with carrots, potatoes, and onion until fall-apart tender.", "main": ["beef chuck roast", "potatoes", "carrots", "onion", "beef broth"], "method": "stove-oven", "tags": { "protein": "beef", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday" } },
+    { "id": "pot-roast", "title": "Pot roast", "unit": 6, "cuisine": "american", "skills": ["braising"], "skill": "Long oven braise", "image": "dishes/pot-roast.png", "safety": "adult-nearby", "minutes": 210, "estimated": true, "about": "Beef chuck braised for hours in the oven with carrots, potatoes, and onion until fall-apart tender.", "main": ["beef chuck roast", "potatoes", "carrots", "onion", "beef broth"], "method": "stove-oven", "tags": { "protein": "beef", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "some" } },
     {
       "id": "bobotie",
       "title": "Bobotie",
@@ -607,11 +1057,34 @@
         "flavors": ["warm-spices", "sweet-savory"],
         "heat": "mild",
         "budget": "$$",
-        "familiar": "adventurous"
+        "familiar": "adventurous",
+        "veggies": "light"
       }
     },
-    { "id": "spanakopita", "title": "Spanakopita", "unit": 6, "cuisine": "greek", "skills": ["layered-pastry"], "skill": "Phyllo, layering", "image": "dishes/spanakopita.png", "safety": "adult-nearby", "minutes": 90, "estimated": true, "about": "A Greek pie of flaky phyllo pastry layered around a spinach and feta filling.", "main": ["phyllo dough", "spinach", "feta", "eggs", "butter"], "method": "oven", "tags": { "protein": "none", "flavors": ["herby-lemony", "tangy"], "heat": "mild", "budget": "$$", "familiar": "new-ish" } },
-    { "id": "spinach-mushroom-quiche", "title": "Spinach & mushroom quiche", "unit": 6, "cuisine": "french", "skills": ["pastry", "custards"], "skill": "Pastry, blind baking, custard", "image": "dishes/spinach-mushroom-quiche.png", "safety": "adult-nearby", "minutes": 120, "estimated": true, "about": "A savory pie with homemade pastry and a creamy egg filling with spinach and mushrooms.", "main": ["eggs", "cream", "spinach", "mushrooms", "cheese"], "method": "stove-oven", "tags": { "protein": "eggs", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$$", "familiar": "everyday" } },
+    { "id": "spanakopita", "title": "Spanakopita", "unit": 6, "cuisine": "greek", "skills": ["layered-pastry"], "skill": "Phyllo, layering", "image": "dishes/spanakopita.png", "safety": "adult-nearby", "minutes": 90, "estimated": true, "about": "A Greek pie of flaky phyllo pastry layered around a spinach and feta filling.", "main": ["phyllo dough", "spinach", "feta", "eggs", "butter"], "method": "oven", "tags": { "protein": "none", "flavors": ["herby-lemony", "tangy"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "lots" } },
+    {
+      "id": "spinach-mushroom-quiche",
+      "title": "Spinach & mushroom quiche",
+      "unit": 6,
+      "cuisine": "french",
+      "skills": ["pastry", "custards"],
+      "skill": "Pastry, blind baking, custard",
+      "image": "dishes/spinach-mushroom-quiche.png",
+      "safety": "adult-nearby",
+      "minutes": 120,
+      "estimated": true,
+      "about": "A savory pie with homemade pastry and a creamy egg filling with spinach and mushrooms.",
+      "main": ["eggs", "cream", "spinach", "mushrooms", "cheese"],
+      "method": "stove-oven",
+      "tags": {
+        "protein": "eggs",
+        "flavors": ["creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      }
+    },
     {
       "id": "chicken-pot-pie",
       "title": "Chicken pot pie",
@@ -632,12 +1105,58 @@
         "flavors": ["creamy-cheesy", "mild-buttery"],
         "heat": "mild",
         "budget": "$$",
-        "familiar": "everyday"
+        "familiar": "everyday",
+        "veggies": "some"
       }
     },
-    { "id": "chicken-katsu", "title": "Chicken katsu", "unit": 6, "cuisine": "japanese", "skills": ["breading-frying"], "skill": "Breading station, shallow frying", "image": "dishes/chicken-katsu.png", "safety": "adult-hands-on", "minutes": 60, "estimated": true, "about": "Japanese crispy breaded chicken cutlets, shallow-fried, with a tangy sauce and rice.", "main": ["chicken breast", "panko", "eggs", "rice", "cabbage"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["mild-buttery", "sweet-savory"], "heat": "mild", "budget": "$$", "familiar": "new-ish" } },
-    { "id": "kelewele", "title": "Kelewele (spiced plantains)", "unit": 6, "cuisine": "ghanaian", "skills": ["crisping", "spice-rubs"], "skill": "Shallow frying", "image": "dishes/kelewele.png", "safety": "adult-hands-on", "minutes": 30, "estimated": true, "about": "Ghanaian fried plantain cubes tossed in ginger and spice. Sweet, spicy, and crisp.", "main": ["ripe plantains", "ginger", "cayenne", "oil for frying"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["chili-heat", "warm-spices"], "heat": "some", "budget": "$", "familiar": "adventurous" } },
-    { "id": "fish-and-chips", "title": "Fish and chips", "unit": 6, "cuisine": "british", "skills": ["batters", "deep-frying"], "skill": "Batter, deep-frying with a thermometer", "image": "dishes/fish-and-chips.png", "safety": "adult-hands-on", "minutes": 70, "estimated": true, "about": "British battered white fish deep-fried until crisp, with thick-cut chips.", "main": ["cod or haddock", "potatoes", "oil for frying", "lemon"], "method": "stove", "tags": { "protein": "white-fish", "flavors": ["mild-buttery", "tangy"], "heat": "mild", "budget": "$$", "familiar": "everyday" } },
+    { "id": "chicken-katsu", "title": "Chicken katsu", "unit": 6, "cuisine": "japanese", "skills": ["breading-frying"], "skill": "Breading station, shallow frying", "image": "dishes/chicken-katsu.png", "safety": "adult-hands-on", "minutes": 60, "estimated": true, "about": "Japanese crispy breaded chicken cutlets, shallow-fried, with a tangy sauce and rice.", "main": ["chicken breast", "panko", "eggs", "rice", "cabbage"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["mild-buttery", "sweet-savory"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "some" } },
+    {
+      "id": "kelewele",
+      "title": "Kelewele (spiced plantains)",
+      "unit": 6,
+      "cuisine": "ghanaian",
+      "skills": ["crisping", "spice-rubs"],
+      "skill": "Shallow frying",
+      "image": "dishes/kelewele.png",
+      "safety": "adult-hands-on",
+      "minutes": 30,
+      "estimated": true,
+      "about": "Ghanaian fried plantain cubes tossed in ginger and spice. Sweet, spicy, and crisp.",
+      "main": ["ripe plantains", "ginger", "cayenne", "oil for frying"],
+      "method": "stove",
+      "meal": false,
+      "tags": {
+        "protein": "none",
+        "flavors": ["chili-heat", "warm-spices"],
+        "heat": "some",
+        "budget": "$",
+        "familiar": "adventurous",
+        "veggies": "light"
+      }
+    },
+    {
+      "id": "fish-and-chips",
+      "title": "Fish and chips",
+      "unit": 6,
+      "cuisine": "british",
+      "skills": ["batters", "deep-frying"],
+      "skill": "Batter, deep-frying with a thermometer",
+      "image": "dishes/fish-and-chips.png",
+      "safety": "adult-hands-on",
+      "minutes": 70,
+      "estimated": true,
+      "about": "British battered white fish deep-fried until crisp, with thick-cut chips.",
+      "main": ["cod or haddock", "potatoes", "oil for frying", "lemon"],
+      "method": "stove",
+      "tags": {
+        "protein": "white-fish",
+        "flavors": ["mild-buttery", "tangy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
     {
       "id": "brown-butter-cookies",
       "title": "Brown butter chocolate chip cookies",
@@ -657,7 +1176,8 @@
         "flavors": ["sweet-treats", "mild-buttery"],
         "heat": "mild",
         "budget": "$",
-        "familiar": "everyday"
+        "familiar": "everyday",
+        "veggies": "light"
       }
     },
     {
@@ -680,10 +1200,34 @@
         "flavors": ["sweet-treats"],
         "heat": "mild",
         "budget": "$",
-        "familiar": "adventurous"
+        "familiar": "adventurous",
+        "veggies": "light"
       }
     },
-    { "id": "churros", "title": "Churros with chocolate", "unit": 7, "cuisine": "mexican", "skills": ["scalded-dough", "deep-frying"], "skill": "Choux dough, frying", "image": "dishes/churros.png", "safety": "adult-hands-on", "minutes": 60, "estimated": true, "about": "Crisp fried dough sticks rolled in cinnamon sugar, with warm chocolate for dipping.", "main": ["butter", "eggs", "cinnamon sugar", "chocolate", "oil for frying"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "new-ish" } },
-    { "id": "apple-pie", "title": "Apple pie with lattice", "unit": 7, "cuisine": "american", "skills": ["pastry"], "skill": "Advanced pastry", "image": "dishes/apple-pie.png", "safety": "adult-nearby", "minutes": 150, "estimated": true, "prereqs": ["spinach-mushroom-quiche"], "about": "A classic apple pie with a homemade woven lattice crust.", "main": ["apples", "butter", "cinnamon", "lemon"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$$", "familiar": "everyday" } }
+    {
+      "id": "churros",
+      "title": "Churros with chocolate",
+      "unit": 7,
+      "cuisine": "mexican",
+      "skills": ["scalded-dough", "deep-frying"],
+      "skill": "Choux dough, frying",
+      "image": "dishes/churros.png",
+      "safety": "adult-hands-on",
+      "minutes": 60,
+      "estimated": true,
+      "about": "Crisp fried dough sticks rolled in cinnamon sugar, with warm chocolate for dipping.",
+      "main": ["butter", "eggs", "cinnamon sugar", "chocolate", "oil for frying"],
+      "method": "stove",
+      "meal": false,
+      "tags": {
+        "protein": "none",
+        "flavors": ["sweet-treats"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      }
+    },
+    { "id": "apple-pie", "title": "Apple pie with lattice", "unit": 7, "cuisine": "american", "skills": ["pastry"], "skill": "Advanced pastry", "image": "dishes/apple-pie.png", "safety": "adult-nearby", "minutes": 150, "estimated": true, "prereqs": ["spinach-mushroom-quiche"], "about": "A classic apple pie with a homemade woven lattice crust.", "main": ["apples", "butter", "cinnamon", "lemon"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } }
   ]
 }

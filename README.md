@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [133. 2026-10-24 — A Sweet treats flavor](docs/build-log.md#133-2026-10-24--a-sweet-treats-flavor)
+**Latest build log entry:** [134. 2026-10-24 — A vegetables tag](docs/build-log.md#134-2026-10-24--a-vegetables-tag)
 
 ## Current features
 
@@ -60,7 +60,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
 - **Lesson content** (`content/`): 32 lessons (all 11 of Unit 1, all 16 of Unit 2, 3 more samples, and the 2 Appointed Times lessons), and the ingredient, tool, skill (52), and cuisine lists, as JSON.
 - **Content linter** (`tools/lint-content.js`): checks every lesson against the food rules, including the unclean-food block, the food-safety steps, and scaling. Runs on every push, on every save from the manager section, and in the browser as the owner edits.
-- **Tastes and tags** (`content/tastes.json`, `src/content/tastes.js`): the proteins, flavors (with example dishes), and key ingredients families will rate, and every dish's protein, flavors, heat, budget, and familiarity tags. Not shown to families yet.
+- **Tastes and tags** (`content/tastes.json`, `src/content/tastes.js`): the proteins, flavors (with example dishes), and key ingredients families will rate, and every dish's protein, flavors, heat, budget, familiarity, and vegetables tags. Not shown to families yet.
 - **Content file layout** (`tools/format-content.js`): every content file in the one layout the manager section writes.
 - **Scaling** (`src/content/`): amounts and step counts change with the serving size, shown in measuring-cup and spoon amounts.
 - **Lesson preview** (`preview/lesson-preview.html`): each written lesson, read-only, at every serving size. Tap an underlined kitchen word to see what it means.

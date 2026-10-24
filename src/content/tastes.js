@@ -10,9 +10,14 @@
 export const HEAT = [['mild', 'Mild'], ['some', 'Some heat'], ['spicy', 'Spicy']];
 export const BUDGET = [['$', '$ (under $3 a serving)'], ['$$', '$$ ($3–6 a serving)'], ['$$$', '$$$ (over $6 a serving)']];
 export const FAMILIAR = [['everyday', 'Everyday'], ['new-ish', 'New-ish'], ['adventurous', 'Adventurous']];
+// How much of the meal is vegetables (owner, 2026-10-24), across flavors: a
+// smoky chili and a lemony salad can both have lots.
+export const VEGGIES = [['light', 'Light'], ['some', 'Some'], ['lots', 'Lots']];
+// The one rated item it's matched against: profiles rate it like a flavor.
+export const VEGGIE_RATING = { id: 'veggie-heavy', name: 'Meals heavy on vegetables', examples: ['a big chopped salad', 'vegetable stir-fry', 'ratatouille', 'minestrone'] };
 // A dish with no main protein: a side, a bread, a dessert.
 export const NO_PROTEIN = 'none';
-export const TAG_KEYS = ['protein', 'flavors', 'heat', 'budget', 'familiar'];
+export const TAG_KEYS = ['protein', 'flavors', 'heat', 'budget', 'familiar', 'veggies'];
 
 // The tastes lists, from the content (contentFromFiles puts them on c.tastes).
 export const tastesOf = (all) => ({ proteins: all.tasteProteins ?? [], flavors: all.tasteFlavors ?? [], ingredients: all.tasteIngredients ?? [] });
@@ -29,7 +34,7 @@ export function tagProblems(tags, tastes) {
     if (!Array.isArray(tags.flavors) || tags.flavors.length > 3) out.push('flavors lists 1 to 3 flavors');
     else for (const f of tags.flavors) if (!flavors.has(f)) out.push(`flavor "${f}" isn't in tastes.json`);
   }
-  for (const [k, list] of [['heat', HEAT], ['budget', BUDGET], ['familiar', FAMILIAR]]) {
+  for (const [k, list] of [['heat', HEAT], ['budget', BUDGET], ['familiar', FAMILIAR], ['veggies', VEGGIES]]) {
     if (tags[k] != null && !list.some(([v]) => v === tags[k])) out.push(`${k} "${tags[k]}" isn't one of ${list.map(([v]) => v).join(', ')}`);
   }
   for (const k of Object.keys(tags)) if (!TAG_KEYS.includes(k)) out.push(`"${k}" isn't a tag`);

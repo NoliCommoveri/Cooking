@@ -82,7 +82,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "lots"
    },
    "tasteItems": {
     "required": [
@@ -191,7 +192,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    },
    "tasteItems": {
     "required": [
@@ -262,7 +264,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [],
@@ -364,7 +367,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "lots"
    },
    "tasteItems": {
     "required": [
@@ -446,7 +450,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [
@@ -534,7 +539,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [
@@ -641,7 +647,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    },
    "tasteItems": {
     "required": [
@@ -739,7 +746,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "lots"
    },
    "tasteItems": {
     "required": [
@@ -841,7 +849,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "lots"
    },
    "tasteItems": {
     "required": [
@@ -957,7 +966,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "lots"
    },
    "tasteItems": {
     "required": [
@@ -1058,7 +1068,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [
@@ -1119,7 +1130,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [],
@@ -1210,7 +1222,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    },
    "tasteItems": {
     "required": [
@@ -1298,7 +1311,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [],
@@ -1363,7 +1377,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [],
@@ -1450,7 +1465,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "some"
    },
    "tasteItems": {
     "required": [
@@ -1541,7 +1557,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    },
    "tasteItems": {
     "required": [
@@ -1637,7 +1654,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [
@@ -1723,7 +1741,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    },
    "tasteItems": {
     "required": [
@@ -1810,7 +1829,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [
@@ -1896,7 +1916,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [
@@ -1986,7 +2007,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [],
@@ -2058,7 +2080,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [
@@ -2139,7 +2162,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [
@@ -2221,7 +2245,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [
@@ -2313,7 +2338,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "some"
    },
    "tasteItems": {
     "required": [
@@ -2415,7 +2441,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "some"
    },
    "tasteItems": {
     "required": [
@@ -2510,7 +2537,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [
@@ -2587,7 +2615,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [],
@@ -2663,7 +2692,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [],
@@ -2722,7 +2752,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [],
@@ -2787,7 +2818,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    },
    "tasteItems": {
     "required": [
@@ -3473,7 +3505,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "lots"
    }
   },
   {
@@ -3493,7 +3526,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    }
   },
   {
@@ -3514,7 +3548,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -3535,7 +3570,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "lots"
    }
   },
   {
@@ -3555,7 +3591,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -3574,7 +3611,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -3594,7 +3632,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    }
   },
   {
@@ -3615,7 +3654,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "lots"
    }
   },
   {
@@ -3635,7 +3675,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "lots"
    }
   },
   {
@@ -3655,7 +3696,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "lots"
    }
   },
   {
@@ -3675,7 +3717,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -3694,7 +3737,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -3715,7 +3759,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    }
   },
   {
@@ -3736,7 +3781,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -3755,7 +3801,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -3776,7 +3823,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "some"
    }
   },
   {
@@ -3796,7 +3844,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    }
   },
   {
@@ -3817,7 +3866,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -3836,7 +3886,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    }
   },
   {
@@ -3856,7 +3907,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -3876,7 +3928,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -3895,7 +3948,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -3913,7 +3967,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -3935,7 +3990,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -3954,7 +4010,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -3974,7 +4031,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "some"
    }
   },
   {
@@ -3995,7 +4053,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "some"
    }
   },
   {
@@ -4014,7 +4073,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "some"
    }
   },
   {
@@ -4035,7 +4095,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    }
   },
   {
@@ -4055,7 +4116,8 @@ export const LIBRARY = {
     ],
     "heat": "spicy",
     "budget": "$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "some"
    }
   },
   {
@@ -4074,7 +4136,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "some"
    }
   },
   {
@@ -4094,7 +4157,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "some"
    }
   },
   {
@@ -4114,7 +4178,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    }
   },
   {
@@ -4134,7 +4199,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "some"
    }
   },
   {
@@ -4154,7 +4220,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "some"
    }
   },
   {
@@ -4174,7 +4241,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "light"
    }
   },
   {
@@ -4194,7 +4262,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -4214,7 +4283,8 @@ export const LIBRARY = {
     ],
     "heat": "spicy",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -4234,7 +4304,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -4256,7 +4327,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    }
   },
   {
@@ -4276,7 +4348,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "some"
    }
   },
   {
@@ -4297,7 +4370,8 @@ export const LIBRARY = {
     ],
     "heat": "spicy",
     "budget": "$$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "light"
    }
   },
   {
@@ -4317,7 +4391,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "some"
    }
   },
   {
@@ -4337,7 +4412,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "some"
    }
   },
   {
@@ -4356,7 +4432,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    }
   },
   {
@@ -4375,7 +4452,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -4395,7 +4473,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -4414,7 +4493,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -4433,7 +4513,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -4452,7 +4533,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "some"
    }
   },
   {
@@ -4471,7 +4553,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "lots"
    }
   },
   {
@@ -4492,7 +4575,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -4513,7 +4597,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -4533,7 +4618,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -4557,7 +4643,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -4576,7 +4663,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "some"
    }
   },
   {
@@ -4596,7 +4684,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -4616,7 +4705,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -4636,7 +4726,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -4655,7 +4746,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -4674,7 +4766,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -4698,7 +4791,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -4721,7 +4815,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -4739,7 +4834,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    }
   },
   {
@@ -4759,7 +4855,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "light"
    }
   },
   {
@@ -4778,7 +4875,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "lots"
    }
   },
   {
@@ -4797,7 +4895,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    }
   },
   {
@@ -4821,7 +4920,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "some"
    }
   },
   {
@@ -4840,7 +4940,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "some"
    }
   },
   {
@@ -4861,7 +4962,8 @@ export const LIBRARY = {
     ],
     "heat": "some",
     "budget": "$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "light"
    }
   },
   {
@@ -4881,7 +4983,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -4902,7 +5005,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   },
   {
@@ -4922,7 +5026,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "adventurous"
+    "familiar": "adventurous",
+    "veggies": "light"
    }
   },
   {
@@ -4942,7 +5047,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$",
-    "familiar": "new-ish"
+    "familiar": "new-ish",
+    "veggies": "light"
    }
   },
   {
@@ -4964,7 +5070,8 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "everyday"
+    "familiar": "everyday",
+    "veggies": "light"
    }
   }
  ],

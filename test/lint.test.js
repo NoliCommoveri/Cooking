@@ -166,6 +166,7 @@ test('tags must use the tastes lists and the fixed levels', () => {
   assert.match(broken((c) => { dish(c, 'shakshuka').tags.protein = 'pork'; }), /protein "pork" isn't in tastes.json/);
   assert.match(broken((c) => { dish(c, 'shakshuka').tags.flavors = ['rich-tomato', 'tangy', 'warm-spices', 'smoky-bbq']; }), /1 to 3 flavors/);
   assert.match(broken((c) => { dish(c, 'shakshuka').tags.colour = 'red'; }), /"colour" isn't a tag/);
+  assert.match(broken((c) => { dish(c, 'shakshuka').tags.veggies = 'heaps'; }), /veggies "heaps"/);
 });
 
 test('the tastes lists name real ingredients and no unclean food', () => {
@@ -186,6 +187,6 @@ test('taste items and meat are worked out from the ingredients', () => {
   assert.equal(meatProtein(L, registry, base.tastes), 'beef', 'broth is not the protein');
   assert.deepEqual(tasteItemsIn(L, base.tastes.ingredients), { required: ['onions'], optional: ['cilantro'] });
   assert.equal(meatProtein({ ingredients: [{ ingredient: 'egg' }] }, registry, base.tastes), null);
-  assert.deepEqual(missingTags({ protein: 'none', flavors: [] }), ['flavors', 'heat', 'budget', 'familiar']);
+  assert.deepEqual(missingTags({ protein: 'none', flavors: [] }), ['flavors', 'heat', 'budget', 'familiar', 'veggies']);
   assert.deepEqual(tagProblems(undefined, base.tastes), []);
 });

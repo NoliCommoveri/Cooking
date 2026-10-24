@@ -6,7 +6,14 @@
   "about": "Small crescent rolls of tender cottage cheese and butter pastry, rolled around cinnamon sugar. Made with no yeast or baking powder.",
   "main": ["cottage cheese", "butter", "flour", "cinnamon sugar"],
   "method": "oven",
-  "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "new-ish" },
+  "tags": {
+    "protein": "none",
+    "flavors": ["sweet-treats"],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+  },
   "title": "Cottage cheese crescent rolls",
   "image": "dishes/cottage-cheese-crescents.png",
   "cuisine": "jewish",

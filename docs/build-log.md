@@ -3337,3 +3337,18 @@ sweet breads), so desserts no longer borrow "Mild and buttery". Re-tagged:
 blueberry muffins, rugelach, cinnamon rolls, granola, brown butter cookies,
 malva pudding, churros, apple pie, challah French toast, and cottage cheese
 crescents. Plan §6.21 updated.
+
+## 134. 2026-10-24 — A vegetables tag
+
+Nothing told the app which dishes are mostly vegetables, so a fattoush and a
+mac and cheese looked alike. The owner chose a separate tag over a 13th
+flavor:
+- **`veggies`** (light, some, lots) on every dish's tags, checked by the
+  linter and set on the Tags page and dish cards. Drafted for all 77: lots
+  for 7 (spring rolls, fattoush, ratatouille, minestrone, chicken Caesar,
+  ugali and sukuma wiki, spanakopita), some for 27, light for 43.
+- **Meals heavy on vegetables** (`VEGGIE_RATING` in `src/content/tastes.js`)
+  is the item profiles will rate for it in slice 11b, matched against this
+  tag. Plan §6.21 updated.
+- Tests: 281. Not checked in a browser this time: the new field uses the
+  same select as the others on the Tags page.

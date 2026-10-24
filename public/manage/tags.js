@@ -4,7 +4,7 @@
 // editor and the planned-dish dialog use the same fields.
 import { el } from './dom.js';
 import { cur, put, page, problems, lessonFile } from './manage.js';
-import { HEAT, BUDGET, FAMILIAR, NO_PROTEIN, missingTags, meatProtein, tastesOf } from '/lib/tastes.js';
+import { HEAT, BUDGET, FAMILIAR, VEGGIES, NO_PROTEIN, missingTags, meatProtein, tastesOf } from '/lib/tastes.js';
 
 const MAX_FLAVORS = 3;
 export const tastes = () => tastesOf(cur('tastes.json') ?? {});
@@ -41,7 +41,7 @@ export function tagFields(holder, onChange) {
   return el('div', { class: 'mtag-fields' },
     el('div', { class: 'mtag-grid' },
       select('protein', 'Main protein', [...T.proteins.map((p) => [p.id, p.name]), [NO_PROTEIN, 'None (a side, bread, or dessert)']]),
-      select('heat', 'Heat', HEAT), select('budget', 'Budget', BUDGET), select('familiar', 'How familiar', FAMILIAR)),
+      select('heat', 'Heat', HEAT), select('budget', 'Budget', BUDGET), select('familiar', 'How familiar', FAMILIAR), select('veggies', 'Vegetables', VEGGIES)),
     el('fieldset', { class: 'mf-list' }, el('legend', {}, `Flavors (up to ${MAX_FLAVORS})`), flavors));
 }
 
