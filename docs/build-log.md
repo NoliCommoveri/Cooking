@@ -3892,3 +3892,15 @@ workbook (`clean-plate-week-options.xlsx`) go into the plan. No app changes.
   leavened week's backup vs. passing it over, the four defaults, teaching
   pages that name unclean foods, Level 4's independence, live-action clips,
   and checking the 58 new dishes against the main course first.
+
+## 156. 2026-10-24 — Plan: Level 4 learners get adult-style safety notes
+
+Owner ruling on §12.7's question 5. No app changes.
+- **§12.6:** a Level 4 learner sees each step's safety banner the way an
+  adult profile does: the hazard, without "an adult stays in the kitchen"
+  or "an adult helps", kid profile or not. The lessons' safety levels don't
+  change.
+- Picking Level 4 under Which program?, and its syllabus wording, tell
+  parents not to assign it unless the learner can work independently. The
+  owner writes that text.
+- **§12.7:** question 5 marked ruled.
