@@ -3380,7 +3380,7 @@ Phase 11, slice 11b (plan §6.21), all behind the Next release switch (§8.6):
   proteins. **Chef Ruth:** "Ask what we like to eat", five unrated items at a
   time for one profile.
 - Not built: the kid's taste quiz in the kitchen, moved to slice 11d.
-- Tests: 293 (6 new in `test/worker-tastes.test.js`; the Getting started
+- Tests: 287 (6 new in `test/worker-tastes.test.js`; the Getting started
   order test updated). Checked in a browser at phone width on the dev
   server: Our tastes with the limits, rating, the favorite question and
   moving it, Haven't tried, the Flavors list, and Chef Ruth rating five
