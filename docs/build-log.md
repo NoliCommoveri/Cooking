@@ -4537,3 +4537,41 @@ tables.
 - Tests: 349 (the switch test reworked for numbers; one new: the old switch
   reads as release 1, and a later release previews while an earlier one is
   live).
+
+## 189. 2026-10-24 — The demo page's two tracks
+
+- Owner, 2026-10-24: with the Level courses merged, the demo should present
+  the two main tracks. **Cook Around the World** is for older teens and
+  adults who want to practise technique and try a wide range of dishes, and
+  is recipe only. **Structured Progression** is for families teaching
+  cooking from the fundamentals onward, even for young cooks: complete,
+  credit-able courses with Knowledge, Drill, and Beyond the Recipe beside
+  each recipe.
+- Owner rulings: Structured Progression is the public name for the Levels;
+  Cook Around the World can still be graded; Levels 1, 2, and 4 show as
+  being written; release 1 is already launched for everyone, so the demo
+  can show Level content.
+- **Before:** the demo was Cook Around the World only (Try it, Shopping,
+  Course, Skills), with the syllabus link under the header.
+- **Now** (`public/demo.js`, `public/demo.css`):
+  - Under the header, a card for each track, with an Explore button; the
+    syllabus link moved onto Cook Around the World's card.
+  - A track switch above the tabs. Cook Around the World's four tabs are
+    unchanged.
+  - Structured Progression: **Try a week** (Level 3, weeks 1–4, as the
+    kitchen's week card in either theme; each part opens its page with its
+    steps and quiz and Done, kept for the tab only; the recipe opens the
+    real player, with "cook it on your own" on the mastery week; with a diet
+    that rules out the default, the first option that fits, or a note that a
+    parent would swap). **The Levels** (all four, Level 3 with its units,
+    goals, and weeks). **Progress** (the real Level progress view,
+    `levelProgressView`, for a pretend learner in week 6 with Unit 1
+    mastered, and sample transcript rows).
+  - Theme, Cooking as, and Leave out show only on the tabs they change.
+- `tools/build-library.js` writes `public/content/levels.json`: each
+  Level's units, and its weeks with recipe titles and part pages.
+- **For the owner to approve:** the two track blurbs are Claude's draft from
+  the owner's words. The header copy above them is unchanged.
+- Not done: the syllabus page still covers Cook Around the World only;
+  Structured Progression has no syllabus link yet.
+- Tests: 349, all passing; screenshots of every view sent in the session.
