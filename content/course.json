@@ -210,6 +210,30 @@
       "pickOne": "dressings"
     },
     {
+      "id": "chopped-salad-vinaigrette",
+      "title": "Chickpea chopped salad + vinaigrette",
+      "unit": 1,
+      "cuisine": "american",
+      "skills": ["dressings", "emulsions"],
+      "skill": "Whisking a vinaigrette, dressing to taste",
+      "image": "dishes/chopped-salad-vinaigrette.png",
+      "safety": "adult-nearby",
+      "minutes": 30,
+      "estimated": true,
+      "about": "A big chopped salad of romaine, cucumber, tomato, and chickpeas, tossed with a red wine vinaigrette whisked from scratch and tasted until it's balanced.",
+      "main": ["romaine", "chickpeas", "cucumber", "tomatoes", "red wine vinegar"],
+      "method": "no-cook",
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["tangy", "herby-lemony"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "lots"
+      },
+      "pickOne": "dressings"
+    },
+    {
       "id": "smash-burgers",
       "title": "Smash burgers + quick pickles",
       "unit": 1,
@@ -369,6 +393,30 @@
         "budget": "$",
         "familiar": "new-ish",
         "veggies": "some"
+      },
+      "pickOne": "stir-frying"
+    },
+    {
+      "id": "vegetable-stir-fry",
+      "title": "Vegetable stir-fry with tofu",
+      "unit": 2,
+      "cuisine": "chinese",
+      "skills": ["stir-frying", "julienne"],
+      "skill": "Julienned vegetables, stir-frying in batches",
+      "image": "dishes/vegetable-stir-fry.png",
+      "safety": "adult-nearby",
+      "minutes": 35,
+      "estimated": true,
+      "about": "Carrots, peppers, and snow peas cut into thin matchsticks and stir-fried fast with crisp tofu in a garlic-ginger sauce, over rice.",
+      "main": ["extra-firm tofu", "carrots", "bell peppers", "snow peas", "garlic and ginger"],
+      "method": "stove",
+      "tags": {
+        "protein": "tofu",
+        "flavors": ["ginger-soy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "lots"
       },
       "pickOne": "stir-frying"
     },
@@ -613,7 +661,7 @@
       "title": "Misir wot",
       "unit": 3,
       "cuisine": "ethiopian",
-      "skills": ["blooming-spices", "simmering"],
+      "skills": ["blooming-spices", "simmering", "cooking-legumes"],
       "skill": "Spiced lentils",
       "image": "dishes/misir-wot.png",
       "safety": "adult-nearby",
@@ -629,14 +677,39 @@
         "budget": "$",
         "familiar": "adventurous",
         "veggies": "some"
-      }
+      },
+      "pickOne": "cooking-legumes"
+    },
+    {
+      "id": "red-lentil-soup",
+      "title": "Red lentil soup (mercimek)",
+      "unit": 3,
+      "cuisine": "turkish",
+      "skills": ["cooking-legumes", "simmering"],
+      "skill": "Cooking lentils until they melt, blending a soup",
+      "image": "dishes/red-lentil-soup.png",
+      "safety": "adult-nearby",
+      "minutes": 45,
+      "estimated": true,
+      "about": "Turkish red lentil soup: lentils simmered with onion, carrot, and a little tomato until soft, blended smooth, and finished with lemon and a paprika butter.",
+      "main": ["red lentils", "onion", "carrot", "tomato paste", "lemon"],
+      "method": "stove",
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["warm-spices", "herby-lemony"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "pickOne": "cooking-legumes"
     },
     {
       "id": "red-beans-and-rice",
       "title": "Red beans and rice",
       "unit": 3,
       "cuisine": "louisiana",
-      "skills": ["flavor-base", "simmering"],
+      "skills": ["flavor-base", "simmering", "cooking-legumes"],
       "skill": "Onion/celery/pepper base, simmering beans until creamy",
       "image": "dishes/red-beans-and-rice.png",
       "safety": "adult-nearby",
@@ -798,6 +871,30 @@
       "pickOne": "braising"
     },
     {
+      "id": "beef-ragu",
+      "title": "Beef ragù",
+      "unit": 3,
+      "cuisine": "italian",
+      "skills": ["braising", "flavor-base"],
+      "skill": "A soffritto base, a long slow braise",
+      "image": "dishes/beef-ragu.png",
+      "safety": "adult-nearby",
+      "minutes": 180,
+      "estimated": true,
+      "about": "Beef chuck braised for hours in tomato with a soffritto of finely chopped onion, carrot, and celery, then shredded into the sauce and served over pasta.",
+      "main": ["beef chuck", "onion, carrot, celery", "crushed tomatoes", "beef broth", "pasta"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["rich-tomato"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "pickOne": "braising"
+    },
+    {
       "id": "peanut-stew",
       "title": "Peanut stew (maafe)",
       "unit": 3,
@@ -846,11 +943,35 @@
       "pickOne": "one-pot-stews"
     },
     {
+      "id": "beef-stew",
+      "title": "Beef stew",
+      "unit": 3,
+      "cuisine": "american",
+      "skills": ["one-pot-stews", "searing"],
+      "skill": "Browning in batches, seasoning a stew in stages",
+      "image": "dishes/beef-stew.png",
+      "safety": "adult-nearby",
+      "minutes": 150,
+      "estimated": true,
+      "about": "Chunks of beef chuck browned in batches and simmered slowly with onion, carrots, and potatoes until tender, tasted and seasoned as it goes.",
+      "main": ["beef chuck", "potatoes", "carrots", "onion", "beef broth"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "pickOne": "one-pot-stews"
+    },
+    {
       "id": "koshari",
       "title": "Koshari",
       "unit": 3,
       "cuisine": "egyptian",
-      "skills": ["layering", "crisping"],
+      "skills": ["layering", "crisping", "cooking-legumes"],
       "skill": "Building a dish in layers, crispy onions",
       "image": "dishes/koshari.png",
       "safety": "adult-nearby",
@@ -866,7 +987,32 @@
         "budget": "$",
         "familiar": "adventurous",
         "veggies": "light"
-      }
+      },
+      "pickOne": "crisping"
+    },
+    {
+      "id": "mujaddara",
+      "title": "Mujaddara",
+      "unit": 3,
+      "cuisine": "lebanese",
+      "skills": ["cooking-legumes", "crisping"],
+      "skill": "Lentils and rice cooked together, crispy onions",
+      "image": "dishes/mujaddara.png",
+      "safety": "adult-nearby",
+      "minutes": 60,
+      "estimated": true,
+      "about": "Brown lentils and rice cooked together with cumin, topped with a big pile of slowly fried crispy onions and a spoon of yogurt.",
+      "main": ["brown lentils", "rice", "onions", "cumin", "yogurt"],
+      "method": "stove",
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["warm-spices"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "pickOne": "crisping"
     },
     {
       "id": "butter-chicken",
@@ -937,6 +1083,30 @@
         "veggies": "some"
       },
       "unit": 3,
+      "pickOne": "broiling"
+    },
+    {
+      "id": "shish-taouk",
+      "title": "Shish taouk",
+      "unit": 3,
+      "cuisine": "lebanese",
+      "skills": ["marinating", "broiling"],
+      "skill": "A yogurt-garlic marinade, broiling skewers",
+      "image": "dishes/shish-taouk.png",
+      "safety": "adult-nearby",
+      "minutes": 50,
+      "estimated": true,
+      "about": "Lebanese chicken skewers marinated in yogurt, lemon, and garlic, broiled until charred at the edges and 165°F inside, with a quick garlic sauce.",
+      "main": ["chicken thighs", "yogurt", "lemon", "garlic", "paprika"],
+      "method": "oven",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["herby-lemony", "tangy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
       "pickOne": "broiling"
     },
     {
@@ -1128,7 +1298,32 @@
     { "id": "blueberry-muffins", "title": "Blueberry muffins", "unit": 5, "cuisine": "american", "skills": ["muffin-method"], "skill": "Muffin method, avoiding overmixing", "image": "dishes/blueberry-muffins.png", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "Tender, sweet muffins full of blueberries. A breakfast bake.", "main": ["blueberries", "milk", "eggs", "butter"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     { "id": "skillet-cornbread", "title": "Skillet cornbread", "unit": 5, "cuisine": "american", "skills": ["skillet-baking", "muffin-method"], "skill": "Preheated skillet", "image": "dishes/skillet-cornbread.png", "safety": "adult-nearby", "minutes": 40, "estimated": true, "about": "Golden cornbread baked in a hot skillet for a crispy edge. Pairs with chili.", "main": ["cornmeal", "buttermilk", "eggs", "butter"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     { "id": "pao-de-queijo", "title": "Pão de queijo", "unit": 5, "cuisine": "brazilian", "skills": ["scalded-dough"], "skill": "Scalded tapioca dough", "image": "dishes/pao-de-queijo.png", "safety": "adult-nearby", "minutes": 50, "estimated": true, "about": "Brazilian cheese bread: chewy, puffy little rolls made with tapioca flour and cheese.", "main": ["tapioca flour", "milk", "eggs", "parmesan"], "method": "stove-oven", "meal": false, "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
-    { "id": "skillet-naan", "title": "Skillet naan", "unit": 5, "cuisine": "indian", "skills": ["flatbreads"], "skill": "Yogurt dough, high-heat skillet", "image": "dishes/skillet-naan.png", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Soft Indian flatbread made with a yogurt dough and cooked in a very hot skillet.", "main": ["yogurt", "butter", "garlic"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
+    { "id": "skillet-naan", "title": "Skillet naan", "unit": 5, "cuisine": "indian", "skills": ["flatbreads"], "skill": "Yogurt dough, high-heat skillet", "image": "dishes/skillet-naan.png", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Soft Indian flatbread made with a yogurt dough and cooked in a very hot skillet.", "main": ["yogurt", "butter", "garlic"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" }, "pickOne": "flatbreads" },
+    {
+      "id": "pita-bread",
+      "title": "Pita bread",
+      "unit": 5,
+      "cuisine": "lebanese",
+      "skills": ["flatbreads", "yeast-dough"],
+      "skill": "A yeast dough, baking flatbreads that puff",
+      "image": "dishes/pita-bread.png",
+      "safety": "adult-nearby",
+      "minutes": 120,
+      "estimated": true,
+      "about": "Soft pita rolled thin and baked on a very hot sheet until each one puffs into a pocket.",
+      "main": ["flour", "yeast", "olive oil"],
+      "method": "oven",
+      "meal": false,
+      "tags": {
+        "protein": "none",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "pickOne": "flatbreads"
+    },
     { "id": "pupusas", "title": "Pupusas", "unit": 5, "cuisine": "salvadoran", "skills": ["masa-dough"], "skill": "Masa dough, griddle", "image": "dishes/pupusas.png", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Salvadoran stuffed corn cakes filled with cheese and beans, cooked on a griddle, with a tangy cabbage slaw.", "main": ["masa harina", "cheese", "refried beans", "cabbage"], "method": "stove", "tags": { "protein": "beans-lentils", "flavors": ["creamy-cheesy", "tangy"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "some" } },
     {
       "id": "ugali-sukuma-wiki",

@@ -51,6 +51,7 @@
     { "id": "oven-browning", "name": "Oven browning", "idea": "Dry heat in the oven browns and crisps, with a stir partway for even color.", "pin": { "shape": "circle", "color": "#B5651D", "glyph": "flame" } },
     { "id": "binders", "name": "Binders", "idea": "Egg and crumbs hold ground meat together so it slices instead of crumbling.", "pin": { "shape": "circle", "color": "#6E604E", "glyph": "dice" } },
     { "id": "roasting", "name": "Roasting and carving", "idea": "Roast, rest so the juices settle, then carve across the grain.", "pin": { "shape": "shield", "color": "#8E2416", "glyph": "knife" } },
-    { "id": "gravy", "name": "Pan gravy", "idea": "The browned bits in a roasting pan become gravy with a little flour and broth.", "pin": { "shape": "circle", "color": "#7A4A2A", "glyph": "whisk" } }
+    { "id": "gravy", "name": "Pan gravy", "idea": "The browned bits in a roasting pan become gravy with a little flour and broth.", "pin": { "shape": "circle", "color": "#7A4A2A", "glyph": "whisk" } },
+    { "id": "cooking-legumes", "name": "Cooking dried beans and lentils", "idea": "Dried beans and lentils simmer gently until they're soft all the way through; lentils need no soaking, beans cook faster after one.", "pin": { "shape": "circle", "color": "#8A5A2B", "glyph": "pot" } }
   ]
 }
