@@ -15,6 +15,7 @@ import { weekOf } from './schedule.js';
 import { isRecipeId, lessonFor, recipeNames, REGISTRY as FULL } from './recipes.js';
 import { variationChoices, versionTitle, listVariations, listVariationRow } from './variations.js';
 import { lessonVersion } from '../content/variations.js';
+import { tasteContext, versionFor } from './picks.js';
 
 const id = () => randomHex(8);
 const placeholders = (list) => list.map(() => '?').join(', ');
@@ -42,9 +43,14 @@ async function upcoming(env, fam, day, tz) {
   const who = await queueProfiles(env, fam.id, rows.map((r) => r.id));
   const out = [];
   const names = await recipeNames(env, fam.id);
-  // The version of each lesson the family cooks (§6.21), so it's what gets bought.
+  // The version of each lesson the family cooks (§6.21), so it's what gets
+  // bought: its pick, or the best for the profiles on the cook.
   const choices = await variationChoices(env, fam.id);
-  const entry = (lid, week, extra) => ({ lesson_id: lid, title: versionTitle(lid, choices[lid]) ?? names[lid]?.title ?? lid, week, ...(choices[lid] ? { variation: choices[lid] } : {}), ...extra });
+  const tc = await tasteContext(env, fam);
+  const entry = (lid, week, extra) => {
+    const vid = versionFor(tc, choices, lid, extra.profile_ids).variation;
+    return { lesson_id: lid, title: versionTitle(lid, vid) ?? names[lid]?.title ?? lid, week, ...(vid ? { variation: vid } : {}), ...extra };
+  };
   for (const st of states) {
     const weeks = [
       { week: st.sched.this_week.week, ids: st.sched.this_week.lessons.filter((x) => !x.done).map((x) => x.id) },

@@ -3618,3 +3618,44 @@ off. Plan §6.21 changed:
   kept when it's the only one.
 - §10 notes the owner's idea of a **custom course from a family's tastes**,
   which could rule dishes and skills out. Not planned.
+
+## 146. 2026-10-24 — Scoring and default picks (slice 11d1)
+
+Phase 11, slice 11d1 (plan §6.21), all behind the Next release switch
+(§8.6). On the main track nothing is ruled out; dishes are only ranked.
+- **`src/content/score.js`:** scores a dish or version for the profiles on
+  a cook with the draft weights (one `WEIGHTS` object). A 1 star on its
+  protein or a required key ingredient makes it Doesn't fit, ranked last but
+  kept. Time, budget, and missing tools take points off with a note. Fit
+  words: Great fit (2 points or more), Good fit (0.5), Not a great fit; none
+  when nothing it uses has been rated.
+- **Build:** library lesson summaries and variations carry their `tools`;
+  the course outline carries each dish's `minutes`, so planned dishes can be
+  scored.
+- **`src/worker/picks.js`:** reads a family's ratings, limits, and diet
+  settings once a request. A lesson with no saved pick plays its best version
+  for the profiles on the row: the parent's queue and course rows
+  (`version`, with every option's fit and why), the kitchen
+  (`versions` on `/api/profiles/<id>/queue`), and shopping. A version the
+  diet settings hide is never picked. `PUT /api/variations/<lesson>` with
+  `variation: null` takes the family's pick off.
+- **Courses:** `GET /api/picks/course?profiles=…` gives each dish's fit and
+  each pick-one group's best written dish. A new course posted with no plan
+  (Chef Ruth's) keeps those picks; without the next release, the first dish
+  as before. A group where nothing fits keeps its closest, with "Nothing for
+  … fits everyone yet; this one is closest."
+- **Parent screens:** **Version: …** says "(best for Ava)", and its dialog
+  lists the versions best first with their fit, why, and notes, after
+  **The best fit for whoever is cooking**. The course editor shows a fit line
+  under each dish and a **Suggest picks** button; a new course follows the
+  people ticked until a dish in a group is ticked by hand. Chef Ruth says she
+  picked the best dish in each group. The queue no longer loads the content
+  registry, which only the old Version button used.
+- **Plan:** slice **11f, the taste tester** (owner, 2026-10-24): a manager
+  tool for trying sets of preferences and seeing what they pick, built at the
+  end of phase 11.
+- Tests: 309 (5 in `test/score.test.js`, including the mushroom check with
+  a made-up lesson; 4 in `test/worker-picks.test.js`). Checked in a browser
+  at phone width on the dev server: the Version button and dialog on a
+  queued Chimichurri steak (beef 1 star, chicken 4, a 45-minute limit), and
+  a new course's fit lines and picks.

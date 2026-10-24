@@ -22,7 +22,7 @@ async function parentWithRelease(env, req) {
 const itemName = (kind, id) => ITEMS[kind].find((x) => x.id === id)?.name ?? id;
 
 // Every rating a profile has, as { kind: { item: stars | null } }.
-async function ratingsOf(env, fid, pids) {
+export async function ratingsOf(env, fid, pids) {
   const out = Object.fromEntries(pids.map((p) => [p, Object.fromEntries(RATING_KINDS.map((k) => [k, {}]))]));
   if (!pids.length) return out;
   const { results } = await env.DB.prepare(`SELECT profile_id, kind, item, stars FROM profile_ratings WHERE family_id = ? AND profile_id IN (${pids.map(() => '?').join(',')})`)
@@ -31,7 +31,7 @@ async function ratingsOf(env, fid, pids) {
   return out;
 }
 
-async function limitsOf(env, fid) {
+export async function limitsOf(env, fid) {
   const r = await env.DB.prepare('SELECT * FROM family_limits WHERE family_id = ?').bind(fid).first();
   return { max_minutes: r?.max_minutes ?? null, budget: r?.budget ?? null, missing_tools: JSON.parse(r?.missing_tools ?? '[]'), adventurous: r?.adventurous ?? null };
 }

@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [145. 2026-10-24 — Plan: the main track ranks, it doesn't rule out](docs/build-log.md#145-2026-10-24--plan-the-main-track-ranks-it-doesnt-rule-out)
+**Latest build log entry:** [146. 2026-10-24 — Scoring and default picks (slice 11d1)](docs/build-log.md#146-2026-10-24--scoring-and-default-picks-slice-11d1)
 
 ## Current features
 
@@ -62,6 +62,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Content linter** (`tools/lint-content.js`): checks every lesson against the food rules, including the unclean-food block, the food-safety steps, and scaling. Runs on every push, on every save from the manager section, and in the browser as the owner edits.
 - **Our tastes** (next release only, `src/worker/tastes.js`, `public/tastes.js`): each profile rates proteins, flavors, and key ingredients from 1 to 5 stars (one absolute favorite per list) or Haven't tried, and the family sets its time, budget, tools, and how adventurous. Also in Getting started and as Chef Ruth's "Ask what we like to eat".
 - **Variations** (`src/content/variations.js`, `src/worker/variations.js`): complete versions of a lesson with a preference built in: 9 so far, on 6 lessons (another protein, beans or tofu, or more heat). Edited in the manager section and checked as whole lessons; with the next release, a parent picks the version, and the player and shopping lists use it.
+- **Picks** (next release only, `src/content/score.js`, `src/worker/picks.js`): each version and dish is scored for the people cooking it from their stars and the family's limits. The best version plays unless a parent picks one, and a new course keeps the best dish in each pick-one group. Nothing is dropped: a 1 star or a limit only ranks a dish lower.
 - **Tastes and tags** (`content/tastes.json`, `src/content/tastes.js`): the proteins, flavors (with example dishes), and key ingredients families will rate, and every dish's protein, flavors, heat, budget, familiarity, and vegetables tags. Not shown to families yet.
 - **Content file layout** (`tools/format-content.js`): every content file in the one layout the manager section writes.
 - **Scaling** (`src/content/`): amounts and step counts change with the serving size, shown in measuring-cup and spoon amounts.

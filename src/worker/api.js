@@ -28,6 +28,7 @@ import { register as registerTastes, forgetProfile } from './tastes.js';
 import { RUBRIC, gradeLine } from '../content/grades.js';
 import { exportFamily, deleteFamily, eraseAfter } from './backup.js';
 import { releaseFor, nextReleaseOn } from './release.js';
+import { register as registerPicks } from './picks.js';
 import { register as registerVariations, variationChoices, recordVariation, hasVariation, forgetCooks } from './variations.js';
 import { lessonVersion } from '../content/variations.js';
 
@@ -922,6 +923,7 @@ registerSetup(on);
 registerGrades(on);
 registerTastes(on);
 registerVariations(on);
+registerPicks(on);
 
 // ---------- dispatch ----------
 

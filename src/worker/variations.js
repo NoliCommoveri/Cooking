@@ -75,13 +75,18 @@ export async function forgetCooks(env, fid) {
 }
 
 export function register(on) {
-  // Which version of a lesson the family cooks: a variation's id, or '' for
-  // the lesson itself. Parents only, behind the PIN.
+  // Which version of a lesson the family cooks: a variation's id, '' for the
+  // lesson itself, or null for no pick. Parents only, behind the PIN.
   on('PUT', '/api/variations/([a-z0-9-]+)', async (req, env, body, [lid]) => {
     const s = await requireParent(env, req);
     if (!(await nextReleaseOn(env.DB, s.family_id))) fail(404, 'not_available', 'Not available yet.');
     const L = libraryLesson(lid);
     if (!L?.variations?.length) fail(404, 'not_found', 'That lesson has no other versions.');
+    // null: no pick, so the best fit for whoever is cooking plays (§6.21, 11d1).
+    if (body.variation === null) {
+      await env.DB.prepare('DELETE FROM variation_choices WHERE family_id = ? AND lesson_id = ?').bind(s.family_id, lid).run();
+      return { ok: true, lesson_id: lid, variation: null, title: null };
+    }
     const vid = String(body.variation ?? '');
     if (vid !== '' && !hasVariation(lid, vid)) fail(400, 'invalid', `${L.title} has no version called "${vid}".`);
     await env.DB.prepare(`INSERT INTO variation_choices (family_id, lesson_id, variation, updated_at) VALUES (?, ?, ?, ?)

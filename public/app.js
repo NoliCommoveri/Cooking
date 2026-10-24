@@ -583,7 +583,7 @@ async function lesson(profileId, lessonId) {
   const mount = el('div');
   screen(mount);
   await openLesson(mount, {
-    profile: p, family: me.family, lessonId, variation: chosenVersion(lessonId), lesson: recipe?.lesson ?? null, extra: recipe?.extra ?? {}, onExit: () => go(`#/kitchen/${p.id}`),
+    profile: p, family: me.family, lessonId, variation: mine.versions?.[lessonId] ?? chosenVersion(lessonId), lesson: recipe?.lesson ?? null, extra: recipe?.extra ?? {}, onExit: () => go(`#/kitchen/${p.id}`),
     crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook, onReflect: saveReflection, labels: mine.labels ?? lib.labels, total: mine.total ?? lib.total,
     // "I want to make this" or "Cook this" (§6.1), and the queued lesson's
     // servings and who it's for, for a fresh cook.
@@ -1223,7 +1223,7 @@ function safetyReview(lessonId) {
 // their profiles will see it (its theme, kid or adult, the family's diet
 // swaps), without checking off Prep, and nothing is saved or counted. It opens
 // over the page, so closing it leaves the queue or a course being edited as it was.
-async function previewLesson(lessonId) {
+async function previewLesson(lessonId, variation) {
   const [{ profiles }, lib] = await Promise.all([api('GET', '/api/profiles'), api('GET', '/api/library')]);
   // A family recipe comes from the API in lesson shape (§6.10).
   const recipe = /^recipe:/.test(lessonId) ? await api('GET', `/api/recipes/${lessonId.slice(7)}`)
@@ -1253,7 +1253,7 @@ async function previewLesson(lessonId) {
     await openLesson(fresh, {
       // Its own place on this device, apart from the profile's real cooks.
       profile: { id: `preview-${as.id}`, name: as.name, theme: as.theme, audience: as.audience },
-      family: me.family, lessonId, variation: chosenVersion(lessonId), lesson: recipe?.lesson ?? null, extra: recipe?.extra ?? {}, labels: lib.labels, total: lib.total,
+      family: me.family, lessonId, variation: variation ?? chosenVersion(lessonId), lesson: recipe?.lesson ?? null, extra: recipe?.extra ?? {}, labels: lib.labels, total: lib.total,
       preview: true, exitLabel: 'Close preview', onExit: close,
     });
   };
@@ -1266,37 +1266,51 @@ async function previewLesson(lessonId) {
 }
 // Versions of a lesson (§6.21): a lesson with variations, like Chimichurri
 // chicken for Chimichurri steak, is cooked in the version the family picks
-// here. Every version counts as the lesson. Next release only.
+// here, or else the one that fits the people cooking it best (11d1). Every
+// version counts as the lesson. Next release only: the row's version comes
+// from the API, null without it.
 const chosenVersion = (lessonId) => me.family.variations?.[lessonId] || null;
-function versionPick(R, lessonId, done) {
-  const L = R.lessons.find((x) => x.id === lessonId);
-  if (!me.family.next_release || !L?.variations?.length) return null;
-  const title = L.variations.find((v) => v.id === chosenVersion(lessonId))?.title ?? L.title;
-  return el('button', { type: 'button', class: 'hbtn link', onclick: () => versionDialog(L, done) }, `Version: ${title}`);
+const peopleList = (xs) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}`);
+function versionPick(x, done) {
+  const v = x.version;
+  if (!v) return null;
+  return el('button', { type: 'button', class: 'hbtn link', onclick: () => versionDialog(x, done) },
+    `Version: ${v.title}${v.saved || !v.best_for.length ? '' : ` (best for ${peopleList(v.best_for)})`}`);
 }
-function versionDialog(L, done) {
-  const now = chosenVersion(L.id) ?? '';
-  const opts = [{ id: '', title: L.title, note: 'as written' }, ...L.variations.map((v) => ({ id: v.id, title: v.title, note: `a version of ${L.title}` }))];
+function versionDialog(x, done) {
+  const v = x.version;
+  const AUTO = '*';
+  const now = v.saved ? v.id : AUTO;
+  const lessonTitle = v.options.find((o) => o.id === '')?.title ?? x.title;
+  const line = (o) => [o.label, ...o.why, ...o.notes, o.hidden ? 'Hidden by your diet settings' : null].filter(Boolean).join(' · ');
+  const opts = [
+    { id: AUTO, title: 'The best fit for whoever is cooking', note: `now ${v.options.find((o) => !o.hidden)?.title ?? lessonTitle}` },
+    ...v.options.map((o) => ({ id: o.id, title: o.title, note: o.id === '' ? 'as written' : `a version of ${lessonTitle}`, line: line(o), hidden: o.hidden })),
+  ];
   const msg = el('p', { class: 'err', role: 'alert' });
   const f = el('form', { onsubmit: async (e) => {
     e.preventDefault();
-    const variation = new FormData(f).get('version') ?? '';
+    const pick = new FormData(f).get('version') ?? AUTO;
+    const variation = pick === AUTO ? null : pick;
     try {
-      await api('PUT', `/api/variations/${encodeURIComponent(L.id)}`, { variation });
-      me.family.variations = { ...me.family.variations, [L.id]: variation };
+      await api('PUT', `/api/variations/${encodeURIComponent(x.lesson_id)}`, { variation });
+      const rest = { ...me.family.variations };
+      if (variation === null) delete rest[x.lesson_id]; else rest[x.lesson_id] = variation;
+      me.family.variations = rest;
       close();
       done?.();
     } catch (err) { msg.textContent = err.message; }
   } },
   el('div', { class: 'stack' }, opts.map((o) => el('label', { class: 'choice' },
-    el('input', { type: 'radio', name: 'version', value: o.id, checked: o.id === now }), el('span', {}, o.title, el('em', {}, ` ${o.note}`))))),
+    el('input', { type: 'radio', name: 'version', value: o.id, checked: o.id === now, disabled: o.hidden }),
+    el('span', {}, o.title, el('em', {}, ` ${o.note}`), o.line ? el('small', { class: 'mut', style: 'display:block' }, o.line) : null)))),
   msg,
   el('div', { class: 'acts' }, el('button', { type: 'submit', class: 'hbtn pri' }, 'Use this version'), el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')));
-  const close = modal(`Which version of ${L.title}?`,
-    el('p', { class: 'mut small' }, 'Every version teaches the same skill and counts as this lesson. The lesson and your shopping lists use the one you pick.'), f);
+  const close = modal(`Which version of ${lessonTitle}?`,
+    el('p', { class: 'mut small' }, `Best first, for ${peopleList(v.best_for) || 'your family'}, from what each of you rated in Our tastes. Every version teaches the same skill and counts as this lesson. The lesson and your shopping lists use the one you pick.`), f);
 }
 
-const previewBtn = (lessonId) => el('button', { type: 'button', class: 'hbtn link', onclick: () => previewLesson(lessonId).catch((err) => showToast(err.message)) }, 'Preview as a learner');
+const previewBtn = (lessonId, variation) => el('button', { type: 'button', class: 'hbtn link', onclick: () => previewLesson(lessonId, variation).catch((err) => showToast(err.message)) }, 'Preview as a learner');
 
 // A button that runs fn, shows its error, and is off while it runs.
 const actBtn = (label, cls, fn) => el('button', { type: 'button', class: `hbtn ${cls}`, onclick: async (e) => {
@@ -1358,7 +1372,7 @@ const menu = (label, items) => el('details', { class: 'more', ontoggle: (e) => {
 const plural = (n, word) => `${n} ${word}${n === 1 ? '' : /(s|sh|ch)$/.test(word) ? 'es' : 's'}`;
 
 const parentQueue = parentOnly(async (flash) => {
-  const [q, { profiles }, R] = await Promise.all([api('GET', `/api/queue?${tz()}`), api('GET', '/api/profiles'), contentRegistry()]);
+  const [q, { profiles }] = await Promise.all([api('GET', `/api/queue?${tz()}`), api('GET', '/api/profiles')]);
   const pname = (id) => profiles.find((p) => p.id === id)?.name ?? 'Someone';
   const names = (ids) => ids.map(pname).join(' & ') || 'Nobody';
   const homeschool = q.mode === 'homeschool';
@@ -1395,7 +1409,7 @@ const parentQueue = parentOnly(async (flash) => {
     el('div', {}, el('b', {}, `${pname(r.requested_by)} asked for `, ...lessonName(r)), r.foundation ? foundationMark() : null,
       el('small', { class: 'mut' }, ` · ${fmtDay(r.created_at.slice(0, 10))}`)),
     r.already_queued ? el('p', { class: 'mut small', style: 'margin:0' }, `It's already on ${pname(r.requested_by)}'s list, so Not now is fine.`) : null,
-    el('div', { class: 'qtools' }, safetyReview(r.lesson_id), tested(r.lesson_id), previewBtn(r.lesson_id), versionPick(R, r.lesson_id, () => parentQueue())),
+    el('div', { class: 'qtools' }, safetyReview(r.lesson_id), tested(r.lesson_id), previewBtn(r.lesson_id, r.version?.id), versionPick(r, () => parentQueue())),
     el('div', { class: 'acts' },
       servingsPick(r, setServings(r.id)),
       actBtn('Approve as an extra meal', 'pri', async () => { await api('POST', `/api/queue/${r.id}/approve?${tz()}`); again(`${r.title} is on ${pname(r.requested_by)}'s list as an extra meal.`); }),
@@ -1417,7 +1431,7 @@ const parentQueue = parentOnly(async (flash) => {
     const lessonRow = (x, week) => (x.done
       ? el('div', { class: 'rowi' }, el('div', {}, el('b', {}, ...lessonName(x)), el('small', {}, 'Cooked')), el('span', { class: 'mut' }, '✓'))
       : expander(el('span', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null, status(x, week) ? el('small', {}, status(x, week)) : null),
-        el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id), previewBtn(x.lesson_id), versionPick(R, x.lesson_id, () => parentQueue())),
+        el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id), previewBtn(x.lesson_id, x.version?.id), versionPick(x, () => parentQueue())),
         el('div', { class: 'acts' },
           x.queue_id ? servingsPick(x, setServings(x.queue_id)) : null,
           actBtn('Skip this recipe', '', async () => {
@@ -1496,7 +1510,7 @@ const parentQueue = parentOnly(async (flash) => {
 
   const queuedRow = (x) => expander(el('span', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null,
     el('small', {}, `For ${names(x.profile_ids)}${x.planned_date ? ` · ${fmtDay(x.planned_date)}` : ''}${x.status === 'shopped' ? ' · Shopped for' : ''}${x.swap ? ' · Swapped in' : ''}`)),
-  el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id), previewBtn(x.lesson_id), versionPick(R, x.lesson_id, () => parentQueue())),
+  el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id), previewBtn(x.lesson_id, x.version?.id), versionPick(x, () => parentQueue())),
   el('div', { class: 'acts' }, servingsPick(x, setServings(x.id)),
     x.swap
       ? actBtn('Undo swap', '', async () => { await api('POST', `/api/queue/${x.id}/unswap`); again(`Undid the swap for ${x.title}.`); })
@@ -1608,6 +1622,28 @@ const courseEditor = parentOnly(async (cid) => {
   // Profiles already on another active course can't be picked.
   const taken = new Set(data.courses.filter((c) => !c.archived_at && c.id !== existing?.id).flatMap((c) => c.profile_ids));
   let plan = (existing?.plan ?? data.default_plan).filter((x) => dish[x.id]).map((x) => ({ ...x }));
+  // How well each dish fits the people the course is for (§6.21, 11d1), next
+  // release only. A new course keeps the best dish in each pick-one group
+  // until the parent ticks one themselves; Suggest picks does it again.
+  let fits = null, touched = false;
+  const picked = () => profiles.filter((p) => document.querySelector(`[name="p_${p.id}"]`)?.checked).map((p) => p.id);
+  const usePicks = () => {
+    const keep = new Set(Object.values(fits.picks));
+    const inGroup = new Set(courseEntries(plan.map((x) => dish[x.id])).filter((e) => e.pickOne).flatMap((e) => e.ids));
+    for (const x of plan) if (inGroup.has(x.id)) x.removed = !keep.has(x.id);
+  };
+  const loadFits = async (ids) => {
+    if (!me.family.next_release) return;
+    fits = ids.length ? await api('GET', `/api/picks/course?profiles=${ids.join(',')}`).catch(() => null) : null;
+    if (fits && !existing && !touched) usePicks();
+    drawPlan();
+  };
+  const suggestBtn = me.family.next_release ? el('button', { type: 'button', class: 'hbtn', hidden: true, onclick: () => {
+    if (!fits) return;
+    usePicks();
+    drawPlan();
+    showToast('Picked the best dish in each group. Save the course to keep it.');
+  } }, 'Suggest picks') : null;
   const listBox = el('div', { class: 'stack plan' });
   const finishBox = el('p', { class: 'mut small', style: 'margin:0' });
   const notesBox = el('div');
@@ -1627,8 +1663,16 @@ const courseEditor = parentOnly(async (cid) => {
   startIn.addEventListener('input', drawFinish);
   perIn.addEventListener('input', drawFinish);
 
+  // A dish's fit, and why, under its name.
+  const fitLine = (id) => {
+    const f = fits?.dishes[id];
+    if (!f?.label) return null;
+    const why = [...f.why, ...f.notes, f.version_title ? `as ${f.version_title}` : null].filter(Boolean).join(' · ');
+    return el('small', { class: `fitline fit-${f.fit}` }, f.label, why ? el('span', { class: 'mut' }, ` · ${why}`) : null);
+  };
   const openParts = new Set();
   const drawPlan = () => {
+    if (suggestBtn) suggestBtn.hidden = !fits;
     const entries = courseEntries(plan.map((x) => dish[x.id]));
     const removed = plan.filter((x) => x.removed).map((x) => x.id);
     const notes = prereqNotes(outline.dishes, { order: entries.map((e) => e.key), removed });
@@ -1651,8 +1695,8 @@ const courseEditor = parentOnly(async (cid) => {
         const tag = !written.has(id) ? 'Being written' : hidden.has(id) ? 'Hidden by your diet settings' : null;
         return el('div', { class: 'dishpick' },
           el('label', { class: 'choice' },
-            el('input', { type: 'checkbox', checked: !x.removed, onchange: (ev) => { x.removed = !ev.target.checked; drawPlan(); } }),
-            el('span', {}, d.title, tag ? el('small', { class: 'mut' }, ` · ${tag}`) : null)),
+            el('input', { type: 'checkbox', checked: !x.removed, onchange: (ev) => { x.removed = !ev.target.checked; if (e.pickOne) touched = true; drawPlan(); } }),
+            el('span', {}, d.title, tag ? el('small', { class: 'mut' }, ` · ${tag}`) : null, fitLine(id))),
           el('span', { class: 'acts' },
             written.has(id) && !hidden.has(id) ? el('button', { type: 'button', class: 'hbtn link', 'aria-label': `Preview ${d.title} as a learner`, onclick: () => previewLesson(id).catch((err) => showToast(err.message)) }, 'Preview') : null,
             el('button', { type: 'button', class: 'hbtn link', 'aria-label': `What is ${d.title}?`, onclick: () => showDish(id) }, d.skill ? `${d.skill} ›` : 'What is it? ›')));
@@ -1661,6 +1705,7 @@ const courseEditor = parentOnly(async (cid) => {
         el('div', { class: 'planno' }, num ?? '–'),
         el('div', { class: 'grow' },
           e.pickOne ? el('div', { class: 'planpick' }, foundationMark(), el('small', { class: 'mut' }, ' Pick one, or tick more')) : null,
+          e.pickOne && fits?.notes[e.key] ? el('p', { class: 'mut small', style: 'margin:2px 0' }, fits.notes[e.key]) : null,
           e.ids.map(dishRow)),
         el('div', { class: 'planmove' },
           el('button', { type: 'button', class: 'hbtn', 'aria-label': 'Move up', disabled: i === 0, onclick: () => move(i, -1) }, '↑'),
@@ -1698,7 +1743,7 @@ const courseEditor = parentOnly(async (cid) => {
 
   parentScreen('courses', el('h2', {}, existing ? 'Edit course' : 'Set up a course'),
     form([
-      el('fieldset', {}, el('legend', {}, "Who it's for"),
+      el('fieldset', { onchange: () => loadFits(picked()) }, el('legend', {}, "Who it's for"),
         el('p', { class: 'mut small', style: 'margin:0' }, 'Siblings can share a course and cook together, or each have their own.'),
         el('div', { class: 'grid2' }, profiles.map((p) => el('label', { class: 'choice' },
           el('input', { type: 'checkbox', name: `p_${p.id}`, checked: existing?.profile_ids.includes(p.id), disabled: taken.has(p.id) }),
@@ -1710,6 +1755,8 @@ const courseEditor = parentOnly(async (cid) => {
       finishBox,
       el('fieldset', {}, el('legend', {}, 'The lessons, in order'),
         el('p', { class: 'mut small', style: 'margin:0' }, 'Untick a lesson to leave it out. Foundation skills have a few lessons to pick from: one is ticked, and you can tick more.'),
+        me.family.next_release ? el('p', { class: 'mut small', style: 'margin:0' }, 'Each dish shows how well it fits the people the course is for, from Our tastes. Suggest picks ticks the best dish in each group.') : null,
+        suggestBtn ? el('div', { class: 'acts' }, suggestBtn) : null,
         notesBox, listBox),
     ], existing ? 'Save course' : 'Start the course', async (v) => {
       const body = {
@@ -1720,6 +1767,7 @@ const courseEditor = parentOnly(async (cid) => {
       await api(existing ? 'PUT' : 'POST', existing ? `/api/courses/${existing.id}` : '/api/courses', body);
       go('#/parent/queue');
     }, { extra, top: true }));
+  loadFits(existing?.profile_ids ?? []);
 });
 
 // ---------- shopping (§6.3): optional; nothing waits on it ----------

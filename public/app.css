@@ -384,6 +384,10 @@ details.qweek>.acts{margin-top:8px}
 .planpart .choice{border:0;padding:0;min-height:32px;gap:8px;font-weight:700;font-size:15px;line-height:1.2;letter-spacing:0}
 .planpart .choice input{width:20px;height:20px;margin:0;flex:none}
 .planpart .choice small{font-size:12px;font-weight:600}
+/* A dish's fit for the people on the course (§6.21). */
+.planpart .choice small.fitline{display:block;margin-top:2px;font-weight:700}
+.fitline.fit-great{color:var(--h-acc)}
+.fitline.fit-none{color:var(--h-bad)}
 .planpart .dishpick>.hbtn.link{justify-content:flex-start;text-align:left;font-size:12.5px;font-weight:600;line-height:1.2;min-height:0;padding:0 0 4px 28px;text-underline-offset:2px}
 .planpart .planmove{gap:2px}
 .planpart .planmove .hbtn{min-height:34px;min-width:34px;padding:0;font-size:15px;border-radius:8px}

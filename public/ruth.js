@@ -466,7 +466,7 @@ async function coursePart(ctx, chat, call, { again }) {
   await chat.ask([field('Lessons per week', 'per', { type: 'number', min: 1, max: data.per_week_max, value: 1, inputmode: 'numeric', required: true })], 'Start the course', async (v) => {
     const per = Number(v.per);
     if (!Number.isInteger(per) || per < 1 || per > data.per_week_max) throw new Error(`Pick a number from 1 to ${data.per_week_max}.`);
-    await call('POST', '/api/courses', { name, start_date: start, per_week: per, profile_ids: pids, plan: data.default_plan });
+    await call('POST', '/api/courses', { name, start_date: start, per_week: per, profile_ids: pids });
     return `${per} a week`;
   });
   if (data.mode !== 'homeschool') {
@@ -474,7 +474,9 @@ async function coursePart(ctx, chat, call, { again }) {
     if (!f.plan_weeks) await call('PUT', '/api/family', { ...f, plan_weeks: true });
     chat.say("I turned on Plan our weeks, so your course loads each week's lessons into the queue.");
   }
-  chat.say("Your course follows our suggested order. You can edit it to change the lesson order or drop lessons, and to pick a different dish where a skill has a few to choose from, in Menu → Courses.");
+  chat.say(ctx.me().family.next_release
+    ? "Your course follows our suggested order, and where a skill has a few dishes to choose from, I picked the one that fits them best from Our tastes. You can edit it to change the lesson order, drop lessons, or pick a different dish, in Menu → Courses."
+    : "Your course follows our suggested order. You can edit it to change the lesson order or drop lessons, and to pick a different dish where a skill has a few to choose from, in Menu → Courses.");
 }
 
 // No course: a first lesson by hand (owner, 2026-10-23). She offers the first

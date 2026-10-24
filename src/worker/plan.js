@@ -17,6 +17,8 @@ import { servingOptions } from '../content/scale.js';
 import { courseEntries, numberCourse } from '../content/course.js';
 import { schedule, weekOf, addDays, localDay, isDay, isSabbath, DUE_DAY } from './schedule.js';
 import { isRecipeId, lessonFor, recipeNames, recipeVisible } from './recipes.js';
+import { tasteContext, versionFor, bestPlan } from './picks.js';
+import { variationChoices } from './variations.js';
 
 const id = () => randomHex(8);
 const ACTIVE = ['requested', 'assigned', 'shopped'];
@@ -35,6 +37,25 @@ const dishById = Object.fromEntries(LIBRARY.course.map((d) => [d.id, d]));
 const placeholders = (list) => list.map(() => '?').join(', ');
 
 // ---------- small helpers ----------
+
+// The version a row plays (§6.21), for its Version button: the family's pick,
+// or the best for the profiles on it, with every version's fit. null for a
+// lesson with no other versions, or a family without the next release.
+function versionOut(tc, choices, lid, pids) {
+  const v = versionFor(tc, choices, lid, pids);
+  if (!v.options) return null;
+  const on = tc.profiles.filter((p) => !pids?.length || pids.includes(p.id)).map((p) => p.name);
+  return {
+    id: v.variation, saved: v.saved, title: v.options.find((o) => o.id === v.variation)?.title ?? lessonById[lid].title, best_for: on,
+    options: v.options.map(({ id, title, fit, label, why, notes, hidden }) => ({ id, title, fit, label, why, notes, hidden })),
+  };
+}
+const versionPicker = async (env, fam) => {
+  const tc = await tasteContext(env, fam);
+  if (!tc) return () => null;
+  const choices = await variationChoices(env, fam.id);
+  return (lid, pids) => versionOut(tc, choices, lid, pids);
+};
 
 export const family = (env, fid) => env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(fid).first();
 export const weeksOn = (fam) => fam.mode === 'homeschool' || Boolean(fam.plan_weeks);
@@ -166,6 +187,13 @@ async function planOf(env, course) {
   const saved = new Set(known.map((r) => r.lesson_id));
   for (const e of courseEntries(LIBRARY.course)) e.ids.slice(1).forEach((x) => { if (!saved.has(x) && e.pickOne) removed.push(x); });
   return { order, removed, skipped };
+}
+
+// A new course with no plan sent (Chef Ruth's): the best dish of each
+// pick-one group for its profiles, with the next release (§6.21).
+async function defaultFor(env, fid, pids) {
+  const tc = await tasteContext(env, await family(env, fid));
+  return tc ? bestPlan(tc, pids) : defaultPlan();
 }
 
 // The suggested order with the first dish of each pick-one group kept.
@@ -376,7 +404,7 @@ export function itemOut(r, who, labels = suggestedLabels, names = {}) {
   };
 }
 
-function courseOut(st, fam, rowsByLesson) {
+function courseOut(st, fam, rowsByLesson, version = () => null) {
   const { course, profiles, lessons, sched } = st;
   const lessonOut = (x) => {
     const L = lessonById[x.id];
@@ -385,6 +413,7 @@ function courseOut(st, fam, rowsByLesson) {
       lesson_id: x.id, title: L?.title ?? x.id, label: lessons.labels[x.id] ?? null, image: L?.image ?? null, unit: L?.unit ?? null,
       foundation: Boolean(dishById[x.id]?.pickOne), done: x.done, overdue: fam.mode === 'homeschool' ? x.overdue : false, extra: Boolean(x.extra),
       queue_id: q?.id ?? null, servings: q?.servings ?? null, servings_options: L ? servingOptions(L) : [], status: q?.status ?? null,
+      version: version(x.id, profiles),
     };
   };
   const week = (w) => ({ week: w.week, skipped: w.skipped, extra: w.extra, lessons: w.lessons.map(lessonOut) });
@@ -423,7 +452,8 @@ export function register(on) {
     for (const r of active) if (unitOne.includes(r.lesson_id)) (who[r.id] ?? []).forEach((p) => knifeOk.add(p));
     const tests = (await env.DB.prepare('SELECT lesson_id, cooked_on, parent_id FROM test_cooks WHERE family_id = ?').bind(s.family_id).all()).results;
     const names = await recipeNames(env, s.family_id);
-    const out = (r) => itemOut(r, who, suggestedLabels, names);
+    const version = await versionPicker(env, fam);
+    const out = (r) => ({ ...itemOut(r, who, suggestedLabels, names), version: version(r.lesson_id, who[r.id]) });
     const filters = JSON.parse(fam.diet_filters);
     const { results: mine } = await env.DB.prepare('SELECT * FROM family_recipes WHERE family_id = ? AND deleted_at IS NULL ORDER BY title COLLATE NOCASE, id').bind(s.family_id).all();
     return {
@@ -437,7 +467,7 @@ export function register(on) {
       queued: active.filter((r) => r.status !== 'requested' && !r.course_id).map(out),
       // A lesson a swap took off is put back by the swap's Undo, not here.
       put_back: rows.filter((r) => !ACTIVE.includes(r.status) && !names[r.lesson_id]?.deleted && !active.some((x) => x.swap_of === `q:${r.id}`)).map(out),
-      courses: states.map((st) => courseOut(st, fam, byLesson)),
+      courses: states.map((st) => courseOut(st, fam, byLesson, version)),
       knife_ok: [...knifeOk],
       test_cooks: Object.fromEntries(tests.map((t) => [t.lesson_id, { cooked_on: t.cooked_on, by_me: t.parent_id === s.parent_id }])),
       library: LIBRARY.lessons.filter((L) => visible(fam).has(L.id)).map((L) => ({
@@ -570,8 +600,20 @@ export function register(on) {
     const at = new Map((mine?.lessons.kept ?? []).map((x, i) => [x, i]));
     const rank = (r) => (r.course_id && at.has(r.lesson_id) ? at.get(r.lesson_id) : 1e6);
     rows.sort((a, b) => rank(a) - rank(b));
+    // The version each lesson with variations plays in this kitchen (§6.21):
+    // a queued one's for everyone it's queued for, any other's for this
+    // profile alone. The family's own pick wins either way.
+    const version = await versionPicker(env, fam);
+    const versions = {};
+    for (const L of LIBRARY.lessons) {
+      if (!L.variations?.length) continue;
+      const r = rows.find((x) => x.lesson_id === L.id && x.status !== 'requested');
+      const v = version(L.id, r ? who[r.id] : [pid]);
+      if (v) versions[L.id] = v.id;
+    }
     return {
       mode: fam.mode,
+      versions,
       // The profile's path, in its course plan's order (or the suggested one),
       // for its kitchen's "Coming up" and the early flag (owner, 2026-10-23).
       order: mine ? mine.lessons.kept : null,
@@ -726,7 +768,7 @@ export function register(on) {
       env.DB.prepare('INSERT INTO courses (id, family_id, name, start_date, per_week, created_at) VALUES (?, ?, ?, ?, ?, ?)')
         .bind(course.id, s.family_id, v.name, v.start, v.per, now()),
       ...profileStatements(env, course, v.pids),
-      ...planStatements(env, course, v.plan ?? defaultPlan()),
+      ...planStatements(env, course, v.plan ?? (await defaultFor(env, s.family_id, v.pids))),
     ]);
     return { ok: true, id: course.id };
   });
