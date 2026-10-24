@@ -4355,3 +4355,11 @@ order, so these two recipes were written.
 - Plan §2.1 names the additions. The fat rule still covers only cattle,
   sheep, and goats; whether it reaches water buffalo and yak is open for the
   owner. No ingredient uses any of the new species yet.
+
+## 181. 2026-10-24 — Week 2's drill uses a potato
+
+- Owner, 2026-10-24: no extra ground beef just for a drill. Level 3 week 2's
+  drill is now "Thick vs. thin: how size changes cooking time": a ¼-inch
+  slice and a 1-inch chunk of potato roasted at 400°F, each checked every 5
+  minutes until about 205°F. Two of the week's burger patties, one thin and
+  one thick, are the option. Plan §12.3 and the review doc follow.

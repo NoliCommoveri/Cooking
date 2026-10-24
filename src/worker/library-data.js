@@ -9065,31 +9065,31 @@ export const LIBRARY = {
       "lamb-kofta"
      ],
      "drill": {
-      "title": "Temp-check thick vs. thin patties",
+      "title": "Thick vs. thin: how size changes cooking time",
       "minutes": 40,
       "body": [
-       "Patty thickness changes cooking time more than most people expect. Cook a thin and a thick patty side by side and track both with the thermometer.",
-       "You'll need an extra ½ pound of ground beef, or two of this week's patties."
+       "Thickness changes cooking time more than most people expect, because heat has to travel from the surface to the center. Cook a thin piece and a thick piece side by side and track both with the thermometer.",
+       "A potato in the oven works as well as beef and costs far less. If you'd rather use beef, shape one of this week's burger patties thin and one thick when you make the recipe."
       ],
       "steps": [
-       "Split ½ pound of ground beef in two. Shape one patty about ¼ inch thick and one about ¾ inch thick.",
-       "Wash your hands and wipe down anything the raw beef touched.",
-       "Heat a skillet over medium-high with 1 teaspoon of oil until it shimmers. Add both patties with tongs, then wash the tongs and your hands.",
-       "When the undersides are browned, flip both and start a timer.",
-       "Check each patty from the side every minute after the flip, and record time and temperature.",
-       "Pull each patty when it reaches 160°F, and note its total time.",
-       "Compare the two. How much longer did the thick one take? Did either look done before it actually was?"
+       "Heat the oven to 400°F and line a sheet pan with foil.",
+       "Scrub a russet potato. Cut one slice about ¼ inch thick and one chunk about 1 inch thick. Rub both with a little oil and set them on the pan.",
+       "Bake them, and start a timer.",
+       "Every 5 minutes, pull the pan out with oven mitts and check the center of each piece with the thermometer. Record the time and temperature for both.",
+       "A potato is cooked through at about 205°F, when a fork slides in easily. Take each piece out when it gets there, and note its total time.",
+       "Compare: how much longer did the thick piece take? Did the outside look done before the center was?",
+       "With beef instead: cook a ¼-inch and a ¾-inch patty in a skillet over medium-high, check each from the side every minute after the flip, and pull each at 160°F. Wash your hands and the tongs after handling the raw beef."
       ],
       "quiz": [
        {
-        "q": "Which patty takes longer to reach 160°F?",
+        "q": "A ¼-inch slice and a 1-inch chunk go in the oven together. Which reaches the target temperature first?",
         "choices": [
-         "The thick one",
-         "The thin one",
-         "Same time"
+         "The thin slice",
+         "The thick chunk",
+         "They arrive together"
         ],
         "answer": 0,
-        "explain": "Heat has farther to travel to the center."
+        "explain": "Heat has a shorter path to the center of a thin piece."
        },
        {
         "q": "A burger is brown all the way through. Is it done?",

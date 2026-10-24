@@ -1362,7 +1362,7 @@ Level 1's "Clean and unclean animals" and Level 2's "Labels and hidden unclean i
 | Week | Recipe | Drill | Knowledge | Beyond the Recipe |
 |---|---|---|---|---|
 | 1 | Shakshuka (eggs set fully, checked at 160°F) | Calibrate a thermometer in ice water | Danger zone and how microorganisms grow | Label and date containers |
-| 2 | Thick beef burgers to 160°F | Temp-check thick vs. thin patties | Safe internal temperatures chart | Cool a cooked dish in an ice bath |
+| 2 | Thick beef burgers to 160°F | Thick vs. thin: how size changes cooking time (a potato in the oven, or two patties) | Safe internal temperatures chart | Cool a cooked dish in an ice bath |
 | 3 | Chicken fried rice, from the rice cooled in the drill | Safe cooling of a batch of rice, saved for the fried rice | Cross-contamination and board colors | Make a dish ahead and store it |
 | 4 | **Mastery:** meatloaf, beef kofta to 160°F, or turkey meatloaf to 165°F | Set up a clean station unaided | Food safety quiz | Reheat a stored dish to 165°F |
 | 5 | Pita bread | Bloom yeast; test water temperature | How yeast makes dough rise | Bake and freeze pita for the Sabbath |
