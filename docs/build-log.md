@@ -3720,3 +3720,38 @@ owner put 11d4, the kid's taste quiz, on hold.
 - Tests: 319 (2 in `test/score.test.js`, 3 in `test/worker-picks.test.js`).
   Not checked in a browser: nothing new is drawn; what's learned shows in
   the fit lines and reasons built in 11d1 and 11d2.
+
+## 149. 2026-10-24 — Recipe gaps (slice 11e)
+
+Phase 11, slice 11e (plan §6.21): a page in the owner screens (Menu → Owner
+→ Recipe gaps), counts only, with no family, profile, or name in it.
+- **`src/worker/gaps.js`, `GET /api/owner/gaps`** (owner only). Families with
+  the next release that have rated something or set a limit are counted.
+  Each is checked group by group for the people it cooks for together (each
+  active course, and everyone on no course) and counts once a group:
+  nothing that fits, or only a poor fit. Reasons are counted per family from
+  name-free codes the scorer now returns (`hated`, `over` in
+  `src/content/score.js`).
+- **Write next:** a protein 1 star → a variation in the protein the
+  affected people rate highest; an ingredient → a version without it; a
+  limit in a full group → a quicker, cheaper, or tool-free version of the
+  closest dish; otherwise a new dish for the group with their best-rated
+  protein and flavors, mild, their usual time and budget (in a full group, a
+  version of its first dish). Bread and dessert groups keep no protein.
+- **Open in the manager** (`/manage/#/gap/variation/<lesson>?…` and
+  `#/gap/dish/<group>?…`): Add a variation opens on the lesson with the gap's
+  tags and note; a new dish opens a dialog that places it after the group's
+  last dish with the group's skills, its pick-one group, the target time, and
+  the tags, then opens it in the editor.
+- **Coverage:** each group against the 10 proteins (written versions, and
+  +planned dishes), heat, and how many flavors, in a table that scrolls
+  sideways on a phone. **What people cook** (every family): swapped out
+  most, skipped most, rated low, and average stars by flavor.
+- Chef Ruth's tour has a Recipe gaps stop.
+- Tests: 323 (4 in `test/worker-gaps.test.js`, including a check that no
+  name or email is in the report). Checked in a browser at phone width on
+  the dev server: the page with three gaps and the coverage table, Open in
+  the manager on a variation, and the new-dish dialog placing a dish in the
+  dressings group with its tags. That check also caught Write next suggesting
+  a salmon version of a dish whose only problem was time, now a quicker
+  version.

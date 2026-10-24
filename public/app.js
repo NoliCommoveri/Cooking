@@ -774,6 +774,7 @@ const PARENT_PAGES = [
   { key: 'parents', group: 'setup', label: 'Logins & PIN' },
   { key: 'owner', group: 'owner', label: 'Families & beta word', owner: true },
   { key: 'fixes', group: 'owner', label: 'Fix requests', owner: true },
+  { key: 'gaps', group: 'owner', label: 'Recipe gaps', owner: true },
   { key: 'reviews', group: 'owner', label: 'Recipe reviews', owner: true },
   { key: 'reports', group: 'owner', label: 'Reported recipes', owner: true },
 ];
@@ -2215,6 +2216,47 @@ const owner = parentOnly(async (flash) => {
     }));
 });
 
+// ---------- owner: Recipe gaps (§6.21, 11e) ----------
+
+// Which pick-one groups leave families with nothing that fits, or only a poor
+// fit, and why; what to write next, opened in the manager with its tags
+// filled in; coverage; and what people cook. Counts only, no family named.
+const recipeGaps = parentOnly(async () => {
+  if (!me.parent.is_owner) return go('#/parent');
+  const g = await api('GET', '/api/owner/gaps');
+  const fam = (n) => `${n} famil${n === 1 ? 'y' : 'ies'}`;
+  const tagLine = (t) => [t.protein, ...(t.flavors ?? []), t.heat, t.budget].filter(Boolean).join(' · ');
+  const gapCard = (x) => el('section', { class: 'card' },
+    el('h3', { style: 'margin:0' }, x.skill),
+    el('p', { class: 'mut small', style: 'margin:2px 0 8px' }, x.dishes.map((d) => `${d.title}${d.written ? '' : ' (not written)'}`).join(' · ')),
+    el('p', { style: 'margin:0' }, el('b', {}, fam(x.families)), [x.none ? `, ${x.none} with nothing that fits` : '', x.low ? `, ${x.low} with only a poor fit` : ''].join('')),
+    x.reasons.length ? el('ul', { class: 'small', style: 'margin:6px 0' }, x.reasons.map((r) => el('li', {}, `${r.text}: ${r.families}`))) : null,
+    el('div', { class: 'card notice', style: 'margin:8px 0 0' },
+      el('b', {}, 'Write next: '), x.write_next.text,
+      el('p', { class: 'mut small', style: 'margin:4px 0' }, `Target tags: ${tagLine(x.write_next.tags)}`),
+      el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: x.write_next.link }, 'Open in the manager'))));
+  const cov = g.coverage;
+  const cell = (c) => (c.written ? String(c.written) : '') + (c.planned ? `${c.written ? ' ' : ''}+${c.planned}` : '') || '·';
+  const list = (title, rows, line) => [el('h3', {}, title), rows.length ? el('ul', { class: 'small' }, rows.map((r) => el('li', {}, line(r)))) : el('p', { class: 'mut small' }, 'Nothing yet.')];
+  parentScreen('gaps',
+    el('h2', {}, 'Recipe gaps'),
+    el('p', { class: 'mut' }, `From what families with the next release have rated: ${fam(g.families)} so far. Counts only; no family is named. Each pick-one group is checked for the people each family cooks for together.`),
+    el('h2', {}, g.gaps.length ? `Gaps (${g.gaps.length} of ${g.slots} groups)` : 'Gaps'),
+    g.gaps.length ? g.gaps.map(gapCard) : el('p', { class: 'card mut' }, g.families ? 'Every group has something that fits every family well.' : 'No family has rated anything yet. Coverage below shows the thin spots in the meantime.'),
+    el('h2', {}, 'Coverage'),
+    el('p', { class: 'mut small' }, 'Each group against protein: the written versions (each lesson and its variations), and +planned dishes. Heat and flavors count written versions.'),
+    el('div', { class: 'ptable covtable' }, el('table', {},
+      el('thead', {}, el('tr', {}, el('th', {}, 'Skill'), cov.proteins.map((p) => el('th', {}, p.name)), el('th', {}, 'Heat (mild · some · spicy)'), el('th', {}, 'Flavors'))),
+      el('tbody', {}, cov.rows.map((r) => el('tr', {}, el('th', { scope: 'row' }, r.skill), cov.proteins.map((p) => el('td', { class: r.cells[p.id].written ? '' : 'mut' }, cell(r.cells[p.id]))),
+        el('td', {}, `${r.heat.mild} · ${r.heat.some} · ${r.heat.spicy}`), el('td', {}, `${r.flavors} of ${cov.flavors_total}`)))))),
+    el('h2', {}, 'What people cook'),
+    el('p', { class: 'mut small' }, 'Across every family.'),
+    list('Swapped out most', g.cooking.swapped, (r) => `${r.title}: ${r.n}`),
+    list('Skipped most', g.cooking.skipped, (r) => `${r.title}: ${r.n}`),
+    list('Rated low', g.cooking.rated_low, (r) => `${r.title}: ${r.low} of ${r.ratings} rated 1 or 2 (average ${r.average})`),
+    list('Average stars by flavor', g.cooking.flavor_stars, (r) => `${r.name}: ${r.average} (${r.ratings})`));
+});
+
 // ---------- owner: fix requests and lesson patches (§6.11) ----------
 
 const STATUS = { fixed: 'Applied', declined: 'Declined', duplicate: 'Duplicate', needs_content_change: 'Needs a content change' };
@@ -2718,6 +2760,7 @@ async function route() {
       if (sub === 'parents') return await parentLogins();
       if (sub === 'owner') return await owner();
       if (sub === 'fixes') return await ownerFixes();
+      if (sub === 'gaps') return await recipeGaps();
       if (sub === 'profiles') return await parentProfiles();
       return await parentQueue();
     }

@@ -585,6 +585,10 @@ const TOUR = [
   { hash: '#/parent/fixes', name: 'Fix requests', owner: true, what: 'Suggestions from families to fix a lesson.', how: [
     "Apply one to change the lesson for every family, after the same checks as our content, or decline it. Anything applied can be reverted.",
   ] },
+  { hash: '#/parent/gaps', name: 'Recipe gaps', owner: true, what: 'Where the recipes fall short of what families like.', how: [
+    "Each skill that leaves families with nothing that fits, or only a poor fit, shows how many and why, counts only. Write next opens the variation or dish that would help most in the manager, with its tags filled in.",
+    'Coverage shows each skill against protein and heat, and What people cook shows what gets swapped, skipped, or rated low.',
+  ] },
   { hash: '#/parent/reviews', name: 'Recipe reviews', owner: true, what: 'Shared recipes waiting on you.', how: [
     'Clear or decline each one, and decide whether it gets the Unleavened badge.',
   ] },

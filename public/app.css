@@ -322,6 +322,11 @@ fieldset.psec legend{font-size:13px;letter-spacing:.07em;text-transform:uppercas
 .ptable{margin:14px 0 22px}
 .ptable h3{margin:0 0 6px}
 .ptable table{width:100%;border-collapse:collapse;font-size:15px}
+/* Recipe gaps' coverage grid (§6.21): wide, so it scrolls on its own. */
+.covtable{overflow-x:auto}
+.covtable table{font-size:13px;white-space:nowrap}
+.covtable th,.covtable td{padding:4px 6px;text-align:center}
+.covtable tbody th{text-align:left}
 .ptable th,.ptable td{text-align:left;padding:6px 8px 6px 0;border-bottom:1px solid var(--h-line);vertical-align:top}
 .printout{overflow-x:auto}
 /* Grading (Phase 4b): a rubric row and its 1-4 choice. */

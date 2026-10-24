@@ -229,8 +229,9 @@ export function lessonPage(id, vid = null) {
 }
 
 // + Add a variation (§6.21): it starts as a copy of the lesson, with the
-// dish's tags, and opens in its own editor to change.
-function addVariation(L, dish) {
+// dish's tags, and opens in its own editor to change. gap: from Recipe gaps
+// (11e), { tags, note }: the tags it's for, and what it should be.
+function addVariation(L, dish, gap = null) {
   const title = el('input', { maxlength: 80, placeholder: 'Like "Chimichurri chicken" for Chimichurri steak' });
   const msg = el('p', { class: 'err', role: 'alert' });
   const close = modal('Add a variation', el('form', { onsubmit: (e) => {
@@ -243,16 +244,25 @@ function addVariation(L, dish) {
     const base = slug(t.toLowerCase().startsWith(first) ? t.slice(first.length) : t) || 'version';
     let vid = base;
     for (let n = 2; (L.variations ?? []).some((x) => x.id === vid); n++) vid = `${base}-${n}`;
-    const tags = dish?.tags ?? L.tags;
+    const tags = gap?.tags ?? dish?.tags ?? L.tags;
     L.variations = [...(L.variations ?? []), { id: vid, title: t, ...(tags ? { tags: structuredClone(tags) } : {}) }];
     put(lessonFile(L.id), L, `Added ${t}, a version of ${L.title}`);
     close();
     go(`#/lesson/${L.id}/v/${vid}`);
   } },
   el('p', { class: 'mut small' }, `A complete version of ${L.title} with a preference built in. It starts as a copy of the lesson; change what differs on the next page.`),
+  gap ? el('p', { class: 'card notice small' }, el('b', {}, 'From Recipe gaps: '), gap.note, '. Its tags are filled in for it; change them on the next page.') : null,
   el('label', { class: 'f' }, 'Its name, as families see it', title),
   msg,
   el('div', { class: 'acts' }, el('button', { type: 'submit', class: 'hbtn pri' }, 'Add and edit it'), el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel'))));
+}
+
+// Write next, from Recipe gaps (§6.21, 11e): the lesson, with Add a
+// variation open and the gap's tags ready.
+export function gapVariation(id, gap) {
+  lessonPage(id);
+  const L = cur(lessonFile(id));
+  if (L) addVariation(L, cur('course.json').dishes.find((d) => d.id === id) ?? null, gap);
 }
 
 function fixBanner(fix) {

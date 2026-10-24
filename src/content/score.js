@@ -53,12 +53,13 @@ function points(stars, adventurous) {
 //                      learned?: { protein, flavor, cuisine } }],
 //          limits: { max_minutes, budget, missing_tools, adventurous },
 //          names: { protein: { id: name }, flavor, ingredient, tool } }
-// Returns { fits, score, low, fit, label, why: [..], notes: [..], known }:
+// Returns { fits, score, low, fit, label, why: [..], notes: [..], known,
+// hated: ['protein:beef', ..], over: ['time', 'budget', 'tool:<id>'] }:
 // fits is false for a 1 star on its protein or a required key ingredient
 // (notes say whose); score is the average over the profiles, plus the family's
 // adjustments; low is the least-happy profile's, for ties; known is whether
 // any rating or limit was used, so a family that hasn't rated anything gets no
-// fit word.
+// fit word. hated and over are the reasons with no names in them.
 export function scoreDish(dish, ctx) {
   const tags = dish.tags ?? {};
   const limits = ctx.limits ?? {};
@@ -69,6 +70,8 @@ export function scoreDish(dish, ctx) {
   const flavors = tags.flavors ?? [];
   const protein = tags.protein && tags.protein !== 'none' ? tags.protein : null;
   const hates = [], loves = {}, notes = [], liked = {};
+  // The same reasons with no names, for counts (Recipe gaps, 11e).
+  const hated = new Set(), over = [];
   let known = false;
   const per = [];
   for (const p of ctx.profiles ?? []) {
@@ -83,13 +86,13 @@ export function scoreDish(dish, ctx) {
     let s = 0;
     if (protein) {
       const x = rate('protein', protein);
-      if (x.stars === HATE) hates.push(`${p.name}: 1 star on ${name('protein', protein)}`);
+      if (x.stars === HATE) { hates.push(`${p.name}: 1 star on ${name('protein', protein)}`); hated.add(`protein:${protein}`); }
       s += x.pts;
     }
     s += avg(flavors.map((f) => rate('flavor', f).pts));
     s += avg(required.map((i) => {
       const x = rate('ingredient', i);
-      if (x.stars === HATE) hates.push(`${p.name}: 1 star on ${name('ingredient', i)}`);
+      if (x.stars === HATE) { hates.push(`${p.name}: 1 star on ${name('ingredient', i)}`); hated.add(`ingredient:${i}`); }
       return x.pts;
     }));
     if (WEIGHTS.veggies[tags.veggies]) s += rate('flavor', 'veggie-heavy').pts * WEIGHTS.veggies[tags.veggies];
@@ -116,11 +119,13 @@ export function scoreDish(dish, ctx) {
   if (limits.max_minutes && minutes > limits.max_minutes) {
     adjust += WEIGHTS.perStepOver * Math.ceil((minutes - limits.max_minutes) / WEIGHTS.minutesStep);
     notes.push(`Takes ${minutes} minutes; your nights are ${limits.max_minutes}`);
+    over.push('time');
     known = true;
   }
-  const over = limits.budget && tags.budget ? BUDGETS.indexOf(tags.budget) - BUDGETS.indexOf(limits.budget) : 0;
-  if (over > 0) {
-    adjust += WEIGHTS.perBudgetOver * over;
+  const pricier = limits.budget && tags.budget ? BUDGETS.indexOf(tags.budget) - BUDGETS.indexOf(limits.budget) : 0;
+  if (pricier > 0) {
+    adjust += WEIGHTS.perBudgetOver * pricier;
+    over.push('budget');
     notes.push(`${tags.budget} a serving; your budget is ${limits.budget}`);
     known = true;
   }
@@ -128,6 +133,7 @@ export function scoreDish(dish, ctx) {
   if (missing.length) {
     adjust += WEIGHTS.perMissingTool * missing.length;
     notes.push(`Needs ${andList(missing.map((t) => names.tool?.[t] ?? t).map(lower))}`);
+    over.push(...missing.map((t) => `tool:${t}`));
     known = true;
   }
   const score = avg(per) + adjust;
@@ -146,6 +152,7 @@ export function scoreDish(dish, ctx) {
     fits, score: Math.round(score * 100) / 100, low: per.length ? Math.min(...per) + adjust : adjust,
     fit, label: fit === 'none' ? NO_FIT : FITS.find(([k]) => k === fit)?.[2] ?? null,
     why: fits ? why : [], notes: [...hates, ...notes], known,
+    hated: [...hated], over,
   };
 }
 
