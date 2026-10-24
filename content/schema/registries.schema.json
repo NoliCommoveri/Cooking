@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Content registries: ingredients, equipment, skills, cuisines, units",
+  "title": "Content registries: ingredients, equipment, skills, cuisines, units, and the tastes families rate",
   "$defs": {
     "id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
     "text": { "type": "string", "minLength": 1 },
@@ -35,6 +35,13 @@
   },
   "type": "object", "additionalProperties": false,
   "properties": {
+    "tasteProteins": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "name", "ingredients"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "name": { "$ref": "#/$defs/text" }, "ingredients": { "type": "array", "items": { "$ref": "#/$defs/id" } } } } },
+    "tasteIngredients": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "name", "ingredients"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "name": { "$ref": "#/$defs/text" }, "ingredients": { "type": "array", "items": { "$ref": "#/$defs/id" } } } } },
+    "tasteFlavors": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "name", "hint", "examples"],
+      "properties": { "id": { "$ref": "#/$defs/id" }, "name": { "$ref": "#/$defs/text" }, "hint": { "$ref": "#/$defs/text" },
+        "examples": { "type": "array", "minItems": 2, "maxItems": 5, "items": { "$ref": "#/$defs/text" } } } } },
     "ingredients": { "type": "array", "items": { "$ref": "#/$defs/ingredient" } },
     "equipment": { "type": "array", "items": { "type": "object", "additionalProperties": false, "required": ["id", "name", "category", "icon"],
       "properties": { "id": { "$ref": "#/$defs/id" }, "name": { "$ref": "#/$defs/text" },

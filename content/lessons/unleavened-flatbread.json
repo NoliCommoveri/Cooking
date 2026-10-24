@@ -6,6 +6,7 @@
   "about": "Thin, crisp, cracker-like rounds made with no yeast or baking powder, the bread of the Feast of Unleavened Bread.",
   "main": ["flour", "water", "olive oil"],
   "method": "stove",
+  "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday" },
   "title": "Unleavened flatbread",
   "image": "dishes/unleavened-flatbread.png",
   "cuisine": "jewish",

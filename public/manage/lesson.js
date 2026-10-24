@@ -5,6 +5,7 @@ import { el, modal } from './dom.js';
 import { field } from './form.js';
 import { S, D, api, cur, exists, put, putPicture, page, problems, syncDish, stageLesson, pickers, lessonFile, redraw, go } from './manage.js';
 import { showValue, patchSpec } from '/lib/patch.js';
+import { tagFields } from './tags.js';
 
 // The editor's sections, in the order a lesson is written. Anything the schema
 // has that isn't named here lands in "Everything else", so a new field shows up.
@@ -19,7 +20,7 @@ const SECTIONS = [
   ['Intro slides', ['intro'], false],
 ];
 const SET_FOR_YOU = { id: 'Its name in the files; fixed once made.', version: 'Goes up on its own when steps or ingredients change.', image: 'The picture below.', unit: 'Move it on the Course page.' };
-const DISH_KEYS = ['about', 'main', 'method'];
+const DISH_KEYS = ['about', 'main', 'method', 'tags'];
 // Set by the checkbox on the dish card, not as its own field.
 const OWN_CONTROL = ['feast'];
 
@@ -127,6 +128,9 @@ export function lessonPage(id) {
         'A side, bread, or dessert (not a full meal)'),
       // Good for Feast Days (§6.19): the badge, and offered in Swap all year
       // round. An Appointed Times lesson always has it.
+      el('fieldset', { class: 'mf-obj' }, el('legend', {}, 'Tags'),
+        el('p', { class: 'mut small' }, 'The words families rate dishes by. All dishes are on the Tags page too.'),
+        tagFields(holder, () => onChange(false))),
       seasonalUnit ? null : el('label', { class: 'choice' },
         el('input', { type: 'checkbox', checked: L.feast === true, onchange: (e) => { if (e.target.checked) L.feast = true; else delete L.feast; onChange(false); } }),
         'Good for Feast Days'));

@@ -3,7 +3,7 @@
 // them), checked by the same content linter GitHub runs, and saved as one
 // commit to the repo, where the publish workflow checks it again and puts it
 // live. Routes live in the hash: #/ (the course), #/lesson/<id>, #/try/<id>, #/saves,
-// #/list/<file>, #/rules, #/fix/<id>.
+// #/list/<file>, #/rules, #/fix/<id>, #/tags.
 import { el, modal } from './dom.js';
 import { field, blank } from './form.js';
 import { lint } from '/lib/lint.js';
@@ -13,6 +13,7 @@ import { SAFETY } from '/lib/recipe.js';
 import { lessonPage, previewPage } from './lesson.js';
 import { listPage, rulesPage } from './lists.js';
 import { fixPage } from './fix.js';
+import { tagsPage, tagFields } from './tags.js';
 
 const app = document.getElementById('app');
 
@@ -294,7 +295,7 @@ function bar() {
         el('button', { class: 'hbtn', onclick: async () => { await api('POST', '/logout'); go('#/login'); } }, 'Sign out'))),
     el('nav', { class: 'mnav', 'aria-label': 'Sections' },
       tab('#/', 'Course'), tab('#/saves', 'Saves'), tab('#/list/ingredients.json', 'Ingredients'), tab('#/list/equipment.json', 'Tools'),
-      tab('#/list/skills.json', 'Skills'), tab('#/list/terms.json', 'Kitchen words'), tab('#/list/cuisines.json', 'Cuisines'), tab('#/rules', 'Food rules')),
+      tab('#/list/skills.json', 'Skills'), tab('#/list/terms.json', 'Kitchen words'), tab('#/list/cuisines.json', 'Cuisines'), tab('#/list/tastes.json', 'Tastes'), tab('#/tags', 'Tags'), tab('#/rules', 'Food rules')),
     S.github ? null : el('p', { class: 'mwarn' }, "GitHub isn't connected yet, so you can look but not save. ", el('a', { href: 'https://github.com/NoliCommoveri/Cooking/blob/main/docs/setup.md#the-manager-section', target: '_blank', rel: 'noopener' }, 'How to connect it')));
 }
 
@@ -507,7 +508,8 @@ function dishDialog(d) {
   const dish = c.dishes.find((x) => x.id === d.id);
   const holder = { dish };
   const body = el('div', {});
-  const draw = () => body.replaceChildren(field({ root: DISH_SCHEMA, onChange: (s) => { if (s) draw(); }, options: pickers() }, holder, 'dish', DISH_SCHEMA, []));
+  const draw = () => body.replaceChildren(field({ root: DISH_SCHEMA, onChange: (s) => { if (s) draw(); }, options: pickers() }, holder, 'dish', DISH_SCHEMA, []),
+    el('fieldset', { class: 'mf-obj' }, el('legend', {}, 'Tags'), tagFields(dish, () => {})));
   draw();
   const close = modal(`${d.title}: the dish card`, el('p', { class: 'mut small' }, 'What families see for this dish before its lesson is written.'), body,
     el('div', { class: 'acts' }, el('button', { class: 'hbtn', onclick: () => close() }, 'Cancel'),
@@ -598,6 +600,7 @@ route = async () => {
     if (h === '#/saves') return await savesPage();
     if ((m = h.match(/^#\/list\/([a-z]+\.json)$/))) return listPage(m[1]);
     if (h === '#/rules') return rulesPage();
+    if (h === '#/tags') return tagsPage();
     if ((m = h.match(/^#\/fix\/([0-9a-f]{16})$/))) return await fixPage(m[1]);
     return coursePage();
   } catch (err) {

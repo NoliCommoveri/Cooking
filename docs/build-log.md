@@ -3295,3 +3295,37 @@ Design only. The owner found a 4-star scale confusing: ratings are now
 5 stars (absolute favorite) to 1 (hate), or Haven't tried, and a profile has
 at most one 5-star item in each list (proteins, flavors, ingredients); a new
 5-star asks to move the old one to 4. Plan §6.21 and §8.4 updated.
+
+## 132. 2026-10-24 — Tags and tastes (slice 11a)
+
+Phase 11, slice 11a (plan §6.21): the shared words ratings, picks, and gaps
+will use. Nothing here is shown to families.
+- **`content/tastes.json`**, a new registry file: 10 proteins, 11 flavors
+  (each with a hint and example dishes, all normally made clean), and 38 key
+  ingredients. A protein or key ingredient lists the registry ingredients it
+  covers. Validated by `registries.schema.json` (`tasteProteins`,
+  `tasteFlavors`, `tasteIngredients`).
+- **Tags** (`tags` with `protein`, `flavors`, `heat`, `budget`,
+  `familiar`) on every `course.json` dish and on the two Appointed Times
+  lessons (`lesson.schema.json`). Claude drafted all 77 for the owner to
+  review. Breads and desserts use "Mild and buttery" for now.
+- **`src/content/tastes.js`** (also in `public/lib/`): the fixed levels,
+  tag checks, the key ingredients a lesson uses, and a written lesson's first
+  meat or fish.
+- **Linter:** refuses unknown tags, more than 3 flavors, a taste item naming
+  an ingredient not in the registry, and blocked words in taste names and
+  example dishes; warns when a dish is missing tags, or when a written
+  lesson's protein tag differs from its first meat or fish (eggs Benedict:
+  eggs, with turkey on top).
+- **Build:** `library-data.js` lessons carry `tags` and `tasteItems`; its
+  course list carries each dish's skills and tags; `tastes` lists the ids and
+  names.
+- **Content editor:** a **Tastes** tab (the three lists, with ingredient
+  pickers), a **Tags** tab (every dish as a card: protein, heat, budget, how
+  familiar, and up to 3 flavors; a filter for dishes still to tag), and the
+  same fields on the lesson editor's dish card and the planned-dish dialog.
+- `course.json` now uses the layout `tools/format-content.js` writes for long
+  entries (one field per line), since tagged dishes no longer fit one line.
+- Tests: 281 (5 new). Checked in a browser at phone width on the dev server:
+  the Tags page and a change staging a save, the Tastes list, and the tags on
+  Shakshuka's dish card.

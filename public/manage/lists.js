@@ -12,18 +12,23 @@ const LISTS = {
   'skills.json': [['skills', 'Skills', 'name']],
   'terms.json': [['terms', 'Kitchen words', 'word']],
   'cuisines.json': [['cuisines', 'Cuisines', 'name'], ['regions', 'Regions', 'name']],
+  'tastes.json': [['tasteProteins', 'Proteins', 'name'], ['tasteFlavors', 'Flavors', 'name'], ['tasteIngredients', 'Key ingredients', 'name']],
 };
+const TITLES = { 'tastes.json': 'Tastes' };
 const INTRO = {
   'ingredients.json': 'Every ingredient a lesson can use. Where it comes from decides whether it\'s clean: an animal has to be on the clean list (Food rules), and the checks refuse anything that isn\'t. An ingredient in use by a lesson can\'t be removed.',
   'equipment.json': 'The tools lessons list.',
   'skills.json': 'The skill pins kids earn. A lesson names the skills it teaches.',
   'terms.json': 'Kitchen words: the cooking words kids tap to learn. A word in a step that\'s on the watch list (Food rules) needs an entry here.',
   'cuisines.json': 'Cuisines, and the passport regions they belong to.',
+  'tastes.json': 'What families rate, 1 to 5 stars per person (§6.21): proteins, flavors (each with example dishes, which don\'t need a recipe here), and key ingredients. A protein or ingredient lists the registry ingredients it covers, so the app can tell which dishes use it. Dishes are tagged in the same words on the Tags page.',
 };
 const slug = (s) => String(s ?? '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 // Choices for an ingredient's animal: the clean list and the allowed products.
-function options(key) {
+function options(key, path) {
+  // A taste's ingredients (tastes.json) are registry ingredients.
+  if (typeof key === 'number' && path?.at(-2) === 'ingredients') return pickers()('ingredient');
   if (key === 'animalSource') {
     const r = cur('rules/clean-species.json');
     return [[null, '(none: not from an animal)'], ...[...new Set([...r.species, ...r.allowedProducts.map((p) => p.source)])].map((x) => [x, x])];
@@ -110,7 +115,7 @@ export function listPage(file) {
     return el('section', { class: 'card' }, el('div', { class: 'mhead' }, el('h2', {}, `${title} (${items.length})`), el('button', { class: 'hbtn small-btn', onclick: add }, '+ Add')), search, list);
   };
 
-  page(el('h1', {}, kinds[0][1]), el('p', { class: 'mut' }, INTRO[file]), checks, kinds.map(block));
+  page(el('h1', {}, TITLES[file] ?? kinds[0][1]), el('p', { class: 'mut' }, INTRO[file]), checks, kinds.map(block));
 }
 
 // ---------- the food rules ----------
