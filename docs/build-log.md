@@ -3585,3 +3585,22 @@ numbers (89 dishes).
 - Plan §4's unit tables and §6.21 updated; `tools/dish-sheets.txt` and
   `content/images/LICENSES.md` list the sheets.
 - Tests: 300.
+
+## 144. 2026-10-24 — Plan: slice 11d in four parts
+
+Design only. Slice 11d (scoring and picks, plan §6.21) is split into four
+parts, as a recommendation waiting on the owner:
+- **11d1 Scoring and default picks:** `src/content/score.js` with draft
+  weights; limits rule a version out (lesson summaries gain their tools);
+  the best version plays by default when the family hasn't picked one; a new
+  course keeps the best dish in each pick-one group; the plan editor shows
+  each dish's fit and has a Suggest picks button. Saved plans don't change.
+- **11d2:** Best for them at the top of Add a lesson; best fit first inside
+  Swap's existing order; Chef Ruth's "What should we cook?"; a hated
+  optional ingredient left out of the player and shopping list.
+- **11d3:** `taste_learned`, rebuilt from a profile's reflections each time
+  one is saved, so an edited reflection isn't counted twice.
+- **11d4:** the kid's taste quiz in the kitchen; the ratings API takes a
+  kid's own session for its own ratings.
+- No written lesson uses mushrooms, so the phase's done-when is tested with
+  a made-up lesson until a mushroom dish is written.
