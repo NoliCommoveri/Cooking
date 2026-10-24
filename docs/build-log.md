@@ -4029,3 +4029,10 @@ rules. Behind the Next release switch.
 - Tests: 341 (3 new in `test/worker-levels.test.js`; the earlier Level
   tests ask for every week's own recipe). Checked in a browser at phone
   width: a new course's picks, Change, Swap recipe, and the edit page.
+
+## 164. 2026-10-24 — A flaky shopping test fixed
+
+The PR's GitHub check failed once and passed on its re-run of the same
+commit: `test/worker-shopping.test.js` queued two lessons back to back, and
+when both got the same millisecond their order came down to their random ids.
+The test now waits a few milliseconds between them. No app changes.
