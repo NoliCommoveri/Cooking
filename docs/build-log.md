@@ -4300,3 +4300,13 @@ order, so these two recipes were written.
 - Tests: the kitchen test expects week 1's new knowledge title. (The first
   push of this entry missed it and failed that one test; the follow-up commit
   fixed it.)
+
+## 177. 2026-10-24 — Leftover times by kind of food
+
+- Owner, 2026-10-24: many leftovers keep a week. Week 1's labeling page and
+  the two leftover quiz questions (weeks 1 and 4) now give the USDA's 3 to 4
+  days for cooked meat, poultry, soups, and stews, say many other leftovers
+  keep longer and hard-cooked eggs keep a week, and leave the limits to the
+  family. The review doc has the same text.
+- Open for the owner: what the Sabbath task part becomes (it teaches
+  Sabbath practice, which families keep differently).

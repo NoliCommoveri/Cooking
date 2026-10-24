@@ -9020,7 +9020,7 @@ export const LIBRARY = {
       "minutes": 45,
       "body": [
        "Sabbath cooking means food made ahead and stored. Labels tell everyone what a container holds and when it was made, so nothing gets eaten past its time or forgotten in the back.",
-       "The USDA guideline is 3 to 4 days in the fridge for most cooked leftovers. Many families keep some foods closer to a week. Quality drops and risk climbs with each day, mostly because Listeria can grow even at fridge temperatures. Your family decides its own limit; the date on the label is what lets you apply it.",
+       "The USDA guideline is 3 to 4 days in the fridge for cooked meat, poultry, soups, and stews. Many other leftovers keep longer, and hard-cooked eggs keep a week. Risk still climbs with time, because Listeria can grow at fridge temperatures and smell won't reveal it. Your family decides its own limits; the date on the label is what lets you apply them.",
        "Frozen food stays safe indefinitely at 0°F, though it tastes best within 2 to 3 months."
       ],
       "steps": [
@@ -9032,14 +9032,14 @@ export const LIBRARY = {
       ],
       "quiz": [
        {
-        "q": "What is the USDA guideline for most cooked leftovers in the fridge?",
+        "q": "What is the USDA guideline for cooked meat and poultry leftovers in the fridge?",
         "choices": [
          "3 to 4 days",
          "2 weeks",
          "1 day"
         ],
         "answer": 0,
-        "explain": "Many families go longer for some foods, but this is the official guideline."
+        "explain": "Other foods vary: many keep longer, and hard-cooked eggs keep a week."
        },
        {
         "q": "Why can't you judge old leftovers by smell?",
@@ -9463,14 +9463,14 @@ export const LIBRARY = {
         "explain": "Measured in the center."
        },
        {
-        "q": "What is the USDA guideline for most cooked leftovers in the fridge?",
+        "q": "What is the USDA guideline for cooked meat and poultry leftovers in the fridge?",
         "choices": [
          "3 to 4 days",
          "2 weeks",
          "1 month"
         ],
         "answer": 0,
-        "explain": "Risk rises each day after, because Listeria grows even in the fridge."
+        "explain": "Many other leftovers keep longer, but risk still rises with time, because Listeria grows even in the fridge."
        },
        {
         "q": "Rice sat out warm all afternoon. What do you do?",
