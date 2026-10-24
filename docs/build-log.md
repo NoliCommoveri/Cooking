@@ -4224,3 +4224,38 @@ order, so these two recipes were written.
   parchment packets, the new recipes' lessons, the fixes inside planned
   lessons, and weeks 35 and 36 picking their dishes. The review's Next
   session lists them.
+
+## 174. 2026-10-24 — Level 3 Unit 1 content (slice 12f)
+
+- Owner, 2026-10-24: 12f for Unit 1 only, for now.
+- **Meatloaf with glaze** (`content/lessons/meatloaf.json`), week 4's mastery
+  recipe and a Cook Around the World lesson: rolled oats soaked in milk and
+  egg bind the loaf, glazed twice, checked at 160°F in the center, rested.
+  Oats keep it unleavened, with gluten-free oats as the swap. Its card's
+  minutes are no longer an estimate, and its main ingredients say rolled oats.
+  **Turkey meatloaf with glaze** is its variation, to 165°F.
+- **Thick beef burgers** (`content/levels/recipes/thick-burgers.json`), week
+  2's recipe, Level only: thick patties with a dimple, seared on medium-high,
+  flipped once, each checked from the side at 160°F. Its card's minutes are
+  the lesson's.
+- **Easy-prep Level versions** (variations, shown to every family): Shakshuka
+  and Chicken fried rice use jarred minced garlic; in Chicken fried rice and
+  Oyakodon a grown-up cuts the raw chicken (adult hands-on), and Oyakodon's
+  onion is chopped; Smash burgers' pickles and onion are optional.
+- New ingredients: rolled oats, gluten-free rolled oats, jarred minced garlic.
+- **Weeks 1–4's twelve part pages** in `level-3.json`, each with a body, steps,
+  and a quiz, for the owner to review: calibrating a thermometer (with the
+  knife-safety quick review), the danger zone, labeling, thick vs. thin
+  patties, the safe temperatures chart, an ice bath, cooling rice for the
+  fried rice, cross-contamination, storing for the Sabbath, a clean station,
+  the unit quiz, and reheating to 165°F.
+- **Cuban black beans and rice** (owner, 2026-10-24) joins Cook Around the
+  World's dried beans and lentils group. Not moved yet: a course dish needs
+  its picture, `content/images/dishes/cuban-black-beans.png`, which isn't
+  made. Its card stays in `level-3.json` until then.
+- **Not served yet:** lessons in `content/levels/recipes/` are linted but not
+  built into the app's library, so Thick beef burgers isn't cookable and week
+  2 still waits as being written. That needs a build: Level-only lessons in
+  the library for families with the next release.
+- Tests: a new Level course schedules 4 written recipes (Meatloaf is
+  written), with 32 waiting; the Level-lesson lint test sets its own minutes.

@@ -1572,30 +1572,7 @@
       }
     },
     { "id": "granola", "title": "Homemade granola", "unit": 6, "cuisine": "american", "skills": ["oven-browning"], "skill": "Oven browning, stirring partway", "image": "dishes/granola.png", "safety": "adult-nearby", "minutes": 50, "estimated": true, "about": "Crunchy oven-toasted oats, nuts, and honey. A breakfast dish.", "main": ["rolled oats", "nuts or seeds", "honey", "oil", "dried fruit"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
-    {
-      "id": "meatloaf",
-      "title": "Meatloaf with glaze",
-      "unit": 6,
-      "cuisine": "american",
-      "skills": ["binders", "temping-meat"],
-      "skill": "Binders, thermometer",
-      "image": "dishes/meatloaf.png",
-      "safety": "adult-nearby",
-      "minutes": 90,
-      "estimated": true,
-      "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.",
-      "main": ["ground beef", "onion", "eggs", "breadcrumbs", "ketchup"],
-      "method": "oven",
-      "tags": {
-        "protein": "beef",
-        "flavors": ["sweet-savory", "mild-buttery"],
-        "heat": "mild",
-        "budget": "$$",
-        "familiar": "everyday",
-        "veggies": "light"
-      },
-      "pickOne": "binders"
-    },
+    { "id": "meatloaf", "title": "Meatloaf with glaze", "unit": 6, "cuisine": "american", "skills": ["binders", "temping-meat"], "skill": "Binders, thermometer", "image": "dishes/meatloaf.png", "safety": "adult-nearby", "minutes": 90, "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.", "main": ["ground beef", "onion", "eggs", "rolled oats", "ketchup"], "method": "oven", "tags": { "protein": "beef", "flavors": ["sweet-savory", "mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" }, "pickOne": "binders" },
     {
       "id": "lamb-kofta",
       "title": "Lamb kofta with yogurt sauce",

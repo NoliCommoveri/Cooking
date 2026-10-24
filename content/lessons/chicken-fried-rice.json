@@ -88,5 +88,57 @@
     { "id": "rice-in", "text": "Push everything to the sides, add the rest of the oil in the middle, and add the rice. Spread it flat and leave it for a minute, then toss everything together and spread it flat again. Keep going until the rice is hot and a little toasty.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 240, "timerLabel": "Fry rice", "why": "press-wait", "look": "The grains are separate and hot, and some are golden and crisp." },
     { "id": "finish", "text": "Pour the soy sauce around the edge of the pan so it sizzles, then add the sesame oil, the eggs, and the green parts of the onions. Toss for a minute until everything is mixed and the eggs are hot again.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 60, "timerLabel": "Toss", "tip": "Soy sauce poured around the hot edge sizzles and toasts. Poured in the middle, it just makes one soggy spot." },
     { "id": "serve", "text": "Turn off the stove. Taste a spoonful, after letting it cool, and add a splash more soy sauce if it needs it. Serve hot.", "safety": "adult-nearby", "hazard": "Hot pan" }
+  ],
+  "variations": [
+    {
+      "id": "easy-prep",
+      "title": "Easy-prep chicken fried rice",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["ginger-soy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "ingredients": {
+        "drop": ["garlic@Vegetables"],
+        "add": [{ "ingredient": "garlic-minced-jarred", "amount": 1.5, "unit": "tsp", "group": "Vegetables" }],
+        "order": [
+          "rice-white@Rice",
+          "chicken-breast@Chicken and egg",
+          "salt@Chicken and egg",
+          "black-pepper@Chicken and egg",
+          "egg@Chicken and egg",
+          "green-onion@Vegetables",
+          "+0",
+          "peas-carrots-frozen@Vegetables",
+          "vegetable-oil@For the pan",
+          "soy-sauce@Sauce",
+          "sesame-oil@Sauce"
+        ]
+      },
+      "steps": {
+        "change": {
+          "vegetables": {
+            "id": "vegetables",
+            "text": "Slice the green onions into thin rings, keeping the white parts and the green parts in two piles. Measure out the jarred garlic and the frozen peas and carrots.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "ready",
+            "tip": "Line everything up next to the stove in the order it goes in."
+          },
+          "dice-chicken": {
+            "id": "dice-chicken",
+            "text": "A grown-up dices the chicken into small cubes, about ½ inch, and puts them in the small bowl. Sprinkle them with {qty:salt} salt and the pepper.",
+            "safety": "adult-hands-on",
+            "hazard": "Sharp knife, raw chicken",
+            "handles": ["chicken-breast"],
+            "why": "small-pieces",
+            "tip": "Watch how the chicken is cut: planks, then sticks, then cubes. You'll cut raw chicken yourself later in the course."
+          }
+        }
+      }
+    }
   ]
 }

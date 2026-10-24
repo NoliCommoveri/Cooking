@@ -1,0 +1,84 @@
+{
+  "id": "thick-burgers",
+  "version": 1,
+  "track": "core",
+  "unit": 100,
+  "title": "Thick beef burgers",
+  "image": "meals/meat.svg",
+  "cuisine": "american",
+  "skill": "Checking ground beef reaches 160°F",
+  "skills": ["temping-meat", "searing"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 40,
+  "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+      { "from": 5, "text": "Cook 4 patties at a time in a 12-inch skillet. For more than 4, keep the first batch warm on a plate under foil, and wash the tongs and your hands after each batch of raw beef." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Thick burger, safe middle",
+      "body": "A thick burger has a lot of beef between its two browned sides, and the middle is the last part to get hot. Today you'll shape thick patties, sear them in a skillet, and check the middle with a thermometer until it reaches 160°F, the safe temperature for ground beef."
+    },
+    "callback": {
+      "lesson": "smash-burgers",
+      "body": "Smash burgers are thin, so they cook through in the time it takes to brown them. A thick patty needs the heat a little lower and a few more minutes, or the outside burns before the middle is safe. That's why this burger gets a thermometer check every time."
+    },
+    "why": [
+      { "id": "dimple", "title": "A dimple in the middle", "body": "As a patty cooks, its edges tighten and push the middle up into a dome. Pressing a shallow dent in the center before cooking means it puffs up flat instead, so it cooks evenly and sits flat on the bun." },
+      { "id": "medium-high", "title": "Not too hot", "body": "A very hot pan browns the outside fast. That's fine for a thin patty, but a thick one would burn on the outside before its middle got hot. Medium-high heat browns the outside while the middle catches up." },
+      { "id": "leave-it", "title": "Leave it alone", "body": "A patty sticks to the pan at first, then lets go once a brown crust forms. Moving or pressing it tears the crust and squeezes out the juices. Flip once, when the timer says, and don't press down with the spatula." },
+      { "id": "from-side", "title": "Check from the side", "body": "The tip of the thermometer is where it reads. Pushed in from the top, the tip can go right through a burger into the hot pan. Slide it in from the side instead, so the tip sits in the very middle, the last part to get hot." }
+    ],
+    "wrong": [
+      { "sign": "The outside is burnt but the middle reads under 160°F", "fix": "Turn the heat down to medium, flip, and keep cooking, checking every minute. Next batch, start a little lower." },
+      { "sign": "The patty shrank into a thick ball", "fix": "Shape the next ones a little wider than the bun and press a deeper dimple in the middle." },
+      { "sign": "The patty broke when you flipped it", "fix": "It wasn't ready. Wait until the bottom is browned and lets go of the pan before you flip." },
+      { "sign": "Two patties read different temperatures", "fix": "Patties are never all the same size. Check each one, and keep cooking the ones that aren't at 160°F yet." }
+    ],
+    "quiz": [
+      { "q": "Where does the thermometer go in a thick burger?", "choices": ["In from the side, with the tip in the middle", "Straight down from the top until it touches the pan", "Just under the crust"], "answer": 0, "explain": "The middle is the last part to get hot, so the tip goes there. From the side, it can't poke through into the pan." },
+      { "q": "Why does a thick burger cook on medium-high, not the highest heat?", "choices": ["So the outside doesn't burn before the middle is safe", "So it doesn't stick", "So the cheese melts"], "answer": 0, "explain": "A thick patty needs time for heat to reach the middle. Very high heat would burn the outside first." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "beef-ground", "amount": 1.5, "unit": "lb", "group": "Burgers" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Burgers" },
+    { "ingredient": "black-pepper", "amount": 0.5, "unit": "tsp", "group": "Burgers" },
+    { "ingredient": "vegetable-oil", "amount": 1, "unit": "tsp", "scale": false, "group": "For the pan" },
+    { "ingredient": "cheese-sliced", "amount": 4, "unit": "count", "round": "up", "optional": true, "group": "Burgers" },
+    { "ingredient": "burger-buns", "amount": 4, "unit": "count", "round": "up", "group": "To serve" },
+    { "ingredient": "tomato", "amount": 1, "unit": "count", "round": "up", "group": "To serve" },
+    { "ingredient": "lettuce-green-leaf", "amount": 1, "unit": "count", "round": "up", "group": "To serve" },
+    { "ingredient": "ketchup", "amount": 0.25, "unit": "cup", "optional": true, "group": "To serve" },
+    { "ingredient": "mustard-dijon", "amount": 2, "unit": "tbsp", "optional": true, "group": "To serve" }
+  ],
+  "substitutions": [{ "for": "burger-buns", "use": "buns-gluten-free", "reason": "gluten" }],
+  "equipment": [
+    "cutting-board",
+    "chef-knife",
+    "plate",
+    "measuring-spoons",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "thermometer"
+  ],
+  "steps": [
+    { "id": "toppings", "text": "Slice the tomato into rounds. Pull off a lettuce leaf for each burger, rinse them, and pat them dry. Open the buns.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Get everything ready now. Once the burgers start, you'll be busy at the stove." },
+    { "id": "shape", "text": "Divide the beef into {n:burger-buns} even pieces. Shape each one into a patty about ¾ inch thick and a little wider than a bun. Press a shallow dent in the middle of each with your thumb. Set them on the plate and sprinkle both sides with {qty:salt} salt and {qty:black-pepper} pepper.", "safety": "solo", "hazard": "Raw meat", "handles": ["beef-ground"], "why": "dimple", "tip": "Handle the beef gently. Pat it into shape instead of squeezing." },
+    { "id": "wash-shape", "type": "wash", "text": "Wash your hands with soap, and wipe anything the raw beef or its package touched.", "safety": "solo", "hazard": "Raw meat", "tip": "Raw beef can carry germs. Wash before you touch the buns or anything else." },
+    { "id": "toast-buns", "text": "Heat the skillet over medium heat. Lay the buns in it, cut side down, until golden, then move them to the serving plates.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 60, "timerLabel": "Toast buns" },
+    { "id": "heat", "text": "Turn the heat up to medium-high. Add the oil and spread it around.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 90, "timerLabel": "Heat pan", "why": "medium-high", "look": "The oil shimmers, but isn't smoking." },
+    { "id": "add", "text": "Use the tongs to lay the patties in the pan, dent side up, with space between them.", "safety": "adult-nearby", "hazard": "Hot pan, spatter", "handles": ["beef-ground"], "tip": "Lay each one down away from you, so any spatter goes the other way." },
+    { "id": "wash-add", "type": "wash", "text": "Wash the tongs in hot, soapy water, and wash your hands. Put the raw-beef plate in the sink.", "safety": "adult-nearby", "hazard": "Hot stove" },
+    { "id": "sear", "text": "Leave the patties alone while the first side browns. Don't press them.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 240, "timerLabel": "First side", "why": "leave-it", "look": "The bottom edges are deep brown, and the sides are turning gray partway up." },
+    { "id": "flip", "text": "Slide the spatula under each patty and flip it once. Cook the second side.", "safety": "adult-nearby", "hazard": "Hot pan, spatter", "timerSeconds": 180, "timerLabel": "Second side", "why": "leave-it" },
+    { "id": "cheese", "text": "Lay a slice of cheese on each patty if you're using it, and cook 1 more minute.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 60, "timerLabel": "Cheese melts", "look": "The cheese is soft and starting to melt." },
+    { "id": "check", "type": "doneness", "text": "Slide the thermometer into the side of each patty so the tip is in the very middle. Each one needs to read at least 160°F. If one doesn't, cook it 1 more minute and check again.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 160, "unit": "F" }, "why": "from-side", "tip": "Wipe the thermometer tip between patties." },
+    { "id": "serve", "text": "Turn off the stove. Move each patty to a bottom bun with the spatula. Add lettuce and tomato, ketchup or mustard if you're using them, and the top bun.", "safety": "adult-nearby", "hazard": "Hot pan" }
+  ]
+}

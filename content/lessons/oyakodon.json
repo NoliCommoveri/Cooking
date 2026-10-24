@@ -90,5 +90,50 @@
     { "id": "eggs-in", "text": "Turn the heat to low. Pour the eggs over the chicken in a slow circle, starting in the middle and spiraling out. Don't stir. Put the lid on.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 180, "timerLabel": "Set eggs", "why": "lid", "look": "The egg is soft but set, with no clear, runny parts." },
     { "id": "check-eggs", "type": "doneness", "text": "Slide the thermometer sideways into the thickest part of the egg. It needs to read at least 160°F. If it doesn't, cover it again for 1 more minute and check again.", "safety": "adult-nearby", "hazard": "Hot stove", "target": { "temp": 160, "unit": "F" } },
     { "id": "serve", "text": "Turn off the stove. Fluff the rice and spoon it into bowls. Cut the egg and chicken into portions with the wooden spoon and slide one onto each bowl with some broth. Sprinkle with green onions.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "Use the ladle to add a little extra broth to each bowl. The rice soaks it up." }
+  ],
+  "variations": [
+    {
+      "id": "easy-prep",
+      "title": "Easy-prep oyakodon",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["ginger-soy", "sweet-savory"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "ingredients": {
+        "change": {
+          "onion-yellow@Chicken and broth": {
+            "ingredient": "onion-yellow",
+            "amount": 1,
+            "unit": "count",
+            "round": "up",
+            "prep": "chopped",
+            "group": "Chicken and broth"
+          }
+        }
+      },
+      "steps": {
+        "change": {
+          "onion": {
+            "id": "onion",
+            "text": "Cut the onion in half through the root and peel it. Chop it into small pieces.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "tip": "Lay each half flat side down so it can't roll, and keep your other hand in a claw."
+          },
+          "cut-chicken": {
+            "id": "cut-chicken",
+            "text": "A grown-up cuts the chicken into bite-size pieces, about 1 inch, and leaves them on the cutting board.",
+            "safety": "adult-hands-on",
+            "hazard": "Sharp knife, raw chicken",
+            "handles": ["chicken-thigh"],
+            "tip": "You'll cut raw chicken yourself later in the course."
+          }
+        }
+      }
+    }
   ]
 }

@@ -276,6 +276,119 @@
           ]
         }
       }
+    },
+    {
+      "id": "easy-prep",
+      "title": "Easy-prep smash burgers",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["tangy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "ingredients": {
+        "change": {
+          "cucumber@Quick pickles": {
+            "ingredient": "cucumber",
+            "amount": 2,
+            "unit": "count",
+            "round": "up",
+            "group": "Quick pickles",
+            "optional": true
+          },
+          "vinegar-white@Quick pickles": {
+            "ingredient": "vinegar-white",
+            "amount": 0.75,
+            "unit": "cup",
+            "group": "Quick pickles",
+            "optional": true
+          },
+          "water@Quick pickles": {
+            "ingredient": "water",
+            "amount": 0.75,
+            "unit": "cup",
+            "group": "Quick pickles",
+            "optional": true
+          },
+          "sugar@Quick pickles": {
+            "ingredient": "sugar",
+            "amount": 2,
+            "unit": "tbsp",
+            "group": "Quick pickles",
+            "optional": true
+          },
+          "salt@Quick pickles": {
+            "ingredient": "salt",
+            "amount": 1.5,
+            "unit": "tsp",
+            "group": "Quick pickles",
+            "optional": true
+          },
+          "onion-yellow@Burgers": {
+            "ingredient": "onion-yellow",
+            "amount": 1,
+            "unit": "count",
+            "round": "up",
+            "group": "Burgers",
+            "optional": true
+          }
+        }
+      },
+      "steps": {
+        "change": {
+          "cucumber-slice": {
+            "id": "cucumber-slice",
+            "text": "If you're making the pickles: cut the ends off the cucumbers. Slice them into rounds, about as thick as a coin. Put them in the medium bowl.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "thin-even",
+            "tip": "Hold the food with your hand shaped like a claw: fingertips tucked under, knuckles in front. Slide your claw back a little after each slice."
+          },
+          "brine": {
+            "id": "brine",
+            "text": "If you're making the pickles: in the saucepan, stir together the vinegar, water, sugar, and {qty:salt} salt. Warm it over medium heat, stirring, just until the sugar and salt disappear. Don't let it boil.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove",
+            "timerSeconds": 180,
+            "timerLabel": "Warm brine",
+            "look": "Clear liquid with no grains of sugar or salt on the bottom."
+          },
+          "pickle": {
+            "id": "pickle",
+            "text": "If you're making the pickles: turn off the stove. Carefully pour the warm brine over the cucumbers and press them down so they're covered. Put the bowl in the fridge.",
+            "safety": "adult-nearby",
+            "hazard": "Hot liquid",
+            "timerSeconds": 1800,
+            "timerLabel": "Quick pickles",
+            "why": "brine",
+            "tip": "Make the burgers while they pickle. Leftover pickles keep in a covered jar in the fridge for about a week."
+          },
+          "onion-slice": {
+            "id": "onion-slice",
+            "text": "If you're using onion: cut it in half through the root and peel it. Lay each half flat side down and slice it as thin as you can, from end to end.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "thin-even",
+            "look": "Slices so thin you can almost see through them."
+          },
+          "smash-first": {
+            "id": "smash-first",
+            "text": "Lay a parchment square on one ball. Press down hard with the flat spatula until the patty is very thin, about as thin as a cracker, then peel off the paper. Smash the others the same way. Scatter a few onion slices on each if you're using them.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan, spatter",
+            "why": "smash",
+            "tip": "Use both hands on the spatula, and lean on it. Keep your arms out of the way of any spatter."
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Top each burger with pickles from the bowl if you made them, plus lettuce, ketchup, or mustard if you're using them, and the top bun.",
+            "safety": "solo",
+            "tip": "Lift the pickles out with a fork and let the brine drip off first."
+          }
+        }
+      }
     }
   ]
 }
