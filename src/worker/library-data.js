@@ -5757,6 +5757,93 @@ export const LIBRARY = {
     "spatula",
     "cooling-rack"
    ]
+  },
+  {
+   "id": "thick-burgers",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Thick beef burgers",
+   "image": "img/meals/meat.svg",
+   "cuisine": "american",
+   "skill": "Checking ground beef reaches 160°F",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 5,
+      "text": "Cook 4 patties at a time in a 12-inch skillet. For more than 4, keep the first batch warm on a plate under foil, and wash the tongs and your hands after each batch of raw beef."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "cheese-sliced",
+     "optional": true
+    },
+    {
+     "ingredient": "burger-buns"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "lettuce-green-leaf"
+    },
+    {
+     "ingredient": "ketchup",
+     "optional": true
+    },
+    {
+     "ingredient": "mustard-dijon",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "burger-buns",
+     "use": "buns-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes"
+    ],
+    "optional": [
+     "mustard"
+    ]
+   },
+   "tools": [
+    "cutting-board",
+    "chef-knife",
+    "plate",
+    "measuring-spoons",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "thermometer"
+   ],
+   "level": "level-3"
   }
  ],
  "ingredients": {
@@ -6528,6 +6615,9 @@ export const LIBRARY = {
  "seasonalLabels": {
   "unleavened-flatbread": "A1",
   "cottage-cheese-crescents": "A2"
+ },
+ "levelLabels": {
+  "thick-burgers": "L1"
  },
  "dietTags": [
   "nuts",
@@ -8869,42 +8959,56 @@ export const LIBRARY = {
    "id": "level-3",
    "name": "Level 3 Cook",
    "hours": 125,
+   "side": {
+    "number": 100,
+    "name": "Level 3 recipes",
+    "prefix": "L"
+   },
    "units": [
     {
      "number": 1,
-     "name": "Food safety science"
+     "name": "Food safety science",
+     "goal": "Uses a thermometer, knows the danger zone (40–140°F), and cools and reheats food safely"
     },
     {
      "number": 2,
-     "name": "Yeast dough"
+     "name": "Yeast dough",
+     "goal": "Mixes, kneads, proofs, shapes, and bakes a yeast dough, and judges when it's done"
     },
     {
      "number": 3,
-     "name": "Classic knife cuts and honing"
+     "name": "Classic knife cuts and honing",
+     "goal": "Holds and hones a chef's knife; even dice, mince, and julienne"
     },
     {
      "number": 4,
-     "name": "Sautéing and aromatic bases"
+     "name": "Sautéing and aromatic bases",
+     "goal": "Controls pan heat, sweats vs. browns aromatics, deglazes"
     },
     {
      "number": 5,
-     "name": "Legumes and grains"
+     "name": "Legumes and grains",
+     "goal": "Soaks and cooks dried beans and lentils; grains by absorption and pilaf"
     },
     {
      "number": 6,
-     "name": "Fish"
+     "name": "Fish",
+     "goal": "Identifies clean fish by fins and scales, judges freshness, cooks fish gently until it flakes"
     },
     {
      "number": 7,
-     "name": "Poultry and roasting"
+     "name": "Poultry and roasting",
+     "goal": "Handles raw poultry safely, roasts to 165°F, roasts vegetables evenly"
     },
     {
      "number": 8,
-     "name": "Stock and soup"
+     "name": "Stock and soup",
+     "goal": "Makes a clear stock from bones or vegetables and builds a soup from it"
     },
     {
      "number": 9,
-     "name": "Balancing flavor and Sabbath capstone"
+     "name": "Balancing flavor and Sabbath capstone",
+     "goal": "Tastes and corrects salt, acid, fat, and heat; plans and cooks a full Sabbath meal ahead and reheats it safely"
     }
    ],
    "weeks": [
@@ -10166,6 +10270,8 @@ export const LIBRARY = {
      "week": 35,
      "unit": 9,
      "kind": "practice",
+     "minutes": 150,
+     "note": "Practice run of one capstone dish",
      "drill": {
       "title": "Taste and adjust without a recipe",
       "minutes": 40
@@ -10183,6 +10289,8 @@ export const LIBRARY = {
      "week": 36,
      "unit": 9,
      "kind": "capstone",
+     "minutes": 300,
+     "note": "A full Sabbath meal made ahead: main, side, bread, and salad, with soup as a choice",
      "drill": {
       "title": "Shop and do Thursday prep",
       "minutes": 40

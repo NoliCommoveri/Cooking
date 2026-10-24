@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import { makeEnv, family } from './helpers/worker.js';
 import { setPreview } from '../src/worker/release.js';
 import { weekOf, addDays } from '../src/worker/schedule.js';
+import { LIBRARY } from '../src/worker/library-data.js';
 
 const today = new Date().toISOString().slice(0, 10);
 const sunday = weekOf(today);
@@ -56,10 +57,10 @@ test('a Level course: one week a week, its recipes in week order, "Week 1 of 36"
   const q = await card(a);
   assert.deepEqual([q.level.id, q.level.name, q.level.weeks, q.level.week], ['level-3', 'Level 3 Cook', 36, 1]);
   assert.deepEqual(q.this_week.lessons.map((x) => [x.lesson_id, x.label]), [['shakshuka', 'Week 1']]);
-  // Thick burgers (week 2) is a Level-only lesson, not served to the app yet, so week 3's recipe is next, like a planned dish (§6.18).
-  assert.deepEqual(q.next_week.lessons.map((x) => [x.lesson_id, x.label]), [['chicken-fried-rice', 'Week 3']]);
-  assert.equal(q.total, 4, 'the written recipes are scheduled');
-  assert.equal(q.unwritten, 32, 'the rest wait, the weeks with no recipe too');
+  // Thick burgers (week 2) is a Level-only lesson, served with the next release (§12.4).
+  assert.deepEqual(q.next_week.lessons.map((x) => [x.lesson_id, x.label]), [['thick-burgers', 'Week 2']]);
+  assert.equal(q.total, 5, 'the written recipes are scheduled');
+  assert.equal(q.unwritten, 31, 'the rest wait, the weeks with no recipe too');
   // Its week's recipe is queued for the course's profiles.
   const mine = (await a.get(`/api/profiles/${ava}/queue`)).body;
   assert.deepEqual(mine.items.map((x) => x.lesson_id), ['shakshuka']);
@@ -77,7 +78,7 @@ test('a week is done when its recipe is cooked; an uncooked one rolls over', asy
   assert.equal((await finish(a, '00000000000012b1', 'shakshuka', [ben])).status, 200);
   q = await card(a);
   assert.deepEqual(q.this_week.lessons.map((x) => [x.lesson_id, x.done]), [['shakshuka', true]]);
-  assert.deepEqual(q.next_week.lessons.map((x) => x.lesson_id), ['chicken-fried-rice']);
+  assert.deepEqual(q.next_week.lessons.map((x) => x.lesson_id), ['thick-burgers']);
   assert.equal(q.done, 1);
 });
 
@@ -87,8 +88,8 @@ test('Skip this recipe and Skip this week work on a Level course, with their und
   assert.equal((await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: 'beef-bulgogi' })).status, 400, 'not one of its weeks');
   await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: 'shakshuka' });
   let q = await card(a);
-  assert.deepEqual(q.this_week.lessons.map((x) => x.lesson_id), ['chicken-fried-rice']);
-  assert.equal(q.level.week, 3);
+  assert.deepEqual(q.this_week.lessons.map((x) => x.lesson_id), ['thick-burgers']);
+  assert.equal(q.level.week, 2);
   assert.deepEqual(q.skipped_recipes, [{ lesson_id: 'shakshuka', title: 'Shakshuka', week: 1 }]);
   await a.post(`/api/courses/${id}/put-back-recipe`, { lesson_id: 'shakshuka' });
   q = await card(a);
@@ -121,6 +122,22 @@ test('a Level course waits out of sight while the next release is off, and comes
   assert.equal((await card(a)).level.week, 1);
 });
 
+test("a Level's own recipes are in the library with the next release only, in their own unit", async () => {
+  const { env, a, ava, fid } = await setup();
+  let lib = (await a.get('/api/library')).body;
+  const burgers = lib.lessons.find((L) => L.id === 'thick-burgers');
+  assert.deepEqual([burgers?.unit, burgers?.label, lib.units[100], lib.level_units], [100, 'L1', 'Level 3 recipes', [100]]);
+  assert.ok((await a.get('/api/queue')).body.library.some((L) => L.id === 'thick-burgers'), 'a parent can queue it');
+  assert.equal((await a.post('/api/queue', { lesson_id: 'thick-burgers', profile_ids: [ava] })).status, 200);
+
+  await setPreview(env.DB, fid, false);
+  lib = (await a.get('/api/library')).body;
+  assert.ok(!lib.lessons.some((L) => L.id === 'thick-burgers'));
+  assert.deepEqual([lib.units[100], lib.level_units, lib.labels['thick-burgers']], [undefined, [], undefined]);
+  assert.ok(!(await a.get('/api/queue')).body.library.some((L) => L.id === 'thick-burgers'));
+  assert.equal((await a.post('/api/queue', { lesson_id: 'thick-burgers', profile_ids: [ava] })).status, 400);
+});
+
 // ---------- 12c: the kitchen's Level week ----------
 
 const saturday = new Date().getUTCDay() === 6;
@@ -142,7 +159,7 @@ test("the kitchen shows this week's recipe and three parts, and the mastery reci
   assert.equal(lv.week.week, 1);
   assert.deepEqual([lv.week.unit_name, lv.week.recipe, lv.week.recipe_written, lv.week.recipe_done], ['Food safety science', 'shakshuka', true, false]);
   assert.deepEqual(lv.week.parts.map((x) => [x.part, x.title, x.minutes, x.done_at]), [
-    ['drill', 'Calibrate a thermometer in ice water', 40, null], ['knowledge', 'Danger zone and how microorganisms grow', 35, null], ['sabbath', 'Label and date containers', 45, null]]);
+    ['knowledge', 'Danger zone and how microorganisms grow', 35, null], ['drill', 'Calibrate a thermometer in ice water', 40, null], ['sabbath', 'Label and date containers', 45, null]]);
   assert.ok(lv.mastery.includes('minestrone') && lv.mastery.includes('meatloaf') && !lv.mastery.includes('shakshuka'));
   assert.equal(lv.sabbath, saturday);
   assert.deepEqual(lv.open, []);
@@ -153,17 +170,17 @@ test('a part is checked off per profile; the parent takes it back, with Undo', a
   const { id } = (await level(a, [ava, ben])).body;
   assert.equal((await a.put(`/api/profiles/${ava}/level-tasks`, { week: 1, part: 'lunch' })).status, saturday ? 409 : 400);
   await checkOff(env, a, ava, 1, 'drill');
-  assert.ok((await kitchen(a, ava)).week.parts[0].done_at);
-  assert.equal((await kitchen(a, ben)).week.parts[0].done_at, null, 'each profile checks off its own');
+  assert.ok((await kitchen(a, ava)).week.parts.find((x) => x.part === 'drill').done_at);
+  assert.equal((await kitchen(a, ben)).week.parts.find((x) => x.part === 'drill').done_at, null, 'each profile checks off its own');
   let parts = (await card(a)).level.parts;
-  assert.deepEqual(parts.map((x) => x.done), [[ava], [], []]);
+  assert.deepEqual(parts.map((x) => [x.part, x.done]), [['knowledge', []], ['drill', [ava]], ['sabbath', []]]);
 
   const body = { week: 1, part: 'drill', profile_id: ava };
   assert.equal((await a.post(`/api/courses/${id}/level-tasks/take-back`, body)).status, 200);
-  assert.deepEqual((await card(a)).level.parts[0].done, []);
-  assert.equal((await kitchen(a, ava)).week.parts[0].done_at, null);
+  assert.deepEqual((await card(a)).level.parts.find((x) => x.part === 'drill').done, []);
+  assert.equal((await kitchen(a, ava)).week.parts.find((x) => x.part === 'drill').done_at, null);
   assert.equal((await a.post(`/api/courses/${id}/level-tasks/put-back`, body)).status, 200);
-  assert.deepEqual((await card(a)).level.parts[0].done, [ava]);
+  assert.deepEqual((await card(a)).level.parts.find((x) => x.part === 'drill').done, [ava]);
   assert.equal((await a.post(`/api/courses/${id}/level-tasks/take-back`, { ...body, part: 'sabbath' })).status, 404, 'nothing to take back');
 });
 
@@ -175,8 +192,8 @@ test("a part not checked off doesn't hold the schedule; it stays open", async ()
     lesson_id: 'shakshuka', servings: 6, profile_ids: [ava], started_at: `${addDays(sunday, -6)}T00:10:00.000Z`, finished_at: `${addDays(sunday, -6)}T00:40:00.000Z`,
   });
   const lv = await kitchen(a, ava);
-  assert.equal(lv.week.week, 3, 'the course moved on');
-  assert.deepEqual(lv.open.map((x) => [x.week, x.part]), [[1, 'drill'], [1, 'knowledge'], [1, 'sabbath']]);
+  assert.equal(lv.week.week, 2, 'the course moved on');
+  assert.deepEqual(lv.open.map((x) => [x.week, x.part]), [[1, 'knowledge'], [1, 'drill'], [1, 'sabbath']]);
 });
 
 test('a profile not on a Level course, or in another family, checks off nothing', async () => {
@@ -212,8 +229,8 @@ test("a new Level course keeps each week's best fit, written recipes first", asy
   assert.equal((await bestFit(a, ava)).status, 200);
   const w = await weekIds(a);
   assert.equal(w[1], 'oyakodon', 'eggs rated 1 star: the chicken option');
-  assert.equal(w[2], 'smash-burgers', 'a written option before an unwritten default');
-  assert.equal(w[9], 'fish-tacos');
+  assert.equal(w[2], 'thick-burgers', "the week's own recipe, written");
+  assert.equal(w[9], 'fish-tacos', 'a written option before an unwritten default');
   assert.equal(new Set(Object.values(w)).size, Object.keys(w).length, 'a recipe is in one week at most');
 });
 
@@ -257,4 +274,127 @@ test('the parent changes a week; a recipe is in one week only; Swap recipe with 
   await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: 'huevos-rancheros' });
   await a.post(`/api/courses/${id}/level-week`, { week: 1, id: 'shakshuka' });
   assert.deepEqual((await card(a)).skipped_recipes.map((x) => x.lesson_id), ['shakshuka']);
+});
+
+// ---------- 12e: the Level view, Progress, and the transcript ----------
+
+const minutesOf = (id) => LIBRARY.lessons.find((L) => L.id === id).totalMinutes;
+const monday = addDays(sunday, -6);
+const cookOn = (a, id, lesson_id, pids, day = monday) => a.put(`/api/attempts/${id}`, {
+  lesson_id, servings: 6, profile_ids: pids, started_at: `${day}T00:10:00.000Z`, finished_at: `${day}T00:40:00.000Z`,
+});
+// Rows straight into the draft's table, so the Sabbath doesn't refuse them.
+const partDone = (env, fid, courseId, pid, week, part) => env.DB.prepare('INSERT INTO level_tasks (family_id, course_id, week, part, profile_id, done_at) VALUES (?, ?, ?, ?, ?, ?)')
+  .bind(fid, courseId, week, part, pid, `${monday}T12:00:00.000Z`).run();
+
+test("a learner's Level progress: each week ticked, hours, and a unit mastered with why it worked", async () => {
+  const { env, a, ava, ben, fid } = await setup();
+  const { id } = (await level(a, [ava], addDays(sunday, -7))).body;
+  await cookOn(a, '00000000000012e1', 'shakshuka', [ava, ben]);
+  await partDone(env, fid, id, ava, 1, 'drill');
+  let pr = (await kitchen(a, ava)).progress;
+  assert.deepEqual([pr.name, pr.hours, pr.weeks, pr.units.length, pr.complete], ['Level 3 Cook', 126, 36, 9, null]);
+  const w1 = pr.units[0].weeks[0];
+  assert.deepEqual([w1.recipe, w1.cooked, w1.parts.drill, w1.parts.knowledge], ['shakshuka', monday, monday, null]);
+  assert.equal(pr.hours_done, Math.round((minutesOf('shakshuka') + 40) / 6) / 10, "the recipe's and the drill's planned time");
+  assert.equal(pr.units[0].mastered, null);
+
+  // Week 4's Meatloaf is the mastery check: cooked, and mastered once there's a "why it worked".
+  await cookOn(a, '00000000000012e2', 'meatloaf', [ava]);
+  pr = (await kitchen(a, ava)).progress;
+  assert.equal(pr.units[0].weeks[3].cooked, monday);
+  assert.equal(pr.units[0].mastered, null, 'cooked without a why');
+  await a.put('/api/attempts/00000000000012e2/reflection', { profile_id: ava, rating: 5, why: 'The thermometer read 160°F in the middle.' });
+  pr = (await kitchen(a, ava)).progress;
+  assert.equal(pr.units[0].mastered, monday);
+  assert.equal(pr.units[1].mastered, null);
+  assert.equal(pr.rows.length, 1);
+
+  // Ben cooked the shakshuka too, but he isn't on a Level course.
+  const benQ = (await a.get(`/api/profiles/${ben}/queue`)).body;
+  assert.equal(benQ.level, null);
+});
+
+test('the capstone completes the Level; the practice run and capstone come after the last recipe', async () => {
+  const { env, a, ava, fid } = await setup();
+  const { id } = (await level(a, [ava], addDays(sunday, -7))).body;
+  for (const part of ['drill', 'knowledge', 'sabbath']) await partDone(env, fid, id, ava, 36, part);
+  const pr = (await kitchen(a, ava)).progress;
+  assert.equal(pr.complete, monday);
+  assert.equal(pr.units[8].mastered, monday, 'the last unit is mastered by its capstone');
+  assert.equal(pr.hours_done, Math.round((40 + 35 + 45 + 300) / 6) / 10, "the capstone's parts and its own time once it's served");
+
+  // Every recipe week skipped: the practice run is this week's card, with its note.
+  const plan = (await a.get('/api/courses')).body.courses[0].plan;
+  for (const x of plan) await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: x.id });
+  const lv = await kitchen(a, ava);
+  assert.deepEqual([lv.week.week, lv.week.kind, lv.week.recipe], [35, 'practice', null]);
+  assert.match(lv.week.note, /Practice run/);
+});
+
+test('Print our progress and the transcript gain the Level part rows, its hours, and its units', async () => {
+  const { env, a, ava, fid } = await setup();
+  await a.put('/api/family', { name: 'Carsons', default_servings: 6, diet_filters: [], plan_weeks: true, mode: 'homeschool' });
+  const { id } = (await level(a, [ava], addDays(sunday, -7))).body;
+  await cookOn(a, '00000000000012e3', 'shakshuka', [ava]);
+  await partDone(env, fid, id, ava, 1, 'knowledge');
+
+  const p = (await a.get('/api/progress')).body.profiles.find((x) => x.id === ava);
+  assert.deepEqual(p.rows.map((r) => [r.dish, r.skill, Boolean(r.part)]), [
+    ['Shakshuka', LIBRARY.lessons.find((L) => L.id === 'shakshuka').skill, false],
+    [LIBRARY.levels['level-3'].weeks[0].knowledge.title, 'Level 3 Cook · Week 1 Knowledge', true],
+  ]);
+  assert.equal(p.level.weeks.length, 36);
+  assert.equal(p.level.units[0].mastered, null);
+
+  const t = (await a.get(`/api/transcript/${ava}`)).body;
+  assert.deepEqual([t.totals.cooks, t.totals.parts], [1, 1]);
+  assert.equal(t.totals.hours, Math.round((minutesOf('shakshuka') + 35) / 6) / 10);
+  assert.deepEqual([t.level.name, t.level.hours, t.level.hours_done], ['Level 3 Cook', 126, t.totals.hours]);
+  assert.ok(t.rows.find((r) => r.part === 'knowledge' && r.minutes === 35 && r.grade === null));
+
+  // Without the next release, none of it shows.
+  await setPreview(env.DB, fid, false);
+  const off = (await a.get('/api/progress')).body.profiles.find((x) => x.id === ava);
+  assert.deepEqual([off.level, off.rows.length], [null, 1]);
+});
+
+test('a parent turns parts off at setup or later, and sees the hours that plans for', async () => {
+  const { a, ava } = await setup();
+  assert.equal((await level(a, [ava], sunday, { parts: ['lunch'] })).status, 400);
+  const { id } = (await level(a, [ava], sunday, { parts: ['drill'] })).body;
+  let c = (await a.get('/api/courses')).body.courses[0];
+  assert.deepEqual(c.parts, ['drill']);
+  const lv = await kitchen(a, ava);
+  assert.deepEqual(lv.week.parts.map((x) => x.part), ['drill'], 'only the parts kept on');
+  const card1 = await card(a);
+  assert.deepEqual(card1.level.on, ['drill']);
+  assert.ok(card1.level.hours < 126 && card1.level.hours > 60, `${card1.level.hours} hours`);
+  assert.equal(lv.progress.hours, card1.level.hours);
+  assert.equal((await a.put(`/api/profiles/${ava}/level-tasks`, { week: 1, part: 'knowledge', skip: true })).status, 400, "it's off");
+
+  // The editor's numbers: every recipe's minutes, so it adds up the same.
+  const V = (await a.get('/api/courses')).body.levels[0];
+  assert.equal(V.minutes.shakshuka, LIBRARY.lessons.find((L) => L.id === 'shakshuka').totalMinutes);
+
+  // Turned back on later.
+  await a.put(`/api/courses/${id}`, { start_date: sunday, per_week: 1, profile_ids: [ava], parts: ['drill', 'knowledge', 'sabbath'] });
+  c = (await a.get('/api/courses')).body.courses[0];
+  assert.deepEqual(c.parts, ['knowledge', 'drill', 'sabbath'], "in the owner's order");
+  assert.equal((await card(a)).level.hours, 126);
+});
+
+test('a part kept on can be skipped, any day: no longer open, counts for nothing, and taken back', async () => {
+  const { a, ava } = await setup();
+  const { id } = (await level(a, [ava])).body;
+  assert.equal((await a.put(`/api/profiles/${ava}/level-tasks`, { week: 1, part: 'knowledge', skip: true })).status, 200);
+  let lv = await kitchen(a, ava);
+  const k = lv.week.parts.find((x) => x.part === 'knowledge');
+  assert.deepEqual([k.skipped, k.done_at], [true, null]);
+  assert.equal(lv.progress.hours_done, 0);
+  assert.deepEqual(lv.progress.units[0].weeks[0].skipped, ['knowledge']);
+  assert.deepEqual((await card(a)).level.parts.find((x) => x.part === 'knowledge').skipped, [ava]);
+  await a.post(`/api/courses/${id}/level-tasks/take-back`, { week: 1, part: 'knowledge', profile_id: ava });
+  lv = await kitchen(a, ava);
+  assert.equal(lv.week.parts.find((x) => x.part === 'knowledge').skipped, false);
 });

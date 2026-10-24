@@ -6,7 +6,7 @@
 import { fail, now } from './lib/http.js';
 import { requireParent } from './auth.js';
 import { LIBRARY } from './library-data.js';
-import { tzOf, today } from './plan.js';
+import { tzOf, today, levelProgress, levelSummary, partRows } from './plan.js';
 import { localDay, isSabbath } from './schedule.js';
 import { recipeNames } from './recipes.js';
 import { RUBRIC, GRADE_TEXT_MAX, rubricAverage, gradeLine } from '../content/grades.js';
@@ -127,11 +127,15 @@ export function register(on) {
     const { s, fam } = await homeschool(env, req);
     const p = await profileOf(env, s.family_id, pid);
     const t = await env.DB.prepare('SELECT * FROM transcripts WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id).first() ?? {};
-    const rows = (await counted(env, req, s.family_id, pid))
-      .filter((r) => (!t.from_date || r.date >= t.from_date) && (!t.to_date || r.date <= t.to_date))
-      .map(({ reflection, ...r }) => r);
+    // A profile on a Level (12e): its parts checked off are rows too, with
+    // their planned hours, and the Level's units and hours are marked.
+    const lv = await levelProgress(env, s.family_id, pid, tzOf(req));
+    const inDates = (r) => (!t.from_date || r.date >= t.from_date) && (!t.to_date || r.date <= t.to_date);
+    const cooks = (await counted(env, req, s.family_id, pid)).filter(inDates).map(({ reflection, ...r }) => r);
+    const parts = partRows(lv).filter(inDates).map((r) => ({ ...r, grade: null, grade_line: null }));
+    const rows = [...cooks, ...parts].sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
     const skills = [];
-    for (const r of rows) if (r.skill && r.skill !== 'Family recipe' && !skills.some((x) => x.name === r.skill)) skills.push({ name: r.skill, date: r.date });
+    for (const r of cooks) if (r.skill && r.skill !== 'Family recipe' && !skills.some((x) => x.name === r.skill)) skills.push({ name: r.skill, date: r.date });
     const avgs = rows.map((r) => rubricAverage(r.grade)).filter((a) => a != null);
     return {
       school_name: fam.school_name ?? '',
@@ -143,8 +147,10 @@ export function register(on) {
       },
       rows,
       skills,
+      level: levelSummary(lv),
       totals: {
-        cooks: rows.length,
+        cooks: cooks.length,
+        parts: parts.length,
         hours: Math.round(rows.reduce((n, r) => n + (r.minutes ?? 0), 0) / 6) / 10,
         graded: rows.filter((r) => r.grade).length,
         rubric_graded: avgs.length,

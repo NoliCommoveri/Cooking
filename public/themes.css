@@ -584,3 +584,72 @@ use.pop{animation:dropin .42s cubic-bezier(.3,.7,.4,1) both}
 .intro .intro-skip{margin-right:auto}
 .intro{--intro-box:var(--q-gold);--intro-ink:#241A05;--intro-edge:var(--q-edge)}
 [data-kt="passport"] .intro{--intro-box:var(--p-red);--intro-ink:#fff;--intro-edge:#D8C9A8}
+/* ---------- A Level learner's progress (12e): weeks bar, hours, the units as chapters or passport pages ---------- */
+.k-lv{display:grid;gap:14px}
+.k-lvtop{display:grid;gap:10px;padding:16px}
+.k-lvtop b{font-size:18px}
+.k-lvbar{display:flex;gap:5px;flex-wrap:wrap}
+.k-lvbar span{display:flex;gap:2px;flex:1 1 0;min-width:30px}
+.k-lvbar i{flex:1;height:16px;min-width:5px}
+.k-lvleft{padding:14px 16px}
+.k-lvleft ul{margin:6px 0 0;padding-left:20px;display:grid;gap:2px}
+.k-lvunit{margin:0}
+.k-lvunit summary{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;align-items:center;cursor:pointer;list-style:none;min-height:60px}
+.k-lvunit summary::-webkit-details-marker{display:none}
+.k-lvunit summary b{display:block;overflow-wrap:anywhere;line-height:1.2}
+.k-lvunit summary small{display:block;font-size:14px;margin-top:2px}
+.k-lvgoal{margin:10px 0 4px;font-size:15px}
+.k-lvkey{margin:4px 0 0;font-size:13px;opacity:.8}
+.k-lvunit summary svg{overflow:visible}
+.k-lvweeks{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:6px}
+.k-lvweeks li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:8px;align-items:center;font-size:15px}
+.k-lvweeks .wk{font-size:13px;white-space:nowrap;opacity:.85}
+.k-lvweeks .t{overflow-wrap:anywhere}
+.k-lvweeks .t small{display:block;font-size:12.5px;font-weight:800}
+.k-lvweeks .tk{display:flex;gap:4px}
+.k-lvweeks .tk i{width:22px;height:22px;display:grid;place-items:center}
+.k-lvweeks .tk .ico{width:15px;height:15px}
+.k-lvcoll{justify-self:start}
+.k-cert{display:grid;justify-items:center;text-align:center;gap:6px;padding:20px 16px}
+.k-cert h3{margin:0;font-size:24px}
+.k-cert p{margin:0}
+.k-cert-ic{width:72px;height:72px}
+.k-visa svg{width:150px;height:auto}
+/* Kitchen Quest: a quest map of chapters with a crest each */
+.kitchen[data-kt="quest"] .k-lvbar i{background:var(--q-deep);box-shadow:inset 0 0 0 2px var(--q-edge)}
+.kitchen[data-kt="quest"] .k-lvbar i.done{background:var(--q-gold);box-shadow:none}
+.kitchen[data-kt="quest"] .k-lvbar i.now{background:var(--q-mana);box-shadow:none;animation:pulse 1.4s infinite}
+.kitchen[data-kt="quest"] .k-lvtop b{font-family:var(--q-disp);color:var(--q-gold)}
+.kitchen[data-kt="quest"] .k-lvmap{display:grid;gap:10px;position:relative}
+.kitchen[data-kt="quest"] .k-lvunit{padding:12px 14px}
+.kitchen[data-kt="quest"] .k-lvunit summary svg{width:52px;height:52px}
+.kitchen[data-kt="quest"] .k-lvunit summary b{font-family:var(--q-disp);font-size:18px}
+.kitchen[data-kt="quest"] .k-lvunit summary small{color:var(--q-dim)}
+.kitchen[data-kt="quest"] .k-lvunit.got summary small{color:var(--q-gold)}
+.kitchen[data-kt="quest"] .k-lvgoal{color:var(--q-dim)}
+.kitchen[data-kt="quest"] .k-lvweeks .tk i{background:var(--q-deep);box-shadow:inset 0 0 0 2px var(--q-edge)}
+.kitchen[data-kt="quest"] .k-lvweeks .tk i.on{background:var(--q-mana);color:#10142A;box-shadow:none}
+.kitchen[data-kt="quest"] .k-lvweeks .t small{color:var(--q-gold)}
+.kitchen[data-kt="quest"] .k-cert h3{font-family:var(--q-disp);color:var(--q-gold)}
+/* Chef's Passport: passport pages with a visa stamp each */
+.kitchen[data-kt="passport"] .k-lvtop,.kitchen[data-kt="passport"] .k-lvleft{color:var(--p-ink)}
+.kitchen[data-kt="passport"] .k-lvbar i{background:#fff;border:1.5px solid var(--p-ink);border-radius:3px}
+.kitchen[data-kt="passport"] .k-lvbar i.done{background:var(--p-basil)}
+.kitchen[data-kt="passport"] .k-lvbar i.now{background:var(--p-butter)}
+.kitchen[data-kt="passport"] .k-lvtop b{font-family:var(--p-hand);font-size:22px;color:var(--p-muted)}
+.kitchen[data-kt="passport"] .k-lvbook{display:grid;gap:8px}
+.kitchen[data-kt="passport"] .k-lvunit{color:var(--p-ink)}
+.kitchen[data-kt="passport"] .k-lvunit summary svg{width:84px;height:auto}
+.kitchen[data-kt="passport"] .k-lvunit summary b{font-family:var(--p-disp);font-weight:400;font-size:20px;color:var(--p-navy)}
+.kitchen[data-kt="passport"] .k-lvunit summary small{font-family:var(--p-hand);font-weight:700;font-size:19px;color:var(--p-muted)}
+.kitchen[data-kt="passport"] .k-lvweeks .tk i{border:1.5px solid #B9AE95;border-radius:50%}
+.kitchen[data-kt="passport"] .k-lvweeks .tk i.on{background:var(--p-basil);border-color:var(--p-basil);color:#fff}
+.kitchen[data-kt="passport"] .k-lvweeks .t small{color:var(--p-red)}
+.kitchen[data-kt="passport"] .k-cert{color:var(--p-ink)}
+.kitchen[data-kt="passport"] .k-cert h3{font-family:var(--p-disp);font-weight:400;color:var(--p-navy)}
+.kitchen[data-kt="passport"] .k-cert .rk{font-family:var(--p-hand);font-weight:700;font-size:22px;color:var(--p-red)}
+/* Skip this on a Level part page (§12.4): quieter than Done. */
+.k-skip{min-height:52px;padding:0 20px;font:inherit;font-weight:800;cursor:pointer}
+.kitchen[data-kt="quest"] .k-skip{background:transparent;border:2px solid var(--q-edge);color:var(--q-text);font-family:var(--q-disp);text-transform:uppercase;letter-spacing:.04em}
+.kitchen[data-kt="passport"] .k-skip{background:#fff;border:2px solid var(--p-ink);border-radius:12px;color:var(--p-ink)}
+.kitchen[data-kt="passport"] .k-lvweeks .tk i.skip,.kitchen[data-kt="quest"] .k-lvweeks .tk i.skip{opacity:.55}

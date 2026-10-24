@@ -4363,3 +4363,149 @@ order, so these two recipes were written.
   slice and a 1-inch chunk of potato roasted at 400°F, each checked every 5
   minutes until about 205°F. Two of the week's burger patties, one thin and
   one thick, are the option. Plan §12.3 and the review doc follow.
+
+## 182. 2026-10-24 — Level 3 recipes are served
+
+Phase 12, the step before 12e (plan §12.4). Behind the Next release switch.
+
+- **The Level's own recipes are in the app's library.** `tools/build-library.js`
+  builds each written lesson in `content/levels/recipes/` into the library
+  with its Level (`level`), labels them L1, L2… in the order of the Level's
+  recipe cards, and serves their lesson files. Thick beef burgers is L1.
+- **Next release only.** `/api/library`, the parent's lesson picker, the
+  queue, and Swap leave them out for a family without the next release; with
+  it, Side quests has a "Level 3 recipes" shelf, named like Appointed Times
+  rather than "Path 100". They're on a profile's path only through a Level
+  course's plan.
+- **Week 2 is cookable.** A Level 3 course's week 2 is Thick beef burgers now,
+  not "being written": 5 recipes are scheduled and 31 weeks wait.
+- The owner's lesson fixes (§6.11) work on a Level recipe too; their checks
+  read it from `levels/recipes/`.
+- Tests: 342. One new test (the shelf and the queue, with and without the next
+  release); the Level course tests expect week 2's burgers.
+
+## 183. 2026-10-24 — The Level view, Progress, and the transcript (slice 12e)
+
+Phase 12, slice 12e (plan §12.4). Behind the Next release switch. No new
+tables.
+
+- **A Level learner's progress tab** (`public/rewards.js`): "Quest map" in
+  Kitchen Quest, "My Level" in Chef's Passport. It shows "Level 3 Cook · Week 2
+  of 36", a bar of the 36 weeks in their 9 units, and the hours so far of about
+  125. Then what's left this week, and the units: chapters with a crest
+  (Kitchen Quest) or passport pages with a visa stamp (Chef's Passport). The
+  current unit is open. Each week has its recipe and four ticks (recipe,
+  drill, knowledge, Beyond the Recipe). A finished Level shows its
+  certificate at the top.
+- **My cooking collection** opens the usual skill tree or passport and pins,
+  without the dish-count ranks; Back returns to the Level.
+- **Units are the ranks.** A Level learner gets no rank-up. A unit mastered
+  (its mastery recipe cooked with a "why it worked") pops "Chapter cleared"
+  or "Unit mastered", and finishing the capstone pops the certificate. Each
+  shows once per device, after a cook or when the kitchen opens; the first
+  visit on a device shows nothing, since it's all on the tab.
+- **The server** (`levelProgress` in `src/worker/plan.js`) works it out from
+  the profile's own work: a week's recipe ticks when the profile cooked it on
+  the course (finished, not taken back, not on the Sabbath), and a part when
+  it checked it off. Hours are the planned minutes of what's done. The
+  kitchen's queue response carries it as `level.progress`.
+- **Practice run and capstone:** once every recipe week is cooked or skipped,
+  the kitchen's Level card shows week 35, then week 36, with its note, until
+  the profile checks its parts off.
+- **Proposed, waiting on the owner:** the capstone has no recipe yet, so it's
+  finished when its three parts are checked off, which also masters Unit 9. A
+  practice or capstone week's own cooking time (150 and 300 minutes) counts
+  once its last part, serving the meal, is checked off.
+- **The parent's Progress** shows each Level profile's hours, units mastered,
+  and a table of every week with its recipe and parts ticked. Its rows (and
+  the CSV) add each part checked off ("Level 3 Cook · Week 1 Drill"), with no
+  grade or "Didn't make it".
+- **The transcript** lists the part rows with their planned hours, counts
+  "Level parts done" apart from lessons cooked, and adds the Level's hours
+  toward its ~125 and the units mastered. Parts aren't graded.
+- Tests: 345 (3 new in `test/worker-levels.test.js`: ticks, hours, and a
+  unit mastered; the capstone and the practice week; Progress and the
+  transcript, and that they're gone without the next release).
+
+## 184. 2026-10-24 — Level parts are optional
+
+- Owner, 2026-10-24: the drill, knowledge, and Beyond the Recipe parts are
+  optional. Parents can turn them off when setting up a course, any part can
+  be skipped even when on, and setup shows the hours the course will add up to.
+- **Each week's parts** in the course editor for a Level: three ticks, all on
+  to start, saved on the course (`course_programs.parts`, in the draft
+  migration) and editable later. A part turned off is out of every week: the
+  kitchen card, the progress ticks, the hours, and the transcript. The practice
+  run and capstone keep all three.
+- **Planned hours:** `src/content/levels.js` adds up a course's recipes
+  (estimates for unwritten ones) and the parts it keeps on. The editor shows it
+  live ("About 106 hours with these parts and recipes. With every part, it's
+  about 126."). The learner's progress counts toward the same number.
+- **Skip:** Skip this on a part page (the learner), and Skip on the course
+  card (the parent, for everyone who hasn't done it). It's allowed any day,
+  the Sabbath included, since it counts for nothing. A skipped part isn't left
+  open, shows as skipped (a dash on the ticks), and Take back undoes it.
+  Stored as `level_tasks.skipped` (in the draft).
+- The capstone is finished when each part is done or skipped, with at least
+  one done.
+- Tests: 347 (2 new: parts off at setup and on again later, with their hours;
+  a skipped part and its take back). Expected Level hours are 126 now, the
+  course's own planned total, not the Level's round 125.
+
+## 185. 2026-10-24 — Migrations squashed into one schema
+
+- Owner, 2026-10-24: no beta testers besides the owner are in yet, so the
+  schema changes are squashed. `0001_schema.sql` now holds everything:
+  - the first schema
+  - `0002`'s `deleted_at` and `school_name` columns on `families`, and the
+    `grades` and `transcripts` tables
+  - every table from the next release's draft `0003`: tastes, variations,
+    learning, and the Levels, with this session's `course_programs.parts` and
+    `level_tasks.skipped`
+- `0002` and `0003` are deleted. There's no draft migration now; a later
+  next-release table starts a new one. The draft runner, Re-apply, and
+  Finalize stay for that.
+- **Restore across the squash:** an export taken at `0002` or `0003` restores
+  into the squashed `0001` (`SQUASHED` in `src/worker/migrations/index.js`).
+  An older one is still refused. The column checks still guard every row.
+- **Owner, one time, all on `/ops`** (`docs/setup.md` §8b): Download
+  export.json, Clear everything, Apply pending, then Restore from
+  export.json. Until then `/ops` shows `0001` as drifted and `0002` and `0003`
+  as orphaned.
+- Checked end to end: a database built from the old three migrations, with a
+  next-release family, a Level course, and a checked-off drill, was exported,
+  cleared, migrated, and restored. The course and the drill came back, and
+  `/ops` reads applied.
+- Tests: 348 (one new: an export at 0003 restores and one at 0017 is refused;
+  the /ops draft page test runs only while a draft exists).
+
+## 186. 2026-10-24 — Knowledge, Drill, Recipe, Beyond the Recipe
+
+- Owner, 2026-10-24: a Level week is presented in the order Knowledge, Drill,
+  Recipe, Beyond the Recipe. The order before (Recipe first, then Drill,
+  Knowledge, Beyond) made no sense to the owner.
+- The new order is used everywhere a week shows:
+  - the kitchen's week card
+  - the progress view's ticks, their key, and "Left this week"
+  - the parent's course card and the Level table on Progress
+  - the setup section
+  - Chef Ruth's and the program picker's one-line descriptions
+  - the manager's Level 3 page
+- `PARTS` in `src/content/levels.js` is in this order now.
+- **Setup copy** is the owner's own: the section is "Each week's components".
+  It reads: "Our Level course lessons consist of four components: Knowledge,
+  Drill, Recipe, Beyond the Recipe. If you'd like to skip assigning any of the
+  components, uncheck them below." Under that: "Note: accumulated hours
+  displayed will be adjusted based off selected components." ("unchecked"
+  became "uncheck".)
+- Recipe is listed in its place, ticked and greyed out ("Always included: a
+  week is done when it's cooked"). The hours line says "components".
+- Tests: 348; the Level tests expect the new order.
+
+## 187. 2026-10-24 — `unleavened_dates` in the schema ahead of phase 13
+
+- So no more schema changes are needed after the squash, Phase 13's table is
+  in `0001_schema.sql` now, as plan §8.4 lists it: family, year, calendar,
+  first day, unleavened from, and confirmed (plus updated_at). Nothing uses it
+  yet. It's in the backup and Download our data automatically, and goes with
+  the family.

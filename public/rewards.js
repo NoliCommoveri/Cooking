@@ -162,7 +162,8 @@ function passportHTML(r, registry, open) {
 
 // The Progress tab's contents for a profile. Returns an element that redraws
 // itself when a skill or a passport page is tapped.
-export async function progressView(profile, cooks) {
+// ranks: false leaves out the dish-count ranks, for a Level learner (§12.4).
+export async function progressView(profile, cooks, { ranks = true } = {}) {
   const { r, registry } = await profileRewards(cooks);
   const quest = profile.theme === 'quest';
   const ui = { skill: null, region: r.stamps.at(-1)?.region ?? r.regions[0]?.id };
@@ -170,9 +171,9 @@ export async function progressView(profile, cooks) {
   box.className = 'k-progress';
   const draw = () => {
     box.innerHTML = quest
-      ? `${rankCard(r, true)}<h3 class="q-h">Skill tree <span>${r.stamps.length} cleared</span></h3><div class="q-tree q-panel">${treeSVG(r.paths)}</div>
+      ? `${ranks ? rankCard(r, true) : ''}<h3 class="q-h">Skill tree <span>${r.stamps.length} cleared</span></h3><div class="q-tree q-panel">${treeSVG(r.paths)}</div>
         <p class="q-note k-pathlist">${r.paths.map((p) => `<span>${esc(PATH_SHORT[p.unit] ?? p.name)} ${p.done}/${p.nodes.length}</span>`).join('')}</p>${skillsHTML(r, true, ui.skill)}`
-      : `${passportHTML(r, registry, ui.region)}${rankCard(r, false)}${skillsHTML(r, false, ui.skill)}`;
+      : `${passportHTML(r, registry, ui.region)}${ranks ? rankCard(r, false) : ''}${skillsHTML(r, false, ui.skill)}`;
   };
   box.addEventListener('click', (e) => {
     const b = e.target.closest('[data-skill],[data-region]');
@@ -187,9 +188,147 @@ export async function progressView(profile, cooks) {
   return box;
 }
 
+// ---------- a Level learner's progress (12e) ----------
+
+// A Level learner isn't working through Cook Around the World's path, so the
+// tab shows how far they are on the Level: the weeks, the hours, and each
+// unit as a chapter (Kitchen Quest) or a passport page (Chef's Passport),
+// with its crest or visa stamp once mastered. Units are the ranks (§12.4).
+// In the order a week is presented (owner, 2026-10-24): Knowledge, Drill, the Recipe, Beyond the Recipe.
+const PARTS = [['knowledge', 'Knowledge'], ['drill', 'Drill'], ['sabbath', 'Beyond the Recipe']];
+const longDay = (d) => new Date(`${d}T12:00:00`).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+const shortDay = (d) => new Date(`${d}T12:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+// A week counts as done when its recipe is cooked; a practice or capstone
+// week, which has no recipe, when its three parts are checked off.
+// A week's parts are the ones its course keeps on; a skipped one counts as dealt with.
+const weekDone = (w) => (w.recipe ? Boolean(w.cooked) : !w.kind ? false : Object.keys(w.parts).every((k) => w.parts[k] || w.skipped?.includes(k)));
+
+// Kitchen Quest's chapter crest: a hex with the unit's number, gold once mastered.
+export function unitCrest(u, cls = '') {
+  if (!u.mastered) return `<svg class="${cls}" viewBox="0 0 60 60" aria-hidden="true"><polygon points="${hex(30, 30, 26)}" fill="#232A4E" stroke="#3D4985" stroke-width="3" stroke-dasharray="4 4"/><text x="30" y="37" text-anchor="middle" font-family="Pixelify Sans" font-weight="700" font-size="20" fill="#6A74AE">${u.number}</text></svg>`;
+  return `<svg class="${cls}" viewBox="0 0 60 60" aria-hidden="true"><polygon points="${hex(30, 30, 26)}" fill="#F2B640" stroke="#FFE3A0" stroke-width="3.5"/><polygon points="${hex(30, 30, 19)}" fill="none" stroke="#6B4A0C" stroke-width="1.5"/><text x="30" y="37" text-anchor="middle" font-family="Pixelify Sans" font-weight="700" font-size="20" fill="#2B3260">${u.number}</text></svg>`;
+}
+// Chef's Passport's visa stamp: the unit's number and the day it was mastered.
+export function visaStamp(u, cls = '') {
+  if (!u.mastered) return `<svg class="${cls}" viewBox="0 0 100 70" aria-hidden="true"><rect x="4" y="4" width="92" height="62" rx="6" fill="none" stroke="#B9AE95" stroke-width="2.5" stroke-dasharray="5 5"/><text x="50" y="42" text-anchor="middle" font-family="Lilita One,Fredoka,sans-serif" font-size="16" fill="#9C927C">UNIT ${u.number}</text></svg>`;
+  const col = INKS[(u.number - 1) % INKS.length], rot = ((u.number * 29) % 13) - 6;
+  return `<svg class="${cls}" viewBox="0 0 100 70" aria-hidden="true" style="color:${col};transform:rotate(${rot}deg)"><rect x="4" y="4" width="92" height="62" rx="6" fill="none" stroke="currentColor" stroke-width="4"/><rect x="10" y="10" width="80" height="50" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="50" y="27" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="900" font-size="7.5" letter-spacing="1" fill="currentColor">VISA · MASTERED</text>
+    <text x="50" y="45" text-anchor="middle" font-family="Lilita One,Fredoka,sans-serif" font-size="17" fill="currentColor">UNIT ${u.number}</text>
+    <text x="50" y="56" text-anchor="middle" font-family="Nunito,sans-serif" font-weight="800" font-size="9" fill="currentColor">${esc(shortDay(u.mastered).toUpperCase())}</text></svg>`;
+}
+
+// The bar of every week, grouped by unit.
+function weeksBar(pr, now) {
+  const all = pr.units.flatMap((u) => u.weeks);
+  const done = all.filter(weekDone).length;
+  return `<div class="k-lvbar" role="img" aria-label="${done} of ${all.length} weeks done">${pr.units.map((u) => `<span>${u.weeks.map((w) => `<i class="${weekDone(w) ? 'done' : w.week === now ? 'now' : ''}"></i>`).join('')}</span>`).join('')}</div>`;
+}
+
+// A week's row: its recipe and its three parts, ticked.
+function weekRow(w, quest) {
+  const what = w.title ?? (w.kind === 'capstone' ? 'Capstone' : w.kind === 'practice' ? 'Practice run' : 'Being written');
+  const kept = PARTS.filter(([k]) => k in w.parts), skipped = (k) => w.skipped?.includes(k);
+  const tick = (on, label, skip = false) => `<i class="${on ? 'on' : skip ? 'skip' : ''}" title="${esc(label)}${on ? ': done' : skip ? ': skipped' : ''}">${on ? ic('i-check') : skip ? '–' : ''}</i>`;
+  // The recipe goes before Beyond the Recipe.
+  const before = kept.filter(([k]) => k !== 'sabbath'), after = kept.filter(([k]) => k === 'sabbath');
+  const partTick = ([k, label]) => tick(w.parts[k], label, skipped(k));
+  const partSaid = ([k, label]) => `${label} ${w.parts[k] ? 'done' : skipped(k) ? 'skipped' : 'not done yet'}`;
+  const ticks = [...before.map(partTick), w.recipe ? tick(w.cooked, 'Recipe') : '', ...after.map(partTick)].join('');
+  const said = [...before.map(partSaid), w.recipe ? `Recipe ${w.cooked ? 'cooked' : 'not cooked yet'}` : null, ...after.map(partSaid)].filter(Boolean).join(', ');
+  return `<li><span class="wk">${quest ? 'Wk' : 'Week'} ${w.week}</span><span class="t">${esc(what)}${w.mastery ? `<small>${quest ? 'Mastery' : 'Mastery week'}</small>` : ''}</span><span class="tk" role="img" aria-label="${esc(said)}">${ticks}</span></li>`;
+}
+
+// What's left of this week: the recipe if it isn't cooked, and each part not checked off.
+function leftThisWeek(lv) {
+  const w = lv.week;
+  if (!w) return [];
+  const open = (x) => !x.done_at && !x.skipped;
+  const said = (x) => `${PARTS.find(([k]) => k === x.part)[1]} not done yet`;
+  return [...w.parts.filter((x) => x.part !== 'sabbath' && open(x)).map(said),
+    w.recipe && !w.recipe_done ? `${w.recipe_title} isn't cooked yet` : null,
+    ...w.parts.filter((x) => x.part === 'sabbath' && open(x)).map(said)].filter(Boolean);
+}
+
+function certificate(pr, profile, quest) {
+  return quest
+    ? `<div class="q-panel k-cert"><span class="q-kick">Quest complete</span>${unitCrest({ number: '★', mastered: true }, 'k-cert-ic')}<h3>${esc(pr.name)} — complete</h3><p>${esc(profile.name)} · ${esc(longDay(pr.complete))}</p></div>`
+    : `<div class="p-card k-cert"><i class="tape t1"></i><i class="tape t2"></i><span class="rk">Certificate</span><h3>${esc(pr.name)} — complete</h3><p>${esc(profile.name)} · ${esc(longDay(pr.complete))}</p></div>`;
+}
+
+function levelHTML(profile, lv, ui) {
+  const pr = lv.progress, quest = profile.theme === 'quest';
+  const now = lv.week?.week ?? null;
+  const at = pr.complete ? `${pr.name} · complete` : `${pr.name} · ${now ? `Week ${now} of ${pr.weeks}` : `${pr.weeks} weeks`}`;
+  const top = `<div class="${quest ? 'q-panel' : 'p-card'} k-lvtop">${quest ? '' : '<i class="tape t2"></i>'}<span class="${quest ? 'q-kick' : 'p-lessonno'}">${esc(at)}</span>${weeksBar(pr, now)}<b>${pr.hours_done} of about ${pr.hours} hours</b></div>`;
+  const openUnit = lv.week?.unit ?? pr.units.find((u) => !u.mastered)?.number;
+  // What the ticks are: the recipe, then the parts the course keeps on.
+  const named = PARTS.filter(([k]) => pr.on.includes(k)).map(([k, label]) => [k, label === 'Beyond the Recipe' ? label : label.toLowerCase()]);
+  const key = `Ticks: ${[...named.filter(([k]) => k !== 'sabbath'), ['', 'recipe'], ...named.filter(([k]) => k === 'sabbath')].map(([, label]) => label).join(', ')}`;
+  const units = pr.units.map((u) => {
+    const done = u.weeks.filter(weekDone).length;
+    const head = quest ? `Chapter ${u.number}: ${u.name}` : `Unit ${u.number}: ${u.name}`;
+    const note = u.mastered ? `Mastered ${shortDay(u.mastered)}` : `${done} of ${u.weeks.length} weeks`;
+    return `<details class="${quest ? 'q-panel' : 'p-page'} k-lvunit ${u.mastered ? 'got' : ''}" data-unit="${u.number}" ${ui.open.has(u.number) || (!ui.touched && u.number === openUnit) ? 'open' : ''}>
+      <summary>${quest ? unitCrest(u) : visaStamp(u)}<span><b>${esc(head)}</b><small>${esc(note)}</small></span></summary>
+      ${u.goal ? `<p class="k-lvgoal">${esc(u.goal)}</p>` : ''}<p class="k-lvkey">${esc(key)}</p><ul class="k-lvweeks">${u.weeks.map((w) => weekRow(w, quest)).join('')}</ul></details>`;
+  }).join('');
+  const left = leftThisWeek(lv);
+  return `${pr.complete ? certificate(pr, profile, quest) : ''}${top}
+    ${left.length ? `<div class="${quest ? 'q-panel' : 'p-card'} k-lvleft"><span class="${quest ? 'q-kick' : 'p-lessonno'}">Left this week</span><ul>${left.map((x) => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
+    <h3 class="${quest ? 'q-h' : 'p-h'}">${quest ? 'Quest map' : 'Passport pages'} <span>${pr.units.filter((u) => u.mastered).length} of ${pr.units.length} ${quest ? 'crests' : 'stamped'}</span></h3>
+    <div class="${quest ? 'k-lvmap' : 'p-book k-lvbook'}">${units}</div>
+    <button type="button" class="${quest ? 'q-btn' : 'p-btn'} k-lvcoll" data-coll="1">My cooking collection</button>`;
+}
+
+// The Progress tab for a profile on a Level: the Level view, with a toggle to
+// the usual skill tree or passport and pins, which every cook keeps earning
+// (owner, 2026-10-24), without the dish-count ranks.
+export async function levelProgressView(profile, lv, cooks) {
+  const box = document.createElement('div');
+  box.className = 'k-progress k-lv';
+  const ui = { open: new Set(), touched: false };
+  let collection = null;
+  const draw = async (coll = false) => {
+    if (!coll) { box.innerHTML = levelHTML(profile, lv, ui); return; }
+    collection ??= await progressView(profile, cooks, { ranks: false });
+    box.replaceChildren(collection);
+    const back = document.createElement('button');
+    back.type = 'button';
+    back.className = `${profile.theme === 'quest' ? 'q-btn' : 'p-btn'} k-lvcoll`;
+    back.textContent = `Back to ${lv.progress.name}`;
+    back.onclick = () => draw(false).then(() => box.querySelector('.k-lvcoll')?.focus());
+    box.prepend(back);
+    back.focus();
+  };
+  box.addEventListener('click', (e) => { if (e.target.closest('[data-coll]')) draw(true); });
+  box.addEventListener('toggle', (e) => {
+    const d = e.target.closest?.('[data-unit]');
+    if (!d) return;
+    ui.touched = true;
+    const n = Number(d.dataset.unit);
+    if (d.open) ui.open.add(n); else ui.open.delete(n);
+  }, true);
+  await draw(false);
+  return box;
+}
+
 // ---------- celebrations ----------
 
 const SEEN = (pid) => `cpr.seen.${pid}`;
+// The Level units mastered and whether it's complete, as this device last showed them.
+const LV_SEEN = (pid) => `cpr.level.${pid}`;
+function levelNews(pid, pr) {
+  let seen = null;
+  try { seen = JSON.parse(localStorage.getItem(LV_SEEN(pid))); } catch { /* shown again */ }
+  const now = { id: pr.id, units: pr.units.filter((u) => u.mastered).map((u) => u.number), complete: Boolean(pr.complete) };
+  try { localStorage.setItem(LV_SEEN(pid), JSON.stringify(now)); } catch { /* shown again next time */ }
+  // The first time on this device (or a new Level), nothing pops: it's all on the tab.
+  if (!seen || seen.id !== pr.id) return { units: [], complete: false };
+  const had = new Set(seen.units ?? []);
+  // The last unit is mastered by the capstone: the certificate says it.
+  return { units: pr.units.filter((u) => u.mastered && !had.has(u.number) && !(pr.complete && u === pr.units.at(-1))), complete: now.complete && !seen.complete };
+}
 function readSeen(pid) { try { return JSON.parse(localStorage.getItem(SEEN(pid))); } catch { return null; } }
 function writeSeen(pid, v) { try { localStorage.setItem(SEEN(pid), JSON.stringify(v)); } catch { /* shown again next time */ } }
 
@@ -223,6 +362,31 @@ function earnedScreen(news, registry, quest, lessons) {
     <button type="button" class="p-btn" data-cel="next">${news.rankUp ? 'Next' : 'Keep cooking'}</button></div>`;
 }
 
+// A Level unit mastered: the level-up for a Level learner (§12.4).
+function unitScreen(u, pr, quest, more) {
+  const btn = more ? 'Next' : 'Keep cooking';
+  if (quest) {
+    return `<div class="lvlbox" role="dialog" aria-modal="true" aria-label="Chapter cleared">${burst(28, ['#F2B640', '#5BD6C8', '#FF7350', '#EEF0FF'])}
+      ${unitCrest(u, 'cr')}<span class="k">CHAPTER CLEARED</span><h2>${esc(u.name)}</h2><p>Unit ${u.number} of ${pr.units.length} on ${esc(pr.name)} is mastered. A new crest on your quest map.</p>
+      <button type="button" class="q-btn" data-cel="next">${btn}</button></div>`;
+  }
+  return `<div class="p-rbox" role="dialog" aria-modal="true" aria-label="Unit mastered">${burst(34, ['#D9412B', '#F6C945', '#4E8B3A', '#22406B', '#FFF8E7', '#F28AB2'], true)}<i class="tape t1"></i><i class="tape t2"></i>
+    <span class="rk">UNIT MASTERED</span><div class="cel-slam k-visa">${visaStamp(u)}</div><h2>${esc(u.name)}</h2><p>Unit ${u.number} of ${pr.units.length} on ${esc(pr.name)}. A new visa stamp in your passport.</p>
+    <button type="button" class="p-btn" data-cel="next">${btn}</button></div>`;
+}
+
+// The Level's certificate, for finishing the capstone: the top of its ranks.
+function certScreen(pr, profile, quest) {
+  if (quest) {
+    return `<div class="lvlbox" role="dialog" aria-modal="true" aria-label="Level complete">${burst(36, ['#F2B640', '#5BD6C8', '#FF7350', '#EEF0FF'])}
+      ${unitCrest({ number: '★', mastered: true }, 'cr')}<span class="k">QUEST COMPLETE</span><h2>${esc(pr.name)}</h2><p>${esc(profile.name)} finished every chapter and the capstone. ${esc(longDay(pr.complete))}.</p>
+      <button type="button" class="q-btn" data-cel="next">Keep cooking</button></div>`;
+  }
+  return `<div class="p-rbox k-certbox" role="dialog" aria-modal="true" aria-label="Certificate">${burst(40, ['#D9412B', '#F6C945', '#4E8B3A', '#22406B', '#FFF8E7', '#F28AB2'], true)}<i class="tape t1"></i><i class="tape t2"></i>
+    <span class="rk">CERTIFICATE</span><h2>${esc(pr.name)} — complete</h2><p>Awarded to ${esc(profile.name)} for every unit and the capstone. ${esc(longDay(pr.complete))}.</p>
+    <button type="button" class="p-btn" data-cel="next">Keep cooking</button></div>`;
+}
+
 function rankScreen(r, quest) {
   const { rank, dishes } = r;
   if (quest) {
@@ -238,18 +402,26 @@ function rankScreen(r, quest) {
 // Shows anything this profile earned since this device last showed its
 // rewards: the stamp or lit node, new skills, then a rank up. Resolves when
 // it's closed (at once if there's nothing new).
-export async function celebrate(profile, cooks) {
+// level: the profile's Level progress (12e), when it's on one. Its units are
+// its ranks, so it gets a level-up for each unit mastered and the certificate
+// for the capstone, never a dish-count rank up.
+export async function celebrate(profile, cooks, level = null) {
   let r, registry;
   try { ({ r, registry } = await profileRewards(cooks)); } catch { return; }
   const seen = readSeen(profile.id);
   const news = newSince(seen, r);
   writeSeen(profile.id, news.now);
-  if (!news.stamps.length && !news.skills.length && !news.rankUp) return;
+  if (level) news.rankUp = false;
+  const lv = level ? levelNews(profile.id, level) : { units: [], complete: false };
+  if (!news.stamps.length && !news.skills.length && !news.rankUp && !lv.units.length && !lv.complete) return;
   const quest = profile.theme === 'quest';
   const lessons = Object.fromEntries(registry.lessons.map((L) => [L.id, L]));
   const screens = [];
-  if (news.stamps.length || news.skills.length) screens.push(() => { thunk(); if (news.skills.length) setTimeout(chime, 450); return earnedScreen(news, registry, quest, lessons); });
+  const more = (i) => i < screens.length - 1;
+  if (news.stamps.length || news.skills.length) screens.push(() => { thunk(); if (news.skills.length) setTimeout(chime, 450); return earnedScreen({ ...news, rankUp: more(0) }, registry, quest, lessons); });
   if (news.rankUp) screens.push(() => { fanfare(); return rankScreen(r, quest); });
+  for (const u of lv.units) { const i = screens.length; screens.push(() => { fanfare(); return unitScreen(u, level, quest, more(i)); }); }
+  if (lv.complete) screens.push(() => { fanfare(); return certScreen(level, profile, quest); });
   const back = document.activeElement;
   const ov = document.createElement('div');
   ov.className = `lvlup ${quest ? '' : 'pp'}`;

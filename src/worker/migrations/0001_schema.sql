@@ -1,6 +1,7 @@
 -- The whole app schema in one file (plan §8.4). The seventeen migrations it
--- replaces were squashed on 2026-10-23, when the database was cleared and
--- started fresh (docs/build-log.md). Lessons, ingredients, and the other
+-- replaced were squashed on 2026-10-23, and the three since (delete and
+-- grades, and the next release's draft) on 2026-10-24, each time with the
+-- database cleared and restored from its export (docs/build-log.md). Lessons, ingredients, and the other
 -- lists are content files in the repo (plan §7), not tables here.
 --
 -- Ids are random text, not counters, so one family's rows can be put back
@@ -14,7 +15,10 @@
 -- a parent turns it on, because the browser usually sends what the mic hears
 -- to Google. photos_enabled is set only from /ops (§2.6). setup_step is the
 -- last part of Chef Ruth's Getting started a family finished (§6.9), and
--- setup_done_at when it was all done.
+-- setup_done_at when it was all done. deleted_at: Delete our family (§6.14),
+-- the family is gone from the app at once and erased 30 days later by the
+-- Worker's daily job; until then the owner can bring it back from /ops.
+-- school_name: the homeschool's own name, printed atop every transcript.
 CREATE TABLE IF NOT EXISTS families (
   id               TEXT PRIMARY KEY,
   name             TEXT NOT NULL DEFAULT '',      -- set in the first run
@@ -28,7 +32,9 @@ CREATE TABLE IF NOT EXISTS families (
   plan_weeks       INTEGER NOT NULL DEFAULT 0,
   photos_enabled   INTEGER NOT NULL DEFAULT 0,
   setup_step       TEXT,
-  setup_done_at    TEXT
+  setup_done_at    TEXT,
+  deleted_at       TEXT,
+  school_name      TEXT
 );
 
 -- notice_seen_at: when this parent closed the "recipes may not be
@@ -472,3 +478,177 @@ CREATE TABLE IF NOT EXISTS content_saves (
   created_at     TEXT NOT NULL
 );
 CREATE INDEX IF NOT EXISTS content_saves_created ON content_saves(created_at);
+
+-- ---------- homeschool mode: grades and the transcript (§6.15, §6.17) ----------
+
+-- A parent's grade for one profile on one cook: the rubric (each row 1 to 4),
+-- a grade in the parent's own words, or both. Parent-only; kids never see it.
+-- A cook on the Sabbath can't be graded, and nothing is graded on the Sabbath.
+CREATE TABLE IF NOT EXISTS grades (
+  attempt_id  TEXT NOT NULL REFERENCES attempts(id),
+  profile_id  TEXT NOT NULL REFERENCES profiles(id),
+  family_id   TEXT NOT NULL REFERENCES families(id),
+  skill       INTEGER CHECK (skill BETWEEN 1 AND 4),
+  safety      INTEGER CHECK (safety BETWEEN 1 AND 4),
+  recipe      INTEGER CHECK (recipe BETWEEN 1 AND 4),
+  result      INTEGER CHECK (result BETWEEN 1 AND 4),
+  reflection  INTEGER CHECK (reflection BETWEEN 1 AND 4),
+  grade_text  TEXT,
+  graded_at   TEXT NOT NULL,
+  PRIMARY KEY (attempt_id, profile_id)
+);
+CREATE INDEX IF NOT EXISTS grades_family ON grades(family_id, profile_id);
+
+-- One profile's transcript details. from_date and to_date (optional) limit
+-- it to a school year's cooks. final_grade and credit are the parent's own;
+-- the app only shows the rubric average and the hours beside them.
+CREATE TABLE IF NOT EXISTS transcripts (
+  profile_id   TEXT PRIMARY KEY REFERENCES profiles(id),
+  family_id    TEXT NOT NULL REFERENCES families(id),
+  student_name TEXT,
+  course_name  TEXT,
+  course_code  TEXT,
+  school_year  TEXT,
+  from_date    TEXT,
+  to_date      TEXT,
+  final_grade  TEXT,
+  credit       TEXT,
+  updated_at   TEXT NOT NULL
+);
+
+-- ---------- the next release (§8.6): tastes, variations, and the Levels ----------
+-- Built behind the Next release switch; a family sees them once it's on.
+
+-- Phase 11b (plan §6.21): each profile's star ratings, and the family's limits.
+-- No REFERENCES on profile_id, so deleting a profile is never blocked here.
+-- A profile's ratings go when it does.
+CREATE TABLE IF NOT EXISTS profile_ratings (
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  profile_id TEXT NOT NULL,
+  kind       TEXT NOT NULL CHECK (kind IN ('protein', 'flavor', 'ingredient')),
+  item       TEXT NOT NULL,
+  -- 5 absolute favorite, 4 love, 3 like, 2 okay, 1 hate; NULL is Haven't tried.
+  stars      INTEGER CHECK (stars BETWEEN 1 AND 5),
+  updated_at TEXT NOT NULL,
+  PRIMARY KEY (profile_id, kind, item)
+);
+CREATE INDEX IF NOT EXISTS profile_ratings_family ON profile_ratings(family_id);
+
+CREATE TABLE IF NOT EXISTS family_limits (
+  family_id     TEXT PRIMARY KEY REFERENCES families(id),
+  max_minutes   INTEGER,
+  budget        TEXT CHECK (budget IN ('$', '$$', '$$$')),
+  missing_tools TEXT NOT NULL DEFAULT '[]',
+  adventurous   TEXT CHECK (adventurous IN ('familiar', 'a-bit', 'adventurous')),
+  updated_at    TEXT NOT NULL
+);
+
+-- Phase 11c (plan §6.21): variations. Which version of a lesson the family
+-- cooks ('' is the lesson itself), the version each cook was of, and the
+-- version each lesson on a shopping list was bought for. A cook still counts
+-- as its lesson; these only say which version. No REFERENCES on attempt_id or
+-- list_id, so taking a cook or a list away never waits on these rows.
+CREATE TABLE IF NOT EXISTS variation_choices (
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  lesson_id  TEXT NOT NULL,
+  variation  TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  PRIMARY KEY (family_id, lesson_id)
+);
+
+CREATE TABLE IF NOT EXISTS attempt_variations (
+  attempt_id TEXT PRIMARY KEY,
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  variation  TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS attempt_variations_family ON attempt_variations(family_id);
+
+CREATE TABLE IF NOT EXISTS list_variations (
+  list_id   TEXT NOT NULL,
+  family_id TEXT NOT NULL REFERENCES families(id),
+  position  INTEGER NOT NULL,
+  variation TEXT NOT NULL,
+  PRIMARY KEY (list_id, position)
+);
+CREATE INDEX IF NOT EXISTS list_variations_family ON list_variations(family_id);
+
+-- Phase 11d3 (plan §6.21): what each profile's cooks have taught. Rebuilt for
+-- a profile from all its finished cooks whenever a reflection on one is saved
+-- (its own rating and half the eaters'), so a changed reflection is never
+-- counted twice. kind: the cooked version's flavors, its protein, or the
+-- lesson's cuisine. adjust: added to the score, -2 to 2. Cuisines are never
+-- asked; they're only learned here.
+CREATE TABLE IF NOT EXISTS taste_learned (
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  profile_id TEXT NOT NULL,
+  kind       TEXT NOT NULL CHECK (kind IN ('flavor', 'protein', 'cuisine')),
+  item       TEXT NOT NULL,
+  adjust     REAL NOT NULL,
+  cooks      INTEGER NOT NULL,
+  PRIMARY KEY (profile_id, kind, item)
+);
+CREATE INDEX IF NOT EXISTS taste_learned_family ON taste_learned(family_id);
+
+-- Phase 12b (plan §12.4): which program a course is. No row is Cook Around
+-- the World, so courses from before need nothing. program: a Level's id from
+-- content/levels/ ('level-3'). No REFERENCES on course_id, like the tables
+-- above, so nothing here waits on a course's own rows.
+-- parts: a Level course's parts the parent kept on, as a JSON list of
+-- 'drill', 'knowledge', 'sabbath'; NULL is all three.
+CREATE TABLE IF NOT EXISTS course_programs (
+  course_id  TEXT PRIMARY KEY,
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  program    TEXT NOT NULL,
+  parts      TEXT,
+  created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS course_programs_family ON course_programs(family_id);
+
+-- Phase 12c (plan §12.4): a Level week's drill, knowledge, and Sabbath task,
+-- checked off per profile. week: the Level week (1 to 36); part: which page.
+-- A parent's take back sets removed_at, and its Undo clears it; a row taken
+-- back counts for nothing. Checking a part off again counts it again.
+-- skipped: 1 when the part was skipped, not done: it's no longer open, and
+-- counts for nothing. done_at is then when it was skipped.
+CREATE TABLE IF NOT EXISTS level_tasks (
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  course_id  TEXT NOT NULL,
+  week       INTEGER NOT NULL,
+  part       TEXT NOT NULL CHECK (part IN ('drill', 'knowledge', 'sabbath')),
+  profile_id TEXT NOT NULL,
+  done_at    TEXT NOT NULL,
+  skipped    INTEGER NOT NULL DEFAULT 0,
+  removed_at TEXT,
+  PRIMARY KEY (course_id, week, part, profile_id)
+);
+CREATE INDEX IF NOT EXISTS level_tasks_family ON level_tasks(family_id, profile_id);
+
+-- Phase 12c: a mastery week's "Why did it work?", one per profile on the
+-- cook.
+CREATE TABLE IF NOT EXISTS mastery_notes (
+  attempt_id TEXT NOT NULL,
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  profile_id TEXT NOT NULL,
+  why        TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  PRIMARY KEY (attempt_id, profile_id)
+);
+CREATE INDEX IF NOT EXISTS mastery_notes_family ON mastery_notes(family_id);
+
+-- Phase 13 (plan §6.20): each family's Unleavened Bread dates, one row a
+-- year. Created ahead of the build, at the 2026-10-24 squash, so the phase
+-- needs no schema change; nothing uses it yet. calendar: a standard
+-- calendar's id (content/calendars.json); first_day: the feast's first day,
+-- which may differ from that calendar's (a deviation); unleavened_from: the
+-- day the house stops leavened recipes, on or before first_day; confirmed_at
+-- stays empty until a parent confirms the year.
+CREATE TABLE IF NOT EXISTS unleavened_dates (
+  family_id       TEXT NOT NULL REFERENCES families(id),
+  year            INTEGER NOT NULL,
+  calendar        TEXT NOT NULL,
+  first_day       TEXT NOT NULL,
+  unleavened_from TEXT NOT NULL,
+  confirmed_at    TEXT,
+  updated_at      TEXT NOT NULL,
+  PRIMARY KEY (family_id, year)
+);

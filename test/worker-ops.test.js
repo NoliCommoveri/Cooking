@@ -296,10 +296,23 @@ test('/ops: the next release switch, per family and for everyone', async () => {
 test('/ops: the draft page asks for its phrase', async () => {
   const env = await makeEnv();
   const ops = await opsClient(env);
+  // A draft exists only while a big build is under way; the runner's own
+  // tests above cover drafts either way.
   const draft = MIGRATIONS.find((m) => m.draft);
-  assert.ok(draft, 'the next release has a draft migration');
+  assert.equal((await ops.get('/ops/draft/0001')).status, 404, 'only a draft');
+  if (!draft) return;
   assert.match((await ops.get(`/ops/draft/${draft.id}`)).body, /Re-apply draft/);
   assert.match((await ops.form(`/ops/draft/${draft.id}/reapply`, { phrase: 'nope' })).body, /Type REBUILD exactly/);
   assert.match((await ops.form(`/ops/draft/${draft.id}/reapply`, { phrase: 'REBUILD' })).body, /Re-applied draft/);
-  assert.equal((await ops.get('/ops/draft/0001')).status, 404, 'only a draft');
+});
+
+test('an export from before the squash (0002 or 0003) restores into the squashed schema; an older one is refused', async () => {
+  const env = await makeEnv();
+  await family(env, 'Carsons', 'jen@example.com');
+  const backup = JSON.parse(JSON.stringify(await exportAll(env.DB)));
+  await clearEverything(env.DB);
+  await applyPending(env.DB);
+  await assert.rejects(importAll(env.DB, { ...backup, schema_version: '0017' }), /schema version 0017/);
+  await importAll(env.DB, { ...backup, schema_version: '0003' });
+  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM families').first()).n, 1);
 });

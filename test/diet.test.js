@@ -73,7 +73,8 @@ test('the library API applies the family\'s filters', async () => {
   const env = await makeEnv();
   const c = await family(env, 'Carsons', 'jen@example.com');
   const all = (await c.get('/api/library')).body;
-  assert.equal(all.lessons.length, LIBRARY.lessons.length);
+  // A Level's own recipes come with the next release only (§12.4).
+  assert.equal(all.lessons.length, LIBRARY.lessons.filter((L) => !L.level).length);
   assert.equal(all.hidden, 0);
 
   await c.put('/api/family', { name: 'Carsons', default_servings: 6, diet_filters: ['gluten'] });

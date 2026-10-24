@@ -4,11 +4,13 @@
 // The exception is a draft (draft: true, plan §8.6): the one migration a big
 // build edits in place until /ops finalizes it at launch.
 import m0001 from './0001_schema.sql';
-import m0002 from './0002_delete_and_grades.sql';
-import m0003 from './0003_next_release.sql';
 
 export const MIGRATIONS = [
   { id: '0001', name: 'schema', sql: m0001 },
-  { id: '0002', name: 'delete_and_grades', sql: m0002 },
-  { id: '0003', name: 'next_release', sql: m0003, draft: true },
 ];
+
+// Schema versions folded into a later migration when the migrations were
+// squashed (2026-10-24: 0002 and 0003 into 0001). An export taken at one of
+// them restores into the squashed schema: its tables and columns are all
+// still there.
+export const SQUASHED = { '0002': '0001', '0003': '0001' };
