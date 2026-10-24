@@ -1403,5 +1403,29 @@ The capstone pulls from every unit: safe temperatures (1), challah (2), knife wo
   - **Units are the ranks** (owner, 2026-10-24): a Level learner isn't shown the dish-count ranks (§5.2). Mastering a unit (its mastery week cooked with a "why it worked") is the step up, with the level-up celebration, and the capstone is the top.
   - **My cooking collection** (owner, 2026-10-24): a toggle on the Level view opens the usual stamps or skill tree and skill pins. Every cook keeps earning there, Level recipes and Cook Around the World swap-ins alike, so nothing is lost moving between programs.
   - **The parent's Progress** shows the Level's weeks, each part checked off, and each unit mastered. The transcript for a Level course lists each recipe as today, plus the drill, knowledge, and Sabbath task rows with their planned hours, marks each mastered unit, and totals the hours toward the Level's ~125. Grading works on the recipe as today (recommendation: parts are checked off, not graded). Print our progress and its CSV gain the part rows.
-- **12f Content:** Claude writes weeks 2 (beef burgers to 160°F) and 4 (the mastery recipe: beef kofta or meatloaf) and all 108 drill, knowledge, and Sabbath pages for the owner to review. Weeks 1 (Shakshuka) and 3 (Chicken fried rice) are written already, and so is week 32's Minestrone. Until a week's recipe is written, its course week holds the best written recipe with the skill, or waits like a planned dish (§6.18).
-- **Question for the owner:** whether Level recipes join Side quests for every family at launch.
+- **12f Content:** Claude writes weeks 2 (beef burgers to 160°F) and 4 (the mastery recipe: meatloaf, or the beef version of Lamb kofta) and all 108 drill, knowledge, and Sabbath pages for the owner to review. Weeks 1 (Shakshuka) and 3 (Chicken fried rice) are written already, and so is week 32's Minestrone. Until a week's recipe is written, its course week holds the best written recipe with the skill, or waits like a planned dish (§6.18).
+- **Every new Level recipe is checked against Cook Around the World first — Requirement (owner, 2026-10-24).** Before one is written, it's checked for a pick-one group with room (at most three, §4.0), or as a variation of a dish already planned (§6.21). If it fits, it's written there, and the Level week points at it. **Proposed (recommendation, waiting on the owner):**
+
+| Week | Recipe | Proposed |
+|---|---|---|
+| 1, 3, 32 | Shakshuka, Chicken fried rice, Minestrone | Written already |
+| 4, 8, 18, 24, 31, 34 | Meatloaf, Challah, Red beans and rice, Roast chicken, Matzo ball soup, Beef chili | Planned dishes, written for both programs |
+| 4 | Beef kofta | A beef variation of Lamb kofta (binders group) |
+| 9 | Pico de gallo | Week 9 uses Pico + Baja fish tacos as its recipe |
+| 31 | Chicken noodle soup | A variation of Matzo ball soup (same stock, noodles) |
+| 2 | Thick beef burgers to 160°F | A variation of Smash burgers, or Level only |
+| 11 | Vegetable stir-fry | 3rd dish in the **stir-frying** group |
+| 33 | Vinaigrette and dressed salad | 3rd in **dressings**, as a main salad (with chicken or chickpeas) |
+| 34 | Beef stew | 3rd in **one-pot stews** |
+| 22 | Shish taouk | 3rd in **broiling** |
+| 16 | Beef ragù | 3rd in **braising** |
+| 27 | Poached cod in tomato sauce | One-pot stews if Beef stew doesn't take the place; otherwise Level only |
+| 5 | Pita bread | A new pick-one pair with Skillet naan (flatbreads) |
+| 20 | Mujaddara | A new pair with Koshari, or Level only |
+| 17 | Red lentil soup | A new pair with Misir wot, or Level only |
+| 6, 7, 10, 12 | Sandwich loaf, Dinner rolls, Tabbouleh, Israeli salad | Level only: their groups (yeast dough, fine chopping, dicing) are full |
+| 14, 15, 23, 25, 26, 28 | Picadillo, Cajun rice dressing, Roast chicken pieces, Baked salmon, Steamed fish, Pan-seared trout | Level only: no group with the skill |
+| 13, 19, 21, 29, 30 | Garlic green beans, Rice pilaf, Roasted vegetables, Vegetable stock, Chicken stock | Level only: sides and stocks, not meals |
+| 35, 36 | Practice run, capstone | Made from earlier weeks' recipes; nothing new |
+
+- **Question for the owner:** whether the Level-only recipes join Side quests for every family at launch.

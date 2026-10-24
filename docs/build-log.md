@@ -3788,3 +3788,15 @@ shows how far they are in the course.
 - **My cooking collection:** a toggle to the usual stamps or skill tree and
   pins, which every cook keeps earning. This answers the open question on
   stamps and pins for Level weeks.
+
+## 152. 2026-10-24 — Plan: Level 3 recipes checked against the main course
+
+Design only. Plan §12.4 changed. The owner's ruling: every new Level recipe
+is checked for a pick-one group with room, or as a variation of a planned
+dish, before it's written. A table of the 36 weeks proposes where each one
+goes, waiting on the owner: 13 are written or planned in Cook Around the
+World already; 3 are variations (beef kofta, chicken noodle soup, perhaps
+thick burgers); 5 fill groups with room (vegetable stir-fry, a dressed
+salad, beef stew, shish taouk, beef ragù); 3 could start new pairs (pita
+with naan, mujaddara with koshari, red lentil soup with misir wot); the rest
+are Level only.
