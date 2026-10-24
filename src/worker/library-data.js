@@ -1293,6 +1293,7 @@ export const LIBRARY = {
    "tags": {
     "protein": "eggs",
     "flavors": [
+     "sweet-treats",
      "mild-buttery"
     ],
     "heat": "mild",
@@ -2657,6 +2658,7 @@ export const LIBRARY = {
    "tags": {
     "protein": "none",
     "flavors": [
+     "sweet-treats",
      "mild-buttery"
     ],
     "heat": "mild",
@@ -2781,7 +2783,7 @@ export const LIBRARY = {
    "tags": {
     "protein": "none",
     "flavors": [
-     "mild-buttery"
+     "sweet-treats"
     ],
     "heat": "mild",
     "budget": "$",
@@ -3729,6 +3731,7 @@ export const LIBRARY = {
    "tags": {
     "protein": "eggs",
     "flavors": [
+     "sweet-treats",
      "mild-buttery"
     ],
     "heat": "mild",
@@ -4368,7 +4371,7 @@ export const LIBRARY = {
    "tags": {
     "protein": "none",
     "flavors": [
-     "mild-buttery"
+     "sweet-treats"
     ],
     "heat": "mild",
     "budget": "$",
@@ -4506,7 +4509,7 @@ export const LIBRARY = {
    "tags": {
     "protein": "none",
     "flavors": [
-     "sweet-savory"
+     "sweet-treats"
     ],
     "heat": "mild",
     "budget": "$$",
@@ -4589,7 +4592,7 @@ export const LIBRARY = {
    "tags": {
     "protein": "none",
     "flavors": [
-     "mild-buttery"
+     "sweet-treats"
     ],
     "heat": "mild",
     "budget": "$",
@@ -4648,7 +4651,7 @@ export const LIBRARY = {
    "tags": {
     "protein": "none",
     "flavors": [
-     "mild-buttery"
+     "sweet-treats"
     ],
     "heat": "mild",
     "budget": "$",
@@ -4894,6 +4897,7 @@ export const LIBRARY = {
    "tags": {
     "protein": "none",
     "flavors": [
+     "sweet-treats",
      "mild-buttery"
     ],
     "heat": "mild",
@@ -4914,7 +4918,7 @@ export const LIBRARY = {
    "tags": {
     "protein": "none",
     "flavors": [
-     "mild-buttery"
+     "sweet-treats"
     ],
     "heat": "mild",
     "budget": "$",
@@ -4934,7 +4938,7 @@ export const LIBRARY = {
    "tags": {
     "protein": "none",
     "flavors": [
-     "mild-buttery"
+     "sweet-treats"
     ],
     "heat": "mild",
     "budget": "$",
@@ -4956,7 +4960,7 @@ export const LIBRARY = {
    "tags": {
     "protein": "none",
     "flavors": [
-     "mild-buttery"
+     "sweet-treats"
     ],
     "heat": "mild",
     "budget": "$$",
@@ -5051,6 +5055,10 @@ export const LIBRARY = {
    {
     "id": "mild-buttery",
     "name": "Mild and buttery"
+   },
+   {
+    "id": "sweet-treats",
+    "name": "Sweet treats"
    }
   ],
   "ingredients": [

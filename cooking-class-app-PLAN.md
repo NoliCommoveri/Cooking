@@ -924,7 +924,7 @@ Each person rates what they love and hate, the app picks the best dish or **vari
 
 **What's rated** (Claude's draft, owner, 2026-10-24: "draft the lists"; the owner edits them). The lists are a content file, `content/tastes.json` (§8.6), edited in the content editor.
 - **Proteins (10):** chicken, turkey, beef, lamb, white fish (cod, tilapia), salmon, tuna, eggs, beans and lentils, tofu.
-- **Flavors (11), each with example dishes** (owner, 2026-10-24: common dishes that show the flavor, whether or not the app has a recipe for them; every example is one that's normally made without unclean food, §2.1):
+- **Flavors (12), each with example dishes** (owner, 2026-10-24: common dishes that show the flavor, whether or not the app has a recipe for them; every example is one that's normally made without unclean food, §2.1):
 
 | Flavor | Example dishes |
 |---|---|
@@ -939,6 +939,7 @@ Each person rates what they love and hate, the app picks the best dish or **vari
 | **Rich tomato** | spaghetti and meatballs, shakshuka, beef lasagna, tomato soup |
 | **Coconut and tropical** | chicken coconut curry, coconut rice, jerk chicken with mango salsa |
 | **Mild and buttery** | roast chicken and potatoes, buttered noodles, chicken noodle soup, mashed potatoes |
+| **Sweet treats** (owner, 2026-10-24) | chocolate chip cookies, cinnamon rolls, apple pie, brownies |
 
 
   "Mild and buttery" is there so a profile that likes plain food can say so.

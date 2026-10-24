@@ -22,7 +22,8 @@
     { "id": "sweet-savory", "name": "Sweet and savory", "hint": "honey, fruit, or sugar with savory food", "examples": ["honey-garlic chicken", "sweet-and-sour chicken", "orange chicken", "chicken tagine with apricots"] },
     { "id": "rich-tomato", "name": "Rich tomato", "hint": "slow-cooked tomato sauces", "examples": ["spaghetti and meatballs", "shakshuka", "beef lasagna", "tomato soup"] },
     { "id": "coconut-tropical", "name": "Coconut and tropical", "hint": "coconut milk, lime, mango", "examples": ["chicken coconut curry", "coconut rice", "jerk chicken with mango salsa"] },
-    { "id": "mild-buttery", "name": "Mild and buttery", "hint": "plain, gentle, comforting", "examples": ["roast chicken and potatoes", "buttered noodles", "chicken noodle soup", "mashed potatoes"] }
+    { "id": "mild-buttery", "name": "Mild and buttery", "hint": "plain, gentle, comforting", "examples": ["roast chicken and potatoes", "buttered noodles", "chicken noodle soup", "mashed potatoes"] },
+    { "id": "sweet-treats", "name": "Sweet treats", "hint": "cookies, cakes, pastries, sweet breads", "examples": ["chocolate chip cookies", "cinnamon rolls", "apple pie", "brownies"] }
   ],
   "tasteIngredients": [
     { "id": "mushrooms", "name": "Mushrooms", "ingredients": [] },

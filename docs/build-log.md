@@ -3329,3 +3329,11 @@ will use. Nothing here is shown to families.
 - Tests: 281 (5 new). Checked in a browser at phone width on the dev server:
   the Tags page and a change staging a save, the Tastes list, and the tags on
   Shakshuka's dish card.
+
+## 133. 2026-10-24 — A Sweet treats flavor
+
+The owner added a 12th flavor, **Sweet treats** (cookies, cakes, pastries,
+sweet breads), so desserts no longer borrow "Mild and buttery". Re-tagged:
+blueberry muffins, rugelach, cinnamon rolls, granola, brown butter cookies,
+malva pudding, churros, apple pie, challah French toast, and cottage cheese
+crescents. Plan §6.21 updated.
