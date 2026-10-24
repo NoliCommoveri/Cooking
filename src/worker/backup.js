@@ -54,7 +54,7 @@ export async function exportAll(db) {
 }
 
 // The migration ledger is rebuilt by Apply pending, not by the restore.
-const SKIPPED = new Set(['_migrations']);
+const SKIPPED = new Set(['_migrations', '_drafts']);
 
 // Restores; never merges. Every table in the file must exist here and be empty.
 export async function importAll(db, payload) {
@@ -63,6 +63,21 @@ export async function importAll(db, payload) {
   for (const t of Object.keys(tables)) {
     const n = (await db.prepare(`SELECT COUNT(*) AS n FROM "${t}"`).first()).n;
     if (n) throw new Refused(`"${t}" already has ${n} row(s). Restore only fills an empty database: Clear everything, Apply pending, then restore.`);
+  }
+  return await insertAll(db, tables);
+}
+
+// The restore beside Re-apply draft (plan §8.6): puts back the rows of a
+// draft's tables from an export.json taken before. Only those tables, only
+// when they're empty, and only columns the edited draft still has.
+export async function importDraftTables(db, payload, draftTables) {
+  if (payload?.kind !== 'clean-plate-backup') throw new Refused('Use an export.json from this ops page.');
+  const only = { ...payload, tables: Object.fromEntries(Object.entries(payload.tables ?? {}).filter(([t]) => draftTables.includes(t))) };
+  const tables = await checkPayload(db, only, 'clean-plate-backup');
+  if (!Object.keys(tables).length) throw new Refused("That file has no rows for the draft's tables.");
+  for (const t of Object.keys(tables)) {
+    const n = (await db.prepare(`SELECT COUNT(*) AS n FROM "${t}"`).first()).n;
+    if (n) throw new Refused(`"${t}" already has ${n} row(s). This restore only fills the draft's tables when they're empty.`);
   }
   return await insertAll(db, tables);
 }

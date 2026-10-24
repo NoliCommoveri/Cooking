@@ -26,6 +26,7 @@ import { register as registerSetup } from './setup.js';
 import { register as registerGrades } from './grades.js';
 import { RUBRIC, gradeLine } from '../content/grades.js';
 import { exportFamily, deleteFamily, eraseAfter } from './backup.js';
+import { releaseFor } from './release.js';
 
 export const THEMES = ['quest', 'passport'];
 export const AVATAR_COLORS = ['tomato', 'butter', 'basil', 'sky', 'plum', 'peach', 'mint', 'slate'];
@@ -117,13 +118,13 @@ on('GET', '/api/me', async (req, env) => {
   // A kid's device knows only its own profile and the family's settings.
   // Each launch asks this, so it renews the kid's login for 14 more days.
   if (s.kid) {
-    return json({ signed_in: true, kid: { profile_id: s.profile_id, login_name: s.login_name }, parent: null, family: familyOut(fam), pin_unlocked_until: null },
+    return json({ signed_in: true, kid: { profile_id: s.profile_id, login_name: s.login_name }, parent: null, family: { ...familyOut(fam), ...(await releaseFor(env.DB, s.family_id)) }, pin_unlocked_until: null },
       200, { 'set-cookie': await renewKidSession(env, s, req) });
   }
   return {
     signed_in: true,
     parent: { email: s.email, is_owner: s.is_owner, test_cook_notice: !s.notice_seen_at },
-    family: { ...familyOut(fam), cooking: await cooking(env, s.family_id) },
+    family: { ...familyOut(fam), cooking: await cooking(env, s.family_id), ...(await releaseFor(env.DB, s.family_id)) },
     pin_unlocked_until: pinUnlocked(s) ? s.pin_until : null,
   };
 }, KID);
@@ -406,7 +407,7 @@ on('GET', '/api/library', async (req, env) => {
       id: L.id, label: labels[L.id], unit: L.unit, title: L.title, image: L.image, cuisine: LIBRARY.cuisines[L.cuisine] ?? L.cuisine,
       skill: L.skill, servings: L.servings, totalMinutes: minutes(L),
       substitutions: view.applied.map((x) => ({ for: name(x.for), use: name(x.use) })),
-      left_out: view.leftOut.map(name), unleavened: L.unleavened,
+      left_out: view.leftOut.map(name), unleavened: L.unleavened, feast: L.feast,
       // The kitchen's search (a name or an ingredient), and the pick-one group
       // its path counts once.
       search: [L.title, L.skill, LIBRARY.cuisines[L.cuisine], ...L.ingredients.map((x) => name(x.ingredient))].join(' ').toLowerCase(),

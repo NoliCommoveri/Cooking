@@ -19,7 +19,9 @@ A parent uses the app from their phone. They queue lessons, see a combined **sho
 
 **Requirement: the app is multi-family.** It was designed first for the owner's family (two kids, ages 11 and 12), but several families must be able to use it. Each family has its own profiles, progress, queue, pantry, shopping list, photos, and settings. All families share the same lesson library. Each family can also add its own recipes (§6.10).
 
-**Planned: a beginner track.** A simpler track for kids with no prior cooking experience is planned after the core course (§11). It is not built in the first release, but the data model includes the fields it needs from the start, so adding it later doesn't require a migration.
+**Two programs, one app — Requirement (owner, 2026-10-23).** The 75-lesson course in §4 is **Cook Around the World**, offered and marketed to casual families and adults (owner, 2026-10-23). The **Levels** (Helper, Apprentice, Cook, Chef; §12) are **the homeschool curriculum**, built inside this app beside it, sharing its families, profiles, food rules, shopping, schedule, and transcript. Cook Around the World stays open to every family. Level 3 is built first.
+
+**The beginner track (§11) is replaced by Levels 1 and 2** (owner, 2026-10-23).
 
 ### Users
 | User | Device | Main jobs |
@@ -137,7 +139,10 @@ Separate from safety levels, which are about who must be in the kitchen. These a
 
 ---
 
-## 4. Curriculum (75 dishes)
+## 4. Curriculum: Cook Around the World (75 dishes)
+
+**Named Cook Around the World** (owner, 2026-10-23): the course for casual families and adults, beside the Levels, which are the homeschool curriculum (§12). Everything in this section is unchanged by that.
+
 
 Lessons are grouped into units by skill. International and American dishes are mixed within each unit, and breakfast dishes are spread across the units. The tables below are in course order (owner, 2026-10-22): units in order, prerequisites first, easier before harder, and cuisines alternated within each unit. **A lesson's number is its place in that order**, not something stored on the lesson (§4.1). The safety levels below are set in the content. Parents can't change them.
 
@@ -883,14 +888,54 @@ A seasonal unit for the appointed times, and a way to swap an Appointed Time mea
 - **Leaven** (owner, 2026-10-22: "a substance (as yeast) used to produce fermentation in dough or a liquid; especially sourdough; a material (as baking powder) used to produce a gas that lightens dough or batter"). An automatic check flags: yeast in every form and sourdough starter; baking powder, baking soda, baker's ammonia, and self-rising flour; and ready-made foods that usually contain leaven (bread, breadcrumbs, panko, pita, flour tortillas, most crackers, cake mixes). Plain flour, matzah, and egg whites whipped for lift aren't leaven, and neither are fermented foods and drinks that aren't a raising agent (owner, 2026-10-22): beer, soy sauce, vinegar of any kind, Worcestershire, and miso. Ready-made foods that are sometimes made without leaven are flagged anyway; a parent can send one for review. The list is a content file beside the blocked words (`content/rules/`). The check reads the ingredients and the step text, the way the blocked-word scan does (owner, 2026-10-22), so "a pinch of baking soda" in a step is caught. Leaven is a badge and a filter, not the hard block: no setting or review ever lets unclean food through (§2.1), but leaven is only about where a recipe shows.
 - **Badges:**
   - **Unleavened:** applied automatically when every ingredient is in the registry and none is on the leaven list. A recipe with a typed-in ingredient doesn't get it unless a review clears it. Library lessons are checked the same way.
-  - **Good for Feast Days:** applied when a parent shares a recipe as a feast-day recipe (roast lamb, for example). A recipe can carry both.
+  - **Good for Feast Days:** applied when a parent shares a recipe as a feast-day recipe (roast lamb, for example). Every Appointed Times lesson has it, and **the owner can mark any course lesson Good for Feast Days** (owner, 2026-10-23), with a checkbox on the lesson's dish card in the content editor (§7.5). A recipe can carry both.
+  - **Where they show** (owner, 2026-10-23): the kitchen's lesson and recipe cards, the dish card, the Swap picker, My recipes, and the User-shared recipes directory.
 - **Swap for an Appointed Time meal instead:** an item in the "⋯" menu of every queued lesson, all year, parents only. It's kept out of the way: no button on the card. It opens a picker, and the meal picked takes that lesson's place this week.
   - A course lesson it replaces stays in the plan and goes first next week, and the rest move back a week (§6.18). **A swap never counts as behind** (owner, 2026-10-22): the parent approved it, so the planned finish moves back with it, the way Skip this week moves it, and nobody is shown as late. A lesson queued by hand is taken off the queue. Either way the swap shows an Undo.
-  - **February 1 through May 15** (fixed every year, wide enough for families on different calendars, so there are no dates to set; extended to mid-May by the owner, 2026-10-22, so the latest years' feast days are covered): the picker shows only Unleavened recipes, in this order: the Appointed Times unit's lessons, then other library lessons that pass the leaven check, then parent recipes that pass it. The window goes by the date of the week being swapped, not the day the parent opens the picker (recommendation).
-  - **The rest of the year:** everything shows: the Appointed Times unit's lessons and every Good for Feast Days recipe, unleavened or not.
+  - **During the family's unleavened days** (§6.20; until that's built, February 1 through May 15, fixed every year): the picker shows only Unleavened recipes, in this order: the Appointed Times unit's lessons, then other library lessons that pass the leaven check, then parent recipes that pass it. It goes by the week being swapped, not the day the parent opens the picker (recommendation): a week that touches any unleavened day is unleavened-only.
+  - **The rest of the year:** everything shows: the Appointed Times unit's lessons, then the course lessons marked Good for Feast Days, then every Good for Feast Days recipe, unleavened or not.
   - **Parent recipes in the picker are the whole community directory** (owner, 2026-10-22), plus the family's own recipes, with the family's diet filters applied. Hidden directory recipes never show. Picking a directory recipe adds it to the family's recipes (recommendation).
 - **Placeholder art by meal type.** A shared recipe always shows a drawing for its meal type (§6.10): meat, poultry, fish, bread or flatbread, soup, salad or vegetables, side, dessert, drink. Claude draws them as SVG (`content/images/meals/`), one set for both themes. A unit lesson uses one until the owner makes its dish art.
 - **Sharing a recipe** follows the routine in §6.10, the same for every recipe, Appointed Times or not.
+
+### 6.20 Unleavened Bread dates — Requirement (owner, 2026-10-23)
+The fixed February 1 to May 15 window (§6.19) is replaced by **each family's own dates**, because families keep different calendars and the feast moves by weeks from year to year.
+- **Every family keeps Unleavened Bread** (owner, 2026-10-23). There is no "we don't observe it" answer, and nothing turns the unleavened rules off.
+- **What's asked: the first day of Unleavened Bread** for the year. The app works out the seven days (Leviticus 23:6, the 15th to the 21st) from it.
+- **One or two standard calendars, then deviations** (owner, 2026-10-23). A family picks a standard calendar, sees its dates for the year, and confirms them or changes the first day to its own. The standard calendars' dates are a content file (`content/calendars.json`: each calendar's name and its first day of Unleavened Bread by year), edited in the content editor (§7.5), so the owner adds next years' dates from the browser. **Which calendars** is the owner's to name (§10).
+- **When the house goes unleavened is asked too** (owner, 2026-10-23): some families have cleared out their leaven before the feast, others are using it up. The question is "When should we stop suggesting leavened recipes?": **on the first day of the feast**, or **from a date we pick** (any day before it). The family's **unleavened days** run from that day to the last day of the feast.
+  - **Recommendation: a "use it up" nudge.** In the two weeks before a family's unleavened days, Chef Ruth offers recipes that use up leaven (yeast, baking powder, bread) when a parent swaps or adds a lesson. It never changes the schedule on its own.
+- **Where it's asked:** in Getting started, right after allergies and diet (§6.9), and in Family settings. **Every year again** (recommendation: from January 1), as one of Chef Ruth's tasks: "When will your family keep Unleavened Bread this year?" Until it's answered, the family's calendar's dates are used, with a note on the queue asking the parent to confirm. A family's first year uses the first standard calendar until it picks.
+- **What the unleavened days change:**
+  - **Swap:** a week that touches an unleavened day offers Unleavened recipes only (§6.19).
+  - **The schedule** (§6.18, and the Levels, §12): **recommendation:** a leavened lesson isn't scheduled on an unleavened day. The schedule passes it over to the first week after the feast and fills its place with the next lesson that's unleavened, the way a swap moves a lesson, so it never counts as behind. A leavened lesson already in the queue is flagged on the Queue with a one-tap unleavened swap.
+  - **The kitchen** (recommendation): a banner on the unleavened days, like the Sabbath's; leavened lessons show "After Unleavened Bread", and starting one asks for the parent PIN, like cooking off the path (§6.18).
+  - **Level 3 setup:** a Level course whose bread weeks would land on the unleavened days says so when it's set up (§12).
+- **Stored** in a new table, `unleavened_dates` (§8.4), created by the next release's draft migration (§8.6); nothing to set up by hand.
+
+### 6.21 Family tastes and the recipe pool — Requirement (owner, 2026-10-23)
+Families tell the app what they like, the app picks dishes to match, and what it can't match tells the owner which recipes to write next. **"We can always add more recipes"** (owner, 2026-10-23): a preference can really leave dishes out; a gap is fixed by writing a dish, not by ignoring the preference.
+- **The questions** (recommendation; asked in Getting started after allergies and diet, and on a **Our tastes** page in Family settings):
+  - **Proteins we like:** chicken, beef, lamb, fish, eggs, beans and lentils (several).
+  - **Cuisines we'd rather skip** (from the cuisine registry).
+  - **Spice:** mild, some heat, spicy.
+  - **Time on a busy night:** 30, 45, 60 minutes, or no limit.
+  - **Budget for a meal:** $, $$, or $$$ (below).
+  - **How adventurous:** stick to what we know, a bit, or bring it on. "Stick to what we know" favors familiar cuisines without skipping any.
+- **What they do.** Diet filters (§2.1) still hide what a family can't eat; tastes choose among what's left:
+  - **They leave dishes out.** A dish with a protein the family didn't pick, a skipped cuisine, more heat, more time, or a higher price band than the family's isn't picked for them: not in a pick-one group's default (§4.0), a Level week's recipe (§12), Chef Ruth's suggestions, or a swap. A parent can still open any dish and add it by hand.
+  - **A skill is never skipped.** When nothing that teaches a needed skill fits, the app offers the closest fit (fewest preferences missed) with a short note ("None of the julienne dishes fit your tastes yet; this one is closest"), and the gap is counted for the owner (below).
+  - **They never touch the hard rule.** Every dish has already passed the unclean-food block (§2.1).
+- **New recipes tie to the teaching** (owner, 2026-10-23). Every recipe added to widen the pool is written as a swap-in for a named skill: a Level week (§12) or a Cook Around the World pick-one group. No recipe is added just to be a recipe.
+  - Lesson files gain `budget` (`$`, `$$`, `$$$`, per serving, set by the owner in the editor; recommendation: no ingredient prices, which would need upkeep) and `heat` (mild, some, spicy). Protein, cuisine, and time already exist.
+- **Data collection for the owner** (owner, 2026-10-23: "build data collection tools to drive it"). A **Recipe gaps** page in the owner screens (§6.2a), counts only, no family named:
+  - **Gaps:** for each Level week and each pick-one group, how many families have no fitting dish, and which preference left them short ("Week 11, julienne: 6 families; no beef, skip Chinese").
+  - **What families pick and drop:** dishes most swapped out, skipped (§6.18), or left off plans, and what they were swapped for.
+  - **How cooks went:** average Reflect rating and eater rating per dish (§3).
+  - **Tastes overall:** how many families chose each answer.
+  - Each gap can be opened straight into a new lesson in the content editor, with the skill already filled in.
+- **Privacy:** tastes are a family's data, removed with the family (§6.14) and included in Download our data. The privacy policy (§6.13) says the owner sees the counts above, never which family.
+- **Stored** in a new table, `family_tastes` (§8.4), set by the parent. Built in the next release (§8.6).
 
 ---
 
@@ -1015,6 +1060,11 @@ Every table holding a family's data carries `family_id`. `families` is the famil
 - `test_cooks` (family_id, lesson_id, lesson_version, parent_id, cooked_on)
 - `photos` (id, family_id, attempt_id, r2_key, created_at)
 - `pantry` (family_id, ingredient_id). Kitchen staples
+- `unleavened_dates` (family_id, year, calendar, first_day, unleavened_from, confirmed_at) (§6.20). `calendar` is a standard calendar's id; `first_day` may differ from that calendar's date (a deviation); `confirmed_at` is null until the parent confirms the year
+- `family_tastes` (family_id, answers_json, updated_at): the family's answers to Our tastes (§6.21)
+- `course_programs` (course_id, family_id, program: `level-3`, …): which program a course is (§12). No row means Cook Around the World, so existing courses need no change
+- `level_tasks` (family_id, course_id, week, part, profile_id, done_at): a Level week's recipe, drill, knowledge, and Sabbath task checked off per profile (§12.2); a mastery week's "why it worked" is saved with the cook's reflection
+- **The next release adds tables only** (§8.6): no column is added to, and nothing is dropped from, a table that exists today
 - Stamps, pins, and rank are computed from `attempts` and the content files, not stored separately (**recommendation**; cache them if it gets slow).
 - The lesson library and ingredient registry are content files shared by all families (§7). They are not stored per family.
 
@@ -1024,8 +1074,23 @@ The owner has no command line (see `CLAUDE.md`). Everything operational is done 
 - **Migrations** are SQL files bundled into the Worker. `/ops` lists each one as applied, pending, or drifted, and **Apply pending** runs them in order. Each migration is all-or-nothing, and the runner stops at the first failure and shows the error.
 - **Backup export** downloads every table as one JSON file. **Import** restores from that file.
 - **Every destructive control has a restore beside it.** Resetting the database, or removing a family (§6.2a), is only offered alongside the export that can bring it back. Photos in R2 are covered by the family photo download (§6.2) and kept for a grace period after a family is removed.
-- Deploys are git → Cloudflare Workers Builds. A schema change reaches production by editing a migration file in the GitHub web editor, letting it deploy, and pressing **Apply pending**.
+- Deploys are git → Cloudflare Workers Builds. A schema change reaches production by editing a migration file in the GitHub web editor, letting it deploy, and pressing **Apply pending**. During a big build, changes go into that build's single draft migration instead (§8.6).
 - Anything that must be set up by hand in the Cloudflare dashboard (the D1 database, the R2 bucket, the `OPS_TOKEN` secret, the `RESEND_API_KEY` secret, and the `GITHUB_TOKEN` secret for the manager section, §7.5) or in Resend (verifying the sending domain, whose DNS records are added in the Cloudflare dashboard) is listed for the owner before the phase that needs it.
+
+### 8.6 The next release: built beside the live app — Requirement (owner, 2026-10-23)
+Everything planned on 2026-10-23 (Unleavened Bread dates, §6.20; family tastes and the recipe gaps page, §6.21; the Levels, §12; the Cook Around the World name, §4) is built **into the live app, switched off**, and turned on for everyone at once when it's ready.
+- **The Next release switch** (on `/ops`):
+  - **Preview for chosen families:** the owner turns the next release on for one family at a time (their own, a test family). Those families see the new screens and rules; every other family sees the app as it is.
+  - **Launch for everyone** turns it on for all families. **Undo launch** is beside it, the restore (§8.5): the app goes back to how it was before launch (only preview families see it), and nothing anyone entered is lost.
+  - **Built (2026-10-23):** the switch is kept in `settings` (`next_release`: launched, and the preview families' ids), so it needs no migration. `/api/me` tells the app `next_release` and `next_release_preview`; a preview family's parent screens say they're in the preview. A preview stays with a family through removal and restore, and is ignored for a family that's gone.
+  - Until launch, today's behaviour stays for everyone else, including the fixed February 1 to May 15 swap window (§6.19).
+- **New content is kept apart** in `content/levels/` (the Level weeks, drills, knowledge pages, Sabbath tasks, and their recipes) and `content/calendars.json`. The content editor (§7.5) edits them before launch; only preview families see them.
+- **One migration for the whole build** (owner, 2026-10-23: "I don't want 40 migrations during this new build"). The next release's schema is a single **draft** migration, `0003_next_release.sql`, edited in place for the whole build:
+  - **A draft may only create new tables and indexes.** It never alters or drops a table that exists today; the runner refuses a draft that tries. So the new build stores tastes and course programs in new tables (§8.4), not new columns.
+  - **On `/ops` it shows as Draft.** Editing it isn't drift. **Re-apply draft** drops the tables it made and creates them again from the edited file. That loses only preview data, so the backup export and Import sit beside it (§8.5).
+  - **Finalize** (at launch) freezes it into an ordinary applied migration, like `0001` and `0002`. The next big build starts its own single draft the same way.
+  - **Built (2026-10-23):** a migration with `draft: true` in `migrations/index.js` is a draft. The runner keeps the tables each draft made in `_drafts` (and whether it's finalized), and refuses a draft statement that isn't `CREATE TABLE` or `CREATE INDEX` on a table it creates. `/ops/draft/<id>` has Re-apply draft (type REBUILD; the backup link before it), **Restore draft tables** (fills the draft's empty tables from an earlier export.json: the restore for Re-apply), and Finalize (type FINALIZE; only an unedited draft). `0003_next_release.sql` is the draft, empty so far.
+  - Tests build the database from every migration, the draft included.
 
 ---
 
@@ -1053,7 +1118,11 @@ Each phase should be deployed and usable before the next begins.
 | **8. Chef Ruth** (Getting started built 2026-10-23) | Chef Ruth on the parent screens (§6.8): her chat, Getting started (§6.9), and her first tasks. Chef Ruth in the kitchen comes after | A new family goes from sign-up to their first queued lesson through Getting started, and a parent sets up a course and plans a week in her chat, with everything showing on the pages it belongs to |
 | **9. Family recipes** | Folded into 4c (§6.10) | — |
 | **10. Content editor** (owner, 2026-10-23; built 2026-10-23) | The manager section at `/manage` with its owner-only sign-in, and the content editor in it (§7.5): the GitHub token check on `/ops`, the save path (checks, commit to `content-edits`, the workflow that builds, checks, and moves it to `main`, the save status), History and Revert, then the editors: lessons and units first, then registries and the food rules, then pictures | The owner adds a unit, adds a lesson to it, moves an existing lesson into it, and removes a step, all from the browser; each is live for every family after the deploy with no session. A save that breaks a rule is refused with the reason, and Revert puts a lesson back |
-| **Later** | More themes: Food Truck and Recipe Scrapbook (§5.2), beginner track (§11), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system (Print our progress's CSV covers the basics, §6.15) | — |
+| **10b. Next release switch** (owner, 2026-10-23; built 2026-10-23) | §8.6: the switch on `/ops` (preview per family, Launch for everyone, Undo launch), the draft migration with Re-apply and Finalize, and `content/levels/`. Phases 11–13 are built behind it | A preview family sees a test screen that other families don't; Re-apply draft rebuilds an edited draft table; Undo launch puts the app back |
+| **11. Tastes and the recipe pool** (owner, 2026-10-23: built first, right after the switch) | §6.21: Our tastes, its use in picks and suggestions, `budget` and `heat` on lessons, the closest-fit rule, and the owner's Recipe gaps page | A family that skips seafood and chooses mild gets no fish week default and a closest-fit note; the owner sees that gap counted and opens a new lesson from it |
+| **12. Level 3 Cook** (owner, 2026-10-23: Level 3 first) | §12: the Level program beside Cook Around the World, Level 3's 36 weeks with its four parts, mastery weeks, skill-tagged swap-ins, the Level 3 recipes, Progress and transcript changes | A parent puts a teen on Level 3; the kid cooks week 1's recipe, checks off its drill, knowledge, and Sabbath task; a swap-in replaces a week's recipe; a mastery week asks for "why it worked"; the transcript shows Level 3's hours |
+| **13. Unleavened Bread dates** (owner, 2026-10-23) | §6.20: the standard calendars file and its editor, the Getting started and Family settings questions, the yearly ask, the migration, and the swap, schedule, and kitchen changes; the fixed window comes out | Two test families on different calendars, one deviating by a day, see Swap go unleavened-only on their own weeks; a leavened course lesson due in the feast moves past it and doesn't count as behind; a family that hasn't confirmed sees the note |
+| **Later** | Levels 2, 4, and 1 (§12), mini-courses (§10), More themes: Food Truck and Recipe Scrapbook (§5.2), capstone meal-timing lessons, split roles when profiles cook together, the tap zone and page-turner remote (§6.12, on hold), CSV export to the homeschool management system (Print our progress's CSV covers the basics, §6.15) | — |
 
 **Phase 2d waits (owner, 2026-10-22):** the installable PWA and cooking offline (Phase 2's slice 2d) are built once pretty much everything else is done, not before Phase 2e. Until then, Phase 2's "Wi-Fi off partway through" check waits with it.
 
@@ -1069,13 +1138,14 @@ Each phase should be deployed and usable before the next begins.
 
 ## 10. Open questions
 
-- None right now.
+- **Which standard calendars** (one or two) Unleavened Bread dates come from (§6.20). The owner names them; Claude fills `content/calendars.json` from them.
+- **Mini-courses** (themed short courses such as spicy, all-American, eco-fare): proposed 2026-10-23, then set aside for the Levels. A Level's skill-tagged weeks may cover the same need (run Level 3 as American, Mediterranean, or World Tour).
 
 ---
 
 ## 11. Planned: beginner track
 
-**Status:** Planned for after the core course. Not part of the first release.
+**Status: replaced by Levels 1 and 2 (§12; owner, 2026-10-23).** Kept for its data hooks and rules, which the Levels use: `track` on lessons and profiles, step `image` and `audioText`, and no ages shown anywhere.
 
 A separate set of simpler lessons for **kids with no prior cooking experience**, inside the same app, using the same families, profiles, shopping list, and photo gallery. The track is defined by experience, not age. As a rough guide for writing the content, it's pitched at about **ages 7–10**. **The app must not show ages anywhere**: no age labels on the track, lessons, or profiles. An older kid who has never cooked belongs here too, so the track's name and art must not feel babyish.
 
@@ -1096,3 +1166,91 @@ A separate set of simpler lessons for **kids with no prior cooking experience**,
 - Profiles have `track` (§8.4). A profile shows lessons from its track. A parent can open individual lessons from the other track to a profile. Kids on different tracks need separate profiles.
 - Steps can carry an `image` and an `audioText` field. These are optional for core lessons and required for beginner lessons, which the linter enforces once the beginner track starts.
 - The shopping list already combines lessons across profiles, so beginner and core lessons queued the same week merge into one list automatically.
+
+---
+
+## 12. Levels: the companion program — Requirement (owner, 2026-10-23)
+
+Four Levels, the homeschool curriculum (owner, 2026-10-23), built inside this app beside Cook Around the World (§1, §4). They teach by skill and food literacy, not by dish, and every Level ends with a Sabbath capstone. **The outlines below are the owner's suggestions** (owner, 2026-10-23), open to change, except where marked Requirement.
+
+- **Same app, same rules.** Families, profiles, kid logins, the hard block (§2.1), diet filters, tastes (§6.21), shopping, the weekly schedule and the Sabbath (§6.18), Unleavened Bread dates (§6.20), grades, and the transcript all apply as they do for Cook Around the World.
+- **Homeschool mode works on both programs** (owner, 2026-10-23): the Levels are the homeschool curriculum, and a homeschool family can also take Cook Around the World as an elective, with grades and the transcript (§6.17). The public syllabus page (§6.17) and the landing page (§6.13) get wording for both programs at launch.
+- **A profile is on one program at a time:** Cook Around the World or a Level, through its course (§6.18). Siblings can be on different Levels. Cook Around the World stays open to every family (owner, 2026-10-23).
+- **Levels go by what a learner can already do, never by age.** §11's rule stands: the app shows no ages. The ages in the owner's outline (6 to 15 and up) are a guide for writing only.
+- **Build order** (owner, 2026-10-23): **Level 3 first**, then (recommendation) Level 2, Level 4, and Level 1, which needs the most new art and reading-light content.
+
+### 12.1 The four Levels (owner's outline, 2026-10-23)
+| Level | Time | Units, in order |
+|---|---|---|
+| **1 Helper** | ~1 hr/week | Clean hands, clean kitchen · Clean and unclean animals · Measuring · Mixing and no-bake recipes · Fruits: washing and soft cuts · Vegetables and salads · Tasting the basic flavors · Bread and baking with an adult · **Capstone:** set the table and help make a Sabbath meal |
+| **2 Apprentice** | ~2 hrs/week | Knife and heat safety · Reading recipes and mise en place · Eggs · Boiling and simmering: rice, pasta · Labels and hidden unclean ingredients · Salt, herbs, and spices · Quick breads · Simple pan cooking · **Capstone:** storage, leftovers, and one Sabbath dish made from a prep list |
+| **3 Cook** | ~3.5 hrs/week | §12.3 |
+| **4 Chef** | ~3.5–4 hrs/week | Precision, speed, and scaling recipes · Braising, stewing, beef and lamb cuts · Foundational sauces · Frying and grilling · Pastry · Flavor profiles by cuisine · Menus, nutrition, and budgeting · Allergens, sourcing, and cooking for groups · **Capstone:** plan, budget, shop for, and cook Sabbath for the household plus guests |
+
+Level 1's "Clean and unclean animals" and Level 2's "Labels and hidden unclean ingredients" teach the hard rule (§2.1) from the same rules files the app enforces, so the lessons and the block never disagree. Any Level with a leavened unit is placed away from spring the way §12.3 does (recommendation).
+
+### 12.2 How a Level week works (from the Level 3 plan, owner, 2026-10-23)
+- **Four parts a week:** a **Recipe** (a full dish that applies the unit's skill, through the usual lesson player, §3), a **Drill** (hands-on practice without a full recipe), **Knowledge** (a reading, worksheet, quiz, or real-world task), and a **Sabbath task** (prep-ahead, holding, or planning for the Sabbath meal). Drill, Knowledge, and Sabbath task are short pages a profile checks off; each counts toward hours (§6.15) by its planned time.
+- **Units of four weeks.** Weeks 1–3 teach and practise. **Week 4 is the mastery check:** the student cooks a different recipe with the same skill without help, then writes why it worked. Progress and the transcript mark each mastered unit.
+- **A week names a skill, and its recipe is a default.** Any recipe tagged with that week's skill can be swapped in (§6.21 picks the best fit for the family's tastes), so a family can run the year as American, Mediterranean, or World Tour. Cook Around the World lessons with the skill count as swap-ins too.
+- **Sabbath tasks are done before the Sabbath.** Nothing cooked on the Sabbath counts (§6.18), so a Sabbath task and the capstone count when done Sunday to Friday; serving on the Sabbath is fine.
+- **Leaven:** a leavened week landing on the family's unleavened days (§6.20) is passed over like any leavened lesson, and the Sabbath task that week uses an unleavened bread (A1, §6.19).
+
+### 12.3 Level 3 Cook: 36 weeks, ~125 hours (one high-school elective credit in most states)
+**Unit order — Requirement (owner, 2026-10-23): yeast dough moves from Unit 8 to Unit 2.** Taught late, it fell on Unleavened Bread in most years (2028 and 2029 overlap; 2027 clears by days, and any skipped week pushes it in). Research supports moving it: it needs only food safety, measuring, and the oven, not the units between; UK schools teach yeast rolls in the first year of secondary school; skills practised over many weeks are kept better than skills practised in a short block, so October bread gets about 28 weeks of Sabbath challah as practice; and an early, visible success builds the confidence teens most often lack. Knife cuts stay directly before sautéing, which uses them. Stock and soup now lands in April, around the feast (matzo ball soup).
+
+| Unit | Weeks | Goal |
+|---|---|---|
+| 1 Food safety science | 1–4 | Uses a thermometer, knows the danger zone (40–140°F), and cools and reheats food safely |
+| 2 Yeast dough | 5–8 | Mixes, kneads, proofs, shapes, and bakes a yeast dough, and judges when it's done |
+| 3 Classic knife cuts and honing | 9–12 | Holds and hones a chef's knife; even dice, mince, and julienne |
+| 4 Sautéing and aromatic bases | 13–16 | Controls pan heat, sweats vs. browns aromatics, deglazes |
+| 5 Legumes and grains | 17–20 | Soaks and cooks dried beans and lentils; grains by absorption and pilaf |
+| 6 Poultry and roasting | 21–24 | Handles raw poultry safely, roasts to 165°F, roasts vegetables evenly |
+| 7 Fish | 25–28 | Identifies clean fish by fins and scales, judges freshness, cooks fish gently until it flakes |
+| 8 Stock and soup | 29–32 | Makes a clear stock from bones or vegetables and builds a soup from it |
+| 9 Balancing flavor and Sabbath capstone | 33–36 | Tastes and corrects salt, acid, fat, and heat; plans and cooks a full Sabbath meal ahead and reheats it safely |
+
+| Week | Recipe | Drill | Knowledge | Sabbath task |
+|---|---|---|---|---|
+| 1 | Shakshuka (eggs set fully) | Calibrate a thermometer in ice water | Danger zone and how bacteria grow | Label and date containers |
+| 2 | Beef burgers to 160°F | Temp-check thick vs. thin patties | Safe internal temperatures chart | Cool a cooked dish in an ice bath |
+| 3 | Fried rice from chilled rice | Safe cooling of a batch of rice | Cross-contamination and board colors | Store a dish safely for the Sabbath |
+| 4 | **Mastery:** beef kofta or meatloaf to 160°F | Set up a clean station unaided | Food safety quiz | Reheat a stored dish to 165°F |
+| 5 | Pita bread | Bloom yeast; test water temperature | How yeast makes dough rise | Bake and freeze pita for the Sabbath |
+| 6 | Sandwich loaf | Knead and windowpane test | Gluten and kneading | Bake a loaf Friday morning |
+| 7 | Dinner rolls | Shape even rolls by weight | Proofing: under vs. over | Shape rolls Thursday; cold proof overnight |
+| 8 | **Mastery:** challah | Braid a dough | Doneness: color, sound, 190°F inside | Challah for the Sabbath table (and from here on, recommendation) |
+| 9 | Pico de gallo | Claw grip; dice 3 onions | Parts of a knife; knife types | Chop vegetables ahead for the Sabbath meal |
+| 10 | Tabbouleh (fine mince) | Mince parsley and garlic | Honing vs. sharpening | Store prepped herbs so they stay fresh |
+| 11 | Vegetable stir-fry (julienne) | Julienne carrots and peppers | Why even cuts cook evenly | Prep a full set of stir-fry vegetables ahead |
+| 12 | **Mastery:** Israeli salad (fine dice) | Timed dice: one onion, one pepper | Name and size each classic cut | Prep and store all salad vegetables for the Sabbath |
+| 13 | Garlic green beans | Shimmer test for hot oil | Oils and smoke points | Blanch and store beans for the Sabbath |
+| 14 | Beef picadillo (sofrito base) | Sweat vs. brown onions | Browning and why it adds flavor | Make and freeze a sofrito batch |
+| 15 | Cajun rice dressing with beef (trinity) | Deglaze a pan, scrape the fond | Aromatic bases across cuisines | Cook rice dressing ahead; cool safely |
+| 16 | **Mastery:** beef ragù (soffritto base) | Sauté a mixed vegetable pan unaided | Explain sweat vs. sauté | Make ragù ahead for the Sabbath meal |
+| 17 | Red lentil soup (mercimek) | Rinse and pick over lentils | Legume types and cook times | Freeze soup in portions |
+| 18 | Red beans and rice (beef sausage, collagen-cased or skinless, or none; §2.1) | Quick-soak vs. overnight soak | Why beans are soaked | Soak beans Friday for a later meal |
+| 19 | Rice pilaf | Toast grains in fat before liquid | Absorption vs. pasta method; ratios | Cook grains ahead and reheat with steam |
+| 20 | **Mastery:** mujaddara (lentils and rice) | Cook a grain without a recipe card | Grains of the world worksheet | Make a legume dish that holds well for the Sabbath |
+| 21 | Roasted vegetables | Cut vegetables to roast at the same rate | How roasting browns food | Roast a tray of vegetables ahead |
+| 22 | Shish taouk (chicken thighs) | Trim and cube chicken safely | Raw poultry handling | Marinate chicken Friday for a later meal |
+| 23 | Roast chicken pieces | Temp-check thigh and breast | Dark vs. white meat | Roast chicken ahead; hold and reheat |
+| 24 | **Mastery:** whole roast chicken | Break down a cooked chicken | Carryover cooking and resting | Roast chicken as the Sabbath centerpiece |
+| 25 | Baked salmon with lemon and herbs | Check a fillet for pin bones | Fins and scales: clean vs. unclean species | Plan a fish dish that serves well cold |
+| 26 | Steamed fish with ginger and scallion | Judge freshness by smell, eyes, flesh | Store-bought fish: reading labels and names | Steam fish and chill for a cold plate |
+| 27 | Poached cod in tomato sauce | Test doneness by flaking | Why fish cooks faster than meat | Make tomato sauce ahead; poach Friday |
+| 28 | **Mastery:** pan-seared tilapia or trout | Skin a fillet | Species ID quiz | Cold fish salad for the Sabbath table |
+| 29 | Vegetable stock | Skim and strain a stock | Stock vs. broth; why simmer, not boil | Freeze stock in portions |
+| 30 | Chicken stock from the Unit 6 carcass (freeze it in week 24) | Cool stock quickly and lift off fat | Gelatin and body in stock | Make stock ahead for the week |
+| 31 | Chicken noodle or matzo ball soup | Season a soup by tasting in stages | Soup families: clear, thick, puréed | Soup that improves when made ahead |
+| 32 | **Mastery:** minestrone or beef and barley soup | Make stock without a recipe card | Clean labels on boxed stock and bouillon (§2.1) | Soup as the Sabbath starter |
+| 33 | Vinaigrette and dressed salad | Fix a dish that's too salty, flat, or sour | Salt, acid, fat, heat | Draft the capstone menu |
+| 34 | Beef stew or chili, seasoned in stages | Blind taste test; name what's missing | How cuisines balance differently | Write the shopping list and prep timeline |
+| 35 | Practice run of one capstone dish | Taste and adjust without a recipe | Holding and reheating a full meal | Shop and do Thursday prep |
+| 36 | **Capstone:** full Sabbath meal made ahead (main, side, bread, salad) | Run the kitchen unaided | Reflection: what worked, what to change | Serve the meal for the Sabbath |
+
+The capstone pulls from every unit: safe temperatures (1), challah (2), knife work (3), an aromatic base (4), a grain or legume (5), a roast or fish (6–7), and soup (8).
+
+- **New recipes:** most Level 3 recipes aren't in Cook Around the World (pico de gallo, tabbouleh, garlic green beans, picadillo, mujaddara, shish taouk, the fish weeks, the stocks, the breads, and others). Each is written as that week's default, tagged with its skill (§6.21). Cook Around the World lessons with the same skill (fish tacos for dicing, minestrone and matzo ball soup for soup, challah) are swap-ins.
+- **Setup checks the calendar** (§6.20): a course whose Unit 2 would touch the family's unleavened days says so when it's set up. It comes with phase 13 (§9), after Level 3 itself.

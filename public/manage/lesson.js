@@ -20,6 +20,8 @@ const SECTIONS = [
 ];
 const SET_FOR_YOU = { id: 'Its name in the files; fixed once made.', version: 'Goes up on its own when steps or ingredients change.', image: 'The picture below.', unit: 'Move it on the Course page.' };
 const DISH_KEYS = ['about', 'main', 'method'];
+// Set by the checkbox on the dish card, not as its own field.
+const OWN_CONTROL = ['feast'];
 
 const slug = (s) => String(s ?? '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
 
@@ -75,7 +77,7 @@ export function lessonPage(id) {
   }
 
   const sections = el('div', { class: 'msections' });
-  const named = new Set([...SECTIONS.flatMap(([, keys]) => keys), ...Object.keys(SET_FOR_YOU), ...DISH_KEYS]);
+  const named = new Set([...SECTIONS.flatMap(([, keys]) => keys), ...Object.keys(SET_FOR_YOU), ...DISH_KEYS, ...OWN_CONTROL]);
   function draw() {
     const open = new Set([...sections.querySelectorAll('details[open]')].map((d) => d.dataset.k));
     const first = !sections.childElementCount;
@@ -122,7 +124,12 @@ export function lessonPage(id) {
       kids,
       seasonalUnit ? null : el('label', { class: 'choice' },
         el('input', { type: 'checkbox', checked: dish.meal === false, onchange: (e) => { if (e.target.checked) dish.meal = false; else delete dish.meal; onChange(false); } }),
-        'A side, bread, or dessert (not a full meal)'));
+        'A side, bread, or dessert (not a full meal)'),
+      // Good for Feast Days (§6.19): the badge, and offered in Swap all year
+      // round. An Appointed Times lesson always has it.
+      seasonalUnit ? null : el('label', { class: 'choice' },
+        el('input', { type: 'checkbox', checked: L.feast === true, onchange: (e) => { if (e.target.checked) L.feast = true; else delete L.feast; onChange(false); } }),
+        'Good for Feast Days'));
   }
 
   // The picture: a new one is made a PNG in this browser and saved with the lesson.

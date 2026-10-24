@@ -119,6 +119,13 @@ function sabbathBanner() {
     el('h2', {}, 'Shabbat shalom!'),
     el('p', {}, "While you're welcome to follow the recipe, please note that grading and due dates are not available on the Sabbath. We hope your family enjoys the rest!"));
 }
+// The next release (plan §8.6): a family the owner turned the preview on for
+// sees it before everyone else, and the parent screens say so.
+function previewNote() {
+  if (!me?.family?.next_release_preview) return null;
+  return el('aside', { class: 'card notice', role: 'note' },
+    el('p', {}, el('b', {}, 'Preview: '), 'your family sees the next release before other families. Some of it is still being built.'));
+}
 const fmtDay = (d, opts = { weekday: 'short', month: 'short', day: 'numeric' }) => new Date(`${d}T12:00:00`).toLocaleDateString(undefined, opts);
 const DIET = {
   nuts: 'Tree nuts', peanuts: 'Peanuts', dairy: 'Dairy', egg: 'Eggs', gluten: 'Gluten', fish: 'Fish', meat: 'Meat and poultry',
@@ -385,6 +392,9 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const quest = p.theme === 'quest';
   const other = quest ? 'passport' : 'quest';
 
+  // The Unleavened and Good for Feast Days badges (§6.19): an icon and a word, never a pill.
+  const mark = (icon, word) => el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-cooked` }, art(`<svg class="ico" aria-hidden="true"><use href="/icons.svg#${icon}"/></svg>`), word);
+  const marks = (x) => [x.unleavened ? mark('i-unleavened', 'Unleavened') : null, x.feast ? mark('i-feast', 'Good for Feast Days') : null];
   const card = (L) => {
     const swaps = L.substitutions.map((s) => `${s.use} instead of ${s.for}`).join('; ');
     const skip = L.left_out.length ? `Leave out the ${L.left_out.join(', ').toLowerCase()}` : '';
@@ -393,9 +403,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     const cooked = done ? el('p', { class: quest ? 'q-swap k-cooked' : 'p-swap k-cooked' },
       art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"/></svg>'),
       done.times === 1 ? 'Cooked once' : `Cooked ${done.times} times`) : null;
-    // The Unleavened badge (§6.19): an icon and a word, never a pill.
-    const unlv = L.unleavened ? el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-cooked` },
-      art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-unleavened"/></svg>'), 'Unleavened') : null;
+    const badges = marks(L);
     // A seasonal unit (Appointed Times) has its own labels, A1, A2.
     const seasonal = lib.seasonal?.includes(L.unit);
     if (quest) {
@@ -410,7 +418,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
           el('div', {}, el('dt', {}, 'From'), el('dd', {}, L.cuisine))),
         swaps ? el('p', { class: 'q-swap' }, `Made with ${swaps}`) : null,
         skip ? el('p', { class: 'q-swap' }, skip) : null,
-        unlv, cooked);
+        badges, cooked);
     }
     return el('article', { class: 'p-card' },
       el('span', { class: 'tape t1' }), el('span', { class: 'tape t2' }),
@@ -421,25 +429,22 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
       el('div', { class: 'p-meta' }, el('span', {}, time), el('span', {}, `Serves ${L.servings}`), el('span', {}, L.cuisine)),
       swaps ? el('p', { class: 'p-swap' }, `Made with ${swaps}`) : null,
       skip ? el('p', { class: 'p-swap' }, skip) : null,
-      unlv, cooked);
+      badges, cooked);
   };
 
   // The family's own recipes (§6.10), with their meal-type picture.
   const recipeCard = (r, kick = 'Family recipe') => {
     const done = cooks[r.id];
     const meta = [`${r.totalMinutes} min`, `Serves ${r.servings}`, r.meal];
-    const marks = [
-      r.unleavened ? el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-cooked` }, art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-unleavened"/></svg>'), 'Unleavened') : null,
-      done ? el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-cooked` }, art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"/></svg>'), done.times === 1 ? 'Cooked once' : `Cooked ${done.times} times`) : null,
-    ];
+    const badges = [...marks(r), done ? mark('i-check', done.times === 1 ? 'Cooked once' : `Cooked ${done.times} times`) : null];
     return quest
       ? el('article', { class: 'q-panel q-card' }, el('p', { class: 'q-kick' }, kick),
         el('div', { class: 'q-win' }, el('img', { src: r.image, alt: '', width: 230, height: 230, loading: 'lazy' })),
-        el('h3', { class: 'q-title' }, r.title), el('p', { class: 'q-skill' }, meta.join(' · ')), marks)
+        el('h3', { class: 'q-title' }, r.title), el('p', { class: 'q-skill' }, meta.join(' · ')), badges)
       : el('article', { class: 'p-card' }, el('span', { class: 'tape t1' }), el('span', { class: 'tape t2' }),
         el('div', { class: 'p-photo' }, el('img', { src: r.image, alt: '', width: 220, height: 220, loading: 'lazy' })),
         el('p', { class: 'p-lessonno' }, kick), el('h3', { class: 'p-title' }, r.title),
-        el('div', { class: 'p-meta' }, meta.map((m) => el('span', {}, m))), marks);
+        el('div', { class: 'p-meta' }, meta.map((m) => el('span', {}, m))), badges);
   };
   const open = (lid) => () => go(`#/kitchen/${p.id}/${lid}`);
   const lessonBtn = (L) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${L.title}`, onclick: open(L.id) }, card(L));
@@ -813,7 +818,7 @@ function parentScreen(current, ...kids) {
   const group = PARENT_GROUPS.find(([g]) => g === page?.group)?.[1];
   screen(head, drawer,
     group ? el('p', { class: 'eyebrow' }, group) : null,
-    el('h1', {}, page?.label ?? 'Parents'), sabbathBanner(), ...kids,
+    el('h1', {}, page?.label ?? 'Parents'), sabbathBanner(), previewNote(), ...kids,
     ruthButton(ruthCtx(), () => openRuth(ruthCtx())));
 }
 
@@ -1105,17 +1110,17 @@ async function showDish(id) {
   let d;
   if (/^recipe:/.test(id)) {
     const r = await api('GET', `/api/recipes/${id.slice(7)}`);
-    d = { title: r.title, image: r.image, minutes: r.totalMinutes, cuisine: 'Family recipe', ...r.card };
+    d = { title: r.title, image: r.image, minutes: r.totalMinutes, cuisine: 'Family recipe', unleavened: r.unleavened, feast: r.feast, ...r.card };
   } else if (/^shared:/.test(id)) {
     const r = await api('GET', `/api/shared/${id.slice(7)}`);
-    d = { title: r.title, image: r.image, minutes: r.totalMinutes, cuisine: 'User-shared recipe', ...r.card };
+    d = { title: r.title, image: r.image, minutes: r.totalMinutes, cuisine: 'User-shared recipe', unleavened: r.unleavened, feast: r.feast, ...r.card };
   } else {
     const [C, R] = await Promise.all([courseCache ??= fetch('/content/course.json').then((x) => x.json()), contentRegistry()]);
     const L = R.lessons.find((x) => x.id === id), c = C.dishes.find((x) => x.id === id);
     const src = L ?? c;
     if (!src) return;
     d = { title: src.title, image: src.image, minutes: L?.minutes ?? c?.minutes, estimated: !L && c?.estimated, cuisine: R.cuisines[src.cuisine]?.name ?? src.cuisine,
-      about: L?.about ?? c?.about, main: L?.main ?? c?.main, method: L?.method ?? c?.method, written: Boolean(L) };
+      about: L?.about ?? c?.about, main: L?.main ?? c?.main, method: L?.method ?? c?.method, written: Boolean(L), unleavened: L?.unleavened, feast: L?.feast };
   }
   const close = () => { ov.remove(); document.removeEventListener('keydown', onKey); };
   const onKey = (e) => { if (e.key === 'Escape') close(); };
@@ -1124,6 +1129,7 @@ async function showDish(id) {
       el('img', { src: d.image, alt: '', width: 160, height: 160 }),
       el('h2', {}, d.title),
       el('p', { class: 'mut' }, [d.cuisine, d.minutes ? `${d.estimated ? 'about ' : ''}${d.minutes} min` : null, d.method ? METHOD_NAMES[d.method] : null].filter(Boolean).join(' · ')),
+      d.unleavened || d.feast ? el('div', { class: 'badges' }, d.unleavened ? badge('i-unleavened', 'Unleavened') : null, d.feast ? badge('i-feast', 'Good for Feast Days') : null) : null,
       d.about ? el('p', {}, d.about) : null,
       d.main?.length ? [el('h3', {}, 'Main ingredients'), el('ul', {}, d.main.map((m) => el('li', {}, m)))] : null,
       d.written === false ? el('p', { class: 'mut small' }, 'This lesson is still being written.') : null,

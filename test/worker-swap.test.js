@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import { makeEnv, family, samplePlan } from './helpers/worker.js';
 import { springWeek } from '../src/worker/swap.js';
 import { weekOf } from '../src/worker/schedule.js';
+import { LIBRARY } from '../src/worker/library-data.js';
 
 const base = { servings: 4, totalMinutes: 30, method: 'stove', why: null, equipment: ['skillet-12'], steps: [{ text: 'Cook it in the pan.', safety: 'adult-nearby', hazard: 'Hot pan' }] };
 const FLAT = { ...base, mealType: 'bread', title: 'Quick flatbread', ingredients: [{ ingredient: 'flour-ap', amount: 2, unit: 'cup' }] };
@@ -50,6 +51,27 @@ test('in spring the picker offers only Unleavened recipes, in order; the rest of
   assert.equal(year.spring, false);
   assert.deepEqual(groupsOf(year.options), ['Appointed Times lessons', 'User-shared recipes']);
   assert.deepEqual(year.options.filter((o) => o.group === 'User-shared recipes').map((o) => o.title), ['Soda bread'], 'feast recipes, unleavened or not; not a general one');
+});
+
+test('a course lesson marked Good for Feast Days is offered all year with the badge; in spring only if unleavened', async () => {
+  const { a, ava } = await setup();
+  const fattoush = LIBRARY.lessons.find((L) => L.id === 'fattoush');
+  assert.equal(fattoush.feast, false);
+  assert.ok(LIBRARY.lessons.filter((L) => LIBRARY.seasonal.includes(L.unit)).every((L) => L.feast), 'Appointed Times lessons always have it');
+  fattoush.feast = true;
+  try {
+    const summer = (await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava], planned_date: '2027-06-16' })).body.id;
+    const year = (await a.get(`/api/queue/${summer}/swap`)).body;
+    assert.deepEqual(groupsOf(year.options), ['Appointed Times lessons', 'Other lessons']);
+    assert.deepEqual(year.options.filter((o) => o.group === 'Other lessons').map((o) => [o.id, o.feast, o.unleavened]), [['fattoush', true, false]]);
+    const spring = (await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava], planned_date: '2027-03-17' })).body.id;
+    assert.ok(!(await a.get(`/api/queue/${spring}/swap`)).body.options.some((o) => o.id === 'fattoush'), 'pita is leaven');
+    const kitchen = (await a.get('/api/library')).body;
+    assert.equal(kitchen.lessons.find((L) => L.id === 'fattoush')?.feast, true, 'the kitchen card gets the badge');
+    assert.equal((await a.post(`/api/queue/${summer}/swap`, { lesson_id: 'fattoush' })).status, 200);
+  } finally {
+    fattoush.feast = false;
+  }
 });
 
 test('a lesson queued by hand comes off the queue; Undo puts it back', async () => {

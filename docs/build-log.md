@@ -3138,3 +3138,131 @@ the deploy until this is done, so its tables go in the same migration).
 - Tests: 271 (5 new). Checked in a browser at phone width on the dev server:
   the Grades page, grading with the rubric and words, Progress's Grade
   column, Edit details, and the transcript on screen and in print.
+
+## 125. 2026-10-23 — Feast-day badges everywhere, and feast-day course lessons
+
+The owner asked where the Unleavened and Good for Feast Days badges show,
+since the dish card had neither.
+- **Owner rulings (2026-10-23):** both badges go on the dish card and the
+  kitchen cards; the owner will mark some course lessons Good for Feast Days
+  (before this, only shared feast-day recipes and the Appointed Times
+  lessons had it). Plan §6.19 updated.
+- **Lesson field:** `feast: true` on a lesson file (`lesson.schema.json`).
+  In the content editor it's a **Good for Feast Days** checkbox on the
+  lesson's dish card section, not on Appointed Times lessons, which always
+  have it. `tools/build-library.js` gives every lesson `feast` (marked, or in
+  a seasonal unit) in `registry.json` and `library-data.js`.
+- **Swap:** outside February 1 to May 15, the picker now also offers the
+  marked course lessons under "Other lessons", after the Appointed Times
+  lessons. In spring they show only if they're unleavened, as before.
+- **Dish card** (`showDish`): both badges, for lessons, family recipes, and
+  shared recipes, in the swap picker's icon-and-word style.
+- **Kitchen cards:** lesson cards and recipe cards (Our recipes and the
+  User-shared shelf) show Good for Feast Days beside Unleavened.
+  `/api/library` lessons and `/api/recipes` summaries carry `feast`; a
+  family recipe has it when it's shared as a feast-day recipe, or was added
+  from one that's still in the directory.
+- Tests: 272 (1 new). Checked in a browser at phone width on the dev server:
+  the dish card and the kitchen's Appointed Times shelf with both badges. The
+  editor checkbox wasn't opened in a browser.
+
+## 126. 2026-10-23 — Plan: the Levels, Unleavened Bread dates, and family tastes
+
+Design only; no code changed. Owner decisions from this session, written
+into the plan:
+- **Heritage and the Levels (§1, §4, §12):** the 75-lesson course is now
+  the Heritage course, still open to every family. Four Levels (Helper,
+  Apprentice, Cook, Chef) are a companion program in this app, not a
+  separate app, because it shares families, food rules, shopping, the
+  schedule, and the transcript. Level 3 is built first. The Level outlines
+  are the owner's suggestions. The beginner track (§11) is replaced by
+  Levels 1 and 2.
+- **Level 3 unit order:** yeast dough moves from Unit 8 to Unit 2. Taught
+  late, it fell on Unleavened Bread in most years. It needs only food safety,
+  measuring, and the oven; UK schools teach yeast rolls in the first year of
+  secondary school; practice spread over weeks is kept better (weekly
+  challah); and an early success builds confidence. Stock and soup now lands
+  in April. Week 18's beef sausage gets the §2.1 casing note.
+- **Unleavened Bread dates (§6.20):** the fixed February 1 to May 15 window
+  is replaced by each family's dates: one or two standard calendars
+  (`content/calendars.json`, owner to name them), with the family's own first
+  day allowed. Every family keeps the feast; there's no opt-out. Families
+  also say when their house goes unleavened (on the first day, or a date
+  before). Asked in Getting started, Family settings, and every year. §6.19's
+  swap rule now points here.
+- **Family tastes and the recipe pool (§6.21):** proteins, cuisines to skip,
+  spice, time, a $ to $$$ budget band, and how adventurous. Tastes leave
+  dishes out, never skip a skill (closest fit instead), and never touch the
+  hard rule. New recipes are written only as swap-ins for a named skill. A
+  Recipe gaps page counts, with no family named, where tastes leave families
+  short, to drive what gets written next.
+- Data model, phases 11 to 13, and open questions (which calendars;
+  mini-courses set aside) updated.
+- Research behind these: teen cooking standards (FCS, ProStart, UK
+  competences), personalization at meal-kit and planning services, Passover
+  dates for 2027 to 2029, and studies on spaced practice and cooking
+  confidence.
+
+## 127. 2026-10-23 — Plan: Cook Around the World
+
+Design only. The owner renamed the 75-lesson course: it's **Cook Around the
+World**, offered and marketed to casual families and adults, and the Levels
+are the homeschool curriculum. "Heritage" (126) didn't fit a course built
+this month. Plan §1, §4, §6.21, §8.4 (`program` is `world` or `level-3`),
+§9, and §12 updated. New open question (§10): whether homeschool mode stays
+on Cook Around the World or moves to the Levels only; the syllabus and
+landing pages need wording for the two programs either way.
+
+## 128. 2026-10-23 — Plan: building the next release beside the live app
+
+Design only. Owner decisions:
+- **The next release is built switched off** (plan §8.6). Everything planned
+  today (Unleavened Bread dates, tastes and recipe gaps, the Levels, the
+  Cook Around the World name) goes into the live app behind a Next release
+  switch on `/ops`: preview for chosen families, Launch for everyone, and
+  Turn off for everyone as its restore. New content lives in
+  `content/levels/` and `content/calendars.json`. Chosen over a long-lived
+  branch, which would drift from `main`, couldn't be tried on the live app
+  without a second Worker, and couldn't be edited in the content editor.
+- **One migration for the whole build** ("I don't want 40 migrations"):
+  `0003_next_release.sql` is a draft, edited in place. It may only create new
+  tables; Re-apply draft rebuilds them (preview data only, with the backup
+  beside it); Finalize freezes it at launch. So tastes and course programs
+  move to new tables (`family_tastes`, `course_programs`) instead of new
+  columns. The runner pattern in `CLAUDE.md` is unchanged.
+- **Homeschool mode stays on both programs:** homeschool families can take
+  Cook Around the World as an elective. The open question is closed.
+- Phase 10b (the switch and the draft migration) comes before phases 11–13.
+
+## 129. 2026-10-23 — The Next release switch and the draft migration
+
+Phase 10b (plan §8.6): the way the next release is built inside the live app,
+switched off, with one migration.
+- **Phases reordered (owner, 2026-10-23):** tastes and the recipe pool is
+  now phase 11, built right after the switch; Unleavened Bread dates moves to
+  13. Level 3's calendar check comes with 13.
+- **Next release switch** (`src/worker/release.js`, `/ops`): a "Next release"
+  section with Launch for everyone and Undo launch (back to preview only;
+  nothing is lost), and a preview on/off button on each family. Kept in
+  `settings` under `next_release`, so the switch needs no migration.
+  `/api/me` adds `next_release` and `next_release_preview`; a preview
+  family's parent screens show a Preview note. Nothing else uses it yet.
+- **Draft migrations** (`src/worker/migrate.js`): a migration marked
+  `draft: true` is edited in place. It may only create new tables and
+  indexes on them; anything else is refused before it runs. `_drafts` (made
+  by the runner, like `_migrations`) records the tables each draft made.
+  States: pending, draft, draft-edited (instead of drifted), and applied once
+  finalized. `/ops/draft/<id>`: Re-apply draft (type REBUILD) drops the
+  draft's tables and makes them again in one batch; Restore draft tables
+  (`importDraftTables` in `backup.js`) is its restore, filling the draft's
+  empty tables from an earlier export.json; Finalize (type FINALIZE) freezes
+  an unedited draft. An applied draft counts as ready on `/ops`.
+- **`0003_next_release.sql`** is the draft, with no tables yet. After this
+  deploy the owner presses **Apply pending** on `/ops` (with 0002, if that's
+  still pending).
+- **`content/levels/`** holds the next release's content (a README for now).
+- Tests: 276 (4 new: draft checks; re-apply, restore, and finalize; the
+  switch per family and for everyone; the draft page's phrase). Checked in a
+  browser at phone width on the dev server: the Next release section, a
+  family's preview button, the draft page, and the Preview note on Family
+  settings.
