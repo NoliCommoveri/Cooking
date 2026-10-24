@@ -4611,3 +4611,20 @@ tables.
   each Level starts. Level 4's assignment note is still the owner's to write
   (§12.6); the syllabus says only that Level 4 students work on their own.
 - Tests: 351 (the two new scripts parse; the new page loads its script).
+
+## 191. 2026-10-24 — Amounts for the pita and rice served on the side
+
+- Owner, 2026-10-24 (screenshot of the demo's shopping list): the bread
+  items showed a note ("warm, for scooping", "steamed, for serving") where
+  the amount should be.
+- **Cause:** both lines had no amount, only a note, and the shopping list
+  shows a line's note when it has nothing to measure.
+- **Fix (content):** Shakshuka's pita is 6 pitas (warm, for scooping), and
+  Beef bulgogi's rice is 2 cups uncooked (steamed, for serving), each still
+  optional. The list now reads "1 × 6-pack of pitas" and "1 × 2-lb bag", for
+  the demo and for every family. They were the only lines in the library
+  with something to buy and no amount, apart from ketchup for dipping (Hash
+  browns, Shoestring fries), which is left as is.
+- The shopping test now checks the pita's amount and uses the ketchup line
+  for a line without one. `preview/lesson-preview.html` rebuilt.
+- Tests: 351, all passing.
