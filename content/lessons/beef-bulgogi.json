@@ -47,7 +47,7 @@
     { "ingredient": "green-onion", "amount": 4, "unit": "count", "prep": "thinly sliced", "group": "Marinade" },
     { "ingredient": "vegetable-oil", "amount": 2, "unit": "tbsp", "scale": false, "group": "For the pan" },
     { "ingredient": "sesame-seeds", "amount": 1, "unit": "tbsp", "optional": true, "group": "To serve" },
-    { "ingredient": "rice-white", "amount": null, "text": "steamed, for serving", "optional": true, "group": "To serve" }
+    { "ingredient": "rice-white", "amount": 2, "unit": "cup", "prep": "uncooked amount: steamed, for serving", "optional": true, "group": "To serve" }
   ],
   "substitutions": [
     { "for": "asian-pear", "use": "pear-bosc", "reason": "availability", "note": "A grated apple works too." },

@@ -49,7 +49,7 @@
     { "ingredient": "egg", "amount": 6, "unit": "count", "round": "up" },
     { "ingredient": "parsley", "amount": 2, "unit": "tbsp", "prep": "chopped", "optional": true, "group": "To serve" },
     { "ingredient": "feta", "amount": 0.5, "unit": "cup", "prep": "crumbled", "optional": true, "group": "To serve" },
-    { "ingredient": "pita", "amount": null, "text": "warm, for scooping", "optional": true, "group": "To serve" }
+    { "ingredient": "pita", "amount": 6, "unit": "count", "round": "up", "prep": "warm, for scooping", "optional": true, "group": "To serve" }
   ],
   "equipment": [
     "chef-knife",

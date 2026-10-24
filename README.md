@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [188. 2026-10-24 — Numbered releases](docs/build-log.md#188-2026-10-24--numbered-releases)
+**Latest build log entry:** [192. 2026-10-24 — Ketchup for dipping is a bottle](docs/build-log.md#192-2026-10-24--ketchup-for-dipping-is-a-bottle)
 
 ## Current features
 
@@ -35,8 +35,9 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Photos switch** (`/ops`): photos are off for every family until the owner turns them on for one.
 - **Chef Ruth** (`public/ruth.js`, `src/worker/setup.js`): the helper, a scripted chat with a floating button on the parent screens. Her **Getting started** runs on its own for a new family and can't be skipped: family name and PIN, servings, diet, learners, kid logins, casual or homeschool, then a course or a first lesson. It can be run again from her button to change answers, until there's a lesson in the queue or a dish cooked. Her **Show me around** tours every parent screen, starting with the Queue: a look at each, then how to use it, and Let me see it again for a longer look. She types like a person: typing dots, then one message at a time.
 - **Test-cook notice**: parents from before Getting started see a one-time note, above the lockers, to read a lesson through before their kids cook it; Getting started ends with the same reminder.
-- **Demo page** (`/demo`): no account needed. Try the sample lessons in either theme, including the three choices for julienne, preview diet settings and a real shopping list, and browse the whole course by dish or by skill.
-- **Syllabus** (`/syllabus`): the course as a homeschool course, with objectives, units, hours, pacing, a suggested credit, and the rubric. Printable.
+- **Demo page** (`/demo`): no account needed. Two tracks: Cook Around the World (the sample lessons in either theme, diet and shopping previews, the course by dish or skill) and Structured Progression (a Level 3 week and its part pages, the four Levels, and a learner's progress).
+- **Syllabus** (`/syllabus`): Cook Around the World as a homeschool course, with objectives, units, hours, pacing, a suggested credit, and the rubric. Printable.
+- **Structured Progression syllabus** (`/syllabus/structured-progression/`): the four Levels, how a week works, Level 3's objectives, units, every week's parts, hours and credit, pacing, safety, and assessment; Levels 1, 2, and 4 as outlines. Printable.
 - **Course outline** (`content/course.json`): all 98 planned dishes (59 numbers, with pick-one choices) in teaching order, with their skills and prerequisites, checked by the linter.
 - **Lesson numbers** (`src/content/course.js`): come from the course order; pick-one choices share a number (1a, 1b, 1c), 59 in all.
 - **Appointed Times unit** (unit 8 in `content/units.json`): lessons beside the numbered course, labeled A1, A2: unleavened flatbread and cottage cheese crescent rolls so far.

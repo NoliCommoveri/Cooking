@@ -41,7 +41,7 @@ root.innerHTML = `
 
 <h2>About the course</h2>
 <p>Each lesson pairs one cooking skill with one real dish that uses it. Students learn why the skill works, gather and measure their ingredients, cook step by step with built-in timers and safety guidance, and reflect on the result. Dishes come from many cuisines, and every recipe follows biblical food laws (Leviticus 11, Deuteronomy 14): no pork, shellfish, or other unclean foods, and no blood, suet, or tallow.</p>
-<p><b>Who it's for:</b> students 10 and up who have done some cooking. A beginner track for students with no experience is planned.</p>
+<p><b>Who it's for:</b> students 10 and up who have done some cooking. For complete courses that start from the fundamentals, with knowledge, drills, and mastery checks, see <a href="/syllabus/structured-progression/">Structured Progression</a>.</p>
 
 <h2>Learning objectives</h2>
 <p>By the end of the course, a student can:</p>

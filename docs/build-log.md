@@ -4537,3 +4537,107 @@ tables.
 - Tests: 349 (the switch test reworked for numbers; one new: the old switch
   reads as release 1, and a later release previews while an earlier one is
   live).
+
+## 189. 2026-10-24 — The demo page's two tracks
+
+- Owner, 2026-10-24: with the Level courses merged, the demo should present
+  the two main tracks. **Cook Around the World** is for older teens and
+  adults who want to practise technique and try a wide range of dishes, and
+  is recipe only. **Structured Progression** is for families teaching
+  cooking from the fundamentals onward, even for young cooks: complete,
+  credit-able courses with Knowledge, Drill, and Beyond the Recipe beside
+  each recipe.
+- Owner rulings: Structured Progression is the public name for the Levels;
+  Cook Around the World can still be graded; Levels 1, 2, and 4 show as
+  being written; release 1 is already launched for everyone, so the demo
+  can show Level content.
+- **Before:** the demo was Cook Around the World only (Try it, Shopping,
+  Course, Skills), with the syllabus link under the header.
+- **Now** (`public/demo.js`, `public/demo.css`):
+  - Under the header, a card for each track, with an Explore button; the
+    syllabus link moved onto Cook Around the World's card.
+  - A track switch above the tabs. Cook Around the World's four tabs are
+    unchanged.
+  - Structured Progression: **Try a week** (Level 3, weeks 1–4, as the
+    kitchen's week card in either theme; each part opens its page with its
+    steps and quiz and Done, kept for the tab only; the recipe opens the
+    real player, with "cook it on your own" on the mastery week; with a diet
+    that rules out the default, the first option that fits, or a note that a
+    parent would swap). **The Levels** (all four, Level 3 with its units,
+    goals, and weeks). **Progress** (the real Level progress view,
+    `levelProgressView`, for a pretend learner in week 6 with Unit 1
+    mastered, and sample transcript rows).
+  - Theme, Cooking as, and Leave out show only on the tabs they change.
+- `tools/build-library.js` writes `public/content/levels.json`: each
+  Level's units, and its weeks with recipe titles and part pages.
+- **For the owner to approve:** the two track blurbs are Claude's draft from
+  the owner's words. The header copy above them is unchanged.
+- Not done: the syllabus page still covers Cook Around the World only;
+  Structured Progression has no syllabus link yet.
+- Tests: 349, all passing; screenshots of every view sent in the session.
+- `CLAUDE.md` gains a Screenshots rule (owner, 2026-10-24): every screen
+  built or changed is sent to the owner as a screenshot in the session, at
+  phone width and in both themes where it matters, and not committed.
+
+## 190. 2026-10-24 — The Structured Progression syllabus
+
+- Owner, 2026-10-24: build the Structured Progression syllabus next.
+- **Before:** one syllabus, `/syllabus`, for Cook Around the World only. It
+  still said a beginner track was planned.
+- **Now:** `/syllabus/structured-progression/` (`public/syllabus-sp.js`):
+  - The program and who it's for, by what a student can do.
+  - The four Levels at a glance: where each starts, time, credit, status.
+  - How a week works: Knowledge, Drill, Recipe, Beyond the Recipe with
+    Level 3's average minutes; mastery weeks; the capstone; best-fit
+    recipes; optional parts.
+  - Level 3 in full: objectives (its unit goals), hours by part with
+    `plannedMinutes` as setup counts them (about 126 with every part), the
+    suggested credit, and each unit's weeks with the recipe and the three
+    part titles.
+  - Levels 1, 2, and 4 as outlines, being written.
+  - Pacing, materials, safety and supervision, and assessment (mastery
+    checks, the rubric, parts checked off, the transcript).
+- `public/content/levels.json` gains each week's `recipeMinutes`, counted
+  the way the Worker counts it (lesson time, else the planned dish's, else
+  the Level card's).
+- The Level outlines moved from `public/demo.js` to `public/level-outlines.js`,
+  shared by the demo and the syllabus.
+- The syllabus pages' styles moved into `public/syllabus.css`. Wide tables
+  stack into labelled rows on a phone; print keeps the table.
+- Links: the demo's Structured Progression card and The Levels tab; Cook
+  Around the World's syllabus now points to Structured Progression in place
+  of the planned beginner track, and the two syllabi link to each other.
+- **For the owner to approve:** all the syllabus wording, including where
+  each Level starts. Level 4's assignment note is still the owner's to write
+  (§12.6); the syllabus says only that Level 4 students work on their own.
+- Tests: 351 (the two new scripts parse; the new page loads its script).
+
+## 191. 2026-10-24 — Amounts for the pita and rice served on the side
+
+- Owner, 2026-10-24 (screenshot of the demo's shopping list): the bread
+  items showed a note ("warm, for scooping", "steamed, for serving") where
+  the amount should be.
+- **Cause:** both lines had no amount, only a note, and the shopping list
+  shows a line's note when it has nothing to measure.
+- **Fix (content):** Shakshuka's pita is 6 pitas (warm, for scooping), and
+  Beef bulgogi's rice is 2 cups uncooked (steamed, for serving), each still
+  optional. The list now reads "1 × 6-pack of pitas" and "1 × 2-lb bag", for
+  the demo and for every family. They were the only lines in the library
+  with something to buy and no amount, apart from ketchup for dipping (Hash
+  browns, Shoestring fries), which is left as is.
+- The shopping test now checks the pita's amount and uses the ketchup line
+  for a line without one. `preview/lesson-preview.html` rebuilt.
+- Tests: 351, all passing.
+
+## 192. 2026-10-24 — Ketchup for dipping is a bottle
+
+- Owner, 2026-10-24: give the ketchup for dipping an amount, one bottle.
+- **Fix (content):** Hash browns (serves 6) and Shoestring fries (serves 4)
+  each list ½ cup ketchup, for dipping, still optional. It scales with the
+  servings like any line, and the shopping list rounds it to **1 × 20-oz
+  bottle** (a bottle is about 2⅓ cups).
+- The shopping test checks the bottle, and now uses French omelet's black
+  pepper ("a few grinds") for a line with no amount. Lines like that, and
+  flour for dusting and flaky salt, still have no amount; each is a pinch or
+  a few grinds of something the lesson buys anyway, or a kitchen staple.
+- Tests: 351, all passing.

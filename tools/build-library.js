@@ -6,6 +6,7 @@
 //   public/content/registry.json   ingredients, tools, skills, kitchen words, cuisines, units, and every lesson's summary
 //   public/content/lessons/*.json  each lesson file, for the lesson player
 //   public/content/course.json     all planned dishes, for the demo and syllabus pages
+//   public/content/levels.json     the Levels' units, weeks, and part pages, for the demo and syllabus pages
 //   public/img/meals/*.svg         the meal-type pictures, copied from content/images/meals
 //   public/lib/*.js                the shared scaling, unit, kitchen-word, diet, and patch code
 // The lesson files are served as plain files so the app can keep them for cooking offline.
@@ -122,6 +123,23 @@ export function buildPublic() {
   const written = new Set(c.lessons.map(({ data }) => data.id));
   files['public/content/course.json'] = JSON.stringify({
     dishes: c.course.dishes.map((d) => ({ ...d, image: `img/${d.image.replace(/\.png$/, '.webp')}`, ...(written.has(d.id) ? { written: true } : {}) })),
+  }) + '\n';
+  // The Levels (§12), for the demo's Structured Progression track (§6.16) and
+  // its syllabus: each one's units and weeks, with every week's recipe title
+  // and planned time, and its part pages.
+  // A recipe's planned time, as the Worker counts it (plannedRecipeMinutes in src/worker/plan.js).
+  const minutesOf = (V, id) => [...c.lessons, ...(c.levelLessons ?? [])].find(({ data }) => data.id === id)?.data.totalMinutes
+    ?? c.course.dishes.find((d) => d.id === id)?.minutes ?? V.recipes.find((r) => r.id === id)?.minutes ?? 0;
+  const titleOf = (V, id) => V.recipes.find((r) => r.id === id)?.title ?? c.course.dishes.find((d) => d.id === id)?.title
+    ?? [...c.lessons, ...(c.levelLessons ?? [])].find(({ data }) => data.id === id)?.data.title ?? id;
+  files['public/content/levels.json'] = JSON.stringify({
+    levels: (c.levels ?? []).map(({ data: V }) => ({
+      id: V.id, name: V.name, hours: V.hours, units: V.units.map(({ number, name, goal }) => ({ number, name, goal })),
+      weeks: V.weeks.map(({ week, unit, recipe, swapIns, mastery, kind, minutes, note, drill, knowledge, sabbath }) => ({
+        week, unit, ...(recipe ? { recipe, title: titleOf(V, recipe), recipeMinutes: minutesOf(V, recipe) } : {}), ...(swapIns?.length ? { options: swapIns } : {}),
+        ...(mastery ? { mastery } : {}), ...(kind ? { kind, minutes, note } : {}), drill, knowledge, sabbath,
+      })),
+    })),
   }) + '\n';
   // Meal-type pictures (§6.19): shared recipes without art, and lessons waiting on theirs.
   for (const f of readdirSync(join(ROOT, 'content/images/meals'))) files[`public/img/meals/${f}`] = readFileSync(join(ROOT, 'content/images/meals', f), 'utf8');

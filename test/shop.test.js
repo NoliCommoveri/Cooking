@@ -46,9 +46,14 @@ test("kitchen staples stay on the list, grouped as may already have; on-hand ite
   const order = SECTIONS.map(([id]) => id);
   const at = list.sections.map((x) => order.indexOf(x.id));
   assert.deepEqual(at, [...at].sort((a, b) => a - b));
-  const pita = find(list, 'pita');
-  assert.equal(pita.buy, null);
-  assert.equal(pita.amountless, true);
+  // Serving pita has an amount, so the list says how much to buy.
+  assert.equal(find(list, 'pita').buy, '1 × 6-pack of pitas');
+  // Ketchup for dipping is a bottle (owner, 2026-10-24).
+  assert.equal(find(shoppingList({ lessons: [{ lesson: L('hash-browns'), servings: 6 }], registry }), 'ketchup').buy, '1 × 20-oz bottle');
+  // A line with no amount ("a few grinds") is listed without one.
+  const pepper = find(shoppingList({ lessons: [{ lesson: L('french-omelet'), servings: 6 }], registry }), 'black-pepper');
+  assert.equal(pepper.buy, null);
+  assert.equal(pepper.amountless, true);
   const skipped = shoppingList({ lessons: [{ lesson: L('shakshuka'), servings: 6 }], registry, skip: ['egg'] });
   assert.equal(find(skipped, 'egg'), undefined);
 });

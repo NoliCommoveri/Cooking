@@ -43,7 +43,7 @@
     { "ingredient": "salt", "amount": 1, "unit": "tsp" },
     { "ingredient": "garlic-powder", "amount": 0.5, "unit": "tsp", "optional": true },
     { "ingredient": "paprika-smoked", "amount": 0.5, "unit": "tsp", "optional": true },
-    { "ingredient": "ketchup", "amount": null, "text": "for dipping", "optional": true, "group": "To serve" }
+    { "ingredient": "ketchup", "amount": 0.5, "unit": "cup", "prep": "for dipping", "optional": true, "group": "To serve" }
   ],
   "equipment": [
     "sheet-pan",

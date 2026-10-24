@@ -16,7 +16,7 @@ test('the app shell loads its script and styles', () => {
   assert.match(html, /href="app.css"/);
 });
 
-for (const f of ['public/ruth.js', 'public/player.js', 'public/cooks.js', 'public/voice.js', 'public/demo.js', 'public/syllabus.js', 'public/rewards.js', 'public/sound.js']) {
+for (const f of ['public/ruth.js', 'public/player.js', 'public/cooks.js', 'public/voice.js', 'public/demo.js', 'public/syllabus.js', 'public/syllabus-sp.js', 'public/level-outlines.js', 'public/rewards.js', 'public/sound.js']) {
   test(`${f} parses`, () => {
     const r = spawnSync(process.execPath, ['--check', f], { encoding: 'utf8' });
     assert.equal(r.status, 0, r.stderr);
@@ -26,6 +26,7 @@ for (const f of ['public/ruth.js', 'public/player.js', 'public/cooks.js', 'publi
 test('the demo and syllabus pages load their scripts', () => {
   assert.match(readFileSync('public/demo/index.html', 'utf8'), /<script type="module" src="\/demo.js">/);
   assert.match(readFileSync('public/syllabus/index.html', 'utf8'), /<script type="module" src="\/syllabus.js">/);
+  assert.match(readFileSync('public/syllabus/structured-progression/index.html', 'utf8'), /<script type="module" src="\/syllabus-sp.js">/);
 });
 
 // The owner's Preview as a learner (§7.5) runs the real player, so the manager
