@@ -32,6 +32,7 @@
     { "id": "kitchen-scale", "name": "Kitchen scale (grams)", "category": "measuring", "icon": null },
     { "id": "saucepan-medium", "name": "Medium saucepan with a lid", "category": "pots", "icon": null },
     { "id": "pot-large", "name": "Large heavy pot with a lid (like a Dutch oven)", "category": "pots", "icon": null },
+    { "id": "stockpot", "name": "Stockpot (8 quarts or bigger)", "category": "pots", "icon": null },
     { "id": "colander", "name": "Colander", "category": "utensils", "icon": null },
     { "id": "shallow-dish", "name": "Wide shallow dish, like a pie plate", "category": "mixing", "icon": null },
     { "id": "kitchen-towel", "name": "Clean kitchen towels", "category": "utensils", "icon": null },

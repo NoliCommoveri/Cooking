@@ -4964,6 +4964,263 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "beef-ragu",
+   "version": 1,
+   "track": "core",
+   "unit": 3,
+   "title": "Beef ragù",
+   "image": "img/dishes/beef-ragu.webp",
+   "cuisine": "italian",
+   "skill": "A soffritto base, a long slow braise",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "Sear the beef in three batches, and make sure your pot holds it all in about two layers with the sauce."
+     }
+    ]
+   },
+   "totalMinutes": 230,
+   "ingredients": [
+    {
+     "ingredient": "beef-chuck"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "tomato-paste"
+    },
+    {
+     "ingredient": "broth-beef"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "spaghetti"
+    },
+    {
+     "ingredient": "parmesan",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "spaghetti",
+     "use": "spaghetti-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "rich-tomato"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "carrots",
+     "celery",
+     "garlic",
+     "tomatoes"
+    ],
+    "optional": [
+     "sharp-cheese"
+    ]
+   },
+   "tools": [
+    "paper-towels",
+    "chef-knife",
+    "cutting-board",
+    "plate",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "liquid-measuring-cup",
+    "can-opener",
+    "pot-large",
+    "tongs",
+    "wooden-spoon",
+    "thermometer",
+    "fork",
+    "stockpot",
+    "colander"
+   ],
+   "variations": [
+    {
+     "title": "Ragù bolognese",
+     "image": "img/dishes/beef-ragu.webp",
+     "cuisine": "italian",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "max": 8,
+      "notes": [
+       {
+        "from": 7,
+        "text": "Brown the beef in three batches, so it browns instead of steaming."
+       }
+      ]
+     },
+     "totalMinutes": 140,
+     "ingredients": [
+      {
+       "ingredient": "beef-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "carrot"
+      },
+      {
+       "ingredient": "celery"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "tomato-paste"
+      },
+      {
+       "ingredient": "broth-beef"
+      },
+      {
+       "ingredient": "tomatoes-crushed"
+      },
+      {
+       "ingredient": "bay-leaves"
+      },
+      {
+       "ingredient": "oregano-dried"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "spaghetti"
+      },
+      {
+       "ingredient": "parmesan",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "spaghetti",
+       "use": "spaghetti-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "beef",
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "carrots",
+       "celery",
+       "garlic",
+       "tomatoes"
+      ],
+      "optional": [
+       "sharp-cheese"
+      ]
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "plate",
+      "mixing-bowl-medium",
+      "small-bowl",
+      "measuring-cups",
+      "measuring-spoons",
+      "liquid-measuring-cup",
+      "can-opener",
+      "pot-large",
+      "tongs",
+      "wooden-spoon",
+      "thermometer",
+      "fork",
+      "stockpot",
+      "colander",
+      "heatproof-bowl"
+     ],
+     "id": "bolognese"
+    }
+   ]
+  },
+  {
    "id": "butter-chicken",
    "version": 1,
    "track": "core",
@@ -6068,6 +6325,116 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "beef-picadillo",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Beef picadillo",
+   "image": "img/meals/meat.svg",
+   "cuisine": "cuban",
+   "skill": "Sweating a sofrito, then browning beef",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "Brown the beef in two batches, so it browns instead of steaming."
+     }
+    ]
+   },
+   "totalMinutes": 55,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "bell-pepper-green"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "tomato-sauce"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "raisins"
+    },
+    {
+     "ingredient": "olives-green"
+    },
+    {
+     "ingredient": "vinegar-red-wine"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "bell-peppers",
+     "garlic"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "saucepan-medium",
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "liquid-measuring-cup",
+    "skillet-12",
+    "wooden-spoon",
+    "heatproof-bowl",
+    "thermometer",
+    "fork"
+   ],
+   "level": "level-3"
+  },
+  {
    "id": "beef-tacos-pico",
    "version": 1,
    "track": "core",
@@ -6180,6 +6547,115 @@ export const LIBRARY = {
    "level": "level-3"
   },
   {
+   "id": "cajun-rice-dressing",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Cajun rice dressing with beef",
+   "image": "img/meals/meat.svg",
+   "cuisine": "louisiana",
+   "skill": "An onion, celery, and pepper base, deglazing a pan",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "Brown the beef in two batches, so it browns instead of steaming, and stir the rice in a little at a time."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "paprika-smoked"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "cayenne",
+     "optional": true
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "bell-pepper-green"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "broth-beef"
+    },
+    {
+     "ingredient": "green-onion"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "celery",
+     "bell-peppers",
+     "garlic"
+    ],
+    "optional": [
+     "hot-peppers"
+    ]
+   },
+   "tools": [
+    "saucepan-medium",
+    "sheet-pan",
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "liquid-measuring-cup",
+    "skillet-12",
+    "wooden-spoon",
+    "heatproof-bowl",
+    "thermometer",
+    "fork"
+   ],
+   "level": "level-3"
+  },
+  {
    "id": "dinner-rolls",
    "version": 1,
    "track": "core",
@@ -6271,6 +6747,147 @@ export const LIBRARY = {
     "foil",
     "oven-mitts",
     "cooling-rack"
+   ],
+   "level": "level-3"
+  },
+  {
+   "id": "garlic-green-beans",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Garlic green beans",
+   "image": "img/meals/side.svg",
+   "cuisine": "american",
+   "skill": "Blanching, the shimmer test, a quick sauté",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "Blanch the beans in two batches so the water stays at a boil, and sauté them in two batches so they blister instead of steaming."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "green-beans"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "lemon"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "pot-large",
+    "mixing-bowl-large",
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "measuring-spoons",
+    "slotted-spoon",
+    "colander",
+    "kitchen-towel",
+    "skillet-12",
+    "tongs"
+   ],
+   "variations": [
+    {
+     "title": "Sautéed zucchini",
+     "image": "img/meals/side.svg",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "max": 8,
+      "notes": [
+       {
+        "from": 7,
+        "text": "Sauté the zucchini in four batches so every piece touches the pan."
+       }
+      ]
+     },
+     "totalMinutes": 25,
+     "ingredients": [
+      {
+       "ingredient": "zucchini"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "lemon"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "lots"
+     },
+     "tasteItems": {
+      "required": [
+       "zucchini",
+       "garlic",
+       "lemon-lime"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "small-bowl",
+      "measuring-spoons",
+      "skillet-12",
+      "tongs",
+      "plate"
+     ],
+     "id": "zucchini"
+    }
    ],
    "level": "level-3"
   },
@@ -7339,6 +7956,34 @@ export const LIBRARY = {
    "contains": [
     "meat"
    ]
+  },
+  "green-beans": {
+   "name": "Fresh green beans",
+   "contains": []
+  },
+  "beef-chuck": {
+   "name": "Boneless beef chuck roast",
+   "contains": [
+    "meat"
+   ]
+  },
+  "broth-beef": {
+   "name": "Beef broth",
+   "contains": [
+    "meat"
+   ]
+  },
+  "tomato-sauce": {
+   "name": "Canned tomato sauce",
+   "contains": []
+  },
+  "raisins": {
+   "name": "Raisins",
+   "contains": []
+  },
+  "olives-green": {
+   "name": "Pimento-stuffed green olives",
+   "contains": []
   }
  },
  "cuisines": {
@@ -7399,8 +8044,11 @@ export const LIBRARY = {
   "cottage-cheese-crescents": "A2"
  },
  "levelLabels": {
+  "beef-picadillo": "L7",
   "beef-tacos-pico": "L18",
+  "cajun-rice-dressing": "L8",
   "dinner-rolls": "L3",
+  "garlic-green-beans": "L6",
   "israeli-salad": "L5",
   "sandwich-loaf": "L2",
   "tabbouleh": "L4",
@@ -8529,7 +9177,7 @@ export const LIBRARY = {
     "braising",
     "flavor-base"
    ],
-   "minutes": 180,
+   "minutes": 230,
    "cuisine": "italian",
    "pickOne": "braising",
    "tags": {
@@ -11699,15 +12347,144 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Blanch and shock green beans and spinach; shimmer test for hot oil",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "You'll blanch two vegetables that need very different times, then learn to read hot oil by eye. An adult is nearby for the boiling water and the hot oil."
+      ],
+      "steps": [
+       "Fill a large pot about three-quarters full of water, add 1 tablespoon of salt, and bring it to a rolling boil with the lid on. Set a large bowl of ice water next to the stove.",
+       "Take the lid off. Blanch a handful of trimmed green beans for 3 minutes, then lift them into the ice water with a slotted spoon.",
+       "Blanch a big handful of spinach for 15 to 30 seconds, just until it wilts and turns bright. Lift it into the ice water.",
+       "When both are cold, lift them out. Squeeze the spinach gently in your hands and pat the beans dry. Set a raw bean and a raw leaf beside them and compare the colors.",
+       "Pour 1 tablespoon of vegetable oil into a cold skillet and set it over medium-high heat. Start a timer and watch. Tilt the pan every 20 seconds. Write down when the oil starts to run thin and ripple.",
+       "Drop in one blanched bean. It should sizzle right away. Then slide the pan off the burner. If you see smoke at any point, slide it off at once.",
+       "Store the beans and spinach in a lined container in the fridge and use them within 3 days, in this week's recipe, in eggs, or with lemon and salt."
+      ],
+      "quiz": [
+       {
+        "q": "Which needs longer in the boiling water?",
+        "choices": [
+         "Green beans",
+         "Spinach",
+         "They need the same time"
+        ],
+        "answer": 0,
+        "explain": "Thin spinach leaves wilt in seconds."
+       },
+       {
+        "q": "What does shimmering oil tell you?",
+        "choices": [
+         "It's hot enough to sauté",
+         "It's burning",
+         "It's cooling down"
+        ],
+        "answer": 0,
+        "explain": "Smoke is the sign it's too hot."
+       }
+      ]
      },
      "knowledge": {
       "title": "Blanching: why vegetables stay green and crisp; oils and smoke points",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Blanching is a short cook in a big pot of boiling salted water, followed right away by shocking: plunging the vegetable into ice water to stop the cooking. Cooks blanch to brighten the color, soften a vegetable just enough, loosen the skins of tomatoes and peaches, and get vegetables ready for the freezer.",
+       "Green vegetables get their color from chlorophyll. Raw, their skins hold tiny pockets of air that make the green look dull. In the first minute of boiling, heat drives that air out, and the green shows through bright. Cook them too long, though, and acids from the vegetable's own cells change the chlorophyll, turning it a dull olive. That's why you blanch with plenty of water and the lid off: the water stays at a boil when the vegetables go in, and the acids escape with the steam instead of dripping back in.",
+       "Crispness comes from the cell walls, which are glued together by pectin. Heat slowly softens that glue. A short blanch softens it just enough to be tender with a snap; the ice water stops it there.",
+       "Every fat has a smoke point, the temperature where it starts to smoke and break down. Past it, the fat tastes harsh and bitter, and it can catch fire. Butter smokes at about 350°F, extra-virgin olive oil at about 375 to 400°F, and vegetable and canola oil at about 400 to 450°F. For high heat, like a stir-fry or a sear, use an oil with a high smoke point. Butter and olive oil are for gentler heat, or for flavor.",
+       "You can't see a temperature, but you can see the oil change. As it heats, it thins out: tilt the pan and it runs like water, and its surface starts to ripple like a heat haze. That shimmer means it's hot enough to sauté. Smoke means it's too hot: slide the pan off the burner for a minute. If oil ever catches fire, slide a lid over the pan and turn off the burner. Never pour water on it, and never carry it."
+      ],
+      "quiz": [
+       {
+        "q": "Why does a green bean turn brighter green in its first minute of boiling?",
+        "choices": [
+         "Heat drives out air trapped under the skin",
+         "The salt dyes it",
+         "The water adds color"
+        ],
+        "answer": 0,
+        "explain": "With the air gone, the chlorophyll shows through."
+       },
+       {
+        "q": "Why do green vegetables turn olive after long cooking?",
+        "choices": [
+         "Acids from the vegetable change the chlorophyll",
+         "They soak up too much salt",
+         "The ice water dulls them"
+        ],
+        "answer": 0,
+        "explain": "A short cook, with the lid off, keeps them bright."
+       },
+       {
+        "q": "What does shocking do?",
+        "choices": [
+         "Stops the cooking fast",
+         "Seasons the vegetable",
+         "Softens the vegetable"
+        ],
+        "answer": 0,
+        "explain": "Ice water cools it in seconds."
+       },
+       {
+        "q": "What is a fat's smoke point?",
+        "choices": [
+         "The temperature where it starts to smoke and break down",
+         "The temperature where it shimmers",
+         "The boiling point of water"
+        ],
+        "answer": 0,
+        "explain": "Past it, the fat tastes harsh and can catch fire."
+       },
+       {
+        "q": "Oil in a pan catches fire. What do you do?",
+        "choices": [
+         "Slide a lid over it and turn off the burner",
+         "Pour water on it",
+         "Carry it to the sink"
+        ],
+        "answer": 0,
+        "explain": "Water makes burning oil explode outward."
+       }
+      ]
      },
      "sabbath": {
       "title": "Blanch and store vegetables",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Blanched vegetables keep 3 to 4 days in the fridge and 8 to 12 months in the freezer. Many families blanch vegetables ahead like this, so a side dish later in the week only needs a few minutes in a hot pan, or so they can focus on resting.",
+       "Blanching matters most for the freezer. Vegetables are full of enzymes that keep working even when they're frozen, slowly turning them dull, tough, and off-tasting. Blanching stops the enzymes. Freezer times are a little longer than for the fridge, to stop them completely.",
+       "Times in boiling water, for the freezer: green beans, 3 minutes; broccoli florets, 3 minutes; sliced carrots, 2 minutes; snap peas, 2 minutes; spinach, 2 minutes. Cut each vegetable evenly, so every piece blanches the same.",
+       "Dry them well before storing. Water left on them turns to ice crystals in the freezer and makes them soggy. Freeze them spread out on a sheet pan first, then bag them, so they don't freeze into one block."
+      ],
+      "steps": [
+       "Choose two vegetables from the list. Trim them and cut them into even pieces.",
+       "Blanch each one separately for its time, with the lid off, then shock it in ice water until it's cold all the way through.",
+       "Drain them and dry them well on a kitchen towel.",
+       "For the fridge: pack them in a container lined with a paper towel, label it with the date, and use them within 3 to 4 days.",
+       "For the freezer: spread them on a sheet pan in one layer and freeze for 1 to 2 hours. Move them to a freezer bag, press out the air, and label it with the date.",
+       "Later in the week, sauté one batch straight from the fridge or freezer with garlic, the way you made this week's green beans. Write down how long it took."
+      ],
+      "quiz": [
+       {
+        "q": "Why blanch vegetables before freezing them?",
+        "choices": [
+         "It stops enzymes that make them dull and tough",
+         "It kills every germ",
+         "It makes them freeze faster"
+        ],
+        "answer": 0,
+        "explain": "Enzymes keep working in the freezer."
+       },
+       {
+        "q": "Why freeze them spread out on a sheet pan first?",
+        "choices": [
+         "So they freeze separately, not in one block",
+         "So they thaw faster",
+         "To dry them"
+        ],
+        "answer": 0,
+        "explain": "Then you can take out just what you need."
+       }
+      ]
      }
     },
     {
@@ -11721,15 +12498,143 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Sweat vs. brown onions",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Same onion, same pan, two kinds of heat. You'll cook two batches side by side and taste the difference."
+      ],
+      "steps": [
+       "Dice 2 onions into ¼-inch cubes and keep them in two separate piles.",
+       "Sweat the first onion: warm 1 tablespoon of oil in a skillet over medium-low heat, add the onion and a pinch of salt, and stir every minute or so for 10 minutes. If you see brown, turn the heat down. Move it to a bowl.",
+       "Brown the second onion: wipe out the pan, add another tablespoon of oil, and heat it over medium-high until it shimmers. Add the onion, spread it out, and stir only every 2 minutes for 10 to 12 minutes, until it's deep golden brown in spots. If any edges turn black, turn the heat down. Move it to a second bowl.",
+       "Look at the pan after each batch. Which one left brown bits stuck to the bottom?",
+       "Let both cool a little and taste them side by side. Write down the color, the texture, and the taste of each. Which is sweeter? Which tastes deeper or roastier?",
+       "Store both in labeled containers in the fridge for up to 4 days. Use them in eggs, on a sandwich, or stirred into rice."
+      ],
+      "quiz": [
+       {
+        "q": "Why add a pinch of salt to the sweating onion?",
+        "choices": [
+         "It pulls out water, so the onion softens without browning",
+         "It makes it brown faster",
+         "It's only for taste"
+        ],
+        "answer": 0,
+        "explain": "Salt draws water out of vegetables."
+       },
+       {
+        "q": "Which batch leaves brown bits on the pan?",
+        "choices": [
+         "The browned onion",
+         "The sweated onion",
+         "Neither"
+        ],
+        "answer": 0,
+        "explain": "Those brown bits are fond, and next week's drill uses them."
+       }
+      ]
      },
      "knowledge": {
       "title": "Browning and why it adds flavor",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "A seared burger tastes different from a boiled one, and toast tastes different from bread. The difference is browning, and it comes from chemical reactions that only happen at high heat.",
+       "The biggest one is the Maillard reaction, named for Louis-Camille Maillard, the French chemist who described it in 1912. Above about 300°F, the proteins and sugars on the surface of food react and make hundreds of new flavors and smells: savory, roasty, and meaty. They also make the brown color. It's what browns meat, bread crust, roasted coffee, and the outside of a pancake.",
+       "Caramelization is a different reaction. It needs only sugar, heated to about 320°F or more, which breaks down into sweet, nutty, slightly bitter flavors. Onions cooked low and long brown partly this way, because they're full of sugar.",
+       "Water stops browning. Water boils at 212°F, and while the surface of food is wet, it can't get any hotter than that, far below the 300°F that browning needs. That's why you pat meat dry, heat the pan first, leave room between pieces, and don't stir too often: each of those lets the surface dry out and get hot.",
+       "Brown is flavor; black is burnt. Burnt food tastes bitter, and so do burnt bits stuck to the pan. Sweating is the opposite choice: lower heat and a pinch of salt draw the water out of vegetables, so they soften and turn sweet without browning. A recipe picks one on purpose: sweated vegetables for a gentle, sweet base, and browned ones, or browned meat, for deep, roasty flavor."
+      ],
+      "quiz": [
+       {
+        "q": "Which reaction browns meat and bread crust?",
+        "choices": [
+         "The Maillard reaction",
+         "Caramelization",
+         "Fermentation"
+        ],
+        "answer": 0,
+        "explain": "Proteins and sugars react above about 300°F."
+       },
+       {
+        "q": "Why can't a wet surface brown?",
+        "choices": [
+         "It can't get hotter than 212°F until the water is gone",
+         "Water washes off the sugar",
+         "Wet food is too heavy"
+        ],
+        "answer": 0,
+        "explain": "Browning needs about 300°F."
+       },
+       {
+        "q": "How is caramelization different from the Maillard reaction?",
+        "choices": [
+         "Caramelization needs only sugar",
+         "Caramelization needs meat",
+         "They're the same reaction"
+        ],
+        "answer": 0,
+        "explain": "The Maillard reaction needs proteins and sugars."
+       },
+       {
+        "q": "The brown bits in your pan have turned black. What are they?",
+        "choices": [
+         "Burnt and bitter",
+         "Extra flavor",
+         "Fond to save"
+        ],
+        "answer": 0,
+        "explain": "Brown is flavor; black is burnt."
+       }
+      ]
      },
      "sabbath": {
       "title": "Clean land animals you might not expect: the two tests, the animals Deuteronomy names, and today's elk, moose, water buffalo, and yak (Leviticus 11:1–8; Deuteronomy 14:3–8)",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "In Leviticus 11, God gave Israel two tests for land animals: \"Whatever parts the hoof and is cloven-footed and chews the cud, among the animals, you may eat\" (Leviticus 11:3). An animal has to pass both. Its hoof is split into two toes, and it chews the cud, bringing swallowed food back up to chew again, the way a cow does.",
+       "The next verses name four animals that pass only one test. The camel, the rock badger, and the hare chew the cud but don't have a split hoof. The pig has a split hoof but doesn't chew the cud (Leviticus 11:4–7). Passing one test isn't enough.",
+       "Deuteronomy names the animals Israel may eat: \"the ox, the sheep, the goat, the deer, the gazelle, the roebuck, the wild goat, the ibex, the antelope, and the mountain sheep\" (Deuteronomy 14:4–5). Seven of the ten are wild animals.",
+       "The same two tests work for animals Israel never saw. Elk, moose, and caribou (called reindeer in Europe) are deer: split hooves, and they chew the cud. Water buffalo, yak, and bison are relatives of cattle, and the pronghorn of the American plains passes both tests too. All of them are clean. Bison and elk are sold in many grocery stores today, often ground, and can stand in for ground beef in this week's picadillo. They're leaner, so cook them gently, and still to 160°F."
+      ],
+      "steps": [
+       "Read Leviticus 11:1–8.",
+       "Read Deuteronomy 14:3–8.",
+       "Make a chart with two columns, \"Split hoof\" and \"Chews the cud\". Put each animal named in both passages under every test it passes.",
+       "Answer in writing: why isn't passing one test enough? Which animals in Leviticus 11:4–7 pass only one?",
+       "Pick one animal from today's list (elk, moose, caribou, water buffalo, yak, bison, or pronghorn) and write how it passes both tests.",
+       "With an adult, look for bison or elk at a grocery store or butcher, and write down what you find."
+      ],
+      "quiz": [
+       {
+        "q": "What two tests does Leviticus 11:3 give for land animals?",
+        "choices": [
+         "A split hoof and chewing the cud",
+         "Four legs and fur",
+         "Eating grass and living on land"
+        ],
+        "answer": 0,
+        "explain": "An animal has to pass both."
+       },
+       {
+        "q": "Why is the camel unclean?",
+        "choices": [
+         "It chews the cud but doesn't have a split hoof",
+         "It has a split hoof but doesn't chew the cud",
+         "It lives in the desert"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:4."
+       },
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "Elk",
+         "Pig",
+         "Hare"
+        ],
+        "answer": 0,
+        "explain": "Elk are deer: split hooves, and they chew the cud."
+       }
+      ]
      }
     },
     {
@@ -11742,15 +12647,154 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Deglaze a pan, scrape the fond",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Fond forms whenever food browns in a pan that isn't nonstick. You'll make fond on purpose, deglaze it, and taste what you saved."
+      ],
+      "steps": [
+       "Use a skillet that isn't nonstick. Heat 1 tablespoon of oil in it over medium-high heat until it shimmers.",
+       "Add ½ pound of ground beef and brown it, leaving it alone between stirs, until there's an even brown layer on the bottom of the pan. Check that the beef reads 160°F, move it to a bowl, and spoon off the fat. For a meatless drill, brown a diced onion instead.",
+       "Look closely at the fond. Golden to dark brown is flavor; black spots are burnt. Write down what you see.",
+       "Turn the heat down to medium. Stand back and pour in ½ cup of broth or water. It will hiss and steam. Scrape the bottom hard with a wooden spoon until the pan is clean.",
+       "Let it bubble until about half of it is gone. Cool a spoonful, and taste it next to a spoonful of the plain broth or water. Write down the difference.",
+       "Pour the pan sauce over the beef. Use it this week in tacos, over rice, or in eggs, or store it in the fridge for up to 4 days."
+      ],
+      "quiz": [
+       {
+        "q": "Why doesn't a nonstick pan make much fond?",
+        "choices": [
+         "Food doesn't stick to it",
+         "It's too thin",
+         "It never gets hot enough"
+        ],
+        "answer": 0,
+        "explain": "Fond is the browned food that sticks."
+       },
+       {
+        "q": "Why stand back as the liquid goes in?",
+        "choices": [
+         "It hisses and throws up a burst of steam",
+         "The oil catches fire",
+         "The pan cracks"
+        ],
+        "answer": 0,
+        "explain": "Steam burns as badly as a hot pan."
+       }
+      ]
      },
      "knowledge": {
       "title": "Aromatic bases across cuisines",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Much of the world's savory cooking starts the same way: a few strong-smelling vegetables, cut small and cooked in fat before anything else goes in. Cooks call them aromatics, and together they're the dish's flavor base. Each cuisine has its own.",
+       "France: mirepoix, onion, carrot, and celery, about two parts onion to one part each of the others. It starts soups, stocks, and braises. Italy: soffritto, the same three vegetables chopped finer and cooked slowly in olive oil, often with garlic. You'll cook one under next week's ragù.",
+       "Louisiana: the holy trinity, onion, celery, and green bell pepper, with the pepper in place of the carrot. It starts jambalaya, gumbo, and this week's rice dressing. Spain and Latin America: sofrito, onion, garlic, and peppers, often with tomato. Cuban sofrito, under last week's picadillo, uses green pepper; Puerto Rican sofrito adds cilantro.",
+       "India: onion, ginger, and garlic, often with green chiles, cooked until golden before the spices go in. China: ginger, garlic, and green onion, in hot oil for just seconds. West Africa: onion, tomato, and hot peppers, often blended smooth, as in jollof rice.",
+       "The idea is the same everywhere; what changes is the time. Slow sauces and soups sweat their base for many minutes so it melts into the dish. A fast stir-fry adds its aromatics near the end, for seconds, so they stay sharp and fresh."
+      ],
+      "quiz": [
+       {
+        "q": "What's in a French mirepoix?",
+        "choices": [
+         "Onion, carrot, and celery",
+         "Onion, celery, and green pepper",
+         "Ginger, garlic, and green onion"
+        ],
+        "answer": 0,
+        "explain": "Italy's soffritto uses the same three, chopped finer."
+       },
+       {
+        "q": "What's in Louisiana's holy trinity?",
+        "choices": [
+         "Onion, celery, and green pepper",
+         "Onion, carrot, and celery",
+         "Onion, tomato, and hot pepper"
+        ],
+        "answer": 0,
+        "explain": "Green pepper takes the carrot's place."
+       },
+       {
+        "q": "Which flavor base usually has ginger and garlic, with spices added after?",
+        "choices": [
+         "India's",
+         "France's",
+         "Louisiana's"
+        ],
+        "answer": 0,
+        "explain": "Onion, ginger, and garlic, cooked until golden."
+       },
+       {
+        "q": "What do all aromatic bases have in common?",
+        "choices": [
+         "Strong-smelling vegetables cooked first to build flavor",
+         "They're always eaten raw",
+         "They're all spices"
+        ],
+        "answer": 0,
+        "explain": "Everything else sits on top of them."
+       },
+       {
+        "q": "Why does a stir-fry add its garlic and ginger near the end?",
+        "choices": [
+         "They burn fast in a very hot pan",
+         "They need the least cooking to be safe",
+         "They thicken the sauce"
+        ],
+        "answer": 0,
+        "explain": "A few seconds keeps them fresh, not bitter."
+       }
+      ]
      },
      "sabbath": {
       "title": "Salt (Leviticus 2:13; Matthew 5:13; Colossians 4:6)",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "In the ancient world, salt was precious. It seasoned food, and long before refrigerators, it kept meat and fish from spoiling. Israel got its salt from the Dead Sea, which the Bible calls the Salt Sea (Genesis 14:3).",
+       "God told Israel: \"You shall season all your grain offerings with salt. You shall not let the salt of the covenant with your God be missing from your grain offering; with all your offerings you shall offer salt\" (Leviticus 2:13). Salt doesn't spoil, so a \"covenant of salt\" pictured a promise that lasts (Numbers 18:19).",
+       "Jesus told his followers, \"You are the salt of the earth, but if salt has lost its taste, how shall its saltiness be restored? It is no longer good for anything except to be thrown out and trampled under people's feet\" (Matthew 5:13). Salt is meant to make a difference to everything it touches, and so are they.",
+       "Paul wrote, \"Let your speech always be gracious, seasoned with salt, so that you may know how you ought to answer each person\" (Colossians 4:6). Like well-seasoned food, good words aren't bland, and they aren't too much.",
+       "In the kitchen, salt does more than taste salty. It brings out the other flavors in a dish, pulls water out of vegetables (that's how it helps them sweat), and keeps food from spoiling. Good cooks salt in stages, a little in each part of a dish, and taste before serving, the way you did this week."
+      ],
+      "steps": [
+       "Read Leviticus 2:13 and Numbers 18:19.",
+       "Read Matthew 5:13–16.",
+       "Read Colossians 4:5–6.",
+       "Answer in writing: name two things salt does in food. How does each one fit what Jesus said about his followers?",
+       "Answer in writing: what would speech \"seasoned with salt\" sound like? Give an example from your week.",
+       "At a meal this week, taste a dish before and after a small pinch of salt, and talk with your family about what changed."
+      ],
+      "quiz": [
+       {
+        "q": "In Leviticus 2:13, what was to go with every grain offering?",
+        "choices": [
+         "Salt",
+         "Yeast",
+         "Honey"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 2:11 kept leaven and honey out of the offerings by fire."
+       },
+       {
+        "q": "Who did Jesus call \"the salt of the earth\"?",
+        "choices": [
+         "His followers",
+         "The priests",
+         "The farmers"
+        ],
+        "answer": 0,
+        "explain": "Matthew 5:13."
+       },
+       {
+        "q": "In Colossians 4:6, what should be \"seasoned with salt\"?",
+        "choices": [
+         "Our speech",
+         "Our bread",
+         "Our offerings"
+        ],
+        "answer": 0,
+        "explain": "Gracious words, worth hearing."
+       }
+      ]
      }
     },
     {
@@ -11765,15 +12809,183 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Sauté a mixed vegetable pan unaided",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "No recipe card this time. Use what you've learned this unit to sauté a pan of mixed vegetables so every one is cooked just right. Plan first, then cook. An adult is nearby, but doesn't help."
+      ],
+      "steps": [
+       "Choose 3 or 4 vegetables that cook at different speeds, such as carrots, bell pepper, zucchini, mushrooms, or blanched green beans, and a clove or two of garlic.",
+       "Cut each one evenly. Cut the hard ones, like carrots, thinner or smaller than the soft ones.",
+       "Write your plan: the order the vegetables go in, about how long each needs, and when the garlic and salt go in.",
+       "Heat the oil until it shimmers and follow your plan. Cook in batches if the pan gets crowded. Taste as you go.",
+       "Judge your pan: was every vegetable crisp-tender? Was anything raw, soggy, or burnt? Write down what you'd change next time.",
+       "Serve it as a side this week, or store it in the fridge and eat it within 3 days."
+      ],
+      "quiz": [
+       {
+        "q": "Which goes into the pan first?",
+        "choices": [
+         "Carrots",
+         "Zucchini",
+         "They go in together"
+        ],
+        "answer": 0,
+        "explain": "Hard vegetables need longer."
+       },
+       {
+        "q": "Your vegetables are steaming in a crowded pan. What do you do?",
+        "choices": [
+         "Take some out and cook in batches",
+         "Add more oil",
+         "Put the lid on"
+        ],
+        "answer": 0,
+        "explain": "Each piece needs to touch the hot pan."
+       }
+      ]
      },
      "knowledge": {
       "title": "Explain sweat vs. sauté",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "This is the unit quiz. First, explain the difference between sweating and sautéing in your own words, out loud to an adult or in writing. Then check your answer against the rest of this page.",
+       "Sweating: medium-low heat, a little fat, and often a pinch of salt. The vegetables give up their water and turn soft, see-through, and sweet, with no brown. It's for the base of a sauce or soup, when you want the vegetables to melt into the dish.",
+       "Sautéing: medium-high heat, oil that shimmers, and small pieces in one layer, stirred or tossed often. The word is French for \"jumped\", from the way the food jumps in the pan. The outside browns quickly while the inside stays crisp-tender. It's for quick side dishes, and for browning before something simmers.",
+       "Searing is hotter still: food is left alone until a brown crust forms, and the fond it leaves behind is lifted with a splash of liquid, which is deglazing.",
+       "Listen to your pan. Sweating is a soft sizzle. Sautéing is a lively one. Searing is loud. If you hear bubbling and no sizzle at all, the food is steaming in its own water: the pan is too crowded or not hot enough."
+      ],
+      "quiz": [
+       {
+        "q": "What heat do you use to sweat vegetables?",
+        "choices": [
+         "Medium-low",
+         "Medium-high",
+         "As high as it goes"
+        ],
+        "answer": 0,
+        "explain": "Gentle heat softens them without browning."
+       },
+       {
+        "q": "What does \"sauté\" mean in French?",
+        "choices": [
+         "Jumped",
+         "Fried",
+         "Fast"
+        ],
+        "answer": 0,
+        "explain": "The food jumps when you toss the pan."
+       },
+       {
+        "q": "How do sweated onions look when they're done?",
+        "choices": [
+         "Soft and see-through, with no brown",
+         "Deep brown and crisp",
+         "Black at the edges"
+        ],
+        "answer": 0,
+        "explain": "Brown means the heat was too high for sweating."
+       },
+       {
+        "q": "You hear bubbling, not sizzling, in your sauté pan. What's happening?",
+        "choices": [
+         "The food is steaming in its own water",
+         "It's browning perfectly",
+         "The oil is too hot"
+        ],
+        "answer": 0,
+        "explain": "Cook in batches, or turn up the heat."
+       },
+       {
+        "q": "Unit review: how can you tell oil is hot enough to sauté?",
+        "choices": [
+         "It shimmers",
+         "It smokes",
+         "It bubbles"
+        ],
+        "answer": 0,
+        "explain": "Smoke means it's too hot."
+       },
+       {
+        "q": "Unit review: why shock blanched vegetables in ice water?",
+        "choices": [
+         "To stop the cooking so they stay crisp and green",
+         "To season them",
+         "To wash them"
+        ],
+        "answer": 0,
+        "explain": "Their own heat would keep cooking them."
+       },
+       {
+        "q": "Unit review: what is fond?",
+        "choices": [
+         "The brown bits stuck to the pan after browning",
+         "A kind of broth",
+         "Burnt food to throw away"
+        ],
+        "answer": 0,
+        "explain": "Deglazing lifts it into the sauce."
+       },
+       {
+        "q": "Unit review: what's in the holy trinity?",
+        "choices": [
+         "Onion, celery, and green pepper",
+         "Onion, carrot, and celery",
+         "Ginger, garlic, and green onion"
+        ],
+        "answer": 0,
+        "explain": "Onion, carrot, and celery is mirepoix."
+       },
+       {
+        "q": "Unit review: why can't a wet surface brown?",
+        "choices": [
+         "It can't get hotter than 212°F until the water is gone",
+         "Water washes off the flavor",
+         "It's too heavy"
+        ],
+        "answer": 0,
+        "explain": "Browning needs about 300°F."
+       }
+      ]
      },
      "sabbath": {
       "title": "Make a sauce that's better the next day",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Many sauces, stews, and braises taste better the day after they're made. Overnight, the flavors spread evenly through the sauce and the meat, and the sharp edges soften. Many families cook a big pot ahead like this, so a meal later in the week only needs reheating, or so they can focus on resting.",
+       "Cool it safely, the Unit 1 way: from 140°F to 70°F within 2 hours, then to 40°F within 4 more. Don't put a big, hot pot straight in the fridge; it stays warm in the middle for hours. Divide it into shallow containers, no more than 2 inches deep.",
+       "As it chills, fat rises to the top and hardens. You can lift it off with a spoon before you reheat.",
+       "A meat sauce keeps 3 to 4 days in the fridge, or 3 to 4 months in the freezer. Reheat it on the stove, stirring, with a splash of water if it's thick, until it reads 165°F in the middle."
+      ],
+      "steps": [
+       "Make a double batch of this week's ragù, or set half of it aside before serving.",
+       "Divide it into shallow containers. Let them sit uncovered until the steam stops, then cover them and put them in the fridge within 2 hours of cooking.",
+       "Label each container with what it is and the date.",
+       "The next day, lift off any hardened fat. Reheat one portion on the stove, stirring, until it reads 165°F in the middle.",
+       "Taste it, and write down how it's different from the day you made it.",
+       "Freeze any extra in portions, labeled, and use it within 3 months."
+      ],
+      "quiz": [
+       {
+        "q": "Why divide a big pot of sauce into shallow containers before chilling it?",
+        "choices": [
+         "It cools through the danger zone faster",
+         "It fits the fridge better",
+         "It keeps the fat in"
+        ],
+        "answer": 0,
+        "explain": "A deep pot stays warm in the middle for hours."
+       },
+       {
+        "q": "What temperature does reheated sauce need to reach?",
+        "choices": [
+         "165°F",
+         "140°F",
+         "145°F"
+        ],
+        "answer": 0,
+        "explain": "Every reheated leftover goes to 165°F."
+       }
+      ]
      }
     },
     {
@@ -12305,7 +13517,7 @@ export const LIBRARY = {
       "sauteing",
       "blanching"
      ],
-     "minutes": 25,
+     "minutes": 35,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -12326,7 +13538,7 @@ export const LIBRARY = {
       "flavor-base",
       "sauteing"
      ],
-     "minutes": 45,
+     "minutes": 55,
      "tags": {
       "protein": "beef",
       "flavors": [

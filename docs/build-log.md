@@ -4798,3 +4798,50 @@ cuts and honing", the kitchen words added and linked, live on merge.
 - Tests: 356. A Level course now schedules 13 written recipes, with 23
   waiting; best fit's "written option first" check moved to week 15, since
   week 9's own recipe is written now.
+## 199. 2026-10-25 — Level 3 Unit 4: sautéing and aromatic bases
+
+Phase 12, slice 12f, Unit 4 (plan §12.4). Owner, 2026-10-25: more units,
+starting with 4, from the Unit 3 review template. The copy is in a review
+doc, "Level 3 Unit 4: Sautéing and aromatic bases", and goes live for every
+family on merge.
+
+- **Garlic green beans** (week 13, Level only): beans blanched 3 minutes in
+  salted water, shocked in ice water, patted dry, then sautéed in oil
+  checked by the shimmer test, garlic last. **Sautéed zucchini**, an approved
+  week 13 option, is its variation: no blanching, three batches, salted at
+  the end.
+- **Beef picadillo** (week 14, Level only): the sofrito sweated on
+  medium-low and moved to a bowl, so the beef browns in a hot, dry pan;
+  160°F, fat spooned off, then a simmer with tomato sauce, raisins, and
+  olives, over rice.
+- **Cajun rice dressing with beef** (week 15, Level only): beef browned for
+  fond, the holy trinity sweated in the same pan, deglazed with beef broth
+  and cooked down, cooled rice folded in. Rice cooked the day before works,
+  reheated to 165°F (Unit 1).
+- **Beef ragù** (week 16; lesson 22c, the braising group, for every family):
+  chuck seared in batches, a soffritto, tomato paste cooked, deglazed, and
+  braised 2½ hours until it reads 195°F and shreds. **Ragù bolognese** is
+  its Level version and week 16's mastery recipe: ground beef browned in two
+  batches to 160°F and a 1½-hour simmer, no whole-cut searing (Level 4). The
+  pasta water boils in a new stockpot.
+- **Weeks 13–16's twelve part pages:** blanching and smoke points, browning
+  (the Maillard reaction and caramelization), aromatic bases across
+  cuisines, and sweat vs. sauté with the unit quiz; drills blanching beans
+  and spinach with a shimmer test, sweating vs. browning onions, deglazing,
+  and an unaided vegetable sauté; Beyond the Recipe: blanching for the
+  fridge and freezer, clean land animals (Leviticus 11:1–8, Deuteronomy
+  14:3–8), salt (Leviticus 2:13, Matthew 5:13, Colossians 4:6), and a sauce
+  made a day ahead.
+- **Kitchen words:** sweat, fond, shock, smoke point, aromatics, mirepoix,
+  soffritto, sofrito, holy trinity. Deglaze now points to Chicken
+  jambalaya, and shimmer to Vegetable stir-fry with tofu.
+- New ingredients: fresh green beans, beef chuck roast, beef broth, canned
+  tomato sauce, raisins, pimento-stuffed green olives. New tool: a stockpot.
+- Level 3's hours with every part are now about 130 (128 before); the
+  written recipes' minutes replace the estimates, and Beef ragù's card is
+  230 minutes.
+- Screenshots were sent in the session, taken from the demo's Try a week
+  pointed at Unit 4 for that only. The demo still shows Unit 1.
+- Tests: 356. A Level course now schedules 17 written recipes, with 19
+  waiting; best fit's "written option first" check moved to week 24, since
+  week 15's own recipe is written now.
