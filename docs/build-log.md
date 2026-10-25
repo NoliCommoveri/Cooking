@@ -5094,3 +5094,11 @@ Planning only; nothing in the app changed.
   like lamb, it's kind of an acquired taste"). Level 4 is to bring in new
   proteins such as quail and duck, noted in plan §12.0 for when its weeks
   are planned.
+- Complexity review (owner, 2026-10-25), in the Level 3 doc's new
+  Complexity across the year section: each dish rated 1–5 for parts to
+  time, decisions, and cook time, bread exempt. The year climbs (units
+  2.6, 1.75, 2.75, bread, about 3.1–3.2 for Units 5–7, 3.7, capstone),
+  with four dips inside units, each fixed by reordering weeks (proposed:
+  fish before poultry in Unit 3, steaming first in Unit 5, the skin-side
+  sear before the stir-fry in Unit 6, the whole roast chicken as Unit 7's
+  mastery) and a timed side for week 26's rava fish fry.
