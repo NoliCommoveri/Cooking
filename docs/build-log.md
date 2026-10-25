@@ -5303,8 +5303,10 @@ part page to review; and fix the recurring resting line.
   are listed in order (`public/app.js`). A course still skips weeks whose
   dish isn't written, so a new Level 3 course opens on week 4 (minestrone)
   until 14g writes the recipes.
-- Lint warnings left: Level 3 week 23's Familiar (pan-seared trout) and
-  Level 4 week 17's (eggs Benedict) are tagged new-ish.
+- Owner, 2026-10-25: pan-seared trout (Level 3 week 23's Familiar) and
+  eggs Benedict (Level 4 week 17's) are retagged everyday, so they fit
+  their Familiar slots. Eggs Benedict's tag also counts in Cook Around
+  the World's best fit.
 - Tests: 362 (a course on Level 3 plans its Familiar dishes; the three Levels in the library, release 2, a pair each
   recipe week, the mastery weeks, and Level 4's cuisines; the Level
   tests now expect the re-planned Levels beside today's Level 3 for a

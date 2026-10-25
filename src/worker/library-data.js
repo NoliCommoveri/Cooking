@@ -4379,7 +4379,7 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish",
+    "familiar": "everyday",
     "veggies": "light"
    },
    "tasteItems": {
@@ -9712,7 +9712,7 @@ export const LIBRARY = {
     ],
     "heat": "mild",
     "budget": "$$",
-    "familiar": "new-ish",
+    "familiar": "everyday",
     "veggies": "light"
    }
   },
@@ -15795,7 +15795,7 @@ export const LIBRARY = {
       ],
       "heat": "mild",
       "budget": "$$",
-      "familiar": "new-ish",
+      "familiar": "everyday",
       "veggies": "light"
      },
      "art": "fish"
@@ -21855,7 +21855,7 @@ export const LIBRARY = {
       ],
       "heat": "mild",
       "budget": "$$",
-      "familiar": "new-ish",
+      "familiar": "everyday",
       "veggies": "light"
      },
      "art": "fish"
