@@ -5229,3 +5229,28 @@ range. The owner's calls on the findings:
   for big chop work where a dish needs it, with a parent assisting.
 - Recorded in plan §12.0, the Level 2 and Level 4 docs, and the re-plan
   doc's difficulty scale and Familiar and Explore section.
+
+## 210. 2026-10-25 — The 14b review's smaller fixes
+
+Planning only; nothing in the app changed. Owner, 2026-10-25: Level 4's
+Unit 2 may cook some parts ("ok"); "the rest you can fix."
+
+- **Level 2:** weeks 7 and 8 swapped, so the thermometer week (burgers)
+  comes before the first other ground-beef dish (tacos, now with the label
+  week). Week 2's molletes are baked, not broiled, until the broiler week
+  (27). Weeks 2, 4, and 16 cook one part first and hold it, so one heat
+  source is on at a time. Unit 8 offers a slow cooker for the simmer.
+- **Level 3:** week 26's cucumber salad is made ahead (two parts finish
+  together, Level 3's limit); week 24's lomo saltado uses oven fries
+  before frying is taught; week 28's Familiar is sheet-pan cod, so salmon
+  isn't four of the five Familiar fish.
+- **Shared lessons:** Level 2's chicken Caesar wraps, sheet-pan fajitas,
+  and meatballs in marinara are variations of written lessons (the
+  meatballs the same variation as Level 3's); Level 2's and Level 3's
+  chicken noodle soup are one new lesson with two Level versions; Level 4's
+  teriyaki salmon side is a variation of Pineapple teriyaki salmon. Counts
+  in plan §12.0 updated.
+- **The re-plan's ladder** now matches the weeks: no frittata or quiche in
+  Unit 7 (quiche is Level 4's Unit 4), Level 3's oven bake is psari plaki,
+  Level 4's is lasagna and moussaka, Level 2's broiling is nachos, and hot
+  holding is 140°F, the USDA figure.
