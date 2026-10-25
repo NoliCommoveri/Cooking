@@ -148,11 +148,11 @@ ${migrationTable(migrations)}
 <h2>Releases</h2>
 <p>New work is built into the app switched off, as a numbered release (plan §8.6). A family sees a release once it's launched for everyone, or before that once its preview is on (under Families below). Releases launch in order.</p>
 ${ready ? `<div class="scroll"><table><tr><th>Release</th><th>What's in it</th><th></th></tr>
-${RELEASES.map((r) => `<tr><td>${esc(r.n)}</td><td>${esc(r.name)}</td><td>${r.n <= release.live ? '<span class="ok">Live for everyone</span>' : 'Not launched'}</td></tr>`).join('')}</table></div>
+${RELEASES.map((r) => `<tr><td>${esc(r.n)}</td><td>${esc(r.name)}</td><td>${r.n <= release.live ? '<span class="ok">Live for everyone</span>' : r.building ? 'Being built: preview only' : 'Not launched'}</td></tr>`).join('')}</table></div>
 <p>${release.preview.length ? `${esc(release.preview.length)} famil${release.preview.length === 1 ? 'y has' : 'ies have'} the preview on.` : 'No family has the preview on.'}</p>
-<div class="row">${release.live < LATEST ? `<form method="post" action="/ops/release"><input type="hidden" name="do" value="launch"><input type="hidden" name="n" value="${esc(release.live + 1)}"><button type="submit">Launch release ${esc(release.live + 1)} for everyone</button></form>` : ''}
+<div class="row">${release.live < LATEST && !RELEASES[release.live].building ? `<form method="post" action="/ops/release"><input type="hidden" name="do" value="launch"><input type="hidden" name="n" value="${esc(release.live + 1)}"><button type="submit">Launch release ${esc(release.live + 1)} for everyone</button></form>` : ''}
 ${release.live > 0 ? `<form method="post" action="/ops/release"><input type="hidden" name="do" value="undo"><input type="hidden" name="n" value="${esc(release.live)}"><button type="submit">Undo launch of release ${esc(release.live)}</button></form>` : ''}</div>
-<p class="muted">${release.live < LATEST ? '' : `Every release built so far is live. The next build adds release ${esc(LATEST + 1)} here. `}Undo launch takes back the latest release launched: only preview families see it again. Nothing anyone entered is lost.</p>` : notReady}
+<p class="muted">${release.live < LATEST ? (RELEASES[release.live].building ? `Release ${esc(release.live + 1)} is still being built, so it can be previewed but not launched yet. ` : '') : `Every release built so far is live. The next build adds release ${esc(LATEST + 1)} here. `}Undo launch takes back the latest release launched: only preview families see it again. Nothing anyone entered is lost.</p>` : notReady}
 
 <h2>The owner</h2>
 ${ready ? `<form method="post" action="/ops/owner" class="row">
@@ -385,6 +385,7 @@ Variables and Secrets → Add, type <em>Secret</em>, name <code>OPS_TOKEN</code>
     const form = await request.formData();
     const undo = String(form.get('do')) === 'undo', n = Number(form.get('n'));
     const done = undo ? await undoLaunch(env.DB, n) : await launch(env.DB, n);
+    if (!done && !undo && RELEASES[n - 1]?.building) return dashboard(env, `<p class="bad">Release ${esc(n)} is still being built, so it can't be launched yet. Nothing was changed.</p>`);
     if (!done) return dashboard(env, '<p class="bad">That was already done. Nothing was changed.</p>');
     return dashboard(env, `<p class="ok">${undo ? `Launch undone: only preview families see release ${esc(n)}. Nothing was deleted.` : `Release ${esc(n)} is on for every family.`}</p>`);
   }

@@ -8,9 +8,11 @@
 const KEY = 'next_release';
 
 // Every release, in order. The next build adds its own entry here and gates
-// its features with that number.
+// its features with that number. A release marked building can be previewed
+// but not launched, so a half-built one can't go out to everyone.
 export const RELEASES = [
   { n: 1, name: 'The Levels, Our tastes, recipe variations, best-fit picks, and the recipe gaps page' },
+  { n: 2, name: 'The Levels re-plan: the same units in every Level, by cooking method, with a Familiar and an Explore dish each week (plan §12.0)', building: true },
 ];
 export const LATEST = RELEASES.at(-1).n;
 
@@ -60,7 +62,7 @@ export async function setPreview(db, familyId, on) {
 // release the owner pressed for, so a resent form does nothing twice.
 export async function launch(db, n) {
   const st = await releaseState(db);
-  if (n !== st.live + 1 || n > LATEST) return false;
+  if (n !== st.live + 1 || n > LATEST || RELEASES[n - 1].building) return false;
   await save(db, { ...st, live: n });
   return true;
 }

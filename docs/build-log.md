@@ -5010,3 +5010,35 @@ Planning only; nothing in the app changed.
   check, and best fit's smaller role).
 - Owner, 2026-10-25: the learner can swap the week's dish from the
   kitchen, and the parent sees it and can Undo.
+
+## 204. 2026-10-25 — Release 2: the Levels re-plan, gated
+
+- Owner, 2026-10-25: "Gate our redesign behind a release switch." The
+  whole re-plan (plan §12.0) is **release 2**.
+- Correction: entries 202 and 203 and the first draft of the re-plan doc
+  said today's Level 3 was behind the switch and seen only by preview
+  families. It isn't: it's release 1, launched for everyone (entries 186,
+  196). It stays live and unchanged until release 2 launches; courses
+  already on it keep it to the end, and the new Levels get their own ids
+  (`sp-1` to `sp-4`).
+- **Before:** `/ops` offered Launch for the next release as soon as it was
+  listed in `RELEASES`.
+- **Now:** a release can be marked `building` (`src/worker/release.js`).
+  It previews for preview families like any release, but `/ops` shows it
+  as "Being built: preview only", offers no Launch button, and refuses a
+  launch sent anyway ("still being built … Nothing was changed"). Release
+  2 is listed and marked building. Nothing is gated on it yet, so no family
+  sees any change.
+- Owner, 2026-10-25: "take all your suggestions for the rest." Every open
+  item in the re-plan doc is confirmed: the nine units, their order and
+  lengths, the same at every Level; frying in Stovetop and grilling in Oven
+  and grill; Level 4's cuisines named per week; the difficulty scales and
+  the linter warning; the skill ladder as drafted; Level 4's "Have an adult
+  at home" for deep frying and grilling; all Level writing held until the
+  new weeks are approved; a non-US option every week and three cuisines per
+  unit; the setup default preset from "how adventurous"; best fit only
+  filling in for diet or tools. Level 4's portfolio is typed in the app.
+  Plan §12.0 and §8.6 are updated.
+- Screenshots of the Releases section and the refusal were sent in the
+  session.
+- Tests: 357 (a release still being built previews but can't be launched).
