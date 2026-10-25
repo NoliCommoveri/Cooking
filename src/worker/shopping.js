@@ -167,6 +167,30 @@ export function register(on) {
     return { lessons: picked, ...(await needs(env, fam, picked, { staples: await staplesOf(env, s.family_id) })) };
   });
 
+  // After a Level week's swap (14d): the preview for the new dish, with what
+  // the old dish's list had preselected as already have. A list being made
+  // doesn't mean it was bought, so each can be unticked (owner, 2026-10-25).
+  // from: the dish the swap replaced, on a list for this course.
+  on('POST', '/api/shopping/swap-preview', async (req, env, body) => {
+    const s = await requireParent(env, req);
+    const fam = await family(env, s.family_id);
+    const cid = String(body.course_id ?? ''), from = String(body.from ?? '');
+    const e = (await upcoming(env, fam, today(req), tzOf(req))).find((x) => x.course_id === cid && x.lesson_id === String(body.lesson_id ?? ''))
+      ?? fail(409, 'changed', "That dish isn't coming up on the course now.");
+    const old = await env.DB.prepare(`SELECT ll.list_id, ll.servings FROM list_lessons ll JOIN shopping_lists l ON l.id = ll.list_id
+        WHERE ll.family_id = ? AND ll.course_id = ? AND ll.lesson_id = ? AND l.deleted_at IS NULL ORDER BY l.created_at DESC LIMIT 1`).bind(s.family_id, cid, from).first()
+      ?? fail(404, 'not_found', "That dish isn't on a shopping list.");
+    const had = await needs(env, fam, [{ lesson_id: from, servings: old.servings }]);
+    const onHand = (await env.DB.prepare('SELECT ingredient_id FROM list_on_hand WHERE list_id = ? AND family_id = ?').bind(old.list_id, s.family_id).all()).results.map((r) => r.ingredient_id);
+    const before = new Set([...had.sections.flatMap((x) => x.items), ...had.may_have].map((x) => x.id).concat(onHand));
+    const p = await needs(env, fam, [e], { staples: await staplesOf(env, s.family_id) });
+    const names = await recipeNames(env, s.family_id);
+    return {
+      lessons: [e], ...p, from_title: LIBRARY.lessons.find((L) => L.id === from)?.title ?? names[from]?.title ?? from,
+      already: [...p.sections.flatMap((x) => x.items), ...p.may_have].map((x) => x.id).filter((x) => before.has(x)),
+    };
+  });
+
   // Create shopping list: the previewed lessons, minus what's on hand.
   on('POST', '/api/shopping/lists', async (req, env, body) => {
     const s = await requireParent(env, req);

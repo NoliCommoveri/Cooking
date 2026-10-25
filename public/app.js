@@ -522,6 +522,42 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     ];
   };
 
+  // ---- Cook this instead (14d): this week's other dish, for everyone on the
+  // course. The dish being cooked is the one highlighted, as the Recipe; a
+  // swap shows who made it, and its maker can Undo it. Never on the Sabbath.
+  const recipeLabel = (w) => {
+    const c = w.choices?.find((x) => x.current);
+    return c ? `Recipe · ${SLOT_NAMES[c.slot]}` : 'Recipe';
+  };
+  const swapDish = async (e, path, body, msg) => {
+    e.currentTarget.disabled = true;
+    try {
+      const res = await api('POST', `/api/profiles/${p.id}/${path}?${tz()}`, body);
+      showToast(msg(res));
+      kitchen(id, current);
+    } catch (err) { showToast(err.message); e.currentTarget.disabled = false; }
+  };
+  const choicesView = (w) => {
+    const btn = quest ? 'q-btn' : 'p-btn', note = quest ? 'q-swap' : 'p-swap';
+    const sabbath = mine.level.sabbath || isSabbath();
+    const by = w.swap?.by ? (w.swap.by === p.id ? 'You' : profiles.find((x) => x.id === w.swap.by)?.name ?? 'Someone') : null;
+    return [
+      by ? el('p', { class: `${note} k-swapnote` }, `${by} picked ${w.recipe_title} instead of ${w.swap.from_title}.`, ' ',
+        w.swap.by === p.id && !sabbath ? el('button', { type: 'button', class: 'k-skip', onclick: (e) => swapDish(e, 'level-swap/undo', { week: w.week, from: w.swap.from }, (r) => `This week's recipe is ${r.title} again.`) }, 'Undo') : null) : null,
+      // The other dish: one that can't be cooked with the family's settings
+      // says so; one still being written, or in another week, isn't shown.
+      w.choices.filter((c) => !c.current && (c.can || c.out)).map((c) => el('div', { class: 'k-part k-other' },
+        el('span', { class: 'k-part-l' }, `Or the ${SLOT_NAMES[c.slot]} dish`), el('b', {}, c.title),
+        c.out ? el('small', {}, "Not with your family's settings")
+          : sabbath ? el('small', {}, 'Swap after the Sabbath')
+            : el('button', { type: 'button', class: btn, onclick: (e) => swapDish(e, 'level-swap', { week: w.week, id: c.id }, (r) => `This week's recipe is ${r.title} now. Everyone on your course cooks it.`) }, 'Cook this instead'))),
+      // After the shopping list was made: a parent checks what to buy (owner, 2026-10-25).
+      w.swap?.shopping ? el('div', { class: 'k-blocked', role: 'note' },
+        el('p', {}, `The shopping list was for ${w.swap.from_title}. Show a parent so they can check what ${w.recipe_title} needs.`),
+        el('a', { class: btn, href: '#/parent/queue' }, 'Show a parent')) : null,
+    ];
+  };
+
   // ---- A Level week (12c): this week's recipe and its three part pages,
   // then any part still to check off from a week already cooked.
   const levelView = () => {
@@ -543,8 +579,9 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
           w.parts.filter((x) => x.part !== 'sabbath').map(partRow),
           // A week the family's settings rule out (14c): the learner takes it to a parent.
           w.blocked ? row('Recipe', w.recipe_title, 'Needs a parent')
-            : w.recipe_written ? row('Recipe', w.recipe_title, w.recipe_done ? 'Cooked ✓' : 'This week', open(w.recipe), w.recipe_done) : row('Recipe', w.recipe_title ?? 'Being written', 'Coming soon'),
+            : w.recipe_written ? row(recipeLabel(w), w.recipe_title, w.recipe_done ? 'Cooked ✓' : 'This week', open(w.recipe), w.recipe_done) : row('Recipe', w.recipe_title ?? 'Being written', 'Coming soon'),
           w.parts.filter((x) => x.part === 'sabbath').map(partRow)),
+        w.choices ? choicesView(w) : null,
         w.blocked ? el('div', { class: 'k-blocked', role: 'note' },
           el('p', {}, "This week's recipe can't be cooked with your family's settings. Show a parent: they can check the settings, ask for another recipe, or go on to next week."),
           el('a', { class: quest ? 'q-btn' : 'p-btn', href: '#/parent/queue' }, 'Show a parent')) : null,
@@ -631,6 +668,8 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
 // A Level week's drill, knowledge, or Beyond the Recipe page (12c), in the
 // profile's theme, with Done. Nothing is checked off on the Sabbath.
 const PART_NAMES = { knowledge: 'Knowledge', drill: 'Drill', sabbath: 'Beyond the Recipe' };
+// A Level week's two dishes (§12.0).
+const SLOT_NAMES = { familiar: 'Familiar', explore: 'Explore' };
 async function levelPage(profileId, key) {
   const [, week, part] = key.match(/^~(\d+)-(drill|knowledge|sabbath)$/) ?? [];
   const { profiles } = await api('GET', '/api/profiles');
@@ -1549,6 +1588,8 @@ const parentQueue = parentOnly(async (flash) => {
       o.current ? el('span', { class: 'mut' }, 'This week') : el('button', { type: 'button', class: 'hbtn', disabled: o.taken, onclick: async () => {
         close();
         const res = await api('POST', `/api/courses/${c.id}/level-week`, { week: x.week, id: o.id });
+        // After the shopping list was made: what to buy for the new dish (14d).
+        if (res.shopping) return go(`#/parent/shopping/swap/${c.id}/${o.id}/${res.from}`);
         again(`Week ${x.week} is ${o.title} now.`, () => api('POST', `/api/courses/${c.id}/level-week`, { week: x.week, id: res.before }));
       } }, 'Use this'));
     const close = modal(`Swap week ${x.week}'s recipe`,
@@ -1585,7 +1626,38 @@ const parentQueue = parentOnly(async (flash) => {
           again(`Skipped week ${x.week}. The next week takes its place.`, () => api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }));
         }),
         actBtn('Change', '', () => swapLevelRecipe(c, x))));
-    const lessonRow = (x, week) => (x.blocked ? blockedRow(x) : x.done
+    // Cook this instead (14d): a Level week's two dishes, the one it cooks
+    // highlighted; a learner's swap, with the parent's Undo; and after the
+    // shopping list was made, what to buy for the new dish.
+    const dishRows = (x) => {
+      if (!x.choices) return null;
+      const by = x.swap?.by ? pname(x.swap.by) : null;
+      return [
+        el('div', { class: 'lvl-dishes lvl-week' }, x.choices.map((o) => el('div', { class: o.current ? 'lvl-dish on' : 'lvl-dish' },
+          el('span', {}, el('small', {}, SLOT_NAMES[o.slot]), ' ', o.title, o.current ? el('small', {}, ' ✓ Cooking this week') : null),
+          o.can ? (isSabbath() ? el('small', {}, ' · Swap after the Sabbath') : actBtn('Cook this instead', '', async () => {
+            const res = await api('POST', `/api/courses/${c.id}/level-swap?${tz()}`, { week: x.week, id: o.id });
+            if (res.shopping) return go(`#/parent/shopping/swap/${c.id}/${o.id}/${res.from}`);
+            again(`Week ${x.week} cooks ${o.title} now.`, () => api('POST', `/api/courses/${c.id}/level-swap/undo?${tz()}`, { week: x.week, from: res.from }));
+          }))
+            : o.current ? null : el('small', {}, o.out ? " · Can't be cooked with your settings" : o.written ? ' · In another week' : ' · Being written')))),
+        by ? el('p', { class: 'small lvl-swapnote' }, `${by} picked ${x.title} instead of ${x.swap.from_title}.`, ' ',
+          isSabbath() ? null : actBtn('Undo', 'link', async () => {
+            await api('POST', `/api/courses/${c.id}/level-swap/undo?${tz()}`, { week: x.week, from: x.swap.from });
+            again(`Week ${x.week} cooks ${x.swap.from_title} again.`);
+          })) : null,
+        x.swap?.shopping ? el('div', { class: 'card notice lvl-blocked', role: 'note' },
+          el('b', {}, `Week ${x.week}'s shopping list was for ${x.swap.from_title}.`),
+          el('p', {}, `Check what ${x.title} needs. Making a list doesn't mean it was bought, so untick anything you still need.`),
+          el('div', { class: 'acts' },
+            el('a', { class: 'hbtn pri', href: `#/parent/shopping/swap/${c.id}/${x.lesson_id}/${x.swap.from}` }, 'See what to buy'),
+            actBtn('We have what it needs', '', async () => {
+              await api('POST', `/api/courses/${c.id}/level-swap/shopped`, { week: x.week });
+              again(`Week ${x.week}'s shopping is checked.`, () => api('POST', `/api/courses/${c.id}/level-swap/shopped`, { week: x.week, done: false }));
+            }))) : null,
+      ];
+    };
+    const lessonRow = (x, week) => [x.blocked ? blockedRow(x) : x.done
       ? el('div', { class: 'rowi' }, el('div', {}, el('b', {}, ...lessonName(x)), el('small', {}, 'Cooked')), el('span', { class: 'mut' }, '✓'))
       : expander(el('span', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null, status(x, week) ? el('small', {}, status(x, week)) : null),
         el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id), previewBtn(x.lesson_id, x.version?.id), versionPick(x, () => parentQueue())),
@@ -1596,7 +1668,7 @@ const parentQueue = parentOnly(async (flash) => {
             await api('POST', `/api/courses/${c.id}/skip-recipe`, { lesson_id: x.lesson_id });
             again(`Skipped ${x.title}. The next lesson takes its place.`, () => api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }));
           }),
-          x.queue_id ? swapLink(x, x.queue_id) : null)));
+          x.queue_id ? swapLink(x, x.queue_id) : null)), dishRows(x)];
     const tw = c.this_week;
     return el('section', { class: 'card qcourse' },
       el('div', { class: 'rowi' },
@@ -2308,6 +2380,29 @@ const shoppingPreview = parentOnly(async (count) => {
       const res = await api('POST', `/api/shopping/lists?${tz()}`, { keys: p.lessons.map((x) => x.key), on_hand: all.filter((x) => v[`h_${x.id}`]).map((x) => x.id) });
       go(`#/parent/shopping/list/${res.id}`);
     }, { extra: [el('a', { class: 'hbtn', href: '#/parent/shopping' }, 'Back')] }));
+});
+
+// After a Level week's swap (14d): the preview for the new dish, with what
+// the old dish's list had ticked as already have. Making a list doesn't mean
+// it was bought, so each can be unticked (owner, 2026-10-25).
+const swapShoppingPreview = parentOnly(async (cid, lessonId, from) => {
+  const p = await api('POST', `/api/shopping/swap-preview?${tz()}`, { course_id: cid, lesson_id: lessonId, from });
+  const all = [...p.sections.flatMap((s) => s.items), ...p.may_have];
+  const had = new Set(p.already);
+  const tick = (x) => el('label', { class: 'choice havebox' },
+    el('input', { type: 'checkbox', name: `h_${x.id}`, checked: had.has(x.id) }),
+    el('span', {}, el('b', {}, x.name), el('small', {}, [had.has(x.id) ? `On the list for ${p.from_title}` : null, x.used ? `Recipe uses ${x.used}` : null, x.buy && x.buy !== x.used ? `buy ${x.buy}` : null].filter(Boolean).join(' · '))));
+  parentScreen('queue', el('h2', {}, `What ${p.lessons[0].title} needs`),
+    el('p', {}, `This week's recipe changed from ${p.from_title} to ${p.lessons[0].title} (serves ${p.lessons[0].servings}).`),
+    el('p', { class: 'mut small' }, `Ticked: what the shopping list for ${p.from_title} had. Making a list doesn't mean it was bought, so untick anything you still need.`),
+    leftOutNote(p.lessons),
+    form([
+      p.may_have.length ? el('fieldset', { class: 'psec' }, el('legend', {}, MAY_HAVE), el('div', { class: 'stack' }, p.may_have.map(tick))) : null,
+      p.sections.map((s) => el('fieldset', { class: 'psec' }, el('legend', {}, s.name), el('div', { class: 'stack' }, s.items.map(tick)))),
+    ], 'Create shopping list', async (v) => {
+      const res = await api('POST', `/api/shopping/lists?${tz()}`, { keys: p.lessons.map((x) => x.key), on_hand: all.filter((x) => v[`h_${x.id}`]).map((x) => x.id) });
+      go(`#/parent/shopping/list/${res.id}`);
+    }, { extra: [el('a', { class: 'hbtn', href: '#/parent/queue' }, 'Not now')] }));
 });
 
 // The list, in the store: tap to check off, saved as it's tapped.
@@ -3156,6 +3251,7 @@ async function route() {
       if (sub === 'queue') return await parentQueue();
       if (sub === 'shopping' && extra === 'new') return await shoppingPreview(parts[3]);
       if (sub === 'shopping' && extra === 'list') return await shoppingListView(parts[3]);
+      if (sub === 'shopping' && extra === 'swap') return await swapShoppingPreview(parts[3], decodeURIComponent(parts[4] ?? ''), decodeURIComponent(parts[5] ?? ''));
       if (sub === 'shopping') return await shopping();
       if (sub === 'pantry') return await pantryEditor();
       if (sub === 'progress') return await progress(extra);

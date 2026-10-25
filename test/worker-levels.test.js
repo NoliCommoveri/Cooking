@@ -563,3 +563,101 @@ test("a family without the Levels' release sees no start setting; the backup car
   assert.deepEqual(body.levels, []);
   assert.equal((await other.a.post('/api/level-requests', { level: 'sp-3', week: 9 })).status, 400);
 });
+
+// ---------- 14d: Cook this instead ----------
+
+// A course for Ava and Ben whose this week is week 9: Chicken fajitas
+// (Familiar) or Oyakodon (Explore), both written.
+async function weekNine() {
+  const t = await setup();
+  const { id } = (await level(t.a, [t.ava, t.ben], addDays(sunday, -35))).body;
+  for (const lid of ['minestrone', 'tabbouleh', 'thick-burgers', 'baked-salmon']) await t.a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: lid });
+  return { ...t, id };
+}
+const thisWeek = async (a) => (await card(a)).this_week.lessons[0];
+const swap = (a, pid, id, week = 9) => a.post(`/api/profiles/${pid}/level-swap`, { week, id });
+
+test('the kitchen shows both dishes; a learner swaps for the whole course, with Undo', async () => {
+  const { a, ava, ben, id } = await weekNine();
+  let lv = await kitchen(a, ava);
+  assert.deepEqual(lv.week.choices.map((x) => [x.id, x.slot, x.current, x.can]), [['chicken-fajitas', 'familiar', true, false], ['oyakodon', 'explore', false, true]]);
+  if (saturday) {
+    assert.equal((await swap(a, ava, 'oyakodon')).status, 409, 'no swapping on the Sabbath');
+    assert.equal((await a.post(`/api/courses/${id}/level-swap`, { week: 9, id: 'oyakodon' })).status, 409);
+    return;
+  }
+  assert.equal((await swap(a, ava, 'beef-bulgogi')).status, 400, "not one of this week's dishes");
+  assert.equal((await swap(a, ava, 'chicken-fajitas')).status, 409, 'already this week');
+  const res = await swap(a, ava, 'oyakodon');
+  assert.equal(res.status, 200);
+  assert.deepEqual([res.body.from, res.body.shopping], ['chicken-fajitas', false]);
+  // The whole course cooks it: Ben's kitchen and queue too, and the parent sees who swapped.
+  for (const pid of [ava, ben]) assert.deepEqual((await a.get(`/api/profiles/${pid}/queue`)).body.items.map((x) => x.lesson_id), ['oyakodon']);
+  lv = await kitchen(a, ben);
+  assert.deepEqual([lv.week.recipe, lv.week.swap.by, lv.week.choices.find((x) => x.current).id], ['oyakodon', ava, 'oyakodon']);
+  let x = await thisWeek(a);
+  assert.deepEqual([x.lesson_id, x.swap.by, x.swap.from], ['oyakodon', ava, 'chicken-fajitas']);
+  // The learner's Undo: back to the start dish, nothing saved for the week.
+  assert.equal((await a.post(`/api/profiles/${ava}/level-swap/undo`, { week: 9, from: 'chicken-fajitas' })).status, 200);
+  x = await thisWeek(a);
+  assert.deepEqual([x.lesson_id, x.swap], ['chicken-fajitas', null]);
+  assert.ok(!(await course0(a)).plan.find((w) => w.week === 9).changed);
+  assert.deepEqual((await a.get(`/api/profiles/${ava}/queue`)).body.items.map((y) => y.lesson_id), ['chicken-fajitas']);
+  // Only this week's dish is the learner's to swap.
+  assert.equal((await swap(a, ava, 'shish-taouk', 10)).status, 409);
+
+  // The parent's Cook this instead and Undo, on the course card.
+  assert.equal((await a.post(`/api/courses/${id}/level-swap`, { week: 9, id: 'oyakodon' })).status, 200);
+  assert.deepEqual([(await thisWeek(a)).lesson_id, (await thisWeek(a)).swap.by], ['oyakodon', null]);
+  await swap(a, ava, 'chicken-fajitas');
+  assert.equal((await a.post(`/api/courses/${id}/level-swap/undo`, { week: 9 })).status, 200, "the parent undoes the learner's swap");
+  assert.equal((await thisWeek(a)).lesson_id, 'oyakodon');
+});
+
+test('a swapped week keeps its dish through a change of start; Put back wipes it; a ruled-out dish is no choice', async () => {
+  const { a, ava, ben, id } = await weekNine();
+  if (saturday) return;
+  await swap(a, ava, 'oyakodon');
+  // A swap is a pick for the week, so a change of start leaves it.
+  await a.put(`/api/courses/${id}`, { start_date: addDays(sunday, -35), per_week: 1, profile_ids: [ava, ben], starts: 'explore' });
+  await a.put(`/api/courses/${id}`, { start_date: addDays(sunday, -35), per_week: 1, profile_ids: [ava, ben], starts: 'familiar' });
+  assert.equal((await thisWeek(a)).lesson_id, 'oyakodon');
+  // Put back wipes it (owner, 2026-10-25).
+  await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: 'oyakodon' });
+  await a.post(`/api/courses/${id}/put-back-recipe`, { lesson_id: 'oyakodon' });
+  const x = await thisWeek(a);
+  assert.deepEqual([x.lesson_id, x.swap], ['chicken-fajitas', null]);
+  // Oyakodon has egg: with egg left out it isn't a choice.
+  await familyIs(a, ['egg']);
+  const c = (await kitchen(a, ava)).week.choices.find((y) => y.id === 'oyakodon');
+  assert.deepEqual([c.out, c.can], [true, false]);
+  assert.equal((await swap(a, ava, 'oyakodon')).status, 409);
+});
+
+test('a swap after the shopping list is made: the preview for the new dish, the old list preselected', async () => {
+  const { a, ava, id } = await weekNine();
+  if (saturday) return;
+  const up = (await a.get('/api/shopping')).body.upcoming;
+  const fajitas = up.find((e) => e.course_id === id && e.lesson_id === 'chicken-fajitas');
+  assert.equal((await a.post('/api/shopping/lists', { keys: [fajitas.key], on_hand: [] })).status, 200);
+  const res = await swap(a, ava, 'oyakodon');
+  assert.equal(res.body.shopping, true, 'the old dish was on a list');
+  assert.equal((await kitchen(a, ava)).week.swap.shopping, true, 'the kitchen sends the learner to a parent');
+  assert.equal((await thisWeek(a)).swap.shopping, true);
+
+  const p = (await a.post('/api/shopping/swap-preview', { course_id: id, lesson_id: 'oyakodon', from: 'chicken-fajitas' })).body;
+  assert.deepEqual([p.lessons.map((e) => e.lesson_id), p.from_title], [['oyakodon'], 'Chicken fajitas']);
+  const items = [...p.sections.flatMap((s) => s.items), ...p.may_have].map((i) => i.id);
+  assert.ok(p.already.length && p.already.every((i) => items.includes(i)), 'what the old list had, preselected');
+  assert.ok(items.some((i) => !p.already.includes(i)), "what it didn't have isn't");
+  assert.equal((await a.post('/api/shopping/swap-preview', { course_id: id, lesson_id: 'oyakodon', from: 'minestrone' })).status, 404);
+
+  // "We have what it needs" clears the notice, with Undo; a list for the new dish does too.
+  await a.post(`/api/courses/${id}/level-swap/shopped`, { week: 9 });
+  assert.equal((await thisWeek(a)).swap.shopping, false);
+  await a.post(`/api/courses/${id}/level-swap/shopped`, { week: 9, done: false });
+  assert.equal((await thisWeek(a)).swap.shopping, true);
+  const made = await a.post('/api/shopping/lists', { keys: [p.lessons[0].key], on_hand: p.already });
+  assert.equal(made.status, 200);
+  assert.equal((await thisWeek(a)).swap.shopping, false);
+});
