@@ -4853,3 +4853,44 @@ family on merge.
 - Tests: 356. A Level course now schedules 17 written recipes, with 19
   waiting; best fit's "written option first" check moved to week 24, since
   week 15's own recipe is written now.
+
+## 200. 2026-10-25 — Level 3 Unit 5: legumes and grains
+
+Phase 12, slice 12f, Unit 5 (plan §12.4). Owner, 2026-10-25: Unit 5, the
+same way as Unit 4. The copy is in a review doc, "Level 3 Unit 5: Legumes
+and grains", and goes live for every family on merge.
+
+- **Red lentil soup (mercimek)** (week 17; lesson 18b, the cooking dried
+  beans and lentils group, for every family): lentils picked over and
+  rinsed, simmered over a sweated onion and carrot until they melt, cooled
+  5 minutes and blended with the stick blender kept under the surface (the
+  hot-blending step the recipe review asked for), finished with lemon and
+  paprika butter.
+- **Red beans and rice** (week 18, for every family): kidney beans picked
+  over and soaked overnight (quick-soak as the fallback), a 10-minute hard
+  boil (the review's ask), a gentle 1½-hour simmer, and a cup mashed for
+  creaminess. The sausage is optional beef kielbasa, with chicken andouille
+  as the swap, to match week 18's note; its course card says so now.
+- **Rice pilaf** (week 19, Level only): orzo and rinsed rice toasted in
+  butter, hot broth, 15 minutes covered and a 10-minute rest. The orzo is
+  optional, so the pilaf can be gluten-free.
+- **Mujaddara** (week 20, mastery; the crisping group, for every family):
+  brown lentils simmered 12 minutes for a head start, onions fried slowly
+  in olive oil until crisp and salted after, the rice toasted in that oil,
+  then lentils and rice cooked together.
+- **Weeks 17–20's twelve part pages:** legume types and cook times, why
+  beans are soaked (and the kidney-bean hard boil), absorption vs. pasta
+  method with ratios, and a grains-of-the-world worksheet with the unit
+  quiz; drills picking over and cooking red and brown lentils, quick-soak
+  vs. overnight soak, toasted vs. plain rice, and a grain cooked without a
+  recipe card; Beyond the Recipe: freezing soup in portions, soaking and
+  freezing beans ahead, Daniel 1, and cooking grains ahead and reheating
+  them with steam.
+- **Kitchen words:** legume, pick over, quick-soak, hard boil, absorption
+  method, pilaf.
+- New ingredients: red lentils, brown lentils, dried red kidney beans, orzo.
+- Level 3's hours with every part are now about 131 (130 before).
+- Screenshots were sent in the session, taken from the demo's Try a week
+  pointed at Unit 5 for that only. The demo still shows Unit 1.
+- Tests: 356. A Level course now schedules 21 written recipes, with 15
+  waiting.

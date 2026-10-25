@@ -1106,10 +1106,276 @@
       },
       "swapIns": ["beef-chili", "chicken-tagine"]
     },
-    { "week": 17, "unit": 5, "skill": "cooking-legumes", "recipe": "red-lentil-soup", "drill": { "title": "Rinse and pick over lentils", "minutes": 40 }, "knowledge": { "title": "Legume types and cook times", "minutes": 35 }, "sabbath": { "title": "Freeze soup in portions", "minutes": 45 }, "swapIns": ["misir-wot"] },
-    { "week": 18, "unit": 5, "skill": "cooking-legumes", "recipe": "red-beans-and-rice", "note": "Beef sausage, collagen-cased or skinless, or none", "drill": { "title": "Quick-soak vs. overnight soak", "minutes": 40 }, "knowledge": { "title": "Why beans are soaked", "minutes": 35 }, "sabbath": { "title": "Soak beans ahead", "minutes": 45 }, "swapIns": ["cuban-black-beans"] },
-    { "week": 19, "unit": 5, "skill": "cooking-grains", "recipe": "rice-pilaf", "drill": { "title": "Toast grains in fat before liquid", "minutes": 40 }, "knowledge": { "title": "Absorption vs. pasta method; ratios", "minutes": 35 }, "sabbath": { "title": "Daniel's diet (Daniel 1)", "minutes": 45 }, "swapIns": ["jollof-rice", "bulgur-pilaf"] },
-    { "week": 20, "unit": 5, "skill": "cooking-legumes", "recipe": "mujaddara", "mastery": true, "note": "Lentils and rice", "drill": { "title": "Cook a grain without a recipe card", "minutes": 40 }, "knowledge": { "title": "Grains of the world worksheet", "minutes": 35 }, "sabbath": { "title": "Cook grains ahead and reheat them with steam", "minutes": 45 }, "swapIns": ["koshari"] },
+    {
+      "week": 17,
+      "unit": 5,
+      "skill": "cooking-legumes",
+      "recipe": "red-lentil-soup",
+      "drill": {
+        "title": "Rinse and pick over lentils",
+        "minutes": 40,
+        "body": [
+          "Every bag of dried legumes gets picked over and rinsed before cooking. Then you'll cook red and brown lentils side by side and see why recipes use them so differently."
+        ],
+        "steps": [
+          "Spread ½ cup of red lentils and ½ cup of brown lentils on two plates. Pick out any tiny stones, clumps of dirt, or shriveled ones. Write down what you found.",
+          "Rinse each in a bowl of cold water: swish, pour off the cloudy water while holding the lentils back with your hand, and repeat until the water is almost clear.",
+          "Put each in its own saucepan with 2 cups of water. Bring both to a boil, then turn them down to a gentle simmer with the lids off.",
+          "Every 5 minutes, scoop out a few of each, let them cool, and taste them. Write down the time each one is tender, and the time the red ones fall apart.",
+          "Drain the brown lentils and compare them with the red ones. Which would you use in a soup? Which in a salad or with rice?",
+          "Season both with a little salt, olive oil, and lemon and eat them as a side, or store them in the fridge and use them within 4 days."
+        ],
+        "quiz": [
+          { "q": "Why pick over dried lentils before cooking them?", "choices": ["To find tiny stones or dirt", "To count them", "To dry them"], "answer": 0, "explain": "They come straight from the field." },
+          { "q": "Which lentils would you use in a salad?", "choices": ["Brown lentils, because they hold their shape", "Red lentils, because they're faster", "Either one"], "answer": 0, "explain": "Red lentils fall apart." }
+        ]
+      },
+      "knowledge": {
+        "title": "Legume types and cook times",
+        "minutes": 35,
+        "body": [
+          "Legumes are the seeds of plants that grow their seeds in pods: beans, lentils, peas, and chickpeas. Dried, they keep for a year or more in the pantry, and they're one of the cheapest ways to feed a family. They're full of protein and fiber, and eaten with a grain, like beans with rice or lentils with bread, they give the body all the protein building blocks it needs.",
+          "Lentils are small and flat and cook fast, with no soak. Red lentils are sold split, with their skins off, and fall apart in 15 to 20 minutes, which is why they make smooth soups. Brown and green lentils keep their skins and hold their shape: 20 to 30 minutes. Split peas take 30 to 45 minutes and melt like red lentils.",
+          "Beans and chickpeas are bigger and harder. Soaked overnight, black beans and pinto beans take about 1 to 1½ hours of simmering, red kidney beans about 1½ hours after a 10-minute hard boil, and chickpeas 1½ to 2 hours. Unsoaked, each takes much longer and cooks less evenly.",
+          "These times are a guide. Old beans, from the back of the pantry, can take twice as long, so taste a few rather than trusting the clock. Acid slows softening: tomatoes, vinegar, or lemon added too early can keep beans firm for hours, so add them once the beans are tender. Salt in the pot is fine from the start.",
+          "Canned beans are already cooked. They're quick and good, but they cost more, and you can't control their texture or salt."
+        ],
+        "quiz": [
+          { "q": "Which of these cooks fastest?", "choices": ["Red lentils", "Chickpeas", "Kidney beans"], "answer": 0, "explain": "Split and skinless, they're done in 15 to 20 minutes." },
+          { "q": "Which keep their shape when cooked: red lentils or brown lentils?", "choices": ["Brown lentils", "Red lentils", "Both fall apart"], "answer": 0, "explain": "Brown lentils keep their skins." },
+          { "q": "When should you add tomatoes or vinegar to a pot of beans?", "choices": ["Once the beans are tender", "At the very start", "Into the soaking water"], "answer": 0, "explain": "Acid slows softening." },
+          { "q": "Your beans are still hard after the usual time. What's the likely reason?", "choices": ["They're old beans", "You salted the pot", "The pot was too big"], "answer": 0, "explain": "Old beans can take twice as long." },
+          { "q": "What does a legume eaten with a grain give you?", "choices": ["All the protein building blocks the body needs", "Twice the sugar", "Nothing extra"], "answer": 0, "explain": "Like beans with rice, or lentils with bread." }
+        ]
+      },
+      "sabbath": {
+        "title": "Freeze soup in portions",
+        "minutes": 45,
+        "body": [
+          "Soup is one of the best things to freeze. A batch made ahead and frozen in portions turns into several quick meals later. Many families keep soup in the freezer like this, so a meal is ready on a busy night, or so they can focus on resting.",
+          "Cool it first, the Unit 1 way: from 140°F to 70°F within 2 hours, then to 40°F within 4 more, in shallow containers, before it goes in the freezer. A hot pot in the freezer warms everything around it.",
+          "Liquids grow as they freeze. Leave about an inch of space at the top of every container, or it can crack or pop its lid. Freezer bags laid flat freeze fast and stack like books.",
+          "Most bean, lentil, and vegetable soups keep their best for 2 to 3 months. Soups with pasta or potatoes go soft, and soups with cream or milk can separate, so freeze those before the pasta or cream goes in. Thaw a portion in the fridge overnight and reheat it to 165°F, adding water, because lentil soups thicken as they sit."
+        ],
+        "steps": [
+          "Make a double batch of this week's red lentil soup, or set half of it aside.",
+          "Cool it the Unit 1 way and check it reaches 40°F.",
+          "Ladle it into freezer containers or bags in 1- or 2-person portions, leaving an inch of space at the top.",
+          "Label each with the soup's name and the date, and freeze bags flat on a sheet pan until solid, then stand them up.",
+          "Later in the week, thaw one portion in the fridge overnight and reheat it on the stove to 165°F, with a splash of water.",
+          "Write down how it compared with the fresh soup, and how long the frozen meal took."
+        ],
+        "quiz": [
+          { "q": "Why leave space at the top of a container of soup for the freezer?", "choices": ["Liquids grow as they freeze", "So it thaws faster", "To let air in"], "answer": 0, "explain": "A full container can crack or pop its lid." },
+          { "q": "What temperature does thawed soup need to reach when you reheat it?", "choices": ["165°F", "140°F", "100°F"], "answer": 0, "explain": "Every reheated leftover goes to 165°F." }
+        ]
+      },
+      "swapIns": ["misir-wot"]
+    },
+    {
+      "week": 18,
+      "unit": 5,
+      "skill": "cooking-legumes",
+      "recipe": "red-beans-and-rice",
+      "note": "Beef sausage, collagen-cased or skinless, or none",
+      "drill": {
+        "title": "Quick-soak vs. overnight soak",
+        "minutes": 40,
+        "body": [
+          "You'll soak two batches of the same beans two ways, cook them side by side, and see whether the overnight soak is worth planning for. Start the overnight batch the evening before."
+        ],
+        "steps": [
+          "The evening before: pick over and rinse 1 cup of dried black beans. Put them in a bowl with 4 cups of cold water and leave them overnight.",
+          "The next day: pick over and rinse another 1 cup of black beans. Put them in a saucepan with 4 cups of water, boil them for 2 minutes, turn off the heat, put the lid on, and leave them for 1 hour.",
+          "Drain both batches and measure them in a measuring cup. Write down how much each one grew, and look at their skins.",
+          "Put each batch in its own saucepan with fresh water to cover by 2 inches and a pinch of salt. Bring both to a boil, then simmer gently with the lids slightly open.",
+          "From 45 minutes on, taste 3 beans from each pot every 10 minutes, letting them cool first. Write down when each batch is creamy all the way through, and how many split skins each has.",
+          "Cool the cooked beans the Unit 1 way and store them in their liquid in the fridge for up to 4 days, for tacos, rice, or soup."
+        ],
+        "quiz": [
+          { "q": "What's the first step of a quick soak?", "choices": ["Boil the beans for 2 minutes", "Freeze them", "Rinse them in hot water"], "answer": 0, "explain": "Then they sit covered for an hour." },
+          { "q": "Why taste three beans, not one?", "choices": ["Beans in one pot don't all cook at the same speed", "To get more flavor", "One is too small to taste"], "answer": 0, "explain": "Every bean you taste should be creamy." }
+        ]
+      },
+      "knowledge": {
+        "title": "Why beans are soaked",
+        "minutes": 35,
+        "body": [
+          "A dried bean is a seed, sealed up hard and dry so it can wait months to sprout. Soaking wakes it up: overnight in plenty of cold water, a bean drinks about its own weight in water and swells to twice its size.",
+          "Soaking makes beans cook faster and more evenly. Unsoaked, the outside of a bean softens and splits long before the middle is done. Soaked, water is already in the middle when the heat starts, so the whole bean cooks together.",
+          "Soaking also washes out some of the sugars in beans that people can't digest. Those sugars are what make beans gassy. Pouring off the soaking water and cooking in fresh water helps.",
+          "There are two ways. An overnight soak takes 8 to 12 hours in cold water. A quick soak takes about an hour: boil the beans for 2 minutes, turn off the heat, cover them, and leave them. Both work; the overnight soak gives slightly more even beans. Lentils and split peas don't need either.",
+          "Red kidney beans need one more step. Raw or undercooked, they contain a natural toxin, and as few as four or five raw beans can make a person very sick. Soaking doesn't remove it. Boiling hard for 10 minutes does, which is why every kidney bean recipe starts with a hard boil. A slow cooker on low may never get hot enough. Canned kidney beans are already cooked and safe."
+        ],
+        "quiz": [
+          { "q": "About how big does a bean get after an overnight soak?", "choices": ["About twice its size", "The same size", "Ten times its size"], "answer": 0, "explain": "It drinks about its own weight in water." },
+          { "q": "Why do soaked beans cook more evenly?", "choices": ["Water is already in the middle when the heat starts", "Soaking softens the skins only", "They're warmer"], "answer": 0, "explain": "Unsoaked, the outside splits before the middle is done." },
+          { "q": "How do you quick-soak beans?", "choices": ["Boil 2 minutes, then cover and leave about an hour", "Soak them in hot tap water for 10 minutes", "Microwave them dry"], "answer": 0, "explain": "It works nearly as well as overnight." },
+          { "q": "What makes red kidney beans safe to eat?", "choices": ["Boiling them hard for 10 minutes", "Soaking them overnight", "Cooking them on low all day"], "answer": 0, "explain": "Soaking doesn't remove the toxin; a hard boil does." },
+          { "q": "Which of these needs no soak?", "choices": ["Lentils", "Chickpeas", "Black beans"], "answer": 0, "explain": "They're small and thin enough to cook through quickly." }
+        ]
+      },
+      "sabbath": {
+        "title": "Soak beans ahead",
+        "minutes": 45,
+        "body": [
+          "Dried beans take planning: a night of soaking and a couple of hours of simmering. Many families soak and cook a big batch ahead and freeze it in portions, so beans are as ready as a can later in the week, or so they can focus on resting.",
+          "Soaked beans that you can't cook right away can be drained and kept in the fridge for up to 2 days. Cooked beans keep 4 days in the fridge, and about 6 months in the freezer.",
+          "Freeze cooked beans in some of their cooking liquid. It keeps them from drying out and freezer-burning. About 1½ cups of beans is the same as one 15-ounce can, so freezing in that size makes them easy to use in any recipe."
+        ],
+        "steps": [
+          "Pick over and rinse 1 pound of dried beans: black, pinto, or chickpeas.",
+          "Soak them overnight in a large bowl with 8 cups of cold water.",
+          "Drain, rinse, and simmer them in fresh water to cover by 2 inches, with a teaspoon of salt, until they're creamy all the way through.",
+          "Cool them in their liquid the Unit 1 way.",
+          "Pack them in 1½-cup portions with enough liquid to cover, leaving an inch of space at the top. Label them with the bean and the date, and freeze them.",
+          "Later in the week, thaw a portion in the fridge and use it in place of a can of beans. Write down the meal you made."
+        ],
+        "quiz": [
+          { "q": "How many cups of cooked beans equal one 15-ounce can?", "choices": ["About 1½ cups", "About ½ cup", "About 4 cups"], "answer": 0, "explain": "Freeze them in that size." },
+          { "q": "Why freeze beans in some of their cooking liquid?", "choices": ["It keeps them from drying out", "It makes them cook faster", "It makes them spicier"], "answer": 0, "explain": "Beans frozen dry get freezer burn." }
+        ]
+      },
+      "swapIns": ["cuban-black-beans"]
+    },
+    {
+      "week": 19,
+      "unit": 5,
+      "skill": "cooking-grains",
+      "recipe": "rice-pilaf",
+      "drill": {
+        "title": "Toast grains in fat before liquid",
+        "minutes": 40,
+        "body": [
+          "Does toasting really make a difference? You'll cook two small batches of rice exactly the same way, except that one is toasted first, and compare them."
+        ],
+        "steps": [
+          "Rinse 1 cup of long-grain white rice until the water is only a little cloudy, and split it into two ½-cup piles.",
+          "Batch 1, plain: put ½ cup of rice and ¾ cup of water in a small saucepan with a pinch of salt.",
+          "Batch 2, toasted: melt 1 tablespoon of butter or oil in a second small saucepan over medium heat. Add the other ½ cup of rice and stir until the edges of the grains turn see-through and it smells nutty, about 3 minutes. Stand back and add ¾ cup of water heated in the microwave, and a pinch of salt.",
+          "Bring both to a boil, then turn them to the lowest heat, put the lids on, and cook 15 minutes without lifting the lids. Turn off the heat and rest 10 minutes.",
+          "Fluff both with a fork. Compare them side by side: color, smell, stickiness, and taste. Write down which you'd serve and why.",
+          "Eat them as a side this week, or cool them the Unit 1 way and keep them in the fridge for up to 4 days."
+        ],
+        "quiz": [
+          { "q": "How do you know the rice is toasted enough?", "choices": ["The edges of the grains turn see-through and it smells nutty", "It turns dark brown", "It starts to pop"], "answer": 0, "explain": "Dark brown is burnt." },
+          { "q": "Why does the water go into the toasted rice hot?", "choices": ["So the pan stays at a boil and the rice cooks evenly", "So the butter melts", "To save time washing up"], "answer": 0, "explain": "Cold water stops the cooking." }
+        ]
+      },
+      "knowledge": {
+        "title": "Absorption vs. pasta method; ratios",
+        "minutes": 35,
+        "body": [
+          "There are two main ways to cook a grain. In the absorption method, the grain cooks in a measured amount of water and drinks all of it, so nothing is drained. Rice, quinoa, bulgur, and couscous are usually cooked this way. In the pasta method, the grain boils in plenty of water and is drained when it's tender, like pasta. Barley, farro, wild rice, and brown rice cook well this way.",
+          "The absorption method needs a ratio: how much liquid for each cup of grain. Rinsed long-grain white rice takes about 1½ cups of water per cup (15 minutes, then a rest). Brown rice takes about 2 cups (45 minutes). Quinoa takes 2 cups (15 minutes), and needs a good rinse first to wash off its bitter coating. Coarse bulgur takes 2 cups (15 minutes). Couscous takes 1¼ cups of boiling water poured over it, with 5 minutes covered off the heat.",
+          "The pasta method needs no ratio at all, which makes it forgiving: taste the grain, and drain it when it's done. The cost is the flavor and nutrients that pour down the sink with the water.",
+          "A pilaf is the absorption method with one step added: the grain is toasted in fat first. Every grain gets a coat of fat that keeps it separate, and the toasting adds a nutty flavor. Bulgur, orzo, and many other grains can be cooked as a pilaf too.",
+          "Whatever the method, keep the lid on and the stirring out once the grain is simmering. Lifting the lid lets out the steam that finishes the cooking, and stirring breaks grains and makes them sticky."
+        ],
+        "quiz": [
+          { "q": "In the absorption method, what happens to the water?", "choices": ["The grain drinks all of it", "You drain it off", "It boils away with the lid off"], "answer": 0, "explain": "That's why the ratio matters." },
+          { "q": "About how much water does a cup of rinsed long-grain white rice take?", "choices": ["1½ cups", "4 cups", "½ cup"], "answer": 0, "explain": "Brown rice takes about 2." },
+          { "q": "Why rinse quinoa before cooking it?", "choices": ["To wash off its bitter coating", "To make it cook faster", "To add salt"], "answer": 0, "explain": "The coating tastes soapy and bitter." },
+          { "q": "What makes a pilaf a pilaf?", "choices": ["The grain is toasted in fat before the liquid", "It's drained like pasta", "It's stirred the whole time"], "answer": 0, "explain": "Toasting coats each grain and adds flavor." },
+          { "q": "What's the advantage of the pasta method?", "choices": ["No ratio to get right; drain when it's done", "It keeps all the nutrients", "It's always faster"], "answer": 0, "explain": "The cost is what pours down the sink." }
+        ]
+      },
+      "sabbath": {
+        "title": "Daniel's diet (Daniel 1)",
+        "minutes": 45,
+        "body": [
+          "When Babylon conquered Jerusalem, King Nebuchadnezzar took young men of Judah's royal and noble families to train for his court, among them Daniel, Hananiah, Mishael, and Azariah. The king gave them a daily portion of the food he ate and the wine he drank (Daniel 1:3–5).",
+          "\"But Daniel resolved that he would not defile himself with the king's food, or with the wine that he drank\" (Daniel 1:8). The king's table likely served meat God's law called unclean, or meat not prepared the way the law required, and food and wine offered first to Babylon's gods.",
+          "Daniel didn't refuse rudely. He asked the official in charge for permission, and when the official was afraid, he offered a test: \"Test your servants for ten days; let us be given vegetables to eat and water to drink\" (Daniel 1:12). The Hebrew word for vegetables means things grown from seed, which would include grains and legumes like the ones in this unit.",
+          "\"At the end of ten days it was seen that they were better in appearance and fatter in flesh than all the youths who ate the king's food\" (Daniel 1:15). God gave the four young men learning and skill, and the king found them ten times better than all the wise men of his kingdom (Daniel 1:17–20)."
+        ],
+        "steps": [
+          "Read Daniel 1.",
+          "Answer in writing: why did Daniel refuse the king's food?",
+          "Answer in writing: how did Daniel ask for a change? What can you learn from the way he asked, not just what he asked for?",
+          "Plan one day of meals made from foods grown from seed: grains, beans, lentils, vegetables, and fruit. Use at least one dish from this unit.",
+          "With your family, cook one of those meals this week, and talk about Daniel 1 while you eat."
+        ],
+        "quiz": [
+          { "q": "What did Daniel ask to eat and drink during the test?", "choices": ["Vegetables and water", "Bread and wine", "Meat and milk"], "answer": 0, "explain": "Daniel 1:12." },
+          { "q": "How long was the test?", "choices": ["Ten days", "Forty days", "Three years"], "answer": 0, "explain": "Daniel 1:12–15." },
+          { "q": "What does the Hebrew word for \"vegetables\" in Daniel 1 mean?", "choices": ["Things grown from seed", "Only leafy greens", "Fruit"], "answer": 0, "explain": "It would include grains and legumes." }
+        ]
+      },
+      "swapIns": ["jollof-rice", "bulgur-pilaf"]
+    },
+    {
+      "week": 20,
+      "unit": 5,
+      "skill": "cooking-legumes",
+      "recipe": "mujaddara",
+      "mastery": true,
+      "note": "Lentils and rice",
+      "drill": {
+        "title": "Cook a grain without a recipe card",
+        "minutes": 40,
+        "body": [
+          "No recipe card this time. Cook the grain you picked on the worksheet, using what you've learned this unit. Plan first, then cook. An adult is nearby, but doesn't help."
+        ],
+        "steps": [
+          "Write your plan: the grain, how much, whether you'll rinse it or toast it, the method (absorption or pasta), the liquid and how much, and the time.",
+          "Cook it by your plan. Taste it near the end and adjust if you need to.",
+          "Judge it: is every grain tender? Is it separate or sticky? Is there water left, or did it scorch? Write down what you'd change.",
+          "Season it and serve it as a side this week, or cool it the Unit 1 way and keep it in the fridge for up to 4 days."
+        ],
+        "quiz": [
+          { "q": "You cooked a grain by absorption and there's water left in the pan. What do you do?", "choices": ["Cook it a few more minutes with the lid off", "Add more water", "Drain it and start over"], "answer": 0, "explain": "Next time, use a little less liquid." },
+          { "q": "Your rice came out sticky. What's a likely cause?", "choices": ["It wasn't rinsed, or it was stirred while cooking", "It was toasted", "The lid stayed on"], "answer": 0, "explain": "Loose starch and broken grains make it sticky." }
+        ]
+      },
+      "knowledge": {
+        "title": "Grains of the world worksheet",
+        "minutes": 35,
+        "body": [
+          "This is the unit quiz. First fill in the worksheet from what you know and can look up, then answer the questions without looking back at weeks 17 to 19.",
+          "Almost every cuisine is built on a grain. Rice feeds much of Asia, and long-grain rice runs through Turkey, Lebanon, Louisiana, and West Africa. Wheat is cracked into bulgur in the Middle East and rolled into couscous in North Africa. Corn is ground into polenta in Italy and grits in the American South. Teff, a tiny grain, makes Ethiopia's spongy injera bread. Quinoa comes from the Andes Mountains of South America; it's really a seed, but it's cooked like a grain. Barley thickens soups across Europe, and oats are Scotland's porridge."
+        ],
+        "steps": [
+          "Make a chart with four columns: Grain, Where it comes from, How it's cooked (absorption or pasta method), and A dish.",
+          "Fill in a row for rice, bulgur, couscous, polenta, teff, quinoa, barley, and oats.",
+          "Put a star next to each grain you've cooked yourself.",
+          "Pick one grain you haven't cooked, look up its ratio or method, and write it on the chart for this week's drill."
+        ],
+        "quiz": [
+          { "q": "Which grain makes Ethiopia's injera bread?", "choices": ["Teff", "Quinoa", "Barley"], "answer": 0, "explain": "A tiny grain from the Horn of Africa." },
+          { "q": "What is bulgur?", "choices": ["Cracked wheat", "A kind of rice", "Ground corn"], "answer": 0, "explain": "Fine bulgur went into Unit 3's tabbouleh." },
+          { "q": "Which is really a seed, but cooked like a grain?", "choices": ["Quinoa", "Rice", "Oats"], "answer": 0, "explain": "It comes from the Andes." },
+          { "q": "Unit review: which legume needs a 10-minute hard boil to be safe?", "choices": ["Red kidney beans", "Red lentils", "Chickpeas"], "answer": 0, "explain": "It destroys a natural toxin." },
+          { "q": "Unit review: which need no soaking?", "choices": ["Lentils", "Black beans", "Chickpeas"], "answer": 0, "explain": "They're small and thin." },
+          { "q": "Unit review: when do tomatoes or vinegar go into a pot of beans?", "choices": ["Once the beans are tender", "At the start", "In the soaking water"], "answer": 0, "explain": "Acid slows softening." },
+          { "q": "Unit review: what makes a pilaf a pilaf?", "choices": ["The grain is toasted in fat before the liquid", "It's drained like pasta", "It's stirred the whole time"], "answer": 0, "explain": "Toasting coats each grain." },
+          { "q": "Unit review: about how much water does a cup of rinsed long-grain white rice take?", "choices": ["1½ cups", "3 cups", "½ cup"], "answer": 0, "explain": "Brown rice takes about 2." },
+          { "q": "Unit review: in mujaddara, why do the lentils cook first?", "choices": ["They take longer than rice", "To make them mushy", "To clean them"], "answer": 0, "explain": "The head start lets them finish together." }
+        ]
+      },
+      "sabbath": {
+        "title": "Cook grains ahead and reheat them with steam",
+        "minutes": 45,
+        "body": [
+          "Cooked grains keep well, so a big pot cooked ahead becomes quick meals all week: rice for stir-fries, bulgur for salads, quinoa for bowls. Many families cook grains ahead like this, so a meal later in the week comes together fast, or so they can focus on resting.",
+          "Cooked rice needs care, as Unit 1 taught: its spores survive cooking and grow if it sits warm. Spread hot grains out on a sheet pan to cool fast, and get them into the fridge within an hour. They keep 4 days in the fridge, or 2 to 3 months in the freezer.",
+          "Cold grains go hard and dry, because their starch firms up as it chills. Steam brings them back: a little water and a cover. Sprinkle about a tablespoon of water over each cup, cover the dish or pan, and heat until it's steaming hot and reads 165°F. Fluff with a fork."
+        ],
+        "steps": [
+          "Cook a double batch of rice, bulgur, or quinoa by its ratio.",
+          "Spread it on a sheet pan to cool, then pack it into containers within an hour of cooking. Label them with the grain and the date.",
+          "Freeze one container, and keep the rest in the fridge.",
+          "Later in the week, reheat a portion with steam: sprinkle on a tablespoon of water per cup, cover it, and heat it in the microwave or a covered pan until it reads 165°F.",
+          "Compare it with a portion reheated with no water and no cover. Write down the difference.",
+          "Use the rest in a meal this week."
+        ],
+        "quiz": [
+          { "q": "Why do cold grains turn hard and dry?", "choices": ["Their starch firms up as it chills", "The water freezes", "They lose their salt"], "answer": 0, "explain": "Steam softens it again." },
+          { "q": "How soon should cooked rice go into the fridge?", "choices": ["Within an hour", "The next morning", "Once it's room temperature, any time"], "answer": 0, "explain": "Spores in rice grow if it sits warm." }
+        ]
+      },
+      "swapIns": ["koshari"]
+    },
     { "week": 21, "unit": 6, "skill": "cooking-fish", "recipe": "baked-salmon", "swapIns": ["honey-soy-salmon", "bbq-salmon"], "drill": { "title": "Check a fillet for pin bones", "minutes": 40 }, "knowledge": { "title": "Fins and scales: clean vs. unclean species", "minutes": 35 }, "sabbath": { "title": "Dishes that serve well cold", "minutes": 45 }, "note": "Any clean fillet, with a side from an earlier week, timed to finish together" },
     { "week": 22, "unit": 6, "skill": "cooking-fish", "recipe": "steamed-fish", "drill": { "title": "Judge freshness by smell, eyes, flesh", "minutes": 40 }, "knowledge": { "title": "Store-bought fish: reading labels and names", "minutes": 35 }, "sabbath": { "title": "Loaves and fishes, and breakfast on the shore (Matthew 14:13–21; John 21:9–13)", "minutes": 45 }, "note": "Steamed on a plate over foil balls in the large pot; the adult pours the hot oil" },
     { "week": 23, "unit": 6, "skill": "cooking-fish", "recipe": "poached-cod", "swapIns": ["moqueca"], "drill": { "title": "Test doneness by flaking", "minutes": 40 }, "knowledge": { "title": "Why fish cooks faster than meat", "minutes": 35 }, "sabbath": { "title": "Make a sauce ahead, finish the dish fresh", "minutes": 45 } },
@@ -1176,7 +1442,7 @@
         "veggies": "some"
       }
     },
-    { "id": "rice-pilaf", "title": "Rice pilaf", "cuisine": "turkish", "skills": ["cooking-grains"], "skill": "Toasting rice before the liquid", "art": "side", "safety": "adult-nearby", "minutes": 35, "estimated": true, "about": "Long-grain rice toasted in butter with a few broken noodles, then simmered in broth until every grain is separate.", "main": ["long-grain rice", "butter", "broth", "orzo or vermicelli"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "rice-pilaf", "title": "Rice pilaf", "cuisine": "turkish", "skills": ["cooking-grains"], "skill": "Toasting rice before the liquid", "art": "side", "safety": "adult-nearby", "minutes": 45, "about": "Long-grain rice toasted in butter with a little orzo, then cooked in hot broth until every grain is separate.", "main": ["long-grain rice", "butter", "broth", "orzo (optional)"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     {
       "id": "roasted-vegetables",
       "title": "Roasted vegetables",

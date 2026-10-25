@@ -48,6 +48,12 @@
     { "id": "aromatics", "word": "Aromatics", "forms": ["aromatics"], "means": "Strong-smelling vegetables, like onion, garlic, celery, and ginger, cooked first to build a dish's flavor.", "taughtIn": "vegetable-stir-fry", "image": null },
     { "id": "mirepoix", "word": "Mirepoix", "forms": ["mirepoix"], "means": "France's flavor base: onion, carrot, and celery, about two parts onion to one part each of the others.", "taughtIn": "minestrone", "image": null },
     { "id": "soffritto", "word": "Soffritto", "forms": ["soffritto"], "means": "Italy's flavor base: onion, carrot, and celery chopped fine and cooked slowly in olive oil.", "taughtIn": "beef-ragu", "image": null },
-    { "id": "sofrito", "word": "Sofrito", "forms": ["sofrito"], "means": "The Spanish and Latin American flavor base: onion, garlic, and peppers, often with tomato, cooked gently in oil.", "taughtIn": null, "image": null }
+    { "id": "sofrito", "word": "Sofrito", "forms": ["sofrito"], "means": "The Spanish and Latin American flavor base: onion, garlic, and peppers, often with tomato, cooked gently in oil.", "taughtIn": null, "image": null },
+    { "id": "legume", "word": "Legume", "forms": ["legume", "legumes"], "means": "A seed that grows in a pod: beans, lentils, peas, and chickpeas. Dried, they keep for a year or more.", "taughtIn": "red-lentil-soup", "image": null },
+    { "id": "pick-over", "word": "Pick over", "forms": ["pick over", "picked over", "picking over"], "means": "Spread dried beans or lentils out and look through them, taking out any tiny stones, dirt, or shriveled ones.", "taughtIn": "red-lentil-soup", "image": null },
+    { "id": "quick-soak", "word": "Quick-soak", "forms": ["quick-soak", "quick soak"], "means": "Boil dried beans for 2 minutes, turn off the heat, cover them, and leave them an hour. It's almost as good as soaking overnight.", "taughtIn": "red-beans-and-rice", "image": null },
+    { "id": "hard-boil", "word": "Hard boil", "forms": ["hard boil", "boil hard", "boils hard", "boiling hard"], "means": "A full, rolling boil, with big bubbles across the whole pot. Red kidney beans need 10 minutes of it to be safe.", "taughtIn": "red-beans-and-rice", "image": null },
+    { "id": "absorption-method", "word": "Absorption method", "forms": ["absorption method"], "means": "Cooking a grain in just enough liquid for it to drink all of it, so nothing is drained.", "taughtIn": null, "image": null },
+    { "id": "pilaf", "word": "Pilaf", "forms": ["pilaf", "pilafs"], "means": "A grain toasted in fat before the liquid goes in, then cooked with the lid on until every grain is separate.", "taughtIn": null, "image": null }
   ]
 }
