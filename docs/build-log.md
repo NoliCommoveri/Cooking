@@ -4680,7 +4680,15 @@ tables.
   for the visit, like the week. The separate part page is gone.
 - Tests: 351, all passing.
 
-## 195. 2026-10-25 — Level 3 Unit 2: yeast dough
+## 195. 2026-10-24 — Demo header: beta testing is live
+
+- Owner, 2026-10-24: "Beta testing will begin shortly" is out of date.
+- **Before:** "Beta testing via invitation will begin shortly."
+- **Now** (`public/demo.js`), in the owner's words: "Beta testing is now
+  live. To participate, search Clean Plate Recipe App on Facebook."
+- Tests: 351, all passing.
+
+## 196. 2026-10-25 — Level 3 Unit 2: yeast dough
 
 Phase 12, slice 12f, Unit 2 (plan §12.4).
 
@@ -4721,7 +4729,7 @@ Phase 12, slice 12f, Unit 2 (plan §12.4).
 - Tests: 351. The Level course test now schedules 9 written recipes, with
   27 waiting; the hours tests expect 128.
 
-## 196. 2026-10-25 — How much? in Cook mode, and kitchen words on part pages
+## 197. 2026-10-25 — How much? in Cook mode, and kitchen words on part pages
 
 - Owner, 2026-10-25: add the kitchen words for Unit 2 and link them; and in
   a cook, a way to see how much of an ingredient a step uses, either by
@@ -4741,7 +4749,7 @@ Phase 12, slice 12f, Unit 2 (plan §12.4).
   changes.
 - **Kitchen words** (`content/terms.json`): bloom, shaggy dough, tacky,
   windowpane test, egg wash, poke test, crumb, and enriched dough, beside
-  proof (build log 195). Knead is now practiced in Pita bread, the first
+  proof (build log 196). Knead is now practiced in Pita bread, the first
   written lesson that kneads.
 - **Kitchen words on part pages:** a Level's knowledge, drill, and Beyond
   the Recipe pages (the kitchen's and the demo's) underline kitchen words,
@@ -4751,7 +4759,7 @@ Phase 12, slice 12f, Unit 2 (plan §12.4).
   sent in the session.
 - Tests: 355 (four new: which ingredients a step names).
 
-## 197. 2026-10-25 — Level 3 Unit 3: knife cuts
+## 198. 2026-10-25 — Level 3 Unit 3: knife cuts
 
 Phase 12, slice 12f, Unit 3 (plan §12.4). Owner, 2026-10-25: Unit 3 the
 same way as Unit 2: the copy in a review doc, "Level 3 Unit 3: Classic knife

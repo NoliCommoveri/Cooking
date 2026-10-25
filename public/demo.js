@@ -68,7 +68,7 @@ function header() {
     <h1>Clean Plate Recipes</h1>
     <p><b>A cooking course, but not like any you've ever tried before.</b></p>
     <p>Appropriate for kids, teens, and even adults looking to expand to new culinary horizons, Clean Plate Recipes is built to be three things: fun, free, and fundamentally rooted in the dietary laws of the Most High.</p>
-    <p>Check out the demo below to see our current build progress. Beta testing via invitation will begin shortly.</p>
+    <p>Check out the demo below to see our current build progress. Beta testing is now live. To participate, search Clean Plate Recipe App on Facebook.</p>
     <p class="by">By Immotus Apps</p></section>
     <div class="d-cta"><a class="hbtn pri" href="/#/signup">Sign up</a><a class="hbtn" href="/#/login">Log in</a></div>
     <h2 class="d-tracks-h">Two ways to learn</h2>
