@@ -225,7 +225,7 @@ export function buildLibrary() {
       // Its swap-ins: the other recipes best fit picks among (12d).
       // A practice or capstone week has no recipe: its own minutes and note instead.
       weeks: V.weeks.map(({ week, unit, skill, familiar, explore, cuisine, swapIns, mastery, kind, minutes, note, drill, knowledge, sabbath }) => ({
-        // A week cooks its Familiar dish until a course picks Familiar or Explore (14c).
+        // recipe: the week has one. Which dish a course cooks follows its start setting (14c).
         week, unit, ...(skill ? { skill } : {}), ...(familiar ? { recipe: familiar, familiar, explore } : {}), ...(cuisine ? { cuisine } : {}), ...(swapIns?.length ? { options: swapIns } : {}),
         ...(mastery ? { mastery } : {}), ...(kind ? { kind, minutes, note } : {}), drill, knowledge, sabbath,
       })),

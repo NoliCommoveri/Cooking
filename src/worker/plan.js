@@ -17,7 +17,7 @@ import { servingOptions } from '../content/scale.js';
 import { courseEntries, numberCourse } from '../content/course.js';
 import { schedule, weekOf, addDays, localDay, isDay, isSabbath, DUE_DAY } from './schedule.js';
 import { isRecipeId, lessonFor, recipeNames, recipeVisible } from './recipes.js';
-import { tasteContext, versionFor, bestPlan, hatedExtras, versionSummary, levelPlan, levelCandidates, cookedBy } from './picks.js';
+import { tasteContext, versionFor, bestPlan, hatedExtras, versionSummary, levelPlan, levelCandidates, cookedBy, bestOf } from './picks.js';
 import { variationChoices } from './variations.js';
 import { releaseOn, familyRelease, LEVELS_RELEASE } from './release.js';
 import { PARTS, PART_NAMES, coursePartsOf, weekParts, plannedMinutes, hoursOf } from '../content/levels.js';
@@ -39,6 +39,8 @@ const dishById = Object.fromEntries(LIBRARY.course.map((d) => [d.id, d]));
 // The Levels (§12), by id: what a Level course can be, with their release.
 const LEVELS = LIBRARY.levels ?? {};
 const placeholders = (list) => list.map(() => '?').join(', ');
+// A Level recipe's title: its lesson's, or its card's until it's written.
+const titleOfLevel = (V, id) => lessonById[id]?.title ?? V.titles[id] ?? dishById[id]?.title ?? id;
 
 // ---------- small helpers ----------
 
@@ -205,38 +207,107 @@ async function planOf(env, course) {
   return { order, removed, skipped };
 }
 
+// What a Level course's weeks start with (14c): each week's Familiar or its
+// Explore dish. A course with no row starts with Familiar.
+export const STARTS = ['familiar', 'explore'];
+async function courseStartOf(env, course) {
+  const r = await env.DB.prepare('SELECT starts FROM course_starts WHERE course_id = ? AND family_id = ?').bind(course.id, course.family_id).first();
+  return r?.starts ?? 'familiar';
+}
+// A new Level course's start, preset from "how adventurous" (owner,
+// 2026-10-25): Bring it on or A bit adventurous start with Explore; Stick to
+// what we know, or not set, with Familiar.
+export const startPreset = (adventurous) => (adventurous === 'adventurous' || adventurous === 'a-bit' ? 'explore' : 'familiar');
+async function familyPreset(env, fid) {
+  const r = await env.DB.prepare('SELECT adventurous FROM family_limits WHERE family_id = ?').bind(fid).first();
+  return startPreset(r?.adventurous ?? null);
+}
+const startsInput = (x) => (STARTS.includes(x) ? x : fail(400, 'invalid', 'Each week starts with familiar or explore.'));
+
+// Each recipe week's dish on a Level course (14c), worked out when the plan
+// is read, not saved per week:
+//   - a week with a row in course_lessons (the parent changed or skipped it)
+//     keeps its row's dish;
+//   - a week whose Familiar or Explore dish is on the course's queue, a
+//     shopping list, or cooked keeps that one;
+//   - otherwise the start slot's dish, or the other slot's when the diet
+//     settings hide it or it needs a tool the family doesn't have; a start
+//     dish not written yet cooks the other while only that one is written
+//     (owner, 2026-10-25), and moves to its own once it's written;
+//   - best fit among the week's other recipes only when both are ruled out
+//     (§12.0). A dish not written yet can't be ruled out until it is.
+// A recipe is in one week at most. rows: { week: course_lessons row }; held:
+// the course's queued or cooked dishes; pids: who the course is for.
+async function levelWeekDishes(env, fam, V, starts, rows, held, pids) {
+  const shown = visible(fam);
+  const limits = await env.DB.prepare('SELECT missing_tools FROM family_limits WHERE family_id = ?').bind(fam.id).first();
+  const missing = JSON.parse(limits?.missing_tools ?? '[]');
+  const out = (id) => Boolean(lessonById[id]) && (!shown.has(id) || (lessonById[id].tools ?? []).some((t) => missing.includes(t)));
+  const used = new Set(Object.values(rows).map((r) => r.lesson_id));
+  const recipeWeeks = V.weeks.filter((w) => w.recipe && !rows[w.week]);
+  const ids = {};
+  for (const w of recipeWeeks) {
+    const kept = [w.familiar, w.explore].find((id) => held.has(id) && !used.has(id));
+    if (kept) { ids[w.week] = kept; used.add(kept); }
+  }
+  let tc;
+  for (const w of recipeWeeks.filter((x) => !ids[x.week])) {
+    const pair = (starts === 'explore' ? [w.explore, w.familiar] : [w.familiar, w.explore]).filter((id) => !used.has(id));
+    const can = pair.filter((id) => !out(id));
+    let id = can.find((x) => lessonById[x]) ?? can[0];
+    if (!id) {
+      const { options, more } = levelCandidates(V, w);
+      const others = [...options, ...more].filter((x) => !pair.includes(x) && !used.has(x) && lessonById[x] && !out(x));
+      if (others.length) {
+        tc ??= await tasteContext(env, fam);
+        id = tc ? bestOf(tc, V, others, pids) : others[0];
+      }
+    }
+    // Nothing to cook: the start dish, which the schedule passes over.
+    id ??= pair[0] ?? w.recipe;
+    ids[w.week] = id;
+    used.add(id);
+  }
+  return ids;
+}
+
 // A Level course's plan (§12.4): each week's recipe in week order, one Level
 // week a calendar week, so the schedule works as it does for any course. A
-// row's position is its week; a week with no row keeps the Level's own
-// recipe. The weeks with no recipe yet (the practice run and the capstone)
-// aren't in it.
-async function levelPlanOf(env, course) {
+// row's position is its week. The weeks with no recipe (the practice run and
+// the capstone) aren't in it. changed: the week has a row. starts: the start
+// to work it out with, when it's being changed.
+async function levelPlanOf(env, course, starts = null) {
   const V = LEVELS[course.program];
+  const fam = await family(env, course.family_id);
+  starts ??= await courseStartOf(env, course);
   const { results } = await env.DB.prepare('SELECT lesson_id, position, removed FROM course_lessons WHERE course_id = ? AND family_id = ?')
     .bind(course.id, course.family_id).all();
-  const byWeek = Object.fromEntries(results.map((r) => [r.position, r]));
-  const weeks = V.weeks.filter((w) => w.recipe).map((w) => ({ week: w.week, id: byWeek[w.week]?.lesson_id ?? w.recipe, removed: byWeek[w.week]?.removed ?? KEPT }));
+  const byWeek = Object.fromEntries(results.filter((r) => V.weeks.some((w) => w.week === r.position && w.recipe)).map((r) => [r.position, r]));
+  const { results: queued } = await env.DB.prepare("SELECT DISTINCT lesson_id FROM queue WHERE family_id = ? AND course_id = ? AND status IN ('assigned', 'shopped', 'cooked')")
+    .bind(course.family_id, course.id).all();
+  const ids = await levelWeekDishes(env, fam, V, starts, byWeek, new Set(queued.map((r) => r.lesson_id)), await courseProfiles(env, course));
+  const weeks = V.weeks.filter((w) => w.recipe).map((w) => (byWeek[w.week]
+    ? { week: w.week, id: byWeek[w.week].lesson_id, removed: byWeek[w.week].removed, changed: true }
+    : { week: w.week, id: ids[w.week], removed: KEPT, changed: false }));
   return {
     order: weeks.map((x) => x.id), removed: weeks.filter((x) => x.removed).map((x) => x.id),
-    skipped: weeks.filter((x) => x.removed === SKIPPED).map((x) => x.id), weeks,
+    skipped: weeks.filter((x) => x.removed === SKIPPED).map((x) => x.id), weeks, starts,
   };
 }
 
-// picks: { week: recipe id } (a week not named keeps the Level's own);
-// removed: { week: KEPT | SKIPPED }, kept from the saved plan.
-const levelPlanStatements = (env, course, V, picks = {}, removed = {}) => [
-  env.DB.prepare('DELETE FROM course_lessons WHERE course_id = ? AND family_id = ?').bind(course.id, course.family_id),
-  ...V.weeks.filter((w) => w.recipe).map((w) => env.DB.prepare('INSERT INTO course_lessons (course_id, family_id, lesson_id, position, removed) VALUES (?, ?, ?, ?, ?)')
-    .bind(course.id, course.family_id, picks[w.week] ?? w.recipe, w.week, removed[w.week] ?? KEPT)),
-];
+// A Level's weeks as a new course for this family would plan them, for each
+// start: { familiar: { week: id }, explore: { week: id } }, for setup.
+async function levelDefaults(env, fam, V) {
+  return Object.fromEntries(await Promise.all(STARTS.map(async (x) => [x, await levelWeekDishes(env, fam, V, x, {}, new Set(), [])])));
+}
 
-// A parent's recipes for a Level's weeks (12d), checked: each is one of the
-// week's recipes (its options, or another with its skill), none is in two
-// weeks, and a mastery week doesn't repeat weeks 1-3 of its unit (owner,
-// 2026-10-24). picks: { week: id } over the plan it changes.
-function levelPicksInput(V, list, base = {}) {
+// The parent's picks for some of a Level's weeks (12d), checked: each is one
+// of the week's recipes (its dishes and swap-ins, or another with its skill),
+// and none is in two weeks of the plan it changes (so a mastery week doesn't
+// repeat weeks 1-3 of its unit, owner, 2026-10-24). Returns { week: id }.
+function levelPicksInput(V, plan, list) {
   if (!Array.isArray(list)) fail(400, 'invalid', "A Level course's weeks list each week's recipe.");
-  const picks = { ...base };
+  const picks = {};
   for (const x of list) {
     const w = V.weeks.find((y) => y.week === Number(x?.week) && y.recipe) ?? fail(400, 'invalid', 'No such week.');
     const id = String(x.id ?? '');
@@ -245,15 +316,23 @@ function levelPicksInput(V, list, base = {}) {
     picks[w.week] = id;
   }
   const seen = {};
-  for (const w of V.weeks.filter((y) => y.recipe)) {
-    const id = picks[w.week] ?? w.recipe;
-    if (seen[id]) fail(400, 'invalid', `A recipe can be in one week only: ${V.titles[id] ?? lessonById[id]?.title ?? id} is in weeks ${seen[id]} and ${w.week}.`);
-    seen[id] = w.week;
+  for (const x of plan.weeks) {
+    const id = picks[x.week] ?? x.id;
+    if (seen[id]) fail(400, 'invalid', `A recipe can be in one week only: ${V.titles[id] ?? lessonById[id]?.title ?? id} is in weeks ${seen[id]} and ${x.week}.`);
+    seen[id] = x.week;
   }
   return picks;
 }
-const savedPicks = (plan) => Object.fromEntries(plan.weeks.map((x) => [x.week, x.id]));
-const savedRemoved = (plan) => Object.fromEntries(plan.weeks.map((x) => [x.week, x.removed]));
+
+// A row for each week the parent picked a recipe for: the week keeps it
+// whatever the course starts with. A skipped week stays skipped.
+const levelPickStatements = (env, course, plan, picks) => Object.entries(picks).flatMap(([week, lid]) => [
+  env.DB.prepare('DELETE FROM course_lessons WHERE course_id = ? AND family_id = ? AND (position = ? OR lesson_id = ?)').bind(course.id, course.family_id, Number(week), lid),
+  env.DB.prepare('INSERT INTO course_lessons (course_id, family_id, lesson_id, position, removed) VALUES (?, ?, ?, ?, ?)')
+    .bind(course.id, course.family_id, lid, Number(week), plan.weeks.find((x) => x.week === Number(week))?.removed ?? KEPT),
+]);
+const startStatement = (env, course, starts) => env.DB.prepare(`INSERT INTO course_starts (course_id, family_id, starts, updated_at) VALUES (?, ?, ?, ?)
+    ON CONFLICT(course_id) DO UPDATE SET starts = excluded.starts, updated_at = excluded.updated_at`).bind(course.id, course.family_id, starts, now());
 
 // Which program each of a family's courses is: a Level's id, or null for
 // Cook Around the World (no row). Empty before its table exists. A Level
@@ -705,7 +784,7 @@ function courseOut(st, fam, rowsByLesson, version = () => null) {
     id: course.id, name: course.name, start_date: course.start_date, per_week: course.per_week, profile_ids: profiles,
     program: course.program,
     level: V ? {
-      id: V.id, name: V.name, weeks: V.weeks.length, week: now,
+      id: V.id, name: V.name, weeks: V.weeks.length, week: now, starts: lessons.plan.starts,
       parts: lw ? weekParts(lw, course.parts ?? PARTS).map((part) => ({
         part, title: lw[part].title, minutes: lw[part].minutes,
         done: profiles.filter((pid) => doneAt(st.tasks[`${now}:${part}:${pid}`])), skipped: profiles.filter((pid) => st.tasks[`${now}:${part}:${pid}`]?.skipped),
@@ -1030,8 +1109,9 @@ export function register(on) {
       if (c.program) {
         const lessons = await courseLessons(env, c, fam);
         out.push({
-          id: c.id, name: c.name, start_date: c.start_date, per_week: c.per_week, archived_at: c.archived_at, program: c.program, parts: c.parts,
-          profile_ids: await courseProfiles(env, c), plan: plan.weeks.map((x) => ({ id: x.id, week: x.week, removed: Boolean(x.removed) })),
+          id: c.id, name: c.name, start_date: c.start_date, per_week: c.per_week, archived_at: c.archived_at, program: c.program, parts: c.parts, starts: plan.starts,
+          // changed: a week the parent picked or skipped, which keeps its recipe whatever the course starts with (14c).
+          profile_ids: await courseProfiles(env, c), plan: plan.weeks.map((x) => ({ id: x.id, week: x.week, removed: Boolean(x.removed), changed: x.changed })),
           usable: lessons.usable.length, unwritten: lessons.unwritten, hidden: lessons.hidden,
         });
         continue;
@@ -1051,14 +1131,19 @@ export function register(on) {
       written: LIBRARY.lessons.map((L) => L.id), hidden: LIBRARY.lessons.filter((L) => !shown.has(L.id)).map((L) => L.id),
       per_week_max: PER_WEEK_MAX,
       // The programs a course can be, past Cook Around the World (§12.4):
-      // the Levels, with their release. Each week with its recipe.
-      levels: levelsOn(await familyRelease(env.DB, s.family_id)).map((V) => ({
+      // the Levels, with their release. Each week with its Familiar and
+      // Explore dishes, and the dish each week cooks for this family when a
+      // course starts with either (14c).
+      levels: await Promise.all(levelsOn(fam.release).map(async (V) => ({
         id: V.id, name: V.name, hours: V.hours, units: V.units,
-        weeks: V.weeks.map((w) => ({ ...w, title: w.recipe ? lessonById[w.recipe]?.title ?? V.titles[w.recipe] : null })),
+        weeks: V.weeks.map((w) => ({ ...w, ...(w.recipe ? { title: titleOfLevel(V, w.familiar), explore_title: titleOfLevel(V, w.explore) } : { title: null }) })),
+        defaults: await levelDefaults(env, fam, V),
         // Each recipe's planned minutes, for the hours the parent's setup plans for (§12.4).
         minutes: Object.fromEntries([...new Set([...Object.keys(V.titles), ...LIBRARY.course.map((d) => d.id), ...V.cards.map((c) => c.id)])]
           .map((rid) => [rid, plannedRecipeMinutes(V, rid)])),
-      })),
+      }))),
+      // What a new Level course starts with, from "how adventurous" (14c).
+      starts_preset: await familyPreset(env, s.family_id),
     };
   });
 
@@ -1088,8 +1173,10 @@ export function register(on) {
       if (!Array.isArray(body.parts) || body.parts.some((x) => !PARTS.includes(x))) fail(400, 'invalid', 'Parts must be drill, knowledge, or sabbath.');
       parts = PARTS.filter((x) => body.parts.includes(x));
     }
+    // What each week starts with (14c): the parent's, or for a new course the preset from "how adventurous".
+    const starts = !program ? null : body.starts !== undefined ? startsInput(body.starts) : course ? null : await familyPreset(env, s.family_id);
     return {
-      per, start: weekOf(body.start_date), pids, name, program, parts,
+      per, start: weekOf(body.start_date), pids, name, program, parts, starts,
       plan: program || body.plan === undefined ? null : planInput(body.plan),
       weeks: program && body.weeks !== undefined ? body.weeks : null,
     };
@@ -1116,19 +1203,21 @@ export function register(on) {
       ...(v.program
         ? [env.DB.prepare('INSERT INTO course_programs (course_id, family_id, program, parts, created_at) VALUES (?, ?, ?, ?, ?)')
           .bind(course.id, s.family_id, v.program, v.parts ? JSON.stringify(v.parts) : null, now()),
-          ...levelPlanStatements(env, course, LEVELS[v.program], await levelPicksFor(env, s.family_id, v))]
+          startStatement(env, course, v.starts),
+          ...(await levelPicksFor(env, s.family_id, course, v))]
         : planStatements(env, course, v.plan ?? (await defaultFor(env, s.family_id, v.pids)))),
     ]);
     return { ok: true, id: course.id };
   });
 
-  // A new Level course's recipes: the parent's, or each week's best fit for
-  // the profiles it's for (owner, 2026-10-24: best fit picked for them).
-  async function levelPicksFor(env, fid, v) {
+  // A new Level course's rows (14c): only the weeks the parent picked a
+  // recipe for; every other week cooks the dish its start slot gives it.
+  async function levelPicksFor(env, fid, course, v) {
+    if (!v.weeks?.length) return [];
     const V = LEVELS[v.program];
-    if (v.weeks) return levelPicksInput(V, v.weeks);
-    const tc = await tasteContext(env, await family(env, fid));
-    return tc ? levelPlan(tc, V, v.pids, await cookedBy(env, fid, v.pids)).picks : {};
+    const ids = await levelWeekDishes(env, await family(env, fid), V, v.starts, {}, new Set(), v.pids);
+    const plan = { weeks: V.weeks.filter((w) => w.recipe).map((w) => ({ week: w.week, id: ids[w.week], removed: KEPT })) };
+    return levelPickStatements(env, course, plan, levelPicksInput(V, plan, v.weeks));
   }
 
   // The course's lessons already queued follow the change: new profiles are
@@ -1143,9 +1232,12 @@ export function register(on) {
       ...(v.parts ? [env.DB.prepare('UPDATE course_programs SET parts = ? WHERE course_id = ? AND family_id = ?').bind(JSON.stringify(v.parts), course.id, s.family_id)] : []),
       ...profileStatements(env, course, v.pids),
       ...(v.plan ? planStatements(env, course, v.plan) : []),
+      // A new start re-points only the weeks no one changed; a week on the
+      // queue or a shopping list keeps its dish (14c).
+      ...(v.starts ? [startStatement(env, course, v.starts)] : []),
       ...(v.weeks ? await (async () => {
-        const plan = await levelPlanOf(env, course);
-        return levelPlanStatements(env, course, LEVELS[course.program], levelPicksInput(LEVELS[course.program], v.weeks, savedPicks(plan)), savedRemoved(plan));
+        const plan = await levelPlanOf(env, course, v.starts);
+        return levelPickStatements(env, course, plan, levelPicksInput(LEVELS[course.program], plan, v.weeks));
       })() : []),
       ...rows.flatMap((r) => [
         env.DB.prepare('DELETE FROM queue_profiles WHERE queue_id = ? AND family_id = ?').bind(r.id, s.family_id),
@@ -1211,8 +1303,7 @@ export function register(on) {
     const V = LEVELS[course.program] ?? fail(400, 'invalid', 'That course has no Level weeks.');
     const plan = await levelPlanOf(env, course);
     const before = plan.weeks.find((x) => x.week === Number(body.week)) ?? fail(404, 'not_found', 'No such week.');
-    const picks = levelPicksInput(V, [{ week: body.week, id: body.id }], savedPicks(plan));
-    await env.DB.batch(levelPlanStatements(env, course, V, picks, savedRemoved(plan)));
+    await env.DB.batch(levelPickStatements(env, course, plan, levelPicksInput(V, plan, [{ week: body.week, id: body.id }])));
     return { ok: true, before: before.id };
   });
 

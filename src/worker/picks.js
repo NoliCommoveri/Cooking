@@ -166,10 +166,11 @@ export function bestPlan(tc, pids) {
 
 // ---------- Level weeks (12d) ----------
 
-// A Level week's recipes: its Familiar dish and swap-ins (§12.2), then any
-// other recipe that teaches its skill, from the course and the Level's cards.
+// A Level week's recipes: its Familiar and Explore dishes and swap-ins
+// (§12.2), then any other recipe that teaches its skill, from the course and
+// the Level's cards.
 export function levelCandidates(V, w) {
-  const options = [w.recipe, ...(w.options ?? [])];
+  const options = [...new Set([w.familiar ?? w.recipe, w.explore, ...(w.options ?? [])].filter(Boolean))];
   const skilled = w.skill ? [...LIBRARY.course, ...V.cards].filter((d) => d.skills?.includes(w.skill)).map((d) => d.id) : [];
   return { options, more: [...new Set(skilled)].filter((id) => !options.includes(id)) };
 }
@@ -187,29 +188,27 @@ const titleOf = (V, id) => lessonById[id]?.title ?? V.titles[id] ?? dishById[id]
 // already cooked comes last (owner, 2026-10-24); then the order given.
 const levelOrder = (a, b) => (Number(a.cooked) - Number(b.cooked)) || (Number(b.fits) - Number(a.fits)) || (Number(b.written) - Number(a.written)) || better(a, b) || a.i - b.i;
 
-// Every week's recipes with their fit for the profiles on a Level course, and
-// the recipe each week keeps (owner, 2026-10-24): the best that isn't kept by
-// an earlier week (a recipe is picked for one week at most, so a mastery week
-// never repeats weeks 1–3 of its unit), or the week's default when nothing
-// fits. cooked: recipes a profile on the course has cooked.
+// Every week's recipes with their fit for the profiles on a Level course, for
+// the course editor's Change and Swap recipe (12d). Best fit no longer picks a
+// week's recipe: a course cooks its start slot's dish, and best fit only fills
+// in (14c). cooked: recipes a profile on the course has cooked.
 export function levelPlan(tc, V, pids, cooked = new Set()) {
   const ctx = cookCtx(tc, pids);
-  const used = new Set(), picks = {}, notes = {}, weeks = [];
   const out = (x) => ({ id: x.id, title: titleOf(V, x.id), fit: x.fit, label: x.label, fits: x.fits, why: x.why, notes: x.notes, written: x.written, cooked: x.cooked, hidden: Boolean(x.hidden) });
-  for (const w of V.weeks) {
-    if (!w.recipe) continue;
-    const { options, more } = levelCandidates(V, w);
-    const score = (ids) => ids.map((id, i) => ({ id, i, cooked: cooked.has(id), ...levelFit(tc, ctx, V, id) })).sort(levelOrder);
-    const opts = score(options);
-    const free = opts.filter((x) => !used.has(x.id) && !x.hidden);
-    const best = free[0];
-    const pick = best?.fits ? best.id : !used.has(w.recipe) ? w.recipe : best?.id ?? w.recipe;
-    if (best && !best.fits) notes[w.week] = `Nothing for this week fits everyone yet, so it keeps ${pick === w.recipe ? 'its own recipe' : 'the closest'}.`;
-    used.add(pick);
-    picks[w.week] = pick;
-    weeks.push({ week: w.week, options: opts.map(out), more: score(more).map(out) });
-  }
-  return { picks, notes, weeks };
+  const score = (ids) => ids.map((id, i) => ({ id, i, cooked: cooked.has(id), ...levelFit(tc, ctx, V, id) })).sort(levelOrder).map(out);
+  return {
+    weeks: V.weeks.filter((w) => w.recipe).map((w) => {
+      const { options, more } = levelCandidates(V, w);
+      return { week: w.week, options: score(options), more: score(more) };
+    }),
+  };
+}
+
+// The best of a week's other recipes for the profiles on a course, when the
+// diet or tools rule out both its dishes (14c): best fit only fills in.
+export function bestOf(tc, V, ids, pids) {
+  const ctx = cookCtx(tc, pids);
+  return ids.map((id, i) => ({ id, i, cooked: false, ...levelFit(tc, ctx, V, id) })).sort(levelOrder)[0]?.id ?? null;
 }
 
 // Every lesson in the library the family's diet settings allow, outside the
@@ -282,7 +281,7 @@ export function register(on) {
   });
 
   // A Level's weeks with each recipe's fit for the profiles a course is for,
-  // and each week's pick, for the course editor (?level=sp-3&profiles=id,id).
+  // for the course editor (?level=sp-3&profiles=id,id).
   on('GET', '/api/picks/level', async (req, env) => {
     const s = await requireParent(env, req);
     const fam = await env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(s.family_id).first();
