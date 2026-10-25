@@ -5169,3 +5169,8 @@ Planning only; nothing in the app changed.
   and lamb fat skimmed and thrown out (birria recipes often fry tortillas
   in it). No wine, following the library's broth rule. Weeks 29–33 are
   unleavened as planned.
+- Owner, 2026-10-25: "I miss the yeast rolls and sandwich bread." Level 3
+  week 12's Familiar is the written Sandwich loaf and week 13's the written
+  Dinner rolls (with their written cold-proof page), in place of homemade
+  pizza and cinnamon rolls. A separate breads course is noted in plan §12.0
+  as an idea to decide.
