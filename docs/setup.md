@@ -91,19 +91,15 @@ in the database, so they stay.
 4. Sign up again and make yourself the owner, as in **6. First run**, steps 3
    and 4.
 
-## 8b. After the 2026-10-24 squash (one-time)
+## 8b. After the 2026-10-25 reset (one-time)
 
-The three migrations became one, so `/ops` shows `0001` as drifted and `0002`
-and `0003` as orphaned until you do this once. Everything comes back, logins
-included.
+The schema was reset, so `/ops` shows `0001` as drifted until you start over.
+There are no real families yet, so nothing is restored afterwards.
 
-1. On `/ops`, press **Download export.json** and keep the file.
-2. Press **Clear everything…**, type `DELETE EVERYTHING`, and press **Clear
-   everything**.
-3. Under **Migrations**, press **Apply pending**. `0001` shows as applied.
-4. Under backups, choose the file from step 1 in **Restore from export.json**
-   and press restore. Your family, profiles, courses, and the next release
-   preview are back as they were.
+1. Follow **8a. Starting over with an empty database**, steps 1 to 4.
+2. To see the Levels, which are release 1 and still being built: on `/ops`,
+   under your family, press **Turn next release preview on**. Other families
+   see Cook Around the World only until release 1 launches.
 
 ## 9. Check it (the Phase 2b test)
 

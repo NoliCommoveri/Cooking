@@ -1,23 +1,16 @@
 // Phase 11b: tastes (plan §6.21). Each profile rates proteins, flavors, and key
 // ingredients from 1 star (hate) to 5 (absolute favorite), or Haven't tried,
 // with at most one favorite per list; the family sets its limits once (time,
-// budget, tools, how adventurous). Part of the next release (§8.6): only a
-// family that has it sees any of this. Parents only, behind the PIN.
+// budget, tools, how adventurous). Parents only, behind the PIN.
 import { fail, now } from './lib/http.js';
 import { requireParent } from './auth.js';
 import { CONTENT } from './content-data.js';
-import { releaseOn } from './release.js';
 import {
   STARS, FAVORITE, RATING_KINDS, MAX_MINUTES, BUDGET, ADVENTUROUS, TOOL_CHOICES, HEAT, ratingItems,
 } from '../content/tastes.js';
 
 const ITEMS = ratingItems(CONTENT.tastes);
 
-async function parentWithRelease(env, req) {
-  const s = await requireParent(env, req);
-  if (!(await releaseOn(env.DB, s.family_id, 1))) fail(404, 'not_available', 'Not available yet.');
-  return s;
-}
 
 const itemName = (kind, id) => ITEMS[kind].find((x) => x.id === id)?.name ?? id;
 
@@ -45,7 +38,7 @@ export function register(on) {
   // Everything the Our tastes page and Chef Ruth need: the lists, every
   // profile's ratings, and the family's limits.
   on('GET', '/api/tastes', async (req, env) => {
-    const s = await parentWithRelease(env, req);
+    const s = await requireParent(env, req);
     const profiles = (await env.DB.prepare('SELECT id, name, avatar, people, audience FROM profiles WHERE family_id = ? ORDER BY created_at, id').bind(s.family_id).all()).results
       .map((p) => ({ ...p, people: JSON.parse(p.people) }));
     const equipment = Object.fromEntries(CONTENT.equipment.map((e) => [e.id, e.name]));
@@ -66,7 +59,7 @@ export function register(on) {
   // off. A second favorite in the same list is refused unless replace is set,
   // which moves the old favorite to 4 stars.
   on('PUT', '/api/profiles/([0-9a-f]{16})/ratings', async (req, env, body, [pid]) => {
-    const s = await parentWithRelease(env, req);
+    const s = await requireParent(env, req);
     await profileOf(env, s.family_id, pid);
     const kind = RATING_KINDS.includes(body.kind) ? body.kind : fail(400, 'invalid', `kind must be one of ${RATING_KINDS.join(', ')}.`);
     const item = ITEMS[kind].some((x) => x.id === body.item) ? body.item : fail(400, 'invalid', 'No such item to rate.');
@@ -91,7 +84,7 @@ export function register(on) {
 
   // The family's limits. Each field: a value, or null for no limit.
   on('PUT', '/api/tastes/limits', async (req, env, body) => {
-    const s = await parentWithRelease(env, req);
+    const s = await requireParent(env, req);
     const pick = (v, ok, what) => (v == null || v === '' ? null : ok(v) ? v : fail(400, 'invalid', `That isn't a ${what}.`));
     const maxMinutes = pick(body.max_minutes == null || body.max_minutes === '' ? null : Number(body.max_minutes), (v) => MAX_MINUTES.includes(v), 'time limit');
     const budget = pick(body.budget, (v) => BUDGET.some(([b]) => b === v), 'budget');
@@ -106,7 +99,7 @@ export function register(on) {
 }
 
 // A deleted profile's ratings, and what its cooks taught, go with it. Before
-// the next release's draft is applied there's no table, and nothing to delete.
+// the tables exist there's nothing to delete.
 export async function forgetProfile(env, fid, pid) {
   try {
     await env.DB.prepare('DELETE FROM profile_ratings WHERE profile_id = ? AND family_id = ?').bind(pid, fid).run();

@@ -1,5 +1,5 @@
 // Phase 11e: Recipe gaps (plan §6.21), a page in the owner screens. From what
-// families with the next release rated, which pick-one groups leave families
+// families rated, which pick-one groups leave families
 // with nothing that fits, or only a poor fit, and why; the variation or dish
 // that would help most of them, opened in the manager with its tags filled
 // in; a coverage grid of each group against protein and heat; and what people

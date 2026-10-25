@@ -298,7 +298,7 @@ function bar() {
         el('button', { class: 'hbtn', onclick: async () => { await api('POST', '/logout'); go('#/login'); } }, 'Sign out'))),
     el('nav', { class: 'mnav', 'aria-label': 'Sections' },
       tab('#/', 'Course'), tab('#/saves', 'Saves'), tab('#/list/ingredients.json', 'Ingredients'), tab('#/list/equipment.json', 'Tools'),
-      tab('#/list/skills.json', 'Skills'), tab('#/list/terms.json', 'Kitchen words'), tab('#/list/cuisines.json', 'Cuisines'), tab('#/list/tastes.json', 'Tastes'), tab('#/tags', 'Tags'), tab('#/level/level-3', 'Level 3'), tab('#/rules', 'Food rules')),
+      tab('#/list/skills.json', 'Skills'), tab('#/list/terms.json', 'Kitchen words'), tab('#/list/cuisines.json', 'Cuisines'), tab('#/list/tastes.json', 'Tastes'), tab('#/tags', 'Tags'), tab('#/level/sp-2', 'Level 2'), tab('#/level/sp-3', 'Level 3'), tab('#/level/sp-4', 'Level 4'), tab('#/rules', 'Food rules')),
     S.github ? null : el('p', { class: 'mwarn' }, "GitHub isn't connected yet, so you can look but not save. ", el('a', { href: 'https://github.com/NoliCommoveri/Cooking/blob/main/docs/setup.md#the-manager-section', target: '_blank', rel: 'noopener' }, 'How to connect it')));
 }
 

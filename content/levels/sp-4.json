@@ -2,7 +2,6 @@
   "id": "sp-4",
   "name": "Level 4 Chef",
   "hours": 135,
-  "release": 2,
   "sideUnit": { "number": 104, "name": "Level 4 Chef recipes", "prefix": "C" },
   "units": [
     { "number": 1, "name": "Kitchen basics", "goal": "Cuts precisely at speed; weighs ingredients and works out yield; scales any recipe by hand; writes a prep timeline and runs it" },

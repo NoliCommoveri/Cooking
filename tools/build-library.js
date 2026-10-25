@@ -40,17 +40,17 @@ const isFeast = (c, L) => Boolean(L.feast) || seasonalUnits(c).includes(L.unit);
 // A dish's tags (§6.21): on its course.json entry, or on a seasonal lesson.
 const tagsOf = (c, L) => c.course.dishes.find((d) => d.id === L.id)?.tags ?? L.tags ?? null;
 const isUnleavened = (c, L) => unleavened(L, Object.fromEntries(c.ingredients.map((i) => [i.id, i])), c.rules.leaven);
-// The Levels' own written recipes (§12.4), next release only: each with its
+// The Levels' own written recipes (§12.4), with the Levels' release: each with its
 // Level's id and its label in the Level's unit (L1, L2, … in the order of the
 // Level's recipe cards).
 export const levelRecipes = (c) => (c.levels ?? []).flatMap(({ data: V }) => {
   const at = Object.fromEntries(V.recipes.map((r, i) => [r.id, `${V.sideUnit.prefix}${i + 1}`]));
-  return (c.levelLessons ?? []).filter(({ data: L }) => at[L.id]).map(({ data: L }) => ({ L, level: V.id, label: at[L.id], release: V.release ?? 1 }));
+  return (c.levelLessons ?? []).filter(({ data: L }) => at[L.id]).map(({ data: L }) => ({ L, level: V.id, label: at[L.id] }));
 });
 // Every Level's recipe cards, by id: a week may cook another Level's card (§12.0).
 const allCards = (c) => Object.fromEntries((c.levels ?? []).flatMap(({ data: V }) => V.recipes.map((r) => [r.id, r])));
 // A week's dishes: its recipe, or its Familiar and Explore pair (§12.0), then its options.
-const weekDishes = (w) => [w.recipe, w.familiar, w.explore, ...(w.swapIns ?? [])].filter(Boolean);
+const weekDishes = (w) => [w.familiar, w.explore, ...(w.swapIns ?? [])].filter(Boolean);
 
 // What families see: hidden lessons (§7.5) are out of the course, the
 // library, and the seasonal units' lists, so they take no number and leave
@@ -118,7 +118,7 @@ export function buildPublic() {
     seasonal: seasonalUnits(c),
     lessons: summary,
     // The Levels' own recipes (§12.4), apart from the course's lessons: the
-    // app shows them only to a family with the next release.
+    // app shows them only to a family with the Levels' release.
     levelLessons: levelRecipes(c).map(({ L, level, label }) => ({ ...card(L, label), level })),
     // Every planned dish's title, for a kitchen word practiced in a lesson not written yet.
     dishes: Object.fromEntries(all.course.dishes.map((d) => [d.id, d.title])),
@@ -137,14 +137,15 @@ export function buildPublic() {
     ?? c.course.dishes.find((d) => d.id === id)?.minutes ?? cards[id]?.minutes ?? 0;
   const titleOf = (V, id) => cards[id]?.title ?? c.course.dishes.find((d) => d.id === id)?.title
     ?? [...c.lessons, ...(c.levelLessons ?? [])].find(({ data }) => data.id === id)?.data.title ?? id;
-  // The demo and syllabus are public, so they show only release 1's Level
-  // until the re-planned Levels launch (§12.0).
+  // The Worker serves this only once the Levels' release is launched, so the
+  // public pages follow the release switch (§8.6).
   files['public/content/levels.json'] = JSON.stringify({
-    levels: (c.levels ?? []).filter(({ data: V }) => (V.release ?? 1) < 2).map(({ data: V }) => ({
+    levels: (c.levels ?? []).map(({ data: V }) => ({
       id: V.id, name: V.name, hours: V.hours, units: V.units.map(({ number, name, goal }) => ({ number, name, goal })),
-      weeks: V.weeks.map(({ week, unit, recipe, swapIns, mastery, kind, minutes, note, drill, knowledge, sabbath }) => ({
-        week, unit, ...(recipe ? { recipe, title: titleOf(V, recipe), recipeMinutes: minutesOf(V, recipe) } : {}), ...(swapIns?.length ? { options: swapIns } : {}),
-        ...(mastery ? { mastery } : {}), ...(kind ? { kind, minutes, note } : {}), drill, knowledge, sabbath,
+      weeks: V.weeks.map(({ week, unit, familiar, explore, cuisine, mastery, kind, minutes, note, drill, knowledge, sabbath }) => ({
+        week, unit,
+        ...(familiar ? { familiar, explore, title: titleOf(V, familiar), exploreTitle: titleOf(V, explore), recipeMinutes: minutesOf(V, familiar) } : {}),
+        ...(cuisine ? { cuisine } : {}), ...(mastery ? { mastery } : {}), ...(kind ? { kind, minutes, note } : {}), drill, knowledge, sabbath,
       })),
     })),
   }) + '\n';
@@ -192,9 +193,9 @@ export function buildLibrary() {
     return out;
   };
   // The Levels' own recipes come after the course's lessons, each with its
-  // Level (§12.4): only a family with the next release sees them.
+  // Level (§12.4): only a family with the Levels' release sees them.
   const lessons = [...c.lessons.map(({ data: L }) => withVariations(L)).sort(inCourse(c)),
-    ...levelRecipes(c).map(({ L, level, release }) => ({ ...withVariations(L), level, ...(release > 1 ? { levelRelease: release } : {}) }))];
+    ...levelRecipes(c).map(({ L, level }) => ({ ...withVariations(L), level }))];
   const ingredients = Object.fromEntries(c.ingredients.filter((i) => used.has(i.id))
     .map((i) => [i.id, { name: i.name, contains: i.contains }]));
   const data = {
@@ -203,7 +204,7 @@ export function buildLibrary() {
     units: Object.fromEntries(c.units.map((u) => [u.number, u.name])),
     seasonal: seasonalUnits(c),
     seasonalLabels: seasonalLabels(c.units),
-    // The Levels' own recipes' labels, L1, L2… (§12.4).
+    // The Levels' own recipes' labels: A1, K1, C1… (§12.4).
     levelLabels: Object.fromEntries(levelRecipes(c).map(({ L, label }) => [L.id, label])),
     dietTags: c.schemas.registries.$defs.dietTag.enum,
     // Every planned dish, for numbering a family's course plan; its line about
@@ -213,21 +214,19 @@ export function buildLibrary() {
     course: c.course.dishes.map(({ id, title, unit, pickOne, prereqs, about, meal, skills, tags, minutes, cuisine }) => ({
       id, title, unit, about, skills, ...(minutes ? { minutes } : {}), ...(cuisine ? { cuisine } : {}), ...(pickOne ? { pickOne } : {}), ...(prereqs ? { prereqs } : {}), ...(meal === false ? { meal } : {}), ...(tags ? { tags } : {}),
     })),
-    // The Levels (§12), next release only: each one's units and weeks, for
+    // The Levels (§12), with their release: each one's units and weeks, for
     // a Level course's plan (12b). A week's recipe is a lesson id when it's
     // written; until then it waits like a planned dish (§6.18).
     levels: Object.fromEntries((c.levels ?? []).map(({ data: V }) => [V.id, {
       id: V.id, name: V.name, hours: V.hours,
-      // The release a family needs to see it (§8.6): 1, or 2 for the re-plan (§12.0).
-      ...(V.release > 1 ? { release: V.release } : {}),
-      // Its own unit in Side quests (§12.4): "Level 3 recipes", labels L1, L2….
+      // Its own unit in Side quests (§12.4): "Level 3 Cook recipes", labels K1, K2….
       side: { number: V.sideUnit.number, name: V.sideUnit.name, prefix: V.sideUnit.prefix }, units: V.units.map(({ number, name, goal }) => ({ number, name, goal })),
       // Each week's three part pages (12c): title, planned minutes, and what's written of them.
-      // Its options (§12.7): the other recipes best fit picks among (12d).
+      // Its swap-ins: the other recipes best fit picks among (12d).
       // A practice or capstone week has no recipe: its own minutes and note instead.
-      weeks: V.weeks.map(({ week, unit, skill, recipe, familiar, explore, cuisine, swapIns, mastery, kind, minutes, note, drill, knowledge, sabbath }) => ({
-        // A re-planned week cooks its Familiar dish until a course picks Familiar or Explore (14c).
-        week, unit, ...(skill ? { skill } : {}), ...(recipe || familiar ? { recipe: recipe ?? familiar } : {}), ...(familiar ? { familiar, explore } : {}), ...(cuisine ? { cuisine } : {}), ...(swapIns?.length ? { options: swapIns } : {}),
+      weeks: V.weeks.map(({ week, unit, skill, familiar, explore, cuisine, swapIns, mastery, kind, minutes, note, drill, knowledge, sabbath }) => ({
+        // A week cooks its Familiar dish until a course picks Familiar or Explore (14c).
+        week, unit, ...(skill ? { skill } : {}), ...(familiar ? { recipe: familiar, familiar, explore } : {}), ...(cuisine ? { cuisine } : {}), ...(swapIns?.length ? { options: swapIns } : {}),
         ...(mastery ? { mastery } : {}), ...(kind ? { kind, minutes, note } : {}), drill, knowledge, sabbath,
       })),
       // The Level's own recipe cards, scored by their tags until they're written (12d).

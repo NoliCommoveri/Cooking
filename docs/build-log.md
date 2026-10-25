@@ -5311,3 +5311,107 @@ part page to review; and fix the recurring resting line.
   recipe week, the mastery weeks, and Level 4's cuisines; the Level
   tests now expect the re-planned Levels beside today's Level 3 for a
   preview family).
+
+## 212. 2026-10-25 — Re-plan build, 14c planned: a course on a new Level
+
+Planning only; nothing in the app changed. Owner, 2026-10-25: "Plan phase
+14c." The plan is in plan §12.9 under 14c, as recommendations until the
+owner confirms them:
+
+- Which program? offers a release 2 family the new Levels only, as after
+  launch; courses on today's Level 3 run to the end.
+- Setup and Chef Ruth ask **Each week starts with: Familiar or Explore**,
+  preset to Explore only for "Bring it on".
+- Draft migration `0002` with one table, `course_starts`, applied from
+  `/ops`.
+- Each week's dish is worked out from the course's start slot, falling back
+  to the other dish when the diet or tools rule one out or it isn't written
+  yet; best fit only when both are ruled out. Weeks the parent changed keep
+  their pick.
+
+## 213. 2026-10-25 — 14c: "A bit adventurous" starts with Explore
+
+Planning only; nothing in the app changed. Owner, 2026-10-25: "A bit
+adventurous should be explore." Plan §12.9's 14c preset is now Explore for
+"Bring it on" or "A bit adventurous", and Familiar for "Stick to what we
+know" or not set.
+
+## 214. 2026-10-25 — 14c: two more of the owner's calls
+
+Planning only; nothing in the app changed. Owner, 2026-10-25, "yes" to
+both:
+
+- Preview families are offered the new Levels only at Which program?, as
+  after launch; today's Level 3 isn't offered to them for a new course.
+- A week whose chosen dish isn't written yet cooks its other dish when that
+  one is written, instead of being skipped.
+
+Recorded in plan §12.9 under 14c.
+
+## 215. 2026-10-25 — Reset: the first Level 3 retired, the schema squashed, release 1 is the Levels
+
+Owner, 2026-10-25: "We don't have any real families yet. So if we can, lets
+reset and squash the schema file. Get rid of the old level 3 stuff from the
+ui and the plans around it, maintaining only the recipes or pages we are
+salvaging, but under the new level 3. The cook around the world and all its
+functionality stay in prod, the new courses behind the release button, which
+is reset to release 1." On the public pages: "Follow the switch."
+
+- **Before:** release 1 (live for everyone) was the first Level 3, Our
+  tastes, variations, best-fit picks, and the recipe gaps page; release 2
+  (being built) was the re-planned Levels 2, 3, and 4. Preview families saw
+  both Level 3s in Which program?, the second as "(new plan)". The public
+  demo and syllabus were built on the first Level 3.
+- **Now:**
+  - **Releases** (`src/worker/release.js`): one release, **release 1, the
+    Levels**, being built (`LEVELS_RELEASE`). Our tastes, variations, picks,
+    learning from Reflect, Chef Ruth's taste questions, and the recipe gaps
+    page are ungated: every family has them, as part of Cook Around the
+    World. The switch is kept under a new settings key, `releases`, so the
+    live database's old launch of release 1 doesn't turn the Levels on for
+    everyone before the reset.
+  - **The first Level 3 is gone:** `content/levels/level-3.json` and six
+    Level-only recipes no new Level uses (beef tacos with pico, Cajun rice
+    dressing, garlic green beans, Israeli salad, poached cod, rice pilaf).
+    The eight it salvages (thick burgers, sandwich loaf, dinner rolls,
+    tabbouleh, beef picadillo, baked fish, steamed fish, pan-seared trout)
+    are the new Level 3's own cards and its Side quests unit (103, K
+    labels); its 45 carried part pages were already there (entry 211).
+  - **A Level has no `release` of its own:** every Level runs on the shared
+    units with a Familiar and an Explore dish each recipe week; the linter
+    and schema lost the old single-recipe week.
+  - **Schema** (`0001_schema.sql`): rewritten as one clean file, phase and
+    "next release" notes taken out, with 14c's `course_starts` table in it,
+    so 14c needs no migration. The squash map for old exports is gone.
+  - **Public pages follow the switch:** the Worker serves
+    `/content/levels.json` empty until release 1 is launched. Until then the
+    demo is Cook Around the World only and the Structured Progression
+    syllabus says it's coming; Cook Around the World's syllabus stops
+    linking to it. After launch, both are built on Levels 2, 3, and 4: the
+    demo's Try a week uses the first four fully written Level 3 weeks, with
+    Cook this instead for the other dish; The Levels and the syllabus show
+    each week's two dishes. `public/level-outlines.js` keeps only what the
+    content doesn't (time, credit, who it's for).
+  - **Manager:** Level 2, Level 3, and Level 4 tabs; a week edits its
+    Familiar and Explore dishes and can pick any Level's card.
+  - **Chef Ruth's tour** has a stop for Our tastes, now an ordinary parent
+    screen.
+  - `tools/dev-server.js`: `/__live?n=1&preview=<email>` sets the release
+    and a preview, for session screenshots.
+- **Plan:** §12.3 and §12.5 to §12.7 removed (the first Level 3's weeks and
+  build history, the old Level 2 and 4 outlines, the week options
+  workbook); §12.1, §12.2, §12.4, and §12.8 rewritten as the rules still in
+  force; §8.4, §8.6, §6.16, §6.17, §6.21, the phase table, and 14c updated.
+  `docs/level-recipe-review.md` (the first Level 3's review) is deleted.
+- **Owner, one time, all on `/ops`** (`docs/setup.md` §8b): Clear
+  everything, Apply pending, sign up again, make yourself the owner, and
+  turn your family's preview on to see the Levels. Until then `/ops` shows
+  `0001` as drifted.
+- Screenshots (phone width, light and dark) of the demo and syllabus before
+  and after launch, Which program?, Our tastes for a family without the
+  preview, and the manager's Level pages were sent in the session.
+- Tests: 361. The Level course tests run on the new Level 3 (its first
+  written week is 4, Minestrone); the "without the next release" tests now
+  check that every family has tastes, variations, and picks; new: the
+  Levels show to a preview family before launch and to everyone after, and
+  `/content/levels.json` is empty until launch.

@@ -2,7 +2,6 @@
   "id": "sp-3",
   "name": "Level 3 Cook",
   "hours": 125,
-  "release": 2,
   "sideUnit": { "number": 103, "name": "Level 3 Cook recipes", "prefix": "K" },
   "units": [
     { "number": 1, "name": "Kitchen basics", "goal": "Holds and hones a chef's knife; dices, minces, and juliennes evenly; reads a recipe for timing and writes a prep list; weighs on a scale; knows the danger zone and the stove's hazards" },
@@ -1283,7 +1282,9 @@
         "veggies": "some"
       }
     },
+    { "id": "tabbouleh", "title": "Tabbouleh", "cuisine": "lebanese", "skills": ["fine-chopping"], "skill": "Mincing parsley fine", "art": "salad", "safety": "adult-nearby", "minutes": 45, "about": "A bright parsley salad with mint, tomato, and a little bulgur, dressed with lemon and olive oil. The knife work is the dish.", "main": ["parsley", "bulgur", "tomatoes", "mint", "lemon"], "method": "no-cook", "meal": false, "tags": { "protein": "none", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "lots" } },
     { "id": "solterito", "title": "Solterito", "cuisine": "peruvian", "skills": ["dicing", "dressings"], "skill": "A fine dice and a balanced dressing", "art": "salad", "safety": "adult-nearby", "minutes": 35, "estimated": true, "about": "A Peruvian salad of corn, lima beans or edamame, tomato, red onion, olives, and cheese in a lime dressing.", "main": ["corn", "lima beans or edamame", "tomatoes", "feta", "lime"], "method": "no-cook", "tags": { "protein": "beans-lentils", "flavors": ["herby-lemony", "tangy"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "lots" } },
+    { "id": "thick-burgers", "title": "Thick beef burgers", "cuisine": "american", "skills": ["temping-meat", "searing"], "skill": "Checking ground beef reaches 160°F", "art": "meat", "safety": "adult-nearby", "minutes": 40, "about": "Thick, juicy beef burgers seared in a skillet and checked with a thermometer until they reach 160°F in the middle, on toasted buns.", "main": ["ground beef", "burger buns", "lettuce", "tomato"], "method": "stove", "tags": { "protein": "beef", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } },
     {
       "id": "chermoula-fish",
       "title": "Chermoula baked fish",
@@ -1304,6 +1305,27 @@
         "budget": "$$",
         "familiar": "new-ish",
         "veggies": "some"
+      }
+    },
+    {
+      "id": "baked-salmon",
+      "title": "Baked fish with lemon and herbs",
+      "cuisine": "american",
+      "skills": ["cooking-fish"],
+      "skill": "Baking fish gently, checking pin bones",
+      "art": "fish",
+      "safety": "adult-nearby",
+      "minutes": 50,
+      "about": "Salmon, cod, or tilapia fillets baked with lemon, dill, and garlic until they flake and reach 145°F, with a side timed to finish at the same time.",
+      "main": ["salmon, cod, or tilapia fillets", "lemon", "dill", "garlic"],
+      "method": "oven",
+      "tags": {
+        "protein": "salmon",
+        "flavors": ["herby-lemony"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
       }
     },
     {
@@ -1352,7 +1374,9 @@
       }
     },
     { "id": "manoushe", "title": "Man'oushe", "cuisine": "lebanese", "skills": ["yeast-dough", "flatbreads"], "skill": "Shaping a yeast dough into flatbreads", "art": "bread", "safety": "adult-nearby", "minutes": 150, "estimated": true, "about": "Lebanese flatbreads from the pita dough, spread with za'atar and olive oil and baked hot.", "main": ["flour", "yeast", "za'atar", "olive oil"], "method": "oven", "meal": false, "variationOf": "pita-bread", "tags": { "protein": "none", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
+    { "id": "sandwich-loaf", "title": "Sandwich loaf", "cuisine": "american", "skills": ["yeast-dough"], "skill": "Kneading to a windowpane, baking a loaf", "art": "bread", "safety": "adult-nearby", "minutes": 240, "about": "A soft white sandwich loaf, kneaded until the dough stretches thin, proofed in a loaf pan, and baked to 190°F inside.", "main": ["flour", "yeast", "milk", "butter"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     { "id": "conchas", "title": "Conchas", "cuisine": "mexican", "skills": ["yeast-dough"], "skill": "An enriched dough shaped by weight", "art": "bread", "safety": "adult-nearby", "minutes": 210, "estimated": true, "about": "Soft Mexican sweet buns with a crackly sugar topping scored like a seashell. Made with butter.", "main": ["flour", "yeast", "butter", "egg", "sugar"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
+    { "id": "dinner-rolls", "title": "Dinner rolls", "cuisine": "american", "skills": ["yeast-dough"], "skill": "Shaping even rolls by weight", "art": "bread", "safety": "adult-nearby", "minutes": 210, "about": "Soft, buttery pull-apart rolls, each weighed so they bake evenly, with two or three shaped as knots or small braids.", "main": ["flour", "yeast", "milk", "butter", "egg"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     {
       "id": "apple-galette",
       "title": "Rustic apple galette",
@@ -1400,6 +1424,7 @@
         "veggies": "lots"
       }
     },
+    { "id": "steamed-fish", "title": "Steamed fish with ginger and scallion", "cuisine": "chinese", "skills": ["cooking-fish"], "skill": "Steaming, judging freshness", "art": "fish", "safety": "adult-nearby", "minutes": 45, "about": "White fish fillets steamed on a plate in a covered pot, then topped with ginger, green onion, soy, and a little warm oil.", "main": ["white fish fillets", "ginger", "green onions", "soy sauce"], "method": "stove", "tags": { "protein": "white-fish", "flavors": ["ginger-soy"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "light" } },
     {
       "id": "arroz-con-pollo",
       "title": "Arroz con pollo",
@@ -1491,8 +1516,30 @@
       }
     },
     { "id": "sausage-peppers", "title": "Sausage and peppers", "cuisine": "italian", "skills": ["sauteing"], "skill": "Sweating and browning onions and peppers", "art": "meat", "safety": "adult-nearby", "minutes": 40, "estimated": true, "about": "Beef or chicken sausages browned, then cooked with soft strips of pepper and onion, on rolls or over pasta.", "main": ["beef or chicken sausage", "bell peppers", "onion", "garlic", "rolls"], "method": "stove", "tags": { "protein": "beef", "flavors": ["rich-tomato"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "lots" } },
+    {
+      "id": "beef-picadillo",
+      "title": "Beef picadillo",
+      "cuisine": "cuban",
+      "skills": ["flavor-base", "sauteing"],
+      "skill": "Sweating a sofrito, then browning beef",
+      "art": "meat",
+      "safety": "adult-nearby",
+      "minutes": 55,
+      "about": "Ground beef browned over a sofrito of onion, pepper, and garlic, simmered with tomato, raisins, and olives, over rice.",
+      "main": ["ground beef", "onion and bell pepper", "tomato sauce", "raisins", "olives"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["sweet-savory", "rich-tomato"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      }
+    },
     { "id": "tortang-talong", "title": "Tortang talong", "cuisine": "filipino", "skills": ["poaching-eggs"], "skill": "Cooking eggs over low heat", "art": "side", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "Whole eggplants charred, peeled, flattened, dipped in beaten egg, and pan-fried golden. Served with rice and ketchup.", "main": ["eggplant", "eggs", "garlic", "rice"], "method": "stove", "tags": { "protein": "eggs", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "some" } },
     { "id": "godeungeo-gui", "title": "Godeungeo-gui", "cuisine": "korean", "skills": ["cooking-fish", "searing"], "skill": "Searing a fillet skin-side down", "art": "fish", "safety": "adult-nearby", "minutes": 40, "estimated": true, "about": "Korean pan-fried mackerel, salted ahead and cooked skin-side down until crisp, with rice and a cucumber side.", "main": ["mackerel fillets", "salt", "rice", "cucumber"], "method": "stove", "tags": { "protein": "white-fish", "flavors": ["ginger-soy"], "heat": "mild", "budget": "$$", "familiar": "adventurous", "veggies": "light" } },
+    { "id": "pan-seared-trout", "title": "Pan-seared trout", "cuisine": "american", "skills": ["cooking-fish", "searing"], "skill": "Searing a fillet skin-side down", "art": "fish", "safety": "adult-nearby", "minutes": 30, "about": "Trout fillets seared skin-side down until the skin is crisp, finished with butter and lemon.", "main": ["trout fillets", "butter", "lemon", "parsley"], "method": "stove", "tags": { "protein": "white-fish", "flavors": ["mild-buttery", "herby-lemony"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } },
     { "id": "steak-mushroom-sauce", "title": "Pan-seared steak with mushroom sauce", "cuisine": "american", "skills": ["searing", "gravy"], "skill": "A pan sauce from the fond", "art": "meat", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "Sirloin seared to 145°F and rested, with a mushroom pan sauce built from the browned bits in the pan.", "main": ["sirloin steak", "mushrooms", "broth", "butter", "thyme"], "method": "stove", "tags": { "protein": "beef", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$$", "familiar": "everyday", "veggies": "some" } },
     {
       "id": "chicken-paprikash",

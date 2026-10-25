@@ -1,13 +1,15 @@
 // A Level in the manager section (plan §12, §12.4): its units, its weeks with
 // their four parts, and the Level's own recipes. The forms are built from
-// content/schema/level.schema.json. Only preview families see a Level until
-// the next release launches (§8.6). Changes are staged until Review and save.
+// content/schema/level.schema.json. Only preview families see the Levels until
+// their release launches (§8.6). Changes are staged until Review and save.
 import { el, modal } from './dom.js';
 import { field, blank } from './form.js';
 import { S, cur, put, page, pickers, problems, redraw } from './manage.js';
 import { tagFields } from './tags.js';
 
 const PARTS = [['knowledge', 'Knowledge'], ['drill', 'Drill'], ['sabbath', 'Beyond the Recipe']];
+// The Levels in the manager's tabs (plan §12.9); Level 1 is planned later.
+export const LEVEL_IDS = ['sp-2', 'sp-3', 'sp-4'];
 const slug = (s) => String(s ?? '').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 function checksLine() {
@@ -23,17 +25,22 @@ export function levelPage(id) {
   if (!V) return page(el('h1', {}, 'No such Level'));
   const schema = S.files['schema/level.schema.json'];
   const dishes = cur('course.json').dishes;
-  const titleOf = (rid) => V.recipes.find((r) => r.id === rid)?.title ?? dishes.find((d) => d.id === rid)?.title ?? rid;
-  const minutesOf = (rid) => V.recipes.find((r) => r.id === rid)?.minutes ?? dishes.find((d) => d.id === rid)?.minutes ?? 0;
-  const weekMinutes = (w) => (w.kind ? w.minutes ?? 0 : minutesOf(w.recipe)) + PARTS.reduce((n, [k]) => n + (w[k]?.minutes ?? 0), 0);
+  // A week can cook any Level's recipe card (§12.0): this Level's first.
+  const others = LEVEL_IDS.filter((x) => x !== id).map((x) => cur(`levels/${x}.json`)).filter(Boolean);
+  const cards = () => [...V.recipes, ...others.flatMap((X) => X.recipes)];
+  const titleOf = (rid) => cards().find((r) => r.id === rid)?.title ?? dishes.find((d) => d.id === rid)?.title ?? rid;
+  const minutesOf = (rid) => cards().find((r) => r.id === rid)?.minutes ?? dishes.find((d) => d.id === rid)?.minutes ?? 0;
+  // The hours count the Familiar dish, every course's starting default.
+  const weekMinutes = (w) => (w.kind ? w.minutes ?? 0 : minutesOf(w.familiar)) + PARTS.reduce((n, [k]) => n + (w[k]?.minutes ?? 0), 0);
 
-  // A week's recipe and swap-ins: a dish in the course, or one of the Level's own.
+  // A week's dishes and swap-ins: a dish in the course, or a Level's own.
   const recipeChoices = () => [
     ...V.recipes.map((r) => [r.id, `${r.title} (Level only)`]),
+    ...others.flatMap((X) => X.recipes.map((r) => [r.id, `${r.title} (${X.name})`])),
     ...dishes.map((d) => [d.id, d.title]),
   ];
   const options = (key, path) => {
-    if (key === 'recipe' || (typeof key === 'number' && path?.at(-2) === 'swapIns')) return recipeChoices();
+    if (key === 'familiar' || key === 'explore' || (typeof key === 'number' && path?.at(-2) === 'swapIns')) return recipeChoices();
     if (key === 'skill') return pickers()('skills');
     return pickers()(key);
   };
@@ -54,10 +61,10 @@ export function levelPage(id) {
   };
   drawTotals();
 
-  // One week: its recipe and skill, then each part's page.
+  // One week: its two dishes and skill, then each part's page.
   const weekSummary = (w) => [
     el('b', {}, `Week ${w.week}`), ' ',
-    w.kind === 'practice' ? 'Practice run' : w.kind === 'capstone' ? 'Capstone' : titleOf(w.recipe),
+    w.kind === 'practice' ? 'Practice run' : w.kind === 'capstone' ? 'Capstone' : `${titleOf(w.familiar)} · ${titleOf(w.explore)}`,
     w.mastery ? el('b', { class: 'mlevel-tag' }, ' · Mastery') : null,
     el('small', { class: 'mut' }, ` ${Math.round(weekMinutes(w))} min`),
   ];
@@ -70,12 +77,14 @@ export function levelPage(id) {
         root: schema, options,
         onChange: (structural) => stage(`Edited Level week ${w.week}`, structural, () => { draw(); det.querySelector('summary').replaceChildren(...weekSummary(w)); }),
         readOnly: (p) => ['w.week', 'w.unit'].includes(p.join('.')),
-        // A practice or capstone week sets its own minutes; any other takes its recipe's.
-        hide: (p) => (w.kind ? ['w.skill', 'w.recipe', 'w.swapIns'] : ['w.kind', 'w.minutes']).includes(p.join('.')),
+        // A practice or capstone week sets its own minutes; any other takes its Familiar dish's.
+        hide: (p) => (w.kind ? ['w.skill', 'w.familiar', 'w.explore', 'w.cuisine', 'w.swapIns'] : ['w.kind', 'w.minutes']).includes(p.join('.')),
         hint: (p) => {
           const k = p.join('.');
           if (k === 'w.skill') return 'A recipe with this skill can be swapped in, and the best fit for the family is picked when the course is set up.';
           if (k === 'w.swapIns') return 'Dishes that fit the week without carrying its skill.';
+          if (k === 'w.familiar') return 'A dish most families already know (tagged everyday).';
+          if (k === 'w.explore') return 'A dish to explore, with the same skill at the same difficulty.';
           if (/^w\.(drill|knowledge|sabbath)\.body$/.test(k)) return 'The page a learner reads, one paragraph each.';
           return null;
         },
@@ -141,7 +150,7 @@ export function levelPage(id) {
   };
 
   page(el('h1', {}, V.name),
-    el('p', { class: 'mut' }, `Only preview families see this until the next release launches. A week is done when its recipe is cooked. The Level's own recipes are in Side quests, in the "${V.sideUnit.name}" unit.`),
+    el('p', { class: 'mut' }, `Only preview families see this until the Levels' release launches. A week is done when its recipe is cooked. The Level's own recipes are in Side quests, in the "${V.sideUnit.name}" unit.`),
     totals, checks,
     V.units.map(unit),
     el('section', { class: 'card' }, el('div', { class: 'mhead' }, el('h2', {}, `${V.sideUnit.name} (${V.recipes.length})`), el('button', { class: 'hbtn small-btn', onclick: addRecipe }, '+ Add')),

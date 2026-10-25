@@ -1,6 +1,6 @@
 // Phase 11c: variations (plan §6.21). A parent picks the version of a lesson
 // the family cooks; cooks and shopping lists use it, and a cook of any
-// version counts as the lesson. All behind the next release (§8.6).
+// version counts as the lesson. Every family has them.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { makeEnv, family } from './helpers/worker.js';
@@ -20,12 +20,12 @@ const cook = (a, id, ava, extra = {}) => a.put(`/api/attempts/${id}`, {
   lesson_id: 'chimichurri-steak', servings: 6, profile_ids: [ava], started_at: new Date(Date.now() - 3600e3).toISOString(), finished_at: new Date().toISOString(), ...extra,
 });
 
-test('a family without the next release can\'t pick a version, and cooks the lesson itself', async () => {
+test('a family without the preview picks a version and cooks it too', async () => {
   const { env, a, ava } = await setup({ preview: false });
-  assert.equal((await a.put('/api/variations/chimichurri-steak', { variation: 'chicken' })).status, 404);
-  assert.deepEqual((await a.get('/api/me')).body.family.variations, {});
+  assert.equal((await a.put('/api/variations/chimichurri-steak', { variation: 'chicken' })).status, 200);
+  assert.deepEqual((await a.get('/api/me')).body.family.variations, { 'chimichurri-steak': 'chicken' });
   assert.equal((await cook(a, '00000000000000a1', ava, { variation: 'chicken' })).status, 200);
-  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM attempt_variations').first()).n, 0);
+  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM attempt_variations').first()).n, 1);
 });
 
 test('picking a version: only one the lesson has, and the lesson itself is a choice', async () => {

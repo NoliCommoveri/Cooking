@@ -2,7 +2,6 @@
   "id": "sp-2",
   "name": "Level 2 Apprentice",
   "hours": 67,
-  "release": 2,
   "sideUnit": { "number": 102, "name": "Level 2 Apprentice recipes", "prefix": "A" },
   "units": [
     { "number": 1, "name": "Kitchen basics", "goal": "Cuts soft foods safely with a paring knife; uses mitts, turns handles in, and knows a lid goes on a pan fire; reads a recipe through and sets everything out first; measures dry and wet, and halves or doubles a recipe" },

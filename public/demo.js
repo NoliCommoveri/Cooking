@@ -3,14 +3,16 @@
 // kids get. It shows the two tracks: Cook Around the World (the sample
 // lessons, the diet preview, a shopping list preview, the whole course, and
 // the skills view) and Structured Progression (a Level week with a tab for
-// each of its parts, the four Levels, and a pretend learner's progress).
+// each of its parts, the four Levels, and a pretend learner's progress). The
+// Levels show once their release is launched (§8.6): until then the Worker
+// serves no Levels, and the demo is Cook Around the World only.
 import { openLesson } from './player.js';
 import { dietView } from './lib/diet.js';
 import { shoppingList } from './lib/shop.js';
 import { numberCourse } from './lib/course.js';
 import { markTerms, toggleTermCard } from './lib/terms.js';
 import { levelProgressView } from './rewards.js';
-import { LEVEL_OUTLINES } from './level-outlines.js';
+import { allLevels } from './level-outlines.js';
 
 const root = document.getElementById('demo');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -35,13 +37,15 @@ const DEMO_TRY = [
   ['Pick one: three ways to learn julienne', 'Each foundation skill has a few dishes from different kitchens. Your family cooks the one it likes best.', ['spring-rolls', 'chicken-fajitas', 'shoestring-fries']],
   ['More sample lessons', '', ['shakshuka', 'beef-bulgogi', 'buttermilk-biscuits', 'brown-butter-cookies']],
 ];
-// Structured Progression's sample: Level 3's first unit, whose four weeks are
-// written, recipe and part pages alike.
-const LEVEL = LV.levels.find((x) => x.id === 'level-3');
-const DEMO_WEEKS_LV = LEVEL.weeks.filter((w) => w.unit === 1);
+// Structured Progression's sample: Level 3's first four weeks whose recipe
+// and part pages are all written. A week's recipe is its Familiar dish, the
+// default a course starts with (§12.0).
+const L3 = LV.levels.find((x) => x.id === 'sp-3') ?? null;
+const LEVEL = L3 && { ...L3, weeks: L3.weeks.map((w) => ({ ...w, recipe: w.familiar })) };
 const written = new Set([...R.lessons, ...(R.levelLessons ?? [])].map((l) => l.id));
-// A week's recipe, then its options: the ones written can be cooked here.
-const weekRecipes = (w) => [w.recipe, ...(w.options ?? [])].filter((id) => id && written.has(id));
+// A week's two dishes, Familiar then Explore: the ones written can be cooked here.
+const weekRecipes = (w) => [w.familiar, w.explore].filter((id) => id && written.has(id));
+const DEMO_WEEKS_LV = LEVEL ? LEVEL.weeks.filter((w) => weekRecipes(w).length && ['knowledge', 'drill', 'sabbath'].every((k) => w[k].body?.length)).slice(0, 4) : [];
 const DEMO_IDS = new Set([...DEMO_TRY.flatMap(([, , ids]) => ids), ...DEMO_WEEKS_LV.flatMap(weekRecipes)]);
 const lessons = Object.fromEntries(await Promise.all([...DEMO_IDS].filter((id) => written.has(id)).map(async (id) => [id, await getJSON(`/content/lessons/${id}.json`)])));
 // Lesson numbers in the suggested course order (a family's own plan can change them).
@@ -51,8 +55,9 @@ const { labels: NUM, total: TOTAL } = numberCourse(C.dishes);
 // and Structured Progression, the Levels as full courses.
 const TRACKS = {
   catw: { name: 'Cook Around the World', short: 'Recipes from around the world', tabs: [['try', 'Try it'], ['shop', 'Shopping'], ['course', 'Course'], ['skills', 'Skills']] },
-  sp: { name: 'Structured Progression', short: 'Complete courses from the fundamentals', tabs: [['week', 'Try a week'], ['levels', 'The Levels'], ['progress', 'Progress']] },
+  ...(DEMO_WEEKS_LV.length ? { sp: { name: 'Structured Progression', short: 'Complete courses from the fundamentals', tabs: [['week', 'Try a week'], ['levels', 'The Levels'], ['progress', 'Progress']] } } : {}),
 };
+const twoTracks = Object.keys(TRACKS).length > 1;
 // What a visitor has chosen. Kept for this tab only.
 let V = { track: 'catw', open: null, theme: 'quest', audience: 'kid', diet: [], tab: 'try', checked: [], shop: { step: 'needs', count: 0, have: [] }, lvWeek: 1, lvPart: 'knowledge', lvDone: [] };
 try { V = { ...V, ...JSON.parse(sessionStorage.getItem('cpr.demo')) }; } catch { /* first visit */ }
@@ -71,9 +76,9 @@ function header() {
     <p>Check out the demo below to see our current build progress. Beta testing is now live. To participate, search Clean Plate Recipe App on Facebook.</p>
     <p class="by">By Immotus Apps</p></section>
     <div class="d-cta"><a class="hbtn pri" href="/#/signup">Sign up</a><a class="hbtn" href="/#/login">Log in</a></div>
-    <h2 class="d-tracks-h">Two ways to learn</h2>
+    ${twoTracks ? `<h2 class="d-tracks-h">Two ways to learn</h2>
     <div class="d-tracks">${Object.entries(TRACKS).map(([k, T]) => `<button type="button" class="d-trackbtn" data-pick="${k}" aria-pressed="${V.track === k}" aria-expanded="${V.open === k}" aria-controls="track-info"><b>${esc(T.name)}</b><small>${esc(T.short)}</small><i aria-hidden="true">${V.open === k ? '▴' : '▾'}</i></button>`).join('')}</div>
-    ${V.open ? trackInfo(V.open) : ''}`;
+    ${V.open ? trackInfo(V.open) : ''}` : ''}`;
 }
 // A track's details, opened from its button under the header.
 function trackInfo(k) {
@@ -83,8 +88,9 @@ function trackInfo(k) {
           <li>Cook them in order, or pick what sounds good</li>
           <li>Homeschool families can grade cooks and print a transcript</li></ul>`
     : `<p class="who">For families teaching cooking from the fundamentals onward, even for young cooks.</p>
-        <ul><li><b>Complete, credit-able courses</b> built on best practices, in four Levels of 36 weeks</li>
+        <ul><li><b>Complete, credit-able courses</b> built on best practices, in Levels of 36 weeks</li>
           <li>Every week: <b>Knowledge, Drill, Recipe, and Beyond the Recipe</b>, for a full culinary and food-science education</li>
+          <li>Two dishes each week, one familiar and one to explore, both teaching the week's skill</li>
           <li>Mastery checks, hours toward credit, and a transcript</li></ul>`;
   const syllabus = k === 'catw' ? '/syllabus/' : '/syllabus/structured-progression/';
   return `<article class="d-track" id="track-info"><h3>${esc(TRACKS[k].name)}</h3>${info}
@@ -225,8 +231,8 @@ function skillsView() {
 // ---------- Structured Progression: a Level week, the Levels, and progress ----------
 const PART_NAMES = { knowledge: 'Knowledge', drill: 'Drill', sabbath: 'Beyond the Recipe' };
 const unitOf = (n) => LEVEL.units.find((u) => u.number === n);
-// The week's recipe for this diet: its own, or the first option that fits,
-// as best fit would pick (§12.2).
+// The week's recipe for this diet: its Familiar dish, or its Explore dish
+// when the diet rules the Familiar out (§12.0).
 const weekRecipe = (w) => weekRecipes(w).find((id) => dietView(lessons[id], R.ingredients, V.diet).visible) ?? null;
 const titleOf = (id) => lessons[id]?.title ?? id;
 
@@ -244,7 +250,7 @@ function weekView() {
   const on = WEEK_TABS.some(([k]) => k === V.lvPart) ? V.lvPart : 'knowledge';
   const swapped = id && id !== w.recipe;
   const tabsRow = `<div class="d-ptabs" role="tablist" aria-label="This week's parts">${WEEK_TABS.map(([k, label]) => `<button type="button" role="tab" id="pt-${k}" aria-controls="pt-panel" aria-selected="${k === on}" data-ptab="${k}"><span>${esc(label)}</span><small>${k === 'recipe' ? (id ? `${lessons[id].totalMinutes} min` : 'Swap') : done(k) ? 'Done ✓' : `${w[k].minutes} min`}</small></button>`).join('')}</div>`;
-  return `<p class="mut d-lede">A sample from <b>${esc(LEVEL.name)}</b>, Unit ${u.number}: ${esc(u.name)}. Each week of a Level has four parts, and a week is done when its recipe is cooked. Pick a week, then tap through its parts.</p>
+  return `<p class="mut d-lede">A sample from <b>${esc(LEVEL.name)}</b>. Each week of a Level has four parts, and a week is done when its recipe is cooked. Pick a week, then tap through its parts.</p>
     <div class="seg d-weeks" role="group" aria-label="Week">${DEMO_WEEKS_LV.map((x) => `<button type="button" data-lvweek="${x.week}" aria-pressed="${x.week === w.week}">Week ${x.week}${x.mastery ? ' · Mastery' : ''}</button>`).join('')}</div>
     <section class="kitchen qx" data-kt="${V.theme}"><article class="${quest ? 'q-panel' : 'p-card'} k-level">
       <p class="${quest ? 'q-kick' : 'p-lessonno'}">${esc(LEVEL.name)} · Week ${w.week} of ${LEVEL.weeks.length}</p>
@@ -260,12 +266,14 @@ function weekView() {
 function recipePanel(w, id, swapped, quest) {
   if (!id) return `<h3 class="${quest ? 'q-title' : 'p-title'}">None of this week's recipes fit this diet</h3><p>A parent would use Swap recipe to pick another dish that teaches this week's skill.</p>`;
   const L = lessons[id], c = cardOf(id);
-  return `${swapped ? `<p class="${quest ? 'q-swap' : 'p-swap'}">${esc(titleOf(w.recipe))} doesn't fit this diet, so this week cooks one of its options.</p>` : ''}
+  const other = [w.familiar, w.explore].find((x) => x !== id);
+  return `${swapped ? `<p class="${quest ? 'q-swap' : 'p-swap'}">${esc(w.title)} doesn't fit this diet, so this week cooks its Explore dish.</p>` : ''}
     <div class="d-precipe">${c?.image ? `<img src="/${esc(c.image)}" alt="" width="120" height="120" loading="lazy">` : ''}<div>
       <h3 class="${quest ? 'q-title' : 'p-title'}">${esc(L.title)}</h3><p class="${quest ? 'q-skill' : 'p-skill'}">${esc(L.skill)}</p>
       <p>${L.totalMinutes} min · Serves ${L.servings} · ${esc(R.cuisines[L.cuisine]?.name ?? L.cuisine)}</p></div></div>
     ${w.note ? `<p><b>This week:</b> ${esc(w.note)}</p>` : ''}
-    <div class="acts"><button type="button" class="${quest ? 'q-btn' : 'p-btn'}" data-open="${esc(id)}">Cook it</button></div>`;
+    <div class="acts"><button type="button" class="${quest ? 'q-btn' : 'p-btn'}" data-open="${esc(id)}">Cook it</button></div>
+    ${other ? `<p class="mut">${other === w.explore ? 'Or explore' : 'Or the familiar one'}: ${esc(other === w.explore ? w.exploreTitle : w.title)}${weekRecipes(w).includes(other) && dietView(lessons[other], R.ingredients, V.diet).visible ? ` <button type="button" class="hbtn link" data-open="${esc(other)}">Cook this instead</button>` : ''}</p>` : ''}`;
 }
 
 // A drill, knowledge, or Beyond the Recipe page (12c), with Done, saving nothing.
@@ -279,22 +287,22 @@ function partPanel(w, k, quest) {
 }
 
 function levelsView() {
-  const card = (o) => {
-    const L = o.built ? { ...o, name: LEVEL.name, hours: LEVEL.hours, units: LEVEL.units } : o;
-    const weeksOf = (n) => LEVEL.weeks.filter((w) => w.unit === n);
-    const unit = (u, i) => `<li><b>Unit ${i + 1}: ${esc(u.name)}</b>${u.goal ? `<small>${esc(u.goal)}</small>` : ''}${o.built ? `<details><summary>Weeks ${weeksOf(u.number)[0].week}–${weeksOf(u.number).at(-1).week}</summary><ol class="d-wks">${weeksOf(u.number).map((w) => `<li value="${w.week}">${esc(w.title ?? (w.kind === 'capstone' ? 'Capstone' : 'Practice run'))}${w.mastery ? ' <em>Mastery</em>' : ''}</li>`).join('')}</ol></details>` : ''}</li>`;
-    return `<article class="d-level ${o.built ? 'built' : ''}"><div class="d-level-h"><h3>${esc(L.name)}</h3><span class="d-badge">${o.built ? 'Ready now' : 'Being written'}</span></div>
+  const card = (L) => {
+    const weeksOf = (n) => L.weeks.filter((w) => w.unit === n);
+    const dishes = (w) => (w.title ? `${esc(w.title)} <small>or ${esc(w.exploreTitle)}</small>` : esc(w.kind === 'capstone' ? 'Capstone' : 'Practice run'));
+    const unit = (u) => `<li><b>Unit ${u.number}: ${esc(u.name)}</b>${u.goal ? `<small>${esc(u.goal)}</small>` : ''}${weeksOf(u.number).length ? `<details><summary>Weeks ${weeksOf(u.number)[0].week}–${weeksOf(u.number).at(-1).week}</summary><ol class="d-wks">${weeksOf(u.number).map((w) => `<li value="${w.week}">${dishes(w)}${w.mastery ? ' <em>Mastery</em>' : ''}</li>`).join('')}</ol></details>` : ''}</li>`;
+    return `<article class="d-level ${L.later ? '' : 'built'}"><div class="d-level-h"><h3>${esc(L.name)}</h3>${L.later ? '<span class="d-badge">Being planned</span>' : ''}</div>
       <p class="d-facts"><span>36 weeks</span><span>${esc(L.week)}</span>${L.hours ? `<span>About ${L.hours} hours</span>` : ''}<span>${esc(L.credit)}</span></p>
       ${L.note ? `<p class="mut">${esc(L.note)}</p>` : ''}
-      <details ${o.built ? 'open' : ''}><summary>The ${L.units.length} units</summary><ol class="d-units">${L.units.map(unit).join('')}</ol></details></article>`;
+      <details ${L.name === LEVEL.name ? 'open' : ''}><summary>The ${L.units.length} units</summary><ol class="d-units">${L.units.map(unit).join('')}</ol></details></article>`;
   };
-  return `<p class="mut d-lede">Four Levels, each a full school year of 36 weeks in units of four: three weeks to learn and practise, then a mastery week cooked on their own. Every Level ends with a Sabbath capstone. Levels go by what a cook can already do, so a family starts wherever fits.</p>
-    <div class="d-levels">${LEVEL_OUTLINES.map(card).join('')}</div>
+  return `<p class="mut d-lede">Each Level is a full school year of 36 weeks, and every Level covers the same nine units by cooking method, so siblings on different Levels stay in step. What climbs is how hard the recipes are. Each unit ends with a mastery week cooked on their own, and every Level ends with a Sabbath capstone. Levels go by what a cook can already do, so a family starts wherever fits.</p>
+    <div class="d-levels">${allLevels(LV.levels).map(card).join('')}</div>
     <p><a class="hbtn link" href="/syllabus/structured-progression/">Review the Structured Progression syllabus</a></p>`;
 }
 
 // A pretend learner partway through Level 3, drawn by the real progress view
-// (12e): weeks 1–5 done, Unit 1 mastered, week 6 begun.
+// (12e): weeks 1–5 done, Unit 1 (weeks 1–4) mastered, week 6 begun.
 const DEMO_NOW = 6;
 const dayOf = (week) => new Date(Date.UTC(2026, 8, 6 + (week - 1) * 7 + 3)).toISOString().slice(0, 10);
 function demoLevel() {

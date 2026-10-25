@@ -9,7 +9,7 @@ import { fail } from './lib/http.js';
 import { requireParent } from './auth.js';
 import { CONTENT } from './content-data.js';
 import { LIBRARY } from './library-data.js';
-import { releaseOn, familyRelease } from './release.js';
+import { releaseOn, LEVELS_RELEASE } from './release.js';
 import { ratingsOf, limitsOf } from './tastes.js';
 import { dietView } from '../content/diet.js';
 import { courseEntries } from '../content/course.js';
@@ -28,10 +28,9 @@ const NAMES = {
 const missingTable = (err) => /no such table/i.test(String(err?.message));
 
 // Everything scoring needs for one family, read once a request: its
-// profiles' names and ratings, its limits, and its diet filters. null for a
-// family without the next release, or before its draft tables exist.
+// profiles' names and ratings, its limits, and its diet filters. null before
+// its tables exist.
 export async function tasteContext(env, fam) {
-  if (!(await releaseOn(env.DB, fam.id, 1))) return null;
   try {
     const { results } = await env.DB.prepare('SELECT id, name FROM profiles WHERE family_id = ? ORDER BY created_at, id').bind(fam.id).all();
     const ratings = await ratingsOf(env, fam.id, results.map((p) => p.id));
@@ -65,9 +64,8 @@ async function learnedOf(env, fid) {
 // cook each was on: its own Reflect rating and half the eaters', on the
 // cooked version's protein and flavors and the lesson's cuisine. Rebuilt, not
 // added to, so a reflection changed later never counts twice. With no pids,
-// the whole family. Next release only; nothing before its draft is applied.
+// the whole family. Nothing before its tables exist.
 export async function relearn(env, fid, pids = null) {
-  if (!(await releaseOn(env.DB, fid, 1))) return;
   try {
     if (!pids) pids = (await env.DB.prepare('SELECT id FROM profiles WHERE family_id = ?').bind(fid).all()).results.map((r) => r.id);
     if (!pids.length) return;
@@ -168,7 +166,7 @@ export function bestPlan(tc, pids) {
 
 // ---------- Level weeks (12d) ----------
 
-// A Level week's recipes: its options (the default first, §12.7), then any
+// A Level week's recipes: its Familiar dish and swap-ins (§12.2), then any
 // other recipe that teaches its skill, from the course and the Level's cards.
 export function levelCandidates(V, w) {
   const options = [w.recipe, ...(w.options ?? [])];
@@ -284,15 +282,15 @@ export function register(on) {
   });
 
   // A Level's weeks with each recipe's fit for the profiles a course is for,
-  // and each week's pick, for the course editor (?level=level-3&profiles=id,id).
+  // and each week's pick, for the course editor (?level=sp-3&profiles=id,id).
   on('GET', '/api/picks/level', async (req, env) => {
     const s = await requireParent(env, req);
     const fam = await env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(s.family_id).first();
     const tc = await tasteContext(env, fam) ?? fail(404, 'not_available', 'Not available yet.');
     const q = new URL(req.url).searchParams;
-    // A Level shows with its release: 1, or 2 for the re-planned Levels (§12.0).
+    // A Level shows with the Levels' release (§8.6).
     const V = LIBRARY.levels?.[q.get('level')];
-    if (!V || (await familyRelease(env.DB, s.family_id)) < (V.release ?? 1)) fail(404, 'not_found', 'No such Level.');
+    if (!V || !(await releaseOn(env.DB, s.family_id, LEVELS_RELEASE))) fail(404, 'not_found', 'No such Level.');
     const pids = (q.get('profiles') ?? '').split(',').filter((p) => tc.profiles.some((x) => x.id === p));
     return levelPlan(tc, V, pids, await cookedBy(env, s.family_id, pids));
   });

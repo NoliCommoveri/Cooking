@@ -4,7 +4,9 @@ import { numberCourse, courseEntries } from './lib/course.js';
 const root = document.getElementById('syllabus');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 const getJSON = async (u) => { const r = await fetch(u); if (!r.ok) throw new Error(`Couldn't load ${u}`); return r.json(); };
-const [R, C] = await Promise.all([getJSON('/content/registry.json'), getJSON('/content/course.json')]);
+const [R, C, LV] = await Promise.all([getJSON('/content/registry.json'), getJSON('/content/course.json'), getJSON('/content/levels.json')]);
+// Structured Progression is mentioned once the Levels are launched (§8.6).
+const levelsLive = LV.levels.length > 0;
 
 // Lesson numbers follow the course order; a pick-one group shares one (1a, 1b, 1c).
 const NUM = numberCourse(C.dishes).labels;
@@ -41,7 +43,7 @@ root.innerHTML = `
 
 <h2>About the course</h2>
 <p>Each lesson pairs one cooking skill with one real dish that uses it. Students learn why the skill works, gather and measure their ingredients, cook step by step with built-in timers and safety guidance, and reflect on the result. Dishes come from many cuisines, and every recipe follows biblical food laws (Leviticus 11, Deuteronomy 14): no pork, shellfish, or other unclean foods, and no blood, suet, or tallow.</p>
-<p><b>Who it's for:</b> students 10 and up who have done some cooking. For complete courses that start from the fundamentals, with knowledge, drills, and mastery checks, see <a href="/syllabus/structured-progression/">Structured Progression</a>.</p>
+<p><b>Who it's for:</b> students 10 and up who have done some cooking.${levelsLive ? ' For complete courses that start from the fundamentals, with knowledge, drills, and mastery checks, see <a href="/syllabus/structured-progression/">Structured Progression</a>.' : ''}</p>
 
 <h2>Learning objectives</h2>
 <p>By the end of the course, a student can:</p>

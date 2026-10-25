@@ -263,6 +263,12 @@ test('a draft is edited in place: re-apply rebuilds its tables, finalize freezes
 });
 
 test('/ops: numbered releases, per family and for everyone', async () => {
+  // As if release 1 were finished, so it can be launched here.
+  const was = RELEASES[0].building;
+  RELEASES[0].building = false;
+  try { await releasesFlow(); } finally { RELEASES[0].building = was; }
+});
+async function releasesFlow() {
   const env = await makeEnv();
   await family(env, 'Carsons', 'jen@example.com');
   await family(env, 'Smiths', 'pat@example.com');
@@ -293,13 +299,13 @@ test('/ops: numbered releases, per family and for everyone', async () => {
   assert.equal(await releaseOn(env.DB, jen, 1), true, 'the preview stays');
   await ops.form(`/ops/preview/${jen}`, { on: '0' });
   assert.equal(await releaseOn(env.DB, jen, 1), false);
-});
+}
 
 test('/ops: a release still being built previews but can\'t be launched', async () => {
   const building = RELEASES.find((r) => r.building);
   if (!building) return;
   const env = await makeEnv();
-  await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('next_release', ?)").bind(JSON.stringify({ live: building.n - 1, preview: [] })).run();
+  await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('releases', ?)").bind(JSON.stringify({ live: building.n - 1, preview: [] })).run();
   const ops = await opsClient(env);
   const page = (await ops.get('/ops')).body;
   assert.match(page, /Being built: preview only/);
@@ -309,13 +315,11 @@ test('/ops: a release still being built previews but can\'t be launched', async 
   assert.equal(releaseOf({ live: building.n - 1, preview: ['aaaaaaaaaaaaaaaa'] }, 'aaaaaaaaaaaaaaaa'), LATEST, 'a preview family sees it');
 });
 
-test('releases: a later release previews while an earlier one is live, and the old switch reads as release 1', async () => {
+test('releases: nothing is launched at first, and a later release previews while an earlier one is live', async () => {
   const env = await makeEnv();
-  const save = (v) => env.DB.prepare("INSERT INTO settings (key, value) VALUES ('next_release', ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value").bind(JSON.stringify(v)).run();
-  await save({ launched: true, preview: ['aaaaaaaaaaaaaaaa'] });
-  assert.equal((await releaseState(env.DB)).live, 1, 'launched before numbering is release 1');
-  await save({ launched: false, preview: [] });
-  assert.equal((await releaseState(env.DB)).live, 0);
+  // A launch saved before the 2026-10-25 reset, when release 1 was something else, doesn't count.
+  await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('next_release', ?)").bind(JSON.stringify({ live: 1, preview: ['aaaaaaaaaaaaaaaa'] })).run();
+  assert.deepEqual(await releaseState(env.DB), { live: 0, preview: [] });
   // Release 2 under way: everyone has 1, a preview family has 2 as well.
   const st = { live: 1, preview: ['aaaaaaaaaaaaaaaa'] }, next = 2;
   assert.equal(releaseOf(st, 'bbbbbbbbbbbbbbbb') >= 1, true);
@@ -336,13 +340,13 @@ test('/ops: the draft page asks for its phrase', async () => {
   assert.match((await ops.form(`/ops/draft/${draft.id}/reapply`, { phrase: 'REBUILD' })).body, /Re-applied draft/);
 });
 
-test('an export from before the squash (0002 or 0003) restores into the squashed schema; an older one is refused', async () => {
+test('an export restores into the same schema; one from another schema is refused', async () => {
   const env = await makeEnv();
   await family(env, 'Carsons', 'jen@example.com');
   const backup = JSON.parse(JSON.stringify(await exportAll(env.DB)));
   await clearEverything(env.DB);
   await applyPending(env.DB);
-  await assert.rejects(importAll(env.DB, { ...backup, schema_version: '0017' }), /schema version 0017/);
-  await importAll(env.DB, { ...backup, schema_version: '0003' });
+  await assert.rejects(importAll(env.DB, { ...backup, schema_version: '0003' }), /schema version 0003/);
+  await importAll(env.DB, backup);
   assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM families').first()).n, 1);
 });

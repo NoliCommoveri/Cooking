@@ -870,8 +870,7 @@ const PARENT_PAGES = [
   { key: 'courses', group: 'setup', label: 'Courses' },
   { key: 'profiles', group: 'setup', label: 'Profiles' },
   { key: 'family', group: 'setup', label: 'Family settings' },
-  // The next release (§8.6): only a family that has it sees it.
-  { key: 'tastes', group: 'setup', label: 'Our tastes', release: 1 },
+  { key: 'tastes', group: 'setup', label: 'Our tastes' },
   { key: 'parents', group: 'setup', label: 'Logins & PIN' },
   { key: 'owner', group: 'owner', label: 'Families & beta word', owner: true },
   { key: 'fixes', group: 'owner', label: 'Fix requests', owner: true },
@@ -1109,7 +1108,7 @@ function passwordDialog(profile, done) {
   }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')] }));
 }
 
-// Our tastes (§6.21, the next release): the family's limits, then each
+// Our tastes (§6.21): the family's limits, then each
 // profile's star ratings for proteins, flavors, and key ingredients. Every tap
 // saves.
 const KIND_TITLES = [['protein', 'Proteins'], ['flavor', 'Flavors'], ['ingredient', 'Key ingredients']];
@@ -1369,8 +1368,7 @@ async function previewLesson(lessonId, variation) {
 // Versions of a lesson (§6.21): a lesson with variations, like Chimichurri
 // chicken for Chimichurri steak, is cooked in the version the family picks
 // here, or else the one that fits the people cooking it best (11d1). Every
-// version counts as the lesson. Next release only: the row's version comes
-// from the API, null without it.
+// version counts as the lesson. The row's version comes from the API.
 const chosenVersion = (lessonId) => me.family.variations?.[lessonId] || null;
 const peopleList = (xs) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}`);
 function versionPick(x, done) {
@@ -1669,7 +1667,7 @@ const parentQueue = parentOnly(async (flash) => {
   const note = el('p', { class: 'mut small note', hidden: true }, 'Most lessons use knife work. We suggest a Unit 1 lesson first.');
   const lessonSel = el('select', { name: 'lesson_id', required: true });
   const lessonText = (L) => `${L.label ? `${L.label} · ` : ''}${L.title}${L.foundation ? ' (foundation)' : ''}`;
-  // With the next release, once who's cooking is ticked, the menu starts
+  // Once who's cooking is ticked, the menu starts
   // with Best for them: up to 5 that fit them, not cooked or queued for them
   // (§6.21, 11d2). A lesson that doesn't fit says so; it can still be picked.
   let ranked = null;
@@ -1704,22 +1702,19 @@ const parentQueue = parentOnly(async (flash) => {
   };
   lessonSel.addEventListener('change', checkNote);
   who.addEventListener('change', checkNote);
-  if (me.family.release >= 1) {
-    who.addEventListener('change', async () => {
-      const ids = profiles.filter((p) => who.querySelector(`[name="p_${p.id}"]`).checked).map((p) => p.id);
-      ranked = ids.length ? (await api('GET', `/api/picks/lessons?profiles=${ids.join(',')}`).catch(() => null))?.lessons ?? null : null;
-      drawLessons();
-    });
-  }
+  who.addEventListener('change', async () => {
+    const ids = profiles.filter((p) => who.querySelector(`[name="p_${p.id}"]`).checked).map((p) => p.id);
+    ranked = ids.length ? (await api('GET', `/api/picks/lessons?profiles=${ids.join(',')}`).catch(() => null))?.lessons ?? null : null;
+    drawLessons();
+  });
   let closeAdd = () => {};
   const pickPreview = el('button', { type: 'button', class: 'hbtn link', hidden: true, onclick: () => previewLesson(lessonSel.value).catch((err) => showToast(err.message)) }, 'Preview as a learner');
   lessonSel.addEventListener('change', () => { pickPreview.hidden = !lessonSel.value; });
-  // With the next release, who's cooking comes first, so the lessons can be
-  // sorted for them.
+  // Who's cooking comes first, so the lessons can be sorted for them.
   const whoBox = el('fieldset', {}, el('legend', {}, "Who's cooking"), el('p', { class: 'mut small', style: 'margin:0' }, 'Pick more than one to cook it together. It counts for each of them.'), who);
   const lessonBox = [el('label', { class: 'f' }, 'Lesson', lessonSel), fitBox, pickPreview];
   const addForm = form([
-    ...(me.family.release >= 1 ? [whoBox, ...lessonBox] : [...lessonBox, whoBox]),
+    whoBox, ...lessonBox,
     note,
     field('Serves', 'servings', { type: 'number', min: 1, value: q.default_servings, inputmode: 'numeric' }),
     field('Planned date', 'planned_date', { type: 'date' }, 'Optional'),
@@ -1800,8 +1795,7 @@ const courseEditor = parentOnly(async (cid) => {
   // Profiles already on another active course can't be picked.
   const taken = new Set(data.courses.filter((c) => !c.archived_at && c.id !== existing?.id).flatMap((c) => c.profile_ids));
   let plan = (existing?.plan ?? data.default_plan).filter((x) => dish[x.id]).map((x) => ({ ...x }));
-  // How well each dish fits the people the course is for (§6.21, 11d1), next
-  // release only. A new course keeps the best dish in each pick-one group
+  // How well each dish fits the people the course is for (§6.21, 11d1). A new course keeps the best dish in each pick-one group
   // until the parent ticks one themselves; Suggest picks does it again.
   let fits = null, touched = false;
   const picked = () => profiles.filter((p) => document.querySelector(`[name="p_${p.id}"]`)?.checked).map((p) => p.id);
@@ -1811,22 +1805,21 @@ const courseEditor = parentOnly(async (cid) => {
     for (const x of plan) if (inGroup.has(x.id)) x.removed = !keep.has(x.id);
   };
   const loadFits = async (ids) => {
-    if (!(me.family.release >= 1)) return;
     if (levelOf()) return loadLevelFits(ids);
     fits = ids.length ? await api('GET', `/api/picks/course?profiles=${ids.join(',')}`).catch(() => null) : null;
     if (fits && !existing && !touched) usePicks();
     drawPlan();
   };
-  const suggestBtn = me.family.release >= 1 ? el('button', { type: 'button', class: 'hbtn', hidden: true, onclick: () => {
+  const suggestBtn = el('button', { type: 'button', class: 'hbtn', hidden: true, onclick: () => {
     if (!fits) return;
     usePicks();
     drawPlan();
     showToast('Picked the best dish in each group. Save the course to keep it.');
-  } }, 'Suggest picks') : null;
+  } }, 'Suggest picks');
   const listBox = el('div', { class: 'stack plan' });
   const levelBox = el('div', { class: 'stack plan' });
   const finishBox = el('p', { class: 'mut small', style: 'margin:0' });
-  // Which program? (§12.4): Cook Around the World, or a Level with the next
+  // Which program? (§12.4): Cook Around the World, or a Level with the Levels'
   // release. It's picked when the course is set up and stays.
   const levels = data.levels ?? [];
   let program = existing?.program ?? '';
@@ -2005,7 +1998,7 @@ const courseEditor = parentOnly(async (cid) => {
   const levelPace = el('p', { class: 'f mut small' }, 'One Level week a week, Sunday to Friday.');
   const planSet = el('fieldset', {}, el('legend', {}, 'The lessons, in order'),
     el('p', { class: 'mut small', style: 'margin:0' }, 'Untick a lesson to leave it out. Foundation skills have a few lessons to pick from: one is ticked, and you can tick more.'),
-    me.family.release >= 1 ? el('p', { class: 'mut small', style: 'margin:0' }, 'Each dish shows how well it fits the people the course is for, from Our tastes. Suggest picks ticks the best dish in each group.') : null,
+    el('p', { class: 'mut small', style: 'margin:0' }, 'Each dish shows how well it fits the people the course is for, from Our tastes. Suggest picks ticks the best dish in each group.'),
     suggestBtn ? el('div', { class: 'acts' }, suggestBtn) : null,
     notesBox, listBox);
   // Which parts each week has (§12.4): any can be turned off, here or later, and
@@ -2040,9 +2033,8 @@ const courseEditor = parentOnly(async (cid) => {
     ? el('fieldset', { onchange: (ev) => { if (ev.target.name === 'program') { program = ev.target.value; drawProgram(); } } }, el('legend', {}, 'Which program?'),
       el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'program', value: '', checked: true }),
         el('span', {}, 'Cook Around the World', el('em', {}, ' A dish at a time, each with its skill, at your pace'))),
-      // By Level; while today's Level 3 and the re-planned one both show (a preview, §12.0), the new one says so.
-      [...levels].sort((x, y) => x.name.localeCompare(y.name) || x.release - y.release).map((V) => el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'program', value: V.id }),
-        el('span', {}, levels.some((x) => x !== V && x.name === V.name) && V.release > 1 ? `${V.name} (new plan)` : V.name, el('em', {}, ` ${V.weeks.length} weeks, about ${V.hours} hours: a reading, a drill, a recipe, and a Beyond the Recipe page each week`)))))
+      [...levels].sort((x, y) => x.name.localeCompare(y.name)).map((V) => el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'program', value: V.id }),
+        el('span', {}, V.name, el('em', {}, ` ${V.weeks.length} weeks, about ${V.hours} hours: a reading, a drill, a recipe, and a Beyond the Recipe page each week`)))))
     : existing?.program ? el('p', { class: 'mut small', style: 'margin:0' }, `Program: ${levelOf()?.name ?? 'a Level'}`) : null;
   drawProgram();
 
@@ -2557,7 +2549,7 @@ const recipeGaps = parentOnly(async () => {
   const list = (title, rows, line) => [el('h3', {}, title), rows.length ? el('ul', { class: 'small' }, rows.map((r) => el('li', {}, line(r)))) : el('p', { class: 'mut small' }, 'Nothing yet.')];
   parentScreen('gaps',
     el('h2', {}, 'Recipe gaps'),
-    el('p', { class: 'mut' }, `From what families with the next release have rated: ${fam(g.families)} so far. Counts only; no family is named. Each pick-one group is checked for the people each family cooks for together.`),
+    el('p', { class: 'mut' }, `From what families have rated: ${fam(g.families)} so far. Counts only; no family is named. Each pick-one group is checked for the people each family cooks for together.`),
     el('h2', {}, g.gaps.length ? `Gaps (${g.gaps.length} of ${g.slots} groups)` : 'Gaps'),
     g.gaps.length ? g.gaps.map(gapCard) : el('p', { class: 'card mut' }, g.families ? 'Every group has something that fits every family well.' : 'No family has rated anything yet. Coverage below shows the thin spots in the meantime.'),
     el('h2', {}, 'Coverage'),
@@ -3075,7 +3067,7 @@ async function route() {
       if (sub === 'grades') return await gradesPage();
       if (sub === 'transcript') return await transcript(extra);
       if (sub === 'family') return await familySettings();
-      if (sub === 'tastes' && me.family.release >= 1) return await ourTastes(extra);
+      if (sub === 'tastes') return await ourTastes(extra);
       if (sub === 'parents') return await parentLogins();
       if (sub === 'owner') return await owner();
       if (sub === 'fixes') return await ownerFixes();
