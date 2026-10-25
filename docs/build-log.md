@@ -5002,3 +5002,9 @@ Planning only; nothing in the app changed.
   home-cooking sources inside each cuisine (plan §12.0), with examples in
   the re-plan doc's new Cuisines section. Proposed: every week has a
   non-US option, and each unit's defaults span at least three cuisines.
+- Owner, 2026-10-25: two main dishes every recipe week at every Level,
+  one Familiar (dishes US families know, not only American) and one
+  Explore, with the family picking the default and a one-tap swap on the
+  kitchen's week card (plan §12.0; the re-plan doc's new Two dishes a week
+  section, with the proposed setup default, who can swap, the shopping
+  check, and best fit's smaller role).
