@@ -67,11 +67,16 @@ export const family = async (env, fid) => {
   return fam && { ...fam, release: await familyRelease(env.DB, fid) };
 };
 export const weeksOn = (fam) => fam.mode === 'homeschool' || Boolean(fam.plan_weeks);
+// A Level's own recipe (§12.4) shows with its Level's release: 1, or 2 for
+// the re-planned Levels (§12.0).
+export const levelLessonOn = (L, release) => !L.level || release >= (L.levelRelease ?? 1);
+// The Levels a family can set a course up on: each one's release is on for it.
+export const levelsOn = (release) => Object.values(LEVELS).filter((V) => release >= (V.release ?? 1));
 // The lessons a family can cook: its diet settings allow them, and a Level's
-// own recipes (§12.4) only with the next release.
+// own recipes (§12.4) only with their release.
 const visible = (fam) => {
   const filters = JSON.parse(fam.diet_filters);
-  return new Set(LIBRARY.lessons.filter((L) => (!L.level || fam.release >= 1) && dietView(L, LIBRARY.ingredients, filters).visible).map((L) => L.id));
+  return new Set(LIBRARY.lessons.filter((L) => levelLessonOn(L, fam.release) && dietView(L, LIBRARY.ingredients, filters).visible).map((L) => L.id));
 };
 const nearestSize = (L, n) => {
   const options = servingOptions(L);
@@ -113,7 +118,7 @@ const queueLesson = async (env, lid, fam) => {
     return found.lesson;
   }
   const L = lessonById[lid] ?? fail(400, 'invalid', 'No such lesson.');
-  if (L.level && !(fam.release >= 1)) fail(400, 'invalid', 'No such lesson.');
+  if (!levelLessonOn(L, fam.release)) fail(400, 'invalid', 'No such lesson.');
   if (!visible(fam).has(L.id)) fail(400, 'invalid', `${L.title} is hidden by your family's diet settings.`);
   return L;
 };
@@ -263,8 +268,9 @@ async function withPrograms(env, fid, rows) {
   } catch { /* the draft isn't applied yet */ }
   // A Level course's parts kept on (a parent can turn any off).
   const out = rows.map((c) => ({ ...c, program: progs[c.id]?.program ?? null, ...(progs[c.id] ? { parts: coursePartsOf(progs[c.id].parts) } : {}) }));
-  if (!out.some((c) => c.program) || (await releaseOn(env.DB, fid, 1))) return out;
-  return out.filter((c) => !c.program);
+  if (!out.some((c) => c.program)) return out;
+  const release = await familyRelease(env.DB, fid);
+  return out.filter((c) => !c.program || release >= (LEVELS[c.program].release ?? 1));
 }
 
 // A new course with no plan sent (Chef Ruth's): the best dish of each
@@ -1047,13 +1053,13 @@ export function register(on) {
       per_week_max: PER_WEEK_MAX,
       // The programs a course can be, past Cook Around the World (§12.4):
       // the Levels, with the next release. Each week with its recipe.
-      levels: (await releaseOn(env.DB, s.family_id, 1)) ? Object.values(LEVELS).map((V) => ({
+      levels: levelsOn(await familyRelease(env.DB, s.family_id)).map((V) => ({
         id: V.id, name: V.name, hours: V.hours, units: V.units,
         weeks: V.weeks.map((w) => ({ ...w, title: w.recipe ? lessonById[w.recipe]?.title ?? V.titles[w.recipe] : null })),
         // Each recipe's planned minutes, for the hours the parent's setup plans for (§12.4).
         minutes: Object.fromEntries([...new Set([...Object.keys(V.titles), ...LIBRARY.course.map((d) => d.id), ...V.cards.map((c) => c.id)])]
           .map((rid) => [rid, plannedRecipeMinutes(V, rid)])),
-      })) : [],
+      })),
     };
   });
 
@@ -1064,7 +1070,7 @@ export function register(on) {
     let program = course ? course.program : null;
     if (!course && body.program) {
       program = String(body.program);
-      if (!LEVELS[program] || !(await releaseOn(env.DB, s.family_id, 1))) fail(400, 'invalid', 'No such program.');
+      if (!levelsOn(await familyRelease(env.DB, s.family_id)).some((V) => V.id === program)) fail(400, 'invalid', 'No such program.');
     }
     // A Level course runs one Level week a calendar week (§12.4).
     const per = program ? 1 : Number(body.per_week);

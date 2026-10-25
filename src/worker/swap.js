@@ -22,7 +22,7 @@ import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
 import { servingOptions } from '../content/scale.js';
 import { unleavened } from '../content/leaven.js';
-import { family, queueProfiles, today, weekFor, replaceStatements } from './plan.js';
+import { family, queueProfiles, today, weekFor, replaceStatements, levelLessonOn } from './plan.js';
 import { addDays } from './schedule.js';
 import { REGISTRY, stored, rowLesson, recipeVisible, lessonFor } from './recipes.js';
 import { recipeLesson } from '../content/recipe.js';
@@ -52,7 +52,7 @@ export async function swapOptions(env, fam, week, pids = []) {
   const filters = JSON.parse(fam.diet_filters);
   const spring = springWeek(week);
   // A Level's own recipes (§12.4) only with the next release.
-  const libOk = (L) => (!L.level || fam.release >= 1) && dietView(L, LIBRARY.ingredients, filters).visible;
+  const libOk = (L) => levelLessonOn(L, fam.release) && dietView(L, LIBRARY.ingredients, filters).visible;
   const out = [];
   const lesson = (L, group) => ({ id: L.id, title: L.title, label: LABELS[L.id] ?? null, group, image: L.image, unleavened: Boolean(L.unleavened), feast: Boolean(L.feast) });
   for (const L of LIBRARY.lessons) if (seasonal.has(L.id) && libOk(L) && (!spring || L.unleavened)) out.push(lesson(L, 'Appointed Times lessons'));

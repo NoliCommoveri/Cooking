@@ -1,0 +1,13 @@
+{
+  "units": [
+    { "number": 1, "name": "Kitchen basics", "weeks": 4 },
+    { "number": 2, "name": "No-cook", "weeks": 2 },
+    { "number": 3, "name": "Clean meat, poultry, and fish", "weeks": 4 },
+    { "number": 4, "name": "Baking", "weeks": 5 },
+    { "number": 5, "name": "Boiling, simmering, and steaming", "weeks": 5 },
+    { "number": 6, "name": "Stovetop", "weeks": 6 },
+    { "number": 7, "name": "Oven and grill", "weeks": 4 },
+    { "number": 8, "name": "Low and slow", "weeks": 3 },
+    { "number": 9, "name": "Sabbath capstone", "weeks": 3 }
+  ]
+}

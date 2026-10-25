@@ -6,7 +6,7 @@ import { makeEnv, client, family, opsClient } from './helpers/worker.js';
 import { migrationStatus, applyPending, schemaVersion, reapplyDraft, finalizeDraft, checkDraft } from '../src/worker/migrate.js';
 import { MIGRATIONS } from '../src/worker/migrations/index.js';
 import { exportAll, importAll, clearEverything, exportFamily, removeFamily, restoreFamily, tableNames, importDraftTables, Refused } from '../src/worker/backup.js';
-import { releaseOn, releaseState, releaseOf, LATEST } from '../src/worker/release.js';
+import { releaseOn, releaseState, releaseOf, LATEST, RELEASES } from '../src/worker/release.js';
 import { makeDb } from './helpers/d1.js';
 
 test('migrations apply in order, once, and report their state', async () => {
@@ -293,6 +293,20 @@ test('/ops: numbered releases, per family and for everyone', async () => {
   assert.equal(await releaseOn(env.DB, jen, 1), true, 'the preview stays');
   await ops.form(`/ops/preview/${jen}`, { on: '0' });
   assert.equal(await releaseOn(env.DB, jen, 1), false);
+});
+
+test('/ops: a release still being built previews but can\'t be launched', async () => {
+  const building = RELEASES.find((r) => r.building);
+  if (!building) return;
+  const env = await makeEnv();
+  await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('next_release', ?)").bind(JSON.stringify({ live: building.n - 1, preview: [] })).run();
+  const ops = await opsClient(env);
+  const page = (await ops.get('/ops')).body;
+  assert.match(page, /Being built: preview only/);
+  assert.doesNotMatch(page, new RegExp(`Launch release ${building.n} for everyone`));
+  assert.match((await ops.form('/ops/release', { do: 'launch', n: String(building.n) })).body, /still being built/);
+  assert.equal((await releaseState(env.DB)).live, building.n - 1, 'nothing launched');
+  assert.equal(releaseOf({ live: building.n - 1, preview: ['aaaaaaaaaaaaaaaa'] }, 'aaaaaaaaaaaaaaaa'), LATEST, 'a preview family sees it');
 });
 
 test('releases: a later release previews while an earlier one is live, and the old switch reads as release 1', async () => {

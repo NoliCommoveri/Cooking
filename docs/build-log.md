@@ -4946,3 +4946,265 @@ Fish", and goes live for every family on merge.
   pointed at Unit 6 for that only. The demo still shows Unit 1.
 - Tests: 356. A Level course now schedules 25 written recipes, with 11
   waiting; best fit's "written option first" check moved to week 25.
+
+## 202. 2026-10-25 — Level 4 planned
+
+Planning only; nothing in the app changed. Owner, 2026-10-25: plan Level 4
+now, ahead of Level 2.
+
+- **Recipe review** (`docs/level-recipe-review.md`, Level 4 Chef): every
+  week of the owner's outline (plan §12.6) read against its skill, the climb
+  across the year, and what Level 3 teaches first. The main finding: Chicken
+  pot pie (week 9) needs a velouté that Unit 4 teaches in week 14, so the
+  review proposes swapping Units 3 and 4 (sauces in weeks 9–12, pastry in
+  13–16, still clear of spring). Smaller fixes: week 2's scaling done by
+  hand and checked against the app's amounts; chiffonade moved to week 1;
+  the chuck-cubing drill moved from week 7 to week 5; week 6's knowledge on
+  fat and trimming, sourcing left to week 31; a grill-pan and oven backup
+  for grilling; a USDA note on hollandaise; four added options. Its
+  decisions are a checklist for the owner.
+- **Build plan** (plan §12.8, phase 14 in the phase table): Level 4's
+  content file and checks, Which program? with the owner's warning,
+  adult-style banners for a cook where every profile is an adult or on
+  Level 4, **Write my recipe** for the weeks the student plans (24, 28,
+  32–36) through the family recipe editor, the capstone portfolio, the
+  syllabus and demo, and the content written a unit at a time.
+- Questions for the owner: an "adult at home" line for weeks 18–20 (the
+  owner's plan asks for it, the adult-style banners don't say it); whether
+  week 31's sourcing page mentions the sciatic nerve (Genesis 32:32);
+  typed or uploaded portfolio work; and the warning's wording, which is the
+  owner's to write.
+
+## 203. 2026-10-25 — The Levels re-plan: shared units by cooking method
+
+Planning only; nothing in the app changed.
+
+- Owner, 2026-10-25, after reviewing all four Level outlines: each Level
+  must stand alone with a real skill set across most types of cooking, and
+  the Levels must still look like a progression. The outlines didn't do
+  both: each Level owned its own kinds of cooking (fish, poultry, and soup
+  only in Level 3; pastry, frying, and grilling only in Level 4; no poultry,
+  fish, or soup in Level 2), so one Level alone left big gaps.
+- Decided: a spiral. The same units in every Level, organized by cooking
+  method, with one early unit on choosing and handling meat, poultry, and
+  fish; unit lengths can differ; recipes picked by each Level's difficulty
+  scale, not by cuisine; the presentation by Level approved; and Level 3
+  re-planned rather than patched.
+- New plan §12.0 records it. §12.1, §12.3, §12.5, §12.6, §12.7's week
+  options, and §12.8's week-by-week parts are marked replaced until each
+  Level's new weeks go in. The Level 4 review (entry 202) is marked
+  replaced.
+- The working doc, [The Levels re-plan](https://claude.ai/artifact/344145zznjKnNzLjXMTZgJ),
+  holds the draft nine units, the difficulty scale for each Level, the skill
+  ladder, what happens to Level 3's written work, and the open decisions.
+- Owner, 2026-10-25: picking by difficulty must not mean picking
+  American. Other cultures' quick, everyday home dishes are researched from
+  home-cooking sources inside each cuisine (plan §12.0), with examples in
+  the re-plan doc's new Cuisines section. Proposed: every week has a
+  non-US option, and each unit's defaults span at least three cuisines.
+- Owner, 2026-10-25: two main dishes every recipe week at every Level,
+  one Familiar (dishes US families know, not only American) and one
+  Explore, with the family picking the default and a one-tap swap on the
+  kitchen's week card (plan §12.0; the re-plan doc's new Two dishes a week
+  section, with the proposed setup default, who can swap, the shopping
+  check, and best fit's smaller role).
+- Owner, 2026-10-25: the learner can swap the week's dish from the
+  kitchen, and the parent sees it and can Undo.
+
+## 204. 2026-10-25 — Release 2: the Levels re-plan, gated
+
+- Owner, 2026-10-25: "Gate our redesign behind a release switch." The
+  whole re-plan (plan §12.0) is **release 2**.
+- Correction: entries 202 and 203 and the first draft of the re-plan doc
+  said today's Level 3 was behind the switch and seen only by preview
+  families. It isn't: it's release 1, launched for everyone (entries 186,
+  196). It stays live and unchanged until release 2 launches; courses
+  already on it keep it to the end, and the new Levels get their own ids
+  (`sp-1` to `sp-4`).
+- **Before:** `/ops` offered Launch for the next release as soon as it was
+  listed in `RELEASES`.
+- **Now:** a release can be marked `building` (`src/worker/release.js`).
+  It previews for preview families like any release, but `/ops` shows it
+  as "Being built: preview only", offers no Launch button, and refuses a
+  launch sent anyway ("still being built … Nothing was changed"). Release
+  2 is listed and marked building. Nothing is gated on it yet, so no family
+  sees any change.
+- Owner, 2026-10-25: "take all your suggestions for the rest." Every open
+  item in the re-plan doc is confirmed: the nine units, their order and
+  lengths, the same at every Level; frying in Stovetop and grilling in Oven
+  and grill; Level 4's cuisines named per week; the difficulty scales and
+  the linter warning; the skill ladder as drafted; Level 4's "Have an adult
+  at home" for deep frying and grilling; all Level writing held until the
+  new weeks are approved; a non-US option every week and three cuisines per
+  unit; the setup default preset from "how adventurous"; best fit only
+  filling in for diet or tools. Level 4's portfolio is typed in the app.
+  Plan §12.0 and §8.6 are updated.
+- Screenshots of the Releases section and the refusal were sent in the
+  session.
+- Tests: 357 (a release still being built previews but can't be launched).
+
+## 205. 2026-10-25 — Level 3's new weeks proposed
+
+Planning only; nothing in the app changed.
+
+- Owner, 2026-10-25: plan Level 3's weeks on the shared units. The
+  proposal is in the doc [Level 3 Cook: the new 36 weeks](https://claude.ai/artifact/HAXqrVAgaEh6BGphYoq8uc),
+  waiting on the owner unit by unit (plan §12.0).
+- Each week takes a Level 3 row of the skill ladder, with a Familiar and an
+  Explore dish at Level 3's difficulty, and its drill, knowledge, and
+  Beyond the Recipe (23 make-ahead, 13 Bible and food: 8 written, 5 to
+  write). No raw meat before Unit 3; each unit's Familiar and Explore
+  dishes each span at least three cuisines.
+- The `familiar` tag decided each dish's slot, so ratatouille, red beans
+  and rice, red lentil soup, and chicken piccata (tagged new-ish) aren't
+  Familiar picks; they and the other unpicked Level 3 recipes stay live in
+  today's Level 3 and as fallbacks.
+- 68 dishes: 14 written, 2 variations of written lessons, 16 planned in
+  Cook Around the World, 1 Level card, 35 new. About 45 of today's 72 part
+  pages carry over.
+- The Explore dishes were checked against home-cooking search results
+  (sources in the doc) for being home dishes and for their usual hidden
+  sources, each written around (lard in tortillas, shells, conchas, and
+  empanada dough; pork in hambagu, sausage, and some noodle and omelet
+  versions; shrimp in jollof bouillon and moqueca; oyster sauce; bouillon in
+  suya and yassa). Weeks 29–33, which usually fall on Unleavened Bread, are
+  unleavened as planned.
+- Owner, 2026-10-25, on the proposal: "very little fish, no lamb", and a
+  note on week 21. Changes in the doc: the soup make-ahead page and the
+  Hospitality page swapped weeks (now 19 and 20); lamb kofta (week 7) and
+  a lamb and apricot tagine (week 33); fish added in weeks 26 (rava fish
+  fry), 29 (sheet-pan salmon, psari plaki), and 30 (Baja fish tacos), with
+  canned tuna as a week 6 choice; hambagu, milanesa, kuku sabzi, chicken
+  yassa, and meatloaf moved to fallbacks.
+- Owner, 2026-10-25: No-cook drops to two weeks so salads don't run three
+  weeks in a row, and Stovetop gains a fish week: week 24 is pan-seared
+  trout or salmon skin-side down (Familiar) and steamed fish with ginger
+  and scallion (Explore), both already written. The shared units move to
+  No-cook 5–6, Meat 7–10, Baking 11–15, Boiling 16–20, Stovetop 21–26, for
+  every Level (plan §12.0). The doc also has a count of main proteins by
+  unit, Familiar and Explore.
+- Owner, 2026-10-25: steaming is Unit 5's ("it's unit 5 we reference
+  steaming"). Week 18 is now a steaming week (salmon and vegetables steamed
+  in a basket; Cantonese steamed fish, written), and week 17 takes beans and
+  lentils together (pinto bean burritos; mujaddara), so red-red and the
+  lentil soup move to fallbacks. Week 24 is both dishes seared skin-side
+  down (pan-seared trout or salmon, written; Korean pan-fried mackerel,
+  godeungeo-gui). Unit lengths are unchanged.
+- Owner, 2026-10-25: lamb stays Explore-only at Level 3 ("familiar may not
+  like lamb, it's kind of an acquired taste"). Level 4 is to bring in new
+  proteins such as quail and duck, noted in plan §12.0 for when its weeks
+  are planned.
+- Complexity review (owner, 2026-10-25), in the Level 3 doc's new
+  Complexity across the year section: each dish rated 1–5 for parts to
+  time, decisions, and cook time, bread exempt. The year climbs (units
+  2.6, 1.75, 2.75, bread, about 3.1–3.2 for Units 5–7, 3.7, capstone),
+  with four dips inside units, each fixed by reordering weeks (proposed:
+  fish before poultry in Unit 3, steaming first in Unit 5, the skin-side
+  sear before the stir-fry in Unit 6, the whole roast chicken as Unit 7's
+  mastery) and a timed side for week 26's rava fish fry.
+- Owner, 2026-10-25: "apply all five." In the Level 3 doc: fish (week 8)
+  before poultry (week 9); steaming first in Unit 5 (16), then grains
+  (17), beans and lentils (18); the skin-side sear (23) before the
+  stir-fry (24); Unit 7 runs sheet-pan (27), fish timed with a side (28),
+  the broiler (29), and whole roast chicken or piri-piri as the mastery
+  (30); week 26's rava fish fry comes with lemon rice and a cucumber salad.
+  Bible and make-ahead pages moved with their dishes; weeks 29–33 stay
+  unleavened.
+
+## 206. 2026-10-25 — Level 2's new weeks proposed
+
+Planning only; nothing in the app changed.
+
+- Owner, 2026-10-25: plan Level 2 with the same rules as Level 3, using
+  rotisserie chicken and more canned and frozen ingredients where they make
+  a dish enjoyable without being overwhelming. The proposal is in the doc
+  [Level 2 Apprentice: the new 36 weeks](https://claude.ai/artifact/7b8KuJsihfkFkFZ1ZQKD9y),
+  waiting on the owner unit by unit (plan §12.0).
+- Same nine units and weeks as Level 3, at Level 2's limits (10
+  ingredients, 12 steps, under 45 minutes hands-on, a paring knife on soft
+  foods). A Familiar and an Explore dish each recipe week; mastery weeks
+  4, 6, 10, 15, 20, 26, 30, 33; the capstone is one Sabbath dish from a
+  prep list. 13 kid-level Bible and food pages, 23 make-ahead.
+- 68 dishes: 11 written Cook Around the World lessons (each needs a
+  Level 2 version), 2 variations, 8 planned, 47 new. All 108 part pages are
+  new.
+- Unit 7 starts with the broiler; Unit 8 simmers rather than braises
+  (braising is Level 3's). Week 4's Explore mastery (ful medames) gains
+  baked pita chips and a salad to match the Familiar dish.
+- Hidden sources written around: lard in refried beans, taco shells, flour
+  tortillas, and Welsh cakes; pork in "chicken" potstickers, sausage,
+  giniling, and the hot dogs in Filipino baked macaroni; salted shrimp in
+  gyeran-jjim; seafood in pajeon; oyster sauce; bouillon cubes; shrimp
+  paste in tom kha pastes. Weeks 29–33 are unleavened as planned.
+- Flagged for the owner: fish is thin (4 dishes, Units 1–3), with two
+  suggested swaps.
+- Owner, 2026-10-25: week 27's Explore is broiled miso-glazed salmon, in
+  place of halloumi skewers, for 5 fish dishes in Level 2.
+- Owner, 2026-10-25: week 19's Familiar is black bean tortilla soup, with
+  rotisserie chicken as a choice, so a family on Familiar defaults cooks a
+  bean dish too.
+
+## 207. 2026-10-25 — Level 4's new weeks proposed
+
+Planning only; nothing in the app changed.
+
+- Owner, 2026-10-25: plan Level 4. The proposal is in the doc
+  [Level 4 Chef: the new 36 weeks](https://claude.ai/artifact/JMPw926naDNJf7d2oQPq6X),
+  waiting on the owner unit by unit (plan §12.0).
+- Same nine units and weeks, at Level 4's difficulty (no ingredient or
+  step limit, three or more parts timed together, up to two days, precise
+  cuts, breaking down birds, deep frying and grilling). Each week names a
+  cuisine, taught on its Knowledge page.
+- New proteins: duck (weeks 8 and 32), quail (10), and goat (31); lamb in
+  29 and 30; all Explore. Adult at home in weeks 26 and 28. Mastery weeks
+  offer the student's own dish through Write my recipe; weeks 34–36 are the
+  student's menu, budget, and meal for household and guests.
+- 66 dishes in weeks 1–33: 6 written, 2 approved variations, 10 planned,
+  5 carried from §12.7, 43 new. All 108 part pages are new. The old Level 4
+  outline's other dishes are replaced.
+- Hidden sources written around: pork cured meats on the antipasto, lard in
+  store pastry and crusts, suet in patties and dafina's casing, pork in
+  sausage gravy, Canadian bacon, feijoada, mapo tofu, Swedish meatballs,
+  and the cassoulet-style duck; shrimp paste in curry paste; beef, goat,
+  and lamb fat skimmed and thrown out (birria recipes often fry tortillas
+  in it). No wine, following the library's broth rule. Weeks 29–33 are
+  unleavened as planned.
+- Owner, 2026-10-25: "I miss the yeast rolls and sandwich bread." Level 3
+  week 12's Familiar is the written Sandwich loaf and week 13's the written
+  Dinner rolls (with their written cold-proof page), in place of homemade
+  pizza and cinnamon rolls. A separate breads course is noted in plan §12.0
+  as an idea to decide.
+
+## 208. 2026-10-25 — Re-plan build, 14a: the data model
+
+Phase 14 (plan §12.9), behind release 2. Owner, 2026-10-25: "start
+building what we have and do level 1 later." The Level 2, 3, and 4 docs are
+taken as approved.
+
+- **Before:** every Level unit had exactly 4 weeks; a week held one recipe;
+  a week could cook only its own Level's cards; every Level, its recipes,
+  and its courses were gated on release 1.
+- **Now:**
+  - `content/level-units.json`: the nine shared units and their lengths
+    (4, 2, 4, 5, 5, 6, 4, 3, 3).
+  - A Level file can set `release`. A release 2 Level must use the shared
+    units (names and lengths) and give each recipe week a `familiar` and an
+    `explore` dish; any week can name its `cuisine`
+    (`content/schema/level.schema.json`).
+  - The linter checks the pair (both known, different, each in one week
+    only), warns when a dish's `familiar` tag doesn't match its slot, and
+    lets a week cook another Level's card or recipe; a card lives in one
+    Level only (`src/content/lint.js`).
+  - The library carries each Level's release, its weeks' pairs and
+    cuisines, and the other Levels' cards its weeks use
+    (`tools/build-library.js`). The public `levels.json` (demo and
+    syllabus) leaves out release 2 Levels until launch.
+  - The Worker shows a Level in Which program?, its own recipes and Side
+    quests unit, its best-fit page, and any course on it only to a family
+    whose release has reached the Level's (`levelsOn`, `levelLessonOn` in
+    `src/worker/plan.js`; `api.js`, `picks.js`, `swap.js`).
+- No family sees a change: no release 2 Level exists yet (14b adds them).
+- Phase 14 in the phase table replaces the old Level 4 row; §12.8's
+  features are slice 14f.
+- Tests: 360 (the shared units and the pair, a card in one Level and cooked
+  by another, and a release 2 Level hidden until the family has release 2).

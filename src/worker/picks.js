@@ -9,7 +9,7 @@ import { fail } from './lib/http.js';
 import { requireParent } from './auth.js';
 import { CONTENT } from './content-data.js';
 import { LIBRARY } from './library-data.js';
-import { releaseOn } from './release.js';
+import { releaseOn, familyRelease } from './release.js';
 import { ratingsOf, limitsOf } from './tastes.js';
 import { dietView } from '../content/diet.js';
 import { courseEntries } from '../content/course.js';
@@ -290,7 +290,9 @@ export function register(on) {
     const fam = await env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(s.family_id).first();
     const tc = await tasteContext(env, fam) ?? fail(404, 'not_available', 'Not available yet.');
     const q = new URL(req.url).searchParams;
-    const V = LIBRARY.levels?.[q.get('level')] ?? fail(404, 'not_found', 'No such Level.');
+    // A Level shows with its release: 1, or 2 for the re-planned Levels (§12.0).
+    const V = LIBRARY.levels?.[q.get('level')];
+    if (!V || (await familyRelease(env.DB, s.family_id)) < (V.release ?? 1)) fail(404, 'not_found', 'No such Level.');
     const pids = (q.get('profiles') ?? '').split(',').filter((p) => tc.profiles.some((x) => x.id === p));
     return levelPlan(tc, V, pids, await cookedBy(env, s.family_id, pids));
   });

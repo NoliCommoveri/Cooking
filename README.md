@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [201. 2026-10-25 — Level 3 Unit 6: fish](docs/build-log.md#201-2026-10-25--level-3-unit-6-fish)
+**Latest build log entry:** [208. 2026-10-25 — Re-plan build, 14a: the data model](docs/build-log.md#208-2026-10-25--re-plan-build-14a-the-data-model)
 
 ## Current features
 
@@ -52,7 +52,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Kid logins** (`src/worker/kidlogin.js`): a parent gives a kid profile a login (first name and last initial, one of 30 cooking pictures, a password). That kid's device opens only their kitchen; the server refuses everything else. A kid login lasts 14 days, renewed each time the app is opened.
 - **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN. Each list's add button is at its top right, and adding opens a dialog (a course or recipe opens its own page); long sections fold shut.
 - **Owner screens**: the beta word, the family list, setting a parent's password, fix requests, recipe reviews, and reported recipes.
-- **Ops page** (`/ops`): migrations (one schema file today; Re-apply draft, Restore draft tables, and Finalize when a build has a draft migration), Releases (numbered releases, each launched in order for everyone, with a preview per family and Undo launch of the latest; `src/worker/release.js`), the owner flag, whether GitHub is connected for the manager section, backup download and restore, clear everything, remove or restore one family, and Bring back a family its parents deleted, within its 30 days.
+- **Ops page** (`/ops`): migrations (one schema file today; Re-apply draft, Restore draft tables, and Finalize when a build has a draft migration), Releases (numbered releases, each launched in order for everyone, with a preview per family and Undo launch of the latest; a release still being built can be previewed but not launched; `src/worker/release.js`). Release 2, the Levels re-plan (plan §12.0), is being built, the owner flag, whether GitHub is connected for the manager section, backup download and restore, clear everything, remove or restore one family, and Bring back a family its parents deleted, within its 30 days.
 - **Manager section** (`/manage`, `src/worker/manage.js`, `public/manage/`): the owner's own sign-in. Add, rename, reorder, and remove units; add lessons (blank or a copy), move, hide, and unhide them; edit every part of a lesson in a form built from the lesson schema; edit ingredients, tools, skills, kitchen words, cuisines, tastes, and the food rules; tag every dish on the Tags page; upload dish pictures. Checked as you type by the content linter. **Preview as a learner** runs a lesson in either theme, unsaved changes included, with no checklist to tick and nothing saved.
 - **Saving content** (`src/worker/github.js`, `.github/workflows/content-publish.yml`): a save is checked again and committed to the `content-edits` branch; GitHub builds, lints, and tests it and puts it on `main`, which deploys. **Saves** shows each one's status, with Undo; a lesson's History loads any earlier version.
 - **Hidden lessons** (`content/hidden.json`): out of the library, the course numbers, and every family's course plan until unhidden.
@@ -61,6 +61,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
 - **Lesson content** (`content/`): 37 lessons (all 12 of Unit 1, all 20 of Unit 2, 3 more samples, and the 2 Appointed Times lessons), and the ingredient, tool, skill (60), and cuisine lists, as JSON.
 - **Level 3 content** (release 1, `content/levels/level-3.json`): Level 3 Cook's 9 units and 36 weeks, each with its skill, recipe, mastery check, and drill, knowledge, and Beyond the Recipe page, plus 21 Level-only recipes and Units 1 to 6's written recipes and part pages; edited on the manager's Level 3 page.
+- **Re-planned Levels** (release 2, being built, plan §12.9): the nine shared units in `content/level-units.json`, a Familiar and an Explore dish each week, and each Level shown only with its release.
 - **Level courses** (release 1, `src/worker/plan.js`): setting up a course asks Which program?, Cook Around the World or Level 3 Cook; a Level course runs one week a week, its recipes in week order, and the course card shows "Week 5 of 36".
 - **Level 3 recipes in Side quests** (release 1): the Level's own written recipes (labels L1, L2…) in their own unit in the kitchen, cookable and queueable like any lesson.
 - **Optional Level parts** (release 1): a Level week is Knowledge, Drill, Recipe, Beyond the Recipe; any but the recipe can be turned off at setup or later, with the planned hours shown; any part can be skipped.
