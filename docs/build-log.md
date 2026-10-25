@@ -5335,3 +5335,15 @@ Planning only; nothing in the app changed. Owner, 2026-10-25: "A bit
 adventurous should be explore." Plan §12.9's 14c preset is now Explore for
 "Bring it on" or "A bit adventurous", and Familiar for "Stick to what we
 know" or not set.
+
+## 214. 2026-10-25 — 14c: two more of the owner's calls
+
+Planning only; nothing in the app changed. Owner, 2026-10-25, "yes" to
+both:
+
+- Preview families are offered the new Levels only at Which program?, as
+  after launch; today's Level 3 isn't offered to them for a new course.
+- A week whose chosen dish isn't written yet cooks its other dish when that
+  one is written, instead of being skipped.
+
+Recorded in plan §12.9 under 14c.
