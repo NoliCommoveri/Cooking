@@ -223,6 +223,9 @@
         "meal": {
           "const": false
         },
+        "variationOf": {
+          "$ref": "#/$defs/id"
+        },
         "tags": {
           "type": "object"
         }

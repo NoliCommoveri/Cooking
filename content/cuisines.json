@@ -46,6 +46,18 @@
     { "id": "turkish", "name": "Turkish", "region": "mena" },
     { "id": "israeli", "name": "Israeli", "region": "mena" },
     { "id": "cuban", "name": "Cuban", "region": "latam" },
-    { "id": "persian", "name": "Persian", "region": "mena" }
+    { "id": "persian", "name": "Persian", "region": "mena" },
+    { "id": "spanish", "name": "Spanish", "region": "europe" },
+    { "id": "welsh", "name": "Welsh", "region": "europe" },
+    { "id": "irish", "name": "Irish", "region": "europe" },
+    { "id": "finnish", "name": "Finnish", "region": "europe" },
+    { "id": "hungarian", "name": "Hungarian", "region": "europe" },
+    { "id": "georgian", "name": "Georgian", "region": "europe" },
+    { "id": "mozambican", "name": "Mozambican", "region": "africa" },
+    { "id": "singaporean", "name": "Singaporean", "region": "easia" },
+    { "id": "thai", "name": "Thai", "region": "easia" },
+    { "id": "indonesian", "name": "Indonesian", "region": "easia" },
+    { "id": "venezuelan", "name": "Venezuelan", "region": "latam" },
+    { "id": "trinidadian", "name": "Trinidadian", "region": "latam" }
   ]
 }

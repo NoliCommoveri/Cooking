@@ -8958,7 +8958,19 @@ export const LIBRARY = {
   "turkish": "Turkish",
   "israeli": "Israeli",
   "cuban": "Cuban",
-  "persian": "Persian"
+  "persian": "Persian",
+  "spanish": "Spanish",
+  "welsh": "Welsh",
+  "irish": "Irish",
+  "finnish": "Finnish",
+  "hungarian": "Hungarian",
+  "georgian": "Georgian",
+  "mozambican": "Mozambican",
+  "singaporean": "Singaporean",
+  "thai": "Thai",
+  "indonesian": "Indonesian",
+  "venezuelan": "Venezuelan",
+  "trinidadian": "Trinidadian"
  },
  "units": {
   "1": "Knife work and assembly",
@@ -16001,6 +16013,14 @@ export const LIBRARY = {
    {
     "id": "lamb",
     "name": "Lamb"
+   },
+   {
+    "id": "goat",
+    "name": "Goat"
+   },
+   {
+    "id": "duck-quail",
+    "name": "Duck and quail"
    },
    {
     "id": "white-fish",

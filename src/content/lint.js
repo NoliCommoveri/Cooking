@@ -366,6 +366,8 @@ export function lint(c) {
       if (!CU[r.cuisine]) err(rw, `cuisine "${r.cuisine}" doesn't exist in cuisines.json`);
       for (const sk of r.skills) if (!SK[sk]) err(rw, `skill "${sk}" doesn't exist in skills.json`);
       dishCard(rw, r);
+      // A card for a variation still to be written names the dish it varies (§6.21).
+      if (r.variationOf && !DISH[r.variationOf] && !byId[r.variationOf]) err(rw, `variationOf "${r.variationOf}" isn't a dish in course.json or a lesson`);
       if (c.imageExists && !c.imageExists(`meals/${r.art}.svg`)) err(rw, `art meals/${r.art}.svg isn't in content/images/`);
       for (const [p, t] of [['title', r.title], ['skill', r.skill], ['about', r.about], ['main', r.main.join(', ')]]) for (const w of blockedWordsIn(t, rules)) err(rw, `${p} names a blocked food ("${w}")`);
       if (c.tastes) for (const p of tagProblems(r.tags, c.tastes)) err(rw, `tags: ${p}`);
