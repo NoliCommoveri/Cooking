@@ -5415,3 +5415,70 @@ is reset to release 1." On the public pages: "Follow the switch."
   check that every family has tastes, variations, and picks; new: the
   Levels show to a preview family before launch and to everyone after, and
   `/content/levels.json` is empty until launch.
+
+## 216. 2026-10-25 — Re-plan build, 14c: a course on a new Level
+
+Phase 14 (plan §12.9), behind release 1. Owner, 2026-10-25: "Build 14c."
+During the build the owner made three calls, now Requirements in §12.0 and
+§12.9:
+
+- "I do not think preferences should alter the recipes for a level course
+  outside the two tracks."
+- "If both dishes would be ruled out, we need to tell them, not just hide
+  it… they need a 'request a replacement' button to funnel it up so we can
+  write an alternative or a variant. Then they can proceed to the next week
+  if they want."
+- The learner's kitchen links to it, since parents will know something
+  needs doing "when their kid brings them a screen with an issue"; and a
+  missing tool can move a week to its other dish.
+
+- **Before:** a new Level course kept each week's best fit from Our tastes,
+  among its Familiar dish and swap-ins (the Explore dish wasn't a choice),
+  saved as a row for every week. A week whose dish was hidden by the diet
+  settings was passed over without a word.
+- **Now:**
+  - **Each week starts with: Familiar or Explore** on setup and in Chef
+    Ruth's Getting started, preset from "how adventurous" (Bring it on or A
+    bit adventurous → Explore), changeable in Edit course; kept in
+    `course_starts`. The course card says "Starts with Familiar" or
+    "Starts with Explore".
+  - **Each week's dish is worked out when the plan is read**
+    (`levelWeekDishes` in `src/worker/plan.js`): a week the parent changed
+    or skipped keeps its row; a dish on the queue, a shopping list, or
+    cooked stays; otherwise the start slot's dish, or the other when the
+    diet settings hide it, it needs a tool the family doesn't have, or only
+    the other is written. Rows are saved only for weeks the parent changed,
+    so changing the start re-points the rest. Put back on a week that cooks
+    its own Familiar or Explore dish drops its row.
+  - **Best fit no longer picks Level weeks.** `/api/picks/level` returns
+    each recipe's fit for Change and Swap recipe only; the week's own dishes
+    list first, in order. The setup's per-week best-fit notes are gone.
+  - **A week whose two dishes are written and both ruled out waits, and
+    says why.** It isn't queued and holds the course. The parent's course
+    card names each dish, what it uses that the diet settings leave out,
+    and the tools it needs that the family marked they don't have, asks
+    whether those are still the right settings, and offers Check diet
+    settings, Check our tools, Request a replacement (with Undo), Go on to
+    the next week (Skip this recipe, with Put back), and Change. Setup's
+    week list shows the same notice. The learner's kitchen shows "Needs a
+    parent" on the recipe and a **Show a parent** button to the course
+    card.
+  - **Request a replacement** saves to `level_requests` in the release's
+    draft migration, `0002_levels.sql`. Recipe gaps lists **Level weeks
+    requested** with the reasons counted, no family named, and Open in the
+    manager.
+  - Setup's week list shows each week's Familiar and Explore dish, the one
+    it cooks ticked.
+- **Owner, on `/ops` after it deploys:** press **Apply pending** for
+  `0002` (draft). Request a replacement says requests open after that.
+- Screenshots (phone width; light and dark for parent screens, Kitchen
+  Quest and Chef's Passport for the kitchen) of setup's start question and
+  week list, the course card's notice before and after a request, the
+  kitchen's week card, and Recipe gaps were sent in the session.
+- Tests: 367. Level course tests now start with Familiar, and week 5 cooks
+  its written Explore dish (tabbouleh). New: the preset from each "how
+  adventurous" answer; Familiar and Explore courses; diet and tool
+  fallbacks; a changed week survives a change of start while a queued dish
+  stays; a blocked week waits unqueued, says why, takes a request counted
+  on Recipe gaps, goes on with Put back, and cooks again once the settings
+  change; backup export and import carry `course_starts`.

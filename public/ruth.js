@@ -498,9 +498,14 @@ async function coursePart(ctx, chat, call, { again }) {
   });
 
   if (level) {
+    // Each week starts with (14c): preset from "how adventurous", listed first.
+    chat.say('Each week has two dishes that teach its skill. Should each week start with Familiar, dishes most families already know, or Explore, a dish from another part of the world? Either one can be swapped any week.');
+    const opts = [['familiar', 'Familiar'], ['explore', 'Explore']];
+    const preset = data.starts_preset === 'explore' ? 'explore' : 'familiar';
+    const starts = await chat.choose(opts.sort(([a]) => (a === preset ? -1 : 1)));
     chat.say(`${level.name} runs one week at a time, Sunday to Friday. A week is done when its recipe is cooked, and one that isn't moves to the next week.`);
     await chat.choose([['go', 'Start the course']]);
-    await call('POST', '/api/courses', { name, start_date: start, per_week: 1, profile_ids: pids, program: level.id });
+    await call('POST', '/api/courses', { name, start_date: start, per_week: 1, profile_ids: pids, program: level.id, starts });
   } else {
     chat.say('How many lessons a week? One or two is a good place to start.');
     await chat.ask([field('Lessons per week', 'per', { type: 'number', min: 1, max: data.per_week_max, value: 1, inputmode: 'numeric', required: true })], 'Start the course', async (v) => {

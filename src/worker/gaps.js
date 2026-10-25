@@ -259,8 +259,41 @@ export async function gapsReport(env) {
       write_next: writeNext(s.slot, lead, s.affected),
     };
   });
-  return { families: counted, slots: SLOTS.length, gaps, coverage: coverage(), cooking: await whatPeopleCook(env) };
+  return { families: counted, slots: SLOTS.length, gaps, coverage: coverage(), cooking: await whatPeopleCook(env), level_requests: await levelRequests(env) };
 }
+
+// Level weeks families asked a replacement for (14c): neither dish could be
+// cooked with their settings. Each week with its dishes, how many families
+// asked, and why, counted. Counts only. Empty before the draft's table exists.
+async function levelRequests(env) {
+  let rows = [];
+  try {
+    rows = (await env.DB.prepare('SELECT level, week, reasons FROM level_requests').all()).results;
+  } catch (err) {
+    if (missingTable(err)) return [];
+    throw err;
+  }
+  const byWeek = {};
+  for (const r of rows) {
+    const V = LIBRARY.levels?.[r.level];
+    const w = V?.weeks.find((x) => x.week === r.week);
+    if (!w?.recipe) continue;
+    const x = byWeek[`${r.level}:${r.week}`] ??= {
+      level: r.level, level_name: V.name, week: r.week, skill: skillName[w.skill] ?? w.skill ?? null,
+      dishes: [w.familiar, w.explore].map((id) => ({ id, title: lessonById[id]?.title ?? V.titles[id] ?? id, written: Boolean(lessonById[id]) })),
+      families: 0, counts: {}, link: `/manage/#/level/${r.level}`,
+    };
+    x.families += 1;
+    for (const code of JSON.parse(r.reasons)) x.counts[code] = (x.counts[code] ?? 0) + 1;
+  }
+  return Object.values(byWeek).sort((a, b) => b.families - a.families || a.level.localeCompare(b.level) || a.week - b.week)
+    .map(({ counts, ...x }) => ({ ...x, reasons: Object.entries(counts).sort((a, b) => b[1] - a[1]).map(([code, n]) => ({ code, text: requestText(code), families: n })) }));
+}
+const DIET_NAMES = { nuts: 'Tree nuts', peanuts: 'Peanuts', dairy: 'Dairy', egg: 'Eggs', gluten: 'Gluten', fish: 'Fish', meat: 'Meat and poultry' };
+const requestText = (code) => {
+  const [kind, id] = code.split(':');
+  return kind === 'diet' ? `Leaves out ${lower(DIET_NAMES[id] ?? id)}` : kind === 'tool' ? `No ${lower(toolName[id] ?? id)}` : code;
+};
 
 export function register(on) {
   on('GET', '/api/owner/gaps', async (req, env) => {

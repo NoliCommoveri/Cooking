@@ -135,6 +135,21 @@ const fmtDay = (d, opts = { weekday: 'short', month: 'short', day: 'numeric' }) 
 const DIET = {
   nuts: 'Tree nuts', peanuts: 'Peanuts', dairy: 'Dairy', egg: 'Eggs', gluten: 'Gluten', fish: 'Fish', meat: 'Meat and poultry',
 };
+// A Level week neither of whose dishes the family can cook (14c): each dish
+// and what rules it out, in words.
+const orWords = (xs) => (xs.length < 2 ? xs.join('') : `${xs.slice(0, -1).join(', ')} and ${xs.at(-1)}`);
+const blockedLines = (list) => list.map((d) => {
+  if (!d.written) return `${d.title} is still being written.`;
+  const diet = d.why.filter((r) => r.kind === 'diet'), tools = d.why.filter((r) => r.kind === 'tool');
+  const leaves = [...new Set(diet.flatMap((r) => r.tags))].map((t) => (DIET[t] ?? t).toLowerCase());
+  return `${d.title}${diet.length ? ` uses ${orWords([...new Set(diet.map((r) => r.item.toLowerCase()))])}, and your diet settings leave out ${orWords(leaves)}` : ''}`
+    + `${diet.length && tools.length ? '. It also' : ''}${tools.length ? ` needs ${orWords(tools.map((r) => `a ${r.item.toLowerCase()}`))}, which you marked you don't have` : ''}.`;
+});
+// The settings that rule a blocked week out: Leave out (Family settings) and Tools we don't have (Our tastes).
+const blockedSettings = (list) => [
+  list.some((d) => d.why?.some((r) => r.kind === 'diet')) ? el('a', { class: 'hbtn', href: '#/parent/family' }, 'Check diet settings') : null,
+  list.some((d) => d.why?.some((r) => r.kind === 'tool')) ? el('a', { class: 'hbtn', href: '#/parent/tastes' }, 'Check our tools') : null,
+];
 
 // ---------- state ----------
 
@@ -526,8 +541,13 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
         el('div', { class: 'k-parts' },
           // In the owner's order: Knowledge, Drill, the Recipe, Beyond the Recipe.
           w.parts.filter((x) => x.part !== 'sabbath').map(partRow),
-          w.recipe_written ? row('Recipe', w.recipe_title, w.recipe_done ? 'Cooked ✓' : 'This week', open(w.recipe), w.recipe_done) : row('Recipe', w.recipe_title ?? 'Being written', 'Coming soon'),
+          // A week the family's settings rule out (14c): the learner takes it to a parent.
+          w.blocked ? row('Recipe', w.recipe_title, 'Needs a parent')
+            : w.recipe_written ? row('Recipe', w.recipe_title, w.recipe_done ? 'Cooked ✓' : 'This week', open(w.recipe), w.recipe_done) : row('Recipe', w.recipe_title ?? 'Being written', 'Coming soon'),
           w.parts.filter((x) => x.part === 'sabbath').map(partRow)),
+        w.blocked ? el('div', { class: 'k-blocked', role: 'note' },
+          el('p', {}, "This week's recipe can't be cooked with your family's settings. Show a parent: they can check the settings, ask for another recipe, or go on to next week."),
+          el('a', { class: quest ? 'q-btn' : 'p-btn', href: '#/parent/queue' }, 'Show a parent')) : null,
       ] : null,
       lv.open.length ? [el('p', { class: kick }, 'Still to check off'), el('div', { class: 'k-parts' }, lv.open.map(partRow))] : null);
   };
@@ -1532,7 +1552,7 @@ const parentQueue = parentOnly(async (flash) => {
         again(`Week ${x.week} is ${o.title} now.`, () => api('POST', `/api/courses/${c.id}/level-week`, { week: x.week, id: res.before }));
       } }, 'Use this'));
     const close = modal(`Swap week ${x.week}'s recipe`,
-      el('p', { class: 'mut' }, 'Recipes that teach the same skill, best fit first.'),
+      el('p', { class: 'mut' }, "The week's Familiar and Explore dishes, then others that teach the same skill."),
       el('div', { class: 'rows' }, d.options.map(row)),
       d.more.length ? [el('h3', {}, 'Also teaches the skill'), el('div', { class: 'rows' }, d.more.map(row))] : null,
       el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')));
@@ -1545,7 +1565,27 @@ const parentQueue = parentOnly(async (flash) => {
       : x.extra ? 'Extra, this week only'
         : isSabbath() || !homeschool ? null
           : [x.overdue ? el('span', { class: 'late' }, 'Overdue · ') : null, `Due ${fmtDay(addDays(week, c.due_day))}`].filter(Boolean));
-    const lessonRow = (x, week) => (x.done
+    // A Level week neither of whose dishes the family can cook (14c): why, and
+    // what the parent can do. It isn't queued, and it holds the course until
+    // the settings change, it's changed, or the parent goes on to next week.
+    const blockedRow = (x) => el('div', { class: 'card notice lvl-blocked', role: 'note' },
+      el('b', {}, `Week ${x.week} can't be cooked with your settings.`),
+      el('ul', {}, blockedLines(x.blocked).map((t) => el('li', {}, t))),
+      el('p', {}, 'Are these still the right settings for your family? Something may have changed.'),
+      el('div', { class: 'acts' },
+        blockedSettings(x.blocked),
+        x.requested ? el('span', { class: 'mut' }, 'Replacement requested ✓')
+          : actBtn('Request a replacement', '', async () => {
+            const body = { level: c.level.id, week: x.week };
+            await api('POST', '/api/level-requests', body);
+            again(`Requested a replacement for week ${x.week}. It goes to the people who write the recipes.`, () => api('POST', '/api/level-requests/undo', body));
+          }),
+        actBtn('Go on to the next week', '', async () => {
+          await api('POST', `/api/courses/${c.id}/skip-recipe`, { lesson_id: x.lesson_id });
+          again(`Skipped week ${x.week}. The next week takes its place.`, () => api('POST', `/api/courses/${c.id}/put-back-recipe`, { lesson_id: x.lesson_id }));
+        }),
+        actBtn('Change', '', () => swapLevelRecipe(c, x))));
+    const lessonRow = (x, week) => (x.blocked ? blockedRow(x) : x.done
       ? el('div', { class: 'rowi' }, el('div', {}, el('b', {}, ...lessonName(x)), el('small', {}, 'Cooked')), el('span', { class: 'mut' }, '✓'))
       : expander(el('span', {}, el('b', {}, ...lessonName(x)), x.foundation ? foundationMark() : null, status(x, week) ? el('small', {}, status(x, week)) : null),
         el('div', { class: 'qtools' }, safetyReview(x.lesson_id), tested(x.lesson_id), previewBtn(x.lesson_id, x.version?.id), versionPick(x, () => parentQueue())),
@@ -1563,7 +1603,7 @@ const parentQueue = parentOnly(async (flash) => {
         el('div', {}, el('h3', { style: 'margin:0' }, c.name || `${names(c.profile_ids)}'s course`),
           el('small', {}, c.level
             // A Level course says which week it's on (§12.4).
-            ? `${names(c.profile_ids)} · ${c.level.name} · ${c.level.week ? `Week ${c.level.week} of ${c.level.weeks}` : `${c.done} of ${c.total} cooked`}`
+            ? `${names(c.profile_ids)} · ${c.level.name} · ${c.level.week ? `Week ${c.level.week} of ${c.level.weeks}` : `${c.done} of ${c.total} cooked`} · Starts with ${c.level.starts === 'explore' ? 'Explore' : 'Familiar'}`
             : `${names(c.profile_ids)} · ${c.per_week} a week · ${c.done} of ${c.total} cooked`)),
         el('a', { class: 'hbtn', href: `#/parent/courses/${c.id}` }, 'Edit')),
       c.total ? el('p', { class: 'mut small', style: 'margin:0' },
@@ -1830,17 +1870,29 @@ const courseEditor = parentOnly(async (cid) => {
   const perIn = el('input', { type: 'number', name: 'per_week', min: 1, max: data.per_week_max, value: existing?.per_week ?? 1, inputmode: 'numeric' });
 
   const usable = () => plan.filter((x) => !x.removed && written.has(x.id) && !hidden.has(x.id)).length;
-  // A Level course's weeks, each with its recipe: the Level's own, or the
-  // one saved on the course.
+  // A Level course's weeks (14c): each cooks its Familiar or Explore dish, by
+  // what the course starts with, unless the parent changed it.
   const savedWeek = Object.fromEntries((existing?.program ? existing.plan : []).map((x) => [x.week, x]));
-  // Each week's recipe (12d): the course's, or for a new course each week's
-  // best fit for the people it's for, until the parent changes one.
-  let levelPicks = Object.fromEntries(Object.values(savedWeek).map((x) => [x.week, x.id]));
-  let levelFits = null, levelTouched = false;
-  const levelWeeks = () => levelOf().weeks.map((w) => ({ ...w, id: w.recipe ? levelPicks[w.week] ?? w.recipe : null, removed: Boolean(savedWeek[w.week]?.removed) }));
+  let starts = existing?.starts ?? data.starts_preset ?? 'familiar';
+  // The weeks the parent picked a recipe for, which keep it whatever the course starts with.
+  let levelPicks = Object.fromEntries(Object.values(savedWeek).filter((x) => x.changed).map((x) => [x.week, x.id]));
+  let levelFits = null;
+  // Each week's dish and whether the family's settings rule both out: the
+  // saved plan while the start is unchanged, else as a new course would plan it.
+  const levelWeeks = () => {
+    const V = levelOf(), d = V.defaults?.[starts] ?? { ids: {}, blocked: {} };
+    const asSaved = existing && starts === existing.starts;
+    return V.weeks.map((w) => {
+      if (!w.recipe) return { ...w, id: null, removed: false };
+      const saved = savedWeek[w.week];
+      const id = levelPicks[w.week] ?? (asSaved && saved ? saved.id : d.ids[w.week] ?? w.recipe);
+      const blocked = levelPicks[w.week] ? null : asSaved && saved ? saved.blocked ?? null : d.blocked[w.week] ?? null;
+      return { ...w, id, blocked, changed: w.week in levelPicks, removed: Boolean(saved?.removed) };
+    });
+  };
+  // Each recipe's fit for the people it's for, shown in Change. It never picks a week's recipe.
   const loadLevelFits = async (ids) => {
     levelFits = ids.length ? await api('GET', `/api/picks/level?level=${encodeURIComponent(program)}&profiles=${ids.join(',')}`).catch(() => null) : null;
-    if (levelFits && !existing && !levelTouched) levelPicks = { ...levelFits.picks };
     drawLevel();
     drawFinish();
   };
@@ -1857,10 +1909,12 @@ const courseEditor = parentOnly(async (cid) => {
     const start = weekOf(startIn.value || localToday());
     if (levelOf()) {
       const V = levelOf(), weeks = levelWeeks();
-      const n = weeks.filter((w) => w.id && !w.removed && written.has(w.id) && !hidden.has(w.id)).length;
+      const n = weeks.filter((w) => w.id && !w.removed && !w.blocked && written.has(w.id) && !hidden.has(w.id)).length;
+      const stuck = weeks.filter((w) => w.blocked && !w.removed).length;
       finishBox.replaceChildren(n
         ? `${n} of ${V.weeks.length} weeks have their recipe ready to cook now, so the schedule runs to the week of ${fmtDay(addDays(start, (n - 1) * 7))}. The others join as they're written.`
-        : 'None of the weeks\' recipes can be cooked yet.');
+        : 'None of the weeks\' recipes can be cooked yet.',
+      stuck ? ` ${stuck} week${stuck === 1 ? " can't" : "s can't"} be cooked with your settings: see below.` : '');
       drawHours();
       return;
     }
@@ -1954,7 +2008,6 @@ const courseEditor = parentOnly(async (cid) => {
       el('div', {}, el('b', {}, x.title), el('small', {}, [fitText(x), written.has(x.id) ? null : 'Being written', elsewhere.has(x.id) ? 'In another week' : null].filter(Boolean).join(' · '))),
       x.id === w.id ? el('span', { class: 'mut' }, 'This week') : el('button', { type: 'button', class: 'hbtn', disabled: elsewhere.has(x.id), onclick: () => {
         levelPicks[w.week] = x.id;
-        levelTouched = true;
         close();
         drawLevel();
         drawFinish();
@@ -1977,15 +2030,36 @@ const courseEditor = parentOnly(async (cid) => {
         el('summary', {}, el('span', {}, el('b', {}, `Unit ${u.number}: ${u.name}`), el('small', {}, `Weeks ${mine[0].week} to ${mine.at(-1).week}`))),
         el('div', {}, mine.map((w) => {
           const f = fitsOf(w.week), mineFit = f ? [...f.options, ...f.more].find((x) => x.id === w.id) : null;
-          const title = w.id ? (mineFit?.title ?? (w.id === w.recipe ? w.title : dish[w.id]?.title ?? lib.lessons.find((L) => L.id === w.id)?.title ?? w.id))
-            : w.kind === 'capstone' ? 'Capstone: a full Sabbath meal, made ahead' : 'Practice run of one capstone dish';
-          const ready = w.id && written.has(w.id) && !hidden.has(w.id);
-          const tags = [w.mastery ? 'Mastery check' : null, w.removed ? 'Skipped' : !w.id || !written.has(w.id) ? 'Being written' : hidden.has(w.id) ? 'Hidden by your diet settings' : null].filter(Boolean);
+          const titleOf = (id) => (id === w.familiar ? w.title : id === w.explore ? w.explore_title : null) ?? mineFit?.title ?? dish[id]?.title ?? lib.lessons.find((L) => L.id === id)?.title ?? id;
+          const title = w.id ? titleOf(w.id) : w.kind === 'capstone' ? 'Capstone: a full Sabbath meal, made ahead' : 'Practice run of one capstone dish';
+          const ready = w.id && !w.blocked && written.has(w.id) && !hidden.has(w.id);
+          const tags = [w.mastery ? 'Mastery check' : null, w.removed ? 'Skipped' : w.blocked ? null : !w.id || !written.has(w.id) ? 'Being written' : hidden.has(w.id) ? 'Hidden by your diet settings' : null].filter(Boolean);
+          // The week's two dishes, the one it cooks marked; a recipe the parent picked instead says so (14c).
+          const slot = (id, label) => el('span', { class: id === w.id ? 'lvl-dish on' : 'lvl-dish' }, el('small', {}, label), ' ', titleOf(id), id === w.id ? el('small', {}, ' ✓') : null);
+          const requested = levelOf().requested?.includes(w.week);
           return el('div', { class: `planrow${w.removed ? ' out' : ''}` },
             el('div', { class: 'planno' }, w.week),
-            el('div', { class: 'grow' }, el('span', {}, title, tags.length ? el('small', { class: 'mut' }, ` · ${tags.join(' · ')}`) : null),
-              mineFit?.label ? el('small', { class: `fitline fit-${mineFit.fit}` }, fitText(mineFit)) : null,
-              levelFits?.notes[w.week] && !existing ? el('p', { class: 'mut small', style: 'margin:2px 0' }, levelFits.notes[w.week]) : null,
+            el('div', { class: 'grow' },
+              w.familiar ? el('div', { class: 'lvl-dishes' }, slot(w.familiar, 'Familiar'), slot(w.explore, 'Explore'),
+                w.id !== w.familiar && w.id !== w.explore ? el('span', { class: 'lvl-dish on' }, el('small', {}, 'Changed to'), ' ', title, el('small', {}, ' ✓')) : null)
+                : el('span', {}, title),
+              tags.length ? el('small', { class: 'mut' }, tags.join(' · ')) : null,
+              mineFit?.label && !w.blocked ? el('small', { class: `fitline fit-${mineFit.fit}` }, fitText(mineFit)) : null,
+              // Neither dish can be cooked with the family's settings (14c).
+              w.blocked ? el('div', { class: 'card notice lvl-blocked', role: 'note' },
+                el('b', {}, "Can't be cooked with your settings"),
+                el('ul', {}, blockedLines(w.blocked).map((t) => el('li', {}, t))),
+                el('p', { class: 'small' }, 'Are these still the right settings for your family? Change picks another recipe, or the week waits on the course until you act on it.'),
+                el('div', { class: 'acts' }, requested ? el('span', { class: 'mut small' }, 'Replacement requested ✓')
+                  : el('button', { type: 'button', class: 'hbtn', onclick: async (ev) => {
+                    ev.target.disabled = true;
+                    try {
+                      await api('POST', '/api/level-requests', { level: levelOf().id, week: w.week });
+                      (levelOf().requested ??= []).push(w.week);
+                      showToast(`Requested a replacement for week ${w.week}.`);
+                      drawLevel();
+                    } catch (err) { ev.target.disabled = false; showToast(err.message); }
+                  } }, 'Request a replacement'))) : null,
               // Under the name, so a long one keeps the row's width.
               el('span', { class: 'acts' },
               w.id ? el('button', { type: 'button', class: 'hbtn link', 'aria-label': `Change week ${w.week}'s recipe`, onclick: () => changeWeek(w) }, 'Change') : null,
@@ -2016,8 +2090,18 @@ const courseEditor = parentOnly(async (cid) => {
     hoursBox);
   const levelSet = el('fieldset', {}, el('legend', {}, 'The weeks'),
     el('p', { class: 'mut small', style: 'margin:0' }, 'Each week has its recipe, and the components kept on above. The last week of each unit is a mastery check. A week is done when its recipe is cooked; one that isn\'t moves to the next week.'),
-    el('p', { class: 'mut small', style: 'margin:0' }, 'Each week starts with the recipe that fits the people it\'s for best, from Our tastes. Change picks another that teaches the same skill.'),
+    el('p', { class: 'mut small', style: 'margin:0' }, 'Each week has a Familiar and an Explore dish, and cooks the one the course starts with (✓). Change picks another that teaches the same skill.'),
     levelBox);
+  // Each week starts with (14c): preset from "how adventurous", and either can be swapped any week.
+  const startsSet = el('fieldset', { onchange: (ev) => {
+    if (ev.target.name !== 'starts') return;
+    starts = ev.target.value;
+    drawLevel();
+    drawFinish();
+  } }, el('legend', {}, 'Each week starts with'),
+    [['familiar', 'Familiar', 'Dishes most families already know'], ['explore', 'Explore', 'A dish from another part of the world']]
+      .map(([k, label, hint]) => el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'starts', value: k, checked: starts === k }), el('span', {}, label, el('em', {}, ` ${hint}`)))),
+    el('p', { class: 'mut small', style: 'margin:0' }, 'Either one can be swapped any week.'));
   const drawProgram = () => {
     const V = levelOf();
     perBox.hidden = Boolean(V);
@@ -2025,6 +2109,7 @@ const courseEditor = parentOnly(async (cid) => {
     planSet.hidden = Boolean(V);
     levelSet.hidden = !V;
     partsSet.hidden = !V;
+    startsSet.hidden = !V;
     drawLevel();
     drawFinish();
     if (V && !levelFits) loadLevelFits(picked());
@@ -2060,13 +2145,13 @@ const courseEditor = parentOnly(async (cid) => {
         el('label', { class: 'f' }, 'Start date', el('span', { class: 'hint' }, 'Weeks run Sunday to Friday'), startIn),
         perBox, levelPace),
       finishBox,
-      partsSet, planSet, levelSet,
+      startsSet, partsSet, planSet, levelSet,
     ], existing ? 'Save course' : 'Start the course', async (v) => {
       // A Level course's plan is its weeks, one a week.
       const body = levelOf()
         ? {
-          name: v.name, start_date: startIn.value, per_week: 1, profile_ids: profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id), ...(existing ? {} : { program }), parts: partsOn,
-          // Left out, a new course takes each week's best fit on the server.
+          name: v.name, start_date: startIn.value, per_week: 1, profile_ids: profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id), ...(existing ? {} : { program }), parts: partsOn, starts,
+          // Only the weeks the parent changed; every other week follows the start.
           ...(Object.keys(levelPicks).length ? { weeks: Object.entries(levelPicks).map(([week, id]) => ({ week: Number(week), id })) } : {}),
         }
         : { name: v.name, start_date: startIn.value, per_week: Number(perIn.value), profile_ids: profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id), plan };
@@ -2552,6 +2637,16 @@ const recipeGaps = parentOnly(async () => {
     el('p', { class: 'mut' }, `From what families have rated: ${fam(g.families)} so far. Counts only; no family is named. Each pick-one group is checked for the people each family cooks for together.`),
     el('h2', {}, g.gaps.length ? `Gaps (${g.gaps.length} of ${g.slots} groups)` : 'Gaps'),
     g.gaps.length ? g.gaps.map(gapCard) : el('p', { class: 'card mut' }, g.families ? 'Every group has something that fits every family well.' : 'No family has rated anything yet. Coverage below shows the thin spots in the meantime.'),
+    // Level weeks families asked a replacement for (14c).
+    el('h2', {}, 'Level weeks requested'),
+    el('p', { class: 'mut small' }, "Weeks a family's settings rule out both dishes for, and they asked for something they can cook. Write a variation or another dish with the week's skill."),
+    g.level_requests?.length ? g.level_requests.map((x) => el('section', { class: 'card' },
+      el('h3', { style: 'margin:0' }, `${x.level_name}, week ${x.week}${x.skill ? `: ${x.skill}` : ''}`),
+      el('p', { class: 'mut small', style: 'margin:2px 0 8px' }, x.dishes.map((d) => `${d.title}${d.written ? '' : ' (not written)'}`).join(' · ')),
+      el('p', { style: 'margin:0' }, el('b', {}, fam(x.families)), ' asked'),
+      el('ul', { class: 'small', style: 'margin:6px 0' }, x.reasons.map((r) => el('li', {}, `${r.text}: ${r.families}`))),
+      el('div', { class: 'acts' }, el('a', { class: 'hbtn pri', href: x.link }, 'Open in the manager'))))
+      : el('p', { class: 'card mut' }, 'No requests yet.'),
     el('h2', {}, 'Coverage'),
     el('p', { class: 'mut small' }, 'Each group against protein: the written versions (each lesson and its variations), and +planned dishes. Heat and flavors count written versions.'),
     el('div', { class: 'ptable covtable' }, el('table', {},
