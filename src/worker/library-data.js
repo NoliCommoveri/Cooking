@@ -6663,6 +6663,119 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "baked-salmon",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Baked fish with lemon and herbs",
+   "image": "img/meals/fish.svg",
+   "cuisine": "american",
+   "skill": "Baking fish gently, checking pin bones",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "Use two sheet pans, on racks in the upper and lower thirds of the oven, and swap them halfway through."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "salmon-fillet"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "dill"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "salmon-fillet",
+     "use": "cod",
+     "reason": "availability"
+    },
+    {
+     "for": "salmon-fillet",
+     "use": "tilapia",
+     "reason": "availability"
+    },
+    {
+     "for": "broth-chicken",
+     "use": "broth-vegetable",
+     "reason": "meat"
+    },
+    {
+     "for": "butter-unsalted",
+     "use": "olive-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "parchment",
+    "paper-towels",
+    "tweezers",
+    "small-bowl",
+    "box-grater",
+    "chef-knife",
+    "cutting-board",
+    "mixing-bowl-medium",
+    "saucepan-medium",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "microwave",
+    "oven-mitts",
+    "wooden-spoon",
+    "thermometer",
+    "spatula",
+    "spoon",
+    "fork"
+   ],
+   "level": "level-3"
+  },
+  {
    "id": "beef-picadillo",
    "version": 1,
    "track": "core",
@@ -7310,6 +7423,192 @@ export const LIBRARY = {
    "level": "level-3"
   },
   {
+   "id": "pan-seared-trout",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Pan-seared trout",
+   "image": "img/meals/fish.svg",
+   "cuisine": "american",
+   "skill": "Searing a fillet skin-side down",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 5,
+      "text": "Sear the fillets in batches, two or three at a time, and keep the first batch warm on a plate under foil."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "trout-fillet"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "parsley"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "trout-fillet",
+     "use": "tilapia",
+     "reason": "availability"
+    },
+    {
+     "for": "butter-unsalted",
+     "use": "olive-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "paper-towels",
+    "plate",
+    "chef-knife",
+    "cutting-board",
+    "measuring-spoons",
+    "skillet-12",
+    "spatula",
+    "spoon",
+    "small-bowl",
+    "oven-mitts",
+    "thermometer",
+    "fork"
+   ],
+   "level": "level-3"
+  },
+  {
+   "id": "poached-cod",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Cod poached in tomato sauce",
+   "image": "img/meals/fish.svg",
+   "cuisine": "italian",
+   "skill": "Poaching fish until it flakes",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "Use the large pot instead of the skillet, so all the fish fits in one layer in the sauce."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "chili-flakes",
+     "optional": true
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "olives-green"
+    },
+    {
+     "ingredient": "capers"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cod"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "pita",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "cod",
+     "use": "tilapia",
+     "reason": "availability"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic",
+     "tomatoes",
+     "capers",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "can-opener",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "wooden-spoon",
+    "paper-towels",
+    "plate",
+    "thermometer",
+    "fork",
+    "spatula"
+   ],
+   "level": "level-3"
+  },
+  {
    "id": "rice-pilaf",
    "version": 1,
    "track": "core",
@@ -7468,6 +7767,204 @@ export const LIBRARY = {
     "cooling-rack",
     "chef-knife",
     "cutting-board"
+   ],
+   "level": "level-3"
+  },
+  {
+   "id": "steamed-fish",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Steamed fish with ginger and scallion",
+   "image": "img/meals/fish.svg",
+   "cuisine": "chinese",
+   "skill": "Steaming, judging freshness",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "max": 6,
+    "notes": [
+     {
+      "from": 5,
+      "text": "Steam the fish in two batches, one plate at a time, and keep the first plate warm under foil."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "cod"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "cod",
+     "use": "tilapia",
+     "reason": "availability"
+    },
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "ginger",
+     "onions"
+    ],
+    "optional": [
+     "cilantro"
+    ]
+   },
+   "tools": [
+    "saucepan-medium",
+    "pot-large",
+    "foil",
+    "plate",
+    "paper-towels",
+    "chef-knife",
+    "cutting-board",
+    "spoon",
+    "small-bowl",
+    "measuring-spoons",
+    "measuring-cups",
+    "thermometer",
+    "fork",
+    "oven-mitts",
+    "skillet-nonstick-8"
+   ],
+   "variations": [
+    {
+     "title": "Fish in parchment packets",
+     "image": "img/meals/fish.svg",
+     "cuisine": "chinese",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "max": 6,
+      "notes": [
+       {
+        "from": 5,
+        "text": "Steam the fish in two batches, one plate at a time, and keep the first plate warm under foil."
+       }
+      ]
+     },
+     "totalMinutes": 40,
+     "ingredients": [
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "cod"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "ginger-fresh"
+      },
+      {
+       "ingredient": "green-onion"
+      },
+      {
+       "ingredient": "soy-sauce"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "sesame-oil"
+      },
+      {
+       "ingredient": "cilantro",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "cod",
+       "use": "tilapia",
+       "reason": "availability"
+      },
+      {
+       "for": "soy-sauce",
+       "use": "tamari",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "fish",
+     "tags": null,
+     "tasteItems": {
+      "required": [
+       "ginger",
+       "onions",
+       "sesame"
+      ],
+      "optional": [
+       "cilantro"
+      ]
+     },
+     "tools": [
+      "saucepan-medium",
+      "paper-towels",
+      "chef-knife",
+      "cutting-board",
+      "spoon",
+      "small-bowl",
+      "measuring-spoons",
+      "measuring-cups",
+      "thermometer",
+      "fork",
+      "oven-mitts",
+      "sheet-pan",
+      "parchment",
+      "table-knife"
+     ],
+     "id": "parchment"
+    }
    ],
    "level": "level-3"
   },
@@ -8415,6 +8912,12 @@ export const LIBRARY = {
    "contains": [
     "gluten"
    ]
+  },
+  "trout-fillet": {
+   "name": "Trout fillets, skin on",
+   "contains": [
+    "fish"
+   ]
   }
  },
  "cuisines": {
@@ -8475,14 +8978,18 @@ export const LIBRARY = {
   "cottage-cheese-crescents": "A2"
  },
  "levelLabels": {
+  "baked-salmon": "L12",
   "beef-picadillo": "L7",
   "beef-tacos-pico": "L18",
   "cajun-rice-dressing": "L8",
   "dinner-rolls": "L3",
   "garlic-green-beans": "L6",
   "israeli-salad": "L5",
+  "pan-seared-trout": "L15",
+  "poached-cod": "L14",
   "rice-pilaf": "L9",
   "sandwich-loaf": "L2",
+  "steamed-fish": "L13",
   "tabbouleh": "L4",
   "thick-burgers": "L1"
  },
@@ -14077,15 +14584,142 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Check a fillet for pin bones",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Many fish have a row of thin, soft pin bones that the filleting knife misses. You'll learn to find them by feel and pull them out, then compare a few kinds of fillet."
+      ],
+      "steps": [
+       "Get one skin-on salmon or trout fillet, and one cod or tilapia fillet if you can.",
+       "Lay the salmon or trout skin side down. Run your fingertips slowly along the middle of the thick end, from the head end toward the tail, then back the other way. Feel for little hard tips poking up.",
+       "Press the flesh down gently on either side of a bone so it stands up. Grip its tip with clean tweezers and pull it out toward the head end, at the same angle it lies, so the flesh doesn't tear.",
+       "Line up the bones you pulled on a paper towel and count them. Check the fillet once more.",
+       "Check the white fish fillet the same way. Write down which had pin bones and where.",
+       "Wash your hands, the tweezers, and everything the raw fish touched. Wrap the fillets and keep them in the coldest part of the fridge to cook within a day, in this week's recipe if you like."
+      ],
+      "quiz": [
+       {
+        "q": "Which way do you pull a pin bone?",
+        "choices": [
+         "Toward the head end, at the angle it lies",
+         "Straight up as hard as you can",
+         "Toward the tail"
+        ],
+        "answer": 0,
+        "explain": "Pulled the right way, the flesh doesn't tear."
+       },
+       {
+        "q": "How long can raw fish wait in the fridge?",
+        "choices": [
+         "About a day",
+         "A week",
+         "A month"
+        ],
+        "answer": 0,
+        "explain": "Cook it within a day or freeze it."
+       }
+      ]
      },
      "knowledge": {
       "title": "Fins and scales: clean vs. unclean species",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "For animals that live in water, God gave Israel one test with two parts: \"Everything in the waters that has fins and scales, whether in the seas or in the rivers, you may eat\" (Leviticus 11:9). Anything in the water without both is unclean (Leviticus 11:10–12; Deuteronomy 14:9–10).",
+       "Fins are easy to see. Scales are the thin, overlapping plates that cover most fish like roof tiles. Some fish have scales so small you have to look closely, like tuna and mackerel, but they're there, and the fish is clean.",
+       "Clean fish this app uses include salmon, trout, cod, tilapia, pollock, haddock, halibut, tuna, sardines, anchovies, and many more: carp, herring, mackerel, smelt, whitefish, perch, walleye, pike, bass, barramundi, mahi-mahi, snapper, grouper, sole, and flounder.",
+       "What the test leaves out: every animal with a shell, the soft sea animals with arms and no backbone, and fish with smooth, slippery skin and no scales, such as the whiskered bottom-feeders sold as swai or basa, and monkfish. Swordfish and sturgeon lose most of their scales as they grow, and people disagree about them, so this app leaves them out.",
+       "Once a fish is filleted and its skin is off, you can't see the scales anymore. That's why the name on the label matters, which is next week's knowledge page."
+      ],
+      "quiz": [
+       {
+        "q": "What two things must a water animal have to be clean?",
+        "choices": [
+         "Fins and scales",
+         "Fins and a tail",
+         "Scales and gills"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:9."
+       },
+       {
+        "q": "Tuna's scales are so small they're hard to see. Is tuna clean?",
+        "choices": [
+         "Yes, it has fins and scales",
+         "No, the scales are too small",
+         "Only canned tuna"
+        ],
+        "answer": 0,
+        "explain": "Small scales are still scales."
+       },
+       {
+        "q": "A fish has fins but smooth skin with no scales. Is it clean?",
+        "choices": [
+         "No, it needs both",
+         "Yes, fins are enough",
+         "Only if it lives in a river"
+        ],
+        "answer": 0,
+        "explain": "Both parts of the test."
+       },
+       {
+        "q": "Why does this app leave out swordfish?",
+        "choices": [
+         "It loses most of its scales as it grows, so people disagree",
+         "It has no fins",
+         "It's too big"
+        ],
+        "answer": 0,
+        "explain": "When in doubt, it's left out."
+       },
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "Trout",
+         "Swai",
+         "Monkfish"
+        ],
+        "answer": 0,
+        "explain": "Swai and monkfish have smooth skin and no scales."
+       }
+      ]
      },
      "sabbath": {
       "title": "Dishes that serve well cold",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Some dishes taste just as good cold as hot, so they can be made a day ahead and set out with no cooking at all: baked fish with a cool sauce, grain salads, lentil and bean salads. Many families serve a cold meal like this, so there's nothing to cook later in the week, or so they can focus on resting.",
+       "Cold food stays safe the Unit 1 way: cooked food is cooled and in the fridge within 2 hours, kept at 40°F or colder until it's served, and put back within 2 hours of coming out (1 hour on a hot day over 90°F).",
+       "Cold dulls flavor, so a dish meant to be eaten cold needs a little more salt and a squeeze of lemon or a splash of vinegar. Taste it cold, not warm, before you serve it."
+      ],
+      "steps": [
+       "Bake extra fish when you make this week's recipe, and chill it, covered, within 2 hours.",
+       "Stir together a cool sauce: 1 cup of plain yogurt, a grated cucumber squeezed dry, a spoonful of chopped dill, lemon juice, and salt. Keep it in the fridge.",
+       "Make a grain or legume salad from Unit 5: cooked rice, bulgur, or lentils with chopped vegetables from Unit 3, olive oil, lemon, and salt. Chill it.",
+       "Label everything with the date.",
+       "Later in the week, set out the cold fish with the sauce and the salad. Taste each cold and add salt or lemon if it needs it.",
+       "Put everything back in the fridge within 2 hours of setting it out."
+      ],
+      "quiz": [
+       {
+        "q": "How long can a cold dish sit out on the table?",
+        "choices": [
+         "Up to 2 hours, or 1 hour on a hot day",
+         "All day",
+         "Ten minutes"
+        ],
+        "answer": 0,
+        "explain": "Then it goes back in the fridge."
+       },
+       {
+        "q": "Why taste a cold dish cold before serving it?",
+        "choices": [
+         "Cold dulls flavor, so it may need more salt or lemon",
+         "To check it's frozen",
+         "To warm it up"
+        ],
+        "answer": 0,
+        "explain": "It tastes different warm."
+       }
+      ]
      }
     },
     {
@@ -14095,15 +14729,142 @@ export const LIBRARY = {
      "recipe": "steamed-fish",
      "drill": {
       "title": "Judge freshness by smell, eyes, flesh",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Fresh fish tells you it's fresh with its smell, its eyes, and its flesh. Take this drill to the fish counter with an adult, or use the fish you're buying for this week's recipe."
+      ],
+      "steps": [
+       "At the counter, look at a whole fish if there is one. Fresh eyes are clear and bulge a little; old ones are cloudy and sunken. Fresh gills are bright red, not brown.",
+       "Look at the fillets. Fresh flesh is moist and shiny, with no dry or browning edges, and the flakes hold together without gaps.",
+       "Ask to smell the fish you're buying. Fresh fish smells clean, like cold water or the sea. A strong fishy or sour smell means it's old.",
+       "At home, press the fillet gently with a fingertip. Fresh flesh springs back; old flesh keeps the dent.",
+       "Write down what you saw, smelled, and felt for each fish you checked.",
+       "Keep the fish in the coldest part of the fridge, on a plate on the bottom shelf, and cook it within a day."
+      ],
+      "quiz": [
+       {
+        "q": "How do fresh fish eyes look?",
+        "choices": [
+         "Clear and bulging a little",
+         "Cloudy and sunken",
+         "Red"
+        ],
+        "answer": 0,
+        "explain": "Cloudy, sunken eyes mean an old fish."
+       },
+       {
+        "q": "What should fresh fish smell like?",
+        "choices": [
+         "Clean, like cold water or the sea",
+         "Strongly fishy",
+         "Sour"
+        ],
+        "answer": 0,
+        "explain": "A strong fishy smell means it's old."
+       }
+      ]
      },
      "knowledge": {
       "title": "Store-bought fish: reading labels and names",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "A fillet with its skin off can't show you its scales, so the label has to. In the United States, fish labels must name the fish and say where it came from and whether it was wild-caught or farm-raised. Read the name first, every time.",
+       "Some names are general. \"Whitefish\" can mean a real whitefish, or it can be a catch-all for any white-fleshed fish. \"Sea bass\" and \"rockfish\" cover several kinds. When a label is vague, ask at the counter which fish it is, and pass on it if no one knows.",
+       "Some cheap white fillets come from smooth-skinned river fish with no scales, sold as swai or basa. They look just like cod or tilapia, so read the label.",
+       "Prepared fish hides even more. Fish sticks and frozen fish fillets are usually pollock or cod, and the box says so. Imitation seafood sticks, called surimi, are often pollock but can include extracts from animals that aren't clean, so skip them unless the full ingredient list is clean.",
+       "Frozen fish is often fresher than \"fresh\": it's frozen on the boat or soon after. Fish labeled \"previously frozen\" at the counter should be cooked within a day and not frozen again."
+      ],
+      "quiz": [
+       {
+        "q": "What's the first thing to read on a fish label?",
+        "choices": [
+         "The name of the fish",
+         "The price",
+         "The weight"
+        ],
+        "answer": 0,
+        "explain": "Without the skin, you can't see the scales."
+       },
+       {
+        "q": "A label says only \"whitefish\". What do you do?",
+        "choices": [
+         "Ask which fish it is, and pass if no one knows",
+         "Buy it; all white fish are clean",
+         "Smell it"
+        ],
+        "answer": 0,
+        "explain": "It can be a catch-all name."
+       },
+       {
+        "q": "Why read the full ingredient list on imitation seafood sticks?",
+        "choices": [
+         "They can include extracts from animals that aren't clean",
+         "They're always clean",
+         "They have no ingredients"
+        ],
+        "answer": 0,
+        "explain": "They're often pollock, but not always only pollock."
+       },
+       {
+        "q": "Why can frozen fish be fresher than fish at the counter?",
+        "choices": [
+         "It's often frozen on the boat, right after it's caught",
+         "Freezing adds flavor",
+         "It's caught closer to home"
+        ],
+        "answer": 0,
+        "explain": "\"Fresh\" fish may have traveled for days."
+       }
+      ]
      },
      "sabbath": {
       "title": "Loaves and fishes, and breakfast on the shore (Matthew 14:13–21; John 21:9–13)",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Fish was everyday food around the Sea of Galilee, where several of Jesus' disciples were fishermen. Twice the Gospels show Jesus feeding people bread and fish.",
+       "Once, a crowd followed him into a remote place. When evening came, the disciples had only five loaves and two fish. Jesus looked up to heaven, blessed the food, broke the loaves, and gave them to the disciples to hand out. \"And they all ate and were satisfied. And they took up twelve baskets full of the broken pieces left over\" (Matthew 14:20). About five thousand men ate, besides women and children.",
+       "After his resurrection, Jesus met seven of his disciples at the lake after a night of catching nothing. He told them where to cast the net, and they hauled in 153 large fish (John 21:11). On the shore \"they saw a charcoal fire in place, with fish laid out on it, and bread\" (John 21:9). \"Jesus said to them, 'Come and have breakfast'\" (John 21:12), and he served them the bread and the fish himself.",
+       "Both meals were simple: bread and fish. In one, Jesus fed thousands from almost nothing; in the other, he cooked for a few tired friends."
+      ],
+      "steps": [
+       "Read Matthew 14:13–21.",
+       "Read John 21:1–14.",
+       "Answer in writing: what did Jesus do with the food before it was handed out in Matthew 14:19?",
+       "Answer in writing: in John 21, who cooked breakfast, and what does that show you about him?",
+       "Cook a simple meal of bread and fish for your family this week, from this week's recipe or week 21's, and serve it to them yourself."
+      ],
+      "quiz": [
+       {
+        "q": "How many loaves and fish did the disciples have?",
+        "choices": [
+         "Five loaves and two fish",
+         "Seven loaves and three fish",
+         "Two loaves and five fish"
+        ],
+        "answer": 0,
+        "explain": "Matthew 14:17."
+       },
+       {
+        "q": "How many baskets of leftovers were taken up?",
+        "choices": [
+         "Twelve",
+         "Seven",
+         "None"
+        ],
+        "answer": 0,
+        "explain": "Matthew 14:20."
+       },
+       {
+        "q": "What did Jesus say to the disciples on the shore in John 21?",
+        "choices": [
+         "\"Come and have breakfast\"",
+         "\"Go and fish again\"",
+         "\"Bring me bread\""
+        ],
+        "answer": 0,
+        "explain": "John 21:12."
+       }
+      ]
      }
     },
     {
@@ -14116,15 +14877,131 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Test doneness by flaking",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "You'll poach three small pieces of fish for different times and learn what undercooked, just right, and overcooked look and feel like, checked against the thermometer."
+      ],
+      "steps": [
+       "Cut a cod or tilapia fillet into three pieces the same size. Wash your hands and everything the raw fish touched.",
+       "Bring a saucepan of water with a pinch of salt to a bare simmer: a bubble now and then, not a boil. Add all three pieces.",
+       "At 3 minutes, lift one piece out onto a plate. Check its temperature in the thickest part, press it with a fork, and look at the middle.",
+       "At 6 minutes, lift out the second piece and check it the same way. At 9 minutes, the third.",
+       "Write down each piece's temperature, color in the middle, how it flaked, and how it tasted. Which was closest to 145°F, and how did it look?",
+       "Eat the pieces that reached 145°F or more, with lemon and salt. Put any that didn't back in the water until they do."
+      ],
+      "quiz": [
+       {
+        "q": "How does fish that's just done look in the middle?",
+        "choices": [
+         "Solid, not see-through, and flakes easily",
+         "See-through and glossy",
+         "Dry and stringy"
+        ],
+        "answer": 0,
+        "explain": "And it reads 145°F."
+       },
+       {
+        "q": "What does poaching water look like?",
+        "choices": [
+         "A bubble now and then, not a boil",
+         "A rolling boil",
+         "Still and cold"
+        ],
+        "answer": 0,
+        "explain": "A hard boil breaks fish apart."
+       }
+      ]
      },
      "knowledge": {
       "title": "Why fish cooks faster than meat",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "A beef chuck roast needs hours; a piece of cod is done in minutes. The difference is in how the muscles are built.",
+       "Fish float in water, so their muscles don't hold up their weight the way a cow's legs do. Fish muscle comes in short, thin layers, the flakes, held together by very thin sheets of connective tissue. Beef has much more connective tissue, and tougher, which is why Unit 4's chuck needed hours to melt it.",
+       "Fish proteins also set at lower temperatures. Most fish live in cold water, and their proteins start to firm and turn opaque at around 120°F, well below beef's. By 145°F, fish is cooked through. A few degrees past that, the flakes squeeze out their juice and turn dry.",
+       "That's why fish suits gentle methods (baking, steaming, poaching) and why it's checked early and often. Thin pieces finish first, so cook pieces of the same thickness together, or take the thin ones out early.",
+       "Fish keeps cooking for a minute or two after it leaves the heat, from the heat stored inside it. Pulled right at 145°F, it stays moist."
+      ],
+      "quiz": [
+       {
+        "q": "Why does fish have so little connective tissue?",
+        "choices": [
+         "Water holds up its weight, so its muscles don't have to",
+         "Fish are young",
+         "Fish are cold"
+        ],
+        "answer": 0,
+        "explain": "Beef muscles hold up a heavy animal."
+       },
+       {
+        "q": "At about what temperature do fish proteins start to firm?",
+        "choices": [
+         "120°F",
+         "200°F",
+         "70°F"
+        ],
+        "answer": 0,
+        "explain": "Well below beef's."
+       },
+       {
+        "q": "What happens a few degrees past 145°F?",
+        "choices": [
+         "The flakes squeeze out their juice and dry out",
+         "It gets more tender",
+         "Nothing"
+        ],
+        "answer": 0,
+        "explain": "Fish has little room for error."
+       },
+       {
+        "q": "What are the flakes in cooked fish?",
+        "choices": [
+         "Thin layers of muscle",
+         "Bits of skin",
+         "Fat"
+        ],
+        "answer": 0,
+        "explain": "Held together by thin sheets of connective tissue."
+       }
+      ]
      },
      "sabbath": {
       "title": "Make a sauce ahead, finish the dish fresh",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Cooked fish doesn't reheat well: it dries out and its smell gets stronger. But the sauce it cooks in reheats perfectly. So many cooks make the sauce ahead and cook the fish fresh, in minutes, right before eating. Many families plan meals this way, so the longest part is done ahead, or so they can focus on resting.",
+       "A tomato sauce like this week's keeps 4 days in the fridge or 3 months in the freezer. Cool it the Unit 1 way. To finish, bring it back to a simmer and poach the fish in it.",
+       "The same idea works for other dishes: a curry sauce ahead, chicken cooked in it fresh; a stir-fry sauce mixed ahead, the stir-fry cooked in minutes."
+      ],
+      "steps": [
+       "Make a double batch of this week's tomato sauce, without the fish.",
+       "Cool it the Unit 1 way, divide it into containers, and label them with the date. Keep one in the fridge and freeze the other.",
+       "Later in the week, bring the fridge portion to a gentle simmer in a skillet.",
+       "Nestle in fresh fish, put the lid on, and poach it until it reads 145°F and flakes.",
+       "Write down how long the meal took from the fridge to the table."
+      ],
+      "quiz": [
+       {
+        "q": "Why make the sauce ahead but cook the fish fresh?",
+        "choices": [
+         "Cooked fish dries out and smells stronger when reheated",
+         "Fish can't be frozen",
+         "The sauce tastes better old"
+        ],
+        "answer": 0,
+        "explain": "The sauce reheats well; fish doesn't."
+       },
+       {
+        "q": "How long does a tomato sauce keep in the fridge?",
+        "choices": [
+         "4 days",
+         "2 weeks",
+         "1 day"
+        ],
+        "answer": 0,
+        "explain": "Or 3 months in the freezer."
+       }
+      ]
      }
     },
     {
@@ -14139,15 +15016,195 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Sear a fillet skin-side down: dry it, press it flat, wait for it to release",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Before this week's mastery recipe, practice the one hard part on a single fillet: crisp skin that lets go of the pan on its own."
+      ],
+      "steps": [
+       "Pat one skin-on salmon or trout fillet very dry on both sides, and salt the skin. Wash your hands and everything the raw fish touched.",
+       "Turn the stove fan on high. Heat a tablespoon of oil in a skillet over medium-high heat until it shimmers.",
+       "Lay the fillet in skin side down, away from you, and press it flat with a spatula for 15 seconds.",
+       "Leave it alone. Watch the side of the fillet: the flesh turns from see-through to solid, working up from the pan. Every 30 seconds, nudge it with the spatula. Write down when it slides free.",
+       "When it's solid about three-quarters of the way up, turn it and cook 1 minute more. Check that it reads 145°F.",
+       "Eat it skin side up, and write down how crisp the skin was and what you'd change for the mastery cook."
+      ],
+      "quiz": [
+       {
+        "q": "Why press the fillet for the first 15 seconds?",
+        "choices": [
+         "The skin shrinks and curls, and pressing keeps it flat",
+         "To squeeze out water",
+         "To cook it faster"
+        ],
+        "answer": 0,
+        "explain": "Flat skin crisps evenly."
+       },
+       {
+        "q": "How do you know how far the fish has cooked without turning it?",
+        "choices": [
+         "Watch the flesh turn solid up the side",
+         "Smell it",
+         "Count to 100"
+        ],
+        "answer": 0,
+        "explain": "Turn it at about three-quarters of the way up."
+       }
+      ]
      },
      "knowledge": {
       "title": "Species ID quiz",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "This is the unit quiz. Answer the questions without looking back at weeks 21 to 23. First, from memory, write the test for clean water animals, and list ten clean fish. Then take the quiz.",
+       "Remember: a fish needs both fins and scales, and the scales can be tiny. A fillet can't show you either, so the label's name is your guide, and when the name is vague, you ask."
+      ],
+      "steps": [
+       "Write the test for clean water animals, with its reference.",
+       "List ten clean fish from memory.",
+       "Name two kinds of animals from the water that fail the test, without naming specific ones: describe what they lack.",
+       "Check your list against week 21's knowledge page, and fix anything you missed."
+      ],
+      "quiz": [
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "Halibut",
+         "Swai",
+         "Monkfish"
+        ],
+        "answer": 0,
+        "explain": "Halibut has fins and scales."
+       },
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "Mahi-mahi",
+         "Swordfish",
+         "Sturgeon"
+        ],
+        "answer": 0,
+        "explain": "This app leaves out swordfish and sturgeon."
+       },
+       {
+        "q": "Mackerel's scales are tiny. Is it clean?",
+        "choices": [
+         "Yes",
+         "No",
+         "Only when smoked"
+        ],
+        "answer": 0,
+        "explain": "Tiny scales are still scales."
+       },
+       {
+        "q": "A frozen fillet is labeled only \"white fish\". What do you do?",
+        "choices": [
+         "Find out which fish it is, or don't buy it",
+         "Buy it",
+         "Cook it longer"
+        ],
+        "answer": 0,
+        "explain": "The name is your guide."
+       },
+       {
+        "q": "Unit review: what temperature does fish need to reach?",
+        "choices": [
+         "145°F",
+         "160°F",
+         "165°F"
+        ],
+        "answer": 0,
+        "explain": "And it flakes."
+       },
+       {
+        "q": "Unit review: how should fresh fish smell?",
+        "choices": [
+         "Clean, like cold water or the sea",
+         "Fishy",
+         "Sour"
+        ],
+        "answer": 0,
+        "explain": "A strong smell means it's old."
+       },
+       {
+        "q": "Unit review: why does fish cook faster than beef?",
+        "choices": [
+         "Less connective tissue, and its proteins set at lower temperatures",
+         "It's smaller",
+         "It's colder"
+        ],
+        "answer": 0,
+        "explain": "Water holds up a fish's weight."
+       },
+       {
+        "q": "Unit review: what does poaching liquid look like?",
+        "choices": [
+         "A bubble now and then",
+         "A rolling boil",
+         "Cold"
+        ],
+        "answer": 0,
+        "explain": "A hard boil breaks fish apart."
+       },
+       {
+        "q": "Unit review: which way do you pull a pin bone?",
+        "choices": [
+         "Toward the head end, at the angle it lies",
+         "Straight up",
+         "Toward the tail"
+        ],
+        "answer": 0,
+        "explain": "So the flesh doesn't tear."
+       }
+      ]
      },
      "sabbath": {
       "title": "Firstfruits and tithing food (Deuteronomy 14:22–29; Proverbs 3:9)",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Right after the clean and unclean foods, Deuteronomy 14 turns to the tithe: a tenth of each year's harvest. \"You shall tithe all the yield of your seed that comes from the field year by year\" (Deuteronomy 14:22).",
+       "The tithe was eaten, not just given: the family brought it to the place God chose and ate it there with joy, \"that you may learn to fear the LORD your God always\" (Deuteronomy 14:23). If the trip was too far to carry the food, they could sell it, carry the money, and buy food and drink there to eat and rejoice together with their household (Deuteronomy 14:24–26). The Levite was not to be forgotten (Deuteronomy 14:27).",
+       "Every third year, the tithe stayed home, stored in the town, for the Levite, the sojourner, the fatherless, and the widow, \"and they shall eat and be filled\" (Deuteronomy 14:28–29).",
+       "Proverbs puts it simply: \"Honor the LORD with your wealth and with the firstfruits of all your produce\" (Proverbs 3:9). The first and best goes to God, not what's left over."
+      ],
+      "steps": [
+       "Read Deuteronomy 14:22–29.",
+       "Read Proverbs 3:9–10.",
+       "Answer in writing: what did a family do with the tithe in the years they took it to the place God chose?",
+       "Answer in writing: who was the third-year tithe for?",
+       "With your family, choose one way to give the first and best of your food this week: the first plate of your mastery dish to someone who needs it, or food to a food pantry. Write it down, and do it."
+      ],
+      "quiz": [
+       {
+        "q": "What part of the harvest was the tithe?",
+        "choices": [
+         "A tenth",
+         "Half",
+         "All of it"
+        ],
+        "answer": 0,
+        "explain": "Deuteronomy 14:22."
+       },
+       {
+        "q": "Who was the third-year tithe stored for?",
+        "choices": [
+         "The Levite, the sojourner, the fatherless, and the widow",
+         "The king",
+         "The family alone"
+        ],
+        "answer": 0,
+        "explain": "Deuteronomy 14:28–29."
+       },
+       {
+        "q": "What does Proverbs 3:9 say to honor the LORD with?",
+        "choices": [
+         "Your wealth and the firstfruits of your produce",
+         "What's left over",
+         "Only money"
+        ],
+        "answer": 0,
+        "explain": "The first and best."
+       }
+      ]
      }
     },
     {
@@ -14634,7 +15691,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-fish"
      ],
-     "minutes": 30,
+     "minutes": 50,
      "tags": {
       "protein": "salmon",
       "flavors": [
@@ -14654,7 +15711,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-fish"
      ],
-     "minutes": 30,
+     "minutes": 45,
      "tags": {
       "protein": "white-fish",
       "flavors": [
@@ -14675,7 +15732,7 @@ export const LIBRARY = {
       "cooking-fish",
       "building-a-sauce"
      ],
-     "minutes": 40,
+     "minutes": 45,
      "tags": {
       "protein": "white-fish",
       "flavors": [

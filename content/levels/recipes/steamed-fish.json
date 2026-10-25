@@ -1,0 +1,172 @@
+{
+  "id": "steamed-fish",
+  "version": 1,
+  "track": "core",
+  "unit": 100,
+  "title": "Steamed fish with ginger and scallion",
+  "image": "meals/fish.svg",
+  "cuisine": "chinese",
+  "skill": "Steaming, judging freshness",
+  "skills": ["cooking-fish"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 45,
+  "scaling": {
+    "mode": "free",
+    "max": 6,
+    "notes": [
+      { "from": 5, "text": "Steam the fish in two batches, one plate at a time, and keep the first plate warm under foil." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "The gentlest heat",
+      "body": "Steaming cooks fish in hot, wet air instead of oil or water, so nothing hides its flavor. That's why Chinese cooks choose the freshest fish for it. Today you'll build a steamer from your large pot and three balls of foil, steam white fish on a plate until it flakes, top it with matchsticks of ginger and green onion, and finish it with soy sauce and warm oil."
+    },
+    "callback": {
+      "lesson": "vegetable-stir-fry",
+      "body": "In the stir-fry, you julienned carrots and peppers into thin matchsticks. Today it's ginger and green onion, cut just as fine, because they cook only from the warm oil poured over them."
+    },
+    "why": [
+      { "id": "fresh", "title": "Steaming shows freshness", "body": "With no browning and no sauce cooked in, steamed fish tastes exactly like the fish. Fresh fish smells like clean water or the sea, not fishy. Buy it the day you cook it, or use frozen fillets thawed in the fridge." },
+      { "id": "foil-steamer", "title": "A steamer from foil", "body": "Three balls of foil hold the plate above an inch of water. The water boils, and the steam rises around the plate and cooks the fish from every side. The lid keeps the steam in." },
+      { "id": "gentle", "title": "Why steam is gentle", "body": "Steam is about 212°F, much cooler than hot oil or an oven at 400°F. The fish heats evenly and slowly enough that it stays moist, and it's hard to overcook by a minute." },
+      { "id": "julienne", "title": "Fine matchsticks", "body": "The ginger and green onion cook only from the warm oil poured over them at the end. Cut thin, they soften and give off their smell in seconds. Cut thick, they stay raw and sharp." },
+      { "id": "warm-oil", "title": "Warm oil wakes up the aromatics", "body": "Oil that shimmers is about 350°F. Poured over the ginger and green onion, it sizzles and lightly cooks them, and their smell fills the kitchen. It's hot enough to burn, which is why the adult pours it." },
+      { "id": "flake", "title": "145°F, and it flakes", "body": "Cooked fish turns from see-through to solid white and separates into flakes when you press it with a fork. The thermometer in the thickest part should read 145°F." }
+    ],
+    "wrong": [
+      { "sign": "The pot boiled dry", "fix": "Turn off the heat, let it cool, and add more water. Next time, check the water level halfway through, and add hot water if it's low." },
+      { "sign": "The fish is still see-through in the middle", "fix": "Put the lid back on and steam 2 more minutes, then check again." },
+      { "sign": "There's water pooled on the plate", "fix": "That's juice from the fish. Tip it off carefully before the topping goes on, so the sauce isn't watery." },
+      { "sign": "The fish smells strongly fishy before cooking", "fix": "It isn't fresh enough to steam. Use it for something with a strong sauce, or don't use it at all if it smells sour." }
+    ],
+    "quiz": [
+      { "q": "Why is steaming called the gentlest way to cook fish?", "choices": ["Steam is about 212°F, much cooler than oil or the oven", "It uses no water", "It's the fastest"], "answer": 0, "explain": "The fish heats slowly and evenly." },
+      { "q": "What do the foil balls do?", "choices": ["Hold the plate above the water", "Keep the lid on", "Season the fish"], "answer": 0, "explain": "The steam rises around the plate." },
+      { "q": "Who pours the hot oil over the fish?", "choices": ["The adult", "Whoever is closest", "Nobody; it's poured cold"], "answer": 0, "explain": "Shimmering oil is about 350°F." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "rice-white", "amount": 1.5, "unit": "cup", "prep": "long-grain", "group": "Rice" },
+    { "ingredient": "water", "amount": 2.25, "unit": "cup", "group": "Rice" },
+    { "ingredient": "cod", "amount": 1.5, "unit": "lb", "prep": "in 4 pieces", "group": "Fish" },
+    { "ingredient": "salt", "amount": 0.25, "unit": "tsp", "group": "Fish" },
+    { "ingredient": "ginger-fresh", "amount": 2, "unit": "tbsp", "prep": "a 2-inch piece", "group": "Topping" },
+    { "ingredient": "green-onion", "amount": 4, "unit": "count", "round": "up", "group": "Topping" },
+    { "ingredient": "soy-sauce", "amount": 3, "unit": "tbsp", "group": "Topping" },
+    { "ingredient": "water", "amount": 2, "unit": "tbsp", "group": "Topping" },
+    { "ingredient": "sugar", "amount": 1, "unit": "tsp", "group": "Topping" },
+    { "ingredient": "vegetable-oil", "amount": 3, "unit": "tbsp", "group": "Topping" },
+    { "ingredient": "cilantro", "amount": 0.25, "unit": "cup", "optional": true, "group": "Topping" }
+  ],
+  "substitutions": [
+    { "for": "cod", "use": "tilapia", "reason": "availability", "note": "Thinner fillets may be done in 6 minutes." },
+    { "for": "soy-sauce", "use": "tamari", "reason": "gluten" }
+  ],
+  "equipment": [
+    "saucepan-medium",
+    "pot-large",
+    "foil",
+    "plate",
+    "paper-towels",
+    "chef-knife",
+    "cutting-board",
+    "spoon",
+    "small-bowl",
+    "measuring-spoons",
+    "measuring-cups",
+    "thermometer",
+    "fork",
+    "oven-mitts",
+    "skillet-nonstick-8"
+  ],
+  "steps": [
+    { "id": "rinse-rice", "text": "Put the rice in the saucepan and cover it with cold water. Swish it with your hand, then carefully pour off the cloudy water, holding the rice back with your hand. Do this 3 times.", "safety": "solo" },
+    { "id": "cook-rice", "text": "Add the rice's {qty:water} of water. Bring it to a boil over high heat with the lid off. Then turn the heat to low, put the lid on, and cook without lifting the lid.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 900, "timerLabel": "Rice", "tip": "When the timer rings, turn off the burner and leave the lid on. The rice keeps steaming until you're ready." },
+    { "id": "steamer", "text": "Roll three pieces of foil into balls about the size of a golf ball and set them in the bottom of the large pot. Pour in about an inch of water, just below the tops of the balls. Check that the plate sits flat on them with space around its edge.", "safety": "solo", "why": "foil-steamer", "tip": "The plate needs to be heatproof, and small enough to leave an inch of space around it so the steam can rise." },
+    { "id": "boil", "text": "Take the plate out, put the lid on the pot, and bring the water to a boil over high heat.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 300, "timerLabel": "Water to a boil" },
+    { "id": "julienne", "text": "Peel the ginger with the edge of the spoon. Slice it thin, stack the slices, and cut them into thin matchsticks. Cut the green onions into 2-inch pieces and slice them the long way into thin strips.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "julienne", "look": "Matchsticks as thin as you can cut them.", "tip": "Use the claw, knuckles against the blade." },
+    { "id": "sauce", "text": "Stir the soy sauce, the topping's water, and the sugar together in the small bowl.", "safety": "solo" },
+    { "id": "fish-plate", "text": "Smell the fish: it should smell clean, like water, not fishy. Pat it dry with paper towels and lay it on the plate in one layer. Sprinkle it with the fish's salt and scatter half the ginger over it.", "safety": "solo", "hazard": "Raw fish", "handles": ["cod"], "why": "fresh" },
+    { "id": "wash-fish", "type": "wash", "text": "Throw the paper towels and the fish's package away, and wash your hands with soap.", "safety": "solo", "hazard": "Raw fish" },
+    { "id": "steam", "text": "With oven mitts, take the lid off, tilting it away from you, and set the plate on the foil balls. Put the lid back on and steam the fish over medium-high heat.", "safety": "adult-nearby", "hazard": "Steam, boiling water", "timerSeconds": 480, "timerLabel": "Steam fish", "why": "gentle", "tip": "Steam pours out when the lid comes off. Lift the far side first, so it goes away from your face." },
+    { "id": "check", "type": "doneness", "text": "Turn off the burner. Lift the lid away from you and slide the thermometer into the side of the thickest piece. It needs to read at least 145°F, and flake when you press it with a fork. If not, turn the burner back on, put the lid on, and steam 2 more minutes.", "safety": "adult-nearby", "hazard": "Steam", "target": { "temp": 145, "unit": "F" }, "why": "flake" },
+    { "id": "plate-out", "text": "An adult lifts the hot plate out of the pot with oven mitts, sets it on the counter, and carefully tips off any liquid on the plate.", "safety": "adult-hands-on", "hazard": "Hot plate, steam" },
+    { "id": "topping", "text": "Pile the green onions and the rest of the ginger on top of the fish, and spoon the soy sauce mixture around it.", "safety": "solo" },
+    { "id": "oil", "text": "Heat the oil in the small skillet over medium heat until it shimmers. An adult pours it slowly over the green onions and ginger.", "safety": "adult-hands-on", "hazard": "Hot oil, spatter", "timerSeconds": 90, "timerLabel": "Heat oil", "why": "warm-oil", "look": "The oil ripples, but isn't smoking.", "tip": "Stand back while it's poured. It sizzles hard." },
+    { "id": "serve", "text": "Scatter the cilantro on top if you're using it. Fluff the rice with the fork and serve the fish over it with the sauce from the plate.", "safety": "solo" }
+  ],
+  "variations": [
+    {
+      "id": "parchment",
+      "title": "Fish in parchment packets",
+      "totalMinutes": 40,
+      "learn": {
+        "move": {
+          "title": "A steamer you fold yourself",
+          "body": "Fish sealed in a folded parchment packet steams in its own juices in the oven. There's no pot of boiling water and no hot oil, so it's the lighter choice. Today you'll fold white fish, ginger, green onion, and soy sauce into packets, bake them until the fish flakes, and open them at the table."
+        },
+        "callback": {
+          "lesson": "vegetable-stir-fry",
+          "body": "In the stir-fry, you julienned carrots and peppers into thin matchsticks. Here ginger and green onion are cut just as fine, so they soften in the packet's steam in the few minutes the fish takes."
+        },
+        "why": {
+          "drop": ["foil-steamer", "warm-oil"],
+          "add": [
+            { "id": "packet", "title": "How the packet steams", "body": "The oven heats the sealed packet, and the fish's own juices turn to steam inside it. The steam can't escape, so it cooks the fish gently, the same way a steamer would, and the ginger and soy flavor it as it cooks." },
+            { "id": "open-away", "title": "Open it away from you", "body": "The packet is full of steam, and steam burns. Cut or tear it open on the side away from your face and hands, and let the first puff out before you lean in." }
+          ],
+          "change": {
+            "julienne": {
+              "id": "julienne",
+              "title": "Fine matchsticks",
+              "body": "The ginger and green onion cook only in the packet's steam, for the few minutes the fish takes. Cut thin, they soften and flavor the fish. Cut thick, they stay raw and sharp."
+            }
+          }
+        },
+        "wrong": [
+          { "sign": "The packet came open in the oven", "fix": "The folds weren't tight enough. It still cooked; next time crimp the edges in small overlapping folds all the way around." },
+          { "sign": "The fish is still see-through in the middle", "fix": "Fold the packet closed again and bake 3 more minutes." },
+          { "sign": "It's watery and bland", "fix": "Spoon the juices in the packet over the rice. They're full of flavor." }
+        ],
+        "quiz": [
+          { "q": "What cooks the fish inside a parchment packet?", "choices": ["Steam from its own juices", "Hot oil", "Boiling water"], "answer": 0, "explain": "The sealed packet traps the steam." },
+          { "q": "How do you open a hot packet?", "choices": ["On the side away from your face, letting the steam out first", "By leaning in close to look", "By shaking it"], "answer": 0, "explain": "Steam burns." },
+          { "q": "What temperature does fish need to reach?", "choices": ["145°F", "160°F", "165°F"], "answer": 0, "explain": "And it flakes when you press it with a fork." }
+        ]
+      },
+      "ingredients": {
+        "change": {
+          "vegetable-oil@Topping": { "ingredient": "sesame-oil", "amount": 2, "unit": "tsp", "group": "Topping" }
+        }
+      },
+      "equipment": {
+        "drop": ["pot-large", "foil", "plate", "skillet-nonstick-8"],
+        "add": ["sheet-pan", "parchment", "table-knife"]
+      },
+      "steps": {
+        "drop": ["steamer", "boil", "fish-plate", "wash-fish", "steam", "check", "plate-out", "topping", "oil"],
+        "add": [
+          { "id": "oven", "text": "Turn the oven on to 400°F, with a rack in the middle.", "safety": "adult-nearby", "hazard": "Hot oven" },
+          { "id": "packets", "text": "Tear off four pieces of parchment, each about 15 inches long, and fold each in half to crease it. Open them on the counter. Pat the fish dry and set one piece just beside the crease on each, then sprinkle with the fish's salt.", "safety": "solo", "hazard": "Raw fish", "handles": ["cod"], "why": "fresh" },
+          { "id": "wash-packets", "type": "wash", "text": "Throw the paper towels and the fish's package away, and wash your hands with soap.", "safety": "solo", "hazard": "Raw fish" },
+          { "id": "fill", "text": "Top each piece of fish with ginger and green onion. Stir the sesame oil into the soy sauce mixture and spoon it over the fish.", "safety": "solo" },
+          { "id": "fold", "text": "Fold the parchment over the fish. Starting at one end, fold the edges over in small, overlapping folds, pressing each one hard, all the way around, so the packet is sealed. Tuck the last fold underneath. Set the packets on the sheet pan.", "safety": "solo", "why": "packet", "look": "Half-moon packets, sealed all the way around." },
+          { "id": "bake", "text": "Bake the packets.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 720, "timerLabel": "Bake packets", "tip": "Use oven mitts, and slide the pan in away from you." },
+          { "id": "check-packet", "type": "doneness", "text": "With oven mitts, pull the pan out. Cut one packet open with the table knife on the side away from you and let the steam out. Slide the thermometer into the thickest part of the fish. It needs to read at least 145°F, and flake when you press it with a fork. If not, fold it closed and bake 3 more minutes.", "safety": "adult-nearby", "hazard": "Steam, hot pan", "target": { "temp": 145, "unit": "F" }, "why": "open-away" }
+        ],
+        "change": {
+          "serve": {
+            "id": "serve",
+            "text": "Set each packet on a plate with rice beside it, and let everyone cut theirs open on the side away from them. Scatter cilantro on top if you're using it.",
+            "safety": "adult-nearby",
+            "hazard": "Steam",
+            "why": "open-away"
+          }
+        },
+        "order": ["rinse-rice", "cook-rice", "+0", "julienne", "sauce", "+1", "+2", "+3", "+4", "+5", "+6", "serve"]
+      }
+    }
+  ]
+}

@@ -54,6 +54,11 @@
     { "id": "quick-soak", "word": "Quick-soak", "forms": ["quick-soak", "quick soak"], "means": "Boil dried beans for 2 minutes, turn off the heat, cover them, and leave them an hour. It's almost as good as soaking overnight.", "taughtIn": "red-beans-and-rice", "image": null },
     { "id": "hard-boil", "word": "Hard boil", "forms": ["hard boil", "boil hard", "boils hard", "boiling hard"], "means": "A full, rolling boil, with big bubbles across the whole pot. Red kidney beans need 10 minutes of it to be safe.", "taughtIn": "red-beans-and-rice", "image": null },
     { "id": "absorption-method", "word": "Absorption method", "forms": ["absorption method"], "means": "Cooking a grain in just enough liquid for it to drink all of it, so nothing is drained.", "taughtIn": null, "image": null },
-    { "id": "pilaf", "word": "Pilaf", "forms": ["pilaf", "pilafs"], "means": "A grain toasted in fat before the liquid goes in, then cooked with the lid on until every grain is separate.", "taughtIn": null, "image": null }
+    { "id": "pilaf", "word": "Pilaf", "forms": ["pilaf", "pilafs"], "means": "A grain toasted in fat before the liquid goes in, then cooked with the lid on until every grain is separate.", "taughtIn": null, "image": null },
+    { "id": "fillet", "word": "Fillet", "forms": ["fillet", "fillets"], "means": "A boneless piece of fish cut from along the backbone, with or without its skin.", "taughtIn": "pineapple-teriyaki-salmon", "image": null },
+    { "id": "pin-bones", "word": "Pin bones", "forms": ["pin bones", "pin bone"], "means": "Thin, soft bones in a row down the thick end of a fish fillet. Feel for them with your fingertips and pull them out with tweezers.", "taughtIn": null, "image": null },
+    { "id": "steam", "word": "Steam", "forms": ["steamed", "steaming"], "means": "Cook food in the hot, wet air above boiling water, with a lid on. The gentlest way to cook fish and vegetables.", "taughtIn": null, "image": null },
+    { "id": "flake", "word": "Flake", "forms": ["flake", "flakes", "flaking"], "means": "When cooked fish is pressed with a fork, it separates into layers called flakes. Flaking is one sign fish is done.", "taughtIn": null, "image": null },
+    { "id": "en-papillote", "word": "In parchment", "forms": ["parchment packet", "parchment packets"], "means": "Food sealed in folded parchment and baked, so it steams in its own juices. French cooks call it en papillote.", "taughtIn": null, "image": null }
   ]
 }

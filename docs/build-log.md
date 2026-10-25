@@ -4894,3 +4894,44 @@ and grains", and goes live for every family on merge.
   pointed at Unit 5 for that only. The demo still shows Unit 1.
 - Tests: 356. A Level course now schedules 21 written recipes, with 15
   waiting.
+
+## 201. 2026-10-25 — Level 3 Unit 6: fish
+
+Phase 12, slice 12f, Unit 6 (plan §12.4). Owner, 2026-10-25: Unit 6, the
+same way as Units 4 and 5. The copy is in a review doc, "Level 3 Unit 6:
+Fish", and goes live for every family on merge.
+
+- **Baked fish with lemon and herbs** (week 21, Level only): salmon, with
+  cod or tilapia as the cheaper swaps; pin bones felt for and pulled with
+  tweezers; baked at 400°F to 145°F. Unit 5's rice pilaf cooks alongside,
+  and the fish goes in when the rice timer shows 15 minutes left, so both
+  finish together (the review's "side from an earlier week").
+- **Steamed fish with ginger and scallion** (week 22, Level only): a
+  heatproof plate on three foil balls in the large pot; cod steamed to
+  145°F; ginger and green onion julienned; the adult lifts the hot plate and
+  pours oil heated only until it shimmers. **Fish in parchment packets** is
+  its variation and week 22's option: no boiling water and no hot oil.
+- **Cod poached in tomato sauce** (week 23, Level only): a sweated onion,
+  tomatoes with olives and capers simmered thick, cod poached under the lid
+  on low to 145°F.
+- **Pan-seared trout** (week 24, mastery, Level only): fan on and a window
+  open first (the review's ventilation step), skin dried, pressed flat, and
+  left until it releases; finished with butter and lemon. Tilapia is the
+  swap, with a note that it has no skin.
+- **Weeks 21–24's twelve part pages:** fins and scales, reading fish labels
+  and names, why fish cooks faster than meat, and a species ID unit quiz;
+  drills on pin bones, freshness, doneness by flaking, and searing one
+  fillet skin side down; Beyond the Recipe: dishes that serve well cold,
+  loaves and fishes and breakfast on the shore (Matthew 14, John 21), a
+  sauce made ahead with the fish cooked fresh, and firstfruits and tithing
+  (Deuteronomy 14:22–29, Proverbs 3:9). The blocked-word check covers every
+  page, so unclean water animals are described by what they lack.
+- **Kitchen words:** fillet (steps can't use it until it has a card), pin
+  bones, steam (underlined as "steamed" and "steaming" only), flake, in
+  parchment.
+- New: skin-on trout fillets, and tweezers for pin bones.
+- Level 3's hours with every part are now about 132 (131 before).
+- Screenshots were sent in the session, taken from the demo's Try a week
+  pointed at Unit 6 for that only. The demo still shows Unit 1.
+- Tests: 356. A Level course now schedules 25 written recipes, with 11
+  waiting; best fit's "written option first" check moved to week 25.
