@@ -8,6 +8,7 @@ import { openLesson } from './player.js';
 import { dietView } from './lib/diet.js';
 import { shoppingList } from './lib/shop.js';
 import { numberCourse } from './lib/course.js';
+import { markTerms, toggleTermCard } from './lib/terms.js';
 import { levelProgressView } from './rewards.js';
 import { LEVEL_OUTLINES } from './level-outlines.js';
 
@@ -273,7 +274,7 @@ function partPanel(w, k, quest) {
   const quiz = (x.quiz ?? []).map((q, n) => `<div class="k-pagebody"><b>${esc(q.q)}</b><div class="k-parts">${q.choices.map((c, i) => `<button type="button" class="k-part" data-quiz="${n}-${i}"><b>${esc(c)}</b></button>`).join('')}</div><p data-why="${n}" hidden></p></div>`).join('');
   return `<h3 class="${quest ? 'q-title' : 'p-title'}">${esc(x.title)}</h3>
     <p>About ${x.minutes} minutes</p>
-    <div class="k-pagebody">${(x.body ?? []).map((t) => `<p>${esc(t)}</p>`).join('')}${x.steps?.length ? `<ol>${x.steps.map((t) => `<li>${esc(t)}</li>`).join('')}</ol>` : ''}${quiz}</div>
+    <div class="k-pagebody">${(x.body ?? []).map((t) => `<p>${markTerms(t, R.terms, esc)}</p>`).join('')}${x.steps?.length ? `<ol>${x.steps.map((t) => `<li>${markTerms(t, R.terms, esc)}</li>`).join('')}</ol>` : ''}${quiz}</div>
     ${on ? `<p class="${quest ? 'q-swap' : 'p-swap'}">Done ✓</p>` : `<div class="acts"><button type="button" class="${quest ? 'q-btn' : 'p-btn'}" data-done="${k}">Done</button></div>`}`;
 }
 
@@ -366,6 +367,8 @@ root.addEventListener('click', (e) => {
   if (tab) { e.preventDefault(); V.tab = tab.dataset.tab; keep(); return draw(); }
   // Structured Progression: a week, a part's tab, Done, and a quiz answer.
   const lvweek = t.closest('[data-lvweek]'), ptab = t.closest('[data-ptab]'), doneBtn = t.closest('[data-done]'), quiz = t.closest('[data-quiz]');
+  const kw = t.closest('[data-term]');
+  if (kw) return toggleTermCard(kw, root, R.terms, esc);
   if (lvweek) { V.lvWeek = Number(lvweek.dataset.lvweek); keep(); return draw(); }
   if (ptab) { V.lvPart = ptab.dataset.ptab; keep(); draw(); return root.querySelector('.d-ptabs [aria-selected="true"]').focus({ preventScroll: true }); }
   if (doneBtn) { V.lvDone = [...new Set([...V.lvDone, `${V.lvWeek}-${doneBtn.dataset.done}`])]; keep(); return draw(); }

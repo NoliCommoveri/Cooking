@@ -4720,3 +4720,33 @@ Phase 12, slice 12f, Unit 2 (plan §12.4).
   pointed at Unit 2 for that only. The demo still shows Unit 1.
 - Tests: 351. The Level course test now schedules 9 written recipes, with
   27 waiting; the hours tests expect 128.
+
+## 196. 2026-10-25 — How much? in Cook mode, and kitchen words on part pages
+
+- Owner, 2026-10-25: add the kitchen words for Unit 2 and link them; and in
+  a cook, a way to see how much of an ingredient a step uses, either by
+  tapping the ingredient or with one How much? button. Claude built the
+  button: kitchen words are already tappable in step text, and two kinds of
+  tappable word in one sentence would be hard to tell apart.
+- **How much?** (`public/player.js`, `src/content/amounts.js`): a Cook mode
+  step that names ingredients has a How much? button beside Why?. It opens
+  "How much, for 8" with each named ingredient's lines at the cook's size,
+  any swap, and the group where one ingredient is in two (challah's eggs:
+  Dough and Egg wash). A step names an ingredient by its name or a run of
+  its words ("flour", "chicken"); describing words alone ("brown", "fresh")
+  and general ones ("sauce", "powder") don't count; a longer name claims its
+  words, so "vegetable oil" isn't olive oil and "garlic powder" isn't
+  garlic; any fish is "the fish"; a {qty:} placeholder names its ingredient.
+  Wash steps and left-out ingredients show nothing. It closes when the step
+  changes.
+- **Kitchen words** (`content/terms.json`): bloom, shaggy dough, tacky,
+  windowpane test, egg wash, poke test, crumb, and enriched dough, beside
+  proof (build log 195). Knead is now practiced in Pita bread, the first
+  written lesson that kneads.
+- **Kitchen words on part pages:** a Level's knowledge, drill, and Beyond
+  the Recipe pages (the kitchen's and the demo's) underline kitchen words,
+  and a tap opens the word's card under its paragraph (`markTerms` and
+  `toggleTermCard` in `src/content/terms.js`).
+- The review doc has the new words and the button's copy. Screenshots were
+  sent in the session.
+- Tests: 355 (four new: which ingredients a step names).

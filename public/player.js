@@ -7,6 +7,7 @@
 // account for every profile on it (onCook); the demo saves nothing.
 import { scaleLesson, servingOptions } from './lib/scale.js';
 import { findTerms } from './lib/terms.js';
+import { ingredientsInStep } from './lib/amounts.js';
 import { dietView } from './lib/diet.js';
 import { applyPatches, showValue } from './lib/patch.js';
 import { lessonVersion } from './lib/variations.js';
@@ -164,7 +165,7 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
   S.with = (S.with ?? []).filter((id) => crew.some((p) => p.id === id));
   // A cook in progress reopens on its lesson card, with Keep going and Start over.
   if (S.stage !== 'done') S.stage = 'card';
-  let term = null, why = null, tick = null;
+  let term = null, why = null, tick = null, much = false;
   const save = () => writeState(profile.id, L.id, S);
   // The whole cook, sent each time it moves on (a new stage or step, servings,
   // who's on it, Plate it). Check-offs ride along with the next one.
@@ -221,6 +222,7 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
       S.step = i - 1;
     }
     term = null;
+    much = false;
     save();
     sync();
     draw();
@@ -269,6 +271,19 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
     if (!t) return '';
     const taught = t.taughtIn && R.dishes[t.taughtIn];
     return `<div class="kwcard" role="note"><b>${esc(t.word)}</b><p>${esc(t.means)}</p>${taught ? `<small>Practiced in ${esc(lessonRef(t.taughtIn, taught))}</small>` : ''}<button type="button" class="kwclose" data-act="term" data-id="">Got it</button></div>`;
+  }
+
+  // How much? (owner, 2026-10-25): the amounts of the ingredients a step
+  // names, at this cook's size, without going back to the list.
+  function muchCard(ids) {
+    if (!much || !ids.length) return '';
+    const lines = ingredientsNow();
+    const rows = ids.flatMap((id) => {
+      const mine = lines.filter((i) => i.id === id);
+      const groups = new Set(mine.map((i) => i.group ?? ''));
+      return mine.map((i) => `<li>${esc(i.line)}${i.prep ? `, ${esc(i.prep)}` : ''}${i.optional ? ' (optional)' : ''}${groups.size > 1 && i.group ? ` <small>(${esc(i.group)})</small>` : ''}${swapFor[id] ? ` <small>Use ${esc(name(swapFor[id]).toLowerCase())} instead</small>` : ''}</li>`);
+    });
+    return `<div class="kwcard muchcard" role="note"><b>How much, for ${S.servings}</b><ul>${rows.join('')}</ul><button type="button" class="kwclose" data-act="much">Got it</button></div>`;
   }
 
   // After shopping, a different count warns and doesn't block (§6.6).
@@ -471,13 +486,15 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
     const timer = S.timers.find((t) => t.step === s.id);
     const startTimer = s.timerSeconds && (!timer || timer.state === 'idle')
       ? `<button type="button" class="${quest ? 'q-tstart' : 'p-tstart'}" data-act="tstart" data-step="${esc(s.id)}">${ic('i-clock')}Start the ${fmt(s.timerSeconds)} timer${s.timerLabel ? `: ${esc(s.timerLabel)}` : ''}</button>` : '';
+    const named = ingredientsInStep(s, L.steps.find((x) => x.id === s.id)?.text, ingredientsNow(), ING);
+    const muchBtn = named.length ? `<button type="button" class="${quest ? 'whybtn' : 'p-why'}" data-act="much" aria-expanded="${much}">${ic('i-spoon')}How much?</button>` : '';
     const whyBtn = s.why ? `<button type="button" class="${quest ? 'whybtn' : 'p-why'}" data-act="why" data-id="${esc(s.why)}">${ic('i-flame')}Why?</button>` : '';
     const text = `${s.type === 'wash' ? `${ic('i-wash')} ` : ''}${withTerms(s.text)}`;
     const nav = `<div class="${quest ? 'q-nav' : 'p-nav'}"><button type="button" class="${T.back}" data-act="step" data-i="-1">${i === 0 ? 'Prep' : 'Back'}</button><button type="button" class="${T.btn}" data-act="${last ? 'finish' : 'step'}" data-i="1">${last ? 'Plate it' : 'Next step'}</button></div>`;
     const body = quest
       ? `<div class="q-cook">${banner(s.safety, s.hazard)}<div class="q-stages" style="grid-template-columns:repeat(${n},1fr)" role="img" aria-label="Stage ${i + 1} of ${n}">${steps.map((_, k) => `<i class="${k < i ? 'done' : k === i ? 'cur' : ''}"></i>`).join('')}</div>
-          <article class="q-panel q-log"><p class="q-kick">Stage ${i + 1} of ${n}</p><p class="steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="logacts">${whyBtn}${voiceBtn()}${fixBtn(s.id)}</div></article>${nav}</div>`
-      : `<div class="p-cook">${banner(s.safety, s.hazard)}<div class="p-cookbody"><article class="p-card p-lined p-stepcard"><p class="p-stepno">Step ${i + 1} of ${n}</p><p class="p-steptxt">${text}</p>${termCard()}${notes.join('')}${startTimer}<div class="p-acts">${whyBtn}${voiceBtn()}${fixBtn(s.id)}</div></article>
+          <article class="q-panel q-log"><p class="q-kick">Stage ${i + 1} of ${n}</p><p class="steptxt">${text}</p>${termCard()}${muchCard(named)}${notes.join('')}${startTimer}<div class="logacts">${muchBtn}${whyBtn}${voiceBtn()}${fixBtn(s.id)}</div></article>${nav}</div>`
+      : `<div class="p-cook">${banner(s.safety, s.hazard)}<div class="p-cookbody"><article class="p-card p-lined p-stepcard"><p class="p-stepno">Step ${i + 1} of ${n}</p><p class="p-steptxt">${text}</p>${termCard()}${muchCard(named)}${notes.join('')}${startTimer}<div class="p-acts">${muchBtn}${whyBtn}${voiceBtn()}${fixBtn(s.id)}</div></article>
           <div class="p-cup">${cupSVG(i, n)}<span>${i} of ${n} done</span></div></div>${nav}</div>`;
     return body + timerTray();
   }
@@ -619,6 +636,7 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
       if (dir < 0 && S.step === 0) S.stage = 'prep';
       else S.step = Math.max(0, Math.min(n - 1, S.step + dir));
       term = null;
+      much = false;
     };
     switch (act) {
       case 'exit': return exit();
@@ -670,6 +688,7 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
         onDone?.();
         break;
       case 'term': term = d.id && d.id !== term ? d.id : null; return draw(false);
+      case 'much': much = !much; return draw(false);
       case 'why': why = d.id; return draw(false);
       case 'why-close': why = null; return draw(false);
       case 'tstart': {

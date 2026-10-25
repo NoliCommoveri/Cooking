@@ -10,6 +10,7 @@ import { LOGIN_PICTURES } from './lib/login-pictures.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 import { RUBRIC, GRADE_TEXT_MAX } from './lib/grades.js';
 import { PARTS, plannedMinutes, hoursOf } from './lib/levels.js';
+import { markTerms, toggleTermCard } from './lib/terms.js';
 import { progressView, levelProgressView, celebrate } from './rewards.js';
 import { isMuted, setMuted } from './sound.js';
 import { gettingStarted, openRuth, ruthButton } from './ruth.js';
@@ -19,6 +20,8 @@ import { starRow, ratingSaver, ratedCount } from './tastes.js';
 const app = document.getElementById('app');
 
 // ---------- helpers ----------
+
+const escHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 function el(tag, attrs = {}, ...kids) {
   const n = document.createElement(tag);
@@ -628,7 +631,13 @@ async function levelPage(profileId, key) {
       } }, el('b', {}, c)))), why);
   });
   const written = x.body?.length || x.steps?.length || x.quiz?.length;
-  screen(el('section', { class: 'kitchen', 'data-kt': p.theme },
+  // Kitchen words on the page are buttons that open their meaning (§6.1).
+  const { terms } = await contentRegistry();
+  const worded = (tag, t) => { const n = el(tag); n.innerHTML = markTerms(t, terms, escHtml); return n; };
+  screen(el('section', { class: 'kitchen', 'data-kt': p.theme, onclick: (e) => {
+    const kw = e.target.closest('[data-term]');
+    if (kw) toggleTermCard(kw, e.currentTarget, terms, escHtml);
+  } },
     el('a', { class: 'back', href: `#/kitchen/${p.id}` }, quest ? '← Quest board' : '← Recipe box'),
     sabbathBanner(),
     el('article', { class: `${quest ? 'q-panel' : 'p-card'} k-level` },
@@ -636,8 +645,8 @@ async function levelPage(profileId, key) {
       el('h2', { class: quest ? 'q-title' : 'p-title' }, x.title),
       el('p', {}, `About ${x.minutes} minutes`),
       el('div', { class: 'k-pagebody' },
-        (x.body ?? []).map((t) => el('p', {}, t)),
-        x.steps?.length ? el('ol', {}, x.steps.map((t) => el('li', {}, t))) : null,
+        (x.body ?? []).map((t) => worded('p', t)),
+        x.steps?.length ? el('ol', {}, x.steps.map((t) => worded('li', t))) : null,
         quiz,
         written ? null : el('p', {}, 'This page is still being written. Do what the title says, with an adult if you need one, then tap Done.')),
       x.done_at ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, `Done ${fmtDay(x.done_at.slice(0, 10))} ✓`)

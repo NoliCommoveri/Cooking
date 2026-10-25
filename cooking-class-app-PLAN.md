@@ -442,6 +442,7 @@ Do **not** use:
 - **Adult profiles don't ask.** On an adult profile the button is **Cook this**: it queues the lesson for that profile straight away, with no approval and no parent PIN, and it goes on the shopping list like any queued lesson. A shared profile with a kid on it is a kid profile, so it still asks
 - Screen Wake Lock during Prep and Cook
 - **Kitchen words** (recommendation, approved): cooking words in step text (dice, mince, simmer, fold the dough…) are underlined. Tapping one opens a card with what it means in kid terms, including a size or look they can picture ("smaller than a grain of rice"), a small drawing, and the lesson that practices it. The card is drawn by the profile's theme, like the Why? card. The words live in `content/terms.json` (§7.1), and the linter won't let a lesson use a cooking word that isn't defined there (§7.4)
+- **How much? — Requirement (owner, 2026-10-25):** in Cook mode, a step that names ingredients has a **How much?** button. It opens the amounts of those ingredients at the cook's size, without going back to the list; an ingredient in two groups says which group each line is (Dough, Egg wash). The ingredients are found from the step's words (`src/content/amounts.js`); a longer name wins its words, so "vegetable oil" isn't olive oil. Kitchen words are also tappable on a Level's part pages (owner, 2026-10-25).
 - Progress, ranks, skills earned, and gallery, drawn by the profile's theme (§5.4, §5.4a)
 
 ### 6.2 Parent features
