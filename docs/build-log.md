@@ -5482,3 +5482,19 @@ During the build the owner made three calls, now Requirements in §12.0 and
   stays; a blocked week waits unqueued, says why, takes a request counted
   on Recipe gaps, goes on with Put back, and cooks again once the settings
   change; backup export and import carry `course_starts`.
+
+## 217. 2026-10-25 — 14d: the owner's calls
+
+Planning only; nothing in the app changed. Owner, 2026-10-25, answering the
+open questions on the kitchen's week card:
+
+- A learner's swap changes the week for everyone on the course.
+- The dish being cooked is highlighted; the default isn't marked.
+- Put back wipes a swap.
+- No swapping on the Sabbath.
+- The shopping check opens the list preview for the new dish, with what the
+  old list had preselected as already have, each one untickable: "just
+  cause they made a list doesn't mean they already bought it."
+
+Recorded in plan §12.0 and §12.9 under 14d. Before, §12.0 said a swap after
+the shopping list was made only said what was missing.
