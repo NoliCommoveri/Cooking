@@ -1,0 +1,80 @@
+{
+  "id": "israeli-salad",
+  "version": 1,
+  "track": "core",
+  "unit": 100,
+  "title": "Israeli salad",
+  "image": "meals/salad.svg",
+  "cuisine": "israeli",
+  "skill": "A fine, even dice",
+  "skills": ["dicing"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 35,
+  "scaling": {
+    "mode": "fixed",
+    "multipliers": [1, 2],
+    "notes": { "1": "Serves 6 as a side.", "2": "Serves 12. Use the largest bowl you have." }
+  },
+  "learn": {
+    "move": {
+      "title": "Every cube the same",
+      "body": "Israeli salad is cucumber, tomato, and pepper cut into tiny, even cubes and dressed with lemon and olive oil. There's nothing to hide behind: the dice is the dish. This is the unit's mastery cook, so you'll do every cut on your own."
+    },
+    "callback": {
+      "lesson": "fish-tacos",
+      "body": "You've diced for pico: planks, sticks, cubes. Israeli salad uses the same cuts, finer and on more vegetables, and every cube shows in the bowl."
+    },
+    "why": [
+      { "id": "quarter-inch", "title": "About ¼ inch", "body": "A fine dice is about ¼ inch on every side, the size of a pea. Small enough that each forkful gets some of everything, big enough that the cucumber still crunches." },
+      { "id": "planks-first", "title": "Even planks make even cubes", "body": "The first cut decides the rest. If the planks are all ¼ inch thick, the sticks and cubes cut from them can't help being even." },
+      { "id": "flat-side", "title": "Flat side down", "body": "A round cucumber or a curved pepper wall rocks under the knife. Cut it so a flat side sits on the board, and it stays put." },
+      { "id": "dress-late", "title": "Dress it just before serving", "body": "Salt draws water out of cut cucumber and tomato. Dressed early, the salad sits in a puddle; dressed at the table, it stays crisp." }
+    ],
+    "wrong": [
+      { "sign": "The cucumber cubes are bigger than the tomato", "fix": "Cut the next cucumber planks a little thinner, and recut the big cubes once more." },
+      { "sign": "The tomato cubes are mushy", "fix": "Use firm tomatoes, and slide the blade forward through the skin instead of pressing down." },
+      { "sign": "The salad is watery", "fix": "Drain it in the colander and dress it again. Next time, dress it right before it's eaten." }
+    ],
+    "quiz": [
+      { "q": "How big is a fine dice?", "choices": ["About ¼ inch, the size of a pea", "About ½ inch", "As small as a grain of rice"], "answer": 0, "explain": "A mince is the size of a grain of rice; a fine dice is a little bigger." },
+      { "q": "Why is the salad dressed right before serving?", "choices": ["Salt draws water out and makes it soggy", "The lemon cooks the vegetables", "Oil makes it hard to stir"], "answer": 0, "explain": "Dressed at the table, it stays crisp." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "cucumber", "amount": 2, "unit": "count", "round": "up" },
+    { "ingredient": "tomato", "amount": 4, "unit": "count", "round": "up", "prep": "firm" },
+    { "ingredient": "bell-pepper-red", "amount": 1, "unit": "count", "round": "up" },
+    { "ingredient": "onion-red", "amount": 0.5, "unit": "count", "round": "up" },
+    { "ingredient": "parsley", "amount": 0.25, "unit": "cup", "prep": "leaves" },
+    { "ingredient": "lemon", "amount": 1, "unit": "count", "round": "up", "prep": "juiced" },
+    { "ingredient": "olive-oil", "amount": 3, "unit": "tbsp" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp" },
+    { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp" }
+  ],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "vegetable-peeler",
+    "spoon",
+    "mixing-bowl-large",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "fork",
+    "colander"
+  ],
+  "steps": [
+    { "id": "set-up", "text": "Set the cutting board on a damp paper towel, hone the knife, and set out the large bowl. This is a mastery cook: an adult stays nearby but doesn't help with the cuts.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "cucumber", "text": "Peel the cucumbers in stripes, or leave the skin on. Cut each into 3-inch pieces, stand each piece on end, and slice it into planks ¼ inch thick.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "planks-first", "tip": "Standing a piece on its cut end gives it a flat bottom." },
+    { "id": "cucumber-dice", "text": "Lay the planks flat, cut them into ¼-inch sticks, then cut across the sticks into ¼-inch cubes. Put them in the bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "quarter-inch", "look": "Cubes the size of a pea, with seeds still in." },
+    { "id": "tomato", "text": "Quarter the tomatoes and scoop out the seeds. Lay each quarter skin side down, cut ¼-inch strips, then cut across them into cubes. Add them to the bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Slide the blade forward through the skin; don't press down." },
+    { "id": "pepper", "text": "Cut the top and bottom off the pepper, cut down one side, and open it flat. Cut away the core and ribs. Lay it skin side down and cut ¼-inch strips, then cubes. Add them to the bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "flat-side" },
+    { "id": "onion", "text": "Peel the red onion half, leaving the root on. Lay it flat side down and dice it fine, strips toward the root, then across. Add it to the bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Cubes a little smaller than the rest, since raw onion is strong." },
+    { "id": "parsley", "text": "Dry the parsley well and mince it fine, rocking the knife with your hand flat on the spine. Add it to the bowl.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "check", "text": "Look over the bowl. Recut any cube that's much bigger than the rest.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Every vegetable in cubes about the same size." },
+    { "id": "dressing", "text": "In the small bowl, whisk the lemon juice, olive oil, salt, and pepper with the fork.", "safety": "solo" },
+    { "id": "serve", "text": "Right before serving, pour the dressing over the salad and toss gently with the spoon. Taste, and add a pinch more salt if it needs it.", "safety": "solo", "why": "dress-late" }
+  ]
+}

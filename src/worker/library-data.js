@@ -3469,6 +3469,131 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "vegetable-stir-fry",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Vegetable stir-fry with tofu",
+   "image": "img/dishes/vegetable-stir-fry.webp",
+   "cuisine": "chinese",
+   "skill": "Julienned vegetables, stir-frying in batches",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "max": 6,
+    "notes": [
+     {
+      "from": 5,
+      "text": "Fry the tofu in three batches, and the vegetables in two, so the pan stays hot."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "tofu-extra-firm"
+    },
+    {
+     "ingredient": "cornstarch"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "snow-peas"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "vinegar-rice"
+    },
+    {
+     "ingredient": "cornstarch"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "tofu",
+    "flavors": [
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "lots"
+   },
+   "tasteItems": {
+    "required": [
+     "carrots",
+     "bell-peppers",
+     "onions",
+     "garlic",
+     "ginger",
+     "sesame"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "saucepan-medium",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "kitchen-towel",
+    "plate",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "fork",
+    "skillet-12",
+    "spatula",
+    "box-grater"
+   ]
+  },
+  {
    "id": "oyakodon",
    "version": 1,
    "track": "core",
@@ -5943,6 +6068,118 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "beef-tacos-pico",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Beef tacos with pico de gallo",
+   "image": "img/meals/meat.svg",
+   "cuisine": "mexican",
+   "skill": "An even dice for pico de gallo",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "Brown the beef in two batches, so it browns instead of steaming."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "onion-white"
+    },
+    {
+     "ingredient": "jalapeno",
+     "optional": true
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "chili-powder"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "tortilla-corn"
+    },
+    {
+     "ingredient": "cheddar-shredded",
+     "optional": true
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "onions",
+     "cilantro",
+     "lemon-lime",
+     "garlic"
+    ],
+    "optional": [
+     "hot-peppers",
+     "sour-cream-yogurt"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "spoon",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "wooden-spoon",
+    "heatproof-bowl",
+    "thermometer",
+    "paper-towels",
+    "microwave",
+    "kitchen-towel"
+   ],
+   "level": "level-3"
+  },
+  {
    "id": "dinner-rolls",
    "version": 1,
    "track": "core",
@@ -6038,6 +6275,86 @@ export const LIBRARY = {
    "level": "level-3"
   },
   {
+   "id": "israeli-salad",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Israeli salad",
+   "image": "img/meals/salad.svg",
+   "cuisine": "israeli",
+   "skill": "A fine, even dice",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Serves 6 as a side.",
+     "2": "Serves 12. Use the largest bowl you have."
+    }
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "onion-red"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "cucumber",
+     "tomatoes",
+     "bell-peppers",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "vegetable-peeler",
+    "spoon",
+    "mixing-bowl-large",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "fork",
+    "colander"
+   ],
+   "level": "level-3"
+  },
+  {
    "id": "sandwich-loaf",
    "version": 1,
    "track": "core",
@@ -6121,6 +6438,91 @@ export const LIBRARY = {
     "cooling-rack",
     "chef-knife",
     "cutting-board"
+   ],
+   "level": "level-3"
+  },
+  {
+   "id": "tabbouleh",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Tabbouleh",
+   "image": "img/meals/salad.svg",
+   "cuisine": "lebanese",
+   "skill": "Mincing parsley fine",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Serves 6 as a side.",
+     "2": "Serves 12. Mince the parsley a bunch at a time."
+    }
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "bulgur-fine"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "mint"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "mint",
+     "tomatoes",
+     "onions",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "microwave",
+    "mixing-bowl-large",
+    "small-bowl",
+    "plate",
+    "measuring-cups",
+    "measuring-spoons",
+    "colander",
+    "kitchen-towel",
+    "chef-knife",
+    "cutting-board",
+    "spoon",
+    "fork"
    ],
    "level": "level-3"
   },
@@ -6347,6 +6749,12 @@ export const LIBRARY = {
    "name": "White rice",
    "contains": []
   },
+  "bulgur-fine": {
+   "name": "Fine bulgur (#1)",
+   "contains": [
+    "gluten"
+   ]
+  },
   "soy-sauce": {
    "name": "Soy sauce",
    "contains": [
@@ -6431,6 +6839,10 @@ export const LIBRARY = {
   },
   "carrot": {
    "name": "Carrots",
+   "contains": []
+  },
+  "snow-peas": {
+   "name": "Snow peas",
    "contains": []
   },
   "cucumber": {
@@ -6987,8 +7399,11 @@ export const LIBRARY = {
   "cottage-cheese-crescents": "A2"
  },
  "levelLabels": {
+  "beef-tacos-pico": "L18",
   "dinner-rolls": "L3",
+  "israeli-salad": "L5",
   "sandwich-loaf": "L2",
+  "tabbouleh": "L4",
   "thick-burgers": "L1"
  },
  "dietTags": [
@@ -7524,7 +7939,7 @@ export const LIBRARY = {
     "stir-frying",
     "julienne"
    ],
-   "minutes": 35,
+   "minutes": 60,
    "cuisine": "chinese",
    "pickOne": "stir-frying",
    "tags": {
@@ -10661,15 +11076,141 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Claw grip; dice 3 onions",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Dicing three onions in a row is how chefs learn the claw and the pinch grip until they're automatic. Go slowly; speed comes on its own. An adult is nearby the whole time."
+      ],
+      "steps": [
+       "Set the cutting board on a damp paper towel. Hold the chef's knife in a pinch grip: thumb and bent pointer finger pinching the blade just in front of the handle.",
+       "Cut the first onion in half through the root, peel it, and lay one half flat side down.",
+       "Hold it with the claw: fingertips curled under, knuckles forward, the flat of the blade against your knuckles. Cut strips ¼ inch apart toward the root, stopping just before it.",
+       "Cut across the strips, ¼ inch apart, moving your claw hand back a little after each cut.",
+       "Dice the other half, then the second and third onions the same way.",
+       "Spread a spoonful of each onion's dice on the board and compare: are the third onion's cubes more even than the first's?",
+       "Put the diced onion in a container, label it, and keep it for this week's tacos and Beyond the Recipe (it keeps 5 to 7 days in the fridge)."
+      ],
+      "quiz": [
+       {
+        "q": "In the claw, where are your fingertips?",
+        "choices": [
+         "Curled under, behind your knuckles",
+         "Flat on top of the food",
+         "Holding the far end"
+        ],
+        "answer": 0,
+        "explain": "The knuckles guide the blade; the fingertips stay back."
+       },
+       {
+        "q": "Why does a sharp knife make you cry less over onions?",
+        "choices": [
+         "It crushes fewer cells, so less of the stinging gas is released",
+         "It cuts faster",
+         "Sharp knives are colder"
+        ],
+        "answer": 0,
+        "explain": "Crushed onion cells release a gas that stings your eyes."
+       }
+      ]
      },
      "knowledge": {
       "title": "Parts of a knife; knife types",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "A chef's knife has names for every part, and each part has a job. The tip does fine work, like the cuts toward an onion's root. The edge runs from tip to heel; its curved belly is what lets the blade rock. The heel, the back of the edge, is the strongest part, for hard things like carrots. The spine is the dull top edge, where your hand rests when you rock-chop. The bolster is the thick band where the blade meets the handle, and the tang is the part of the blade that runs into the handle. A full tang, running the whole length, makes a knife sturdy and balanced.",
+       "Most cooking needs three knives. A chef's knife (8 inches is the usual size) does nearly all the cutting. A paring knife, 3 to 4 inches, is for small work in the hand, like hulling a strawberry. A serrated bread knife saws through crust and tomato skin without crushing. A santoku is a Japanese chef's knife with a flatter edge, better for chopping straight down than rocking.",
+       "A sharp knife is safer than a dull one. A dull blade needs more force, skids off a tomato skin or an onion's curve, and slips toward your hand. Other rules: cut on a board that can't slide; carry a knife point down at your side; never try to catch a falling knife; and never leave one in a sink of soapy water, where someone will reach in without seeing it."
+      ],
+      "quiz": [
+       {
+        "q": "Which part of the knife does your other hand rest on when you rock-chop?",
+        "choices": [
+         "The spine",
+         "The edge",
+         "The bolster"
+        ],
+        "answer": 0,
+        "explain": "The spine is the dull top of the blade."
+       },
+       {
+        "q": "Which part of the edge is best for a hard carrot?",
+        "choices": [
+         "The heel",
+         "The tip",
+         "The belly"
+        ],
+        "answer": 0,
+        "explain": "The heel is the strongest part of the edge."
+       },
+       {
+        "q": "Which knife cuts tomato skin and bread crust without crushing?",
+        "choices": [
+         "A serrated bread knife",
+         "A paring knife",
+         "A santoku"
+        ],
+        "answer": 0,
+        "explain": "Its teeth saw instead of pressing."
+       },
+       {
+        "q": "Why is a dull knife more dangerous than a sharp one?",
+        "choices": [
+         "It needs more force and skids toward your hand",
+         "It's heavier",
+         "It rusts"
+        ],
+        "answer": 0,
+        "explain": "A sharp blade bites where you aim it."
+       },
+       {
+        "q": "A knife falls off the counter. What do you do?",
+        "choices": [
+         "Step back and let it fall",
+         "Catch it by the handle",
+         "Catch it with a towel"
+        ],
+        "answer": 0,
+        "explain": "Never try to catch a falling knife."
+       }
+      ]
      },
      "sabbath": {
       "title": "Chop vegetables ahead and store them",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Knife work is most of the time a meal takes, and much of it can be done days ahead. Many families chop ahead like this so busy evenings are quick, or so they can focus on resting.",
+       "Some vegetables keep well cut: onions, bell peppers, carrots, and celery last 3 to 5 days (onions up to a week) in a sealed container in the fridge. A folded paper towel in the container soaks up moisture that would make them slimy.",
+       "Others don't: cut tomatoes turn mealy, cut cucumbers go soft, and cut potatoes and apples turn brown. Potatoes can wait under cold water in the fridge for up to a day. Cut those on the day."
+      ],
+      "steps": [
+       "Plan a meal for later in the week that uses onions, peppers, or carrots.",
+       "Dice, slice, or julienne what it needs, using this unit's cuts.",
+       "Line each container with a folded paper towel and pack each vegetable in its own container.",
+       "Label each one with what it is and the date, as in week 1.",
+       "Store them in the fridge, and use them within the times above.",
+       "When you cook the meal, note how much time the prep saved."
+      ],
+      "quiz": [
+       {
+        "q": "Which vegetable should you not cut days ahead?",
+        "choices": [
+         "Tomato",
+         "Onion",
+         "Carrot"
+        ],
+        "answer": 0,
+        "explain": "Cut tomatoes turn mealy and watery."
+       },
+       {
+        "q": "Why put a paper towel in the container?",
+        "choices": [
+         "It soaks up moisture that makes vegetables slimy",
+         "It keeps them cold",
+         "It stops them browning"
+        ],
+        "answer": 0,
+        "explain": "Damp vegetables spoil faster."
+       }
+      ]
      }
     },
     {
@@ -10683,15 +11224,133 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Mince parsley and garlic",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "A mince is the finest cut, about the size of a grain of rice. You'll mince parsley, which is soft and slips, and garlic, which is small and sticky."
+      ],
+      "steps": [
+       "Hone the knife, with an adult watching.",
+       "Wash a bunch of parsley and dry it completely in a kitchen towel. Pull off the leaves.",
+       "Gather the leaves into a tight pile. Rock the knife through it, tip on the board and your other hand flat on the spine. Gather the pile and rock through again until no whole leaves are left.",
+       "Peel a few garlic cloves: lay one under the flat of the blade, edge facing away from you, and press down with the heel of your hand until it cracks. The skin slips off.",
+       "Slice each clove thin, then rock through the slices until they're minced. Gather and repeat.",
+       "Compare your minced parsley with a grain of rice. Mince again anything much bigger.",
+       "Use the parsley in this week's tabbouleh and the garlic in a meal this week. Store the garlic in the fridge, covered, and use it within a day or two."
+      ],
+      "quiz": [
+       {
+        "q": "When you crush a garlic clove with the flat of the knife, where does the edge face?",
+        "choices": [
+         "Away from you",
+         "Toward you",
+         "Up"
+        ],
+        "answer": 0,
+        "explain": "The heel of your hand presses the flat, far from the edge."
+       },
+       {
+        "q": "Why should garlic in oil never sit at room temperature?",
+        "choices": [
+         "It can grow Clostridium botulinum, whose toxin is deadly",
+         "It loses its smell",
+         "The oil goes cloudy"
+        ],
+        "answer": 0,
+        "explain": "Garlic can carry the spores, and oil shuts out air, which they need. Keep it in the fridge, briefly, or frozen."
+       }
+      ]
      },
      "knowledge": {
       "title": "Honing vs. sharpening",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Under a microscope, a knife's edge is a thin ridge of metal. As you cut, it bends over to one side, a little at a time, like the tip of a page that's been folded. The knife feels dull even though the metal is still there.",
+       "Honing fixes that. A honing steel (a rod with a handle) pushes the bent edge back into line. It removes almost no metal, so you can hone every time you cook. Chefs hone before each use.",
+       "Sharpening is different: it grinds away metal to make a brand-new edge. It's done with a whetstone, a sharpener, or by a professional, every few months for a home cook. Honing can't fix an edge that's worn away; sharpening can.",
+       "How to tell: a honed, sharp knife slides into a tomato's skin with no pressure. If it skids even after honing, it needs sharpening.",
+       "To hone, an adult shows you first. Stand the steel straight up with its tip on a folded towel. Hold the blade against it at a slight angle, about 15 degrees, heel at the top. Draw the blade down and toward you so the whole edge, heel to tip, touches the steel. Do the other side the same way, and repeat 5 or 6 times on each side. Light pressure; it isn't a sword fight."
+      ],
+      "quiz": [
+       {
+        "q": "What does honing do?",
+        "choices": [
+         "Pushes a bent edge back into line",
+         "Grinds a new edge",
+         "Polishes the handle"
+        ],
+        "answer": 0,
+        "explain": "It removes almost no metal."
+       },
+       {
+        "q": "How often can you hone?",
+        "choices": [
+         "Every time you cook",
+         "Once a year",
+         "Never at home"
+        ],
+        "answer": 0,
+        "explain": "Chefs hone before each use."
+       },
+       {
+        "q": "A freshly honed knife still skids on a tomato. What does it need?",
+        "choices": [
+         "Sharpening",
+         "More honing",
+         "A new cutting board"
+        ],
+        "answer": 0,
+        "explain": "The edge is worn away and has to be ground new."
+       },
+       {
+        "q": "Where does the steel's tip rest when you hone?",
+        "choices": [
+         "On a folded towel on the counter",
+         "Against your chest",
+         "In the air"
+        ],
+        "answer": 0,
+        "explain": "Standing it up keeps the blade moving down, away from you."
+       }
+      ]
      },
      "sabbath": {
       "title": "Store prepped herbs so they stay fresh",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Fresh herbs wilt fast, but stored the right way, most keep a week or more.",
+       "Tender herbs (parsley, cilantro, mint, dill) keep like cut flowers: trim the stems, stand them in a jar with an inch of water, cover the tops loosely with a bag, and keep them in the fridge. Basil is the exception; it keeps on the counter, because cold turns its leaves black.",
+       "Woody herbs (thyme, rosemary, oregano) keep wrapped in a barely damp paper towel in a bag in the fridge.",
+       "Chopped herbs last a day or two in a container lined with a paper towel. To keep them longer, freeze them: pack chopped herbs into an ice cube tray, cover with water or olive oil, and freeze. A cube drops straight into a soup or sauce. Many families keep herbs ready like this so cooking ahead is quick, or so they can focus on resting."
+      ],
+      "steps": [
+       "Set up a jar of parsley or cilantro: trim the stems, stand them in an inch of water, and cover loosely with a bag. Put it in the fridge.",
+       "Wrap any woody herbs in a barely damp paper towel and seal them in a bag.",
+       "Chop a handful of herbs and freeze them in an ice cube tray, covered with water or oil. When frozen, move the cubes to a labeled bag.",
+       "Change the jar's water every 2 or 3 days.",
+       "Check the herbs after a week, and note which method kept them best."
+      ],
+      "quiz": [
+       {
+        "q": "How do you store parsley so it stays fresh longest?",
+        "choices": [
+         "Stems in a jar of water in the fridge, loosely covered",
+         "Loose in the fridge drawer",
+         "On the counter in the sun"
+        ],
+        "answer": 0,
+        "explain": "Like cut flowers."
+       },
+       {
+        "q": "Why does basil stay out of the fridge?",
+        "choices": [
+         "Cold turns its leaves black",
+         "It needs light to grow",
+         "It goes moldy faster cold"
+        ],
+        "answer": 0,
+        "explain": "Basil is damaged by cold."
+       }
+      ]
      }
     },
     {
@@ -10705,15 +11364,140 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Julienne carrots and peppers",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "A julienne is a matchstick about ⅛ inch thick and 2 to 3 inches long. You'll julienne carrots and peppers, then measure your work."
+      ],
+      "steps": [
+       "Peel 2 carrots and cut them into 3-inch pieces.",
+       "Slice a thin strip off one side of each piece and lay it on that flat side. Slice it the long way into planks ⅛ inch thick.",
+       "Stack 2 or 3 planks, hold them with the claw, and slice them the long way into ⅛-inch matchsticks.",
+       "Cut the top and bottom off a bell pepper, open it flat, cut away the ribs, and julienne it skin side down.",
+       "Line up 10 carrot matchsticks against a ruler. How many are within ⅛ inch of each other?",
+       "Store the matchsticks in a container in the fridge (carrots in a little cold water) and use them in this week's stir-fry or as a snack within 3 days."
+      ],
+      "quiz": [
+       {
+        "q": "How big is a julienne?",
+        "choices": [
+         "About ⅛ inch thick and 2 to 3 inches long",
+         "About ½ inch cubes",
+         "Paper-thin rounds"
+        ],
+        "answer": 0,
+        "explain": "A thin matchstick."
+       },
+       {
+        "q": "Why do you cut the pepper skin side down?",
+        "choices": [
+         "The knife skids on the shiny skin",
+         "The skin is bitter",
+         "It's faster"
+        ],
+        "answer": 0,
+        "explain": "Flesh side up, the blade bites right away."
+       }
+      ]
      },
      "knowledge": {
       "title": "Why even cuts cook evenly",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Heat moves into food from the outside in, by conduction. The outside of a piece gets hot first, and the middle is the last part to reach the temperature you want.",
+       "Thickness matters more than you'd guess. The time for heat to reach the center grows with the square of the thickness: a piece twice as thick takes about four times as long to cook through. That's why a ¼-inch matchstick and a ½-inch one, side by side in a pan, can't finish together.",
+       "Size also changes surface area. Small pieces have more surface for their size, so they brown faster, take up more sauce, and lose water faster. Even cuts brown evenly; mixed sizes give you burnt crumbs and raw chunks in the same bite.",
+       "Fast methods, like stir-frying and sautéing, are the least forgiving: there are only a few minutes for heat to reach every piece. Slow methods, like a stew, give big pieces time to catch up. So the faster the cooking, the more even the cuts need to be."
+      ],
+      "quiz": [
+       {
+        "q": "A carrot stick is twice as thick as another. About how much longer does it take to cook through?",
+        "choices": [
+         "About four times as long",
+         "Twice as long",
+         "The same time"
+        ],
+        "answer": 0,
+        "explain": "Time grows with the square of the thickness."
+       },
+       {
+        "q": "How does heat get to the middle of a piece of carrot?",
+        "choices": [
+         "By conduction, from the outside in",
+         "All at once",
+         "From the middle out"
+        ],
+        "answer": 0,
+        "explain": "The center is the last part to heat."
+       },
+       {
+        "q": "Why do small pieces brown faster?",
+        "choices": [
+         "More surface area for their size",
+         "They have more sugar",
+         "They're lighter"
+        ],
+        "answer": 0,
+        "explain": "Browning happens on the surface."
+       },
+       {
+        "q": "Which cooking method needs the most even cuts?",
+        "choices": [
+         "A fast stir-fry",
+         "A slow stew",
+         "A long braise"
+        ],
+        "answer": 0,
+        "explain": "There are only minutes for heat to reach every piece."
+       }
+      ]
      },
      "sabbath": {
       "title": "Gleaning: leaving the edges of the field (Leviticus 19:9–10; Ruth 2)",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "God's law built care for the poor into the harvest itself. \"When you reap the harvest of your land, you shall not reap your field right up to its edge, neither shall you gather the gleanings after your harvest. And you shall not strip your vineyard bare\" (Leviticus 19:9–10). What was left was for the poor and the sojourner, the foreigner living among Israel. Deuteronomy adds the sheaf forgotten in the field, and the olives and grapes left on the branch, \"for the sojourner, the fatherless, and the widow,\" and gives the reason: \"You shall remember that you were a slave in the land of Egypt\" (Deuteronomy 24:19–22).",
+       "Ruth shows the law at work. She was a widow from Moab who came to Bethlehem with her mother-in-law, Naomi, at the start of the barley harvest. She went out to glean behind the reapers in the field of Boaz, a relative of Naomi's. Boaz told his workers to let her glean even among the sheaves and to pull out some stalks from the bundles on purpose for her (Ruth 2:15–16). By evening she had beaten out about an ephah of barley, perhaps 30 pounds (Ruth 2:17).",
+       "Gleaning fed the poor with dignity: they worked the harvest themselves, and the farmer gave by leaving, not by handing out. Gleaning groups still exist today, gathering crops left after a harvest for food banks."
+      ],
+      "steps": [
+       "Read Leviticus 19:9–10 and Deuteronomy 24:19–22.",
+       "Read Ruth 2.",
+       "Answer in writing: who was gleaning meant for, and what reason does Deuteronomy give?",
+       "Answer in writing: what did Boaz do beyond what the law required?",
+       "With an adult, choose one way your family could \"leave the edges\" this week, such as cooking extra of this week's stir-fry for someone, or giving to a food bank. Write it down, and do it if you can."
+      ],
+      "quiz": [
+       {
+        "q": "In Leviticus 19:9–10, what were farmers told not to reap?",
+        "choices": [
+         "The edges of the field",
+         "The middle of the field",
+         "Any barley"
+        ],
+        "answer": 0,
+        "explain": "The edges and the gleanings were left for the poor and the sojourner."
+       },
+       {
+        "q": "Whose field did Ruth glean in?",
+        "choices": [
+         "Boaz's",
+         "Naomi's",
+         "Her own"
+        ],
+        "answer": 0,
+        "explain": "Boaz was a relative of Naomi's (Ruth 2:1–3)."
+       },
+       {
+        "q": "What reason does Deuteronomy 24 give for leaving the gleanings?",
+        "choices": [
+         "Israel had been slaves in Egypt",
+         "The crops were poor",
+         "The harvest was too big"
+        ],
+        "answer": 0,
+        "explain": "Deuteronomy 24:22."
+       }
+      ]
      }
     },
     {
@@ -10727,15 +11511,182 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Timed dice: one onion, one pepper",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Now you'll time yourself. Accuracy comes first: an even dice slowly beats a ragged one fast. Compare with your onions from week 9."
+      ],
+      "steps": [
+       "Hone the knife and set up your board on a damp paper towel.",
+       "Start a timer and dice one onion into ¼-inch cubes. Stop the timer and write down the time.",
+       "Start the timer again and dice one bell pepper into ¼-inch cubes, skin side down. Write down the time.",
+       "Spread 10 cubes of each on the board next to a ruler. Count how many are within ⅛ inch of ¼ inch.",
+       "Write down your times and your count. Compare them with how the week 9 onions looked.",
+       "Use the onion and pepper in this week's Israeli salad, or store them for later in the week."
+      ],
+      "quiz": [
+       {
+        "q": "What matters more in this drill: speed or evenness?",
+        "choices": [
+         "Evenness",
+         "Speed",
+         "Neither"
+        ],
+        "answer": 0,
+        "explain": "Speed comes with practice; uneven cubes cook unevenly."
+       },
+       {
+        "q": "Why cut the pepper skin side down?",
+        "choices": [
+         "The blade doesn't skid on the skin",
+         "It's prettier",
+         "It keeps the juice in"
+        ],
+        "answer": 0,
+        "explain": "The flesh side gives the knife something to bite."
+       }
+      ]
      },
      "knowledge": {
       "title": "Name and size each classic cut",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Cooks use names for each cut so a recipe can say exactly what it means. Sizes are a guide, not a law, but evenness always matters.",
+       "Large dice: ¾-inch cubes, for stews and roasting. Medium dice: ½-inch cubes, for soups and sautés. Small dice: ¼-inch cubes, for salsas and salads. Brunoise: ⅛-inch cubes, the finest dice, cut from a julienne.",
+       "Julienne: matchsticks ⅛ inch thick and 2 to 3 inches long. Batonnet: thicker sticks, ¼ inch thick and 2 to 3 inches long; cut across, they make a small dice.",
+       "Chiffonade: leafy herbs or greens stacked, rolled up tight, and sliced across into thin ribbons. Mince: chopped finer than a brunoise, with no set shape, like garlic or parsley. Chop: rough pieces, roughly the same size, when looks don't matter.",
+       "Notice how the cuts build on each other: planks become sticks (julienne or batonnet), and sticks become cubes (brunoise or small dice). This is the unit quiz: answer from memory, then review anything you missed in weeks 9 to 11."
+      ],
+      "quiz": [
+       {
+        "q": "What size is a small dice?",
+        "choices": [
+         "¼ inch",
+         "¾ inch",
+         "⅛ inch"
+        ],
+        "answer": 0,
+        "explain": "¾ inch is large; ⅛ inch is brunoise."
+       },
+       {
+        "q": "What is a brunoise cut from?",
+        "choices": [
+         "A julienne",
+         "A batonnet",
+         "A chiffonade"
+        ],
+        "answer": 0,
+        "explain": "⅛-inch sticks cut across make ⅛-inch cubes."
+       },
+       {
+        "q": "What is a chiffonade?",
+        "choices": [
+         "Leaves rolled tight and sliced into thin ribbons",
+         "Thick sticks",
+         "A rough chop"
+        ],
+        "answer": 0,
+        "explain": "Used for basil, mint, and greens."
+       },
+       {
+        "q": "How thick is a batonnet?",
+        "choices": [
+         "¼ inch",
+         "⅛ inch",
+         "½ inch"
+        ],
+        "answer": 0,
+        "explain": "Cut across, it makes a small dice."
+       },
+       {
+        "q": "Unit review: in the claw, what guides the side of the blade?",
+        "choices": [
+         "Your knuckles",
+         "Your fingertips",
+         "Your thumb"
+        ],
+        "answer": 0,
+        "explain": "Fingertips stay curled back."
+       },
+       {
+        "q": "Unit review: what does honing do?",
+        "choices": [
+         "Pushes the bent edge back into line",
+         "Grinds a new edge",
+         "Cleans the blade"
+        ],
+        "answer": 0,
+        "explain": "Sharpening grinds a new edge."
+       },
+       {
+        "q": "Unit review: why must herbs be dry before mincing?",
+        "choices": [
+         "Wet leaves bruise into paste",
+         "Water dulls the knife",
+         "Dry herbs weigh less"
+        ],
+        "answer": 0,
+        "explain": "Dry leaves cut clean."
+       },
+       {
+        "q": "Unit review: a piece twice as thick takes about how long to cook through?",
+        "choices": [
+         "Four times as long",
+         "Twice as long",
+         "The same"
+        ],
+        "answer": 0,
+        "explain": "Time grows with the square of the thickness."
+       },
+       {
+        "q": "Unit review: which part of the knife is best for cutting a hard carrot?",
+        "choices": [
+         "The heel",
+         "The tip",
+         "The spine"
+        ],
+        "answer": 0,
+        "explain": "The heel is the strongest part of the edge."
+       }
+      ]
      },
      "sabbath": {
       "title": "Prep and store a full set of salad vegetables",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "With an hour of knife work, you can have the makings of salads ready for several days. Many families prep a set like this so meals later in the week come together in minutes, or so they can focus on resting.",
+       "Greens: wash and dry them completely, then store them loosely in a container or bag lined with a paper towel. They keep 3 to 5 days.",
+       "Sturdy vegetables (carrots, peppers, radishes, red onion, celery) keep 3 to 5 days cut, each in its own lined container.",
+       "Tender ones (cucumbers and tomatoes) are cut the day you eat them; they turn soft and watery. Dressing keeps a week in a sealed jar in the fridge; shake it before using. Dress a salad only right before it's eaten."
+      ],
+      "steps": [
+       "Wash and dry a head of lettuce or a bag of greens, and store it in a lined container.",
+       "Julienne or dice carrots and peppers, and slice a red onion thin. Store each in its own lined container.",
+       "Shake together a simple dressing in a jar: 3 parts olive oil to 1 part lemon juice or vinegar, with salt and pepper.",
+       "Label everything with the date.",
+       "Over the next few days, put a salad together from the containers, cutting cucumber and tomato fresh, and note how long it took."
+      ],
+      "quiz": [
+       {
+        "q": "Which salad vegetables are cut on the day you eat them?",
+        "choices": [
+         "Cucumbers and tomatoes",
+         "Carrots and peppers",
+         "Red onion"
+        ],
+        "answer": 0,
+        "explain": "They go soft and watery when cut ahead."
+       },
+       {
+        "q": "When do you dress a salad?",
+        "choices": [
+         "Right before it's eaten",
+         "The night before",
+         "When you wash the greens"
+        ],
+        "answer": 0,
+        "explain": "Salt in the dressing draws water out of the vegetables."
+       }
+      ]
      }
     },
     {
@@ -11313,7 +12264,7 @@ export const LIBRARY = {
      "skills": [
       "fine-chopping"
      ],
-     "minutes": 40,
+     "minutes": 45,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -11333,7 +12284,7 @@ export const LIBRARY = {
      "skills": [
       "dicing"
      ],
-     "minutes": 25,
+     "minutes": 35,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -11602,7 +12553,7 @@ export const LIBRARY = {
      "skills": [
       "dicing"
      ],
-     "minutes": 45,
+     "minutes": 50,
      "tags": {
       "protein": "beef",
       "flavors": [

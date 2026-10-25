@@ -38,3 +38,11 @@ test('a {qty:} placeholder names its ingredient outright', () => {
   const s = burgers.steps.find((x) => x.id === 'shape');
   assert.ok(ingredientsInStep({ ...s, text: 'Season both sides.' }, s.text, burgers.ingredients, ING).includes('black-pepper'));
 });
+
+test('"rice" is the rice, not rice vinegar; "the pepper" is the bell pepper, and "salt and pepper" the spice', () => {
+  const stirFry = lesson('content/lessons/vegetable-stir-fry.json');
+  assert.deepEqual(named(stirFry, 'cook-rice'), ['rice-white', 'water']);
+  const salad = lesson('content/levels/recipes/israeli-salad.json');
+  assert.deepEqual(named(salad, 'pepper'), ['bell-pepper-red']);
+  assert.deepEqual(named(salad, 'dressing'), ['lemon', 'olive-oil', 'salt', 'black-pepper']);
+});

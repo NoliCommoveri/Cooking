@@ -278,10 +278,18 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
   function muchCard(ids) {
     if (!much || !ids.length) return '';
     const lines = ingredientsNow();
+    const said = scaled().steps[Math.min(S.step, L.steps.length - 1)].text.toLowerCase();
     const rows = ids.flatMap((id) => {
-      const mine = lines.filter((i) => i.id === id);
+      let mine = lines.filter((i) => i.id === id);
       const groups = new Set(mine.map((i) => i.group ?? ''));
-      return mine.map((i) => `<li>${esc(i.line)}${i.prep ? `, ${esc(i.prep)}` : ''}${i.optional ? ' (optional)' : ''}${groups.size > 1 && i.group ? ` <small>(${esc(i.group)})</small>` : ''}${swapFor[id] ? ` <small>Use ${esc(name(swapFor[id]).toLowerCase())} instead</small>` : ''}</li>`);
+      // A step that says which group ("the beef's salt", "the eggs for the
+      // dough") shows only that group's line.
+      if (groups.size > 1) {
+        const groupWord = (g) => g.toLowerCase().split(' ').find((w) => !['to', 'for', 'the', 'a'].includes(w));
+        const named = mine.filter((i) => i.group && new RegExp(`\\b${groupWord(i.group)}\\b`).test(said));
+        if (named.length) mine = named;
+      }
+      return mine.map((i) => `<li>${esc(i.line)}${i.prep ? `, ${esc(i.prep)}` : ''}${i.optional ? ' (optional)' : ''}${groups.size > 1 && mine.length > 1 && i.group ? ` <small>(${esc(i.group)})</small>` : ''}${swapFor[id] ? ` <small>Use ${esc(name(swapFor[id]).toLowerCase())} instead</small>` : ''}</li>`);
     });
     return `<div class="kwcard muchcard" role="note"><b>How much, for ${S.servings}</b><ul>${rows.join('')}</ul><button type="button" class="kwclose" data-act="much">Got it</button></div>`;
   }

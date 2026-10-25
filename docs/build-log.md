@@ -4750,3 +4750,43 @@ Phase 12, slice 12f, Unit 2 (plan §12.4).
 - The review doc has the new words and the button's copy. Screenshots were
   sent in the session.
 - Tests: 355 (four new: which ingredients a step names).
+
+## 197. 2026-10-25 — Level 3 Unit 3: knife cuts
+
+Phase 12, slice 12f, Unit 3 (plan §12.4). Owner, 2026-10-25: Unit 3 the
+same way as Unit 2: the copy in a review doc, "Level 3 Unit 3: Classic knife
+cuts and honing", the kitchen words added and linked, live on merge.
+
+- **Beef tacos with pico de gallo** (week 9, Level only): pico diced to
+  ¼ inch with the pinch grip and the claw; ground beef browned to 160°F, its
+  fat spooned off and thrown away cooled.
+- **Tabbouleh** (week 10, Level only): two bunches of parsley minced by
+  rock-chopping; fine bulgur soaked, not cooked. Bulgur is wheat; no
+  gluten-free swap.
+- **Vegetable stir-fry with tofu** (week 11; lesson 9c, the stir-frying
+  group, for every family): carrots and pepper julienned ⅛ inch, tofu pressed
+  and crisped in batches, hard vegetables first, garlic and ginger last.
+  Tamari is the gluten-free swap. Its card's minutes are now the lesson's 60.
+- **Israeli salad** (week 12, mastery, Level only): every cut unaided, a
+  ¼-inch dice, dressed right before serving.
+- **Weeks 9–12's twelve part pages:** parts of a knife and knife safety,
+  honing vs. sharpening (with how to hone), why even cuts cook evenly, and
+  the classic cuts by size with the unit quiz; drills dicing three onions,
+  mincing parsley and garlic (garlic in oil is kept cold: botulism), a
+  measured julienne, and a timed dice; Beyond the Recipe: chopping ahead,
+  storing herbs, prepping salad vegetables, and gleaning (Leviticus 19:9–10,
+  Deuteronomy 24:19–22, Ruth 2).
+- **Kitchen words:** pinch grip, claw, hone, plank, brunoise, batonnet,
+  chiffonade.
+- New ingredients: fine bulgur (#1), snow peas.
+- **How much?** reads names more carefully: a word before the last stands
+  alone only if it isn't another ingredient's name ("rice" isn't rice
+  vinegar, "chicken" isn't chicken broth); "the pepper" next to a bell pepper
+  isn't black pepper, but "salt and pepper" is. When a step says which group
+  it means ("the beef's salt", "the eggs for the dough"), only that group's
+  line shows.
+- Screenshots were sent in the session, taken from the demo's Try a week
+  pointed at Unit 3 for that only.
+- Tests: 356. A Level course now schedules 13 written recipes, with 23
+  waiting; best fit's "written option first" check moved to week 15, since
+  week 9's own recipe is written now.
