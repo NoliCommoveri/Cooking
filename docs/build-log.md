@@ -4926,6 +4926,12 @@ Fish", and goes live for every family on merge.
   sauce made ahead with the fish cooked fresh, and firstfruits and tithing
   (Deuteronomy 14:22–29, Proverbs 3:9). The blocked-word check covers every
   page, so unclean water animals are described by what they lack.
+- Owner, 2026-10-25: week 24's tithing page names all three tithes. The
+  first went to the Levites (Numbers 18:21, 24); the second the family ate
+  at the place God chose (Deuteronomy 14:22–27); and every third year a
+  third tithe for the poor was given in addition, while families still
+  traveled and ate the second (Deuteronomy 14:28–29). The first draft had
+  the third-year tithe replacing the second.
 - **Kitchen words:** fillet (steps can't use it until it has a card), pin
   bones, steam (underlined as "steamed" and "steaming" only), flake, in
   parchment.
