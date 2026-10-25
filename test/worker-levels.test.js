@@ -47,10 +47,11 @@ test('a re-planned Level (release 2) shows only to a family that has release 2 (
   try {
     const ids = async () => (await a.get('/api/courses')).body.levels.map((V) => V.id);
     assert.deepEqual(await ids(), ['level-3'], 'release 1 live: only the release 1 Level');
+    const built = Object.values(LIBRARY.levels).filter((V) => V.release === 2 && V.id !== 'level-test').map((V) => V.id);
     assert.equal((await level(a, [ava], sunday, { program: 'level-test' })).status, 400);
     assert.equal((await a.get('/api/picks/level?level=level-test')).status, 404);
     await setPreview(env.DB, fid, true);
-    assert.deepEqual(await ids(), ['level-3', 'level-test'], 'a preview family sees release 2');
+    assert.deepEqual(await ids(), ['level-3', ...built, 'level-test'], 'a preview family sees release 2');
     assert.equal((await level(a, [ava], sunday, { program: 'level-test' })).status, 200);
     await setPreview(env.DB, fid, false);
     assert.equal((await a.get('/api/courses')).body.courses.length, 0, 'its course waits out of sight without release 2');
@@ -61,7 +62,10 @@ test('a re-planned Level (release 2) shows only to a family that has release 2 (
 
 test('a Level course: one week a week, its recipes in week order, "Week 1 of 36"', async () => {
   const { a, ava } = await setup();
-  const { levels } = (await a.get('/api/courses')).body;
+  const all = (await a.get('/api/courses')).body.levels;
+  // The re-planned Levels (sp-1 to sp-4, §12.0) show beside it for a preview family.
+  assert.ok(all.filter((V) => V.id.startsWith('sp-')).every((V) => V.weeks.length === 36));
+  const levels = all.filter((V) => !V.id.startsWith('sp-'));
   assert.deepEqual(levels.map((V) => [V.id, V.weeks.length]), [['level-3', 36]]);
   assert.equal(levels[0].weeks[0].title, 'Shakshuka');
   const made = await level(a, [ava]);
@@ -145,7 +149,7 @@ test("a Level's own recipes are in the library with the next release only, in th
   const { env, a, ava, fid } = await setup();
   let lib = (await a.get('/api/library')).body;
   const burgers = lib.lessons.find((L) => L.id === 'thick-burgers');
-  assert.deepEqual([burgers?.unit, burgers?.label, lib.units[100], lib.level_units], [100, 'L1', 'Level 3 recipes', [100]]);
+  assert.deepEqual([burgers?.unit, burgers?.label, lib.units[100], lib.level_units[0]], [100, 'L1', 'Level 3 recipes', 100]);
   assert.ok((await a.get('/api/queue')).body.library.some((L) => L.id === 'thick-burgers'), 'a parent can queue it');
   assert.equal((await a.post('/api/queue', { lesson_id: 'thick-burgers', profile_ids: [ava] })).status, 200);
 
