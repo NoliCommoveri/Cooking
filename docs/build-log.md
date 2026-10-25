@@ -5008,3 +5008,5 @@ Planning only; nothing in the app changed.
   kitchen's week card (plan §12.0; the re-plan doc's new Two dishes a week
   section, with the proposed setup default, who can swap, the shopping
   check, and best fit's smaller role).
+- Owner, 2026-10-25: the learner can swap the week's dish from the
+  kitchen, and the parent sees it and can Undo.
