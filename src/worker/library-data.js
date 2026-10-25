@@ -21867,6 +21867,1934 @@ export const LIBRARY = {
     "beef-chili": "Beef chili",
     "pad-kra-pao": "Pad kra pao"
    }
+  },
+  "sp-4": {
+   "id": "sp-4",
+   "name": "Level 4 Chef",
+   "hours": 135,
+   "release": 2,
+   "side": {
+    "number": 104,
+    "name": "Level 4 Chef recipes",
+    "prefix": "C"
+   },
+   "units": [
+    {
+     "number": 1,
+     "name": "Kitchen basics",
+     "goal": "Cuts precisely at speed; weighs ingredients and works out yield; scales any recipe by hand; writes a prep timeline and runs it"
+    },
+    {
+     "number": 2,
+     "name": "No-cook",
+     "goal": "Makes and rescues an emulsion; composes cold dishes for guests; holds a cold spread safely"
+    },
+    {
+     "number": 3,
+     "name": "Clean meat, poultry, and fish",
+     "goal": "Breaks down a whole chicken and trims a cut; matches primal cuts to methods; buys and portions fish; works out yield and cost per serving; knows the clean birds and how to source meat well"
+    },
+    {
+     "number": 4,
+     "name": "Baking",
+     "goal": "Makes enriched and cold-fermented doughs; laminates a rough puff; blind-bakes a crust; scales a quick bread and times it with a meal; judges a bake by feel and fixes what went wrong"
+    },
+    {
+     "number": 5,
+     "name": "Boiling, simmering, and steaming",
+     "goal": "Poaches fish and eggs at a held temperature; makes risotto and grains for a crowd; costs a bean dish; reduces a stock and builds a soup from it"
+    },
+    {
+     "number": 6,
+     "name": "Stovetop",
+     "goal": "Sears to doneness by touch and builds a pan sauce; times a multi-dish stir-fry; cooks eggs to order; builds a cuisine's base from scratch; makes the mother sauces and rescues a broken one; deep-fries at a held temperature"
+    },
+    {
+     "number": 7,
+     "name": "Oven and grill",
+     "goal": "Roasts whole fish and fish in parchment for guests; grills over two zones; roasts a large cut to doneness with pan juices; bakes a casserole for 12, timing the oven for two pans"
+    },
+    {
+     "number": 8,
+     "name": "Low and slow",
+     "goal": "Braises tough cuts to fork-tender and lifts off the fat; renders and saves poultry fat; builds a stew that holds safely for hours"
+    },
+    {
+     "number": 9,
+     "name": "Sabbath capstone",
+     "goal": "Plans, budgets, shops for, and cooks a full Sabbath meal for the household and guests, entirely on their own, from dishes the student writes"
+    }
+   ],
+   "weeks": [
+    {
+     "week": 1,
+     "unit": 1,
+     "skill": "dicing",
+     "familiar": "chicken-fried-rice",
+     "explore": "ratatouille",
+     "cuisine": "french",
+     "drill": {
+      "title": "Timed brunoise",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Cuts by size: brunoise, small dice, batonnet, chiffonade; the French herb base",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Prep every vegetable for a weekend meal",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 2,
+     "unit": 1,
+     "skill": "measuring",
+     "familiar": "steak-fajitas",
+     "explore": "bo-luc-lac",
+     "cuisine": "vietnamese",
+     "drill": {
+      "title": "Weigh vs. measure; weigh the trim to find the yield",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Why weight beats volume; trim loss and buying enough",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Weigh and portion ingredients ahead",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 3,
+     "unit": 1,
+     "skill": "measuring",
+     "familiar": "chicken-enchiladas",
+     "explore": "chana-masala",
+     "cuisine": "indian",
+     "drill": {
+      "title": "Scale a recipe on paper, then check it against the app's amounts",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Scaling factors, and what doesn't scale: salt, spice, time, pan size",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Scale a Sabbath recipe to the guest count",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 4,
+     "unit": 1,
+     "skill": "timing",
+     "familiar": "salade-nicoise",
+     "explore": "bibimbap",
+     "cuisine": "korean",
+     "mastery": true,
+     "drill": {
+      "title": "Write a prep timeline and run it with a timer",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Planning a meal backward from serving time",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Plan a Sabbath prep timeline",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 5,
+     "unit": 2,
+     "skill": "emulsions",
+     "familiar": "chicken-caesar",
+     "explore": "ensaladilla-rusa",
+     "cuisine": "spanish",
+     "drill": {
+      "title": "Make mayonnaise, break it, and rescue it",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Emulsions, and raw eggs: the USDA guideline and pasteurized eggs",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Make a dressing ahead",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 6,
+     "unit": 2,
+     "skill": "cooling-reheating",
+     "familiar": "antipasto-platter",
+     "explore": "mezze-spread",
+     "cuisine": "lebanese",
+     "mastery": true,
+     "drill": {
+      "title": "Hold a cold platter below 41°F; the 2-hour rule",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Food safety for a cold buffet",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Hospitality: Abraham's meal for his guests (Genesis 18:1–8; Hebrews 13:2)",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 7,
+     "unit": 3,
+     "skill": "breaking-down-chicken",
+     "familiar": "chicken-cacciatore",
+     "explore": "chicken-tagine",
+     "cuisine": "moroccan",
+     "drill": {
+      "title": "Break a chicken into 8 pieces; save the back for stock",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Yield and cost: a whole bird vs. parts",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Freeze the back and wings for stock",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 8,
+     "unit": 3,
+     "skill": "thin-slicing",
+     "familiar": "flank-steak",
+     "explore": "duck-breast-cherry",
+     "cuisine": "french",
+     "drill": {
+      "title": "Trim silverskin; score duck skin",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Primal cuts and the method each suits",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Clean birds: duck, goose, quail, and the birds Leviticus names (Leviticus 11:13–19)",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 9,
+     "unit": 3,
+     "skill": "cooking-fish",
+     "familiar": "teriyaki-salmon-side",
+     "explore": "pescado-veracruzana",
+     "cuisine": "mexican",
+     "drill": {
+      "title": "Skin and portion a side of salmon; pull the pin bones",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Buying fish: wild and farmed, labels, questions for the fish counter",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Fins and scales, and the fishermen Jesus called (Leviticus 11:9–12; Luke 5:1–11)",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 10,
+     "unit": 3,
+     "skill": "breaking-down-chicken",
+     "familiar": "chicken-two-ways",
+     "explore": "spatchcocked-quail",
+     "cuisine": "persian",
+     "mastery": true,
+     "drill": {
+      "title": "Spatchcock a bird",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Cost per serving, from the receipt",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Manna and quail (Exodus 16:13; Numbers 11:31–32)",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 11,
+     "unit": 4,
+     "skill": "yeast-dough",
+     "familiar": "chocolate-babka",
+     "explore": "milk-bread",
+     "cuisine": "japanese",
+     "drill": {
+      "title": "Make a tangzhong; cold-retard a dough overnight",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Lean vs. enriched doughs; what cold fermentation adds",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Bread of the Presence (Leviticus 24:5–9)",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 12,
+     "unit": 4,
+     "skill": "folding-layers",
+     "familiar": "chicken-pot-pie",
+     "explore": "spinach-feta-borekas",
+     "cuisine": "turkish",
+     "drill": {
+      "title": "Lamination folds",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Fats: butter vs. shortening; reading pastry labels",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Freeze unbaked borekas or a pot pie",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 13,
+     "unit": 4,
+     "skill": "pastry",
+     "familiar": "spinach-mushroom-quiche",
+     "explore": "jamaican-beef-patties",
+     "cuisine": "jamaican",
+     "drill": {
+      "title": "Blind-bake a crust; stop a soggy bottom",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Blind baking and soggy bottoms",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Make pastry ahead and freeze it",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 14,
+     "unit": 4,
+     "skill": "cutting-in-fat",
+     "familiar": "biscuits-and-gravy",
+     "explore": "arepas",
+     "cuisine": "venezuelan",
+     "drill": {
+      "title": "Scale a quick bread and time it to the main",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Chemical leaveners at a larger batch",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Freeze unbaked biscuits",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 15,
+     "unit": 4,
+     "skill": "pastry",
+     "familiar": "apple-pie",
+     "explore": "malva-pudding",
+     "cuisine": "south-african",
+     "mastery": true,
+     "drill": {
+      "title": "Weave a lattice; vent and crimp",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Fruit-pie thickeners; reading doneness by the bubbling",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Leaven and unleavened bread (Exodus 12:15–20; 1 Corinthians 5:6–8)",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 16,
+     "unit": 5,
+     "skill": "cooking-fish",
+     "familiar": "poached-salmon-dill",
+     "explore": "goan-fish-curry",
+     "cuisine": "indian",
+     "drill": {
+      "title": "Hold a poaching liquid at 170–180°F",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Poaching vs. simmering: the temperatures",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Make a court-bouillon ahead",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 17,
+     "unit": 5,
+     "skill": "poaching-eggs",
+     "familiar": "eggs-benedict",
+     "explore": "cilbir",
+     "cuisine": "turkish",
+     "drill": {
+      "title": "Poach 8 eggs and hold them in warm water",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Hollandaise and egg safety: 160°F or pasteurized eggs",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Poach eggs ahead and reheat them for a crowd",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 18,
+     "unit": 5,
+     "skill": "cooking-grains",
+     "familiar": "mushroom-risotto",
+     "explore": "tahdig",
+     "cuisine": "persian",
+     "drill": {
+      "title": "Toast and stir a risotto; cook rice for 12",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Starch: why risotto creams and tahdig crisps",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Cook grains ahead for a crowd",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 19,
+     "unit": 5,
+     "skill": "cooking-legumes",
+     "familiar": "black-bean-soup",
+     "explore": "feijoada",
+     "cuisine": "brazilian",
+     "drill": {
+      "title": "Cost per serving from the receipt",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Unit pricing at the store",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Gleaning and generosity (Leviticus 19:9–10; Deuteronomy 24:19–22)",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 20,
+     "unit": 5,
+     "skill": "reducing",
+     "familiar": "french-onion-soup",
+     "explore": "pho-bo",
+     "cuisine": "vietnamese",
+     "mastery": true,
+     "drill": {
+      "title": "Reduce a stock by half and taste the change",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Clear, puréed, and thickened soups; reduction",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Freeze stock and soup in portions",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 21,
+     "unit": 6,
+     "skill": "searing",
+     "familiar": "seared-thighs-pan-sauce",
+     "explore": "chimichurri-steak",
+     "cuisine": "argentine",
+     "drill": {
+      "title": "Test doneness by touch, then check with the thermometer",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Carryover and resting for whole cuts",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Blood and fat: what the rule means when buying meat (Leviticus 3:17; 7:23–27; 17:10–14)",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 22,
+     "unit": 6,
+     "skill": "stir-frying",
+     "familiar": "kung-pao-chicken",
+     "explore": "mapo-tofu",
+     "cuisine": "chinese",
+     "drill": {
+      "title": "Set out three dishes' mise en place and cook them in order",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Wok heat and batch cooking; Sichuan peppercorn and bean paste",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Prep stir-fry kits for the week",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 23,
+     "unit": 6,
+     "skill": "heat-control",
+     "familiar": "diner-eggs-to-order",
+     "explore": "tortilla-espanola",
+     "cuisine": "spanish",
+     "drill": {
+      "title": "Cook four egg styles in a row",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Egg proteins and the temperatures they set at",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Prep a brunch for guests ahead",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 24,
+     "unit": 6,
+     "skill": "blooming-spices",
+     "familiar": "chicken-tikka-masala",
+     "explore": "thai-green-curry",
+     "cuisine": "thai",
+     "drill": {
+      "title": "Toast and grind a spice blend; pound a curry paste",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Flavor bases by cuisine: mirepoix, sofrito, the trinity, masala, curry paste",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Make a curry paste ahead and freeze it",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 25,
+     "unit": 6,
+     "skill": "roux",
+     "familiar": "chicken-a-la-king",
+     "explore": "swedish-meatballs",
+     "cuisine": "swedish",
+     "drill": {
+      "title": "Make a béchamel and a velouté; rescue a broken sauce",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "The five mother sauces",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Make a velouté ahead and reheat it gently",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 26,
+     "unit": 6,
+     "skill": "deep-frying",
+     "familiar": "fish-and-chips",
+     "explore": "korean-fried-chicken",
+     "cuisine": "korean",
+     "mastery": true,
+     "drill": {
+      "title": "Hold oil at 350°F; drain and hold fried food crisp in a low oven",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Oil fires; cooling and disposing of oil",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Fry ahead and re-crisp in the oven for guests",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 27,
+     "unit": 7,
+     "skill": "oven-browning",
+     "familiar": "salmon-en-papillote",
+     "explore": "samke-harra",
+     "cuisine": "lebanese",
+     "drill": {
+      "title": "Score and stuff a whole fish; check doneness at the backbone",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Buying and roasting whole fish",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Make a tahini sauce ahead",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 28,
+     "unit": 7,
+     "skill": "grilling",
+     "familiar": "bbq-chicken-two-zone",
+     "explore": "chicken-satay",
+     "cuisine": "indonesian",
+     "drill": {
+      "title": "Set up two zones and move food between them",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Direct vs. indirect heat; grill fires",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Firstfruits and tithing (Deuteronomy 14:22–29; Proverbs 3:9)",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 29,
+     "unit": 7,
+     "skill": "roasting",
+     "familiar": "roast-beef",
+     "explore": "roast-leg-of-lamb",
+     "cuisine": "greek",
+     "drill": {
+      "title": "Carve a roast; make a pan jus",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Carryover in large roasts",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "The Passover lamb (Exodus 12:1–11)",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 30,
+     "unit": 7,
+     "skill": "layering",
+     "familiar": "beef-lasagna",
+     "explore": "moussaka",
+     "cuisine": "greek",
+     "mastery": true,
+     "drill": {
+      "title": "Plan oven space and timing for two large pans",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Cooking for a crowd: what changes",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Assemble a casserole ahead and bake it the day of",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 31,
+     "unit": 8,
+     "skill": "braising",
+     "familiar": "pot-roast",
+     "explore": "birria-de-chivo",
+     "cuisine": "mexican",
+     "drill": {
+      "title": "Chill a braise and lift off the fat",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Collagen to gelatin; marbling and drippings vs. the fat the rule blocks",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Braise ahead and reheat",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 32,
+     "unit": 8,
+     "skill": "braising",
+     "familiar": "chicken-chasseur",
+     "explore": "duck-legs-white-beans",
+     "cuisine": "french",
+     "drill": {
+      "title": "Sear and render duck legs; save the fat",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Braising liquids: stock, tomato, and reduction",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Feasting, rejoicing, and moderation (Deuteronomy 14:26; Nehemiah 8:10; Proverbs 23:20–21)",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 33,
+     "unit": 8,
+     "skill": "one-pot-stews",
+     "familiar": "cholent",
+     "explore": "dafina",
+     "cuisine": "moroccan",
+     "mastery": true,
+     "drill": {
+      "title": "Hold a stew safely for hours at 140°F or above",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Holding hot food for hours; Sabbath stews across the Jewish world",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Preparation day (Exodus 16:22–30; Luke 23:54)",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 34,
+     "unit": 9,
+     "kind": "practice",
+     "minutes": 180,
+     "note": "Test-cook the planned main and sides",
+     "drill": {
+      "title": "Write the menu, budget, and guest list with allergies",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Adapting recipes for guests' allergies and to clean ingredients",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Send invitations; ask about allergies",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 35,
+     "unit": 9,
+     "kind": "practice",
+     "minutes": 180,
+     "note": "Make-ahead dishes from the plan: a sauce, the dessert, a stew or braise",
+     "drill": {
+      "title": "Shop within the budget, by store section",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Plating and serving family-style",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Thursday prep",
+      "minutes": 30
+     }
+    },
+    {
+     "week": 36,
+     "unit": 9,
+     "kind": "capstone",
+     "minutes": 360,
+     "note": "The full Sabbath meal for household and guests: a main, two sides, bread (challah, or homemade matzah in spring), and dessert, cooked alone",
+     "drill": {
+      "title": "Run the kitchen alone",
+      "minutes": 30
+     },
+     "knowledge": {
+      "title": "Reflection essay, the Sunday after (into the portfolio)",
+      "minutes": 45
+     },
+     "sabbath": {
+      "title": "Giving thanks for food (Deuteronomy 8:10; 1 Timothy 4:4–5)",
+      "minutes": 30
+     }
+    }
+   ],
+   "cards": [
+    {
+     "id": "steak-fajitas",
+     "title": "Steak fajitas",
+     "cuisine": "tex-mex",
+     "skills": [
+      "julienne",
+      "searing"
+     ],
+     "minutes": 75,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "bo-luc-lac",
+     "title": "Bò lúc lắc",
+     "cuisine": "vietnamese",
+     "skills": [
+      "searing"
+     ],
+     "minutes": 75,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "ginger-soy",
+       "sweet-savory"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "adventurous",
+      "veggies": "some"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "chicken-enchiladas",
+     "title": "Chicken enchiladas",
+     "cuisine": "mexican",
+     "skills": [
+      "layering"
+     ],
+     "minutes": 120,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "warm-spices",
+       "creamy-cheesy"
+      ],
+      "heat": "some",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "salade-nicoise",
+     "title": "Salade niçoise with seared tuna",
+     "cuisine": "french",
+     "skills": [
+      "timing",
+      "searing"
+     ],
+     "minutes": 90,
+     "tags": {
+      "protein": "tuna",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "everyday",
+      "veggies": "lots"
+     },
+     "art": "salad"
+    },
+    {
+     "id": "bibimbap",
+     "title": "Bibimbap",
+     "cuisine": "korean",
+     "skills": [
+      "timing",
+      "stir-frying"
+     ],
+     "minutes": 120,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "ginger-soy",
+       "chili-heat"
+      ],
+      "heat": "some",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "lots"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "ensaladilla-rusa",
+     "title": "Ensaladilla rusa",
+     "cuisine": "spanish",
+     "skills": [
+      "emulsions"
+     ],
+     "minutes": 75,
+     "tags": {
+      "protein": "tuna",
+      "flavors": [
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "adventurous",
+      "veggies": "some"
+     },
+     "art": "salad"
+    },
+    {
+     "id": "antipasto-platter",
+     "title": "Antipasto platter",
+     "cuisine": "italian",
+     "skills": [
+      "cooling-reheating"
+     ],
+     "minutes": 60,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "salad"
+    },
+    {
+     "id": "mezze-spread",
+     "title": "Mezze spread",
+     "cuisine": "lebanese",
+     "skills": [
+      "cooling-reheating",
+      "cooking-legumes"
+     ],
+     "minutes": 180,
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "lots"
+     },
+     "art": "salad"
+    },
+    {
+     "id": "chicken-cacciatore",
+     "title": "Chicken cacciatore",
+     "cuisine": "italian",
+     "skills": [
+      "breaking-down-chicken",
+      "braising"
+     ],
+     "minutes": 120,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "rich-tomato",
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "flank-steak",
+     "title": "Sliced flank steak",
+     "cuisine": "american",
+     "skills": [
+      "thin-slicing",
+      "searing"
+     ],
+     "minutes": 75,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "duck-breast-cherry",
+     "title": "Seared duck breast with cherry sauce",
+     "cuisine": "french",
+     "skills": [
+      "searing",
+      "reducing"
+     ],
+     "minutes": 90,
+     "tags": {
+      "protein": "duck-quail",
+      "flavors": [
+       "sweet-savory"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "adventurous",
+      "veggies": "light"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "teriyaki-salmon-side",
+     "title": "Teriyaki salmon side",
+     "cuisine": "japanese",
+     "skills": [
+      "cooking-fish"
+     ],
+     "minutes": 75,
+     "tags": {
+      "protein": "salmon",
+      "flavors": [
+       "ginger-soy",
+       "sweet-savory"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "fish"
+    },
+    {
+     "id": "pescado-veracruzana",
+     "title": "Pescado a la veracruzana",
+     "cuisine": "mexican",
+     "skills": [
+      "cooking-fish"
+     ],
+     "minutes": 90,
+     "tags": {
+      "protein": "white-fish",
+      "flavors": [
+       "rich-tomato",
+       "tangy"
+      ],
+      "heat": "some",
+      "budget": "$$$",
+      "familiar": "adventurous",
+      "veggies": "some"
+     },
+     "art": "fish"
+    },
+    {
+     "id": "chicken-two-ways",
+     "title": "Chicken two ways",
+     "cuisine": "american",
+     "skills": [
+      "breaking-down-chicken",
+      "making-stock"
+     ],
+     "minutes": 180,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "spatchcocked-quail",
+     "title": "Spatchcocked quail with pomegranate",
+     "cuisine": "persian",
+     "skills": [
+      "breaking-down-chicken",
+      "roasting"
+     ],
+     "minutes": 75,
+     "tags": {
+      "protein": "duck-quail",
+      "flavors": [
+       "sweet-savory",
+       "warm-spices"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "adventurous",
+      "veggies": "light"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "chocolate-babka",
+     "title": "Chocolate babka",
+     "cuisine": "jewish",
+     "skills": [
+      "yeast-dough",
+      "layering"
+     ],
+     "minutes": 240,
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "sweet-treats"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "bread"
+    },
+    {
+     "id": "milk-bread",
+     "title": "Japanese milk bread",
+     "cuisine": "japanese",
+     "skills": [
+      "yeast-dough",
+      "scalded-dough"
+     ],
+     "minutes": 210,
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "art": "bread"
+    },
+    {
+     "id": "spinach-feta-borekas",
+     "title": "Spinach and feta borekas",
+     "cuisine": "turkish",
+     "skills": [
+      "folding-layers",
+      "filling-crimping"
+     ],
+     "minutes": 180,
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "art": "side"
+    },
+    {
+     "id": "jamaican-beef-patties",
+     "title": "Jamaican beef patties",
+     "cuisine": "jamaican",
+     "skills": [
+      "pastry",
+      "filling-crimping"
+     ],
+     "minutes": 150,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "warm-spices",
+       "chili-heat"
+      ],
+      "heat": "some",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "arepas",
+     "title": "Arepas with black beans and cheese",
+     "cuisine": "venezuelan",
+     "skills": [
+      "skillet-baking"
+     ],
+     "minutes": 75,
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "adventurous",
+      "veggies": "light"
+     },
+     "art": "side"
+    },
+    {
+     "id": "poached-salmon-dill",
+     "title": "Poached salmon with dill sauce",
+     "cuisine": "american",
+     "skills": [
+      "cooking-fish",
+      "simmering"
+     ],
+     "minutes": 60,
+     "tags": {
+      "protein": "salmon",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "fish"
+    },
+    {
+     "id": "goan-fish-curry",
+     "title": "Goan fish curry",
+     "cuisine": "indian",
+     "skills": [
+      "cooking-fish",
+      "blooming-spices"
+     ],
+     "minutes": 75,
+     "tags": {
+      "protein": "white-fish",
+      "flavors": [
+       "coconut-tropical",
+       "chili-heat"
+      ],
+      "heat": "spicy",
+      "budget": "$$",
+      "familiar": "adventurous",
+      "veggies": "light"
+     },
+     "art": "fish"
+    },
+    {
+     "id": "cilbir",
+     "title": "Çılbır",
+     "cuisine": "turkish",
+     "skills": [
+      "poaching-eggs"
+     ],
+     "minutes": 45,
+     "tags": {
+      "protein": "eggs",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "adventurous",
+      "veggies": "light"
+     },
+     "art": "side"
+    },
+    {
+     "id": "mushroom-risotto",
+     "title": "Mushroom risotto",
+     "cuisine": "italian",
+     "skills": [
+      "cooking-grains"
+     ],
+     "minutes": 75,
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "creamy-cheesy",
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "side"
+    },
+    {
+     "id": "tahdig",
+     "title": "Chelow with tahdig",
+     "cuisine": "persian",
+     "skills": [
+      "cooking-grains"
+     ],
+     "minutes": 120,
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "adventurous",
+      "veggies": "light"
+     },
+     "art": "side"
+    },
+    {
+     "id": "black-bean-soup",
+     "title": "Puréed black bean soup",
+     "cuisine": "cuban",
+     "skills": [
+      "cooking-legumes",
+      "building-soup"
+     ],
+     "minutes": 120,
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "soup"
+    },
+    {
+     "id": "feijoada",
+     "title": "Feijoada, beef only",
+     "cuisine": "brazilian",
+     "skills": [
+      "cooking-legumes",
+      "one-pot-stews"
+     ],
+     "minutes": 180,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "adventurous",
+      "veggies": "some"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "french-onion-soup",
+     "title": "French onion soup",
+     "cuisine": "french",
+     "skills": [
+      "reducing",
+      "building-soup"
+     ],
+     "minutes": 150,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "mild-buttery",
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "soup"
+    },
+    {
+     "id": "pho-bo",
+     "title": "Phở bò",
+     "cuisine": "vietnamese",
+     "skills": [
+      "making-stock",
+      "reducing"
+     ],
+     "minutes": 240,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "warm-spices",
+       "ginger-soy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "art": "soup"
+    },
+    {
+     "id": "seared-thighs-pan-sauce",
+     "title": "Seared chicken thighs with pan sauce",
+     "cuisine": "italian",
+     "skills": [
+      "searing",
+      "reducing"
+     ],
+     "minutes": 60,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "herby-lemony",
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "kung-pao-chicken",
+     "title": "Kung pao chicken",
+     "cuisine": "chinese-american",
+     "skills": [
+      "stir-frying",
+      "timing"
+     ],
+     "minutes": 75,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "chili-heat",
+       "ginger-soy"
+      ],
+      "heat": "spicy",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "mapo-tofu",
+     "title": "Mapo tofu",
+     "cuisine": "chinese",
+     "skills": [
+      "stir-frying"
+     ],
+     "minutes": 45,
+     "tags": {
+      "protein": "tofu",
+      "flavors": [
+       "chili-heat"
+      ],
+      "heat": "spicy",
+      "budget": "$",
+      "familiar": "adventurous",
+      "veggies": "light"
+     },
+     "art": "side"
+    },
+    {
+     "id": "diner-eggs-to-order",
+     "title": "Diner eggs to order with hash browns",
+     "cuisine": "american",
+     "skills": [
+      "heat-control",
+      "poaching-eggs"
+     ],
+     "minutes": 75,
+     "tags": {
+      "protein": "eggs",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "side"
+    },
+    {
+     "id": "tortilla-espanola",
+     "title": "Tortilla española",
+     "cuisine": "spanish",
+     "skills": [
+      "heat-control"
+     ],
+     "minutes": 75,
+     "tags": {
+      "protein": "eggs",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "art": "side"
+    },
+    {
+     "id": "chicken-tikka-masala",
+     "title": "Chicken tikka masala",
+     "cuisine": "indian",
+     "skills": [
+      "blooming-spices",
+      "broiling"
+     ],
+     "minutes": 105,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "warm-spices",
+       "creamy-cheesy"
+      ],
+      "heat": "some",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "thai-green-curry",
+     "title": "Thai green curry",
+     "cuisine": "thai",
+     "skills": [
+      "blooming-spices"
+     ],
+     "minutes": 90,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "coconut-tropical",
+       "chili-heat"
+      ],
+      "heat": "spicy",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "chicken-a-la-king",
+     "title": "Chicken à la king",
+     "cuisine": "american",
+     "skills": [
+      "roux"
+     ],
+     "minutes": 60,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "creamy-cheesy",
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "korean-fried-chicken",
+     "title": "Korean fried chicken",
+     "cuisine": "korean",
+     "skills": [
+      "deep-frying"
+     ],
+     "minutes": 120,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "chili-heat",
+       "sweet-savory"
+      ],
+      "heat": "some",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "salmon-en-papillote",
+     "title": "Salmon en papillote",
+     "cuisine": "french",
+     "skills": [
+      "cooking-fish"
+     ],
+     "minutes": 60,
+     "tags": {
+      "protein": "salmon",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "fish"
+    },
+    {
+     "id": "samke-harra",
+     "title": "Samke harra",
+     "cuisine": "lebanese",
+     "skills": [
+      "cooking-fish",
+      "roasting"
+     ],
+     "minutes": 90,
+     "tags": {
+      "protein": "white-fish",
+      "flavors": [
+       "chili-heat",
+       "herby-lemony"
+      ],
+      "heat": "some",
+      "budget": "$$$",
+      "familiar": "adventurous",
+      "veggies": "some"
+     },
+     "art": "fish"
+    },
+    {
+     "id": "bbq-chicken-two-zone",
+     "title": "Grilled BBQ chicken",
+     "cuisine": "american",
+     "skills": [
+      "grilling"
+     ],
+     "minutes": 90,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "smoky-bbq",
+       "sweet-savory"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "chicken-satay",
+     "title": "Chicken satay with peanut sauce",
+     "cuisine": "indonesian",
+     "skills": [
+      "grilling",
+      "marinating"
+     ],
+     "minutes": 90,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "sweet-savory",
+       "coconut-tropical"
+      ],
+      "heat": "some",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "roast-beef",
+     "title": "Roast beef with roasted vegetables",
+     "cuisine": "american",
+     "skills": [
+      "roasting",
+      "gravy"
+     ],
+     "minutes": 150,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "roast-leg-of-lamb",
+     "title": "Roast leg of lamb",
+     "cuisine": "greek",
+     "skills": [
+      "roasting"
+     ],
+     "minutes": 180,
+     "tags": {
+      "protein": "lamb",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "beef-lasagna",
+     "title": "Beef lasagna with béchamel",
+     "cuisine": "italian",
+     "skills": [
+      "layering",
+      "roux"
+     ],
+     "minutes": 180,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "rich-tomato",
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "moussaka",
+     "title": "Moussaka",
+     "cuisine": "greek",
+     "skills": [
+      "layering",
+      "roux"
+     ],
+     "minutes": 180,
+     "tags": {
+      "protein": "lamb",
+      "flavors": [
+       "warm-spices",
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "adventurous",
+      "veggies": "some"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "birria-de-chivo",
+     "title": "Birria de chivo",
+     "cuisine": "mexican",
+     "skills": [
+      "braising"
+     ],
+     "minutes": 240,
+     "tags": {
+      "protein": "goat",
+      "flavors": [
+       "chili-heat",
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$$$",
+      "familiar": "adventurous",
+      "veggies": "light"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "chicken-chasseur",
+     "title": "Chicken chasseur",
+     "cuisine": "french",
+     "skills": [
+      "braising"
+     ],
+     "minutes": 90,
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "rich-tomato",
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "duck-legs-white-beans",
+     "title": "Braised duck legs with white beans",
+     "cuisine": "french",
+     "skills": [
+      "braising"
+     ],
+     "minutes": 180,
+     "tags": {
+      "protein": "duck-quail",
+      "flavors": [
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "adventurous",
+      "veggies": "light"
+     },
+     "art": "poultry"
+    },
+    {
+     "id": "cholent",
+     "title": "Cholent",
+     "cuisine": "jewish",
+     "skills": [
+      "one-pot-stews"
+     ],
+     "minutes": 150,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "art": "meat"
+    },
+    {
+     "id": "dafina",
+     "title": "Dafina",
+     "cuisine": "moroccan",
+     "skills": [
+      "one-pot-stews"
+     ],
+     "minutes": 180,
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "adventurous",
+      "veggies": "some"
+     },
+     "art": "meat"
+    }
+   ],
+   "titles": {
+    "chicken-fried-rice": "Chicken fried rice",
+    "ratatouille": "Ratatouille",
+    "steak-fajitas": "Steak fajitas",
+    "bo-luc-lac": "Bò lúc lắc",
+    "chicken-enchiladas": "Chicken enchiladas",
+    "chana-masala": "Chana masala",
+    "salade-nicoise": "Salade niçoise with seared tuna",
+    "bibimbap": "Bibimbap",
+    "chicken-caesar": "Chicken Caesar + homemade dressing & croutons",
+    "ensaladilla-rusa": "Ensaladilla rusa",
+    "antipasto-platter": "Antipasto platter",
+    "mezze-spread": "Mezze spread",
+    "chicken-cacciatore": "Chicken cacciatore",
+    "chicken-tagine": "Chicken tagine with olives",
+    "flank-steak": "Sliced flank steak",
+    "duck-breast-cherry": "Seared duck breast with cherry sauce",
+    "teriyaki-salmon-side": "Teriyaki salmon side",
+    "pescado-veracruzana": "Pescado a la veracruzana",
+    "chicken-two-ways": "Chicken two ways",
+    "spatchcocked-quail": "Spatchcocked quail with pomegranate",
+    "chocolate-babka": "Chocolate babka",
+    "milk-bread": "Japanese milk bread",
+    "chicken-pot-pie": "Chicken pot pie",
+    "spinach-feta-borekas": "Spinach and feta borekas",
+    "spinach-mushroom-quiche": "Spinach & mushroom quiche",
+    "jamaican-beef-patties": "Jamaican beef patties",
+    "biscuits-and-gravy": "Biscuits + sausage gravy",
+    "arepas": "Arepas with black beans and cheese",
+    "apple-pie": "Apple pie with lattice",
+    "malva-pudding": "Malva pudding",
+    "poached-salmon-dill": "Poached salmon with dill sauce",
+    "goan-fish-curry": "Goan fish curry",
+    "eggs-benedict": "Eggs Benedict",
+    "cilbir": "Çılbır",
+    "mushroom-risotto": "Mushroom risotto",
+    "tahdig": "Chelow with tahdig",
+    "black-bean-soup": "Puréed black bean soup",
+    "feijoada": "Feijoada, beef only",
+    "french-onion-soup": "French onion soup",
+    "pho-bo": "Phở bò",
+    "seared-thighs-pan-sauce": "Seared chicken thighs with pan sauce",
+    "chimichurri-steak": "Chimichurri steak",
+    "kung-pao-chicken": "Kung pao chicken",
+    "mapo-tofu": "Mapo tofu",
+    "diner-eggs-to-order": "Diner eggs to order with hash browns",
+    "tortilla-espanola": "Tortilla española",
+    "chicken-tikka-masala": "Chicken tikka masala",
+    "thai-green-curry": "Thai green curry",
+    "chicken-a-la-king": "Chicken à la king",
+    "swedish-meatballs": "Swedish meatballs",
+    "fish-and-chips": "Fish and chips",
+    "korean-fried-chicken": "Korean fried chicken",
+    "salmon-en-papillote": "Salmon en papillote",
+    "samke-harra": "Samke harra",
+    "bbq-chicken-two-zone": "Grilled BBQ chicken",
+    "chicken-satay": "Chicken satay with peanut sauce",
+    "roast-beef": "Roast beef with roasted vegetables",
+    "roast-leg-of-lamb": "Roast leg of lamb",
+    "beef-lasagna": "Beef lasagna with béchamel",
+    "moussaka": "Moussaka",
+    "pot-roast": "Pot roast",
+    "birria-de-chivo": "Birria de chivo",
+    "chicken-chasseur": "Chicken chasseur",
+    "duck-legs-white-beans": "Braised duck legs with white beans",
+    "cholent": "Cholent",
+    "dafina": "Dafina"
+   }
   }
  },
  "tastes": {

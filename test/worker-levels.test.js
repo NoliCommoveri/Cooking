@@ -424,3 +424,15 @@ test('a part kept on can be skipped, any day: no longer open, counts for nothing
   lv = await kitchen(a, ava);
   assert.equal(lv.week.parts.find((x) => x.part === 'knowledge').skipped, false);
 });
+
+test('14b: the re-planned Levels 2, 3, and 4 are in the library, release 2, with a Familiar and an Explore dish each recipe week', () => {
+  const sp = ['sp-2', 'sp-3', 'sp-4'].map((id) => LIBRARY.levels[id]);
+  assert.deepEqual(sp.map((V) => [V.id, V.name, V.release, V.side.number, V.weeks.length]),
+    [['sp-2', 'Level 2 Apprentice', 2, 102, 36], ['sp-3', 'Level 3 Cook', 2, 103, 36], ['sp-4', 'Level 4 Chef', 2, 104, 36]]);
+  for (const V of sp) {
+    for (const w of V.weeks.filter((x) => !x.kind)) assert.ok(w.familiar && w.explore && w.familiar !== w.explore, `${V.id} week ${w.week}`);
+    assert.deepEqual(V.weeks.filter((w) => w.mastery).map((w) => w.week), [4, 6, 10, 15, 20, 26, 30, 33]);
+  }
+  // Level 4 names a cuisine every recipe week (§12.0).
+  assert.ok(sp[2].weeks.filter((w) => !w.kind).every((w) => w.cuisine));
+});
