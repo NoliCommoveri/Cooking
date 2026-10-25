@@ -15161,22 +15161,22 @@ export const LIBRARY = {
       "title": "Firstfruits and tithing food (Deuteronomy 14:22–29; Proverbs 3:9)",
       "minutes": 45,
       "body": [
-       "God's law set apart more than one tithe, a tenth of each year's harvest. The first tithe went to the Levites, who had no land of their own and served at the tabernacle (Numbers 18:21, 24).",
-       "Deuteronomy 14 describes a second tithe: \"You shall tithe all the yield of your seed that comes from the field year by year\" (Deuteronomy 14:22). The family ate this one themselves. They brought it to the place God chose and ate it there with joy, \"that you may learn to fear the LORD your God always\" (Deuteronomy 14:23). If the trip was too far to carry the food, they could sell it, carry the money, and buy food and drink there to eat and rejoice together with their household (Deuteronomy 14:24–26). The Levite was not to be forgotten (Deuteronomy 14:27).",
-       "Every third year, there was a third tithe as well, in addition to the other two. Families still traveled and ate their second tithe at the feast, and they set aside another tenth, stored in their own towns, for the Levite, the sojourner, the fatherless, and the widow, \"and they shall eat and be filled\" (Deuteronomy 14:28–29).",
+       "God's law sets apart three tithes, each a tenth of our increase, and we still keep them today. The first tithe is the LORD's: \"it is holy to the LORD\" (Leviticus 27:30). In Israel it went to the Levites, who served at the tabernacle and had no land of their own (Numbers 18:21, 24).",
+       "Deuteronomy 14 describes the second tithe: \"You shall tithe all the yield of your seed that comes from the field year by year\" (Deuteronomy 14:22). The family keeps this tithe and spends it at the place God chooses, at His feasts, eating and rejoicing before Him, \"that you may learn to fear the LORD your God always\" (Deuteronomy 14:23). It can be turned into money and spent there \"for whatever you desire\" to eat and rejoice together with your household (Deuteronomy 14:24–26). The Levite is not to be forgotten (Deuteronomy 14:27).",
+       "Every third year there is a third tithe as well, in addition to the other two. Families still keep the feasts with their second tithe, and they set aside another tenth for the Levite, the sojourner, the fatherless, and the widow, \"and they shall eat and be filled\" (Deuteronomy 14:28–29).",
        "Proverbs puts it simply: \"Honor the LORD with your wealth and with the firstfruits of all your produce\" (Proverbs 3:9). The first and best goes to God, not what's left over."
       ],
       "steps": [
-       "Read Numbers 18:21–24.",
+       "Read Leviticus 27:30 and Numbers 18:21–24.",
        "Read Deuteronomy 14:22–29.",
        "Read Proverbs 3:9–10.",
-       "Answer in writing: what were the three tithes, and who was each one for?",
-       "Answer in writing: what did a family do with the second tithe, and how did that teach them to fear the LORD?",
-       "With your family, choose one way to give the first and best of your food this week: the first plate of your mastery dish to someone who needs it, or food to a food pantry. Write it down, and do it."
+       "Answer in writing: what are the three tithes, and what is each one for?",
+       "Answer in writing: how does the second tithe teach a family to fear the LORD?",
+       "With your family, talk about how you set aside your tithes. Plan one dish from this year's units you'd like to cook or share at the feast with your second tithe, and write it down."
       ],
       "quiz": [
        {
-        "q": "What part of the harvest was a tithe?",
+        "q": "What part of our increase is a tithe?",
         "choices": [
          "A tenth",
          "Half",
@@ -15186,27 +15186,37 @@ export const LIBRARY = {
         "explain": "Deuteronomy 14:22."
        },
        {
-        "q": "Who received the first tithe?",
+        "q": "Who received the first tithe in Israel?",
         "choices": [
          "The Levites",
          "The king",
          "The family itself"
         ],
         "answer": 0,
-        "explain": "They had no land of their own (Numbers 18:21, 24)."
+        "explain": "They served at the tabernacle and had no land of their own (Numbers 18:21, 24)."
        },
        {
-        "q": "In the third year, what happened to the second tithe?",
+        "q": "What is the second tithe for?",
         "choices": [
-         "Families still ate it at the feast, and gave a third tithe for the poor as well",
-         "It stayed home instead",
-         "It was skipped that year"
+         "Keeping God's feasts at the place He chooses, with your household",
+         "Paying taxes",
+         "Saving for later years"
         ],
         "answer": 0,
-        "explain": "The third tithe was in addition (Deuteronomy 14:28–29)."
+        "explain": "Deuteronomy 14:23–26."
        },
        {
-        "q": "Who was the third-year tithe stored for?",
+        "q": "In the third year, what happens to the second tithe?",
+        "choices": [
+         "Families still keep the feasts with it, and give a third tithe for those in need as well",
+         "It stays home instead",
+         "It is skipped that year"
+        ],
+        "answer": 0,
+        "explain": "The third tithe is in addition (Deuteronomy 14:28–29)."
+       },
+       {
+        "q": "Who is the third-year tithe for?",
         "choices": [
          "The Levite, the sojourner, the fatherless, and the widow",
          "The king",
@@ -15214,16 +15224,6 @@ export const LIBRARY = {
         ],
         "answer": 0,
         "explain": "Deuteronomy 14:28–29."
-       },
-       {
-        "q": "What does Proverbs 3:9 say to honor the LORD with?",
-        "choices": [
-         "Your wealth and the firstfruits of your produce",
-         "What's left over",
-         "Only money"
-        ],
-        "answer": 0,
-        "explain": "The first and best."
        }
       ]
      }

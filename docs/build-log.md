@@ -4932,6 +4932,11 @@ Fish", and goes live for every family on merge.
   third tithe for the poor was given in addition, while families still
   traveled and ate the second (Deuteronomy 14:28–29). The first draft had
   the third-year tithe replacing the second.
+- Owner, 2026-10-25: "We still keep the tithe laws." The page is in the
+  present tense: the three tithes are kept today, the first is the LORD's
+  (Leviticus 27:30), the second keeps the feasts, and the third is set aside
+  every third year as well. Its family step plans a dish for the feast
+  with the second tithe.
 - **Kitchen words:** fillet (steps can't use it until it has a card), pin
   bones, steam (underlined as "steamed" and "steaming" only), flake, in
   parchment.
