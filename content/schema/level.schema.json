@@ -126,6 +126,15 @@
         },
         "sabbath": {
           "$ref": "#/$defs/part"
+        },
+        "familiar": {
+          "$ref": "#/$defs/id"
+        },
+        "explore": {
+          "$ref": "#/$defs/id"
+        },
+        "cuisine": {
+          "$ref": "#/$defs/id"
         }
       }
     },
@@ -301,6 +310,10 @@
       "items": {
         "$ref": "#/$defs/recipe"
       }
+    },
+    "release": {
+      "type": "integer",
+      "minimum": 1
     }
   }
 }

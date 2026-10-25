@@ -28,6 +28,8 @@ export function contentFromFiles(files, images = null) {
   const pictures = images && new Set(images);
   return {
     registryFiles, lessons, levels, levelLessons,
+    // The units every re-planned Level shares, with their lengths (§12.0).
+    levelUnits: files['level-units.json'] ?? null,
     ingredients: all.ingredients, equipment: all.equipment, terms: all.terms, watchedWords: r('rules/kitchen-words.json').words,
     skills: all.skills, cuisines: all.cuisines, regions: all.regions, units: all.units, course: r('course.json'),
     // What profiles rate, and the words dishes are tagged in (§6.21).

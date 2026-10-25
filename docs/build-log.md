@@ -5174,3 +5174,37 @@ Planning only; nothing in the app changed.
   Dinner rolls (with their written cold-proof page), in place of homemade
   pizza and cinnamon rolls. A separate breads course is noted in plan §12.0
   as an idea to decide.
+
+## 208. 2026-10-25 — Re-plan build, 14a: the data model
+
+Phase 14 (plan §12.9), behind release 2. Owner, 2026-10-25: "start
+building what we have and do level 1 later." The Level 2, 3, and 4 docs are
+taken as approved.
+
+- **Before:** every Level unit had exactly 4 weeks; a week held one recipe;
+  a week could cook only its own Level's cards; every Level, its recipes,
+  and its courses were gated on release 1.
+- **Now:**
+  - `content/level-units.json`: the nine shared units and their lengths
+    (4, 2, 4, 5, 5, 6, 4, 3, 3).
+  - A Level file can set `release`. A release 2 Level must use the shared
+    units (names and lengths) and give each recipe week a `familiar` and an
+    `explore` dish; any week can name its `cuisine`
+    (`content/schema/level.schema.json`).
+  - The linter checks the pair (both known, different, each in one week
+    only), warns when a dish's `familiar` tag doesn't match its slot, and
+    lets a week cook another Level's card or recipe; a card lives in one
+    Level only (`src/content/lint.js`).
+  - The library carries each Level's release, its weeks' pairs and
+    cuisines, and the other Levels' cards its weeks use
+    (`tools/build-library.js`). The public `levels.json` (demo and
+    syllabus) leaves out release 2 Levels until launch.
+  - The Worker shows a Level in Which program?, its own recipes and Side
+    quests unit, its best-fit page, and any course on it only to a family
+    whose release has reached the Level's (`levelsOn`, `levelLessonOn` in
+    `src/worker/plan.js`; `api.js`, `picks.js`, `swap.js`).
+- No family sees a change: no release 2 Level exists yet (14b adds them).
+- Phase 14 in the phase table replaces the old Level 4 row; §12.8's
+  features are slice 14f.
+- Tests: 360 (the shared units and the pair, a card in one Level and cooked
+  by another, and a release 2 Level hidden until the family has release 2).

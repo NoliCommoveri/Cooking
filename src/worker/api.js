@@ -15,7 +15,7 @@ import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
 import { FREE_MAX, servingOptions } from '../content/scale.js';
 import { numberCourse } from '../content/course.js';
-import { register as registerPlan, markCooked, tzOf, levelProgress, levelSummary, partRows } from './plan.js';
+import { register as registerPlan, markCooked, tzOf, levelProgress, levelSummary, partRows, levelLessonOn, levelsOn } from './plan.js';
 import { localDay, isSabbath } from './schedule.js';
 import { register as registerShopping } from './shopping.js';
 import { register as registerRecipes, lessonFor, recipeNames } from './recipes.js';
@@ -27,7 +27,7 @@ import { register as registerGrades } from './grades.js';
 import { register as registerTastes, forgetProfile } from './tastes.js';
 import { RUBRIC, gradeLine } from '../content/grades.js';
 import { exportFamily, deleteFamily, eraseAfter } from './backup.js';
-import { releaseFor, releaseOn } from './release.js';
+import { releaseFor, releaseOn, familyRelease } from './release.js';
 import { register as registerPicks, relearn } from './picks.js';
 import { register as registerGaps } from './gaps.js';
 import { register as registerVariations, variationChoices, recordVariation, hasVariation, forgetCooks } from './variations.js';
@@ -400,7 +400,7 @@ on('GET', '/api/library', async (req, env) => {
   const fam = await env.DB.prepare('SELECT diet_filters FROM families WHERE id = ?').bind(s.family_id).first();
   const filters = JSON.parse(fam.diet_filters);
   // A Level's own recipes (§12.4), in their own unit, with the next release only.
-  const release = await releaseOn(env.DB, s.family_id, 1);
+  const releaseN = await familyRelease(env.DB, s.family_id), release = releaseN >= 1;
   const name = (i) => LIBRARY.ingredients[i]?.name ?? i;
   // A patched total time shows on the card too (§6.11).
   const live = await livePatches(env.DB);
@@ -413,7 +413,7 @@ on('GET', '/api/library', async (req, env) => {
   const lessons = [];
   let hidden = 0;
   for (const L of LIBRARY.lessons) {
-    if (L.level && !release) continue;
+    if (!levelLessonOn(L, releaseN)) continue;
     const view = dietView(L, LIBRARY.ingredients, filters);
     if (!view.visible) { hidden++; continue; }
     lessons.push({
@@ -427,7 +427,7 @@ on('GET', '/api/library', async (req, env) => {
       pick: pickOf[L.id] ?? null,
     });
   }
-  const sides = release ? Object.values(LIBRARY.levels ?? {}).map((V) => V.side) : [];
+  const sides = levelsOn(releaseN).map((V) => V.side);
   return {
     lessons, hidden, units: { ...LIBRARY.units, ...Object.fromEntries(sides.map((u) => [u.number, u.name])) }, seasonal: LIBRARY.seasonal, labels, total,
     // The Levels' own units: named like the seasonal ones, not "Path 100".

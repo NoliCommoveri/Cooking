@@ -40,6 +40,25 @@ test('without the next release there is only Cook Around the World', async () =>
   assert.equal((await level(a, [ava])).status, 400);
 });
 
+test('a re-planned Level (release 2) shows only to a family that has release 2 (§12.0)', async () => {
+  const { env, a, ava, fid } = await setup({ preview: false });
+  await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('next_release', ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value").bind(JSON.stringify({ live: 1, preview: [] })).run();
+  LIBRARY.levels['level-test'] = { ...LIBRARY.levels['level-3'], id: 'level-test', name: 'Test Level', release: 2 };
+  try {
+    const ids = async () => (await a.get('/api/courses')).body.levels.map((V) => V.id);
+    assert.deepEqual(await ids(), ['level-3'], 'release 1 live: only the release 1 Level');
+    assert.equal((await level(a, [ava], sunday, { program: 'level-test' })).status, 400);
+    assert.equal((await a.get('/api/picks/level?level=level-test')).status, 404);
+    await setPreview(env.DB, fid, true);
+    assert.deepEqual(await ids(), ['level-3', 'level-test'], 'a preview family sees release 2');
+    assert.equal((await level(a, [ava], sunday, { program: 'level-test' })).status, 200);
+    await setPreview(env.DB, fid, false);
+    assert.equal((await a.get('/api/courses')).body.courses.length, 0, 'its course waits out of sight without release 2');
+  } finally {
+    delete LIBRARY.levels['level-test'];
+  }
+});
+
 test('a Level course: one week a week, its recipes in week order, "Week 1 of 36"', async () => {
   const { a, ava } = await setup();
   const { levels } = (await a.get('/api/courses')).body;
