@@ -5083,3 +5083,10 @@ Planning only; nothing in the app changed.
   No-cook 5–6, Meat 7–10, Baking 11–15, Boiling 16–20, Stovetop 21–26, for
   every Level (plan §12.0). The doc also has a count of main proteins by
   unit, Familiar and Explore.
+- Owner, 2026-10-25: steaming is Unit 5's ("it's unit 5 we reference
+  steaming"). Week 18 is now a steaming week (salmon and vegetables steamed
+  in a basket; Cantonese steamed fish, written), and week 17 takes beans and
+  lentils together (pinto bean burritos; mujaddara), so red-red and the
+  lentil soup move to fallbacks. Week 24 is both dishes seared skin-side
+  down (pan-seared trout or salmon, written; Korean pan-fried mackerel,
+  godeungeo-gui). Unit lengths are unchanged.
