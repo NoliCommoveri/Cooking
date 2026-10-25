@@ -48,7 +48,6 @@
     { "id": "aromatics", "word": "Aromatics", "forms": ["aromatics"], "means": "Strong-smelling vegetables, like onion, garlic, celery, and ginger, cooked first to build a dish's flavor.", "taughtIn": "vegetable-stir-fry", "image": null },
     { "id": "mirepoix", "word": "Mirepoix", "forms": ["mirepoix"], "means": "France's flavor base: onion, carrot, and celery, about two parts onion to one part each of the others.", "taughtIn": "minestrone", "image": null },
     { "id": "soffritto", "word": "Soffritto", "forms": ["soffritto"], "means": "Italy's flavor base: onion, carrot, and celery chopped fine and cooked slowly in olive oil.", "taughtIn": "beef-ragu", "image": null },
-    { "id": "sofrito", "word": "Sofrito", "forms": ["sofrito"], "means": "The Spanish and Latin American flavor base: onion, garlic, and peppers, often with tomato, cooked gently in oil.", "taughtIn": null, "image": null },
-    { "id": "holy-trinity", "word": "Holy trinity", "forms": ["holy trinity", "trinity"], "means": "Louisiana's flavor base: onion, celery, and green bell pepper, diced and cooked together.", "taughtIn": "chicken-jambalaya", "image": null }
+    { "id": "sofrito", "word": "Sofrito", "forms": ["sofrito"], "means": "The Spanish and Latin American flavor base: onion, garlic, and peppers, often with tomato, cooked gently in oil.", "taughtIn": null, "image": null }
   ]
 }

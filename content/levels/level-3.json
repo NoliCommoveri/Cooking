@@ -996,13 +996,13 @@
         "body": [
           "Much of the world's savory cooking starts the same way: a few strong-smelling vegetables, cut small and cooked in fat before anything else goes in. Cooks call them aromatics, and together they're the dish's flavor base. Each cuisine has its own.",
           "France: mirepoix, onion, carrot, and celery, about two parts onion to one part each of the others. It starts soups, stocks, and braises. Italy: soffritto, the same three vegetables chopped finer and cooked slowly in olive oil, often with garlic. You'll cook one under next week's ragù.",
-          "Louisiana: the holy trinity, onion, celery, and green bell pepper, with the pepper in place of the carrot. It starts jambalaya, gumbo, and this week's rice dressing. Spain and Latin America: sofrito, onion, garlic, and peppers, often with tomato. Cuban sofrito, under last week's picadillo, uses green pepper; Puerto Rican sofrito adds cilantro.",
+          "Louisiana: onion, celery, and green bell pepper, with the pepper in place of the carrot. It starts jambalaya, gumbo, and this week's rice dressing. Spain and Latin America: sofrito, onion, garlic, and peppers, often with tomato. Cuban sofrito, under last week's picadillo, uses green pepper; Puerto Rican sofrito adds cilantro.",
           "India: onion, ginger, and garlic, often with green chiles, cooked until golden before the spices go in. China: ginger, garlic, and green onion, in hot oil for just seconds. West Africa: onion, tomato, and hot peppers, often blended smooth, as in jollof rice.",
           "The idea is the same everywhere; what changes is the time. Slow sauces and soups sweat their base for many minutes so it melts into the dish. A fast stir-fry adds its aromatics near the end, for seconds, so they stay sharp and fresh."
         ],
         "quiz": [
           { "q": "What's in a French mirepoix?", "choices": ["Onion, carrot, and celery", "Onion, celery, and green pepper", "Ginger, garlic, and green onion"], "answer": 0, "explain": "Italy's soffritto uses the same three, chopped finer." },
-          { "q": "What's in Louisiana's holy trinity?", "choices": ["Onion, celery, and green pepper", "Onion, carrot, and celery", "Onion, tomato, and hot pepper"], "answer": 0, "explain": "Green pepper takes the carrot's place." },
+          { "q": "Which three vegetables start most Louisiana cooking?", "choices": ["Onion, celery, and green pepper", "Onion, carrot, and celery", "Onion, tomato, and hot pepper"], "answer": 0, "explain": "Green pepper takes the carrot's place." },
           { "q": "Which flavor base usually has ginger and garlic, with spices added after?", "choices": ["India's", "France's", "Louisiana's"], "answer": 0, "explain": "Onion, ginger, and garlic, cooked until golden." },
           { "q": "What do all aromatic bases have in common?", "choices": ["Strong-smelling vegetables cooked first to build flavor", "They're always eaten raw", "They're all spices"], "answer": 0, "explain": "Everything else sits on top of them." },
           { "q": "Why does a stir-fry add its garlic and ginger near the end?", "choices": ["They burn fast in a very hot pan", "They need the least cooking to be safe", "They thicken the sauce"], "answer": 0, "explain": "A few seconds keeps them fresh, not bitter." }
@@ -1078,7 +1078,7 @@
           { "q": "Unit review: how can you tell oil is hot enough to sauté?", "choices": ["It shimmers", "It smokes", "It bubbles"], "answer": 0, "explain": "Smoke means it's too hot." },
           { "q": "Unit review: why shock blanched vegetables in ice water?", "choices": ["To stop the cooking so they stay crisp and green", "To season them", "To wash them"], "answer": 0, "explain": "Their own heat would keep cooking them." },
           { "q": "Unit review: what is fond?", "choices": ["The brown bits stuck to the pan after browning", "A kind of broth", "Burnt food to throw away"], "answer": 0, "explain": "Deglazing lifts it into the sauce." },
-          { "q": "Unit review: what's in the holy trinity?", "choices": ["Onion, celery, and green pepper", "Onion, carrot, and celery", "Ginger, garlic, and green onion"], "answer": 0, "explain": "Onion, carrot, and celery is mirepoix." },
+          { "q": "Unit review: which three vegetables start most Louisiana cooking?", "choices": ["Onion, celery, and green pepper", "Onion, carrot, and celery", "Ginger, garlic, and green onion"], "answer": 0, "explain": "Onion, carrot, and celery is mirepoix." },
           { "q": "Unit review: why can't a wet surface brown?", "choices": ["It can't get hotter than 212°F until the water is gone", "Water washes off the flavor", "It's too heavy"], "answer": 0, "explain": "Browning needs about 300°F." }
         ]
       },

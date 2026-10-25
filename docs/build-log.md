@@ -4815,7 +4815,8 @@ family on merge.
   160°F, fat spooned off, then a simmer with tomato sauce, raisins, and
   olives, over rice.
 - **Cajun rice dressing with beef** (week 15, Level only): beef browned for
-  fond, the holy trinity sweated in the same pan, deglazed with beef broth
+  fond, onion, celery, and green pepper sweated in the same pan, deglazed
+  with beef broth
   and cooked down, cooled rice folded in. Rice cooked the day before works,
   reheated to 165°F (Unit 1).
 - **Beef ragù** (week 16; lesson 22c, the braising group, for every family):
@@ -4833,8 +4834,11 @@ family on merge.
   14:3–8), salt (Leviticus 2:13, Matthew 5:13, Colossians 4:6), and a sauce
   made a day ahead.
 - **Kitchen words:** sweat, fond, shock, smoke point, aromatics, mirepoix,
-  soffritto, sofrito, holy trinity. Deglaze now points to Chicken
+  soffritto, sofrito. Deglaze now points to Chicken
   jambalaya, and shimmer to Vegetable stir-fry with tofu.
+- No "holy trinity" anywhere (owner's ruling, build log 175, repeated
+  2026-10-25): the rice dressing, week 15's knowledge page, the unit quiz,
+  and the kitchen words say onion, celery, and green pepper instead.
 - New ingredients: fresh green beans, beef chuck roast, beef broth, canned
   tomato sauce, raisins, pimento-stuffed green olives. New tool: a stockpot.
 - Level 3's hours with every part are now about 130 (128 before); the

@@ -12688,7 +12688,7 @@ export const LIBRARY = {
       "body": [
        "Much of the world's savory cooking starts the same way: a few strong-smelling vegetables, cut small and cooked in fat before anything else goes in. Cooks call them aromatics, and together they're the dish's flavor base. Each cuisine has its own.",
        "France: mirepoix, onion, carrot, and celery, about two parts onion to one part each of the others. It starts soups, stocks, and braises. Italy: soffritto, the same three vegetables chopped finer and cooked slowly in olive oil, often with garlic. You'll cook one under next week's ragù.",
-       "Louisiana: the holy trinity, onion, celery, and green bell pepper, with the pepper in place of the carrot. It starts jambalaya, gumbo, and this week's rice dressing. Spain and Latin America: sofrito, onion, garlic, and peppers, often with tomato. Cuban sofrito, under last week's picadillo, uses green pepper; Puerto Rican sofrito adds cilantro.",
+       "Louisiana: onion, celery, and green bell pepper, with the pepper in place of the carrot. It starts jambalaya, gumbo, and this week's rice dressing. Spain and Latin America: sofrito, onion, garlic, and peppers, often with tomato. Cuban sofrito, under last week's picadillo, uses green pepper; Puerto Rican sofrito adds cilantro.",
        "India: onion, ginger, and garlic, often with green chiles, cooked until golden before the spices go in. China: ginger, garlic, and green onion, in hot oil for just seconds. West Africa: onion, tomato, and hot peppers, often blended smooth, as in jollof rice.",
        "The idea is the same everywhere; what changes is the time. Slow sauces and soups sweat their base for many minutes so it melts into the dish. A fast stir-fry adds its aromatics near the end, for seconds, so they stay sharp and fresh."
       ],
@@ -12704,7 +12704,7 @@ export const LIBRARY = {
         "explain": "Italy's soffritto uses the same three, chopped finer."
        },
        {
-        "q": "What's in Louisiana's holy trinity?",
+        "q": "Which three vegetables start most Louisiana cooking?",
         "choices": [
          "Onion, celery, and green pepper",
          "Onion, carrot, and celery",
@@ -12926,7 +12926,7 @@ export const LIBRARY = {
         "explain": "Deglazing lifts it into the sauce."
        },
        {
-        "q": "Unit review: what's in the holy trinity?",
+        "q": "Unit review: which three vegetables start most Louisiana cooking?",
         "choices": [
          "Onion, celery, and green pepper",
          "Onion, carrot, and celery",
