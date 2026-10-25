@@ -5210,6 +5210,88 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "pita-bread",
+   "version": 1,
+   "track": "core",
+   "unit": 5,
+   "title": "Pita bread",
+   "image": "img/dishes/pita-bread.webp",
+   "cuisine": "lebanese",
+   "skill": "A yeast dough, baking flatbreads that puff",
+   "servings": 8,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 8 pitas.",
+     "2": "Makes 16 pitas. Mix it in the large bowl and knead it in two halves."
+    }
+   },
+   "totalMinutes": 120,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "flour-ap"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "sheet-pan",
+    "chef-knife",
+    "rolling-pin",
+    "oven-mitts",
+    "tongs"
+   ]
+  },
+  {
    "id": "buttermilk-biscuits",
    "version": 1,
    "track": "core",
@@ -5293,6 +5375,108 @@ export const LIBRARY = {
     "sheet-pan",
     "parchment",
     "pastry-brush",
+    "oven-mitts",
+    "cooling-rack"
+   ]
+  },
+  {
+   "id": "challah",
+   "version": 1,
+   "track": "core",
+   "unit": 5,
+   "title": "Challah",
+   "image": "img/dishes/challah.webp",
+   "cuisine": "jewish",
+   "skill": "Yeast dough: kneading, proofing, braiding",
+   "servings": 10,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 1 large braided loaf.",
+     "2": "Makes 2 loaves. Bake them on two sheet pans, one rack in the upper third and one in the lower third, and swap them halfway."
+    }
+   },
+   "totalMinutes": 240,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "sesame-seeds",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "sesame"
+    ]
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "chef-knife",
+    "kitchen-scale",
+    "sheet-pan",
+    "parchment",
+    "pastry-brush",
+    "foil",
     "oven-mitts",
     "cooling-rack"
    ]
@@ -5759,6 +5943,188 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "dinner-rolls",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Dinner rolls",
+   "image": "img/meals/bread.svg",
+   "cuisine": "american",
+   "skill": "Shaping even rolls by weight",
+   "servings": 12,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 12 rolls.",
+     "2": "Makes 24 rolls in two baking dishes. Knead the dough in two halves."
+    }
+   },
+   "totalMinutes": 210,
+   "ingredients": [
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "milk-whole",
+     "use": "milk-oat",
+     "reason": "dairy"
+    },
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "fork",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "kitchen-scale",
+    "chef-knife",
+    "baking-dish",
+    "pastry-brush",
+    "foil",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "level": "level-3"
+  },
+  {
+   "id": "sandwich-loaf",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Sandwich loaf",
+   "image": "img/meals/bread.svg",
+   "cuisine": "american",
+   "skill": "Kneading to a windowpane, baking a loaf",
+   "servings": 12,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 1 loaf, about 12 slices.",
+     "2": "Makes 2 loaves. Knead the dough in two halves, and you'll need two loaf pans."
+    }
+   },
+   "totalMinutes": 240,
+   "ingredients": [
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "milk-whole",
+     "use": "milk-oat",
+     "reason": "dairy"
+    },
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "rolling-pin",
+    "loaf-pan",
+    "foil",
+    "oven-mitts",
+    "cooling-rack",
+    "chef-knife",
+    "cutting-board"
+   ],
+   "level": "level-3"
+  },
+  {
    "id": "thick-burgers",
    "version": 1,
    "track": "core",
@@ -6008,6 +6374,10 @@ export const LIBRARY = {
    "contains": [
     "gluten"
    ]
+  },
+  "yeast-active-dry": {
+   "name": "Active dry yeast",
+   "contains": []
   },
   "baking-powder": {
    "name": "Baking powder",
@@ -6617,6 +6987,8 @@ export const LIBRARY = {
   "cottage-cheese-crescents": "A2"
  },
  "levelLabels": {
+  "dinner-rolls": "L3",
+  "sandwich-loaf": "L2",
   "thick-burgers": "L1"
  },
  "dietTags": [
@@ -8491,7 +8863,7 @@ export const LIBRARY = {
    "skills": [
     "yeast-dough"
    ],
-   "minutes": 210,
+   "minutes": 240,
    "cuisine": "jewish",
    "pickOne": "yeast-dough",
    "meal": false,
@@ -9638,15 +10010,143 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Bloom yeast; test water temperature",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "You'll test yeast in water at three temperatures, side by side, and see for yourself why the recipe asks for 105 to 110°F. Use the thermometer you calibrated in week 1."
+      ],
+      "steps": [
+       "Set out 3 clear glasses or jars and label them: cool, warm, hot.",
+       "Fill each with ½ cup of water: about 80°F in the first, 105 to 110°F in the second, and 140°F in the third. Warm the water in the microwave and check each glass with the thermometer, adjusting with hot or cold water until it reads right.",
+       "Stir ½ teaspoon of sugar into each glass.",
+       "Sprinkle ½ teaspoon of active dry yeast over each, and start a 10-minute timer.",
+       "At 5 minutes and at 10 minutes, look at each glass. Note how much foam there is and how it smells.",
+       "Write down what you saw: which bloomed fastest, which bloomed slowly, and which didn't bloom at all.",
+       "Pour the glasses down the drain and rinse them."
+      ],
+      "quiz": [
+       {
+        "q": "Which glass should show no foam?",
+        "choices": [
+         "The 140°F one",
+         "The 80°F one",
+         "The 110°F one"
+        ],
+        "answer": 0,
+        "explain": "Water that hot kills yeast."
+       },
+       {
+        "q": "The 80°F glass foamed, but slowly. Why?",
+        "choices": [
+         "Cool water slows yeast but doesn't kill it",
+         "It had less sugar",
+         "The yeast was dead"
+        ],
+        "answer": 0,
+        "explain": "Yeast still works when it's cool, just more slowly."
+       }
+      ]
      },
      "knowledge": {
       "title": "How yeast makes dough rise",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Baker's yeast is a single-celled fungus, Saccharomyces cerevisiae. A packet holds billions of them, dried and dormant. Warm water wakes them up.",
+       "Once awake, yeast feeds on sugars in the dough, some added and some released from the flour's starch by its own enzymes. It breaks them down by fermentation and gives off two things: carbon dioxide gas and a little alcohol (ethanol).",
+       "The gas is what raises bread. Kneading builds gluten, a stretchy network that traps the gas in thousands of tiny bubbles, so the dough swells instead of letting it escape. In the oven, the gas expands, the alcohol bakes off, and the heat kills the yeast at about 140°F. The bubbles set in place as the crumb.",
+       "Temperature runs the whole process. Yeast works best around 75 to 80°F in a rising dough. Cold slows it down; that's why a dough can rise overnight in the fridge. Water above about 130°F starts to kill it, which is why you check the water before the yeast goes in.",
+       "Fermentation also makes flavor. A dough that rises slowly, in a cool kitchen or the fridge, tastes fuller than one rushed in a warm spot."
+      ],
+      "quiz": [
+       {
+        "q": "What is baker's yeast?",
+        "choices": [
+         "A single-celled fungus",
+         "A kind of bacteria",
+         "A chemical powder"
+        ],
+        "answer": 0,
+        "explain": "Saccharomyces cerevisiae, a living fungus, dried and dormant in the packet."
+       },
+       {
+        "q": "Which gas raises bread dough?",
+        "choices": [
+         "Carbon dioxide",
+         "Oxygen",
+         "Steam only"
+        ],
+        "answer": 0,
+        "explain": "Yeast gives it off as it ferments sugar. Steam helps in the oven, as in pita."
+       },
+       {
+        "q": "What traps the gas in the dough?",
+        "choices": [
+         "Gluten, built by kneading",
+         "The salt",
+         "The oil"
+        ],
+        "answer": 0,
+        "explain": "Gluten's stretchy network holds the gas in tiny bubbles."
+       },
+       {
+        "q": "What happens to yeast in the oven?",
+        "choices": [
+         "Heat kills it at about 140°F",
+         "It keeps working until the bread cools",
+         "It turns into gluten"
+        ],
+        "answer": 0,
+        "explain": "By then it has done its work, and the bubbles set as the crumb."
+       },
+       {
+        "q": "Why can dough rise overnight in the fridge?",
+        "choices": [
+         "Cold slows yeast down without killing it",
+         "Cold kills the yeast",
+         "The fridge adds moisture"
+        ],
+        "answer": 0,
+        "explain": "That slow rise also gives the bread more flavor."
+       }
+      ]
      },
      "sabbath": {
-      "title": "Bake and freeze pita for the Sabbath",
-      "minutes": 45
+      "title": "Bake and freeze pita",
+      "minutes": 45,
+      "body": [
+       "Bread freezes better than almost anything you'll cook. Frozen within a few hours of baking, it tastes nearly fresh when it's reheated. Left on the counter, it goes stale in a day or two, and a stale pita cracks instead of folding.",
+       "Staling isn't drying out. The starch in bread slowly recrystallizes as it cools, and that's what makes it firm. The fridge speeds that up, so bread keeps worse there than on the counter. The freezer stops it.",
+       "Many families bake ahead like this so there's bread on hand for busy days, or so they can focus on resting."
+      ],
+      "steps": [
+       "Set aside some of this week's pitas, or bake a second batch.",
+       "Let them cool completely, about 30 minutes, in their towel. Warm pitas sweat in a bag, and the drops of water turn to ice.",
+       "Stack them with a square of parchment between each, so you can take out one at a time.",
+       "Slide the stack into a freezer bag, press out the air, and seal it. Label it with what it is and the date.",
+       "Freeze for up to 3 months.",
+       "To serve, wrap the frozen pitas in foil and heat them at 350°F for 10 to 15 minutes, or thaw one on the counter for 15 minutes and warm it in a dry skillet for 30 seconds a side."
+      ],
+      "quiz": [
+       {
+        "q": "Why not keep bread in the fridge?",
+        "choices": [
+         "The cold makes it go stale faster",
+         "It's a food safety risk",
+         "It gets moldy faster"
+        ],
+        "answer": 0,
+        "explain": "Cold speeds up the starch recrystallizing. The freezer stops it."
+       },
+       {
+        "q": "Why cool the pitas before bagging them?",
+        "choices": [
+         "Warm bread sweats, and the water turns to ice",
+         "They're easier to stack",
+         "So they shrink"
+        ],
+        "answer": 0,
+        "explain": "Ice crystals make the bread soggy when it thaws."
+       }
+      ]
      }
     },
     {
@@ -9659,15 +10159,144 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Knead and windowpane test",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "You'll knead a small dough by hand and test it as you go, so you learn what a developed dough feels like. There's no yeast in it; the drill is about gluten."
+      ],
+      "steps": [
+       "Stir together 1 cup of all-purpose flour, ⅓ cup of water, and a pinch of salt in a bowl until it forms a rough dough.",
+       "Turn it out and knead: push it away with the heel of your hand, fold it back, turn it a quarter turn, and repeat in a steady rhythm.",
+       "After 2 minutes, pinch off a grape-sized piece and try the windowpane test: stretch it slowly between your fingers and thumbs into a thin sheet. Note where it tears.",
+       "Knead 3 more minutes and test again. Then 3 more, and test again.",
+       "Note how the dough changed: how sticky it is, how smooth, and how far it stretched each time.",
+       "When a piece stretches thin enough to see light through, the dough is developed. Note how many minutes it took.",
+       "Roll the dough thin and cook it in a dry skillet like Unleavened flatbread, or throw it out."
+      ],
+      "quiz": [
+       {
+        "q": "The test piece tore before it went thin. What next?",
+        "choices": [
+         "Knead a few more minutes and test again",
+         "Add more flour",
+         "Let it rise"
+        ],
+        "answer": 0,
+        "explain": "The gluten isn't developed yet."
+       },
+       {
+        "q": "How does dough change as you knead it?",
+        "choices": [
+         "Less sticky, smoother, and stretchier",
+         "Stickier and softer",
+         "Drier and crumbly"
+        ],
+        "answer": 0,
+        "explain": "The gluten network is organizing."
+       }
+      ]
      },
      "knowledge": {
       "title": "Gluten and kneading",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Wheat flour holds two proteins, glutenin and gliadin. Dry, they do nothing. When water is added, they link up into gluten. Glutenin makes it springy and strong, and gliadin makes it stretchy.",
+       "Kneading lines those links up. At first the dough is shaggy and tears easily. As you push, fold, and turn it, the strands lengthen and organize into a network that stretches without breaking. That's what the windowpane test shows.",
+       "A strong network matters most for a tall loaf. It has to hold its gas through a long rise and half an hour in the oven. A flatbread, baked in minutes, needs less.",
+       "Other ingredients change gluten. Fat (butter, oil, egg yolk) coats the strands so the crumb is soft and tender; that's an enriched dough. Salt tightens the network and slows the yeast a little. Bread flour has more protein than all-purpose, so it builds stronger gluten and a chewier bread.",
+       "Gluten is also why some people can't eat bread. In people with celiac disease, gluten triggers an immune reaction that damages the small intestine. Gluten-free breads use other starches and binders, and they behave differently in every step you're learning."
+      ],
+      "quiz": [
+       {
+        "q": "Which two proteins form gluten?",
+        "choices": [
+         "Glutenin and gliadin",
+         "Casein and whey",
+         "Albumin and keratin"
+        ],
+        "answer": 0,
+        "explain": "Water lets them link; kneading lines them up."
+       },
+       {
+        "q": "What does kneading do?",
+        "choices": [
+         "Lines up gluten strands into a strong network",
+         "Adds air for the yeast",
+         "Melts the butter"
+        ],
+        "answer": 0,
+        "explain": "That network traps the yeast's gas."
+       },
+       {
+        "q": "Why is an enriched dough softer?",
+        "choices": [
+         "Fat coats the gluten strands",
+         "It has more yeast",
+         "It's kneaded less"
+        ],
+        "answer": 0,
+        "explain": "Butter, oil, and egg yolk tenderize the crumb."
+       },
+       {
+        "q": "Why would a baker pick bread flour?",
+        "choices": [
+         "Its higher protein builds stronger gluten",
+         "It has yeast in it",
+         "It's gluten-free"
+        ],
+        "answer": 0,
+        "explain": "Stronger gluten makes a taller, chewier loaf."
+       }
+      ]
      },
      "sabbath": {
-      "title": "Bake a loaf Friday morning",
-      "minutes": 45
+      "title": "Bread in the Bible: daily bread and the bread of life (Matthew 6:11; John 6:35)",
+      "minutes": 45,
+      "body": [
+       "Bread comes up more than almost any other food in the Bible. It stands for the food a person needs to live, and often for more than that.",
+       "In the wilderness, God fed Israel with manna, \"bread from heaven\" (Exodus 16:4). Each morning the people gathered what they needed for that day. Manna kept overnight spoiled, except the double portion gathered on the sixth day, which kept (Exodus 16:16–24). It taught them to depend on God one day at a time.",
+       "Jesus taught his disciples to pray, \"Give us this day our daily bread\" (Matthew 6:11). The prayer asks for what's needed today, not a store for years.",
+       "After feeding five thousand people with five loaves (John 6:1–14), Jesus told the crowd, who had brought up the manna, \"I am the bread of life; whoever comes to me shall not hunger\" (John 6:35). Bread keeps a body alive for a day; he spoke of himself as what keeps a person alive for good."
+      ],
+      "steps": [
+       "Read Exodus 16:4–5 and 16:13–24.",
+       "Read Matthew 6:9–13.",
+       "Read John 6:26–35.",
+       "Answer in writing: what did gathering manna each morning teach Israel?",
+       "Answer in writing: why do you think Jesus compared himself to bread, and not to some other food?",
+       "Share your answers with an adult at a meal this week, with a slice of this week's loaf."
+      ],
+      "quiz": [
+       {
+        "q": "What did Israel gather each morning in the wilderness?",
+        "choices": [
+         "Manna",
+         "Quail only",
+         "Grain from the fields"
+        ],
+        "answer": 0,
+        "explain": "\"Bread from heaven\" (Exodus 16:4)."
+       },
+       {
+        "q": "Where is \"Give us this day our daily bread\"?",
+        "choices": [
+         "Matthew 6:11",
+         "Exodus 16:4",
+         "John 6:35"
+        ],
+        "answer": 0,
+        "explain": "It's part of the prayer Jesus taught in Matthew 6."
+       },
+       {
+        "q": "What happened just before Jesus said \"I am the bread of life\"?",
+        "choices": [
+         "He fed five thousand people with five loaves",
+         "He turned water into wine",
+         "He ate the Passover"
+        ],
+        "answer": 0,
+        "explain": "The crowd followed him after the feeding (John 6:1–14, 26)."
+       }
+      ]
      }
     },
     {
@@ -9677,15 +10306,134 @@ export const LIBRARY = {
      "recipe": "dinner-rolls",
      "drill": {
       "title": "Shape even rolls by weight",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Bakeries weigh dough because eyes are poor judges of size. You'll divide a practice dough by weight and shape tight, even balls."
+      ],
+      "steps": [
+       "Stir together 1½ cups of all-purpose flour, ½ cup of water, and a pinch of salt until it forms a dough. Knead it until it's smooth, about 3 minutes.",
+       "Before using the scale, cut the dough by eye into 8 pieces you think are equal. Weigh each one and write the weights down.",
+       "Press the pieces back together. Weigh the whole dough and divide by 8. That's your target.",
+       "Cut 8 pieces again, this time weighing each. Pinch dough from heavy pieces onto light ones until each is within 3 grams of the target.",
+       "Shape each piece into a ball: cup it under your palm on a bare spot of counter and roll it in small circles until the top is smooth and tight.",
+       "Compare your two sets of weights. How far off were your eyes?",
+       "Roll the balls flat and cook them in a dry skillet like Unleavened flatbread, or throw them out."
+      ],
+      "quiz": [
+       {
+        "q": "Why weigh dough instead of cutting it by eye?",
+        "choices": [
+         "So every roll bakes through at the same time",
+         "So the dough rises faster",
+         "So you use less flour"
+        ],
+        "answer": 0,
+        "explain": "Small rolls overbake while large ones stay doughy."
+       },
+       {
+        "q": "Why shape on a bare spot of counter, not on flour?",
+        "choices": [
+         "A little stickiness gives the dough grip to tighten",
+         "Flour is wasted",
+         "It's cleaner"
+        ],
+        "answer": 0,
+        "explain": "On flour, the ball just slides and never builds a tight skin."
+       }
+      ]
      },
      "knowledge": {
       "title": "Proofing: under vs. over",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Proofing is the last rise, after shaping. It decides how a bread turns out more than any other step, and there's no clock for it. You judge it by the dough.",
+       "The poke test: flour a fingertip and press it about ½ inch into the side of the dough. If the dent springs back right away, the dough is underproofed. If it springs back slowly and leaves a small dent, it's ready. If it doesn't spring back at all, or the dough sighs and sinks, it's overproofed.",
+       "Underproofed bread is dense and tight. It rises hard in the oven and often bursts open along a side, because the yeast still has a lot of gas to give and the gluten is still tight.",
+       "Overproofed bread rises too far before baking. The gluten stretches thin and weak, the yeast runs out of sugar, and the loaf collapses or spreads flat in the oven, with big holes under the crust and a sour, boozy smell.",
+       "Temperature sets the pace. A warm kitchen (80°F) might proof rolls in 30 minutes; a cool one (68°F) might take an hour and a half. The fridge (below 40°F) slows it to overnight, which is called a cold proof or retarding the dough. That's the make-ahead method in this week's Beyond the Recipe."
+      ],
+      "quiz": [
+       {
+        "q": "You poke the dough and the dent springs right back. What does that mean?",
+        "choices": [
+         "It's underproofed; give it more time",
+         "It's ready to bake",
+         "It's overproofed"
+        ],
+        "answer": 0,
+        "explain": "Ready dough springs back slowly and leaves a small dent."
+       },
+       {
+        "q": "What does overproofed bread do in the oven?",
+        "choices": [
+         "Collapses or spreads flat",
+         "Bursts along one side",
+         "Rises extra tall"
+        ],
+        "answer": 0,
+        "explain": "The gluten is stretched weak, and the yeast has run out of food."
+       },
+       {
+        "q": "Why might rolls proof faster on one day than another?",
+        "choices": [
+         "The kitchen is warmer",
+         "The oven is hotter",
+         "They were weighed"
+        ],
+        "answer": 0,
+        "explain": "Yeast works faster when it's warm."
+       },
+       {
+        "q": "What does a cold proof in the fridge do?",
+        "choices": [
+         "Slows the yeast so dough can wait overnight",
+         "Kills the yeast",
+         "Makes the bread rise faster"
+        ],
+        "answer": 0,
+        "explain": "It's also called retarding the dough."
+       }
+      ]
      },
      "sabbath": {
-      "title": "Shape rolls Thursday; cold proof overnight",
-      "minutes": 45
+      "title": "Shape rolls a day ahead; cold proof overnight",
+      "minutes": 45,
+      "body": [
+       "A cold proof splits rolls across two days. You do the mixing and shaping one day, and the next day you only bake them. The long, cool rise also gives them more flavor.",
+       "The fridge keeps a dough with milk and egg safe, because it stays below 40°F, out of the danger zone. Shaped dough keeps there for 8 to 16 hours. Past about a day, the yeast runs out of food and the rolls overproof.",
+       "Many families do the shaping a day ahead so baking day is short, or so they can focus on resting."
+      ],
+      "steps": [
+       "Make this week's roll dough and let it rise once, as the recipe says.",
+       "Weigh, divide, and shape the rolls into the buttered dish.",
+       "Cover the dish tightly with plastic wrap or a lid, and put it straight in the fridge. Label it with the time.",
+       "Leave it 8 to 16 hours.",
+       "The next day, take the dish out and leave it on the counter, still covered, until the rolls are puffy and touching and pass the poke test. This usually takes 1 to 2 hours, because the dough starts cold.",
+       "Heat the oven to 375°F and bake them as the recipe says, to 190°F in the middle roll.",
+       "Note how the cold-proofed rolls compare with ones made the same day: flavor, rise, and color."
+      ],
+      "quiz": [
+       {
+        "q": "Why is dough with milk and egg safe overnight in the fridge?",
+        "choices": [
+         "It stays below 40°F, out of the danger zone",
+         "Yeast kills bacteria",
+         "The butter preserves it"
+        ],
+        "answer": 0,
+        "explain": "Refrigerator temperatures keep it out of the 40–140°F range."
+       },
+       {
+        "q": "Why do cold rolls need 1 to 2 hours on the counter?",
+        "choices": [
+         "The dough has to warm up and finish proofing",
+         "So they don't crack the dish",
+         "So the butter melts"
+        ],
+        "answer": 0,
+        "explain": "Yeast is slow when cold. Use the poke test, not the clock."
+       }
+      ]
      }
     },
     {
@@ -9699,15 +10447,206 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Braid a dough",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "A three-strand braid is the classic challah shape. You'll practice it with a plain dough until it's smooth and even, before you braid this week's challah on your own."
+      ],
+      "steps": [
+       "Stir together 1½ cups of all-purpose flour, ½ cup of water, and a pinch of salt. Knead it until it's smooth, about 3 minutes, and cut it into 3 pieces of the same weight.",
+       "Roll each piece into a rope about 12 inches long, a little thicker in the middle than at the ends. If a rope shrinks back, let it rest 5 minutes.",
+       "Lay the ropes side by side, running away from you, and pinch them together at the far end.",
+       "Braid: cross the right rope over the middle one, then the left rope over the new middle one. Keep going, right over middle, left over middle, snug but not stretched.",
+       "At the end, pinch the three ropes together and tuck both pinched ends under the loaf.",
+       "Unbraid it, roll the ropes again, and braid a second time, this time starting from the middle and working to each end, turning the loaf around between halves. Compare the two: which is more even?",
+       "If you have time, try a four-strand or a round braid from a video or book, and note the pattern you used.",
+       "Roll the dough out and cook it in a dry skillet like Unleavened flatbread, or throw it out."
+      ],
+      "quiz": [
+       {
+        "q": "In a three-strand braid, where does each outside rope go?",
+        "choices": [
+         "Over the middle rope",
+         "Under both other ropes",
+         "Straight down the side"
+        ],
+        "answer": 0,
+        "explain": "Right over middle, then left over middle."
+       },
+       {
+        "q": "Why braid from the middle out to each end?",
+        "choices": [
+         "The loaf comes out even, thick in the middle and tapered",
+         "It's faster",
+         "It uses less dough"
+        ],
+        "answer": 0,
+        "explain": "Braiding end to end tends to leave one end fat and one thin."
+       }
+      ]
      },
      "knowledge": {
       "title": "Doneness: color, sound, 190°F inside",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "This week you judge doneness three ways, then take the unit quiz.",
+       "Color: the crust browns through the Maillard reaction, where proteins and sugars react above about 300°F. An egg wash, honey, or milk adds proteins and sugars, so enriched breads brown sooner and darker. That's why color alone can fool you.",
+       "Sound: tip a loaf over (with oven mitts) and tap the bottom. A done loaf sounds hollow, because the crumb has set and dried. A dull thud means it's still wet inside. It's a useful check, but hard to read on a soft, rich loaf.",
+       "Temperature: the thermometer is the sure test. Enriched breads like sandwich loaves, rolls, and challah are done at 190°F in the center. Lean breads (flour, water, yeast, salt) go to about 200 to 210°F for a crisp crust and an open crumb. At these temperatures, the starch has absorbed water and set; this is called gelatinization.",
+       "Underbaked bread is gummy and dense in the middle and may sink as it cools. Bread keeps cooking for a while after it comes out, so it's cooled before slicing."
+      ],
+      "quiz": [
+       {
+        "q": "What temperature is an enriched bread done at?",
+        "choices": [
+         "190°F",
+         "165°F",
+         "212°F"
+        ],
+        "answer": 0,
+        "explain": "Lean breads go higher, to about 200 to 210°F."
+       },
+       {
+        "q": "Why does an egg-washed loaf brown early?",
+        "choices": [
+         "Egg adds proteins and sugars for the Maillard reaction",
+         "Egg is sticky",
+         "It blocks the heat"
+        ],
+        "answer": 0,
+        "explain": "That's why color isn't enough."
+       },
+       {
+        "q": "What does a hollow sound tell you?",
+        "choices": [
+         "The crumb has set and dried",
+         "There's a big hole inside",
+         "It's overproofed"
+        ],
+        "answer": 0,
+        "explain": "A dull thud means it's still wet."
+       },
+       {
+        "q": "Unit review: what water temperature wakes active dry yeast?",
+        "choices": [
+         "105 to 110°F",
+         "140 to 150°F",
+         "60 to 70°F"
+        ],
+        "answer": 0,
+        "explain": "Above about 130°F starts to kill it."
+       },
+       {
+        "q": "Unit review: which gas raises yeast dough?",
+        "choices": [
+         "Carbon dioxide",
+         "Oxygen",
+         "Nitrogen"
+        ],
+        "answer": 0,
+        "explain": "Yeast gives it off as it ferments sugar."
+       },
+       {
+        "q": "Unit review: what does the windowpane test show?",
+        "choices": [
+         "The gluten is fully developed",
+         "The yeast is alive",
+         "The dough has doubled"
+        ],
+        "answer": 0,
+        "explain": "The dough stretches thin enough to see light through."
+       },
+       {
+        "q": "Unit review: a gentle poke springs back slowly and leaves a small dent. The dough is…",
+        "choices": [
+         "Ready to bake",
+         "Underproofed",
+         "Overproofed"
+        ],
+        "answer": 0,
+        "explain": "Fast spring-back is under; none at all is over."
+       },
+       {
+        "q": "Unit review: why is bread kept in the freezer, not the fridge?",
+        "choices": [
+         "The fridge speeds staling; the freezer stops it",
+         "The fridge is unsafe for bread",
+         "Bread can't be frozen after baking"
+        ],
+        "answer": 0,
+        "explain": "Staling is starch recrystallizing, fastest just above freezing."
+       },
+       {
+        "q": "Unit review: why weigh dough when dividing it?",
+        "choices": [
+         "Even pieces bake evenly",
+         "To use less flour",
+         "To make it rise faster"
+        ],
+        "answer": 0,
+        "explain": "Sizes by eye can differ by a third."
+       }
+      ]
      },
      "sabbath": {
-      "title": "Challah for the Sabbath table",
-      "minutes": 45
+      "title": "Leaven and unleavened bread (Exodus 12:15–20; 1 Corinthians 5:6–8)",
+      "minutes": 45,
+      "body": [
+       "Leaven is anything that makes dough rise by fermentation: yeast, or a sourdough starter, a piece of old dough kept back to start the next batch. You've baked with it for four weeks. Scripture uses it in two ways, as a real food and as a picture.",
+       "As a food: at the first Passover, Israel left Egypt in such a hurry that their dough had no time to rise (Exodus 12:34, 39). God commanded them to eat unleavened bread for seven days each year, from the evening of the 14th day of the first month to the evening of the 21st, and to put all leaven out of their houses (Exodus 12:15–20). Deuteronomy calls it \"the bread of affliction,\" eaten to remember leaving Egypt in haste (Deuteronomy 16:3).",
+       "As a picture: Paul writes, \"a little leaven leavens the whole lump\" (1 Corinthians 5:6). A pinch of starter works through an entire batch of dough. He uses that to show how one wrong left alone spreads through a whole community, and tells the believers to \"celebrate the festival … with the unleavened bread of sincerity and truth\" (1 Corinthians 5:8).",
+       "Leaven isn't always bad in Scripture. The two loaves offered at the Feast of Weeks were baked with leaven (Leviticus 23:17), and Jesus compared the kingdom of heaven to leaven that a woman worked into three measures of flour until all of it rose (Matthew 13:33).",
+       "Families keep these days in different ways. This app shows the unleavened days a family sets and plans around leavened recipes on those days."
+      ],
+      "steps": [
+       "Read Exodus 12:14–20 and 12:33–39.",
+       "Read 1 Corinthians 5:6–8.",
+       "Read Leviticus 23:15–17 and Matthew 13:33.",
+       "From your own baking, explain in writing how \"a little leaven leavens the whole lump\" works in a bowl of dough. How much yeast went into your challah, and how much dough did it raise?",
+       "Answer in writing: in 1 Corinthians 5, what does leaven stand for, and what does unleavened bread stand for?",
+       "Share your answers with an adult over this week's challah."
+      ],
+      "quiz": [
+       {
+        "q": "Why was Israel's bread unleavened when they left Egypt?",
+        "choices": [
+         "They left in haste, before the dough could rise",
+         "They had no flour",
+         "Yeast was forbidden all year"
+        ],
+        "answer": 0,
+        "explain": "Exodus 12:34 and 39."
+       },
+       {
+        "q": "How many days is unleavened bread eaten in Exodus 12?",
+        "choices": [
+         "Seven",
+         "Three",
+         "Forty"
+        ],
+        "answer": 0,
+        "explain": "Exodus 12:15."
+       },
+       {
+        "q": "What does Paul use leaven to picture in 1 Corinthians 5?",
+        "choices": [
+         "Wrong that spreads through a whole community",
+         "God's provision",
+         "Hospitality"
+        ],
+        "answer": 0,
+        "explain": "\"A little leaven leavens the whole lump\" (1 Corinthians 5:6)."
+       },
+       {
+        "q": "Which offering was baked with leaven?",
+        "choices": [
+         "The two loaves at the Feast of Weeks",
+         "The Passover bread",
+         "The manna"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 23:17."
+       }
+      ]
      }
     },
     {
@@ -9729,7 +10668,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Chop vegetables ahead for the Sabbath meal",
+      "title": "Chop vegetables ahead and store them",
       "minutes": 45
      }
     },
@@ -9773,7 +10712,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Prep a full set of stir-fry vegetables ahead",
+      "title": "Gleaning: leaving the edges of the field (Leviticus 19:9–10; Ruth 2)",
       "minutes": 45
      }
     },
@@ -9795,7 +10734,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Prep and store all salad vegetables for the Sabbath",
+      "title": "Prep and store a full set of salad vegetables",
       "minutes": 45
      }
     },
@@ -9816,7 +10755,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Blanch and store beans for the Sabbath",
+      "title": "Blanch and store vegetables",
       "minutes": 45
      }
     },
@@ -9838,7 +10777,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Make and freeze a sofrito batch",
+      "title": "Clean land animals you might not expect: the two tests, the animals Deuteronomy names, and today's elk, moose, water buffalo, and yak (Leviticus 11:1–8; Deuteronomy 14:3–8)",
       "minutes": 45
      }
     },
@@ -9859,7 +10798,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Cook rice dressing ahead; cool safely",
+      "title": "Salt (Leviticus 2:13; Matthew 5:13; Colossians 4:6)",
       "minutes": 45
      }
     },
@@ -9882,7 +10821,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Make ragù ahead for the Sabbath meal",
+      "title": "Make a sauce that's better the next day",
       "minutes": 45
      }
     },
@@ -9924,7 +10863,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Soak beans Friday for a later meal",
+      "title": "Soak beans ahead",
       "minutes": 45
      }
     },
@@ -9946,7 +10885,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Cook grains ahead and reheat with steam",
+      "title": "Daniel's diet (Daniel 1)",
       "minutes": 45
      }
     },
@@ -9968,7 +10907,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Make a legume dish that holds well for the Sabbath",
+      "title": "Cook grains ahead and reheat them with steam",
       "minutes": 45
      }
     },
@@ -9990,7 +10929,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Plan a fish dish that serves well cold",
+      "title": "Dishes that serve well cold",
       "minutes": 45
      }
     },
@@ -10008,7 +10947,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Steam fish and chill for a cold plate",
+      "title": "Loaves and fishes, and breakfast on the shore (Matthew 14:13–21; John 21:9–13)",
       "minutes": 45
      }
     },
@@ -10029,7 +10968,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Make tomato sauce ahead; poach Friday",
+      "title": "Make a sauce ahead, finish the dish fresh",
       "minutes": 45
      }
     },
@@ -10052,7 +10991,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Cold fish salad for the Sabbath table",
+      "title": "Firstfruits and tithing food (Deuteronomy 14:22–29; Proverbs 3:9)",
       "minutes": 45
      }
     },
@@ -10097,7 +11036,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Marinate chicken Friday for a later meal",
+      "title": "Clean and unclean birds, and why God gave the food laws (Leviticus 11:13–19, 44–47; Deuteronomy 14:11–20)",
       "minutes": 45
      }
     },
@@ -10118,7 +11057,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Roast chicken ahead; hold and reheat",
+      "title": "Marinate ahead; roast, hold hot, and reheat",
       "minutes": 45
      }
     },
@@ -10137,7 +11076,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Roast chicken as the Sabbath centerpiece",
+      "title": "Blood and fat (Leviticus 3:17; 7:23–27; 17:10–14; Acts 15:20)",
       "minutes": 45
      }
     },
@@ -10173,7 +11112,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Make stock ahead for the week",
+      "title": "Hospitality: Abraham's meal for his guests (Genesis 18:1–8; Hebrews 13:2)",
       "minutes": 45
      }
     },
@@ -10218,7 +11157,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Soup as the Sabbath starter",
+      "title": "Feasting, rejoicing, and moderation (Deuteronomy 14:26; Nehemiah 8:10; Proverbs 23:20–21)",
       "minutes": 45
      }
     },
@@ -10281,7 +11220,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Serve the practice dish at the Sabbath meal and note what to change",
+      "title": "Serve the practice dish and note what to change",
       "minutes": 45
      }
     },
@@ -10300,7 +11239,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Serve the meal for the Sabbath",
+      "title": "Giving thanks for food (Deuteronomy 8:10; 1 Timothy 4:4–5)",
       "minutes": 45
      }
     }
@@ -10334,7 +11273,7 @@ export const LIBRARY = {
      "skills": [
       "yeast-dough"
      ],
-     "minutes": 210,
+     "minutes": 240,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -10354,7 +11293,7 @@ export const LIBRARY = {
      "skills": [
       "yeast-dough"
      ],
-     "minutes": 180,
+     "minutes": 210,
      "tags": {
       "protein": "none",
       "flavors": [

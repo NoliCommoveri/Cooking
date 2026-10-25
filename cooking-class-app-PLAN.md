@@ -1375,42 +1375,42 @@ Level 1's "Clean and unclean animals" and Level 2's "Labels and hidden unclean i
 | 2 | Thick beef burgers to 160°F | Thick vs. thin: how size changes cooking time (a potato in the oven, or two patties) | Safe internal temperatures chart | Cool a cooked dish in an ice bath |
 | 3 | Chicken fried rice, from the rice cooled in the drill | Safe cooling of a batch of rice, saved for the fried rice | Cross-contamination and board colors | Make a dish ahead and store it |
 | 4 | **Mastery:** meatloaf, beef kofta to 160°F, or turkey meatloaf to 165°F | Set up a clean station unaided | Food safety quiz | Reheat a stored dish to 165°F |
-| 5 | Pita bread | Bloom yeast; test water temperature | How yeast makes dough rise | Bake and freeze pita for the Sabbath |
-| 6 | Sandwich loaf | Knead and windowpane test | Gluten and kneading | Bake a loaf Friday morning |
-| 7 | Dinner rolls (2 or 3 shaped as small braids or knots) | Shape even rolls by weight | Proofing: under vs. over | Shape rolls Thursday; cold proof overnight |
-| 8 | **Mastery:** challah | Braid a dough | Doneness: color, sound, 190°F inside | Challah for the Sabbath table (and from here on, recommendation) |
-| 9 | Beef tacos with pico de gallo | Claw grip; dice 3 onions | Parts of a knife; knife types | Chop vegetables ahead for the Sabbath meal |
+| 5 | Pita bread | Bloom yeast; test water temperature | How yeast makes dough rise | Bake and freeze pita |
+| 6 | Sandwich loaf | Knead and windowpane test | Gluten and kneading | Bread in the Bible: daily bread and the bread of life (Matthew 6:11; John 6:35) |
+| 7 | Dinner rolls (2 or 3 shaped as small braids or knots) | Shape even rolls by weight | Proofing: under vs. over | Shape rolls a day ahead; cold proof overnight |
+| 8 | **Mastery:** challah | Braid a dough | Doneness: color, sound, 190°F inside | Leaven and unleavened bread (Exodus 12:15–20; 1 Corinthians 5:6–8) |
+| 9 | Beef tacos with pico de gallo | Claw grip; dice 3 onions | Parts of a knife; knife types | Chop vegetables ahead and store them |
 | 10 | Tabbouleh (fine mince) | Mince parsley and garlic | Honing vs. sharpening | Store prepped herbs so they stay fresh |
-| 11 | Vegetable stir-fry (julienne) | Julienne carrots and peppers | Why even cuts cook evenly | Prep a full set of stir-fry vegetables ahead |
-| 12 | **Mastery:** Israeli salad (fine dice) | Timed dice: one onion, one pepper | Name and size each classic cut | Prep and store all salad vegetables for the Sabbath |
-| 13 | Garlic green beans | Blanch and shock green beans and spinach; shimmer test for hot oil | Blanching: why vegetables stay green and crisp; oils and smoke points | Blanch and store beans for the Sabbath |
-| 14 | Beef picadillo (sofrito base) | Sweat vs. brown onions | Browning and why it adds flavor | Make and freeze a sofrito batch |
-| 15 | Cajun rice dressing with beef (onion, celery, and bell pepper) | Deglaze a pan, scrape the fond | Aromatic bases across cuisines | Cook rice dressing ahead; cool safely |
-| 16 | **Mastery:** ragù bolognese (Beef ragù's ground-beef Level version) | Sauté a mixed vegetable pan unaided | Explain sweat vs. sauté | Make ragù ahead for the Sabbath meal |
+| 11 | Vegetable stir-fry (julienne) | Julienne carrots and peppers | Why even cuts cook evenly | Gleaning: leaving the edges of the field (Leviticus 19:9–10; Ruth 2) |
+| 12 | **Mastery:** Israeli salad (fine dice) | Timed dice: one onion, one pepper | Name and size each classic cut | Prep and store a full set of salad vegetables |
+| 13 | Garlic green beans | Blanch and shock green beans and spinach; shimmer test for hot oil | Blanching: why vegetables stay green and crisp; oils and smoke points | Blanch and store vegetables |
+| 14 | Beef picadillo (sofrito base) | Sweat vs. brown onions | Browning and why it adds flavor | Clean land animals you might not expect: the two tests, the animals Deuteronomy names, and today's elk, moose, water buffalo, and yak (Leviticus 11:1–8; Deuteronomy 14:3–8) |
+| 15 | Cajun rice dressing with beef (onion, celery, and bell pepper) | Deglaze a pan, scrape the fond | Aromatic bases across cuisines | Salt (Leviticus 2:13; Matthew 5:13; Colossians 4:6) |
+| 16 | **Mastery:** ragù bolognese (Beef ragù's ground-beef Level version) | Sauté a mixed vegetable pan unaided | Explain sweat vs. sauté | Make a sauce that's better the next day |
 | 17 | Red lentil soup (mercimek) | Rinse and pick over lentils | Legume types and cook times | Freeze soup in portions |
-| 18 | Red beans and rice (beef sausage, collagen-cased or skinless, or none; §2.1) | Quick-soak vs. overnight soak | Why beans are soaked | Soak beans Friday for a later meal |
-| 19 | Rice pilaf | Toast grains in fat before liquid | Absorption vs. pasta method; ratios | Cook grains ahead and reheat with steam |
-| 20 | **Mastery:** mujaddara (lentils and rice) | Cook a grain without a recipe card | Grains of the world worksheet | Make a legume dish that holds well for the Sabbath |
-| 21 | Baked fish with lemon and herbs (any clean fillet), with a side from an earlier week | Check a fillet for pin bones | Fins and scales: clean vs. unclean species | Plan a fish dish that serves well cold |
-| 22 | Steamed fish with ginger and green onion | Judge freshness by smell, eyes, flesh | Store-bought fish: reading labels and names | Steam fish and chill for a cold plate |
-| 23 | Poached cod in tomato sauce | Test doneness by flaking | Why fish cooks faster than meat | Make tomato sauce ahead; poach Friday |
-| 24 | **Mastery:** pan-seared trout or tilapia | Sear a fillet skin-side down: dry it, press it flat, wait for it to release | Species ID quiz | Cold fish salad for the Sabbath table |
+| 18 | Red beans and rice (beef sausage, collagen-cased or skinless, or none; §2.1) | Quick-soak vs. overnight soak | Why beans are soaked | Soak beans ahead |
+| 19 | Rice pilaf | Toast grains in fat before liquid | Absorption vs. pasta method; ratios | Daniel's diet (Daniel 1) |
+| 20 | **Mastery:** mujaddara (lentils and rice) | Cook a grain without a recipe card | Grains of the world worksheet | Cook grains ahead and reheat them with steam |
+| 21 | Baked fish with lemon and herbs (any clean fillet), with a side from an earlier week | Check a fillet for pin bones | Fins and scales: clean vs. unclean species | Dishes that serve well cold |
+| 22 | Steamed fish with ginger and green onion | Judge freshness by smell, eyes, flesh | Store-bought fish: reading labels and names | Loaves and fishes, and breakfast on the shore (Matthew 14:13–21; John 21:9–13) |
+| 23 | Poached cod in tomato sauce | Test doneness by flaking | Why fish cooks faster than meat | Make a sauce ahead, finish the dish fresh |
+| 24 | **Mastery:** pan-seared trout or tilapia | Sear a fillet skin-side down: dry it, press it flat, wait for it to release | Species ID quiz | Firstfruits and tithing food (Deuteronomy 14:22–29; Proverbs 3:9) |
 | 25 | Roasted vegetables | Cut vegetables to roast at the same rate | How roasting browns food | Roast a tray of vegetables ahead |
-| 26 | Shish taouk (chicken thighs) | Trim and cube chicken safely | Raw poultry handling | Marinate chicken Friday for a later meal |
-| 27 | Roast chicken pieces | Temp-check thigh and breast | Dark vs. white meat | Roast chicken ahead; hold and reheat |
-| 28 | **Mastery:** whole roast chicken with pan juices (Level version; freeze the carcass) | Break down a cooked chicken | Carryover cooking and resting | Roast chicken as the Sabbath centerpiece |
+| 26 | Shish taouk (chicken thighs) | Trim and cube chicken safely | Raw poultry handling | Clean and unclean birds, and why God gave the food laws (Leviticus 11:13–19, 44–47; Deuteronomy 14:11–20) |
+| 27 | Roast chicken pieces | Temp-check thigh and breast | Dark vs. white meat | Marinate ahead; roast, hold hot, and reheat |
+| 28 | **Mastery:** whole roast chicken with pan juices (Level version; freeze the carcass) | Break down a cooked chicken | Carryover cooking and resting | Blood and fat (Leviticus 3:17; 7:23–27; 17:10–14; Acts 15:20) |
 | 29 | Vegetable stock (saved for week 32) | Skim and strain a stock | Stock vs. broth; why simmer, not boil | Freeze stock in portions |
-| 30 | Chicken stock from the week 28 carcass, or chicken wings or backs | Cool stock quickly and lift off fat | Gelatin and body in stock | Make stock ahead for the week |
+| 30 | Chicken stock from the week 28 carcass, or chicken wings or backs | Cool stock quickly and lift off fat | Gelatin and body in stock | Hospitality: Abraham's meal for his guests (Genesis 18:1–8; Hebrews 13:2) |
 | 31 | Matzo ball or chicken noodle soup, from week 30's stock (Level version) | Season a soup by tasting in stages | Soup families: clear, thick, puréed | Soup that improves when made ahead |
-| 32 | **Mastery:** minestrone from homemade stock, or beef and barley soup with ground beef (Level versions) | Make stock without a recipe card | Clean labels on boxed stock and bouillon (§2.1) | Soup as the Sabbath starter |
+| 32 | **Mastery:** minestrone from homemade stock, or beef and barley soup with ground beef (Level versions) | Make stock without a recipe card | Clean labels on boxed stock and bouillon (§2.1) | Feasting, rejoicing, and moderation (Deuteronomy 14:26; Nehemiah 8:10; Proverbs 23:20–21) |
 | 33 | Vinaigrette and dressed salad | Fix a dish that's too salty, flat, or sour | Salt, acid, fat, heat | Draft the capstone menu |
 | 34 | Chicken stew (Beef stew's Level version) or chili, seasoned in stages | Blind taste test; name what's missing | How cuisines balance differently | Write the shopping list and prep timeline |
-| 35 | Practice run of one capstone dish | Taste and adjust without a recipe | Holding and reheating a full meal | Serve the practice dish at the Sabbath meal and note what to change |
-| 36 | **Capstone:** full Sabbath meal made ahead (main, side, bread, and salad, with soup as a choice) | Shop and do Thursday prep | Reflection, the Sunday after: what worked, what to change | Serve the meal for the Sabbath |
+| 35 | Practice run of one capstone dish | Taste and adjust without a recipe | Holding and reheating a full meal | Serve the practice dish and note what to change |
+| 36 | **Capstone:** full Sabbath meal made ahead (main, side, bread, and salad, with soup as a choice) | Shop and do Thursday prep | Reflection, the Sunday after: what worked, what to change | Giving thanks for food (Deuteronomy 8:10; 1 Timothy 4:4–5) |
 
 The capstone pulls from every unit: safe temperatures (1), challah (2), knife work (3), an aromatic base (4), a grain or legume (5), a fish or a roast (6–7), and soup (8).
 
-- **Beyond the Recipe across the year (recommendation, waiting on the owner):** Unit 1 is make-ahead throughout (food storage, written 2026-10-24). For weeks 5–36, a make-ahead skill where the week's dish suits one (23 weeks in all), and **What the Bible says about food** in the other 13, so neither is padded. Titles say no more about the Sabbath than that families often prepare ahead.
+- **Beyond the Recipe across the year (owner, 2026-10-25: confirmed, applied to `level-3.json`):** Unit 1 is make-ahead throughout (food storage, written 2026-10-24). For weeks 5–36, a make-ahead skill where the week's dish suits one (23 weeks in all), and **What the Bible says about food** in the other 13, so neither is padded. Titles say no more about the Sabbath than that families often prepare ahead.
 
 | Week | Kind | Proposed title |
 |---|---|---|
@@ -1472,6 +1472,7 @@ The capstone pulls from every unit: safe temperatures (1), challah (2), knife wo
 - **Order and setup copy — Requirement (owner, 2026-10-24):** a Level week is presented as **Knowledge, Drill, Recipe, Beyond the Recipe**, everywhere a learner or parent sees it: the kitchen's week card, the progress ticks and their key, "Left this week", the parent's course card and Progress table, and setup. Setup's section is **Each week's components**, in the owner's words: "Our Level course lessons consist of four components: Knowledge, Drill, Recipe, Beyond the Recipe. If you'd like to skip assigning any of the components, uncheck them below." and "Note: accumulated hours displayed will be adjusted based off selected components." Recipe shows ticked and can't be unticked.
 - **12f Content:** Claude writes weeks 2 (beef burgers to 160°F) and 4 (the mastery recipe: meatloaf, or the beef version of Lamb kofta) and all 108 drill, knowledge, and Sabbath pages for the owner to review. Weeks 1 (Shakshuka) and 3 (Chicken fried rice) are written already, and so is week 32's Minestrone. Until a week's recipe is written, its course week holds the best written recipe with the skill, or waits like a planned dish (§6.18).
 - **12f Unit 1 written (2026-10-24, owner: Unit 1 only for now):** Meatloaf with glaze (`content/lessons/`, a Cook Around the World lesson) with a Turkey meatloaf variation to 165°F; Thick beef burgers (`content/levels/recipes/`, Level only); Easy-prep Level versions of Shakshuka and Chicken fried rice (jarred minced garlic), Chicken fried rice and Oyakodon (a grown-up cuts the raw chicken; Oyakodon's onion chopped, not sliced thin), and Smash burgers (pickles and onion optional); and weeks 1–4's twelve drill, knowledge, and Sabbath pages, with week 1's drill carrying the knife-safety quick review. Meatloaf binds with rolled oats, not breadcrumbs, so it's unleavened (gluten-free oats as the swap).
+- **12f Unit 2 written (2026-10-25, owner: one unit at a time; copy reviewed in a doc before merge, live for every family on merge):** Pita bread and Challah (`content/lessons/`, Cook Around the World lessons), Sandwich loaf and Dinner rolls (`content/levels/recipes/`, Level only), and weeks 5–8's twelve pages. Every Unit 2 bread blooms active dry yeast in liquid checked at 105 to 110°F; the loaf, rolls, and challah are checked at 190°F. Dinner rolls are weighed on a kitchen scale, with 2 or 3 shaped as knots or small braids, and are made the same day; the overnight cold proof is week 7's Beyond the Recipe. Weeks 6 and 8's Beyond the Recipe are Bible and food pages. New: active dry yeast, a kitchen scale, a loaf pan, and the kitchen word "proof".
 - **Level-only recipes served (2026-10-24):** a written lesson in `content/levels/recipes/` is built into the app's library with its Level, and a family with the next release sees it in Side quests under "Level 3 recipes", labeled L1, L2… in the order of the Level's recipe cards. It cooks, queues, shops, and patches like any lesson, and a Level week with it is cookable. Without the next release it isn't listed and can't be queued.
 - **Every new Level recipe is checked against Cook Around the World first — Requirement (owner, 2026-10-24).** Before one is written, it's checked for a pick-one group with room (at most three, §4.0), or as a variation of a dish already planned (§6.21). If it fits, it's written there, and the Level week points at it. Checked 2026-10-24 against all 89 dishes in `content/course.json`, the Appointed Times lessons (A1, A2), and the proposed variations (§6.21). **Proposed (recommendation, waiting on the owner):**
 

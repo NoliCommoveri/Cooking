@@ -29,6 +29,7 @@
     { "id": "box-grater", "name": "Box grater", "category": "openers", "icon": null },
     { "id": "can-opener", "name": "Can opener", "category": "openers", "icon": null },
     { "id": "thermometer", "name": "Instant-read thermometer", "category": "thermometers", "icon": null },
+    { "id": "kitchen-scale", "name": "Kitchen scale (grams)", "category": "measuring", "icon": null },
     { "id": "saucepan-medium", "name": "Medium saucepan with a lid", "category": "pots", "icon": null },
     { "id": "pot-large", "name": "Large heavy pot with a lid (like a Dutch oven)", "category": "pots", "icon": null },
     { "id": "colander", "name": "Colander", "category": "utensils", "icon": null },
@@ -44,6 +45,7 @@
     { "id": "heatproof-bowl", "name": "Heatproof glass or metal bowl that sits on top of the saucepan", "category": "mixing", "icon": null },
     { "id": "slotted-spoon", "name": "Slotted spoon", "category": "utensils", "icon": null },
     { "id": "toaster", "name": "Toaster", "category": "appliances", "icon": null },
-    { "id": "baking-dish", "name": "9-by-13-inch baking dish", "category": "bakeware", "icon": null }
+    { "id": "baking-dish", "name": "9-by-13-inch baking dish", "category": "bakeware", "icon": null },
+    { "id": "loaf-pan", "name": "9-by-5-inch loaf pan", "category": "bakeware", "icon": null }
   ]
 }

@@ -1,0 +1,104 @@
+{
+  "id": "challah",
+  "version": 1,
+  "track": "core",
+  "unit": 5,
+  "title": "Challah",
+  "image": "dishes/challah.png",
+  "cuisine": "jewish",
+  "skill": "Yeast dough: kneading, proofing, braiding",
+  "skills": ["yeast-dough"],
+  "prereqs": [],
+  "servings": 10,
+  "totalMinutes": 240,
+  "scaling": {
+    "mode": "fixed",
+    "multipliers": [1, 2],
+    "notes": {
+      "1": "Makes 1 large braided loaf.",
+      "2": "Makes 2 loaves. Bake them on two sheet pans, one rack in the upper third and one in the lower third, and swap them halfway."
+    }
+  },
+  "learn": {
+    "move": {
+      "title": "A rich dough, braided",
+      "body": "Challah is a yeast dough made rich with eggs, honey, and oil. It rises, is rolled into three ropes and braided, rises again, and bakes golden under an egg wash until it reads 190°F inside."
+    },
+    "callback": {
+      "lesson": "pita-bread",
+      "body": "Pita is a lean dough: flour, water, yeast, a little oil. Challah adds eggs, honey, and more oil. They make the bread soft and golden, but they also slow the yeast down, so this dough takes longer to rise."
+    },
+    "why": [
+      { "id": "rich", "title": "Why a rich dough rises slowly", "body": "Fat coats the gluten strands, and sugar pulls water away from the yeast. Both slow it down. That's why challah's first rise is about an hour and a half, where pita's is one hour." },
+      { "id": "windowpane", "title": "The windowpane test", "body": "Stretch a small piece of dough between your fingers. If it goes thin enough to let light through without tearing, the gluten is strong enough to hold the rise and the braid. If it tears, knead 2 more minutes and test again." },
+      { "id": "even-ropes", "title": "Even ropes", "body": "Ropes of the same weight and length make a braid that bakes evenly. A thick rope stays doughy while a thin one overbakes." },
+      { "id": "egg-wash", "title": "Egg wash", "body": "The proteins and sugars in egg brown deeply and shine in the oven. A wash brushed on before the second rise and again before baking gives an even, glossy crust." },
+      { "id": "foil-tent", "title": "Why a foil tent", "body": "Honey and egg brown fast. If the top is deep brown before the middle is done, a loose sheet of foil shades it while the inside finishes baking." },
+      { "id": "temp-190", "title": "190°F inside", "body": "A rich bread is done when its center reaches 190°F. By then the starch has set, so the crumb is soft but not gummy. Color alone can fool you, because the crust browns early." }
+    ],
+    "wrong": [
+      { "sign": "The braid came apart or spread flat", "fix": "Braid a little tighter next time, and pinch and tuck both ends well under the loaf." },
+      { "sign": "The top is brown, but the middle reads under 190°F", "fix": "Lay foil loosely over the top and bake 5 more minutes, then check again." },
+      { "sign": "The loaf split along one side", "fix": "It went in the oven before its second rise was done. Next time, wait until it's puffy and a gentle poke springs back slowly." },
+      { "sign": "The middle is gummy", "fix": "It came out under 190°F, or it was sliced hot. Check the temperature, and let it cool at least 30 minutes." }
+    ],
+    "quiz": [
+      { "q": "Why does challah rise more slowly than pita?", "choices": ["Its eggs, honey, and oil slow the yeast down", "It has less yeast", "It's kneaded less"], "answer": 0, "explain": "Fat coats the gluten and sugar pulls water from the yeast." },
+      { "q": "What temperature tells you a challah is done?", "choices": ["190°F in the center", "165°F in the center", "When the top is brown"], "answer": 0, "explain": "The crust browns early, so the thermometer is the sure test." },
+      { "q": "What does the windowpane test check?", "choices": ["That the gluten is strong enough", "That the yeast is alive", "That the dough is warm enough"], "answer": 0, "explain": "Dough that stretches thin without tearing can hold the rise and the braid." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "water", "amount": 0.75, "unit": "cup", "prep": "warm, 105 to 110°F", "group": "Dough" },
+    { "ingredient": "yeast-active-dry", "amount": 2.25, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "honey", "amount": 0.25, "unit": "cup", "group": "Dough" },
+    { "ingredient": "vegetable-oil", "amount": 0.25, "unit": "cup", "group": "Dough" },
+    { "ingredient": "egg", "amount": 2, "unit": "count", "group": "Dough" },
+    { "ingredient": "salt", "amount": 1.5, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "flour-ap", "amount": 3.5, "unit": "cup", "group": "Dough" },
+    { "ingredient": "flour-ap", "amount": null, "text": "a little more, for dusting", "group": "Dough" },
+    { "ingredient": "vegetable-oil", "amount": null, "text": "a little more, for the bowl", "group": "Dough" },
+    { "ingredient": "egg", "amount": 1, "unit": "count", "group": "Egg wash" },
+    { "ingredient": "water", "amount": 1, "unit": "tbsp", "group": "Egg wash" },
+    { "ingredient": "sesame-seeds", "amount": 1, "unit": "tbsp", "optional": true, "group": "Egg wash" }
+  ],
+  "equipment": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "chef-knife",
+    "kitchen-scale",
+    "sheet-pan",
+    "parchment",
+    "pastry-brush",
+    "foil",
+    "oven-mitts",
+    "cooling-rack"
+  ],
+  "steps": [
+    { "id": "warm-water", "text": "Warm the water in the measuring cup in the microwave for about 20 seconds. Stir and check it with the thermometer. It should read 105 to 110°F.", "safety": "solo", "tip": "Too hot? Let it sit a minute and check again." },
+    { "id": "bloom", "text": "Pour the water into the large bowl. Stir in 1 teaspoon of the honey, then sprinkle the yeast over the top. Leave it alone to bloom.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Bloom yeast", "look": "A layer of foam on top, and it smells like bread." },
+    { "id": "wet", "text": "Add the rest of the honey, the ¼ cup of oil, the salt, and the {n:egg} eggs for the dough. Whisk them in with the fork.", "safety": "solo", "handles": ["egg"] },
+    { "id": "wash-eggs", "type": "wash", "text": "Wash your hands with soap, and throw away the eggshells.", "safety": "solo", "tip": "Raw egg can carry Salmonella. Wash before you touch anything else." },
+    { "id": "mix", "text": "Add the flour and stir with the wooden spoon until a soft, shaggy dough forms.", "safety": "solo", "tip": "Don't taste the raw dough. It has raw egg and raw flour." },
+    { "id": "knead", "text": "Dust the counter with flour and turn the dough out. Knead it until it's smooth and stretchy, then do the windowpane test.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Knead", "why": "windowpane", "look": "A small piece stretches thin enough to see light through without tearing." },
+    { "id": "rise", "text": "Rub a little oil around the bowl, put the dough in, and turn it once to coat it. Cover with a towel and leave it somewhere warm until it doubles.", "safety": "solo", "timerSeconds": 5400, "timerLabel": "First rise", "why": "rich", "look": "Doubled. A floured finger pressed in leaves a dent that stays." },
+    { "id": "ropes", "text": "Line the sheet pan with parchment. Weigh the dough, then cut it into 3 pieces of the same weight. Roll each into a rope about 16 inches long, thicker in the middle than at the ends.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "even-ropes", "tip": "If a rope keeps shrinking back, leave it for 5 minutes and come back to it." },
+    { "id": "braid", "text": "Lay the ropes side by side and pinch them together at the top. Braid them, outside rope over the middle each time, left then right, snug but not stretched. Pinch the bottom ends together and tuck both ends under the loaf. Lift it onto the pan.", "safety": "solo", "tip": "This is the braid from this week's drill. If you braided from the middle out there, you can do that here instead." },
+    { "id": "wash-mix", "text": "Beat the egg for the wash with the tablespoon of water in the small bowl. Brush a thin coat over the whole braid.", "safety": "solo", "handles": ["egg"], "why": "egg-wash" },
+    { "id": "wash-hands", "type": "wash", "text": "Wash your hands and the brush with soap. Cover the egg wash and put it in the fridge for later.", "safety": "solo" },
+    { "id": "proof", "text": "Cover the loaf loosely with the towel and let it proof. Heat the oven to 350°F while it does.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 2700, "timerLabel": "Second rise", "look": "Puffy, about half again as big. A gentle poke springs back slowly and leaves a small dent." },
+    { "id": "brush-again", "text": "Brush the loaf with a second coat of egg wash, into the cracks of the braid, and sprinkle on the sesame seeds if you're using them.", "safety": "solo", "handles": ["egg"], "why": "egg-wash" },
+    { "id": "wash-again", "type": "wash", "text": "Wash your hands and the brush, and throw away the rest of the egg wash.", "safety": "solo" },
+    { "id": "bake", "text": "Bake the challah. Check it at 20 minutes, and if the top is already deep brown, lay a sheet of foil loosely over it.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 1800, "timerLabel": "Bake", "why": "foil-tent", "look": "Deep golden brown and shiny." },
+    { "id": "check", "type": "doneness", "text": "With oven mitts, pull the pan out partway. Push the thermometer into the thickest part of the loaf from the side, so the tip is in the center. It's done at 190°F. If it's lower, bake 5 more minutes and check again.", "safety": "adult-nearby", "hazard": "Hot oven and pan", "target": { "temp": 190, "unit": "F" }, "why": "temp-190" },
+    { "id": "cool", "text": "Turn off the oven. Slide the challah onto the cooling rack and let it cool before slicing or tearing.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 1800, "timerLabel": "Cool", "tip": "Slicing it hot makes the inside gummy. It keeps cooking as it cools." }
+  ]
+}

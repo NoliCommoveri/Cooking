@@ -4679,3 +4679,44 @@ tables.
   which opens the real player. Knowledge is open first; the open tab is kept
   for the visit, like the week. The separate part page is gone.
 - Tests: 351, all passing.
+
+## 195. 2026-10-25 — Level 3 Unit 2: yeast dough
+
+Phase 12, slice 12f, Unit 2 (plan §12.4).
+
+- Owner, 2026-10-25: one unit at a time. All new copy goes to a review doc,
+  "Level 3 Unit 2: Yeast dough", so corrections land before merge and no
+  lesson's version goes up. Level 3 is release 1, so this is live for every
+  family on merge, not behind a new release.
+- Owner, 2026-10-25: the Beyond the Recipe plan is confirmed: a make-ahead
+  task where the dish suits one, What the Bible says about food in the other
+  weeks. All 32 titles for weeks 5–36 are set in `level-3.json` (most old
+  titles said "for the Sabbath"). Week 36's is now Giving thanks for food, in
+  place of serving the meal; the review doc asks the owner to confirm that.
+- **Pita bread** (`content/lessons/`, lesson 37b in the flatbreads pair): 8
+  pitas baked on a sheet pan heated at 475°F. A flat pita is still good
+  bread, and the lesson says so.
+- **Challah** (`content/lessons/`, the yeast dough group): 3-strand braid,
+  egg wash twice, checked at 190°F. Made with oil, so it's dairy-free.
+- **Sandwich loaf** and **Dinner rolls** (`content/levels/recipes/`, Level
+  only): a loaf kneaded to a windowpane and checked at 190°F; 12 rolls
+  weighed on a scale, 2 or 3 shaped as knots or small braids. The rolls are
+  made the same day; the overnight cold proof is week 7's Beyond the Recipe.
+  Their cards' minutes are the lessons'.
+- Every Unit 2 bread blooms active dry yeast in liquid checked at 105 to
+  110°F, the week 5 drill.
+- **Weeks 5–8's twelve part pages**, in the Level 3 voice: how yeast works,
+  gluten, proofing, doneness, and the unit quiz; a three-temperature yeast
+  test, kneading to a windowpane, dividing by weight, and braiding (drills
+  use a flour-and-water dough with no yeast); freezing pita, a cold proof,
+  and two Bible pages: Bread in the Bible (Exodus 16, Matthew 6, John 6) and
+  Leaven and unleavened bread (Exodus 12, 1 Corinthians 5, Leviticus 23,
+  Matthew 13).
+- New registry entries: active dry yeast, a kitchen scale, a 9-by-5-inch
+  loaf pan, and the kitchen word "proof" (taught in Challah).
+- Level 3's hours with every part are now about 128 (126 before); the
+  written recipes' minutes replace the estimates.
+- Screenshots were sent in the session, taken from the demo's Try a week
+  pointed at Unit 2 for that only. The demo still shows Unit 1.
+- Tests: 351. The Level course test now schedules 9 written recipes, with
+  27 waiting; the hours tests expect 128.
