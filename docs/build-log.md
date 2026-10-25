@@ -5140,3 +5140,6 @@ Planning only; nothing in the app changed.
   suggested swaps.
 - Owner, 2026-10-25: week 27's Explore is broiled miso-glazed salmon, in
   place of halloumi skewers, for 5 fish dishes in Level 2.
+- Owner, 2026-10-25: week 19's Familiar is black bean tortilla soup, with
+  rotisserie chicken as a choice, so a family on Familiar defaults cooks a
+  bean dish too.
