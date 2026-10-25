@@ -2,7 +2,7 @@
   "id": "steamed-fish",
   "version": 1,
   "track": "core",
-  "unit": 100,
+  "unit": 103,
   "title": "Steamed fish with ginger and scallion",
   "image": "meals/fish.svg",
   "cuisine": "chinese",

@@ -352,7 +352,7 @@ async function loginsPart(ctx, chat, call) {
   chat.say("You can add, change, or turn off a kid's login on their profile, in Menu → Profiles.");
 }
 
-// ---------- tastes (§6.21, the next release) ----------
+// ---------- tastes (§6.21) ----------
 
 const KINDS = [['protein', 'proteins'], ['flavor', 'flavors'], ['ingredient', 'foods']];
 
@@ -371,7 +371,6 @@ async function rateInChat(ctx, chat, call, profile, kind, items, ratings) {
 // Getting started: the family's limits, then each person's proteins. The
 // rest waits for Our tastes, or for her to ask a few at a time.
 async function tastesPart(ctx, chat, call) {
-  if (!(ctx.me().family.release >= 1)) return;
   const { el } = ctx;
   const t = await call('GET', '/api/tastes');
   chat.say("Now, what your family likes to eat. I'll use it to pick the dishes, and the versions of them, that suit you best. First, a few things for the whole family.");
@@ -464,7 +463,7 @@ async function coursePart(ctx, chat, call, { again }) {
   const yes = await chat.choose([['yes', 'Yes, set up a course'], ['no', 'No, not now']]);
   if (yes === 'no') return firstLesson(ctx, chat, call, profiles);
 
-  // Which program? (§12.4), with the next release: Cook Around the World or a Level.
+  // Which program? (§12.4), with the Levels' release: Cook Around the World or a Level.
   let level = null;
   if (data.levels?.length) {
     chat.say('Which program? Cook Around the World goes a dish at a time, each with its skill. ' + data.levels.map((V) => `${V.name} is ${V.weeks.length} weeks of a reading, a drill, a recipe, and a Beyond the Recipe page each week, about ${V.hours} hours in all.`).join(' '));
@@ -517,9 +516,7 @@ async function coursePart(ctx, chat, call, { again }) {
     chat.say("I turned on Plan our weeks, so your course loads each week's lessons into the queue.");
   }
   if (level) chat.say(`You can see its weeks, change who it's for, or pick another start date in Menu → Courses.`);
-  else chat.say(ctx.me().family.release >= 1
-    ? "Your course follows our suggested order, and where a skill has a few dishes to choose from, I picked the one that fits them best from Our tastes. You can edit it to change the lesson order, drop lessons, or pick a different dish, in Menu → Courses."
-    : "Your course follows our suggested order. You can edit it to change the lesson order or drop lessons, and to pick a different dish where a skill has a few to choose from, in Menu → Courses.");
+  else chat.say("Your course follows our suggested order, and where a skill has a few dishes to choose from, I picked the one that fits them best from Our tastes. You can edit it to change the lesson order, drop lessons, or pick a different dish, in Menu → Courses.");
 }
 
 // No course: a first lesson by hand (owner, 2026-10-23). She offers the first
@@ -590,6 +587,10 @@ const TOUR = [
     'Your family name, default servings, the foods to leave out, casual or homeschool, and Plan our weeks.',
     'Voice step control is here too: it lets kids say "next," "back," or "again" in cook mode instead of tapping. Change what you like and tap Save.',
   ] },
+  { hash: '#/parent/tastes', name: 'Our tastes', what: 'What your family likes to eat, so the app can pick dishes that fit.', how: [
+    'For the whole family: the time you have on a cooking night, a budget, how adventurous you are, and any tools you don\'t have.',
+    'Then each person rates proteins, flavors, and key ingredients with stars. Every tap saves.',
+  ] },
   { hash: '#/parent/parents', name: 'Logins & PIN', what: 'Who can sign in as a parent, and the PIN.', how: [
     'Tap + Add a parent to give another adult their own login to your family.',
     'Change the PIN is below. The PIN keeps the parent screens for adults, since kitchen devices stay logged in.',
@@ -658,7 +659,7 @@ export function openRuth(ctx) {
     for (;;) {
       chat.say('What can I help with?');
       const pick = await chat.choose([['tour', 'Show me around'],
-        ...(ctx.me().family.release >= 1 ? [['cook', 'What should we cook?'], ['tastes', 'Ask what we like to eat']] : []),
+        ['cook', 'What should we cook?'], ['tastes', 'Ask what we like to eat'],
         ...(ctx.me().family.cooking ? [] : [['setup', 'Getting started (change your setup)']]), ['bye', 'Nothing right now']]);
       if (pick === 'bye') { chat.say('Okay! Tap my button any time.'); return; }
       if (pick === 'tastes' || pick === 'cook') {

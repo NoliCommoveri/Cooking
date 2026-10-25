@@ -43,15 +43,14 @@ export function springWeek(sunday) {
   return false;
 }
 
-// What the picker offers for a week, in order (§6.19). With the next release,
-// each library lesson has its fit for the profiles on the cook (pids), and
+// What the picker offers for a week, in order (§6.19). Each library lesson has its fit for the profiles on the cook (pids), and
 // within each part the best fit comes first; ones that don't fit go last
 // (§6.21, 11d2). The parts keep their order, and parent recipes, which have
 // no tags, keep theirs.
 export async function swapOptions(env, fam, week, pids = []) {
   const filters = JSON.parse(fam.diet_filters);
   const spring = springWeek(week);
-  // A Level's own recipes (§12.4) only with the next release.
+  // A Level's own recipes (§12.4) only with the Levels' release.
   const libOk = (L) => levelLessonOn(L, fam.release) && dietView(L, LIBRARY.ingredients, filters).visible;
   const out = [];
   const lesson = (L, group) => ({ id: L.id, title: L.title, label: LABELS[L.id] ?? null, group, image: L.image, unleavened: Boolean(L.unleavened), feast: Boolean(L.feast) });

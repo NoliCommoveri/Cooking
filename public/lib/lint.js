@@ -388,13 +388,10 @@ export function lint(c) {
     const minutesOf = id => levelLessons[id]?.totalMinutes ?? (REC[id] ?? CARDS[id] ?? DISH[id])?.minutes ?? byId[id]?.totalMinutes ?? 0;
     // A dish's familiar tag (§6.21), which decides its Familiar or Explore slot (§12.0).
     const familiarOf = id => (CARDS[id] ?? DISH[id])?.tags?.familiar ?? byId[id]?.tags?.familiar ?? levelLessons[id]?.tags?.familiar;
-    // A re-planned Level (release 2 on) runs on the shared units, with a
-    // Familiar and an Explore dish each recipe week (§12.0).
-    const shared = (V.release ?? 1) >= 2;
-    if (shared) {
-      if (V.units.length !== SHARED.length) err(`${where} units`, `has ${V.units.length} units; the shared plan has ${SHARED.length}`);
-      SHARED.forEach((u, i) => { if (V.units[i] && V.units[i].name !== u.name) err(`${where} unit ${u.number}`, `should be "${u.name}", as in level-units.json`); });
-    }
+    // Every Level runs on the shared units, with a Familiar and an Explore
+    // dish each recipe week (§12.0).
+    if (V.units.length !== SHARED.length) err(`${where} units`, `has ${V.units.length} units; the shared plan has ${SHARED.length}`);
+    SHARED.forEach((u, i) => { if (V.units[i] && V.units[i].name !== u.name) err(`${where} unit ${u.number}`, `should be "${u.name}", as in level-units.json`); });
     V.units.forEach((u, i) => { if (u.number !== i + 1) err(`${where} units`, `unit ${u.number} should be unit ${i + 1}: units are numbered in order`); });
     const used = new Set();
     let minutes = 0, unwritten = 0, parts = 0;
@@ -407,11 +404,11 @@ export function lint(c) {
       const last = unitWeeks.at(-1) === w;
       if (w.cuisine && !CU[w.cuisine]) err(ww, `cuisine "${w.cuisine}" doesn't exist in cuisines.json`);
       if (w.kind) {
-        for (const f of ['skill', 'recipe', 'familiar', 'explore', 'mastery', 'swapIns']) if (f in w) err(ww, `a ${w.kind} week has no ${f}: it's cooked from earlier weeks' recipes`);
+        for (const f of ['skill', 'familiar', 'explore', 'mastery', 'swapIns']) if (f in w) err(ww, `a ${w.kind} week has no ${f}: it's cooked from earlier weeks' recipes`);
         if (!w.minutes) err(ww, `a ${w.kind} week needs its minutes`);
         if (w.kind === 'capstone' && !last) err(ww, 'the capstone is the last week of its unit');
         minutes += w.minutes ?? 0;
-      } else if (shared || 'familiar' in w || 'explore' in w) {
+      } else {
         if (!w.skill || !w.familiar || !w.explore) err(ww, 'needs a skill, a Familiar dish, and an Explore dish');
         if ('recipe' in w) err(ww, "has a Familiar and an Explore dish, so it doesn't set recipe");
         if ('minutes' in w) err(ww, "takes its minutes from its recipes, so it doesn't set its own");
@@ -430,19 +427,6 @@ export function lint(c) {
         for (const x of w.swapIns || []) if (!known(x)) err(ww, `swap-in "${x}" isn't a dish in course.json, a lesson, or a Level's recipe`);
         // The hours count the Familiar dish, every family's starting default.
         minutes += minutesOf(w.familiar);
-      } else {
-        if (!w.skill || !w.recipe) err(ww, 'needs a skill and a recipe');
-        if ('minutes' in w) err(ww, "takes its minutes from its recipe, so it doesn't set its own");
-        if (w.skill && !SK[w.skill]) err(ww, `skill "${w.skill}" doesn't exist in skills.json`);
-        if (w.recipe && !known(w.recipe)) err(ww, `recipe "${w.recipe}" isn't a dish in course.json, a lesson, or one of this Level's recipes`);
-        if (w.recipe && used.has(w.recipe)) err(ww, `recipe "${w.recipe}" is already an earlier week's recipe`);
-        if (w.recipe && c.hidden?.includes(w.recipe)) warn(ww, `recipe "${w.recipe}" is hidden from every family`);
-        used.add(w.recipe);
-        for (const x of w.swapIns || []) {
-          if (!known(x)) err(ww, `swap-in "${x}" isn't a dish in course.json, a lesson, or one of this Level's recipes`);
-          if (x === w.recipe) err(ww, `swap-in "${x}" is already the week's recipe`);
-        }
-        minutes += minutesOf(w.recipe);
       }
       // Units of four weeks: the last is the mastery check (§12.2), or the capstone.
       if (w.mastery && !last) err(ww, 'a mastery week is the last week of its unit');
@@ -455,11 +439,11 @@ export function lint(c) {
       }
     });
     for (const u of V.units) {
-      const n = V.weeks.filter(w => w.unit === u.number).length, want = shared ? SHARED.find(x => x.number === u.number)?.weeks : 4;
-      if (want && n !== want) err(`${where} unit ${u.number}`, `has ${n} weeks; ${shared ? 'the shared plan gives it' : 'a unit has'} ${want}`);
+      const n = V.weeks.filter(w => w.unit === u.number).length, want = SHARED.find(x => x.number === u.number)?.weeks;
+      if (want && n !== want) err(`${where} unit ${u.number}`, `has ${n} weeks; the shared plan gives it ${want}`);
     }
     // A card can be cooked by any Level's week (§12.0).
-    const cooks = (id) => (c.levels || []).some(({ data: X }) => Array.isArray(X?.weeks) && X.weeks.some(w => [w.recipe, w.familiar, w.explore, ...(w.swapIns || [])].includes(id)));
+    const cooks = (id) => (c.levels || []).some(({ data: X }) => Array.isArray(X?.weeks) && X.weeks.some(w => [w.familiar, w.explore, ...(w.swapIns || [])].includes(id)));
     for (const r of V.recipes) if (!cooks(r.id)) warn(`${where} recipe ${r.id}`, "isn't any week's recipe or swap-in");
     // The words a learner reads: unit names and goals, notes, and the part pages.
     for (const [p, t] of strings({ name: V.name, sideUnit: V.sideUnit.name, units: V.units, weeks: V.weeks })) for (const w of blockedWordsIn(t, rules)) err(where, `${p} names a blocked food ("${w}")`);

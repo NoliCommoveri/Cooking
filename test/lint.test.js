@@ -195,78 +195,62 @@ test('taste items and meat are worked out from the ingredients', () => {
 
 // ---------- the Levels (plan §12) ----------
 
-const level = (c) => c.levels.find((l) => l.data.id === 'level-3').data;
+const level = (c) => c.levels.find((l) => l.data.id === 'sp-3').data;
 
-test('Level 3: 9 units of 4 weeks, about 125 hours, every recipe known', () => {
+test('Level 3 Cook: the shared units, 36 weeks, a Familiar and an Explore dish each recipe week', () => {
   const L = level(base);
   assert.equal(L.units.length, 9);
   assert.equal(L.weeks.length, 36);
-  assert.deepEqual(L.weeks.filter((w) => w.mastery).map((w) => w.week), [4, 8, 12, 16, 20, 24, 28, 32]);
+  // Each unit's last week is its mastery check; the last unit ends on the capstone.
+  assert.deepEqual(L.weeks.filter((w) => w.mastery).map((w) => w.week), [4, 6, 10, 15, 20, 26, 30, 33]);
   assert.equal(L.weeks.at(-1).kind, 'capstone');
-  const dishes = new Set(base.course.dishes.map((d) => d.id));
-  // The recipes checked against the main course (§12.4) are pick-one dishes there.
-  for (const id of ['vegetable-stir-fry', 'chopped-salad-vinaigrette', 'beef-stew', 'shish-taouk', 'beef-ragu', 'pita-bread', 'mujaddara', 'red-lentil-soup']) {
-    assert.ok(dishes.has(id), id);
-    assert.ok(L.weeks.some((w) => w.recipe === id), `${id} is a week's recipe`);
-    assert.ok(!L.recipes.some((r) => r.id === id), `${id} isn't Level only`);
+  assert.ok(L.weeks.filter((w) => !w.kind).every((w) => w.familiar && w.explore && !('recipe' in w)));
+  // The recipes salvaged from the first Level 3 are its own cards now.
+  for (const id of ['thick-burgers', 'sandwich-loaf', 'dinner-rolls', 'tabbouleh', 'beef-picadillo', 'baked-salmon', 'steamed-fish', 'pan-seared-trout']) {
+    assert.ok(L.recipes.some((r) => r.id === id), id);
   }
-  assert.equal(L.recipes.length, 21);
   assert.ok(!lint(base).errors.some((e) => e.startsWith('levels/')));
 });
 
-test('a Level week is checked: skill, recipe, mastery, units of four, the hours', () => {
+test('a Level week is checked: skill, its two dishes, mastery, the shared units, the hours', () => {
   const bad = (fn) => broken((c) => fn(level(c)));
   assert.match(bad((L) => { L.weeks[0].skill = 'no-such-skill'; }), /week 1: skill "no-such-skill" doesn't exist/);
-  assert.match(bad((L) => { L.weeks[0].recipe = 'pork-buns'; }), /week 1: recipe "pork-buns" isn't a dish/);
-  assert.match(bad((L) => { L.weeks[1].recipe = 'shakshuka'; }), /week 2: recipe "shakshuka" is already an earlier week's recipe/);
+  assert.match(bad((L) => { L.weeks[0].familiar = 'pork-buns'; }), /week 1: Familiar dish "pork-buns" isn't a dish/);
+  assert.match(bad((L) => { L.weeks[1].familiar = 'bean-quesadillas'; }), /week 2: Familiar dish "bean-quesadillas" is already an earlier week's dish/);
+  assert.match(bad((L) => { L.weeks[0].explore = L.weeks[0].familiar; }), /week 1: its Familiar and Explore dishes are the same/);
+  assert.match(bad((L) => { delete L.weeks[0].explore; }), /week 1: needs a skill, a Familiar dish, and an Explore dish/);
+  assert.match(bad((L) => { L.weeks[0].cuisine = 'atlantis'; }), /week 1: cuisine "atlantis" doesn't exist/);
   assert.match(bad((L) => { delete L.weeks[3].mastery; }), /week 4: the last week of a unit is its mastery week/);
   assert.match(bad((L) => { L.weeks[2].mastery = true; }), /week 3: a mastery week is the last week of its unit/);
-  assert.match(bad((L) => { L.weeks[4].unit = 1; }), /unit 1: has 5 weeks; a unit has 4/);
-  assert.match(bad((L) => { L.weeks[34].recipe = 'shakshuka'; }), /week 35: a practice week has no recipe/);
+  assert.match(bad((L) => { L.units[0].name = 'Knives'; }), /unit 1: should be "Kitchen basics", as in level-units.json/);
+  assert.match(bad((L) => { L.weeks[4].unit = 1; delete L.weeks[3].mastery; }), /unit 1: has 5 weeks; the shared plan gives it 4/);
+  assert.match(bad((L) => { L.weeks[34].familiar = 'shakshuka'; }), /week 35: a practice week has no familiar/);
   assert.match(bad((L) => { L.weeks[0].swapIns = ['no-such-dish']; }), /week 1: swap-in "no-such-dish" isn't a dish/);
   assert.match(bad((L) => { for (const w of L.weeks) w.drill.minutes = 200; }), /the weeks add up to [\d.]+ hours, not about 125/);
-});
-
-test('a re-planned Level runs on the shared units, with a Familiar and an Explore dish each week (§12.0)', () => {
-  const bad = (fn) => broken((c) => fn(level(c)));
-  // A Level on release 2 must use the shared unit plan and its lengths.
-  const two = bad((L) => { L.release = 2; });
-  assert.match(two, /unit 1: should be "Kitchen basics", as in level-units.json/);
-  assert.match(two, /unit 2: has 4 weeks; the shared plan gives it 2/);
-  assert.match(two, /week 1: needs a skill, a Familiar dish, and an Explore dish/);
-  // A pair is checked on any Level that uses one.
-  const pair = (w) => bad((L) => { delete L.weeks[0].recipe; Object.assign(L.weeks[0], w); });
-  assert.match(pair({ familiar: 'shakshuka', explore: 'shakshuka' }), /week 1: its Familiar and Explore dishes are the same/);
-  assert.match(pair({ familiar: 'shakshuka', explore: 'pork-buns' }), /week 1: Explore dish "pork-buns" isn't a dish/);
-  assert.match(pair({ familiar: 'shakshuka', explore: 'thick-burgers' }), /week 2: recipe "thick-burgers" is already an earlier week's recipe/);
-  assert.match(bad((L) => { L.weeks[0].familiar = 'oyakodon'; L.weeks[0].explore = 'huevos-rancheros'; }), /week 1: has a Familiar and an Explore dish, so it doesn't set recipe/);
-  assert.match(bad((L) => { L.weeks[0].cuisine = 'atlantis'; }), /week 1: cuisine "atlantis" doesn't exist/);
   // The familiar tag decides the slot: a warning, since tags can change.
   const c = structuredClone({ ...base, imageExists: undefined });
-  const L = level(c);
-  delete L.weeks[0].recipe;
-  Object.assign(L.weeks[0], { familiar: 'oyakodon', explore: 'french-omelet' });
+  Object.assign(level(c).weeks[0], { familiar: 'rajma', explore: 'bean-quesadillas' });
   const { warnings } = lint(c);
-  assert.ok(warnings.some((w) => /week 1: Familiar dish "oyakodon" is tagged new-ish/.test(w)), warnings.join('\n'));
-  assert.ok(warnings.some((w) => /week 1: Explore dish "french-omelet" is tagged everyday/.test(w)));
+  assert.ok(warnings.some((w) => /week 1: Familiar dish "rajma" is tagged new-ish/.test(w)), warnings.join('\n'));
+  assert.ok(warnings.some((w) => /week 1: Explore dish "bean-quesadillas" is tagged everyday/.test(w)));
 });
 
 test('a recipe card is in one Level only, and another Level can cook it', () => {
   const two = (fn) => broken((c) => {
     const V = structuredClone(level(c));
-    V.id = 'level-x'; V.sideUnit = { ...V.sideUnit, number: 101, prefix: 'X' };
+    V.id = 'level-x'; V.sideUnit = { ...V.sideUnit, number: 109, prefix: 'X' };
     fn(V);
     c.levels.push({ file: 'level-x.json', data: V });
   });
-  assert.match(two(() => {}), /recipe thick-burgers: is already a recipe card in another Level/);
-  // Without its own copies, level-x's weeks still know level-3's cards.
+  assert.match(two(() => {}), /recipe bean-quesadillas: is already a recipe card in another Level/);
+  // Without its own copies, level-x's weeks still know Level 3's cards.
   assert.doesNotMatch(two((V) => { V.recipes = []; }), /isn't a dish in course.json, a lesson, or (one of this|a) Level's recipe/);
 });
 
 test('the hard rule holds on Level pages and recipes', () => {
   const bad = (fn) => broken((c) => fn(level(c)));
   assert.match(bad((L) => { L.weeks[0].knowledge.body = ['Shrimp is safe at 145°F.']; }), /names a blocked food \("shrimp"\)/);
-  assert.match(bad((L) => { L.recipes[0].about = 'Burgers with bacon on top.'; }), /recipe thick-burgers: about names a blocked food \("bacon"\)/);
+  assert.match(bad((L) => { L.recipes.find((r) => r.id === 'thick-burgers').about = 'Burgers with bacon on top.'; }), /recipe thick-burgers: about names a blocked food \("bacon"\)/);
   assert.match(bad((L) => { L.units[6].goal = 'Cooks shellfish gently'; }), /names a blocked food \("shellfish"\)/);
   assert.match(bad((L) => { L.recipes[0].id = 'shakshuka'; }), /has the same id as a Cook Around the World dish/);
 });
@@ -274,7 +258,7 @@ test('the hard rule holds on Level pages and recipes', () => {
 test('a Level recipe written as a lesson is checked like a lesson and matches its card', () => {
   const shak = base.lessons.find((l) => l.data.id === 'shakshuka').data;
   const errs = broken((c) => {
-    const L = { ...structuredClone(shak), id: 'thick-burgers', title: 'Thick beef burgers', unit: 100, cuisine: 'american', totalMinutes: 41 };
+    const L = { ...structuredClone(shak), id: 'thick-burgers', title: 'Thick beef burgers', unit: 103, cuisine: 'american', totalMinutes: 41 };
     L.steps[0].text = 'Add the ham.';
     c.levelLessons = [{ file: 'thick-burgers.json', data: L }];
   });

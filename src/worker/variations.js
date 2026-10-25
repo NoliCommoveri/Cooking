@@ -1,23 +1,19 @@
 // Phase 11c: variations (plan §6.21). A lesson can have versions with a
 // preference built in (Chimichurri chicken for Chimichurri steak); a parent
 // picks which one the family cooks, and the lesson player and shopping lists
-// use it. A cook of any version counts as its lesson. Part of the next release
-// (§8.6): a family without it always gets the lesson itself, and none of these
-// tables is read for it.
+// use it. A cook of any version counts as its lesson.
 import { fail, now } from './lib/http.js';
 import { requireParent } from './auth.js';
 import { LIBRARY } from './library-data.js';
-import { releaseOn } from './release.js';
 
 const missingTable = (err) => /no such table/i.test(String(err?.message));
 const libraryLesson = (lid) => LIBRARY.lessons.find((L) => L.id === lid) ?? null;
 export const hasVariation = (lid, vid) => Boolean(libraryLesson(lid)?.variations?.some((v) => v.id === vid));
 
 // The family's chosen version of each lesson that has variations, as
-// { lesson id: variation id }; '' is the lesson itself. Empty for a family
-// without the next release, and for a variation since taken out of its lesson.
+// { lesson id: variation id }; '' is the lesson itself. Empty for a variation
+// since taken out of its lesson.
 export async function variationChoices(env, fid) {
-  if (!(await releaseOn(env.DB, fid, 1))) return {};
   try {
     const { results } = await env.DB.prepare('SELECT lesson_id, variation FROM variation_choices WHERE family_id = ?').bind(fid).all();
     return Object.fromEntries(results.filter((r) => r.variation === '' || hasVariation(r.lesson_id, r.variation)).map((r) => [r.lesson_id, r.variation]));
@@ -79,7 +75,6 @@ export function register(on) {
   // lesson itself, or null for no pick. Parents only, behind the PIN.
   on('PUT', '/api/variations/([a-z0-9-]+)', async (req, env, body, [lid]) => {
     const s = await requireParent(env, req);
-    if (!(await releaseOn(env.DB, s.family_id, 1))) fail(404, 'not_available', 'Not available yet.');
     const L = libraryLesson(lid);
     if (!L?.variations?.length) fail(404, 'not_found', 'That lesson has no other versions.');
     // null: no pick, so the best fit for whoever is cooking plays (§6.21, 11d1).

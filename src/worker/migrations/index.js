@@ -8,9 +8,3 @@ import m0001 from './0001_schema.sql';
 export const MIGRATIONS = [
   { id: '0001', name: 'schema', sql: m0001 },
 ];
-
-// Schema versions folded into a later migration when the migrations were
-// squashed (2026-10-24: 0002 and 0003 into 0001). An export taken at one of
-// them restores into the squashed schema: its tables and columns are all
-// still there.
-export const SQUASHED = { '0002': '0001', '0003': '0001' };

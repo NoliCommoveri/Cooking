@@ -1,5 +1,5 @@
 // Phase 11b: tastes (plan §6.21): star ratings per profile, one favorite per
-// list, the family's limits, all behind the next release (§8.6).
+// list, and the family's limits, for every family.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { makeEnv, family } from './helpers/worker.js';
@@ -16,10 +16,10 @@ async function setup({ preview = true } = {}) {
   return { env, a, fid, ava: profiles[0].id, ben: profiles[1]?.id };
 }
 
-test('a family without the next release gets nothing', async () => {
+test('a family without the preview has Our tastes: it is part of Cook Around the World', async () => {
   const { a, ava } = await setup({ preview: false });
-  assert.equal((await a.get('/api/tastes')).status, 404);
-  assert.equal((await a.put(`/api/profiles/${ava}/ratings`, { kind: 'protein', item: 'beef', stars: 4 })).status, 404);
+  assert.equal((await a.get('/api/tastes')).status, 200);
+  assert.equal((await a.put(`/api/profiles/${ava}/ratings`, { kind: 'protein', item: 'beef', stars: 4 })).status, 200);
 });
 
 test('the lists, with example dishes and Meals heavy on vegetables', async () => {

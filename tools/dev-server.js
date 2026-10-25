@@ -1,6 +1,7 @@
 // Runs the Worker on http://localhost:8787 against an in-memory database, for
 // looking at the app in a browser during a Claude session. Not part of the app.
 // Emails aren't sent: GET /__outbox lists them, so a sign-up code can be read.
+// GET /__live?n=1 launches a release for everyone, even one still being built.
 // With DEV_GITHUB=1 the manager section (/manage) saves to the tests' stand-in
 // GitHub instead of the real one, and jen@example.com is made the owner once
 // she signs up.
@@ -39,6 +40,16 @@ env.ASSETS = {
 
 createServer(async (req, res) => {
   if (req.url === '/__outbox') { res.writeHead(200, { 'content-type': 'application/json' }); return res.end(JSON.stringify(outbox)); }
+  // /__live?n=1 launches release n for everyone (0 takes it back), past the
+  // building check on /ops, to see what launch will show; &preview=<email>
+  // also turns that parent's family's preview on.
+  if (req.url.startsWith('/__live')) {
+    const q = new URL(req.url, 'http://x').searchParams, n = Number(q.get('n') ?? 0);
+    const preview = [];
+    for (const e of q.getAll('preview')) preview.push((await env.DB.prepare('SELECT family_id FROM parents WHERE email = ?').bind(e).first())?.family_id);
+    await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('releases', ?) ON CONFLICT(key) DO UPDATE SET value = excluded.value").bind(JSON.stringify({ live: n, preview: preview.filter(Boolean) })).run();
+    res.writeHead(200); return res.end(`live ${n}`);
+  }
   const chunks = [];
   for await (const c of req) chunks.push(c);
   const body = chunks.length ? Buffer.concat(chunks) : undefined;

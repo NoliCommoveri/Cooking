@@ -19,7 +19,7 @@ export function contentFromFiles(files, images = null) {
   const lessons = Object.keys(files).filter((f) => /^lessons\/[^/]+\.json$/.test(f)).sort()
     .map((f) => ({ file: f.slice('lessons/'.length), data: files[f] }));
   // The Levels (plan §12): one file per Level, and their own recipes'
-  // lesson files, kept apart from the course until the next release (§8.6).
+  // lesson files, kept apart from the course, shown with the Levels' release (§8.6).
   const levels = Object.keys(files).filter((f) => /^levels\/[^/]+\.json$/.test(f)).sort()
     .map((f) => ({ file: f.slice('levels/'.length), data: files[f] }));
   const levelLessons = Object.keys(files).filter((f) => /^levels\/recipes\/[^/]+\.json$/.test(f)).sort()

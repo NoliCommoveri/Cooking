@@ -4,24 +4,26 @@
 // the owner turns on the family's preview on /ops (a preview family sees every
 // release built so far). Releases launch in order, one at a time, and Undo
 // launch takes back the latest one launched; nothing anyone entered is lost.
-// Kept in settings, so the switch itself needs no migration.
-const KEY = 'next_release';
+// Kept in settings, so the switch itself needs no migration. The key changed
+// at the 2026-10-25 reset, when release 1 became the Levels, so a launch
+// saved under the old one ('next_release') doesn't carry over.
+const KEY = 'releases';
 
 // Every release, in order. The next build adds its own entry here and gates
 // its features with that number. A release marked building can be previewed
 // but not launched, so a half-built one can't go out to everyone.
 export const RELEASES = [
-  { n: 1, name: 'The Levels, Our tastes, recipe variations, best-fit picks, and the recipe gaps page' },
-  { n: 2, name: 'The Levels re-plan: the same units in every Level, by cooking method, with a Familiar and an Explore dish each week (plan §12.0)', building: true },
+  { n: 1, name: 'The Levels: Level 2 Apprentice, Level 3 Cook, and Level 4 Chef, with a Familiar and an Explore dish each week (plan §12)', building: true },
 ];
 export const LATEST = RELEASES.at(-1).n;
+// The release the Levels (§12) come with: their courses, recipes, and public pages.
+export const LEVELS_RELEASE = 1;
 
 export async function releaseState(db) {
   try {
     const row = await db.prepare('SELECT value FROM settings WHERE key = ?').bind(KEY).first();
     const v = row ? JSON.parse(row.value) : {};
-    // Before numbered releases, launched meant release 1.
-    const live = Number.isInteger(v.live) ? v.live : v.launched ? 1 : 0;
+    const live = Number.isInteger(v.live) ? v.live : 0;
     return { live: Math.max(0, Math.min(LATEST, live)), preview: Array.isArray(v.preview) ? v.preview : [] };
   } catch {
     // Before the settings table exists (migrations not applied), nothing is launched.

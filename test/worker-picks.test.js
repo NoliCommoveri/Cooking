@@ -1,6 +1,7 @@
 // Phase 11d1: default picks (plan §6.21). The best version for the people
 // cooking plays when the family hasn't picked one, and a new course keeps the
-// best dish of each pick-one group. All behind the next release (§8.6).
+// best dish of each pick-one group. Every family has them; the release switch
+// gates only the Levels (§8.6).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { makeEnv, family } from './helpers/worker.js';
@@ -53,12 +54,13 @@ test('the best version for whoever is cooking plays, until the family picks one'
   assert.deepEqual((await a.get('/api/me')).body.family.variations, {});
 });
 
-test('a family without the next release gets the lesson itself and no version info', async () => {
+test('a family without the preview gets versions and picks too: they are Cook Around the World', async () => {
   const { a, ava } = await setup({ preview: false });
+  await rate(a, ava, 'protein', 'beef', 1);
   await a.post('/api/queue', { lesson_id: 'chimichurri-steak', profile_ids: [ava], servings: 6 });
-  assert.equal((await queueRow(a, 'chimichurri-steak')).version, null);
-  assert.deepEqual((await a.get(`/api/profiles/${ava}/queue`)).body.versions, {});
-  assert.equal((await a.get('/api/picks/course')).status, 404);
+  assert.equal((await queueRow(a, 'chimichurri-steak')).version.id, 'chicken');
+  assert.equal((await a.get(`/api/profiles/${ava}/queue`)).body.versions['chimichurri-steak'], 'chicken');
+  assert.equal((await a.get('/api/picks/course')).status, 200);
 });
 
 test('a new course keeps the best dish of each pick-one group; nothing is dropped', async () => {
@@ -81,7 +83,7 @@ test('a new course keeps the best dish of each pick-one group; nothing is droppe
   assert.ok(plan.filter((x) => !x.removed).length >= 59);
 });
 
-test('without the next release a new course keeps the first dish of each group', async () => {
+test('with nothing rated, a new course keeps the first dish of each group', async () => {
   const { a, ava } = await setup({ preview: false });
   await a.post('/api/courses', { start_date: start, per_week: 1, profile_ids: [ava] });
   const plan = (await a.get('/api/courses')).body.courses[0].plan;
@@ -149,14 +151,14 @@ test('Swap keeps its parts in order, and puts the best fit first inside each', a
   assert.equal(after[0].group, 'Appointed Times lessons');
 });
 
-test('without the next release Swap and the queue are as before', async () => {
+test('a family without the preview gets fits in Swap and Add a lesson', async () => {
   const { a, ava } = await setup({ preview: false });
+  await rate(a, ava, 'flavor', 'sweet-treats', 5);
   await a.post('/api/queue', { lesson_id: 'chicken-fajitas', profile_ids: [ava], servings: 4 });
   const qid = (await queueRow(a, 'chicken-fajitas')).id;
   const { options } = (await a.get(`/api/queue/${qid}/swap`)).body;
-  assert.ok(options.every((o) => o.fit_label === undefined));
-  assert.deepEqual((await a.get(`/api/profiles/${ava}/queue`)).body.leave_out, {});
-  assert.equal((await a.get(`/api/picks/lessons?profiles=${ava}`)).status, 404);
+  assert.equal(options[0].fit_label, 'Great fit');
+  assert.equal((await a.get(`/api/picks/lessons?profiles=${ava}`)).status, 200);
 });
 
 // ---------- 11d3: learning from Reflect ----------
@@ -206,9 +208,9 @@ test('a version cooked teaches its own tags', async () => {
   assert.ok(!rows.some((r) => r.item === 'chicken'));
 });
 
-test('without the next release nothing is learned', async () => {
+test('a family without the preview learns from Reflect too', async () => {
   const { env, a, ava } = await setup({ preview: false });
   await cookIt(a, '00000000000000b3', 'chicken-fajitas', [ava]);
   await a.put('/api/attempts/00000000000000b3/reflection', { profile_id: ava, rating: 5 });
-  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM taste_learned').first()).n, 0);
+  assert.equal((await env.DB.prepare('SELECT COUNT(*) AS n FROM taste_learned').first()).n, 3);
 });

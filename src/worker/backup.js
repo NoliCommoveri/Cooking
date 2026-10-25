@@ -7,7 +7,6 @@
 //                               the daily job erases it, §6.14)
 // Approach and limits follow the MCCE repo's src/restore.js.
 import { schemaVersion } from './migrate.js';
-import { SQUASHED } from './migrations/index.js';
 
 export const CLEAR_PHRASE = 'DELETE EVERYTHING';
 export const REMOVE_PHRASE = 'REMOVE';
@@ -195,10 +194,7 @@ async function checkPayload(db, payload, kind) {
   }
   const current = await schemaVersion(db);
   if (current === null) throw new Refused('No schema is applied yet. Press Apply pending first.');
-  // An export from before a squash restores into the schema it was folded into.
-  const given = String(payload.schema_version);
-  const version = given === String(current) ? given : SQUASHED[given] ?? given;
-  if (version !== String(current)) {
+  if (String(payload.schema_version) !== String(current)) {
     throw new Refused(`That export is schema version ${payload.schema_version ?? 'none'} and this database is at ${current}. Apply the matching migrations first.`);
   }
   const existing = new Set(await tableNames(db));

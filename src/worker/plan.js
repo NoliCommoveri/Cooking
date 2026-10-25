@@ -19,7 +19,7 @@ import { schedule, weekOf, addDays, localDay, isDay, isSabbath, DUE_DAY } from '
 import { isRecipeId, lessonFor, recipeNames, recipeVisible } from './recipes.js';
 import { tasteContext, versionFor, bestPlan, hatedExtras, versionSummary, levelPlan, levelCandidates, cookedBy } from './picks.js';
 import { variationChoices } from './variations.js';
-import { releaseOn, familyRelease } from './release.js';
+import { releaseOn, familyRelease, LEVELS_RELEASE } from './release.js';
 import { PARTS, PART_NAMES, coursePartsOf, weekParts, plannedMinutes, hoursOf } from '../content/levels.js';
 
 const id = () => randomHex(8);
@@ -36,7 +36,7 @@ const unitOne = LIBRARY.course.filter((d) => d.unit === 1).map((d) => d.id);
 
 const lessonById = Object.fromEntries(LIBRARY.lessons.map((L) => [L.id, L]));
 const dishById = Object.fromEntries(LIBRARY.course.map((d) => [d.id, d]));
-// The Levels (§12), by id: what a Level course can be, next release only.
+// The Levels (§12), by id: what a Level course can be, with their release.
 const LEVELS = LIBRARY.levels ?? {};
 const placeholders = (list) => list.map(() => '?').join(', ');
 
@@ -44,7 +44,7 @@ const placeholders = (list) => list.map(() => '?').join(', ');
 
 // The version a row plays (§6.21), for its Version button: the family's pick,
 // or the best for the profiles on it, with every version's fit. null for a
-// lesson with no other versions, or a family without the next release.
+// lesson with no other versions.
 function versionOut(tc, choices, lid, pids) {
   const v = versionFor(tc, choices, lid, pids);
   if (!v.options) return null;
@@ -61,17 +61,16 @@ const versionPicker = async (env, fam, tc = undefined) => {
   return (lid, pids) => versionOut(tc, choices, lid, pids);
 };
 
-// The family's row, with whether it sees the next release (§8.6).
+// The family's row, with the newest release it sees (§8.6).
 export const family = async (env, fid) => {
   const fam = await env.DB.prepare('SELECT * FROM families WHERE id = ?').bind(fid).first();
   return fam && { ...fam, release: await familyRelease(env.DB, fid) };
 };
 export const weeksOn = (fam) => fam.mode === 'homeschool' || Boolean(fam.plan_weeks);
-// A Level's own recipe (§12.4) shows with its Level's release: 1, or 2 for
-// the re-planned Levels (§12.0).
-export const levelLessonOn = (L, release) => !L.level || release >= (L.levelRelease ?? 1);
-// The Levels a family can set a course up on: each one's release is on for it.
-export const levelsOn = (release) => Object.values(LEVELS).filter((V) => release >= (V.release ?? 1));
+// A Level's own recipe (§12.4) shows with the Levels' release.
+export const levelLessonOn = (L, release) => !L.level || release >= LEVELS_RELEASE;
+// The Levels a family can set a course up on: all of them, with their release.
+export const levelsOn = (release) => (release >= LEVELS_RELEASE ? Object.values(LEVELS) : []);
 // The lessons a family can cook: its diet settings allow them, and a Level's
 // own recipes (§12.4) only with their release.
 const visible = (fam) => {
@@ -257,24 +256,24 @@ const savedPicks = (plan) => Object.fromEntries(plan.weeks.map((x) => [x.week, x
 const savedRemoved = (plan) => Object.fromEntries(plan.weeks.map((x) => [x.week, x.removed]));
 
 // Which program each of a family's courses is: a Level's id, or null for
-// Cook Around the World (no row). Empty before the draft's table exists. A
-// Level course waits, out of sight, while the next release is off for the
-// family (§8.6): Undo launch puts the app back as it was, and nothing is lost.
+// Cook Around the World (no row). Empty before its table exists. A Level
+// course waits, out of sight, while the Levels' release is off for the family
+// (§8.6): Undo launch puts the app back as it was, and nothing is lost.
 async function withPrograms(env, fid, rows) {
   let progs = {};
   try {
     const { results } = await env.DB.prepare('SELECT course_id, program, parts FROM course_programs WHERE family_id = ?').bind(fid).all();
     progs = Object.fromEntries(results.filter((r) => LEVELS[r.program]).map((r) => [r.course_id, r]));
-  } catch { /* the draft isn't applied yet */ }
+  } catch { /* the table isn't there yet */ }
   // A Level course's parts kept on (a parent can turn any off).
   const out = rows.map((c) => ({ ...c, program: progs[c.id]?.program ?? null, ...(progs[c.id] ? { parts: coursePartsOf(progs[c.id].parts) } : {}) }));
   if (!out.some((c) => c.program)) return out;
-  const release = await familyRelease(env.DB, fid);
-  return out.filter((c) => !c.program || release >= (LEVELS[c.program].release ?? 1));
+  if (await releaseOn(env.DB, fid, LEVELS_RELEASE)) return out;
+  return out.filter((c) => !c.program);
 }
 
 // A new course with no plan sent (Chef Ruth's): the best dish of each
-// pick-one group for its profiles, with the next release (§6.21).
+// pick-one group for its profiles (§6.21).
 async function defaultFor(env, fid, pids) {
   const tc = await tasteContext(env, await family(env, fid));
   return tc ? bestPlan(tc, pids) : defaultPlan();
@@ -440,7 +439,7 @@ async function levelCourseOf(env, fid, pid) {
 // that completes the Level. A practice or capstone week, which has no
 // recipe, counts its own minutes once its last part (serving the meal) is
 // checked off. Hours are the planned time of what's done, toward the
-// Level's ~125. rows: each part checked off, for Progress and the
+// Level's hours. rows: each part checked off, for Progress and the
 // transcript. Returns null when the profile isn't on a Level course.
 export async function levelProgress(env, fid, pid, tz) {
   const course = await levelCourseOf(env, fid, pid);
@@ -458,7 +457,7 @@ export async function levelProgress(env, fid, pid, tz) {
   try {
     const { results } = await env.DB.prepare('SELECT attempt_id FROM mastery_notes WHERE family_id = ? AND profile_id = ?').bind(fid, pid).all();
     noted = new Set(results.map((r) => r.attempt_id));
-  } catch { /* the draft isn't applied yet */ }
+  } catch { /* the table isn't there yet */ }
   // Each lesson's first counted cook, and its first with a "why it worked".
   const cooked = {}, why = {};
   for (const r of cooks) {
@@ -1052,9 +1051,9 @@ export function register(on) {
       written: LIBRARY.lessons.map((L) => L.id), hidden: LIBRARY.lessons.filter((L) => !shown.has(L.id)).map((L) => L.id),
       per_week_max: PER_WEEK_MAX,
       // The programs a course can be, past Cook Around the World (§12.4):
-      // the Levels, with the next release. Each week with its recipe.
+      // the Levels, with their release. Each week with its recipe.
       levels: levelsOn(await familyRelease(env.DB, s.family_id)).map((V) => ({
-        id: V.id, name: V.name, hours: V.hours, units: V.units, release: V.release ?? 1,
+        id: V.id, name: V.name, hours: V.hours, units: V.units,
         weeks: V.weeks.map((w) => ({ ...w, title: w.recipe ? lessonById[w.recipe]?.title ?? V.titles[w.recipe] : null })),
         // Each recipe's planned minutes, for the hours the parent's setup plans for (§12.4).
         minutes: Object.fromEntries([...new Set([...Object.keys(V.titles), ...LIBRARY.course.map((d) => d.id), ...V.cards.map((c) => c.id)])]

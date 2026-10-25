@@ -1,6 +1,6 @@
 // Star ratings (plan §6.21): one row per thing a profile rates, used by the
 // Our tastes page and by Chef Ruth. 5 stars is the absolute favorite, one per
-// list; tapping a rating again takes it off. Part of the next release (§8.6).
+// list; tapping a rating again takes it off.
 
 export const STAR_WORDS = { 5: 'Absolute favorite', 4: 'Love', 3: 'Like', 2: 'Okay', 1: 'Hate' };
 
