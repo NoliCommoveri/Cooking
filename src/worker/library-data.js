@@ -17909,7 +17909,7 @@ export const LIBRARY = {
        "Cut across the strips, ¼ inch apart, moving your claw hand back a little after each cut.",
        "Dice the other half, then the second and third onions the same way.",
        "Spread a spoonful of each onion's dice on the board and compare: are the third onion's cubes more even than the first's?",
-       "Put the diced onion in a container, label it, and keep it for this week's tacos and Beyond the Recipe (it keeps 5 to 7 days in the fridge)."
+       "Put the diced onion in a container, label it, and keep it for this week's quesadillas or rajma and Beyond the Recipe (it keeps 5 to 7 days in the fridge)."
       ],
       "quiz": [
        {
@@ -17993,7 +17993,7 @@ export const LIBRARY = {
        "Plan a meal for later in the week that uses onions, peppers, or carrots.",
        "Dice, slice, or julienne what it needs, using this unit's cuts.",
        "Line each container with a folded paper towel and pack each vegetable in its own container.",
-       "Label each one with what it is and the date, as in week 1.",
+       "Label each one with what it is and the date.",
        "Store them in the fridge, and use them within the times above.",
        "When you cook the meal, note how much time the prep saved."
       ],
@@ -18040,7 +18040,7 @@ export const LIBRARY = {
        "Peel a few garlic cloves: lay one under the flat of the blade, edge facing away from you, and press down with the heel of your hand until it cracks. The skin slips off.",
        "Slice each clove thin, then rock through the slices until they're minced. Gather and repeat.",
        "Compare your minced parsley with a grain of rice. Mince again anything much bigger.",
-       "Use the parsley in this week's tabbouleh and the garlic in a meal this week. Store the garlic in the fridge, covered, and use it within a day or two."
+       "Use the garlic and parsley in this week's aglio e olio, or in a meal this week. Store the garlic in the fridge, covered, and use it within a day or two."
       ],
       "quiz": [
        {
@@ -18229,7 +18229,7 @@ export const LIBRARY = {
        "Stack 2 or 3 planks, hold them with the claw, and slice them the long way into ⅛-inch matchsticks.",
        "Cut the top and bottom off a bell pepper, open it flat, cut away the ribs, and julienne it skin side down.",
        "Line up 10 carrot matchsticks against a ruler. How many are within ⅛ inch of each other?",
-       "Store the matchsticks in a container in the fridge (carrots in a little cold water) and use them in this week's stir-fry or as a snack within 3 days."
+       "Store the matchsticks in a container in the fridge (carrots in a little cold water) and use them in this week's lo mein or kimbap or as a snack within 3 days."
       ],
       "quiz": [
        {
@@ -18318,15 +18318,15 @@ export const LIBRARY = {
       "title": "Timed dice: one onion, one pepper",
       "minutes": 40,
       "body": [
-       "Now you'll time yourself. Accuracy comes first: an even dice slowly beats a ragged one fast. Compare with your onions from week 9."
+       "Now you'll time yourself. Accuracy comes first: an even dice slowly beats a ragged one fast. Compare with your onions from week 1."
       ],
       "steps": [
        "Hone the knife and set up your board on a damp paper towel.",
        "Start a timer and dice one onion into ¼-inch cubes. Stop the timer and write down the time.",
        "Start the timer again and dice one bell pepper into ¼-inch cubes, skin side down. Write down the time.",
        "Spread 10 cubes of each on the board next to a ruler. Count how many are within ⅛ inch of ¼ inch.",
-       "Write down your times and your count. Compare them with how the week 9 onions looked.",
-       "Use the onion and pepper in this week's Israeli salad, or store them for later in the week."
+       "Write down your times and your count. Compare them with how the week 1 onions looked.",
+       "Use the onion and pepper in this week's minestrone or ajapsandali, or store them for later in the week."
       ],
       "quiz": [
        {
@@ -18359,7 +18359,7 @@ export const LIBRARY = {
        "Large dice: ¾-inch cubes, for stews and roasting. Medium dice: ½-inch cubes, for soups and sautés. Small dice: ¼-inch cubes, for salsas and salads. Brunoise: ⅛-inch cubes, the finest dice, cut from a julienne.",
        "Julienne: matchsticks ⅛ inch thick and 2 to 3 inches long. Batonnet: thicker sticks, ¼ inch thick and 2 to 3 inches long; cut across, they make a small dice.",
        "Chiffonade: leafy herbs or greens stacked, rolled up tight, and sliced across into thin ribbons. Mince: chopped finer than a brunoise, with no set shape, like garlic or parsley. Chop: rough pieces, roughly the same size, when looks don't matter.",
-       "Notice how the cuts build on each other: planks become sticks (julienne or batonnet), and sticks become cubes (brunoise or small dice). This is the unit quiz: answer from memory, then review anything you missed in weeks 9 to 11."
+       "Notice how the cuts build on each other: planks become sticks (julienne or batonnet), and sticks become cubes (brunoise or small dice). This is the unit quiz: answer from memory, then review anything you missed in weeks 1 to 3."
       ],
       "quiz": [
        {
@@ -18590,8 +18590,7 @@ export const LIBRARY = {
       "title": "Calibrate a thermometer in ice water",
       "minutes": 40,
       "body": [
-       "Every safe-temperature check this year depends on your thermometer reading correctly. A mixture of ice and water sits at 32°F, which makes it a reliable reference point.",
-       "The second part is a short knife-safety review. This unit's recipes call for diced onion and pepper, and the knife unit doesn't start until week 9."
+       "Every safe-temperature check this year depends on your thermometer reading correctly. A mixture of ice and water sits at 32°F, which makes it a reliable reference point."
       ],
       "steps": [
        "Fill a tall glass with ice, add cold water to just below the top of the ice, and stir. Let it stand 3 minutes.",
@@ -18599,10 +18598,7 @@ export const LIBRARY = {
        "Wait for the reading to settle, about 30 seconds on a digital thermometer. It should read 32°F.",
        "If it's more than 2°F off, recalibrate: most digital thermometers have a calibrate or reset function (see the manual); on a dial thermometer, an adult turns the nut under the dial with pliers until the needle reads 32°F. If it can't be adjusted, note the offset and correct for it every time.",
        "Record readings for warm and cold tap water as well, so you get used to how quickly the probe settles.",
-       "Wash the probe in hot, soapy water. From now on, clean it after every use.",
-       "Knife review: set the cutting board on a damp paper towel so it can't slide. Grip the knife at the handle, and hold the food in a claw grip, fingertips curled under.",
-       "Halve an onion through the root, lay the halves flat side down, and chop them, moving your guide hand back with each cut. If the knife falls, step back and let it drop.",
-       "Use the onion in this week's recipe."
+       "Wash the probe in hot, soapy water. From now on, clean it after every use."
       ],
       "quiz": [
        {
@@ -18691,7 +18687,7 @@ export const LIBRARY = {
        "In Leviticus 11, God gave Israel two tests for land animals: \"Whatever parts the hoof and is cloven-footed and chews the cud, among the animals, you may eat\" (Leviticus 11:3). An animal has to pass both. Its hoof is split into two toes, and it chews the cud, bringing swallowed food back up to chew again, the way a cow does.",
        "The next verses name four animals that pass only one test. The camel, the rock badger, and the hare chew the cud but don't have a split hoof. The pig has a split hoof but doesn't chew the cud (Leviticus 11:4–7). Passing one test isn't enough.",
        "Deuteronomy names the animals Israel may eat: \"the ox, the sheep, the goat, the deer, the gazelle, the roebuck, the wild goat, the ibex, the antelope, and the mountain sheep\" (Deuteronomy 14:4–5). Seven of the ten are wild animals.",
-       "The same two tests work for animals Israel never saw. Elk, moose, and caribou (called reindeer in Europe) are deer: split hooves, and they chew the cud. Water buffalo, yak, and bison are relatives of cattle, and the pronghorn of the American plains passes both tests too. All of them are clean. Bison and elk are sold in many grocery stores today, often ground, and can stand in for ground beef in this week's picadillo. They're leaner, so cook them gently, and still to 160°F."
+       "The same two tests work for animals Israel never saw. Elk, moose, and caribou (called reindeer in Europe) are deer: split hooves, and they chew the cud. Water buffalo, yak, and bison are relatives of cattle, and the pronghorn of the American plains passes both tests too. All of them are clean. Bison and elk are sold in many grocery stores today, often ground, and can stand in for ground beef in this week's burgers. They're leaner, so cook them gently, and still to 160°F."
       ],
       "steps": [
        "Read Leviticus 11:1–8.",
@@ -18813,7 +18809,7 @@ export const LIBRARY = {
        "Fins are easy to see. Scales are the thin, overlapping plates that cover most fish like roof tiles. Some fish have scales so small you have to look closely, like tuna and mackerel, but they're there, and the fish is clean.",
        "Clean fish this app uses include salmon, trout, cod, tilapia, pollock, haddock, halibut, tuna, sardines, anchovies, and many more: carp, herring, mackerel, smelt, whitefish, perch, walleye, pike, bass, barramundi, mahi-mahi, snapper, grouper, sole, and flounder.",
        "What the test leaves out: every animal with a shell, the soft sea animals with arms and no backbone, and fish with smooth, slippery skin and no scales, such as the whiskered bottom-feeders sold as swai or basa, and monkfish. Swordfish and sturgeon lose most of their scales as they grow, and people disagree about them, so this app leaves them out.",
-       "Once a fish is filleted and its skin is off, you can't see the scales anymore. That's why the name on the label matters, which is next week's knowledge page.",
+       "Once a fish is filleted and its skin is off, you can't see the scales anymore. That's why the name on the label matters, which the second half of this page covers.",
        "A fillet with its skin off can't show you its scales, so the label has to. In the United States, fish labels must name the fish and say where it came from and whether it was wild-caught or farm-raised. Read the name first, every time.",
        "Some names are general. \"Whitefish\" can mean a real whitefish, or it can be a catch-all for any white-fleshed fish. \"Sea bass\" and \"rockfish\" cover several kinds. When a label is vague, ask at the counter which fish it is, and pass on it if no one knows.",
        "Some cheap white fillets come from smooth-skinned river fish with no scales, sold as swai or basa. They look just like cod or tilapia, so read the label.",
@@ -18927,7 +18923,7 @@ export const LIBRARY = {
        "Read John 21:1–14.",
        "Answer in writing: what did Jesus do with the food before it was handed out in Matthew 14:19?",
        "Answer in writing: in John 21, who cooked breakfast, and what does that show you about him?",
-       "Cook a simple meal of bread and fish for your family this week, from this week's recipe or week 21's, and serve it to them yourself."
+       "Cook a simple meal of bread and fish for your family this week, from this week's recipe, and serve it to them yourself."
       ],
       "quiz": [
        {
@@ -19042,7 +19038,7 @@ export const LIBRARY = {
        "Wash your hands with soap for at least 20 seconds.",
        "Set out both cutting boards, raw-meat and general, each on a damp paper towel.",
        "Set out a plate for raw meat, a separate plate for cooked food, and a bowl for scraps.",
-       "Calibrate the thermometer in ice water (week 1) and keep it within reach.",
+       "Calibrate the thermometer in ice water (week 7) and keep it within reach.",
        "Fill one side of the sink or a dishpan with hot, soapy water for washing as you go.",
        "Have the adult check your setup against this list, then cook this week's recipe from it."
       ],
@@ -19107,7 +19103,7 @@ export const LIBRARY = {
       "title": "Bloom yeast at 105–110°F; knead to a windowpane",
       "minutes": 40,
       "body": [
-       "You'll test yeast in water at three temperatures, side by side, and see for yourself why the recipe asks for 105 to 110°F. Use the thermometer you calibrated in week 1.",
+       "You'll test yeast in water at three temperatures, side by side, and see for yourself why the recipe asks for 105 to 110°F. Use the thermometer you calibrated in week 7.",
        "You'll knead a small dough by hand and test it as you go, so you learn what a developed dough feels like. There's no yeast in it; the drill is about gluten."
       ],
       "steps": [
@@ -19715,14 +19711,14 @@ export const LIBRARY = {
       "minutes": 45,
       "body": [
        "Cooked fish doesn't reheat well: it dries out and its smell gets stronger. But the sauce it cooks in reheats perfectly. So many cooks make the sauce ahead and cook the fish fresh, in minutes, right before eating. Planning this way puts the longest part of the work on the day you have the most time.",
-       "A tomato sauce like this week's keeps 4 days in the fridge or 3 months in the freezer. Cool it the Unit 1 way. To finish, bring it back to a simmer and poach the fish in it.",
+       "A sauce like this week's lemon-dill yogurt or ginger-scallion keeps 3 to 4 days in the fridge, covered. Yogurt sauces don't freeze well, so make only what the week needs.",
        "The same idea works for other dishes: a curry sauce ahead, chicken cooked in it fresh; a stir-fry sauce mixed ahead, the stir-fry cooked in minutes."
       ],
       "steps": [
-       "Make a double batch of this week's tomato sauce, without the fish.",
-       "Cool it the Unit 1 way, divide it into containers, and label them with the date. Keep one in the fridge and freeze the other.",
-       "Later in the week, bring the fridge portion to a gentle simmer in a skillet.",
-       "Nestle in fresh fish, put the lid on, and poach it until it reads 145°F and flakes.",
+       "Make a double batch of this week's sauce.",
+       "Store it covered in the fridge, labeled with the date.",
+       "Later in the week, take the sauce out while you set up the steamer.",
+       "Steam fresh fish until it reads 145°F and flakes, and spoon the sauce over it.",
        "Write down how long the meal took from the fridge to the table."
       ],
       "quiz": [
@@ -19767,7 +19763,7 @@ export const LIBRARY = {
        "Batch 2, toasted: melt 1 tablespoon of butter or oil in a second small saucepan over medium heat. Add the other ½ cup of rice and stir until the edges of the grains turn see-through and it smells nutty, about 3 minutes. Stand back and add ¾ cup of water heated in the microwave, and a pinch of salt.",
        "Bring both to a boil, then turn them to the lowest heat, put the lids on, and cook 15 minutes without lifting the lids. Turn off the heat and rest 10 minutes.",
        "Fluff both with a fork. Compare them side by side: color, smell, stickiness, and taste. Write down which you'd serve and why.",
-       "Eat them as a side this week, or cool them the Unit 1 way and keep them in the fridge for up to 4 days."
+       "Eat them as a side this week, or cool them safely and keep them in the fridge for up to 4 days."
       ],
       "quiz": [
        {
@@ -19860,7 +19856,7 @@ export const LIBRARY = {
       "minutes": 45,
       "body": [
        "Cooked grains keep well, so a big pot cooked ahead becomes quick meals all week: rice for stir-fries, bulgur for salads, quinoa for bowls. Cook once, and the grain is ready for three or four meals.",
-       "Cooked rice needs care, as Unit 1 taught: its spores survive cooking and grow if it sits warm. Spread hot grains out on a sheet pan to cool fast, and get them into the fridge within an hour. They keep 4 days in the fridge, or 2 to 3 months in the freezer.",
+       "Cooked rice needs care, as week 1's danger-zone page taught: its spores survive cooking and grow if it sits warm. Spread hot grains out on a sheet pan to cool fast, and get them into the fridge within an hour. They keep 4 days in the fridge, or 2 to 3 months in the freezer.",
        "Cold grains go hard and dry, because their starch firms up as it chills. Steam brings them back: a little water and a cover. Sprinkle about a tablespoon of water over each cup, cover the dish or pan, and heat until it's steaming hot and reads 165°F. Fluff with a fork."
       ],
       "steps": [
@@ -19914,7 +19910,7 @@ export const LIBRARY = {
        "Drain both batches and measure them in a measuring cup. Write down how much each one grew, and look at their skins.",
        "Put each batch in its own saucepan with fresh water to cover by 2 inches and a pinch of salt. Bring both to a boil, then simmer gently with the lids slightly open.",
        "From 45 minutes on, taste 3 beans from each pot every 10 minutes, letting them cool first. Write down when each batch is creamy all the way through, and how many split skins each has.",
-       "Cool the cooked beans the Unit 1 way and store them in their liquid in the fridge for up to 4 days, for tacos, rice, or soup.",
+       "Cool the cooked beans safely and store them in their liquid in the fridge for up to 4 days, for tacos, rice, or soup.",
        "Spread ½ cup of red lentils and ½ cup of brown lentils on two plates. Pick out any tiny stones, clumps of dirt, or shriveled ones. Write down what you found.",
        "Rinse each in a bowl of cold water: swish, pour off the cloudy water while holding the lentils back with your hand, and repeat until the water is almost clear.",
        "Put each in its own saucepan with 2 cups of water. Bring both to a boil, then turn them down to a gentle simmer with the lids off.",
@@ -20152,13 +20148,13 @@ export const LIBRARY = {
       "minutes": 45,
       "body": [
        "Soup is one of the best things to freeze. A batch made ahead and frozen in portions turns into several quick meals later. A few portions in the freezer mean a hot meal on a busy night is only a reheat away.",
-       "Cool it first, the Unit 1 way: from 140°F to 70°F within 2 hours, then to 40°F within 4 more, in shallow containers, before it goes in the freezer. A hot pot in the freezer warms everything around it.",
+       "Cool it first: from 140°F to 70°F within 2 hours, then to 40°F within 4 more, in shallow containers, before it goes in the freezer. A hot pot in the freezer warms everything around it.",
        "Liquids grow as they freeze. Leave about an inch of space at the top of every container, or it can crack or pop its lid. Freezer bags laid flat freeze fast and stack like books.",
        "Most bean, lentil, and vegetable soups keep their best for 2 to 3 months. Soups with pasta or potatoes go soft, and soups with cream or milk can separate, so freeze those before the pasta or cream goes in. Thaw a portion in the fridge overnight and reheat it to 165°F, adding water, because lentil soups thicken as they sit."
       ],
       "steps": [
-       "Make a double batch of this week's red lentil soup, or set half of it aside.",
-       "Cool it the Unit 1 way and check it reaches 40°F.",
+       "Make a double batch of this week's chicken noodle soup or arroz caldo, or set half of it aside.",
+       "Cool it safely and check it reaches 40°F.",
        "Ladle it into freezer containers or bags in 1- or 2-person portions, leaving an inch of space at the top.",
        "Label each with the soup's name and the date, and freeze bags flat on a sheet pan until solid, then stand them up.",
        "Later in the week, thaw one portion in the fridge overnight and reheat it on the stove to 165°F, with a splash of water.",
@@ -20247,7 +20243,7 @@ export const LIBRARY = {
          "Neither"
         ],
         "answer": 0,
-        "explain": "Those brown bits are fond, and next week's drill uses them."
+        "explain": "Those brown bits are fond, and week 25's drill uses them."
        }
       ]
      },
@@ -20312,7 +20308,7 @@ export const LIBRARY = {
        "Reheat only what you'll eat. Each round of reheating and cooling costs quality and adds time in the danger zone."
       ],
       "steps": [
-       "Choose a stored dish: this week's meatloaf, or something you made ahead.",
+       "Choose a stored dish: this week's sausage and peppers or picadillo, or something you made ahead.",
        "Oven: portions in a baking dish with a splash of water or broth, covered with foil, at 350°F. Microwave: cover loosely, and stir or rotate every minute or two.",
        "Check the center of the thickest piece. Keep heating until it reads 165°F.",
        "Note the method and how long it took.",
@@ -20371,7 +20367,7 @@ export const LIBRARY = {
       "title": "Sear a skin-on fillet: dry it, press it flat, wait for it to release",
       "minutes": 40,
       "body": [
-       "Before this week's mastery recipe, practice the one hard part on a single fillet: crisp skin that lets go of the pan on its own."
+       "Before this week's recipe, practice the one hard part on a single fillet: crisp skin that lets go of the pan on its own."
       ],
       "steps": [
        "Pat one skin-on salmon or trout fillet very dry on both sides, and salt the skin. Wash your hands and everything the raw fish touched.",
@@ -20627,13 +20623,13 @@ export const LIBRARY = {
       "minutes": 45,
       "body": [
        "Some dishes taste just as good cold as hot, so they can be made a day ahead and set out with no cooking at all: baked fish with a cool sauce, grain salads, lentil and bean salads. A cold meal like this needs no cooking when it's served. Many families plan one for the Sabbath so they can focus on resting.",
-       "Cold food stays safe the Unit 1 way: cooked food is cooled and in the fridge within 2 hours, kept at 40°F or colder until it's served, and put back within 2 hours of coming out (1 hour on a hot day over 90°F).",
+       "Cold food stays safe this way: cooked food is cooled and in the fridge within 2 hours, kept at 40°F or colder until it's served, and put back within 2 hours of coming out (1 hour on a hot day over 90°F).",
        "Cold dulls flavor, so a dish meant to be eaten cold needs a little more salt and a squeeze of lemon or a splash of vinegar. Taste it cold, not warm, before you serve it."
       ],
       "steps": [
        "Bake extra fish when you make this week's recipe, and chill it, covered, within 2 hours.",
        "Stir together a cool sauce: 1 cup of plain yogurt, a grated cucumber squeezed dry, a spoonful of chopped dill, lemon juice, and salt. Keep it in the fridge.",
-       "Make a grain or legume salad from Unit 5: cooked rice, bulgur, or lentils with chopped vegetables from Unit 3, olive oil, lemon, and salt. Chill it.",
+       "Make a grain or legume salad from Unit 5: cooked rice, bulgur, or lentils with chopped vegetables cut the Unit 1 way, olive oil, lemon, and salt. Chill it.",
        "Label everything with the date.",
        "Later in the week, set out the cold fish with the sauce and the salad. Taste each cold and add salt or lemon if it needs it.",
        "Put everything back in the fridge within 2 hours of setting it out."
@@ -20701,12 +20697,12 @@ export const LIBRARY = {
       "minutes": 45,
       "body": [
        "Many sauces, stews, and braises taste better the day after they're made. Overnight, the flavors spread evenly through the sauce and the meat, and the sharp edges soften. Many families cook a big pot like this before the Sabbath, so the next day they only reheat it and can focus on resting.",
-       "Cool it safely, the Unit 1 way: from 140°F to 70°F within 2 hours, then to 40°F within 4 more. Don't put a big, hot pot straight in the fridge; it stays warm in the middle for hours. Divide it into shallow containers, no more than 2 inches deep.",
+       "Cool it safely: from 140°F to 70°F within 2 hours, then to 40°F within 4 more. Don't put a big, hot pot straight in the fridge; it stays warm in the middle for hours. Divide it into shallow containers, no more than 2 inches deep.",
        "As it chills, fat rises to the top and hardens. You can lift it off with a spoon before you reheat.",
        "A meat sauce keeps 3 to 4 days in the fridge, or 3 to 4 months in the freezer. Reheat it on the stove, stirring, with a splash of water if it's thick, until it reads 165°F in the middle."
       ],
       "steps": [
-       "Make a double batch of this week's ragù, or set half of it aside before serving.",
+       "Make a double batch of this week's chile verde or adobo, or set half of it aside before serving.",
        "Divide it into shallow containers. Let them sit uncovered until the steam stops, then cover them and put them in the fridge within 2 hours of cooking.",
        "Label each container with what it is and the date.",
        "The next day, lift off any hardened fat. Reheat one portion on the stove, stirring, until it reads 165°F in the middle.",
