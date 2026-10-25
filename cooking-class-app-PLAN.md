@@ -1337,6 +1337,14 @@ Four Levels, the homeschool curriculum (owner, 2026-10-23), built inside this ap
 - **Levels go by what a learner can already do, never by age.** §11's rule stands: the app shows no ages. The ages in the owner's outline (6 to 15 and up) are a guide for writing only.
 - **Build order** (owner, 2026-10-23): **Level 3 first**, then (recommendation) Level 2, Level 4, and Level 1, which needs the most new art and reading-light content. **Level 4 is planned next, ahead of Level 2** (owner, 2026-10-25; §12.8).
 
+### 12.0 Re-plan: the same units in every Level — Requirement (owner, 2026-10-25)
+**The Levels are a spiral, not a sequence.** Every Level covers every major kind of cooking; what climbs is how hard the recipes are and the new way each skill is used. Any one Level must stand alone, leaving a learner with a real skill set across most types of cooking, and any two Levels must look different to a family with siblings on both. **Level 3 is re-planned too, not patched** (owner: "If we have to scrap or heavily modify our L3 work, we do it"). The working doc is [The Levels re-plan](https://claude.ai/artifact/344145zznjKnNzLjXMTZgJ); its open items wait on the owner.
+- **Same units in every Level, organized by cooking method** (owner, 2026-10-25). Unit lengths can differ. One early unit teaches choosing and handling meat, poultry, and fish, so every later unit cooks meat its own way.
+- **Draft units** (recommendation, waiting on the owner): 1 Kitchen basics: safety and knife work (weeks 1–4) · 2 No-cook (5–7) · 3 Clean meat, poultry, and fish: choosing and handling (8–11) · 4 Baking: breads and doughs (12–16) · 5 Boiling, simmering, and steaming (17–21) · 6 Stovetop (22–26) · 7 Oven and grill (27–30) · 8 Low and slow (31–33) · 9 Sabbath capstone (34–36). Each unit's last week is its mastery check.
+- **Presentation by Level** (owner, 2026-10-25: approved): Level 1 picture-first and read aloud, with the child's jobs marked, and a two-part week; Level 2 short steps with pictures; Level 3 full steps in real terms; Level 4 a professional recipe card with less coaching. A coaching setting per Level in the player.
+- **Recipes are picked by each Level's difficulty scale, not by cuisine.** A Level picks from any recipe that fits, written or new. Weeks are planned from a skill ladder: each skill, and the new way each Level uses it.
+- **Replaced, kept until the new weeks go in:** the outlines and week tables in §12.1, §12.3, §12.5, §12.6, and §12.7's week options, and the week-by-week parts of §12.8. Level 3's built code and written lessons stay; its weeks change.
+
 ### 12.1 The four Levels (owner's outline, 2026-10-23)
 | Level | Time | Units, in order |
 |---|---|---|
@@ -1686,7 +1694,7 @@ That's 2 group fills, 2 Appointed Times lessons, 21 variations, 1 lesson used tw
 
 
 ### 12.8 Building Level 4 (phase 14, planned 2026-10-25)
-**Planned now, ahead of Level 2** (owner, 2026-10-25). The recipe review is in `docs/level-recipe-review.md` (Level 4 Chef); its proposals, including **swapping Units 3 and 4** so the pot pie's velouté is taught first, wait on the owner. Everything below is a recommendation until the owner confirms it.
+**Planned now, ahead of Level 2** (owner, 2026-10-25). **Its week-by-week parts are replaced by the re-plan (§12.0);** 14b–14f still stand. The recipe review is in `docs/level-recipe-review.md` (Level 4 Chef); its proposals, including **swapping Units 3 and 4** so the pot pie's velouté is taught first, wait on the owner. Everything below is a recommendation until the owner confirms it.
 
 Most of Level 3's build is already general: the course, the schedule, best fit, the kitchen's week card, part pages, the progress view, Progress, and the transcript all read whichever Levels are in the library. Level 4 needs its content and these few changes:
 

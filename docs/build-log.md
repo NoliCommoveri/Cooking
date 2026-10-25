@@ -4974,3 +4974,26 @@ now, ahead of Level 2.
   week 31's sourcing page mentions the sciatic nerve (Genesis 32:32);
   typed or uploaded portfolio work; and the warning's wording, which is the
   owner's to write.
+
+## 203. 2026-10-25 — The Levels re-plan: shared units by cooking method
+
+Planning only; nothing in the app changed.
+
+- Owner, 2026-10-25, after reviewing all four Level outlines: each Level
+  must stand alone with a real skill set across most types of cooking, and
+  the Levels must still look like a progression. The outlines didn't do
+  both: each Level owned its own kinds of cooking (fish, poultry, and soup
+  only in Level 3; pastry, frying, and grilling only in Level 4; no poultry,
+  fish, or soup in Level 2), so one Level alone left big gaps.
+- Decided: a spiral. The same units in every Level, organized by cooking
+  method, with one early unit on choosing and handling meat, poultry, and
+  fish; unit lengths can differ; recipes picked by each Level's difficulty
+  scale, not by cuisine; the presentation by Level approved; and Level 3
+  re-planned rather than patched.
+- New plan §12.0 records it. §12.1, §12.3, §12.5, §12.6, §12.7's week
+  options, and §12.8's week-by-week parts are marked replaced until each
+  Level's new weeks go in. The Level 4 review (entry 202) is marked
+  replaced.
+- The working doc, [The Levels re-plan](https://claude.ai/artifact/344145zznjKnNzLjXMTZgJ),
+  holds the draft nine units, the difficulty scale for each Level, the skill
+  ladder, what happens to Level 3's written work, and the open decisions.

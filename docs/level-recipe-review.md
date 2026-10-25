@@ -358,6 +358,8 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 
 # Level 4 Chef (reviewed 2026-10-25)
 
+**Replaced the same day** (owner, 2026-10-25): every Level is re-planned on shared units by cooking method (plan §12.0). This review of the old outline is kept for its findings; its checklist isn't being decided.
+
 Planned now, ahead of Level 2, at the owner's ask (2026-10-25). The same ground rules as Level 3 (top of this file), on the owner's outline in plan §12.6 and the defaults ruled in §12.7. Claude's review for the owner to decide; nothing here is built. The build plan is plan §12.8.
 
 **What a learner brings in from Level 3:** a thermometer and the safe temperatures; lean and enriched yeast doughs and challah; the classic cuts by name and size (brunoise, batonnet, chiffonade are kitchen words already); sweating, browning, fond and deglazing; dried beans, lentils, and grains; fish to 145°F and poultry to 165°F; stock and soup; tasting for salt, acid, fat, and heat; and a Sabbath meal planned and cooked ahead. From Level 2: halving and doubling a recipe, and reading labels.
