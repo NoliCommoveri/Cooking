@@ -5254,3 +5254,49 @@ Unit 2 may cook some parts ("ok"); "the rest you can fix."
   Unit 7 (quiche is Level 4's Unit 4), Level 3's oven bake is psari plaki,
   Level 4's is lasagna and moussaka, Level 2's broiling is nachos, and hot
   holding is 140°F, the USDA figure.
+
+## 211. 2026-10-25 — Re-plan build, 14b: the Level 2, 3, and 4 files
+
+Phase 14 (plan §12.9), behind release 2. Owner, 2026-10-25: start 14b,
+in sections; ChatGPT prompts first, four dishes a sheet; a doc of every
+part page to review; and fix the recurring resting line.
+
+- **Pictures:** 136 dish prompts, 34 sheets of four (sheets 29–62), in
+  [Level dish pictures: ChatGPT prompts](https://claude.ai/artifact/PbGHZTt9e78S2SbwtyYVMB),
+  in week order. Sloppy joes and chicken noodle soup get fresh pictures
+  rather than their retired ones, so every sheet has four. The cards keep
+  their meal-type drawings until the sheets arrive.
+- **Registries:** seven skills for Level weeks (knife grip and safety,
+  setting out first, measuring and scaling, reading labels, steaming,
+  seasoning by taste, grilling over two zones); twelve cuisines (Spanish,
+  Welsh, Irish, Finnish, Hungarian, Georgian, Mozambican, Singaporean,
+  Thai, Indonesian, Venezuelan, Trinidadian); goat and "duck and quail"
+  as taste proteins; a card's `variationOf` names the written or planned
+  dish it varies, and the linter checks it.
+- **Level files** (`content/levels/sp-2.json`, `sp-3.json`, `sp-4.json`,
+  release 2): units with their goals, 36 weeks each with a skill, a
+  Familiar and an Explore dish, notes (shortcuts, Level versions, an
+  adult at home), mastery weeks, and part titles at each Level's minutes;
+  Level 4 names a cuisine every recipe week, and weeks 34–36 are the
+  student's own menu. Side quests units 102 (A), 103 (K), and 104 (C).
+  - 136 recipe cards with tags and estimated times: 47 in Level 2, 38 in
+    Level 3, 51 in Level 4. Level 2 cooks Level 3's spaghetti and
+    meatballs and chicken noodle soup cards with its own steps.
+  - Level 3 carries 45 written pages from today's Level 3, edited to
+    their new weeks and dishes (old week and unit numbers, old dishes,
+    week 16's make-ahead sauce, week 7's knife review).
+  - Level 2's recipe estimates add up to about 67 hours (set as its
+    hours), under the planned 72, until they're written and timed.
+- **Resting line:** 12 of today's Level 3 make-ahead pages ended "…or so
+  they can focus on resting". Each now closes on its own payoff; the
+  resting fact stays on two pages (a cold meal, a pot made ahead). Plan
+  §12.2 records the rule for new pages.
+- **Review doc:** [Level part pages](https://claude.ai/artifact/PYqCyTko7F9fK4NWbZciNc)
+  lists all 324 pages with a one-line summary, marking the carried pages
+  and the five that join two of today's pages.
+- Lint warnings left: Level 3 week 23's Familiar (pan-seared trout) and
+  Level 4 week 17's (eggs Benedict) are tagged new-ish.
+- Tests: 361 (the three Levels in the library, release 2, a pair each
+  recipe week, the mastery weeks, and Level 4's cuisines; the Level
+  tests now expect the re-planned Levels beside today's Level 3 for a
+  preview family).
