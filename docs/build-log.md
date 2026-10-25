@@ -5042,3 +5042,30 @@ Planning only; nothing in the app changed.
 - Screenshots of the Releases section and the refusal were sent in the
   session.
 - Tests: 357 (a release still being built previews but can't be launched).
+
+## 205. 2026-10-25 — Level 3's new weeks proposed
+
+Planning only; nothing in the app changed.
+
+- Owner, 2026-10-25: plan Level 3's weeks on the shared units. The
+  proposal is in the doc [Level 3 Cook: the new 36 weeks](https://claude.ai/artifact/HAXqrVAgaEh6BGphYoq8uc),
+  waiting on the owner unit by unit (plan §12.0).
+- Each week takes a Level 3 row of the skill ladder, with a Familiar and an
+  Explore dish at Level 3's difficulty, and its drill, knowledge, and
+  Beyond the Recipe (23 make-ahead, 13 Bible and food: 8 written, 5 to
+  write). No raw meat before Unit 3; each unit's Familiar and Explore
+  dishes each span at least three cuisines.
+- The `familiar` tag decided each dish's slot, so ratatouille, red beans
+  and rice, red lentil soup, and chicken piccata (tagged new-ish) aren't
+  Familiar picks; they and the other unpicked Level 3 recipes stay live in
+  today's Level 3 and as fallbacks.
+- 68 dishes: 14 written, 2 variations of written lessons, 16 planned in
+  Cook Around the World, 1 Level card, 35 new. About 45 of today's 72 part
+  pages carry over.
+- The Explore dishes were checked against home-cooking search results
+  (sources in the doc) for being home dishes and for their usual hidden
+  sources, each written around (lard in tortillas, shells, conchas, and
+  empanada dough; pork in hambagu, sausage, and some noodle and omelet
+  versions; shrimp in jollof bouillon and moqueca; oyster sauce; bouillon in
+  suya and yassa). Weeks 29–33, which usually fall on Unleavened Bread, are
+  unleavened as planned.
