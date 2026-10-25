@@ -5138,3 +5138,5 @@ Planning only; nothing in the app changed.
   paste in tom kha pastes. Weeks 29–33 are unleavened as planned.
 - Flagged for the owner: fish is thin (4 dishes, Units 1–3), with two
   suggested swaps.
+- Owner, 2026-10-25: week 27's Explore is broiled miso-glazed salmon, in
+  place of halloumi skewers, for 5 fish dishes in Level 2.
