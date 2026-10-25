@@ -5311,3 +5311,20 @@ part page to review; and fix the recurring resting line.
   recipe week, the mastery weeks, and Level 4's cuisines; the Level
   tests now expect the re-planned Levels beside today's Level 3 for a
   preview family).
+
+## 212. 2026-10-25 — Re-plan build, 14c planned: a course on a new Level
+
+Planning only; nothing in the app changed. Owner, 2026-10-25: "Plan phase
+14c." The plan is in plan §12.9 under 14c, as recommendations until the
+owner confirms them:
+
+- Which program? offers a release 2 family the new Levels only, as after
+  launch; courses on today's Level 3 run to the end.
+- Setup and Chef Ruth ask **Each week starts with: Familiar or Explore**,
+  preset to Explore only for "Bring it on".
+- Draft migration `0002` with one table, `course_starts`, applied from
+  `/ops`.
+- Each week's dish is worked out from the course's start slot, falling back
+  to the other dish when the diet or tools rule one out or it isn't written
+  yet; best fit only when both are ruled out. Weeks the parent changed keep
+  their pick.
