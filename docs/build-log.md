@@ -5090,3 +5090,7 @@ Planning only; nothing in the app changed.
   lentil soup move to fallbacks. Week 24 is both dishes seared skin-side
   down (pan-seared trout or salmon, written; Korean pan-fried mackerel,
   godeungeo-gui). Unit lengths are unchanged.
+- Owner, 2026-10-25: lamb stays Explore-only at Level 3 ("familiar may not
+  like lamb, it's kind of an acquired taste"). Level 4 is to bring in new
+  proteins such as quail and duck, noted in plan §12.0 for when its weeks
+  are planned.
