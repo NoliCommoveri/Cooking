@@ -5143,3 +5143,29 @@ Planning only; nothing in the app changed.
 - Owner, 2026-10-25: week 19's Familiar is black bean tortilla soup, with
   rotisserie chicken as a choice, so a family on Familiar defaults cooks a
   bean dish too.
+
+## 207. 2026-10-25 — Level 4's new weeks proposed
+
+Planning only; nothing in the app changed.
+
+- Owner, 2026-10-25: plan Level 4. The proposal is in the doc
+  [Level 4 Chef: the new 36 weeks](https://claude.ai/artifact/JMPw926naDNJf7d2oQPq6X),
+  waiting on the owner unit by unit (plan §12.0).
+- Same nine units and weeks, at Level 4's difficulty (no ingredient or
+  step limit, three or more parts timed together, up to two days, precise
+  cuts, breaking down birds, deep frying and grilling). Each week names a
+  cuisine, taught on its Knowledge page.
+- New proteins: duck (weeks 8 and 32), quail (10), and goat (31); lamb in
+  29 and 30; all Explore. Adult at home in weeks 26 and 28. Mastery weeks
+  offer the student's own dish through Write my recipe; weeks 34–36 are the
+  student's menu, budget, and meal for household and guests.
+- 66 dishes in weeks 1–33: 6 written, 2 approved variations, 10 planned,
+  5 carried from §12.7, 43 new. All 108 part pages are new. The old Level 4
+  outline's other dishes are replaced.
+- Hidden sources written around: pork cured meats on the antipasto, lard in
+  store pastry and crusts, suet in patties and dafina's casing, pork in
+  sausage gravy, Canadian bacon, feijoada, mapo tofu, Swedish meatballs,
+  and the cassoulet-style duck; shrimp paste in curry paste; beef, goat,
+  and lamb fat skimmed and thrown out (birria recipes often fry tortillas
+  in it). No wine, following the library's broth rule. Weeks 29–33 are
+  unleavened as planned.
