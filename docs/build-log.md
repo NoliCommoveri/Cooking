@@ -4997,3 +4997,8 @@ Planning only; nothing in the app changed.
 - The working doc, [The Levels re-plan](https://claude.ai/artifact/344145zznjKnNzLjXMTZgJ),
   holds the draft nine units, the difficulty scale for each Level, the skill
   ladder, what happens to Level 3's written work, and the open decisions.
+- Owner, 2026-10-25: picking by difficulty must not mean picking
+  American. Other cultures' quick, everyday home dishes are researched from
+  home-cooking sources inside each cuisine (plan §12.0), with examples in
+  the re-plan doc's new Cuisines section. Proposed: every week has a
+  non-US option, and each unit's defaults span at least three cuisines.
