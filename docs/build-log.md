@@ -5298,7 +5298,11 @@ part page to review; and fix the recurring resting line.
   show in Which program?. Until 14c adds each course's Familiar or Explore
   pick, a week's recipe in the library is its Familiar dish
   (`tools/build-library.js`), so a course runs on Familiar dishes in week
-  order instead of coming out empty.
+  order instead of coming out empty. While today's Level 3 and the new one
+  both show, the new one reads "Level 3 Cook (new plan)", and the Levels
+  are listed in order (`public/app.js`). A course still skips weeks whose
+  dish isn't written, so a new Level 3 course opens on week 4 (minestrone)
+  until 14g writes the recipes.
 - Lint warnings left: Level 3 week 23's Familiar (pan-seared trout) and
   Level 4 week 17's (eggs Benedict) are tagged new-ish.
 - Tests: 362 (a course on Level 3 plans its Familiar dishes; the three Levels in the library, release 2, a pair each
