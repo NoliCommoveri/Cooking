@@ -5293,10 +5293,15 @@ part page to review; and fix the recurring resting line.
   §12.2 records the rule for new pages.
 - **Review doc:** [Level part pages](https://claude.ai/artifact/PYqCyTko7F9fK4NWbZciNc)
   lists all 324 pages with a one-line summary, marking the carried pages
-  and the five that join two of today's pages.
+  and the seven that join two of today's pages.
+- **A course on a new Level** (preview families only): the three Levels
+  show in Which program?. Until 14c adds each course's Familiar or Explore
+  pick, a week's recipe in the library is its Familiar dish
+  (`tools/build-library.js`), so a course runs on Familiar dishes in week
+  order instead of coming out empty.
 - Lint warnings left: Level 3 week 23's Familiar (pan-seared trout) and
   Level 4 week 17's (eggs Benedict) are tagged new-ish.
-- Tests: 361 (the three Levels in the library, release 2, a pair each
+- Tests: 362 (a course on Level 3 plans its Familiar dishes; the three Levels in the library, release 2, a pair each
   recipe week, the mastery weeks, and Level 4's cuisines; the Level
   tests now expect the re-planned Levels beside today's Level 3 for a
   preview family).

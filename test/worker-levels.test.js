@@ -436,3 +436,11 @@ test('14b: the re-planned Levels 2, 3, and 4 are in the library, release 2, with
   // Level 4 names a cuisine every recipe week (§12.0).
   assert.ok(sp[2].weeks.filter((w) => !w.kind).every((w) => w.cuisine));
 });
+
+test('14b: a course on a re-planned Level cooks each week\'s Familiar dish until the course can pick (14c)', async () => {
+  const { a, ava } = await setup();
+  assert.equal((await level(a, [ava], sunday, { program: 'sp-3' })).status, 200);
+  const c = (await a.get('/api/courses')).body.courses[0];
+  assert.equal(c.plan.length, 34, 'the practice run and the capstone have no recipe');
+  assert.deepEqual(c.plan.slice(0, 3).map((x) => [x.week, x.id]), [[1, 'bean-quesadillas'], [2, 'aglio-e-olio'], [3, 'vegetable-lo-mein']]);
+});
