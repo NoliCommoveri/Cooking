@@ -5328,3 +5328,10 @@ owner confirms them:
   to the other dish when the diet or tools rule one out or it isn't written
   yet; best fit only when both are ruled out. Weeks the parent changed keep
   their pick.
+
+## 213. 2026-10-25 — 14c: "A bit adventurous" starts with Explore
+
+Planning only; nothing in the app changed. Owner, 2026-10-25: "A bit
+adventurous should be explore." Plan §12.9's 14c preset is now Explore for
+"Bring it on" or "A bit adventurous", and Familiar for "Stick to what we
+know" or not set.
