@@ -5110,3 +5110,31 @@ Planning only; nothing in the app changed.
   (30); week 26's rava fish fry comes with lemon rice and a cucumber salad.
   Bible and make-ahead pages moved with their dishes; weeks 29–33 stay
   unleavened.
+
+## 206. 2026-10-25 — Level 2's new weeks proposed
+
+Planning only; nothing in the app changed.
+
+- Owner, 2026-10-25: plan Level 2 with the same rules as Level 3, using
+  rotisserie chicken and more canned and frozen ingredients where they make
+  a dish enjoyable without being overwhelming. The proposal is in the doc
+  [Level 2 Apprentice: the new 36 weeks](https://claude.ai/artifact/7b8KuJsihfkFkFZ1ZQKD9y),
+  waiting on the owner unit by unit (plan §12.0).
+- Same nine units and weeks as Level 3, at Level 2's limits (10
+  ingredients, 12 steps, under 45 minutes hands-on, a paring knife on soft
+  foods). A Familiar and an Explore dish each recipe week; mastery weeks
+  4, 6, 10, 15, 20, 26, 30, 33; the capstone is one Sabbath dish from a
+  prep list. 13 kid-level Bible and food pages, 23 make-ahead.
+- 68 dishes: 11 written Cook Around the World lessons (each needs a
+  Level 2 version), 2 variations, 8 planned, 47 new. All 108 part pages are
+  new.
+- Unit 7 starts with the broiler; Unit 8 simmers rather than braises
+  (braising is Level 3's). Week 4's Explore mastery (ful medames) gains
+  baked pita chips and a salad to match the Familiar dish.
+- Hidden sources written around: lard in refried beans, taco shells, flour
+  tortillas, and Welsh cakes; pork in "chicken" potstickers, sausage,
+  giniling, and the hot dogs in Filipino baked macaroni; salted shrimp in
+  gyeran-jjim; seafood in pajeon; oyster sauce; bouillon cubes; shrimp
+  paste in tom kha pastes. Weeks 29–33 are unleavened as planned.
+- Flagged for the owner: fish is thin (4 dishes, Units 1–3), with two
+  suggested swaps.
