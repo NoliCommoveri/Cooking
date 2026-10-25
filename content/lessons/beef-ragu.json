@@ -1,0 +1,268 @@
+{
+  "id": "beef-ragu",
+  "version": 1,
+  "track": "core",
+  "unit": 3,
+  "title": "Beef ragù",
+  "image": "dishes/beef-ragu.png",
+  "cuisine": "italian",
+  "skill": "A soffritto base, a long slow braise",
+  "skills": ["braising", "flavor-base"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 230,
+  "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+      { "from": 7, "text": "Sear the beef in three batches, and make sure your pot holds it all in about two layers with the sauce." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Sear, soffritto, then time",
+      "body": "Ragù is the slow-cooked meat sauce of Italy. Today you'll sear big chunks of beef chuck until they're deep brown, build a soffritto of onion, carrot, and celery in the same pot, deglaze it, and add tomatoes. Then the lid goes on and the beef braises gently for hours, until it's soft enough to shred with a fork into the sauce."
+    },
+    "callback": {
+      "lesson": "chicken-adobo",
+      "body": "In adobo, you browned chicken thighs and braised them with the lid on until they were tender. Beef chuck is the same idea, but tougher, so it takes hours, not minutes. The steps you know just get more time."
+    },
+    "why": [
+      { "id": "dry-beef", "title": "Dry meat sears", "body": "A wet surface has to boil off its water before it can brown, and while it does, the meat steams. Patted dry, it starts browning the moment it hits the oil." },
+      { "id": "sear", "title": "A deep brown crust", "body": "Searing isn't about cooking the meat through. It's about flavor: the brown crust, and the fond it leaves on the pot, flavor the whole sauce for hours. Leave each side alone until it lets go of the pot." },
+      { "id": "soffritto", "title": "Soffritto", "body": "Onion, carrot, and celery chopped fine and cooked gently in oil are where many Italian sauces start. Chopped small, they melt into the sauce over the long cook, so you taste them without biting into them." },
+      { "id": "paste", "title": "Cook the tomato paste", "body": "Tomato paste stirred into the hot pot for a couple of minutes turns from bright red to a darker rust color. That cooks off its raw, tinny taste and makes it sweeter and deeper." },
+      { "id": "chuck", "title": "Why chuck needs hours", "body": "Chuck is a hard-working shoulder muscle, full of tough connective tissue. A quick cook leaves it chewy. Hours of gentle heat melt that tissue into gelatin, which makes the meat fall apart and gives the sauce its rich, silky body." },
+      { "id": "low-bubble", "title": "A lazy bubble, not a boil", "body": "Boiling hard squeezes the meat fibers tight and dries them out, even under liquid. A gentle bubble, just a few breaking at a time, keeps the beef soft while the tough parts melt." }
+    ],
+    "wrong": [
+      { "sign": "The beef is gray, not brown", "fix": "The pot was crowded, or the meat was wet. Take some out, pat it dry, and sear in smaller batches until it's deep brown." },
+      { "sign": "The beef is still tough after the timer", "fix": "It needs more time, not more heat. Put the lid back on and check every 20 minutes." },
+      { "sign": "The sauce is sticking or scorching on the bottom", "fix": "Turn the heat down, stir in ½ cup of water, and don't scrape up anything black." },
+      { "sign": "The sauce is thin and watery", "fix": "After shredding, simmer it with the lid off, stirring now and then, until it's thick enough to cling to a spoon." }
+    ],
+    "quiz": [
+      { "q": "Why is the beef seared before it braises?", "choices": ["The brown crust and fond flavor the whole sauce", "To cook it through", "To make it tender"], "answer": 0, "explain": "The long braise makes it tender; searing is for flavor." },
+      { "q": "Why does beef chuck need hours to cook?", "choices": ["Its tough connective tissue needs time to melt", "It's cut too thick", "It has to thaw first"], "answer": 0, "explain": "The tissue melts into gelatin, and the meat falls apart." },
+      { "q": "What should the sauce look like while it braises?", "choices": ["A few lazy bubbles", "A hard, rolling boil", "Completely still"], "answer": 0, "explain": "A hard boil dries out the meat, even under liquid." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "beef-chuck", "amount": 2.5, "unit": "lb", "group": "Beef" },
+    { "ingredient": "salt", "amount": 1.5, "unit": "tsp", "group": "Beef" },
+    { "ingredient": "black-pepper", "amount": 0.5, "unit": "tsp", "group": "Beef" },
+    { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp", "group": "Beef" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "round": "up", "group": "Soffritto" },
+    { "ingredient": "carrot", "amount": 1, "unit": "count", "round": "up", "group": "Soffritto" },
+    { "ingredient": "celery", "amount": 2, "unit": "count", "round": "up", "group": "Soffritto" },
+    { "ingredient": "garlic", "amount": 4, "unit": "count", "round": "up", "prep": "minced", "group": "Soffritto" },
+    { "ingredient": "salt", "amount": 0.25, "unit": "tsp", "group": "Soffritto" },
+    { "ingredient": "tomato-paste", "amount": 2, "unit": "tbsp", "group": "Sauce" },
+    { "ingredient": "broth-beef", "amount": 1, "unit": "cup", "group": "Sauce" },
+    { "ingredient": "tomatoes-crushed", "amount": 1, "unit": "can", "group": "Sauce" },
+    { "ingredient": "bay-leaves", "amount": 2, "unit": "count", "round": "up", "group": "Sauce" },
+    { "ingredient": "oregano-dried", "amount": 1, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "water", "amount": 16, "unit": "cup", "scale": false, "group": "Pasta" },
+    { "ingredient": "salt", "amount": 1, "unit": "tbsp", "scale": false, "group": "Pasta" },
+    { "ingredient": "spaghetti", "amount": 1, "unit": "lb", "group": "Pasta" },
+    { "ingredient": "parmesan", "amount": 0.5, "unit": "cup", "prep": "grated", "optional": true, "group": "To serve" }
+  ],
+  "substitutions": [
+    { "for": "spaghetti", "use": "spaghetti-gluten-free", "reason": "gluten", "note": "Gluten-free spaghetti turns soft quickly. Start tasting it 2 minutes before the box says." }
+  ],
+  "equipment": [
+    "paper-towels",
+    "chef-knife",
+    "cutting-board",
+    "plate",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "liquid-measuring-cup",
+    "can-opener",
+    "pot-large",
+    "tongs",
+    "wooden-spoon",
+    "thermometer",
+    "fork",
+    "stockpot",
+    "colander"
+  ],
+  "steps": [
+    { "id": "cut-beef", "text": "Pat the beef dry with paper towels. Cut it into chunks about 3 inches across, trimming off any thick pieces of hard white fat. Put the chunks on the plate, sprinkle the beef's salt and the pepper all over them, and turn them to coat every side.", "safety": "adult-nearby", "hazard": "Sharp knife, raw meat", "handles": ["beef-chuck"], "why": "dry-beef", "tip": "Thin streaks of fat inside the meat stay. They melt in the long cook." },
+    { "id": "wash-beef", "type": "wash", "text": "Throw away the packaging and paper towels. Wash the knife and cutting board with hot, soapy water, and wash your hands with soap.", "safety": "solo", "hazard": "Raw meat" },
+    { "id": "soffritto", "text": "Dice the onion, carrot, and celery very small, about ⅛ inch, and put them together in the medium bowl. Peel and mince the garlic and keep it in the small bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "soffritto", "look": "Pieces smaller than a pea, all about the same size." },
+    { "id": "heat", "text": "Heat the oil in the large pot over medium-high heat until it shimmers.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 120, "timerLabel": "Heat pot" },
+    { "id": "sear-1", "text": "With the tongs, lay half the beef in the pot with space between the chunks. Leave them alone until the bottoms are deep brown and let go of the pot, then turn them. Brown at least two sides, then move them back to the plate.", "safety": "adult-nearby", "hazard": "Hot oil, spatter", "timerSeconds": 480, "timerLabel": "Sear, batch 1", "why": "sear", "look": "A dark brown crust, and brown bits on the bottom of the pot." },
+    { "id": "sear-2", "text": "Sear the rest of the beef the same way and move it to the plate.", "safety": "adult-nearby", "hazard": "Hot oil, spatter", "timerSeconds": 480, "timerLabel": "Sear, batch 2", "why": "sear", "tip": "If the bottom of the pot is turning darker than dark brown, turn the heat down a little." },
+    { "id": "wash-tongs", "type": "wash", "text": "Wash the tongs with hot, soapy water. They touched the raw beef.", "safety": "solo", "hazard": "Raw meat" },
+    { "id": "sweat", "text": "Turn the heat down to medium-low. Add the soffritto and its salt. Cook, stirring and scraping the bottom of the pot now and then, until it's soft.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 600, "timerLabel": "Sweat soffritto", "why": "soffritto", "look": "Soft and shiny, the onion see-through. The water from the vegetables has loosened some of the brown bits." },
+    { "id": "paste", "text": "Add the garlic and tomato paste. Stir and cook until the paste turns a darker, rusty red.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 120, "timerLabel": "Tomato paste", "why": "paste" },
+    { "id": "deglaze", "text": "Stand back and pour in the broth. Scrape the bottom of the pot hard with the wooden spoon until no brown bits are stuck to it.", "safety": "adult-nearby", "hazard": "Steam, hot pot", "look": "The bottom of the pot is clean." },
+    { "id": "tomatoes", "text": "Add the crushed tomatoes, bay leaves, and oregano. Put the beef back in with any juices from the plate, and nestle it down into the sauce. Bring it to a bubble.", "safety": "adult-nearby", "hazard": "Hot pot, spatter", "tip": "Pour the tomatoes slowly, close to the pot, so they don't splash." },
+    { "id": "braise", "text": "Turn the heat to low and put the lid on. Let it braise, stirring gently every 30 minutes and checking that it's still just barely bubbling.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 9000, "timerLabel": "Braise", "why": "low-bubble", "tip": "Stay in the house while it braises. Set the timer for 30 minutes at a time if that helps you remember to stir.", "look": "A few lazy bubbles at a time, not a boil." },
+    { "id": "tender", "type": "doneness", "text": "Lift out one chunk with the tongs and slide the thermometer into its middle. It needs to read at least 195°F, and fall apart when you press it with a fork. If it doesn't, put the lid back on and braise 20 minutes more.", "safety": "adult-nearby", "hazard": "Hot pot", "target": { "temp": 195, "unit": "F" }, "why": "chuck", "tip": "Whole beef is safe at 145°F, but chuck isn't tender until about 195°F, when its tough tissue has melted." },
+    { "id": "water-on", "text": "Fill the stockpot with the pasta's water at the sink, cover it, and set it over high heat to come to a boil.", "safety": "adult-nearby", "hazard": "Hot stove", "tip": "Never carry a pot of boiling water." },
+    { "id": "shred", "text": "Turn off the heat under the ragù and take out the bay leaves. Pull the beef apart right in the pot with two forks, into bite-size shreds. Stir it through the sauce.", "safety": "adult-nearby", "hazard": "Hot pot", "look": "No big chunks left, and the sauce is thick enough to cling to a spoon." },
+    { "id": "pasta", "text": "When the water is boiling hard, add the pasta's salt and the spaghetti. Stir it with the tongs for the first 2 minutes, then boil it until it's tender with a little bite in the middle.", "safety": "adult-nearby", "hazard": "Boiling water", "timerSeconds": 540, "timerLabel": "Spaghetti", "tip": "Check the box for its time, and taste a strand when the timer rings, after letting it cool." },
+    { "id": "drain", "text": "Set the colander in the sink. An adult pours the spaghetti into it, pouring away from both of you.", "safety": "adult-hands-on", "hazard": "Boiling water, steam" },
+    { "id": "serve", "text": "Taste the ragù and add a pinch more salt if it needs it. Serve it over the spaghetti, with parmesan on top if you like.", "safety": "solo" }
+  ],
+  "variations": [
+    {
+      "id": "bolognese",
+      "title": "Ragù bolognese",
+      "totalMinutes": 140,
+      "tags": {
+        "protein": "beef",
+        "flavors": ["rich-tomato"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "scaling": {
+        "mode": "free",
+        "max": 8,
+        "notes": [{ "from": 7, "text": "Brown the beef in three batches, so it browns instead of steaming." }]
+      },
+      "learn": {
+        "move": {
+          "title": "Brown, sweat, deglaze, simmer",
+          "body": "Ragù bolognese is the meat sauce of Bologna, in Italy, made with ground beef and a soffritto of onion, carrot, and celery. Today you'll brown the beef, sweat the soffritto, deglaze the pot, and let it simmer for an hour and a half, until it's thick and rich enough to cling to every strand of spaghetti."
+        },
+        "callback": {
+          "lesson": "spaghetti-marinara",
+          "body": "In spaghetti marinara, you cooked an onion soft, then simmered tomatoes until a spoon left a path. Bolognese builds on that sauce: browned beef first, a finer vegetable base, and much more time."
+        },
+        "why": {
+          "drop": ["dry-beef", "chuck"],
+          "change": {
+            "sear": {
+              "id": "sear",
+              "title": "Brown it, don't steam it",
+              "body": "Ground beef browns only in a hot pot with room to spread out. Crowded, it lets out water and turns gray. Leave it alone between stirs, and the brown bits it leaves on the pot will flavor the whole sauce."
+            },
+            "low-bubble": {
+              "id": "low-bubble",
+              "title": "A lazy bubble, not a boil",
+              "body": "A hard boil scorches the bottom and spatters the stove. A gentle bubble, just a few breaking at a time, lets the sauce thicken slowly without sticking."
+            }
+          },
+          "add": [
+            { "id": "long-simmer", "title": "Why simmer so long?", "body": "The beef is cooked through in minutes. The long simmer is for the sauce: the soffritto melts away, the flavors blend, and water cooks off until the sauce is thick and deep." }
+          ]
+        },
+        "wrong": [
+          { "sign": "The beef is gray, not brown", "fix": "The pot was crowded or not hot enough. Brown it in smaller batches, and leave it alone between stirs." },
+          { "sign": "The soffritto turned brown", "fix": "The heat was too high. Turn it down and add a spoonful of water. A little color is fine." },
+          { "sign": "The sauce is sticking or scorching on the bottom", "fix": "Turn the heat down, stir in ½ cup of water, and don't scrape up anything black." },
+          { "sign": "The sauce is thin and watery", "fix": "Simmer it with the lid off a little longer, stirring now and then, until it's thick enough to cling to a spoon." }
+        ],
+        "quiz": [
+          { "q": "What's the difference between browning the beef and sweating the soffritto?", "choices": ["Browning is hot and adds color; sweating is gentle and adds none", "They're the same thing", "Sweating uses more oil"], "answer": 0, "explain": "Same pot, different heat." },
+          { "q": "Why pour in broth and scrape the bottom of the pot?", "choices": ["To lift the brown bits so their flavor goes into the sauce", "To clean the pot", "To cool it down"], "answer": 0, "explain": "That's deglazing." },
+          { "q": "What should the sauce look like while it simmers?", "choices": ["A few lazy bubbles", "A hard, rolling boil", "Completely still"], "answer": 0, "explain": "A hard boil scorches the bottom." }
+        ]
+      },
+      "ingredients": {
+        "change": {
+          "beef-chuck@Beef": { "ingredient": "beef-ground", "amount": 2, "unit": "lb", "group": "Beef" },
+          "salt@Beef": { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Beef" },
+          "olive-oil@Beef": { "ingredient": "olive-oil", "amount": 1, "unit": "tbsp", "group": "Beef" }
+        }
+      },
+      "equipment": { "drop": ["paper-towels"], "add": ["heatproof-bowl"] },
+      "steps": {
+        "drop": ["cut-beef", "sear-2", "wash-tongs", "tender", "shred"],
+        "add": [
+          { "id": "beef-in", "text": "Crumble half the beef into the pot in pieces, straight from the package, and spread it out.", "safety": "adult-nearby", "hazard": "Hot pan, raw meat", "handles": ["beef-ground"] },
+          { "id": "wash-hands", "type": "wash", "text": "Wash your hands with soap.", "safety": "adult-nearby", "hazard": "Hot stove" },
+          { "id": "brown-2", "text": "Brown the rest of the beef the same way, with the rest of the beef's salt and pepper, and move it to the plate.", "safety": "adult-nearby", "hazard": "Hot pan, raw meat", "handles": ["beef-ground"], "timerSeconds": 420, "timerLabel": "Brown, batch 2", "why": "sear" },
+          { "id": "check-beef", "type": "doneness", "text": "Push the beef on the plate into a pile and slide the thermometer into the middle. It needs to read at least 160°F. If it doesn't, put it back in the pot for a minute and check again.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 160, "unit": "F" } },
+          { "id": "fat", "text": "Tip the pot a little and spoon all but about a tablespoon of the fat into the heatproof bowl. Let it cool, then throw it away in the trash, not down the sink.", "safety": "adult-nearby", "hazard": "Hot fat", "tip": "Leave the brown bits in the pot. They're the flavor." }
+        ],
+        "change": {
+          "heat": {
+            "id": "heat",
+            "text": "Heat the oil in the large pot over medium-high heat until it shimmers.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 90,
+            "timerLabel": "Heat pot"
+          },
+          "sear-1": {
+            "id": "sear-1",
+            "text": "Leave it alone for 2 minutes, then break it into crumbles with the wooden spoon. Sprinkle on half the beef's salt and pepper. Keep cooking, stirring only every minute or so, until it's browned with no pink left. Move it to the plate.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 420,
+            "timerLabel": "Brown, batch 1",
+            "why": "sear",
+            "look": "Deep brown crumbles, and brown bits on the bottom of the pot."
+          },
+          "wash-beef": {
+            "id": "wash-beef",
+            "type": "wash",
+            "text": "Throw away the package and wash your hands with soap.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove"
+          },
+          "tomatoes": {
+            "id": "tomatoes",
+            "text": "Add the crushed tomatoes, bay leaves, and oregano. Put the beef back in and stir. Bring it to a bubble.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pot, spatter",
+            "tip": "Pour the tomatoes slowly, close to the pot, so they don't splash."
+          },
+          "braise": {
+            "id": "braise",
+            "text": "Turn the heat to low and set the lid on the pot slightly open, so steam can escape. Simmer, stirring every 15 minutes and checking that it's still just barely bubbling.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pot",
+            "timerSeconds": 5400,
+            "timerLabel": "Simmer",
+            "why": "long-simmer",
+            "tip": "Stay in the house while it simmers. Set the timer for 15 minutes at a time if that helps you remember to stir.",
+            "look": "A few lazy bubbles at a time, not a boil."
+          },
+          "water-on": {
+            "id": "water-on",
+            "text": "About 30 minutes before the simmer is done, fill the stockpot with the pasta's water at the sink, cover it, and set it over high heat to come to a boil.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove",
+            "tip": "Never carry a pot of boiling water."
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Turn off the heat under the ragù and take out the bay leaves. Taste it and add a pinch more salt if it needs it. Serve it over the spaghetti, with parmesan on top if you like.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pot",
+            "look": "Thick enough to cling to a spoon."
+          }
+        },
+        "order": [
+          "soffritto",
+          "heat",
+          "+0",
+          "+1",
+          "sear-1",
+          "+2",
+          "wash-beef",
+          "+3",
+          "+4",
+          "sweat",
+          "paste",
+          "deglaze",
+          "tomatoes",
+          "braise",
+          "water-on",
+          "pasta",
+          "drain",
+          "serve"
+        ]
+      }
+    }
+  ]
+}

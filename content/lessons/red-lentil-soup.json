@@ -1,0 +1,93 @@
+{
+  "id": "red-lentil-soup",
+  "version": 1,
+  "track": "core",
+  "unit": 3,
+  "title": "Red lentil soup (mercimek)",
+  "image": "dishes/red-lentil-soup.png",
+  "cuisine": "turkish",
+  "skill": "Cooking lentils until they melt, blending a soup",
+  "skills": ["cooking-legumes", "simmering"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 50,
+  "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+      { "from": 7, "text": "Make sure the soup fills your pot no more than two-thirds full, so it can't splash out while you blend it." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Lentils that melt",
+      "body": "Mercimek is the red lentil soup cooks make all over Turkey. Red lentils need no soaking: they're small and split, so they cook in about 20 minutes and fall apart into the soup. Today you'll pick over and rinse them, simmer them over a sweated onion and carrot, blend the soup smooth safely, and finish it with lemon and a spoonful of paprika butter."
+    },
+    "callback": {
+      "lesson": "grilled-cheese-tomato-soup",
+      "body": "If you made tomato soup, you let it cool for a few minutes and blended it with the stick blender kept under the surface. Lentil soup is thicker, so it holds heat longer and spatters harder. The same rules keep you safe."
+    },
+    "why": [
+      { "id": "pick-over", "title": "Pick them over first", "body": "Dried lentils come straight from the field. Now and then a tiny stone or a clump of dirt gets bagged with them. Spreading them out and looking takes a minute and saves a tooth." },
+      { "id": "rinse", "title": "Rinse off the dust", "body": "Lentils carry dust and loose starch. A few rinses wash it off, so the soup tastes clean and doesn't foam up as much." },
+      { "id": "no-soak", "title": "Why red lentils need no soak", "body": "Red lentils are sold with their skins off and split in half. Water reaches the middle of each little piece fast, so they cook through in about 20 minutes. Big whole beans need a soak; red lentils don't." },
+      { "id": "melt", "title": "Cooked until they fall apart", "body": "For most dishes you stop cooking lentils while they still hold their shape. For this soup you keep going until they collapse. They thicken the soup on their own, with no flour or cream." },
+      { "id": "blend-safe", "title": "Blending hot soup safely", "body": "A spinning blade can fling hot soup and steam. Let the soup cool for 5 minutes, put the blender in before you switch it on, and keep the blade under the surface until it's off. Lift it out only when it has stopped." },
+      { "id": "paprika-butter", "title": "Paprika butter", "body": "Paprika's color and flavor dissolve in fat, not water. Warmed for a few seconds in melted butter, it turns the butter bright red and toasty. A spoonful on top flavors every bite." }
+    ],
+    "wrong": [
+      { "sign": "The soup is too thick", "fix": "Stir in hot water or broth, ¼ cup at a time, until it pours off a spoon." },
+      { "sign": "It's grainy after blending", "fix": "The lentils needed longer. Simmer 5 more minutes and blend again." },
+      { "sign": "It tastes flat", "fix": "Add a pinch of salt and a squeeze of lemon, stir, and taste again. Lentils need both." },
+      { "sign": "The paprika butter turned dark brown", "fix": "It was too hot, and burnt paprika tastes bitter. Wipe out the pan and make it again on low heat." }
+    ],
+    "quiz": [
+      { "q": "Why don't red lentils need soaking?", "choices": ["They're small and split, so they cook through fast", "They're already cooked", "Soaking makes them bitter"], "answer": 0, "explain": "Big whole beans need a soak; red lentils don't." },
+      { "q": "When you blend hot soup, where does the blade stay?", "choices": ["Under the surface the whole time", "Just at the top", "Anywhere, if you're quick"], "answer": 0, "explain": "Lifted out while it spins, it flings hot soup." },
+      { "q": "Why spread the lentils out before rinsing them?", "choices": ["To pick out tiny stones", "To dry them", "To count them"], "answer": 0, "explain": "Now and then a stone gets bagged with them." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "lentils-red", "amount": 1.5, "unit": "cup", "group": "Soup" },
+    { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp", "group": "Soup" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "round": "up", "group": "Soup" },
+    { "ingredient": "carrot", "amount": 1, "unit": "count", "round": "up", "group": "Soup" },
+    { "ingredient": "garlic", "amount": 2, "unit": "count", "round": "up", "group": "Soup" },
+    { "ingredient": "tomato-paste", "amount": 1, "unit": "tbsp", "group": "Soup" },
+    { "ingredient": "cumin-ground", "amount": 1, "unit": "tsp", "group": "Soup" },
+    { "ingredient": "broth-vegetable", "amount": 6, "unit": "cup", "group": "Soup" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Soup" },
+    { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Soup" },
+    { "ingredient": "lemon", "amount": 1, "unit": "count", "round": "up", "group": "Soup" },
+    { "ingredient": "butter-unsalted", "amount": 2, "unit": "tbsp", "group": "Paprika butter" },
+    { "ingredient": "paprika-sweet", "amount": 1, "unit": "tsp", "group": "Paprika butter" },
+    { "ingredient": "chili-flakes", "amount": 0.25, "unit": "tsp", "optional": true, "group": "Paprika butter" }
+  ],
+  "substitutions": [{ "for": "butter-unsalted", "use": "olive-oil", "reason": "dairy" }],
+  "equipment": [
+    "plate",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "chef-knife",
+    "cutting-board",
+    "pot-large",
+    "wooden-spoon",
+    "immersion-blender",
+    "skillet-nonstick-8",
+    "ladle"
+  ],
+  "steps": [
+    { "id": "pick-over", "text": "Spread the lentils on the plate and look through them. Pick out any tiny stones, clumps of dirt, or shriveled lentils.", "safety": "solo", "why": "pick-over" },
+    { "id": "rinse", "text": "Put the lentils in the medium bowl and cover them with cold water. Swish them with your hand, then carefully pour off the cloudy water, holding the lentils back with your hand. Do this 3 times, and leave them in the bowl.", "safety": "solo", "why": "rinse", "look": "The water is almost clear." },
+    { "id": "chop", "text": "Peel the onion and carrot and chop them into rough pieces. They don't need to be neat, because the soup gets blended. Peel the garlic and chop it small.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Use the claw, knuckles against the blade." },
+    { "id": "sweat", "text": "Warm the oil in the large pot over medium-low heat. Add the onion and carrot and cook, stirring now and then, until the onion is soft and see-through.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 480, "timerLabel": "Onion & carrot", "look": "Soft and shiny, with no brown edges." },
+    { "id": "paste", "text": "Add the garlic, tomato paste, and cumin, and stir for 1 minute until it smells toasty.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 60, "timerLabel": "Paste & cumin" },
+    { "id": "simmer", "text": "Add the lentils, the broth, and {qty:salt} salt. Turn the heat up and bring it to a boil, then turn it down so it bubbles gently. Set the lid on slightly open and simmer, stirring now and then, until the lentils have fallen apart.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 1200, "timerLabel": "Simmer lentils", "why": "no-soak", "look": "No whole lentils left: they've melted into a thick, golden soup.", "tip": "Skim off any foam that rises at the start with the ladle." },
+    { "id": "cool", "text": "Turn off the burner and slide the pot onto a cool burner. Take the lid off and let the soup cool.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 300, "timerLabel": "Cool soup", "why": "melt" },
+    { "id": "blend", "text": "Put the stick blender all the way into the soup, then switch it on. Blend until smooth, keeping the blade under the surface the whole time. Switch it off before you lift it out.", "safety": "adult-nearby", "hazard": "Hot soup, blender blade", "why": "blend-safe", "look": "Smooth, with no whole lentils or carrot bits.", "tip": "Tilt the pot a little toward the blender if the soup is shallow, so the blade stays covered." },
+    { "id": "season", "text": "Cut the lemon in half. Squeeze one half into the soup, and cut the other into wedges. Add the pepper, stir, and taste. Add a pinch more salt if it needs it.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "paprika-butter", "text": "Melt the butter in the small skillet over low heat. When it foams, take it off the heat and stir in the paprika, and the chili flakes if you're using them, for 15 seconds.", "safety": "adult-nearby", "hazard": "Hot butter", "timerSeconds": 15, "timerLabel": "Paprika", "why": "paprika-butter", "look": "Bright red butter, not dark brown." },
+    { "id": "serve", "text": "Ladle the soup into bowls. Spoon a little paprika butter over each one and serve with the lemon wedges.", "safety": "adult-nearby", "hazard": "Hot soup" }
+  ]
+}

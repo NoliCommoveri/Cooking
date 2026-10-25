@@ -831,18 +831,823 @@
       },
       "swapIns": ["ratatouille"]
     },
-    { "week": 13, "unit": 4, "skill": "sauteing", "recipe": "garlic-green-beans", "drill": { "title": "Blanch and shock green beans and spinach; shimmer test for hot oil", "minutes": 40 }, "knowledge": { "title": "Blanching: why vegetables stay green and crisp; oils and smoke points", "minutes": 35 }, "sabbath": { "title": "Blanch and store vegetables", "minutes": 45 }, "swapIns": ["japchae"] },
-    { "week": 14, "unit": 4, "skill": "flavor-base", "recipe": "beef-picadillo", "note": "A sofrito base", "drill": { "title": "Sweat vs. brown onions", "minutes": 40 }, "knowledge": { "title": "Browning and why it adds flavor", "minutes": 35 }, "sabbath": { "title": "Clean land animals you might not expect: the two tests, the animals Deuteronomy names, and today's elk, moose, water buffalo, and yak (Leviticus 11:1–8; Deuteronomy 14:3–8)", "minutes": 45 }, "swapIns": ["chana-masala", "chicken-yassa"] },
-    { "week": 15, "unit": 4, "skill": "flavor-base", "recipe": "cajun-rice-dressing", "note": "Onion, celery, and bell pepper", "drill": { "title": "Deglaze a pan, scrape the fond", "minutes": 40 }, "knowledge": { "title": "Aromatic bases across cuisines", "minutes": 35 }, "sabbath": { "title": "Salt (Leviticus 2:13; Matthew 5:13; Colossians 4:6)", "minutes": 45 }, "swapIns": ["chicken-jambalaya"] },
-    { "week": 16, "unit": 4, "skill": "flavor-base", "recipe": "beef-ragu", "mastery": true, "note": "Level version: ragù bolognese, ground beef over a soffritto, a 1½-hour simmer", "drill": { "title": "Sauté a mixed vegetable pan unaided", "minutes": 40 }, "knowledge": { "title": "Explain sweat vs. sauté", "minutes": 35 }, "sabbath": { "title": "Make a sauce that's better the next day", "minutes": 45 }, "swapIns": ["beef-chili", "chicken-tagine"] },
-    { "week": 17, "unit": 5, "skill": "cooking-legumes", "recipe": "red-lentil-soup", "drill": { "title": "Rinse and pick over lentils", "minutes": 40 }, "knowledge": { "title": "Legume types and cook times", "minutes": 35 }, "sabbath": { "title": "Freeze soup in portions", "minutes": 45 }, "swapIns": ["misir-wot"] },
-    { "week": 18, "unit": 5, "skill": "cooking-legumes", "recipe": "red-beans-and-rice", "note": "Beef sausage, collagen-cased or skinless, or none", "drill": { "title": "Quick-soak vs. overnight soak", "minutes": 40 }, "knowledge": { "title": "Why beans are soaked", "minutes": 35 }, "sabbath": { "title": "Soak beans ahead", "minutes": 45 }, "swapIns": ["cuban-black-beans"] },
-    { "week": 19, "unit": 5, "skill": "cooking-grains", "recipe": "rice-pilaf", "drill": { "title": "Toast grains in fat before liquid", "minutes": 40 }, "knowledge": { "title": "Absorption vs. pasta method; ratios", "minutes": 35 }, "sabbath": { "title": "Daniel's diet (Daniel 1)", "minutes": 45 }, "swapIns": ["jollof-rice", "bulgur-pilaf"] },
-    { "week": 20, "unit": 5, "skill": "cooking-legumes", "recipe": "mujaddara", "mastery": true, "note": "Lentils and rice", "drill": { "title": "Cook a grain without a recipe card", "minutes": 40 }, "knowledge": { "title": "Grains of the world worksheet", "minutes": 35 }, "sabbath": { "title": "Cook grains ahead and reheat them with steam", "minutes": 45 }, "swapIns": ["koshari"] },
-    { "week": 21, "unit": 6, "skill": "cooking-fish", "recipe": "baked-salmon", "swapIns": ["honey-soy-salmon", "bbq-salmon"], "drill": { "title": "Check a fillet for pin bones", "minutes": 40 }, "knowledge": { "title": "Fins and scales: clean vs. unclean species", "minutes": 35 }, "sabbath": { "title": "Dishes that serve well cold", "minutes": 45 }, "note": "Any clean fillet, with a side from an earlier week, timed to finish together" },
-    { "week": 22, "unit": 6, "skill": "cooking-fish", "recipe": "steamed-fish", "drill": { "title": "Judge freshness by smell, eyes, flesh", "minutes": 40 }, "knowledge": { "title": "Store-bought fish: reading labels and names", "minutes": 35 }, "sabbath": { "title": "Loaves and fishes, and breakfast on the shore (Matthew 14:13–21; John 21:9–13)", "minutes": 45 }, "note": "Steamed on a plate over foil balls in the large pot; the adult pours the hot oil" },
-    { "week": 23, "unit": 6, "skill": "cooking-fish", "recipe": "poached-cod", "swapIns": ["moqueca"], "drill": { "title": "Test doneness by flaking", "minutes": 40 }, "knowledge": { "title": "Why fish cooks faster than meat", "minutes": 35 }, "sabbath": { "title": "Make a sauce ahead, finish the dish fresh", "minutes": 45 } },
-    { "week": 24, "unit": 6, "skill": "cooking-fish", "recipe": "pan-seared-trout", "mastery": true, "note": "Or tilapia", "swapIns": ["blackened-cod", "pineapple-teriyaki-salmon"], "drill": { "title": "Sear a fillet skin-side down: dry it, press it flat, wait for it to release", "minutes": 40 }, "knowledge": { "title": "Species ID quiz", "minutes": 35 }, "sabbath": { "title": "Firstfruits and tithing food (Deuteronomy 14:22–29; Proverbs 3:9)", "minutes": 45 } },
+    {
+      "week": 13,
+      "unit": 4,
+      "skill": "sauteing",
+      "recipe": "garlic-green-beans",
+      "drill": {
+        "title": "Blanch and shock green beans and spinach; shimmer test for hot oil",
+        "minutes": 40,
+        "body": [
+          "You'll blanch two vegetables that need very different times, then learn to read hot oil by eye. An adult is nearby for the boiling water and the hot oil."
+        ],
+        "steps": [
+          "Fill a large pot about three-quarters full of water, add 1 tablespoon of salt, and bring it to a rolling boil with the lid on. Set a large bowl of ice water next to the stove.",
+          "Take the lid off. Blanch a handful of trimmed green beans for 3 minutes, then lift them into the ice water with a slotted spoon.",
+          "Blanch a big handful of spinach for 15 to 30 seconds, just until it wilts and turns bright. Lift it into the ice water.",
+          "When both are cold, lift them out. Squeeze the spinach gently in your hands and pat the beans dry. Set a raw bean and a raw leaf beside them and compare the colors.",
+          "Pour 1 tablespoon of vegetable oil into a cold skillet and set it over medium-high heat. Start a timer and watch. Tilt the pan every 20 seconds. Write down when the oil starts to run thin and ripple.",
+          "Drop in one blanched bean. It should sizzle right away. Then slide the pan off the burner. If you see smoke at any point, slide it off at once.",
+          "Store the beans and spinach in a lined container in the fridge and use them within 3 days, in this week's recipe, in eggs, or with lemon and salt."
+        ],
+        "quiz": [
+          { "q": "Which needs longer in the boiling water?", "choices": ["Green beans", "Spinach", "They need the same time"], "answer": 0, "explain": "Thin spinach leaves wilt in seconds." },
+          { "q": "What does shimmering oil tell you?", "choices": ["It's hot enough to sauté", "It's burning", "It's cooling down"], "answer": 0, "explain": "Smoke is the sign it's too hot." }
+        ]
+      },
+      "knowledge": {
+        "title": "Blanching: why vegetables stay green and crisp; oils and smoke points",
+        "minutes": 35,
+        "body": [
+          "Blanching is a short cook in a big pot of boiling salted water, followed right away by shocking: plunging the vegetable into ice water to stop the cooking. Cooks blanch to brighten the color, soften a vegetable just enough, loosen the skins of tomatoes and peaches, and get vegetables ready for the freezer.",
+          "Green vegetables get their color from chlorophyll. Raw, their skins hold tiny pockets of air that make the green look dull. In the first minute of boiling, heat drives that air out, and the green shows through bright. Cook them too long, though, and acids from the vegetable's own cells change the chlorophyll, turning it a dull olive. That's why you blanch with plenty of water and the lid off: the water stays at a boil when the vegetables go in, and the acids escape with the steam instead of dripping back in.",
+          "Crispness comes from the cell walls, which are glued together by pectin. Heat slowly softens that glue. A short blanch softens it just enough to be tender with a snap; the ice water stops it there.",
+          "Every fat has a smoke point, the temperature where it starts to smoke and break down. Past it, the fat tastes harsh and bitter, and it can catch fire. Butter smokes at about 350°F, extra-virgin olive oil at about 375 to 400°F, and vegetable and canola oil at about 400 to 450°F. For high heat, like a stir-fry or a sear, use an oil with a high smoke point. Butter and olive oil are for gentler heat, or for flavor.",
+          "You can't see a temperature, but you can see the oil change. As it heats, it thins out: tilt the pan and it runs like water, and its surface starts to ripple like a heat haze. That shimmer means it's hot enough to sauté. Smoke means it's too hot: slide the pan off the burner for a minute. If oil ever catches fire, slide a lid over the pan and turn off the burner. Never pour water on it, and never carry it."
+        ],
+        "quiz": [
+          { "q": "Why does a green bean turn brighter green in its first minute of boiling?", "choices": ["Heat drives out air trapped under the skin", "The salt dyes it", "The water adds color"], "answer": 0, "explain": "With the air gone, the chlorophyll shows through." },
+          { "q": "Why do green vegetables turn olive after long cooking?", "choices": ["Acids from the vegetable change the chlorophyll", "They soak up too much salt", "The ice water dulls them"], "answer": 0, "explain": "A short cook, with the lid off, keeps them bright." },
+          { "q": "What does shocking do?", "choices": ["Stops the cooking fast", "Seasons the vegetable", "Softens the vegetable"], "answer": 0, "explain": "Ice water cools it in seconds." },
+          { "q": "What is a fat's smoke point?", "choices": ["The temperature where it starts to smoke and break down", "The temperature where it shimmers", "The boiling point of water"], "answer": 0, "explain": "Past it, the fat tastes harsh and can catch fire." },
+          { "q": "Oil in a pan catches fire. What do you do?", "choices": ["Slide a lid over it and turn off the burner", "Pour water on it", "Carry it to the sink"], "answer": 0, "explain": "Water makes burning oil explode outward." }
+        ]
+      },
+      "sabbath": {
+        "title": "Blanch and store vegetables",
+        "minutes": 45,
+        "body": [
+          "Blanched vegetables keep 3 to 4 days in the fridge and 8 to 12 months in the freezer. Many families blanch vegetables ahead like this, so a side dish later in the week only needs a few minutes in a hot pan, or so they can focus on resting.",
+          "Blanching matters most for the freezer. Vegetables are full of enzymes that keep working even when they're frozen, slowly turning them dull, tough, and off-tasting. Blanching stops the enzymes. Freezer times are a little longer than for the fridge, to stop them completely.",
+          "Times in boiling water, for the freezer: green beans, 3 minutes; broccoli florets, 3 minutes; sliced carrots, 2 minutes; snap peas, 2 minutes; spinach, 2 minutes. Cut each vegetable evenly, so every piece blanches the same.",
+          "Dry them well before storing. Water left on them turns to ice crystals in the freezer and makes them soggy. Freeze them spread out on a sheet pan first, then bag them, so they don't freeze into one block."
+        ],
+        "steps": [
+          "Choose two vegetables from the list. Trim them and cut them into even pieces.",
+          "Blanch each one separately for its time, with the lid off, then shock it in ice water until it's cold all the way through.",
+          "Drain them and dry them well on a kitchen towel.",
+          "For the fridge: pack them in a container lined with a paper towel, label it with the date, and use them within 3 to 4 days.",
+          "For the freezer: spread them on a sheet pan in one layer and freeze for 1 to 2 hours. Move them to a freezer bag, press out the air, and label it with the date.",
+          "Later in the week, sauté one batch straight from the fridge or freezer with garlic, the way you made this week's green beans. Write down how long it took."
+        ],
+        "quiz": [
+          { "q": "Why blanch vegetables before freezing them?", "choices": ["It stops enzymes that make them dull and tough", "It kills every germ", "It makes them freeze faster"], "answer": 0, "explain": "Enzymes keep working in the freezer." },
+          { "q": "Why freeze them spread out on a sheet pan first?", "choices": ["So they freeze separately, not in one block", "So they thaw faster", "To dry them"], "answer": 0, "explain": "Then you can take out just what you need." }
+        ]
+      },
+      "swapIns": ["japchae"]
+    },
+    {
+      "week": 14,
+      "unit": 4,
+      "skill": "flavor-base",
+      "recipe": "beef-picadillo",
+      "note": "A sofrito base",
+      "drill": {
+        "title": "Sweat vs. brown onions",
+        "minutes": 40,
+        "body": [
+          "Same onion, same pan, two kinds of heat. You'll cook two batches side by side and taste the difference."
+        ],
+        "steps": [
+          "Dice an onion into ¼-inch cubes and divide it into two separate piles.",
+          "Sweat the first onion pile: warm 1 tablespoon of oil in a skillet over medium-low heat, add the onion and a pinch of salt, and stir every minute or so for 10 minutes. If you see brown, turn the heat down. Move it to a bowl.",
+          "Brown the second onion pile: wipe out the pan, add another tablespoon of oil, and heat it over medium-high until it shimmers. Add the onion, spread it out, and stir only every 2 minutes for 10 to 12 minutes, until it's deep golden brown in spots. If any edges turn black, turn the heat down. Move it to a second bowl.",
+          "Look at the pan after each batch. Which one left brown bits stuck to the bottom?",
+          "Let both cool a little and taste them side by side. Write down the color, the texture, and the taste of each. Which is sweeter? Which tastes deeper or roastier?",
+          "Store both in labeled containers in the fridge for up to 4 days. Use them in eggs, on a sandwich, or stirred into rice."
+        ],
+        "quiz": [
+          { "q": "Why add a pinch of salt to the sweating onion?", "choices": ["It pulls out water, so the onion softens without browning", "It makes it brown faster", "It's only for taste"], "answer": 0, "explain": "Salt draws water out of vegetables." },
+          { "q": "Which batch leaves brown bits on the pan?", "choices": ["The browned onion", "The sweated onion", "Neither"], "answer": 0, "explain": "Those brown bits are fond, and next week's drill uses them." }
+        ]
+      },
+      "knowledge": {
+        "title": "Browning and why it adds flavor",
+        "minutes": 35,
+        "body": [
+          "A seared burger tastes different from a boiled one, and toast tastes different from bread. The difference is browning, and it comes from chemical reactions that only happen at high heat.",
+          "The biggest one is the Maillard reaction, named for Louis-Camille Maillard, the French chemist who described it in 1912. Above about 300°F, the proteins and sugars on the surface of food react and make hundreds of new flavors and smells: savory, roasty, and meaty. They also make the brown color. It's what browns meat, bread crust, roasted coffee, and the outside of a pancake.",
+          "Caramelization is a different reaction. It needs only sugar, heated to about 320°F or more, which breaks down into sweet, nutty, slightly bitter flavors. Onions cooked low and long brown partly this way, because they're full of sugar.",
+          "Water stops browning. Water boils at 212°F, and while the surface of food is wet, it can't get any hotter than that, far below the 300°F that browning needs. That's why you pat meat dry, heat the pan first, leave room between pieces, and don't stir too often: each of those lets the surface dry out and get hot.",
+          "Brown is flavor; black is burnt. Burnt food tastes bitter, and so do burnt bits stuck to the pan. Sweating is the opposite choice: lower heat and a pinch of salt draw the water out of vegetables, so they soften and turn sweet without browning. A recipe picks one on purpose: sweated vegetables for a gentle, sweet base, and browned ones, or browned meat, for deep, roasty flavor."
+        ],
+        "quiz": [
+          { "q": "Which reaction browns meat and bread crust?", "choices": ["The Maillard reaction", "Caramelization", "Fermentation"], "answer": 0, "explain": "Proteins and sugars react above about 300°F." },
+          { "q": "Why can't a wet surface brown?", "choices": ["It can't get hotter than 212°F until the water is gone", "Water washes off the sugar", "Wet food is too heavy"], "answer": 0, "explain": "Browning needs about 300°F." },
+          { "q": "How is caramelization different from the Maillard reaction?", "choices": ["Caramelization needs only sugar", "Caramelization needs meat", "They're the same reaction"], "answer": 0, "explain": "The Maillard reaction needs proteins and sugars." },
+          { "q": "The brown bits in your pan have turned black. What are they?", "choices": ["Burnt and bitter", "Extra flavor", "Fond to save"], "answer": 0, "explain": "Brown is flavor; black is burnt." }
+        ]
+      },
+      "sabbath": {
+        "title": "Clean land animals you might not expect: the two tests, the animals Deuteronomy names, and today's elk, moose, water buffalo, and yak (Leviticus 11:1–8; Deuteronomy 14:3–8)",
+        "minutes": 45,
+        "body": [
+          "In Leviticus 11, God gave Israel two tests for land animals: \"Whatever parts the hoof and is cloven-footed and chews the cud, among the animals, you may eat\" (Leviticus 11:3). An animal has to pass both. Its hoof is split into two toes, and it chews the cud, bringing swallowed food back up to chew again, the way a cow does.",
+          "The next verses name four animals that pass only one test. The camel, the rock badger, and the hare chew the cud but don't have a split hoof. The pig has a split hoof but doesn't chew the cud (Leviticus 11:4–7). Passing one test isn't enough.",
+          "Deuteronomy names the animals Israel may eat: \"the ox, the sheep, the goat, the deer, the gazelle, the roebuck, the wild goat, the ibex, the antelope, and the mountain sheep\" (Deuteronomy 14:4–5). Seven of the ten are wild animals.",
+          "The same two tests work for animals Israel never saw. Elk, moose, and caribou (called reindeer in Europe) are deer: split hooves, and they chew the cud. Water buffalo, yak, and bison are relatives of cattle, and the pronghorn of the American plains passes both tests too. All of them are clean. Bison and elk are sold in many grocery stores today, often ground, and can stand in for ground beef in this week's picadillo. They're leaner, so cook them gently, and still to 160°F."
+        ],
+        "steps": [
+          "Read Leviticus 11:1–8.",
+          "Read Deuteronomy 14:3–8.",
+          "Make a chart with two columns, \"Split hoof\" and \"Chews the cud\". Put each animal named in both passages under every test it passes.",
+          "Answer in writing: why isn't passing one test enough? Which animals in Leviticus 11:4–7 pass only one?",
+          "Research the giraffe. Does it have split hooves? Does it chew the cud? Based on this, is it clean to eat?",
+          "With an adult, look for bison or elk at a grocery store or butcher, and write down what you find."
+        ],
+        "quiz": [
+          { "q": "What two tests does Leviticus 11:3 give for land animals?", "choices": ["A split hoof and chewing the cud", "Four legs and fur", "Eating grass and living on land"], "answer": 0, "explain": "An animal has to pass both." },
+          { "q": "Why is the camel unclean?", "choices": ["It chews the cud but doesn't have a split hoof", "It has a split hoof but doesn't chew the cud", "It lives in the desert"], "answer": 0, "explain": "Leviticus 11:4." },
+          { "q": "Which of these is clean?", "choices": ["Elk", "Pig", "Hare"], "answer": 0, "explain": "Elk are deer: split hooves, and they chew the cud." }
+        ]
+      },
+      "swapIns": ["chana-masala", "chicken-yassa"]
+    },
+    {
+      "week": 15,
+      "unit": 4,
+      "skill": "flavor-base",
+      "recipe": "cajun-rice-dressing",
+      "note": "Onion, celery, and bell pepper",
+      "drill": {
+        "title": "Deglaze a pan, scrape the fond",
+        "minutes": 40,
+        "body": [
+          "Fond forms whenever food browns in a pan that isn't nonstick. You'll make fond on purpose, deglaze it, and taste what you saved."
+        ],
+        "steps": [
+          "Use a skillet that isn't nonstick. Heat 1 tablespoon of oil in it over medium-high heat until it shimmers.",
+          "Add ½ pound of ground beef and brown it, leaving it alone between stirs, until there's an even brown layer on the bottom of the pan. Check that the beef reads 160°F, move it to a bowl, and spoon off the fat. For a meatless drill, brown a diced onion instead.",
+          "Look closely at the fond. Golden to dark brown is flavor; black spots are burnt. Write down what you see.",
+          "Turn the heat down to medium. Stand back and pour in ½ cup of broth or water. It will hiss and steam. Scrape the bottom hard with a wooden spoon until the pan is clean.",
+          "Let it bubble until about half of it is gone. Cool a spoonful, and taste it next to a spoonful of the plain broth or water. Write down the difference.",
+          "Pour the pan sauce over the beef. Use it this week in tacos, over rice, or in eggs, or store it in the fridge for up to 4 days."
+        ],
+        "quiz": [
+          { "q": "Why doesn't a nonstick pan make much fond?", "choices": ["Food doesn't stick to it", "It's too thin", "It never gets hot enough"], "answer": 0, "explain": "Fond is the browned food that sticks." },
+          { "q": "Why stand back as the liquid goes in?", "choices": ["It hisses and throws up a burst of steam", "The oil catches fire", "The pan cracks"], "answer": 0, "explain": "Steam burns as badly as a hot pan." }
+        ]
+      },
+      "knowledge": {
+        "title": "Aromatic bases across cuisines",
+        "minutes": 35,
+        "body": [
+          "Much of the world's savory cooking starts the same way: a few strong-smelling vegetables, cut small and cooked in fat before anything else goes in. Cooks call them aromatics, and together they're the dish's flavor base. Each cuisine has its own.",
+          "France: mirepoix, onion, carrot, and celery, about two parts onion to one part each of the others. It starts soups, stocks, and braises. Italy: soffritto, the same three vegetables chopped finer and cooked slowly in olive oil, often with garlic. You'll cook one under next week's ragù.",
+          "Louisiana: onion, celery, and green bell pepper, with the pepper in place of the carrot. It starts jambalaya, gumbo, and this week's rice dressing. Spain and Latin America: sofrito, onion, garlic, and peppers, often with tomato. Cuban sofrito, under last week's picadillo, uses green pepper; Puerto Rican sofrito adds cilantro.",
+          "India: onion, ginger, and garlic, often with green chiles, cooked until golden before the spices go in. China: ginger, garlic, and green onion, in hot oil for just seconds. West Africa: onion, tomato, and hot peppers, often blended smooth, as in jollof rice.",
+          "The idea is the same everywhere; what changes is the time. Slow sauces and soups sweat their base for many minutes so it melts into the dish. A fast stir-fry adds its aromatics near the end, for seconds, so they stay sharp and fresh."
+        ],
+        "quiz": [
+          { "q": "What's in a French mirepoix?", "choices": ["Onion, carrot, and celery", "Onion, celery, and green pepper", "Ginger, garlic, and green onion"], "answer": 0, "explain": "Italy's soffritto uses the same three, chopped finer." },
+          { "q": "Which three vegetables start most Louisiana cooking?", "choices": ["Onion, celery, and green pepper", "Onion, carrot, and celery", "Onion, tomato, and hot pepper"], "answer": 0, "explain": "Green pepper takes the carrot's place." },
+          { "q": "Which flavor base usually has ginger and garlic, with spices added after?", "choices": ["India's", "France's", "Louisiana's"], "answer": 0, "explain": "Onion, ginger, and garlic, cooked until golden." },
+          { "q": "What do all aromatic bases have in common?", "choices": ["Strong-smelling vegetables cooked first to build flavor", "They're always eaten raw", "They're all spices"], "answer": 0, "explain": "Everything else sits on top of them." },
+          { "q": "Why does a stir-fry add its garlic and ginger near the end?", "choices": ["They burn fast in a very hot pan", "They need the least cooking to be safe", "They thicken the sauce"], "answer": 0, "explain": "A few seconds keeps them fresh, not bitter." }
+        ]
+      },
+      "sabbath": {
+        "title": "Salt (Leviticus 2:13; Matthew 5:13; Colossians 4:6)",
+        "minutes": 45,
+        "body": [
+          "In the ancient world, salt was precious. It seasoned food, and long before refrigerators, it kept meat and fish from spoiling. Israel got its salt from the Dead Sea, which the Bible calls the Salt Sea (Genesis 14:3).",
+          "God told Israel: \"You shall season all your grain offerings with salt. You shall not let the salt of the covenant with your God be missing from your grain offering; with all your offerings you shall offer salt\" (Leviticus 2:13). Salt doesn't spoil, so a \"covenant of salt\" pictured a promise that lasts (Numbers 18:19).",
+          "Jesus told his followers, \"You are the salt of the earth, but if salt has lost its taste, how shall its saltiness be restored? It is no longer good for anything except to be thrown out and trampled under people's feet\" (Matthew 5:13). Salt is meant to make a difference to everything it touches, and so are they.",
+          "Paul wrote, \"Let your speech always be gracious, seasoned with salt, so that you may know how you ought to answer each person\" (Colossians 4:6). Like well-seasoned food, good words aren't bland, and they aren't too much.",
+          "In the kitchen, salt does more than taste salty. It brings out the other flavors in a dish, pulls water out of vegetables (that's how it helps them sweat), and keeps food from spoiling. Good cooks salt in stages, a little in each part of a dish, and taste before serving, the way you did this week."
+        ],
+        "steps": [
+          "Read Leviticus 2:13 and Numbers 18:19.",
+          "Read Matthew 5:13–16.",
+          "Read Colossians 4:5–6.",
+          "Answer in writing: name two things salt does in food. How does each one fit what Jesus said about his followers?",
+          "Answer in writing: what would speech \"seasoned with salt\" sound like? Give an example from your week.",
+          "At a meal this week, taste a dish before and after a small pinch of salt, and talk with your family about what changed."
+        ],
+        "quiz": [
+          { "q": "In Leviticus 2:13, what was to go with every grain offering?", "choices": ["Salt", "Yeast", "Honey"], "answer": 0, "explain": "Leviticus 2:11 kept leaven and honey out of the offerings by fire." },
+          { "q": "Who did Jesus call \"the salt of the earth\"?", "choices": ["His followers", "The priests", "The farmers"], "answer": 0, "explain": "Matthew 5:13." },
+          { "q": "In Colossians 4:6, what should be \"seasoned with salt\"?", "choices": ["Our speech", "Our bread", "Our offerings"], "answer": 0, "explain": "Gracious words, worth hearing." }
+        ]
+      },
+      "swapIns": ["chicken-jambalaya"]
+    },
+    {
+      "week": 16,
+      "unit": 4,
+      "skill": "flavor-base",
+      "recipe": "beef-ragu",
+      "mastery": true,
+      "note": "Level version: ragù bolognese, ground beef over a soffritto, a 1½-hour simmer",
+      "drill": {
+        "title": "Sauté a mixed vegetable pan unaided",
+        "minutes": 40,
+        "body": [
+          "No recipe card this time. Use what you've learned this unit to sauté a pan of mixed vegetables so every one is cooked just right. Plan first, then cook. An adult is nearby, but doesn't help."
+        ],
+        "steps": [
+          "Choose 3 or 4 vegetables that cook at different speeds, such as carrots, bell pepper, zucchini, mushrooms, or blanched green beans, and a clove or two of garlic.",
+          "Cut each one evenly. Cut the hard ones, like carrots, thinner or smaller than the soft ones.",
+          "Write your plan: the order the vegetables go in, about how long each needs, and when the garlic and salt go in.",
+          "Heat the oil until it shimmers and follow your plan. Cook in batches if the pan gets crowded. Taste as you go.",
+          "Judge your pan: was every vegetable crisp-tender? Was anything raw, soggy, or burnt? Write down what you'd change next time.",
+          "Serve it as a side this week, or store it in the fridge and eat it within 3 days."
+        ],
+        "quiz": [
+          { "q": "Which goes into the pan first?", "choices": ["Carrots", "Zucchini", "They go in together"], "answer": 0, "explain": "Hard vegetables need longer." },
+          { "q": "Your vegetables are steaming in a crowded pan. What do you do?", "choices": ["Take some out and cook in batches", "Add more oil", "Put the lid on"], "answer": 0, "explain": "Each piece needs to touch the hot pan." }
+        ]
+      },
+      "knowledge": {
+        "title": "Explain sweat vs. sauté",
+        "minutes": 35,
+        "body": [
+          "This is the unit quiz. First, explain the difference between sweating and sautéing in your own words, out loud to an adult or in writing. Then check your answer against the rest of this page.",
+          "Sweating: medium-low heat, a little fat, and often a pinch of salt. The vegetables give up their water and turn soft, see-through, and sweet, with no brown. It's for the base of a sauce or soup, when you want the vegetables to melt into the dish.",
+          "Sautéing: medium-high heat, oil that shimmers, and small pieces in one layer, stirred or tossed often. The word is French for \"jumped\", from the way the food jumps in the pan. The outside browns quickly while the inside stays crisp-tender. It's for quick side dishes, and for browning before something simmers.",
+          "Searing is hotter still: food is left alone until a brown crust forms, and the fond it leaves behind is lifted with a splash of liquid, which is deglazing.",
+          "Listen to your pan. Sweating is a soft sizzle. Sautéing is a lively one. Searing is loud. If you hear bubbling and no sizzle at all, the food is steaming in its own water: the pan is too crowded or not hot enough."
+        ],
+        "quiz": [
+          { "q": "What heat do you use to sweat vegetables?", "choices": ["Medium-low", "Medium-high", "As high as it goes"], "answer": 0, "explain": "Gentle heat softens them without browning." },
+          { "q": "What does \"sauté\" mean in French?", "choices": ["Jumped", "Fried", "Fast"], "answer": 0, "explain": "The food jumps when you toss the pan." },
+          { "q": "How do sweated onions look when they're done?", "choices": ["Soft and see-through, with no brown", "Deep brown and crisp", "Black at the edges"], "answer": 0, "explain": "Brown means the heat was too high for sweating." },
+          { "q": "You hear bubbling, not sizzling, in your sauté pan. What's happening?", "choices": ["The food is steaming in its own water", "It's browning perfectly", "The oil is too hot"], "answer": 0, "explain": "Cook in batches, or turn up the heat." },
+          { "q": "Unit review: how can you tell oil is hot enough to sauté?", "choices": ["It shimmers", "It smokes", "It bubbles"], "answer": 0, "explain": "Smoke means it's too hot." },
+          { "q": "Unit review: why shock blanched vegetables in ice water?", "choices": ["To stop the cooking so they stay crisp and green", "To season them", "To wash them"], "answer": 0, "explain": "Their own heat would keep cooking them." },
+          { "q": "Unit review: what is fond?", "choices": ["The brown bits stuck to the pan after browning", "A kind of broth", "Burnt food to throw away"], "answer": 0, "explain": "Deglazing lifts it into the sauce." },
+          { "q": "Unit review: which three vegetables start most Louisiana cooking?", "choices": ["Onion, celery, and green pepper", "Onion, carrot, and celery", "Ginger, garlic, and green onion"], "answer": 0, "explain": "Onion, carrot, and celery is mirepoix." },
+          { "q": "Unit review: why can't a wet surface brown?", "choices": ["It can't get hotter than 212°F until the water is gone", "Water washes off the flavor", "It's too heavy"], "answer": 0, "explain": "Browning needs about 300°F." }
+        ]
+      },
+      "sabbath": {
+        "title": "Make a sauce that's better the next day",
+        "minutes": 45,
+        "body": [
+          "Many sauces, stews, and braises taste better the day after they're made. Overnight, the flavors spread evenly through the sauce and the meat, and the sharp edges soften. Many families cook a big pot ahead like this, so a meal later in the week only needs reheating, or so they can focus on resting.",
+          "Cool it safely, the Unit 1 way: from 140°F to 70°F within 2 hours, then to 40°F within 4 more. Don't put a big, hot pot straight in the fridge; it stays warm in the middle for hours. Divide it into shallow containers, no more than 2 inches deep.",
+          "As it chills, fat rises to the top and hardens. You can lift it off with a spoon before you reheat.",
+          "A meat sauce keeps 3 to 4 days in the fridge, or 3 to 4 months in the freezer. Reheat it on the stove, stirring, with a splash of water if it's thick, until it reads 165°F in the middle."
+        ],
+        "steps": [
+          "Make a double batch of this week's ragù, or set half of it aside before serving.",
+          "Divide it into shallow containers. Let them sit uncovered until the steam stops, then cover them and put them in the fridge within 2 hours of cooking.",
+          "Label each container with what it is and the date.",
+          "The next day, lift off any hardened fat. Reheat one portion on the stove, stirring, until it reads 165°F in the middle.",
+          "Taste it, and write down how it's different from the day you made it.",
+          "Freeze any extra in portions, labeled, and use it within 3 months."
+        ],
+        "quiz": [
+          { "q": "Why divide a big pot of sauce into shallow containers before chilling it?", "choices": ["It cools through the danger zone faster", "It fits the fridge better", "It keeps the fat in"], "answer": 0, "explain": "A deep pot stays warm in the middle for hours." },
+          { "q": "What temperature does reheated sauce need to reach?", "choices": ["165°F", "140°F", "145°F"], "answer": 0, "explain": "Every reheated leftover goes to 165°F." }
+        ]
+      },
+      "swapIns": ["beef-chili", "chicken-tagine"]
+    },
+    {
+      "week": 17,
+      "unit": 5,
+      "skill": "cooking-legumes",
+      "recipe": "red-lentil-soup",
+      "drill": {
+        "title": "Rinse and pick over lentils",
+        "minutes": 40,
+        "body": [
+          "Every bag of dried legumes gets picked over and rinsed before cooking. Then you'll cook red and brown lentils side by side and see why recipes use them so differently."
+        ],
+        "steps": [
+          "Spread ½ cup of red lentils and ½ cup of brown lentils on two plates. Pick out any tiny stones, clumps of dirt, or shriveled ones. Write down what you found.",
+          "Rinse each in a bowl of cold water: swish, pour off the cloudy water while holding the lentils back with your hand, and repeat until the water is almost clear.",
+          "Put each in its own saucepan with 2 cups of water. Bring both to a boil, then turn them down to a gentle simmer with the lids off.",
+          "Every 5 minutes, scoop out a few of each, let them cool, and taste them. Write down the time each one is tender, and the time the red ones fall apart.",
+          "Drain the brown lentils and compare them with the red ones. Which would you use in a soup? Which in a salad or with rice?",
+          "Season both with a little salt, olive oil, and lemon and eat them as a side, or store them in the fridge and use them within 4 days."
+        ],
+        "quiz": [
+          { "q": "Why pick over dried lentils before cooking them?", "choices": ["To find tiny stones or dirt", "To count them", "To dry them"], "answer": 0, "explain": "They come straight from the field." },
+          { "q": "Which lentils would you use in a salad?", "choices": ["Brown lentils, because they hold their shape", "Red lentils, because they're faster", "Either one"], "answer": 0, "explain": "Red lentils fall apart." }
+        ]
+      },
+      "knowledge": {
+        "title": "Legume types and cook times",
+        "minutes": 35,
+        "body": [
+          "Legumes are the seeds of plants that grow their seeds in pods: beans, lentils, peas, and chickpeas. Dried, they keep for a year or more in the pantry, and they're one of the cheapest ways to feed a family. They're full of protein and fiber, and eaten with a grain, like beans with rice or lentils with bread, they give the body all the protein building blocks it needs.",
+          "Lentils are small and flat and cook fast, with no soak. Red lentils are sold split, with their skins off, and fall apart in 15 to 20 minutes, which is why they make smooth soups. Brown and green lentils keep their skins and hold their shape: 20 to 30 minutes. Split peas take 30 to 45 minutes and melt like red lentils.",
+          "Beans and chickpeas are bigger and harder. Soaked overnight, black beans and pinto beans take about 1 to 1½ hours of simmering, red kidney beans about 1½ hours after a 10-minute hard boil, and chickpeas 1½ to 2 hours. Unsoaked, each takes much longer and cooks less evenly.",
+          "These times are a guide. Old beans, from the back of the pantry, can take twice as long, so taste a few rather than trusting the clock. Acid slows softening: tomatoes, vinegar, or lemon added too early can keep beans firm for hours, so add them once the beans are tender. Salt in the pot is fine from the start.",
+          "Canned beans are already cooked. They're quick and good, but they cost more, and you can't control their texture or salt."
+        ],
+        "quiz": [
+          { "q": "Which of these cooks fastest?", "choices": ["Red lentils", "Chickpeas", "Kidney beans"], "answer": 0, "explain": "Split and skinless, they're done in 15 to 20 minutes." },
+          { "q": "Which keep their shape when cooked: red lentils or brown lentils?", "choices": ["Brown lentils", "Red lentils", "Both fall apart"], "answer": 0, "explain": "Brown lentils keep their skins." },
+          { "q": "When should you add tomatoes or vinegar to a pot of beans?", "choices": ["Once the beans are tender", "At the very start", "Into the soaking water"], "answer": 0, "explain": "Acid slows softening." },
+          { "q": "Your beans are still hard after the usual time. What's the likely reason?", "choices": ["They're old beans", "You salted the pot", "The pot was too big"], "answer": 0, "explain": "Old beans can take twice as long." },
+          { "q": "What does a legume eaten with a grain give you?", "choices": ["All the protein building blocks the body needs", "Twice the sugar", "Nothing extra"], "answer": 0, "explain": "Like beans with rice, or lentils with bread." }
+        ]
+      },
+      "sabbath": {
+        "title": "Freeze soup in portions",
+        "minutes": 45,
+        "body": [
+          "Soup is one of the best things to freeze. A batch made ahead and frozen in portions turns into several quick meals later. Many families keep soup in the freezer like this, so a meal is ready on a busy night, or so they can focus on resting.",
+          "Cool it first, the Unit 1 way: from 140°F to 70°F within 2 hours, then to 40°F within 4 more, in shallow containers, before it goes in the freezer. A hot pot in the freezer warms everything around it.",
+          "Liquids grow as they freeze. Leave about an inch of space at the top of every container, or it can crack or pop its lid. Freezer bags laid flat freeze fast and stack like books.",
+          "Most bean, lentil, and vegetable soups keep their best for 2 to 3 months. Soups with pasta or potatoes go soft, and soups with cream or milk can separate, so freeze those before the pasta or cream goes in. Thaw a portion in the fridge overnight and reheat it to 165°F, adding water, because lentil soups thicken as they sit."
+        ],
+        "steps": [
+          "Make a double batch of this week's red lentil soup, or set half of it aside.",
+          "Cool it the Unit 1 way and check it reaches 40°F.",
+          "Ladle it into freezer containers or bags in 1- or 2-person portions, leaving an inch of space at the top.",
+          "Label each with the soup's name and the date, and freeze bags flat on a sheet pan until solid, then stand them up.",
+          "Later in the week, thaw one portion in the fridge overnight and reheat it on the stove to 165°F, with a splash of water.",
+          "Write down how it compared with the fresh soup, and how long the frozen meal took."
+        ],
+        "quiz": [
+          { "q": "Why leave space at the top of a container of soup for the freezer?", "choices": ["Liquids grow as they freeze", "So it thaws faster", "To let air in"], "answer": 0, "explain": "A full container can crack or pop its lid." },
+          { "q": "What temperature does thawed soup need to reach when you reheat it?", "choices": ["165°F", "140°F", "100°F"], "answer": 0, "explain": "Every reheated leftover goes to 165°F." }
+        ]
+      },
+      "swapIns": ["misir-wot"]
+    },
+    {
+      "week": 18,
+      "unit": 5,
+      "skill": "cooking-legumes",
+      "recipe": "red-beans-and-rice",
+      "note": "Beef sausage, collagen-cased or skinless, or none",
+      "drill": {
+        "title": "Quick-soak vs. overnight soak",
+        "minutes": 40,
+        "body": [
+          "You'll soak two batches of the same beans two ways, cook them side by side, and see whether the overnight soak is worth planning for. Start the overnight batch the evening before."
+        ],
+        "steps": [
+          "The evening before: pick over and rinse 1 cup of dried black beans. Put them in a bowl with 4 cups of cold water and leave them overnight.",
+          "The next day: pick over and rinse another 1 cup of black beans. Put them in a saucepan with 4 cups of water, boil them for 2 minutes, turn off the heat, put the lid on, and leave them for 1 hour.",
+          "Drain both batches and measure them in a measuring cup. Write down how much each one grew, and look at their skins.",
+          "Put each batch in its own saucepan with fresh water to cover by 2 inches and a pinch of salt. Bring both to a boil, then simmer gently with the lids slightly open.",
+          "From 45 minutes on, taste 3 beans from each pot every 10 minutes, letting them cool first. Write down when each batch is creamy all the way through, and how many split skins each has.",
+          "Cool the cooked beans the Unit 1 way and store them in their liquid in the fridge for up to 4 days, for tacos, rice, or soup."
+        ],
+        "quiz": [
+          { "q": "What's the first step of a quick soak?", "choices": ["Boil the beans for 2 minutes", "Freeze them", "Rinse them in hot water"], "answer": 0, "explain": "Then they sit covered for an hour." },
+          { "q": "Why taste three beans, not one?", "choices": ["Beans in one pot don't all cook at the same speed", "To get more flavor", "One is too small to taste"], "answer": 0, "explain": "Every bean you taste should be creamy." }
+        ]
+      },
+      "knowledge": {
+        "title": "Why beans are soaked",
+        "minutes": 35,
+        "body": [
+          "A dried bean is a seed, sealed up hard and dry so it can wait months to sprout. Soaking wakes it up: overnight in plenty of cold water, a bean drinks about its own weight in water and swells to twice its size.",
+          "Soaking makes beans cook faster and more evenly. Unsoaked, the outside of a bean softens and splits long before the middle is done. Soaked, water is already in the middle when the heat starts, so the whole bean cooks together.",
+          "Soaking also washes out some of the sugars in beans that people can't digest. Those sugars are what make beans gassy. Pouring off the soaking water and cooking in fresh water helps.",
+          "There are two ways. An overnight soak takes 8 to 12 hours in cold water. A quick soak takes about an hour: boil the beans for 2 minutes, turn off the heat, cover them, and leave them. Both work; the overnight soak gives slightly more even beans. Lentils and split peas don't need either.",
+          "Red kidney beans need one more step. Raw or undercooked, they contain a natural toxin, and as few as four or five raw beans can make a person very sick. Soaking doesn't remove it. Boiling hard for 10 minutes does, which is why every kidney bean recipe starts with a hard boil. A slow cooker on low may never get hot enough. Canned kidney beans are already cooked and safe."
+        ],
+        "quiz": [
+          { "q": "About how big does a bean get after an overnight soak?", "choices": ["About twice its size", "The same size", "Ten times its size"], "answer": 0, "explain": "It drinks about its own weight in water." },
+          { "q": "Why do soaked beans cook more evenly?", "choices": ["Water is already in the middle when the heat starts", "Soaking softens the skins only", "They're warmer"], "answer": 0, "explain": "Unsoaked, the outside splits before the middle is done." },
+          { "q": "How do you quick-soak beans?", "choices": ["Boil 2 minutes, then cover and leave about an hour", "Soak them in hot tap water for 10 minutes", "Microwave them dry"], "answer": 0, "explain": "It works nearly as well as overnight." },
+          { "q": "What makes red kidney beans safe to eat?", "choices": ["Boiling them hard for 10 minutes", "Soaking them overnight", "Cooking them on low all day"], "answer": 0, "explain": "Soaking doesn't remove the toxin; a hard boil does." },
+          { "q": "Which of these needs no soak?", "choices": ["Lentils", "Chickpeas", "Black beans"], "answer": 0, "explain": "They're small and thin enough to cook through quickly." }
+        ]
+      },
+      "sabbath": {
+        "title": "Soak beans ahead",
+        "minutes": 45,
+        "body": [
+          "Dried beans take planning: a night of soaking and a couple of hours of simmering. Many families soak and cook a big batch ahead and freeze it in portions, so beans are as ready as a can later in the week, or so they can focus on resting.",
+          "Soaked beans that you can't cook right away can be drained and kept in the fridge for up to 2 days. Cooked beans keep 4 days in the fridge, and about 6 months in the freezer.",
+          "Freeze cooked beans in some of their cooking liquid. It keeps them from drying out and freezer-burning. About 1½ cups of beans is the same as one 15-ounce can, so freezing in that size makes them easy to use in any recipe."
+        ],
+        "steps": [
+          "Pick over and rinse 1 pound of dried beans: black, pinto, or chickpeas.",
+          "Soak them overnight in a large bowl with 8 cups of cold water.",
+          "Drain, rinse, and simmer them in fresh water to cover by 2 inches, with a teaspoon of salt, until they're creamy all the way through.",
+          "Cool them in their liquid the Unit 1 way.",
+          "Pack them in 1½-cup portions with enough liquid to cover, leaving an inch of space at the top. Label them with the bean and the date, and freeze them.",
+          "Later in the week, thaw a portion in the fridge and use it in place of a can of beans. Write down the meal you made."
+        ],
+        "quiz": [
+          { "q": "How many cups of cooked beans equal one 15-ounce can?", "choices": ["About 1½ cups", "About ½ cup", "About 4 cups"], "answer": 0, "explain": "Freeze them in that size." },
+          { "q": "Why freeze beans in some of their cooking liquid?", "choices": ["It keeps them from drying out", "It makes them cook faster", "It makes them spicier"], "answer": 0, "explain": "Beans frozen dry get freezer burn." }
+        ]
+      },
+      "swapIns": ["cuban-black-beans"]
+    },
+    {
+      "week": 19,
+      "unit": 5,
+      "skill": "cooking-grains",
+      "recipe": "rice-pilaf",
+      "drill": {
+        "title": "Toast grains in fat before liquid",
+        "minutes": 40,
+        "body": [
+          "Does toasting really make a difference? You'll cook two small batches of rice exactly the same way, except that one is toasted first, and compare them."
+        ],
+        "steps": [
+          "Rinse 1 cup of long-grain white rice until the water is only a little cloudy, and split it into two ½-cup piles.",
+          "Batch 1, plain: put ½ cup of rice and ¾ cup of water in a small saucepan with a pinch of salt.",
+          "Batch 2, toasted: melt 1 tablespoon of butter or oil in a second small saucepan over medium heat. Add the other ½ cup of rice and stir until the edges of the grains turn see-through and it smells nutty, about 3 minutes. Stand back and add ¾ cup of water heated in the microwave, and a pinch of salt.",
+          "Bring both to a boil, then turn them to the lowest heat, put the lids on, and cook 15 minutes without lifting the lids. Turn off the heat and rest 10 minutes.",
+          "Fluff both with a fork. Compare them side by side: color, smell, stickiness, and taste. Write down which you'd serve and why.",
+          "Eat them as a side this week, or cool them the Unit 1 way and keep them in the fridge for up to 4 days."
+        ],
+        "quiz": [
+          { "q": "How do you know the rice is toasted enough?", "choices": ["The edges of the grains turn see-through and it smells nutty", "It turns dark brown", "It starts to pop"], "answer": 0, "explain": "Dark brown is burnt." },
+          { "q": "Why does the water go into the toasted rice hot?", "choices": ["So the pan stays at a boil and the rice cooks evenly", "So the butter melts", "To save time washing up"], "answer": 0, "explain": "Cold water stops the cooking." }
+        ]
+      },
+      "knowledge": {
+        "title": "Absorption vs. pasta method; ratios",
+        "minutes": 35,
+        "body": [
+          "There are two main ways to cook a grain. In the absorption method, the grain cooks in a measured amount of water and drinks all of it, so nothing is drained. Rice, quinoa, bulgur, and couscous are usually cooked this way. In the pasta method, the grain boils in plenty of water and is drained when it's tender, like pasta. Barley, farro, wild rice, and brown rice cook well this way.",
+          "The absorption method needs a ratio: how much liquid for each cup of grain. Rinsed long-grain white rice takes about 1½ cups of water per cup (15 minutes, then a rest). Brown rice takes about 2 cups (45 minutes). Quinoa takes 2 cups (15 minutes), and needs a good rinse first to wash off its bitter coating. Coarse bulgur takes 2 cups (15 minutes). Couscous takes 1¼ cups of boiling water poured over it, with 5 minutes covered off the heat.",
+          "The pasta method needs no ratio at all, which makes it forgiving: taste the grain, and drain it when it's done. The cost is the flavor and nutrients that pour down the sink with the water.",
+          "A pilaf is the absorption method with one step added: the grain is toasted in fat first. Every grain gets a coat of fat that keeps it separate, and the toasting adds a nutty flavor. Bulgur, orzo, and many other grains can be cooked as a pilaf too.",
+          "Whatever the method, keep the lid on and the stirring out once the grain is simmering. Lifting the lid lets out the steam that finishes the cooking, and stirring breaks grains and makes them sticky."
+        ],
+        "quiz": [
+          { "q": "In the absorption method, what happens to the water?", "choices": ["The grain drinks all of it", "You drain it off", "It boils away with the lid off"], "answer": 0, "explain": "That's why the ratio matters." },
+          { "q": "About how much water does a cup of rinsed long-grain white rice take?", "choices": ["1½ cups", "4 cups", "½ cup"], "answer": 0, "explain": "Brown rice takes about 2." },
+          { "q": "Why rinse quinoa before cooking it?", "choices": ["To wash off its bitter coating", "To make it cook faster", "To add salt"], "answer": 0, "explain": "The coating tastes soapy and bitter." },
+          { "q": "What makes a pilaf a pilaf?", "choices": ["The grain is toasted in fat before the liquid", "It's drained like pasta", "It's stirred the whole time"], "answer": 0, "explain": "Toasting coats each grain and adds flavor." },
+          { "q": "What's the advantage of the pasta method?", "choices": ["No ratio to get right; drain when it's done", "It keeps all the nutrients", "It's always faster"], "answer": 0, "explain": "The cost is what pours down the sink." }
+        ]
+      },
+      "sabbath": {
+        "title": "Daniel's diet (Daniel 1)",
+        "minutes": 45,
+        "body": [
+          "When Babylon conquered Jerusalem, King Nebuchadnezzar took young men of Judah's royal and noble families to train for his court, among them Daniel, Hananiah, Mishael, and Azariah. The king gave them a daily portion of the food he ate and the wine he drank (Daniel 1:3–5).",
+          "\"But Daniel resolved that he would not defile himself with the king's food, or with the wine that he drank\" (Daniel 1:8). The king's table likely served meat God's law called unclean, or meat not prepared the way the law required, and food and wine offered first to Babylon's gods.",
+          "Daniel didn't refuse rudely. He asked the official in charge for permission, and when the official was afraid, he offered a test: \"Test your servants for ten days; let us be given vegetables to eat and water to drink\" (Daniel 1:12). The Hebrew word for vegetables means things grown from seed, which would include grains and legumes like the ones in this unit.",
+          "\"At the end of ten days it was seen that they were better in appearance and fatter in flesh than all the youths who ate the king's food\" (Daniel 1:15). God gave the four young men learning and skill, and the king found them ten times better than all the wise men of his kingdom (Daniel 1:17–20)."
+        ],
+        "steps": [
+          "Read Daniel 1.",
+          "Answer in writing: why did Daniel refuse the king's food?",
+          "Answer in writing: how did Daniel ask for a change? What can you learn from the way he asked, not just what he asked for?",
+          "Plan one day of meals made from foods grown from seed: grains, beans, lentils, vegetables, and fruit. Use at least one dish from this unit.",
+          "With your family, cook one of those meals this week, and talk about Daniel 1 while you eat."
+        ],
+        "quiz": [
+          { "q": "What did Daniel ask to eat and drink during the test?", "choices": ["Vegetables and water", "Bread and wine", "Meat and milk"], "answer": 0, "explain": "Daniel 1:12." },
+          { "q": "How long was the test?", "choices": ["Ten days", "Forty days", "Three years"], "answer": 0, "explain": "Daniel 1:12–15." },
+          { "q": "What does the Hebrew word for \"vegetables\" in Daniel 1 mean?", "choices": ["Things grown from seed", "Only leafy greens", "Fruit"], "answer": 0, "explain": "It would include grains and legumes." }
+        ]
+      },
+      "swapIns": ["jollof-rice", "bulgur-pilaf"]
+    },
+    {
+      "week": 20,
+      "unit": 5,
+      "skill": "cooking-legumes",
+      "recipe": "mujaddara",
+      "mastery": true,
+      "note": "Lentils and rice",
+      "drill": {
+        "title": "Cook a grain without a recipe card",
+        "minutes": 40,
+        "body": [
+          "No recipe card this time. Cook the grain you picked on the worksheet, using what you've learned this unit. Plan first, then cook. An adult is nearby, but doesn't help."
+        ],
+        "steps": [
+          "Write your plan: the grain, how much, whether you'll rinse it or toast it, the method (absorption or pasta), the liquid and how much, and the time.",
+          "Cook it by your plan. Taste it near the end and adjust if you need to.",
+          "Judge it: is every grain tender? Is it separate or sticky? Is there water left, or did it scorch? Write down what you'd change.",
+          "Season it and serve it as a side this week, or cool it the Unit 1 way and keep it in the fridge for up to 4 days."
+        ],
+        "quiz": [
+          { "q": "You cooked a grain by absorption and there's water left in the pan. What do you do?", "choices": ["Cook it a few more minutes with the lid off", "Add more water", "Drain it and start over"], "answer": 0, "explain": "Next time, use a little less liquid." },
+          { "q": "Your rice came out sticky. What's a likely cause?", "choices": ["It wasn't rinsed, or it was stirred while cooking", "It was toasted", "The lid stayed on"], "answer": 0, "explain": "Loose starch and broken grains make it sticky." }
+        ]
+      },
+      "knowledge": {
+        "title": "Grains of the world worksheet",
+        "minutes": 35,
+        "body": [
+          "This is the unit quiz. First fill in the worksheet from what you know and can look up, then answer the questions without looking back at weeks 17 to 19.",
+          "Almost every cuisine is built on a grain. Rice feeds much of Asia, and long-grain rice runs through Turkey, Lebanon, Louisiana, and West Africa. Wheat is cracked into bulgur in the Middle East and rolled into couscous in North Africa. Corn is ground into polenta in Italy and grits in the American South. Teff, a tiny grain, makes Ethiopia's spongy injera bread. Quinoa comes from the Andes Mountains of South America; it's really a seed, but it's cooked like a grain. Barley thickens soups across Europe, and oats are Scotland's porridge."
+        ],
+        "steps": [
+          "Make a chart with four columns: Grain, Where it comes from, How it's cooked (absorption or pasta method), and A dish.",
+          "Fill in a row for rice, bulgur, couscous, polenta, teff, quinoa, barley, and oats.",
+          "Put a star next to each grain you've cooked yourself.",
+          "Pick one grain you haven't cooked, look up its ratio or method, and write it on the chart for this week's drill."
+        ],
+        "quiz": [
+          { "q": "Which grain makes Ethiopia's injera bread?", "choices": ["Teff", "Quinoa", "Barley"], "answer": 0, "explain": "A tiny grain from the Horn of Africa." },
+          { "q": "What is bulgur?", "choices": ["Cracked wheat", "A kind of rice", "Ground corn"], "answer": 0, "explain": "Fine bulgur went into Unit 3's tabbouleh." },
+          { "q": "Which is really a seed, but cooked like a grain?", "choices": ["Quinoa", "Rice", "Oats"], "answer": 0, "explain": "It comes from the Andes." },
+          { "q": "Unit review: which legume needs a 10-minute hard boil to be safe?", "choices": ["Red kidney beans", "Red lentils", "Chickpeas"], "answer": 0, "explain": "It destroys a natural toxin." },
+          { "q": "Unit review: which need no soaking?", "choices": ["Lentils", "Black beans", "Chickpeas"], "answer": 0, "explain": "They're small and thin." },
+          { "q": "Unit review: when do tomatoes or vinegar go into a pot of beans?", "choices": ["Once the beans are tender", "At the start", "In the soaking water"], "answer": 0, "explain": "Acid slows softening." },
+          { "q": "Unit review: what makes a pilaf a pilaf?", "choices": ["The grain is toasted in fat before the liquid", "It's drained like pasta", "It's stirred the whole time"], "answer": 0, "explain": "Toasting coats each grain." },
+          { "q": "Unit review: about how much water does a cup of rinsed long-grain white rice take?", "choices": ["1½ cups", "3 cups", "½ cup"], "answer": 0, "explain": "Brown rice takes about 2." },
+          { "q": "Unit review: in mujaddara, why do the lentils cook first?", "choices": ["They take longer than rice", "To make them mushy", "To clean them"], "answer": 0, "explain": "The head start lets them finish together." }
+        ]
+      },
+      "sabbath": {
+        "title": "Cook grains ahead and reheat them with steam",
+        "minutes": 45,
+        "body": [
+          "Cooked grains keep well, so a big pot cooked ahead becomes quick meals all week: rice for stir-fries, bulgur for salads, quinoa for bowls. Many families cook grains ahead like this, so a meal later in the week comes together fast, or so they can focus on resting.",
+          "Cooked rice needs care, as Unit 1 taught: its spores survive cooking and grow if it sits warm. Spread hot grains out on a sheet pan to cool fast, and get them into the fridge within an hour. They keep 4 days in the fridge, or 2 to 3 months in the freezer.",
+          "Cold grains go hard and dry, because their starch firms up as it chills. Steam brings them back: a little water and a cover. Sprinkle about a tablespoon of water over each cup, cover the dish or pan, and heat until it's steaming hot and reads 165°F. Fluff with a fork."
+        ],
+        "steps": [
+          "Cook a double batch of rice, bulgur, or quinoa by its ratio.",
+          "Spread it on a sheet pan to cool, then pack it into containers within an hour of cooking. Label them with the grain and the date.",
+          "Freeze one container, and keep the rest in the fridge.",
+          "Later in the week, reheat a portion with steam: sprinkle on a tablespoon of water per cup, cover it, and heat it in the microwave or a covered pan until it reads 165°F.",
+          "Compare it with a portion reheated with no water and no cover. Write down the difference.",
+          "Use the rest in a meal this week."
+        ],
+        "quiz": [
+          { "q": "Why do cold grains turn hard and dry?", "choices": ["Their starch firms up as it chills", "The water freezes", "They lose their salt"], "answer": 0, "explain": "Steam softens it again." },
+          { "q": "How soon should cooked rice go into the fridge?", "choices": ["Within an hour", "The next morning", "Once it's room temperature, any time"], "answer": 0, "explain": "Spores in rice grow if it sits warm." }
+        ]
+      },
+      "swapIns": ["koshari"]
+    },
+    {
+      "week": 21,
+      "unit": 6,
+      "skill": "cooking-fish",
+      "recipe": "baked-salmon",
+      "swapIns": ["honey-soy-salmon", "bbq-salmon"],
+      "drill": {
+        "title": "Check a fillet for pin bones",
+        "minutes": 40,
+        "body": [
+          "Many fish have a row of thin, soft pin bones that the filleting knife misses. You'll learn to find them by feel and pull them out, then compare a few kinds of fillet."
+        ],
+        "steps": [
+          "Get one skin-on salmon or trout fillet, and one cod or tilapia fillet if you can.",
+          "Lay the salmon or trout skin side down. Run your fingertips slowly along the middle of the thick end, from the head end toward the tail, then back the other way. Feel for little hard tips poking up.",
+          "Press the flesh down gently on either side of a bone so it stands up. Grip its tip with clean tweezers and pull it out toward the head end, at the same angle it lies, so the flesh doesn't tear.",
+          "Line up the bones you pulled on a paper towel and count them. Check the fillet once more.",
+          "Check the white fish fillet the same way. Write down which had pin bones and where.",
+          "Wash your hands, the tweezers, and everything the raw fish touched. Wrap the fillets and keep them in the coldest part of the fridge to cook within a day, in this week's recipe if you like."
+        ],
+        "quiz": [
+          { "q": "Which way do you pull a pin bone?", "choices": ["Toward the head end, at the angle it lies", "Straight up as hard as you can", "Toward the tail"], "answer": 0, "explain": "Pulled the right way, the flesh doesn't tear." },
+          { "q": "How long can raw fish wait in the fridge?", "choices": ["About a day", "A week", "A month"], "answer": 0, "explain": "Cook it within a day or freeze it." }
+        ]
+      },
+      "knowledge": {
+        "title": "Fins and scales: clean vs. unclean species",
+        "minutes": 35,
+        "body": [
+          "For animals that live in water, God gave Israel one test with two parts: \"Everything in the waters that has fins and scales, whether in the seas or in the rivers, you may eat\" (Leviticus 11:9). Anything in the water without both is unclean (Leviticus 11:10–12; Deuteronomy 14:9–10).",
+          "Fins are easy to see. Scales are the thin, overlapping plates that cover most fish like roof tiles. Some fish have scales so small you have to look closely, like tuna and mackerel, but they're there, and the fish is clean.",
+          "Clean fish this app uses include salmon, trout, cod, tilapia, pollock, haddock, halibut, tuna, sardines, anchovies, and many more: carp, herring, mackerel, smelt, whitefish, perch, walleye, pike, bass, barramundi, mahi-mahi, snapper, grouper, sole, and flounder.",
+          "What the test leaves out: every animal with a shell, the soft sea animals with arms and no backbone, and fish with smooth, slippery skin and no scales, such as the whiskered bottom-feeders sold as swai or basa, and monkfish. Swordfish and sturgeon lose most of their scales as they grow, and people disagree about them, so this app leaves them out.",
+          "Once a fish is filleted and its skin is off, you can't see the scales anymore. That's why the name on the label matters, which is next week's knowledge page."
+        ],
+        "quiz": [
+          { "q": "What two things must a water animal have to be clean?", "choices": ["Fins and scales", "Fins and a tail", "Scales and gills"], "answer": 0, "explain": "Leviticus 11:9." },
+          { "q": "Tuna's scales are so small they're hard to see. Is tuna clean?", "choices": ["Yes, it has fins and scales", "No, the scales are too small", "Only canned tuna"], "answer": 0, "explain": "Small scales are still scales." },
+          { "q": "A fish has fins but smooth skin with no scales. Is it clean?", "choices": ["No, it needs both", "Yes, fins are enough", "Only if it lives in a river"], "answer": 0, "explain": "Both parts of the test." },
+          { "q": "Why does this app leave out swordfish?", "choices": ["It loses most of its scales as it grows, so people disagree", "It has no fins", "It's too big"], "answer": 0, "explain": "When in doubt, it's left out." },
+          { "q": "Which of these is clean?", "choices": ["Trout", "Swai", "Monkfish"], "answer": 0, "explain": "Swai and monkfish have smooth skin and no scales." }
+        ]
+      },
+      "sabbath": {
+        "title": "Dishes that serve well cold",
+        "minutes": 45,
+        "body": [
+          "Some dishes taste just as good cold as hot, so they can be made a day ahead and set out with no cooking at all: baked fish with a cool sauce, grain salads, lentil and bean salads. Many families serve a cold meal like this, so there's nothing to cook later in the week, or so they can focus on resting.",
+          "Cold food stays safe the Unit 1 way: cooked food is cooled and in the fridge within 2 hours, kept at 40°F or colder until it's served, and put back within 2 hours of coming out (1 hour on a hot day over 90°F).",
+          "Cold dulls flavor, so a dish meant to be eaten cold needs a little more salt and a squeeze of lemon or a splash of vinegar. Taste it cold, not warm, before you serve it."
+        ],
+        "steps": [
+          "Bake extra fish when you make this week's recipe, and chill it, covered, within 2 hours.",
+          "Stir together a cool sauce: 1 cup of plain yogurt, a grated cucumber squeezed dry, a spoonful of chopped dill, lemon juice, and salt. Keep it in the fridge.",
+          "Make a grain or legume salad from Unit 5: cooked rice, bulgur, or lentils with chopped vegetables from Unit 3, olive oil, lemon, and salt. Chill it.",
+          "Label everything with the date.",
+          "Later in the week, set out the cold fish with the sauce and the salad. Taste each cold and add salt or lemon if it needs it.",
+          "Put everything back in the fridge within 2 hours of setting it out."
+        ],
+        "quiz": [
+          { "q": "How long can a cold dish sit out on the table?", "choices": ["Up to 2 hours, or 1 hour on a hot day", "All day", "Ten minutes"], "answer": 0, "explain": "Then it goes back in the fridge." },
+          { "q": "Why taste a cold dish cold before serving it?", "choices": ["Cold dulls flavor, so it may need more salt or lemon", "To check it's frozen", "To warm it up"], "answer": 0, "explain": "It tastes different warm." }
+        ]
+      },
+      "note": "Any clean fillet, with a side from an earlier week, timed to finish together"
+    },
+    {
+      "week": 22,
+      "unit": 6,
+      "skill": "cooking-fish",
+      "recipe": "steamed-fish",
+      "drill": {
+        "title": "Judge freshness by smell, eyes, flesh",
+        "minutes": 40,
+        "body": [
+          "Fresh fish tells you it's fresh with its smell, its eyes, and its flesh. Take this drill to the fish counter with an adult, or use the fish you're buying for this week's recipe."
+        ],
+        "steps": [
+          "At the counter, look at a whole fish if there is one. Fresh eyes are clear and bulge a little; old ones are cloudy and sunken. Fresh gills are bright red, not brown.",
+          "Look at the fillets. Fresh flesh is moist and shiny, with no dry or browning edges, and the flakes hold together without gaps.",
+          "Ask to smell the fish you're buying. Fresh fish smells clean, like cold water or the sea. A strong fishy or sour smell means it's old.",
+          "At home, press the fillet gently with a fingertip. Fresh flesh springs back; old flesh keeps the dent.",
+          "Write down what you saw, smelled, and felt for each fish you checked.",
+          "Keep the fish in the coldest part of the fridge, on a plate on the bottom shelf, and cook it within a day."
+        ],
+        "quiz": [
+          { "q": "How do fresh fish eyes look?", "choices": ["Clear and bulging a little", "Cloudy and sunken", "Red"], "answer": 0, "explain": "Cloudy, sunken eyes mean an old fish." },
+          { "q": "What should fresh fish smell like?", "choices": ["Clean, like cold water or the sea", "Strongly fishy", "Sour"], "answer": 0, "explain": "A strong fishy smell means it's old." }
+        ]
+      },
+      "knowledge": {
+        "title": "Store-bought fish: reading labels and names",
+        "minutes": 35,
+        "body": [
+          "A fillet with its skin off can't show you its scales, so the label has to. In the United States, fish labels must name the fish and say where it came from and whether it was wild-caught or farm-raised. Read the name first, every time.",
+          "Some names are general. \"Whitefish\" can mean a real whitefish, or it can be a catch-all for any white-fleshed fish. \"Sea bass\" and \"rockfish\" cover several kinds. When a label is vague, ask at the counter which fish it is, and pass on it if no one knows.",
+          "Some cheap white fillets come from smooth-skinned river fish with no scales, sold as swai or basa. They look just like cod or tilapia, so read the label.",
+          "Prepared fish hides even more. Fish sticks and frozen fish fillets are usually pollock or cod, and the box says so. Imitation seafood sticks, called surimi, are often pollock but can include extracts from animals that aren't clean, so skip them unless the full ingredient list is clean.",
+          "Frozen fish is often fresher than \"fresh\": it's frozen on the boat or soon after. Fish labeled \"previously frozen\" at the counter should be cooked within a day and not frozen again."
+        ],
+        "quiz": [
+          { "q": "What's the first thing to read on a fish label?", "choices": ["The name of the fish", "The price", "The weight"], "answer": 0, "explain": "Without the skin, you can't see the scales." },
+          { "q": "A label says only \"whitefish\". What do you do?", "choices": ["Ask which fish it is, and pass if no one knows", "Buy it; all white fish are clean", "Smell it"], "answer": 0, "explain": "It can be a catch-all name." },
+          { "q": "Why read the full ingredient list on imitation seafood sticks?", "choices": ["They can include extracts from animals that aren't clean", "They're always clean", "They have no ingredients"], "answer": 0, "explain": "They're often pollock, but not always only pollock." },
+          { "q": "Why can frozen fish be fresher than fish at the counter?", "choices": ["It's often frozen on the boat, right after it's caught", "Freezing adds flavor", "It's caught closer to home"], "answer": 0, "explain": "\"Fresh\" fish may have traveled for days." }
+        ]
+      },
+      "sabbath": {
+        "title": "Loaves and fishes, and breakfast on the shore (Matthew 14:13–21; John 21:9–13)",
+        "minutes": 45,
+        "body": [
+          "Fish was everyday food around the Sea of Galilee, where several of Jesus' disciples were fishermen. Twice the Gospels show Jesus feeding people bread and fish.",
+          "Once, a crowd followed him into a remote place. When evening came, the disciples had only five loaves and two fish. Jesus looked up to heaven, blessed the food, broke the loaves, and gave them to the disciples to hand out. \"And they all ate and were satisfied. And they took up twelve baskets full of the broken pieces left over\" (Matthew 14:20). About five thousand men ate, besides women and children.",
+          "After his resurrection, Jesus met seven of his disciples at the lake after a night of catching nothing. He told them where to cast the net, and they hauled in 153 large fish (John 21:11). On the shore \"they saw a charcoal fire in place, with fish laid out on it, and bread\" (John 21:9). \"Jesus said to them, 'Come and have breakfast'\" (John 21:12), and he served them the bread and the fish himself.",
+          "Both meals were simple: bread and fish. In one, Jesus fed thousands from almost nothing; in the other, he cooked for a few tired friends."
+        ],
+        "steps": [
+          "Read Matthew 14:13–21.",
+          "Read John 21:1–14.",
+          "Answer in writing: what did Jesus do with the food before it was handed out in Matthew 14:19?",
+          "Answer in writing: in John 21, who cooked breakfast, and what does that show you about him?",
+          "Cook a simple meal of bread and fish for your family this week, from this week's recipe or week 21's, and serve it to them yourself."
+        ],
+        "quiz": [
+          { "q": "How many loaves and fish did the disciples have?", "choices": ["Five loaves and two fish", "Seven loaves and three fish", "Two loaves and five fish"], "answer": 0, "explain": "Matthew 14:17." },
+          { "q": "How many baskets of leftovers were taken up?", "choices": ["Twelve", "Seven", "None"], "answer": 0, "explain": "Matthew 14:20." },
+          { "q": "What did Jesus say to the disciples on the shore in John 21?", "choices": ["\"Come and have breakfast\"", "\"Go and fish again\"", "\"Bring me bread\""], "answer": 0, "explain": "John 21:12." }
+        ]
+      },
+      "note": "Steamed on a plate over foil balls in the large pot; the adult pours the hot oil"
+    },
+    {
+      "week": 23,
+      "unit": 6,
+      "skill": "cooking-fish",
+      "recipe": "poached-cod",
+      "swapIns": ["moqueca"],
+      "drill": {
+        "title": "Test doneness by flaking",
+        "minutes": 40,
+        "body": [
+          "You'll poach three small pieces of fish for different times and learn what undercooked, just right, and overcooked look and feel like, checked against the thermometer."
+        ],
+        "steps": [
+          "Cut a cod or tilapia fillet into three pieces the same size. Wash your hands and everything the raw fish touched.",
+          "Bring a saucepan of water with a pinch of salt to a bare simmer: a bubble now and then, not a boil. Add all three pieces.",
+          "At 3 minutes, lift one piece out onto a plate. Check its temperature in the thickest part, press it with a fork, and look at the middle.",
+          "At 6 minutes, lift out the second piece and check it the same way. At 9 minutes, the third.",
+          "Write down each piece's temperature, color in the middle, how it flaked, and how it tasted. Which was closest to 145°F, and how did it look?",
+          "Eat the pieces that reached 145°F or more, with lemon and salt. Put any that didn't back in the water until they do."
+        ],
+        "quiz": [
+          { "q": "How does fish that's just done look in the middle?", "choices": ["Solid, not see-through, and flakes easily", "See-through and glossy", "Dry and stringy"], "answer": 0, "explain": "And it reads 145°F." },
+          { "q": "What does poaching water look like?", "choices": ["A bubble now and then, not a boil", "A rolling boil", "Still and cold"], "answer": 0, "explain": "A hard boil breaks fish apart." }
+        ]
+      },
+      "knowledge": {
+        "title": "Why fish cooks faster than meat",
+        "minutes": 35,
+        "body": [
+          "A beef chuck roast needs hours; a piece of cod is done in minutes. The difference is in how the muscles are built.",
+          "Fish float in water, so their muscles don't hold up their weight the way a cow's legs do. Fish muscle comes in short, thin layers, the flakes, held together by very thin sheets of connective tissue. Beef has much more connective tissue, and tougher, which is why Unit 4's chuck needed hours to melt it.",
+          "Fish proteins also set at lower temperatures. Most fish live in cold water, and their proteins start to firm and turn opaque at around 120°F, well below beef's. By 145°F, fish is cooked through. A few degrees past that, the flakes squeeze out their juice and turn dry.",
+          "That's why fish suits gentle methods (baking, steaming, poaching) and why it's checked early and often. Thin pieces finish first, so cook pieces of the same thickness together, or take the thin ones out early.",
+          "Fish keeps cooking for a minute or two after it leaves the heat, from the heat stored inside it. Pulled right at 145°F, it stays moist."
+        ],
+        "quiz": [
+          { "q": "Why does fish have so little connective tissue?", "choices": ["Water holds up its weight, so its muscles don't have to", "Fish are young", "Fish are cold"], "answer": 0, "explain": "Beef muscles hold up a heavy animal." },
+          { "q": "At about what temperature do fish proteins start to firm?", "choices": ["120°F", "200°F", "70°F"], "answer": 0, "explain": "Well below beef's." },
+          { "q": "What happens a few degrees past 145°F?", "choices": ["The flakes squeeze out their juice and dry out", "It gets more tender", "Nothing"], "answer": 0, "explain": "Fish has little room for error." },
+          { "q": "What are the flakes in cooked fish?", "choices": ["Thin layers of muscle", "Bits of skin", "Fat"], "answer": 0, "explain": "Held together by thin sheets of connective tissue." }
+        ]
+      },
+      "sabbath": {
+        "title": "Make a sauce ahead, finish the dish fresh",
+        "minutes": 45,
+        "body": [
+          "Cooked fish doesn't reheat well: it dries out and its smell gets stronger. But the sauce it cooks in reheats perfectly. So many cooks make the sauce ahead and cook the fish fresh, in minutes, right before eating. Many families plan meals this way, so the longest part is done ahead, or so they can focus on resting.",
+          "A tomato sauce like this week's keeps 4 days in the fridge or 3 months in the freezer. Cool it the Unit 1 way. To finish, bring it back to a simmer and poach the fish in it.",
+          "The same idea works for other dishes: a curry sauce ahead, chicken cooked in it fresh; a stir-fry sauce mixed ahead, the stir-fry cooked in minutes."
+        ],
+        "steps": [
+          "Make a double batch of this week's tomato sauce, without the fish.",
+          "Cool it the Unit 1 way, divide it into containers, and label them with the date. Keep one in the fridge and freeze the other.",
+          "Later in the week, bring the fridge portion to a gentle simmer in a skillet.",
+          "Nestle in fresh fish, put the lid on, and poach it until it reads 145°F and flakes.",
+          "Write down how long the meal took from the fridge to the table."
+        ],
+        "quiz": [
+          { "q": "Why make the sauce ahead but cook the fish fresh?", "choices": ["Cooked fish dries out and smells stronger when reheated", "Fish can't be frozen", "The sauce tastes better old"], "answer": 0, "explain": "The sauce reheats well; fish doesn't." },
+          { "q": "How long does a tomato sauce keep in the fridge?", "choices": ["4 days", "2 weeks", "1 day"], "answer": 0, "explain": "Or 3 months in the freezer." }
+        ]
+      }
+    },
+    {
+      "week": 24,
+      "unit": 6,
+      "skill": "cooking-fish",
+      "recipe": "pan-seared-trout",
+      "mastery": true,
+      "note": "Or tilapia",
+      "swapIns": ["blackened-cod", "pineapple-teriyaki-salmon"],
+      "drill": {
+        "title": "Sear a fillet skin-side down: dry it, press it flat, wait for it to release",
+        "minutes": 40,
+        "body": [
+          "Before this week's mastery recipe, practice the one hard part on a single fillet: crisp skin that lets go of the pan on its own."
+        ],
+        "steps": [
+          "Pat one skin-on salmon or trout fillet very dry on both sides, and salt the skin. Wash your hands and everything the raw fish touched.",
+          "Turn the stove fan on high. Heat a tablespoon of oil in a skillet over medium-high heat until it shimmers.",
+          "Lay the fillet in skin side down, away from you, and press it flat with a spatula for 15 seconds.",
+          "Leave it alone. Watch the side of the fillet: the flesh turns from see-through to solid, working up from the pan. Every 30 seconds, nudge it with the spatula. Write down when it slides free.",
+          "When it's solid about three-quarters of the way up, turn it and cook 1 minute more. Check that it reads 145°F.",
+          "Eat it skin side up, and write down how crisp the skin was and what you'd change for the mastery cook."
+        ],
+        "quiz": [
+          { "q": "Why press the fillet for the first 15 seconds?", "choices": ["The skin shrinks and curls, and pressing keeps it flat", "To squeeze out water", "To cook it faster"], "answer": 0, "explain": "Flat skin crisps evenly." },
+          { "q": "How do you know how far the fish has cooked without turning it?", "choices": ["Watch the flesh turn solid up the side", "Smell it", "Count to 100"], "answer": 0, "explain": "Turn it at about three-quarters of the way up." }
+        ]
+      },
+      "knowledge": {
+        "title": "Species ID quiz",
+        "minutes": 35,
+        "body": [
+          "This is the unit quiz. Answer the questions without looking back at weeks 21 to 23. First, from memory, write the test for clean water animals, and list ten clean fish. Then take the quiz.",
+          "Remember: a fish needs both fins and scales, and the scales can be tiny. A fillet can't show you either, so the label's name is your guide, and when the name is vague, you ask."
+        ],
+        "steps": [
+          "Write the test for clean water animals, with its reference.",
+          "List ten clean fish from memory.",
+          "Name two kinds of animals from the water that fail the test, without naming specific ones: describe what they lack.",
+          "Check your list against week 21's knowledge page, and fix anything you missed."
+        ],
+        "quiz": [
+          { "q": "Which of these is clean?", "choices": ["Halibut", "Swai", "Monkfish"], "answer": 0, "explain": "Halibut has fins and scales." },
+          { "q": "Which of these is clean?", "choices": ["Mahi-mahi", "Swordfish", "Sturgeon"], "answer": 0, "explain": "This app leaves out swordfish and sturgeon." },
+          { "q": "Mackerel's scales are tiny. Is it clean?", "choices": ["Yes", "No", "Only when smoked"], "answer": 0, "explain": "Tiny scales are still scales." },
+          { "q": "A frozen fillet is labeled only \"white fish\". What do you do?", "choices": ["Find out which fish it is, or don't buy it", "Buy it", "Cook it longer"], "answer": 0, "explain": "The name is your guide." },
+          { "q": "Unit review: what temperature does fish need to reach?", "choices": ["145°F", "160°F", "165°F"], "answer": 0, "explain": "And it flakes." },
+          { "q": "Unit review: how should fresh fish smell?", "choices": ["Clean, like cold water or the sea", "Fishy", "Sour"], "answer": 0, "explain": "A strong smell means it's old." },
+          { "q": "Unit review: why does fish cook faster than beef?", "choices": ["Less connective tissue, and its proteins set at lower temperatures", "It's smaller", "It's colder"], "answer": 0, "explain": "Water holds up a fish's weight." },
+          { "q": "Unit review: what does poaching liquid look like?", "choices": ["A bubble now and then", "A rolling boil", "Cold"], "answer": 0, "explain": "A hard boil breaks fish apart." },
+          { "q": "Unit review: which way do you pull a pin bone?", "choices": ["Toward the head end, at the angle it lies", "Straight up", "Toward the tail"], "answer": 0, "explain": "So the flesh doesn't tear." }
+        ]
+      },
+      "sabbath": {
+        "title": "Firstfruits and tithing food (Deuteronomy 14:22–29; Proverbs 3:9)",
+        "minutes": 45,
+        "body": [
+          "God's law sets apart three tithes, each a tenth of our increase, and we still keep them today. The first tithe is the LORD's: \"it is holy to the LORD\" (Leviticus 27:30). In Israel it went to the Levites, who served at the tabernacle and had no land of their own (Numbers 18:21, 24).",
+          "Deuteronomy 14 describes the second tithe: \"You shall tithe all the yield of your seed that comes from the field year by year\" (Deuteronomy 14:22). The family keeps this tithe and spends it at the place God chooses, at His feasts, eating and rejoicing before Him, \"that you may learn to fear the LORD your God always\" (Deuteronomy 14:23). It can be turned into money and spent there \"for whatever you desire\" to eat and rejoice together with your household (Deuteronomy 14:24–26). The Levite is not to be forgotten (Deuteronomy 14:27).",
+          "Every third year there is a third tithe as well, in addition to the other two. Families still keep the feasts with their second tithe, and they set aside another tenth for the Levite, the sojourner, the fatherless, and the widow, \"and they shall eat and be filled\" (Deuteronomy 14:28–29).",
+          "Proverbs puts it simply: \"Honor the LORD with your wealth and with the firstfruits of all your produce\" (Proverbs 3:9). The first and best goes to God, not what's left over."
+        ],
+        "steps": [
+          "Read Leviticus 27:30 and Numbers 18:21–24.",
+          "Read Deuteronomy 14:22–29.",
+          "Read Proverbs 3:9–10.",
+          "Answer in writing: what are the three tithes, and what is each one for?",
+          "Answer in writing: how does the second tithe teach a family to fear the LORD?",
+          "With your family, talk about how you set aside your tithes. Plan one dish from this year's units you'd like to cook or share at the feast with your second tithe, and write it down."
+        ],
+        "quiz": [
+          { "q": "What part of our increase is a tithe?", "choices": ["A tenth", "Half", "All of it"], "answer": 0, "explain": "Deuteronomy 14:22." },
+          { "q": "Who received the first tithe in Israel?", "choices": ["The Levites", "The king", "The family itself"], "answer": 0, "explain": "They served at the tabernacle and had no land of their own (Numbers 18:21, 24)." },
+          { "q": "What is the second tithe for?", "choices": ["Keeping God's feasts at the place He chooses, with your household", "Paying taxes", "Saving for later years"], "answer": 0, "explain": "Deuteronomy 14:23–26." },
+          { "q": "In the third year, what happens to the second tithe?", "choices": ["Families still keep the feasts with it, and give a third tithe for those in need as well", "It stays home instead", "It is skipped that year"], "answer": 0, "explain": "The third tithe is in addition (Deuteronomy 14:28–29)." },
+          { "q": "Who is the third-year tithe for?", "choices": ["The Levite, the sojourner, the fatherless, and the widow", "The king", "The family alone"], "answer": 0, "explain": "Deuteronomy 14:28–29." }
+        ]
+      }
+    },
     { "week": 25, "unit": 7, "skill": "roasting", "recipe": "roasted-vegetables", "drill": { "title": "Cut vegetables to roast at the same rate", "minutes": 40 }, "knowledge": { "title": "How roasting browns food", "minutes": 35 }, "sabbath": { "title": "Roast a tray of vegetables ahead", "minutes": 45 }, "swapIns": ["shoestring-fries"] },
     { "week": 26, "unit": 7, "skill": "handling-poultry", "recipe": "shish-taouk", "note": "Chicken thighs", "swapIns": ["chicken-souvlaki-pitas", "jerk-chicken", "chicken-yassa", "butter-chicken"], "drill": { "title": "Trim and cube chicken safely", "minutes": 40 }, "knowledge": { "title": "Raw poultry handling", "minutes": 35 }, "sabbath": { "title": "Clean and unclean birds, and why God gave the food laws (Leviticus 11:13–19, 44–47; Deuteronomy 14:11–20)", "minutes": 45 } },
     { "week": 27, "unit": 7, "skill": "roasting", "recipe": "roast-chicken-pieces", "drill": { "title": "Temp-check thigh and breast", "minutes": 40 }, "knowledge": { "title": "Dark vs. white meat", "minutes": 35 }, "sabbath": { "title": "Marinate ahead; roast, hold hot, and reheat", "minutes": 45 }, "swapIns": ["bbq-pulled-chicken"] },
@@ -862,17 +1667,16 @@
     { "id": "dinner-rolls", "title": "Dinner rolls", "cuisine": "american", "skills": ["yeast-dough"], "skill": "Shaping even rolls by weight", "art": "bread", "safety": "adult-nearby", "minutes": 210, "about": "Soft, buttery pull-apart rolls, each weighed so they bake evenly, with two or three shaped as knots or small braids.", "main": ["flour", "yeast", "milk", "butter", "egg"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     { "id": "tabbouleh", "title": "Tabbouleh", "cuisine": "lebanese", "skills": ["fine-chopping"], "skill": "Mincing parsley fine", "art": "salad", "safety": "adult-nearby", "minutes": 45, "about": "A bright parsley salad with mint, tomato, and a little bulgur, dressed with lemon and olive oil. The knife work is the dish.", "main": ["parsley", "bulgur", "tomatoes", "mint", "lemon"], "method": "no-cook", "meal": false, "tags": { "protein": "none", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "lots" } },
     { "id": "israeli-salad", "title": "Israeli salad", "cuisine": "israeli", "skills": ["dicing"], "skill": "A fine, even dice", "art": "salad", "safety": "adult-nearby", "minutes": 35, "about": "Cucumber, tomato, and pepper diced small and even, with parsley, lemon, and olive oil.", "main": ["cucumber", "tomatoes", "bell pepper", "parsley", "lemon"], "method": "no-cook", "meal": false, "tags": { "protein": "none", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "lots" } },
-    { "id": "garlic-green-beans", "title": "Garlic green beans", "cuisine": "american", "skills": ["sauteing", "blanching"], "skill": "Hot oil, a quick sauté", "art": "side", "safety": "adult-nearby", "minutes": 25, "estimated": true, "about": "Green beans blanched bright green, then sautéed in shimmering oil with garlic until just blistered.", "main": ["green beans", "garlic", "olive oil", "lemon"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "lots" } },
+    { "id": "garlic-green-beans", "title": "Garlic green beans", "cuisine": "american", "skills": ["sauteing", "blanching"], "skill": "Blanching, the shimmer test, a quick sauté", "art": "side", "safety": "adult-nearby", "minutes": 35, "about": "Green beans blanched bright green, then sautéed in shimmering oil with garlic until just blistered.", "main": ["green beans", "garlic", "olive oil", "lemon"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "lots" } },
     {
       "id": "beef-picadillo",
       "title": "Beef picadillo",
       "cuisine": "cuban",
       "skills": ["flavor-base", "sauteing"],
-      "skill": "A sofrito base, browning",
+      "skill": "Sweating a sofrito, then browning beef",
       "art": "meat",
       "safety": "adult-nearby",
-      "minutes": 45,
-      "estimated": true,
+      "minutes": 55,
       "about": "Ground beef browned over a sofrito of onion, pepper, and garlic, simmered with tomato, raisins, and olives, over rice.",
       "main": ["ground beef", "onion and bell pepper", "tomato sauce", "raisins", "olives"],
       "method": "stove",
@@ -894,7 +1698,6 @@
       "art": "meat",
       "safety": "adult-nearby",
       "minutes": 60,
-      "estimated": true,
       "about": "Louisiana rice dressing: ground beef browned with onion, celery, and bell pepper, the pan deglazed, and cooked rice stirred through.",
       "main": ["ground beef", "onion, celery, bell pepper", "rice", "green onions"],
       "method": "stove",
@@ -907,7 +1710,7 @@
         "veggies": "some"
       }
     },
-    { "id": "rice-pilaf", "title": "Rice pilaf", "cuisine": "turkish", "skills": ["cooking-grains"], "skill": "Toasting rice before the liquid", "art": "side", "safety": "adult-nearby", "minutes": 35, "estimated": true, "about": "Long-grain rice toasted in butter with a few broken noodles, then simmered in broth until every grain is separate.", "main": ["long-grain rice", "butter", "broth", "orzo or vermicelli"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "rice-pilaf", "title": "Rice pilaf", "cuisine": "turkish", "skills": ["cooking-grains"], "skill": "Toasting rice before the liquid", "art": "side", "safety": "adult-nearby", "minutes": 45, "about": "Long-grain rice toasted in butter with a little orzo, then cooked in hot broth until every grain is separate.", "main": ["long-grain rice", "butter", "broth", "orzo (optional)"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     {
       "id": "roasted-vegetables",
       "title": "Roasted vegetables",
@@ -940,8 +1743,7 @@
       "skill": "Baking fish gently, checking pin bones",
       "art": "fish",
       "safety": "adult-nearby",
-      "minutes": 30,
-      "estimated": true,
+      "minutes": 50,
       "about": "Salmon, cod, or tilapia fillets baked with lemon, dill, and garlic until they flake and reach 145°F, with a side timed to finish at the same time.",
       "main": ["salmon, cod, or tilapia fillets", "lemon", "dill", "garlic"],
       "method": "oven",
@@ -954,30 +1756,9 @@
         "veggies": "light"
       }
     },
-    {
-      "id": "steamed-fish",
-      "title": "Steamed fish with ginger and scallion",
-      "cuisine": "chinese",
-      "skills": ["cooking-fish"],
-      "skill": "Steaming, judging freshness",
-      "art": "fish",
-      "safety": "adult-nearby",
-      "minutes": 30,
-      "estimated": true,
-      "about": "White fish fillets steamed on a plate in a covered pot, then topped with ginger, green onion, soy, and a little warm oil.",
-      "main": ["white fish fillets", "ginger", "green onions", "soy sauce"],
-      "method": "stove",
-      "tags": {
-        "protein": "white-fish",
-        "flavors": ["ginger-soy"],
-        "heat": "mild",
-        "budget": "$$",
-        "familiar": "new-ish",
-        "veggies": "light"
-      }
-    },
-    { "id": "poached-cod", "title": "Cod poached in tomato sauce", "cuisine": "italian", "skills": ["cooking-fish", "building-a-sauce"], "skill": "Poaching fish until it flakes", "art": "fish", "safety": "adult-nearby", "minutes": 40, "estimated": true, "about": "Cod fillets poached gently in a garlicky tomato sauce with olives and capers until they flake.", "main": ["cod", "crushed tomatoes", "garlic", "olives", "capers"], "method": "stove", "tags": { "protein": "white-fish", "flavors": ["rich-tomato"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "some" } },
-    { "id": "pan-seared-trout", "title": "Pan-seared trout", "cuisine": "american", "skills": ["cooking-fish", "searing"], "skill": "Searing a fillet skin-side down", "art": "fish", "safety": "adult-nearby", "minutes": 30, "estimated": true, "about": "Trout fillets seared skin-side down until the skin is crisp, finished with butter and lemon.", "main": ["trout fillets", "butter", "lemon", "parsley"], "method": "stove", "tags": { "protein": "white-fish", "flavors": ["mild-buttery", "herby-lemony"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "light" } },
+    { "id": "steamed-fish", "title": "Steamed fish with ginger and scallion", "cuisine": "chinese", "skills": ["cooking-fish"], "skill": "Steaming, judging freshness", "art": "fish", "safety": "adult-nearby", "minutes": 45, "about": "White fish fillets steamed on a plate in a covered pot, then topped with ginger, green onion, soy, and a little warm oil.", "main": ["white fish fillets", "ginger", "green onions", "soy sauce"], "method": "stove", "tags": { "protein": "white-fish", "flavors": ["ginger-soy"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "light" } },
+    { "id": "poached-cod", "title": "Cod poached in tomato sauce", "cuisine": "italian", "skills": ["cooking-fish", "building-a-sauce"], "skill": "Poaching fish until it flakes", "art": "fish", "safety": "adult-nearby", "minutes": 45, "about": "Cod fillets poached gently in a garlicky tomato sauce with olives and capers until they flake.", "main": ["cod", "crushed tomatoes", "garlic", "olives", "capers"], "method": "stove", "tags": { "protein": "white-fish", "flavors": ["rich-tomato"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "some" } },
+    { "id": "pan-seared-trout", "title": "Pan-seared trout", "cuisine": "american", "skills": ["cooking-fish", "searing"], "skill": "Searing a fillet skin-side down", "art": "fish", "safety": "adult-nearby", "minutes": 30, "about": "Trout fillets seared skin-side down until the skin is crisp, finished with butter and lemon.", "main": ["trout fillets", "butter", "lemon", "parsley"], "method": "stove", "tags": { "protein": "white-fish", "flavors": ["mild-buttery", "herby-lemony"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "light" } },
     { "id": "vegetable-stock", "title": "Vegetable stock", "cuisine": "french", "skills": ["making-stock"], "skill": "Simmering, skimming, and straining", "art": "soup", "safety": "adult-nearby", "minutes": 90, "estimated": true, "about": "A clear stock from onion, carrot, celery, and herbs, simmered gently, skimmed, and strained, for soups later.", "main": ["onion", "carrots", "celery", "parsley", "peppercorns"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "lots" } },
     {
       "id": "chicken-stock",

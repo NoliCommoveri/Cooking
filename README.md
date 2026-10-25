@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [198. 2026-10-25 — Level 3 Unit 3: knife cuts](docs/build-log.md#198-2026-10-25--level-3-unit-3-knife-cuts)
+**Latest build log entry:** [201. 2026-10-25 — Level 3 Unit 6: fish](docs/build-log.md#201-2026-10-25--level-3-unit-6-fish)
 
 ## Current features
 
@@ -60,7 +60,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Dish illustrations** (`content/images/dishes/`): one picture for each planned dish.
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
 - **Lesson content** (`content/`): 37 lessons (all 12 of Unit 1, all 20 of Unit 2, 3 more samples, and the 2 Appointed Times lessons), and the ingredient, tool, skill (60), and cuisine lists, as JSON.
-- **Level 3 content** (release 1, `content/levels/level-3.json`): Level 3 Cook's 9 units and 36 weeks, each with its skill, recipe, mastery check, and drill, knowledge, and Beyond the Recipe page, plus 21 Level-only recipes and Units 1 to 3's written recipes and part pages; edited on the manager's Level 3 page.
+- **Level 3 content** (release 1, `content/levels/level-3.json`): Level 3 Cook's 9 units and 36 weeks, each with its skill, recipe, mastery check, and drill, knowledge, and Beyond the Recipe page, plus 21 Level-only recipes and Units 1 to 6's written recipes and part pages; edited on the manager's Level 3 page.
 - **Level courses** (release 1, `src/worker/plan.js`): setting up a course asks Which program?, Cook Around the World or Level 3 Cook; a Level course runs one week a week, its recipes in week order, and the course card shows "Week 5 of 36".
 - **Level 3 recipes in Side quests** (release 1): the Level's own written recipes (labels L1, L2…) in their own unit in the kitchen, cookable and queueable like any lesson.
 - **Optional Level parts** (release 1): a Level week is Knowledge, Drill, Recipe, Beyond the Recipe; any but the recipe can be turned off at setup or later, with the planned hours shown; any part can be skipped.

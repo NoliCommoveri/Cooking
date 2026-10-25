@@ -1,0 +1,100 @@
+{
+  "id": "beef-picadillo",
+  "version": 1,
+  "track": "core",
+  "unit": 100,
+  "title": "Beef picadillo",
+  "image": "meals/meat.svg",
+  "cuisine": "cuban",
+  "skill": "Sweating a sofrito, then browning beef",
+  "skills": ["flavor-base", "sauteing"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 55,
+  "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [{ "from": 7, "text": "Brown the beef in two batches, so it browns instead of steaming." }]
+  },
+  "learn": {
+    "move": {
+      "title": "Sweat, then brown",
+      "body": "Picadillo is a Cuban dish of ground beef simmered in tomato with sweet raisins and salty olives, over rice. It starts with a sofrito: onion, green pepper, and garlic cooked gently until soft. Today you'll cook the same pan two ways: low and slow to sweat the sofrito, then hot to brown the beef."
+    },
+    "callback": {
+      "lesson": "chicken-jambalaya",
+      "body": "If you made jambalaya, you cooked onion, celery, and pepper until soft before the rice went in. That gentle cooking has a name, sweating, and today you'll see how it's different from browning by doing both in one pan."
+    },
+    "why": [
+      { "id": "sweat", "title": "Sweating: soft, sweet, no color", "body": "On medium-low heat with a pinch of salt, onion and pepper give up their water and turn soft and sweet without browning. The salt pulls the water out faster. Sweated vegetables melt into a sauce instead of standing out in it." },
+      { "id": "brown", "title": "Browning: hot, dry, and left alone", "body": "Browning needs a hot pan and dry food that isn't moved too often. The outside of the beef reaches over 300°F and turns brown and savory. If the pan is crowded or wet, it can't get past the boiling point of water, so the meat steams gray." },
+      { "id": "separate", "title": "Why the sofrito comes out", "body": "Wet vegetables in the pan would keep the beef from browning. Moving the sofrito to a bowl gives the beef a hot, dry pan, and it all goes back together for the simmer." },
+      { "id": "pour-off", "title": "Spoon off the fat", "body": "Ground beef gives off fat as it browns. Spooned off before the sauce goes in, the picadillo isn't greasy, and the spices coat the meat instead of floating." },
+      { "id": "sweet-salty", "title": "Sweet and salty together", "body": "Raisins add little bursts of sweet, and olives add bursts of salty and sour. With a splash of vinegar, they keep the rich beef and tomato from tasting heavy." }
+    ],
+    "wrong": [
+      { "sign": "The onions turned brown while sweating", "fix": "The heat was too high. Turn it down and add a tablespoon of water; they'll still be fine in the sauce." },
+      { "sign": "The beef is gray and watery, not browned", "fix": "The pan was crowded or not hot enough. Turn the heat up, spread it out, and leave it alone for a minute between stirs." },
+      { "sign": "The sauce is thin and soupy", "fix": "Keep simmering 5 more minutes, stirring now and then, until it's thick enough to sit on the rice." },
+      { "sign": "It tastes flat", "fix": "Add a pinch of salt and a few drops more vinegar, stir, and taste again." }
+    ],
+    "quiz": [
+      { "q": "What's the difference between sweating and browning?", "choices": ["Sweating is gentle and adds no color; browning is hot and adds brown flavor", "They're the same thing", "Sweating uses water, browning uses oil"], "answer": 0, "explain": "Same pan, different heat." },
+      { "q": "Why does the sofrito come out of the pan before the beef goes in?", "choices": ["So the beef browns in a hot, dry pan", "So the sofrito doesn't burn", "To make room for the rice"], "answer": 0, "explain": "Wet vegetables make the beef steam." },
+      { "q": "What temperature does ground beef need to reach?", "choices": ["160°F", "145°F", "165°F"], "answer": 0, "explain": "Unit 1: grinding mixes surface bacteria all through the meat." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "rice-white", "amount": 2, "unit": "cup", "prep": "long-grain", "group": "Rice" },
+    { "ingredient": "water", "amount": 3, "unit": "cup", "group": "Rice" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Rice" },
+    { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp", "group": "Sofrito" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "round": "up", "group": "Sofrito" },
+    { "ingredient": "bell-pepper-green", "amount": 1, "unit": "count", "round": "up", "group": "Sofrito" },
+    { "ingredient": "garlic", "amount": 4, "unit": "count", "round": "up", "prep": "minced", "group": "Sofrito" },
+    { "ingredient": "salt", "amount": 0.25, "unit": "tsp", "group": "Sofrito" },
+    { "ingredient": "beef-ground", "amount": 1.5, "unit": "lb", "group": "Beef" },
+    { "ingredient": "cumin-ground", "amount": 1, "unit": "tsp", "group": "Beef" },
+    { "ingredient": "oregano-dried", "amount": 1, "unit": "tsp", "group": "Beef" },
+    { "ingredient": "salt", "amount": 0.75, "unit": "tsp", "group": "Beef" },
+    { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Beef" },
+    { "ingredient": "tomato-sauce", "amount": 1, "unit": "cup", "group": "Sauce" },
+    { "ingredient": "water", "amount": 0.5, "unit": "cup", "group": "Sauce" },
+    { "ingredient": "bay-leaves", "amount": 1, "unit": "count", "round": "up", "group": "Sauce" },
+    { "ingredient": "raisins", "amount": 0.333, "unit": "cup", "group": "Sauce" },
+    { "ingredient": "olives-green", "amount": 0.333, "unit": "cup", "prep": "halved", "group": "Sauce" },
+    { "ingredient": "vinegar-red-wine", "amount": 1, "unit": "tbsp", "group": "Sauce" }
+  ],
+  "equipment": [
+    "saucepan-medium",
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "liquid-measuring-cup",
+    "skillet-12",
+    "wooden-spoon",
+    "heatproof-bowl",
+    "thermometer",
+    "fork"
+  ],
+  "steps": [
+    { "id": "rinse-rice", "text": "Put the rice in the saucepan and cover it with cold water. Swish it with your hand, then carefully pour off the cloudy water, holding the rice back with your hand. Do this 3 times.", "safety": "solo", "tip": "Rinsing washes off loose starch, so the rice cooks up fluffy instead of gluey." },
+    { "id": "cook-rice", "text": "Add the rice's {qty:water} of water and its salt. Bring it to a boil over high heat with the lid off. Then turn the heat to low, put the lid on, and cook without lifting the lid.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 900, "timerLabel": "Rice", "tip": "When the timer rings, turn off the burner and leave the lid on. The rice keeps steaming until you're ready." },
+    { "id": "dice", "text": "Dice the onion and the green pepper into ¼-inch cubes, the way you did in Unit 3. Peel and mince the garlic, and keep it in the small bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Cubes about the size of a pea." },
+    { "id": "sweat", "text": "Warm the oil in the skillet over medium-low heat. Add the onion, the pepper, and the sofrito's salt. Cook, stirring every minute or so, until they're soft and the onion is see-through.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 600, "timerLabel": "Sweat sofrito", "why": "sweat", "look": "Soft and shiny, the onion see-through, and no brown on the edges.", "tip": "If you hear a loud sizzle or see brown edges, turn the heat down." },
+    { "id": "garlic", "text": "Add the garlic and stir it for 1 minute. Scrape the sofrito into the medium bowl.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 60, "timerLabel": "Garlic", "why": "separate" },
+    { "id": "heat", "text": "Turn the heat up to medium-high. Let the empty pan heat until the oil left in it shimmers.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 60, "timerLabel": "Heat pan" },
+    { "id": "beef-in", "text": "Crumble the beef into the pan in pieces, straight from the package, and spread it out.", "safety": "adult-nearby", "hazard": "Hot pan, raw meat", "handles": ["beef-ground"] },
+    { "id": "wash-beef", "type": "wash", "text": "Throw away the package and wash your hands with soap.", "safety": "adult-nearby", "hazard": "Hot stove" },
+    { "id": "brown", "text": "Leave the beef alone for 2 minutes, then break it into small crumbles with the wooden spoon. Keep cooking, stirring only every minute or so, until it's browned with no pink left.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 480, "timerLabel": "Brown beef", "why": "brown", "look": "Deep brown crumbles, and a sizzle, not a bubble." },
+    { "id": "check-beef", "type": "doneness", "text": "Push the beef into a pile and slide the thermometer into the middle. It needs to read at least 160°F. If it doesn't, cook 1 more minute and check again.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 160, "unit": "F" } },
+    { "id": "fat", "text": "Tip the pan a little and spoon the fat into the heatproof bowl. Let it cool, then throw it away in the trash, not down the sink.", "safety": "adult-nearby", "hazard": "Hot fat", "why": "pour-off" },
+    { "id": "spices", "text": "Turn the heat down to medium. Add the cumin, oregano, the beef's salt, and the pepper, and stir for 30 seconds until it smells toasty.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 30, "timerLabel": "Spices" },
+    { "id": "simmer", "text": "Put the sofrito back in. Add the tomato sauce, the sauce's water, the bay leaf, raisins, and olives. Stir, bring it to a bubble, then turn the heat to low and simmer with the lid off, stirring now and then.", "safety": "adult-nearby", "hazard": "Hot pan, spatter", "timerSeconds": 900, "timerLabel": "Simmer", "why": "sweet-salty", "look": "Thick enough that a spoon dragged through it leaves a path." },
+    { "id": "finish", "text": "Turn off the stove. Take out the bay leaf, stir in the vinegar, and taste. Add a pinch more salt if it needs it.", "safety": "adult-nearby", "hazard": "Hot pan" },
+    { "id": "serve", "text": "Fluff the rice with the fork and serve the picadillo over it.", "safety": "solo" }
+  ]
+}

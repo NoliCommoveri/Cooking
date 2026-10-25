@@ -4798,3 +4798,151 @@ cuts and honing", the kitchen words added and linked, live on merge.
 - Tests: 356. A Level course now schedules 13 written recipes, with 23
   waiting; best fit's "written option first" check moved to week 15, since
   week 9's own recipe is written now.
+## 199. 2026-10-25 — Level 3 Unit 4: sautéing and aromatic bases
+
+Phase 12, slice 12f, Unit 4 (plan §12.4). Owner, 2026-10-25: more units,
+starting with 4, from the Unit 3 review template. The copy is in a review
+doc, "Level 3 Unit 4: Sautéing and aromatic bases", and goes live for every
+family on merge.
+
+- **Garlic green beans** (week 13, Level only): beans blanched 3 minutes in
+  salted water, shocked in ice water, patted dry, then sautéed in oil
+  checked by the shimmer test, garlic last. **Sautéed zucchini**, an approved
+  week 13 option, is its variation: no blanching, three batches, salted at
+  the end.
+- **Beef picadillo** (week 14, Level only): the sofrito sweated on
+  medium-low and moved to a bowl, so the beef browns in a hot, dry pan;
+  160°F, fat spooned off, then a simmer with tomato sauce, raisins, and
+  olives, over rice.
+- **Cajun rice dressing with beef** (week 15, Level only): beef browned for
+  fond, onion, celery, and green pepper sweated in the same pan, deglazed
+  with beef broth
+  and cooked down, cooled rice folded in. Rice cooked the day before works,
+  reheated to 165°F (Unit 1).
+- **Beef ragù** (week 16; lesson 22c, the braising group, for every family):
+  chuck seared in batches, a soffritto, tomato paste cooked, deglazed, and
+  braised 2½ hours until it reads 195°F and shreds. **Ragù bolognese** is
+  its Level version and week 16's mastery recipe: ground beef browned in two
+  batches to 160°F and a 1½-hour simmer, no whole-cut searing (Level 4). The
+  pasta water boils in a new stockpot.
+- **Weeks 13–16's twelve part pages:** blanching and smoke points, browning
+  (the Maillard reaction and caramelization), aromatic bases across
+  cuisines, and sweat vs. sauté with the unit quiz; drills blanching beans
+  and spinach with a shimmer test, sweating vs. browning onions, deglazing,
+  and an unaided vegetable sauté; Beyond the Recipe: blanching for the
+  fridge and freezer, clean land animals (Leviticus 11:1–8, Deuteronomy
+  14:3–8), salt (Leviticus 2:13, Matthew 5:13, Colossians 4:6), and a sauce
+  made a day ahead.
+- **Kitchen words:** sweat, fond, shock, smoke point, aromatics, mirepoix,
+  soffritto, sofrito. Deglaze now points to Chicken
+  jambalaya, and shimmer to Vegetable stir-fry with tofu.
+- No "holy trinity" anywhere (owner's ruling, build log 175, repeated
+  2026-10-25): the rice dressing, week 15's knowledge page, the unit quiz,
+  and the kitchen words say onion, celery, and green pepper instead.
+- Owner's edits in the review doc, 2026-10-25: week 14's drill dices one
+  onion and splits it into two piles, and its Beyond the Recipe asks the
+  learner to research the giraffe (split hooves? chews the cud? clean?) in
+  place of picking an animal from the page's list.
+- New ingredients: fresh green beans, beef chuck roast, beef broth, canned
+  tomato sauce, raisins, pimento-stuffed green olives. New tool: a stockpot.
+- Level 3's hours with every part are now about 130 (128 before); the
+  written recipes' minutes replace the estimates, and Beef ragù's card is
+  230 minutes.
+- Screenshots were sent in the session, taken from the demo's Try a week
+  pointed at Unit 4 for that only. The demo still shows Unit 1.
+- Tests: 356. A Level course now schedules 17 written recipes, with 19
+  waiting; best fit's "written option first" check moved to week 24, since
+  week 15's own recipe is written now.
+
+## 200. 2026-10-25 — Level 3 Unit 5: legumes and grains
+
+Phase 12, slice 12f, Unit 5 (plan §12.4). Owner, 2026-10-25: Unit 5, the
+same way as Unit 4. The copy is in a review doc, "Level 3 Unit 5: Legumes
+and grains", and goes live for every family on merge.
+
+- **Red lentil soup (mercimek)** (week 17; lesson 18b, the cooking dried
+  beans and lentils group, for every family): lentils picked over and
+  rinsed, simmered over a sweated onion and carrot until they melt, cooled
+  5 minutes and blended with the stick blender kept under the surface (the
+  hot-blending step the recipe review asked for), finished with lemon and
+  paprika butter.
+- **Red beans and rice** (week 18, for every family): kidney beans picked
+  over and soaked overnight (quick-soak as the fallback), a 10-minute hard
+  boil (the review's ask), a gentle 1½-hour simmer, and a cup mashed for
+  creaminess. The sausage is optional beef kielbasa, with chicken andouille
+  as the swap, to match week 18's note; its course card says so now.
+- **Rice pilaf** (week 19, Level only): orzo and rinsed rice toasted in
+  butter, hot broth, 15 minutes covered and a 10-minute rest. The orzo is
+  optional, so the pilaf can be gluten-free.
+- **Mujaddara** (week 20, mastery; the crisping group, for every family):
+  brown lentils simmered 12 minutes for a head start, onions fried slowly
+  in olive oil until crisp and salted after, the rice toasted in that oil,
+  then lentils and rice cooked together.
+- **Weeks 17–20's twelve part pages:** legume types and cook times, why
+  beans are soaked (and the kidney-bean hard boil), absorption vs. pasta
+  method with ratios, and a grains-of-the-world worksheet with the unit
+  quiz; drills picking over and cooking red and brown lentils, quick-soak
+  vs. overnight soak, toasted vs. plain rice, and a grain cooked without a
+  recipe card; Beyond the Recipe: freezing soup in portions, soaking and
+  freezing beans ahead, Daniel 1, and cooking grains ahead and reheating
+  them with steam.
+- **Kitchen words:** legume, pick over, quick-soak, hard boil, absorption
+  method, pilaf.
+- New ingredients: red lentils, brown lentils, dried red kidney beans, orzo.
+- Level 3's hours with every part are now about 131 (130 before).
+- Screenshots were sent in the session, taken from the demo's Try a week
+  pointed at Unit 5 for that only. The demo still shows Unit 1.
+- Tests: 356. A Level course now schedules 21 written recipes, with 15
+  waiting.
+
+## 201. 2026-10-25 — Level 3 Unit 6: fish
+
+Phase 12, slice 12f, Unit 6 (plan §12.4). Owner, 2026-10-25: Unit 6, the
+same way as Units 4 and 5. The copy is in a review doc, "Level 3 Unit 6:
+Fish", and goes live for every family on merge.
+
+- **Baked fish with lemon and herbs** (week 21, Level only): salmon, with
+  cod or tilapia as the cheaper swaps; pin bones felt for and pulled with
+  tweezers; baked at 400°F to 145°F. Unit 5's rice pilaf cooks alongside,
+  and the fish goes in when the rice timer shows 15 minutes left, so both
+  finish together (the review's "side from an earlier week").
+- **Steamed fish with ginger and scallion** (week 22, Level only): a
+  heatproof plate on three foil balls in the large pot; cod steamed to
+  145°F; ginger and green onion julienned; the adult lifts the hot plate and
+  pours oil heated only until it shimmers. **Fish in parchment packets** is
+  its variation and week 22's option: no boiling water and no hot oil.
+- **Cod poached in tomato sauce** (week 23, Level only): a sweated onion,
+  tomatoes with olives and capers simmered thick, cod poached under the lid
+  on low to 145°F.
+- **Pan-seared trout** (week 24, mastery, Level only): fan on and a window
+  open first (the review's ventilation step), skin dried, pressed flat, and
+  left until it releases; finished with butter and lemon. Tilapia is the
+  swap, with a note that it has no skin.
+- **Weeks 21–24's twelve part pages:** fins and scales, reading fish labels
+  and names, why fish cooks faster than meat, and a species ID unit quiz;
+  drills on pin bones, freshness, doneness by flaking, and searing one
+  fillet skin side down; Beyond the Recipe: dishes that serve well cold,
+  loaves and fishes and breakfast on the shore (Matthew 14, John 21), a
+  sauce made ahead with the fish cooked fresh, and firstfruits and tithing
+  (Deuteronomy 14:22–29, Proverbs 3:9). The blocked-word check covers every
+  page, so unclean water animals are described by what they lack.
+- Owner, 2026-10-25: week 24's tithing page names all three tithes. The
+  first went to the Levites (Numbers 18:21, 24); the second the family ate
+  at the place God chose (Deuteronomy 14:22–27); and every third year a
+  third tithe for the poor was given in addition, while families still
+  traveled and ate the second (Deuteronomy 14:28–29). The first draft had
+  the third-year tithe replacing the second.
+- Owner, 2026-10-25: "We still keep the tithe laws." The page is in the
+  present tense: the three tithes are kept today, the first is the LORD's
+  (Leviticus 27:30), the second keeps the feasts, and the third is set aside
+  every third year as well. Its family step plans a dish for the feast
+  with the second tithe.
+- **Kitchen words:** fillet (steps can't use it until it has a card), pin
+  bones, steam (underlined as "steamed" and "steaming" only), flake, in
+  parchment.
+- New: skin-on trout fillets, and tweezers for pin bones.
+- Level 3's hours with every part are now about 132 (131 before).
+- Screenshots were sent in the session, taken from the demo's Try a week
+  pointed at Unit 6 for that only. The demo still shows Unit 1.
+- Tests: 356. A Level course now schedules 25 written recipes, with 11
+  waiting; best fit's "written option first" check moved to week 25.

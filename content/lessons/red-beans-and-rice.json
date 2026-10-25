@@ -1,0 +1,101 @@
+{
+  "id": "red-beans-and-rice",
+  "version": 1,
+  "track": "core",
+  "unit": 3,
+  "title": "Red beans and rice",
+  "image": "dishes/red-beans-and-rice.png",
+  "cuisine": "louisiana",
+  "skill": "Soaking dried beans, simmering them until creamy",
+  "skills": ["flavor-base", "simmering", "cooking-legumes"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 165,
+  "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+      { "from": 7, "text": "Use your biggest pot: the beans and water should fill it no more than two-thirds full." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Soak, boil hard, then simmer low",
+      "body": "Red beans and rice is a Louisiana Monday supper: dried red kidney beans simmered for hours with onion, celery, and green pepper until they turn creamy, over rice. Today you'll start the night before by soaking the beans. Then you'll boil them hard for 10 minutes to make them safe, simmer them low until they're soft all the way through, and mash a few to make the pot creamy."
+    },
+    "callback": {
+      "lesson": "chicken-jambalaya",
+      "body": "In jambalaya, you sweated onion, celery, and green pepper before anything else went in. The same three vegetables start this pot, but this time they cook for two hours, until they melt into the beans."
+    },
+    "why": [
+      { "id": "soak", "title": "Why soak beans?", "body": "A dried bean is hard and dry all the way through. Overnight in water, it drinks up about its own weight in water and swells to twice its size. Soaked beans cook faster and more evenly, so the outsides don't burst while the middles stay hard." },
+      { "id": "fresh-water", "title": "Fresh water for cooking", "body": "The soaking water has dust and some of the beans' gas-causing sugars in it. Pour it off, rinse the beans, and cook them in fresh water." },
+      { "id": "hard-boil", "title": "The 10-minute hard boil", "body": "Raw kidney beans contain a natural toxin that can make people very sick, even from a few undercooked beans. A full, rolling boil for 10 minutes destroys it. A gentle simmer or a slow cooker on low may not get hot enough, so the hard boil always comes first." },
+      { "id": "gentle", "title": "Then a gentle simmer", "body": "After the hard boil, beans cook best with small, lazy bubbles. A hard boil for hours knocks them around and splits their skins, so some turn to mush while others stay firm." },
+      { "id": "mash", "title": "Mash a few for creaminess", "body": "Pressing a cup of the soft beans against the side of the pot breaks them open. Their starch thickens the liquid around the rest, which is what makes red beans creamy." }
+    ],
+    "wrong": [
+      { "sign": "The beans are still hard after 2 hours", "fix": "Old beans take longer. Keep them simmering, add hot water if they poke above the liquid, and taste every 20 minutes." },
+      { "sign": "It's soupy", "fix": "Mash another cup of beans and simmer with the lid off, stirring, until it's thick." },
+      { "sign": "It's sticking to the bottom", "fix": "Turn the heat down, add ½ cup of hot water, and stir from the bottom more often. Don't scrape up anything black." },
+      { "sign": "The skins split and some beans turned to mush", "fix": "The simmer was too hard. They still taste good; next time keep the bubbles small." }
+    ],
+    "quiz": [
+      { "q": "Why do kidney beans boil hard for 10 minutes?", "choices": ["To destroy a natural toxin in raw beans", "To soften the skins", "To make the water clear"], "answer": 0, "explain": "A gentle simmer may not get hot enough." },
+      { "q": "Why soak dried beans overnight?", "choices": ["They cook faster and more evenly", "It makes them red", "It adds flavor"], "answer": 0, "explain": "They drink up water all the way to the middle." },
+      { "q": "How do you make the pot creamy?", "choices": ["Mash some of the soft beans against the pot", "Add cream", "Boil it hard"], "answer": 0, "explain": "Their starch thickens the liquid." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "kidney-beans-dried", "amount": 1, "unit": "lb", "group": "Beans" },
+    { "ingredient": "water", "amount": 8, "unit": "cup", "group": "Beans" },
+    { "ingredient": "vegetable-oil", "amount": 1, "unit": "tbsp", "scale": false, "group": "Pot" },
+    { "ingredient": "beef-kielbasa", "amount": 0.75, "unit": "lb", "prep": "sliced into coins", "optional": true, "group": "Pot" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "round": "up", "group": "Pot" },
+    { "ingredient": "celery", "amount": 2, "unit": "count", "round": "up", "group": "Pot" },
+    { "ingredient": "bell-pepper-green", "amount": 1, "unit": "count", "round": "up", "group": "Pot" },
+    { "ingredient": "garlic", "amount": 4, "unit": "count", "round": "up", "prep": "minced", "group": "Pot" },
+    { "ingredient": "thyme-dried", "amount": 1, "unit": "tsp", "group": "Pot" },
+    { "ingredient": "paprika-smoked", "amount": 1, "unit": "tsp", "group": "Pot" },
+    { "ingredient": "cayenne", "amount": 0.25, "unit": "tsp", "optional": true, "group": "Pot" },
+    { "ingredient": "bay-leaves", "amount": 2, "unit": "count", "round": "up", "group": "Pot" },
+    { "ingredient": "water", "amount": 8, "unit": "cup", "group": "Pot" },
+    { "ingredient": "salt", "amount": 1.5, "unit": "tsp", "group": "Pot" },
+    { "ingredient": "black-pepper", "amount": 0.5, "unit": "tsp", "group": "Pot" },
+    { "ingredient": "rice-white", "amount": 2, "unit": "cup", "prep": "long-grain", "group": "Rice" },
+    { "ingredient": "water", "amount": 3, "unit": "cup", "group": "Rice" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Rice" },
+    { "ingredient": "green-onion", "amount": 4, "unit": "count", "round": "up", "prep": "sliced", "group": "To serve" }
+  ],
+  "substitutions": [{ "for": "beef-kielbasa", "use": "chicken-sausage-smoked", "reason": "availability" }],
+  "equipment": [
+    "plate",
+    "mixing-bowl-large",
+    "colander",
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "pot-large",
+    "wooden-spoon",
+    "saucepan-medium",
+    "fork"
+  ],
+  "steps": [
+    { "id": "pick-over", "text": "The night before: spread the beans on the plate and pick out any tiny stones, clumps of dirt, or shriveled beans.", "safety": "solo" },
+    { "id": "soak", "text": "Put the beans in the large bowl, add the beans' {qty:water} of cold water, and leave them on the counter overnight, 8 to 12 hours.", "safety": "solo", "why": "soak", "look": "The beans have swelled to about twice their size, and their skins are smooth.", "tip": "Forgot? Quick-soak instead: boil the beans and water in the large pot for 2 minutes, turn off the heat, put the lid on, and leave them 1 hour." },
+    { "id": "drain", "text": "Pour the beans into the colander in the sink, throw away the soaking water, and rinse the beans under cold water.", "safety": "solo", "why": "fresh-water" },
+    { "id": "chop", "text": "Dice the onion, celery, and green pepper into ¼-inch cubes. Peel and mince the garlic. Stir the thyme, paprika, and cayenne if you're using it together in the small bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Cubes about the size of a pea." },
+    { "id": "sausage", "text": "If you're using sausage, heat the oil in the large pot over medium-high heat. Brown the coins on both sides and move them to the plate.", "safety": "adult-nearby", "hazard": "Hot oil, spatter", "timerSeconds": 300, "timerLabel": "Brown sausage", "tip": "No sausage? Just heat the oil and go on to the next step." },
+    { "id": "sweat", "text": "Turn the heat down to medium. Add the onion, celery, and pepper and cook, stirring and scraping the bottom of the pot, until they're soft.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 420, "timerLabel": "Vegetables", "look": "The onion is see-through and the pepper is soft." },
+    { "id": "spices", "text": "Add the garlic and the spice mix and stir for 30 seconds until it smells toasty.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 30, "timerLabel": "Spices" },
+    { "id": "hard-boil", "text": "Add the beans, the pot's water, and the bay leaves. Turn the heat to high and bring it to a full, rolling boil. Let it boil hard for 10 minutes.", "safety": "adult-nearby", "hazard": "Boiling water", "timerSeconds": 600, "timerLabel": "Hard boil", "why": "hard-boil", "look": "Big bubbles rolling across the whole surface, the whole time.", "tip": "Start the timer only once the whole pot is boiling hard." },
+    { "id": "simmer", "text": "Turn the heat down so it bubbles gently. Set the lid on slightly open and simmer, stirring every 20 minutes. If the beans poke above the liquid, add a little hot water.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 5400, "timerLabel": "Simmer beans", "why": "gentle", "look": "A few lazy bubbles at a time.", "tip": "Stay in the house while it simmers." },
+    { "id": "rinse-rice", "text": "About 30 minutes before the beans are done, put the rice in the saucepan and cover it with cold water. Swish it with your hand, then carefully pour off the cloudy water, holding the rice back with your hand. Do this 3 times.", "safety": "solo" },
+    { "id": "cook-rice", "text": "Add the rice's 3 cups of water and its salt. Bring it to a boil over high heat with the lid off. Then turn the heat to low, put the lid on, and cook without lifting the lid.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 900, "timerLabel": "Rice", "tip": "When the timer rings, turn off the burner and leave the lid on. The rice keeps steaming until you're ready." },
+    { "id": "tender", "type": "doneness", "text": "Scoop out 3 beans, let them cool, and taste them. They're done when all three are creamy all the way through, with no chalky middle. If not, keep simmering and check every 20 minutes.", "safety": "adult-nearby", "hazard": "Hot pot", "target": { "look": "Every bean you taste is soft and creamy in the middle." } },
+    { "id": "mash", "text": "Press about a cup of beans against the side of the pot with the wooden spoon until they burst, and stir them in. Add the sausage back, the pot's salt, and the pepper. Simmer with the lid off, stirring now and then, until it's thick and creamy.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 900, "timerLabel": "Thicken", "why": "mash", "look": "Thick enough to sit on the rice without running." },
+    { "id": "serve", "text": "Turn off the stove and take out the bay leaves. Taste and add a pinch more salt if it needs it. Fluff the rice with the fork, spoon the beans over it, and scatter the green onions on top.", "safety": "adult-nearby", "hazard": "Hot pot" }
+  ]
+}
