@@ -405,8 +405,7 @@
       "skill": "Julienned vegetables, stir-frying in batches",
       "image": "dishes/vegetable-stir-fry.png",
       "safety": "adult-nearby",
-      "minutes": 35,
-      "estimated": true,
+      "minutes": 60,
       "about": "Carrots, peppers, and snow peas cut into thin matchsticks and stir-fried fast with crisp tofu in a garlic-ginger sauce, over rice.",
       "main": ["extra-firm tofu", "carrots", "bell peppers", "snow peas", "garlic and ginger"],
       "method": "stove",
@@ -1352,31 +1351,7 @@
     { "id": "skillet-cornbread", "title": "Skillet cornbread", "unit": 5, "cuisine": "american", "skills": ["skillet-baking", "muffin-method"], "skill": "Preheated skillet", "image": "dishes/skillet-cornbread.png", "safety": "adult-nearby", "minutes": 40, "estimated": true, "about": "Golden cornbread baked in a hot skillet for a crispy edge. Pairs with chili.", "main": ["cornmeal", "buttermilk", "eggs", "butter"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     { "id": "pao-de-queijo", "title": "Pão de queijo", "unit": 5, "cuisine": "brazilian", "skills": ["scalded-dough"], "skill": "Scalded tapioca dough", "image": "dishes/pao-de-queijo.png", "safety": "adult-nearby", "minutes": 50, "estimated": true, "about": "Brazilian cheese bread: chewy, puffy little rolls made with tapioca flour and cheese.", "main": ["tapioca flour", "milk", "eggs", "parmesan"], "method": "stove-oven", "meal": false, "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
     { "id": "skillet-naan", "title": "Skillet naan", "unit": 5, "cuisine": "indian", "skills": ["flatbreads"], "skill": "Yogurt dough, high-heat skillet", "image": "dishes/skillet-naan.png", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Soft Indian flatbread made with a yogurt dough and cooked in a very hot skillet.", "main": ["yogurt", "butter", "garlic"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" }, "pickOne": "flatbreads" },
-    {
-      "id": "pita-bread",
-      "title": "Pita bread",
-      "unit": 5,
-      "cuisine": "lebanese",
-      "skills": ["flatbreads", "yeast-dough"],
-      "skill": "A yeast dough, baking flatbreads that puff",
-      "image": "dishes/pita-bread.png",
-      "safety": "adult-nearby",
-      "minutes": 120,
-      "estimated": true,
-      "about": "Soft pita rolled thin and baked on a very hot sheet until each one puffs into a pocket.",
-      "main": ["flour", "yeast", "olive oil"],
-      "method": "oven",
-      "meal": false,
-      "tags": {
-        "protein": "none",
-        "flavors": ["mild-buttery"],
-        "heat": "mild",
-        "budget": "$",
-        "familiar": "everyday",
-        "veggies": "light"
-      },
-      "pickOne": "flatbreads"
-    },
+    { "id": "pita-bread", "title": "Pita bread", "unit": 5, "cuisine": "lebanese", "skills": ["flatbreads", "yeast-dough"], "skill": "A yeast dough, baking flatbreads that puff", "image": "dishes/pita-bread.png", "safety": "adult-nearby", "minutes": 120, "about": "Soft pita rolled thin and baked on a very hot sheet until each one puffs into a pocket.", "main": ["flour", "yeast", "olive oil"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" }, "pickOne": "flatbreads" },
     { "id": "pupusas", "title": "Pupusas", "unit": 5, "cuisine": "salvadoran", "skills": ["masa-dough"], "skill": "Masa dough, griddle", "image": "dishes/pupusas.png", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Salvadoran stuffed corn cakes filled with cheese and beans, cooked on a griddle, with a tangy cabbage slaw.", "main": ["masa harina", "cheese", "refried beans", "cabbage"], "method": "stove", "tags": { "protein": "beans-lentils", "flavors": ["creamy-cheesy", "tangy"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "some" } },
     {
       "id": "ugali-sukuma-wiki",
@@ -1546,7 +1521,7 @@
         "veggies": "light"
       }
     },
-    { "id": "challah", "title": "Challah", "unit": 5, "cuisine": "jewish", "skills": ["yeast-dough"], "skill": "Yeast dough: kneading, proofing, braiding", "image": "dishes/challah.png", "safety": "adult-nearby", "minutes": 210, "estimated": true, "pickOne": "yeast-dough", "about": "A soft, slightly sweet braided bread made with eggs and honey.", "main": ["yeast", "eggs", "honey", "oil"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "challah", "title": "Challah", "unit": 5, "cuisine": "jewish", "skills": ["yeast-dough"], "skill": "Yeast dough: kneading, proofing, braiding", "image": "dishes/challah.png", "safety": "adult-nearby", "minutes": 240, "pickOne": "yeast-dough", "about": "A soft, slightly sweet braided bread made with eggs and honey.", "main": ["yeast", "eggs", "honey", "oil"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     {
       "id": "homemade-pizza",
       "title": "Homemade pizza",

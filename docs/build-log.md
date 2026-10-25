@@ -4687,3 +4687,114 @@ tables.
 - **Now** (`public/demo.js`), in the owner's words: "Beta testing is now
   live. To participate, search Clean Plate Recipe App on Facebook."
 - Tests: 351, all passing.
+
+## 196. 2026-10-25 — Level 3 Unit 2: yeast dough
+
+Phase 12, slice 12f, Unit 2 (plan §12.4).
+
+- Owner, 2026-10-25: one unit at a time. All new copy goes to a review doc,
+  "Level 3 Unit 2: Yeast dough", so corrections land before merge and no
+  lesson's version goes up. Level 3 is release 1, so this is live for every
+  family on merge, not behind a new release.
+- Owner, 2026-10-25: the Beyond the Recipe plan is confirmed: a make-ahead
+  task where the dish suits one, What the Bible says about food in the other
+  weeks. All 32 titles for weeks 5–36 are set in `level-3.json` (most old
+  titles said "for the Sabbath"). Week 36's is now Giving thanks for food, in
+  place of serving the meal; the review doc asks the owner to confirm that.
+- **Pita bread** (`content/lessons/`, lesson 37b in the flatbreads pair): 8
+  pitas baked on a sheet pan heated at 475°F. A flat pita is still good
+  bread, and the lesson says so.
+- **Challah** (`content/lessons/`, the yeast dough group): 3-strand braid,
+  egg wash twice, checked at 190°F. Made with oil, so it's dairy-free.
+- **Sandwich loaf** and **Dinner rolls** (`content/levels/recipes/`, Level
+  only): a loaf kneaded to a windowpane and checked at 190°F; 12 rolls
+  weighed on a scale, 2 or 3 shaped as knots or small braids. The rolls are
+  made the same day; the overnight cold proof is week 7's Beyond the Recipe.
+  Their cards' minutes are the lessons'.
+- Every Unit 2 bread blooms active dry yeast in liquid checked at 105 to
+  110°F, the week 5 drill.
+- **Weeks 5–8's twelve part pages**, in the Level 3 voice: how yeast works,
+  gluten, proofing, doneness, and the unit quiz; a three-temperature yeast
+  test, kneading to a windowpane, dividing by weight, and braiding (drills
+  use a flour-and-water dough with no yeast); freezing pita, a cold proof,
+  and two Bible pages: Bread in the Bible (Exodus 16, Matthew 6, John 6) and
+  Leaven and unleavened bread (Exodus 12, 1 Corinthians 5, Leviticus 23,
+  Matthew 13).
+- New registry entries: active dry yeast, a kitchen scale, a 9-by-5-inch
+  loaf pan, and the kitchen word "proof" (taught in Challah).
+- Level 3's hours with every part are now about 128 (126 before); the
+  written recipes' minutes replace the estimates.
+- Screenshots were sent in the session, taken from the demo's Try a week
+  pointed at Unit 2 for that only. The demo still shows Unit 1.
+- Tests: 351. The Level course test now schedules 9 written recipes, with
+  27 waiting; the hours tests expect 128.
+
+## 197. 2026-10-25 — How much? in Cook mode, and kitchen words on part pages
+
+- Owner, 2026-10-25: add the kitchen words for Unit 2 and link them; and in
+  a cook, a way to see how much of an ingredient a step uses, either by
+  tapping the ingredient or with one How much? button. Claude built the
+  button: kitchen words are already tappable in step text, and two kinds of
+  tappable word in one sentence would be hard to tell apart.
+- **How much?** (`public/player.js`, `src/content/amounts.js`): a Cook mode
+  step that names ingredients has a How much? button beside Why?. It opens
+  "How much, for 8" with each named ingredient's lines at the cook's size,
+  any swap, and the group where one ingredient is in two (challah's eggs:
+  Dough and Egg wash). A step names an ingredient by its name or a run of
+  its words ("flour", "chicken"); describing words alone ("brown", "fresh")
+  and general ones ("sauce", "powder") don't count; a longer name claims its
+  words, so "vegetable oil" isn't olive oil and "garlic powder" isn't
+  garlic; any fish is "the fish"; a {qty:} placeholder names its ingredient.
+  Wash steps and left-out ingredients show nothing. It closes when the step
+  changes.
+- **Kitchen words** (`content/terms.json`): bloom, shaggy dough, tacky,
+  windowpane test, egg wash, poke test, crumb, and enriched dough, beside
+  proof (build log 196). Knead is now practiced in Pita bread, the first
+  written lesson that kneads.
+- **Kitchen words on part pages:** a Level's knowledge, drill, and Beyond
+  the Recipe pages (the kitchen's and the demo's) underline kitchen words,
+  and a tap opens the word's card under its paragraph (`markTerms` and
+  `toggleTermCard` in `src/content/terms.js`).
+- The review doc has the new words and the button's copy. Screenshots were
+  sent in the session.
+- Tests: 355 (four new: which ingredients a step names).
+
+## 198. 2026-10-25 — Level 3 Unit 3: knife cuts
+
+Phase 12, slice 12f, Unit 3 (plan §12.4). Owner, 2026-10-25: Unit 3 the
+same way as Unit 2: the copy in a review doc, "Level 3 Unit 3: Classic knife
+cuts and honing", the kitchen words added and linked, live on merge.
+
+- **Beef tacos with pico de gallo** (week 9, Level only): pico diced to
+  ¼ inch with the pinch grip and the claw; ground beef browned to 160°F, its
+  fat spooned off and thrown away cooled.
+- **Tabbouleh** (week 10, Level only): two bunches of parsley minced by
+  rock-chopping; fine bulgur soaked, not cooked. Bulgur is wheat; no
+  gluten-free swap.
+- **Vegetable stir-fry with tofu** (week 11; lesson 9c, the stir-frying
+  group, for every family): carrots and pepper julienned ⅛ inch, tofu pressed
+  and crisped in batches, hard vegetables first, garlic and ginger last.
+  Tamari is the gluten-free swap. Its card's minutes are now the lesson's 60.
+- **Israeli salad** (week 12, mastery, Level only): every cut unaided, a
+  ¼-inch dice, dressed right before serving.
+- **Weeks 9–12's twelve part pages:** parts of a knife and knife safety,
+  honing vs. sharpening (with how to hone), why even cuts cook evenly, and
+  the classic cuts by size with the unit quiz; drills dicing three onions,
+  mincing parsley and garlic (garlic in oil is kept cold: botulism), a
+  measured julienne, and a timed dice; Beyond the Recipe: chopping ahead,
+  storing herbs, prepping salad vegetables, and gleaning (Leviticus 19:9–10,
+  Deuteronomy 24:19–22, Ruth 2).
+- **Kitchen words:** pinch grip, claw, hone, plank, brunoise, batonnet,
+  chiffonade.
+- New ingredients: fine bulgur (#1), snow peas.
+- **How much?** reads names more carefully: a word before the last stands
+  alone only if it isn't another ingredient's name ("rice" isn't rice
+  vinegar, "chicken" isn't chicken broth); "the pepper" next to a bell pepper
+  isn't black pepper, but "salt and pepper" is. When a step says which group
+  it means ("the beef's salt", "the eggs for the dough"), only that group's
+  line shows.
+- Screenshots were sent in the session, taken from the demo's Try a week
+  pointed at Unit 3 for that only.
+- Tests: 356. A Level course now schedules 13 written recipes, with 23
+  waiting; best fit's "written option first" check moved to week 15, since
+  week 9's own recipe is written now.

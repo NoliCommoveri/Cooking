@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [195. 2026-10-24 — Demo header: beta testing is live](docs/build-log.md#195-2026-10-24--demo-header-beta-testing-is-live)
+**Latest build log entry:** [198. 2026-10-25 — Level 3 Unit 3: knife cuts](docs/build-log.md#198-2026-10-25--level-3-unit-3-knife-cuts)
 
 ## Current features
 
@@ -18,7 +18,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Progress and rewards** (`public/rewards.js`, `src/content/rewards.js`): each dish lights its node on the skill tree or stamps the passport and its world map, and each skill earns a crest or pin. Six ranks, from Kitchen Apprentice to Executive Chef at 75 dishes; family recipes count toward rank only. Worked out from the cooks, never stored.
 - **Celebrations**: after a cook, and on coming back to the kitchen, the new stamp or cleared quest, new skills, and a full-screen rank up, once per device.
 - **Sound** (`public/sound.js`): made in the browser. A sizzle on Next, a stamp thunk, a skill chime, and a rank-up fanfare, with a mute toggle remembered on the device (timers always ring).
-- **Lesson player** (`public/player.js`): each lesson in the profile's theme: the lesson card with the serving picker, Learn cards, Prep checklists, and Cook mode with safety banners, kitchen words, Why? cards, timers that ring until stopped, and the screen kept awake.
+- **Lesson player** (`public/player.js`): each lesson in the profile's theme: the lesson card with the serving picker, Learn cards, Prep checklists, and Cook mode with safety banners, kitchen words, How much? (the amounts of the ingredients a step names), Why? cards, timers that ring until stopped, and the screen kept awake.
 - **Suggest a fix** (`src/content/patch.js`, `src/worker/lessons.js`): parents and adult learners report a problem on a lesson or step with what it should say instead; the family sees what came of it on the lesson.
 - **Fix requests** (owner screens): **Apply in the manager** opens the lesson in the manager section with the suggestion filled in; decline or reopen any of them, and revert an older lesson patch.
 - **Voice step control** (`public/voice.js`): in cook mode, "next" (moves on and reads the step aloud), "back," and "again" (reads it again). Off until a parent turns it on in family settings; shown only where the browser can recognize speech.
@@ -60,7 +60,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Dish illustrations** (`content/images/dishes/`): one picture for each planned dish.
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
 - **Lesson content** (`content/`): 37 lessons (all 12 of Unit 1, all 20 of Unit 2, 3 more samples, and the 2 Appointed Times lessons), and the ingredient, tool, skill (60), and cuisine lists, as JSON.
-- **Level 3 content** (release 1, `content/levels/level-3.json`): Level 3 Cook's 9 units and 36 weeks, each with its skill, recipe, mastery check, and drill, knowledge, and Beyond the Recipe page, plus 21 Level-only recipes and Unit 1's written part pages; edited on the manager's Level 3 page.
+- **Level 3 content** (release 1, `content/levels/level-3.json`): Level 3 Cook's 9 units and 36 weeks, each with its skill, recipe, mastery check, and drill, knowledge, and Beyond the Recipe page, plus 21 Level-only recipes and Units 1 to 3's written recipes and part pages; edited on the manager's Level 3 page.
 - **Level courses** (release 1, `src/worker/plan.js`): setting up a course asks Which program?, Cook Around the World or Level 3 Cook; a Level course runs one week a week, its recipes in week order, and the course card shows "Week 5 of 36".
 - **Level 3 recipes in Side quests** (release 1): the Level's own written recipes (labels L1, L2…) in their own unit in the kitchen, cookable and queueable like any lesson.
 - **Optional Level parts** (release 1): a Level week is Knowledge, Drill, Recipe, Beyond the Recipe; any but the recipe can be turned off at setup or later, with the planned hours shown; any part can be skipped.
@@ -76,4 +76,4 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Content file layout** (`tools/format-content.js`): every content file in the one layout the manager section writes.
 - **Scaling** (`src/content/`): amounts and step counts change with the serving size, shown in measuring-cup and spoon amounts.
 - **Lesson preview** (`preview/lesson-preview.html`): each written lesson, read-only, at every serving size. Tap an underlined kitchen word to see what it means.
-- **Kitchen words** (`content/terms.json`): what cooking words like dice, mince, and simmer mean, in kid terms. The linter won't let a lesson use one that isn't defined.
+- **Kitchen words** (`content/terms.json`): what cooking words like dice, mince, and simmer mean, in kid terms. The linter won't let a lesson use one that isn't defined. They're tappable in Cook mode and on a Level's part pages.

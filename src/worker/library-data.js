@@ -3469,6 +3469,131 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "vegetable-stir-fry",
+   "version": 1,
+   "track": "core",
+   "unit": 2,
+   "title": "Vegetable stir-fry with tofu",
+   "image": "img/dishes/vegetable-stir-fry.webp",
+   "cuisine": "chinese",
+   "skill": "Julienned vegetables, stir-frying in batches",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "max": 6,
+    "notes": [
+     {
+      "from": 5,
+      "text": "Fry the tofu in three batches, and the vegetables in two, so the pan stays hot."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "tofu-extra-firm"
+    },
+    {
+     "ingredient": "cornstarch"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "snow-peas"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "vinegar-rice"
+    },
+    {
+     "ingredient": "cornstarch"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "tofu",
+    "flavors": [
+     "ginger-soy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "lots"
+   },
+   "tasteItems": {
+    "required": [
+     "carrots",
+     "bell-peppers",
+     "onions",
+     "garlic",
+     "ginger",
+     "sesame"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "saucepan-medium",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "kitchen-towel",
+    "plate",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "fork",
+    "skillet-12",
+    "spatula",
+    "box-grater"
+   ]
+  },
+  {
    "id": "oyakodon",
    "version": 1,
    "track": "core",
@@ -5210,6 +5335,88 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "pita-bread",
+   "version": 1,
+   "track": "core",
+   "unit": 5,
+   "title": "Pita bread",
+   "image": "img/dishes/pita-bread.webp",
+   "cuisine": "lebanese",
+   "skill": "A yeast dough, baking flatbreads that puff",
+   "servings": 8,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 8 pitas.",
+     "2": "Makes 16 pitas. Mix it in the large bowl and knead it in two halves."
+    }
+   },
+   "totalMinutes": 120,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "flour-ap"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "sheet-pan",
+    "chef-knife",
+    "rolling-pin",
+    "oven-mitts",
+    "tongs"
+   ]
+  },
+  {
    "id": "buttermilk-biscuits",
    "version": 1,
    "track": "core",
@@ -5293,6 +5500,108 @@ export const LIBRARY = {
     "sheet-pan",
     "parchment",
     "pastry-brush",
+    "oven-mitts",
+    "cooling-rack"
+   ]
+  },
+  {
+   "id": "challah",
+   "version": 1,
+   "track": "core",
+   "unit": 5,
+   "title": "Challah",
+   "image": "img/dishes/challah.webp",
+   "cuisine": "jewish",
+   "skill": "Yeast dough: kneading, proofing, braiding",
+   "servings": 10,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 1 large braided loaf.",
+     "2": "Makes 2 loaves. Bake them on two sheet pans, one rack in the upper third and one in the lower third, and swap them halfway."
+    }
+   },
+   "totalMinutes": 240,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "sesame-seeds",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "sesame"
+    ]
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "chef-knife",
+    "kitchen-scale",
+    "sheet-pan",
+    "parchment",
+    "pastry-brush",
+    "foil",
     "oven-mitts",
     "cooling-rack"
    ]
@@ -5759,6 +6068,465 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "beef-tacos-pico",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Beef tacos with pico de gallo",
+   "image": "img/meals/meat.svg",
+   "cuisine": "mexican",
+   "skill": "An even dice for pico de gallo",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "Brown the beef in two batches, so it browns instead of steaming."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "onion-white"
+    },
+    {
+     "ingredient": "jalapeno",
+     "optional": true
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "chili-powder"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "tortilla-corn"
+    },
+    {
+     "ingredient": "cheddar-shredded",
+     "optional": true
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "onions",
+     "cilantro",
+     "lemon-lime",
+     "garlic"
+    ],
+    "optional": [
+     "hot-peppers",
+     "sour-cream-yogurt"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "spoon",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "wooden-spoon",
+    "heatproof-bowl",
+    "thermometer",
+    "paper-towels",
+    "microwave",
+    "kitchen-towel"
+   ],
+   "level": "level-3"
+  },
+  {
+   "id": "dinner-rolls",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Dinner rolls",
+   "image": "img/meals/bread.svg",
+   "cuisine": "american",
+   "skill": "Shaping even rolls by weight",
+   "servings": 12,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 12 rolls.",
+     "2": "Makes 24 rolls in two baking dishes. Knead the dough in two halves."
+    }
+   },
+   "totalMinutes": 210,
+   "ingredients": [
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "milk-whole",
+     "use": "milk-oat",
+     "reason": "dairy"
+    },
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "fork",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "kitchen-scale",
+    "chef-knife",
+    "baking-dish",
+    "pastry-brush",
+    "foil",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "level": "level-3"
+  },
+  {
+   "id": "israeli-salad",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Israeli salad",
+   "image": "img/meals/salad.svg",
+   "cuisine": "israeli",
+   "skill": "A fine, even dice",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Serves 6 as a side.",
+     "2": "Serves 12. Use the largest bowl you have."
+    }
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "onion-red"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "cucumber",
+     "tomatoes",
+     "bell-peppers",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "vegetable-peeler",
+    "spoon",
+    "mixing-bowl-large",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "fork",
+    "colander"
+   ],
+   "level": "level-3"
+  },
+  {
+   "id": "sandwich-loaf",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Sandwich loaf",
+   "image": "img/meals/bread.svg",
+   "cuisine": "american",
+   "skill": "Kneading to a windowpane, baking a loaf",
+   "servings": 12,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 1 loaf, about 12 slices.",
+     "2": "Makes 2 loaves. Knead the dough in two halves, and you'll need two loaf pans."
+    }
+   },
+   "totalMinutes": 240,
+   "ingredients": [
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "milk-whole",
+     "use": "milk-oat",
+     "reason": "dairy"
+    },
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "rolling-pin",
+    "loaf-pan",
+    "foil",
+    "oven-mitts",
+    "cooling-rack",
+    "chef-knife",
+    "cutting-board"
+   ],
+   "level": "level-3"
+  },
+  {
+   "id": "tabbouleh",
+   "version": 1,
+   "track": "core",
+   "unit": 100,
+   "title": "Tabbouleh",
+   "image": "img/meals/salad.svg",
+   "cuisine": "lebanese",
+   "skill": "Mincing parsley fine",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Serves 6 as a side.",
+     "2": "Serves 12. Mince the parsley a bunch at a time."
+    }
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "bulgur-fine"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "mint"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "mint",
+     "tomatoes",
+     "onions",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "microwave",
+    "mixing-bowl-large",
+    "small-bowl",
+    "plate",
+    "measuring-cups",
+    "measuring-spoons",
+    "colander",
+    "kitchen-towel",
+    "chef-knife",
+    "cutting-board",
+    "spoon",
+    "fork"
+   ],
+   "level": "level-3"
+  },
+  {
    "id": "thick-burgers",
    "version": 1,
    "track": "core",
@@ -5981,6 +6749,12 @@ export const LIBRARY = {
    "name": "White rice",
    "contains": []
   },
+  "bulgur-fine": {
+   "name": "Fine bulgur (#1)",
+   "contains": [
+    "gluten"
+   ]
+  },
   "soy-sauce": {
    "name": "Soy sauce",
    "contains": [
@@ -6008,6 +6782,10 @@ export const LIBRARY = {
    "contains": [
     "gluten"
    ]
+  },
+  "yeast-active-dry": {
+   "name": "Active dry yeast",
+   "contains": []
   },
   "baking-powder": {
    "name": "Baking powder",
@@ -6061,6 +6839,10 @@ export const LIBRARY = {
   },
   "carrot": {
    "name": "Carrots",
+   "contains": []
+  },
+  "snow-peas": {
+   "name": "Snow peas",
    "contains": []
   },
   "cucumber": {
@@ -6617,6 +7399,11 @@ export const LIBRARY = {
   "cottage-cheese-crescents": "A2"
  },
  "levelLabels": {
+  "beef-tacos-pico": "L18",
+  "dinner-rolls": "L3",
+  "israeli-salad": "L5",
+  "sandwich-loaf": "L2",
+  "tabbouleh": "L4",
   "thick-burgers": "L1"
  },
  "dietTags": [
@@ -7152,7 +7939,7 @@ export const LIBRARY = {
     "stir-frying",
     "julienne"
    ],
-   "minutes": 35,
+   "minutes": 60,
    "cuisine": "chinese",
    "pickOne": "stir-frying",
    "tags": {
@@ -8491,7 +9278,7 @@ export const LIBRARY = {
    "skills": [
     "yeast-dough"
    ],
-   "minutes": 210,
+   "minutes": 240,
    "cuisine": "jewish",
    "pickOne": "yeast-dough",
    "meal": false,
@@ -9638,15 +10425,143 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Bloom yeast; test water temperature",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "You'll test yeast in water at three temperatures, side by side, and see for yourself why the recipe asks for 105 to 110°F. Use the thermometer you calibrated in week 1."
+      ],
+      "steps": [
+       "Set out 3 clear glasses or jars and label them: cool, warm, hot.",
+       "Fill each with ½ cup of water: about 80°F in the first, 105 to 110°F in the second, and 140°F in the third. Warm the water in the microwave and check each glass with the thermometer, adjusting with hot or cold water until it reads right.",
+       "Stir ½ teaspoon of sugar into each glass.",
+       "Sprinkle ½ teaspoon of active dry yeast over each, and start a 10-minute timer.",
+       "At 5 minutes and at 10 minutes, look at each glass. Note how much foam there is and how it smells.",
+       "Write down what you saw: which bloomed fastest, which bloomed slowly, and which didn't bloom at all.",
+       "Pour the glasses down the drain and rinse them."
+      ],
+      "quiz": [
+       {
+        "q": "Which glass should show no foam?",
+        "choices": [
+         "The 140°F one",
+         "The 80°F one",
+         "The 110°F one"
+        ],
+        "answer": 0,
+        "explain": "Water that hot kills yeast."
+       },
+       {
+        "q": "The 80°F glass foamed, but slowly. Why?",
+        "choices": [
+         "Cool water slows yeast but doesn't kill it",
+         "It had less sugar",
+         "The yeast was dead"
+        ],
+        "answer": 0,
+        "explain": "Yeast still works when it's cool, just more slowly."
+       }
+      ]
      },
      "knowledge": {
       "title": "How yeast makes dough rise",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Baker's yeast is a single-celled fungus, Saccharomyces cerevisiae. A packet holds billions of them, dried and dormant. Warm water wakes them up.",
+       "Once awake, yeast feeds on sugars in the dough, some added and some released from the flour's starch by its own enzymes. It breaks them down by fermentation and gives off two things: carbon dioxide gas and a little alcohol (ethanol).",
+       "The gas is what raises bread. Kneading builds gluten, a stretchy network that traps the gas in thousands of tiny bubbles, so the dough swells instead of letting it escape. In the oven, the gas expands, the alcohol bakes off, and the heat kills the yeast at about 140°F. The bubbles set in place as the crumb.",
+       "Temperature runs the whole process. Yeast works best around 75 to 80°F in a rising dough. Cold slows it down; that's why a dough can rise overnight in the fridge. Water above about 130°F starts to kill it, which is why you check the water before the yeast goes in.",
+       "Fermentation also makes flavor. A dough that rises slowly, in a cool kitchen or the fridge, tastes fuller than one rushed in a warm spot."
+      ],
+      "quiz": [
+       {
+        "q": "What is baker's yeast?",
+        "choices": [
+         "A single-celled fungus",
+         "A kind of bacteria",
+         "A chemical powder"
+        ],
+        "answer": 0,
+        "explain": "Saccharomyces cerevisiae, a living fungus, dried and dormant in the packet."
+       },
+       {
+        "q": "Which gas raises bread dough?",
+        "choices": [
+         "Carbon dioxide",
+         "Oxygen",
+         "Steam only"
+        ],
+        "answer": 0,
+        "explain": "Yeast gives it off as it ferments sugar. Steam helps in the oven, as in pita."
+       },
+       {
+        "q": "What traps the gas in the dough?",
+        "choices": [
+         "Gluten, built by kneading",
+         "The salt",
+         "The oil"
+        ],
+        "answer": 0,
+        "explain": "Gluten's stretchy network holds the gas in tiny bubbles."
+       },
+       {
+        "q": "What happens to yeast in the oven?",
+        "choices": [
+         "Heat kills it at about 140°F",
+         "It keeps working until the bread cools",
+         "It turns into gluten"
+        ],
+        "answer": 0,
+        "explain": "By then it has done its work, and the bubbles set as the crumb."
+       },
+       {
+        "q": "Why can dough rise overnight in the fridge?",
+        "choices": [
+         "Cold slows yeast down without killing it",
+         "Cold kills the yeast",
+         "The fridge adds moisture"
+        ],
+        "answer": 0,
+        "explain": "That slow rise also gives the bread more flavor."
+       }
+      ]
      },
      "sabbath": {
-      "title": "Bake and freeze pita for the Sabbath",
-      "minutes": 45
+      "title": "Bake and freeze pita",
+      "minutes": 45,
+      "body": [
+       "Bread freezes better than almost anything you'll cook. Frozen within a few hours of baking, it tastes nearly fresh when it's reheated. Left on the counter, it goes stale in a day or two, and a stale pita cracks instead of folding.",
+       "Staling isn't drying out. The starch in bread slowly recrystallizes as it cools, and that's what makes it firm. The fridge speeds that up, so bread keeps worse there than on the counter. The freezer stops it.",
+       "Many families bake ahead like this so there's bread on hand for busy days, or so they can focus on resting."
+      ],
+      "steps": [
+       "Set aside some of this week's pitas, or bake a second batch.",
+       "Let them cool completely, about 30 minutes, in their towel. Warm pitas sweat in a bag, and the drops of water turn to ice.",
+       "Stack them with a square of parchment between each, so you can take out one at a time.",
+       "Slide the stack into a freezer bag, press out the air, and seal it. Label it with what it is and the date.",
+       "Freeze for up to 3 months.",
+       "To serve, wrap the frozen pitas in foil and heat them at 350°F for 10 to 15 minutes, or thaw one on the counter for 15 minutes and warm it in a dry skillet for 30 seconds a side."
+      ],
+      "quiz": [
+       {
+        "q": "Why not keep bread in the fridge?",
+        "choices": [
+         "The cold makes it go stale faster",
+         "It's a food safety risk",
+         "It gets moldy faster"
+        ],
+        "answer": 0,
+        "explain": "Cold speeds up the starch recrystallizing. The freezer stops it."
+       },
+       {
+        "q": "Why cool the pitas before bagging them?",
+        "choices": [
+         "Warm bread sweats, and the water turns to ice",
+         "They're easier to stack",
+         "So they shrink"
+        ],
+        "answer": 0,
+        "explain": "Ice crystals make the bread soggy when it thaws."
+       }
+      ]
      }
     },
     {
@@ -9659,15 +10574,144 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Knead and windowpane test",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "You'll knead a small dough by hand and test it as you go, so you learn what a developed dough feels like. There's no yeast in it; the drill is about gluten."
+      ],
+      "steps": [
+       "Stir together 1 cup of all-purpose flour, ⅓ cup of water, and a pinch of salt in a bowl until it forms a rough dough.",
+       "Turn it out and knead: push it away with the heel of your hand, fold it back, turn it a quarter turn, and repeat in a steady rhythm.",
+       "After 2 minutes, pinch off a grape-sized piece and try the windowpane test: stretch it slowly between your fingers and thumbs into a thin sheet. Note where it tears.",
+       "Knead 3 more minutes and test again. Then 3 more, and test again.",
+       "Note how the dough changed: how sticky it is, how smooth, and how far it stretched each time.",
+       "When a piece stretches thin enough to see light through, the dough is developed. Note how many minutes it took.",
+       "Roll the dough thin and cook it in a dry skillet like Unleavened flatbread, or throw it out."
+      ],
+      "quiz": [
+       {
+        "q": "The test piece tore before it went thin. What next?",
+        "choices": [
+         "Knead a few more minutes and test again",
+         "Add more flour",
+         "Let it rise"
+        ],
+        "answer": 0,
+        "explain": "The gluten isn't developed yet."
+       },
+       {
+        "q": "How does dough change as you knead it?",
+        "choices": [
+         "Less sticky, smoother, and stretchier",
+         "Stickier and softer",
+         "Drier and crumbly"
+        ],
+        "answer": 0,
+        "explain": "The gluten network is organizing."
+       }
+      ]
      },
      "knowledge": {
       "title": "Gluten and kneading",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Wheat flour holds two proteins, glutenin and gliadin. Dry, they do nothing. When water is added, they link up into gluten. Glutenin makes it springy and strong, and gliadin makes it stretchy.",
+       "Kneading lines those links up. At first the dough is shaggy and tears easily. As you push, fold, and turn it, the strands lengthen and organize into a network that stretches without breaking. That's what the windowpane test shows.",
+       "A strong network matters most for a tall loaf. It has to hold its gas through a long rise and half an hour in the oven. A flatbread, baked in minutes, needs less.",
+       "Other ingredients change gluten. Fat (butter, oil, egg yolk) coats the strands so the crumb is soft and tender; that's an enriched dough. Salt tightens the network and slows the yeast a little. Bread flour has more protein than all-purpose, so it builds stronger gluten and a chewier bread.",
+       "Gluten is also why some people can't eat bread. In people with celiac disease, gluten triggers an immune reaction that damages the small intestine. Gluten-free breads use other starches and binders, and they behave differently in every step you're learning."
+      ],
+      "quiz": [
+       {
+        "q": "Which two proteins form gluten?",
+        "choices": [
+         "Glutenin and gliadin",
+         "Casein and whey",
+         "Albumin and keratin"
+        ],
+        "answer": 0,
+        "explain": "Water lets them link; kneading lines them up."
+       },
+       {
+        "q": "What does kneading do?",
+        "choices": [
+         "Lines up gluten strands into a strong network",
+         "Adds air for the yeast",
+         "Melts the butter"
+        ],
+        "answer": 0,
+        "explain": "That network traps the yeast's gas."
+       },
+       {
+        "q": "Why is an enriched dough softer?",
+        "choices": [
+         "Fat coats the gluten strands",
+         "It has more yeast",
+         "It's kneaded less"
+        ],
+        "answer": 0,
+        "explain": "Butter, oil, and egg yolk tenderize the crumb."
+       },
+       {
+        "q": "Why would a baker pick bread flour?",
+        "choices": [
+         "Its higher protein builds stronger gluten",
+         "It has yeast in it",
+         "It's gluten-free"
+        ],
+        "answer": 0,
+        "explain": "Stronger gluten makes a taller, chewier loaf."
+       }
+      ]
      },
      "sabbath": {
-      "title": "Bake a loaf Friday morning",
-      "minutes": 45
+      "title": "Bread in the Bible: daily bread and the bread of life (Matthew 6:11; John 6:35)",
+      "minutes": 45,
+      "body": [
+       "Bread comes up more than almost any other food in the Bible. It stands for the food a person needs to live, and often for more than that.",
+       "In the wilderness, God fed Israel with manna, \"bread from heaven\" (Exodus 16:4). Each morning the people gathered what they needed for that day. Manna kept overnight spoiled, except the double portion gathered on the sixth day, which kept (Exodus 16:16–24). It taught them to depend on God one day at a time.",
+       "Jesus taught his disciples to pray, \"Give us this day our daily bread\" (Matthew 6:11). The prayer asks for what's needed today, not a store for years.",
+       "After feeding five thousand people with five loaves (John 6:1–14), Jesus told the crowd, who had brought up the manna, \"I am the bread of life; whoever comes to me shall not hunger\" (John 6:35). Bread keeps a body alive for a day; he spoke of himself as what keeps a person alive for good."
+      ],
+      "steps": [
+       "Read Exodus 16:4–5 and 16:13–24.",
+       "Read Matthew 6:9–13.",
+       "Read John 6:26–35.",
+       "Answer in writing: what did gathering manna each morning teach Israel?",
+       "Answer in writing: why do you think Jesus compared himself to bread, and not to some other food?",
+       "Share your answers with an adult at a meal this week, with a slice of this week's loaf."
+      ],
+      "quiz": [
+       {
+        "q": "What did Israel gather each morning in the wilderness?",
+        "choices": [
+         "Manna",
+         "Quail only",
+         "Grain from the fields"
+        ],
+        "answer": 0,
+        "explain": "\"Bread from heaven\" (Exodus 16:4)."
+       },
+       {
+        "q": "Where is \"Give us this day our daily bread\"?",
+        "choices": [
+         "Matthew 6:11",
+         "Exodus 16:4",
+         "John 6:35"
+        ],
+        "answer": 0,
+        "explain": "It's part of the prayer Jesus taught in Matthew 6."
+       },
+       {
+        "q": "What happened just before Jesus said \"I am the bread of life\"?",
+        "choices": [
+         "He fed five thousand people with five loaves",
+         "He turned water into wine",
+         "He ate the Passover"
+        ],
+        "answer": 0,
+        "explain": "The crowd followed him after the feeding (John 6:1–14, 26)."
+       }
+      ]
      }
     },
     {
@@ -9677,15 +10721,134 @@ export const LIBRARY = {
      "recipe": "dinner-rolls",
      "drill": {
       "title": "Shape even rolls by weight",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Bakeries weigh dough because eyes are poor judges of size. You'll divide a practice dough by weight and shape tight, even balls."
+      ],
+      "steps": [
+       "Stir together 1½ cups of all-purpose flour, ½ cup of water, and a pinch of salt until it forms a dough. Knead it until it's smooth, about 3 minutes.",
+       "Before using the scale, cut the dough by eye into 8 pieces you think are equal. Weigh each one and write the weights down.",
+       "Press the pieces back together. Weigh the whole dough and divide by 8. That's your target.",
+       "Cut 8 pieces again, this time weighing each. Pinch dough from heavy pieces onto light ones until each is within 3 grams of the target.",
+       "Shape each piece into a ball: cup it under your palm on a bare spot of counter and roll it in small circles until the top is smooth and tight.",
+       "Compare your two sets of weights. How far off were your eyes?",
+       "Roll the balls flat and cook them in a dry skillet like Unleavened flatbread, or throw them out."
+      ],
+      "quiz": [
+       {
+        "q": "Why weigh dough instead of cutting it by eye?",
+        "choices": [
+         "So every roll bakes through at the same time",
+         "So the dough rises faster",
+         "So you use less flour"
+        ],
+        "answer": 0,
+        "explain": "Small rolls overbake while large ones stay doughy."
+       },
+       {
+        "q": "Why shape on a bare spot of counter, not on flour?",
+        "choices": [
+         "A little stickiness gives the dough grip to tighten",
+         "Flour is wasted",
+         "It's cleaner"
+        ],
+        "answer": 0,
+        "explain": "On flour, the ball just slides and never builds a tight skin."
+       }
+      ]
      },
      "knowledge": {
       "title": "Proofing: under vs. over",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Proofing is the last rise, after shaping. It decides how a bread turns out more than any other step, and there's no clock for it. You judge it by the dough.",
+       "The poke test: flour a fingertip and press it about ½ inch into the side of the dough. If the dent springs back right away, the dough is underproofed. If it springs back slowly and leaves a small dent, it's ready. If it doesn't spring back at all, or the dough sighs and sinks, it's overproofed.",
+       "Underproofed bread is dense and tight. It rises hard in the oven and often bursts open along a side, because the yeast still has a lot of gas to give and the gluten is still tight.",
+       "Overproofed bread rises too far before baking. The gluten stretches thin and weak, the yeast runs out of sugar, and the loaf collapses or spreads flat in the oven, with big holes under the crust and a sour, boozy smell.",
+       "Temperature sets the pace. A warm kitchen (80°F) might proof rolls in 30 minutes; a cool one (68°F) might take an hour and a half. The fridge (below 40°F) slows it to overnight, which is called a cold proof or retarding the dough. That's the make-ahead method in this week's Beyond the Recipe."
+      ],
+      "quiz": [
+       {
+        "q": "You poke the dough and the dent springs right back. What does that mean?",
+        "choices": [
+         "It's underproofed; give it more time",
+         "It's ready to bake",
+         "It's overproofed"
+        ],
+        "answer": 0,
+        "explain": "Ready dough springs back slowly and leaves a small dent."
+       },
+       {
+        "q": "What does overproofed bread do in the oven?",
+        "choices": [
+         "Collapses or spreads flat",
+         "Bursts along one side",
+         "Rises extra tall"
+        ],
+        "answer": 0,
+        "explain": "The gluten is stretched weak, and the yeast has run out of food."
+       },
+       {
+        "q": "Why might rolls proof faster on one day than another?",
+        "choices": [
+         "The kitchen is warmer",
+         "The oven is hotter",
+         "They were weighed"
+        ],
+        "answer": 0,
+        "explain": "Yeast works faster when it's warm."
+       },
+       {
+        "q": "What does a cold proof in the fridge do?",
+        "choices": [
+         "Slows the yeast so dough can wait overnight",
+         "Kills the yeast",
+         "Makes the bread rise faster"
+        ],
+        "answer": 0,
+        "explain": "It's also called retarding the dough."
+       }
+      ]
      },
      "sabbath": {
-      "title": "Shape rolls Thursday; cold proof overnight",
-      "minutes": 45
+      "title": "Shape rolls a day ahead; cold proof overnight",
+      "minutes": 45,
+      "body": [
+       "A cold proof splits rolls across two days. You do the mixing and shaping one day, and the next day you only bake them. The long, cool rise also gives them more flavor.",
+       "The fridge keeps a dough with milk and egg safe, because it stays below 40°F, out of the danger zone. Shaped dough keeps there for 8 to 16 hours. Past about a day, the yeast runs out of food and the rolls overproof.",
+       "Many families do the shaping a day ahead so baking day is short, or so they can focus on resting."
+      ],
+      "steps": [
+       "Make this week's roll dough and let it rise once, as the recipe says.",
+       "Weigh, divide, and shape the rolls into the buttered dish.",
+       "Cover the dish tightly with plastic wrap or a lid, and put it straight in the fridge. Label it with the time.",
+       "Leave it 8 to 16 hours.",
+       "The next day, take the dish out and leave it on the counter, still covered, until the rolls are puffy and touching and pass the poke test. This usually takes 1 to 2 hours, because the dough starts cold.",
+       "Heat the oven to 375°F and bake them as the recipe says, to 190°F in the middle roll.",
+       "Note how the cold-proofed rolls compare with ones made the same day: flavor, rise, and color."
+      ],
+      "quiz": [
+       {
+        "q": "Why is dough with milk and egg safe overnight in the fridge?",
+        "choices": [
+         "It stays below 40°F, out of the danger zone",
+         "Yeast kills bacteria",
+         "The butter preserves it"
+        ],
+        "answer": 0,
+        "explain": "Refrigerator temperatures keep it out of the 40–140°F range."
+       },
+       {
+        "q": "Why do cold rolls need 1 to 2 hours on the counter?",
+        "choices": [
+         "The dough has to warm up and finish proofing",
+         "So they don't crack the dish",
+         "So the butter melts"
+        ],
+        "answer": 0,
+        "explain": "Yeast is slow when cold. Use the poke test, not the clock."
+       }
+      ]
      }
     },
     {
@@ -9699,15 +10862,206 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Braid a dough",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "A three-strand braid is the classic challah shape. You'll practice it with a plain dough until it's smooth and even, before you braid this week's challah on your own."
+      ],
+      "steps": [
+       "Stir together 1½ cups of all-purpose flour, ½ cup of water, and a pinch of salt. Knead it until it's smooth, about 3 minutes, and cut it into 3 pieces of the same weight.",
+       "Roll each piece into a rope about 12 inches long, a little thicker in the middle than at the ends. If a rope shrinks back, let it rest 5 minutes.",
+       "Lay the ropes side by side, running away from you, and pinch them together at the far end.",
+       "Braid: cross the right rope over the middle one, then the left rope over the new middle one. Keep going, right over middle, left over middle, snug but not stretched.",
+       "At the end, pinch the three ropes together and tuck both pinched ends under the loaf.",
+       "Unbraid it, roll the ropes again, and braid a second time, this time starting from the middle and working to each end, turning the loaf around between halves. Compare the two: which is more even?",
+       "If you have time, try a four-strand or a round braid from a video or book, and note the pattern you used.",
+       "Roll the dough out and cook it in a dry skillet like Unleavened flatbread, or throw it out."
+      ],
+      "quiz": [
+       {
+        "q": "In a three-strand braid, where does each outside rope go?",
+        "choices": [
+         "Over the middle rope",
+         "Under both other ropes",
+         "Straight down the side"
+        ],
+        "answer": 0,
+        "explain": "Right over middle, then left over middle."
+       },
+       {
+        "q": "Why braid from the middle out to each end?",
+        "choices": [
+         "The loaf comes out even, thick in the middle and tapered",
+         "It's faster",
+         "It uses less dough"
+        ],
+        "answer": 0,
+        "explain": "Braiding end to end tends to leave one end fat and one thin."
+       }
+      ]
      },
      "knowledge": {
       "title": "Doneness: color, sound, 190°F inside",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "This week you judge doneness three ways, then take the unit quiz.",
+       "Color: the crust browns through the Maillard reaction, where proteins and sugars react above about 300°F. An egg wash, honey, or milk adds proteins and sugars, so enriched breads brown sooner and darker. That's why color alone can fool you.",
+       "Sound: tip a loaf over (with oven mitts) and tap the bottom. A done loaf sounds hollow, because the crumb has set and dried. A dull thud means it's still wet inside. It's a useful check, but hard to read on a soft, rich loaf.",
+       "Temperature: the thermometer is the sure test. Enriched breads like sandwich loaves, rolls, and challah are done at 190°F in the center. Lean breads (flour, water, yeast, salt) go to about 200 to 210°F for a crisp crust and an open crumb. At these temperatures, the starch has absorbed water and set; this is called gelatinization.",
+       "Underbaked bread is gummy and dense in the middle and may sink as it cools. Bread keeps cooking for a while after it comes out, so it's cooled before slicing."
+      ],
+      "quiz": [
+       {
+        "q": "What temperature is an enriched bread done at?",
+        "choices": [
+         "190°F",
+         "165°F",
+         "212°F"
+        ],
+        "answer": 0,
+        "explain": "Lean breads go higher, to about 200 to 210°F."
+       },
+       {
+        "q": "Why does an egg-washed loaf brown early?",
+        "choices": [
+         "Egg adds proteins and sugars for the Maillard reaction",
+         "Egg is sticky",
+         "It blocks the heat"
+        ],
+        "answer": 0,
+        "explain": "That's why color isn't enough."
+       },
+       {
+        "q": "What does a hollow sound tell you?",
+        "choices": [
+         "The crumb has set and dried",
+         "There's a big hole inside",
+         "It's overproofed"
+        ],
+        "answer": 0,
+        "explain": "A dull thud means it's still wet."
+       },
+       {
+        "q": "Unit review: what water temperature wakes active dry yeast?",
+        "choices": [
+         "105 to 110°F",
+         "140 to 150°F",
+         "60 to 70°F"
+        ],
+        "answer": 0,
+        "explain": "Above about 130°F starts to kill it."
+       },
+       {
+        "q": "Unit review: which gas raises yeast dough?",
+        "choices": [
+         "Carbon dioxide",
+         "Oxygen",
+         "Nitrogen"
+        ],
+        "answer": 0,
+        "explain": "Yeast gives it off as it ferments sugar."
+       },
+       {
+        "q": "Unit review: what does the windowpane test show?",
+        "choices": [
+         "The gluten is fully developed",
+         "The yeast is alive",
+         "The dough has doubled"
+        ],
+        "answer": 0,
+        "explain": "The dough stretches thin enough to see light through."
+       },
+       {
+        "q": "Unit review: a gentle poke springs back slowly and leaves a small dent. The dough is…",
+        "choices": [
+         "Ready to bake",
+         "Underproofed",
+         "Overproofed"
+        ],
+        "answer": 0,
+        "explain": "Fast spring-back is under; none at all is over."
+       },
+       {
+        "q": "Unit review: why is bread kept in the freezer, not the fridge?",
+        "choices": [
+         "The fridge speeds staling; the freezer stops it",
+         "The fridge is unsafe for bread",
+         "Bread can't be frozen after baking"
+        ],
+        "answer": 0,
+        "explain": "Staling is starch recrystallizing, fastest just above freezing."
+       },
+       {
+        "q": "Unit review: why weigh dough when dividing it?",
+        "choices": [
+         "Even pieces bake evenly",
+         "To use less flour",
+         "To make it rise faster"
+        ],
+        "answer": 0,
+        "explain": "Sizes by eye can differ by a third."
+       }
+      ]
      },
      "sabbath": {
-      "title": "Challah for the Sabbath table",
-      "minutes": 45
+      "title": "Leaven and unleavened bread (Exodus 12:15–20; 1 Corinthians 5:6–8)",
+      "minutes": 45,
+      "body": [
+       "Leaven is anything that makes dough rise by fermentation: yeast, or a sourdough starter, a piece of old dough kept back to start the next batch. You've baked with it for four weeks. Scripture uses it in two ways, as a real food and as a picture.",
+       "As a food: at the first Passover, Israel left Egypt in such a hurry that their dough had no time to rise (Exodus 12:34, 39). God commanded them to eat unleavened bread for seven days each year, from the evening of the 14th day of the first month to the evening of the 21st, and to put all leaven out of their houses (Exodus 12:15–20). Deuteronomy calls it \"the bread of affliction,\" eaten to remember leaving Egypt in haste (Deuteronomy 16:3).",
+       "As a picture: Paul writes, \"a little leaven leavens the whole lump\" (1 Corinthians 5:6). A pinch of starter works through an entire batch of dough. He uses that to show how one wrong left alone spreads through a whole community, and tells the believers to \"celebrate the festival … with the unleavened bread of sincerity and truth\" (1 Corinthians 5:8).",
+       "Leaven isn't always bad in Scripture. The two loaves offered at the Feast of Weeks were baked with leaven (Leviticus 23:17), and Jesus compared the kingdom of heaven to leaven that a woman worked into three measures of flour until all of it rose (Matthew 13:33).",
+       "Families keep these days in different ways. This app shows the unleavened days a family sets and plans around leavened recipes on those days."
+      ],
+      "steps": [
+       "Read Exodus 12:14–20 and 12:33–39.",
+       "Read 1 Corinthians 5:6–8.",
+       "Read Leviticus 23:15–17 and Matthew 13:33.",
+       "From your own baking, explain in writing how \"a little leaven leavens the whole lump\" works in a bowl of dough. How much yeast went into your challah, and how much dough did it raise?",
+       "Answer in writing: in 1 Corinthians 5, what does leaven stand for, and what does unleavened bread stand for?",
+       "Share your answers with an adult over this week's challah."
+      ],
+      "quiz": [
+       {
+        "q": "Why was Israel's bread unleavened when they left Egypt?",
+        "choices": [
+         "They left in haste, before the dough could rise",
+         "They had no flour",
+         "Yeast was forbidden all year"
+        ],
+        "answer": 0,
+        "explain": "Exodus 12:34 and 39."
+       },
+       {
+        "q": "How many days is unleavened bread eaten in Exodus 12?",
+        "choices": [
+         "Seven",
+         "Three",
+         "Forty"
+        ],
+        "answer": 0,
+        "explain": "Exodus 12:15."
+       },
+       {
+        "q": "What does Paul use leaven to picture in 1 Corinthians 5?",
+        "choices": [
+         "Wrong that spreads through a whole community",
+         "God's provision",
+         "Hospitality"
+        ],
+        "answer": 0,
+        "explain": "\"A little leaven leavens the whole lump\" (1 Corinthians 5:6)."
+       },
+       {
+        "q": "Which offering was baked with leaven?",
+        "choices": [
+         "The two loaves at the Feast of Weeks",
+         "The Passover bread",
+         "The manna"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 23:17."
+       }
+      ]
      }
     },
     {
@@ -9722,15 +11076,141 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Claw grip; dice 3 onions",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Dicing three onions in a row is how chefs learn the claw and the pinch grip until they're automatic. Go slowly; speed comes on its own. An adult is nearby the whole time."
+      ],
+      "steps": [
+       "Set the cutting board on a damp paper towel. Hold the chef's knife in a pinch grip: thumb and bent pointer finger pinching the blade just in front of the handle.",
+       "Cut the first onion in half through the root, peel it, and lay one half flat side down.",
+       "Hold it with the claw: fingertips curled under, knuckles forward, the flat of the blade against your knuckles. Cut strips ¼ inch apart toward the root, stopping just before it.",
+       "Cut across the strips, ¼ inch apart, moving your claw hand back a little after each cut.",
+       "Dice the other half, then the second and third onions the same way.",
+       "Spread a spoonful of each onion's dice on the board and compare: are the third onion's cubes more even than the first's?",
+       "Put the diced onion in a container, label it, and keep it for this week's tacos and Beyond the Recipe (it keeps 5 to 7 days in the fridge)."
+      ],
+      "quiz": [
+       {
+        "q": "In the claw, where are your fingertips?",
+        "choices": [
+         "Curled under, behind your knuckles",
+         "Flat on top of the food",
+         "Holding the far end"
+        ],
+        "answer": 0,
+        "explain": "The knuckles guide the blade; the fingertips stay back."
+       },
+       {
+        "q": "Why does a sharp knife make you cry less over onions?",
+        "choices": [
+         "It crushes fewer cells, so less of the stinging gas is released",
+         "It cuts faster",
+         "Sharp knives are colder"
+        ],
+        "answer": 0,
+        "explain": "Crushed onion cells release a gas that stings your eyes."
+       }
+      ]
      },
      "knowledge": {
       "title": "Parts of a knife; knife types",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "A chef's knife has names for every part, and each part has a job. The tip does fine work, like the cuts toward an onion's root. The edge runs from tip to heel; its curved belly is what lets the blade rock. The heel, the back of the edge, is the strongest part, for hard things like carrots. The spine is the dull top edge, where your hand rests when you rock-chop. The bolster is the thick band where the blade meets the handle, and the tang is the part of the blade that runs into the handle. A full tang, running the whole length, makes a knife sturdy and balanced.",
+       "Most cooking needs three knives. A chef's knife (8 inches is the usual size) does nearly all the cutting. A paring knife, 3 to 4 inches, is for small work in the hand, like hulling a strawberry. A serrated bread knife saws through crust and tomato skin without crushing. A santoku is a Japanese chef's knife with a flatter edge, better for chopping straight down than rocking.",
+       "A sharp knife is safer than a dull one. A dull blade needs more force, skids off a tomato skin or an onion's curve, and slips toward your hand. Other rules: cut on a board that can't slide; carry a knife point down at your side; never try to catch a falling knife; and never leave one in a sink of soapy water, where someone will reach in without seeing it."
+      ],
+      "quiz": [
+       {
+        "q": "Which part of the knife does your other hand rest on when you rock-chop?",
+        "choices": [
+         "The spine",
+         "The edge",
+         "The bolster"
+        ],
+        "answer": 0,
+        "explain": "The spine is the dull top of the blade."
+       },
+       {
+        "q": "Which part of the edge is best for a hard carrot?",
+        "choices": [
+         "The heel",
+         "The tip",
+         "The belly"
+        ],
+        "answer": 0,
+        "explain": "The heel is the strongest part of the edge."
+       },
+       {
+        "q": "Which knife cuts tomato skin and bread crust without crushing?",
+        "choices": [
+         "A serrated bread knife",
+         "A paring knife",
+         "A santoku"
+        ],
+        "answer": 0,
+        "explain": "Its teeth saw instead of pressing."
+       },
+       {
+        "q": "Why is a dull knife more dangerous than a sharp one?",
+        "choices": [
+         "It needs more force and skids toward your hand",
+         "It's heavier",
+         "It rusts"
+        ],
+        "answer": 0,
+        "explain": "A sharp blade bites where you aim it."
+       },
+       {
+        "q": "A knife falls off the counter. What do you do?",
+        "choices": [
+         "Step back and let it fall",
+         "Catch it by the handle",
+         "Catch it with a towel"
+        ],
+        "answer": 0,
+        "explain": "Never try to catch a falling knife."
+       }
+      ]
      },
      "sabbath": {
-      "title": "Chop vegetables ahead for the Sabbath meal",
-      "minutes": 45
+      "title": "Chop vegetables ahead and store them",
+      "minutes": 45,
+      "body": [
+       "Knife work is most of the time a meal takes, and much of it can be done days ahead. Many families chop ahead like this so busy evenings are quick, or so they can focus on resting.",
+       "Some vegetables keep well cut: onions, bell peppers, carrots, and celery last 3 to 5 days (onions up to a week) in a sealed container in the fridge. A folded paper towel in the container soaks up moisture that would make them slimy.",
+       "Others don't: cut tomatoes turn mealy, cut cucumbers go soft, and cut potatoes and apples turn brown. Potatoes can wait under cold water in the fridge for up to a day. Cut those on the day."
+      ],
+      "steps": [
+       "Plan a meal for later in the week that uses onions, peppers, or carrots.",
+       "Dice, slice, or julienne what it needs, using this unit's cuts.",
+       "Line each container with a folded paper towel and pack each vegetable in its own container.",
+       "Label each one with what it is and the date, as in week 1.",
+       "Store them in the fridge, and use them within the times above.",
+       "When you cook the meal, note how much time the prep saved."
+      ],
+      "quiz": [
+       {
+        "q": "Which vegetable should you not cut days ahead?",
+        "choices": [
+         "Tomato",
+         "Onion",
+         "Carrot"
+        ],
+        "answer": 0,
+        "explain": "Cut tomatoes turn mealy and watery."
+       },
+       {
+        "q": "Why put a paper towel in the container?",
+        "choices": [
+         "It soaks up moisture that makes vegetables slimy",
+         "It keeps them cold",
+         "It stops them browning"
+        ],
+        "answer": 0,
+        "explain": "Damp vegetables spoil faster."
+       }
+      ]
      }
     },
     {
@@ -9744,15 +11224,133 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Mince parsley and garlic",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "A mince is the finest cut, about the size of a grain of rice. You'll mince parsley, which is soft and slips, and garlic, which is small and sticky."
+      ],
+      "steps": [
+       "Hone the knife, with an adult watching.",
+       "Wash a bunch of parsley and dry it completely in a kitchen towel. Pull off the leaves.",
+       "Gather the leaves into a tight pile. Rock the knife through it, tip on the board and your other hand flat on the spine. Gather the pile and rock through again until no whole leaves are left.",
+       "Peel a few garlic cloves: lay one under the flat of the blade, edge facing away from you, and press down with the heel of your hand until it cracks. The skin slips off.",
+       "Slice each clove thin, then rock through the slices until they're minced. Gather and repeat.",
+       "Compare your minced parsley with a grain of rice. Mince again anything much bigger.",
+       "Use the parsley in this week's tabbouleh and the garlic in a meal this week. Store the garlic in the fridge, covered, and use it within a day or two."
+      ],
+      "quiz": [
+       {
+        "q": "When you crush a garlic clove with the flat of the knife, where does the edge face?",
+        "choices": [
+         "Away from you",
+         "Toward you",
+         "Up"
+        ],
+        "answer": 0,
+        "explain": "The heel of your hand presses the flat, far from the edge."
+       },
+       {
+        "q": "Why should garlic in oil never sit at room temperature?",
+        "choices": [
+         "It can grow Clostridium botulinum, whose toxin is deadly",
+         "It loses its smell",
+         "The oil goes cloudy"
+        ],
+        "answer": 0,
+        "explain": "Garlic can carry the spores, and oil shuts out air, which they need. Keep it in the fridge, briefly, or frozen."
+       }
+      ]
      },
      "knowledge": {
       "title": "Honing vs. sharpening",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Under a microscope, a knife's edge is a thin ridge of metal. As you cut, it bends over to one side, a little at a time, like the tip of a page that's been folded. The knife feels dull even though the metal is still there.",
+       "Honing fixes that. A honing steel (a rod with a handle) pushes the bent edge back into line. It removes almost no metal, so you can hone every time you cook. Chefs hone before each use.",
+       "Sharpening is different: it grinds away metal to make a brand-new edge. It's done with a whetstone, a sharpener, or by a professional, every few months for a home cook. Honing can't fix an edge that's worn away; sharpening can.",
+       "How to tell: a honed, sharp knife slides into a tomato's skin with no pressure. If it skids even after honing, it needs sharpening.",
+       "To hone, an adult shows you first. Stand the steel straight up with its tip on a folded towel. Hold the blade against it at a slight angle, about 15 degrees, heel at the top. Draw the blade down and toward you so the whole edge, heel to tip, touches the steel. Do the other side the same way, and repeat 5 or 6 times on each side. Light pressure; it isn't a sword fight."
+      ],
+      "quiz": [
+       {
+        "q": "What does honing do?",
+        "choices": [
+         "Pushes a bent edge back into line",
+         "Grinds a new edge",
+         "Polishes the handle"
+        ],
+        "answer": 0,
+        "explain": "It removes almost no metal."
+       },
+       {
+        "q": "How often can you hone?",
+        "choices": [
+         "Every time you cook",
+         "Once a year",
+         "Never at home"
+        ],
+        "answer": 0,
+        "explain": "Chefs hone before each use."
+       },
+       {
+        "q": "A freshly honed knife still skids on a tomato. What does it need?",
+        "choices": [
+         "Sharpening",
+         "More honing",
+         "A new cutting board"
+        ],
+        "answer": 0,
+        "explain": "The edge is worn away and has to be ground new."
+       },
+       {
+        "q": "Where does the steel's tip rest when you hone?",
+        "choices": [
+         "On a folded towel on the counter",
+         "Against your chest",
+         "In the air"
+        ],
+        "answer": 0,
+        "explain": "Standing it up keeps the blade moving down, away from you."
+       }
+      ]
      },
      "sabbath": {
       "title": "Store prepped herbs so they stay fresh",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Fresh herbs wilt fast, but stored the right way, most keep a week or more.",
+       "Tender herbs (parsley, cilantro, mint, dill) keep like cut flowers: trim the stems, stand them in a jar with an inch of water, cover the tops loosely with a bag, and keep them in the fridge. Basil is the exception; it keeps on the counter, because cold turns its leaves black.",
+       "Woody herbs (thyme, rosemary, oregano) keep wrapped in a barely damp paper towel in a bag in the fridge.",
+       "Chopped herbs last a day or two in a container lined with a paper towel. To keep them longer, freeze them: pack chopped herbs into an ice cube tray, cover with water or olive oil, and freeze. A cube drops straight into a soup or sauce. Many families keep herbs ready like this so cooking ahead is quick, or so they can focus on resting."
+      ],
+      "steps": [
+       "Set up a jar of parsley or cilantro: trim the stems, stand them in an inch of water, and cover loosely with a bag. Put it in the fridge.",
+       "Wrap any woody herbs in a barely damp paper towel and seal them in a bag.",
+       "Chop a handful of herbs and freeze them in an ice cube tray, covered with water or oil. When frozen, move the cubes to a labeled bag.",
+       "Change the jar's water every 2 or 3 days.",
+       "Check the herbs after a week, and note which method kept them best."
+      ],
+      "quiz": [
+       {
+        "q": "How do you store parsley so it stays fresh longest?",
+        "choices": [
+         "Stems in a jar of water in the fridge, loosely covered",
+         "Loose in the fridge drawer",
+         "On the counter in the sun"
+        ],
+        "answer": 0,
+        "explain": "Like cut flowers."
+       },
+       {
+        "q": "Why does basil stay out of the fridge?",
+        "choices": [
+         "Cold turns its leaves black",
+         "It needs light to grow",
+         "It goes moldy faster cold"
+        ],
+        "answer": 0,
+        "explain": "Basil is damaged by cold."
+       }
+      ]
      }
     },
     {
@@ -9766,15 +11364,140 @@ export const LIBRARY = {
      ],
      "drill": {
       "title": "Julienne carrots and peppers",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "A julienne is a matchstick about ⅛ inch thick and 2 to 3 inches long. You'll julienne carrots and peppers, then measure your work."
+      ],
+      "steps": [
+       "Peel 2 carrots and cut them into 3-inch pieces.",
+       "Slice a thin strip off one side of each piece and lay it on that flat side. Slice it the long way into planks ⅛ inch thick.",
+       "Stack 2 or 3 planks, hold them with the claw, and slice them the long way into ⅛-inch matchsticks.",
+       "Cut the top and bottom off a bell pepper, open it flat, cut away the ribs, and julienne it skin side down.",
+       "Line up 10 carrot matchsticks against a ruler. How many are within ⅛ inch of each other?",
+       "Store the matchsticks in a container in the fridge (carrots in a little cold water) and use them in this week's stir-fry or as a snack within 3 days."
+      ],
+      "quiz": [
+       {
+        "q": "How big is a julienne?",
+        "choices": [
+         "About ⅛ inch thick and 2 to 3 inches long",
+         "About ½ inch cubes",
+         "Paper-thin rounds"
+        ],
+        "answer": 0,
+        "explain": "A thin matchstick."
+       },
+       {
+        "q": "Why do you cut the pepper skin side down?",
+        "choices": [
+         "The knife skids on the shiny skin",
+         "The skin is bitter",
+         "It's faster"
+        ],
+        "answer": 0,
+        "explain": "Flesh side up, the blade bites right away."
+       }
+      ]
      },
      "knowledge": {
       "title": "Why even cuts cook evenly",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Heat moves into food from the outside in, by conduction. The outside of a piece gets hot first, and the middle is the last part to reach the temperature you want.",
+       "Thickness matters more than you'd guess. The time for heat to reach the center grows with the square of the thickness: a piece twice as thick takes about four times as long to cook through. That's why a ¼-inch matchstick and a ½-inch one, side by side in a pan, can't finish together.",
+       "Size also changes surface area. Small pieces have more surface for their size, so they brown faster, take up more sauce, and lose water faster. Even cuts brown evenly; mixed sizes give you burnt crumbs and raw chunks in the same bite.",
+       "Fast methods, like stir-frying and sautéing, are the least forgiving: there are only a few minutes for heat to reach every piece. Slow methods, like a stew, give big pieces time to catch up. So the faster the cooking, the more even the cuts need to be."
+      ],
+      "quiz": [
+       {
+        "q": "A carrot stick is twice as thick as another. About how much longer does it take to cook through?",
+        "choices": [
+         "About four times as long",
+         "Twice as long",
+         "The same time"
+        ],
+        "answer": 0,
+        "explain": "Time grows with the square of the thickness."
+       },
+       {
+        "q": "How does heat get to the middle of a piece of carrot?",
+        "choices": [
+         "By conduction, from the outside in",
+         "All at once",
+         "From the middle out"
+        ],
+        "answer": 0,
+        "explain": "The center is the last part to heat."
+       },
+       {
+        "q": "Why do small pieces brown faster?",
+        "choices": [
+         "More surface area for their size",
+         "They have more sugar",
+         "They're lighter"
+        ],
+        "answer": 0,
+        "explain": "Browning happens on the surface."
+       },
+       {
+        "q": "Which cooking method needs the most even cuts?",
+        "choices": [
+         "A fast stir-fry",
+         "A slow stew",
+         "A long braise"
+        ],
+        "answer": 0,
+        "explain": "There are only minutes for heat to reach every piece."
+       }
+      ]
      },
      "sabbath": {
-      "title": "Prep a full set of stir-fry vegetables ahead",
-      "minutes": 45
+      "title": "Gleaning: leaving the edges of the field (Leviticus 19:9–10; Ruth 2)",
+      "minutes": 45,
+      "body": [
+       "God's law built care for the poor into the harvest itself. \"When you reap the harvest of your land, you shall not reap your field right up to its edge, neither shall you gather the gleanings after your harvest. And you shall not strip your vineyard bare\" (Leviticus 19:9–10). What was left was for the poor and the sojourner, the foreigner living among Israel. Deuteronomy adds the sheaf forgotten in the field, and the olives and grapes left on the branch, \"for the sojourner, the fatherless, and the widow,\" and gives the reason: \"You shall remember that you were a slave in the land of Egypt\" (Deuteronomy 24:19–22).",
+       "Ruth shows the law at work. She was a widow from Moab who came to Bethlehem with her mother-in-law, Naomi, at the start of the barley harvest. She went out to glean behind the reapers in the field of Boaz, a relative of Naomi's. Boaz told his workers to let her glean even among the sheaves and to pull out some stalks from the bundles on purpose for her (Ruth 2:15–16). By evening she had beaten out about an ephah of barley, perhaps 30 pounds (Ruth 2:17).",
+       "Gleaning fed the poor with dignity: they worked the harvest themselves, and the farmer gave by leaving, not by handing out. Gleaning groups still exist today, gathering crops left after a harvest for food banks."
+      ],
+      "steps": [
+       "Read Leviticus 19:9–10 and Deuteronomy 24:19–22.",
+       "Read Ruth 2.",
+       "Answer in writing: who was gleaning meant for, and what reason does Deuteronomy give?",
+       "Answer in writing: what did Boaz do beyond what the law required?",
+       "With an adult, choose one way your family could \"leave the edges\" this week, such as cooking extra of this week's stir-fry for someone, or giving to a food bank. Write it down, and do it if you can."
+      ],
+      "quiz": [
+       {
+        "q": "In Leviticus 19:9–10, what were farmers told not to reap?",
+        "choices": [
+         "The edges of the field",
+         "The middle of the field",
+         "Any barley"
+        ],
+        "answer": 0,
+        "explain": "The edges and the gleanings were left for the poor and the sojourner."
+       },
+       {
+        "q": "Whose field did Ruth glean in?",
+        "choices": [
+         "Boaz's",
+         "Naomi's",
+         "Her own"
+        ],
+        "answer": 0,
+        "explain": "Boaz was a relative of Naomi's (Ruth 2:1–3)."
+       },
+       {
+        "q": "What reason does Deuteronomy 24 give for leaving the gleanings?",
+        "choices": [
+         "Israel had been slaves in Egypt",
+         "The crops were poor",
+         "The harvest was too big"
+        ],
+        "answer": 0,
+        "explain": "Deuteronomy 24:22."
+       }
+      ]
      }
     },
     {
@@ -9788,15 +11511,182 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Timed dice: one onion, one pepper",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Now you'll time yourself. Accuracy comes first: an even dice slowly beats a ragged one fast. Compare with your onions from week 9."
+      ],
+      "steps": [
+       "Hone the knife and set up your board on a damp paper towel.",
+       "Start a timer and dice one onion into ¼-inch cubes. Stop the timer and write down the time.",
+       "Start the timer again and dice one bell pepper into ¼-inch cubes, skin side down. Write down the time.",
+       "Spread 10 cubes of each on the board next to a ruler. Count how many are within ⅛ inch of ¼ inch.",
+       "Write down your times and your count. Compare them with how the week 9 onions looked.",
+       "Use the onion and pepper in this week's Israeli salad, or store them for later in the week."
+      ],
+      "quiz": [
+       {
+        "q": "What matters more in this drill: speed or evenness?",
+        "choices": [
+         "Evenness",
+         "Speed",
+         "Neither"
+        ],
+        "answer": 0,
+        "explain": "Speed comes with practice; uneven cubes cook unevenly."
+       },
+       {
+        "q": "Why cut the pepper skin side down?",
+        "choices": [
+         "The blade doesn't skid on the skin",
+         "It's prettier",
+         "It keeps the juice in"
+        ],
+        "answer": 0,
+        "explain": "The flesh side gives the knife something to bite."
+       }
+      ]
      },
      "knowledge": {
       "title": "Name and size each classic cut",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Cooks use names for each cut so a recipe can say exactly what it means. Sizes are a guide, not a law, but evenness always matters.",
+       "Large dice: ¾-inch cubes, for stews and roasting. Medium dice: ½-inch cubes, for soups and sautés. Small dice: ¼-inch cubes, for salsas and salads. Brunoise: ⅛-inch cubes, the finest dice, cut from a julienne.",
+       "Julienne: matchsticks ⅛ inch thick and 2 to 3 inches long. Batonnet: thicker sticks, ¼ inch thick and 2 to 3 inches long; cut across, they make a small dice.",
+       "Chiffonade: leafy herbs or greens stacked, rolled up tight, and sliced across into thin ribbons. Mince: chopped finer than a brunoise, with no set shape, like garlic or parsley. Chop: rough pieces, roughly the same size, when looks don't matter.",
+       "Notice how the cuts build on each other: planks become sticks (julienne or batonnet), and sticks become cubes (brunoise or small dice). This is the unit quiz: answer from memory, then review anything you missed in weeks 9 to 11."
+      ],
+      "quiz": [
+       {
+        "q": "What size is a small dice?",
+        "choices": [
+         "¼ inch",
+         "¾ inch",
+         "⅛ inch"
+        ],
+        "answer": 0,
+        "explain": "¾ inch is large; ⅛ inch is brunoise."
+       },
+       {
+        "q": "What is a brunoise cut from?",
+        "choices": [
+         "A julienne",
+         "A batonnet",
+         "A chiffonade"
+        ],
+        "answer": 0,
+        "explain": "⅛-inch sticks cut across make ⅛-inch cubes."
+       },
+       {
+        "q": "What is a chiffonade?",
+        "choices": [
+         "Leaves rolled tight and sliced into thin ribbons",
+         "Thick sticks",
+         "A rough chop"
+        ],
+        "answer": 0,
+        "explain": "Used for basil, mint, and greens."
+       },
+       {
+        "q": "How thick is a batonnet?",
+        "choices": [
+         "¼ inch",
+         "⅛ inch",
+         "½ inch"
+        ],
+        "answer": 0,
+        "explain": "Cut across, it makes a small dice."
+       },
+       {
+        "q": "Unit review: in the claw, what guides the side of the blade?",
+        "choices": [
+         "Your knuckles",
+         "Your fingertips",
+         "Your thumb"
+        ],
+        "answer": 0,
+        "explain": "Fingertips stay curled back."
+       },
+       {
+        "q": "Unit review: what does honing do?",
+        "choices": [
+         "Pushes the bent edge back into line",
+         "Grinds a new edge",
+         "Cleans the blade"
+        ],
+        "answer": 0,
+        "explain": "Sharpening grinds a new edge."
+       },
+       {
+        "q": "Unit review: why must herbs be dry before mincing?",
+        "choices": [
+         "Wet leaves bruise into paste",
+         "Water dulls the knife",
+         "Dry herbs weigh less"
+        ],
+        "answer": 0,
+        "explain": "Dry leaves cut clean."
+       },
+       {
+        "q": "Unit review: a piece twice as thick takes about how long to cook through?",
+        "choices": [
+         "Four times as long",
+         "Twice as long",
+         "The same"
+        ],
+        "answer": 0,
+        "explain": "Time grows with the square of the thickness."
+       },
+       {
+        "q": "Unit review: which part of the knife is best for cutting a hard carrot?",
+        "choices": [
+         "The heel",
+         "The tip",
+         "The spine"
+        ],
+        "answer": 0,
+        "explain": "The heel is the strongest part of the edge."
+       }
+      ]
      },
      "sabbath": {
-      "title": "Prep and store all salad vegetables for the Sabbath",
-      "minutes": 45
+      "title": "Prep and store a full set of salad vegetables",
+      "minutes": 45,
+      "body": [
+       "With an hour of knife work, you can have the makings of salads ready for several days. Many families prep a set like this so meals later in the week come together in minutes, or so they can focus on resting.",
+       "Greens: wash and dry them completely, then store them loosely in a container or bag lined with a paper towel. They keep 3 to 5 days.",
+       "Sturdy vegetables (carrots, peppers, radishes, red onion, celery) keep 3 to 5 days cut, each in its own lined container.",
+       "Tender ones (cucumbers and tomatoes) are cut the day you eat them; they turn soft and watery. Dressing keeps a week in a sealed jar in the fridge; shake it before using. Dress a salad only right before it's eaten."
+      ],
+      "steps": [
+       "Wash and dry a head of lettuce or a bag of greens, and store it in a lined container.",
+       "Julienne or dice carrots and peppers, and slice a red onion thin. Store each in its own lined container.",
+       "Shake together a simple dressing in a jar: 3 parts olive oil to 1 part lemon juice or vinegar, with salt and pepper.",
+       "Label everything with the date.",
+       "Over the next few days, put a salad together from the containers, cutting cucumber and tomato fresh, and note how long it took."
+      ],
+      "quiz": [
+       {
+        "q": "Which salad vegetables are cut on the day you eat them?",
+        "choices": [
+         "Cucumbers and tomatoes",
+         "Carrots and peppers",
+         "Red onion"
+        ],
+        "answer": 0,
+        "explain": "They go soft and watery when cut ahead."
+       },
+       {
+        "q": "When do you dress a salad?",
+        "choices": [
+         "Right before it's eaten",
+         "The night before",
+         "When you wash the greens"
+        ],
+        "answer": 0,
+        "explain": "Salt in the dressing draws water out of the vegetables."
+       }
+      ]
      }
     },
     {
@@ -9816,7 +11706,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Blanch and store beans for the Sabbath",
+      "title": "Blanch and store vegetables",
       "minutes": 45
      }
     },
@@ -9838,7 +11728,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Make and freeze a sofrito batch",
+      "title": "Clean land animals you might not expect: the two tests, the animals Deuteronomy names, and today's elk, moose, water buffalo, and yak (Leviticus 11:1–8; Deuteronomy 14:3–8)",
       "minutes": 45
      }
     },
@@ -9859,7 +11749,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Cook rice dressing ahead; cool safely",
+      "title": "Salt (Leviticus 2:13; Matthew 5:13; Colossians 4:6)",
       "minutes": 45
      }
     },
@@ -9882,7 +11772,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Make ragù ahead for the Sabbath meal",
+      "title": "Make a sauce that's better the next day",
       "minutes": 45
      }
     },
@@ -9924,7 +11814,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Soak beans Friday for a later meal",
+      "title": "Soak beans ahead",
       "minutes": 45
      }
     },
@@ -9946,7 +11836,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Cook grains ahead and reheat with steam",
+      "title": "Daniel's diet (Daniel 1)",
       "minutes": 45
      }
     },
@@ -9968,7 +11858,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Make a legume dish that holds well for the Sabbath",
+      "title": "Cook grains ahead and reheat them with steam",
       "minutes": 45
      }
     },
@@ -9990,7 +11880,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Plan a fish dish that serves well cold",
+      "title": "Dishes that serve well cold",
       "minutes": 45
      }
     },
@@ -10008,7 +11898,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Steam fish and chill for a cold plate",
+      "title": "Loaves and fishes, and breakfast on the shore (Matthew 14:13–21; John 21:9–13)",
       "minutes": 45
      }
     },
@@ -10029,7 +11919,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Make tomato sauce ahead; poach Friday",
+      "title": "Make a sauce ahead, finish the dish fresh",
       "minutes": 45
      }
     },
@@ -10052,7 +11942,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Cold fish salad for the Sabbath table",
+      "title": "Firstfruits and tithing food (Deuteronomy 14:22–29; Proverbs 3:9)",
       "minutes": 45
      }
     },
@@ -10097,7 +11987,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Marinate chicken Friday for a later meal",
+      "title": "Clean and unclean birds, and why God gave the food laws (Leviticus 11:13–19, 44–47; Deuteronomy 14:11–20)",
       "minutes": 45
      }
     },
@@ -10118,7 +12008,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Roast chicken ahead; hold and reheat",
+      "title": "Marinate ahead; roast, hold hot, and reheat",
       "minutes": 45
      }
     },
@@ -10137,7 +12027,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Roast chicken as the Sabbath centerpiece",
+      "title": "Blood and fat (Leviticus 3:17; 7:23–27; 17:10–14; Acts 15:20)",
       "minutes": 45
      }
     },
@@ -10173,7 +12063,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Make stock ahead for the week",
+      "title": "Hospitality: Abraham's meal for his guests (Genesis 18:1–8; Hebrews 13:2)",
       "minutes": 45
      }
     },
@@ -10218,7 +12108,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Soup as the Sabbath starter",
+      "title": "Feasting, rejoicing, and moderation (Deuteronomy 14:26; Nehemiah 8:10; Proverbs 23:20–21)",
       "minutes": 45
      }
     },
@@ -10281,7 +12171,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Serve the practice dish at the Sabbath meal and note what to change",
+      "title": "Serve the practice dish and note what to change",
       "minutes": 45
      }
     },
@@ -10300,7 +12190,7 @@ export const LIBRARY = {
       "minutes": 35
      },
      "sabbath": {
-      "title": "Serve the meal for the Sabbath",
+      "title": "Giving thanks for food (Deuteronomy 8:10; 1 Timothy 4:4–5)",
       "minutes": 45
      }
     }
@@ -10334,7 +12224,7 @@ export const LIBRARY = {
      "skills": [
       "yeast-dough"
      ],
-     "minutes": 210,
+     "minutes": 240,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -10354,7 +12244,7 @@ export const LIBRARY = {
      "skills": [
       "yeast-dough"
      ],
-     "minutes": 180,
+     "minutes": 210,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -10374,7 +12264,7 @@ export const LIBRARY = {
      "skills": [
       "fine-chopping"
      ],
-     "minutes": 40,
+     "minutes": 45,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -10394,7 +12284,7 @@ export const LIBRARY = {
      "skills": [
       "dicing"
      ],
-     "minutes": 25,
+     "minutes": 35,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -10663,7 +12553,7 @@ export const LIBRARY = {
      "skills": [
       "dicing"
      ],
-     "minutes": 45,
+     "minutes": 50,
      "tags": {
       "protein": "beef",
       "flavors": [

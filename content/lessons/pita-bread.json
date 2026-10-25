@@ -1,0 +1,84 @@
+{
+  "id": "pita-bread",
+  "version": 1,
+  "track": "core",
+  "unit": 5,
+  "title": "Pita bread",
+  "image": "dishes/pita-bread.png",
+  "cuisine": "lebanese",
+  "skill": "A yeast dough, baking flatbreads that puff",
+  "skills": ["flatbreads", "yeast-dough"],
+  "prereqs": [],
+  "servings": 8,
+  "totalMinutes": 120,
+  "scaling": {
+    "mode": "fixed",
+    "multipliers": [1, 2],
+    "notes": { "1": "Makes 8 pitas.", "2": "Makes 16 pitas. Mix it in the large bowl and knead it in two halves." }
+  },
+  "learn": {
+    "move": {
+      "title": "Yeast, then a very hot oven",
+      "body": "Yeast is alive. Warm water wakes it up, and over an hour it fills the dough with gas so it doubles. Then each round is rolled thin and baked on a very hot pan, where the water inside turns to steam and puffs it into a pocket."
+    },
+    "why": [
+      { "id": "warm-water", "title": "Water at 105 to 110°F", "body": "Yeast is a living fungus. Cold water slows it down, and water hotter than about 130°F starts to kill it. Between 105 and 110°F it wakes up fast and stays alive, which is why the thermometer checks the water before the yeast goes in." },
+      { "id": "bloom", "title": "Why wait for foam", "body": "Yeast eats the sugar and gives off carbon dioxide gas, which shows as foam. Foam after 10 minutes tells you the yeast is alive before you spend the flour on it. No foam means old yeast or water that was too hot." },
+      { "id": "knead", "title": "Why knead", "body": "Kneading stretches the flour's proteins into gluten, a network of long, springy strands. That network traps the yeast's gas, so the dough rises instead of letting the gas escape." },
+      { "id": "rest", "title": "Why the balls rest", "body": "Shaping tightens the gluten, so a ball rolled right away springs back. Ten minutes under a towel lets it relax, and it rolls out round and stays put." },
+      { "id": "even", "title": "Roll it even", "body": "A pocket forms when the top and bottom set into two crusts and steam pushes them apart. A thin spot sets first and pins the two sides together, so roll evenly, about ¼ inch thick all over, with no creases." },
+      { "id": "steam-puff", "title": "A very hot pan", "body": "At 475°F, the water in the dough turns to steam in a minute, before the crust has time to set hard. The steam blows the round up like a balloon. In a cooler oven the crust sets first and the pita bakes flat." },
+      { "id": "towel", "title": "Wrap them warm", "body": "As the pitas cool, steam leaves them and they dry out. Stacked in a towel, they hold that steam and stay soft and bendy." }
+    ],
+    "wrong": [
+      { "sign": "A pita baked flat, with no pocket", "fix": "It's still good bread, so eat it. For the next ones, roll more evenly, keep the rounds covered so they don't dry out, and make sure the pan has had the full 30 minutes to heat." },
+      { "sign": "No foam after 10 minutes", "fix": "The yeast is dead, or the water was too hot. Start again with fresh yeast and water at 105 to 110°F." },
+      { "sign": "The dough is too sticky to knead", "fix": "Dust it with a tablespoon of flour at a time, just until it stops sticking to your hands. Too much flour makes a dry pita." },
+      { "sign": "The dough didn't double", "fix": "The kitchen may be cool. Move the bowl somewhere warm, like an oven that's off with the light on, and give it another 20 to 30 minutes." },
+      { "sign": "The pitas are hard and crisp", "fix": "They baked too long. Take the next ones out as soon as they puff, and wrap them in the towel right away." }
+    ],
+    "quiz": [
+      { "q": "Why does the water need to be 105 to 110°F?", "choices": ["Yeast wakes up fast there, and hotter water starts to kill it", "So the dough cooks faster", "So the salt dissolves"], "answer": 0, "explain": "Cold water slows yeast down. Above about 130°F, it starts to die." },
+      { "q": "What puffs a pita into a pocket?", "choices": ["Steam from the water in the dough", "Air from kneading", "Oil between the layers"], "answer": 0, "explain": "The very hot pan turns the water to steam, which pushes the top and bottom apart." },
+      { "q": "A pita came out flat. What does that mean?", "choices": ["It's still good bread; roll the next ones more evenly", "The dough was ruined", "It needs to bake twice as long"], "answer": 0, "explain": "A flat pita tastes the same. An uneven round or a pan that isn't hot enough is the usual cause." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "water", "amount": 1, "unit": "cup", "prep": "warm, 105 to 110°F" },
+    { "ingredient": "yeast-active-dry", "amount": 2.25, "unit": "tsp" },
+    { "ingredient": "sugar", "amount": 1, "unit": "tsp" },
+    { "ingredient": "flour-ap", "amount": 3, "unit": "cup" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp" },
+    { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp" },
+    { "ingredient": "olive-oil", "amount": null, "text": "a little more, for the bowl" },
+    { "ingredient": "flour-ap", "amount": null, "text": "a little more, for dusting" }
+  ],
+  "equipment": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "sheet-pan",
+    "chef-knife",
+    "rolling-pin",
+    "oven-mitts",
+    "tongs"
+  ],
+  "steps": [
+    { "id": "warm-water", "text": "Warm the water in the measuring cup in the microwave for about 30 seconds. Stir it and check it with the thermometer. It should read 105 to 110°F.", "safety": "solo", "why": "warm-water", "tip": "Too hot? Let it sit a minute and check again. Too cool? Another 5 seconds." },
+    { "id": "bloom", "text": "Pour the water into the large bowl. Stir in the sugar, then sprinkle the yeast over the top. Leave it alone to bloom.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Bloom yeast", "why": "bloom", "look": "A layer of foam on top, and it smells like bread." },
+    { "id": "mix", "text": "Add the flour, salt, and 2 tablespoons of oil. Stir with the wooden spoon until it comes together into a rough, shaggy dough.", "safety": "solo", "tip": "Don't taste the raw dough. Raw flour can make you sick." },
+    { "id": "knead", "text": "Dust the counter with flour and turn the dough out. Knead it until it's smooth and springs back when you press it.", "safety": "solo", "timerSeconds": 480, "timerLabel": "Knead", "why": "knead", "look": "Smooth, a little tacky, and a dent from your finger fills back in." },
+    { "id": "rise", "text": "Rub a little oil around the bowl, put the dough in, and turn it once to coat it. Cover the bowl with a towel and leave it somewhere warm to rise.", "safety": "solo", "timerSeconds": 1800, "timerLabel": "First rise" },
+    { "id": "heat-oven", "text": "Put the sheet pan on the lowest rack, upside down, and heat the oven to 475°F. Let the dough keep rising while the oven and pan heat.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 1800, "timerLabel": "Pan heats, dough rises", "why": "steam-puff", "look": "The dough has doubled. A floured finger pressed in leaves a dent that stays." },
+    { "id": "divide", "text": "Press the dough down gently to let out the big bubbles. Cut it into 8 even pieces with the knife and roll each one into a smooth ball. Cover the balls with the towel and let them rest.", "safety": "adult-nearby", "hazard": "Sharp knife", "timerSeconds": 600, "timerLabel": "Rest", "why": "rest" },
+    { "id": "roll", "text": "Roll 2 or 3 balls into rounds about 6 inches across and ¼ inch thick, the same thickness all over. Keep the others under the towel.", "safety": "solo", "why": "even", "tip": "Roll from the middle out, turning the round a quarter turn each time." },
+    { "id": "bake", "text": "With oven mitts, pull the rack out partway. Lay the rounds on the hot pan, push the rack back in, and close the door. Bake until they puff.", "safety": "adult-nearby", "hazard": "Very hot oven and pan", "timerSeconds": 240, "timerLabel": "Bake", "why": "steam-puff", "look": "Puffed up like a balloon, pale with a few light brown spots." },
+    { "id": "wrap", "text": "Lift the pitas out with the tongs and stack them in a clean towel, folded over to cover them.", "safety": "adult-nearby", "hazard": "Very hot oven and pan", "why": "towel", "tip": "Steam is trapped inside. Let them sit a minute before you tear one open." },
+    { "id": "repeat", "text": "Roll and bake the rest the same way, 2 or 3 at a time. Turn off the oven when the last ones are out.", "safety": "adult-nearby", "hazard": "Very hot oven and pan" }
+  ]
+}
