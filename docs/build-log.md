@@ -5208,3 +5208,24 @@ taken as approved.
   features are slice 14f.
 - Tests: 360 (the shared units and the pair, a card in one Level and cooked
   by another, and a release 2 Level hidden until the family has release 2).
+
+## 209. 2026-10-25 — Review of the 14b weeks; owner's calls
+
+Planning only; nothing in the app changed. Claude reviewed the Level 2, 3,
+and 4 week docs that 14b turns into the Level files, for progression and
+range. The owner's calls on the findings:
+
+- **Level 4 week 33:** the Familiar dish is cholent (beef, beans, barley,
+  potatoes, held overnight; no kishke) in place of brisket, so both dishes
+  teach the week's overnight hold. Explore running harder than Familiar at
+  Level 4 is fine.
+- **The same dish at more than one Level** (fajitas, teriyaki, chicken
+  Caesar, spaghetti and meatballs, chili, chicken noodle soup) stays, as
+  long as its steps differ by Level: shortcuts vs. scratch, or the cook
+  seasoning the meat and sauce themselves. Each is one lesson with Level
+  versions.
+- **Level 2 rice and knives:** rice from a rice cooker or heat-and-serve
+  rice, so dishes served with rice keep to one heat source; a chef's knife
+  for big chop work where a dish needs it, with a parent assisting.
+- Recorded in plan §12.0, the Level 2 and Level 4 docs, and the re-plan
+  doc's difficulty scale and Familiar and Explore section.
