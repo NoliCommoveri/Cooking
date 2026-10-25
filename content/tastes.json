@@ -4,6 +4,8 @@
     { "id": "turkey", "name": "Turkey", "ingredients": ["turkey-sausage-bulk", "turkey-strips", "turkey-ground"] },
     { "id": "beef", "name": "Beef", "ingredients": ["beef-ribeye", "beef-sirloin", "beef-ground", "beef-flank"] },
     { "id": "lamb", "name": "Lamb", "ingredients": [] },
+    { "id": "goat", "name": "Goat", "ingredients": [] },
+    { "id": "duck-quail", "name": "Duck and quail", "ingredients": [] },
     { "id": "white-fish", "name": "White fish (cod, tilapia)", "ingredients": ["cod", "tilapia"] },
     { "id": "salmon", "name": "Salmon", "ingredients": ["salmon-smoked", "salmon-fillet"] },
     { "id": "tuna", "name": "Tuna", "ingredients": ["tuna-canned"] },

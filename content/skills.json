@@ -60,6 +60,13 @@
     { "id": "cooking-fish", "name": "Cooking fish", "idea": "Fish is delicate and cooks fast; it's done when it turns opaque and flakes, at 145°F.", "pin": { "shape": "circle", "color": "#2E6F8E", "glyph": "drop" } },
     { "id": "building-soup", "name": "Building a soup", "idea": "A soup is built in layers: a base, a good stock, and seasoning tasted at every stage.", "pin": { "shape": "hex", "color": "#7A5A2E", "glyph": "pot" } },
     { "id": "blanching", "name": "Blanching", "idea": "A quick dip in boiling water, then straight into ice water, keeps a vegetable bright and crisp and stops it cooking.", "pin": { "shape": "circle", "color": "#3E8E4A", "glyph": "drop" } },
-    { "id": "cooling-reheating", "name": "Cooling and reheating", "idea": "Cooked food cools fast in shallow containers, goes in the fridge within 2 hours, and is reheated to 165°F.", "pin": { "shape": "hex", "color": "#3A6E8E", "glyph": "drop" } }
+    { "id": "cooling-reheating", "name": "Cooling and reheating", "idea": "Cooked food cools fast in shallow containers, goes in the fridge within 2 hours, and is reheated to 165°F.", "pin": { "shape": "hex", "color": "#3A6E8E", "glyph": "drop" } },
+    { "id": "knife-safety", "name": "Knife grip and safety", "idea": "A steady board, a bridge or claw grip, and a sharp knife keep fingers safe.", "pin": { "shape": "hex", "color": "#5A6E3A", "glyph": "knife" } },
+    { "id": "mise-en-place", "name": "Setting out first", "idea": "Read the recipe through and set out every ingredient and tool before the heat goes on.", "pin": { "shape": "hex", "color": "#4A6B8A", "glyph": "dice" } },
+    { "id": "measuring", "name": "Measuring and scaling", "idea": "Level dry cups, read wet ones at eye level, and halve, double, or weigh a recipe to fit.", "pin": { "shape": "circle", "color": "#3A5E8E", "glyph": "dice" } },
+    { "id": "reading-labels", "name": "Reading labels", "idea": "Find the hidden unclean ingredients in a list before food goes in the cart.", "pin": { "shape": "shield", "color": "#22406B", "glyph": "leaf" } },
+    { "id": "steaming", "name": "Steaming", "idea": "Food cooks gently over boiling water, so it stays moist and keeps its color.", "pin": { "shape": "circle", "color": "#4A8E9A", "glyph": "pot" } },
+    { "id": "seasoning", "name": "Seasoning by taste", "idea": "Add salt, acid, and spice a little at a time, tasting as you go.", "pin": { "shape": "hex", "color": "#9A6A2E", "glyph": "drop" } },
+    { "id": "grilling", "name": "Grilling over two zones", "idea": "A hot side sears and a cooler side cooks through, with the lid as an oven.", "pin": { "shape": "shield", "color": "#8E2A1E", "glyph": "flame" } }
   ]
 }

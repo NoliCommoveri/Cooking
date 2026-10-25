@@ -47,10 +47,11 @@ test('a re-planned Level (release 2) shows only to a family that has release 2 (
   try {
     const ids = async () => (await a.get('/api/courses')).body.levels.map((V) => V.id);
     assert.deepEqual(await ids(), ['level-3'], 'release 1 live: only the release 1 Level');
+    const built = Object.values(LIBRARY.levels).filter((V) => V.release === 2 && V.id !== 'level-test').map((V) => V.id);
     assert.equal((await level(a, [ava], sunday, { program: 'level-test' })).status, 400);
     assert.equal((await a.get('/api/picks/level?level=level-test')).status, 404);
     await setPreview(env.DB, fid, true);
-    assert.deepEqual(await ids(), ['level-3', 'level-test'], 'a preview family sees release 2');
+    assert.deepEqual(await ids(), ['level-3', ...built, 'level-test'], 'a preview family sees release 2');
     assert.equal((await level(a, [ava], sunday, { program: 'level-test' })).status, 200);
     await setPreview(env.DB, fid, false);
     assert.equal((await a.get('/api/courses')).body.courses.length, 0, 'its course waits out of sight without release 2');
@@ -61,7 +62,10 @@ test('a re-planned Level (release 2) shows only to a family that has release 2 (
 
 test('a Level course: one week a week, its recipes in week order, "Week 1 of 36"', async () => {
   const { a, ava } = await setup();
-  const { levels } = (await a.get('/api/courses')).body;
+  const all = (await a.get('/api/courses')).body.levels;
+  // The re-planned Levels (sp-1 to sp-4, §12.0) show beside it for a preview family.
+  assert.ok(all.filter((V) => V.id.startsWith('sp-')).every((V) => V.weeks.length === 36));
+  const levels = all.filter((V) => !V.id.startsWith('sp-'));
   assert.deepEqual(levels.map((V) => [V.id, V.weeks.length]), [['level-3', 36]]);
   assert.equal(levels[0].weeks[0].title, 'Shakshuka');
   const made = await level(a, [ava]);
@@ -145,7 +149,7 @@ test("a Level's own recipes are in the library with the next release only, in th
   const { env, a, ava, fid } = await setup();
   let lib = (await a.get('/api/library')).body;
   const burgers = lib.lessons.find((L) => L.id === 'thick-burgers');
-  assert.deepEqual([burgers?.unit, burgers?.label, lib.units[100], lib.level_units], [100, 'L1', 'Level 3 recipes', [100]]);
+  assert.deepEqual([burgers?.unit, burgers?.label, lib.units[100], lib.level_units[0]], [100, 'L1', 'Level 3 recipes', 100]);
   assert.ok((await a.get('/api/queue')).body.library.some((L) => L.id === 'thick-burgers'), 'a parent can queue it');
   assert.equal((await a.post('/api/queue', { lesson_id: 'thick-burgers', profile_ids: [ava] })).status, 200);
 
@@ -419,4 +423,24 @@ test('a part kept on can be skipped, any day: no longer open, counts for nothing
   await a.post(`/api/courses/${id}/level-tasks/take-back`, { week: 1, part: 'knowledge', profile_id: ava });
   lv = await kitchen(a, ava);
   assert.equal(lv.week.parts.find((x) => x.part === 'knowledge').skipped, false);
+});
+
+test('14b: the re-planned Levels 2, 3, and 4 are in the library, release 2, with a Familiar and an Explore dish each recipe week', () => {
+  const sp = ['sp-2', 'sp-3', 'sp-4'].map((id) => LIBRARY.levels[id]);
+  assert.deepEqual(sp.map((V) => [V.id, V.name, V.release, V.side.number, V.weeks.length]),
+    [['sp-2', 'Level 2 Apprentice', 2, 102, 36], ['sp-3', 'Level 3 Cook', 2, 103, 36], ['sp-4', 'Level 4 Chef', 2, 104, 36]]);
+  for (const V of sp) {
+    for (const w of V.weeks.filter((x) => !x.kind)) assert.ok(w.familiar && w.explore && w.familiar !== w.explore, `${V.id} week ${w.week}`);
+    assert.deepEqual(V.weeks.filter((w) => w.mastery).map((w) => w.week), [4, 6, 10, 15, 20, 26, 30, 33]);
+  }
+  // Level 4 names a cuisine every recipe week (§12.0).
+  assert.ok(sp[2].weeks.filter((w) => !w.kind).every((w) => w.cuisine));
+});
+
+test('14b: a course on a re-planned Level cooks each week\'s Familiar dish until the course can pick (14c)', async () => {
+  const { a, ava } = await setup();
+  assert.equal((await level(a, [ava], sunday, { program: 'sp-3' })).status, 200);
+  const c = (await a.get('/api/courses')).body.courses[0];
+  assert.equal(c.plan.length, 34, 'the practice run and the capstone have no recipe');
+  assert.deepEqual(c.plan.slice(0, 3).map((x) => [x.week, x.id]), [[1, 'bean-quesadillas'], [2, 'aglio-e-olio'], [3, 'vegetable-lo-mein']]);
 });

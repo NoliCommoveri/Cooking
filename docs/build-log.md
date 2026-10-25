@@ -5208,3 +5208,106 @@ taken as approved.
   features are slice 14f.
 - Tests: 360 (the shared units and the pair, a card in one Level and cooked
   by another, and a release 2 Level hidden until the family has release 2).
+
+## 209. 2026-10-25 — Review of the 14b weeks; owner's calls
+
+Planning only; nothing in the app changed. Claude reviewed the Level 2, 3,
+and 4 week docs that 14b turns into the Level files, for progression and
+range. The owner's calls on the findings:
+
+- **Level 4 week 33:** the Familiar dish is cholent (beef, beans, barley,
+  potatoes, held overnight; no kishke) in place of brisket, so both dishes
+  teach the week's overnight hold. Explore running harder than Familiar at
+  Level 4 is fine.
+- **The same dish at more than one Level** (fajitas, teriyaki, chicken
+  Caesar, spaghetti and meatballs, chili, chicken noodle soup) stays, as
+  long as its steps differ by Level: shortcuts vs. scratch, or the cook
+  seasoning the meat and sauce themselves. Each is one lesson with Level
+  versions.
+- **Level 2 rice and knives:** rice from a rice cooker or heat-and-serve
+  rice, so dishes served with rice keep to one heat source; a chef's knife
+  for big chop work where a dish needs it, with a parent assisting.
+- Recorded in plan §12.0, the Level 2 and Level 4 docs, and the re-plan
+  doc's difficulty scale and Familiar and Explore section.
+
+## 210. 2026-10-25 — The 14b review's smaller fixes
+
+Planning only; nothing in the app changed. Owner, 2026-10-25: Level 4's
+Unit 2 may cook some parts ("ok"); "the rest you can fix."
+
+- **Level 2:** weeks 7 and 8 swapped, so the thermometer week (burgers)
+  comes before the first other ground-beef dish (tacos, now with the label
+  week). Week 2's molletes are baked, not broiled, until the broiler week
+  (27). Weeks 2, 4, and 16 cook one part first and hold it, so one heat
+  source is on at a time. Unit 8 offers a slow cooker for the simmer.
+- **Level 3:** week 26's cucumber salad is made ahead (two parts finish
+  together, Level 3's limit); week 24's lomo saltado uses oven fries
+  before frying is taught; week 28's Familiar is sheet-pan cod, so salmon
+  isn't four of the five Familiar fish.
+- **Shared lessons:** Level 2's chicken Caesar wraps, sheet-pan fajitas,
+  and meatballs in marinara are variations of written lessons (the
+  meatballs the same variation as Level 3's); Level 2's and Level 3's
+  chicken noodle soup are one new lesson with two Level versions; Level 4's
+  teriyaki salmon side is a variation of Pineapple teriyaki salmon. Counts
+  in plan §12.0 updated.
+- **The re-plan's ladder** now matches the weeks: no frittata or quiche in
+  Unit 7 (quiche is Level 4's Unit 4), Level 3's oven bake is psari plaki,
+  Level 4's is lasagna and moussaka, Level 2's broiling is nachos, and hot
+  holding is 140°F, the USDA figure.
+
+## 211. 2026-10-25 — Re-plan build, 14b: the Level 2, 3, and 4 files
+
+Phase 14 (plan §12.9), behind release 2. Owner, 2026-10-25: start 14b,
+in sections; ChatGPT prompts first, four dishes a sheet; a doc of every
+part page to review; and fix the recurring resting line.
+
+- **Pictures:** 136 dish prompts, 34 sheets of four (sheets 29–62), in
+  [Level dish pictures: ChatGPT prompts](https://claude.ai/artifact/PbGHZTt9e78S2SbwtyYVMB),
+  in week order. Sloppy joes and chicken noodle soup get fresh pictures
+  rather than their retired ones, so every sheet has four. The cards keep
+  their meal-type drawings until the sheets arrive.
+- **Registries:** seven skills for Level weeks (knife grip and safety,
+  setting out first, measuring and scaling, reading labels, steaming,
+  seasoning by taste, grilling over two zones); twelve cuisines (Spanish,
+  Welsh, Irish, Finnish, Hungarian, Georgian, Mozambican, Singaporean,
+  Thai, Indonesian, Venezuelan, Trinidadian); goat and "duck and quail"
+  as taste proteins; a card's `variationOf` names the written or planned
+  dish it varies, and the linter checks it.
+- **Level files** (`content/levels/sp-2.json`, `sp-3.json`, `sp-4.json`,
+  release 2): units with their goals, 36 weeks each with a skill, a
+  Familiar and an Explore dish, notes (shortcuts, Level versions, an
+  adult at home), mastery weeks, and part titles at each Level's minutes;
+  Level 4 names a cuisine every recipe week, and weeks 34–36 are the
+  student's own menu. Side quests units 102 (A), 103 (K), and 104 (C).
+  - 136 recipe cards with tags and estimated times: 47 in Level 2, 38 in
+    Level 3, 51 in Level 4. Level 2 cooks Level 3's spaghetti and
+    meatballs and chicken noodle soup cards with its own steps.
+  - Level 3 carries 45 written pages from today's Level 3, edited to
+    their new weeks and dishes (old week and unit numbers, old dishes,
+    week 16's make-ahead sauce, week 7's knife review).
+  - Level 2's recipe estimates add up to about 67 hours (set as its
+    hours), under the planned 72, until they're written and timed.
+- **Resting line:** 12 of today's Level 3 make-ahead pages ended "…or so
+  they can focus on resting". Each now closes on its own payoff; the
+  resting fact stays on two pages (a cold meal, a pot made ahead). Plan
+  §12.2 records the rule for new pages.
+- **Review doc:** [Level part pages](https://claude.ai/artifact/PYqCyTko7F9fK4NWbZciNc)
+  lists all 324 pages with a one-line summary, marking the carried pages
+  and the seven that join two of today's pages.
+- **A course on a new Level** (preview families only): the three Levels
+  show in Which program?. Until 14c adds each course's Familiar or Explore
+  pick, a week's recipe in the library is its Familiar dish
+  (`tools/build-library.js`), so a course runs on Familiar dishes in week
+  order instead of coming out empty. While today's Level 3 and the new one
+  both show, the new one reads "Level 3 Cook (new plan)", and the Levels
+  are listed in order (`public/app.js`). A course still skips weeks whose
+  dish isn't written, so a new Level 3 course opens on week 4 (minestrone)
+  until 14g writes the recipes.
+- Owner, 2026-10-25: pan-seared trout (Level 3 week 23's Familiar) and
+  eggs Benedict (Level 4 week 17's) are retagged everyday, so they fit
+  their Familiar slots. Eggs Benedict's tag also counts in Cook Around
+  the World's best fit.
+- Tests: 362 (a course on Level 3 plans its Familiar dishes; the three Levels in the library, release 2, a pair each
+  recipe week, the mastery weeks, and Level 4's cuisines; the Level
+  tests now expect the re-planned Levels beside today's Level 3 for a
+  preview family).

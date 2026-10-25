@@ -1054,7 +1054,7 @@ export function register(on) {
       // The programs a course can be, past Cook Around the World (§12.4):
       // the Levels, with the next release. Each week with its recipe.
       levels: levelsOn(await familyRelease(env.DB, s.family_id)).map((V) => ({
-        id: V.id, name: V.name, hours: V.hours, units: V.units,
+        id: V.id, name: V.name, hours: V.hours, units: V.units, release: V.release ?? 1,
         weeks: V.weeks.map((w) => ({ ...w, title: w.recipe ? lessonById[w.recipe]?.title ?? V.titles[w.recipe] : null })),
         // Each recipe's planned minutes, for the hours the parent's setup plans for (§12.4).
         minutes: Object.fromEntries([...new Set([...Object.keys(V.titles), ...LIBRARY.course.map((d) => d.id), ...V.cards.map((c) => c.id)])]

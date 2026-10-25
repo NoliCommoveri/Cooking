@@ -226,7 +226,8 @@ export function buildLibrary() {
       // Its options (§12.7): the other recipes best fit picks among (12d).
       // A practice or capstone week has no recipe: its own minutes and note instead.
       weeks: V.weeks.map(({ week, unit, skill, recipe, familiar, explore, cuisine, swapIns, mastery, kind, minutes, note, drill, knowledge, sabbath }) => ({
-        week, unit, ...(skill ? { skill } : {}), ...(recipe ? { recipe } : {}), ...(familiar ? { familiar, explore } : {}), ...(cuisine ? { cuisine } : {}), ...(swapIns?.length ? { options: swapIns } : {}),
+        // A re-planned week cooks its Familiar dish until a course picks Familiar or Explore (14c).
+        week, unit, ...(skill ? { skill } : {}), ...(recipe || familiar ? { recipe: recipe ?? familiar } : {}), ...(familiar ? { familiar, explore } : {}), ...(cuisine ? { cuisine } : {}), ...(swapIns?.length ? { options: swapIns } : {}),
         ...(mastery ? { mastery } : {}), ...(kind ? { kind, minutes, note } : {}), drill, knowledge, sabbath,
       })),
       // The Level's own recipe cards, scored by their tags until they're written (12d).
