@@ -4946,3 +4946,31 @@ Fish", and goes live for every family on merge.
   pointed at Unit 6 for that only. The demo still shows Unit 1.
 - Tests: 356. A Level course now schedules 25 written recipes, with 11
   waiting; best fit's "written option first" check moved to week 25.
+
+## 202. 2026-10-25 — Level 4 planned
+
+Planning only; nothing in the app changed. Owner, 2026-10-25: plan Level 4
+now, ahead of Level 2.
+
+- **Recipe review** (`docs/level-recipe-review.md`, Level 4 Chef): every
+  week of the owner's outline (plan §12.6) read against its skill, the climb
+  across the year, and what Level 3 teaches first. The main finding: Chicken
+  pot pie (week 9) needs a velouté that Unit 4 teaches in week 14, so the
+  review proposes swapping Units 3 and 4 (sauces in weeks 9–12, pastry in
+  13–16, still clear of spring). Smaller fixes: week 2's scaling done by
+  hand and checked against the app's amounts; chiffonade moved to week 1;
+  the chuck-cubing drill moved from week 7 to week 5; week 6's knowledge on
+  fat and trimming, sourcing left to week 31; a grill-pan and oven backup
+  for grilling; a USDA note on hollandaise; four added options. Its
+  decisions are a checklist for the owner.
+- **Build plan** (plan §12.8, phase 14 in the phase table): Level 4's
+  content file and checks, Which program? with the owner's warning,
+  adult-style banners for a cook where every profile is an adult or on
+  Level 4, **Write my recipe** for the weeks the student plans (24, 28,
+  32–36) through the family recipe editor, the capstone portfolio, the
+  syllabus and demo, and the content written a unit at a time.
+- Questions for the owner: an "adult at home" line for weeks 18–20 (the
+  owner's plan asks for it, the adult-style banners don't say it); whether
+  week 31's sourcing page mentions the sciatic nerve (Genesis 32:32);
+  typed or uploaded portfolio work; and the warning's wording, which is the
+  owner's to write.

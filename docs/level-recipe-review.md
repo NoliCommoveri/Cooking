@@ -353,3 +353,127 @@ These are the Level 3 weeks that rely on a skill Level 2 teaches. Each one needs
 - Still to build: weeks 35 and 36 picking their dishes from the Level's recipes.
 - Owner, 2026-10-24: Cuban black beans and rice goes into Cook Around the World's dried beans and lentils group. It waits on its picture (`content/images/dishes/cuban-black-beans.png`) before its card moves to `course.json`.
 - Written (2026-10-24, build log 174): Unit 1's Level versions (Easy-prep Shakshuka, Chicken fried rice, Oyakodon, Smash burgers), Turkey meatloaf (in the new Meatloaf lesson), Thick beef burgers, and weeks 1–4's part pages.
+
+---
+
+# Level 4 Chef (reviewed 2026-10-25)
+
+Planned now, ahead of Level 2, at the owner's ask (2026-10-25). The same ground rules as Level 3 (top of this file), on the owner's outline in plan §12.6 and the defaults ruled in §12.7. Claude's review for the owner to decide; nothing here is built. The build plan is plan §12.8.
+
+**What a learner brings in from Level 3:** a thermometer and the safe temperatures; lean and enriched yeast doughs and challah; the classic cuts by name and size (brunoise, batonnet, chiffonade are kitchen words already); sweating, browning, fond and deglazing; dried beans, lentils, and grains; fish to 145°F and poultry to 165°F; stock and soup; tasting for salt, acid, fat, and heat; and a Sabbath meal planned and cooked ahead. From Level 2: halving and doubling a recipe, and reading labels.
+
+**Not taught before Level 4:** searing a whole cut (noted in the Level 3 patterns), a roux, pastry, poaching eggs, deep frying, grilling, scaling past doubling, and pricing.
+
+## Level 4 Unit 1: Precision, speed, and scaling
+
+| Week | Dish | Verdict | Why | Proposal |
+| --- | --- | --- | --- | --- |
+| 1 | Ratatouille (written) | Keep, add | Even dice across five vegetables, so uneven cuts show. It was a Level 3 week 12 option, which is fine (looking back). Week 3 names chiffonade, but fajitas don't use it; ratatouille is finished with basil. | Move chiffonade here: basil chiffonade to finish. |
+| 2 | Beef chili scaled from 4 to 12 (planned) | Keep, fix | The app scales every recipe to the cook's size on its own, so the student never has to. | The scaling worksheet is done by hand first, from the 4-serving amounts; then the student sets the size to 12 and checks their numbers against the app's. The app is the answer key; nothing is built. The extra servings freeze (Beyond the Recipe). |
+| 3 | Chicken fajitas as Steak fajitas (written) | Keep, fix | Batonnet peppers and onions fit. Nothing in the recipe is weighed, though the week's drill and knowledge are about weight. | A Level version that lists the steak and vegetables in grams and has the student weigh them, and chiffonade moves to week 1. |
+| 4 | **Mastery:** salade niçoise with tuna, timed (Level only, new) | Keep | Four components hot and cold, timed to plate together: boiled potatoes, blanched green beans (Level 3 week 13), boiled eggs (Level 2), a vinaigrette (Level 3 week 33). | Cook it at a size other than the recipe's, so scaling is tested too. |
+
+## Level 4 Unit 2: Braising, stewing, beef and lamb cuts
+
+| Week | Dish | Verdict | Why | Proposal |
+| --- | --- | --- | --- | --- |
+| 5 | Beef stew (planned) | Keep, fix order | The first whole-cut sear, in batches. But cubing a chuck roast is week 7's drill, two weeks after the stew needs it. | Week 5's drill: cube a chuck roast. The stew's own steps sear in batches. |
+| 6 | Moroccan lamb tagine (variation of Chicken tagine) | Keep, fix | A good braise. Its knowledge (Leviticus 3, 7, and 17 and sourcing) overlaps week 31's (sourcing: slaughter, blood, fat), and Level 3 week 28 already had blood and fat. | Week 6's knowledge: which fat the rule blocks and which it doesn't (§2.1: suet and tallow out, marbling and drippings in), and how to trim a lamb shoulder. Sourcing stays in week 31. |
+| 7 | Korean braised short ribs (Level only, new) | Keep, fix | Short ribs are fatty and the braise ends greasy. The week's drill (cube a chuck roast) moves to week 5. | Week 7's drill: chill the braise and lift off the fat. Cost: short ribs are $$$; chuck is the cheaper swap. |
+| 8 | **Mastery:** pot roast or braised lamb shanks (planned; shanks a variation) | Keep, fix | A large cut to fork-tender, unaided. Pot roast's gravy usually starts from a roux, which Unit 4 teaches later. | Thicken the gravy by reducing, or with a cornstarch slurry walked through in the steps. |
+
+## Level 4 Units 3 and 4: Pastry, then sauces — swap them
+
+**Chicken pot pie (week 9) is filled with a velouté, a roux sauce Unit 4 teaches in week 14.** It's the one place Level 4 leans on a later unit. Every other Unit 3 dish stands alone, and no Unit 4 dish needs pastry.
+
+**Proposal:** sauces become Unit 3 (weeks 9–12) and pastry and enriched breads Unit 4 (weeks 13–16). Pot pie then comes three weeks after Chicken à la king, the same velouté, as review. Pastry was moved up to stay clear of spring; weeks 13–16 still end before the new year for a course that starts in September, so cinnamon rolls (the only yeast dish, and a week with no unleavened option) stay well away from Unleavened Bread. The tables below are in the proposed order.
+
+### Sauces (weeks 9–12 if swapped)
+
+| Week | Dish | Verdict | Why | Proposal |
+| --- | --- | --- | --- | --- |
+| 9 | Beef lasagna with béchamel (Level only, new) | Keep | A roux three ways in the drill, then a béchamel layered with Level 3's ragù. Meat with dairy is allowed (§2.1). | None. |
+| 10 | Chicken à la king over rice (Level only, new) | Keep | Velouté from homemade or boxed stock (Level 3 Unit 8), tempering hot liquid in. | None. |
+| 11 | Hollandaise over asparagus and poached eggs (new, 3rd in poaching eggs) | Keep, fix | The emulsion and its rescue. Poaching an egg is new here, which the recipe teaches. The USDA guideline is to cook egg-yolk sauces to 160°F and poached eggs until the yolk is firm; most cooks don't. | Say both plainly (the Level 3 voice rule): hold the sauce at 160°F over the double boiler, or use pasteurized eggs; a runny yolk is the family's choice. |
+| 12 | **Mastery:** seared chicken thighs with pan sauce (variation of Chicken piccata) | Keep | A pan sauce from fond, mounted with butter, unaided. | None. |
+
+### Pastry and enriched breads (weeks 13–16 if swapped)
+
+| Week | Dish | Verdict | Why | Proposal |
+| --- | --- | --- | --- | --- |
+| 13 | Chicken pot pie with homemade crust (planned) | Keep | Rolling to an even thickness, a velouté filling that's now review. | None, once swapped. Otherwise a Level version walks the roux through. |
+| 14 | Spinach and feta borekas, rough puff (Level only, new) | Keep | Lamination by folding. Store-bought puff and phyllo can carry lard (§12.7); homemade sidesteps it. | Spanakopita (planned) as the lighter option, with its "check the phyllo label" note. |
+| 15 | Cinnamon rolls (planned) | Keep | Review of Level 3's enriched dough, now shaped and cut evenly, with an overnight cold proof. A Level 3 week 8 option; best fit puts a dish the learner has cooked last, so a Level 3 graduate gets another option where there is one. | None. |
+| 16 | **Mastery:** apple pie from scratch (planned) | Keep, add | Crust, crimp, and vent unaided. The week's knowledge is blind baking, which an apple pie doesn't do. | Spinach and mushroom quiche (planned, blind-baked) as the option. |
+
+## Level 4 Unit 5: Frying and grilling
+
+| Week | Dish | Verdict | Why | Proposal |
+| --- | --- | --- | --- | --- |
+| 17 | Chicken schnitzel, shallow fried (new, 3rd in breading and frying) | Keep | The breading station and a shallow fry. Matzah-meal backup. | None. |
+| 18 | Cornmeal-fried whiting, deep fried (variation of Fish and chips) | Keep, fix | The first deep fry, oil held at 350°F. The owner's plan says an adult is home for deep frying and grilling, but Level 4's banners don't mention adults (§12.6). | See "An adult at home" below. |
+| 19 | Grilled beef kebabs (variation of Shish taouk) | Keep, fix | Two-zone grilling needs an outdoor grill, which many families don't have. | A backup in the lesson: a grill pan for the direct heat and the oven for the indirect, the same two zones. |
+| 20 | **Mastery:** fried chicken with grilled vegetables (Level only, new) | Keep | The hardest fry: bone-in chicken to 165°F at a held temperature, kept crisp. Plain flour and cornstarch dredge as the backup. | The same grill backup as week 19. |
+
+**An adult at home (question for the owner):** the owner's plan says an adult needs to be home for deep frying and grilling. With adult-style banners, nothing in the app says so. **Recommendation:** weeks 18–20's cards and their recipes' first step say "Have an adult at home while you deep-fry" (or grill), the one place Level 4 mentions an adult.
+
+## Level 4 Unit 6: Flavor profiles by cuisine
+
+| Week | Dish | Verdict | Why | Proposal |
+| --- | --- | --- | --- | --- |
+| 21 | Chicken tinga tacos on corn tortillas (planned) | Keep, fix | Mexican flavors fit. The drill toasts and rehydrates dried chiles, but tinga is usually made with canned chipotles in adobo. | A Level version that toasts and blends dried chipotles and guajillos in place of the can. |
+| 22 | Chicken tikka masala (variation of Butter chicken) | Keep | Toasting and grinding a garam masala for it. | None. |
+| 23 | Pineapple teriyaki salmon (written) | Keep, add | A simpler dish than its neighbours, but it teaches the unit's last goal: adapting a dish to clean ingredients. | Beef and broccoli (planned) as the option: its oyster sauce is the swap the knowledge page teaches. |
+| 24 | **Mastery:** the student designs a dish in a chosen cuisine | Keep, build | No fixed recipe. | See "Weeks the student plans" below. |
+
+## Level 4 Unit 7: Menus, nutrition, and budgeting
+
+| Week | Dish | Verdict | Why | Proposal |
+| --- | --- | --- | --- | --- |
+| 25 | Mediterranean chicken bowls (Level only, new) | Keep | A balanced plate built from parts. | None. |
+| 26 | Beans and rice for 6 on a budget (Red beans and rice, written) | Keep | Cost per serving from the student's own receipt; the app has no prices, and doesn't need them. | Cuban black beans and rice as the option. |
+| 27 | Roast chicken, then a second meal from leftovers (planned) | Keep, fix | Two meals, but a Level week holds one recipe. | The week's recipe is Roast chicken. The second meal is the drill: cook one of a short list of written lessons from the leftover chicken (Chicken fried rice, Chicken tinga, Chicken à la king), which counts as an ordinary cook. |
+| 28 | **Mastery:** a three-course dinner on a set budget | Keep, build | No fixed recipe. | See below. |
+
+## Level 4 Unit 8: Allergens, sourcing, and cooking for groups
+
+| Week | Dish | Verdict | Why | Proposal |
+| --- | --- | --- | --- | --- |
+| 29 | Dairy-free, gluten-free chicken stir-fry (variation of Vegetable stir-fry with tofu) | Keep, fix | Allergen cross-contact. Soy sauce has wheat. | Tamari or coconut aminos, with the "check the label for wheat" note. |
+| 30 | Beef lasagna for 12 (week 9's lesson at 12 servings) | Keep | Equipment and oven space for a crowd. | None. |
+| 31 | Roast leg of lamb from a local source (Appointed Times A4) | Keep, ask | Sourcing fits. Many observant butchers remove the sciatic nerve from the hindquarter (Genesis 32:32); it isn't part of the app's rule (§2.1). | Owner: should the sourcing page mention it, as a fact, the way Beyond the Recipe treats the Sabbath? |
+| 32 | **Mastery:** a buffet for 12 with allergen labels | Keep, build | No fixed recipe; holding hot and cold. | See below. |
+
+## Level 4 Unit 9: Sabbath capstone
+
+Weeks 33–36 test, prepare, and serve the student's own menu, as the outline has it. The capstone bread is challah, with homemade matzah as its unleavened backup (§12.6); matzah needs a lesson (it's an Appointed Times idea, §6.19).
+
+## Weeks the student plans (question for the owner)
+
+Weeks 24, 28, 32, and 33–36 have no fixed recipe: the student designs or picks the dishes. Level 3's capstone is handled by checking off its parts (§12.4, still proposed). Level 4 has eight such weeks, so it needs a way for the student's own dish to be the week's recipe.
+
+**Recommendation:** on those weeks the Level card has **Write my recipe**, which opens the family recipe editor (§6.10) for the learner, with the same hard-rule checks every family recipe gets. The saved recipe becomes the week's recipe and cooks in the player like any other; it stays in the family's recipes afterward. Weeks with several dishes (28, 32, 36) take a recipe per dish, or pick written lessons. The week is done when its dishes are cooked. Capstone weeks 33–35 cook test and make-ahead dishes the same way.
+
+## Patterns
+
+- **Repeats from Level 3** (ratatouille, chili, beef stew, cinnamon rolls, roast chicken) are fine: looking back is review, and best fit puts a dish the learner already cooked last (§12.4, 12d).
+- **Cost.** Short ribs, lamb shanks, leg of lamb, and salmon are $$$. Each has a cheaper option where the week allows (the workbook's gaps, §12.7).
+- **Mastery when everything is unaided.** Level 4 learners already cook on their own, so "cook it on your own" is no longer the step up. **Recommendation:** keep the same mastery mechanism (a different recipe with the same skill, then "Why did it work?"); the unaided part is simply true all year.
+
+## For the owner to decide
+
+- [ ] Swap Units 3 and 4: sauces in weeks 9–12, pastry and enriched breads in weeks 13–16
+- [ ] Week 1 finishes with basil chiffonade; week 3's Level version weighs its ingredients in grams
+- [ ] Week 2's scaling is done by hand, then checked against the app's amounts
+- [ ] Week 5's drill cubes the chuck roast; week 7's drill lifts the fat off the braise
+- [ ] Week 6's knowledge is fat and trimming; sourcing stays in week 31
+- [ ] Week 8's pot roast gravy is reduced or slurry-thickened, not a roux
+- [ ] Week 11 (or 15 unswapped): hollandaise at 160°F or pasteurized eggs, with the USDA guideline stated
+- [ ] Weeks 18–20 say "Have an adult at home" on the card and the first step
+- [ ] Weeks 19–20 get a grill pan and oven backup
+- [ ] Week 21's Level version toasts dried chiles
+- [ ] Options added: Spanakopita (borekas week), Spinach and mushroom quiche (apple pie week), Beef and broccoli (teriyaki week), Cuban black beans and rice (week 26)
+- [ ] Week 27's second meal is the drill, cooked from a written lesson
+- [ ] Week 29 uses tamari or coconut aminos
+- [ ] Week 31: mention the sciatic nerve on the sourcing page, or not
+- [ ] Student-planned weeks: **Write my recipe** from the Level card, through the family recipe editor
