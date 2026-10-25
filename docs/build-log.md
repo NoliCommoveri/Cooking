@@ -4839,6 +4839,10 @@ family on merge.
 - No "holy trinity" anywhere (owner's ruling, build log 175, repeated
   2026-10-25): the rice dressing, week 15's knowledge page, the unit quiz,
   and the kitchen words say onion, celery, and green pepper instead.
+- Owner's edits in the review doc, 2026-10-25: week 14's drill dices one
+  onion and splits it into two piles, and its Beyond the Recipe asks the
+  learner to research the giraffe (split hooves? chews the cud? clean?) in
+  place of picking an animal from the page's list.
 - New ingredients: fresh green beans, beef chuck roast, beef broth, canned
   tomato sauce, raisins, pimento-stuffed green olives. New tool: a stockpot.
 - Level 3's hours with every part are now about 130 (128 before); the
