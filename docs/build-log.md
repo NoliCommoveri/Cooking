@@ -5102,3 +5102,11 @@ Planning only; nothing in the app changed.
   fish before poultry in Unit 3, steaming first in Unit 5, the skin-side
   sear before the stir-fry in Unit 6, the whole roast chicken as Unit 7's
   mastery) and a timed side for week 26's rava fish fry.
+- Owner, 2026-10-25: "apply all five." In the Level 3 doc: fish (week 8)
+  before poultry (week 9); steaming first in Unit 5 (16), then grains
+  (17), beans and lentils (18); the skin-side sear (23) before the
+  stir-fry (24); Unit 7 runs sheet-pan (27), fish timed with a side (28),
+  the broiler (29), and whole roast chicken or piri-piri as the mastery
+  (30); week 26's rava fish fry comes with lemon rice and a cucumber salad.
+  Bible and make-ahead pages moved with their dishes; weeks 29–33 stay
+  unleavened.
