@@ -432,3 +432,134 @@ test('the public demo and syllabus get the Levels only once their release is lau
   await env.DB.prepare("INSERT INTO settings (key, value) VALUES ('releases', ?)").bind(JSON.stringify({ live: 1, preview: [] })).run();
   assert.equal(await get(), 1, 'launched: the built file');
 });
+
+// ---------- 14c: a course on a new Level, Familiar or Explore ----------
+// Level 3 week 9 has both dishes written: chicken fajitas (Familiar, needs a
+// microwave) and oyakodon (Explore, uses egg). Week 4's Explore dish isn't
+// written yet. Both of week 9's dishes are chicken.
+
+import { exportAll, importAll } from '../src/worker/backup.js';
+import { makeDb } from './helpers/d1.js';
+import { applyPending } from '../src/worker/migrate.js';
+
+const familyIs = (a, diet) => a.put('/api/family', { name: 'Carsons', default_servings: 6, diet_filters: diet, plan_weeks: true });
+const limits = (a, x) => a.put('/api/tastes/limits', { max_minutes: null, budget: null, missing_tools: [], adventurous: null, ...x });
+const course0 = async (a) => (await a.get('/api/courses')).body.courses[0];
+
+test('a new course starts with Familiar or Explore, preset from how adventurous', async () => {
+  const { a, ava } = await setup();
+  const preset = async () => (await a.get('/api/courses')).body.starts_preset;
+  assert.equal(await preset(), 'familiar', 'not set');
+  for (const [adv, starts] of [['familiar', 'familiar'], ['a-bit', 'explore'], ['adventurous', 'explore']]) {
+    await limits(a, { adventurous: adv });
+    assert.equal(await preset(), starts, adv);
+  }
+  // Sent no start, a new course takes the preset.
+  await a.post('/api/courses', { program: 'sp-3', start_date: sunday, per_week: 1, profile_ids: [ava] });
+  assert.equal((await course0(a)).starts, 'explore');
+  const { ben } = await setup();
+  assert.equal((await a.post('/api/courses', { program: 'sp-3', start_date: sunday, per_week: 1, profile_ids: [ben], starts: 'both' })).status, 400);
+});
+
+test("Familiar and Explore courses cook their slot's dish; an unwritten one falls back to the written other", async () => {
+  const { a, ava, ben } = await setup();
+  await level(a, [ava]);
+  const fam = await weekIds(a);
+  assert.deepEqual([fam[4], fam[5], fam[9]], ['minestrone', 'tabbouleh', 'chicken-fajitas']);
+  await level(a, [ben], sunday, { starts: 'explore' });
+  const exp = Object.fromEntries((await a.get('/api/courses')).body.courses[1].plan.map((x) => [x.week, x.id]));
+  assert.deepEqual([exp[4], exp[5], exp[9]], ['minestrone', 'tabbouleh', 'oyakodon'], "week 4's Explore isn't written, so it cooks Minestrone");
+  assert.ok(!(await course0(a)).plan.some((x) => x.changed), 'nothing saved per week');
+  // What setup shows for each start.
+  const V = (await a.get('/api/courses')).body.levels.find((x) => x.id === 'sp-3');
+  assert.deepEqual([V.defaults.familiar.ids[9], V.defaults.explore.ids[9]], ['chicken-fajitas', 'oyakodon']);
+  assert.equal(V.weeks.find((w) => w.week === 9).explore_title, 'Oyakodon');
+});
+
+test('a dish the diet or a missing tool rules out gives the week its other dish', async () => {
+  const { a, ava } = await setup();
+  await limits(a, { missing_tools: ['microwave'] });
+  await level(a, [ava]);
+  assert.equal((await weekIds(a))[9], 'oyakodon', 'fajitas need a microwave');
+  await limits(a, {});
+  await familyIs(a, ['egg']);
+  const { id } = await course0(a);
+  await a.put(`/api/courses/${id}`, { start_date: sunday, per_week: 1, profile_ids: [ava], starts: 'explore' });
+  assert.equal((await weekIds(a))[9], 'chicken-fajitas', 'oyakodon has egg');
+});
+
+test('changing the start re-points the weeks no one changed; a queued dish stays', async () => {
+  const { a, ava } = await setup();
+  const { id } = (await level(a, [ava], addDays(sunday, -35))).body;
+  // Week 4 changed by the parent; this week is week 9 once 4, 5, and 8 are skipped.
+  await a.put(`/api/courses/${id}`, { start_date: addDays(sunday, -35), per_week: 1, profile_ids: [ava], weeks: [{ week: 4, id: 'ratatouille' }] });
+  for (const lid of ['ratatouille', 'tabbouleh', 'thick-burgers', 'baked-salmon']) await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: lid });
+  assert.deepEqual((await card(a)).this_week.lessons.map((x) => x.lesson_id), ['chicken-fajitas']);
+  await a.put(`/api/courses/${id}`, { start_date: addDays(sunday, -35), per_week: 1, profile_ids: [ava], starts: 'explore' });
+  const w = await weekIds(a);
+  assert.equal(w[4], 'ratatouille', 'the changed week keeps its pick');
+  assert.equal(w[9], 'chicken-fajitas', "this week's is on the queue, so it stays");
+  assert.equal(w[16], 'steamed-fish', 'a week no one changed moves to Explore');
+  assert.equal((await card(a)).level.starts, 'explore');
+});
+
+test("a week neither of whose dishes the family can cook waits, says why, and takes a request", async () => {
+  const { env, a, ava, fid } = await setup();
+  await env.DB.prepare("UPDATE parents SET is_owner = 1 WHERE email = 'jen@example.com'").run();
+  await familyIs(a, ['meat']);
+  await limits(a, { missing_tools: ['microwave'] });
+  const { id } = (await level(a, [ava], addDays(sunday, -21))).body;
+  for (const lid of ['minestrone', 'tabbouleh', 'baked-salmon']) await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: lid });
+  let q = await card(a);
+  const x = q.this_week.lessons[0];
+  assert.deepEqual([x.lesson_id, x.week, x.requested], ['chicken-fajitas', 9, false], 'week 9 holds the course');
+  const codes = (d) => [...new Set(d.why.map((r) => `${r.kind}:${r.tags.join()}`))];
+  assert.deepEqual(x.blocked.map((d) => [d.id, codes(d)]), [['chicken-fajitas', ['diet:meat', 'tool:microwave']], ['oyakodon', ['diet:meat']]]);
+  assert.ok(x.blocked[0].why.some((r) => r.kind === 'tool' && r.item === 'Microwave'));
+  assert.equal(q.hidden, 0, "a blocked week isn't counted as hidden");
+  // Not queued: no one can cook it.
+  assert.deepEqual((await a.get(`/api/profiles/${ava}/queue`)).body.items, []);
+  const lv = await kitchen(a, ava);
+  assert.deepEqual([lv.week.week, lv.week.blocked], [9, true]);
+  // Week 7 (thick burgers, beef) waits quietly: its Explore dish is still being written.
+  assert.ok(!(await course0(a)).plan.find((w) => w.week === 7).blocked);
+  assert.equal((await a.post('/api/level-requests', { level: 'sp-3', week: 7 })).status, 409);
+
+  // Request a replacement: once a family, counted on Recipe gaps with no name.
+  assert.equal((await a.post('/api/level-requests', { level: 'sp-3', week: 9 })).status, 200);
+  assert.equal((await a.post('/api/level-requests', { level: 'sp-3', week: 9 })).status, 200);
+  assert.equal((await card(a)).this_week.lessons[0].requested, true);
+  let r = (await a.get('/api/owner/gaps')).body.level_requests;
+  assert.deepEqual(r.map((y) => [y.level, y.week, y.families]), [['sp-3', 9, 1]]);
+  assert.deepEqual(r[0].reasons.map((y) => y.text).sort(), ['Leaves out meat and poultry', 'No microwave']);
+  assert.ok(!JSON.stringify(r).includes(fid));
+  await a.post('/api/level-requests/undo', { level: 'sp-3', week: 9 });
+  assert.deepEqual((await a.get('/api/owner/gaps')).body.level_requests, [], 'Undo takes it back');
+
+  // Go on to the next week: skipped, with Put back.
+  await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: 'chicken-fajitas' });
+  q = await card(a);
+  assert.notEqual(q.this_week.lessons[0]?.week, 9);
+  await a.post(`/api/courses/${id}/put-back-recipe`, { lesson_id: 'chicken-fajitas' });
+  // The settings changed: the week cooks again, its other dish while there's no microwave.
+  await familyIs(a, []);
+  const w9 = (await course0(a)).plan.find((w) => w.week === 9);
+  assert.deepEqual([w9.id, w9.blocked], ['oyakodon', undefined]);
+  assert.ok(!(await card(a)).this_week.lessons.some((y) => y.blocked));
+});
+
+test("a family without the Levels' release sees no start setting; the backup carries course_starts", async () => {
+  const { env, a, ava } = await setup();
+  await level(a, [ava], sunday, { starts: 'explore' });
+  const backup = JSON.parse(JSON.stringify(await exportAll(env.DB)));
+  assert.deepEqual(backup.tables.course_starts.map((r) => r.starts), ['explore']);
+  const fresh = makeDb();
+  await applyPending(fresh);
+  await importAll(fresh, backup);
+  assert.equal((await fresh.prepare('SELECT starts FROM course_starts').first()).starts, 'explore');
+
+  const other = await setup({ preview: false });
+  const body = (await other.a.get('/api/courses')).body;
+  assert.deepEqual(body.levels, []);
+  assert.equal((await other.a.post('/api/level-requests', { level: 'sp-3', week: 9 })).status, 400);
+});

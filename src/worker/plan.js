@@ -11,13 +11,14 @@ import { fail, now } from './lib/http.js';
 import { randomHex } from './lib/crypto.js';
 import { requireSession, requireParent, ownProfile, checkPin } from './auth.js';
 import { LIBRARY } from './library-data.js';
+import { CONTENT } from './content-data.js';
 import { liveLesson, livePatches } from './lessons.js';
 import { dietView } from '../content/diet.js';
 import { servingOptions } from '../content/scale.js';
 import { courseEntries, numberCourse } from '../content/course.js';
 import { schedule, weekOf, addDays, localDay, isDay, isSabbath, DUE_DAY } from './schedule.js';
 import { isRecipeId, lessonFor, recipeNames, recipeVisible } from './recipes.js';
-import { tasteContext, versionFor, bestPlan, hatedExtras, versionSummary, levelPlan, levelCandidates, cookedBy, bestOf } from './picks.js';
+import { tasteContext, versionFor, bestPlan, hatedExtras, versionSummary, levelPlan, levelCandidates, cookedBy } from './picks.js';
 import { variationChoices } from './variations.js';
 import { releaseOn, familyRelease, LEVELS_RELEASE } from './release.js';
 import { PARTS, PART_NAMES, coursePartsOf, weekParts, plannedMinutes, hoursOf } from '../content/levels.js';
@@ -39,6 +40,7 @@ const dishById = Object.fromEntries(LIBRARY.course.map((d) => [d.id, d]));
 // The Levels (§12), by id: what a Level course can be, with their release.
 const LEVELS = LIBRARY.levels ?? {};
 const placeholders = (list) => list.map(() => '?').join(', ');
+const toolNames = Object.fromEntries(CONTENT.equipment.map((e) => [e.id, e.name]));
 // A Level recipe's title: its lesson's, or its card's until it's written.
 const titleOfLevel = (V, id) => lessonById[id]?.title ?? V.titles[id] ?? dishById[id]?.title ?? id;
 
@@ -233,42 +235,63 @@ const startsInput = (x) => (STARTS.includes(x) ? x : fail(400, 'invalid', 'Each 
 //   - otherwise the start slot's dish, or the other slot's when the diet
 //     settings hide it or it needs a tool the family doesn't have; a start
 //     dish not written yet cooks the other while only that one is written
-//     (owner, 2026-10-25), and moves to its own once it's written;
-//   - best fit among the week's other recipes only when both are ruled out
-//     (§12.0). A dish not written yet can't be ruled out until it is.
-// A recipe is in one week at most. rows: { week: course_lessons row }; held:
-// the course's queued or cooked dishes; pids: who the course is for.
-async function levelWeekDishes(env, fam, V, starts, rows, held, pids) {
-  const shown = visible(fam);
-  const limits = await env.DB.prepare('SELECT missing_tools FROM family_limits WHERE family_id = ?').bind(fam.id).first();
-  const missing = JSON.parse(limits?.missing_tools ?? '[]');
-  const out = (id) => Boolean(lessonById[id]) && (!shown.has(id) || (lessonById[id].tools ?? []).some((t) => missing.includes(t)));
+//     (owner, 2026-10-25), and moves to its own once it's written.
+// Best fit never picks a Level week's dish (owner, 2026-10-25). A week whose
+// dishes are both written and both ruled out is blocked: it holds the course,
+// with why, for the parent to check the settings, request a replacement,
+// change it, or go on to the next week. A week with a dish still being
+// written waits quietly for it, as before. A recipe is in one week at
+// most. rows: { week: course_lessons row }; held: the course's queued or
+// cooked dishes. Returns { ids: { week: id }, blocked: { week: reasons } }.
+async function levelWeekDishes(env, fam, V, starts, rows, held) {
+  const why = await ruledOut(env, fam);
   const used = new Set(Object.values(rows).map((r) => r.lesson_id));
   const recipeWeeks = V.weeks.filter((w) => w.recipe && !rows[w.week]);
-  const ids = {};
+  const ids = {}, blocked = {};
   for (const w of recipeWeeks) {
     const kept = [w.familiar, w.explore].find((id) => held.has(id) && !used.has(id));
     if (kept) { ids[w.week] = kept; used.add(kept); }
   }
-  let tc;
   for (const w of recipeWeeks.filter((x) => !ids[x.week])) {
     const pair = (starts === 'explore' ? [w.explore, w.familiar] : [w.familiar, w.explore]).filter((id) => !used.has(id));
-    const can = pair.filter((id) => !out(id));
-    let id = can.find((x) => lessonById[x]) ?? can[0];
-    if (!id) {
-      const { options, more } = levelCandidates(V, w);
-      const others = [...options, ...more].filter((x) => !pair.includes(x) && !used.has(x) && lessonById[x] && !out(x));
-      if (others.length) {
-        tc ??= await tasteContext(env, fam);
-        id = tc ? bestOf(tc, V, others, pids) : others[0];
-      }
-    }
-    // Nothing to cook: the start dish, which the schedule passes over.
-    id ??= pair[0] ?? w.recipe;
+    const can = pair.find((id) => lessonById[id] && !why(id));
+    const out = pair.filter((id) => lessonById[id] && why(id));
+    const id = can ?? pair.find((x) => !lessonById[x]) ?? out[0] ?? w.recipe;
+    if (!can && out.length && out.length === pair.length) blocked[w.week] = pair.map((x) => ({ id: x, title: titleOfLevel(V, x), written: true, why: why(x) }));
     ids[w.week] = id;
     used.add(id);
   }
-  return ids;
+  return { ids, blocked };
+}
+
+// What rules a written dish out for a family, in words, or null: each
+// ingredient its diet settings leave out (with no substitution), and each
+// tool it needs that the family marked they don't have.
+async function ruledOut(env, fam) {
+  const filters = JSON.parse(fam.diet_filters ?? '[]');
+  const limits = await env.DB.prepare('SELECT missing_tools FROM family_limits WHERE family_id = ?').bind(fam.id).first();
+  const missing = JSON.parse(limits?.missing_tools ?? '[]');
+  return (id) => {
+    const L = lessonById[id];
+    if (!L) return null;
+    const out = [
+      ...dietView(L, LIBRARY.ingredients, filters).blockedBy.map((i) => {
+        const tags = (LIBRARY.ingredients[i]?.contains ?? []).filter((t) => filters.includes(t));
+        return { kind: 'diet', item: LIBRARY.ingredients[i]?.name ?? i, tags };
+      }),
+      ...(L.tools ?? []).filter((t) => missing.includes(t)).map((t) => ({ kind: 'tool', item: toolNames[t] ?? t, tags: [t] })),
+    ];
+    return out.length ? out : null;
+  };
+}
+
+// The weeks of a Level this family has requested a replacement for (14c).
+// Empty before the draft's table exists.
+async function requestedWeeks(env, fid, level) {
+  try {
+    const { results } = await env.DB.prepare('SELECT week FROM level_requests WHERE family_id = ? AND level = ?').bind(fid, level).all();
+    return new Set(results.map((r) => r.week));
+  } catch { return new Set(); }
 }
 
 // A Level course's plan (§12.4): each week's recipe in week order, one Level
@@ -285,10 +308,10 @@ async function levelPlanOf(env, course, starts = null) {
   const byWeek = Object.fromEntries(results.filter((r) => V.weeks.some((w) => w.week === r.position && w.recipe)).map((r) => [r.position, r]));
   const { results: queued } = await env.DB.prepare("SELECT DISTINCT lesson_id FROM queue WHERE family_id = ? AND course_id = ? AND status IN ('assigned', 'shopped', 'cooked')")
     .bind(course.family_id, course.id).all();
-  const ids = await levelWeekDishes(env, fam, V, starts, byWeek, new Set(queued.map((r) => r.lesson_id)), await courseProfiles(env, course));
+  const { ids, blocked } = await levelWeekDishes(env, fam, V, starts, byWeek, new Set(queued.map((r) => r.lesson_id)));
   const weeks = V.weeks.filter((w) => w.recipe).map((w) => (byWeek[w.week]
     ? { week: w.week, id: byWeek[w.week].lesson_id, removed: byWeek[w.week].removed, changed: true }
-    : { week: w.week, id: ids[w.week], removed: KEPT, changed: false }));
+    : { week: w.week, id: ids[w.week], removed: KEPT, changed: false, ...(blocked[w.week] ? { blocked: blocked[w.week] } : {}) }));
   return {
     order: weeks.map((x) => x.id), removed: weeks.filter((x) => x.removed).map((x) => x.id),
     skipped: weeks.filter((x) => x.removed === SKIPPED).map((x) => x.id), weeks, starts,
@@ -296,9 +319,9 @@ async function levelPlanOf(env, course, starts = null) {
 }
 
 // A Level's weeks as a new course for this family would plan them, for each
-// start: { familiar: { week: id }, explore: { week: id } }, for setup.
+// start: { familiar: { ids, blocked }, explore: { ids, blocked } }, for setup.
 async function levelDefaults(env, fam, V) {
-  return Object.fromEntries(await Promise.all(STARTS.map(async (x) => [x, await levelWeekDishes(env, fam, V, x, {}, new Set(), [])])));
+  return Object.fromEntries(await Promise.all(STARTS.map(async (x) => [x, await levelWeekDishes(env, fam, V, x, {}, new Set())])));
 }
 
 // The parent's picks for some of a Level's weeks (12d), checked: each is one
@@ -410,11 +433,14 @@ async function levelLessons(env, course, fam) {
   const plan = await levelPlanOf(env, course);
   const kept = plan.weeks.filter((x) => !x.removed).map((x) => x.id);
   const shown = visible(fam);
+  // A blocked week (14c) holds the schedule, unqueued, until the parent acts on it.
+  const blocked = Object.fromEntries(plan.weeks.filter((x) => x.blocked && !x.removed).map((x) => [x.id, x.blocked]));
   return {
     plan, labels: suggestedLabels, total: numberCourse(LIBRARY.course).total, kept,
-    usable: kept.filter((x) => shown.has(x)),
+    usable: kept.filter((x) => shown.has(x) || blocked[x]),
     unwritten: kept.filter((x) => !lessonById[x]).length + V.weeks.filter((w) => !w.recipe).length,
-    hidden: kept.filter((x) => lessonById[x] && !shown.has(x)).length,
+    hidden: kept.filter((x) => lessonById[x] && !shown.has(x) && !blocked[x]).length,
+    blocked, requested: await requestedWeeks(env, course.family_id, V.id),
     level: V, weekOf: Object.fromEntries(plan.weeks.map((x) => [x.id, x.week])), idOf: Object.fromEntries(plan.weeks.map((x) => [x.week, x.id])),
   };
 }
@@ -474,6 +500,8 @@ function levelFor(st, pid, day) {
     return {
       week: w.week, unit: w.unit, unit_name: unitName[w.unit], mastery: Boolean(w.mastery), kind: w.kind ?? null, note: w.kind ? w.note ?? null : null,
       recipe: id, recipe_title: id ? lessonById[id]?.title ?? V.titles[id] ?? id : null, recipe_written: Boolean(id && lessonById[id]), recipe_done: Boolean(id && st.done[id]),
+      // Neither dish can be cooked with the family's settings (14c): the kitchen sends the learner to a parent.
+      blocked: Boolean(id && st.lessons.blocked[id]),
       // The parts the course keeps on (a parent can turn any off).
       parts: weekParts(w, on).map((part) => partOut(w, part)),
     };
@@ -666,7 +694,8 @@ export async function syncQueue(env, fam, day, tz) {
     const st = await courseState(env, course, fam, day, tz);
     states.push(st);
     const due = new Map();
-    for (const x of st.sched.this_week.lessons) if (!x.done) due.set(x.id, st.sched.this_week.week);
+    // A blocked Level week (14c) isn't queued: no one can cook it as things stand.
+    for (const x of st.sched.this_week.lessons) if (!x.done && !st.lessons.blocked?.[x.id]) due.set(x.id, st.sched.this_week.week);
     const { results: rows } = await env.DB.prepare("SELECT * FROM queue WHERE family_id = ? AND course_id = ? AND status IN ('assigned', 'shopped')").bind(fam.id, course.id).all();
     const stmts = [];
     const have = new Set();
@@ -773,6 +802,8 @@ function courseOut(st, fam, rowsByLesson, version = () => null) {
       foundation: Boolean(dishById[x.id]?.pickOne), done: x.done, overdue: fam.mode === 'homeschool' ? x.overdue : false, extra: Boolean(x.extra),
       queue_id: q?.id ?? null, servings: q?.servings ?? null, servings_options: L ? servingOptions(L) : [], status: q?.status ?? null,
       version: version(x.id, profiles),
+      // A Level week neither of whose dishes the family can cook (14c): each dish and why, and whether it's been requested.
+      ...(V && lessons.blocked[x.id] ? { blocked: lessons.blocked[x.id], requested: lessons.requested.has(week) } : {}),
     };
   };
   const week = (w) => ({ week: w.week, skipped: w.skipped, extra: w.extra, lessons: w.lessons.map(lessonOut) });
@@ -1111,7 +1142,7 @@ export function register(on) {
         out.push({
           id: c.id, name: c.name, start_date: c.start_date, per_week: c.per_week, archived_at: c.archived_at, program: c.program, parts: c.parts, starts: plan.starts,
           // changed: a week the parent picked or skipped, which keeps its recipe whatever the course starts with (14c).
-          profile_ids: await courseProfiles(env, c), plan: plan.weeks.map((x) => ({ id: x.id, week: x.week, removed: Boolean(x.removed), changed: x.changed })),
+          profile_ids: await courseProfiles(env, c), plan: plan.weeks.map((x) => ({ id: x.id, week: x.week, removed: Boolean(x.removed), changed: x.changed, ...(x.blocked ? { blocked: x.blocked } : {}) })),
           usable: lessons.usable.length, unwritten: lessons.unwritten, hidden: lessons.hidden,
         });
         continue;
@@ -1138,6 +1169,8 @@ export function register(on) {
         id: V.id, name: V.name, hours: V.hours, units: V.units,
         weeks: V.weeks.map((w) => ({ ...w, ...(w.recipe ? { title: titleOfLevel(V, w.familiar), explore_title: titleOfLevel(V, w.explore) } : { title: null }) })),
         defaults: await levelDefaults(env, fam, V),
+        // The weeks the family has asked for a replacement for (14c).
+        requested: [...await requestedWeeks(env, s.family_id, V.id)],
         // Each recipe's planned minutes, for the hours the parent's setup plans for (§12.4).
         minutes: Object.fromEntries([...new Set([...Object.keys(V.titles), ...LIBRARY.course.map((d) => d.id), ...V.cards.map((c) => c.id)])]
           .map((rid) => [rid, plannedRecipeMinutes(V, rid)])),
@@ -1215,7 +1248,7 @@ export function register(on) {
   async function levelPicksFor(env, fid, course, v) {
     if (!v.weeks?.length) return [];
     const V = LEVELS[v.program];
-    const ids = await levelWeekDishes(env, await family(env, fid), V, v.starts, {}, new Set(), v.pids);
+    const { ids } = await levelWeekDishes(env, await family(env, fid), V, v.starts, {}, new Set());
     const plan = { weeks: V.weeks.filter((w) => w.recipe).map((w) => ({ week: w.week, id: ids[w.week], removed: KEPT })) };
     return levelPickStatements(env, course, plan, levelPicksInput(V, plan, v.weeks));
   }
@@ -1307,6 +1340,37 @@ export function register(on) {
     return { ok: true, before: before.id };
   });
 
+  // ---------- a Level week neither of whose dishes the family can cook (14c) ----------
+
+  // Request a replacement: tells the owner, on Recipe gaps, so a variation or
+  // another dish can be written (owner, 2026-10-25). Only for a week the
+  // family's settings block now; asked again, it stays one request. Undo
+  // takes it back.
+  on('POST', '/api/level-requests', async (req, env, body) => {
+    const s = await requireParent(env, req);
+    const fam = await family(env, s.family_id);
+    const V = levelsOn(fam.release).find((x) => x.id === body.level) ?? fail(400, 'invalid', 'No such Level.');
+    const w = V.weeks.find((x) => x.week === Number(body.week) && x.recipe) ?? fail(400, 'invalid', 'No such week.');
+    const why = await ruledOut(env, fam);
+    const pair = [w.familiar, w.explore];
+    if (!pair.every((id) => why(id))) fail(409, 'not_blocked', "This week isn't blocked: a dish can be cooked now, or one is still being written.");
+    // Name-free reasons, for the owner's counts: "diet:meat", "tool:microwave".
+    const codes = [...new Set(pair.flatMap((id) => why(id) ?? []).flatMap((r) => r.tags.map((t) => `${r.kind}:${t}`)))];
+    try {
+      await env.DB.prepare(`INSERT INTO level_requests (family_id, level, week, reasons, created_at) VALUES (?, ?, ?, ?, ?)
+          ON CONFLICT(family_id, level, week) DO UPDATE SET reasons = excluded.reasons`).bind(s.family_id, V.id, w.week, JSON.stringify(codes), now()).run();
+    } catch (err) {
+      if (/no such table/i.test(String(err?.message))) fail(503, 'not_ready', 'Requests open once the owner presses Apply pending on /ops.');
+      throw err;
+    }
+    return { ok: true };
+  });
+  on('POST', '/api/level-requests/undo', async (req, env, body) => {
+    const s = await requireParent(env, req);
+    await env.DB.prepare('DELETE FROM level_requests WHERE family_id = ? AND level = ? AND week = ?').bind(s.family_id, String(body.level ?? ''), Number(body.week)).run();
+    return { ok: true };
+  });
+
   // ---------- a Level week's parts (12c) ----------
 
   // The week and part asked for, on a Level course; a page that doesn't exist is refused.
@@ -1359,6 +1423,14 @@ export function register(on) {
     // A Level course's recipe is one of its weeks'; its row's position is the week.
     const week = course.program ? (await levelPlanOf(env, course)).weeks.find((x) => x.id === lid)?.week : null;
     if (course.program ? !week : !dishById[lid]) fail(400, 'invalid', 'No such lesson.');
+    // Put back on a Level week that cooks its own Familiar or Explore dish
+    // drops its row, so it follows the start and the settings again (14c);
+    // a recipe the parent picked keeps its row.
+    const w = week && LEVELS[course.program].weeks.find((x) => x.week === week);
+    if (removed === KEPT && w && [w.familiar, w.explore].includes(lid)) {
+      await env.DB.prepare('DELETE FROM course_lessons WHERE course_id = ? AND family_id = ? AND lesson_id = ?').bind(course.id, s.family_id, lid).run();
+      return { ok: true };
+    }
     const res = await env.DB.prepare('UPDATE course_lessons SET removed = ? WHERE course_id = ? AND family_id = ? AND lesson_id = ?').bind(removed, course.id, s.family_id, lid).run();
     if (!res.meta.changes) {
       const at = week ?? LIBRARY.course.findIndex((d) => d.id === lid);

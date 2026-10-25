@@ -195,20 +195,14 @@ const levelOrder = (a, b) => (Number(a.cooked) - Number(b.cooked)) || (Number(b.
 export function levelPlan(tc, V, pids, cooked = new Set()) {
   const ctx = cookCtx(tc, pids);
   const out = (x) => ({ id: x.id, title: titleOf(V, x.id), fit: x.fit, label: x.label, fits: x.fits, why: x.why, notes: x.notes, written: x.written, cooked: x.cooked, hidden: Boolean(x.hidden) });
-  const score = (ids) => ids.map((id, i) => ({ id, i, cooked: cooked.has(id), ...levelFit(tc, ctx, V, id) })).sort(levelOrder).map(out);
+  const score = (ids) => ids.map((id, i) => ({ id, i, cooked: cooked.has(id), ...levelFit(tc, ctx, V, id) }));
+  // The week's own dishes in their order (Familiar, Explore, swap-ins); the others best fit first.
   return {
     weeks: V.weeks.filter((w) => w.recipe).map((w) => {
       const { options, more } = levelCandidates(V, w);
-      return { week: w.week, options: score(options), more: score(more) };
+      return { week: w.week, options: score(options).map(out), more: score(more).sort(levelOrder).map(out) };
     }),
   };
-}
-
-// The best of a week's other recipes for the profiles on a course, when the
-// diet or tools rule out both its dishes (14c): best fit only fills in.
-export function bestOf(tc, V, ids, pids) {
-  const ctx = cookCtx(tc, pids);
-  return ids.map((id, i) => ({ id, i, cooked: false, ...levelFit(tc, ctx, V, id) })).sort(levelOrder)[0]?.id ?? null;
 }
 
 // Every lesson in the library the family's diet settings allow, outside the
