@@ -5069,3 +5069,17 @@ Planning only; nothing in the app changed.
   versions; shrimp in jollof bouillon and moqueca; oyster sauce; bouillon in
   suya and yassa). Weeks 29–33, which usually fall on Unleavened Bread, are
   unleavened as planned.
+- Owner, 2026-10-25, on the proposal: "very little fish, no lamb", and a
+  note on week 21. Changes in the doc: the soup make-ahead page and the
+  Hospitality page swapped weeks (now 19 and 20); lamb kofta (week 7) and
+  a lamb and apricot tagine (week 33); fish added in weeks 26 (rava fish
+  fry), 29 (sheet-pan salmon, psari plaki), and 30 (Baja fish tacos), with
+  canned tuna as a week 6 choice; hambagu, milanesa, kuku sabzi, chicken
+  yassa, and meatloaf moved to fallbacks.
+- Owner, 2026-10-25: No-cook drops to two weeks so salads don't run three
+  weeks in a row, and Stovetop gains a fish week: week 24 is pan-seared
+  trout or salmon skin-side down (Familiar) and steamed fish with ginger
+  and scallion (Explore), both already written. The shared units move to
+  No-cook 5–6, Meat 7–10, Baking 11–15, Boiling 16–20, Stovetop 21–26, for
+  every Level (plan §12.0). The doc also has a count of main proteins by
+  unit, Familiar and Explore.
