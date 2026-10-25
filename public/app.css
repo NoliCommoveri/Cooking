@@ -488,6 +488,11 @@ a.choice.on{border-color:var(--h-acc);box-shadow:inset 0 0 0 1.5px var(--h-acc)}
 .k-part b{grid-column:1;overflow-wrap:anywhere}
 .k-part small{grid-column:2;grid-row:1/span 2;font-size:14px;white-space:nowrap}
 .k-part.done small{font-weight:700}
+/* This week's other dish (14d): a row with Cook this instead, under the Recipe. */
+.k-other{cursor:default;grid-template-columns:minmax(0,1fr)}
+.k-other small,.k-other .q-btn,.k-other .p-btn{grid-column:1;grid-row:auto;justify-self:start;white-space:normal}
+.k-swapnote{margin:0}
+.k-swapnote .k-skip{background:none;border:0;padding:0 4px;min-height:44px;color:inherit;font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
 .kitchen[data-kt="quest"] .k-part{background:var(--q-well);border:2px solid var(--q-edge);border-radius:0}
 .kitchen[data-kt="quest"] .k-part.done{border-color:var(--q-mana)}
 .kitchen[data-kt="passport"] .k-part{background:#fff;border:2px solid var(--p-ink);border-radius:12px}
@@ -498,6 +503,11 @@ a.choice.on{border-color:var(--h-acc);box-shadow:inset 0 0 0 1.5px var(--h-acc)}
 .lvl-dishes{display:grid;gap:2px}
 .lvl-dish{color:var(--h-mut)}
 .lvl-dish small{text-transform:uppercase;letter-spacing:.05em;font-size:11px}
+/* Cook this instead (14d): a Level week's two dishes on the course card, the one it cooks highlighted. */
+.lvl-week{gap:6px;margin:4px 0 2px}
+.lvl-week .lvl-dish{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;padding:8px 10px;border:1px solid var(--h-line);border-radius:8px}
+.lvl-week .lvl-dish.on{color:var(--h-fg);border-color:var(--h-acc);box-shadow:inset 3px 0 0 var(--h-acc);font-weight:700}
+.lvl-swapnote{margin:2px 0;color:var(--h-mut)}
 .lvl-dish.on{color:inherit;font-weight:600}
 .lvl-blocked ul,.lvl-blocked p{margin:0}
 .lvl-blocked ul{padding-left:20px}

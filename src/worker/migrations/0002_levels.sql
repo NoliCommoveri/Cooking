@@ -12,3 +12,23 @@ CREATE TABLE IF NOT EXISTS level_requests (
   created_at TEXT NOT NULL,
   PRIMARY KEY (family_id, level, week)
 );
+
+-- Cook this instead (14d): a Level week moved to its other dish, by a learner
+-- (profile_id) or a parent (NULL). Its Undo puts back what the week had:
+-- from_id, and whether the week had a parent's pick (from_changed). Swaps
+-- are for the whole course. shop_done_at: the parent said they have what the
+-- new dish needs, so its shopping notice goes.
+CREATE TABLE IF NOT EXISTS level_swaps (
+  id           TEXT PRIMARY KEY,
+  family_id    TEXT NOT NULL REFERENCES families(id),
+  course_id    TEXT NOT NULL,
+  week         INTEGER NOT NULL,
+  from_id      TEXT NOT NULL,
+  to_id        TEXT NOT NULL,
+  from_changed INTEGER NOT NULL DEFAULT 0,
+  profile_id   TEXT,
+  created_at   TEXT NOT NULL,
+  undone_at    TEXT,
+  shop_done_at TEXT
+);
+CREATE INDEX IF NOT EXISTS level_swaps_course ON level_swaps(course_id, week);

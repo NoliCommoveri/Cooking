@@ -242,7 +242,8 @@ const startsInput = (x) => (STARTS.includes(x) ? x : fail(400, 'invalid', 'Each 
 // change it, or go on to the next week. A week with a dish still being
 // written waits quietly for it, as before. A recipe is in one week at
 // most. rows: { week: course_lessons row }; held: the course's queued or
-// cooked dishes. Returns { ids: { week: id }, blocked: { week: reasons } }.
+// cooked dishes. Returns { ids: { week: id }, blocked: { week: reasons } },
+// and why, what rules a dish out (ruledOut), for Cook this instead (14d).
 async function levelWeekDishes(env, fam, V, starts, rows, held) {
   const why = await ruledOut(env, fam);
   const used = new Set(Object.values(rows).map((r) => r.lesson_id));
@@ -261,7 +262,7 @@ async function levelWeekDishes(env, fam, V, starts, rows, held) {
     ids[w.week] = id;
     used.add(id);
   }
-  return { ids, blocked };
+  return { ids, blocked, why };
 }
 
 // What rules a written dish out for a family, in words, or null: each
@@ -308,13 +309,13 @@ async function levelPlanOf(env, course, starts = null) {
   const byWeek = Object.fromEntries(results.filter((r) => V.weeks.some((w) => w.week === r.position && w.recipe)).map((r) => [r.position, r]));
   const { results: queued } = await env.DB.prepare("SELECT DISTINCT lesson_id FROM queue WHERE family_id = ? AND course_id = ? AND status IN ('assigned', 'shopped', 'cooked')")
     .bind(course.family_id, course.id).all();
-  const { ids, blocked } = await levelWeekDishes(env, fam, V, starts, byWeek, new Set(queued.map((r) => r.lesson_id)));
+  const { ids, blocked, why } = await levelWeekDishes(env, fam, V, starts, byWeek, new Set(queued.map((r) => r.lesson_id)));
   const weeks = V.weeks.filter((w) => w.recipe).map((w) => (byWeek[w.week]
     ? { week: w.week, id: byWeek[w.week].lesson_id, removed: byWeek[w.week].removed, changed: true }
     : { week: w.week, id: ids[w.week], removed: KEPT, changed: false, ...(blocked[w.week] ? { blocked: blocked[w.week] } : {}) }));
   return {
     order: weeks.map((x) => x.id), removed: weeks.filter((x) => x.removed).map((x) => x.id),
-    skipped: weeks.filter((x) => x.removed === SKIPPED).map((x) => x.id), weeks, starts,
+    skipped: weeks.filter((x) => x.removed === SKIPPED).map((x) => x.id), weeks, starts, why,
   };
 }
 
@@ -442,7 +443,131 @@ async function levelLessons(env, course, fam) {
     hidden: kept.filter((x) => lessonById[x] && !shown.has(x) && !blocked[x]).length,
     blocked, requested: await requestedWeeks(env, course.family_id, V.id),
     level: V, weekOf: Object.fromEntries(plan.weeks.map((x) => [x.id, x.week])), idOf: Object.fromEntries(plan.weeks.map((x) => [x.week, x.id])),
+    // For Cook this instead (14d): what rules a dish out, each week's swap
+    // still standing, and the dishes on the course's shopping lists.
+    why: plan.why, swaps: await levelSwaps(env, course), listed: await listedFor(env, course),
   };
+}
+
+// ---------- Cook this instead (14d) ----------
+
+// Each week's latest swap still standing: { week: level_swaps row }. Empty
+// before the draft's table exists.
+async function levelSwaps(env, course) {
+  try {
+    const { results } = await env.DB.prepare('SELECT * FROM level_swaps WHERE course_id = ? AND family_id = ? AND undone_at IS NULL ORDER BY created_at, id')
+      .bind(course.id, course.family_id).all();
+    return Object.fromEntries(results.map((r) => [r.week, r]));
+  } catch { return {}; }
+}
+
+// The course's dishes on a shopping list not deleted.
+async function listedFor(env, course) {
+  const { results } = await env.DB.prepare(`SELECT DISTINCT ll.lesson_id FROM list_lessons ll JOIN shopping_lists l ON l.id = ll.list_id
+      WHERE ll.family_id = ? AND ll.course_id = ? AND l.deleted_at IS NULL`).bind(course.family_id, course.id).all();
+  return new Set(results.map((r) => r.lesson_id));
+}
+
+// A Level week's Familiar and Explore dishes, the one it cooks now marked,
+// and whether each can be cooked instead: written, not ruled out by the
+// family's settings, and not in another week.
+function levelChoices(lessons, w, current) {
+  return [['familiar', w.familiar], ['explore', w.explore]].map(([slot, id]) => {
+    const written = Boolean(lessonById[id]), out = written && Boolean(lessons.why(id));
+    const elsewhere = id !== current && lessons.weekOf[id] !== undefined && lessons.weekOf[id] !== w.week;
+    return { id, slot, title: titleOfLevel(lessons.level, id), current: id === current, written, out, elsewhere, can: id !== current && written && !out && !elsewhere };
+  });
+}
+
+// A week's swap while it stands (its dish not cooked): who made it (a
+// profile, or null for the parent), the dish it replaced, and whether to
+// check the shopping: the old dish is on a list and the new one isn't, and
+// the parent hasn't said they have what it needs (owner, 2026-10-25).
+function swapOut(lessons, week, current, done) {
+  const x = lessons.swaps[week];
+  if (!x || x.to_id !== current || done[current]) return null;
+  return {
+    by: x.profile_id, from: x.from_id, from_title: titleOfLevel(lessons.level, x.from_id),
+    shopping: !x.shop_done_at && lessons.listed.has(x.from_id) && !lessons.listed.has(current),
+  };
+}
+
+// What a week shows for Cook this instead: its two dishes and its swap, or
+// nothing once it's cooked, skipped, or blocked (both dishes ruled out, 14c).
+function weekSwapOut(st, week) {
+  const { lessons } = st;
+  const w = lessons.level.weeks.find((x) => x.week === week);
+  const id = lessons.idOf[week];
+  if (!w?.familiar || !id || st.done[id] || lessons.blocked[id] || lessons.plan.removed.includes(id)) return {};
+  return { choices: levelChoices(lessons, w, id), swap: swapOut(lessons, week, id, st.done) };
+}
+
+const NO_SABBATH = "Dishes aren't swapped on the Sabbath. Swap it on another day.";
+
+// The statements that move a week from one dish to another: the week's row
+// (a pick that survives a change of start, so Put back wipes it, 14c), and
+// the course's queued lesson, so the queue holds the dish the week cooks.
+async function moveStatements(env, fam, course, plan, week, from, to, keepRow) {
+  const stmts = keepRow ? levelPickStatements(env, course, plan, { [week]: to })
+    : [env.DB.prepare('DELETE FROM course_lessons WHERE course_id = ? AND family_id = ? AND position = ?').bind(course.id, course.family_id, week)];
+  const q = await env.DB.prepare("SELECT id, servings FROM queue WHERE family_id = ? AND course_id = ? AND lesson_id = ? AND status IN ('assigned', 'shopped')")
+    .bind(course.family_id, course.id, from).first();
+  if (q && lessonById[to]) stmts.push(env.DB.prepare('UPDATE queue SET lesson_id = ?, servings = ? WHERE id = ? AND family_id = ?').bind(to, nearestSize(lessonById[to], q.servings), q.id, course.family_id));
+  return stmts;
+}
+
+// Cook this instead (14d): the week cooks `to` for everyone on the course
+// (owner, 2026-10-25), by a learner (pid) or the parent (null). Cook this
+// instead offers the week's other dish, never on the Sabbath; the parent's
+// Swap recipe (12d, any) any recipe the week can hold. A learner swaps the
+// week their kitchen is on. Returns the dish it replaced, and whether the
+// shopping needs a look: the old dish is on a list and the new one isn't.
+async function swapWeek(env, fam, course, req, { week, to, pid = null, any = false }) {
+  if (!any && isSabbath(today(req))) fail(409, 'sabbath', NO_SABBATH);
+  const st = await courseState(env, course, fam, today(req), tzOf(req));
+  const { lessons } = st, V = lessons.level, plan = lessons.plan;
+  const w = V.weeks.find((x) => x.week === week && x.recipe) ?? fail(400, 'invalid', 'No such week.');
+  const cur = plan.weeks.find((x) => x.week === week);
+  if (pid && levelWeekNow(st) !== week) fail(409, 'not_this_week', 'Only this week\'s dish can be swapped.');
+  // Swap recipe may change a skipped week, which stays skipped (12d).
+  if (cur.removed && !any) fail(409, 'skipped', 'That week is skipped. Put it back first.');
+  if (st.done[cur.id]) fail(409, 'cooked', "That week's recipe is cooked already.");
+  if (cur.id === to) fail(409, 'already', `That week already cooks ${titleOfLevel(V, to)}.`);
+  if (any) levelPicksInput(V, plan, [{ week, id: to }]);
+  else {
+    const c = levelChoices(lessons, w, cur.id).find((x) => x.id === to) ?? fail(400, 'invalid', "That isn't one of this week's dishes.");
+    if (!c.can) fail(409, 'not_available', c.out ? "That dish can't be cooked with your family's settings." : c.written ? "That dish is in another week." : "That dish isn't written yet.");
+  }
+  await env.DB.batch(await moveStatements(env, fam, course, plan, week, cur.id, to, true));
+  // Kept for the Undo, who swapped, and the shopping notice; the swap
+  // itself works before the draft's table exists.
+  try {
+    await env.DB.batch([
+      env.DB.prepare('UPDATE level_swaps SET undone_at = ? WHERE course_id = ? AND family_id = ? AND week = ? AND undone_at IS NULL').bind(now(), course.id, fam.id, week),
+      env.DB.prepare(`INSERT INTO level_swaps (id, family_id, course_id, week, from_id, to_id, from_changed, profile_id, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`)
+        .bind(id(), fam.id, course.id, week, cur.id, to, cur.changed ? 1 : 0, pid, now()),
+    ]);
+  } catch { /* the table isn't there yet */ }
+  return { ok: true, week, from: cur.id, from_title: titleOfLevel(V, cur.id), title: titleOfLevel(V, to), shopping: lessons.listed.has(cur.id) && !lessons.listed.has(to) };
+}
+
+// Undo a week's swap: the dish it had, as it had it (a parent's pick keeps
+// its row; otherwise the week follows the start again). Before the draft's
+// table exists, Undo swaps back to `from`.
+async function undoSwap(env, fam, course, req, { week, from, pid = null }) {
+  if (isSabbath(today(req))) fail(409, 'sabbath', NO_SABBATH);
+  const st = await courseState(env, course, fam, today(req), tzOf(req));
+  const plan = st.lessons.plan;
+  const cur = plan.weeks.find((x) => x.week === week) ?? fail(400, 'invalid', 'No such week.');
+  const x = st.lessons.swaps[week];
+  if (!x) return swapWeek(env, fam, course, req, { week, to: from, pid });
+  if (x.to_id !== cur.id) fail(409, 'changed', 'That week has changed since. There is nothing to undo.');
+  if (st.done[cur.id]) fail(409, 'cooked', "That week's recipe is cooked already.");
+  await env.DB.batch([
+    ...(await moveStatements(env, fam, course, plan, week, cur.id, x.from_id, Boolean(x.from_changed))),
+    env.DB.prepare('UPDATE level_swaps SET undone_at = ? WHERE id = ? AND family_id = ?').bind(now(), x.id, fam.id),
+  ]);
+  return { ok: true, week, title: titleOfLevel(st.lessons.level, x.from_id) };
 }
 
 export { PART_NAMES };
@@ -502,6 +627,8 @@ function levelFor(st, pid, day) {
       recipe: id, recipe_title: id ? lessonById[id]?.title ?? V.titles[id] ?? id : null, recipe_written: Boolean(id && lessonById[id]), recipe_done: Boolean(id && st.done[id]),
       // Neither dish can be cooked with the family's settings (14c): the kitchen sends the learner to a parent.
       blocked: Boolean(id && st.lessons.blocked[id]),
+      // This week's two dishes, for Cook this instead, and its swap (14d).
+      ...(w.week === now ? weekSwapOut(st, w.week) : {}),
       // The parts the course keeps on (a parent can turn any off).
       parts: weekParts(w, on).map((part) => partOut(w, part)),
     };
@@ -804,6 +931,8 @@ function courseOut(st, fam, rowsByLesson, version = () => null) {
       version: version(x.id, profiles),
       // A Level week neither of whose dishes the family can cook (14c): each dish and why, and whether it's been requested.
       ...(V && lessons.blocked[x.id] ? { blocked: lessons.blocked[x.id], requested: lessons.requested.has(week) } : {}),
+      // Its two dishes, for Cook this instead, and its swap (14d).
+      ...(V && week ? weekSwapOut(st, week) : {}),
     };
   };
   const week = (w) => ({ week: w.week, skipped: w.skipped, extra: w.extra, lessons: w.lessons.map(lessonOut) });
@@ -1333,11 +1462,57 @@ export function register(on) {
   on('POST', '/api/courses/([0-9a-f]{16})/level-week', async (req, env, body, [cid]) => {
     const s = await requireParent(env, req);
     const course = await ownCourse(env, s, cid);
-    const V = LEVELS[course.program] ?? fail(400, 'invalid', 'That course has no Level weeks.');
-    const plan = await levelPlanOf(env, course);
-    const before = plan.weeks.find((x) => x.week === Number(body.week)) ?? fail(404, 'not_found', 'No such week.');
-    await env.DB.batch(levelPickStatements(env, course, plan, levelPicksInput(V, plan, [{ week: body.week, id: body.id }])));
-    return { ok: true, before: before.id };
+    if (!LEVELS[course.program]) fail(400, 'invalid', 'That course has no Level weeks.');
+    const res = await swapWeek(env, await family(env, s.family_id), course, req, { week: Number(body.week), to: String(body.id ?? ''), any: true });
+    return { ...res, before: res.from };
+  });
+
+  // ---------- Cook this instead (14d) ----------
+
+  // The learner's: this week's other dish, for everyone on the course, and its Undo.
+  const learnerCourse = async (env, s, pid) => {
+    ownProfile(s, pid);
+    const { results } = await env.DB.prepare(`SELECT c.* FROM courses c JOIN course_profiles cp ON cp.course_id = c.id
+        WHERE c.family_id = ? AND c.archived_at IS NULL AND cp.profile_id = ?`).bind(s.family_id, pid).all();
+    return (await withPrograms(env, s.family_id, results)).find((c) => c.program) ?? fail(404, 'not_found', 'This profile is not on a Level course.');
+  };
+  on('POST', '/api/profiles/([0-9a-f]{16})/level-swap', async (req, env, body, [pid]) => {
+    const s = await requireSession(env, req);
+    const course = await learnerCourse(env, s, pid);
+    return swapWeek(env, await family(env, s.family_id), course, req, { week: Number(body.week), to: String(body.id ?? ''), pid });
+  }, { kid: true });
+  on('POST', '/api/profiles/([0-9a-f]{16})/level-swap/undo', async (req, env, body, [pid]) => {
+    const s = await requireSession(env, req);
+    const course = await learnerCourse(env, s, pid);
+    return undoSwap(env, await family(env, s.family_id), course, req, { week: Number(body.week), from: String(body.from ?? ''), pid });
+  }, { kid: true });
+
+  // The parent's, on the course card: the same, and the Undo for anyone's swap.
+  const levelCourse = async (env, req, cid) => {
+    const s = await requireParent(env, req);
+    const course = await ownCourse(env, s, cid);
+    if (!LEVELS[course.program]) fail(400, 'invalid', 'That course has no Level weeks.');
+    return { course, fam: await family(env, s.family_id) };
+  };
+  on('POST', '/api/courses/([0-9a-f]{16})/level-swap', async (req, env, body, [cid]) => {
+    const { course, fam } = await levelCourse(env, req, cid);
+    return swapWeek(env, fam, course, req, { week: Number(body.week), to: String(body.id ?? '') });
+  });
+  on('POST', '/api/courses/([0-9a-f]{16})/level-swap/undo', async (req, env, body, [cid]) => {
+    const { course, fam } = await levelCourse(env, req, cid);
+    return undoSwap(env, fam, course, req, { week: Number(body.week), from: String(body.from ?? '') });
+  });
+
+  // "We have what it needs": the swap's shopping notice goes; done: false is its Undo.
+  on('POST', '/api/courses/([0-9a-f]{16})/level-swap/shopped', async (req, env, body, [cid]) => {
+    const { course, fam } = await levelCourse(env, req, cid);
+    let res;
+    try {
+      res = await env.DB.prepare('UPDATE level_swaps SET shop_done_at = ? WHERE course_id = ? AND family_id = ? AND week = ? AND undone_at IS NULL')
+        .bind(body.done === false ? null : now(), course.id, fam.id, Number(body.week)).run();
+    } catch { fail(409, 'not_ready', 'This opens once the update is applied.'); }
+    if (!res.meta.changes) fail(404, 'not_found', 'That week has no swap.');
+    return { ok: true };
   });
 
   // ---------- a Level week neither of whose dishes the family can cook (14c) ----------
@@ -1429,6 +1604,20 @@ export function register(on) {
     const w = week && LEVELS[course.program].weeks.find((x) => x.week === week);
     if (removed === KEPT && w && [w.familiar, w.explore].includes(lid)) {
       await env.DB.prepare('DELETE FROM course_lessons WHERE course_id = ? AND family_id = ? AND lesson_id = ?').bind(course.id, s.family_id, lid).run();
+      // A swap goes with it (owner, 2026-10-25), and its dish off the queue,
+      // so the week's own dish is queued in its place.
+      try {
+        const res = await env.DB.prepare('UPDATE level_swaps SET undone_at = ? WHERE course_id = ? AND family_id = ? AND week = ? AND undone_at IS NULL').bind(now(), course.id, s.family_id, week).run();
+        if (res.meta.changes) {
+          const q = await env.DB.prepare("SELECT id FROM queue WHERE family_id = ? AND course_id = ? AND lesson_id = ? AND status = 'assigned'").bind(s.family_id, course.id, lid).first();
+          if (q) {
+            await env.DB.batch([
+              env.DB.prepare('DELETE FROM queue_profiles WHERE queue_id = ? AND family_id = ?').bind(q.id, s.family_id),
+              env.DB.prepare('DELETE FROM queue WHERE id = ? AND family_id = ?').bind(q.id, s.family_id),
+            ]);
+          }
+        }
+      } catch { /* the table isn't there yet */ }
       return { ok: true };
     }
     const res = await env.DB.prepare('UPDATE course_lessons SET removed = ? WHERE course_id = ? AND family_id = ? AND lesson_id = ?').bind(removed, course.id, s.family_id, lid).run();

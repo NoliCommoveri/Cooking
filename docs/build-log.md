@@ -5482,3 +5482,63 @@ During the build the owner made three calls, now Requirements in §12.0 and
   stays; a blocked week waits unqueued, says why, takes a request counted
   on Recipe gaps, goes on with Put back, and cooks again once the settings
   change; backup export and import carry `course_starts`.
+
+## 217. 2026-10-25 — 14d: the owner's calls
+
+Planning only; nothing in the app changed. Owner, 2026-10-25, answering the
+open questions on the kitchen's week card:
+
+- A learner's swap changes the week for everyone on the course.
+- The dish being cooked is highlighted; the default isn't marked.
+- Put back wipes a swap.
+- No swapping on the Sabbath.
+- The shopping check opens the list preview for the new dish, with what the
+  old list had preselected as already have, each one untickable: "just
+  cause they made a list doesn't mean they already bought it."
+
+Recorded in plan §12.0 and §12.9 under 14d. Before, §12.0 said a swap after
+the shopping list was made only said what was missing.
+
+## 218. 2026-10-25 — Re-plan build, 14d: Cook this instead
+
+Phase 14 (plan §12.9), behind release 1. Owner, 2026-10-25: "Build 14d",
+and for a learner's swap after the shopping list was made: "Yes show
+parent."
+
+- **Before:** the kitchen's Level week showed one recipe. Only the parent
+  could change a week (the course editor or Swap recipe), and a change after
+  the shopping list was made said nothing about the list.
+- **Now:**
+  - **The kitchen's week card** shows the dish being cooked as the Recipe,
+    labelled Familiar or Explore, and the other dish under it with **Cook
+    this instead**. A dish the diet settings or a missing tool rule out says
+    so; one still being written, or in another week, isn't shown. No
+    swapping on the Sabbath.
+  - **A swap is for the whole course:** the week's row and its queued lesson
+    move to the new dish for every profile on it. The swapping learner's
+    card says "You picked … instead of …" with **Undo**; a sibling's says
+    who picked it.
+  - **The parent's course card** lists the week's two dishes, the one
+    cooking highlighted, with **Cook this instead** and Undo, and a
+    learner's swap with the parent's **Undo**. Swap recipe (12d) runs
+    through the same swap.
+  - **Put back wipes a swap**, and its dish comes off the queue, so the
+    week follows its start again.
+  - **The shopping check:** when the old dish is on a shopping list and the
+    new one isn't, the parent's swap opens **What it needs**, the list
+    preview for the new dish, with what the old list had ticked as already
+    have, each untickable. A learner's swap shows **Show a parent** in the
+    kitchen; the course card's notice has See what to buy and **We have
+    what it needs** (with Undo). A list made for the new dish clears it.
+  - New in the draft migration `0002_levels.sql`: `level_swaps`.
+- **Owner, on `/ops` after it deploys:** if `0002` is already applied, press
+  **Re-apply draft** for it; otherwise **Apply pending**. Until then a swap
+  still works, but who made it and the shopping notice don't show.
+- Screenshots skipped this session, at the owner's word.
+- Tests: 370. New: the kitchen's two dishes; a learner's swap for the whole
+  course with Undo, a sibling's view, and the parent's Cook this instead
+  and Undo; only this week, only its dishes; a swap survives a change of
+  start, Put back wipes it, and a ruled-out dish is no choice; the shopping
+  preview after a swap with the old list preselected, We have what it
+  needs with Undo, and a new list clearing the notice. Every swap test
+  expects a refusal when run on the Sabbath.
