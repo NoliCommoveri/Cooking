@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [234. 2026-10-26 — Level dish pictures: sheets 63–64](docs/build-log.md#234-2026-10-26--level-dish-pictures-sheets-6364)
+**Latest build log entry:** [235. 2026-10-26 — A letter for each program's labels](docs/build-log.md#235-2026-10-26--a-letter-for-each-programs-labels)
 
 ## Current features
 
@@ -39,8 +39,9 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Syllabus** (`/syllabus`): Cook Around the World as a homeschool course, with objectives, units, hours, pacing, a suggested credit, and the rubric. Printable.
 - **Structured Progression syllabus** (`/syllabus/structured-progression/`): "coming soon" until the Levels launch; then Levels 2, 3, and 4 in full (objectives, units, each week's two dishes and parts, hours and credit), Level 1 as being planned, pacing, safety, and assessment. Printable.
 - **Course outline** (`content/course.json`): all 98 planned dishes (59 numbers, with pick-one choices) in teaching order, with their skills and prerequisites, checked by the linter.
-- **Lesson numbers** (`src/content/course.js`): come from the course order; pick-one choices share a number (1a, 1b, 1c), 59 in all.
-- **Appointed Times unit** (unit 8 in `content/units.json`): lessons beside the numbered course, labeled A1, A2: unleavened flatbread and cottage cheese crescent rolls so far.
+- **Lesson labels** (`src/content/course.js`): each program has a letter. Cook Around the World is S, in course order, with pick-one choices sharing a number (S1a, S1b, S1c), 59 in all; learners' cards count without the S. Appointed Times is U; Levels 1 to 4 are A to D, by week, a for Familiar and b for Explore (C4a, C4b).
+- **Add a lesson** lists the library by program: the family's Levels first, then the other Levels, Cook Around the World, and Appointed Times, each in label order.
+- **Appointed Times unit** (unit 8 in `content/units.json`): lessons beside the numbered course, labeled U1, U2: unleavened flatbread and cottage cheese crescent rolls so far.
 - **Family recipes** (Parents → Recipes, `src/content/recipe.js`, `src/worker/recipes.js`): a parent adds the family's own recipes one thing at a time (basics, ingredients from the list or typed in, tools, steps with safety levels and timers, meal type, a "why we make this" card, then review). The same unclean-food and food-safety checks as lessons; a wash-hands step is added after raw food. They show on an "Our recipes" shelf in every kitchen and can be queued, shopped for, and cooked like lessons. Only that family sees them.
 - **Sharing recipes** (`src/worker/sharing.js`): a parent shares a recipe as General or Feast day. One from our ingredient list goes straight into **User-shared recipes**, with no family named; a typed-in ingredient waits for the owner's review; a feast-day recipe flagged for leaven gets the owner's notice with Send for review and Share recipe. Any family can search the directory, add a recipe to its own, and report one.
 - **Owner: Recipe reviews and Reported recipes**: clear or decline a review (deciding the Unleavened badge), and hide or unhide any shared recipe.
@@ -62,7 +63,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Lesson content** (`content/`): 49 lessons (all 13 of Unit 1, all 21 of Unit 2, 13 more, and the 2 Appointed Times lessons), and the ingredient, tool, skill (60), and cuisine lists, as JSON.
 - **The Levels** (release 1, being built, plan §12): Level 2 Apprentice, Level 3 Cook, and Level 4 Chef (`content/levels/sp-2.json` to `sp-4.json`) on the nine shared units in `content/level-units.json`, a Familiar and an Explore dish each week, and their recipe cards; Unit 1 is complete on all three Levels; in all, Level 2 (18 part pages, 10 Level-only recipes, 2 Level versions), Level 3 (51 part pages, 17 Level-only recipes, 2 Level versions), and Level 4 (18 part pages, 8 Level-only recipes, 4 Level versions); Unit 2 is complete on all three Levels too. Edited on the manager's Level 2, 3, and 4 pages.
 - **Level courses** (release 1, `src/worker/plan.js`): setting up a course asks Which program?, Cook Around the World or a Level, and for a Level, whether each week starts with its Familiar or Explore dish (preset from "how adventurous"); a Level course runs one week a week, its written recipes in week order, and the course card shows "Week 5 of 36 · Starts with Familiar".
-- **Level recipes in Side quests** (release 1): each Level's own written recipes (labels A1, K1, C1…) in its own unit in the kitchen, cookable and queueable like any lesson.
+- **Level recipes in Side quests** (release 1): each Level's own written recipes (labeled by Level and week: B1a, C4b, D5a…) in its own unit in the kitchen, cookable and queueable like any lesson.
 - **Optional Level parts** (release 1): a Level week is Knowledge, Drill, Recipe, Beyond the Recipe; any but the recipe can be turned off at setup or later, with the planned hours shown; any part can be skipped.
 - **Level progress** (release 1): a Level learner's own progress tab (the weeks bar, hours toward the Level's total, units as chapters or passport pages with a crest or visa stamp, and My cooking collection), level-ups for units mastered, and the completion certificate; the Level's weeks and part rows on Progress, its CSV, and the transcript.
 - **A Level week's dish** (release 1): the course's start slot's dish, or the other when the diet settings or a missing tool rule it out or only the other is written; preferences never pick it. The parent changes a week in the course editor or with Swap recipe.

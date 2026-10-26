@@ -2,7 +2,7 @@
   "id": "sp-3",
   "name": "Level 3 Cook",
   "hours": 125,
-  "sideUnit": { "number": 103, "name": "Level 3 Cook recipes", "prefix": "K" },
+  "sideUnit": { "number": 103, "name": "Level 3 Cook recipes", "prefix": "C" },
   "units": [
     { "number": 1, "name": "Kitchen basics", "goal": "Holds and hones a chef's knife; dices, minces, and juliennes evenly; reads a recipe for timing and writes a prep list; weighs on a scale; knows the danger zone and the stove's hazards" },
     { "number": 2, "name": "No-cook", "goal": "Makes fine cuts for salads, a balanced dressing, salsa from scratch, and a cold plate that holds" },

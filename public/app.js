@@ -4,7 +4,7 @@
 import { openLesson } from './player.js';
 import { saveCook, saveReflection, flushCooks } from './cooks.js';
 import { patchTargets, showValue } from './lib/patch.js';
-import { courseEntries, prereqNotes } from './lib/course.js';
+import { courseEntries, prereqNotes, courseNo } from './lib/course.js';
 import { toBase, mixed } from './lib/units.js';
 import { LOGIN_PICTURES } from './lib/login-pictures.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
@@ -428,8 +428,9 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
       art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"/></svg>'),
       done.times === 1 ? 'Cooked once' : `Cooked ${done.times} times`) : null;
     const badges = marks(L);
-    // A seasonal unit (Appointed Times) has its own labels, A1, A2, and so
-    // does a Level's own unit, L1, L2 (§12.4).
+    // A seasonal unit (Appointed Times) has its own labels, U1, U2, and so
+    // does a Level's own unit, C4a, C4b (§12.4). A Cook Around the World
+    // lesson says its place in the course: Quest 27 for S27.
     const seasonal = sideUnit(L.unit);
     // A Level learner sees the course's week, never Cook Around the World's
     // numbers, which are out of order for a Level (owner, 2026-10-26).
@@ -437,7 +438,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     const number = week !== undefined ? (week ? `Week ${week}` : null) : null;
     if (quest) {
       return el('article', { class: 'q-panel q-card' },
-        el('p', { class: 'q-kick' }, week !== undefined ? number ?? (seasonal ? lib.units[L.unit] : 'Side quest') : `${seasonal ? lib.units[L.unit] : `Path ${L.unit}`} · Quest ${L.label}`),
+        el('p', { class: 'q-kick' }, week !== undefined ? number ?? (seasonal ? lib.units[L.unit] : 'Side quest') : `${seasonal ? lib.units[L.unit] : `Path ${L.unit}`} · Quest ${courseNo(L.label)}`),
         el('div', { class: 'q-win' }, el('img', { src: L.image, alt: '', width: 230, height: 230, loading: 'lazy' })),
         el('h3', { class: 'q-title' }, L.title),
         el('p', { class: 'q-skill' }, L.skill),
@@ -452,7 +453,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     return el('article', { class: 'p-card' },
       el('span', { class: 'tape t1' }), el('span', { class: 'tape t2' }),
       el('div', { class: 'p-photo' }, el('img', { src: L.image, alt: '', width: 220, height: 220, loading: 'lazy' })),
-      week !== undefined ? (number ? el('p', { class: 'p-lessonno' }, number) : null) : el('p', { class: 'p-lessonno' }, `Lesson ${L.label}`),
+      week !== undefined ? (number ? el('p', { class: 'p-lessonno' }, number) : null) : el('p', { class: 'p-lessonno' }, `Lesson ${courseNo(L.label)}`),
       el('h3', { class: 'p-title' }, L.title),
       el('p', { class: 'p-skill' }, L.skill),
       el('div', { class: 'p-meta' }, el('span', {}, time), el('span', {}, `Serves ${L.servings}`), el('span', {}, L.cuisine)),
@@ -511,7 +512,9 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     const queuedCard = (x) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${x.title}`, onclick: open(x.lesson_id) },
       el('article', { class: quest ? 'q-panel q-card k-next' : 'p-card k-next' },
         x.image ? el('div', { class: quest ? 'q-win' : 'p-photo' }, el('img', { src: x.image, alt: '', width: 160, height: 160, loading: 'lazy' })) : null,
-        el('p', { class: quest ? 'q-kick' : 'p-lessonno' }, x.label ? `${quest ? 'Quest' : 'Lesson'} ${x.label}` : ''),
+        // A Level learner sees the course's week, as on the other cards.
+        el('p', { class: quest ? 'q-kick' : 'p-lessonno' }, mine.level ? (mine.level.week_of?.[x.lesson_id] ? `Week ${mine.level.week_of[x.lesson_id]}` : '')
+          : x.label ? `${quest ? 'Quest' : 'Lesson'} ${courseNo(x.label)}` : ''),
         el('h3', { class: quest ? 'q-title' : 'p-title' }, x.title),
         el('p', { class: quest ? 'q-swap' : 'p-swap' }, when(x))));
     const now = mine.items.filter((x) => soon(x.planned_date));
@@ -1849,10 +1852,23 @@ const parentQueue = parentOnly(async (flash) => {
     const byId = Object.fromEntries(q.library.map((L) => [L.id, L]));
     const best = (ranked ?? []).filter((x) => byId[x.id] && x.fits && x.fit && x.fit !== 'poor' && !x.cooked && !x.queued).slice(0, 5);
     const opt = (L) => el('option', { value: L.id }, `${lessonText(L)}${fitOf[L.id]?.fit === 'none' ? " · doesn't fit" : ''}`);
+    // Every lesson by program (owner, 2026-10-26), each in label order: the
+    // Levels, the family's own first, with their own labels (C4a), then Cook
+    // Around the World (S1) and Appointed Times (U1). A lesson a Level shares
+    // with Cook Around the World is in both.
+    const byLabel = (a, b) => a.label.localeCompare(b.label, 'en', { numeric: true });
+    const levelOwn = new Set((q.level_groups ?? []).flatMap((g) => g.ids));
+    const programs = [
+      ...(q.level_groups ?? []).map((g) => [g.name, g.ids.filter((x) => byId[x]).map((x) => ({ ...byId[x], label: g.labels[x] }))]),
+      ['Cook Around the World', q.library.filter((L) => /^S\d/.test(L.label ?? '')).sort(byLabel)],
+      ['Appointed Times', q.library.filter((L) => /^U\d/.test(L.label ?? '')).sort(byLabel)],
+      ['Other lessons', q.library.filter((L) => !/^[SU]\d/.test(L.label ?? '') && !levelOwn.has(L.id))],
+    ].filter(([, list]) => list.length);
     // replaceChildren takes nodes only: an array or a null would show as text.
     lessonSel.replaceChildren(...[
       el('option', { value: '' }, 'Pick a lesson'),
-      ...(best.length ? [el('optgroup', { label: 'Best for them' }, best.map((x) => opt(byId[x.id]))), el('optgroup', { label: 'Every lesson' }, q.library.map(opt))] : q.library.map(opt)),
+      ...(best.length ? [el('optgroup', { label: 'Best for them' }, best.map((x) => opt(byId[x.id])))] : []),
+      ...programs.map(([name, list]) => el('optgroup', { label: name }, list.map(opt))),
       // The family's own recipes (§6.10).
       q.recipes?.length ? el('optgroup', { label: 'Our recipes' }, q.recipes.map((r) => el('option', { value: r.id }, r.title))) : null,
     ].filter(Boolean));

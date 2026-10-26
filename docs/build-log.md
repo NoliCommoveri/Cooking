@@ -6033,3 +6033,41 @@ the two sheets made from Claude's prompts.
   plate, so it was cut by hand; `tools/dish-sheets.txt` records how.
 - Screenshots (More recipes, phone width, both themes) sent in the session.
 - Tests: 392.
+
+## 235. 2026-10-26 — A letter for each program's labels
+
+Owner, 2026-10-26, from a phone screenshot of Add a lesson: "Cook around the
+world is one course of many now. So i think we need to prefix them S for
+standard. We initially gave feast meals a, but lets give them U for
+unleavened. 1-4 can be A-D. … I should not see a cooking around the world
+recipe number in my course list for level 3. And levels familiar/explore need
+an a/b after the number. A level number should correspond with its week."
+Then: keep "Quest 27 of 59" as a count, keep "Week 4" on a Level learner's
+cards, group Add a lesson by program, and keep A for Level 1.
+
+- **Before:** Appointed Times and Level 2's own recipes both used A, so Add a
+  lesson showed two A1s and two runs of A's, sorted by name. Level 3 was K
+  and Level 4 was C, numbered in the order of each Level's recipe cards, not
+  by week. A Cook Around the World lesson a Level cooks (about 25 in each)
+  showed its course number in that Level's queue rows and kitchen cards.
+- **Now:**
+  - **Cook Around the World is S:** S1, S8a. Learners' cards, the player,
+    Chef Ruth, and the demo still count the place without the S ("Quest 27",
+    "Lesson 8a"); `courseNo` in `src/content/course.js`.
+  - **Appointed Times is U:** U1, U2 (`content/units.json`).
+  - **Levels are B, C, D by week:** the letter, the week, and a (Familiar) or
+    b (Explore): B1a, C4b, D5a (`weekLabels` in `src/content/levels.js`). A
+    is kept for Level 1. A lesson shared with Cook Around the World takes the
+    Level's label on that Level's course card and queue rows, and when queued
+    by hand for learners all on that Level. A week changed to a recipe from
+    elsewhere is just C4.
+  - **Add a lesson by program:** Best for them, each Level (the family's own
+    first) in week order with its own labels, Cook Around the World, then
+    Appointed Times, then Our recipes.
+  - **Kitchen cards on a Level course** say the week ("Week 4") on queued
+    lessons too; they showed Cook Around the World's number.
+  - **Lint:** each program's letter is its own; S and A are taken.
+  - Plan §4.1, §6.19, §12.4 updated.
+- Screenshots (the queue, Add a lesson, and both kitchen themes, phone width,
+  light and dark) sent in the session.
+- Tests: 395.

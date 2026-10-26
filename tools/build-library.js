@@ -21,6 +21,7 @@ import { unleavened } from '../src/content/leaven.js';
 import { tasteItemsIn } from '../src/content/tastes.js';
 import { mainProtein } from '../src/content/getting-started.js';
 import { applyVariation } from '../src/content/variations.js';
+import { weekLabels } from '../src/content/levels.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, 'src/worker/library-data.js');
@@ -41,11 +42,11 @@ const isFeast = (c, L) => Boolean(L.feast) || seasonalUnits(c).includes(L.unit);
 const tagsOf = (c, L) => c.course.dishes.find((d) => d.id === L.id)?.tags ?? L.tags ?? null;
 const isUnleavened = (c, L) => unleavened(L, Object.fromEntries(c.ingredients.map((i) => [i.id, i])), c.rules.leaven);
 // The Levels' own written recipes (§12.4), with the Levels' release: each with its
-// Level's id and its label in the Level's unit (L1, L2, … in the order of the
-// Level's recipe cards).
+// Level's id and its label from the week that cooks it (C4a, C4b).
 export const levelRecipes = (c) => (c.levels ?? []).flatMap(({ data: V }) => {
-  const at = Object.fromEntries(V.recipes.map((r, i) => [r.id, `${V.sideUnit.prefix}${i + 1}`]));
-  return (c.levelLessons ?? []).filter(({ data: L }) => at[L.id]).map(({ data: L }) => ({ L, level: V.id, label: at[L.id] }));
+  const own = new Set(V.recipes.map((r) => r.id));
+  const at = weekLabels(V.weeks, V.sideUnit.prefix);
+  return (c.levelLessons ?? []).filter(({ data: L }) => own.has(L.id)).map(({ data: L }) => ({ L, level: V.id, label: at[L.id] ?? null }));
 });
 // Every Level's recipe cards, by id: a week may cook another Level's card (§12.0).
 const allCards = (c) => Object.fromEntries((c.levels ?? []).flatMap(({ data: V }) => V.recipes.map((r) => [r.id, r])));
@@ -204,7 +205,7 @@ export function buildLibrary() {
     units: Object.fromEntries(c.units.map((u) => [u.number, u.name])),
     seasonal: seasonalUnits(c),
     seasonalLabels: seasonalLabels(c.units),
-    // The Levels' own recipes' labels: A1, K1, C1… (§12.4).
+    // The Levels' own recipes' labels, from their Level's weeks: B1a, C4b… (§12.4).
     levelLabels: Object.fromEntries(levelRecipes(c).map(({ L, label }) => [L.id, label])),
     dietTags: c.schemas.registries.$defs.dietTag.enum,
     // Every planned dish, for numbering a family's course plan; its line about
@@ -219,8 +220,10 @@ export function buildLibrary() {
     // written; until then it waits like a planned dish (§6.18).
     levels: Object.fromEntries((c.levels ?? []).map(({ data: V }) => [V.id, {
       id: V.id, name: V.name, hours: V.hours,
-      // Its own unit in Side quests (§12.4): "Level 3 Cook recipes", labels K1, K2….
-      side: { number: V.sideUnit.number, name: V.sideUnit.name, prefix: V.sideUnit.prefix }, units: V.units.map(({ number, name, goal }) => ({ number, name, goal })),
+      // Its own unit in Side quests (§12.4): "Level 3 Cook recipes".
+      side: { number: V.sideUnit.number, name: V.sideUnit.name, prefix: V.sideUnit.prefix },
+      // Every dish's label in this Level, its shared lessons' too: C4a, C4b.
+      labels: weekLabels(V.weeks, V.sideUnit.prefix), units: V.units.map(({ number, name, goal }) => ({ number, name, goal })),
       // Each week's three part pages (12c): title, planned minutes, and what's written of them.
       // Its swap-ins: the other recipes best fit picks among (12d).
       // A practice or capstone week has no recipe: its own minutes and note instead.

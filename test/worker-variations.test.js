@@ -85,7 +85,7 @@ test('the new pick-one dishes are in Cook Around the World for every family, wit
   for (const id of ['chicken-souvlaki-pitas', 'turkey-lettuce-wraps', 'chicken-piccata', 'pineapple-teriyaki-salmon', 'huevos-rancheros']) {
     assert.ok(lib.lessons.some((L) => L.id === id), `${id} in the library`);
   }
-  assert.equal(lib.labels['chicken-piccata'], '11b');
+  assert.equal(lib.labels['chicken-piccata'], 'S11b');
   const plan = (await a.get('/api/courses')).body.default_plan;
   // Planned (not written yet) choices are in the course outline too, as second choices.
   for (const id of ['moqueca', 'lamb-kofta', 'beef-and-broccoli']) assert.equal(plan.find((x) => x.id === id)?.removed, true, id);

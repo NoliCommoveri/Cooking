@@ -7,6 +7,6 @@
     { "number": 5, "name": "Dough and batter" },
     { "number": 6, "name": "Oven, roasting, frying" },
     { "number": 7, "name": "Desserts" },
-    { "number": 8, "name": "Appointed Times", "seasonal": true, "prefix": "A", "lessons": ["unleavened-flatbread", "cottage-cheese-crescents"] }
+    { "number": 8, "name": "Appointed Times", "seasonal": true, "prefix": "U", "lessons": ["unleavened-flatbread", "cottage-cheese-crescents"] }
   ]
 }

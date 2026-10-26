@@ -89,7 +89,7 @@ test('starters follow the family\'s diet filters', async () => {
   const a = await family(env, 'Carsons', 'jen@example.com');
   const veg = (await a.get('/api/setup/starters?kind=vegetarian')).body.lessons;
   assert.equal(veg[0].id, 'fattoush');
-  assert.equal(veg[0].label, '2a');
+  assert.equal(veg[0].label, 'S2a');
   assert.match(veg[0].about, /Lebanese salad/);
   assert.ok(!veg.some((L) => L.id === 'shoestring-fries'));
   // A fish-free family has no fish lesson to start with.

@@ -2,7 +2,7 @@
   "id": "sp-4",
   "name": "Level 4 Chef",
   "hours": 135,
-  "sideUnit": { "number": 104, "name": "Level 4 Chef recipes", "prefix": "C" },
+  "sideUnit": { "number": 104, "name": "Level 4 Chef recipes", "prefix": "D" },
   "units": [
     { "number": 1, "name": "Kitchen basics", "goal": "Cuts precisely at speed; weighs ingredients and works out yield; scales any recipe by hand; writes a prep timeline and runs it" },
     { "number": 2, "name": "No-cook", "goal": "Makes and rescues an emulsion; composes cold dishes for guests; holds a cold spread safely" },
