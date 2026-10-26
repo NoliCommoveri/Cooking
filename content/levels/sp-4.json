@@ -72,6 +72,7 @@
       "skills": ["julienne", "searing"],
       "skill": "Weighing in grams and finding the yield",
       "art": "meat",
+      "image": "dishes/steak-fajitas.png",
       "safety": "solo",
       "minutes": 75,
       "estimated": true,
@@ -88,7 +89,29 @@
         "veggies": "some"
       }
     },
-    { "id": "bo-luc-lac", "title": "Bò lúc lắc", "cuisine": "vietnamese", "skills": ["searing"], "skill": "Weighing the trim; searing cubes", "art": "meat", "safety": "solo", "minutes": 75, "estimated": true, "about": "Vietnamese shaking beef: cubed sirloin seared hard and tossed in a savory sauce, over watercress, with a lime-pepper dip.", "main": ["sirloin", "watercress", "garlic", "soy sauce", "lime"], "method": "stove", "tags": { "protein": "beef", "flavors": ["ginger-soy", "sweet-savory"], "heat": "mild", "budget": "$$$", "familiar": "adventurous", "veggies": "some" } },
+    {
+      "id": "bo-luc-lac",
+      "title": "Bò lúc lắc",
+      "cuisine": "vietnamese",
+      "skills": ["searing"],
+      "skill": "Weighing the trim; searing cubes",
+      "art": "meat",
+      "image": "dishes/bo-luc-lac.png",
+      "safety": "solo",
+      "minutes": 75,
+      "estimated": true,
+      "about": "Vietnamese shaking beef: cubed sirloin seared hard and tossed in a savory sauce, over watercress, with a lime-pepper dip.",
+      "main": ["sirloin", "watercress", "garlic", "soy sauce", "lime"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["ginger-soy", "sweet-savory"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "adventurous",
+        "veggies": "some"
+      }
+    },
     {
       "id": "chicken-enchiladas",
       "title": "Chicken enchiladas",
@@ -96,6 +119,7 @@
       "skills": ["layering"],
       "skill": "Scaling a recipe from 4 to 12 by hand",
       "art": "poultry",
+      "image": "dishes/chicken-enchiladas.png",
       "safety": "solo",
       "minutes": 120,
       "estimated": true,
@@ -118,6 +142,7 @@
       "skills": ["timing", "searing"],
       "skill": "Four parts, hot and cold, on one timeline",
       "art": "salad",
+      "image": "dishes/salade-nicoise.png",
       "safety": "solo",
       "minutes": 90,
       "estimated": true,
@@ -133,10 +158,76 @@
         "veggies": "lots"
       }
     },
-    { "id": "bibimbap", "title": "Bibimbap", "cuisine": "korean", "skills": ["timing", "stir-frying"], "skill": "Each topping cut and cooked on its own, timed", "art": "meat", "safety": "solo", "minutes": 120, "estimated": true, "about": "Rice topped with separately cooked vegetables, seasoned beef, a fried egg, and gochujang.", "main": ["rice", "beef", "spinach", "carrots and zucchini", "gochujang"], "method": "stove", "tags": { "protein": "beef", "flavors": ["ginger-soy", "chili-heat"], "heat": "some", "budget": "$$", "familiar": "new-ish", "veggies": "lots" } },
-    { "id": "ensaladilla-rusa", "title": "Ensaladilla rusa", "cuisine": "spanish", "skills": ["emulsions"], "skill": "Homemade mayonnaise", "art": "salad", "safety": "solo", "minutes": 75, "estimated": true, "about": "Spanish potato salad with carrots, peas, and tuna, bound with mayonnaise made from pasteurized eggs.", "main": ["potatoes", "carrots", "peas", "canned tuna", "pasteurized eggs"], "method": "stove", "tags": { "protein": "tuna", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "some" } },
-    { "id": "antipasto-platter", "title": "Antipasto platter", "cuisine": "italian", "skills": ["cooling-reheating"], "skill": "A cold platter that holds below 41°F", "art": "salad", "safety": "solo", "minutes": 60, "estimated": true, "about": "A guest platter of beef bresaola and beef salami, cheeses, marinated vegetables, and olives, with a chopped salad.", "main": ["beef salami", "bresaola", "cheese", "artichokes", "olives"], "method": "no-cook", "tags": { "protein": "beef", "flavors": ["tangy"], "heat": "mild", "budget": "$$$", "familiar": "everyday", "veggies": "some" } },
-    { "id": "mezze-spread", "title": "Mezze spread", "cuisine": "lebanese", "skills": ["cooling-reheating", "cooking-legumes"], "skill": "A spread for guests, held safely", "art": "salad", "safety": "solo", "minutes": 180, "estimated": true, "about": "Hummus from dried chickpeas, baba ghanoush, tabbouleh, and labneh, with pita, set out for guests.", "main": ["dried chickpeas", "eggplant", "parsley", "labneh", "pita"], "method": "stove-oven", "tags": { "protein": "beans-lentils", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "lots" } },
+    {
+      "id": "bibimbap",
+      "title": "Bibimbap",
+      "cuisine": "korean",
+      "skills": ["timing", "stir-frying"],
+      "skill": "Each topping cut and cooked on its own, timed",
+      "art": "meat",
+      "image": "dishes/bibimbap.png",
+      "safety": "solo",
+      "minutes": 120,
+      "estimated": true,
+      "about": "Rice topped with separately cooked vegetables, seasoned beef, a fried egg, and gochujang.",
+      "main": ["rice", "beef", "spinach", "carrots and zucchini", "gochujang"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["ginger-soy", "chili-heat"],
+        "heat": "some",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "lots"
+      }
+    },
+    { "id": "ensaladilla-rusa", "title": "Ensaladilla rusa", "cuisine": "spanish", "skills": ["emulsions"], "skill": "Homemade mayonnaise", "art": "salad", "image": "dishes/ensaladilla-rusa.png", "safety": "solo", "minutes": 75, "estimated": true, "about": "Spanish potato salad with carrots, peas, and tuna, bound with mayonnaise made from pasteurized eggs.", "main": ["potatoes", "carrots", "peas", "canned tuna", "pasteurized eggs"], "method": "stove", "tags": { "protein": "tuna", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "some" } },
+    {
+      "id": "antipasto-platter",
+      "title": "Antipasto platter",
+      "cuisine": "italian",
+      "skills": ["cooling-reheating"],
+      "skill": "A cold platter that holds below 41°F",
+      "art": "salad",
+      "image": "dishes/antipasto-platter.png",
+      "safety": "solo",
+      "minutes": 60,
+      "estimated": true,
+      "about": "A guest platter of beef bresaola and beef salami, cheeses, marinated vegetables, and olives, with a chopped salad.",
+      "main": ["beef salami", "bresaola", "cheese", "artichokes", "olives"],
+      "method": "no-cook",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["tangy"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      }
+    },
+    {
+      "id": "mezze-spread",
+      "title": "Mezze spread",
+      "cuisine": "lebanese",
+      "skills": ["cooling-reheating", "cooking-legumes"],
+      "skill": "A spread for guests, held safely",
+      "art": "salad",
+      "image": "dishes/mezze-spread.png",
+      "safety": "solo",
+      "minutes": 180,
+      "estimated": true,
+      "about": "Hummus from dried chickpeas, baba ghanoush, tabbouleh, and labneh, with pita, set out for guests.",
+      "main": ["dried chickpeas", "eggplant", "parsley", "labneh", "pita"],
+      "method": "stove-oven",
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["herby-lemony"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "lots"
+      }
+    },
     {
       "id": "chicken-cacciatore",
       "title": "Chicken cacciatore",
@@ -144,6 +235,7 @@
       "skills": ["breaking-down-chicken", "braising"],
       "skill": "Breaking down a whole chicken",
       "art": "poultry",
+      "image": "dishes/chicken-cacciatore.png",
       "safety": "solo",
       "minutes": 120,
       "estimated": true,
@@ -159,7 +251,7 @@
         "veggies": "some"
       }
     },
-    { "id": "flank-steak", "title": "Sliced flank steak", "cuisine": "american", "skills": ["thin-slicing", "searing"], "skill": "Trimming and slicing against the grain", "art": "meat", "safety": "solo", "minutes": 75, "estimated": true, "about": "Flank steak trimmed, seared, rested, and sliced thin against the grain, with a herb sauce.", "main": ["flank steak", "parsley", "garlic", "olive oil", "lemon"], "method": "stove", "tags": { "protein": "beef", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$$$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "flank-steak", "title": "Sliced flank steak", "cuisine": "american", "skills": ["thin-slicing", "searing"], "skill": "Trimming and slicing against the grain", "art": "meat", "image": "dishes/flank-steak.png", "safety": "solo", "minutes": 75, "estimated": true, "about": "Flank steak trimmed, seared, rested, and sliced thin against the grain, with a herb sauce.", "main": ["flank steak", "parsley", "garlic", "olive oil", "lemon"], "method": "stove", "tags": { "protein": "beef", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$$$", "familiar": "everyday", "veggies": "light" } },
     {
       "id": "duck-breast-cherry",
       "title": "Seared duck breast with cherry sauce",
@@ -167,6 +259,7 @@
       "skills": ["searing", "reducing"],
       "skill": "Scoring skin and rendering fat",
       "art": "poultry",
+      "image": "dishes/duck-breast-cherry.png",
       "safety": "solo",
       "minutes": 90,
       "estimated": true,
@@ -189,6 +282,7 @@
       "skills": ["cooking-fish"],
       "skill": "Skinning and portioning a side of salmon",
       "art": "fish",
+      "image": "dishes/teriyaki-salmon-side.png",
       "safety": "solo",
       "minutes": 75,
       "estimated": true,
@@ -205,7 +299,29 @@
         "veggies": "light"
       }
     },
-    { "id": "pescado-veracruzana", "title": "Pescado a la veracruzana", "cuisine": "mexican", "skills": ["cooking-fish"], "skill": "Cleaning and baking a whole fish", "art": "fish", "safety": "solo", "minutes": 90, "estimated": true, "about": "A whole snapper baked in a Veracruz sauce of tomatoes, olives, capers, and pickled peppers.", "main": ["whole red snapper", "tomatoes", "green olives", "capers", "pickled jalapeños"], "method": "oven", "tags": { "protein": "white-fish", "flavors": ["rich-tomato", "tangy"], "heat": "some", "budget": "$$$", "familiar": "adventurous", "veggies": "some" } },
+    {
+      "id": "pescado-veracruzana",
+      "title": "Pescado a la veracruzana",
+      "cuisine": "mexican",
+      "skills": ["cooking-fish"],
+      "skill": "Cleaning and baking a whole fish",
+      "art": "fish",
+      "image": "dishes/pescado-veracruzana.png",
+      "safety": "solo",
+      "minutes": 90,
+      "estimated": true,
+      "about": "A whole snapper baked in a Veracruz sauce of tomatoes, olives, capers, and pickled peppers.",
+      "main": ["whole red snapper", "tomatoes", "green olives", "capers", "pickled jalapeños"],
+      "method": "oven",
+      "tags": {
+        "protein": "white-fish",
+        "flavors": ["rich-tomato", "tangy"],
+        "heat": "some",
+        "budget": "$$$",
+        "familiar": "adventurous",
+        "veggies": "some"
+      }
+    },
     {
       "id": "chicken-two-ways",
       "title": "Chicken two ways",
@@ -213,6 +329,7 @@
       "skills": ["breaking-down-chicken", "making-stock"],
       "skill": "Using every part of one bird, costed",
       "art": "poultry",
+      "image": "dishes/chicken-two-ways.png",
       "safety": "solo",
       "minutes": 180,
       "estimated": true,
@@ -235,6 +352,7 @@
       "skills": ["breaking-down-chicken", "roasting"],
       "skill": "Spatchcocking a small bird",
       "art": "poultry",
+      "image": "dishes/spatchcocked-quail.png",
       "safety": "solo",
       "minutes": 75,
       "estimated": true,
@@ -257,6 +375,7 @@
       "skills": ["yeast-dough", "layering"],
       "skill": "An enriched, cold-retarded dough, filled and twisted",
       "art": "bread",
+      "image": "dishes/chocolate-babka.png",
       "safety": "solo",
       "minutes": 240,
       "estimated": true,
@@ -273,8 +392,53 @@
         "veggies": "light"
       }
     },
-    { "id": "milk-bread", "title": "Japanese milk bread", "cuisine": "japanese", "skills": ["yeast-dough", "scalded-dough"], "skill": "A tangzhong for a soft crumb", "art": "bread", "safety": "solo", "minutes": 210, "estimated": true, "about": "A tall, soft loaf made with tangzhong, a cooked flour-and-milk paste that keeps it tender for days.", "main": ["bread flour", "milk", "yeast", "butter", "egg"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
-    { "id": "spinach-feta-borekas", "title": "Spinach and feta borekas", "cuisine": "turkish", "skills": ["folding-layers", "filling-crimping"], "skill": "Laminating a rough puff", "art": "side", "safety": "solo", "minutes": 180, "estimated": true, "about": "Homemade rough-puff pastry folded around spinach and feta, brushed with egg and sesame, and baked flaky.", "main": ["flour", "butter", "spinach", "feta", "sesame seeds"], "method": "oven", "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "some" } },
+    {
+      "id": "milk-bread",
+      "title": "Japanese milk bread",
+      "cuisine": "japanese",
+      "skills": ["yeast-dough", "scalded-dough"],
+      "skill": "A tangzhong for a soft crumb",
+      "art": "bread",
+      "image": "dishes/milk-bread.png",
+      "safety": "solo",
+      "minutes": 210,
+      "estimated": true,
+      "about": "A tall, soft loaf made with tangzhong, a cooked flour-and-milk paste that keeps it tender for days.",
+      "main": ["bread flour", "milk", "yeast", "butter", "egg"],
+      "method": "oven",
+      "meal": false,
+      "tags": {
+        "protein": "none",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      }
+    },
+    {
+      "id": "spinach-feta-borekas",
+      "title": "Spinach and feta borekas",
+      "cuisine": "turkish",
+      "skills": ["folding-layers", "filling-crimping"],
+      "skill": "Laminating a rough puff",
+      "art": "side",
+      "image": "dishes/spinach-feta-borekas.png",
+      "safety": "solo",
+      "minutes": 180,
+      "estimated": true,
+      "about": "Homemade rough-puff pastry folded around spinach and feta, brushed with egg and sesame, and baked flaky.",
+      "main": ["flour", "butter", "spinach", "feta", "sesame seeds"],
+      "method": "oven",
+      "tags": {
+        "protein": "none",
+        "flavors": ["creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      }
+    },
     {
       "id": "jamaican-beef-patties",
       "title": "Jamaican beef patties",
@@ -282,6 +446,7 @@
       "skills": ["pastry", "filling-crimping"],
       "skill": "A turmeric pastry, filled and crimped",
       "art": "meat",
+      "image": "dishes/jamaican-beef-patties.png",
       "safety": "solo",
       "minutes": 150,
       "estimated": true,

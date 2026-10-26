@@ -5683,3 +5683,27 @@ Level 2 and five for Level 3 (sheet 40 is Levels 2 and 3).
 - The app shows a Level card's picture once its lesson is written; none of
   these 40 is written yet.
 - Tests: 381.
+
+## 224. 2026-10-26 — Level dish pictures: sheets 45–54
+
+Owner, 2026-10-26: ten more ChatGPT sheets from [Level dish pictures:
+ChatGPT prompts](https://claude.ai/artifact/PbGHZTt9e78S2SbwtyYVMB), "the
+rest of missing L3 art and some L4", matched to the prompt doc's sheets.
+
+- **Before:** Level 3's sheets 45–50 and Level 4's sheets 51–54 hadn't
+  arrived, so those cards had only a meal-type drawing.
+- **Now:**
+  - 40 dish pictures, matched by eye to sheets 45–50 (Level 3, with sheet 50
+    shared with Level 4) and 51–54 (Level 4), saved to
+    `content/images/source/` under the doc's names, cropped into
+    `content/images/dishes/<card id>.png`, built to `public/img/dishes/`,
+    and listed in `tools/dish-sheets.txt`. Every sheet cropped cleanly with
+    the tool; no hand cuts.
+  - `"image"` added to the 40 cards in `sp-3.json` and `sp-4.json`.
+  - Checked by eye for unclean foods: none. The sausages and the antipasto
+    meats look like pork in the pictures, but their cards say beef or chicken
+    sausage, and beef bresaola and beef salami; godeungeo-gui is mackerel,
+    which has fins and scales.
+- Level 3 now has a picture on every recipe card from the prompt doc. Still
+  to come: Level 2's sheets 34–39 and Level 4's sheets 55–62.
+- Tests: 381.

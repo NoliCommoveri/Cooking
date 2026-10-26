@@ -49,6 +49,16 @@ sheet-41-levels-13.png rajma,aglio-e-olio,scallion-oil-noodles,vegetable-lo-mein
 sheet-42-levels-14.png -,-,bean-tostadas
 sheet-43-levels-15.png chermoula-fish,chicken-tenders,soda-bread,manoushe
 sheet-44-levels-16.png conchas,apple-galette,pulla,steamed-salmon-vegetables
+sheet-45-levels-17.png arroz-con-pollo,pinto-bean-burritos,chicken-noodle-soup,arroz-caldo
+sheet-46-levels-18.png spaghetti-meatballs,sausage-peppers,tortang-talong,godeungeo-gui
+sheet-47-levels-19.png steak-mushroom-sauce,chicken-paprikash,chicken-parmesan,rava-fish-fry
+sheet-48-levels-20.png sheet-pan-teriyaki-chicken,peruvian-chicken-thighs,sheet-pan-cod,psari-plaki
+sheet-49-levels-21.png piri-piri-chicken,chicken-chile-verde,bo-kho,lamb-tagine
+sheet-50-levels-22.png pad-kra-pao,steak-fajitas,bo-luc-lac,chicken-enchiladas
+sheet-51-levels-23.png salade-nicoise,bibimbap,ensaladilla-rusa,antipasto-platter
+sheet-52-levels-24.png mezze-spread,chicken-cacciatore,flank-steak,duck-breast-cherry
+sheet-53-levels-25.png teriyaki-salmon-side,pescado-veracruzana,chicken-two-ways,spatchcocked-quail
+sheet-54-levels-26.png chocolate-babka,milk-bread,spinach-feta-borekas,jamaican-beef-patties
 # sheet-42-levels-14.png: ajapsandali and solterito touch, so they're split by hand the same way:
 #   ajapsandali 780,0,1536,476   solterito 780,476,1536,1024
 # Onigiri (sheet 29) and kimbap (sheet 42) have plates whose white rim gaps let the tool's

@@ -1574,6 +1574,7 @@
       "skills": ["cooking-grains"],
       "skill": "Rice cooked by absorption with the chicken",
       "art": "poultry",
+      "image": "dishes/arroz-con-pollo.png",
       "safety": "adult-nearby",
       "minutes": 75,
       "estimated": true,
@@ -1596,6 +1597,7 @@
       "skills": ["cooking-legumes"],
       "skill": "Soaking and cooking dried pinto beans",
       "art": "side",
+      "image": "dishes/pinto-bean-burritos.png",
       "safety": "adult-nearby",
       "minutes": 60,
       "estimated": true,
@@ -1618,6 +1620,7 @@
       "skills": ["making-stock", "building-soup"],
       "skill": "A soup from homemade stock",
       "art": "soup",
+      "image": "dishes/chicken-noodle-soup.png",
       "safety": "adult-nearby",
       "minutes": 90,
       "estimated": true,
@@ -1633,7 +1636,29 @@
         "veggies": "some"
       }
     },
-    { "id": "arroz-caldo", "title": "Arroz caldo", "cuisine": "filipino", "skills": ["simmering"], "skill": "Poaching chicken in a rice porridge", "art": "soup", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Filipino chicken and ginger rice porridge, topped with crisp garlic, green onion, a boiled egg, and calamansi or lime.", "main": ["chicken thighs", "rice", "ginger", "garlic", "fish sauce"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["ginger-soy"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
+    {
+      "id": "arroz-caldo",
+      "title": "Arroz caldo",
+      "cuisine": "filipino",
+      "skills": ["simmering"],
+      "skill": "Poaching chicken in a rice porridge",
+      "art": "soup",
+      "image": "dishes/arroz-caldo.png",
+      "safety": "adult-nearby",
+      "minutes": 60,
+      "estimated": true,
+      "about": "Filipino chicken and ginger rice porridge, topped with crisp garlic, green onion, a boiled egg, and calamansi or lime.",
+      "main": ["chicken thighs", "rice", "ginger", "garlic", "fish sauce"],
+      "method": "stove",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["ginger-soy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      }
+    },
     {
       "id": "spaghetti-meatballs",
       "title": "Spaghetti and meatballs",
@@ -1641,6 +1666,7 @@
       "skills": ["binders", "simmering"],
       "skill": "Meatballs simmered gently in the sauce",
       "art": "meat",
+      "image": "dishes/spaghetti-meatballs.png",
       "safety": "adult-nearby",
       "minutes": 75,
       "estimated": true,
@@ -1657,7 +1683,29 @@
         "veggies": "some"
       }
     },
-    { "id": "sausage-peppers", "title": "Sausage and peppers", "cuisine": "italian", "skills": ["sauteing"], "skill": "Sweating and browning onions and peppers", "art": "meat", "safety": "adult-nearby", "minutes": 40, "estimated": true, "about": "Beef or chicken sausages browned, then cooked with soft strips of pepper and onion, on rolls or over pasta.", "main": ["beef or chicken sausage", "bell peppers", "onion", "garlic", "rolls"], "method": "stove", "tags": { "protein": "beef", "flavors": ["rich-tomato"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "lots" } },
+    {
+      "id": "sausage-peppers",
+      "title": "Sausage and peppers",
+      "cuisine": "italian",
+      "skills": ["sauteing"],
+      "skill": "Sweating and browning onions and peppers",
+      "art": "meat",
+      "image": "dishes/sausage-peppers.png",
+      "safety": "adult-nearby",
+      "minutes": 40,
+      "estimated": true,
+      "about": "Beef or chicken sausages browned, then cooked with soft strips of pepper and onion, on rolls or over pasta.",
+      "main": ["beef or chicken sausage", "bell peppers", "onion", "garlic", "rolls"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["rich-tomato"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "lots"
+      }
+    },
     {
       "id": "beef-picadillo",
       "title": "Beef picadillo",
@@ -1679,10 +1727,54 @@
         "veggies": "some"
       }
     },
-    { "id": "tortang-talong", "title": "Tortang talong", "cuisine": "filipino", "skills": ["poaching-eggs"], "skill": "Cooking eggs over low heat", "art": "side", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "Whole eggplants charred, peeled, flattened, dipped in beaten egg, and pan-fried golden. Served with rice and ketchup.", "main": ["eggplant", "eggs", "garlic", "rice"], "method": "stove", "tags": { "protein": "eggs", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "some" } },
-    { "id": "godeungeo-gui", "title": "Godeungeo-gui", "cuisine": "korean", "skills": ["cooking-fish", "searing"], "skill": "Searing a fillet skin-side down", "art": "fish", "safety": "adult-nearby", "minutes": 40, "estimated": true, "about": "Korean pan-fried mackerel, salted ahead and cooked skin-side down until crisp, with rice and a cucumber side.", "main": ["mackerel fillets", "salt", "rice", "cucumber"], "method": "stove", "tags": { "protein": "white-fish", "flavors": ["ginger-soy"], "heat": "mild", "budget": "$$", "familiar": "adventurous", "veggies": "light" } },
+    { "id": "tortang-talong", "title": "Tortang talong", "cuisine": "filipino", "skills": ["poaching-eggs"], "skill": "Cooking eggs over low heat", "art": "side", "image": "dishes/tortang-talong.png", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "Whole eggplants charred, peeled, flattened, dipped in beaten egg, and pan-fried golden. Served with rice and ketchup.", "main": ["eggplant", "eggs", "garlic", "rice"], "method": "stove", "tags": { "protein": "eggs", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "some" } },
+    {
+      "id": "godeungeo-gui",
+      "title": "Godeungeo-gui",
+      "cuisine": "korean",
+      "skills": ["cooking-fish", "searing"],
+      "skill": "Searing a fillet skin-side down",
+      "art": "fish",
+      "image": "dishes/godeungeo-gui.png",
+      "safety": "adult-nearby",
+      "minutes": 40,
+      "estimated": true,
+      "about": "Korean pan-fried mackerel, salted ahead and cooked skin-side down until crisp, with rice and a cucumber side.",
+      "main": ["mackerel fillets", "salt", "rice", "cucumber"],
+      "method": "stove",
+      "tags": {
+        "protein": "white-fish",
+        "flavors": ["ginger-soy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "adventurous",
+        "veggies": "light"
+      }
+    },
     { "id": "pan-seared-trout", "title": "Pan-seared trout", "cuisine": "american", "skills": ["cooking-fish", "searing"], "skill": "Searing a fillet skin-side down", "art": "fish", "safety": "adult-nearby", "minutes": 30, "about": "Trout fillets seared skin-side down until the skin is crisp, finished with butter and lemon.", "main": ["trout fillets", "butter", "lemon", "parsley"], "method": "stove", "tags": { "protein": "white-fish", "flavors": ["mild-buttery", "herby-lemony"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } },
-    { "id": "steak-mushroom-sauce", "title": "Pan-seared steak with mushroom sauce", "cuisine": "american", "skills": ["searing", "gravy"], "skill": "A pan sauce from the fond", "art": "meat", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "Sirloin seared to 145°F and rested, with a mushroom pan sauce built from the browned bits in the pan.", "main": ["sirloin steak", "mushrooms", "broth", "butter", "thyme"], "method": "stove", "tags": { "protein": "beef", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$$", "familiar": "everyday", "veggies": "some" } },
+    {
+      "id": "steak-mushroom-sauce",
+      "title": "Pan-seared steak with mushroom sauce",
+      "cuisine": "american",
+      "skills": ["searing", "gravy"],
+      "skill": "A pan sauce from the fond",
+      "art": "meat",
+      "image": "dishes/steak-mushroom-sauce.png",
+      "safety": "adult-nearby",
+      "minutes": 45,
+      "estimated": true,
+      "about": "Sirloin seared to 145°F and rested, with a mushroom pan sauce built from the browned bits in the pan.",
+      "main": ["sirloin steak", "mushrooms", "broth", "butter", "thyme"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      }
+    },
     {
       "id": "chicken-paprikash",
       "title": "Chicken paprikash",
@@ -1690,6 +1782,7 @@
       "skills": ["searing", "gravy"],
       "skill": "Searing, deglazing, and finishing a sauce",
       "art": "poultry",
+      "image": "dishes/chicken-paprikash.png",
       "safety": "adult-nearby",
       "minutes": 60,
       "estimated": true,
@@ -1712,6 +1805,7 @@
       "skills": ["breading-frying"],
       "skill": "Shallow-frying a breaded cutlet",
       "art": "poultry",
+      "image": "dishes/chicken-parmesan.png",
       "safety": "adult-nearby",
       "minutes": 70,
       "estimated": true,
@@ -1734,6 +1828,7 @@
       "skills": ["breading-frying", "cooking-fish"],
       "skill": "Shallow-frying a crusted fillet, timed with rice",
       "art": "fish",
+      "image": "dishes/rava-fish-fry.png",
       "safety": "adult-nearby",
       "minutes": 60,
       "estimated": true,
@@ -1756,6 +1851,7 @@
       "skills": ["oven-browning"],
       "skill": "Cutting vegetables to roast at the same rate",
       "art": "poultry",
+      "image": "dishes/sheet-pan-teriyaki-chicken.png",
       "safety": "adult-nearby",
       "minutes": 50,
       "estimated": true,
@@ -1778,6 +1874,7 @@
       "skills": ["oven-browning", "spice-rubs"],
       "skill": "Roasting thighs to deep brown",
       "art": "poultry",
+      "image": "dishes/peruvian-chicken-thighs.png",
       "safety": "adult-nearby",
       "minutes": 60,
       "estimated": true,
@@ -1800,6 +1897,7 @@
       "skills": ["timing", "cooking-fish"],
       "skill": "Starting the slower tray first",
       "art": "fish",
+      "image": "dishes/sheet-pan-cod.png",
       "safety": "adult-nearby",
       "minutes": 50,
       "estimated": true,
@@ -1815,7 +1913,29 @@
         "veggies": "lots"
       }
     },
-    { "id": "psari-plaki", "title": "Psari plaki", "cuisine": "greek", "skills": ["timing", "cooking-fish"], "skill": "Fish baked in sauce, timed with rice", "art": "fish", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Greek white fish baked in a tomato, onion, and garlic sauce with parsley and lemon, served with rice.", "main": ["white fish", "tomatoes", "onions", "garlic", "parsley"], "method": "oven", "tags": { "protein": "white-fish", "flavors": ["rich-tomato", "herby-lemony"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "some" } },
+    {
+      "id": "psari-plaki",
+      "title": "Psari plaki",
+      "cuisine": "greek",
+      "skills": ["timing", "cooking-fish"],
+      "skill": "Fish baked in sauce, timed with rice",
+      "art": "fish",
+      "image": "dishes/psari-plaki.png",
+      "safety": "adult-nearby",
+      "minutes": 60,
+      "estimated": true,
+      "about": "Greek white fish baked in a tomato, onion, and garlic sauce with parsley and lemon, served with rice.",
+      "main": ["white fish", "tomatoes", "onions", "garlic", "parsley"],
+      "method": "oven",
+      "tags": {
+        "protein": "white-fish",
+        "flavors": ["rich-tomato", "herby-lemony"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      }
+    },
     {
       "id": "piri-piri-chicken",
       "title": "Piri-piri chicken",
@@ -1823,6 +1943,7 @@
       "skills": ["roasting"],
       "skill": "Roasting a spatchcocked bird, resting, and carving",
       "art": "poultry",
+      "image": "dishes/piri-piri-chicken.png",
       "safety": "adult-nearby",
       "minutes": 90,
       "estimated": true,
@@ -1845,6 +1966,7 @@
       "skills": ["braising"],
       "skill": "Searing thighs, then braising them in salsa",
       "art": "poultry",
+      "image": "dishes/chicken-chile-verde.png",
       "safety": "adult-nearby",
       "minutes": 75,
       "estimated": true,
@@ -1860,7 +1982,7 @@
         "veggies": "some"
       }
     },
-    { "id": "bo-kho", "title": "Bò kho", "cuisine": "vietnamese", "skills": ["braising"], "skill": "Searing chuck in batches, then stewing it", "art": "meat", "safety": "adult-nearby", "minutes": 150, "estimated": true, "about": "Vietnamese beef stew with lemongrass, star anise, and carrots, served with rice.", "main": ["beef chuck", "lemongrass", "star anise", "carrots", "fish sauce"], "method": "stove", "tags": { "protein": "beef", "flavors": ["warm-spices", "rich-tomato"], "heat": "mild", "budget": "$$", "familiar": "adventurous", "veggies": "some" } },
+    { "id": "bo-kho", "title": "Bò kho", "cuisine": "vietnamese", "skills": ["braising"], "skill": "Searing chuck in batches, then stewing it", "art": "meat", "image": "dishes/bo-kho.png", "safety": "adult-nearby", "minutes": 150, "estimated": true, "about": "Vietnamese beef stew with lemongrass, star anise, and carrots, served with rice.", "main": ["beef chuck", "lemongrass", "star anise", "carrots", "fish sauce"], "method": "stove", "tags": { "protein": "beef", "flavors": ["warm-spices", "rich-tomato"], "heat": "mild", "budget": "$$", "familiar": "adventurous", "veggies": "some" } },
     {
       "id": "lamb-tagine",
       "title": "Lamb tagine with apricots",
@@ -1868,6 +1990,7 @@
       "skills": ["braising"],
       "skill": "Setting up a braise unaided",
       "art": "meat",
+      "image": "dishes/lamb-tagine.png",
       "safety": "adult-nearby",
       "minutes": 150,
       "estimated": true,
@@ -1891,6 +2014,7 @@
       "skills": ["stir-frying", "seasoning"],
       "skill": "Balancing salt, sweet, and heat by taste",
       "art": "poultry",
+      "image": "dishes/pad-kra-pao.png",
       "safety": "adult-nearby",
       "minutes": 35,
       "estimated": true,
