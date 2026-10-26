@@ -412,7 +412,7 @@ on('GET', '/api/library', async (req, env) => {
   const minutes = (L) => live[L.id]?.patches.findLast((p) => p.path === 'totalMinutes')?.value ?? L.totalMinutes;
   // Lesson numbers in the suggested course order (§4.1).
   const { labels: numbered, total } = numberCourse(LIBRARY.course);
-  // Appointed Times lessons are A1, A2… beside the numbered course (§6.19).
+  // Appointed Times lessons are U1, U2… beside the numbered course (§6.19).
   const labels = { ...numbered, ...LIBRARY.seasonalLabels, ...(release ? LIBRARY.levelLabels : {}) };
   const pickOf = Object.fromEntries(LIBRARY.course.filter((d) => d.pickOne).map((d) => [d.id, d.pickOne]));
   const lessons = [];

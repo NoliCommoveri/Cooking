@@ -9,7 +9,7 @@
 import { openLesson } from './player.js';
 import { dietView } from './lib/diet.js';
 import { shoppingList } from './lib/shop.js';
-import { numberCourse } from './lib/course.js';
+import { numberCourse, courseNo } from './lib/course.js';
 import { markTerms, toggleTermCard } from './lib/terms.js';
 import { levelProgressView } from './rewards.js';
 import { allLevels } from './level-outlines.js';
@@ -124,9 +124,9 @@ function tryView() {
     const notes = [...v.applied.map((x) => `Made with ${name(x.use)} instead of ${name(x.for)}`), ...v.leftOut.map((id) => `Leave out the ${name(id)}`)];
     const cu = R.cuisines[L.cuisine]?.name ?? L.cuisine;
     const inner = quest
-      ? `<article class="q-panel q-card"><p class="q-kick">Path ${L.unit} · Quest ${NUM[L.id]}</p><div class="q-win"><img src="/${esc(l.image)}" alt="" width="230" height="230" loading="lazy"></div><h3 class="q-title">${esc(L.title)}</h3><p class="q-skill">${esc(L.skill)}</p>
+      ? `<article class="q-panel q-card"><p class="q-kick">Path ${L.unit} · Quest ${courseNo(NUM[L.id])}</p><div class="q-win"><img src="/${esc(l.image)}" alt="" width="230" height="230" loading="lazy"></div><h3 class="q-title">${esc(L.title)}</h3><p class="q-skill">${esc(L.skill)}</p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>Serves</dt><dd>${L.servings}</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div></dl>${notes.map((n) => `<p class="q-swap">${esc(n)}</p>`).join('')}</article>`
-      : `<article class="p-card"><span class="tape t1"></span><span class="tape t2"></span><div class="p-photo"><img src="/${esc(l.image)}" alt="" width="220" height="220" loading="lazy"></div><p class="p-lessonno">Lesson ${NUM[L.id]}</p><h3 class="p-title">${esc(L.title)}</h3><p class="p-skill">${esc(L.skill)}</p>
+      : `<article class="p-card"><span class="tape t1"></span><span class="tape t2"></span><div class="p-photo"><img src="/${esc(l.image)}" alt="" width="220" height="220" loading="lazy"></div><p class="p-lessonno">Lesson ${courseNo(NUM[L.id])}</p><h3 class="p-title">${esc(L.title)}</h3><p class="p-skill">${esc(L.skill)}</p>
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>Serves ${L.servings}</span><span>${esc(cu)}</span></div>${notes.map((n) => `<p class="p-swap">${esc(n)}</p>`).join('')}</article>`;
     return `<button type="button" class="lesson" data-open="${esc(l.id)}" aria-label="Try ${esc(L.title)}">${inner}</button>`;
   };
@@ -193,7 +193,7 @@ function courseView() {
   const row = (d) => {
     const cu = R.cuisines[d.cuisine]?.name ?? d.cuisine;
     const pick = d.pickOne ? `<small class="pick">Pick one: ${groupOf(d).map((x) => esc(x.title)).join(' · ')}</small>` : '';
-    const body = `<img src="/${esc(d.image)}" alt="" width="64" height="64" loading="lazy"><span><b>${NUM[d.id]}. ${esc(d.title)}</b><small>${esc(cu)}${d.breakfast ? ' · breakfast' : ''}</small><small>${esc(d.skill)}</small>${pick}${lessons[d.id] ? `<span class="tag">${ic('i-check', '')}Try it now</span>` : ''}</span>`;
+    const body = `<img src="/${esc(d.image)}" alt="" width="64" height="64" loading="lazy"><span><b>${NUM[d.id]} · ${esc(d.title)}</b><small>${esc(cu)}${d.breakfast ? ' · breakfast' : ''}</small><small>${esc(d.skill)}</small>${pick}${lessons[d.id] ? `<span class="tag">${ic('i-check', '')}Try it now</span>` : ''}</span>`;
     return lessons[d.id] ? `<button type="button" class="c-dish" data-open="${esc(d.id)}">${body}</button>` : `<div class="c-dish">${body}</div>`;
   };
   return `<p class="mut">With over 100 dishes to choose from, you can build a course that is filled with dishes you love as you practice the skills you need. Where a skill has several dishes designed to teach it, we'll use your diet preferences to recommend the one we think you'll like best; however, you can swap, or add multiple, anytime you'd like!</p>

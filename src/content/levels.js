@@ -31,6 +31,13 @@ export function plannedMinutes(weeks, minutesOf, on = PARTS) {
 }
 export const hoursOf = (minutes) => Math.round(minutes / 60);
 
+// A Level's labels for its dishes (owner, 2026-10-26): its letter (A for
+// Level 1, B, C, D), the week, then a for the week's Familiar dish and b for
+// its Explore one: C4a, C4b. A lesson shared with Cook Around the World has
+// one in each Level that cooks it. prefix: the Level's letter.
+export const weekLabels = (weeks, prefix) => Object.fromEntries(weeks.flatMap((w) => [[w.familiar, 'a'], [w.explore, 'b']]
+  .filter(([id]) => id).map(([id, x]) => [id, `${prefix}${w.week}${x}`])));
+
 // What a parent reads before assigning a Level, where one needs it: under
 // Which program? at setup and with Chef Ruth, and in the syllabus. The
 // owner's words (2026-10-26), word for word.

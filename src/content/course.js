@@ -36,8 +36,9 @@ export function planEntries(dishes, plan = null) {
   return out;
 }
 
-// Numbers for every dish still in the plan.
-// Returns { entries: [{ key, n, ids, removed: [ids], pickOne }], labels: { id: '8a' }, total }.
+// Numbers for every dish still in the plan, labeled with Cook Around the
+// World's letter: S8, or S8a in a pick-one group.
+// Returns { entries: [{ key, n, ids, removed: [ids], pickOne }], labels: { id: 'S8a' }, total }.
 export function numberCourse(dishes, plan = null) {
   const removed = new Set(plan?.removed ?? []);
   const labels = {};
@@ -47,14 +48,18 @@ export function numberCourse(dishes, plan = null) {
     const out = { key: e.key, pickOne: e.pickOne, ids, removed: e.ids.filter((id) => removed.has(id)), n: null };
     if (!ids.length) return out;
     out.n = ++n;
-    ids.forEach((id, i) => { labels[id] = ids.length > 1 ? `${n}${String.fromCharCode(97 + i)}` : String(n); });
+    ids.forEach((id, i) => { labels[id] = `S${n}${ids.length > 1 ? String.fromCharCode(97 + i) : ''}`; });
     return out;
   });
   return { entries, labels, total: n };
 }
 
+// The place in the course a Cook Around the World label counts: "Quest 27 of
+// 59" for S27. Any other label (U1, C4a) is returned as it is.
+export const courseNo = (label) => (label ? label.replace(/^S(?=\d)/, '') : label);
+
 // A seasonal unit (Appointed Times, §6.19) sits beside the numbered course.
-// Its lessons are labeled with its letter and their place in its list: A1, A2.
+// Its lessons are labeled with its letter and their place in its list: U1, U2.
 export function seasonalLabels(units) {
   const labels = {};
   for (const u of units) if (u.seasonal) (u.lessons || []).forEach((id, i) => { labels[id] = `${u.prefix}${i + 1}`; });

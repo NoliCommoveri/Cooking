@@ -525,3 +525,29 @@ a.choice.on{border-color:var(--h-acc);box-shadow:inset 0 0 0 1.5px var(--h-acc)}
 .lvl-dish.on{color:inherit;font-weight:600}
 .lvl-blocked ul,.lvl-blocked p{margin:0}
 .lvl-blocked ul{padding-left:20px}
+
+/* Add a lesson (owner, 2026-10-26): search by ingredients and skills, and each lesson as a card */
+.findfilters{margin:12px 0}
+.tokensearch{display:grid;gap:6px;position:relative}
+.tokensearch .flabel{font-weight:800;font-size:15px}
+.tokens{display:flex;flex-wrap:wrap;gap:6px}
+.tokens:empty{display:none}
+.token{display:inline-flex;align-items:center;gap:2px;padding:4px 4px 4px 12px;border:1.5px solid var(--h-acc);border-radius:999px;font-weight:700;font-size:15px}
+.token button{border:0;background:none;color:var(--h-mut);font-size:20px;line-height:1;min-width:32px;min-height:32px;cursor:pointer}
+.suggest{display:grid;border:1.5px solid var(--h-line);border-radius:10px;background:var(--h-card);overflow:hidden}
+.suggest button{text-align:left;font:inherit;font-size:16px;color:var(--h-fg);background:none;border:0;border-bottom:1px solid var(--h-line);padding:12px;min-height:46px;cursor:pointer}
+.suggest button:last-child{border-bottom:0}
+.suggest button:hover,.suggest button:focus{background:var(--h-bg)}
+.tokensearch .hbtn.link{justify-self:start}
+.findlist{display:grid;gap:12px}
+.findlist h3{margin:8px 0 0}
+.findcard{grid-template-columns:88px minmax(0,1fr);align-items:start;gap:12px;padding:14px}
+.findcard.norow{grid-template-columns:1fr}
+.findcard img{width:88px;height:88px;object-fit:cover;border-radius:10px}
+.findcard h3{margin:0;font-size:17px;line-height:1.3}
+.findcard p{margin:4px 0 0}
+.findcard .about{font-size:15px;line-height:1.4}
+.findcard .uses{color:var(--h-acc)}
+.findcard .acts{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.findcard .acts .hbtn{min-height:44px;padding:8px 14px;font-size:15px;width:auto}
+.tokensearch [hidden]{display:none!important}

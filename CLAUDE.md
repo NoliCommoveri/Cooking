@@ -73,6 +73,13 @@ Migrations are bundled into the Worker and applied by pressing a button on
   2026-10-24): every screen added or changed, at phone width, in both themes
   where the theme changes the look. Send them in the session; don't commit
   them to the repo.
+- **Chef Ruth's floating button (`.ruth-fab`) covers the bottom right of
+  every parent screen** and gets in the way of screenshot scripts' clicks and
+  pictures (owner, 2026-10-26: sessions keep hitting it). Hide it in the
+  script first, e.g.
+  `page.addStyleTag({ content: '.ruth-fab{display:none!important}' })`
+  after each page load. Opening a kitchen locks the parent screens again, so
+  a script that goes back to them must enter the parent PIN.
 
 ---
 

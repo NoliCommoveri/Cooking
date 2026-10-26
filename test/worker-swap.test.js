@@ -41,7 +41,7 @@ test('in spring the picker offers only Unleavened recipes, in order; the rest of
   const opts = (await a.get(`/api/queue/${spring}/swap`)).body;
   assert.equal(opts.spring, true);
   assert.deepEqual(groupsOf(opts.options), ['Appointed Times lessons', 'Other lessons', 'Our recipes']);
-  assert.deepEqual(opts.options.slice(0, 2).map((o) => o.label), ['A1', 'A2']);
+  assert.deepEqual(opts.options.slice(0, 2).map((o) => o.label), ['U1', 'U2']);
   assert.ok(opts.options.every((o) => o.unleavened));
   assert.ok(!opts.options.some((o) => o.id === 'buttermilk-biscuits'), 'leavened lessons are left out');
   assert.ok(opts.options.some((o) => o.id === own));
