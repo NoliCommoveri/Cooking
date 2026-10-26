@@ -7,6 +7,7 @@
 import { STARTERS, nextStep } from './lib/getting-started.js';
 import { starRow, ratingSaver } from './tastes.js';
 import { ASSIGN_NOTES } from './lib/levels.js';
+import { courseNo } from './lib/course.js';
 
 export const RUTH = { name: 'Chef Ruth', photo: 'img/chef-ruth.webp' };
 
@@ -546,7 +547,7 @@ async function firstLesson(ctx, chat, call, profiles) {
   }
   const servings = ctx.me().family.default_servings;
   for (const [i, L] of lessons.slice(0, 2).entries()) {
-    chat.say(`${i ? 'Or how about' : 'How about'} lesson ${L.label}, ${L.title}? ${L.about}`,
+    chat.say(`${i ? 'Or how about' : 'How about'} lesson ${courseNo(L.label)}, ${L.title}? ${L.about}`,
       el('img', { class: 'ruth-dish', src: L.image, alt: '', width: 160, height: 160 }));
     const pick = await chat.choose([['add', `Add ${L.title}`], ['no', i ? 'No, thanks' : 'Something else']]);
     if (pick === 'add') {

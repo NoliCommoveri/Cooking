@@ -11,6 +11,7 @@ import { ingredientsInStep } from './lib/amounts.js';
 import { dietView } from './lib/diet.js';
 import { applyPatches, showValue } from './lib/patch.js';
 import { lessonVersion } from './lib/variations.js';
+import { courseNo } from './lib/course.js';
 import { voiceSupported, createVoice } from './voice.js';
 import { unlockSound, soundReady, ding, sizzle, isMuted, setMuted } from './sound.js';
 
@@ -112,7 +113,7 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // other profiles, who can join this cook. onCook(id, cook): saves the cook.
 // fixes: { suggest({ lesson, stepId, servings, ingredients }), list(lessonId) }
 // for Suggest a fix and what came of this family's fixes (§6.11). labels: the
-// family's lesson numbers from its course plan ({ id: '8a' }); without them,
+// family's lesson numbers from its course plan ({ id: 'S8a' }); without them,
 // the suggested order's numbers. ask: { status, send() } for "I want to make
 // this" (a kid) or "Cook this" (an adult); status is null, or where the lesson
 // is in the profile's queue, and send() resolves to the new one (§6.1).
@@ -148,9 +149,10 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
   const versionOf = (cls) => (L.versionOf ? `<p class="${cls}">A version of ${esc(L.versionOf)}</p>` : '');
   const R = { ...published, ...registry };
   const ING = { ...R.ingredients, ...extra };
-  // Appointed Times lessons keep their A1, A2 labels whatever the course plan (§6.19).
+  // Appointed Times lessons keep their U1, U2 labels whatever the course plan (§6.19).
   const seasonal = (id) => R.seasonal?.includes(R.lessons.find((x) => x.id === id)?.unit);
-  const num = (id) => (level ? null : (labels && !seasonal(id) ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null);
+  // A Cook Around the World lesson says its place in the course: 27 for S27.
+  const num = (id) => (level ? null : courseNo((labels && !seasonal(id) ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null));
   const levelKick = level ? `${level.name}${level.week ? ` · Week ${level.week}` : ''}` : null;
   // "lesson 8a, Shakshuka", or just the title for a dish the family took out of its plan.
   const lessonRef = (id, title) => (num(id) ? `lesson ${num(id)}, ${title}` : title);

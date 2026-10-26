@@ -113,6 +113,19 @@ export const LIBRARY = {
     "measuring-spoons",
     "shallow-dish",
     "kitchen-towel"
+   ],
+   "skills": [
+    "julienne",
+    "rolling-wrapping"
+   ],
+   "method": "stove",
+   "about": "Soft rice-paper rolls filled with crunchy vegetables, chicken, noodles, and mint, dipped in a peanut-hoisin sauce. Served cool, not fried.",
+   "main": [
+    "chicken breast",
+    "rice paper",
+    "rice noodles",
+    "carrots and cucumber",
+    "mint"
    ]
   },
   {
@@ -238,6 +251,19 @@ export const LIBRARY = {
     "paper-towels",
     "microwave"
    ],
+   "skills": [
+    "julienne",
+    "searing"
+   ],
+   "method": "stove",
+   "about": "Strips of seared chicken with peppers and onions, wrapped in warm tortillas with salsa and sour cream.",
+   "main": [
+    "chicken thighs",
+    "bell peppers",
+    "onion",
+    "tortillas",
+    "lime"
+   ],
    "variations": [
     {
      "title": "Steak fajitas",
@@ -355,6 +381,19 @@ export const LIBRARY = {
       "thermometer",
       "paper-towels",
       "microwave"
+     ],
+     "skills": [
+      "julienne",
+      "searing"
+     ],
+     "method": "stove",
+     "about": "Strips of seared chicken with peppers and onions, wrapped in warm tortillas with salsa and sour cream.",
+     "main": [
+      "chicken thighs",
+      "bell peppers",
+      "onion",
+      "tortillas",
+      "lime"
      ],
      "id": "steak"
     },
@@ -474,6 +513,19 @@ export const LIBRARY = {
       "colander",
       "can-opener",
       "wooden-spoon"
+     ],
+     "skills": [
+      "julienne",
+      "searing"
+     ],
+     "method": "stove",
+     "about": "Strips of seared chicken with peppers and onions, wrapped in warm tortillas with salsa and sour cream.",
+     "main": [
+      "chicken thighs",
+      "bell peppers",
+      "onion",
+      "tortillas",
+      "lime"
      ],
      "id": "black-bean"
     },
@@ -603,6 +655,19 @@ export const LIBRARY = {
       "microwave",
       "spoon"
      ],
+     "skills": [
+      "julienne",
+      "searing"
+     ],
+     "method": "stove",
+     "about": "Strips of seared chicken with peppers and onions, wrapped in warm tortillas with salsa and sour cream.",
+     "main": [
+      "chicken thighs",
+      "bell peppers",
+      "onion",
+      "tortillas",
+      "lime"
+     ],
      "id": "spicy"
     },
     {
@@ -723,6 +788,19 @@ export const LIBRARY = {
       "thermometer",
       "microwave"
      ],
+     "skills": [
+      "julienne",
+      "searing"
+     ],
+     "method": "stove",
+     "about": "Strips of seared chicken with peppers and onions, wrapped in warm tortillas with salsa and sour cream.",
+     "main": [
+      "chicken thighs",
+      "bell peppers",
+      "onion",
+      "tortillas",
+      "lime"
+     ],
      "id": "sp-3",
      "level": "sp-3"
     }
@@ -802,6 +880,15 @@ export const LIBRARY = {
     "measuring-spoons",
     "spatula",
     "oven-mitts"
+   ],
+   "skills": [
+    "julienne",
+    "oven-browning"
+   ],
+   "method": "oven",
+   "about": "Thin, crispy potato sticks baked in the oven instead of fried.",
+   "main": [
+    "russet potatoes"
    ]
   },
   {
@@ -926,6 +1013,19 @@ export const LIBRARY = {
     "fork",
     "measuring-cups",
     "measuring-spoons"
+   ],
+   "skills": [
+    "fine-chopping",
+    "dressings"
+   ],
+   "method": "oven",
+   "about": "A crunchy Lebanese salad of chopped vegetables, herbs, and toasted pita pieces in a lemony dressing.",
+   "main": [
+    "pita bread",
+    "tomatoes",
+    "cucumber",
+    "parsley and mint",
+    "lemon"
    ]
   },
   {
@@ -1021,6 +1121,18 @@ export const LIBRARY = {
     "thermometer",
     "oven-mitts"
    ],
+   "skills": [
+    "fine-chopping",
+    "searing"
+   ],
+   "method": "stove",
+   "about": "Seared steak topped with chimichurri, a bright Argentine sauce of chopped parsley, garlic, oregano, and vinegar.",
+   "main": [
+    "beef steak",
+    "parsley",
+    "garlic",
+    "oregano"
+   ],
    "variations": [
     {
      "title": "Chimichurri chicken",
@@ -1108,6 +1220,18 @@ export const LIBRARY = {
       "spatula",
       "thermometer",
       "oven-mitts"
+     ],
+     "skills": [
+      "fine-chopping",
+      "searing"
+     ],
+     "method": "stove",
+     "about": "Seared steak topped with chimichurri, a bright Argentine sauce of chopped parsley, garlic, oregano, and vinegar.",
+     "main": [
+      "beef steak",
+      "parsley",
+      "garlic",
+      "oregano"
      ],
      "id": "chicken"
     }
@@ -1221,6 +1345,18 @@ export const LIBRARY = {
     "measuring-spoons",
     "wooden-spoon"
    ],
+   "skills": [
+    "fine-chopping"
+   ],
+   "method": "no-cook",
+   "about": "Classic tuna salad with finely chopped celery, onion, pickles, and herbs, on bread.",
+   "main": [
+    "canned tuna",
+    "celery",
+    "pickles",
+    "mayonnaise",
+    "bread"
+   ],
    "variations": [
     {
      "title": "Tuna salad sandwiches",
@@ -1324,6 +1460,18 @@ export const LIBRARY = {
       "wooden-spoon",
       "paring-knife",
       "bread-knife"
+     ],
+     "skills": [
+      "fine-chopping"
+     ],
+     "method": "no-cook",
+     "about": "Classic tuna salad with finely chopped celery, onion, pickles, and herbs, on bread.",
+     "main": [
+      "canned tuna",
+      "celery",
+      "pickles",
+      "mayonnaise",
+      "bread"
      ],
      "id": "sp-2",
      "level": "sp-2"
@@ -1455,6 +1603,19 @@ export const LIBRARY = {
     "paper-towels",
     "microwave",
     "kitchen-towel"
+   ],
+   "skills": [
+    "dicing",
+    "broiling"
+   ],
+   "method": "oven",
+   "about": "Broiled white fish in tortillas with fresh pico de gallo, a chunky salsa of diced tomato, onion, and cilantro.",
+   "main": [
+    "cod or tilapia",
+    "tomatoes",
+    "onion",
+    "cilantro",
+    "corn tortillas"
    ]
   },
   {
@@ -1564,6 +1725,18 @@ export const LIBRARY = {
     "wooden-spoon",
     "oven-mitts"
    ],
+   "skills": [
+    "dicing",
+    "simmering"
+   ],
+   "method": "stove",
+   "about": "A French vegetable stew of diced eggplant, zucchini, peppers, and tomato, cooked slowly with herbs.",
+   "main": [
+    "eggplant",
+    "zucchini",
+    "bell pepper",
+    "tomatoes"
+   ],
    "variations": [
     {
      "title": "Ratatouille",
@@ -1665,6 +1838,18 @@ export const LIBRARY = {
       "pot-large",
       "wooden-spoon",
       "oven-mitts"
+     ],
+     "skills": [
+      "dicing",
+      "simmering"
+     ],
+     "method": "stove",
+     "about": "A French vegetable stew of diced eggplant, zucchini, peppers, and tomato, cooked slowly with herbs.",
+     "main": [
+      "eggplant",
+      "zucchini",
+      "bell pepper",
+      "tomatoes"
      ],
      "id": "sp-4",
      "level": "sp-4"
@@ -1791,6 +1976,19 @@ export const LIBRARY = {
     "spoon",
     "ladle"
    ],
+   "skills": [
+    "dicing",
+    "simmering"
+   ],
+   "method": "stove",
+   "about": "A hearty Italian vegetable soup with beans and small pasta.",
+   "main": [
+    "carrots, celery, onion",
+    "zucchini",
+    "white beans",
+    "small pasta",
+    "tomatoes"
+   ],
    "variations": [
     {
      "title": "Minestrone",
@@ -1905,6 +2103,19 @@ export const LIBRARY = {
       "wooden-spoon",
       "spoon",
       "ladle"
+     ],
+     "skills": [
+      "dicing",
+      "simmering"
+     ],
+     "method": "stove",
+     "about": "A hearty Italian vegetable soup with beans and small pasta.",
+     "main": [
+      "carrots, celery, onion",
+      "zucchini",
+      "white beans",
+      "small pasta",
+      "tomatoes"
      ],
      "id": "sp-3",
      "level": "sp-3"
@@ -2042,6 +2253,19 @@ export const LIBRARY = {
     "colander",
     "kitchen-towel"
    ],
+   "skills": [
+    "dressings",
+    "dicing"
+   ],
+   "method": "stove-oven",
+   "about": "Romaine salad with sliced chicken, a homemade creamy Caesar dressing, and crunchy homemade croutons.",
+   "main": [
+    "chicken breast",
+    "romaine lettuce",
+    "parmesan",
+    "bread",
+    "lemon"
+   ],
    "variations": [
     {
      "title": "Chicken Caesar + homemade dressing & croutons",
@@ -2171,6 +2395,19 @@ export const LIBRARY = {
       "heatproof-bowl",
       "saucepan-medium"
      ],
+     "skills": [
+      "dressings",
+      "dicing"
+     ],
+     "method": "stove-oven",
+     "about": "Romaine salad with sliced chicken, a homemade creamy Caesar dressing, and crunchy homemade croutons.",
+     "main": [
+      "chicken breast",
+      "romaine lettuce",
+      "parmesan",
+      "bread",
+      "lemon"
+     ],
      "id": "sp-4",
      "level": "sp-4"
     }
@@ -2294,6 +2531,19 @@ export const LIBRARY = {
     "paper-towels",
     "microwave"
    ],
+   "skills": [
+    "dressings",
+    "fine-chopping"
+   ],
+   "method": "stove",
+   "about": "Lemon and oregano chicken seared in a skillet and tucked into warm pitas with tomato, onion, and a cool cucumber-yogurt tzatziki.",
+   "main": [
+    "chicken breast",
+    "pita",
+    "Greek yogurt",
+    "cucumber",
+    "lemon"
+   ],
    "variations": [
     {
      "title": "Chicken souvlaki pitas",
@@ -2402,6 +2652,19 @@ export const LIBRARY = {
       "thermometer",
       "paper-towels",
       "microwave"
+     ],
+     "skills": [
+      "dressings",
+      "fine-chopping"
+     ],
+     "method": "stove",
+     "about": "Lemon and oregano chicken seared in a skillet and tucked into warm pitas with tomato, onion, and a cool cucumber-yogurt tzatziki.",
+     "main": [
+      "chicken breast",
+      "pita",
+      "Greek yogurt",
+      "cucumber",
+      "lemon"
      ],
      "id": "sp-2",
      "level": "sp-2"
@@ -2518,6 +2781,19 @@ export const LIBRARY = {
     "measuring-spoons",
     "spoon"
    ],
+   "skills": [
+    "dressings",
+    "emulsions"
+   ],
+   "method": "no-cook",
+   "about": "A big chopped salad of romaine, cucumber, tomato, and chickpeas, tossed with a red wine vinaigrette whisked from scratch and tasted until it's balanced.",
+   "main": [
+    "romaine",
+    "chickpeas",
+    "cucumber",
+    "tomatoes",
+    "red wine vinegar"
+   ],
    "variations": [
     {
      "title": "Chickpea chopped salad + vinaigrette",
@@ -2622,6 +2898,19 @@ export const LIBRARY = {
       "measuring-cups",
       "measuring-spoons",
       "spoon"
+     ],
+     "skills": [
+      "dressings",
+      "emulsions"
+     ],
+     "method": "no-cook",
+     "about": "A big chopped salad of romaine, cucumber, tomato, and chickpeas, tossed with a red wine vinaigrette whisked from scratch and tasted until it's balanced.",
+     "main": [
+      "romaine",
+      "chickpeas",
+      "cucumber",
+      "tomatoes",
+      "red wine vinegar"
      ],
      "id": "sp-3",
      "level": "sp-3"
@@ -2744,6 +3033,20 @@ export const LIBRARY = {
     "thermometer",
     "oven-mitts"
    ],
+   "skills": [
+    "thin-slicing",
+    "quick-pickling",
+    "searing"
+   ],
+   "method": "stove",
+   "about": "Thin beef patties smashed onto a very hot pan for crispy edges, with quick homemade pickles.",
+   "main": [
+    "ground beef",
+    "cucumbers",
+    "buns",
+    "cheese",
+    "onion"
+   ],
    "variations": [
     {
      "title": "Turkey smash burgers + quick pickles",
@@ -2854,6 +3157,20 @@ export const LIBRARY = {
       "tongs",
       "thermometer",
       "oven-mitts"
+     ],
+     "skills": [
+      "thin-slicing",
+      "quick-pickling",
+      "searing"
+     ],
+     "method": "stove",
+     "about": "Thin beef patties smashed onto a very hot pan for crispy edges, with quick homemade pickles.",
+     "main": [
+      "ground beef",
+      "cucumbers",
+      "buns",
+      "cheese",
+      "onion"
      ],
      "id": "turkey"
     },
@@ -2972,6 +3289,20 @@ export const LIBRARY = {
       "thermometer",
       "oven-mitts"
      ],
+     "skills": [
+      "thin-slicing",
+      "quick-pickling",
+      "searing"
+     ],
+     "method": "stove",
+     "about": "Thin beef patties smashed onto a very hot pan for crispy edges, with quick homemade pickles.",
+     "main": [
+      "ground beef",
+      "cucumbers",
+      "buns",
+      "cheese",
+      "onion"
+     ],
      "id": "easy-prep"
     },
     {
@@ -3064,6 +3395,20 @@ export const LIBRARY = {
       "thermometer",
       "oven-mitts"
      ],
+     "skills": [
+      "thin-slicing",
+      "quick-pickling",
+      "searing"
+     ],
+     "method": "stove",
+     "about": "Thin beef patties smashed onto a very hot pan for crispy edges, with quick homemade pickles.",
+     "main": [
+      "ground beef",
+      "cucumbers",
+      "buns",
+      "cheese",
+      "onion"
+     ],
      "id": "sp-2",
      "level": "sp-2"
     }
@@ -3138,6 +3483,16 @@ export const LIBRARY = {
     "plate",
     "paper-towels",
     "thermometer"
+   ],
+   "skills": [
+    "heat-control"
+   ],
+   "method": "stove",
+   "about": "A soft, pale-yellow rolled omelet cooked gently over low heat. A breakfast dish.",
+   "main": [
+    "eggs",
+    "butter",
+    "chives"
    ]
   },
   {
@@ -3250,6 +3605,18 @@ export const LIBRARY = {
     "skillet-12",
     "spatula"
    ],
+   "skills": [
+    "heat-control",
+    "simmering"
+   ],
+   "method": "stove",
+   "about": "Crispy, golden grilled cheese sandwiches with a smooth homemade tomato soup for dipping.",
+   "main": [
+    "bread",
+    "cheddar cheese",
+    "canned tomatoes",
+    "onion"
+   ],
    "variations": [
     {
      "title": "Grilled cheese + tomato soup",
@@ -3348,6 +3715,18 @@ export const LIBRARY = {
       "skillet-12",
       "spatula",
       "bread-knife"
+     ],
+     "skills": [
+      "heat-control",
+      "simmering"
+     ],
+     "method": "stove",
+     "about": "Crispy, golden grilled cheese sandwiches with a smooth homemade tomato soup for dipping.",
+     "main": [
+      "bread",
+      "cheddar cheese",
+      "canned tomatoes",
+      "onion"
      ],
      "id": "sp-2",
      "level": "sp-2"
@@ -3452,6 +3831,18 @@ export const LIBRARY = {
     "foil",
     "paper-towels",
     "thermometer"
+   ],
+   "skills": [
+    "heat-control",
+    "batters"
+   ],
+   "method": "stove",
+   "about": "Thick slices of challah soaked in a sweet egg custard and cooked golden. A breakfast dish.",
+   "main": [
+    "challah bread",
+    "eggs",
+    "milk",
+    "cinnamon"
    ]
   },
   {
@@ -3530,6 +3921,15 @@ export const LIBRARY = {
     "spatula",
     "plate",
     "foil"
+   ],
+   "skills": [
+    "crisping"
+   ],
+   "method": "stove",
+   "about": "Shredded potatoes squeezed dry and pan-fried into a crispy golden cake. A breakfast side.",
+   "main": [
+    "russet potatoes",
+    "butter or oil"
    ]
   },
   {
@@ -3635,6 +4035,19 @@ export const LIBRARY = {
     "can-opener",
     "small-bowl",
     "thermometer"
+   ],
+   "skills": [
+    "building-a-sauce",
+    "poaching-eggs"
+   ],
+   "method": "stove",
+   "about": "Eggs gently cooked in a spiced tomato and pepper sauce, served in the pan with bread for dipping.",
+   "main": [
+    "eggs",
+    "crushed tomatoes",
+    "red bell pepper",
+    "onion",
+    "feta"
    ],
    "variations": [
     {
@@ -3742,6 +4155,19 @@ export const LIBRARY = {
       "thermometer",
       "spoon"
      ],
+     "skills": [
+      "building-a-sauce",
+      "poaching-eggs"
+     ],
+     "method": "stove",
+     "about": "Eggs gently cooked in a spiced tomato and pepper sauce, served in the pan with bread for dipping.",
+     "main": [
+      "eggs",
+      "crushed tomatoes",
+      "red bell pepper",
+      "onion",
+      "feta"
+     ],
      "id": "spicy"
     },
     {
@@ -3840,6 +4266,19 @@ export const LIBRARY = {
       "can-opener",
       "small-bowl",
       "thermometer"
+     ],
+     "skills": [
+      "building-a-sauce",
+      "poaching-eggs"
+     ],
+     "method": "stove",
+     "about": "Eggs gently cooked in a spiced tomato and pepper sauce, served in the pan with bread for dipping.",
+     "main": [
+      "eggs",
+      "crushed tomatoes",
+      "red bell pepper",
+      "onion",
+      "feta"
      ],
      "id": "easy-prep"
     }
@@ -3947,6 +4386,18 @@ export const LIBRARY = {
     "tongs",
     "liquid-measuring-cup",
     "colander"
+   ],
+   "skills": [
+    "building-a-sauce",
+    "simmering"
+   ],
+   "method": "stove",
+   "about": "Spaghetti in a simple homemade tomato sauce with garlic and basil.",
+   "main": [
+    "spaghetti",
+    "canned tomatoes",
+    "garlic",
+    "basil"
    ]
   },
   {
@@ -4062,6 +4513,19 @@ export const LIBRARY = {
     "fork",
     "thermometer"
    ],
+   "skills": [
+    "building-a-sauce",
+    "reducing"
+   ],
+   "method": "stove",
+   "about": "Bite-size chicken in a sticky, sweet-savory honey, garlic, and soy sauce, over rice.",
+   "main": [
+    "chicken thighs",
+    "honey",
+    "garlic",
+    "soy sauce",
+    "rice"
+   ],
    "variations": [
     {
      "title": "Honey-garlic salmon",
@@ -4170,6 +4634,19 @@ export const LIBRARY = {
       "fork",
       "thermometer",
       "paper-towels"
+     ],
+     "skills": [
+      "building-a-sauce",
+      "reducing"
+     ],
+     "method": "stove",
+     "about": "Bite-size chicken in a sticky, sweet-savory honey, garlic, and soy sauce, over rice.",
+     "main": [
+      "chicken thighs",
+      "honey",
+      "garlic",
+      "soy sauce",
+      "rice"
      ],
      "id": "salmon"
     },
@@ -4280,6 +4757,19 @@ export const LIBRARY = {
       "fork",
       "kitchen-towel"
      ],
+     "skills": [
+      "building-a-sauce",
+      "reducing"
+     ],
+     "method": "stove",
+     "about": "Bite-size chicken in a sticky, sweet-savory honey, garlic, and soy sauce, over rice.",
+     "main": [
+      "chicken thighs",
+      "honey",
+      "garlic",
+      "soy sauce",
+      "rice"
+     ],
      "id": "tofu"
     }
    ]
@@ -4382,6 +4872,20 @@ export const LIBRARY = {
     "plate",
     "thermometer"
    ],
+   "skills": [
+    "stir-frying",
+    "dicing",
+    "cooling-reheating"
+   ],
+   "method": "stove",
+   "about": "Day-old rice stir-fried fast with chicken, egg, vegetables, and soy sauce.",
+   "main": [
+    "cooked rice",
+    "chicken",
+    "eggs",
+    "peas and carrots",
+    "green onions"
+   ],
    "variations": [
     {
      "title": "Easy-prep chicken fried rice",
@@ -4473,6 +4977,20 @@ export const LIBRARY = {
       "spatula",
       "plate",
       "thermometer"
+     ],
+     "skills": [
+      "stir-frying",
+      "dicing",
+      "cooling-reheating"
+     ],
+     "method": "stove",
+     "about": "Day-old rice stir-fried fast with chicken, egg, vegetables, and soy sauce.",
+     "main": [
+      "cooked rice",
+      "chicken",
+      "eggs",
+      "peas and carrots",
+      "green onions"
      ],
      "id": "easy-prep"
     },
@@ -4574,6 +5092,20 @@ export const LIBRARY = {
       "spatula",
       "plate",
       "thermometer"
+     ],
+     "skills": [
+      "stir-frying",
+      "dicing",
+      "cooling-reheating"
+     ],
+     "method": "stove",
+     "about": "Day-old rice stir-fried fast with chicken, egg, vegetables, and soy sauce.",
+     "main": [
+      "cooked rice",
+      "chicken",
+      "eggs",
+      "peas and carrots",
+      "green onions"
      ],
      "id": "sp-4",
      "level": "sp-4"
@@ -4684,6 +5216,19 @@ export const LIBRARY = {
     "skillet-12",
     "wooden-spoon",
     "thermometer"
+   ],
+   "skills": [
+    "stir-frying",
+    "dicing"
+   ],
+   "method": "stove",
+   "about": "Ground turkey stir-fried with carrots, water chestnuts, and a hoisin sauce, spooned into cold lettuce cups.",
+   "main": [
+    "ground turkey",
+    "butter lettuce",
+    "water chestnuts",
+    "carrot",
+    "hoisin sauce"
    ]
   },
   {
@@ -4809,6 +5354,19 @@ export const LIBRARY = {
     "skillet-12",
     "spatula",
     "box-grater"
+   ],
+   "skills": [
+    "stir-frying",
+    "julienne"
+   ],
+   "method": "stove",
+   "about": "Carrots, peppers, and snow peas cut into thin matchsticks and stir-fried fast with crisp tofu in a garlic-ginger sauce, over rice.",
+   "main": [
+    "extra-firm tofu",
+    "carrots",
+    "bell peppers",
+    "snow peas",
+    "garlic and ginger"
    ]
   },
   {
@@ -4909,6 +5467,19 @@ export const LIBRARY = {
     "ladle",
     "thermometer"
    ],
+   "skills": [
+    "simmering",
+    "poaching-eggs"
+   ],
+   "method": "stove",
+   "about": "A Japanese rice bowl of chicken and onion simmered in a sweet soy broth, with egg set gently on top.",
+   "main": [
+    "chicken thighs",
+    "eggs",
+    "onion",
+    "soy sauce",
+    "rice"
+   ],
    "variations": [
     {
      "title": "Easy-prep oyakodon",
@@ -5001,6 +5572,19 @@ export const LIBRARY = {
       "wooden-spoon",
       "ladle",
       "thermometer"
+     ],
+     "skills": [
+      "simmering",
+      "poaching-eggs"
+     ],
+     "method": "stove",
+     "about": "A Japanese rice bowl of chicken and onion simmered in a sweet soy broth, with egg set gently on top.",
+     "main": [
+      "chicken thighs",
+      "eggs",
+      "onion",
+      "soy sauce",
+      "rice"
      ],
      "id": "easy-prep"
     },
@@ -5095,6 +5679,19 @@ export const LIBRARY = {
       "wooden-spoon",
       "ladle",
       "thermometer"
+     ],
+     "skills": [
+      "simmering",
+      "poaching-eggs"
+     ],
+     "method": "stove",
+     "about": "A Japanese rice bowl of chicken and onion simmered in a sweet soy broth, with egg set gently on top.",
+     "main": [
+      "chicken thighs",
+      "eggs",
+      "onion",
+      "soy sauce",
+      "rice"
      ],
      "id": "sp-3",
      "level": "sp-3"
@@ -5204,6 +5801,19 @@ export const LIBRARY = {
     "fork",
     "spoon",
     "thermometer"
+   ],
+   "skills": [
+    "braising",
+    "reducing"
+   ],
+   "method": "stove",
+   "about": "Filipino chicken braised in vinegar, soy sauce, garlic, and bay leaves until tender, then glazed. Served with rice.",
+   "main": [
+    "chicken thighs",
+    "vinegar",
+    "soy sauce",
+    "garlic",
+    "bay leaves"
    ]
   },
   {
@@ -5310,6 +5920,19 @@ export const LIBRARY = {
     "thermometer",
     "foil",
     "oven-mitts"
+   ],
+   "skills": [
+    "searing",
+    "reducing"
+   ],
+   "method": "stove",
+   "about": "Thin chicken cutlets seared golden, in a bright lemon and caper pan sauce made in the same skillet.",
+   "main": [
+    "chicken breasts",
+    "lemon",
+    "capers",
+    "chicken broth",
+    "butter"
    ]
   },
   {
@@ -5427,6 +6050,19 @@ export const LIBRARY = {
     "fork",
     "thermometer",
     "oven-mitts"
+   ],
+   "skills": [
+    "reducing",
+    "searing"
+   ],
+   "method": "stove",
+   "about": "Seared salmon under a shiny homemade teriyaki glaze of pineapple juice and soy, with warm pineapple and rice.",
+   "main": [
+    "salmon",
+    "pineapple",
+    "soy sauce",
+    "brown sugar",
+    "rice"
    ]
   },
   {
@@ -5534,6 +6170,19 @@ export const LIBRARY = {
     "plate",
     "microwave",
     "thermometer"
+   ],
+   "skills": [
+    "timing",
+    "rolling-wrapping"
+   ],
+   "method": "stove",
+   "about": "Flour tortillas rolled around scrambled eggs, crispy potatoes, beef or turkey sausage, and cheese.",
+   "main": [
+    "eggs",
+    "potatoes",
+    "turkey or beef sausage",
+    "cheese",
+    "tortillas"
    ]
   },
   {
@@ -5618,6 +6267,16 @@ export const LIBRARY = {
     "measuring-spoons",
     "tongs",
     "oven-mitts"
+   ],
+   "skills": [
+    "emulsions"
+   ],
+   "method": "stove",
+   "about": "Roman pasta with a creamy sauce made only from cheese, black pepper, and starchy pasta water.",
+   "main": [
+    "spaghetti",
+    "pecorino or parmesan",
+    "black pepper"
    ]
   },
   {
@@ -5721,6 +6380,19 @@ export const LIBRARY = {
     "chef-knife",
     "cutting-board",
     "thermometer"
+   ],
+   "skills": [
+    "poaching-eggs",
+    "emulsions"
+   ],
+   "method": "stove",
+   "about": "Poached eggs on toasted English muffins with turkey bacon or smoked salmon, under a buttery hollandaise sauce.",
+   "main": [
+    "eggs",
+    "English muffins",
+    "turkey bacon or smoked salmon",
+    "butter",
+    "lemon"
    ]
   },
   {
@@ -5811,6 +6483,19 @@ export const LIBRARY = {
     "chef-knife",
     "cutting-board",
     "oven-mitts"
+   ],
+   "skills": [
+    "poaching-eggs",
+    "heat-control"
+   ],
+   "method": "stove",
+   "about": "Eggs cooked in simmering salsa, served on crisp corn tortillas with refried beans. A breakfast or supper dish.",
+   "main": [
+    "eggs",
+    "salsa",
+    "corn tortillas",
+    "refried beans",
+    "avocado"
    ]
   },
   {
@@ -5907,6 +6592,17 @@ export const LIBRARY = {
     "measuring-cups",
     "measuring-spoons",
     "spoon"
+   ],
+   "skills": [
+    "roux"
+   ],
+   "method": "stove",
+   "about": "Creamy macaroni in a homemade cheese sauce, made on the stove.",
+   "main": [
+    "elbow macaroni",
+    "cheddar cheese",
+    "milk",
+    "butter"
    ]
   },
   {
@@ -6021,6 +6717,19 @@ export const LIBRARY = {
     "oven-mitts",
     "paper-towels",
     "thermometer"
+   ],
+   "skills": [
+    "roux",
+    "batters"
+   ],
+   "method": "stove-oven",
+   "about": "Thin French pancakes wrapped around chicken and spinach in a creamy white sauce.",
+   "main": [
+    "chicken",
+    "spinach",
+    "milk",
+    "eggs",
+    "butter"
    ]
   },
   {
@@ -6143,6 +6852,19 @@ export const LIBRARY = {
     "ladle",
     "fork",
     "thermometer"
+   ],
+   "skills": [
+    "roux",
+    "blooming-spices"
+   ],
+   "method": "stove",
+   "about": "A mild, thick Japanese curry with chicken, potatoes, and carrots over rice. The curry sauce is made from scratch.",
+   "main": [
+    "chicken thighs",
+    "potatoes",
+    "carrots",
+    "onion",
+    "curry powder"
    ]
   },
   {
@@ -6264,6 +6986,19 @@ export const LIBRARY = {
     "wooden-spoon",
     "fork"
    ],
+   "skills": [
+    "blooming-spices",
+    "flavor-base"
+   ],
+   "method": "stove",
+   "about": "An Indian chickpea curry in a spiced onion and tomato sauce, with rice.",
+   "main": [
+    "chickpeas",
+    "onion",
+    "tomatoes",
+    "ginger and garlic",
+    "garam masala"
+   ],
    "variations": [
     {
      "title": "Chana masala",
@@ -6378,6 +7113,19 @@ export const LIBRARY = {
       "wooden-spoon",
       "fork"
      ],
+     "skills": [
+      "blooming-spices",
+      "flavor-base"
+     ],
+     "method": "stove",
+     "about": "An Indian chickpea curry in a spiced onion and tomato sauce, with rice.",
+     "main": [
+      "chickpeas",
+      "onion",
+      "tomatoes",
+      "ginger and garlic",
+      "garam masala"
+     ],
      "id": "sp-4",
      "level": "sp-4"
     }
@@ -6491,6 +7239,19 @@ export const LIBRARY = {
     "immersion-blender",
     "skillet-nonstick-8",
     "ladle"
+   ],
+   "skills": [
+    "cooking-legumes",
+    "simmering"
+   ],
+   "method": "stove",
+   "about": "Turkish red lentil soup: lentils simmered with onion, carrot, and a little tomato until soft, blended smooth, and finished with lemon and a paprika butter.",
+   "main": [
+    "red lentils",
+    "onion",
+    "carrot",
+    "tomato paste",
+    "lemon"
    ]
   },
   {
@@ -6619,6 +7380,19 @@ export const LIBRARY = {
     "wooden-spoon",
     "saucepan-medium",
     "fork"
+   ],
+   "skills": [
+    "flavor-base",
+    "simmering",
+    "cooking-legumes"
+   ],
+   "method": "stove",
+   "about": "A Louisiana dish of red beans soaked overnight and simmered until creamy with onion, celery, and green pepper and smoked beef sausage, over rice.",
+   "main": [
+    "dried red kidney beans",
+    "beef sausage (optional)",
+    "onion, celery, bell pepper",
+    "rice"
    ]
   },
   {
@@ -6750,6 +7524,19 @@ export const LIBRARY = {
     "wooden-spoon",
     "fork",
     "thermometer"
+   ],
+   "skills": [
+    "flavor-base",
+    "sauteing"
+   ],
+   "method": "stove",
+   "about": "Louisiana one-pot rice: chicken and smoked chicken andouille browned, onion, celery, and green pepper sweated, the pot deglazed, and the rice cooked in the flavorful broth.",
+   "main": [
+    "chicken thighs",
+    "smoked chicken andouille",
+    "onion, celery, green pepper",
+    "rice",
+    "tomatoes"
    ]
   },
   {
@@ -6866,6 +7653,19 @@ export const LIBRARY = {
     "wooden-spoon",
     "thermometer"
    ],
+   "skills": [
+    "blooming-spices",
+    "braising"
+   ],
+   "method": "stove",
+   "about": "A Moroccan stew of chicken slowly braised with spices, lemon, and green olives.",
+   "main": [
+    "chicken thighs",
+    "onion",
+    "green olives",
+    "lemon",
+    "warm spices"
+   ],
    "variations": [
     {
      "title": "Chicken tagine with olives",
@@ -6980,6 +7780,19 @@ export const LIBRARY = {
       "tongs",
       "wooden-spoon",
       "thermometer"
+     ],
+     "skills": [
+      "blooming-spices",
+      "braising"
+     ],
+     "method": "stove",
+     "about": "A Moroccan stew of chicken slowly braised with spices, lemon, and green olives.",
+     "main": [
+      "chicken thighs",
+      "onion",
+      "green olives",
+      "lemon",
+      "warm spices"
      ],
      "id": "sp-4",
      "level": "sp-4"
@@ -7115,6 +7928,19 @@ export const LIBRARY = {
     "stockpot",
     "colander"
    ],
+   "skills": [
+    "braising",
+    "flavor-base"
+   ],
+   "method": "stove",
+   "about": "Beef chuck braised for hours in tomato with a soffritto of finely chopped onion, carrot, and celery, then shredded into the sauce and served over pasta.",
+   "main": [
+    "beef chuck",
+    "onion, carrot, celery",
+    "crushed tomatoes",
+    "beef broth",
+    "pasta"
+   ],
    "variations": [
     {
      "title": "Ragù bolognese",
@@ -7239,6 +8065,19 @@ export const LIBRARY = {
       "colander",
       "heatproof-bowl"
      ],
+     "skills": [
+      "braising",
+      "flavor-base"
+     ],
+     "method": "stove",
+     "about": "Beef chuck braised for hours in tomato with a soffritto of finely chopped onion, carrot, and celery, then shredded into the sauce and served over pasta.",
+     "main": [
+      "beef chuck",
+      "onion, carrot, celery",
+      "crushed tomatoes",
+      "beef broth",
+      "pasta"
+     ],
      "id": "bolognese"
     }
    ]
@@ -7341,6 +8180,19 @@ export const LIBRARY = {
     "pot-large",
     "wooden-spoon",
     "fork"
+   ],
+   "skills": [
+    "cooking-legumes",
+    "crisping"
+   ],
+   "method": "stove",
+   "about": "Brown lentils and rice cooked together with cumin, topped with a big pile of slowly fried crispy onions and a spoon of yogurt.",
+   "main": [
+    "brown lentils",
+    "rice",
+    "onions",
+    "cumin",
+    "yogurt"
    ]
   },
   {
@@ -7495,6 +8347,19 @@ export const LIBRARY = {
     "fork",
     "spoon",
     "thermometer"
+   ],
+   "skills": [
+    "marinating",
+    "building-a-sauce"
+   ],
+   "method": "stove",
+   "about": "Marinated chicken in a mild, creamy, buttery tomato curry sauce, with rice.",
+   "main": [
+    "chicken thighs",
+    "yogurt",
+    "tomatoes",
+    "butter and cream",
+    "garam masala"
    ]
   },
   {
@@ -7622,6 +8487,19 @@ export const LIBRARY = {
     "microwave",
     "paper-towels"
    ],
+   "skills": [
+    "marinating",
+    "broiling"
+   ],
+   "method": "oven",
+   "about": "Lebanese chicken skewers marinated in yogurt, lemon, and garlic, broiled until charred at the edges and 165°F inside, with a quick garlic sauce.",
+   "main": [
+    "chicken thighs",
+    "yogurt",
+    "lemon",
+    "garlic",
+    "paprika"
+   ],
    "variations": [
     {
      "title": "Shish taouk",
@@ -7743,6 +8621,19 @@ export const LIBRARY = {
       "microwave",
       "paper-towels"
      ],
+     "skills": [
+      "marinating",
+      "broiling"
+     ],
+     "method": "oven",
+     "about": "Lebanese chicken skewers marinated in yogurt, lemon, and garlic, broiled until charred at the edges and 165°F inside, with a quick garlic sauce.",
+     "main": [
+      "chicken thighs",
+      "yogurt",
+      "lemon",
+      "garlic",
+      "paprika"
+     ],
      "id": "sp-3",
      "level": "sp-3"
     }
@@ -7857,6 +8748,19 @@ export const LIBRARY = {
     "plate",
     "thermometer"
    ],
+   "skills": [
+    "thin-slicing",
+    "marinating"
+   ],
+   "method": "stove",
+   "about": "Korean thin-sliced beef in a sweet soy, pear, and garlic marinade, seared fast and served over rice.",
+   "main": [
+    "beef ribeye",
+    "soy sauce",
+    "Asian pear",
+    "garlic",
+    "rice"
+   ],
    "variations": [
     {
      "title": "Chicken bulgogi",
@@ -7961,6 +8865,19 @@ export const LIBRARY = {
       "plate",
       "thermometer"
      ],
+     "skills": [
+      "thin-slicing",
+      "marinating"
+     ],
+     "method": "stove",
+     "about": "Korean thin-sliced beef in a sweet soy, pear, and garlic marinade, seared fast and served over rice.",
+     "main": [
+      "beef ribeye",
+      "soy sauce",
+      "Asian pear",
+      "garlic",
+      "rice"
+     ],
      "id": "chicken"
     }
    ]
@@ -8045,6 +8962,17 @@ export const LIBRARY = {
     "rolling-pin",
     "oven-mitts",
     "tongs"
+   ],
+   "skills": [
+    "flatbreads",
+    "yeast-dough"
+   ],
+   "method": "oven",
+   "about": "Soft pita rolled thin and baked on a very hot sheet until each one puffs into a pocket.",
+   "main": [
+    "flour",
+    "yeast",
+    "olive oil"
    ]
   },
   {
@@ -8133,6 +9061,16 @@ export const LIBRARY = {
     "pastry-brush",
     "oven-mitts",
     "cooling-rack"
+   ],
+   "skills": [
+    "cutting-in-fat",
+    "folding-layers"
+   ],
+   "method": "oven",
+   "about": "Tall, flaky biscuits made with cold butter folded into layers. A breakfast bake.",
+   "main": [
+    "butter",
+    "buttermilk"
    ]
   },
   {
@@ -8235,6 +9173,17 @@ export const LIBRARY = {
     "foil",
     "oven-mitts",
     "cooling-rack"
+   ],
+   "skills": [
+    "yeast-dough"
+   ],
+   "method": "oven",
+   "about": "A soft, slightly sweet braided bread made with eggs and honey.",
+   "main": [
+    "yeast",
+    "eggs",
+    "honey",
+    "oil"
    ]
   },
   {
@@ -8344,6 +9293,19 @@ export const LIBRARY = {
     "thermometer",
     "spatula"
    ],
+   "skills": [
+    "binders",
+    "temping-meat"
+   ],
+   "method": "oven",
+   "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.",
+   "main": [
+    "ground beef",
+    "onion",
+    "eggs",
+    "rolled oats",
+    "ketchup"
+   ],
    "variations": [
     {
      "title": "Turkey meatloaf with glaze",
@@ -8445,6 +9407,19 @@ export const LIBRARY = {
       "oven-mitts",
       "thermometer",
       "spatula"
+     ],
+     "skills": [
+      "binders",
+      "temping-meat"
+     ],
+     "method": "oven",
+     "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.",
+     "main": [
+      "ground beef",
+      "onion",
+      "eggs",
+      "rolled oats",
+      "ketchup"
      ],
      "id": "turkey"
     }
@@ -8585,6 +9560,18 @@ export const LIBRARY = {
     "microwave",
     "paper-towels"
    ],
+   "skills": [
+    "binders"
+   ],
+   "method": "stove",
+   "about": "Ground lamb mixed with onion, parsley, and warm spices, shaped by hand and browned, on flatbread with a yogurt-mint sauce.",
+   "main": [
+    "ground lamb",
+    "onion",
+    "parsley",
+    "Greek yogurt",
+    "flatbread"
+   ],
    "variations": [
     {
      "title": "Lamb kofta with yogurt sauce",
@@ -8716,6 +9703,18 @@ export const LIBRARY = {
       "microwave",
       "paper-towels"
      ],
+     "skills": [
+      "binders"
+     ],
+     "method": "stove",
+     "about": "Ground lamb mixed with onion, parsley, and warm spices, shaped by hand and browned, on flatbread with a yogurt-mint sauce.",
+     "main": [
+      "ground lamb",
+      "onion",
+      "parsley",
+      "Greek yogurt",
+      "flatbread"
+     ],
      "id": "sp-3",
      "level": "sp-3"
     }
@@ -8811,6 +9810,18 @@ export const LIBRARY = {
     "oven-mitts",
     "spatula",
     "cooling-rack"
+   ],
+   "skills": [
+    "browning-butter",
+    "creaming"
+   ],
+   "method": "stove-oven",
+   "about": "Chocolate chip cookies made with browned butter for a toasty, nutty flavor.",
+   "main": [
+    "butter",
+    "chocolate chips",
+    "brown sugar",
+    "eggs"
    ]
   },
   {
@@ -8883,6 +9894,16 @@ export const LIBRARY = {
     "skillet-12",
     "spatula",
     "plate"
+   ],
+   "skills": [
+    "flatbreads"
+   ],
+   "method": "stove",
+   "about": "Thin, crisp, cracker-like rounds made with no yeast or baking powder, the bread of the Feast of Unleavened Bread.",
+   "main": [
+    "flour",
+    "water",
+    "olive oil"
    ]
   },
   {
@@ -8967,6 +9988,18 @@ export const LIBRARY = {
     "oven-mitts",
     "spatula",
     "cooling-rack"
+   ],
+   "skills": [
+    "pastry",
+    "rolling-wrapping"
+   ],
+   "method": "oven",
+   "about": "Small crescent rolls of tender cottage cheese and butter pastry, rolled around cinnamon sugar. Made with no yeast or baking powder.",
+   "main": [
+    "cottage cheese",
+    "butter",
+    "flour",
+    "cinnamon sugar"
    ]
   },
   {
@@ -9062,6 +10095,18 @@ export const LIBRARY = {
     "wooden-spoon",
     "thermometer",
     "spoon"
+   ],
+   "skills": [
+    "reading-labels"
+   ],
+   "method": "stove",
+   "about": "Ground beef browned with a seasoning mix made at home, in label-checked shells with lettuce, tomato, and cheese.",
+   "main": [
+    "ground beef",
+    "taco shells",
+    "chili powder and cumin",
+    "lettuce",
+    "cheddar"
    ],
    "level": "sp-2"
   },
@@ -9166,6 +10211,18 @@ export const LIBRARY = {
     "plate",
     "tongs"
    ],
+   "skills": [
+    "mise-en-place"
+   ],
+   "method": "no-cook",
+   "about": "Rice noodles soaked in hot water, topped with rotisserie chicken, lettuce, cucumber, carrot, herbs, and peanuts, with nước chấm.",
+   "main": [
+    "rice noodles",
+    "rotisserie chicken",
+    "cucumber",
+    "carrots",
+    "fish sauce"
+   ],
    "level": "sp-2"
   },
   {
@@ -9236,6 +10293,18 @@ export const LIBRARY = {
     "plate",
     "spoon",
     "measuring-spoons"
+   ],
+   "skills": [
+    "knife-safety"
+   ],
+   "method": "no-cook",
+   "about": "Tomato and fresh mozzarella sliced with a paring knife and layered with basil on ciabatta.",
+   "main": [
+    "ciabatta",
+    "tomatoes",
+    "fresh mozzarella",
+    "basil",
+    "olive oil"
    ],
    "level": "sp-2"
   },
@@ -9326,6 +10395,18 @@ export const LIBRARY = {
     "paper-towels",
     "paring-knife",
     "spoon"
+   ],
+   "skills": [
+    "dressings"
+   ],
+   "method": "no-cook",
+   "about": "An Indian chickpea salad with green onion, tomato, cucumber, cilantro, lime, and chaat masala.",
+   "main": [
+    "canned chickpeas",
+    "tomato",
+    "cucumber",
+    "green onion",
+    "lime"
    ],
    "level": "sp-2"
   },
@@ -9424,6 +10505,18 @@ export const LIBRARY = {
     "fork",
     "plate"
    ],
+   "skills": [
+    "dressings"
+   ],
+   "method": "no-cook",
+   "about": "Romaine, rotisserie chicken, and parmesan in a mayonnaise-based Caesar dressing with no raw egg, rolled in tortillas.",
+   "main": [
+    "romaine",
+    "rotisserie chicken",
+    "parmesan",
+    "mayonnaise",
+    "flour tortillas"
+   ],
    "level": "sp-2"
   },
   {
@@ -9521,6 +10614,18 @@ export const LIBRARY = {
     "spatula",
     "thermometer"
    ],
+   "skills": [
+    "cooking-fish"
+   ],
+   "method": "oven",
+   "about": "Cod strips crumbed and baked crisp, with tartar sauce and lemon.",
+   "main": [
+    "cod",
+    "breadcrumbs",
+    "egg",
+    "lemon",
+    "tartar sauce"
+   ],
    "level": "sp-2"
   },
   {
@@ -9615,6 +10720,19 @@ export const LIBRARY = {
     "fork",
     "measuring-spoons",
     "spoon"
+   ],
+   "skills": [
+    "measuring",
+    "timing"
+   ],
+   "method": "stove-oven",
+   "about": "Egyptian fava beans warmed and mashed with cumin, lemon, and olive oil, with baked pita chips and a cucumber-tomato salad.",
+   "main": [
+    "canned fava beans",
+    "cumin",
+    "lemon",
+    "pita",
+    "cucumber and tomato"
    ],
    "level": "sp-2"
   },
@@ -9713,6 +10831,18 @@ export const LIBRARY = {
     "sheet-pan",
     "oven-mitts"
    ],
+   "skills": [
+    "fine-chopping"
+   ],
+   "method": "no-cook",
+   "about": "Hummus made in the blender from canned chickpeas, with cucumber, tomatoes, and pita.",
+   "main": [
+    "canned chickpeas",
+    "tahini",
+    "lemon",
+    "cucumber",
+    "pita"
+   ],
    "level": "sp-2"
   },
   {
@@ -9799,6 +10929,18 @@ export const LIBRARY = {
     "microwave",
     "cutting-board",
     "paring-knife"
+   ],
+   "skills": [
+    "reading-labels"
+   ],
+   "method": "stove",
+   "about": "Indian ground beef cooked with onion, tomato, ginger, garlic, and frozen peas, served with flatbread or rice.",
+   "main": [
+    "ground beef",
+    "frozen peas",
+    "frozen diced onion",
+    "jarred ginger and garlic",
+    "garam masala"
    ],
    "level": "sp-2"
   },
@@ -9914,6 +11056,18 @@ export const LIBRARY = {
     "spatula",
     "thermometer"
    ],
+   "skills": [
+    "temping-meat"
+   ],
+   "method": "stove",
+   "about": "Turkish beef patties with onion, parsley, and cumin, cooked to 160°F, with a tomato-cucumber salad.",
+   "main": [
+    "ground beef",
+    "onion",
+    "parsley",
+    "cumin",
+    "tomato and cucumber"
+   ],
    "level": "sp-2"
   },
   {
@@ -9988,6 +11142,18 @@ export const LIBRARY = {
     "paring-knife",
     "kitchen-towel",
     "spoon"
+   ],
+   "skills": [
+    "mise-en-place"
+   ],
+   "method": "oven",
+   "about": "Baked potatoes split and loaded with butter, cheddar, sour cream, and green onion from a set-out topping bar.",
+   "main": [
+    "russet potatoes",
+    "cheddar",
+    "sour cream",
+    "green onions",
+    "butter"
    ],
    "level": "sp-2"
   },
@@ -10064,6 +11230,18 @@ export const LIBRARY = {
     "spoon",
     "pastry-brush"
    ],
+   "skills": [
+    "measuring"
+   ],
+   "method": "oven",
+   "about": "Small pitas topped with sauce, mozzarella, peppers, and mushrooms, baked until bubbling.",
+   "main": [
+    "pita",
+    "pizza sauce",
+    "mozzarella",
+    "bell pepper",
+    "mushrooms"
+   ],
    "level": "sp-2"
   },
   {
@@ -10130,6 +11308,18 @@ export const LIBRARY = {
     "spoon",
     "measuring-cups",
     "measuring-spoons"
+   ],
+   "skills": [
+    "heat-control"
+   ],
+   "method": "oven",
+   "about": "Bolillo rolls split and spread with refried beans and cheese, baked until melted, and topped with pico de gallo. The beans are vegetarian, label-checked.",
+   "main": [
+    "bolillo rolls",
+    "vegetarian refried beans",
+    "Monterey Jack",
+    "tomatoes",
+    "onion"
    ],
    "level": "sp-2"
   },
@@ -10210,6 +11400,18 @@ export const LIBRARY = {
     "paring-knife",
     "plate"
    ],
+   "skills": [
+    "knife-safety",
+    "rolling-wrapping"
+   ],
+   "method": "no-cook",
+   "about": "Japanese rice balls shaped by hand around canned tuna or salmon, wrapped in a strip of nori, with cucumber sticks. Rice from a rice cooker.",
+   "main": [
+    "cooked short-grain rice",
+    "canned tuna or salmon",
+    "nori",
+    "cucumber"
+   ],
    "level": "sp-2"
   },
   {
@@ -10283,6 +11485,17 @@ export const LIBRARY = {
     "cutting-board",
     "paring-knife",
     "small-bowl"
+   ],
+   "skills": [
+    "cooking-fish"
+   ],
+   "method": "oven",
+   "about": "Japanese salted salmon, baked until it flakes, with rice and lemon.",
+   "main": [
+    "salmon fillet",
+    "salt",
+    "rice",
+    "lemon"
    ],
    "level": "sp-2"
   },
@@ -10374,6 +11587,18 @@ export const LIBRARY = {
     "thermometer",
     "paper-towels"
    ],
+   "skills": [
+    "handling-poultry"
+   ],
+   "method": "oven",
+   "about": "Ready-cut chicken baked to 165°F and tossed in a teriyaki glaze, over rice.",
+   "main": [
+    "ready-cut chicken",
+    "soy sauce",
+    "honey",
+    "jarred ginger and garlic",
+    "rice"
+   ],
    "level": "sp-2"
   },
   {
@@ -10457,6 +11682,18 @@ export const LIBRARY = {
     "skillet-12",
     "wooden-spoon",
     "tongs"
+   ],
+   "skills": [
+    "fine-chopping"
+   ],
+   "method": "stove",
+   "about": "Spaghetti tossed in olive oil gently cooked with sliced garlic and red pepper flakes, finished with parsley and pasta water.",
+   "main": [
+    "spaghetti",
+    "garlic",
+    "olive oil",
+    "parsley",
+    "red pepper flakes"
    ],
    "level": "sp-3"
   },
@@ -10563,6 +11800,19 @@ export const LIBRARY = {
     "wooden-spoon",
     "slotted-spoon",
     "fork"
+   ],
+   "skills": [
+    "dicing",
+    "simmering"
+   ],
+   "method": "stove",
+   "about": "A Georgian stew of eggplant, peppers, tomato, potato, and onion, simmered soft and finished with plenty of herbs.",
+   "main": [
+    "eggplant",
+    "bell peppers",
+    "tomatoes",
+    "potatoes",
+    "cilantro and basil"
    ],
    "level": "sp-3"
   },
@@ -10677,6 +11927,17 @@ export const LIBRARY = {
     "spoon",
     "fork"
    ],
+   "skills": [
+    "cooking-fish"
+   ],
+   "method": "oven",
+   "about": "Salmon, cod, or tilapia fillets baked with lemon, dill, and garlic until they flake and reach 145°F, with a side timed to finish at the same time.",
+   "main": [
+    "salmon, cod, or tilapia fillets",
+    "lemon",
+    "dill",
+    "garlic"
+   ],
    "level": "sp-3"
   },
   {
@@ -10774,6 +12035,18 @@ export const LIBRARY = {
     "fork",
     "spatula",
     "plate"
+   ],
+   "skills": [
+    "dicing"
+   ],
+   "method": "stove",
+   "about": "Flour tortillas crisped in a skillet around melted cheese, black beans, and diced onion and pepper, with salsa and sour cream.",
+   "main": [
+    "flour tortillas",
+    "black beans",
+    "cheddar",
+    "onion",
+    "bell pepper"
    ],
    "level": "sp-3"
   },
@@ -10877,6 +12150,18 @@ export const LIBRARY = {
     "spoon",
     "microwave",
     "plate"
+   ],
+   "skills": [
+    "fine-chopping"
+   ],
+   "method": "no-cook",
+   "about": "Crisp tostada shells spread with mashed beans, topped with lettuce, cheese, and fresh pico de gallo. Store shells are label-checked.",
+   "main": [
+    "tostada shells",
+    "pinto beans",
+    "tomatoes",
+    "onion",
+    "cilantro"
    ],
    "level": "sp-3"
   },
@@ -10987,6 +12272,19 @@ export const LIBRARY = {
     "heatproof-bowl",
     "thermometer",
     "fork"
+   ],
+   "skills": [
+    "flavor-base",
+    "sauteing"
+   ],
+   "method": "stove",
+   "about": "Ground beef browned over a sofrito of onion, pepper, and garlic, simmered with tomato, raisins, and olives, over rice.",
+   "main": [
+    "ground beef",
+    "onion and bell pepper",
+    "tomato sauce",
+    "raisins",
+    "olives"
    ],
    "level": "sp-3"
   },
@@ -11105,6 +12403,18 @@ export const LIBRARY = {
     "oven-mitts",
     "bread-knife"
    ],
+   "skills": [
+    "cooking-fish"
+   ],
+   "method": "oven",
+   "about": "Firm white fish coated in chermoula, a herb, garlic, cumin, and lemon paste, baked with tomatoes until it flakes.",
+   "main": [
+    "cod or another firm white fish",
+    "cilantro and parsley",
+    "garlic",
+    "cumin",
+    "lemon"
+   ],
    "level": "sp-3"
   },
   {
@@ -11214,6 +12524,19 @@ export const LIBRARY = {
     "thermometer",
     "whisk"
    ],
+   "skills": [
+    "handling-poultry",
+    "breading-frying"
+   ],
+   "method": "oven",
+   "about": "Chicken breast trimmed into strips, breaded, and baked crisp to 165°F, with a honey-mustard dip.",
+   "main": [
+    "chicken breast",
+    "breadcrumbs",
+    "egg",
+    "honey",
+    "mustard"
+   ],
    "level": "sp-3"
   },
   {
@@ -11308,6 +12631,18 @@ export const LIBRARY = {
     "foil",
     "oven-mitts",
     "cooling-rack"
+   ],
+   "skills": [
+    "yeast-dough"
+   ],
+   "method": "oven",
+   "about": "Soft, buttery pull-apart rolls, each weighed so they bake evenly, with two or three shaped as knots or small braids.",
+   "main": [
+    "flour",
+    "yeast",
+    "milk",
+    "butter",
+    "egg"
    ],
    "level": "sp-3"
   },
@@ -11414,6 +12749,20 @@ export const LIBRARY = {
     "pastry-brush",
     "kitchen-towel"
    ],
+   "skills": [
+    "julienne",
+    "rolling-wrapping"
+   ],
+   "method": "stove",
+   "about": "Korean rice rolls in seaweed, filled with julienned carrot and cucumber, spinach, and strips of thin omelet, then sliced.",
+   "main": [
+    "short-grain rice",
+    "nori",
+    "carrot",
+    "cucumber",
+    "egg",
+    "spinach"
+   ],
    "level": "sp-3"
   },
   {
@@ -11495,6 +12844,18 @@ export const LIBRARY = {
     "oven-mitts",
     "thermometer",
     "fork"
+   ],
+   "skills": [
+    "cooking-fish",
+    "searing"
+   ],
+   "method": "stove",
+   "about": "Trout fillets seared skin-side down until the skin is crisp, finished with butter and lemon.",
+   "main": [
+    "trout fillets",
+    "butter",
+    "lemon",
+    "parsley"
    ],
    "level": "sp-3"
   },
@@ -11605,6 +12966,19 @@ export const LIBRARY = {
     "ladle",
     "fork"
    ],
+   "skills": [
+    "dicing",
+    "flavor-base"
+   ],
+   "method": "stove",
+   "about": "North Indian kidney beans simmered in a thick, spiced onion-tomato gravy, served with rice.",
+   "main": [
+    "kidney beans",
+    "onion",
+    "tomatoes",
+    "ginger and garlic",
+    "rice"
+   ],
    "level": "sp-3"
   },
   {
@@ -11692,6 +13066,17 @@ export const LIBRARY = {
     "chef-knife",
     "cutting-board"
    ],
+   "skills": [
+    "yeast-dough"
+   ],
+   "method": "oven",
+   "about": "A soft white sandwich loaf, kneaded until the dough stretches thin, proofed in a loaf pan, and baked to 190°F inside.",
+   "main": [
+    "flour",
+    "yeast",
+    "milk",
+    "butter"
+   ],
    "level": "sp-3"
   },
   {
@@ -11764,6 +13149,17 @@ export const LIBRARY = {
     "pot-large",
     "colander",
     "tongs"
+   ],
+   "skills": [
+    "fine-chopping"
+   ],
+   "method": "stove",
+   "about": "Shanghai-style noodles tossed in scallions fried slowly in oil until crisp, with soy sauce and a little sugar.",
+   "main": [
+    "wheat noodles",
+    "scallions",
+    "soy sauce",
+    "oil"
    ],
    "level": "sp-3"
   },
@@ -11861,6 +13257,19 @@ export const LIBRARY = {
     "measuring-cups",
     "measuring-spoons",
     "spoon"
+   ],
+   "skills": [
+    "dicing",
+    "dressings"
+   ],
+   "method": "no-cook",
+   "about": "A Peruvian salad of corn, lima beans or edamame, tomato, red onion, olives, and cheese in a lime dressing.",
+   "main": [
+    "corn",
+    "lima beans or edamame",
+    "tomatoes",
+    "queso fresco",
+    "lime"
    ],
    "level": "sp-3"
   },
@@ -11963,6 +13372,17 @@ export const LIBRARY = {
     "oven-mitts",
     "skillet-nonstick-8"
    ],
+   "skills": [
+    "cooking-fish"
+   ],
+   "method": "stove",
+   "about": "White fish fillets steamed on a plate in a covered pot, then topped with ginger, green onion, soy, and a little warm oil.",
+   "main": [
+    "white fish fillets",
+    "ginger",
+    "green onions",
+    "soy sauce"
+   ],
    "variations": [
     {
      "title": "Fish in parchment packets",
@@ -12057,6 +13477,17 @@ export const LIBRARY = {
       "parchment",
       "table-knife"
      ],
+     "skills": [
+      "cooking-fish"
+     ],
+     "method": "stove",
+     "about": "White fish fillets steamed on a plate in a covered pot, then topped with ginger, green onion, soy, and a little warm oil.",
+     "main": [
+      "white fish fillets",
+      "ginger",
+      "green onions",
+      "soy sauce"
+     ],
      "id": "parchment"
     }
    ],
@@ -12145,6 +13576,18 @@ export const LIBRARY = {
     "spoon",
     "fork"
    ],
+   "skills": [
+    "fine-chopping"
+   ],
+   "method": "no-cook",
+   "about": "A bright parsley salad with mint, tomato, and a little bulgur, dressed with lemon and olive oil. The knife work is the dish.",
+   "main": [
+    "parsley",
+    "bulgur",
+    "tomatoes",
+    "mint",
+    "lemon"
+   ],
    "level": "sp-3"
   },
   {
@@ -12231,6 +13674,18 @@ export const LIBRARY = {
     "tongs",
     "spatula",
     "thermometer"
+   ],
+   "skills": [
+    "temping-meat",
+    "searing"
+   ],
+   "method": "stove",
+   "about": "Thick, juicy beef burgers seared in a skillet and checked with a thermometer until they reach 160°F in the middle, on toasted buns.",
+   "main": [
+    "ground beef",
+    "burger buns",
+    "lettuce",
+    "tomato"
    ],
    "level": "sp-3"
   },
@@ -12346,6 +13801,19 @@ export const LIBRARY = {
     "skillet-12",
     "tongs",
     "wooden-spoon"
+   ],
+   "skills": [
+    "julienne",
+    "stir-frying"
+   ],
+   "method": "stove",
+   "about": "Soft egg noodles tossed with julienned carrots, peppers, cabbage, and green onion in a soy-ginger sauce.",
+   "main": [
+    "egg noodles",
+    "carrots",
+    "bell peppers",
+    "cabbage",
+    "soy sauce"
    ],
    "level": "sp-3"
   },
@@ -12463,6 +13931,18 @@ export const LIBRARY = {
     "kitchen-scale",
     "thermometer",
     "tongs"
+   ],
+   "skills": [
+    "cooling-reheating"
+   ],
+   "method": "no-cook",
+   "about": "A guest platter of beef bresaola and beef salami, cheeses, marinated vegetables, and olives, with a chopped salad.",
+   "main": [
+    "beef salami",
+    "bresaola",
+    "cheese",
+    "artichokes",
+    "olives"
    ],
    "level": "sp-4"
   },
@@ -12594,6 +14074,19 @@ export const LIBRARY = {
     "paper-towels",
     "plate"
    ],
+   "skills": [
+    "timing",
+    "stir-frying"
+   ],
+   "method": "stove",
+   "about": "Rice topped with separately cooked vegetables, seasoned beef, a fried egg, and gochujang.",
+   "main": [
+    "rice",
+    "beef",
+    "spinach",
+    "carrots and zucchini",
+    "gochujang"
+   ],
    "level": "sp-4"
   },
   {
@@ -12706,6 +14199,18 @@ export const LIBRARY = {
     "thermometer",
     "plate"
    ],
+   "skills": [
+    "searing"
+   ],
+   "method": "stove",
+   "about": "Vietnamese shaking beef: cubed sirloin seared hard and tossed in a savory sauce, over watercress, with a lime-pepper dip.",
+   "main": [
+    "sirloin",
+    "watercress",
+    "garlic",
+    "soy sauce",
+    "lime"
+   ],
    "level": "sp-4"
   },
   {
@@ -12811,6 +14316,19 @@ export const LIBRARY = {
     "can-opener",
     "thermometer",
     "bread-knife"
+   ],
+   "skills": [
+    "breaking-down-chicken",
+    "braising"
+   ],
+   "method": "stove",
+   "about": "A whole chicken broken into pieces at home and braised with tomatoes, peppers, mushrooms, and herbs.",
+   "main": [
+    "whole chicken",
+    "tomatoes",
+    "bell peppers",
+    "mushrooms",
+    "onion"
    ],
    "level": "sp-4"
   },
@@ -12921,6 +14439,18 @@ export const LIBRARY = {
     "oven-mitts",
     "plate"
    ],
+   "skills": [
+    "layering"
+   ],
+   "method": "stove-oven",
+   "about": "Chicken enchiladas in red sauce for 12, scaled by hand from a recipe for 4, baked under cheese.",
+   "main": [
+    "chicken thighs",
+    "corn tortillas",
+    "dried red chiles",
+    "onion",
+    "cheese"
+   ],
    "level": "sp-4"
   },
   {
@@ -13030,6 +14560,19 @@ export const LIBRARY = {
     "measuring-spoons",
     "sheet-pan"
    ],
+   "skills": [
+    "breaking-down-chicken",
+    "making-stock"
+   ],
+   "method": "stove",
+   "about": "One whole chicken broken down: the breasts pan-roasted, the legs and back made into a soup, with the cost per serving worked out.",
+   "main": [
+    "whole chicken",
+    "carrots",
+    "celery",
+    "onion",
+    "thyme"
+   ],
    "level": "sp-4"
   },
   {
@@ -13118,6 +14661,19 @@ export const LIBRARY = {
     "measuring-spoons",
     "wooden-spoon",
     "spoon"
+   ],
+   "skills": [
+    "searing",
+    "reducing"
+   ],
+   "method": "stove",
+   "about": "Duck breast scored and seared slowly skin-side down until crisp, the fat saved, with a cherry pan sauce.",
+   "main": [
+    "duck breasts",
+    "cherries",
+    "broth",
+    "balsamic vinegar",
+    "thyme"
    ],
    "level": "sp-4"
   },
@@ -13217,6 +14773,18 @@ export const LIBRARY = {
     "silicone-spatula",
     "plate"
    ],
+   "skills": [
+    "emulsions"
+   ],
+   "method": "stove",
+   "about": "Spanish potato salad with carrots, peas, and tuna, bound with mayonnaise made from pasteurized eggs.",
+   "main": [
+    "potatoes",
+    "carrots",
+    "peas",
+    "canned tuna",
+    "pasteurized eggs"
+   ],
    "level": "sp-4"
   },
   {
@@ -13307,6 +14875,19 @@ export const LIBRARY = {
     "thermometer",
     "kitchen-scale",
     "box-grater"
+   ],
+   "skills": [
+    "thin-slicing",
+    "searing"
+   ],
+   "method": "stove",
+   "about": "Flank steak trimmed, seared, rested, and sliced thin against the grain, with a herb sauce.",
+   "main": [
+    "flank steak",
+    "parsley",
+    "garlic",
+    "olive oil",
+    "lemon"
    ],
    "level": "sp-4"
   },
@@ -13447,6 +15028,19 @@ export const LIBRARY = {
     "kitchen-scale",
     "thermometer"
    ],
+   "skills": [
+    "cooling-reheating",
+    "cooking-legumes"
+   ],
+   "method": "stove-oven",
+   "about": "Hummus from dried chickpeas, baba ghanoush, tabbouleh, and labneh, with pita, set out for guests.",
+   "main": [
+    "dried chickpeas",
+    "eggplant",
+    "parsley",
+    "labneh",
+    "pita"
+   ],
    "level": "sp-4"
   },
   {
@@ -13552,6 +15146,18 @@ export const LIBRARY = {
     "thermometer",
     "spatula",
     "plate"
+   ],
+   "skills": [
+    "cooking-fish"
+   ],
+   "method": "oven",
+   "about": "A whole snapper baked in a Veracruz sauce of tomatoes, olives, capers, and pickled peppers.",
+   "main": [
+    "whole red snapper",
+    "tomatoes",
+    "green olives",
+    "capers",
+    "pickled jalapeños"
    ],
    "level": "sp-4"
   },
@@ -13663,6 +15269,19 @@ export const LIBRARY = {
     "thermometer",
     "plate"
    ],
+   "skills": [
+    "timing",
+    "searing"
+   ],
+   "method": "stove",
+   "about": "A composed salad of seared tuna, soft-boiled eggs, green beans, potatoes, tomatoes, and olives, each part timed.",
+   "main": [
+    "tuna steak",
+    "eggs",
+    "green beans",
+    "small potatoes",
+    "olives"
+   ],
    "level": "sp-4"
   },
   {
@@ -13764,6 +15383,19 @@ export const LIBRARY = {
     "fork",
     "tongs",
     "thermometer"
+   ],
+   "skills": [
+    "breaking-down-chicken",
+    "roasting"
+   ],
+   "method": "oven",
+   "about": "Quail flattened, glazed with pomegranate molasses and spices, and roasted, over bulgur.",
+   "main": [
+    "quail",
+    "pomegranate molasses",
+    "garlic",
+    "cinnamon",
+    "bulgur"
    ],
    "level": "sp-4"
   },
@@ -13873,6 +15505,19 @@ export const LIBRARY = {
     "thermometer",
     "foil"
    ],
+   "skills": [
+    "julienne",
+    "searing"
+   ],
+   "method": "stove",
+   "about": "Skirt or flank steak seared and sliced with charred peppers and onions, every ingredient weighed, in warm tortillas.",
+   "main": [
+    "skirt or flank steak",
+    "bell peppers",
+    "onion",
+    "lime",
+    "tortillas"
+   ],
    "level": "sp-4"
   },
   {
@@ -13963,6 +15608,18 @@ export const LIBRARY = {
     "measuring-spoons",
     "spatula",
     "thermometer"
+   ],
+   "skills": [
+    "cooking-fish"
+   ],
+   "method": "oven",
+   "about": "A whole side of salmon skinned, pin-boned, and portioned at home, then glazed with teriyaki and roasted.",
+   "main": [
+    "side of salmon",
+    "soy sauce",
+    "mirin or honey",
+    "ginger",
+    "sesame seeds"
    ],
    "level": "sp-4"
   }
@@ -15081,60 +16738,60 @@ export const LIBRARY = {
   8
  ],
  "seasonalLabels": {
-  "unleavened-flatbread": "A1",
-  "cottage-cheese-crescents": "A2"
+  "unleavened-flatbread": "U1",
+  "cottage-cheese-crescents": "U2"
  },
  "levelLabels": {
-  "beef-tacos-seasoning": "A12",
-  "bun-bowl": "A5",
-  "caprese-sandwiches": "A1",
-  "chana-chaat": "A10",
-  "chicken-caesar-wraps": "A9",
-  "fish-sticks": "A14",
-  "ful-medames": "A7",
-  "hummus-plate": "A8",
-  "keema": "A13",
-  "kofte": "A11",
-  "loaded-baked-potatoes": "A4",
-  "mini-pita-pizzas": "A6",
-  "molletes": "A3",
-  "onigiri": "A2",
-  "shioyaki": "A15",
-  "teriyaki-chicken-bites": "A16",
-  "aglio-e-olio": "K3",
-  "ajapsandali": "K7",
-  "baked-salmon": "K13",
-  "bean-quesadillas": "K1",
-  "bean-tostadas": "K8",
-  "beef-picadillo": "K30",
-  "chermoula-fish": "K12",
-  "chicken-tenders": "K14",
-  "dinner-rolls": "K19",
-  "kimbap": "K6",
-  "pan-seared-trout": "K33",
-  "rajma": "K2",
-  "sandwich-loaf": "K17",
-  "scallion-oil-noodles": "K4",
-  "solterito": "K10",
-  "steamed-fish": "K23",
-  "tabbouleh": "K9",
-  "thick-burgers": "K11",
-  "vegetable-lo-mein": "K5",
-  "antipasto-platter": "C7",
-  "bibimbap": "C5",
-  "bo-luc-lac": "C2",
-  "chicken-cacciatore": "C9",
-  "chicken-enchiladas": "C3",
-  "chicken-two-ways": "C14",
-  "duck-breast-cherry": "C11",
-  "ensaladilla-rusa": "C6",
-  "flank-steak": "C10",
-  "mezze-spread": "C8",
-  "pescado-veracruzana": "C13",
-  "salade-nicoise": "C4",
-  "spatchcocked-quail": "C15",
-  "steak-fajitas": "C1",
-  "teriyaki-salmon-side": "C12"
+  "beef-tacos-seasoning": "B8a",
+  "bun-bowl": "B3b",
+  "caprese-sandwiches": "B1a",
+  "chana-chaat": "B6b",
+  "chicken-caesar-wraps": "B6a",
+  "fish-sticks": "B9a",
+  "ful-medames": "B4b",
+  "hummus-plate": "B5b",
+  "keema": "B8b",
+  "kofte": "B7b",
+  "loaded-baked-potatoes": "B3a",
+  "mini-pita-pizzas": "B4a",
+  "molletes": "B2b",
+  "onigiri": "B1b",
+  "shioyaki": "B9b",
+  "teriyaki-chicken-bites": "B10a",
+  "aglio-e-olio": "C2a",
+  "ajapsandali": "C4b",
+  "baked-salmon": "C8a",
+  "bean-quesadillas": "C1a",
+  "bean-tostadas": "C5a",
+  "beef-picadillo": "C21b",
+  "chermoula-fish": "C8b",
+  "chicken-tenders": "C10a",
+  "dinner-rolls": "C13a",
+  "kimbap": "C3b",
+  "pan-seared-trout": "C23a",
+  "rajma": "C1b",
+  "sandwich-loaf": "C12a",
+  "scallion-oil-noodles": "C2b",
+  "solterito": "C6b",
+  "steamed-fish": "C16b",
+  "tabbouleh": "C5b",
+  "thick-burgers": "C7a",
+  "vegetable-lo-mein": "C3a",
+  "antipasto-platter": "D6a",
+  "bibimbap": "D4b",
+  "bo-luc-lac": "D2b",
+  "chicken-cacciatore": "D7a",
+  "chicken-enchiladas": "D3a",
+  "chicken-two-ways": "D10a",
+  "duck-breast-cherry": "D8b",
+  "ensaladilla-rusa": "D5b",
+  "flank-steak": "D8a",
+  "mezze-spread": "D6b",
+  "pescado-veracruzana": "D9b",
+  "salade-nicoise": "D4a",
+  "spatchcocked-quail": "D10b",
+  "steak-fajitas": "D2a",
+  "teriyaki-salmon-side": "D9a"
  },
  "dietTags": [
   "nuts",
@@ -17479,7 +19136,77 @@ export const LIBRARY = {
    "side": {
     "number": 102,
     "name": "Level 2 Apprentice recipes",
-    "prefix": "A"
+    "prefix": "B"
+   },
+   "labels": {
+    "caprese-sandwiches": "B1a",
+    "onigiri": "B1b",
+    "grilled-cheese-tomato-soup": "B2a",
+    "molletes": "B2b",
+    "loaded-baked-potatoes": "B3a",
+    "bun-bowl": "B3b",
+    "mini-pita-pizzas": "B4a",
+    "ful-medames": "B4b",
+    "tuna-salad-sandwiches": "B5a",
+    "hummus-plate": "B5b",
+    "chicken-caesar-wraps": "B6a",
+    "chana-chaat": "B6b",
+    "smash-burgers": "B7a",
+    "kofte": "B7b",
+    "beef-tacos-seasoning": "B8a",
+    "keema": "B8b",
+    "fish-sticks": "B9a",
+    "shioyaki": "B9b",
+    "teriyaki-chicken-bites": "B10a",
+    "chicken-souvlaki-pitas": "B10b",
+    "blueberry-muffins": "B11a",
+    "pao-de-queijo": "B11b",
+    "buttermilk-biscuits": "B12a",
+    "welsh-cakes": "B12b",
+    "homemade-pizza": "B13a",
+    "skillet-naan": "B13b",
+    "chocolate-chip-cookies": "B14a",
+    "alfajores": "B14b",
+    "banana-bread": "B15a",
+    "pan-de-elote": "B15b",
+    "chicken-potstickers": "B16a",
+    "gyeran-jjim": "B16b",
+    "egg-salad-sandwiches": "B17a",
+    "anda-curry": "B17b",
+    "mexican-rice-chicken": "B18a",
+    "hainanese-chicken-rice": "B18b",
+    "black-bean-tortilla-soup": "B19a",
+    "egg-drop-soup": "B19b",
+    "spaghetti-marinara": "B20a",
+    "cacio-e-pepe": "B20b",
+    "pancakes": "B21a",
+    "pajeon": "B21b",
+    "breakfast-burritos": "B22a",
+    "tomato-egg-stir-fry": "B22b",
+    "zucchini-pasta": "B23a",
+    "tikil-gomen": "B23b",
+    "sloppy-joes": "B24a",
+    "giniling": "B24b",
+    "honey-garlic-chicken": "B25a",
+    "lemongrass-chicken": "B25b",
+    "mac-and-cheese": "B26a",
+    "japanese-chicken-curry": "B26b",
+    "chicken-nachos": "B27a",
+    "miso-salmon": "B27b",
+    "sheet-pan-fajitas": "B28a",
+    "moroccan-vegetables-couscous": "B28b",
+    "bbq-drumsticks": "B29a",
+    "jerk-chicken": "B29b",
+    "baked-ziti": "B30a",
+    "filipino-baked-macaroni": "B30b",
+    "beef-chili": "B31a",
+    "peanut-stew": "B31b",
+    "bbq-pulled-chicken": "B32a",
+    "trinidad-curry-chicken": "B32b",
+    "spaghetti-meatballs": "B33a",
+    "kefta-tagine": "B33b",
+    "chicken-noodle-soup": "B34a",
+    "tom-kha-gai": "B34b"
    },
    "units": [
     {
@@ -20777,7 +22504,77 @@ export const LIBRARY = {
    "side": {
     "number": 103,
     "name": "Level 3 Cook recipes",
-    "prefix": "K"
+    "prefix": "C"
+   },
+   "labels": {
+    "bean-quesadillas": "C1a",
+    "rajma": "C1b",
+    "aglio-e-olio": "C2a",
+    "scallion-oil-noodles": "C2b",
+    "vegetable-lo-mein": "C3a",
+    "kimbap": "C3b",
+    "minestrone": "C4a",
+    "ajapsandali": "C4b",
+    "bean-tostadas": "C5a",
+    "tabbouleh": "C5b",
+    "chopped-salad-vinaigrette": "C6a",
+    "solterito": "C6b",
+    "thick-burgers": "C7a",
+    "lamb-kofta": "C7b",
+    "baked-salmon": "C8a",
+    "chermoula-fish": "C8b",
+    "chicken-fajitas": "C9a",
+    "oyakodon": "C9b",
+    "chicken-tenders": "C10a",
+    "shish-taouk": "C10b",
+    "skillet-cornbread": "C11a",
+    "soda-bread": "C11b",
+    "sandwich-loaf": "C12a",
+    "manoushe": "C12b",
+    "dinner-rolls": "C13a",
+    "conchas": "C13b",
+    "apple-galette": "C14a",
+    "beef-empanadas": "C14b",
+    "challah": "C15a",
+    "pulla": "C15b",
+    "steamed-salmon-vegetables": "C16a",
+    "steamed-fish": "C16b",
+    "arroz-con-pollo": "C17a",
+    "jollof-rice": "C17b",
+    "pinto-bean-burritos": "C18a",
+    "mujaddara": "C18b",
+    "chicken-noodle-soup": "C19a",
+    "arroz-caldo": "C19b",
+    "spaghetti-meatballs": "C20a",
+    "moqueca": "C20b",
+    "sausage-peppers": "C21a",
+    "beef-picadillo": "C21b",
+    "french-omelet": "C22a",
+    "tortang-talong": "C22b",
+    "pan-seared-trout": "C23a",
+    "godeungeo-gui": "C23b",
+    "beef-and-broccoli": "C24a",
+    "lomo-saltado": "C24b",
+    "steak-mushroom-sauce": "C25a",
+    "chicken-paprikash": "C25b",
+    "chicken-parmesan": "C26a",
+    "rava-fish-fry": "C26b",
+    "sheet-pan-teriyaki-chicken": "C27a",
+    "peruvian-chicken-thighs": "C27b",
+    "sheet-pan-cod": "C28a",
+    "psari-plaki": "C28b",
+    "fish-tacos": "C29a",
+    "suya": "C29b",
+    "roast-chicken": "C30a",
+    "piri-piri-chicken": "C30b",
+    "chicken-chile-verde": "C31a",
+    "chicken-adobo": "C31b",
+    "beef-stew": "C32a",
+    "bo-kho": "C32b",
+    "beef-ragu": "C33a",
+    "lamb-tagine": "C33b",
+    "beef-chili": "C34a",
+    "pad-kra-pao": "C34b"
    },
    "units": [
     {
@@ -25469,7 +27266,75 @@ export const LIBRARY = {
    "side": {
     "number": 104,
     "name": "Level 4 Chef recipes",
-    "prefix": "C"
+    "prefix": "D"
+   },
+   "labels": {
+    "chicken-fried-rice": "D1a",
+    "ratatouille": "D1b",
+    "steak-fajitas": "D2a",
+    "bo-luc-lac": "D2b",
+    "chicken-enchiladas": "D3a",
+    "chana-masala": "D3b",
+    "salade-nicoise": "D4a",
+    "bibimbap": "D4b",
+    "chicken-caesar": "D5a",
+    "ensaladilla-rusa": "D5b",
+    "antipasto-platter": "D6a",
+    "mezze-spread": "D6b",
+    "chicken-cacciatore": "D7a",
+    "chicken-tagine": "D7b",
+    "flank-steak": "D8a",
+    "duck-breast-cherry": "D8b",
+    "teriyaki-salmon-side": "D9a",
+    "pescado-veracruzana": "D9b",
+    "chicken-two-ways": "D10a",
+    "spatchcocked-quail": "D10b",
+    "chocolate-babka": "D11a",
+    "milk-bread": "D11b",
+    "chicken-pot-pie": "D12a",
+    "spinach-feta-borekas": "D12b",
+    "spinach-mushroom-quiche": "D13a",
+    "jamaican-beef-patties": "D13b",
+    "biscuits-and-gravy": "D14a",
+    "arepas": "D14b",
+    "apple-pie": "D15a",
+    "malva-pudding": "D15b",
+    "poached-salmon-dill": "D16a",
+    "goan-fish-curry": "D16b",
+    "eggs-benedict": "D17a",
+    "cilbir": "D17b",
+    "mushroom-risotto": "D18a",
+    "tahdig": "D18b",
+    "black-bean-soup": "D19a",
+    "feijoada": "D19b",
+    "french-onion-soup": "D20a",
+    "pho-bo": "D20b",
+    "seared-thighs-pan-sauce": "D21a",
+    "chimichurri-steak": "D21b",
+    "kung-pao-chicken": "D22a",
+    "mapo-tofu": "D22b",
+    "diner-eggs-to-order": "D23a",
+    "tortilla-espanola": "D23b",
+    "chicken-tikka-masala": "D24a",
+    "thai-green-curry": "D24b",
+    "chicken-a-la-king": "D25a",
+    "swedish-meatballs": "D25b",
+    "fish-and-chips": "D26a",
+    "korean-fried-chicken": "D26b",
+    "salmon-en-papillote": "D27a",
+    "samke-harra": "D27b",
+    "bbq-chicken-two-zone": "D28a",
+    "chicken-satay": "D28b",
+    "roast-beef": "D29a",
+    "roast-leg-of-lamb": "D29b",
+    "beef-lasagna": "D30a",
+    "moussaka": "D30b",
+    "pot-roast": "D31a",
+    "birria-de-chivo": "D31b",
+    "chicken-chasseur": "D32a",
+    "duck-legs-white-beans": "D32b",
+    "cholent": "D33a",
+    "dafina": "D33b"
    },
    "units": [
     {
@@ -29203,6 +31068,49 @@ export const LIBRARY = {
     "id": "lemon-lime",
     "name": "Lemon and lime"
    }
+  ]
+ },
+ "proteinIngredients": {
+  "chicken": [
+   "chicken-breast",
+   "chicken-thigh"
+  ],
+  "turkey": [
+   "turkey-sausage-bulk",
+   "turkey-strips",
+   "turkey-ground"
+  ],
+  "beef": [
+   "beef-ribeye",
+   "beef-sirloin",
+   "beef-ground",
+   "beef-flank"
+  ],
+  "lamb": [],
+  "goat": [],
+  "duck-quail": [],
+  "white-fish": [
+   "cod",
+   "tilapia"
+  ],
+  "salmon": [
+   "salmon-smoked",
+   "salmon-fillet"
+  ],
+  "tuna": [
+   "tuna-canned"
+  ],
+  "eggs": [
+   "egg",
+   "egg-pasteurized"
+  ],
+  "beans-lentils": [
+   "cannellini",
+   "black-beans",
+   "refried-beans"
+  ],
+  "tofu": [
+   "tofu-extra-firm"
   ]
  }
 };

@@ -505,9 +505,8 @@ async function courseLessons(env, course, fam) {
   };
 }
 
-// A Level course's recipes (§12.4). They keep the kitchen's usual lesson
-// numbers; the parent sees each one's Level week. unwritten counts the weeks
-// with no recipe yet too.
+// A Level course's recipes (§12.4), labeled by their Level's weeks (C4a,
+// C4b), shared lessons too. unwritten counts the weeks with no recipe yet too.
 async function levelLessons(env, course, fam) {
   const V = LEVELS[course.program];
   const plan = await levelPlanOf(env, course);
@@ -516,7 +515,7 @@ async function levelLessons(env, course, fam) {
   // A blocked week (14c) holds the schedule, unqueued, until the parent acts on it.
   const blocked = Object.fromEntries(plan.weeks.filter((x) => x.blocked && !x.removed).map((x) => [x.id, x.blocked]));
   return {
-    plan, labels: suggestedLabels, total: numberCourse(LIBRARY.course).total, kept,
+    plan, labels: { ...labelsFor(V.id), ...courseWeekLabels(V, plan.weeks) }, total: numberCourse(LIBRARY.course).total, kept,
     usable: kept.filter((x) => shown.has(x) || blocked[x] || ownReady(plan.own, x)),
     unwritten: kept.filter((x) => !lessonById[x] && !ownReady(plan.own, x)).length + V.weeks.filter((w) => !w.recipe).length,
     hidden: kept.filter((x) => lessonById[x] && !shown.has(x) && !blocked[x]).length,
@@ -1039,8 +1038,39 @@ export async function queueProfiles(env, fid, ids) {
   return out;
 }
 
-// Appointed Times lessons are A1, A2… whatever the plan (§6.19).
+// Appointed Times lessons are U1, U2… whatever the plan (§6.19).
 const suggestedLabels = { ...numberCourse(LIBRARY.course).labels, ...LIBRARY.seasonalLabels, ...LIBRARY.levelLabels };
+// The labels a Level's course shows: its own weeks' (C4a, C4b), never Cook
+// Around the World's numbers for the lessons it shares (owner, 2026-10-26).
+// A Level course's own weeks (§12.4): the dish the course cooks takes its
+// week's label, C4a or C4b, and one the parent changed the week to from
+// elsewhere is just C4.
+const courseWeekLabels = (V, weeks) => Object.fromEntries(weeks.filter((x) => x.id).map((x) => {
+  const w = V.weeks.find((y) => y.week === x.week);
+  return [x.id, `${V.side.prefix}${x.week}${x.id === w?.familiar ? 'a' : x.id === w?.explore ? 'b' : ''}`];
+}));
+export const labelsFor = (program) => (LEVELS[program] ? { ...suggestedLabels, ...LEVELS[program].labels } : suggestedLabels);
+
+// What Add a lesson's filters offer (owner, 2026-10-26), from the lessons the
+// family can cook: proteins by taste group, every other ingredient by name,
+// and the skills and cuisines in them.
+const SKILL_NAMES = Object.fromEntries(CONTENT.skills.map((x) => [x.id, x.name]));
+function finderOptions(lessons) {
+  const P = LIBRARY.proteinIngredients ?? {};
+  const inProtein = new Set(Object.values(P).flat());
+  const used = new Set(lessons.flatMap((L) => L.ingredients.map((x) => x.ingredient)));
+  const byName = (a, b) => a.name.localeCompare(b.name);
+  return {
+    proteins: P,
+    ingredients: [
+      ...(LIBRARY.tastes.proteins ?? []).filter((p) => lessons.some((L) => L.tags?.protein === p.id) || (P[p.id] ?? []).some((i) => used.has(i))).map((p) => ({ id: `protein:${p.id}`, name: p.name })),
+      ...[...used].filter((i) => !inProtein.has(i) && LIBRARY.ingredients[i]).map((i) => ({ id: i, name: LIBRARY.ingredients[i].name })),
+    ].sort(byName),
+    skills: [...new Set(lessons.flatMap((L) => L.skills))].map((id) => ({ id, name: SKILL_NAMES[id] ?? id })).sort(byName),
+    protein_tags: (LIBRARY.tastes.proteins ?? []).filter((p) => lessons.some((L) => L.tags?.protein === p.id)),
+    cuisines: [...new Set(lessons.map((L) => L.cuisine))].map((id) => ({ id, name: LIBRARY.cuisines[id] ?? id })).sort(byName),
+  };
+}
 
 // names: the family's recipes (recipeNames), for queued family recipes.
 const RECIPE_SIZES = servingOptions({ scaling: { mode: 'free', min: 1, max: 12 } });
@@ -1063,10 +1093,10 @@ function courseOut(st, fam, rowsByLesson, version = () => null) {
     // A Level week can cook a learner's own recipe (14f).
     const own = lessons.own?.[x.id];
     const q = rowsByLesson[`${course.id}:${x.id}`];
-    // A Level week's recipe shows its week, not its lesson number.
+    // A Level week's recipe shows its Level label (C4a), not its lesson number.
     const week = V ? lessons.weekOf[x.id] ?? null : null;
     return {
-      lesson_id: x.id, title: L?.title ?? own?.title ?? x.id, label: V ? (week ? `Week ${week}` : null) : lessons.labels[x.id] ?? null, week, image: L?.image ?? own?.image ?? null, unit: L?.unit ?? null,
+      lesson_id: x.id, title: L?.title ?? own?.title ?? x.id, label: (V && !week ? null : lessons.labels[x.id]) ?? null, week, image: L?.image ?? own?.image ?? null, unit: L?.unit ?? null,
       foundation: Boolean(dishById[x.id]?.pickOne), done: x.done, overdue: fam.mode === 'homeschool' ? x.overdue : false, extra: Boolean(x.extra),
       queue_id: q?.id ?? null, servings: q?.servings ?? null, servings_options: L ? servingOptions(L) : own ? RECIPE_SIZES : [], status: q?.status ?? null, ...(own ? { recipe: true } : {}),
       // A Level course plays the Level's own version (14e): no Version button.
@@ -1129,7 +1159,15 @@ export function register(on) {
     const names = await recipeNames(env, s.family_id);
     const version = await versionPicker(env, fam);
     const levelOfRow = await rowLevels(env, s.family_id);
-    const out = (r) => ({ ...itemOut(r, who, suggestedLabels, names), version: version(r.lesson_id, who[r.id], levelOfRow(r)) });
+    // A lesson queued for a Level course, or by hand for learners all on one
+    // Level that cooks it, shows that Level's label (C4a).
+    const levelOf = Object.fromEntries(states.filter((st) => st.course.program).flatMap((st) => st.profiles.map((pid) => [pid, st.course.program])));
+    const labelLevel = (r) => {
+      if (levelOfRow(r)) return levelOfRow(r);
+      const ps = [...new Set((who[r.id] ?? []).map((pid) => levelOf[pid] ?? null))];
+      return ps.length === 1 && LEVELS[ps[0]]?.labels[r.lesson_id] ? ps[0] : null;
+    };
+    const out = (r) => ({ ...itemOut(r, who, labelsFor(labelLevel(r)), names), version: version(r.lesson_id, who[r.id], levelOfRow(r)) });
     const filters = JSON.parse(fam.diet_filters);
     const { results: mine } = await env.DB.prepare('SELECT * FROM family_recipes WHERE family_id = ? AND deleted_at IS NULL ORDER BY title COLLATE NOCASE, id').bind(s.family_id).all();
     return {
@@ -1148,7 +1186,15 @@ export function register(on) {
       test_cooks: Object.fromEntries(tests.map((t) => [t.lesson_id, { cooked_on: t.cooked_on, by_me: t.parent_id === s.parent_id }])),
       library: LIBRARY.lessons.filter((L) => visible(fam).has(L.id)).map((L) => ({
         id: L.id, title: L.title, label: suggestedLabels[L.id] ?? null, unit: L.unit, servings_options: servingOptions(L), foundation: Boolean(dishById[L.id]?.pickOne),
+        image: L.image, minutes: L.totalMinutes, cuisine: L.cuisine, method: L.method, skills: L.skills, protein: L.tags?.protein ?? null,
+        about: L.about, main: L.main, skill: L.skill, ingredients: L.ingredients.map((x) => x.ingredient),
       })),
+      finder: finderOptions(LIBRARY.lessons.filter((L) => visible(fam).has(L.id))),
+      // Add a lesson lists the library by program (owner, 2026-10-26): each
+      // Level, the family's own courses' first, in week order with its own
+      // labels, then Cook Around the World and Appointed Times.
+      level_groups: levelsOn(fam.release).map((V) => ({ id: V.id, name: V.name, mine: states.some((st) => st.course.program === V.id), ids: Object.keys(V.labels).filter((x) => visible(fam).has(x)), labels: V.labels }))
+        .sort((a, b) => b.mine - a.mine),
       // The family's own recipes can be queued like lessons (§6.10).
       recipes: (await Promise.all(mine.map(async (row) => ({ row, f: await lessonFor(env, s.family_id, `recipe:${row.id}`) }))))
         .filter(({ f }) => f && recipeVisible(f, filters)).map(({ row }) => ({ id: `recipe:${row.id}`, title: row.title, servings_options: RECIPE_SIZES })),

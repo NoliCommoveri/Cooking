@@ -53,6 +53,15 @@ export function lint(c) {
   // A Level's own recipes sit in a unit of their own beside the course, in
   // Side quests (owner, 2026-10-24), numbered apart from units.json.
   const LEVEL_UNITS = new Set((c.levels || []).map(({ data }) => data?.sideUnit?.number).filter(n => n != null));
+  // Each program's labels have a letter of their own (owner, 2026-10-26): S is
+  // Cook Around the World's, and A is kept for Level 1.
+  const letters = { S: 'Cook Around the World', A: 'Level 1' };
+  for (const [file, letter] of [...(c.units || []).filter(u => u.seasonal).map(u => [`units.json ${u.number}`, u.prefix]),
+    ...(c.levels || []).map(({ data }) => [`levels ${data?.id}`, data?.sideUnit?.prefix])]) {
+    if (!letter) continue;
+    if (letters[letter]) err(file, `prefix "${letter}" is already ${letters[letter]}'s`);
+    else letters[letter] = file;
+  }
   for (const ing of c.ingredients) {
     for (const r of uncleanReasons(ing, rules)) err(`ingredients.json ${ing.id}`, `unclean: ${r}`);
     for (const [u, pkg] of Object.entries(ing.units || {})) if (!pkg.amount) err(`ingredients.json ${ing.id}`, `unit "${u}" has no amount`);
@@ -258,7 +267,7 @@ export function lint(c) {
     for (const f of ['about', 'main', 'method']) if (L[f] == null) err(`lessons/${L.id}.json`, `a lesson in a seasonal unit needs ${f} for its dish card`);
     dishCard(`lessons/${L.id}.json`, L);
   }
-  // a seasonal unit lists its lessons in order, for their labels (A1, A2)
+  // a seasonal unit lists its lessons in order, for their labels (U1, U2)
   for (const u of (c.units || []).filter(u => u.seasonal)) {
     for (const id of u.lessons || []) if (byId[id]?.unit !== u.number) err(`units.json ${u.number}`, `lists "${id}", which isn't a written lesson in this unit`);
     for (const L of lessons) if (L.unit === u.number && !(u.lessons || []).includes(L.id)) err(`units.json ${u.number}`, `lessons doesn't list "${L.id}", so it has no label`);

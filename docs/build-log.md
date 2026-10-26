@@ -6034,7 +6034,82 @@ the two sheets made from Claude's prompts.
 - Screenshots (More recipes, phone width, both themes) sent in the session.
 - Tests: 392.
 
-## 235. 2026-10-26 — 14g content: Level 3 Unit 3
+## 235. 2026-10-26 — A letter for each program's labels
+
+Owner, 2026-10-26, from a phone screenshot of Add a lesson: "Cook around the
+world is one course of many now. So i think we need to prefix them S for
+standard. We initially gave feast meals a, but lets give them U for
+unleavened. 1-4 can be A-D. … I should not see a cooking around the world
+recipe number in my course list for level 3. And levels familiar/explore need
+an a/b after the number. A level number should correspond with its week."
+Then: keep "Quest 27 of 59" as a count, keep "Week 4" on a Level learner's
+cards, group Add a lesson by program, and keep A for Level 1.
+
+- **Before:** Appointed Times and Level 2's own recipes both used A, so Add a
+  lesson showed two A1s and two runs of A's, sorted by name. Level 3 was K
+  and Level 4 was C, numbered in the order of each Level's recipe cards, not
+  by week. A Cook Around the World lesson a Level cooks (about 25 in each)
+  showed its course number in that Level's queue rows and kitchen cards.
+- **Now:**
+  - **Cook Around the World is S:** S1, S8a. Learners' cards, the player,
+    Chef Ruth, and the demo still count the place without the S ("Quest 27",
+    "Lesson 8a"); `courseNo` in `src/content/course.js`.
+  - **Appointed Times is U:** U1, U2 (`content/units.json`).
+  - **Levels are B, C, D by week:** the letter, the week, and a (Familiar) or
+    b (Explore): B1a, C4b, D5a (`weekLabels` in `src/content/levels.js`). A
+    is kept for Level 1. A lesson shared with Cook Around the World takes the
+    Level's label on that Level's course card and queue rows, and when queued
+    by hand for learners all on that Level. A week changed to a recipe from
+    elsewhere is just C4.
+  - **Add a lesson by program:** Best for them, each Level (the family's own
+    first) in week order with its own labels, Cook Around the World, then
+    Appointed Times, then Our recipes.
+  - **Kitchen cards on a Level course** say the week ("Week 4") on queued
+    lessons too; they showed Cook Around the World's number.
+  - **Lint:** each program's letter is its own; S and A are taken.
+  - Plan §4.1, §6.19, §12.4 updated.
+- Screenshots (the queue, Add a lesson, and both kitchen themes, phone width,
+  light and dark) sent in the session.
+- Tests: 395.
+
+## 236. 2026-10-26 — Add a lesson: its own page, with filters
+
+Owner, 2026-10-26: "For add a lesson, I'd really like it if we had filters,
+like ingredients where they could input their ingredients to find lessons
+that matched, or skill tags, instead of just every lesson. Once we write
+everything its gonna be like 250 recipes." Then: its own page; ingredients
+and skills "should not be a wall, it should look more like a search bar that
+filters the Ingredients down in real time as they type, and then +another to
+add more"; "searches should be wide on anything except proteins"; program,
+protein and cuisine, time and method, and not cooked yet as more filters; and
+"since we are on a page we can show more about the recipe than just its
+name". Also: record that Chef Ruth's button gets in the way of screenshot
+scripts.
+
+- **Before:** + Add a lesson opened a dialog with one long menu of every
+  lesson, grouped by program (235). A lesson's line about the dish showed
+  only after it was added.
+- **Now:**
+  - **Its own page,** `#/parent/queue/add`: who's cooking, a dish-name
+    search, Ingredients you have and Skills as type-to-narrow searches with
+    chips and + Another, and More filters (program, protein, cuisine, time,
+    how it cooks, not cooked yet by who's cooking).
+  - **Matching** (`src/content/find.js`): a lesson needs one of the
+    proteins added, searched by taste group (Chicken, not chicken breast and
+    chicken thigh), and at least one of the other ingredients; the most of
+    them first, with "Uses yours: …".
+  - **Lesson cards:** picture, labels, time, cuisine, method, the line about
+    the dish, and its skill, with Add (a dialog: who, serves, planned date),
+    Main ingredients, and Preview as a learner. 30 at a time, Show more.
+  - **The library** carries each lesson's skills, method, line about the
+    dish, and main ingredients; the queue sends the filters' options.
+  - **CLAUDE.md:** screenshot scripts hide Chef Ruth's floating button and
+    enter the parent PIN after opening a kitchen (owner's request).
+- Screenshots (the page, typing, results, and the Add dialog, phone width,
+  light and dark) sent in the session.
+- Tests: 400.
+
+## 237. 2026-10-26 — 14g content: Level 3 Unit 3
 
 Owner, 2026-10-26: "We're gonna do unit 3, ordered levels 3, 2, 4. Put each
 level unit in a review doc for me before starting the next one." Reviewed in
@@ -6075,9 +6150,9 @@ not merged until the owner approves it there.
 - No screens changed, so no screenshots.
 - Tests: 392.
 
-## 236. 2026-10-26 — 14g content: Level 2 Unit 3
+## 238. 2026-10-26 — 14g content: Level 2 Unit 3
 
-Owner, 2026-10-26: Level 2 is the second of Unit 3's three Levels (235).
+Owner, 2026-10-26: Level 2 is the second of Unit 3's three Levels (237).
 Reviewed in [14g review: Level 2 Apprentice, Unit
 3](https://claude.ai/artifact/HHaY6sUdVwUTu1GtCDThNJ); not merged until the
 owner approves it there.
@@ -6109,9 +6184,9 @@ owner approves it there.
 - No screens changed, so no screenshots.
 - Tests: 392.
 
-## 237. 2026-10-26 — 14g content: Level 4 Unit 3
+## 239. 2026-10-26 — 14g content: Level 4 Unit 3
 
-Owner, 2026-10-26: Level 4 is the last of Unit 3's three Levels (235).
+Owner, 2026-10-26: Level 4 is the last of Unit 3's three Levels (237).
 Reviewed in [14g review: Level 4 Chef, Unit
 3](https://claude.ai/artifact/87ZoVDP7Kn4ugsVeX8CiDf); not merged until the
 owner approves it there.
@@ -6149,7 +6224,7 @@ owner approves it there.
 - No screens changed, so no screenshots.
 - Tests: 392.
 
-## 238. 2026-10-26 — Watch-for lists on part pages; the chicken oyster
+## 240. 2026-10-26 — Watch-for lists on part pages; the chicken oyster
 
 Owner, 2026-10-26, on how hidden ingredients were worded in Unit 3: "I thought
 label warnings were excluded", then "Do all three" (Claude's three

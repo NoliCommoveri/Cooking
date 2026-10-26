@@ -144,7 +144,7 @@ test("a course loads this week's lessons into the queue, for all its profiles", 
   assert.equal(kid.items[0].due, null, 'no due dates in casual mode');
   // Lesson numbers follow the course plan: only the samples are kept, so
   // shakshuka is first, and its pick-one group keeps one dish, so no letter.
-  assert.equal(kid.labels.shakshuka, '1');
+  assert.equal(kid.labels.shakshuka, 'S1');
   // The week each lesson still to cook falls in, for the kitchen's open weeks
   // and See more: this week's, next week's, then one a week after.
   assert.equal(kid.week, sunday);
@@ -294,8 +294,8 @@ test('a pick-one group can keep more than one dish; one is kept by default', asy
   const plan = default_plan.map((x) => (x.id === 'spaghetti-marinara' ? { ...x, removed: false } : x));
   await a.post('/api/courses', { profile_ids: [ava], start_date: sunday, per_week: 1, plan });
   const kid = (await a.get(`/api/profiles/${ava}/queue`)).body;
-  assert.equal(kid.labels.shakshuka, '8a');
-  assert.equal(kid.labels['spaghetti-marinara'], '8b');
+  assert.equal(kid.labels.shakshuka, 'S8a');
+  assert.equal(kid.labels['spaghetti-marinara'], 'S8b');
   assert.equal((await a.get('/api/courses')).body.courses[0].plan.find((x) => x.id === 'spaghetti-marinara').removed, false);
 });
 

@@ -36,8 +36,8 @@ test('Unleavened: every ingredient from the registry and none of it leaven', () 
   assert.equal(LIBRARY.lessons.find((L) => L.id === 'buttermilk-biscuits').unleavened, false);
 });
 
-test('Appointed Times lessons are A1, A2, outside the numbered course', () => {
-  assert.deepEqual(seasonalLabels(CONTENT.units), { 'unleavened-flatbread': 'A1', 'cottage-cheese-crescents': 'A2' });
+test('Appointed Times lessons are U1, U2, outside the numbered course', () => {
+  assert.deepEqual(seasonalLabels(CONTENT.units), { 'unleavened-flatbread': 'U1', 'cottage-cheese-crescents': 'U2' });
   assert.equal(LIBRARY.course.some((d) => d.unit === 8), false);
 });
 

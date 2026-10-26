@@ -60,7 +60,7 @@ test('the Levels show to a preview family before launch, and to every family aft
 });
 
 test('a Level course: one Level week a calendar week, its written recipes in week order', async () => {
-  const { a, ava } = await setup();
+  const { a, ava, ben } = await setup();
   const levels = (await a.get('/api/courses')).body.levels;
   assert.ok(levels.every((V) => V.weeks.length === 36));
   assert.equal(levels.find((V) => V.id === 'sp-3').weeks[0].title, 'Black bean and vegetable quesadillas');
@@ -75,14 +75,27 @@ test('a Level course: one Level week a calendar week, its written recipes in wee
 
   const q = await card(a);
   assert.deepEqual([q.level.id, q.level.name, q.level.weeks, q.level.week], ['sp-3', 'Level 3 Cook', 36, 1]);
-  assert.deepEqual(q.this_week.lessons.map((x) => [x.lesson_id, x.label]), [['bean-quesadillas', 'Week 1']]);
-  assert.deepEqual(q.next_week.lessons.map((x) => [x.lesson_id, x.label]), [['aglio-e-olio', 'Week 2']]);
+  assert.deepEqual(q.this_week.lessons.map((x) => [x.lesson_id, x.label]), [['bean-quesadillas', 'C1a']]);
+  assert.deepEqual(q.next_week.lessons.map((x) => [x.lesson_id, x.label]), [['aglio-e-olio', 'C2a']]);
   assert.equal(q.total + q.unwritten, 36, 'the written recipes are scheduled; the rest wait, the weeks with no recipe too');
+
+  // Add a lesson lists the family's Level first, in week order with its own
+  // labels, shared lessons too (owner, 2026-10-26).
+  const { level_groups: groups, library } = (await a.get('/api/queue')).body;
+  assert.deepEqual(groups.map((g) => [g.id, g.mine]), [['sp-3', true], ['sp-2', false], ['sp-4', false]]);
+  assert.deepEqual(groups[0].ids.slice(0, 2).map((x) => groups[0].labels[x]), ['C1a', 'C1b']);
+  assert.equal(groups[0].labels.minestrone, 'C4a', 'a lesson shared with Cook Around the World');
+  assert.match(library.find((L) => L.id === 'minestrone').label, /^S\d+[a-c]?$/, 'which keeps its own label there');
   assert.ok(q.total >= 11);
   // Its week's recipe is queued for the course's profiles.
   const mine = (await a.get(`/api/profiles/${ava}/queue`)).body;
   assert.deepEqual(mine.items.map((x) => x.lesson_id), ['bean-quesadillas']);
   assert.deepEqual(mine.order.slice(0, 5), ['bean-quesadillas', 'aglio-e-olio', 'vegetable-lo-mein', 'minestrone', 'bean-tostadas'], 'the whole course, in week order');
+  // Queued by hand for a learner on the Level, it shows the Level's label too.
+  assert.equal((await a.post('/api/queue', { lesson_id: 'minestrone', profile_ids: [ava], servings: 6, planned_date: null })).status, 200);
+  assert.equal((await a.get('/api/queue')).body.queued.find((x) => x.lesson_id === 'minestrone').label, 'C4a');
+  assert.equal((await a.post('/api/queue', { lesson_id: 'minestrone', profile_ids: [ben], servings: 6, planned_date: null })).status, 200);
+  assert.match((await a.get('/api/queue')).body.queued.find((x) => x.lesson_id === 'minestrone' && x.profile_ids.includes(ben)).label, /^S/, 'for a learner on no Level, its course number');
 });
 
 test('a week is done when its recipe is cooked; an uncooked one rolls over', async () => {
@@ -144,7 +157,7 @@ test("a Level's own recipes are in the library with the Levels' release only, in
   const { env, a, ava, fid } = await setup();
   let lib = (await a.get('/api/library')).body;
   const burgers = lib.lessons.find((L) => L.id === 'thick-burgers');
-  assert.deepEqual([burgers?.unit, burgers?.label, lib.units[103], lib.level_units], [103, 'K11', 'Level 3 Cook recipes', [102, 103, 104]]);
+  assert.deepEqual([burgers?.unit, burgers?.label, lib.units[103], lib.level_units], [103, 'C7a', 'Level 3 Cook recipes', [102, 103, 104]]);
   assert.ok((await a.get('/api/queue')).body.library.some((L) => L.id === 'thick-burgers'), 'a parent can queue it');
   assert.equal((await a.post('/api/queue', { lesson_id: 'thick-burgers', profile_ids: [ava] })).status, 200);
 
@@ -282,7 +295,7 @@ test('the parent changes a week; a recipe is in one week only; Swap recipe with 
   const res = await a.post(`/api/courses/${id}/level-week`, { week: 4, id: 'chicken-fried-rice' });
   assert.equal(res.body.before, 'ratatouille');
   let q = await card(a);
-  assert.deepEqual(q.this_week.lessons.map((x) => [x.lesson_id, x.label]), [['chicken-fried-rice', 'Week 4']]);
+  assert.deepEqual(q.this_week.lessons.map((x) => [x.lesson_id, x.label]), [['chicken-fried-rice', 'C4']]);
   await a.post(`/api/courses/${id}/level-week`, { week: 4, id: res.body.before });
   q = await card(a);
   assert.equal(q.this_week.lessons[0].lesson_id, 'ratatouille');

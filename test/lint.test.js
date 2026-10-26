@@ -300,6 +300,12 @@ test('a recipe card is in one Level only, and another Level can cook it', () => 
   assert.doesNotMatch(two((V) => { V.recipes = []; }), /isn't a dish in course.json, a lesson, or (one of this|a) Level's recipe/);
 });
 
+test("each program's labels have a letter of their own; S and A are taken", () => {
+  assert.match(broken((c) => { level(c).sideUnit.prefix = 'U'; }), /prefix "U" is already units\.json 8's/);
+  assert.match(broken((c) => { level(c).sideUnit.prefix = 'S'; }), /prefix "S" is already Cook Around the World's/);
+  assert.match(broken((c) => { level(c).sideUnit.prefix = 'A'; }), /prefix "A" is already Level 1's/);
+});
+
 test('the hard rule holds on Level pages and recipes', () => {
   const bad = (fn) => broken((c) => fn(level(c)));
   assert.match(bad((L) => { L.weeks[0].knowledge.body = ['Shrimp is safe at 145°F.']; }), /names a blocked food \("shrimp"\)/);
