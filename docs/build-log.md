@@ -5897,3 +5897,15 @@ review](https://claude.ai/artifact/1wxbCfTZ2XeGSSVJ9sQkrn) (rows D10 to D41).
     for {Level}…", with Unit capitalized as elsewhere in the app).
 - Screenshots (phone width, light and dark) sent in the session.
 - Tests: 392.
+
+## 230. 2026-10-26 — Release 1 can be launched
+
+Owner, 2026-10-26: "Where's my ops release button to make it live for
+everyone".
+
+- **Before:** release 1 (the Levels) was marked as being built in
+  `src/worker/release.js`, so `/ops` offered its preview but no launch button.
+- **Now:** release 1 is no longer marked as being built. `/ops` → Releases
+  shows **Launch release 1 for everyone**, with **Undo launch** beside it once
+  it's pressed.
+- Tests: 392.

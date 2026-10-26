@@ -13,7 +13,7 @@ const KEY = 'releases';
 // its features with that number. A release marked building can be previewed
 // but not launched, so a half-built one can't go out to everyone.
 export const RELEASES = [
-  { n: 1, name: 'The Levels: Level 2 Apprentice, Level 3 Cook, and Level 4 Chef, with a Familiar and an Explore dish each week (plan §12)', building: true },
+  { n: 1, name: 'The Levels: Level 2 Apprentice, Level 3 Cook, and Level 4 Chef, with a Familiar and an Explore dish each week (plan §12)' },
 ];
 export const LATEST = RELEASES.at(-1).n;
 // The release the Levels (§12) come with: their courses, recipes, and public pages.
