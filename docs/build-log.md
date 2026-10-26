@@ -5560,6 +5560,6 @@ Plan only; no code. The owner's calls on presentation by Level (§12.0, 14e).
     dish pictures, from ChatGPT sheets the owner uploads.
   - 14e also has a Level week play its own Level's version of a shared
     lesson, never one picked by best fit.
-  - **Claude's recommendations, not yet confirmed:** pictures on 3–4 key
+  - **Claude's proposals, confirmed by the owner ("Yes to all"):** pictures on 3–4 key
     steps a recipe, one sheet per recipe; the Levels before Cook Around the
     World; a writing standard per Level that the linter warns on.
