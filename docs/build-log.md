@@ -5789,6 +5789,9 @@ owner approves it there.
   - **Minestrone's Level 3 version** (`"level": "sp-3"`): sized cuts (½-inch
     onion, celery, and zucchini; ¼-inch carrot), a timed knife check, and no
     beginner tips. Level 3 has no lessons left without a version in Unit 1.
+  - **Week 1 uses jarred minced garlic** (owner, 2026-10-26: "Youre asking
+    for a mince not taught yet"): mincing is week 2's skill, so the
+    quesadillas and rajma measure jarred garlic instead of mincing cloves.
   - **Week 3's Knowledge page:** reading a recipe for timing, a prep list,
     mise en place, and why a scale beats cups, with a 7-question quiz.
   - **New ingredients:** canned red kidney beans, lo mein egg noodles, thin

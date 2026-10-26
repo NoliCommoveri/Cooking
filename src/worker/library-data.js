@@ -7112,7 +7112,7 @@ export const LIBRARY = {
      "ingredient": "bell-pepper-red"
     },
     {
-     "ingredient": "garlic"
+     "ingredient": "garlic-minced-jarred"
     },
     {
      "ingredient": "black-beans"
@@ -7158,8 +7158,7 @@ export const LIBRARY = {
    "tasteItems": {
     "required": [
      "onions",
-     "bell-peppers",
-     "garlic"
+     "bell-peppers"
     ],
     "optional": [
      "sour-cream-yogurt"
@@ -7612,7 +7611,7 @@ export const LIBRARY = {
      "ingredient": "tomato"
     },
     {
-     "ingredient": "garlic"
+     "ingredient": "garlic-minced-jarred"
     },
     {
      "ingredient": "ginger-fresh"
@@ -7658,7 +7657,6 @@ export const LIBRARY = {
     "required": [
      "onions",
      "tomatoes",
-     "garlic",
      "ginger",
      "hot-peppers"
     ],
