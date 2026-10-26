@@ -29,6 +29,7 @@
       "type": "object", "additionalProperties": false, "required": ["id", "title"],
       "properties": {
         "id": { "$ref": "#/$defs/id" }, "title": { "$ref": "#/$defs/text" }, "tags": { "$ref": "#/$defs/tags" },
+        "level": { "type": "string", "pattern": "^sp-[0-9]+$", "description": "A Level's version of the lesson (14e): its Level course always plays it, and it's never a taste pick." },
         "image": { "$ref": "#/$defs/text" }, "servings": { "type": "integer", "minimum": 1 }, "totalMinutes": { "type": "integer", "minimum": 1 },
         "scaling": { "type": "object" }, "substitutions": { "type": ["array", "null"] }, "intro": { "type": ["object", "null"] },
         "learn": { "type": "object", "additionalProperties": false, "properties": {
@@ -47,6 +48,7 @@
         "hazard": { "$ref": "#/$defs/text" },
         "tip": { "$ref": "#/$defs/text" },
         "look": { "$ref": "#/$defs/text" },
+        "picture": { "type": "string", "pattern": "^steps/[a-z0-9-]+/[a-z0-9-]+\\.png$", "description": "A picture of the step (14e), in content/images/steps/<lesson>/: shown under the step at Level 2, behind Show me otherwise." },
         "why": { "$ref": "#/$defs/id" },
         "handles": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/id" } },
         "timerSeconds": { "type": "integer", "minimum": 1 },

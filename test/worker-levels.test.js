@@ -177,6 +177,10 @@ test("the kitchen shows this week's recipe and three parts, and the mastery reci
   assert.ok(lv.mastery.includes('minestrone') && lv.mastery.includes('challah') && !lv.mastery.includes('thick-burgers'));
   assert.equal(lv.sabbath, saturday);
   assert.deepEqual(lv.open, []);
+  // Each recipe's week on the course, for its card in place of lesson numbers.
+  assert.equal(lv.week_of.minestrone, 4);
+  assert.equal(new Set(Object.values(lv.week_of)).size, Object.keys(lv.week_of).length, 'one recipe a week');
+  assert.ok(Object.values(lv.week_of).every((n) => Number.isInteger(n) && n >= 1 && n <= 36));
 });
 
 test('a part is checked off per profile; the parent takes it back, with Undo', async () => {
@@ -660,4 +664,79 @@ test('a swap after the shopping list is made: the preview for the new dish, the 
   const made = await a.post('/api/shopping/lists', { keys: [p.lessons[0].key], on_hand: p.already });
   assert.equal(made.status, 200);
   assert.equal((await thisWeek(a)).swap.shopping, false);
+});
+
+// 14e: step pictures show under each step on Level 2, behind Show me on
+// Level 3 and 4, and a parent can change it for each learner.
+test("step pictures follow the Level, and a parent's pick for each learner", async () => {
+  const { a, ava, ben } = await setup();
+  await level(a, [ava, ben]);
+  const c = (await a.get('/api/courses')).body.courses[0];
+  assert.equal(c.pictures_default, 'button', 'Level 3 puts them behind Show me');
+  assert.deepEqual(c.pictures, { [ava]: 'button', [ben]: 'button' });
+  assert.equal((await kitchen(a, ava)).pictures, 'button');
+
+  const put = (pictures) => a.put(`/api/courses/${c.id}`, { name: '', start_date: c.start_date, per_week: 1, profile_ids: [ava, ben], pictures });
+  assert.equal((await put({ [ava]: 'shown', [ben]: 'button' })).status, 200);
+  assert.equal((await kitchen(a, ava)).pictures, 'shown');
+  assert.equal((await kitchen(a, ben)).pictures, 'button');
+  assert.deepEqual((await a.get('/api/courses')).body.courses[0].pictures, { [ava]: 'shown', [ben]: 'button' });
+  assert.equal((await put({ [ava]: 'big' })).status, 400);
+  assert.equal((await put({ nobody: 'shown' })).status, 400);
+  // Saving without pictures keeps the picks; back to the Level's way drops them.
+  assert.equal((await a.put(`/api/courses/${c.id}`, { name: '', start_date: c.start_date, per_week: 1, profile_ids: [ava, ben] })).status, 200);
+  assert.equal((await kitchen(a, ava)).pictures, 'shown');
+  await put({ [ava]: 'button' });
+  assert.equal((await kitchen(a, ava)).pictures, 'button');
+});
+
+test('a Level 2 course shows step pictures under each step', async () => {
+  const { a, ava } = await setup();
+  await a.post('/api/courses', { program: 'sp-2', start_date: sunday, per_week: 1, profile_ids: [ava], starts: 'familiar' });
+  const c = (await a.get('/api/courses')).body.courses[0];
+  assert.equal(c.pictures_default, 'shown');
+  assert.equal((await kitchen(a, ava)).pictures, 'shown');
+});
+
+test('before /ops applies the draft, a course still saves and its step pictures follow the Level', async () => {
+  const { env, a, ava } = await setup();
+  await env.DB.prepare('DROP TABLE course_pictures').run();
+  const made = await level(a, [ava], sunday, { pictures: { [ava]: 'shown' } });
+  assert.equal(made.status, 200);
+  assert.equal(made.body.pictures_saved, false);
+  assert.equal((await kitchen(a, ava)).pictures, 'button');
+});
+
+// 14e: a Level course cooks the Level's own version of a lesson, never a
+// taste pick or the best fit; until one is written, the lesson itself.
+test("a Level course plays the lesson itself, not the family's taste pick", async () => {
+  const { a, ava } = await setup();
+  assert.equal((await a.put('/api/variations/chimichurri-steak', { variation: 'chicken' })).status, 200);
+  await a.post('/api/courses', { program: 'sp-4', start_date: sunday, per_week: 1, profile_ids: [ava], starts: 'familiar' });
+  const q = (await a.get(`/api/profiles/${ava}/queue`)).body;
+  assert.ok(Object.values(q.level.week_of).length && q.level.week_of['chimichurri-steak'], 'chimichurri steak is a Level 4 week');
+  assert.equal(q.versions['chimichurri-steak'], '', 'no Level 4 version yet: the lesson itself');
+  // And it's bought for as the lesson, not the family's pick.
+  const shop = (await a.get('/api/shopping')).body.weeks.flatMap((w) => w.lessons).find((e) => e.lesson_id === 'chimichurri-steak');
+  assert.ok(shop, 'on the shopping weeks ahead');
+  assert.equal(shop.variation, undefined);
+});
+
+test("a Level course plays the Level's own version, and it's never a taste pick", async () => {
+  const L = LIBRARY.lessons.find((x) => x.id === 'minestrone');
+  const { variations: _, ...summary } = L;
+  L.variations = [{ ...summary, id: 'sp-3', title: 'Minestrone', level: 'sp-3' }];
+  try {
+    const { a, ava, ben } = await setup();
+    await level(a, [ava]);
+    const q = (await a.get(`/api/profiles/${ava}/queue`)).body;
+    assert.equal(q.versions.minestrone, 'sp-3');
+    const row = (await card(a)).this_week.lessons.find((x) => x.lesson_id === 'minestrone');
+    assert.equal(row.version, null, 'no Version button on a Level week');
+    // Off the Level course, the Level's version isn't offered or picked.
+    assert.equal((await a.get(`/api/profiles/${ben}/queue`)).body.versions.minestrone, undefined);
+    assert.equal((await a.put('/api/variations/minestrone', { variation: 'sp-3' })).status, 400);
+  } finally {
+    delete L.variations;
+  }
 });

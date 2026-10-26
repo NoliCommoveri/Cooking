@@ -39,3 +39,18 @@ sheet-25-quick-smoky.png beef-and-broccoli,coconut-chickpea-curry,blackened-cod,
 sheet-26-tropical-lamb.png moqueca,coconut-crusted-fish,lamb-kofta,caribbean-lamb-chops
 sheet-27-level-pick-ones-1.png chopped-salad-vinaigrette,vegetable-stir-fry,red-lentil-soup,beef-stew
 sheet-28-level-pick-ones-2.png shish-taouk,beef-ragu,mujaddara,pita-bread
+sheet-29-levels-1.png caprese-sandwiches,-,molletes,loaded-baked-potatoes
+sheet-30-levels-2.png bun-bowl,mini-pita-pizzas,ful-medames,hummus-plate
+sheet-31-levels-3.png chicken-caesar-wraps,chana-chaat,kofte,beef-tacos-seasoning
+sheet-32-levels-4.png keema,fish-sticks,shioyaki,teriyaki-chicken-bites
+sheet-33-levels-5.png welsh-cakes,chocolate-chip-cookies,alfajores,banana-bread
+sheet-40-levels-12.png trinidad-curry-chicken,kefta-tagine,tom-kha-gai,bean-quesadillas
+sheet-41-levels-13.png rajma,aglio-e-olio,scallion-oil-noodles,vegetable-lo-mein
+sheet-42-levels-14.png -,-,bean-tostadas
+sheet-43-levels-15.png chermoula-fish,chicken-tenders,soda-bread,manoushe
+sheet-44-levels-16.png conchas,apple-galette,pulla,steamed-salmon-vegetables
+# sheet-42-levels-14.png: ajapsandali and solterito touch, so they're split by hand the same way:
+#   ajapsandali 780,0,1536,476   solterito 780,476,1536,1024
+# Onigiri (sheet 29) and kimbap (sheet 42) have plates whose white rim gaps let the tool's
+# fill eat the plate; each was cut from its box (onigiri 800,0,1536,480; kimbap 0,0,780,490)
+# with a mask of everything not white, closed (25px) and hole-filled, so the plate stays.

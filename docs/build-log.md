@@ -5542,3 +5542,144 @@ parent."
   preview after a swap with the old list preselected, We have what it
   needs with Undo, and a new list clearing the notice. Every swap test
   expects a refusal when run on the Sabbath.
+
+## 219. 2026-10-26 — Plan 14e: Level versions and step pictures
+
+Plan only; no code. The owner's calls on presentation by Level (§12.0, 14e).
+
+- **Before:** §12.0 and 14e called for "a coaching setting per Level in the
+  player."
+- **Now:**
+  - **Presentation comes from each Level's written version** of a recipe,
+    not from the player adapting one recipe (owner: "the original idea was
+    writing level appropriate variations of the recipes"). The coaching
+    setting is gone. Level 3 and Level 4 use the same player.
+  - **Step pictures at every Level** (owner: "since video is too expensive
+    I definitely think we should do pictures"): shown under the step on
+    Level 2 versions, behind **Show me** on Level 3 and 4. Made like the
+    dish pictures, from ChatGPT sheets the owner uploads.
+  - 14e also has a Level week play its own Level's version of a shared
+    lesson, never one picked by best fit.
+  - **Claude's proposals, confirmed by the owner ("Yes to all"):** pictures on 3–4 key
+    steps a recipe, one sheet per recipe; the Levels before Cook Around the
+    World; a writing standard per Level that the linter warns on.
+
+## 220. 2026-10-26 — Level week numbers on recipe cards; more 14e calls
+
+Owner, 2026-10-26: Cook Around the World recipes on a Level course "show
+numbers that are all out of order for how they present in a level course"
+("Or hide the numbers"). Also the owner's yes to Claude's 14e proposals.
+
+- **Before:** a Level learner's recipe card showed Cook Around the World's
+  numbers: "Path 1 · Quest 27 of 59" in Kitchen Quest, "Lesson 27 of 59" in
+  Chef's Passport, and "Path 1:" on More recipes' shelves.
+- **Now:**
+  - **In the player,** a Level learner's card says "Level 3 Cook · Week 4"
+    for a recipe on their course, and just the Level's name for one that
+    isn't. Lesson numbers in the Learn cards and fix notes are hidden.
+  - **On More recipes (Side quests),** a card says "Week 9" for a recipe on
+    the course; others show no number ("Side quest" in Kitchen Quest).
+    Shelves show the unit's name without "Path 1:".
+  - The kitchen's Level data has `week_of`: each recipe's week on the
+    course.
+- **Plan, 14e:** Level 2 is written for a beginner of any age; a parent
+  setting per learner for step pictures (shown, or behind Show me); no
+  switching to another Level's version inside a course; Cook Around the
+  World recipes on a Level week get Level versions in 14g.
+- Screenshots (phone width, Kitchen Quest and Chef's Passport) of the
+  player's card and More recipes were sent in the session.
+- Tests: 370. The kitchen test checks `week_of`.
+
+## 221. 2026-10-26 — Re-plan build, 14e: step pictures and Show me
+
+Owner, 2026-10-26: "Go" (build 14e's player work: step pictures, Show me,
+and the parent's setting).
+
+- **Before:** a lesson step had words only (with its tip, look note, Why?,
+  and How much?).
+- **Now:**
+  - **Step pictures in lesson files:** `"picture":
+    "steps/<lesson>/<name>.png"` on a step, from
+    `content/images/steps/<lesson>/`. The schema, the content editor (a
+    Step picture field), and the linter (the file must exist) know it.
+    `tools/build-dish-images.py` makes its web copy in
+    `public/img/steps/`, and the content-publish workflow passes new ones to
+    it. A test checks every step picture has a web copy.
+  - **In the player:** the picture shows under the step's words, or a
+    **Show me** button (an eye icon) opens it, with **Hide the picture** to
+    close it. It closes on the next step. Kitchen Quest frames it in gold;
+    Chef's Passport as a snapshot.
+  - **Step pictures setting:** Set up a course and Edit course have **Step
+    pictures** for each learner on a Level course: Under each step, or
+    Behind Show me, with "the Level's way" marked (Level 2 under each step,
+    Level 3 and 4 behind Show me). Only a change from the Level's way is
+    kept. The kitchen's Level data says how this learner's pictures show.
+    Outside a Level course, pictures are behind Show me.
+  - New in the draft migration `0002_levels.sql`: `course_pictures`.
+  - `tools/split-step-sheet.py`: cuts a 2×2 ChatGPT sheet of step
+    pictures into four square PNGs named for their steps.
+- **Owner, on `/ops` after it deploys:** press **Re-apply draft** for
+  `0002` (or **Apply pending** if it isn't applied). Until then a course
+  still saves, and step pictures follow the Level, with a note saying so.
+- No lesson has a step picture yet: the first prompt sheets come next.
+- Screenshots (phone width) of a cook step with Show me, opened, and shown
+  under the step, in Kitchen Quest and Chef's Passport, and Edit course's
+  Step pictures in light and dark, were sent in the session. They used a
+  stand-in picture that isn't in the repo.
+- Tests: 375. New: step pictures follow the Level and each learner's pick
+  (Level 3 and Level 2, a bad value, someone not on the course, saving
+  without the setting, back to the Level's way); a course saves before the
+  draft and its pictures follow the Level; the linter refuses a missing or
+  misnamed step picture.
+
+## 222. 2026-10-26 — Re-plan build, 14e: Level versions and the writing standard
+
+Owner, 2026-10-26: "skip picture prompts for now, do the rest" of 14e.
+
+- **Before:** a Level week cooking a Cook Around the World lesson played the
+  family's taste pick or the best fit, like any other cook, and nothing
+  checked a Level recipe against its Level's writing.
+- **Now:**
+  - **A Level's version** is a variation with `"level"` (sp-2, sp-3, or
+    sp-4), one per Level, which may keep the lesson's name. On that Level's
+    course the kitchen, the course card, and shopping use it, with no
+    Version button; until it's written, the lesson itself. It's never a
+    taste pick (the Version dialog refuses it), never the best fit, and not
+    counted in Recipe gaps. The player doesn't call it "a version of".
+  - **The content editor:** Add a variation asks what it's for, a
+    preference or a Level's version; a Level's version says so on its page
+    and in the lesson's list, and keeps its Level when edited.
+  - **The writing standard, as linter warnings** (Claude's numbers):
+    Level 2, a step over 25 words, a "!", or fewer than half the steps with
+    a tip or "should look like"; Level 4, more than a third of the steps
+    with a tip. Each Level file lists the written lessons its weeks cook
+    with no version for it yet.
+- Tests: 380. New: a Level course plays the lesson itself over the
+  family's taste pick, and buys for it; it plays the Level's version, with
+  no Version button, which isn't offered off the course or pickable; the
+  linter's Level version rules and writing warnings.
+
+## 223. 2026-10-26 — Level dish pictures: sheets 29–33 and 40–44
+
+Owner, 2026-10-26: ten ChatGPT sheets from [Level dish pictures: ChatGPT
+prompts](https://claude.ai/artifact/PbGHZTt9e78S2SbwtyYVMB), five for
+Level 2 and five for Level 3 (sheet 40 is Levels 2 and 3).
+
+- **Before:** Level recipe cards had only a meal-type drawing (`art`).
+- **Now:**
+  - 40 dish pictures, matched to the prompt doc's sheets 29–33 and 40–44,
+    saved to `content/images/source/` under the doc's names, cropped into
+    `content/images/dishes/<card id>.png`, and built to
+    `public/img/dishes/`. Each was checked by eye for unclean foods: none
+    (the potatoes have no bacon, the kimbap has egg and vegetables, no ham
+    or crab stick).
+  - Hand cuts, written down in `tools/dish-sheets.txt`: ajapsandali and
+    solterito touched on sheet 42; onigiri's and kimbap's plates had gaps in
+    their rims, so they were cut with a filled mask to keep the plate.
+  - **A recipe card's picture:** `"image": "dishes/<id>.png"` on a Level
+    card (the level schema), on all 40. The linter checks the name and the
+    file, and that a written lesson for the card uses the same picture. A
+    test checks every card picture has a web copy.
+- The app shows a Level card's picture once its lesson is written; none of
+  these 40 is written yet.
+- Tests: 381.

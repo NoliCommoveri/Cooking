@@ -50,6 +50,49 @@ test('blocked words in step text fail', () => {
   assert.match(broken((c, L) => { L('shakshuka').steps[0].tip = 'Bacon would be good here.'; }), /blocked food \("bacon"\)/);
 });
 
+test("a step picture must be in content/images, and named like steps/<lesson>/<name>.png", () => {
+  assert.match(broken((c, L) => { L('shakshuka').steps[0].picture = 'steps/shakshuka/no-such.png'; }), /picture steps\/shakshuka\/no-such\.png isn't in content\/images/);
+  assert.match(broken((c, L) => { L('shakshuka').steps[0].picture = 'dishes/shakshuka.png'; }), /doesn't match/);
+});
+
+// 14e: a Level's version of a lesson, and each Level's writing standard.
+function lintWith(fn) {
+  const c = structuredClone({ ...base, imageExists: undefined });
+  c.imageExists = base.imageExists;
+  c.lessons = c.lessons.map(l => ({ ...l }));
+  fn(c, n => c.lessons.find(l => l.data.id === n).data);
+  return lint(c);
+}
+test("a Level's version keeps the lesson's name, one a Level, for a real Level", () => {
+  const { errors } = lintWith((c, L) => { L('minestrone').variations = [{ id: 'sp-3', title: 'Minestrone', level: 'sp-3' }]; });
+  assert.deepEqual(errors, []);
+  const twice = lintWith((c, L) => { L('minestrone').variations = [{ id: 'sp-3', title: 'Minestrone', level: 'sp-3' }, { id: 'again', title: 'Minestrone again', level: 'sp-3' }]; });
+  assert.match(twice.errors.join('\n'), /already a sp-3 version/);
+  assert.match(lintWith((c, L) => { L('minestrone').variations = [{ id: 'sp-9', title: 'Minestrone', level: 'sp-9' }]; }).errors.join('\n'), /"sp-9" isn't a Level/);
+  assert.match(lintWith((c, L) => { L('minestrone').variations = [{ id: 'same', title: 'Minestrone' }]; }).errors.join('\n'), /needs a title of its own/);
+});
+
+test("each Level's writing standard warns: Level 2 one action a step in plain words, Level 4 few tips", () => {
+  const long = 'Cut the carrots into sticks and then cut the sticks across into small cubes about the size of a pea and put them all in the bowl with the onion';
+  const w2 = lintWith((c, L) => {
+    const steps = L('minestrone').steps.map(({ tip, look, ...s }) => s);
+    steps[0] = { ...steps[0], text: long };
+    steps[1] = { ...steps[1], text: 'Peel the onion!' };
+    L('minestrone').variations = [{ id: 'sp-2', title: 'Minestrone', level: 'sp-2', steps: { change: Object.fromEntries(steps.map((s) => [s.id, s])) } }];
+  }).warnings.join('\n');
+  assert.match(w2, /runs 29 words; Level 2 keeps a step to one action/);
+  assert.match(w2, /has "!"; Level 2 is plain words/);
+  assert.match(w2, /0 of 14 steps have a tip or a "should look like"; Level 2 has one on most steps/);
+  const w4 = lintWith((c, L) => {
+    L('minestrone').variations = [{ id: 'sp-4', title: 'Minestrone', level: 'sp-4', steps: { change: Object.fromEntries(L('minestrone').steps.map((s) => [s.id, { ...s, tip: 'Taste as you go.' }])) } }];
+  }).warnings.join('\n');
+  assert.match(w4, /steps have a tip; Level 4 keeps tips few/);
+});
+
+test("a Level's weeks list the written lessons with no version for it yet", () => {
+  assert.match(lint(base).warnings.join('\n'), /levels\/sp-3\.json: \d+ written lessons its weeks cook have no Level 3 Cook version yet: .*minestrone/);
+});
+
 test('a missing wash step after raw food fails', () => {
   assert.match(broken((c, L) => { L('shakshuka').steps = L('shakshuka').steps.filter(s => s.id !== 'wash-egg'); }), /next step must be a wash step/);
 });

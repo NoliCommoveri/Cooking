@@ -32,3 +32,16 @@ CREATE TABLE IF NOT EXISTS level_swaps (
   shop_done_at TEXT
 );
 CREATE INDEX IF NOT EXISTS level_swaps_course ON level_swaps(course_id, week);
+
+-- Step pictures (14e): a parent's pick, for one learner on a Level course, of
+-- how the player shows a step's picture. shown: 1 under each step, 0 behind
+-- Show me. Only a change from the Level's way has a row (Level 2 shows them;
+-- Level 3 and 4 put them behind Show me).
+CREATE TABLE IF NOT EXISTS course_pictures (
+  course_id  TEXT NOT NULL,
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  profile_id TEXT NOT NULL,
+  shown      INTEGER NOT NULL,
+  updated_at TEXT NOT NULL,
+  PRIMARY KEY (course_id, profile_id)
+);

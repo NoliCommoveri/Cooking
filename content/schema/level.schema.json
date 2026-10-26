@@ -185,6 +185,11 @@
             "drink"
           ]
         },
+        "image": {
+          "type": "string",
+          "pattern": "^dishes/[a-z0-9-]+\\.png$",
+          "description": "The dish's picture, once its ChatGPT sheet is cropped: dishes/<id>.png. Its lesson uses it when written."
+        },
         "safety": {
           "enum": [
             "solo",

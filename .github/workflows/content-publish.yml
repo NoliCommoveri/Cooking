@@ -42,7 +42,7 @@ jobs:
           set -o pipefail
           pip install --quiet pillow
           # Only the pictures this brings to main, so the others aren't re-encoded.
-          changed=$(git diff --name-only --diff-filter=AM origin/main...HEAD -- 'content/images/dishes/*.png')
+          changed=$(git diff --name-only --diff-filter=AM origin/main...HEAD -- 'content/images/dishes/*.png' 'content/images/steps/*/*.png')
           if [ -n "$changed" ]; then python3 tools/build-dish-images.py $changed 2>&1 | tee -a check.log; fi
           node tools/build-library.js 2>&1 | tee -a check.log
       - name: Check the content

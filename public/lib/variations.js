@@ -117,18 +117,20 @@ export function applyVariation(L, v) {
 
 // What a family cooks: the lesson, or the variation by that id, marked with
 // which one it is and what it's a version of. An id the lesson doesn't have
-// (taken out since) gives the lesson itself.
+// (taken out since) gives the lesson itself. A Level's version (14e) is the
+// Level's recipe, not "a version of" anything, so it says which Level instead.
 export function lessonVersion(L, id) {
   const v = id ? variationById(L, id) : null;
   if (!v) return L;
-  return { ...applyVariation(L, v), variation: v.id, versionOf: L.title, tags: v.tags };
+  return { ...applyVariation(L, v), variation: v.id, ...(v.level ? { level: v.level } : { versionOf: L.title }), tags: v.tags };
 }
 
 // The variation that turns lesson L into full: what the content editor stores
-// when the owner edits a copy of the lesson (§7.5). head: { id, tags }.
+// when the owner edits a copy of the lesson (§7.5). head: { id, tags, level }.
 export function diffVariation(L, full, head) {
   const { variations, ...base } = L;
   const v = { id: head.id, title: full.title };
+  if (head.level) v.level = head.level;
   if (head.tags) v.tags = structuredClone(head.tags);
   for (const k of WHOLE) {
     if (same(base[k], full[k])) continue;

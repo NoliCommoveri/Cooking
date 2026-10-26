@@ -53,7 +53,29 @@
     { "week": 36, "unit": 9, "kind": "capstone", "minutes": 120, "note": "One Sabbath dish made ahead from a prep list, picked from the student's own recipe weeks", "drill": { "title": "Run the prep list with an adult watching", "minutes": 20 }, "knowledge": { "title": "Reflection: what went well, what to change", "minutes": 20 }, "sabbath": { "title": "Giving thanks for food (Deuteronomy 8:10)", "minutes": 20 } }
   ],
   "recipes": [
-    { "id": "caprese-sandwiches", "title": "Caprese sandwiches", "cuisine": "italian", "skills": ["knife-safety"], "skill": "Slicing soft foods with a paring knife", "art": "side", "safety": "adult-nearby", "minutes": 25, "estimated": true, "about": "Tomato and fresh mozzarella sliced with a paring knife and layered with basil on ciabatta.", "main": ["ciabatta", "tomatoes", "fresh mozzarella", "basil", "olive oil"], "method": "no-cook", "tags": { "protein": "none", "flavors": ["herby-lemony", "creamy-cheesy"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "some" } },
+    {
+      "id": "caprese-sandwiches",
+      "title": "Caprese sandwiches",
+      "cuisine": "italian",
+      "skills": ["knife-safety"],
+      "skill": "Slicing soft foods with a paring knife",
+      "art": "side",
+      "image": "dishes/caprese-sandwiches.png",
+      "safety": "adult-nearby",
+      "minutes": 25,
+      "estimated": true,
+      "about": "Tomato and fresh mozzarella sliced with a paring knife and layered with basil on ciabatta.",
+      "main": ["ciabatta", "tomatoes", "fresh mozzarella", "basil", "olive oil"],
+      "method": "no-cook",
+      "tags": {
+        "protein": "none",
+        "flavors": ["herby-lemony", "creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      }
+    },
     {
       "id": "onigiri",
       "title": "Onigiri with tuna",
@@ -61,6 +83,7 @@
       "skills": ["knife-safety", "rolling-wrapping"],
       "skill": "Shaping rice with damp hands",
       "art": "side",
+      "image": "dishes/onigiri.png",
       "safety": "adult-nearby",
       "minutes": 30,
       "estimated": true,
@@ -83,6 +106,7 @@
       "skills": ["heat-control"],
       "skill": "Using the oven with mitts on",
       "art": "side",
+      "image": "dishes/molletes.png",
       "safety": "adult-nearby",
       "minutes": 30,
       "estimated": true,
@@ -98,7 +122,29 @@
         "veggies": "some"
       }
     },
-    { "id": "loaded-baked-potatoes", "title": "Loaded baked potatoes", "cuisine": "american", "skills": ["mise-en-place"], "skill": "Setting every topping out first", "art": "side", "safety": "adult-nearby", "minutes": 30, "estimated": true, "about": "Baked potatoes split and loaded with butter, cheddar, sour cream, and green onion from a set-out topping bar.", "main": ["russet potatoes", "cheddar", "sour cream", "green onions", "butter"], "method": "oven", "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    {
+      "id": "loaded-baked-potatoes",
+      "title": "Loaded baked potatoes",
+      "cuisine": "american",
+      "skills": ["mise-en-place"],
+      "skill": "Setting every topping out first",
+      "art": "side",
+      "image": "dishes/loaded-baked-potatoes.png",
+      "safety": "adult-nearby",
+      "minutes": 30,
+      "estimated": true,
+      "about": "Baked potatoes split and loaded with butter, cheddar, sour cream, and green onion from a set-out topping bar.",
+      "main": ["russet potatoes", "cheddar", "sour cream", "green onions", "butter"],
+      "method": "oven",
+      "tags": {
+        "protein": "none",
+        "flavors": ["creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
     {
       "id": "bun-bowl",
       "title": "Bún bowl with chicken",
@@ -106,6 +152,7 @@
       "skills": ["mise-en-place"],
       "skill": "Setting out a bowl's parts in small dishes",
       "art": "salad",
+      "image": "dishes/bun-bowl.png",
       "safety": "adult-nearby",
       "minutes": 35,
       "estimated": true,
@@ -121,7 +168,29 @@
         "veggies": "lots"
       }
     },
-    { "id": "mini-pita-pizzas", "title": "Mini pita pizzas", "cuisine": "italian", "skills": ["measuring"], "skill": "Halving or doubling a recipe for the family", "art": "side", "safety": "adult-nearby", "minutes": 30, "estimated": true, "about": "Small pitas topped with sauce, mozzarella, peppers, and mushrooms, baked until bubbling.", "main": ["pita", "pizza sauce", "mozzarella", "bell pepper", "mushrooms"], "method": "oven", "tags": { "protein": "none", "flavors": ["rich-tomato", "creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "some" } },
+    {
+      "id": "mini-pita-pizzas",
+      "title": "Mini pita pizzas",
+      "cuisine": "italian",
+      "skills": ["measuring"],
+      "skill": "Halving or doubling a recipe for the family",
+      "art": "side",
+      "image": "dishes/mini-pita-pizzas.png",
+      "safety": "adult-nearby",
+      "minutes": 30,
+      "estimated": true,
+      "about": "Small pitas topped with sauce, mozzarella, peppers, and mushrooms, baked until bubbling.",
+      "main": ["pita", "pizza sauce", "mozzarella", "bell pepper", "mushrooms"],
+      "method": "oven",
+      "tags": {
+        "protein": "none",
+        "flavors": ["rich-tomato", "creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "some"
+      }
+    },
     {
       "id": "ful-medames",
       "title": "Ful medames with pita chips",
@@ -129,6 +198,7 @@
       "skills": ["measuring", "timing"],
       "skill": "Timing three parts together",
       "art": "side",
+      "image": "dishes/ful-medames.png",
       "safety": "adult-nearby",
       "minutes": 40,
       "estimated": true,
@@ -144,7 +214,7 @@
         "veggies": "some"
       }
     },
-    { "id": "hummus-plate", "title": "Hummus plate", "cuisine": "lebanese", "skills": ["fine-chopping"], "skill": "Peeling, coring, and seeding vegetables", "art": "salad", "safety": "adult-nearby", "minutes": 25, "estimated": true, "about": "Hummus made in the blender from canned chickpeas, with cucumber, tomatoes, and pita.", "main": ["canned chickpeas", "tahini", "lemon", "cucumber", "pita"], "method": "no-cook", "tags": { "protein": "beans-lentils", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "some" } },
+    { "id": "hummus-plate", "title": "Hummus plate", "cuisine": "lebanese", "skills": ["fine-chopping"], "skill": "Peeling, coring, and seeding vegetables", "art": "salad", "image": "dishes/hummus-plate.png", "safety": "adult-nearby", "minutes": 25, "estimated": true, "about": "Hummus made in the blender from canned chickpeas, with cucumber, tomatoes, and pita.", "main": ["canned chickpeas", "tahini", "lemon", "cucumber", "pita"], "method": "no-cook", "tags": { "protein": "beans-lentils", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "some" } },
     {
       "id": "chicken-caesar-wraps",
       "title": "Chicken Caesar wraps",
@@ -152,6 +222,7 @@
       "skills": ["dressings"],
       "skill": "Whisking a dressing and tasting it",
       "art": "salad",
+      "image": "dishes/chicken-caesar-wraps.png",
       "safety": "adult-nearby",
       "minutes": 25,
       "estimated": true,
@@ -168,8 +239,30 @@
         "veggies": "some"
       }
     },
-    { "id": "chana-chaat", "title": "Chana chaat", "cuisine": "indian", "skills": ["dressings"], "skill": "A tangy dressing tasted and fixed", "art": "salad", "safety": "adult-nearby", "minutes": 20, "estimated": true, "about": "An Indian chickpea salad with onion, tomato, cucumber, cilantro, lime, and chaat masala.", "main": ["canned chickpeas", "tomato", "cucumber", "red onion", "lime"], "method": "no-cook", "tags": { "protein": "beans-lentils", "flavors": ["tangy", "warm-spices"], "heat": "some", "budget": "$", "familiar": "new-ish", "veggies": "lots" } },
-    { "id": "kofte", "title": "Köfte with tomato-cucumber salad", "cuisine": "turkish", "skills": ["temping-meat"], "skill": "Checking patties for 160°F", "art": "meat", "safety": "adult-nearby", "minutes": 40, "estimated": true, "about": "Turkish beef patties with onion, parsley, and cumin, cooked to 160°F, with a tomato-cucumber salad.", "main": ["ground beef", "onion", "parsley", "cumin", "tomato and cucumber"], "method": "stove", "tags": { "protein": "beef", "flavors": ["warm-spices", "herby-lemony"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "some" } },
+    { "id": "chana-chaat", "title": "Chana chaat", "cuisine": "indian", "skills": ["dressings"], "skill": "A tangy dressing tasted and fixed", "art": "salad", "image": "dishes/chana-chaat.png", "safety": "adult-nearby", "minutes": 20, "estimated": true, "about": "An Indian chickpea salad with onion, tomato, cucumber, cilantro, lime, and chaat masala.", "main": ["canned chickpeas", "tomato", "cucumber", "red onion", "lime"], "method": "no-cook", "tags": { "protein": "beans-lentils", "flavors": ["tangy", "warm-spices"], "heat": "some", "budget": "$", "familiar": "new-ish", "veggies": "lots" } },
+    {
+      "id": "kofte",
+      "title": "Köfte with tomato-cucumber salad",
+      "cuisine": "turkish",
+      "skills": ["temping-meat"],
+      "skill": "Checking patties for 160°F",
+      "art": "meat",
+      "image": "dishes/kofte.png",
+      "safety": "adult-nearby",
+      "minutes": 40,
+      "estimated": true,
+      "about": "Turkish beef patties with onion, parsley, and cumin, cooked to 160°F, with a tomato-cucumber salad.",
+      "main": ["ground beef", "onion", "parsley", "cumin", "tomato and cucumber"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["warm-spices", "herby-lemony"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      }
+    },
     {
       "id": "beef-tacos-seasoning",
       "title": "Beef tacos with homemade seasoning",
@@ -177,6 +270,7 @@
       "skills": ["reading-labels"],
       "skill": "Reading labels on shells and seasoning",
       "art": "meat",
+      "image": "dishes/beef-tacos-seasoning.png",
       "safety": "adult-nearby",
       "minutes": 35,
       "estimated": true,
@@ -199,6 +293,7 @@
       "skills": ["reading-labels"],
       "skill": "Choosing clean ground beef and spices",
       "art": "meat",
+      "image": "dishes/keema.png",
       "safety": "adult-nearby",
       "minutes": 40,
       "estimated": true,
@@ -214,8 +309,8 @@
         "veggies": "some"
       }
     },
-    { "id": "fish-sticks", "title": "Oven-baked fish sticks", "cuisine": "american", "skills": ["cooking-fish"], "skill": "Thawing fish safely and baking to 145°F", "art": "fish", "safety": "adult-nearby", "minutes": 35, "estimated": true, "about": "Cod strips crumbed and baked crisp, with tartar sauce and lemon.", "main": ["cod", "breadcrumbs", "egg", "lemon", "tartar sauce"], "method": "oven", "tags": { "protein": "white-fish", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } },
-    { "id": "shioyaki", "title": "Shioyaki salted salmon", "cuisine": "japanese", "skills": ["cooking-fish"], "skill": "Baking fish to 145°F", "art": "fish", "safety": "adult-nearby", "minutes": 30, "estimated": true, "about": "Japanese salted salmon, baked until the skin crisps, with rice.", "main": ["salmon fillet", "salt", "rice", "lemon"], "method": "oven", "tags": { "protein": "salmon", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "light" } },
+    { "id": "fish-sticks", "title": "Oven-baked fish sticks", "cuisine": "american", "skills": ["cooking-fish"], "skill": "Thawing fish safely and baking to 145°F", "art": "fish", "image": "dishes/fish-sticks.png", "safety": "adult-nearby", "minutes": 35, "estimated": true, "about": "Cod strips crumbed and baked crisp, with tartar sauce and lemon.", "main": ["cod", "breadcrumbs", "egg", "lemon", "tartar sauce"], "method": "oven", "tags": { "protein": "white-fish", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "shioyaki", "title": "Shioyaki salted salmon", "cuisine": "japanese", "skills": ["cooking-fish"], "skill": "Baking fish to 145°F", "art": "fish", "image": "dishes/shioyaki.png", "safety": "adult-nearby", "minutes": 30, "estimated": true, "about": "Japanese salted salmon, baked until the skin crisps, with rice.", "main": ["salmon fillet", "salt", "rice", "lemon"], "method": "oven", "tags": { "protein": "salmon", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "light" } },
     {
       "id": "teriyaki-chicken-bites",
       "title": "Baked teriyaki chicken bites",
@@ -223,6 +318,7 @@
       "skills": ["handling-poultry"],
       "skill": "Handling ready-cut chicken safely",
       "art": "poultry",
+      "image": "dishes/teriyaki-chicken-bites.png",
       "safety": "adult-nearby",
       "minutes": 35,
       "estimated": true,
@@ -238,7 +334,7 @@
         "veggies": "light"
       }
     },
-    { "id": "welsh-cakes", "title": "Welsh cakes", "cuisine": "welsh", "skills": ["cutting-in-fat"], "skill": "Rubbing cold butter into flour", "art": "dessert", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "Small griddled cakes from a buttery dough with currants, dusted with sugar. Made with butter.", "main": ["flour", "butter", "currants", "egg", "sugar"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "light" } },
+    { "id": "welsh-cakes", "title": "Welsh cakes", "cuisine": "welsh", "skills": ["cutting-in-fat"], "skill": "Rubbing cold butter into flour", "art": "dessert", "image": "dishes/welsh-cakes.png", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "Small griddled cakes from a buttery dough with currants, dusted with sugar. Made with butter.", "main": ["flour", "butter", "currants", "egg", "sugar"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "light" } },
     {
       "id": "chocolate-chip-cookies",
       "title": "Chocolate chip cookies",
@@ -246,6 +342,7 @@
       "skills": ["creaming"],
       "skill": "Creaming butter and sugar; even scoops",
       "art": "dessert",
+      "image": "dishes/chocolate-chip-cookies.png",
       "safety": "adult-nearby",
       "minutes": 45,
       "estimated": true,
@@ -263,8 +360,8 @@
         "veggies": "light"
       }
     },
-    { "id": "alfajores", "title": "Alfajores", "cuisine": "argentine", "skills": ["creaming"], "skill": "Even cookies, sandwiched", "art": "dessert", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Tender shortbread cookies sandwiched with canned dulce de leche and rolled in coconut.", "main": ["flour", "cornstarch", "butter", "dulce de leche", "coconut"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
-    { "id": "banana-bread", "title": "Banana bread", "cuisine": "american", "skills": ["muffin-method"], "skill": "The toothpick test", "art": "bread", "safety": "adult-nearby", "minutes": 75, "estimated": true, "about": "A moist loaf of ripe bananas mixed by the muffin method and baked until a toothpick comes out clean.", "main": ["ripe bananas", "flour", "butter", "egg", "baking soda"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "alfajores", "title": "Alfajores", "cuisine": "argentine", "skills": ["creaming"], "skill": "Even cookies, sandwiched", "art": "dessert", "image": "dishes/alfajores.png", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Tender shortbread cookies sandwiched with canned dulce de leche and rolled in coconut.", "main": ["flour", "cornstarch", "butter", "dulce de leche", "coconut"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
+    { "id": "banana-bread", "title": "Banana bread", "cuisine": "american", "skills": ["muffin-method"], "skill": "The toothpick test", "art": "bread", "image": "dishes/banana-bread.png", "safety": "adult-nearby", "minutes": 75, "estimated": true, "about": "A moist loaf of ripe bananas mixed by the muffin method and baked until a toothpick comes out clean.", "main": ["ripe bananas", "flour", "butter", "egg", "baking soda"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     { "id": "pan-de-elote", "title": "Pan de elote", "cuisine": "mexican", "skills": ["muffin-method"], "skill": "A blender batter baked to doneness", "art": "dessert", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "A moist Mexican corn cake mixed in the blender from corn kernels, eggs, and condensed milk.", "main": ["corn", "eggs", "sweetened condensed milk", "butter", "flour"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
     {
       "id": "chicken-potstickers",
@@ -550,6 +647,7 @@
       "skills": ["shredding", "simmering"],
       "skill": "A low simmer until the chicken is tender",
       "art": "poultry",
+      "image": "dishes/trinidad-curry-chicken.png",
       "safety": "adult-nearby",
       "minutes": 55,
       "estimated": true,
@@ -572,6 +670,7 @@
       "skills": ["binders", "simmering"],
       "skill": "Meatballs simmered gently in sauce",
       "art": "meat",
+      "image": "dishes/kefta-tagine.png",
       "safety": "adult-nearby",
       "minutes": 55,
       "estimated": true,
@@ -587,6 +686,28 @@
         "veggies": "some"
       }
     },
-    { "id": "tom-kha-gai", "title": "Tom kha gai", "cuisine": "thai", "skills": ["seasoning", "simmering"], "skill": "Seasoning a soup by taste", "art": "soup", "safety": "adult-nearby", "minutes": 35, "estimated": true, "about": "Thai coconut chicken soup with lemongrass, ginger, mushrooms, lime, and fish sauce. No curry paste.", "main": ["coconut milk", "chicken", "mushrooms", "lemongrass", "lime"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["coconut-tropical", "herby-lemony"], "heat": "some", "budget": "$$", "familiar": "adventurous", "veggies": "some" } }
+    {
+      "id": "tom-kha-gai",
+      "title": "Tom kha gai",
+      "cuisine": "thai",
+      "skills": ["seasoning", "simmering"],
+      "skill": "Seasoning a soup by taste",
+      "art": "soup",
+      "image": "dishes/tom-kha-gai.png",
+      "safety": "adult-nearby",
+      "minutes": 35,
+      "estimated": true,
+      "about": "Thai coconut chicken soup with lemongrass, ginger, mushrooms, lime, and fish sauce. No curry paste.",
+      "main": ["coconut milk", "chicken", "mushrooms", "lemongrass", "lime"],
+      "method": "stove",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["coconut-tropical", "herby-lemony"],
+        "heat": "some",
+        "budget": "$$",
+        "familiar": "adventurous",
+        "veggies": "some"
+      }
+    }
   ]
 }

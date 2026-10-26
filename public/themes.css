@@ -95,6 +95,8 @@
 .q-stages i.done{background:var(--q-gold)}
 .q-stages i.cur{background:var(--q-mana);animation:pulse 1.4s infinite}
 .q-log{padding:18px;display:grid;gap:12px}
+.q-log .steppic{margin:0;border:3px solid var(--q-gold);background:var(--q-deep)}
+.q-log .steppic img{display:block;width:100%;height:auto}
 .q-log.flip .steptxt{animation:slidein .3s ease-out}
 .steptxt{font-size:21px;line-height:1.45;font-weight:700;margin:0;color:#fff}
 .q-note{margin:0;font-size:16px;line-height:1.4;color:var(--q-dim);padding-left:12px;box-shadow:inset 3px 0 0 var(--q-mana)}
@@ -315,6 +317,8 @@ use.pop{animation:dropin .42s cubic-bezier(.3,.7,.4,1) both}
 .p-banner.hot{background:var(--p-red);color:#fff}
 .p-cookbody{display:grid;grid-template-columns:minmax(0,1fr) 84px;gap:12px;align-items:start;perspective:900px}
 .p-stepcard{padding:18px 16px 14px;display:grid;gap:10px;transform-origin:left center}
+.p-stepcard .steppic{margin:0;padding:8px 8px 22px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.18);transform:rotate(-1deg)}
+.p-stepcard .steppic img{display:block;width:100%;height:auto}
 .p-stepcard.flip{animation:flipin .32s ease-out}
 .p-stepno{font-family:var(--p-hand);font-weight:700;font-size:24px;margin:0;color:var(--p-red)}
 .p-steptxt{font-size:21px;line-height:1.45;font-weight:700;margin:0}

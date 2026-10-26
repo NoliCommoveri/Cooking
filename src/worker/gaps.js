@@ -163,7 +163,7 @@ function coverage() {
     const flavors = new Set();
     for (const id of slot.ids) {
       const L = lessonById[id];
-      const versions = L ? [L.tags, ...(L.variations ?? []).map((v) => v.tags ?? L.tags)] : [dishById[id]?.tags];
+      const versions = L ? [L.tags, ...(L.variations ?? []).filter((v) => !v.level).map((v) => v.tags ?? L.tags)] : [dishById[id]?.tags];
       for (const t of versions.filter(Boolean)) {
         if (cells[t.protein]) cells[t.protein][L ? 'written' : 'planned'] += 1;
         if (L && t.heat in heat) heat[t.heat] += 1;

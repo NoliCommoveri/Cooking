@@ -12,7 +12,7 @@ import { tagProblems, missingTags, meatProtein } from './tastes.js';
 import { applyVariation, changesSomething, staleKeys } from './variations.js';
 
 // Fields that hold ids or codes, not words a kid reads.
-const CODE_FIELDS = new Set(['id', 'image', 'cuisine', 'ingredient', 'use', 'for', 'unit', 'why', 'glyph', 'reason',
+const CODE_FIELDS = new Set(['id', 'image', 'picture', 'cuisine', 'ingredient', 'use', 'for', 'unit', 'why', 'glyph', 'reason',
   'handles', 'skills', 'equipment', 'track', 'safety', 'type', 'mode', 'music', 'round', 'section', 'baseUnit', 'region', 'category']);
 const RAW_NEEDS_TEMP = ['poultry', 'meat', 'fish'];
 const PLACEHOLDER = /\{(n|qty):([a-z0-9-]+)\}/g;
@@ -109,6 +109,8 @@ export function lint(c) {
     for (const s of L.skills) if (!SK[s]) e(`skill "${s}" doesn't exist in skills.json`);
     for (const q of L.equipment) if (!EQ[q]) e(`equipment "${q}" doesn't exist in equipment.json`);
     if (c.imageExists && !c.imageExists(L.image)) e(`image ${L.image} isn't in content/images/`);
+    // Step pictures (14e) live in content/images/steps/<lesson>/.
+    for (const s of L.steps) if (s.picture && c.imageExists && !c.imageExists(s.picture)) e(`step ${s.id}: picture ${s.picture} isn't in content/images/`);
     for (const p of L.prereqs) if (!prereqOk(p)) e(`prerequisite "${p}" isn't a dish or pick-one group in course.json`);
     if (L.learn.callback && !byId[L.learn.callback.lesson]) e(`callback points to "${L.learn.callback.lesson}", which isn't a written lesson`);
     if (L.learn.callback && L.learn.callback.lesson === L.id) e('callback points to itself');
@@ -205,15 +207,41 @@ export function lint(c) {
       }
     }
   };
+  // Each Level's writing standard (14e, owner 2026-10-26), as warnings:
+  // Level 2 keeps a step to one action, in plain words for a beginner of any
+  // age, with a tip or a "should look like" on most steps; Level 4 keeps
+  // tips few. Level 3 is full steps in real terms, with no limit here.
+  const LEVEL_IDS = new Set((c.levels || []).map(({ data: V }) => V?.id));
+  const wordsIn = (t) => (String(t).match(/\S+/g) || []).length;
+  const writing = (L, level, where) => {
+    if (level === 'sp-2') {
+      for (const s of L.steps) {
+        const n = wordsIn(s.text);
+        if (n > 25) warn(where, `step ${s.id} runs ${n} words; Level 2 keeps a step to one action, 25 words or fewer`);
+        if (/!/.test(s.text)) warn(where, `step ${s.id} has "!"; Level 2 is plain words for a beginner of any age`);
+      }
+      const helped = L.steps.filter((s) => s.tip || s.look).length;
+      if (helped * 2 < L.steps.length) warn(where, `${helped} of ${L.steps.length} steps have a tip or a "should look like"; Level 2 has one on most steps`);
+    }
+    if (level === 'sp-4') {
+      const tips = L.steps.filter((s) => s.tip).length;
+      if (tips * 3 > L.steps.length) warn(where, `${tips} of ${L.steps.length} steps have a tip; Level 4 keeps tips few`);
+    }
+  };
   for (const L of lessons) {
     const where = `lessons/${L.id}.json`;
     checkLesson(L, where);
-    const vids = new Set();
+    const vids = new Set(), levels = new Set();
     for (const v of L.variations || []) {
       const vw = `${where} variation "${v.id}"`;
       if (vids.has(v.id)) err(vw, 'variation ids must be unique');
       vids.add(v.id);
-      if (v.title === L.title) err(vw, 'needs a title of its own, like "Chimichurri chicken"');
+      // A Level's version (14e) may keep the lesson's title: it's that Level's recipe.
+      if (v.level) {
+        if (!LEVEL_IDS.has(v.level)) err(vw, `level "${v.level}" isn't a Level`);
+        if (levels.has(v.level)) err(vw, `there's already a ${v.level} version of this lesson`);
+        levels.add(v.level);
+      } else if (v.title === L.title) err(vw, 'needs a title of its own, like "Chimichurri chicken"');
       if (!changesSomething(v)) warn(vw, 'changes nothing but its title');
       for (const m of staleKeys(L, v)) warn(vw, m);
       let V;
@@ -221,6 +249,7 @@ export function lint(c) {
       const schemaErrs = validate(V, c.schemas.lesson);
       if (schemaErrs.length) { schemaErrs.forEach(x => err(vw, x)); continue; }
       checkLesson(V, vw, L);
+      if (v.level) writing(V, v.level, vw);
     }
   }
   // a seasonal lesson isn't in course.json, so it carries its own dish card
@@ -369,6 +398,10 @@ export function lint(c) {
       // A card for a variation still to be written names the dish it varies (§6.21).
       if (r.variationOf && !DISH[r.variationOf] && !byId[r.variationOf]) err(rw, `variationOf "${r.variationOf}" isn't a dish in course.json or a lesson`);
       if (c.imageExists && !c.imageExists(`meals/${r.art}.svg`)) err(rw, `art meals/${r.art}.svg isn't in content/images/`);
+      // Its picture, once a sheet is cropped: the written lesson uses it too.
+      if (r.image && r.image !== `dishes/${r.id}.png`) err(rw, `image should be dishes/${r.id}.png`);
+      if (r.image && c.imageExists && !c.imageExists(r.image)) err(rw, `image ${r.image} isn't in content/images/`);
+      if (r.image && levelLessons[r.id] && levelLessons[r.id].image !== r.image) err(rw, `the lesson's image should be the card's picture, ${r.image}`);
       for (const [p, t] of [['title', r.title], ['skill', r.skill], ['about', r.about], ['main', r.main.join(', ')]]) for (const w of blockedWordsIn(t, rules)) err(rw, `${p} names a blocked food ("${w}")`);
       if (c.tastes) for (const p of tagProblems(r.tags, c.tastes)) err(rw, `tags: ${p}`);
       if (c.tastes && missingTags(r.tags).length) warn(rw, `tags missing: ${missingTags(r.tags).join(', ')}`);
@@ -379,6 +412,7 @@ export function lint(c) {
         for (const f of ['title', 'cuisine']) if (r[f] !== L[f]) err(rw, `${f} is "${r[f]}" but the lesson says "${L[f]}"`);
         if (JSON.stringify(r.skills) !== JSON.stringify(L.skills)) err(rw, `skills don't match the lesson's (${L.skills.join(', ')})`);
         if (r.minutes !== L.totalMinutes || r.estimated) err(rw, `minutes should be the lesson's ${L.totalMinutes}, not an estimate`);
+        writing(L, V.id, `levels/recipes/${r.id}.json`);
       }
     }
     // A week's recipe is a Cook Around the World dish, an Appointed Times
@@ -441,6 +475,11 @@ export function lint(c) {
       const n = V.weeks.filter(w => w.unit === u.number).length, want = SHARED.find(x => x.number === u.number)?.weeks;
       if (want && n !== want) err(`${where} unit ${u.number}`, `has ${n} weeks; the shared plan gives it ${want}`);
     }
+    // A Cook Around the World lesson a week cooks gets this Level's own
+    // version (14e, owner 2026-10-26); until it's written, the week plays the
+    // lesson as it is.
+    const unversioned = [...new Set(V.weeks.flatMap(w => [w.familiar, w.explore, ...(w.swapIns || [])]).filter(id => byId[id] && !(byId[id].variations || []).some(v => v.level === V.id)))];
+    if (unversioned.length) warn(where, `${unversioned.length} written lessons its weeks cook have no ${V.name} version yet: ${unversioned.join(', ')}`);
     // A card can be cooked by any Level's week (§12.0).
     const cooks = (id) => (c.levels || []).some(({ data: X }) => Array.isArray(X?.weeks) && X.weeks.some(w => [w.familiar, w.explore, ...(w.swapIns || [])].includes(id)));
     for (const r of V.recipes) if (!cooks(r.id)) warn(`${where} recipe ${r.id}`, "isn't any week's recipe or swap-in");

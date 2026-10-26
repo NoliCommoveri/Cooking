@@ -135,7 +135,12 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // the family cooks (§6.21), or null for the lesson itself; a cook already
 // under way keeps the version it started in. leaveOut: [{ ingredient, who }],
 // optional ingredients someone cooking rated 1 star, left out (§6.21).
-export async function openLesson(mount, { profile, family, lessonId, variation = null, leaveOut = [], lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null, mastery = false, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
+// level: { name, week } for a learner on a Level course: the card says
+// "Level 3 Cook · Week 5" (week null when the recipe isn't on the course),
+// and no lesson numbers show, as Cook Around the World's don't fit the course.
+// pictures: how a step's picture shows (14e): 'shown' under the step (a
+// Level 2 course, or a parent's pick), or 'button', behind Show me.
+export async function openLesson(mount, { profile, family, lessonId, variation = null, leaveOut = [], lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, level = null, pictures = 'button', ask = null, seed = null, onDone = null, mastery = false, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
   const [published, B] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
   const kept = readState(profile.id, B.id);
   const L = lessonVersion(B, kept?.cookId ? kept.variation ?? null : variation);
@@ -145,7 +150,8 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
   const ING = { ...R.ingredients, ...extra };
   // Appointed Times lessons keep their A1, A2 labels whatever the course plan (§6.19).
   const seasonal = (id) => R.seasonal?.includes(R.lessons.find((x) => x.id === id)?.unit);
-  const num = (id) => (labels && !seasonal(id) ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null;
+  const num = (id) => (level ? null : (labels && !seasonal(id) ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null);
+  const levelKick = level ? `${level.name}${level.week ? ` · Week ${level.week}` : ''}` : null;
   // "lesson 8a, Shakshuka", or just the title for a dish the family took out of its plan.
   const lessonRef = (id, title) => (num(id) ? `lesson ${num(id)}, ${title}` : title);
   let myFixes = [];
@@ -165,7 +171,7 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
   S.with = (S.with ?? []).filter((id) => crew.some((p) => p.id === id));
   // A cook in progress reopens on its lesson card, with Keep going and Start over.
   if (S.stage !== 'done') S.stage = 'card';
-  let term = null, why = null, tick = null, much = false;
+  let term = null, why = null, tick = null, much = false, pic = false;
   const save = () => writeState(profile.id, L.id, S);
   // The whole cook, sent each time it moves on (a new stage or step, servings,
   // who's on it, Plate it). Check-offs ride along with the next one.
@@ -223,6 +229,7 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
     }
     term = null;
     much = false;
+    pic = false;
     save();
     sync();
     draw();
@@ -333,12 +340,12 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
       ? `<div class="${quest ? 'serve' : 'p-serve'} crew"><span class="${quest ? 'lbl' : 'p-lbl'}">Cooking with someone?</span><div class="${quest ? 'sizes' : 'p-sizes'}" role="group" aria-label="Who's cooking">${crew.map((p) => `<button type="button" class="${quest ? 'size' : 'p-size'}" role="checkbox" aria-checked="${S.with.includes(p.id)}" data-act="crew" data-id="${esc(p.id)}">${esc(p.name)}</button>`).join('')}</div></div>`
       : '';
     const top = quest
-      ? `<article class="q-panel q-card"><p class="q-kick">${L.recipe ? esc(L.kicker ?? 'Family recipe') : R.seasonal?.includes(L.unit) ? esc(R.units[L.unit]) : `Path ${L.unit}`}${num(L.id) ? ` · Quest ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
+      ? `<article class="q-panel q-card"><p class="q-kick">${L.recipe ? esc(L.kicker ?? 'Family recipe') : levelKick ? esc(levelKick) : R.seasonal?.includes(L.unit) ? esc(R.units[L.unit]) : `Path ${L.unit}`}${num(L.id) ? ` · Quest ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
           <h2 class="q-title">${esc(L.title)}</h2>${versionOf('q-skill')}<p class="q-skill"><b>${esc(L.skill)}</b></p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${who}${swaps}
           ${gateNote()}<button type="button" class="q-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask an adult to start' : !S.started ? 'Start quest' : 'Keep going'}</button></article>`
       : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
-          ${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2>${versionOf('p-skill')}<p class="p-skill">${esc(L.skill)}</p>
+          ${levelKick && !L.recipe ? `<p class="p-lessonno">${esc(levelKick)}</p>` : ''}${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2>${versionOf('p-skill')}<p class="p-skill">${esc(L.skill)}</p>
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
           ${gateNote()}<button type="button" class="p-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask an adult to start' : !S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
@@ -497,12 +504,16 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
     const named = ingredientsInStep(s, L.steps.find((x) => x.id === s.id)?.text, ingredientsNow(), ING);
     const muchBtn = named.length ? `<button type="button" class="${quest ? 'whybtn' : 'p-why'}" data-act="much" aria-expanded="${much}">${ic('i-spoon')}How much?</button>` : '';
     const whyBtn = s.why ? `<button type="button" class="${quest ? 'whybtn' : 'p-why'}" data-act="why" data-id="${esc(s.why)}">${ic('i-flame')}Why?</button>` : '';
+    // The step's picture (14e): under the step, or behind Show me.
+    const shown = s.picture && (pictures === 'shown' || pic);
+    const picture = shown ? `<figure class="steppic"><img src="/img/${esc(s.picture.replace(/\.png$/, '.webp'))}" alt="" width="480" height="480"></figure>` : '';
+    const picBtn = s.picture && pictures !== 'shown' ? `<button type="button" class="${quest ? 'whybtn' : 'p-why'}" data-act="pic" aria-expanded="${pic}">${ic('i-eye')}${pic ? 'Hide the picture' : 'Show me'}</button>` : '';
     const text = `${s.type === 'wash' ? `${ic('i-wash')} ` : ''}${withTerms(s.text)}`;
     const nav = `<div class="${quest ? 'q-nav' : 'p-nav'}"><button type="button" class="${T.back}" data-act="step" data-i="-1">${i === 0 ? 'Prep' : 'Back'}</button><button type="button" class="${T.btn}" data-act="${last ? 'finish' : 'step'}" data-i="1">${last ? 'Plate it' : 'Next step'}</button></div>`;
     const body = quest
       ? `<div class="q-cook">${banner(s.safety, s.hazard)}<div class="q-stages" style="grid-template-columns:repeat(${n},1fr)" role="img" aria-label="Stage ${i + 1} of ${n}">${steps.map((_, k) => `<i class="${k < i ? 'done' : k === i ? 'cur' : ''}"></i>`).join('')}</div>
-          <article class="q-panel q-log"><p class="q-kick">Stage ${i + 1} of ${n}</p><p class="steptxt">${text}</p>${termCard()}${muchCard(named)}${notes.join('')}${startTimer}<div class="logacts">${muchBtn}${whyBtn}${voiceBtn()}${fixBtn(s.id)}</div></article>${nav}</div>`
-      : `<div class="p-cook">${banner(s.safety, s.hazard)}<div class="p-cookbody"><article class="p-card p-lined p-stepcard"><p class="p-stepno">Step ${i + 1} of ${n}</p><p class="p-steptxt">${text}</p>${termCard()}${muchCard(named)}${notes.join('')}${startTimer}<div class="p-acts">${muchBtn}${whyBtn}${voiceBtn()}${fixBtn(s.id)}</div></article>
+          <article class="q-panel q-log"><p class="q-kick">Stage ${i + 1} of ${n}</p><p class="steptxt">${text}</p>${picture}${termCard()}${muchCard(named)}${notes.join('')}${startTimer}<div class="logacts">${picBtn}${muchBtn}${whyBtn}${voiceBtn()}${fixBtn(s.id)}</div></article>${nav}</div>`
+      : `<div class="p-cook">${banner(s.safety, s.hazard)}<div class="p-cookbody"><article class="p-card p-lined p-stepcard"><p class="p-stepno">Step ${i + 1} of ${n}</p><p class="p-steptxt">${text}</p>${picture}${termCard()}${muchCard(named)}${notes.join('')}${startTimer}<div class="p-acts">${picBtn}${muchBtn}${whyBtn}${voiceBtn()}${fixBtn(s.id)}</div></article>
           <div class="p-cup">${cupSVG(i, n)}<span>${i} of ${n} done</span></div></div>${nav}</div>`;
     return body + timerTray();
   }
@@ -645,6 +656,7 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
       else S.step = Math.max(0, Math.min(n - 1, S.step + dir));
       term = null;
       much = false;
+      pic = false;
     };
     switch (act) {
       case 'exit': return exit();
@@ -697,6 +709,7 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
         break;
       case 'term': term = d.id && d.id !== term ? d.id : null; return draw(false);
       case 'much': much = !much; return draw(false);
+      case 'pic': pic = !pic; return draw(false);
       case 'why': why = d.id; return draw(false);
       case 'why-close': why = null; return draw(false);
       case 'tstart': {

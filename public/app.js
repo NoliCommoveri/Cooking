@@ -429,9 +429,13 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     // A seasonal unit (Appointed Times) has its own labels, A1, A2, and so
     // does a Level's own unit, L1, L2 (§12.4).
     const seasonal = sideUnit(L.unit);
+    // A Level learner sees the course's week, never Cook Around the World's
+    // numbers, which are out of order for a Level (owner, 2026-10-26).
+    const week = mine.level ? mine.level.week_of?.[L.id] ?? null : undefined;
+    const number = week !== undefined ? (week ? `Week ${week}` : null) : null;
     if (quest) {
       return el('article', { class: 'q-panel q-card' },
-        el('p', { class: 'q-kick' }, `${seasonal ? lib.units[L.unit] : `Path ${L.unit}`} · Quest ${L.label}`),
+        el('p', { class: 'q-kick' }, week !== undefined ? number ?? (seasonal ? lib.units[L.unit] : 'Side quest') : `${seasonal ? lib.units[L.unit] : `Path ${L.unit}`} · Quest ${L.label}`),
         el('div', { class: 'q-win' }, el('img', { src: L.image, alt: '', width: 230, height: 230, loading: 'lazy' })),
         el('h3', { class: 'q-title' }, L.title),
         el('p', { class: 'q-skill' }, L.skill),
@@ -446,7 +450,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     return el('article', { class: 'p-card' },
       el('span', { class: 'tape t1' }), el('span', { class: 'tape t2' }),
       el('div', { class: 'p-photo' }, el('img', { src: L.image, alt: '', width: 220, height: 220, loading: 'lazy' })),
-      el('p', { class: 'p-lessonno' }, `Lesson ${L.label}`),
+      week !== undefined ? (number ? el('p', { class: 'p-lessonno' }, number) : null) : el('p', { class: 'p-lessonno' }, `Lesson ${L.label}`),
       el('h3', { class: 'p-title' }, L.title),
       el('p', { class: 'p-skill' }, L.skill),
       el('div', { class: 'p-meta' }, el('span', {}, time), el('span', {}, `Serves ${L.servings}`), el('span', {}, L.cuisine)),
@@ -474,7 +478,8 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const recipeBtn = (r, kick) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${r.title}`, onclick: open(r.id) }, recipeCard(r, kick));
   const seasonalUnit = (u) => lib.seasonal?.includes(u);
   const levelUnit = (u) => lib.level_units?.includes(u);
-  const unitName = (u) => (quest && !sideUnit(u) ? `Path ${u}: ${lib.units[u]}` : lib.units[u]);
+  // No path numbers for a Level learner: they're Cook Around the World's.
+  const unitName = (u) => (quest && !sideUnit(u) && !mine.level ? `Path ${u}: ${lib.units[u]}` : lib.units[u]);
 
   // ---- My path (Main quest): what's up next, then the rest of this profile's
   // path. This week and next show open; everything later is under See more
@@ -743,6 +748,10 @@ async function lesson(profileId, lessonId) {
     crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook, onReflect: saveReflection, labels: mine.labels ?? lib.labels, total: mine.total ?? lib.total,
     // A Level's mastery week (12c): "cook it on your own", and why it worked.
     mastery: Boolean(mine.level?.mastery.includes(lessonId)),
+    // On a Level course, the card shows the course's week, not lesson numbers.
+    level: mine.level ? { name: mine.level.name, week: mine.level.week_of?.[lessonId] ?? null } : null,
+    // Step pictures under each step, or behind Show me (14e).
+    pictures: mine.level?.pictures ?? 'button',
     // "I want to make this" or "Cook this" (§6.1), and the queued lesson's
     // servings and who it's for, for a fresh cook.
     ask: {
@@ -1970,6 +1979,11 @@ const courseEditor = parentOnly(async (cid) => {
   };
   // A Level course's parts kept on (§12.4): all three unless the parent turns some off.
   let partsOn = existing?.parts ?? [...PARTS];
+  // Step pictures (14e): each learner's, starting from the Level's way. Only
+  // the parent's changes are kept here; the rest follow the Level.
+  const picsPicked = Object.fromEntries(Object.entries(existing?.pictures ?? {}).filter(([, v]) => v !== existing.pictures_default));
+  const picsDefault = () => (levelOf()?.id === 'sp-2' ? 'shown' : 'button');
+  const picsOf = (pid) => picsPicked[pid] ?? picsDefault();
   const hoursBox = el('p', { class: 'lvl-hours', role: 'status' });
   const drawHours = () => {
     const V = levelOf();
@@ -2174,6 +2188,20 @@ const courseEditor = parentOnly(async (cid) => {
     [['familiar', 'Familiar', 'Dishes most families already know'], ['explore', 'Explore', 'A dish from another part of the world']]
       .map(([k, label, hint]) => el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'starts', value: k, checked: starts === k }), el('span', {}, label, el('em', {}, ` ${hint}`)))),
     el('p', { class: 'mut small', style: 'margin:0' }, 'Either one can be swapped any week.'));
+  const picsBox = el('div', { class: 'k-pics' });
+  const picsSet = el('fieldset', { onchange: (ev) => {
+    const pid = ev.target.dataset.pid;
+    if (pid) picsPicked[pid] = ev.target.value;
+  } }, el('legend', {}, 'Step pictures'),
+    el('p', { class: 'mut small', style: 'margin:0' }, 'Some steps have a picture of what to do. Level 2 shows them under each step; Level 3 and Level 4 put them behind a Show me button. Pick what suits each learner: the course, its credit, and its recipes stay the same.'),
+    picsBox);
+  const drawPics = () => {
+    const pids = picked();
+    picsBox.replaceChildren(...(pids.length ? pids.map((pid) => el('label', { class: 'f' }, profiles.find((p) => p.id === pid).name,
+      el('select', { 'data-pid': pid },
+        [['shown', 'Under each step'], ['button', 'Behind Show me']].map(([v, t]) => el('option', { value: v, selected: picsOf(pid) === v }, `${t}${v === picsDefault() ? ' (the Level\'s way)' : ''}`)))))
+      : [el('p', { class: 'mut small', style: 'margin:0' }, "Pick who it's for first.")]));
+  };
   const drawProgram = () => {
     const V = levelOf();
     perBox.hidden = Boolean(V);
@@ -2182,6 +2210,8 @@ const courseEditor = parentOnly(async (cid) => {
     levelSet.hidden = !V;
     partsSet.hidden = !V;
     startsSet.hidden = !V;
+    picsSet.hidden = !V;
+    drawPics();
     drawLevel();
     drawFinish();
     if (V && !levelFits) loadLevelFits(picked());
@@ -2207,7 +2237,7 @@ const courseEditor = parentOnly(async (cid) => {
   parentScreen('courses', el('h2', {}, existing ? 'Edit course' : 'Set up a course'),
     form([
       programSet,
-      el('fieldset', { onchange: () => loadFits(picked()) }, el('legend', {}, "Who it's for"),
+      el('fieldset', { onchange: () => { loadFits(picked()); drawPics(); } }, el('legend', {}, "Who it's for"),
         el('p', { class: 'mut small', style: 'margin:0' }, 'Siblings can share a course and cook together, or each have their own.'),
         el('div', { class: 'grid2' }, profiles.map((p) => el('label', { class: 'choice' },
           el('input', { type: 'checkbox', name: `p_${p.id}`, checked: existing?.profile_ids.includes(p.id), disabled: taken.has(p.id) }),
@@ -2217,20 +2247,24 @@ const courseEditor = parentOnly(async (cid) => {
         el('label', { class: 'f' }, 'Start date', el('span', { class: 'hint' }, 'Weeks run Sunday to Friday'), startIn),
         perBox, levelPace),
       finishBox,
-      startsSet, partsSet, planSet, levelSet,
+      startsSet, picsSet, partsSet, planSet, levelSet,
     ], existing ? 'Save course' : 'Start the course', async (v) => {
       // A Level course's plan is its weeks, one a week.
       const body = levelOf()
         ? {
           name: v.name, start_date: startIn.value, per_week: 1, profile_ids: profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id), ...(existing ? {} : { program }), parts: partsOn, starts,
+          pictures: Object.fromEntries(profiles.filter((p) => v[`p_${p.id}`]).map((p) => [p.id, picsOf(p.id)])),
           // Only the weeks the parent changed; every other week follows the start.
           ...(Object.keys(levelPicks).length ? { weeks: Object.entries(levelPicks).map(([week, id]) => ({ week: Number(week), id })) } : {}),
         }
         : { name: v.name, start_date: startIn.value, per_week: Number(perIn.value), profile_ids: profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id), plan };
       if (!body.profile_ids.length) throw new Error('Pick who the course is for.');
-      await api(existing ? 'PUT' : 'POST', existing ? `/api/courses/${existing.id}` : '/api/courses', body);
+      const res = await api(existing ? 'PUT' : 'POST', existing ? `/api/courses/${existing.id}` : '/api/courses', body);
+      // Before /ops applies the draft (14e), the course saves but its step pictures follow the Level.
+      if (res?.pictures_saved === false) showToast('Course saved. Step pictures follow the Level until Re-apply draft is pressed on /ops.');
       go('#/parent/queue');
     }, { extra, top: true }));
+  drawPics();
   loadFits(existing?.profile_ids ?? []);
 });
 
