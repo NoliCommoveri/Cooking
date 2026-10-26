@@ -6033,3 +6033,44 @@ the two sheets made from Claude's prompts.
   plate, so it was cut by hand; `tools/dish-sheets.txt` records how.
 - Screenshots (More recipes, phone width, both themes) sent in the session.
 - Tests: 392.
+
+## 235. 2026-10-26 — 14g content: Level 3 Unit 3
+
+Owner, 2026-10-26: "We're gonna do unit 3, ordered levels 3, 2, 4. Put each
+level unit in a review doc for me before starting the next one." Reviewed in
+[14g review: Level 3 Cook, Unit 3](https://claude.ai/artifact/DQPqdYECracPFipDVSgm1C);
+not merged until the owner approves it there.
+
+- **Before:** Unit 3, Clean meat, poultry, and fish (weeks 7–10), had thick
+  beef burgers and baked fish from phase 12. Week 7's lamb kofta and week 10's
+  shish taouk were planned Cook Around the World cards with no lesson; week
+  8's chermoula fish and week 10's chicken tenders were unwritten Level cards;
+  week 9 cooked Cook Around the World's fajitas and oyakodon, which had no
+  Level 3 versions. Four of its 12 part pages were blank.
+- **Now:**
+  - **Two Level-only recipes** in `content/levels/recipes/`, unit 103:
+    Chermoula baked fish (week 8: pin bones by feel, the thin end tucked under,
+    145°F) and Oven-baked chicken tenders (week 10, the mastery week: the
+    raw-meat station set up alone, breast trimmed into even strips, one dry
+    hand and one wet, 165°F). Their cards' minutes are now the recipes' own
+    (45 and 50).
+  - **Two new Cook Around the World lessons,** each already planned (§12.4):
+    Lamb kofta with yogurt sauce (Unit 6, the binders group; 45 minutes) and
+    Shish taouk (Unit 3, the broiling group, with a callback to butter
+    chicken's marinade; 75 minutes, 30 of them marinating).
+  - **Level 3 versions** of all four of week 7, 9, and 10's lessons: kofta
+    with a test patty and the three thickest checked; fajitas with the thighs
+    sliced raw on the raw-meat board after the vegetables and seared in two
+    checked batches; oyakodon with trimmed 1-inch cubes; shish taouk as the
+    mastery cook, with fresh garlic and three skewers checked.
+  - **Four part pages:** week 9's drill (trim and cube thighs, clean down) and
+    Beyond the Recipe (the birds of Leviticus 11:13–19, and "be holy, for I
+    am holy"); week 10's Knowledge (dark and white, tender and tough, fillet
+    types, carryover, and a 12-question unit quiz) and Beyond the Recipe (blood
+    and fat, Leviticus 3:17; 7:23–27; 17:10–14).
+  - **New ingredients:** ground lamb, panko breadcrumbs. **New tool:** skewers.
+- A meat-free family's week 7 now has both dishes written and both ruled out,
+  so the Level course test skips it with week 9's, and uses week 21 for a week
+  that waits quietly.
+- No screens changed, so no screenshots.
+- Tests: 392.

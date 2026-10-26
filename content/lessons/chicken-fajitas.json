@@ -498,6 +498,157 @@
           ]
         }
       }
+    },
+    {
+      "id": "sp-3",
+      "title": "Chicken fajitas",
+      "level": "sp-3",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["warm-spices"],
+        "heat": "some",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "equipment": {
+        "drop": ["small-bowl"],
+        "add": ["mixing-bowl-large", "mixing-bowl-medium"],
+        "order": [
+          "chef-knife",
+          "cutting-board",
+          "paper-towels",
+          "+0",
+          "+1",
+          "measuring-spoons",
+          "plate",
+          "skillet-12",
+          "tongs",
+          "spatula",
+          "thermometer",
+          "microwave"
+        ]
+      },
+      "steps": {
+        "change": {
+          "pepper-open": {
+            "id": "pepper-open",
+            "text": "Rinse the peppers. Set the cutting board on a damp paper towel. Cut the top and bottom off each pepper, slit it down one side, and open it out flat. Trim away the seeds and white ribs.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife"
+          },
+          "pepper-strips": {
+            "id": "pepper-strips",
+            "text": "Lay each piece skin side down and cut it into ¼-inch strips. Put them in the large bowl.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "skin-down",
+            "look": "Strips about the width of a pencil, all close to the same."
+          },
+          "onion-strips": {
+            "id": "onion-strips",
+            "text": "Halve the onion through the root and peel it. Lay each half flat and cut ¼-inch strips from the root end to the tip. Add them to the peppers.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "same-size"
+          },
+          "spice-paste": {
+            "id": "spice-paste",
+            "text": "In the medium bowl, stir together the chili powder, cumin, garlic powder, smoked paprika, {qty:salt} salt, the lime juice, and {qty:olive-oil} olive oil.",
+            "safety": "solo"
+          },
+          "heat": {
+            "id": "heat",
+            "text": "Heat 1 tablespoon of the vegetable oil in the skillet over medium-high heat until it shimmers. Set out a clean plate for the cooked chicken.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil"
+          },
+          "vegetables": {
+            "id": "vegetables",
+            "text": "Add the rest of the vegetable oil, then the peppers and onion. Cook, stirring every minute, until soft and browned at the edges, scraping up the brown bits from the chicken.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "timerSeconds": 420,
+            "timerLabel": "Peppers & onion",
+            "look": "Soft, bendy strips with brown spots."
+          },
+          "tortillas": {
+            "id": "tortillas",
+            "text": "Turn off the stove. Wrap the tortillas in a damp paper towel and microwave them until warm and soft.",
+            "safety": "solo",
+            "timerSeconds": 45,
+            "timerLabel": "Tortillas"
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Return the chicken and its juices to the pan and toss with the vegetables. Fill the tortillas and top with sour cream, salsa, avocado, or cilantro if you're using them.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan"
+          }
+        },
+        "drop": ["season", "wash-season", "add-chicken", "wash-pan", "sear", "flip", "check-chicken", "rest", "slice"],
+        "add": [
+          { "id": "raw-board", "text": "Set out your raw-meat board, or wash the board and knife you just used in hot, soapy water and dry them. Don't rinse the chicken.", "safety": "solo", "why": "clean-to-raw", "tip": "If you have only one board, this is why the vegetables were cut first." },
+          { "id": "slice-chicken", "text": "Unroll each thigh on the board, smooth side down. Trim off any thick white fat and shiny gristle with the tip of the knife. Slice the thighs across into ½-inch strips and put them in the spice paste. Toss with your hand until every strip is coated.", "safety": "adult-nearby", "hazard": "Sharp knife, raw chicken", "handles": ["chicken-thigh"], "why": "trim", "look": "Strips about ½ inch wide and 3 inches long, with no thick fat left." },
+          { "id": "wash-chicken", "type": "wash", "text": "Wash your hands, the knife, and the board in hot, soapy water, and wipe the counter where the chicken was.", "safety": "solo", "hazard": "Raw chicken", "why": "no-rinse" },
+          { "id": "batch-1", "text": "Use the tongs to lay half the strips in the pan in one layer, with a little space between them. Leave the tongs in the bowl with the rest of the raw chicken.", "safety": "adult-nearby", "hazard": "Hot oil, spatter", "handles": ["chicken-thigh"], "why": "crowd" },
+          { "id": "wash-1", "type": "wash", "text": "Wash your hands if they touched the raw chicken. From here on, turn the chicken with the clean spatula.", "safety": "adult-nearby", "hazard": "Hot stove" },
+          { "id": "sear-1", "text": "Leave the strips alone until browned underneath, then turn them with the spatula and cook the other side.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 300, "timerLabel": "First batch", "look": "Deep brown on both sides, no pink at the edges." },
+          { "id": "check-1", "type": "doneness", "text": "Slide the thermometer into the side of the thickest strip. It needs to read at least 165°F. If it doesn't, cook 1 more minute and check again. Move the batch to the clean plate.", "safety": "adult-nearby", "hazard": "Hot stove", "target": { "temp": 165, "unit": "F" } },
+          { "id": "batch-2", "text": "Lay the rest of the strips in the pan with the tongs. Put the tongs and the empty bowl in the sink.", "safety": "adult-nearby", "hazard": "Hot oil, spatter", "handles": ["chicken-thigh"] },
+          { "id": "wash-2", "type": "wash", "text": "Wash your hands with soap.", "safety": "adult-nearby", "hazard": "Hot stove" },
+          { "id": "sear-2", "text": "Sear the second batch the same way, turning it once with the spatula.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 300, "timerLabel": "Second batch" },
+          { "id": "check-2", "type": "doneness", "text": "Check the thickest strip again: at least 165°F. Add it to the plate with the first batch.", "safety": "adult-nearby", "hazard": "Hot stove", "target": { "temp": 165, "unit": "F" } }
+        ],
+        "order": [
+          "pepper-open",
+          "pepper-strips",
+          "onion-strips",
+          "spice-paste",
+          "+0",
+          "+1",
+          "+2",
+          "heat",
+          "+3",
+          "+4",
+          "+5",
+          "+6",
+          "+7",
+          "+8",
+          "+9",
+          "+10",
+          "vegetables",
+          "tortillas",
+          "serve"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "Vegetables first, raw chicken last",
+          "body": "This week the chicken comes to you raw and whole, and you slice it yourself. You'll cut the peppers and onion first on a clean board, then trim and slice the chicken thighs on the board kept for raw meat, sear the strips in two batches so they brown, and check the thickest strip at 165°F."
+        },
+        "wrong": [
+          { "sign": "The chicken is gray and sitting in liquid", "fix": "The pan was crowded or not hot enough. Take out half, let the pan heat up again, and cook in smaller batches." },
+          { "sign": "The strips stick and tear when you turn them", "fix": "Give them another minute. Once the bottom browns, they let go." },
+          { "sign": "The thickest strip reads under 165°F", "fix": "Keep cooking it 1 more minute, then check again. Next time, slice the thick parts of the thighs a little thinner." },
+          { "sign": "The vegetables are soft but pale", "fix": "Turn the heat up and stop stirring for a minute at a time so they can brown." }
+        ],
+        "quiz": [
+          { "q": "Why are the vegetables cut before the chicken?", "choices": ["So nothing cut after raw chicken picks up its bacteria", "Vegetables take longer to cook", "So the knife stays sharp"], "answer": 0, "explain": "Work clean to raw, then wash." },
+          { "q": "Should you rinse the raw chicken first?", "choices": ["No, it spreads bacteria around the sink", "Yes, it washes bacteria off", "Only if it looks wet"], "answer": 0, "explain": "Cooking to 165°F is what makes it safe." },
+          { "q": "Why sear the strips in two batches?", "choices": ["A crowded pan cools down and the chicken steams instead of browning", "To save oil", "So each batch gets more spice"], "answer": 0, "explain": "Space between the strips keeps the pan hot." },
+          { "q": "Which strip do you check with the thermometer?", "choices": ["The thickest one", "The first one in", "Any one"], "answer": 0, "explain": "The thickest is the last to reach 165°F." }
+        ],
+        "why": {
+          "drop": ["leave-it", "rest"],
+          "add": [
+            { "id": "clean-to-raw", "title": "Clean to raw", "body": "Anything cut after raw chicken picks up whatever was on it. So the vegetables are cut first, and the chicken goes on its own board, or on the same board after the vegetables are done, followed by hot, soapy water for the board, the knife, and your hands." },
+            { "id": "trim", "title": "Trim, then slice across", "body": "Thighs carry thick pieces of soft white fat and some tough, shiny gristle. Trimming them off with the knife's tip makes strips that cook evenly and chew well. Slicing across the thigh, not along it, gives short strips that stay tender." },
+            { "id": "no-rinse", "title": "Don't rinse it", "body": "Rinsing raw chicken doesn't wash bacteria off. It splashes them around the sink and counter in tiny drops. Cooking to 165°F is what makes chicken safe." },
+            { "id": "crowd", "title": "Two batches, not one", "body": "A pan holds only so much heat. Fill it with cold chicken and the temperature drops, the juices run out, and the strips simmer gray instead of browning. Half at a time, with space between the strips, the pan stays hot enough to sear." }
+          ]
+        }
+      }
     }
   ]
 }

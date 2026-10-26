@@ -51,6 +51,7 @@
     { "id": "slotted-spoon", "name": "Slotted spoon", "category": "utensils", "icon": null },
     { "id": "toaster", "name": "Toaster", "category": "appliances", "icon": null },
     { "id": "baking-dish", "name": "9-by-13-inch baking dish", "category": "bakeware", "icon": null },
-    { "id": "loaf-pan", "name": "9-by-5-inch loaf pan", "category": "bakeware", "icon": null }
+    { "id": "loaf-pan", "name": "9-by-5-inch loaf pan", "category": "bakeware", "icon": null },
+    { "id": "skewers", "name": "Skewers, metal or wooden (soak wooden ones 30 minutes)", "category": "utensils", "icon": null }
   ]
 }

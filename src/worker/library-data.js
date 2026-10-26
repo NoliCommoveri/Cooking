@@ -604,6 +604,127 @@ export const LIBRARY = {
       "spoon"
      ],
      "id": "spicy"
+    },
+    {
+     "title": "Chicken fajitas",
+     "image": "img/dishes/chicken-fajitas.webp",
+     "cuisine": "tex-mex",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "For more than 6, sear the chicken in two batches so the pan stays hot, and cook the vegetables in two batches too."
+       }
+      ]
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "chili-powder"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "garlic-powder"
+      },
+      {
+       "ingredient": "paprika-smoked"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "lime"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "bell-pepper-green"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "tortilla-flour"
+      },
+      {
+       "ingredient": "sour-cream",
+       "optional": true
+      },
+      {
+       "ingredient": "salsa",
+       "optional": true
+      },
+      {
+       "ingredient": "avocado",
+       "optional": true
+      },
+      {
+       "ingredient": "cilantro",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "tortilla-flour",
+       "use": "tortilla-corn",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "lemon-lime",
+       "bell-peppers",
+       "onions"
+      ],
+      "optional": [
+       "sour-cream-yogurt",
+       "avocado",
+       "cilantro"
+      ]
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "paper-towels",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "measuring-spoons",
+      "plate",
+      "skillet-12",
+      "tongs",
+      "spatula",
+      "thermometer",
+      "microwave"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
     }
    ]
   },
@@ -4676,6 +4797,101 @@ export const LIBRARY = {
       "thermometer"
      ],
      "id": "easy-prep"
+    },
+    {
+     "title": "Oyakodon",
+     "image": "img/dishes/oyakodon.webp",
+     "cuisine": "japanese",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, cook the chicken and egg in two skillets side by side, with half of everything in each."
+       }
+      ]
+     },
+     "totalMinutes": 45,
+     "ingredients": [
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "broth-chicken"
+      },
+      {
+       "ingredient": "soy-sauce"
+      },
+      {
+       "ingredient": "mirin"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "green-onion"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "mirin",
+       "use": "vinegar-rice",
+       "reason": "availability"
+      },
+      {
+       "for": "soy-sauce",
+       "use": "tamari",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "ginger-soy",
+       "sweet-savory"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "onions"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "saucepan-medium",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "chef-knife",
+      "cutting-board",
+      "mixing-bowl-medium",
+      "fork",
+      "skillet-12",
+      "wooden-spoon",
+      "ladle",
+      "thermometer"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
     }
    ]
   },
@@ -6842,6 +7058,257 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "shish-taouk",
+   "version": 1,
+   "track": "core",
+   "unit": 3,
+   "title": "Shish taouk",
+   "image": "img/dishes/shish-taouk.webp",
+   "cuisine": "lebanese",
+   "skill": "A yogurt-garlic marinade, broiling skewers",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Broil the skewers in two batches, or on two sheet pans one after the other, so they sit in one layer under the broiler."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "yogurt-greek"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "tomato-paste"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "yogurt-greek"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "pita"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "pickle-dill",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pita",
+     "use": "tortilla-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "herby-lemony",
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "sour-cream-yogurt",
+     "lemon-lime",
+     "tomatoes"
+    ],
+    "optional": [
+     "pickles"
+    ]
+   },
+   "tools": [
+    "skewers",
+    "cutting-board",
+    "chef-knife",
+    "mixing-bowl-large",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "sheet-pan",
+    "foil",
+    "oven-mitts",
+    "tongs",
+    "thermometer",
+    "plate",
+    "microwave",
+    "paper-towels"
+   ],
+   "variations": [
+    {
+     "title": "Shish taouk",
+     "image": "img/dishes/shish-taouk.webp",
+     "cuisine": "lebanese",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "Broil the skewers in two batches, or on two sheet pans one after the other, so they sit in one layer under the broiler."
+       }
+      ]
+     },
+     "totalMinutes": 75,
+     "ingredients": [
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "yogurt-greek"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "tomato-paste"
+      },
+      {
+       "ingredient": "paprika-sweet"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "yogurt-greek"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "pita"
+      },
+      {
+       "ingredient": "romaine"
+      },
+      {
+       "ingredient": "tomato"
+      },
+      {
+       "ingredient": "pickle-dill",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "pita",
+       "use": "tortilla-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "herby-lemony",
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "sour-cream-yogurt",
+       "lemon-lime",
+       "garlic",
+       "tomatoes"
+      ],
+      "optional": [
+       "pickles"
+      ]
+     },
+     "tools": [
+      "skewers",
+      "cutting-board",
+      "chef-knife",
+      "mixing-bowl-large",
+      "small-bowl",
+      "measuring-cups",
+      "measuring-spoons",
+      "sheet-pan",
+      "foil",
+      "oven-mitts",
+      "tongs",
+      "thermometer",
+      "plate",
+      "microwave",
+      "paper-towels"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
+    }
+   ]
+  },
+  {
    "id": "beef-bulgogi",
    "version": 1,
    "track": "core",
@@ -7540,6 +8007,277 @@ export const LIBRARY = {
       "spatula"
      ],
      "id": "turkey"
+    }
+   ]
+  },
+  {
+   "id": "lamb-kofta",
+   "version": 1,
+   "track": "core",
+   "unit": 6,
+   "title": "Lamb kofta with yogurt sauce",
+   "image": "img/dishes/lamb-kofta.webp",
+   "cuisine": "lebanese",
+   "skill": "Binders, shaping by hand",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Brown the kofta in two batches so they have room in the pan. Keep the first batch warm on a plate under foil."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "lamb-ground"
+    },
+    {
+     "ingredient": "panko"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "yogurt-greek"
+    },
+    {
+     "ingredient": "mint"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "pita"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "tomato"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "lamb-ground",
+     "use": "beef-ground",
+     "reason": "availability"
+    },
+    {
+     "for": "panko",
+     "use": "oats-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "pita",
+     "use": "tortilla-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "other",
+   "tags": {
+    "protein": "lamb",
+    "flavors": [
+     "warm-spices",
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic",
+     "sour-cream-yogurt",
+     "mint",
+     "lemon-lime",
+     "cucumber",
+     "tomatoes"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "box-grater",
+    "kitchen-towel",
+    "chef-knife",
+    "cutting-board",
+    "mixing-bowl-large",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "plate",
+    "skillet-12",
+    "tongs",
+    "thermometer",
+    "microwave",
+    "paper-towels"
+   ],
+   "variations": [
+    {
+     "title": "Lamb kofta with yogurt sauce",
+     "image": "img/dishes/lamb-kofta.webp",
+     "cuisine": "lebanese",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "Brown the kofta in two batches so they have room in the pan. Keep the first batch warm on a plate under foil."
+       }
+      ]
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "parsley"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "lamb-ground"
+      },
+      {
+       "ingredient": "panko"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "paprika-sweet"
+      },
+      {
+       "ingredient": "cinnamon-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "yogurt-greek"
+      },
+      {
+       "ingredient": "mint"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "pita"
+      },
+      {
+       "ingredient": "cucumber"
+      },
+      {
+       "ingredient": "tomato"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "lamb-ground",
+       "use": "beef-ground",
+       "reason": "availability"
+      },
+      {
+       "for": "panko",
+       "use": "oats-gluten-free",
+       "reason": "gluten"
+      },
+      {
+       "for": "pita",
+       "use": "tortilla-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "other",
+     "tags": {
+      "protein": "lamb",
+      "flavors": [
+       "warm-spices",
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "adventurous",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "garlic",
+       "sour-cream-yogurt",
+       "mint",
+       "lemon-lime",
+       "cucumber",
+       "tomatoes"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "box-grater",
+      "kitchen-towel",
+      "chef-knife",
+      "cutting-board",
+      "mixing-bowl-large",
+      "small-bowl",
+      "measuring-cups",
+      "measuring-spoons",
+      "plate",
+      "skillet-12",
+      "tongs",
+      "spatula",
+      "thermometer",
+      "microwave",
+      "paper-towels"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
     }
    ]
   },
@@ -9251,6 +9989,232 @@ export const LIBRARY = {
     "heatproof-bowl",
     "thermometer",
     "fork"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "chermoula-fish",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Chermoula baked fish",
+   "image": "img/dishes/chermoula-fish.webp",
+   "cuisine": "moroccan",
+   "skill": "Checking a fillet and baking it to 145°F",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, use two baking dishes on the same rack, or a sheet pan, so the fillets sit in one layer with space around them."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "cod"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "cayenne",
+     "optional": true
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "onion-red"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "baguette"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "cod",
+     "use": "tilapia",
+     "reason": "availability"
+    },
+    {
+     "for": "baguette",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "cilantro",
+     "garlic",
+     "lemon-lime",
+     "tomatoes"
+    ],
+    "optional": [
+     "hot-peppers"
+    ]
+   },
+   "tools": [
+    "cutting-board",
+    "chef-knife",
+    "box-grater",
+    "tweezers",
+    "paper-towels",
+    "plate",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "spoon",
+    "baking-dish",
+    "spatula",
+    "thermometer",
+    "oven-mitts",
+    "bread-knife"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "chicken-tenders",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Oven-baked chicken tenders",
+   "image": "img/dishes/chicken-tenders.webp",
+   "cuisine": "american",
+   "skill": "Trimming raw chicken into strips and checking 165°F",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, use two sheet pans, one on each of the two middle racks, and swap them halfway through baking."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "chicken-breast"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "panko"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "mayonnaise"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "honey"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "panko",
+     "use": "oats-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "flour-ap",
+     "use": "cornstarch",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "mayonnaise",
+     "mustard"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "oven-mitts",
+    "skillet-12",
+    "wooden-spoon",
+    "shallow-dish",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "cutting-board",
+    "chef-knife",
+    "paper-towels",
+    "plate",
+    "spatula",
+    "thermometer",
+    "whisk"
    ],
    "level": "sp-3"
   },
@@ -12281,6 +13245,18 @@ export const LIBRARY = {
    "contains": [
     "dairy"
    ]
+  },
+  "lamb-ground": {
+   "name": "Ground lamb",
+   "contains": [
+    "meat"
+   ]
+  },
+  "panko": {
+   "name": "Panko breadcrumbs",
+   "contains": [
+    "gluten"
+   ]
   }
  },
  "cuisines": {
@@ -12369,6 +13345,8 @@ export const LIBRARY = {
   "bean-quesadillas": "K1",
   "bean-tostadas": "K8",
   "beef-picadillo": "K30",
+  "chermoula-fish": "K12",
+  "chicken-tenders": "K14",
   "dinner-rolls": "K19",
   "kimbap": "K6",
   "pan-seared-trout": "K33",
@@ -13725,7 +14703,7 @@ export const LIBRARY = {
     "marinating",
     "broiling"
    ],
-   "minutes": 50,
+   "minutes": 75,
    "cuisine": "lebanese",
    "pickOne": "broiling",
    "tags": {
@@ -14353,7 +15331,7 @@ export const LIBRARY = {
    "skills": [
     "binders"
    ],
-   "minutes": 40,
+   "minutes": 45,
    "cuisine": "lebanese",
    "pickOne": "binders",
    "tags": {
@@ -18924,7 +19902,63 @@ export const LIBRARY = {
      "explore": "oyakodon",
      "drill": {
       "title": "Trim and cube chicken thighs; clean down after",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Boneless thighs are the most forgiving cut of chicken, but they come with soft white fat, a few tough strands of gristle, and an uneven shape. Today you'll trim them clean and cut them into even 1-inch cubes, then clean down as if you'd been cooking in a restaurant kitchen. An adult is nearby the whole time.",
+       "Use the chicken for this week's recipe, or freeze the cubes flat in a labeled bag to cook within 3 months."
+      ],
+      "steps": [
+       "Clear the counter and set out your raw-meat board on a damp paper towel, a sharp chef's knife, a bowl for the trimmed cubes, and a second bowl for scraps. Have hot, soapy water ready in the sink.",
+       "Open the package over the board so no juice drips on the counter. Don't rinse the chicken. Put the empty tray straight in the trash.",
+       "Unroll one thigh, smooth side down. Find the thick, soft white fat at the edges and in the folds. Pull it gently away with your fingers and cut it off with the tip of the knife, keeping the blade angled away from your other hand.",
+       "Feel for gristle: shiny, white, rubbery strands that don't give when you press them. Cut them out.",
+       "Cut the thigh into 1-inch strips, then across into 1-inch cubes. The thin edges make smaller pieces; put two small ones together in your count, or set them aside for a stir-fry.",
+       "Trim and cube the rest. Line up 10 cubes and look at them side by side: are they close to the same size?",
+       "Weigh the trimmings or measure them in a measuring cup. Write down how much of the package you trimmed away.",
+       "Clean down: scraps in the trash, the cubes covered in the fridge, then the knife, the board, and the bowls in hot, soapy water. Wipe the counter, the faucet handle, and anything else you touched with hot, soapy water. Wash your hands last, for at least 20 seconds."
+      ],
+      "quiz": [
+       {
+        "q": "What do you do before cutting raw chicken?",
+        "choices": [
+         "Set up the raw-meat board and leave the chicken unrinsed",
+         "Rinse the chicken in the sink",
+         "Cut the vegetables on the same board right after"
+        ],
+        "answer": 0,
+        "explain": "Rinsing spreads bacteria. The board is set up first."
+       },
+       {
+        "q": "How do you know a strand is gristle, not meat?",
+        "choices": [
+         "It's shiny, white, and rubbery, and doesn't give when pressed",
+         "It's pink",
+         "It's soft and white"
+        ],
+        "answer": 0,
+        "explain": "Soft white is fat; shiny and rubbery is gristle."
+       },
+       {
+        "q": "Why cut the cubes all close to 1 inch?",
+        "choices": [
+         "So they all reach 165°F at the same time",
+         "So they look nicer",
+         "So they weigh less"
+        ],
+        "answer": 0,
+        "explain": "Big pieces finish last, and small ones dry out waiting."
+       },
+       {
+        "q": "What gets washed after cutting raw chicken?",
+        "choices": [
+         "The knife, board, bowls, counter, faucet handle, and your hands",
+         "Only the knife",
+         "Only your hands"
+        ],
+        "answer": 0,
+        "explain": "Anything you touched with chicken on your hands, including the faucet."
+       }
+      ]
      },
      "knowledge": {
       "title": "Cross-contamination and board colors; never rinse raw poultry",
@@ -18974,7 +20008,63 @@ export const LIBRARY = {
      },
      "sabbath": {
       "title": "Clean and unclean birds, and why God gave the food laws (Leviticus 11:13–19, 44–47)",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "For land animals and fish, Leviticus gives a test. For birds it gives a list instead: \"And these you shall detest among the birds; they shall not be eaten\" (Leviticus 11:13). Twenty kinds follow, among them the eagle, the vultures, the kite and falcon, every raven, the ostrich, the hawk, the owls, the cormorant, the stork, the heron, and the bat, which the passage counts with the birds (Leviticus 11:13–19; Deuteronomy 14:11–18).",
+       "Most of the birds on the list hunt other animals or eat what's already dead. Every bird not on it may be eaten: \"You may eat all clean birds\" (Deuteronomy 14:11). Scripture also shows clean birds in use. Pigeons and turtledoves were brought as offerings (Leviticus 1:14; 12:8), and God fed Israel quail in the wilderness (Exodus 16:13; Numbers 11:31). Chicken, turkey, duck, goose, quail, pigeon and dove, pheasant, partridge, grouse, and guinea fowl are all clean, and this app uses them.",
+       "Leviticus 11 also says why the food laws were given. \"For I am the LORD your God. Consecrate yourselves therefore, and be holy, for I am holy\" (Leviticus 11:44). The chapter ends: \"This is the law about beast and bird and every living creature that moves through the waters and every creature that swarms on the ground, to make a distinction between the unclean and the clean and between the living creature that may be eaten and the living creature that may not be eaten\" (Leviticus 11:46–47).",
+       "The reason the passage itself gives is about God: his people were to be set apart, holy, because he is holy. Choosing food carefully was one everyday way to live that out, at every meal."
+      ],
+      "steps": [
+       "Read Leviticus 11:13–19 and 11:44–47.",
+       "Read Deuteronomy 14:11–20.",
+       "List every bird named in Leviticus 11:13–19. Next to each, write whether it hunts, eats dead animals, or something else, using a field guide or a reliable website.",
+       "Find two places in Scripture where clean birds are offered or eaten (start with Leviticus 1:14 and Exodus 16:13), and write down what happened.",
+       "Answer in writing: what reason does Leviticus 11:44–45 give for the food laws? Put it in your own words.",
+       "Look at the poultry case at a grocery store with an adult. Write down every kind of bird you find, and check each against the list."
+      ],
+      "quiz": [
+       {
+        "q": "How does Leviticus 11 tell clean birds from unclean?",
+        "choices": [
+         "It lists the unclean birds by name",
+         "It gives a two-part test",
+         "It says all birds are clean"
+        ],
+        "answer": 0,
+        "explain": "Land animals and fish get a test; birds get a list."
+       },
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "Quail",
+         "Raven",
+         "Ostrich"
+        ],
+        "answer": 0,
+        "explain": "God fed Israel quail in the wilderness (Exodus 16:13)."
+       },
+       {
+        "q": "What reason does Leviticus 11:44 give for the food laws?",
+        "choices": [
+         "\"Be holy, for I am holy\"",
+         "To keep food fresh",
+         "To save money"
+        ],
+        "answer": 0,
+        "explain": "The passage ties the laws to God's holiness."
+       },
+       {
+        "q": "What do most of the unclean birds have in common?",
+        "choices": [
+         "They hunt other animals or eat dead ones",
+         "They can't fly",
+         "They live in water"
+        ],
+        "answer": 0,
+        "explain": "Eagles, hawks, and owls hunt; vultures and ravens eat what's dead."
+       }
+      ]
      }
     },
     {
@@ -19025,11 +20115,201 @@ export const LIBRARY = {
      },
      "knowledge": {
       "title": "Cuts: dark vs. white, tender vs. tough, fillet types; carryover (unit quiz)",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Knowing the cut tells you how to cook it. This page covers the cuts this unit used and the ones you'll meet next, then one more idea about temperature, and ends with a quiz on the whole unit.",
+       "Dark and white meat. Chicken legs and thighs do the walking, so their muscles have more fat, more connective tissue, and more of the red protein that stores oxygen. That makes them darker, richer, and hard to dry out: thighs stay juicy even a few degrees past 165°F. Breasts barely work, so they're lean, mild, and pale, and they turn dry fast once they pass 165°F. That's why breasts are cut even and watched closely, as in this week's tenders.",
+       "Tender and tough. On a cow or a lamb, the muscles that work hardest (shoulder, leg, shank, brisket) are full of connective tissue, which is chewy when cooked fast. Long, slow, moist heat melts it into gelatin, so those cuts are braised or stewed. The muscles along the back that do little work (ribeye, sirloin, tenderloin, lamb loin chops) are tender and are cooked fast and hot: seared, grilled, or broiled. Ground meat can go either way.",
+       "Fish fillets. Fish are sold as fillets (the side, cut off the bone), steaks (a slice across the body, with a bone in the middle), or whole. Lean, white, flaky fish like cod, tilapia, and haddock are delicate and suit baking, steaming, and gentle pan-frying. Oily fish like salmon, trout, and mackerel are richer, stay moist, and stand up to roasting and broiling. Firm, meaty fish like tuna and mahi-mahi hold together on a grill.",
+       "Carryover cooking. Food keeps cooking after it comes off the heat, because the outside is hotter than the middle and that heat keeps moving inward. A thick piece can rise 5°F or more as it rests; a thin strip, barely at all. Restaurant cooks use this, pulling a thick roast a few degrees early. This app always asks you to reach the safe temperature before the food comes off the heat, so the rest is a bonus, not part of the safety check. You'll use carryover on purpose with the big roasts later in the year."
+      ],
+      "steps": [
+       "Make a two-column chart, \"Cook fast and hot\" and \"Cook low and slow\". Put each of these cuts in a column: chicken breast, chicken thigh, beef chuck, beef sirloin, lamb shank, lamb loin chop, flank steak, brisket.",
+       "Next time you cook something thick (a burger, a fillet, a kofta), check its temperature as it comes off the heat, then again after 3 minutes. Write down how much it rose.",
+       "Take the unit quiz below."
+      ],
+      "quiz": [
+       {
+        "q": "Why do thighs stay juicier than breasts?",
+        "choices": [
+         "They have more fat and connective tissue",
+         "They're smaller",
+         "They cook at a lower temperature"
+        ],
+        "answer": 0,
+        "explain": "Hard-working muscles are richer and more forgiving."
+       },
+       {
+        "q": "Which cut would you braise slowly?",
+        "choices": [
+         "Beef chuck",
+         "Beef ribeye",
+         "Chicken breast"
+        ],
+        "answer": 0,
+        "explain": "Shoulder cuts are tough until slow, moist heat melts their connective tissue."
+       },
+       {
+        "q": "What is carryover cooking?",
+        "choices": [
+         "Food rising in temperature after it leaves the heat",
+         "Cooking two dishes at once",
+         "Leftovers"
+        ],
+        "answer": 0,
+        "explain": "Heat keeps moving from the hot outside into the middle."
+       },
+       {
+        "q": "What temperature does ground lamb need?",
+        "choices": [
+         "160°F",
+         "145°F",
+         "165°F"
+        ],
+        "answer": 0,
+        "explain": "Ground beef and lamb are 160°F; poultry is 165°F."
+       },
+       {
+        "q": "Your thermometer reads 34°F in ice water. A chicken strip reads 166°F. Is it done?",
+        "choices": [
+         "Not quite: it's really about 164°F",
+         "Yes",
+         "It's overcooked"
+        ],
+        "answer": 0,
+        "explain": "It reads 2°F high, so subtract 2 (week 7)."
+       },
+       {
+        "q": "Which fish is clean?",
+        "choices": [
+         "Haddock",
+         "Swai",
+         "Monkfish"
+        ],
+        "answer": 0,
+        "explain": "Haddock has fins and scales (week 8)."
+       },
+       {
+        "q": "Where do you feel for pin bones?",
+        "choices": [
+         "Along the middle of the thick end of the fillet",
+         "Along the tail",
+         "Inside the skin"
+        ],
+        "answer": 0,
+        "explain": "They sit in a line through the thickest part (week 8)."
+       },
+       {
+        "q": "You have one cutting board. What order do you cut in?",
+        "choices": [
+         "Vegetables first, raw chicken last, then wash",
+         "Chicken first",
+         "Any order if you rinse the board with water"
+        ],
+        "answer": 0,
+        "explain": "Clean to raw, then hot, soapy water (week 9)."
+       },
+       {
+        "q": "Why don't you rinse raw chicken?",
+        "choices": [
+         "It splashes bacteria around without removing them",
+         "It makes the chicken tough",
+         "It washes off the flavor"
+        ],
+        "answer": 0,
+        "explain": "Cooking to 165°F is what makes it safe (week 9)."
+       },
+       {
+        "q": "What may be done with marinade that held raw chicken?",
+        "choices": [
+         "Throw it out",
+         "Serve it as a sauce",
+         "Brush it on the cooked chicken"
+        ],
+        "answer": 0,
+        "explain": "It carries raw-chicken juices."
+       },
+       {
+        "q": "Which bird is clean?",
+        "choices": [
+         "Pheasant",
+         "Heron",
+         "Owl"
+        ],
+        "answer": 0,
+        "explain": "Herons and owls are on the list in Leviticus 11:13–19 (week 9)."
+       },
+       {
+        "q": "What are the two tests for land animals?",
+        "choices": [
+         "A split hoof and chewing the cud",
+         "Four legs and fur",
+         "Eating grass and living on land"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:3 (week 7)."
+       }
+      ]
      },
      "sabbath": {
       "title": "Blood and fat (Leviticus 3:17; 7:23–27; 17:10–14)",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Two more food laws run alongside the clean and unclean animals: no blood, and no fat of certain kinds. \"It shall be a statute forever throughout your generations, in all your dwelling places, that you eat neither fat nor blood\" (Leviticus 3:17).",
+       "Blood. The rule is older than Israel. After the flood, God told Noah, \"But you shall not eat flesh with its life, that is, its blood\" (Genesis 9:4). Leviticus gives the reason: \"For the life of the flesh is in the blood, and I have given it for you on the altar to make atonement for your souls\" (Leviticus 17:11). A hunter who killed a clean animal or bird was to \"pour out its blood and cover it with earth\" (Leviticus 17:13).",
+       "In the kitchen, the blood is drained at slaughter, before the meat reaches a store. The red liquid in a package of beef is mostly water and a protein called myoglobin, not blood. Some families who keep these laws buy only kosher or halal meat, which is drained and handled under its own rules; others buy ordinary meat. Either way, this app never uses blood as an ingredient, and no recipe uses dishes made from it, which some cuisines sell as sausages, puddings, or cakes.",
+       "Fat. \"You shall eat no fat, of ox or sheep or goat\" (Leviticus 7:23). In the offerings, \"the fat\" means the thick, hard fat around the organs and kidneys, which was burned on the altar (Leviticus 3:3–5). It doesn't mean the fat marbled through meat. This app follows that: the hard fat of cattle, sheep, and goats, and the cooking fat rendered from it, are never used. Marbling, and the juices and drippings from cooking, are fine. Watch for that hard fat in some pastry, mincemeat, dumplings, and in the oil some restaurants fry in.",
+       "So a clean animal, drained of its blood, without its hard fat: those three together are what this unit has meant by clean meat."
+      ],
+      "steps": [
+       "Read Leviticus 3:17; 7:22–27; and 17:10–14.",
+       "Read Genesis 9:3–4.",
+       "Answer in writing: what reason does Leviticus 17:11 give for not eating blood?",
+       "Answer in writing: what's the difference between the fat Leviticus 3:3–5 describes and the marbling in a steak?",
+       "With an adult, read the labels on three store-bought items that could hide animal fat (pie crust, a box of mincemeat, or a frozen pastry). Write down which fats each one uses."
+      ],
+      "quiz": [
+       {
+        "q": "Where does the rule against eating blood first appear?",
+        "choices": [
+         "Genesis 9:4, after the flood",
+         "Leviticus 11",
+         "Deuteronomy 14"
+        ],
+        "answer": 0,
+        "explain": "God gave it to Noah, before Israel."
+       },
+       {
+        "q": "What reason does Leviticus 17:11 give?",
+        "choices": [
+         "The life of the flesh is in the blood",
+         "Blood spoils quickly",
+         "Blood tastes bitter"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 17:11."
+       },
+       {
+        "q": "Is the red liquid in a package of beef blood?",
+        "choices": [
+         "Mostly no: it's water and a protein called myoglobin",
+         "Yes, all of it",
+         "It's food coloring"
+        ],
+        "answer": 0,
+        "explain": "The blood is drained at slaughter."
+       },
+       {
+        "q": "Which fat does this app leave out?",
+        "choices": [
+         "The hard fat of cattle, sheep, and goats around the organs, and fat rendered from it",
+         "The marbling in a steak",
+         "Chicken fat"
+        ],
+        "answer": 0,
+        "explain": "Marbling and pan juices are fine (Leviticus 3:3–5; 7:23)."
+       }
+      ]
      }
     },
     {
@@ -21049,7 +22329,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-fish"
      ],
-     "minutes": 40,
+     "minutes": 45,
      "tags": {
       "protein": "white-fish",
       "flavors": [
@@ -21091,7 +22371,7 @@ export const LIBRARY = {
       "handling-poultry",
       "breading-frying"
      ],
-     "minutes": 45,
+     "minutes": 50,
      "tags": {
       "protein": "chicken",
       "flavors": [
