@@ -19,7 +19,7 @@
   "learn": {
     "move": {
       "title": "Every roll the same weight",
-      "body": "Rolls that weigh the same rise and bake the same. Today you'll weigh the dough, divide it into 12 pieces within a few grams of each other, and shape each into a smooth, tight ball. Two or three become small knots or braids, practice for next week's challah."
+      "body": "Rolls that weigh the same rise and bake the same. Today you'll weigh the dough, divide it into 12 pieces within a tenth of an ounce of each other, and shape each into a smooth, tight ball. Two or three become small knots or braids, practice for next week's challah."
     },
     "callback": {
       "lesson": "pita-bread",
@@ -33,7 +33,7 @@
       { "id": "temp-190", "title": "190°F inside", "body": "At 190°F, the crumb in the center has set. A golden top can come before that, so check the middle roll, which bakes last." }
     ],
     "wrong": [
-      { "sign": "The rolls came out different sizes", "fix": "Weigh each piece and pinch dough from heavy ones onto light ones until they're within a few grams." },
+      { "sign": "The rolls came out different sizes", "fix": "Weigh each piece and pinch dough from heavy ones onto light ones until they're within a tenth of an ounce." },
       { "sign": "The tops are wrinkled or torn", "fix": "The skin was stretched too far. Roll the next ball gently, just until the top is smooth." },
       { "sign": "A ball won't hold its shape", "fix": "Cup it under your hand and roll it on a bare spot of counter, not on flour. A little stickiness gives it grip." },
       { "sign": "The middle roll reads under 190°F", "fix": "Bake 3 more minutes and check again. Lay foil over the top if it's getting too dark." }
@@ -86,7 +86,7 @@
     { "id": "mix", "text": "Add the 4 tablespoons of softened butter, the salt, and the flour. Stir with the wooden spoon until a soft, shaggy dough forms.", "safety": "solo", "tip": "Don't taste the raw dough. It has raw egg and raw flour." },
     { "id": "knead", "text": "Dust the counter with flour and turn the dough out. Knead it until it's smooth and stretchy and passes the windowpane test.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Knead", "look": "A small piece stretches thin enough to see light through without tearing." },
     { "id": "rise", "text": "Butter the bowl, put the dough in, and turn it once to coat it. Cover with a towel and leave it somewhere warm until it doubles.", "safety": "solo", "timerSeconds": 3600, "timerLabel": "First rise", "look": "Doubled. A floured finger pressed in leaves a dent that stays." },
-    { "id": "weigh", "text": "Butter the baking dish. Weigh the whole dough on the scale and divide the weight by 12. Cut the dough into 12 pieces with the knife, weighing each one. Pinch dough from heavy pieces onto light ones until they're all within 3 grams.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "by-weight", "tip": "Write the target weight down. It's usually about 65 grams." },
+    { "id": "weigh", "text": "Butter the baking dish. Weigh the whole dough on the scale and divide the weight by 12. Cut the dough into 12 pieces with the knife, weighing each one. Pinch dough from heavy pieces onto light ones until they're all within a tenth of an ounce.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "by-weight", "tip": "Write the target weight down. It's usually about 2¼ ounces." },
     { "id": "shape", "text": "Cup a piece under your palm on a bare spot of counter and roll it in small circles until the top is smooth and tight. Shape 9 or 10 rolls this way and set them in the dish in rows, a little apart.", "safety": "solo", "why": "tight-ball" },
     { "id": "knots", "text": "Shape the last 2 or 3 pieces as knots or small braids. For a knot, roll a piece into an 8-inch rope, tie it in a loose knot, and tuck the ends under. For a braid, cut a piece into 3, roll each into a thin rope, and braid them, pinching the ends. Fit them into the dish with the others.", "safety": "solo", "tip": "This is practice for next week. Even if they're lopsided, they'll bake into good rolls." },
     { "id": "proof", "text": "Cover the dish loosely with the towel and let the rolls proof. Heat the oven to 375°F while they do.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 2700, "timerLabel": "Second rise", "why": "touching", "look": "Puffy, and the rolls are touching each other." },

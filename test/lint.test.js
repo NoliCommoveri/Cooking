@@ -257,6 +257,14 @@ test('Level 3 Cook: the shared units, 36 weeks, a Familiar and an Explore dish e
   assert.ok(!lint(base).errors.some((e) => e.startsWith('levels/')));
 });
 
+test("a part page's watch-for list may name a blocked food, and only in its names (§12.2)", () => {
+  const page = (fn) => broken((c) => fn(level(c).weeks[0].knowledge));
+  assert.doesNotMatch(page((x) => { x.watch = [{ name: 'Lard', hides: 'In some tortillas.' }]; }), /blocked food/);
+  assert.match(page((x) => { x.watch = [{ name: 'Lard', hides: 'Lard hides in tortillas.' }]; }), /knowledge\.watch\[0\]\.hides names a blocked food \("lard"\)/);
+  assert.match(page((x) => { x.watch = [{ name: 'Lard', hides: 'In some tortillas.' }]; x.body = ['Watch for lard.']; }), /knowledge\.body\[0\] names a blocked food \("lard"\)/);
+  assert.deepEqual(blockedWordsIn('the chicken oyster, by the thigh', base.rules), []);
+});
+
 test('a Level week is checked: skill, its two dishes, mastery, the shared units, the hours', () => {
   const bad = (fn) => broken((c) => fn(level(c)));
   assert.match(bad((L) => { L.weeks[0].skill = 'no-such-skill'; }), /week 1: skill "no-such-skill" doesn't exist/);

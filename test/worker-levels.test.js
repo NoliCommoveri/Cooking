@@ -531,7 +531,8 @@ test("a week neither of whose dishes the family can cook waits, says why, and ta
   await familyIs(a, ['meat']);
   await limits(a, { missing_tools: ['microwave'] });
   const { id } = (await level(a, [ava], addDays(sunday, -21))).body;
-  for (const lid of [...UNIT1, 'minestrone', ...UNIT2, 'baked-salmon']) await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: lid });
+  // Week 7 (beef burgers or lamb kofta) is blocked too, and week 8 cooks its other fish once one is skipped.
+  for (const lid of [...UNIT1, 'minestrone', ...UNIT2, 'thick-burgers', 'baked-salmon', 'chermoula-fish']) await a.post(`/api/courses/${id}/skip-recipe`, { lesson_id: lid });
   let q = await card(a);
   const x = q.this_week.lessons[0];
   assert.deepEqual([x.lesson_id, x.week, x.requested], ['chicken-fajitas', 9, false], 'week 9 holds the course');
@@ -543,9 +544,9 @@ test("a week neither of whose dishes the family can cook waits, says why, and ta
   assert.deepEqual((await a.get(`/api/profiles/${ava}/queue`)).body.items, []);
   const lv = await kitchen(a, ava);
   assert.deepEqual([lv.week.week, lv.week.blocked], [9, true]);
-  // Week 7 (thick burgers, beef) waits quietly: its Explore dish is still being written.
-  assert.ok(!(await course0(a)).plan.find((w) => w.week === 7).blocked);
-  assert.equal((await a.post('/api/level-requests', { level: 'sp-3', week: 7 })).status, 409);
+  // Week 21 (beef picadillo) waits quietly: its Familiar dish is still being written.
+  assert.ok(!(await course0(a)).plan.find((w) => w.week === 21).blocked);
+  assert.equal((await a.post('/api/level-requests', { level: 'sp-3', week: 21 })).status, 409);
 
   // Request a replacement: once a family, counted on Recipe gaps with no name.
   assert.equal((await a.post('/api/level-requests', { level: 'sp-3', week: 9 })).status, 200);

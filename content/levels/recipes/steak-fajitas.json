@@ -6,7 +6,7 @@
   "title": "Steak fajitas",
   "image": "dishes/steak-fajitas.png",
   "cuisine": "tex-mex",
-  "skill": "Weighing in grams and finding the yield",
+  "skill": "Weighing and finding the yield",
   "skills": ["julienne", "searing"],
   "prereqs": [],
   "servings": 4,
@@ -35,14 +35,14 @@
       { "sign": "Your yield is far below the usual", "fix": "Check the trim: cut closer to the core next time." }
     ],
     "quiz": [
-      { "q": "A 400 g pepper gives 330 g of strips. What's the yield?", "choices": ["About 83%", "About 70%", "About 120%"], "answer": 0, "explain": "330 ÷ 400 = 0.825." },
+      { "q": "A 14-ounce pepper gives 11½ ounces of strips. What's the yield?", "choices": ["About 82%", "About 70%", "About 120%"], "answer": 0, "explain": "11.5 ÷ 14 = 0.82." },
       { "q": "Why rest the steak before slicing?", "choices": ["The juices settle and stay in the meat", "It cooks more slowly", "It's easier to season"], "answer": 0, "explain": "Ten minutes on the board." },
       { "q": "Which way do you slice flank steak?", "choices": ["Across the grain", "Along the grain", "Diagonally along the grain"], "answer": 0, "explain": "Short fibers chew tender." },
-      { "q": "Why weigh in grams instead of cups?", "choices": ["It's exact, and it's the same every time", "Grams are smaller", "Cups don't work for meat"], "answer": 0, "explain": "A scale doesn't care how you pack it." }
+      { "q": "Why weigh instead of using cups?", "choices": ["It's exact, and it's the same every time", "Scales are faster", "Cups don't work for meat"], "answer": 0, "explain": "A scale doesn't care how you pack it." }
     ]
   },
   "ingredients": [
-    { "ingredient": "beef-flank", "amount": 680, "unit": "g", "group": "Steak" },
+    { "ingredient": "beef-flank", "amount": 1.5, "unit": "lb", "group": "Steak" },
     { "ingredient": "lime", "amount": 2, "unit": "count", "round": "up", "prep": "juiced", "group": "Steak" },
     { "ingredient": "garlic", "amount": 3, "unit": "count", "round": "up", "group": "Steak" },
     { "ingredient": "cumin-ground", "amount": 1, "unit": "tsp", "group": "Steak" },

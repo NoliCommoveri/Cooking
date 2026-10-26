@@ -445,13 +445,15 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
     const label = (i) => `${i.line}${i.prep ? `, ${i.prep}` : ''}${i.optional ? ' (optional)' : ''}`;
     const iconOf = (i) => OWN_ICON[i.id] ?? SECTION_ICON[ING[i.id]?.section] ?? 's-pantry';
     const swapNote = (i) => (swapFor[i.id] ? `<small>Use ${esc(name(swapFor[i.id]).toLowerCase())} instead</small>` : '');
+    // An ingredient's label note (§2.1): what to check on the package for a hidden unclean ingredient.
+    const labelNote = (i) => { const w = ING[swapFor[i.id] ?? i.id]?.watch; return w ? `<small class="watchnote">${esc(w)}</small>` : ''; };
     const unlock = allI && allG || preview
       ? `${preview && !(allI && allG) ? `<p class="${T.note}">Preview: no need to check everything off.</p>` : ''}<div class="${quest ? 'gate' : 'p-gate'}"><button type="button" class="${T.btn}" data-act="goto" data-to="cook">${quest ? 'Enter the kitchen' : 'Start cooking'}</button></div>`
       : `<p class="${quest ? 'gate' : 'p-gate'}">${ic('i-lock')}Check off everything to unlock cook mode</p>`;
     if (quest) {
       const meter = (n, of) => `<div class="q-meter" style="--n:${of}" aria-hidden="true">${Array.from({ length: of }, (_, k) => `<i class="${k < n ? 'on' : ''}"></i>`).join('')}</div>`;
       return `<h3 class="q-h">Gather supplies <span>${ing.filter((i) => got.has(i.id)).length}/${ing.length}</span></h3>${meter(ing.filter((i) => got.has(i.id)).length, ing.length)}
-        <div class="q-inv">${ing.map((i) => `<button type="button" class="q-slot ${got.has(i.id) ? 'on' : ''}" data-act="got" data-id="${esc(i.id)}" aria-pressed="${got.has(i.id)}">${ic(iconOf(i), 'ii')}<span class="nm">${esc(label(i))}</span>${swapNote(i)}</button>`).join('')}</div>
+        <div class="q-inv">${ing.map((i) => `<button type="button" class="q-slot ${got.has(i.id) ? 'on' : ''}" data-act="got" data-id="${esc(i.id)}" aria-pressed="${got.has(i.id)}">${ic(iconOf(i), 'ii')}<span class="nm">${esc(label(i))}</span>${swapNote(i)}${labelNote(i)}</button>`).join('')}</div>
         <div class="gear" style="margin-top:18px"><h3 class="q-h">Gear loadout <span>${tools.filter((t) => gear.has(t.id)).length}/${tools.length}</span></h3>${meter(tools.filter((t) => gear.has(t.id)).length, tools.length)}
         <div class="q-inv">${tools.map((t) => `<button type="button" class="q-slot ${gear.has(t.id) ? 'on' : ''}" data-act="gear" data-id="${esc(t.id)}" aria-pressed="${gear.has(t.id)}">${ic(TOOL_ICON[t.category] ?? 't-utensils', 'ii')}<span class="nm">${esc(t.name)}</span></button>`).join('')}</div></div>${unlock}`;
     }
@@ -464,7 +466,7 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
         <path d="M22 116H218" stroke="#D9412B" stroke-width="7"/><path d="M34 132H206" stroke="#D9412B" stroke-width="3"/></svg>
         <p class="p-count">${inBowl.length} of ${ing.length} in the bowl</p></div>
       <div class="p-card p-lined p-list"><i class="tape t1"></i><h3 class="p-h">Ingredients <span>for ${S.servings}</span></h3>
-        ${ing.map((i) => `<button type="button" class="p-item ${got.has(i.id) ? 'on' : ''}" data-act="got" data-id="${esc(i.id)}" aria-pressed="${got.has(i.id)}">${ic(iconOf(i), 'ii')}<span class="nm">${esc(label(i))}${swapNote(i)}</span><svg class="p-ck" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M9 16l5 5 9-10"/></svg></button>`).join('')}</div></div>
+        ${ing.map((i) => `<button type="button" class="p-item ${got.has(i.id) ? 'on' : ''}" data-act="got" data-id="${esc(i.id)}" aria-pressed="${got.has(i.id)}">${ic(iconOf(i), 'ii')}<span class="nm">${esc(label(i))}${swapNote(i)}${labelNote(i)}</span><svg class="p-ck" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M9 16l5 5 9-10"/></svg></button>`).join('')}</div></div>
       <h3 class="p-h" style="margin-top:18px">Pegboard <span>${tools.filter((t) => gear.has(t.id)).length} of ${tools.length}</span></h3>
       <div class="p-peg"><div class="p-tools">${tools.map((t) => `<button type="button" class="p-tool ${gear.has(t.id) ? 'on' : ''}" data-act="gear" data-id="${esc(t.id)}" aria-pressed="${gear.has(t.id)}"><span class="hook" aria-hidden="true"></span>${ic(TOOL_ICON[t.category] ?? 't-utensils', 'ii')}<span class="got" aria-hidden="true">${ic('i-check', '')}</span><span class="tag">${esc(t.name)}</span></button>`).join('')}</div></div>${unlock}`;
   }

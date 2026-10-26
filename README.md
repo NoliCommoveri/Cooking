@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [236. 2026-10-26 — Add a lesson: its own page, with filters](docs/build-log.md#236-2026-10-26--add-a-lesson-its-own-page-with-filters)
+**Latest build log entry:** [242. 2026-10-26 — Drills use what the week already buys](docs/build-log.md#242-2026-10-26--drills-use-what-the-week-already-buys)
 
 ## Current features
 
@@ -60,10 +60,12 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
 - **Dish illustrations** (`content/images/dishes/`): one picture for each planned dish.
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
-- **Lesson content** (`content/`): 49 lessons (all 13 of Unit 1, all 21 of Unit 2, 13 more, and the 2 Appointed Times lessons), and the ingredient, tool, skill (60), and cuisine lists, as JSON.
-- **The Levels** (release 1, being built, plan §12): Level 2 Apprentice, Level 3 Cook, and Level 4 Chef (`content/levels/sp-2.json` to `sp-4.json`) on the nine shared units in `content/level-units.json`, a Familiar and an Explore dish each week, and their recipe cards; Unit 1 is complete on all three Levels; in all, Level 2 (18 part pages, 10 Level-only recipes, 2 Level versions), Level 3 (51 part pages, 17 Level-only recipes, 2 Level versions), and Level 4 (18 part pages, 8 Level-only recipes, 4 Level versions); Unit 2 is complete on all three Levels too. Edited on the manager's Level 2, 3, and 4 pages.
+- **Lesson content** (`content/`): 52 lessons (all 13 of Unit 1, all 21 of Unit 2, 16 more, and the 2 Appointed Times lessons), and the ingredient, tool, skill (60), and cuisine lists, as JSON.
+- **The Levels** (release 1, being built, plan §12): Level 2 Apprentice, Level 3 Cook, and Level 4 Chef (`content/levels/sp-2.json` to `sp-4.json`) on the nine shared units in `content/level-units.json`, a Familiar and an Explore dish each week, and their recipe cards; Unit 1 is complete on all three Levels; in all, Level 2 (30 part pages, 16 Level-only recipes, 4 Level versions), Level 3 (55 part pages, 19 Level-only recipes, 6 Level versions), and Level 4 (30 part pages, 15 Level-only recipes, 5 Level versions); Unit 2 is complete on all three Levels too, and Unit 3 on all three Levels. Edited on the manager's Level 2, 3, and 4 pages.
 - **Level courses** (release 1, `src/worker/plan.js`): setting up a course asks Which program?, Cook Around the World or a Level, and for a Level, whether each week starts with its Familiar or Explore dish (preset from "how adventurous"); a Level course runs one week a week, its written recipes in week order, and the course card shows "Week 5 of 36 · Starts with Familiar".
 - **Level recipes in Side quests** (release 1): each Level's own written recipes (labeled by Level and week: B1a, C4b, D5a…) in its own unit in the kitchen, cookable and queueable like any lesson.
+- **Label notes**: an ingredient's "check the label" note shows under it on a recipe's prep list and on the shopping list.
+- **Watch for** (release 1): a Level part page can list unclean foods by name, with where they hide, in a box the content check allows; nowhere else may name them.
 - **Optional Level parts** (release 1): a Level week is Knowledge, Drill, Recipe, Beyond the Recipe; any but the recipe can be turned off at setup or later, with the planned hours shown; any part can be skipped.
 - **Level progress** (release 1): a Level learner's own progress tab (the weeks bar, hours toward the Level's total, units as chapters or passport pages with a crest or visa stamp, and My cooking collection), level-ups for units mastered, and the completion certificate; the Level's weeks and part rows on Progress, its CSV, and the transcript.
 - **A Level week's dish** (release 1): the course's start slot's dish, or the other when the diet settings or a missing tool rule it out or only the other is written; preferences never pick it. The parent changes a week in the course editor or with Swap recipe.

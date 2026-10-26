@@ -134,6 +134,173 @@
           }
         }
       }
+    },
+    {
+      "id": "sp-3",
+      "title": "Oyakodon",
+      "level": "sp-3",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["ginger-soy", "sweet-savory"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "steps": {
+        "change": {
+          "rinse-rice": {
+            "id": "rinse-rice",
+            "text": "Put the rice in the saucepan, cover it with cold water, swish, and pour off the cloudy water, holding the rice back with your hand. Repeat until the water runs nearly clear, about 3 times.",
+            "safety": "solo"
+          },
+          "cook-rice": {
+            "id": "cook-rice",
+            "text": "Add {qty:water} of water. Bring it to a boil uncovered over high heat, then cover, turn the heat to low, and cook without lifting the lid. When the timer rings, turn off the burner and leave it covered.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove",
+            "timerSeconds": 900,
+            "timerLabel": "Rice"
+          },
+          "onion": {
+            "id": "onion",
+            "text": "Halve the onion through the root, peel it, and slice each half into ¼-inch half-moons.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife"
+          },
+          "greens": {
+            "id": "greens",
+            "text": "Slice the green onions into ⅛-inch rings.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife"
+          },
+          "crack": {
+            "id": "crack",
+            "text": "Crack the {n:egg} eggs into the medium bowl and stir with the fork about 10 times, just until the yolks break, leaving streaks of white.",
+            "safety": "solo",
+            "handles": ["egg"],
+            "why": "light-beat"
+          },
+          "wash-egg": {
+            "id": "wash-egg",
+            "type": "wash",
+            "text": "Wash your hands with soap and wipe the counter where the eggs were.",
+            "safety": "solo",
+            "hazard": "Raw egg"
+          },
+          "cut-chicken": {
+            "id": "cut-chicken",
+            "text": "Unroll each thigh smooth side down. Trim off thick white fat and gristle with the knife's tip, then cut the thighs into 1-inch pieces, keeping them on the board.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife, raw chicken",
+            "handles": ["chicken-thigh"],
+            "look": "Pieces about 1 inch across and close to the same size, so they finish together.",
+            "why": "even-pieces"
+          },
+          "wash-chicken": {
+            "id": "wash-chicken",
+            "type": "wash",
+            "text": "Wash your hands with soap. The knife and board get washed once the chicken is in the pan.",
+            "safety": "solo",
+            "hazard": "Raw chicken"
+          },
+          "broth": {
+            "id": "broth",
+            "text": "Pour the broth, soy sauce, and mirin into the skillet, add the sugar and the onion, and bring it to a simmer over medium heat. Cook until the onion is soft.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove",
+            "timerSeconds": 240,
+            "timerLabel": "Onion",
+            "why": "broth"
+          },
+          "chicken-in": {
+            "id": "chicken-in",
+            "text": "Hold the board low over the pan and slide the chicken into the broth with the back of the knife. Spread it into one layer.",
+            "safety": "adult-nearby",
+            "hazard": "Hot broth, raw chicken",
+            "handles": ["chicken-thigh"]
+          },
+          "wash-board": {
+            "id": "wash-board",
+            "type": "wash",
+            "text": "Wash your hands, the knife, and the board in hot, soapy water, and wipe the counter.",
+            "safety": "solo",
+            "hazard": "Raw chicken"
+          },
+          "simmer": {
+            "id": "simmer",
+            "text": "Simmer gently, turning the pieces with the wooden spoon halfway, until white all over. Adjust the heat to keep the bubbles small.",
+            "safety": "adult-nearby",
+            "hazard": "Hot broth",
+            "timerSeconds": 480,
+            "timerLabel": "Simmer chicken",
+            "why": "gentle-simmer",
+            "look": "Small, steady bubbles, and the chicken is white all over."
+          },
+          "check-chicken": {
+            "id": "check-chicken",
+            "type": "doneness",
+            "text": "Check the largest piece of chicken with the thermometer: at least 165°F. If it's under, simmer 2 more minutes and check again.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove",
+            "target": { "temp": 165, "unit": "F" }
+          },
+          "check-eggs": {
+            "id": "check-eggs",
+            "type": "doneness",
+            "text": "Slide the thermometer sideways into the thickest part of the egg: at least 160°F. If it's under, cover it for 1 more minute and check again.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove",
+            "target": { "temp": 160, "unit": "F" }
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Turn off the stove. Fluff the rice and divide it among the bowls. Cut the chicken and egg into portions with the wooden spoon, slide one onto each bowl with a ladle of broth, and top with green onions.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan"
+          }
+        },
+        "add": [
+          { "id": "raw-board", "text": "Set out your raw-meat board and the knife. If you have one board, wash it and the knife in hot, soapy water first. Don't rinse the chicken.", "safety": "solo", "why": "clean-to-raw" }
+        ],
+        "order": [
+          "rinse-rice",
+          "cook-rice",
+          "onion",
+          "greens",
+          "crack",
+          "wash-egg",
+          "+0",
+          "cut-chicken",
+          "wash-chicken",
+          "broth",
+          "chicken-in",
+          "wash-board",
+          "simmer",
+          "check-chicken",
+          "eggs-in",
+          "check-eggs",
+          "serve"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "Trim, cube, simmer, set",
+          "body": "Oyakodon, \"parent and child,\" is a Japanese rice bowl of chicken and egg. This week you'll trim and cube raw chicken thighs on the raw-meat board, simmer them in a sweet soy broth, and set beaten egg over the top. Two foods need two checks: the chicken at 165°F before the egg goes in, and the egg at 160°F."
+        },
+        "quiz": [
+          { "q": "Why check the chicken before the eggs go in?", "choices": ["Once the egg covers it, you can't easily check or keep cooking the chicken", "The egg cools the chicken", "It saves time"], "answer": 0, "explain": "Each food gets its own check: chicken 165°F, egg 160°F." },
+          { "q": "Why cut the chicken into pieces the same size?", "choices": ["So they all reach 165°F at the same time", "So they look nicer", "So they soak up more broth"], "answer": 0, "explain": "Big pieces finish last." },
+          { "q": "Why is the raw chicken cut after the eggs and onions?", "choices": ["So nothing else is cut after raw meat", "Chicken cooks fastest", "The board stays drier"], "answer": 0, "explain": "Clean to raw, then wash." }
+        ],
+        "why": {
+          "add": [
+            { "id": "clean-to-raw", "title": "Eggs and vegetables first", "body": "Raw egg and raw chicken both carry bacteria. Doing the vegetables and eggs first, then the chicken on its own board, means nothing ready to eat is cut after raw meat. Wash hands, board, and knife after each raw food." },
+            { "id": "even-pieces", "title": "Same size, same finish", "body": "In a gentle simmer, a 2-inch piece takes far longer than a ½-inch one. Cut every piece about 1 inch, and they all reach 165°F together, with none overcooked while you wait for the biggest." }
+          ],
+          "order": ["gentle-simmer", "broth", "+0", "+1", "light-beat", "lid"]
+        }
+      }
     }
   ]
 }

@@ -669,6 +669,140 @@ export const LIBRARY = {
       "lime"
      ],
      "id": "spicy"
+    },
+    {
+     "title": "Chicken fajitas",
+     "image": "img/dishes/chicken-fajitas.webp",
+     "cuisine": "tex-mex",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "For more than 6, sear the chicken in two batches so the pan stays hot, and cook the vegetables in two batches too."
+       }
+      ]
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "chili-powder"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "garlic-powder"
+      },
+      {
+       "ingredient": "paprika-smoked"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "lime"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "bell-pepper-green"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "tortilla-flour"
+      },
+      {
+       "ingredient": "sour-cream",
+       "optional": true
+      },
+      {
+       "ingredient": "salsa",
+       "optional": true
+      },
+      {
+       "ingredient": "avocado",
+       "optional": true
+      },
+      {
+       "ingredient": "cilantro",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "tortilla-flour",
+       "use": "tortilla-corn",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "lemon-lime",
+       "bell-peppers",
+       "onions"
+      ],
+      "optional": [
+       "sour-cream-yogurt",
+       "avocado",
+       "cilantro"
+      ]
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "paper-towels",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "measuring-spoons",
+      "plate",
+      "skillet-12",
+      "tongs",
+      "spatula",
+      "thermometer",
+      "microwave"
+     ],
+     "skills": [
+      "julienne",
+      "searing"
+     ],
+     "method": "stove",
+     "about": "Strips of seared chicken with peppers and onions, wrapped in warm tortillas with salsa and sour cream.",
+     "main": [
+      "chicken thighs",
+      "bell peppers",
+      "onion",
+      "tortillas",
+      "lime"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
     }
    ]
   },
@@ -2409,6 +2543,132 @@ export const LIBRARY = {
     "Greek yogurt",
     "cucumber",
     "lemon"
+   ],
+   "variations": [
+    {
+     "title": "Chicken souvlaki pitas",
+     "image": "img/dishes/chicken-souvlaki-pitas.webp",
+     "cuisine": "greek",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 5,
+        "text": "For more than 4, sear the chicken in batches so the pieces have room to brown."
+       }
+      ]
+     },
+     "totalMinutes": 45,
+     "ingredients": [
+      {
+       "ingredient": "cucumber"
+      },
+      {
+       "ingredient": "yogurt-greek"
+      },
+      {
+       "ingredient": "garlic-minced-jarred"
+      },
+      {
+       "ingredient": "dill"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "chicken-ready-cut"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "garlic-minced-jarred"
+      },
+      {
+       "ingredient": "oregano-dried"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "pita"
+      },
+      {
+       "ingredient": "tomato"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "pita",
+       "use": "tortilla-corn",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "herby-lemony",
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "cucumber",
+       "sour-cream-yogurt",
+       "lemon-lime",
+       "tomatoes"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "vegetable-peeler",
+      "paring-knife",
+      "cutting-board",
+      "spoon",
+      "small-bowl",
+      "mixing-bowl-medium",
+      "mixing-bowl-large",
+      "measuring-cups",
+      "measuring-spoons",
+      "skillet-12",
+      "spatula",
+      "plate",
+      "thermometer",
+      "paper-towels",
+      "microwave"
+     ],
+     "skills": [
+      "dressings",
+      "fine-chopping"
+     ],
+     "method": "stove",
+     "about": "Lemon and oregano chicken seared in a skillet and tucked into warm pitas with tomato, onion, and a cool cucumber-yogurt tzatziki.",
+     "main": [
+      "chicken breast",
+      "pita",
+      "Greek yogurt",
+      "cucumber",
+      "lemon"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
+    }
    ]
   },
   {
@@ -3044,6 +3304,113 @@ export const LIBRARY = {
       "onion"
      ],
      "id": "easy-prep"
+    },
+    {
+     "title": "Smash burgers",
+     "image": "img/dishes/smash-burgers.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "Cook 3 patties at a time in a 12-inch skillet. For more than 6, keep going in batches of 3, washing the tongs and your hands after each batch of raw beef."
+       }
+      ]
+     },
+     "totalMinutes": 35,
+     "ingredients": [
+      {
+       "ingredient": "beef-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "cheese-sliced",
+       "optional": true
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "burger-buns"
+      },
+      {
+       "ingredient": "pickle-dill"
+      },
+      {
+       "ingredient": "ketchup",
+       "optional": true
+      },
+      {
+       "ingredient": "mustard-dijon",
+       "optional": true
+      },
+      {
+       "ingredient": "lettuce-green-leaf",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "burger-buns",
+       "use": "buns-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "beef",
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "pickles"
+      ],
+      "optional": [
+       "mustard"
+      ]
+     },
+     "tools": [
+      "paring-knife",
+      "cutting-board",
+      "plate",
+      "parchment",
+      "measuring-spoons",
+      "skillet-12",
+      "spatula",
+      "tongs",
+      "thermometer",
+      "oven-mitts"
+     ],
+     "skills": [
+      "thin-slicing",
+      "quick-pickling",
+      "searing"
+     ],
+     "method": "stove",
+     "about": "Thin beef patties smashed onto a very hot pan for crispy edges, with quick homemade pickles.",
+     "main": [
+      "ground beef",
+      "cucumbers",
+      "buns",
+      "cheese",
+      "onion"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
     }
    ]
   },
@@ -5220,6 +5587,114 @@ export const LIBRARY = {
       "rice"
      ],
      "id": "easy-prep"
+    },
+    {
+     "title": "Oyakodon",
+     "image": "img/dishes/oyakodon.webp",
+     "cuisine": "japanese",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, cook the chicken and egg in two skillets side by side, with half of everything in each."
+       }
+      ]
+     },
+     "totalMinutes": 45,
+     "ingredients": [
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "broth-chicken"
+      },
+      {
+       "ingredient": "soy-sauce"
+      },
+      {
+       "ingredient": "mirin"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "green-onion"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "mirin",
+       "use": "vinegar-rice",
+       "reason": "availability"
+      },
+      {
+       "for": "soy-sauce",
+       "use": "tamari",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "ginger-soy",
+       "sweet-savory"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "onions"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "saucepan-medium",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "chef-knife",
+      "cutting-board",
+      "mixing-bowl-medium",
+      "fork",
+      "skillet-12",
+      "wooden-spoon",
+      "ladle",
+      "thermometer"
+     ],
+     "skills": [
+      "simmering",
+      "poaching-eggs"
+     ],
+     "method": "stove",
+     "about": "A Japanese rice bowl of chicken and onion simmered in a sweet soy broth, with egg set gently on top.",
+     "main": [
+      "chicken thighs",
+      "eggs",
+      "onion",
+      "soy sauce",
+      "rice"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
     }
    ]
   },
@@ -7065,6 +7540,266 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "chicken-tagine",
+   "version": 1,
+   "track": "core",
+   "unit": 3,
+   "title": "Chicken tagine with olives",
+   "image": "img/dishes/chicken-tagine.webp",
+   "cuisine": "moroccan",
+   "skill": "Layered spice braise",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, brown the chicken in three batches and use your biggest pot, so the pieces fit in one or two layers for the braise."
+     }
+    ]
+   },
+   "totalMinutes": 80,
+   "ingredients": [
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "turmeric-ground"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "olives-green"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices",
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic",
+     "ginger",
+     "lemon-lime",
+     "cilantro"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "pot-large",
+    "saucepan-medium",
+    "cutting-board",
+    "chef-knife",
+    "box-grater",
+    "paper-towels",
+    "plate",
+    "small-bowl",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "tongs",
+    "wooden-spoon",
+    "thermometer"
+   ],
+   "skills": [
+    "blooming-spices",
+    "braising"
+   ],
+   "method": "stove",
+   "about": "A Moroccan stew of chicken slowly braised with spices, lemon, and green olives.",
+   "main": [
+    "chicken thighs",
+    "onion",
+    "green olives",
+    "lemon",
+    "warm spices"
+   ],
+   "variations": [
+    {
+     "title": "Chicken tagine with olives",
+     "image": "img/dishes/chicken-tagine.webp",
+     "cuisine": "moroccan",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, brown the chicken in three batches and use your biggest pot, so the pieces fit in one or two layers for the braise."
+       }
+      ]
+     },
+     "totalMinutes": 105,
+     "ingredients": [
+      {
+       "ingredient": "chicken-whole"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "ginger-fresh"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "paprika-sweet"
+      },
+      {
+       "ingredient": "turmeric-ground"
+      },
+      {
+       "ingredient": "cinnamon-ground"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "broth-chicken"
+      },
+      {
+       "ingredient": "olives-green"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "cilantro"
+      },
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "water"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "warm-spices",
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "adventurous",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "garlic",
+       "ginger",
+       "lemon-lime",
+       "cilantro"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "kitchen-scale",
+      "vegetable-peeler",
+      "pot-large",
+      "saucepan-medium",
+      "box-grater",
+      "paper-towels",
+      "plate",
+      "small-bowl",
+      "heatproof-bowl",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "tongs",
+      "wooden-spoon",
+      "thermometer"
+     ],
+     "skills": [
+      "blooming-spices",
+      "braising"
+     ],
+     "method": "stove",
+     "about": "A Moroccan stew of chicken slowly braised with spices, lemon, and green olives.",
+     "main": [
+      "chicken thighs",
+      "onion",
+      "green olives",
+      "lemon",
+      "warm spices"
+     ],
+     "id": "sp-4",
+     "level": "sp-4"
+    }
+   ]
+  },
+  {
    "id": "beef-ragu",
    "version": 1,
    "track": "core",
@@ -7625,6 +8360,283 @@ export const LIBRARY = {
     "tomatoes",
     "butter and cream",
     "garam masala"
+   ]
+  },
+  {
+   "id": "shish-taouk",
+   "version": 1,
+   "track": "core",
+   "unit": 3,
+   "title": "Shish taouk",
+   "image": "img/dishes/shish-taouk.webp",
+   "cuisine": "lebanese",
+   "skill": "A yogurt-garlic marinade, broiling skewers",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Broil the skewers in two batches, or on two sheet pans one after the other, so they sit in one layer under the broiler."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "yogurt-greek"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "tomato-paste"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "yogurt-greek"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "pita"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "pickle-dill",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pita",
+     "use": "tortilla-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "herby-lemony",
+     "tangy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "sour-cream-yogurt",
+     "lemon-lime",
+     "tomatoes"
+    ],
+    "optional": [
+     "pickles"
+    ]
+   },
+   "tools": [
+    "skewers",
+    "cutting-board",
+    "chef-knife",
+    "mixing-bowl-large",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "sheet-pan",
+    "foil",
+    "oven-mitts",
+    "tongs",
+    "thermometer",
+    "plate",
+    "microwave",
+    "paper-towels"
+   ],
+   "skills": [
+    "marinating",
+    "broiling"
+   ],
+   "method": "oven",
+   "about": "Lebanese chicken skewers marinated in yogurt, lemon, and garlic, broiled until charred at the edges and 165°F inside, with a quick garlic sauce.",
+   "main": [
+    "chicken thighs",
+    "yogurt",
+    "lemon",
+    "garlic",
+    "paprika"
+   ],
+   "variations": [
+    {
+     "title": "Shish taouk",
+     "image": "img/dishes/shish-taouk.webp",
+     "cuisine": "lebanese",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "Broil the skewers in two batches, or on two sheet pans one after the other, so they sit in one layer under the broiler."
+       }
+      ]
+     },
+     "totalMinutes": 75,
+     "ingredients": [
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "yogurt-greek"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "tomato-paste"
+      },
+      {
+       "ingredient": "paprika-sweet"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "yogurt-greek"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "pita"
+      },
+      {
+       "ingredient": "romaine"
+      },
+      {
+       "ingredient": "tomato"
+      },
+      {
+       "ingredient": "pickle-dill",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "pita",
+       "use": "tortilla-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "herby-lemony",
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "sour-cream-yogurt",
+       "lemon-lime",
+       "garlic",
+       "tomatoes"
+      ],
+      "optional": [
+       "pickles"
+      ]
+     },
+     "tools": [
+      "skewers",
+      "cutting-board",
+      "chef-knife",
+      "mixing-bowl-large",
+      "small-bowl",
+      "measuring-cups",
+      "measuring-spoons",
+      "sheet-pan",
+      "foil",
+      "oven-mitts",
+      "tongs",
+      "thermometer",
+      "plate",
+      "microwave",
+      "paper-towels"
+     ],
+     "skills": [
+      "marinating",
+      "broiling"
+     ],
+     "method": "oven",
+     "about": "Lebanese chicken skewers marinated in yogurt, lemon, and garlic, broiled until charred at the edges and 165°F inside, with a quick garlic sauce.",
+     "main": [
+      "chicken thighs",
+      "yogurt",
+      "lemon",
+      "garlic",
+      "paprika"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
+    }
    ]
   },
   {
@@ -8414,6 +9426,301 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "lamb-kofta",
+   "version": 1,
+   "track": "core",
+   "unit": 6,
+   "title": "Lamb kofta with yogurt sauce",
+   "image": "img/dishes/lamb-kofta.webp",
+   "cuisine": "lebanese",
+   "skill": "Binders, shaping by hand",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Brown the kofta in two batches so they have room in the pan. Keep the first batch warm on a plate under foil."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "lamb-ground"
+    },
+    {
+     "ingredient": "panko"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "yogurt-greek"
+    },
+    {
+     "ingredient": "mint"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "pita"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "tomato"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "lamb-ground",
+     "use": "beef-ground",
+     "reason": "availability"
+    },
+    {
+     "for": "panko",
+     "use": "oats-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "pita",
+     "use": "tortilla-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "other",
+   "tags": {
+    "protein": "lamb",
+    "flavors": [
+     "warm-spices",
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$$$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic",
+     "sour-cream-yogurt",
+     "mint",
+     "lemon-lime",
+     "cucumber",
+     "tomatoes"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "box-grater",
+    "kitchen-towel",
+    "chef-knife",
+    "cutting-board",
+    "mixing-bowl-large",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "plate",
+    "skillet-12",
+    "tongs",
+    "thermometer",
+    "microwave",
+    "paper-towels"
+   ],
+   "skills": [
+    "binders"
+   ],
+   "method": "stove",
+   "about": "Ground lamb mixed with onion, parsley, and warm spices, shaped by hand and browned, on flatbread with a yogurt-mint sauce.",
+   "main": [
+    "ground lamb",
+    "onion",
+    "parsley",
+    "Greek yogurt",
+    "flatbread"
+   ],
+   "variations": [
+    {
+     "title": "Lamb kofta with yogurt sauce",
+     "image": "img/dishes/lamb-kofta.webp",
+     "cuisine": "lebanese",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "Brown the kofta in two batches so they have room in the pan. Keep the first batch warm on a plate under foil."
+       }
+      ]
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "parsley"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "lamb-ground"
+      },
+      {
+       "ingredient": "panko"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "paprika-sweet"
+      },
+      {
+       "ingredient": "cinnamon-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "yogurt-greek"
+      },
+      {
+       "ingredient": "mint"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "pita"
+      },
+      {
+       "ingredient": "cucumber"
+      },
+      {
+       "ingredient": "tomato"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "lamb-ground",
+       "use": "beef-ground",
+       "reason": "availability"
+      },
+      {
+       "for": "panko",
+       "use": "oats-gluten-free",
+       "reason": "gluten"
+      },
+      {
+       "for": "pita",
+       "use": "tortilla-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "other",
+     "tags": {
+      "protein": "lamb",
+      "flavors": [
+       "warm-spices",
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$$",
+      "familiar": "adventurous",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "garlic",
+       "sour-cream-yogurt",
+       "mint",
+       "lemon-lime",
+       "cucumber",
+       "tomatoes"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "box-grater",
+      "kitchen-towel",
+      "chef-knife",
+      "cutting-board",
+      "mixing-bowl-large",
+      "small-bowl",
+      "measuring-cups",
+      "measuring-spoons",
+      "plate",
+      "skillet-12",
+      "tongs",
+      "spatula",
+      "thermometer",
+      "microwave",
+      "paper-towels"
+     ],
+     "skills": [
+      "binders"
+     ],
+     "method": "stove",
+     "about": "Ground lamb mixed with onion, parsley, and warm spices, shaped by hand and browned, on flatbread with a yogurt-mint sauce.",
+     "main": [
+      "ground lamb",
+      "onion",
+      "parsley",
+      "Greek yogurt",
+      "flatbread"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
+    }
+   ]
+  },
+  {
    "id": "brown-butter-cookies",
    "version": 1,
    "track": "core",
@@ -8694,6 +10001,114 @@ export const LIBRARY = {
     "flour",
     "cinnamon sugar"
    ]
+  },
+  {
+   "id": "beef-tacos-seasoning",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Beef tacos with homemade seasoning",
+   "image": "img/dishes/beef-tacos-seasoning.webp",
+   "cuisine": "tex-mex",
+   "skill": "Reading labels on shells and seasoning",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, brown the beef in two batches, or in a wide pot, so it browns instead of steaming."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "chili-powder"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "taco-shells"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "cheddar-shredded"
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    },
+    {
+     "ingredient": "salsa",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "tomatoes"
+    ],
+    "optional": [
+     "sour-cream-yogurt"
+    ]
+   },
+   "tools": [
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "cutting-board",
+    "paring-knife",
+    "paper-towels",
+    "sheet-pan",
+    "oven-mitts",
+    "skillet-12",
+    "wooden-spoon",
+    "thermometer",
+    "spoon"
+   ],
+   "skills": [
+    "reading-labels"
+   ],
+   "method": "stove",
+   "about": "Ground beef browned with a seasoning mix made at home, in label-checked shells with lettuce, tomato, and cheese.",
+   "main": [
+    "ground beef",
+    "taco shells",
+    "chili powder and cumin",
+    "lettuce",
+    "cheddar"
+   ],
+   "level": "sp-2"
   },
   {
    "id": "bun-bowl",
@@ -9105,6 +10520,115 @@ export const LIBRARY = {
    "level": "sp-2"
   },
   {
+   "id": "fish-sticks",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Oven-baked fish sticks",
+   "image": "img/dishes/fish-sticks.webp",
+   "cuisine": "american",
+   "skill": "Thawing fish safely and baking to 145°F",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, use two sheet pans, one on each middle rack, and swap them halfway."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "cod"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "panko"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "mayonnaise"
+    },
+    {
+     "ingredient": "pickle-dill"
+    },
+    {
+     "ingredient": "lemon"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "panko",
+     "use": "oats-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "flour-ap",
+     "use": "cornstarch",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "mayonnaise",
+     "pickles",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "oven-mitts",
+    "paper-towels",
+    "cutting-board",
+    "paring-knife",
+    "plate",
+    "shallow-dish",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "spatula",
+    "thermometer"
+   ],
+   "skills": [
+    "cooking-fish"
+   ],
+   "method": "oven",
+   "about": "Cod strips crumbed and baked crisp, with tartar sauce and lemon.",
+   "main": [
+    "cod",
+    "breadcrumbs",
+    "egg",
+    "lemon",
+    "tartar sauce"
+   ],
+   "level": "sp-2"
+  },
+  {
    "id": "ful-medames",
    "version": 1,
    "track": "core",
@@ -9318,6 +10842,231 @@ export const LIBRARY = {
     "lemon",
     "cucumber",
     "pita"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "keema",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Keema with peas",
+   "image": "img/dishes/keema.webp",
+   "cuisine": "indian",
+   "skill": "Choosing clean ground beef and spices",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, use a wide pot so the beef has room to brown, and give it 5 more minutes to simmer."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "onion-diced-frozen"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "ginger-minced-jarred"
+    },
+    {
+     "ingredient": "garam-masala"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "turmeric-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "tomato-sauce"
+    },
+    {
+     "ingredient": "peas-frozen"
+    },
+    {
+     "ingredient": "lemon",
+     "optional": true
+    },
+    {
+     "ingredient": "rice-cooked-pouch"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "lemon-lime"
+    ]
+   },
+   "tools": [
+    "measuring-cups",
+    "measuring-spoons",
+    "small-bowl",
+    "can-opener",
+    "skillet-12",
+    "wooden-spoon",
+    "thermometer",
+    "microwave",
+    "cutting-board",
+    "paring-knife"
+   ],
+   "skills": [
+    "reading-labels"
+   ],
+   "method": "stove",
+   "about": "Indian ground beef cooked with onion, tomato, ginger, garlic, and frozen peas, served with flatbread or rice.",
+   "main": [
+    "ground beef",
+    "frozen peas",
+    "frozen diced onion",
+    "jarred ginger and garlic",
+    "garam masala"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "kofte",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Köfte with tomato-cucumber salad",
+   "image": "img/dishes/kofte.webp",
+   "cuisine": "turkish",
+   "skill": "Checking patties for 160°F",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Cook the patties in two batches so they have room in the pan. Wash the tongs and your hands after each batch of raw beef."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "onion-diced-frozen"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "panko"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "pita"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "panko",
+     "use": "oats-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "pita",
+     "use": "tortilla-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "cucumber",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "microwave",
+    "small-bowl",
+    "paper-towels",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "plate",
+    "cutting-board",
+    "paring-knife",
+    "vegetable-peeler",
+    "spoon",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "thermometer"
+   ],
+   "skills": [
+    "temping-meat"
+   ],
+   "method": "stove",
+   "about": "Turkish beef patties with onion, parsley, and cumin, cooked to 160°F, with a tomato-cucumber salad.",
+   "main": [
+    "ground beef",
+    "onion",
+    "parsley",
+    "cumin",
+    "tomato and cucumber"
    ],
    "level": "sp-2"
   },
@@ -9662,6 +11411,193 @@ export const LIBRARY = {
     "canned tuna or salmon",
     "nori",
     "cucumber"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "shioyaki",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Shioyaki salted salmon",
+   "image": "img/dishes/shioyaki.webp",
+   "cuisine": "japanese",
+   "skill": "Baking fish to 145°F",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, use two sheet pans, one on each middle rack, and swap them halfway."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "salmon-fillet"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "rice-cooked-pouch"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "cucumber",
+     "optional": true
+    },
+    {
+     "ingredient": "vinegar-rice",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "lemon-lime"
+    ],
+    "optional": [
+     "cucumber"
+    ]
+   },
+   "tools": [
+    "plate",
+    "paper-towels",
+    "tweezers",
+    "sheet-pan",
+    "parchment",
+    "oven-mitts",
+    "spatula",
+    "thermometer",
+    "microwave",
+    "cutting-board",
+    "paring-knife",
+    "small-bowl"
+   ],
+   "skills": [
+    "cooking-fish"
+   ],
+   "method": "oven",
+   "about": "Japanese salted salmon, baked until it flakes, with rice and lemon.",
+   "main": [
+    "salmon fillet",
+    "salt",
+    "rice",
+    "lemon"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "teriyaki-chicken-bites",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Baked teriyaki chicken bites",
+   "image": "img/dishes/teriyaki-chicken-bites.webp",
+   "cuisine": "japanese",
+   "skill": "Handling ready-cut chicken safely",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, use two sheet pans, one on each middle rack, and swap them halfway."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "chicken-ready-cut"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "ginger-minced-jarred"
+    },
+    {
+     "ingredient": "cornstarch"
+    },
+    {
+     "ingredient": "rice-cooked-pouch"
+    },
+    {
+     "ingredient": "sesame-seeds",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "sesame"
+    ]
+   },
+   "tools": [
+    "sheet-pan",
+    "parchment",
+    "oven-mitts",
+    "mixing-bowl-medium",
+    "mixing-bowl-large",
+    "spoon",
+    "whisk",
+    "measuring-cups",
+    "measuring-spoons",
+    "microwave",
+    "spatula",
+    "thermometer",
+    "paper-towels"
+   ],
+   "skills": [
+    "handling-poultry"
+   ],
+   "method": "oven",
+   "about": "Ready-cut chicken baked to 165°F and tossed in a teriyaki glaze, over rice.",
+   "main": [
+    "ready-cut chicken",
+    "soy sauce",
+    "honey",
+    "jarred ginger and garlic",
+    "rice"
    ],
    "level": "sp-2"
   },
@@ -10349,6 +12285,257 @@ export const LIBRARY = {
     "tomato sauce",
     "raisins",
     "olives"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "chermoula-fish",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Chermoula baked fish",
+   "image": "img/dishes/chermoula-fish.webp",
+   "cuisine": "moroccan",
+   "skill": "Checking a fillet and baking it to 145°F",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, use two baking dishes on the same rack, or a sheet pan, so the fillets sit in one layer with space around them."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "cod"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "cayenne",
+     "optional": true
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "onion-red"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "baguette"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "cod",
+     "use": "tilapia",
+     "reason": "availability"
+    },
+    {
+     "for": "baguette",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "cilantro",
+     "garlic",
+     "lemon-lime",
+     "tomatoes"
+    ],
+    "optional": [
+     "hot-peppers"
+    ]
+   },
+   "tools": [
+    "cutting-board",
+    "chef-knife",
+    "box-grater",
+    "tweezers",
+    "paper-towels",
+    "plate",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "spoon",
+    "baking-dish",
+    "spatula",
+    "thermometer",
+    "oven-mitts",
+    "bread-knife"
+   ],
+   "skills": [
+    "cooking-fish"
+   ],
+   "method": "oven",
+   "about": "Firm white fish coated in chermoula, a herb, garlic, cumin, and lemon paste, baked with tomatoes until it flakes.",
+   "main": [
+    "cod or another firm white fish",
+    "cilantro and parsley",
+    "garlic",
+    "cumin",
+    "lemon"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "chicken-tenders",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Oven-baked chicken tenders",
+   "image": "img/dishes/chicken-tenders.webp",
+   "cuisine": "american",
+   "skill": "Trimming raw chicken into strips and checking 165°F",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, use two sheet pans, one on each of the two middle racks, and swap them halfway through baking."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "chicken-breast"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "panko"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "mayonnaise"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "honey"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "panko",
+     "use": "oats-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "flour-ap",
+     "use": "cornstarch",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "mayonnaise",
+     "mustard"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "oven-mitts",
+    "skillet-12",
+    "wooden-spoon",
+    "shallow-dish",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "cutting-board",
+    "chef-knife",
+    "paper-towels",
+    "plate",
+    "spatula",
+    "thermometer",
+    "whisk"
+   ],
+   "skills": [
+    "handling-poultry",
+    "breading-frying"
+   ],
+   "method": "oven",
+   "about": "Chicken breast trimmed into strips, breaded, and baked crisp to 165°F, with a honey-mustard dip.",
+   "main": [
+    "chicken breast",
+    "breadcrumbs",
+    "egg",
+    "honey",
+    "mustard"
    ],
    "level": "sp-3"
   },
@@ -11917,7 +14104,7 @@ export const LIBRARY = {
     "notes": [
      {
       "from": 5,
-      "text": "Sear the beef in batches of about 340 g. More than that in the pan, and it boils in its own juice."
+      "text": "Sear the beef in batches of about ¾ pound. More than that in the pan, and it boils in its own juice."
      }
     ]
    },
@@ -12023,6 +14210,125 @@ export const LIBRARY = {
     "garlic",
     "soy sauce",
     "lime"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "chicken-cacciatore",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Chicken cacciatore",
+   "image": "img/dishes/chicken-cacciatore.webp",
+   "cuisine": "italian",
+   "skill": "Breaking down a whole chicken",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, break down two chickens, brown in three batches, and braise in your widest pot so the pieces sit in one layer."
+     }
+    ]
+   },
+   "totalMinutes": 110,
+   "ingredients": [
+    {
+     "ingredient": "chicken-whole"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "bell-pepper-green"
+    },
+    {
+     "ingredient": "mushrooms"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "chili-flakes",
+     "optional": true
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "baguette"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "bell-peppers",
+     "garlic",
+     "tomatoes"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-scale",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "pot-large",
+    "heatproof-bowl",
+    "tongs",
+    "wooden-spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "can-opener",
+    "thermometer",
+    "bread-knife"
+   ],
+   "skills": [
+    "breaking-down-chicken",
+    "braising"
+   ],
+   "method": "stove",
+   "about": "A whole chicken broken into pieces at home and braised with tomatoes, peppers, mushrooms, and herbs.",
+   "main": [
+    "whole chicken",
+    "tomatoes",
+    "bell peppers",
+    "mushrooms",
+    "onion"
    ],
    "level": "sp-4"
   },
@@ -12148,6 +14454,230 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "chicken-two-ways",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Chicken two ways",
+   "image": "img/dishes/chicken-two-ways.webp",
+   "cuisine": "american",
+   "skill": "Using every part of one bird, costed",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, break down two chickens, pan-roast the breasts in two skillets, and use the stockpot for both backs and all four legs."
+     }
+    ]
+   },
+   "totalMinutes": 180,
+   "ingredients": [
+    {
+     "ingredient": "chicken-whole"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "peppercorns-black"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "noodles-egg"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "parsley"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "carrots",
+     "celery"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-scale",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "stockpot",
+    "pot-large",
+    "colander",
+    "mixing-bowl-large",
+    "ladle",
+    "spoon",
+    "fork",
+    "skillet-12",
+    "tongs",
+    "oven-mitts",
+    "thermometer",
+    "measuring-cups",
+    "measuring-spoons",
+    "sheet-pan"
+   ],
+   "skills": [
+    "breaking-down-chicken",
+    "making-stock"
+   ],
+   "method": "stove",
+   "about": "One whole chicken broken down: the breasts pan-roasted, the legs and back made into a soup, with the cost per serving worked out.",
+   "main": [
+    "whole chicken",
+    "carrots",
+    "celery",
+    "onion",
+    "thyme"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "duck-breast-cherry",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Seared duck breast with cherry sauce",
+   "image": "img/dishes/duck-breast-cherry.webp",
+   "cuisine": "french",
+   "skill": "Scoring skin and rendering fat",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, render the duck in two skillets, and roast all the breasts together on one sheet pan."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "duck-breast"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "potato-baby"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "onion-red"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "vinegar-balsamic"
+    },
+    {
+     "ingredient": "cherries-frozen"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "salt"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "other",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "skillet-12",
+    "heatproof-bowl",
+    "tongs",
+    "sheet-pan",
+    "oven-mitts",
+    "thermometer",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "wooden-spoon",
+    "spoon"
+   ],
+   "skills": [
+    "searing",
+    "reducing"
+   ],
+   "method": "stove",
+   "about": "Duck breast scored and seared slowly skin-side down until crisp, the fat saved, with a cherry pan sauce.",
+   "main": [
+    "duck breasts",
+    "cherries",
+    "broth",
+    "balsamic vinegar",
+    "thyme"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "ensaladilla-rusa",
    "version": 1,
    "track": "core",
@@ -12254,6 +14784,110 @@ export const LIBRARY = {
     "peas",
     "canned tuna",
     "pasteurized eggs"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "flank-steak",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Sliced flank steak",
+   "image": "img/dishes/flank-steak.webp",
+   "cuisine": "american",
+   "skill": "Trimming and slicing against the grain",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, sear the steaks one at a time so the pan stays hot, and roast the potatoes on two sheet pans."
+     }
+    ]
+   },
+   "totalMinutes": 70,
+   "ingredients": [
+    {
+     "ingredient": "beef-flank"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "potato-baby"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "chili-flakes"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "oven-mitts",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "tongs",
+    "thermometer",
+    "kitchen-scale",
+    "box-grater"
+   ],
+   "skills": [
+    "thin-slicing",
+    "searing"
+   ],
+   "method": "stove",
+   "about": "Flank steak trimmed, seared, rested, and sliced thin against the grain, with a herb sauce.",
+   "main": [
+    "flank steak",
+    "parsley",
+    "garlic",
+    "olive oil",
+    "lemon"
    ],
    "level": "sp-4"
   },
@@ -12410,6 +15044,124 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "pescado-veracruzana",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Pescado a la veracruzana",
+   "image": "img/dishes/pescado-veracruzana.webp",
+   "cuisine": "mexican",
+   "skill": "Cleaning and baking a whole fish",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, bake two fish side by side on a sheet pan, each in its own bed of sauce, and add 5 minutes."
+     }
+    ]
+   },
+   "totalMinutes": 80,
+   "ingredients": [
+    {
+     "ingredient": "snapper-whole"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-white"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "olives-green"
+    },
+    {
+     "ingredient": "capers"
+    },
+    {
+     "ingredient": "jalapenos-pickled"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "parsley"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "lemon-lime",
+     "onions",
+     "garlic",
+     "tomatoes",
+     "capers"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-shears",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "tweezers",
+    "baking-dish",
+    "skillet-12",
+    "saucepan-medium",
+    "wooden-spoon",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "can-opener",
+    "oven-mitts",
+    "thermometer",
+    "spatula",
+    "plate"
+   ],
+   "skills": [
+    "cooking-fish"
+   ],
+   "method": "oven",
+   "about": "A whole snapper baked in a Veracruz sauce of tomatoes, olives, capers, and pickled peppers.",
+   "main": [
+    "whole red snapper",
+    "tomatoes",
+    "green olives",
+    "capers",
+    "pickled jalapeños"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "salade-nicoise",
    "version": 1,
    "track": "core",
@@ -12533,6 +15285,121 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "spatchcocked-quail",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Spatchcocked quail with pomegranate",
+   "image": "img/dishes/spatchcocked-quail.webp",
+   "cuisine": "persian",
+   "skill": "Spatchcocking a small bird",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, roast the quail on two sheet pans, one on each middle rack, swapping them halfway."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "quail-whole"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "pomegranate-molasses"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "bulgur-fine"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "mint"
+    },
+    {
+     "ingredient": "lemon"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "other",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "mint",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-shears",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "sheet-pan",
+    "foil",
+    "oven-mitts",
+    "small-bowl",
+    "pastry-brush",
+    "saucepan-medium",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "chef-knife",
+    "fork",
+    "tongs",
+    "thermometer"
+   ],
+   "skills": [
+    "breaking-down-chicken",
+    "roasting"
+   ],
+   "method": "oven",
+   "about": "Quail flattened, glazed with pomegranate molasses and spices, and roasted, over bulgur.",
+   "main": [
+    "quail",
+    "pomegranate molasses",
+    "garlic",
+    "cinnamon",
+    "bulgur"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "steak-fajitas",
    "version": 1,
    "track": "core",
@@ -12540,7 +15407,7 @@ export const LIBRARY = {
    "title": "Steak fajitas",
    "image": "img/dishes/steak-fajitas.webp",
    "cuisine": "tex-mex",
-   "skill": "Weighing in grams and finding the yield",
+   "skill": "Weighing and finding the yield",
    "servings": 4,
    "scaling": {
     "mode": "free",
@@ -12650,6 +15517,109 @@ export const LIBRARY = {
     "onion",
     "lime",
     "tortillas"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "teriyaki-salmon-side",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Teriyaki salmon side",
+   "image": "img/dishes/teriyaki-salmon-side.webp",
+   "cuisine": "japanese",
+   "skill": "Skinning and portioning a side of salmon",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, buy a second side and roast the portions on two sheet pans, swapping them halfway."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "salmon-side"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "mirin"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "rice-short-grain"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "sesame-seeds"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "ginger",
+     "garlic",
+     "onions",
+     "sesame"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "tweezers",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "kitchen-scale",
+    "plate",
+    "sheet-pan",
+    "parchment",
+    "oven-mitts",
+    "saucepan-medium",
+    "saucepan-light",
+    "pastry-brush",
+    "box-grater",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "spatula",
+    "thermometer"
+   ],
+   "skills": [
+    "cooking-fish"
+   ],
+   "method": "oven",
+   "about": "A whole side of salmon skinned, pin-boned, and portioned at home, then glazed with teriyaki and roasted.",
+   "main": [
+    "side of salmon",
+    "soy sauce",
+    "mirin or honey",
+    "ginger",
+    "sesame seeds"
    ],
    "level": "sp-4"
   }
@@ -13624,6 +16594,82 @@ export const LIBRARY = {
    "contains": [
     "dairy"
    ]
+  },
+  "lamb-ground": {
+   "name": "Ground lamb",
+   "contains": [
+    "meat"
+   ]
+  },
+  "panko": {
+   "name": "Panko breadcrumbs",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "chicken-ready-cut": {
+   "name": "Ready-cut chicken breast, plain (chunks or stir-fry strips)",
+   "contains": [
+    "meat"
+   ]
+  },
+  "onion-diced-frozen": {
+   "name": "Frozen diced onion",
+   "contains": []
+  },
+  "ginger-minced-jarred": {
+   "name": "Jarred minced ginger",
+   "contains": []
+  },
+  "taco-shells": {
+   "name": "Hard taco shells",
+   "contains": []
+  },
+  "chicken-whole": {
+   "name": "Whole chicken",
+   "contains": [
+    "meat"
+   ]
+  },
+  "duck-breast": {
+   "name": "Duck breasts, skin on",
+   "contains": [
+    "meat"
+   ]
+  },
+  "quail-whole": {
+   "name": "Whole quail",
+   "contains": [
+    "meat"
+   ]
+  },
+  "salmon-side": {
+   "name": "Side of salmon, skin on",
+   "contains": [
+    "fish"
+   ]
+  },
+  "snapper-whole": {
+   "name": "Whole red snapper, scaled and gutted",
+   "contains": [
+    "fish"
+   ]
+  },
+  "cherries-frozen": {
+   "name": "Frozen dark sweet cherries, pitted",
+   "contains": []
+  },
+  "vinegar-balsamic": {
+   "name": "Balsamic vinegar",
+   "contains": []
+  },
+  "jalapenos-pickled": {
+   "name": "Pickled jalapeño slices",
+   "contains": []
+  },
+  "pomegranate-molasses": {
+   "name": "Pomegranate molasses",
+   "contains": []
   }
  },
  "cuisines": {
@@ -13696,22 +16742,30 @@ export const LIBRARY = {
   "cottage-cheese-crescents": "U2"
  },
  "levelLabels": {
+  "beef-tacos-seasoning": "B8a",
   "bun-bowl": "B3b",
   "caprese-sandwiches": "B1a",
   "chana-chaat": "B6b",
   "chicken-caesar-wraps": "B6a",
+  "fish-sticks": "B9a",
   "ful-medames": "B4b",
   "hummus-plate": "B5b",
+  "keema": "B8b",
+  "kofte": "B7b",
   "loaded-baked-potatoes": "B3a",
   "mini-pita-pizzas": "B4a",
   "molletes": "B2b",
   "onigiri": "B1b",
+  "shioyaki": "B9b",
+  "teriyaki-chicken-bites": "B10a",
   "aglio-e-olio": "C2a",
   "ajapsandali": "C4b",
   "baked-salmon": "C8a",
   "bean-quesadillas": "C1a",
   "bean-tostadas": "C5a",
   "beef-picadillo": "C21b",
+  "chermoula-fish": "C8b",
+  "chicken-tenders": "C10a",
   "dinner-rolls": "C13a",
   "kimbap": "C3b",
   "pan-seared-trout": "C23a",
@@ -13726,11 +16780,18 @@ export const LIBRARY = {
   "antipasto-platter": "D6a",
   "bibimbap": "D4b",
   "bo-luc-lac": "D2b",
+  "chicken-cacciatore": "D7a",
   "chicken-enchiladas": "D3a",
+  "chicken-two-ways": "D10a",
+  "duck-breast-cherry": "D8b",
   "ensaladilla-rusa": "D5b",
+  "flank-steak": "D8a",
   "mezze-spread": "D6b",
+  "pescado-veracruzana": "D9b",
   "salade-nicoise": "D4a",
-  "steak-fajitas": "D2a"
+  "spatchcocked-quail": "D10b",
+  "steak-fajitas": "D2a",
+  "teriyaki-salmon-side": "D9a"
  },
  "dietTags": [
   "nuts",
@@ -14807,7 +17868,7 @@ export const LIBRARY = {
     "blooming-spices",
     "braising"
    ],
-   "minutes": 90,
+   "minutes": 80,
    "cuisine": "moroccan",
    "pickOne": "braising",
    "tags": {
@@ -15068,7 +18129,7 @@ export const LIBRARY = {
     "marinating",
     "broiling"
    ],
-   "minutes": 50,
+   "minutes": 75,
    "cuisine": "lebanese",
    "pickOne": "broiling",
    "tags": {
@@ -15696,7 +18757,7 @@ export const LIBRARY = {
    "skills": [
     "binders"
    ],
-   "minutes": 40,
+   "minutes": 45,
    "cuisine": "lebanese",
    "pickOne": "binders",
    "tags": {
@@ -16983,8 +20044,8 @@ export const LIBRARY = {
       "title": "Daily bread (Matthew 6:11)",
       "minutes": 20,
       "body": [
-       "When Jesus taught his followers to pray, one of the things he told them to ask for was food: \"Give us this day our daily bread\" (Matthew 6:11). Not a year's worth, or a week's: today's.",
-       "In the wilderness, God fed Israel with manna one day at a time (Exodus 16:4). Proverbs asks God for \"neither poverty nor riches; feed me with the food that is needful for me\" (Proverbs 30:8). And later in the same chapter of Matthew, Jesus tells his followers not to worry about what they'll eat, because their Father knows they need it (Matthew 6:31–33).",
+       "When Jesus taught His followers to pray, one of the things He told them to ask for was food: \"Give us this day our daily bread\" (Matthew 6:11). Not a year's worth, or a week's: today's.",
+       "In the wilderness, God fed Israel with manna one day at a time (Exodus 16:4). Proverbs asks God for \"neither poverty nor riches; feed me with the food that is needful for me\" (Proverbs 30:8). And later in the same chapter of Matthew, Jesus tells His followers not to worry about what they'll eat, because their Father knows they need it (Matthew 6:31–33).",
        "Asking for daily bread is a way of remembering that every meal is a gift, and of trusting God for tomorrow's."
       ],
       "steps": [
@@ -17187,15 +20248,143 @@ export const LIBRARY = {
      "explore": "kofte",
      "drill": {
       "title": "Read a thermometer; check a patty for 160°F",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A thermometer is the only way to know ground beef is safe. Today you'll practice reading one, then use it on a real patty. An adult is in the kitchen while the stove is on."
+      ],
+      "steps": [
+       "Find the thermometer's probe, the metal stick, and its tip, which is where it reads. Turn it on, or wait for the dial to settle.",
+       "Fill a glass with ice and water. Put the tip in the middle of the glass for 30 seconds. It should read about 32°F.",
+       "Hold the tip under warm tap water, then cold. Watch how long the number takes to stop moving.",
+       "Shape a small beef patty, wash your hands, and cook it in a skillet over medium heat, 3 minutes a side.",
+       "Slide the thermometer into the side of the patty so the tip is in the middle. Wait for the number to stop moving.",
+       "If it reads 160°F or more, it's done. If not, cook it 1 more minute and check again.",
+       "Wash the probe with hot, soapy water. Write down what your patty read."
+      ],
+      "quiz": [
+       {
+        "q": "Where does a thermometer read?",
+        "choices": [
+         "At the tip",
+         "Along the whole stick",
+         "At the top"
+        ],
+        "answer": 0,
+        "explain": "Put the tip in the middle of the food."
+       },
+       {
+        "q": "What should it read in ice water?",
+        "choices": [
+         "About 32°F",
+         "0°F",
+         "100°F"
+        ],
+        "answer": 0,
+        "explain": "Ice water is 32°F."
+       },
+       {
+        "q": "When do you read the number?",
+        "choices": [
+         "When it stops moving",
+         "Right away",
+         "After a minute out of the food"
+        ],
+        "answer": 0,
+        "explain": "It takes a few seconds to settle."
+       }
+      ]
      },
      "knowledge": {
       "title": "Why ground meat must reach 160°F",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Germs that can make people sick live on the outside of meat. When beef is ground, the outside gets mixed all the way through, so germs can be in the middle of a burger too.",
+       "Heat kills those germs. At 160°F, ground beef is safe. You can't tell by color: beef can turn brown inside before it's safe, or stay a little pink after it is. Only a thermometer can tell you.",
+       "Every kind of meat has its own safe temperature. You'll learn chicken's (165°F) and fish's (145°F) later in this unit."
+      ],
+      "steps": [
+       "Make a small card that says \"Ground beef: 160°F\" and keep it by the stove.",
+       "Ask an adult what temperature they cook burgers to. Tell them what you learned."
+      ],
+      "quiz": [
+       {
+        "q": "Why do germs end up in the middle of a burger?",
+        "choices": [
+         "Grinding mixes the outside all through",
+         "Burgers are thick",
+         "Beef grows them inside"
+        ],
+        "answer": 0,
+        "explain": "The outside is mixed in."
+       },
+       {
+        "q": "What temperature makes ground beef safe?",
+        "choices": [
+         "160°F",
+         "145°F",
+         "120°F"
+        ],
+        "answer": 0,
+        "explain": "160°F for ground beef."
+       },
+       {
+        "q": "Can you tell a burger is done by its color?",
+        "choices": [
+         "No, only a thermometer can tell",
+         "Yes, if it's brown",
+         "Yes, if it's gray"
+        ],
+        "answer": 0,
+        "explain": "Color can fool you."
+       }
+      ]
      },
      "sabbath": {
       "title": "Shape patties ahead and freeze them",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Shaped patties freeze well. With a stack in the freezer, burgers or köfte are ready to cook any night, with the messy raw-meat part already done."
+      ],
+      "steps": [
+       "Shape ground beef into patties, the same size as this week's recipe. Wash your hands after.",
+       "Lay them on a parchment-lined plate or sheet pan, not touching, and freeze them for 1 hour.",
+       "Stack the frozen patties with a square of parchment between each one, and put them in a freezer bag.",
+       "Press out the air, seal it, and write the date and \"ground beef\" on the bag.",
+       "Use them within 3 months. Thaw them in the fridge overnight, then cook them to 160°F as usual.",
+       "Wash your hands, and wipe everything the raw beef touched."
+      ],
+      "quiz": [
+       {
+        "q": "Why freeze the patties apart first?",
+        "choices": [
+         "So they don't freeze stuck together",
+         "So they cook faster",
+         "To dry them"
+        ],
+        "answer": 0,
+        "explain": "Then they stack and come apart easily."
+       },
+       {
+        "q": "Where do frozen patties thaw?",
+        "choices": [
+         "In the fridge",
+         "On the counter",
+         "In the sun"
+        ],
+        "answer": 0,
+        "explain": "The fridge keeps them cold."
+       },
+       {
+        "q": "What goes on the bag?",
+        "choices": [
+         "The date and what's inside",
+         "Nothing",
+         "Your name only"
+        ],
+        "answer": 0,
+        "explain": "So you know what it is and how old."
+       }
+      ]
      }
     },
     {
@@ -17207,15 +20396,184 @@ export const LIBRARY = {
      "explore": "keema",
      "drill": {
       "title": "Read 10 labels and find the hidden unclean ingredients",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Some foods hide ingredients that aren't clean. Today you'll read real labels and find them, using the watch-for list below and the longer one on this week's Knowledge page. Your family's kitchen and a grocery store both work."
+      ],
+      "steps": [
+       "Pick 10 packaged foods: try yogurt, sour cream, tortillas, taco shells, refried beans, gummy candy, marshmallows, a seasoning packet, a sauce, and one of your choice.",
+       "Turn each one over and find the ingredient list.",
+       "Read the whole list, slowly. Look for the names on the watch-for list, and for animal fats that don't say which animal.",
+       "Sort them into three piles: clean, not clean, and not sure.",
+       "For each one in \"not sure\", write down the word that made you stop. Ask an adult to look it up with you.",
+       "Tell an adult which foods you'd pick and which you'd put back."
+      ],
+      "quiz": [
+       {
+        "q": "Where do you find what's really in a food?",
+        "choices": [
+         "The ingredient list",
+         "The picture on the front",
+         "The price"
+        ],
+        "answer": 0,
+        "explain": "The list names everything inside."
+       },
+       {
+        "q": "Which of these can hide gelatin?",
+        "choices": [
+         "Yogurt and gummy candy",
+         "Apples",
+         "Plain rice"
+        ],
+        "answer": 0,
+        "explain": "Check the list."
+       },
+       {
+        "q": "A label says only \"animal fat.\" Is it clean?",
+        "choices": [
+         "You can't tell, so pass on it",
+         "Yes",
+         "Only if it's cheap"
+        ],
+        "answer": 0,
+        "explain": "It doesn't say which animal."
+       }
+      ],
+      "watch": [
+       {
+        "name": "Lard",
+        "hides": "In some tortillas, taco shells, and refried beans."
+       },
+       {
+        "name": "Gelatin",
+        "hides": "In some yogurt, sour cream, gummy candy, and marshmallows."
+       },
+       {
+        "name": "Carmine or cochineal",
+        "hides": "A red coloring in some yogurts, candies, and drinks."
+       }
+      ]
      },
      "knowledge": {
       "title": "Hidden unclean ingredients and where they hide",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Unclean foods don't always look like what they are. They can be one word on a long ingredient list, and some have names you wouldn't guess.",
+       "The list below names the ones to watch for and where they hide. Learn the names: they're what you'll see on the label.",
+       "Meat can hide too. Packages called \"ground meat\" or \"meatloaf mix\" can mix more than one animal. The label should name every animal.",
+       "The rule is simple: if the label doesn't tell you, or you can't tell what a word means, pass on it."
+      ],
+      "steps": [
+       "Make a list of the six names on this page. Keep it on your phone or in your pocket for shopping.",
+       "Find one food at home with a hidden ingredient, and one that's clean."
+      ],
+      "quiz": [
+       {
+        "q": "What is gelatin usually made from?",
+        "choices": [
+         "Pigs, unless the label says beef or fish",
+         "Plants",
+         "Fruit"
+        ],
+        "answer": 0,
+        "explain": "Read the label."
+       },
+       {
+        "q": "What should a ground beef label say?",
+        "choices": [
+         "Beef, and nothing else",
+         "Ground meat",
+         "Meatloaf mix"
+        ],
+        "answer": 0,
+        "explain": "Mixed packages can hold other meats."
+       },
+       {
+        "q": "You can't tell what a word on the label means. What do you do?",
+        "choices": [
+         "Pass on it, or look it up first",
+         "Buy it",
+         "Eat a little"
+        ],
+        "answer": 0,
+        "explain": "If you can't tell, don't."
+       }
+      ],
+      "watch": [
+       {
+        "name": "Lard",
+        "hides": "Fat from pigs. Used in some tortillas, taco shells, refried beans, and pie crusts."
+       },
+       {
+        "name": "Gelatin",
+        "hides": "Usually made from pigs, unless the label says beef or fish. In some yogurt, sour cream, gummy candy, and marshmallows."
+       },
+       {
+        "name": "Pork casings",
+        "hides": "The skin around many chicken and turkey sausages. Look for collagen casings or skinless."
+       },
+       {
+        "name": "Oyster sauce",
+        "hides": "Made from a sea animal with a shell. In many stir-fry sauces. Mushroom stir-fry sauce works instead."
+       },
+       {
+        "name": "Shrimp paste",
+        "hides": "In many Thai curry pastes and some kimchi."
+       },
+       {
+        "name": "Carmine or cochineal",
+        "hides": "A red coloring made from crushed bugs. In some yogurts, candies, and drinks."
+       }
+      ]
      },
      "sabbath": {
       "title": "Clean and unclean animals (Leviticus 11:1–8)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "God gave Israel a simple test for land animals: \"Whatever parts the hoof and is cloven-footed and chews the cud, among the animals, you may eat\" (Leviticus 11:3). An animal has to pass both parts.",
+       "A split hoof is a hoof divided into two toes, like a cow's. Chewing the cud means bringing swallowed food back up to chew again. Cows, sheep, goats, and deer do both, so they're clean.",
+       "The next verses name animals that pass only one part. The camel, the rock badger, and the hare chew the cud but don't have split hooves, and the pig has split hooves but doesn't chew the cud (Leviticus 11:4–7). Passing one part isn't enough."
+      ],
+      "steps": [
+       "Read Leviticus 11:1–8 with an adult.",
+       "Draw two circles that overlap. Label one \"split hoof\" and one \"chews the cud.\"",
+       "Put each animal from the passage where it belongs. The clean ones go in the middle, where the circles overlap.",
+       "Add three animals you know (try a cow, a horse, and a deer) and decide where they go.",
+       "Answer out loud: why isn't one part of the test enough?"
+      ],
+      "quiz": [
+       {
+        "q": "What are the two parts of the test for land animals?",
+        "choices": [
+         "A split hoof and chewing the cud",
+         "Four legs and fur",
+         "Eating grass and living on a farm"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:3."
+       },
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "A goat",
+         "A camel",
+         "A hare"
+        ],
+        "answer": 0,
+        "explain": "Goats pass both parts."
+       },
+       {
+        "q": "Why is the camel unclean?",
+        "choices": [
+         "It chews the cud but doesn't have a split hoof",
+         "It lives in the desert",
+         "It's too big"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:4."
+       }
+      ]
      }
     },
     {
@@ -17227,15 +20585,158 @@ export const LIBRARY = {
      "explore": "shioyaki",
      "drill": {
       "title": "Thaw frozen fish safely: in the fridge or in cold water",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Most fish at the store is sold frozen, and it has to thaw before it cooks evenly. There are two safe ways, and one way that isn't. Today you'll try both safe ones on the frozen fish you bought for this week's recipe, so nothing extra is needed."
+      ],
+      "steps": [
+       "Take this week's frozen fish and split it into two sealed zip-top bags, half in each.",
+       "The night before you cook, put one bag on a plate on the bottom shelf of the fridge. The plate catches any drips.",
+       "The next day, fill a big bowl with cold tap water. Put the other bag in it, pressed under the water.",
+       "Change the water every 30 minutes so it stays cold. Check the fish by pressing it through the bag.",
+       "When it's soft all the way through, it's thawed. Write down how long it took.",
+       "Compare the two halves. Both go into this week's recipe today.",
+       "Never thaw fish on the counter. Wash your hands, the plate, and the bowl after."
+      ],
+      "quiz": [
+       {
+        "q": "What are the two safe ways to thaw fish?",
+        "choices": [
+         "In the fridge, or sealed in cold water",
+         "On the counter, or in the sun",
+         "In hot water, or on the stove"
+        ],
+        "answer": 0,
+        "explain": "Both keep the fish cold."
+       },
+       {
+        "q": "How often do you change the cold water?",
+        "choices": [
+         "Every 30 minutes",
+         "Never",
+         "Every 5 hours"
+        ],
+        "answer": 0,
+        "explain": "So it stays cold."
+       },
+       {
+        "q": "Where does fish thaw in the fridge?",
+        "choices": [
+         "On a plate on the bottom shelf",
+         "On the top shelf",
+         "In the door"
+        ],
+        "answer": 0,
+        "explain": "The plate catches drips."
+       }
+      ]
      },
      "knowledge": {
       "title": "Fins and scales: which fish are clean; reading fish labels",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "For animals in the water, the test is fins and scales: a water animal must have both to be clean (Leviticus 11:9). Salmon, cod, tilapia, tuna, trout, and many more are clean.",
+       "Some water animals are unclean: fish with smooth skin and no scales, every animal with a shell, and the soft sea animals with arms. The list below names the common ones. Swordfish is left out because people disagree about its scales.",
+       "Once fish is cut into a fillet, you can't see the scales, so the label matters. It must say what fish it is. If it only says \"whitefish\" or \"seafood,\" or names a fish you don't know, ask what it is or pass on it. Some cheap white fillets, sold as swai or basa, come from a fish with no scales."
+      ],
+      "steps": [
+       "Write down five clean fish from this page.",
+       "At the store with an adult, read the names on three fish packages. Are they clean?"
+      ],
+      "quiz": [
+       {
+        "q": "What must a water animal have to be clean?",
+        "choices": [
+         "Fins and scales",
+         "Only fins",
+         "A tail"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:9."
+       },
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "Salmon",
+         "Monkfish",
+         "Swai"
+        ],
+        "answer": 0,
+        "explain": "Monkfish and swai have no scales."
+       },
+       {
+        "q": "Why read the name on a fish fillet?",
+        "choices": [
+         "You can't see the scales on a fillet",
+         "It tells you the price",
+         "To know how to cook it"
+        ],
+        "answer": 0,
+        "explain": "The name tells you what fish it is."
+       }
+      ],
+      "watch": [
+       {
+        "name": "Catfish, monkfish, swai, and basa",
+        "hides": "Fins but no scales. Swai and basa are sold as cheap white fillets."
+       },
+       {
+        "name": "Shrimp, crab, lobster, clams, oysters, mussels, and scallops",
+        "hides": "Animals with shells. Also in some seafood mixes, and imitation seafood sticks can include them."
+       },
+       {
+        "name": "Squid, calamari, and octopus",
+        "hides": "The soft sea animals with arms. In some seafood mixes and fried appetizers."
+       }
+      ]
      },
      "sabbath": {
       "title": "Fins and scales (Leviticus 11:9–12)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "\"These you may eat, of all that are in the waters. Everything in the waters that has fins and scales, whether in the seas or in the rivers, you may eat\" (Leviticus 11:9).",
+       "The next verses say the rest are \"detestable\" for food (Leviticus 11:10–12). Deuteronomy says the same thing again (Deuteronomy 14:9–10).",
+       "Fish were everyday food in Bible times. Several of Jesus' disciples were fishermen on the Sea of Galilee, and after He rose, Jesus cooked fish for them on the shore (John 21:9–13)."
+      ],
+      "steps": [
+       "Read Leviticus 11:9–12 with an adult.",
+       "Read Deuteronomy 14:9–10. What's the same as Leviticus?",
+       "Look at a picture of a salmon or a trout. Point to its fins and its scales.",
+       "Read John 21:9–13. Draw the breakfast Jesus made.",
+       "Answer out loud: why do you think God gave the same rule twice?"
+      ],
+      "quiz": [
+       {
+        "q": "What two things does Leviticus 11:9 say a water animal needs?",
+        "choices": [
+         "Fins and scales",
+         "Fins and a tail",
+         "Scales and gills"
+        ],
+        "answer": 0,
+        "explain": "Both parts."
+       },
+       {
+        "q": "Where else is the same rule written?",
+        "choices": [
+         "Deuteronomy 14:9–10",
+         "Genesis 1",
+         "Psalm 23"
+        ],
+        "answer": 0,
+        "explain": "Deuteronomy repeats it."
+       },
+       {
+        "q": "What did Jesus cook on the shore in John 21?",
+        "choices": [
+         "Fish and bread",
+         "Lamb",
+         "Soup"
+        ],
+        "answer": 0,
+        "explain": "John 21:9."
+       }
+      ]
      }
     },
     {
@@ -17248,15 +20749,142 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Separate boards and hand-washing for raw chicken",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Raw chicken can carry germs that make people sick. Today you'll set up a raw-chicken spot in your kitchen and practice washing your hands the right way, so you're ready for this week's recipe on your own."
+      ],
+      "steps": [
+       "Pick one cutting board for raw meat only. Put a piece of tape on it that says \"raw\".",
+       "Pick a spot on the counter near the sink for raw chicken. Clear everything else away from it.",
+       "Wash your hands: wet them, add soap, and scrub the backs, between your fingers, and under your nails for 20 seconds. Hum \"Happy Birthday\" twice.",
+       "Rinse and dry your hands on a clean towel or a paper towel.",
+       "Put a little flour on your hands, as if it were raw chicken. Touch the faucet, a drawer handle, and the fridge door.",
+       "See how far it spread? Wipe each spot with hot, soapy water, then wash your hands again.",
+       "From now on, wash those spots every time you touch raw chicken."
+      ],
+      "quiz": [
+       {
+        "q": "How long do you scrub with soap?",
+        "choices": [
+         "20 seconds",
+         "2 seconds",
+         "2 minutes"
+        ],
+        "answer": 0,
+        "explain": "Hum \"Happy Birthday\" twice."
+       },
+       {
+        "q": "What did the flour show you?",
+        "choices": [
+         "How far raw-chicken germs spread from your hands",
+         "How to bake",
+         "That flour is messy"
+        ],
+        "answer": 0,
+        "explain": "Everything you touch picks it up."
+       },
+       {
+        "q": "Which board does raw chicken go on?",
+        "choices": [
+         "The one marked raw",
+         "Any board",
+         "The bread board"
+        ],
+        "answer": 0,
+        "explain": "Only raw meat goes on it."
+       }
+      ]
      },
      "knowledge": {
       "title": "Raw meat on the bottom shelf; 165°F for chicken",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Raw chicken and meat go on the bottom shelf of the fridge, in a bowl or on a plate. If juice leaks out, it can't drip onto food that won't be cooked, like fruit or leftovers.",
+       "Chicken is safe at 165°F, a little higher than ground beef. Check the thickest piece, and check more than one, because some pieces are always bigger. Never rinse raw chicken: it splashes germs around the sink and doesn't clean it.",
+       "Cooked chicken goes on a clean plate, never the one that held it raw."
+      ],
+      "steps": [
+       "Look in your fridge. Is there a bottom-shelf spot for raw meat? Clear one with an adult.",
+       "Add \"Chicken: 165°F\" to your temperature card from week 7."
+      ],
+      "quiz": [
+       {
+        "q": "Where does raw chicken go in the fridge?",
+        "choices": [
+         "On the bottom shelf, on a plate",
+         "On the top shelf",
+         "In the door"
+        ],
+        "answer": 0,
+        "explain": "So it can't drip on other food."
+       },
+       {
+        "q": "What temperature does chicken need?",
+        "choices": [
+         "165°F",
+         "160°F",
+         "145°F"
+        ],
+        "answer": 0,
+        "explain": "Chicken is 165°F."
+       },
+       {
+        "q": "Where does cooked chicken go?",
+        "choices": [
+         "A clean plate",
+         "The plate it sat on raw",
+         "The raw board"
+        ],
+        "answer": 0,
+        "explain": "Raw-chicken germs stay on that plate."
+       }
+      ]
      },
      "sabbath": {
       "title": "Clean and unclean birds (Leviticus 11:13–19)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "For birds, Leviticus doesn't give a test. It gives a list of birds not to eat (Leviticus 11:13–19). Most of them hunt other animals or eat dead ones: the eagle, the vultures, the hawk, the owls, the raven, the heron, and more. The bat is on the list too.",
+       "Every bird not on the list is clean (Deuteronomy 14:11). That includes chicken, turkey, duck, goose, and quail. When Israel was hungry in the wilderness, God sent quail for them to eat (Exodus 16:13)."
+      ],
+      "steps": [
+       "Read Leviticus 11:13–19 with an adult.",
+       "Pick three birds from the list. Find a picture of each and write what it eats.",
+       "Read Exodus 16:11–13. What did God send in the evening?",
+       "Make a list of the birds your family eats. Check each one against Leviticus 11:13–19."
+      ],
+      "quiz": [
+       {
+        "q": "How does Leviticus tell which birds aren't clean?",
+        "choices": [
+         "It lists them by name",
+         "It gives a test",
+         "It doesn't say"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:13–19."
+       },
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "Chicken",
+         "Eagle",
+         "Owl"
+        ],
+        "answer": 0,
+        "explain": "Chicken isn't on the list."
+       },
+       {
+        "q": "What bird did God send Israel in the wilderness?",
+        "choices": [
+         "Quail",
+         "Raven",
+         "Eagle"
+        ],
+        "answer": 0,
+        "explain": "Exodus 16:13."
+       }
+      ]
      }
     },
     {
@@ -18060,7 +21688,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-fish"
      ],
-     "minutes": 35,
+     "minutes": 40,
      "tags": {
       "protein": "white-fish",
       "flavors": [
@@ -18080,7 +21708,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-fish"
      ],
-     "minutes": 30,
+     "minutes": 45,
      "tags": {
       "protein": "salmon",
       "flavors": [
@@ -18100,7 +21728,7 @@ export const LIBRARY = {
      "skills": [
       "handling-poultry"
      ],
-     "minutes": 35,
+     "minutes": 40,
      "tags": {
       "protein": "chicken",
       "flavors": [
@@ -19372,7 +23000,7 @@ export const LIBRARY = {
        "Then add up the active time: the minutes your hands are busy. In vegetable lo mein, the julienne might take you 20 minutes this week, but the stove part is under 6. If the noodles were cooked before the knife work started, they'd sit and go gummy. So the order is: water on, sauce mixed, vegetables cut, then noodles, then the pan.",
        "Work backward from when you want to eat. If dinner is at 6:00 and the recipe has 45 minutes of work and waiting, you start at 5:15, or 5:00 if you're new to the cut. Beginners are always slower than a recipe's time, and that's expected.",
        "A prep list turns all that into a plan. Write each job on its own line in the order you'll do it, with a time beside the long ones: \"5:00 water on (12 min). 5:02 mix sauce. 5:05 julienne carrots and peppers (20 min). 5:25 noodles in (3 min).\" Cooks call having everything cut, measured, and ready before the heat goes on mise en place, French for \"everything in its place\". The prep list is how you get there.",
-       "Now the scale. A cup measures space, not how much food is in it. Scoop a cup of flour straight from the bag and it can weigh 150 grams; spoon it in lightly and it can be 120. That's a 25% difference from the same cup, enough to make bread dry or cookies spread. A scale reads 125 grams every time.",
+       "Now the scale. A cup measures space, not how much food is in it. Scoop a cup of flour straight from the bag and it can weigh 5¼ ounces; spoon it in lightly and it can be 4¼. That's a 25% difference from the same cup, enough to make bread dry or cookies spread. A scale reads the same weight every time.",
        "Weighing is also faster and cleaner. Set a bowl on the scale, press tare (or zero) so the bowl counts as nothing, and pour in the first ingredient. Press tare again and add the next. One bowl, no measuring cups to wash.",
        "This week's drill weighs your trim, the peels, ends, and cores you cut away. Weighing it is how cooks measure waste: a careful julienne leaves less on the board, and over a year that's real food and money. This week's Beyond the Recipe, on gleaning, asks the same question from the other side: what's left over, and who can use it?"
       ],
@@ -19425,13 +23053,13 @@ export const LIBRARY = {
          "Flour gets heavier over time"
         ],
         "answer": 0,
-        "explain": "The same cup can hold 120 to 150 grams."
+        "explain": "The same cup can hold 4¼ to 5¼ ounces."
        },
        {
         "q": "What does the tare button do?",
         "choices": [
          "Sets the scale back to zero with the bowl on it",
-         "Turns grams into cups",
+         "Turns ounces into cups",
          "Weighs the bowl"
         ],
         "answer": 0,
@@ -19971,7 +23599,7 @@ export const LIBRARY = {
       "body": [
        "In the ancient world, salt was precious. It seasoned food, and long before refrigerators, it kept meat and fish from spoiling. Israel got its salt from the Dead Sea, which the Bible calls the Salt Sea (Genesis 14:3).",
        "God told Israel: \"You shall season all your grain offerings with salt. You shall not let the salt of the covenant with your God be missing from your grain offering; with all your offerings you shall offer salt\" (Leviticus 2:13). Salt doesn't spoil, so a \"covenant of salt\" pictured a promise that lasts (Numbers 18:19).",
-       "Jesus told his followers, \"You are the salt of the earth, but if salt has lost its taste, how shall its saltiness be restored? It is no longer good for anything except to be thrown out and trampled under people's feet\" (Matthew 5:13). Salt is meant to make a difference to everything it touches, and so are they.",
+       "Jesus told His followers, \"You are the salt of the earth, but if salt has lost its taste, how shall its saltiness be restored? It is no longer good for anything except to be thrown out and trampled under people's feet\" (Matthew 5:13). Salt is meant to make a difference to everything it touches, and so are they.",
        "Paul wrote, \"Let your speech always be gracious, seasoned with salt, so that you may know how you ought to answer each person\" (Colossians 4:6). Like well-seasoned food, good words aren't bland, and they aren't too much.",
        "In the kitchen, salt does more than taste salty. It brings out the other flavors in a dish, pulls water out of vegetables (that's how it helps them sweat), and keeps food from spoiling. Good cooks salt in stages, a little in each part of a dish, and taste before serving, the way you did this week."
       ],
@@ -19979,7 +23607,7 @@ export const LIBRARY = {
        "Read Leviticus 2:13 and Numbers 18:19.",
        "Read Matthew 5:13–16.",
        "Read Colossians 4:5–6.",
-       "Answer in writing: name two things salt does in food. How does each one fit what Jesus said about his followers?",
+       "Answer in writing: name two things salt does in food. How does each one fit what Jesus said about His followers?",
        "Answer in writing: what would speech \"seasoned with salt\" sound like? Give an example from your week.",
        "At a meal this week, taste a dish before and after a small pinch of salt, and talk with your family about what changed."
       ],
@@ -20180,16 +23808,16 @@ export const LIBRARY = {
       "title": "Check a fillet for pin bones; judge freshness by smell, eyes, and flesh",
       "minutes": 40,
       "body": [
-       "Many fish have a row of thin, soft pin bones that the filleting knife misses. You'll learn to find them by feel and pull them out, then compare a few kinds of fillet.",
-       "Fresh fish tells you it's fresh with its smell, its eyes, and its flesh. Take this drill to the fish counter with an adult, or use the fish you're buying for this week's recipe."
+       "Many fish have a row of thin, soft pin bones that the filleting knife misses. You'll learn to find them by feel and pull them out, using the fish you bought for this week's recipe.",
+       "Fresh fish tells you it's fresh with its smell, its eyes, and its flesh. Take the second half of this drill to the fish counter when you buy this week's fish."
       ],
       "steps": [
-       "Get one skin-on salmon or trout fillet, and one cod or tilapia fillet if you can.",
-       "Lay the salmon or trout skin side down. Run your fingertips slowly along the middle of the thick end, from the head end toward the tail, then back the other way. Feel for little hard tips poking up.",
+       "Use the fillets for this week's recipe: salmon for the baked fish, or cod for the chermoula. Don't buy extra fish for the drill.",
+       "Lay a fillet skin side down, or flat side down if it's skinless. Run your fingertips slowly along the middle of the thick end, from the head end toward the tail, then back the other way. Feel for little hard tips poking up.",
        "Press the flesh down gently on either side of a bone so it stands up. Grip its tip with clean tweezers and pull it out toward the head end, at the same angle it lies, so the flesh doesn't tear.",
        "Line up the bones you pulled on a paper towel and count them. Check the fillet once more.",
-       "Check the white fish fillet the same way. Write down which had pin bones and where.",
-       "Wash your hands, the tweezers, and everything the raw fish touched. Wrap the fillets and keep them in the coldest part of the fridge to cook within a day, in this week's recipe if you like.",
+       "Check every fillet the same way. Write down how many bones you found and where. To see how a salmon and a white fish differ, watch a short video of a fishmonger pin-boning each (search \"how to remove pin bones from salmon\").",
+       "Wash your hands, the tweezers, and everything the raw fish touched. Wrap the fillets and keep them in the coldest part of the fridge for this week's recipe.",
        "At the counter, look at a whole fish if there is one. Fresh eyes are clear and bulge a little; old ones are cloudy and sunken. Fresh gills are bright red, not brown.",
        "Look at the fillets. Fresh flesh is moist and shiny, with no dry or browning edges, and the flakes hold together without gaps.",
        "Ask to smell the fish you're buying. Fresh fish smells clean, like cold water or the sea. A strong fishy or sour smell means it's old.",
@@ -20353,15 +23981,15 @@ export const LIBRARY = {
       "minutes": 45,
       "body": [
        "Fish was everyday food around the Sea of Galilee, where several of Jesus' disciples were fishermen. Twice the Gospels show Jesus feeding people bread and fish.",
-       "Once, a crowd followed him into a remote place. When evening came, the disciples had only five loaves and two fish. Jesus looked up to heaven, blessed the food, broke the loaves, and gave them to the disciples to hand out. \"And they all ate and were satisfied. And they took up twelve baskets full of the broken pieces left over\" (Matthew 14:20). About five thousand men ate, besides women and children.",
-       "After his resurrection, Jesus met seven of his disciples at the lake after a night of catching nothing. He told them where to cast the net, and they hauled in 153 large fish (John 21:11). On the shore \"they saw a charcoal fire in place, with fish laid out on it, and bread\" (John 21:9). \"Jesus said to them, 'Come and have breakfast'\" (John 21:12), and he served them the bread and the fish himself.",
-       "Both meals were simple: bread and fish. In one, Jesus fed thousands from almost nothing; in the other, he cooked for a few tired friends."
+       "Once, a crowd followed Him into a remote place. When evening came, the disciples had only five loaves and two fish. Jesus looked up to heaven, blessed the food, broke the loaves, and gave them to the disciples to hand out. \"And they all ate and were satisfied. And they took up twelve baskets full of the broken pieces left over\" (Matthew 14:20). About five thousand men ate, besides women and children.",
+       "After His resurrection, Jesus met seven of His disciples at the lake after a night of catching nothing. He told them where to cast the net, and they hauled in 153 large fish (John 21:11). On the shore \"they saw a charcoal fire in place, with fish laid out on it, and bread\" (John 21:9). \"Jesus said to them, 'Come and have breakfast'\" (John 21:12), and He served them the bread and the fish Himself.",
+       "Both meals were simple: bread and fish. In one, Jesus fed thousands from almost nothing; in the other, He cooked for a few tired friends."
       ],
       "steps": [
        "Read Matthew 14:13–21.",
        "Read John 21:1–14.",
        "Answer in writing: what did Jesus do with the food before it was handed out in Matthew 14:19?",
-       "Answer in writing: in John 21, who cooked breakfast, and what does that show you about him?",
+       "Answer in writing: in John 21, who cooked breakfast, and what does that show you about Him?",
        "Cook a simple meal of bread and fish for your family this week, from this week's recipe, and serve it to them yourself."
       ],
       "quiz": [
@@ -20407,7 +24035,63 @@ export const LIBRARY = {
      "explore": "oyakodon",
      "drill": {
       "title": "Trim and cube chicken thighs; clean down after",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Boneless thighs are the most forgiving cut of chicken, but they come with soft white fat, a few tough strands of gristle, and an uneven shape. Today you'll trim them clean and cut them into even 1-inch cubes, then clean down as if you'd been cooking in a restaurant kitchen. An adult is nearby the whole time.",
+       "Use the chicken for this week's recipe, or freeze the cubes flat in a labeled bag to cook within 3 months."
+      ],
+      "steps": [
+       "Clear the counter and set out your raw-meat board on a damp paper towel, a sharp chef's knife, a bowl for the trimmed cubes, and a second bowl for scraps. Have hot, soapy water ready in the sink.",
+       "Open the package over the board so no juice drips on the counter. Don't rinse the chicken. Put the empty tray straight in the trash.",
+       "Unroll one thigh, smooth side down. Find the thick, soft white fat at the edges and in the folds. Pull it gently away with your fingers and cut it off with the tip of the knife, keeping the blade angled away from your other hand.",
+       "Feel for gristle: shiny, white, rubbery strands that don't give when you press them. Cut them out.",
+       "Cut the thigh into 1-inch strips, then across into 1-inch cubes. The thin edges make smaller pieces; put two small ones together in your count, or set them aside for a stir-fry.",
+       "Trim and cube the rest. Line up 10 cubes and look at them side by side: are they close to the same size?",
+       "Weigh the trimmings or measure them in a measuring cup. Write down how much of the package you trimmed away.",
+       "Clean down: scraps in the trash, the cubes covered in the fridge, then the knife, the board, and the bowls in hot, soapy water. Wipe the counter, the faucet handle, and anything else you touched with hot, soapy water. Wash your hands last, for at least 20 seconds."
+      ],
+      "quiz": [
+       {
+        "q": "What do you do before cutting raw chicken?",
+        "choices": [
+         "Set up the raw-meat board and leave the chicken unrinsed",
+         "Rinse the chicken in the sink",
+         "Cut the vegetables on the same board right after"
+        ],
+        "answer": 0,
+        "explain": "Rinsing spreads bacteria. The board is set up first."
+       },
+       {
+        "q": "How do you know a strand is gristle, not meat?",
+        "choices": [
+         "It's shiny, white, and rubbery, and doesn't give when pressed",
+         "It's pink",
+         "It's soft and white"
+        ],
+        "answer": 0,
+        "explain": "Soft white is fat; shiny and rubbery is gristle."
+       },
+       {
+        "q": "Why cut the cubes all close to 1 inch?",
+        "choices": [
+         "So they all reach 165°F at the same time",
+         "So they look nicer",
+         "So they weigh less"
+        ],
+        "answer": 0,
+        "explain": "Big pieces finish last, and small ones dry out waiting."
+       },
+       {
+        "q": "What gets washed after cutting raw chicken?",
+        "choices": [
+         "The knife, board, bowls, counter, faucet handle, and your hands",
+         "Only the knife",
+         "Only your hands"
+        ],
+        "answer": 0,
+        "explain": "Anything you touched with chicken on your hands, including the faucet."
+       }
+      ]
      },
      "knowledge": {
       "title": "Cross-contamination and board colors; never rinse raw poultry",
@@ -20457,7 +24141,63 @@ export const LIBRARY = {
      },
      "sabbath": {
       "title": "Clean and unclean birds, and why God gave the food laws (Leviticus 11:13–19, 44–47)",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "For land animals and fish, Leviticus gives a test. For birds it gives a list instead: \"And these you shall detest among the birds; they shall not be eaten\" (Leviticus 11:13). Twenty kinds follow, among them the eagle, the vultures, the kite and falcon, every raven, the ostrich, the hawk, the owls, the cormorant, the stork, the heron, and the bat, which the passage counts with the birds (Leviticus 11:13–19; Deuteronomy 14:11–18).",
+       "Most of the birds on the list hunt other animals or eat what's already dead. Every bird not on it may be eaten: \"You may eat all clean birds\" (Deuteronomy 14:11). Scripture also shows clean birds in use. Pigeons and turtledoves were brought as offerings (Leviticus 1:14; 12:8), and God fed Israel quail in the wilderness (Exodus 16:13; Numbers 11:31). Chicken, turkey, duck, goose, quail, pigeon and dove, pheasant, partridge, grouse, and guinea fowl are all clean, and this app uses them.",
+       "Leviticus 11 also says why the food laws were given. \"For I am the LORD your God. Consecrate yourselves therefore, and be holy, for I am holy\" (Leviticus 11:44). The chapter ends: \"This is the law about beast and bird and every living creature that moves through the waters and every creature that swarms on the ground, to make a distinction between the unclean and the clean and between the living creature that may be eaten and the living creature that may not be eaten\" (Leviticus 11:46–47).",
+       "The reason the passage itself gives is about God: His people were to be set apart, holy, because He is holy. Choosing food carefully was one everyday way to live that out, at every meal."
+      ],
+      "steps": [
+       "Read Leviticus 11:13–19 and 11:44–47.",
+       "Read Deuteronomy 14:11–20.",
+       "List every bird named in Leviticus 11:13–19. Next to each, write whether it hunts, eats dead animals, or something else, using a field guide or a reliable website.",
+       "Find two places in Scripture where clean birds are offered or eaten (start with Leviticus 1:14 and Exodus 16:13), and write down what happened.",
+       "Answer in writing: what reason does Leviticus 11:44–45 give for the food laws? Put it in your own words.",
+       "Look at the poultry case at a grocery store with an adult. Write down every kind of bird you find, and check each against the list."
+      ],
+      "quiz": [
+       {
+        "q": "How does Leviticus 11 tell clean birds from unclean?",
+        "choices": [
+         "It lists the unclean birds by name",
+         "It gives a two-part test",
+         "It says all birds are clean"
+        ],
+        "answer": 0,
+        "explain": "Land animals and fish get a test; birds get a list."
+       },
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "Quail",
+         "Raven",
+         "Ostrich"
+        ],
+        "answer": 0,
+        "explain": "God fed Israel quail in the wilderness (Exodus 16:13)."
+       },
+       {
+        "q": "What reason does Leviticus 11:44 give for the food laws?",
+        "choices": [
+         "\"Be holy, for I am holy\"",
+         "To keep food fresh",
+         "To save money"
+        ],
+        "answer": 0,
+        "explain": "The passage ties the laws to God's holiness."
+       },
+       {
+        "q": "What do most of the unclean birds have in common?",
+        "choices": [
+         "They hunt other animals or eat dead ones",
+         "They can't fly",
+         "They live in water"
+        ],
+        "answer": 0,
+        "explain": "Eagles, hawks, and owls hunt; vultures and ravens eat what's dead."
+       }
+      ]
      }
     },
     {
@@ -20508,11 +24248,201 @@ export const LIBRARY = {
      },
      "knowledge": {
       "title": "Cuts: dark vs. white, tender vs. tough, fillet types; carryover (unit quiz)",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Knowing the cut tells you how to cook it. This page covers the cuts this unit used and the ones you'll meet next, then one more idea about temperature, and ends with a quiz on the whole unit.",
+       "Dark and white meat. Chicken legs and thighs do the walking, so their muscles have more fat, more connective tissue, and more of the red protein that stores oxygen. That makes them darker, richer, and hard to dry out: thighs stay juicy even a few degrees past 165°F. Breasts barely work, so they're lean, mild, and pale, and they turn dry fast once they pass 165°F. That's why breasts are cut even and watched closely, as in this week's tenders.",
+       "Tender and tough. On a cow or a lamb, the muscles that work hardest (shoulder, leg, shank, brisket) are full of connective tissue, which is chewy when cooked fast. Long, slow, moist heat melts it into gelatin, so those cuts are braised or stewed. The muscles along the back that do little work (ribeye, sirloin, tenderloin, lamb loin chops) are tender and are cooked fast and hot: seared, grilled, or broiled. Ground meat can go either way.",
+       "Fish fillets. Fish are sold as fillets (the side, cut off the bone), steaks (a slice across the body, with a bone in the middle), or whole. Lean, white, flaky fish like cod, tilapia, and haddock are delicate and suit baking, steaming, and gentle pan-frying. Oily fish like salmon, trout, and mackerel are richer, stay moist, and stand up to roasting and broiling. Firm, meaty fish like tuna and mahi-mahi hold together on a grill.",
+       "Carryover cooking. Food keeps cooking after it comes off the heat, because the outside is hotter than the middle and that heat keeps moving inward. A thick piece can rise 5°F or more as it rests; a thin strip, barely at all. Restaurant cooks use this, pulling a thick roast a few degrees early. This app always asks you to reach the safe temperature before the food comes off the heat, so the rest is a bonus, not part of the safety check. You'll use carryover on purpose with the big roasts later in the year."
+      ],
+      "steps": [
+       "Make a two-column chart, \"Cook fast and hot\" and \"Cook low and slow\". Put each of these cuts in a column: chicken breast, chicken thigh, beef chuck, beef sirloin, lamb shank, lamb loin chop, flank steak, brisket.",
+       "Next time you cook something thick (a burger, a fillet, a kofta), check its temperature as it comes off the heat, then again after 3 minutes. Write down how much it rose.",
+       "Take the unit quiz below."
+      ],
+      "quiz": [
+       {
+        "q": "Why do thighs stay juicier than breasts?",
+        "choices": [
+         "They have more fat and connective tissue",
+         "They're smaller",
+         "They cook at a lower temperature"
+        ],
+        "answer": 0,
+        "explain": "Hard-working muscles are richer and more forgiving."
+       },
+       {
+        "q": "Which cut would you braise slowly?",
+        "choices": [
+         "Beef chuck",
+         "Beef ribeye",
+         "Chicken breast"
+        ],
+        "answer": 0,
+        "explain": "Shoulder cuts are tough until slow, moist heat melts their connective tissue."
+       },
+       {
+        "q": "What is carryover cooking?",
+        "choices": [
+         "Food rising in temperature after it leaves the heat",
+         "Cooking two dishes at once",
+         "Leftovers"
+        ],
+        "answer": 0,
+        "explain": "Heat keeps moving from the hot outside into the middle."
+       },
+       {
+        "q": "What temperature does ground lamb need?",
+        "choices": [
+         "160°F",
+         "145°F",
+         "165°F"
+        ],
+        "answer": 0,
+        "explain": "Ground beef and lamb are 160°F; poultry is 165°F."
+       },
+       {
+        "q": "Your thermometer reads 34°F in ice water. A chicken strip reads 166°F. Is it done?",
+        "choices": [
+         "Not quite: it's really about 164°F",
+         "Yes",
+         "It's overcooked"
+        ],
+        "answer": 0,
+        "explain": "It reads 2°F high, so subtract 2 (week 7)."
+       },
+       {
+        "q": "Which fish is clean?",
+        "choices": [
+         "Haddock",
+         "Swai",
+         "Monkfish"
+        ],
+        "answer": 0,
+        "explain": "Haddock has fins and scales (week 8)."
+       },
+       {
+        "q": "Where do you feel for pin bones?",
+        "choices": [
+         "Along the middle of the thick end of the fillet",
+         "Along the tail",
+         "Inside the skin"
+        ],
+        "answer": 0,
+        "explain": "They sit in a line through the thickest part (week 8)."
+       },
+       {
+        "q": "You have one cutting board. What order do you cut in?",
+        "choices": [
+         "Vegetables first, raw chicken last, then wash",
+         "Chicken first",
+         "Any order if you rinse the board with water"
+        ],
+        "answer": 0,
+        "explain": "Clean to raw, then hot, soapy water (week 9)."
+       },
+       {
+        "q": "Why don't you rinse raw chicken?",
+        "choices": [
+         "It splashes bacteria around without removing them",
+         "It makes the chicken tough",
+         "It washes off the flavor"
+        ],
+        "answer": 0,
+        "explain": "Cooking to 165°F is what makes it safe (week 9)."
+       },
+       {
+        "q": "What may be done with marinade that held raw chicken?",
+        "choices": [
+         "Throw it out",
+         "Serve it as a sauce",
+         "Brush it on the cooked chicken"
+        ],
+        "answer": 0,
+        "explain": "It carries raw-chicken juices."
+       },
+       {
+        "q": "Which bird is clean?",
+        "choices": [
+         "Pheasant",
+         "Heron",
+         "Owl"
+        ],
+        "answer": 0,
+        "explain": "Herons and owls are on the list in Leviticus 11:13–19 (week 9)."
+       },
+       {
+        "q": "What are the two tests for land animals?",
+        "choices": [
+         "A split hoof and chewing the cud",
+         "Four legs and fur",
+         "Eating grass and living on land"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:3 (week 7)."
+       }
+      ]
      },
      "sabbath": {
       "title": "Blood and fat (Leviticus 3:17; 7:23–27; 17:10–14)",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Two more food laws run alongside the clean and unclean animals: no blood, and no fat of certain kinds. \"It shall be a statute forever throughout your generations, in all your dwelling places, that you eat neither fat nor blood\" (Leviticus 3:17).",
+       "Blood. The rule is older than Israel. After the flood, God told Noah, \"But you shall not eat flesh with its life, that is, its blood\" (Genesis 9:4). Leviticus gives the reason: \"For the life of the flesh is in the blood, and I have given it for you on the altar to make atonement for your souls\" (Leviticus 17:11). A hunter who killed a clean animal or bird was to \"pour out its blood and cover it with earth\" (Leviticus 17:13).",
+       "In the kitchen, the blood is drained at slaughter, before the meat reaches a store. The red liquid in a package of beef is mostly water and a protein called myoglobin, not blood. Some families who keep these laws buy only kosher or halal meat, which is drained and handled under its own rules; others buy ordinary meat. Either way, this app never uses blood as an ingredient, and no recipe uses dishes made from it, which some cuisines sell as sausages, puddings, or cakes.",
+       "Fat. \"You shall eat no fat, of ox or sheep or goat\" (Leviticus 7:23). In the offerings, \"the fat\" means the thick, hard fat around the organs and kidneys, which was burned on the altar (Leviticus 3:3–5). It doesn't mean the fat marbled through meat. This app follows that: the hard fat of cattle, sheep, and goats, and the cooking fat rendered from it, are never used. Marbling, and the juices and drippings from cooking, are fine. Watch for that hard fat in some pastry, mincemeat, dumplings, and in the oil some restaurants fry in.",
+       "So a clean animal, drained of its blood, without its hard fat: those three together are what this unit has meant by clean meat."
+      ],
+      "steps": [
+       "Read Leviticus 3:17; 7:22–27; and 17:10–14.",
+       "Read Genesis 9:3–4.",
+       "Answer in writing: what reason does Leviticus 17:11 give for not eating blood?",
+       "Answer in writing: what's the difference between the fat Leviticus 3:3–5 describes and the marbling in a steak?",
+       "With an adult, read the labels on three store-bought items that could hide animal fat (pie crust, a box of mincemeat, or a frozen pastry). Write down which fats each one uses."
+      ],
+      "quiz": [
+       {
+        "q": "Where does the rule against eating blood first appear?",
+        "choices": [
+         "Genesis 9:4, after the flood",
+         "Leviticus 11",
+         "Deuteronomy 14"
+        ],
+        "answer": 0,
+        "explain": "God gave it to Noah, before Israel."
+       },
+       {
+        "q": "What reason does Leviticus 17:11 give?",
+        "choices": [
+         "The life of the flesh is in the blood",
+         "Blood spoils quickly",
+         "Blood tastes bitter"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 17:11."
+       },
+       {
+        "q": "Is the red liquid in a package of beef blood?",
+        "choices": [
+         "Mostly no: it's water and a protein called myoglobin",
+         "Yes, all of it",
+         "It's food coloring"
+        ],
+        "answer": 0,
+        "explain": "The blood is drained at slaughter."
+       },
+       {
+        "q": "Which fat does this app leave out?",
+        "choices": [
+         "The hard fat of cattle, sheep, and goats around the organs, and fat rendered from it",
+         "The marbling in a steak",
+         "Chicken fat"
+        ],
+        "answer": 0,
+        "explain": "Marbling and pan juices are fine (Leviticus 3:3–5; 7:23)."
+       }
+      ]
      }
     },
     {
@@ -20722,15 +24652,15 @@ export const LIBRARY = {
       "body": [
        "Bread comes up more than almost any other food in the Bible. It stands for the food a person needs to live, and often for more than that.",
        "In the wilderness, God fed Israel with manna, \"bread from heaven\" (Exodus 16:4). Each morning the people gathered what they needed for that day. Manna kept overnight spoiled, except the double portion gathered on the sixth day, which kept (Exodus 16:16–24). It taught them to depend on God one day at a time.",
-       "Jesus taught his disciples to pray, \"Give us this day our daily bread\" (Matthew 6:11). The prayer asks for what's needed today, not a store for years.",
-       "After feeding five thousand people with five loaves (John 6:1–14), Jesus told the crowd, who had brought up the manna, \"I am the bread of life; whoever comes to me shall not hunger\" (John 6:35). Bread keeps a body alive for a day; he spoke of himself as what keeps a person alive for good."
+       "Jesus taught His disciples to pray, \"Give us this day our daily bread\" (Matthew 6:11). The prayer asks for what's needed today, not a store for years.",
+       "After feeding five thousand people with five loaves (John 6:1–14), Jesus told the crowd, who had brought up the manna, \"I am the bread of life; whoever comes to me shall not hunger\" (John 6:35). Bread keeps a body alive for a day; He spoke of Himself as what keeps a person alive for good."
       ],
       "steps": [
        "Read Exodus 16:4–5 and 16:13–24.",
        "Read Matthew 6:9–13.",
        "Read John 6:26–35.",
        "Answer in writing: what did gathering manna each morning teach Israel?",
-       "Answer in writing: why do you think Jesus compared himself to bread, and not to some other food?",
+       "Answer in writing: why do you think Jesus compared Himself to bread, and not to some other food?",
        "Share your answers with an adult at a meal this week, with a slice of this week's loaf."
       ],
       "quiz": [
@@ -20762,7 +24692,7 @@ export const LIBRARY = {
          "He ate the Passover"
         ],
         "answer": 0,
-        "explain": "The crowd followed him after the feeding (John 6:1–14, 26)."
+        "explain": "The crowd followed Him after the feeding (John 6:1–14, 26)."
        }
       ]
      }
@@ -20784,7 +24714,7 @@ export const LIBRARY = {
        "Stir together 1½ cups of all-purpose flour, ½ cup of water, and a pinch of salt until it forms a dough. Knead it until it's smooth, about 3 minutes.",
        "Before using the scale, cut the dough by eye into 8 pieces you think are equal. Weigh each one and write the weights down.",
        "Press the pieces back together. Weigh the whole dough and divide by 8. That's your target.",
-       "Cut 8 pieces again, this time weighing each. Pinch dough from heavy pieces onto light ones until each is within 3 grams of the target.",
+       "Cut 8 pieces again, this time weighing each. Pinch dough from heavy pieces onto light ones until each is within a tenth of an ounce of the target.",
        "Shape each piece into a ball: cup it under your palm on a bare spot of counter and roll it in small circles until the top is smooth and tight.",
        "Compare your two sets of weights. How far off were your eyes?",
        "Roll the balls flat and cook them in a dry skillet like Unleavened flatbread, or throw them out."
@@ -21821,15 +25751,15 @@ export const LIBRARY = {
       "title": "Sear a skin-on fillet: dry it, press it flat, wait for it to release",
       "minutes": 40,
       "body": [
-       "Before this week's recipe, practice the one hard part on a single fillet: crisp skin that lets go of the pan on its own."
+       "Before you cook the whole recipe, practice the one hard part on a single fillet: crisp skin that lets go of the pan on its own. Use the first fillet of this week's recipe, so nothing extra is needed, and cook the rest once you've seen how it goes."
       ],
       "steps": [
-       "Pat one skin-on salmon or trout fillet very dry on both sides, and salt the skin. Wash your hands and everything the raw fish touched.",
+       "Take one skin-on fillet from this week's recipe. Pat it very dry on both sides, and salt the skin. Wash your hands and everything the raw fish touched.",
        "Turn the stove fan on high. Heat a tablespoon of oil in a skillet over medium-high heat until it shimmers.",
        "Lay the fillet in skin side down, away from you, and press it flat with a spatula for 15 seconds.",
        "Leave it alone. Watch the side of the fillet: the flesh turns from see-through to solid, working up from the pan. Every 30 seconds, nudge it with the spatula. Write down when it slides free.",
        "When it's solid about three-quarters of the way up, turn it and cook 1 minute more. Check that it reads 145°F.",
-       "Eat it skin side up, and write down how crisp the skin was and what you'd change for the mastery cook."
+       "Eat it skin side up, or set it aside warm for the meal. Write down how crisp the skin was and what you'll change for the rest of the fillets."
       ],
       "quiz": [
        {
@@ -22532,7 +26462,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-fish"
      ],
-     "minutes": 40,
+     "minutes": 45,
      "tags": {
       "protein": "white-fish",
       "flavors": [
@@ -22574,7 +26504,7 @@ export const LIBRARY = {
       "handling-poultry",
       "breading-frying"
      ],
-     "minutes": 45,
+     "minutes": 50,
      "tags": {
       "protein": "chicken",
       "flavors": [
@@ -23472,7 +27402,7 @@ export const LIBRARY = {
        "Hone your chef's knife and set the board on a damp towel.",
        "Start a timer. Peel one carrot, square it into a block, and cut ⅛-inch planks, then ⅛-inch julienne, then ⅛-inch cubes.",
        "Stop the timer and write down the time.",
-       "Spread 20 cubes on the board and measure a few with a ruler. Note how many are within a millimeter of ⅛ inch.",
+       "Spread 20 cubes on the board and measure a few with a ruler. Note how many are within a hair of ⅛ inch.",
        "Repeat with a second carrot and compare the time and the count.",
        "Weigh the trim and the brunoise. Save the trim for stock.",
        "Use the brunoise in this week's fried rice or ratatouille."
@@ -23515,7 +27445,7 @@ export const LIBRARY = {
       "minutes": 45,
       "body": [
        "Professional recipes name cuts by size, so every cook produces the same piece. Learn them as numbers.",
-       "Brunoise: ⅛-inch cubes (3 mm), cut from a julienne. Small dice: ¼-inch cubes (6 mm), cut from a batonnet. Medium dice: ½ inch (12 mm). Large dice: ¾ inch (2 cm).",
+       "Brunoise: ⅛-inch cubes, cut from a julienne. Small dice: ¼-inch cubes, cut from a batonnet. Medium dice: ½ inch. Large dice: ¾ inch.",
        "Julienne: ⅛ by ⅛ inch, 2 to 2½ inches long. Batonnet: ¼ by ¼ inch, 2½ to 3 inches long. Chiffonade: leafy herbs or greens stacked, rolled tight, and sliced across into thin ribbons.",
        "Precision isn't decoration. Pieces of one size cook in the same time, so a pan of brunoise is done all at once, and a sauce built on it is smooth.",
        "French cooking builds on two aromatic foundations. Mirepoix is onion, carrot, and celery in a 2:1:1 ratio by weight, diced to suit the cooking time: brunoise for a quick sauce, large dice for a long stock. Herbs come as a bouquet garni, a bundle of thyme, bay leaf, and parsley stems tied together so it can be lifted out, or as fines herbes, parsley, chives, tarragon, and chervil, chopped fine and added at the end.",
@@ -23649,7 +27579,7 @@ export const LIBRARY = {
       ],
       "steps": [
        "Scoop 1 cup of flour three ways: scooped and packed, spooned and leveled, and sifted in. Weigh each and write it down.",
-       "Measure 1 cup of water and weigh it. It should be close to 237 grams.",
+       "Measure 1 cup of water and weigh it. It should be close to 8⅓ ounces.",
        "Weigh a whole onion. Peel it, trim the root and top, and weigh it again. Work out the yield.",
        "Do the same with a bell pepper: weigh, core and seed, weigh again.",
        "Compare your yields with the Knowledge page's typical numbers.",
@@ -23659,12 +27589,12 @@ export const LIBRARY = {
        {
         "q": "1 cup of water weighs about:",
         "choices": [
-         "237 g",
-         "100 g",
-         "500 g"
+         "About 8⅓ oz",
+         "5 oz",
+         "12 oz"
         ],
         "answer": 0,
-        "explain": "Water is about 1 g per mL."
+        "explain": "A cup of water weighs a little over 8 ounces."
        },
        {
         "q": "Which flour cup weighs most?",
@@ -23677,14 +27607,14 @@ export const LIBRARY = {
         "explain": "Packing adds flour."
        },
        {
-        "q": "A 200 g onion gives 180 g peeled. Yield?",
+        "q": "A 10-ounce onion gives 9 ounces peeled. Yield?",
         "choices": [
          "90%",
          "80%",
          "110%"
         ],
         "answer": 0,
-        "explain": "180 ÷ 200."
+        "explain": "9 ÷ 10."
        }
       ]
      },
@@ -23692,17 +27622,17 @@ export const LIBRARY = {
       "title": "Why weight beats volume; trim loss and buying enough",
       "minutes": 45,
       "body": [
-       "A cup is a volume, and how much fits in it depends on how it's filled. A cup of flour can weigh anywhere from 120 to 150 grams; a cup of chopped onion varies more. A gram is a gram.",
+       "A cup is a volume, and how much fits in it depends on how it's filled. A cup of flour can weigh anywhere from 4¼ to 5¼ ounces; a cup of chopped onion varies more. An ounce is an ounce.",
        "That's why professional kitchens weigh. A scale gives the same result every time, in any hands, and it lets you scale a recipe by multiplication without converting cups and spoons.",
        "Weight also tells you what you're really getting. Yield is the usable weight divided by the bought weight. Typical yields: onions about 90 percent after peeling; bell peppers 80 to 85; carrots 85 to 90; boneless steak trimmed 85 to 90; and meat loses another 20 to 30 percent of its trimmed weight in cooking.",
-       "To buy enough, work backward: the plated weight you need, divided by the yield. For 4 servings of 140 grams of cooked steak (560 g) at a 75 percent cooking yield, you need about 750 grams trimmed, and at 88 percent trim yield, about 850 grams as bought.",
-       "Small amounts of salt, spices, and leaveners are still often given in spoons, because home scales aren't precise below a few grams."
+       "To buy enough, work backward: the plated weight you need, divided by the yield. For 4 servings of 5 ounces of cooked steak (20 ounces) at a 75 percent cooking yield, you need about 27 ounces trimmed, and at 88 percent trim yield, about 30 ounces (1⅞ pounds) as bought.",
+       "Small amounts of salt, spices, and leaveners are still often given in spoons, because home scales aren't precise below about a tenth of an ounce."
       ],
       "quiz": [
        {
         "q": "Why weigh instead of using cups?",
         "choices": [
-         "A gram is the same every time",
+         "An ounce is the same every time",
          "Cups are smaller",
          "Scales are faster to wash"
         ],
@@ -23720,19 +27650,19 @@ export const LIBRARY = {
         "explain": "Expressed as a percent."
        },
        {
-        "q": "You need 560 g cooked at a 75% cooking yield. How much trimmed meat?",
+        "q": "You need 20 ounces cooked at a 75% cooking yield. How much trimmed meat?",
         "choices": [
-         "About 750 g",
-         "About 420 g",
-         "560 g"
+         "About 27 oz",
+         "About 15 oz",
+         "20 oz"
         ],
         "answer": 0,
-        "explain": "560 ÷ 0.75."
+        "explain": "20 ÷ 0.75."
        },
        {
         "q": "Why are teaspoons still used for salt?",
         "choices": [
-         "Home scales aren't precise for a few grams",
+         "Home scales aren't precise for tiny amounts",
          "Salt can't be weighed",
          "Tradition only"
         ],
@@ -23759,7 +27689,7 @@ export const LIBRARY = {
        "Dry ingredients can be weighed days ahead. Raw meat can be trimmed and portioned up to 2 days ahead in the fridge, or frozen; keep it sealed, on the bottom shelf, away from anything eaten raw."
       ],
       "steps": [
-       "Pick a recipe for the weekend and convert its main ingredients to grams.",
+       "Pick a recipe for the weekend and convert its main ingredients to weights in ounces and pounds.",
        "Weigh each dry ingredient into a labeled container or bag.",
        "Trim and portion any meat, weigh each portion, and seal it. Wash your hands, board, and knife afterward.",
        "Store the meat on the bottom shelf of the fridge, or freeze it.",
@@ -24377,7 +28307,7 @@ export const LIBRARY = {
       "body": [
        "A buffet is the riskiest way to serve food: it sits out, many hands reach in, and nobody is watching the clock. Food safety codes call the risky foods TCS, time/temperature control for safety: anything moist and protein-rich or cut, where bacteria can grow. On a cold table that means sliced meats, cheeses, dips like hummus and labneh, cut tomatoes and melons, leafy greens, cooked grains and beans, and anything with mayonnaise.",
        "Cold holding has a number: 41°F or below, from the FDA Food Code that restaurants follow (your home fridge should run at 40°F or below). There are two ways to control it. Temperature: on ice, probed and logged, with nothing above 41°F. Or time: off ice, out for no more than 2 hours, or 1 hour above 90°F, then discarded, not returned to the fridge.",
-       "Cooked food headed for a cold table has to get cold fast. The rule is two-stage cooling: from 135°F to 70°F within 2 hours, then to 41°F within the next 4. Big, deep containers can't do it; the middle stays warm for hours. Spread food shallow, under 5 cm, and leave it uncovered until it's cool.",
+       "Cooked food headed for a cold table has to get cold fast. The rule is two-stage cooling: from 135°F to 70°F within 2 hours, then to 41°F within the next 4. Big, deep containers can't do it; the middle stays warm for hours. Spread food shallow, under 2 inches, and leave it uncovered until it's cool.",
        "Listeria is the cold table's special concern. It grows even at fridge temperature and is found in deli meats and soft cheeses. It's most dangerous during pregnancy and for older adults, which is one more reason cold food stays cold and isn't held for days.",
        "Good buffet practice: small platters, refilled from the fridge on clean plates, never topped up with fresh food on top of old; a separate serving utensil for every dish; bread off the ice and away from the dips; and a written log of times and temperatures. At the end, food that held at 41°F on ice can be refrigerated; anything else is thrown away.",
        "This is a professional's standard, and it's what lets you feed a crowd without making anyone sick."
@@ -24506,15 +28436,158 @@ export const LIBRARY = {
      "cuisine": "moroccan",
      "drill": {
       "title": "Break a chicken into 8 pieces; save the back for stock",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "A whole chicken breaks into eight serving pieces with nothing but a sharp chef's knife and a feel for the joints. Do it once slowly, naming each joint as you find it, then again for time. Use the pieces in this week's recipe."
+      ],
+      "steps": [
+       "Set up: the raw-meat board on a damp towel, a sharp chef's knife, a sheet pan for the pieces, a bag for the back, and hot, soapy water ready. Don't rinse the bird.",
+       "Legs: lay the chicken breast up. Pull a leg away from the body, slice through the skin between leg and breast, then bend the leg back until the hip joint pops out. Cut through the joint, scooping the chicken oyster (the round pocket of meat on the back) out with the thigh. Repeat.",
+       "Split each leg: skin side down, find the line of fat over the knee joint, and cut straight down through it into drumstick and thigh.",
+       "Wings: pull each wing out, find the shoulder joint by wiggling it, and cut through.",
+       "Back: stand the bird on its neck end and cut down through the ribs on both sides, separating the breast from the back.",
+       "Breast: lay it skin side up and cut through the breastbone, just off center, into two halves. For four breast pieces, halve each across.",
+       "Line up the 8 pieces and the back. Weigh the pieces and the back separately, and note both.",
+       "Bag and freeze the back (Beyond the Recipe). Wash the knife, board, and pan, wipe the counter and the faucet, and wash your hands.",
+       "Next time, time yourself. A cook who knows the joints takes under 5 minutes."
+      ],
+      "quiz": [
+       {
+        "q": "How do you find where to cut a leg off?",
+        "choices": [
+         "Bend it back until the hip joint pops, then cut through the joint",
+         "Cut straight through the thigh",
+         "Twist it off"
+        ],
+        "answer": 0,
+        "explain": "Joints, not bone."
+       },
+       {
+        "q": "What is the chicken oyster?",
+        "choices": [
+         "A round pocket of meat on the back, kept with the thigh",
+         "The wing tip",
+         "The backbone"
+        ],
+        "answer": 0,
+        "explain": "It's the best bite on the bird."
+       },
+       {
+        "q": "What marks the knee joint from the outside?",
+        "choices": [
+         "A line of fat across the leg",
+         "The skin color",
+         "A bone sticking out"
+        ],
+        "answer": 0,
+        "explain": "Cut straight down through the fat line."
+       }
+      ]
      },
      "knowledge": {
       "title": "Yield and cost: a whole bird vs. parts",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "A whole chicken almost always costs less per pound than the same chicken sold in parts, because the store charges for the butchering. But some of a whole bird's weight is back, neck, and bone you won't serve. The question is what you pay per pound of what you actually eat.",
+       "Yield is the weight you use divided by the weight you bought. A 4-pound chicken usually gives about 2⅞ pounds of serving pieces (breasts, thighs, drumsticks, wings) and 1⅛ pounds of back, neck, and trim. That's a yield of about 72 percent.",
+       "Here's the math with sample prices; your store's will differ. A whole chicken at $1.50 a pound, 4 pounds, costs $6.00. Divided by the 2⅞ pounds of pieces, that's $2.09 a pound of serving pieces. Bought separately, bone-in thighs might be $2.00 a pound and breasts $4.00, a mix averaging around $2.95. The whole bird wins, and the back becomes free stock.",
+       "The break-even point is the parts price at which the whole bird stops saving money: whole-bird price divided by yield. If parts ever cost less than that, buy parts.",
+       "What the math leaves out: your time (about 5 minutes once you're practiced), freezer space, and whether your family eats every part. A whole bird pays only if nothing is wasted."
+      ],
+      "steps": [
+       "Find today's prices at your store for a whole chicken, bone-in thighs, drumsticks, wings, and breasts.",
+       "Use your weights from the drill to work out your bird's yield and its cost per pound of serving pieces.",
+       "Work out the break-even parts price, and compare it with the store's.",
+       "Write two sentences: which was cheaper this week, and when you'd choose the other."
+      ],
+      "quiz": [
+       {
+        "q": "What is yield?",
+        "choices": [
+         "The weight you use divided by the weight you bought",
+         "The price per pound",
+         "The number of pieces"
+        ],
+        "answer": 0,
+        "explain": "Used ÷ bought."
+       },
+       {
+        "q": "A 5-pound bird gives 3.6 pounds of pieces. What's the yield?",
+        "choices": [
+         "72%",
+         "28%",
+         "144%"
+        ],
+        "answer": 0,
+        "explain": "3.6 ÷ 5."
+       },
+       {
+        "q": "A whole bird costs $1.50 a pound with a 72% yield. What's the break-even parts price?",
+        "choices": [
+         "About $2.08 a pound",
+         "$1.50 a pound",
+         "$1.08 a pound"
+        ],
+        "answer": 0,
+        "explain": "1.50 ÷ 0.72."
+       },
+       {
+        "q": "What does the yield math leave out?",
+        "choices": [
+         "Your time, freezer space, and waste",
+         "The weight",
+         "The price"
+        ],
+        "answer": 0,
+        "explain": "A bird only pays if every part is used."
+       }
+      ]
      },
      "sabbath": {
       "title": "Freeze the back and wings for stock",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "The back, neck, and wing tips from a whole chicken are the start of a good stock: mostly bone and connective tissue, which is what gives stock its body. Saved in the freezer until there's enough, they cost nothing extra."
+      ],
+      "steps": [
+       "Bag the back and wing tips from this week's chicken in a freezer bag. Press out the air.",
+       "Label the bag with the date and \"chicken backs for stock.\" Keep a running count on the label as you add more.",
+       "Freeze it flat, so it stacks and thaws quickly. Use it within 3 months.",
+       "When you have the backs of 2 or 3 chickens (about 3 pounds), they're enough for about 3 quarts of stock: cover with cold water, add onion, carrot, celery, bay, and peppercorns, and simmer 3 hours.",
+       "Wash your hands and everything the raw chicken touched."
+      ],
+      "quiz": [
+       {
+        "q": "Why are backs good for stock?",
+        "choices": [
+         "They're mostly bone and connective tissue, which give stock its body",
+         "They're the meatiest part",
+         "They're cheapest at the store"
+        ],
+        "answer": 0,
+        "explain": "Body comes from collagen."
+       },
+       {
+        "q": "How long do frozen backs keep?",
+        "choices": [
+         "About 3 months",
+         "A week",
+         "Two years"
+        ],
+        "answer": 0,
+        "explain": "Label the date."
+       },
+       {
+        "q": "Why freeze the bag flat?",
+        "choices": [
+         "It stacks and thaws faster",
+         "It cooks better",
+         "It stays raw"
+        ],
+        "answer": 0,
+        "explain": "Flat bags save space too."
+       }
+      ]
      }
     },
     {
@@ -24527,15 +28600,155 @@ export const LIBRARY = {
      "cuisine": "french",
      "drill": {
       "title": "Trim silverskin; score duck skin",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Two trims a restaurant prep cook does every day: taking silverskin off beef, and scoring duck skin so its fat renders. Do the one for the dish you're cooking this week on its own meat. For the other, watch a short video and practice the knife work on a vegetable, so you don't buy a second cut."
+      ],
+      "steps": [
+       "If you're cooking the flank steak: lay it on the raw-meat board and find the thin, shiny membrane on its surface.",
+       "Slide the tip of a sharp, flexible knife under one end of it. Grip the freed tab with a paper towel.",
+       "Angle the blade slightly up, toward the membrane, and saw gently along under it while pulling the tab back. Take it off in strips, losing as little meat as you can. Weigh the trim and note it as a percentage of the steak.",
+       "If you're cooking the duck: lay a breast skin side up. With the tip of the knife, cut lines ⅜ inch apart diagonally across the skin, through the fat but not into the meat. Turn it and cut the other way, for diamonds. No red meat should show; if it does, cut shallower.",
+       "For the trim you aren't doing, watch a short video of it (search \"remove silverskin from steak\" or \"score duck breast\").",
+       "Then practice that motion on a vegetable: score a crosshatch through the skin of a halved eggplant or zucchini without cutting into the flesh, or slide the knife just under the peel of a cucumber, blade angled up, taking off a thin strip.",
+       "Refrigerate the meat for this week's recipe, use the vegetable in a stir-fry or salad, and wash your hands, the knife, and the board."
+      ],
+      "quiz": [
+       {
+        "q": "Which way does the blade angle when you remove silverskin?",
+        "choices": [
+         "Slightly up, toward the membrane",
+         "Down, into the meat",
+         "Flat, sideways"
+        ],
+        "answer": 0,
+        "explain": "So you lose as little meat as possible."
+       },
+       {
+        "q": "How deep do you score duck skin?",
+        "choices": [
+         "Through the skin and fat, not into the meat",
+         "Into the meat",
+         "Only the surface of the skin"
+        ],
+        "answer": 0,
+        "explain": "Fat needs a way out."
+       },
+       {
+        "q": "Why remove silverskin?",
+        "choices": [
+         "It tightens and turns rubbery when cooked",
+         "It's unsafe",
+         "It's fat"
+        ],
+        "answer": 0,
+        "explain": "It doesn't melt like fat."
+       }
+      ]
      },
      "knowledge": {
       "title": "Primal cuts and the method each suits",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "A beef carcass is first cut into large sections called primals, and each primal into the cuts you buy. Knowing which primal a cut comes from tells you how hard that muscle worked, and so how to cook it.",
+       "Chuck (the shoulder) works constantly: flavorful, full of connective tissue, and best braised or stewed (pot roast, stew meat, ground chuck). Rib and short loin (along the upper back) barely work: tender, marbled cuts for dry, fast heat (ribeye, strip, tenderloin). Sirloin, behind them, is a little firmer and still good seared or grilled. Round (the hind leg) is lean and tough unless sliced thin or braised. Brisket and plate (the chest and belly) are fatty and tough, made for long, slow cooking. Flank, below the loin, is lean and fibrous, with lots of flavor: seared hot, sliced thin across the grain.",
+       "The rule: muscles that move a lot are tough and suited to moist, slow heat (braising, stewing); muscles that move little are tender and suited to dry, fast heat (searing, grilling, roasting). Lamb follows the same map: shoulder and shank for braising, rack and loin for roasting.",
+       "Poultry follows it too. Legs work and are dark, rich, and forgiving; breasts are lean and dry quickly. Duck breast is darker than chicken breast because ducks fly: it's a working muscle, rich and red, and it slices like a steak."
+      ],
+      "steps": [
+       "Draw a simple outline of a steer and divide it into the primals on this page: chuck, rib, short loin, sirloin, round, brisket, plate, flank.",
+       "On each, write one cut and one cooking method.",
+       "At a store or butcher, find three beef cuts. Write down each primal, its price per pound, and how you'd cook it."
+      ],
+      "quiz": [
+       {
+        "q": "Which primal is best for braising?",
+        "choices": [
+         "Chuck",
+         "Short loin",
+         "Rib"
+        ],
+        "answer": 0,
+        "explain": "It's a working shoulder muscle."
+       },
+       {
+        "q": "Why is flank sliced thin across the grain?",
+        "choices": [
+         "It's lean and fibrous; short fibers are tender",
+         "It's fatty",
+         "It's from the rib"
+        ],
+        "answer": 0,
+        "explain": "Long fibers cut short."
+       },
+       {
+        "q": "Why is duck breast darker than chicken breast?",
+        "choices": [
+         "Ducks fly, so the breast is a working muscle",
+         "It's cooked longer",
+         "It's a different cut"
+        ],
+        "answer": 0,
+        "explain": "Working muscles are darker."
+       },
+       {
+        "q": "Which method suits a tender cut like ribeye?",
+        "choices": [
+         "Dry, fast heat: searing or grilling",
+         "Long braising",
+         "Boiling"
+        ],
+        "answer": 0,
+        "explain": "Tender cuts need little cooking."
+       }
+      ]
      },
      "sabbath": {
       "title": "Clean birds: duck, goose, quail, and the birds Leviticus names (Leviticus 11:13–19)",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Leviticus 11:13–19 lists the birds Israel was not to eat: the eagle, the vultures, the kite and falcon, every raven, the ostrich, the nighthawk and sea gull, the hawk, the owls, the cormorant, the stork, the heron, the hoopoe, and the bat. Most hunt or eat what's already dead. Deuteronomy 14:11–20 repeats the list and adds, \"All clean winged things you may eat.\"",
+       "Every bird not on the list is clean. That includes the domestic birds raised for food (chicken, turkey, duck, goose) and many game birds: quail, pheasant, partridge, grouse, guinea fowl, and pigeon and dove. Scripture shows clean birds in use: turtledoves and pigeons as offerings (Leviticus 1:14; 12:8), and quail sent to Israel in the wilderness (Exodus 16:13).",
+       "This week's duck and week 10's quail are both clean. Duck and goose are richer than chicken, with dark breast meat and a thick layer of fat under the skin, which is why they're scored and rendered."
+      ],
+      "steps": [
+       "Read Leviticus 11:13–19 and Deuteronomy 14:11–20.",
+       "Sort these into clean and unclean using the passages: duck, goose, heron, quail, ostrich, pheasant, raven, turkey.",
+       "Look up the hoopoe and the cormorant. Write one sentence on what each eats.",
+       "Find duck, quail, or another game bird at a store or online. Write down the price per pound and compare it with chicken."
+      ],
+      "quiz": [
+       {
+        "q": "How does Leviticus 11 identify unclean birds?",
+        "choices": [
+         "It names them",
+         "It gives a two-part test",
+         "It doesn't"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:13–19."
+       },
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "Goose",
+         "Heron",
+         "Ostrich"
+        ],
+        "answer": 0,
+        "explain": "Goose isn't on the list."
+       },
+       {
+        "q": "What does Deuteronomy 14:20 say?",
+        "choices": [
+         "\"All clean winged things you may eat\"",
+         "\"Eat no birds\"",
+         "\"Birds are for offerings only\""
+        ],
+        "answer": 0,
+        "explain": "Every bird not listed is clean."
+       }
+      ]
      }
     },
     {
@@ -24548,15 +28761,159 @@ export const LIBRARY = {
      "cuisine": "mexican",
      "drill": {
       "title": "Skin and portion a side of salmon; pull the pin bones",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "A whole side of salmon costs less per pound than portions, and portioning it yourself is quick once you've done it. If your family is cooking the teriyaki salmon side, this drill is its first steps. If you're cooking the veracruzana, don't buy a side for it: watch a fishmonger do it on video, then practice on one skin-on fillet."
+      ],
+      "steps": [
+       "Cooking the veracruzana instead? Watch a short video of a side of salmon being skinned and portioned (search \"how to portion a side of salmon\"), then do the steps below on one skin-on salmon fillet, and cook it any way you like this week.",
+       "Lay the side skin down on the raw-meat board with the head end to your left (to your right if you're left-handed).",
+       "Run your fingertips along the thick half, from the head end toward the tail. Pull each pin bone with tweezers toward the head, at the angle it lies. Count them; a side usually has 25 to 35.",
+       "Turn the side so the tail points toward you. Cut down through the flesh to the skin about ¾ inch from the tail end.",
+       "Grip the tail flap of skin with a paper towel. Hold the knife nearly flat against the skin, and pull the skin toward you in small side-to-side movements while the knife stays almost still.",
+       "Trim off the thin belly fat along the bottom edge and any brown flesh on the skinned side.",
+       "Portion by weight: about 5 ounces each. Cut the thick head end into narrower pieces and the tail into wider ones, folding the thinnest tail under.",
+       "Weigh the trim and the skin. Note the yield.",
+       "Wash the knife, tweezers, board, and your hands with hot, soapy water."
+      ],
+      "quiz": [
+       {
+        "q": "How do you hold the knife when skinning?",
+        "choices": [
+         "Nearly flat against the skin, almost still, while you pull the skin",
+         "Angled down into the board",
+         "Straight up"
+        ],
+        "answer": 0,
+        "explain": "The pull does the work."
+       },
+       {
+        "q": "How do you portion a side evenly?",
+        "choices": [
+         "By weight, narrower at the thick end and wider at the tail",
+         "By equal widths",
+         "By eye"
+        ],
+        "answer": 0,
+        "explain": "Thickness changes along the side."
+       },
+       {
+        "q": "About how many pin bones does a side of salmon have?",
+        "choices": [
+         "25 to 35",
+         "2 or 3",
+         "None"
+        ],
+        "answer": 0,
+        "explain": "They run along the thick half."
+       }
+      ]
      },
      "knowledge": {
       "title": "Buying fish: wild and farmed, labels, questions for the fish counter",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Every fish sold at a U.S. counter must be labeled with its name, where it came from, and whether it was wild-caught or farm-raised. Those three things, plus a few questions, tell you most of what you need.",
+       "Name. On a fillet or steak you can't see the scales, so the name is how you know a fish is clean (fins and scales, Leviticus 11:9). Watch for vague names. \"Snapper\" sold in some places covers several kinds; \"red snapper\" is one species. Fish that are commonly substituted include snapper, grouper, and cod. If a name is vague or the price is far below other stores, ask.",
+       "Wild or farmed. Wild salmon is leaner, deeper in color, and seasonal; farmed salmon is fattier, milder, and steady in price and supply. Both are clean. Farmed fish vary with how they're raised; certification labels from independent groups tell you a farm meets set standards for feed, crowding, and the water around it.",
+       "Fresh, frozen, and \"previously frozen.\" Fish frozen at sea within hours of the catch is often better than \"fresh\" fish that's been on ice for a week. \"Previously frozen\" at the counter means it was thawed for display: cook it within a day and don't refreeze it.",
+       "Questions for the fish counter: What is it, exactly? Where's it from? When did it come in? Was it frozen? Can I smell it? Will you scale and gut it, or skin it?"
+      ],
+      "steps": [
+       "At a fish counter, read the labels on four fish. Write down each one's name, origin, and wild or farmed.",
+       "Ask two of the questions on this page, and write down the answers.",
+       "Compare the price per pound of a side of salmon with salmon portions. Using your drill yield, work out the real cost of the side per pound of portions."
+      ],
+      "quiz": [
+       {
+        "q": "What three things must a U.S. fish label show?",
+        "choices": [
+         "Its name, where it's from, and wild or farmed",
+         "Price, weight, and date",
+         "Name, color, and size"
+        ],
+        "answer": 0,
+        "explain": "Country of origin labeling."
+       },
+       {
+        "q": "What does \"previously frozen\" mean at the counter?",
+        "choices": [
+         "It was thawed for display: cook within a day, don't refreeze",
+         "It's fresher than fresh",
+         "It's frozen now"
+        ],
+        "answer": 0,
+        "explain": "Thawed fish has a short clock."
+       },
+       {
+        "q": "Why does the fish's name matter most?",
+        "choices": [
+         "Without the skin, it's how you know the fish has fins and scales",
+         "It sets the price",
+         "It tells you how to cook it"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:9."
+       },
+       {
+        "q": "A label says \"snapper.\" What do you do?",
+        "choices": [
+         "Ask which kind, and whether it's red snapper",
+         "Buy it",
+         "Smell it only"
+        ],
+        "answer": 0,
+        "explain": "Snapper is a name some stores use loosely."
+       }
+      ]
      },
      "sabbath": {
       "title": "Fins and scales, and the fishermen Jesus called (Leviticus 11:9–12; Luke 5:1–11)",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "\"These you may eat, of all that are in the waters. Everything in the waters that has fins and scales, whether in the seas or in the rivers, you may eat\" (Leviticus 11:9). The rule is repeated in Deuteronomy 14:9–10.",
+       "In Luke 5:1–11, Jesus borrows Simon Peter's boat to teach the crowd from the water. Afterward He tells Peter to put out into deep water and let down the nets. Peter answers, \"Master, we toiled all night and took nothing! But at your word I will let down the nets\" (Luke 5:5). The catch is so large the nets begin to break and two boats nearly sink.",
+       "Peter falls at Jesus' knees. Jesus tells him, \"Do not be afraid; from now on you will be catching men\" (Luke 5:10). They brought their boats to land, left everything, and followed Him (Luke 5:11).",
+       "The disciples' trade was the fish of the Sea of Galilee, sold in the markets and salted for the cities, and the Gospels return to those boats and nets again and again."
+      ],
+      "steps": [
+       "Read Leviticus 11:9–12 and Luke 5:1–11.",
+       "Answer in writing: what did Peter's answer in Luke 5:5 show about him?",
+       "Answer in writing: what did the fishermen leave behind in Luke 5:11, and what would that have meant for their families' living?",
+       "Find two more Gospel passages where Jesus meets His disciples at their boats or eats fish with them (start with Mark 1:16–20 and John 21)."
+      ],
+      "quiz": [
+       {
+        "q": "What did Peter say when Jesus told him to let down the nets?",
+        "choices": [
+         "\"At your word I will let down the nets\"",
+         "\"There are no fish here\"",
+         "\"We'll go tomorrow\""
+        ],
+        "answer": 0,
+        "explain": "Luke 5:5."
+       },
+       {
+        "q": "What happened to the nets?",
+        "choices": [
+         "They began to break from the catch",
+         "They were empty",
+         "They were stolen"
+        ],
+        "answer": 0,
+        "explain": "Luke 5:6."
+       },
+       {
+        "q": "What two things must a water animal have to be clean?",
+        "choices": [
+         "Fins and scales",
+         "Fins and gills",
+         "Scales and a tail"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:9."
+       }
+      ]
      }
     },
     {
@@ -24571,15 +28928,159 @@ export const LIBRARY = {
      "ownRecipe": true,
      "drill": {
       "title": "Spatchcock a bird",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Spatchcocking, cutting out the backbone and pressing a bird flat, makes a whole bird roast evenly and fast. Use this week's birds, so nothing extra is needed: spatchcock the quail for the Explore dish, or, for chicken two ways, spatchcock the chicken first, then break it down from flat. The backbone goes into the stock either way."
+      ],
+      "steps": [
+       "Set up the raw-meat station. Lay the bird breast side down, neck end toward you. Don't rinse it.",
+       "With kitchen shears, cut along one side of the backbone from tail to neck, cutting through the rib bones.",
+       "Cut along the other side and lift the backbone out. Bag it for stock.",
+       "Open the bird like a book. Nick the white cartilage at the top of the breastbone with the knife tip.",
+       "Turn it skin side up, legs pointing out. Press hard on the breastbone with the heel of your hand until it cracks and the bird lies flat.",
+       "Tuck the wing tips behind the breast. If you're cooking chicken two ways, go straight on to breaking it down: the legs, wings, and breasts come off a flat bird easily.",
+       "A flat 4-pound chicken would roast at 450°F in about 45 minutes, to 165°F in the thickest part of the breast and thigh; flat quail take about 14 minutes.",
+       "Wash the shears, board, and your hands with hot, soapy water, and wipe the counter."
+      ],
+      "quiz": [
+       {
+        "q": "What do you cut out to spatchcock a bird?",
+        "choices": [
+         "The backbone",
+         "The breastbone",
+         "The legs"
+        ],
+        "answer": 0,
+        "explain": "Then press it flat."
+       },
+       {
+        "q": "Why spatchcock?",
+        "choices": [
+         "The bird roasts evenly and faster",
+         "It looks fancier",
+         "It keeps the bones in"
+        ],
+        "answer": 0,
+        "explain": "No hollow middle."
+       },
+       {
+        "q": "What tool cuts through the ribs most easily?",
+        "choices": [
+         "Kitchen or poultry shears",
+         "A paring knife",
+         "A bread knife"
+        ],
+        "answer": 0,
+        "explain": "Shears cut bone cleanly."
+       }
+      ]
      },
      "knowledge": {
       "title": "Cost per serving, from the receipt",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Cost per serving is what restaurants live by and what most home cooks never calculate. It's simple: the total cost of what a dish used, divided by the servings it made.",
+       "Start with the receipt. For each ingredient, work out what fraction of the package the recipe used: half a bag of noodles, the whole of a 4-pound chicken, a tenth of a jar of thyme. Multiply each package price by that fraction and add them up. Spices and oil are small but count; round them to the nearest few cents.",
+       "Divide by servings. If this week's chicken two ways used $18.60 of ingredients and made 6 servings of soup and 6 of breast, that's $1.55 per serving; as 6 dinners of both together, $3.10.",
+       "Compare. A dish's cost per serving is useful next to something: the same dish from store-bought parts and stock, a restaurant's price, or your family's grocery budget per meal. What a whole bird saves shows up here: the stock you didn't buy, the parts you didn't pay a butcher for.",
+       "Food cost percentage, the restaurant measure, is the ingredient cost divided by the menu price. Many restaurants aim for about 28 to 35 percent; the rest pays for labor, rent, and everything else."
+      ],
+      "steps": [
+       "Using this week's receipt, list every ingredient in your mastery dish, its package price, and the fraction you used.",
+       "Add up the cost and divide by servings. Show your math.",
+       "Price the same meal made from store-bought parts and boxed stock, and from a restaurant. Write a short paragraph comparing the three.",
+       "Write down one change that would lower the cost per serving without changing the dish much."
+      ],
+      "quiz": [
+       {
+        "q": "How do you work out cost per serving?",
+        "choices": [
+         "Total ingredient cost divided by servings",
+         "Price of the most expensive ingredient",
+         "Total grocery bill divided by days"
+        ],
+        "answer": 0,
+        "explain": "Only what the dish used."
+       },
+       {
+        "q": "A $4.00 jar of thyme; you used a tenth. What do you count?",
+        "choices": [
+         "$0.40",
+         "$4.00",
+         "Nothing"
+        ],
+        "answer": 0,
+        "explain": "Count the fraction used."
+       },
+       {
+        "q": "A dish costs $3.00 to make and sells for $10.00. What's the food cost percentage?",
+        "choices": [
+         "30%",
+         "3%",
+         "70%"
+        ],
+        "answer": 0,
+        "explain": "3 ÷ 10."
+       },
+       {
+        "q": "Why does a whole bird lower cost per serving?",
+        "choices": [
+         "You don't pay for butchering, and the back becomes stock",
+         "It weighs more",
+         "It cooks faster"
+        ],
+        "answer": 0,
+        "explain": "Every part is used."
+       }
+      ]
      },
      "sabbath": {
       "title": "Manna and quail (Exodus 16:13; Numbers 11:31–32)",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "In the wilderness, Israel complained of hunger, and God answered: \"At twilight you shall eat meat, and in the morning you shall be filled with bread\" (Exodus 16:12). \"In the evening quail came up and covered the camp, and in the morning dew lay around the camp\" (Exodus 16:13), and when the dew lifted, there was manna.",
+       "The manna came with instructions: gather what each person needs for the day; on the sixth day, gather twice as much (Exodus 16:16–26). Some gathered extra on other days, and it spoiled (Exodus 16:20). The provision was daily, and it was enough.",
+       "Numbers 11 tells of a later time, when the people grew tired of manna and craved meat. God sent quail again, in huge numbers (Numbers 11:31–32), but the people gathered greedily, and the story ends in judgment (Numbers 11:33–34). The same food was a gift in one story and a lesson in the other; the difference was the people's hearts.",
+       "Quail are clean birds (Deuteronomy 14:11), and this week's Explore dish cooks them."
+      ],
+      "steps": [
+       "Read Exodus 16:1–21 and Numbers 11:4–6, 18–20, 31–34.",
+       "Answer in writing: how were the two quail stories alike, and how were they different?",
+       "Answer in writing: what did the manna instructions teach about trusting God for daily food?",
+       "Look at your family's grocery spending for one week. Write one way your family could waste less, as Israel was told to gather only what it needed."
+      ],
+      "quiz": [
+       {
+        "q": "What did God send Israel at twilight in Exodus 16?",
+        "choices": [
+         "Quail",
+         "Bread",
+         "Fish"
+        ],
+        "answer": 0,
+        "explain": "Exodus 16:13."
+       },
+       {
+        "q": "What happened to extra manna gathered on an ordinary day?",
+        "choices": [
+         "It spoiled",
+         "It turned to bread",
+         "It kept for a week"
+        ],
+        "answer": 0,
+        "explain": "Exodus 16:20."
+       },
+       {
+        "q": "In Numbers 11, what was wrong when quail came again?",
+        "choices": [
+         "The people craved and gathered greedily",
+         "The quail were unclean",
+         "There weren't enough"
+        ],
+        "answer": 0,
+        "explain": "Numbers 11:33–34."
+       }
+      ]
      }
     },
     {
@@ -25345,7 +29846,7 @@ export const LIBRARY = {
       "breaking-down-chicken",
       "braising"
      ],
-     "minutes": 120,
+     "minutes": 110,
      "tags": {
       "protein": "chicken",
       "flavors": [
@@ -25367,7 +29868,7 @@ export const LIBRARY = {
       "thin-slicing",
       "searing"
      ],
-     "minutes": 75,
+     "minutes": 70,
      "tags": {
       "protein": "beef",
       "flavors": [
@@ -25388,7 +29889,7 @@ export const LIBRARY = {
       "searing",
       "reducing"
      ],
-     "minutes": 90,
+     "minutes": 75,
      "tags": {
       "protein": "duck-quail",
       "flavors": [
@@ -25408,7 +29909,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-fish"
      ],
-     "minutes": 75,
+     "minutes": 60,
      "tags": {
       "protein": "salmon",
       "flavors": [
@@ -25429,7 +29930,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-fish"
      ],
-     "minutes": 90,
+     "minutes": 80,
      "tags": {
       "protein": "white-fish",
       "flavors": [

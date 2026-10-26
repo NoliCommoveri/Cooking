@@ -389,6 +389,243 @@
           }
         }
       }
+    },
+    {
+      "id": "sp-2",
+      "title": "Smash burgers",
+      "level": "sp-2",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["tangy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "totalMinutes": 35,
+      "ingredients": {
+        "drop": [
+          "cucumber@Quick pickles",
+          "vinegar-white@Quick pickles",
+          "water@Quick pickles",
+          "sugar@Quick pickles",
+          "salt@Quick pickles",
+          "onion-yellow@Burgers"
+        ],
+        "add": [{ "ingredient": "pickle-dill", "amount": 2, "unit": "count", "round": "up", "group": "To serve" }],
+        "order": [
+          "beef-ground@Burgers",
+          "salt@Burgers",
+          "black-pepper@Burgers",
+          "cheese-sliced@Burgers",
+          "vegetable-oil@For the pan",
+          "burger-buns@To serve",
+          "+0",
+          "ketchup@To serve",
+          "mustard-dijon@To serve",
+          "lettuce-green-leaf@To serve"
+        ]
+      },
+      "equipment": {
+        "drop": ["chef-knife", "mixing-bowl-medium", "saucepan-medium", "liquid-measuring-cup", "wooden-spoon"],
+        "add": ["paring-knife"],
+        "order": [
+          "+0",
+          "cutting-board",
+          "plate",
+          "parchment",
+          "measuring-spoons",
+          "skillet-12",
+          "spatula",
+          "tongs",
+          "thermometer",
+          "oven-mitts"
+        ]
+      },
+      "steps": {
+        "change": {
+          "parchment": {
+            "id": "parchment",
+            "text": "Cut a square of parchment for each burger. Open the buns and set out the cheese.",
+            "safety": "solo",
+            "tip": "Once the burgers start, they cook in minutes. Get everything ready now."
+          },
+          "balls": {
+            "id": "balls",
+            "text": "Divide the beef into {n:burger-buns} even pieces. Roll each into a loose ball on the plate. Sprinkle with the salt and pepper.",
+            "safety": "solo",
+            "hazard": "Raw meat",
+            "handles": ["beef-ground"],
+            "why": "loose-balls",
+            "tip": "Roll gently. Squeezed balls make tough burgers."
+          },
+          "wash-balls": {
+            "id": "wash-balls",
+            "type": "wash",
+            "text": "Wash your hands with soap for 20 seconds.",
+            "safety": "solo",
+            "hazard": "Raw meat"
+          },
+          "toast-buns": {
+            "id": "toast-buns",
+            "text": "Heat the skillet over medium heat. Toast the buns cut side down, then put them on the plates.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 60,
+            "timerLabel": "Toast buns",
+            "look": "Golden on the cut side."
+          },
+          "heat": {
+            "id": "heat",
+            "text": "Turn the heat to high. Add the oil and let the pan get very hot.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 120,
+            "timerLabel": "Heat pan",
+            "look": "The oil shimmers."
+          },
+          "add-first": {
+            "id": "add-first",
+            "text": "Use the tongs to set 3 beef balls in the pan, far apart.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "handles": ["beef-ground"],
+            "tip": "Set each one down away from you."
+          },
+          "smash-first": {
+            "id": "smash-first",
+            "text": "Lay parchment on a ball. Press down hard with the spatula until it's thin. Peel off the paper. Smash the others.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan, spatter",
+            "why": "smash",
+            "tip": "Both hands on the spatula. Keep your arms back from the spatter."
+          },
+          "sear-first": {
+            "id": "sear-first",
+            "text": "Leave the patties alone while they sear.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 150,
+            "timerLabel": "Sear, first batch",
+            "look": "Brown, lacy edges."
+          },
+          "flip-first": {
+            "id": "flip-first",
+            "text": "Scrape under each patty with the spatula and flip it. Add a slice of cheese if you're using it.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 60,
+            "timerLabel": "Second side",
+            "look": "Cheese soft and melting."
+          },
+          "check-first": {
+            "id": "check-first",
+            "type": "doneness",
+            "text": "Slide the thermometer into one patty from the side. It should read 160°F or more.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "target": { "temp": 160, "unit": "F" },
+            "why": "from-side",
+            "tip": "Not there yet? Cook 30 more seconds."
+          },
+          "plate-first": {
+            "id": "plate-first",
+            "text": "Move each patty onto a bottom bun with the spatula.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "why": "160"
+          },
+          "add-second": {
+            "id": "add-second",
+            "text": "Use the clean tongs to set the rest of the beef balls in the pan.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "handles": ["beef-ground"],
+            "tip": "Far apart, so you have room to smash."
+          },
+          "wash-second": {
+            "id": "wash-second",
+            "type": "wash",
+            "text": "Put the tongs and the raw-beef plate in the sink. Wash your hands.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove"
+          },
+          "cook-second": {
+            "id": "cook-second",
+            "text": "Smash, sear, flip, and add cheese the same way.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan, spatter",
+            "timerSeconds": 210,
+            "timerLabel": "Second batch",
+            "tip": "If the pan smokes hard, turn the heat down a little."
+          },
+          "check-second": {
+            "id": "check-second",
+            "type": "doneness",
+            "text": "Check one patty from the side: 160°F or more. Then move them to the buns and turn off the stove.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "target": { "temp": 160, "unit": "F" }
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Top each burger with pickles, lettuce, ketchup or mustard, and the top bun.",
+            "safety": "solo",
+            "look": "Crisp brown edges poking out of the bun."
+          }
+        },
+        "drop": ["cucumber-slice", "brine", "pickle", "onion-slice"],
+        "add": [
+          { "id": "pickles", "text": "Slice the pickles into thin coins with the paring knife.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Claw grip: fingertips tucked under." },
+          { "id": "lettuce", "text": "Rinse the lettuce leaves, pat them dry, and tear them to fit the buns.", "safety": "solo", "look": "One leaf for each bun." }
+        ],
+        "order": [
+          "+0",
+          "+1",
+          "parchment",
+          "balls",
+          "wash-balls",
+          "toast-buns",
+          "heat",
+          "add-first",
+          "wash-first",
+          "smash-first",
+          "sear-first",
+          "flip-first",
+          "check-first",
+          "plate-first",
+          "add-second",
+          "wash-second",
+          "cook-second",
+          "check-second",
+          "serve"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "Smash it, then check it",
+          "body": "Smash burgers are balls of beef pressed thin in a very hot pan, so the edges turn brown and crisp. This week's skill is the thermometer. Thin patties cook fast, but they still have to reach 160°F, the safe temperature for ground beef, so you'll check one from each batch."
+        },
+        "callback": null,
+        "wrong": [
+          { "sign": "The patty stuck to the spatula", "fix": "Use the parchment square every time, and press straight down." },
+          { "sign": "The edges aren't brown", "fix": "The pan wasn't hot enough. Heat it longer before the next batch." },
+          { "sign": "A patty reads under 160°F", "fix": "Cook it 30 more seconds and check again." },
+          { "sign": "The pan is smoking a lot", "fix": "Turn the heat down a little for the next batch." }
+        ],
+        "quiz": [
+          { "q": "What temperature does ground beef need?", "choices": ["160°F", "145°F", "120°F"], "answer": 0, "explain": "Grinding mixes germs all through the meat." },
+          { "q": "How does the thermometer go into a thin patty?", "choices": ["In from the side", "Down from the top", "It doesn't need one"], "answer": 0, "explain": "From the top, the tip hits the pan." },
+          { "q": "Why does the parchment go between the spatula and the beef?", "choices": ["So the beef doesn't stick to the spatula", "To keep it warm", "To catch the fat"], "answer": 0, "explain": "Then you peel it off." }
+        ],
+        "why": {
+          "drop": ["thin-even", "brine"],
+          "add": [
+            { "id": "160", "title": "Why 160°F", "body": "Germs live on the outside of meat. Grinding mixes the outside all through the beef, so the whole patty has to get hot. At 160°F, ground beef is safe." },
+            { "id": "from-side", "title": "In from the side", "body": "A smashed patty is thin. Pushed in from the top, the thermometer hits the pan. Slide it in from the edge so the tip sits in the middle." }
+          ]
+        }
+      }
     }
   ]
 }

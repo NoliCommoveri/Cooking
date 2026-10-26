@@ -1,0 +1,86 @@
+{
+  "id": "keema",
+  "version": 1,
+  "track": "core",
+  "unit": 102,
+  "title": "Keema with peas",
+  "image": "dishes/keema.png",
+  "cuisine": "indian",
+  "skill": "Choosing clean ground beef and spices",
+  "skills": ["reading-labels"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 40,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 7, "text": "For more than 6, use a wide pot so the beef has room to brown, and give it 5 more minutes to simmer." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Clean from the label up",
+      "body": "Keema is ground meat cooked with onion, ginger, garlic, tomato, and warm spices, a weeknight dish in homes across India and Pakistan. Today you'll read the labels on the beef and the jars, then brown the beef, simmer it with peas, and check it at 160°F."
+    },
+    "why": [
+      { "id": "beef-only", "title": "Beef, and only beef", "body": "Some packages of ground meat mix more than one animal. The label must say what's inside. Look for the word beef and nothing else." },
+      { "id": "jars", "title": "Jars and blends", "body": "Jarred garlic and ginger are usually just garlic or ginger, oil or water, and salt. Spice blends like garam masala are just spices. Reading the list takes ten seconds and makes sure." },
+      { "id": "onion-first", "title": "Onion first", "body": "Onion cooked in oil for a few minutes turns soft and sweet. It's the base the spices and beef build on." },
+      { "id": "spices-in-oil", "title": "Spices in the fat", "body": "Spice flavor dissolves in fat. Stirring the spices into the beef and its fat for a minute before the tomatoes go in makes them taste stronger." },
+      { "id": "peas-last", "title": "Peas go in last", "body": "Frozen peas only need to heat through. Added at the end, they stay bright green and sweet." }
+    ],
+    "wrong": [
+      { "sign": "It's watery", "fix": "Let it bubble with the lid off for 3 more minutes, stirring." },
+      { "sign": "It's sticking to the pan", "fix": "Stir in 2 tablespoons of water and turn the heat down a little." },
+      { "sign": "It tastes flat", "fix": "Stir in a pinch of salt and a squeeze of lemon." },
+      { "sign": "The peas are wrinkled and gray", "fix": "They cooked too long. Next time, add them in the last 3 minutes." }
+    ],
+    "quiz": [
+      { "q": "What should a ground beef label say?", "choices": ["Beef, and nothing else", "Ground meat", "Meatloaf mix"], "answer": 0, "explain": "Mixed packages can hold other meats." },
+      { "q": "Why stir the spices into the beef before the tomatoes?", "choices": ["Spice flavor dissolves in fat", "To cool them down", "So they don't burn later"], "answer": 0, "explain": "A minute in the fat wakes them up." },
+      { "q": "When do the frozen peas go in?", "choices": ["Near the end", "First", "Before the beef"], "answer": 0, "explain": "They only need to heat through." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "vegetable-oil", "amount": 1, "unit": "tbsp", "group": "Keema" },
+    { "ingredient": "onion-diced-frozen", "amount": 1, "unit": "cup", "group": "Keema" },
+    { "ingredient": "beef-ground", "amount": 1, "unit": "lb", "group": "Keema" },
+    { "ingredient": "garlic-minced-jarred", "amount": 2, "unit": "tsp", "group": "Keema" },
+    { "ingredient": "ginger-minced-jarred", "amount": 2, "unit": "tsp", "group": "Keema" },
+    { "ingredient": "garam-masala", "amount": 2, "unit": "tsp", "group": "Keema" },
+    { "ingredient": "cumin-ground", "amount": 1, "unit": "tsp", "group": "Keema" },
+    { "ingredient": "turmeric-ground", "amount": 0.5, "unit": "tsp", "group": "Keema" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Keema" },
+    { "ingredient": "tomato-sauce", "amount": 1.5, "unit": "cup", "group": "Keema" },
+    { "ingredient": "peas-frozen", "amount": 1, "unit": "cup", "group": "Keema" },
+    { "ingredient": "lemon", "amount": 1, "unit": "count", "round": "up", "optional": true, "group": "To serve" },
+    { "ingredient": "rice-cooked-pouch", "amount": 2, "unit": "count", "round": "up", "group": "To serve" }
+  ],
+  "equipment": [
+    "measuring-cups",
+    "measuring-spoons",
+    "small-bowl",
+    "can-opener",
+    "skillet-12",
+    "wooden-spoon",
+    "thermometer",
+    "microwave",
+    "cutting-board",
+    "paring-knife"
+  ],
+  "steps": [
+    { "id": "beef-label", "text": "Read the label on the beef. It should say beef and nothing else.", "safety": "solo", "why": "beef-only", "tip": "Packages called ground meat or meatloaf mix can hold other meats." },
+    { "id": "jar-labels", "text": "Read the lists on the garlic, the ginger, the garam masala, and the tomato sauce.", "safety": "solo", "why": "jars", "look": "Plants, oil, water, salt, and spices. Nothing from an animal." },
+    { "id": "spices", "text": "Measure the garam masala, cumin, turmeric, and salt into the small bowl.", "safety": "solo", "tip": "Turmeric stains. Wipe up any spills right away." },
+    { "id": "onion", "text": "Heat the oil in the skillet over medium heat. Add the frozen onion and cook, stirring, until soft.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 300, "timerLabel": "Onion", "why": "onion-first", "look": "Soft and see-through, a little golden." },
+    { "id": "beef-in", "text": "Add the beef to the pan. Turn the heat to medium-high.", "safety": "adult-nearby", "hazard": "Hot pan, raw meat", "handles": ["beef-ground"], "tip": "Tip it in from the package, close to the pan." },
+    { "id": "wash-beef", "type": "wash", "text": "Put the package in the trash. Wash your hands with soap.", "safety": "adult-nearby", "hazard": "Hot stove" },
+    { "id": "brown", "text": "Break the beef into small crumbles with the wooden spoon. Cook, stirring every minute.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 360, "timerLabel": "Brown beef", "look": "No pink left." },
+    { "id": "aromatics", "text": "Stir in the garlic, the ginger, and the spices from the bowl. Cook for 1 minute, stirring.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 60, "timerLabel": "Spices", "why": "spices-in-oil", "look": "It smells strong and toasty." },
+    { "id": "tomato", "text": "Open the tomato sauce and stir it in. Turn the heat to low and let it bubble gently.", "safety": "adult-nearby", "hazard": "Hot pan, sharp can lid", "timerSeconds": 600, "timerLabel": "Simmer", "tip": "Stir every few minutes so it doesn't stick." },
+    { "id": "peas", "text": "Stir in the frozen peas and cook until they're hot.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 180, "timerLabel": "Peas", "why": "peas-last", "look": "Bright green peas, steaming." },
+    { "id": "check", "type": "doneness", "text": "Push some keema into a pile and put the thermometer in the middle. It should read 160°F or more.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 160, "unit": "F" } },
+    { "id": "rice", "text": "Turn off the stove. Heat the rice pouches in the microwave as the package says.", "safety": "solo", "tip": "Tear the pouch open away from your face. The steam is hot." },
+    { "id": "serve", "text": "Cut the lemon into wedges if you're using it. Spoon the keema over the rice and squeeze lemon on top.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Red-brown keema with green peas on white rice." }
+  ]
+}

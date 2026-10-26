@@ -42,7 +42,7 @@
     ]
   },
   "ingredients": [
-    { "ingredient": "chicken-thigh", "amount": 680, "unit": "g", "group": "Chicken" },
+    { "ingredient": "chicken-thigh", "amount": 1.5, "unit": "lb", "group": "Chicken" },
     { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Chicken" },
     { "ingredient": "chiles-guajillo", "amount": 6, "unit": "count", "group": "Sauce" },
     { "ingredient": "broth-chicken", "amount": 2, "unit": "cup", "group": "Sauce" },
@@ -82,7 +82,7 @@
   "steps": [
     { "id": "scale", "text": "Scale the recipe to 12 on paper: multiply every amount by 3. Then set the servings to 12 and compare your list with the app's.", "safety": "solo", "why": "factor", "tip": "Write salt at two and a half times, and plan three baking dishes." },
     { "id": "oven", "text": "Heat the oven to 375°F.", "safety": "solo", "hazard": "Hot oven" },
-    { "id": "poach", "text": "Put the chicken in the saucepan, cover it by 2 centimeters with water, and add the chicken's salt.", "safety": "solo", "handles": ["chicken-thigh"] },
+    { "id": "poach", "text": "Put the chicken in the saucepan, cover it by 1 inch with water, and add the chicken's salt.", "safety": "solo", "handles": ["chicken-thigh"] },
     { "id": "wash-1", "type": "wash", "text": "Wash your hands with hot, soapy water.", "safety": "solo", "hazard": "Raw poultry" },
     { "id": "simmer", "text": "Bring it to a boil, then simmer, partly covered.", "safety": "solo", "hazard": "Hot pot", "timerSeconds": 1200, "timerLabel": "Poach chicken" },
     { "id": "chiles", "text": "Meanwhile, cut the stems off the chiles, slit them, and shake out the seeds.", "safety": "solo", "hazard": "Sharp knife" },

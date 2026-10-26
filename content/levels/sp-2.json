@@ -342,8 +342,8 @@
         "title": "Daily bread (Matthew 6:11)",
         "minutes": 20,
         "body": [
-          "When Jesus taught his followers to pray, one of the things he told them to ask for was food: \"Give us this day our daily bread\" (Matthew 6:11). Not a year's worth, or a week's: today's.",
-          "In the wilderness, God fed Israel with manna one day at a time (Exodus 16:4). Proverbs asks God for \"neither poverty nor riches; feed me with the food that is needful for me\" (Proverbs 30:8). And later in the same chapter of Matthew, Jesus tells his followers not to worry about what they'll eat, because their Father knows they need it (Matthew 6:31–33).",
+          "When Jesus taught His followers to pray, one of the things He told them to ask for was food: \"Give us this day our daily bread\" (Matthew 6:11). Not a year's worth, or a week's: today's.",
+          "In the wilderness, God fed Israel with manna one day at a time (Exodus 16:4). Proverbs asks God for \"neither poverty nor riches; feed me with the food that is needful for me\" (Proverbs 30:8). And later in the same chapter of Matthew, Jesus tells His followers not to worry about what they'll eat, because their Father knows they need it (Matthew 6:31–33).",
           "Asking for daily bread is a way of remembering that every meal is a gift, and of trusting God for tomorrow's."
         ],
         "steps": [
@@ -428,10 +428,292 @@
         ]
       }
     },
-    { "week": 7, "unit": 3, "skill": "temping-meat", "familiar": "smash-burgers", "explore": "kofte", "drill": { "title": "Read a thermometer; check a patty for 160°F", "minutes": 20 }, "knowledge": { "title": "Why ground meat must reach 160°F", "minutes": 20 }, "sabbath": { "title": "Shape patties ahead and freeze them", "minutes": 20 } },
-    { "week": 8, "unit": 3, "skill": "reading-labels", "familiar": "beef-tacos-seasoning", "explore": "keema", "note": "Taco shells label-checked", "drill": { "title": "Read 10 labels and find the hidden unclean ingredients", "minutes": 20 }, "knowledge": { "title": "Hidden unclean ingredients and where they hide", "minutes": 20 }, "sabbath": { "title": "Clean and unclean animals (Leviticus 11:1–8)", "minutes": 20 } },
-    { "week": 9, "unit": 3, "skill": "cooking-fish", "familiar": "fish-sticks", "explore": "shioyaki", "drill": { "title": "Thaw frozen fish safely: in the fridge or in cold water", "minutes": 20 }, "knowledge": { "title": "Fins and scales: which fish are clean; reading fish labels", "minutes": 20 }, "sabbath": { "title": "Fins and scales (Leviticus 11:9–12)", "minutes": 20 } },
-    { "week": 10, "unit": 3, "skill": "handling-poultry", "mastery": true, "familiar": "teriyaki-chicken-bites", "explore": "chicken-souvlaki-pitas", "note": "Ready-cut chicken in both", "drill": { "title": "Separate boards and hand-washing for raw chicken", "minutes": 20 }, "knowledge": { "title": "Raw meat on the bottom shelf; 165°F for chicken", "minutes": 20 }, "sabbath": { "title": "Clean and unclean birds (Leviticus 11:13–19)", "minutes": 20 } },
+    {
+      "week": 7,
+      "unit": 3,
+      "skill": "temping-meat",
+      "familiar": "smash-burgers",
+      "explore": "kofte",
+      "drill": {
+        "title": "Read a thermometer; check a patty for 160°F",
+        "minutes": 20,
+        "body": [
+          "A thermometer is the only way to know ground beef is safe. Today you'll practice reading one, then use it on a real patty. An adult is in the kitchen while the stove is on."
+        ],
+        "steps": [
+          "Find the thermometer's probe, the metal stick, and its tip, which is where it reads. Turn it on, or wait for the dial to settle.",
+          "Fill a glass with ice and water. Put the tip in the middle of the glass for 30 seconds. It should read about 32°F.",
+          "Hold the tip under warm tap water, then cold. Watch how long the number takes to stop moving.",
+          "Shape a small beef patty, wash your hands, and cook it in a skillet over medium heat, 3 minutes a side.",
+          "Slide the thermometer into the side of the patty so the tip is in the middle. Wait for the number to stop moving.",
+          "If it reads 160°F or more, it's done. If not, cook it 1 more minute and check again.",
+          "Wash the probe with hot, soapy water. Write down what your patty read."
+        ],
+        "quiz": [
+          { "q": "Where does a thermometer read?", "choices": ["At the tip", "Along the whole stick", "At the top"], "answer": 0, "explain": "Put the tip in the middle of the food." },
+          { "q": "What should it read in ice water?", "choices": ["About 32°F", "0°F", "100°F"], "answer": 0, "explain": "Ice water is 32°F." },
+          { "q": "When do you read the number?", "choices": ["When it stops moving", "Right away", "After a minute out of the food"], "answer": 0, "explain": "It takes a few seconds to settle." }
+        ]
+      },
+      "knowledge": {
+        "title": "Why ground meat must reach 160°F",
+        "minutes": 20,
+        "body": [
+          "Germs that can make people sick live on the outside of meat. When beef is ground, the outside gets mixed all the way through, so germs can be in the middle of a burger too.",
+          "Heat kills those germs. At 160°F, ground beef is safe. You can't tell by color: beef can turn brown inside before it's safe, or stay a little pink after it is. Only a thermometer can tell you.",
+          "Every kind of meat has its own safe temperature. You'll learn chicken's (165°F) and fish's (145°F) later in this unit."
+        ],
+        "steps": [
+          "Make a small card that says \"Ground beef: 160°F\" and keep it by the stove.",
+          "Ask an adult what temperature they cook burgers to. Tell them what you learned."
+        ],
+        "quiz": [
+          { "q": "Why do germs end up in the middle of a burger?", "choices": ["Grinding mixes the outside all through", "Burgers are thick", "Beef grows them inside"], "answer": 0, "explain": "The outside is mixed in." },
+          { "q": "What temperature makes ground beef safe?", "choices": ["160°F", "145°F", "120°F"], "answer": 0, "explain": "160°F for ground beef." },
+          { "q": "Can you tell a burger is done by its color?", "choices": ["No, only a thermometer can tell", "Yes, if it's brown", "Yes, if it's gray"], "answer": 0, "explain": "Color can fool you." }
+        ]
+      },
+      "sabbath": {
+        "title": "Shape patties ahead and freeze them",
+        "minutes": 20,
+        "body": [
+          "Shaped patties freeze well. With a stack in the freezer, burgers or köfte are ready to cook any night, with the messy raw-meat part already done."
+        ],
+        "steps": [
+          "Shape ground beef into patties, the same size as this week's recipe. Wash your hands after.",
+          "Lay them on a parchment-lined plate or sheet pan, not touching, and freeze them for 1 hour.",
+          "Stack the frozen patties with a square of parchment between each one, and put them in a freezer bag.",
+          "Press out the air, seal it, and write the date and \"ground beef\" on the bag.",
+          "Use them within 3 months. Thaw them in the fridge overnight, then cook them to 160°F as usual.",
+          "Wash your hands, and wipe everything the raw beef touched."
+        ],
+        "quiz": [
+          { "q": "Why freeze the patties apart first?", "choices": ["So they don't freeze stuck together", "So they cook faster", "To dry them"], "answer": 0, "explain": "Then they stack and come apart easily." },
+          { "q": "Where do frozen patties thaw?", "choices": ["In the fridge", "On the counter", "In the sun"], "answer": 0, "explain": "The fridge keeps them cold." },
+          { "q": "What goes on the bag?", "choices": ["The date and what's inside", "Nothing", "Your name only"], "answer": 0, "explain": "So you know what it is and how old." }
+        ]
+      }
+    },
+    {
+      "week": 8,
+      "unit": 3,
+      "skill": "reading-labels",
+      "familiar": "beef-tacos-seasoning",
+      "explore": "keema",
+      "note": "Taco shells label-checked",
+      "drill": {
+        "title": "Read 10 labels and find the hidden unclean ingredients",
+        "minutes": 20,
+        "body": [
+          "Some foods hide ingredients that aren't clean. Today you'll read real labels and find them, using the watch-for list below and the longer one on this week's Knowledge page. Your family's kitchen and a grocery store both work."
+        ],
+        "steps": [
+          "Pick 10 packaged foods: try yogurt, sour cream, tortillas, taco shells, refried beans, gummy candy, marshmallows, a seasoning packet, a sauce, and one of your choice.",
+          "Turn each one over and find the ingredient list.",
+          "Read the whole list, slowly. Look for the names on the watch-for list, and for animal fats that don't say which animal.",
+          "Sort them into three piles: clean, not clean, and not sure.",
+          "For each one in \"not sure\", write down the word that made you stop. Ask an adult to look it up with you.",
+          "Tell an adult which foods you'd pick and which you'd put back."
+        ],
+        "quiz": [
+          { "q": "Where do you find what's really in a food?", "choices": ["The ingredient list", "The picture on the front", "The price"], "answer": 0, "explain": "The list names everything inside." },
+          { "q": "Which of these can hide gelatin?", "choices": ["Yogurt and gummy candy", "Apples", "Plain rice"], "answer": 0, "explain": "Check the list." },
+          { "q": "A label says only \"animal fat.\" Is it clean?", "choices": ["You can't tell, so pass on it", "Yes", "Only if it's cheap"], "answer": 0, "explain": "It doesn't say which animal." }
+        ],
+        "watch": [
+          { "name": "Lard", "hides": "In some tortillas, taco shells, and refried beans." },
+          { "name": "Gelatin", "hides": "In some yogurt, sour cream, gummy candy, and marshmallows." },
+          { "name": "Carmine or cochineal", "hides": "A red coloring in some yogurts, candies, and drinks." }
+        ]
+      },
+      "knowledge": {
+        "title": "Hidden unclean ingredients and where they hide",
+        "minutes": 20,
+        "body": [
+          "Unclean foods don't always look like what they are. They can be one word on a long ingredient list, and some have names you wouldn't guess.",
+          "The list below names the ones to watch for and where they hide. Learn the names: they're what you'll see on the label.",
+          "Meat can hide too. Packages called \"ground meat\" or \"meatloaf mix\" can mix more than one animal. The label should name every animal.",
+          "The rule is simple: if the label doesn't tell you, or you can't tell what a word means, pass on it."
+        ],
+        "steps": [
+          "Make a list of the six names on this page. Keep it on your phone or in your pocket for shopping.",
+          "Find one food at home with a hidden ingredient, and one that's clean."
+        ],
+        "quiz": [
+          { "q": "What is gelatin usually made from?", "choices": ["Pigs, unless the label says beef or fish", "Plants", "Fruit"], "answer": 0, "explain": "Read the label." },
+          { "q": "What should a ground beef label say?", "choices": ["Beef, and nothing else", "Ground meat", "Meatloaf mix"], "answer": 0, "explain": "Mixed packages can hold other meats." },
+          { "q": "You can't tell what a word on the label means. What do you do?", "choices": ["Pass on it, or look it up first", "Buy it", "Eat a little"], "answer": 0, "explain": "If you can't tell, don't." }
+        ],
+        "watch": [
+          { "name": "Lard", "hides": "Fat from pigs. Used in some tortillas, taco shells, refried beans, and pie crusts." },
+          { "name": "Gelatin", "hides": "Usually made from pigs, unless the label says beef or fish. In some yogurt, sour cream, gummy candy, and marshmallows." },
+          { "name": "Pork casings", "hides": "The skin around many chicken and turkey sausages. Look for collagen casings or skinless." },
+          { "name": "Oyster sauce", "hides": "Made from a sea animal with a shell. In many stir-fry sauces. Mushroom stir-fry sauce works instead." },
+          { "name": "Shrimp paste", "hides": "In many Thai curry pastes and some kimchi." },
+          { "name": "Carmine or cochineal", "hides": "A red coloring made from crushed bugs. In some yogurts, candies, and drinks." }
+        ]
+      },
+      "sabbath": {
+        "title": "Clean and unclean animals (Leviticus 11:1–8)",
+        "minutes": 20,
+        "body": [
+          "God gave Israel a simple test for land animals: \"Whatever parts the hoof and is cloven-footed and chews the cud, among the animals, you may eat\" (Leviticus 11:3). An animal has to pass both parts.",
+          "A split hoof is a hoof divided into two toes, like a cow's. Chewing the cud means bringing swallowed food back up to chew again. Cows, sheep, goats, and deer do both, so they're clean.",
+          "The next verses name animals that pass only one part. The camel, the rock badger, and the hare chew the cud but don't have split hooves, and the pig has split hooves but doesn't chew the cud (Leviticus 11:4–7). Passing one part isn't enough."
+        ],
+        "steps": [
+          "Read Leviticus 11:1–8 with an adult.",
+          "Draw two circles that overlap. Label one \"split hoof\" and one \"chews the cud.\"",
+          "Put each animal from the passage where it belongs. The clean ones go in the middle, where the circles overlap.",
+          "Add three animals you know (try a cow, a horse, and a deer) and decide where they go.",
+          "Answer out loud: why isn't one part of the test enough?"
+        ],
+        "quiz": [
+          { "q": "What are the two parts of the test for land animals?", "choices": ["A split hoof and chewing the cud", "Four legs and fur", "Eating grass and living on a farm"], "answer": 0, "explain": "Leviticus 11:3." },
+          { "q": "Which of these is clean?", "choices": ["A goat", "A camel", "A hare"], "answer": 0, "explain": "Goats pass both parts." },
+          { "q": "Why is the camel unclean?", "choices": ["It chews the cud but doesn't have a split hoof", "It lives in the desert", "It's too big"], "answer": 0, "explain": "Leviticus 11:4." }
+        ]
+      }
+    },
+    {
+      "week": 9,
+      "unit": 3,
+      "skill": "cooking-fish",
+      "familiar": "fish-sticks",
+      "explore": "shioyaki",
+      "drill": {
+        "title": "Thaw frozen fish safely: in the fridge or in cold water",
+        "minutes": 20,
+        "body": [
+          "Most fish at the store is sold frozen, and it has to thaw before it cooks evenly. There are two safe ways, and one way that isn't. Today you'll try both safe ones on the frozen fish you bought for this week's recipe, so nothing extra is needed."
+        ],
+        "steps": [
+          "Take this week's frozen fish and split it into two sealed zip-top bags, half in each.",
+          "The night before you cook, put one bag on a plate on the bottom shelf of the fridge. The plate catches any drips.",
+          "The next day, fill a big bowl with cold tap water. Put the other bag in it, pressed under the water.",
+          "Change the water every 30 minutes so it stays cold. Check the fish by pressing it through the bag.",
+          "When it's soft all the way through, it's thawed. Write down how long it took.",
+          "Compare the two halves. Both go into this week's recipe today.",
+          "Never thaw fish on the counter. Wash your hands, the plate, and the bowl after."
+        ],
+        "quiz": [
+          { "q": "What are the two safe ways to thaw fish?", "choices": ["In the fridge, or sealed in cold water", "On the counter, or in the sun", "In hot water, or on the stove"], "answer": 0, "explain": "Both keep the fish cold." },
+          { "q": "How often do you change the cold water?", "choices": ["Every 30 minutes", "Never", "Every 5 hours"], "answer": 0, "explain": "So it stays cold." },
+          { "q": "Where does fish thaw in the fridge?", "choices": ["On a plate on the bottom shelf", "On the top shelf", "In the door"], "answer": 0, "explain": "The plate catches drips." }
+        ]
+      },
+      "knowledge": {
+        "title": "Fins and scales: which fish are clean; reading fish labels",
+        "minutes": 20,
+        "body": [
+          "For animals in the water, the test is fins and scales: a water animal must have both to be clean (Leviticus 11:9). Salmon, cod, tilapia, tuna, trout, and many more are clean.",
+          "Some water animals are unclean: fish with smooth skin and no scales, every animal with a shell, and the soft sea animals with arms. The list below names the common ones. Swordfish is left out because people disagree about its scales.",
+          "Once fish is cut into a fillet, you can't see the scales, so the label matters. It must say what fish it is. If it only says \"whitefish\" or \"seafood,\" or names a fish you don't know, ask what it is or pass on it. Some cheap white fillets, sold as swai or basa, come from a fish with no scales."
+        ],
+        "steps": [
+          "Write down five clean fish from this page.",
+          "At the store with an adult, read the names on three fish packages. Are they clean?"
+        ],
+        "quiz": [
+          { "q": "What must a water animal have to be clean?", "choices": ["Fins and scales", "Only fins", "A tail"], "answer": 0, "explain": "Leviticus 11:9." },
+          { "q": "Which of these is clean?", "choices": ["Salmon", "Monkfish", "Swai"], "answer": 0, "explain": "Monkfish and swai have no scales." },
+          { "q": "Why read the name on a fish fillet?", "choices": ["You can't see the scales on a fillet", "It tells you the price", "To know how to cook it"], "answer": 0, "explain": "The name tells you what fish it is." }
+        ],
+        "watch": [
+          { "name": "Catfish, monkfish, swai, and basa", "hides": "Fins but no scales. Swai and basa are sold as cheap white fillets." },
+          { "name": "Shrimp, crab, lobster, clams, oysters, mussels, and scallops", "hides": "Animals with shells. Also in some seafood mixes, and imitation seafood sticks can include them." },
+          { "name": "Squid, calamari, and octopus", "hides": "The soft sea animals with arms. In some seafood mixes and fried appetizers." }
+        ]
+      },
+      "sabbath": {
+        "title": "Fins and scales (Leviticus 11:9–12)",
+        "minutes": 20,
+        "body": [
+          "\"These you may eat, of all that are in the waters. Everything in the waters that has fins and scales, whether in the seas or in the rivers, you may eat\" (Leviticus 11:9).",
+          "The next verses say the rest are \"detestable\" for food (Leviticus 11:10–12). Deuteronomy says the same thing again (Deuteronomy 14:9–10).",
+          "Fish were everyday food in Bible times. Several of Jesus' disciples were fishermen on the Sea of Galilee, and after He rose, Jesus cooked fish for them on the shore (John 21:9–13)."
+        ],
+        "steps": [
+          "Read Leviticus 11:9–12 with an adult.",
+          "Read Deuteronomy 14:9–10. What's the same as Leviticus?",
+          "Look at a picture of a salmon or a trout. Point to its fins and its scales.",
+          "Read John 21:9–13. Draw the breakfast Jesus made.",
+          "Answer out loud: why do you think God gave the same rule twice?"
+        ],
+        "quiz": [
+          { "q": "What two things does Leviticus 11:9 say a water animal needs?", "choices": ["Fins and scales", "Fins and a tail", "Scales and gills"], "answer": 0, "explain": "Both parts." },
+          { "q": "Where else is the same rule written?", "choices": ["Deuteronomy 14:9–10", "Genesis 1", "Psalm 23"], "answer": 0, "explain": "Deuteronomy repeats it." },
+          { "q": "What did Jesus cook on the shore in John 21?", "choices": ["Fish and bread", "Lamb", "Soup"], "answer": 0, "explain": "John 21:9." }
+        ]
+      }
+    },
+    {
+      "week": 10,
+      "unit": 3,
+      "skill": "handling-poultry",
+      "mastery": true,
+      "familiar": "teriyaki-chicken-bites",
+      "explore": "chicken-souvlaki-pitas",
+      "note": "Ready-cut chicken in both",
+      "drill": {
+        "title": "Separate boards and hand-washing for raw chicken",
+        "minutes": 20,
+        "body": [
+          "Raw chicken can carry germs that make people sick. Today you'll set up a raw-chicken spot in your kitchen and practice washing your hands the right way, so you're ready for this week's recipe on your own."
+        ],
+        "steps": [
+          "Pick one cutting board for raw meat only. Put a piece of tape on it that says \"raw\".",
+          "Pick a spot on the counter near the sink for raw chicken. Clear everything else away from it.",
+          "Wash your hands: wet them, add soap, and scrub the backs, between your fingers, and under your nails for 20 seconds. Hum \"Happy Birthday\" twice.",
+          "Rinse and dry your hands on a clean towel or a paper towel.",
+          "Put a little flour on your hands, as if it were raw chicken. Touch the faucet, a drawer handle, and the fridge door.",
+          "See how far it spread? Wipe each spot with hot, soapy water, then wash your hands again.",
+          "From now on, wash those spots every time you touch raw chicken."
+        ],
+        "quiz": [
+          { "q": "How long do you scrub with soap?", "choices": ["20 seconds", "2 seconds", "2 minutes"], "answer": 0, "explain": "Hum \"Happy Birthday\" twice." },
+          { "q": "What did the flour show you?", "choices": ["How far raw-chicken germs spread from your hands", "How to bake", "That flour is messy"], "answer": 0, "explain": "Everything you touch picks it up." },
+          { "q": "Which board does raw chicken go on?", "choices": ["The one marked raw", "Any board", "The bread board"], "answer": 0, "explain": "Only raw meat goes on it." }
+        ]
+      },
+      "knowledge": {
+        "title": "Raw meat on the bottom shelf; 165°F for chicken",
+        "minutes": 20,
+        "body": [
+          "Raw chicken and meat go on the bottom shelf of the fridge, in a bowl or on a plate. If juice leaks out, it can't drip onto food that won't be cooked, like fruit or leftovers.",
+          "Chicken is safe at 165°F, a little higher than ground beef. Check the thickest piece, and check more than one, because some pieces are always bigger. Never rinse raw chicken: it splashes germs around the sink and doesn't clean it.",
+          "Cooked chicken goes on a clean plate, never the one that held it raw."
+        ],
+        "steps": [
+          "Look in your fridge. Is there a bottom-shelf spot for raw meat? Clear one with an adult.",
+          "Add \"Chicken: 165°F\" to your temperature card from week 7."
+        ],
+        "quiz": [
+          { "q": "Where does raw chicken go in the fridge?", "choices": ["On the bottom shelf, on a plate", "On the top shelf", "In the door"], "answer": 0, "explain": "So it can't drip on other food." },
+          { "q": "What temperature does chicken need?", "choices": ["165°F", "160°F", "145°F"], "answer": 0, "explain": "Chicken is 165°F." },
+          { "q": "Where does cooked chicken go?", "choices": ["A clean plate", "The plate it sat on raw", "The raw board"], "answer": 0, "explain": "Raw-chicken germs stay on that plate." }
+        ]
+      },
+      "sabbath": {
+        "title": "Clean and unclean birds (Leviticus 11:13–19)",
+        "minutes": 20,
+        "body": [
+          "For birds, Leviticus doesn't give a test. It gives a list of birds not to eat (Leviticus 11:13–19). Most of them hunt other animals or eat dead ones: the eagle, the vultures, the hawk, the owls, the raven, the heron, and more. The bat is on the list too.",
+          "Every bird not on the list is clean (Deuteronomy 14:11). That includes chicken, turkey, duck, goose, and quail. When Israel was hungry in the wilderness, God sent quail for them to eat (Exodus 16:13)."
+        ],
+        "steps": [
+          "Read Leviticus 11:13–19 with an adult.",
+          "Pick three birds from the list. Find a picture of each and write what it eats.",
+          "Read Exodus 16:11–13. What did God send in the evening?",
+          "Make a list of the birds your family eats. Check each one against Leviticus 11:13–19."
+        ],
+        "quiz": [
+          { "q": "How does Leviticus tell which birds aren't clean?", "choices": ["It lists them by name", "It gives a test", "It doesn't say"], "answer": 0, "explain": "Leviticus 11:13–19." },
+          { "q": "Which of these is clean?", "choices": ["Chicken", "Eagle", "Owl"], "answer": 0, "explain": "Chicken isn't on the list." },
+          { "q": "What bird did God send Israel in the wilderness?", "choices": ["Quail", "Raven", "Eagle"], "answer": 0, "explain": "Exodus 16:13." }
+        ]
+      }
+    },
     { "week": 11, "unit": 4, "skill": "muffin-method", "familiar": "blueberry-muffins", "explore": "pao-de-queijo", "drill": { "title": "Spoon and level flour; wet into dry, don't overmix", "minutes": 20 }, "knowledge": { "title": "Baking soda vs. baking powder", "minutes": 20 }, "sabbath": { "title": "Bake muffins ahead and freeze them", "minutes": 20 } },
     { "week": 12, "unit": 4, "skill": "cutting-in-fat", "familiar": "buttermilk-biscuits", "explore": "welsh-cakes", "drill": { "title": "Cut cold butter into flour", "minutes": 20 }, "knowledge": { "title": "Why cold fat makes flaky layers", "minutes": 20 }, "sabbath": { "title": "Manna in the wilderness (Exodus 16)", "minutes": 20 } },
     { "week": 13, "unit": 4, "skill": "yeast-dough", "familiar": "homemade-pizza", "explore": "skillet-naan", "note": "Pizza with an adult", "drill": { "title": "Bloom yeast; knead for 5 minutes", "minutes": 20 }, "knowledge": { "title": "What yeast does in a dough", "minutes": 20 }, "sabbath": { "title": "Make dough ahead and chill it", "minutes": 20 } },
@@ -639,29 +921,7 @@
       }
     },
     { "id": "chana-chaat", "title": "Chana chaat", "cuisine": "indian", "skills": ["dressings"], "skill": "A tangy dressing tasted and fixed", "art": "salad", "image": "dishes/chana-chaat.png", "safety": "adult-nearby", "minutes": 30, "about": "An Indian chickpea salad with green onion, tomato, cucumber, cilantro, lime, and chaat masala.", "main": ["canned chickpeas", "tomato", "cucumber", "green onion", "lime"], "method": "no-cook", "tags": { "protein": "beans-lentils", "flavors": ["tangy", "warm-spices"], "heat": "some", "budget": "$", "familiar": "new-ish", "veggies": "lots" } },
-    {
-      "id": "kofte",
-      "title": "Köfte with tomato-cucumber salad",
-      "cuisine": "turkish",
-      "skills": ["temping-meat"],
-      "skill": "Checking patties for 160°F",
-      "art": "meat",
-      "image": "dishes/kofte.png",
-      "safety": "adult-nearby",
-      "minutes": 40,
-      "estimated": true,
-      "about": "Turkish beef patties with onion, parsley, and cumin, cooked to 160°F, with a tomato-cucumber salad.",
-      "main": ["ground beef", "onion", "parsley", "cumin", "tomato and cucumber"],
-      "method": "stove",
-      "tags": {
-        "protein": "beef",
-        "flavors": ["warm-spices", "herby-lemony"],
-        "heat": "mild",
-        "budget": "$$",
-        "familiar": "new-ish",
-        "veggies": "some"
-      }
-    },
+    { "id": "kofte", "title": "Köfte with tomato-cucumber salad", "cuisine": "turkish", "skills": ["temping-meat"], "skill": "Checking patties for 160°F", "art": "meat", "image": "dishes/kofte.png", "safety": "adult-nearby", "minutes": 40, "about": "Turkish beef patties with onion, parsley, and cumin, cooked to 160°F, with a tomato-cucumber salad.", "main": ["ground beef", "onion", "parsley", "cumin", "tomato and cucumber"], "method": "stove", "tags": { "protein": "beef", "flavors": ["warm-spices", "herby-lemony"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "some" } },
     {
       "id": "beef-tacos-seasoning",
       "title": "Beef tacos with homemade seasoning",
@@ -672,7 +932,6 @@
       "image": "dishes/beef-tacos-seasoning.png",
       "safety": "adult-nearby",
       "minutes": 35,
-      "estimated": true,
       "about": "Ground beef browned with a seasoning mix made at home, in label-checked shells with lettuce, tomato, and cheese.",
       "main": ["ground beef", "taco shells", "chili powder and cumin", "lettuce", "cheddar"],
       "method": "stove",
@@ -695,7 +954,6 @@
       "image": "dishes/keema.png",
       "safety": "adult-nearby",
       "minutes": 40,
-      "estimated": true,
       "about": "Indian ground beef cooked with onion, tomato, ginger, garlic, and frozen peas, served with flatbread or rice.",
       "main": ["ground beef", "frozen peas", "frozen diced onion", "jarred ginger and garlic", "garam masala"],
       "method": "stove",
@@ -708,8 +966,8 @@
         "veggies": "some"
       }
     },
-    { "id": "fish-sticks", "title": "Oven-baked fish sticks", "cuisine": "american", "skills": ["cooking-fish"], "skill": "Thawing fish safely and baking to 145°F", "art": "fish", "image": "dishes/fish-sticks.png", "safety": "adult-nearby", "minutes": 35, "estimated": true, "about": "Cod strips crumbed and baked crisp, with tartar sauce and lemon.", "main": ["cod", "breadcrumbs", "egg", "lemon", "tartar sauce"], "method": "oven", "tags": { "protein": "white-fish", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } },
-    { "id": "shioyaki", "title": "Shioyaki salted salmon", "cuisine": "japanese", "skills": ["cooking-fish"], "skill": "Baking fish to 145°F", "art": "fish", "image": "dishes/shioyaki.png", "safety": "adult-nearby", "minutes": 30, "estimated": true, "about": "Japanese salted salmon, baked until the skin crisps, with rice.", "main": ["salmon fillet", "salt", "rice", "lemon"], "method": "oven", "tags": { "protein": "salmon", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "light" } },
+    { "id": "fish-sticks", "title": "Oven-baked fish sticks", "cuisine": "american", "skills": ["cooking-fish"], "skill": "Thawing fish safely and baking to 145°F", "art": "fish", "image": "dishes/fish-sticks.png", "safety": "adult-nearby", "minutes": 40, "about": "Cod strips crumbed and baked crisp, with tartar sauce and lemon.", "main": ["cod", "breadcrumbs", "egg", "lemon", "tartar sauce"], "method": "oven", "tags": { "protein": "white-fish", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "shioyaki", "title": "Shioyaki salted salmon", "cuisine": "japanese", "skills": ["cooking-fish"], "skill": "Baking fish to 145°F", "art": "fish", "image": "dishes/shioyaki.png", "safety": "adult-nearby", "minutes": 45, "about": "Japanese salted salmon, baked until it flakes, with rice and lemon.", "main": ["salmon fillet", "salt", "rice", "lemon"], "method": "oven", "tags": { "protein": "salmon", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "light" } },
     {
       "id": "teriyaki-chicken-bites",
       "title": "Baked teriyaki chicken bites",
@@ -719,8 +977,7 @@
       "art": "poultry",
       "image": "dishes/teriyaki-chicken-bites.png",
       "safety": "adult-nearby",
-      "minutes": 35,
-      "estimated": true,
+      "minutes": 40,
       "about": "Ready-cut chicken baked to 165°F and tossed in a teriyaki glaze, over rice.",
       "main": ["ready-cut chicken", "soy sauce", "honey", "jarred ginger and garlic", "rice"],
       "method": "oven",

@@ -281,7 +281,7 @@ function partPanel(w, k, quest) {
   const quiz = (x.quiz ?? []).map((q, n) => `<div class="k-pagebody"><b>${esc(q.q)}</b><div class="k-parts">${q.choices.map((c, i) => `<button type="button" class="k-part" data-quiz="${n}-${i}"><b>${esc(c)}</b></button>`).join('')}</div><p data-why="${n}" hidden></p></div>`).join('');
   return `<h3 class="${quest ? 'q-title' : 'p-title'}">${esc(x.title)}</h3>
     <p>About ${x.minutes} minutes</p>
-    <div class="k-pagebody">${(x.body ?? []).map((t) => `<p>${markTerms(t, R.terms, esc)}</p>`).join('')}${x.steps?.length ? `<ol>${x.steps.map((t) => `<li>${markTerms(t, R.terms, esc)}</li>`).join('')}</ol>` : ''}${quiz}</div>
+    <div class="k-pagebody">${(x.body ?? []).map((t) => `<p>${markTerms(t, R.terms, esc)}</p>`).join('')}${x.steps?.length ? `<ol>${x.steps.map((t) => `<li>${markTerms(t, R.terms, esc)}</li>`).join('')}</ol>` : ''}${x.watch?.length ? `<div class="k-watch"><b>Watch for</b><ul>${x.watch.map((i) => `<li><b>${esc(i.name)}</b>: ${esc(i.hides)}</li>`).join('')}</ul></div>` : ''}${quiz}</div>
     ${on ? `<p class="${quest ? 'q-swap' : 'p-swap'}">Done ✓</p>` : `<div class="acts"><button type="button" class="${quest ? 'q-btn' : 'p-btn'}" data-done="${k}">Done</button></div>`}`;
 }
 

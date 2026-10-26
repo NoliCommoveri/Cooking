@@ -6108,3 +6108,206 @@ scripts.
 - Screenshots (the page, typing, results, and the Add dialog, phone width,
   light and dark) sent in the session.
 - Tests: 400.
+
+## 237. 2026-10-26 — 14g content: Level 3 Unit 3
+
+Owner, 2026-10-26: "We're gonna do unit 3, ordered levels 3, 2, 4. Put each
+level unit in a review doc for me before starting the next one." Reviewed in
+[14g review: Level 3 Cook, Unit 3](https://claude.ai/artifact/DQPqdYECracPFipDVSgm1C);
+not merged until the owner approves it there.
+
+- **Before:** Unit 3, Clean meat, poultry, and fish (weeks 7–10), had thick
+  beef burgers and baked fish from phase 12. Week 7's lamb kofta and week 10's
+  shish taouk were planned Cook Around the World cards with no lesson; week
+  8's chermoula fish and week 10's chicken tenders were unwritten Level cards;
+  week 9 cooked Cook Around the World's fajitas and oyakodon, which had no
+  Level 3 versions. Four of its 12 part pages were blank.
+- **Now:**
+  - **Two Level-only recipes** in `content/levels/recipes/`, unit 103:
+    Chermoula baked fish (week 8: pin bones by feel, the thin end tucked under,
+    145°F) and Oven-baked chicken tenders (week 10, the mastery week: the
+    raw-meat station set up alone, breast trimmed into even strips, one dry
+    hand and one wet, 165°F). Their cards' minutes are now the recipes' own
+    (45 and 50).
+  - **Two new Cook Around the World lessons,** each already planned (§12.4):
+    Lamb kofta with yogurt sauce (Unit 6, the binders group; 45 minutes) and
+    Shish taouk (Unit 3, the broiling group, with a callback to butter
+    chicken's marinade; 75 minutes, 30 of them marinating).
+  - **Level 3 versions** of all four of week 7, 9, and 10's lessons: kofta
+    with a test patty and the three thickest checked; fajitas with the thighs
+    sliced raw on the raw-meat board after the vegetables and seared in two
+    checked batches; oyakodon with trimmed 1-inch cubes; shish taouk as the
+    mastery cook, with fresh garlic and three skewers checked.
+  - **Four part pages:** week 9's drill (trim and cube thighs, clean down) and
+    Beyond the Recipe (the birds of Leviticus 11:13–19, and "be holy, for I
+    am holy"); week 10's Knowledge (dark and white, tender and tough, fillet
+    types, carryover, and a 12-question unit quiz) and Beyond the Recipe (blood
+    and fat, Leviticus 3:17; 7:23–27; 17:10–14).
+  - **New ingredients:** ground lamb, panko breadcrumbs. **New tool:** skewers.
+- A meat-free family's week 7 now has both dishes written and both ruled out,
+  so the Level course test skips it with week 9's, and uses week 21 for a week
+  that waits quietly.
+- No screens changed, so no screenshots.
+- Tests: 392.
+
+## 238. 2026-10-26 — 14g content: Level 2 Unit 3
+
+Owner, 2026-10-26: Level 2 is the second of Unit 3's three Levels (237).
+Reviewed in [14g review: Level 2 Apprentice, Unit
+3](https://claude.ai/artifact/HHaY6sUdVwUTu1GtCDThNJ); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 2 Unit 3's dishes was written except Cook Around
+  the World's smash burgers (quick pickles and onion sliced paper-thin with a
+  chef's knife) and chicken souvlaki pitas (raw breast cut with a chef's
+  knife, cucumber grated). All 12 part pages were blank.
+- **Now:**
+  - **Six Level-only recipes** in `content/levels/recipes/`, unit 102: Köfte
+    with tomato-cucumber salad (week 7, the thermometer), Beef tacos with
+    homemade seasoning and Keema with peas (week 8, reading labels), Oven-baked
+    fish sticks and Shioyaki salted salmon (week 9, thawing fish and 145°F),
+    and Baked teriyaki chicken bites (week 10, the mastery week: raw ready-cut
+    chicken handled alone). None fits a pick-one group with room or is a
+    variation of a planned dish (§12.4). Their cards' minutes are now the
+    recipes' own; shioyaki's card no longer says the skin crisps.
+  - **Level 2 versions** of smash burgers (jarred pickles, no onion, a check
+    on each batch; 35 minutes) and chicken souvlaki pitas (ready-cut chicken,
+    jarred garlic, a peeled and seeded cucumber, torn dill, no onion).
+  - **All 12 part pages:** reading a thermometer, why ground meat needs
+    160°F, freezing patties ahead; reading 10 labels, where hidden ingredients
+    hide, land animals (Leviticus 11:1–8); thawing fish, fins and scales and
+    fish labels, Leviticus 11:9–12; a raw-chicken spot and hand-washing, the
+    bottom shelf and 165°F, birds (Leviticus 11:13–19).
+  - **New ingredients:** ready-cut chicken breast (plain), frozen diced onion,
+    jarred minced ginger, hard taco shells (watch: the frying fat).
+- The content check finds no Level 2 writing warnings.
+- No screens changed, so no screenshots.
+- Tests: 392.
+
+## 239. 2026-10-26 — 14g content: Level 4 Unit 3
+
+Owner, 2026-10-26: Level 4 is the last of Unit 3's three Levels (237).
+Reviewed in [14g review: Level 4 Chef, Unit
+3](https://claude.ai/artifact/87ZoVDP7Kn4ugsVeX8CiDf); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 4 Unit 3's eight dishes was written; chicken
+  tagine (week 7's Explore) was a planned Cook Around the World card. All 12
+  part pages were blank.
+- **Now:**
+  - **Seven Level-only recipes** in `content/levels/recipes/`, unit 104:
+    Chicken cacciatore (week 7, a whole chicken broken into 8 and the yield
+    weighed), Sliced flank steak and Seared duck breast with cherry sauce
+    (week 8: silverskin, scoring, rendering, slicing across the grain),
+    Teriyaki salmon side and Pescado a la veracruzana (week 9: a side skinned
+    and portioned by weight, a whole snapper baked on the bone), and Chicken
+    two ways and Spatchcocked quail with pomegranate (week 10, the mastery
+    week: one bird used whole with its cost per serving, and eight quail
+    spatchcocked). Their cards' minutes are now the recipes' own.
+  - **Chicken tagine with olives,** a new Cook Around the World lesson (Unit
+    3, the braising group's first dish, with a callback to chana masala;
+    80 minutes), and its Level 4 version from a whole bird, the breasts out
+    at 165°F and the dark meat braised on.
+  - **All 12 part pages:** yield and cost, breaking down a chicken, freezing
+    backs for stock; primal cuts, silverskin and scoring, clean birds
+    (Leviticus 11:13–19); buying fish and labels, skinning a side of salmon,
+    Luke 5:1–11; cost per serving, spatchcocking, manna and quail (Exodus 16;
+    Numbers 11).
+  - **New ingredients:** whole chicken, duck breasts, whole quail (watch:
+    thaw in the fridge), side of salmon, whole red snapper (watch: scaled and
+    gutted, check the name), frozen dark cherries, balsamic vinegar, pickled
+    jalapeños, pomegranate molasses. **New tool:** kitchen shears. **New
+    kitchen words:** score, render.
+  - Duck and quail are cooked to 165°F and flank steak to 145°F, the app's
+    standards; the review doc asks the owner about both.
+- The content check finds no Level 4 writing warnings.
+- No screens changed, so no screenshots.
+- Tests: 392.
+
+## 240. 2026-10-26 — Watch-for lists on part pages; the chicken oyster
+
+Owner, 2026-10-26, on how hidden ingredients were worded in Unit 3: "I thought
+label warnings were excluded", then "Do all three" (Claude's three
+proposals).
+
+- **Before:** the content check blocks unclean foods' names everywhere a
+  learner reads, part pages included, so Level 2's week 8 pages said "a fat
+  from an unclean animal" and "a red coloring made from crushed bugs", and
+  Level 4's week 7 drill called the chicken's oyster "the round pocket of meat
+  on the back". The plan's reviewed "watch for" list (§12.2) wasn't built.
+- **Now:**
+  - **Watch for** (§12.2): a part page can carry `watch`, a list of
+    `{ name, hides }`, shown as a box after its steps in the kitchen and the
+    demo. Only an item's name may name a blocked food; the rest of the page
+    is checked as before. The manager's Level pages edit it, with a hint.
+  - **Level 2:** week 8's Knowledge page names six (lard, gelatin, pork
+    casings, oyster sauce, shrimp paste, carmine), week 8's Drill three, and
+    week 9's Knowledge the unclean water animals by name.
+  - **"chicken oyster"** is an allowed phrase, and Level 4's week 7 drill
+    uses it.
+- **Not done:** cutting the beef tacos back to rely on the taco shells' label
+  note. Ingredient label notes (`watch` in `ingredients.json`) are read only
+  by the content check; no screen shows them to a family, so the recipe keeps
+  its own label step until the owner decides.
+- Screenshots (a part page's Watch for box, phone width, both themes) sent in
+  the session.
+- Tests: 393.
+
+## 241. 2026-10-26 — US units in Level recipes; label notes shown; capitalized pronouns for God
+
+Owner, 2026-10-26: "Sure you can show the warnings." "Go through the parts
+pages and make sure everywhere you use 'He' to refer to God, it is
+capitalized." "Dude you can't show ingredients in grams these are all us
+users."
+
+- **Before:** an ingredient's label note (`watch` in `ingredients.json`, e.g.
+  "Check the label for lard") was read only by the content check; no screen
+  showed it. Level 4's recipes (Units 1 to 3) gave meat and fish in grams and
+  cuts in centimeters and millimeters, and Level 3 and 4 pages priced and
+  weighed in grams and kilograms. Some part pages used "he", "his", and "him"
+  for God and Jesus.
+- **Now:**
+  - **Label notes** show under the ingredient in the player's prep list (both
+    themes) and on the shopping list in the store. The beef tacos (Level 2,
+    week 8) now point to them instead of naming the fat themselves.
+  - **US units everywhere a family reads:** 29 ingredient lines from grams to
+    pounds and ounces; every metric cut, depth, and volume in steps, tips, Why
+    cards, quizzes, and part pages to inches, quarts, pounds, and ounces, with
+    the yield and cost math redone in pounds (sample prices per pound). The
+    kitchen scale is "Kitchen scale", not "(grams)". Level 4's week 2 skill is
+    "Weighing and finding the yield".
+  - **Pronouns for God and Jesus** are capitalized on the part pages (He,
+    His, Him, Himself), outside quoted Scripture, which keeps the ESV's
+    wording. Pronouns for people (Boaz, Daniel, Abraham, Paul, Peter) stay
+    lowercase.
+- Screenshots (the prep list in both themes, the shopping list light and
+  dark, phone width) sent in the session.
+- Tests: 401.
+
+## 242. 2026-10-26 — Drills use what the week already buys
+
+Owner, 2026-10-26: "Some of your drills are extremely expensive to do. If
+something may not be achievable to a family (like buying a whole side of
+flounder) direct them to find a YouTube video instead, or come up with an
+alternative."
+
+- **Before:** some drills asked for food the week's chosen dish doesn't
+  buy: Level 4's week 8 drill needed both a flank steak and duck breasts,
+  week 9 a whole side of salmon even for families cooking the veracruzana,
+  and week 10 an extra whole chicken to spatchcock. Level 3's week 8 drill
+  wanted two kinds of fillet and week 23 an extra skin-on fillet; Level 2's
+  week 9 wanted two extra frozen fillets.
+- **Now:** each of those drills uses the week's own ingredients, and where
+  that can't cover it, sends the learner to a short video (with what to
+  search for) and a cheap stand-in:
+  - Level 2 week 9: thaw this week's frozen fish in two halves, one each way.
+  - Level 3 week 8: pin-bone this week's fillets; a video shows the other
+    kind of fish. Week 23: practice the skin-side sear on the first fillet of
+    the week's recipe.
+  - Level 4 week 8: the trim for the dish being cooked, then a video and the
+    same knife motion on an eggplant, zucchini, or cucumber for the other.
+    Week 9: a family cooking the veracruzana watches a side being portioned
+    and practices on one skin-on fillet. Week 10: spatchcock the quail, or
+    the chicken for chicken two ways before breaking it down.
+- No screens changed, so no screenshots.
+- Tests: 401.
