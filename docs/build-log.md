@@ -5844,3 +5844,38 @@ owner approves it there.
 - The content check finds no Level 2 writing warnings.
 - No screens changed, so no screenshots.
 - Tests: 392.
+
+## 228. 2026-10-26 — 14g content: Level 4 Unit 1
+
+Owner, 2026-10-26: "Start Level 4 Unit 1 while I review." Reviewed in [14g
+review: Level 4 Chef, Unit 1](https://claude.ai/artifact/6jLt9HvV7Ng1QSzg8zKVNY);
+not merged until the owner approves it there.
+
+- **Before:** Unit 1's Familiar dishes in week 1 were Cook Around the World
+  lessons with no Level 4 version; chana masala (week 3) was a Cook Around
+  the World card with no lesson; the other five dishes and all 12 part pages
+  were unwritten.
+- **Now:**
+  - **Five Level-only recipes** in `content/levels/recipes/`, unit 104:
+    Steak fajitas and Bò lúc lắc (week 2, weighing and yield), Chicken
+    enchiladas (week 3, scaling 4 to 12 by hand), Salade niçoise with seared
+    tuna and Bibimbap (week 4, the timed mastery week). All "solo", with
+    weights in grams where the unit weighs. Their cards' minutes are now the
+    recipes' own.
+  - **Level 4 versions** of Chicken fried rice (every vegetable in brunoise)
+    and Ratatouille (exact ½-inch dice).
+  - **Chana masala**, a new Cook Around the World lesson (lesson 3, the
+    blooming-spices group), and its Level 4 version, scaled 6 to 12 by hand.
+    Its card's minutes are now the lesson's 55.
+  - **All 12 part pages** at Level 4's lengths: cuts by size and the French
+    aromatic base, a timed brunoise, cutting ahead; weight over volume and
+    yield, weighing and portioning ahead; scaling factors and what doesn't
+    scale, scaling a Sabbath recipe; planning backward from serving, a run
+    prep timeline, a Sabbath prep timeline.
+  - **New ingredients:** tuna steaks, baby potatoes, Kalamata or Niçoise
+    olives, watercress, gochujang (watch: no shrimp or squid), dried guajillo
+    chiles, canned chickpeas.
+  - Tuna is cooked to 145°F and eggs to 160°F, the app's standards; the
+    review doc asks the owner about both.
+- No screens changed, so no screenshots.
+- Tests: 392.

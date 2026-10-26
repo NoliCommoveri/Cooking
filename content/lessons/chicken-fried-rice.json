@@ -139,6 +139,92 @@
           }
         }
       }
+    },
+    {
+      "id": "sp-4",
+      "title": "Chicken fried rice",
+      "level": "sp-4",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["ginger-soy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "totalMinutes": 45,
+      "ingredients": {
+        "drop": ["peas-carrots-frozen@Vegetables"],
+        "add": [
+          { "ingredient": "carrot", "amount": 1, "unit": "count", "round": "up", "prep": "brunoise", "group": "Vegetables" },
+          { "ingredient": "onion-yellow", "amount": 0.5, "unit": "count", "round": "up", "prep": "brunoise", "group": "Vegetables" },
+          { "ingredient": "bell-pepper-red", "amount": 0.5, "unit": "count", "round": "up", "prep": "brunoise", "group": "Vegetables" }
+        ],
+        "order": [
+          "rice-white@Rice",
+          "chicken-breast@Chicken and egg",
+          "salt@Chicken and egg",
+          "black-pepper@Chicken and egg",
+          "egg@Chicken and egg",
+          "green-onion@Vegetables",
+          "garlic@Vegetables",
+          "+0",
+          "+1",
+          "+2",
+          "vegetable-oil@For the pan",
+          "soy-sauce@Sauce",
+          "sesame-oil@Sauce"
+        ]
+      },
+      "steps": {
+        "change": {
+          "vegetables": {
+            "id": "vegetables",
+            "text": "Brunoise the carrot, onion, and pepper: ⅛-inch planks, ⅛-inch julienne, then ⅛-inch cubes. Mince the garlic. Slice the green onions, whites and greens apart.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "ready",
+            "look": "Cubes the size of a grain of rice, all alike."
+          },
+          "dice-chicken": {
+            "id": "dice-chicken",
+            "text": "Cut the chicken into ½-inch dice. Season with {qty:salt} salt and the pepper.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife, raw poultry",
+            "handles": ["chicken-breast"],
+            "why": "small-pieces"
+          },
+          "chicken-in": {
+            "id": "chicken-in",
+            "text": "Add another third of the oil and turn the heat to high. Add the chicken in one layer.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil, raw poultry",
+            "handles": ["chicken-breast"]
+          },
+          "veg-in": {
+            "id": "veg-in",
+            "text": "Add the brunoise and the onion whites and garlic. Stir-fry until the carrot is just tender.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 120,
+            "timerLabel": "Vegetables"
+          },
+          "finish": {
+            "id": "finish",
+            "text": "Pour the soy sauce around the hot edge of the pan, then add the sesame oil, eggs, and green onion tops. Toss for a minute.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 60,
+            "timerLabel": "Finish"
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Taste and adjust with soy sauce. Serve hot.",
+            "safety": "adult-nearby",
+            "hazard": "Hot food"
+          }
+        }
+      }
     }
   ]
 }
