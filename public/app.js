@@ -759,6 +759,8 @@ async function levelPage(profileId, key) {
       el('div', { class: 'k-pagebody' },
         (x.body ?? []).map((t) => worded('p', t)),
         x.steps?.length ? el('ol', {}, x.steps.map((t) => worded('li', t))) : null,
+        // The page's reviewed "watch for" list (§12.2): the foods it names.
+        x.watch?.length ? el('div', { class: 'k-watch' }, el('b', {}, 'Watch for'), el('ul', {}, x.watch.map((i) => el('li', {}, el('b', {}, i.name), ': ', i.hides)))) : null,
         quiz,
         written ? null : el('p', {}, boxes.length ? 'This page is still being written. Do what the title says, write it below, then tap Done.' : 'This page is still being written. Do what the title says, with an adult if you need one, then tap Done.')),
       writing,

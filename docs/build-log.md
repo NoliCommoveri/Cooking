@@ -6148,3 +6148,32 @@ owner approves it there.
 - The content check finds no Level 4 writing warnings.
 - No screens changed, so no screenshots.
 - Tests: 392.
+
+## 238. 2026-10-26 — Watch-for lists on part pages; the chicken oyster
+
+Owner, 2026-10-26, on how hidden ingredients were worded in Unit 3: "I thought
+label warnings were excluded", then "Do all three" (Claude's three
+proposals).
+
+- **Before:** the content check blocks unclean foods' names everywhere a
+  learner reads, part pages included, so Level 2's week 8 pages said "a fat
+  from an unclean animal" and "a red coloring made from crushed bugs", and
+  Level 4's week 7 drill called the chicken's oyster "the round pocket of meat
+  on the back". The plan's reviewed "watch for" list (§12.2) wasn't built.
+- **Now:**
+  - **Watch for** (§12.2): a part page can carry `watch`, a list of
+    `{ name, hides }`, shown as a box after its steps in the kitchen and the
+    demo. Only an item's name may name a blocked food; the rest of the page
+    is checked as before. The manager's Level pages edit it, with a hint.
+  - **Level 2:** week 8's Knowledge page names six (lard, gelatin, pork
+    casings, oyster sauce, shrimp paste, carmine), week 8's Drill three, and
+    week 9's Knowledge the unclean water animals by name.
+  - **"chicken oyster"** is an allowed phrase, and Level 4's week 7 drill
+    uses it.
+- **Not done:** cutting the beef tacos back to rely on the taco shells' label
+  note. Ingredient label notes (`watch` in `ingredients.json`) are read only
+  by the content check; no screen shows them to a family, so the recipe keeps
+  its own label step until the owner decides.
+- Screenshots (a part page's Watch for box, phone width, both themes) sent in
+  the session.
+- Tests: 393.

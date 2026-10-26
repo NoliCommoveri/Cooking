@@ -445,7 +445,7 @@
         ],
         "steps": [
           "Set up: the raw-meat board on a damp towel, a sharp chef's knife, a sheet pan for the pieces, a bag for the back, and hot, soapy water ready. Don't rinse the bird.",
-          "Legs: lay the chicken breast up. Pull a leg away from the body, slice through the skin between leg and breast, then bend the leg back until the hip joint pops out. Cut through the joint, scooping the round pocket of meat on the back out with the thigh. Repeat.",
+          "Legs: lay the chicken breast up. Pull a leg away from the body, slice through the skin between leg and breast, then bend the leg back until the hip joint pops out. Cut through the joint, scooping the chicken oyster (the round pocket of meat on the back) out with the thigh. Repeat.",
           "Split each leg: skin side down, find the line of fat over the knee joint, and cut straight down through it into drumstick and thigh.",
           "Wings: pull each wing out, find the shoulder joint by wiggling it, and cut through.",
           "Back: stand the bird on its neck end and cut down through the ribs on both sides, separating the breast from the back.",
@@ -456,7 +456,7 @@
         ],
         "quiz": [
           { "q": "How do you find where to cut a leg off?", "choices": ["Bend it back until the hip joint pops, then cut through the joint", "Cut straight through the thigh", "Twist it off"], "answer": 0, "explain": "Joints, not bone." },
-          { "q": "What comes off with the thigh when you take the leg?", "choices": ["The round pocket of meat on the back beside it", "The wing", "The backbone"], "answer": 0, "explain": "It's the best bite on the bird." },
+          { "q": "What is the chicken oyster?", "choices": ["A round pocket of meat on the back, kept with the thigh", "The wing tip", "The backbone"], "answer": 0, "explain": "It's the best bite on the bird." },
           { "q": "What marks the knee joint from the outside?", "choices": ["A line of fat across the leg", "The skin color", "A bone sticking out"], "answer": 0, "explain": "Cut straight down through the fat line." }
         ]
       },

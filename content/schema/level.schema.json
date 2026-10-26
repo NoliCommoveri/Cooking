@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "A Level (plan \u00a712): its units, weeks, the four parts of each week, and its own recipes",
+  "title": "A Level (plan §12): its units, weeks, the four parts of each week, and its own recipes",
   "$defs": {
     "id": {
       "type": "string",
@@ -35,6 +35,27 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/text"
+          }
+        },
+        "watch": {
+          "type": "array",
+          "minItems": 1,
+          "description": "A reviewed \"watch for\" list (§12.2): unclean foods the page teaches by name. Only each item's name may name a blocked food.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "name",
+              "hides"
+            ],
+            "properties": {
+              "name": {
+                "$ref": "#/$defs/text"
+              },
+              "hides": {
+                "$ref": "#/$defs/text"
+              }
+            }
           }
         },
         "write": {

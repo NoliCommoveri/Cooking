@@ -505,12 +505,12 @@
         "title": "Read 10 labels and find the hidden unclean ingredients",
         "minutes": 20,
         "body": [
-          "Some foods hide ingredients that aren't clean: a fat from an unclean animal in shells and tortillas, gelatin in yogurt and candy, or a red coloring made from crushed bugs. Today you'll read real labels and find them. Your family's kitchen and a grocery store both work."
+          "Some foods hide ingredients that aren't clean. Today you'll read real labels and find them, using the watch-for list below and the longer one on this week's Knowledge page. Your family's kitchen and a grocery store both work."
         ],
         "steps": [
           "Pick 10 packaged foods: try yogurt, sour cream, tortillas, taco shells, refried beans, gummy candy, marshmallows, a seasoning packet, a sauce, and one of your choice.",
           "Turn each one over and find the ingredient list.",
-          "Read the whole list, slowly. Look for gelatin, animal fats that don't say which animal, and red colorings made from bugs.",
+          "Read the whole list, slowly. Look for the names on the watch-for list, and for animal fats that don't say which animal.",
           "Sort them into three piles: clean, not clean, and not sure.",
           "For each one in \"not sure\", write down the word that made you stop. Ask an adult to look it up with you.",
           "Tell an adult which foods you'd pick and which you'd put back."
@@ -519,25 +519,38 @@
           { "q": "Where do you find what's really in a food?", "choices": ["The ingredient list", "The picture on the front", "The price"], "answer": 0, "explain": "The list names everything inside." },
           { "q": "Which of these can hide gelatin?", "choices": ["Yogurt and gummy candy", "Apples", "Plain rice"], "answer": 0, "explain": "Check the list." },
           { "q": "A label says only \"animal fat.\" Is it clean?", "choices": ["You can't tell, so pass on it", "Yes", "Only if it's cheap"], "answer": 0, "explain": "It doesn't say which animal." }
+        ],
+        "watch": [
+          { "name": "Lard", "hides": "In some tortillas, taco shells, and refried beans." },
+          { "name": "Gelatin", "hides": "In some yogurt, sour cream, gummy candy, and marshmallows." },
+          { "name": "Carmine or cochineal", "hides": "A red coloring in some yogurts, candies, and drinks." }
         ]
       },
       "knowledge": {
         "title": "Hidden unclean ingredients and where they hide",
         "minutes": 20,
         "body": [
-          "Unclean foods don't always look like what they are. They can be one word on a long ingredient list.",
-          "Watch for these: gelatin (in yogurt, sour cream, gummy candy, marshmallows), which is usually made from an unclean animal unless it says beef or fish; fats from unclean animals, used in some tortillas, taco shells, refried beans, and pie crusts; sauces made from sea animals without fins and scales, used in some stir-fry sauces and curry pastes; and a red coloring made from crushed bugs, in some yogurts, candies, and drinks.",
-          "Meat can hide too. Packages called \"ground meat\" or \"meatloaf mix\" can mix more than one animal, and some chicken and turkey sausages come in casings from an unclean animal. The label should name every animal.",
+          "Unclean foods don't always look like what they are. They can be one word on a long ingredient list, and some have names you wouldn't guess.",
+          "The list below names the ones to watch for and where they hide. Learn the names: they're what you'll see on the label.",
+          "Meat can hide too. Packages called \"ground meat\" or \"meatloaf mix\" can mix more than one animal. The label should name every animal.",
           "The rule is simple: if the label doesn't tell you, or you can't tell what a word means, pass on it."
         ],
         "steps": [
-          "Make a list of the four places hidden ingredients go: gelatin, fats, sauces, and red coloring. Keep it on your phone or in your pocket for shopping.",
+          "Make a list of the six names on this page. Keep it on your phone or in your pocket for shopping.",
           "Find one food at home with a hidden ingredient, and one that's clean."
         ],
         "quiz": [
-          { "q": "What is gelatin usually made from?", "choices": ["An unclean animal, unless the label says beef or fish", "Plants", "Fruit"], "answer": 0, "explain": "Read the label." },
+          { "q": "What is gelatin usually made from?", "choices": ["Pigs, unless the label says beef or fish", "Plants", "Fruit"], "answer": 0, "explain": "Read the label." },
           { "q": "What should a ground beef label say?", "choices": ["Beef, and nothing else", "Ground meat", "Meatloaf mix"], "answer": 0, "explain": "Mixed packages can hold other meats." },
           { "q": "You can't tell what a word on the label means. What do you do?", "choices": ["Pass on it, or look it up first", "Buy it", "Eat a little"], "answer": 0, "explain": "If you can't tell, don't." }
+        ],
+        "watch": [
+          { "name": "Lard", "hides": "Fat from pigs. Used in some tortillas, taco shells, refried beans, and pie crusts." },
+          { "name": "Gelatin", "hides": "Usually made from pigs, unless the label says beef or fish. In some yogurt, sour cream, gummy candy, and marshmallows." },
+          { "name": "Pork casings", "hides": "The skin around many chicken and turkey sausages. Look for collagen casings or skinless." },
+          { "name": "Oyster sauce", "hides": "Made from a sea animal with a shell. In many stir-fry sauces. Mushroom stir-fry sauce works instead." },
+          { "name": "Shrimp paste", "hides": "In many Thai curry pastes and some kimchi." },
+          { "name": "Carmine or cochineal", "hides": "A red coloring made from crushed bugs. In some yogurts, candies, and drinks." }
         ]
       },
       "sabbath": {
@@ -594,7 +607,7 @@
         "minutes": 20,
         "body": [
           "For animals in the water, the test is fins and scales: a water animal must have both to be clean (Leviticus 11:9). Salmon, cod, tilapia, tuna, trout, and many more are clean.",
-          "Some fish have smooth skin and no scales, like monkfish, and are unclean. So are all animals with shells, and the soft sea animals with arms. Swordfish is left out because people disagree about its scales.",
+          "Some water animals are unclean: fish with smooth skin and no scales, every animal with a shell, and the soft sea animals with arms. The list below names the common ones. Swordfish is left out because people disagree about its scales.",
           "Once fish is cut into a fillet, you can't see the scales, so the label matters. It must say what fish it is. If it only says \"whitefish\" or \"seafood,\" or names a fish you don't know, ask what it is or pass on it. Some cheap white fillets, sold as swai or basa, come from a fish with no scales."
         ],
         "steps": [
@@ -603,8 +616,13 @@
         ],
         "quiz": [
           { "q": "What must a water animal have to be clean?", "choices": ["Fins and scales", "Only fins", "A tail"], "answer": 0, "explain": "Leviticus 11:9." },
-          { "q": "Which of these is clean?", "choices": ["Salmon", "Monkfish", "Swai"], "answer": 0, "explain": "Salmon has fins and scales." },
+          { "q": "Which of these is clean?", "choices": ["Salmon", "Monkfish", "Swai"], "answer": 0, "explain": "Monkfish and swai have no scales." },
           { "q": "Why read the name on a fish fillet?", "choices": ["You can't see the scales on a fillet", "It tells you the price", "To know how to cook it"], "answer": 0, "explain": "The name tells you what fish it is." }
+        ],
+        "watch": [
+          { "name": "Catfish, monkfish, swai, and basa", "hides": "Fins but no scales. Swai and basa are sold as cheap white fillets." },
+          { "name": "Shrimp, crab, lobster, clams, oysters, mussels, and scallops", "hides": "Animals with shells. Also in some seafood mixes, and imitation seafood sticks can include them." },
+          { "name": "Squid, calamari, and octopus", "hides": "The soft sea animals with arms. In some seafood mixes and fried appetizers." }
         ]
       },
       "sabbath": {

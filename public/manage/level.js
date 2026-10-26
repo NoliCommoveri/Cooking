@@ -86,6 +86,7 @@ export function levelPage(id) {
           if (k === 'w.familiar') return 'A dish most families already know (tagged everyday).';
           if (k === 'w.explore') return 'A dish to explore, with the same skill at the same difficulty.';
           if (/^w\.(drill|knowledge|sabbath)\.body$/.test(k)) return 'The page a learner reads, one paragraph each.';
+          if (/^w\.(drill|knowledge|sabbath)\.watch$/.test(k)) return 'The unclean foods this page teaches by name, each with where it hides. Only the name may name a blocked food; the rest of the page can\'t.';
           return null;
         },
       }, holder, 'w', { ...schema.$defs.week, title: '' }, []));

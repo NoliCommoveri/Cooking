@@ -496,7 +496,11 @@ export function lint(c) {
     const cooks = (id) => (c.levels || []).some(({ data: X }) => Array.isArray(X?.weeks) && X.weeks.some(w => [w.familiar, w.explore, ...(w.swapIns || [])].includes(id)));
     for (const r of V.recipes) if (!cooks(r.id)) warn(`${where} recipe ${r.id}`, "isn't any week's recipe or swap-in");
     // The words a learner reads: unit names and goals, notes, and the part pages.
-    for (const [p, t] of strings({ name: V.name, sideUnit: V.sideUnit.name, units: V.units, weeks: V.weeks })) for (const w of blockedWordsIn(t, rules)) err(where, `${p} names a blocked food ("${w}")`);
+    // A part page's reviewed "watch for" list (§12.2) is the one place a
+    // blocked food may be named, in each item's name; where it hides is
+    // checked like the rest of the page.
+    const unnamed = V.weeks.map((w) => Object.fromEntries(Object.entries(w).map(([k, x]) => [k, x?.watch ? { ...x, watch: x.watch.map(({ hides }) => ({ hides })) } : x])));
+    for (const [p, t] of strings({ name: V.name, sideUnit: V.sideUnit.name, units: V.units, weeks: unnamed })) for (const w of blockedWordsIn(t, rules)) err(where, `${p} names a blocked food ("${w}")`);
     // The planned hours (§6.15) add up to about the Level's hours.
     const hours = minutes / 60, off = Math.abs(hours - V.hours) / V.hours;
     if (off > 0.1) err(where, `the weeks add up to ${hours.toFixed(1)} hours, not about ${V.hours}`);
