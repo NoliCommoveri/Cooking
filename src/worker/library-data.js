@@ -1099,6 +1099,114 @@ export const LIBRARY = {
     "measuring-cups",
     "measuring-spoons",
     "wooden-spoon"
+   ],
+   "variations": [
+    {
+     "title": "Tuna salad sandwiches",
+     "image": "img/dishes/tuna-salad-sandwiches.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free"
+     },
+     "totalMinutes": 25,
+     "ingredients": [
+      {
+       "ingredient": "tuna-canned"
+      },
+      {
+       "ingredient": "celery"
+      },
+      {
+       "ingredient": "green-onion"
+      },
+      {
+       "ingredient": "pickle-dill"
+      },
+      {
+       "ingredient": "parsley"
+      },
+      {
+       "ingredient": "mayonnaise"
+      },
+      {
+       "ingredient": "mustard-dijon"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "bread-sandwich"
+      },
+      {
+       "ingredient": "lettuce-green-leaf",
+       "optional": true
+      },
+      {
+       "ingredient": "tomato",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "bread-sandwich",
+       "use": "bread-gluten-free",
+       "reason": "gluten"
+      },
+      {
+       "for": "mayonnaise",
+       "use": "yogurt-greek",
+       "reason": "egg"
+      }
+     ],
+     "unleavened": false,
+     "protein": "fish",
+     "tags": {
+      "protein": "tuna",
+      "flavors": [
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "celery",
+       "onions",
+       "pickles",
+       "mayonnaise",
+       "mustard",
+       "lemon-lime"
+      ],
+      "optional": [
+       "tomatoes"
+      ]
+     },
+     "tools": [
+      "can-opener",
+      "fork",
+      "mixing-bowl-large",
+      "cutting-board",
+      "colander",
+      "paper-towels",
+      "kitchen-towel",
+      "measuring-cups",
+      "measuring-spoons",
+      "wooden-spoon",
+      "paring-knife",
+      "bread-knife"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
+    }
    ]
   },
   {
@@ -7725,6 +7833,193 @@ export const LIBRARY = {
    "level": "sp-2"
   },
   {
+   "id": "chana-chaat",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Chana chaat",
+   "image": "img/dishes/chana-chaat.webp",
+   "cuisine": "indian",
+   "skill": "A tangy dressing tasted and fixed",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Mix the dressing in a bigger bowl, and taste it on a few chickpeas before it all goes in."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "chickpeas"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "chaat-masala"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "chili-flakes",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "cucumber",
+     "tomatoes",
+     "onions",
+     "cilantro",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "can-opener",
+    "colander",
+    "mixing-bowl-large",
+    "small-bowl",
+    "whisk",
+    "measuring-cups",
+    "measuring-spoons",
+    "vegetable-peeler",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "spoon"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "chicken-caesar-wraps",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Chicken Caesar wraps",
+   "image": "img/dishes/chicken-caesar-wraps.webp",
+   "cuisine": "american",
+   "skill": "Whisking a dressing and tasting it",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Toss the salad in two bowls, with half the dressing in each, so it coats evenly."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "mayonnaise"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "worcestershire",
+     "optional": true
+    },
+    {
+     "ingredient": "parmesan"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "rotisserie-chicken"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "parmesan"
+    },
+    {
+     "ingredient": "tortilla-burrito"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "tortilla-burrito",
+     "use": "tortilla-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "mayonnaise",
+     "use": "yogurt-greek",
+     "reason": "egg"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "mayonnaise",
+     "lemon-lime",
+     "mustard",
+     "sharp-cheese"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "mixing-bowl-large",
+    "small-bowl",
+    "whisk",
+    "measuring-cups",
+    "measuring-spoons",
+    "colander",
+    "kitchen-towel",
+    "cutting-board",
+    "paper-towels",
+    "bread-knife",
+    "fork",
+    "plate"
+   ],
+   "level": "sp-2"
+  },
+  {
    "id": "ful-medames",
    "version": 1,
    "track": "core",
@@ -7816,6 +8111,103 @@ export const LIBRARY = {
     "fork",
     "measuring-spoons",
     "spoon"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "hummus-plate",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Hummus plate",
+   "image": "img/dishes/hummus-plate.webp",
+   "cuisine": "lebanese",
+   "skill": "Peeling, coring, and seeding vegetables",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Blend the hummus in two batches so the blender isn't too full to turn."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "chickpeas"
+    },
+    {
+     "ingredient": "tahini"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "olives-kalamata",
+     "optional": true
+    },
+    {
+     "ingredient": "pita"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pita",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "lemon-lime",
+     "cucumber",
+     "tomatoes"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "can-opener",
+    "colander",
+    "small-bowl",
+    "blender",
+    "silicone-spatula",
+    "measuring-cups",
+    "measuring-spoons",
+    "vegetable-peeler",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "spoon",
+    "plate",
+    "sheet-pan",
+    "oven-mitts"
    ],
    "level": "sp-2"
   },
@@ -11348,6 +11740,14 @@ export const LIBRARY = {
   "edamame-frozen": {
    "name": "Frozen shelled edamame or baby lima beans",
    "contains": []
+  },
+  "tahini": {
+   "name": "Tahini (sesame paste)",
+   "contains": []
+  },
+  "chaat-masala": {
+   "name": "Chaat masala",
+   "contains": []
   }
  },
  "cuisines": {
@@ -11422,7 +11822,10 @@ export const LIBRARY = {
  "levelLabels": {
   "bun-bowl": "A5",
   "caprese-sandwiches": "A1",
+  "chana-chaat": "A10",
+  "chicken-caesar-wraps": "A9",
   "ful-medames": "A7",
+  "hummus-plate": "A8",
   "loaded-baked-potatoes": "A4",
   "mini-pita-pizzas": "A6",
   "molletes": "A3",
@@ -14524,15 +14927,156 @@ export const LIBRARY = {
      "explore": "hummus-plate",
      "drill": {
       "title": "Peel, core, and seed a cucumber and a tomato",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Peeling, coring, and seeding take the tough or watery parts out of a vegetable before it goes in a salad. Today you'll do all three with a peeler, a paring knife, and a spoon. An adult is nearby."
+      ],
+      "steps": [
+       "Lay a damp paper towel under the cutting board. Rinse a cucumber and a tomato.",
+       "Hold the cucumber by one end on the board. Peel it in long strokes away from you, turning it as you go.",
+       "Trim both ends with the paring knife. Cut it in half the long way, using the bridge grip.",
+       "Scrape the seeds out of each half with the tip of a spoon.",
+       "Cut the tomato in half through the stem. Cut a small V around the stem in each half to take out the core.",
+       "Scoop out the tomato's seeds with the spoon.",
+       "Slice the cucumber halves into half-moons and the tomato into wedges. Eat them as a snack, or use them in this week's recipe today."
+      ],
+      "quiz": [
+       {
+        "q": "Which way do you pull the peeler?",
+        "choices": [
+         "Away from you",
+         "Toward you",
+         "Side to side"
+        ],
+        "answer": 0,
+        "explain": "The blade never comes toward your body."
+       },
+       {
+        "q": "What scoops out the seeds?",
+        "choices": [
+         "The tip of a spoon",
+         "The knife",
+         "Your fingers"
+        ],
+        "answer": 0,
+        "explain": "A spoon follows the curve without cutting."
+       },
+       {
+        "q": "What is the core of a tomato?",
+        "choices": [
+         "The hard part under the stem",
+         "The seeds",
+         "The skin"
+        ],
+        "answer": 0,
+        "explain": "Cut it out with a small V."
+       }
+      ]
      },
      "knowledge": {
       "title": "Washing produce: what to wash and what not to",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Fruits and vegetables can carry dirt and germs from the field, the truck, and the store. Rinsing them under cool running water just before you use them washes most of it away.",
+       "Wash: anything you'll eat raw, and anything you'll cut, even if you won't eat the peel. A knife going through a melon, an avocado, or an orange carries whatever is on the skin into the part you eat.",
+       "How: rub produce with your hands under running water. Scrub firm things like potatoes and carrots with a clean brush. Pull lettuce leaves apart and rinse each one. Then dry them with a clean towel or paper towel. No soap, bleach, or produce wash: plain water works, and soap can soak into food.",
+       "When: right before you use it, not when you put it away. Washed produce stored wet spoils faster.",
+       "Don't wash: bagged greens marked \"ready to eat\" or \"triple washed\" (rinsing them in a dirty sink can add germs), raw chicken or meat (the splashes spread germs across the kitchen), and eggs (they're cleaned before they're sold)."
+      ],
+      "steps": [
+       "Look in your fridge with an adult. Find two things to wash before eating and one bag marked ready to eat.",
+       "Wash one fruit or vegetable the right way, rubbing it under running water, and dry it."
+      ],
+      "quiz": [
+       {
+        "q": "When do you wash produce?",
+        "choices": [
+         "Right before you use it",
+         "As soon as you get home",
+         "Never"
+        ],
+        "answer": 0,
+        "explain": "Stored wet, it spoils faster."
+       },
+       {
+        "q": "Why wash a melon if you don't eat the rind?",
+        "choices": [
+         "The knife carries germs from the rind inside",
+         "To make it shine",
+         "To keep it cold"
+        ],
+        "answer": 0,
+        "explain": "Whatever is on the skin goes in with the knife."
+       },
+       {
+        "q": "What do you wash produce with?",
+        "choices": [
+         "Cool running water",
+         "Soap",
+         "Bleach"
+        ],
+        "answer": 0,
+        "explain": "Soap can soak into food."
+       },
+       {
+        "q": "Which should you not wash?",
+        "choices": [
+         "Raw chicken",
+         "Apples",
+         "Carrots"
+        ],
+        "answer": 0,
+        "explain": "Splashes spread germs around the kitchen."
+       }
+      ]
      },
      "sabbath": {
       "title": "Daily bread (Matthew 6:11)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "When Jesus taught his followers to pray, one of the things he told them to ask for was food: \"Give us this day our daily bread\" (Matthew 6:11). Not a year's worth, or a week's: today's.",
+       "In the wilderness, God fed Israel with manna one day at a time (Exodus 16:4). Proverbs asks God for \"neither poverty nor riches; feed me with the food that is needful for me\" (Proverbs 30:8). And later in the same chapter of Matthew, Jesus tells his followers not to worry about what they'll eat, because their Father knows they need it (Matthew 6:31–33).",
+       "Asking for daily bread is a way of remembering that every meal is a gift, and of trusting God for tomorrow's."
+      ],
+      "steps": [
+       "Read Matthew 6:9–13 with an adult.",
+       "Read Matthew 6:25–33.",
+       "Answer out loud or in writing: why do you think Jesus said \"this day\" and not \"this year\"?",
+       "List five foods your family ate this week. Next to each, write one person who helped bring it to your table: a farmer, a driver, a cook.",
+       "Before a meal this week, thank God for that day's food."
+      ],
+      "quiz": [
+       {
+        "q": "In the Lord's Prayer, what bread do we ask for?",
+        "choices": [
+         "Our daily bread",
+         "A year's bread",
+         "The best bread"
+        ],
+        "answer": 0,
+        "explain": "Matthew 6:11."
+       },
+       {
+        "q": "How often did God send manna?",
+        "choices": [
+         "Each day",
+         "Once a year",
+         "Once"
+        ],
+        "answer": 0,
+        "explain": "Exodus 16:4."
+       },
+       {
+        "q": "In Matthew 6, why don't we need to worry about food?",
+        "choices": [
+         "Our Father knows we need it",
+         "There's always plenty",
+         "Food doesn't matter"
+        ],
+        "answer": 0,
+        "explain": "Matthew 6:32."
+       }
+      ]
      }
     },
     {
@@ -14545,15 +15089,144 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Whisk a vinaigrette, taste it, and fix it",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A vinaigrette is oil, vinegar, and salt whisked together. Today you'll make a small one, taste it, and fix it, one change at a time."
+      ],
+      "steps": [
+       "In a small bowl, put 1 tablespoon of vinegar, a pinch of salt, and ½ teaspoon of mustard. Whisk until the salt dissolves.",
+       "Keep whisking while you pour in 3 tablespoons of olive oil, a little at a time.",
+       "Dip a piece of lettuce or cucumber in it and taste.",
+       "Too sour? Whisk in 1 teaspoon of oil. Flat? Add a pinch of salt. Oily? Add a few drops of vinegar.",
+       "Taste again after each change. Write down what you changed.",
+       "Use it on a salad today, or keep it in a jar in the fridge for up to a week."
+      ],
+      "quiz": [
+       {
+        "q": "Why change only one thing at a time?",
+        "choices": [
+         "So you know which change helped",
+         "So it's faster",
+         "So you use less"
+        ],
+        "answer": 0,
+        "explain": "Two at once, and you can't tell."
+       },
+       {
+        "q": "The dressing tastes oily and flat. What do you add?",
+        "choices": [
+         "Salt or a few drops of vinegar",
+         "More oil",
+         "Water"
+        ],
+        "answer": 0,
+        "explain": "Salt and sour wake it up."
+       }
+      ]
      },
      "knowledge": {
       "title": "Oil and vinegar: why a dressing separates",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Oil and vinegar don't mix. Vinegar is mostly water, and oil and water push apart. Whisk them and the oil breaks into tiny drops spread through the vinegar, so the dressing looks cloudy. Leave it, and the drops join back together and float to the top.",
+       "That's why a dressing separates in the jar. It's not spoiled: whisk or shake it again right before you pour it.",
+       "Some things help a dressing stay mixed longer. Mustard and mayonnaise hold onto oil and water at the same time, so they keep the drops apart. That's why Caesar dressing, made with mayonnaise, stays creamy, and a vinaigrette with mustard stays mixed longer than one without.",
+       "A good starting mix is 3 spoons of oil to 1 spoon of vinegar or lemon juice, with a pinch of salt. Then taste it on a piece of what you're dressing, and change it to suit you."
+      ],
+      "steps": [
+       "Put 1 tablespoon of vinegar and 3 tablespoons of oil in a clean jar with a lid. Shake it hard and watch: how long until it separates?",
+       "Add ½ teaspoon of mustard, shake again, and time it. What changed?"
+      ],
+      "quiz": [
+       {
+        "q": "Why does a dressing separate?",
+        "choices": [
+         "Oil and water push apart",
+         "It went bad",
+         "It got cold"
+        ],
+        "answer": 0,
+        "explain": "Shake or whisk it again."
+       },
+       {
+        "q": "What helps a dressing stay mixed?",
+        "choices": [
+         "Mustard or mayonnaise",
+         "More water",
+         "Ice"
+        ],
+        "answer": 0,
+        "explain": "They hold onto oil and water at the same time."
+       },
+       {
+        "q": "What's a good starting mix?",
+        "choices": [
+         "3 spoons of oil to 1 of vinegar",
+         "1 to 1",
+         "1 spoon of oil to 3 of vinegar"
+        ],
+        "answer": 0,
+        "explain": "Then taste and change it."
+       },
+       {
+        "q": "The dressing separated in the jar. What do you do?",
+        "choices": [
+         "Shake it again",
+         "Throw it away",
+         "Add more oil"
+        ],
+        "answer": 0,
+        "explain": "It's not spoiled."
+       }
+      ]
      },
      "sabbath": {
       "title": "Pack a lunch salad with the dressing apart",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A salad packed for lunch stays crisp if the dressing travels on its own. Dressing on lettuce for hours makes it limp and watery.",
+       "Pack sturdy things on the bottom and leaves on top, and carry the dressing in a small container with a tight lid. Pour and toss right before you eat. Keep it cold: a lunch with chicken, cheese, or mayonnaise needs an ice pack, or a fridge, until lunchtime."
+      ],
+      "steps": [
+       "Make a small jar of this week's vinaigrette or Caesar dressing.",
+       "In a container, put sturdy things first: chickpeas, cucumber, or chicken.",
+       "Put lettuce on top. Close the lid.",
+       "Spoon dressing into a small container with a tight lid. Label both with the date.",
+       "Keep them in the fridge, and pack them with an ice pack for lunch.",
+       "At lunch, pour, close the lid, and shake to toss. How crisp is it?"
+      ],
+      "quiz": [
+       {
+        "q": "Why pack the dressing apart?",
+        "choices": [
+         "So the lettuce stays crisp",
+         "So it weighs less",
+         "So it stays warm"
+        ],
+        "answer": 0,
+        "explain": "Dressing wilts leaves over hours."
+       },
+       {
+        "q": "What goes on the bottom of the container?",
+        "choices": [
+         "Sturdy things like chickpeas",
+         "Lettuce",
+         "The dressing"
+        ],
+        "answer": 0,
+        "explain": "Leaves go on top, away from the wet."
+       },
+       {
+        "q": "What keeps a lunch with chicken safe?",
+        "choices": [
+         "An ice pack or a fridge",
+         "A tight lid",
+         "A paper bag"
+        ],
+        "answer": 0,
+        "explain": "Keep it cold until you eat."
+       }
+      ]
      }
     },
     {
@@ -15315,7 +15988,7 @@ export const LIBRARY = {
      "skills": [
       "fine-chopping"
      ],
-     "minutes": 25,
+     "minutes": 30,
      "tags": {
       "protein": "beans-lentils",
       "flavors": [
@@ -15335,7 +16008,7 @@ export const LIBRARY = {
      "skills": [
       "dressings"
      ],
-     "minutes": 25,
+     "minutes": 30,
      "tags": {
       "protein": "chicken",
       "flavors": [
@@ -15356,7 +16029,7 @@ export const LIBRARY = {
      "skills": [
       "dressings"
      ],
-     "minutes": 20,
+     "minutes": 30,
      "tags": {
       "protein": "beans-lentils",
       "flavors": [

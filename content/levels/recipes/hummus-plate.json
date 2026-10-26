@@ -1,0 +1,99 @@
+{
+  "id": "hummus-plate",
+  "version": 1,
+  "track": "core",
+  "unit": 102,
+  "title": "Hummus plate",
+  "image": "dishes/hummus-plate.png",
+  "cuisine": "lebanese",
+  "skill": "Peeling, coring, and seeding vegetables",
+  "skills": ["fine-chopping"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 30,
+  "scaling": {
+    "mode": "free",
+    "notes": [{ "from": 7, "text": "Blend the hummus in two batches so the blender isn't too full to turn." }]
+  },
+  "learn": {
+    "move": {
+      "title": "A dip from a can",
+      "body": "Hummus is a chickpea dip eaten all over the Middle East. Today you'll blend it from canned chickpeas, then peel, seed, and slice a cucumber and core and seed tomatoes to go with it, with warm pita."
+    },
+    "why": [
+      { "id": "peel", "title": "Peel away from you", "body": "A vegetable peeler's blade faces the food. Pull it away from your body, with your other hand holding the top end, and the blade never comes toward your fingers." },
+      { "id": "seeds", "title": "Why scoop the seeds", "body": "Cucumber and tomato seeds sit in a watery middle. Scooped out, the slices stay crisp and the plate doesn't get puddles that soak the pita." },
+      { "id": "liquid", "title": "Save the can's liquid", "body": "The liquid in a can of chickpeas is thick and a little salty. A few spoonfuls make hummus smooth and fluffy without watering it down." },
+      { "id": "blend", "title": "Scrape and blend again", "body": "Thick dips climb the sides of the blender and stop moving. Stopping to scrape them back down gets every chickpea to the blade, so there are no lumps." },
+      { "id": "unplug", "title": "Off and unplugged", "body": "A blender blade is sharper than any knife in the kitchen, and it hides under the food. Turn it off and unplug it before a spatula or a hand goes in the jar." }
+    ],
+    "wrong": [
+      { "sign": "The hummus is thick and won't blend", "fix": "Add 1 tablespoon of the chickpea liquid, scrape down, and blend again." },
+      { "sign": "The hummus is grainy", "fix": "Blend it longer, a full minute more, scraping down halfway." },
+      { "sign": "It tastes flat", "fix": "Add a pinch of salt and a squeeze of lemon, blend, and taste again." },
+      { "sign": "The peeler keeps skipping", "fix": "Hold it at a lower angle and use long, steady strokes." }
+    ],
+    "quiz": [
+      { "q": "Which way do you pull a peeler?", "choices": ["Away from your body", "Toward your body", "Side to side"], "answer": 0, "explain": "The blade never comes toward you." },
+      { "q": "Why scoop out cucumber seeds?", "choices": ["The slices stay crisp and the plate stays dry", "Seeds are bitter", "It's faster"], "answer": 0, "explain": "The seeds sit in a watery middle." },
+      { "q": "What do you do before putting a spatula in the blender?", "choices": ["Turn it off and unplug it", "Turn it to low", "Nothing"], "answer": 0, "explain": "The blade hides under the food." },
+      { "q": "What makes the hummus smooth without watering it down?", "choices": ["The liquid from the chickpea can", "Ice cubes", "Milk"], "answer": 0, "explain": "It's thick and a little salty." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "chickpeas", "amount": 1, "unit": "can", "round": "up", "group": "Hummus" },
+    { "ingredient": "tahini", "amount": 0.25, "unit": "cup", "group": "Hummus" },
+    { "ingredient": "lemon", "amount": 1, "unit": "count", "round": "up", "prep": "juiced", "group": "Hummus" },
+    { "ingredient": "garlic-minced-jarred", "amount": 0.5, "unit": "tsp", "group": "Hummus" },
+    { "ingredient": "cumin-ground", "amount": 0.5, "unit": "tsp", "group": "Hummus" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Hummus" },
+    { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp", "group": "Hummus" },
+    { "ingredient": "paprika-sweet", "amount": 0.25, "unit": "tsp", "group": "Hummus" },
+    { "ingredient": "cucumber", "amount": 1, "unit": "count", "round": "up", "group": "Plate" },
+    { "ingredient": "tomato", "amount": 2, "unit": "count", "round": "up", "group": "Plate" },
+    { "ingredient": "olives-kalamata", "amount": 0.5, "unit": "cup", "optional": true, "group": "Plate" },
+    { "ingredient": "pita", "amount": 4, "unit": "count", "group": "Plate" }
+  ],
+  "substitutions": [
+    { "for": "pita", "use": "bread-gluten-free", "reason": "gluten", "note": "Toast gluten-free bread and cut it into strips for dipping." }
+  ],
+  "equipment": [
+    "can-opener",
+    "colander",
+    "small-bowl",
+    "blender",
+    "silicone-spatula",
+    "measuring-cups",
+    "measuring-spoons",
+    "vegetable-peeler",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "spoon",
+    "plate",
+    "sheet-pan",
+    "oven-mitts"
+  ],
+  "steps": [
+    { "id": "oven", "text": "Turn the oven on to 350°F for the pita.", "safety": "adult-nearby", "hazard": "Hot oven", "tip": "It heats while you make the hummus." },
+    { "id": "open", "text": "Open the chickpeas. Set the colander over the small bowl and drain them, keeping the liquid.", "safety": "adult-nearby", "hazard": "Sharp can lid", "why": "liquid", "tip": "Keep your fingers away from the lid's cut edge." },
+    { "id": "fill", "text": "Put the chickpeas, tahini, lemon juice, garlic, cumin, and salt in the blender.", "safety": "solo", "tip": "Stir the tahini in its jar first. The oil rises to the top." },
+    { "id": "liquid", "text": "Add 3 tablespoons of the chickpea liquid and the olive oil. Put the lid on tight.", "safety": "solo", "why": "liquid" },
+    { "id": "blend", "text": "Blend for 1 minute, with one hand on the lid.", "safety": "adult-nearby", "hazard": "Blender blade", "timerSeconds": 60, "timerLabel": "Blend" },
+    { "id": "scrape", "text": "Turn the blender off and unplug it. Scrape down the sides with the spatula.", "safety": "adult-nearby", "hazard": "Blender blade", "why": "unplug", "tip": "Unplug it every time a spatula goes in." },
+    { "id": "blend-again", "text": "Plug it back in and blend for 1 more minute. Add more chickpea liquid if it's too thick.", "safety": "adult-nearby", "hazard": "Blender blade", "why": "blend", "timerSeconds": 60, "timerLabel": "Blend again", "look": "Smooth and fluffy, like thick yogurt." },
+    { "id": "taste", "text": "Unplug the blender. Taste the hummus on a clean spoon, and add a pinch of salt or lemon if it needs it.", "safety": "solo", "look": "Creamy and a little tangy." },
+    { "id": "bowl", "text": "Spoon the hummus onto the plate. Make a swirl with the back of the spoon and sprinkle on the paprika.", "safety": "solo", "tip": "A little olive oil in the swirl is traditional." },
+    { "id": "board", "text": "Lay a damp paper towel flat under the cutting board. Rinse the cucumber and tomatoes.", "safety": "solo", "look": "Push the board gently. It shouldn't slide." },
+    { "id": "peel", "text": "Hold the cucumber by one end on the board. Peel it in long strokes, away from you, turning it as you go.", "safety": "adult-nearby", "hazard": "Peeler blade", "why": "peel", "look": "Stripes of green or none, as you like." },
+    { "id": "halve-cucumber", "text": "Trim the ends. Cut the cucumber in half the long way with the paring knife, using the bridge grip.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "The knife goes under your hand's bridge." },
+    { "id": "seed-cucumber", "text": "Scrape the seeds out of each half with the tip of a spoon.", "safety": "solo", "why": "seeds", "look": "A clean groove down the middle." },
+    { "id": "slice-cucumber", "text": "Lay the halves flat side down. Slice them into half-moons with the claw grip.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Half-moons about ¼ inch thick." },
+    { "id": "core-tomato", "text": "Cut each tomato in half through the stem. Cut a small V around the stem to take out the core.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Point the knife tip away from your hand." },
+    { "id": "seed-tomato", "text": "Scoop out the seeds with a spoon. Cut each half into wedges.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "seeds", "look": "Firm wedges, no watery middle." },
+    { "id": "knife-down", "text": "Set the knife down flat at the top of the board, blade facing away from you.", "safety": "solo", "tip": "Do this every time you stop cutting." },
+    { "id": "pita-in", "text": "Lay the pitas on the sheet pan. With oven mitts on, warm them in the oven.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 300, "timerLabel": "Warm pita" },
+    { "id": "pita-out", "text": "Take the pan out with oven mitts and turn off the oven. Cut each pita into 6 wedges.", "safety": "adult-nearby", "hazard": "Hot pan, sharp knife", "tip": "Let the pita cool for a minute before you cut it." },
+    { "id": "plate", "text": "Arrange the cucumber, tomatoes, olives if you're using them, and pita around the hummus.", "safety": "solo", "tip": "Leftover hummus keeps 4 days in a covered container in the fridge." }
+  ]
+}

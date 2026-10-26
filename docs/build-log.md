@@ -5947,3 +5947,37 @@ approves it there.
   The Level course tests skip weeks 5 and 6 where they need week 9.
 - No screens changed, so no screenshots.
 - Tests: 392.
+
+## 232. 2026-10-26 — 14g content: Level 2 Unit 2
+
+Owner, 2026-10-26: Level 2 is the second of Unit 2's three Levels (231).
+Reviewed in [14g review: Level 2 Apprentice, Unit
+2](https://claude.ai/artifact/QZkxD9oWoNK5Cw4MmGApZC); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 2 Unit 2's dishes was written except Cook Around
+  the World's tuna salad sandwiches, which chop with a chef's knife and the
+  rocking cut. Its 6 part pages were blank.
+- **Now:**
+  - **Three Level-only recipes** in `content/levels/recipes/`, unit 102:
+    Hummus plate (week 5: peel, core, and seed, and a blended dip), and
+    Chicken Caesar wraps and Chana chaat (week 6, the mastery week: a
+    dressing whisked, tasted, and fixed). The fine-chopping and dressings
+    pick-one groups are full (§12.4). The wraps' card is marked as a
+    variation of Chicken Caesar; like Level 4's steak fajitas, they're a
+    Level recipe of their own. Their cards' minutes are now the recipes' own
+    (30 each).
+  - **Tuna salad sandwiches' Level 2 version:** the paring knife, not a
+    chef's knife; parsley torn by hand; a bread knife for the sandwiches;
+    every step rewritten to Level 2's standard.
+  - **Nothing before it's taught:** the paring knife cuts only soft foods,
+    herbs and lettuce are torn, and there's no stove. Chana chaat uses green
+    onion in place of the card's red onion, which would need a dice.
+  - **All 6 part pages:** peel, core, and seed; washing produce; daily bread
+    (Matthew 6:11); a vinaigrette tasted and fixed; why a dressing separates;
+    a lunch salad packed with the dressing apart.
+  - **New tool:** a blender or food processor.
+  - **New ingredients:** tahini, chaat masala (with ground cumin and lime as
+    its stand-in).
+- No screens changed, so no screenshots.
+- Tests: 392.
