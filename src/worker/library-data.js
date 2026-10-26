@@ -6753,6 +6753,240 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "chicken-tagine",
+   "version": 1,
+   "track": "core",
+   "unit": 3,
+   "title": "Chicken tagine with olives",
+   "image": "img/dishes/chicken-tagine.webp",
+   "cuisine": "moroccan",
+   "skill": "Layered spice braise",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, brown the chicken in three batches and use your biggest pot, so the pieces fit in one or two layers for the braise."
+     }
+    ]
+   },
+   "totalMinutes": 80,
+   "ingredients": [
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "turmeric-ground"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "olives-green"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "warm-spices",
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic",
+     "ginger",
+     "lemon-lime",
+     "cilantro"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "pot-large",
+    "saucepan-medium",
+    "cutting-board",
+    "chef-knife",
+    "box-grater",
+    "paper-towels",
+    "plate",
+    "small-bowl",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "tongs",
+    "wooden-spoon",
+    "thermometer"
+   ],
+   "variations": [
+    {
+     "title": "Chicken tagine with olives",
+     "image": "img/dishes/chicken-tagine.webp",
+     "cuisine": "moroccan",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, brown the chicken in three batches and use your biggest pot, so the pieces fit in one or two layers for the braise."
+       }
+      ]
+     },
+     "totalMinutes": 105,
+     "ingredients": [
+      {
+       "ingredient": "chicken-whole"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "ginger-fresh"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "paprika-sweet"
+      },
+      {
+       "ingredient": "turmeric-ground"
+      },
+      {
+       "ingredient": "cinnamon-ground"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "broth-chicken"
+      },
+      {
+       "ingredient": "olives-green"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "cilantro"
+      },
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "water"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "warm-spices",
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "adventurous",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "garlic",
+       "ginger",
+       "lemon-lime",
+       "cilantro"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "kitchen-scale",
+      "vegetable-peeler",
+      "pot-large",
+      "saucepan-medium",
+      "box-grater",
+      "paper-towels",
+      "plate",
+      "small-bowl",
+      "heatproof-bowl",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "tongs",
+      "wooden-spoon",
+      "thermometer"
+     ],
+     "id": "sp-4",
+     "level": "sp-4"
+    }
+   ]
+  },
+  {
    "id": "beef-ragu",
    "version": 1,
    "track": "core",
@@ -12475,6 +12709,112 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "chicken-cacciatore",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Chicken cacciatore",
+   "image": "img/dishes/chicken-cacciatore.webp",
+   "cuisine": "italian",
+   "skill": "Breaking down a whole chicken",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, break down two chickens, brown in three batches, and braise in your widest pot so the pieces sit in one layer."
+     }
+    ]
+   },
+   "totalMinutes": 110,
+   "ingredients": [
+    {
+     "ingredient": "chicken-whole"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "bell-pepper-green"
+    },
+    {
+     "ingredient": "mushrooms"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "chili-flakes",
+     "optional": true
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "baguette"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "bell-peppers",
+     "garlic",
+     "tomatoes"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-scale",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "pot-large",
+    "heatproof-bowl",
+    "tongs",
+    "wooden-spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "can-opener",
+    "thermometer",
+    "bread-knife"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "chicken-enchiladas",
    "version": 1,
    "track": "core",
@@ -12584,6 +12924,204 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "chicken-two-ways",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Chicken two ways",
+   "image": "img/dishes/chicken-two-ways.webp",
+   "cuisine": "american",
+   "skill": "Using every part of one bird, costed",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, break down two chickens, pan-roast the breasts in two skillets, and use the stockpot for both backs and all four legs."
+     }
+    ]
+   },
+   "totalMinutes": 180,
+   "ingredients": [
+    {
+     "ingredient": "chicken-whole"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "peppercorns-black"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "noodles-egg"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "parsley"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "carrots",
+     "celery"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-scale",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "stockpot",
+    "pot-large",
+    "colander",
+    "mixing-bowl-large",
+    "ladle",
+    "spoon",
+    "fork",
+    "skillet-12",
+    "tongs",
+    "oven-mitts",
+    "thermometer",
+    "measuring-cups",
+    "measuring-spoons",
+    "sheet-pan"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "duck-breast-cherry",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Seared duck breast with cherry sauce",
+   "image": "img/dishes/duck-breast-cherry.webp",
+   "cuisine": "french",
+   "skill": "Scoring skin and rendering fat",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, render the duck in two skillets, and roast all the breasts together on one sheet pan."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "duck-breast"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "potato-baby"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "onion-red"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "vinegar-balsamic"
+    },
+    {
+     "ingredient": "cherries-frozen"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "salt"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "other",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "skillet-12",
+    "heatproof-bowl",
+    "tongs",
+    "sheet-pan",
+    "oven-mitts",
+    "thermometer",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "wooden-spoon",
+    "spoon"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "ensaladilla-rusa",
    "version": 1,
    "track": "core",
@@ -12678,6 +13216,97 @@ export const LIBRARY = {
     "mixing-bowl-large",
     "silicone-spatula",
     "plate"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "flank-steak",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Sliced flank steak",
+   "image": "img/dishes/flank-steak.webp",
+   "cuisine": "american",
+   "skill": "Trimming and slicing against the grain",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, sear the steaks one at a time so the pan stays hot, and roast the potatoes on two sheet pans."
+     }
+    ]
+   },
+   "totalMinutes": 70,
+   "ingredients": [
+    {
+     "ingredient": "beef-flank"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "potato-baby"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "chili-flakes"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "oven-mitts",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "tongs",
+    "thermometer",
+    "kitchen-scale",
+    "box-grater"
    ],
    "level": "sp-4"
   },
@@ -12821,6 +13450,112 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "pescado-veracruzana",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Pescado a la veracruzana",
+   "image": "img/dishes/pescado-veracruzana.webp",
+   "cuisine": "mexican",
+   "skill": "Cleaning and baking a whole fish",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, bake two fish side by side on a sheet pan, each in its own bed of sauce, and add 5 minutes."
+     }
+    ]
+   },
+   "totalMinutes": 80,
+   "ingredients": [
+    {
+     "ingredient": "snapper-whole"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-white"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "olives-green"
+    },
+    {
+     "ingredient": "capers"
+    },
+    {
+     "ingredient": "jalapenos-pickled"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "parsley"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "lemon-lime",
+     "onions",
+     "garlic",
+     "tomatoes",
+     "capers"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-shears",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "tweezers",
+    "baking-dish",
+    "skillet-12",
+    "saucepan-medium",
+    "wooden-spoon",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "can-opener",
+    "oven-mitts",
+    "thermometer",
+    "spatula",
+    "plate"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "salade-nicoise",
    "version": 1,
    "track": "core",
@@ -12931,6 +13666,108 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "spatchcocked-quail",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Spatchcocked quail with pomegranate",
+   "image": "img/dishes/spatchcocked-quail.webp",
+   "cuisine": "persian",
+   "skill": "Spatchcocking a small bird",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, roast the quail on two sheet pans, one on each middle rack, swapping them halfway."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "quail-whole"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "pomegranate-molasses"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "bulgur-fine"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "mint"
+    },
+    {
+     "ingredient": "lemon"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "other",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "mint",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-shears",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "sheet-pan",
+    "foil",
+    "oven-mitts",
+    "small-bowl",
+    "pastry-brush",
+    "saucepan-medium",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "chef-knife",
+    "fork",
+    "tongs",
+    "thermometer"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "steak-fajitas",
    "version": 1,
    "track": "core",
@@ -13035,6 +13872,97 @@ export const LIBRARY = {
     "tongs",
     "thermometer",
     "foil"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "teriyaki-salmon-side",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Teriyaki salmon side",
+   "image": "img/dishes/teriyaki-salmon-side.webp",
+   "cuisine": "japanese",
+   "skill": "Skinning and portioning a side of salmon",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, buy a second side and roast the portions on two sheet pans, swapping them halfway."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "salmon-side"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "mirin"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "rice-short-grain"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "sesame-seeds"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "ginger",
+     "garlic",
+     "onions",
+     "sesame"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "tweezers",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "kitchen-scale",
+    "plate",
+    "sheet-pan",
+    "parchment",
+    "oven-mitts",
+    "saucepan-medium",
+    "saucepan-light",
+    "pastry-brush",
+    "box-grater",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "spatula",
+    "thermometer"
    ],
    "level": "sp-4"
   }
@@ -14039,6 +14967,52 @@ export const LIBRARY = {
   "taco-shells": {
    "name": "Hard taco shells",
    "contains": []
+  },
+  "chicken-whole": {
+   "name": "Whole chicken",
+   "contains": [
+    "meat"
+   ]
+  },
+  "duck-breast": {
+   "name": "Duck breasts, skin on",
+   "contains": [
+    "meat"
+   ]
+  },
+  "quail-whole": {
+   "name": "Whole quail",
+   "contains": [
+    "meat"
+   ]
+  },
+  "salmon-side": {
+   "name": "Side of salmon, skin on",
+   "contains": [
+    "fish"
+   ]
+  },
+  "snapper-whole": {
+   "name": "Whole red snapper, scaled and gutted",
+   "contains": [
+    "fish"
+   ]
+  },
+  "cherries-frozen": {
+   "name": "Frozen dark sweet cherries, pitted",
+   "contains": []
+  },
+  "vinegar-balsamic": {
+   "name": "Balsamic vinegar",
+   "contains": []
+  },
+  "jalapenos-pickled": {
+   "name": "Pickled jalapeño slices",
+   "contains": []
+  },
+  "pomegranate-molasses": {
+   "name": "Pomegranate molasses",
+   "contains": []
   }
  },
  "cuisines": {
@@ -14149,11 +15123,18 @@ export const LIBRARY = {
   "antipasto-platter": "C7",
   "bibimbap": "C5",
   "bo-luc-lac": "C2",
+  "chicken-cacciatore": "C9",
   "chicken-enchiladas": "C3",
+  "chicken-two-ways": "C14",
+  "duck-breast-cherry": "C11",
   "ensaladilla-rusa": "C6",
+  "flank-steak": "C10",
   "mezze-spread": "C8",
+  "pescado-veracruzana": "C13",
   "salade-nicoise": "C4",
-  "steak-fajitas": "C1"
+  "spatchcocked-quail": "C15",
+  "steak-fajitas": "C1",
+  "teriyaki-salmon-side": "C12"
  },
  "dietTags": [
   "nuts",
@@ -15230,7 +16211,7 @@ export const LIBRARY = {
     "blooming-spices",
     "braising"
    ],
-   "minutes": 90,
+   "minutes": 80,
    "cuisine": "moroccan",
    "pickOne": "braising",
    "tags": {
@@ -25536,15 +26517,158 @@ export const LIBRARY = {
      "cuisine": "moroccan",
      "drill": {
       "title": "Break a chicken into 8 pieces; save the back for stock",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "A whole chicken breaks into eight serving pieces with nothing but a sharp chef's knife and a feel for the joints. Do it once slowly, naming each joint as you find it, then again for time. Use the pieces in this week's recipe."
+      ],
+      "steps": [
+       "Set up: the raw-meat board on a damp towel, a sharp chef's knife, a sheet pan for the pieces, a bag for the back, and hot, soapy water ready. Don't rinse the bird.",
+       "Legs: lay the chicken breast up. Pull a leg away from the body, slice through the skin between leg and breast, then bend the leg back until the hip joint pops out. Cut through the joint, scooping the round pocket of meat on the back out with the thigh. Repeat.",
+       "Split each leg: skin side down, find the line of fat over the knee joint, and cut straight down through it into drumstick and thigh.",
+       "Wings: pull each wing out, find the shoulder joint by wiggling it, and cut through.",
+       "Back: stand the bird on its neck end and cut down through the ribs on both sides, separating the breast from the back.",
+       "Breast: lay it skin side up and cut through the breastbone, just off center, into two halves. For four breast pieces, halve each across.",
+       "Line up the 8 pieces and the back. Weigh the pieces and the back separately, and note both.",
+       "Bag and freeze the back (Beyond the Recipe). Wash the knife, board, and pan, wipe the counter and the faucet, and wash your hands.",
+       "Next time, time yourself. A cook who knows the joints takes under 5 minutes."
+      ],
+      "quiz": [
+       {
+        "q": "How do you find where to cut a leg off?",
+        "choices": [
+         "Bend it back until the hip joint pops, then cut through the joint",
+         "Cut straight through the thigh",
+         "Twist it off"
+        ],
+        "answer": 0,
+        "explain": "Joints, not bone."
+       },
+       {
+        "q": "What comes off with the thigh when you take the leg?",
+        "choices": [
+         "The round pocket of meat on the back beside it",
+         "The wing",
+         "The backbone"
+        ],
+        "answer": 0,
+        "explain": "It's the best bite on the bird."
+       },
+       {
+        "q": "What marks the knee joint from the outside?",
+        "choices": [
+         "A line of fat across the leg",
+         "The skin color",
+         "A bone sticking out"
+        ],
+        "answer": 0,
+        "explain": "Cut straight down through the fat line."
+       }
+      ]
      },
      "knowledge": {
       "title": "Yield and cost: a whole bird vs. parts",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "A whole chicken almost always costs less per kilogram than the same chicken sold in parts, because the store charges for the butchering. But some of a whole bird's weight is back, neck, and bone you won't serve. The question is what you pay per kilogram of what you actually eat.",
+       "Yield is the weight you use divided by the weight you bought. A 1.8-kilogram chicken usually gives about 1.3 kilograms of serving pieces (breasts, thighs, drumsticks, wings) and 0.5 kilograms of back, neck, and trim. That's a yield of about 72 percent.",
+       "Here's the math with sample prices; your store's will differ. A whole chicken at $3.30 a kilogram, 1.8 kilograms, costs $5.94. Divided by the 1.3 kilograms of pieces, that's $4.57 a kilogram of serving pieces. Bought separately, bone-in thighs might be $4.40 a kilogram and breasts $8.80, a mix averaging around $6.50. The whole bird wins, and the back becomes free stock.",
+       "The break-even point is the parts price at which the whole bird stops saving money: whole-bird price divided by yield. If parts ever cost less than that, buy parts.",
+       "What the math leaves out: your time (about 5 minutes once you're practiced), freezer space, and whether your family eats every part. A whole bird pays only if nothing is wasted."
+      ],
+      "steps": [
+       "Find today's prices at your store for a whole chicken, bone-in thighs, drumsticks, wings, and breasts.",
+       "Use your weights from the drill to work out your bird's yield and its cost per kilogram of serving pieces.",
+       "Work out the break-even parts price, and compare it with the store's.",
+       "Write two sentences: which was cheaper this week, and when you'd choose the other."
+      ],
+      "quiz": [
+       {
+        "q": "What is yield?",
+        "choices": [
+         "The weight you use divided by the weight you bought",
+         "The price per kilogram",
+         "The number of pieces"
+        ],
+        "answer": 0,
+        "explain": "Used ÷ bought."
+       },
+       {
+        "q": "A 2.0 kg bird gives 1.44 kg of pieces. What's the yield?",
+        "choices": [
+         "72%",
+         "28%",
+         "144%"
+        ],
+        "answer": 0,
+        "explain": "1.44 ÷ 2.0."
+       },
+       {
+        "q": "A whole bird costs $3.30/kg with a 72% yield. What's the break-even parts price?",
+        "choices": [
+         "About $4.58/kg",
+         "$3.30/kg",
+         "$2.38/kg"
+        ],
+        "answer": 0,
+        "explain": "3.30 ÷ 0.72."
+       },
+       {
+        "q": "What does the yield math leave out?",
+        "choices": [
+         "Your time, freezer space, and waste",
+         "The weight",
+         "The price"
+        ],
+        "answer": 0,
+        "explain": "A bird only pays if every part is used."
+       }
+      ]
      },
      "sabbath": {
       "title": "Freeze the back and wings for stock",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "The back, neck, and wing tips from a whole chicken are the start of a good stock: mostly bone and connective tissue, which is what gives stock its body. Saved in the freezer until there's enough, they cost nothing extra."
+      ],
+      "steps": [
+       "Bag the back and wing tips from this week's chicken in a freezer bag. Press out the air.",
+       "Label the bag with the date and \"chicken backs for stock.\" Keep a running count on the label as you add more.",
+       "Freeze it flat, so it stacks and thaws quickly. Use it within 3 months.",
+       "When you have the backs of 2 or 3 chickens (about 1.5 kilograms), they're enough for about 3 liters of stock: cover with cold water, add onion, carrot, celery, bay, and peppercorns, and simmer 3 hours.",
+       "Wash your hands and everything the raw chicken touched."
+      ],
+      "quiz": [
+       {
+        "q": "Why are backs good for stock?",
+        "choices": [
+         "They're mostly bone and connective tissue, which give stock its body",
+         "They're the meatiest part",
+         "They're cheapest at the store"
+        ],
+        "answer": 0,
+        "explain": "Body comes from collagen."
+       },
+       {
+        "q": "How long do frozen backs keep?",
+        "choices": [
+         "About 3 months",
+         "A week",
+         "Two years"
+        ],
+        "answer": 0,
+        "explain": "Label the date."
+       },
+       {
+        "q": "Why freeze the bag flat?",
+        "choices": [
+         "It stacks and thaws faster",
+         "It cooks better",
+         "It stays raw"
+        ],
+        "answer": 0,
+        "explain": "Flat bags save space too."
+       }
+      ]
      }
     },
     {
@@ -25557,15 +26681,155 @@ export const LIBRARY = {
      "cuisine": "french",
      "drill": {
       "title": "Trim silverskin; score duck skin",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Two trims a restaurant prep cook does every day: taking silverskin off beef, and scoring duck skin so its fat renders. Both need a sharp knife and a light hand. Use this week's flank steak and duck breasts."
+      ],
+      "steps": [
+       "Silverskin: lay the flank steak on the raw-meat board and find the thin, shiny membrane on its surface.",
+       "Slide the tip of a sharp, flexible knife under one end of it. Grip the freed tab with a paper towel.",
+       "Angle the blade slightly up, toward the membrane, and saw gently along under it while pulling the tab back. Take it off in strips, losing as little meat as you can.",
+       "Weigh the trim. Note it as a percentage of the steak.",
+       "Scoring: lay a duck breast skin side up. With the tip of the knife, cut lines 1 centimeter apart diagonally across the skin, through the fat but not into the meat. Turn the breast and cut the other way, for diamonds.",
+       "Check the cuts: no red meat should show. If it does, the next cuts go shallower.",
+       "Refrigerate both for this week's recipes, and wash your hands, the knife, and the board."
+      ],
+      "quiz": [
+       {
+        "q": "Which way does the blade angle when you remove silverskin?",
+        "choices": [
+         "Slightly up, toward the membrane",
+         "Down, into the meat",
+         "Flat, sideways"
+        ],
+        "answer": 0,
+        "explain": "So you lose as little meat as possible."
+       },
+       {
+        "q": "How deep do you score duck skin?",
+        "choices": [
+         "Through the skin and fat, not into the meat",
+         "Into the meat",
+         "Only the surface of the skin"
+        ],
+        "answer": 0,
+        "explain": "Fat needs a way out."
+       },
+       {
+        "q": "Why remove silverskin?",
+        "choices": [
+         "It tightens and turns rubbery when cooked",
+         "It's unsafe",
+         "It's fat"
+        ],
+        "answer": 0,
+        "explain": "It doesn't melt like fat."
+       }
+      ]
      },
      "knowledge": {
       "title": "Primal cuts and the method each suits",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "A beef carcass is first cut into large sections called primals, and each primal into the cuts you buy. Knowing which primal a cut comes from tells you how hard that muscle worked, and so how to cook it.",
+       "Chuck (the shoulder) works constantly: flavorful, full of connective tissue, and best braised or stewed (pot roast, stew meat, ground chuck). Rib and short loin (along the upper back) barely work: tender, marbled cuts for dry, fast heat (ribeye, strip, tenderloin). Sirloin, behind them, is a little firmer and still good seared or grilled. Round (the hind leg) is lean and tough unless sliced thin or braised. Brisket and plate (the chest and belly) are fatty and tough, made for long, slow cooking. Flank, below the loin, is lean and fibrous, with lots of flavor: seared hot, sliced thin across the grain.",
+       "The rule: muscles that move a lot are tough and suited to moist, slow heat (braising, stewing); muscles that move little are tender and suited to dry, fast heat (searing, grilling, roasting). Lamb follows the same map: shoulder and shank for braising, rack and loin for roasting.",
+       "Poultry follows it too. Legs work and are dark, rich, and forgiving; breasts are lean and dry quickly. Duck breast is darker than chicken breast because ducks fly: it's a working muscle, rich and red, and it slices like a steak."
+      ],
+      "steps": [
+       "Draw a simple outline of a steer and divide it into the primals on this page: chuck, rib, short loin, sirloin, round, brisket, plate, flank.",
+       "On each, write one cut and one cooking method.",
+       "At a store or butcher, find three beef cuts. Write down each primal, its price per kilogram, and how you'd cook it."
+      ],
+      "quiz": [
+       {
+        "q": "Which primal is best for braising?",
+        "choices": [
+         "Chuck",
+         "Short loin",
+         "Rib"
+        ],
+        "answer": 0,
+        "explain": "It's a working shoulder muscle."
+       },
+       {
+        "q": "Why is flank sliced thin across the grain?",
+        "choices": [
+         "It's lean and fibrous; short fibers are tender",
+         "It's fatty",
+         "It's from the rib"
+        ],
+        "answer": 0,
+        "explain": "Long fibers cut short."
+       },
+       {
+        "q": "Why is duck breast darker than chicken breast?",
+        "choices": [
+         "Ducks fly, so the breast is a working muscle",
+         "It's cooked longer",
+         "It's a different cut"
+        ],
+        "answer": 0,
+        "explain": "Working muscles are darker."
+       },
+       {
+        "q": "Which method suits a tender cut like ribeye?",
+        "choices": [
+         "Dry, fast heat: searing or grilling",
+         "Long braising",
+         "Boiling"
+        ],
+        "answer": 0,
+        "explain": "Tender cuts need little cooking."
+       }
+      ]
      },
      "sabbath": {
       "title": "Clean birds: duck, goose, quail, and the birds Leviticus names (Leviticus 11:13–19)",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Leviticus 11:13–19 lists the birds Israel was not to eat: the eagle, the vultures, the kite and falcon, every raven, the ostrich, the nighthawk and sea gull, the hawk, the owls, the cormorant, the stork, the heron, the hoopoe, and the bat. Most hunt or eat what's already dead. Deuteronomy 14:11–20 repeats the list and adds, \"All clean winged things you may eat.\"",
+       "Every bird not on the list is clean. That includes the domestic birds raised for food (chicken, turkey, duck, goose) and many game birds: quail, pheasant, partridge, grouse, guinea fowl, and pigeon and dove. Scripture shows clean birds in use: turtledoves and pigeons as offerings (Leviticus 1:14; 12:8), and quail sent to Israel in the wilderness (Exodus 16:13).",
+       "This week's duck and week 10's quail are both clean. Duck and goose are richer than chicken, with dark breast meat and a thick layer of fat under the skin, which is why they're scored and rendered."
+      ],
+      "steps": [
+       "Read Leviticus 11:13–19 and Deuteronomy 14:11–20.",
+       "Sort these into clean and unclean using the passages: duck, goose, heron, quail, ostrich, pheasant, raven, turkey.",
+       "Look up the hoopoe and the cormorant. Write one sentence on what each eats.",
+       "Find duck, quail, or another game bird at a store or online. Write down the price per kilogram and compare it with chicken."
+      ],
+      "quiz": [
+       {
+        "q": "How does Leviticus 11 identify unclean birds?",
+        "choices": [
+         "It names them",
+         "It gives a two-part test",
+         "It doesn't"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:13–19."
+       },
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "Goose",
+         "Heron",
+         "Ostrich"
+        ],
+        "answer": 0,
+        "explain": "Goose isn't on the list."
+       },
+       {
+        "q": "What does Deuteronomy 14:20 say?",
+        "choices": [
+         "\"All clean winged things you may eat\"",
+         "\"Eat no birds\"",
+         "\"Birds are for offerings only\""
+        ],
+        "answer": 0,
+        "explain": "Every bird not listed is clean."
+       }
+      ]
      }
     },
     {
@@ -25578,15 +26842,158 @@ export const LIBRARY = {
      "cuisine": "mexican",
      "drill": {
       "title": "Skin and portion a side of salmon; pull the pin bones",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "A whole side of salmon costs less per kilogram than portions, and portioning it yourself is quick once you've done it. Use this week's side for the teriyaki salmon, or freeze the portions individually wrapped."
+      ],
+      "steps": [
+       "Lay the side skin down on the raw-meat board with the head end to your left (to your right if you're left-handed).",
+       "Run your fingertips along the thick half, from the head end toward the tail. Pull each pin bone with tweezers toward the head, at the angle it lies. Count them; a side usually has 25 to 35.",
+       "Turn the side so the tail points toward you. Cut down through the flesh to the skin about 2 centimeters from the tail end.",
+       "Grip the tail flap of skin with a paper towel. Hold the knife nearly flat against the skin, and pull the skin toward you in small side-to-side movements while the knife stays almost still.",
+       "Trim off the thin belly fat along the bottom edge and any brown flesh on the skinned side.",
+       "Portion by weight: about 150 grams each. Cut the thick head end into narrower pieces and the tail into wider ones, folding the thinnest tail under.",
+       "Weigh the trim and the skin. Note the yield.",
+       "Wash the knife, tweezers, board, and your hands with hot, soapy water."
+      ],
+      "quiz": [
+       {
+        "q": "How do you hold the knife when skinning?",
+        "choices": [
+         "Nearly flat against the skin, almost still, while you pull the skin",
+         "Angled down into the board",
+         "Straight up"
+        ],
+        "answer": 0,
+        "explain": "The pull does the work."
+       },
+       {
+        "q": "How do you portion a side evenly?",
+        "choices": [
+         "By weight, narrower at the thick end and wider at the tail",
+         "By equal widths",
+         "By eye"
+        ],
+        "answer": 0,
+        "explain": "Thickness changes along the side."
+       },
+       {
+        "q": "About how many pin bones does a side of salmon have?",
+        "choices": [
+         "25 to 35",
+         "2 or 3",
+         "None"
+        ],
+        "answer": 0,
+        "explain": "They run along the thick half."
+       }
+      ]
      },
      "knowledge": {
       "title": "Buying fish: wild and farmed, labels, questions for the fish counter",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Every fish sold at a U.S. counter must be labeled with its name, where it came from, and whether it was wild-caught or farm-raised. Those three things, plus a few questions, tell you most of what you need.",
+       "Name. On a fillet or steak you can't see the scales, so the name is how you know a fish is clean (fins and scales, Leviticus 11:9). Watch for vague names. \"Snapper\" sold in some places covers several kinds; \"red snapper\" is one species. Fish that are commonly substituted include snapper, grouper, and cod. If a name is vague or the price is far below other stores, ask.",
+       "Wild or farmed. Wild salmon is leaner, deeper in color, and seasonal; farmed salmon is fattier, milder, and steady in price and supply. Both are clean. Farmed fish vary with how they're raised; certification labels from independent groups tell you a farm meets set standards for feed, crowding, and the water around it.",
+       "Fresh, frozen, and \"previously frozen.\" Fish frozen at sea within hours of the catch is often better than \"fresh\" fish that's been on ice for a week. \"Previously frozen\" at the counter means it was thawed for display: cook it within a day and don't refreeze it.",
+       "Questions for the fish counter: What is it, exactly? Where's it from? When did it come in? Was it frozen? Can I smell it? Will you scale and gut it, or skin it?"
+      ],
+      "steps": [
+       "At a fish counter, read the labels on four fish. Write down each one's name, origin, and wild or farmed.",
+       "Ask two of the questions on this page, and write down the answers.",
+       "Compare the price per kilogram of a side of salmon with salmon portions. Using your drill yield, work out the real cost of the side per kilogram of portions."
+      ],
+      "quiz": [
+       {
+        "q": "What three things must a U.S. fish label show?",
+        "choices": [
+         "Its name, where it's from, and wild or farmed",
+         "Price, weight, and date",
+         "Name, color, and size"
+        ],
+        "answer": 0,
+        "explain": "Country of origin labeling."
+       },
+       {
+        "q": "What does \"previously frozen\" mean at the counter?",
+        "choices": [
+         "It was thawed for display: cook within a day, don't refreeze",
+         "It's fresher than fresh",
+         "It's frozen now"
+        ],
+        "answer": 0,
+        "explain": "Thawed fish has a short clock."
+       },
+       {
+        "q": "Why does the fish's name matter most?",
+        "choices": [
+         "Without the skin, it's how you know the fish has fins and scales",
+         "It sets the price",
+         "It tells you how to cook it"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:9."
+       },
+       {
+        "q": "A label says \"snapper.\" What do you do?",
+        "choices": [
+         "Ask which kind, and whether it's red snapper",
+         "Buy it",
+         "Smell it only"
+        ],
+        "answer": 0,
+        "explain": "Snapper is a name some stores use loosely."
+       }
+      ]
      },
      "sabbath": {
       "title": "Fins and scales, and the fishermen Jesus called (Leviticus 11:9–12; Luke 5:1–11)",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "\"These you may eat, of all that are in the waters. Everything in the waters that has fins and scales, whether in the seas or in the rivers, you may eat\" (Leviticus 11:9). The rule is repeated in Deuteronomy 14:9–10.",
+       "In Luke 5:1–11, Jesus borrows Simon Peter's boat to teach the crowd from the water. Afterward he tells Peter to put out into deep water and let down the nets. Peter answers, \"Master, we toiled all night and took nothing! But at your word I will let down the nets\" (Luke 5:5). The catch is so large the nets begin to break and two boats nearly sink.",
+       "Peter falls at Jesus' knees. Jesus tells him, \"Do not be afraid; from now on you will be catching men\" (Luke 5:10). They brought their boats to land, left everything, and followed him (Luke 5:11).",
+       "The disciples' trade was the fish of the Sea of Galilee, sold in the markets and salted for the cities, and the Gospels return to those boats and nets again and again."
+      ],
+      "steps": [
+       "Read Leviticus 11:9–12 and Luke 5:1–11.",
+       "Answer in writing: what did Peter's answer in Luke 5:5 show about him?",
+       "Answer in writing: what did the fishermen leave behind in Luke 5:11, and what would that have meant for their families' living?",
+       "Find two more Gospel passages where Jesus meets his disciples at their boats or eats fish with them (start with Mark 1:16–20 and John 21)."
+      ],
+      "quiz": [
+       {
+        "q": "What did Peter say when Jesus told him to let down the nets?",
+        "choices": [
+         "\"At your word I will let down the nets\"",
+         "\"There are no fish here\"",
+         "\"We'll go tomorrow\""
+        ],
+        "answer": 0,
+        "explain": "Luke 5:5."
+       },
+       {
+        "q": "What happened to the nets?",
+        "choices": [
+         "They began to break from the catch",
+         "They were empty",
+         "They were stolen"
+        ],
+        "answer": 0,
+        "explain": "Luke 5:6."
+       },
+       {
+        "q": "What two things must a water animal have to be clean?",
+        "choices": [
+         "Fins and scales",
+         "Fins and gills",
+         "Scales and a tail"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:9."
+       }
+      ]
      }
     },
     {
@@ -25601,15 +27008,159 @@ export const LIBRARY = {
      "ownRecipe": true,
      "drill": {
       "title": "Spatchcock a bird",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Spatchcocking, cutting out the backbone and pressing a bird flat, makes a whole bird roast evenly and fast. Practice on a whole chicken, then use the technique on this week's quail, or roast the chicken flat for another dinner."
+      ],
+      "steps": [
+       "Set up the raw-meat station. Lay the chicken breast side down, neck end toward you. Don't rinse it.",
+       "With kitchen shears, cut along one side of the backbone from tail to neck, cutting through the rib bones.",
+       "Cut along the other side and lift the backbone out. Bag it for stock.",
+       "Open the bird like a book. Nick the white cartilage at the top of the breastbone with the knife tip.",
+       "Turn it skin side up, legs pointing out. Press hard on the breastbone with the heel of your hand until it cracks and the bird lies flat.",
+       "Tuck the wing tips behind the breast. Pat dry, and season, or refrigerate uncovered to dry the skin overnight.",
+       "A flat 1.8-kilogram chicken roasts at 450°F in about 45 minutes, to 165°F in the thickest part of the breast and thigh.",
+       "Wash the shears, board, and your hands with hot, soapy water, and wipe the counter."
+      ],
+      "quiz": [
+       {
+        "q": "What do you cut out to spatchcock a bird?",
+        "choices": [
+         "The backbone",
+         "The breastbone",
+         "The legs"
+        ],
+        "answer": 0,
+        "explain": "Then press it flat."
+       },
+       {
+        "q": "Why spatchcock?",
+        "choices": [
+         "The bird roasts evenly and faster",
+         "It looks fancier",
+         "It keeps the bones in"
+        ],
+        "answer": 0,
+        "explain": "No hollow middle."
+       },
+       {
+        "q": "What tool cuts through the ribs most easily?",
+        "choices": [
+         "Kitchen or poultry shears",
+         "A paring knife",
+         "A bread knife"
+        ],
+        "answer": 0,
+        "explain": "Shears cut bone cleanly."
+       }
+      ]
      },
      "knowledge": {
       "title": "Cost per serving, from the receipt",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Cost per serving is what restaurants live by and what most home cooks never calculate. It's simple: the total cost of what a dish used, divided by the servings it made.",
+       "Start with the receipt. For each ingredient, work out what fraction of the package the recipe used: half a bag of noodles, 1.8 kilograms of a 1.8-kilogram chicken, a tenth of a jar of thyme. Multiply each package price by that fraction and add them up. Spices and oil are small but count; round them to the nearest few cents.",
+       "Divide by servings. If this week's chicken two ways used $18.60 of ingredients and made 6 servings of soup and 6 of breast, that's $1.55 per serving; as 6 dinners of both together, $3.10.",
+       "Compare. A dish's cost per serving is useful next to something: the same dish from store-bought parts and stock, a restaurant's price, or your family's grocery budget per meal. What a whole bird saves shows up here: the stock you didn't buy, the parts you didn't pay a butcher for.",
+       "Food cost percentage, the restaurant measure, is the ingredient cost divided by the menu price. Many restaurants aim for about 28 to 35 percent; the rest pays for labor, rent, and everything else."
+      ],
+      "steps": [
+       "Using this week's receipt, list every ingredient in your mastery dish, its package price, and the fraction you used.",
+       "Add up the cost and divide by servings. Show your math.",
+       "Price the same meal made from store-bought parts and boxed stock, and from a restaurant. Write a short paragraph comparing the three.",
+       "Write down one change that would lower the cost per serving without changing the dish much."
+      ],
+      "quiz": [
+       {
+        "q": "How do you work out cost per serving?",
+        "choices": [
+         "Total ingredient cost divided by servings",
+         "Price of the most expensive ingredient",
+         "Total grocery bill divided by days"
+        ],
+        "answer": 0,
+        "explain": "Only what the dish used."
+       },
+       {
+        "q": "A $4.00 jar of thyme; you used a tenth. What do you count?",
+        "choices": [
+         "$0.40",
+         "$4.00",
+         "Nothing"
+        ],
+        "answer": 0,
+        "explain": "Count the fraction used."
+       },
+       {
+        "q": "A dish costs $3.00 to make and sells for $10.00. What's the food cost percentage?",
+        "choices": [
+         "30%",
+         "3%",
+         "70%"
+        ],
+        "answer": 0,
+        "explain": "3 ÷ 10."
+       },
+       {
+        "q": "Why does a whole bird lower cost per serving?",
+        "choices": [
+         "You don't pay for butchering, and the back becomes stock",
+         "It weighs more",
+         "It cooks faster"
+        ],
+        "answer": 0,
+        "explain": "Every part is used."
+       }
+      ]
      },
      "sabbath": {
       "title": "Manna and quail (Exodus 16:13; Numbers 11:31–32)",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "In the wilderness, Israel complained of hunger, and God answered: \"At twilight you shall eat meat, and in the morning you shall be filled with bread\" (Exodus 16:12). \"In the evening quail came up and covered the camp, and in the morning dew lay around the camp\" (Exodus 16:13), and when the dew lifted, there was manna.",
+       "The manna came with instructions: gather what each person needs for the day; on the sixth day, gather twice as much (Exodus 16:16–26). Some gathered extra on other days, and it spoiled (Exodus 16:20). The provision was daily, and it was enough.",
+       "Numbers 11 tells of a later time, when the people grew tired of manna and craved meat. God sent quail again, in huge numbers (Numbers 11:31–32), but the people gathered greedily, and the story ends in judgment (Numbers 11:33–34). The same food was a gift in one story and a lesson in the other; the difference was the people's hearts.",
+       "Quail are clean birds (Deuteronomy 14:11), and this week's Explore dish cooks them."
+      ],
+      "steps": [
+       "Read Exodus 16:1–21 and Numbers 11:4–6, 18–20, 31–34.",
+       "Answer in writing: how were the two quail stories alike, and how were they different?",
+       "Answer in writing: what did the manna instructions teach about trusting God for daily food?",
+       "Look at your family's grocery spending for one week. Write one way your family could waste less, as Israel was told to gather only what it needed."
+      ],
+      "quiz": [
+       {
+        "q": "What did God send Israel at twilight in Exodus 16?",
+        "choices": [
+         "Quail",
+         "Bread",
+         "Fish"
+        ],
+        "answer": 0,
+        "explain": "Exodus 16:13."
+       },
+       {
+        "q": "What happened to extra manna gathered on an ordinary day?",
+        "choices": [
+         "It spoiled",
+         "It turned to bread",
+         "It kept for a week"
+        ],
+        "answer": 0,
+        "explain": "Exodus 16:20."
+       },
+       {
+        "q": "In Numbers 11, what was wrong when quail came again?",
+        "choices": [
+         "The people craved and gathered greedily",
+         "The quail were unclean",
+         "There weren't enough"
+        ],
+        "answer": 0,
+        "explain": "Numbers 11:33–34."
+       }
+      ]
      }
     },
     {
@@ -26375,7 +27926,7 @@ export const LIBRARY = {
       "breaking-down-chicken",
       "braising"
      ],
-     "minutes": 120,
+     "minutes": 110,
      "tags": {
       "protein": "chicken",
       "flavors": [
@@ -26397,7 +27948,7 @@ export const LIBRARY = {
       "thin-slicing",
       "searing"
      ],
-     "minutes": 75,
+     "minutes": 70,
      "tags": {
       "protein": "beef",
       "flavors": [
@@ -26418,7 +27969,7 @@ export const LIBRARY = {
       "searing",
       "reducing"
      ],
-     "minutes": 90,
+     "minutes": 75,
      "tags": {
       "protein": "duck-quail",
       "flavors": [
@@ -26438,7 +27989,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-fish"
      ],
-     "minutes": 75,
+     "minutes": 60,
      "tags": {
       "protein": "salmon",
       "flavors": [
@@ -26459,7 +28010,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-fish"
      ],
-     "minutes": 90,
+     "minutes": 80,
      "tags": {
       "protein": "white-fish",
       "flavors": [

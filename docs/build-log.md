@@ -6108,3 +6108,43 @@ owner approves it there.
 - The content check finds no Level 2 writing warnings.
 - No screens changed, so no screenshots.
 - Tests: 392.
+
+## 237. 2026-10-26 — 14g content: Level 4 Unit 3
+
+Owner, 2026-10-26: Level 4 is the last of Unit 3's three Levels (235).
+Reviewed in [14g review: Level 4 Chef, Unit
+3](https://claude.ai/artifact/87ZoVDP7Kn4ugsVeX8CiDf); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 4 Unit 3's eight dishes was written; chicken
+  tagine (week 7's Explore) was a planned Cook Around the World card. All 12
+  part pages were blank.
+- **Now:**
+  - **Seven Level-only recipes** in `content/levels/recipes/`, unit 104:
+    Chicken cacciatore (week 7, a whole chicken broken into 8 and the yield
+    weighed), Sliced flank steak and Seared duck breast with cherry sauce
+    (week 8: silverskin, scoring, rendering, slicing across the grain),
+    Teriyaki salmon side and Pescado a la veracruzana (week 9: a side skinned
+    and portioned by weight, a whole snapper baked on the bone), and Chicken
+    two ways and Spatchcocked quail with pomegranate (week 10, the mastery
+    week: one bird used whole with its cost per serving, and eight quail
+    spatchcocked). Their cards' minutes are now the recipes' own.
+  - **Chicken tagine with olives,** a new Cook Around the World lesson (Unit
+    3, the braising group's first dish, with a callback to chana masala;
+    80 minutes), and its Level 4 version from a whole bird, the breasts out
+    at 165°F and the dark meat braised on.
+  - **All 12 part pages:** yield and cost, breaking down a chicken, freezing
+    backs for stock; primal cuts, silverskin and scoring, clean birds
+    (Leviticus 11:13–19); buying fish and labels, skinning a side of salmon,
+    Luke 5:1–11; cost per serving, spatchcocking, manna and quail (Exodus 16;
+    Numbers 11).
+  - **New ingredients:** whole chicken, duck breasts, whole quail (watch:
+    thaw in the fridge), side of salmon, whole red snapper (watch: scaled and
+    gutted, check the name), frozen dark cherries, balsamic vinegar, pickled
+    jalapeños, pomegranate molasses. **New tool:** kitchen shears. **New
+    kitchen words:** score, render.
+  - Duck and quail are cooked to 165°F and flank steak to 145°F, the app's
+    standards; the review doc asks the owner about both.
+- The content check finds no Level 4 writing warnings.
+- No screens changed, so no screenshots.
+- Tests: 392.

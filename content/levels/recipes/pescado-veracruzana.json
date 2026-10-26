@@ -1,0 +1,95 @@
+{
+  "id": "pescado-veracruzana",
+  "version": 1,
+  "track": "core",
+  "unit": 104,
+  "title": "Pescado a la veracruzana",
+  "image": "dishes/pescado-veracruzana.png",
+  "cuisine": "mexican",
+  "skill": "Cleaning and baking a whole fish",
+  "skills": ["cooking-fish"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 80,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 5, "text": "For more than 4, bake two fish side by side on a sheet pan, each in its own bed of sauce, and add 5 minutes." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "A whole fish, on the bone",
+      "body": "From the port of Veracruz: a whole red snapper baked in a sauce of tomatoes, olives, capers, and pickled jalapeños, a meeting of Spanish and Mexican cooking. You'll check the fish the counter cleaned for you, trim its fins, score it, bake it on the bone, and lift the fillets off at the table."
+    },
+    "why": [
+      { "id": "check-clean", "title": "Check the cleaning", "body": "The counter scales and guts the fish, but often misses a few scales near the fins and head and a dark line of blood along the backbone inside. Scrape any scales off with the back of the knife, toward the head, and wipe the cavity with damp paper towels." },
+      { "id": "score", "title": "Score to the bone", "body": "Three diagonal cuts on each side, down to the bone, let the heat and the sauce reach the thick middle so it cooks in step with the thin tail." },
+      { "id": "bone", "title": "Cooking on the bone", "body": "The bone and skin hold the fish together and slow the cooking near the spine, so the flesh stays moist. The thickest point, right behind the head and against the backbone, is the last part to cook and the place to check." },
+      { "id": "sauce", "title": "A cooked-down sauce", "body": "The tomatoes simmer with the onion and garlic first, so they're thick and sweet before they meet the fish. Raw, they'd flood the dish with water as it bakes." },
+      { "id": "fillet", "title": "Lifting the fillets", "body": "Run a knife along the backbone from head to tail, then slide a spatula under the top fillet and lift it off in one or two pieces. Lift out the whole skeleton by the tail, and the bottom fillet is free." }
+    ],
+    "wrong": [
+      { "sign": "The flesh near the bone is still translucent", "fix": "Return it for 5 minutes and check again behind the head." },
+      { "sign": "The sauce is watery", "fix": "The tomatoes needed longer. Pour the sauce into a pan and reduce it while the fish rests." },
+      { "sign": "Too salty", "fix": "Olives, capers, and pickled peppers are all salty. Next time, skip the salt in the sauce and season at the end." },
+      { "sign": "Small bones in the fillets", "fix": "Lift them out with the tweezers as you plate. Whole fish always carries a few." }
+    ],
+    "quiz": [
+      { "q": "Where do you check a whole fish's temperature?", "choices": ["The thickest point, behind the head, against the backbone", "The tail", "Inside the cavity"], "answer": 0, "explain": "It's the last part to cook." },
+      { "q": "Why score a whole fish?", "choices": ["So heat and sauce reach the thick middle", "To check for bones", "To remove the scales"], "answer": 0, "explain": "The thick part catches up with the tail." },
+      { "q": "What must a fish have to be clean?", "choices": ["Fins and scales", "Fins only", "Gills"], "answer": 0, "explain": "Leviticus 11:9." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "snapper-whole", "amount": 1400, "unit": "g", "group": "Fish", "prep": "1 large or 2 small" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Fish" },
+    { "ingredient": "lime", "amount": 1, "unit": "count", "group": "Fish", "round": "up" },
+    { "ingredient": "olive-oil", "amount": 3, "unit": "tbsp", "group": "Sauce" },
+    { "ingredient": "onion-white", "amount": 1, "unit": "count", "group": "Sauce", "round": "up" },
+    { "ingredient": "garlic", "amount": 4, "unit": "count", "group": "Sauce", "round": "up" },
+    { "ingredient": "tomatoes-crushed", "amount": 1, "unit": "can", "group": "Sauce" },
+    { "ingredient": "olives-green", "amount": 0.5, "unit": "cup", "group": "Sauce" },
+    { "ingredient": "capers", "amount": 2, "unit": "tbsp", "group": "Sauce" },
+    { "ingredient": "jalapenos-pickled", "amount": 0.25, "unit": "cup", "group": "Sauce" },
+    { "ingredient": "bay-leaves", "amount": 2, "unit": "count", "group": "Sauce", "round": "up" },
+    { "ingredient": "oregano-dried", "amount": 1, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "cinnamon-ground", "amount": 0.125, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "rice-white", "amount": 1.5, "unit": "cup", "group": "Rice" },
+    { "ingredient": "water", "amount": 2.25, "unit": "cup", "group": "Rice" },
+    { "ingredient": "parsley", "amount": 0.25, "unit": "cup", "group": "To serve", "prep": "chopped" }
+  ],
+  "equipment": [
+    "kitchen-shears",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "tweezers",
+    "baking-dish",
+    "skillet-12",
+    "saucepan-medium",
+    "wooden-spoon",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "can-opener",
+    "oven-mitts",
+    "thermometer",
+    "spatula",
+    "plate"
+  ],
+  "steps": [
+    { "id": "oven", "text": "Heat the oven to 400°F with a rack in the middle.", "safety": "solo", "hazard": "Hot oven" },
+    { "id": "sauce", "text": "Slice the onion thin and the garlic thinner. Cook them in the oil in the skillet over medium heat until soft, then add the tomatoes, olives, capers, jalapeños, bay, oregano, and cinnamon. Simmer until thick.", "safety": "solo", "hazard": "Hot pan", "timerSeconds": 900, "timerLabel": "Sauce", "why": "sauce", "look": "A thick sauce; a spoon dragged through leaves a clear line." },
+    { "id": "rice", "text": "Rinse the rice and bring it to a boil with the water in the saucepan. Cover, cook on low, and hold it off the heat, covered.", "safety": "solo", "hazard": "Hot pot", "timerSeconds": 1080, "timerLabel": "Rice" },
+    { "id": "clean", "text": "Check the fish's label for red snapper. Scrape off missed scales with the back of the knife, toward the head, and wipe the cavity with damp paper towels. Don't rinse it under the tap.", "safety": "solo", "hazard": "Raw fish", "why": "check-clean" },
+    { "id": "trim", "text": "Snip off the sharp fins with the shears. Score each side 3 times, diagonally, down to the bone. Rub with the salt and the juice of the lime, inside and out.", "safety": "solo", "hazard": "Sharp fins, shears, raw fish", "handles": ["snapper-whole"], "why": "score", "tip": "The back fin's spines are sharp. Snip them first, holding the fish by the tail." },
+    { "id": "wash-trim", "text": "Throw the paper towels away. Wash your hands, the knife, the shears, and the board with hot, soapy water, and wipe the sink.", "safety": "solo", "type": "wash", "hazard": "Raw fish" },
+    { "id": "assemble", "text": "Spread a third of the sauce in the baking dish, lay the fish on it with the spatula, and spoon the rest over and into the cuts.", "safety": "solo", "hazard": "Raw fish", "handles": ["snapper-whole"] },
+    { "id": "wash-assemble", "text": "Wash your hands and the spatula.", "safety": "solo", "type": "wash", "hazard": "Raw fish" },
+    { "id": "bake", "text": "Bake until the flesh at the cuts is opaque and pulls away from the bone.", "safety": "solo", "hazard": "Hot oven", "timerSeconds": 1800, "timerLabel": "Bake the fish", "why": "bone" },
+    { "id": "check", "text": "Check behind the head, against the backbone: at least 145°F. If not, bake 5 more minutes.", "safety": "solo", "type": "doneness", "hazard": "Hot oven", "target": { "temp": 145, "unit": "F" } },
+    { "id": "fillet", "text": "At the table, run a knife along the backbone, lift off the top fillet, lift out the skeleton by the tail, and serve the bottom fillet. Spoon sauce over each piece.", "safety": "solo", "hazard": "Hot dish, small bones", "why": "fillet" },
+    { "id": "serve", "text": "Serve with the rice and parsley, and the lime-and-sauce juices from the dish.", "safety": "solo" }
+  ]
+}

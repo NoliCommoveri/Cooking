@@ -1,0 +1,97 @@
+{
+  "id": "chicken-cacciatore",
+  "version": 1,
+  "track": "core",
+  "unit": 104,
+  "title": "Chicken cacciatore",
+  "image": "dishes/chicken-cacciatore.png",
+  "cuisine": "italian",
+  "skill": "Breaking down a whole chicken",
+  "skills": ["breaking-down-chicken", "braising"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 110,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 7, "text": "For more than 6, break down two chickens, brown in three batches, and braise in your widest pot so the pieces sit in one layer." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Break it down, braise it",
+      "body": "Cacciatore is Italy's hunter-style chicken: a whole bird cut into pieces, browned, and braised with peppers, mushrooms, tomatoes, and herbs. You'll break the chicken into 8 pieces yourself, weigh what you get, and braise it until the dark meat is tender. Week 7's two dishes both start from a whole bird."
+    },
+    "why": [
+      { "id": "joints", "title": "Cut through joints, not bone", "body": "A chef's knife goes through a chicken's joints easily and through its bones badly. Bend each leg and wing back until the joint pops, then cut through the gap. If the knife meets hard resistance, you're on bone: move it a few millimeters." },
+      { "id": "yield", "title": "Weigh the parts", "body": "A whole chicken costs less per kilogram than parts, but some of its weight is back, neck, and bone. Weighing the pieces you'll cook against the whole bird gives the yield, which this week's knowledge page turns into cost." },
+      { "id": "dry-skin", "title": "Dry skin browns", "body": "Wet skin steams. Patting the pieces dry and salting them before browning gives crisp, deep-golden skin and the brown bits the sauce is built on." },
+      { "id": "deglaze", "title": "Deglaze with the tomatoes", "body": "The brown bits stuck to the pot after browning are concentrated flavor. The juice from the tomatoes, with a scrape of the spoon, dissolves them into the sauce." },
+      { "id": "dark-longer", "title": "Dark meat stays in longer", "body": "Breasts are done at 165°F and dry out after. Thighs and drumsticks have more connective tissue and get more tender up to about 185°F, so the breasts go in later." }
+    ],
+    "wrong": [
+      { "sign": "The skin tore off when you turned it", "fix": "It wasn't browned enough to release. Give it another 2 minutes before turning." },
+      { "sign": "The sauce is thin", "fix": "Take the lid off for the last 10 minutes and let it reduce." },
+      { "sign": "The breasts are dry", "fix": "They went in too early. Next time, add them for the last 20 minutes only." },
+      { "sign": "Bits of bone in the pieces", "fix": "The knife went through bone, not joint. Feel for the joint first, and cut through the gap." }
+    ],
+    "quiz": [
+      { "q": "How do you cut off a chicken leg cleanly?", "choices": ["Bend it back until the hip joint pops, then cut through the joint", "Chop straight through the thigh bone", "Pull it off by hand"], "answer": 0, "explain": "Joints, not bone." },
+      { "q": "A 1,800 g chicken gives 1,350 g of cooking pieces. What's the yield?", "choices": ["75%", "25%", "135%"], "answer": 0, "explain": "1,350 ÷ 1,800 = 0.75." },
+      { "q": "Why do the breasts go into the braise later?", "choices": ["They dry out past 165°F; dark meat gets more tender", "They're bigger", "They need less salt"], "answer": 0, "explain": "Each part cooks to what suits it." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "chicken-whole", "amount": 1800, "unit": "g", "group": "Chicken" },
+    { "ingredient": "salt", "amount": 1.5, "unit": "tsp", "group": "Chicken" },
+    { "ingredient": "black-pepper", "amount": 0.5, "unit": "tsp", "group": "Chicken" },
+    { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp", "group": "Chicken" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "group": "Sauce", "round": "up" },
+    { "ingredient": "bell-pepper-red", "amount": 1, "unit": "count", "group": "Sauce", "round": "up" },
+    { "ingredient": "bell-pepper-green", "amount": 1, "unit": "count", "group": "Sauce", "round": "up" },
+    { "ingredient": "mushrooms", "amount": 225, "unit": "g", "group": "Sauce" },
+    { "ingredient": "garlic", "amount": 4, "unit": "count", "group": "Sauce", "round": "up" },
+    { "ingredient": "tomatoes-crushed", "amount": 1, "unit": "can", "group": "Sauce" },
+    { "ingredient": "broth-chicken", "amount": 0.5, "unit": "cup", "group": "Sauce" },
+    { "ingredient": "oregano-dried", "amount": 1, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "thyme-dried", "amount": 0.5, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "bay-leaves", "amount": 2, "unit": "count", "group": "Sauce", "round": "up" },
+    { "ingredient": "chili-flakes", "amount": 0.25, "unit": "tsp", "group": "Sauce", "optional": true },
+    { "ingredient": "parsley", "amount": 0.25, "unit": "cup", "group": "To serve", "prep": "chopped" },
+    { "ingredient": "baguette", "amount": 1, "unit": "count", "group": "To serve", "round": "up" }
+  ],
+  "equipment": [
+    "kitchen-scale",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "plate",
+    "pot-large",
+    "heatproof-bowl",
+    "tongs",
+    "wooden-spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "can-opener",
+    "thermometer",
+    "bread-knife"
+  ],
+  "steps": [
+    { "id": "weigh", "text": "Weigh the chicken and note it. Unwrap it over the board; don't rinse it.", "safety": "solo" },
+    { "id": "break-down", "text": "Break the chicken into 8 pieces: legs off at the hip, split at the knee; wings off at the shoulder; breast off the back and halved. Weigh the 8 pieces.", "safety": "solo", "hazard": "Sharp knife, raw chicken", "handles": ["chicken-whole"], "why": "joints", "look": "Eight pieces with clean cuts at the joints." },
+    { "id": "wash-break", "text": "Bag and freeze the back. Wash your hands, the knife, and the board with hot, soapy water.", "safety": "solo", "hazard": "Raw chicken", "type": "wash" },
+    { "id": "weigh-pieces", "text": "Work out the yield: the pieces' weight divided by the whole bird's. Write it down.", "safety": "solo", "why": "yield" },
+    { "id": "season", "text": "Pat the pieces dry, and season them with the salt and pepper.", "safety": "solo", "hazard": "Raw chicken", "handles": ["chicken-whole"], "why": "dry-skin" },
+    { "id": "wash-season", "text": "Throw the paper towels away and wash your hands.", "safety": "solo", "hazard": "Raw chicken", "type": "wash" },
+    { "id": "veg", "text": "Slice the onion and peppers into 1-centimeter strips, quarter the mushrooms, and slice the garlic thin.", "safety": "solo", "hazard": "Sharp knife" },
+    { "id": "brown", "text": "Heat the oil in the pot over medium-high. Brown the chicken skin side down in two batches with the tongs, about 5 minutes, then turn for 2. Set the pieces aside.", "safety": "solo", "hazard": "Hot oil, spatter", "handles": ["chicken-whole"], "timerSeconds": 840, "timerLabel": "Brown, both batches", "look": "Deep golden skin that releases on its own." },
+    { "id": "wash-brown", "text": "Put the tongs in the sink and wash your hands. Use clean tongs from here.", "safety": "solo", "hazard": "Hot stove", "type": "wash" },
+    { "id": "fat", "text": "Pour off all but 2 tablespoons of fat into the heatproof bowl.", "safety": "solo", "hazard": "Hot fat" },
+    { "id": "veg-cook", "text": "Cook the onion, peppers, and mushrooms over medium heat until the mushrooms brown. Add the garlic for the last minute.", "safety": "solo", "hazard": "Hot pot", "timerSeconds": 600, "timerLabel": "Vegetables" },
+    { "id": "sauce", "text": "Add the tomatoes, broth, oregano, thyme, bay leaves, and chili flakes, and scrape the bottom of the pot clean.", "safety": "solo", "hazard": "Hot pot, steam", "why": "deglaze" },
+    { "id": "braise-dark", "text": "Return the drumsticks, thighs, and wings, skin side up. Cover and braise on low.", "safety": "solo", "hazard": "Hot pot", "timerSeconds": 1500, "timerLabel": "Dark meat", "why": "dark-longer" },
+    { "id": "braise-breast", "text": "Add the breasts and braise, covered, until the breasts reach temperature.", "safety": "solo", "hazard": "Hot pot", "timerSeconds": 1200, "timerLabel": "With breasts" },
+    { "id": "check", "text": "Check a breast and a thigh, away from the bone: both at least 165°F. The thigh should be tender; if not, braise 10 more minutes.", "safety": "solo", "hazard": "Hot pot", "type": "doneness", "target": { "temp": 165, "unit": "F" } },
+    { "id": "serve", "text": "Discard the bay leaves, season the sauce to taste, and scatter the parsley. Serve with sliced bread.", "safety": "solo", "hazard": "Hot pot" }
+  ]
+}
