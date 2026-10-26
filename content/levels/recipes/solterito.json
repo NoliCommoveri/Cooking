@@ -1,0 +1,93 @@
+{
+  "id": "solterito",
+  "version": 1,
+  "track": "core",
+  "unit": 103,
+  "title": "Solterito",
+  "image": "dishes/solterito.png",
+  "cuisine": "peruvian",
+  "skill": "A fine dice and a balanced dressing",
+  "skills": ["dicing", "dressings"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 45,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 9, "text": "Heat the corn and beans in two batches so each one gets steaming hot all the way through." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Everything the size of a bean",
+      "body": "Solterito is a salad from Arequipa, in southern Peru: corn, fava or lima beans, tomato, onion, olives, and fresh cheese, all cut to the size of the beans and dressed with lime. It's this unit's mastery week. You'll dice everything yourself, time the knife work, and balance the dressing by taste."
+    },
+    "why": [
+      { "id": "bean-size", "title": "The beans set the size", "body": "The corn kernels and beans can't be cut, so everything else is diced to match them, about ¼ to ⅜ inch. When every piece is the same size, each spoonful has some of everything, and nothing hides at the bottom of the bowl." },
+      { "id": "frozen", "title": "Frozen isn't ready to eat", "body": "Frozen corn and edamame are blanched before freezing, not cooked through, and the bags say to cook them. Heating them until steaming hot makes them safe, and cooling them right after keeps them sweet and crisp for a cold salad." },
+      { "id": "cool", "title": "Cold water stops the cooking", "body": "Hot vegetables keep cooking from their own heat after they leave the microwave. Rinsing them in cold water stops that, so they stay bright and firm, and it cools them before they meet the cheese and tomato." },
+      { "id": "lime-forward", "title": "A sharper ratio on purpose", "body": "Most vinaigrettes start at 3 parts oil to 1 part acid. Solterito is made sharper, about 2 to 1, because the corn, beans, and cheese are mild and sweet and need a lot of brightness. A ratio is where you start; your tongue decides where you finish." },
+      { "id": "cheese-last", "title": "Cheese goes in last", "body": "Queso fresco is soft and crumbles when it's stirred hard. Fold it in at the end with a few gentle turns so the cubes stay whole." },
+      { "id": "rest", "title": "A salad that improves", "body": "With no lettuce to wilt, solterito gets better after 10 minutes: the onion mellows in the lime, and the beans and corn take on the dressing. It holds well for a couple of hours in the fridge." }
+    ],
+    "wrong": [
+      { "sign": "The corn and beans are still cold in the middle after heating", "fix": "Stir, cover, and heat for another minute. They need to be steaming all the way through." },
+      { "sign": "The salad tastes flat", "fix": "Add salt a pinch at a time, then a squeeze of lime, tasting after each." },
+      { "sign": "It's too sour", "fix": "Whisk a tablespoon of oil into what's left of the dressing, or add more corn and beans." },
+      { "sign": "The cheese broke into crumbs", "fix": "It was stirred in too early or too hard. It still tastes right; next time fold it in last." }
+    ],
+    "quiz": [
+      { "q": "Why are the vegetables diced to about the size of a bean?", "choices": ["So every spoonful has some of everything", "So they cook faster", "So the salad weighs less"], "answer": 0, "explain": "The corn and beans can't be cut, so they set the size." },
+      { "q": "Why are the frozen corn and edamame heated first?", "choices": ["Frozen vegetables aren't cooked through and need to be heated before eating", "To thaw them faster", "To make them softer"], "answer": 0, "explain": "The bags say to cook them. Steaming hot makes them safe." },
+      { "q": "This dressing is about 2 parts oil to 1 part lime. Why not 3 to 1?", "choices": ["The mild corn, beans, and cheese need more brightness", "Lime juice is weaker than vinegar", "Oil is expensive"], "answer": 0, "explain": "A ratio is a starting point you change to fit the dish." },
+      { "q": "When does the cheese go in?", "choices": ["Last, folded in gently", "First, with the dressing", "Before the corn is heated"], "answer": 0, "explain": "Stirred hard, soft cheese crumbles." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "corn-frozen", "amount": 1.5, "unit": "cup", "group": "Corn and beans" },
+    { "ingredient": "edamame-frozen", "amount": 1.5, "unit": "cup", "group": "Corn and beans" },
+    { "ingredient": "water", "amount": 2, "unit": "tbsp", "group": "Corn and beans" },
+    { "ingredient": "onion-red", "amount": 1, "unit": "count", "round": "up", "group": "Salad" },
+    { "ingredient": "tomato", "amount": 3, "unit": "count", "round": "up", "group": "Salad" },
+    { "ingredient": "jalapeno", "amount": 1, "unit": "count", "round": "up", "optional": true, "group": "Salad" },
+    { "ingredient": "olives-kalamata", "amount": 0.5, "unit": "cup", "group": "Salad" },
+    { "ingredient": "parsley", "amount": 0.5, "unit": "cup", "prep": "leaves", "group": "Salad" },
+    { "ingredient": "queso-fresco", "amount": 1, "unit": "cup", "group": "Salad" },
+    { "ingredient": "lime", "amount": 2, "unit": "count", "round": "up", "prep": "juiced, about 3 tbsp", "group": "Dressing" },
+    { "ingredient": "vinegar-red-wine", "amount": 1, "unit": "tbsp", "group": "Dressing" },
+    { "ingredient": "salt", "amount": 0.75, "unit": "tsp", "group": "Dressing" },
+    { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Dressing" },
+    { "ingredient": "olive-oil", "amount": 0.5, "unit": "cup", "group": "Dressing" }
+  ],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "mixing-bowl-medium",
+    "mixing-bowl-large",
+    "small-bowl",
+    "plate",
+    "microwave",
+    "colander",
+    "kitchen-towel",
+    "whisk",
+    "measuring-cups",
+    "measuring-spoons",
+    "spoon"
+  ],
+  "steps": [
+    { "id": "heat", "text": "Put the corn, edamame, and water in the medium bowl, cover it with the plate, and microwave until steaming hot all the way through, stirring once halfway.", "safety": "adult-nearby", "hazard": "Hot bowl and steam", "why": "frozen", "timerSeconds": 240, "timerLabel": "Corn and beans", "look": "Steam rising from the middle when you stir, not just the edges.", "tip": "Lift the plate away from you." },
+    { "id": "cool", "text": "Tip the corn and beans into the colander and run cold water over them, tossing, until they're cool to the touch. Shake them dry and spread them on the towel.", "safety": "adult-nearby", "hazard": "Hot steam", "why": "cool" },
+    { "id": "start", "text": "Set the cutting board on a damp paper towel and set out the bowls. Note the time: the knife work, from the onion to the cheese, is this week's mastery check.", "safety": "solo", "tip": "Even first, fast second. A neat dice in 20 minutes beats a ragged one in 10." },
+    { "id": "onion", "text": "Halve and peel the onion, leaving the root on. Mince it: strips ⅛ inch apart toward the root, then across at ⅛ inch. Put it in the large bowl with the lime juice to soften while you work.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Pieces smaller than a corn kernel." },
+    { "id": "tomatoes", "text": "Core and quarter the tomatoes and scoop out the seeds. Lay each quarter skin side down and cut it into ⅜-inch strips, then across into ⅜-inch dice. Put them on a plate.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "bean-size", "look": "Dice about the size of an edamame bean." },
+    { "id": "chile", "text": "If you're using the jalapeño, halve it, scrape out the ribs and seeds, and mince it. Add it to the onion and wash your hands with soap.", "safety": "adult-nearby", "hazard": "Sharp knife, hot chile" },
+    { "id": "olives", "text": "Cut each olive into quarters the long way, then across, to bean-size pieces.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "parsley", "text": "Dry the parsley well, gather it tight, and rock the knife through it until finely chopped.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "cheese", "text": "Cut the queso fresco into ⅜-inch slices, then strips, then cubes, using light pressure. Check the time: that's your knife-work time for this week.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Cubes the size of the tomato, most of them whole." },
+    { "id": "dressing", "text": "Add the vinegar, salt, and pepper to the onion and lime in the large bowl and whisk. Keep whisking while you pour in the oil in a thin stream.", "safety": "solo", "why": "lime-forward" },
+    { "id": "taste", "text": "Taste the dressing on a piece of tomato and a few kernels of corn. Balance it with salt, lime, or oil until it's bright but not harsh.", "safety": "solo", "why": "lime-forward" },
+    { "id": "toss", "text": "Add the corn, beans, tomatoes, olives, and parsley to the bowl and toss well. Add the cheese last and fold it in with a few gentle turns.", "safety": "solo", "why": "cheese-last" },
+    { "id": "rest", "text": "Let the salad sit, then taste once more and serve. Refrigerate any left over within 2 hours.", "safety": "solo", "why": "rest", "timerSeconds": 600, "timerLabel": "Rest" }
+  ]
+}

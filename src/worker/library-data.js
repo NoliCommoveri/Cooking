@@ -1099,6 +1099,114 @@ export const LIBRARY = {
     "measuring-cups",
     "measuring-spoons",
     "wooden-spoon"
+   ],
+   "variations": [
+    {
+     "title": "Tuna salad sandwiches",
+     "image": "img/dishes/tuna-salad-sandwiches.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free"
+     },
+     "totalMinutes": 25,
+     "ingredients": [
+      {
+       "ingredient": "tuna-canned"
+      },
+      {
+       "ingredient": "celery"
+      },
+      {
+       "ingredient": "green-onion"
+      },
+      {
+       "ingredient": "pickle-dill"
+      },
+      {
+       "ingredient": "parsley"
+      },
+      {
+       "ingredient": "mayonnaise"
+      },
+      {
+       "ingredient": "mustard-dijon"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "bread-sandwich"
+      },
+      {
+       "ingredient": "lettuce-green-leaf",
+       "optional": true
+      },
+      {
+       "ingredient": "tomato",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "bread-sandwich",
+       "use": "bread-gluten-free",
+       "reason": "gluten"
+      },
+      {
+       "for": "mayonnaise",
+       "use": "yogurt-greek",
+       "reason": "egg"
+      }
+     ],
+     "unleavened": false,
+     "protein": "fish",
+     "tags": {
+      "protein": "tuna",
+      "flavors": [
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "celery",
+       "onions",
+       "pickles",
+       "mayonnaise",
+       "mustard",
+       "lemon-lime"
+      ],
+      "optional": [
+       "tomatoes"
+      ]
+     },
+     "tools": [
+      "can-opener",
+      "fork",
+      "mixing-bowl-large",
+      "cutting-board",
+      "colander",
+      "paper-towels",
+      "kitchen-towel",
+      "measuring-cups",
+      "measuring-spoons",
+      "wooden-spoon",
+      "paring-knife",
+      "bread-knife"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
+    }
    ]
   },
   {
@@ -1812,6 +1920,139 @@ export const LIBRARY = {
     "measuring-spoons",
     "colander",
     "kitchen-towel"
+   ],
+   "variations": [
+    {
+     "title": "Chicken Caesar + homemade dressing & croutons",
+     "image": "img/dishes/chicken-caesar.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, bake the croutons on two sheet pans and swap their shelves halfway, and cook the chicken in two batches."
+       }
+      ]
+     },
+     "totalMinutes": 60,
+     "ingredients": [
+      {
+       "ingredient": "baguette"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "garlic-powder"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "chicken-breast"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "mustard-dijon"
+      },
+      {
+       "ingredient": "worcestershire",
+       "optional": true
+      },
+      {
+       "ingredient": "parmesan"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "romaine"
+      },
+      {
+       "ingredient": "parmesan"
+      },
+      {
+       "ingredient": "egg-pasteurized"
+      },
+      {
+       "ingredient": "anchovy-fillets",
+       "optional": true
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "olive-oil"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "baguette",
+       "use": "bread-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "creamy-cheesy",
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "lemon-lime",
+       "mustard",
+       "sharp-cheese"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "mixing-bowl-large",
+      "sheet-pan",
+      "oven-mitts",
+      "spatula",
+      "plate",
+      "skillet-12",
+      "tongs",
+      "thermometer",
+      "small-bowl",
+      "whisk",
+      "measuring-cups",
+      "measuring-spoons",
+      "colander",
+      "kitchen-towel",
+      "heatproof-bowl",
+      "saucepan-medium"
+     ],
+     "id": "sp-4",
+     "level": "sp-4"
+    }
    ]
   },
   {
@@ -1931,6 +2172,226 @@ export const LIBRARY = {
     "thermometer",
     "paper-towels",
     "microwave"
+   ]
+  },
+  {
+   "id": "chopped-salad-vinaigrette",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Chickpea chopped salad + vinaigrette",
+   "image": "img/dishes/chopped-salad-vinaigrette.webp",
+   "cuisine": "american",
+   "skill": "Whisking a vinaigrette, dressing to taste",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, toss the salad in two bowls, with half the dressing in each, so the bottom doesn't get crushed."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "onion-red"
+    },
+    {
+     "ingredient": "chickpeas"
+    },
+    {
+     "ingredient": "feta",
+     "optional": true
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "vinegar-red-wine"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "olive-oil"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "tangy",
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "lots"
+   },
+   "tasteItems": {
+    "required": [
+     "cucumber",
+     "tomatoes",
+     "bell-peppers",
+     "garlic",
+     "mustard"
+    ],
+    "optional": [
+     "feta"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "colander",
+    "kitchen-towel",
+    "can-opener",
+    "mixing-bowl-large",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "whisk",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "spoon"
+   ],
+   "variations": [
+    {
+     "title": "Chickpea chopped salad + vinaigrette",
+     "image": "img/dishes/chopped-salad-vinaigrette.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, toss the salad in two bowls, with half the dressing in each, so the bottom doesn't get crushed."
+       }
+      ]
+     },
+     "totalMinutes": 40,
+     "ingredients": [
+      {
+       "ingredient": "romaine"
+      },
+      {
+       "ingredient": "cucumber"
+      },
+      {
+       "ingredient": "tomato"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "onion-red"
+      },
+      {
+       "ingredient": "chickpeas"
+      },
+      {
+       "ingredient": "feta",
+       "optional": true
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "vinegar-red-wine"
+      },
+      {
+       "ingredient": "mustard-dijon"
+      },
+      {
+       "ingredient": "honey"
+      },
+      {
+       "ingredient": "oregano-dried"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "olive-oil"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "tangy",
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "lots"
+     },
+     "tasteItems": {
+      "required": [
+       "cucumber",
+       "tomatoes",
+       "bell-peppers",
+       "garlic",
+       "mustard"
+      ],
+      "optional": [
+       "feta"
+      ]
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "colander",
+      "kitchen-towel",
+      "can-opener",
+      "mixing-bowl-large",
+      "small-bowl",
+      "mixing-bowl-medium",
+      "whisk",
+      "liquid-measuring-cup",
+      "measuring-cups",
+      "measuring-spoons",
+      "spoon"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
+    }
    ]
   },
   {
@@ -7505,6 +7966,193 @@ export const LIBRARY = {
    "level": "sp-2"
   },
   {
+   "id": "chana-chaat",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Chana chaat",
+   "image": "img/dishes/chana-chaat.webp",
+   "cuisine": "indian",
+   "skill": "A tangy dressing tasted and fixed",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Mix the dressing in a bigger bowl, and taste it on a few chickpeas before it all goes in."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "chickpeas"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "chaat-masala"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "chili-flakes",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "cucumber",
+     "tomatoes",
+     "onions",
+     "cilantro",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "can-opener",
+    "colander",
+    "mixing-bowl-large",
+    "small-bowl",
+    "whisk",
+    "measuring-cups",
+    "measuring-spoons",
+    "vegetable-peeler",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "spoon"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "chicken-caesar-wraps",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Chicken Caesar wraps",
+   "image": "img/dishes/chicken-caesar-wraps.webp",
+   "cuisine": "american",
+   "skill": "Whisking a dressing and tasting it",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Toss the salad in two bowls, with half the dressing in each, so it coats evenly."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "mayonnaise"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "worcestershire",
+     "optional": true
+    },
+    {
+     "ingredient": "parmesan"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "rotisserie-chicken"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "parmesan"
+    },
+    {
+     "ingredient": "tortilla-burrito"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "tortilla-burrito",
+     "use": "tortilla-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "mayonnaise",
+     "use": "yogurt-greek",
+     "reason": "egg"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "mayonnaise",
+     "lemon-lime",
+     "mustard",
+     "sharp-cheese"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "mixing-bowl-large",
+    "small-bowl",
+    "whisk",
+    "measuring-cups",
+    "measuring-spoons",
+    "colander",
+    "kitchen-towel",
+    "cutting-board",
+    "paper-towels",
+    "bread-knife",
+    "fork",
+    "plate"
+   ],
+   "level": "sp-2"
+  },
+  {
    "id": "ful-medames",
    "version": 1,
    "track": "core",
@@ -7596,6 +8244,103 @@ export const LIBRARY = {
     "fork",
     "measuring-spoons",
     "spoon"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "hummus-plate",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Hummus plate",
+   "image": "img/dishes/hummus-plate.webp",
+   "cuisine": "lebanese",
+   "skill": "Peeling, coring, and seeding vegetables",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Blend the hummus in two batches so the blender isn't too full to turn."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "chickpeas"
+    },
+    {
+     "ingredient": "tahini"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "olives-kalamata",
+     "optional": true
+    },
+    {
+     "ingredient": "pita"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pita",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "lemon-lime",
+     "cucumber",
+     "tomatoes"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "can-opener",
+    "colander",
+    "small-bowl",
+    "blender",
+    "silicone-spatula",
+    "measuring-cups",
+    "measuring-spoons",
+    "vegetable-peeler",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "spoon",
+    "plate",
+    "sheet-pan",
+    "oven-mitts"
    ],
    "level": "sp-2"
   },
@@ -8091,7 +8836,7 @@ export const LIBRARY = {
    "track": "core",
    "unit": 103,
    "title": "Baked fish with lemon and herbs",
-   "image": "img/meals/fish.svg",
+   "image": "img/dishes/baked-salmon.webp",
    "cuisine": "american",
    "skill": "Baking fish gently, checking pin bones",
    "servings": 6,
@@ -8297,12 +9042,115 @@ export const LIBRARY = {
    "level": "sp-3"
   },
   {
+   "id": "bean-tostadas",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Bean tostadas with pico de gallo",
+   "image": "img/dishes/bean-tostadas.webp",
+   "cuisine": "mexican",
+   "skill": "A fine pico de gallo",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Warm the beans in two batches, and salt the tomatoes in two colanders so they drain evenly."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "onion-white"
+    },
+    {
+     "ingredient": "jalapeno"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "pinto-beans"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "tostada-shells"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "queso-fresco"
+    },
+    {
+     "ingredient": "avocado",
+     "optional": true
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "onions",
+     "hot-peppers",
+     "cilantro",
+     "lemon-lime"
+    ],
+    "optional": [
+     "avocado",
+     "sour-cream-yogurt"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "colander",
+    "mixing-bowl-medium",
+    "mixing-bowl-large",
+    "small-bowl",
+    "can-opener",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "fork",
+    "spoon",
+    "microwave",
+    "plate"
+   ],
+   "level": "sp-3"
+  },
+  {
    "id": "beef-picadillo",
    "version": 1,
    "track": "core",
    "unit": 103,
    "title": "Beef picadillo",
-   "image": "img/meals/meat.svg",
+   "image": "img/dishes/beef-picadillo.webp",
    "cuisine": "cuban",
    "skill": "Sweating a sofrito, then browning beef",
    "servings": 6,
@@ -8412,7 +9260,7 @@ export const LIBRARY = {
    "track": "core",
    "unit": 103,
    "title": "Dinner rolls",
-   "image": "img/meals/bread.svg",
+   "image": "img/dishes/dinner-rolls.webp",
    "cuisine": "american",
    "skill": "Shaping even rolls by weight",
    "servings": 12,
@@ -8612,7 +9460,7 @@ export const LIBRARY = {
    "track": "core",
    "unit": 103,
    "title": "Pan-seared trout",
-   "image": "img/meals/fish.svg",
+   "image": "img/dishes/pan-seared-trout.webp",
    "cuisine": "american",
    "skill": "Searing a fillet skin-side down",
    "servings": 4,
@@ -8803,7 +9651,7 @@ export const LIBRARY = {
    "track": "core",
    "unit": 103,
    "title": "Sandwich loaf",
-   "image": "img/meals/bread.svg",
+   "image": "img/dishes/sandwich-loaf.webp",
    "cuisine": "american",
    "skill": "Kneading to a windowpane, baking a loaf",
    "servings": 12,
@@ -8958,12 +9806,109 @@ export const LIBRARY = {
    "level": "sp-3"
   },
   {
+   "id": "solterito",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Solterito",
+   "image": "img/dishes/solterito.webp",
+   "cuisine": "peruvian",
+   "skill": "A fine dice and a balanced dressing",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "Heat the corn and beans in two batches so each one gets steaming hot all the way through."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "corn-frozen"
+    },
+    {
+     "ingredient": "edamame-frozen"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "onion-red"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "jalapeno",
+     "optional": true
+    },
+    {
+     "ingredient": "olives-kalamata"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "queso-fresco"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "vinegar-red-wine"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "olive-oil"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "lemon-lime"
+    ],
+    "optional": [
+     "hot-peppers"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "mixing-bowl-medium",
+    "mixing-bowl-large",
+    "small-bowl",
+    "plate",
+    "microwave",
+    "colander",
+    "kitchen-towel",
+    "whisk",
+    "measuring-cups",
+    "measuring-spoons",
+    "spoon"
+   ],
+   "level": "sp-3"
+  },
+  {
    "id": "steamed-fish",
    "version": 1,
    "track": "core",
    "unit": 103,
    "title": "Steamed fish with ginger and scallion",
-   "image": "img/meals/fish.svg",
+   "image": "img/dishes/steamed-fish.webp",
    "cuisine": "chinese",
    "skill": "Steaming, judging freshness",
    "servings": 4,
@@ -9059,7 +10004,7 @@ export const LIBRARY = {
    "variations": [
     {
      "title": "Fish in parchment packets",
-     "image": "img/meals/fish.svg",
+     "image": "img/dishes/steamed-fish.webp",
      "cuisine": "chinese",
      "servings": 4,
      "scaling": {
@@ -9161,7 +10106,7 @@ export const LIBRARY = {
    "track": "core",
    "unit": 103,
    "title": "Tabbouleh",
-   "image": "img/meals/salad.svg",
+   "image": "img/dishes/tabbouleh.webp",
    "cuisine": "lebanese",
    "skill": "Mincing parsley fine",
    "servings": 6,
@@ -9246,7 +10191,7 @@ export const LIBRARY = {
    "track": "core",
    "unit": 103,
    "title": "Thick beef burgers",
-   "image": "img/meals/meat.svg",
+   "image": "img/dishes/thick-burgers.webp",
    "cuisine": "american",
    "skill": "Checking ground beef reaches 160°F",
    "servings": 4,
@@ -9441,6 +10386,123 @@ export const LIBRARY = {
     "wooden-spoon"
    ],
    "level": "sp-3"
+  },
+  {
+   "id": "antipasto-platter",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Antipasto platter",
+   "image": "img/dishes/antipasto-platter.webp",
+   "cuisine": "italian",
+   "skill": "A cold platter that holds below 41°F",
+   "servings": 8,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 13,
+      "text": "Build two platters: one out, one in the fridge to swap in at the 1-hour mark."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "beef-dry-sausage"
+    },
+    {
+     "ingredient": "bresaola"
+    },
+    {
+     "ingredient": "provolone"
+    },
+    {
+     "ingredient": "mozzarella-fresh"
+    },
+    {
+     "ingredient": "artichoke-hearts"
+    },
+    {
+     "ingredient": "roasted-red-peppers"
+    },
+    {
+     "ingredient": "olives-kalamata"
+    },
+    {
+     "ingredient": "olives-green"
+    },
+    {
+     "ingredient": "baguette"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "chickpeas"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "onion-red"
+    },
+    {
+     "ingredient": "vinegar-red-wine"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "olive-oil"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "baguette",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "mustard"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "plate",
+    "chef-knife",
+    "bread-knife",
+    "cutting-board",
+    "colander",
+    "kitchen-towel",
+    "can-opener",
+    "mixing-bowl-large",
+    "small-bowl",
+    "whisk",
+    "measuring-cups",
+    "measuring-spoons",
+    "kitchen-scale",
+    "thermometer",
+    "tongs"
+   ],
+   "level": "sp-4"
   },
   {
    "id": "bibimbap",
@@ -9790,6 +10852,243 @@ export const LIBRARY = {
     "foil",
     "oven-mitts",
     "plate"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "ensaladilla-rusa",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Ensaladilla rusa",
+   "image": "img/dishes/ensaladilla-rusa.webp",
+   "cuisine": "spanish",
+   "skill": "Homemade mayonnaise",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "Make the mayonnaise in two batches of 2 yolks each; one bowl of yolks can't take more than about 1 cup of oil by hand without strain."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "potato-russet"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "peas-frozen"
+    },
+    {
+     "ingredient": "tuna-canned"
+    },
+    {
+     "ingredient": "egg-pasteurized"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "roasted-red-peppers"
+    },
+    {
+     "ingredient": "olives-green"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "carrots",
+     "lemon-lime",
+     "mustard"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "vegetable-peeler",
+    "chef-knife",
+    "cutting-board",
+    "kitchen-scale",
+    "pot-large",
+    "colander",
+    "sheet-pan",
+    "heatproof-bowl",
+    "saucepan-medium",
+    "whisk",
+    "kitchen-towel",
+    "thermometer",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "mixing-bowl-large",
+    "silicone-spatula",
+    "plate"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "mezze-spread",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Mezze spread",
+   "image": "img/dishes/mezze-spread.webp",
+   "cuisine": "lebanese",
+   "skill": "A spread for guests, held safely",
+   "servings": 8,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 13,
+      "text": "Cook the chickpeas in two pots, and roast the eggplant on two pans so it chars instead of steaming."
+     }
+    ]
+   },
+   "totalMinutes": 180,
+   "ingredients": [
+    {
+     "ingredient": "chickpeas-dried"
+    },
+    {
+     "ingredient": "baking-soda"
+    },
+    {
+     "ingredient": "tahini"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "eggplant"
+    },
+    {
+     "ingredient": "tahini"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "bulgur-fine"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "mint"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "labneh"
+    },
+    {
+     "ingredient": "sumac"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "pita"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pita",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "lemon-lime",
+     "garlic",
+     "eggplant",
+     "mint",
+     "tomatoes",
+     "onions"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "mixing-bowl-large",
+    "pot-large",
+    "colander",
+    "blender",
+    "silicone-spatula",
+    "sheet-pan",
+    "foil",
+    "oven-mitts",
+    "tongs",
+    "chef-knife",
+    "cutting-board",
+    "kitchen-towel",
+    "saucepan-medium",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "fork",
+    "spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "liquid-measuring-cup",
+    "kitchen-scale",
+    "thermometer"
    ],
    "level": "sp-4"
   },
@@ -10912,6 +12211,76 @@ export const LIBRARY = {
   "chickpeas": {
    "name": "Chickpeas (canned)",
    "contains": []
+  },
+  "pinto-beans": {
+   "name": "Pinto beans",
+   "contains": []
+  },
+  "tostada-shells": {
+   "name": "Tostada shells",
+   "contains": []
+  },
+  "corn-frozen": {
+   "name": "Frozen corn kernels",
+   "contains": []
+  },
+  "edamame-frozen": {
+   "name": "Frozen shelled edamame or baby lima beans",
+   "contains": []
+  },
+  "tahini": {
+   "name": "Tahini (sesame paste)",
+   "contains": []
+  },
+  "chaat-masala": {
+   "name": "Chaat masala",
+   "contains": []
+  },
+  "anchovy-fillets": {
+   "name": "Anchovy fillets in olive oil",
+   "contains": [
+    "fish"
+   ]
+  },
+  "peas-frozen": {
+   "name": "Frozen peas",
+   "contains": []
+  },
+  "roasted-red-peppers": {
+   "name": "Roasted red peppers (jarred)",
+   "contains": []
+  },
+  "beef-dry-sausage": {
+   "name": "Beef salami",
+   "contains": [
+    "meat"
+   ]
+  },
+  "bresaola": {
+   "name": "Bresaola (air-dried beef), sliced",
+   "contains": [
+    "meat"
+   ]
+  },
+  "provolone": {
+   "name": "Provolone cheese, in a piece",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "artichoke-hearts": {
+   "name": "Marinated artichoke hearts (jarred)",
+   "contains": []
+  },
+  "chickpeas-dried": {
+   "name": "Dried chickpeas",
+   "contains": []
+  },
+  "labneh": {
+   "name": "Labneh (strained yogurt)",
+   "contains": [
+    "dairy"
+   ]
   }
  },
  "cuisines": {
@@ -10986,7 +12355,10 @@ export const LIBRARY = {
  "levelLabels": {
   "bun-bowl": "A5",
   "caprese-sandwiches": "A1",
+  "chana-chaat": "A10",
+  "chicken-caesar-wraps": "A9",
   "ful-medames": "A7",
+  "hummus-plate": "A8",
   "loaded-baked-potatoes": "A4",
   "mini-pita-pizzas": "A6",
   "molletes": "A3",
@@ -10995,6 +12367,7 @@ export const LIBRARY = {
   "ajapsandali": "K7",
   "baked-salmon": "K13",
   "bean-quesadillas": "K1",
+  "bean-tostadas": "K8",
   "beef-picadillo": "K30",
   "dinner-rolls": "K19",
   "kimbap": "K6",
@@ -11002,13 +12375,17 @@ export const LIBRARY = {
   "rajma": "K2",
   "sandwich-loaf": "K17",
   "scallion-oil-noodles": "K4",
+  "solterito": "K10",
   "steamed-fish": "K23",
   "tabbouleh": "K9",
   "thick-burgers": "K11",
   "vegetable-lo-mein": "K5",
+  "antipasto-platter": "C7",
   "bibimbap": "C5",
   "bo-luc-lac": "C2",
   "chicken-enchiladas": "C3",
+  "ensaladilla-rusa": "C6",
+  "mezze-spread": "C8",
   "salade-nicoise": "C4",
   "steak-fajitas": "C1"
  },
@@ -11288,7 +12665,7 @@ export const LIBRARY = {
     "dressings",
     "emulsions"
    ],
-   "minutes": 30,
+   "minutes": 40,
    "cuisine": "american",
    "pickOne": "dressings",
    "tags": {
@@ -14086,15 +15463,156 @@ export const LIBRARY = {
      "explore": "hummus-plate",
      "drill": {
       "title": "Peel, core, and seed a cucumber and a tomato",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Peeling, coring, and seeding take the tough or watery parts out of a vegetable before it goes in a salad. Today you'll do all three with a peeler, a paring knife, and a spoon. An adult is nearby."
+      ],
+      "steps": [
+       "Lay a damp paper towel under the cutting board. Rinse a cucumber and a tomato.",
+       "Hold the cucumber by one end on the board. Peel it in long strokes away from you, turning it as you go.",
+       "Trim both ends with the paring knife. Cut it in half the long way, using the bridge grip.",
+       "Scrape the seeds out of each half with the tip of a spoon.",
+       "Cut the tomato in half through the stem. Cut a small V around the stem in each half to take out the core.",
+       "Scoop out the tomato's seeds with the spoon.",
+       "Slice the cucumber halves into half-moons and the tomato into wedges. Eat them as a snack, or use them in this week's recipe today."
+      ],
+      "quiz": [
+       {
+        "q": "Which way do you pull the peeler?",
+        "choices": [
+         "Away from you",
+         "Toward you",
+         "Side to side"
+        ],
+        "answer": 0,
+        "explain": "The blade never comes toward your body."
+       },
+       {
+        "q": "What scoops out the seeds?",
+        "choices": [
+         "The tip of a spoon",
+         "The knife",
+         "Your fingers"
+        ],
+        "answer": 0,
+        "explain": "A spoon follows the curve without cutting."
+       },
+       {
+        "q": "What is the core of a tomato?",
+        "choices": [
+         "The hard part under the stem",
+         "The seeds",
+         "The skin"
+        ],
+        "answer": 0,
+        "explain": "Cut it out with a small V."
+       }
+      ]
      },
      "knowledge": {
       "title": "Washing produce: what to wash and what not to",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Fruits and vegetables can carry dirt and germs from the field, the truck, and the store. Rinsing them under cool running water just before you use them washes most of it away.",
+       "Wash: anything you'll eat raw, and anything you'll cut, even if you won't eat the peel. A knife going through a melon, an avocado, or an orange carries whatever is on the skin into the part you eat.",
+       "How: rub produce with your hands under running water. Scrub firm things like potatoes and carrots with a clean brush. Pull lettuce leaves apart and rinse each one. Then dry them with a clean towel or paper towel. No soap, bleach, or produce wash: plain water works, and soap can soak into food.",
+       "When: right before you use it, not when you put it away. Washed produce stored wet spoils faster.",
+       "Don't wash: bagged greens marked \"ready to eat\" or \"triple washed\" (rinsing them in a dirty sink can add germs), raw chicken or meat (the splashes spread germs across the kitchen), and eggs (they're cleaned before they're sold)."
+      ],
+      "steps": [
+       "Look in your fridge with an adult. Find two things to wash before eating and one bag marked ready to eat.",
+       "Wash one fruit or vegetable the right way, rubbing it under running water, and dry it."
+      ],
+      "quiz": [
+       {
+        "q": "When do you wash produce?",
+        "choices": [
+         "Right before you use it",
+         "As soon as you get home",
+         "Never"
+        ],
+        "answer": 0,
+        "explain": "Stored wet, it spoils faster."
+       },
+       {
+        "q": "Why wash a melon if you don't eat the rind?",
+        "choices": [
+         "The knife carries germs from the rind inside",
+         "To make it shine",
+         "To keep it cold"
+        ],
+        "answer": 0,
+        "explain": "Whatever is on the skin goes in with the knife."
+       },
+       {
+        "q": "What do you wash produce with?",
+        "choices": [
+         "Cool running water",
+         "Soap",
+         "Bleach"
+        ],
+        "answer": 0,
+        "explain": "Soap can soak into food."
+       },
+       {
+        "q": "Which should you not wash?",
+        "choices": [
+         "Raw chicken",
+         "Apples",
+         "Carrots"
+        ],
+        "answer": 0,
+        "explain": "Splashes spread germs around the kitchen."
+       }
+      ]
      },
      "sabbath": {
       "title": "Daily bread (Matthew 6:11)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "When Jesus taught his followers to pray, one of the things he told them to ask for was food: \"Give us this day our daily bread\" (Matthew 6:11). Not a year's worth, or a week's: today's.",
+       "In the wilderness, God fed Israel with manna one day at a time (Exodus 16:4). Proverbs asks God for \"neither poverty nor riches; feed me with the food that is needful for me\" (Proverbs 30:8). And later in the same chapter of Matthew, Jesus tells his followers not to worry about what they'll eat, because their Father knows they need it (Matthew 6:31–33).",
+       "Asking for daily bread is a way of remembering that every meal is a gift, and of trusting God for tomorrow's."
+      ],
+      "steps": [
+       "Read Matthew 6:9–13 with an adult.",
+       "Read Matthew 6:25–33.",
+       "Answer out loud or in writing: why do you think Jesus said \"this day\" and not \"this year\"?",
+       "List five foods your family ate this week. Next to each, write one person who helped bring it to your table: a farmer, a driver, a cook.",
+       "Before a meal this week, thank God for that day's food."
+      ],
+      "quiz": [
+       {
+        "q": "In the Lord's Prayer, what bread do we ask for?",
+        "choices": [
+         "Our daily bread",
+         "A year's bread",
+         "The best bread"
+        ],
+        "answer": 0,
+        "explain": "Matthew 6:11."
+       },
+       {
+        "q": "How often did God send manna?",
+        "choices": [
+         "Each day",
+         "Once a year",
+         "Once"
+        ],
+        "answer": 0,
+        "explain": "Exodus 16:4."
+       },
+       {
+        "q": "In Matthew 6, why don't we need to worry about food?",
+        "choices": [
+         "Our Father knows we need it",
+         "There's always plenty",
+         "Food doesn't matter"
+        ],
+        "answer": 0,
+        "explain": "Matthew 6:32."
+       }
+      ]
      }
     },
     {
@@ -14107,15 +15625,144 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Whisk a vinaigrette, taste it, and fix it",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A vinaigrette is oil, vinegar, and salt whisked together. Today you'll make a small one, taste it, and fix it, one change at a time."
+      ],
+      "steps": [
+       "In a small bowl, put 1 tablespoon of vinegar, a pinch of salt, and ½ teaspoon of mustard. Whisk until the salt dissolves.",
+       "Keep whisking while you pour in 3 tablespoons of olive oil, a little at a time.",
+       "Dip a piece of lettuce or cucumber in it and taste.",
+       "Too sour? Whisk in 1 teaspoon of oil. Flat? Add a pinch of salt. Oily? Add a few drops of vinegar.",
+       "Taste again after each change. Write down what you changed.",
+       "Use it on a salad today, or keep it in a jar in the fridge for up to a week."
+      ],
+      "quiz": [
+       {
+        "q": "Why change only one thing at a time?",
+        "choices": [
+         "So you know which change helped",
+         "So it's faster",
+         "So you use less"
+        ],
+        "answer": 0,
+        "explain": "Two at once, and you can't tell."
+       },
+       {
+        "q": "The dressing tastes oily and flat. What do you add?",
+        "choices": [
+         "Salt or a few drops of vinegar",
+         "More oil",
+         "Water"
+        ],
+        "answer": 0,
+        "explain": "Salt and sour wake it up."
+       }
+      ]
      },
      "knowledge": {
       "title": "Oil and vinegar: why a dressing separates",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Oil and vinegar don't mix. Vinegar is mostly water, and oil and water push apart. Whisk them and the oil breaks into tiny drops spread through the vinegar, so the dressing looks cloudy. Leave it, and the drops join back together and float to the top.",
+       "That's why a dressing separates in the jar. It's not spoiled: whisk or shake it again right before you pour it.",
+       "Some things help a dressing stay mixed longer. Mustard and mayonnaise hold onto oil and water at the same time, so they keep the drops apart. That's why Caesar dressing, made with mayonnaise, stays creamy, and a vinaigrette with mustard stays mixed longer than one without.",
+       "A good starting mix is 3 spoons of oil to 1 spoon of vinegar or lemon juice, with a pinch of salt. Then taste it on a piece of what you're dressing, and change it to suit you."
+      ],
+      "steps": [
+       "Put 1 tablespoon of vinegar and 3 tablespoons of oil in a clean jar with a lid. Shake it hard and watch: how long until it separates?",
+       "Add ½ teaspoon of mustard, shake again, and time it. What changed?"
+      ],
+      "quiz": [
+       {
+        "q": "Why does a dressing separate?",
+        "choices": [
+         "Oil and water push apart",
+         "It went bad",
+         "It got cold"
+        ],
+        "answer": 0,
+        "explain": "Shake or whisk it again."
+       },
+       {
+        "q": "What helps a dressing stay mixed?",
+        "choices": [
+         "Mustard or mayonnaise",
+         "More water",
+         "Ice"
+        ],
+        "answer": 0,
+        "explain": "They hold onto oil and water at the same time."
+       },
+       {
+        "q": "What's a good starting mix?",
+        "choices": [
+         "3 spoons of oil to 1 of vinegar",
+         "1 to 1",
+         "1 spoon of oil to 3 of vinegar"
+        ],
+        "answer": 0,
+        "explain": "Then taste and change it."
+       },
+       {
+        "q": "The dressing separated in the jar. What do you do?",
+        "choices": [
+         "Shake it again",
+         "Throw it away",
+         "Add more oil"
+        ],
+        "answer": 0,
+        "explain": "It's not spoiled."
+       }
+      ]
      },
      "sabbath": {
       "title": "Pack a lunch salad with the dressing apart",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A salad packed for lunch stays crisp if the dressing travels on its own. Dressing on lettuce for hours makes it limp and watery.",
+       "Pack sturdy things on the bottom and leaves on top, and carry the dressing in a small container with a tight lid. Pour and toss right before you eat. Keep it cold: a lunch with chicken, cheese, or mayonnaise needs an ice pack, or a fridge, until lunchtime."
+      ],
+      "steps": [
+       "Make a small jar of this week's vinaigrette or Caesar dressing.",
+       "In a container, put sturdy things first: chickpeas, cucumber, or chicken.",
+       "Put lettuce on top. Close the lid.",
+       "Spoon dressing into a small container with a tight lid. Label both with the date.",
+       "Keep them in the fridge, and pack them with an ice pack for lunch.",
+       "At lunch, pour, close the lid, and shake to toss. How crisp is it?"
+      ],
+      "quiz": [
+       {
+        "q": "Why pack the dressing apart?",
+        "choices": [
+         "So the lettuce stays crisp",
+         "So it weighs less",
+         "So it stays warm"
+        ],
+        "answer": 0,
+        "explain": "Dressing wilts leaves over hours."
+       },
+       {
+        "q": "What goes on the bottom of the container?",
+        "choices": [
+         "Sturdy things like chickpeas",
+         "Lettuce",
+         "The dressing"
+        ],
+        "answer": 0,
+        "explain": "Leaves go on top, away from the wet."
+       },
+       {
+        "q": "What keeps a lunch with chicken safe?",
+        "choices": [
+         "An ice pack or a fridge",
+         "A tight lid",
+         "A paper bag"
+        ],
+        "answer": 0,
+        "explain": "Keep it cold until you eat."
+       }
+      ]
      }
     },
     {
@@ -14877,7 +16524,7 @@ export const LIBRARY = {
      "skills": [
       "fine-chopping"
      ],
-     "minutes": 25,
+     "minutes": 30,
      "tags": {
       "protein": "beans-lentils",
       "flavors": [
@@ -14897,7 +16544,7 @@ export const LIBRARY = {
      "skills": [
       "dressings"
      ],
-     "minutes": 25,
+     "minutes": 30,
      "tags": {
       "protein": "chicken",
       "flavors": [
@@ -14918,7 +16565,7 @@ export const LIBRARY = {
      "skills": [
       "dressings"
      ],
-     "minutes": 20,
+     "minutes": 30,
      "tags": {
       "protein": "beans-lentils",
       "flavors": [
@@ -16565,15 +18212,161 @@ export const LIBRARY = {
      "explore": "tabbouleh",
      "drill": {
       "title": "Mince parsley and onion fine; salt and drain tomatoes",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "A salad or salsa is only as good as its smallest pieces. Today you'll mince parsley and onion as fine as you can, then run a side-by-side test on diced tomatoes: half salted and drained, half left alone. An adult is nearby the whole time."
+      ],
+      "steps": [
+       "Set the cutting board on a damp paper towel. Rinse a bunch of parsley and roll it in a towel until the leaves are completely dry.",
+       "Pull the leaves off the thick stems. Gather them into a tight pile and rock the chef's knife through them, tip on the board and your other hand flat on the spine. Gather and rock again until the bits are about the size of a grain of rice.",
+       "Halve and peel an onion, leaving the root on. Mince one half: strips ⅛ inch apart toward the root, then across at ⅛ inch.",
+       "Core 2 tomatoes and dice them into ¼-inch cubes. Split the dice into two equal piles.",
+       "Put one pile in a strainer over a bowl and toss it with ¼ teaspoon of salt. Put the other pile in a dry bowl with no salt. Set a timer for 15 minutes.",
+       "When the timer rings, pour the liquid from under the strainer into a measuring spoon. How much came out? Tilt the unsalted bowl: how much is there?",
+       "Taste a cube from each pile. Write down how they differ in taste and in texture.",
+       "Stir the drained tomatoes, the onion, and a spoonful of the parsley together with a squeeze of lime for a quick salsa, or use them in this week's tostadas or tabbouleh today. Store the rest of the parsley and onion in labeled containers in the fridge for up to 3 days."
+      ],
+      "quiz": [
+       {
+        "q": "Why must parsley be completely dry before you mince it?",
+        "choices": [
+         "Wet leaves bruise into a dark paste",
+         "Dry parsley weighs less",
+         "Water dulls the knife"
+        ],
+        "answer": 0,
+        "explain": "Dry leaves cut into clean, bright bits."
+       },
+       {
+        "q": "Which pile of tomatoes gave off more liquid?",
+        "choices": [
+         "The salted one",
+         "The unsalted one",
+         "They gave off the same"
+        ],
+        "answer": 0,
+        "explain": "Salt draws water out of the cut cells. This week's Knowledge page explains how."
+       }
+      ]
      },
      "knowledge": {
       "title": "Why salt draws water from cut vegetables",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Every plant is made of cells, and each cell is a tiny bag of water held in by a thin membrane and a stiffer wall. A crisp cucumber or a firm tomato is crisp because those cells are full and pressing against each other, like balloons packed in a box.",
+       "Water moves across a cell's membrane toward the side with more dissolved in it, salt or sugar, until the two sides are closer to even. This is called osmosis. When you sprinkle salt on a cut vegetable, the salt dissolves in the juice on the surface and makes it far saltier than the water inside the cells. Water moves out of the cells toward the salt.",
+       "Cutting speeds it up. A whole tomato has a skin that salt can't get through; a diced tomato has hundreds of cut faces with opened cells. The smaller the dice, the more cut surface, and the faster the water comes out. That's why salted, diced tomatoes can give up a tablespoon or more of juice in 15 minutes.",
+       "Cooks use this on purpose. Tomatoes are salted and drained for pico de gallo so the salsa isn't soupy. Cucumbers are salted and squeezed before they go into a yogurt sauce so it stays thick. Eggplant was salted in Unit 1's ajapsandali so it would brown instead of steam. Shredded cabbage is salted for slaw so it softens and doesn't water down the dressing.",
+       "It also works against you. Salt a green salad and walk away, and twenty minutes later the leaves are limp and there's a puddle in the bowl. So the rule has two halves: salt early when you want water out, and salt at the last minute when you want things crisp.",
+       "Salt drawn into the drained vegetable stays in it, so a salted tomato is already seasoned. Taste before you add more. And not all salt measures alike: a teaspoon of fine table salt is about twice as salty as a teaspoon of flaky kosher salt, because the fine grains pack tighter in the spoon. The app's recipes use table salt unless they say otherwise."
+      ],
+      "steps": [
+       "Slice a cucumber into thin rounds and split them into two plates.",
+       "Sprinkle one plate with ¼ teaspoon of salt. Leave the other plain.",
+       "After 20 minutes, look at each plate and try bending a slice from each. Write down what you see and feel.",
+       "Pat the salted slices dry and taste one from each plate. Which would you rather have in a yogurt dip, and which in a green salad? Why?"
+      ],
+      "quiz": [
+       {
+        "q": "What is osmosis?",
+        "choices": [
+         "Water moving toward the side with more dissolved in it",
+         "Salt melting in heat",
+         "Cells growing bigger"
+        ],
+        "answer": 0,
+        "explain": "Water moves out of the cells toward the salty surface."
+       },
+       {
+        "q": "Why does a diced tomato give up water faster than a whole one?",
+        "choices": [
+         "It has more cut surface with opened cells",
+         "It's warmer",
+         "Its skin is thinner"
+        ],
+        "answer": 0,
+        "explain": "The skin blocks salt; cut faces let water out."
+       },
+       {
+        "q": "When should you salt a green salad?",
+        "choices": [
+         "At the last minute",
+         "An hour ahead",
+         "The night before"
+        ],
+        "answer": 0,
+        "explain": "Salt pulls water out of the leaves and wilts them."
+       },
+       {
+        "q": "Why are cucumbers salted before they go into a yogurt sauce?",
+        "choices": [
+         "So their water comes out before, not in the sauce",
+         "To make them sweeter",
+         "To keep them green"
+        ],
+        "answer": 0,
+        "explain": "Squeezed cucumbers keep the sauce thick."
+       },
+       {
+        "q": "Which is saltier: a teaspoon of fine table salt or a teaspoon of flaky kosher salt?",
+        "choices": [
+         "Table salt",
+         "Kosher salt",
+         "They're the same"
+        ],
+        "answer": 0,
+        "explain": "Fine grains pack tighter in the spoon."
+       }
+      ]
      },
      "sabbath": {
       "title": "Make dips and salsas ahead and store them",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Most dips and salsas are made from raw or already-cooked ingredients, so they can be made a day or more before you need them. Some even taste better the next day, once the garlic, lemon, and spices have had time to spread through.",
+       "How long each one keeps in a sealed container in the fridge: bean dips and hummus, 4 to 5 days; yogurt dips like tzatziki, 3 to 4 days, if the cucumber was salted and squeezed first; cooked or blended salsas, 5 to 7 days; pico de gallo, 1 to 2 days, since the tomatoes keep weeping; guacamole, 1 day, with plastic wrap pressed right onto its surface so air can't brown it.",
+       "Three habits keep them safe and fresh. Make and store them in clean containers, and get them into the fridge within 2 hours of making. Label each one with what it is and the date. And serve from a clean spoon into a small bowl rather than dipping into the whole container, so crumbs and mouths stay out of what's left.",
+       "A dip made ahead leaves you with a snack ready to go, half a meal already done, and a dish you can bring when someone needs one."
+      ],
+      "steps": [
+       "Make a quick bean dip: drain and rinse a can of white or pinto beans, then mash them with a fork with 2 tablespoons of olive oil, 1 tablespoon of lemon or lime juice, ¼ teaspoon of salt, and a pinch of cumin. Taste and adjust.",
+       "Make a second dip or salsa of your choice from this unit, such as a drained pico de gallo or a cucumber yogurt dip.",
+       "Pack each one in a clean, sealed container. Label it with the name and the date.",
+       "Taste each one on the day you make it, then again the next day and the day after. Write down how each one changed.",
+       "Serve them at a meal or as a snack, from a clean spoon into a small bowl."
+      ],
+      "quiz": [
+       {
+        "q": "Which keeps the shortest time in the fridge?",
+        "choices": [
+         "Guacamole",
+         "Hummus",
+         "A cooked salsa"
+        ],
+        "answer": 0,
+        "explain": "About a day, with plastic pressed on its surface."
+       },
+       {
+        "q": "Why serve a dip from a clean spoon into a small bowl?",
+        "choices": [
+         "To keep crumbs and mouths out of what's stored",
+         "It looks nicer",
+         "It keeps the dip warm"
+        ],
+        "answer": 0,
+        "explain": "What goes back in the fridge stays clean."
+       },
+       {
+        "q": "How soon should a dip you made go into the fridge?",
+        "choices": [
+         "Within 2 hours",
+         "Within a day",
+         "Whenever it's finished"
+        ],
+        "answer": 0,
+        "explain": "After 2 hours in the danger zone, bacteria have had time to grow."
+       }
+      ]
      }
     },
     {
@@ -16586,11 +18379,108 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Timed fine dice of a salad set, then whisk and balance its dressing",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "This is the unit's mastery drill: the cuts for a whole salad, timed, then a dressing you balance by taste alone. Write down your times and your dressing changes; you'll compare them with this week's recipe."
+      ],
+      "steps": [
+       "Set out a cucumber, a red bell pepper, a red onion, and 2 tomatoes, washed. Set the board on a damp paper towel and start a timer.",
+       "Cut the cucumber into ¼-inch planks, sticks, and cubes.",
+       "Cut the sides off the pepper, trim the ribs, and dice it skin side down at ¼ inch.",
+       "Mince half the onion at ⅛ inch.",
+       "Core, seed, and dice the tomatoes at ¼ inch. Stop the timer and write down your time.",
+       "Line up 10 cubes of each vegetable against a ruler. How many of each are within ⅛ inch of ¼ inch?",
+       "In a small bowl, whisk 1 tablespoon of vinegar with a pinch of salt and ½ teaspoon of mustard until the salt dissolves. Whisk in 3 tablespoons of oil in a thin stream.",
+       "Taste it on a cucumber cube. Change one thing at a time: a pinch of salt, a few drops of vinegar, or a teaspoon of oil. Taste again after each, and write down every change.",
+       "Toss the vegetables with the dressing and eat it today, or store the pepper and onion apart for this week's recipe and use the cucumber and tomato today."
+      ],
+      "quiz": [
+       {
+        "q": "Why change only one thing at a time when balancing a dressing?",
+        "choices": [
+         "So you know which change helped",
+         "So it's faster",
+         "So you use less"
+        ],
+        "answer": 0,
+        "explain": "Change two at once and you can't tell which one did it."
+       },
+       {
+        "q": "Why dissolve the salt in the vinegar before the oil goes in?",
+        "choices": [
+         "Salt dissolves in vinegar but not in oil",
+         "Salt makes the oil thicker",
+         "It keeps the vinegar cold"
+        ],
+        "answer": 0,
+        "explain": "Salt in oil stays as grains."
+       }
+      ]
      },
      "knowledge": {
       "title": "Emulsions and the 3-to-1 rule; why salads go soggy, and dressing at the last minute",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "An emulsion is one liquid spread through another as tiny drops, when the two would normally stay apart. Oil and vinegar are the classic pair: vinegar is mostly water, and oil and water don't mix. Whisk them hard and the oil breaks into drops small enough to cloud the vinegar. That's an emulsion, at least for a few minutes.",
+       "Left alone, the drops find each other, join into bigger ones, and float to the top. That's why a plain vinaigrette splits. An emulsifier slows that down. It's something with one end that holds onto water and one end that holds onto oil, so it coats each drop and keeps it apart from the others. Mustard is the vinaigrette cook's emulsifier; egg yolk is mayonnaise's, which is why mayonnaise stays thick for weeks. Honey and garlic paste help too, by thickening the vinegar so drops move more slowly.",
+       "Drop size matters as much as the emulsifier. Pour the oil in slowly while whisking and each bit breaks into small drops the mustard can coat. Dump it all in and you get big drops that split fast. A shaken jar works too, because the shaking does the same job.",
+       "The 3-to-1 rule, three parts oil to one part acid, comes from French cooking, and it's a good starting point for wine vinegar. But acids vary. Lemon and lime juice are about as sharp as wine vinegar; rice vinegar is milder and can go closer to 2 to 1; balsamic is sweet and takes less oil. A dish matters too: mild ingredients like corn and beans can take a sharper dressing, as in this week's solterito. Start at 3 to 1, then taste.",
+       "Taste it on what it's going on. A dressing tasted from a spoon seems much stronger than it does on a leaf of lettuce. Dip a leaf or a cube of cucumber and judge it there.",
+       "Why salads go soggy: last week you saw salt pull water out of cut vegetables, and vinegar does the same. Oil is the other half. Lettuce leaves have a thin, waxy coat; oil soaks through it and darkens and wilts the leaf. Water left on the leaves from washing thins the dressing and keeps it from clinging. So: dry the leaves well, keep the dressing apart until the last minute, toss in a bowl bigger than you think you need, and start with less dressing than you think. You can always add more.",
+       "Not every salad needs the last-minute rule. A salad of sturdy chopped vegetables, beans, or grains, like tabbouleh or solterito, can sit dressed for an hour or two and gets better as the vegetables take on the dressing. Lettuce, tender herbs, and crisp croutons are the ones that can't wait."
+      ],
+      "quiz": [
+       {
+        "q": "What is an emulsion?",
+        "choices": [
+         "One liquid spread through another as tiny drops",
+         "A liquid that's been boiled",
+         "A mix of salt and water"
+        ],
+        "answer": 0,
+        "explain": "Like oil drops clouding vinegar."
+       },
+       {
+        "q": "What does mustard do in a vinaigrette?",
+        "choices": [
+         "Coats the oil drops so they stay apart longer",
+         "Makes it sour",
+         "Dissolves the salt"
+        ],
+        "answer": 0,
+        "explain": "It's the emulsifier."
+       },
+       {
+        "q": "Why pour the oil in slowly while whisking?",
+        "choices": [
+         "It breaks into smaller drops that stay mixed",
+         "It keeps the bowl clean",
+         "It warms the oil"
+        ],
+        "answer": 0,
+        "explain": "Big drops split fast."
+       },
+       {
+        "q": "Where should you taste a dressing?",
+        "choices": [
+         "On a leaf or piece of what it's dressing",
+         "From a spoon",
+         "Straight from the bowl"
+        ],
+        "answer": 0,
+        "explain": "It tastes much stronger from a spoon."
+       },
+       {
+        "q": "Which salad can be dressed an hour ahead?",
+        "choices": [
+         "Solterito",
+         "A green salad with croutons",
+         "Chopped romaine"
+        ],
+        "answer": 0,
+        "explain": "Sturdy vegetables and beans get better as they sit."
+       }
+      ]
      },
      "sabbath": {
       "title": "Salt (Leviticus 2:13; Matthew 5:13; Colossians 4:6)",
@@ -19076,7 +20966,7 @@ export const LIBRARY = {
      "skills": [
       "fine-chopping"
      ],
-     "minutes": 35,
+     "minutes": 40,
      "tags": {
       "protein": "beans-lentils",
       "flavors": [
@@ -19117,7 +21007,7 @@ export const LIBRARY = {
       "dicing",
       "dressings"
      ],
-     "minutes": 35,
+     "minutes": 45,
      "tags": {
       "protein": "beans-lentils",
       "flavors": [
@@ -20703,15 +22593,174 @@ export const LIBRARY = {
      "cuisine": "spanish",
      "drill": {
       "title": "Make mayonnaise, break it, and rescue it",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Make a mayonnaise, break it on purpose, and bring it back. Once you've rescued one, a broken sauce stops being a disaster. Use pasteurized eggs, and cook the yolk to 160°F first, as this week's recipes do."
+      ],
+      "steps": [
+       "Whisk 1 pasteurized egg yolk with 1 teaspoon of lemon juice and 1 teaspoon of water in a heatproof bowl over barely simmering water until it thickens and probes 160°F. Wash your hands after separating the egg.",
+       "Off the heat, whisk for a minute to cool it, then add ½ teaspoon of mustard and a pinch of salt.",
+       "Measure ¾ cup of neutral oil. Whisk in the first quarter drop by drop, then the rest in a thin stream. Note when it turns thick and pale.",
+       "Take a third of the finished mayonnaise into a second bowl. Pour 3 tablespoons of oil in at once and whisk. Watch it break into a greasy, curdled pool.",
+       "Rescue it: in a clean bowl, whisk 1 teaspoon of mustard with 1 teaspoon of water. Whisk the broken mayonnaise in a teaspoon at a time until it's thick again.",
+       "Compare the two by look and taste, and write down what broke it and what saved it.",
+       "Keep the mayonnaise in a covered jar in the fridge and use it within 4 days, in this week's Caesar or ensaladilla."
+      ],
+      "quiz": [
+       {
+        "q": "What breaks a mayonnaise?",
+        "choices": [
+         "Oil added faster than the emulsion can take it",
+         "Too much whisking",
+         "Cold lemon juice"
+        ],
+        "answer": 0,
+        "explain": "The droplets merge and the oil separates."
+       },
+       {
+        "q": "How do you rescue a broken mayonnaise?",
+        "choices": [
+         "Whisk it slowly into a fresh emulsifier",
+         "Add more oil",
+         "Heat it"
+        ],
+        "answer": 0,
+        "explain": "Mustard and water, or a fresh cooked yolk, then the broken sauce a little at a time."
+       },
+       {
+        "q": "How long does homemade mayonnaise keep in the fridge?",
+        "choices": [
+         "About 4 days",
+         "A month",
+         "A year"
+        ],
+        "answer": 0,
+        "explain": "It has no preservatives."
+       }
+      ]
      },
      "knowledge": {
       "title": "Emulsions, and raw eggs: the USDA guideline and pasteurized eggs",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "An emulsion is one liquid dispersed through another as droplets: oil droplets in a water-based liquid in mayonnaise and vinaigrette, water droplets in fat in butter. The two phases don't mix, so an emulsion needs energy (whisking breaks the oil into droplets) and an emulsifier, a molecule with a water-loving end and a fat-loving end that coats each droplet and keeps it from merging with its neighbors.",
+       "Egg yolk is the strongest emulsifier in the kitchen. Its lecithin and proteins hold a mayonnaise stable for days, and one yolk can carry well over a cup of oil. Mustard is weaker but useful: it steadies a vinaigrette for an hour instead of a minute. Without an emulsifier, a vinaigrette is a temporary emulsion that separates as soon as you stop.",
+       "Three things break an emulsion: oil added faster than there are droplets to hold it, too much oil for the emulsifier (more than about 1½ cups to a yolk), and temperature, since a very cold or a warm sauce loses its grip. The fix is always the same: start a fresh emulsifier and whisk the broken sauce into it slowly.",
+       "Now the eggs. Salmonella Enteritidis can be inside an intact, clean egg, passed from the hen before the shell forms, so washing doesn't remove it. The USDA and FDA advise against eating raw or undercooked eggs and say to cook egg dishes to 160°F. The risk is highest for young children, older adults, pregnant women, and anyone with a weakened immune system.",
+       "For recipes that use eggs raw, the USDA's answer is pasteurized eggs: in-shell eggs heated in a water bath just enough to kill Salmonella without cooking them, or pasteurized liquid egg products. Store-bought mayonnaise is made with pasteurized eggs and enough acid to be shelf-stable until opened.",
+       "This app keeps one standard for every egg: 160°F. So the Level 4 recipes use pasteurized eggs and still cook the yolks to 160°F with the lemon juice before the oil goes in. Cooked this way, the yolk keeps its emulsifying power, and the sauce is safe for every guest at the table.",
+       "Homemade mayonnaise and egg-based dressings have no preservatives. Keep them covered in the fridge at 40°F or below and use them within 4 days."
+      ],
+      "quiz": [
+       {
+        "q": "What does an emulsifier do?",
+        "choices": [
+         "Coats droplets so they don't merge",
+         "Thickens by cooking",
+         "Adds acid"
+        ],
+        "answer": 0,
+        "explain": "One end holds water, the other fat."
+       },
+       {
+        "q": "Why doesn't washing make a raw egg safe?",
+        "choices": [
+         "Salmonella can be inside an intact egg",
+         "Water spreads it",
+         "Shells are porous to soap"
+        ],
+        "answer": 0,
+        "explain": "It's passed from the hen before the shell forms."
+       },
+       {
+        "q": "To what temperature does the USDA say to cook egg dishes?",
+        "choices": [
+         "160°F",
+         "145°F",
+         "120°F"
+        ],
+        "answer": 0,
+        "explain": "The app uses this for every egg."
+       },
+       {
+        "q": "What is a pasteurized in-shell egg?",
+        "choices": [
+         "Heated just enough to kill Salmonella without cooking",
+         "A hard-boiled egg",
+         "An egg from a special breed"
+        ],
+        "answer": 0,
+        "explain": "The USDA's answer for raw-egg recipes."
+       },
+       {
+        "q": "A mayonnaise broke. What's the fix?",
+        "choices": [
+         "Whisk it slowly into a fresh emulsifier",
+         "Add more oil",
+         "Refrigerate it"
+        ],
+        "answer": 0,
+        "explain": "Mustard and water, or a new cooked yolk."
+       },
+       {
+        "q": "How long does homemade mayonnaise keep?",
+        "choices": [
+         "About 4 days in the fridge",
+         "2 weeks",
+         "Until it smells"
+        ],
+        "answer": 0,
+        "explain": "No preservatives."
+       }
+      ]
      },
      "sabbath": {
       "title": "Make a dressing ahead",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "A dressing made ahead turns a week of salads, wraps, and grain bowls into assembly. Most keep well, but not equally.",
+       "A plain vinaigrette of oil, vinegar, salt, and mustard keeps up to 2 weeks in the fridge. Add fresh garlic, shallot, or herbs and the clock shortens to about 4 days: fresh garlic held in oil is a botulism risk if it's left out, so it stays cold and gets used soon. An egg- or dairy-based dressing, like this week's Caesar or a yogurt dressing, keeps 3 to 4 days.",
+       "Olive oil firms up in the fridge. Take the jar out 15 minutes before you need it, or run it under warm water, and shake it hard; it re-emulsifies in seconds."
+      ],
+      "steps": [
+       "Plan four meals this week that use a dressing.",
+       "Make a double batch of a vinaigrette, with mustard, and a single batch of a creamy dressing: this week's Caesar or a yogurt dressing.",
+       "Jar each one, and label it with the name, the date made, and the use-by date from the guide above.",
+       "Store them on a fridge shelf, not the door, where the temperature swings.",
+       "Use them through the week, and note which held up and which didn't."
+      ],
+      "quiz": [
+       {
+        "q": "How long does a vinaigrette with fresh garlic keep?",
+        "choices": [
+         "About 4 days, refrigerated",
+         "2 weeks",
+         "A month"
+        ],
+        "answer": 0,
+        "explain": "Fresh garlic in oil is a botulism risk."
+       },
+       {
+        "q": "Why store dressings on a shelf, not the door?",
+        "choices": [
+         "The door's temperature swings",
+         "They're heavy",
+         "The light"
+        ],
+        "answer": 0,
+        "explain": "Every opening warms the door."
+       },
+       {
+        "q": "The olive oil vinaigrette is solid from the fridge. What do you do?",
+        "choices": [
+         "Let it warm 15 minutes and shake it",
+         "Throw it out",
+         "Microwave it"
+        ],
+        "answer": 0,
+        "explain": "It re-emulsifies in seconds."
+       }
+      ]
      }
     },
     {
@@ -20726,15 +22775,174 @@ export const LIBRARY = {
      "ownRecipe": true,
      "drill": {
       "title": "Hold a cold platter below 41°F; the 2-hour rule",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Run a cold-holding test before you hold food for guests. You'll set out two identical plates, one on ice and one not, and log both for 2 hours."
+      ],
+      "steps": [
+       "Chill two plates and a sheet pan of ice packs or frozen water for 30 minutes.",
+       "Cut two equal sets of perishable food from the fridge: cheese cubes, cut tomato, and a scoop of a dip.",
+       "Set one plate on the ice tray and one on the counter. Probe the cheese on each and log the time and temperature.",
+       "Probe both every 30 minutes for 2 hours. Note the room temperature too.",
+       "Graph or table your readings. When did the counter plate pass 41°F? Did the iced plate ever?",
+       "Discard the counter plate's food at 2 hours. Refrigerate the iced plate's food only if every reading was 41°F or below."
+      ],
+      "quiz": [
+       {
+        "q": "What's the cold-holding limit?",
+        "choices": [
+         "41°F",
+         "50°F",
+         "32°F"
+        ],
+        "answer": 0,
+        "explain": "From the FDA Food Code."
+       },
+       {
+        "q": "What happens to food left off ice for 2 hours?",
+        "choices": [
+         "It's discarded",
+         "It goes back in the fridge",
+         "It's served last"
+        ],
+        "answer": 0,
+        "explain": "Its time is used up."
+       },
+       {
+        "q": "How often do you probe a cold platter?",
+        "choices": [
+         "Every 30 minutes",
+         "Once at the start",
+         "Only at the end"
+        ],
+        "answer": 0,
+        "explain": "And log every reading."
+       }
+      ]
      },
      "knowledge": {
       "title": "Food safety for a cold buffet",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "A buffet is the riskiest way to serve food: it sits out, many hands reach in, and nobody is watching the clock. Food safety codes call the risky foods TCS, time/temperature control for safety: anything moist and protein-rich or cut, where bacteria can grow. On a cold table that means sliced meats, cheeses, dips like hummus and labneh, cut tomatoes and melons, leafy greens, cooked grains and beans, and anything with mayonnaise.",
+       "Cold holding has a number: 41°F or below, from the FDA Food Code that restaurants follow (your home fridge should run at 40°F or below). There are two ways to control it. Temperature: on ice, probed and logged, with nothing above 41°F. Or time: off ice, out for no more than 2 hours, or 1 hour above 90°F, then discarded, not returned to the fridge.",
+       "Cooked food headed for a cold table has to get cold fast. The rule is two-stage cooling: from 135°F to 70°F within 2 hours, then to 41°F within the next 4. Big, deep containers can't do it; the middle stays warm for hours. Spread food shallow, under 5 cm, and leave it uncovered until it's cool.",
+       "Listeria is the cold table's special concern. It grows even at fridge temperature and is found in deli meats and soft cheeses. It's most dangerous during pregnancy and for older adults, which is one more reason cold food stays cold and isn't held for days.",
+       "Good buffet practice: small platters, refilled from the fridge on clean plates, never topped up with fresh food on top of old; a separate serving utensil for every dish; bread off the ice and away from the dips; and a written log of times and temperatures. At the end, food that held at 41°F on ice can be refrigerated; anything else is thrown away.",
+       "This is a professional's standard, and it's what lets you feed a crowd without making anyone sick."
+      ],
+      "quiz": [
+       {
+        "q": "What does TCS mean?",
+        "choices": [
+         "Time/temperature control for safety",
+         "Total cold storage",
+         "Table and counter safety"
+        ],
+        "answer": 0,
+        "explain": "Foods where bacteria can grow."
+       },
+       {
+        "q": "What are the two ways to control a cold buffet?",
+        "choices": [
+         "Temperature on ice, or time off ice",
+         "Covering and stirring",
+         "Salt and acid"
+        ],
+        "answer": 0,
+        "explain": "41°F, or 2 hours then discarded."
+       },
+       {
+        "q": "What's the two-stage cooling rule?",
+        "choices": [
+         "135°F to 70°F in 2 hours, then to 41°F in 4",
+         "Room temperature, then fridge",
+         "Freezer first"
+        ],
+        "answer": 0,
+        "explain": "Shallow pans make it possible."
+       },
+       {
+        "q": "Why is Listeria a concern on a cold table?",
+        "choices": [
+         "It grows even at fridge temperature",
+         "It's killed by ice",
+         "It only grows in hot food"
+        ],
+        "answer": 0,
+        "explain": "Deli meats and soft cheeses."
+       },
+       {
+        "q": "How do you refill a platter?",
+        "choices": [
+         "A fresh plate from the fridge",
+         "New food on top of the old",
+         "From the leftovers"
+        ],
+        "answer": 0,
+        "explain": "Never mix fresh with what's been out."
+       },
+       {
+        "q": "Iced food read 41°F all afternoon. What happens to it at the end?",
+        "choices": [
+         "It can be refrigerated",
+         "It must be discarded",
+         "It can sit out longer"
+        ],
+        "answer": 0,
+        "explain": "It never left safe temperatures."
+       }
+      ]
      },
      "sabbath": {
       "title": "Hospitality: Abraham's meal for his guests (Genesis 18:1–8; Hebrews 13:2)",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Abraham was sitting at the door of his tent in the heat of the day when he saw three men standing nearby. He ran to meet them, bowed, and begged them to stay: \"Let a little water be brought, and wash your feet, and rest yourselves under the tree, while I bring a morsel of bread\" (Genesis 18:4–5).",
+       "The \"morsel\" was a feast. Abraham hurried to Sarah, who made cakes from three seahs of fine flour, enough for a crowd. He ran to the herd himself, chose a calf, \"tender and good,\" and a young man hurried to prepare it. He set it before them with curds and milk, and stood by them under the tree while they ate (Genesis 18:6–8). The guests were the LORD and two angels, though Abraham welcomed them before he knew it.",
+       "The New Testament remembers this scene: \"Do not neglect to show hospitality to strangers, for thereby some have entertained angels unawares\" (Hebrews 13:2). Paul tells believers to \"seek to show hospitality\" (Romans 12:13), and Peter adds, \"without grumbling\" (1 Peter 4:9).",
+       "Notice what Abraham did: he ran, he offered his best rather than his leftovers, he served the guests himself, and he stayed with them while they ate. Hospitality was a matter of the heart, and also of planning and work."
+      ],
+      "steps": [
+       "Read Genesis 18:1–8 and Hebrews 13:1–2.",
+       "Read Romans 12:13 and 1 Peter 4:9.",
+       "Answer in writing: list every action Abraham took, from seeing the guests to standing by them. What does each show?",
+       "Answer in writing: what's the difference between hosting to impress and hosting as Abraham did?",
+       "With your family, plan a meal for a guest this month: someone new, alone, or in need. Write the menu from your Unit 1 and 2 recipes, the shopping list, and the budget.",
+       "If you can, host it, and use this week's cold-holding skills for anything set out."
+      ],
+      "quiz": [
+       {
+        "q": "What did Abraham first offer his guests?",
+        "choices": [
+         "Water to wash their feet, rest, and a morsel of bread",
+         "A tour of his flocks",
+         "Gold"
+        ],
+        "answer": 0,
+        "explain": "Genesis 18:4–5."
+       },
+       {
+        "q": "What did the \"morsel of bread\" turn out to be?",
+        "choices": [
+         "A feast of cakes, a tender calf, curds, and milk",
+         "A single loaf",
+         "Nothing"
+        ],
+        "answer": 0,
+        "explain": "Genesis 18:6–8."
+       },
+       {
+        "q": "According to Hebrews 13:2, who have some entertained unawares?",
+        "choices": [
+         "Angels",
+         "Kings",
+         "Prophets"
+        ],
+        "answer": 0,
+        "explain": "Remembering Abraham."
+       }
+      ]
      }
     },
     {

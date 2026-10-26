@@ -64,3 +64,7 @@ sheet-54-levels-26.png chocolate-babka,milk-bread,spinach-feta-borekas,jamaican-
 # Onigiri (sheet 29) and kimbap (sheet 42) have plates whose white rim gaps let the tool's
 # fill eat the plate; each was cut from its box (onigiri 800,0,1536,480; kimbap 0,0,780,490)
 # with a mask of everything not white, closed (25px) and hole-filled, so the plate stays.
+sheet-63-levels-35.png tabbouleh,thick-burgers,baked-salmon,sandwich-loaf
+sheet-64-levels-36.png dinner-rolls,-,beef-picadillo,pan-seared-trout
+# sheet-64-levels-36.png: steamed-fish's rice bowl stands apart from its plate, so it was cut by
+#   hand: everything not white in the box 780,0,1536,500, padded 10px and squared.

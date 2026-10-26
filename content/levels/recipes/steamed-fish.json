@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 103,
   "title": "Steamed fish with ginger and scallion",
-  "image": "meals/fish.svg",
+  "image": "dishes/steamed-fish.png",
   "cuisine": "chinese",
   "skill": "Steaming, judging freshness",
   "skills": ["cooking-fish"],

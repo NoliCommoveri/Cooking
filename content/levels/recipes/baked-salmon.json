@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 103,
   "title": "Baked fish with lemon and herbs",
-  "image": "meals/fish.svg",
+  "image": "dishes/baked-salmon.png",
   "cuisine": "american",
   "skill": "Baking fish gently, checking pin bones",
   "skills": ["cooking-fish"],

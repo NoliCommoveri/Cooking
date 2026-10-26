@@ -45,6 +45,7 @@
     { "id": "rolling-pin", "name": "Rolling pin", "category": "bakeware", "icon": null },
     { "id": "skillet-nonstick-8", "name": "8-inch nonstick skillet", "category": "pans", "icon": null },
     { "id": "immersion-blender", "name": "Stick blender (immersion blender)", "category": "appliances", "icon": null },
+    { "id": "blender", "name": "Blender or food processor", "category": "appliances", "icon": null },
     { "id": "table-knife", "name": "Butter knife", "category": "utensils", "icon": null },
     { "id": "heatproof-bowl", "name": "Heatproof glass or metal bowl that sits on top of the saucepan", "category": "mixing", "icon": null },
     { "id": "slotted-spoon", "name": "Slotted spoon", "category": "utensils", "icon": null },

@@ -5909,3 +5909,127 @@ everyone".
   shows **Launch release 1 for everyone**, with **Undo launch** beside it once
   it's pressed.
 - Tests: 392.
+
+## 231. 2026-10-26 — 14g content: Level 3 Unit 2
+
+Owner, 2026-10-26: "We're gonna do unit 2, ordered levels 3, 2, 4. Put
+each level unit in a review doc for me before starting the next one."
+Reviewed in [14g review: Level 3 Cook, Unit
+2](https://claude.ai/artifact/M8cfT5VgozuCAZ2Jirj1tQ); not merged until the owner
+approves it there.
+
+- **Before:** Unit 2, No-cook (weeks 5 and 6), had one written recipe,
+  tabbouleh. Week 5 cooked it for both starts, week 6 waited, and five of
+  its six part pages were blank.
+- **Now:**
+  - **Two Level-only recipes** in `content/levels/recipes/`, unit 103: Bean
+    tostadas with pico de gallo (week 5, fine chopping; tomatoes salted and
+    drained) and Solterito (week 6, the mastery week: a timed dice to the size
+    of the beans and a lime-forward dressing balanced by taste). The
+    fine-chopping and dressings pick-one groups are full, and neither is a
+    variation of a planned dish (§12.4). Their cards' minutes are now the
+    recipes' own (40 and 45).
+  - **Chickpea chopped salad + vinaigrette**, a new Cook Around the World
+    lesson (the dressings group's third dish), and its Level 3 version:
+    sized cuts, the timed knife check, and no beginner tips. Its card's
+    minutes are now the lesson's 40.
+  - **Five part pages:** week 5's drill (mince parsley and onion; salted
+    against unsalted tomatoes), Knowledge (osmosis, and salting early or
+    late), and Beyond the Recipe (dips and salsas made ahead); week 6's
+    drill (the timed salad set and a dressing changed one thing at a time)
+    and Knowledge (emulsions, the 3-to-1 rule, and soggy salads).
+  - **New ingredients:** canned pinto beans, tostada shells (watch: lard),
+    frozen corn, frozen shelled edamame or baby lima beans.
+  - Frozen corn and edamame are heated until steaming before the salad, as
+    their bags say; they're not ready to eat from frozen.
+- Recipe gaps and best fit: the dressings group now has a chickpea dish, so
+  two tests that needed every dressings dish ruled out also rate beans low.
+  The Level course tests skip weeks 5 and 6 where they need week 9.
+- No screens changed, so no screenshots.
+- Tests: 392.
+
+## 232. 2026-10-26 — 14g content: Level 2 Unit 2
+
+Owner, 2026-10-26: Level 2 is the second of Unit 2's three Levels (231).
+Reviewed in [14g review: Level 2 Apprentice, Unit
+2](https://claude.ai/artifact/QZkxD9oWoNK5Cw4MmGApZC); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 2 Unit 2's dishes was written except Cook Around
+  the World's tuna salad sandwiches, which chop with a chef's knife and the
+  rocking cut. Its 6 part pages were blank.
+- **Now:**
+  - **Three Level-only recipes** in `content/levels/recipes/`, unit 102:
+    Hummus plate (week 5: peel, core, and seed, and a blended dip), and
+    Chicken Caesar wraps and Chana chaat (week 6, the mastery week: a
+    dressing whisked, tasted, and fixed). The fine-chopping and dressings
+    pick-one groups are full (§12.4). The wraps' card is marked as a
+    variation of Chicken Caesar; like Level 4's steak fajitas, they're a
+    Level recipe of their own. Their cards' minutes are now the recipes' own
+    (30 each).
+  - **Tuna salad sandwiches' Level 2 version:** the paring knife, not a
+    chef's knife; parsley torn by hand; a bread knife for the sandwiches;
+    every step rewritten to Level 2's standard.
+  - **Nothing before it's taught:** the paring knife cuts only soft foods,
+    herbs and lettuce are torn, and there's no stove. Chana chaat uses green
+    onion in place of the card's red onion, which would need a dice.
+  - **All 6 part pages:** peel, core, and seed; washing produce; daily bread
+    (Matthew 6:11); a vinaigrette tasted and fixed; why a dressing separates;
+    a lunch salad packed with the dressing apart.
+  - **New tool:** a blender or food processor.
+  - **New ingredients:** tahini, chaat masala (with ground cumin and lime as
+    its stand-in).
+- No screens changed, so no screenshots.
+- Tests: 392.
+
+## 233. 2026-10-26 — 14g content: Level 4 Unit 2
+
+Owner, 2026-10-26: Level 4 is the last of Unit 2's three Levels (231).
+Reviewed in [14g review: Level 4 Chef, Unit
+2](https://claude.ai/artifact/KYrWbzYA96NVAc7DkRg9Kx); not merged until the
+owner approves it there.
+
+- **Before:** week 5 cooked Cook Around the World's Chicken Caesar, which
+  had no Level 4 version; the other three dishes and all 6 part pages were
+  unwritten.
+- **Now:**
+  - **Three Level-only recipes** in `content/levels/recipes/`, unit 104:
+    Ensaladilla rusa (week 5, emulsions: a hand-whisked mayonnaise), and
+    Antipasto platter and Mezze spread (week 6, the mastery week: cold
+    holding at 41°F, logged, and two-stage cooling for the mezze's cooked
+    chickpeas and eggplant). No pick-one group covers either skill (§12.4).
+    Their cards' minutes are now the recipes' own (75, 60, 180).
+  - **Chicken Caesar's Level 4 version:** the dressing from scratch, with
+    pasteurized yolks, optional anchovy, and oil whisked to an emulsion;
+    metric cuts and a tight method. 60 minutes.
+  - **Eggs to 160°F:** both mayonnaises cook the pasteurized yolks with the
+    lemon juice to 160°F before the oil, so the content check's doneness rule
+    holds; the review doc asks the owner whether to allow raw pasteurized
+    yolks instead.
+  - **All 6 part pages:** a mayonnaise made, broken, and rescued; emulsions
+    and the USDA's raw-egg guidance; dressings made ahead; an iced and an
+    un-iced plate logged for 2 hours; food safety for a cold buffet;
+    hospitality (Genesis 18:1–8; Hebrews 13:2).
+  - **New ingredients:** anchovy fillets, frozen peas, roasted red peppers,
+    beef salami (`beef-dry-sausage`; watch: pork casings), bresaola (watch:
+    beef only, sealed), provolone, marinated artichoke hearts, dried
+    chickpeas, labneh (watch: gelatin).
+- No screens changed, so no screenshots.
+- Tests: 392.
+
+## 234. 2026-10-26 — Level dish pictures: sheets 63–64
+
+Owner, 2026-10-26: "find me recipes with placeholder images like this", then
+the two sheets made from Claude's prompts.
+
+- **Before:** eight written Level 3 recipes, all from phase 12, showed the
+  meal-type drawings (`meals/*.svg`) on their cards and in the player:
+  tabbouleh, thick beef burgers, baked fish with lemon and herbs, sandwich
+  loaf, dinner rolls, steamed fish with ginger and scallion, beef picadillo,
+  and pan-seared trout. None had been on a picture sheet.
+- **Now:** sheets 63 and 64 (`content/images/source/`) are cut into those
+  eight dish pictures, with web copies, and the lessons and their Level 3
+  cards point at them. The steamed fish's rice bowl stands apart from its
+  plate, so it was cut by hand; `tools/dish-sheets.txt` records how.
+- Screenshots (More recipes, phone width, both themes) sent in the session.
+- Tests: 392.
