@@ -1920,6 +1920,139 @@ export const LIBRARY = {
     "measuring-spoons",
     "colander",
     "kitchen-towel"
+   ],
+   "variations": [
+    {
+     "title": "Chicken Caesar + homemade dressing & croutons",
+     "image": "img/dishes/chicken-caesar.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, bake the croutons on two sheet pans and swap their shelves halfway, and cook the chicken in two batches."
+       }
+      ]
+     },
+     "totalMinutes": 60,
+     "ingredients": [
+      {
+       "ingredient": "baguette"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "garlic-powder"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "chicken-breast"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "mustard-dijon"
+      },
+      {
+       "ingredient": "worcestershire",
+       "optional": true
+      },
+      {
+       "ingredient": "parmesan"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "romaine"
+      },
+      {
+       "ingredient": "parmesan"
+      },
+      {
+       "ingredient": "egg-pasteurized"
+      },
+      {
+       "ingredient": "anchovy-fillets",
+       "optional": true
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "olive-oil"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "baguette",
+       "use": "bread-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "creamy-cheesy",
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic",
+       "lemon-lime",
+       "mustard",
+       "sharp-cheese"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "mixing-bowl-large",
+      "sheet-pan",
+      "oven-mitts",
+      "spatula",
+      "plate",
+      "skillet-12",
+      "tongs",
+      "thermometer",
+      "small-bowl",
+      "whisk",
+      "measuring-cups",
+      "measuring-spoons",
+      "colander",
+      "kitchen-towel",
+      "heatproof-bowl",
+      "saucepan-medium"
+     ],
+     "id": "sp-4",
+     "level": "sp-4"
+    }
    ]
   },
   {
@@ -10255,6 +10388,123 @@ export const LIBRARY = {
    "level": "sp-3"
   },
   {
+   "id": "antipasto-platter",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Antipasto platter",
+   "image": "img/dishes/antipasto-platter.webp",
+   "cuisine": "italian",
+   "skill": "A cold platter that holds below 41°F",
+   "servings": 8,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 13,
+      "text": "Build two platters: one out, one in the fridge to swap in at the 1-hour mark."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "beef-dry-sausage"
+    },
+    {
+     "ingredient": "bresaola"
+    },
+    {
+     "ingredient": "provolone"
+    },
+    {
+     "ingredient": "mozzarella-fresh"
+    },
+    {
+     "ingredient": "artichoke-hearts"
+    },
+    {
+     "ingredient": "roasted-red-peppers"
+    },
+    {
+     "ingredient": "olives-kalamata"
+    },
+    {
+     "ingredient": "olives-green"
+    },
+    {
+     "ingredient": "baguette"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "chickpeas"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "onion-red"
+    },
+    {
+     "ingredient": "vinegar-red-wine"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "olive-oil"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "baguette",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "mustard"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "plate",
+    "chef-knife",
+    "bread-knife",
+    "cutting-board",
+    "colander",
+    "kitchen-towel",
+    "can-opener",
+    "mixing-bowl-large",
+    "small-bowl",
+    "whisk",
+    "measuring-cups",
+    "measuring-spoons",
+    "kitchen-scale",
+    "thermometer",
+    "tongs"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "bibimbap",
    "version": 1,
    "track": "core",
@@ -10602,6 +10852,243 @@ export const LIBRARY = {
     "foil",
     "oven-mitts",
     "plate"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "ensaladilla-rusa",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Ensaladilla rusa",
+   "image": "img/dishes/ensaladilla-rusa.webp",
+   "cuisine": "spanish",
+   "skill": "Homemade mayonnaise",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "Make the mayonnaise in two batches of 2 yolks each; one bowl of yolks can't take more than about 1 cup of oil by hand without strain."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "potato-russet"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "peas-frozen"
+    },
+    {
+     "ingredient": "tuna-canned"
+    },
+    {
+     "ingredient": "egg-pasteurized"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "roasted-red-peppers"
+    },
+    {
+     "ingredient": "olives-green"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "carrots",
+     "lemon-lime",
+     "mustard"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "vegetable-peeler",
+    "chef-knife",
+    "cutting-board",
+    "kitchen-scale",
+    "pot-large",
+    "colander",
+    "sheet-pan",
+    "heatproof-bowl",
+    "saucepan-medium",
+    "whisk",
+    "kitchen-towel",
+    "thermometer",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "mixing-bowl-large",
+    "silicone-spatula",
+    "plate"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "mezze-spread",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Mezze spread",
+   "image": "img/dishes/mezze-spread.webp",
+   "cuisine": "lebanese",
+   "skill": "A spread for guests, held safely",
+   "servings": 8,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 13,
+      "text": "Cook the chickpeas in two pots, and roast the eggplant on two pans so it chars instead of steaming."
+     }
+    ]
+   },
+   "totalMinutes": 180,
+   "ingredients": [
+    {
+     "ingredient": "chickpeas-dried"
+    },
+    {
+     "ingredient": "baking-soda"
+    },
+    {
+     "ingredient": "tahini"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "eggplant"
+    },
+    {
+     "ingredient": "tahini"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "bulgur-fine"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "mint"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "labneh"
+    },
+    {
+     "ingredient": "sumac"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "pita"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pita",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "lemon-lime",
+     "garlic",
+     "eggplant",
+     "mint",
+     "tomatoes",
+     "onions"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "mixing-bowl-large",
+    "pot-large",
+    "colander",
+    "blender",
+    "silicone-spatula",
+    "sheet-pan",
+    "foil",
+    "oven-mitts",
+    "tongs",
+    "chef-knife",
+    "cutting-board",
+    "kitchen-towel",
+    "saucepan-medium",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "fork",
+    "spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "liquid-measuring-cup",
+    "kitchen-scale",
+    "thermometer"
    ],
    "level": "sp-4"
   },
@@ -11748,6 +12235,52 @@ export const LIBRARY = {
   "chaat-masala": {
    "name": "Chaat masala",
    "contains": []
+  },
+  "anchovy-fillets": {
+   "name": "Anchovy fillets in olive oil",
+   "contains": [
+    "fish"
+   ]
+  },
+  "peas-frozen": {
+   "name": "Frozen peas",
+   "contains": []
+  },
+  "roasted-red-peppers": {
+   "name": "Roasted red peppers (jarred)",
+   "contains": []
+  },
+  "beef-dry-sausage": {
+   "name": "Beef salami",
+   "contains": [
+    "meat"
+   ]
+  },
+  "bresaola": {
+   "name": "Bresaola (air-dried beef), sliced",
+   "contains": [
+    "meat"
+   ]
+  },
+  "provolone": {
+   "name": "Provolone cheese, in a piece",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "artichoke-hearts": {
+   "name": "Marinated artichoke hearts (jarred)",
+   "contains": []
+  },
+  "chickpeas-dried": {
+   "name": "Dried chickpeas",
+   "contains": []
+  },
+  "labneh": {
+   "name": "Labneh (strained yogurt)",
+   "contains": [
+    "dairy"
+   ]
   }
  },
  "cuisines": {
@@ -11847,9 +12380,12 @@ export const LIBRARY = {
   "tabbouleh": "K9",
   "thick-burgers": "K11",
   "vegetable-lo-mein": "K5",
+  "antipasto-platter": "C7",
   "bibimbap": "C5",
   "bo-luc-lac": "C2",
   "chicken-enchiladas": "C3",
+  "ensaladilla-rusa": "C6",
+  "mezze-spread": "C8",
   "salade-nicoise": "C4",
   "steak-fajitas": "C1"
  },
@@ -22057,15 +22593,174 @@ export const LIBRARY = {
      "cuisine": "spanish",
      "drill": {
       "title": "Make mayonnaise, break it, and rescue it",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Make a mayonnaise, break it on purpose, and bring it back. Once you've rescued one, a broken sauce stops being a disaster. Use pasteurized eggs, and cook the yolk to 160°F first, as this week's recipes do."
+      ],
+      "steps": [
+       "Whisk 1 pasteurized egg yolk with 1 teaspoon of lemon juice and 1 teaspoon of water in a heatproof bowl over barely simmering water until it thickens and probes 160°F. Wash your hands after separating the egg.",
+       "Off the heat, whisk for a minute to cool it, then add ½ teaspoon of mustard and a pinch of salt.",
+       "Measure ¾ cup of neutral oil. Whisk in the first quarter drop by drop, then the rest in a thin stream. Note when it turns thick and pale.",
+       "Take a third of the finished mayonnaise into a second bowl. Pour 3 tablespoons of oil in at once and whisk. Watch it break into a greasy, curdled pool.",
+       "Rescue it: in a clean bowl, whisk 1 teaspoon of mustard with 1 teaspoon of water. Whisk the broken mayonnaise in a teaspoon at a time until it's thick again.",
+       "Compare the two by look and taste, and write down what broke it and what saved it.",
+       "Keep the mayonnaise in a covered jar in the fridge and use it within 4 days, in this week's Caesar or ensaladilla."
+      ],
+      "quiz": [
+       {
+        "q": "What breaks a mayonnaise?",
+        "choices": [
+         "Oil added faster than the emulsion can take it",
+         "Too much whisking",
+         "Cold lemon juice"
+        ],
+        "answer": 0,
+        "explain": "The droplets merge and the oil separates."
+       },
+       {
+        "q": "How do you rescue a broken mayonnaise?",
+        "choices": [
+         "Whisk it slowly into a fresh emulsifier",
+         "Add more oil",
+         "Heat it"
+        ],
+        "answer": 0,
+        "explain": "Mustard and water, or a fresh cooked yolk, then the broken sauce a little at a time."
+       },
+       {
+        "q": "How long does homemade mayonnaise keep in the fridge?",
+        "choices": [
+         "About 4 days",
+         "A month",
+         "A year"
+        ],
+        "answer": 0,
+        "explain": "It has no preservatives."
+       }
+      ]
      },
      "knowledge": {
       "title": "Emulsions, and raw eggs: the USDA guideline and pasteurized eggs",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "An emulsion is one liquid dispersed through another as droplets: oil droplets in a water-based liquid in mayonnaise and vinaigrette, water droplets in fat in butter. The two phases don't mix, so an emulsion needs energy (whisking breaks the oil into droplets) and an emulsifier, a molecule with a water-loving end and a fat-loving end that coats each droplet and keeps it from merging with its neighbors.",
+       "Egg yolk is the strongest emulsifier in the kitchen. Its lecithin and proteins hold a mayonnaise stable for days, and one yolk can carry well over a cup of oil. Mustard is weaker but useful: it steadies a vinaigrette for an hour instead of a minute. Without an emulsifier, a vinaigrette is a temporary emulsion that separates as soon as you stop.",
+       "Three things break an emulsion: oil added faster than there are droplets to hold it, too much oil for the emulsifier (more than about 1½ cups to a yolk), and temperature, since a very cold or a warm sauce loses its grip. The fix is always the same: start a fresh emulsifier and whisk the broken sauce into it slowly.",
+       "Now the eggs. Salmonella Enteritidis can be inside an intact, clean egg, passed from the hen before the shell forms, so washing doesn't remove it. The USDA and FDA advise against eating raw or undercooked eggs and say to cook egg dishes to 160°F. The risk is highest for young children, older adults, pregnant women, and anyone with a weakened immune system.",
+       "For recipes that use eggs raw, the USDA's answer is pasteurized eggs: in-shell eggs heated in a water bath just enough to kill Salmonella without cooking them, or pasteurized liquid egg products. Store-bought mayonnaise is made with pasteurized eggs and enough acid to be shelf-stable until opened.",
+       "This app keeps one standard for every egg: 160°F. So the Level 4 recipes use pasteurized eggs and still cook the yolks to 160°F with the lemon juice before the oil goes in. Cooked this way, the yolk keeps its emulsifying power, and the sauce is safe for every guest at the table.",
+       "Homemade mayonnaise and egg-based dressings have no preservatives. Keep them covered in the fridge at 40°F or below and use them within 4 days."
+      ],
+      "quiz": [
+       {
+        "q": "What does an emulsifier do?",
+        "choices": [
+         "Coats droplets so they don't merge",
+         "Thickens by cooking",
+         "Adds acid"
+        ],
+        "answer": 0,
+        "explain": "One end holds water, the other fat."
+       },
+       {
+        "q": "Why doesn't washing make a raw egg safe?",
+        "choices": [
+         "Salmonella can be inside an intact egg",
+         "Water spreads it",
+         "Shells are porous to soap"
+        ],
+        "answer": 0,
+        "explain": "It's passed from the hen before the shell forms."
+       },
+       {
+        "q": "To what temperature does the USDA say to cook egg dishes?",
+        "choices": [
+         "160°F",
+         "145°F",
+         "120°F"
+        ],
+        "answer": 0,
+        "explain": "The app uses this for every egg."
+       },
+       {
+        "q": "What is a pasteurized in-shell egg?",
+        "choices": [
+         "Heated just enough to kill Salmonella without cooking",
+         "A hard-boiled egg",
+         "An egg from a special breed"
+        ],
+        "answer": 0,
+        "explain": "The USDA's answer for raw-egg recipes."
+       },
+       {
+        "q": "A mayonnaise broke. What's the fix?",
+        "choices": [
+         "Whisk it slowly into a fresh emulsifier",
+         "Add more oil",
+         "Refrigerate it"
+        ],
+        "answer": 0,
+        "explain": "Mustard and water, or a new cooked yolk."
+       },
+       {
+        "q": "How long does homemade mayonnaise keep?",
+        "choices": [
+         "About 4 days in the fridge",
+         "2 weeks",
+         "Until it smells"
+        ],
+        "answer": 0,
+        "explain": "No preservatives."
+       }
+      ]
      },
      "sabbath": {
       "title": "Make a dressing ahead",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "A dressing made ahead turns a week of salads, wraps, and grain bowls into assembly. Most keep well, but not equally.",
+       "A plain vinaigrette of oil, vinegar, salt, and mustard keeps up to 2 weeks in the fridge. Add fresh garlic, shallot, or herbs and the clock shortens to about 4 days: fresh garlic held in oil is a botulism risk if it's left out, so it stays cold and gets used soon. An egg- or dairy-based dressing, like this week's Caesar or a yogurt dressing, keeps 3 to 4 days.",
+       "Olive oil firms up in the fridge. Take the jar out 15 minutes before you need it, or run it under warm water, and shake it hard; it re-emulsifies in seconds."
+      ],
+      "steps": [
+       "Plan four meals this week that use a dressing.",
+       "Make a double batch of a vinaigrette, with mustard, and a single batch of a creamy dressing: this week's Caesar or a yogurt dressing.",
+       "Jar each one, and label it with the name, the date made, and the use-by date from the guide above.",
+       "Store them on a fridge shelf, not the door, where the temperature swings.",
+       "Use them through the week, and note which held up and which didn't."
+      ],
+      "quiz": [
+       {
+        "q": "How long does a vinaigrette with fresh garlic keep?",
+        "choices": [
+         "About 4 days, refrigerated",
+         "2 weeks",
+         "A month"
+        ],
+        "answer": 0,
+        "explain": "Fresh garlic in oil is a botulism risk."
+       },
+       {
+        "q": "Why store dressings on a shelf, not the door?",
+        "choices": [
+         "The door's temperature swings",
+         "They're heavy",
+         "The light"
+        ],
+        "answer": 0,
+        "explain": "Every opening warms the door."
+       },
+       {
+        "q": "The olive oil vinaigrette is solid from the fridge. What do you do?",
+        "choices": [
+         "Let it warm 15 minutes and shake it",
+         "Throw it out",
+         "Microwave it"
+        ],
+        "answer": 0,
+        "explain": "It re-emulsifies in seconds."
+       }
+      ]
      }
     },
     {
@@ -22080,15 +22775,174 @@ export const LIBRARY = {
      "ownRecipe": true,
      "drill": {
       "title": "Hold a cold platter below 41°F; the 2-hour rule",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Run a cold-holding test before you hold food for guests. You'll set out two identical plates, one on ice and one not, and log both for 2 hours."
+      ],
+      "steps": [
+       "Chill two plates and a sheet pan of ice packs or frozen water for 30 minutes.",
+       "Cut two equal sets of perishable food from the fridge: cheese cubes, cut tomato, and a scoop of a dip.",
+       "Set one plate on the ice tray and one on the counter. Probe the cheese on each and log the time and temperature.",
+       "Probe both every 30 minutes for 2 hours. Note the room temperature too.",
+       "Graph or table your readings. When did the counter plate pass 41°F? Did the iced plate ever?",
+       "Discard the counter plate's food at 2 hours. Refrigerate the iced plate's food only if every reading was 41°F or below."
+      ],
+      "quiz": [
+       {
+        "q": "What's the cold-holding limit?",
+        "choices": [
+         "41°F",
+         "50°F",
+         "32°F"
+        ],
+        "answer": 0,
+        "explain": "From the FDA Food Code."
+       },
+       {
+        "q": "What happens to food left off ice for 2 hours?",
+        "choices": [
+         "It's discarded",
+         "It goes back in the fridge",
+         "It's served last"
+        ],
+        "answer": 0,
+        "explain": "Its time is used up."
+       },
+       {
+        "q": "How often do you probe a cold platter?",
+        "choices": [
+         "Every 30 minutes",
+         "Once at the start",
+         "Only at the end"
+        ],
+        "answer": 0,
+        "explain": "And log every reading."
+       }
+      ]
      },
      "knowledge": {
       "title": "Food safety for a cold buffet",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "A buffet is the riskiest way to serve food: it sits out, many hands reach in, and nobody is watching the clock. Food safety codes call the risky foods TCS, time/temperature control for safety: anything moist and protein-rich or cut, where bacteria can grow. On a cold table that means sliced meats, cheeses, dips like hummus and labneh, cut tomatoes and melons, leafy greens, cooked grains and beans, and anything with mayonnaise.",
+       "Cold holding has a number: 41°F or below, from the FDA Food Code that restaurants follow (your home fridge should run at 40°F or below). There are two ways to control it. Temperature: on ice, probed and logged, with nothing above 41°F. Or time: off ice, out for no more than 2 hours, or 1 hour above 90°F, then discarded, not returned to the fridge.",
+       "Cooked food headed for a cold table has to get cold fast. The rule is two-stage cooling: from 135°F to 70°F within 2 hours, then to 41°F within the next 4. Big, deep containers can't do it; the middle stays warm for hours. Spread food shallow, under 5 cm, and leave it uncovered until it's cool.",
+       "Listeria is the cold table's special concern. It grows even at fridge temperature and is found in deli meats and soft cheeses. It's most dangerous during pregnancy and for older adults, which is one more reason cold food stays cold and isn't held for days.",
+       "Good buffet practice: small platters, refilled from the fridge on clean plates, never topped up with fresh food on top of old; a separate serving utensil for every dish; bread off the ice and away from the dips; and a written log of times and temperatures. At the end, food that held at 41°F on ice can be refrigerated; anything else is thrown away.",
+       "This is a professional's standard, and it's what lets you feed a crowd without making anyone sick."
+      ],
+      "quiz": [
+       {
+        "q": "What does TCS mean?",
+        "choices": [
+         "Time/temperature control for safety",
+         "Total cold storage",
+         "Table and counter safety"
+        ],
+        "answer": 0,
+        "explain": "Foods where bacteria can grow."
+       },
+       {
+        "q": "What are the two ways to control a cold buffet?",
+        "choices": [
+         "Temperature on ice, or time off ice",
+         "Covering and stirring",
+         "Salt and acid"
+        ],
+        "answer": 0,
+        "explain": "41°F, or 2 hours then discarded."
+       },
+       {
+        "q": "What's the two-stage cooling rule?",
+        "choices": [
+         "135°F to 70°F in 2 hours, then to 41°F in 4",
+         "Room temperature, then fridge",
+         "Freezer first"
+        ],
+        "answer": 0,
+        "explain": "Shallow pans make it possible."
+       },
+       {
+        "q": "Why is Listeria a concern on a cold table?",
+        "choices": [
+         "It grows even at fridge temperature",
+         "It's killed by ice",
+         "It only grows in hot food"
+        ],
+        "answer": 0,
+        "explain": "Deli meats and soft cheeses."
+       },
+       {
+        "q": "How do you refill a platter?",
+        "choices": [
+         "A fresh plate from the fridge",
+         "New food on top of the old",
+         "From the leftovers"
+        ],
+        "answer": 0,
+        "explain": "Never mix fresh with what's been out."
+       },
+       {
+        "q": "Iced food read 41°F all afternoon. What happens to it at the end?",
+        "choices": [
+         "It can be refrigerated",
+         "It must be discarded",
+         "It can sit out longer"
+        ],
+        "answer": 0,
+        "explain": "It never left safe temperatures."
+       }
+      ]
      },
      "sabbath": {
       "title": "Hospitality: Abraham's meal for his guests (Genesis 18:1–8; Hebrews 13:2)",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Abraham was sitting at the door of his tent in the heat of the day when he saw three men standing nearby. He ran to meet them, bowed, and begged them to stay: \"Let a little water be brought, and wash your feet, and rest yourselves under the tree, while I bring a morsel of bread\" (Genesis 18:4–5).",
+       "The \"morsel\" was a feast. Abraham hurried to Sarah, who made cakes from three seahs of fine flour, enough for a crowd. He ran to the herd himself, chose a calf, \"tender and good,\" and a young man hurried to prepare it. He set it before them with curds and milk, and stood by them under the tree while they ate (Genesis 18:6–8). The guests were the LORD and two angels, though Abraham welcomed them before he knew it.",
+       "The New Testament remembers this scene: \"Do not neglect to show hospitality to strangers, for thereby some have entertained angels unawares\" (Hebrews 13:2). Paul tells believers to \"seek to show hospitality\" (Romans 12:13), and Peter adds, \"without grumbling\" (1 Peter 4:9).",
+       "Notice what Abraham did: he ran, he offered his best rather than his leftovers, he served the guests himself, and he stayed with them while they ate. Hospitality was a matter of the heart, and also of planning and work."
+      ],
+      "steps": [
+       "Read Genesis 18:1–8 and Hebrews 13:1–2.",
+       "Read Romans 12:13 and 1 Peter 4:9.",
+       "Answer in writing: list every action Abraham took, from seeing the guests to standing by them. What does each show?",
+       "Answer in writing: what's the difference between hosting to impress and hosting as Abraham did?",
+       "With your family, plan a meal for a guest this month: someone new, alone, or in need. Write the menu from your Unit 1 and 2 recipes, the shopping list, and the budget.",
+       "If you can, host it, and use this week's cold-holding skills for anything set out."
+      ],
+      "quiz": [
+       {
+        "q": "What did Abraham first offer his guests?",
+        "choices": [
+         "Water to wash their feet, rest, and a morsel of bread",
+         "A tour of his flocks",
+         "Gold"
+        ],
+        "answer": 0,
+        "explain": "Genesis 18:4–5."
+       },
+       {
+        "q": "What did the \"morsel of bread\" turn out to be?",
+        "choices": [
+         "A feast of cakes, a tender calf, curds, and milk",
+         "A single loaf",
+         "Nothing"
+        ],
+        "answer": 0,
+        "explain": "Genesis 18:6–8."
+       },
+       {
+        "q": "According to Hebrews 13:2, who have some entertained unawares?",
+        "choices": [
+         "Angels",
+         "Kings",
+         "Prophets"
+        ],
+        "answer": 0,
+        "explain": "Remembering Abraham."
+       }
+      ]
      }
     },
     {

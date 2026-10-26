@@ -5981,3 +5981,38 @@ owner approves it there.
     its stand-in).
 - No screens changed, so no screenshots.
 - Tests: 392.
+
+## 233. 2026-10-26 — 14g content: Level 4 Unit 2
+
+Owner, 2026-10-26: Level 4 is the last of Unit 2's three Levels (231).
+Reviewed in [14g review: Level 4 Chef, Unit
+2](https://claude.ai/artifact/KYrWbzYA96NVAc7DkRg9Kx); not merged until the
+owner approves it there.
+
+- **Before:** week 5 cooked Cook Around the World's Chicken Caesar, which
+  had no Level 4 version; the other three dishes and all 6 part pages were
+  unwritten.
+- **Now:**
+  - **Three Level-only recipes** in `content/levels/recipes/`, unit 104:
+    Ensaladilla rusa (week 5, emulsions: a hand-whisked mayonnaise), and
+    Antipasto platter and Mezze spread (week 6, the mastery week: cold
+    holding at 41°F, logged, and two-stage cooling for the mezze's cooked
+    chickpeas and eggplant). No pick-one group covers either skill (§12.4).
+    Their cards' minutes are now the recipes' own (75, 60, 180).
+  - **Chicken Caesar's Level 4 version:** the dressing from scratch, with
+    pasteurized yolks, optional anchovy, and oil whisked to an emulsion;
+    metric cuts and a tight method. 60 minutes.
+  - **Eggs to 160°F:** both mayonnaises cook the pasteurized yolks with the
+    lemon juice to 160°F before the oil, so the content check's doneness rule
+    holds; the review doc asks the owner whether to allow raw pasteurized
+    yolks instead.
+  - **All 6 part pages:** a mayonnaise made, broken, and rescued; emulsions
+    and the USDA's raw-egg guidance; dressings made ahead; an iced and an
+    un-iced plate logged for 2 hours; food safety for a cold buffet;
+    hospitality (Genesis 18:1–8; Hebrews 13:2).
+  - **New ingredients:** anchovy fillets, frozen peas, roasted red peppers,
+    beef salami (`beef-dry-sausage`; watch: pork casings), bresaola (watch:
+    beef only, sealed), provolone, marinated artichoke hearts, dried
+    chickpeas, labneh (watch: gelatin).
+- No screens changed, so no screenshots.
+- Tests: 392.
