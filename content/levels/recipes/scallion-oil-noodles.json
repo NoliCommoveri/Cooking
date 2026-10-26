@@ -1,0 +1,82 @@
+{
+  "id": "scallion-oil-noodles",
+  "version": 1,
+  "track": "core",
+  "unit": 103,
+  "title": "Scallion oil noodles",
+  "image": "dishes/scallion-oil-noodles.png",
+  "cuisine": "chinese",
+  "skill": "Cutting scallions fine and even",
+  "skills": ["fine-chopping"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 35,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 5, "text": "The scallion oil keeps in a jar in the fridge for a week. Make a double batch and keep half." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Scallions, slow and even",
+      "body": "In Shanghai, cong you ban mian is a whole meal from a bunch of scallions. You'll cut them into even lengths, fry them slowly in oil until they're dark and crisp, and season the oil with soy sauce and sugar. Then a few scallions are sliced paper thin for the top."
+    },
+    "why": [
+      { "id": "dry", "title": "Dry scallions, quiet oil", "body": "Water in hot oil turns to steam in an instant and throws oil out of the pan. Scallions dried completely fry calmly." },
+      { "id": "even", "title": "Even lengths fry evenly", "body": "Thin greens crisp faster than thick whites. Cutting everything to the same length, and splitting the thick whites in half, means the whole pan turns dark at the same time instead of some pieces burning." },
+      { "id": "low-slow", "title": "Low and slow", "body": "The goal is to cook the water out of the scallions so their flavor moves into the oil. On medium-low heat that takes 12 to 15 minutes. On high, they burn on the outside while they're still wet inside, and the oil tastes burnt." },
+      { "id": "soy", "title": "Soy and sugar in the hot oil", "body": "Soy sauce poured into hot oil sizzles and turns darker and toasty, and the sugar melts into it. That's the sauce. Off the heat, it bubbles hard but doesn't burn." },
+      { "id": "bias", "title": "A thin slice for the top", "body": "Sliced thin on an angle, raw scallion greens are mild and crisp. They're cut last so they stay fresh." }
+    ],
+    "wrong": [
+      { "sign": "The scallions turned black", "fix": "The heat was too high. Strain them out; if the oil tastes burnt, start over with fresh oil." },
+      { "sign": "The scallions are soft and green, not crisp", "fix": "Keep cooking. They darken slowly, then quickly at the end, so watch closely once they start to brown." },
+      { "sign": "The noodles are clumped together", "fix": "Toss them with a spoonful of the oil as soon as they're drained, and work fast." },
+      { "sign": "It's too salty", "fix": "Toss in more plain noodles if you have them. Next time, start with 2 tablespoons of soy sauce and taste." }
+    ],
+    "quiz": [
+      { "q": "Why must the scallions be completely dry?", "choices": ["Water spatters hot oil", "Wet scallions taste bitter", "They're easier to cut"], "answer": 0, "explain": "Water turns to steam and throws oil." },
+      { "q": "Why are the thick white parts split in half?", "choices": ["So they cook as fast as the greens", "They look nicer", "They're easier to eat"], "answer": 0, "explain": "Even size means even frying." },
+      { "q": "Why fry the scallions on low heat?", "choices": ["To cook the water out before they burn", "To save gas", "So the oil stays clear"], "answer": 0, "explain": "On high, they burn while still wet inside." },
+      { "q": "Why take the pan off the heat before adding soy sauce?", "choices": ["It bubbles hard and could burn", "To cool the noodles", "It's thicker cold"], "answer": 0, "explain": "The oil is still hot enough to sizzle it." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "green-onion", "amount": 12, "unit": "count", "round": "up", "prep": "about 2 bunches", "group": "Scallion oil" },
+    { "ingredient": "vegetable-oil", "amount": 0.5, "unit": "cup", "group": "Scallion oil" },
+    { "ingredient": "soy-sauce", "amount": 3, "unit": "tbsp", "group": "Scallion oil" },
+    { "ingredient": "sugar", "amount": 1, "unit": "tbsp", "group": "Scallion oil" },
+    { "ingredient": "water", "amount": 16, "unit": "cup", "scale": false, "group": "Noodles" },
+    { "ingredient": "noodles-wheat", "amount": 12, "unit": "oz", "group": "Noodles" }
+  ],
+  "substitutions": [
+    { "for": "soy-sauce", "use": "tamari", "reason": "gluten", "note": "Tamari is a little saltier. Start with 2½ tablespoons and taste." }
+  ],
+  "equipment": [
+    "kitchen-towel",
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "slotted-spoon",
+    "heatproof-bowl",
+    "pot-large",
+    "colander",
+    "tongs"
+  ],
+  "steps": [
+    { "id": "wash", "text": "Rinse the scallions, trim off the roots and any limp tops, and roll them in the towel until they're completely dry.", "safety": "solo", "why": "dry" },
+    { "id": "garnish", "text": "Set two scallions aside for the top. Cut the rest into 2-inch lengths. Split each white piece in half lengthwise. Keep the whites and greens in separate piles.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "even", "look": "Pieces all close to 2 inches long and about the same thickness." },
+    { "id": "sauce", "text": "Stir the soy sauce and sugar together in the small bowl.", "safety": "solo" },
+    { "id": "boil", "text": "Fill the large pot with the water and bring it to a boil over high heat, lid on.", "safety": "adult-nearby", "hazard": "Hot pot" },
+    { "id": "whites", "text": "Put the oil and the scallion whites in the cold skillet and set it over medium-low heat. Cook, stirring now and then, until the whites start to soften.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 180, "timerLabel": "Whites" },
+    { "id": "greens", "text": "Add the greens. Keep the heat medium-low and stir every minute or two, until every piece is dark brown and crisp. Watch closely near the end.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 720, "timerLabel": "Fry scallions", "why": "low-slow", "look": "Dark brown and shrunken, quiet in the oil, with no green left." },
+    { "id": "season", "text": "Take the skillet off the heat. Lift out about half of the crisp scallions with the slotted spoon onto the heatproof bowl for the top. Stand back and pour the soy mixture into the oil; it bubbles hard. Stir until the sugar melts.", "safety": "adult-nearby", "hazard": "Hot oil, spatters", "why": "soy" },
+    { "id": "slice", "text": "Slice the two scallions you set aside as thin as you can on a sharp angle.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "bias", "look": "Thin green ovals, all close to the same width." },
+    { "id": "noodles", "text": "Cook the noodles in the boiling water as the package says. Drain them in the colander and shake off the water.", "safety": "adult-nearby", "hazard": "Boiling water", "timerSeconds": 240, "timerLabel": "Noodles", "tip": "Check the package: fresh noodles cook in 2 or 3 minutes, dried ones in 4 to 6." },
+    { "id": "toss", "text": "Put the noodles in the skillet with the scallion oil and toss with the tongs until every strand is coated and brown. Divide them into bowls and top with the crisp scallions and the raw ones.", "safety": "solo" }
+  ]
+}

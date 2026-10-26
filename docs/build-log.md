@@ -5766,3 +5766,39 @@ asked for 14f (plan §12.8).
   and back, cooked into Progress), only on its week, kept through Edit
   course, capstone menu recipes, and before the draft; the linter's
   `adultAtHome`, `ownRecipe`, and writing box rules.
+
+## 226. 2026-10-26 — 14g content: Level 3 Unit 1
+
+Owner, 2026-10-26: "Start with Level 3 Unit 1", the first unit of 14g
+(plan §12.9). Reviewed in [14g review: Level 3 Cook, Unit
+1](https://claude.ai/artifact/87vWCFZFenAy9FDYHVbdXt); not merged until the
+owner approves it there.
+
+- **Before:** Unit 1 had one written recipe (Minestrone, Cook Around the
+  World's lesson), so a Level 3 course waited until week 4 to cook, and
+  week 3's Knowledge page was blank.
+- **Now:**
+  - **Seven Level-only recipes** in `content/levels/recipes/`, unit 103:
+    Black bean and vegetable quesadillas and Rajma (week 1, dicing),
+    Spaghetti aglio e olio and Scallion oil noodles (week 2, fine chopping),
+    Vegetable lo mein and Kimbap (week 3, julienne), and Ajapsandali (week 4,
+    the timed mastery dice). Checked against Cook Around the World first
+    (§12.4): the dicing, fine-chopping, and julienne pick-one groups are full,
+    and none is a variation of a planned dish. Their cards' minutes are now
+    the recipes' own (370 in all, against 350 estimated).
+  - **Minestrone's Level 3 version** (`"level": "sp-3"`): sized cuts (½-inch
+    onion, celery, and zucchini; ¼-inch carrot), a timed knife check, and no
+    beginner tips. Level 3 has no lessons left without a version in Unit 1.
+  - **Week 3's Knowledge page:** reading a recipe for timing, a prep list,
+    mise en place, and why a scale beats cups, with a 7-question quiz.
+  - **New ingredients:** canned red kidney beans, lo mein egg noodles, thin
+    wheat noodles (watch: some have egg), nori (watch: plain sheets, not
+    seasoned snacks), short-grain rice, green cabbage.
+  - **Clean foods:** no oyster sauce in the lo mein, no ham, imitation crab,
+    or fish cake in the kimbap, and vegetable oil, not lard, for the scallion
+    oil. Kimbap's egg has a wash step and a doneness check.
+- A Level 3 course now starts cooking in week 1. The Level course tests
+  (`test/worker-levels.test.js`) start there, or skip weeks 1–3 where they
+  need week 4; the Level version test uses the real minestrone version.
+- No screens changed, so no screenshots.
+- Tests: 392.

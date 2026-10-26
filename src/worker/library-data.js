@@ -1455,6 +1455,125 @@ export const LIBRARY = {
     "wooden-spoon",
     "spoon",
     "ladle"
+   ],
+   "variations": [
+    {
+     "title": "Minestrone",
+     "image": "img/dishes/minestrone.webp",
+     "cuisine": "italian",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, you'll need a very big pot, at least 8 quarts. Or make it in two pots side by side."
+       }
+      ]
+     },
+     "totalMinutes": 60,
+     "ingredients": [
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "carrot"
+      },
+      {
+       "ingredient": "celery"
+      },
+      {
+       "ingredient": "zucchini"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "thyme-dried"
+      },
+      {
+       "ingredient": "oregano-dried"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "tomatoes-crushed"
+      },
+      {
+       "ingredient": "broth-vegetable"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "cannellini"
+      },
+      {
+       "ingredient": "pasta-small"
+      },
+      {
+       "ingredient": "parmesan",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "pasta-small",
+       "use": "pasta-small-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "lots"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "carrots",
+       "celery",
+       "zucchini",
+       "garlic",
+       "tomatoes"
+      ],
+      "optional": [
+       "sharp-cheese"
+      ]
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "vegetable-peeler",
+      "colander",
+      "can-opener",
+      "mixing-bowl-large",
+      "small-bowl",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "pot-large",
+      "wooden-spoon",
+      "spoon",
+      "ladle"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
+    }
    ]
   },
   {
@@ -6663,6 +6782,196 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "aglio-e-olio",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Spaghetti aglio e olio",
+   "image": "img/dishes/aglio-e-olio.webp",
+   "cuisine": "italian",
+   "skill": "Mincing garlic and parsley",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Toss the pasta in two batches, or in the large pot instead of the skillet. Crowded pasta won't turn glossy."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "spaghetti"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "chili-flakes"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "parmesan",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "spaghetti",
+     "use": "spaghetti-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic"
+    ],
+    "optional": [
+     "sharp-cheese"
+    ]
+   },
+   "tools": [
+    "pot-large",
+    "chef-knife",
+    "cutting-board",
+    "kitchen-towel",
+    "small-bowl",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "skillet-12",
+    "wooden-spoon",
+    "tongs"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "ajapsandali",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Ajapsandali",
+   "image": "img/dishes/ajapsandali.webp",
+   "cuisine": "georgian",
+   "skill": "Every vegetable diced evenly and timed",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "Brown the eggplant in three batches, and use the largest pot you have."
+     }
+    ]
+   },
+   "totalMinutes": 80,
+   "ingredients": [
+    {
+     "ingredient": "eggplant"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "potato-russet"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "jalapeno",
+     "optional": true
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "basil"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "eggplant",
+     "onions",
+     "bell-peppers",
+     "tomatoes",
+     "garlic",
+     "cilantro"
+    ],
+    "optional": [
+     "hot-peppers"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "vegetable-peeler",
+    "colander",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "plate",
+    "paper-towels",
+    "kitchen-towel",
+    "measuring-cups",
+    "measuring-spoons",
+    "pot-large",
+    "wooden-spoon",
+    "slotted-spoon",
+    "fork"
+   ],
+   "level": "sp-3"
+  },
+  {
    "id": "baked-salmon",
    "version": 1,
    "track": "core",
@@ -6772,6 +7081,105 @@ export const LIBRARY = {
     "spatula",
     "spoon",
     "fork"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "bean-quesadillas",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Black bean and vegetable quesadillas",
+   "image": "img/dishes/bean-quesadillas.webp",
+   "cuisine": "tex-mex",
+   "skill": "An even dice of onion and pepper",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Cook the quesadillas in batches and keep the finished ones warm on a sheet pan in a 200°F oven."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "black-beans"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "chili-powder"
+    },
+    {
+     "ingredient": "tortilla-flour"
+    },
+    {
+     "ingredient": "cheddar-shredded"
+    },
+    {
+     "ingredient": "salsa",
+     "optional": true
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "tortilla-flour",
+     "use": "tortilla-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "bell-peppers",
+     "garlic"
+    ],
+    "optional": [
+     "sour-cream-yogurt"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "can-opener",
+    "colander",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "wooden-spoon",
+    "fork",
+    "spatula",
+    "plate"
    ],
    "level": "sp-3"
   },
@@ -6981,6 +7389,111 @@ export const LIBRARY = {
    "level": "sp-3"
   },
   {
+   "id": "kimbap",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Kimbap",
+   "image": "img/dishes/kimbap.webp",
+   "cuisine": "korean",
+   "skill": "Julienned fillings, rolled tight",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Cook the rice in the large pot, and make one thin omelet for every two rolls."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "rice-short-grain"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "sesame-seeds"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "spinach-baby"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "nori"
+    },
+    {
+     "ingredient": "sesame-oil"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "sesame",
+     "carrots",
+     "cucumber",
+     "spinach-greens",
+     "garlic"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "colander",
+    "saucepan-medium",
+    "chef-knife",
+    "cutting-board",
+    "vegetable-peeler",
+    "spoon",
+    "skillet-nonstick-8",
+    "spatula",
+    "small-bowl",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "fork",
+    "plate",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "parchment",
+    "pastry-brush",
+    "kitchen-towel"
+   ],
+   "level": "sp-3"
+  },
+  {
    "id": "pan-seared-trout",
    "version": 1,
    "track": "core",
@@ -7058,6 +7571,116 @@ export const LIBRARY = {
     "small-bowl",
     "oven-mitts",
     "thermometer",
+    "fork"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "rajma",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Rajma",
+   "image": "img/dishes/rajma.webp",
+   "cuisine": "indian",
+   "skill": "A diced onion and tomato base",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Use the large pot for the rajma, and give the onions a few more minutes: more onion takes longer to brown."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "turmeric-ground"
+    },
+    {
+     "ingredient": "cayenne"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "kidney-beans"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "garam-masala"
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "tomatoes",
+     "garlic",
+     "ginger",
+     "hot-peppers"
+    ],
+    "optional": [
+     "cilantro"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "colander",
+    "can-opener",
+    "box-grater",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "saucepan-medium",
+    "pot-large",
+    "wooden-spoon",
+    "ladle",
     "fork"
    ],
    "level": "sp-3"
@@ -7146,6 +7769,79 @@ export const LIBRARY = {
     "cooling-rack",
     "chef-knife",
     "cutting-board"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "scallion-oil-noodles",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Scallion oil noodles",
+   "image": "img/dishes/scallion-oil-noodles.webp",
+   "cuisine": "chinese",
+   "skill": "Cutting scallions fine and even",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "The scallion oil keeps in a jar in the fridge for a week. Make a double batch and keep half."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "noodles-wheat"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-towel",
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "slotted-spoon",
+    "heatproof-bowl",
+    "pot-large",
+    "colander",
+    "tongs"
    ],
    "level": "sp-3"
   },
@@ -7516,6 +8212,121 @@ export const LIBRARY = {
     "tongs",
     "spatula",
     "thermometer"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "vegetable-lo-mein",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Vegetable lo mein",
+   "image": "img/dishes/vegetable-lo-mein.webp",
+   "cuisine": "chinese-american",
+   "skill": "Julienned carrots and peppers",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Stir-fry the vegetables in two batches. A crowded pan steams them instead of searing."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "noodles-egg"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "bell-pepper-green"
+    },
+    {
+     "ingredient": "cabbage-green"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "water"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    },
+    {
+     "for": "noodles-egg",
+     "use": "rice-vermicelli",
+     "reason": "gluten"
+    },
+    {
+     "for": "noodles-egg",
+     "use": "noodles-wheat",
+     "reason": "egg"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "sesame",
+     "carrots",
+     "bell-peppers",
+     "onions",
+     "garlic",
+     "ginger"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "pot-large",
+    "colander",
+    "chef-knife",
+    "cutting-board",
+    "vegetable-peeler",
+    "box-grater",
+    "small-bowl",
+    "mixing-bowl-large",
+    "measuring-spoons",
+    "skillet-12",
+    "tongs",
+    "wooden-spoon"
    ],
    "level": "sp-3"
   }
@@ -8287,6 +9098,35 @@ export const LIBRARY = {
    "contains": [
     "fish"
    ]
+  },
+  "kidney-beans": {
+   "name": "Red kidney beans (canned)",
+   "contains": []
+  },
+  "noodles-egg": {
+   "name": "Lo mein egg noodles",
+   "contains": [
+    "gluten",
+    "egg"
+   ]
+  },
+  "noodles-wheat": {
+   "name": "Thin wheat noodles (Shanghai or plain lo mein)",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "nori": {
+   "name": "Roasted seaweed sheets (nori, for kimbap or sushi)",
+   "contains": []
+  },
+  "rice-short-grain": {
+   "name": "Short-grain white rice (sushi rice)",
+   "contains": []
+  },
+  "cabbage-green": {
+   "name": "Green cabbage",
+   "contains": []
   }
  },
  "cuisines": {
@@ -8359,14 +9199,21 @@ export const LIBRARY = {
   "cottage-cheese-crescents": "A2"
  },
  "levelLabels": {
+  "aglio-e-olio": "K3",
+  "ajapsandali": "K7",
   "baked-salmon": "K13",
+  "bean-quesadillas": "K1",
   "beef-picadillo": "K30",
   "dinner-rolls": "K19",
+  "kimbap": "K6",
   "pan-seared-trout": "K33",
+  "rajma": "K2",
   "sandwich-loaf": "K17",
+  "scallion-oil-noodles": "K4",
   "steamed-fish": "K23",
   "tabbouleh": "K9",
-  "thick-burgers": "K11"
+  "thick-burgers": "K11",
+  "vegetable-lo-mein": "K5"
  },
  "dietTags": [
   "nuts",
@@ -13000,7 +13847,89 @@ export const LIBRARY = {
      },
      "knowledge": {
       "title": "Read a recipe for timing; write a prep list; why a scale beats cups",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Professional cooks read a recipe all the way through before they pick up a knife. They're looking for three things: what has to be done first, what takes the longest, and where the waiting is. A recipe's steps are in the order you cook, not always the order you should start.",
+       "Look for the waits first. A pot of water takes 10 minutes or more to boil. Rice cooks for 18 minutes and rests for 10. Eggplant sweats in salt for 20. None of those need your hands, so they start first, and the cutting happens while they run.",
+       "Then add up the active time: the minutes your hands are busy. In vegetable lo mein, the julienne might take you 20 minutes this week, but the stove part is under 6. If the noodles were cooked before the knife work started, they'd sit and go gummy. So the order is: water on, sauce mixed, vegetables cut, then noodles, then the pan.",
+       "Work backward from when you want to eat. If dinner is at 6:00 and the recipe has 45 minutes of work and waiting, you start at 5:15, or 5:00 if you're new to the cut. Beginners are always slower than a recipe's time, and that's expected.",
+       "A prep list turns all that into a plan. Write each job on its own line in the order you'll do it, with a time beside the long ones: \"5:00 water on (12 min). 5:02 mix sauce. 5:05 julienne carrots and peppers (20 min). 5:25 noodles in (3 min).\" Cooks call having everything cut, measured, and ready before the heat goes on mise en place, French for \"everything in its place\". The prep list is how you get there.",
+       "Now the scale. A cup measures space, not how much food is in it. Scoop a cup of flour straight from the bag and it can weigh 150 grams; spoon it in lightly and it can be 120. That's a 25% difference from the same cup, enough to make bread dry or cookies spread. A scale reads 125 grams every time.",
+       "Weighing is also faster and cleaner. Set a bowl on the scale, press tare (or zero) so the bowl counts as nothing, and pour in the first ingredient. Press tare again and add the next. One bowl, no measuring cups to wash.",
+       "This week's drill weighs your trim, the peels, ends, and cores you cut away. Weighing it is how cooks measure waste: a careful julienne leaves less on the board, and over a year that's real food and money. This week's Beyond the Recipe, on gleaning, asks the same question from the other side: what's left over, and who can use it?"
+      ],
+      "quiz": [
+       {
+        "q": "What do you look for first when you read a recipe for timing?",
+        "choices": [
+         "The waits, like boiling water or resting rice",
+         "The last step",
+         "The serving size"
+        ],
+        "answer": 0,
+        "explain": "Long waits start first, and the cutting happens while they run."
+       },
+       {
+        "q": "What is active time?",
+        "choices": [
+         "The minutes your hands are busy",
+         "The time on the stove",
+         "The time the food rests"
+        ],
+        "answer": 0,
+        "explain": "Waiting time doesn't need your hands."
+       },
+       {
+        "q": "Dinner is at 6:00 and a recipe takes 45 minutes. When do you start?",
+        "choices": [
+         "5:15, or earlier if the cut is new to you",
+         "5:45",
+         "6:00"
+        ],
+        "answer": 0,
+        "explain": "Work backward from when you want to eat, and leave room for being new."
+       },
+       {
+        "q": "What does mise en place mean?",
+        "choices": [
+         "Everything in its place, cut and measured before the heat goes on",
+         "Clean as you go",
+         "Cook in the right order"
+        ],
+        "answer": 0,
+        "explain": "The prep list is how you get there."
+       },
+       {
+        "q": "Why can a cup of flour be wrong?",
+        "choices": [
+         "How it's scooped changes how much is in the cup",
+         "Cups shrink in the dishwasher",
+         "Flour gets heavier over time"
+        ],
+        "answer": 0,
+        "explain": "The same cup can hold 120 to 150 grams."
+       },
+       {
+        "q": "What does the tare button do?",
+        "choices": [
+         "Sets the scale back to zero with the bowl on it",
+         "Turns grams into cups",
+         "Weighs the bowl"
+        ],
+        "answer": 0,
+        "explain": "Then the scale shows only what you add."
+       },
+       {
+        "q": "Why weigh your trim?",
+        "choices": [
+         "To see how much food a cut wastes",
+         "To check the knife",
+         "To season it"
+        ],
+        "answer": 0,
+        "explain": "A careful cut leaves less on the board."
+       }
+      ]
      },
      "sabbath": {
       "title": "Gleaning: leaving the edges of the field (Leviticus 19:9–10; Ruth 2)",
@@ -15634,7 +16563,7 @@ export const LIBRARY = {
       "dicing",
       "flavor-base"
      ],
-     "minutes": 55,
+     "minutes": 60,
      "tags": {
       "protein": "beans-lentils",
       "flavors": [
@@ -15696,7 +16625,7 @@ export const LIBRARY = {
       "julienne",
       "stir-frying"
      ],
-     "minutes": 40,
+     "minutes": 45,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -15738,7 +16667,7 @@ export const LIBRARY = {
       "dicing",
       "simmering"
      ],
-     "minutes": 70,
+     "minutes": 80,
      "tags": {
       "protein": "none",
       "flavors": [

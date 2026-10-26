@@ -1,0 +1,96 @@
+{
+  "id": "rajma",
+  "version": 1,
+  "track": "core",
+  "unit": 103,
+  "title": "Rajma",
+  "image": "dishes/rajma.png",
+  "cuisine": "indian",
+  "skill": "A diced onion and tomato base",
+  "skills": ["dicing", "flavor-base"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 60,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 7, "text": "Use the large pot for the rajma, and give the onions a few more minutes: more onion takes longer to brown." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "The base is the dish",
+      "body": "Rajma is red kidney beans in a thick gravy, eaten all over North India with rice. Most of its flavor comes from the start: a fine dice of onion browned slowly, then tomatoes cooked down with ginger, garlic, and spices until the oil separates. Today you'll dice for that base."
+    },
+    "why": [
+      { "id": "fine", "title": "A finer dice melts", "body": "The onion here is cut smaller than ¼ inch, closer to ⅛. Small, even pieces brown evenly and break down into the gravy, so it's smooth and thick instead of chunky." },
+      { "id": "brown", "title": "Brown, not just soft", "body": "Onions cooked until golden brown taste deep and sweet; the sugars in them are browning. That takes 10 minutes or more on medium. If the onion is uneven, the small bits burn before the big ones color." },
+      { "id": "bloom", "title": "Spices in the oil", "body": "Ground spices give up their flavor to hot oil far better than to water. Thirty seconds in the pan before the tomatoes go in is enough. Longer, and they scorch and turn bitter." },
+      { "id": "oil-sep", "title": "When the oil separates", "body": "As the tomatoes cook down, their water steams off. When the mixture is thick and the oil starts pooling at its edges, the base is done. Indian cooks use this sign the way a baker uses a timer." },
+      { "id": "mash", "title": "Thicken with the beans", "body": "Mashing a ladle of beans against the side of the pot releases their starch, which thickens the gravy without flour." },
+      { "id": "rice-rest", "title": "Rice rests covered", "body": "When the timer rings, the rice at the bottom is wetter than the top. Ten minutes off the heat with the lid on lets the steam even it out, so every grain is tender and separate." }
+    ],
+    "wrong": [
+      { "sign": "Some onion burned while some is still pale", "fix": "The pieces were uneven or the heat was too high. Turn it down to medium-low and stir more often; pick out any black bits." },
+      { "sign": "The gravy is thin", "fix": "Mash more beans and simmer uncovered another 5 minutes." },
+      { "sign": "The spices smell sharp and bitter", "fix": "They scorched. Add the tomatoes right away to cool the pan; next time, have the tomatoes ready before the spices go in." },
+      { "sign": "The rice is crunchy", "fix": "Sprinkle 2 tablespoons of water over it, cover, and cook on low for 5 more minutes." }
+    ],
+    "quiz": [
+      { "q": "Why is the onion diced finer than ¼ inch for rajma?", "choices": ["Small even pieces brown evenly and melt into the gravy", "It's faster", "So you can't taste it"], "answer": 0, "explain": "A fine, even dice gives a smooth, thick gravy." },
+      { "q": "How do you know the tomato base is done?", "choices": ["The oil separates at the edges", "It boils", "The timer rings"], "answer": 0, "explain": "The water has cooked off." },
+      { "q": "Why do the spices go into the oil before the tomatoes?", "choices": ["Their flavor dissolves in hot oil", "To cool the oil", "So they don't stick"], "answer": 0, "explain": "That's called blooming." },
+      { "q": "How do you thicken the gravy?", "choices": ["Mash some beans against the pot", "Add flour", "Add more water"], "answer": 0, "explain": "The beans' starch thickens it." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "rice-white", "amount": 1.5, "unit": "cup", "group": "Rice" },
+    { "ingredient": "water", "amount": 2.25, "unit": "cup", "group": "Rice" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Rice" },
+    { "ingredient": "onion-yellow", "amount": 2, "unit": "count", "round": "up", "group": "Rajma" },
+    { "ingredient": "tomato", "amount": 3, "unit": "count", "round": "up", "group": "Rajma" },
+    { "ingredient": "garlic", "amount": 4, "unit": "count", "round": "up", "group": "Rajma" },
+    { "ingredient": "ginger-fresh", "amount": 1, "unit": "tbsp", "prep": "grated", "group": "Rajma" },
+    { "ingredient": "vegetable-oil", "amount": 3, "unit": "tbsp", "group": "Rajma" },
+    { "ingredient": "cumin-ground", "amount": 1.5, "unit": "tsp", "group": "Rajma" },
+    { "ingredient": "paprika-sweet", "amount": 1, "unit": "tsp", "group": "Rajma" },
+    { "ingredient": "turmeric-ground", "amount": 0.5, "unit": "tsp", "group": "Rajma" },
+    { "ingredient": "cayenne", "amount": 0.25, "unit": "tsp", "group": "Rajma" },
+    { "ingredient": "salt", "amount": 1.25, "unit": "tsp", "group": "Rajma" },
+    { "ingredient": "kidney-beans", "amount": 2, "unit": "can", "round": "up", "prep": "drained and rinsed", "group": "Rajma" },
+    { "ingredient": "water", "amount": 2, "unit": "cup", "group": "Rajma" },
+    { "ingredient": "garam-masala", "amount": 1, "unit": "tsp", "group": "Rajma" },
+    { "ingredient": "cilantro", "amount": 0.25, "unit": "cup", "prep": "chopped", "optional": true, "group": "To serve" }
+  ],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "colander",
+    "can-opener",
+    "box-grater",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "saucepan-medium",
+    "pot-large",
+    "wooden-spoon",
+    "ladle",
+    "fork"
+  ],
+  "steps": [
+    { "id": "rinse-rice", "text": "Put the rice in the colander and rinse it under cold water, swishing it with your hand, until the water running out is nearly clear.", "safety": "solo", "tip": "Rinsing washes off loose starch, so the grains don't glue together." },
+    { "id": "cook-rice", "text": "Put the rice, the rice's water, and the rice's salt in the saucepan and bring it to a boil over high heat. Stir once, put the lid on, and turn the heat to low.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 1080, "timerLabel": "Rice", "tip": "Don't lift the lid while it cooks; the steam is doing the work." },
+    { "id": "onion", "text": "While the rice cooks, halve and peel the onions, leaving the root on. Dice them fine: strips about ⅛ inch apart toward the root, then across at ⅛ inch. Put them in the medium bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "fine", "look": "Small, even pieces, smaller than a pea." },
+    { "id": "tomato", "text": "Core the tomatoes and dice them into ¼-inch pieces, juice and all. Keep them on the board.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "A sharp, honed knife cuts tomato skin with no pressure. If it skids, hone it." },
+    { "id": "aromatics", "text": "Peel and mince the garlic. Peel the ginger with the edge of a spoon and grate it on the fine side of the box grater. Put both in the small bowl. Measure the cumin, paprika, turmeric, and cayenne into a little pile beside it.", "safety": "adult-nearby", "hazard": "Sharp knife, grater" },
+    { "id": "rice-rest", "text": "When the rice timer rings, take the saucepan off the heat and leave the lid on. It rests, then stays warm until the rajma is ready.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 600, "timerLabel": "Rice rests", "why": "rice-rest" },
+    { "id": "brown", "text": "Heat the oil in the large pot over medium heat. Add the onions and cook, stirring every minute or so, until they're golden brown all over.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 720, "timerLabel": "Brown onions", "why": "brown", "look": "Deep golden, no pale bits and no black ones." },
+    { "id": "spices", "text": "Add the garlic and ginger and stir for a minute. Add the spices and stir for 30 seconds, then add the tomatoes and the rajma's salt right away.", "safety": "adult-nearby", "hazard": "Hot oil, spatters", "why": "bloom", "tip": "The tomatoes will hiss. Add them close to the pot, not from up high." },
+    { "id": "base", "text": "Cook the tomatoes, stirring and scraping the bottom, until they've broken down into a thick paste and the oil separates at the edges.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 480, "timerLabel": "Tomato base", "why": "oil-sep", "look": "A thick red paste with shiny oil pooling around it." },
+    { "id": "simmer", "text": "Add the beans and the rajma's water and bring it to a boil. Turn it down to a simmer and cook uncovered, stirring now and then.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 1200, "timerLabel": "Simmer rajma" },
+    { "id": "thicken", "text": "Press a ladleful of beans against the side of the pot with the back of the ladle to mash them, and stir them in. Stir in the garam masala and taste: add salt a pinch at a time if it needs it.", "safety": "adult-nearby", "hazard": "Hot pot", "why": "mash", "look": "A gravy thick enough to coat the ladle." },
+    { "id": "serve", "text": "Fluff the rice with the fork. Serve the rajma over the rice with cilantro on top if you're using it.", "safety": "adult-nearby", "hazard": "Hot food" }
+  ]
+}

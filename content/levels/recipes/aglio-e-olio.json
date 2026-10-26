@@ -1,0 +1,83 @@
+{
+  "id": "aglio-e-olio",
+  "version": 1,
+  "track": "core",
+  "unit": 103,
+  "title": "Spaghetti aglio e olio",
+  "image": "dishes/aglio-e-olio.png",
+  "cuisine": "italian",
+  "skill": "Mincing garlic and parsley",
+  "skills": ["fine-chopping"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 30,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 7, "text": "Toss the pasta in two batches, or in the large pot instead of the skillet. Crowded pasta won't turn glossy." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Five ingredients, all knife work",
+      "body": "Aglio e olio means garlic and oil. It's a Roman late-night pasta with almost nothing in it, so the cutting shows: garlic minced fine and sliced thin, parsley minced to bright green flecks, and the oil warmed gently so the garlic turns gold, not brown."
+    },
+    "why": [
+      { "id": "two-ways", "title": "Minced and sliced garlic", "body": "Minced garlic melts into the oil and flavors every strand. Thin slices turn into soft golden chips you can see and bite. Same clove, two jobs, depending on the cut." },
+      { "id": "cold-start", "title": "Start the garlic in cold oil", "body": "Garlic dropped into hot oil browns at the edges in seconds and turns bitter. Starting it in cold oil over medium-low lets it warm slowly and color evenly, with time to pull it off at pale gold." },
+      { "id": "dry-herbs", "title": "Dry parsley cuts clean", "body": "Wet leaves stick to the blade and bruise into dark paste. Dry parsley, gathered tight and rocked through once or twice, stays bright." },
+      { "id": "pasta-water", "title": "Pasta water makes the sauce", "body": "The water pasta cooks in is full of starch. Tossed hard with the oil, the starch holds tiny drops of oil in the water, so the two turn into a glossy sauce that clings instead of an oily puddle." },
+      { "id": "under", "title": "Pull the pasta a minute early", "body": "The pasta finishes cooking in the skillet, soaking up the sauce. Pulled at the box time, it ends up soft." }
+    ],
+    "wrong": [
+      { "sign": "The garlic turned brown and tastes bitter", "fix": "Start over with fresh garlic and oil; bitter garlic can't be fixed. Take the pan off the heat at pale gold: it keeps cooking in the hot oil." },
+      { "sign": "The pasta is greasy, with oil in the bottom of the pan", "fix": "Add another splash of pasta water and toss hard over the heat until it turns glossy." },
+      { "sign": "The pasta is dry and sticky", "fix": "Toss in more pasta water, a couple of tablespoons at a time." },
+      { "sign": "The parsley is dark and wet", "fix": "It was wet or cut too many times. Dry it completely next time and gather the pile before each pass." }
+    ],
+    "quiz": [
+      { "q": "Why does the garlic start in cold oil?", "choices": ["It warms slowly and turns gold evenly", "It's safer for the pan", "Cold oil has more flavor"], "answer": 0, "explain": "Hot oil browns garlic at the edges in seconds." },
+      { "q": "What turns oil and pasta water into a sauce?", "choices": ["The starch in the water, tossed hard", "Salt", "Boiling it for 10 minutes"], "answer": 0, "explain": "Starch holds the oil and water together." },
+      { "q": "Why pull the pasta a minute before the box time?", "choices": ["It finishes cooking in the skillet", "It's easier to drain", "It saves water"], "answer": 0, "explain": "It soaks up sauce in the pan." },
+      { "q": "When you mince, what stays on the board?", "choices": ["The tip of the knife", "The heel", "Your fingertips"], "answer": 0, "explain": "The tip stays down and the heel rocks." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "water", "amount": 16, "unit": "cup", "scale": false, "group": "Pasta" },
+    { "ingredient": "salt", "amount": 1, "unit": "tbsp", "group": "Pasta" },
+    { "ingredient": "spaghetti", "amount": 1, "unit": "lb", "group": "Pasta" },
+    { "ingredient": "garlic", "amount": 6, "unit": "count", "round": "up", "group": "Sauce" },
+    { "ingredient": "parsley", "amount": 0.5, "unit": "cup", "prep": "leaves", "group": "Sauce" },
+    { "ingredient": "olive-oil", "amount": 0.5, "unit": "cup", "group": "Sauce" },
+    { "ingredient": "chili-flakes", "amount": 0.5, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "salt", "amount": 0.25, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "parmesan", "amount": 0.5, "unit": "cup", "prep": "grated", "optional": true, "group": "To serve" }
+  ],
+  "substitutions": [
+    { "for": "spaghetti", "use": "spaghetti-gluten-free", "reason": "gluten", "note": "Gluten-free pasta water has less starch. Toss a little longer to get it glossy." }
+  ],
+  "equipment": [
+    "pot-large",
+    "chef-knife",
+    "cutting-board",
+    "kitchen-towel",
+    "small-bowl",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "skillet-12",
+    "wooden-spoon",
+    "tongs"
+  ],
+  "steps": [
+    { "id": "boil", "text": "Fill the large pot with the pasta's water, add the pasta's salt, put the lid on, and bring it to a boil over high heat.", "safety": "adult-nearby", "hazard": "Hot pot" },
+    { "id": "parsley", "text": "Rinse the parsley and roll it in the towel until it's completely dry. Pull the leaves off the thick stems. Gather them into a tight pile and mince them: tip of the knife on the board, your other hand flat on the spine, rocking the heel through the pile. Gather and rock through again until the bits are the size of a grain of rice.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "dry-herbs", "look": "Bright green flecks, no whole leaves and no dark paste." },
+    { "id": "slice", "text": "Peel the garlic. Slice four of the cloves as thin as you can, lengthwise, holding each with the claw. Mince the other two fine. Keep them in separate piles.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "two-ways", "tip": "Hone the knife first. Thin slices need a clean edge, or the garlic tears." },
+    { "id": "pasta", "text": "Add the spaghetti to the boiling water and stir it for the first minute so it doesn't stick. Cook it 1 minute less than the box says.", "safety": "adult-nearby", "hazard": "Boiling water", "timerSeconds": 540, "timerLabel": "Spaghetti", "why": "under" },
+    { "id": "garlic-oil", "text": "As soon as the pasta goes in, put the olive oil and all the garlic in the cold skillet and set it over medium-low heat. Cook, stirring, until the slices are pale gold.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 300, "timerLabel": "Garlic", "why": "cold-start", "look": "Tiny bubbles around the garlic, and slices just turning pale gold." },
+    { "id": "off-heat", "text": "Take the skillet off the heat and stir in the chili flakes and the sauce's salt.", "safety": "adult-nearby", "hazard": "Hot oil", "tip": "The garlic keeps cooking in the hot oil. Pull it a shade lighter than you want it." },
+    { "id": "reserve", "text": "Before the pasta comes out, dip the liquid measuring cup into the pot and save 1 cup of the cooking water.", "safety": "adult-nearby", "hazard": "Boiling water" },
+    { "id": "toss", "text": "Set the skillet back over medium heat. Lift the spaghetti out of the pot with the tongs straight into the skillet. Add ½ cup of the pasta water and toss hard with the tongs until the sauce turns cloudy and glossy and clings to the pasta. Add more water a splash at a time if it looks dry.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 90, "timerLabel": "Toss", "why": "pasta-water", "look": "Glossy strands, no oil pooling in the pan." },
+    { "id": "finish", "text": "Turn off the heat, toss in the parsley, and taste. Add salt a pinch at a time if it needs it. Serve right away, with parmesan if you're using it.", "safety": "adult-nearby", "hazard": "Hot pan" }
+  ]
+}
