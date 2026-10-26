@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [235. 2026-10-26 — A letter for each program's labels](docs/build-log.md#235-2026-10-26--a-letter-for-each-programs-labels)
+**Latest build log entry:** [236. 2026-10-26 — Add a lesson: its own page, with filters](docs/build-log.md#236-2026-10-26--add-a-lesson-its-own-page-with-filters)
 
 ## Current features
 
@@ -40,7 +40,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Structured Progression syllabus** (`/syllabus/structured-progression/`): "coming soon" until the Levels launch; then Levels 2, 3, and 4 in full (objectives, units, each week's two dishes and parts, hours and credit), Level 1 as being planned, pacing, safety, and assessment. Printable.
 - **Course outline** (`content/course.json`): all 98 planned dishes (59 numbers, with pick-one choices) in teaching order, with their skills and prerequisites, checked by the linter.
 - **Lesson labels** (`src/content/course.js`): each program has a letter. Cook Around the World is S, in course order, with pick-one choices sharing a number (S1a, S1b, S1c), 59 in all; learners' cards count without the S. Appointed Times is U; Levels 1 to 4 are A to D, by week, a for Familiar and b for Explore (C4a, C4b).
-- **Add a lesson** lists the library by program: the family's Levels first, then the other Levels, Cook Around the World, and Appointed Times, each in label order.
+- **Add a lesson** (`#/parent/queue/add`, `src/content/find.js`): its own page. Search by dish name, by the ingredients you have (proteins must match, the rest any one), and by skill, with more filters for program, protein, cuisine, time, method, and not cooked yet. Each lesson shows its picture, line about the dish, and skill before you add it.
 - **Appointed Times unit** (unit 8 in `content/units.json`): lessons beside the numbered course, labeled U1, U2: unleavened flatbread and cottage cheese crescent rolls so far.
 - **Family recipes** (Parents → Recipes, `src/content/recipe.js`, `src/worker/recipes.js`): a parent adds the family's own recipes one thing at a time (basics, ingredients from the list or typed in, tools, steps with safety levels and timers, meal type, a "why we make this" card, then review). The same unclean-food and food-safety checks as lessons; a wash-hands step is added after raw food. They show on an "Our recipes" shelf in every kitchen and can be queued, shopped for, and cooked like lessons. Only that family sees them.
 - **Sharing recipes** (`src/worker/sharing.js`): a parent shares a recipe as General or Feast day. One from our ingredient list goes straight into **User-shared recipes**, with no family named; a typed-in ingredient waits for the owner's review; a feast-day recipe flagged for leaven gets the owner's notice with Send for review and Share recipe. Any family can search the directory, add a recipe to its own, and report one.

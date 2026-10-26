@@ -9,6 +9,7 @@ import { toBase, mixed } from './lib/units.js';
 import { LOGIN_PICTURES } from './lib/login-pictures.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 import { RUBRIC, GRADE_TEXT_MAX } from './lib/grades.js';
+import { findLessons, suggest } from './lib/find.js';
 import { PARTS, plannedMinutes, hoursOf, ASSIGN_NOTES } from './lib/levels.js';
 // The longest a writing box takes (14f), as the Worker checks it.
 const WRITING_MAX = 20000;
@@ -1837,87 +1838,6 @@ const parentQueue = parentOnly(async (flash) => {
       }),
     x.swap ? null : swapLink(x, x.id)));
 
-  // ---- add a lesson ----
-  const note = el('p', { class: 'mut small note', hidden: true }, 'Most lessons use knife work. We suggest a Unit 1 lesson first.');
-  const lessonSel = el('select', { name: 'lesson_id', required: true });
-  const lessonText = (L) => `${L.label ? `${L.label} · ` : ''}${L.title}${L.foundation ? ' (foundation)' : ''}`;
-  // Once who's cooking is ticked, the menu starts
-  // with Best for them: up to 5 that fit them, not cooked or queued for them
-  // (§6.21, 11d2). A lesson that doesn't fit says so; it can still be picked.
-  let ranked = null;
-  const fitBox = el('div');
-  const drawLessons = () => {
-    const was = lessonSel.value;
-    const fitOf = Object.fromEntries((ranked ?? []).map((x) => [x.id, x]));
-    const byId = Object.fromEntries(q.library.map((L) => [L.id, L]));
-    const best = (ranked ?? []).filter((x) => byId[x.id] && x.fits && x.fit && x.fit !== 'poor' && !x.cooked && !x.queued).slice(0, 5);
-    const opt = (L) => el('option', { value: L.id }, `${lessonText(L)}${fitOf[L.id]?.fit === 'none' ? " · doesn't fit" : ''}`);
-    // Every lesson by program (owner, 2026-10-26), each in label order: the
-    // Levels, the family's own first, with their own labels (C4a), then Cook
-    // Around the World (S1) and Appointed Times (U1). A lesson a Level shares
-    // with Cook Around the World is in both.
-    const byLabel = (a, b) => a.label.localeCompare(b.label, 'en', { numeric: true });
-    const levelOwn = new Set((q.level_groups ?? []).flatMap((g) => g.ids));
-    const programs = [
-      ...(q.level_groups ?? []).map((g) => [g.name, g.ids.filter((x) => byId[x]).map((x) => ({ ...byId[x], label: g.labels[x] }))]),
-      ['Cook Around the World', q.library.filter((L) => /^S\d/.test(L.label ?? '')).sort(byLabel)],
-      ['Appointed Times', q.library.filter((L) => /^U\d/.test(L.label ?? '')).sort(byLabel)],
-      ['Other lessons', q.library.filter((L) => !/^[SU]\d/.test(L.label ?? '') && !levelOwn.has(L.id))],
-    ].filter(([, list]) => list.length);
-    // replaceChildren takes nodes only: an array or a null would show as text.
-    lessonSel.replaceChildren(...[
-      el('option', { value: '' }, 'Pick a lesson'),
-      ...(best.length ? [el('optgroup', { label: 'Best for them' }, best.map((x) => opt(byId[x.id])))] : []),
-      ...programs.map(([name, list]) => el('optgroup', { label: name }, list.map(opt))),
-      // The family's own recipes (§6.10).
-      q.recipes?.length ? el('optgroup', { label: 'Our recipes' }, q.recipes.map((r) => el('option', { value: r.id }, r.title))) : null,
-    ].filter(Boolean));
-    lessonSel.value = was;
-    const f = fitOf[lessonSel.value];
-    fitBox.replaceChildren(f ? fitNote({ ...f, fit_label: f.label, why: [...f.why, ...(f.version_title ? [`as ${f.version_title}`] : [])] }) ?? '' : '');
-  };
-  drawLessons();
-  lessonSel.addEventListener('change', drawLessons);
-  const pickable = [...q.library, ...(q.recipes ?? [])];
-  const who = el('div', { class: 'grid2' }, profiles.map((p) => el('label', { class: 'choice' },
-    el('input', { type: 'checkbox', name: `p_${p.id}`, value: p.id }), el('span', {}, p.name))));
-  // The knife-work note (§4.0): a suggestion, not a block.
-  const checkNote = () => {
-    const L = pickable.find((x) => x.id === lessonSel.value);
-    const picked = profiles.filter((p) => who.querySelector(`[name="p_${p.id}"]`).checked).map((p) => p.id);
-    note.hidden = !L || L.unit === 1 || !L.unit || !picked.length || picked.some((pid) => q.knife_ok.includes(pid));
-  };
-  lessonSel.addEventListener('change', checkNote);
-  who.addEventListener('change', checkNote);
-  who.addEventListener('change', async () => {
-    const ids = profiles.filter((p) => who.querySelector(`[name="p_${p.id}"]`).checked).map((p) => p.id);
-    ranked = ids.length ? (await api('GET', `/api/picks/lessons?profiles=${ids.join(',')}`).catch(() => null))?.lessons ?? null : null;
-    drawLessons();
-  });
-  let closeAdd = () => {};
-  const pickPreview = el('button', { type: 'button', class: 'hbtn link', hidden: true, onclick: () => previewLesson(lessonSel.value).catch((err) => showToast(err.message)) }, 'Preview as a learner');
-  lessonSel.addEventListener('change', () => { pickPreview.hidden = !lessonSel.value; });
-  // Who's cooking comes first, so the lessons can be sorted for them.
-  const whoBox = el('fieldset', {}, el('legend', {}, "Who's cooking"), el('p', { class: 'mut small', style: 'margin:0' }, 'Pick more than one to cook it together. It counts for each of them.'), who);
-  const lessonBox = [el('label', { class: 'f' }, 'Lesson', lessonSel), fitBox, pickPreview];
-  const addForm = form([
-    whoBox, ...lessonBox,
-    note,
-    field('Serves', 'servings', { type: 'number', min: 1, value: q.default_servings, inputmode: 'numeric' }),
-    field('Planned date', 'planned_date', { type: 'date' }, 'Optional'),
-  ], 'Add to the queue', async (v) => {
-    const ids = profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id);
-    if (!v.lesson_id) throw new Error('Pick a lesson.');
-    if (!ids.length) throw new Error("Pick who's cooking.");
-    const L = pickable.find((x) => x.id === v.lesson_id);
-    const n = Number(v.servings);
-    // A lesson with set sizes takes the nearest one it offers.
-    const servings = L.servings_options.includes(n) ? n : L.servings_options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a));
-    await api('POST', '/api/queue', { lesson_id: v.lesson_id, profile_ids: ids, servings, planned_date: v.planned_date || null });
-    closeAdd();
-    again(`${L.title} is in the queue${servings !== n ? `, serving ${servings} (the nearest size it makes)` : ''}.`);
-  }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => closeAdd() }, 'Cancel')] });
-
   const courses = q.weeks_on
     ? (q.courses.length ? q.courses.map(courseBox)
       : el('div', { class: 'card' }, el('p', {}, homeschool ? 'Homeschool mode plans your weeks from a course.' : 'Plan our weeks is on.'),
@@ -1944,9 +1864,199 @@ const parentQueue = parentOnly(async (flash) => {
     flash ?? null,
     q.requests.length ? [el('h2', {}, `Requests (${q.requests.length})`), requests] : null,
     el('div', { class: 'pagehead' }, el('h2', {}, 'The queue'),
-      el('button', { type: 'button', class: 'hbtn pri', onclick: () => { closeAdd = modal('Add a lesson', addForm); } }, '+ Add a lesson')),
+      el('a', { class: 'hbtn pri', href: '#/parent/queue/add' }, '+ Add a lesson')),
     toggle,
     view);
+});
+
+// ---------- Add a lesson (owner, 2026-10-26) ----------
+// Its own page, as the library grows to some 250 lessons: who's cooking, then
+// search by the ingredients the family has and by skill, more filters behind
+// a fold, and each lesson as a card with its picture, its line about the
+// dish, and its skill, so a parent can read about it before adding it.
+
+// A search that narrows a list as you type, and "+ Another" for the next:
+// the ingredients or skills picked so far are chips with a ×.
+function tokenSearch({ label, more, placeholder, options, onChange }) {
+  const picked = [];
+  const chips = el('div', { class: 'tokens' });
+  const list = el('div', { class: 'suggest', role: 'listbox', hidden: true });
+  const input = el('input', { type: 'search', placeholder, autocomplete: 'off', 'aria-label': label });
+  const another = el('button', { type: 'button', class: 'hbtn link', hidden: true, onclick: () => { another.hidden = true; input.hidden = false; input.focus(); } }, more);
+  const draw = () => {
+    chips.replaceChildren(...picked.map((o) => el('span', { class: 'token' }, o.name,
+      el('button', { type: 'button', 'aria-label': `Remove ${o.name}`, onclick: () => { picked.splice(picked.indexOf(o), 1); draw(); onChange(); } }, '×'))));
+    input.hidden = picked.length > 0 && document.activeElement !== input && !input.value;
+    another.hidden = !input.hidden;
+  };
+  const showList = () => {
+    const found = suggest(options.filter((o) => !picked.includes(o)), input.value);
+    list.hidden = !found.length;
+    // Pressing a suggestion keeps the focus in the box, so the box's blur
+    // never hides the list under a tap.
+    list.replaceChildren(...found.map((o) => el('button', { type: 'button', role: 'option', onpointerdown: (e) => e.preventDefault(), onclick: () => {
+      picked.push(o); input.value = ''; list.hidden = true; input.blur(); draw(); onChange();
+    } }, o.name)));
+  };
+  input.addEventListener('input', showList);
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); list.querySelector('button')?.click(); } });
+  input.addEventListener('blur', () => setTimeout(() => { if (document.activeElement !== input) { list.hidden = true; draw(); } }, 100));
+  draw();
+  return { box: el('div', { class: 'f tokensearch' }, el('span', { class: 'flabel' }, label), chips, input, list, another), ids: () => picked.map((o) => o.id), names: () => picked, clear: () => { picked.length = 0; input.value = ''; draw(); } };
+}
+
+const addLesson = parentOnly(async () => {
+  const [q, { profiles }] = await Promise.all([api('GET', `/api/queue?${tz()}`), api('GET', '/api/profiles')]);
+  const F = q.finder;
+  const groups = q.level_groups ?? [];
+  // Each lesson's programs, for the Program filter, and the labels it shows:
+  // the family's own Levels' first, then its own (S1, U1, or its Level's).
+  const lessons = q.library.map((L) => {
+    const inLevels = groups.filter((g) => g.ids.includes(L.id));
+    const programs = [...inLevels.map((g) => g.id), ...(/^S\d/.test(L.label ?? '') ? ['catw'] : []), ...(/^U\d/.test(L.label ?? '') ? ['feast'] : [])];
+    const labels = [...new Set([...inLevels.filter((g) => g.mine).map((g) => g.labels[L.id]), L.label].filter(Boolean))];
+    return { ...L, programs, labels };
+  });
+  // In program order: the family's Levels by week, then Cook Around the
+  // World and Appointed Times by label, then the other Levels.
+  const byLabel = (a, b) => (a ?? '').localeCompare(b ?? '', 'en', { numeric: true });
+  const rank = (L) => {
+    const g = groups.findIndex((x) => x.mine && x.ids.includes(L.id));
+    if (g >= 0) return [0, g, groups[g].ids.indexOf(L.id)];
+    return [/^S\d/.test(L.label ?? '') ? 1 : /^U\d/.test(L.label ?? '') ? 2 : 3, 0, 0];
+  };
+  lessons.sort((a, b) => { const x = rank(a), y = rank(b); return x[0] - y[0] || x[1] - y[1] || x[2] - y[2] || byLabel(a.label, b.label); });
+  const programNames = [...groups.map((g) => [g.id, g.name]), ['catw', 'Cook Around the World'], ['feast', 'Appointed Times']].filter(([id]) => lessons.some((L) => L.programs.includes(id)));
+  const cuisineName = Object.fromEntries(F.cuisines.map((c) => [c.id, c.name]));
+  const ingredientName = Object.fromEntries(F.ingredients.map((x) => [x.id, x.name]));
+
+  // Who's cooking, first: it sorts Best for them and checks what they've cooked.
+  let ranked = null;
+  const who = el('div', { class: 'grid2' }, profiles.map((p) => el('label', { class: 'choice' },
+    el('input', { type: 'checkbox', name: `p_${p.id}`, value: p.id }), el('span', {}, p.name))));
+  const whoIds = () => profiles.filter((p) => who.querySelector(`[name="p_${p.id}"]`).checked).map((p) => p.id);
+  who.addEventListener('change', async () => {
+    const ids = whoIds();
+    ranked = ids.length ? (await api('GET', `/api/picks/lessons?profiles=${ids.join(',')}`).catch(() => null))?.lessons ?? null : null;
+    notCooked.disabled = !ranked;
+    redraw();
+  });
+
+  const text = el('input', { type: 'search', placeholder: 'Dish name', 'aria-label': 'Dish name' });
+  const ingredients = tokenSearch({ label: 'Ingredients you have', more: '+ Another ingredient', placeholder: 'Type an ingredient', options: F.ingredients, onChange: () => redraw() });
+  const skills = tokenSearch({ label: 'Skills', more: '+ Another skill', placeholder: 'Type a skill', options: F.skills, onChange: () => redraw() });
+  const select = (label, options) => el('label', { class: 'f' }, label, el('select', { onchange: () => redraw() }, el('option', { value: '' }, 'Any'), options.map(([v, n]) => el('option', { value: v }, n))));
+  const program = select('Program', programNames);
+  const protein = select('Protein', [...F.protein_tags.map((p) => [p.id, p.name]), ['none', 'No meat, fish, or eggs']]);
+  const cuisine = select('Cuisine', F.cuisines.map((c) => [c.id, c.name]));
+  const time = select('Time', [['30', '30 minutes or less'], ['60', 'An hour or less'], ['90', '90 minutes or less']]);
+  const method = select('How it cooks', [['stove', METHOD_NAMES.stove], ['oven', METHOD_NAMES.oven], ['no-cook', METHOD_NAMES['no-cook']]]);
+  const notCooked = el('input', { type: 'checkbox', disabled: true, onchange: () => redraw() });
+  const val = (box) => box.querySelector('select').value;
+  text.addEventListener('input', () => redraw());
+
+  const count = el('p', { class: 'mut small', role: 'status' });
+  const results = el('div', { class: 'findlist' });
+  let shown = 30;
+  // A changed filter starts the list again from the top.
+  const redraw = () => { shown = 30; draw(); };
+
+  const card = (L, used, fit) => el('article', { class: 'card findcard' },
+    el('img', { src: L.image, alt: '', width: 88, height: 88, loading: 'lazy' }),
+    el('div', {},
+      el('h3', {}, L.labels.length ? el('span', { class: 'mut' }, `${L.labels.join(' · ')} · `) : null, L.title, L.foundation ? el('small', { class: 'mut' }, ' (foundation)') : null),
+      el('p', { class: 'mut small' }, [`${L.minutes} min`, cuisineName[L.cuisine] ?? L.cuisine, METHOD_NAMES[L.method]].filter(Boolean).join(' · ')),
+      L.about ? el('p', { class: 'about' }, L.about) : null,
+      el('p', { class: 'small' }, el('b', {}, 'Skill: '), L.skill),
+      used.length ? el('p', { class: 'small uses' }, el('b', {}, 'Uses yours: '), used.map((x) => ingredientName[x] ?? x).join(', ')) : null,
+      fit ? fitNote({ ...fit, fit_label: fit.label, why: [...fit.why, ...(fit.version_title ? [`as ${fit.version_title}`] : [])] }) : null,
+      el('div', { class: 'acts' },
+        el('button', { type: 'button', class: 'hbtn pri', onclick: () => addDialog(L) }, 'Add'),
+        el('button', { type: 'button', class: 'hbtn', onclick: () => showDish(L.id) }, 'Main ingredients'),
+        el('button', { type: 'button', class: 'hbtn link', onclick: () => previewLesson(L.id).catch((err) => showToast(err.message)) }, 'Preview as a learner'))));
+
+  function draw() {
+    const fitOf = Object.fromEntries((ranked ?? []).map((x) => [x.id, x]));
+    const f = {
+      text: text.value, items: ingredients.ids(), skills: skills.ids(), program: val(program), cuisine: val(cuisine),
+      protein: val(protein), maxMinutes: Number(val(time)) || null, method: val(method),
+      skip: notCooked.checked && ranked ? new Set(ranked.filter((x) => x.cooked).map((x) => x.id)) : null,
+    };
+    const filtering = Boolean(f.text.trim() || f.items.length || f.skills.length || f.program || f.cuisine || f.protein || f.maxMinutes || f.method || f.skip);
+    const found = findLessons(lessons, f, F.proteins);
+    // Best for them (§6.21): up to 5 that fit, not cooked or queued, before anything's filtered.
+    const best = filtering ? [] : (ranked ?? []).filter((x) => x.fits && x.fit && x.fit !== 'poor' && !x.cooked && !x.queued).slice(0, 5)
+      .map((x) => lessons.find((L) => L.id === x.id)).filter(Boolean);
+    count.textContent = filtering ? `${found.length} ${found.length === 1 ? 'lesson matches' : 'lessons match'}.` : `${found.length} lessons.`;
+    // replaceChildren takes nodes only: a null would show as text.
+    results.replaceChildren(...[
+      best.length ? el('h3', {}, 'Best for them') : null,
+      ...best.map((L) => card(L, [], fitOf[L.id])),
+      best.length ? el('h3', {}, 'Every lesson') : null,
+      ...found.slice(0, shown).map(({ L, used }) => card(L, used, fitOf[L.id])),
+      found.length > shown ? el('button', { type: 'button', class: 'hbtn', onclick: () => { shown += 30; draw(); } }, `Show more (${found.length - shown} left)`) : null,
+      !found.length ? el('p', { class: 'mut' }, 'No lessons match. Try fewer filters.') : null,
+      // The family's own recipes (§6.10).
+      q.recipes?.length && !filtering ? el('h3', {}, 'Our recipes') : null,
+      ...(filtering ? [] : (q.recipes ?? []).map((r) => el('div', { class: 'card findcard norow' }, el('div', {}, el('h3', {}, r.title),
+        el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn pri', onclick: () => addDialog({ ...r, labels: [] }) }, 'Add')))))),
+    ].filter(Boolean));
+  }
+  const clear = el('button', { type: 'button', class: 'hbtn link', onclick: () => {
+    text.value = ''; ingredients.clear(); skills.clear(); notCooked.checked = false;
+    for (const b of [program, protein, cuisine, time, method]) b.querySelector('select').value = '';
+    redraw();
+  } }, 'Clear filters');
+
+  // Adding one: in a dialog over the page, with who's cooking ticked from above.
+  function addDialog(L) {
+    const picked = new Set(whoIds());
+    const note = el('p', { class: 'mut small note', hidden: true }, 'Most lessons use knife work. We suggest a Unit 1 lesson first.');
+    const boxes = el('div', { class: 'grid2' }, profiles.map((p) => el('label', { class: 'choice' },
+      el('input', { type: 'checkbox', name: `p_${p.id}`, value: p.id, checked: picked.has(p.id) }), el('span', {}, p.name))));
+    const checkNote = () => {
+      const ids = profiles.filter((p) => boxes.querySelector(`[name="p_${p.id}"]`).checked).map((p) => p.id);
+      note.hidden = L.unit === 1 || !L.unit || !ids.length || ids.some((pid) => q.knife_ok.includes(pid));
+    };
+    boxes.addEventListener('change', checkNote);
+    checkNote();
+    let close = () => {};
+    const f = form([
+      el('fieldset', {}, el('legend', {}, "Who's cooking"), el('p', { class: 'mut small', style: 'margin:0' }, 'Pick more than one to cook it together. It counts for each of them.'), boxes),
+      note,
+      field('Serves', 'servings', { type: 'number', min: 1, value: q.default_servings, inputmode: 'numeric' }),
+      field('Planned date', 'planned_date', { type: 'date' }, 'Optional'),
+    ], 'Add to the queue', async (v) => {
+      const ids = profiles.filter((p) => v[`p_${p.id}`]).map((p) => p.id);
+      if (!ids.length) throw new Error("Pick who's cooking.");
+      const n = Number(v.servings);
+      // A lesson with set sizes takes the nearest one it offers.
+      const servings = L.servings_options.includes(n) ? n : L.servings_options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a));
+      await api('POST', '/api/queue', { lesson_id: L.id, profile_ids: ids, servings, planned_date: v.planned_date || null });
+      close();
+      sessionSet('cpr.queue.view', 'extra');
+      go('#/parent/queue');
+      showToast(`${L.title} is in the queue${servings !== n ? `, serving ${servings} (the nearest size it makes)` : ''}.`);
+    }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')] });
+    close = modal(`Add ${L.title}`, f);
+  }
+
+  draw();
+  parentScreen('queue',
+    el('p', {}, el('a', { href: '#/parent/queue' }, '← The queue')),
+    el('h2', {}, 'Add a lesson'),
+    el('fieldset', {}, el('legend', {}, "Who's cooking"), el('p', { class: 'mut small', style: 'margin:0' }, 'Pick them first to see what fits them best.'), who),
+    el('div', { class: 'card findfilters' },
+      el('label', { class: 'f' }, 'Search', text),
+      ingredients.box,
+      el('p', { class: 'mut small' }, 'A lesson needs one of the proteins you add (chicken, beef, eggs…) and at least one of your other ingredients.'),
+      skills.box,
+      el('details', { class: 'psec' }, el('summary', {}, 'More filters'),
+        el('div', { class: 'stack' }, program, protein, cuisine, time, method,
+          el('label', { class: 'choice' }, notCooked, el('span', {}, 'Not cooked yet by who\'s cooking')))),
+      clear),
+    count,
+    results);
 });
 
 // ---------- courses: the list and the editor (§6.18) ----------
@@ -3410,6 +3520,7 @@ async function route() {
       if (sub === 'reviews') return await ownerReviews();
       if (sub === 'reports') return await ownerReports();
       if (sub === 'courses') return await courseList();
+      if (sub === 'queue' && extra === 'add') return await addLesson();
       if (sub === 'queue') return await parentQueue();
       if (sub === 'shopping' && extra === 'new') return await shoppingPreview(parts[3]);
       if (sub === 'shopping' && extra === 'list') return await shoppingListView(parts[3]);

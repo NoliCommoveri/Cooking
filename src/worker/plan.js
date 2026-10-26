@@ -1051,6 +1051,27 @@ const courseWeekLabels = (V, weeks) => Object.fromEntries(weeks.filter((x) => x.
 }));
 export const labelsFor = (program) => (LEVELS[program] ? { ...suggestedLabels, ...LEVELS[program].labels } : suggestedLabels);
 
+// What Add a lesson's filters offer (owner, 2026-10-26), from the lessons the
+// family can cook: proteins by taste group, every other ingredient by name,
+// and the skills and cuisines in them.
+const SKILL_NAMES = Object.fromEntries(CONTENT.skills.map((x) => [x.id, x.name]));
+function finderOptions(lessons) {
+  const P = LIBRARY.proteinIngredients ?? {};
+  const inProtein = new Set(Object.values(P).flat());
+  const used = new Set(lessons.flatMap((L) => L.ingredients.map((x) => x.ingredient)));
+  const byName = (a, b) => a.name.localeCompare(b.name);
+  return {
+    proteins: P,
+    ingredients: [
+      ...(LIBRARY.tastes.proteins ?? []).filter((p) => lessons.some((L) => L.tags?.protein === p.id) || (P[p.id] ?? []).some((i) => used.has(i))).map((p) => ({ id: `protein:${p.id}`, name: p.name })),
+      ...[...used].filter((i) => !inProtein.has(i) && LIBRARY.ingredients[i]).map((i) => ({ id: i, name: LIBRARY.ingredients[i].name })),
+    ].sort(byName),
+    skills: [...new Set(lessons.flatMap((L) => L.skills))].map((id) => ({ id, name: SKILL_NAMES[id] ?? id })).sort(byName),
+    protein_tags: (LIBRARY.tastes.proteins ?? []).filter((p) => lessons.some((L) => L.tags?.protein === p.id)),
+    cuisines: [...new Set(lessons.map((L) => L.cuisine))].map((id) => ({ id, name: LIBRARY.cuisines[id] ?? id })).sort(byName),
+  };
+}
+
 // names: the family's recipes (recipeNames), for queued family recipes.
 const RECIPE_SIZES = servingOptions({ scaling: { mode: 'free', min: 1, max: 12 } });
 export function itemOut(r, who, labels = suggestedLabels, names = {}) {
@@ -1165,7 +1186,10 @@ export function register(on) {
       test_cooks: Object.fromEntries(tests.map((t) => [t.lesson_id, { cooked_on: t.cooked_on, by_me: t.parent_id === s.parent_id }])),
       library: LIBRARY.lessons.filter((L) => visible(fam).has(L.id)).map((L) => ({
         id: L.id, title: L.title, label: suggestedLabels[L.id] ?? null, unit: L.unit, servings_options: servingOptions(L), foundation: Boolean(dishById[L.id]?.pickOne),
+        image: L.image, minutes: L.totalMinutes, cuisine: L.cuisine, method: L.method, skills: L.skills, protein: L.tags?.protein ?? null,
+        about: L.about, main: L.main, skill: L.skill, ingredients: L.ingredients.map((x) => x.ingredient),
       })),
+      finder: finderOptions(LIBRARY.lessons.filter((L) => visible(fam).has(L.id))),
       // Add a lesson lists the library by program (owner, 2026-10-26): each
       // Level, the family's own courses' first, in week order with its own
       // labels, then Cook Around the World and Appointed Times.

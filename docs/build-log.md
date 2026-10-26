@@ -6071,3 +6071,40 @@ cards, group Add a lesson by program, and keep A for Level 1.
 - Screenshots (the queue, Add a lesson, and both kitchen themes, phone width,
   light and dark) sent in the session.
 - Tests: 395.
+
+## 236. 2026-10-26 — Add a lesson: its own page, with filters
+
+Owner, 2026-10-26: "For add a lesson, I'd really like it if we had filters,
+like ingredients where they could input their ingredients to find lessons
+that matched, or skill tags, instead of just every lesson. Once we write
+everything its gonna be like 250 recipes." Then: its own page; ingredients
+and skills "should not be a wall, it should look more like a search bar that
+filters the Ingredients down in real time as they type, and then +another to
+add more"; "searches should be wide on anything except proteins"; program,
+protein and cuisine, time and method, and not cooked yet as more filters; and
+"since we are on a page we can show more about the recipe than just its
+name". Also: record that Chef Ruth's button gets in the way of screenshot
+scripts.
+
+- **Before:** + Add a lesson opened a dialog with one long menu of every
+  lesson, grouped by program (235). A lesson's line about the dish showed
+  only after it was added.
+- **Now:**
+  - **Its own page,** `#/parent/queue/add`: who's cooking, a dish-name
+    search, Ingredients you have and Skills as type-to-narrow searches with
+    chips and + Another, and More filters (program, protein, cuisine, time,
+    how it cooks, not cooked yet by who's cooking).
+  - **Matching** (`src/content/find.js`): a lesson needs one of the
+    proteins added, searched by taste group (Chicken, not chicken breast and
+    chicken thigh), and at least one of the other ingredients; the most of
+    them first, with "Uses yours: …".
+  - **Lesson cards:** picture, labels, time, cuisine, method, the line about
+    the dish, and its skill, with Add (a dialog: who, serves, planned date),
+    Main ingredients, and Preview as a learner. 30 at a time, Show more.
+  - **The library** carries each lesson's skills, method, line about the
+    dish, and main ingredients; the queue sends the filters' options.
+  - **CLAUDE.md:** screenshot scripts hide Chef Ruth's floating button and
+    enter the parent PIN after opening a kitchen (owner's request).
+- Screenshots (the page, typing, results, and the Add dialog, phone width,
+  light and dark) sent in the session.
+- Tests: 400.
