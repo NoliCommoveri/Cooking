@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 103,
   "title": "Thick beef burgers",
-  "image": "meals/meat.svg",
+  "image": "dishes/thick-burgers.png",
   "cuisine": "american",
   "skill": "Checking ground beef reaches 160°F",
   "skills": ["temping-meat", "searing"],

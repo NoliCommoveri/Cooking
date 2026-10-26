@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 103,
   "title": "Pan-seared trout",
-  "image": "meals/fish.svg",
+  "image": "dishes/pan-seared-trout.png",
   "cuisine": "american",
   "skill": "Searing a fillet skin-side down",
   "skills": ["cooking-fish", "searing"],

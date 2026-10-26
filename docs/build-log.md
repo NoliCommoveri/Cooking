@@ -6016,3 +6016,20 @@ owner approves it there.
     chickpeas, labneh (watch: gelatin).
 - No screens changed, so no screenshots.
 - Tests: 392.
+
+## 234. 2026-10-26 — Level dish pictures: sheets 63–64
+
+Owner, 2026-10-26: "find me recipes with placeholder images like this", then
+the two sheets made from Claude's prompts.
+
+- **Before:** eight written Level 3 recipes, all from phase 12, showed the
+  meal-type drawings (`meals/*.svg`) on their cards and in the player:
+  tabbouleh, thick beef burgers, baked fish with lemon and herbs, sandwich
+  loaf, dinner rolls, steamed fish with ginger and scallion, beef picadillo,
+  and pan-seared trout. None had been on a picture sheet.
+- **Now:** sheets 63 and 64 (`content/images/source/`) are cut into those
+  eight dish pictures, with web copies, and the lessons and their Level 3
+  cards point at them. The steamed fish's rice bowl stands apart from its
+  plate, so it was cut by hand; `tools/dish-sheets.txt` records how.
+- Screenshots (More recipes, phone width, both themes) sent in the session.
+- Tests: 392.

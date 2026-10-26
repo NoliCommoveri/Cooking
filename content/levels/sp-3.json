@@ -1458,7 +1458,7 @@
         "veggies": "some"
       }
     },
-    { "id": "tabbouleh", "title": "Tabbouleh", "cuisine": "lebanese", "skills": ["fine-chopping"], "skill": "Mincing parsley fine", "art": "salad", "safety": "adult-nearby", "minutes": 45, "about": "A bright parsley salad with mint, tomato, and a little bulgur, dressed with lemon and olive oil. The knife work is the dish.", "main": ["parsley", "bulgur", "tomatoes", "mint", "lemon"], "method": "no-cook", "meal": false, "tags": { "protein": "none", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "lots" } },
+    { "id": "tabbouleh", "title": "Tabbouleh", "cuisine": "lebanese", "skills": ["fine-chopping"], "skill": "Mincing parsley fine", "art": "salad", "image": "dishes/tabbouleh.png", "safety": "adult-nearby", "minutes": 45, "about": "A bright parsley salad with mint, tomato, and a little bulgur, dressed with lemon and olive oil. The knife work is the dish.", "main": ["parsley", "bulgur", "tomatoes", "mint", "lemon"], "method": "no-cook", "meal": false, "tags": { "protein": "none", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "lots" } },
     {
       "id": "solterito",
       "title": "Solterito",
@@ -1481,7 +1481,28 @@
         "veggies": "lots"
       }
     },
-    { "id": "thick-burgers", "title": "Thick beef burgers", "cuisine": "american", "skills": ["temping-meat", "searing"], "skill": "Checking ground beef reaches 160°F", "art": "meat", "safety": "adult-nearby", "minutes": 40, "about": "Thick, juicy beef burgers seared in a skillet and checked with a thermometer until they reach 160°F in the middle, on toasted buns.", "main": ["ground beef", "burger buns", "lettuce", "tomato"], "method": "stove", "tags": { "protein": "beef", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } },
+    {
+      "id": "thick-burgers",
+      "title": "Thick beef burgers",
+      "cuisine": "american",
+      "skills": ["temping-meat", "searing"],
+      "skill": "Checking ground beef reaches 160°F",
+      "art": "meat",
+      "image": "dishes/thick-burgers.png",
+      "safety": "adult-nearby",
+      "minutes": 40,
+      "about": "Thick, juicy beef burgers seared in a skillet and checked with a thermometer until they reach 160°F in the middle, on toasted buns.",
+      "main": ["ground beef", "burger buns", "lettuce", "tomato"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
     {
       "id": "chermoula-fish",
       "title": "Chermoula baked fish",
@@ -1512,6 +1533,7 @@
       "skills": ["cooking-fish"],
       "skill": "Baking fish gently, checking pin bones",
       "art": "fish",
+      "image": "dishes/baked-salmon.png",
       "safety": "adult-nearby",
       "minutes": 50,
       "about": "Salmon, cod, or tilapia fillets baked with lemon, dill, and garlic until they flake and reach 145°F, with a side timed to finish at the same time.",
@@ -1598,9 +1620,9 @@
         "veggies": "light"
       }
     },
-    { "id": "sandwich-loaf", "title": "Sandwich loaf", "cuisine": "american", "skills": ["yeast-dough"], "skill": "Kneading to a windowpane, baking a loaf", "art": "bread", "safety": "adult-nearby", "minutes": 240, "about": "A soft white sandwich loaf, kneaded until the dough stretches thin, proofed in a loaf pan, and baked to 190°F inside.", "main": ["flour", "yeast", "milk", "butter"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "sandwich-loaf", "title": "Sandwich loaf", "cuisine": "american", "skills": ["yeast-dough"], "skill": "Kneading to a windowpane, baking a loaf", "art": "bread", "image": "dishes/sandwich-loaf.png", "safety": "adult-nearby", "minutes": 240, "about": "A soft white sandwich loaf, kneaded until the dough stretches thin, proofed in a loaf pan, and baked to 190°F inside.", "main": ["flour", "yeast", "milk", "butter"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     { "id": "conchas", "title": "Conchas", "cuisine": "mexican", "skills": ["yeast-dough"], "skill": "An enriched dough shaped by weight", "art": "bread", "image": "dishes/conchas.png", "safety": "adult-nearby", "minutes": 210, "estimated": true, "about": "Soft Mexican sweet buns with a crackly sugar topping scored like a seashell. Made with butter.", "main": ["flour", "yeast", "butter", "egg", "sugar"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
-    { "id": "dinner-rolls", "title": "Dinner rolls", "cuisine": "american", "skills": ["yeast-dough"], "skill": "Shaping even rolls by weight", "art": "bread", "safety": "adult-nearby", "minutes": 210, "about": "Soft, buttery pull-apart rolls, each weighed so they bake evenly, with two or three shaped as knots or small braids.", "main": ["flour", "yeast", "milk", "butter", "egg"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "dinner-rolls", "title": "Dinner rolls", "cuisine": "american", "skills": ["yeast-dough"], "skill": "Shaping even rolls by weight", "art": "bread", "image": "dishes/dinner-rolls.png", "safety": "adult-nearby", "minutes": 210, "about": "Soft, buttery pull-apart rolls, each weighed so they bake evenly, with two or three shaped as knots or small braids.", "main": ["flour", "yeast", "milk", "butter", "egg"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     {
       "id": "apple-galette",
       "title": "Rustic apple galette",
@@ -1650,7 +1672,28 @@
         "veggies": "lots"
       }
     },
-    { "id": "steamed-fish", "title": "Steamed fish with ginger and scallion", "cuisine": "chinese", "skills": ["cooking-fish"], "skill": "Steaming, judging freshness", "art": "fish", "safety": "adult-nearby", "minutes": 45, "about": "White fish fillets steamed on a plate in a covered pot, then topped with ginger, green onion, soy, and a little warm oil.", "main": ["white fish fillets", "ginger", "green onions", "soy sauce"], "method": "stove", "tags": { "protein": "white-fish", "flavors": ["ginger-soy"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "light" } },
+    {
+      "id": "steamed-fish",
+      "title": "Steamed fish with ginger and scallion",
+      "cuisine": "chinese",
+      "skills": ["cooking-fish"],
+      "skill": "Steaming, judging freshness",
+      "art": "fish",
+      "image": "dishes/steamed-fish.png",
+      "safety": "adult-nearby",
+      "minutes": 45,
+      "about": "White fish fillets steamed on a plate in a covered pot, then topped with ginger, green onion, soy, and a little warm oil.",
+      "main": ["white fish fillets", "ginger", "green onions", "soy sauce"],
+      "method": "stove",
+      "tags": {
+        "protein": "white-fish",
+        "flavors": ["ginger-soy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      }
+    },
     {
       "id": "arroz-con-pollo",
       "title": "Arroz con pollo",
@@ -1797,6 +1840,7 @@
       "skills": ["flavor-base", "sauteing"],
       "skill": "Sweating a sofrito, then browning beef",
       "art": "meat",
+      "image": "dishes/beef-picadillo.png",
       "safety": "adult-nearby",
       "minutes": 55,
       "about": "Ground beef browned over a sofrito of onion, pepper, and garlic, simmered with tomato, raisins, and olives, over rice.",
@@ -1835,7 +1879,28 @@
         "veggies": "light"
       }
     },
-    { "id": "pan-seared-trout", "title": "Pan-seared trout", "cuisine": "american", "skills": ["cooking-fish", "searing"], "skill": "Searing a fillet skin-side down", "art": "fish", "safety": "adult-nearby", "minutes": 30, "about": "Trout fillets seared skin-side down until the skin is crisp, finished with butter and lemon.", "main": ["trout fillets", "butter", "lemon", "parsley"], "method": "stove", "tags": { "protein": "white-fish", "flavors": ["mild-buttery", "herby-lemony"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } },
+    {
+      "id": "pan-seared-trout",
+      "title": "Pan-seared trout",
+      "cuisine": "american",
+      "skills": ["cooking-fish", "searing"],
+      "skill": "Searing a fillet skin-side down",
+      "art": "fish",
+      "image": "dishes/pan-seared-trout.png",
+      "safety": "adult-nearby",
+      "minutes": 30,
+      "about": "Trout fillets seared skin-side down until the skin is crisp, finished with butter and lemon.",
+      "main": ["trout fillets", "butter", "lemon", "parsley"],
+      "method": "stove",
+      "tags": {
+        "protein": "white-fish",
+        "flavors": ["mild-buttery", "herby-lemony"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
     {
       "id": "steak-mushroom-sauce",
       "title": "Pan-seared steak with mushroom sauce",

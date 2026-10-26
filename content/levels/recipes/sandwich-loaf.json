@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 103,
   "title": "Sandwich loaf",
-  "image": "meals/bread.svg",
+  "image": "dishes/sandwich-loaf.png",
   "cuisine": "american",
   "skill": "Kneading to a windowpane, baking a loaf",
   "skills": ["yeast-dough"],

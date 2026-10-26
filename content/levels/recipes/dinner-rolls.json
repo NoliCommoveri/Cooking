@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 103,
   "title": "Dinner rolls",
-  "image": "meals/bread.svg",
+  "image": "dishes/dinner-rolls.png",
   "cuisine": "american",
   "skill": "Shaping even rolls by weight",
   "skills": ["yeast-dough"],
