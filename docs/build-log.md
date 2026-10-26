@@ -5589,3 +5589,45 @@ numbers that are all out of order for how they present in a level course"
 - Screenshots (phone width, Kitchen Quest and Chef's Passport) of the
   player's card and More recipes were sent in the session.
 - Tests: 370. The kitchen test checks `week_of`.
+
+## 221. 2026-10-26 — Re-plan build, 14e: step pictures and Show me
+
+Owner, 2026-10-26: "Go" (build 14e's player work: step pictures, Show me,
+and the parent's setting).
+
+- **Before:** a lesson step had words only (with its tip, look note, Why?,
+  and How much?).
+- **Now:**
+  - **Step pictures in lesson files:** `"picture":
+    "steps/<lesson>/<name>.png"` on a step, from
+    `content/images/steps/<lesson>/`. The schema, the content editor (a
+    Step picture field), and the linter (the file must exist) know it.
+    `tools/build-dish-images.py` makes its web copy in
+    `public/img/steps/`, and the content-publish workflow passes new ones to
+    it. A test checks every step picture has a web copy.
+  - **In the player:** the picture shows under the step's words, or a
+    **Show me** button (an eye icon) opens it, with **Hide the picture** to
+    close it. It closes on the next step. Kitchen Quest frames it in gold;
+    Chef's Passport as a snapshot.
+  - **Step pictures setting:** Set up a course and Edit course have **Step
+    pictures** for each learner on a Level course: Under each step, or
+    Behind Show me, with "the Level's way" marked (Level 2 under each step,
+    Level 3 and 4 behind Show me). Only a change from the Level's way is
+    kept. The kitchen's Level data says how this learner's pictures show.
+    Outside a Level course, pictures are behind Show me.
+  - New in the draft migration `0002_levels.sql`: `course_pictures`.
+  - `tools/split-step-sheet.py`: cuts a 2×2 ChatGPT sheet of step
+    pictures into four square PNGs named for their steps.
+- **Owner, on `/ops` after it deploys:** press **Re-apply draft** for
+  `0002` (or **Apply pending** if it isn't applied). Until then a course
+  still saves, and step pictures follow the Level, with a note saying so.
+- No lesson has a step picture yet: the first prompt sheets come next.
+- Screenshots (phone width) of a cook step with Show me, opened, and shown
+  under the step, in Kitchen Quest and Chef's Passport, and Edit course's
+  Step pictures in light and dark, were sent in the session. They used a
+  stand-in picture that isn't in the repo.
+- Tests: 375. New: step pictures follow the Level and each learner's pick
+  (Level 3 and Level 2, a bad value, someone not on the course, saving
+  without the setting, back to the Level's way); a course saves before the
+  draft and its pictures follow the Level; the linter refuses a missing or
+  misnamed step picture.

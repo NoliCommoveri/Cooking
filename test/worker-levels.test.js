@@ -665,3 +665,44 @@ test('a swap after the shopping list is made: the preview for the new dish, the 
   assert.equal(made.status, 200);
   assert.equal((await thisWeek(a)).swap.shopping, false);
 });
+
+// 14e: step pictures show under each step on Level 2, behind Show me on
+// Level 3 and 4, and a parent can change it for each learner.
+test("step pictures follow the Level, and a parent's pick for each learner", async () => {
+  const { a, ava, ben } = await setup();
+  await level(a, [ava, ben]);
+  const c = (await a.get('/api/courses')).body.courses[0];
+  assert.equal(c.pictures_default, 'button', 'Level 3 puts them behind Show me');
+  assert.deepEqual(c.pictures, { [ava]: 'button', [ben]: 'button' });
+  assert.equal((await kitchen(a, ava)).pictures, 'button');
+
+  const put = (pictures) => a.put(`/api/courses/${c.id}`, { name: '', start_date: c.start_date, per_week: 1, profile_ids: [ava, ben], pictures });
+  assert.equal((await put({ [ava]: 'shown', [ben]: 'button' })).status, 200);
+  assert.equal((await kitchen(a, ava)).pictures, 'shown');
+  assert.equal((await kitchen(a, ben)).pictures, 'button');
+  assert.deepEqual((await a.get('/api/courses')).body.courses[0].pictures, { [ava]: 'shown', [ben]: 'button' });
+  assert.equal((await put({ [ava]: 'big' })).status, 400);
+  assert.equal((await put({ nobody: 'shown' })).status, 400);
+  // Saving without pictures keeps the picks; back to the Level's way drops them.
+  assert.equal((await a.put(`/api/courses/${c.id}`, { name: '', start_date: c.start_date, per_week: 1, profile_ids: [ava, ben] })).status, 200);
+  assert.equal((await kitchen(a, ava)).pictures, 'shown');
+  await put({ [ava]: 'button' });
+  assert.equal((await kitchen(a, ava)).pictures, 'button');
+});
+
+test('a Level 2 course shows step pictures under each step', async () => {
+  const { a, ava } = await setup();
+  await a.post('/api/courses', { program: 'sp-2', start_date: sunday, per_week: 1, profile_ids: [ava], starts: 'familiar' });
+  const c = (await a.get('/api/courses')).body.courses[0];
+  assert.equal(c.pictures_default, 'shown');
+  assert.equal((await kitchen(a, ava)).pictures, 'shown');
+});
+
+test('before /ops applies the draft, a course still saves and its step pictures follow the Level', async () => {
+  const { env, a, ava } = await setup();
+  await env.DB.prepare('DROP TABLE course_pictures').run();
+  const made = await level(a, [ava], sunday, { pictures: { [ava]: 'shown' } });
+  assert.equal(made.status, 200);
+  assert.equal(made.body.pictures_saved, false);
+  assert.equal((await kitchen(a, ava)).pictures, 'button');
+});

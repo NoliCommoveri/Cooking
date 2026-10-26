@@ -69,6 +69,15 @@ test('every lesson has a web picture for the app (run: python3 tools/build-dish-
   for (const L of LIBRARY.lessons) assert.ok(existsSync(new URL(`../public/${L.image}`, import.meta.url)), L.image);
 });
 
+test('every step picture has a web copy for the app (run: python3 tools/build-dish-images.py)', () => {
+  const dir = new URL('../public/content/lessons/', import.meta.url);
+  for (const f of readdirSync(dir)) {
+    for (const s of JSON.parse(readFileSync(new URL(f, dir), 'utf8')).steps ?? []) {
+      if (s.picture) assert.ok(existsSync(new URL(`../public/img/${s.picture.replace(/\.png$/, '.webp')}`, import.meta.url)), s.picture);
+    }
+  }
+});
+
 test('the library API applies the family\'s filters', async () => {
   const env = await makeEnv();
   const c = await family(env, 'Carsons', 'jen@example.com');

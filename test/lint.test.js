@@ -50,6 +50,11 @@ test('blocked words in step text fail', () => {
   assert.match(broken((c, L) => { L('shakshuka').steps[0].tip = 'Bacon would be good here.'; }), /blocked food \("bacon"\)/);
 });
 
+test("a step picture must be in content/images, and named like steps/<lesson>/<name>.png", () => {
+  assert.match(broken((c, L) => { L('shakshuka').steps[0].picture = 'steps/shakshuka/no-such.png'; }), /picture steps\/shakshuka\/no-such\.png isn't in content\/images/);
+  assert.match(broken((c, L) => { L('shakshuka').steps[0].picture = 'dishes/shakshuka.png'; }), /doesn't match/);
+});
+
 test('a missing wash step after raw food fails', () => {
   assert.match(broken((c, L) => { L('shakshuka').steps = L('shakshuka').steps.filter(s => s.id !== 'wash-egg'); }), /next step must be a wash step/);
 });

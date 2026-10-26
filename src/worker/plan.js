@@ -368,11 +368,52 @@ async function withPrograms(env, fid, rows) {
     const { results } = await env.DB.prepare('SELECT course_id, program, parts FROM course_programs WHERE family_id = ?').bind(fid).all();
     progs = Object.fromEntries(results.filter((r) => LEVELS[r.program]).map((r) => [r.course_id, r]));
   } catch { /* the table isn't there yet */ }
-  // A Level course's parts kept on (a parent can turn any off).
-  const out = rows.map((c) => ({ ...c, program: progs[c.id]?.program ?? null, ...(progs[c.id] ? { parts: coursePartsOf(progs[c.id].parts) } : {}) }));
+  const pics = Object.keys(progs).length ? await picturesPicked(env, fid) : {};
+  // A Level course's parts kept on (a parent can turn any off), and how each
+  // learner's step pictures show.
+  const out = rows.map((c) => ({ ...c, program: progs[c.id]?.program ?? null, ...(progs[c.id] ? { parts: coursePartsOf(progs[c.id].parts), pictures: pics[c.id] ?? {} } : {}) }));
   if (!out.some((c) => c.program)) return out;
   if (await releaseOn(env.DB, fid, LEVELS_RELEASE)) return out;
   return out.filter((c) => !c.program);
+}
+
+// Step pictures (14e): 'shown' under each step, or 'button', behind Show me.
+// A Level 2 course shows them; Level 3 and 4 put them behind Show me
+// (owner, 2026-10-26). A parent can change it for each learner on the course
+// (course_pictures, in the draft migration); only a change from the Level's
+// way is kept.
+export const PICTURES = ['shown', 'button'];
+export const picturesDefault = (program) => (program === 'sp-2' ? 'shown' : 'button');
+export const picturesFor = (course, pid) => course.pictures?.[pid] ?? picturesDefault(course.program);
+// { course_id: { profile_id: 'shown' | 'button' } }. Empty before the table exists.
+async function picturesPicked(env, fid) {
+  const out = {};
+  try {
+    const { results } = await env.DB.prepare('SELECT course_id, profile_id, shown FROM course_pictures WHERE family_id = ?').bind(fid).all();
+    for (const r of results) (out[r.course_id] ??= {})[r.profile_id] = r.shown ? 'shown' : 'button';
+  } catch (err) { if (!/no such table/i.test(String(err?.message))) throw err; }
+  return out;
+}
+const picturesInput = (x, pids) => {
+  if (!x || typeof x !== 'object' || Array.isArray(x)) fail(400, 'invalid', 'Step pictures must be a setting for each learner.');
+  for (const [pid, v] of Object.entries(x)) if (!pids.includes(pid) || !PICTURES.includes(v)) fail(400, 'invalid', 'Step pictures are shown or behind Show me, for a learner on the course.');
+  return x;
+};
+// Saved apart from the course, so a course still saves before /ops applies
+// the draft. Returns false when the table isn't there yet.
+async function savePictures(env, course, program, pictures) {
+  const keep = Object.entries(pictures).filter(([, v]) => v !== picturesDefault(program));
+  try {
+    await env.DB.batch([
+      env.DB.prepare('DELETE FROM course_pictures WHERE course_id = ? AND family_id = ?').bind(course.id, course.family_id),
+      ...keep.map(([pid, v]) => env.DB.prepare('INSERT INTO course_pictures (course_id, family_id, profile_id, shown, updated_at) VALUES (?, ?, ?, ?, ?)')
+        .bind(course.id, course.family_id, pid, v === 'shown' ? 1 : 0, now())),
+    ]);
+    return true;
+  } catch (err) {
+    if (/no such table/i.test(String(err?.message))) return false;
+    throw err;
+  }
 }
 
 // A new course with no plan sent (Chef Ruth's): the best dish of each
@@ -643,6 +684,8 @@ function levelFor(st, pid, day) {
   const reached = V.weeks.filter((w) => w.week !== now && st.lessons.idOf[w.week] && st.done[st.lessons.idOf[w.week]]);
   return {
     course_id: st.course.id, id: V.id, name: V.name, weeks: V.weeks.length, sabbath: isSabbath(day),
+    // How this learner's step pictures show in the player (14e).
+    pictures: picturesFor(st.course, pid),
     week: now ? weekOut(V.weeks.find((w) => w.week === now)) : after ? weekOut(after) : null,
     open: reached.flatMap((w) => weekParts(w, on).map((part) => partOut(w, part))).filter((x) => !x.done_at && !x.skipped),
     // The recipes of mastery weeks: the player says "cook it on your own" (§12.4).
@@ -1273,6 +1316,8 @@ export function register(on) {
         const lessons = await courseLessons(env, c, fam);
         out.push({
           id: c.id, name: c.name, start_date: c.start_date, per_week: c.per_week, archived_at: c.archived_at, program: c.program, parts: c.parts, starts: plan.starts,
+          // Each learner's step pictures (14e): their pick, else the Level's way.
+          pictures: Object.fromEntries((await courseProfiles(env, c)).map((pid) => [pid, picturesFor(c, pid)])), pictures_default: picturesDefault(c.program),
           // changed: a week the parent picked or skipped, which keeps its recipe whatever the course starts with (14c).
           profile_ids: await courseProfiles(env, c), plan: plan.weeks.map((x) => ({ id: x.id, week: x.week, removed: Boolean(x.removed), changed: x.changed, ...(x.blocked ? { blocked: x.blocked } : {}) })),
           usable: lessons.usable.length, unwritten: lessons.unwritten, hidden: lessons.hidden,
@@ -1340,8 +1385,9 @@ export function register(on) {
     }
     // What each week starts with (14c): the parent's, or for a new course the preset from "how adventurous".
     const starts = !program ? null : body.starts !== undefined ? startsInput(body.starts) : course ? null : await familyPreset(env, s.family_id);
+    const pictures = program && body.pictures !== undefined ? picturesInput(body.pictures, pids) : null;
     return {
-      per, start: weekOf(body.start_date), pids, name, program, parts, starts,
+      per, start: weekOf(body.start_date), pids, name, program, parts, starts, pictures,
       plan: program || body.plan === undefined ? null : planInput(body.plan),
       weeks: program && body.weeks !== undefined ? body.weeks : null,
     };
@@ -1372,7 +1418,8 @@ export function register(on) {
           ...(await levelPicksFor(env, s.family_id, course, v))]
         : planStatements(env, course, v.plan ?? (await defaultFor(env, s.family_id, v.pids)))),
     ]);
-    return { ok: true, id: course.id };
+    const saved = v.pictures ? await savePictures(env, course, v.program, v.pictures) : true;
+    return { ok: true, id: course.id, ...(saved ? {} : { pictures_saved: false }) };
   });
 
   // A new Level course's rows (14c): only the weeks the parent picked a
@@ -1409,7 +1456,8 @@ export function register(on) {
         ...v.pids.map((pid) => env.DB.prepare('INSERT INTO queue_profiles (queue_id, family_id, profile_id) VALUES (?, ?, ?)').bind(r.id, s.family_id, pid)),
       ]),
     ]);
-    return { ok: true };
+    const saved = v.pictures ? await savePictures(env, course, course.program, v.pictures) : true;
+    return { ok: true, ...(saved ? {} : { pictures_saved: false }) };
   });
 
 

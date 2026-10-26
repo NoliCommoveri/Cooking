@@ -16,7 +16,7 @@ const types = (s) => [].concat(s.type ?? []);
 const LABELS = {
   totalMinutes: 'Total time (minutes)', timerSeconds: 'Timer (seconds)', timerLabel: 'Timer name', prereqs: 'Prerequisites (lessons that come first)',
   why: 'Why cards', wrong: 'If it goes wrong', quiz: 'Quiz', move: 'The move', callback: 'Callback to an earlier lesson', look: 'Should look like',
-  tip: 'Tip', handles: 'Handles raw', hazard: 'Hazard (what an adult profile sees)', safety: 'Safety level', q: 'Question', explain: 'Explanation',
+  tip: 'Tip', picture: 'Step picture (steps/<lesson>/<name>.png)', handles: 'Handles raw', hazard: 'Hazard (what an adult profile sees)', safety: 'Safety level', q: 'Question', explain: 'Explanation',
   sign: 'What you see', fix: 'What to do', baseUnit: 'Base unit', purchaseUnit: 'Store package', animalSource: 'Animal it comes from',
   animalPart: 'Part of the animal', rawHandling: 'Raw handling', countLabel: 'Count words', watch: 'Watch note', idea: 'The idea',
   taughtIn: 'Taught in (lesson)', byWeight: 'Sold by weight', many: 'Plural', one: 'Singular', perishable: 'Perishable', pickOne: 'Pick-one group',

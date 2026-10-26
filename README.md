@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [220. 2026-10-26 — Level week numbers on recipe cards; more 14e calls](docs/build-log.md#220-2026-10-26--level-week-numbers-on-recipe-cards-more-14e-calls)
+**Latest build log entry:** [221. 2026-10-26 — Re-plan build, 14e: step pictures and Show me](docs/build-log.md#221-2026-10-26--re-plan-build-14e-step-pictures-and-show-me)
 
 ## Current features
 
@@ -67,6 +67,8 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Level progress** (release 1): a Level learner's own progress tab (the weeks bar, hours toward the Level's total, units as chapters or passport pages with a crest or visa stamp, and My cooking collection), level-ups for units mastered, and the completion certificate; the Level's weeks and part rows on Progress, its CSV, and the transcript.
 - **A Level week's dish** (release 1): the course's start slot's dish, or the other when the diet settings or a missing tool rule it out or only the other is written; preferences never pick it. The parent changes a week in the course editor or with Swap recipe.
 - **Cook this instead** (release 1): the kitchen's week card and the parent's course card show both dishes; a learner or parent swaps the week for the whole course, with Undo (not on the Sabbath); after a shopping list, the preview for the new dish with the old list's items preselected.
+- **Step pictures** (release 1 for the setting): a lesson step can have a picture, shown under the step or behind Show me; each learner on a Level course is set to the Level's way (Level 2 under each step, Level 3 and 4 behind Show me) or the parent's pick.
+- **Level week numbers** (release 1): a Level learner's recipe cards say the course's week ("Level 3 Cook · Week 4"), never Cook Around the World's lesson numbers.
 - **Weeks the settings rule out** (release 1): when both dishes are ruled out, the week waits and the course card says why, with Check settings, Request a replacement, Go on to the next week, and Change; the learner's kitchen shows Show a parent. Requests are counted on Recipe gaps.
 - **The kitchen's Level week** (release 1): this week's recipe and its drill, knowledge, and Beyond the Recipe pages, each checked off with Done (not on the Sabbath); parts still open from earlier weeks; the parent's Take back; and a mastery week's "cook it on your own" and "Why did it work?".
 - **Content linter** (`tools/lint-content.js`): checks every lesson against the food rules, including the unclean-food block, the food-safety steps, and scaling. Runs on every push, on every save from the manager section, and in the browser as the owner edits.

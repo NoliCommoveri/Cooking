@@ -13,7 +13,7 @@ import { tagProblems, missingTags, meatProtein } from './tastes.js';
 import { applyVariation, changesSomething, staleKeys } from './variations.js';
 
 // Fields that hold ids or codes, not words a kid reads.
-const CODE_FIELDS = new Set(['id', 'image', 'cuisine', 'ingredient', 'use', 'for', 'unit', 'why', 'glyph', 'reason',
+const CODE_FIELDS = new Set(['id', 'image', 'picture', 'cuisine', 'ingredient', 'use', 'for', 'unit', 'why', 'glyph', 'reason',
   'handles', 'skills', 'equipment', 'track', 'safety', 'type', 'mode', 'music', 'round', 'section', 'baseUnit', 'region', 'category']);
 const RAW_NEEDS_TEMP = ['poultry', 'meat', 'fish'];
 const PLACEHOLDER = /\{(n|qty):([a-z0-9-]+)\}/g;
@@ -110,6 +110,8 @@ export function lint(c) {
     for (const s of L.skills) if (!SK[s]) e(`skill "${s}" doesn't exist in skills.json`);
     for (const q of L.equipment) if (!EQ[q]) e(`equipment "${q}" doesn't exist in equipment.json`);
     if (c.imageExists && !c.imageExists(L.image)) e(`image ${L.image} isn't in content/images/`);
+    // Step pictures (14e) live in content/images/steps/<lesson>/.
+    for (const s of L.steps) if (s.picture && c.imageExists && !c.imageExists(s.picture)) e(`step ${s.id}: picture ${s.picture} isn't in content/images/`);
     for (const p of L.prereqs) if (!prereqOk(p)) e(`prerequisite "${p}" isn't a dish or pick-one group in course.json`);
     if (L.learn.callback && !byId[L.learn.callback.lesson]) e(`callback points to "${L.learn.callback.lesson}", which isn't a written lesson`);
     if (L.learn.callback && L.learn.callback.lesson === L.id) e('callback points to itself');
