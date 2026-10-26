@@ -6252,3 +6252,34 @@ proposals).
 - Screenshots (a part page's Watch for box, phone width, both themes) sent in
   the session.
 - Tests: 393.
+
+## 241. 2026-10-26 — US units in Level recipes; label notes shown; capitalized pronouns for God
+
+Owner, 2026-10-26: "Sure you can show the warnings." "Go through the parts
+pages and make sure everywhere you use 'He' to refer to God, it is
+capitalized." "Dude you can't show ingredients in grams these are all us
+users."
+
+- **Before:** an ingredient's label note (`watch` in `ingredients.json`, e.g.
+  "Check the label for lard") was read only by the content check; no screen
+  showed it. Level 4's recipes (Units 1 to 3) gave meat and fish in grams and
+  cuts in centimeters and millimeters, and Level 3 and 4 pages priced and
+  weighed in grams and kilograms. Some part pages used "he", "his", and "him"
+  for God and Jesus.
+- **Now:**
+  - **Label notes** show under the ingredient in the player's prep list (both
+    themes) and on the shopping list in the store. The beef tacos (Level 2,
+    week 8) now point to them instead of naming the fat themselves.
+  - **US units everywhere a family reads:** 29 ingredient lines from grams to
+    pounds and ounces; every metric cut, depth, and volume in steps, tips, Why
+    cards, quizzes, and part pages to inches, quarts, pounds, and ounces, with
+    the yield and cost math redone in pounds (sample prices per pound). The
+    kitchen scale is "Kitchen scale", not "(grams)". Level 4's week 2 skill is
+    "Weighing and finding the yield".
+  - **Pronouns for God and Jesus** are capitalized on the part pages (He,
+    His, Him, Himself), outside quoted Scripture, which keeps the ESV's
+    wording. Pronouns for people (Boaz, Daniel, Abraham, Paul, Peter) stay
+    lowercase.
+- Screenshots (the prep list in both themes, the shopping list light and
+  dark, phone width) sent in the session.
+- Tests: 401.

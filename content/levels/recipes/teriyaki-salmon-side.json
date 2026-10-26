@@ -25,7 +25,7 @@
     "why": [
       { "id": "pin-bones", "title": "Pin bones first", "body": "Pin bones run in a line through the thick front half of the side. With the skin still on, the flesh holds firm while you pull each one out with tweezers, toward the head end." },
       { "id": "skin", "title": "Skin it in one pass", "body": "Start at the tail end. Cut down to the skin, angle the blade flat against it, and grip the skin tail with a paper towel. Pull the skin toward you while the knife moves in small sawing strokes the other way, so the knife barely travels." },
-      { "id": "portion", "title": "Portion by weight", "body": "The front of a side is thick and the tail is thin. Cutting by weight, about 150 grams each, with wider pieces at the tail and narrower at the head, gives portions that cook in the same time." },
+      { "id": "portion", "title": "Portion by weight", "body": "The front of a side is thick and the tail is thin. Cutting by weight, about 5 ounces each, with wider pieces at the tail and narrower at the head, gives portions that cook in the same time." },
       { "id": "glaze", "title": "Reduce the glaze first", "body": "Soy, mirin, and honey cooked down in a saucepan until syrupy cling to the fish. Brushed on thin, they burn before reducing; reduced first, they only need to set in the oven." },
       { "id": "145", "title": "Fish at 145°F", "body": "The app's standard for fish is 145°F in the thickest part. Salmon at 145°F is opaque and flakes; pull it as soon as it gets there." }
     ],
@@ -42,7 +42,7 @@
     ]
   },
   "ingredients": [
-    { "ingredient": "salmon-side", "amount": 1100, "unit": "g", "group": "Salmon" },
+    { "ingredient": "salmon-side", "amount": 2.5, "unit": "lb", "group": "Salmon" },
     { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Salmon" },
     { "ingredient": "soy-sauce", "amount": 0.33, "unit": "cup", "group": "Teriyaki glaze" },
     { "ingredient": "mirin", "amount": 0.33, "unit": "cup", "group": "Teriyaki glaze" },
@@ -80,7 +80,7 @@
     { "id": "glaze", "text": "Grate the ginger and garlic into the light saucepan with the soy sauce, mirin, and honey. Simmer until syrupy and reduced by about half.", "safety": "solo", "hazard": "Hot pan", "timerSeconds": 480, "timerLabel": "Reduce glaze", "why": "glaze", "look": "It coats a spoon." },
     { "id": "bones", "text": "Lay the side skin down on the board. Feel along the thick half and pull each pin bone with the tweezers, toward the head end.", "safety": "solo", "hazard": "Raw fish", "why": "pin-bones" },
     { "id": "skin", "text": "Skin the side from the tail end, holding the skin with a paper towel and keeping the blade flat. Throw the skin away.", "safety": "solo", "hazard": "Sharp knife, raw fish", "why": "skin" },
-    { "id": "portion", "text": "Cut the side into 6 portions of about 150 grams, weighing each, wider at the tail. Fold any thin tail piece under. Season with the salt and lay them on the pan.", "safety": "solo", "hazard": "Sharp knife, raw fish", "handles": ["salmon-side"], "why": "portion", "look": "Six portions within about 15 grams of each other." },
+    { "id": "portion", "text": "Cut the side into 6 portions of about 5 ounces, weighing each, wider at the tail. Fold any thin tail piece under. Season with the salt and lay them on the pan.", "safety": "solo", "hazard": "Sharp knife, raw fish", "handles": ["salmon-side"], "why": "portion", "look": "Six portions within about ½ ounce of each other." },
     { "id": "wash-portion", "text": "Wash your hands, the knife, the tweezers, and the board with hot, soapy water.", "safety": "solo", "type": "wash", "hazard": "Raw fish" },
     { "id": "roast", "text": "Roast the salmon, then brush the tops with half the glaze and roast until set.", "safety": "solo", "hazard": "Hot oven", "timerSeconds": 720, "timerLabel": "Roast salmon" },
     { "id": "check", "text": "Check the thickest portion from the side: at least 145°F.", "safety": "solo", "type": "doneness", "hazard": "Hot oven", "target": { "temp": 145, "unit": "F" }, "why": "145" },

@@ -23,7 +23,7 @@
       "body": "Ensaladilla rusa is on the counter of nearly every tapas bar in Spain: potatoes, carrots, peas, and tuna, bound in mayonnaise and served cold. What makes it is the mayonnaise, made by hand from pasteurized yolks cooked to 160°F and built drop by drop into an emulsion."
     },
     "why": [
-      { "id": "even-dice", "title": "One size, one pot", "body": "Potatoes cut to 1 cm and carrots to 6 mm finish together in the same water: the denser carrot is cut smaller. The peas only need the last minute." },
+      { "id": "even-dice", "title": "One size, one pot", "body": "Potatoes cut to ⅜ inch and carrots to ¼ inch finish together in the same water: the denser carrot is cut smaller. The peas only need the last minute." },
       { "id": "cold-start", "title": "Cold water start", "body": "Potatoes started in cold, salted water heat through evenly, so the outside doesn't fall apart before the center is tender. The salt seasons them all the way through." },
       { "id": "steam-dry", "title": "Steam them dry", "body": "Spread on a sheet pan, hot vegetables give off their surface water as steam. Dry vegetables hold the mayonnaise; wet ones thin it and make the salad weep." },
       { "id": "yolk-160", "title": "Yolks to 160°F", "body": "Pasteurized eggs are heat-treated in the shell, and the USDA says they can be used raw. This app cooks every egg to 160°F. Yolks whisked with lemon juice over gentle steam thicken at that point, and once cooled they emulsify oil just as raw yolks do." },
@@ -44,10 +44,10 @@
     ]
   },
   "ingredients": [
-    { "ingredient": "potato-russet", "amount": 3, "unit": "count", "round": "up", "prep": "about 700 g", "group": "Vegetables" },
+    { "ingredient": "potato-russet", "amount": 3, "unit": "count", "round": "up", "prep": "about 1½ lb", "group": "Vegetables" },
     { "ingredient": "carrot", "amount": 2, "unit": "count", "round": "up", "group": "Vegetables" },
     { "ingredient": "salt", "amount": 1, "unit": "tbsp", "group": "Vegetables" },
-    { "ingredient": "peas-frozen", "amount": 150, "unit": "g", "group": "Vegetables" },
+    { "ingredient": "peas-frozen", "amount": 5, "unit": "oz", "group": "Vegetables" },
     { "ingredient": "tuna-canned", "amount": 2, "unit": "can", "round": "up", "prep": "drained", "group": "Vegetables" },
     { "ingredient": "egg-pasteurized", "amount": 2, "unit": "count", "prep": "yolks only", "group": "Mayonnaise" },
     { "ingredient": "lemon", "amount": 1, "unit": "count", "round": "up", "prep": "juiced", "group": "Mayonnaise" },
@@ -56,7 +56,7 @@
     { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Mayonnaise" },
     { "ingredient": "vegetable-oil", "amount": 0.5, "unit": "cup", "group": "Mayonnaise" },
     { "ingredient": "olive-oil", "amount": 0.25, "unit": "cup", "group": "Mayonnaise" },
-    { "ingredient": "roasted-red-peppers", "amount": 60, "unit": "g", "group": "To finish" },
+    { "ingredient": "roasted-red-peppers", "amount": 2, "unit": "oz", "group": "To finish" },
     { "ingredient": "olives-green", "amount": 0.25, "unit": "cup", "group": "To finish" }
   ],
   "equipment": [
@@ -80,10 +80,10 @@
   ],
   "steps": [
     { "id": "dice", "text": "Peel the potatoes and carrots. Cut the potatoes into 1-cm dice and the carrots into 6-mm dice.", "safety": "solo", "hazard": "Sharp knife, peeler", "why": "even-dice" },
-    { "id": "boil", "text": "Put the potatoes and carrots in the pot with the vegetables' salt and cold water to cover by 3 cm. Bring to a boil, then simmer.", "safety": "solo", "hazard": "Boiling water", "why": "cold-start", "timerSeconds": 420, "timerLabel": "Simmer" },
+    { "id": "boil", "text": "Put the potatoes and carrots in the pot with the vegetables' salt and cold water to cover by 1 inch. Bring to a boil, then simmer.", "safety": "solo", "hazard": "Boiling water", "why": "cold-start", "timerSeconds": 420, "timerLabel": "Simmer" },
     { "id": "peas", "text": "Add the peas and cook until a knife slides into a potato cube with no push.", "safety": "solo", "hazard": "Boiling water", "timerSeconds": 60, "timerLabel": "Peas" },
     { "id": "dry", "text": "Drain, then spread the vegetables on the sheet pan to steam dry and cool to room temperature.", "safety": "solo", "hazard": "Steam", "why": "steam-dry", "timerSeconds": 1200, "timerLabel": "Cool" },
-    { "id": "water-on", "text": "Bring 3 cm of water to a bare simmer in the saucepan for the yolks.", "safety": "solo", "hazard": "Hot water" },
+    { "id": "water-on", "text": "Bring 1 inch of water to a bare simmer in the saucepan for the yolks.", "safety": "solo", "hazard": "Hot water" },
     { "id": "separate", "text": "Separate the eggs, dropping the yolks into the heatproof bowl. Keep the whites for another use.", "safety": "solo", "hazard": "Raw egg", "handles": ["egg-pasteurized"] },
     { "id": "wash-yolks", "type": "wash", "text": "Wash your hands and wipe the counter.", "safety": "solo", "hazard": "Raw egg" },
     { "id": "cook-yolks", "text": "Whisk the lemon juice and the mayonnaise's water into the yolks. Set the bowl over the water and whisk constantly until it thickens and holds a trail.", "safety": "solo", "hazard": "Steam, hot bowl", "why": "yolk-160", "timerSeconds": 120, "timerLabel": "Yolks" },

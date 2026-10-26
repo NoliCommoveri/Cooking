@@ -69,6 +69,7 @@
 .q-slot{display:grid;justify-items:center;align-content:start;gap:4px;padding:12px 6px 10px;min-height:124px;border:0;background:var(--q-deep);box-shadow:inset 0 0 0 3px var(--q-edge);color:var(--q-text);clip-path:polygon(6px 0,calc(100% - 6px) 0,100% 6px,100% calc(100% - 6px),calc(100% - 6px) 100%,6px 100%,0 calc(100% - 6px),0 6px)}
 .q-slot .ii{width:52px;height:52px;filter:grayscale(1) brightness(.45) contrast(1.4);opacity:.6}
 .q-slot .nm{font-weight:800;font-size:15px;line-height:1.1;text-align:center}
+.q-slot .watchnote{display:block;font-size:12px;font-weight:600;line-height:1.2;text-align:center;opacity:.85}
 .q-slot .amt{font-size:13px;color:var(--q-dim);line-height:1.15;text-align:center}
 .q-slot.on{background:#1F3A4A;animation:glow 2.4s ease-in-out infinite}
 .q-slot.on .ii{filter:none;opacity:1}

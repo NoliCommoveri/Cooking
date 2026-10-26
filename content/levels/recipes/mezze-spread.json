@@ -44,7 +44,7 @@
     ]
   },
   "ingredients": [
-    { "ingredient": "chickpeas-dried", "amount": 200, "unit": "g", "group": "Hummus" },
+    { "ingredient": "chickpeas-dried", "amount": 7, "unit": "oz", "group": "Hummus" },
     { "ingredient": "baking-soda", "amount": 0.5, "unit": "tsp", "group": "Hummus" },
     { "ingredient": "tahini", "amount": 0.3333, "unit": "cup", "group": "Hummus" },
     { "ingredient": "lemon", "amount": 1, "unit": "count", "round": "up", "prep": "juiced", "group": "Hummus" },
@@ -96,11 +96,11 @@
     "thermometer"
   ],
   "steps": [
-    { "id": "soak", "text": "The night before, weigh the chickpeas, pick out any stones, and cover them with 5 cm of cold water in the large bowl. Leave them to soak overnight.", "safety": "solo", "why": "soak" },
-    { "id": "simmer", "text": "Drain the chickpeas, cover them by 5 cm with fresh water in the pot, and add the baking soda. Bring to a boil, skim the foam, and simmer partly covered.", "safety": "solo", "hazard": "Boiling water", "why": "soak", "timerSeconds": 3600, "timerLabel": "Chickpeas" },
+    { "id": "soak", "text": "The night before, weigh the chickpeas, pick out any stones, and cover them with 2 inches of cold water in the large bowl. Leave them to soak overnight.", "safety": "solo", "why": "soak" },
+    { "id": "simmer", "text": "Drain the chickpeas, cover them by 2 inches with fresh water in the pot, and add the baking soda. Bring to a boil, skim the foam, and simmer partly covered.", "safety": "solo", "hazard": "Boiling water", "why": "soak", "timerSeconds": 3600, "timerLabel": "Chickpeas" },
     { "id": "oven", "text": "While they simmer, heat the oven to 475°F. Prick the eggplants all over with a fork and roast them on a foil-lined sheet pan, turning once, until collapsed.", "safety": "solo", "hazard": "Hot oven", "why": "char", "timerSeconds": 2400, "timerLabel": "Eggplant" },
     { "id": "bulgur", "text": "Bring ⅓ cup of water to a boil in the saucepan, pour it over the bulgur in the small bowl, and cover.", "safety": "solo", "hazard": "Boiling water", "timerSeconds": 1200, "timerLabel": "Bulgur" },
-    { "id": "tabbouleh-cut", "text": "Mince the parsley and mint fine, dice the tomatoes at 6 mm, and slice the green onions thin. Combine in the medium bowl.", "safety": "solo", "hazard": "Sharp knife", "look": "Herbs the size of a grain of rice, bright green, no paste." },
+    { "id": "tabbouleh-cut", "text": "Mince the parsley and mint fine, dice the tomatoes at ¼ inch, and slice the green onions thin. Combine in the medium bowl.", "safety": "solo", "hazard": "Sharp knife", "look": "Herbs the size of a grain of rice, bright green, no paste." },
     { "id": "chickpeas-done", "text": "Check the chickpeas: one should crush to a paste between your fingers. Simmer longer if not. Drain, saving 1 cup of the liquid.", "safety": "solo", "hazard": "Hot water" },
     { "id": "cool-chickpeas", "text": "Spread the chickpeas on a sheet pan to cool. Probe them and write down the time; they must reach 70°F within 2 hours.", "safety": "solo", "hazard": "Hot pan", "why": "two-stage" },
     { "id": "eggplant-out", "text": "Take out the eggplant and turn off the oven. When you can handle it, split it, scoop the flesh into the colander, and let it drain.", "safety": "solo", "hazard": "Hot pan, steam", "why": "drain", "timerSeconds": 600, "timerLabel": "Drain" },

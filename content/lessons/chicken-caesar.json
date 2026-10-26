@@ -199,7 +199,7 @@
           { "id": "l4-emulsify", "text": "Whisk in the dressing's oils drop by drop for the first quarter, then in a thin stream, until thick and glossy.", "safety": "solo", "why": "creamy", "look": "Thick enough to hold a ribbon on the surface for a second." },
           { "id": "l4-finish", "text": "Whisk in the dressing's parmesan, then water a teaspoon at a time until it pours slowly. Taste and adjust with lemon and salt.", "safety": "solo" },
           { "id": "l4-lettuce", "text": "Wash and dry the romaine, and cut it across into 2.5-cm ribbons.", "safety": "solo", "hazard": "Sharp knife", "why": "dry-leaves" },
-          { "id": "l4-slice", "text": "Slice the chicken across the grain, 1 cm thick.", "safety": "solo", "hazard": "Sharp knife" },
+          { "id": "l4-slice", "text": "Slice the chicken across the grain, ⅜ inch thick.", "safety": "solo", "hazard": "Sharp knife" },
           { "id": "l4-toss", "text": "Toss the romaine with two thirds of the dressing just before serving. Top with the chicken, croutons, and remaining parmesan, and pass the rest of the dressing.", "safety": "solo", "tip": "Refrigerate leftover dressing and use it within 4 days." }
         ]
       }

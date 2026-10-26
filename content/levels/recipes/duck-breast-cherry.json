@@ -23,7 +23,7 @@
       "body": "A French bistro classic: duck breasts scored through the skin, started in a cold pan, and cooked slowly skin side down until the fat melts away and the skin turns thin and crisp. The fat is saved to roast potatoes, and the pan becomes a cherry and balsamic sauce, reduced until glossy. The duck is sliced thin across the grain."
     },
     "why": [
-      { "id": "score", "title": "Score the skin, not the meat", "body": "Duck skin sits on a thick layer of fat. A crosshatch cut 1 centimeter apart, through the skin and fat but not into the meat, lets the fat run out as it melts and keeps the skin from curling." },
+      { "id": "score", "title": "Score the skin, not the meat", "body": "Duck skin sits on a thick layer of fat. A crosshatch cut ⅜ inch apart, through the skin and fat but not into the meat, lets the fat run out as it melts and keeps the skin from curling." },
       { "id": "cold-pan", "title": "Start in a cold pan", "body": "A cold pan heats slowly, so the fat melts out before the skin browns. Started in a hot pan, the skin burns while the fat underneath stays thick and chewy." },
       { "id": "save-fat", "title": "Save the fat", "body": "Rendered duck fat is clean-tasting and stands up to high heat. Pour it off as it collects, into a heatproof bowl, and roast the potatoes in it." },
       { "id": "165", "title": "Duck at 165°F", "body": "Restaurants often serve duck breast pink, at about 135°F. This app follows the USDA standard for all poultry, 165°F, so the breast finishes in the oven and is sliced thin to keep it tender." },
@@ -43,10 +43,10 @@
     ]
   },
   "ingredients": [
-    { "ingredient": "duck-breast", "amount": 900, "unit": "g", "group": "Duck", "prep": "4 breasts" },
+    { "ingredient": "duck-breast", "amount": 2, "unit": "lb", "group": "Duck", "prep": "4 breasts" },
     { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Duck" },
     { "ingredient": "black-pepper", "amount": 0.5, "unit": "tsp", "group": "Duck" },
-    { "ingredient": "potato-baby", "amount": 680, "unit": "g", "group": "Potatoes" },
+    { "ingredient": "potato-baby", "amount": 1.5, "unit": "lb", "group": "Potatoes" },
     { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Potatoes" },
     { "ingredient": "onion-red", "amount": 0.5, "unit": "count", "group": "Cherry sauce", "round": "up" },
     { "ingredient": "thyme-dried", "amount": 0.5, "unit": "tsp", "group": "Cherry sauce" },
@@ -77,7 +77,7 @@
   "steps": [
     { "id": "oven", "text": "Heat the oven to 400°F with a rack in the middle.", "safety": "solo", "hazard": "Hot oven" },
     { "id": "potatoes", "text": "Halve the potatoes and put them on the sheet pan.", "safety": "solo", "hazard": "Sharp knife" },
-    { "id": "score", "text": "Pat the duck dry. Score the skin in a crosshatch 1 centimeter apart, through the fat but not into the meat. Season both sides with the duck's salt and pepper.", "safety": "solo", "hazard": "Sharp knife, raw poultry", "handles": ["duck-breast"], "why": "score", "look": "A diamond pattern; no red meat showing in the cuts." },
+    { "id": "score", "text": "Pat the duck dry. Score the skin in a crosshatch ⅜ inch apart, through the fat but not into the meat. Season both sides with the duck's salt and pepper.", "safety": "solo", "hazard": "Sharp knife, raw poultry", "handles": ["duck-breast"], "why": "score", "look": "A diamond pattern; no red meat showing in the cuts." },
     { "id": "wash-score", "text": "Throw the paper towels away. Wash your hands, the knife, and the board with hot, soapy water.", "safety": "solo", "type": "wash", "hazard": "Raw poultry" },
     { "id": "render", "text": "Lay the breasts skin side down in the cold skillet with the tongs. Set it over medium-low heat.", "safety": "solo", "hazard": "Hot fat", "handles": ["duck-breast"], "why": "cold-pan" },
     { "id": "wash-render", "text": "Wash the tongs and your hands.", "safety": "solo", "type": "wash", "hazard": "Hot stove" },
@@ -88,7 +88,7 @@
     { "id": "rest", "text": "Rest the duck on the board, skin side up.", "safety": "solo", "timerSeconds": 300, "timerLabel": "Rest" },
     { "id": "sauce", "text": "Pour off all but 1 tablespoon of fat from the skillet. Mince the onion and cook it over medium heat until soft, then add the thyme, broth, balsamic, cherries, and honey.", "safety": "solo", "hazard": "Hot pan", "timerSeconds": 180, "timerLabel": "Onion", "why": "reduce" },
     { "id": "reduce", "text": "Simmer until the sauce coats a spoon. Turn off the heat, swirl in the butter, and season with the sauce's salt.", "safety": "solo", "hazard": "Hot pan", "timerSeconds": 360, "timerLabel": "Reduce", "look": "Glossy; a line drawn through it on the spoon holds." },
-    { "id": "slice", "text": "Slice the duck 5 millimeters thick across the grain, on a slight angle.", "safety": "solo", "hazard": "Sharp knife", "why": "grain" },
+    { "id": "slice", "text": "Slice the duck ¼ inch thick across the grain, on a slight angle.", "safety": "solo", "hazard": "Sharp knife", "why": "grain" },
     { "id": "serve", "text": "Fan the slices on plates with the potatoes and spoon the cherry sauce over.", "safety": "solo" }
   ]
 }

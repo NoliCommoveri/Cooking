@@ -26,7 +26,7 @@
       { "id": "silverskin", "title": "Silverskin doesn't melt", "body": "The thin, shiny membrane on the surface of a flank steak tightens and turns rubbery in the pan. Slide the knife tip under it, angle the blade up, and pull it away in strips." },
       { "id": "dry-sear", "title": "Dry, then hot", "body": "Pat the steak completely dry and get the pan smoking before it goes in. Surface water has to boil off before browning can start; a dry steak in a hot pan browns in minutes." },
       { "id": "rest", "title": "Rest before slicing", "body": "Hot meat's juices are under pressure. Ten minutes on the board lets them settle back into the fibers, so they stay in the slices instead of running across the board." },
-      { "id": "grain", "title": "Across the grain, on an angle", "body": "Flank's long fibers run the length of the steak. Slicing across them, 5 millimeters thick, on a 45° angle, cuts each fiber short, so every slice is tender." },
+      { "id": "grain", "title": "Across the grain, on an angle", "body": "Flank's long fibers run the length of the steak. Slicing across them, ¼ inch thick, on a 45° angle, cuts each fiber short, so every slice is tender." },
       { "id": "145", "title": "Whole cuts at 145°F", "body": "The app's standard for a whole cut of beef is 145°F, which is medium. A seared whole cut is a smaller risk than ground meat, since its inside was never exposed, but this app still asks for 145°F." }
     ],
     "wrong": [
@@ -42,11 +42,11 @@
     ]
   },
   "ingredients": [
-    { "ingredient": "beef-flank", "amount": 680, "unit": "g", "group": "Steak" },
+    { "ingredient": "beef-flank", "amount": 1.5, "unit": "lb", "group": "Steak" },
     { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Steak" },
     { "ingredient": "black-pepper", "amount": 0.5, "unit": "tsp", "group": "Steak" },
     { "ingredient": "vegetable-oil", "amount": 1, "unit": "tbsp", "group": "Steak" },
-    { "ingredient": "potato-baby", "amount": 680, "unit": "g", "group": "Potatoes" },
+    { "ingredient": "potato-baby", "amount": 1.5, "unit": "lb", "group": "Potatoes" },
     { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp", "group": "Potatoes" },
     { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Potatoes" },
     { "ingredient": "parsley", "amount": 1, "unit": "cup", "group": "Herb sauce", "prep": "leaves" },
@@ -83,7 +83,7 @@
     { "id": "cook", "text": "Sear without moving until a dark crust forms, then turn and sear the other side.", "safety": "solo", "hazard": "Hot pan", "timerSeconds": 480, "timerLabel": "Sear, 4 min a side", "look": "A deep brown crust on both sides." },
     { "id": "check", "text": "Check the thickest part from the side: at least 145°F. If not, turn and cook 1 minute more.", "safety": "solo", "type": "doneness", "hazard": "Hot pan", "target": { "temp": 145, "unit": "F" }, "why": "145" },
     { "id": "rest", "text": "Move the steak to the clean board and rest it.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Rest", "why": "rest" },
-    { "id": "slice", "text": "Find the grain. Slice across it, 5 millimeters thick, with the knife at a 45° angle.", "safety": "solo", "hazard": "Sharp knife", "why": "grain", "look": "Short fibers on each slice's cut face." },
+    { "id": "slice", "text": "Find the grain. Slice across it, ¼ inch thick, with the knife at a 45° angle.", "safety": "solo", "hazard": "Sharp knife", "why": "grain", "look": "Short fibers on each slice's cut face." },
     { "id": "serve", "text": "Fan the slices on a platter with the potatoes, and spoon the herb sauce over.", "safety": "solo", "hazard": "Hot pan" }
   ]
 }

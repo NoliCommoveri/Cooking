@@ -2624,7 +2624,7 @@ const swapShoppingPreview = parentOnly(async (cid, lessonId, from) => {
 
 // The list, in the store: tap to check off, saved as it's tapped.
 const shoppingListView = parentOnly(async (lid, flash) => {
-  const { list: l } = await api('GET', `/api/shopping/lists/${lid}`);
+  const [{ list: l }, { ingredients: ING }] = await Promise.all([api('GET', `/api/shopping/lists/${lid}`), contentRegistry()]);
   const again = (msg, undo) => shoppingListView(lid, el('p', { class: 'ok flash', role: 'status' }, msg, ' ',
     undo ? el('button', { type: 'button', class: 'hbtn link', onclick: async () => { await undo(); shoppingListView(lid); } }, 'Undo') : null));
   const all = [...l.sections.flatMap((s) => s.items), ...l.may_have];
@@ -2635,7 +2635,9 @@ const shoppingListView = parentOnly(async (lid, flash) => {
   const row = (x) => {
     const b = el('button', { type: 'button', class: 'pitem', 'aria-pressed': String(checked.has(x.id)) },
       el('span', { class: 'bx' }, art('<svg aria-hidden="true"><use href="/icons.svg#i-check"/></svg>')),
-      el('span', { class: 'nm' }, x.name, el('small', {}, [x.from.join(' · '), x.optional ? 'optional' : null].filter(Boolean).join(' · '))),
+      el('span', { class: 'nm' }, x.name, el('small', {}, [x.from.join(' · '), x.optional ? 'optional' : null].filter(Boolean).join(' · ')),
+        // Its label note (§2.1): what to check on the package in the store.
+        ING[x.id]?.watch ? el('small', { class: 'watchnote' }, ING[x.id].watch) : null),
       el('span', { class: 'q' }, x.buy ?? '', x.used && x.used !== x.buy ? el('small', {}, x.buy ? `The recipes use ${x.used}` : x.used) : null));
     b.addEventListener('click', async () => {
       const on = !checked.has(x.id);

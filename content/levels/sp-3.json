@@ -190,7 +190,7 @@
           "Then add up the active time: the minutes your hands are busy. In vegetable lo mein, the julienne might take you 20 minutes this week, but the stove part is under 6. If the noodles were cooked before the knife work started, they'd sit and go gummy. So the order is: water on, sauce mixed, vegetables cut, then noodles, then the pan.",
           "Work backward from when you want to eat. If dinner is at 6:00 and the recipe has 45 minutes of work and waiting, you start at 5:15, or 5:00 if you're new to the cut. Beginners are always slower than a recipe's time, and that's expected.",
           "A prep list turns all that into a plan. Write each job on its own line in the order you'll do it, with a time beside the long ones: \"5:00 water on (12 min). 5:02 mix sauce. 5:05 julienne carrots and peppers (20 min). 5:25 noodles in (3 min).\" Cooks call having everything cut, measured, and ready before the heat goes on mise en place, French for \"everything in its place\". The prep list is how you get there.",
-          "Now the scale. A cup measures space, not how much food is in it. Scoop a cup of flour straight from the bag and it can weigh 150 grams; spoon it in lightly and it can be 120. That's a 25% difference from the same cup, enough to make bread dry or cookies spread. A scale reads 125 grams every time.",
+          "Now the scale. A cup measures space, not how much food is in it. Scoop a cup of flour straight from the bag and it can weigh 5¼ ounces; spoon it in lightly and it can be 4¼. That's a 25% difference from the same cup, enough to make bread dry or cookies spread. A scale reads the same weight every time.",
           "Weighing is also faster and cleaner. Set a bowl on the scale, press tare (or zero) so the bowl counts as nothing, and pour in the first ingredient. Press tare again and add the next. One bowl, no measuring cups to wash.",
           "This week's drill weighs your trim, the peels, ends, and cores you cut away. Weighing it is how cooks measure waste: a careful julienne leaves less on the board, and over a year that's real food and money. This week's Beyond the Recipe, on gleaning, asks the same question from the other side: what's left over, and who can use it?"
         ],
@@ -199,8 +199,8 @@
           { "q": "What is active time?", "choices": ["The minutes your hands are busy", "The time on the stove", "The time the food rests"], "answer": 0, "explain": "Waiting time doesn't need your hands." },
           { "q": "Dinner is at 6:00 and a recipe takes 45 minutes. When do you start?", "choices": ["5:15, or earlier if the cut is new to you", "5:45", "6:00"], "answer": 0, "explain": "Work backward from when you want to eat, and leave room for being new." },
           { "q": "What does mise en place mean?", "choices": ["Everything in its place, cut and measured before the heat goes on", "Clean as you go", "Cook in the right order"], "answer": 0, "explain": "The prep list is how you get there." },
-          { "q": "Why can a cup of flour be wrong?", "choices": ["How it's scooped changes how much is in the cup", "Cups shrink in the dishwasher", "Flour gets heavier over time"], "answer": 0, "explain": "The same cup can hold 120 to 150 grams." },
-          { "q": "What does the tare button do?", "choices": ["Sets the scale back to zero with the bowl on it", "Turns grams into cups", "Weighs the bowl"], "answer": 0, "explain": "Then the scale shows only what you add." },
+          { "q": "Why can a cup of flour be wrong?", "choices": ["How it's scooped changes how much is in the cup", "Cups shrink in the dishwasher", "Flour gets heavier over time"], "answer": 0, "explain": "The same cup can hold 4¼ to 5¼ ounces." },
+          { "q": "What does the tare button do?", "choices": ["Sets the scale back to zero with the bowl on it", "Turns ounces into cups", "Weighs the bowl"], "answer": 0, "explain": "Then the scale shows only what you add." },
           { "q": "Why weigh your trim?", "choices": ["To see how much food a cut wastes", "To check the knife", "To season it"], "answer": 0, "explain": "A careful cut leaves less on the board." }
         ]
       },
@@ -429,7 +429,7 @@
         "body": [
           "In the ancient world, salt was precious. It seasoned food, and long before refrigerators, it kept meat and fish from spoiling. Israel got its salt from the Dead Sea, which the Bible calls the Salt Sea (Genesis 14:3).",
           "God told Israel: \"You shall season all your grain offerings with salt. You shall not let the salt of the covenant with your God be missing from your grain offering; with all your offerings you shall offer salt\" (Leviticus 2:13). Salt doesn't spoil, so a \"covenant of salt\" pictured a promise that lasts (Numbers 18:19).",
-          "Jesus told his followers, \"You are the salt of the earth, but if salt has lost its taste, how shall its saltiness be restored? It is no longer good for anything except to be thrown out and trampled under people's feet\" (Matthew 5:13). Salt is meant to make a difference to everything it touches, and so are they.",
+          "Jesus told His followers, \"You are the salt of the earth, but if salt has lost its taste, how shall its saltiness be restored? It is no longer good for anything except to be thrown out and trampled under people's feet\" (Matthew 5:13). Salt is meant to make a difference to everything it touches, and so are they.",
           "Paul wrote, \"Let your speech always be gracious, seasoned with salt, so that you may know how you ought to answer each person\" (Colossians 4:6). Like well-seasoned food, good words aren't bland, and they aren't too much.",
           "In the kitchen, salt does more than taste salty. It brings out the other flavors in a dish, pulls water out of vegetables (that's how it helps them sweat), and keeps food from spoiling. Good cooks salt in stages, a little in each part of a dish, and taste before serving, the way you did this week."
         ],
@@ -437,7 +437,7 @@
           "Read Leviticus 2:13 and Numbers 18:19.",
           "Read Matthew 5:13–16.",
           "Read Colossians 4:5–6.",
-          "Answer in writing: name two things salt does in food. How does each one fit what Jesus said about his followers?",
+          "Answer in writing: name two things salt does in food. How does each one fit what Jesus said about His followers?",
           "Answer in writing: what would speech \"seasoned with salt\" sound like? Give an example from your week.",
           "At a meal this week, taste a dish before and after a small pinch of salt, and talk with your family about what changed."
         ],
@@ -585,15 +585,15 @@
         "minutes": 45,
         "body": [
           "Fish was everyday food around the Sea of Galilee, where several of Jesus' disciples were fishermen. Twice the Gospels show Jesus feeding people bread and fish.",
-          "Once, a crowd followed him into a remote place. When evening came, the disciples had only five loaves and two fish. Jesus looked up to heaven, blessed the food, broke the loaves, and gave them to the disciples to hand out. \"And they all ate and were satisfied. And they took up twelve baskets full of the broken pieces left over\" (Matthew 14:20). About five thousand men ate, besides women and children.",
-          "After his resurrection, Jesus met seven of his disciples at the lake after a night of catching nothing. He told them where to cast the net, and they hauled in 153 large fish (John 21:11). On the shore \"they saw a charcoal fire in place, with fish laid out on it, and bread\" (John 21:9). \"Jesus said to them, 'Come and have breakfast'\" (John 21:12), and he served them the bread and the fish himself.",
-          "Both meals were simple: bread and fish. In one, Jesus fed thousands from almost nothing; in the other, he cooked for a few tired friends."
+          "Once, a crowd followed Him into a remote place. When evening came, the disciples had only five loaves and two fish. Jesus looked up to heaven, blessed the food, broke the loaves, and gave them to the disciples to hand out. \"And they all ate and were satisfied. And they took up twelve baskets full of the broken pieces left over\" (Matthew 14:20). About five thousand men ate, besides women and children.",
+          "After His resurrection, Jesus met seven of His disciples at the lake after a night of catching nothing. He told them where to cast the net, and they hauled in 153 large fish (John 21:11). On the shore \"they saw a charcoal fire in place, with fish laid out on it, and bread\" (John 21:9). \"Jesus said to them, 'Come and have breakfast'\" (John 21:12), and He served them the bread and the fish Himself.",
+          "Both meals were simple: bread and fish. In one, Jesus fed thousands from almost nothing; in the other, He cooked for a few tired friends."
         ],
         "steps": [
           "Read Matthew 14:13–21.",
           "Read John 21:1–14.",
           "Answer in writing: what did Jesus do with the food before it was handed out in Matthew 14:19?",
-          "Answer in writing: in John 21, who cooked breakfast, and what does that show you about him?",
+          "Answer in writing: in John 21, who cooked breakfast, and what does that show you about Him?",
           "Cook a simple meal of bread and fish for your family this week, from this week's recipe, and serve it to them yourself."
         ],
         "quiz": [
@@ -660,7 +660,7 @@
           "For land animals and fish, Leviticus gives a test. For birds it gives a list instead: \"And these you shall detest among the birds; they shall not be eaten\" (Leviticus 11:13). Twenty kinds follow, among them the eagle, the vultures, the kite and falcon, every raven, the ostrich, the hawk, the owls, the cormorant, the stork, the heron, and the bat, which the passage counts with the birds (Leviticus 11:13–19; Deuteronomy 14:11–18).",
           "Most of the birds on the list hunt other animals or eat what's already dead. Every bird not on it may be eaten: \"You may eat all clean birds\" (Deuteronomy 14:11). Scripture also shows clean birds in use. Pigeons and turtledoves were brought as offerings (Leviticus 1:14; 12:8), and God fed Israel quail in the wilderness (Exodus 16:13; Numbers 11:31). Chicken, turkey, duck, goose, quail, pigeon and dove, pheasant, partridge, grouse, and guinea fowl are all clean, and this app uses them.",
           "Leviticus 11 also says why the food laws were given. \"For I am the LORD your God. Consecrate yourselves therefore, and be holy, for I am holy\" (Leviticus 11:44). The chapter ends: \"This is the law about beast and bird and every living creature that moves through the waters and every creature that swarms on the ground, to make a distinction between the unclean and the clean and between the living creature that may be eaten and the living creature that may not be eaten\" (Leviticus 11:46–47).",
-          "The reason the passage itself gives is about God: his people were to be set apart, holy, because he is holy. Choosing food carefully was one everyday way to live that out, at every meal."
+          "The reason the passage itself gives is about God: His people were to be set apart, holy, because He is holy. Choosing food carefully was one everyday way to live that out, at every meal."
         ],
         "steps": [
           "Read Leviticus 11:13–19 and 11:44–47.",
@@ -828,21 +828,21 @@
         "body": [
           "Bread comes up more than almost any other food in the Bible. It stands for the food a person needs to live, and often for more than that.",
           "In the wilderness, God fed Israel with manna, \"bread from heaven\" (Exodus 16:4). Each morning the people gathered what they needed for that day. Manna kept overnight spoiled, except the double portion gathered on the sixth day, which kept (Exodus 16:16–24). It taught them to depend on God one day at a time.",
-          "Jesus taught his disciples to pray, \"Give us this day our daily bread\" (Matthew 6:11). The prayer asks for what's needed today, not a store for years.",
-          "After feeding five thousand people with five loaves (John 6:1–14), Jesus told the crowd, who had brought up the manna, \"I am the bread of life; whoever comes to me shall not hunger\" (John 6:35). Bread keeps a body alive for a day; he spoke of himself as what keeps a person alive for good."
+          "Jesus taught His disciples to pray, \"Give us this day our daily bread\" (Matthew 6:11). The prayer asks for what's needed today, not a store for years.",
+          "After feeding five thousand people with five loaves (John 6:1–14), Jesus told the crowd, who had brought up the manna, \"I am the bread of life; whoever comes to me shall not hunger\" (John 6:35). Bread keeps a body alive for a day; He spoke of Himself as what keeps a person alive for good."
         ],
         "steps": [
           "Read Exodus 16:4–5 and 16:13–24.",
           "Read Matthew 6:9–13.",
           "Read John 6:26–35.",
           "Answer in writing: what did gathering manna each morning teach Israel?",
-          "Answer in writing: why do you think Jesus compared himself to bread, and not to some other food?",
+          "Answer in writing: why do you think Jesus compared Himself to bread, and not to some other food?",
           "Share your answers with an adult at a meal this week, with a slice of this week's loaf."
         ],
         "quiz": [
           { "q": "What did Israel gather each morning in the wilderness?", "choices": ["Manna", "Quail only", "Grain from the fields"], "answer": 0, "explain": "\"Bread from heaven\" (Exodus 16:4)." },
           { "q": "Where is \"Give us this day our daily bread\"?", "choices": ["Matthew 6:11", "Exodus 16:4", "John 6:35"], "answer": 0, "explain": "It's part of the prayer Jesus taught in Matthew 6." },
-          { "q": "What happened just before Jesus said \"I am the bread of life\"?", "choices": ["He fed five thousand people with five loaves", "He turned water into wine", "He ate the Passover"], "answer": 0, "explain": "The crowd followed him after the feeding (John 6:1–14, 26)." }
+          { "q": "What happened just before Jesus said \"I am the bread of life\"?", "choices": ["He fed five thousand people with five loaves", "He turned water into wine", "He ate the Passover"], "answer": 0, "explain": "The crowd followed Him after the feeding (John 6:1–14, 26)." }
         ]
       }
     },
@@ -863,7 +863,7 @@
           "Stir together 1½ cups of all-purpose flour, ½ cup of water, and a pinch of salt until it forms a dough. Knead it until it's smooth, about 3 minutes.",
           "Before using the scale, cut the dough by eye into 8 pieces you think are equal. Weigh each one and write the weights down.",
           "Press the pieces back together. Weigh the whole dough and divide by 8. That's your target.",
-          "Cut 8 pieces again, this time weighing each. Pinch dough from heavy pieces onto light ones until each is within 3 grams of the target.",
+          "Cut 8 pieces again, this time weighing each. Pinch dough from heavy pieces onto light ones until each is within a tenth of an ounce of the target.",
           "Shape each piece into a ball: cup it under your palm on a bare spot of counter and roll it in small circles until the top is smooth and tight.",
           "Compare your two sets of weights. How far off were your eyes?",
           "Roll the balls flat and cook them in a dry skillet like Unleavened flatbread, or throw them out."

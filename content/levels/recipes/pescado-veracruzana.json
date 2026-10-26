@@ -42,7 +42,7 @@
     ]
   },
   "ingredients": [
-    { "ingredient": "snapper-whole", "amount": 1400, "unit": "g", "group": "Fish", "prep": "1 large or 2 small" },
+    { "ingredient": "snapper-whole", "amount": 3, "unit": "lb", "group": "Fish", "prep": "1 large or 2 small" },
     { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Fish" },
     { "ingredient": "lime", "amount": 1, "unit": "count", "group": "Fish", "round": "up" },
     { "ingredient": "olive-oil", "amount": 3, "unit": "tbsp", "group": "Sauce" },

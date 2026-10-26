@@ -32,7 +32,7 @@
     { "id": "can-opener", "name": "Can opener", "category": "openers", "icon": null },
     { "id": "thermometer", "name": "Instant-read thermometer", "category": "thermometers", "icon": null },
     { "id": "tweezers", "name": "Clean tweezers or needle-nose pliers (for fish bones)", "category": "utensils", "icon": null },
-    { "id": "kitchen-scale", "name": "Kitchen scale (grams)", "category": "measuring", "icon": null },
+    { "id": "kitchen-scale", "name": "Kitchen scale", "category": "measuring", "icon": null },
     { "id": "saucepan-medium", "name": "Medium saucepan with a lid", "category": "pots", "icon": null },
     { "id": "pot-large", "name": "Large heavy pot with a lid (like a Dutch oven)", "category": "pots", "icon": null },
     { "id": "stockpot", "name": "Stockpot (8 quarts or bigger)", "category": "pots", "icon": null },

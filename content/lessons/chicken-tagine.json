@@ -115,7 +115,7 @@
         "change": { "salt@Chicken": { "ingredient": "salt", "amount": 1.5, "unit": "tsp", "group": "Chicken" } },
         "drop": ["chicken-thigh@Chicken"],
         "add": [
-          { "ingredient": "chicken-whole", "amount": 1800, "unit": "g", "group": "Chicken" },
+          { "ingredient": "chicken-whole", "amount": 4, "unit": "lb", "group": "Chicken" },
           { "ingredient": "lemon", "amount": 1, "unit": "count", "round": "up", "prep": "zest in strips", "group": "Sauce" }
         ],
         "order": [

@@ -26,7 +26,7 @@
       { "id": "spatchcock", "title": "Out with the backbone", "body": "Spatchcocking means cutting out the backbone with shears and pressing the bird flat. A flat bird has no thick middle hiding inside a hollow cavity, so the legs and breast finish at the same time." },
       { "id": "thaw", "title": "Thaw in the fridge", "body": "Most quail are sold frozen. A day in the fridge thaws them all the way through, so they roast evenly; a bird icy in the middle stays raw there while the outside dries." },
       { "id": "glaze", "title": "A glaze that clings", "body": "Pomegranate molasses is pomegranate juice boiled down to a thick, tart syrup. Mixed with oil and spices, it clings to the skin and browns quickly at high heat, so it goes on in two coats." },
-      { "id": "hot", "title": "Small bird, high heat", "body": "A quail weighs about 115 grams. At 450°F it browns outside in the same 12 to 15 minutes it takes to cook through, which a lower oven can't do." },
+      { "id": "hot", "title": "Small bird, high heat", "body": "A quail weighs about 4 ounces. At 450°F it browns outside in the same 12 to 15 minutes it takes to cook through, which a lower oven can't do." },
       { "id": "165", "title": "Quail at 165°F", "body": "All poultry is 165°F in this app. On a quail, check the thickest part of the breast from the side, close to the bone." }
     ],
     "wrong": [
@@ -42,7 +42,7 @@
     ]
   },
   "ingredients": [
-    { "ingredient": "quail-whole", "amount": 900, "unit": "g", "group": "Quail", "prep": "8 birds, thawed" },
+    { "ingredient": "quail-whole", "amount": 2, "unit": "lb", "group": "Quail", "prep": "8 birds, thawed" },
     { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Quail" },
     { "ingredient": "pomegranate-molasses", "amount": 3, "unit": "tbsp", "group": "Glaze" },
     { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp", "group": "Glaze" },

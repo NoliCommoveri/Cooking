@@ -27,7 +27,7 @@
       { "id": "one-pot", "title": "One pot, staggered", "body": "The green beans cook in the potatoes' water for the last few minutes. One pot of boiling water does two jobs, and both finish together." },
       { "id": "shock", "title": "Ice bath", "body": "Plunging eggs and beans into ice water stops their cooking at once. The beans stay bright and crisp, and the eggs peel cleanly." },
       { "id": "warm-dress", "title": "Dress potatoes warm", "body": "Warm potatoes soak up dressing; cold ones only get coated. Toss them as soon as they're drained." },
-      { "id": "tuna-145", "title": "Tuna to 145°F", "body": "Restaurants often serve tuna rare. This app cooks all fish to 145°F, the safe minimum. A hot pan and a short, hard sear on 2.5-centimeter steaks still gives a browned crust, and slicing against the grain keeps it tender." }
+      { "id": "tuna-145", "title": "Tuna to 145°F", "body": "Restaurants often serve tuna rare. This app cooks all fish to 145°F, the safe minimum. A hot pan and a short, hard sear on 1-inch steaks still gives a browned crust, and slicing against the grain keeps it tender." }
     ],
     "wrong": [
       { "sign": "Everything was ready except the potatoes", "fix": "Start them earlier: they're the longest part. Rewrite the timeline with 5 minutes of slack." },
@@ -43,11 +43,11 @@
     ]
   },
   "ingredients": [
-    { "ingredient": "potato-baby", "amount": 450, "unit": "g", "group": "Potatoes and beans" },
+    { "ingredient": "potato-baby", "amount": 1, "unit": "lb", "group": "Potatoes and beans" },
     { "ingredient": "salt", "amount": 1, "unit": "tbsp", "group": "Potatoes and beans" },
-    { "ingredient": "green-beans", "amount": 225, "unit": "g", "group": "Potatoes and beans" },
+    { "ingredient": "green-beans", "amount": 8, "unit": "oz", "group": "Potatoes and beans" },
     { "ingredient": "egg", "amount": 4, "unit": "count", "group": "Eggs" },
-    { "ingredient": "tuna-steak", "amount": 450, "unit": "g", "prep": "2 steaks, about 2.5 cm thick", "group": "Tuna" },
+    { "ingredient": "tuna-steak", "amount": 1, "unit": "lb", "prep": "2 steaks, about 1 inch thick", "group": "Tuna" },
     { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Tuna" },
     { "ingredient": "black-pepper", "amount": 0.5, "unit": "tsp", "group": "Tuna" },
     { "ingredient": "vegetable-oil", "amount": 1, "unit": "tbsp", "group": "Tuna" },
@@ -83,7 +83,7 @@
   ],
   "steps": [
     { "id": "timeline", "text": "Write a timeline backward from serving time: potatoes 20 minutes, eggs 12, beans 4, tuna 10 with resting, plating 5.", "safety": "solo", "why": "backward", "tip": "Add 5 minutes of slack at the start. Run it with your phone's clock." },
-    { "id": "potatoes", "text": "Put the potatoes in the large pot, cover with cold water by 3 centimeters, add the tablespoon of salt, and bring to a boil.", "safety": "solo", "hazard": "Hot pot" },
+    { "id": "potatoes", "text": "Put the potatoes in the large pot, cover with cold water by 1 inch, add the tablespoon of salt, and bring to a boil.", "safety": "solo", "hazard": "Hot pot" },
     { "id": "simmer-potatoes", "text": "Simmer until a knife slides in easily.", "safety": "solo", "hazard": "Hot pot", "timerSeconds": 900, "timerLabel": "Potatoes" },
     { "id": "ice", "text": "Fill the large bowl with ice and water.", "safety": "solo" },
     { "id": "eggs", "text": "Bring the saucepan of water to a simmer. Lower in the eggs with the slotted spoon.", "safety": "solo", "hazard": "Hot water", "handles": ["egg"], "timerSeconds": 480, "timerLabel": "Eggs" },

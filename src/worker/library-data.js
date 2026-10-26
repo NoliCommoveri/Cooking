@@ -14104,7 +14104,7 @@ export const LIBRARY = {
     "notes": [
      {
       "from": 5,
-      "text": "Sear the beef in batches of about 340 g. More than that in the pan, and it boils in its own juice."
+      "text": "Sear the beef in batches of about ¾ pound. More than that in the pan, and it boils in its own juice."
      }
     ]
    },
@@ -15407,7 +15407,7 @@ export const LIBRARY = {
    "title": "Steak fajitas",
    "image": "img/dishes/steak-fajitas.webp",
    "cuisine": "tex-mex",
-   "skill": "Weighing in grams and finding the yield",
+   "skill": "Weighing and finding the yield",
    "servings": 4,
    "scaling": {
     "mode": "free",
@@ -20044,8 +20044,8 @@ export const LIBRARY = {
       "title": "Daily bread (Matthew 6:11)",
       "minutes": 20,
       "body": [
-       "When Jesus taught his followers to pray, one of the things he told them to ask for was food: \"Give us this day our daily bread\" (Matthew 6:11). Not a year's worth, or a week's: today's.",
-       "In the wilderness, God fed Israel with manna one day at a time (Exodus 16:4). Proverbs asks God for \"neither poverty nor riches; feed me with the food that is needful for me\" (Proverbs 30:8). And later in the same chapter of Matthew, Jesus tells his followers not to worry about what they'll eat, because their Father knows they need it (Matthew 6:31–33).",
+       "When Jesus taught His followers to pray, one of the things He told them to ask for was food: \"Give us this day our daily bread\" (Matthew 6:11). Not a year's worth, or a week's: today's.",
+       "In the wilderness, God fed Israel with manna one day at a time (Exodus 16:4). Proverbs asks God for \"neither poverty nor riches; feed me with the food that is needful for me\" (Proverbs 30:8). And later in the same chapter of Matthew, Jesus tells His followers not to worry about what they'll eat, because their Father knows they need it (Matthew 6:31–33).",
        "Asking for daily bread is a way of remembering that every meal is a gift, and of trusting God for tomorrow's."
       ],
       "steps": [
@@ -20696,7 +20696,7 @@ export const LIBRARY = {
       "body": [
        "\"These you may eat, of all that are in the waters. Everything in the waters that has fins and scales, whether in the seas or in the rivers, you may eat\" (Leviticus 11:9).",
        "The next verses say the rest are \"detestable\" for food (Leviticus 11:10–12). Deuteronomy says the same thing again (Deuteronomy 14:9–10).",
-       "Fish were everyday food in Bible times. Several of Jesus' disciples were fishermen on the Sea of Galilee, and after he rose, Jesus cooked fish for them on the shore (John 21:9–13)."
+       "Fish were everyday food in Bible times. Several of Jesus' disciples were fishermen on the Sea of Galilee, and after He rose, Jesus cooked fish for them on the shore (John 21:9–13)."
       ],
       "steps": [
        "Read Leviticus 11:9–12 with an adult.",
@@ -23000,7 +23000,7 @@ export const LIBRARY = {
        "Then add up the active time: the minutes your hands are busy. In vegetable lo mein, the julienne might take you 20 minutes this week, but the stove part is under 6. If the noodles were cooked before the knife work started, they'd sit and go gummy. So the order is: water on, sauce mixed, vegetables cut, then noodles, then the pan.",
        "Work backward from when you want to eat. If dinner is at 6:00 and the recipe has 45 minutes of work and waiting, you start at 5:15, or 5:00 if you're new to the cut. Beginners are always slower than a recipe's time, and that's expected.",
        "A prep list turns all that into a plan. Write each job on its own line in the order you'll do it, with a time beside the long ones: \"5:00 water on (12 min). 5:02 mix sauce. 5:05 julienne carrots and peppers (20 min). 5:25 noodles in (3 min).\" Cooks call having everything cut, measured, and ready before the heat goes on mise en place, French for \"everything in its place\". The prep list is how you get there.",
-       "Now the scale. A cup measures space, not how much food is in it. Scoop a cup of flour straight from the bag and it can weigh 150 grams; spoon it in lightly and it can be 120. That's a 25% difference from the same cup, enough to make bread dry or cookies spread. A scale reads 125 grams every time.",
+       "Now the scale. A cup measures space, not how much food is in it. Scoop a cup of flour straight from the bag and it can weigh 5¼ ounces; spoon it in lightly and it can be 4¼. That's a 25% difference from the same cup, enough to make bread dry or cookies spread. A scale reads the same weight every time.",
        "Weighing is also faster and cleaner. Set a bowl on the scale, press tare (or zero) so the bowl counts as nothing, and pour in the first ingredient. Press tare again and add the next. One bowl, no measuring cups to wash.",
        "This week's drill weighs your trim, the peels, ends, and cores you cut away. Weighing it is how cooks measure waste: a careful julienne leaves less on the board, and over a year that's real food and money. This week's Beyond the Recipe, on gleaning, asks the same question from the other side: what's left over, and who can use it?"
       ],
@@ -23053,13 +23053,13 @@ export const LIBRARY = {
          "Flour gets heavier over time"
         ],
         "answer": 0,
-        "explain": "The same cup can hold 120 to 150 grams."
+        "explain": "The same cup can hold 4¼ to 5¼ ounces."
        },
        {
         "q": "What does the tare button do?",
         "choices": [
          "Sets the scale back to zero with the bowl on it",
-         "Turns grams into cups",
+         "Turns ounces into cups",
          "Weighs the bowl"
         ],
         "answer": 0,
@@ -23599,7 +23599,7 @@ export const LIBRARY = {
       "body": [
        "In the ancient world, salt was precious. It seasoned food, and long before refrigerators, it kept meat and fish from spoiling. Israel got its salt from the Dead Sea, which the Bible calls the Salt Sea (Genesis 14:3).",
        "God told Israel: \"You shall season all your grain offerings with salt. You shall not let the salt of the covenant with your God be missing from your grain offering; with all your offerings you shall offer salt\" (Leviticus 2:13). Salt doesn't spoil, so a \"covenant of salt\" pictured a promise that lasts (Numbers 18:19).",
-       "Jesus told his followers, \"You are the salt of the earth, but if salt has lost its taste, how shall its saltiness be restored? It is no longer good for anything except to be thrown out and trampled under people's feet\" (Matthew 5:13). Salt is meant to make a difference to everything it touches, and so are they.",
+       "Jesus told His followers, \"You are the salt of the earth, but if salt has lost its taste, how shall its saltiness be restored? It is no longer good for anything except to be thrown out and trampled under people's feet\" (Matthew 5:13). Salt is meant to make a difference to everything it touches, and so are they.",
        "Paul wrote, \"Let your speech always be gracious, seasoned with salt, so that you may know how you ought to answer each person\" (Colossians 4:6). Like well-seasoned food, good words aren't bland, and they aren't too much.",
        "In the kitchen, salt does more than taste salty. It brings out the other flavors in a dish, pulls water out of vegetables (that's how it helps them sweat), and keeps food from spoiling. Good cooks salt in stages, a little in each part of a dish, and taste before serving, the way you did this week."
       ],
@@ -23607,7 +23607,7 @@ export const LIBRARY = {
        "Read Leviticus 2:13 and Numbers 18:19.",
        "Read Matthew 5:13–16.",
        "Read Colossians 4:5–6.",
-       "Answer in writing: name two things salt does in food. How does each one fit what Jesus said about his followers?",
+       "Answer in writing: name two things salt does in food. How does each one fit what Jesus said about His followers?",
        "Answer in writing: what would speech \"seasoned with salt\" sound like? Give an example from your week.",
        "At a meal this week, taste a dish before and after a small pinch of salt, and talk with your family about what changed."
       ],
@@ -23981,15 +23981,15 @@ export const LIBRARY = {
       "minutes": 45,
       "body": [
        "Fish was everyday food around the Sea of Galilee, where several of Jesus' disciples were fishermen. Twice the Gospels show Jesus feeding people bread and fish.",
-       "Once, a crowd followed him into a remote place. When evening came, the disciples had only five loaves and two fish. Jesus looked up to heaven, blessed the food, broke the loaves, and gave them to the disciples to hand out. \"And they all ate and were satisfied. And they took up twelve baskets full of the broken pieces left over\" (Matthew 14:20). About five thousand men ate, besides women and children.",
-       "After his resurrection, Jesus met seven of his disciples at the lake after a night of catching nothing. He told them where to cast the net, and they hauled in 153 large fish (John 21:11). On the shore \"they saw a charcoal fire in place, with fish laid out on it, and bread\" (John 21:9). \"Jesus said to them, 'Come and have breakfast'\" (John 21:12), and he served them the bread and the fish himself.",
-       "Both meals were simple: bread and fish. In one, Jesus fed thousands from almost nothing; in the other, he cooked for a few tired friends."
+       "Once, a crowd followed Him into a remote place. When evening came, the disciples had only five loaves and two fish. Jesus looked up to heaven, blessed the food, broke the loaves, and gave them to the disciples to hand out. \"And they all ate and were satisfied. And they took up twelve baskets full of the broken pieces left over\" (Matthew 14:20). About five thousand men ate, besides women and children.",
+       "After His resurrection, Jesus met seven of His disciples at the lake after a night of catching nothing. He told them where to cast the net, and they hauled in 153 large fish (John 21:11). On the shore \"they saw a charcoal fire in place, with fish laid out on it, and bread\" (John 21:9). \"Jesus said to them, 'Come and have breakfast'\" (John 21:12), and He served them the bread and the fish Himself.",
+       "Both meals were simple: bread and fish. In one, Jesus fed thousands from almost nothing; in the other, He cooked for a few tired friends."
       ],
       "steps": [
        "Read Matthew 14:13–21.",
        "Read John 21:1–14.",
        "Answer in writing: what did Jesus do with the food before it was handed out in Matthew 14:19?",
-       "Answer in writing: in John 21, who cooked breakfast, and what does that show you about him?",
+       "Answer in writing: in John 21, who cooked breakfast, and what does that show you about Him?",
        "Cook a simple meal of bread and fish for your family this week, from this week's recipe, and serve it to them yourself."
       ],
       "quiz": [
@@ -24146,7 +24146,7 @@ export const LIBRARY = {
        "For land animals and fish, Leviticus gives a test. For birds it gives a list instead: \"And these you shall detest among the birds; they shall not be eaten\" (Leviticus 11:13). Twenty kinds follow, among them the eagle, the vultures, the kite and falcon, every raven, the ostrich, the hawk, the owls, the cormorant, the stork, the heron, and the bat, which the passage counts with the birds (Leviticus 11:13–19; Deuteronomy 14:11–18).",
        "Most of the birds on the list hunt other animals or eat what's already dead. Every bird not on it may be eaten: \"You may eat all clean birds\" (Deuteronomy 14:11). Scripture also shows clean birds in use. Pigeons and turtledoves were brought as offerings (Leviticus 1:14; 12:8), and God fed Israel quail in the wilderness (Exodus 16:13; Numbers 11:31). Chicken, turkey, duck, goose, quail, pigeon and dove, pheasant, partridge, grouse, and guinea fowl are all clean, and this app uses them.",
        "Leviticus 11 also says why the food laws were given. \"For I am the LORD your God. Consecrate yourselves therefore, and be holy, for I am holy\" (Leviticus 11:44). The chapter ends: \"This is the law about beast and bird and every living creature that moves through the waters and every creature that swarms on the ground, to make a distinction between the unclean and the clean and between the living creature that may be eaten and the living creature that may not be eaten\" (Leviticus 11:46–47).",
-       "The reason the passage itself gives is about God: his people were to be set apart, holy, because he is holy. Choosing food carefully was one everyday way to live that out, at every meal."
+       "The reason the passage itself gives is about God: His people were to be set apart, holy, because He is holy. Choosing food carefully was one everyday way to live that out, at every meal."
       ],
       "steps": [
        "Read Leviticus 11:13–19 and 11:44–47.",
@@ -24652,15 +24652,15 @@ export const LIBRARY = {
       "body": [
        "Bread comes up more than almost any other food in the Bible. It stands for the food a person needs to live, and often for more than that.",
        "In the wilderness, God fed Israel with manna, \"bread from heaven\" (Exodus 16:4). Each morning the people gathered what they needed for that day. Manna kept overnight spoiled, except the double portion gathered on the sixth day, which kept (Exodus 16:16–24). It taught them to depend on God one day at a time.",
-       "Jesus taught his disciples to pray, \"Give us this day our daily bread\" (Matthew 6:11). The prayer asks for what's needed today, not a store for years.",
-       "After feeding five thousand people with five loaves (John 6:1–14), Jesus told the crowd, who had brought up the manna, \"I am the bread of life; whoever comes to me shall not hunger\" (John 6:35). Bread keeps a body alive for a day; he spoke of himself as what keeps a person alive for good."
+       "Jesus taught His disciples to pray, \"Give us this day our daily bread\" (Matthew 6:11). The prayer asks for what's needed today, not a store for years.",
+       "After feeding five thousand people with five loaves (John 6:1–14), Jesus told the crowd, who had brought up the manna, \"I am the bread of life; whoever comes to me shall not hunger\" (John 6:35). Bread keeps a body alive for a day; He spoke of Himself as what keeps a person alive for good."
       ],
       "steps": [
        "Read Exodus 16:4–5 and 16:13–24.",
        "Read Matthew 6:9–13.",
        "Read John 6:26–35.",
        "Answer in writing: what did gathering manna each morning teach Israel?",
-       "Answer in writing: why do you think Jesus compared himself to bread, and not to some other food?",
+       "Answer in writing: why do you think Jesus compared Himself to bread, and not to some other food?",
        "Share your answers with an adult at a meal this week, with a slice of this week's loaf."
       ],
       "quiz": [
@@ -24692,7 +24692,7 @@ export const LIBRARY = {
          "He ate the Passover"
         ],
         "answer": 0,
-        "explain": "The crowd followed him after the feeding (John 6:1–14, 26)."
+        "explain": "The crowd followed Him after the feeding (John 6:1–14, 26)."
        }
       ]
      }
@@ -24714,7 +24714,7 @@ export const LIBRARY = {
        "Stir together 1½ cups of all-purpose flour, ½ cup of water, and a pinch of salt until it forms a dough. Knead it until it's smooth, about 3 minutes.",
        "Before using the scale, cut the dough by eye into 8 pieces you think are equal. Weigh each one and write the weights down.",
        "Press the pieces back together. Weigh the whole dough and divide by 8. That's your target.",
-       "Cut 8 pieces again, this time weighing each. Pinch dough from heavy pieces onto light ones until each is within 3 grams of the target.",
+       "Cut 8 pieces again, this time weighing each. Pinch dough from heavy pieces onto light ones until each is within a tenth of an ounce of the target.",
        "Shape each piece into a ball: cup it under your palm on a bare spot of counter and roll it in small circles until the top is smooth and tight.",
        "Compare your two sets of weights. How far off were your eyes?",
        "Roll the balls flat and cook them in a dry skillet like Unleavened flatbread, or throw them out."
@@ -27402,7 +27402,7 @@ export const LIBRARY = {
        "Hone your chef's knife and set the board on a damp towel.",
        "Start a timer. Peel one carrot, square it into a block, and cut ⅛-inch planks, then ⅛-inch julienne, then ⅛-inch cubes.",
        "Stop the timer and write down the time.",
-       "Spread 20 cubes on the board and measure a few with a ruler. Note how many are within a millimeter of ⅛ inch.",
+       "Spread 20 cubes on the board and measure a few with a ruler. Note how many are within a hair of ⅛ inch.",
        "Repeat with a second carrot and compare the time and the count.",
        "Weigh the trim and the brunoise. Save the trim for stock.",
        "Use the brunoise in this week's fried rice or ratatouille."
@@ -27445,7 +27445,7 @@ export const LIBRARY = {
       "minutes": 45,
       "body": [
        "Professional recipes name cuts by size, so every cook produces the same piece. Learn them as numbers.",
-       "Brunoise: ⅛-inch cubes (3 mm), cut from a julienne. Small dice: ¼-inch cubes (6 mm), cut from a batonnet. Medium dice: ½ inch (12 mm). Large dice: ¾ inch (2 cm).",
+       "Brunoise: ⅛-inch cubes, cut from a julienne. Small dice: ¼-inch cubes, cut from a batonnet. Medium dice: ½ inch. Large dice: ¾ inch.",
        "Julienne: ⅛ by ⅛ inch, 2 to 2½ inches long. Batonnet: ¼ by ¼ inch, 2½ to 3 inches long. Chiffonade: leafy herbs or greens stacked, rolled tight, and sliced across into thin ribbons.",
        "Precision isn't decoration. Pieces of one size cook in the same time, so a pan of brunoise is done all at once, and a sauce built on it is smooth.",
        "French cooking builds on two aromatic foundations. Mirepoix is onion, carrot, and celery in a 2:1:1 ratio by weight, diced to suit the cooking time: brunoise for a quick sauce, large dice for a long stock. Herbs come as a bouquet garni, a bundle of thyme, bay leaf, and parsley stems tied together so it can be lifted out, or as fines herbes, parsley, chives, tarragon, and chervil, chopped fine and added at the end.",
@@ -27579,7 +27579,7 @@ export const LIBRARY = {
       ],
       "steps": [
        "Scoop 1 cup of flour three ways: scooped and packed, spooned and leveled, and sifted in. Weigh each and write it down.",
-       "Measure 1 cup of water and weigh it. It should be close to 237 grams.",
+       "Measure 1 cup of water and weigh it. It should be close to 8⅓ ounces.",
        "Weigh a whole onion. Peel it, trim the root and top, and weigh it again. Work out the yield.",
        "Do the same with a bell pepper: weigh, core and seed, weigh again.",
        "Compare your yields with the Knowledge page's typical numbers.",
@@ -27589,12 +27589,12 @@ export const LIBRARY = {
        {
         "q": "1 cup of water weighs about:",
         "choices": [
-         "237 g",
-         "100 g",
-         "500 g"
+         "About 8⅓ oz",
+         "5 oz",
+         "12 oz"
         ],
         "answer": 0,
-        "explain": "Water is about 1 g per mL."
+        "explain": "A cup of water weighs a little over 8 ounces."
        },
        {
         "q": "Which flour cup weighs most?",
@@ -27607,14 +27607,14 @@ export const LIBRARY = {
         "explain": "Packing adds flour."
        },
        {
-        "q": "A 200 g onion gives 180 g peeled. Yield?",
+        "q": "A 10-ounce onion gives 9 ounces peeled. Yield?",
         "choices": [
          "90%",
          "80%",
          "110%"
         ],
         "answer": 0,
-        "explain": "180 ÷ 200."
+        "explain": "9 ÷ 10."
        }
       ]
      },
@@ -27622,17 +27622,17 @@ export const LIBRARY = {
       "title": "Why weight beats volume; trim loss and buying enough",
       "minutes": 45,
       "body": [
-       "A cup is a volume, and how much fits in it depends on how it's filled. A cup of flour can weigh anywhere from 120 to 150 grams; a cup of chopped onion varies more. A gram is a gram.",
+       "A cup is a volume, and how much fits in it depends on how it's filled. A cup of flour can weigh anywhere from 4¼ to 5¼ ounces; a cup of chopped onion varies more. An ounce is an ounce.",
        "That's why professional kitchens weigh. A scale gives the same result every time, in any hands, and it lets you scale a recipe by multiplication without converting cups and spoons.",
        "Weight also tells you what you're really getting. Yield is the usable weight divided by the bought weight. Typical yields: onions about 90 percent after peeling; bell peppers 80 to 85; carrots 85 to 90; boneless steak trimmed 85 to 90; and meat loses another 20 to 30 percent of its trimmed weight in cooking.",
-       "To buy enough, work backward: the plated weight you need, divided by the yield. For 4 servings of 140 grams of cooked steak (560 g) at a 75 percent cooking yield, you need about 750 grams trimmed, and at 88 percent trim yield, about 850 grams as bought.",
-       "Small amounts of salt, spices, and leaveners are still often given in spoons, because home scales aren't precise below a few grams."
+       "To buy enough, work backward: the plated weight you need, divided by the yield. For 4 servings of 5 ounces of cooked steak (20 ounces) at a 75 percent cooking yield, you need about 27 ounces trimmed, and at 88 percent trim yield, about 30 ounces (1⅞ pounds) as bought.",
+       "Small amounts of salt, spices, and leaveners are still often given in spoons, because home scales aren't precise below about a tenth of an ounce."
       ],
       "quiz": [
        {
         "q": "Why weigh instead of using cups?",
         "choices": [
-         "A gram is the same every time",
+         "An ounce is the same every time",
          "Cups are smaller",
          "Scales are faster to wash"
         ],
@@ -27650,19 +27650,19 @@ export const LIBRARY = {
         "explain": "Expressed as a percent."
        },
        {
-        "q": "You need 560 g cooked at a 75% cooking yield. How much trimmed meat?",
+        "q": "You need 20 ounces cooked at a 75% cooking yield. How much trimmed meat?",
         "choices": [
-         "About 750 g",
-         "About 420 g",
-         "560 g"
+         "About 27 oz",
+         "About 15 oz",
+         "20 oz"
         ],
         "answer": 0,
-        "explain": "560 ÷ 0.75."
+        "explain": "20 ÷ 0.75."
        },
        {
         "q": "Why are teaspoons still used for salt?",
         "choices": [
-         "Home scales aren't precise for a few grams",
+         "Home scales aren't precise for tiny amounts",
          "Salt can't be weighed",
          "Tradition only"
         ],
@@ -27689,7 +27689,7 @@ export const LIBRARY = {
        "Dry ingredients can be weighed days ahead. Raw meat can be trimmed and portioned up to 2 days ahead in the fridge, or frozen; keep it sealed, on the bottom shelf, away from anything eaten raw."
       ],
       "steps": [
-       "Pick a recipe for the weekend and convert its main ingredients to grams.",
+       "Pick a recipe for the weekend and convert its main ingredients to weights in ounces and pounds.",
        "Weigh each dry ingredient into a labeled container or bag.",
        "Trim and portion any meat, weigh each portion, and seal it. Wash your hands, board, and knife afterward.",
        "Store the meat on the bottom shelf of the fridge, or freeze it.",
@@ -28307,7 +28307,7 @@ export const LIBRARY = {
       "body": [
        "A buffet is the riskiest way to serve food: it sits out, many hands reach in, and nobody is watching the clock. Food safety codes call the risky foods TCS, time/temperature control for safety: anything moist and protein-rich or cut, where bacteria can grow. On a cold table that means sliced meats, cheeses, dips like hummus and labneh, cut tomatoes and melons, leafy greens, cooked grains and beans, and anything with mayonnaise.",
        "Cold holding has a number: 41°F or below, from the FDA Food Code that restaurants follow (your home fridge should run at 40°F or below). There are two ways to control it. Temperature: on ice, probed and logged, with nothing above 41°F. Or time: off ice, out for no more than 2 hours, or 1 hour above 90°F, then discarded, not returned to the fridge.",
-       "Cooked food headed for a cold table has to get cold fast. The rule is two-stage cooling: from 135°F to 70°F within 2 hours, then to 41°F within the next 4. Big, deep containers can't do it; the middle stays warm for hours. Spread food shallow, under 5 cm, and leave it uncovered until it's cool.",
+       "Cooked food headed for a cold table has to get cold fast. The rule is two-stage cooling: from 135°F to 70°F within 2 hours, then to 41°F within the next 4. Big, deep containers can't do it; the middle stays warm for hours. Spread food shallow, under 2 inches, and leave it uncovered until it's cool.",
        "Listeria is the cold table's special concern. It grows even at fridge temperature and is found in deli meats and soft cheeses. It's most dangerous during pregnancy and for older adults, which is one more reason cold food stays cold and isn't held for days.",
        "Good buffet practice: small platters, refilled from the fridge on clean plates, never topped up with fresh food on top of old; a separate serving utensil for every dish; bread off the ice and away from the dips; and a written log of times and temperatures. At the end, food that held at 41°F on ice can be refrigerated; anything else is thrown away.",
        "This is a professional's standard, and it's what lets you feed a crowd without making anyone sick."
@@ -28488,15 +28488,15 @@ export const LIBRARY = {
       "title": "Yield and cost: a whole bird vs. parts",
       "minutes": 45,
       "body": [
-       "A whole chicken almost always costs less per kilogram than the same chicken sold in parts, because the store charges for the butchering. But some of a whole bird's weight is back, neck, and bone you won't serve. The question is what you pay per kilogram of what you actually eat.",
-       "Yield is the weight you use divided by the weight you bought. A 1.8-kilogram chicken usually gives about 1.3 kilograms of serving pieces (breasts, thighs, drumsticks, wings) and 0.5 kilograms of back, neck, and trim. That's a yield of about 72 percent.",
-       "Here's the math with sample prices; your store's will differ. A whole chicken at $3.30 a kilogram, 1.8 kilograms, costs $5.94. Divided by the 1.3 kilograms of pieces, that's $4.57 a kilogram of serving pieces. Bought separately, bone-in thighs might be $4.40 a kilogram and breasts $8.80, a mix averaging around $6.50. The whole bird wins, and the back becomes free stock.",
+       "A whole chicken almost always costs less per pound than the same chicken sold in parts, because the store charges for the butchering. But some of a whole bird's weight is back, neck, and bone you won't serve. The question is what you pay per pound of what you actually eat.",
+       "Yield is the weight you use divided by the weight you bought. A 4-pound chicken usually gives about 2⅞ pounds of serving pieces (breasts, thighs, drumsticks, wings) and 1⅛ pounds of back, neck, and trim. That's a yield of about 72 percent.",
+       "Here's the math with sample prices; your store's will differ. A whole chicken at $1.50 a pound, 4 pounds, costs $6.00. Divided by the 2⅞ pounds of pieces, that's $2.09 a pound of serving pieces. Bought separately, bone-in thighs might be $2.00 a pound and breasts $4.00, a mix averaging around $2.95. The whole bird wins, and the back becomes free stock.",
        "The break-even point is the parts price at which the whole bird stops saving money: whole-bird price divided by yield. If parts ever cost less than that, buy parts.",
        "What the math leaves out: your time (about 5 minutes once you're practiced), freezer space, and whether your family eats every part. A whole bird pays only if nothing is wasted."
       ],
       "steps": [
        "Find today's prices at your store for a whole chicken, bone-in thighs, drumsticks, wings, and breasts.",
-       "Use your weights from the drill to work out your bird's yield and its cost per kilogram of serving pieces.",
+       "Use your weights from the drill to work out your bird's yield and its cost per pound of serving pieces.",
        "Work out the break-even parts price, and compare it with the store's.",
        "Write two sentences: which was cheaper this week, and when you'd choose the other."
       ],
@@ -28505,31 +28505,31 @@ export const LIBRARY = {
         "q": "What is yield?",
         "choices": [
          "The weight you use divided by the weight you bought",
-         "The price per kilogram",
+         "The price per pound",
          "The number of pieces"
         ],
         "answer": 0,
         "explain": "Used ÷ bought."
        },
        {
-        "q": "A 2.0 kg bird gives 1.44 kg of pieces. What's the yield?",
+        "q": "A 5-pound bird gives 3.6 pounds of pieces. What's the yield?",
         "choices": [
          "72%",
          "28%",
          "144%"
         ],
         "answer": 0,
-        "explain": "1.44 ÷ 2.0."
+        "explain": "3.6 ÷ 5."
        },
        {
-        "q": "A whole bird costs $3.30/kg with a 72% yield. What's the break-even parts price?",
+        "q": "A whole bird costs $1.50 a pound with a 72% yield. What's the break-even parts price?",
         "choices": [
-         "About $4.58/kg",
-         "$3.30/kg",
-         "$2.38/kg"
+         "About $2.08 a pound",
+         "$1.50 a pound",
+         "$1.08 a pound"
         ],
         "answer": 0,
-        "explain": "3.30 ÷ 0.72."
+        "explain": "1.50 ÷ 0.72."
        },
        {
         "q": "What does the yield math leave out?",
@@ -28553,7 +28553,7 @@ export const LIBRARY = {
        "Bag the back and wing tips from this week's chicken in a freezer bag. Press out the air.",
        "Label the bag with the date and \"chicken backs for stock.\" Keep a running count on the label as you add more.",
        "Freeze it flat, so it stacks and thaws quickly. Use it within 3 months.",
-       "When you have the backs of 2 or 3 chickens (about 1.5 kilograms), they're enough for about 3 liters of stock: cover with cold water, add onion, carrot, celery, bay, and peppercorns, and simmer 3 hours.",
+       "When you have the backs of 2 or 3 chickens (about 3 pounds), they're enough for about 3 quarts of stock: cover with cold water, add onion, carrot, celery, bay, and peppercorns, and simmer 3 hours.",
        "Wash your hands and everything the raw chicken touched."
       ],
       "quiz": [
@@ -28609,7 +28609,7 @@ export const LIBRARY = {
        "Slide the tip of a sharp, flexible knife under one end of it. Grip the freed tab with a paper towel.",
        "Angle the blade slightly up, toward the membrane, and saw gently along under it while pulling the tab back. Take it off in strips, losing as little meat as you can.",
        "Weigh the trim. Note it as a percentage of the steak.",
-       "Scoring: lay a duck breast skin side up. With the tip of the knife, cut lines 1 centimeter apart diagonally across the skin, through the fat but not into the meat. Turn the breast and cut the other way, for diamonds.",
+       "Scoring: lay a duck breast skin side up. With the tip of the knife, cut lines ⅜ inch apart diagonally across the skin, through the fat but not into the meat. Turn the breast and cut the other way, for diamonds.",
        "Check the cuts: no red meat should show. If it does, the next cuts go shallower.",
        "Refrigerate both for this week's recipes, and wash your hands, the knife, and the board."
       ],
@@ -28658,7 +28658,7 @@ export const LIBRARY = {
       "steps": [
        "Draw a simple outline of a steer and divide it into the primals on this page: chuck, rib, short loin, sirloin, round, brisket, plate, flank.",
        "On each, write one cut and one cooking method.",
-       "At a store or butcher, find three beef cuts. Write down each primal, its price per kilogram, and how you'd cook it."
+       "At a store or butcher, find three beef cuts. Write down each primal, its price per pound, and how you'd cook it."
       ],
       "quiz": [
        {
@@ -28715,7 +28715,7 @@ export const LIBRARY = {
        "Read Leviticus 11:13–19 and Deuteronomy 14:11–20.",
        "Sort these into clean and unclean using the passages: duck, goose, heron, quail, ostrich, pheasant, raven, turkey.",
        "Look up the hoopoe and the cormorant. Write one sentence on what each eats.",
-       "Find duck, quail, or another game bird at a store or online. Write down the price per kilogram and compare it with chicken."
+       "Find duck, quail, or another game bird at a store or online. Write down the price per pound and compare it with chicken."
       ],
       "quiz": [
        {
@@ -28763,15 +28763,15 @@ export const LIBRARY = {
       "title": "Skin and portion a side of salmon; pull the pin bones",
       "minutes": 30,
       "body": [
-       "A whole side of salmon costs less per kilogram than portions, and portioning it yourself is quick once you've done it. Use this week's side for the teriyaki salmon, or freeze the portions individually wrapped."
+       "A whole side of salmon costs less per pound than portions, and portioning it yourself is quick once you've done it. Use this week's side for the teriyaki salmon, or freeze the portions individually wrapped."
       ],
       "steps": [
        "Lay the side skin down on the raw-meat board with the head end to your left (to your right if you're left-handed).",
        "Run your fingertips along the thick half, from the head end toward the tail. Pull each pin bone with tweezers toward the head, at the angle it lies. Count them; a side usually has 25 to 35.",
-       "Turn the side so the tail points toward you. Cut down through the flesh to the skin about 2 centimeters from the tail end.",
+       "Turn the side so the tail points toward you. Cut down through the flesh to the skin about ¾ inch from the tail end.",
        "Grip the tail flap of skin with a paper towel. Hold the knife nearly flat against the skin, and pull the skin toward you in small side-to-side movements while the knife stays almost still.",
        "Trim off the thin belly fat along the bottom edge and any brown flesh on the skinned side.",
-       "Portion by weight: about 150 grams each. Cut the thick head end into narrower pieces and the tail into wider ones, folding the thinnest tail under.",
+       "Portion by weight: about 5 ounces each. Cut the thick head end into narrower pieces and the tail into wider ones, folding the thinnest tail under.",
        "Weigh the trim and the skin. Note the yield.",
        "Wash the knife, tweezers, board, and your hands with hot, soapy water."
       ],
@@ -28821,7 +28821,7 @@ export const LIBRARY = {
       "steps": [
        "At a fish counter, read the labels on four fish. Write down each one's name, origin, and wild or farmed.",
        "Ask two of the questions on this page, and write down the answers.",
-       "Compare the price per kilogram of a side of salmon with salmon portions. Using your drill yield, work out the real cost of the side per kilogram of portions."
+       "Compare the price per pound of a side of salmon with salmon portions. Using your drill yield, work out the real cost of the side per pound of portions."
       ],
       "quiz": [
        {
@@ -28871,15 +28871,15 @@ export const LIBRARY = {
       "minutes": 30,
       "body": [
        "\"These you may eat, of all that are in the waters. Everything in the waters that has fins and scales, whether in the seas or in the rivers, you may eat\" (Leviticus 11:9). The rule is repeated in Deuteronomy 14:9–10.",
-       "In Luke 5:1–11, Jesus borrows Simon Peter's boat to teach the crowd from the water. Afterward he tells Peter to put out into deep water and let down the nets. Peter answers, \"Master, we toiled all night and took nothing! But at your word I will let down the nets\" (Luke 5:5). The catch is so large the nets begin to break and two boats nearly sink.",
-       "Peter falls at Jesus' knees. Jesus tells him, \"Do not be afraid; from now on you will be catching men\" (Luke 5:10). They brought their boats to land, left everything, and followed him (Luke 5:11).",
+       "In Luke 5:1–11, Jesus borrows Simon Peter's boat to teach the crowd from the water. Afterward He tells Peter to put out into deep water and let down the nets. Peter answers, \"Master, we toiled all night and took nothing! But at your word I will let down the nets\" (Luke 5:5). The catch is so large the nets begin to break and two boats nearly sink.",
+       "Peter falls at Jesus' knees. Jesus tells him, \"Do not be afraid; from now on you will be catching men\" (Luke 5:10). They brought their boats to land, left everything, and followed Him (Luke 5:11).",
        "The disciples' trade was the fish of the Sea of Galilee, sold in the markets and salted for the cities, and the Gospels return to those boats and nets again and again."
       ],
       "steps": [
        "Read Leviticus 11:9–12 and Luke 5:1–11.",
        "Answer in writing: what did Peter's answer in Luke 5:5 show about him?",
        "Answer in writing: what did the fishermen leave behind in Luke 5:11, and what would that have meant for their families' living?",
-       "Find two more Gospel passages where Jesus meets his disciples at their boats or eats fish with them (start with Mark 1:16–20 and John 21)."
+       "Find two more Gospel passages where Jesus meets His disciples at their boats or eats fish with them (start with Mark 1:16–20 and John 21)."
       ],
       "quiz": [
        {
@@ -28938,7 +28938,7 @@ export const LIBRARY = {
        "Open the bird like a book. Nick the white cartilage at the top of the breastbone with the knife tip.",
        "Turn it skin side up, legs pointing out. Press hard on the breastbone with the heel of your hand until it cracks and the bird lies flat.",
        "Tuck the wing tips behind the breast. Pat dry, and season, or refrigerate uncovered to dry the skin overnight.",
-       "A flat 1.8-kilogram chicken roasts at 450°F in about 45 minutes, to 165°F in the thickest part of the breast and thigh.",
+       "A flat 4-pound chicken roasts at 450°F in about 45 minutes, to 165°F in the thickest part of the breast and thigh.",
        "Wash the shears, board, and your hands with hot, soapy water, and wipe the counter."
       ],
       "quiz": [
@@ -28979,7 +28979,7 @@ export const LIBRARY = {
       "minutes": 45,
       "body": [
        "Cost per serving is what restaurants live by and what most home cooks never calculate. It's simple: the total cost of what a dish used, divided by the servings it made.",
-       "Start with the receipt. For each ingredient, work out what fraction of the package the recipe used: half a bag of noodles, 1.8 kilograms of a 1.8-kilogram chicken, a tenth of a jar of thyme. Multiply each package price by that fraction and add them up. Spices and oil are small but count; round them to the nearest few cents.",
+       "Start with the receipt. For each ingredient, work out what fraction of the package the recipe used: half a bag of noodles, the whole of a 4-pound chicken, a tenth of a jar of thyme. Multiply each package price by that fraction and add them up. Spices and oil are small but count; round them to the nearest few cents.",
        "Divide by servings. If this week's chicken two ways used $18.60 of ingredients and made 6 servings of soup and 6 of breast, that's $1.55 per serving; as 6 dinners of both together, $3.10.",
        "Compare. A dish's cost per serving is useful next to something: the same dish from store-bought parts and stock, a restaurant's price, or your family's grocery budget per meal. What a whole bird saves shows up here: the stock you didn't buy, the parts you didn't pay a butcher for.",
        "Food cost percentage, the restaurant measure, is the ingredient cost divided by the menu price. Many restaurants aim for about 28 to 35 percent; the rest pays for labor, rent, and everything else."
