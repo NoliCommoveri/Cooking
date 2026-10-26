@@ -24,10 +24,12 @@ const rate = (a, pid, kind, item, stars) => a.put(`/api/profiles/${pid}/ratings`
 
 test('the owner sees which groups leave families short, why, and what to write next; no names', async () => {
   const { own, b, c, ava, zoe } = await setup();
-  // Two families hate chicken; both dressings dishes are chicken.
+  // Two families hate chicken and beans; the dressings dishes are chicken and chickpeas.
   await rate(own, ava, 'protein', 'chicken', 1);
+  await rate(own, ava, 'protein', 'beans-lentils', 1);
   await rate(own, ava, 'protein', 'salmon', 5);
   await rate(b, zoe, 'protein', 'chicken', 1);
+  await rate(b, zoe, 'protein', 'beans-lentils', 1);
   await rate(b, zoe, 'protein', 'salmon', 4);
   const r = await own.get('/api/owner/gaps');
   assert.equal(r.status, 200);

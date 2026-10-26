@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [230. 2026-10-26 — Release 1 can be launched](docs/build-log.md#230-2026-10-26--release-1-can-be-launched)
+**Latest build log entry:** [231. 2026-10-26 — 14g content: Level 3 Unit 2](docs/build-log.md#231-2026-10-26--14g-content-level-3-unit-2)
 
 ## Current features
 
@@ -59,8 +59,8 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Theme picker mockup** (`mockups/theme-picker.html`): four candidate themes with a sample lesson, so the kids can pick one.
 - **Dish illustrations** (`content/images/dishes/`): one picture for each planned dish.
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
-- **Lesson content** (`content/`): 37 lessons (all 12 of Unit 1, all 20 of Unit 2, 3 more samples, and the 2 Appointed Times lessons), and the ingredient, tool, skill (60), and cuisine lists, as JSON.
-- **The Levels** (release 1, being built, plan §12): Level 2 Apprentice, Level 3 Cook, and Level 4 Chef (`content/levels/sp-2.json` to `sp-4.json`) on the nine shared units in `content/level-units.json`, a Familiar and an Explore dish each week, and their recipe cards; Unit 1 is complete on all three Levels: Level 2 (12 part pages, 7 Level-only recipes, 1 Level version), Level 3 (46 part pages, 15 Level-only recipes, 1 Level version in all), and Level 4 (12 part pages, 5 Level-only recipes, 3 Level versions). Edited on the manager's Level 2, 3, and 4 pages.
+- **Lesson content** (`content/`): 49 lessons (all 13 of Unit 1, all 21 of Unit 2, 13 more, and the 2 Appointed Times lessons), and the ingredient, tool, skill (60), and cuisine lists, as JSON.
+- **The Levels** (release 1, being built, plan §12): Level 2 Apprentice, Level 3 Cook, and Level 4 Chef (`content/levels/sp-2.json` to `sp-4.json`) on the nine shared units in `content/level-units.json`, a Familiar and an Explore dish each week, and their recipe cards; Unit 1 is complete on all three Levels: Level 2 (12 part pages, 7 Level-only recipes, 1 Level version), Level 3 (51 part pages, 17 Level-only recipes, 2 Level versions in all), and Level 4 (12 part pages, 5 Level-only recipes, 3 Level versions); Unit 2 is complete on Level 3. Edited on the manager's Level 2, 3, and 4 pages.
 - **Level courses** (release 1, `src/worker/plan.js`): setting up a course asks Which program?, Cook Around the World or a Level, and for a Level, whether each week starts with its Familiar or Explore dish (preset from "how adventurous"); a Level course runs one week a week, its written recipes in week order, and the course card shows "Week 5 of 36 · Starts with Familiar".
 - **Level recipes in Side quests** (release 1): each Level's own written recipes (labels A1, K1, C1…) in its own unit in the kitchen, cookable and queueable like any lesson.
 - **Optional Level parts** (release 1): a Level week is Knowledge, Drill, Recipe, Beyond the Recipe; any but the recipe can be turned off at setup or later, with the planned hours shown; any part can be skipped.

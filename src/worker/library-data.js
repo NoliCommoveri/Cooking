@@ -1934,6 +1934,226 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "chopped-salad-vinaigrette",
+   "version": 1,
+   "track": "core",
+   "unit": 1,
+   "title": "Chickpea chopped salad + vinaigrette",
+   "image": "img/dishes/chopped-salad-vinaigrette.webp",
+   "cuisine": "american",
+   "skill": "Whisking a vinaigrette, dressing to taste",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, toss the salad in two bowls, with half the dressing in each, so the bottom doesn't get crushed."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "onion-red"
+    },
+    {
+     "ingredient": "chickpeas"
+    },
+    {
+     "ingredient": "feta",
+     "optional": true
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "vinegar-red-wine"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "olive-oil"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "tangy",
+     "herby-lemony"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "lots"
+   },
+   "tasteItems": {
+    "required": [
+     "cucumber",
+     "tomatoes",
+     "bell-peppers",
+     "garlic",
+     "mustard"
+    ],
+    "optional": [
+     "feta"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "colander",
+    "kitchen-towel",
+    "can-opener",
+    "mixing-bowl-large",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "whisk",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "spoon"
+   ],
+   "variations": [
+    {
+     "title": "Chickpea chopped salad + vinaigrette",
+     "image": "img/dishes/chopped-salad-vinaigrette.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, toss the salad in two bowls, with half the dressing in each, so the bottom doesn't get crushed."
+       }
+      ]
+     },
+     "totalMinutes": 40,
+     "ingredients": [
+      {
+       "ingredient": "romaine"
+      },
+      {
+       "ingredient": "cucumber"
+      },
+      {
+       "ingredient": "tomato"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "onion-red"
+      },
+      {
+       "ingredient": "chickpeas"
+      },
+      {
+       "ingredient": "feta",
+       "optional": true
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "vinegar-red-wine"
+      },
+      {
+       "ingredient": "mustard-dijon"
+      },
+      {
+       "ingredient": "honey"
+      },
+      {
+       "ingredient": "oregano-dried"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "olive-oil"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "tangy",
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "lots"
+     },
+     "tasteItems": {
+      "required": [
+       "cucumber",
+       "tomatoes",
+       "bell-peppers",
+       "garlic",
+       "mustard"
+      ],
+      "optional": [
+       "feta"
+      ]
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "colander",
+      "kitchen-towel",
+      "can-opener",
+      "mixing-bowl-large",
+      "small-bowl",
+      "mixing-bowl-medium",
+      "whisk",
+      "liquid-measuring-cup",
+      "measuring-cups",
+      "measuring-spoons",
+      "spoon"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
+    }
+   ]
+  },
+  {
    "id": "smash-burgers",
    "version": 1,
    "track": "core",
@@ -8297,6 +8517,109 @@ export const LIBRARY = {
    "level": "sp-3"
   },
   {
+   "id": "bean-tostadas",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Bean tostadas with pico de gallo",
+   "image": "img/dishes/bean-tostadas.webp",
+   "cuisine": "mexican",
+   "skill": "A fine pico de gallo",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Warm the beans in two batches, and salt the tomatoes in two colanders so they drain evenly."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "onion-white"
+    },
+    {
+     "ingredient": "jalapeno"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "pinto-beans"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "tostada-shells"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "queso-fresco"
+    },
+    {
+     "ingredient": "avocado",
+     "optional": true
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "onions",
+     "hot-peppers",
+     "cilantro",
+     "lemon-lime"
+    ],
+    "optional": [
+     "avocado",
+     "sour-cream-yogurt"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "colander",
+    "mixing-bowl-medium",
+    "mixing-bowl-large",
+    "small-bowl",
+    "can-opener",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "fork",
+    "spoon",
+    "microwave",
+    "plate"
+   ],
+   "level": "sp-3"
+  },
+  {
    "id": "beef-picadillo",
    "version": 1,
    "track": "core",
@@ -8954,6 +9277,103 @@ export const LIBRARY = {
     "pot-large",
     "colander",
     "tongs"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "solterito",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Solterito",
+   "image": "img/dishes/solterito.webp",
+   "cuisine": "peruvian",
+   "skill": "A fine dice and a balanced dressing",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "Heat the corn and beans in two batches so each one gets steaming hot all the way through."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "corn-frozen"
+    },
+    {
+     "ingredient": "edamame-frozen"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "onion-red"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "jalapeno",
+     "optional": true
+    },
+    {
+     "ingredient": "olives-kalamata"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "queso-fresco"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "vinegar-red-wine"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "olive-oil"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "lemon-lime"
+    ],
+    "optional": [
+     "hot-peppers"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "mixing-bowl-medium",
+    "mixing-bowl-large",
+    "small-bowl",
+    "plate",
+    "microwave",
+    "colander",
+    "kitchen-towel",
+    "whisk",
+    "measuring-cups",
+    "measuring-spoons",
+    "spoon"
    ],
    "level": "sp-3"
   },
@@ -10912,6 +11332,22 @@ export const LIBRARY = {
   "chickpeas": {
    "name": "Chickpeas (canned)",
    "contains": []
+  },
+  "pinto-beans": {
+   "name": "Pinto beans",
+   "contains": []
+  },
+  "tostada-shells": {
+   "name": "Tostada shells",
+   "contains": []
+  },
+  "corn-frozen": {
+   "name": "Frozen corn kernels",
+   "contains": []
+  },
+  "edamame-frozen": {
+   "name": "Frozen shelled edamame or baby lima beans",
+   "contains": []
   }
  },
  "cuisines": {
@@ -10995,6 +11431,7 @@ export const LIBRARY = {
   "ajapsandali": "K7",
   "baked-salmon": "K13",
   "bean-quesadillas": "K1",
+  "bean-tostadas": "K8",
   "beef-picadillo": "K30",
   "dinner-rolls": "K19",
   "kimbap": "K6",
@@ -11002,6 +11439,7 @@ export const LIBRARY = {
   "rajma": "K2",
   "sandwich-loaf": "K17",
   "scallion-oil-noodles": "K4",
+  "solterito": "K10",
   "steamed-fish": "K23",
   "tabbouleh": "K9",
   "thick-burgers": "K11",
@@ -11288,7 +11726,7 @@ export const LIBRARY = {
     "dressings",
     "emulsions"
    ],
-   "minutes": 30,
+   "minutes": 40,
    "cuisine": "american",
    "pickOne": "dressings",
    "tags": {
@@ -16565,15 +17003,161 @@ export const LIBRARY = {
      "explore": "tabbouleh",
      "drill": {
       "title": "Mince parsley and onion fine; salt and drain tomatoes",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "A salad or salsa is only as good as its smallest pieces. Today you'll mince parsley and onion as fine as you can, then run a side-by-side test on diced tomatoes: half salted and drained, half left alone. An adult is nearby the whole time."
+      ],
+      "steps": [
+       "Set the cutting board on a damp paper towel. Rinse a bunch of parsley and roll it in a towel until the leaves are completely dry.",
+       "Pull the leaves off the thick stems. Gather them into a tight pile and rock the chef's knife through them, tip on the board and your other hand flat on the spine. Gather and rock again until the bits are about the size of a grain of rice.",
+       "Halve and peel an onion, leaving the root on. Mince one half: strips ⅛ inch apart toward the root, then across at ⅛ inch.",
+       "Core 2 tomatoes and dice them into ¼-inch cubes. Split the dice into two equal piles.",
+       "Put one pile in a strainer over a bowl and toss it with ¼ teaspoon of salt. Put the other pile in a dry bowl with no salt. Set a timer for 15 minutes.",
+       "When the timer rings, pour the liquid from under the strainer into a measuring spoon. How much came out? Tilt the unsalted bowl: how much is there?",
+       "Taste a cube from each pile. Write down how they differ in taste and in texture.",
+       "Stir the drained tomatoes, the onion, and a spoonful of the parsley together with a squeeze of lime for a quick salsa, or use them in this week's tostadas or tabbouleh today. Store the rest of the parsley and onion in labeled containers in the fridge for up to 3 days."
+      ],
+      "quiz": [
+       {
+        "q": "Why must parsley be completely dry before you mince it?",
+        "choices": [
+         "Wet leaves bruise into a dark paste",
+         "Dry parsley weighs less",
+         "Water dulls the knife"
+        ],
+        "answer": 0,
+        "explain": "Dry leaves cut into clean, bright bits."
+       },
+       {
+        "q": "Which pile of tomatoes gave off more liquid?",
+        "choices": [
+         "The salted one",
+         "The unsalted one",
+         "They gave off the same"
+        ],
+        "answer": 0,
+        "explain": "Salt draws water out of the cut cells. This week's Knowledge page explains how."
+       }
+      ]
      },
      "knowledge": {
       "title": "Why salt draws water from cut vegetables",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Every plant is made of cells, and each cell is a tiny bag of water held in by a thin membrane and a stiffer wall. A crisp cucumber or a firm tomato is crisp because those cells are full and pressing against each other, like balloons packed in a box.",
+       "Water moves across a cell's membrane toward the side with more dissolved in it, salt or sugar, until the two sides are closer to even. This is called osmosis. When you sprinkle salt on a cut vegetable, the salt dissolves in the juice on the surface and makes it far saltier than the water inside the cells. Water moves out of the cells toward the salt.",
+       "Cutting speeds it up. A whole tomato has a skin that salt can't get through; a diced tomato has hundreds of cut faces with opened cells. The smaller the dice, the more cut surface, and the faster the water comes out. That's why salted, diced tomatoes can give up a tablespoon or more of juice in 15 minutes.",
+       "Cooks use this on purpose. Tomatoes are salted and drained for pico de gallo so the salsa isn't soupy. Cucumbers are salted and squeezed before they go into a yogurt sauce so it stays thick. Eggplant was salted in Unit 1's ajapsandali so it would brown instead of steam. Shredded cabbage is salted for slaw so it softens and doesn't water down the dressing.",
+       "It also works against you. Salt a green salad and walk away, and twenty minutes later the leaves are limp and there's a puddle in the bowl. So the rule has two halves: salt early when you want water out, and salt at the last minute when you want things crisp.",
+       "Salt drawn into the drained vegetable stays in it, so a salted tomato is already seasoned. Taste before you add more. And not all salt measures alike: a teaspoon of fine table salt is about twice as salty as a teaspoon of flaky kosher salt, because the fine grains pack tighter in the spoon. The app's recipes use table salt unless they say otherwise."
+      ],
+      "steps": [
+       "Slice a cucumber into thin rounds and split them into two plates.",
+       "Sprinkle one plate with ¼ teaspoon of salt. Leave the other plain.",
+       "After 20 minutes, look at each plate and try bending a slice from each. Write down what you see and feel.",
+       "Pat the salted slices dry and taste one from each plate. Which would you rather have in a yogurt dip, and which in a green salad? Why?"
+      ],
+      "quiz": [
+       {
+        "q": "What is osmosis?",
+        "choices": [
+         "Water moving toward the side with more dissolved in it",
+         "Salt melting in heat",
+         "Cells growing bigger"
+        ],
+        "answer": 0,
+        "explain": "Water moves out of the cells toward the salty surface."
+       },
+       {
+        "q": "Why does a diced tomato give up water faster than a whole one?",
+        "choices": [
+         "It has more cut surface with opened cells",
+         "It's warmer",
+         "Its skin is thinner"
+        ],
+        "answer": 0,
+        "explain": "The skin blocks salt; cut faces let water out."
+       },
+       {
+        "q": "When should you salt a green salad?",
+        "choices": [
+         "At the last minute",
+         "An hour ahead",
+         "The night before"
+        ],
+        "answer": 0,
+        "explain": "Salt pulls water out of the leaves and wilts them."
+       },
+       {
+        "q": "Why are cucumbers salted before they go into a yogurt sauce?",
+        "choices": [
+         "So their water comes out before, not in the sauce",
+         "To make them sweeter",
+         "To keep them green"
+        ],
+        "answer": 0,
+        "explain": "Squeezed cucumbers keep the sauce thick."
+       },
+       {
+        "q": "Which is saltier: a teaspoon of fine table salt or a teaspoon of flaky kosher salt?",
+        "choices": [
+         "Table salt",
+         "Kosher salt",
+         "They're the same"
+        ],
+        "answer": 0,
+        "explain": "Fine grains pack tighter in the spoon."
+       }
+      ]
      },
      "sabbath": {
       "title": "Make dips and salsas ahead and store them",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Most dips and salsas are made from raw or already-cooked ingredients, so they can be made a day or more before you need them. Some even taste better the next day, once the garlic, lemon, and spices have had time to spread through.",
+       "How long each one keeps in a sealed container in the fridge: bean dips and hummus, 4 to 5 days; yogurt dips like tzatziki, 3 to 4 days, if the cucumber was salted and squeezed first; cooked or blended salsas, 5 to 7 days; pico de gallo, 1 to 2 days, since the tomatoes keep weeping; guacamole, 1 day, with plastic wrap pressed right onto its surface so air can't brown it.",
+       "Three habits keep them safe and fresh. Make and store them in clean containers, and get them into the fridge within 2 hours of making. Label each one with what it is and the date. And serve from a clean spoon into a small bowl rather than dipping into the whole container, so crumbs and mouths stay out of what's left.",
+       "A dip made ahead leaves you with a snack ready to go, half a meal already done, and a dish you can bring when someone needs one."
+      ],
+      "steps": [
+       "Make a quick bean dip: drain and rinse a can of white or pinto beans, then mash them with a fork with 2 tablespoons of olive oil, 1 tablespoon of lemon or lime juice, ¼ teaspoon of salt, and a pinch of cumin. Taste and adjust.",
+       "Make a second dip or salsa of your choice from this unit, such as a drained pico de gallo or a cucumber yogurt dip.",
+       "Pack each one in a clean, sealed container. Label it with the name and the date.",
+       "Taste each one on the day you make it, then again the next day and the day after. Write down how each one changed.",
+       "Serve them at a meal or as a snack, from a clean spoon into a small bowl."
+      ],
+      "quiz": [
+       {
+        "q": "Which keeps the shortest time in the fridge?",
+        "choices": [
+         "Guacamole",
+         "Hummus",
+         "A cooked salsa"
+        ],
+        "answer": 0,
+        "explain": "About a day, with plastic pressed on its surface."
+       },
+       {
+        "q": "Why serve a dip from a clean spoon into a small bowl?",
+        "choices": [
+         "To keep crumbs and mouths out of what's stored",
+         "It looks nicer",
+         "It keeps the dip warm"
+        ],
+        "answer": 0,
+        "explain": "What goes back in the fridge stays clean."
+       },
+       {
+        "q": "How soon should a dip you made go into the fridge?",
+        "choices": [
+         "Within 2 hours",
+         "Within a day",
+         "Whenever it's finished"
+        ],
+        "answer": 0,
+        "explain": "After 2 hours in the danger zone, bacteria have had time to grow."
+       }
+      ]
      }
     },
     {
@@ -16586,11 +17170,108 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Timed fine dice of a salad set, then whisk and balance its dressing",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "This is the unit's mastery drill: the cuts for a whole salad, timed, then a dressing you balance by taste alone. Write down your times and your dressing changes; you'll compare them with this week's recipe."
+      ],
+      "steps": [
+       "Set out a cucumber, a red bell pepper, a red onion, and 2 tomatoes, washed. Set the board on a damp paper towel and start a timer.",
+       "Cut the cucumber into ¼-inch planks, sticks, and cubes.",
+       "Cut the sides off the pepper, trim the ribs, and dice it skin side down at ¼ inch.",
+       "Mince half the onion at ⅛ inch.",
+       "Core, seed, and dice the tomatoes at ¼ inch. Stop the timer and write down your time.",
+       "Line up 10 cubes of each vegetable against a ruler. How many of each are within ⅛ inch of ¼ inch?",
+       "In a small bowl, whisk 1 tablespoon of vinegar with a pinch of salt and ½ teaspoon of mustard until the salt dissolves. Whisk in 3 tablespoons of oil in a thin stream.",
+       "Taste it on a cucumber cube. Change one thing at a time: a pinch of salt, a few drops of vinegar, or a teaspoon of oil. Taste again after each, and write down every change.",
+       "Toss the vegetables with the dressing and eat it today, or store the pepper and onion apart for this week's recipe and use the cucumber and tomato today."
+      ],
+      "quiz": [
+       {
+        "q": "Why change only one thing at a time when balancing a dressing?",
+        "choices": [
+         "So you know which change helped",
+         "So it's faster",
+         "So you use less"
+        ],
+        "answer": 0,
+        "explain": "Change two at once and you can't tell which one did it."
+       },
+       {
+        "q": "Why dissolve the salt in the vinegar before the oil goes in?",
+        "choices": [
+         "Salt dissolves in vinegar but not in oil",
+         "Salt makes the oil thicker",
+         "It keeps the vinegar cold"
+        ],
+        "answer": 0,
+        "explain": "Salt in oil stays as grains."
+       }
+      ]
      },
      "knowledge": {
       "title": "Emulsions and the 3-to-1 rule; why salads go soggy, and dressing at the last minute",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "An emulsion is one liquid spread through another as tiny drops, when the two would normally stay apart. Oil and vinegar are the classic pair: vinegar is mostly water, and oil and water don't mix. Whisk them hard and the oil breaks into drops small enough to cloud the vinegar. That's an emulsion, at least for a few minutes.",
+       "Left alone, the drops find each other, join into bigger ones, and float to the top. That's why a plain vinaigrette splits. An emulsifier slows that down. It's something with one end that holds onto water and one end that holds onto oil, so it coats each drop and keeps it apart from the others. Mustard is the vinaigrette cook's emulsifier; egg yolk is mayonnaise's, which is why mayonnaise stays thick for weeks. Honey and garlic paste help too, by thickening the vinegar so drops move more slowly.",
+       "Drop size matters as much as the emulsifier. Pour the oil in slowly while whisking and each bit breaks into small drops the mustard can coat. Dump it all in and you get big drops that split fast. A shaken jar works too, because the shaking does the same job.",
+       "The 3-to-1 rule, three parts oil to one part acid, comes from French cooking, and it's a good starting point for wine vinegar. But acids vary. Lemon and lime juice are about as sharp as wine vinegar; rice vinegar is milder and can go closer to 2 to 1; balsamic is sweet and takes less oil. A dish matters too: mild ingredients like corn and beans can take a sharper dressing, as in this week's solterito. Start at 3 to 1, then taste.",
+       "Taste it on what it's going on. A dressing tasted from a spoon seems much stronger than it does on a leaf of lettuce. Dip a leaf or a cube of cucumber and judge it there.",
+       "Why salads go soggy: last week you saw salt pull water out of cut vegetables, and vinegar does the same. Oil is the other half. Lettuce leaves have a thin, waxy coat; oil soaks through it and darkens and wilts the leaf. Water left on the leaves from washing thins the dressing and keeps it from clinging. So: dry the leaves well, keep the dressing apart until the last minute, toss in a bowl bigger than you think you need, and start with less dressing than you think. You can always add more.",
+       "Not every salad needs the last-minute rule. A salad of sturdy chopped vegetables, beans, or grains, like tabbouleh or solterito, can sit dressed for an hour or two and gets better as the vegetables take on the dressing. Lettuce, tender herbs, and crisp croutons are the ones that can't wait."
+      ],
+      "quiz": [
+       {
+        "q": "What is an emulsion?",
+        "choices": [
+         "One liquid spread through another as tiny drops",
+         "A liquid that's been boiled",
+         "A mix of salt and water"
+        ],
+        "answer": 0,
+        "explain": "Like oil drops clouding vinegar."
+       },
+       {
+        "q": "What does mustard do in a vinaigrette?",
+        "choices": [
+         "Coats the oil drops so they stay apart longer",
+         "Makes it sour",
+         "Dissolves the salt"
+        ],
+        "answer": 0,
+        "explain": "It's the emulsifier."
+       },
+       {
+        "q": "Why pour the oil in slowly while whisking?",
+        "choices": [
+         "It breaks into smaller drops that stay mixed",
+         "It keeps the bowl clean",
+         "It warms the oil"
+        ],
+        "answer": 0,
+        "explain": "Big drops split fast."
+       },
+       {
+        "q": "Where should you taste a dressing?",
+        "choices": [
+         "On a leaf or piece of what it's dressing",
+         "From a spoon",
+         "Straight from the bowl"
+        ],
+        "answer": 0,
+        "explain": "It tastes much stronger from a spoon."
+       },
+       {
+        "q": "Which salad can be dressed an hour ahead?",
+        "choices": [
+         "Solterito",
+         "A green salad with croutons",
+         "Chopped romaine"
+        ],
+        "answer": 0,
+        "explain": "Sturdy vegetables and beans get better as they sit."
+       }
+      ]
      },
      "sabbath": {
       "title": "Salt (Leviticus 2:13; Matthew 5:13; Colossians 4:6)",
@@ -19076,7 +19757,7 @@ export const LIBRARY = {
      "skills": [
       "fine-chopping"
      ],
-     "minutes": 35,
+     "minutes": 40,
      "tags": {
       "protein": "beans-lentils",
       "flavors": [
@@ -19117,7 +19798,7 @@ export const LIBRARY = {
       "dicing",
       "dressings"
      ],
-     "minutes": 35,
+     "minutes": 45,
      "tags": {
       "protein": "beans-lentils",
       "flavors": [

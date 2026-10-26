@@ -67,10 +67,11 @@ test('a new course keeps the best dish of each pick-one group; nothing is droppe
   const { a, ava } = await setup();
   await rate(a, ava, 'protein', 'salmon', 5);
   await rate(a, ava, 'protein', 'chicken', 1);
+  await rate(a, ava, 'protein', 'beans-lentils', 1);
   const fits = (await a.get(`/api/picks/course?profiles=${ava}`)).body;
   assert.equal(fits.picks['pick:reducing'], 'pineapple-teriyaki-salmon');
   assert.equal(fits.dishes['pineapple-teriyaki-salmon'].fit, 'great');
-  // Both dressings dishes are chicken: the closest stays, with a note.
+  // The dressings dishes are chicken and chickpeas: the closest stays, with a note.
   assert.match(fits.notes['pick:dressings'], /^Nothing for .* fits everyone yet; this one is closest\.$/);
   assert.equal(fits.picks['pick:julienne'], 'chicken-fajitas', 'fajitas has beef and bean versions');
   assert.equal(fits.dishes['chicken-fajitas'].version_title, 'Steak fajitas');

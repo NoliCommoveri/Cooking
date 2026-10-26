@@ -5909,3 +5909,41 @@ everyone".
   shows **Launch release 1 for everyone**, with **Undo launch** beside it once
   it's pressed.
 - Tests: 392.
+
+## 231. 2026-10-26 — 14g content: Level 3 Unit 2
+
+Owner, 2026-10-26: "We're gonna do unit 2, ordered levels 3, 2, 4. Put
+each level unit in a review doc for me before starting the next one."
+Reviewed in [14g review: Level 3 Cook, Unit
+2](https://claude.ai/artifact/M8cfT5VgozuCAZ2Jirj1tQ); not merged until the owner
+approves it there.
+
+- **Before:** Unit 2, No-cook (weeks 5 and 6), had one written recipe,
+  tabbouleh. Week 5 cooked it for both starts, week 6 waited, and five of
+  its six part pages were blank.
+- **Now:**
+  - **Two Level-only recipes** in `content/levels/recipes/`, unit 103: Bean
+    tostadas with pico de gallo (week 5, fine chopping; tomatoes salted and
+    drained) and Solterito (week 6, the mastery week: a timed dice to the size
+    of the beans and a lime-forward dressing balanced by taste). The
+    fine-chopping and dressings pick-one groups are full, and neither is a
+    variation of a planned dish (§12.4). Their cards' minutes are now the
+    recipes' own (40 and 45).
+  - **Chickpea chopped salad + vinaigrette**, a new Cook Around the World
+    lesson (the dressings group's third dish), and its Level 3 version:
+    sized cuts, the timed knife check, and no beginner tips. Its card's
+    minutes are now the lesson's 40.
+  - **Five part pages:** week 5's drill (mince parsley and onion; salted
+    against unsalted tomatoes), Knowledge (osmosis, and salting early or
+    late), and Beyond the Recipe (dips and salsas made ahead); week 6's
+    drill (the timed salad set and a dressing changed one thing at a time)
+    and Knowledge (emulsions, the 3-to-1 rule, and soggy salads).
+  - **New ingredients:** canned pinto beans, tostada shells (watch: lard),
+    frozen corn, frozen shelled edamame or baby lima beans.
+  - Frozen corn and edamame are heated until steaming before the salad, as
+    their bags say; they're not ready to eat from frozen.
+- Recipe gaps and best fit: the dressings group now has a chickpea dish, so
+  two tests that needed every dressings dish ruled out also rate beans low.
+  The Level course tests skip weeks 5 and 6 where they need week 9.
+- No screens changed, so no screenshots.
+- Tests: 392.
