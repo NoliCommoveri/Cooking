@@ -49,13 +49,13 @@ const DEMO_WEEKS_LV = LEVEL ? LEVEL.weeks.filter((w) => weekRecipes(w).length &&
 const DEMO_IDS = new Set([...DEMO_TRY.flatMap(([, , ids]) => ids), ...DEMO_WEEKS_LV.flatMap(weekRecipes)]);
 const lessons = Object.fromEntries(await Promise.all([...DEMO_IDS].filter((id) => written.has(id)).map(async (id) => [id, await getJSON(`/content/lessons/${id}.json`)])));
 // Lesson numbers in the suggested course order (a family's own plan can change them).
-const { labels: NUM, total: TOTAL } = numberCourse(C.dishes);
+const { labels: NUM } = numberCourse(C.dishes);
 
 // The two tracks (owner, 2026-10-24): Cook Around the World, recipes only,
 // and Structured Progression, the Levels as full courses.
 const TRACKS = {
-  catw: { name: 'Cook Around the World', short: 'Recipes from around the world', tabs: [['try', 'Try it'], ['shop', 'Shopping'], ['course', 'Course'], ['skills', 'Skills']] },
-  ...(DEMO_WEEKS_LV.length ? { sp: { name: 'Structured Progression', short: 'Complete courses from the fundamentals', tabs: [['week', 'Try a week'], ['levels', 'The Levels'], ['progress', 'Progress']] } } : {}),
+  catw: { name: 'Cook Around the World', short: 'Enhance your technique as you explore dishes from all over', tabs: [['try', 'Try it'], ['shop', 'Shopping'], ['course', 'Course'], ['skills', 'Skills']] },
+  ...(DEMO_WEEKS_LV.length ? { sp: { name: 'Structured Progression', short: 'Fundamental cooking skills taught through reading, writing, and doing', tabs: [['week', 'Try a week'], ['levels', 'The Levels'], ['progress', 'Progress']] } } : {}),
 };
 const twoTracks = Object.keys(TRACKS).length > 1;
 // What a visitor has chosen. Kept for this tab only.
@@ -172,18 +172,17 @@ function shopView() {
     return `<section class="parent"><h3>Shopping list</h3><p class="sub">For ${names(picked)} · ${done} of ${all.length} in the cart</p>
       ${groups(list, row)}
       ${had.length ? `<details class="psec"><summary>You have these (${had.length})</summary>${had.map((it) => `<div class="drow"><span><b>${esc(it.name)}</b></span><button type="button" class="hbtn" data-unhave="${esc(it.id)}">Put on the list</button></div>`).join('')}</details>` : ''}
-      <div class="acts"><button type="button" class="hbtn" data-shop="needs">Make another</button></div>
-      <p class="small mut" style="margin-top:12px">A preview: nothing here is saved. A family's list is kept, check-offs and all, so it survives closing the app.</p></section>`;
+      <div class="acts"><button type="button" class="hbtn" data-shop="needs">Make another</button></div></section>`;
   }
 
-  return `<section class="parent"><h3>Shopping</h3><p class="sub">Shopping lists are optional. Kids can start any lesson whenever you're ready.</p>
+  return `<section class="parent"><h3>Shopping</h3><p class="sub">We help make sure everything you need is on hand.</p>
     <div class="psec"><h4>Make a shopping list</h4>
       <label class="f">How many lessons are you shopping for? <small class="mut">Counting from the next lesson not cooked yet</small>
         <select data-count><option value="0">Pick a number</option>${upcoming.map((_, i) => `<option value="${i + 1}" ${sh.count === i + 1 ? 'selected' : ''}>${i + 1} lesson${i ? 's' : ''}</option>`).join('')}</select></label>
       ${picked.length ? `<p class="small mut">For ${names(picked)}</p><div class="acts"><button type="button" class="hbtn pri" data-shop="preview">Next</button></div>` : ''}</div>
     <h3 style="margin-top:22px">What you'll need</h3>
     ${weeks.map(([name, ids], k) => `<details class="dweek" ${k < 2 ? 'open' : ''}><summary><b>${esc(name)}</b> · ${names(ids)}</summary>${groups(listOf(ids), used)}</details>`).join('')}
-    <p class="small mut" style="margin-top:12px">A preview with the four sample lessons as a pretend family's next few weeks. Salt, black pepper, and olive oil play its kitchen staples, grouped under "May already have" and still on the list.</p></section>`;
+    </section>`;
 }
 
 // ---------- the whole course ----------
@@ -197,7 +196,7 @@ function courseView() {
     const body = `<img src="/${esc(d.image)}" alt="" width="64" height="64" loading="lazy"><span><b>${NUM[d.id]}. ${esc(d.title)}</b><small>${esc(cu)}${d.breakfast ? ' · breakfast' : ''}</small><small>${esc(d.skill)}</small>${pick}${lessons[d.id] ? `<span class="tag">${ic('i-check', '')}Try it now</span>` : ''}</span>`;
     return lessons[d.id] ? `<button type="button" class="c-dish" data-open="${esc(d.id)}">${body}</button>` : `<div class="c-dish">${body}</div>`;
   };
-  return `<p class="mut">${C.dishes.length} dishes in ${units.length} units, ${TOTAL} lessons on one cook's path: dishes that share a number, like 1a, 1b, and 1c, are pick-one choices. Each unit teaches a set of skills; the ones marked "Try it now" can be tried here.</p>
+  return `<p class="mut">With over 100 dishes to choose from, you can build a course that is filled with dishes you love as you practice the skills you need. Where a skill has several dishes designed to teach it, we'll use your diet preferences to recommend the one we think you'll like best; however, you can swap, or add multiple, anytime you'd like!</p>
     ${units.map((u) => `<h3 class="c-unit">${R.units[u] === 'Desserts' ? 'Desserts' : `Unit ${u}: ${esc(R.units[u])}`}</h3><div class="c-grid">${C.dishes.filter((d) => d.unit === u).map(row).join('')}</div>`).join('')}`;
 }
 
@@ -220,7 +219,7 @@ function skillsView() {
     else e.practice.push(d.id);
   }
   const names = (ids) => ids.map((id) => `${NUM[id]} ${esc(dishById[id].title)}${dishById[id].written ? ' ✓' : ''}`).join(', ');
-  return `<p class="mut">${order.length} skills across ${C.dishes.length} dishes, in the order the course first teaches them. ✓ marks a lesson you can try now.</p>
+  return `<p class="mut">${order.length} skills are taught or practiced throughout the course. Below is the general order in which they are taught.</p>
     <div class="sk-list">${order.map((e) => {
       const s = R.skills[e.id];
       return `<article class="sk"><h4>${pinSVG(s)}${esc(s.name)}</h4>${e.teach.length > 1 ? '<span class="found">Foundation skill · pick one</span>' : ''}<p>${esc(s.idea)}</p>
@@ -250,7 +249,7 @@ function weekView() {
   const on = WEEK_TABS.some(([k]) => k === V.lvPart) ? V.lvPart : 'knowledge';
   const swapped = id && id !== w.recipe;
   const tabsRow = `<div class="d-ptabs" role="tablist" aria-label="This week's parts">${WEEK_TABS.map(([k, label]) => `<button type="button" role="tab" id="pt-${k}" aria-controls="pt-panel" aria-selected="${k === on}" data-ptab="${k}"><span>${esc(label)}</span><small>${k === 'recipe' ? (id ? `${lessons[id].totalMinutes} min` : 'Swap') : done(k) ? 'Done ✓' : `${w[k].minutes} min`}</small></button>`).join('')}</div>`;
-  return `<p class="mut d-lede">A sample from <b>${esc(LEVEL.name)}</b>. Each week of a Level has four parts, and a week is done when its recipe is cooked. Pick a week, then tap through its parts.</p>
+  return `<p class="mut d-lede">A sample of Unit 1 for <b>${esc(LEVEL.name)}</b>. Each week, your learner reads a new Knowledge page, practices a Drill, cooks a Recipe, and completes a Beyond the Recipe activity.</p>
     <div class="seg d-weeks" role="group" aria-label="Week">${DEMO_WEEKS_LV.map((x) => `<button type="button" data-lvweek="${x.week}" aria-pressed="${x.week === w.week}">Week ${x.week}${x.mastery ? ' · Mastery' : ''}</button>`).join('')}</div>
     <section class="kitchen qx" data-kt="${V.theme}"><article class="${quest ? 'q-panel' : 'p-card'} k-level">
       <p class="${quest ? 'q-kick' : 'p-lessonno'}">${esc(LEVEL.name)} · Week ${w.week} of ${LEVEL.weeks.length}</p>

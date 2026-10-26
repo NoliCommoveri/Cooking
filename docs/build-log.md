@@ -5879,3 +5879,21 @@ not merged until the owner approves it there.
     review doc asks the owner about both.
 - No screens changed, so no screenshots.
 - Tests: 392.
+
+## 229. 2026-10-26 — Demo page copy: the owner's first corrections
+
+Owner, 2026-10-26, in [Release 1 copy
+review](https://claude.ai/artifact/1wxbCfTZ2XeGSSVJ9sQkrn) (rows D10 to D41).
+
+- **Before:** the demo's track buttons, Shopping, Course, Skills, and Try a
+  week intros were Claude's draft.
+- **Now** (`public/demo.js`), in the owner's words:
+  - Track buttons: "Enhance your technique as you explore dishes from all
+    over" and "Fundamental cooking skills taught through reading, writing,
+    and doing".
+  - Shopping: "We help make sure everything you need is on hand." The two
+    preview notes under What you'll need and under the list are gone.
+  - Course and Skills intros, and Try a week's intro ("A sample of Unit 1
+    for {Level}…", with Unit capitalized as elsewhere in the app).
+- Screenshots (phone width, light and dark) sent in the session.
+- Tests: 392.
