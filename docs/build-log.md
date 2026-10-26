@@ -5563,3 +5563,29 @@ Plan only; no code. The owner's calls on presentation by Level (§12.0, 14e).
   - **Claude's proposals, confirmed by the owner ("Yes to all"):** pictures on 3–4 key
     steps a recipe, one sheet per recipe; the Levels before Cook Around the
     World; a writing standard per Level that the linter warns on.
+
+## 220. 2026-10-26 — Level week numbers on recipe cards; more 14e calls
+
+Owner, 2026-10-26: Cook Around the World recipes on a Level course "show
+numbers that are all out of order for how they present in a level course"
+("Or hide the numbers"). Also the owner's yes to Claude's 14e proposals.
+
+- **Before:** a Level learner's recipe card showed Cook Around the World's
+  numbers: "Path 1 · Quest 27 of 59" in Kitchen Quest, "Lesson 27 of 59" in
+  Chef's Passport, and "Path 1:" on More recipes' shelves.
+- **Now:**
+  - **In the player,** a Level learner's card says "Level 3 Cook · Week 4"
+    for a recipe on their course, and just the Level's name for one that
+    isn't. Lesson numbers in the Learn cards and fix notes are hidden.
+  - **On More recipes (Side quests),** a card says "Week 9" for a recipe on
+    the course; others show no number ("Side quest" in Kitchen Quest).
+    Shelves show the unit's name without "Path 1:".
+  - The kitchen's Level data has `week_of`: each recipe's week on the
+    course.
+- **Plan, 14e:** Level 2 is written for a beginner of any age; a parent
+  setting per learner for step pictures (shown, or behind Show me); no
+  switching to another Level's version inside a course; Cook Around the
+  World recipes on a Level week get Level versions in 14g.
+- Screenshots (phone width, Kitchen Quest and Chef's Passport) of the
+  player's card and More recipes were sent in the session.
+- Tests: 370. The kitchen test checks `week_of`.

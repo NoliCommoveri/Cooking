@@ -177,6 +177,10 @@ test("the kitchen shows this week's recipe and three parts, and the mastery reci
   assert.ok(lv.mastery.includes('minestrone') && lv.mastery.includes('challah') && !lv.mastery.includes('thick-burgers'));
   assert.equal(lv.sabbath, saturday);
   assert.deepEqual(lv.open, []);
+  // Each recipe's week on the course, for its card in place of lesson numbers.
+  assert.equal(lv.week_of.minestrone, 4);
+  assert.equal(new Set(Object.values(lv.week_of)).size, Object.keys(lv.week_of).length, 'one recipe a week');
+  assert.ok(Object.values(lv.week_of).every((n) => Number.isInteger(n) && n >= 1 && n <= 36));
 });
 
 test('a part is checked off per profile; the parent takes it back, with Undo', async () => {

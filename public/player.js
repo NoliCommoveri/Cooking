@@ -135,7 +135,10 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // the family cooks (§6.21), or null for the lesson itself; a cook already
 // under way keeps the version it started in. leaveOut: [{ ingredient, who }],
 // optional ingredients someone cooking rated 1 star, left out (§6.21).
-export async function openLesson(mount, { profile, family, lessonId, variation = null, leaveOut = [], lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, ask = null, seed = null, onDone = null, mastery = false, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
+// level: { name, week } for a learner on a Level course: the card says
+// "Level 3 Cook · Week 5" (week null when the recipe isn't on the course),
+// and no lesson numbers show, as Cook Around the World's don't fit the course.
+export async function openLesson(mount, { profile, family, lessonId, variation = null, leaveOut = [], lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, level = null, ask = null, seed = null, onDone = null, mastery = false, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
   const [published, B] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
   const kept = readState(profile.id, B.id);
   const L = lessonVersion(B, kept?.cookId ? kept.variation ?? null : variation);
@@ -145,7 +148,8 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
   const ING = { ...R.ingredients, ...extra };
   // Appointed Times lessons keep their A1, A2 labels whatever the course plan (§6.19).
   const seasonal = (id) => R.seasonal?.includes(R.lessons.find((x) => x.id === id)?.unit);
-  const num = (id) => (labels && !seasonal(id) ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null;
+  const num = (id) => (level ? null : (labels && !seasonal(id) ? labels[id] : R.lessons.find((x) => x.id === id)?.label) ?? null);
+  const levelKick = level ? `${level.name}${level.week ? ` · Week ${level.week}` : ''}` : null;
   // "lesson 8a, Shakshuka", or just the title for a dish the family took out of its plan.
   const lessonRef = (id, title) => (num(id) ? `lesson ${num(id)}, ${title}` : title);
   let myFixes = [];
@@ -333,12 +337,12 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
       ? `<div class="${quest ? 'serve' : 'p-serve'} crew"><span class="${quest ? 'lbl' : 'p-lbl'}">Cooking with someone?</span><div class="${quest ? 'sizes' : 'p-sizes'}" role="group" aria-label="Who's cooking">${crew.map((p) => `<button type="button" class="${quest ? 'size' : 'p-size'}" role="checkbox" aria-checked="${S.with.includes(p.id)}" data-act="crew" data-id="${esc(p.id)}">${esc(p.name)}</button>`).join('')}</div></div>`
       : '';
     const top = quest
-      ? `<article class="q-panel q-card"><p class="q-kick">${L.recipe ? esc(L.kicker ?? 'Family recipe') : R.seasonal?.includes(L.unit) ? esc(R.units[L.unit]) : `Path ${L.unit}`}${num(L.id) ? ` · Quest ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
+      ? `<article class="q-panel q-card"><p class="q-kick">${L.recipe ? esc(L.kicker ?? 'Family recipe') : levelKick ? esc(levelKick) : R.seasonal?.includes(L.unit) ? esc(R.units[L.unit]) : `Path ${L.unit}`}${num(L.id) ? ` · Quest ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
           <h2 class="q-title">${esc(L.title)}</h2>${versionOf('q-skill')}<p class="q-skill"><b>${esc(L.skill)}</b></p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${who}${swaps}
           ${gateNote()}<button type="button" class="q-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask an adult to start' : !S.started ? 'Start quest' : 'Keep going'}</button></article>`
       : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
-          ${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2>${versionOf('p-skill')}<p class="p-skill">${esc(L.skill)}</p>
+          ${levelKick && !L.recipe ? `<p class="p-lessonno">${esc(levelKick)}</p>` : ''}${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2>${versionOf('p-skill')}<p class="p-skill">${esc(L.skill)}</p>
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
           ${gateNote()}<button type="button" class="p-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask an adult to start' : !S.started ? "Let's cook" : 'Keep going'}</button></article>`;
     const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';

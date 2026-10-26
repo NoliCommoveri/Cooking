@@ -429,9 +429,13 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     // A seasonal unit (Appointed Times) has its own labels, A1, A2, and so
     // does a Level's own unit, L1, L2 (§12.4).
     const seasonal = sideUnit(L.unit);
+    // A Level learner sees the course's week, never Cook Around the World's
+    // numbers, which are out of order for a Level (owner, 2026-10-26).
+    const week = mine.level ? mine.level.week_of?.[L.id] ?? null : undefined;
+    const number = week !== undefined ? (week ? `Week ${week}` : null) : null;
     if (quest) {
       return el('article', { class: 'q-panel q-card' },
-        el('p', { class: 'q-kick' }, `${seasonal ? lib.units[L.unit] : `Path ${L.unit}`} · Quest ${L.label}`),
+        el('p', { class: 'q-kick' }, week !== undefined ? number ?? (seasonal ? lib.units[L.unit] : 'Side quest') : `${seasonal ? lib.units[L.unit] : `Path ${L.unit}`} · Quest ${L.label}`),
         el('div', { class: 'q-win' }, el('img', { src: L.image, alt: '', width: 230, height: 230, loading: 'lazy' })),
         el('h3', { class: 'q-title' }, L.title),
         el('p', { class: 'q-skill' }, L.skill),
@@ -446,7 +450,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     return el('article', { class: 'p-card' },
       el('span', { class: 'tape t1' }), el('span', { class: 'tape t2' }),
       el('div', { class: 'p-photo' }, el('img', { src: L.image, alt: '', width: 220, height: 220, loading: 'lazy' })),
-      el('p', { class: 'p-lessonno' }, `Lesson ${L.label}`),
+      week !== undefined ? (number ? el('p', { class: 'p-lessonno' }, number) : null) : el('p', { class: 'p-lessonno' }, `Lesson ${L.label}`),
       el('h3', { class: 'p-title' }, L.title),
       el('p', { class: 'p-skill' }, L.skill),
       el('div', { class: 'p-meta' }, el('span', {}, time), el('span', {}, `Serves ${L.servings}`), el('span', {}, L.cuisine)),
@@ -474,7 +478,8 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const recipeBtn = (r, kick) => el('button', { type: 'button', class: 'lesson', 'aria-label': `Open ${r.title}`, onclick: open(r.id) }, recipeCard(r, kick));
   const seasonalUnit = (u) => lib.seasonal?.includes(u);
   const levelUnit = (u) => lib.level_units?.includes(u);
-  const unitName = (u) => (quest && !sideUnit(u) ? `Path ${u}: ${lib.units[u]}` : lib.units[u]);
+  // No path numbers for a Level learner: they're Cook Around the World's.
+  const unitName = (u) => (quest && !sideUnit(u) && !mine.level ? `Path ${u}: ${lib.units[u]}` : lib.units[u]);
 
   // ---- My path (Main quest): what's up next, then the rest of this profile's
   // path. This week and next show open; everything later is under See more
@@ -743,6 +748,8 @@ async function lesson(profileId, lessonId) {
     crew: profiles.filter((x) => x.id !== p.id), onCook: saveCook, onReflect: saveReflection, labels: mine.labels ?? lib.labels, total: mine.total ?? lib.total,
     // A Level's mastery week (12c): "cook it on your own", and why it worked.
     mastery: Boolean(mine.level?.mastery.includes(lessonId)),
+    // On a Level course, the card shows the course's week, not lesson numbers.
+    level: mine.level ? { name: mine.level.name, week: mine.level.week_of?.[lessonId] ?? null } : null,
     // "I want to make this" or "Cook this" (§6.1), and the queued lesson's
     // servings and who it's for, for a fresh cook.
     ask: {

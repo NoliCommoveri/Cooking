@@ -647,6 +647,9 @@ function levelFor(st, pid, day) {
     open: reached.flatMap((w) => weekParts(w, on).map((part) => partOut(w, part))).filter((x) => !x.done_at && !x.skipped),
     // The recipes of mastery weeks: the player says "cook it on your own" (§12.4).
     mastery: V.weeks.filter((w) => w.mastery && st.lessons.idOf[w.week]).map((w) => st.lessons.idOf[w.week]),
+    // The week each recipe is on the course, for its card: "Week 5", never
+    // Cook Around the World's lesson numbers (owner, 2026-10-26).
+    week_of: Object.fromEntries(V.weeks.filter((w) => st.lessons.idOf[w.week]).map((w) => [st.lessons.idOf[w.week], w.week])),
   };
 }
 
