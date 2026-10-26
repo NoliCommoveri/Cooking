@@ -5683,3 +5683,86 @@ Level 2 and five for Level 3 (sheet 40 is Levels 2 and 3).
 - The app shows a Level card's picture once its lesson is written; none of
   these 40 is written yet.
 - Tests: 381.
+
+## 224. 2026-10-26 — Level dish pictures: sheets 45–54
+
+Owner, 2026-10-26: ten more ChatGPT sheets from [Level dish pictures:
+ChatGPT prompts](https://claude.ai/artifact/PbGHZTt9e78S2SbwtyYVMB), "the
+rest of missing L3 art and some L4", matched to the prompt doc's sheets.
+
+- **Before:** Level 3's sheets 45–50 and Level 4's sheets 51–54 hadn't
+  arrived, so those cards had only a meal-type drawing.
+- **Now:**
+  - 40 dish pictures, matched by eye to sheets 45–50 (Level 3, with sheet 50
+    shared with Level 4) and 51–54 (Level 4), saved to
+    `content/images/source/` under the doc's names, cropped into
+    `content/images/dishes/<card id>.png`, built to `public/img/dishes/`,
+    and listed in `tools/dish-sheets.txt`. Every sheet cropped cleanly with
+    the tool; no hand cuts.
+  - `"image"` added to the 40 cards in `sp-3.json` and `sp-4.json`.
+  - Checked by eye for unclean foods: none. The sausages and the antipasto
+    meats look like pork in the pictures, but their cards say beef or chicken
+    sausage, and beef bresaola and beef salami; godeungeo-gui is mackerel,
+    which has fins and scales.
+- Level 3 now has a picture on every recipe card from the prompt doc. Still
+  to come: Level 2's sheets 34–39 and Level 4's sheets 55–62.
+- Tests: 381.
+
+## 225. 2026-10-26 — Re-plan build, 14f: Level 4's own features
+
+Owner, 2026-10-26: wrote the note parents see before assigning Level 4, and
+asked for 14f (plan §12.8).
+
+- **Before:** Level 4 looked like any Level. Its learners got kid safety
+  banners, "Have an adult at home" was only in two weeks' notes, nothing let
+  a learner write its own recipe, and the capstone's written parts had
+  nowhere to go.
+- **Now:**
+  - **The owner's note** (`ASSIGN_NOTES`, `src/content/levels.js`, word for
+    word) shows under Which program? when Level 4 is picked, in Chef Ruth's
+    setup (with Keep Level 4 Chef or Cook Around the World instead), and in
+    the syllabus's Level 4 section.
+  - **Adult-style banners:** `/api/profiles` gives each profile its active
+    Level (and a kid's device now sees each sibling's audience and Level).
+    The player shows only the hazard when everyone on the cook is an adult
+    or on Level 4; one kid not on Level 4 brings the kid banners back.
+  - **Have an adult at home:** `adultAtHome` on Level 4's weeks 26 and 28
+    (the linter allows it on Level 4 only). The week card and the recipe's
+    first step say it.
+  - **Write my recipe:** `ownRecipe` on Level 4's mastery weeks and weeks
+    34–36. The week card has Write my recipe, which opens the family recipe
+    entry flow for the learner (the parent's flow, now shared as
+    `recipeFlow`), with every hard-rule check. It's saved to Our recipes and
+    kept for the week in `level_recipes`. On a mastery week it becomes the
+    week's recipe for everyone on the course, as a swap with Undo, and
+    counts like any recipe (Progress, hours, mastery); one sent for review
+    waits, then Cook this instead picks it. On weeks 34–36 it's a recipe for
+    the capstone menu, cooked from the card; the plan doesn't change. The
+    learner can edit its own. Edit course keeps it as the week's recipe.
+  - **The portfolio:** a part page's `write` boxes (week 34's menu, budget,
+    and guest list; week 35's prep timeline; week 36's reflection essay) save
+    per profile in `level_writing`, not on the Sabbath, and print after the
+    transcript as "Level 4 Chef portfolio", on its own pages. A deleted
+    profile takes its writing with it.
+  - Both tables are new in the draft migration `0002_levels.sql`.
+  - The box labels and hints, and the Write my recipe and portfolio wording,
+    are Claude's draft for the owner to change.
+- **Owner, on `/ops` after it deploys:** press **Re-apply draft** for `0002`.
+  Until then, Write my recipe and the writing boxes say they're waiting for
+  it, and nothing else changes.
+- Screenshots (phone width), sent in the session: setup's note (light and
+  dark), Chef Ruth's note, the syllabus's note (light and dark), the week
+  card before and after Write my recipe, a first step with Have an adult at
+  home, and a page with writing boxes (Kitchen Quest and Chef's Passport),
+  Write my recipe (light and dark), and the transcript's portfolio (light
+  and dark). Week 26's dish isn't written yet, so the kitchen screenshots
+  used a stand-in Level 4 week 1 (adult at home, a mastery week, and writing
+  boxes) that isn't in the repo.
+- Tests: 392. New: the owner's note; each profile's Level; Level 4's adult
+  weeks; writing saved, replaced, cleared, refused (wrong box, too long, no
+  Level 4, another family, before the draft), printed as the portfolio, and
+  deleted with its profile; Write my recipe on a mastery week (checks, a
+  kid's login, the whole course, the queue, edit by its writer only, Undo
+  and back, cooked into Progress), only on its week, kept through Edit
+  course, capstone menu recipes, and before the draft; the linter's
+  `adultAtHome`, `ownRecipe`, and writing box rules.

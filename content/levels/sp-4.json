@@ -18,23 +18,23 @@
     { "week": 1, "unit": 1, "skill": "dicing", "cuisine": "french", "familiar": "chicken-fried-rice", "explore": "ratatouille", "note": "Level 4 versions: every vegetable in brunoise; ratatouille cut evenly and precisely", "drill": { "title": "Timed brunoise", "minutes": 30 }, "knowledge": { "title": "Cuts by size: brunoise, small dice, batonnet, chiffonade; the French herb base", "minutes": 45 }, "sabbath": { "title": "Prep every vegetable for a weekend meal", "minutes": 30 } },
     { "week": 2, "unit": 1, "skill": "measuring", "cuisine": "vietnamese", "familiar": "steak-fajitas", "explore": "bo-luc-lac", "drill": { "title": "Weigh vs. measure; weigh the trim to find the yield", "minutes": 30 }, "knowledge": { "title": "Why weight beats volume; trim loss and buying enough", "minutes": 45 }, "sabbath": { "title": "Weigh and portion ingredients ahead", "minutes": 30 } },
     { "week": 3, "unit": 1, "skill": "measuring", "cuisine": "indian", "familiar": "chicken-enchiladas", "explore": "chana-masala", "note": "Both for 12, scaled by hand from 4", "drill": { "title": "Scale a recipe on paper, then check it against the app's amounts", "minutes": 30 }, "knowledge": { "title": "Scaling factors, and what doesn't scale: salt, spice, time, pan size", "minutes": 45 }, "sabbath": { "title": "Scale a Sabbath recipe to the guest count", "minutes": 30 } },
-    { "week": 4, "unit": 1, "skill": "timing", "mastery": true, "cuisine": "korean", "familiar": "salade-nicoise", "explore": "bibimbap", "note": "Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Write a prep timeline and run it with a timer", "minutes": 30 }, "knowledge": { "title": "Planning a meal backward from serving time", "minutes": 45 }, "sabbath": { "title": "Plan a Sabbath prep timeline", "minutes": 30 } },
+    { "week": 4, "unit": 1, "ownRecipe": true, "skill": "timing", "mastery": true, "cuisine": "korean", "familiar": "salade-nicoise", "explore": "bibimbap", "note": "Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Write a prep timeline and run it with a timer", "minutes": 30 }, "knowledge": { "title": "Planning a meal backward from serving time", "minutes": 45 }, "sabbath": { "title": "Plan a Sabbath prep timeline", "minutes": 30 } },
     { "week": 5, "unit": 2, "skill": "emulsions", "cuisine": "spanish", "familiar": "chicken-caesar", "explore": "ensaladilla-rusa", "note": "Level 4 version of Chicken Caesar: homemade dressing with pasteurized eggs", "drill": { "title": "Make mayonnaise, break it, and rescue it", "minutes": 30 }, "knowledge": { "title": "Emulsions, and raw eggs: the USDA guideline and pasteurized eggs", "minutes": 45 }, "sabbath": { "title": "Make a dressing ahead", "minutes": 30 } },
-    { "week": 6, "unit": 2, "skill": "cooling-reheating", "mastery": true, "cuisine": "lebanese", "familiar": "antipasto-platter", "explore": "mezze-spread", "note": "Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Hold a cold platter below 41°F; the 2-hour rule", "minutes": 30 }, "knowledge": { "title": "Food safety for a cold buffet", "minutes": 45 }, "sabbath": { "title": "Hospitality: Abraham's meal for his guests (Genesis 18:1–8; Hebrews 13:2)", "minutes": 30 } },
+    { "week": 6, "unit": 2, "ownRecipe": true, "skill": "cooling-reheating", "mastery": true, "cuisine": "lebanese", "familiar": "antipasto-platter", "explore": "mezze-spread", "note": "Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Hold a cold platter below 41°F; the 2-hour rule", "minutes": 30 }, "knowledge": { "title": "Food safety for a cold buffet", "minutes": 45 }, "sabbath": { "title": "Hospitality: Abraham's meal for his guests (Genesis 18:1–8; Hebrews 13:2)", "minutes": 30 } },
     { "week": 7, "unit": 3, "skill": "breaking-down-chicken", "cuisine": "moroccan", "familiar": "chicken-cacciatore", "explore": "chicken-tagine", "note": "Both from a whole chicken broken down at home", "drill": { "title": "Break a chicken into 8 pieces; save the back for stock", "minutes": 30 }, "knowledge": { "title": "Yield and cost: a whole bird vs. parts", "minutes": 45 }, "sabbath": { "title": "Freeze the back and wings for stock", "minutes": 30 } },
     { "week": 8, "unit": 3, "skill": "thin-slicing", "cuisine": "french", "familiar": "flank-steak", "explore": "duck-breast-cherry", "drill": { "title": "Trim silverskin; score duck skin", "minutes": 30 }, "knowledge": { "title": "Primal cuts and the method each suits", "minutes": 45 }, "sabbath": { "title": "Clean birds: duck, goose, quail, and the birds Leviticus names (Leviticus 11:13–19)", "minutes": 30 } },
     { "week": 9, "unit": 3, "skill": "cooking-fish", "cuisine": "mexican", "familiar": "teriyaki-salmon-side", "explore": "pescado-veracruzana", "drill": { "title": "Skin and portion a side of salmon; pull the pin bones", "minutes": 30 }, "knowledge": { "title": "Buying fish: wild and farmed, labels, questions for the fish counter", "minutes": 45 }, "sabbath": { "title": "Fins and scales, and the fishermen Jesus called (Leviticus 11:9–12; Luke 5:1–11)", "minutes": 30 } },
-    { "week": 10, "unit": 3, "skill": "breaking-down-chicken", "mastery": true, "cuisine": "persian", "familiar": "chicken-two-ways", "explore": "spatchcocked-quail", "note": "Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Spatchcock a bird", "minutes": 30 }, "knowledge": { "title": "Cost per serving, from the receipt", "minutes": 45 }, "sabbath": { "title": "Manna and quail (Exodus 16:13; Numbers 11:31–32)", "minutes": 30 } },
+    { "week": 10, "unit": 3, "ownRecipe": true, "skill": "breaking-down-chicken", "mastery": true, "cuisine": "persian", "familiar": "chicken-two-ways", "explore": "spatchcocked-quail", "note": "Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Spatchcock a bird", "minutes": 30 }, "knowledge": { "title": "Cost per serving, from the receipt", "minutes": 45 }, "sabbath": { "title": "Manna and quail (Exodus 16:13; Numbers 11:31–32)", "minutes": 30 } },
     { "week": 11, "unit": 4, "skill": "yeast-dough", "cuisine": "japanese", "familiar": "chocolate-babka", "explore": "milk-bread", "drill": { "title": "Make a tangzhong; cold-retard a dough overnight", "minutes": 30 }, "knowledge": { "title": "Lean vs. enriched doughs; what cold fermentation adds", "minutes": 45 }, "sabbath": { "title": "Bread of the Presence (Leviticus 24:5–9)", "minutes": 30 } },
     { "week": 12, "unit": 4, "skill": "folding-layers", "cuisine": "turkish", "familiar": "chicken-pot-pie", "explore": "spinach-feta-borekas", "note": "Level 4 version of the pot pie: a homemade rough-puff top", "drill": { "title": "Lamination folds", "minutes": 30 }, "knowledge": { "title": "Fats: butter vs. shortening; reading pastry labels", "minutes": 45 }, "sabbath": { "title": "Freeze unbaked borekas or a pot pie", "minutes": 30 } },
     { "week": 13, "unit": 4, "skill": "pastry", "cuisine": "jamaican", "familiar": "spinach-mushroom-quiche", "explore": "jamaican-beef-patties", "note": "Patty pastry made with butter", "drill": { "title": "Blind-bake a crust; stop a soggy bottom", "minutes": 30 }, "knowledge": { "title": "Blind baking and soggy bottoms", "minutes": 45 }, "sabbath": { "title": "Make pastry ahead and freeze it", "minutes": 30 } },
     { "week": 14, "unit": 4, "skill": "cutting-in-fat", "cuisine": "venezuelan", "familiar": "biscuits-and-gravy", "explore": "arepas", "note": "Beef or turkey sausage gravy", "drill": { "title": "Scale a quick bread and time it to the main", "minutes": 30 }, "knowledge": { "title": "Chemical leaveners at a larger batch", "minutes": 45 }, "sabbath": { "title": "Freeze unbaked biscuits", "minutes": 30 } },
-    { "week": 15, "unit": 4, "skill": "pastry", "mastery": true, "cuisine": "south-african", "familiar": "apple-pie", "explore": "malva-pudding", "note": "Level 4 version of apple pie: a lattice top. Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Weave a lattice; vent and crimp", "minutes": 30 }, "knowledge": { "title": "Fruit-pie thickeners; reading doneness by the bubbling", "minutes": 45 }, "sabbath": { "title": "Leaven and unleavened bread (Exodus 12:15–20; 1 Corinthians 5:6–8)", "minutes": 30 } },
+    { "week": 15, "unit": 4, "ownRecipe": true, "skill": "pastry", "mastery": true, "cuisine": "south-african", "familiar": "apple-pie", "explore": "malva-pudding", "note": "Level 4 version of apple pie: a lattice top. Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Weave a lattice; vent and crimp", "minutes": 30 }, "knowledge": { "title": "Fruit-pie thickeners; reading doneness by the bubbling", "minutes": 45 }, "sabbath": { "title": "Leaven and unleavened bread (Exodus 12:15–20; 1 Corinthians 5:6–8)", "minutes": 30 } },
     { "week": 16, "unit": 5, "skill": "cooking-fish", "cuisine": "indian", "familiar": "poached-salmon-dill", "explore": "goan-fish-curry", "drill": { "title": "Hold a poaching liquid at 170–180°F", "minutes": 30 }, "knowledge": { "title": "Poaching vs. simmering: the temperatures", "minutes": 45 }, "sabbath": { "title": "Make a court-bouillon ahead", "minutes": 30 } },
     { "week": 17, "unit": 5, "skill": "poaching-eggs", "cuisine": "turkish", "familiar": "eggs-benedict", "explore": "cilbir", "note": "Beef or turkey bacon in the Benedict", "drill": { "title": "Poach 8 eggs and hold them in warm water", "minutes": 30 }, "knowledge": { "title": "Hollandaise and egg safety: 160°F or pasteurized eggs", "minutes": 45 }, "sabbath": { "title": "Poach eggs ahead and reheat them for a crowd", "minutes": 30 } },
     { "week": 18, "unit": 5, "skill": "cooking-grains", "cuisine": "persian", "familiar": "mushroom-risotto", "explore": "tahdig", "drill": { "title": "Toast and stir a risotto; cook rice for 12", "minutes": 30 }, "knowledge": { "title": "Starch: why risotto creams and tahdig crisps", "minutes": 45 }, "sabbath": { "title": "Cook grains ahead for a crowd", "minutes": 30 } },
     { "week": 19, "unit": 5, "skill": "cooking-legumes", "cuisine": "brazilian", "familiar": "black-bean-soup", "explore": "feijoada", "note": "Black bean soup for 8, costed; feijoada with beef only", "drill": { "title": "Cost per serving from the receipt", "minutes": 30 }, "knowledge": { "title": "Unit pricing at the store", "minutes": 45 }, "sabbath": { "title": "Gleaning and generosity (Leviticus 19:9–10; Deuteronomy 24:19–22)", "minutes": 30 } },
-    { "week": 20, "unit": 5, "skill": "reducing", "mastery": true, "cuisine": "vietnamese", "familiar": "french-onion-soup", "explore": "pho-bo", "note": "Beef fat skimmed and thrown out. Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Reduce a stock by half and taste the change", "minutes": 30 }, "knowledge": { "title": "Clear, puréed, and thickened soups; reduction", "minutes": 45 }, "sabbath": { "title": "Freeze stock and soup in portions", "minutes": 30 } },
+    { "week": 20, "unit": 5, "ownRecipe": true, "skill": "reducing", "mastery": true, "cuisine": "vietnamese", "familiar": "french-onion-soup", "explore": "pho-bo", "note": "Beef fat skimmed and thrown out. Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Reduce a stock by half and taste the change", "minutes": 30 }, "knowledge": { "title": "Clear, puréed, and thickened soups; reduction", "minutes": 45 }, "sabbath": { "title": "Freeze stock and soup in portions", "minutes": 30 } },
     { "week": 21, "unit": 6, "skill": "searing", "cuisine": "argentine", "familiar": "seared-thighs-pan-sauce", "explore": "chimichurri-steak", "note": "Level 4 version of chimichurri steak: cooked to doneness by touch", "drill": { "title": "Test doneness by touch, then check with the thermometer", "minutes": 30 }, "knowledge": { "title": "Carryover and resting for whole cuts", "minutes": 45 }, "sabbath": { "title": "Blood and fat: what the rule means when buying meat (Leviticus 3:17; 7:23–27; 17:10–14)", "minutes": 30 } },
     { "week": 22, "unit": 6, "skill": "stir-frying", "cuisine": "chinese", "familiar": "kung-pao-chicken", "explore": "mapo-tofu", "note": "Mapo tofu with ground beef", "drill": { "title": "Set out three dishes' mise en place and cook them in order", "minutes": 30 }, "knowledge": { "title": "Wok heat and batch cooking; Sichuan peppercorn and bean paste", "minutes": 45 }, "sabbath": { "title": "Prep stir-fry kits for the week", "minutes": 30 } },
     { "week": 23, "unit": 6, "skill": "heat-control", "cuisine": "spanish", "familiar": "diner-eggs-to-order", "explore": "tortilla-espanola", "drill": { "title": "Cook four egg styles in a row", "minutes": 30 }, "knowledge": { "title": "Egg proteins and the temperatures they set at", "minutes": 45 }, "sabbath": { "title": "Prep a brunch for guests ahead", "minutes": 30 } },
@@ -43,26 +43,62 @@
     {
       "week": 26,
       "unit": 6,
+      "ownRecipe": true,
       "skill": "deep-frying",
       "mastery": true,
+      "adultAtHome": true,
       "cuisine": "korean",
       "familiar": "fish-and-chips",
       "explore": "korean-fried-chicken",
-      "note": "Have an adult at home. A plain flour and cornstarch dredge if the week falls in spring. Or the student's own dish with the unit's skills, through Write my recipe",
+      "note": "A plain flour and cornstarch dredge if the week falls in spring. Or the student's own dish with the unit's skills, through Write my recipe",
       "drill": { "title": "Hold oil at 350°F; drain and hold fried food crisp in a low oven", "minutes": 30 },
       "knowledge": { "title": "Oil fires; cooling and disposing of oil", "minutes": 45 },
       "sabbath": { "title": "Fry ahead and re-crisp in the oven for guests", "minutes": 30 }
     },
     { "week": 27, "unit": 7, "skill": "oven-browning", "cuisine": "lebanese", "familiar": "salmon-en-papillote", "explore": "samke-harra", "note": "Salmon for 6", "drill": { "title": "Score and stuff a whole fish; check doneness at the backbone", "minutes": 30 }, "knowledge": { "title": "Buying and roasting whole fish", "minutes": 45 }, "sabbath": { "title": "Make a tahini sauce ahead", "minutes": 30 } },
-    { "week": 28, "unit": 7, "skill": "grilling", "cuisine": "indonesian", "familiar": "bbq-chicken-two-zone", "explore": "chicken-satay", "note": "Have an adult at home. Without a grill: a grill pan for direct heat, the oven for indirect", "drill": { "title": "Set up two zones and move food between them", "minutes": 30 }, "knowledge": { "title": "Direct vs. indirect heat; grill fires", "minutes": 45 }, "sabbath": { "title": "Firstfruits and tithing (Deuteronomy 14:22–29; Proverbs 3:9)", "minutes": 30 } },
+    { "week": 28, "unit": 7, "skill": "grilling", "adultAtHome": true, "cuisine": "indonesian", "familiar": "bbq-chicken-two-zone", "explore": "chicken-satay", "note": "Without a grill: a grill pan for direct heat, the oven for indirect", "drill": { "title": "Set up two zones and move food between them", "minutes": 30 }, "knowledge": { "title": "Direct vs. indirect heat; grill fires", "minutes": 45 }, "sabbath": { "title": "Firstfruits and tithing (Deuteronomy 14:22–29; Proverbs 3:9)", "minutes": 30 } },
     { "week": 29, "unit": 7, "skill": "roasting", "cuisine": "greek", "familiar": "roast-beef", "explore": "roast-leg-of-lamb", "note": "Lamb with the fat cap trimmed off", "drill": { "title": "Carve a roast; make a pan jus", "minutes": 30 }, "knowledge": { "title": "Carryover in large roasts", "minutes": 45 }, "sabbath": { "title": "The Passover lamb (Exodus 12:1–11)", "minutes": 30 } },
-    { "week": 30, "unit": 7, "skill": "layering", "mastery": true, "cuisine": "greek", "familiar": "beef-lasagna", "explore": "moussaka", "note": "Both for 12; the lamb fat cap trimmed off. Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Plan oven space and timing for two large pans", "minutes": 30 }, "knowledge": { "title": "Cooking for a crowd: what changes", "minutes": 45 }, "sabbath": { "title": "Assemble a casserole ahead and bake it the day of", "minutes": 30 } },
+    { "week": 30, "unit": 7, "ownRecipe": true, "skill": "layering", "mastery": true, "cuisine": "greek", "familiar": "beef-lasagna", "explore": "moussaka", "note": "Both for 12; the lamb fat cap trimmed off. Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Plan oven space and timing for two large pans", "minutes": 30 }, "knowledge": { "title": "Cooking for a crowd: what changes", "minutes": 45 }, "sabbath": { "title": "Assemble a casserole ahead and bake it the day of", "minutes": 30 } },
     { "week": 31, "unit": 8, "skill": "braising", "cuisine": "mexican", "familiar": "pot-roast", "explore": "birria-de-chivo", "note": "Level 4 version of pot roast: the gravy reduced. Birria fat skimmed and thrown out, tortillas crisped in oil; beef is the swap for goat", "drill": { "title": "Chill a braise and lift off the fat", "minutes": 30 }, "knowledge": { "title": "Collagen to gelatin; marbling and drippings vs. the fat the rule blocks", "minutes": 45 }, "sabbath": { "title": "Braise ahead and reheat", "minutes": 30 } },
     { "week": 32, "unit": 8, "skill": "braising", "cuisine": "french", "familiar": "chicken-chasseur", "explore": "duck-legs-white-beans", "note": "Broth in place of wine; beef sausage with the duck", "drill": { "title": "Sear and render duck legs; save the fat", "minutes": 30 }, "knowledge": { "title": "Braising liquids: stock, tomato, and reduction", "minutes": 45 }, "sabbath": { "title": "Feasting, rejoicing, and moderation (Deuteronomy 14:26; Nehemiah 8:10; Proverbs 23:20–21)", "minutes": 30 } },
-    { "week": 33, "unit": 8, "skill": "one-pot-stews", "mastery": true, "cuisine": "moroccan", "familiar": "cholent", "explore": "dafina", "note": "Both held overnight. Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Hold a stew safely for hours at 140°F or above", "minutes": 30 }, "knowledge": { "title": "Holding hot food for hours; Sabbath stews across the Jewish world", "minutes": 45 }, "sabbath": { "title": "Preparation day (Exodus 16:22–30; Luke 23:54)", "minutes": 30 } },
-    { "week": 34, "unit": 9, "kind": "practice", "minutes": 180, "note": "Test-cook the planned main and sides", "drill": { "title": "Write the menu, budget, and guest list with allergies", "minutes": 30 }, "knowledge": { "title": "Adapting recipes for guests' allergies and to clean ingredients", "minutes": 45 }, "sabbath": { "title": "Send invitations; ask about allergies", "minutes": 30 } },
-    { "week": 35, "unit": 9, "kind": "practice", "minutes": 180, "note": "Make-ahead dishes from the plan: a sauce, the dessert, a stew or braise", "drill": { "title": "Shop within the budget, by store section", "minutes": 30 }, "knowledge": { "title": "Plating and serving family-style", "minutes": 45 }, "sabbath": { "title": "Thursday prep", "minutes": 30 } },
-    { "week": 36, "unit": 9, "kind": "capstone", "minutes": 360, "note": "The full Sabbath meal for household and guests: a main, two sides, bread (challah, or homemade matzah in spring), and dessert, cooked alone", "drill": { "title": "Run the kitchen alone", "minutes": 30 }, "knowledge": { "title": "Reflection essay, the Sunday after (into the portfolio)", "minutes": 45 }, "sabbath": { "title": "Giving thanks for food (Deuteronomy 8:10; 1 Timothy 4:4–5)", "minutes": 30 } }
+    { "week": 33, "unit": 8, "ownRecipe": true, "skill": "one-pot-stews", "mastery": true, "cuisine": "moroccan", "familiar": "cholent", "explore": "dafina", "note": "Both held overnight. Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Hold a stew safely for hours at 140°F or above", "minutes": 30 }, "knowledge": { "title": "Holding hot food for hours; Sabbath stews across the Jewish world", "minutes": 45 }, "sabbath": { "title": "Preparation day (Exodus 16:22–30; Luke 23:54)", "minutes": 30 } },
+    {
+      "week": 34,
+      "unit": 9,
+      "ownRecipe": true,
+      "kind": "practice",
+      "minutes": 180,
+      "note": "Test-cook the planned main and sides",
+      "drill": {
+        "title": "Write the menu, budget, and guest list with allergies",
+        "minutes": 30,
+        "write": [
+          { "id": "menu", "label": "The menu", "hint": "The main, two sides, the bread, and dessert, each with where its recipe comes from." },
+          { "id": "budget", "label": "The budget", "hint": "What you can spend, and what each dish should cost." },
+          { "id": "guest-list", "label": "The guest list", "hint": "Who is coming, and each guest's allergies or foods they avoid." }
+        ]
+      },
+      "knowledge": { "title": "Adapting recipes for guests' allergies and to clean ingredients", "minutes": 45 },
+      "sabbath": { "title": "Send invitations; ask about allergies", "minutes": 30 }
+    },
+    { "week": 35, "unit": 9, "ownRecipe": true, "kind": "practice", "minutes": 180, "note": "Make-ahead dishes from the plan: a sauce, the dessert, a stew or braise", "drill": { "title": "Shop within the budget, by store section", "minutes": 30 }, "knowledge": { "title": "Plating and serving family-style", "minutes": 45 }, "sabbath": { "title": "Thursday prep", "minutes": 30, "write": [{ "id": "prep-timeline", "label": "The prep timeline", "hint": "What you make each day before the meal, and the order you cook in on the day." }] } },
+    {
+      "week": 36,
+      "unit": 9,
+      "ownRecipe": true,
+      "kind": "capstone",
+      "minutes": 360,
+      "note": "The full Sabbath meal for household and guests: a main, two sides, bread (challah, or homemade matzah in spring), and dessert, cooked alone",
+      "drill": { "title": "Run the kitchen alone", "minutes": 30 },
+      "knowledge": {
+        "title": "Reflection essay, the Sunday after (into the portfolio)",
+        "minutes": 45,
+        "write": [
+          { "id": "reflection", "label": "Reflection essay", "hint": "What went well, what you would change, and what you learned this year." }
+        ]
+      },
+      "sabbath": { "title": "Giving thanks for food (Deuteronomy 8:10; 1 Timothy 4:4–5)", "minutes": 30 }
+    }
   ],
   "recipes": [
     {
@@ -72,6 +108,7 @@
       "skills": ["julienne", "searing"],
       "skill": "Weighing in grams and finding the yield",
       "art": "meat",
+      "image": "dishes/steak-fajitas.png",
       "safety": "solo",
       "minutes": 75,
       "estimated": true,
@@ -88,7 +125,29 @@
         "veggies": "some"
       }
     },
-    { "id": "bo-luc-lac", "title": "Bò lúc lắc", "cuisine": "vietnamese", "skills": ["searing"], "skill": "Weighing the trim; searing cubes", "art": "meat", "safety": "solo", "minutes": 75, "estimated": true, "about": "Vietnamese shaking beef: cubed sirloin seared hard and tossed in a savory sauce, over watercress, with a lime-pepper dip.", "main": ["sirloin", "watercress", "garlic", "soy sauce", "lime"], "method": "stove", "tags": { "protein": "beef", "flavors": ["ginger-soy", "sweet-savory"], "heat": "mild", "budget": "$$$", "familiar": "adventurous", "veggies": "some" } },
+    {
+      "id": "bo-luc-lac",
+      "title": "Bò lúc lắc",
+      "cuisine": "vietnamese",
+      "skills": ["searing"],
+      "skill": "Weighing the trim; searing cubes",
+      "art": "meat",
+      "image": "dishes/bo-luc-lac.png",
+      "safety": "solo",
+      "minutes": 75,
+      "estimated": true,
+      "about": "Vietnamese shaking beef: cubed sirloin seared hard and tossed in a savory sauce, over watercress, with a lime-pepper dip.",
+      "main": ["sirloin", "watercress", "garlic", "soy sauce", "lime"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["ginger-soy", "sweet-savory"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "adventurous",
+        "veggies": "some"
+      }
+    },
     {
       "id": "chicken-enchiladas",
       "title": "Chicken enchiladas",
@@ -96,6 +155,7 @@
       "skills": ["layering"],
       "skill": "Scaling a recipe from 4 to 12 by hand",
       "art": "poultry",
+      "image": "dishes/chicken-enchiladas.png",
       "safety": "solo",
       "minutes": 120,
       "estimated": true,
@@ -118,6 +178,7 @@
       "skills": ["timing", "searing"],
       "skill": "Four parts, hot and cold, on one timeline",
       "art": "salad",
+      "image": "dishes/salade-nicoise.png",
       "safety": "solo",
       "minutes": 90,
       "estimated": true,
@@ -133,10 +194,76 @@
         "veggies": "lots"
       }
     },
-    { "id": "bibimbap", "title": "Bibimbap", "cuisine": "korean", "skills": ["timing", "stir-frying"], "skill": "Each topping cut and cooked on its own, timed", "art": "meat", "safety": "solo", "minutes": 120, "estimated": true, "about": "Rice topped with separately cooked vegetables, seasoned beef, a fried egg, and gochujang.", "main": ["rice", "beef", "spinach", "carrots and zucchini", "gochujang"], "method": "stove", "tags": { "protein": "beef", "flavors": ["ginger-soy", "chili-heat"], "heat": "some", "budget": "$$", "familiar": "new-ish", "veggies": "lots" } },
-    { "id": "ensaladilla-rusa", "title": "Ensaladilla rusa", "cuisine": "spanish", "skills": ["emulsions"], "skill": "Homemade mayonnaise", "art": "salad", "safety": "solo", "minutes": 75, "estimated": true, "about": "Spanish potato salad with carrots, peas, and tuna, bound with mayonnaise made from pasteurized eggs.", "main": ["potatoes", "carrots", "peas", "canned tuna", "pasteurized eggs"], "method": "stove", "tags": { "protein": "tuna", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "some" } },
-    { "id": "antipasto-platter", "title": "Antipasto platter", "cuisine": "italian", "skills": ["cooling-reheating"], "skill": "A cold platter that holds below 41°F", "art": "salad", "safety": "solo", "minutes": 60, "estimated": true, "about": "A guest platter of beef bresaola and beef salami, cheeses, marinated vegetables, and olives, with a chopped salad.", "main": ["beef salami", "bresaola", "cheese", "artichokes", "olives"], "method": "no-cook", "tags": { "protein": "beef", "flavors": ["tangy"], "heat": "mild", "budget": "$$$", "familiar": "everyday", "veggies": "some" } },
-    { "id": "mezze-spread", "title": "Mezze spread", "cuisine": "lebanese", "skills": ["cooling-reheating", "cooking-legumes"], "skill": "A spread for guests, held safely", "art": "salad", "safety": "solo", "minutes": 180, "estimated": true, "about": "Hummus from dried chickpeas, baba ghanoush, tabbouleh, and labneh, with pita, set out for guests.", "main": ["dried chickpeas", "eggplant", "parsley", "labneh", "pita"], "method": "stove-oven", "tags": { "protein": "beans-lentils", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "lots" } },
+    {
+      "id": "bibimbap",
+      "title": "Bibimbap",
+      "cuisine": "korean",
+      "skills": ["timing", "stir-frying"],
+      "skill": "Each topping cut and cooked on its own, timed",
+      "art": "meat",
+      "image": "dishes/bibimbap.png",
+      "safety": "solo",
+      "minutes": 120,
+      "estimated": true,
+      "about": "Rice topped with separately cooked vegetables, seasoned beef, a fried egg, and gochujang.",
+      "main": ["rice", "beef", "spinach", "carrots and zucchini", "gochujang"],
+      "method": "stove",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["ginger-soy", "chili-heat"],
+        "heat": "some",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "lots"
+      }
+    },
+    { "id": "ensaladilla-rusa", "title": "Ensaladilla rusa", "cuisine": "spanish", "skills": ["emulsions"], "skill": "Homemade mayonnaise", "art": "salad", "image": "dishes/ensaladilla-rusa.png", "safety": "solo", "minutes": 75, "estimated": true, "about": "Spanish potato salad with carrots, peas, and tuna, bound with mayonnaise made from pasteurized eggs.", "main": ["potatoes", "carrots", "peas", "canned tuna", "pasteurized eggs"], "method": "stove", "tags": { "protein": "tuna", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "some" } },
+    {
+      "id": "antipasto-platter",
+      "title": "Antipasto platter",
+      "cuisine": "italian",
+      "skills": ["cooling-reheating"],
+      "skill": "A cold platter that holds below 41°F",
+      "art": "salad",
+      "image": "dishes/antipasto-platter.png",
+      "safety": "solo",
+      "minutes": 60,
+      "estimated": true,
+      "about": "A guest platter of beef bresaola and beef salami, cheeses, marinated vegetables, and olives, with a chopped salad.",
+      "main": ["beef salami", "bresaola", "cheese", "artichokes", "olives"],
+      "method": "no-cook",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["tangy"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      }
+    },
+    {
+      "id": "mezze-spread",
+      "title": "Mezze spread",
+      "cuisine": "lebanese",
+      "skills": ["cooling-reheating", "cooking-legumes"],
+      "skill": "A spread for guests, held safely",
+      "art": "salad",
+      "image": "dishes/mezze-spread.png",
+      "safety": "solo",
+      "minutes": 180,
+      "estimated": true,
+      "about": "Hummus from dried chickpeas, baba ghanoush, tabbouleh, and labneh, with pita, set out for guests.",
+      "main": ["dried chickpeas", "eggplant", "parsley", "labneh", "pita"],
+      "method": "stove-oven",
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["herby-lemony"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "lots"
+      }
+    },
     {
       "id": "chicken-cacciatore",
       "title": "Chicken cacciatore",
@@ -144,6 +271,7 @@
       "skills": ["breaking-down-chicken", "braising"],
       "skill": "Breaking down a whole chicken",
       "art": "poultry",
+      "image": "dishes/chicken-cacciatore.png",
       "safety": "solo",
       "minutes": 120,
       "estimated": true,
@@ -159,7 +287,7 @@
         "veggies": "some"
       }
     },
-    { "id": "flank-steak", "title": "Sliced flank steak", "cuisine": "american", "skills": ["thin-slicing", "searing"], "skill": "Trimming and slicing against the grain", "art": "meat", "safety": "solo", "minutes": 75, "estimated": true, "about": "Flank steak trimmed, seared, rested, and sliced thin against the grain, with a herb sauce.", "main": ["flank steak", "parsley", "garlic", "olive oil", "lemon"], "method": "stove", "tags": { "protein": "beef", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$$$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "flank-steak", "title": "Sliced flank steak", "cuisine": "american", "skills": ["thin-slicing", "searing"], "skill": "Trimming and slicing against the grain", "art": "meat", "image": "dishes/flank-steak.png", "safety": "solo", "minutes": 75, "estimated": true, "about": "Flank steak trimmed, seared, rested, and sliced thin against the grain, with a herb sauce.", "main": ["flank steak", "parsley", "garlic", "olive oil", "lemon"], "method": "stove", "tags": { "protein": "beef", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$$$", "familiar": "everyday", "veggies": "light" } },
     {
       "id": "duck-breast-cherry",
       "title": "Seared duck breast with cherry sauce",
@@ -167,6 +295,7 @@
       "skills": ["searing", "reducing"],
       "skill": "Scoring skin and rendering fat",
       "art": "poultry",
+      "image": "dishes/duck-breast-cherry.png",
       "safety": "solo",
       "minutes": 90,
       "estimated": true,
@@ -189,6 +318,7 @@
       "skills": ["cooking-fish"],
       "skill": "Skinning and portioning a side of salmon",
       "art": "fish",
+      "image": "dishes/teriyaki-salmon-side.png",
       "safety": "solo",
       "minutes": 75,
       "estimated": true,
@@ -205,7 +335,29 @@
         "veggies": "light"
       }
     },
-    { "id": "pescado-veracruzana", "title": "Pescado a la veracruzana", "cuisine": "mexican", "skills": ["cooking-fish"], "skill": "Cleaning and baking a whole fish", "art": "fish", "safety": "solo", "minutes": 90, "estimated": true, "about": "A whole snapper baked in a Veracruz sauce of tomatoes, olives, capers, and pickled peppers.", "main": ["whole red snapper", "tomatoes", "green olives", "capers", "pickled jalapeños"], "method": "oven", "tags": { "protein": "white-fish", "flavors": ["rich-tomato", "tangy"], "heat": "some", "budget": "$$$", "familiar": "adventurous", "veggies": "some" } },
+    {
+      "id": "pescado-veracruzana",
+      "title": "Pescado a la veracruzana",
+      "cuisine": "mexican",
+      "skills": ["cooking-fish"],
+      "skill": "Cleaning and baking a whole fish",
+      "art": "fish",
+      "image": "dishes/pescado-veracruzana.png",
+      "safety": "solo",
+      "minutes": 90,
+      "estimated": true,
+      "about": "A whole snapper baked in a Veracruz sauce of tomatoes, olives, capers, and pickled peppers.",
+      "main": ["whole red snapper", "tomatoes", "green olives", "capers", "pickled jalapeños"],
+      "method": "oven",
+      "tags": {
+        "protein": "white-fish",
+        "flavors": ["rich-tomato", "tangy"],
+        "heat": "some",
+        "budget": "$$$",
+        "familiar": "adventurous",
+        "veggies": "some"
+      }
+    },
     {
       "id": "chicken-two-ways",
       "title": "Chicken two ways",
@@ -213,6 +365,7 @@
       "skills": ["breaking-down-chicken", "making-stock"],
       "skill": "Using every part of one bird, costed",
       "art": "poultry",
+      "image": "dishes/chicken-two-ways.png",
       "safety": "solo",
       "minutes": 180,
       "estimated": true,
@@ -235,6 +388,7 @@
       "skills": ["breaking-down-chicken", "roasting"],
       "skill": "Spatchcocking a small bird",
       "art": "poultry",
+      "image": "dishes/spatchcocked-quail.png",
       "safety": "solo",
       "minutes": 75,
       "estimated": true,
@@ -257,6 +411,7 @@
       "skills": ["yeast-dough", "layering"],
       "skill": "An enriched, cold-retarded dough, filled and twisted",
       "art": "bread",
+      "image": "dishes/chocolate-babka.png",
       "safety": "solo",
       "minutes": 240,
       "estimated": true,
@@ -273,8 +428,53 @@
         "veggies": "light"
       }
     },
-    { "id": "milk-bread", "title": "Japanese milk bread", "cuisine": "japanese", "skills": ["yeast-dough", "scalded-dough"], "skill": "A tangzhong for a soft crumb", "art": "bread", "safety": "solo", "minutes": 210, "estimated": true, "about": "A tall, soft loaf made with tangzhong, a cooked flour-and-milk paste that keeps it tender for days.", "main": ["bread flour", "milk", "yeast", "butter", "egg"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
-    { "id": "spinach-feta-borekas", "title": "Spinach and feta borekas", "cuisine": "turkish", "skills": ["folding-layers", "filling-crimping"], "skill": "Laminating a rough puff", "art": "side", "safety": "solo", "minutes": 180, "estimated": true, "about": "Homemade rough-puff pastry folded around spinach and feta, brushed with egg and sesame, and baked flaky.", "main": ["flour", "butter", "spinach", "feta", "sesame seeds"], "method": "oven", "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "some" } },
+    {
+      "id": "milk-bread",
+      "title": "Japanese milk bread",
+      "cuisine": "japanese",
+      "skills": ["yeast-dough", "scalded-dough"],
+      "skill": "A tangzhong for a soft crumb",
+      "art": "bread",
+      "image": "dishes/milk-bread.png",
+      "safety": "solo",
+      "minutes": 210,
+      "estimated": true,
+      "about": "A tall, soft loaf made with tangzhong, a cooked flour-and-milk paste that keeps it tender for days.",
+      "main": ["bread flour", "milk", "yeast", "butter", "egg"],
+      "method": "oven",
+      "meal": false,
+      "tags": {
+        "protein": "none",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      }
+    },
+    {
+      "id": "spinach-feta-borekas",
+      "title": "Spinach and feta borekas",
+      "cuisine": "turkish",
+      "skills": ["folding-layers", "filling-crimping"],
+      "skill": "Laminating a rough puff",
+      "art": "side",
+      "image": "dishes/spinach-feta-borekas.png",
+      "safety": "solo",
+      "minutes": 180,
+      "estimated": true,
+      "about": "Homemade rough-puff pastry folded around spinach and feta, brushed with egg and sesame, and baked flaky.",
+      "main": ["flour", "butter", "spinach", "feta", "sesame seeds"],
+      "method": "oven",
+      "tags": {
+        "protein": "none",
+        "flavors": ["creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      }
+    },
     {
       "id": "jamaican-beef-patties",
       "title": "Jamaican beef patties",
@@ -282,6 +482,7 @@
       "skills": ["pastry", "filling-crimping"],
       "skill": "A turmeric pastry, filled and crimped",
       "art": "meat",
+      "image": "dishes/jamaican-beef-patties.png",
       "safety": "solo",
       "minutes": 150,
       "estimated": true,

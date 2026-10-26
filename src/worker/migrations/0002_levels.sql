@@ -45,3 +45,30 @@ CREATE TABLE IF NOT EXISTS course_pictures (
   updated_at TEXT NOT NULL,
   PRIMARY KEY (course_id, profile_id)
 );
+
+-- Write my recipe (14f): a family recipe a learner wrote for a Level week, on
+-- Level 4's mastery weeks (the week can cook it) and the weeks it plans its
+-- capstone menu. recipe_id: its lesson id, "recipe:<id>".
+CREATE TABLE IF NOT EXISTS level_recipes (
+  course_id  TEXT NOT NULL,
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  week       INTEGER NOT NULL,
+  recipe_id  TEXT NOT NULL,
+  profile_id TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  PRIMARY KEY (course_id, week, recipe_id)
+);
+
+-- The portfolio (14f): what a learner types into a part page's writing boxes
+-- (the capstone's menu, budget, guest list, prep timeline, and reflection
+-- essay at Level 4), one row per box. field: the box's id, unique in its Level.
+CREATE TABLE IF NOT EXISTS level_writing (
+  course_id  TEXT NOT NULL,
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  profile_id TEXT NOT NULL,
+  week       INTEGER NOT NULL,
+  field      TEXT NOT NULL,
+  body       TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  PRIMARY KEY (course_id, profile_id, week, field)
+);

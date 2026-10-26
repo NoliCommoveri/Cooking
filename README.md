@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [223. 2026-10-26 — Level dish pictures: sheets 29–33 and 40–44](docs/build-log.md#223-2026-10-26--level-dish-pictures-sheets-2933-and-4044)
+**Latest build log entry:** [225. 2026-10-26 — Re-plan build, 14f: Level 4's own features](docs/build-log.md#225-2026-10-26--re-plan-build-14f-level-4s-own-features)
 
 ## Current features
 
@@ -69,6 +69,9 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Cook this instead** (release 1): the kitchen's week card and the parent's course card show both dishes; a learner or parent swaps the week for the whole course, with Undo (not on the Sabbath); after a shopping list, the preview for the new dish with the old list's items preselected.
 - **Step pictures** (release 1 for the setting): a lesson step can have a picture, shown under the step or behind Show me; each learner on a Level course is set to the Level's way (Level 2 under each step, Level 3 and 4 behind Show me) or the parent's pick.
 - **Level versions** (release 1): a lesson can have a version written for each Level; that Level's course always cooks it (or the lesson itself until it's written), never a taste pick. The linter warns when a Level recipe breaks its Level's writing standard.
+- **Level 4's features** (release 1): the owner's note for parents when Level 4 is picked (setup, Chef Ruth, the syllabus); adult-style safety banners when everyone on a cook is an adult or on Level 4; "Have an adult at home" on its deep frying and grilling weeks.
+- **Write my recipe** (release 1): on Level 4's mastery weeks a learner writes its own dish, with every hard-rule check, and it becomes the week's recipe (with Undo); on the capstone weeks, the recipes for its menu.
+- **The Level 4 portfolio** (release 1): writing boxes on the capstone's pages (menu, budget, guest list, prep timeline, reflection essay), kept per learner and printed after the transcript.
 - **Level week numbers** (release 1): a Level learner's recipe cards say the course's week ("Level 3 Cook · Week 4"), never Cook Around the World's lesson numbers.
 - **Weeks the settings rule out** (release 1): when both dishes are ruled out, the week waits and the course card says why, with Check settings, Request a replacement, Go on to the next week, and Change; the learner's kitchen shows Show a parent. Requests are counted on Recipe gaps.
 - **The kitchen's Level week** (release 1): this week's recipe and its drill, knowledge, and Beyond the Recipe pages, each checked off with Done (not on the Sabbath); parts still open from earlier weeks; the parent's Take back; and a mastery week's "cook it on your own" and "Why did it work?".

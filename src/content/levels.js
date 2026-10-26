@@ -30,3 +30,10 @@ export function plannedMinutes(weeks, minutesOf, on = PARTS) {
   return m;
 }
 export const hoursOf = (minutes) => Math.round(minutes / 60);
+
+// What a parent reads before assigning a Level, where one needs it: under
+// Which program? at setup and with Chef Ruth, and in the syllabus. The
+// owner's words (2026-10-26), word for word.
+export const ASSIGN_NOTES = {
+  'sp-4': 'Note: While lessons do review some fundamentals in culinary technique, Level 4 is intended for somewhat experienced cooks and pre-supposes learners that are ready to be in the kitchen independently. Please do not assign until your learner is able to operate the stove-top and oven themselves, and is able to drain, work with oils, and perform cutting unassisted.',
+};

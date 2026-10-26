@@ -9,7 +9,9 @@ import { toBase, mixed } from './lib/units.js';
 import { LOGIN_PICTURES } from './lib/login-pictures.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 import { RUBRIC, GRADE_TEXT_MAX } from './lib/grades.js';
-import { PARTS, plannedMinutes, hoursOf } from './lib/levels.js';
+import { PARTS, plannedMinutes, hoursOf, ASSIGN_NOTES } from './lib/levels.js';
+// The longest a writing box takes (14f), as the Worker checks it.
+const WRITING_MAX = 20000;
 import { markTerms, toggleTermCard } from './lib/terms.js';
 import { progressView, levelProgressView, celebrate } from './rewards.js';
 import { isMuted, setMuted } from './sound.js';
@@ -551,7 +553,8 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
         w.swap.by === p.id && !sabbath ? el('button', { type: 'button', class: 'k-skip', onclick: (e) => swapDish(e, 'level-swap/undo', { week: w.week, from: w.swap.from }, (r) => `This week's recipe is ${r.title} again.`) }, 'Undo') : null) : null,
       // The other dish: one that can't be cooked with the family's settings
       // says so; one still being written, or in another week, isn't shown.
-      w.choices.filter((c) => !c.current && (c.can || c.out)).map((c) => el('div', { class: 'k-part k-other' },
+      // The learner's own recipes are under Write my recipe (14f).
+      w.choices.filter((c) => !c.current && (c.can || c.out) && c.slot !== 'own').map((c) => el('div', { class: 'k-part k-other' },
         el('span', { class: 'k-part-l' }, `Or the ${SLOT_NAMES[c.slot]} dish`), el('b', {}, c.title),
         c.out ? el('small', {}, "Not with your family's settings")
           : sabbath ? el('small', {}, 'Swap after the Sabbath')
@@ -560,6 +563,28 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
       w.swap?.shopping ? el('div', { class: 'k-blocked', role: 'note' },
         el('p', {}, `The shopping list was for ${w.swap.from_title}. Show a parent so they can check what ${w.recipe_title} needs.`),
         el('a', { class: btn, href: '#/parent/queue' }, 'Show a parent')) : null,
+    ];
+  };
+
+  // ---- Write my recipe (14f): on Level 4's mastery weeks, the learner's own
+  // dish with the unit's skills, which becomes the week's recipe; on the
+  // weeks it plans its capstone menu, the recipes for that menu.
+  const writeView = (w) => {
+    const btn = quest ? 'q-btn' : 'p-btn', note = quest ? 'q-swap' : 'p-swap';
+    const resting = mine.level.sabbath || isSabbath();
+    const edit = (x) => go(`#/kitchen/${p.id}/~write-${w.week}-${x.id.slice(7)}`);
+    return [
+      el('p', { class: note }, w.kind ? 'Write the recipes for your menu. Each one is kept in Our recipes and cooks like any recipe.'
+        : "Or cook your own dish with this unit's skills: write it, and it becomes this week's recipe for everyone on your course."),
+      w.mine.map((x) => el('div', { class: 'k-part k-other' },
+        el('span', { class: 'k-part-l' }, x.current ? 'This week\'s recipe' : 'Your recipe'), el('b', {}, x.title),
+        x.held ? el('small', {}, "Waiting for the owner's review")
+          : w.kind ? el('button', { type: 'button', class: btn, onclick: open(x.id) }, 'Cook it')
+            : x.current || w.recipe_done || resting ? null
+              : el('button', { type: 'button', class: btn, onclick: (e) => swapDish(e, 'level-swap', { week: w.week, id: x.id }, (r) => `This week's recipe is ${r.title} now. Everyone on your course cooks it.`) }, 'Cook this instead'),
+        resting ? null : el('button', { type: 'button', class: 'k-skip', onclick: () => edit(x) }, 'Edit'))),
+      w.recipe_done ? null : resting ? el('p', { class: note }, 'Write your recipe on another day than the Sabbath.')
+        : el('button', { type: 'button', class: btn, onclick: () => go(`#/kitchen/${p.id}/~write-${w.week}`) }, w.mine.length && w.kind ? 'Write another recipe' : 'Write my recipe'),
     ];
   };
 
@@ -579,6 +604,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
       w ? [
         el('h2', { class: quest ? 'q-title' : 'p-title' }, `Unit ${w.unit}: ${w.unit_name}`),
         w.mastery ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, 'Mastery week: cook it on your own') : null,
+        w.adult_home ? el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-cooked` }, art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-hat"/></svg>'), "Have an adult at home for this week's recipe.") : null,
         el('div', { class: 'k-parts' },
           // In the owner's order: Knowledge, Drill, the Recipe, Beyond the Recipe.
           w.parts.filter((x) => x.part !== 'sabbath').map(partRow),
@@ -587,6 +613,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
             : w.recipe_written ? row(recipeLabel(w), w.recipe_title, w.recipe_done ? 'Cooked ✓' : 'This week', open(w.recipe), w.recipe_done) : row('Recipe', w.recipe_title ?? 'Being written', 'Coming soon'),
           w.parts.filter((x) => x.part === 'sabbath').map(partRow)),
         w.choices ? choicesView(w) : null,
+        w.write ? writeView(w) : null,
         w.blocked ? el('div', { class: 'k-blocked', role: 'note' },
           el('p', {}, "This week's recipe can't be cooked with your family's settings. Show a parent: they can check the settings, ask for another recipe, or go on to next week."),
           el('a', { class: quest ? 'q-btn' : 'p-btn', href: '#/parent/queue' }, 'Show a parent')) : null,
@@ -674,7 +701,8 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
 // profile's theme, with Done. Nothing is checked off on the Sabbath.
 const PART_NAMES = { knowledge: 'Knowledge', drill: 'Drill', sabbath: 'Beyond the Recipe' };
 // A Level week's two dishes (§12.0).
-const SLOT_NAMES = { familiar: 'Familiar', explore: 'Explore' };
+// and the learner's own recipe (14f, Write my recipe).
+const SLOT_NAMES = { familiar: 'Familiar', explore: 'Explore', own: 'Your own' };
 async function levelPage(profileId, key) {
   const [, week, part] = key.match(/^~(\d+)-(drill|knowledge|sabbath)$/) ?? [];
   const { profiles } = await api('GET', '/api/profiles');
@@ -695,6 +723,26 @@ async function levelPage(profileId, key) {
       } }, el('b', {}, c)))), why);
   });
   const written = x.body?.length || x.steps?.length || x.quiz?.length;
+  // The page's writing boxes (14f): what's typed goes into the portfolio,
+  // printed with the transcript. Not saved on the Sabbath.
+  const resting = lv.sabbath || isSabbath();
+  const boxes = (x.write ?? []).map((b) => ({ ...b, input: el('textarea', { rows: 8, maxlength: WRITING_MAX, readonly: resting, 'aria-label': b.label }, x.written?.[b.id] ?? '') }));
+  const writing = boxes.length ? el('div', { class: 'k-writing' },
+    boxes.map((b) => el('label', { class: 'k-write' }, el('b', {}, b.label), b.hint ? el('small', {}, b.hint) : null, b.input)),
+    resting ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, 'Your writing is kept. Add to it on another day than the Sabbath.')
+      : el('button', { type: 'button', class: quest ? 'q-btn' : 'p-btn', onclick: async (e) => {
+        const btn = e.currentTarget;
+        btn.disabled = true;
+        try {
+          for (const b of boxes) {
+            if (b.input.value.trim() === (x.written?.[b.id] ?? '')) continue;
+            await api('PUT', `/api/profiles/${p.id}/level-writing?${tz()}`, { week: x.week, part, field: b.id, body: b.input.value });
+            x.written = { ...x.written, [b.id]: b.input.value.trim() };
+          }
+          showToast('Saved to your portfolio.');
+        } catch (err) { showToast(err.message); }
+        btn.disabled = false;
+      } }, 'Save my writing')) : null;
   // Kitchen words on the page are buttons that open their meaning (§6.1).
   const { terms } = await contentRegistry();
   const worded = (tag, t) => { const n = el(tag); n.innerHTML = markTerms(t, terms, escHtml); return n; };
@@ -712,7 +760,8 @@ async function levelPage(profileId, key) {
         (x.body ?? []).map((t) => worded('p', t)),
         x.steps?.length ? el('ol', {}, x.steps.map((t) => worded('li', t))) : null,
         quiz,
-        written ? null : el('p', {}, 'This page is still being written. Do what the title says, with an adult if you need one, then tap Done.')),
+        written ? null : el('p', {}, boxes.length ? 'This page is still being written. Do what the title says, write it below, then tap Done.' : 'This page is still being written. Do what the title says, with an adult if you need one, then tap Done.')),
+      writing,
       x.done_at ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, `Done ${fmtDay(x.done_at.slice(0, 10))} ✓`)
         : x.skipped ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, 'Skipped. An adult can take it back.')
           : el('div', { class: 'acts' },
@@ -749,7 +798,8 @@ async function lesson(profileId, lessonId) {
     // A Level's mastery week (12c): "cook it on your own", and why it worked.
     mastery: Boolean(mine.level?.mastery.includes(lessonId)),
     // On a Level course, the card shows the course's week, not lesson numbers.
-    level: mine.level ? { name: mine.level.name, week: mine.level.week_of?.[lessonId] ?? null } : null,
+    // and on Level 4's deep frying and grilling, "Have an adult at home" (§12.8).
+    level: mine.level ? { name: mine.level.name, week: mine.level.week_of?.[lessonId] ?? null, adultHome: Boolean(mine.level.adult_home?.includes(lessonId)) } : null,
     // Step pictures under each step, or behind Show me (14e).
     pictures: mine.level?.pictures ?? 'button',
     // "I want to make this" or "Cook this" (§6.1), and the queued lesson's
@@ -2202,8 +2252,12 @@ const courseEditor = parentOnly(async (cid) => {
         [['shown', 'Under each step'], ['button', 'Behind Show me']].map(([v, t]) => el('option', { value: v, selected: picsOf(pid) === v }, `${t}${v === picsDefault() ? ' (the Level\'s way)' : ''}`)))))
       : [el('p', { class: 'mut small', style: 'margin:0' }, "Pick who it's for first.")]));
   };
+  // Level 4's note for parents (§12.8), under the program once it's picked.
+  const assignBox = el('p', { class: 'card notice', role: 'note', hidden: true, style: 'margin:8px 0 0' });
   const drawProgram = () => {
     const V = levelOf();
+    assignBox.hidden = !ASSIGN_NOTES[program];
+    assignBox.textContent = ASSIGN_NOTES[program] ?? '';
     perBox.hidden = Boolean(V);
     levelPace.hidden = !V;
     planSet.hidden = Boolean(V);
@@ -2221,7 +2275,8 @@ const courseEditor = parentOnly(async (cid) => {
       el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'program', value: '', checked: true }),
         el('span', {}, 'Cook Around the World', el('em', {}, ' A dish at a time, each with its skill, at your pace'))),
       [...levels].sort((x, y) => x.name.localeCompare(y.name)).map((V) => el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'program', value: V.id }),
-        el('span', {}, V.name, el('em', {}, ` ${V.weeks.length} weeks, about ${V.hours} hours: a reading, a drill, a recipe, and a Beyond the Recipe page each week`)))))
+        el('span', {}, V.name, el('em', {}, ` ${V.weeks.length} weeks, about ${V.hours} hours: a reading, a drill, a recipe, and a Beyond the Recipe page each week`)))),
+      assignBox)
     : existing?.program ? el('p', { class: 'mut small', style: 'margin:0' }, `Program: ${levelOf()?.name ?? 'a Level'}`) : null;
   drawProgram();
 
@@ -2696,8 +2751,25 @@ const transcript = parentOnly(async (pid) => {
         t.level?.units.some((u) => u.mastered) ? line('Units mastered', t.level.units.filter((u) => u.mastered).map((u) => `${u.number}. ${u.name}`).join('; ')) : null,
         line('Final grade', d.final_grade),
         line('Credit', d.credit)),
-      el('p', { class: 'mut small' }, `Printed ${fmtDay(localToday(), long)}`)));
+      el('p', { class: 'mut small' }, `Printed ${fmtDay(localToday(), long)}`)),
+    t.portfolio ? portfolioView(t.portfolio, d.student_name || p.name) : null);
 });
+
+// Level 4's portfolio (14f): the capstone's written parts, as the learner
+// typed them on their pages, printed on its own pages after the transcript.
+function portfolioView(pf, student) {
+  const done = pf.pieces.filter((x) => x.body);
+  const left = pf.pieces.filter((x) => !x.body);
+  return el('section', { class: 'printout portfolio' },
+    el('h2', {}, `${pf.name} portfolio`),
+    el('p', {}, el('b', {}, student)),
+    done.length ? done.map((x) => el('div', { class: 'pf-piece' },
+      el('h3', {}, x.label),
+      el('p', { class: 'mut small' }, `Week ${x.week} · ${PART_NAMES[x.part]}: ${x.title}`),
+      el('div', { class: 'pf-body' }, x.body)))
+      : el('p', { class: 'mut' }, 'Nothing written yet. The capstone weeks have boxes for each part.'),
+    left.length && done.length ? el('p', { class: 'mut small noprint' }, `Not written yet: ${left.map((x) => x.label.toLowerCase()).join(', ')}.`) : null);
+}
 
 // ---------- owner screens ----------
 
@@ -3074,9 +3146,48 @@ const ownerReports = parentOnly(async (flash) => {
 // The guided entry flow: one thing at a time (§6.10). The draft is kept on
 // this device until it's saved, so a closed tab doesn't lose it.
 const recipeEditor = parentOnly(async (rid) => {
-  const R = await contentRegistry();
   const existing = rid === 'new' ? null : await api('GET', `/api/recipes/${rid}`);
-  const draftKey = `cpr.recipe.${rid}`;
+  await recipeFlow({
+    existing, draftKey: `cpr.recipe.${rid}`, cancel: '#/parent/recipes',
+    check: (D) => api('POST', '/api/recipes/check', { ...D, id: existing ? rid : undefined }),
+    save: (D) => (existing ? api('PUT', `/api/recipes/${rid}`, D) : api('POST', '/api/recipes', D)),
+    done: (r, review) => parentRecipes(el('p', { class: 'ok flash', role: 'status' }, review ? `Saved ${r.title} and sent it for review. It can be cooked once it's cleared.` : `Saved ${r.title}. It's in every profile's kitchen.`)),
+    frame: (body) => parentScreen('recipes', el('a', { class: 'hbtn link', href: '#/parent/recipes' }, '← Our recipes'),
+      existing ? null : el('p', { class: 'mut' }, 'Add your family\'s recipe one thing at a time. Nothing is saved until the last step.'), body),
+  });
+});
+
+// Write my recipe (14f): a Level 4 learner writes its own recipe for a
+// mastery week or its capstone menu, in the same guided flow and with the
+// same checks as a parent's (§6.10). A mastery week cooks it from then on.
+async function writeOwn(profileId, key) {
+  const [, week, hex] = key.match(/^~write-(\d+)(?:-([0-9a-f]{16}))?$/) ?? [];
+  const { profiles } = await api('GET', '/api/profiles');
+  const p = profiles.find((x) => x.id === profileId);
+  if (!p || !week) return go('#/');
+  const existing = hex ? await api('GET', `/api/recipes/${hex}`) : null;
+  const back = `#/kitchen/${p.id}`;
+  await recipeFlow({
+    existing, draftKey: `cpr.own.${p.id}.${week}.${hex ?? 'new'}`, cancel: back,
+    check: (D) => api('POST', `/api/profiles/${p.id}/level-recipe/check?${tz()}`, { ...D, week: Number(week), id: hex }),
+    save: (D) => (hex ? api('PUT', `/api/profiles/${p.id}/level-recipe/${hex}?${tz()}`, D) : api('POST', `/api/profiles/${p.id}/level-recipe?${tz()}`, { ...D, week: Number(week) })),
+    done: (r, review, res) => {
+      showToast(review ? `Saved ${r.title} and sent it for review. It can be cooked once it's cleared.`
+        : res?.cooks ? `${r.title} is this week's recipe now. Everyone on your course cooks it.`
+          : hex ? 'Saved your changes.' : `Saved ${r.title}. It's in Our recipes.`);
+      go(back);
+    },
+    frame: (body) => screen(topbar(p.name), el('a', { class: 'back', href: back }, '← Back to the kitchen'),
+      el('h1', {}, hex ? 'Edit my recipe' : 'Write my recipe'), sabbathBanner(),
+      hex ? null : el('p', { class: 'mut' }, `For week ${week}. Write it one thing at a time; nothing is saved until the last step. It goes through the same checks as every recipe in the app.`), body),
+  });
+}
+
+// The guided entry flow for a family recipe (§6.10): a parent's, or a
+// learner's Write my recipe (14f). check and save call the Worker; done runs
+// after a save; frame draws the page around it.
+async function recipeFlow({ existing, draftKey, cancel, check, save, done, frame }) {
+  const R = await contentRegistry();
   let D;
   try { D = JSON.parse(sessionStorage.getItem(draftKey)); } catch { D = null; }
   D ??= existing ? structuredClone(existing.recipe) : { title: '', servings: me.family.default_servings, totalMinutes: '', mealType: '', why: null, ingredients: [], equipment: [], steps: [] };
@@ -3183,16 +3294,16 @@ const recipeEditor = parentOnly(async (rid) => {
     // 6. review: the server's checks, then save
     () => {
       const box = el('div', {}, el('p', { class: 'mut' }, 'Checking…'));
-      api('POST', '/api/recipes/check', { ...D, id: existing ? rid : undefined }).then((c) => {
+      check(D).then((c) => {
         const r = c.recipe;
         box.replaceChildren(
           // Only a blocked word wrong: it may be a false alarm, for the owner to review (§6.10).
           c.reviewable
             ? el('div', { class: 'card notice', role: 'alert' }, el('p', {}, blockedNotice(c.blocked)),
               el('div', { class: 'acts' }, actBtn('Send for review', '', async () => {
-                const res = existing ? await api('PUT', `/api/recipes/${rid}`, { ...D, send_for_review: true }) : await api('POST', '/api/recipes', { ...D, send_for_review: true });
+                const res = await save({ ...D, send_for_review: true });
                 try { sessionStorage.removeItem(draftKey); } catch { /* nothing kept */ }
-                parentRecipes(el('p', { class: 'ok flash', role: 'status' }, `Saved ${r.title} and sent it for review. It can be cooked once it's cleared.`));
+                done(r, true, res);
                 return res;
               })))
             : c.problems.length
@@ -3203,9 +3314,9 @@ const recipeEditor = parentOnly(async (rid) => {
           el('ul', {}, r.ingredients.map((l) => el('li', {}, `${l.amount == null ? l.text : `${[8, 3].some((d) => Math.abs(l.amount * d - Math.round(l.amount * d)) < 1e-6) && !/^0$/.test(mixed(l.amount)) ? mixed(l.amount) : l.amount} ${unitLabel(l.unit, l.ingredient)}`} ${l.ingredient ? R.ingredients[l.ingredient]?.name.toLowerCase() : l.name}${l.prep ? `, ${l.prep}` : ''}${l.optional ? ' (optional)' : ''}`))),
           el('ol', {}, r.steps.map((s) => el('li', {}, s.text, s.type === 'wash' ? el('small', { class: 'mut' }, ' (added for you)') : null))),
           c.problems.length ? null : el('div', { class: 'acts' }, actBtn(existing ? 'Save changes' : 'Save recipe', 'pri', async () => {
-            const res = existing ? await api('PUT', `/api/recipes/${rid}`, D) : await api('POST', '/api/recipes', D);
+            const res = await save(D);
             try { sessionStorage.removeItem(draftKey); } catch { /* nothing kept */ }
-            parentRecipes(el('p', { class: 'ok flash', role: 'status' }, `Saved ${r.title}. It's in every profile's kitchen.`));
+            done(r, false, res);
             return res;
           })));
       }, (err) => box.replaceChildren(el('p', { class: 'err' }, err.message)));
@@ -3220,13 +3331,12 @@ const recipeEditor = parentOnly(async (rid) => {
       el('h2', {}, PAGES[page]),
       pages[page](),
       el('div', { class: 'acts' },
-        page ? el('button', { type: 'button', class: 'hbtn', onclick: () => { page--; draw(); window.scrollTo(0, 0); } }, 'Back') : el('a', { class: 'hbtn', href: '#/parent/recipes' }, 'Cancel'),
+        page ? el('button', { type: 'button', class: 'hbtn', onclick: () => { page--; draw(); window.scrollTo(0, 0); } }, 'Back') : el('a', { class: 'hbtn', href: cancel }, 'Cancel'),
         page < PAGES.length - 1 ? el('button', { type: 'button', class: 'hbtn pri', onclick: () => { page++; draw(); window.scrollTo(0, 0); } }, 'Next') : null)));
   }
   draw();
-  parentScreen('recipes', el('a', { class: 'hbtn link', href: '#/parent/recipes' }, '← Our recipes'),
-    existing ? null : el('p', { class: 'mut' }, 'Add your family\'s recipe one thing at a time. Nothing is saved until the last step.'), body);
-});
+  frame(body);
+}
 
 async function refresh() {
   me = await api('GET', '/api/me');
@@ -3260,6 +3370,7 @@ async function route() {
     if (me.kid) {
       const own = me.kid.profile_id;
       if (top === 'kitchen' && sub === own && extra?.startsWith('@')) return await kitchen(own, extra.slice(1));
+      if (top === 'kitchen' && sub === own && extra?.startsWith('~write-')) return await writeOwn(own, extra);
       if (top === 'kitchen' && sub === own && extra?.startsWith('~')) return await levelPage(own, extra);
       if (top === 'kitchen' && sub === own && extra) return await lesson(own, decodeURIComponent(extra));
       if (top === 'kitchen' && sub === own) return await kitchen(own);
@@ -3270,6 +3381,7 @@ async function route() {
     // Before /ops applies migration 0014, the old first run still sets the PIN.
     if (!me.family.pin_set) return firstRun();
     if (top === 'kitchen' && sub && extra?.startsWith('@')) return await kitchen(sub, extra.slice(1));
+    if (top === 'kitchen' && sub && extra?.startsWith('~write-')) return await writeOwn(sub, extra);
     if (top === 'kitchen' && sub && extra?.startsWith('~')) return await levelPage(sub, extra);
     if (top === 'kitchen' && sub && extra) return await lesson(sub, decodeURIComponent(extra));
     if (top === 'kitchen' && sub) return await kitchen(sub);

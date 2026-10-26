@@ -3,7 +3,7 @@
 // weeks are written. The Levels show once their release is launched (§8.6);
 // until then the Worker serves none, and the page says they're coming. The
 // words are a draft for the owner to approve.
-import { PARTS, PART_NAMES, plannedMinutes, hoursOf } from './lib/levels.js';
+import { PARTS, PART_NAMES, plannedMinutes, hoursOf, ASSIGN_NOTES } from './lib/levels.js';
 import { allLevels } from './level-outlines.js';
 const root = document.getElementById('syllabus');
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -39,6 +39,7 @@ if (!levels.length) {
     const h = hoursOfLevel(L), special = L.weeks.some((w) => w.kind);
     return `<h2>${esc(L.name)}</h2>
 <p>36 weeks in ${L.units.length} units. ${esc(L.ready)}.${L.note ? ` ${esc(L.note)}` : ''}</p>
+${ASSIGN_NOTES[L.id] ? `<div class="credit">${esc(ASSIGN_NOTES[L.id])}</div>` : ''}
 <h3>Learning objectives</h3>
 <p>By the end of ${esc(L.name.split(' ').slice(0, 2).join(' '))}, a student:</p>
 <ul>${L.units.map((u) => `<li>${esc(u.goal)}.</li>`).join('')}</ul>

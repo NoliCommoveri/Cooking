@@ -15,7 +15,7 @@ import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
 import { FREE_MAX, servingOptions } from '../content/scale.js';
 import { numberCourse } from '../content/course.js';
-import { register as registerPlan, markCooked, tzOf, levelProgress, levelSummary, partRows, levelLessonOn, levelsOn } from './plan.js';
+import { register as registerPlan, markCooked, tzOf, levelProgress, levelSummary, partRows, levelLessonOn, levelsOn, profileLevels } from './plan.js';
 import { localDay, isSabbath } from './schedule.js';
 import { register as registerShopping } from './shopping.js';
 import { register as registerRecipes, lessonFor, recipeNames } from './recipes.js';
@@ -314,9 +314,12 @@ on('POST', '/api/pin/reset', async (req, env, body) => {
 on('GET', '/api/profiles', async (req, env) => {
   const s = await requireSession(env, req);
   const { results } = await env.DB.prepare('SELECT * FROM profiles WHERE family_id = ? ORDER BY created_at, id').bind(s.family_id).all();
-  const out = results.map(profileOut);
+  // Each profile's Level, and whether it's an adult, so a cook on any device
+  // can tell who's on it for its safety banners (§12.8).
+  const levels = await profileLevels(env, s.family_id);
+  const out = results.map((r) => ({ ...profileOut(r), level: levels[r.id] ?? null }));
   if (!s.kid) return { profiles: out };
-  return { profiles: out.map((p) => (p.id === s.profile_id ? p : { id: p.id, name: p.name, avatar: p.avatar, people: p.people })) };
+  return { profiles: out.map((p) => (p.id === s.profile_id ? p : { id: p.id, name: p.name, avatar: p.avatar, people: p.people, audience: p.audience, level: p.level })) };
 }, KID);
 
 on('POST', '/api/profiles', async (req, env, body) => {
@@ -388,6 +391,8 @@ on('DELETE', '/api/profiles/([0-9a-f]{16})', async (req, env, body, [pid]) => {
     env.DB.prepare('DELETE FROM profiles WHERE id = ? AND family_id = ?').bind(pid, s.family_id),
   ]);
   await forgetProfile(env, s.family_id, pid);
+  // Its portfolio writing (14f), once the draft's table is there.
+  await env.DB.prepare('DELETE FROM level_writing WHERE profile_id = ? AND family_id = ?').bind(pid, s.family_id).run().catch(() => {});
   await forgetCooks(env, s.family_id);
   // A cook shared with them may be gone too: what the rest have learned is rebuilt.
   await relearn(env, s.family_id);

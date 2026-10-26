@@ -429,6 +429,8 @@ export function lint(c) {
     V.units.forEach((u, i) => { if (u.number !== i + 1) err(`${where} units`, `unit ${u.number} should be unit ${i + 1}: units are numbered in order`); });
     const used = new Set();
     let minutes = 0, unwritten = 0, parts = 0;
+    // A writing box's id (14f) is its row in level_writing, so one id per Level.
+    const boxes = new Set();
     V.weeks.forEach((w, i) => {
       const ww = `${where} week ${w.week}`;
       if (w.week !== i + 1) err(ww, `should be week ${i + 1}: weeks are numbered in order`);
@@ -438,7 +440,7 @@ export function lint(c) {
       const last = unitWeeks.at(-1) === w;
       if (w.cuisine && !CU[w.cuisine]) err(ww, `cuisine "${w.cuisine}" doesn't exist in cuisines.json`);
       if (w.kind) {
-        for (const f of ['skill', 'familiar', 'explore', 'mastery', 'swapIns']) if (f in w) err(ww, `a ${w.kind} week has no ${f}: it's cooked from earlier weeks' recipes`);
+        for (const f of ['skill', 'familiar', 'explore', 'mastery', 'swapIns', 'adultAtHome']) if (f in w) err(ww, `a ${w.kind} week has no ${f}: it's cooked from earlier weeks' recipes`);
         if (!w.minutes) err(ww, `a ${w.kind} week needs its minutes`);
         if (w.kind === 'capstone' && !last) err(ww, 'the capstone is the last week of its unit');
         minutes += w.minutes ?? 0;
@@ -462,6 +464,11 @@ export function lint(c) {
         // The hours count the Familiar dish, every family's starting default.
         minutes += minutesOf(w.familiar);
       }
+      // Only Level 4 says "Have an adult at home" (§12.8): the other Levels' banners already ask for one.
+      if (w.adultAtHome && V.id !== 'sp-4') err(ww, 'has adultAtHome, which only Level 4 uses: its learners cook on their own');
+      // Write my recipe (§12.8): Level 4's mastery weeks, and the weeks the student plans its menu.
+      if (w.ownRecipe && V.id !== 'sp-4') err(ww, 'has ownRecipe, which only Level 4 uses');
+      if (w.ownRecipe && !w.mastery && !w.kind) err(ww, 'has ownRecipe, which is for a mastery week, the practice runs, and the capstone');
       // Units of four weeks: the last is the mastery check (§12.2), or the capstone.
       if (w.mastery && !last) err(ww, 'a mastery week is the last week of its unit');
       if (last && !w.mastery && w.kind !== 'capstone') err(ww, 'the last week of a unit is its mastery week');
@@ -470,6 +477,10 @@ export function lint(c) {
         minutes += w[k].minutes;
         if (!w[k].body?.length) unwritten += 1;
         for (const q of w[k].quiz || []) if (q.answer >= q.choices.length) err(`${ww} ${k}`, `quiz "${q.q}" has an answer outside its choices`);
+        for (const x of w[k].write || []) {
+          if (boxes.has(x.id)) err(`${ww} ${k}`, `writing box "${x.id}" is already used on another page of this Level`);
+          boxes.add(x.id);
+        }
       }
     });
     for (const u of V.units) {
