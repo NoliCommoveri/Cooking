@@ -5658,3 +5658,28 @@ Owner, 2026-10-26: "skip picture prompts for now, do the rest" of 14e.
   family's taste pick, and buys for it; it plays the Level's version, with
   no Version button, which isn't offered off the course or pickable; the
   linter's Level version rules and writing warnings.
+
+## 223. 2026-10-26 — Level dish pictures: sheets 29–33 and 40–44
+
+Owner, 2026-10-26: ten ChatGPT sheets from [Level dish pictures: ChatGPT
+prompts](https://claude.ai/artifact/PbGHZTt9e78S2SbwtyYVMB), five for
+Level 2 and five for Level 3 (sheet 40 is Levels 2 and 3).
+
+- **Before:** Level recipe cards had only a meal-type drawing (`art`).
+- **Now:**
+  - 40 dish pictures, matched to the prompt doc's sheets 29–33 and 40–44,
+    saved to `content/images/source/` under the doc's names, cropped into
+    `content/images/dishes/<card id>.png`, and built to
+    `public/img/dishes/`. Each was checked by eye for unclean foods: none
+    (the potatoes have no bacon, the kimbap has egg and vegetables, no ham
+    or crab stick).
+  - Hand cuts, written down in `tools/dish-sheets.txt`: ajapsandali and
+    solterito touched on sheet 42; onigiri's and kimbap's plates had gaps in
+    their rims, so they were cut with a filled mask to keep the plate.
+  - **A recipe card's picture:** `"image": "dishes/<id>.png"` on a Level
+    card (the level schema), on all 40. The linter checks the name and the
+    file, and that a written lesson for the card uses the same picture. A
+    test checks every card picture has a web copy.
+- The app shows a Level card's picture once its lesson is written; none of
+  these 40 is written yet.
+- Tests: 381.

@@ -69,6 +69,13 @@ test('every lesson has a web picture for the app (run: python3 tools/build-dish-
   for (const L of LIBRARY.lessons) assert.ok(existsSync(new URL(`../public/${L.image}`, import.meta.url)), L.image);
 });
 
+test("every Level recipe card's picture has a web copy (run: python3 tools/build-dish-images.py)", () => {
+  const dir = new URL('../content/levels/', import.meta.url);
+  const cards = readdirSync(dir).filter((f) => /^sp-\d+\.json$/.test(f)).flatMap((f) => JSON.parse(readFileSync(new URL(f, dir), 'utf8')).recipes).filter((c) => c.image);
+  assert.ok(cards.length >= 40);
+  for (const c of cards) assert.ok(existsSync(new URL(`../public/img/${c.image.replace(/\.png$/, '.webp')}`, import.meta.url)), c.image);
+});
+
 test('every step picture has a web copy for the app (run: python3 tools/build-dish-images.py)', () => {
   const dir = new URL('../public/content/lessons/', import.meta.url);
   for (const f of readdirSync(dir)) {

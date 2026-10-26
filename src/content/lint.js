@@ -398,6 +398,10 @@ export function lint(c) {
       // A card for a variation still to be written names the dish it varies (§6.21).
       if (r.variationOf && !DISH[r.variationOf] && !byId[r.variationOf]) err(rw, `variationOf "${r.variationOf}" isn't a dish in course.json or a lesson`);
       if (c.imageExists && !c.imageExists(`meals/${r.art}.svg`)) err(rw, `art meals/${r.art}.svg isn't in content/images/`);
+      // Its picture, once a sheet is cropped: the written lesson uses it too.
+      if (r.image && r.image !== `dishes/${r.id}.png`) err(rw, `image should be dishes/${r.id}.png`);
+      if (r.image && c.imageExists && !c.imageExists(r.image)) err(rw, `image ${r.image} isn't in content/images/`);
+      if (r.image && levelLessons[r.id] && levelLessons[r.id].image !== r.image) err(rw, `the lesson's image should be the card's picture, ${r.image}`);
       for (const [p, t] of [['title', r.title], ['skill', r.skill], ['about', r.about], ['main', r.main.join(', ')]]) for (const w of blockedWordsIn(t, rules)) err(rw, `${p} names a blocked food ("${w}")`);
       if (c.tastes) for (const p of tagProblems(r.tags, c.tastes)) err(rw, `tags: ${p}`);
       if (c.tastes && missingTags(r.tags).length) warn(rw, `tags missing: ${missingTags(r.tags).join(', ')}`);
