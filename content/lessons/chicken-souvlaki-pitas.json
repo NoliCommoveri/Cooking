@@ -93,5 +93,204 @@
     { "id": "check-chicken", "type": "doneness", "text": "Turn off the heat. Slide the thermometer into the thickest piece. It needs to read at least 165°F. If it doesn't, cook 2 more minutes and check again.", "safety": "adult-nearby", "hazard": "Hot stove", "target": { "temp": 165, "unit": "F" } },
     { "id": "pitas", "text": "Stack the pitas, wrap them in a damp paper towel, and microwave until warm and soft.", "safety": "solo", "timerSeconds": 45, "timerLabel": "Pitas", "tip": "The steam inside is hot. Open the paper towel slowly." },
     { "id": "serve", "text": "Fill each pita with chicken, tomato, and onion, and spoon tzatziki over the top.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "The handle stays hot for a long time. Leave an oven mitt on it so nobody grabs it bare-handed." }
+  ],
+  "variations": [
+    {
+      "id": "sp-2",
+      "title": "Chicken souvlaki pitas",
+      "level": "sp-2",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["herby-lemony", "tangy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "ingredients": {
+        "change": {
+          "dill@Tzatziki": { "ingredient": "dill", "amount": 1, "unit": "tbsp", "prep": "leaves", "group": "Tzatziki" }
+        },
+        "drop": ["garlic@Tzatziki", "chicken-breast@Chicken", "garlic@Chicken", "onion-red@To serve"],
+        "add": [
+          { "ingredient": "garlic-minced-jarred", "amount": 0.5, "unit": "tsp", "group": "Tzatziki" },
+          { "ingredient": "chicken-ready-cut", "amount": 1.5, "unit": "lb", "group": "Chicken" },
+          { "ingredient": "garlic-minced-jarred", "amount": 1, "unit": "tsp", "group": "Chicken" }
+        ],
+        "order": [
+          "cucumber@Tzatziki",
+          "yogurt-greek@Tzatziki",
+          "+0",
+          "dill@Tzatziki",
+          "lemon@Tzatziki and chicken",
+          "salt@Tzatziki",
+          "+1",
+          "olive-oil@Chicken",
+          "+2",
+          "oregano-dried@Chicken",
+          "salt@Chicken",
+          "black-pepper@Chicken",
+          "vegetable-oil@For the pan",
+          "pita@To serve",
+          "tomato@To serve"
+        ]
+      },
+      "equipment": {
+        "drop": ["box-grater", "kitchen-towel", "chef-knife"],
+        "add": ["vegetable-peeler", "paring-knife", "small-bowl"],
+        "order": [
+          "+0",
+          "+1",
+          "cutting-board",
+          "spoon",
+          "+2",
+          "mixing-bowl-medium",
+          "mixing-bowl-large",
+          "measuring-cups",
+          "measuring-spoons",
+          "skillet-12",
+          "spatula",
+          "plate",
+          "thermometer",
+          "paper-towels",
+          "microwave"
+        ]
+      },
+      "steps": {
+        "change": {
+          "cucumber": {
+            "id": "cucumber",
+            "text": "Peel the cucumber. Cut it in half the long way and scoop out the seeds with the spoon.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "seed",
+            "tip": "Use the bridge grip for the long cut."
+          },
+          "tzatziki": {
+            "id": "tzatziki",
+            "text": "In the medium bowl, stir the yogurt, cucumber, the tzatziki's garlic, dill, 1 tablespoon of lemon juice, and the tzatziki's salt. Refrigerate it.",
+            "safety": "solo",
+            "why": "chill"
+          },
+          "marinade": {
+            "id": "marinade",
+            "text": "In the large bowl, stir the rest of the lemon juice, the olive oil, the chicken's garlic, oregano, salt, and pepper.",
+            "safety": "solo",
+            "look": "A thin, cloudy yellow sauce."
+          },
+          "heat": {
+            "id": "heat",
+            "text": "Heat the vegetable oil in the skillet over medium-high heat.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "timerSeconds": 90,
+            "timerLabel": "Heat pan",
+            "look": "The oil shimmers."
+          },
+          "add-chicken": {
+            "id": "add-chicken",
+            "text": "Tip the chicken into the pan, leaving the marinade in the bowl. Spread it out with the spatula.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil, raw chicken",
+            "handles": ["chicken-ready-cut"],
+            "why": "room",
+            "tip": "Tip it in low and away from you, so the oil doesn't splash."
+          },
+          "wash-pan": {
+            "id": "wash-pan",
+            "type": "wash",
+            "text": "Pour the marinade down the drain. Put the bowl in the sink and wash your hands.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove",
+            "why": "throw-out"
+          },
+          "sear": {
+            "id": "sear",
+            "text": "Leave the chicken alone until browned underneath. Then stir and cook until golden all over.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "timerSeconds": 480,
+            "timerLabel": "Chicken",
+            "look": "Golden on most sides, no pink outside."
+          },
+          "check-chicken": {
+            "id": "check-chicken",
+            "type": "doneness",
+            "text": "Turn off the heat. Check the two biggest pieces with the thermometer. Each should read 165°F or more.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove",
+            "target": { "temp": 165, "unit": "F" },
+            "tip": "Not there yet? Cook 2 more minutes."
+          },
+          "pitas": {
+            "id": "pitas",
+            "text": "Wrap the pitas in a damp paper towel and microwave until warm.",
+            "safety": "solo",
+            "timerSeconds": 45,
+            "timerLabel": "Pitas",
+            "tip": "Open the towel slowly. The steam is hot."
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Fill each pita with chicken and tomato, and spoon tzatziki over the top.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "tip": "Leave a mitt on the hot pan handle."
+          }
+        },
+        "drop": ["chop", "cut-chicken", "wash-cut", "veg"],
+        "add": [
+          { "id": "cuc-chop", "text": "Slice each half into thin half-moons, then cut across them into small bits.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Bits about the size of a pea." },
+          { "id": "dill", "text": "Pull the dill's feathery leaves off the stems and tear them small.", "safety": "solo", "look": "A small pile of soft green bits." },
+          { "id": "lemons", "text": "Cut the lemons in half and squeeze the juice into the small bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Squeeze over your other hand to catch the seeds." },
+          { "id": "chicken", "text": "Tip the chicken into the marinade. Don't rinse it. Stir until coated, then cover the bowl and refrigerate it.", "safety": "solo", "hazard": "Raw chicken", "handles": ["chicken-ready-cut"], "timerSeconds": 1200, "timerLabel": "Marinate", "why": "marinade", "tip": "Put the empty package straight in the trash." },
+          { "id": "wash-chicken", "type": "wash", "text": "Wash your hands with soap for 20 seconds. Wipe the counter with hot, soapy water.", "safety": "solo", "hazard": "Raw chicken", "why": "no-rinse" },
+          { "id": "tomatoes", "text": "Core the tomatoes and scoop out the seeds. Cut them into small wedges.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Small wedges, about the same size." }
+        ],
+        "order": [
+          "cucumber",
+          "+0",
+          "+1",
+          "+2",
+          "tzatziki",
+          "marinade",
+          "+3",
+          "+4",
+          "+5",
+          "heat",
+          "add-chicken",
+          "wash-pan",
+          "sear",
+          "check-chicken",
+          "pitas",
+          "serve"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "Raw chicken, on your own",
+          "body": "This is the unit's mastery week. You'll handle raw chicken from start to finish yourself, with an adult in the kitchen: a lemon and oregano marinade, a hot pan, and a thermometer check at 165°F. A cool cucumber yogurt sauce called tzatziki goes on top, all in warm pita."
+        },
+        "wrong": [
+          { "sign": "The tzatziki is thin and runny", "fix": "The cucumber was too wet. Stir in another spoonful of yogurt, and scoop out all the seeds next time." },
+          { "sign": "The chicken is pale and sitting in juice", "fix": "The pan was crowded. Turn the heat up, and cook the rest in smaller batches." },
+          { "sign": "The pitas crack when you fold them", "fix": "They're too cold or dry. Warm them a little longer, or wrap them in a damp paper towel in the microwave." }
+        ],
+        "quiz": [
+          { "q": "What do you do with the leftover marinade?", "choices": ["Pour it down the drain", "Spoon it over the pitas", "Save it"], "answer": 0, "explain": "It held raw chicken." },
+          { "q": "Should you rinse raw chicken?", "choices": ["No, it splashes germs around", "Yes", "Only ready-cut chicken"], "answer": 0, "explain": "Cooking to 165°F makes it safe." },
+          { "q": "What temperature does chicken need?", "choices": ["165°F", "145°F", "160°F"], "answer": 0, "explain": "All chicken is 165°F." }
+        ],
+        "why": {
+          "drop": ["squeeze"],
+          "add": [
+            { "id": "seed", "title": "Seed the cucumber", "body": "The seeds in the middle of a cucumber are watery. Scooping them out, as you did in week 5, keeps the tzatziki thick." },
+            { "id": "no-rinse", "title": "Don't rinse it", "body": "Rinsing raw chicken doesn't clean it. It splashes germs onto the sink and counter. Cooking it to 165°F is what makes it safe." },
+            { "id": "throw-out", "title": "Throw out the marinade", "body": "Marinade that held raw chicken has raw-chicken juice in it. Pour it down the drain. The tzatziki is your sauce." }
+          ],
+          "order": ["+0", "chill", "+1", "marinade", "room", "+2"]
+        }
+      }
+    }
   ]
 }

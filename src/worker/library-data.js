@@ -2293,6 +2293,119 @@ export const LIBRARY = {
     "thermometer",
     "paper-towels",
     "microwave"
+   ],
+   "variations": [
+    {
+     "title": "Chicken souvlaki pitas",
+     "image": "img/dishes/chicken-souvlaki-pitas.webp",
+     "cuisine": "greek",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 5,
+        "text": "For more than 4, sear the chicken in batches so the pieces have room to brown."
+       }
+      ]
+     },
+     "totalMinutes": 45,
+     "ingredients": [
+      {
+       "ingredient": "cucumber"
+      },
+      {
+       "ingredient": "yogurt-greek"
+      },
+      {
+       "ingredient": "garlic-minced-jarred"
+      },
+      {
+       "ingredient": "dill"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "chicken-ready-cut"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "garlic-minced-jarred"
+      },
+      {
+       "ingredient": "oregano-dried"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "pita"
+      },
+      {
+       "ingredient": "tomato"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "pita",
+       "use": "tortilla-corn",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "herby-lemony",
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "cucumber",
+       "sour-cream-yogurt",
+       "lemon-lime",
+       "tomatoes"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "vegetable-peeler",
+      "paring-knife",
+      "cutting-board",
+      "spoon",
+      "small-bowl",
+      "mixing-bowl-medium",
+      "mixing-bowl-large",
+      "measuring-cups",
+      "measuring-spoons",
+      "skillet-12",
+      "spatula",
+      "plate",
+      "thermometer",
+      "paper-towels",
+      "microwave"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
+    }
    ]
   },
   {
@@ -2860,6 +2973,99 @@ export const LIBRARY = {
       "oven-mitts"
      ],
      "id": "easy-prep"
+    },
+    {
+     "title": "Smash burgers",
+     "image": "img/dishes/smash-burgers.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "Cook 3 patties at a time in a 12-inch skillet. For more than 6, keep going in batches of 3, washing the tongs and your hands after each batch of raw beef."
+       }
+      ]
+     },
+     "totalMinutes": 35,
+     "ingredients": [
+      {
+       "ingredient": "beef-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "cheese-sliced",
+       "optional": true
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "burger-buns"
+      },
+      {
+       "ingredient": "pickle-dill"
+      },
+      {
+       "ingredient": "ketchup",
+       "optional": true
+      },
+      {
+       "ingredient": "mustard-dijon",
+       "optional": true
+      },
+      {
+       "ingredient": "lettuce-green-leaf",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "burger-buns",
+       "use": "buns-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "beef",
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "pickles"
+      ],
+      "optional": [
+       "mustard"
+      ]
+     },
+     "tools": [
+      "paring-knife",
+      "cutting-board",
+      "plate",
+      "parchment",
+      "measuring-spoons",
+      "skillet-12",
+      "spatula",
+      "tongs",
+      "thermometer",
+      "oven-mitts"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
     }
    ]
   },
@@ -8530,6 +8736,102 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "beef-tacos-seasoning",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Beef tacos with homemade seasoning",
+   "image": "img/dishes/beef-tacos-seasoning.webp",
+   "cuisine": "tex-mex",
+   "skill": "Reading labels on shells and seasoning",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, brown the beef in two batches, or in a wide pot, so it browns instead of steaming."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "chili-powder"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "garlic-powder"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "taco-shells"
+    },
+    {
+     "ingredient": "romaine"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "cheddar-shredded"
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    },
+    {
+     "ingredient": "salsa",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "tomatoes"
+    ],
+    "optional": [
+     "sour-cream-yogurt"
+    ]
+   },
+   "tools": [
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "cutting-board",
+    "paring-knife",
+    "paper-towels",
+    "sheet-pan",
+    "oven-mitts",
+    "skillet-12",
+    "wooden-spoon",
+    "thermometer",
+    "spoon"
+   ],
+   "level": "sp-2"
+  },
+  {
    "id": "bun-bowl",
    "version": 1,
    "track": "core",
@@ -8891,6 +9193,103 @@ export const LIBRARY = {
    "level": "sp-2"
   },
   {
+   "id": "fish-sticks",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Oven-baked fish sticks",
+   "image": "img/dishes/fish-sticks.webp",
+   "cuisine": "american",
+   "skill": "Thawing fish safely and baking to 145°F",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, use two sheet pans, one on each middle rack, and swap them halfway."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "cod"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "panko"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "mayonnaise"
+    },
+    {
+     "ingredient": "pickle-dill"
+    },
+    {
+     "ingredient": "lemon"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "panko",
+     "use": "oats-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "flour-ap",
+     "use": "cornstarch",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "mayonnaise",
+     "pickles",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "oven-mitts",
+    "paper-towels",
+    "cutting-board",
+    "paring-knife",
+    "plate",
+    "shallow-dish",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "spatula",
+    "thermometer"
+   ],
+   "level": "sp-2"
+  },
+  {
    "id": "ful-medames",
    "version": 1,
    "track": "core",
@@ -9079,6 +9478,207 @@ export const LIBRARY = {
     "plate",
     "sheet-pan",
     "oven-mitts"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "keema",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Keema with peas",
+   "image": "img/dishes/keema.webp",
+   "cuisine": "indian",
+   "skill": "Choosing clean ground beef and spices",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, use a wide pot so the beef has room to brown, and give it 5 more minutes to simmer."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "onion-diced-frozen"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "ginger-minced-jarred"
+    },
+    {
+     "ingredient": "garam-masala"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "turmeric-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "tomato-sauce"
+    },
+    {
+     "ingredient": "peas-frozen"
+    },
+    {
+     "ingredient": "lemon",
+     "optional": true
+    },
+    {
+     "ingredient": "rice-cooked-pouch"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "lemon-lime"
+    ]
+   },
+   "tools": [
+    "measuring-cups",
+    "measuring-spoons",
+    "small-bowl",
+    "can-opener",
+    "skillet-12",
+    "wooden-spoon",
+    "thermometer",
+    "microwave",
+    "cutting-board",
+    "paring-knife"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "kofte",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Köfte with tomato-cucumber salad",
+   "image": "img/dishes/kofte.webp",
+   "cuisine": "turkish",
+   "skill": "Checking patties for 160°F",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Cook the patties in two batches so they have room in the pan. Wash the tongs and your hands after each batch of raw beef."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "onion-diced-frozen"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "panko"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "pita"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "panko",
+     "use": "oats-gluten-free",
+     "reason": "gluten"
+    },
+    {
+     "for": "pita",
+     "use": "tortilla-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "cucumber",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "microwave",
+    "small-bowl",
+    "paper-towels",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "plate",
+    "cutting-board",
+    "paring-knife",
+    "vegetable-peeler",
+    "spoon",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "thermometer"
    ],
    "level": "sp-2"
   },
@@ -9375,6 +9975,170 @@ export const LIBRARY = {
     "paper-towels",
     "paring-knife",
     "plate"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "shioyaki",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Shioyaki salted salmon",
+   "image": "img/dishes/shioyaki.webp",
+   "cuisine": "japanese",
+   "skill": "Baking fish to 145°F",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "For more than 6, use two sheet pans, one on each middle rack, and swap them halfway."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "salmon-fillet"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "rice-cooked-pouch"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "cucumber",
+     "optional": true
+    },
+    {
+     "ingredient": "vinegar-rice",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "lemon-lime"
+    ],
+    "optional": [
+     "cucumber"
+    ]
+   },
+   "tools": [
+    "plate",
+    "paper-towels",
+    "tweezers",
+    "sheet-pan",
+    "parchment",
+    "oven-mitts",
+    "spatula",
+    "thermometer",
+    "microwave",
+    "cutting-board",
+    "paring-knife",
+    "small-bowl"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "teriyaki-chicken-bites",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Baked teriyaki chicken bites",
+   "image": "img/dishes/teriyaki-chicken-bites.webp",
+   "cuisine": "japanese",
+   "skill": "Handling ready-cut chicken safely",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "For more than 4, use two sheet pans, one on each middle rack, and swap them halfway."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "chicken-ready-cut"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "honey"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "ginger-minced-jarred"
+    },
+    {
+     "ingredient": "cornstarch"
+    },
+    {
+     "ingredient": "rice-cooked-pouch"
+    },
+    {
+     "ingredient": "sesame-seeds",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "sesame"
+    ]
+   },
+   "tools": [
+    "sheet-pan",
+    "parchment",
+    "oven-mitts",
+    "mixing-bowl-medium",
+    "mixing-bowl-large",
+    "spoon",
+    "whisk",
+    "measuring-cups",
+    "measuring-spoons",
+    "microwave",
+    "spatula",
+    "thermometer",
+    "paper-towels"
    ],
    "level": "sp-2"
   },
@@ -13257,6 +14021,24 @@ export const LIBRARY = {
    "contains": [
     "gluten"
    ]
+  },
+  "chicken-ready-cut": {
+   "name": "Ready-cut chicken breast, plain (chunks or stir-fry strips)",
+   "contains": [
+    "meat"
+   ]
+  },
+  "onion-diced-frozen": {
+   "name": "Frozen diced onion",
+   "contains": []
+  },
+  "ginger-minced-jarred": {
+   "name": "Jarred minced ginger",
+   "contains": []
+  },
+  "taco-shells": {
+   "name": "Hard taco shells",
+   "contains": []
   }
  },
  "cuisines": {
@@ -13329,16 +14111,22 @@ export const LIBRARY = {
   "cottage-cheese-crescents": "A2"
  },
  "levelLabels": {
+  "beef-tacos-seasoning": "A12",
   "bun-bowl": "A5",
   "caprese-sandwiches": "A1",
   "chana-chaat": "A10",
   "chicken-caesar-wraps": "A9",
+  "fish-sticks": "A14",
   "ful-medames": "A7",
   "hummus-plate": "A8",
+  "keema": "A13",
+  "kofte": "A11",
   "loaded-baked-potatoes": "A4",
   "mini-pita-pizzas": "A6",
   "molletes": "A3",
   "onigiri": "A2",
+  "shioyaki": "A15",
+  "teriyaki-chicken-bites": "A16",
   "aglio-e-olio": "K3",
   "ajapsandali": "K7",
   "baked-salmon": "K13",
@@ -16752,15 +17540,143 @@ export const LIBRARY = {
      "explore": "kofte",
      "drill": {
       "title": "Read a thermometer; check a patty for 160°F",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A thermometer is the only way to know ground beef is safe. Today you'll practice reading one, then use it on a real patty. An adult is in the kitchen while the stove is on."
+      ],
+      "steps": [
+       "Find the thermometer's probe, the metal stick, and its tip, which is where it reads. Turn it on, or wait for the dial to settle.",
+       "Fill a glass with ice and water. Put the tip in the middle of the glass for 30 seconds. It should read about 32°F.",
+       "Hold the tip under warm tap water, then cold. Watch how long the number takes to stop moving.",
+       "Shape a small beef patty, wash your hands, and cook it in a skillet over medium heat, 3 minutes a side.",
+       "Slide the thermometer into the side of the patty so the tip is in the middle. Wait for the number to stop moving.",
+       "If it reads 160°F or more, it's done. If not, cook it 1 more minute and check again.",
+       "Wash the probe with hot, soapy water. Write down what your patty read."
+      ],
+      "quiz": [
+       {
+        "q": "Where does a thermometer read?",
+        "choices": [
+         "At the tip",
+         "Along the whole stick",
+         "At the top"
+        ],
+        "answer": 0,
+        "explain": "Put the tip in the middle of the food."
+       },
+       {
+        "q": "What should it read in ice water?",
+        "choices": [
+         "About 32°F",
+         "0°F",
+         "100°F"
+        ],
+        "answer": 0,
+        "explain": "Ice water is 32°F."
+       },
+       {
+        "q": "When do you read the number?",
+        "choices": [
+         "When it stops moving",
+         "Right away",
+         "After a minute out of the food"
+        ],
+        "answer": 0,
+        "explain": "It takes a few seconds to settle."
+       }
+      ]
      },
      "knowledge": {
       "title": "Why ground meat must reach 160°F",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Germs that can make people sick live on the outside of meat. When beef is ground, the outside gets mixed all the way through, so germs can be in the middle of a burger too.",
+       "Heat kills those germs. At 160°F, ground beef is safe. You can't tell by color: beef can turn brown inside before it's safe, or stay a little pink after it is. Only a thermometer can tell you.",
+       "Every kind of meat has its own safe temperature. You'll learn chicken's (165°F) and fish's (145°F) later in this unit."
+      ],
+      "steps": [
+       "Make a small card that says \"Ground beef: 160°F\" and keep it by the stove.",
+       "Ask an adult what temperature they cook burgers to. Tell them what you learned."
+      ],
+      "quiz": [
+       {
+        "q": "Why do germs end up in the middle of a burger?",
+        "choices": [
+         "Grinding mixes the outside all through",
+         "Burgers are thick",
+         "Beef grows them inside"
+        ],
+        "answer": 0,
+        "explain": "The outside is mixed in."
+       },
+       {
+        "q": "What temperature makes ground beef safe?",
+        "choices": [
+         "160°F",
+         "145°F",
+         "120°F"
+        ],
+        "answer": 0,
+        "explain": "160°F for ground beef."
+       },
+       {
+        "q": "Can you tell a burger is done by its color?",
+        "choices": [
+         "No, only a thermometer can tell",
+         "Yes, if it's brown",
+         "Yes, if it's gray"
+        ],
+        "answer": 0,
+        "explain": "Color can fool you."
+       }
+      ]
      },
      "sabbath": {
       "title": "Shape patties ahead and freeze them",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Shaped patties freeze well. With a stack in the freezer, burgers or köfte are ready to cook any night, with the messy raw-meat part already done."
+      ],
+      "steps": [
+       "Shape ground beef into patties, the same size as this week's recipe. Wash your hands after.",
+       "Lay them on a parchment-lined plate or sheet pan, not touching, and freeze them for 1 hour.",
+       "Stack the frozen patties with a square of parchment between each one, and put them in a freezer bag.",
+       "Press out the air, seal it, and write the date and \"ground beef\" on the bag.",
+       "Use them within 3 months. Thaw them in the fridge overnight, then cook them to 160°F as usual.",
+       "Wash your hands, and wipe everything the raw beef touched."
+      ],
+      "quiz": [
+       {
+        "q": "Why freeze the patties apart first?",
+        "choices": [
+         "So they don't freeze stuck together",
+         "So they cook faster",
+         "To dry them"
+        ],
+        "answer": 0,
+        "explain": "Then they stack and come apart easily."
+       },
+       {
+        "q": "Where do frozen patties thaw?",
+        "choices": [
+         "In the fridge",
+         "On the counter",
+         "In the sun"
+        ],
+        "answer": 0,
+        "explain": "The fridge keeps them cold."
+       },
+       {
+        "q": "What goes on the bag?",
+        "choices": [
+         "The date and what's inside",
+         "Nothing",
+         "Your name only"
+        ],
+        "answer": 0,
+        "explain": "So you know what it is and how old."
+       }
+      ]
      }
     },
     {
@@ -16772,15 +17688,144 @@ export const LIBRARY = {
      "explore": "keema",
      "drill": {
       "title": "Read 10 labels and find the hidden unclean ingredients",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Some foods hide ingredients that aren't clean: a fat from an unclean animal in shells and tortillas, gelatin in yogurt and candy, or a red coloring made from crushed bugs. Today you'll read real labels and find them. Your family's kitchen and a grocery store both work."
+      ],
+      "steps": [
+       "Pick 10 packaged foods: try yogurt, sour cream, tortillas, taco shells, refried beans, gummy candy, marshmallows, a seasoning packet, a sauce, and one of your choice.",
+       "Turn each one over and find the ingredient list.",
+       "Read the whole list, slowly. Look for gelatin, animal fats that don't say which animal, and red colorings made from bugs.",
+       "Sort them into three piles: clean, not clean, and not sure.",
+       "For each one in \"not sure\", write down the word that made you stop. Ask an adult to look it up with you.",
+       "Tell an adult which foods you'd pick and which you'd put back."
+      ],
+      "quiz": [
+       {
+        "q": "Where do you find what's really in a food?",
+        "choices": [
+         "The ingredient list",
+         "The picture on the front",
+         "The price"
+        ],
+        "answer": 0,
+        "explain": "The list names everything inside."
+       },
+       {
+        "q": "Which of these can hide gelatin?",
+        "choices": [
+         "Yogurt and gummy candy",
+         "Apples",
+         "Plain rice"
+        ],
+        "answer": 0,
+        "explain": "Check the list."
+       },
+       {
+        "q": "A label says only \"animal fat.\" Is it clean?",
+        "choices": [
+         "You can't tell, so pass on it",
+         "Yes",
+         "Only if it's cheap"
+        ],
+        "answer": 0,
+        "explain": "It doesn't say which animal."
+       }
+      ]
      },
      "knowledge": {
       "title": "Hidden unclean ingredients and where they hide",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Unclean foods don't always look like what they are. They can be one word on a long ingredient list.",
+       "Watch for these: gelatin (in yogurt, sour cream, gummy candy, marshmallows), which is usually made from an unclean animal unless it says beef or fish; fats from unclean animals, used in some tortillas, taco shells, refried beans, and pie crusts; sauces made from sea animals without fins and scales, used in some stir-fry sauces and curry pastes; and a red coloring made from crushed bugs, in some yogurts, candies, and drinks.",
+       "Meat can hide too. Packages called \"ground meat\" or \"meatloaf mix\" can mix more than one animal, and some chicken and turkey sausages come in casings from an unclean animal. The label should name every animal.",
+       "The rule is simple: if the label doesn't tell you, or you can't tell what a word means, pass on it."
+      ],
+      "steps": [
+       "Make a list of the four places hidden ingredients go: gelatin, fats, sauces, and red coloring. Keep it on your phone or in your pocket for shopping.",
+       "Find one food at home with a hidden ingredient, and one that's clean."
+      ],
+      "quiz": [
+       {
+        "q": "What is gelatin usually made from?",
+        "choices": [
+         "An unclean animal, unless the label says beef or fish",
+         "Plants",
+         "Fruit"
+        ],
+        "answer": 0,
+        "explain": "Read the label."
+       },
+       {
+        "q": "What should a ground beef label say?",
+        "choices": [
+         "Beef, and nothing else",
+         "Ground meat",
+         "Meatloaf mix"
+        ],
+        "answer": 0,
+        "explain": "Mixed packages can hold other meats."
+       },
+       {
+        "q": "You can't tell what a word on the label means. What do you do?",
+        "choices": [
+         "Pass on it, or look it up first",
+         "Buy it",
+         "Eat a little"
+        ],
+        "answer": 0,
+        "explain": "If you can't tell, don't."
+       }
+      ]
      },
      "sabbath": {
       "title": "Clean and unclean animals (Leviticus 11:1–8)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "God gave Israel a simple test for land animals: \"Whatever parts the hoof and is cloven-footed and chews the cud, among the animals, you may eat\" (Leviticus 11:3). An animal has to pass both parts.",
+       "A split hoof is a hoof divided into two toes, like a cow's. Chewing the cud means bringing swallowed food back up to chew again. Cows, sheep, goats, and deer do both, so they're clean.",
+       "The next verses name animals that pass only one part. The camel, the rock badger, and the hare chew the cud but don't have split hooves, and the pig has split hooves but doesn't chew the cud (Leviticus 11:4–7). Passing one part isn't enough."
+      ],
+      "steps": [
+       "Read Leviticus 11:1–8 with an adult.",
+       "Draw two circles that overlap. Label one \"split hoof\" and one \"chews the cud.\"",
+       "Put each animal from the passage where it belongs. The clean ones go in the middle, where the circles overlap.",
+       "Add three animals you know (try a cow, a horse, and a deer) and decide where they go.",
+       "Answer out loud: why isn't one part of the test enough?"
+      ],
+      "quiz": [
+       {
+        "q": "What are the two parts of the test for land animals?",
+        "choices": [
+         "A split hoof and chewing the cud",
+         "Four legs and fur",
+         "Eating grass and living on a farm"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:3."
+       },
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "A goat",
+         "A camel",
+         "A hare"
+        ],
+        "answer": 0,
+        "explain": "Goats pass both parts."
+       },
+       {
+        "q": "Why is the camel unclean?",
+        "choices": [
+         "It chews the cud but doesn't have a split hoof",
+         "It lives in the desert",
+         "It's too big"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:4."
+       }
+      ]
      }
     },
     {
@@ -16792,15 +17837,144 @@ export const LIBRARY = {
      "explore": "shioyaki",
      "drill": {
       "title": "Thaw frozen fish safely: in the fridge or in cold water",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Most fish at the store is sold frozen, and it has to thaw before it cooks evenly. There are two safe ways, and one way that isn't. Today you'll try both safe ones."
+      ],
+      "steps": [
+       "Take two frozen fish fillets, each in its own sealed package or zip-top bag.",
+       "The night before, put one on a plate on the bottom shelf of the fridge. The plate catches any drips.",
+       "The next day, fill a big bowl with cold tap water. Put the other sealed fillet in it, pressed under the water.",
+       "Change the water every 30 minutes so it stays cold. Check the fish by pressing it through the bag.",
+       "When it's soft all the way through, it's thawed. Write down how long it took.",
+       "Compare the two fillets. Cook both today, in this week's recipe or another.",
+       "Never thaw fish on the counter. Wash your hands, the plate, and the bowl after."
+      ],
+      "quiz": [
+       {
+        "q": "What are the two safe ways to thaw fish?",
+        "choices": [
+         "In the fridge, or sealed in cold water",
+         "On the counter, or in the sun",
+         "In hot water, or on the stove"
+        ],
+        "answer": 0,
+        "explain": "Both keep the fish cold."
+       },
+       {
+        "q": "How often do you change the cold water?",
+        "choices": [
+         "Every 30 minutes",
+         "Never",
+         "Every 5 hours"
+        ],
+        "answer": 0,
+        "explain": "So it stays cold."
+       },
+       {
+        "q": "Where does fish thaw in the fridge?",
+        "choices": [
+         "On a plate on the bottom shelf",
+         "On the top shelf",
+         "In the door"
+        ],
+        "answer": 0,
+        "explain": "The plate catches drips."
+       }
+      ]
      },
      "knowledge": {
       "title": "Fins and scales: which fish are clean; reading fish labels",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "For animals in the water, the test is fins and scales: a water animal must have both to be clean (Leviticus 11:9). Salmon, cod, tilapia, tuna, trout, and many more are clean.",
+       "Some fish have smooth skin and no scales, like monkfish, and are unclean. So are all animals with shells, and the soft sea animals with arms. Swordfish is left out because people disagree about its scales.",
+       "Once fish is cut into a fillet, you can't see the scales, so the label matters. It must say what fish it is. If it only says \"whitefish\" or \"seafood,\" or names a fish you don't know, ask what it is or pass on it. Some cheap white fillets, sold as swai or basa, come from a fish with no scales."
+      ],
+      "steps": [
+       "Write down five clean fish from this page.",
+       "At the store with an adult, read the names on three fish packages. Are they clean?"
+      ],
+      "quiz": [
+       {
+        "q": "What must a water animal have to be clean?",
+        "choices": [
+         "Fins and scales",
+         "Only fins",
+         "A tail"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:9."
+       },
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "Salmon",
+         "Monkfish",
+         "Swai"
+        ],
+        "answer": 0,
+        "explain": "Salmon has fins and scales."
+       },
+       {
+        "q": "Why read the name on a fish fillet?",
+        "choices": [
+         "You can't see the scales on a fillet",
+         "It tells you the price",
+         "To know how to cook it"
+        ],
+        "answer": 0,
+        "explain": "The name tells you what fish it is."
+       }
+      ]
      },
      "sabbath": {
       "title": "Fins and scales (Leviticus 11:9–12)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "\"These you may eat, of all that are in the waters. Everything in the waters that has fins and scales, whether in the seas or in the rivers, you may eat\" (Leviticus 11:9).",
+       "The next verses say the rest are \"detestable\" for food (Leviticus 11:10–12). Deuteronomy says the same thing again (Deuteronomy 14:9–10).",
+       "Fish were everyday food in Bible times. Several of Jesus' disciples were fishermen on the Sea of Galilee, and after he rose, Jesus cooked fish for them on the shore (John 21:9–13)."
+      ],
+      "steps": [
+       "Read Leviticus 11:9–12 with an adult.",
+       "Read Deuteronomy 14:9–10. What's the same as Leviticus?",
+       "Look at a picture of a salmon or a trout. Point to its fins and its scales.",
+       "Read John 21:9–13. Draw the breakfast Jesus made.",
+       "Answer out loud: why do you think God gave the same rule twice?"
+      ],
+      "quiz": [
+       {
+        "q": "What two things does Leviticus 11:9 say a water animal needs?",
+        "choices": [
+         "Fins and scales",
+         "Fins and a tail",
+         "Scales and gills"
+        ],
+        "answer": 0,
+        "explain": "Both parts."
+       },
+       {
+        "q": "Where else is the same rule written?",
+        "choices": [
+         "Deuteronomy 14:9–10",
+         "Genesis 1",
+         "Psalm 23"
+        ],
+        "answer": 0,
+        "explain": "Deuteronomy repeats it."
+       },
+       {
+        "q": "What did Jesus cook on the shore in John 21?",
+        "choices": [
+         "Fish and bread",
+         "Lamb",
+         "Soup"
+        ],
+        "answer": 0,
+        "explain": "John 21:9."
+       }
+      ]
      }
     },
     {
@@ -16813,15 +17987,142 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Separate boards and hand-washing for raw chicken",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Raw chicken can carry germs that make people sick. Today you'll set up a raw-chicken spot in your kitchen and practice washing your hands the right way, so you're ready for this week's recipe on your own."
+      ],
+      "steps": [
+       "Pick one cutting board for raw meat only. Put a piece of tape on it that says \"raw\".",
+       "Pick a spot on the counter near the sink for raw chicken. Clear everything else away from it.",
+       "Wash your hands: wet them, add soap, and scrub the backs, between your fingers, and under your nails for 20 seconds. Hum \"Happy Birthday\" twice.",
+       "Rinse and dry your hands on a clean towel or a paper towel.",
+       "Put a little flour on your hands, as if it were raw chicken. Touch the faucet, a drawer handle, and the fridge door.",
+       "See how far it spread? Wipe each spot with hot, soapy water, then wash your hands again.",
+       "From now on, wash those spots every time you touch raw chicken."
+      ],
+      "quiz": [
+       {
+        "q": "How long do you scrub with soap?",
+        "choices": [
+         "20 seconds",
+         "2 seconds",
+         "2 minutes"
+        ],
+        "answer": 0,
+        "explain": "Hum \"Happy Birthday\" twice."
+       },
+       {
+        "q": "What did the flour show you?",
+        "choices": [
+         "How far raw-chicken germs spread from your hands",
+         "How to bake",
+         "That flour is messy"
+        ],
+        "answer": 0,
+        "explain": "Everything you touch picks it up."
+       },
+       {
+        "q": "Which board does raw chicken go on?",
+        "choices": [
+         "The one marked raw",
+         "Any board",
+         "The bread board"
+        ],
+        "answer": 0,
+        "explain": "Only raw meat goes on it."
+       }
+      ]
      },
      "knowledge": {
       "title": "Raw meat on the bottom shelf; 165°F for chicken",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Raw chicken and meat go on the bottom shelf of the fridge, in a bowl or on a plate. If juice leaks out, it can't drip onto food that won't be cooked, like fruit or leftovers.",
+       "Chicken is safe at 165°F, a little higher than ground beef. Check the thickest piece, and check more than one, because some pieces are always bigger. Never rinse raw chicken: it splashes germs around the sink and doesn't clean it.",
+       "Cooked chicken goes on a clean plate, never the one that held it raw."
+      ],
+      "steps": [
+       "Look in your fridge. Is there a bottom-shelf spot for raw meat? Clear one with an adult.",
+       "Add \"Chicken: 165°F\" to your temperature card from week 7."
+      ],
+      "quiz": [
+       {
+        "q": "Where does raw chicken go in the fridge?",
+        "choices": [
+         "On the bottom shelf, on a plate",
+         "On the top shelf",
+         "In the door"
+        ],
+        "answer": 0,
+        "explain": "So it can't drip on other food."
+       },
+       {
+        "q": "What temperature does chicken need?",
+        "choices": [
+         "165°F",
+         "160°F",
+         "145°F"
+        ],
+        "answer": 0,
+        "explain": "Chicken is 165°F."
+       },
+       {
+        "q": "Where does cooked chicken go?",
+        "choices": [
+         "A clean plate",
+         "The plate it sat on raw",
+         "The raw board"
+        ],
+        "answer": 0,
+        "explain": "Raw-chicken germs stay on that plate."
+       }
+      ]
      },
      "sabbath": {
       "title": "Clean and unclean birds (Leviticus 11:13–19)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "For birds, Leviticus doesn't give a test. It gives a list of birds not to eat (Leviticus 11:13–19). Most of them hunt other animals or eat dead ones: the eagle, the vultures, the hawk, the owls, the raven, the heron, and more. The bat is on the list too.",
+       "Every bird not on the list is clean (Deuteronomy 14:11). That includes chicken, turkey, duck, goose, and quail. When Israel was hungry in the wilderness, God sent quail for them to eat (Exodus 16:13)."
+      ],
+      "steps": [
+       "Read Leviticus 11:13–19 with an adult.",
+       "Pick three birds from the list. Find a picture of each and write what it eats.",
+       "Read Exodus 16:11–13. What did God send in the evening?",
+       "Make a list of the birds your family eats. Check each one against Leviticus 11:13–19."
+      ],
+      "quiz": [
+       {
+        "q": "How does Leviticus tell which birds aren't clean?",
+        "choices": [
+         "It lists them by name",
+         "It gives a test",
+         "It doesn't say"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 11:13–19."
+       },
+       {
+        "q": "Which of these is clean?",
+        "choices": [
+         "Chicken",
+         "Eagle",
+         "Owl"
+        ],
+        "answer": 0,
+        "explain": "Chicken isn't on the list."
+       },
+       {
+        "q": "What bird did God send Israel in the wilderness?",
+        "choices": [
+         "Quail",
+         "Raven",
+         "Eagle"
+        ],
+        "answer": 0,
+        "explain": "Exodus 16:13."
+       }
+      ]
      }
     },
     {
@@ -17625,7 +18926,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-fish"
      ],
-     "minutes": 35,
+     "minutes": 40,
      "tags": {
       "protein": "white-fish",
       "flavors": [
@@ -17645,7 +18946,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-fish"
      ],
-     "minutes": 30,
+     "minutes": 45,
      "tags": {
       "protein": "salmon",
       "flavors": [
@@ -17665,7 +18966,7 @@ export const LIBRARY = {
      "skills": [
       "handling-poultry"
      ],
-     "minutes": 35,
+     "minutes": 40,
      "tags": {
       "protein": "chicken",
       "flavors": [

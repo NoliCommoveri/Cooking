@@ -6074,3 +6074,37 @@ not merged until the owner approves it there.
   that waits quietly.
 - No screens changed, so no screenshots.
 - Tests: 392.
+
+## 236. 2026-10-26 — 14g content: Level 2 Unit 3
+
+Owner, 2026-10-26: Level 2 is the second of Unit 3's three Levels (235).
+Reviewed in [14g review: Level 2 Apprentice, Unit
+3](https://claude.ai/artifact/HHaY6sUdVwUTu1GtCDThNJ); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 2 Unit 3's dishes was written except Cook Around
+  the World's smash burgers (quick pickles and onion sliced paper-thin with a
+  chef's knife) and chicken souvlaki pitas (raw breast cut with a chef's
+  knife, cucumber grated). All 12 part pages were blank.
+- **Now:**
+  - **Six Level-only recipes** in `content/levels/recipes/`, unit 102: Köfte
+    with tomato-cucumber salad (week 7, the thermometer), Beef tacos with
+    homemade seasoning and Keema with peas (week 8, reading labels), Oven-baked
+    fish sticks and Shioyaki salted salmon (week 9, thawing fish and 145°F),
+    and Baked teriyaki chicken bites (week 10, the mastery week: raw ready-cut
+    chicken handled alone). None fits a pick-one group with room or is a
+    variation of a planned dish (§12.4). Their cards' minutes are now the
+    recipes' own; shioyaki's card no longer says the skin crisps.
+  - **Level 2 versions** of smash burgers (jarred pickles, no onion, a check
+    on each batch; 35 minutes) and chicken souvlaki pitas (ready-cut chicken,
+    jarred garlic, a peeled and seeded cucumber, torn dill, no onion).
+  - **All 12 part pages:** reading a thermometer, why ground meat needs
+    160°F, freezing patties ahead; reading 10 labels, where hidden ingredients
+    hide, land animals (Leviticus 11:1–8); thawing fish, fins and scales and
+    fish labels, Leviticus 11:9–12; a raw-chicken spot and hand-washing, the
+    bottom shelf and 165°F, birds (Leviticus 11:13–19).
+  - **New ingredients:** ready-cut chicken breast (plain), frozen diced onion,
+    jarred minced ginger, hard taco shells (watch: the frying fat).
+- The content check finds no Level 2 writing warnings.
+- No screens changed, so no screenshots.
+- Tests: 392.

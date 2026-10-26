@@ -1,0 +1,79 @@
+{
+  "id": "shioyaki",
+  "version": 1,
+  "track": "core",
+  "unit": 102,
+  "title": "Shioyaki salted salmon",
+  "image": "dishes/shioyaki.png",
+  "cuisine": "japanese",
+  "skill": "Baking fish to 145°F",
+  "skills": ["cooking-fish"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 45,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 7, "text": "For more than 6, use two sheet pans, one on each middle rack, and swap them halfway." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Just salt and heat",
+      "body": "Shioyaki means salt-grilled. It's an everyday Japanese dish: salmon salted, left to sit, and cooked hot, served with rice. With only salt for flavor, the fish has to be cooked just right. Today you'll salt it, feel it for bones, and bake it until it reaches 145°F and flakes."
+    },
+    "why": [
+      { "id": "salt-sit", "title": "Salt, then wait", "body": "Salt on the fish pulls a little water to the surface, then soaks back in. After 20 minutes, the salt has seasoned the fish inside, not just on top." },
+      { "id": "pat", "title": "Pat it dry", "body": "The salt brings water out. Patting it off before baking helps the top brown instead of steam." },
+      { "id": "bones", "title": "Feel for bones", "body": "Salmon can have thin bones in a line down the thick part. Run a fingertip along it. If you feel a hard tip, an adult pulls it out with tweezers." },
+      { "id": "145", "title": "Opaque and flaky", "body": "Raw salmon is shiny and see-through. Done salmon is opaque and pale pink, and flakes when you press it. The thermometer, at 145°F, tells you for sure." }
+    ],
+    "wrong": [
+      { "sign": "It's too salty", "fix": "Eat it with plenty of rice. Next time, use less salt or a shorter wait." },
+      { "sign": "It's dry", "fix": "It cooked past 145°F. Next time, check 2 minutes sooner." },
+      { "sign": "It reads under 145°F", "fix": "Bake 2 more minutes and check again." },
+      { "sign": "There's white stuff on top", "fix": "That's a protein from the fish. It's safe. Cooking a little lower makes less of it." }
+    ],
+    "quiz": [
+      { "q": "Why does the salted fish wait 20 minutes?", "choices": ["So the salt seasons it inside", "To thaw it", "To dry it out"], "answer": 0, "explain": "The salt soaks back into the fish." },
+      { "q": "You feel a hard tip in the fish. What do you do?", "choices": ["Ask an adult to pull it out with tweezers", "Cook it anyway", "Cut it out with a knife"], "answer": 0, "explain": "It's a small bone." },
+      { "q": "What does done salmon look like?", "choices": ["Opaque and flaky", "Shiny and see-through", "Dark red"], "answer": 0, "explain": "And it reads 145°F." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "salmon-fillet", "amount": 1.5, "unit": "lb", "prep": "4 pieces", "group": "Salmon" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Salmon" },
+    { "ingredient": "vegetable-oil", "amount": 1, "unit": "tsp", "scale": false, "group": "For the pan" },
+    { "ingredient": "rice-cooked-pouch", "amount": 2, "unit": "count", "round": "up", "group": "To serve" },
+    { "ingredient": "lemon", "amount": 1, "unit": "count", "round": "up", "group": "To serve" },
+    { "ingredient": "cucumber", "amount": 1, "unit": "count", "round": "up", "optional": true, "group": "To serve" },
+    { "ingredient": "vinegar-rice", "amount": 1, "unit": "tbsp", "optional": true, "group": "To serve" }
+  ],
+  "equipment": [
+    "plate",
+    "paper-towels",
+    "tweezers",
+    "sheet-pan",
+    "parchment",
+    "oven-mitts",
+    "spatula",
+    "thermometer",
+    "microwave",
+    "cutting-board",
+    "paring-knife",
+    "small-bowl"
+  ],
+  "steps": [
+    { "id": "salt", "text": "Lay the salmon on the plate. Sprinkle the salt over both sides. Put it in the fridge.", "safety": "solo", "hazard": "Raw fish", "handles": ["salmon-fillet"], "timerSeconds": 1200, "timerLabel": "Salted salmon rests", "why": "salt-sit", "tip": "Use your fingers to scatter the salt evenly." },
+    { "id": "wash-salt", "type": "wash", "text": "Wash your hands with soap, and wipe the counter.", "safety": "solo", "hazard": "Raw fish" },
+    { "id": "oven", "text": "Move a rack to the middle of the cold oven. Heat the oven to 425°F.", "safety": "adult-nearby", "hazard": "Hot oven", "tip": "The salmon rests while the oven heats." },
+    { "id": "pan", "text": "Line the sheet pan with parchment and rub the oil over it.", "safety": "solo", "look": "A thin shine of oil all over the paper." },
+    { "id": "cucumber", "text": "If you're making the cucumber side, slice it into thin coins. Toss them with the rice vinegar in the small bowl.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Claw grip: fingertips tucked under." },
+    { "id": "bones", "text": "Pat the salmon dry. Run a fingertip along each piece, feeling for bones. Lay the pieces on the pan, not touching.", "safety": "solo", "hazard": "Raw fish", "handles": ["salmon-fillet"], "why": "bones", "tip": "Feel a hard tip? Ask an adult to pull it out with the tweezers.", "look": "Four pieces with space between them." },
+    { "id": "wash-pan", "type": "wash", "text": "Throw the paper towels away. Wash your hands, the tweezers, and the plate with hot, soapy water.", "safety": "solo", "hazard": "Raw fish" },
+    { "id": "bake", "text": "Mitts on. Slide the pan into the oven and bake.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 720, "timerLabel": "Bake salmon", "look": "Opaque all over, with golden edges." },
+    { "id": "check", "type": "doneness", "text": "Mitts on, pull the rack out. Slide the thermometer into the side of the thickest piece. It should read 145°F or more.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 145, "unit": "F" }, "why": "145", "tip": "Not there yet? Bake 2 more minutes." },
+    { "id": "rice", "text": "Turn off the oven. Heat the rice pouches in the microwave as the package says.", "safety": "solo", "tip": "Tear the pouch open away from your face." },
+    { "id": "serve", "text": "Cut the lemon into wedges. Serve each piece of salmon with rice, a lemon wedge, and the cucumber.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Pale pink salmon that flakes when you press it." }
+  ]
+}

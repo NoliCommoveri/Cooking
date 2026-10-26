@@ -1,0 +1,89 @@
+{
+  "id": "beef-tacos-seasoning",
+  "version": 1,
+  "track": "core",
+  "unit": 102,
+  "title": "Beef tacos with homemade seasoning",
+  "image": "dishes/beef-tacos-seasoning.png",
+  "cuisine": "tex-mex",
+  "skill": "Reading labels on shells and seasoning",
+  "skills": ["reading-labels"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 35,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 7, "text": "For more than 6, brown the beef in two batches, or in a wide pot, so it browns instead of steaming." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Read it before you cook it",
+      "body": "Taco night is easy to make clean, if you read the labels. Some taco shells are fried in a fat from an unclean animal, and some seasoning packets hide ingredients you don't want. Today you'll check the labels, mix your own taco seasoning from plain spices, and brown ground beef to 160°F."
+    },
+    "why": [
+      { "id": "list", "title": "The ingredient list tells the truth", "body": "The front of a package is an ad. The ingredient list on the back says what's really inside, from the most to the least. Read it every time." },
+      { "id": "shells", "title": "Shells can hide a fat", "body": "Most taco shells are fried in vegetable oil, but a few use a fat from an unclean animal. The ingredient list says which oil or fat. If it's not a plant oil, put it back and pick another brand." },
+      { "id": "own-mix", "title": "Your own seasoning", "body": "A seasoning packet is mostly spices you already have, plus salt, starch, and sometimes things you can't check. Mixing your own means you know every ingredient." },
+      { "id": "break-up", "title": "Break it up as it browns", "body": "Ground beef cooks in clumps unless you break it up. Small crumbles brown on all sides and cook through evenly." },
+      { "id": "pile", "title": "Check the pile", "body": "Crumbles are too small to check one at a time. Push them into a pile and put the thermometer in the middle of it." }
+    ],
+    "wrong": [
+      { "sign": "The beef is gray and watery", "fix": "Turn the heat up and stop stirring for a minute at a time so it can brown." },
+      { "sign": "The shells broke", "fix": "Warm them first, and fill them gently from the bottom up." },
+      { "sign": "It's too spicy", "fix": "Add more lettuce, cheese, or sour cream on top." },
+      { "sign": "The beef reads under 160°F", "fix": "Keep cooking and stirring for 2 more minutes, then check again." }
+    ],
+    "quiz": [
+      { "q": "Where do you find what's really in a food?", "choices": ["The ingredient list on the back", "The picture on the front", "The price tag"], "answer": 0, "explain": "The list names every ingredient." },
+      { "q": "What should the oil or fat on a taco shell label be?", "choices": ["A plant oil, like corn or vegetable oil", "Any fat", "It doesn't matter"], "answer": 0, "explain": "A few brands use a fat from an unclean animal." },
+      { "q": "How do you check crumbled beef for 160°F?", "choices": ["Push it into a pile and check the middle", "Check one crumble", "Look at the color"], "answer": 0, "explain": "A pile gives the thermometer something to read." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "chili-powder", "amount": 1, "unit": "tbsp", "group": "Taco seasoning" },
+    { "ingredient": "cumin-ground", "amount": 1.5, "unit": "tsp", "group": "Taco seasoning" },
+    { "ingredient": "garlic-powder", "amount": 0.5, "unit": "tsp", "group": "Taco seasoning" },
+    { "ingredient": "paprika-sweet", "amount": 0.5, "unit": "tsp", "group": "Taco seasoning" },
+    { "ingredient": "oregano-dried", "amount": 0.5, "unit": "tsp", "group": "Taco seasoning" },
+    { "ingredient": "salt", "amount": 0.75, "unit": "tsp", "group": "Taco seasoning" },
+    { "ingredient": "beef-ground", "amount": 1, "unit": "lb", "group": "Beef" },
+    { "ingredient": "water", "amount": 0.33, "unit": "cup", "group": "Beef" },
+    { "ingredient": "taco-shells", "amount": 8, "unit": "count", "round": "up", "group": "Tacos" },
+    { "ingredient": "romaine", "amount": 0.5, "unit": "count", "round": "up", "group": "Tacos" },
+    { "ingredient": "tomato", "amount": 2, "unit": "count", "round": "up", "group": "Tacos" },
+    { "ingredient": "cheddar-shredded", "amount": 1, "unit": "cup", "group": "Tacos" },
+    { "ingredient": "sour-cream", "amount": 0.5, "unit": "cup", "optional": true, "group": "Tacos" },
+    { "ingredient": "salsa", "amount": 0.5, "unit": "cup", "optional": true, "group": "Tacos" }
+  ],
+  "equipment": [
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "cutting-board",
+    "paring-knife",
+    "paper-towels",
+    "sheet-pan",
+    "oven-mitts",
+    "skillet-12",
+    "wooden-spoon",
+    "thermometer",
+    "spoon"
+  ],
+  "steps": [
+    { "id": "labels", "text": "Read the ingredient lists on the taco shells, the cheese, and the sour cream. Check the shells' fat and look for gelatin.", "safety": "solo", "why": "shells", "tip": "If one has either, don't use it. Pick a brand without it." },
+    { "id": "beef-label", "text": "Read the beef label. It should say beef and nothing else.", "safety": "solo", "tip": "Packages called ground meat or meatloaf mix can hold other meats." },
+    { "id": "seasoning", "text": "In the small bowl, stir together the chili powder, cumin, garlic powder, paprika, oregano, and salt.", "safety": "solo", "why": "own-mix", "look": "One even, red-brown color." },
+    { "id": "oven", "text": "Move a rack to the middle of the cold oven. Heat the oven to 350°F.", "safety": "adult-nearby", "hazard": "Hot oven" },
+    { "id": "lettuce", "text": "Rinse the lettuce leaves and pat them dry. Stack a few, roll them up, and slice the roll thin with the paring knife.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Claw grip: fingertips tucked under." },
+    { "id": "tomato", "text": "Core the tomatoes and scoop out the seeds. Cut them into small pieces.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Pieces about the size of a pea." },
+    { "id": "brown", "text": "Put the beef in the cold skillet. Turn the heat to medium-high.", "safety": "adult-nearby", "hazard": "Hot pan, raw meat", "handles": ["beef-ground"], "tip": "Use the wooden spoon, not your hands, to spread it out." },
+    { "id": "wash-brown", "type": "wash", "text": "Wash your hands with soap. Put the beef package in the trash.", "safety": "adult-nearby", "hazard": "Hot stove" },
+    { "id": "crumble", "text": "Break the beef into small crumbles with the wooden spoon as it cooks. Stir every minute.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 420, "timerLabel": "Brown beef", "why": "break-up", "look": "No pink left, and some brown bits." },
+    { "id": "season", "text": "Stir in the seasoning and the water. Let it bubble until the water is almost gone.", "safety": "adult-nearby", "hazard": "Hot pan, steam", "timerSeconds": 180, "timerLabel": "Simmer", "look": "The beef is shiny and coated, not soupy." },
+    { "id": "check", "type": "doneness", "text": "Push the beef into a pile. Put the thermometer in the middle. It should read 160°F or more.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 160, "unit": "F" }, "why": "pile" },
+    { "id": "shells", "text": "Turn off the stove. Mitts on, set the shells on the sheet pan and warm them in the oven.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 300, "timerLabel": "Warm shells", "tip": "Pull the rack out with a mitt to lift the pan out." },
+    { "id": "serve", "text": "Turn off the oven. Spoon beef into each shell, then add lettuce, tomato, cheese, and sour cream or salsa.", "safety": "solo", "look": "Beef on the bottom, cool toppings on top." }
+  ]
+}

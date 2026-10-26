@@ -1,0 +1,92 @@
+{
+  "id": "fish-sticks",
+  "version": 1,
+  "track": "core",
+  "unit": 102,
+  "title": "Oven-baked fish sticks",
+  "image": "dishes/fish-sticks.png",
+  "cuisine": "american",
+  "skill": "Thawing fish safely and baking to 145°F",
+  "skills": ["cooking-fish"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 40,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 5, "text": "For more than 4, use two sheet pans, one on each middle rack, and swap them halfway." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Thawed, crumbed, baked",
+      "body": "Homemade fish sticks are strips of cod in a crisp crumb coat, baked instead of fried. Today you'll start with fish that thawed safely in the fridge, cut it into strips, coat it, and bake it until it reaches 145°F, the safe temperature for fish. A quick tartar sauce goes on the side."
+    },
+    "why": [
+      { "id": "thaw", "title": "Thaw it cold", "body": "Fish left on the counter warms up on the outside while the middle is still frozen, and germs grow on the warm part. Thawing in the fridge overnight keeps all of it cold." },
+      { "id": "dry", "title": "Dry fish holds crumbs", "body": "Thawed fish is wet. Patting it dry with paper towels lets the flour stick, then the egg, then the crumbs." },
+      { "id": "dry-wet", "title": "One dry hand, one wet hand", "body": "Use one hand for the flour and crumbs and the other for the egg. Your fingers stay clean, and the coating goes on evenly." },
+      { "id": "hot-oven", "title": "A hot oven makes it crisp", "body": "At 425°F, the crumbs brown and crisp in the time the fish takes to cook through. A cooler oven dries the fish before the outside crisps." },
+      { "id": "145", "title": "Fish is done at 145°F", "body": "Fish cooks fast. At 145°F the middle turns white all the way through and flakes when you press it." }
+    ],
+    "wrong": [
+      { "sign": "The crumbs fell off", "fix": "Pat the fish drier next time, and press the crumbs on firmly." },
+      { "sign": "The sticks are pale", "fix": "Bake 2 more minutes, mitts on to check." },
+      { "sign": "A stick reads under 145°F", "fix": "Bake 2 more minutes and check again." },
+      { "sign": "The fish is still icy in the middle", "fix": "It didn't thaw all the way. Put it back in the fridge, or thaw it in cold water in a sealed bag." }
+    ],
+    "quiz": [
+      { "q": "Where should frozen fish thaw?", "choices": ["In the fridge", "On the counter", "In the sun"], "answer": 0, "explain": "The fridge keeps every part of it cold." },
+      { "q": "Why pat the fish dry?", "choices": ["So the coating sticks", "So it cooks slower", "To clean it"], "answer": 0, "explain": "Flour won't stick to wet fish." },
+      { "q": "What temperature is fish safe at?", "choices": ["145°F", "165°F", "120°F"], "answer": 0, "explain": "Fish is done at 145°F." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "cod", "amount": 1, "unit": "lb", "prep": "thawed in the fridge overnight if frozen", "group": "Fish" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Fish" },
+    { "ingredient": "flour-ap", "amount": 0.33, "unit": "cup", "group": "Coating" },
+    { "ingredient": "egg", "amount": 1, "unit": "count", "round": "up", "group": "Coating" },
+    { "ingredient": "panko", "amount": 1, "unit": "cup", "group": "Coating" },
+    { "ingredient": "vegetable-oil", "amount": 2, "unit": "tbsp", "group": "Coating" },
+    { "ingredient": "paprika-sweet", "amount": 0.5, "unit": "tsp", "group": "Coating" },
+    { "ingredient": "vegetable-oil", "amount": 1, "unit": "tbsp", "scale": false, "group": "For the pan" },
+    { "ingredient": "mayonnaise", "amount": 0.33, "unit": "cup", "group": "Tartar sauce" },
+    { "ingredient": "pickle-dill", "amount": 1, "unit": "count", "round": "up", "group": "Tartar sauce" },
+    { "ingredient": "lemon", "amount": 1, "unit": "count", "round": "up", "group": "Tartar sauce" }
+  ],
+  "substitutions": [
+    { "for": "panko", "use": "oats-gluten-free", "reason": "gluten", "note": "Chop the oats fine first." },
+    { "for": "flour-ap", "use": "cornstarch", "reason": "gluten" }
+  ],
+  "equipment": [
+    "sheet-pan",
+    "oven-mitts",
+    "paper-towels",
+    "cutting-board",
+    "paring-knife",
+    "plate",
+    "shallow-dish",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "spatula",
+    "thermometer"
+  ],
+  "steps": [
+    { "id": "oven", "text": "Move a rack to the middle of the cold oven. Spread the pan's oil on the sheet pan. Heat the oven to 425°F.", "safety": "adult-nearby", "hazard": "Hot oven", "why": "hot-oven" },
+    { "id": "thawed", "text": "Check the fish is thawed: press the thickest part. It should feel soft all through, with no ice.", "safety": "solo", "hazard": "Raw fish", "handles": ["cod"], "why": "thaw", "tip": "Still icy? Seal it in a bag and set it in cold water for 30 minutes." },
+    { "id": "wash-thawed", "type": "wash", "text": "Wash your hands with soap.", "safety": "solo", "hazard": "Raw fish" },
+    { "id": "sauce", "text": "Cut the pickle into small bits with the paring knife. Stir it into the mayonnaise in the small bowl with a squeeze of lemon.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Creamy sauce with green flecks." },
+    { "id": "stations", "text": "Put the flour on the plate. Beat the egg in the shallow dish with the fork. Mix the panko, oil, and paprika in the bowl.", "safety": "solo", "hazard": "Raw egg", "handles": ["egg"], "tip": "Line them up: flour, egg, crumbs, then the sheet pan." },
+    { "id": "wash-stations", "type": "wash", "text": "Wash your hands and throw the eggshell away.", "safety": "solo", "hazard": "Raw egg" },
+    { "id": "cut", "text": "Pat the fish dry with paper towels. Cut it into strips about as wide as two fingers. Sprinkle them with the salt.", "safety": "adult-nearby", "hazard": "Sharp knife, raw fish", "handles": ["cod"], "why": "dry", "look": "About 12 strips, close to the same size." },
+    { "id": "wash-cut", "type": "wash", "text": "Throw the paper towels away. Wash your hands, the knife, and the board with hot, soapy water.", "safety": "solo", "hazard": "Raw fish" },
+    { "id": "coat", "text": "Dry hand: roll a strip in flour. Wet hand: dip it in egg. Dry hand: press it into the crumbs. Lay it on the pan.", "safety": "solo", "hazard": "Raw fish, raw egg", "handles": ["cod", "egg"], "why": "dry-wet", "tip": "Leave space between the strips." },
+    { "id": "wash-coat", "type": "wash", "text": "Wash your hands. Throw out the leftover flour, egg, and crumbs.", "safety": "solo", "hazard": "Raw fish" },
+    { "id": "bake", "text": "Mitts on. Slide the pan into the oven and bake.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 720, "timerLabel": "Bake fish sticks", "look": "Golden crumbs, sizzling at the edges." },
+    { "id": "check", "type": "doneness", "text": "Mitts on, pull the rack out. Slide the thermometer into the side of the thickest stick. It should read 145°F or more.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 145, "unit": "F" }, "why": "145", "tip": "Not there yet? Bake 2 more minutes." },
+    { "id": "serve", "text": "Turn off the oven. Lift the fish sticks onto plates with the spatula. Serve with the tartar sauce and lemon.", "safety": "adult-nearby", "hazard": "Hot pan", "look": "Crisp golden sticks, white and flaky inside." }
+  ]
+}
