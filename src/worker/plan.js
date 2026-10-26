@@ -550,6 +550,9 @@ function weekSwapOut(st, week) {
   return { choices: levelChoices(lessons, w, id), swap: swapOut(lessons, week, id, st.done) };
 }
 
+// The longest a writing box takes (14f): room for a long essay.
+export const WRITING_MAX = 20000;
+
 const NO_SABBATH = "Dishes aren't swapped on the Sabbath. Swap it on another day.";
 
 // The statements that move a week from one dish to another: the week's row
@@ -643,6 +646,19 @@ async function levelTasks(env, course, profiles) {
 }
 const doneAt = (t) => (t && !t.skipped ? t.at : null);
 
+// What each profile typed into a Level's writing boxes (14f): { 'week:field:profile': body }.
+// Empty before the draft's table exists.
+async function levelWriting(env, course, profiles) {
+  if (!course.program || !profiles.length) return {};
+  try {
+    const { results } = await env.DB.prepare(`SELECT week, field, profile_id, body FROM level_writing
+        WHERE course_id = ? AND family_id = ? AND profile_id IN (${placeholders(profiles)})`).bind(course.id, course.family_id, ...profiles).all();
+    return Object.fromEntries(results.map((r) => [`${r.week}:${r.field}:${r.profile_id}`, r.body]));
+  } catch { return {}; }
+}
+// A Level's writing boxes, in week order: { week, part, title, id, label }.
+const writingBoxes = (V) => V.weeks.flatMap((w) => PARTS.flatMap((part) => (w[part].write ?? []).map((x) => ({ week: w.week, part, title: w[part].title, id: x.id, label: x.label }))));
+
 // The minutes a recipe plans for: its lesson's, or a planned dish's or a
 // Level card's estimate until it's written.
 const plannedRecipeMinutes = (V, id) => lessonById[id]?.totalMinutes ?? dishById[id]?.minutes ?? V.cards.find((c) => c.id === id)?.minutes ?? 0;
@@ -666,12 +682,16 @@ function levelFor(st, pid, day) {
   const on = st.course.parts ?? PARTS;
   const partOut = (w, part) => {
     const t = st.tasks[`${w.week}:${part}:${pid}`];
-    return { week: w.week, part, ...w[part], done_at: doneAt(t), skipped: Boolean(t?.skipped) };
+    // A page's writing boxes come with what this profile typed in them (14f).
+    const written = w[part].write ? Object.fromEntries(w[part].write.map((x) => [x.id, st.writing?.[`${w.week}:${x.id}:${pid}`] ?? ''])) : undefined;
+    return { week: w.week, part, ...w[part], ...(written ? { written } : {}), done_at: doneAt(t), skipped: Boolean(t?.skipped) };
   };
   const weekOut = (w) => {
     const id = st.lessons.idOf[w.week] ?? null;
     return {
       week: w.week, unit: w.unit, unit_name: unitName[w.unit], mastery: Boolean(w.mastery), kind: w.kind ?? null, note: w.kind ? w.note ?? null : null,
+      // Level 4's deep frying and grilling (§12.8): the one place it mentions an adult.
+      adult_home: Boolean(w.adultAtHome),
       recipe: id, recipe_title: id ? lessonById[id]?.title ?? V.titles[id] ?? id : null, recipe_written: Boolean(id && lessonById[id]), recipe_done: Boolean(id && st.done[id]),
       // Neither dish can be cooked with the family's settings (14c): the kitchen sends the learner to a parent.
       blocked: Boolean(id && st.lessons.blocked[id]),
@@ -697,6 +717,8 @@ function levelFor(st, pid, day) {
     open: reached.flatMap((w) => weekParts(w, on).map((part) => partOut(w, part))).filter((x) => !x.done_at && !x.skipped),
     // The recipes of mastery weeks: the player says "cook it on your own" (§12.4).
     mastery: V.weeks.filter((w) => w.mastery && st.lessons.idOf[w.week]).map((w) => st.lessons.idOf[w.week]),
+    // The recipes of weeks with an adult at home: the player says so on the first step (§12.8).
+    adult_home: V.weeks.filter((w) => w.adultAtHome && st.lessons.idOf[w.week]).map((w) => st.lessons.idOf[w.week]),
     // The week each recipe is on the course, for its card: "Week 5", never
     // Cook Around the World's lesson numbers (owner, 2026-10-26).
     week_of: Object.fromEntries(V.weeks.filter((w) => st.lessons.idOf[w.week]).map((w) => [st.lessons.idOf[w.week], w.week])),
@@ -715,6 +737,26 @@ async function levelCourseOf(env, fid, pid) {
   const { results } = await env.DB.prepare(`SELECT c.* FROM courses c JOIN course_profiles cp ON cp.course_id = c.id AND cp.family_id = c.family_id
       WHERE c.family_id = ? AND cp.profile_id = ? ORDER BY c.archived_at IS NOT NULL, c.created_at DESC, c.id`).bind(fid, pid).all();
   return (await withPrograms(env, fid, results)).find((c) => c.program) ?? null;
+}
+
+// The Level each profile is on now (its active Level course's program), for
+// the player's safety banners (§12.8): { profile id: 'sp-4' }. Empty without
+// the next release.
+export async function profileLevels(env, fid) {
+  const { results } = await env.DB.prepare(`SELECT c.*, cp.profile_id FROM courses c JOIN course_profiles cp ON cp.course_id = c.id AND cp.family_id = c.family_id
+      WHERE c.family_id = ? AND c.archived_at IS NULL`).bind(fid).all();
+  return Object.fromEntries((await withPrograms(env, fid, results)).filter((c) => c.program).map((c) => [c.profile_id, c.program]));
+}
+
+// The portfolio (14f): what a profile typed into its Level's writing boxes,
+// for the transcript to print after it. null when its Level has none.
+export async function levelPortfolio(env, fid, pid) {
+  const course = await levelCourseOf(env, fid, pid);
+  const V = course && LEVELS[course.program];
+  const boxes = V ? writingBoxes(V) : [];
+  if (!boxes.length) return null;
+  const typed = await levelWriting(env, course, [pid]);
+  return { name: V.name, pieces: boxes.map((b) => ({ ...b, body: typed[`${b.week}:${b.id}:${pid}`] ?? '' })) };
 }
 
 // How far one profile is on its Level (12e), by its own work: each week's
@@ -859,7 +901,8 @@ async function courseState(env, course, fam, day, tz) {
   const weeks = await courseWeeks(env, course);
   const taken = await courseTaken(env, course, profiles, lessons.usable);
   const tasks = await levelTasks(env, course, profiles);
-  return { course, profiles, lessons, done, taken, tasks, sched: schedule({ course, lessons: lessons.usable, done, free, taken, weeks, today: day }) };
+  const writing = await levelWriting(env, course, profiles);
+  return { course, profiles, lessons, done, taken, tasks, writing, sched: schedule({ course, lessons: lessons.usable, done, free, taken, weeks, today: day }) };
 }
 
 const activeCourses = async (env, fid) => withPrograms(env, fid, (await env.DB.prepare('SELECT * FROM courses WHERE family_id = ? AND archived_at IS NULL ORDER BY created_at, id').bind(fid).all()).results);
@@ -1643,6 +1686,34 @@ export function register(on) {
     await env.DB.prepare(`INSERT INTO level_tasks (family_id, course_id, week, part, profile_id, done_at, skipped) VALUES (?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(course_id, week, part, profile_id) DO UPDATE SET done_at = excluded.done_at, skipped = excluded.skipped, removed_at = NULL`)
       .bind(s.family_id, course.id, week, part, pid, now(), skip ? 1 : 0).run();
+    return { ok: true };
+  }, { kid: true });
+
+  // What a profile types into a page's writing box (14f), by the profile or its
+  // parent: the portfolio. An empty box clears its row. Schoolwork isn't done
+  // on the Sabbath (§6.18), so it isn't saved then.
+  on('PUT', '/api/profiles/([0-9a-f]{16})/level-writing', async (req, env, body, [pid]) => {
+    const s = await requireSession(env, req);
+    ownProfile(s, pid);
+    if (isSabbath(today(req))) fail(409, 'sabbath', 'Schoolwork is saved on another day than the Sabbath.');
+    const { results } = await env.DB.prepare(`SELECT c.* FROM courses c JOIN course_profiles cp ON cp.course_id = c.id
+        WHERE c.family_id = ? AND c.archived_at IS NULL AND cp.profile_id = ?`).bind(s.family_id, pid).all();
+    const course = (await withPrograms(env, s.family_id, results)).find((c) => c.program) ?? fail(404, 'not_found', 'This profile is not on a Level course.');
+    const { week, part } = levelPart(course, body);
+    const field = String(body.field ?? '');
+    if (!(LEVELS[course.program].weeks.find((w) => w.week === week)[part].write ?? []).some((x) => x.id === field)) fail(400, 'invalid', 'No such writing box.');
+    if (typeof body.body !== 'string') fail(400, 'invalid', 'Send what was typed.');
+    const text = body.body.replace(/\r\n/g, '\n').trim();
+    if (text.length > WRITING_MAX) fail(400, 'invalid', `That's over ${WRITING_MAX} characters. Shorten it a little.`);
+    try {
+      await (text
+        ? env.DB.prepare(`INSERT INTO level_writing (course_id, family_id, profile_id, week, field, body, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(course_id, profile_id, week, field) DO UPDATE SET body = excluded.body, updated_at = excluded.updated_at`).bind(course.id, s.family_id, pid, week, field, text, now())
+        : env.DB.prepare('DELETE FROM level_writing WHERE course_id = ? AND family_id = ? AND profile_id = ? AND week = ? AND field = ?').bind(course.id, s.family_id, pid, week, field)).run();
+    } catch (err) {
+      if (/no such table/i.test(String(err?.message))) fail(503, 'not_ready', 'Writing is saved once the owner presses Re-apply draft on /ops.');
+      throw err;
+    }
     return { ok: true };
   }, { kid: true });
 

@@ -9,7 +9,9 @@ import { toBase, mixed } from './lib/units.js';
 import { LOGIN_PICTURES } from './lib/login-pictures.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 import { RUBRIC, GRADE_TEXT_MAX } from './lib/grades.js';
-import { PARTS, plannedMinutes, hoursOf } from './lib/levels.js';
+import { PARTS, plannedMinutes, hoursOf, ASSIGN_NOTES } from './lib/levels.js';
+// The longest a writing box takes (14f), as the Worker checks it.
+const WRITING_MAX = 20000;
 import { markTerms, toggleTermCard } from './lib/terms.js';
 import { progressView, levelProgressView, celebrate } from './rewards.js';
 import { isMuted, setMuted } from './sound.js';
@@ -579,6 +581,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
       w ? [
         el('h2', { class: quest ? 'q-title' : 'p-title' }, `Unit ${w.unit}: ${w.unit_name}`),
         w.mastery ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, 'Mastery week: cook it on your own') : null,
+        w.adult_home ? el('p', { class: `${quest ? 'q-swap' : 'p-swap'} k-adulthome` }, art('<svg class="ico" aria-hidden="true"><use href="/icons.svg#i-hat"/></svg>'), "Have an adult at home for this week's recipe.") : null,
         el('div', { class: 'k-parts' },
           // In the owner's order: Knowledge, Drill, the Recipe, Beyond the Recipe.
           w.parts.filter((x) => x.part !== 'sabbath').map(partRow),
@@ -695,6 +698,26 @@ async function levelPage(profileId, key) {
       } }, el('b', {}, c)))), why);
   });
   const written = x.body?.length || x.steps?.length || x.quiz?.length;
+  // The page's writing boxes (14f): what's typed goes into the portfolio,
+  // printed with the transcript. Not saved on the Sabbath.
+  const resting = lv.sabbath || isSabbath();
+  const boxes = (x.write ?? []).map((b) => ({ ...b, input: el('textarea', { rows: 8, maxlength: WRITING_MAX, readonly: resting, 'aria-label': b.label }, x.written?.[b.id] ?? '') }));
+  const writing = boxes.length ? el('div', { class: 'k-writing' },
+    boxes.map((b) => el('label', { class: 'k-write' }, el('b', {}, b.label), b.hint ? el('small', {}, b.hint) : null, b.input)),
+    resting ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, 'Your writing is kept. Add to it on another day than the Sabbath.')
+      : el('button', { type: 'button', class: quest ? 'q-btn' : 'p-btn', onclick: async (e) => {
+        const btn = e.currentTarget;
+        btn.disabled = true;
+        try {
+          for (const b of boxes) {
+            if (b.input.value.trim() === (x.written?.[b.id] ?? '')) continue;
+            await api('PUT', `/api/profiles/${p.id}/level-writing?${tz()}`, { week: x.week, part, field: b.id, body: b.input.value });
+            x.written = { ...x.written, [b.id]: b.input.value.trim() };
+          }
+          showToast('Saved to your portfolio.');
+        } catch (err) { showToast(err.message); }
+        btn.disabled = false;
+      } }, 'Save my writing')) : null;
   // Kitchen words on the page are buttons that open their meaning (§6.1).
   const { terms } = await contentRegistry();
   const worded = (tag, t) => { const n = el(tag); n.innerHTML = markTerms(t, terms, escHtml); return n; };
@@ -712,7 +735,8 @@ async function levelPage(profileId, key) {
         (x.body ?? []).map((t) => worded('p', t)),
         x.steps?.length ? el('ol', {}, x.steps.map((t) => worded('li', t))) : null,
         quiz,
-        written ? null : el('p', {}, 'This page is still being written. Do what the title says, with an adult if you need one, then tap Done.')),
+        written ? null : el('p', {}, boxes.length ? 'This page is still being written. Do what the title says, write it below, then tap Done.' : 'This page is still being written. Do what the title says, with an adult if you need one, then tap Done.')),
+      writing,
       x.done_at ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, `Done ${fmtDay(x.done_at.slice(0, 10))} ✓`)
         : x.skipped ? el('p', { class: quest ? 'q-swap' : 'p-swap' }, 'Skipped. An adult can take it back.')
           : el('div', { class: 'acts' },
@@ -749,7 +773,8 @@ async function lesson(profileId, lessonId) {
     // A Level's mastery week (12c): "cook it on your own", and why it worked.
     mastery: Boolean(mine.level?.mastery.includes(lessonId)),
     // On a Level course, the card shows the course's week, not lesson numbers.
-    level: mine.level ? { name: mine.level.name, week: mine.level.week_of?.[lessonId] ?? null } : null,
+    // and on Level 4's deep frying and grilling, "Have an adult at home" (§12.8).
+    level: mine.level ? { name: mine.level.name, week: mine.level.week_of?.[lessonId] ?? null, adultHome: Boolean(mine.level.adult_home?.includes(lessonId)) } : null,
     // Step pictures under each step, or behind Show me (14e).
     pictures: mine.level?.pictures ?? 'button',
     // "I want to make this" or "Cook this" (§6.1), and the queued lesson's
@@ -2202,8 +2227,12 @@ const courseEditor = parentOnly(async (cid) => {
         [['shown', 'Under each step'], ['button', 'Behind Show me']].map(([v, t]) => el('option', { value: v, selected: picsOf(pid) === v }, `${t}${v === picsDefault() ? ' (the Level\'s way)' : ''}`)))))
       : [el('p', { class: 'mut small', style: 'margin:0' }, "Pick who it's for first.")]));
   };
+  // Level 4's note for parents (§12.8), under the program once it's picked.
+  const assignBox = el('p', { class: 'card notice', role: 'note', hidden: true, style: 'margin:8px 0 0' });
   const drawProgram = () => {
     const V = levelOf();
+    assignBox.hidden = !ASSIGN_NOTES[program];
+    assignBox.textContent = ASSIGN_NOTES[program] ?? '';
     perBox.hidden = Boolean(V);
     levelPace.hidden = !V;
     planSet.hidden = Boolean(V);
@@ -2221,7 +2250,8 @@ const courseEditor = parentOnly(async (cid) => {
       el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'program', value: '', checked: true }),
         el('span', {}, 'Cook Around the World', el('em', {}, ' A dish at a time, each with its skill, at your pace'))),
       [...levels].sort((x, y) => x.name.localeCompare(y.name)).map((V) => el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'program', value: V.id }),
-        el('span', {}, V.name, el('em', {}, ` ${V.weeks.length} weeks, about ${V.hours} hours: a reading, a drill, a recipe, and a Beyond the Recipe page each week`)))))
+        el('span', {}, V.name, el('em', {}, ` ${V.weeks.length} weeks, about ${V.hours} hours: a reading, a drill, a recipe, and a Beyond the Recipe page each week`)))),
+      assignBox)
     : existing?.program ? el('p', { class: 'mut small', style: 'margin:0' }, `Program: ${levelOf()?.name ?? 'a Level'}`) : null;
   drawProgram();
 
@@ -2696,8 +2726,25 @@ const transcript = parentOnly(async (pid) => {
         t.level?.units.some((u) => u.mastered) ? line('Units mastered', t.level.units.filter((u) => u.mastered).map((u) => `${u.number}. ${u.name}`).join('; ')) : null,
         line('Final grade', d.final_grade),
         line('Credit', d.credit)),
-      el('p', { class: 'mut small' }, `Printed ${fmtDay(localToday(), long)}`)));
+      el('p', { class: 'mut small' }, `Printed ${fmtDay(localToday(), long)}`)),
+    t.portfolio ? portfolioView(t.portfolio, d.student_name || p.name) : null);
 });
+
+// Level 4's portfolio (14f): the capstone's written parts, as the learner
+// typed them on their pages, printed on its own pages after the transcript.
+function portfolioView(pf, student) {
+  const done = pf.pieces.filter((x) => x.body);
+  const left = pf.pieces.filter((x) => !x.body);
+  return el('section', { class: 'printout portfolio' },
+    el('h2', {}, `${pf.name} portfolio`),
+    el('p', {}, el('b', {}, student)),
+    done.length ? done.map((x) => el('div', { class: 'pf-piece' },
+      el('h3', {}, x.label),
+      el('p', { class: 'mut small' }, `Week ${x.week} · ${PART_NAMES[x.part]}: ${x.title}`),
+      el('div', { class: 'pf-body' }, x.body)))
+      : el('p', { class: 'mut' }, 'Nothing written yet. The capstone weeks have boxes for each part.'),
+    left.length && done.length ? el('p', { class: 'mut small noprint' }, `Not written yet: ${left.map((x) => x.label.toLowerCase()).join(', ')}.`) : null);
+}
 
 // ---------- owner screens ----------
 

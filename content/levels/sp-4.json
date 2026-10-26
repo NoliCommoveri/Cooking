@@ -45,24 +45,57 @@
       "unit": 6,
       "skill": "deep-frying",
       "mastery": true,
+      "adultAtHome": true,
       "cuisine": "korean",
       "familiar": "fish-and-chips",
       "explore": "korean-fried-chicken",
-      "note": "Have an adult at home. A plain flour and cornstarch dredge if the week falls in spring. Or the student's own dish with the unit's skills, through Write my recipe",
+      "note": "A plain flour and cornstarch dredge if the week falls in spring. Or the student's own dish with the unit's skills, through Write my recipe",
       "drill": { "title": "Hold oil at 350°F; drain and hold fried food crisp in a low oven", "minutes": 30 },
       "knowledge": { "title": "Oil fires; cooling and disposing of oil", "minutes": 45 },
       "sabbath": { "title": "Fry ahead and re-crisp in the oven for guests", "minutes": 30 }
     },
     { "week": 27, "unit": 7, "skill": "oven-browning", "cuisine": "lebanese", "familiar": "salmon-en-papillote", "explore": "samke-harra", "note": "Salmon for 6", "drill": { "title": "Score and stuff a whole fish; check doneness at the backbone", "minutes": 30 }, "knowledge": { "title": "Buying and roasting whole fish", "minutes": 45 }, "sabbath": { "title": "Make a tahini sauce ahead", "minutes": 30 } },
-    { "week": 28, "unit": 7, "skill": "grilling", "cuisine": "indonesian", "familiar": "bbq-chicken-two-zone", "explore": "chicken-satay", "note": "Have an adult at home. Without a grill: a grill pan for direct heat, the oven for indirect", "drill": { "title": "Set up two zones and move food between them", "minutes": 30 }, "knowledge": { "title": "Direct vs. indirect heat; grill fires", "minutes": 45 }, "sabbath": { "title": "Firstfruits and tithing (Deuteronomy 14:22–29; Proverbs 3:9)", "minutes": 30 } },
+    { "week": 28, "unit": 7, "skill": "grilling", "adultAtHome": true, "cuisine": "indonesian", "familiar": "bbq-chicken-two-zone", "explore": "chicken-satay", "note": "Without a grill: a grill pan for direct heat, the oven for indirect", "drill": { "title": "Set up two zones and move food between them", "minutes": 30 }, "knowledge": { "title": "Direct vs. indirect heat; grill fires", "minutes": 45 }, "sabbath": { "title": "Firstfruits and tithing (Deuteronomy 14:22–29; Proverbs 3:9)", "minutes": 30 } },
     { "week": 29, "unit": 7, "skill": "roasting", "cuisine": "greek", "familiar": "roast-beef", "explore": "roast-leg-of-lamb", "note": "Lamb with the fat cap trimmed off", "drill": { "title": "Carve a roast; make a pan jus", "minutes": 30 }, "knowledge": { "title": "Carryover in large roasts", "minutes": 45 }, "sabbath": { "title": "The Passover lamb (Exodus 12:1–11)", "minutes": 30 } },
     { "week": 30, "unit": 7, "skill": "layering", "mastery": true, "cuisine": "greek", "familiar": "beef-lasagna", "explore": "moussaka", "note": "Both for 12; the lamb fat cap trimmed off. Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Plan oven space and timing for two large pans", "minutes": 30 }, "knowledge": { "title": "Cooking for a crowd: what changes", "minutes": 45 }, "sabbath": { "title": "Assemble a casserole ahead and bake it the day of", "minutes": 30 } },
     { "week": 31, "unit": 8, "skill": "braising", "cuisine": "mexican", "familiar": "pot-roast", "explore": "birria-de-chivo", "note": "Level 4 version of pot roast: the gravy reduced. Birria fat skimmed and thrown out, tortillas crisped in oil; beef is the swap for goat", "drill": { "title": "Chill a braise and lift off the fat", "minutes": 30 }, "knowledge": { "title": "Collagen to gelatin; marbling and drippings vs. the fat the rule blocks", "minutes": 45 }, "sabbath": { "title": "Braise ahead and reheat", "minutes": 30 } },
     { "week": 32, "unit": 8, "skill": "braising", "cuisine": "french", "familiar": "chicken-chasseur", "explore": "duck-legs-white-beans", "note": "Broth in place of wine; beef sausage with the duck", "drill": { "title": "Sear and render duck legs; save the fat", "minutes": 30 }, "knowledge": { "title": "Braising liquids: stock, tomato, and reduction", "minutes": 45 }, "sabbath": { "title": "Feasting, rejoicing, and moderation (Deuteronomy 14:26; Nehemiah 8:10; Proverbs 23:20–21)", "minutes": 30 } },
     { "week": 33, "unit": 8, "skill": "one-pot-stews", "mastery": true, "cuisine": "moroccan", "familiar": "cholent", "explore": "dafina", "note": "Both held overnight. Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Hold a stew safely for hours at 140°F or above", "minutes": 30 }, "knowledge": { "title": "Holding hot food for hours; Sabbath stews across the Jewish world", "minutes": 45 }, "sabbath": { "title": "Preparation day (Exodus 16:22–30; Luke 23:54)", "minutes": 30 } },
-    { "week": 34, "unit": 9, "kind": "practice", "minutes": 180, "note": "Test-cook the planned main and sides", "drill": { "title": "Write the menu, budget, and guest list with allergies", "minutes": 30 }, "knowledge": { "title": "Adapting recipes for guests' allergies and to clean ingredients", "minutes": 45 }, "sabbath": { "title": "Send invitations; ask about allergies", "minutes": 30 } },
-    { "week": 35, "unit": 9, "kind": "practice", "minutes": 180, "note": "Make-ahead dishes from the plan: a sauce, the dessert, a stew or braise", "drill": { "title": "Shop within the budget, by store section", "minutes": 30 }, "knowledge": { "title": "Plating and serving family-style", "minutes": 45 }, "sabbath": { "title": "Thursday prep", "minutes": 30 } },
-    { "week": 36, "unit": 9, "kind": "capstone", "minutes": 360, "note": "The full Sabbath meal for household and guests: a main, two sides, bread (challah, or homemade matzah in spring), and dessert, cooked alone", "drill": { "title": "Run the kitchen alone", "minutes": 30 }, "knowledge": { "title": "Reflection essay, the Sunday after (into the portfolio)", "minutes": 45 }, "sabbath": { "title": "Giving thanks for food (Deuteronomy 8:10; 1 Timothy 4:4–5)", "minutes": 30 } }
+    {
+      "week": 34,
+      "unit": 9,
+      "kind": "practice",
+      "minutes": 180,
+      "note": "Test-cook the planned main and sides",
+      "drill": {
+        "title": "Write the menu, budget, and guest list with allergies",
+        "minutes": 30,
+        "write": [
+          { "id": "menu", "label": "The menu", "hint": "The main, two sides, the bread, and dessert, each with where its recipe comes from." },
+          { "id": "budget", "label": "The budget", "hint": "What you can spend, and what each dish should cost." },
+          { "id": "guest-list", "label": "The guest list", "hint": "Who is coming, and each guest's allergies or foods they avoid." }
+        ]
+      },
+      "knowledge": { "title": "Adapting recipes for guests' allergies and to clean ingredients", "minutes": 45 },
+      "sabbath": { "title": "Send invitations; ask about allergies", "minutes": 30 }
+    },
+    { "week": 35, "unit": 9, "kind": "practice", "minutes": 180, "note": "Make-ahead dishes from the plan: a sauce, the dessert, a stew or braise", "drill": { "title": "Shop within the budget, by store section", "minutes": 30 }, "knowledge": { "title": "Plating and serving family-style", "minutes": 45 }, "sabbath": { "title": "Thursday prep", "minutes": 30, "write": [{ "id": "prep-timeline", "label": "The prep timeline", "hint": "What you make each day before the meal, and the order you cook in on the day." }] } },
+    {
+      "week": 36,
+      "unit": 9,
+      "kind": "capstone",
+      "minutes": 360,
+      "note": "The full Sabbath meal for household and guests: a main, two sides, bread (challah, or homemade matzah in spring), and dessert, cooked alone",
+      "drill": { "title": "Run the kitchen alone", "minutes": 30 },
+      "knowledge": {
+        "title": "Reflection essay, the Sunday after (into the portfolio)",
+        "minutes": 45,
+        "write": [
+          { "id": "reflection", "label": "Reflection essay", "hint": "What went well, what you would change, and what you learned this year." }
+        ]
+      },
+      "sabbath": { "title": "Giving thanks for food (Deuteronomy 8:10; 1 Timothy 4:4–5)", "minutes": 30 }
+    }
   ],
   "recipes": [
     {

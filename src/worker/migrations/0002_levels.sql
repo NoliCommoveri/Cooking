@@ -45,3 +45,17 @@ CREATE TABLE IF NOT EXISTS course_pictures (
   updated_at TEXT NOT NULL,
   PRIMARY KEY (course_id, profile_id)
 );
+
+-- The portfolio (14f): what a learner types into a part page's writing boxes
+-- (the capstone's menu, budget, guest list, prep timeline, and reflection
+-- essay at Level 4), one row per box. field: the box's id, unique in its Level.
+CREATE TABLE IF NOT EXISTS level_writing (
+  course_id  TEXT NOT NULL,
+  family_id  TEXT NOT NULL REFERENCES families(id),
+  profile_id TEXT NOT NULL,
+  week       INTEGER NOT NULL,
+  field      TEXT NOT NULL,
+  body       TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
+  PRIMARY KEY (course_id, profile_id, week, field)
+);

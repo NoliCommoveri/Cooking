@@ -254,11 +254,16 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
     : { btn: 'p-btn', back: 'p-back', h: 'p-h', kick: 'p-kick', card: 'p-card p-lore', note: 'p-note' };
   const tape = quest ? '' : '<i class="tape t1"></i>';
 
+  // Adult-style banners (§3, §12.8) when everyone on the cook is an adult or
+  // on Level 4, whose learners cook on their own; one kid profile not on
+  // Level 4 brings the kid banners back.
+  const independent = (p) => p.audience === 'adult' || p.level === 'sp-4';
+  const adultBanners = () => [profile, ...crew.filter((p) => S.with.includes(p.id))].every(independent);
   function banner(level, hazard) {
     const lv = LVL[level] ?? LVL.solo;
     const cls = quest ? 'q-banner' : 'p-banner';
-    // An adult profile sees only the hazard, without "an adult must…" (§3).
-    if (adult) return `<div class="${cls} ${lv.cls}" role="note">${ic(lv.icon)}<div><b>${esc(hazard || lv.head)}</b></div></div>`;
+    // Only the hazard, without "an adult must…" (§3).
+    if (adultBanners()) return `<div class="${cls} ${lv.cls}" role="note">${ic(lv.icon)}<div><b>${esc(hazard || lv.head)}</b></div></div>`;
     return `<div class="${cls} ${lv.cls}" role="note">${ic(lv.icon)}<div><b>${esc(lv.head)}</b>${esc(lv.kid)}${hazard ? ` ${esc(hazard)}.` : ''}</div></div>`;
   }
 
@@ -491,6 +496,8 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
   function cookView() {
     const steps = scaled().steps, n = steps.length, i = Math.min(S.step, n - 1), s = steps[i], last = i === n - 1;
     const notes = [];
+    // Level 4's deep frying and grilling (§12.8), on the recipe's first step.
+    if (i === 0 && level?.adultHome) notes.push(`<p class="${T.note} adulthome">${ic('i-hat')}<b>Have an adult at home</b> for this recipe.</p>`);
     if (s.type === 'doneness' && s.target) {
       notes.push(s.target.temp
         ? `<p class="${T.note} done-target">${ic('i-thermo')}<b>Thermometer:</b> at least ${s.target.temp}°${esc(s.target.unit || 'F')}</p>`

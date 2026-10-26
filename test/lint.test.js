@@ -309,3 +309,12 @@ test('a Level recipe written as a lesson is checked like a lesson and matches it
   assert.match(errs, /recipe thick-burgers: skills don't match the lesson's/);
   assert.match(errs, /recipe thick-burgers: minutes should be the lesson's/);
 });
+
+// 14f: Level 4's "Have an adult at home", and the portfolio's writing boxes.
+test("only Level 4 says Have an adult at home, and a writing box's id is used once in its Level", () => {
+  const four = (c) => c.levels.find((l) => l.data.id === 'sp-4').data;
+  assert.ok(four(base).weeks.find((w) => w.week === 26).adultAtHome);
+  assert.match(broken((c) => { level(c).weeks[0].adultAtHome = true; }), /week 1: has adultAtHome, which only Level 4 uses/);
+  assert.match(broken((c) => { four(c).weeks.find((w) => w.week === 35).adultAtHome = true; }), /a practice week has no adultAtHome/);
+  assert.match(broken((c) => { four(c).weeks.find((w) => w.week === 35).sabbath.write = [{ id: 'menu', label: 'The menu again' }]; }), /writing box "menu" is already used on another page of this Level/);
+});

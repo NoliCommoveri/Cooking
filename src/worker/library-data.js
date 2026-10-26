@@ -17235,6 +17235,7 @@ export const LIBRARY = {
      "explore": "korean-fried-chicken",
      "cuisine": "korean",
      "mastery": true,
+     "adultAtHome": true,
      "drill": {
       "title": "Hold oil at 350°F; drain and hold fried food crisp in a low oven",
       "minutes": 30
@@ -17277,6 +17278,7 @@ export const LIBRARY = {
      "familiar": "bbq-chicken-two-zone",
      "explore": "chicken-satay",
      "cuisine": "indonesian",
+     "adultAtHome": true,
      "drill": {
       "title": "Set up two zones and move food between them",
       "minutes": 30
@@ -17405,7 +17407,24 @@ export const LIBRARY = {
      "note": "Test-cook the planned main and sides",
      "drill": {
       "title": "Write the menu, budget, and guest list with allergies",
-      "minutes": 30
+      "minutes": 30,
+      "write": [
+       {
+        "id": "menu",
+        "label": "The menu",
+        "hint": "The main, two sides, the bread, and dessert, each with where its recipe comes from."
+       },
+       {
+        "id": "budget",
+        "label": "The budget",
+        "hint": "What you can spend, and what each dish should cost."
+       },
+       {
+        "id": "guest-list",
+        "label": "The guest list",
+        "hint": "Who is coming, and each guest's allergies or foods they avoid."
+       }
+      ]
      },
      "knowledge": {
       "title": "Adapting recipes for guests' allergies and to clean ingredients",
@@ -17432,7 +17451,14 @@ export const LIBRARY = {
      },
      "sabbath": {
       "title": "Thursday prep",
-      "minutes": 30
+      "minutes": 30,
+      "write": [
+       {
+        "id": "prep-timeline",
+        "label": "The prep timeline",
+        "hint": "What you make each day before the meal, and the order you cook in on the day."
+       }
+      ]
      }
     },
     {
@@ -17447,7 +17473,14 @@ export const LIBRARY = {
      },
      "knowledge": {
       "title": "Reflection essay, the Sunday after (into the portfolio)",
-      "minutes": 45
+      "minutes": 45,
+      "write": [
+       {
+        "id": "reflection",
+        "label": "Reflection essay",
+        "hint": "What went well, what you would change, and what you learned this year."
+       }
+      ]
      },
      "sabbath": {
       "title": "Giving thanks for food (Deuteronomy 8:10; 1 Timothy 4:4–5)",

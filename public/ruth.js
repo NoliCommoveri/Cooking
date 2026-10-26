@@ -6,6 +6,7 @@
 // the same way the pages do.
 import { STARTERS, nextStep } from './lib/getting-started.js';
 import { starRow, ratingSaver } from './tastes.js';
+import { ASSIGN_NOTES } from './lib/levels.js';
 
 export const RUTH = { name: 'Chef Ruth', photo: 'img/chef-ruth.webp' };
 
@@ -469,6 +470,11 @@ async function coursePart(ctx, chat, call, { again }) {
     chat.say('Which program? Cook Around the World goes a dish at a time, each with its skill. ' + data.levels.map((V) => `${V.name} is ${V.weeks.length} weeks of a reading, a drill, a recipe, and a Beyond the Recipe page each week, about ${V.hours} hours in all.`).join(' '));
     const pick = await chat.choose([['', 'Cook Around the World'], ...data.levels.map((V) => [V.id, V.name])]);
     level = data.levels.find((V) => V.id === pick) ?? null;
+    // Level 4's note for parents (§12.8), before going on.
+    if (ASSIGN_NOTES[pick]) {
+      chat.say(ASSIGN_NOTES[pick]);
+      if (await chat.choose([['go', `Keep ${level.name}`], ['back', 'Cook Around the World instead']]) === 'back') level = null;
+    }
   }
 
   chat.say("Who's it for? Siblings can share a course and cook together, or each have their own.");

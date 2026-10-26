@@ -93,9 +93,10 @@ test("a kid's device reaches its own kitchen and nothing else", async () => {
   }
   assert.equal((await k.put(`/api/profiles/${ava}/theme`, { theme: 'passport' })).status, 200);
   assert.equal((await k.post(`/api/profiles/${ava}/ask`, { lesson_id: 'shakshuka' })).body.status, 'requested');
-  // The family's names and avatars only, for a sibling.
+  // The family's names and avatars only, for a sibling, and whether it's an
+  // adult or on Level 4, for a cook's safety banners (§12.8).
   const profiles = (await k.get('/api/profiles')).body.profiles;
-  assert.deepEqual(Object.keys(profiles.find((p) => p.id === eli)).sort(), ['avatar', 'id', 'name', 'people']);
+  assert.deepEqual(Object.keys(profiles.find((p) => p.id === eli)).sort(), ['audience', 'avatar', 'id', 'level', 'name', 'people']);
   // A sibling's kitchen, and every parent route, even with the right PIN.
   for (const path of [`/api/profiles/${eli}/queue`, `/api/profiles/${eli}/cooks`, '/api/queue', '/api/family', '/api/courses', '/api/shopping', '/api/progress', '/api/owner', `/api/profiles/${ava}/login`]) {
     const r = await k.get(path);

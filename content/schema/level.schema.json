@@ -37,6 +37,29 @@
             "$ref": "#/$defs/text"
           }
         },
+        "write": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "label"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/$defs/id"
+              },
+              "label": {
+                "$ref": "#/$defs/text"
+              },
+              "hint": {
+                "$ref": "#/$defs/text"
+              }
+            }
+          }
+        },
         "quiz": {
           "type": "array",
           "items": {
@@ -97,6 +120,9 @@
           "$ref": "#/$defs/text"
         },
         "mastery": {
+          "const": true
+        },
+        "adultAtHome": {
           "const": true
         },
         "kind": {

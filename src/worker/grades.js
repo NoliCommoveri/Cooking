@@ -6,7 +6,7 @@
 import { fail, now } from './lib/http.js';
 import { requireParent } from './auth.js';
 import { LIBRARY } from './library-data.js';
-import { tzOf, today, levelProgress, levelSummary, partRows } from './plan.js';
+import { tzOf, today, levelProgress, levelSummary, partRows, levelPortfolio } from './plan.js';
 import { localDay, isSabbath } from './schedule.js';
 import { recipeNames } from './recipes.js';
 import { RUBRIC, GRADE_TEXT_MAX, rubricAverage, gradeLine } from '../content/grades.js';
@@ -148,6 +148,8 @@ export function register(on) {
       rows,
       skills,
       level: levelSummary(lv),
+      // Level 4's portfolio (14f), printed after the transcript.
+      portfolio: await levelPortfolio(env, s.family_id, pid),
       totals: {
         cooks: cooks.length,
         parts: parts.length,
