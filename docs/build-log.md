@@ -5805,3 +5805,42 @@ owner approves it there.
   need week 4; the Level version test uses the real minestrone version.
 - No screens changed, so no screenshots.
 - Tests: 392.
+
+## 227. 2026-10-26 — 14g content: Level 2 Unit 1
+
+Owner, 2026-10-26: "begin unit 1 of level 2 while I review" (Level 3 Unit
+1). Reviewed in [14g review: Level 2 Apprentice, Unit
+1](https://claude.ai/artifact/5ChtD3ZAUh9VAnHy3cnv21); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 2 Unit 1's dishes was written except Cook Around
+  the World's grilled cheese and tomato soup, which chops with a chef's
+  knife and uses a stick blender. Its 12 part pages were blank.
+- **Now:**
+  - **Seven Level-only recipes** in `content/levels/recipes/`, unit 102:
+    Caprese sandwiches and Onigiri with tuna (week 1, knife safety),
+    Molletes (week 2, the oven with mitts), Loaded baked potatoes and Bún
+    bowl with chicken (week 3, mise en place), and Mini pita pizzas and Ful
+    medames with pita chips (week 4, measuring, the mastery week). None fits
+    a pick-one group with room or is a variation of a planned dish (§12.4).
+    Their cards' minutes are now the recipes' own.
+  - **Grilled cheese + tomato soup's Level 2 version:** no onion, chef's
+    knife, or blender; jarred garlic; the soup made first and held off the
+    heat; every step rewritten to Level 2's standard. 45 minutes.
+  - **Nothing before it's taught** (the owner's note on Level 3's garlic):
+    week 1 cuts only soft foods with a paring knife; the stove and oven
+    start in week 2; nothing is diced, minced, or a hard vegetable. Jarred
+    garlic, shredded carrots, and jarred salsa stand in.
+  - **All 12 part pages:** knife rules, the bridge and claw, cutting ahead;
+    burns and pan fires, mitts and handles, soup made ahead; parts of a
+    recipe, mise en place, gleaning (Ruth 2); halving and doubling, dry and
+    wet measuring, a yogurt dip made ahead.
+  - **New tools:** paring knife, serrated bread knife.
+  - **New ingredients:** fresh and shredded mozzarella, Monterey Jack,
+    ciabatta and bolillo rolls (watch: lard), cooked short-grain rice
+    pouches, rotisserie chicken (watch: no bacon or ham in the seasoning),
+    shredded carrots, fish sauce (anchovy; watch: no shrimp or squid),
+    roasted peanuts, mushrooms, canned fava beans, pizza sauce.
+- The content check finds no Level 2 writing warnings.
+- No screens changed, so no screenshots.
+- Tests: 392.

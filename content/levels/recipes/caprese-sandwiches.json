@@ -1,0 +1,72 @@
+{
+  "id": "caprese-sandwiches",
+  "version": 1,
+  "track": "core",
+  "unit": 102,
+  "title": "Caprese sandwiches",
+  "image": "dishes/caprese-sandwiches.png",
+  "cuisine": "italian",
+  "skill": "Slicing soft foods with a paring knife",
+  "skills": ["knife-safety"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 25,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 7, "text": "Slice everything first, then build the sandwiches in a row, like an assembly line." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "A small knife, soft foods",
+      "body": "Today you'll use a paring knife on two soft foods, tomato and fresh mozzarella, and a bread knife on the rolls. Layered with basil and olive oil, they make an Italian sandwich with no cooking at all."
+    },
+    "why": [
+      { "id": "board", "title": "A board that can't slide", "body": "Most knife cuts happen when the board or the food moves. A damp paper towel under the board holds it still, and a flat side down holds the food still." },
+      { "id": "bridge", "title": "The bridge grip", "body": "To cut something round in half, make a bridge over it with your hand: thumb on one side, fingers on the other. The knife goes under the bridge, so your fingers are never in its path." },
+      { "id": "claw", "title": "The claw grip", "body": "To slice, curl your fingertips under and rest your knuckles against the side of the blade. The blade can only touch your knuckles, and it slides along them instead of cutting." },
+      { "id": "saw", "title": "Saw, don't press", "body": "Tomato skin is tough and the inside is soft. Pressing straight down squashes it. Small back-and-forth strokes let the edge cut through the skin first." },
+      { "id": "set-down", "title": "Where the knife goes", "body": "When you're not cutting, the knife lies flat at the top of the board, blade facing away from you. Never leave it near the edge, under food, or in a sink of soapy water, where someone can't see it." }
+    ],
+    "wrong": [
+      { "sign": "The tomato squashed instead of slicing", "fix": "Use small sawing strokes and let the knife do the work. If it still squashes, the knife may be dull; ask an adult to hone it." },
+      { "sign": "The board keeps moving", "fix": "Wet the paper towel again and press the board down onto it." },
+      { "sign": "The sandwich is soggy", "fix": "Pat the tomato and mozzarella slices dry with a paper towel before they go on the bread." },
+      { "sign": "The slices are thick and thin", "fix": "Slow down. Move your claw hand back the same small step after each cut." }
+    ],
+    "quiz": [
+      { "q": "What goes under the cutting board so it can't slide?", "choices": ["A damp paper towel", "A dry plate", "Nothing"], "answer": 0, "explain": "A board that moves is how most cuts happen." },
+      { "q": "In the claw grip, what touches the side of the blade?", "choices": ["Your knuckles", "Your fingertips", "Your thumb"], "answer": 0, "explain": "Fingertips stay curled under, out of the way." },
+      { "q": "Where does the knife go when you're not cutting?", "choices": ["Flat at the top of the board, blade away from you", "In the sink", "On the edge of the counter"], "answer": 0, "explain": "Somewhere everyone can see it." },
+      { "q": "How do you slice a tomato without squashing it?", "choices": ["Small sawing strokes", "Press straight down hard", "Cut it while it's wet"], "answer": 0, "explain": "The edge cuts the skin first." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "tomato", "amount": 2, "unit": "count", "round": "up", "group": "Filling" },
+    { "ingredient": "mozzarella-fresh", "amount": 8, "unit": "oz", "group": "Filling" },
+    { "ingredient": "basil", "amount": 0.5, "unit": "cup", "prep": "leaves", "group": "Filling" },
+    { "ingredient": "salt", "amount": 0.25, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "black-pepper", "amount": 0.125, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "ciabatta-rolls", "amount": 4, "unit": "count", "group": "Bread" },
+    { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp", "group": "Bread" }
+  ],
+  "substitutions": [
+    { "for": "ciabatta-rolls", "use": "bread-gluten-free", "reason": "gluten", "note": "Use two slices of gluten-free bread for each sandwich, toasted so they hold up to the tomato." }
+  ],
+  "equipment": ["cutting-board", "paper-towels", "paring-knife", "bread-knife", "plate", "spoon", "measuring-spoons"],
+  "steps": [
+    { "id": "board", "text": "Wet a paper towel, squeeze it out, and lay it flat under the cutting board.", "safety": "solo", "why": "board", "look": "Push the board gently. It shouldn't slide." },
+    { "id": "rinse", "text": "Rinse the tomatoes and basil, and pat them dry with paper towels.", "safety": "solo", "tip": "Dry food doesn't slip under the knife." },
+    { "id": "halve", "text": "Lay a tomato on the board. Hold it with the bridge grip and cut it in half from top to bottom with the paring knife.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "bridge", "tip": "The knife goes under your hand's bridge, never toward your fingers." },
+    { "id": "slice-tomato", "text": "Lay each half flat side down. Hold it with the claw grip and cut slices about ¼ inch thick.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "claw", "look": "Slices about as thick as a pencil." },
+    { "id": "more-tomato", "text": "Slice the second tomato the same way. Put the slices on the plate.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "saw", "tip": "Use small sawing strokes, and let the knife do the work." },
+    { "id": "rest-knife", "text": "Set the knife down flat at the top of the board, blade facing away from you.", "safety": "solo", "why": "set-down", "tip": "Do this every time you stop cutting, even for a moment." },
+    { "id": "mozzarella", "text": "Drain the mozzarella and pat it dry. Hold it with the claw grip and slice it about ¼ inch thick.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "claw", "look": "Round slices about the same size as the tomato slices." },
+    { "id": "rolls", "text": "Lay a roll flat. Press your hand flat on top and cut it open sideways with the bread knife, sawing gently.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Keep your fingers flat and pointing up, above the blade's path." },
+    { "id": "oil", "text": "Spoon a little olive oil over the cut sides of each roll.", "safety": "solo", "look": "A light shine on the bread, not a puddle." },
+    { "id": "build", "text": "On each bottom half, layer tomato slices, mozzarella slices, and basil leaves. Sprinkle with salt and pepper.", "safety": "solo", "tip": "Overlap the slices a little so every bite has some of each." },
+    { "id": "close", "text": "Put on the tops and press each sandwich down gently with your hand.", "safety": "solo" },
+    { "id": "wash", "text": "Wash the knives one at a time, holding the handle, with the blade pointing away from you. Dry them and put them away.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "set-down", "tip": "Never drop a knife into a sink of soapy water." }
+  ]
+}

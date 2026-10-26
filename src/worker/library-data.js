@@ -2355,6 +2355,109 @@ export const LIBRARY = {
     "plate",
     "skillet-12",
     "spatula"
+   ],
+   "variations": [
+    {
+     "title": "Grilled cheese + tomato soup",
+     "image": "img/dishes/grilled-cheese-tomato-soup.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, the soup needs a very big pot, at least 8 quarts. Cook the sandwiches in two skillets side by side to save time."
+       }
+      ]
+     },
+     "totalMinutes": 45,
+     "ingredients": [
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "garlic-minced-jarred"
+      },
+      {
+       "ingredient": "tomatoes-crushed"
+      },
+      {
+       "ingredient": "broth-vegetable"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "milk-whole",
+       "optional": true
+      },
+      {
+       "ingredient": "bread-sandwich"
+      },
+      {
+       "ingredient": "cheese-sliced"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "basil",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "bread-sandwich",
+       "use": "bread-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "creamy-cheesy",
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "tomatoes"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "cutting-board",
+      "can-opener",
+      "pot-large",
+      "wooden-spoon",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "ladle",
+      "table-knife",
+      "plate",
+      "skillet-12",
+      "spatula",
+      "bread-knife"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
+    }
    ]
   },
   {
@@ -6782,6 +6885,571 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "bun-bowl",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Bún bowl with chicken",
+   "image": "img/dishes/bun-bowl.webp",
+   "cuisine": "vietnamese",
+   "skill": "Setting out a bowl's parts in small dishes",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Soak the noodles in two pots, or in the pot in two batches."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "rice-vermicelli"
+    },
+    {
+     "ingredient": "fish-sauce"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "rotisserie-chicken"
+    },
+    {
+     "ingredient": "lettuce-green-leaf"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "carrot-shredded"
+    },
+    {
+     "ingredient": "mint"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "peanuts-roasted",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "fish-sauce",
+     "use": "soy-sauce",
+     "reason": "fish"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "lemon-lime",
+     "cucumber",
+     "mint",
+     "cilantro"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "saucepan-medium",
+    "colander",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "small-bowl",
+    "mixing-bowl-large",
+    "spoon",
+    "fork",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "plate",
+    "tongs"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "caprese-sandwiches",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Caprese sandwiches",
+   "image": "img/dishes/caprese-sandwiches.webp",
+   "cuisine": "italian",
+   "skill": "Slicing soft foods with a paring knife",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Slice everything first, then build the sandwiches in a row, like an assembly line."
+     }
+    ]
+   },
+   "totalMinutes": 25,
+   "ingredients": [
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "mozzarella-fresh"
+    },
+    {
+     "ingredient": "basil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "ciabatta-rolls"
+    },
+    {
+     "ingredient": "olive-oil"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "ciabatta-rolls",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "bread-knife",
+    "plate",
+    "spoon",
+    "measuring-spoons"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "ful-medames",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Ful medames with pita chips",
+   "image": "img/dishes/ful-medames.webp",
+   "cuisine": "egyptian",
+   "skill": "Timing three parts together",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Bake the chips on two sheet pans, and warm the beans in the large pot."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "pita"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "fava-beans"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "salt"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pita",
+     "use": "tortilla-corn",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "cucumber",
+     "tomatoes",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "oven-mitts",
+    "pastry-brush",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "can-opener",
+    "saucepan-medium",
+    "wooden-spoon",
+    "fork",
+    "measuring-spoons",
+    "spoon"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "loaded-baked-potatoes",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Loaded baked potatoes",
+   "image": "img/dishes/loaded-baked-potatoes.webp",
+   "cuisine": "american",
+   "skill": "Setting every topping out first",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Microwave the potatoes 4 at a time, and add 2 minutes for each extra potato in a batch."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "potato-russet"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "cheddar-shredded"
+    },
+    {
+     "ingredient": "sour-cream"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "sour-cream-yogurt",
+     "onions"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "fork",
+    "plate",
+    "microwave",
+    "sheet-pan",
+    "oven-mitts",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "kitchen-towel",
+    "spoon"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "mini-pita-pizzas",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Mini pita pizzas",
+   "image": "img/dishes/mini-pita-pizzas.webp",
+   "cuisine": "italian",
+   "skill": "Halving or doubling a recipe for the family",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Use two sheet pans, one on each rack, and swap them halfway through."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "pita"
+    },
+    {
+     "ingredient": "pizza-sauce"
+    },
+    {
+     "ingredient": "mozzarella-shredded"
+    },
+    {
+     "ingredient": "bell-pepper-green"
+    },
+    {
+     "ingredient": "mushrooms"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "olive-oil"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pita",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "bell-peppers"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "oven-mitts",
+    "measuring-cups",
+    "measuring-spoons",
+    "table-knife",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "small-bowl",
+    "spoon",
+    "pastry-brush"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "molletes",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Molletes",
+   "image": "img/dishes/molletes.webp",
+   "cuisine": "mexican",
+   "skill": "Using the oven with mitts on",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Use two sheet pans, one on each rack, and swap them halfway through the second bake."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "bolillo-rolls"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "refried-beans"
+    },
+    {
+     "ingredient": "monterey-jack"
+    },
+    {
+     "ingredient": "salsa"
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "cilantro"
+    ]
+   },
+   "tools": [
+    "oven-mitts",
+    "sheet-pan",
+    "cutting-board",
+    "paper-towels",
+    "bread-knife",
+    "table-knife",
+    "can-opener",
+    "small-bowl",
+    "spoon",
+    "measuring-cups",
+    "measuring-spoons"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "onigiri",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Onigiri with tuna",
+   "image": "img/dishes/onigiri.webp",
+   "cuisine": "japanese",
+   "skill": "Shaping rice with damp hands",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "One pouch of rice makes about 3 rice balls. Heat the pouches one or two at a time."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "rice-cooked-pouch"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "tuna-canned"
+    },
+    {
+     "ingredient": "mayonnaise"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "nori"
+    },
+    {
+     "ingredient": "cucumber"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "mayonnaise",
+     "cucumber"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "microwave",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "can-opener",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "plate"
+   ],
+   "level": "sp-2"
+  },
+  {
    "id": "aglio-e-olio",
    "version": 1,
    "track": "core",
@@ -9125,6 +9793,74 @@ export const LIBRARY = {
   "cabbage-green": {
    "name": "Green cabbage",
    "contains": []
+  },
+  "mozzarella-fresh": {
+   "name": "Fresh mozzarella",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "mozzarella-shredded": {
+   "name": "Shredded mozzarella cheese",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "monterey-jack": {
+   "name": "Shredded Monterey Jack cheese",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "ciabatta-rolls": {
+   "name": "Ciabatta rolls",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "bolillo-rolls": {
+   "name": "Bolillo rolls (or small French rolls)",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "rice-cooked-pouch": {
+   "name": "Cooked short-grain rice (microwave pouch)",
+   "contains": []
+  },
+  "rotisserie-chicken": {
+   "name": "Rotisserie chicken",
+   "contains": [
+    "meat"
+   ]
+  },
+  "carrot-shredded": {
+   "name": "Shredded carrots",
+   "contains": []
+  },
+  "fish-sauce": {
+   "name": "Fish sauce",
+   "contains": [
+    "fish"
+   ]
+  },
+  "peanuts-roasted": {
+   "name": "Roasted peanuts, chopped",
+   "contains": [
+    "peanuts"
+   ]
+  },
+  "mushrooms": {
+   "name": "White mushrooms",
+   "contains": []
+  },
+  "fava-beans": {
+   "name": "Fava beans (canned, ful medames)",
+   "contains": []
+  },
+  "pizza-sauce": {
+   "name": "Pizza sauce",
+   "contains": []
   }
  },
  "cuisines": {
@@ -9197,6 +9933,13 @@ export const LIBRARY = {
   "cottage-cheese-crescents": "A2"
  },
  "levelLabels": {
+  "bun-bowl": "A5",
+  "caprese-sandwiches": "A1",
+  "ful-medames": "A7",
+  "loaded-baked-potatoes": "A4",
+  "mini-pita-pizzas": "A6",
+  "molletes": "A3",
+  "onigiri": "A2",
   "aglio-e-olio": "K3",
   "ajapsandali": "K7",
   "baked-salmon": "K13",
@@ -11615,15 +12358,165 @@ export const LIBRARY = {
      "explore": "onigiri",
      "drill": {
       "title": "Bridge and claw grips on soft foods",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Two grips keep your fingers safe on everything you'll cut in this unit. Practice them today on soft foods with a paring knife, slowly, until they feel natural. An adult is nearby the whole time."
+      ],
+      "steps": [
+       "Lay a damp paper towel under the cutting board so it can't slide.",
+       "The bridge: set a banana on the board. Make a bridge over it with your hand, thumb on one side and fingers on the other.",
+       "Put the paring knife under the bridge and cut the banana in half. The blade never goes near your fingers.",
+       "The claw: lay one half flat side down. Curl your fingertips under and rest your knuckles against the side of the blade.",
+       "Slice the banana, moving your claw hand back a small step after each cut.",
+       "Do the same with a cucumber: bridge to halve it the long way, then claw to slice it into half-moons.",
+       "Slice 5 strawberries with the claw grip.",
+       "Set the knife down flat at the top of the board, blade away. Eat your practice, or save it for a snack."
+      ],
+      "quiz": [
+       {
+        "q": "When do you use the bridge grip?",
+        "choices": [
+         "To cut something round in half",
+         "To slice thin",
+         "To peel"
+        ],
+        "answer": 0,
+        "explain": "The knife goes under the bridge."
+       },
+       {
+        "q": "In the claw grip, what guides the blade?",
+        "choices": [
+         "Your knuckles",
+         "Your fingertips",
+         "Your thumb"
+        ],
+        "answer": 0,
+        "explain": "Fingertips stay curled under."
+       },
+       {
+        "q": "Why cut a cucumber in half before slicing it?",
+        "choices": [
+         "So it lies flat and can't roll",
+         "It's easier to eat",
+         "It cooks faster"
+        ],
+        "answer": 0,
+        "explain": "A flat side down holds still."
+       }
+      ]
      },
      "knowledge": {
       "title": "Knife rules: grip, direction, where to set it down",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A knife is safe when you follow a few rules every time, the same way every time. They're simple, and they matter more than speed.",
+       "Grip: hold the handle firmly, with all your fingers wrapped around it. Your other hand holds the food in a bridge or a claw, never flat in front of the blade.",
+       "Direction: cut down and away from you, toward the board. Never cut toward your hand, your body, or something you're holding in the air.",
+       "Where it goes: when you stop cutting, even for a moment, lay the knife flat at the top of the board with the blade facing away. Never leave it at the edge of the counter, under a towel or food, or in a sink of soapy water, where someone can't see it.",
+       "If it falls: step back and let it fall. Never try to catch a falling knife.",
+       "Carry and wash: carry a knife by the handle, point down, at your side. Wash it on its own, holding the handle, blade away from you, and dry it right away."
+      ],
+      "quiz": [
+       {
+        "q": "Which way do you cut?",
+        "choices": [
+         "Down and away, toward the board",
+         "Toward your hand",
+         "In the air"
+        ],
+        "answer": 0,
+        "explain": "The board catches the blade."
+       },
+       {
+        "q": "Where does the knife go when you stop cutting?",
+        "choices": [
+         "Flat at the top of the board, blade away",
+         "In the sink",
+         "At the edge of the counter"
+        ],
+        "answer": 0,
+        "explain": "Where everyone can see it."
+       },
+       {
+        "q": "A knife falls off the counter. What do you do?",
+        "choices": [
+         "Step back and let it fall",
+         "Catch it",
+         "Grab it with a towel"
+        ],
+        "answer": 0,
+        "explain": "Never catch a falling knife."
+       },
+       {
+        "q": "Why not put a knife in a sink of soapy water?",
+        "choices": [
+         "Someone could reach in and not see it",
+         "It rusts",
+         "It gets dull"
+        ],
+        "answer": 0,
+        "explain": "Wash it on its own instead."
+       },
+       {
+        "q": "How do you carry a knife?",
+        "choices": [
+         "By the handle, point down, at your side",
+         "Point up",
+         "By the blade"
+        ],
+        "answer": 0,
+        "explain": "So it points at no one."
+       }
+      ]
      },
      "sabbath": {
       "title": "Wash and cut vegetables ahead for the week",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A few minutes washing and cutting fruit and vegetables on one day saves time all week, and makes a healthy snack the easy choice.",
+       "Some keep well washed and cut: bell pepper strips, snap peas, and washed lettuce last 3 to 5 days in the fridge. Others are best cut on the day: tomatoes go mealy, and cucumbers go soft. Rinse berries just before you eat them, or they turn mushy.",
+       "A folded paper towel in the container soaks up extra water, which is what makes cut vegetables slimy."
+      ],
+      "steps": [
+       "With an adult, pick two or three vegetables your family eats as snacks or in lunches.",
+       "Wash them, and dry them well with a towel or paper towels.",
+       "Cut the soft ones with the paring knife, using the bridge and the claw. Leave hard vegetables like carrots whole for now.",
+       "Line each container with a folded paper towel and pack one vegetable in each.",
+       "Label each with what it is and today's date, and put them in the fridge.",
+       "Check them in 3 days: which kept best?"
+      ],
+      "quiz": [
+       {
+        "q": "Why put a paper towel in the container?",
+        "choices": [
+         "It soaks up extra water",
+         "It keeps them cold",
+         "It adds flavor"
+        ],
+        "answer": 0,
+        "explain": "Water makes cut vegetables slimy."
+       },
+       {
+        "q": "Which is best cut on the day you eat it?",
+        "choices": [
+         "Tomato",
+         "Bell pepper",
+         "Snap peas"
+        ],
+        "answer": 0,
+        "explain": "Cut tomatoes turn mealy."
+       },
+       {
+        "q": "When should berries be rinsed?",
+        "choices": [
+         "Just before eating",
+         "A week ahead",
+         "Never"
+        ],
+        "answer": 0,
+        "explain": "Washed early, they go mushy."
+       }
+      ]
      }
     },
     {
@@ -11635,15 +12528,162 @@ export const LIBRARY = {
      "explore": "molletes",
      "drill": {
       "title": "Mitts on; handles in; pull out an oven rack safely",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Today you'll practice three habits until they're automatic: mitts on, handles in, and a rack pulled out before the pan is lifted. Start with a cold oven, then do it again with the oven warm. An adult is beside you."
+      ],
+      "steps": [
+       "Check your oven mitts are dry. Put one on each hand.",
+       "Set an empty pot on each burner of the cold stove. Turn every handle in, so none sticks out past the edge.",
+       "Walk past the stove and check: could your hip or sleeve catch a handle?",
+       "With the oven cold, move a rack to the middle. Put an empty sheet pan on it.",
+       "Mitts on: open the door, pull the rack out partway, lift the pan straight up, and set it on the stovetop. Push the rack in and close the door.",
+       "Now heat the oven to 200°F. When it's hot, do step 5 again, slowly.",
+       "Turn off the oven. Leave the pan on the stovetop until it's cool to the touch."
+      ],
+      "quiz": [
+       {
+        "q": "Which way do pot handles point?",
+        "choices": [
+         "In, over the stove",
+         "Out, past the edge",
+         "Toward you"
+        ],
+        "answer": 0,
+        "explain": "So no one bumps them."
+       },
+       {
+        "q": "Why pull the rack out before lifting the pan?",
+        "choices": [
+         "So your arms stay away from the hot oven walls",
+         "It's faster",
+         "The pan is lighter"
+        ],
+        "answer": 0,
+        "explain": "Lift straight up, then out."
+       },
+       {
+        "q": "Why must mitts be dry?",
+        "choices": [
+         "Heat goes through wet cloth as steam",
+         "They grip better",
+         "They last longer"
+        ],
+        "answer": 0,
+        "explain": "A damp mitt burns in a second."
+       }
+      ]
      },
      "knowledge": {
       "title": "Burns and scalds; a lid on a pan fire, never water",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Most kitchen burns come from things you can see coming: a pot handle sticking out, a wet oven mitt, steam from a lid, or a splash of hot oil. A burn is from something hot and dry; a scald is from hot liquid or steam.",
+       "If you get a small burn: hold it under cool running water for at least 10 minutes, and tell an adult. Don't use ice, butter, or toothpaste. They trap the heat or damage the skin. A burn that's large, blistered, or on the face or hands needs an adult right away, and maybe a doctor.",
+       "A pan fire is usually oil that got too hot. Never throw water on it: water hits burning oil and explodes it into a ball of flame. Instead, an adult turns off the burner and slides a lid over the pan, which takes away the air the fire needs. Leave the lid on until the pan is cold. Never carry a burning pan.",
+       "An oven fire: keep the door closed and turn the oven off. The fire runs out of air. If any fire doesn't go out right away, everyone leaves the house and calls 911."
+      ],
+      "quiz": [
+       {
+        "q": "What do you do for a small burn?",
+        "choices": [
+         "Cool running water for at least 10 minutes",
+         "Put ice on it",
+         "Rub butter on it"
+        ],
+        "answer": 0,
+        "explain": "And tell an adult."
+       },
+       {
+        "q": "Why never put water on a pan fire?",
+        "choices": [
+         "It explodes the burning oil into flame",
+         "It cools too slowly",
+         "It makes smoke"
+        ],
+        "answer": 0,
+        "explain": "Water and hot oil don't mix."
+       },
+       {
+        "q": "How do you put out a pan fire?",
+        "choices": [
+         "Turn off the burner and slide a lid over the pan",
+         "Carry it to the sink",
+         "Blow on it"
+        ],
+        "answer": 0,
+        "explain": "No air, no fire."
+       },
+       {
+        "q": "Something's burning in the oven. What do you do?",
+        "choices": [
+         "Keep the door closed and turn the oven off",
+         "Open the door to look",
+         "Throw water in"
+        ],
+        "answer": 0,
+        "explain": "Opening it feeds the fire air."
+       },
+       {
+        "q": "What's a scald?",
+        "choices": [
+         "A burn from hot liquid or steam",
+         "A cut",
+         "A burn from a dry pan"
+        ],
+        "answer": 0,
+        "explain": "Steam from a lid is a common one."
+       }
+      ]
      },
      "sabbath": {
       "title": "Make a pot of soup ahead and reheat it",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Soup is one of the best foods to make ahead. Many soups taste even better the next day.",
+       "The safe way to keep it: cool the soup within 2 hours of cooking. Pour it into shallow containers, no more than 2 inches deep, so it cools fast in the fridge. It keeps 3 to 4 days.",
+       "To reheat, warm it in a pot over medium heat, stirring, until it's steaming all the way through and bubbling at the edges. Only reheat what you'll eat, and reheat it once."
+      ],
+      "steps": [
+       "Make this week's tomato soup, or a pot of soup with an adult.",
+       "Let it cool on the stovetop for no more than 30 minutes, lid off.",
+       "Ladle it into shallow containers. Label each with the soup's name and the date.",
+       "Put them in the fridge, uncovered until cold, then cover them.",
+       "Later in the week, reheat one container in a pot until steaming, stirring often.",
+       "Taste it: does it taste the same as the first day?"
+      ],
+      "quiz": [
+       {
+        "q": "How soon should cooked soup go in the fridge?",
+        "choices": [
+         "Within 2 hours",
+         "The next day",
+         "Whenever"
+        ],
+        "answer": 0,
+        "explain": "Then germs don't have time to grow."
+       },
+       {
+        "q": "Why shallow containers?",
+        "choices": [
+         "The soup cools faster",
+         "They stack",
+         "They're cheaper"
+        ],
+        "answer": 0,
+        "explain": "No more than 2 inches deep."
+       },
+       {
+        "q": "How hot should reheated soup be?",
+        "choices": [
+         "Steaming all the way through",
+         "Just warm",
+         "Room temperature"
+        ],
+        "answer": 0,
+        "explain": "Bubbling at the edges."
+       }
+      ]
      }
     },
     {
@@ -11655,15 +12695,162 @@ export const LIBRARY = {
      "explore": "bun-bowl",
      "drill": {
       "title": "Set out a recipe's mise en place in small bowls; clean as you go",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Mise en place, French for \"everything in its place,\" means setting out every ingredient and tool before you start cooking. Today you'll practice it with this week's recipe, and clean as you go."
+      ],
+      "steps": [
+       "Read this week's recipe all the way through.",
+       "Set out every tool it needs on the counter.",
+       "Measure each ingredient into its own small bowl or cup. Line the bowls up in the order the recipe uses them.",
+       "Put each package or jar away as soon as you've measured from it.",
+       "Wipe the counter and the board before you start cooking.",
+       "Cook the recipe. Each time you wait, wash a dish or put something away.",
+       "When you finish: is the kitchen clean, or nearly?"
+      ],
+      "quiz": [
+       {
+        "q": "What does mise en place mean?",
+        "choices": [
+         "Everything in its place",
+         "Cook fast",
+         "Clean the kitchen"
+        ],
+        "answer": 0,
+        "explain": "Set out before you start."
+       },
+       {
+        "q": "When does a package go back in the cupboard?",
+        "choices": [
+         "As soon as you've measured from it",
+         "At the end",
+         "Never"
+        ],
+        "answer": 0,
+        "explain": "Clean as you go."
+       },
+       {
+        "q": "What can you do while food cooks?",
+        "choices": [
+         "Wash a dish or put something away",
+         "Nothing",
+         "Leave the kitchen"
+        ],
+        "answer": 0,
+        "explain": "Waiting time is cleaning time."
+       }
+      ]
      },
      "knowledge": {
       "title": "Parts of a recipe: yield, ingredients, steps, abbreviations",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Every recipe is written in the same parts. Knowing them means you can read any recipe, from any book or website.",
+       "The title and the yield come first. The yield says how much it makes: \"Serves 4\" or \"Makes 12.\" The time tells you how long it takes, start to finish.",
+       "The ingredients are listed in the order you use them. Watch the words after each one: \"1 cup onion, chopped\" means measure, then chop. \"1 cup chopped onion\" means chop, then measure. They're different amounts.",
+       "The steps say what to do, in order. Read them all before you start, so nothing surprises you.",
+       "Recipes shorten common words: tsp or t is teaspoon; tbsp or T is tablespoon (3 teaspoons); c is cup; oz is ounce; lb is pound; fl oz is fluid ounce, for liquids; pkg is package; and °F is degrees Fahrenheit."
+      ],
+      "quiz": [
+       {
+        "q": "What does the yield tell you?",
+        "choices": [
+         "How much the recipe makes",
+         "How long it takes",
+         "What it costs"
+        ],
+        "answer": 0,
+        "explain": "\"Serves 4\" or \"Makes 12.\""
+       },
+       {
+        "q": "What does tbsp mean?",
+        "choices": [
+         "Tablespoon",
+         "Teaspoon",
+         "Tub"
+        ],
+        "answer": 0,
+        "explain": "A big T is a tablespoon too."
+       },
+       {
+        "q": "How many teaspoons are in a tablespoon?",
+        "choices": [
+         "3",
+         "2",
+         "4"
+        ],
+        "answer": 0,
+        "explain": "3 teaspoons = 1 tablespoon."
+       },
+       {
+        "q": "\"1 cup onion, chopped\" means:",
+        "choices": [
+         "Measure 1 cup, then chop it",
+         "Chop it, then measure 1 cup",
+         "Use a cup of any onion"
+        ],
+        "answer": 0,
+        "explain": "The comma means do it after measuring."
+       },
+       {
+        "q": "Why read the whole recipe before you start?",
+        "choices": [
+         "So nothing surprises you",
+         "To count the steps",
+         "To find the photo"
+        ],
+        "answer": 0,
+        "explain": "Then you know what's coming."
+       }
+      ]
      },
      "sabbath": {
       "title": "Gleaning: Ruth in the fields (Ruth 2)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "God's law built care for the poor into the harvest. Farmers were told not to cut the grain at the very edges of their fields, and not to go back for what they dropped. What was left was for the poor and for foreigners to gather (Leviticus 19:9–10). Gathering it is called gleaning.",
+       "Ruth was a widow from Moab who came to Bethlehem with her mother-in-law, Naomi, who was poor. Ruth went to glean barley in the field of Boaz, a relative of Naomi's. Boaz told his workers to let her glean freely, and even to pull some stalks out of the bundles on purpose for her (Ruth 2:15–16). By evening she had enough barley to feed them both.",
+       "Gleaning let people work for their own food, and let farmers give by leaving, not only by handing out."
+      ],
+      "steps": [
+       "Read Ruth 2 with an adult.",
+       "Answer out loud or in writing: who was the gleaning for?",
+       "Answer: what did Boaz do that was more than the law asked?",
+       "With your family, choose one way to \"leave the edges\" this week, like making extra of a meal for someone, or giving food to a food bank.",
+       "Write it down, and do it if you can."
+      ],
+      "quiz": [
+       {
+        "q": "What is gleaning?",
+        "choices": [
+         "Gathering what's left in a field after the harvest",
+         "Planting seeds",
+         "Selling grain"
+        ],
+        "answer": 0,
+        "explain": "It was left for the poor."
+       },
+       {
+        "q": "Whose field did Ruth glean in?",
+        "choices": [
+         "Boaz's",
+         "Naomi's",
+         "Her own"
+        ],
+        "answer": 0,
+        "explain": "Boaz was Naomi's relative."
+       },
+       {
+        "q": "What did Boaz tell his workers to do?",
+        "choices": [
+         "Pull out stalks on purpose for Ruth",
+         "Send her away",
+         "Charge her"
+        ],
+        "answer": 0,
+        "explain": "Ruth 2:15–16."
+       }
+      ]
      }
     },
     {
@@ -11676,15 +12863,162 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Measure dry vs. wet; level a cup",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Dry and wet ingredients are measured in different cups, in different ways. Today you'll learn both and see why it matters."
+      ],
+      "steps": [
+       "Dry: spoon flour into a dry measuring cup until it's heaped. Don't press or shake it.",
+       "Sweep the flat side of a table knife across the top to level it. That's 1 cup.",
+       "Now scoop a cup of flour straight from the bag and press it down. Compare the two cups on a kitchen scale, if you have one.",
+       "Wet: set the liquid measuring cup on the counter. Pour in water to the 1-cup line.",
+       "Bend down so your eyes are level with the line. Is it exactly on it?",
+       "Spoons: fill a teaspoon with salt and level it with the knife. Do the same with a tablespoon.",
+       "Pour the flour back, and wipe up."
+      ],
+      "quiz": [
+       {
+        "q": "How do you measure flour?",
+        "choices": [
+         "Spoon it in loosely and level it",
+         "Scoop and press",
+         "Shake it down"
+        ],
+        "answer": 0,
+        "explain": "Pressing packs in too much."
+       },
+       {
+        "q": "How do you read a liquid measuring cup?",
+        "choices": [
+         "At eye level, on the counter",
+         "From above",
+         "Holding it up"
+        ],
+        "answer": 0,
+        "explain": "From above, it looks fuller."
+       },
+       {
+        "q": "What levels a measuring cup or spoon?",
+        "choices": [
+         "The flat side of a table knife",
+         "Your finger",
+         "A spoon"
+        ],
+        "answer": 0,
+        "explain": "Sweep it across the top."
+       }
+      ]
      },
      "knowledge": {
       "title": "Halving and doubling a recipe",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A recipe makes a set amount, but your family might need more or less. Halving means using half of every amount. Doubling means using two times every amount.",
+       "Some amounts are easy: 1 cup doubled is 2 cups; 1 cup halved is ½ cup. Others need a conversion. It helps to know: 3 teaspoons = 1 tablespoon; 4 tablespoons = ¼ cup; 16 tablespoons = 1 cup.",
+       "So half of 1 tablespoon is 1½ teaspoons. Half of ¼ cup is 2 tablespoons. Half of ⅓ cup is 2 tablespoons plus 2 teaspoons.",
+       "Half an egg: beat one egg in a cup and use half of it, about 2 tablespoons.",
+       "Some things don't change the same way. Cooking time stays about the same when you double: 8 pizzas take as long to bake as 4, as long as they fit on the pans. A bigger batch may need a bigger pot or two pans. Write your new amounts down before you start."
+      ],
+      "quiz": [
+       {
+        "q": "How many tablespoons in ¼ cup?",
+        "choices": [
+         "4",
+         "2",
+         "8"
+        ],
+        "answer": 0,
+        "explain": "16 tablespoons = 1 cup."
+       },
+       {
+        "q": "What's half of 1 tablespoon?",
+        "choices": [
+         "1½ teaspoons",
+         "1 teaspoon",
+         "2 teaspoons"
+        ],
+        "answer": 0,
+        "explain": "3 teaspoons = 1 tablespoon."
+       },
+       {
+        "q": "You double a pizza recipe. How long do they bake?",
+        "choices": [
+         "About the same time",
+         "Twice as long",
+         "Half as long"
+        ],
+        "answer": 0,
+        "explain": "If they fit on the pans."
+       },
+       {
+        "q": "How do you use half an egg?",
+        "choices": [
+         "Beat it and use about half",
+         "Cut it in half",
+         "Use the yolk only"
+        ],
+        "answer": 0,
+        "explain": "About 2 tablespoons."
+       },
+       {
+        "q": "When do you write down the new amounts?",
+        "choices": [
+         "Before you start",
+         "While cooking",
+         "After"
+        ],
+        "answer": 0,
+        "explain": "So your hands stay free."
+       }
+      ]
      },
      "sabbath": {
       "title": "Make a dip ahead and store it covered",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A dip made ahead is a ready snack all week, with vegetables, pita chips, or crackers. This one needs no cooking, only measuring and stirring.",
+       "Yogurt dip keeps covered in the fridge for up to 3 days. Stir it before serving, since a little liquid may rise to the top."
+      ],
+      "steps": [
+       "Measure 1 cup of plain Greek yogurt into a bowl. Check its label for gelatin first.",
+       "Add 1 tablespoon of lemon juice, ½ teaspoon of jarred minced garlic, 1 teaspoon of dried dill, and ¼ teaspoon of salt.",
+       "Stir until smooth. Taste, and add a pinch more salt if it needs it.",
+       "Spoon it into a container with a lid. Label it with the date.",
+       "Put it in the fridge. Use it within 3 days.",
+       "For practice, work out what you'd use for a double batch, and write it down."
+      ],
+      "quiz": [
+       {
+        "q": "How long does the dip keep in the fridge?",
+        "choices": [
+         "Up to 3 days",
+         "A month",
+         "1 hour"
+        ],
+        "answer": 0,
+        "explain": "Covered and labeled."
+       },
+       {
+        "q": "Doubling the dip, how much yogurt?",
+        "choices": [
+         "2 cups",
+         "1 cup",
+         "½ cup"
+        ],
+        "answer": 0,
+        "explain": "Two times every amount."
+       },
+       {
+        "q": "Why check the yogurt's label?",
+        "choices": [
+         "Some yogurt has gelatin",
+         "For the color",
+         "For the price"
+        ],
+        "answer": 0,
+        "explain": "Gelatin can come from unclean animals."
+       }
+      ]
      }
     },
     {
@@ -12403,7 +13737,7 @@ export const LIBRARY = {
      "skills": [
       "mise-en-place"
      ],
-     "minutes": 30,
+     "minutes": 35,
      "tags": {
       "protein": "none",
       "flavors": [

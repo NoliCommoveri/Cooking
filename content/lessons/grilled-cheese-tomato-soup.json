@@ -62,6 +62,78 @@
   "substitutions": [
     { "for": "bread-sandwich", "use": "bread-gluten-free", "reason": "gluten", "note": "Gluten-free bread browns faster. Check the bottom a minute early." }
   ],
+  "variations": [
+    {
+      "id": "sp-2",
+      "title": "Grilled cheese + tomato soup",
+      "level": "sp-2",
+      "tags": {
+        "protein": "none",
+        "flavors": ["creamy-cheesy", "rich-tomato"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "totalMinutes": 45,
+      "ingredients": {
+        "drop": ["onion-yellow@Soup", "garlic@Soup"],
+        "add": [{ "ingredient": "garlic-minced-jarred", "amount": 1.5, "unit": "tsp", "group": "Soup" }],
+        "order": [
+          "butter-unsalted@Soup",
+          "olive-oil@Soup",
+          "+0",
+          "tomatoes-crushed@Soup",
+          "broth-vegetable@Soup",
+          "sugar@Soup",
+          "salt@Soup",
+          "black-pepper@Soup",
+          "milk-whole@Soup",
+          "bread-sandwich@Sandwiches",
+          "cheese-sliced@Sandwiches",
+          "butter-unsalted@Sandwiches",
+          "basil@To serve"
+        ]
+      },
+      "equipment": { "drop": ["chef-knife", "immersion-blender"], "add": ["bread-knife"] },
+      "steps": {
+        "drop": [
+          "soften-butter",
+          "chop",
+          "onion",
+          "garlic",
+          "simmer",
+          "build",
+          "heat-pan",
+          "first-side",
+          "second-side",
+          "more",
+          "blend",
+          "taste",
+          "serve"
+        ],
+        "add": [
+          { "id": "l2-soften", "text": "Take the sandwich butter out of the fridge so it's soft when you need it.", "safety": "solo", "tip": "Cold butter tears the bread. Soft butter spreads." },
+          { "id": "l2-open", "text": "Open the cans of crushed tomatoes with the can opener.", "safety": "adult-nearby", "hazard": "Sharp can lid", "tip": "Keep your fingers away from the lid's edge." },
+          { "id": "l2-handles", "text": "Set the large pot on a back burner and turn its handle in, away from the edge.", "safety": "solo", "tip": "A handle sticking out is easy to bump and spill." },
+          { "id": "l2-garlic", "text": "Melt the soup butter with the olive oil over medium heat. Add the garlic and stir for 1 minute.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 60, "timerLabel": "Garlic", "look": "You can smell the garlic. It shouldn't brown." },
+          { "id": "l2-simmer", "text": "Add the tomatoes, broth, sugar, {qty:salt} salt, and pepper. Bring it to a bubble, then turn it down low.", "safety": "adult-nearby", "hazard": "Hot pot", "why": "simmer-soup", "tip": "Pour slowly, close to the pot, so nothing splashes." },
+          { "id": "l2-lid", "text": "Set the lid on crooked, leaving a gap, and let the soup simmer.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 900, "timerLabel": "Simmer soup", "look": "Small, lazy bubbles. Stir every few minutes." },
+          { "id": "l2-hold", "text": "Turn off the burner. Put the lid on all the way and leave the pot where it is.", "safety": "adult-nearby", "hazard": "Hot pot", "tip": "The soup stays hot with the lid on while you make the sandwiches." },
+          { "id": "l2-milk", "text": "Stir in the milk. Taste the soup on a clean spoon, after letting it cool, and add salt if it needs it.", "safety": "adult-nearby", "hazard": "Hot soup", "look": "Smooth and red, a little thick." },
+          { "id": "l2-butter-bread", "text": "Spread a thin layer of soft butter on one side of every slice of bread, all the way to the edges.", "safety": "solo", "why": "butter-out", "look": "Every slice covered edge to edge." },
+          { "id": "l2-build", "text": "Lay half the slices butter side down. Put 2 slices of cheese on each, and top with the rest, butter side up.", "safety": "solo", "tip": "Butter goes on the outside, so it touches the pan." },
+          { "id": "l2-heat-pan", "text": "Set the skillet on a front burner, handle turned in. Heat it over medium-low.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 120, "timerLabel": "Heat pan", "why": "race" },
+          { "id": "l2-first", "text": "Lay 2 sandwiches in the pan and cover with the lid.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 240, "timerLabel": "First side", "why": "lid", "look": "Lift a corner: golden brown, like toast." },
+          { "id": "l2-flip", "text": "Flip each sandwich with the spatula. Cook without the lid until the second side is golden.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 180, "timerLabel": "Second side", "look": "Cheese starting to ooze at the edges." },
+          { "id": "l2-more", "text": "Move them to the cutting board. Cook the rest the same way, 2 at a time.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "If a sandwich browns too fast, turn the heat down a little." },
+          { "id": "l2-off", "text": "Turn off the burner. Leave the hot skillet where it is to cool.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "A pan off the burner is still hot for a long time." },
+          { "id": "l2-rewarm", "text": "If the soup has cooled, warm it over low heat for 2 minutes, stirring.", "safety": "adult-nearby", "hazard": "Hot pot", "look": "Steaming, not bubbling hard." },
+          { "id": "l2-serve", "text": "Cut each sandwich in half with the bread knife. Ladle the soup into bowls on the counter, next to the stove.", "safety": "adult-nearby", "hazard": "Hot soup, sharp knife", "tip": "Fill bowls on the counter, not over the burner." }
+        ]
+      }
+    }
+  ],
   "equipment": [
     "chef-knife",
     "cutting-board",

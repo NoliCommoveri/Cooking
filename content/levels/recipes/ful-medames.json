@@ -1,0 +1,93 @@
+{
+  "id": "ful-medames",
+  "version": 1,
+  "track": "core",
+  "unit": 102,
+  "title": "Ful medames with pita chips",
+  "image": "dishes/ful-medames.png",
+  "cuisine": "egyptian",
+  "skill": "Timing three parts together",
+  "skills": ["measuring", "timing"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 40,
+  "scaling": {
+    "mode": "free",
+    "notes": [{ "from": 5, "text": "Bake the chips on two sheet pans, and warm the beans in the large pot." }]
+  },
+  "learn": {
+    "move": {
+      "title": "Three parts, one finish",
+      "body": "Ful medames is fava beans warmed and mashed with cumin, lemon, and olive oil, eaten across Egypt for breakfast. It comes with baked pita chips and a cucumber and tomato salad. The skill is timing: the slowest part starts first, so all three are ready together."
+    },
+    "why": [
+      { "id": "slowest", "title": "Slowest first", "body": "The oven takes 10 minutes to heat and the chips 10 more to bake. The salad takes about 10 minutes to cut, and the beans 5 minutes to warm. So the oven goes on first, the salad gets cut while it heats, and the beans warm while the chips bake." },
+      { "id": "measure", "title": "Measure before the heat", "body": "Once the beans are warm, there's no time to look for the cumin. Measure everything into small bowls before the stove goes on." },
+      { "id": "low", "title": "Warm, not boiled", "body": "The beans are already cooked. Medium-low heat warms them through without sticking or spattering." },
+      { "id": "mash", "title": "Mash some, not all", "body": "Mashing about half the beans with a fork makes them creamy, and the whole ones keep some bite." },
+      { "id": "salt-last", "title": "Dress the salad last", "body": "Salt pulls water out of cucumber and tomato. Dressed just before serving, the salad stays crisp." }
+    ],
+    "wrong": [
+      { "sign": "The chips are pale and soft", "fix": "Bake them 2 or 3 minutes more. They crisp more as they cool." },
+      { "sign": "The beans are sticking to the pan", "fix": "Turn the heat down and stir in 2 tablespoons of water." },
+      { "sign": "The beans were ready long before the chips", "fix": "Next time, start the beans when the chips go in, not before." },
+      { "sign": "The salad is watery", "fix": "Pour off the liquid. Next time, add the salt and lemon just before serving." }
+    ],
+    "quiz": [
+      { "q": "Which part starts first?", "choices": ["The slowest one, the oven and chips", "The salad", "The beans"], "answer": 0, "explain": "Then everything finishes together." },
+      { "q": "Why measure the spices before the stove goes on?", "choices": ["There's no time once the beans are warm", "Spices go bad", "To use fewer bowls"], "answer": 0, "explain": "Everything in its place, like week 3." },
+      { "q": "Why warm the beans on medium-low?", "choices": ["They're already cooked and only need warming", "To cook them through", "To brown them"], "answer": 0, "explain": "Higher heat makes them stick and spatter." },
+      { "q": "When does the salad get its salt and lemon?", "choices": ["Just before serving", "First thing", "The night before"], "answer": 0, "explain": "Salt pulls the water out." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "pita", "amount": 3, "unit": "count", "group": "Pita chips" },
+    { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp", "group": "Pita chips" },
+    { "ingredient": "salt", "amount": 0.25, "unit": "tsp", "group": "Pita chips" },
+    { "ingredient": "cucumber", "amount": 1, "unit": "count", "round": "up", "group": "Salad" },
+    { "ingredient": "tomato", "amount": 2, "unit": "count", "round": "up", "group": "Salad" },
+    { "ingredient": "lemon", "amount": 1, "unit": "count", "round": "up", "prep": "half for the salad, half for the beans", "group": "Salad" },
+    { "ingredient": "salt", "amount": 0.25, "unit": "tsp", "group": "Salad" },
+    { "ingredient": "fava-beans", "amount": 2, "unit": "can", "round": "up", "group": "Beans" },
+    { "ingredient": "olive-oil", "amount": 3, "unit": "tbsp", "group": "Beans" },
+    { "ingredient": "garlic-minced-jarred", "amount": 1, "unit": "tsp", "group": "Beans" },
+    { "ingredient": "cumin-ground", "amount": 1, "unit": "tsp", "group": "Beans" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Beans" }
+  ],
+  "substitutions": [
+    { "for": "pita", "use": "tortilla-corn", "reason": "gluten", "note": "Corn tortilla chips bake the same way. Check them at 7 minutes." }
+  ],
+  "equipment": [
+    "sheet-pan",
+    "oven-mitts",
+    "pastry-brush",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "can-opener",
+    "saucepan-medium",
+    "wooden-spoon",
+    "fork",
+    "measuring-spoons",
+    "spoon"
+  ],
+  "steps": [
+    { "id": "plan", "text": "Read the recipe. Notice the order: oven first, then the salad, then the beans while the chips bake.", "safety": "solo", "why": "slowest", "tip": "Halving or doubling? Write down the new amounts now." },
+    { "id": "oven", "text": "Move a rack to the middle while the oven is cold. Heat the oven to 400°F.", "safety": "adult-nearby", "hazard": "Hot oven" },
+    { "id": "measure", "text": "Measure the beans' olive oil, garlic, cumin, and salt into a small bowl. Set it by the stove.", "safety": "solo", "why": "measure", "look": "Everything for the beans in one bowl, ready." },
+    { "id": "pita", "text": "Cut each pita into 8 wedges with the paring knife, like a pizza. Spread them on the sheet pan.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "24 wedges, not overlapping." },
+    { "id": "oil-pita", "text": "Brush the wedges with the chips' olive oil and sprinkle with the chips' salt.", "safety": "solo", "tip": "Both sides crisp better, but one side is fine." },
+    { "id": "cucumber", "text": "Halve the cucumber the long way with the bridge grip. Slice it into half-moons with the claw grip.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Half-moons about ¼ inch thick." },
+    { "id": "tomatoes", "text": "Halve each tomato with the bridge grip, then cut each half into 4 wedges. Add them to the medium bowl with the cucumber.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Saw gently so the tomato doesn't squash." },
+    { "id": "lemon", "text": "Cut the lemon in half. Set the knife down flat at the top of the board, blade away from you.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "bake", "text": "When the oven is hot, put on mitts and slide in the chips.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 600, "timerLabel": "Bake chips", "look": "Golden at the edges and crisp." },
+    { "id": "beans", "text": "Open the beans and pour them, liquid and all, into the saucepan. Set it on a back burner, handle in.", "safety": "adult-nearby", "hazard": "Sharp can lid" },
+    { "id": "warm", "text": "Warm the beans over medium-low heat, stirring now and then.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 300, "timerLabel": "Warm beans", "why": "low", "look": "Steaming, with small bubbles at the edges." },
+    { "id": "mash", "text": "Turn off the burner. Stir in the measured bowl, squeeze in half the lemon, and mash about half the beans with the fork.", "safety": "adult-nearby", "hazard": "Hot pot", "why": "mash", "look": "Creamy, with some whole beans." },
+    { "id": "chips-out", "text": "Mitts on. Pull the rack out, lift out the pan, and set it on the stovetop. Turn off the oven.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "The chips crisp more as they cool." },
+    { "id": "dress", "text": "Squeeze the other lemon half over the salad, add the salad's salt, and toss with the spoon.", "safety": "solo", "why": "salt-last" },
+    { "id": "serve", "text": "Spoon the beans into bowls. Serve with the pita chips for scooping and the salad on the side.", "safety": "solo", "tip": "A spoonful of olive oil on top of the beans is traditional." }
+  ]
+}

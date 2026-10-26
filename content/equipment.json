@@ -1,6 +1,8 @@
 {
   "equipment": [
     { "id": "chef-knife", "name": "Chef's knife", "category": "knives", "icon": null },
+    { "id": "paring-knife", "name": "Paring knife", "category": "knives", "icon": null },
+    { "id": "bread-knife", "name": "Serrated bread knife", "category": "knives", "icon": null },
     { "id": "cutting-board", "name": "Cutting board", "category": "knives", "icon": null },
     { "id": "skillet-12", "name": "12-inch skillet with a lid", "category": "pans", "icon": null },
     { "id": "saucepan-light", "name": "Light-colored saucepan", "category": "pots", "icon": null },

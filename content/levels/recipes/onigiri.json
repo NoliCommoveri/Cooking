@@ -1,0 +1,86 @@
+{
+  "id": "onigiri",
+  "version": 1,
+  "track": "core",
+  "unit": 102,
+  "title": "Onigiri with tuna",
+  "image": "dishes/onigiri.png",
+  "cuisine": "japanese",
+  "skill": "Shaping rice with damp hands",
+  "skills": ["knife-safety", "rolling-wrapping"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 30,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 7, "text": "One pouch of rice makes about 3 rice balls. Heat the pouches one or two at a time." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Rice shaped by hand",
+      "body": "Onigiri are Japanese rice balls, packed for school and work lunches. You'll shape warm rice around a tuna filling with damp, salted hands, wrap each one in a strip of seaweed, and cut cucumber sticks with a paring knife to go with them."
+    },
+    "why": [
+      { "id": "damp", "title": "Damp hands, no sticking", "body": "Short-grain rice is sticky, which is why it holds a shape. Water on your hands keeps it sticking to itself instead of to you." },
+      { "id": "salt-hands", "title": "Salt on your hands", "body": "Rubbing a pinch of salt on your damp palms seasons the outside of each rice ball as you shape it. It's how onigiri are salted in Japan." },
+      { "id": "warm", "title": "Warm rice, not hot", "body": "Hot rice burns your hands, and cold rice won't stick together. Warm rice, like a bath, is just right." },
+      { "id": "press", "title": "Press, turn, press", "body": "Firm, even pressing makes a rice ball that holds together. Press, give it a quarter turn, and press again, three or four times. Squeezing hard makes it dense and gummy." },
+      { "id": "bridge", "title": "The bridge grip on a cucumber", "body": "A cucumber is round and rolls. Cut it in half the long way with the bridge grip first, then lay it flat side down so it can't move." }
+    ],
+    "wrong": [
+      { "sign": "The rice sticks to your hands", "fix": "Dip your hands in the water again. They should be damp, not dripping." },
+      { "sign": "The rice ball falls apart", "fix": "Press a little firmer, and check the rice is still warm. Cold rice doesn't stick." },
+      { "sign": "The filling is poking out", "fix": "Use a little less filling, and pinch a bit more rice over the top before you shape it." },
+      { "sign": "The seaweed is soggy", "fix": "Wrap it on just before eating. Damp rice softens it." }
+    ],
+    "quiz": [
+      { "q": "Why do you wet your hands?", "choices": ["So the rice sticks to itself, not to you", "To cool the rice", "To clean the rice"], "answer": 0, "explain": "Damp, not dripping." },
+      { "q": "How warm should the rice be?", "choices": ["Warm, like a bath", "Steaming hot", "Cold from the fridge"], "answer": 0, "explain": "Hot burns, and cold won't stick." },
+      { "q": "How do you cut a round cucumber safely?", "choices": ["Halve it with the bridge grip, then lay it flat", "Hold it in the air", "Cut it while it rolls"], "answer": 0, "explain": "A flat side down stops it rolling." },
+      { "q": "How long can tuna onigiri sit out?", "choices": ["2 hours", "All day", "Until dinner"], "answer": 0, "explain": "Then they go in the fridge." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "rice-cooked-pouch", "amount": 3, "unit": "count", "group": "Rice" },
+    { "ingredient": "water", "amount": 1, "unit": "cup", "scale": false, "group": "Rice" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Rice" },
+    { "ingredient": "tuna-canned", "amount": 1, "unit": "can", "round": "up", "group": "Filling" },
+    { "ingredient": "mayonnaise", "amount": 2, "unit": "tbsp", "group": "Filling" },
+    { "ingredient": "soy-sauce", "amount": 1, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "nori", "amount": 2, "unit": "count", "group": "To wrap" },
+    { "ingredient": "cucumber", "amount": 1, "unit": "count", "round": "up", "group": "To serve" }
+  ],
+  "substitutions": [{ "for": "soy-sauce", "use": "tamari", "reason": "gluten", "note": "Use the same amount." }],
+  "equipment": [
+    "microwave",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "can-opener",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "plate"
+  ],
+  "steps": [
+    { "id": "heat-rice", "text": "Heat the rice pouches in the microwave as the package says.", "safety": "adult-nearby", "hazard": "Hot steam", "tip": "Open each pouch away from your face. The steam inside is very hot." },
+    { "id": "cool-rice", "text": "Empty the rice into the medium bowl and spread it out with the fork to cool.", "safety": "solo", "why": "warm", "look": "Warm when you touch it, like a bath, not steaming." },
+    { "id": "drain-tuna", "text": "Open the tuna with the can opener. Press the lid down and tip out the water over the sink.", "safety": "adult-nearby", "hazard": "Sharp can lid", "tip": "The lid's edge is sharp. Press it with a fork, not your fingers." },
+    { "id": "filling", "text": "Mix the tuna, mayonnaise, and soy sauce in the small bowl with the fork. Put it in the fridge.", "safety": "solo", "look": "Flaky tuna, evenly coated, no big lumps." },
+    { "id": "board", "text": "Lay a damp paper towel under the cutting board so it can't slide. Rinse the cucumber and dry it.", "safety": "solo", "tip": "Dry food doesn't slip under the knife." },
+    { "id": "cucumber-half", "text": "Cut the ends off the cucumber. Hold it with the bridge grip and cut it in half the long way.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "bridge" },
+    { "id": "cucumber-sticks", "text": "Lay each half flat side down. Hold it with the claw grip and cut it into sticks about ½ inch wide.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Sticks about as wide as your finger." },
+    { "id": "rest-knife", "text": "Set the knife down flat at the top of the board, blade facing away from you.", "safety": "solo", "tip": "Do this every time you stop cutting." },
+    { "id": "nori", "text": "Fold each nori sheet in half, crease it, and tear along the fold. Fold and tear each half again to make 8 strips.", "safety": "solo", "look": "8 strips about as wide as two fingers." },
+    { "id": "set-up", "text": "Fill a bowl with the cup of water. Put the salt in a little pile on the plate.", "safety": "solo", "why": "salt-hands" },
+    { "id": "hands", "text": "Dip your hands in the water, shake them, and rub a pinch of salt over your palms.", "safety": "solo", "why": "damp", "tip": "Damp, not dripping." },
+    { "id": "fill", "text": "Scoop about ½ cup of rice into one palm. Press a dent in the middle and add a spoonful of tuna.", "safety": "solo" },
+    { "id": "shape", "text": "Cover the tuna with a little more rice. Press it into a triangle, turn it, and press again, three or four times.", "safety": "solo", "why": "press", "look": "A firm triangle that holds its shape when you set it down." },
+    { "id": "more", "text": "Make the rest the same way, wetting and salting your hands each time.", "safety": "solo", "look": "About 8 rice balls." },
+    { "id": "wrap", "text": "Wrap a nori strip around the bottom of each rice ball just before eating. Serve with the cucumber sticks.", "safety": "solo", "tip": "Eat within 2 hours, or keep them in the fridge." }
+  ]
+}
