@@ -15,10 +15,274 @@
     { "number": 9, "name": "Sabbath capstone", "goal": "Plans, budgets, shops for, and cooks a full Sabbath meal for the household and guests, entirely on their own, from dishes the student writes" }
   ],
   "weeks": [
-    { "week": 1, "unit": 1, "skill": "dicing", "cuisine": "french", "familiar": "chicken-fried-rice", "explore": "ratatouille", "note": "Level 4 versions: every vegetable in brunoise; ratatouille cut evenly and precisely", "drill": { "title": "Timed brunoise", "minutes": 30 }, "knowledge": { "title": "Cuts by size: brunoise, small dice, batonnet, chiffonade; the French herb base", "minutes": 45 }, "sabbath": { "title": "Prep every vegetable for a weekend meal", "minutes": 30 } },
-    { "week": 2, "unit": 1, "skill": "measuring", "cuisine": "vietnamese", "familiar": "steak-fajitas", "explore": "bo-luc-lac", "drill": { "title": "Weigh vs. measure; weigh the trim to find the yield", "minutes": 30 }, "knowledge": { "title": "Why weight beats volume; trim loss and buying enough", "minutes": 45 }, "sabbath": { "title": "Weigh and portion ingredients ahead", "minutes": 30 } },
-    { "week": 3, "unit": 1, "skill": "measuring", "cuisine": "indian", "familiar": "chicken-enchiladas", "explore": "chana-masala", "note": "Both for 12, scaled by hand from 4", "drill": { "title": "Scale a recipe on paper, then check it against the app's amounts", "minutes": 30 }, "knowledge": { "title": "Scaling factors, and what doesn't scale: salt, spice, time, pan size", "minutes": 45 }, "sabbath": { "title": "Scale a Sabbath recipe to the guest count", "minutes": 30 } },
-    { "week": 4, "unit": 1, "ownRecipe": true, "skill": "timing", "mastery": true, "cuisine": "korean", "familiar": "salade-nicoise", "explore": "bibimbap", "note": "Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Write a prep timeline and run it with a timer", "minutes": 30 }, "knowledge": { "title": "Planning a meal backward from serving time", "minutes": 45 }, "sabbath": { "title": "Plan a Sabbath prep timeline", "minutes": 30 } },
+    {
+      "week": 1,
+      "unit": 1,
+      "skill": "dicing",
+      "cuisine": "french",
+      "familiar": "chicken-fried-rice",
+      "explore": "ratatouille",
+      "note": "Level 4 versions: every vegetable in brunoise; ratatouille cut evenly and precisely",
+      "drill": {
+        "title": "Timed brunoise",
+        "minutes": 30,
+        "body": ["A brunoise shows every flaw in your knife work. Today you time it, then check it."],
+        "steps": [
+          "Hone your chef's knife and set the board on a damp towel.",
+          "Start a timer. Peel one carrot, square it into a block, and cut ⅛-inch planks, then ⅛-inch julienne, then ⅛-inch cubes.",
+          "Stop the timer and write down the time.",
+          "Spread 20 cubes on the board and measure a few with a ruler. Note how many are within a millimeter of ⅛ inch.",
+          "Repeat with a second carrot and compare the time and the count.",
+          "Weigh the trim and the brunoise. Save the trim for stock.",
+          "Use the brunoise in this week's fried rice or ratatouille."
+        ],
+        "quiz": [
+          { "q": "What comes before a brunoise?", "choices": ["A julienne", "A chiffonade", "A large dice"], "answer": 0, "explain": "Sticks become cubes." },
+          { "q": "Which matters first, speed or evenness?", "choices": ["Evenness", "Speed", "Neither"], "answer": 0, "explain": "Speed follows even work." },
+          { "q": "Why square the carrot into a block?", "choices": ["Flat sides make even planks and it can't roll", "It's faster", "It looks neater"], "answer": 0, "explain": "And the trim goes to stock." }
+        ]
+      },
+      "knowledge": {
+        "title": "Cuts by size: brunoise, small dice, batonnet, chiffonade; the French herb base",
+        "minutes": 45,
+        "body": [
+          "Professional recipes name cuts by size, so every cook produces the same piece. Learn them as numbers.",
+          "Brunoise: ⅛-inch cubes (3 mm), cut from a julienne. Small dice: ¼-inch cubes (6 mm), cut from a batonnet. Medium dice: ½ inch (12 mm). Large dice: ¾ inch (2 cm).",
+          "Julienne: ⅛ by ⅛ inch, 2 to 2½ inches long. Batonnet: ¼ by ¼ inch, 2½ to 3 inches long. Chiffonade: leafy herbs or greens stacked, rolled tight, and sliced across into thin ribbons.",
+          "Precision isn't decoration. Pieces of one size cook in the same time, so a pan of brunoise is done all at once, and a sauce built on it is smooth.",
+          "French cooking builds on two aromatic foundations. Mirepoix is onion, carrot, and celery in a 2:1:1 ratio by weight, diced to suit the cooking time: brunoise for a quick sauce, large dice for a long stock. Herbs come as a bouquet garni, a bundle of thyme, bay leaf, and parsley stems tied together so it can be lifted out, or as fines herbes, parsley, chives, tarragon, and chervil, chopped fine and added at the end.",
+          "Speed comes from repetition, not hurry. Keep the claw, let the blade do the work, and keep each cut the same before you try to make it faster."
+        ],
+        "quiz": [
+          { "q": "What size is a brunoise?", "choices": ["⅛ inch", "¼ inch", "½ inch"], "answer": 0, "explain": "Cut from a julienne." },
+          { "q": "A small dice is cut from which stick?", "choices": ["A batonnet", "A julienne", "A chiffonade"], "answer": 0, "explain": "¼-inch sticks cut across." },
+          { "q": "What's the mirepoix ratio by weight?", "choices": ["2 onion : 1 carrot : 1 celery", "1:1:1", "1 onion : 2 carrot : 2 celery"], "answer": 0, "explain": "Onion is half." },
+          { "q": "Why is a bouquet garni tied?", "choices": ["So it can be lifted out", "So it cooks faster", "For looks"], "answer": 0, "explain": "It flavors, then comes out." },
+          { "q": "When do fines herbes go in?", "choices": ["At the end", "At the start", "In the marinade"], "answer": 0, "explain": "Delicate herbs lose flavor with long cooking." },
+          { "q": "Why cut to an exact size?", "choices": ["Pieces of one size cook in the same time", "It's traditional", "It's faster"], "answer": 0, "explain": "Even cooking, even texture." }
+        ]
+      },
+      "sabbath": {
+        "title": "Prep every vegetable for a weekend meal",
+        "minutes": 30,
+        "body": [
+          "A weekend meal is easier to serve when every vegetable is cut beforehand. Done right, the day itself is only cooking.",
+          "Most firm vegetables keep 3 to 4 days cut: onions, carrots, celery, peppers, and squash, in sealed containers lined with paper towel. Tomatoes, cucumbers, potatoes, apples, and herbs are cut on the day, or held as noted: potatoes under cold water for up to a day, herbs whole in a damp towel."
+        ],
+        "steps": [
+          "Choose the weekend menu and list every vegetable and its cut.",
+          "Group the list by what keeps and what doesn't.",
+          "Cut the keeping vegetables to the sizes the recipes need, each in its own lined container.",
+          "Label each with the recipe, the cut, and the date.",
+          "Write a short note of what's left to cut on the day, and how long it will take.",
+          "After the meal, note what worked and what you'd change."
+        ],
+        "quiz": [
+          { "q": "Which keeps well cut for several days?", "choices": ["Carrots", "Tomatoes", "Cucumbers"], "answer": 0, "explain": "Firm vegetables keep." },
+          { "q": "How do cut potatoes wait?", "choices": ["Under cold water, up to a day", "In a dry container", "On the counter"], "answer": 0, "explain": "Air browns them." },
+          { "q": "Why label each container with the recipe and cut?", "choices": ["So the day's cooking is only cooking", "For looks", "It's required"], "answer": 0, "explain": "No sorting on the day." }
+        ]
+      }
+    },
+    {
+      "week": 2,
+      "unit": 1,
+      "skill": "measuring",
+      "cuisine": "vietnamese",
+      "familiar": "steak-fajitas",
+      "explore": "bo-luc-lac",
+      "drill": {
+        "title": "Weigh vs. measure; weigh the trim to find the yield",
+        "minutes": 30,
+        "body": [
+          "Today you'll see the difference between measuring and weighing with your own numbers, then find a real yield."
+        ],
+        "steps": [
+          "Scoop 1 cup of flour three ways: scooped and packed, spooned and leveled, and sifted in. Weigh each and write it down.",
+          "Measure 1 cup of water and weigh it. It should be close to 237 grams.",
+          "Weigh a whole onion. Peel it, trim the root and top, and weigh it again. Work out the yield.",
+          "Do the same with a bell pepper: weigh, core and seed, weigh again.",
+          "Compare your yields with the Knowledge page's typical numbers.",
+          "Keep the trim for stock."
+        ],
+        "quiz": [
+          { "q": "1 cup of water weighs about:", "choices": ["237 g", "100 g", "500 g"], "answer": 0, "explain": "Water is about 1 g per mL." },
+          { "q": "Which flour cup weighs most?", "choices": ["Scooped and packed", "Sifted", "Spooned and leveled"], "answer": 0, "explain": "Packing adds flour." },
+          { "q": "A 200 g onion gives 180 g peeled. Yield?", "choices": ["90%", "80%", "110%"], "answer": 0, "explain": "180 ÷ 200." }
+        ]
+      },
+      "knowledge": {
+        "title": "Why weight beats volume; trim loss and buying enough",
+        "minutes": 45,
+        "body": [
+          "A cup is a volume, and how much fits in it depends on how it's filled. A cup of flour can weigh anywhere from 120 to 150 grams; a cup of chopped onion varies more. A gram is a gram.",
+          "That's why professional kitchens weigh. A scale gives the same result every time, in any hands, and it lets you scale a recipe by multiplication without converting cups and spoons.",
+          "Weight also tells you what you're really getting. Yield is the usable weight divided by the bought weight. Typical yields: onions about 90 percent after peeling; bell peppers 80 to 85; carrots 85 to 90; boneless steak trimmed 85 to 90; and meat loses another 20 to 30 percent of its trimmed weight in cooking.",
+          "To buy enough, work backward: the plated weight you need, divided by the yield. For 4 servings of 140 grams of cooked steak (560 g) at a 75 percent cooking yield, you need about 750 grams trimmed, and at 88 percent trim yield, about 850 grams as bought.",
+          "Small amounts of salt, spices, and leaveners are still often given in spoons, because home scales aren't precise below a few grams."
+        ],
+        "quiz": [
+          { "q": "Why weigh instead of using cups?", "choices": ["A gram is the same every time", "Cups are smaller", "Scales are faster to wash"], "answer": 0, "explain": "Volume depends on packing." },
+          { "q": "What is yield?", "choices": ["Usable weight ÷ bought weight", "Cooked weight × 2", "Servings per pound"], "answer": 0, "explain": "Expressed as a percent." },
+          { "q": "You need 560 g cooked at a 75% cooking yield. How much trimmed meat?", "choices": ["About 750 g", "About 420 g", "560 g"], "answer": 0, "explain": "560 ÷ 0.75." },
+          { "q": "Why are teaspoons still used for salt?", "choices": ["Home scales aren't precise for a few grams", "Salt can't be weighed", "Tradition only"], "answer": 0, "explain": "Too small to weigh well." },
+          { "q": "About what does steak lose in cooking?", "choices": ["20 to 30 percent", "Nothing", "Half"], "answer": 0, "explain": "Mostly water." }
+        ]
+      },
+      "sabbath": {
+        "title": "Weigh and portion ingredients ahead",
+        "minutes": 30,
+        "body": [
+          "Weighing and portioning ahead turns a recipe into a kit: open the containers and cook.",
+          "Dry ingredients can be weighed days ahead. Raw meat can be trimmed and portioned up to 2 days ahead in the fridge, or frozen; keep it sealed, on the bottom shelf, away from anything eaten raw."
+        ],
+        "steps": [
+          "Pick a recipe for the weekend and convert its main ingredients to grams.",
+          "Weigh each dry ingredient into a labeled container or bag.",
+          "Trim and portion any meat, weigh each portion, and seal it. Wash your hands, board, and knife afterward.",
+          "Store the meat on the bottom shelf of the fridge, or freeze it.",
+          "Label everything with the recipe, the weight, and the date.",
+          "When you cook, note how much time it saved."
+        ],
+        "quiz": [
+          { "q": "How long can trimmed raw meat wait in the fridge?", "choices": ["Up to 2 days", "A week", "Until it smells"], "answer": 0, "explain": "Or freeze it." },
+          { "q": "Where does raw meat go in the fridge?", "choices": ["The bottom shelf", "The top shelf", "The door"], "answer": 0, "explain": "So nothing drips onto other food." },
+          { "q": "What goes on each label?", "choices": ["Recipe, weight, and date", "Only the name", "Nothing"], "answer": 0, "explain": "So the kit is complete." }
+        ]
+      }
+    },
+    {
+      "week": 3,
+      "unit": 1,
+      "skill": "measuring",
+      "cuisine": "indian",
+      "familiar": "chicken-enchiladas",
+      "explore": "chana-masala",
+      "note": "Both for 12, scaled by hand from 4",
+      "drill": {
+        "title": "Scale a recipe on paper, then check it against the app's amounts",
+        "minutes": 30,
+        "body": ["Scale a recipe by hand, then check yourself against the app."],
+        "steps": [
+          "Pick this week's enchiladas or chana masala.",
+          "Work out the factor to 12 servings.",
+          "On paper, multiply every ingredient, converting volumes to sensible amounts.",
+          "Mark which items you'd scale under the factor, and why.",
+          "Set the recipe's servings to 12 in the app and compare line by line.",
+          "Note every difference and decide whether yours or the app's is better for the dish."
+        ],
+        "quiz": [
+          { "q": "How do you find the factor?", "choices": ["New servings ÷ old servings", "Old ÷ new", "New − old"], "answer": 0, "explain": "12 ÷ 4 = 3." },
+          { "q": "What do you do with a result like 2.25 eggs?", "choices": ["Round sensibly, usually down to 2", "Use 2.25 eggs", "Leave them out"], "answer": 0, "explain": "Or beat and measure." },
+          { "q": "Which do you mark to scale under?", "choices": ["Salt and spices", "Chicken", "Tortillas"], "answer": 0, "explain": "Then taste." }
+        ]
+      },
+      "knowledge": {
+        "title": "Scaling factors, and what doesn't scale: salt, spice, time, pan size",
+        "minutes": 45,
+        "body": [
+          "The scaling factor is the servings you want divided by the servings written. From 4 to 12, it's 3. From 6 to 4, it's about 0.67. Multiply every ingredient by it, and round counted items sensibly.",
+          "Weights scale cleanly. Volumes do too, but convert awkward results: ⅓ cup × 3 is 1 cup; 1 teaspoon × 3 is 1 tablespoon; 3 tablespoons × 3 is ½ cup plus 1 tablespoon.",
+          "Some things don't scale in a straight line. Salt, spices, and chile heat build faster in a big batch: start at about three quarters of the full factor, then taste. Liquids that evaporate, like a simmering sauce, need less than the full factor, because a bigger pot loses less in proportion. Leaveners in baking are often scaled a little under.",
+          "Time doesn't multiply. A pot of soup three times the size takes longer to come to a boil, but simmers about the same. Baking time stays the same per pan, as long as the pans are the same size.",
+          "Pans don't stretch. A tripled recipe needs three pans of the original size, or one pan with three times the area, at the same depth. Check the oven fits them, and rotate them halfway."
+        ],
+        "quiz": [
+          { "q": "What's the scaling factor from 6 to 4?", "choices": ["About 0.67", "1.5", "2"], "answer": 0, "explain": "4 ÷ 6." },
+          { "q": "How should salt be scaled up?", "choices": ["Under the full factor, then taste", "Exactly by the factor", "Not at all"], "answer": 0, "explain": "It builds fast." },
+          { "q": "A tripled cake in three pans bakes:", "choices": ["About the same time", "Three times as long", "A third as long"], "answer": 0, "explain": "Same pan, same time." },
+          { "q": "1 teaspoon × 3 is:", "choices": ["1 tablespoon", "3 tablespoons", "½ cup"], "answer": 0, "explain": "3 teaspoons = 1 tablespoon." },
+          { "q": "Why does a big batch of sauce need less extra liquid?", "choices": ["A bigger pot loses less in proportion", "Liquid is expensive", "It cooks faster"], "answer": 0, "explain": "Less surface per cup." }
+        ]
+      },
+      "sabbath": {
+        "title": "Scale a Sabbath recipe to the guest count",
+        "minutes": 30,
+        "body": [
+          "A Sabbath meal often has guests, so the family recipe has to fit the table. Scale it ahead, shop to the new amounts, and plan the pans before the day."
+        ],
+        "steps": [
+          "Choose a recipe your family makes for Sabbath meals, and the number of guests.",
+          "Work out the factor and scale every ingredient by hand.",
+          "Adjust salt and spices under the factor, to taste on the day.",
+          "Plan the pans and the oven space, and any timing changes.",
+          "Write the shopping list from your scaled amounts.",
+          "Keep the scaled recipe with your notes for next time."
+        ],
+        "quiz": [
+          { "q": "What's the first number you need?", "choices": ["The guest count", "The oven temperature", "The price"], "answer": 0, "explain": "It sets the factor." },
+          { "q": "What should you plan besides amounts?", "choices": ["Pans and oven space", "Napkins", "Music"], "answer": 0, "explain": "Pans don't stretch." },
+          { "q": "When do you taste and finish the salt?", "choices": ["On the day, while cooking", "When shopping", "Never"], "answer": 0, "explain": "Start under and adjust." }
+        ]
+      }
+    },
+    {
+      "week": 4,
+      "unit": 1,
+      "ownRecipe": true,
+      "skill": "timing",
+      "mastery": true,
+      "cuisine": "korean",
+      "familiar": "salade-nicoise",
+      "explore": "bibimbap",
+      "note": "Or the student's own dish with the unit's skills, through Write my recipe",
+      "drill": {
+        "title": "Write a prep timeline and run it with a timer",
+        "minutes": 30,
+        "body": ["Write a timeline for this week's mastery dish, then run it against a timer and see where it slips."],
+        "steps": [
+          "Pick salade niçoise, bibimbap, or your own dish.",
+          "List each component with its active and passive time.",
+          "Choose a serving time and write each step as a clock time, working backward.",
+          "Check for collisions: hands, burners, and oven.",
+          "Cook to the timeline with a timer running, and note the actual time of each step.",
+          "Afterward, compare planned and actual times, and rewrite the timeline for next time."
+        ],
+        "quiz": [
+          { "q": "What do you note while cooking?", "choices": ["The actual time of each step", "Nothing", "Only the end time"], "answer": 0, "explain": "So you can compare." },
+          { "q": "What's a collision?", "choices": ["Two jobs needing the same hands or burner at once", "A dropped pan", "A late guest"], "answer": 0, "explain": "Move one." },
+          { "q": "When do you rewrite the timeline?", "choices": ["After cooking, from your notes", "Before shopping", "Never"], "answer": 0, "explain": "Plans improve with use." }
+        ]
+      },
+      "knowledge": {
+        "title": "Planning a meal backward from serving time",
+        "minutes": 45,
+        "body": [
+          "Every meal has a fixed point: the moment it's served. Plan from there backward.",
+          "List every component with its active time, hands busy, and its passive time, waiting. A roast might be 15 minutes active and 90 passive; a salad 15 active and nothing passive.",
+          "Place each component so it finishes at serving time, counting resting and holding: meat rests 10 minutes, rice holds covered for 20, and dressed greens wilt within minutes, so they go last.",
+          "Now check for collisions. Two jobs needing your hands at once, or two pans needing the same burner or the oven at different temperatures, must be moved. Passive time is when you do the active work of something else.",
+          "Add slack: 10 to 15 percent of the total, at the start. Write the plan as clock times, not durations, and keep it in view while you cook."
+        ],
+        "quiz": [
+          { "q": "What's the fixed point of a meal plan?", "choices": ["Serving time", "The first step", "Shopping"], "answer": 0, "explain": "Plan backward from it." },
+          { "q": "What is passive time?", "choices": ["Waiting time, hands free", "Time spent cutting", "Cleanup"], "answer": 0, "explain": "Use it for active work." },
+          { "q": "What goes last?", "choices": ["Dressed greens", "A roast", "Rice"], "answer": 0, "explain": "They wilt quickly." },
+          { "q": "How much slack should you add?", "choices": ["10 to 15 percent", "None", "Double"], "answer": 0, "explain": "At the start." },
+          { "q": "How should the plan be written?", "choices": ["As clock times", "As durations only", "From memory"], "answer": 0, "explain": "Easy to follow under pressure." }
+        ]
+      },
+      "sabbath": {
+        "title": "Plan a Sabbath prep timeline",
+        "minutes": 30,
+        "body": [
+          "A Sabbath meal is cooked before the Sabbath begins and served without last-minute work. That makes the timeline run backward from sundown on Friday, with food held hot or served cold."
+        ],
+        "steps": [
+          "Choose the Sabbath menu and note which dishes are served hot and which cold.",
+          "Mark sundown on Friday as your fixed point.",
+          "List every component, with its active and passive time and how it will be held.",
+          "Spread the work over Thursday and Friday so Friday afternoon isn't crowded.",
+          "Write the timeline as days and clock times, with slack before sundown.",
+          "After the meal, note what you'd move, and keep the plan."
+        ],
+        "quiz": [
+          { "q": "What's the fixed point for a Sabbath meal?", "choices": ["Sundown on Friday", "Saturday noon", "The first guest"], "answer": 0, "explain": "Work stops then." },
+          { "q": "Why spread the work over two days?", "choices": ["So Friday afternoon isn't crowded", "To use more pans", "For freshness"], "answer": 0, "explain": "Slack before sundown." },
+          { "q": "What do you note for each dish?", "choices": ["Active time, passive time, and how it's held", "Its color", "Its price"], "answer": 0, "explain": "Hot, warm, or cold." }
+        ]
+      }
+    },
     { "week": 5, "unit": 2, "skill": "emulsions", "cuisine": "spanish", "familiar": "chicken-caesar", "explore": "ensaladilla-rusa", "note": "Level 4 version of Chicken Caesar: homemade dressing with pasteurized eggs", "drill": { "title": "Make mayonnaise, break it, and rescue it", "minutes": 30 }, "knowledge": { "title": "Emulsions, and raw eggs: the USDA guideline and pasteurized eggs", "minutes": 45 }, "sabbath": { "title": "Make a dressing ahead", "minutes": 30 } },
     { "week": 6, "unit": 2, "ownRecipe": true, "skill": "cooling-reheating", "mastery": true, "cuisine": "lebanese", "familiar": "antipasto-platter", "explore": "mezze-spread", "note": "Or the student's own dish with the unit's skills, through Write my recipe", "drill": { "title": "Hold a cold platter below 41°F; the 2-hour rule", "minutes": 30 }, "knowledge": { "title": "Food safety for a cold buffet", "minutes": 45 }, "sabbath": { "title": "Hospitality: Abraham's meal for his guests (Genesis 18:1–8; Hebrews 13:2)", "minutes": 30 } },
     { "week": 7, "unit": 3, "skill": "breaking-down-chicken", "cuisine": "moroccan", "familiar": "chicken-cacciatore", "explore": "chicken-tagine", "note": "Both from a whole chicken broken down at home", "drill": { "title": "Break a chicken into 8 pieces; save the back for stock", "minutes": 30 }, "knowledge": { "title": "Yield and cost: a whole bird vs. parts", "minutes": 45 }, "sabbath": { "title": "Freeze the back and wings for stock", "minutes": 30 } },
@@ -111,7 +375,6 @@
       "image": "dishes/steak-fajitas.png",
       "safety": "solo",
       "minutes": 75,
-      "estimated": true,
       "about": "Skirt or flank steak seared and sliced with charred peppers and onions, every ingredient weighed, in warm tortillas.",
       "main": ["skirt or flank steak", "bell peppers", "onion", "lime", "tortillas"],
       "method": "stove",
@@ -125,29 +388,7 @@
         "veggies": "some"
       }
     },
-    {
-      "id": "bo-luc-lac",
-      "title": "Bò lúc lắc",
-      "cuisine": "vietnamese",
-      "skills": ["searing"],
-      "skill": "Weighing the trim; searing cubes",
-      "art": "meat",
-      "image": "dishes/bo-luc-lac.png",
-      "safety": "solo",
-      "minutes": 75,
-      "estimated": true,
-      "about": "Vietnamese shaking beef: cubed sirloin seared hard and tossed in a savory sauce, over watercress, with a lime-pepper dip.",
-      "main": ["sirloin", "watercress", "garlic", "soy sauce", "lime"],
-      "method": "stove",
-      "tags": {
-        "protein": "beef",
-        "flavors": ["ginger-soy", "sweet-savory"],
-        "heat": "mild",
-        "budget": "$$$",
-        "familiar": "adventurous",
-        "veggies": "some"
-      }
-    },
+    { "id": "bo-luc-lac", "title": "Bò lúc lắc", "cuisine": "vietnamese", "skills": ["searing"], "skill": "Weighing the trim; searing cubes", "art": "meat", "image": "dishes/bo-luc-lac.png", "safety": "solo", "minutes": 75, "about": "Vietnamese shaking beef: cubed sirloin seared hard and tossed in a savory sauce, over watercress, with a lime-pepper dip.", "main": ["sirloin", "watercress", "garlic", "soy sauce", "lime"], "method": "stove", "tags": { "protein": "beef", "flavors": ["ginger-soy", "sweet-savory"], "heat": "mild", "budget": "$$$", "familiar": "adventurous", "veggies": "some" } },
     {
       "id": "chicken-enchiladas",
       "title": "Chicken enchiladas",
@@ -158,7 +399,6 @@
       "image": "dishes/chicken-enchiladas.png",
       "safety": "solo",
       "minutes": 120,
-      "estimated": true,
       "about": "Chicken enchiladas in red sauce for 12, scaled by hand from a recipe for 4, baked under cheese.",
       "main": ["chicken thighs", "corn tortillas", "dried red chiles", "onion", "cheese"],
       "method": "stove-oven",
@@ -181,7 +421,6 @@
       "image": "dishes/salade-nicoise.png",
       "safety": "solo",
       "minutes": 90,
-      "estimated": true,
       "about": "A composed salad of seared tuna, soft-boiled eggs, green beans, potatoes, tomatoes, and olives, each part timed.",
       "main": ["tuna steak", "eggs", "green beans", "small potatoes", "olives"],
       "method": "stove",
@@ -194,29 +433,7 @@
         "veggies": "lots"
       }
     },
-    {
-      "id": "bibimbap",
-      "title": "Bibimbap",
-      "cuisine": "korean",
-      "skills": ["timing", "stir-frying"],
-      "skill": "Each topping cut and cooked on its own, timed",
-      "art": "meat",
-      "image": "dishes/bibimbap.png",
-      "safety": "solo",
-      "minutes": 120,
-      "estimated": true,
-      "about": "Rice topped with separately cooked vegetables, seasoned beef, a fried egg, and gochujang.",
-      "main": ["rice", "beef", "spinach", "carrots and zucchini", "gochujang"],
-      "method": "stove",
-      "tags": {
-        "protein": "beef",
-        "flavors": ["ginger-soy", "chili-heat"],
-        "heat": "some",
-        "budget": "$$",
-        "familiar": "new-ish",
-        "veggies": "lots"
-      }
-    },
+    { "id": "bibimbap", "title": "Bibimbap", "cuisine": "korean", "skills": ["timing", "stir-frying"], "skill": "Each topping cut and cooked on its own, timed", "art": "meat", "image": "dishes/bibimbap.png", "safety": "solo", "minutes": 120, "about": "Rice topped with separately cooked vegetables, seasoned beef, a fried egg, and gochujang.", "main": ["rice", "beef", "spinach", "carrots and zucchini", "gochujang"], "method": "stove", "tags": { "protein": "beef", "flavors": ["ginger-soy", "chili-heat"], "heat": "some", "budget": "$$", "familiar": "new-ish", "veggies": "lots" } },
     { "id": "ensaladilla-rusa", "title": "Ensaladilla rusa", "cuisine": "spanish", "skills": ["emulsions"], "skill": "Homemade mayonnaise", "art": "salad", "image": "dishes/ensaladilla-rusa.png", "safety": "solo", "minutes": 75, "estimated": true, "about": "Spanish potato salad with carrots, peas, and tuna, bound with mayonnaise made from pasteurized eggs.", "main": ["potatoes", "carrots", "peas", "canned tuna", "pasteurized eggs"], "method": "stove", "tags": { "protein": "tuna", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "some" } },
     {
       "id": "antipasto-platter",

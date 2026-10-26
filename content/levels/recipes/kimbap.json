@@ -1,0 +1,103 @@
+{
+  "id": "kimbap",
+  "version": 1,
+  "track": "core",
+  "unit": 103,
+  "title": "Kimbap",
+  "image": "dishes/kimbap.png",
+  "cuisine": "korean",
+  "skill": "Julienned fillings, rolled tight",
+  "skills": ["julienne", "rolling-wrapping"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 75,
+  "scaling": {
+    "mode": "free",
+    "notes": [{ "from": 5, "text": "Cook the rice in the large pot, and make one thin omelet for every two rolls." }]
+  },
+  "learn": {
+    "move": {
+      "title": "Every filling the same length",
+      "body": "Kimbap is Korea's picnic food: seasoned rice and a row of fillings rolled in seaweed and sliced into rounds. Each filling is a julienne or a strip as long as the roll, so every slice shows the same pattern. Today you'll cut and cook four fillings and roll four rolls."
+    },
+    "why": [
+      { "id": "rinse", "title": "Rinse the rice", "body": "Short-grain rice is sticky, which is what holds a roll together. Rinsing washes off the loose starch on the outside, so the rice is sticky but not gluey." },
+      { "id": "sticks", "title": "Sticks the length of the roll", "body": "Fillings cut into long, even sticks lie side by side in a straight line. Short or uneven pieces leave gaps, and the roll caves in where they are." },
+      { "id": "squeeze", "title": "Squeeze the spinach dry", "body": "Wilted spinach holds a lot of water. Left in, it soaks the rice and the seaweed tears. Squeeze it in your fist until no more drips out." },
+      { "id": "thin-rice", "title": "A thin layer of rice", "body": "Too much rice and the fillings end up off-center and the roll won't close. A layer one or two grains thick, with a bare strip at the far edge, rolls tight and seals." },
+      { "id": "tight", "title": "Roll, tuck, squeeze", "body": "The first turn matters most. Lift the near edge up and over the fillings, tuck it in tight, then roll the rest of the way, squeezing gently as you go. A loose roll falls apart when you slice it." },
+      { "id": "wet-knife", "title": "A wet, sharp knife", "body": "Rice sticks to a dry blade and drags the roll apart. Wipe the knife with a damp towel between slices and cut with long, gentle strokes instead of pressing down." },
+      { "id": "two-hours", "title": "Two hours on the counter", "body": "Cooked rice, eggs, and spinach are all foods microorganisms grow in. Kimbap is eaten at room temperature, so eat it within 2 hours of making it, or refrigerate it, the same danger-zone rule as week 1." }
+    ],
+    "wrong": [
+      { "sign": "The roll falls apart when you slice it", "fix": "It was rolled loose. Squeeze it gently in the parchment for a few seconds before slicing, and use a wet knife." },
+      { "sign": "The seaweed tore", "fix": "The fillings were wet, or the rice layer was too thick. Squeeze the spinach harder and spread the rice thinner." },
+      { "sign": "The fillings are off to one side", "fix": "Lay them in a line about a third of the way up the rice, not in the middle." },
+      { "sign": "The rice won't stick to the seaweed", "fix": "It cooled too much. Rice spreads best when it's warm, not hot and not cold." }
+    ],
+    "quiz": [
+      { "q": "Why are the fillings cut as long as the roll?", "choices": ["They line up with no gaps", "They're faster to cut", "They cook evenly"], "answer": 0, "explain": "Gaps make the roll cave in." },
+      { "q": "Why squeeze the spinach?", "choices": ["Its water would soak the rice and tear the seaweed", "To make it smaller", "To cool it"], "answer": 0, "explain": "Squeeze until nothing drips." },
+      { "q": "How do you keep the knife from dragging the roll apart?", "choices": ["Wipe it with a damp towel between slices", "Press down hard", "Use a bread knife"], "answer": 0, "explain": "Rice sticks to a dry blade." },
+      { "q": "How long can kimbap sit out?", "choices": ["2 hours", "All day", "15 minutes"], "answer": 0, "explain": "Then it goes in the fridge." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "rice-short-grain", "amount": 2, "unit": "cup", "group": "Rice" },
+    { "ingredient": "water", "amount": 2.25, "unit": "cup", "group": "Rice" },
+    { "ingredient": "sesame-oil", "amount": 1, "unit": "tbsp", "group": "Rice" },
+    { "ingredient": "salt", "amount": 0.75, "unit": "tsp", "group": "Rice" },
+    { "ingredient": "sesame-seeds", "amount": 1, "unit": "tbsp", "group": "Rice" },
+    { "ingredient": "carrot", "amount": 2, "unit": "count", "round": "up", "group": "Fillings" },
+    { "ingredient": "cucumber", "amount": 1, "unit": "count", "round": "up", "group": "Fillings" },
+    { "ingredient": "spinach-baby", "amount": 5, "unit": "oz", "group": "Fillings" },
+    { "ingredient": "garlic", "amount": 1, "unit": "count", "round": "up", "group": "Fillings" },
+    { "ingredient": "egg", "amount": 4, "unit": "count", "group": "Fillings" },
+    { "ingredient": "vegetable-oil", "amount": 1, "unit": "tbsp", "group": "Fillings" },
+    { "ingredient": "sesame-oil", "amount": 1, "unit": "tsp", "group": "Fillings" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Fillings" },
+    { "ingredient": "nori", "amount": 4, "unit": "count", "group": "To roll" },
+    { "ingredient": "sesame-oil", "amount": 1, "unit": "tsp", "group": "To roll" }
+  ],
+  "equipment": [
+    "colander",
+    "saucepan-medium",
+    "chef-knife",
+    "cutting-board",
+    "vegetable-peeler",
+    "spoon",
+    "skillet-nonstick-8",
+    "spatula",
+    "small-bowl",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "fork",
+    "plate",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "parchment",
+    "pastry-brush",
+    "kitchen-towel"
+  ],
+  "steps": [
+    { "id": "rinse", "text": "Put the rice in the colander and rinse it under cold water, rubbing it between your hands, until the water running out is nearly clear.", "safety": "solo", "why": "rinse" },
+    { "id": "cook-rice", "text": "Put the rice and the rice's water in the saucepan and bring it to a boil over high heat. Stir once, put the lid on, and turn the heat to low.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 900, "timerLabel": "Rice" },
+    { "id": "rice-rest", "text": "When the timer rings, take the pan off the heat and leave the lid on while you make the fillings.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 600, "timerLabel": "Rice rests" },
+    { "id": "carrot", "text": "Peel the carrots and cut them into pieces as long as a nori sheet is wide, about 7 inches, or two pieces end to end. Cut them into ⅛-inch planks, then stack the planks and cut ⅛-inch sticks.", "safety": "adult-nearby", "hazard": "Sharp knife, peeler", "why": "sticks", "look": "Long, thin matchsticks, all the same thickness." },
+    { "id": "cucumber", "text": "Cut the cucumber into lengths the same as the carrots. Cut each piece lengthwise into quarters, scoop out the seeds with the spoon, and cut each quarter into ¼-inch strips.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Seeds are wet. Scooping them out keeps the roll dry." },
+    { "id": "carrot-cook", "text": "Heat half the vegetable oil in the small skillet over medium heat. Add the carrots and a pinch of the fillings' salt and cook, stirring, until they bend but aren't soft. Spread them on the plate to cool.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 120, "timerLabel": "Carrots" },
+    { "id": "spinach", "text": "Mince the garlic. Put the spinach in the same skillet and stir it over medium heat just until it wilts. Let it cool for a minute, then squeeze it hard in your fist until no more water drips out. Toss it in the small bowl with the garlic, the fillings' sesame oil, and a pinch of salt.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 60, "timerLabel": "Spinach", "why": "squeeze" },
+    { "id": "beat", "text": "Crack the eggs into the medium bowl, add the rest of the fillings' salt, and beat with the fork until no streaks of white are left.", "safety": "solo", "handles": ["egg"] },
+    { "id": "wash-egg", "type": "wash", "text": "Wash your hands with soap and wipe the counter where the eggs were.", "safety": "solo", "hazard": "Raw egg" },
+    { "id": "omelet", "text": "Wipe out the skillet, add the rest of the vegetable oil, and set it over low heat. Pour in half the eggs, tilt the pan to spread them thin, and cook until the top is set, then flip and cook 30 seconds more. Slide it onto the board and make a second omelet with the rest.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 150, "timerLabel": "Each omelet", "look": "Yellow with no brown." },
+    { "id": "egg-done", "type": "doneness", "text": "Press the middle of each omelet with the spatula. It should be firm and dry all the way through, with no wet or runny egg. If it isn't, put it back over low heat for 30 seconds a side.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "look": "Firm and dry all the way through, no wet or runny egg." } },
+    { "id": "egg-strips", "text": "Let the omelets cool, stack them, and cut them into ½-inch strips.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "season-rice", "text": "Spread the rice in the large bowl. Pour the rice's sesame oil over it, sprinkle on the rice's salt and the sesame seeds, and fold it gently with the spatula until it's evenly seasoned and warm, not hot.", "safety": "solo" },
+    { "id": "spread", "text": "Lay a sheet of parchment on the board and a nori sheet on it, shiny side down, long edge toward you. With damp fingers, spread about ¾ cup of rice over it in a thin, even layer, leaving a 1-inch strip bare at the far edge.", "safety": "solo", "why": "thin-rice", "look": "You can see the seaweed through the rice in places." },
+    { "id": "fill", "text": "Lay a line of each filling across the rice about a third of the way up from the near edge: carrot, cucumber, spinach, and egg, side by side.", "safety": "solo", "why": "sticks" },
+    { "id": "roll", "text": "Lift the near edge of the parchment and roll the nori up and over the fillings, tucking it in tight. Keep rolling, pulling the parchment away as you go and squeezing gently, until the bare strip seals the roll. Set it seam side down. Make three more.", "safety": "solo", "why": "tight" },
+    { "id": "slice", "text": "Brush each roll lightly with the rolling sesame oil. Wipe the knife with a damp towel and slice each roll into ½-inch rounds with long, gentle strokes, wiping the blade between every few slices.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "wet-knife", "look": "Clean rounds with every filling showing." },
+    { "id": "serve", "text": "Serve the kimbap within 2 hours, or cover it and refrigerate it.", "safety": "solo", "why": "two-hours" }
+  ]
+}

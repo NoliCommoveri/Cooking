@@ -181,7 +181,29 @@
           { "q": "Why do you cut the pepper skin side down?", "choices": ["The knife skids on the shiny skin", "The skin is bitter", "It's faster"], "answer": 0, "explain": "Flesh side up, the blade bites right away." }
         ]
       },
-      "knowledge": { "title": "Read a recipe for timing; write a prep list; why a scale beats cups", "minutes": 35 },
+      "knowledge": {
+        "title": "Read a recipe for timing; write a prep list; why a scale beats cups",
+        "minutes": 35,
+        "body": [
+          "Professional cooks read a recipe all the way through before they pick up a knife. They're looking for three things: what has to be done first, what takes the longest, and where the waiting is. A recipe's steps are in the order you cook, not always the order you should start.",
+          "Look for the waits first. A pot of water takes 10 minutes or more to boil. Rice cooks for 18 minutes and rests for 10. Eggplant sweats in salt for 20. None of those need your hands, so they start first, and the cutting happens while they run.",
+          "Then add up the active time: the minutes your hands are busy. In vegetable lo mein, the julienne might take you 20 minutes this week, but the stove part is under 6. If the noodles were cooked before the knife work started, they'd sit and go gummy. So the order is: water on, sauce mixed, vegetables cut, then noodles, then the pan.",
+          "Work backward from when you want to eat. If dinner is at 6:00 and the recipe has 45 minutes of work and waiting, you start at 5:15, or 5:00 if you're new to the cut. Beginners are always slower than a recipe's time, and that's expected.",
+          "A prep list turns all that into a plan. Write each job on its own line in the order you'll do it, with a time beside the long ones: \"5:00 water on (12 min). 5:02 mix sauce. 5:05 julienne carrots and peppers (20 min). 5:25 noodles in (3 min).\" Cooks call having everything cut, measured, and ready before the heat goes on mise en place, French for \"everything in its place\". The prep list is how you get there.",
+          "Now the scale. A cup measures space, not how much food is in it. Scoop a cup of flour straight from the bag and it can weigh 150 grams; spoon it in lightly and it can be 120. That's a 25% difference from the same cup, enough to make bread dry or cookies spread. A scale reads 125 grams every time.",
+          "Weighing is also faster and cleaner. Set a bowl on the scale, press tare (or zero) so the bowl counts as nothing, and pour in the first ingredient. Press tare again and add the next. One bowl, no measuring cups to wash.",
+          "This week's drill weighs your trim, the peels, ends, and cores you cut away. Weighing it is how cooks measure waste: a careful julienne leaves less on the board, and over a year that's real food and money. This week's Beyond the Recipe, on gleaning, asks the same question from the other side: what's left over, and who can use it?"
+        ],
+        "quiz": [
+          { "q": "What do you look for first when you read a recipe for timing?", "choices": ["The waits, like boiling water or resting rice", "The last step", "The serving size"], "answer": 0, "explain": "Long waits start first, and the cutting happens while they run." },
+          { "q": "What is active time?", "choices": ["The minutes your hands are busy", "The time on the stove", "The time the food rests"], "answer": 0, "explain": "Waiting time doesn't need your hands." },
+          { "q": "Dinner is at 6:00 and a recipe takes 45 minutes. When do you start?", "choices": ["5:15, or earlier if the cut is new to you", "5:45", "6:00"], "answer": 0, "explain": "Work backward from when you want to eat, and leave room for being new." },
+          { "q": "What does mise en place mean?", "choices": ["Everything in its place, cut and measured before the heat goes on", "Clean as you go", "Cook in the right order"], "answer": 0, "explain": "The prep list is how you get there." },
+          { "q": "Why can a cup of flour be wrong?", "choices": ["How it's scooped changes how much is in the cup", "Cups shrink in the dishwasher", "Flour gets heavier over time"], "answer": 0, "explain": "The same cup can hold 120 to 150 grams." },
+          { "q": "What does the tare button do?", "choices": ["Sets the scale back to zero with the bowl on it", "Turns grams into cups", "Weighs the bowl"], "answer": 0, "explain": "Then the scale shows only what you add." },
+          { "q": "Why weigh your trim?", "choices": ["To see how much food a cut wastes", "To check the knife", "To season it"], "answer": 0, "explain": "A careful cut leaves less on the board." }
+        ]
+      },
       "sabbath": {
         "title": "Gleaning: leaving the edges of the field (Leviticus 19:9–10; Ruth 2)",
         "minutes": 45,
@@ -1221,7 +1243,6 @@
       "image": "dishes/bean-quesadillas.png",
       "safety": "adult-nearby",
       "minutes": 45,
-      "estimated": true,
       "about": "Flour tortillas crisped in a skillet around melted cheese, black beans, and diced onion and pepper, with salsa and sour cream.",
       "main": ["flour tortillas", "black beans", "cheddar", "onion", "bell pepper"],
       "method": "stove",
@@ -1234,7 +1255,7 @@
         "veggies": "some"
       }
     },
-    { "id": "rajma", "title": "Rajma", "cuisine": "indian", "skills": ["dicing", "flavor-base"], "skill": "A diced onion and tomato base", "art": "side", "image": "dishes/rajma.png", "safety": "adult-nearby", "minutes": 55, "estimated": true, "about": "North Indian kidney beans simmered in a thick, spiced onion-tomato gravy, served with rice.", "main": ["kidney beans", "onion", "tomatoes", "ginger and garlic", "rice"], "method": "stove", "tags": { "protein": "beans-lentils", "flavors": ["warm-spices", "rich-tomato"], "heat": "some", "budget": "$", "familiar": "new-ish", "veggies": "some" } },
+    { "id": "rajma", "title": "Rajma", "cuisine": "indian", "skills": ["dicing", "flavor-base"], "skill": "A diced onion and tomato base", "art": "side", "image": "dishes/rajma.png", "safety": "adult-nearby", "minutes": 60, "about": "North Indian kidney beans simmered in a thick, spiced onion-tomato gravy, served with rice.", "main": ["kidney beans", "onion", "tomatoes", "ginger and garlic", "rice"], "method": "stove", "tags": { "protein": "beans-lentils", "flavors": ["warm-spices", "rich-tomato"], "heat": "some", "budget": "$", "familiar": "new-ish", "veggies": "some" } },
     {
       "id": "aglio-e-olio",
       "title": "Spaghetti aglio e olio",
@@ -1245,7 +1266,6 @@
       "image": "dishes/aglio-e-olio.png",
       "safety": "adult-nearby",
       "minutes": 30,
-      "estimated": true,
       "about": "Spaghetti tossed in olive oil gently cooked with sliced garlic and red pepper flakes, finished with parsley and pasta water.",
       "main": ["spaghetti", "garlic", "olive oil", "parsley", "red pepper flakes"],
       "method": "stove",
@@ -1258,29 +1278,7 @@
         "veggies": "light"
       }
     },
-    {
-      "id": "scallion-oil-noodles",
-      "title": "Scallion oil noodles",
-      "cuisine": "chinese",
-      "skills": ["fine-chopping"],
-      "skill": "Cutting scallions fine and even",
-      "art": "side",
-      "image": "dishes/scallion-oil-noodles.png",
-      "safety": "adult-nearby",
-      "minutes": 35,
-      "estimated": true,
-      "about": "Shanghai-style noodles tossed in scallions fried slowly in oil until crisp, with soy sauce and a little sugar.",
-      "main": ["wheat noodles", "scallions", "soy sauce", "oil"],
-      "method": "stove",
-      "tags": {
-        "protein": "none",
-        "flavors": ["ginger-soy"],
-        "heat": "mild",
-        "budget": "$",
-        "familiar": "new-ish",
-        "veggies": "light"
-      }
-    },
+    { "id": "scallion-oil-noodles", "title": "Scallion oil noodles", "cuisine": "chinese", "skills": ["fine-chopping"], "skill": "Cutting scallions fine and even", "art": "side", "image": "dishes/scallion-oil-noodles.png", "safety": "adult-nearby", "minutes": 35, "about": "Shanghai-style noodles tossed in scallions fried slowly in oil until crisp, with soy sauce and a little sugar.", "main": ["wheat noodles", "scallions", "soy sauce", "oil"], "method": "stove", "tags": { "protein": "none", "flavors": ["ginger-soy"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
     {
       "id": "vegetable-lo-mein",
       "title": "Vegetable lo mein",
@@ -1290,8 +1288,7 @@
       "art": "side",
       "image": "dishes/vegetable-lo-mein.png",
       "safety": "adult-nearby",
-      "minutes": 40,
-      "estimated": true,
+      "minutes": 45,
       "about": "Soft egg noodles tossed with julienned carrots, peppers, cabbage, and green onion in a soy-ginger sauce.",
       "main": ["egg noodles", "carrots", "bell peppers", "cabbage", "soy sauce"],
       "method": "stove",
@@ -1304,29 +1301,7 @@
         "veggies": "lots"
       }
     },
-    {
-      "id": "kimbap",
-      "title": "Kimbap",
-      "cuisine": "korean",
-      "skills": ["julienne", "rolling-wrapping"],
-      "skill": "Julienned fillings, rolled tight",
-      "art": "side",
-      "image": "dishes/kimbap.png",
-      "safety": "adult-nearby",
-      "minutes": 75,
-      "estimated": true,
-      "about": "Korean rice rolls in seaweed, filled with julienned carrot and cucumber, spinach, and strips of thin omelet, then sliced.",
-      "main": ["short-grain rice", "nori", "carrot", "cucumber", "egg", "spinach"],
-      "method": "stove",
-      "tags": {
-        "protein": "eggs",
-        "flavors": ["ginger-soy"],
-        "heat": "mild",
-        "budget": "$$",
-        "familiar": "new-ish",
-        "veggies": "lots"
-      }
-    },
+    { "id": "kimbap", "title": "Kimbap", "cuisine": "korean", "skills": ["julienne", "rolling-wrapping"], "skill": "Julienned fillings, rolled tight", "art": "side", "image": "dishes/kimbap.png", "safety": "adult-nearby", "minutes": 75, "about": "Korean rice rolls in seaweed, filled with julienned carrot and cucumber, spinach, and strips of thin omelet, then sliced.", "main": ["short-grain rice", "nori", "carrot", "cucumber", "egg", "spinach"], "method": "stove", "tags": { "protein": "eggs", "flavors": ["ginger-soy"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "lots" } },
     {
       "id": "ajapsandali",
       "title": "Ajapsandali",
@@ -1336,8 +1311,7 @@
       "art": "side",
       "image": "dishes/ajapsandali.png",
       "safety": "adult-nearby",
-      "minutes": 70,
-      "estimated": true,
+      "minutes": 80,
       "about": "A Georgian stew of eggplant, peppers, tomato, potato, and onion, simmered soft and finished with plenty of herbs.",
       "main": ["eggplant", "bell peppers", "tomatoes", "potatoes", "cilantro and basil"],
       "method": "stove",

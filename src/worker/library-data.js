@@ -1334,6 +1334,112 @@ export const LIBRARY = {
     "pot-large",
     "wooden-spoon",
     "oven-mitts"
+   ],
+   "variations": [
+    {
+     "title": "Ratatouille",
+     "image": "img/dishes/ratatouille.webp",
+     "cuisine": "french",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, brown the eggplant in two batches so it doesn't crowd the pot, and use your biggest pot."
+       }
+      ]
+     },
+     "totalMinutes": 70,
+     "ingredients": [
+      {
+       "ingredient": "eggplant"
+      },
+      {
+       "ingredient": "zucchini"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "tomato"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "thyme-dried"
+      },
+      {
+       "ingredient": "oregano-dried"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "basil",
+       "optional": true
+      },
+      {
+       "ingredient": "baguette",
+       "optional": true
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "rich-tomato",
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "lots"
+     },
+     "tasteItems": {
+      "required": [
+       "eggplant",
+       "zucchini",
+       "bell-peppers",
+       "onions",
+       "garlic",
+       "tomatoes"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "colander",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "small-bowl",
+      "measuring-spoons",
+      "pot-large",
+      "wooden-spoon",
+      "oven-mitts"
+     ],
+     "id": "sp-4",
+     "level": "sp-4"
+    }
    ]
   },
   {
@@ -1455,6 +1561,125 @@ export const LIBRARY = {
     "wooden-spoon",
     "spoon",
     "ladle"
+   ],
+   "variations": [
+    {
+     "title": "Minestrone",
+     "image": "img/dishes/minestrone.webp",
+     "cuisine": "italian",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, you'll need a very big pot, at least 8 quarts. Or make it in two pots side by side."
+       }
+      ]
+     },
+     "totalMinutes": 60,
+     "ingredients": [
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "carrot"
+      },
+      {
+       "ingredient": "celery"
+      },
+      {
+       "ingredient": "zucchini"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "thyme-dried"
+      },
+      {
+       "ingredient": "oregano-dried"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "tomatoes-crushed"
+      },
+      {
+       "ingredient": "broth-vegetable"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "cannellini"
+      },
+      {
+       "ingredient": "pasta-small"
+      },
+      {
+       "ingredient": "parmesan",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "pasta-small",
+       "use": "pasta-small-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "lots"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "carrots",
+       "celery",
+       "zucchini",
+       "garlic",
+       "tomatoes"
+      ],
+      "optional": [
+       "sharp-cheese"
+      ]
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "vegetable-peeler",
+      "colander",
+      "can-opener",
+      "mixing-bowl-large",
+      "small-bowl",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "pot-large",
+      "wooden-spoon",
+      "spoon",
+      "ladle"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
+    }
    ]
   },
   {
@@ -2236,6 +2461,109 @@ export const LIBRARY = {
     "plate",
     "skillet-12",
     "spatula"
+   ],
+   "variations": [
+    {
+     "title": "Grilled cheese + tomato soup",
+     "image": "img/dishes/grilled-cheese-tomato-soup.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, the soup needs a very big pot, at least 8 quarts. Cook the sandwiches in two skillets side by side to save time."
+       }
+      ]
+     },
+     "totalMinutes": 45,
+     "ingredients": [
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "garlic-minced-jarred"
+      },
+      {
+       "ingredient": "tomatoes-crushed"
+      },
+      {
+       "ingredient": "broth-vegetable"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "milk-whole",
+       "optional": true
+      },
+      {
+       "ingredient": "bread-sandwich"
+      },
+      {
+       "ingredient": "cheese-sliced"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "basil",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "bread-sandwich",
+       "use": "bread-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "creamy-cheesy",
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "tomatoes"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "cutting-board",
+      "can-opener",
+      "pot-large",
+      "wooden-spoon",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "ladle",
+      "table-knife",
+      "plate",
+      "skillet-12",
+      "spatula",
+      "bread-knife"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
+    }
    ]
   },
   {
@@ -3359,6 +3687,108 @@ export const LIBRARY = {
       "thermometer"
      ],
      "id": "easy-prep"
+    },
+    {
+     "title": "Chicken fried rice",
+     "image": "img/dishes/chicken-fried-rice.webp",
+     "cuisine": "chinese",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "max": 8,
+      "notes": [
+       {
+        "from": 7,
+        "text": "For 7 or 8, the pan is very full. Fry the rice in two batches, and stir half the egg, chicken, and sauce into each."
+       }
+      ]
+     },
+     "totalMinutes": 45,
+     "ingredients": [
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "chicken-breast"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "green-onion"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "carrot"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "soy-sauce"
+      },
+      {
+       "ingredient": "sesame-oil"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "soy-sauce",
+       "use": "tamari",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "ginger-soy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "garlic",
+       "carrots",
+       "bell-peppers",
+       "sesame"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "small-bowl",
+      "mixing-bowl-medium",
+      "fork",
+      "measuring-cups",
+      "measuring-spoons",
+      "skillet-12",
+      "spatula",
+      "plate",
+      "thermometer"
+     ],
+     "id": "sp-4",
+     "level": "sp-4"
     }
    ]
   },
@@ -4830,6 +5260,244 @@ export const LIBRARY = {
     "ladle",
     "fork",
     "thermometer"
+   ]
+  },
+  {
+   "id": "chana-masala",
+   "version": 1,
+   "track": "core",
+   "unit": 3,
+   "title": "Chana masala",
+   "image": "img/dishes/chana-masala.webp",
+   "cuisine": "indian",
+   "skill": "Blooming spices, onion-tomato base",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "For more than 8, use your biggest pot, and give the onion a few extra minutes to turn golden."
+     }
+    ]
+   },
+   "totalMinutes": 55,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "turmeric-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "cayenne"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "chickpeas"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "garam-masala"
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    },
+    {
+     "ingredient": "lemon",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "beans-lentils",
+    "flavors": [
+     "warm-spices"
+    ],
+    "heat": "some",
+    "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic",
+     "ginger",
+     "hot-peppers",
+     "tomatoes"
+    ],
+    "optional": [
+     "cilantro",
+     "lemon-lime"
+    ]
+   },
+   "tools": [
+    "colander",
+    "saucepan-medium",
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "box-grater",
+    "spoon",
+    "plate",
+    "can-opener",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "pot-large",
+    "wooden-spoon",
+    "fork"
+   ],
+   "variations": [
+    {
+     "title": "Chana masala",
+     "image": "img/dishes/chana-masala.webp",
+     "cuisine": "indian",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, use your biggest pot, and give the onion a few extra minutes to turn golden."
+       }
+      ]
+     },
+     "totalMinutes": 55,
+     "ingredients": [
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "ginger-fresh"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "turmeric-ground"
+      },
+      {
+       "ingredient": "paprika-sweet"
+      },
+      {
+       "ingredient": "cayenne"
+      },
+      {
+       "ingredient": "tomatoes-crushed"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "chickpeas"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "garam-masala"
+      },
+      {
+       "ingredient": "cilantro",
+       "optional": true
+      },
+      {
+       "ingredient": "lemon",
+       "optional": true
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "some",
+      "budget": "$",
+      "familiar": "adventurous",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "garlic",
+       "ginger",
+       "hot-peppers",
+       "tomatoes"
+      ],
+      "optional": [
+       "cilantro",
+       "lemon-lime"
+      ]
+     },
+     "tools": [
+      "colander",
+      "saucepan-medium",
+      "chef-knife",
+      "cutting-board",
+      "small-bowl",
+      "box-grater",
+      "spoon",
+      "plate",
+      "can-opener",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "pot-large",
+      "wooden-spoon",
+      "fork"
+     ],
+     "id": "sp-4",
+     "level": "sp-4"
+    }
    ]
   },
   {
@@ -6663,6 +7331,761 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "bun-bowl",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Bún bowl with chicken",
+   "image": "img/dishes/bun-bowl.webp",
+   "cuisine": "vietnamese",
+   "skill": "Setting out a bowl's parts in small dishes",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Soak the noodles in two pots, or in the pot in two batches."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "rice-vermicelli"
+    },
+    {
+     "ingredient": "fish-sauce"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "rotisserie-chicken"
+    },
+    {
+     "ingredient": "lettuce-green-leaf"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "carrot-shredded"
+    },
+    {
+     "ingredient": "mint"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "peanuts-roasted",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "fish-sauce",
+     "use": "soy-sauce",
+     "reason": "fish"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "lemon-lime",
+     "cucumber",
+     "mint",
+     "cilantro"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "saucepan-medium",
+    "colander",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "small-bowl",
+    "mixing-bowl-large",
+    "spoon",
+    "fork",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "plate",
+    "tongs"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "caprese-sandwiches",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Caprese sandwiches",
+   "image": "img/dishes/caprese-sandwiches.webp",
+   "cuisine": "italian",
+   "skill": "Slicing soft foods with a paring knife",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Slice everything first, then build the sandwiches in a row, like an assembly line."
+     }
+    ]
+   },
+   "totalMinutes": 25,
+   "ingredients": [
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "mozzarella-fresh"
+    },
+    {
+     "ingredient": "basil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "ciabatta-rolls"
+    },
+    {
+     "ingredient": "olive-oil"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "ciabatta-rolls",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "bread-knife",
+    "plate",
+    "spoon",
+    "measuring-spoons"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "ful-medames",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Ful medames with pita chips",
+   "image": "img/dishes/ful-medames.webp",
+   "cuisine": "egyptian",
+   "skill": "Timing three parts together",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Bake the chips on two sheet pans, and warm the beans in the large pot."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "pita"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "fava-beans"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "salt"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pita",
+     "use": "tortilla-corn",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "cucumber",
+     "tomatoes",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "oven-mitts",
+    "pastry-brush",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "can-opener",
+    "saucepan-medium",
+    "wooden-spoon",
+    "fork",
+    "measuring-spoons",
+    "spoon"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "loaded-baked-potatoes",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Loaded baked potatoes",
+   "image": "img/dishes/loaded-baked-potatoes.webp",
+   "cuisine": "american",
+   "skill": "Setting every topping out first",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Microwave the potatoes 4 at a time, and add 2 minutes for each extra potato in a batch."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "potato-russet"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "cheddar-shredded"
+    },
+    {
+     "ingredient": "sour-cream"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "sour-cream-yogurt",
+     "onions"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "fork",
+    "plate",
+    "microwave",
+    "sheet-pan",
+    "oven-mitts",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "kitchen-towel",
+    "spoon"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "mini-pita-pizzas",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Mini pita pizzas",
+   "image": "img/dishes/mini-pita-pizzas.webp",
+   "cuisine": "italian",
+   "skill": "Halving or doubling a recipe for the family",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Use two sheet pans, one on each rack, and swap them halfway through."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "pita"
+    },
+    {
+     "ingredient": "pizza-sauce"
+    },
+    {
+     "ingredient": "mozzarella-shredded"
+    },
+    {
+     "ingredient": "bell-pepper-green"
+    },
+    {
+     "ingredient": "mushrooms"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "olive-oil"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "pita",
+     "use": "bread-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "bell-peppers"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "oven-mitts",
+    "measuring-cups",
+    "measuring-spoons",
+    "table-knife",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "small-bowl",
+    "spoon",
+    "pastry-brush"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "molletes",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Molletes",
+   "image": "img/dishes/molletes.webp",
+   "cuisine": "mexican",
+   "skill": "Using the oven with mitts on",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Use two sheet pans, one on each rack, and swap them halfway through the second bake."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "bolillo-rolls"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "refried-beans"
+    },
+    {
+     "ingredient": "monterey-jack"
+    },
+    {
+     "ingredient": "salsa"
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "cilantro"
+    ]
+   },
+   "tools": [
+    "oven-mitts",
+    "sheet-pan",
+    "cutting-board",
+    "paper-towels",
+    "bread-knife",
+    "table-knife",
+    "can-opener",
+    "small-bowl",
+    "spoon",
+    "measuring-cups",
+    "measuring-spoons"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "onigiri",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Onigiri with tuna",
+   "image": "img/dishes/onigiri.webp",
+   "cuisine": "japanese",
+   "skill": "Shaping rice with damp hands",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "One pouch of rice makes about 3 rice balls. Heat the pouches one or two at a time."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "rice-cooked-pouch"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "tuna-canned"
+    },
+    {
+     "ingredient": "mayonnaise"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "nori"
+    },
+    {
+     "ingredient": "cucumber"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "mayonnaise",
+     "cucumber"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "microwave",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "can-opener",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "plate"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "aglio-e-olio",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Spaghetti aglio e olio",
+   "image": "img/dishes/aglio-e-olio.webp",
+   "cuisine": "italian",
+   "skill": "Mincing garlic and parsley",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Toss the pasta in two batches, or in the large pot instead of the skillet. Crowded pasta won't turn glossy."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "spaghetti"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "chili-flakes"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "parmesan",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "spaghetti",
+     "use": "spaghetti-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic"
+    ],
+    "optional": [
+     "sharp-cheese"
+    ]
+   },
+   "tools": [
+    "pot-large",
+    "chef-knife",
+    "cutting-board",
+    "kitchen-towel",
+    "small-bowl",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "skillet-12",
+    "wooden-spoon",
+    "tongs"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "ajapsandali",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Ajapsandali",
+   "image": "img/dishes/ajapsandali.webp",
+   "cuisine": "georgian",
+   "skill": "Every vegetable diced evenly and timed",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "Brown the eggplant in three batches, and use the largest pot you have."
+     }
+    ]
+   },
+   "totalMinutes": 80,
+   "ingredients": [
+    {
+     "ingredient": "eggplant"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "potato-russet"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "jalapeno",
+     "optional": true
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "basil"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "eggplant",
+     "onions",
+     "bell-peppers",
+     "tomatoes",
+     "garlic",
+     "cilantro"
+    ],
+    "optional": [
+     "hot-peppers"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "vegetable-peeler",
+    "colander",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "plate",
+    "paper-towels",
+    "kitchen-towel",
+    "measuring-cups",
+    "measuring-spoons",
+    "pot-large",
+    "wooden-spoon",
+    "slotted-spoon",
+    "fork"
+   ],
+   "level": "sp-3"
+  },
+  {
    "id": "baked-salmon",
    "version": 1,
    "track": "core",
@@ -6772,6 +8195,104 @@ export const LIBRARY = {
     "spatula",
     "spoon",
     "fork"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "bean-quesadillas",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Black bean and vegetable quesadillas",
+   "image": "img/dishes/bean-quesadillas.webp",
+   "cuisine": "tex-mex",
+   "skill": "An even dice of onion and pepper",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Cook the quesadillas in batches and keep the finished ones warm on a sheet pan in a 200°F oven."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "black-beans"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "chili-powder"
+    },
+    {
+     "ingredient": "tortilla-flour"
+    },
+    {
+     "ingredient": "cheddar-shredded"
+    },
+    {
+     "ingredient": "salsa",
+     "optional": true
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "tortilla-flour",
+     "use": "tortilla-gluten-free",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "bell-peppers"
+    ],
+    "optional": [
+     "sour-cream-yogurt"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "can-opener",
+    "colander",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "wooden-spoon",
+    "fork",
+    "spatula",
+    "plate"
    ],
    "level": "sp-3"
   },
@@ -6981,6 +8502,111 @@ export const LIBRARY = {
    "level": "sp-3"
   },
   {
+   "id": "kimbap",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Kimbap",
+   "image": "img/dishes/kimbap.webp",
+   "cuisine": "korean",
+   "skill": "Julienned fillings, rolled tight",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Cook the rice in the large pot, and make one thin omelet for every two rolls."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "rice-short-grain"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "sesame-seeds"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "spinach-baby"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "nori"
+    },
+    {
+     "ingredient": "sesame-oil"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "sesame",
+     "carrots",
+     "cucumber",
+     "spinach-greens",
+     "garlic"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "colander",
+    "saucepan-medium",
+    "chef-knife",
+    "cutting-board",
+    "vegetable-peeler",
+    "spoon",
+    "skillet-nonstick-8",
+    "spatula",
+    "small-bowl",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "fork",
+    "plate",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "parchment",
+    "pastry-brush",
+    "kitchen-towel"
+   ],
+   "level": "sp-3"
+  },
+  {
    "id": "pan-seared-trout",
    "version": 1,
    "track": "core",
@@ -7058,6 +8684,115 @@ export const LIBRARY = {
     "small-bowl",
     "oven-mitts",
     "thermometer",
+    "fork"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "rajma",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Rajma",
+   "image": "img/dishes/rajma.webp",
+   "cuisine": "indian",
+   "skill": "A diced onion and tomato base",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 7,
+      "text": "Use the large pot for the rajma, and give the onions a few more minutes: more onion takes longer to brown."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "turmeric-ground"
+    },
+    {
+     "ingredient": "cayenne"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "kidney-beans"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "garam-masala"
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "tomatoes",
+     "ginger",
+     "hot-peppers"
+    ],
+    "optional": [
+     "cilantro"
+    ]
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "colander",
+    "can-opener",
+    "box-grater",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "saucepan-medium",
+    "pot-large",
+    "wooden-spoon",
+    "ladle",
     "fork"
    ],
    "level": "sp-3"
@@ -7146,6 +8881,79 @@ export const LIBRARY = {
     "cooling-rack",
     "chef-knife",
     "cutting-board"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "scallion-oil-noodles",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Scallion oil noodles",
+   "image": "img/dishes/scallion-oil-noodles.webp",
+   "cuisine": "chinese",
+   "skill": "Cutting scallions fine and even",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "The scallion oil keeps in a jar in the fridge for a week. Make a double batch and keep half."
+     }
+    ]
+   },
+   "totalMinutes": 35,
+   "ingredients": [
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "noodles-wheat"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-towel",
+    "chef-knife",
+    "cutting-board",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "slotted-spoon",
+    "heatproof-bowl",
+    "pot-large",
+    "colander",
+    "tongs"
    ],
    "level": "sp-3"
   },
@@ -7518,6 +9326,690 @@ export const LIBRARY = {
     "thermometer"
    ],
    "level": "sp-3"
+  },
+  {
+   "id": "vegetable-lo-mein",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Vegetable lo mein",
+   "image": "img/dishes/vegetable-lo-mein.webp",
+   "cuisine": "chinese-american",
+   "skill": "Julienned carrots and peppers",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Stir-fry the vegetables in two batches. A crowded pan steams them instead of searing."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "noodles-egg"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "bell-pepper-green"
+    },
+    {
+     "ingredient": "cabbage-green"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "water"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    },
+    {
+     "for": "noodles-egg",
+     "use": "rice-vermicelli",
+     "reason": "gluten"
+    },
+    {
+     "for": "noodles-egg",
+     "use": "noodles-wheat",
+     "reason": "egg"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "sesame",
+     "carrots",
+     "bell-peppers",
+     "onions",
+     "garlic",
+     "ginger"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "pot-large",
+    "colander",
+    "chef-knife",
+    "cutting-board",
+    "vegetable-peeler",
+    "box-grater",
+    "small-bowl",
+    "mixing-bowl-large",
+    "measuring-spoons",
+    "skillet-12",
+    "tongs",
+    "wooden-spoon"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "bibimbap",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Bibimbap",
+   "image": "img/dishes/bibimbap.webp",
+   "cuisine": "korean",
+   "skill": "Each topping cut and cooked on its own, timed",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Cook each topping in batches no bigger than the recipe's, and fry the eggs two at a time."
+     }
+    ]
+   },
+   "totalMinutes": 120,
+   "ingredients": [
+    {
+     "ingredient": "rice-short-grain"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "beef-ribeye"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "spinach-baby"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "zucchini"
+    },
+    {
+     "ingredient": "mushrooms"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "sesame-seeds"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "gochujang"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "vinegar-rice"
+    },
+    {
+     "ingredient": "water"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "sesame",
+     "garlic",
+     "spinach-greens",
+     "carrots",
+     "zucchini"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "colander",
+    "saucepan-medium",
+    "pot-large",
+    "chef-knife",
+    "cutting-board",
+    "kitchen-scale",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "skillet-12",
+    "tongs",
+    "spatula",
+    "thermometer",
+    "paper-towels",
+    "plate"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "bo-luc-lac",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Bò lúc lắc",
+   "image": "img/dishes/bo-luc-lac.webp",
+   "cuisine": "vietnamese",
+   "skill": "Weighing the trim; searing cubes",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Sear the beef in batches of about 340 g. More than that in the pan, and it boils in its own juice."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "beef-sirloin"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "fish-sauce"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "onion-red"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "watercress"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    },
+    {
+     "for": "fish-sauce",
+     "use": "soy-sauce",
+     "reason": "fish"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "tomatoes",
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-scale",
+    "colander",
+    "saucepan-medium",
+    "chef-knife",
+    "cutting-board",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "skillet-12",
+    "tongs",
+    "thermometer",
+    "plate"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "chicken-enchiladas",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Chicken enchiladas",
+   "image": "img/dishes/chicken-enchiladas.webp",
+   "cuisine": "mexican",
+   "skill": "Scaling a recipe from 4 to 12 by hand",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 9,
+      "text": "One 9-by-13-inch dish holds 12 enchiladas, enough for 4. For 12 people, use three dishes and rotate them halfway through baking."
+     }
+    ]
+   },
+   "totalMinutes": 120,
+   "ingredients": [
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "chiles-guajillo"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "onion-white"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "tomato-paste"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "tortilla-corn"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "monterey-jack"
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic"
+    ],
+    "optional": [
+     "cilantro",
+     "sour-cream-yogurt"
+    ]
+   },
+   "tools": [
+    "kitchen-scale",
+    "saucepan-medium",
+    "pot-large",
+    "skillet-12",
+    "heatproof-bowl",
+    "chef-knife",
+    "cutting-board",
+    "immersion-blender",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "tongs",
+    "fork",
+    "thermometer",
+    "baking-dish",
+    "foil",
+    "oven-mitts",
+    "plate"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "salade-nicoise",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Salade niçoise with seared tuna",
+   "image": "img/dishes/salade-nicoise.webp",
+   "cuisine": "french",
+   "skill": "Four parts, hot and cold, on one timeline",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Sear the tuna in two batches, and cook the eggs in a wider pot so they sit in one layer."
+     }
+    ]
+   },
+   "totalMinutes": 90,
+   "ingredients": [
+    {
+     "ingredient": "potato-baby"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "green-beans"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "tuna-steak"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "vinegar-red-wine"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "lettuce-butter"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "olives-kalamata"
+    },
+    {
+     "ingredient": "capers",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "mustard",
+     "tomatoes"
+    ],
+    "optional": [
+     "capers"
+    ]
+   },
+   "tools": [
+    "pot-large",
+    "saucepan-medium",
+    "slotted-spoon",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "whisk",
+    "colander",
+    "chef-knife",
+    "cutting-board",
+    "measuring-spoons",
+    "measuring-cups",
+    "kitchen-scale",
+    "paper-towels",
+    "skillet-12",
+    "tongs",
+    "thermometer",
+    "plate"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "steak-fajitas",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Steak fajitas",
+   "image": "img/dishes/steak-fajitas.webp",
+   "cuisine": "tex-mex",
+   "skill": "Weighing in grams and finding the yield",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "notes": [
+     {
+      "from": 5,
+      "text": "Sear the steak and the vegetables in batches; a crowded pan steams instead of charring."
+     }
+    ]
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "beef-flank"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "chili-powder"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "bell-pepper-green"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "tortilla-flour"
+    },
+    {
+     "ingredient": "salsa",
+     "optional": true
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "tortilla-flour",
+     "use": "tortilla-corn",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "lemon-lime",
+     "garlic",
+     "bell-peppers",
+     "onions"
+    ],
+    "optional": [
+     "sour-cream-yogurt"
+    ]
+   },
+   "tools": [
+    "kitchen-scale",
+    "plate",
+    "chef-knife",
+    "cutting-board",
+    "shallow-dish",
+    "small-bowl",
+    "measuring-spoons",
+    "measuring-cups",
+    "paper-towels",
+    "skillet-12",
+    "tongs",
+    "thermometer",
+    "foil"
+   ],
+   "level": "sp-4"
   }
  ],
  "ingredients": {
@@ -8246,6 +10738,10 @@ export const LIBRARY = {
     "meat"
    ]
   },
+  "green-beans": {
+   "name": "Fresh green beans",
+   "contains": []
+  },
   "beef-chuck": {
    "name": "Boneless beef chuck roast",
    "contains": [
@@ -8287,6 +10783,135 @@ export const LIBRARY = {
    "contains": [
     "fish"
    ]
+  },
+  "kidney-beans": {
+   "name": "Red kidney beans (canned)",
+   "contains": []
+  },
+  "noodles-egg": {
+   "name": "Lo mein egg noodles",
+   "contains": [
+    "gluten",
+    "egg"
+   ]
+  },
+  "noodles-wheat": {
+   "name": "Thin wheat noodles (Shanghai or plain lo mein)",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "nori": {
+   "name": "Roasted seaweed sheets (nori, for kimbap or sushi)",
+   "contains": []
+  },
+  "rice-short-grain": {
+   "name": "Short-grain white rice (sushi rice)",
+   "contains": []
+  },
+  "cabbage-green": {
+   "name": "Green cabbage",
+   "contains": []
+  },
+  "mozzarella-fresh": {
+   "name": "Fresh mozzarella",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "mozzarella-shredded": {
+   "name": "Shredded mozzarella cheese",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "monterey-jack": {
+   "name": "Shredded Monterey Jack cheese",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "ciabatta-rolls": {
+   "name": "Ciabatta rolls",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "bolillo-rolls": {
+   "name": "Bolillo rolls (or small French rolls)",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "rice-cooked-pouch": {
+   "name": "Cooked short-grain rice (microwave pouch)",
+   "contains": []
+  },
+  "rotisserie-chicken": {
+   "name": "Rotisserie chicken",
+   "contains": [
+    "meat"
+   ]
+  },
+  "carrot-shredded": {
+   "name": "Shredded carrots",
+   "contains": []
+  },
+  "fish-sauce": {
+   "name": "Fish sauce",
+   "contains": [
+    "fish"
+   ]
+  },
+  "peanuts-roasted": {
+   "name": "Roasted peanuts, chopped",
+   "contains": [
+    "peanuts"
+   ]
+  },
+  "mushrooms": {
+   "name": "White mushrooms",
+   "contains": []
+  },
+  "fava-beans": {
+   "name": "Fava beans (canned, ful medames)",
+   "contains": []
+  },
+  "pizza-sauce": {
+   "name": "Pizza sauce",
+   "contains": []
+  },
+  "tuna-steak": {
+   "name": "Tuna steaks (about 1 inch thick)",
+   "contains": [
+    "fish"
+   ]
+  },
+  "potato-baby": {
+   "name": "Baby potatoes",
+   "contains": []
+  },
+  "olives-kalamata": {
+   "name": "Pitted Kalamata or Niçoise olives",
+   "contains": []
+  },
+  "watercress": {
+   "name": "Watercress",
+   "contains": []
+  },
+  "gochujang": {
+   "name": "Gochujang (Korean chili paste)",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "chiles-guajillo": {
+   "name": "Dried guajillo chiles",
+   "contains": []
+  },
+  "chickpeas": {
+   "name": "Chickpeas (canned)",
+   "contains": []
   }
  },
  "cuisines": {
@@ -8359,14 +10984,33 @@ export const LIBRARY = {
   "cottage-cheese-crescents": "A2"
  },
  "levelLabels": {
+  "bun-bowl": "A5",
+  "caprese-sandwiches": "A1",
+  "ful-medames": "A7",
+  "loaded-baked-potatoes": "A4",
+  "mini-pita-pizzas": "A6",
+  "molletes": "A3",
+  "onigiri": "A2",
+  "aglio-e-olio": "K3",
+  "ajapsandali": "K7",
   "baked-salmon": "K13",
+  "bean-quesadillas": "K1",
   "beef-picadillo": "K30",
   "dinner-rolls": "K19",
+  "kimbap": "K6",
   "pan-seared-trout": "K33",
+  "rajma": "K2",
   "sandwich-loaf": "K17",
+  "scallion-oil-noodles": "K4",
   "steamed-fish": "K23",
   "tabbouleh": "K9",
-  "thick-burgers": "K11"
+  "thick-burgers": "K11",
+  "vegetable-lo-mein": "K5",
+  "bibimbap": "C5",
+  "bo-luc-lac": "C2",
+  "chicken-enchiladas": "C3",
+  "salade-nicoise": "C4",
+  "steak-fajitas": "C1"
  },
  "dietTags": [
   "nuts",
@@ -9181,7 +11825,7 @@ export const LIBRARY = {
     "blooming-spices",
     "flavor-base"
    ],
-   "minutes": 45,
+   "minutes": 55,
    "cuisine": "indian",
    "pickOne": "blooming-spices",
    "tags": {
@@ -10770,15 +13414,165 @@ export const LIBRARY = {
      "explore": "onigiri",
      "drill": {
       "title": "Bridge and claw grips on soft foods",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Two grips keep your fingers safe on everything you'll cut in this unit. Practice them today on soft foods with a paring knife, slowly, until they feel natural. An adult is nearby the whole time."
+      ],
+      "steps": [
+       "Lay a damp paper towel under the cutting board so it can't slide.",
+       "The bridge: set a banana on the board. Make a bridge over it with your hand, thumb on one side and fingers on the other.",
+       "Put the paring knife under the bridge and cut the banana in half. The blade never goes near your fingers.",
+       "The claw: lay one half flat side down. Curl your fingertips under and rest your knuckles against the side of the blade.",
+       "Slice the banana, moving your claw hand back a small step after each cut.",
+       "Do the same with a cucumber: bridge to halve it the long way, then claw to slice it into half-moons.",
+       "Slice 5 strawberries with the claw grip.",
+       "Set the knife down flat at the top of the board, blade away. Eat your practice, or save it for a snack."
+      ],
+      "quiz": [
+       {
+        "q": "When do you use the bridge grip?",
+        "choices": [
+         "To cut something round in half",
+         "To slice thin",
+         "To peel"
+        ],
+        "answer": 0,
+        "explain": "The knife goes under the bridge."
+       },
+       {
+        "q": "In the claw grip, what guides the blade?",
+        "choices": [
+         "Your knuckles",
+         "Your fingertips",
+         "Your thumb"
+        ],
+        "answer": 0,
+        "explain": "Fingertips stay curled under."
+       },
+       {
+        "q": "Why cut a cucumber in half before slicing it?",
+        "choices": [
+         "So it lies flat and can't roll",
+         "It's easier to eat",
+         "It cooks faster"
+        ],
+        "answer": 0,
+        "explain": "A flat side down holds still."
+       }
+      ]
      },
      "knowledge": {
       "title": "Knife rules: grip, direction, where to set it down",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A knife is safe when you follow a few rules every time, the same way every time. They're simple, and they matter more than speed.",
+       "Grip: hold the handle firmly, with all your fingers wrapped around it. Your other hand holds the food in a bridge or a claw, never flat in front of the blade.",
+       "Direction: cut down and away from you, toward the board. Never cut toward your hand, your body, or something you're holding in the air.",
+       "Where it goes: when you stop cutting, even for a moment, lay the knife flat at the top of the board with the blade facing away. Never leave it at the edge of the counter, under a towel or food, or in a sink of soapy water, where someone can't see it.",
+       "If it falls: step back and let it fall. Never try to catch a falling knife.",
+       "Carry and wash: carry a knife by the handle, point down, at your side. Wash it on its own, holding the handle, blade away from you, and dry it right away."
+      ],
+      "quiz": [
+       {
+        "q": "Which way do you cut?",
+        "choices": [
+         "Down and away, toward the board",
+         "Toward your hand",
+         "In the air"
+        ],
+        "answer": 0,
+        "explain": "The board catches the blade."
+       },
+       {
+        "q": "Where does the knife go when you stop cutting?",
+        "choices": [
+         "Flat at the top of the board, blade away",
+         "In the sink",
+         "At the edge of the counter"
+        ],
+        "answer": 0,
+        "explain": "Where everyone can see it."
+       },
+       {
+        "q": "A knife falls off the counter. What do you do?",
+        "choices": [
+         "Step back and let it fall",
+         "Catch it",
+         "Grab it with a towel"
+        ],
+        "answer": 0,
+        "explain": "Never catch a falling knife."
+       },
+       {
+        "q": "Why not put a knife in a sink of soapy water?",
+        "choices": [
+         "Someone could reach in and not see it",
+         "It rusts",
+         "It gets dull"
+        ],
+        "answer": 0,
+        "explain": "Wash it on its own instead."
+       },
+       {
+        "q": "How do you carry a knife?",
+        "choices": [
+         "By the handle, point down, at your side",
+         "Point up",
+         "By the blade"
+        ],
+        "answer": 0,
+        "explain": "So it points at no one."
+       }
+      ]
      },
      "sabbath": {
       "title": "Wash and cut vegetables ahead for the week",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A few minutes washing and cutting fruit and vegetables on one day saves time all week, and makes a healthy snack the easy choice.",
+       "Some keep well washed and cut: bell pepper strips, snap peas, and washed lettuce last 3 to 5 days in the fridge. Others are best cut on the day: tomatoes go mealy, and cucumbers go soft. Rinse berries just before you eat them, or they turn mushy.",
+       "A folded paper towel in the container soaks up extra water, which is what makes cut vegetables slimy."
+      ],
+      "steps": [
+       "With an adult, pick two or three vegetables your family eats as snacks or in lunches.",
+       "Wash them, and dry them well with a towel or paper towels.",
+       "Cut the soft ones with the paring knife, using the bridge and the claw. Leave hard vegetables like carrots whole for now.",
+       "Line each container with a folded paper towel and pack one vegetable in each.",
+       "Label each with what it is and today's date, and put them in the fridge.",
+       "Check them in 3 days: which kept best?"
+      ],
+      "quiz": [
+       {
+        "q": "Why put a paper towel in the container?",
+        "choices": [
+         "It soaks up extra water",
+         "It keeps them cold",
+         "It adds flavor"
+        ],
+        "answer": 0,
+        "explain": "Water makes cut vegetables slimy."
+       },
+       {
+        "q": "Which is best cut on the day you eat it?",
+        "choices": [
+         "Tomato",
+         "Bell pepper",
+         "Snap peas"
+        ],
+        "answer": 0,
+        "explain": "Cut tomatoes turn mealy."
+       },
+       {
+        "q": "When should berries be rinsed?",
+        "choices": [
+         "Just before eating",
+         "A week ahead",
+         "Never"
+        ],
+        "answer": 0,
+        "explain": "Washed early, they go mushy."
+       }
+      ]
      }
     },
     {
@@ -10790,15 +13584,162 @@ export const LIBRARY = {
      "explore": "molletes",
      "drill": {
       "title": "Mitts on; handles in; pull out an oven rack safely",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Today you'll practice three habits until they're automatic: mitts on, handles in, and a rack pulled out before the pan is lifted. Start with a cold oven, then do it again with the oven warm. An adult is beside you."
+      ],
+      "steps": [
+       "Check your oven mitts are dry. Put one on each hand.",
+       "Set an empty pot on each burner of the cold stove. Turn every handle in, so none sticks out past the edge.",
+       "Walk past the stove and check: could your hip or sleeve catch a handle?",
+       "With the oven cold, move a rack to the middle. Put an empty sheet pan on it.",
+       "Mitts on: open the door, pull the rack out partway, lift the pan straight up, and set it on the stovetop. Push the rack in and close the door.",
+       "Now heat the oven to 200°F. When it's hot, do step 5 again, slowly.",
+       "Turn off the oven. Leave the pan on the stovetop until it's cool to the touch."
+      ],
+      "quiz": [
+       {
+        "q": "Which way do pot handles point?",
+        "choices": [
+         "In, over the stove",
+         "Out, past the edge",
+         "Toward you"
+        ],
+        "answer": 0,
+        "explain": "So no one bumps them."
+       },
+       {
+        "q": "Why pull the rack out before lifting the pan?",
+        "choices": [
+         "So your arms stay away from the hot oven walls",
+         "It's faster",
+         "The pan is lighter"
+        ],
+        "answer": 0,
+        "explain": "Lift straight up, then out."
+       },
+       {
+        "q": "Why must mitts be dry?",
+        "choices": [
+         "Heat goes through wet cloth as steam",
+         "They grip better",
+         "They last longer"
+        ],
+        "answer": 0,
+        "explain": "A damp mitt burns in a second."
+       }
+      ]
      },
      "knowledge": {
       "title": "Burns and scalds; a lid on a pan fire, never water",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Most kitchen burns come from things you can see coming: a pot handle sticking out, a wet oven mitt, steam from a lid, or a splash of hot oil. A burn is from something hot and dry; a scald is from hot liquid or steam.",
+       "If you get a small burn: hold it under cool running water for at least 10 minutes, and tell an adult. Don't use ice, butter, or toothpaste. They trap the heat or damage the skin. A burn that's large, blistered, or on the face or hands needs an adult right away, and maybe a doctor.",
+       "A pan fire is usually oil that got too hot. Never throw water on it: water hits burning oil and explodes it into a ball of flame. Instead, an adult turns off the burner and slides a lid over the pan, which takes away the air the fire needs. Leave the lid on until the pan is cold. Never carry a burning pan.",
+       "An oven fire: keep the door closed and turn the oven off. The fire runs out of air. If any fire doesn't go out right away, everyone leaves the house and calls 911."
+      ],
+      "quiz": [
+       {
+        "q": "What do you do for a small burn?",
+        "choices": [
+         "Cool running water for at least 10 minutes",
+         "Put ice on it",
+         "Rub butter on it"
+        ],
+        "answer": 0,
+        "explain": "And tell an adult."
+       },
+       {
+        "q": "Why never put water on a pan fire?",
+        "choices": [
+         "It explodes the burning oil into flame",
+         "It cools too slowly",
+         "It makes smoke"
+        ],
+        "answer": 0,
+        "explain": "Water and hot oil don't mix."
+       },
+       {
+        "q": "How do you put out a pan fire?",
+        "choices": [
+         "Turn off the burner and slide a lid over the pan",
+         "Carry it to the sink",
+         "Blow on it"
+        ],
+        "answer": 0,
+        "explain": "No air, no fire."
+       },
+       {
+        "q": "Something's burning in the oven. What do you do?",
+        "choices": [
+         "Keep the door closed and turn the oven off",
+         "Open the door to look",
+         "Throw water in"
+        ],
+        "answer": 0,
+        "explain": "Opening it feeds the fire air."
+       },
+       {
+        "q": "What's a scald?",
+        "choices": [
+         "A burn from hot liquid or steam",
+         "A cut",
+         "A burn from a dry pan"
+        ],
+        "answer": 0,
+        "explain": "Steam from a lid is a common one."
+       }
+      ]
      },
      "sabbath": {
       "title": "Make a pot of soup ahead and reheat it",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Soup is one of the best foods to make ahead. Many soups taste even better the next day.",
+       "The safe way to keep it: cool the soup within 2 hours of cooking. Pour it into shallow containers, no more than 2 inches deep, so it cools fast in the fridge. It keeps 3 to 4 days.",
+       "To reheat, warm it in a pot over medium heat, stirring, until it's steaming all the way through and bubbling at the edges. Only reheat what you'll eat, and reheat it once."
+      ],
+      "steps": [
+       "Make this week's tomato soup, or a pot of soup with an adult.",
+       "Let it cool on the stovetop for no more than 30 minutes, lid off.",
+       "Ladle it into shallow containers. Label each with the soup's name and the date.",
+       "Put them in the fridge, uncovered until cold, then cover them.",
+       "Later in the week, reheat one container in a pot until steaming, stirring often.",
+       "Taste it: does it taste the same as the first day?"
+      ],
+      "quiz": [
+       {
+        "q": "How soon should cooked soup go in the fridge?",
+        "choices": [
+         "Within 2 hours",
+         "The next day",
+         "Whenever"
+        ],
+        "answer": 0,
+        "explain": "Then germs don't have time to grow."
+       },
+       {
+        "q": "Why shallow containers?",
+        "choices": [
+         "The soup cools faster",
+         "They stack",
+         "They're cheaper"
+        ],
+        "answer": 0,
+        "explain": "No more than 2 inches deep."
+       },
+       {
+        "q": "How hot should reheated soup be?",
+        "choices": [
+         "Steaming all the way through",
+         "Just warm",
+         "Room temperature"
+        ],
+        "answer": 0,
+        "explain": "Bubbling at the edges."
+       }
+      ]
      }
     },
     {
@@ -10810,15 +13751,162 @@ export const LIBRARY = {
      "explore": "bun-bowl",
      "drill": {
       "title": "Set out a recipe's mise en place in small bowls; clean as you go",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Mise en place, French for \"everything in its place,\" means setting out every ingredient and tool before you start cooking. Today you'll practice it with this week's recipe, and clean as you go."
+      ],
+      "steps": [
+       "Read this week's recipe all the way through.",
+       "Set out every tool it needs on the counter.",
+       "Measure each ingredient into its own small bowl or cup. Line the bowls up in the order the recipe uses them.",
+       "Put each package or jar away as soon as you've measured from it.",
+       "Wipe the counter and the board before you start cooking.",
+       "Cook the recipe. Each time you wait, wash a dish or put something away.",
+       "When you finish: is the kitchen clean, or nearly?"
+      ],
+      "quiz": [
+       {
+        "q": "What does mise en place mean?",
+        "choices": [
+         "Everything in its place",
+         "Cook fast",
+         "Clean the kitchen"
+        ],
+        "answer": 0,
+        "explain": "Set out before you start."
+       },
+       {
+        "q": "When does a package go back in the cupboard?",
+        "choices": [
+         "As soon as you've measured from it",
+         "At the end",
+         "Never"
+        ],
+        "answer": 0,
+        "explain": "Clean as you go."
+       },
+       {
+        "q": "What can you do while food cooks?",
+        "choices": [
+         "Wash a dish or put something away",
+         "Nothing",
+         "Leave the kitchen"
+        ],
+        "answer": 0,
+        "explain": "Waiting time is cleaning time."
+       }
+      ]
      },
      "knowledge": {
       "title": "Parts of a recipe: yield, ingredients, steps, abbreviations",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Every recipe is written in the same parts. Knowing them means you can read any recipe, from any book or website.",
+       "The title and the yield come first. The yield says how much it makes: \"Serves 4\" or \"Makes 12.\" The time tells you how long it takes, start to finish.",
+       "The ingredients are listed in the order you use them. Watch the words after each one: \"1 cup onion, chopped\" means measure, then chop. \"1 cup chopped onion\" means chop, then measure. They're different amounts.",
+       "The steps say what to do, in order. Read them all before you start, so nothing surprises you.",
+       "Recipes shorten common words: tsp or t is teaspoon; tbsp or T is tablespoon (3 teaspoons); c is cup; oz is ounce; lb is pound; fl oz is fluid ounce, for liquids; pkg is package; and °F is degrees Fahrenheit."
+      ],
+      "quiz": [
+       {
+        "q": "What does the yield tell you?",
+        "choices": [
+         "How much the recipe makes",
+         "How long it takes",
+         "What it costs"
+        ],
+        "answer": 0,
+        "explain": "\"Serves 4\" or \"Makes 12.\""
+       },
+       {
+        "q": "What does tbsp mean?",
+        "choices": [
+         "Tablespoon",
+         "Teaspoon",
+         "Tub"
+        ],
+        "answer": 0,
+        "explain": "A big T is a tablespoon too."
+       },
+       {
+        "q": "How many teaspoons are in a tablespoon?",
+        "choices": [
+         "3",
+         "2",
+         "4"
+        ],
+        "answer": 0,
+        "explain": "3 teaspoons = 1 tablespoon."
+       },
+       {
+        "q": "\"1 cup onion, chopped\" means:",
+        "choices": [
+         "Measure 1 cup, then chop it",
+         "Chop it, then measure 1 cup",
+         "Use a cup of any onion"
+        ],
+        "answer": 0,
+        "explain": "The comma means do it after measuring."
+       },
+       {
+        "q": "Why read the whole recipe before you start?",
+        "choices": [
+         "So nothing surprises you",
+         "To count the steps",
+         "To find the photo"
+        ],
+        "answer": 0,
+        "explain": "Then you know what's coming."
+       }
+      ]
      },
      "sabbath": {
       "title": "Gleaning: Ruth in the fields (Ruth 2)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "God's law built care for the poor into the harvest. Farmers were told not to cut the grain at the very edges of their fields, and not to go back for what they dropped. What was left was for the poor and for foreigners to gather (Leviticus 19:9–10). Gathering it is called gleaning.",
+       "Ruth was a widow from Moab who came to Bethlehem with her mother-in-law, Naomi, who was poor. Ruth went to glean barley in the field of Boaz, a relative of Naomi's. Boaz told his workers to let her glean freely, and even to pull some stalks out of the bundles on purpose for her (Ruth 2:15–16). By evening she had enough barley to feed them both.",
+       "Gleaning let people work for their own food, and let farmers give by leaving, not only by handing out."
+      ],
+      "steps": [
+       "Read Ruth 2 with an adult.",
+       "Answer out loud or in writing: who was the gleaning for?",
+       "Answer: what did Boaz do that was more than the law asked?",
+       "With your family, choose one way to \"leave the edges\" this week, like making extra of a meal for someone, or giving food to a food bank.",
+       "Write it down, and do it if you can."
+      ],
+      "quiz": [
+       {
+        "q": "What is gleaning?",
+        "choices": [
+         "Gathering what's left in a field after the harvest",
+         "Planting seeds",
+         "Selling grain"
+        ],
+        "answer": 0,
+        "explain": "It was left for the poor."
+       },
+       {
+        "q": "Whose field did Ruth glean in?",
+        "choices": [
+         "Boaz's",
+         "Naomi's",
+         "Her own"
+        ],
+        "answer": 0,
+        "explain": "Boaz was Naomi's relative."
+       },
+       {
+        "q": "What did Boaz tell his workers to do?",
+        "choices": [
+         "Pull out stalks on purpose for Ruth",
+         "Send her away",
+         "Charge her"
+        ],
+        "answer": 0,
+        "explain": "Ruth 2:15–16."
+       }
+      ]
      }
     },
     {
@@ -10831,15 +13919,162 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Measure dry vs. wet; level a cup",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Dry and wet ingredients are measured in different cups, in different ways. Today you'll learn both and see why it matters."
+      ],
+      "steps": [
+       "Dry: spoon flour into a dry measuring cup until it's heaped. Don't press or shake it.",
+       "Sweep the flat side of a table knife across the top to level it. That's 1 cup.",
+       "Now scoop a cup of flour straight from the bag and press it down. Compare the two cups on a kitchen scale, if you have one.",
+       "Wet: set the liquid measuring cup on the counter. Pour in water to the 1-cup line.",
+       "Bend down so your eyes are level with the line. Is it exactly on it?",
+       "Spoons: fill a teaspoon with salt and level it with the knife. Do the same with a tablespoon.",
+       "Pour the flour back, and wipe up."
+      ],
+      "quiz": [
+       {
+        "q": "How do you measure flour?",
+        "choices": [
+         "Spoon it in loosely and level it",
+         "Scoop and press",
+         "Shake it down"
+        ],
+        "answer": 0,
+        "explain": "Pressing packs in too much."
+       },
+       {
+        "q": "How do you read a liquid measuring cup?",
+        "choices": [
+         "At eye level, on the counter",
+         "From above",
+         "Holding it up"
+        ],
+        "answer": 0,
+        "explain": "From above, it looks fuller."
+       },
+       {
+        "q": "What levels a measuring cup or spoon?",
+        "choices": [
+         "The flat side of a table knife",
+         "Your finger",
+         "A spoon"
+        ],
+        "answer": 0,
+        "explain": "Sweep it across the top."
+       }
+      ]
      },
      "knowledge": {
       "title": "Halving and doubling a recipe",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A recipe makes a set amount, but your family might need more or less. Halving means using half of every amount. Doubling means using two times every amount.",
+       "Some amounts are easy: 1 cup doubled is 2 cups; 1 cup halved is ½ cup. Others need a conversion. It helps to know: 3 teaspoons = 1 tablespoon; 4 tablespoons = ¼ cup; 16 tablespoons = 1 cup.",
+       "So half of 1 tablespoon is 1½ teaspoons. Half of ¼ cup is 2 tablespoons. Half of ⅓ cup is 2 tablespoons plus 2 teaspoons.",
+       "Half an egg: beat one egg in a cup and use half of it, about 2 tablespoons.",
+       "Some things don't change the same way. Cooking time stays about the same when you double: 8 pizzas take as long to bake as 4, as long as they fit on the pans. A bigger batch may need a bigger pot or two pans. Write your new amounts down before you start."
+      ],
+      "quiz": [
+       {
+        "q": "How many tablespoons in ¼ cup?",
+        "choices": [
+         "4",
+         "2",
+         "8"
+        ],
+        "answer": 0,
+        "explain": "16 tablespoons = 1 cup."
+       },
+       {
+        "q": "What's half of 1 tablespoon?",
+        "choices": [
+         "1½ teaspoons",
+         "1 teaspoon",
+         "2 teaspoons"
+        ],
+        "answer": 0,
+        "explain": "3 teaspoons = 1 tablespoon."
+       },
+       {
+        "q": "You double a pizza recipe. How long do they bake?",
+        "choices": [
+         "About the same time",
+         "Twice as long",
+         "Half as long"
+        ],
+        "answer": 0,
+        "explain": "If they fit on the pans."
+       },
+       {
+        "q": "How do you use half an egg?",
+        "choices": [
+         "Beat it and use about half",
+         "Cut it in half",
+         "Use the yolk only"
+        ],
+        "answer": 0,
+        "explain": "About 2 tablespoons."
+       },
+       {
+        "q": "When do you write down the new amounts?",
+        "choices": [
+         "Before you start",
+         "While cooking",
+         "After"
+        ],
+        "answer": 0,
+        "explain": "So your hands stay free."
+       }
+      ]
      },
      "sabbath": {
       "title": "Make a dip ahead and store it covered",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A dip made ahead is a ready snack all week, with vegetables, pita chips, or crackers. This one needs no cooking, only measuring and stirring.",
+       "Yogurt dip keeps covered in the fridge for up to 3 days. Stir it before serving, since a little liquid may rise to the top."
+      ],
+      "steps": [
+       "Measure 1 cup of plain Greek yogurt into a bowl. Check its label for gelatin first.",
+       "Add 1 tablespoon of lemon juice, ½ teaspoon of jarred minced garlic, 1 teaspoon of dried dill, and ¼ teaspoon of salt.",
+       "Stir until smooth. Taste, and add a pinch more salt if it needs it.",
+       "Spoon it into a container with a lid. Label it with the date.",
+       "Put it in the fridge. Use it within 3 days.",
+       "For practice, work out what you'd use for a double batch, and write it down."
+      ],
+      "quiz": [
+       {
+        "q": "How long does the dip keep in the fridge?",
+        "choices": [
+         "Up to 3 days",
+         "A month",
+         "1 hour"
+        ],
+        "answer": 0,
+        "explain": "Covered and labeled."
+       },
+       {
+        "q": "Doubling the dip, how much yogurt?",
+        "choices": [
+         "2 cups",
+         "1 cup",
+         "½ cup"
+        ],
+        "answer": 0,
+        "explain": "Two times every amount."
+       },
+       {
+        "q": "Why check the yogurt's label?",
+        "choices": [
+         "Some yogurt has gelatin",
+         "For the color",
+         "For the price"
+        ],
+        "answer": 0,
+        "explain": "Gelatin can come from unclean animals."
+       }
+      ]
      }
     },
     {
@@ -11558,7 +14793,7 @@ export const LIBRARY = {
      "skills": [
       "mise-en-place"
      ],
-     "minutes": 30,
+     "minutes": 35,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -13000,7 +16235,89 @@ export const LIBRARY = {
      },
      "knowledge": {
       "title": "Read a recipe for timing; write a prep list; why a scale beats cups",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Professional cooks read a recipe all the way through before they pick up a knife. They're looking for three things: what has to be done first, what takes the longest, and where the waiting is. A recipe's steps are in the order you cook, not always the order you should start.",
+       "Look for the waits first. A pot of water takes 10 minutes or more to boil. Rice cooks for 18 minutes and rests for 10. Eggplant sweats in salt for 20. None of those need your hands, so they start first, and the cutting happens while they run.",
+       "Then add up the active time: the minutes your hands are busy. In vegetable lo mein, the julienne might take you 20 minutes this week, but the stove part is under 6. If the noodles were cooked before the knife work started, they'd sit and go gummy. So the order is: water on, sauce mixed, vegetables cut, then noodles, then the pan.",
+       "Work backward from when you want to eat. If dinner is at 6:00 and the recipe has 45 minutes of work and waiting, you start at 5:15, or 5:00 if you're new to the cut. Beginners are always slower than a recipe's time, and that's expected.",
+       "A prep list turns all that into a plan. Write each job on its own line in the order you'll do it, with a time beside the long ones: \"5:00 water on (12 min). 5:02 mix sauce. 5:05 julienne carrots and peppers (20 min). 5:25 noodles in (3 min).\" Cooks call having everything cut, measured, and ready before the heat goes on mise en place, French for \"everything in its place\". The prep list is how you get there.",
+       "Now the scale. A cup measures space, not how much food is in it. Scoop a cup of flour straight from the bag and it can weigh 150 grams; spoon it in lightly and it can be 120. That's a 25% difference from the same cup, enough to make bread dry or cookies spread. A scale reads 125 grams every time.",
+       "Weighing is also faster and cleaner. Set a bowl on the scale, press tare (or zero) so the bowl counts as nothing, and pour in the first ingredient. Press tare again and add the next. One bowl, no measuring cups to wash.",
+       "This week's drill weighs your trim, the peels, ends, and cores you cut away. Weighing it is how cooks measure waste: a careful julienne leaves less on the board, and over a year that's real food and money. This week's Beyond the Recipe, on gleaning, asks the same question from the other side: what's left over, and who can use it?"
+      ],
+      "quiz": [
+       {
+        "q": "What do you look for first when you read a recipe for timing?",
+        "choices": [
+         "The waits, like boiling water or resting rice",
+         "The last step",
+         "The serving size"
+        ],
+        "answer": 0,
+        "explain": "Long waits start first, and the cutting happens while they run."
+       },
+       {
+        "q": "What is active time?",
+        "choices": [
+         "The minutes your hands are busy",
+         "The time on the stove",
+         "The time the food rests"
+        ],
+        "answer": 0,
+        "explain": "Waiting time doesn't need your hands."
+       },
+       {
+        "q": "Dinner is at 6:00 and a recipe takes 45 minutes. When do you start?",
+        "choices": [
+         "5:15, or earlier if the cut is new to you",
+         "5:45",
+         "6:00"
+        ],
+        "answer": 0,
+        "explain": "Work backward from when you want to eat, and leave room for being new."
+       },
+       {
+        "q": "What does mise en place mean?",
+        "choices": [
+         "Everything in its place, cut and measured before the heat goes on",
+         "Clean as you go",
+         "Cook in the right order"
+        ],
+        "answer": 0,
+        "explain": "The prep list is how you get there."
+       },
+       {
+        "q": "Why can a cup of flour be wrong?",
+        "choices": [
+         "How it's scooped changes how much is in the cup",
+         "Cups shrink in the dishwasher",
+         "Flour gets heavier over time"
+        ],
+        "answer": 0,
+        "explain": "The same cup can hold 120 to 150 grams."
+       },
+       {
+        "q": "What does the tare button do?",
+        "choices": [
+         "Sets the scale back to zero with the bowl on it",
+         "Turns grams into cups",
+         "Weighs the bowl"
+        ],
+        "answer": 0,
+        "explain": "Then the scale shows only what you add."
+       },
+       {
+        "q": "Why weigh your trim?",
+        "choices": [
+         "To see how much food a cut wastes",
+         "To check the knife",
+         "To season it"
+        ],
+        "answer": 0,
+        "explain": "A careful cut leaves less on the board."
+       }
+      ]
      },
      "sabbath": {
       "title": "Gleaning: leaving the edges of the field (Leviticus 19:9–10; Ruth 2)",
@@ -15634,7 +18951,7 @@ export const LIBRARY = {
       "dicing",
       "flavor-base"
      ],
-     "minutes": 55,
+     "minutes": 60,
      "tags": {
       "protein": "beans-lentils",
       "flavors": [
@@ -15696,7 +19013,7 @@ export const LIBRARY = {
       "julienne",
       "stir-frying"
      ],
-     "minutes": 40,
+     "minutes": 45,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -15738,7 +19055,7 @@ export const LIBRARY = {
       "dicing",
       "simmering"
      ],
-     "minutes": 70,
+     "minutes": 80,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -16706,15 +20023,173 @@ export const LIBRARY = {
      "cuisine": "french",
      "drill": {
       "title": "Timed brunoise",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "A brunoise shows every flaw in your knife work. Today you time it, then check it."
+      ],
+      "steps": [
+       "Hone your chef's knife and set the board on a damp towel.",
+       "Start a timer. Peel one carrot, square it into a block, and cut ⅛-inch planks, then ⅛-inch julienne, then ⅛-inch cubes.",
+       "Stop the timer and write down the time.",
+       "Spread 20 cubes on the board and measure a few with a ruler. Note how many are within a millimeter of ⅛ inch.",
+       "Repeat with a second carrot and compare the time and the count.",
+       "Weigh the trim and the brunoise. Save the trim for stock.",
+       "Use the brunoise in this week's fried rice or ratatouille."
+      ],
+      "quiz": [
+       {
+        "q": "What comes before a brunoise?",
+        "choices": [
+         "A julienne",
+         "A chiffonade",
+         "A large dice"
+        ],
+        "answer": 0,
+        "explain": "Sticks become cubes."
+       },
+       {
+        "q": "Which matters first, speed or evenness?",
+        "choices": [
+         "Evenness",
+         "Speed",
+         "Neither"
+        ],
+        "answer": 0,
+        "explain": "Speed follows even work."
+       },
+       {
+        "q": "Why square the carrot into a block?",
+        "choices": [
+         "Flat sides make even planks and it can't roll",
+         "It's faster",
+         "It looks neater"
+        ],
+        "answer": 0,
+        "explain": "And the trim goes to stock."
+       }
+      ]
      },
      "knowledge": {
       "title": "Cuts by size: brunoise, small dice, batonnet, chiffonade; the French herb base",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Professional recipes name cuts by size, so every cook produces the same piece. Learn them as numbers.",
+       "Brunoise: ⅛-inch cubes (3 mm), cut from a julienne. Small dice: ¼-inch cubes (6 mm), cut from a batonnet. Medium dice: ½ inch (12 mm). Large dice: ¾ inch (2 cm).",
+       "Julienne: ⅛ by ⅛ inch, 2 to 2½ inches long. Batonnet: ¼ by ¼ inch, 2½ to 3 inches long. Chiffonade: leafy herbs or greens stacked, rolled tight, and sliced across into thin ribbons.",
+       "Precision isn't decoration. Pieces of one size cook in the same time, so a pan of brunoise is done all at once, and a sauce built on it is smooth.",
+       "French cooking builds on two aromatic foundations. Mirepoix is onion, carrot, and celery in a 2:1:1 ratio by weight, diced to suit the cooking time: brunoise for a quick sauce, large dice for a long stock. Herbs come as a bouquet garni, a bundle of thyme, bay leaf, and parsley stems tied together so it can be lifted out, or as fines herbes, parsley, chives, tarragon, and chervil, chopped fine and added at the end.",
+       "Speed comes from repetition, not hurry. Keep the claw, let the blade do the work, and keep each cut the same before you try to make it faster."
+      ],
+      "quiz": [
+       {
+        "q": "What size is a brunoise?",
+        "choices": [
+         "⅛ inch",
+         "¼ inch",
+         "½ inch"
+        ],
+        "answer": 0,
+        "explain": "Cut from a julienne."
+       },
+       {
+        "q": "A small dice is cut from which stick?",
+        "choices": [
+         "A batonnet",
+         "A julienne",
+         "A chiffonade"
+        ],
+        "answer": 0,
+        "explain": "¼-inch sticks cut across."
+       },
+       {
+        "q": "What's the mirepoix ratio by weight?",
+        "choices": [
+         "2 onion : 1 carrot : 1 celery",
+         "1:1:1",
+         "1 onion : 2 carrot : 2 celery"
+        ],
+        "answer": 0,
+        "explain": "Onion is half."
+       },
+       {
+        "q": "Why is a bouquet garni tied?",
+        "choices": [
+         "So it can be lifted out",
+         "So it cooks faster",
+         "For looks"
+        ],
+        "answer": 0,
+        "explain": "It flavors, then comes out."
+       },
+       {
+        "q": "When do fines herbes go in?",
+        "choices": [
+         "At the end",
+         "At the start",
+         "In the marinade"
+        ],
+        "answer": 0,
+        "explain": "Delicate herbs lose flavor with long cooking."
+       },
+       {
+        "q": "Why cut to an exact size?",
+        "choices": [
+         "Pieces of one size cook in the same time",
+         "It's traditional",
+         "It's faster"
+        ],
+        "answer": 0,
+        "explain": "Even cooking, even texture."
+       }
+      ]
      },
      "sabbath": {
       "title": "Prep every vegetable for a weekend meal",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "A weekend meal is easier to serve when every vegetable is cut beforehand. Done right, the day itself is only cooking.",
+       "Most firm vegetables keep 3 to 4 days cut: onions, carrots, celery, peppers, and squash, in sealed containers lined with paper towel. Tomatoes, cucumbers, potatoes, apples, and herbs are cut on the day, or held as noted: potatoes under cold water for up to a day, herbs whole in a damp towel."
+      ],
+      "steps": [
+       "Choose the weekend menu and list every vegetable and its cut.",
+       "Group the list by what keeps and what doesn't.",
+       "Cut the keeping vegetables to the sizes the recipes need, each in its own lined container.",
+       "Label each with the recipe, the cut, and the date.",
+       "Write a short note of what's left to cut on the day, and how long it will take.",
+       "After the meal, note what worked and what you'd change."
+      ],
+      "quiz": [
+       {
+        "q": "Which keeps well cut for several days?",
+        "choices": [
+         "Carrots",
+         "Tomatoes",
+         "Cucumbers"
+        ],
+        "answer": 0,
+        "explain": "Firm vegetables keep."
+       },
+       {
+        "q": "How do cut potatoes wait?",
+        "choices": [
+         "Under cold water, up to a day",
+         "In a dry container",
+         "On the counter"
+        ],
+        "answer": 0,
+        "explain": "Air browns them."
+       },
+       {
+        "q": "Why label each container with the recipe and cut?",
+        "choices": [
+         "So the day's cooking is only cooking",
+         "For looks",
+         "It's required"
+        ],
+        "answer": 0,
+        "explain": "No sorting on the day."
+       }
+      ]
      }
     },
     {
@@ -16727,15 +20202,161 @@ export const LIBRARY = {
      "cuisine": "vietnamese",
      "drill": {
       "title": "Weigh vs. measure; weigh the trim to find the yield",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Today you'll see the difference between measuring and weighing with your own numbers, then find a real yield."
+      ],
+      "steps": [
+       "Scoop 1 cup of flour three ways: scooped and packed, spooned and leveled, and sifted in. Weigh each and write it down.",
+       "Measure 1 cup of water and weigh it. It should be close to 237 grams.",
+       "Weigh a whole onion. Peel it, trim the root and top, and weigh it again. Work out the yield.",
+       "Do the same with a bell pepper: weigh, core and seed, weigh again.",
+       "Compare your yields with the Knowledge page's typical numbers.",
+       "Keep the trim for stock."
+      ],
+      "quiz": [
+       {
+        "q": "1 cup of water weighs about:",
+        "choices": [
+         "237 g",
+         "100 g",
+         "500 g"
+        ],
+        "answer": 0,
+        "explain": "Water is about 1 g per mL."
+       },
+       {
+        "q": "Which flour cup weighs most?",
+        "choices": [
+         "Scooped and packed",
+         "Sifted",
+         "Spooned and leveled"
+        ],
+        "answer": 0,
+        "explain": "Packing adds flour."
+       },
+       {
+        "q": "A 200 g onion gives 180 g peeled. Yield?",
+        "choices": [
+         "90%",
+         "80%",
+         "110%"
+        ],
+        "answer": 0,
+        "explain": "180 ÷ 200."
+       }
+      ]
      },
      "knowledge": {
       "title": "Why weight beats volume; trim loss and buying enough",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "A cup is a volume, and how much fits in it depends on how it's filled. A cup of flour can weigh anywhere from 120 to 150 grams; a cup of chopped onion varies more. A gram is a gram.",
+       "That's why professional kitchens weigh. A scale gives the same result every time, in any hands, and it lets you scale a recipe by multiplication without converting cups and spoons.",
+       "Weight also tells you what you're really getting. Yield is the usable weight divided by the bought weight. Typical yields: onions about 90 percent after peeling; bell peppers 80 to 85; carrots 85 to 90; boneless steak trimmed 85 to 90; and meat loses another 20 to 30 percent of its trimmed weight in cooking.",
+       "To buy enough, work backward: the plated weight you need, divided by the yield. For 4 servings of 140 grams of cooked steak (560 g) at a 75 percent cooking yield, you need about 750 grams trimmed, and at 88 percent trim yield, about 850 grams as bought.",
+       "Small amounts of salt, spices, and leaveners are still often given in spoons, because home scales aren't precise below a few grams."
+      ],
+      "quiz": [
+       {
+        "q": "Why weigh instead of using cups?",
+        "choices": [
+         "A gram is the same every time",
+         "Cups are smaller",
+         "Scales are faster to wash"
+        ],
+        "answer": 0,
+        "explain": "Volume depends on packing."
+       },
+       {
+        "q": "What is yield?",
+        "choices": [
+         "Usable weight ÷ bought weight",
+         "Cooked weight × 2",
+         "Servings per pound"
+        ],
+        "answer": 0,
+        "explain": "Expressed as a percent."
+       },
+       {
+        "q": "You need 560 g cooked at a 75% cooking yield. How much trimmed meat?",
+        "choices": [
+         "About 750 g",
+         "About 420 g",
+         "560 g"
+        ],
+        "answer": 0,
+        "explain": "560 ÷ 0.75."
+       },
+       {
+        "q": "Why are teaspoons still used for salt?",
+        "choices": [
+         "Home scales aren't precise for a few grams",
+         "Salt can't be weighed",
+         "Tradition only"
+        ],
+        "answer": 0,
+        "explain": "Too small to weigh well."
+       },
+       {
+        "q": "About what does steak lose in cooking?",
+        "choices": [
+         "20 to 30 percent",
+         "Nothing",
+         "Half"
+        ],
+        "answer": 0,
+        "explain": "Mostly water."
+       }
+      ]
      },
      "sabbath": {
       "title": "Weigh and portion ingredients ahead",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Weighing and portioning ahead turns a recipe into a kit: open the containers and cook.",
+       "Dry ingredients can be weighed days ahead. Raw meat can be trimmed and portioned up to 2 days ahead in the fridge, or frozen; keep it sealed, on the bottom shelf, away from anything eaten raw."
+      ],
+      "steps": [
+       "Pick a recipe for the weekend and convert its main ingredients to grams.",
+       "Weigh each dry ingredient into a labeled container or bag.",
+       "Trim and portion any meat, weigh each portion, and seal it. Wash your hands, board, and knife afterward.",
+       "Store the meat on the bottom shelf of the fridge, or freeze it.",
+       "Label everything with the recipe, the weight, and the date.",
+       "When you cook, note how much time it saved."
+      ],
+      "quiz": [
+       {
+        "q": "How long can trimmed raw meat wait in the fridge?",
+        "choices": [
+         "Up to 2 days",
+         "A week",
+         "Until it smells"
+        ],
+        "answer": 0,
+        "explain": "Or freeze it."
+       },
+       {
+        "q": "Where does raw meat go in the fridge?",
+        "choices": [
+         "The bottom shelf",
+         "The top shelf",
+         "The door"
+        ],
+        "answer": 0,
+        "explain": "So nothing drips onto other food."
+       },
+       {
+        "q": "What goes on each label?",
+        "choices": [
+         "Recipe, weight, and date",
+         "Only the name",
+         "Nothing"
+        ],
+        "answer": 0,
+        "explain": "So the kit is complete."
+       }
+      ]
      }
     },
     {
@@ -16748,15 +20369,160 @@ export const LIBRARY = {
      "cuisine": "indian",
      "drill": {
       "title": "Scale a recipe on paper, then check it against the app's amounts",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Scale a recipe by hand, then check yourself against the app."
+      ],
+      "steps": [
+       "Pick this week's enchiladas or chana masala.",
+       "Work out the factor to 12 servings.",
+       "On paper, multiply every ingredient, converting volumes to sensible amounts.",
+       "Mark which items you'd scale under the factor, and why.",
+       "Set the recipe's servings to 12 in the app and compare line by line.",
+       "Note every difference and decide whether yours or the app's is better for the dish."
+      ],
+      "quiz": [
+       {
+        "q": "How do you find the factor?",
+        "choices": [
+         "New servings ÷ old servings",
+         "Old ÷ new",
+         "New − old"
+        ],
+        "answer": 0,
+        "explain": "12 ÷ 4 = 3."
+       },
+       {
+        "q": "What do you do with a result like 2.25 eggs?",
+        "choices": [
+         "Round sensibly, usually down to 2",
+         "Use 2.25 eggs",
+         "Leave them out"
+        ],
+        "answer": 0,
+        "explain": "Or beat and measure."
+       },
+       {
+        "q": "Which do you mark to scale under?",
+        "choices": [
+         "Salt and spices",
+         "Chicken",
+         "Tortillas"
+        ],
+        "answer": 0,
+        "explain": "Then taste."
+       }
+      ]
      },
      "knowledge": {
       "title": "Scaling factors, and what doesn't scale: salt, spice, time, pan size",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "The scaling factor is the servings you want divided by the servings written. From 4 to 12, it's 3. From 6 to 4, it's about 0.67. Multiply every ingredient by it, and round counted items sensibly.",
+       "Weights scale cleanly. Volumes do too, but convert awkward results: ⅓ cup × 3 is 1 cup; 1 teaspoon × 3 is 1 tablespoon; 3 tablespoons × 3 is ½ cup plus 1 tablespoon.",
+       "Some things don't scale in a straight line. Salt, spices, and chile heat build faster in a big batch: start at about three quarters of the full factor, then taste. Liquids that evaporate, like a simmering sauce, need less than the full factor, because a bigger pot loses less in proportion. Leaveners in baking are often scaled a little under.",
+       "Time doesn't multiply. A pot of soup three times the size takes longer to come to a boil, but simmers about the same. Baking time stays the same per pan, as long as the pans are the same size.",
+       "Pans don't stretch. A tripled recipe needs three pans of the original size, or one pan with three times the area, at the same depth. Check the oven fits them, and rotate them halfway."
+      ],
+      "quiz": [
+       {
+        "q": "What's the scaling factor from 6 to 4?",
+        "choices": [
+         "About 0.67",
+         "1.5",
+         "2"
+        ],
+        "answer": 0,
+        "explain": "4 ÷ 6."
+       },
+       {
+        "q": "How should salt be scaled up?",
+        "choices": [
+         "Under the full factor, then taste",
+         "Exactly by the factor",
+         "Not at all"
+        ],
+        "answer": 0,
+        "explain": "It builds fast."
+       },
+       {
+        "q": "A tripled cake in three pans bakes:",
+        "choices": [
+         "About the same time",
+         "Three times as long",
+         "A third as long"
+        ],
+        "answer": 0,
+        "explain": "Same pan, same time."
+       },
+       {
+        "q": "1 teaspoon × 3 is:",
+        "choices": [
+         "1 tablespoon",
+         "3 tablespoons",
+         "½ cup"
+        ],
+        "answer": 0,
+        "explain": "3 teaspoons = 1 tablespoon."
+       },
+       {
+        "q": "Why does a big batch of sauce need less extra liquid?",
+        "choices": [
+         "A bigger pot loses less in proportion",
+         "Liquid is expensive",
+         "It cooks faster"
+        ],
+        "answer": 0,
+        "explain": "Less surface per cup."
+       }
+      ]
      },
      "sabbath": {
       "title": "Scale a Sabbath recipe to the guest count",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "A Sabbath meal often has guests, so the family recipe has to fit the table. Scale it ahead, shop to the new amounts, and plan the pans before the day."
+      ],
+      "steps": [
+       "Choose a recipe your family makes for Sabbath meals, and the number of guests.",
+       "Work out the factor and scale every ingredient by hand.",
+       "Adjust salt and spices under the factor, to taste on the day.",
+       "Plan the pans and the oven space, and any timing changes.",
+       "Write the shopping list from your scaled amounts.",
+       "Keep the scaled recipe with your notes for next time."
+      ],
+      "quiz": [
+       {
+        "q": "What's the first number you need?",
+        "choices": [
+         "The guest count",
+         "The oven temperature",
+         "The price"
+        ],
+        "answer": 0,
+        "explain": "It sets the factor."
+       },
+       {
+        "q": "What should you plan besides amounts?",
+        "choices": [
+         "Pans and oven space",
+         "Napkins",
+         "Music"
+        ],
+        "answer": 0,
+        "explain": "Pans don't stretch."
+       },
+       {
+        "q": "When do you taste and finish the salt?",
+        "choices": [
+         "On the day, while cooking",
+         "When shopping",
+         "Never"
+        ],
+        "answer": 0,
+        "explain": "Start under and adjust."
+       }
+      ]
      }
     },
     {
@@ -16771,15 +20537,160 @@ export const LIBRARY = {
      "ownRecipe": true,
      "drill": {
       "title": "Write a prep timeline and run it with a timer",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Write a timeline for this week's mastery dish, then run it against a timer and see where it slips."
+      ],
+      "steps": [
+       "Pick salade niçoise, bibimbap, or your own dish.",
+       "List each component with its active and passive time.",
+       "Choose a serving time and write each step as a clock time, working backward.",
+       "Check for collisions: hands, burners, and oven.",
+       "Cook to the timeline with a timer running, and note the actual time of each step.",
+       "Afterward, compare planned and actual times, and rewrite the timeline for next time."
+      ],
+      "quiz": [
+       {
+        "q": "What do you note while cooking?",
+        "choices": [
+         "The actual time of each step",
+         "Nothing",
+         "Only the end time"
+        ],
+        "answer": 0,
+        "explain": "So you can compare."
+       },
+       {
+        "q": "What's a collision?",
+        "choices": [
+         "Two jobs needing the same hands or burner at once",
+         "A dropped pan",
+         "A late guest"
+        ],
+        "answer": 0,
+        "explain": "Move one."
+       },
+       {
+        "q": "When do you rewrite the timeline?",
+        "choices": [
+         "After cooking, from your notes",
+         "Before shopping",
+         "Never"
+        ],
+        "answer": 0,
+        "explain": "Plans improve with use."
+       }
+      ]
      },
      "knowledge": {
       "title": "Planning a meal backward from serving time",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Every meal has a fixed point: the moment it's served. Plan from there backward.",
+       "List every component with its active time, hands busy, and its passive time, waiting. A roast might be 15 minutes active and 90 passive; a salad 15 active and nothing passive.",
+       "Place each component so it finishes at serving time, counting resting and holding: meat rests 10 minutes, rice holds covered for 20, and dressed greens wilt within minutes, so they go last.",
+       "Now check for collisions. Two jobs needing your hands at once, or two pans needing the same burner or the oven at different temperatures, must be moved. Passive time is when you do the active work of something else.",
+       "Add slack: 10 to 15 percent of the total, at the start. Write the plan as clock times, not durations, and keep it in view while you cook."
+      ],
+      "quiz": [
+       {
+        "q": "What's the fixed point of a meal plan?",
+        "choices": [
+         "Serving time",
+         "The first step",
+         "Shopping"
+        ],
+        "answer": 0,
+        "explain": "Plan backward from it."
+       },
+       {
+        "q": "What is passive time?",
+        "choices": [
+         "Waiting time, hands free",
+         "Time spent cutting",
+         "Cleanup"
+        ],
+        "answer": 0,
+        "explain": "Use it for active work."
+       },
+       {
+        "q": "What goes last?",
+        "choices": [
+         "Dressed greens",
+         "A roast",
+         "Rice"
+        ],
+        "answer": 0,
+        "explain": "They wilt quickly."
+       },
+       {
+        "q": "How much slack should you add?",
+        "choices": [
+         "10 to 15 percent",
+         "None",
+         "Double"
+        ],
+        "answer": 0,
+        "explain": "At the start."
+       },
+       {
+        "q": "How should the plan be written?",
+        "choices": [
+         "As clock times",
+         "As durations only",
+         "From memory"
+        ],
+        "answer": 0,
+        "explain": "Easy to follow under pressure."
+       }
+      ]
      },
      "sabbath": {
       "title": "Plan a Sabbath prep timeline",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "A Sabbath meal is cooked before the Sabbath begins and served without last-minute work. That makes the timeline run backward from sundown on Friday, with food held hot or served cold."
+      ],
+      "steps": [
+       "Choose the Sabbath menu and note which dishes are served hot and which cold.",
+       "Mark sundown on Friday as your fixed point.",
+       "List every component, with its active and passive time and how it will be held.",
+       "Spread the work over Thursday and Friday so Friday afternoon isn't crowded.",
+       "Write the timeline as days and clock times, with slack before sundown.",
+       "After the meal, note what you'd move, and keep the plan."
+      ],
+      "quiz": [
+       {
+        "q": "What's the fixed point for a Sabbath meal?",
+        "choices": [
+         "Sundown on Friday",
+         "Saturday noon",
+         "The first guest"
+        ],
+        "answer": 0,
+        "explain": "Work stops then."
+       },
+       {
+        "q": "Why spread the work over two days?",
+        "choices": [
+         "So Friday afternoon isn't crowded",
+         "To use more pans",
+         "For freshness"
+        ],
+        "answer": 0,
+        "explain": "Slack before sundown."
+       },
+       {
+        "q": "What do you note for each dish?",
+        "choices": [
+         "Active time, passive time, and how it's held",
+         "Its color",
+         "Its price"
+        ],
+        "answer": 0,
+        "explain": "Hot, warm, or cold."
+       }
+      ]
      }
     },
     {

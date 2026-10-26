@@ -60,6 +60,99 @@
   "substitutions": [
     { "for": "pasta-small", "use": "pasta-small-gluten-free", "reason": "gluten", "note": "Gluten-free pasta gets soft faster. Start checking it a few minutes early." }
   ],
+  "variations": [
+    {
+      "id": "sp-3",
+      "title": "Minestrone",
+      "level": "sp-3",
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["rich-tomato"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "lots"
+      },
+      "steps": {
+        "change": {
+          "wash": {
+            "id": "wash",
+            "text": "Rinse the carrots, celery, and zucchini and dry them. Set out the board, the knife, and the bowls, and note the time: the knife work, from the onion to the garlic, is this week's mastery check.",
+            "safety": "solo",
+            "tip": "Even first, fast second. Every cube the same size matters more than the clock."
+          },
+          "onion": {
+            "id": "onion",
+            "text": "Halve and peel the onion, leaving the root on. Dice it into ½-inch pieces: strips ½ inch apart toward the root, then across at ½ inch. Put it in the large bowl.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "grid",
+            "look": "½-inch pieces, close to the same size."
+          },
+          "carrots": {
+            "id": "carrots",
+            "text": "Peel the carrots and cut them into 3-inch pieces. Square off one side of each so it lies flat, cut ¼-inch planks, then ¼-inch sticks, then across into ¼-inch cubes. Add them to the bowl.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife, peeler",
+            "why": "hard-small",
+            "look": "¼-inch cubes, half the size of the onion."
+          },
+          "celery": {
+            "id": "celery",
+            "text": "Trim the celery and cut each rib into 3-inch pieces. Split the wide pieces lengthwise into ½-inch sticks and cut across them at ½ inch. Add them to the bowl.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife"
+          },
+          "zucchini": {
+            "id": "zucchini",
+            "text": "Trim the zucchini, quarter it lengthwise, and cut it into ½-inch pieces. Keep it on the board, apart from the other vegetables; it goes in later.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "grid"
+          },
+          "garlic": {
+            "id": "garlic",
+            "text": "Peel and mince the garlic and put it in the small bowl. Check the time: that's your knife-work time for this week.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife"
+          },
+          "beans": {
+            "id": "beans",
+            "text": "Open the beans, drain them in the colander, and rinse them under cold water until no more foam runs off.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp can lid"
+          },
+          "liquid": {
+            "id": "liquid",
+            "text": "Add the crushed tomatoes, the broth, the water, and the beans. Turn the heat to high, cover, and bring it to a boil.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pot"
+          },
+          "pasta": {
+            "id": "pasta",
+            "text": "Add the zucchini and the pasta. Keep simmering, stirring every couple of minutes so the pasta doesn't stick, until the pasta is tender. Start tasting a minute before the box time.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pot",
+            "timerSeconds": 600,
+            "timerLabel": "Pasta in soup",
+            "why": "pasta-drinks"
+          },
+          "taste": {
+            "id": "taste",
+            "text": "Turn off the stove. Taste the soup and adjust the salt a pinch at a time.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pot"
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Ladle the soup into bowls and top with parmesan if you're using it.",
+            "safety": "adult-nearby",
+            "hazard": "Hot soup"
+          }
+        }
+      }
+    }
+  ],
   "equipment": [
     "chef-knife",
     "cutting-board",

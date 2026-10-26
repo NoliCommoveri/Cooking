@@ -1,0 +1,95 @@
+{
+  "id": "bun-bowl",
+  "version": 1,
+  "track": "core",
+  "unit": 102,
+  "title": "Bún bowl with chicken",
+  "image": "dishes/bun-bowl.png",
+  "cuisine": "vietnamese",
+  "skill": "Setting out a bowl's parts in small dishes",
+  "skills": ["mise-en-place"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 35,
+  "scaling": {
+    "mode": "free",
+    "notes": [{ "from": 7, "text": "Soak the noodles in two pots, or in the pot in two batches." }]
+  },
+  "learn": {
+    "move": {
+      "title": "A bowl built from small dishes",
+      "body": "Bún is a Vietnamese bowl of cool rice noodles with chicken, crunchy vegetables, fresh herbs, and nước chấm, a sweet, sour, salty dipping sauce. Nothing here takes long to cook. The skill is setting every part out in its own dish first, then building the bowls."
+    },
+    "why": [
+      { "id": "soak", "title": "Noodles that soak, not boil", "body": "Thin rice noodles only need hot water. Boiling them on the stove makes them mushy. Pour them into water that has just boiled, off the heat, and they soften in a few minutes." },
+      { "id": "rinse", "title": "Rinse them cold", "body": "Rice noodles turn sticky as they cool. A rinse under cold water washes off the starch and stops them cooking, so they stay separate." },
+      { "id": "sauce", "title": "Taste the sauce", "body": "Nước chấm balances four things: salty fish sauce, sour lime, sweet sugar, and water. Tasting and adjusting it is part of the recipe." },
+      { "id": "dishes", "title": "Every part in its own dish", "body": "When each part waits in its own dish, everyone can build a bowl the way they like it, and nothing gets soggy before it's eaten." },
+      { "id": "chicken", "title": "Wash after the chicken", "body": "Rotisserie chicken is already cooked, but it's still meat handled with your hands. Wash them before you touch the vegetables, and put the rest of the chicken in the fridge." }
+    ],
+    "wrong": [
+      { "sign": "The noodles are stuck together", "fix": "Rinse them again under cold water, loosening them with your fingers." },
+      { "sign": "The noodles are still hard in the middle", "fix": "Leave them in the hot water 2 more minutes." },
+      { "sign": "The sauce is too salty", "fix": "Add a spoonful of water and a squeeze of lime, then taste again." },
+      { "sign": "The sauce is too sour", "fix": "Stir in a little more sugar, a pinch at a time." }
+    ],
+    "quiz": [
+      { "q": "How do rice noodles cook?", "choices": ["They soak in water that just boiled, off the heat", "They boil for 15 minutes", "They bake"], "answer": 0, "explain": "Boiling makes them mushy." },
+      { "q": "Why rinse the noodles in cold water?", "choices": ["So they don't stick together", "To warm them", "To salt them"], "answer": 0, "explain": "It washes off the starch." },
+      { "q": "What four tastes does nước chấm balance?", "choices": ["Salty, sour, sweet, and water to soften them", "Hot, cold, crunchy, soft", "Spicy, bitter, bland, rich"], "answer": 0, "explain": "Fish sauce, lime, sugar, and water." },
+      { "q": "What do you do after pulling the chicken apart?", "choices": ["Wash your hands", "Taste the sauce", "Nothing"], "answer": 0, "explain": "Then touch the vegetables." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "water", "amount": 8, "unit": "cup", "scale": false, "group": "Noodles" },
+    { "ingredient": "rice-vermicelli", "amount": 8, "unit": "oz", "group": "Noodles" },
+    { "ingredient": "fish-sauce", "amount": 3, "unit": "tbsp", "group": "Nước chấm" },
+    { "ingredient": "lime", "amount": 2, "unit": "count", "round": "up", "prep": "juiced", "group": "Nước chấm" },
+    { "ingredient": "sugar", "amount": 3, "unit": "tbsp", "group": "Nước chấm" },
+    { "ingredient": "water", "amount": 0.5, "unit": "cup", "group": "Nước chấm" },
+    { "ingredient": "garlic-minced-jarred", "amount": 1, "unit": "tsp", "group": "Nước chấm" },
+    { "ingredient": "rotisserie-chicken", "amount": 0.5, "unit": "count", "round": "up", "prep": "about 3 cups of meat", "group": "Bowls" },
+    { "ingredient": "lettuce-green-leaf", "amount": 0.5, "unit": "count", "round": "up", "group": "Bowls" },
+    { "ingredient": "cucumber", "amount": 1, "unit": "count", "round": "up", "group": "Bowls" },
+    { "ingredient": "carrot-shredded", "amount": 1, "unit": "cup", "group": "Bowls" },
+    { "ingredient": "mint", "amount": 0.5, "unit": "cup", "prep": "leaves", "group": "Bowls" },
+    { "ingredient": "cilantro", "amount": 0.5, "unit": "cup", "prep": "leaves", "group": "Bowls" },
+    { "ingredient": "peanuts-roasted", "amount": 0.25, "unit": "cup", "optional": true, "group": "Bowls" }
+  ],
+  "substitutions": [
+    { "for": "fish-sauce", "use": "soy-sauce", "reason": "fish", "note": "Use 2 tablespoons of soy sauce. It's a different taste, but the sauce still works." }
+  ],
+  "equipment": [
+    "saucepan-medium",
+    "colander",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "small-bowl",
+    "mixing-bowl-large",
+    "spoon",
+    "fork",
+    "cutting-board",
+    "paper-towels",
+    "paring-knife",
+    "plate",
+    "tongs"
+  ],
+  "steps": [
+    { "id": "read", "text": "Read the whole recipe. Set out a small bowl or plate for each part of the bowl.", "safety": "solo", "why": "dishes", "tip": "Seven parts: noodles, chicken, lettuce, cucumber, carrots, herbs, and sauce." },
+    { "id": "boil", "text": "Set the saucepan on a back burner, handle in. Bring the noodle water to a boil.", "safety": "adult-nearby", "hazard": "Hot pot", "look": "Big bubbles breaking all over the top." },
+    { "id": "soak", "text": "Turn off the burner. Add the noodles, push them under with the tongs, and let them soak.", "safety": "adult-nearby", "hazard": "Hot water", "timerSeconds": 300, "timerLabel": "Soak noodles", "why": "soak" },
+    { "id": "juice", "text": "While they soak, roll each lime on the counter, cut it in half with the paring knife, and squeeze the juice.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Rolling the lime first makes it juicier." },
+    { "id": "sauce", "text": "Stir the fish sauce, lime juice, sugar, water, and garlic in the measuring cup until the sugar dissolves.", "safety": "solo", "why": "sauce", "look": "No sugar grains on the bottom." },
+    { "id": "taste", "text": "Taste the sauce. Add more sugar, lime, or water, a little at a time, until you like it.", "safety": "solo", "tip": "It should taste strong. It's a sauce, not a drink." },
+    { "id": "drain", "text": "Pour the noodles into the colander in the sink. Rinse them under cold water and shake them dry.", "safety": "adult-nearby", "hazard": "Hot water", "why": "rinse", "look": "Soft, white, cool noodles that pull apart." },
+    { "id": "chicken", "text": "Pull the chicken meat off the bones with two forks and your fingers. Put it on a plate.", "safety": "solo", "look": "Bite-size shreds, no skin or bones." },
+    { "id": "wash-hands", "text": "Put the rest of the chicken in the fridge. Wash your hands with soap.", "safety": "solo", "why": "chicken", "tip": "Clean hands before you touch the vegetables." },
+    { "id": "lettuce", "text": "Rinse the lettuce leaves, pat them dry, and tear them into bite-size pieces into a bowl.", "safety": "solo", "look": "Pieces about the size of a cracker." },
+    { "id": "cucumber", "text": "Halve the cucumber the long way with the bridge grip, then slice it thin with the claw grip.", "safety": "adult-nearby", "hazard": "Sharp knife", "look": "Thin half-moons." },
+    { "id": "rest-knife", "text": "Set the knife down flat at the top of the board, blade facing away from you.", "safety": "solo" },
+    { "id": "herbs", "text": "Rinse the mint and cilantro, pat them dry, and pull the leaves off the stems.", "safety": "solo", "tip": "Tear big mint leaves in half." },
+    { "id": "build", "text": "Put noodles in each big bowl. Add lettuce, cucumber, carrots, chicken, and herbs on top, side by side.", "safety": "solo", "look": "Each part in its own section, like a wheel." },
+    { "id": "serve", "text": "Sprinkle peanuts on top if you're using them. Spoon sauce over each bowl just before eating.", "safety": "solo", "tip": "Put the rest of the sauce on the table for more." }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "id": "bean-quesadillas",
+  "version": 1,
+  "track": "core",
+  "unit": 103,
+  "title": "Black bean and vegetable quesadillas",
+  "image": "dishes/bean-quesadillas.png",
+  "cuisine": "tex-mex",
+  "skill": "An even dice of onion and pepper",
+  "skills": ["dicing"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 45,
+  "scaling": {
+    "mode": "free",
+    "notes": [
+      { "from": 7, "text": "Cook the quesadillas in batches and keep the finished ones warm on a sheet pan in a 200°F oven." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "A dice you can trust",
+      "body": "This week's cut is the dice: an onion and a pepper cut into ¼-inch cubes, all the same size. They cook down with black beans and spices into a filling, which goes between flour tortillas with cheese and crisps in a lightly oiled skillet."
+    },
+    "why": [
+      { "id": "grid", "title": "Planks, strips, cubes", "body": "Every dice is the same three moves: cut the food flat so it can't roll, cut it into strips, then cut across the strips. If the strips are even, the cubes are too. On an onion, the root end holds the layers together while you cut, so you don't need planks." },
+      { "id": "even", "title": "Even cubes cook evenly", "body": "Heat moves into food from the outside. A ½-inch piece takes about four times as long to soften as a ¼-inch one, so a mixed pan has raw bits and scorched bits at the same time. Same-size cubes finish together." },
+      { "id": "skin-down", "title": "Pepper skin side down", "body": "A pepper's skin is smooth and tough, and a blade can skid on it. Laid skin side down, the knife meets the soft inside first and cuts clean." },
+      { "id": "mash", "title": "Mash some of the beans", "body": "Whole beans roll out of a quesadilla. Mashing about a third of them makes a paste that holds the rest of the filling in place, the same way the cheese does." },
+      { "id": "medium", "title": "Medium heat, not high", "body": "The tortilla browns from the pan while the cheese melts from the heat that gets through. On high heat, the tortilla burns before the middle is hot. Medium gives both the same few minutes." }
+    ],
+    "wrong": [
+      { "sign": "The tortilla is dark but the cheese hasn't melted", "fix": "Turn the heat down a notch and cover the skillet for a minute after you flip, so the steam melts the cheese." },
+      { "sign": "The filling falls out when you cut it", "fix": "Mash more of the beans, and put cheese on both sides of the filling so it glues the tortilla shut." },
+      { "sign": "Some of the pepper is crunchy and some is brown", "fix": "The pieces were different sizes. Next time, cut the strips the same width before you cut across." },
+      { "sign": "The quesadilla is soggy", "fix": "The filling was wet. Cook it a minute or two longer, until no liquid pools in the pan, before it goes in." }
+    ],
+    "quiz": [
+      { "q": "What size is a small dice?", "choices": ["¼ inch", "½ inch", "1 inch"], "answer": 0, "explain": "A medium dice is ½ inch, a large dice ¾ inch." },
+      { "q": "Why do you lay the pepper skin side down?", "choices": ["The knife cuts the soft side first and doesn't skid", "It's easier to see", "The skin is the sharpest part"], "answer": 0, "explain": "Smooth skin makes the blade slide." },
+      { "q": "Why mash some of the beans?", "choices": ["They hold the filling together", "They cook faster", "They taste stronger"], "answer": 0, "explain": "Whole beans roll out." },
+      { "q": "The tortilla is browning too fast and the cheese is still solid. What do you do?", "choices": ["Turn the heat down and cover the pan", "Turn the heat up", "Add more cheese"], "answer": 0, "explain": "Lower heat and steam give the cheese time to melt." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "round": "up", "group": "Filling" },
+    { "ingredient": "bell-pepper-red", "amount": 1, "unit": "count", "round": "up", "group": "Filling" },
+    { "ingredient": "garlic-minced-jarred", "amount": 1, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "black-beans", "amount": 1, "unit": "can", "round": "up", "prep": "drained and rinsed", "group": "Filling" },
+    { "ingredient": "vegetable-oil", "amount": 2, "unit": "tbsp", "group": "Filling" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "cumin-ground", "amount": 1, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "chili-powder", "amount": 1, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "tortilla-flour", "amount": 8, "unit": "count", "group": "Quesadillas" },
+    { "ingredient": "cheddar-shredded", "amount": 2, "unit": "cup", "group": "Quesadillas" },
+    { "ingredient": "salsa", "amount": 0.75, "unit": "cup", "optional": true, "group": "To serve" },
+    { "ingredient": "sour-cream", "amount": 0.5, "unit": "cup", "optional": true, "group": "To serve" }
+  ],
+  "substitutions": [
+    { "for": "tortilla-flour", "use": "tortilla-gluten-free", "reason": "gluten", "note": "Gluten-free tortillas crack when cold. Warm each one in the dry skillet for 10 seconds before you fill and fold it." }
+  ],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "can-opener",
+    "colander",
+    "small-bowl",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "measuring-spoons",
+    "skillet-12",
+    "wooden-spoon",
+    "fork",
+    "spatula",
+    "plate"
+  ],
+  "steps": [
+    { "id": "board", "text": "Set the cutting board on a damp paper towel so it can't slide. Open the beans, drain them in the colander, and rinse them under cold water.", "safety": "adult-nearby", "hazard": "Sharp can lid" },
+    { "id": "onion", "text": "Cut the onion in half through the root and peel it, leaving the root on. Lay one half flat side down. Holding it with the claw, cut strips ¼ inch apart from the top toward the root, stopping just short of it. Then cut across the strips, ¼ inch apart, moving your claw hand back after each cut. Dice the other half the same way and put the onion in the medium bowl. Throw away the root ends.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "grid", "look": "Cubes about ¼ inch, close to the same size." },
+    { "id": "pepper", "text": "Stand the pepper on its stem end and cut the four sides off the core. Lay each piece skin side down, trim off the white ribs, and cut it into ¼-inch strips. Line the strips up and cut across them, ¼ inch apart. Add the pepper to the onion.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "skin-down", "look": "Pepper cubes the same size as the onion." },
+    { "id": "garlic", "text": "Measure the jarred garlic into the small bowl with the cumin and chili powder.", "safety": "solo", "tip": "Mincing garlic by hand comes next week. Jarred garlic is already minced." },
+    { "id": "soften", "text": "Heat 1 tablespoon of the oil in the skillet over medium heat until it shimmers. Add the onion, pepper, and salt and cook, stirring now and then, until soft and just starting to brown at the edges.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 360, "timerLabel": "Onion & pepper", "why": "even", "look": "Every piece soft, a few edges golden." },
+    { "id": "beans", "text": "Add the garlic and spices and stir for 30 seconds, until fragrant. Add the beans, then mash about a third of them against the pan with the fork. Cook, stirring, until no liquid pools in the pan. Scrape the filling into the bowl and wipe the skillet clean with a paper towel.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 120, "timerLabel": "Bean filling", "why": "mash" },
+    { "id": "fill", "text": "Lay out the tortillas. Sprinkle 2 tablespoons of cheese over half of each one, spoon an eighth of the filling over the cheese, and top with another 2 tablespoons of cheese. Fold the bare half over and press it down.", "safety": "solo", "tip": "Cheese on both sides of the filling glues the tortilla shut." },
+    { "id": "cook", "text": "Brush the skillet with a little of the remaining oil and set it over medium heat. Cook two quesadillas at a time, pressing them flat with the spatula, until the bottoms are golden. Flip and cook the other side until golden and the cheese has melted. Move them to the cutting board and cook the rest, adding a little oil each time.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 180, "timerLabel": "Each side", "why": "medium", "look": "Golden brown in spots and cheese melting out at the edge." },
+    { "id": "serve", "text": "Let each quesadilla rest for a minute so the cheese sets, then cut it in half. Serve with salsa and sour cream if you're using them.", "safety": "adult-nearby", "hazard": "Sharp knife" }
+  ]
+}

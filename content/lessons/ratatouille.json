@@ -85,5 +85,75 @@
     { "id": "simmer-open", "text": "Take the lid off and keep simmering, stirring now and then, until the juices cook down and thicken.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 600, "timerLabel": "Simmer, lid off", "why": "simmer", "look": "A thick, glossy sauce, with no pool of thin liquid at the bottom." },
     { "id": "taste", "text": "Turn off the stove. Taste a little on a clean spoon, after blowing on it, and add a pinch more salt if it needs it.", "safety": "adult-nearby", "hazard": "Hot pot", "tip": "Stews are very hot inside. Let a spoonful cool for a moment before tasting." },
     { "id": "serve", "text": "Tear the basil leaves over the top if you're using them. Serve in bowls, with slices of baguette for scooping up the sauce.", "safety": "solo", "tip": "Ratatouille tastes even better the next day, warmed up or at room temperature." }
+  ],
+  "variations": [
+    {
+      "id": "sp-4",
+      "title": "Ratatouille",
+      "level": "sp-4",
+      "tags": {
+        "protein": "none",
+        "flavors": ["rich-tomato", "herby-lemony"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "lots"
+      },
+      "steps": {
+        "change": {
+          "eggplant": {
+            "id": "eggplant",
+            "text": "Trim the eggplant. Cut ½-inch planks, ½-inch batons, then ½-inch cubes. Put them in the medium bowl.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "flat-first",
+            "look": "Cubes ½ inch on every side."
+          },
+          "zucchini": {
+            "id": "zucchini",
+            "text": "Trim the zucchini and cut it into ½-inch cubes the same way, discarding the seedy core if it's soft. Put them in the large bowl.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "grid"
+          },
+          "pepper": {
+            "id": "pepper",
+            "text": "Open the peppers flat, remove the ribs and seeds, and cut ½-inch squares, skin side down. Add them to the large bowl.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife"
+          },
+          "onion": {
+            "id": "onion",
+            "text": "Cut the onion into a ¼-inch small dice. Add it to the large bowl.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife"
+          },
+          "garlic": {
+            "id": "garlic",
+            "text": "Mince the garlic fine. Put it in the small bowl.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife"
+          },
+          "tomatoes": {
+            "id": "tomatoes",
+            "text": "Core the tomatoes, quarter them, and cut them into a ½-inch dice, keeping the juice and seeds. Add them to the garlic.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife"
+          },
+          "taste": {
+            "id": "taste",
+            "text": "Turn off the heat. Taste and adjust the salt.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pot"
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Tear the basil over the top. Serve with sliced baguette.",
+            "safety": "adult-nearby",
+            "hazard": "Hot food"
+          }
+        }
+      }
+    }
   ]
 }

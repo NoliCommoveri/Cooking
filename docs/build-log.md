@@ -5766,3 +5766,134 @@ asked for 14f (plan §12.8).
   and back, cooked into Progress), only on its week, kept through Edit
   course, capstone menu recipes, and before the draft; the linter's
   `adultAtHome`, `ownRecipe`, and writing box rules.
+
+## 226. 2026-10-26 — 14g content: Level 3 Unit 1
+
+Owner, 2026-10-26: "Start with Level 3 Unit 1", the first unit of 14g
+(plan §12.9). Reviewed in [14g review: Level 3 Cook, Unit
+1](https://claude.ai/artifact/87vWCFZFenAy9FDYHVbdXt); not merged until the
+owner approves it there.
+
+- **Before:** Unit 1 had one written recipe (Minestrone, Cook Around the
+  World's lesson), so a Level 3 course waited until week 4 to cook, and
+  week 3's Knowledge page was blank.
+- **Now:**
+  - **Seven Level-only recipes** in `content/levels/recipes/`, unit 103:
+    Black bean and vegetable quesadillas and Rajma (week 1, dicing),
+    Spaghetti aglio e olio and Scallion oil noodles (week 2, fine chopping),
+    Vegetable lo mein and Kimbap (week 3, julienne), and Ajapsandali (week 4,
+    the timed mastery dice). Checked against Cook Around the World first
+    (§12.4): the dicing, fine-chopping, and julienne pick-one groups are full,
+    and none is a variation of a planned dish. Their cards' minutes are now
+    the recipes' own (370 in all, against 350 estimated).
+  - **Minestrone's Level 3 version** (`"level": "sp-3"`): sized cuts (½-inch
+    onion, celery, and zucchini; ¼-inch carrot), a timed knife check, and no
+    beginner tips. Level 3 has no lessons left without a version in Unit 1.
+  - **Week 1 uses jarred minced garlic** (owner, 2026-10-26: "Youre asking
+    for a mince not taught yet"): mincing is week 2's skill, so the
+    quesadillas and rajma measure jarred garlic instead of mincing cloves.
+  - **Week 3's Knowledge page:** reading a recipe for timing, a prep list,
+    mise en place, and why a scale beats cups, with a 7-question quiz.
+  - **New ingredients:** canned red kidney beans, lo mein egg noodles, thin
+    wheat noodles (watch: some have egg), nori (watch: plain sheets, not
+    seasoned snacks), short-grain rice, green cabbage.
+  - **Clean foods:** no oyster sauce in the lo mein, no ham, imitation crab,
+    or fish cake in the kimbap, and vegetable oil, not lard, for the scallion
+    oil. Kimbap's egg has a wash step and a doneness check.
+- A Level 3 course now starts cooking in week 1. The Level course tests
+  (`test/worker-levels.test.js`) start there, or skip weeks 1–3 where they
+  need week 4; the Level version test uses the real minestrone version.
+- No screens changed, so no screenshots.
+- Tests: 392.
+
+## 227. 2026-10-26 — 14g content: Level 2 Unit 1
+
+Owner, 2026-10-26: "begin unit 1 of level 2 while I review" (Level 3 Unit
+1). Reviewed in [14g review: Level 2 Apprentice, Unit
+1](https://claude.ai/artifact/5ChtD3ZAUh9VAnHy3cnv21); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 2 Unit 1's dishes was written except Cook Around
+  the World's grilled cheese and tomato soup, which chops with a chef's
+  knife and uses a stick blender. Its 12 part pages were blank.
+- **Now:**
+  - **Seven Level-only recipes** in `content/levels/recipes/`, unit 102:
+    Caprese sandwiches and Onigiri with tuna (week 1, knife safety),
+    Molletes (week 2, the oven with mitts), Loaded baked potatoes and Bún
+    bowl with chicken (week 3, mise en place), and Mini pita pizzas and Ful
+    medames with pita chips (week 4, measuring, the mastery week). None fits
+    a pick-one group with room or is a variation of a planned dish (§12.4).
+    Their cards' minutes are now the recipes' own.
+  - **Grilled cheese + tomato soup's Level 2 version:** no onion, chef's
+    knife, or blender; jarred garlic; the soup made first and held off the
+    heat; every step rewritten to Level 2's standard. 45 minutes.
+  - **Nothing before it's taught** (the owner's note on Level 3's garlic):
+    week 1 cuts only soft foods with a paring knife; the stove and oven
+    start in week 2; nothing is diced, minced, or a hard vegetable. Jarred
+    garlic, shredded carrots, and jarred salsa stand in.
+  - **All 12 part pages:** knife rules, the bridge and claw, cutting ahead;
+    burns and pan fires, mitts and handles, soup made ahead; parts of a
+    recipe, mise en place, gleaning (Ruth 2); halving and doubling, dry and
+    wet measuring, a yogurt dip made ahead.
+  - **New tools:** paring knife, serrated bread knife.
+  - **New ingredients:** fresh and shredded mozzarella, Monterey Jack,
+    ciabatta and bolillo rolls (watch: lard), cooked short-grain rice
+    pouches, rotisserie chicken (watch: no bacon or ham in the seasoning),
+    shredded carrots, fish sauce (anchovy; watch: no shrimp or squid),
+    roasted peanuts, mushrooms, canned fava beans, pizza sauce.
+- The content check finds no Level 2 writing warnings.
+- No screens changed, so no screenshots.
+- Tests: 392.
+
+## 228. 2026-10-26 — 14g content: Level 4 Unit 1
+
+Owner, 2026-10-26: "Start Level 4 Unit 1 while I review." Reviewed in [14g
+review: Level 4 Chef, Unit 1](https://claude.ai/artifact/6jLt9HvV7Ng1QSzg8zKVNY);
+not merged until the owner approves it there.
+
+- **Before:** Unit 1's Familiar dishes in week 1 were Cook Around the World
+  lessons with no Level 4 version; chana masala (week 3) was a Cook Around
+  the World card with no lesson; the other five dishes and all 12 part pages
+  were unwritten.
+- **Now:**
+  - **Five Level-only recipes** in `content/levels/recipes/`, unit 104:
+    Steak fajitas and Bò lúc lắc (week 2, weighing and yield), Chicken
+    enchiladas (week 3, scaling 4 to 12 by hand), Salade niçoise with seared
+    tuna and Bibimbap (week 4, the timed mastery week). All "solo", with
+    weights in grams where the unit weighs. Their cards' minutes are now the
+    recipes' own.
+  - **Level 4 versions** of Chicken fried rice (every vegetable in brunoise)
+    and Ratatouille (exact ½-inch dice).
+  - **Chana masala**, a new Cook Around the World lesson (lesson 3, the
+    blooming-spices group), and its Level 4 version, scaled 6 to 12 by hand.
+    Its card's minutes are now the lesson's 55.
+  - **All 12 part pages** at Level 4's lengths: cuts by size and the French
+    aromatic base, a timed brunoise, cutting ahead; weight over volume and
+    yield, weighing and portioning ahead; scaling factors and what doesn't
+    scale, scaling a Sabbath recipe; planning backward from serving, a run
+    prep timeline, a Sabbath prep timeline.
+  - **New ingredients:** tuna steaks, baby potatoes, Kalamata or Niçoise
+    olives, watercress, gochujang (watch: no shrimp or squid), dried guajillo
+    chiles, canned chickpeas.
+  - Tuna is cooked to 145°F and eggs to 160°F, the app's standards; the
+    review doc asks the owner about both.
+- No screens changed, so no screenshots.
+- Tests: 392.
+
+## 229. 2026-10-26 — Demo page copy: the owner's first corrections
+
+Owner, 2026-10-26, in [Release 1 copy
+review](https://claude.ai/artifact/1wxbCfTZ2XeGSSVJ9sQkrn) (rows D10 to D41).
+
+- **Before:** the demo's track buttons, Shopping, Course, Skills, and Try a
+  week intros were Claude's draft.
+- **Now** (`public/demo.js`), in the owner's words:
+  - Track buttons: "Enhance your technique as you explore dishes from all
+    over" and "Fundamental cooking skills taught through reading, writing,
+    and doing".
+  - Shopping: "We help make sure everything you need is on hand." The two
+    preview notes under What you'll need and under the list are gone.
+  - Course and Skills intros, and Try a week's intro ("A sample of Unit 1
+    for {Level}…", with Unit capitalized as elsewhere in the app).
+- Screenshots (phone width, light and dark) sent in the session.
+- Tests: 392.

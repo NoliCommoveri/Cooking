@@ -90,7 +90,9 @@ test("each Level's writing standard warns: Level 2 one action a step in plain wo
 });
 
 test("a Level's weeks list the written lessons with no version for it yet", () => {
-  assert.match(lint(base).warnings.join('\n'), /levels\/sp-3\.json: \d+ written lessons its weeks cook have no Level 3 Cook version yet: .*minestrone/);
+  const w = lint(base).warnings.join('\n');
+  assert.match(w, /levels\/sp-3\.json: \d+ written lessons its weeks cook have no Level 3 Cook version yet: .*challah/);
+  assert.doesNotMatch(w, /no Level 3 Cook version yet: .*minestrone/);
 });
 
 test('a missing wash step after raw food fails', () => {
