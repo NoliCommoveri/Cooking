@@ -6283,3 +6283,31 @@ users."
 - Screenshots (the prep list in both themes, the shopping list light and
   dark, phone width) sent in the session.
 - Tests: 401.
+
+## 242. 2026-10-26 — Drills use what the week already buys
+
+Owner, 2026-10-26: "Some of your drills are extremely expensive to do. If
+something may not be achievable to a family (like buying a whole side of
+flounder) direct them to find a YouTube video instead, or come up with an
+alternative."
+
+- **Before:** some drills asked for food the week's chosen dish doesn't
+  buy: Level 4's week 8 drill needed both a flank steak and duck breasts,
+  week 9 a whole side of salmon even for families cooking the veracruzana,
+  and week 10 an extra whole chicken to spatchcock. Level 3's week 8 drill
+  wanted two kinds of fillet and week 23 an extra skin-on fillet; Level 2's
+  week 9 wanted two extra frozen fillets.
+- **Now:** each of those drills uses the week's own ingredients, and where
+  that can't cover it, sends the learner to a short video (with what to
+  search for) and a cheap stand-in:
+  - Level 2 week 9: thaw this week's frozen fish in two halves, one each way.
+  - Level 3 week 8: pin-bone this week's fillets; a video shows the other
+    kind of fish. Week 23: practice the skin-side sear on the first fillet of
+    the week's recipe.
+  - Level 4 week 8: the trim for the dish being cooked, then a video and the
+    same knife motion on an eggplant, zucchini, or cucumber for the other.
+    Week 9: a family cooking the veracruzana watches a side being portioned
+    and practices on one skin-on fillet. Week 10: spatchcock the quail, or
+    the chicken for chicken two ways before breaking it down.
+- No screens changed, so no screenshots.
+- Tests: 401.

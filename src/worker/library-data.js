@@ -20587,15 +20587,15 @@ export const LIBRARY = {
       "title": "Thaw frozen fish safely: in the fridge or in cold water",
       "minutes": 20,
       "body": [
-       "Most fish at the store is sold frozen, and it has to thaw before it cooks evenly. There are two safe ways, and one way that isn't. Today you'll try both safe ones."
+       "Most fish at the store is sold frozen, and it has to thaw before it cooks evenly. There are two safe ways, and one way that isn't. Today you'll try both safe ones on the frozen fish you bought for this week's recipe, so nothing extra is needed."
       ],
       "steps": [
-       "Take two frozen fish fillets, each in its own sealed package or zip-top bag.",
-       "The night before, put one on a plate on the bottom shelf of the fridge. The plate catches any drips.",
-       "The next day, fill a big bowl with cold tap water. Put the other sealed fillet in it, pressed under the water.",
+       "Take this week's frozen fish and split it into two sealed zip-top bags, half in each.",
+       "The night before you cook, put one bag on a plate on the bottom shelf of the fridge. The plate catches any drips.",
+       "The next day, fill a big bowl with cold tap water. Put the other bag in it, pressed under the water.",
        "Change the water every 30 minutes so it stays cold. Check the fish by pressing it through the bag.",
        "When it's soft all the way through, it's thawed. Write down how long it took.",
-       "Compare the two fillets. Cook both today, in this week's recipe or another.",
+       "Compare the two halves. Both go into this week's recipe today.",
        "Never thaw fish on the counter. Wash your hands, the plate, and the bowl after."
       ],
       "quiz": [
@@ -23808,16 +23808,16 @@ export const LIBRARY = {
       "title": "Check a fillet for pin bones; judge freshness by smell, eyes, and flesh",
       "minutes": 40,
       "body": [
-       "Many fish have a row of thin, soft pin bones that the filleting knife misses. You'll learn to find them by feel and pull them out, then compare a few kinds of fillet.",
-       "Fresh fish tells you it's fresh with its smell, its eyes, and its flesh. Take this drill to the fish counter with an adult, or use the fish you're buying for this week's recipe."
+       "Many fish have a row of thin, soft pin bones that the filleting knife misses. You'll learn to find them by feel and pull them out, using the fish you bought for this week's recipe.",
+       "Fresh fish tells you it's fresh with its smell, its eyes, and its flesh. Take the second half of this drill to the fish counter when you buy this week's fish."
       ],
       "steps": [
-       "Get one skin-on salmon or trout fillet, and one cod or tilapia fillet if you can.",
-       "Lay the salmon or trout skin side down. Run your fingertips slowly along the middle of the thick end, from the head end toward the tail, then back the other way. Feel for little hard tips poking up.",
+       "Use the fillets for this week's recipe: salmon for the baked fish, or cod for the chermoula. Don't buy extra fish for the drill.",
+       "Lay a fillet skin side down, or flat side down if it's skinless. Run your fingertips slowly along the middle of the thick end, from the head end toward the tail, then back the other way. Feel for little hard tips poking up.",
        "Press the flesh down gently on either side of a bone so it stands up. Grip its tip with clean tweezers and pull it out toward the head end, at the same angle it lies, so the flesh doesn't tear.",
        "Line up the bones you pulled on a paper towel and count them. Check the fillet once more.",
-       "Check the white fish fillet the same way. Write down which had pin bones and where.",
-       "Wash your hands, the tweezers, and everything the raw fish touched. Wrap the fillets and keep them in the coldest part of the fridge to cook within a day, in this week's recipe if you like.",
+       "Check every fillet the same way. Write down how many bones you found and where. To see how a salmon and a white fish differ, watch a short video of a fishmonger pin-boning each (search \"how to remove pin bones from salmon\").",
+       "Wash your hands, the tweezers, and everything the raw fish touched. Wrap the fillets and keep them in the coldest part of the fridge for this week's recipe.",
        "At the counter, look at a whole fish if there is one. Fresh eyes are clear and bulge a little; old ones are cloudy and sunken. Fresh gills are bright red, not brown.",
        "Look at the fillets. Fresh flesh is moist and shiny, with no dry or browning edges, and the flakes hold together without gaps.",
        "Ask to smell the fish you're buying. Fresh fish smells clean, like cold water or the sea. A strong fishy or sour smell means it's old.",
@@ -25751,15 +25751,15 @@ export const LIBRARY = {
       "title": "Sear a skin-on fillet: dry it, press it flat, wait for it to release",
       "minutes": 40,
       "body": [
-       "Before this week's recipe, practice the one hard part on a single fillet: crisp skin that lets go of the pan on its own."
+       "Before you cook the whole recipe, practice the one hard part on a single fillet: crisp skin that lets go of the pan on its own. Use the first fillet of this week's recipe, so nothing extra is needed, and cook the rest once you've seen how it goes."
       ],
       "steps": [
-       "Pat one skin-on salmon or trout fillet very dry on both sides, and salt the skin. Wash your hands and everything the raw fish touched.",
+       "Take one skin-on fillet from this week's recipe. Pat it very dry on both sides, and salt the skin. Wash your hands and everything the raw fish touched.",
        "Turn the stove fan on high. Heat a tablespoon of oil in a skillet over medium-high heat until it shimmers.",
        "Lay the fillet in skin side down, away from you, and press it flat with a spatula for 15 seconds.",
        "Leave it alone. Watch the side of the fillet: the flesh turns from see-through to solid, working up from the pan. Every 30 seconds, nudge it with the spatula. Write down when it slides free.",
        "When it's solid about three-quarters of the way up, turn it and cook 1 minute more. Check that it reads 145°F.",
-       "Eat it skin side up, and write down how crisp the skin was and what you'd change for the mastery cook."
+       "Eat it skin side up, or set it aside warm for the meal. Write down how crisp the skin was and what you'll change for the rest of the fillets."
       ],
       "quiz": [
        {
@@ -28602,16 +28602,16 @@ export const LIBRARY = {
       "title": "Trim silverskin; score duck skin",
       "minutes": 30,
       "body": [
-       "Two trims a restaurant prep cook does every day: taking silverskin off beef, and scoring duck skin so its fat renders. Both need a sharp knife and a light hand. Use this week's flank steak and duck breasts."
+       "Two trims a restaurant prep cook does every day: taking silverskin off beef, and scoring duck skin so its fat renders. Do the one for the dish you're cooking this week on its own meat. For the other, watch a short video and practice the knife work on a vegetable, so you don't buy a second cut."
       ],
       "steps": [
-       "Silverskin: lay the flank steak on the raw-meat board and find the thin, shiny membrane on its surface.",
+       "If you're cooking the flank steak: lay it on the raw-meat board and find the thin, shiny membrane on its surface.",
        "Slide the tip of a sharp, flexible knife under one end of it. Grip the freed tab with a paper towel.",
-       "Angle the blade slightly up, toward the membrane, and saw gently along under it while pulling the tab back. Take it off in strips, losing as little meat as you can.",
-       "Weigh the trim. Note it as a percentage of the steak.",
-       "Scoring: lay a duck breast skin side up. With the tip of the knife, cut lines ⅜ inch apart diagonally across the skin, through the fat but not into the meat. Turn the breast and cut the other way, for diamonds.",
-       "Check the cuts: no red meat should show. If it does, the next cuts go shallower.",
-       "Refrigerate both for this week's recipes, and wash your hands, the knife, and the board."
+       "Angle the blade slightly up, toward the membrane, and saw gently along under it while pulling the tab back. Take it off in strips, losing as little meat as you can. Weigh the trim and note it as a percentage of the steak.",
+       "If you're cooking the duck: lay a breast skin side up. With the tip of the knife, cut lines ⅜ inch apart diagonally across the skin, through the fat but not into the meat. Turn it and cut the other way, for diamonds. No red meat should show; if it does, cut shallower.",
+       "For the trim you aren't doing, watch a short video of it (search \"remove silverskin from steak\" or \"score duck breast\").",
+       "Then practice that motion on a vegetable: score a crosshatch through the skin of a halved eggplant or zucchini without cutting into the flesh, or slide the knife just under the peel of a cucumber, blade angled up, taking off a thin strip.",
+       "Refrigerate the meat for this week's recipe, use the vegetable in a stir-fry or salad, and wash your hands, the knife, and the board."
       ],
       "quiz": [
        {
@@ -28763,9 +28763,10 @@ export const LIBRARY = {
       "title": "Skin and portion a side of salmon; pull the pin bones",
       "minutes": 30,
       "body": [
-       "A whole side of salmon costs less per pound than portions, and portioning it yourself is quick once you've done it. Use this week's side for the teriyaki salmon, or freeze the portions individually wrapped."
+       "A whole side of salmon costs less per pound than portions, and portioning it yourself is quick once you've done it. If your family is cooking the teriyaki salmon side, this drill is its first steps. If you're cooking the veracruzana, don't buy a side for it: watch a fishmonger do it on video, then practice on one skin-on fillet."
       ],
       "steps": [
+       "Cooking the veracruzana instead? Watch a short video of a side of salmon being skinned and portioned (search \"how to portion a side of salmon\"), then do the steps below on one skin-on salmon fillet, and cook it any way you like this week.",
        "Lay the side skin down on the raw-meat board with the head end to your left (to your right if you're left-handed).",
        "Run your fingertips along the thick half, from the head end toward the tail. Pull each pin bone with tweezers toward the head, at the angle it lies. Count them; a side usually has 25 to 35.",
        "Turn the side so the tail points toward you. Cut down through the flesh to the skin about ¾ inch from the tail end.",
@@ -28929,16 +28930,16 @@ export const LIBRARY = {
       "title": "Spatchcock a bird",
       "minutes": 30,
       "body": [
-       "Spatchcocking, cutting out the backbone and pressing a bird flat, makes a whole bird roast evenly and fast. Practice on a whole chicken, then use the technique on this week's quail, or roast the chicken flat for another dinner."
+       "Spatchcocking, cutting out the backbone and pressing a bird flat, makes a whole bird roast evenly and fast. Use this week's birds, so nothing extra is needed: spatchcock the quail for the Explore dish, or, for chicken two ways, spatchcock the chicken first, then break it down from flat. The backbone goes into the stock either way."
       ],
       "steps": [
-       "Set up the raw-meat station. Lay the chicken breast side down, neck end toward you. Don't rinse it.",
+       "Set up the raw-meat station. Lay the bird breast side down, neck end toward you. Don't rinse it.",
        "With kitchen shears, cut along one side of the backbone from tail to neck, cutting through the rib bones.",
        "Cut along the other side and lift the backbone out. Bag it for stock.",
        "Open the bird like a book. Nick the white cartilage at the top of the breastbone with the knife tip.",
        "Turn it skin side up, legs pointing out. Press hard on the breastbone with the heel of your hand until it cracks and the bird lies flat.",
-       "Tuck the wing tips behind the breast. Pat dry, and season, or refrigerate uncovered to dry the skin overnight.",
-       "A flat 4-pound chicken roasts at 450°F in about 45 minutes, to 165°F in the thickest part of the breast and thigh.",
+       "Tuck the wing tips behind the breast. If you're cooking chicken two ways, go straight on to breaking it down: the legs, wings, and breasts come off a flat bird easily.",
+       "A flat 4-pound chicken would roast at 450°F in about 45 minutes, to 165°F in the thickest part of the breast and thigh; flat quail take about 14 minutes.",
        "Wash the shears, board, and your hands with hot, soapy water, and wipe the counter."
       ],
       "quiz": [
