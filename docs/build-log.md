@@ -5542,3 +5542,24 @@ parent."
   preview after a swap with the old list preselected, We have what it
   needs with Undo, and a new list clearing the notice. Every swap test
   expects a refusal when run on the Sabbath.
+
+## 219. 2026-10-26 — Plan 14e: Level versions and step pictures
+
+Plan only; no code. The owner's calls on presentation by Level (§12.0, 14e).
+
+- **Before:** §12.0 and 14e called for "a coaching setting per Level in the
+  player."
+- **Now:**
+  - **Presentation comes from each Level's written version** of a recipe,
+    not from the player adapting one recipe (owner: "the original idea was
+    writing level appropriate variations of the recipes"). The coaching
+    setting is gone. Level 3 and Level 4 use the same player.
+  - **Step pictures at every Level** (owner: "since video is too expensive
+    I definitely think we should do pictures"): shown under the step on
+    Level 2 versions, behind **Show me** on Level 3 and 4. Made like the
+    dish pictures, from ChatGPT sheets the owner uploads.
+  - 14e also has a Level week play its own Level's version of a shared
+    lesson, never one picked by best fit.
+  - **Claude's recommendations, not yet confirmed:** pictures on 3–4 key
+    steps a recipe, one sheet per recipe; the Levels before Cook Around the
+    World; a writing standard per Level that the linter warns on.
