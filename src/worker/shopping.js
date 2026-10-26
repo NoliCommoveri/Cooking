@@ -47,8 +47,9 @@ async function upcoming(env, fam, day, tz) {
   // bought: its pick, or the best for the profiles on the cook.
   const choices = await variationChoices(env, fam.id);
   const tc = await tasteContext(env, fam);
-  const entry = (lid, week, extra) => {
-    const vid = versionFor(tc, choices, lid, extra.profile_ids).variation;
+  // level: a Level course's lessons are bought for the Level's own version (14e).
+  const entry = (lid, week, extra, level = null) => {
+    const vid = versionFor(tc, choices, lid, extra.profile_ids, level).variation;
     // An optional ingredient someone on the cook rated 1 star isn't bought (11d2).
     const out = hatedExtras(tc, versionSummary(lid, vid), extra.profile_ids);
     return { lesson_id: lid, title: versionTitle(lid, vid) ?? names[lid]?.title ?? lid, week, ...(vid ? { variation: vid } : {}), ...(out.length ? { left_out: out } : {}), ...extra };
@@ -65,7 +66,7 @@ async function upcoming(env, fam, day, tz) {
         out.push(entry(lid, w.week < thisWeek ? thisWeek : w.week, {
           key: q ? q.id : `${st.course.id}:${lid}`, queue_id: q?.id ?? null, course_id: st.course.id,
           servings: q?.servings ?? nearestSize(lid, fam.default_servings), profile_ids: st.profiles,
-        }));
+        }, st.course.program ?? null));
       }
     }
   }

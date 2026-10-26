@@ -103,20 +103,30 @@ export function cookCtx(tc, pids) {
 }
 const dietOk = (tc, x) => dietView(x, LIBRARY.ingredients, tc.filters).visible;
 
+// A lesson's taste versions (§6.21): its variations that aren't a Level's
+// version. A Level's version (14e) plays only on that Level's course.
+export const tasteVersions = (L) => (L?.variations ?? []).filter((v) => !v.level);
+export const levelVersionOf = (lid, level) => (level && lessonById[lid]?.variations?.find((v) => v.level === level)) || null;
+
 // A lesson's versions for the profiles on a cook, best first, each with its
 // fit and why. A version the family's diet settings hide is listed last,
 // marked, and never picked.
 export function versionOptions(tc, lid, pids) {
-  const L = lessonById[lid];
-  if (!tc || !L?.variations?.length) return null;
-  const hidden = new Set([L, ...L.variations].filter((v) => !dietOk(tc, v)).map((v) => (v === L ? '' : v.id)));
-  const ranked = rankVersions(L, cookCtx(tc, pids)).map((v) => ({ ...v, hidden: hidden.has(v.id) }));
+  const L = lessonById[lid], vs = tasteVersions(L);
+  if (!tc || !vs.length) return null;
+  const hidden = new Set([L, ...vs].filter((v) => !dietOk(tc, v)).map((v) => (v === L ? '' : v.id)));
+  const ranked = rankVersions({ ...L, variations: vs }, cookCtx(tc, pids)).map((v) => ({ ...v, hidden: hidden.has(v.id) }));
   return [...ranked.filter((v) => !v.hidden), ...ranked.filter((v) => v.hidden)];
 }
 
 // The version a cook plays: the family's pick when it made one, or the best
 // for the profiles on it. { variation, saved, options } ('' is the lesson).
-export function versionFor(tc, choices, lid, pids) {
+// level: the Level course it's cooked on (14e), which plays the Level's own
+// version, or the lesson itself, never a pick or the best fit.
+export function versionFor(tc, choices, lid, pids, level = null) {
+  if (level) return { variation: levelVersionOf(lid, level)?.id ?? '', saved: false, options: null, level: true };
+  // A pick can't be a Level's version (the Version dialog never offers one).
+  if (choices?.[lid] && lessonById[lid]?.variations?.some((v) => v.id === choices[lid] && v.level)) choices = null;
   const options = versionOptions(tc, lid, pids);
   if (!options) return { variation: choices?.[lid] ?? '', saved: lid in (choices ?? {}), options: null };
   if (choices && lid in choices) return { variation: choices[lid], saved: true, options };
@@ -128,7 +138,7 @@ export function versionFor(tc, choices, lid, pids) {
 export function dishFit(tc, ctx, id) {
   const L = lessonById[id];
   if (!L) return { ...scoreDish(dishById[id], ctx), written: false };
-  const versions = [L, ...(L.variations ?? []).map((v) => ({ ...v, tags: v.tags ?? L.tags }))].filter((v) => dietOk(tc, v));
+  const versions = [L, ...tasteVersions(L).map((v) => ({ ...v, tags: v.tags ?? L.tags }))].filter((v) => dietOk(tc, v));
   if (!versions.length) return { ...scoreDish(L, ctx), written: true, hidden: true };
   const scored = versions.map((v) => ({ ...scoreDish(v, ctx), version: v === L ? '' : v.id, version_title: v.title }));
   return { ...scored.sort(better)[0], written: true };

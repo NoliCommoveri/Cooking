@@ -706,3 +706,37 @@ test('before /ops applies the draft, a course still saves and its step pictures 
   assert.equal(made.body.pictures_saved, false);
   assert.equal((await kitchen(a, ava)).pictures, 'button');
 });
+
+// 14e: a Level course cooks the Level's own version of a lesson, never a
+// taste pick or the best fit; until one is written, the lesson itself.
+test("a Level course plays the lesson itself, not the family's taste pick", async () => {
+  const { a, ava } = await setup();
+  assert.equal((await a.put('/api/variations/chimichurri-steak', { variation: 'chicken' })).status, 200);
+  await a.post('/api/courses', { program: 'sp-4', start_date: sunday, per_week: 1, profile_ids: [ava], starts: 'familiar' });
+  const q = (await a.get(`/api/profiles/${ava}/queue`)).body;
+  assert.ok(Object.values(q.level.week_of).length && q.level.week_of['chimichurri-steak'], 'chimichurri steak is a Level 4 week');
+  assert.equal(q.versions['chimichurri-steak'], '', 'no Level 4 version yet: the lesson itself');
+  // And it's bought for as the lesson, not the family's pick.
+  const shop = (await a.get('/api/shopping')).body.weeks.flatMap((w) => w.lessons).find((e) => e.lesson_id === 'chimichurri-steak');
+  assert.ok(shop, 'on the shopping weeks ahead');
+  assert.equal(shop.variation, undefined);
+});
+
+test("a Level course plays the Level's own version, and it's never a taste pick", async () => {
+  const L = LIBRARY.lessons.find((x) => x.id === 'minestrone');
+  const { variations: _, ...summary } = L;
+  L.variations = [{ ...summary, id: 'sp-3', title: 'Minestrone', level: 'sp-3' }];
+  try {
+    const { a, ava, ben } = await setup();
+    await level(a, [ava]);
+    const q = (await a.get(`/api/profiles/${ava}/queue`)).body;
+    assert.equal(q.versions.minestrone, 'sp-3');
+    const row = (await card(a)).this_week.lessons.find((x) => x.lesson_id === 'minestrone');
+    assert.equal(row.version, null, 'no Version button on a Level week');
+    // Off the Level course, the Level's version isn't offered or picked.
+    assert.equal((await a.get(`/api/profiles/${ben}/queue`)).body.versions.minestrone, undefined);
+    assert.equal((await a.put('/api/variations/minestrone', { variation: 'sp-3' })).status, 400);
+  } finally {
+    delete L.variations;
+  }
+});

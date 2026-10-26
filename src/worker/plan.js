@@ -48,8 +48,10 @@ const titleOfLevel = (V, id) => lessonById[id]?.title ?? V.titles[id] ?? dishByI
 
 // The version a row plays (§6.21), for its Version button: the family's pick,
 // or the best for the profiles on it, with every version's fit. null for a
-// lesson with no other versions.
-function versionOut(tc, choices, lid, pids) {
+// lesson with no other versions, and on a Level course (14e), which plays the
+// Level's own version.
+function versionOut(tc, choices, lid, pids, level = null) {
+  if (level) return null;
   const v = versionFor(tc, choices, lid, pids);
   if (!v.options) return null;
   const on = tc.profiles.filter((p) => !pids?.length || pids.includes(p.id)).map((p) => p.name);
@@ -62,7 +64,12 @@ const versionPicker = async (env, fam, tc = undefined) => {
   tc = tc === undefined ? await tasteContext(env, fam) : tc;
   if (!tc) return () => null;
   const choices = await variationChoices(env, fam.id);
-  return (lid, pids) => versionOut(tc, choices, lid, pids);
+  return (lid, pids, level = null) => versionOut(tc, choices, lid, pids, level);
+};
+// The Level a queue row is cooked on (14e): its course's, for a Level course.
+const rowLevels = async (env, fid) => {
+  const of = Object.fromEntries((await activeCourses(env, fid)).filter((c) => c.program).map((c) => [c.id, c.program]));
+  return (r) => (r.course_id && of[r.course_id]) || null;
 };
 
 // The family's row, with the newest release it sees (§8.6).
@@ -974,7 +981,8 @@ function courseOut(st, fam, rowsByLesson, version = () => null) {
       lesson_id: x.id, title: L?.title ?? x.id, label: V ? (week ? `Week ${week}` : null) : lessons.labels[x.id] ?? null, week, image: L?.image ?? null, unit: L?.unit ?? null,
       foundation: Boolean(dishById[x.id]?.pickOne), done: x.done, overdue: fam.mode === 'homeschool' ? x.overdue : false, extra: Boolean(x.extra),
       queue_id: q?.id ?? null, servings: q?.servings ?? null, servings_options: L ? servingOptions(L) : [], status: q?.status ?? null,
-      version: version(x.id, profiles),
+      // A Level course plays the Level's own version (14e): no Version button.
+      version: version(x.id, profiles, V ? course.program : null),
       // A Level week neither of whose dishes the family can cook (14c): each dish and why, and whether it's been requested.
       ...(V && lessons.blocked[x.id] ? { blocked: lessons.blocked[x.id], requested: lessons.requested.has(week) } : {}),
       // Its two dishes, for Cook this instead, and its swap (14d).
@@ -1032,7 +1040,8 @@ export function register(on) {
     const tests = (await env.DB.prepare('SELECT lesson_id, cooked_on, parent_id FROM test_cooks WHERE family_id = ?').bind(s.family_id).all()).results;
     const names = await recipeNames(env, s.family_id);
     const version = await versionPicker(env, fam);
-    const out = (r) => ({ ...itemOut(r, who, suggestedLabels, names), version: version(r.lesson_id, who[r.id]) });
+    const levelOfRow = await rowLevels(env, s.family_id);
+    const out = (r) => ({ ...itemOut(r, who, suggestedLabels, names), version: version(r.lesson_id, who[r.id], levelOfRow(r)) });
     const filters = JSON.parse(fam.diet_filters);
     const { results: mine } = await env.DB.prepare('SELECT * FROM family_recipes WHERE family_id = ? AND deleted_at IS NULL ORDER BY title COLLATE NOCASE, id').bind(s.family_id).all();
     return {
@@ -1193,6 +1202,16 @@ export function register(on) {
       if (v) versions[L.id] = v.id;
       const out = hatedExtras(tc, versionSummary(L.id, v?.id), pids);
       if (out.length) leaveOut[L.id] = out;
+    }
+    // A Level learner's course recipes play the Level's own version (14e),
+    // whatever the tastes say, or the lesson itself when it has none.
+    const program = mine?.lessons.level ? mine.course.program : null;
+    for (const lid of program ? Object.values(mine.lessons.idOf) : []) {
+      if (!lessonById[lid]?.variations?.length) continue;
+      const v = versionFor(tc, null, lid, [pid], program).variation;
+      versions[lid] = v;
+      const out = hatedExtras(tc, versionSummary(lid, v), mine.profiles);
+      if (out.length) leaveOut[lid] = out; else delete leaveOut[lid];
     }
     return {
       mode: fam.mode,

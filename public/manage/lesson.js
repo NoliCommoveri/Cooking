@@ -28,6 +28,9 @@ const OWN_CONTROL = ['feast', 'variations'];
 // A variation (plan §6.21) teaches what its lesson teaches, so these stay the lesson's.
 const SAME = ['track', 'cuisine', 'skill', 'skills', 'prereqs', 'image'];
 
+// The Levels (§12): a lesson can have one version written for each (14e).
+const LEVEL_IDS = ['sp-2', 'sp-3', 'sp-4'];
+const levelName = (x) => cur(`levels/${x}.json`)?.name ?? x;
 const slug = (s) => String(s ?? '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
 
 // Steps and why cards need ids other parts point at; a new one gets one from its words.
@@ -62,7 +65,7 @@ export function lessonPage(id, vid = null) {
   const commit = (structural) => {
     giveIds(W);
     if (v) {
-      const now = diffVariation(L, W, { id: v.id, tags: v.tags });
+      const now = diffVariation(L, W, { id: v.id, tags: v.tags, level: v.level });
       for (const k of Object.keys(v)) delete v[k];
       Object.assign(v, now);
       put(path, L, `Edited ${W.title} (a version of ${L.title})`);
@@ -160,7 +163,7 @@ export function lessonPage(id, vid = null) {
     return el('details', { class: 'card msec', 'data-k': 'variations' },
       el('summary', {}, el('h2', {}, `Variations (${list.length})`)),
       el('p', { class: 'mut small' }, "Complete versions of this lesson with a preference built in, like Chimichurri chicken for Chimichurri steak. Each one teaches the same skill and counts as this lesson. Whatever a variation doesn't change stays shared with the lesson, so a fix here reaches it too. Each one is checked like a whole lesson."),
-      list.length ? el('ul', { class: 'mvars' }, list.map((x) => el('li', {}, el('a', { href: `#/lesson/${id}/v/${x.id}` }, x.title)))) : null,
+      list.length ? el('ul', { class: 'mvars' }, list.map((x) => el('li', {}, el('a', { href: `#/lesson/${id}/v/${x.id}` }, x.title), x.level ? el('span', { class: 'mut' }, ` (${levelName(x.level)}'s version)`) : null))) : null,
       el('button', { type: 'button', class: 'hbtn small-btn', onclick: () => addVariation(L, dish) }, '+ Add a variation'));
   }
   // A variation's own card: its tags, and taking it out.
@@ -168,6 +171,8 @@ export function lessonPage(id, vid = null) {
     return el('section', { class: 'card msec' },
       el('h2', {}, 'This version'),
       el('p', { class: 'mut small' }, `Its name in the files is "${v.id}". Change anything below that differs from ${L.title}: the protein, amounts, times, doneness target, steps, tools, or Learn cards.`),
+      // A Level's version (14e): its Level course always cooks it.
+      v.level ? el('p', { class: 'card notice small' }, el('b', {}, `${levelName(v.level)}'s version. `), `A ${levelName(v.level)} course always cooks this version of ${L.title}; it's never offered as a preference. Write it to the Level's standard: the checks below warn when it isn't.`) : null,
       el('fieldset', { class: 'mf-obj' }, el('legend', {}, 'Tags'),
         el('p', { class: 'mut small' }, 'Tagged like a dish, so families can be offered the version that suits them.'),
         tagFields(v, () => onChange(false))),
@@ -234,10 +239,24 @@ export function lessonPage(id, vid = null) {
 function addVariation(L, dish, gap = null) {
   const title = el('input', { maxlength: 80, placeholder: 'Like "Chimichurri chicken" for Chimichurri steak' });
   const msg = el('p', { class: 'err', role: 'alert' });
+  // What it's for: a preference, or a Level's own version (14e), one per Level.
+  const levels = LEVEL_IDS.filter((x) => cur(`levels/${x}.json`) && !(L.variations ?? []).some((v) => v.level === x));
+  const kind = el('select', { onchange: () => { if (kind.value && !title.value.trim()) title.value = L.title; } },
+    el('option', { value: '' }, 'A preference, like Chimichurri chicken'),
+    gap ? null : levels.map((x) => el('option', { value: x }, `${levelName(x)}'s version`)));
   const close = modal('Add a variation', el('form', { onsubmit: (e) => {
     e.preventDefault();
     const t = title.value.trim().replace(/\s+/g, ' ');
     if (!t) { msg.textContent = 'Give it a name.'; return; }
+    const level = kind.value || null;
+    if (level) {
+      // A Level's version may keep the lesson's name: it's that Level's recipe.
+      L.variations = [...(L.variations ?? []), { id: level, title: t, level }];
+      put(lessonFile(L.id), L, `Added ${levelName(level)}'s version of ${L.title}`);
+      close();
+      go(`#/lesson/${L.id}/v/${level}`);
+      return;
+    }
     if (t === L.title || (L.variations ?? []).some((x) => x.title === t)) { msg.textContent = 'That name is taken. Give this version its own.'; return; }
     // "Chimichurri chicken" is "chicken" in the files: the first word of the lesson's title is left off.
     const first = `${L.title.split(' ')[0]} `.toLowerCase();
@@ -252,6 +271,8 @@ function addVariation(L, dish, gap = null) {
   } },
   el('p', { class: 'mut small' }, `A complete version of ${L.title} with a preference built in. It starts as a copy of the lesson; change what differs on the next page.`),
   gap ? el('p', { class: 'card notice small' }, el('b', {}, 'From Recipe gaps: '), gap.note, '. Its tags are filled in for it; change them on the next page.') : null,
+  el('label', { class: 'f' }, "What it's for", kind),
+  el('p', { class: 'mut small' }, "A Level's version is the recipe written to that Level's standard: its Level course always cooks it."),
   el('label', { class: 'f' }, 'Its name, as families see it', title),
   msg,
   el('div', { class: 'acts' }, el('button', { type: 'submit', class: 'hbtn pri' }, 'Add and edit it'), el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel'))));

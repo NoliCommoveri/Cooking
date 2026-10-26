@@ -5631,3 +5631,30 @@ and the parent's setting).
   without the setting, back to the Level's way); a course saves before the
   draft and its pictures follow the Level; the linter refuses a missing or
   misnamed step picture.
+
+## 222. 2026-10-26 — Re-plan build, 14e: Level versions and the writing standard
+
+Owner, 2026-10-26: "skip picture prompts for now, do the rest" of 14e.
+
+- **Before:** a Level week cooking a Cook Around the World lesson played the
+  family's taste pick or the best fit, like any other cook, and nothing
+  checked a Level recipe against its Level's writing.
+- **Now:**
+  - **A Level's version** is a variation with `"level"` (sp-2, sp-3, or
+    sp-4), one per Level, which may keep the lesson's name. On that Level's
+    course the kitchen, the course card, and shopping use it, with no
+    Version button; until it's written, the lesson itself. It's never a
+    taste pick (the Version dialog refuses it), never the best fit, and not
+    counted in Recipe gaps. The player doesn't call it "a version of".
+  - **The content editor:** Add a variation asks what it's for, a
+    preference or a Level's version; a Level's version says so on its page
+    and in the lesson's list, and keeps its Level when edited.
+  - **The writing standard, as linter warnings** (Claude's numbers):
+    Level 2, a step over 25 words, a "!", or fewer than half the steps with
+    a tip or "should look like"; Level 4, more than a third of the steps
+    with a tip. Each Level file lists the written lessons its weeks cook
+    with no version for it yet.
+- Tests: 380. New: a Level course plays the lesson itself over the
+  family's taste pick, and buys for it; it plays the Level's version, with
+  no Version button, which isn't offered off the course or pickable; the
+  linter's Level version rules and writing warnings.
