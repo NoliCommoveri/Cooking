@@ -497,7 +497,7 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
     const steps = scaled().steps, n = steps.length, i = Math.min(S.step, n - 1), s = steps[i], last = i === n - 1;
     const notes = [];
     // Level 4's deep frying and grilling (§12.8), on the recipe's first step.
-    if (i === 0 && level?.adultHome) notes.push(`<p class="${T.note} adulthome">${ic('i-hat')}<b>Have an adult at home</b> for this recipe.</p>`);
+    if (i === 0 && level?.adultHome) notes.push(`<p class="${T.note} adulthome">${ic('i-hat')}<span><b>Have an adult at home</b> for this recipe.</span></p>`);
     if (s.type === 'doneness' && s.target) {
       notes.push(s.target.temp
         ? `<p class="${T.note} done-target">${ic('i-thermo')}<b>Thermometer:</b> at least ${s.target.temp}°${esc(s.target.unit || 'F')}</p>`

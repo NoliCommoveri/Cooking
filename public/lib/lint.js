@@ -466,6 +466,9 @@ export function lint(c) {
       }
       // Only Level 4 says "Have an adult at home" (§12.8): the other Levels' banners already ask for one.
       if (w.adultAtHome && V.id !== 'sp-4') err(ww, 'has adultAtHome, which only Level 4 uses: its learners cook on their own');
+      // Write my recipe (§12.8): Level 4's mastery weeks, and the weeks the student plans its menu.
+      if (w.ownRecipe && V.id !== 'sp-4') err(ww, 'has ownRecipe, which only Level 4 uses');
+      if (w.ownRecipe && !w.mastery && !w.kind) err(ww, 'has ownRecipe, which is for a mastery week, the practice runs, and the capstone');
       // Units of four weeks: the last is the mastery check (§12.2), or the capstone.
       if (w.mastery && !last) err(ww, 'a mastery week is the last week of its unit');
       if (last && !w.mastery && w.kind !== 'capstone') err(ww, 'the last week of a unit is its mastery week');

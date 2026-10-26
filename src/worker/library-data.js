@@ -16768,6 +16768,7 @@ export const LIBRARY = {
      "explore": "bibimbap",
      "cuisine": "korean",
      "mastery": true,
+     "ownRecipe": true,
      "drill": {
       "title": "Write a prep timeline and run it with a timer",
       "minutes": 30
@@ -16811,6 +16812,7 @@ export const LIBRARY = {
      "explore": "mezze-spread",
      "cuisine": "lebanese",
      "mastery": true,
+     "ownRecipe": true,
      "drill": {
       "title": "Hold a cold platter below 41°F; the 2-hour rule",
       "minutes": 30
@@ -16896,6 +16898,7 @@ export const LIBRARY = {
      "explore": "spatchcocked-quail",
      "cuisine": "persian",
      "mastery": true,
+     "ownRecipe": true,
      "drill": {
       "title": "Spatchcock a bird",
       "minutes": 30
@@ -17002,6 +17005,7 @@ export const LIBRARY = {
      "explore": "malva-pudding",
      "cuisine": "south-african",
      "mastery": true,
+     "ownRecipe": true,
      "drill": {
       "title": "Weave a lattice; vent and crimp",
       "minutes": 30
@@ -17108,6 +17112,7 @@ export const LIBRARY = {
      "explore": "pho-bo",
      "cuisine": "vietnamese",
      "mastery": true,
+     "ownRecipe": true,
      "drill": {
       "title": "Reduce a stock by half and taste the change",
       "minutes": 30
@@ -17236,6 +17241,7 @@ export const LIBRARY = {
      "cuisine": "korean",
      "mastery": true,
      "adultAtHome": true,
+     "ownRecipe": true,
      "drill": {
       "title": "Hold oil at 350°F; drain and hold fried food crisp in a low oven",
       "minutes": 30
@@ -17322,6 +17328,7 @@ export const LIBRARY = {
      "explore": "moussaka",
      "cuisine": "greek",
      "mastery": true,
+     "ownRecipe": true,
      "drill": {
       "title": "Plan oven space and timing for two large pans",
       "minutes": 30
@@ -17386,6 +17393,7 @@ export const LIBRARY = {
      "explore": "dafina",
      "cuisine": "moroccan",
      "mastery": true,
+     "ownRecipe": true,
      "drill": {
       "title": "Hold a stew safely for hours at 140°F or above",
       "minutes": 30
@@ -17402,6 +17410,7 @@ export const LIBRARY = {
     {
      "week": 34,
      "unit": 9,
+     "ownRecipe": true,
      "kind": "practice",
      "minutes": 180,
      "note": "Test-cook the planned main and sides",
@@ -17438,6 +17447,7 @@ export const LIBRARY = {
     {
      "week": 35,
      "unit": 9,
+     "ownRecipe": true,
      "kind": "practice",
      "minutes": 180,
      "note": "Make-ahead dishes from the plan: a sauce, the dessert, a stew or braise",
@@ -17464,6 +17474,7 @@ export const LIBRARY = {
     {
      "week": 36,
      "unit": 9,
+     "ownRecipe": true,
      "kind": "capstone",
      "minutes": 360,
      "note": "The full Sabbath meal for household and guests: a main, two sides, bread (challah, or homemade matzah in spring), and dessert, cooked alone",

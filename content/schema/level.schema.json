@@ -125,6 +125,9 @@
         "adultAtHome": {
           "const": true
         },
+        "ownRecipe": {
+          "const": true
+        },
         "kind": {
           "enum": [
             "practice",

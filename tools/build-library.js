@@ -225,10 +225,11 @@ export function buildLibrary() {
       // Its swap-ins: the other recipes best fit picks among (12d).
       // A practice or capstone week has no recipe: its own minutes and note instead.
       // adultAtHome: Level 4's deep frying and grilling (§12.8).
-      weeks: V.weeks.map(({ week, unit, skill, familiar, explore, cuisine, swapIns, mastery, adultAtHome, kind, minutes, note, drill, knowledge, sabbath }) => ({
+      // ownRecipe: Write my recipe, Level 4's mastery weeks and the capstone's (§12.8).
+      weeks: V.weeks.map(({ week, unit, skill, familiar, explore, cuisine, swapIns, mastery, adultAtHome, ownRecipe, kind, minutes, note, drill, knowledge, sabbath }) => ({
         // recipe: the week has one. Which dish a course cooks follows its start setting (14c).
         week, unit, ...(skill ? { skill } : {}), ...(familiar ? { recipe: familiar, familiar, explore } : {}), ...(cuisine ? { cuisine } : {}), ...(swapIns?.length ? { options: swapIns } : {}),
-        ...(mastery ? { mastery } : {}), ...(adultAtHome ? { adultAtHome } : {}), ...(kind ? { kind, minutes, note } : {}), drill, knowledge, sabbath,
+        ...(mastery ? { mastery } : {}), ...(adultAtHome ? { adultAtHome } : {}), ...(ownRecipe ? { ownRecipe } : {}), ...(kind ? { kind, minutes, note } : {}), drill, knowledge, sabbath,
       })),
       // The Level's own recipe cards, scored by their tags until they're written (12d).
       // Another Level's cards its weeks cook come along, so they score and wait the same way (§12.0).

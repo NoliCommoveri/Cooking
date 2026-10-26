@@ -317,4 +317,7 @@ test("only Level 4 says Have an adult at home, and a writing box's id is used on
   assert.match(broken((c) => { level(c).weeks[0].adultAtHome = true; }), /week 1: has adultAtHome, which only Level 4 uses/);
   assert.match(broken((c) => { four(c).weeks.find((w) => w.week === 35).adultAtHome = true; }), /a practice week has no adultAtHome/);
   assert.match(broken((c) => { four(c).weeks.find((w) => w.week === 35).sabbath.write = [{ id: 'menu', label: 'The menu again' }]; }), /writing box "menu" is already used on another page of this Level/);
+  // Write my recipe is Level 4's, on a mastery week or the capstone's weeks.
+  assert.match(broken((c) => { level(c).weeks[3].ownRecipe = true; }), /week 4: has ownRecipe, which only Level 4 uses/);
+  assert.match(broken((c) => { four(c).weeks[0].ownRecipe = true; }), /week 1: has ownRecipe, which is for a mastery week/);
 });

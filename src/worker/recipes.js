@@ -100,7 +100,7 @@ const summary = (row, filters, { share = null, review = null, source = null } = 
 // The checks, in one place: the recipe as it will be stored, what's wrong
 // with it, and what looks like leaven (§6.19). reviewable: the only problems
 // are blocked words, which a parent can send to the owner as a false alarm.
-function checked(body, cleared = []) {
+export function checked(body, cleared = []) {
   const recipe = normalizeRecipe(body);
   const problems = recipeProblems(recipe, CTX, { cleared });
   const blocked = blockedWords(recipe, CTX.rules).filter((w) => !cleared.includes(w));
@@ -129,6 +129,36 @@ async function summaryExtras(env, fid) {
     review: reviews.filter((x) => x.family_recipe_id === row.id).at(-1) ?? null,
     source: sources.find((x) => x.id === row.source_community_id) ?? null,
   });
+}
+
+// A new family recipe, checked: the statements that save it, and its id. A
+// parent's entry flow and a learner's Write my recipe (14f) both save here.
+export async function newRecipe(env, fid, body) {
+  const { recipe: r, held } = mustPass(checked(body), body);
+  const n = (await env.DB.prepare('SELECT COUNT(*) AS n FROM family_recipes WHERE family_id = ? AND deleted_at IS NULL').bind(fid).first()).n;
+  if (n >= RECIPES_MAX) fail(429, 'too_many', `A family can keep ${RECIPES_MAX} recipes.`);
+  const hex = randomHex(8), t = now();
+  return {
+    hex, held, title: r.title,
+    stmts: [
+      env.DB.prepare(`INSERT INTO family_recipes (id, family_id, title, servings, total_minutes, meal_type, body_json, version, held, created_at, updated_at)
+          VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?)`).bind(hex, fid, r.title, r.servings, r.totalMinutes, r.mealType, JSON.stringify(r), held ? 1 : 0, t, t),
+      ...(held ? [holdReview(env, fid, hex, 1)] : []),
+    ],
+  };
+}
+// An edit, checked: it raises the version, so a cook records what was cooked.
+export function editedRecipe(env, fid, row, body) {
+  const { recipe: r, held } = mustPass(checked(body, clearedOf(row)), body);
+  const v = row.version + 1;
+  return {
+    held, version: v, title: r.title,
+    stmts: [
+      env.DB.prepare(`UPDATE family_recipes SET title = ?, servings = ?, total_minutes = ?, meal_type = ?, body_json = ?, version = ?, held = ?, updated_at = ?
+          WHERE id = ? AND family_id = ?`).bind(r.title, r.servings, r.totalMinutes, r.mealType, JSON.stringify(r), v, held ? 1 : 0, now(), row.id, fid),
+      ...(held ? [holdReview(env, fid, row.id, v)] : []),
+    ],
+  };
 }
 
 const familyFilters = async (env, fid) => JSON.parse((await env.DB.prepare('SELECT diet_filters FROM families WHERE id = ?').bind(fid).first()).diet_filters);
@@ -160,15 +190,8 @@ export function register(on) {
 
   on('POST', '/api/recipes', async (req, env, body) => {
     const s = await requireParent(env, req);
-    const { recipe: r, held } = mustPass(checked(body), body);
-    const n = (await env.DB.prepare('SELECT COUNT(*) AS n FROM family_recipes WHERE family_id = ? AND deleted_at IS NULL').bind(s.family_id).first()).n;
-    if (n >= RECIPES_MAX) fail(429, 'too_many', `A family can keep ${RECIPES_MAX} recipes.`);
-    const hex = randomHex(8), t = now();
-    await env.DB.batch([
-      env.DB.prepare(`INSERT INTO family_recipes (id, family_id, title, servings, total_minutes, meal_type, body_json, version, held, created_at, updated_at)
-          VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?)`).bind(hex, s.family_id, r.title, r.servings, r.totalMinutes, r.mealType, JSON.stringify(r), held ? 1 : 0, t, t),
-      ...(held ? [holdReview(env, s.family_id, hex, 1)] : []),
-    ]);
+    const { hex, held, stmts } = await newRecipe(env, s.family_id, body);
+    await env.DB.batch(stmts);
     return { ok: true, id: `recipe:${hex}`, held };
   });
 
@@ -176,14 +199,9 @@ export function register(on) {
   on('PUT', '/api/recipes/([0-9a-f]{16})', async (req, env, body, [hex]) => {
     const s = await requireParent(env, req);
     const row = await recipeRow(env, s.family_id, hex) ?? fail(404, 'not_found', 'No such recipe.');
-    const { recipe: r, held } = mustPass(checked(body, clearedOf(row)), body);
-    const v = row.version + 1;
-    await env.DB.batch([
-      env.DB.prepare(`UPDATE family_recipes SET title = ?, servings = ?, total_minutes = ?, meal_type = ?, body_json = ?, version = ?, held = ?, updated_at = ?
-          WHERE id = ? AND family_id = ?`).bind(r.title, r.servings, r.totalMinutes, r.mealType, JSON.stringify(r), v, held ? 1 : 0, now(), hex, s.family_id),
-      ...(held ? [holdReview(env, s.family_id, hex, v)] : []),
-    ]);
-    return { ok: true, id: `recipe:${hex}`, version: v, held };
+    const { version, held, stmts } = editedRecipe(env, s.family_id, row, body);
+    await env.DB.batch(stmts);
+    return { ok: true, id: `recipe:${hex}`, version, held };
   });
 
   // Delete has an Undo (restore). Cooks of it keep their record; it comes off
