@@ -1,0 +1,95 @@
+{
+  "id": "apple-galette",
+  "version": 1,
+  "track": "core",
+  "unit": 103,
+  "title": "Rustic apple galette",
+  "image": "dishes/apple-galette.png",
+  "cuisine": "french",
+  "skill": "A single butter crust, rolled and folded",
+  "skills": ["pastry", "cutting-in-fat"],
+  "prereqs": [],
+  "servings": 8,
+  "totalMinutes": 135,
+  "scaling": { "mode": "fixed", "multipliers": [1], "notes": { "1": "Makes one 10-inch galette, 8 slices." } },
+  "learn": {
+    "move": {
+      "title": "One crust, folded by hand",
+      "body": "A galette is a French free-form tart: one round of butter pastry, filled in the middle and folded up around the edge, with no pie pan. Today you'll cut cold butter into flour until it's the size of peas, add just enough ice water to hold it, roll it to an even ⅛ inch, and pleat it around sliced apples. The crust is done when it's deep golden underneath and the juices bubble thick."
+    },
+    "callback": {
+      "lesson": "buttermilk-biscuits",
+      "body": "Biscuits used cold butter for flaky layers. Pastry uses the same idea with much less water and no leavening, so it bakes thin, crisp, and flaky instead of tall."
+    },
+    "why": [
+      { "id": "cold", "title": "Everything cold", "body": "Pieces of cold butter coated in flour melt in the oven and leave flaky pockets. Butter that warms and smears into the flour makes a crust that's tough or greasy. Ice water and quick hands keep it cold." },
+      { "id": "little-water", "title": "Just enough water", "body": "Water lets flour build gluten. Pastry wants only enough to hold the dough together when squeezed. Too much, and the crust bakes tough and shrinks." },
+      { "id": "rest", "title": "Why the dough rests", "body": "An hour in the fridge firms the butter and lets the water spread evenly, and the gluten relaxes. The dough rolls out without cracking or springing back." },
+      { "id": "even", "title": "An even ⅛ inch", "body": "Rolling from the middle out and turning the dough a quarter turn each time keeps it the same thickness everywhere. Thin spots tear and burn; thick ones stay pale and doughy." },
+      { "id": "cornstarch", "title": "Cornstarch thickens the juice", "body": "Apples let go of juice as they bake. Cornstarch turns it into a glossy syrup once it boils, which is why you wait for thick bubbles before taking the galette out." }
+    ],
+    "wrong": [
+      { "sign": "The dough cracks at the edges as you roll", "fix": "It's too cold. Let it sit 5 minutes. Pinch small cracks closed with your fingers." },
+      { "sign": "The dough sticks to the parchment or the pin", "fix": "The butter has warmed. Slide it on its parchment into the fridge for 10 minutes, then keep rolling." },
+      { "sign": "Juice leaked out onto the pan", "fix": "There was a tear in the fold. Pinch a scrap of dough over any hole before baking. Leaked juice is fine to scrape off." },
+      { "sign": "The bottom is pale and soft", "fix": "It came out too soon. Bake until it's deep golden underneath, and bake on the lowest rack next time." }
+    ],
+    "quiz": [
+      { "q": "How big should the butter be after you cut it in?", "choices": ["About the size of peas", "Fine like sand", "Whole cubes"], "answer": 0, "explain": "Each piece melts into a flaky pocket." },
+      { "q": "How much water goes into pastry?", "choices": ["Just enough to hold together when squeezed", "As much as it takes to make it smooth", "None"], "answer": 0, "explain": "More water builds gluten and makes it tough." },
+      { "q": "How do you know the galette is done?", "choices": ["Deep golden underneath, and the juices bubble thick", "When the apples look soft", "When the edges are light gold"], "answer": 0, "explain": "The cornstarch thickens once the juice boils." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "butter-unsalted", "amount": 10, "unit": "tbsp", "prep": "cold, cut in ½-inch cubes", "group": "Crust" },
+    { "ingredient": "flour-ap", "amount": 1.5, "unit": "cup", "group": "Crust" },
+    { "ingredient": "flour-ap", "amount": null, "text": "a little more, for rolling", "group": "Crust" },
+    { "ingredient": "sugar", "amount": 1, "unit": "tbsp", "group": "Crust" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Crust" },
+    { "ingredient": "water", "amount": 6, "unit": "tbsp", "prep": "ice-cold", "group": "Crust" },
+    { "ingredient": "apple-tart", "amount": 3, "unit": "count", "group": "Filling" },
+    { "ingredient": "lemon", "amount": 0.5, "unit": "count", "prep": "juiced", "group": "Filling" },
+    { "ingredient": "sugar", "amount": 0.33, "unit": "cup", "group": "Filling" },
+    { "ingredient": "cinnamon-ground", "amount": 1, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "cornstarch", "amount": 1, "unit": "tbsp", "group": "Filling" },
+    { "ingredient": "egg", "amount": 1, "unit": "count", "group": "To finish" },
+    { "ingredient": "sugar", "amount": 1, "unit": "tbsp", "group": "To finish" }
+  ],
+  "equipment": [
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "fork",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "chef-knife",
+    "paring-knife",
+    "vegetable-peeler",
+    "cutting-board",
+    "rolling-pin",
+    "parchment",
+    "sheet-pan",
+    "pastry-brush",
+    "oven-mitts",
+    "spatula",
+    "cooling-rack"
+  ],
+  "steps": [
+    { "id": "freeze-butter", "text": "Spread the butter cubes on a plate and put them in the freezer. Put the water in the measuring cup with a few ice cubes.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Chill butter", "why": "cold" },
+    { "id": "dry", "text": "Whisk the flour, the crust's tablespoon of sugar, and the salt in the large bowl with the fork.", "safety": "solo" },
+    { "id": "cut-in", "text": "Add the cold butter. Press the cubes into the flour with the back of the fork, tossing as you go, until the biggest pieces are the size of peas.", "safety": "solo", "timerSeconds": 300, "timerLabel": "Cut in butter", "why": "cold", "look": "Coarse crumbs, with pea-sized pieces of butter coated in flour." },
+    { "id": "water", "text": "Sprinkle 4 tablespoons of the ice water over the flour, leaving the ice behind, and toss with the fork. Squeeze a handful: if it holds together, stop. If it crumbles, add more water a tablespoon at a time.", "safety": "solo", "why": "little-water", "look": "Shaggy, but a squeezed handful holds together." },
+    { "id": "chill", "text": "Press the dough into a flat disk about 1 inch thick, cover it, and chill it in the fridge.", "safety": "solo", "timerSeconds": 3600, "timerLabel": "Dough rests", "why": "rest" },
+    { "id": "oven", "text": "Put a rack in the lower third of the oven and heat it to 400°F.", "safety": "adult-nearby", "hazard": "Hot oven" },
+    { "id": "apples", "text": "Peel the apples. Cut each into quarters through the stem, cut out the core with the paring knife, and slice the quarters ¼ inch thick. Toss them in the medium bowl with the lemon juice, the filling's sugar, the cinnamon, and the cornstarch.", "safety": "adult-nearby", "hazard": "Sharp knife and peeler", "why": "cornstarch" },
+    { "id": "roll", "text": "Lay a sheet of parchment on the counter and dust it with flour. Roll the dough on it into a 12-inch round, ⅛ inch thick, from the middle out, turning the dough a quarter turn each time. Slide the parchment and dough onto the sheet pan.", "safety": "solo", "why": "even", "tip": "Feel the edges and the middle with your fingertips. They should be the same thickness." },
+    { "id": "fill", "text": "Pile the apples in the middle, leaving a 2-inch border bare. Leave the juice in the bowl.", "safety": "solo" },
+    { "id": "fold", "text": "Fold the border up over the edge of the apples, a section at a time, letting each fold overlap the last in a pleat. The middle stays open.", "safety": "solo", "look": "A round of apples framed by an even, pleated border with no tears." },
+    { "id": "egg-wash", "text": "Beat the egg in the small bowl. Brush it over the folded crust and sprinkle the crust with the last tablespoon of sugar.", "safety": "solo", "handles": ["egg"] },
+    { "id": "wash-egg", "type": "wash", "text": "Wash your hands and the brush with soap, and throw away the eggshell and the rest of the egg.", "safety": "solo" },
+    { "id": "bake", "text": "Bake the galette until the crust is deep golden and the juices bubble thickly between the apples.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 2700, "timerLabel": "Bake", "look": "Deep golden crust, and thick, slow bubbles in the middle." },
+    { "id": "check", "type": "doneness", "text": "With oven mitts, pull the pan out partway. Lift an edge of the galette with the spatula: the bottom should be golden brown, not pale. Poke an apple slice with the paring knife: it should slide in easily. If not, bake 5 more minutes and check again.", "safety": "adult-nearby", "hazard": "Hot oven, pan, and juices", "target": { "look": "Golden underneath, thick bubbling juice, and tender apples" }, "why": "cornstarch" },
+    { "id": "cool", "text": "Turn off the oven. Set the pan on the cooling rack and let the galette cool before slicing, so the juices set.", "safety": "adult-nearby", "hazard": "Hot pan and juices", "timerSeconds": 1800, "timerLabel": "Cool" }
+  ]
+}

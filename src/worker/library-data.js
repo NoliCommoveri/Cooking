@@ -8883,6 +8883,224 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "skillet-cornbread",
+   "version": 1,
+   "track": "core",
+   "unit": 5,
+   "title": "Skillet cornbread",
+   "image": "img/dishes/skillet-cornbread.webp",
+   "cuisine": "american",
+   "skill": "Preheated skillet",
+   "servings": 8,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes one 10-inch round, cut into 8 wedges."
+    }
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "cornmeal"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "baking-powder"
+    },
+    {
+     "ingredient": "baking-soda"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "buttermilk"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "honey",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "skillet-cast-iron",
+    "oven-mitts",
+    "small-bowl",
+    "microwave",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "whisk",
+    "silicone-spatula",
+    "table-knife",
+    "chef-knife",
+    "cooling-rack"
+   ],
+   "skills": [
+    "skillet-baking",
+    "muffin-method"
+   ],
+   "method": "oven",
+   "about": "Golden cornbread baked in a hot skillet for a crispy edge. Pairs with chili.",
+   "main": [
+    "cornmeal",
+    "buttermilk",
+    "eggs",
+    "butter"
+   ],
+   "variations": [
+    {
+     "title": "Skillet cornbread",
+     "image": "img/dishes/skillet-cornbread.webp",
+     "cuisine": "american",
+     "servings": 8,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes one 10-inch round, cut into 8 wedges."
+      }
+     },
+     "totalMinutes": 45,
+     "ingredients": [
+      {
+       "ingredient": "cornmeal"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "baking-powder"
+      },
+      {
+       "ingredient": "baking-soda"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "buttermilk"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "honey",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "butter-unsalted",
+       "use": "vegetable-oil",
+       "reason": "dairy"
+      }
+     ],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "skillet-cast-iron",
+      "oven-mitts",
+      "small-bowl",
+      "microwave",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "whisk",
+      "silicone-spatula",
+      "table-knife",
+      "chef-knife",
+      "cooling-rack",
+      "kitchen-scale",
+      "thermometer"
+     ],
+     "skills": [
+      "skillet-baking",
+      "muffin-method"
+     ],
+     "method": "oven",
+     "about": "Golden cornbread baked in a hot skillet for a crispy edge. Pairs with chili.",
+     "main": [
+      "cornmeal",
+      "buttermilk",
+      "eggs",
+      "butter"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
+    }
+   ]
+  },
+  {
    "id": "pita-bread",
    "version": 1,
    "track": "core",
@@ -9074,6 +9292,288 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "beef-empanadas",
+   "version": 1,
+   "track": "core",
+   "unit": 5,
+   "title": "Baked beef empanadas",
+   "image": "img/dishes/beef-empanadas.webp",
+   "cuisine": "argentine",
+   "skill": "Cutting in fat, filling and crimping",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 12 empanadas, 2 each.",
+     "2": "Makes 24. Make the dough in two batches, and bake on two sheet pans, swapping them halfway."
+    }
+   },
+   "totalMinutes": 90,
+   "ingredients": [
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "bell-pepper-red"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "olives-green"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "water"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": {
+    "protein": "beef",
+    "flavors": [
+     "warm-spices"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "bell-peppers"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "saucepan-medium",
+    "box-grater",
+    "mixing-bowl-large",
+    "fork",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "chef-knife",
+    "cutting-board",
+    "skillet-12",
+    "wooden-spoon",
+    "thermometer",
+    "plate",
+    "sheet-pan",
+    "parchment",
+    "rolling-pin",
+    "small-bowl",
+    "spoon",
+    "pastry-brush",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "skills": [
+    "cutting-in-fat",
+    "filling-crimping"
+   ],
+   "method": "stove-oven",
+   "about": "Hand pies of buttery pastry filled with spiced beef, onion, and egg, crimped and baked.",
+   "main": [
+    "ground beef",
+    "onion",
+    "butter",
+    "eggs",
+    "olives"
+   ],
+   "variations": [
+    {
+     "title": "Baked beef empanadas",
+     "image": "img/dishes/beef-empanadas.webp",
+     "cuisine": "argentine",
+     "servings": 6,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1,
+       2
+      ],
+      "notes": {
+       "1": "Makes 12 empanadas, 2 each.",
+       "2": "Makes 24. Make the dough in two batches, and bake on two sheet pans, swapping them halfway."
+      }
+     },
+     "totalMinutes": 105,
+     "ingredients": [
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "bell-pepper-red"
+      },
+      {
+       "ingredient": "beef-ground"
+      },
+      {
+       "ingredient": "paprika-sweet"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "oregano-dried"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "olives-green"
+      },
+      {
+       "ingredient": "green-onion"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "water"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "beef",
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "warm-spices"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "bell-peppers"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "saucepan-medium",
+      "box-grater",
+      "mixing-bowl-large",
+      "fork",
+      "liquid-measuring-cup",
+      "measuring-cups",
+      "measuring-spoons",
+      "chef-knife",
+      "cutting-board",
+      "skillet-12",
+      "wooden-spoon",
+      "thermometer",
+      "plate",
+      "sheet-pan",
+      "parchment",
+      "rolling-pin",
+      "small-bowl",
+      "spoon",
+      "pastry-brush",
+      "oven-mitts",
+      "cooling-rack"
+     ],
+     "skills": [
+      "cutting-in-fat",
+      "filling-crimping"
+     ],
+     "method": "stove-oven",
+     "about": "Hand pies of buttery pastry filled with spiced beef, onion, and egg, crimped and baked.",
+     "main": [
+      "ground beef",
+      "onion",
+      "butter",
+      "eggs",
+      "olives"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
+    }
+   ]
+  },
+  {
    "id": "challah",
    "version": 1,
    "track": "core",
@@ -9184,6 +9684,117 @@ export const LIBRARY = {
     "eggs",
     "honey",
     "oil"
+   ],
+   "variations": [
+    {
+     "title": "Challah",
+     "image": "img/dishes/challah.webp",
+     "cuisine": "jewish",
+     "servings": 10,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1,
+       2
+      ],
+      "notes": {
+       "1": "Makes 1 large braided loaf.",
+       "2": "Makes 2 loaves. Bake them on two sheet pans, one rack in the upper third and one in the lower third, and swap them halfway."
+      }
+     },
+     "totalMinutes": 240,
+     "ingredients": [
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "yeast-active-dry"
+      },
+      {
+       "ingredient": "honey"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "sesame-seeds",
+       "optional": true
+      }
+     ],
+     "substitutions": [],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": [
+       "sesame"
+      ]
+     },
+     "tools": [
+      "liquid-measuring-cup",
+      "thermometer",
+      "microwave",
+      "mixing-bowl-large",
+      "small-bowl",
+      "fork",
+      "measuring-cups",
+      "measuring-spoons",
+      "wooden-spoon",
+      "kitchen-towel",
+      "chef-knife",
+      "kitchen-scale",
+      "sheet-pan",
+      "parchment",
+      "pastry-brush",
+      "foil",
+      "oven-mitts",
+      "cooling-rack"
+     ],
+     "skills": [
+      "yeast-dough"
+     ],
+     "method": "oven",
+     "about": "A soft, slightly sweet braided bread made with eggs and honey.",
+     "main": [
+      "yeast",
+      "eggs",
+      "honey",
+      "oil"
+     ],
+     "id": "sp-3",
+     "level": "sp-3"
+    }
    ]
   },
   {
@@ -11817,6 +12428,113 @@ export const LIBRARY = {
    "level": "sp-3"
   },
   {
+   "id": "apple-galette",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Rustic apple galette",
+   "image": "img/dishes/apple-galette.webp",
+   "cuisine": "french",
+   "skill": "A single butter crust, rolled and folded",
+   "servings": 8,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes one 10-inch galette, 8 slices."
+    }
+   },
+   "totalMinutes": 135,
+   "ingredients": [
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "apple-tart"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "cornstarch"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "sugar"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "fork",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "chef-knife",
+    "paring-knife",
+    "vegetable-peeler",
+    "cutting-board",
+    "rolling-pin",
+    "parchment",
+    "sheet-pan",
+    "pastry-brush",
+    "oven-mitts",
+    "spatula",
+    "cooling-rack"
+   ],
+   "skills": [
+    "pastry",
+    "cutting-in-fat"
+   ],
+   "method": "oven",
+   "about": "A free-form butter crust folded around sliced apples with cinnamon and sugar, baked golden.",
+   "main": [
+    "flour",
+    "butter",
+    "apples",
+    "sugar",
+    "cinnamon"
+   ],
+   "level": "sp-3"
+  },
+  {
    "id": "baked-salmon",
    "version": 1,
    "track": "core",
@@ -12540,6 +13258,122 @@ export const LIBRARY = {
    "level": "sp-3"
   },
   {
+   "id": "conchas",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Conchas",
+   "image": "img/dishes/conchas.webp",
+   "cuisine": "mexican",
+   "skill": "An enriched dough shaped by weight",
+   "servings": 10,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes 10 conchas."
+    }
+   },
+   "totalMinutes": 210,
+   "ingredients": [
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "vanilla-extract"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "powdered-sugar"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "cocoa-powder"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "milk-whole",
+     "use": "milk-oat",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "kitchen-scale",
+    "chef-knife",
+    "paring-knife",
+    "sheet-pan",
+    "parchment",
+    "pastry-brush",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "skills": [
+    "yeast-dough"
+   ],
+   "method": "oven",
+   "about": "Soft Mexican sweet buns with a crackly sugar topping scored like a seashell. Made with butter.",
+   "main": [
+    "flour",
+    "yeast",
+    "butter",
+    "egg",
+    "sugar"
+   ],
+   "level": "sp-3"
+  },
+  {
    "id": "dinner-rolls",
    "version": 1,
    "track": "core",
@@ -12766,6 +13600,123 @@ export const LIBRARY = {
    "level": "sp-3"
   },
   {
+   "id": "manoushe",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Man'oushe",
+   "image": "img/dishes/manoushe.webp",
+   "cuisine": "lebanese",
+   "skill": "Shaping a yeast dough into flatbreads",
+   "servings": 8,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 8 flatbreads.",
+     "2": "Makes 16. Knead the dough in two halves."
+    }
+   },
+   "totalMinutes": 150,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "zaatar"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "tomato"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "mint",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "zaatar",
+     "use": "thyme-dried",
+     "reason": "availability"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "cucumber"
+    ],
+    "optional": [
+     "mint"
+    ]
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "kitchen-scale",
+    "chef-knife",
+    "cutting-board",
+    "sheet-pan",
+    "rolling-pin",
+    "spoon",
+    "oven-mitts",
+    "spatula"
+   ],
+   "skills": [
+    "yeast-dough",
+    "flatbreads"
+   ],
+   "method": "oven",
+   "about": "Lebanese flatbreads from the pita dough, spread with za'atar and olive oil and baked hot.",
+   "main": [
+    "flour",
+    "yeast",
+    "za'atar",
+    "olive oil"
+   ],
+   "level": "sp-3"
+  },
+  {
    "id": "pan-seared-trout",
    "version": 1,
    "track": "core",
@@ -12856,6 +13807,121 @@ export const LIBRARY = {
     "butter",
     "lemon",
     "parsley"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "pulla",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Pulla",
+   "image": "img/dishes/pulla.webp",
+   "cuisine": "finnish",
+   "skill": "Braiding an enriched dough",
+   "servings": 12,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes 1 large braided loaf, about 12 slices."
+    }
+   },
+   "totalMinutes": 225,
+   "ingredients": [
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "cardamom-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "sugar-pearl"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "sugar-pearl",
+     "use": "sugar",
+     "reason": "availability"
+    },
+    {
+     "for": "milk-whole",
+     "use": "milk-oat",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "kitchen-scale",
+    "chef-knife",
+    "sheet-pan",
+    "parchment",
+    "pastry-brush",
+    "foil",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "skills": [
+    "yeast-dough"
+   ],
+   "method": "oven",
+   "about": "A Finnish cardamom bread braided from an enriched dough, brushed with egg and sprinkled with pearl sugar.",
+   "main": [
+    "flour",
+    "yeast",
+    "milk",
+    "butter",
+    "cardamom"
    ],
    "level": "sp-3"
   },
@@ -13160,6 +14226,99 @@ export const LIBRARY = {
     "scallions",
     "soy sauce",
     "oil"
+   ],
+   "level": "sp-3"
+  },
+  {
+   "id": "soda-bread",
+   "version": 1,
+   "track": "core",
+   "unit": 103,
+   "title": "Irish brown soda bread",
+   "image": "img/dishes/soda-bread.webp",
+   "cuisine": "irish",
+   "skill": "A quick bread mixed only until it comes together",
+   "servings": 10,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes 1 round loaf, about 10 slices."
+    }
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "flour-whole-wheat"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "oats-rolled"
+    },
+    {
+     "ingredient": "brown-sugar"
+    },
+    {
+     "ingredient": "baking-soda"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "buttermilk"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "parchment",
+    "kitchen-scale",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "whisk",
+    "fork",
+    "chef-knife",
+    "oven-mitts",
+    "thermometer",
+    "cooling-rack",
+    "kitchen-towel"
+   ],
+   "skills": [
+    "muffin-method"
+   ],
+   "method": "oven",
+   "about": "A rustic round loaf of whole-wheat flour and buttermilk, raised with baking soda and baked with a deep cross on top.",
+   "main": [
+    "whole-wheat flour",
+    "buttermilk",
+    "baking soda",
+    "oats"
    ],
    "level": "sp-3"
   },
@@ -16670,6 +17829,40 @@ export const LIBRARY = {
   "pomegranate-molasses": {
    "name": "Pomegranate molasses",
    "contains": []
+  },
+  "cornmeal": {
+   "name": "Yellow cornmeal (medium grind)",
+   "contains": []
+  },
+  "flour-whole-wheat": {
+   "name": "Whole-wheat flour",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "zaatar": {
+   "name": "Za'atar",
+   "contains": []
+  },
+  "powdered-sugar": {
+   "name": "Powdered sugar",
+   "contains": []
+  },
+  "cocoa-powder": {
+   "name": "Unsweetened cocoa powder",
+   "contains": []
+  },
+  "apple-tart": {
+   "name": "Tart baking apples (Granny Smith or Honeycrisp)",
+   "contains": []
+  },
+  "cardamom-ground": {
+   "name": "Ground cardamom",
+   "contains": []
+  },
+  "sugar-pearl": {
+   "name": "Pearl sugar",
+   "contains": []
   }
  },
  "cuisines": {
@@ -16760,18 +17953,23 @@ export const LIBRARY = {
   "teriyaki-chicken-bites": "B10a",
   "aglio-e-olio": "C2a",
   "ajapsandali": "C4b",
+  "apple-galette": "C14a",
   "baked-salmon": "C8a",
   "bean-quesadillas": "C1a",
   "bean-tostadas": "C5a",
   "beef-picadillo": "C21b",
   "chermoula-fish": "C8b",
   "chicken-tenders": "C10a",
+  "conchas": "C13b",
   "dinner-rolls": "C13a",
   "kimbap": "C3b",
+  "manoushe": "C12b",
   "pan-seared-trout": "C23a",
+  "pulla": "C15b",
   "rajma": "C1b",
   "sandwich-loaf": "C12a",
   "scallion-oil-noodles": "C2b",
+  "soda-bread": "C11b",
   "solterito": "C6b",
   "steamed-fish": "C16b",
   "tabbouleh": "C5b",
@@ -24454,15 +25652,185 @@ export const LIBRARY = {
      "explore": "soda-bread",
      "drill": {
       "title": "Spoon and level vs. weigh flour; the muffin method, stopped while streaky",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Two habits make quick breads come out the same every time: measuring flour the same way, and mixing just enough. You'll measure one cup of flour three ways and weigh each, then mix two small batters to the same recipe, one stopped while streaky and one stirred smooth, and cook them side by side as pancakes.",
+       "Use the flour and buttermilk this week's bread already buys. An adult is nearby for the stove."
+      ],
+      "steps": [
+       "Set a bowl on the kitchen scale and zero it. Scoop the measuring cup straight into the flour bag, level it with the back of a knife, and tip it into the bowl. Write down the weight.",
+       "Pour that flour back. Fluff the flour in the bag with a spoon, spoon it into the cup without packing, and level it. Weigh it and write it down.",
+       "Do the spoon-and-level cup two more times and weigh each. A cup of all-purpose flour should weigh about 4.4 ounces. How far off was the scooped cup?",
+       "In each of two small bowls, whisk together 3 tablespoons of flour, ½ teaspoon of sugar, ¼ teaspoon of baking powder, and a pinch of salt.",
+       "In a cup, whisk ⅓ cup of buttermilk with 2 teaspoons of oil. Pour half into each bowl.",
+       "Bowl A: fold with a spatula, about 8 strokes, and stop while a few streaks of flour still show. Bowl B: stir hard with a whisk for 1 minute, until it's completely smooth.",
+       "Heat a skillet over medium heat with a little oil. Spoon in each batter as one pancake, side by side, and cook until bubbles cover the top, then flip and cook 1 more minute.",
+       "Let them cool a minute, then tear each in half. Compare how tall they are, how tender they are, and what the inside looks like.",
+       "Write down what you found, and turn off the stove."
+      ],
+      "quiz": [
+       {
+        "q": "Why does a scooped cup of flour weigh more?",
+        "choices": [
+         "The cup packs the flour down",
+         "Scooped flour is wetter",
+         "It doesn't"
+        ],
+        "answer": 0,
+        "explain": "That can be a quarter more flour than the recipe means."
+       },
+       {
+        "q": "About how much does a cup of all-purpose flour weigh?",
+        "choices": [
+         "4.4 ounces",
+         "8 ounces",
+         "2 ounces"
+        ],
+        "answer": 0,
+        "explain": "Spooned and leveled, not packed."
+       },
+       {
+        "q": "Which pancake is usually more tender?",
+        "choices": [
+         "The one stopped while streaky",
+         "The one stirred smooth",
+         "They're the same"
+        ],
+        "answer": 0,
+        "explain": "Stirring builds gluten, which makes it tough."
+       },
+       {
+        "q": "In the muffin method, what gets mixed separately?",
+        "choices": [
+         "The dry ingredients and the wet ones",
+         "The eggs and the sugar",
+         "Nothing"
+        ],
+        "answer": 0,
+        "explain": "Then they're folded together only until just combined."
+       }
+      ]
      },
      "knowledge": {
       "title": "Baking soda vs. baking powder; doneness by toothpick and temperature",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Quick breads rise without yeast. A chemical leavener makes carbon dioxide gas in the batter, and the oven sets the batter around the bubbles before they escape. There are two, and they aren't the same thing.",
+       "Baking soda is one ingredient, sodium bicarbonate. It makes gas only when it meets an acid: buttermilk, yogurt, lemon juice, brown sugar, honey, or natural cocoa. It starts working the moment the acid touches it, so a soda batter goes into the oven right away. Too much soda, or soda with too little acid, leaves a bitter, soapy taste and yellow-green specks.",
+       "Baking powder is baking soda with a dry acid already mixed in, plus a little starch to keep them apart. Most baking powder is double-acting: it makes some gas when it gets wet and more when it gets hot. It's used when the batter has no acid of its own, like plain milk. Many recipes use both: soda to match the buttermilk, and powder for extra lift.",
+       "A quick bread is done when its center is set. The toothpick test: push it into the center and pull it out. Wet batter means it needs more time; clean, or a few moist crumbs, means it's done. The thermometer is surer. Most quick breads are set at 200 to 205°F in the center, about 10°F hotter than a soft yeast bread, because there's more moisture to drive off.",
+       "Both leaveners lose strength with age. Write the date on the box when you open it. Old baking soda and powder still look the same, so test them."
+      ],
+      "steps": [
+       "Test your baking soda: stir ¼ teaspoon into 2 tablespoons of vinegar in a glass. It should fizz hard at once.",
+       "Test your baking powder: stir ½ teaspoon into ¼ cup of hot tap water in a second glass. It should bubble right away.",
+       "Stir ¼ teaspoon of baking soda into ¼ cup of plain water in a third glass. Write down what happens and why.",
+       "Read the labels on your baking soda and baking powder. Write down what's in each.",
+       "Look at this week's recipe. Write down which leaveners it uses, and which ingredient is the acid for the baking soda.",
+       "When this week's bread comes out, do the toothpick test and the thermometer test on it, and write down what each told you."
+      ],
+      "quiz": [
+       {
+        "q": "What does baking soda need to make gas?",
+        "choices": [
+         "An acid, like buttermilk",
+         "Heat only",
+         "Yeast"
+        ],
+        "answer": 0,
+        "explain": "In plain water, baking soda does almost nothing."
+       },
+       {
+        "q": "What is baking powder?",
+        "choices": [
+         "Baking soda with a dry acid already mixed in",
+         "Ground yeast",
+         "Cornstarch and salt"
+        ],
+        "answer": 0,
+        "explain": "It works in a batter that has no acid of its own."
+       },
+       {
+        "q": "Why does a buttermilk and soda batter go straight into the oven?",
+        "choices": [
+         "The gas starts as soon as they meet, and escapes if it waits",
+         "So the butter doesn't melt",
+         "The oven cools down"
+        ],
+        "answer": 0,
+        "explain": "The oven has to set the batter around the bubbles."
+       },
+       {
+        "q": "What does a bitter, soapy taste in a quick bread mean?",
+        "choices": [
+         "Too much baking soda, or not enough acid for it",
+         "Too much sugar",
+         "It's underbaked"
+        ],
+        "answer": 0,
+        "explain": "Leftover soda tastes soapy."
+       },
+       {
+        "q": "About what temperature is a quick bread done at in the center?",
+        "choices": [
+         "200 to 205°F",
+         "165°F",
+         "145°F"
+        ],
+        "answer": 0,
+        "explain": "A little hotter than a soft yeast bread's 190°F."
+       }
+      ]
      },
      "sabbath": {
       "title": "Bake and freeze quick breads",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Quick breads are at their best warm on the day they're baked, and they go stale quickly on the counter. Frozen the right way, they come back almost fresh, so one baking day can cover several meals.",
+       "Staling is the starch in bread slowly hardening as it loses water. The fridge speeds it up; the freezer stops it. So quick breads are kept on the counter for a day or two, or frozen, but not refrigerated.",
+       "The bread has to be completely cool first. Warm bread wrapped up steams, and the crust turns soggy and ices over in the freezer."
+      ],
+      "steps": [
+       "Let this week's cornbread or soda bread cool completely on a rack, at least 1 hour.",
+       "Cut it into the pieces you'll want to serve: wedges of cornbread, or slices of soda bread.",
+       "Wrap the pieces tightly in plastic wrap or foil, a meal's worth to a bundle, and put the bundles in a freezer bag. Press out the air.",
+       "Label the bag with the bread's name and the date. Quick breads keep in the freezer for up to 3 months.",
+       "To serve, take out what you need and let it thaw in its wrap on the counter, about 30 minutes for slices.",
+       "Unwrap it, lay it on a sheet pan, and warm it in a 350°F oven for 8 to 10 minutes, until the crust is crisp again.",
+       "Taste a warmed piece beside one kept on the counter for 2 days. Write down which is better and why."
+      ],
+      "quiz": [
+       {
+        "q": "Why are quick breads frozen instead of refrigerated?",
+        "choices": [
+         "The fridge makes them stale faster; the freezer stops it",
+         "The fridge is unsafe",
+         "They can't go in the fridge"
+        ],
+        "answer": 0,
+        "explain": "Staling is fastest just above freezing."
+       },
+       {
+        "q": "Why does bread cool completely before wrapping?",
+        "choices": [
+         "Warm bread steams in the wrap and turns soggy",
+         "So it weighs less",
+         "So the freezer stays cold"
+        ],
+        "answer": 0,
+        "explain": "The steam freezes into ice on the crust."
+       },
+       {
+        "q": "How long do quick breads keep in the freezer?",
+        "choices": [
+         "Up to 3 months",
+         "1 day",
+         "2 years"
+        ],
+        "answer": 0,
+        "explain": "Label the bag with the date."
+       }
+      ]
      }
     },
     {
@@ -24845,15 +26213,183 @@ export const LIBRARY = {
      "explore": "beef-empanadas",
      "drill": {
       "title": "Cut cold butter in; roll to an even thickness and crimp",
-      "minutes": 40
+      "minutes": 40,
+      "body": [
+       "Three pastry skills, practised on a small dough before the real one: cutting cold butter in to the size of peas, rolling to an even ⅛ inch, and sealing an edge three ways. The practice pies bake into a snack.",
+       "Use the flour and butter this week's recipe already buys. If you're making the empanadas, do this drill first so your hands know the repulgue."
+      ],
+      "steps": [
+       "Cut 4 tablespoons of cold butter into ½-inch cubes and chill them in the freezer for 10 minutes. Put ¼ cup of water in a cup with ice.",
+       "Whisk ¾ cup of flour and a pinch of salt in a bowl. Add the butter and press it in with the back of a fork, tossing, until the biggest pieces are the size of peas. Stop and look: are any pieces still bigger than a pea? Any smeared into a paste?",
+       "Sprinkle 2 tablespoons of the ice water over it and toss with the fork. Squeeze a handful. Add water a teaspoon at a time until a squeezed handful just holds. Write down how much water it took.",
+       "Press the dough into a disk, cover it, and chill it 20 minutes.",
+       "Roll it on a floured counter from the middle out, turning it a quarter turn after each pass. Stop when it's ⅛ inch thick, about as thick as two stacked quarters. Check the edges and the middle with a ruler or your fingertips.",
+       "Cut out 6 circles about 3 inches across with a glass or cutter.",
+       "Put a teaspoon of jam or cinnamon sugar in the middle of each, wet the edge with water, fold it into a half-moon, and press out the air.",
+       "Seal 2 with a fork pressed along the edge, 2 with small folded pleats, and 2 with the repulgue: fold a small piece of the edge over itself and press, then the next, all the way around.",
+       "Bake them on a parchment-lined sheet pan at 375°F until golden, about 15 minutes. Let them cool 10 minutes; jam stays very hot.",
+       "Which edge held best? Which looked best? Write it down."
+      ],
+      "quiz": [
+       {
+        "q": "How big should the butter be after cutting in?",
+        "choices": [
+         "About the size of peas",
+         "Fine like sand",
+         "Whole cubes"
+        ],
+        "answer": 0,
+        "explain": "Each piece steams into a flaky pocket."
+       },
+       {
+        "q": "How do you know you've added enough water?",
+        "choices": [
+         "A squeezed handful just holds together",
+         "The dough is smooth and sticky",
+         "It looks wet"
+        ],
+        "answer": 0,
+        "explain": "More water makes a tough crust."
+       },
+       {
+        "q": "How do you keep the dough the same thickness?",
+        "choices": [
+         "Roll from the middle out, turning a quarter turn each time",
+         "Roll back and forth in one direction",
+         "Press it with your hands"
+        ],
+        "answer": 0,
+        "explain": "Check the edges and middle as you go."
+       },
+       {
+        "q": "Why press out the air before sealing?",
+        "choices": [
+         "Trapped air expands in the oven and pops the seal open",
+         "So it weighs less",
+         "To keep the filling cold"
+        ],
+        "answer": 0,
+        "explain": "Then the edge stays shut."
+       }
+      ]
      },
      "knowledge": {
       "title": "Pastry vs. bread: keeping gluten weak, cold fat, and reading pastry labels",
-      "minutes": 35
+      "minutes": 35,
+      "body": [
+       "Bread and pastry start with the same flour and treat it in opposite ways. Bread wants strong gluten: lots of water and long kneading build a stretchy net that holds gas and rises. Pastry wants weak gluten: little water, cold fat, and a light touch, so it bakes crisp, flaky, and tender instead of chewy.",
+       "Fat is what makes pastry. Coated in fat, flour can't soak up as much water, so less gluten forms. Pieces of cold butter left about the size of peas stay solid until the oven, where their water turns to steam and pushes the dough into flaky layers. If the butter warms and smears into the flour, the layers are lost.",
+       "Water is added a tablespoon at a time, just until a squeezed handful holds. Then the dough rests in the fridge so the butter firms up and the gluten relaxes. Rolled cold, it doesn't shrink in the oven.",
+       "Store-bought crusts, empanada discs, and puff pastry save time, but some are made with fats this app keeps out. Butter, vegetable shortening, and oil are fine. Read the ingredient list every time, because a brand can change its recipe. The list below names what to watch for."
+      ],
+      "steps": [
+       "On your phone or at the store, find the ingredient lists for two store-bought pie crusts and one pack of frozen empanada discs or puff pastry.",
+       "For each, write down what fat it's made with, and whether it's one your family can use.",
+       "Compare the price of one store-bought crust with the cost of the flour and butter in this week's homemade crust.",
+       "In your own words, write three ways pastry is made differently from bread, and why each matters."
+      ],
+      "watch": [
+       {
+        "name": "Lard",
+        "hides": "Fat from pigs. In some store-bought pie crusts, empanada discs, pastry shells, and shortening blends."
+       },
+       {
+        "name": "Suet and beef tallow",
+        "hides": "The hard fat of cattle and sheep, which Leviticus 3:17 and 7:23 forbid. In some pastry, mincemeat, and shortening blends."
+       }
+      ],
+      "quiz": [
+       {
+        "q": "Does pastry want strong gluten or weak gluten?",
+        "choices": [
+         "Weak, for a tender, flaky crust",
+         "Strong, for a tall crust",
+         "It doesn't matter"
+        ],
+        "answer": 0,
+        "explain": "Bread wants strong gluten; pastry wants as little as possible."
+       },
+       {
+        "q": "What makes the flaky layers in pastry?",
+        "choices": [
+         "Cold pieces of butter turning to steam in the oven",
+         "Yeast",
+         "Kneading"
+        ],
+        "answer": 0,
+        "explain": "The steam pushes the dough apart."
+       },
+       {
+        "q": "Why does pastry dough rest in the fridge before rolling?",
+        "choices": [
+         "The butter firms up and the gluten relaxes",
+         "So it rises",
+         "To kill bacteria"
+        ],
+        "answer": 0,
+        "explain": "Relaxed dough doesn't shrink in the oven."
+       },
+       {
+        "q": "A store-bought crust's label lists a fat from the Watch for box. What do you do?",
+        "choices": [
+         "Pick a brand made with butter, shortening, or oil, or make the crust",
+         "Use it anyway",
+         "Bake it longer"
+        ],
+        "answer": 0,
+        "explain": "Read the list every time; brands change."
+       }
+      ]
      },
      "sabbath": {
       "title": "Freeze unbaked pastry",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Pastry freezes better than almost anything you bake. Freeze it unbaked, and it goes from the freezer straight into the oven, so a warm pie or a pan of empanadas takes only the baking time.",
+       "Baking from frozen keeps the butter cold right up until the oven, so the crust is often flakier than one baked fresh. It just needs 5 to 10 minutes more.",
+       "There are two ways to keep it: as dough, in disks, or shaped and filled. Anything with a cooked meat filling still has to reach 165°F in the center when it bakes."
+      ],
+      "steps": [
+       "Make a double batch of this week's dough, or save part of it.",
+       "Dough: press it into 1-inch-thick disks, wrap each tightly in plastic wrap, and put them in a freezer bag. To use one, thaw it overnight in the fridge.",
+       "Shaped empanadas or a galette: set them, unbaked and without egg wash, on a parchment-lined sheet pan or plate, not touching, and freeze them until hard, about 2 hours.",
+       "Move the frozen empanadas into a freezer bag, or wrap the frozen galette on its parchment in plastic wrap and then foil. Press out the air.",
+       "Label everything with what it is, the oven temperature, and the date. Unbaked pastry keeps up to 3 months.",
+       "To bake: don't thaw. Brush with egg wash and bake as the recipe says, adding 5 to 10 minutes. Check empanadas for 165°F in the filling, and a galette for thick, bubbling juice and a golden bottom.",
+       "Compare one baked from frozen with one baked fresh. Write down any difference in the crust."
+      ],
+      "quiz": [
+       {
+        "q": "Why do empanadas freeze on a pan before going in a bag?",
+        "choices": [
+         "So they freeze separately and don't stick together",
+         "To thaw them faster",
+         "So the bag stays cold"
+        ],
+        "answer": 0,
+        "explain": "Then you can take out just what you need."
+       },
+       {
+        "q": "Do you thaw unbaked frozen pastry before baking?",
+        "choices": [
+         "No, bake it from frozen and add 5 to 10 minutes",
+         "Yes, overnight on the counter",
+         "Yes, in the microwave"
+        ],
+        "answer": 0,
+        "explain": "Cold butter makes a flakier crust."
+       },
+       {
+        "q": "What must a frozen meat empanada reach when it bakes?",
+        "choices": [
+         "165°F in the filling",
+         "145°F",
+         "Golden brown is enough"
+        ],
+        "answer": 0,
+        "explain": "Color doesn't tell you the middle is hot."
+       }
+      ]
      }
     },
     {
@@ -26524,7 +28060,7 @@ export const LIBRARY = {
      "skills": [
       "muffin-method"
      ],
-     "minutes": 60,
+     "minutes": 75,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -26626,7 +28162,7 @@ export const LIBRARY = {
       "pastry",
       "cutting-in-fat"
      ],
-     "minutes": 90,
+     "minutes": 135,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -26646,7 +28182,7 @@ export const LIBRARY = {
      "skills": [
       "yeast-dough"
      ],
-     "minutes": 210,
+     "minutes": 225,
      "tags": {
       "protein": "none",
       "flavors": [

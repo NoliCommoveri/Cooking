@@ -6358,3 +6358,44 @@ Owner, 2026-10-27: "I dont like it." with the new wording for both programs.
 - Screenshots (Ruth's lines and the editor's dialog, phone width, both
   themes) sent in the session.
 - Tests: 402.
+
+## 245. 2026-10-27 — 14g content: Level 3 Unit 4
+
+Owner, 2026-10-27: "We're gonna do unit 4, ordered levels 3, 2, 4. Put each
+level unit in a review doc for me before starting the next one. Notify me of
+any missing artwork for new recipes." Reviewed in [14g review: Level 3 Cook,
+Unit 4](https://claude.ai/artifact/3mWfgmLMojBjNvXQtVREiR); not merged until
+the owner approves it there.
+
+- **Before:** Unit 4, Baking (weeks 11–15), had Sandwich loaf, Dinner rolls,
+  and weeks 12, 13, and 15's pages. Week 11's skillet cornbread and week 14's
+  beef empanadas were planned Cook Around the World cards with no lesson;
+  soda bread, man'oushe, conchas, the apple galette, and pulla were unwritten
+  Level cards; week 15 cooked Cook Around the World's challah, which had no
+  Level 3 version. Weeks 11 and 14's six pages were blank.
+- **Now:**
+  - **Two new Cook Around the World lessons,** each already planned (§12.4):
+    Skillet cornbread (Unit 5; 40 minutes) and Baked beef empanadas (Unit 5,
+    the cutting-in-fat group, with a callback to buttermilk biscuits; 90
+    minutes).
+  - **Level 3 versions** of both and of challah: cornbread with the flour
+    weighed, folded while streaky, and checked at 200°F; empanadas with butter
+    cut in to pea size, rolled to ⅛ inch, sealed with the repulgue, chilled,
+    and two checked at 165°F; challah as the mastery bake, its ropes weighed to
+    a tenth of an ounce and a hollow-sound check beside 190°F.
+  - **Five Level-only recipes** in `content/levels/recipes/`, unit 103: Irish
+    brown soda bread (200°F), Man'oushe and Rustic apple galette (marked as
+    variations of Pita bread and Apple pie, written as Level recipes of their
+    own), Conchas (weighed into 10), and Pulla (the mastery week's Explore).
+    Their cards' minutes are now the recipes' own.
+  - **Six part pages:** week 11's leaveners and doneness, flour weighed three
+    ways and two pancakes mixed two ways, and freezing quick breads; week 14's
+    pastry vs. bread with a Watch for box (lard, suet and beef tallow), a
+    cut-in, roll, and crimp drill, and freezing unbaked pastry.
+  - **New ingredients:** cornmeal, whole-wheat flour, za'atar, powdered
+    sugar, cocoa powder, tart baking apples, ground cardamom, pearl sugar.
+    **New tool:** a 10-inch cast-iron skillet.
+- The lint test that used challah as a lesson with no Level 3 version uses
+  mujaddara now.
+- No screens changed, so no screenshots.
+- Tests: 402.
