@@ -6741,3 +6741,19 @@ it in...'" The new lines are the owner's, approved before building.
 - Screenshots (Ruth's Help me choose and her track line, the editor's
   dialog, phone width, both themes) sent in the session.
 - Tests: 407.
+
+## 255. 2026-10-27 — Plan: the first standard calendar for Unleavened Bread
+
+Owner, 2026-10-27: "This is the date set for first standard calendar", with
+the calculated Biblical calendar's dates (United Church of God, Living Church
+of God, and similar groups): the first day of Unleavened Bread Thursday,
+April 22, 2027 (from sunset April 21), the last Wednesday, April 28, 2027.
+
+- **Before:** the plan left both standard calendars for the owner to name
+  (§6.20, §10).
+- **Now:** the plan names the first standard calendar and its 2027 dates
+  (§6.20), and §10 says a second calendar and later years are still to come.
+  Its name as families see it is still to be worded. Nothing is built yet:
+  `content/calendars.json` comes with phase 13.
+- No screens changed, so no screenshots.
+- Tests: 407.
