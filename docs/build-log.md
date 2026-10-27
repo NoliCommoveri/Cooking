@@ -6311,3 +6311,50 @@ alternative."
     the chicken for chicken two ways before breaking it down.
 - No screens changed, so no screenshots.
 - Tests: 401.
+
+## 243. 2026-10-27 — Help me choose a program
+
+Owner, 2026-10-26 and 2026-10-27: "When chef Ruth asks about adding courses,
+she needs a button to say 'help me choose'." "Add a fourth question: 'Do you
+want reading pages and drills for supplemental learning, or are you only
+here for the actual recipe?'" "Your other questions need to be framed as
+'what are they ready for', not 'what have they done'." "Yes lowest. And yes,
+course editor should also ask help me choose questions optionally."
+
+- **Before:** Which program? listed Cook Around the World and the Levels,
+  with no help picking one.
+- **Now:**
+  - **Chef Ruth** has **Help me choose** under Which program?. She says what
+    each program expects a cook to be ready for (Cook Around the World in
+    the owner's words), then offers four questions: knife work, the stove
+    and oven, and the kind of recipe they're ready for, then reading pages
+    and drills or just the recipes. The Level is the lowest of the three
+    readiness answers; Level 2 stands in for Level 1 until it's built.
+    Reading pages and drills offers that Level only. Just the recipes offers
+    Level 3 or 4 beside Cook Around the World (Level 2 alone), saying its
+    parts can be turned off, and picking the Level makes the course with
+    Knowledge, Drill, and Beyond the Recipe off. **Start over** goes back.
+  - **Set up a course** has the same **Help me choose** as a dialog under
+    Which program?. It's optional: **Use …** ticks the program (and, for
+    just the recipes, unticks the components), and the parent can still
+    change anything.
+  - The words and the placement live in `src/content/levels.js`
+    (`READY_FOR`, `PLACE_QUIZ`, `PLACE_PARTS`, `suggestProgram`). The Level
+    descriptions and the quiz answers are Claude's draft for the owner.
+- Screenshots (Chef Ruth's buttons, descriptions, quiz, result, and finish;
+  the editor's button, dialog, result, and unticked components; phone
+  width, both themes) sent in the session.
+- Tests: 402.
+
+## 244. 2026-10-27 — Help me choose: the owner's two program lines
+
+Owner, 2026-10-27: "I dont like it." with the new wording for both programs.
+
+- **Before:** Help me choose opened with a line for Cook Around the World and
+  one for each Level, on what a cook should be ready for.
+- **Now:** two lines, in the owner's words: one for Cook Around the World and
+  one for Structured Progression Level Courses. The quiz is unchanged and
+  still picks the Level. Same in Chef Ruth and in Set up a course.
+- Screenshots (Ruth's lines and the editor's dialog, phone width, both
+  themes) sent in the session.
+- Tests: 402.

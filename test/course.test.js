@@ -5,7 +5,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { numberCourse, courseEntries, prereqNotes, courseNo } from '../src/content/course.js';
-import { weekLabels } from '../src/content/levels.js';
+import { weekLabels, suggestProgram, PLACE_QUIZ, PLACE_PARTS, READY_FOR } from '../src/content/levels.js';
 
 const C = JSON.parse(readFileSync('content/course.json', 'utf8')).dishes;
 
@@ -58,4 +58,22 @@ test("a Cook Around the World label counts its place in the course; others stay 
 
 test("a Level's labels: its letter, the week, and a for Familiar or b for Explore", () => {
   assert.deepEqual(weekLabels([{ week: 4, familiar: 'minestrone', explore: 'ajapsandali' }, { week: 35, kind: 'capstone' }], 'C'), { minestrone: 'C4a', ajapsandali: 'C4b' });
+});
+
+test("Help me choose suggests by the lowest answer, and Cook Around the World only for just the recipes at Level 3 or 4", () => {
+  const offered = ['sp-2', 'sp-3', 'sp-4'];
+  const s = (levels, parts, o = offered) => suggestProgram(levels, parts, o);
+  assert.deepEqual(s([4, 4, 4], 'parts'), { id: 'sp-4', under: false, caw: false, partsOff: false });
+  assert.deepEqual(s([4, 3, 4], 'recipes'), { id: 'sp-3', under: false, caw: true, partsOff: true });
+  assert.deepEqual(s([4, 4, 4], 'recipes'), { id: 'sp-4', under: false, caw: true, partsOff: true });
+  // Ready for a chef's knife but not the stove: Level 2, never Cook Around the World.
+  assert.deepEqual(s([3, 2, 4], 'recipes'), { id: 'sp-2', under: false, caw: false, partsOff: true });
+  assert.deepEqual(s([3, 2, 4], 'parts'), { id: 'sp-2', under: false, caw: false, partsOff: false });
+  // Level 1 isn't offered yet: the lowest Level, marked under.
+  assert.deepEqual(s([1, 3, 3], 'parts'), { id: 'sp-2', under: true, caw: false, partsOff: false });
+  assert.deepEqual(s([1, 1, 1], 'parts', [...offered, 'sp-1']), { id: 'sp-1', under: false, caw: false, partsOff: false });
+  // Every readiness answer points at a Level, and each program has its line.
+  for (const { answers } of PLACE_QUIZ) assert.deepEqual(answers.map(([, n]) => n), [1, 2, 3, 4]);
+  assert.deepEqual(PLACE_PARTS.answers.map(([v]) => v), ['parts', 'recipes']);
+  assert.deepEqual(Object.keys(READY_FOR), ['caw', 'levels']);
 });

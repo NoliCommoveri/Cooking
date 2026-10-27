@@ -45,3 +45,53 @@ export const weekLabels = (weeks, prefix) => Object.fromEntries(weeks.flatMap((w
 export const ASSIGN_NOTES = {
   'sp-4': 'Note: While lessons do review some fundamentals in culinary technique, Level 4 is intended for somewhat experienced cooks and pre-supposes learners that are ready to be in the kitchen independently. Please do not assign until your learner is able to operate the stove-top and oven themselves, and is able to drain, work with oils, and perform cutting unassisted.',
 };
+
+// Help me choose (owner, 2026-10-27): under Which program?, with Chef Ruth
+// and in the course editor, a line on each program in the owner's words,
+// then a short quiz that suggests one. It goes by what a cook is ready to
+// learn, never by what they've done or their age (§12).
+export const READY_FOR = {
+  caw: "Cook Around the World: a self-paced course where each dish is chosen to practice the skills you'd like to grow in, all while experiencing food from many cultures and cuisines.",
+  levels: "Structured Progression Level Courses: a weekly full culinary arts course teaching kitchen science, health rules, and Scriptural truths about food along with one recipe per week for practice. Levels are based on a learner's development and previous experience in the kitchen.",
+};
+
+// The quiz. Each readiness answer is the Level it points to (1 to 4); the
+// last question is whether they want the reading pages and drills. Siblings
+// share a course, so it's answered for the cook with the least experience.
+export const PLACE_QUIZ = [
+  { q: 'What knife work are they ready to learn?', answers: [
+    ["Not yet. They'd watch, wash, and tear", 1],
+    ['A table knife on soft foods, with an adult right beside them', 2],
+    ["A chef's knife, with an adult nearby", 3],
+    ['Any knife work on their own', 4],
+  ] },
+  { q: 'What are they ready to do at the stove and oven?', answers: [
+    ['Stay back while an adult cooks', 1],
+    ['Stir and flip, with an adult right there', 2],
+    ['Cook at the stove and use the oven, with an adult nearby', 3],
+    ['The stove, oven, and hot oil on their own', 4],
+  ] },
+  { q: 'What kind of recipe are they ready to follow?', answers: [
+    ['Pictures, read aloud to them', 1],
+    ['Short steps, one thing at a time', 2],
+    ['Full steps in real cooking words, like simmer and fold', 3],
+    ['A recipe with few tips, changed to taste', 4],
+  ] },
+];
+// The owner's words (2026-10-27).
+export const PLACE_PARTS = { q: 'Do you want reading pages and drills for supplemental learning, or are you only here for the actual recipe?', answers: [['parts', 'Reading pages and drills too'], ['recipes', 'Just the recipes']] };
+
+// What the quiz suggests. levels: the readiness answers; parts: 'parts' or
+// 'recipes'; offered: the Level ids ('sp-2', …). The Level is the lowest
+// answer (owner, 2026-10-27), so they're ready for it on every count, or
+// the highest offered Level under it; if none is (Level 1 isn't offered
+// yet), the lowest offered, marked under. Cook Around the World is offered
+// beside a Level 3 or 4 for just the recipes, and never with the reading
+// pages and drills. Just the recipes on a Level turns its parts off.
+export function suggestProgram(levels, parts, offered) {
+  const n = Math.min(...levels);
+  const at = offered.filter((id) => Number(id.slice(3)) <= n).sort().at(-1);
+  const id = at ?? [...offered].sort()[0] ?? null;
+  const recipes = parts === 'recipes';
+  return { id, under: !at, caw: recipes && Number(id?.slice(3)) >= 3, partsOff: recipes };
+}
