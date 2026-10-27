@@ -6926,3 +6926,28 @@ approach with a sorting pass first.
     Not fixed yet: the fix waits on the owner.
 - No screens changed, so no screenshots.
 - Tests: 407.
+
+## 265. 2026-10-27 — The leaven check: baguettes and rolls, and three false alarms
+
+Owner, 2026-10-27, answering the sorting pass's questions (264): "All yours
+is fine. The soda isn't really leaven in that case but no one will have the
+soda in their house so leave it out."
+
+- **Before:** the leaven list (`content/rules/leaven.json`) didn't name
+  baguettes or rolls, so French onion soup (a baguette under the cheese) and
+  ratatouille (an optional baguette) had the Unleavened badge, and spring
+  Swap offered them. "Bread knife", "the size of a cracker", and "looks like
+  breadcrumbs" in a step counted as leaven, so arepas and the bún bowl,
+  which have none, didn't have the badge.
+- **Now:**
+  - The leaven list adds baguette, ciabatta, and bolillo, and passes those
+    three phrases. French onion soup and ratatouille lose the badge; arepas
+    and the bún bowl get it. Ensaladilla rusa keeps its flag until its tip
+    is reworded.
+  - The plan (§6.20) records the owner's other answers: mezze spread's
+    unleavened version leaves the soda out, so it moves from easy swap to
+    needs a version (23 and 18); a gluten-free family's swap is gluten-free
+    too; and matzah and matzah meal join the ingredient list with the note
+    "Plain matzah: flour and water only."
+- No screens changed, so no screenshots.
+- Tests: 408.
