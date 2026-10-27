@@ -6879,3 +6879,26 @@ lunisolar calendar".
   it comes with phase 13.
 - No screens changed, so no screenshots.
 - Tests: 407.
+
+## 263. 2026-10-27 — Plan: leavened lessons don't play during the feast; unleavened swaps
+
+Owner, 2026-10-27, asked whether a leavened lesson can be cooked at all
+during the feast when it isn't on the schedule: "No. We should do our best to
+find unleavened swap in ingredients for as many recipes as possible. But if
+the recipe absolutely requires leavening, it doesn't play in the player."
+
+- **Before:** the plan (261) covered only when a leavened recipe could be
+  due.
+- **Now:**
+  - A leavened lesson doesn't play in the player on a family's unleavened
+    days, however it's opened.
+  - As many lessons as possible get unleavened swaps. Claude's recommendation
+    for how, waiting on the owner, is in §6.20: a lesson's substitutions get
+    an `unleavened` reason, applied on their own during the unleavened days
+    like diet swaps, with an unleavened version where a step names the
+    leaven. A lesson with all its leaven swapped plays, can be due, and
+    doesn't pause a course.
+  - 59 of the 153 written lessons have leaven.
+  - Nothing is built yet: it comes with phase 13.
+- No screens changed, so no screenshots.
+- Tests: 407.
