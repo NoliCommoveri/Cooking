@@ -6441,3 +6441,53 @@ owner approves it there.
 - The content check finds no Level 2 writing warnings.
 - No screens changed, so no screenshots.
 - Tests: 402.
+
+## 247. 2026-10-27 — 14g content: Level 4 Unit 4
+
+Owner, 2026-10-27: Level 4 is the last of Unit 4's three Levels (245).
+Reviewed in [14g review: Level 4 Chef, Unit
+4](https://claude.ai/artifact/KqcKeNDNyyW3Dkut9yEvHc); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 4 Unit 4's ten dishes was written. Chicken pot
+  pie, spinach & mushroom quiche, biscuits and sausage gravy, apple pie with
+  lattice, and malva pudding were planned Cook Around the World cards with no
+  lesson; the other five were unwritten Level cards. All 15 part pages were
+  blank.
+- **Now:**
+  - **Five new Cook Around the World lessons,** each already planned (§12.4):
+    Spinach & mushroom quiche (Unit 6, blind-baked; 135 minutes), Chicken pot
+    pie (Unit 6, in the cast-iron skillet; 120), Biscuits + sausage gravy
+    (Unit 5, bulk turkey sausage; 60, in two sizes, 6 or 12), Apple pie with
+    lattice (Unit 7; 240), and Malva pudding (Unit 7; 75).
+  - **Level 4 versions** of all five: the quiche with a weighed, egg-sealed
+    crust and the custard to 170°F; the pot pie under a four-fold rough puff;
+    biscuits and gravy weighed at the parent's size, with ground beef
+    seasoned into sausage and a timeline; the apple pie as the mastery bake,
+    the apples weighed and their juice boiled down; malva with a stirred
+    custard to 175°F and the sponge to 200°F.
+  - **Five Level-only recipes** in `content/levels/recipes/`, unit 104:
+    Chocolate babka (two days, cold-retarded), Japanese milk bread
+    (tangzhong), Spinach and feta borekas (rough puff), Jamaican beef patties
+    (butter pastry), and Arepas with black beans and cheese. Their cards'
+    minutes are now the recipes' own.
+  - **All 15 part pages:** enriched doughs, cold fermentation, and baker's
+    percentages, a tangzhong and an overnight retard, the bread of the
+    Presence (Leviticus 24:5–9); fats and pastry labels with a Watch for box,
+    lamination folds, freezing unbaked pastry; blind baking and soggy
+    bottoms, a side-by-side blind bake, freezing pastry ahead; leaveners at a
+    larger batch, scaling and timing to the main, freezing unbaked biscuits;
+    fruit-pie thickeners and doneness by the bubbling, weaving a lattice, and
+    leaven and unleavened bread with an essay. Each Knowledge page closes
+    with the week's cuisine.
+  - **New ingredients:** bread flour, shredded Swiss, masarepa, ground
+    allspice, Scotch bonnet or habanero, apricot jam. **New tools:** a 9-inch
+    pie plate, pie weights.
+- **Missing picture:** the arepas' card never had one. Its recipe shows the
+  side-dish drawing (`meals/side.svg`) until a dish picture is made; the
+  review doc has a prompt for it.
+- The lint test that used apple pie as an unwritten lesson uses beef chili
+  now.
+- The content check finds no Level 4 writing warnings.
+- No screens changed, so no screenshots.
+- Tests: 402.

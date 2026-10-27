@@ -10302,6 +10302,264 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "biscuits-and-gravy",
+   "version": 1,
+   "track": "core",
+   "unit": 5,
+   "title": "Biscuits + sausage gravy",
+   "image": "img/dishes/biscuits-and-gravy.webp",
+   "cuisine": "american",
+   "skill": "Milk gravy on a roux",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 6 biscuits and about 3 cups of gravy.",
+     "2": "Makes 12 biscuits and about 6 cups of gravy. They fit on one sheet pan, 3 rows of 4."
+    }
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "baking-powder"
+    },
+    {
+     "ingredient": "baking-soda"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "buttermilk"
+    },
+    {
+     "ingredient": "turkey-sausage-bulk"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "salt"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "other",
+   "tags": {
+    "protein": "turkey",
+    "flavors": [
+     "mild-buttery",
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "parchment",
+    "mixing-bowl-large",
+    "box-grater",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "whisk",
+    "fork",
+    "biscuit-cutter",
+    "skillet-12",
+    "wooden-spoon",
+    "thermometer",
+    "oven-mitts",
+    "cooling-rack",
+    "ladle"
+   ],
+   "skills": [
+    "roux",
+    "gravy"
+   ],
+   "method": "stove",
+   "about": "Split biscuits smothered in a creamy, peppery gravy made with turkey sausage. A breakfast dish.",
+   "main": [
+    "biscuits",
+    "turkey sausage",
+    "milk",
+    "black pepper"
+   ],
+   "variations": [
+    {
+     "title": "Biscuits + sausage gravy",
+     "image": "img/dishes/biscuits-and-gravy.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1,
+       2
+      ],
+      "notes": {
+       "1": "Makes 6 biscuits and about 3 cups of gravy.",
+       "2": "Makes 12 biscuits and about 6 cups of gravy. They fit on one sheet pan, 3 rows of 4."
+      }
+     },
+     "totalMinutes": 70,
+     "ingredients": [
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "baking-powder"
+      },
+      {
+       "ingredient": "baking-soda"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "buttermilk"
+      },
+      {
+       "ingredient": "beef-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "thyme-dried"
+      },
+      {
+       "ingredient": "chili-flakes"
+      },
+      {
+       "ingredient": "garlic-powder"
+      },
+      {
+       "ingredient": "brown-sugar"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "milk-whole"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "salt"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "beef-ground",
+       "use": "turkey-sausage-bulk",
+       "reason": "availability"
+      }
+     ],
+     "unleavened": false,
+     "protein": "beef",
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "mild-buttery",
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "garlic"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "kitchen-scale",
+      "small-bowl",
+      "sheet-pan",
+      "parchment",
+      "mixing-bowl-large",
+      "box-grater",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "whisk",
+      "fork",
+      "biscuit-cutter",
+      "skillet-12",
+      "wooden-spoon",
+      "thermometer",
+      "oven-mitts",
+      "cooling-rack",
+      "ladle"
+     ],
+     "skills": [
+      "roux",
+      "gravy"
+     ],
+     "method": "stove",
+     "about": "Split biscuits smothered in a creamy, peppery gravy made with turkey sausage. A breakfast dish.",
+     "main": [
+      "biscuits",
+      "turkey sausage",
+      "milk",
+      "black pepper"
+     ],
+     "id": "sp-4",
+     "level": "sp-4"
+    }
+   ]
+  },
+  {
    "id": "challah",
    "version": 1,
    "track": "core",
@@ -11263,6 +11521,529 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "spinach-mushroom-quiche",
+   "version": 1,
+   "track": "core",
+   "unit": 6,
+   "title": "Spinach & mushroom quiche",
+   "image": "img/dishes/spinach-mushroom-quiche.webp",
+   "cuisine": "french",
+   "skill": "Pastry, blind baking, custard",
+   "servings": 8,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes one 9-inch quiche, 8 slices."
+    }
+   },
+   "totalMinutes": 135,
+   "ingredients": [
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "mushrooms"
+    },
+    {
+     "ingredient": "spinach-baby"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "heavy-cream"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "swiss-shredded"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "swiss-shredded",
+     "use": "cheddar-shredded",
+     "reason": "availability"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "eggs",
+    "flavors": [
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "spinach-greens"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "plate",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "fork",
+    "whisk",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "rolling-pin",
+    "pie-plate",
+    "foil",
+    "pie-weights",
+    "sheet-pan",
+    "chef-knife",
+    "cutting-board",
+    "skillet-12",
+    "wooden-spoon",
+    "oven-mitts",
+    "table-knife",
+    "cooling-rack"
+   ],
+   "skills": [
+    "pastry",
+    "custards"
+   ],
+   "method": "stove-oven",
+   "about": "A savory pie with homemade pastry and a creamy egg filling with spinach and mushrooms.",
+   "main": [
+    "eggs",
+    "cream",
+    "spinach",
+    "mushrooms",
+    "cheese"
+   ],
+   "variations": [
+    {
+     "title": "Spinach & mushroom quiche",
+     "image": "img/dishes/spinach-mushroom-quiche.webp",
+     "cuisine": "french",
+     "servings": 8,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes one 9-inch quiche, 8 slices."
+      }
+     },
+     "totalMinutes": 140,
+     "ingredients": [
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "mushrooms"
+      },
+      {
+       "ingredient": "spinach-baby"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "heavy-cream"
+      },
+      {
+       "ingredient": "milk-whole"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "swiss-shredded"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "swiss-shredded",
+       "use": "cheddar-shredded",
+       "reason": "availability"
+      }
+     ],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "eggs",
+      "flavors": [
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "spinach-greens"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "plate",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "fork",
+      "whisk",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "rolling-pin",
+      "pie-plate",
+      "foil",
+      "pie-weights",
+      "sheet-pan",
+      "chef-knife",
+      "cutting-board",
+      "skillet-12",
+      "wooden-spoon",
+      "oven-mitts",
+      "cooling-rack",
+      "kitchen-scale",
+      "thermometer",
+      "kitchen-towel"
+     ],
+     "skills": [
+      "pastry",
+      "custards"
+     ],
+     "method": "stove-oven",
+     "about": "A savory pie with homemade pastry and a creamy egg filling with spinach and mushrooms.",
+     "main": [
+      "eggs",
+      "cream",
+      "spinach",
+      "mushrooms",
+      "cheese"
+     ],
+     "id": "sp-4",
+     "level": "sp-4"
+    }
+   ]
+  },
+  {
+   "id": "chicken-pot-pie",
+   "version": 1,
+   "track": "core",
+   "unit": 6,
+   "title": "Chicken pot pie",
+   "image": "img/dishes/chicken-pot-pie.webp",
+   "cuisine": "american",
+   "skill": "Roux filling + pie crust",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes one 10-inch skillet pie."
+    }
+   },
+   "totalMinutes": 120,
+   "ingredients": [
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "chicken-thigh"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "peas-frozen"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "water"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": {
+    "protein": "chicken",
+    "flavors": [
+     "creamy-cheesy",
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "some"
+   },
+   "tasteItems": {
+    "required": [
+     "onions",
+     "carrots",
+     "celery"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "plate",
+    "mixing-bowl-large",
+    "fork",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "rolling-pin",
+    "chef-knife",
+    "cutting-board",
+    "skillet-cast-iron",
+    "wooden-spoon",
+    "whisk",
+    "thermometer",
+    "small-bowl",
+    "pastry-brush",
+    "sheet-pan",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "skills": [
+    "roux",
+    "pastry"
+   ],
+   "method": "stove-oven",
+   "about": "Chicken and vegetables in a creamy sauce, baked under a golden pie crust.",
+   "main": [
+    "chicken",
+    "peas and carrots",
+    "chicken broth",
+    "butter",
+    "milk"
+   ],
+   "variations": [
+    {
+     "title": "Chicken pot pie",
+     "image": "img/dishes/chicken-pot-pie.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes one 10-inch skillet pie."
+      }
+     },
+     "totalMinutes": 150,
+     "ingredients": [
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "chicken-thigh"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "carrot"
+      },
+      {
+       "ingredient": "celery"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "broth-chicken"
+      },
+      {
+       "ingredient": "milk-whole"
+      },
+      {
+       "ingredient": "thyme-dried"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "peas-frozen"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "water"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "creamy-cheesy",
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "carrots",
+       "celery"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "plate",
+      "mixing-bowl-large",
+      "fork",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "rolling-pin",
+      "chef-knife",
+      "cutting-board",
+      "skillet-cast-iron",
+      "wooden-spoon",
+      "whisk",
+      "thermometer",
+      "small-bowl",
+      "pastry-brush",
+      "sheet-pan",
+      "oven-mitts",
+      "cooling-rack",
+      "kitchen-scale"
+     ],
+     "skills": [
+      "roux",
+      "pastry"
+     ],
+     "method": "stove-oven",
+     "about": "Chicken and vegetables in a creamy sauce, baked under a golden pie crust.",
+     "main": [
+      "chicken",
+      "peas and carrots",
+      "chicken broth",
+      "butter",
+      "milk"
+     ],
+     "id": "sp-4",
+     "level": "sp-4"
+    }
+   ]
+  },
+  {
    "id": "brown-butter-cookies",
    "version": 1,
    "track": "core",
@@ -11364,6 +12145,488 @@ export const LIBRARY = {
     "chocolate chips",
     "brown sugar",
     "eggs"
+   ]
+  },
+  {
+   "id": "malva-pudding",
+   "version": 1,
+   "track": "core",
+   "unit": 7,
+   "title": "Malva pudding",
+   "image": "img/dishes/malva-pudding.webp",
+   "cuisine": "south-african",
+   "skill": "A sponge pudding soaked in a warm butter-cream sauce",
+   "servings": 12,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes one 9-by-13-inch pudding, 12 squares."
+    }
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "apricot-jam"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "baking-soda"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "vinegar-white"
+    },
+    {
+     "ingredient": "heavy-cream"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "vanilla-extract"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "sweet-treats"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "adventurous",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "baking-dish",
+    "pastry-brush",
+    "small-bowl",
+    "microwave",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "whisk",
+    "silicone-spatula",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "saucepan-medium",
+    "fork",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "skills": [
+    "batters",
+    "custards"
+   ],
+   "method": "oven",
+   "about": "A soft South African sponge cake with apricot jam, soaked in a warm butter-cream sauce.",
+   "main": [
+    "apricot jam",
+    "milk",
+    "eggs",
+    "butter",
+    "cream"
+   ],
+   "variations": [
+    {
+     "title": "Malva pudding",
+     "image": "img/dishes/malva-pudding.webp",
+     "cuisine": "south-african",
+     "servings": 12,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes one 9-by-13-inch pudding, 12 squares."
+      }
+     },
+     "totalMinutes": 90,
+     "ingredients": [
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "apricot-jam"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "baking-soda"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "milk-whole"
+      },
+      {
+       "ingredient": "vinegar-white"
+      },
+      {
+       "ingredient": "heavy-cream"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "vanilla-extract"
+      },
+      {
+       "ingredient": "milk-whole"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "vanilla-extract"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "sweet-treats"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "adventurous",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "baking-dish",
+      "pastry-brush",
+      "small-bowl",
+      "microwave",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "whisk",
+      "silicone-spatula",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "saucepan-medium",
+      "fork",
+      "oven-mitts",
+      "cooling-rack",
+      "thermometer",
+      "saucepan-light",
+      "heatproof-bowl"
+     ],
+     "skills": [
+      "batters",
+      "custards"
+     ],
+     "method": "oven",
+     "about": "A soft South African sponge cake with apricot jam, soaked in a warm butter-cream sauce.",
+     "main": [
+      "apricot jam",
+      "milk",
+      "eggs",
+      "butter",
+      "cream"
+     ],
+     "id": "sp-4",
+     "level": "sp-4"
+    }
+   ]
+  },
+  {
+   "id": "apple-pie",
+   "version": 1,
+   "track": "core",
+   "unit": 7,
+   "title": "Apple pie with lattice",
+   "image": "img/dishes/apple-pie.webp",
+   "cuisine": "american",
+   "skill": "Advanced pastry",
+   "servings": 8,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes one 9-inch pie, 8 slices."
+    }
+   },
+   "totalMinutes": 240,
+   "ingredients": [
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "apple-tart"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "brown-sugar"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "cornstarch"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "sugar"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "sweet-treats"
+    ],
+    "heat": "mild",
+    "budget": "$$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "lemon-lime"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "plate",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "small-bowl",
+    "fork",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "vegetable-peeler",
+    "paring-knife",
+    "chef-knife",
+    "cutting-board",
+    "rolling-pin",
+    "parchment",
+    "pie-plate",
+    "sheet-pan",
+    "pastry-brush",
+    "foil",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "skills": [
+    "pastry"
+   ],
+   "method": "oven",
+   "about": "A classic apple pie with a homemade woven lattice crust.",
+   "main": [
+    "apples",
+    "butter",
+    "cinnamon",
+    "lemon"
+   ],
+   "variations": [
+    {
+     "title": "Apple pie with lattice",
+     "image": "img/dishes/apple-pie.webp",
+     "cuisine": "american",
+     "servings": 8,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes one 9-inch pie, 8 slices."
+      }
+     },
+     "totalMinutes": 255,
+     "ingredients": [
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "apple-tart"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "brown-sugar"
+      },
+      {
+       "ingredient": "cinnamon-ground"
+      },
+      {
+       "ingredient": "cornstarch"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "sugar"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "sweet-treats"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "lemon-lime"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "plate",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "small-bowl",
+      "fork",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "vegetable-peeler",
+      "paring-knife",
+      "chef-knife",
+      "cutting-board",
+      "rolling-pin",
+      "parchment",
+      "pie-plate",
+      "sheet-pan",
+      "pastry-brush",
+      "foil",
+      "oven-mitts",
+      "cooling-rack",
+      "kitchen-scale",
+      "saucepan-medium",
+      "colander"
+     ],
+     "skills": [
+      "pastry"
+     ],
+     "method": "oven",
+     "about": "A classic apple pie with a homemade woven lattice crust.",
+     "main": [
+      "apples",
+      "butter",
+      "cinnamon",
+      "lemon"
+     ],
+     "id": "sp-4",
+     "level": "sp-4"
+    }
    ]
   },
   {
@@ -16497,6 +17760,109 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "arepas",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Arepas with black beans and cheese",
+   "image": "img/meals/side.svg",
+   "cuisine": "venezuelan",
+   "skill": "A corn dough timed with its fillings",
+   "servings": 4,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes 8 arepas."
+    }
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "masarepa"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "black-beans"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "queso-fresco"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "saucepan-medium",
+    "wooden-spoon",
+    "fork",
+    "chef-knife",
+    "bread-knife",
+    "cutting-board",
+    "can-opener",
+    "colander",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "skillet-12",
+    "spatula",
+    "sheet-pan",
+    "kitchen-towel",
+    "oven-mitts"
+   ],
+   "skills": [
+    "skillet-baking"
+   ],
+   "method": "stove-oven",
+   "about": "Venezuelan corn cakes griddled, finished in the oven, split, and filled with black beans and white cheese. No leaven.",
+   "main": [
+    "masarepa",
+    "black beans",
+    "queso blanco",
+    "onion",
+    "cumin"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "bibimbap",
    "version": 1,
    "track": "core",
@@ -17126,6 +18492,121 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "chocolate-babka",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Chocolate babka",
+   "image": "img/dishes/chocolate-babka.webp",
+   "cuisine": "jewish",
+   "skill": "An enriched, cold-retarded dough, filled and twisted",
+   "servings": 10,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes 1 loaf, about 10 slices."
+    }
+   },
+   "totalMinutes": 285,
+   "ingredients": [
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "vanilla-extract"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "chocolate-chips"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "powdered-sugar"
+    },
+    {
+     "ingredient": "cocoa-powder"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "water"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-scale",
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "fork",
+    "wooden-spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "silicone-spatula",
+    "rolling-pin",
+    "chef-knife",
+    "cutting-board",
+    "loaf-pan",
+    "parchment",
+    "kitchen-towel",
+    "saucepan-light",
+    "pastry-brush",
+    "foil",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "skills": [
+    "yeast-dough",
+    "layering"
+   ],
+   "method": "oven",
+   "about": "A rich yeast loaf rolled with chocolate filling, cut, twisted, and baked. The dough rests overnight in the fridge.",
+   "main": [
+    "flour",
+    "yeast",
+    "butter",
+    "eggs",
+    "dark chocolate"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "duck-breast-cherry",
    "version": 1,
    "track": "core",
@@ -17442,6 +18923,141 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "jamaican-beef-patties",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Jamaican beef patties",
+   "image": "img/dishes/jamaican-beef-patties.webp",
+   "cuisine": "jamaican",
+   "skill": "A turmeric pastry, filled and crimped",
+   "servings": 8,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes 8 patties."
+    }
+   },
+   "totalMinutes": 150,
+   "ingredients": [
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "turmeric-ground"
+    },
+    {
+     "ingredient": "curry-powder"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "scotch-bonnet"
+    },
+    {
+     "ingredient": "beef-ground"
+    },
+    {
+     "ingredient": "curry-powder"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "allspice-ground"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "broth-beef"
+    },
+    {
+     "ingredient": "panko"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "scotch-bonnet",
+     "use": "jalapeno",
+     "reason": "availability"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-scale",
+    "mixing-bowl-large",
+    "fork",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "chef-knife",
+    "cutting-board",
+    "skillet-12",
+    "wooden-spoon",
+    "thermometer",
+    "plate",
+    "rolling-pin",
+    "small-bowl",
+    "sheet-pan",
+    "parchment",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "skills": [
+    "pastry",
+    "filling-crimping"
+   ],
+   "method": "oven",
+   "about": "Flaky turmeric-colored pastry made with butter, filled with spiced ground beef, crimped, and baked.",
+   "main": [
+    "flour",
+    "butter",
+    "turmeric",
+    "ground beef",
+    "Scotch bonnet"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "mezze-spread",
    "version": 1,
    "track": "core",
@@ -17590,6 +19206,109 @@ export const LIBRARY = {
     "parsley",
     "labneh",
     "pita"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "milk-bread",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Japanese milk bread",
+   "image": "img/dishes/milk-bread.webp",
+   "cuisine": "japanese",
+   "skill": "A tangzhong for a soft crumb",
+   "servings": 10,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes 1 loaf, about 10 slices."
+    }
+   },
+   "totalMinutes": 210,
+   "ingredients": [
+    {
+     "ingredient": "flour-bread"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "flour-bread"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "milk-whole"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "milk-whole",
+     "use": "milk-oat",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "saucepan-light",
+    "whisk",
+    "thermometer",
+    "kitchen-scale",
+    "liquid-measuring-cup",
+    "microwave",
+    "mixing-bowl-large",
+    "wooden-spoon",
+    "measuring-spoons",
+    "kitchen-towel",
+    "chef-knife",
+    "rolling-pin",
+    "loaf-pan",
+    "pastry-brush",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "skills": [
+    "yeast-dough",
+    "scalded-dough"
+   ],
+   "method": "oven",
+   "about": "A tall, soft loaf made with tangzhong, a cooked flour-and-milk paste that keeps it tender for days.",
+   "main": [
+    "bread flour",
+    "milk",
+    "yeast",
+    "butter",
+    "egg"
    ],
    "level": "sp-4"
   },
@@ -17946,6 +19665,120 @@ export const LIBRARY = {
     "garlic",
     "cinnamon",
     "bulgur"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "spinach-feta-borekas",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Spinach and feta borekas",
+   "image": "img/dishes/spinach-feta-borekas.webp",
+   "cuisine": "turkish",
+   "skill": "Laminating a rough puff",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes 12 borekas."
+    }
+   },
+   "totalMinutes": 180,
+   "ingredients": [
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "spinach-baby"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "feta"
+    },
+    {
+     "ingredient": "dill"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "sesame-seeds"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "spinach-greens",
+     "onions",
+     "feta",
+     "sesame"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "kitchen-scale",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "fork",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "rolling-pin",
+    "pastry-brush",
+    "chef-knife",
+    "cutting-board",
+    "skillet-12",
+    "tongs",
+    "kitchen-towel",
+    "small-bowl",
+    "sheet-pan",
+    "parchment",
+    "thermometer",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "skills": [
+    "folding-layers",
+    "filling-crimping"
+   ],
+   "method": "oven",
+   "about": "Homemade rough-puff pastry folded around spinach and feta, brushed with egg and sesame, and baked flaky.",
+   "main": [
+    "flour",
+    "butter",
+    "spinach",
+    "feta",
+    "sesame seeds"
    ],
    "level": "sp-4"
   },
@@ -19286,6 +21119,34 @@ export const LIBRARY = {
    "contains": [
     "dairy"
    ]
+  },
+  "flour-bread": {
+   "name": "Bread flour",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "swiss-shredded": {
+   "name": "Shredded Swiss cheese",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "masarepa": {
+   "name": "Masarepa (precooked white cornmeal)",
+   "contains": []
+  },
+  "allspice-ground": {
+   "name": "Ground allspice",
+   "contains": []
+  },
+  "scotch-bonnet": {
+   "name": "Scotch bonnet or habanero pepper",
+   "contains": []
+  },
+  "apricot-jam": {
+   "name": "Apricot jam",
+   "contains": []
   }
  },
  "cuisines": {
@@ -19404,18 +21265,23 @@ export const LIBRARY = {
   "thick-burgers": "C7a",
   "vegetable-lo-mein": "C3a",
   "antipasto-platter": "D6a",
+  "arepas": "D14b",
   "bibimbap": "D4b",
   "bo-luc-lac": "D2b",
   "chicken-cacciatore": "D7a",
   "chicken-enchiladas": "D3a",
   "chicken-two-ways": "D10a",
+  "chocolate-babka": "D11a",
   "duck-breast-cherry": "D8b",
   "ensaladilla-rusa": "D5b",
   "flank-steak": "D8a",
+  "jamaican-beef-patties": "D13b",
   "mezze-spread": "D6b",
+  "milk-bread": "D11b",
   "pescado-veracruzana": "D9b",
   "salade-nicoise": "D4a",
   "spatchcocked-quail": "D10b",
+  "spinach-feta-borekas": "D12b",
   "steak-fajitas": "D2a",
   "teriyaki-salmon-side": "D9a"
  },
@@ -21220,7 +23086,7 @@ export const LIBRARY = {
     "roux",
     "gravy"
    ],
-   "minutes": 40,
+   "minutes": 60,
    "cuisine": "american",
    "prereqs": [
     "buttermilk-biscuits",
@@ -21526,7 +23392,7 @@ export const LIBRARY = {
     "pastry",
     "custards"
    ],
-   "minutes": 120,
+   "minutes": 135,
    "cuisine": "french",
    "tags": {
     "protein": "eggs",
@@ -21548,7 +23414,7 @@ export const LIBRARY = {
     "roux",
     "pastry"
    ],
-   "minutes": 105,
+   "minutes": 120,
    "cuisine": "american",
    "prereqs": [
     "pick:roux",
@@ -21691,7 +23557,7 @@ export const LIBRARY = {
     "batters",
     "custards"
    ],
-   "minutes": 70,
+   "minutes": 75,
    "cuisine": "south-african",
    "meal": false,
    "tags": {
@@ -21736,7 +23602,7 @@ export const LIBRARY = {
    "skills": [
     "pastry"
    ],
-   "minutes": 150,
+   "minutes": 240,
    "cuisine": "american",
    "prereqs": [
     "spinach-mushroom-quiche"
@@ -32705,15 +34571,179 @@ export const LIBRARY = {
      "cuisine": "japanese",
      "drill": {
       "title": "Make a tangzhong; cold-retard a dough overnight",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Two techniques from this week, practiced on their own: a tangzhong cooked by temperature, and a dough retarded overnight. Use the flour, milk, and yeast this week's recipe already buys."
+      ],
+      "steps": [
+       "Whisk 1 tablespoon of flour into 3 tablespoons of milk in a small saucepan. Cook over low heat, whisking, with the thermometer in it.",
+       "Note what it looks like at 120°F, 140°F, and 149°F. Take it off at 149°F. When did it thicken?",
+       "Cooking the milk bread? This is its first step; keep going with the recipe. Cooking the babka? Stir the paste into a small test dough instead: ½ cup flour, 2 tablespoons warm milk, ¼ teaspoon yeast, a pinch each of sugar and salt.",
+       "Knead the test dough 5 minutes and split it in two balls.",
+       "Leave one ball covered at room temperature. Wrap the other and put it in the fridge overnight.",
+       "Next day, let the cold ball warm 1 hour, then bake both on a sheet pan at 375°F until golden.",
+       "Taste them side by side. Write down the difference in flavor, crust color, and crumb."
+      ],
+      "quiz": [
+       {
+        "q": "At what temperature does tangzhong thicken?",
+        "choices": [
+         "About 149°F",
+         "105°F",
+         "212°F"
+        ],
+        "answer": 0,
+        "explain": "The starch swells."
+       },
+       {
+        "q": "What did the retarded ball probably taste like?",
+        "choices": [
+         "Deeper, a little tangy, and browner",
+         "The same",
+         "Sweeter and paler"
+        ],
+        "answer": 0,
+        "explain": "Enzymes and bacteria worked overnight."
+       },
+       {
+        "q": "Why let cold dough warm before baking?",
+        "choices": [
+         "So the yeast wakes up and it bakes evenly",
+         "To melt the butter",
+         "It doesn't matter"
+        ],
+        "answer": 0,
+        "explain": "Cold dough bakes unevenly."
+       }
+      ]
      },
      "knowledge": {
       "title": "Lean vs. enriched doughs; what cold fermentation adds",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "A lean dough is flour, water, yeast, and salt, maybe a little oil: baguettes, pita, pizza. An enriched dough adds fat, sugar, eggs, or milk: challah, brioche, babka, milk bread. The additions change everything about how the dough behaves.",
+       "Fat coats gluten strands and shortens them, so enriched breads are soft and tender rather than chewy. Sugar pulls water away from the yeast and feeds it at the same time; past about 10% of the flour's weight, it slows fermentation, which is why rich doughs rise slowly and sometimes use extra yeast. Eggs add protein that sets in the oven and lecithin that softens the crumb. Milk sugars and proteins brown the crust early, so enriched loaves are judged by 190°F, not color.",
+       "Cold fermentation, or retarding, means slowing a dough in the fridge for 8 to 72 hours. The yeast nearly stops, but the dough's enzymes keep breaking starch into sugars and proteins into flavor compounds, and bacteria make small amounts of acid. The bread tastes deeper and more complex, browns better, and keeps longer. For a rich dough there's a practical gain too: cold butter makes a soft dough firm enough to roll and shape cleanly.",
+       "Tangzhong, from Japan and China, works on a different lever: pre-cooking a little of the flour in liquid swells its starch so it holds several times its weight in water. The dough can carry more water without being sticky, and the bread stays soft for days.",
+       "Bakers describe doughs by percentages of the flour's weight, called baker's percentages: flour is always 100%. A lean dough might be 65% water and 2% salt; a babka is closer to 25% butter and 20% sugar. It's how a professional compares recipes at a glance.",
+       "This week's Explore dish is Japanese. Bread came to Japan from the West in the late 1800s, and Japanese bakeries made it their own: soft, slightly sweet milk breads, filled buns, and curry bread. Shokupan, the milk loaf, is sold by the loaf in every neighborhood bakery and toasted thick for breakfast."
+      ],
+      "steps": [
+       "Take this week's recipe. Weigh or convert its flour, liquid, fat, and sugar to ounces.",
+       "Work out each as a baker's percentage of the flour. Write them in a table.",
+       "Do the same for the sandwich loaf or challah, if you've baked one, and compare. Which is richer?",
+       "Answer in writing: what two things does a night in the fridge do for a rich dough?"
+      ],
+      "quiz": [
+       {
+        "q": "What makes a dough \"enriched\"?",
+        "choices": [
+         "Added fat, sugar, eggs, or milk",
+         "Extra yeast",
+         "Longer kneading"
+        ],
+        "answer": 0,
+        "explain": "A lean dough is flour, water, yeast, and salt."
+       },
+       {
+        "q": "Why do rich doughs rise slowly?",
+        "choices": [
+         "Fat coats the gluten and sugar pulls water from the yeast",
+         "They have less flour",
+         "They're kneaded less"
+        ],
+        "answer": 0,
+        "explain": "Some recipes add extra yeast to make up for it."
+       },
+       {
+        "q": "What does cold fermentation add?",
+        "choices": [
+         "Deeper flavor, better browning, and a firmer dough to shape",
+         "Height",
+         "Sweetness only"
+        ],
+        "answer": 0,
+        "explain": "Enzymes keep working in the cold."
+       },
+       {
+        "q": "In baker's percentages, the flour is always…",
+        "choices": [
+         "100%",
+         "50%",
+         "The smallest number"
+        ],
+        "answer": 0,
+        "explain": "Everything else is measured against it."
+       },
+       {
+        "q": "What does tangzhong do?",
+        "choices": [
+         "Swells starch so the dough holds more water and stays soft",
+         "Adds yeast",
+         "Makes a crisp crust"
+        ],
+        "answer": 0,
+        "explain": "The bread keeps soft for days."
+       }
+      ]
      },
      "sabbath": {
       "title": "Bread of the Presence (Leviticus 24:5–9)",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "In the tabernacle, God commanded twelve loaves of fine flour to be set out on a gold table before Him, in two rows of six, with pure frankincense beside them. Every Sabbath they were replaced with fresh bread, \"a covenant forever,\" and the old loaves were eaten by Aaron and his sons in a holy place (Leviticus 24:5–9).",
+       "The loaves are called the bread of the Presence (Exodus 25:30), set \"before the LORD regularly.\" Twelve loaves stood for the twelve tribes of Israel, kept always before God.",
+       "The bread comes back in the life of David. Fleeing Saul and hungry, David asked the priest Ahimelech for bread, and the only bread there was the holy bread just removed from the table. The priest gave it to him (1 Samuel 21:1–6). Jesus pointed to this story when the Pharisees accused His disciples of breaking the Sabbath by picking grain (Matthew 12:1–8), and said, \"something greater than the temple is here.\""
+      ],
+      "steps": [
+       "Read Leviticus 24:5–9 and Exodus 25:23–30.",
+       "Read 1 Samuel 21:1–6 and Matthew 12:1–8.",
+       "Each loaf used two-tenths of an ephah of flour, about 4 quarts. Work out roughly how many pounds of flour the twelve loaves took each week (a quart of flour weighs about 1¼ pounds).",
+       "Answer in writing: what did it mean that the bread was set out \"regularly\" and replaced every Sabbath?",
+       "Answer in writing: why do you think Jesus used David's story to answer the Pharisees?"
+      ],
+      "quiz": [
+       {
+        "q": "How many loaves were set on the table?",
+        "choices": [
+         "Twelve, in two rows of six",
+         "Seven",
+         "Three"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 24:5–6."
+       },
+       {
+        "q": "How often were they replaced?",
+        "choices": [
+         "Every Sabbath",
+         "Every day",
+         "Once a year"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 24:8."
+       },
+       {
+        "q": "Who ate the holy bread when fleeing Saul?",
+        "choices": [
+         "David",
+         "Elijah",
+         "Moses"
+        ],
+        "answer": 0,
+        "explain": "1 Samuel 21:6."
+       },
+       {
+        "q": "Where did Jesus refer to that story?",
+        "choices": [
+         "Matthew 12:1–8",
+         "John 6:35",
+         "Luke 5:1–11"
+        ],
+        "answer": 0,
+        "explain": "When His disciples picked grain on the Sabbath."
+       }
+      ]
      }
     },
     {
@@ -32726,15 +34756,166 @@ export const LIBRARY = {
      "cuisine": "turkish",
      "drill": {
       "title": "Lamination folds",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Lamination is the skill this week: folding butter into dough so it stays in layers. You'll practice the folds on this week's rough puff and count what you make. If you're cooking the pot pie, the dough is its top crust; if the borekas, their pastry."
+      ],
+      "steps": [
+       "Make this week's rough-puff dough up to the first roll. Weigh the dough and note the weight.",
+       "Roll it to a rectangle about 6 by 15 inches, the short side toward you. Measure it.",
+       "Brush off the flour. Fold the bottom third up and the top third down, like a letter. That's one fold.",
+       "Turn it a quarter turn so the open edge faces you. Roll and fold again.",
+       "Wrap and chill 15 minutes. Feel the dough before and after. What changed?",
+       "Do two more folds. Count the layers of butter: each fold triples them.",
+       "When you bake it, cut through one piece and look at the side. Can you count layers?"
+      ],
+      "quiz": [
+       {
+        "q": "What is one letter fold?",
+        "choices": [
+         "Folding the dough in thirds, like a letter",
+         "Folding it in half",
+         "Rolling it up"
+        ],
+        "answer": 0,
+        "explain": "Each one triples the layers."
+       },
+       {
+        "q": "After two folds, what do you do?",
+        "choices": [
+         "Chill 15 minutes",
+         "Bake it",
+         "Add water"
+        ],
+        "answer": 0,
+        "explain": "The butter firms and the gluten relaxes."
+       },
+       {
+        "q": "How many butter layers after four folds?",
+        "choices": [
+         "81",
+         "12",
+         "8"
+        ],
+        "answer": 0,
+        "explain": "3 × 3 × 3 × 3."
+       }
+      ]
      },
      "knowledge": {
       "title": "Fats: butter vs. shortening; reading pastry labels",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Pastry is mostly flour and fat, and the fat decides the result. Butter is about 80% fat and 16% water, and it melts at body temperature. The water turns to steam in the oven and lifts layers; the milk solids brown and taste rich. Its weakness is a narrow working range: too cold and it shatters, a few degrees too warm and it smears.",
+       "Vegetable shortening is 100% fat with no water. It stays solid over a wider range of temperatures, so it's easier to work and makes a tender, flaky crust, but with less flavor and less lift from steam. Many bakers use a mix. Oil makes a crumbly, mealy crust that doesn't flake.",
+       "In rough puff and puff pastry, the fat must stay in sheets between layers of dough. That needs butter cold enough to roll without smearing, chilling between folds, and a hot oven so the water in the butter turns to steam before the butter melts out.",
+       "Fats are where pastry hides ingredients this app keeps out. Store-bought pie crusts, puff pastry, phyllo, empanada discs, and some shortening blends can be made with the fats in the Watch for box. Butter, pure vegetable shortening, and oil are fine. Ingredient lists change, so read them each time, and check \"shortening\" on a label to see what it's made from.",
+       "This week's Explore dish is Turkish. Turkish home baking is built on layered doughs: yufka and phyllo sheets brushed with butter for börek, and rough or full puff for bakery borekas. The fillings stay simple: white cheese like feta, spinach, potato, or spiced meat, with dill, parsley, and black pepper."
+      ],
+      "steps": [
+       "Read the ingredient lists on a box of store-bought pie crust, a box of puff pastry, and a can of shortening, online or at the store.",
+       "For each, write down the fat or fats it uses and whether your family can use it.",
+       "Work out the cost per ounce of store-bought puff pastry and of the butter and flour in this week's rough puff."
+      ],
+      "watch": [
+       {
+        "name": "Lard",
+        "hides": "Fat from pigs. In some store-bought pie crusts, puff pastry, empanada discs, and shortening blends."
+       },
+       {
+        "name": "Suet and beef tallow",
+        "hides": "The hard fat of cattle and sheep, which Leviticus 3:17 and 7:23 forbid. In some pastry, mincemeat, and shortening blends."
+       }
+      ],
+      "quiz": [
+       {
+        "q": "What does butter have that shortening doesn't?",
+        "choices": [
+         "About 16% water, which steams into layers, and milk solids for flavor",
+         "More fat",
+         "Salt only"
+        ],
+        "answer": 0,
+        "explain": "Shortening is 100% fat."
+       },
+       {
+        "q": "Why is shortening easier to work?",
+        "choices": [
+         "It stays solid over a wider range of temperatures",
+         "It's colder",
+         "It has more water"
+        ],
+        "answer": 0,
+        "explain": "Butter has a narrow working range."
+       },
+       {
+        "q": "Why does rough puff need a hot oven?",
+        "choices": [
+         "So the butter's water steams before the butter melts out",
+         "To brown it fast",
+         "To kill the yeast"
+        ],
+        "answer": 0,
+        "explain": "Steam lifts the layers."
+       },
+       {
+        "q": "A label says only \"shortening.\" What do you do?",
+        "choices": [
+         "Check what the shortening is made from",
+         "Assume it's fine",
+         "Assume it isn't"
+        ],
+        "answer": 0,
+        "explain": "Some blends include fats on the Watch for list."
+       }
+      ]
      },
      "sabbath": {
       "title": "Freeze unbaked borekas or a pot pie",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Laminated pastry is made for the freezer. Shaped but unbaked, borekas and a pot pie's rough-puff lid go straight from the freezer to the oven, and the frozen butter makes them puff even better. A dinner that took an afternoon becomes a dinner that takes the baking time."
+      ],
+      "steps": [
+       "Shape a batch of borekas, or a second pot-pie lid, and don't egg-wash them.",
+       "Borekas: freeze them on a lined sheet pan, not touching, until hard, about 2 hours. Move them to a freezer bag.",
+       "Pot pie: cool the filling completely, cover it in a foil pan or a freezer-safe dish, and lay the rough-puff lid over it. Wrap it in plastic, then foil.",
+       "Label each with the dish, the oven temperature, and the date. They keep 3 months.",
+       "To bake, don't thaw. Egg-wash, cut vents in the pie, and bake at the recipe's temperature: borekas about 10 minutes longer, a pot pie 25 to 35 minutes longer, with foil over the top once it browns.",
+       "Check the filling: 165°F for the pot pie, 160°F for the borekas."
+      ],
+      "quiz": [
+       {
+        "q": "Why freeze borekas on a pan first?",
+        "choices": [
+         "So they freeze separately and don't stick",
+         "To thaw them",
+         "To bake them faster"
+        ],
+        "answer": 0,
+        "explain": "Then bag them."
+       },
+       {
+        "q": "Why must the pot pie filling be cold before the lid goes on?",
+        "choices": [
+         "Warm filling melts the butter layers",
+         "So it freezes faster",
+         "It doesn't matter"
+        ],
+        "answer": 0,
+        "explain": "The layers need cold butter."
+       },
+       {
+        "q": "What temperature does a frozen pot pie's filling need to reach?",
+        "choices": [
+         "165°F",
+         "145°F",
+         "Golden is enough"
+        ],
+        "answer": 0,
+        "explain": "The crust browns long before the middle is hot."
+       }
+      ]
      }
     },
     {
@@ -32747,15 +34928,164 @@ export const LIBRARY = {
      "cuisine": "jamaican",
      "drill": {
       "title": "Blind-bake a crust; stop a soggy bottom",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Blind baking, and the soggy bottom it prevents, are easiest to understand side by side. If you're making the quiche, its crust is this drill. If you're making the patties, use a little of their pastry to bake two small test tarts."
+      ],
+      "steps": [
+       "Making the quiche: follow its blind-bake steps, and stop to look at the crust after the weighted bake and again after the empty bake. Note the color and how the bottom feels.",
+       "Making the patties: roll two 4-inch rounds of their pastry and press each into a muffin cup or small ovenproof dish.",
+       "Blind-bake one: foil, weights or dried beans, 12 minutes at 400°F, then 5 minutes empty. Leave the other raw.",
+       "Fill both with 2 tablespoons of milk whisked with 1 tablespoon of beaten egg, and bake both 12 minutes at 350°F.",
+       "Cool them and cut both open. Compare the bottoms.",
+       "Write down what blind baking changed and why."
+      ],
+      "quiz": [
+       {
+        "q": "Which tart had the crisper bottom?",
+        "choices": [
+         "The blind-baked one",
+         "The raw one",
+         "They were the same"
+        ],
+        "answer": 0,
+        "explain": "It was set before the filling went in."
+       },
+       {
+        "q": "When are the weights taken out?",
+        "choices": [
+         "After the crust is set, so the bottom can dry and brown",
+         "Before it bakes",
+         "After the filling"
+        ],
+        "answer": 0,
+        "explain": "Then it bakes empty."
+       },
+       {
+        "q": "What color should a blind-baked crust be before filling?",
+        "choices": [
+         "Dry and golden, with no shiny spots",
+         "Pale and soft",
+         "Dark brown"
+        ],
+        "answer": 0,
+        "explain": "Shiny spots are raw dough."
+       }
+      ]
      },
      "knowledge": {
       "title": "Blind baking and soggy bottoms",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "A soggy bottom is pastry that never got hot and dry enough to set before a wet filling soaked into it. The fixes all aim at the same thing: getting the bottom crust baked before, or faster than, the filling makes it wet.",
+       "Blind baking bakes the crust empty first. Lined with foil and filled with weights so the sides don't slump and the bottom doesn't puff, it bakes until set, then bakes unweighted until the bottom is dry and golden. For a custard filling like quiche, it's essential: the custard never gets hot enough to bake raw pastry under it.",
+       "A seal finishes the job. Brushing the hot, blind-baked crust with beaten egg and returning it for 2 minutes cooks a thin waterproof layer between pastry and filling.",
+       "Bottom heat helps every pie. Bake on the lowest rack, on a sheet pan heated in the oven, so heat hits the bottom first. Glass and dark metal pie plates brown the bottom faster than shiny ones. Cook watery fillings first (wilt and wring spinach, brown mushrooms dry), and keep juicy fruit fillings thickened.",
+       "This week's Explore dish is Jamaican. Jamaican cooking is built on thyme, allspice (called pimento there), Scotch bonnet pepper, green onion (escallion), and garlic, with curry from the Indian cooks who came to the island in the 1800s. The beef patty brings them together in a pastry that, in Jamaica, is often made with beef fat; this one uses butter."
+      ],
+      "steps": [
+       "Cut a slice of this week's quiche or a patty in half and look at the bottom crust. Is it crisp and golden, or pale and damp? Draw it.",
+       "List the steps in this week's recipe that protect the bottom crust, and what each one does.",
+       "Write down the five base flavors of Jamaican cooking and which ones are in this week's patties."
+      ],
+      "quiz": [
+       {
+        "q": "What causes a soggy bottom?",
+        "choices": [
+         "The filling wets the crust before it can set",
+         "Too much butter",
+         "Too much salt"
+        ],
+        "answer": 0,
+        "explain": "The bottom never got hot and dry enough."
+       },
+       {
+        "q": "Why are weights used in blind baking?",
+        "choices": [
+         "To stop the sides slumping and the bottom puffing",
+         "To add weight to the pie",
+         "To keep it cold"
+        ],
+        "answer": 0,
+        "explain": "Foil and weights hold the shape."
+       },
+       {
+        "q": "What does an egg seal do?",
+        "choices": [
+         "Makes a waterproof layer between crust and filling",
+         "Adds color",
+         "Makes it rise"
+        ],
+        "answer": 0,
+        "explain": "Brush the hot crust and bake 2 minutes."
+       },
+       {
+        "q": "Why bake on a preheated sheet pan on the lowest rack?",
+        "choices": [
+         "Heat hits the bottom crust first",
+         "It's cooler there",
+         "To catch drips only"
+        ],
+        "answer": 0,
+        "explain": "It catches drips too."
+       },
+       {
+        "q": "What do Jamaicans call allspice?",
+        "choices": [
+         "Pimento",
+         "Escallion",
+         "Curry"
+        ],
+        "answer": 0,
+        "explain": "Escallion is green onion."
+       }
+      ]
      },
      "sabbath": {
       "title": "Make pastry ahead and freeze it",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Pastry dough is the slow part of any pie, and it keeps beautifully. Made ahead and frozen, it turns a quiche or a batch of patties into an evening's work instead of an afternoon's, and a frozen blind-baked shell is a head start on next week's dinner."
+      ],
+      "steps": [
+       "Make a double batch of this week's pastry. Press each half into a 1-inch disk.",
+       "Wrap each disk tightly in plastic wrap, then put them in a freezer bag. Label it with the kind of pastry and the date. It keeps 3 months.",
+       "Or roll one into the pie plate, crimp it, and freeze it in the plate, wrapped. It goes from the freezer straight into a blind bake, adding 5 minutes.",
+       "To use a disk, thaw it overnight in the fridge. It should feel cold but bend without cracking.",
+       "Note how long the frozen dough took, start to finish, compared with fresh."
+      ],
+      "quiz": [
+       {
+        "q": "How long does frozen pastry dough keep?",
+        "choices": [
+         "About 3 months",
+         "A week",
+         "A year"
+        ],
+        "answer": 0,
+        "explain": "Label the date."
+       },
+       {
+        "q": "How do you thaw a disk?",
+        "choices": [
+         "Overnight in the fridge",
+         "On the counter for an hour",
+         "In the microwave"
+        ],
+        "answer": 0,
+        "explain": "It stays cold and safe."
+       },
+       {
+        "q": "Can a frozen crust in its plate be blind-baked from frozen?",
+        "choices": [
+         "Yes, adding about 5 minutes",
+         "No, never",
+         "Only after a day thawing"
+        ],
+        "answer": 0,
+        "explain": "The cold helps it hold its shape."
+       }
+      ]
      }
     },
     {
@@ -32768,15 +35098,153 @@ export const LIBRARY = {
      "cuisine": "venezuelan",
      "drill": {
       "title": "Scale a quick bread and time it to the main",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Scaling and timing, done for real on this week's dish. You'll write the scaled recipe and a timeline before you cook, then check your plan against the clock."
+      ],
+      "steps": [
+       "Decide how many your family needs this week. Scale this week's recipe to it, by weight, and write the new ingredient list.",
+       "List every step that takes time: chilling, browning, simmering, baking, resting. Give each its minutes.",
+       "Write a timeline backward from the time you'll serve, so the dish that can't wait finishes last.",
+       "Cook to your timeline. Note the real clock time at each step.",
+       "Afterward, compare the plan with the real times. Where did you lose or gain time? Write one change for next time."
+      ],
+      "quiz": [
+       {
+        "q": "Where does a cooking timeline start?",
+        "choices": [
+         "At serving time, working backward",
+         "At the first step",
+         "At the shopping list"
+        ],
+        "answer": 0,
+        "explain": "The last step sets the rest."
+       },
+       {
+        "q": "What finishes last?",
+        "choices": [
+         "The part that can't wait",
+         "The longest part",
+         "The simplest part"
+        ],
+        "answer": 0,
+        "explain": "Biscuits, arepas, anything crisp."
+       },
+       {
+        "q": "Why note the real times as you cook?",
+        "choices": [
+         "To fix the plan next time",
+         "For fun",
+         "To slow down"
+        ],
+        "answer": 0,
+        "explain": "Plans get better with practice."
+       }
+      ]
      },
      "knowledge": {
       "title": "Chemical leaveners at a larger batch",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Scaling a quick bread looks like simple multiplication, and mostly it is. Weigh the flour, liquid, and fat, multiply, and the batch scales exactly. Measured by cups, every scoop's error multiplies too.",
+       "Leaveners need care. Up to a double batch, baking powder and baking soda scale with everything else. Beyond that, many bakers scale them slightly less, because a big batch sits longer before it's all in the oven and bubbles escape from the waiting dough. The rule of thumb for biscuits and scones is about 1 teaspoon of baking powder per cup of flour (5 ounces), and ¼ teaspoon of baking soda per ½ cup of buttermilk.",
+       "Baking time follows size, not batch. Twelve biscuits the same size as six bake in the same 13 minutes, as long as the pan isn't crowded. A loaf twice as big takes far longer than twice the time. When a batch fills two pans, bake them on two racks and swap them halfway.",
+       "Timing the bread to the main dish means working backward. Quick breads won't wait: biscuits flatten and arepas harden as they cool. Sauces, gravies, and stews will. So the dish that holds goes first, and the bread goes in the oven last, timed to come out as the plates do.",
+       "This week's Explore dish is Venezuelan. Venezuelan home cooking is built around the arepa, made every day from precooked corn flour, and stuffed with whatever's on hand: black beans (caraotas), white cheese, shredded beef, avocado. Cumin, garlic, onion, and sweet peppers are the base of its flavors."
+      ],
+      "steps": [
+       "Scale this week's biscuit recipe to 18 biscuits by weight. Write the new amounts.",
+       "Check the baking powder against the rule of thumb. Is it close?",
+       "Write a timeline, backward from serving, for this week's recipe: when each part starts and ends."
+      ],
+      "quiz": [
+       {
+        "q": "Why scale by weight?",
+        "choices": [
+         "Cup errors multiply with the batch",
+         "It's faster",
+         "Weighed flour rises more"
+        ],
+        "answer": 0,
+        "explain": "A scale is exact."
+       },
+       {
+        "q": "Twelve biscuits instead of six, the same size. The baking time…",
+        "choices": [
+         "Stays the same",
+         "Doubles",
+         "Halves"
+        ],
+        "answer": 0,
+        "explain": "Time follows size."
+       },
+       {
+        "q": "Which goes first on a timeline: the biscuits or the gravy?",
+        "choices": [
+         "The gravy, since it holds",
+         "The biscuits",
+         "Either"
+        ],
+        "answer": 0,
+        "explain": "Quick breads won't wait."
+       },
+       {
+        "q": "About how much baking powder per cup of flour in biscuits?",
+        "choices": [
+         "1 teaspoon",
+         "1 tablespoon",
+         "¼ teaspoon"
+        ],
+        "answer": 0,
+        "explain": "A rule of thumb to check a recipe."
+       }
+      ]
      },
      "sabbath": {
       "title": "Freeze unbaked biscuits",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Biscuits freeze better unbaked than baked. Cut and frozen raw, they go straight into a hot oven and rise as tall as fresh ones, so a warm breakfast needs no mixing at all."
+      ],
+      "steps": [
+       "Make and cut a batch of biscuits as this week's recipe says, but don't bake them.",
+       "Set them on a lined sheet pan, not touching, and freeze them until hard, about 2 hours.",
+       "Move them to a freezer bag, press out the air, and label it with the oven temperature and date. They keep 3 months.",
+       "To bake, don't thaw. Set them on a lined pan, sides touching, and bake at 450°F for 3 to 5 minutes longer than fresh, until tall and golden.",
+       "Bake one fresh and one frozen side by side if you can, and compare the height."
+      ],
+      "quiz": [
+       {
+        "q": "Do frozen biscuits need to thaw?",
+        "choices": [
+         "No, bake them frozen, a few minutes longer",
+         "Yes, overnight",
+         "Yes, in the microwave"
+        ],
+        "answer": 0,
+        "explain": "Cold butter helps them rise."
+       },
+       {
+        "q": "Why freeze them on a pan first?",
+        "choices": [
+         "So they don't stick together in the bag",
+         "To thaw them",
+         "To shrink them"
+        ],
+        "answer": 0,
+        "explain": "Then take out just what you need."
+       },
+       {
+        "q": "How long do they keep?",
+        "choices": [
+         "About 3 months",
+         "1 week",
+         "1 year"
+        ],
+        "answer": 0,
+        "explain": "Label the date."
+       }
+      ]
      }
     },
     {
@@ -32791,15 +35259,168 @@ export const LIBRARY = {
      "ownRecipe": true,
      "drill": {
       "title": "Weave a lattice; vent and crimp",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "A lattice is woven, not laid on, and its vents and crimp hold the pie together. You'll weave the lattice for this week's apple pie. Cooking the malva pudding instead? Practice the weave with ten 1-inch strips cut from a sheet of paper."
+      ],
+      "steps": [
+       "Roll the top crust on parchment ⅛ inch thick and cut 10 strips, 1 inch wide, with a ruler for straight edges.",
+       "Lay 5 strips across the pie, evenly spaced, the longest in the middle.",
+       "Fold back strips 1, 3, and 5. Lay a strip across at a right angle near the edge. Unfold them.",
+       "Fold back strips 2 and 4. Lay the next cross strip. Unfold. Repeat until the top is woven.",
+       "Trim everything ½ inch past the rim. Fold the overhang under the bottom crust's edge.",
+       "Flute the edge: push the dough out with one finger from inside while pinching it with two from outside, all the way around.",
+       "Look at the gaps. They're the vents. Would a solid top need slits? Why?"
+      ],
+      "quiz": [
+       {
+        "q": "How do you weave a lattice?",
+        "choices": [
+         "Fold back every other strip, lay a cross strip, unfold, repeat",
+         "Lay all the strips on top of each other",
+         "Braid them first"
+        ],
+        "answer": 0,
+        "explain": "Over and under."
+       },
+       {
+        "q": "Why does a solid top crust need slits?",
+        "choices": [
+         "To let steam out",
+         "For decoration only",
+         "To make it brown"
+        ],
+        "answer": 0,
+        "explain": "A lattice's gaps do the same job."
+       },
+       {
+        "q": "Why tuck the overhang under before fluting?",
+        "choices": [
+         "It makes a thick edge that seals and holds its shape",
+         "To hide it",
+         "To save dough"
+        ],
+        "answer": 0,
+        "explain": "A thin edge burns."
+       }
+      ]
      },
      "knowledge": {
       "title": "Fruit-pie thickeners; reading doneness by the bubbling",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "A fruit filling is fruit, sugar, and a thickener for the juice the fruit gives off. Each thickener behaves differently.",
+       "Cornstarch is cheap and strong and sets clear-ish, but only once it boils, and acid or long baking can weaken it. Use about 1 tablespoon per pound of fruit, more for juicy berries. Flour works too but needs about twice as much and makes a cloudier, pastier filling. Tapioca starch sets glossy and clear and holds up to freezing. Apples hold their own pectin, so they need the least.",
+       "Reading doneness by the bubbling: because starch thickens only at a boil, a fruit pie isn't done until the juice in the very center is bubbling thickly and slowly, not just the edges. Thin, fast bubbles mean it hasn't thickened yet. A thermometer in the center filling reads about 200°F when it's ready. Then the pie needs at least 2 hours to cool before the thickened juice sets enough to slice.",
+       "Juicy fruit can be managed before baking: sugared fruit gives off its juice in 30 minutes, and that juice can be boiled down to a syrup and returned, so less liquid ever reaches the crust.",
+       "This week's Explore dish is South African. Its home cooking mixes Dutch, Malay, Indian, and African traditions: bobotie and bredies, sambals and chutneys, and rich baked puddings like malva and milk tart, often finished with a pour of custard."
+      ],
+      "steps": [
+       "Weigh this week's fruit and work out the cornstarch at 1 tablespoon per pound. Does it match the recipe?",
+       "Watch the pie's center bubbles near the end of baking. Write down what they looked like when it was done.",
+       "Write a short reflection: what you'd change about your mastery bake, and why it worked or didn't."
+      ],
+      "quiz": [
+       {
+        "q": "When does cornstarch thicken?",
+        "choices": [
+         "Only once the juice boils",
+         "As soon as it's mixed",
+         "When it cools"
+        ],
+        "answer": 0,
+        "explain": "That's why you wait for center bubbles."
+       },
+       {
+        "q": "About how much cornstarch per pound of fruit?",
+        "choices": [
+         "1 tablespoon",
+         "1 cup",
+         "1 teaspoon"
+        ],
+        "answer": 0,
+        "explain": "More for juicy berries."
+       },
+       {
+        "q": "What do thick, slow bubbles in the center mean?",
+        "choices": [
+         "The filling has thickened; the pie is done",
+         "It's burning",
+         "It needs more sugar"
+        ],
+        "answer": 0,
+        "explain": "Thin, fast bubbles mean not yet."
+       },
+       {
+        "q": "Which thickener stays clear and freezes well?",
+        "choices": [
+         "Tapioca starch",
+         "Flour",
+         "Cornmeal"
+        ],
+        "answer": 0,
+        "explain": "Flour is the cloudiest."
+       }
+      ]
      },
      "sabbath": {
       "title": "Leaven and unleavened bread (Exodus 12:15–20; 1 Corinthians 5:6–8)",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Leaven is anything that makes dough rise by fermentation, or that lightens a batter with gas: yeast, a sourdough starter, baking powder and baking soda. You've baked with all of them this unit. Scripture uses leaven two ways, as a real food and as a picture.",
+       "As a food: Israel left Egypt so quickly that their dough had no time to rise, and they carried it out in their kneading bowls (Exodus 12:34, 39). God commanded unleavened bread for seven days each year, from the evening of the 14th day of the first month to the evening of the 21st, with all leaven removed from their houses (Exodus 12:15–20). Deuteronomy calls it \"the bread of affliction\" (Deuteronomy 16:3).",
+       "As a picture: \"a little leaven leavens the whole lump\" (1 Corinthians 5:6). Paul uses the way a pinch of starter works through a whole batch to show how one sin tolerated spreads through a community, and calls believers to keep the festival \"with the unleavened bread of sincerity and truth\" (1 Corinthians 5:8). Jesus warned of \"the leaven of the Pharisees,\" their teaching (Matthew 16:6–12).",
+       "Leaven isn't always bad. The two loaves of the Feast of Weeks were baked with leaven (Leviticus 23:17), and Jesus compared the kingdom of heaven to leaven worked through three measures of flour until all of it rose (Matthew 13:33). Families keep the unleavened days in different ways; this app shows the days a family sets and plans around leavened recipes on them."
+      ],
+      "steps": [
+       "Read Exodus 12:14–20 and 12:33–39, and Deuteronomy 16:3.",
+       "Read 1 Corinthians 5:6–8 and Matthew 16:6–12.",
+       "Read Leviticus 23:15–17 and Matthew 13:33.",
+       "Go back through this unit's recipes and list which leavener each used: yeast, baking powder, baking soda, or none.",
+       "Write a short essay: how does leaven work in dough, and how do Paul and Jesus use that to teach? Use at least three passages."
+      ],
+      "quiz": [
+       {
+        "q": "Why was Israel's bread unleavened when they left Egypt?",
+        "choices": [
+         "They left in haste, before the dough could rise",
+         "They had no flour",
+         "Yeast was forbidden all year"
+        ],
+        "answer": 0,
+        "explain": "Exodus 12:34, 39."
+       },
+       {
+        "q": "What does Deuteronomy 16:3 call unleavened bread?",
+        "choices": [
+         "The bread of affliction",
+         "The bread of life",
+         "Daily bread"
+        ],
+        "answer": 0,
+        "explain": "Eaten to remember leaving Egypt in haste."
+       },
+       {
+        "q": "What did Jesus mean by \"the leaven of the Pharisees\"?",
+        "choices": [
+         "Their teaching",
+         "Their bread",
+         "Their wealth"
+        ],
+        "answer": 0,
+        "explain": "Matthew 16:12."
+       },
+       {
+        "q": "Which offering was baked with leaven?",
+        "choices": [
+         "The two loaves at the Feast of Weeks",
+         "The bread of the Presence",
+         "The Passover bread"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 23:17."
+       }
+      ]
      }
     },
     {
@@ -33607,7 +36228,7 @@ export const LIBRARY = {
       "yeast-dough",
       "layering"
      ],
-     "minutes": 240,
+     "minutes": 285,
      "tags": {
       "protein": "none",
       "flavors": [

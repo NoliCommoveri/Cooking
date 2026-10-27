@@ -1,0 +1,309 @@
+{
+  "id": "biscuits-and-gravy",
+  "version": 1,
+  "track": "core",
+  "unit": 5,
+  "title": "Biscuits + sausage gravy",
+  "image": "dishes/biscuits-and-gravy.png",
+  "cuisine": "american",
+  "skill": "Milk gravy on a roux",
+  "skills": ["roux", "gravy"],
+  "prereqs": ["buttermilk-biscuits", "pick:roux"],
+  "servings": 6,
+  "totalMinutes": 60,
+  "scaling": {
+    "mode": "fixed",
+    "multipliers": [1, 2],
+    "notes": {
+      "1": "Makes 6 biscuits and about 3 cups of gravy.",
+      "2": "Makes 12 biscuits and about 6 cups of gravy. They fit on one sheet pan, 3 rows of 4."
+    }
+  },
+  "learn": {
+    "move": {
+      "title": "Biscuits from the oven, gravy from the pan",
+      "body": "Biscuits and gravy is a Southern breakfast: flaky buttermilk biscuits split open and smothered in a creamy, peppery gravy. Today you'll bake a batch of biscuits and, while they bake, brown turkey sausage and thicken milk into gravy with a roux, so both are ready together."
+    },
+    "callback": {
+      "lesson": "buttermilk-biscuits",
+      "body": "You've made these biscuits before. This time they bake while you make the gravy, so the two finish at the same time."
+    },
+    "why": [
+      { "id": "cold-butter", "title": "Cold butter, tall biscuits", "body": "Frozen butter grated into the flour turns to steam in a hot oven and puffs the biscuits into layers." },
+      { "id": "roux", "title": "A roux in the sausage pan", "body": "Flour stirred into the sausage and butter for 2 minutes cooks out its raw taste. Milk whisked in slowly turns it into a smooth gravy." },
+      { "id": "thickens", "title": "It thickens as it simmers", "body": "Flour thickens milk only once it's close to a boil. Keep the gravy at a gentle simmer for a few minutes and it goes from thin to creamy. It thickens more as it sits." }
+    ],
+    "wrong": [
+      { "sign": "The gravy is lumpy", "fix": "The milk went in too fast. Whisk hard; the lumps break up as it simmers." },
+      { "sign": "The gravy is too thick", "fix": "Whisk in a splash of milk." },
+      { "sign": "The gravy is thin", "fix": "Simmer 2 more minutes. It thickens as it cooks and as it sits." },
+      { "sign": "The biscuits came out flat", "fix": "The butter was too warm. Freeze it longer next time." }
+    ],
+    "quiz": [
+      { "q": "What thickens the gravy?", "choices": ["A roux: flour cooked in the fat", "Cornstarch", "Cheese"], "answer": 0, "explain": "The flour cooks 2 minutes first." },
+      { "q": "Why is the milk whisked in slowly?", "choices": ["So the gravy doesn't lump", "So it boils faster", "So it stays cold"], "answer": 0, "explain": "A little at a time, whisking." },
+      { "q": "What temperature does turkey sausage need?", "choices": ["165°F", "145°F", "120°F"], "answer": 0, "explain": "It's poultry." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "butter-unsalted", "amount": 8, "unit": "tbsp", "prep": "very cold", "group": "Biscuits" },
+    { "ingredient": "flour-ap", "amount": 2, "unit": "cup", "group": "Biscuits" },
+    { "ingredient": "flour-ap", "amount": null, "text": "a little more, for dusting", "group": "Biscuits" },
+    { "ingredient": "baking-powder", "amount": 1, "unit": "tbsp", "group": "Biscuits" },
+    { "ingredient": "baking-soda", "amount": 0.5, "unit": "tsp", "group": "Biscuits" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Biscuits" },
+    { "ingredient": "sugar", "amount": 1, "unit": "tsp", "group": "Biscuits" },
+    { "ingredient": "buttermilk", "amount": 0.75, "unit": "cup", "prep": "cold", "group": "Biscuits" },
+    { "ingredient": "turkey-sausage-bulk", "amount": 1, "unit": "lb", "group": "Gravy" },
+    { "ingredient": "butter-unsalted", "amount": 3, "unit": "tbsp", "group": "Gravy" },
+    { "ingredient": "flour-ap", "amount": 0.25, "unit": "cup", "group": "Gravy" },
+    { "ingredient": "milk-whole", "amount": 2.5, "unit": "cup", "group": "Gravy" },
+    { "ingredient": "black-pepper", "amount": 1, "unit": "tsp", "group": "Gravy" },
+    { "ingredient": "salt", "amount": 0.25, "unit": "tsp", "group": "Gravy" }
+  ],
+  "equipment": [
+    "sheet-pan",
+    "parchment",
+    "mixing-bowl-large",
+    "box-grater",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "whisk",
+    "fork",
+    "biscuit-cutter",
+    "skillet-12",
+    "wooden-spoon",
+    "thermometer",
+    "oven-mitts",
+    "cooling-rack",
+    "ladle"
+  ],
+  "steps": [
+    { "id": "freeze-butter", "text": "Put the biscuits' butter in the freezer.", "safety": "solo", "timerSeconds": 900, "timerLabel": "Freeze butter", "why": "cold-butter", "tip": "Heat the oven and measure everything while it chills." },
+    { "id": "oven", "text": "Put a rack in the middle of the oven and heat it to 450°F. Line the sheet pan with parchment.", "safety": "adult-nearby", "hazard": "Hot oven" },
+    { "id": "dry", "text": "Whisk the biscuits' flour, baking powder, baking soda, salt, and sugar in the large bowl.", "safety": "solo" },
+    { "id": "grate", "text": "Grate the frozen butter on the large holes of the box grater into the flour, and toss with the fork.", "safety": "adult-nearby", "hazard": "Sharp grater" },
+    { "id": "wet", "text": "Stir in the buttermilk with the fork just until there's no dry flour.", "safety": "solo", "look": "Lumpy and rough.", "tip": "Don't taste the raw dough. Raw flour can make you sick." },
+    { "id": "fold", "text": "Pat the dough 1 inch thick on a floured counter, fold it in thirds, and pat it out again. Do this 3 times, then cut 6 biscuits straight down and set them on the pan, sides touching.", "safety": "solo" },
+    { "id": "bake", "text": "Bake the biscuits until tall and golden. Start the gravy now.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 780, "timerLabel": "Biscuits", "look": "Tall and golden brown." },
+    { "id": "sausage", "text": "Cook the sausage in the skillet over medium-high heat, breaking it into small crumbles, until no pink is left.", "safety": "adult-nearby", "hazard": "Hot pan, raw meat", "handles": ["turkey-sausage-bulk"], "timerSeconds": 480, "timerLabel": "Brown sausage" },
+    { "id": "wash-sausage", "text": "Throw away the package and wash your hands with soap.", "safety": "adult-nearby", "type": "wash", "hazard": "Hot stove" },
+    { "id": "check-sausage", "text": "Check a pile of sausage with the thermometer: 165°F.", "safety": "adult-nearby", "type": "doneness", "hazard": "Hot pan", "target": { "temp": 165, "unit": "F" } },
+    { "id": "roux", "text": "Turn the heat to medium. Add the gravy's butter, let it melt, then sprinkle in the flour and stir for 2 minutes.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 120, "timerLabel": "Cook roux", "why": "roux" },
+    { "id": "milk", "text": "Slowly whisk in the milk. Simmer, stirring, until the gravy is thick and creamy. Stir in the pepper and salt.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 300, "timerLabel": "Simmer gravy", "why": "thickens", "look": "Thick enough to coat the back of the spoon." },
+    { "id": "serve", "text": "With oven mitts, take out the biscuits. Turn off the oven and the stove. Split the biscuits and ladle the gravy over them.", "safety": "adult-nearby", "hazard": "Hot pan and gravy" }
+  ],
+  "variations": [
+    {
+      "id": "sp-4",
+      "title": "Biscuits + sausage gravy",
+      "level": "sp-4",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["mild-buttery", "creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "totalMinutes": 70,
+      "substitutions": [
+        { "for": "beef-ground", "use": "turkey-sausage-bulk", "reason": "availability", "note": "Use bulk turkey breakfast sausage and leave out the sausage seasonings." }
+      ],
+      "ingredients": {
+        "change": {
+          "flour-ap@Biscuits": { "ingredient": "flour-ap", "amount": 8, "unit": "oz", "group": "Biscuits" },
+          "butter-unsalted@Gravy": { "ingredient": "butter-unsalted", "amount": 2, "unit": "tbsp", "group": "Gravy" }
+        },
+        "drop": ["turkey-sausage-bulk@Gravy"],
+        "add": [
+          { "ingredient": "beef-ground", "amount": 1, "unit": "lb", "group": "Sausage" },
+          { "ingredient": "salt", "amount": 0.75, "unit": "tsp", "group": "Sausage" },
+          { "ingredient": "black-pepper", "amount": 0.75, "unit": "tsp", "group": "Sausage" },
+          { "ingredient": "thyme-dried", "amount": 0.5, "unit": "tsp", "group": "Sausage" },
+          { "ingredient": "chili-flakes", "amount": 0.25, "unit": "tsp", "group": "Sausage" },
+          { "ingredient": "garlic-powder", "amount": 0.25, "unit": "tsp", "group": "Sausage" },
+          { "ingredient": "brown-sugar", "amount": 1.5, "unit": "tsp", "group": "Sausage" }
+        ],
+        "order": [
+          "butter-unsalted@Biscuits",
+          "flour-ap@Biscuits",
+          "flour-ap@Biscuits#2",
+          "baking-powder@Biscuits",
+          "baking-soda@Biscuits",
+          "salt@Biscuits",
+          "sugar@Biscuits",
+          "buttermilk@Biscuits",
+          "+0",
+          "+1",
+          "+2",
+          "+3",
+          "+4",
+          "+5",
+          "+6",
+          "butter-unsalted@Gravy",
+          "flour-ap@Gravy",
+          "milk-whole@Gravy",
+          "black-pepper@Gravy",
+          "salt@Gravy"
+        ]
+      },
+      "equipment": {
+        "add": ["kitchen-scale", "small-bowl"],
+        "order": [
+          "+0",
+          "+1",
+          "sheet-pan",
+          "parchment",
+          "mixing-bowl-large",
+          "box-grater",
+          "measuring-cups",
+          "liquid-measuring-cup",
+          "measuring-spoons",
+          "whisk",
+          "fork",
+          "biscuit-cutter",
+          "skillet-12",
+          "wooden-spoon",
+          "thermometer",
+          "oven-mitts",
+          "cooling-rack",
+          "ladle"
+        ]
+      },
+      "steps": {
+        "change": {
+          "freeze-butter": {
+            "id": "freeze-butter",
+            "text": "Put the biscuits' butter in the freezer.",
+            "safety": "solo",
+            "timerSeconds": 900,
+            "timerLabel": "Freeze butter",
+            "why": "cold-butter"
+          },
+          "sausage": {
+            "id": "sausage",
+            "text": "Brown the beef in the skillet over medium-high heat, sprinkling in the seasoning and breaking it into small crumbles.",
+            "safety": "solo",
+            "hazard": "Hot pan, raw meat",
+            "handles": ["beef-ground"],
+            "timerSeconds": 600,
+            "timerLabel": "Brown sausage"
+          },
+          "wash-sausage": {
+            "id": "wash-sausage",
+            "text": "Discard the package and wash your hands.",
+            "safety": "solo",
+            "type": "wash",
+            "hazard": "Hot stove"
+          },
+          "check-sausage": {
+            "id": "check-sausage",
+            "text": "Check a pile of sausage: at least 165°F. Turn the heat to low.",
+            "safety": "solo",
+            "type": "doneness",
+            "hazard": "Hot pan",
+            "target": { "temp": 165, "unit": "F" }
+          },
+          "oven": {
+            "id": "oven",
+            "text": "Heat the oven to 450°F with a rack in the middle. Line the sheet pan.",
+            "safety": "solo",
+            "hazard": "Hot oven"
+          },
+          "dry": {
+            "id": "dry",
+            "text": "Weigh {qty:flour-ap} of flour into the large bowl and whisk in the baking powder, baking soda, salt, and sugar.",
+            "safety": "solo",
+            "why": "scale"
+          },
+          "grate": {
+            "id": "grate",
+            "text": "Grate the frozen butter into the flour and toss.",
+            "safety": "solo",
+            "hazard": "Sharp grater"
+          },
+          "wet": { "id": "wet", "text": "Stir in the buttermilk just until no dry flour remains.", "safety": "solo" },
+          "fold": {
+            "id": "fold",
+            "text": "Pat 1 inch thick, letter-fold three times, and cut the biscuits straight down. Set them on the pan, sides touching.",
+            "safety": "solo"
+          },
+          "bake": {
+            "id": "bake",
+            "text": "Bake the biscuits. Start the roux as they go in.",
+            "safety": "solo",
+            "hazard": "Hot oven",
+            "timerSeconds": 780,
+            "timerLabel": "Biscuits",
+            "why": "timeline",
+            "look": "Tall and golden."
+          },
+          "roux": {
+            "id": "roux",
+            "text": "Turn the sausage to medium, add the gravy's butter, then the flour, and stir 2 minutes.",
+            "safety": "solo",
+            "hazard": "Hot pan",
+            "timerSeconds": 120,
+            "timerLabel": "Roux",
+            "why": "roux"
+          },
+          "milk": {
+            "id": "milk",
+            "text": "Whisk in the milk a little at a time and simmer until it coats a spoon. Season with the pepper and salt.",
+            "safety": "solo",
+            "hazard": "Hot pan",
+            "timerSeconds": 480,
+            "timerLabel": "Simmer gravy",
+            "why": "thickens",
+            "tip": "Too thick by the time the biscuits are done? Whisk in a splash of milk."
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Pull the biscuits, turn everything off, split them, and ladle the gravy over.",
+            "safety": "solo",
+            "hazard": "Hot pan and gravy"
+          }
+        },
+        "add": [
+          { "id": "season", "text": "Mix the sausage's salt, pepper, thyme, chili flakes, garlic powder, and brown sugar in the small bowl.", "safety": "solo" }
+        ],
+        "order": [
+          "freeze-butter",
+          "+0",
+          "sausage",
+          "wash-sausage",
+          "check-sausage",
+          "oven",
+          "dry",
+          "grate",
+          "wet",
+          "fold",
+          "bake",
+          "roux",
+          "milk",
+          "serve"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "Scaled by weight, timed to the minute",
+          "body": "This week's skill is scaling a quick bread and timing it to the main. Pick the size you're feeding (12 doubles it), and the amounts here scale by weight. You'll season ground beef into breakfast sausage yourself and run the gravy on a timeline so it's thick and hot the minute the biscuits come out."
+        },
+        "quiz": [
+          { "q": "Doubling the biscuits, what happens to the baking time?", "choices": ["It stays the same, since each biscuit is the same size", "It doubles", "It halves"], "answer": 0, "explain": "Time follows size, not batch." },
+          { "q": "Why scale flour by weight?", "choices": ["Doubling cups doubles the measuring error too", "It's faster", "Weighed flour rises more"], "answer": 0, "explain": "A scale is exact." },
+          { "q": "Which part can wait: biscuits or gravy?", "choices": ["The gravy", "The biscuits", "Neither"], "answer": 0, "explain": "Biscuits go flat as they sit." },
+          { "q": "What does the gravy's roux do?", "choices": ["Thickens the milk", "Browns the sausage", "Seasons it"], "answer": 0, "explain": "Flour cooked in the fat." }
+        ],
+        "why": {
+          "add": [
+            { "id": "scale", "title": "Scale by weight", "body": "Doubling cups adds the error twice. Weighed flour doubles exactly, and the leaveners double with it. The baking time stays the same: each biscuit is the same size." },
+            { "id": "timeline", "title": "Work back from the oven", "body": "The biscuits need 13 minutes in the oven and won't wait. The gravy holds. So the sausage is browned before the biscuits go in, and the gravy simmers while they bake." }
+          ]
+        }
+      }
+    }
+  ]
+}

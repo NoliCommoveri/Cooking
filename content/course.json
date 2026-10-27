@@ -1449,8 +1449,7 @@
       "skill": "Milk gravy on a roux",
       "image": "dishes/biscuits-and-gravy.png",
       "safety": "adult-nearby",
-      "minutes": 40,
-      "estimated": true,
+      "minutes": 60,
       "prereqs": ["buttermilk-biscuits", "pick:roux"],
       "about": "Split biscuits smothered in a creamy, peppery gravy made with turkey sausage. A breakfast dish.",
       "main": ["biscuits", "turkey sausage", "milk", "black pepper"],
@@ -1612,29 +1611,7 @@
       }
     },
     { "id": "spanakopita", "title": "Spanakopita", "unit": 6, "cuisine": "greek", "skills": ["layered-pastry"], "skill": "Phyllo, layering", "image": "dishes/spanakopita.png", "safety": "adult-nearby", "minutes": 90, "estimated": true, "about": "A Greek pie of flaky phyllo pastry layered around a spinach and feta filling.", "main": ["phyllo dough", "spinach", "feta", "eggs", "butter"], "method": "oven", "tags": { "protein": "none", "flavors": ["herby-lemony", "tangy"], "heat": "mild", "budget": "$$", "familiar": "new-ish", "veggies": "lots" } },
-    {
-      "id": "spinach-mushroom-quiche",
-      "title": "Spinach & mushroom quiche",
-      "unit": 6,
-      "cuisine": "french",
-      "skills": ["pastry", "custards"],
-      "skill": "Pastry, blind baking, custard",
-      "image": "dishes/spinach-mushroom-quiche.png",
-      "safety": "adult-nearby",
-      "minutes": 120,
-      "estimated": true,
-      "about": "A savory pie with homemade pastry and a creamy egg filling with spinach and mushrooms.",
-      "main": ["eggs", "cream", "spinach", "mushrooms", "cheese"],
-      "method": "stove-oven",
-      "tags": {
-        "protein": "eggs",
-        "flavors": ["creamy-cheesy"],
-        "heat": "mild",
-        "budget": "$$",
-        "familiar": "everyday",
-        "veggies": "some"
-      }
-    },
+    { "id": "spinach-mushroom-quiche", "title": "Spinach & mushroom quiche", "unit": 6, "cuisine": "french", "skills": ["pastry", "custards"], "skill": "Pastry, blind baking, custard", "image": "dishes/spinach-mushroom-quiche.png", "safety": "adult-nearby", "minutes": 135, "about": "A savory pie with homemade pastry and a creamy egg filling with spinach and mushrooms.", "main": ["eggs", "cream", "spinach", "mushrooms", "cheese"], "method": "stove-oven", "tags": { "protein": "eggs", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "some" } },
     {
       "id": "chicken-pot-pie",
       "title": "Chicken pot pie",
@@ -1644,8 +1621,7 @@
       "skill": "Roux filling + pie crust",
       "image": "dishes/chicken-pot-pie.png",
       "safety": "adult-nearby",
-      "minutes": 105,
-      "estimated": true,
+      "minutes": 120,
       "prereqs": ["pick:roux", "spinach-mushroom-quiche"],
       "about": "Chicken and vegetables in a creamy sauce, baked under a golden pie crust.",
       "main": ["chicken", "peas and carrots", "chicken broth", "butter", "milk"],
@@ -1786,8 +1762,7 @@
       "skill": "A sponge pudding soaked in a warm butter-cream sauce",
       "image": "dishes/malva-pudding.png",
       "safety": "adult-nearby",
-      "minutes": 70,
-      "estimated": true,
+      "minutes": 75,
       "about": "A soft South African sponge cake with apricot jam, soaked in a warm butter-cream sauce.",
       "main": ["apricot jam", "milk", "eggs", "butter", "cream"],
       "method": "oven",
@@ -1825,6 +1800,6 @@
         "veggies": "light"
       }
     },
-    { "id": "apple-pie", "title": "Apple pie with lattice", "unit": 7, "cuisine": "american", "skills": ["pastry"], "skill": "Advanced pastry", "image": "dishes/apple-pie.png", "safety": "adult-nearby", "minutes": 150, "estimated": true, "prereqs": ["spinach-mushroom-quiche"], "about": "A classic apple pie with a homemade woven lattice crust.", "main": ["apples", "butter", "cinnamon", "lemon"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } }
+    { "id": "apple-pie", "title": "Apple pie with lattice", "unit": 7, "cuisine": "american", "skills": ["pastry"], "skill": "Advanced pastry", "image": "dishes/apple-pie.png", "safety": "adult-nearby", "minutes": 240, "prereqs": ["spinach-mushroom-quiche"], "about": "A classic apple pie with a homemade woven lattice crust.", "main": ["apples", "butter", "cinnamon", "lemon"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } }
   ]
 }

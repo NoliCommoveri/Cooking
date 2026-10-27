@@ -132,7 +132,7 @@ test('prerequisites: missing ones, loops, and an order that puts one first fail'
 });
 
 test('a callback points at a written lesson', () => {
-  assert.match(broken((c, L) => { L('brown-butter-cookies').learn.callback.lesson = 'apple-pie'; }), /isn't a written lesson/);
+  assert.match(broken((c, L) => { L('brown-butter-cookies').learn.callback.lesson = 'beef-chili'; }), /isn't a written lesson/);
 });
 
 test('a dish in the same pick-one group needs no callback, but a later dish does', () => {
