@@ -72,8 +72,8 @@ test("Help me choose suggests by the lowest answer, and Cook Around the World on
   // Level 1 isn't offered yet: the lowest Level, marked under.
   assert.deepEqual(s([1, 3, 3], 'parts'), { id: 'sp-2', under: true, caw: false, partsOff: false });
   assert.deepEqual(s([1, 1, 1], 'parts', [...offered, 'sp-1']), { id: 'sp-1', under: false, caw: false, partsOff: false });
-  // Every readiness answer points at a Level, and every program has its line.
+  // Every readiness answer points at a Level, and each program has its line.
   for (const { answers } of PLACE_QUIZ) assert.deepEqual(answers.map(([, n]) => n), [1, 2, 3, 4]);
   assert.deepEqual(PLACE_PARTS.answers.map(([v]) => v), ['parts', 'recipes']);
-  for (const id of ['caw', 'sp-1', 'sp-2', 'sp-3', 'sp-4']) assert.ok(READY_FOR[id]);
+  assert.deepEqual(Object.keys(READY_FOR), ['caw', 'levels']);
 });

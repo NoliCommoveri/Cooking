@@ -542,7 +542,7 @@ async function coursePart(ctx, chat, call, { again }) {
 // whether a Level should be just its recipes.
 async function helpChoose(chat, levels, programs) {
   chat.say(READY_FOR.caw);
-  for (const V of levels) if (READY_FOR[V.id]) chat.say(READY_FOR[V.id]);
+  chat.say(READY_FOR.levels);
   chat.say(`Want to answer ${PLACE_QUIZ.length + 1} quick questions? I'll suggest where to start. If the course is for more than one cook, answer for the one with the least experience.`);
   if (await chat.choose([['quiz', 'Take the quiz'], ['pick', "I'll pick"]]) === 'pick') {
     chat.say('Which program would you like?');

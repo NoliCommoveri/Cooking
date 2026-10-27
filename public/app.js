@@ -1587,7 +1587,7 @@ function helpChoose(levels, use) {
     result.scrollIntoView({ block: 'nearest' });
   } },
   el('p', { class: 'small' }, READY_FOR.caw),
-  levels.filter((V) => READY_FOR[V.id]).map((V) => el('p', { class: 'small' }, READY_FOR[V.id])),
+  el('p', { class: 'small' }, READY_FOR.levels),
   el('p', { class: 'mut small' }, 'Not sure? Answer these and we\'ll suggest where to start. For more than one cook, answer for the one with the least experience.'),
   PLACE_QUIZ.map(({ q, answers }, i) => radios(`q${i}`, q, answers)),
   radios('parts', PLACE_PARTS.q, PLACE_PARTS.answers.map(([v, text]) => [text, v])),

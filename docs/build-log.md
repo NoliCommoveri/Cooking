@@ -6345,3 +6345,16 @@ course editor should also ask help me choose questions optionally."
   the editor's button, dialog, result, and unticked components; phone
   width, both themes) sent in the session.
 - Tests: 402.
+
+## 244. 2026-10-27 — Help me choose: the owner's two program lines
+
+Owner, 2026-10-27: "I dont like it." with the new wording for both programs.
+
+- **Before:** Help me choose opened with a line for Cook Around the World and
+  one for each Level, on what a cook should be ready for.
+- **Now:** two lines, in the owner's words: one for Cook Around the World and
+  one for Structured Progression Level Courses. The quiz is unchanged and
+  still picks the Level. Same in Chef Ruth and in Set up a course.
+- Screenshots (Ruth's lines and the editor's dialog, phone width, both
+  themes) sent in the session.
+- Tests: 402.

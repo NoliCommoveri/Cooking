@@ -47,16 +47,12 @@ export const ASSIGN_NOTES = {
 };
 
 // Help me choose (owner, 2026-10-27): under Which program?, with Chef Ruth
-// and in the course editor, what each program expects a cook to be ready
-// for, and a short quiz that suggests one. It goes by what a cook is ready
-// to learn, never by what they've done or their age (§12). The Cook Around
-// the World line is the owner's (2026-10-27); the rest is Claude's draft.
+// and in the course editor, a line on each program in the owner's words,
+// then a short quiz that suggests one. It goes by what a cook is ready to
+// learn, never by what they've done or their age (§12).
 export const READY_FOR = {
-  caw: "Cook Around the World: Dishes from a wide variety of cuisines, each teaching one skill, with no readings or drills. It fits teen cooks who can follow a recipe with an adult nearby, adults, and families who'd like to cook together for fun.",
-  'sp-1': 'Level 1 Helper: For brand-new cooks, ready to wash, stir, pour, and spread beside an adult the whole time, following pictures more than words.',
-  'sp-2': 'Level 2 Apprentice: For beginners of any age, ready to follow short steps one at a time, measure, and stir, with an adult in the kitchen for all stove, oven, and knife work.',
-  'sp-3': "Level 3 Cook: For cooks ready to follow full steps in real cooking words and learn a chef's knife and the stove, with an adult nearby for heat and sharp knives.",
-  'sp-4': 'Level 4 Chef: For cooks ready to work on their own: the stove and oven, draining, hot oil, cutting without help, and planning a meal.',
+  caw: "Cook Around the World: a self-paced course where each dish is chosen to practice the skills you'd like to grow in, all while experiencing food from many cultures and cuisines.",
+  levels: "Structured Progression Level Courses: a weekly full culinary arts course teaching kitchen science, health rules, and Scriptural truths about food along with one recipe per week for practice. Levels are based on a learner's development and previous experience in the kitchen.",
 };
 
 // The quiz. Each readiness answer is the Level it points to (1 to 4); the
