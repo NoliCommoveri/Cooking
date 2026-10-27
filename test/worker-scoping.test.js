@@ -25,11 +25,11 @@ test("a family can't edit, retheme, or delete another family's profile", async (
   const { a, b, bId } = await twoFamilies();
   const body = { people: [{ name: 'Hacked', color: 'tomato' }] };
   assert.equal((await a.put(`/api/profiles/${bId}`, body)).status, 404);
-  assert.equal((await a.put(`/api/profiles/${bId}/theme`, { theme: 'passport' })).status, 404);
+  assert.equal((await a.put(`/api/profiles/${bId}/theme`, { theme: 'quest' })).status, 404);
   assert.equal((await a.del(`/api/profiles/${bId}`)).status, 404);
   const still = (await b.get('/api/profiles')).body.profiles[0];
   assert.equal(still.name, 'Bea');
-  assert.equal(still.theme, 'quest');
+  assert.equal(still.theme, 'passport');
 });
 
 test('family settings and parent lists stay in their family', async () => {

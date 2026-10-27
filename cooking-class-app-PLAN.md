@@ -332,6 +332,7 @@ None of the 75 dishes requires a stand mixer. Lessons that use one in typical re
 - **The look follows the profile.** On a shared device, the theme switches when a profile is picked from the chef lockers. The profile picker and parent screens use a neutral house style.
 - **Theme tokens are CSS custom properties,** one set per theme, applied at the root when a profile is active.
 - **Requirement: Kitchen Quest is built first, then Chef's Passport as soon as possible.** The kids chose from the Phase 0 mockups (`mockups/theme-picker.html`). Food Truck and Recipe Scrapbook come later (§9). A profile can switch to any built theme at any time.
+- **Chef's Passport is the default theme (owner, 2026-10-27).** A profile gets Kitchen Quest only when it's picked: a new profile (from Chef Ruth or the Profiles page), the demo page, and Preview as a learner all start in Chef's Passport, and it's listed first wherever a theme is picked.
 
 **Themes:**
 - **Chef's Passport + Kitchen Ranks.** Each dish earns an inked stamp for its cuisine in a passport book. Stamp pages are grouped by region, and the world map lights up as regions fill in. Ranks go Kitchen Apprentice → Prep Cook → Line Cook → Sous Chef → Head Chef → Executive Chef, and each changes the hat or apron on the chef avatar. §5.4 describes this one. Built second.

@@ -74,7 +74,7 @@ function profileInput(body) {
     name,
     people: cleanPeople,
     avatar: cleanPeople[0].color,
-    theme: oneOf(body.theme ?? 'quest', THEMES, 'theme'),
+    theme: oneOf(body.theme ?? 'passport', THEMES, 'theme'),
     // A shared profile with any kid on it is a kid profile (§1); the parent says which.
     audience: oneOf(body.audience ?? 'kid', ['kid', 'adult'], 'audience'),
   };

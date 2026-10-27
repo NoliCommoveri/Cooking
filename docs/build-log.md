@@ -6983,3 +6983,32 @@ in docs."
   255 to 266 after it.
 - No screens changed, so no screenshots.
 - Tests: 408.
+
+## 268. 2026-10-27 — Chef's Passport is the default theme
+
+Owner, 2026-10-27: "set the chefs passport as the default … Everywhere that it
+is currently using quest without quest being specifically requested-- through
+ruth, when creating profiles manually, even the demo page."
+
+- **Before:** a profile made without a theme (Chef Ruth's Getting started
+  never asks for one) got Kitchen Quest, the Add a profile form had Kitchen
+  Quest picked, and the demo page and the manager's Preview as a learner
+  opened in Kitchen Quest. Kitchen Quest was listed first in every theme
+  picker.
+- **Now:** all of those start in Chef's Passport, and Chef's Passport is
+  listed first. Profiles that already exist keep the theme they have. The
+  plan (§5.2) records the new default.
+  - The API's default for a new profile without a theme is `passport`
+    (`src/worker/api.js`); the parent form, the lesson preview's stand-in
+    learner when a family has no profiles, the demo, and the manager preview
+    follow it.
+  - The demo's progress tab now says "Switch the theme to see the quest map
+    version", since it opens in the passport.
+  - The database column's own default stays `'quest'`: changing it would mean
+    rebuilding the profiles table, and every insert already names the theme.
+  - The test families on `/ops` keep one Kitchen Quest kid (Ava) on purpose,
+    so both themes can be checked.
+- Screenshots sent: the Profiles page with a profile made the way Chef Ruth makes one,
+  the Add a profile dialog (light and dark), and the demo's
+  theme switch.
+- Tests: 408.

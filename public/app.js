@@ -111,7 +111,7 @@ const HAT = '<path d="M17 22c-4-.7-6-4-5-7.3s5.3-4.3 7.3-3C20 8 22.3 6 24.3 6s4.
 const avatar = (color) => art(`<svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="32" r="21" fill="${COLORS[color] ?? COLORS.slate}" stroke="#1F2328" stroke-width="2.5"/><circle cx="21" cy="33" r="2.6" fill="#1F2328"/><circle cx="35" cy="33" r="2.6" fill="#1F2328"/><path d="M21 41c4 3 10 3 14 0" fill="none" stroke="#1F2328" stroke-width="2.5" stroke-linecap="round"/><g transform="translate(4 -6)">${HAT}</g></svg>`);
 const avatars = (people) => el('span', { class: 'av' }, people.slice(0, 3).map((p) => avatar(p.color)));
 
-const THEMES = { quest: "Kitchen Quest", passport: "Chef's Passport" };
+const THEMES = { passport: "Chef's Passport", quest: "Kitchen Quest" };
 
 // The family's calendar: the queue and schedule work in the device's own days.
 const tz = () => `tz=${new Date().getTimezoneOffset()}`;
@@ -1110,7 +1110,7 @@ function profileForm(existing, { cancel, done }) {
         radio('audience', 'kid', 'Kid', 'Pick this if any kid shares it', (existing?.audience ?? 'kid') === 'kid'),
         radio('audience', 'adult', 'Adult', null, existing?.audience === 'adult'))),
     el('fieldset', {}, el('legend', {}, 'Theme'),
-      el('div', { class: 'grid2' }, Object.entries(THEMES).map(([k, label]) => radio('theme', k, label, null, (existing?.theme ?? 'quest') === k)))),
+      el('div', { class: 'grid2' }, Object.entries(THEMES).map(([k, label]) => radio('theme', k, label, null, (existing?.theme ?? 'passport') === k)))),
   ], existing ? 'Save' : 'Add profile', async (v) => {
     const body = { name: v.name.trim() || undefined, people: people.map((p) => ({ name: p.name.trim(), color: p.color })), audience: v.audience, theme: v.theme };
     if (body.people.some((p) => !p.name)) throw new Error('Every person needs a name.');
@@ -1454,7 +1454,7 @@ async function previewLesson(lessonId, variation) {
   // A family recipe comes from the API in lesson shape (§6.10).
   const recipe = /^recipe:/.test(lessonId) ? await api('GET', `/api/recipes/${lessonId.slice(7)}`)
     : /^shared:/.test(lessonId) ? await api('GET', `/api/shared/${lessonId.slice(7)}`) : null;
-  const ways = profiles.length ? profiles : [{ id: 'family', name: 'A kid', theme: 'quest', audience: 'kid' }];
+  const ways = profiles.length ? profiles : [{ id: 'family', name: 'A kid', theme: 'passport', audience: 'kid' }];
   let as = ways.find((x) => x.id === sessionGet('cpr.preview.as')) ?? ways[0];
   const mount = el('div');
   const pick = el('div', { class: 'seg', role: 'group', 'aria-label': 'See it as' });

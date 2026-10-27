@@ -340,7 +340,7 @@ const PREVIEW_KEY = 'cpr-manage-preview';
 export async function previewPage(id, vid = null) {
   const path = lessonFile(id);
   if (!exists(path)) return page(el('p', {}, el('a', { href: '#/' }, '← The course')), el('h1', {}, 'No such lesson'), el('p', {}, `There's no lesson called "${id}".`));
-  let V = { theme: 'quest', audience: 'kid' };
+  let V = { theme: 'passport', audience: 'kid' };
   try { V = { ...V, ...JSON.parse(localStorage.getItem(PREVIEW_KEY)) }; } catch { /* first time */ }
   // A variation previews as the whole lesson it makes (§6.21).
   const L = lessonVersion(cur(path), vid);
@@ -355,7 +355,7 @@ export async function previewPage(id, vid = null) {
     el('p', {}, el('a', { href: back }, `← ${L.title}`)),
     el('div', { class: 'mhead' }, el('h1', {}, 'Preview as a learner')),
     el('p', { class: 'mut' }, 'As a family sees it, with your unsaved changes. Nothing is saved or counted.'),
-    el('div', { class: 'acts pv-pick' }, seg('theme', [['quest', 'Kitchen Quest'], ['passport', "Chef's Passport"]]), seg('audience', [['kid', 'A kid'], ['adult', 'An adult']])),
+    el('div', { class: 'acts pv-pick' }, seg('theme', [['passport', "Chef's Passport"], ['quest', 'Kitchen Quest']]), seg('audience', [['kid', 'A kid'], ['adult', 'An adult']])),
     mount,
   );
   const { openLesson } = await import('/player.js');
