@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 102,
   "title": "Egg drop soup with tofu",
-  "image": "meals/soup.svg",
+  "image": "dishes/egg-drop-soup.png",
   "cuisine": "chinese",
   "skill": "Holding a simmer while the egg goes in",
   "skills": ["simmering", "building-soup"],

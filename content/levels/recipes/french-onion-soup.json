@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 104,
   "title": "French onion soup",
-  "image": "meals/soup.svg",
+  "image": "dishes/french-onion-soup.png",
   "cuisine": "french",
   "skill": "Reducing a stock by half",
   "skills": ["reducing", "building-soup"],

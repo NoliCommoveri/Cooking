@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 102,
   "title": "Anda curry",
-  "image": "meals/side.svg",
+  "image": "dishes/anda-curry.png",
   "cuisine": "indian",
   "skill": "Boiled eggs in a simple curry",
   "skills": ["poaching-eggs", "flavor-base"],

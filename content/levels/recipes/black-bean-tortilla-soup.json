@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 102,
   "title": "Black bean tortilla soup",
-  "image": "meals/soup.svg",
+  "image": "dishes/black-bean-tortilla-soup.png",
   "cuisine": "tex-mex",
   "skill": "A soup from boxed broth at a simmer",
   "skills": ["simmering", "building-soup"],

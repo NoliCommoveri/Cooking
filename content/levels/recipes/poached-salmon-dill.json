@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 104,
   "title": "Poached salmon with dill sauce",
-  "image": "meals/fish.svg",
+  "image": "dishes/poached-salmon-dill.png",
   "cuisine": "american",
   "skill": "Poaching at a held temperature",
   "skills": ["cooking-fish", "simmering"],

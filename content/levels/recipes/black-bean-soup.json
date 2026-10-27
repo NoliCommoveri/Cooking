@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 104,
   "title": "Puréed black bean soup",
-  "image": "meals/soup.svg",
+  "image": "dishes/black-bean-soup.png",
   "cuisine": "cuban",
   "skill": "A costed bean soup for 8",
   "skills": ["cooking-legumes", "building-soup"],

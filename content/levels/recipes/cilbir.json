@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 104,
   "title": "Çılbır",
-  "image": "meals/side.svg",
+  "image": "dishes/cilbir.png",
   "cuisine": "turkish",
   "skill": "Poaching eggs for a crowd",
   "skills": ["poaching-eggs"],

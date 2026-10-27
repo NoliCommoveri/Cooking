@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 102,
   "title": "Hainanese-style chicken rice",
-  "image": "meals/poultry.svg",
+  "image": "dishes/hainanese-chicken-rice.png",
   "cuisine": "singaporean",
   "skill": "Rice by ratio, cooked in broth",
   "skills": ["cooking-grains"],

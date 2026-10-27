@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 104,
   "title": "Mushroom risotto",
-  "image": "meals/side.svg",
+  "image": "dishes/mushroom-risotto.png",
   "cuisine": "italian",
   "skill": "A stirred grain",
   "skills": ["cooking-grains"],

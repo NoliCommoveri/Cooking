@@ -6492,13 +6492,73 @@ owner approves it there.
 - No screens changed, so no screenshots.
 - Tests: 402.
 
-## 248. 2026-10-27 — 14g content: Level 3 Unit 5
+## 248. 2026-10-27 — Level dish pictures: sheets 34–39
+
+Owner, 2026-10-27: "Rest of level two dishes", six ChatGPT sheets from
+[Level dish pictures: ChatGPT
+prompts](https://claude.ai/artifact/PbGHZTt9e78S2SbwtyYVMB), matched to the
+prompt doc's sheets 34–39.
+
+- **Before:** 24 Level 2 recipe cards had only a meal-type drawing, and the
+  written pan de elote recipe showed the dessert drawing (247's missing
+  picture).
+- **Now:**
+  - 24 dish pictures, saved to `content/images/source/` under the doc's
+    names (`sheet-34-levels-6.png` to `sheet-39-levels-11.png`), cropped into
+    `content/images/dishes/<card id>.png`, built to `public/img/dishes/`, and
+    listed in `tools/dish-sheets.txt`. Every sheet cropped cleanly with the
+    tool; no hand cuts.
+  - `"image"` added to the 24 cards in `sp-2.json`; pan de elote's recipe
+    points at its picture.
+  - Checked by eye for unclean foods: none. The potstickers, nachos, and
+    fajitas are chicken; the sloppy joes, giniling, and Filipino baked
+    macaroni are ground beef; the salmon has fins and scales.
+- Every Level 2 recipe card now has a dish picture. Still to come: Level 4's
+  sheets 55–62.
+- Tests: 402.
+
+## 249. 2026-10-27 — Level dish pictures: sheets 55–62, and white bowls recut
+
+Owner, 2026-10-27: eight more ChatGPT sheets, "make sure these are the rest";
+then, from a phone screenshot of the crops, "you've got a couple more that
+are just floating bowl tops"; then "check unit 4 for any dishes that used
+placeholder photos for recipes and make sure they're swapped".
+
+- **Before:** 32 Level 4 recipe cards had only a meal-type drawing, and the
+  written arepas recipe showed the side-dish drawing (247's missing
+  picture). The crop tool takes white near the edge of a dish for
+  background, so a white bowl or baking dish lost its sides and kept only
+  its rim. That happened on eight of 248's Level 2 pictures.
+- **Now:**
+  - The eight sheets are the prompt doc's sheets 55–62, the last ones in it.
+    They're saved to `content/images/source/` under the doc's names, cut into
+    32 dish pictures with web copies, and listed in `tools/dish-sheets.txt`.
+    `"image"` is added to the 32 cards in `sp-4.json`, and arepas' recipe
+    points at its picture. Every Level 2, 3, and 4 recipe card now has a
+    dish picture.
+  - **`tools/hand-cut-dish.py`:** cuts one dish by hand from boxes around its
+    pieces (plate, side bowls), keeping each piece's whole outline so white
+    sides stay. Pieces whose outlines don't meet are kept as separate
+    pieces. Recut with it: Level 2's pan de elote, gyeran-jjim, anda curry,
+    Hainanese chicken rice, egg drop soup, tikil gomen, baked ziti, and
+    Filipino baked macaroni; Level 4's Goan fish curry, çılbır, black bean
+    soup, French onion soup, phở bò, kung pao chicken, mapo tofu, chicken
+    tikka masala, Thai green curry, and birria de chivo. Every hand cut's
+    command is written in `tools/dish-sheets.txt`.
+  - Checked by eye for unclean foods: none. Feijoada and the braised duck
+    legs show beef sausage, as their prompts asked; the mapo tofu is ground
+    beef; the fish (salmon, white fish, the whole samke harra fish) have fins
+    and scales; birria de chivo is goat.
+- **Unit 4:** all 30 Unit 4 dishes across Levels 2, 3, and 4 now show their
+  own dish picture. Pan de elote and arepas were the only ones on a
+  placeholder.
+## 250. 2026-10-27 — 14g content: Level 3 Unit 5
 
 Owner, 2026-10-27: "We're gonna do unit 5, ordered levels 3, 2, 4. Put each
 level unit in a review doc for me before starting the next one. Notify me of
 any missing artwork for new recipes." Built on Unit 4's branch (245–247),
-which isn't merged yet. Reviewed in [14g review: Level 3 Cook, Unit
-5](https://claude.ai/artifact/DECbyfWNNHxqwK7gNYAcvQ); not merged until the
+since merged, with main's dish pictures (248–249) merged in. Reviewed in
+[14g review: Level 3 Cook, Unit 5](https://claude.ai/artifact/DECbyfWNNHxqwK7gNYAcvQ); not merged until the
 owner approves it there.
 
 - **Before:** Unit 5, Boiling, simmering, and steaming (weeks 16–20), had
@@ -6537,9 +6597,9 @@ owner approves it there.
 - No screens changed, so no screenshots.
 - Tests: 402.
 
-## 249. 2026-10-27 — 14g content: Level 2 Unit 5
+## 251. 2026-10-27 — 14g content: Level 2 Unit 5
 
-Owner, 2026-10-27: Level 2 is the second of Unit 5's three Levels (248).
+Owner, 2026-10-27: Level 2 is the second of Unit 5's three Levels (250).
 Reviewed in [14g review: Level 2 Apprentice, Unit
 5](https://claude.ai/artifact/HokGLPnrWNN5cpMo8iG9ef); not merged until the
 owner approves it there.
@@ -6568,16 +6628,15 @@ owner approves it there.
   - **New ingredients:** frozen chicken or vegetable potstickers (label note:
     chicken or vegetable filling only), broccoli crowns, tortilla chips,
     pouches of cooked long-grain rice.
-- **Missing pictures:** all eight Level-only recipes. Their prompts are
-  already in the Level dish pictures doc, on sheets 34, 35, and 36; until
-  those are made, the recipes show the meal-type drawings.
+- **Pictures:** all eight Level-only recipes use the dish pictures from
+  sheets 34–36 (248), merged in from main.
 - The content check finds no Level 2 writing warnings.
 - No screens changed, so no screenshots.
 - Tests: 402.
 
-## 250. 2026-10-27 — 14g content: Level 4 Unit 5
+## 252. 2026-10-27 — 14g content: Level 4 Unit 5
 
-Owner, 2026-10-27: Level 4 is the last of Unit 5's three Levels (248).
+Owner, 2026-10-27: Level 4 is the last of Unit 5's three Levels (250).
 Reviewed in [14g review: Level 4 Chef, Unit
 5](https://claude.ai/artifact/XbEPhqexrjJ1tWbb6uSAnF); not merged until the
 owner approves it there.
@@ -6612,9 +6671,8 @@ owner approves it there.
     bones (each with a note to trim the fat), collard greens, Gruyère, star
     anise, cinnamon sticks, whole cloves, flat rice noodles, bean sprouts,
     and oranges.
-- **Missing pictures:** all nine Level-only recipes. Their prompts are
-  already in the Level dish pictures doc, on sheets 55, 56, and 57; until
-  those are made, the recipes show the meal-type drawings.
+- **Pictures:** all nine Level-only recipes use the dish pictures from
+  sheets 55–57 (249), merged in from main.
 - The content check finds no Level 4 writing warnings.
 - No screens changed, so no screenshots.
 - Tests: 402.

@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 104,
   "title": "Goan fish curry",
-  "image": "meals/fish.svg",
+  "image": "dishes/goan-fish-curry.png",
   "cuisine": "indian",
   "skill": "Poaching fish in a curry",
   "skills": ["cooking-fish", "blooming-spices"],

@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 104,
   "title": "Feijoada, beef only",
-  "image": "meals/meat.svg",
+  "image": "dishes/feijoada.png",
   "cuisine": "brazilian",
   "skill": "A bean stew for a crowd",
   "skills": ["cooking-legumes", "one-pot-stews"],

@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 104,
   "title": "Phở bò",
-  "image": "meals/soup.svg",
+  "image": "dishes/pho-bo.png",
   "cuisine": "vietnamese",
   "skill": "A long-simmered stock with charred aromatics",
   "skills": ["making-stock", "reducing"],

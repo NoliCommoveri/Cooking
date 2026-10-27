@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 102,
   "title": "Egg salad sandwiches",
-  "image": "meals/side.svg",
+  "image": "dishes/egg-salad-sandwiches.png",
   "cuisine": "american",
   "skill": "Boiling eggs hard and peeling them",
   "skills": ["poaching-eggs"],

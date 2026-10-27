@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 102,
   "title": "Mexican rice with chicken",
-  "image": "meals/poultry.svg",
+  "image": "dishes/mexican-rice-chicken.png",
   "cuisine": "tex-mex",
   "skill": "White rice by ratio",
   "skills": ["cooking-grains"],
