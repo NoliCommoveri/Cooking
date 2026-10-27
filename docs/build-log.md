@@ -6902,3 +6902,27 @@ the recipe absolutely requires leavening, it doesn't play in the player."
   - Nothing is built yet: it comes with phase 13.
 - No screens changed, so no screenshots.
 - Tests: 407.
+
+## 264. 2026-10-27 — Plan: the calendar's years, and the unleavened sorting pass
+
+Owner, 2026-10-27: "Yes to both", to putting the Hebrew lunisolar calendar's
+first days for 2027 to 2036 in the calendars file, and to the unleavened-swap
+approach with a sorting pass first.
+
+- **Before:** the plan had the calendar's 2027 date only, and the unleavened
+  swaps as a recommendation.
+- **Now:**
+  - The plan lists the calendar's first days for 2027 to 2036 (15 Nisan,
+    worked out from the Hebrew calendar), to go in `content/calendars.json`
+    in phase 13.
+  - The swap approach is approved.
+  - Claude's sorting pass of the 59 leavened lessons is in [Unleavened swaps
+    review](https://claude.ai/artifact/9hhp5kabC48K6Yy1T5mMPa), for the
+    owner's review before any swap is written: 24 easy swaps, 17 that need
+    an unleavened version, 15 that can't be unleavened, and 3 with no leaven
+    that the leaven check flags anyway.
+  - The pass also found that the leaven list misses baguettes and rolls, so
+    French onion soup and ratatouille carry the Unleavened badge wrongly.
+    Not fixed yet: the fix waits on the owner.
+- No screens changed, so no screenshots.
+- Tests: 407.
