@@ -1,0 +1,242 @@
+{
+  "id": "beef-empanadas",
+  "version": 1,
+  "track": "core",
+  "unit": 5,
+  "title": "Baked beef empanadas",
+  "image": "dishes/beef-empanadas.png",
+  "cuisine": "argentine",
+  "skill": "Cutting in fat, filling and crimping",
+  "skills": ["cutting-in-fat", "filling-crimping"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 90,
+  "scaling": {
+    "mode": "fixed",
+    "multipliers": [1, 2],
+    "notes": {
+      "1": "Makes 12 empanadas, 2 each.",
+      "2": "Makes 24. Make the dough in two batches, and bake on two sheet pans, swapping them halfway."
+    }
+  },
+  "learn": {
+    "move": {
+      "title": "Cold butter, a cool filling, a tight seal",
+      "body": "Empanadas are hand pies baked all over Argentina, filled with beef, onion, peppers, olives, and chopped egg. Today you'll grate frozen butter into flour for a flaky dough, cook and cool the filling, then fold each round into a half-moon and crimp it shut so nothing leaks in the oven."
+    },
+    "callback": {
+      "lesson": "buttermilk-biscuits",
+      "body": "In biscuits, frozen butter grated into flour made flaky layers. It's the same trick here, rolled thin and folded around a filling."
+    },
+    "why": [
+      { "id": "cold-butter", "title": "Why the butter is frozen", "body": "Little pieces of cold butter stay solid in the dough. In the hot oven they melt and turn to steam, which pushes the dough into flaky layers. Butter that's soft just mixes in, and the crust bakes up hard." },
+      { "id": "rest", "title": "Why the dough rests", "body": "Mixing wakes up the gluten in flour and makes dough spring back when you roll it. Half an hour in the fridge relaxes the gluten and firms up the butter, so the dough rolls out thin and stays that way." },
+      { "id": "cool-filling", "title": "A cool filling", "body": "Hot filling melts the butter in the dough before it reaches the oven, and its steam makes the dough soggy and hard to seal. Spread it out to cool first." },
+      { "id": "seal", "title": "Water seals the edge", "body": "A wet edge turns a little sticky, so the two sides glue together when you press them. Pressing out the air first keeps the empanada from puffing open in the oven." },
+      { "id": "temp-165", "title": "165°F inside", "body": "The beef was cooked to 160°F, then cooled. Reheated food is safe once it's hot all the way through again, at 165°F. The middle of the filling is the last part to get there." }
+    ],
+    "wrong": [
+      { "sign": "The dough cracks when you roll it", "fix": "It's too cold or too dry. Let it sit 5 minutes, or knead in a teaspoon of water." },
+      { "sign": "The dough shrinks back as you roll", "fix": "The gluten is tight. Cover it and let it rest in the fridge 10 more minutes." },
+      { "sign": "An empanada opened in the oven", "fix": "The edge wasn't sealed or had filling on it. Keep the filling in the middle, wet the edge, and press firmly before crimping." },
+      { "sign": "The bottoms are pale", "fix": "Move the pan to the lower rack for the last 5 minutes." }
+    ],
+    "quiz": [
+      { "q": "Why is the butter frozen and grated?", "choices": ["Cold pieces of butter turn to steam and make flaky layers", "So it melts faster", "It's easier to measure"], "answer": 0, "explain": "Soft butter mixes in and the crust bakes hard." },
+      { "q": "Why does the filling cool before it goes in the dough?", "choices": ["Hot filling melts the butter and makes the dough soggy", "So it tastes better", "So it shrinks"], "answer": 0, "explain": "Cool filling keeps the dough cold until it's in the oven." },
+      { "q": "What temperature does the middle of the filling need to reach?", "choices": ["165°F", "145°F", "200°F"], "answer": 0, "explain": "Reheated food is safe once it's back to 165°F." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "butter-unsalted", "amount": 12, "unit": "tbsp", "group": "Dough" },
+    { "ingredient": "flour-ap", "amount": 3, "unit": "cup", "group": "Dough" },
+    { "ingredient": "flour-ap", "amount": null, "text": "a little more, for rolling", "group": "Dough" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "egg", "amount": 1, "unit": "count", "group": "Dough" },
+    { "ingredient": "water", "amount": 0.5, "unit": "cup", "prep": "ice-cold", "group": "Dough" },
+    { "ingredient": "egg", "amount": 2, "unit": "count", "group": "Filling" },
+    { "ingredient": "vegetable-oil", "amount": 1, "unit": "tbsp", "group": "Filling" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "group": "Filling" },
+    { "ingredient": "bell-pepper-red", "amount": 1, "unit": "count", "group": "Filling" },
+    { "ingredient": "beef-ground", "amount": 1, "unit": "lb", "group": "Filling" },
+    { "ingredient": "paprika-sweet", "amount": 2, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "cumin-ground", "amount": 1, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "oregano-dried", "amount": 1, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "salt", "amount": 0.75, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "olives-green", "amount": 0.33, "unit": "cup", "group": "Filling" },
+    { "ingredient": "green-onion", "amount": 2, "unit": "count", "group": "Filling" },
+    { "ingredient": "egg", "amount": 1, "unit": "count", "group": "Egg wash" },
+    { "ingredient": "water", "amount": 1, "unit": "tbsp", "group": "Egg wash" }
+  ],
+  "equipment": [
+    "saucepan-medium",
+    "box-grater",
+    "mixing-bowl-large",
+    "fork",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "chef-knife",
+    "cutting-board",
+    "skillet-12",
+    "wooden-spoon",
+    "thermometer",
+    "plate",
+    "sheet-pan",
+    "parchment",
+    "rolling-pin",
+    "small-bowl",
+    "spoon",
+    "pastry-brush",
+    "oven-mitts",
+    "cooling-rack"
+  ],
+  "steps": [
+    { "id": "freeze-butter", "text": "Put the butter for the dough in the freezer.", "safety": "solo", "timerSeconds": 900, "timerLabel": "Freeze butter", "why": "cold-butter", "tip": "Start the eggs and measure everything else while it chills." },
+    { "id": "eggs", "text": "Put the 2 eggs for the filling in the saucepan and cover them with cold water by an inch. Bring to a boil over high heat, then turn off the heat, cover the pan, and let them sit.", "safety": "adult-nearby", "hazard": "Boiling water", "timerSeconds": 720, "timerLabel": "Eggs stand" },
+    { "id": "dry", "text": "Whisk the flour and the dough's teaspoon of salt together in the large bowl with the fork.", "safety": "solo" },
+    { "id": "grate", "text": "Grate the frozen butter on the large holes of the box grater, straight into the flour. Toss with the fork so every shred is coated.", "safety": "adult-nearby", "hazard": "Sharp grater", "why": "cold-butter", "tip": "Hold the butter by its wrapper so your warm hands don't melt it." },
+    { "id": "dough", "text": "Beat the dough's egg into the ice water in the measuring cup. Pour it over the flour and stir with the fork until it's shaggy. Squeeze a handful: if it holds together, it's ready. If it crumbles, add water a tablespoon at a time.", "safety": "solo", "handles": ["egg"], "look": "Shaggy clumps that hold together when squeezed.", "tip": "Don't taste the raw dough. It has raw egg and raw flour." },
+    { "id": "wash-dough", "type": "wash", "text": "Wash your hands with soap, and throw away the eggshell.", "safety": "solo" },
+    { "id": "chill", "text": "Press the dough into a flat disk, cover it, and put it in the fridge to rest.", "safety": "solo", "timerSeconds": 1800, "timerLabel": "Dough rests", "why": "rest" },
+    { "id": "chop", "text": "Dice the onion and the red pepper. Chop the olives and slice the green onions.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "peel", "text": "Pour off the hot water and fill the pan with cold water. When the eggs are cool enough to hold, peel them and chop them.", "safety": "adult-nearby", "hazard": "Hot water" },
+    { "id": "soften", "text": "Heat the oil in the skillet over medium heat. Cook the onion and pepper, stirring now and then, until soft.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 360, "timerLabel": "Soften vegetables", "look": "Soft and see-through, not browned." },
+    { "id": "beef", "text": "Add the beef and break it up with the wooden spoon. Cook, stirring, until no pink is left.", "safety": "adult-nearby", "hazard": "Hot pan, raw meat", "handles": ["beef-ground"], "timerSeconds": 420, "timerLabel": "Brown beef", "look": "Brown all through, in small crumbles." },
+    { "id": "wash-beef", "type": "wash", "text": "Throw away the beef package and wash your hands with soap.", "safety": "adult-nearby", "hazard": "Hot stove" },
+    { "id": "check-beef", "type": "doneness", "text": "Push the thermometer into a pile of beef in the middle of the pan. It needs 160°F. If it's lower, cook 2 more minutes and check again.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 160, "unit": "F" } },
+    { "id": "season", "text": "Stir in the paprika, cumin, oregano, the filling's salt, and the pepper, and cook 1 minute. Turn off the heat, stir in the olives and green onions, and spread the filling on the plate to cool.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 900, "timerLabel": "Filling cools", "why": "cool-filling" },
+    { "id": "oven", "text": "Put a rack in the middle of the oven and heat it to 400°F. Line the sheet pan with parchment.", "safety": "adult-nearby", "hazard": "Hot oven" },
+    { "id": "roll", "text": "Dust the counter with flour. Cut the dough in half and roll one half about as thin as a coin. Cut out circles by tracing around a 5-inch bowl or saucer with the knife. Do the same with the other half, then press the scraps together and roll them once more. You need 12.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Roll from the middle out, turning the dough a quarter turn each time so it doesn't stick." },
+    { "id": "fill", "text": "Put 2 spoonfuls of filling and a little chopped egg in the middle of each circle. Wet the edge with a fingertip dipped in water, fold it over into a half-moon, and press out the air. Press the edge shut, then crimp it with the fork. Set them on the pan.", "safety": "solo", "why": "seal", "look": "No filling on the edges, and every edge pressed flat." },
+    { "id": "egg-wash", "text": "Beat the last egg with the tablespoon of water in the small bowl and brush it over the tops.", "safety": "solo", "handles": ["egg"] },
+    { "id": "wash-wash", "type": "wash", "text": "Wash your hands and the brush with soap, and throw away the rest of the egg wash.", "safety": "solo" },
+    { "id": "bake", "text": "Bake the empanadas until they're golden brown.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 1320, "timerLabel": "Bake", "look": "Deep golden on top, and lightly browned underneath." },
+    { "id": "check", "type": "doneness", "text": "With oven mitts, take out the pan. Push the thermometer through the side of one empanada in the middle of the pan, into the filling. It needs 165°F. If it's lower, bake 3 more minutes and check again.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 165, "unit": "F" }, "why": "temp-165" },
+    { "id": "cool", "text": "Turn off the oven. Move the empanadas to the rack and let them cool a few minutes before eating.", "safety": "adult-nearby", "hazard": "Hot pan and filling", "timerSeconds": 300, "timerLabel": "Cool", "tip": "The filling stays very hot inside. Bite in carefully." }
+  ],
+  "variations": [
+    {
+      "id": "sp-3",
+      "title": "Baked beef empanadas",
+      "level": "sp-3",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["warm-spices"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "totalMinutes": 105,
+      "learn": {
+        "move": {
+          "title": "Cut in, rolled even, crimped by hand",
+          "body": "This week's skill is pastry: cold fat cut into flour, rolled to an even thickness, and sealed. You'll cut cubes of cold butter into the flour with a fork until they're the size of peas, roll the dough ⅛ inch thick all over, and close each empanada with the repulgue, the twisted rope edge Argentine cooks use. The shaped empanadas chill before they bake, so the butter is cold when it hits the oven."
+        },
+        "why": {
+          "drop": ["cold-butter"],
+          "add": [
+            { "id": "pea-size", "title": "Pea-sized pieces", "body": "Cutting cold butter in leaves it in pieces about the size of peas, coated in flour. Each one melts and steams in the oven, leaving a pocket. Too fine, like sand, and the dough is tender but not flaky; too big, and butter leaks out." },
+            { "id": "even", "title": "An even ⅛ inch", "body": "Thin spots tear and burn; thick spots stay raw where the crust folds over. Rolling from the middle out, turning a quarter turn each time, keeps the whole round the same thickness." },
+            { "id": "repulgue", "title": "The repulgue", "body": "Folding the edge over itself in small twists makes a seal two layers thick that holds the filling in. It's also how Argentine cooks tell their fillings apart: each family has its own edge." },
+            { "id": "chill-shaped", "title": "Chill before baking", "body": "Your hands and the warm kitchen soften the butter while you shape. Fifteen minutes in the fridge firms it again, so it steams into layers instead of melting out." }
+          ]
+        },
+        "wrong": [
+          { "sign": "The butter melted into the flour as you worked", "fix": "Put the bowl in the freezer for 10 minutes, then keep cutting. Work with a fork, not your palms." },
+          { "sign": "The dough is thin in some places and thick in others", "fix": "Roll from the middle out, turning a quarter turn each time, and check the edges with your fingertips." },
+          { "sign": "The twisted edge came apart", "fix": "There was flour or filling on it. Brush it off, wet the edge, and press it flat before you twist." },
+          { "sign": "The empanadas leaked butter on the pan", "fix": "The butter got too warm. Chill the next batch 15 minutes before it goes in." }
+        ],
+        "quiz": [
+          { "q": "How big should the butter pieces be after cutting in?", "choices": ["About the size of peas", "Fine like sand", "Whole cubes"], "answer": 0, "explain": "Each pea-sized piece steams into a flaky pocket." },
+          { "q": "Why roll the dough to an even ⅛ inch?", "choices": ["Thin spots tear and burn, and thick spots stay raw", "It's faster", "So the filling fits"], "answer": 0, "explain": "The whole crust bakes in the same time." },
+          { "q": "Why chill the empanadas before baking?", "choices": ["To firm up the butter so it steams into layers", "To cool the filling", "So they brown less"], "answer": 0, "explain": "Warm butter melts out instead." },
+          { "q": "What temperature does the reheated filling need?", "choices": ["165°F", "145°F", "190°F"], "answer": 0, "explain": "Reheated food is safe at 165°F." }
+        ]
+      },
+      "steps": {
+        "change": {
+          "freeze-butter": {
+            "id": "freeze-butter",
+            "text": "Cut the butter into ½-inch cubes and put them on a plate in the freezer.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "timerSeconds": 900,
+            "timerLabel": "Chill butter",
+            "tip": "Start the eggs and measure everything else while it chills."
+          },
+          "grate": {
+            "id": "grate",
+            "text": "Add the cold butter cubes to the flour. Press them into the flour with the back of the fork, tossing as you go, until the biggest pieces are the size of peas.",
+            "safety": "solo",
+            "why": "pea-size",
+            "timerSeconds": 300,
+            "timerLabel": "Cut in butter",
+            "look": "Coarse crumbs, with pea-sized pieces of butter coated in flour."
+          },
+          "chop": {
+            "id": "chop",
+            "text": "Cut the onion and the red pepper into ¼-inch dice. Chop the olives to about the same size and slice the green onions thin.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife"
+          },
+          "roll": {
+            "id": "roll",
+            "text": "Dust the counter with flour. Cut the dough in half and roll one half ⅛ inch thick, from the middle out, turning it a quarter turn each time. Trace around a 5-inch bowl with the knife to cut circles. Repeat with the other half, then press the scraps together and roll them once more. You need 12.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "why": "even",
+            "tip": "If the dough turns soft and sticky, put it back in the fridge for 10 minutes."
+          },
+          "fill": {
+            "id": "fill",
+            "text": "Put 2 tablespoons of filling and a little chopped egg in the middle of each circle. Wet the edge with water, fold it into a half-moon, press out the air, and press the edge flat. Starting at one corner, fold a small piece of the edge over itself and press, then the next, all the way around, to make a twisted rope. Set them on the pan.",
+            "safety": "solo",
+            "why": "repulgue",
+            "look": "An even, twisted edge with no gaps, and no filling showing."
+          },
+          "check": {
+            "id": "check",
+            "type": "doneness",
+            "text": "With oven mitts, take out the pan. Check the two fullest empanadas: push the thermometer through the side into the filling. Each needs 165°F. If either is lower, bake 3 more minutes and check again.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "target": { "temp": 165, "unit": "F" },
+            "why": "temp-165"
+          }
+        },
+        "add": [
+          { "id": "chill-shaped", "text": "Put the pan of shaped empanadas in the fridge while the oven finishes heating.", "safety": "solo", "timerSeconds": 900, "timerLabel": "Chill empanadas", "why": "chill-shaped" }
+        ],
+        "order": [
+          "freeze-butter",
+          "eggs",
+          "dry",
+          "grate",
+          "dough",
+          "wash-dough",
+          "chill",
+          "chop",
+          "peel",
+          "soften",
+          "beef",
+          "wash-beef",
+          "check-beef",
+          "season",
+          "oven",
+          "roll",
+          "fill",
+          "+0",
+          "egg-wash",
+          "wash-wash",
+          "bake",
+          "check",
+          "cool"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "id": "chocolate-babka",
+  "version": 1,
+  "track": "core",
+  "unit": 104,
+  "title": "Chocolate babka",
+  "image": "dishes/chocolate-babka.png",
+  "cuisine": "jewish",
+  "skill": "An enriched, cold-retarded dough, filled and twisted",
+  "skills": ["yeast-dough", "layering"],
+  "prereqs": [],
+  "servings": 10,
+  "totalMinutes": 285,
+  "scaling": { "mode": "fixed", "multipliers": [1], "notes": { "1": "Makes 1 loaf, about 10 slices." } },
+  "learn": {
+    "move": {
+      "title": "Two days, one twist",
+      "body": "Babka is the rich, twisted chocolate loaf of Jewish bakeries in New York and Eastern Europe. The dough is mixed one day and rests overnight in the fridge, where it gains flavor and firms up enough to roll thin. The next day you'll spread it with chocolate, roll it up, split it, twist it, and bake it to 190°F."
+    },
+    "callback": {
+      "lesson": "challah",
+      "body": "Challah is an enriched dough braided from ropes. Babka is richer still, with butter and more eggs, so it's chilled overnight to be firm enough to roll around a filling and cut open."
+    },
+    "why": [
+      { "id": "cold-retard", "title": "Why overnight in the fridge", "body": "Cold slows the yeast to a crawl while enzymes keep breaking starch into sugars, so the bread tastes deeper. The cold also sets the butter, so the soft, rich dough rolls thin and clean instead of tearing." },
+      { "id": "butter-late", "title": "Butter goes in last", "body": "Kneading builds gluten first; butter added early coats the flour and stops it. Worked in after the dough is smooth, it makes the crumb soft without weakening the structure." },
+      { "id": "split", "title": "Split and twist", "body": "Cutting the log lengthwise opens the layers so the chocolate shows on top, and twisting the halves holds them together as they rise." },
+      { "id": "syrup", "title": "Syrup at the oven door", "body": "Brushing sugar syrup on the hot loaf keeps the crust soft and glossy and seals in moisture." }
+    ],
+    "wrong": [
+      { "sign": "The dough tears when you roll it", "fix": "It's too cold. Leave it 10 minutes and roll again." },
+      { "sign": "The filling squeezed out as you twisted", "fix": "The filling was too warm and runny. Chill the rolled log 15 minutes before cutting." },
+      { "sign": "The top is dark but the center reads under 190°F", "fix": "Tent with foil and bake 5 more minutes." },
+      { "sign": "It's dense", "fix": "It wasn't proofed long enough after shaping. Cold dough takes 1½ to 2 hours to rise." }
+    ],
+    "quiz": [
+      { "q": "What does the night in the fridge do?", "choices": ["Deepens the flavor and firms the butter for rolling", "Kills the yeast", "Dries the dough"], "answer": 0, "explain": "Enzymes keep working in the cold." },
+      { "q": "Why is the butter added after kneading starts?", "choices": ["So gluten forms first", "So it melts", "So the dough rises faster"], "answer": 0, "explain": "Fat coats flour and stops gluten." },
+      { "q": "What is babka done at in the center?", "choices": ["190°F", "165°F", "212°F"], "answer": 0, "explain": "An enriched bread." },
+      { "q": "Why brush syrup on the hot loaf?", "choices": ["To keep the crust soft and glossy", "To bake it more", "To cool it"], "answer": 0, "explain": "It also seals in moisture." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "milk-whole", "amount": 0.25, "unit": "cup", "prep": "warm, 105 to 110°F", "group": "Dough" },
+    { "ingredient": "yeast-active-dry", "amount": 2.25, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "sugar", "amount": 0.25, "unit": "cup", "group": "Dough" },
+    { "ingredient": "egg", "amount": 2, "unit": "count", "group": "Dough" },
+    { "ingredient": "vanilla-extract", "amount": 1, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "flour-ap", "amount": 10, "unit": "oz", "group": "Dough" },
+    { "ingredient": "flour-ap", "amount": null, "text": "a little more, for rolling", "group": "Dough" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "butter-unsalted", "amount": 6, "unit": "tbsp", "prep": "soft", "group": "Dough" },
+    { "ingredient": "chocolate-chips", "amount": 0.75, "unit": "cup", "group": "Filling" },
+    { "ingredient": "butter-unsalted", "amount": 4, "unit": "tbsp", "group": "Filling" },
+    { "ingredient": "powdered-sugar", "amount": 0.25, "unit": "cup", "group": "Filling" },
+    { "ingredient": "cocoa-powder", "amount": 2, "unit": "tbsp", "group": "Filling" },
+    { "ingredient": "sugar", "amount": 0.33, "unit": "cup", "group": "Syrup" },
+    { "ingredient": "water", "amount": 0.33, "unit": "cup", "group": "Syrup" }
+  ],
+  "equipment": [
+    "kitchen-scale",
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "fork",
+    "wooden-spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "silicone-spatula",
+    "rolling-pin",
+    "chef-knife",
+    "cutting-board",
+    "loaf-pan",
+    "parchment",
+    "kitchen-towel",
+    "saucepan-light",
+    "pastry-brush",
+    "foil",
+    "oven-mitts",
+    "cooling-rack"
+  ],
+  "steps": [
+    { "id": "bloom", "text": "Day 1. Pour the warm milk into the large bowl with 1 teaspoon of the sugar, sprinkle in the yeast, and let it foam.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Bloom yeast" },
+    { "id": "mix", "text": "Add the rest of the sugar, the eggs, and the vanilla, and beat with the fork. Add the flour and salt and mix to a shaggy dough.", "safety": "solo", "handles": ["egg"] },
+    { "id": "wash-egg", "text": "Wash your hands, and throw away the shells.", "safety": "solo", "type": "wash" },
+    { "id": "knead", "text": "Knead until smooth, then knead in the soft butter a tablespoon at a time until the dough passes the windowpane test.", "safety": "solo", "timerSeconds": 900, "timerLabel": "Knead", "why": "butter-late", "look": "Glossy, soft, and stretching thin enough to see light through.", "tip": "It turns slippery as the butter goes in, then comes back together. Keep going." },
+    { "id": "rise", "text": "Cover and let it rise at room temperature, then refrigerate overnight, 8 to 24 hours.", "safety": "solo", "timerSeconds": 3600, "timerLabel": "First rise", "why": "cold-retard", "look": "Puffed by about half before it goes in the fridge." },
+    { "id": "filling", "text": "Day 2. Melt the chocolate and the filling's butter in the medium bowl in the microwave in 20-second bursts. Stir in the powdered sugar and cocoa, and let it cool to spreadable.", "safety": "solo", "look": "Thick and glossy, like frosting." },
+    { "id": "roll", "text": "Line the loaf pan with parchment. Roll the cold dough on a floured counter into a 10-by-15-inch rectangle. Spread the filling to the edges, leaving a ½-inch strip bare along one long side.", "safety": "solo" },
+    { "id": "log", "text": "Roll it up tightly from the long side toward the bare strip and pinch the seam. Chill the log on the board.", "safety": "solo", "timerSeconds": 900, "timerLabel": "Chill log" },
+    { "id": "twist", "text": "Trim the ends and cut the log in half lengthwise. Lay the halves cut side up, cross them in the middle, and twist each end like a rope. Tuck the ends under and lift it into the pan.", "safety": "solo", "hazard": "Sharp knife", "why": "split", "look": "Chocolate layers showing along the whole twist." },
+    { "id": "proof", "text": "Cover loosely and let it proof until puffy and risen to the rim. Heat the oven to 350°F for the last half hour.", "safety": "solo", "hazard": "Hot oven", "timerSeconds": 6000, "timerLabel": "Second rise" },
+    { "id": "bake", "text": "Bake. After 20 minutes, tent loosely with foil.", "safety": "solo", "hazard": "Hot oven", "timerSeconds": 2700, "timerLabel": "Bake" },
+    { "id": "syrup", "text": "While it bakes, boil the syrup's sugar and water in the saucepan until the sugar dissolves.", "safety": "solo", "hazard": "Boiling syrup", "timerSeconds": 120, "timerLabel": "Syrup" },
+    { "id": "check", "text": "Check the center from the side: 190°F.", "safety": "solo", "type": "doneness", "hazard": "Hot oven and pan", "target": { "temp": 190, "unit": "F" } },
+    { "id": "glaze", "text": "Brush the hot loaf with all the syrup. Cool in the pan 20 minutes, then lift it out on its parchment to cool on the rack.", "safety": "solo", "hazard": "Hot pan and syrup", "timerSeconds": 1200, "timerLabel": "Cool in pan", "why": "syrup" }
+  ]
+}

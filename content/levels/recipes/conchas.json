@@ -1,0 +1,100 @@
+{
+  "id": "conchas",
+  "version": 1,
+  "track": "core",
+  "unit": 103,
+  "title": "Conchas",
+  "image": "dishes/conchas.png",
+  "cuisine": "mexican",
+  "skill": "An enriched dough shaped by weight",
+  "skills": ["yeast-dough"],
+  "prereqs": [],
+  "servings": 10,
+  "totalMinutes": 210,
+  "scaling": { "mode": "fixed", "multipliers": [1], "notes": { "1": "Makes 10 conchas." } },
+  "learn": {
+    "move": {
+      "title": "Ten buns, one weight, a shell on top",
+      "body": "Conchas are the sweet buns of every Mexican panadería, named for the seashell pattern scored into their crackly sugar topping. The dough is enriched with butter, eggs, milk, and sugar. Today you'll weigh it into 10 even pieces, round each into a tight ball, press a disk of topping on top, score the shell, and bake them to 190°F."
+    },
+    "callback": {
+      "lesson": "pita-bread",
+      "body": "Pita is a lean dough: flour, water, yeast, and a little oil, divided into balls. Conchas add milk, eggs, butter, and sugar, so the dough is softer and stickier, and each ball has to be weighed and rounded tight to hold its topping."
+    },
+    "why": [
+      { "id": "enriched", "title": "A rich dough is slow", "body": "Butter, eggs, and sugar make the crumb soft and sweet, but they also slow the yeast. Fat coats the gluten and sugar pulls water away from the yeast, so this dough takes longer to rise than a lean one." },
+      { "id": "by-weight", "title": "Why weigh", "body": "By eye, buns can differ by a third. Weighed to within a tenth of an ounce, all 10 rise and bake in the same time, and every topping disk fits its bun." },
+      { "id": "tight-ball", "title": "A tight skin", "body": "Rolling a piece in small circles under a cupped hand stretches its outside into a smooth, tight skin. It holds the gas in, so the bun rises up round instead of spreading flat." },
+      { "id": "topping", "title": "Score the topping, not the bun", "body": "The topping is a sugar-butter paste. Scored lines open as the bun rises in the oven, and that's what makes the shell. Cut into the dough and the bun tears open there." },
+      { "id": "temp-190", "title": "190°F inside", "body": "The topping should stay pale, so color won't tell you when they're done. The center of an enriched bun is set at 190°F." }
+    ],
+    "wrong": [
+      { "sign": "The buns came out different sizes", "fix": "Weigh each piece, and pinch dough from heavy ones onto light ones until they're within a tenth of an ounce." },
+      { "sign": "The topping slid off or cracked away", "fix": "The bun wasn't dampened, or the disk was too thick. Press it a little thinner, and brush the buns with a touch of water first." },
+      { "sign": "The shell lines disappeared", "fix": "They were cut too shallow. Score firmly through the topping, just not into the dough." },
+      { "sign": "The bottoms are dark but the center reads under 190°F", "fix": "Move the pan up a rack, lay foil loosely over the top, and bake 3 more minutes." }
+    ],
+    "quiz": [
+      { "q": "Why does an enriched dough rise more slowly?", "choices": ["Fat and sugar slow the yeast down", "It has less yeast", "It's kneaded less"], "answer": 0, "explain": "Fat coats the gluten; sugar pulls water from the yeast." },
+      { "q": "Why weigh each piece of dough?", "choices": ["So all 10 buns bake through in the same time", "So there's less dough", "So they rise faster"], "answer": 0, "explain": "Small ones overbake while big ones stay doughy." },
+      { "q": "How deep do you score the shell?", "choices": ["Through the topping, not into the dough", "Halfway into the bun", "Just a light scratch"], "answer": 0, "explain": "The lines open as the bun rises." },
+      { "q": "How do you know conchas are done?", "choices": ["190°F in the center of a bun", "When the topping is brown", "When they smell sweet"], "answer": 0, "explain": "The topping stays pale, so color can't tell you." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "milk-whole", "amount": 0.5, "unit": "cup", "prep": "warm, 105 to 110°F", "group": "Dough" },
+    { "ingredient": "yeast-active-dry", "amount": 2.25, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "sugar", "amount": 0.33, "unit": "cup", "group": "Dough" },
+    { "ingredient": "egg", "amount": 2, "unit": "count", "group": "Dough" },
+    { "ingredient": "butter-unsalted", "amount": 6, "unit": "tbsp", "prep": "softened", "group": "Dough" },
+    { "ingredient": "vanilla-extract", "amount": 1, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "salt", "amount": 0.75, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "cinnamon-ground", "amount": 0.25, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "flour-ap", "amount": 3.5, "unit": "cup", "group": "Dough" },
+    { "ingredient": "flour-ap", "amount": null, "text": "a little more, for dusting", "group": "Dough" },
+    { "ingredient": "butter-unsalted", "amount": null, "text": "a little more, for the bowl", "group": "Dough" },
+    { "ingredient": "butter-unsalted", "amount": 4, "unit": "tbsp", "prep": "softened", "group": "Topping" },
+    { "ingredient": "powdered-sugar", "amount": 0.5, "unit": "cup", "group": "Topping" },
+    { "ingredient": "flour-ap", "amount": 0.5, "unit": "cup", "group": "Topping" },
+    { "ingredient": "cocoa-powder", "amount": 1, "unit": "tbsp", "group": "Topping" }
+  ],
+  "substitutions": [{ "for": "milk-whole", "use": "milk-oat", "reason": "dairy" }],
+  "equipment": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "kitchen-scale",
+    "chef-knife",
+    "paring-knife",
+    "sheet-pan",
+    "parchment",
+    "pastry-brush",
+    "oven-mitts",
+    "cooling-rack"
+  ],
+  "steps": [
+    { "id": "warm-milk", "text": "Warm the milk in the measuring cup in the microwave for about 30 seconds. Stir it and check it with the thermometer: 105 to 110°F.", "safety": "solo" },
+    { "id": "bloom", "text": "Pour the milk into the large bowl. Stir in 1 teaspoon of the dough's sugar, then sprinkle the yeast over the top and leave it alone to bloom.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Bloom yeast", "look": "Foam on top, and it smells like bread." },
+    { "id": "wet", "text": "Add the rest of the dough's sugar, the eggs, the 6 tablespoons of softened butter, and the vanilla. Beat with the fork until the eggs are mixed in. The butter will stay in small lumps.", "safety": "solo", "handles": ["egg"] },
+    { "id": "wash-egg", "type": "wash", "text": "Wash your hands with soap, and throw away the eggshells.", "safety": "solo" },
+    { "id": "mix", "text": "Add the salt, cinnamon, and 3½ cups of flour. Stir with the wooden spoon until a soft, sticky dough forms.", "safety": "solo", "tip": "Don't taste the raw dough. It has raw egg and raw flour." },
+    { "id": "knead", "text": "Dust the counter lightly with flour and turn the dough out. Knead until it's smooth, soft, and passes the windowpane test. It starts sticky; use a little flour at a time, not handfuls.", "safety": "solo", "timerSeconds": 720, "timerLabel": "Knead", "look": "Smooth and soft, and a small piece stretches thin enough to see light through.", "tip": "Too much flour makes the buns dry. A little stickiness is fine." },
+    { "id": "rise", "text": "Butter the bowl, put the dough in, and turn it once to coat it. Cover with the towel and leave it somewhere warm until it doubles.", "safety": "solo", "timerSeconds": 5400, "timerLabel": "First rise", "why": "enriched", "look": "Doubled. A floured finger pressed in leaves a dent that stays." },
+    { "id": "topping", "text": "In the medium bowl, mash the topping's butter, powdered sugar, and flour together with the fork into a smooth paste. Scoop half of it out onto the parchment and mix the cocoa into what's left in the bowl.", "safety": "solo", "look": "A soft paste, like play dough." },
+    { "id": "divide", "text": "Line the sheet pan with parchment. Weigh the dough and divide the weight by 10. Cut 10 pieces with the chef's knife, weighing each, and pinch dough from heavy pieces onto light ones until they're within a tenth of an ounce.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "by-weight" },
+    { "id": "shape", "text": "Cup each piece under your palm on a bare spot of counter and roll it in small circles until the top is smooth and tight. Set them on the pan in rows of 3, 4, and 3, and press each down a little to flatten the top.", "safety": "solo", "why": "tight-ball" },
+    { "id": "disks", "text": "Divide each color of topping into 5 balls. Flatten each between your palms into a 3-inch disk. Brush the top of each bun with a little water and press a disk on, so it covers the top.", "safety": "solo" },
+    { "id": "score", "text": "With the paring knife, cut curved lines through the topping from one edge to the other, fanning out like a shell. Cut through the topping only, not into the dough.", "safety": "adult-nearby", "hazard": "Sharp knife", "why": "topping" },
+    { "id": "proof", "text": "Cover the pan loosely with the towel and let the conchas proof. Heat the oven to 350°F while they do.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 3600, "timerLabel": "Second rise", "look": "Puffy, and the shell lines have opened." },
+    { "id": "bake", "text": "Bake the conchas until the bottoms are golden. The topping should stay pale.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 1200, "timerLabel": "Bake", "look": "Golden at the bottom edges, with a pale, cracked topping." },
+    { "id": "check", "type": "doneness", "text": "With oven mitts, pull the pan out partway. Push the thermometer into the side of a bun in the middle row, so the tip is in its center: 190°F. If it's lower, bake 3 more minutes and check again.", "safety": "adult-nearby", "hazard": "Hot oven and pan", "target": { "temp": 190, "unit": "F" }, "why": "temp-190" },
+    { "id": "cool", "text": "Turn off the oven. Move the conchas to the cooling rack and let them cool before eating.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 1200, "timerLabel": "Cool", "tip": "They keep in a bag for 2 days, or in the freezer for 3 months." }
+  ]
+}

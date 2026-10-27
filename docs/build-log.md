@@ -6358,3 +6358,136 @@ Owner, 2026-10-27: "I dont like it." with the new wording for both programs.
 - Screenshots (Ruth's lines and the editor's dialog, phone width, both
   themes) sent in the session.
 - Tests: 402.
+
+## 245. 2026-10-27 — 14g content: Level 3 Unit 4
+
+Owner, 2026-10-27: "We're gonna do unit 4, ordered levels 3, 2, 4. Put each
+level unit in a review doc for me before starting the next one. Notify me of
+any missing artwork for new recipes." Reviewed in [14g review: Level 3 Cook,
+Unit 4](https://claude.ai/artifact/3mWfgmLMojBjNvXQtVREiR); not merged until
+the owner approves it there.
+
+- **Before:** Unit 4, Baking (weeks 11–15), had Sandwich loaf, Dinner rolls,
+  and weeks 12, 13, and 15's pages. Week 11's skillet cornbread and week 14's
+  beef empanadas were planned Cook Around the World cards with no lesson;
+  soda bread, man'oushe, conchas, the apple galette, and pulla were unwritten
+  Level cards; week 15 cooked Cook Around the World's challah, which had no
+  Level 3 version. Weeks 11 and 14's six pages were blank.
+- **Now:**
+  - **Two new Cook Around the World lessons,** each already planned (§12.4):
+    Skillet cornbread (Unit 5; 40 minutes) and Baked beef empanadas (Unit 5,
+    the cutting-in-fat group, with a callback to buttermilk biscuits; 90
+    minutes).
+  - **Level 3 versions** of both and of challah: cornbread with the flour
+    weighed, folded while streaky, and checked at 200°F; empanadas with butter
+    cut in to pea size, rolled to ⅛ inch, sealed with the repulgue, chilled,
+    and two checked at 165°F; challah as the mastery bake, its ropes weighed to
+    a tenth of an ounce and a hollow-sound check beside 190°F.
+  - **Five Level-only recipes** in `content/levels/recipes/`, unit 103: Irish
+    brown soda bread (200°F), Man'oushe and Rustic apple galette (marked as
+    variations of Pita bread and Apple pie, written as Level recipes of their
+    own), Conchas (weighed into 10), and Pulla (the mastery week's Explore).
+    Their cards' minutes are now the recipes' own.
+  - **Six part pages:** week 11's leaveners and doneness, flour weighed three
+    ways and two pancakes mixed two ways, and freezing quick breads; week 14's
+    pastry vs. bread with a Watch for box (lard, suet and beef tallow), a
+    cut-in, roll, and crimp drill, and freezing unbaked pastry.
+  - **New ingredients:** cornmeal, whole-wheat flour, za'atar, powdered
+    sugar, cocoa powder, tart baking apples, ground cardamom, pearl sugar.
+    **New tool:** a 10-inch cast-iron skillet.
+- The lint test that used challah as a lesson with no Level 3 version uses
+  mujaddara now.
+- No screens changed, so no screenshots.
+- Tests: 402.
+
+## 246. 2026-10-27 — 14g content: Level 2 Unit 4
+
+Owner, 2026-10-27: Level 2 is the second of Unit 4's three Levels (245).
+Reviewed in [14g review: Level 2 Apprentice, Unit
+4](https://claude.ai/artifact/SXA8VrkW4ict39UrkwsxGV); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 2 Unit 4's ten dishes was written for Level 2.
+  Blueberry muffins, pão de queijo, homemade pizza, and skillet naan were
+  planned Cook Around the World cards with no lesson; buttermilk biscuits had
+  no Level 2 version; the other five were unwritten Level cards. All 15 part
+  pages were blank.
+- **Now:**
+  - **Four new Cook Around the World lessons,** each already planned (§12.4),
+    all in Unit 5: Blueberry muffins (45 minutes), Pão de queijo (scalded on
+    the stove; 50), Homemade pizza (the yeast-dough group; 120), and Skillet
+    naan (the flatbreads group; 105).
+  - **Level 2 versions** of those four and of buttermilk biscuits, every step
+    rewritten short: muffins with flour spooned and leveled; pão de queijo
+    blended and baked in a muffin tin, with no stove; biscuits with cubed
+    butter cut in to pea size instead of grated; pizza with an adult at the
+    oven and knife; naan with jarred garlic and the dough divided by hand.
+  - **Five Level-only recipes** in `content/levels/recipes/`, unit 102: Welsh
+    cakes, Chocolate chip cookies (marked as a variation of Brown butter
+    cookies, written as a Level recipe of its own), Alfajores, and week 15's
+    mastery pair, Banana bread and Pan de elote. Their cards' minutes are now
+    the recipes' own.
+  - **All 15 part pages:** leaveners, spooning flour and two pancakes, freezing
+    muffins; cold fat and flaky layers, cutting butter in, manna (Exodus 16);
+    what yeast does, blooming and kneading 5 minutes, chilling dough ahead;
+    why cookies spread, even scoops, freezing dough balls; quick breads around
+    the world, the toothpick test, Elijah and the widow (1 Kings 17:8–16).
+  - **New ingredients:** frozen blueberries, tapioca flour, currants, dulce de
+    leche, shredded coconut, bananas, sweetened condensed milk. **New tool:** a
+    12-cup muffin tin. **New kitchen word:** fold in.
+- **Missing picture:** pan de elote's card never had one. Its recipe shows the
+  dessert drawing (`meals/dessert.svg`) until a dish picture is made; the
+  review doc has a prompt for it.
+- The content check finds no Level 2 writing warnings.
+- No screens changed, so no screenshots.
+- Tests: 402.
+
+## 247. 2026-10-27 — 14g content: Level 4 Unit 4
+
+Owner, 2026-10-27: Level 4 is the last of Unit 4's three Levels (245).
+Reviewed in [14g review: Level 4 Chef, Unit
+4](https://claude.ai/artifact/KqcKeNDNyyW3Dkut9yEvHc); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 4 Unit 4's ten dishes was written. Chicken pot
+  pie, spinach & mushroom quiche, biscuits and sausage gravy, apple pie with
+  lattice, and malva pudding were planned Cook Around the World cards with no
+  lesson; the other five were unwritten Level cards. All 15 part pages were
+  blank.
+- **Now:**
+  - **Five new Cook Around the World lessons,** each already planned (§12.4):
+    Spinach & mushroom quiche (Unit 6, blind-baked; 135 minutes), Chicken pot
+    pie (Unit 6, in the cast-iron skillet; 120), Biscuits + sausage gravy
+    (Unit 5, bulk turkey sausage; 60, in two sizes, 6 or 12), Apple pie with
+    lattice (Unit 7; 240), and Malva pudding (Unit 7; 75).
+  - **Level 4 versions** of all five: the quiche with a weighed, egg-sealed
+    crust and the custard to 170°F; the pot pie under a four-fold rough puff;
+    biscuits and gravy weighed at the parent's size, with ground beef
+    seasoned into sausage and a timeline; the apple pie as the mastery bake,
+    the apples weighed and their juice boiled down; malva with a stirred
+    custard to 175°F and the sponge to 200°F.
+  - **Five Level-only recipes** in `content/levels/recipes/`, unit 104:
+    Chocolate babka (two days, cold-retarded), Japanese milk bread
+    (tangzhong), Spinach and feta borekas (rough puff), Jamaican beef patties
+    (butter pastry), and Arepas with black beans and cheese. Their cards'
+    minutes are now the recipes' own.
+  - **All 15 part pages:** enriched doughs, cold fermentation, and baker's
+    percentages, a tangzhong and an overnight retard, the bread of the
+    Presence (Leviticus 24:5–9); fats and pastry labels with a Watch for box,
+    lamination folds, freezing unbaked pastry; blind baking and soggy
+    bottoms, a side-by-side blind bake, freezing pastry ahead; leaveners at a
+    larger batch, scaling and timing to the main, freezing unbaked biscuits;
+    fruit-pie thickeners and doneness by the bubbling, weaving a lattice, and
+    leaven and unleavened bread with an essay. Each Knowledge page closes
+    with the week's cuisine.
+  - **New ingredients:** bread flour, shredded Swiss, masarepa, ground
+    allspice, Scotch bonnet or habanero, apricot jam. **New tools:** a 9-inch
+    pie plate, pie weights.
+- **Missing picture:** the arepas' card never had one. Its recipe shows the
+  side-dish drawing (`meals/side.svg`) until a dish picture is made; the
+  review doc has a prompt for it.
+- The lint test that used apple pie as an unwritten lesson uses beef chili
+  now.
+- The content check finds no Level 4 writing warnings.
+- No screens changed, so no screenshots.
+- Tests: 402.

@@ -91,8 +91,8 @@ test("each Level's writing standard warns: Level 2 one action a step in plain wo
 
 test("a Level's weeks list the written lessons with no version for it yet", () => {
   const w = lint(base).warnings.join('\n');
-  assert.match(w, /levels\/sp-3\.json: \d+ written lessons its weeks cook have no Level 3 Cook version yet: .*challah/);
-  assert.doesNotMatch(w, /no Level 3 Cook version yet: .*minestrone/);
+  assert.match(w, /levels\/sp-3\.json: \d+ written lessons its weeks cook have no Level 3 Cook version yet: .*mujaddara/);
+  assert.doesNotMatch(w, /no Level 3 Cook version yet: .*(minestrone|challah)/);
 });
 
 test('a missing wash step after raw food fails', () => {
@@ -132,7 +132,7 @@ test('prerequisites: missing ones, loops, and an order that puts one first fail'
 });
 
 test('a callback points at a written lesson', () => {
-  assert.match(broken((c, L) => { L('brown-butter-cookies').learn.callback.lesson = 'apple-pie'; }), /isn't a written lesson/);
+  assert.match(broken((c, L) => { L('brown-butter-cookies').learn.callback.lesson = 'beef-chili'; }), /isn't a written lesson/);
 });
 
 test('a dish in the same pick-one group needs no callback, but a later dish does', () => {

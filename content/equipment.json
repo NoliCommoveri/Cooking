@@ -53,6 +53,10 @@
     { "id": "baking-dish", "name": "9-by-13-inch baking dish", "category": "bakeware", "icon": null },
     { "id": "loaf-pan", "name": "9-by-5-inch loaf pan", "category": "bakeware", "icon": null },
     { "id": "skewers", "name": "Skewers, metal or wooden (soak wooden ones 30 minutes)", "category": "utensils", "icon": null },
-    { "id": "kitchen-shears", "name": "Kitchen shears or poultry shears", "category": "utensils", "icon": null }
+    { "id": "kitchen-shears", "name": "Kitchen shears or poultry shears", "category": "utensils", "icon": null },
+    { "id": "skillet-cast-iron", "name": "10-inch cast-iron skillet (or another oven-safe skillet)", "category": "pans", "icon": null },
+    { "id": "muffin-tin", "name": "12-cup muffin tin", "category": "bakeware", "icon": null },
+    { "id": "pie-plate", "name": "9-inch pie plate", "category": "bakeware", "icon": null },
+    { "id": "pie-weights", "name": "Pie weights, or 2 cups of dried beans kept for baking", "category": "bakeware", "icon": null }
   ]
 }

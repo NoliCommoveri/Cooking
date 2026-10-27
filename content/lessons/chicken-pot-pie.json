@@ -1,0 +1,343 @@
+{
+  "id": "chicken-pot-pie",
+  "version": 1,
+  "track": "core",
+  "unit": 6,
+  "title": "Chicken pot pie",
+  "image": "dishes/chicken-pot-pie.png",
+  "cuisine": "american",
+  "skill": "Roux filling + pie crust",
+  "skills": ["roux", "pastry"],
+  "prereqs": ["pick:roux", "spinach-mushroom-quiche"],
+  "servings": 6,
+  "totalMinutes": 120,
+  "scaling": { "mode": "fixed", "multipliers": [1], "notes": { "1": "Makes one 10-inch skillet pie." } },
+  "learn": {
+    "move": {
+      "title": "A roux filling under a butter crust",
+      "body": "Chicken pot pie is chicken and vegetables in a creamy sauce, baked under a golden crust. Today you'll make the pastry, cook the chicken, thicken broth and milk with a roux, and bake the filling under a crust in the same skillet."
+    },
+    "callback": {
+      "lesson": "spinach-mushroom-quiche",
+      "body": "The quiche taught you a butter crust under a filling. Here the same crust goes on top, so it bakes crisp in the dry oven heat, with vents to let the steam out."
+    },
+    "why": [
+      { "id": "cold", "title": "Cold butter, flaky crust", "body": "Pieces of cold butter coated in flour melt in the oven and leave flaky pockets. Butter that warms and smears in makes the crust tough or greasy." },
+      { "id": "little-water", "title": "Just enough water", "body": "Water lets flour build gluten. Pastry wants only enough to hold together when squeezed; more makes it tough, and it shrinks in the oven." },
+      { "id": "roux", "title": "A roux thickens", "body": "Flour cooked in butter for a couple of minutes loses its raw taste. Liquid whisked in slowly turns it into a smooth sauce that thickens as it simmers." },
+      { "id": "vents", "title": "Why cut vents", "body": "The filling boils under the crust. Vents let the steam out so the crust stays crisp and doesn't puff up or split." },
+      { "id": "reheat-165", "title": "165°F in the filling", "body": "The chicken was cooked first, then baked again under the crust. Reheated food is safe once the middle of the filling is back to 165°F." }
+    ],
+    "wrong": [
+      { "sign": "The sauce is lumpy", "fix": "The liquid went in too fast. Whisk hard, or pour it through a strainer." },
+      { "sign": "The sauce is thin", "fix": "Simmer it 2 more minutes, stirring. It thickens as it cooks." },
+      { "sign": "The crust is pale", "fix": "Bake 5 more minutes, until golden brown." },
+      { "sign": "The filling bubbled over", "fix": "Bake it on a sheet pan next time to catch the drips." }
+    ],
+    "quiz": [
+      { "q": "What is a roux?", "choices": ["Flour cooked in butter, used to thicken a sauce", "A kind of pastry", "A spice mix"], "answer": 0, "explain": "Whisk the liquid in slowly." },
+      { "q": "Why cut vents in the crust?", "choices": ["To let steam out so the crust stays crisp", "To see the filling", "To make it bake faster"], "answer": 0, "explain": "Steam under the crust makes it soggy." },
+      { "q": "What temperature should the filling reach?", "choices": ["165°F", "145°F", "200°F"], "answer": 0, "explain": "Reheated food is safe at 165°F." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "flour-ap", "amount": 1.25, "unit": "cup", "group": "Crust" },
+    { "ingredient": "flour-ap", "amount": null, "text": "a little more, for rolling", "group": "Crust" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Crust" },
+    { "ingredient": "butter-unsalted", "amount": 8, "unit": "tbsp", "prep": "cold, cut in ½-inch cubes", "group": "Crust" },
+    { "ingredient": "water", "amount": 4, "unit": "tbsp", "prep": "ice-cold", "group": "Crust" },
+    { "ingredient": "chicken-thigh", "amount": 1.5, "unit": "lb", "group": "Filling" },
+    { "ingredient": "butter-unsalted", "amount": 5, "unit": "tbsp", "group": "Filling" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "group": "Filling" },
+    { "ingredient": "carrot", "amount": 2, "unit": "count", "group": "Filling" },
+    { "ingredient": "celery", "amount": 2, "unit": "count", "group": "Filling" },
+    { "ingredient": "flour-ap", "amount": 0.33, "unit": "cup", "group": "Filling" },
+    { "ingredient": "broth-chicken", "amount": 2, "unit": "cup", "group": "Filling" },
+    { "ingredient": "milk-whole", "amount": 1, "unit": "cup", "group": "Filling" },
+    { "ingredient": "thyme-dried", "amount": 1, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "black-pepper", "amount": 0.5, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "peas-frozen", "amount": 1, "unit": "cup", "group": "Filling" },
+    { "ingredient": "egg", "amount": 1, "unit": "count", "group": "Egg wash" },
+    { "ingredient": "water", "amount": 1, "unit": "tbsp", "group": "Egg wash" }
+  ],
+  "equipment": [
+    "plate",
+    "mixing-bowl-large",
+    "fork",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "rolling-pin",
+    "chef-knife",
+    "cutting-board",
+    "skillet-cast-iron",
+    "wooden-spoon",
+    "whisk",
+    "thermometer",
+    "small-bowl",
+    "pastry-brush",
+    "sheet-pan",
+    "oven-mitts",
+    "cooling-rack"
+  ],
+  "steps": [
+    { "id": "freeze-butter", "text": "Spread the crust's butter cubes on the plate and put them in the freezer. Put the water in a cup with a few ice cubes.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Chill butter", "why": "cold" },
+    { "id": "cut-in", "text": "Whisk the crust's flour and salt in the large bowl. Add the cold butter and press it in with the back of the fork until the biggest pieces are the size of peas.", "safety": "solo", "look": "Coarse crumbs, with pea-sized bits of butter." },
+    { "id": "water", "text": "Sprinkle 3 tablespoons of the ice water over it and toss with the fork. Add more a tablespoon at a time until a squeezed handful holds.", "safety": "solo", "why": "little-water" },
+    { "id": "chill", "text": "Press the dough into a flat disk, cover it, and chill it.", "safety": "solo", "timerSeconds": 3600, "timerLabel": "Dough rests" },
+    { "id": "oven", "text": "Put a rack in the middle of the oven and heat it to 400°F.", "safety": "adult-nearby", "hazard": "Hot oven" },
+    { "id": "veg", "text": "Dice the onion, and slice the carrots and celery thin.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "chicken", "text": "On the cutting board, cut the chicken into 1-inch pieces.", "safety": "adult-nearby", "hazard": "Sharp knife, raw chicken", "handles": ["chicken-thigh"] },
+    { "id": "wash-chicken", "text": "Wash the knife, the board, and your hands with hot, soapy water.", "safety": "solo", "type": "wash" },
+    { "id": "brown", "text": "Melt 1 tablespoon of the filling's butter in the skillet over medium-high heat. Cook the chicken, stirring, until no pink is left.", "safety": "adult-nearby", "hazard": "Hot pan, raw chicken", "handles": ["chicken-thigh"], "timerSeconds": 480, "timerLabel": "Cook chicken" },
+    { "id": "wash-brown", "text": "Wash your hands and the spoon.", "safety": "adult-nearby", "type": "wash", "hazard": "Hot stove" },
+    { "id": "check-chicken", "text": "Check the biggest piece with the thermometer: 165°F. Move the chicken to a clean bowl.", "safety": "adult-nearby", "type": "doneness", "hazard": "Hot pan", "target": { "temp": 165, "unit": "F" } },
+    { "id": "soften", "text": "Melt the other 4 tablespoons of butter in the skillet over medium heat. Cook the onion, carrots, and celery until soft.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 360, "timerLabel": "Soften vegetables" },
+    { "id": "roux", "text": "Sprinkle in the ⅓ cup of flour and stir for 2 minutes.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 120, "timerLabel": "Cook roux", "why": "roux", "look": "The vegetables are coated, with no dry flour." },
+    { "id": "sauce", "text": "Slowly whisk in the broth, then the milk. Simmer, stirring, until thick.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 240, "timerLabel": "Simmer sauce", "look": "Thick enough to coat the back of the spoon.", "tip": "Pour a little at a time, whisking, and it won't lump." },
+    { "id": "finish", "text": "Stir in the thyme, the filling's salt and pepper, the chicken, and the peas. Turn off the heat.", "safety": "adult-nearby", "hazard": "Hot pan" },
+    { "id": "top", "text": "Roll the dough into an 11-inch circle. Lay it over the filling, tuck the edge in around the inside of the skillet, and cut 4 slits in the top.", "safety": "adult-nearby", "hazard": "Hot pan", "why": "vents" },
+    { "id": "egg-wash", "text": "Beat the egg with the tablespoon of water in the small bowl and brush it over the crust.", "safety": "solo", "handles": ["egg"] },
+    { "id": "wash-egg", "text": "Wash your hands and the brush with soap, and throw away the rest of the egg wash.", "safety": "solo", "type": "wash" },
+    { "id": "bake", "text": "Set the skillet on the sheet pan and bake until the crust is golden and the filling bubbles through the vents.", "safety": "adult-nearby", "hazard": "Hot oven and skillet", "timerSeconds": 1800, "timerLabel": "Bake", "look": "Golden crust, with sauce bubbling at the slits." },
+    { "id": "check", "text": "With oven mitts, pull out the rack. Push the thermometer through a slit into the middle of the filling: 165°F. If it's lower, bake 5 more minutes.", "safety": "adult-nearby", "type": "doneness", "hazard": "Hot oven and skillet", "target": { "temp": 165, "unit": "F" }, "why": "reheat-165" },
+    { "id": "rest", "text": "Turn off the oven. Set the skillet on the rack, lay an oven mitt over the handle, and let it rest before serving.", "safety": "adult-nearby", "hazard": "Very hot skillet and handle", "timerSeconds": 900, "timerLabel": "Rest", "tip": "The handle stays hot a long time." }
+  ],
+  "variations": [
+    {
+      "id": "sp-4",
+      "title": "Chicken pot pie",
+      "level": "sp-4",
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["creamy-cheesy", "mild-buttery"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "totalMinutes": 150,
+      "ingredients": {
+        "drop": ["flour-ap@Crust", "flour-ap@Crust#2", "salt@Crust", "butter-unsalted@Crust", "water@Crust"],
+        "add": [
+          { "ingredient": "flour-ap", "amount": 7, "unit": "oz", "group": "Rough puff" },
+          { "ingredient": "flour-ap", "amount": null, "text": "a little more, for rolling", "group": "Rough puff" },
+          { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Rough puff" },
+          { "ingredient": "butter-unsalted", "amount": 12, "unit": "tbsp", "prep": "cold, cut in ½-inch cubes", "group": "Rough puff" },
+          { "ingredient": "water", "amount": 0.5, "unit": "cup", "prep": "ice-cold", "group": "Rough puff" }
+        ],
+        "order": [
+          "+0",
+          "+1",
+          "+2",
+          "+3",
+          "+4",
+          "chicken-thigh@Filling",
+          "butter-unsalted@Filling",
+          "onion-yellow@Filling",
+          "carrot@Filling",
+          "celery@Filling",
+          "flour-ap@Filling",
+          "broth-chicken@Filling",
+          "milk-whole@Filling",
+          "thyme-dried@Filling",
+          "salt@Filling",
+          "black-pepper@Filling",
+          "peas-frozen@Filling",
+          "egg@Egg wash",
+          "water@Egg wash"
+        ]
+      },
+      "equipment": { "add": ["kitchen-scale"] },
+      "steps": {
+        "change": {
+          "water": {
+            "id": "water",
+            "text": "Add more ice water a tablespoon at a time until it just holds together. Don't break up the butter.",
+            "safety": "solo"
+          },
+          "oven": {
+            "id": "oven",
+            "text": "Heat the oven to 400°F with a rack in the middle.",
+            "safety": "solo",
+            "hazard": "Hot oven"
+          },
+          "veg": {
+            "id": "veg",
+            "text": "Dice the onion, and slice the carrots and celery ¼ inch thick.",
+            "safety": "solo",
+            "hazard": "Sharp knife"
+          },
+          "chicken": {
+            "id": "chicken",
+            "text": "Trim the chicken of fat and cut it into 1-inch pieces on the raw-meat board.",
+            "safety": "solo",
+            "hazard": "Sharp knife, raw chicken",
+            "handles": ["chicken-thigh"]
+          },
+          "wash-chicken": {
+            "id": "wash-chicken",
+            "text": "Wash the knife, board, and your hands.",
+            "safety": "solo",
+            "type": "wash"
+          },
+          "brown": {
+            "id": "brown",
+            "text": "Brown the chicken in 1 tablespoon of the filling's butter in the skillet over medium-high heat until no pink is left.",
+            "safety": "solo",
+            "hazard": "Hot pan, raw chicken",
+            "handles": ["chicken-thigh"],
+            "timerSeconds": 480,
+            "timerLabel": "Cook chicken"
+          },
+          "wash-brown": {
+            "id": "wash-brown",
+            "text": "Wash your hands and the spoon.",
+            "safety": "solo",
+            "type": "wash",
+            "hazard": "Hot stove"
+          },
+          "check-chicken": {
+            "id": "check-chicken",
+            "text": "Check the largest pieces: 165°F. Move the chicken to a clean bowl.",
+            "safety": "solo",
+            "type": "doneness",
+            "hazard": "Hot pan",
+            "target": { "temp": 165, "unit": "F" }
+          },
+          "soften": {
+            "id": "soften",
+            "text": "Soften the vegetables in the other 4 tablespoons of butter over medium heat.",
+            "safety": "solo",
+            "hazard": "Hot pan",
+            "timerSeconds": 360,
+            "timerLabel": "Soften vegetables"
+          },
+          "roux": {
+            "id": "roux",
+            "text": "Stir in the ⅓ cup of flour and cook 2 minutes. Whisk in the broth, then the milk, a little at a time, and simmer until it coats a spoon.",
+            "safety": "solo",
+            "hazard": "Hot pan",
+            "timerSeconds": 360,
+            "timerLabel": "Roux and sauce",
+            "why": "roux"
+          },
+          "finish": {
+            "id": "finish",
+            "text": "Stir in the thyme, salt, pepper, chicken, and peas, and turn off the heat.",
+            "safety": "solo",
+            "hazard": "Hot pan"
+          },
+          "top": {
+            "id": "top",
+            "text": "Roll the rough puff ⅛ inch thick, a little wider than the skillet. Lay it over the filling, trim to a ½-inch overhang, and cut 4 vents.",
+            "safety": "solo",
+            "hazard": "Hot pan",
+            "why": "vents"
+          },
+          "egg-wash": {
+            "id": "egg-wash",
+            "text": "Beat the egg with the water and brush the top, keeping the egg off the cut edges.",
+            "safety": "solo",
+            "handles": ["egg"],
+            "tip": "Egg on the edges glues the layers shut."
+          },
+          "wash-egg": {
+            "id": "wash-egg",
+            "text": "Wash your hands and the brush, and discard the egg wash.",
+            "safety": "solo",
+            "type": "wash"
+          },
+          "bake": {
+            "id": "bake",
+            "text": "Bake on the sheet pan until the top is puffed and deep golden.",
+            "safety": "solo",
+            "hazard": "Hot oven and skillet",
+            "timerSeconds": 2100,
+            "timerLabel": "Bake",
+            "look": "Tall, flaky, and deep golden, with sauce bubbling at the vents."
+          },
+          "check": {
+            "id": "check",
+            "text": "Check the filling through a vent: 165°F.",
+            "safety": "solo",
+            "type": "doneness",
+            "hazard": "Hot oven and skillet",
+            "target": { "temp": 165, "unit": "F" },
+            "why": "reheat-165"
+          },
+          "rest": {
+            "id": "rest",
+            "text": "Rest on the rack, a mitt over the handle, before serving.",
+            "safety": "solo",
+            "hazard": "Very hot skillet and handle",
+            "timerSeconds": 900,
+            "timerLabel": "Rest"
+          }
+        },
+        "drop": ["freeze-butter", "cut-in", "chill", "sauce"],
+        "add": [
+          { "id": "dough", "text": "Weigh 7 ounces of flour into the large bowl with the salt. Toss in the cold butter cubes so each is coated, then stir in ⅓ cup of ice water with the fork.", "safety": "solo", "why": "cold", "look": "A shaggy dough with whole chunks of butter." },
+          { "id": "fold-1", "text": "Pat the dough into a rectangle on a floured counter and roll it about 6 by 15 inches. Fold it in thirds like a letter, turn it a quarter turn, and roll and fold again.", "safety": "solo", "why": "lamination", "tip": "Brush off extra flour before each fold." },
+          { "id": "chill-1", "text": "Wrap and chill.", "safety": "solo", "timerSeconds": 900, "timerLabel": "Chill", "why": "rest-cold" },
+          { "id": "fold-2", "text": "Roll and fold twice more, the same way.", "safety": "solo", "look": "Smooth, with streaks of butter but no butter showing through." },
+          { "id": "chill-2", "text": "Wrap and chill until the filling is done.", "safety": "solo", "timerSeconds": 1800, "timerLabel": "Chill" }
+        ],
+        "order": [
+          "+0",
+          "water",
+          "+1",
+          "+2",
+          "+3",
+          "+4",
+          "oven",
+          "veg",
+          "chicken",
+          "wash-chicken",
+          "brown",
+          "wash-brown",
+          "check-chicken",
+          "soften",
+          "roux",
+          "finish",
+          "top",
+          "egg-wash",
+          "wash-egg",
+          "bake",
+          "check",
+          "rest"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "A rough-puff lid",
+          "body": "This week's skill is lamination. You'll make a rough puff: chunks of cold butter folded into dough four times until they're hundreds of thin layers, which puff tall and flaky over a chicken and vegetable filling thickened with a roux."
+        },
+        "callback": {
+          "lesson": "spinach-mushroom-quiche",
+          "body": "The quiche's crust was cut in to pea size and rolled once. Rough puff starts with bigger chunks of butter and is folded four times, so it rises in layers instead of just flaking."
+        },
+        "wrong": [
+          { "sign": "Butter is breaking through the dough", "fix": "It's too warm. Dust the spot with flour, wrap it, and chill 15 minutes." },
+          { "sign": "The dough springs back when you roll", "fix": "The gluten is tight. Chill it 10 more minutes." },
+          { "sign": "The top didn't puff", "fix": "The butter melted into the dough before baking. Chill longer between folds next time." },
+          { "sign": "The sauce is lumpy", "fix": "The liquid went in too fast. Whisk hard, or pour it through a strainer." }
+        ],
+        "quiz": [
+          { "q": "How many layers of butter do four letter folds make?", "choices": ["81", "12", "4"], "answer": 0, "explain": "Each fold triples them: 3, 9, 27, 81." },
+          { "q": "Why chill between folds?", "choices": ["To keep the butter in sheets and relax the gluten", "To make it rise", "To dry it out"], "answer": 0, "explain": "Warm butter smears into the dough." },
+          { "q": "What makes rough puff rise in the oven?", "choices": ["Steam from the butter layers", "Yeast", "Baking powder"], "answer": 0, "explain": "There's no leavening in it." },
+          { "q": "What temperature should the filling reach under the crust?", "choices": ["165°F", "145°F", "200°F"], "answer": 0, "explain": "It's reheated chicken." }
+        ],
+        "why": {
+          "drop": ["little-water"],
+          "add": [
+            { "id": "lamination", "title": "Folding makes layers", "body": "Each letter fold triples the layers of butter and dough. Four folds give 81 layers of each. In the oven, the water in each butter layer turns to steam and lifts the dough above it." },
+            { "id": "rest-cold", "title": "Chill between folds", "body": "Rolling warms the butter and tightens the gluten. Fifteen minutes in the fridge after every two folds keeps the butter in sheets, not smears, and stops the dough fighting back." }
+          ]
+        }
+      }
+    }
+  ]
+}

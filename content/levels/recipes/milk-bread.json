@@ -1,0 +1,88 @@
+{
+  "id": "milk-bread",
+  "version": 1,
+  "track": "core",
+  "unit": 104,
+  "title": "Japanese milk bread",
+  "image": "dishes/milk-bread.png",
+  "cuisine": "japanese",
+  "skill": "A tangzhong for a soft crumb",
+  "skills": ["yeast-dough", "scalded-dough"],
+  "prereqs": [],
+  "servings": 10,
+  "totalMinutes": 210,
+  "scaling": { "mode": "fixed", "multipliers": [1], "notes": { "1": "Makes 1 loaf, about 10 slices." } },
+  "learn": {
+    "move": {
+      "title": "A cooked paste for a cloud-soft loaf",
+      "body": "Japanese milk bread (shokupan) is famous for a crumb so soft it pulls apart in feathery strands, and it stays fresh for days. The secret is tangzhong: a little flour cooked in milk into a paste before it goes in the dough. You'll cook it to 149°F, knead a soft dough to a windowpane, shape four rolls side by side in the pan, and bake to 190°F."
+    },
+    "callback": {
+      "lesson": "pao-de-queijo",
+      "body": "Pão de queijo scalds its starch with boiling milk. Tangzhong does the same with a spoonful of flour, so the starch can hold far more water, which keeps the bread moist."
+    },
+    "why": [
+      { "id": "tangzhong", "title": "What tangzhong does", "body": "Starch heated in liquid to about 149°F swells and soaks up several times its weight in water. Mixed into dough, it holds that water through baking, so the loaf is softer, moister, and slower to go stale." },
+      { "id": "bread-flour", "title": "Bread flour", "body": "Bread flour has more protein than all-purpose, so it builds a stronger gluten net. That net holds a soft, wet dough up tall." },
+      { "id": "four-rolls", "title": "Four rolls in the pan", "body": "Shaping the dough as four rolled-up pieces stretches the gluten in every direction, so the loaf rises evenly into four domes and pulls apart in layers." },
+      { "id": "temp-190", "title": "190°F inside", "body": "Milk and sugar brown the crust early. The center is set at 190°F." }
+    ],
+    "wrong": [
+      { "sign": "The tangzhong is lumpy", "fix": "It heated too fast. Whisk hard off the heat, or start again on lower heat." },
+      { "sign": "The dough is very sticky", "fix": "It's meant to be soft. Knead on a lightly oiled counter instead of adding flour." },
+      { "sign": "The loaf has a big hole under the crust", "fix": "It was shaped loosely. Roll each piece up tight." },
+      { "sign": "The top browned before 190°F", "fix": "Tent with foil for the rest of the bake." }
+    ],
+    "quiz": [
+      { "q": "What temperature does tangzhong cook to?", "choices": ["About 149°F, a thick paste", "212°F", "105°F"], "answer": 0, "explain": "The starch swells and thickens." },
+      { "q": "What does tangzhong do for the bread?", "choices": ["Holds extra water so it stays soft and fresh longer", "Makes it rise faster", "Adds flavor only"], "answer": 0, "explain": "The swollen starch keeps its water." },
+      { "q": "Why bread flour?", "choices": ["Its stronger gluten holds up a soft dough", "It's whiter", "It has no gluten"], "answer": 0, "explain": "More protein." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "flour-bread", "amount": 3, "unit": "tbsp", "group": "Tangzhong" },
+    { "ingredient": "milk-whole", "amount": 0.5, "unit": "cup", "group": "Tangzhong" },
+    { "ingredient": "milk-whole", "amount": 0.5, "unit": "cup", "prep": "warm, 105 to 110°F", "group": "Dough" },
+    { "ingredient": "yeast-active-dry", "amount": 2, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "sugar", "amount": 3, "unit": "tbsp", "group": "Dough" },
+    { "ingredient": "flour-bread", "amount": 11, "unit": "oz", "group": "Dough" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "egg", "amount": 1, "unit": "count", "group": "Dough" },
+    { "ingredient": "butter-unsalted", "amount": 3, "unit": "tbsp", "prep": "soft", "group": "Dough" },
+    { "ingredient": "vegetable-oil", "amount": null, "text": "a little, for the counter and bowl", "group": "Dough" },
+    { "ingredient": "milk-whole", "amount": 1, "unit": "tbsp", "group": "To brush" }
+  ],
+  "substitutions": [{ "for": "milk-whole", "use": "milk-oat", "reason": "dairy" }],
+  "equipment": [
+    "saucepan-light",
+    "whisk",
+    "thermometer",
+    "kitchen-scale",
+    "liquid-measuring-cup",
+    "microwave",
+    "mixing-bowl-large",
+    "wooden-spoon",
+    "measuring-spoons",
+    "kitchen-towel",
+    "chef-knife",
+    "rolling-pin",
+    "loaf-pan",
+    "pastry-brush",
+    "oven-mitts",
+    "cooling-rack"
+  ],
+  "steps": [
+    { "id": "tangzhong", "text": "Whisk the tangzhong's flour into its milk in the saucepan. Cook over medium-low heat, whisking, until it reaches 149°F and thickens to a paste.", "safety": "solo", "hazard": "Hot pan", "timerSeconds": 180, "timerLabel": "Tangzhong", "why": "tangzhong", "look": "Thick enough that the whisk leaves lines." },
+    { "id": "cool", "text": "Scrape it into the large bowl and let it cool to warm.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Cool tangzhong" },
+    { "id": "bloom", "text": "Stir the warm milk, 1 teaspoon of the sugar, and the yeast in a cup and let it foam.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Bloom yeast" },
+    { "id": "mix", "text": "Add the yeast, the rest of the sugar, the flour, the salt, and the egg to the tangzhong. Mix to a shaggy dough.", "safety": "solo", "handles": ["egg"], "why": "bread-flour" },
+    { "id": "wash-egg", "text": "Wash your hands, and throw away the shell.", "safety": "solo", "type": "wash" },
+    { "id": "knead", "text": "Knead on a lightly oiled counter, working in the butter after 5 minutes, until it passes the windowpane test.", "safety": "solo", "timerSeconds": 900, "timerLabel": "Knead", "look": "Smooth, soft, and stretching thin enough to see light through." },
+    { "id": "rise", "text": "Oil the bowl, add the dough, cover, and let it double.", "safety": "solo", "timerSeconds": 3600, "timerLabel": "First rise" },
+    { "id": "divide", "text": "Divide the dough into 4 pieces by weight. Roll each into an 8-by-4-inch oval, fold the long sides into the middle, and roll it up tightly from a short end.", "safety": "solo", "hazard": "Sharp knife", "why": "four-rolls", "look": "Four tight, even rolls." },
+    { "id": "pan", "text": "Oil the loaf pan and set the rolls in side by side, seams down. Cover and proof until the dough is 1 inch above the rim. Heat the oven to 350°F for the last half hour.", "safety": "solo", "hazard": "Hot oven", "timerSeconds": 3600, "timerLabel": "Second rise" },
+    { "id": "bake", "text": "Brush the top with milk and bake until deep golden.", "safety": "solo", "hazard": "Hot oven", "timerSeconds": 1920, "timerLabel": "Bake", "why": "temp-190" },
+    { "id": "check", "text": "Check the center from the side: 190°F.", "safety": "solo", "type": "doneness", "hazard": "Hot oven and pan", "target": { "temp": 190, "unit": "F" } },
+    { "id": "cool-loaf", "text": "Turn it out onto the rack at once and cool completely before slicing.", "safety": "solo", "hazard": "Hot pan", "timerSeconds": 3600, "timerLabel": "Cool", "tip": "Sliced warm, the soft crumb squashes." }
+  ]
+}

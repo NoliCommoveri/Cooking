@@ -1,0 +1,289 @@
+{
+  "id": "spinach-mushroom-quiche",
+  "version": 1,
+  "track": "core",
+  "unit": 6,
+  "title": "Spinach & mushroom quiche",
+  "image": "dishes/spinach-mushroom-quiche.png",
+  "cuisine": "french",
+  "skill": "Pastry, blind baking, custard",
+  "skills": ["pastry", "custards"],
+  "prereqs": [],
+  "servings": 8,
+  "totalMinutes": 135,
+  "scaling": { "mode": "fixed", "multipliers": [1], "notes": { "1": "Makes one 9-inch quiche, 8 slices." } },
+  "learn": {
+    "move": {
+      "title": "A crisp crust under a soft custard",
+      "body": "A quiche is a savory pie: a butter crust filled with eggs, cream, cheese, and vegetables. Today you'll make the pastry, bake it empty first so the bottom stays crisp, cook the spinach and mushrooms dry, and bake the custard gently until it's just set."
+    },
+    "why": [
+      { "id": "cold", "title": "Cold butter, flaky crust", "body": "Pieces of cold butter coated in flour melt in the oven and leave flaky pockets. Butter that warms and smears in makes the crust tough or greasy." },
+      { "id": "little-water", "title": "Just enough water", "body": "Water lets flour build gluten. Pastry wants only enough to hold together when squeezed; more makes it tough, and it shrinks in the oven." },
+      { "id": "blind", "title": "Why bake the crust first", "body": "A wet custard poured into raw pastry soaks it before it can bake, and the bottom comes out pale and soggy. Baking the crust empty first, weighted so it keeps its shape, sets it crisp." },
+      { "id": "dry-veg", "title": "Cook the water out", "body": "Mushrooms and spinach are mostly water. Cooked first until the pan is dry, they won't weep into the custard and make it runny." },
+      { "id": "gentle", "title": "Gentle heat for custard", "body": "Eggs set smooth at a low oven temperature. Too hot, and the custard puffs, cracks, and turns watery. It's done when the middle still jiggles a little; it finishes setting as it cools." }
+    ],
+    "wrong": [
+      { "sign": "The crust shrank down the sides", "fix": "The dough was stretched into the plate or not chilled. Ease it in loosely, and chill it before baking." },
+      { "sign": "The bottom is soggy", "fix": "The crust wasn't baked long enough before filling. Bake it until it looks dry and light golden." },
+      { "sign": "The custard is watery", "fix": "The vegetables weren't cooked dry, or it baked too hot. Cook them until the pan is dry next time." },
+      { "sign": "The top cracked", "fix": "It baked too long or too hot. Take it out while the center still jiggles." }
+    ],
+    "quiz": [
+      { "q": "Why bake the crust before filling it?", "choices": ["So the bottom sets crisp before the wet custard goes in", "So it browns more", "To melt the butter"], "answer": 0, "explain": "This is called blind baking." },
+      { "q": "Why cook the spinach and mushrooms first?", "choices": ["To cook out their water so the custard isn't runny", "To make them crunchy", "To save time"], "answer": 0, "explain": "They're mostly water." },
+      { "q": "When is the quiche done?", "choices": ["The edges are set and the center jiggles a little", "The center is firm and puffed", "The top is brown and cracked"], "answer": 0, "explain": "It finishes setting as it cools." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "flour-ap", "amount": 1.25, "unit": "cup", "group": "Crust" },
+    { "ingredient": "flour-ap", "amount": null, "text": "a little more, for rolling", "group": "Crust" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Crust" },
+    { "ingredient": "butter-unsalted", "amount": 8, "unit": "tbsp", "prep": "cold, cut in ½-inch cubes", "group": "Crust" },
+    { "ingredient": "water", "amount": 4, "unit": "tbsp", "prep": "ice-cold", "group": "Crust" },
+    { "ingredient": "butter-unsalted", "amount": 1, "unit": "tbsp", "group": "Filling" },
+    { "ingredient": "mushrooms", "amount": 8, "unit": "oz", "group": "Filling" },
+    { "ingredient": "spinach-baby", "amount": 5, "unit": "oz", "group": "Filling" },
+    { "ingredient": "egg", "amount": 4, "unit": "count", "group": "Filling" },
+    { "ingredient": "heavy-cream", "amount": 1, "unit": "cup", "group": "Filling" },
+    { "ingredient": "milk-whole", "amount": 0.5, "unit": "cup", "group": "Filling" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "swiss-shredded", "amount": 1, "unit": "cup", "group": "Filling" }
+  ],
+  "substitutions": [{ "for": "swiss-shredded", "use": "cheddar-shredded", "reason": "availability" }],
+  "equipment": [
+    "plate",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "fork",
+    "whisk",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "rolling-pin",
+    "pie-plate",
+    "foil",
+    "pie-weights",
+    "sheet-pan",
+    "chef-knife",
+    "cutting-board",
+    "skillet-12",
+    "wooden-spoon",
+    "oven-mitts",
+    "table-knife",
+    "cooling-rack"
+  ],
+  "steps": [
+    { "id": "freeze-butter", "text": "Spread the butter cubes on the plate and put them in the freezer. Put the water in a cup with a few ice cubes.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Chill butter", "why": "cold" },
+    { "id": "cut-in", "text": "Whisk the crust's flour and salt in the large bowl. Add the cold butter and press it in with the back of the fork until the biggest pieces are the size of peas.", "safety": "solo", "look": "Coarse crumbs, with pea-sized bits of butter." },
+    { "id": "water", "text": "Sprinkle 3 tablespoons of the ice water over it, leaving the ice behind, and toss with the fork. Squeeze a handful. If it crumbles, add more water a tablespoon at a time.", "safety": "solo", "why": "little-water", "look": "Shaggy, but a squeezed handful holds together." },
+    { "id": "chill", "text": "Press the dough into a flat disk, cover it, and chill it.", "safety": "solo", "timerSeconds": 3600, "timerLabel": "Dough rests" },
+    { "id": "oven", "text": "Put a rack in the lower third of the oven, set the sheet pan on it, and heat the oven to 400°F.", "safety": "adult-nearby", "hazard": "Hot oven" },
+    { "id": "roll", "text": "Roll the dough on a floured counter into a 12-inch circle, about ⅛ inch thick. Ease it into the pie plate without stretching it. Trim the edge to ½ inch past the rim, fold it under, and press it with the fork.", "safety": "solo", "tip": "Roll from the middle out, turning the dough a quarter turn each time." },
+    { "id": "freeze-crust", "text": "Put the crust in the freezer to firm up.", "safety": "solo", "timerSeconds": 900, "timerLabel": "Chill crust" },
+    { "id": "blind", "text": "Line the crust with foil and fill it with the pie weights. Bake it on the hot sheet pan.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 900, "timerLabel": "Bake with weights", "why": "blind" },
+    { "id": "unweight", "text": "With oven mitts, take out the pan. Lift out the foil and weights, and bake the crust until the bottom looks dry and light golden.", "safety": "adult-nearby", "hazard": "Hot oven and weights", "timerSeconds": 600, "timerLabel": "Bake empty", "look": "Dry and light golden, with no shiny raw spots." },
+    { "id": "veg", "text": "While the crust bakes, slice the mushrooms. Cook them in the tablespoon of butter in the skillet over medium-high heat until browned and the pan is dry. Add the spinach and stir until it wilts.", "safety": "adult-nearby", "hazard": "Hot pan, sharp knife", "timerSeconds": 600, "timerLabel": "Cook vegetables", "why": "dry-veg", "look": "Browned mushrooms, wilted spinach, and no liquid in the pan." },
+    { "id": "cool-veg", "text": "Spread the vegetables on the plate to cool. Turn the oven down to 350°F.", "safety": "adult-nearby", "hazard": "Hot oven" },
+    { "id": "custard", "text": "Whisk the eggs, cream, milk, the filling's salt, and the pepper in the medium bowl.", "safety": "solo", "handles": ["egg"], "look": "Smooth and pale yellow, with no streaks of white." },
+    { "id": "wash-egg", "text": "Wash your hands with soap, and throw away the eggshells.", "safety": "solo", "type": "wash" },
+    { "id": "fill", "text": "Scatter the cheese and the vegetables in the crust. Pour the custard over them slowly.", "safety": "adult-nearby", "hazard": "Hot crust", "tip": "Pull the rack out partway and fill it in the oven if it's easier than carrying it full." },
+    { "id": "bake", "text": "Bake until the edges are set and the center still jiggles a little.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 2100, "timerLabel": "Bake", "why": "gentle", "look": "Puffed and set at the edges, a gentle wobble in the middle." },
+    { "id": "check", "text": "With oven mitts, pull out the rack. Push the butter knife in 1 inch from the center. It should come out clean. If not, bake 5 more minutes.", "safety": "adult-nearby", "type": "doneness", "hazard": "Hot oven and plate", "target": { "look": "A knife 1 inch from the center comes out clean" } },
+    { "id": "cool", "text": "Turn off the oven. Let the quiche cool on the rack before slicing.", "safety": "adult-nearby", "hazard": "Hot plate", "timerSeconds": 900, "timerLabel": "Cool", "tip": "It finishes setting as it cools." }
+  ],
+  "variations": [
+    {
+      "id": "sp-4",
+      "title": "Spinach & mushroom quiche",
+      "level": "sp-4",
+      "tags": {
+        "protein": "eggs",
+        "flavors": ["creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "totalMinutes": 140,
+      "ingredients": {
+        "change": { "flour-ap@Crust": { "ingredient": "flour-ap", "amount": 6, "unit": "oz", "group": "Crust" } }
+      },
+      "equipment": { "drop": ["table-knife"], "add": ["kitchen-scale", "thermometer", "kitchen-towel"] },
+      "steps": {
+        "change": {
+          "freeze-butter": {
+            "id": "freeze-butter",
+            "text": "Cube the butter, spread it on the plate, and freeze it. Put the water in a cup with ice.",
+            "safety": "solo",
+            "timerSeconds": 600,
+            "timerLabel": "Chill butter",
+            "why": "cold"
+          },
+          "cut-in": {
+            "id": "cut-in",
+            "text": "Weigh 6 ounces of flour into the large bowl and whisk in the crust's salt. Cut in the butter with the fork to pea size.",
+            "safety": "solo",
+            "look": "Coarse crumbs, with pea-sized bits of butter."
+          },
+          "water": {
+            "id": "water",
+            "text": "Toss in ice water a tablespoon at a time, usually 3 to 4, until a squeezed handful just holds.",
+            "safety": "solo",
+            "why": "little-water"
+          },
+          "chill": {
+            "id": "chill",
+            "text": "Press into a disk, wrap, and chill.",
+            "safety": "solo",
+            "timerSeconds": 3600,
+            "timerLabel": "Dough rests",
+            "tip": "The dough keeps 2 days in the fridge, so it can be made ahead."
+          },
+          "oven": {
+            "id": "oven",
+            "text": "Set the sheet pan on a rack in the lower third and heat the oven to 400°F.",
+            "safety": "solo",
+            "hazard": "Hot oven"
+          },
+          "roll": {
+            "id": "roll",
+            "text": "Roll a 12-inch round ⅛ inch thick. Ease it into the pie plate, trim to ½ inch past the rim, fold under, and flute the edge with your fingers.",
+            "safety": "solo"
+          },
+          "freeze-crust": {
+            "id": "freeze-crust",
+            "text": "Freeze the crust until firm.",
+            "safety": "solo",
+            "timerSeconds": 900,
+            "timerLabel": "Chill crust"
+          },
+          "blind": {
+            "id": "blind",
+            "text": "Line with foil, fill with the weights, and bake on the hot pan.",
+            "safety": "solo",
+            "hazard": "Hot oven",
+            "timerSeconds": 900,
+            "timerLabel": "Bake with weights",
+            "why": "blind"
+          },
+          "unweight": {
+            "id": "unweight",
+            "text": "Lift out the foil and weights. Bake until the bottom is dry and golden, not just pale.",
+            "safety": "solo",
+            "hazard": "Hot oven and weights",
+            "timerSeconds": 600,
+            "timerLabel": "Bake empty",
+            "look": "Golden all over, with no shiny or translucent spots."
+          },
+          "wash-egg": {
+            "id": "wash-egg",
+            "text": "Wash your hands, and throw away the shells.",
+            "safety": "solo",
+            "type": "wash"
+          },
+          "veg": {
+            "id": "veg",
+            "text": "Slice the mushrooms ¼ inch thick. Brown them in the filling's butter over medium-high heat until the pan is dry, then wilt in the spinach.",
+            "safety": "solo",
+            "hazard": "Hot pan, sharp knife",
+            "timerSeconds": 600,
+            "timerLabel": "Cook vegetables",
+            "why": "dry-veg"
+          },
+          "custard": {
+            "id": "custard",
+            "text": "Whisk the cream, milk, salt, and pepper into the eggs.",
+            "safety": "solo"
+          },
+          "fill": {
+            "id": "fill",
+            "text": "Scatter the cheese and vegetables in the crust, set it on the pan in the oven, and pour in the custard.",
+            "safety": "solo",
+            "hazard": "Hot oven"
+          },
+          "bake": {
+            "id": "bake",
+            "text": "Bake until the edges are set and the center wobbles slightly.",
+            "safety": "solo",
+            "hazard": "Hot oven",
+            "timerSeconds": 2400,
+            "timerLabel": "Bake",
+            "why": "custard-170"
+          },
+          "check": {
+            "id": "check",
+            "text": "Check the center with the thermometer: 170°F. Under, bake 5 minutes more.",
+            "safety": "solo",
+            "type": "doneness",
+            "hazard": "Hot oven",
+            "target": { "temp": 170, "unit": "F" },
+            "why": "gentle"
+          },
+          "cool": {
+            "id": "cool",
+            "text": "Cool on the rack before slicing.",
+            "safety": "solo",
+            "hazard": "Hot plate",
+            "timerSeconds": 1200,
+            "timerLabel": "Cool"
+          }
+        },
+        "drop": ["cool-veg"],
+        "add": [
+          { "id": "eggs", "text": "Meanwhile, beat the eggs in the medium bowl.", "safety": "solo", "handles": ["egg"] },
+          { "id": "seal", "text": "Brush the hot crust with 1 tablespoon of the beaten egg and bake 2 more minutes. Turn the oven down to 325°F.", "safety": "solo", "hazard": "Hot oven", "timerSeconds": 120, "timerLabel": "Seal", "why": "seal", "look": "A dry, matte coat on the bottom." },
+          { "id": "squeeze", "text": "Tip the vegetables onto the towel, let them cool a few minutes, then wring out the liquid.", "safety": "solo", "look": "Dry enough that nothing drips." }
+        ],
+        "order": [
+          "freeze-butter",
+          "cut-in",
+          "water",
+          "chill",
+          "oven",
+          "roll",
+          "freeze-crust",
+          "blind",
+          "unweight",
+          "+0",
+          "wash-egg",
+          "+1",
+          "veg",
+          "+2",
+          "custard",
+          "fill",
+          "bake",
+          "check",
+          "cool"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "Blind-baked, sealed, set at 170°F",
+          "body": "A quiche fails at the bottom: a pale, wet crust under the custard. You'll weigh and blind-bake the crust until it's golden, seal it with egg, wring the vegetables dry, and bake the custard low until the center reads 170°F."
+        },
+        "wrong": [
+          { "sign": "The crust shrank down the sides", "fix": "The dough was stretched into the plate or not chilled. Ease it in loosely, and chill it before baking." },
+          { "sign": "The bottom is soggy", "fix": "The crust wasn't baked long enough before filling. Bake it until it looks dry and light golden." },
+          { "sign": "The custard is watery", "fix": "The vegetables weren't cooked dry, or it baked too hot. Cook them until the pan is dry next time." },
+          { "sign": "The top cracked", "fix": "It baked too long or too hot. Take it out while the center still jiggles." },
+          { "sign": "The custard curdled at the edges", "fix": "The oven ran hot or it baked too long. Pull it at 170°F next time, and check your oven with a thermometer." }
+        ],
+        "quiz": [
+          { "q": "What does brushing the hot crust with egg do?", "choices": ["Seals it so the custard can't soak in", "Makes it shiny", "Helps it rise"], "answer": 0, "explain": "It cooks into a thin layer." },
+          { "q": "What temperature is the center of the custard done at?", "choices": ["170°F", "145°F", "212°F"], "answer": 0, "explain": "It firms more as it cools." },
+          { "q": "Why squeeze the cooked spinach in a towel?", "choices": ["To get the last water out before it hits the custard", "To cool it", "To chop it"], "answer": 0, "explain": "Water makes a weepy custard." },
+          { "q": "Why bake the custard at 325°F, not 400°F?", "choices": ["So the edges don't overcook while the center sets", "To save time", "So the crust browns"], "answer": 0, "explain": "Low heat keeps it smooth." }
+        ],
+        "why": {
+          "add": [
+            { "id": "seal", "title": "An egg seal", "body": "A thin coat of beaten egg brushed on the hot crust cooks in 2 minutes into a waterproof layer between pastry and custard." },
+            { "id": "custard-170", "title": "170°F, low and slow", "body": "Custard sets between 165 and 180°F. At 325°F the outside doesn't overshoot while the center catches up. At 170°F in the middle it's set but still silky; it firms more as it cools." }
+          ]
+        }
+      }
+    }
+  ]
+}

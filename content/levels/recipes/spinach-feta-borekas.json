@@ -1,0 +1,92 @@
+{
+  "id": "spinach-feta-borekas",
+  "version": 1,
+  "track": "core",
+  "unit": 104,
+  "title": "Spinach and feta borekas",
+  "image": "dishes/spinach-feta-borekas.png",
+  "cuisine": "turkish",
+  "skill": "Laminating a rough puff",
+  "skills": ["folding-layers", "filling-crimping"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 180,
+  "scaling": { "mode": "fixed", "multipliers": [1], "notes": { "1": "Makes 12 borekas." } },
+  "learn": {
+    "move": {
+      "title": "Rough puff, folded by hand",
+      "body": "Borekas are the flaky filled pastries sold in bakeries from Istanbul to Jerusalem. You'll make a rough puff, cold butter chunks folded into dough four times until they form layers, then fill it with spinach and feta, fold it into triangles, and bake until it puffs and shatters."
+    },
+    "why": [
+      { "id": "lamination", "title": "Folding makes layers", "body": "Each letter fold triples the layers of butter and dough: four folds make 81. In the oven, each butter layer's water turns to steam and lifts the dough above it." },
+      { "id": "rest-cold", "title": "Chill between folds", "body": "Rolling warms the butter and tightens the gluten. Fifteen minutes in the fridge after every two folds keeps the butter in sheets and the dough relaxed." },
+      { "id": "dry-filling", "title": "A dry filling", "body": "Spinach is mostly water. Wilted and wrung dry, it won't steam the pastry soggy from the inside." },
+      { "id": "clean-edges", "title": "Keep the cut edges clean", "body": "Egg wash on a cut edge glues the layers shut so they can't rise. Brush only the tops." }
+    ],
+    "wrong": [
+      { "sign": "Butter is poking through the dough", "fix": "It's too warm. Flour the spot and chill 15 minutes." },
+      { "sign": "The borekas leaked", "fix": "There was filling on the edges or too much inside. Use a level tablespoon, and press the edges firmly." },
+      { "sign": "They didn't puff", "fix": "The butter melted into the dough. Chill longer between folds, and chill the shaped borekas before baking." },
+      { "sign": "The bottoms are pale", "fix": "Bake on a rack in the lower third." }
+    ],
+    "quiz": [
+      { "q": "How many layers of butter do four letter folds make?", "choices": ["81", "16", "4"], "answer": 0, "explain": "3, 9, 27, 81." },
+      { "q": "Why wring out the spinach?", "choices": ["So its water doesn't make the pastry soggy", "To season it", "To cool it"], "answer": 0, "explain": "Spinach is mostly water." },
+      { "q": "Why keep egg wash off the cut edges?", "choices": ["It glues the layers shut so they can't rise", "It burns", "It's wasteful"], "answer": 0, "explain": "Brush only the tops." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "flour-ap", "amount": 9, "unit": "oz", "group": "Rough puff" },
+    { "ingredient": "flour-ap", "amount": null, "text": "a little more, for rolling", "group": "Rough puff" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Rough puff" },
+    { "ingredient": "butter-unsalted", "amount": 16, "unit": "tbsp", "prep": "cold, cut in ½-inch cubes", "group": "Rough puff" },
+    { "ingredient": "water", "amount": 0.5, "unit": "cup", "prep": "ice-cold", "group": "Rough puff" },
+    { "ingredient": "olive-oil", "amount": 1, "unit": "tbsp", "group": "Filling" },
+    { "ingredient": "spinach-baby", "amount": 10, "unit": "oz", "group": "Filling" },
+    { "ingredient": "green-onion", "amount": 3, "unit": "count", "group": "Filling" },
+    { "ingredient": "feta", "amount": 6, "unit": "oz", "prep": "crumbled", "group": "Filling" },
+    { "ingredient": "dill", "amount": 2, "unit": "tbsp", "prep": "chopped", "group": "Filling" },
+    { "ingredient": "egg", "amount": 1, "unit": "count", "group": "Filling" },
+    { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Filling" },
+    { "ingredient": "egg", "amount": 1, "unit": "count", "group": "To finish" },
+    { "ingredient": "sesame-seeds", "amount": 1, "unit": "tbsp", "group": "To finish" }
+  ],
+  "equipment": [
+    "kitchen-scale",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "fork",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "rolling-pin",
+    "pastry-brush",
+    "chef-knife",
+    "cutting-board",
+    "skillet-12",
+    "tongs",
+    "kitchen-towel",
+    "small-bowl",
+    "sheet-pan",
+    "parchment",
+    "thermometer",
+    "oven-mitts",
+    "cooling-rack"
+  ],
+  "steps": [
+    { "id": "dough", "text": "Weigh the flour into the large bowl with the salt. Toss in the butter cubes to coat, then stir in ⅓ cup of ice water with the fork, adding more a tablespoon at a time until it just holds.", "safety": "solo", "look": "Shaggy, with whole chunks of butter." },
+    { "id": "fold-1", "text": "Roll the dough on a floured counter to about 6 by 15 inches. Letter-fold, turn a quarter turn, and roll and fold again.", "safety": "solo", "why": "lamination" },
+    { "id": "chill-1", "text": "Wrap and chill.", "safety": "solo", "timerSeconds": 900, "timerLabel": "Chill", "why": "rest-cold" },
+    { "id": "fold-2", "text": "Roll and fold twice more. Wrap and chill.", "safety": "solo", "timerSeconds": 1800, "timerLabel": "Chill", "look": "Smooth, with streaks of butter and none breaking through." },
+    { "id": "spinach", "text": "Wilt the spinach in the oil in the skillet over medium heat, turning it with the tongs. Tip it into the towel, cool, and wring it dry.", "safety": "solo", "hazard": "Hot pan", "timerSeconds": 180, "timerLabel": "Wilt spinach", "why": "dry-filling" },
+    { "id": "filling", "text": "Chop the spinach and slice the green onions. Mix them in the medium bowl with the feta, dill, pepper, and the filling's egg.", "safety": "solo", "hazard": "Sharp knife", "handles": ["egg"] },
+    { "id": "wash-egg", "text": "Wash your hands, and throw away the shell.", "safety": "solo", "type": "wash" },
+    { "id": "oven", "text": "Heat the oven to 400°F with a rack in the lower third. Line the sheet pan.", "safety": "solo", "hazard": "Hot oven" },
+    { "id": "cut", "text": "Roll the pastry to a 12-by-16-inch rectangle, ⅛ inch thick, and cut twelve 4-inch squares.", "safety": "solo", "hazard": "Sharp knife" },
+    { "id": "shape", "text": "Put a level tablespoon of filling on each square, fold it corner to corner into a triangle, and press the edges with the fork. Set them on the pan and chill.", "safety": "solo", "timerSeconds": 900, "timerLabel": "Chill borekas" },
+    { "id": "egg-wash", "text": "Beat the last egg and brush the tops only. Sprinkle with sesame.", "safety": "solo", "handles": ["egg"], "why": "clean-edges" },
+    { "id": "wash-wash", "text": "Wash your hands and the brush, and discard the egg wash.", "safety": "solo", "type": "wash" },
+    { "id": "bake", "text": "Bake until puffed and deep golden, top and bottom.", "safety": "solo", "hazard": "Hot oven", "timerSeconds": 1500, "timerLabel": "Bake", "look": "Tall, flaky layers at the edges." },
+    { "id": "check", "text": "Check the filling of one boreka: 160°F.", "safety": "solo", "type": "doneness", "hazard": "Hot pan", "target": { "temp": 160, "unit": "F" } },
+    { "id": "cool", "text": "Cool on the rack a few minutes.", "safety": "solo", "hazard": "Hot filling", "timerSeconds": 300, "timerLabel": "Cool" }
+  ]
+}
