@@ -6516,3 +6516,40 @@ prompt doc's sheets 34–39.
 - Every Level 2 recipe card now has a dish picture. Still to come: Level 4's
   sheets 55–62.
 - Tests: 402.
+
+## 249. 2026-10-27 — Level dish pictures: sheets 55–62, and white bowls recut
+
+Owner, 2026-10-27: eight more ChatGPT sheets, "make sure these are the rest";
+then, from a phone screenshot of the crops, "you've got a couple more that
+are just floating bowl tops"; then "check unit 4 for any dishes that used
+placeholder photos for recipes and make sure they're swapped".
+
+- **Before:** 32 Level 4 recipe cards had only a meal-type drawing, and the
+  written arepas recipe showed the side-dish drawing (247's missing
+  picture). The crop tool takes white near the edge of a dish for
+  background, so a white bowl or baking dish lost its sides and kept only
+  its rim. That happened on eight of 248's Level 2 pictures.
+- **Now:**
+  - The eight sheets are the prompt doc's sheets 55–62, the last ones in it.
+    They're saved to `content/images/source/` under the doc's names, cut into
+    32 dish pictures with web copies, and listed in `tools/dish-sheets.txt`.
+    `"image"` is added to the 32 cards in `sp-4.json`, and arepas' recipe
+    points at its picture. Every Level 2, 3, and 4 recipe card now has a
+    dish picture.
+  - **`tools/hand-cut-dish.py`:** cuts one dish by hand from boxes around its
+    pieces (plate, side bowls), keeping each piece's whole outline so white
+    sides stay. Pieces whose outlines don't meet are kept as separate
+    pieces. Recut with it: Level 2's pan de elote, gyeran-jjim, anda curry,
+    Hainanese chicken rice, egg drop soup, tikil gomen, baked ziti, and
+    Filipino baked macaroni; Level 4's Goan fish curry, çılbır, black bean
+    soup, French onion soup, phở bò, kung pao chicken, mapo tofu, chicken
+    tikka masala, Thai green curry, and birria de chivo. Every hand cut's
+    command is written in `tools/dish-sheets.txt`.
+  - Checked by eye for unclean foods: none. Feijoada and the braised duck
+    legs show beef sausage, as their prompts asked; the mapo tofu is ground
+    beef; the fish (salmon, white fish, the whole samke harra fish) have fins
+    and scales; birria de chivo is goat.
+- **Unit 4:** all 30 Unit 4 dishes across Levels 2, 3, and 4 now show their
+  own dish picture. Pan de elote and arepas were the only ones on a
+  placeholder.
+- Tests: 402.

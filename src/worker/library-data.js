@@ -17765,7 +17765,7 @@ export const LIBRARY = {
    "track": "core",
    "unit": 104,
    "title": "Arepas with black beans and cheese",
-   "image": "img/meals/side.svg",
+   "image": "img/dishes/arepas.webp",
    "cuisine": "venezuelan",
    "skill": "A corn dough timed with its fillings",
    "servings": 4,

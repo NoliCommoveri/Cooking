@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 104,
   "title": "Arepas with black beans and cheese",
-  "image": "meals/side.svg",
+  "image": "dishes/arepas.png",
   "cuisine": "venezuelan",
   "skill": "A corn dough timed with its fillings",
   "skills": ["skillet-baking"],
