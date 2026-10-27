@@ -10,7 +10,7 @@ import { LOGIN_PICTURES } from './lib/login-pictures.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 import { RUBRIC, GRADE_TEXT_MAX } from './lib/grades.js';
 import { findLessons, suggest } from './lib/find.js';
-import { PARTS, plannedMinutes, hoursOf, ASSIGN_NOTES, READY_FOR, PLACE_QUIZ, PLACE_PARTS, suggestProgram } from './lib/levels.js';
+import { PARTS, plannedMinutes, hoursOf, ASSIGN_NOTES, bestForLines, PLACE_QUIZ, PLACE_PARTS, suggestProgram } from './lib/levels.js';
 // The longest a writing box takes (14f), as the Worker checks it.
 const WRITING_MAX = 20000;
 import { markTerms, toggleTermCard } from './lib/terms.js';
@@ -1587,8 +1587,7 @@ function helpChoose(levels, use) {
     result.hidden = false;
     result.scrollIntoView({ block: 'nearest' });
   } },
-  el('p', { class: 'small' }, READY_FOR.caw),
-  el('p', { class: 'small' }, READY_FOR.levels),
+  bestForLines(levels.map((V) => V.id)).map((line) => el('p', { class: 'small' }, line)),
   el('p', { class: 'mut small' }, 'Not sure? Answer these and we\'ll suggest where to start. For more than one cook, answer for the one with the least experience.'),
   PLACE_QUIZ.map(({ q, answers }, i) => radios(`q${i}`, q, answers)),
   radios('parts', PLACE_PARTS.q, PLACE_PARTS.answers.map(([v, text]) => [text, v])),

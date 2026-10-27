@@ -45,14 +45,26 @@ export const ASSIGN_NOTES = {
   'sp-4': 'Note: While lessons do review some fundamentals in culinary technique, Level 4 is intended for somewhat experienced cooks and pre-supposes learners that are ready to be in the kitchen independently. Please do not assign until your learner is able to operate the stove-top and oven themselves, and is able to drain, work with oils, and perform cutting unassisted.',
 };
 
-// Help me choose (owner, 2026-10-27): under Which program?, with Chef Ruth
-// and in the course editor, a line on each program in the owner's words,
-// then a short quiz that suggests one. It goes by what a cook is ready to
-// learn, never by what they've done or their age (§12).
+// A line on each program in the owner's words (2026-10-27): Chef Ruth's
+// Which program?. Help me choose has its own lines (BEST_FOR), then a short
+// quiz that suggests one. It goes by what a cook is ready to learn, never by
+// what they've done or their age (§12).
 export const READY_FOR = {
   caw: "Cook Around the World: a self-paced course where each dish is chosen to practice the skills you'd like to grow in, all while experiencing food from many cultures and cuisines.",
   levels: "Structured Progression Level Courses: a weekly full culinary arts course teaching kitchen science, health rules, and Scriptural truths about food along with one recipe per week for practice. Levels are based on a learner's development and previous experience in the kitchen.",
 };
+
+// Help me choose's own lines, in the owner's words (2026-10-27): who each
+// program is best for, then a line on every Level course.
+export const BEST_FOR = {
+  caw: 'Cook Around the World: best for learners with some prior kitchen experience who want to cook real meals at their own pace, with no extra reading or drills.',
+  'sp-2': 'Level 2: best for learners who are just beginning or now ready to work with cutting instruments like paring knives, but still need adult assistance with the stove and oven.',
+  'sp-3': "Level 3: best for learners who are ready for a real chef's knife and to operate the stove and oven. We'll still recommend an adult be present for assistance when needed.",
+  'sp-4': 'Level 4: best for experienced cooks looking to hone and practice the full range of cooking techniques, and who are familiar with knives, heat sources, and oil.',
+  levels: 'All Level courses come with additional reading, quizzes, and drills outside the weekly recipe. These can be turned off by a parent.',
+};
+// The lines in order, for the Levels a family can pick.
+export const bestForLines = (levelIds) => [BEST_FOR.caw, ...levelIds.filter((x) => BEST_FOR[x]).map((x) => BEST_FOR[x]), BEST_FOR.levels];
 
 // The quiz. Each readiness answer is the Level it points to (1 to 4); the
 // last question is whether they want the reading pages and drills. Siblings

@@ -6711,3 +6711,33 @@ prod views of what they'd see."
   - Chef Ruth's Show me around has a stop for it (owner only).
 - Screenshots sent in the session.
 - Tests: 407.
+
+## 254. 2026-10-27 — Which program? and Help me choose: the owner's words; the week's start set from the tastes
+
+Owner, 2026-10-27, from Getting started on a phone: "I rejected this wording
+already. It was supposed to be replaced with what is currently coming through
+the help me choose. The help me choose needs its own copy like 'Cook Around
+the World: best for-'." "We ask them how adventurous they are up in the flow
+and should be prefilling the familiar/explore. Instead of asking, we say
+'Based on your earlier answers, I set it on the Explore track. You can change
+it in...'" The new lines are the owner's, approved before building.
+
+- **Before:** Chef Ruth's Which program? described each program with its
+  weeks and hours; Help me choose opened with the owner's two program lines;
+  and Ruth asked whether each week should start with Familiar or Explore.
+- **Now:**
+  - **Which program?** (Chef Ruth) is the owner's two program lines
+    (`READY_FOR`), then "Which program would you like?".
+  - **Help me choose** (Chef Ruth and the Set up a course dialog) opens with
+    the owner's "best for" lines (`BEST_FOR`, `bestForLines` in
+    `src/content/levels.js`): Cook Around the World, each Level offered
+    (Level 2, 3, 4), and a line that every Level course has reading,
+    quizzes, and drills a parent can turn off.
+  - **Familiar or Explore** isn't asked: the course starts with the preset
+    from How adventurous, and Ruth says "Based on your earlier answers, I set
+    it on the Explore track. You can change it in Menu → Courses." (or
+    Familiar). When How adventurous was skipped: "I set it on the Familiar
+    track. You can change it in Menu → Courses."
+- Screenshots (Ruth's Help me choose and her track line, the editor's
+  dialog, phone width, both themes) sent in the session.
+- Tests: 407.
