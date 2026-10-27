@@ -950,7 +950,7 @@ The fixed February 1 to May 15 window (§6.19) is replaced by **each family's ow
   - **Swap:** a week that touches an unleavened day offers Unleavened recipes only (§6.19).
   - **The schedule** (§6.18, and the Levels, §12): **recommendation:** a leavened lesson isn't scheduled on an unleavened day. The schedule passes it over to the first week after the feast and fills its place with the next lesson that's unleavened, the way a swap moves a lesson, so it never counts as behind. A leavened lesson already in the queue is flagged on the Queue with a one-tap unleavened swap.
   - **The kitchen** (recommendation): a banner on the unleavened days, like the Sabbath's; leavened lessons show "After Unleavened Bread", and starting one asks for the parent PIN, like cooking off the path (§6.18).
-  - **Level 3 setup:** a Level course whose bread weeks would land on the unleavened days says so when it's set up (§12).
+  - **Level course setup, every Level** (owner, 2026-10-27: "This should be for all levels not just 3"): a Level course whose bread weeks (any leavened recipe week) would land on the unleavened days says so when it's set up (§12).
 - **Stored** in `unleavened_dates` (§8.4), already in the schema since the 2026-10-24 squash, so phase 13 needs no schema change; nothing to set up by hand.
 
 ### 6.21 Family tastes, variations, and the recipe pool — Requirement (owner, 2026-10-23; revised 2026-10-24)

@@ -6757,3 +6757,16 @@ April 22, 2027 (from sunset April 21), the last Wednesday, April 28, 2027.
   `content/calendars.json` comes with phase 13.
 - No screens changed, so no screenshots.
 - Tests: 407.
+
+## 256. 2026-10-27 — Plan: the bread-week warning on every Level
+
+Owner, 2026-10-27, on the Level 3 setup warning (§6.20): "This should be for
+all levels not just 3".
+
+- **Before:** the plan said Level 3 setup warns when the course's bread weeks
+  land on the unleavened days.
+- **Now:** setting up a course on any Level warns when a leavened recipe week
+  would land on the unleavened days. Nothing is built yet: it comes with
+  phase 13.
+- No screens changed, so no screenshots.
+- Tests: 407.
