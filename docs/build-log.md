@@ -6814,3 +6814,21 @@ wording is fine".
   Nothing is built yet: it comes with phase 13.
 - No screens changed, so no screenshots.
 - Tests: 407.
+
+## 259. 2026-10-27 — Plan: Show me some, on the kitchen's paused notice
+
+Owner, 2026-10-27: "Give them an in here, like a 'Show me some', with the U
+prefix lessons first, then the other unleavened options they haven't cooked,
+with pictures and ask to cook for kids. Maybe it's a button that pressing
+links to side quests filtered and sorted."
+
+- **Before:** the plan (258) left open where the kitchen's paused notice
+  leads.
+- **Now:** the notice has a **Show me some** button. It opens Side quests
+  (More recipes in Chef's Passport) filtered to unleavened recipes: the U
+  lessons first, then the other unleavened lessons and recipes the profile
+  hasn't cooked, each with its picture and the usual ask to cook. The
+  filter's wording waits on the owner. Nothing is built yet: it comes with
+  phase 13.
+- No screens changed, so no screenshots.
+- Tests: 407.
