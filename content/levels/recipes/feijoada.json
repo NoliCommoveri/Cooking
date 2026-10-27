@@ -1,0 +1,89 @@
+{
+  "id": "feijoada",
+  "version": 1,
+  "track": "core",
+  "unit": 104,
+  "title": "Feijoada, beef only",
+  "image": "meals/meat.svg",
+  "cuisine": "brazilian",
+  "skill": "A bean stew for a crowd",
+  "skills": ["cooking-legumes", "one-pot-stews"],
+  "prereqs": [],
+  "servings": 10,
+  "totalMinutes": 210,
+  "scaling": {
+    "mode": "fixed",
+    "multipliers": [1],
+    "notes": { "1": "Fills one stockpot and feeds 10. Leftovers freeze well." }
+  },
+  "learn": {
+    "move": {
+      "title": "Black beans, three beefs, a slow pot",
+      "body": "Feijoada is Brazil's Saturday feast: black beans stewed for hours with meats, served with rice, garlicky greens, and orange slices. Brazilian cooks use many different meats; this version uses beef only: oxtail for body, chuck, and an all-beef sausage. You'll trim the fat, brown the meats, simmer them with the beans until everything is tender, and skim the fat before it's served to a crowd."
+    },
+    "why": [
+      { "id": "trim", "title": "Trim and skim the fat", "body": "The hard white fat on beef is set apart in the law (Leviticus 3:17). Trim the thick fat from the oxtail and chuck before cooking, and skim what renders off the top of the pot." },
+      { "id": "brown", "title": "Brown the meat", "body": "Browning in batches builds a dark crust and a fond in the pot, which flavors the beans." },
+      { "id": "oxtail", "title": "Oxtail for body", "body": "Oxtail's joints melt into gelatin over hours, thickening the stew. It's done when the meat pulls from the bone." },
+      { "id": "hold", "title": "Hold it hot", "body": "For a crowd, keep the pot at 140°F or above on low heat, or cool it fast and reheat to 165°F." }
+    ],
+    "wrong": [
+      { "sign": "There's a layer of fat on top", "fix": "Skim it off with a ladle, or chill the pot and lift off the set fat." },
+      { "sign": "The oxtail is tough", "fix": "It needs longer. Simmer 30 minutes more and test again." },
+      { "sign": "The beans are breaking down before the meat is tender", "fix": "Lift the meat out, cool the beans, and finish the meat alone, then combine." }
+    ],
+    "quiz": [
+      { "q": "Why trim and skim the beef fat?", "choices": ["The hard fat of beef is set apart in the law", "It's too salty", "It burns"], "answer": 0, "explain": "Leviticus 3:17." },
+      { "q": "When is the oxtail done?", "choices": ["The meat pulls from the bone", "After 30 minutes", "When it's brown"], "answer": 0, "explain": "Its gelatin thickens the stew." },
+      { "q": "How hot must a stew be held for a crowd?", "choices": ["140°F or above", "100°F", "Room temperature"], "answer": 0, "explain": "Or cool fast and reheat to 165°F." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "black-beans-dried", "amount": 1.5, "unit": "lb", "group": "Beans" },
+    { "ingredient": "water", "amount": 14, "unit": "cup", "group": "Beans" },
+    { "ingredient": "bay-leaves", "amount": 3, "unit": "count", "group": "Beans" },
+    { "ingredient": "beef-oxtail", "amount": 2.5, "unit": "lb", "group": "Meats" },
+    { "ingredient": "beef-chuck", "amount": 1.5, "unit": "lb", "prep": "in 1½-inch cubes", "group": "Meats" },
+    { "ingredient": "beef-kielbasa", "amount": 1, "unit": "lb", "prep": "in ½-inch coins", "group": "Meats" },
+    { "ingredient": "salt", "amount": 2, "unit": "tsp", "group": "Meats" },
+    { "ingredient": "black-pepper", "amount": 1, "unit": "tsp", "group": "Meats" },
+    { "ingredient": "vegetable-oil", "amount": 2, "unit": "tbsp", "group": "Stew" },
+    { "ingredient": "onion-yellow", "amount": 2, "unit": "count", "group": "Stew" },
+    { "ingredient": "garlic", "amount": 8, "unit": "count", "group": "Stew" },
+    { "ingredient": "rice-white", "amount": 3, "unit": "cup", "prep": "long-grain", "group": "To serve" },
+    { "ingredient": "water", "amount": 4.5, "unit": "cup", "prep": "for the rice", "group": "To serve" },
+    { "ingredient": "collard-greens", "amount": 2, "unit": "count", "group": "To serve" },
+    { "ingredient": "olive-oil", "amount": 2, "unit": "tbsp", "group": "To serve" },
+    { "ingredient": "orange", "amount": 3, "unit": "count", "group": "To serve" }
+  ],
+  "equipment": [
+    "plate",
+    "colander",
+    "mixing-bowl-large",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "stockpot",
+    "tongs",
+    "wooden-spoon",
+    "ladle",
+    "thermometer",
+    "saucepan-medium",
+    "skillet-12",
+    "measuring-cups",
+    "measuring-spoons"
+  ],
+  "steps": [
+    { "id": "soak", "text": "The night before, pick over and rinse the beans and soak them in cold water.", "safety": "solo", "look": "Doubled in size by morning." },
+    { "id": "trim", "text": "Trim the thick white fat from the oxtail and the chuck. Pat the meat dry and season it with the salt and pepper.", "safety": "solo", "hazard": "Raw beef, sharp knife", "handles": ["beef-oxtail", "beef-chuck"], "why": "trim" },
+    { "id": "wash", "text": "Wash the board, knife, and your hands.", "safety": "solo", "type": "wash", "hazard": "Raw beef" },
+    { "id": "brown", "text": "Brown the oxtail and chuck in the oil in the stockpot over medium-high heat, in batches, on all sides. Set them aside.", "safety": "solo", "hazard": "Hot oil, spatters", "handles": ["beef-oxtail", "beef-chuck"], "timerSeconds": 1200, "timerLabel": "Brown beef", "why": "brown" },
+    { "id": "wash-tongs", "text": "Wash the tongs and your hands.", "safety": "solo", "type": "wash", "hazard": "Raw beef" },
+    { "id": "aromatics", "text": "Brown the kielbasa in the same pot, then add the diced onions and minced garlic and cook until soft, scraping up the fond.", "safety": "solo", "hazard": "Hot pot", "timerSeconds": 480, "timerLabel": "Onions" },
+    { "id": "stew", "text": "Add the drained beans, the beans' water, the bay leaves, and the browned beef. Bring to a boil, skim, and simmer partly covered, stirring now and then.", "safety": "solo", "hazard": "Hot pot", "timerSeconds": 7200, "timerLabel": "Simmer", "why": "oxtail", "tip": "Add hot water if the beans poke above the liquid." },
+    { "id": "check", "text": "Check the chuck and the oxtail.", "safety": "solo", "type": "doneness", "hazard": "Hot pot", "target": { "temp": 195, "unit": "F" }, "tip": "Fork-tender meat reads about 195°F; the oxtail pulls from the bone." },
+    { "id": "skim", "text": "Turn off the heat, let it settle 10 minutes, and ladle off the fat from the surface. Mash a ladle of beans against the pot to thicken.", "safety": "solo", "hazard": "Hot liquid", "timerSeconds": 600, "timerLabel": "Settle", "why": "trim" },
+    { "id": "sides", "text": "While it settles, cook the rice by absorption, and slice the collards into thin ribbons and sauté them with olive oil and a little garlic until bright. Slice the oranges.", "safety": "solo", "hazard": "Hot pan, sharp knife" },
+    { "id": "serve", "text": "Serve the feijoada over rice with the greens and orange slices. Hold the pot at 140°F or above on low.", "safety": "solo", "why": "hold", "look": "Thick, dark, and glossy, no fat pooling on top." }
+  ]
+}

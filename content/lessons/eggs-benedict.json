@@ -98,5 +98,153 @@
     { "id": "check-eggs", "type": "doneness", "text": "Lift one egg out with the slotted spoon and slide the thermometer sideways into the thick part of the white. It needs to read at least 160°F. If it doesn't, slip it back in for 1 more minute and check again.", "safety": "adult-nearby", "hazard": "Hot water", "target": { "temp": 160, "unit": "F" } },
     { "id": "more-eggs", "text": "Lift the eggs out with the slotted spoon, let them drain for a second, and set them on a paper towel. Poach the rest of the eggs the same way, 4 at a time, checking one from each batch. Wash your hands after each round of cracking.", "safety": "adult-nearby", "hazard": "Hot water" },
     { "id": "build", "text": "Turn off the stove. On each plate, set 2 muffin halves, cut side up. Top each with a slice of turkey bacon, a poached egg, and a big spoonful of hollandaise. Sprinkle chives on top if you're using them.", "safety": "adult-nearby", "hazard": "Hot pot", "tip": "Stir the hollandaise before you spoon it. If it has thickened, whisk in a teaspoon of warm water." }
+  ],
+  "variations": [
+    {
+      "id": "sp-4",
+      "title": "Eggs Benedict",
+      "level": "sp-4",
+      "tags": {
+        "protein": "turkey",
+        "flavors": ["mild-buttery", "creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "totalMinutes": 60,
+      "learn": {
+        "move": {
+          "title": "Twelve eggs, one hollandaise, all hot at once",
+          "body": "Brunch for six is a timing problem: a hollandaise held warm and stable, twelve eggs poached in batches and held in 150°F water, turkey bacon and muffins ready together. You'll cook the pasteurized yolks to 160°F over simmering water, emulsify the butter in off the heat, and poach and hold the eggs so every plate goes out at once."
+        },
+        "why": {
+          "add": [
+            { "id": "hold", "title": "Hold poached eggs at 150°F", "body": "Poached eggs sit up to 20 minutes in 150°F water without cooking further, so batches can be finished ahead and plated together. A quick blot on a towel keeps the plate dry." }
+          ]
+        },
+        "quiz": [
+          { "q": "What temperature must the yolks reach for the hollandaise?", "choices": ["160°F", "120°F", "212°F"], "answer": 0, "explain": "Even pasteurized yolks are cooked to 160°F here." },
+          { "q": "How do you serve 12 poached eggs together?", "choices": ["Poach in batches and hold them in 150°F water", "Poach all 12 at once", "Keep them on a cold plate"], "answer": 0, "explain": "They wait without cooking further." },
+          { "q": "Your hollandaise looks oily. What do you do?", "choices": ["Stop adding butter and whisk until smooth", "Add all the butter at once", "Turn the heat to high"], "answer": 0, "explain": "The yolks can only hold so much at a time." }
+        ]
+      },
+      "equipment": { "add": ["mixing-bowl-large"] },
+      "steps": {
+        "change": {
+          "juice": {
+            "id": "juice",
+            "text": "Cut the lemon in half. Squeeze the juice into the small bowl, using the fork to twist out the last of it. Pick out any seeds.",
+            "safety": "solo",
+            "hazard": "Sharp knife"
+          },
+          "melt-butter": {
+            "id": "melt-butter",
+            "text": "Put the butter for the hollandaise in the liquid measuring cup, cover it with a paper towel, and microwave it in short bursts until it's melted and hot.",
+            "safety": "solo",
+            "timerSeconds": 60,
+            "timerLabel": "Melt butter"
+          },
+          "water-bath": {
+            "id": "water-bath",
+            "text": "Pour about 2 inches of water into the saucepan and bring it to a gentle simmer over medium heat. Check that the bowl sits on top without touching the water.",
+            "safety": "solo",
+            "hazard": "Hot stove",
+            "why": "warm-bath"
+          },
+          "separate": {
+            "id": "separate",
+            "text": "Separate the {n:egg-pasteurized} pasteurized eggs, dropping the yolks into the heatproof bowl. Keep the whites for another day.",
+            "safety": "solo",
+            "handles": ["egg-pasteurized"]
+          },
+          "wash-yolks": {
+            "id": "wash-yolks",
+            "type": "wash",
+            "text": "Wash your hands with soap, and wipe the counter where the eggs were.",
+            "safety": "solo",
+            "hazard": "Raw egg"
+          },
+          "whisk-yolks": {
+            "id": "whisk-yolks",
+            "text": "Whisk the lemon juice and 1 tablespoon of water into the yolks. Set the bowl over the simmering water and whisk constantly until pale, thick, and doubled. Lift it off for a few seconds if the edges start to set.",
+            "safety": "solo",
+            "hazard": "Hot steam, hot bowl",
+            "timerSeconds": 180,
+            "timerLabel": "Whisk yolks",
+            "why": "warm-bath",
+            "look": "Pale yellow, thick, and the whisk leaves trails you can see for a second."
+          },
+          "check-yolks": {
+            "id": "check-yolks",
+            "type": "doneness",
+            "text": "Slide the thermometer into the thickened yolks. They should read at least 160°F. If they don't, whisk over the water 30 seconds more and check again.",
+            "safety": "solo",
+            "hazard": "Hot bowl",
+            "target": { "temp": 160, "unit": "F" }
+          },
+          "butter-in": {
+            "id": "butter-in",
+            "text": "Off the heat, with the bowl still on the pan, whisk in the hot butter in a thin stream, then the salt. If it looks oily, stop pouring and whisk until smooth. Hold it on the warm pan.",
+            "safety": "solo",
+            "hazard": "Hot bowl",
+            "why": "slow-butter",
+            "look": "Thick, smooth, and glossy, like soft pudding. No oil on top."
+          },
+          "bacon": {
+            "id": "bacon",
+            "text": "Lay the turkey bacon in the skillet in one layer and cook over medium heat, turning it with the tongs, until it's browned and a little crisp. Move it to a plate lined with a paper towel. Cook the rest the same way.",
+            "safety": "solo",
+            "hazard": "Hot pan, spatter",
+            "timerSeconds": 360,
+            "timerLabel": "Turkey bacon"
+          },
+          "poach-water": {
+            "id": "poach-water",
+            "text": "Fill the large pot with about 3 inches of water, add the vinegar, and bring it to a boil, then down until just a few small bubbles rise. Fill the large bowl with 150°F water for holding.",
+            "safety": "solo",
+            "hazard": "Hot water",
+            "why": "gentle-water"
+          },
+          "crack": {
+            "id": "crack",
+            "text": "Crack 4 of the regular eggs, each into its own cup or small bowl.",
+            "safety": "solo",
+            "handles": ["egg"]
+          },
+          "poach": {
+            "id": "poach",
+            "text": "Hold each cup at the surface and tip the egg in. Poach until the whites are fully set.",
+            "safety": "solo",
+            "hazard": "Hot water",
+            "timerSeconds": 240,
+            "timerLabel": "Poach eggs",
+            "why": "vinegar",
+            "look": "The whites are firm and white all over, with no clear parts. The yolk jiggles a little."
+          },
+          "check-eggs": {
+            "id": "check-eggs",
+            "type": "doneness",
+            "text": "Lift one egg out with the slotted spoon and slide the thermometer sideways into the thick part of the white. It needs to read at least 160°F. If it doesn't, slip it back in for 1 more minute and check again.",
+            "safety": "solo",
+            "hazard": "Hot water",
+            "target": { "temp": 160, "unit": "F" }
+          },
+          "more-eggs": {
+            "id": "more-eggs",
+            "text": "Lift the eggs into the bowl of 150°F water to hold. Poach the remaining eggs in batches of 4, checking one from each batch and washing your hands after each round of cracking.",
+            "safety": "solo",
+            "hazard": "Hot water",
+            "why": "hold"
+          },
+          "build": {
+            "id": "build",
+            "text": "Blot each egg on a paper towel. On each plate, set 2 muffin halves, then the turkey bacon, an egg, and a spoonful of hollandaise. Finish with chives.",
+            "safety": "solo",
+            "hazard": "Hot pot"
+          }
+        }
+      }
+    }
   ]
 }

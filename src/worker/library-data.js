@@ -6596,6 +6596,122 @@ export const LIBRARY = {
     "turkey bacon or smoked salmon",
     "butter",
     "lemon"
+   ],
+   "variations": [
+    {
+     "title": "Eggs Benedict",
+     "image": "img/dishes/eggs-benedict.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, poach the eggs in three or four batches, and keep the finished ones in a bowl of warm water while you cook the rest."
+       }
+      ]
+     },
+     "totalMinutes": 60,
+     "ingredients": [
+      {
+       "ingredient": "egg-pasteurized"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "turkey-strips"
+      },
+      {
+       "ingredient": "english-muffin"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "vinegar-white"
+      },
+      {
+       "ingredient": "chives",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "turkey-strips",
+       "use": "salmon-smoked",
+       "reason": "meat"
+      },
+      {
+       "for": "english-muffin",
+       "use": "bread-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": false,
+     "protein": "other",
+     "tags": {
+      "protein": "turkey",
+      "flavors": [
+       "mild-buttery",
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "lemon-lime"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "saucepan-medium",
+      "heatproof-bowl",
+      "whisk",
+      "small-bowl",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "microwave",
+      "fork",
+      "skillet-12",
+      "tongs",
+      "paper-towels",
+      "plate",
+      "pot-large",
+      "slotted-spoon",
+      "toaster",
+      "oven-mitts",
+      "chef-knife",
+      "cutting-board",
+      "thermometer",
+      "mixing-bowl-large"
+     ],
+     "skills": [
+      "poaching-eggs",
+      "emulsions"
+     ],
+     "method": "stove",
+     "about": "Poached eggs on toasted English muffins with turkey bacon or smoked salmon, under a buttery hollandaise sauce.",
+     "main": [
+      "eggs",
+      "English muffins",
+      "turkey bacon or smoked salmon",
+      "butter",
+      "lemon"
+     ],
+     "id": "sp-4",
+     "level": "sp-4"
+    }
    ]
   },
   {
@@ -20447,6 +20563,117 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "black-bean-soup",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Puréed black bean soup",
+   "image": "img/meals/soup.svg",
+   "cuisine": "cuban",
+   "skill": "A costed bean soup for 8",
+   "servings": 8,
+   "scaling": {
+    "mode": "free",
+    "max": 16,
+    "notes": [
+     {
+      "from": 9,
+      "text": "Cook in the stockpot; the beans may need 15 minutes more."
+     }
+    ]
+   },
+   "totalMinutes": 150,
+   "ingredients": [
+    {
+     "ingredient": "black-beans-dried"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "bell-pepper-green"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "vinegar-red-wine"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "sour-cream",
+     "optional": true
+    },
+    {
+     "ingredient": "onion-red",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "bell-peppers",
+     "garlic"
+    ],
+    "optional": [
+     "sour-cream-yogurt"
+    ]
+   },
+   "tools": [
+    "plate",
+    "colander",
+    "stockpot",
+    "skillet-12",
+    "wooden-spoon",
+    "chef-knife",
+    "cutting-board",
+    "immersion-blender",
+    "measuring-cups",
+    "measuring-spoons",
+    "ladle",
+    "spoon"
+   ],
+   "skills": [
+    "cooking-legumes",
+    "building-soup"
+   ],
+   "method": "stove",
+   "about": "Dried black beans cooked with sofrito and cumin, puréed smooth, for 8, with the cost per serving worked out.",
+   "main": [
+    "dried black beans",
+    "onion",
+    "bell pepper",
+    "cumin",
+    "garlic"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "bo-luc-lac",
    "version": 1,
    "track": "core",
@@ -21048,6 +21275,98 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "cilbir",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Çılbır",
+   "image": "img/meals/side.svg",
+   "cuisine": "turkish",
+   "skill": "Poaching eggs for a crowd",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 5,
+      "text": "Poach in batches of 4 and hold them in warm water."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "yogurt-greek"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "egg-pasteurized"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "vinegar-white"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "aleppo-pepper"
+    },
+    {
+     "ingredient": "dill"
+    },
+    {
+     "ingredient": "baguette"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "sour-cream-yogurt",
+     "garlic"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "pot-large",
+    "saucepan-medium",
+    "thermometer",
+    "slotted-spoon",
+    "small-bowl",
+    "mixing-bowl-large",
+    "spoon",
+    "chef-knife",
+    "cutting-board",
+    "bread-knife",
+    "paper-towels"
+   ],
+   "skills": [
+    "poaching-eggs"
+   ],
+   "method": "stove",
+   "about": "Turkish poached eggs on garlic yogurt, with Aleppo pepper butter and dill, and toasted bread.",
+   "main": [
+    "eggs",
+    "yogurt",
+    "garlic",
+    "butter",
+    "Aleppo pepper"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "duck-breast-cherry",
    "version": 1,
    "track": "core",
@@ -21260,6 +21579,120 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "feijoada",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Feijoada, beef only",
+   "image": "img/meals/meat.svg",
+   "cuisine": "brazilian",
+   "skill": "A bean stew for a crowd",
+   "servings": 10,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Fills one stockpot and feeds 10. Leftovers freeze well."
+    }
+   },
+   "totalMinutes": 210,
+   "ingredients": [
+    {
+     "ingredient": "black-beans-dried"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "beef-oxtail"
+    },
+    {
+     "ingredient": "beef-chuck"
+    },
+    {
+     "ingredient": "beef-kielbasa"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "collard-greens"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "orange"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "plate",
+    "colander",
+    "mixing-bowl-large",
+    "chef-knife",
+    "cutting-board",
+    "paper-towels",
+    "stockpot",
+    "tongs",
+    "wooden-spoon",
+    "ladle",
+    "thermometer",
+    "saucepan-medium",
+    "skillet-12",
+    "measuring-cups",
+    "measuring-spoons"
+   ],
+   "skills": [
+    "cooking-legumes",
+    "one-pot-stews"
+   ],
+   "method": "stove",
+   "about": "Brazilian black bean stew made with beef only: oxtail, chuck, and all-beef sausage, the fat trimmed and skimmed, with rice, greens, and orange.",
+   "main": [
+    "dried black beans",
+    "oxtail",
+    "beef chuck",
+    "beef sausage",
+    "collard greens"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "flank-steak",
    "version": 1,
    "track": "core",
@@ -21360,6 +21793,219 @@ export const LIBRARY = {
     "garlic",
     "olive oil",
     "lemon"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "french-onion-soup",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "French onion soup",
+   "image": "img/meals/soup.svg",
+   "cuisine": "french",
+   "skill": "Reducing a stock by half",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Six ovenproof crocks or bowls on a sheet pan."
+    }
+   },
+   "totalMinutes": 150,
+   "ingredients": [
+    {
+     "ingredient": "broth-beef"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "baguette"
+    },
+    {
+     "ingredient": "gruyere"
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "saucepan-medium",
+    "liquid-measuring-cup",
+    "pot-large",
+    "wooden-spoon",
+    "chef-knife",
+    "cutting-board",
+    "bread-knife",
+    "sheet-pan",
+    "oven-mitts",
+    "ladle",
+    "measuring-cups",
+    "measuring-spoons"
+   ],
+   "skills": [
+    "reducing",
+    "building-soup"
+   ],
+   "method": "stove-oven",
+   "about": "Onions caramelized slowly, simmered in a beef stock reduced by half, and topped with toast and broiled cheese.",
+   "main": [
+    "onions",
+    "beef stock",
+    "butter",
+    "baguette",
+    "Gruyère"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "goan-fish-curry",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Goan fish curry",
+   "image": "img/meals/fish.svg",
+   "cuisine": "indian",
+   "skill": "Poaching fish in a curry",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "rice-basmati"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "coriander-seed"
+    },
+    {
+     "ingredient": "cumin-seed"
+    },
+    {
+     "ingredient": "peppercorns-black"
+    },
+    {
+     "ingredient": "chiles-dried-red"
+    },
+    {
+     "ingredient": "turmeric-ground"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "coconut-milk"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "jalapeno"
+    },
+    {
+     "ingredient": "coconut-milk"
+    },
+    {
+     "ingredient": "tamarind-paste"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cod"
+    },
+    {
+     "ingredient": "cilantro"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "garlic",
+     "ginger",
+     "onions",
+     "hot-peppers",
+     "cilantro"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "colander",
+    "saucepan-medium",
+    "skillet-12",
+    "wooden-spoon",
+    "blender",
+    "chef-knife",
+    "cutting-board",
+    "can-opener",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "paper-towels",
+    "thermometer",
+    "fork",
+    "spoon"
+   ],
+   "skills": [
+    "cooking-fish",
+    "blooming-spices"
+   ],
+   "method": "stove",
+   "about": "White fish poached in a coconut and tamarind curry with a spice paste ground at home, with rice.",
+   "main": [
+    "firm white fish",
+    "coconut milk",
+    "tamarind",
+    "dried red chiles",
+    "coriander and cumin"
    ],
    "level": "sp-4"
   },
@@ -21754,6 +22400,103 @@ export const LIBRARY = {
    "level": "sp-4"
   },
   {
+   "id": "mushroom-risotto",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Mushroom risotto",
+   "image": "img/meals/side.svg",
+   "cuisine": "italian",
+   "skill": "A stirred grain",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "broth-vegetable"
+    },
+    {
+     "ingredient": "mushrooms"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "thyme-dried"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "rice-arborio"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "parmesan"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "garlic",
+     "lemon-lime",
+     "sharp-cheese"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "saucepan-medium",
+    "ladle",
+    "pot-large",
+    "wooden-spoon",
+    "skillet-12",
+    "chef-knife",
+    "cutting-board",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "box-grater",
+    "plate"
+   ],
+   "skills": [
+    "cooking-grains"
+   ],
+   "method": "stove",
+   "about": "Arborio rice toasted and stirred with hot broth until creamy, with mushrooms and parmesan.",
+   "main": [
+    "arborio rice",
+    "mushrooms",
+    "broth",
+    "parmesan",
+    "butter"
+   ],
+   "level": "sp-4"
+  },
+  {
    "id": "pescado-veracruzana",
    "version": 1,
    "track": "core",
@@ -21868,6 +22611,252 @@ export const LIBRARY = {
     "green olives",
     "capers",
     "pickled jalapeños"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "pho-bo",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Phở bò",
+   "image": "img/meals/soup.svg",
+   "cuisine": "vietnamese",
+   "skill": "A long-simmered stock with charred aromatics",
+   "servings": 8,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Fills one stockpot: about 4 quarts of broth, 8 bowls."
+    }
+   },
+   "totalMinutes": 270,
+   "ingredients": [
+    {
+     "ingredient": "beef-bones"
+    },
+    {
+     "ingredient": "beef-brisket"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "ginger-fresh"
+    },
+    {
+     "ingredient": "star-anise"
+    },
+    {
+     "ingredient": "cinnamon-stick"
+    },
+    {
+     "ingredient": "cloves-whole"
+    },
+    {
+     "ingredient": "coriander-seed"
+    },
+    {
+     "ingredient": "fish-sauce"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "rice-noodles-pho"
+    },
+    {
+     "ingredient": "bean-sprouts"
+    },
+    {
+     "ingredient": "basil"
+    },
+    {
+     "ingredient": "cilantro"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "jalapeno"
+    },
+    {
+     "ingredient": "hoisin-sauce",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "beef",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "ginger",
+     "cilantro",
+     "lemon-lime",
+     "hot-peppers"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "stockpot",
+    "colander",
+    "tongs",
+    "sheet-pan",
+    "oven-mitts",
+    "skillet-nonstick-8",
+    "ladle",
+    "chef-knife",
+    "cutting-board",
+    "pot-large",
+    "thermometer",
+    "mixing-bowl-large",
+    "plate",
+    "spoon"
+   ],
+   "skills": [
+    "making-stock",
+    "reducing"
+   ],
+   "method": "stove",
+   "about": "Vietnamese beef noodle soup from bones simmered with charred onion, ginger, and spices, the fat skimmed off.",
+   "main": [
+    "beef bones",
+    "rice noodles",
+    "onion and ginger",
+    "star anise and cinnamon",
+    "fish sauce"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "poached-salmon-dill",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Poached salmon with dill sauce",
+   "image": "img/meals/fish.svg",
+   "cuisine": "american",
+   "skill": "Poaching at a held temperature",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 7,
+      "text": "Use a wider pan so the fillets stay in one layer; the court-bouillon takes 5 minutes longer to reach temperature."
+     }
+    ]
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "onion-yellow"
+    },
+    {
+     "ingredient": "celery"
+    },
+    {
+     "ingredient": "carrot"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "bay-leaves"
+    },
+    {
+     "ingredient": "peppercorns-black"
+    },
+    {
+     "ingredient": "parsley"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "salmon-fillet"
+    },
+    {
+     "ingredient": "yogurt-greek"
+    },
+    {
+     "ingredient": "dill"
+    },
+    {
+     "ingredient": "lemon"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "salt"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "fish",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "celery",
+     "carrots",
+     "lemon-lime",
+     "sour-cream-yogurt",
+     "mustard",
+     "garlic"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "chef-knife",
+    "cutting-board",
+    "skillet-12",
+    "thermometer",
+    "box-grater",
+    "small-bowl",
+    "measuring-cups",
+    "measuring-spoons",
+    "spatula",
+    "slotted-spoon",
+    "paper-towels",
+    "plate"
+   ],
+   "skills": [
+    "cooking-fish",
+    "simmering"
+   ],
+   "method": "stove",
+   "about": "Salmon poached gently in a court-bouillon held at 170–180°F, with a dill and yogurt sauce.",
+   "main": [
+    "salmon fillets",
+    "lemon",
+    "dill",
+    "yogurt",
+    "onion and celery"
    ],
    "level": "sp-4"
   },
@@ -22341,6 +23330,92 @@ export const LIBRARY = {
     "onion",
     "lime",
     "tortillas"
+   ],
+   "level": "sp-4"
+  },
+  {
+   "id": "tahdig",
+   "version": 1,
+   "track": "core",
+   "unit": 104,
+   "title": "Chelow with tahdig",
+   "image": "img/meals/side.svg",
+   "cuisine": "persian",
+   "skill": "Steamed rice with a crisp bottom",
+   "servings": 8,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "One heavy 5-quart nonstick pot. The crust only forms evenly at this size."
+    }
+   },
+   "totalMinutes": 120,
+   "ingredients": [
+    {
+     "ingredient": "rice-basmati"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "saffron"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "yogurt-greek"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "sour-cream-yogurt"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "mixing-bowl-large",
+    "colander",
+    "stockpot",
+    "pot-large",
+    "small-bowl",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "spoon",
+    "kitchen-towel",
+    "oven-mitts",
+    "plate",
+    "wooden-spoon",
+    "spatula"
+   ],
+   "skills": [
+    "cooking-grains"
+   ],
+   "method": "stove",
+   "about": "Persian rice parboiled, then steamed over a buttered pot bottom until a golden crust forms, flipped onto a platter.",
+   "main": [
+    "basmati rice",
+    "butter",
+    "saffron",
+    "yogurt"
    ],
    "level": "sp-4"
   },
@@ -23628,6 +24703,94 @@ export const LIBRARY = {
   "rice-cooked-pouch-long": {
    "name": "Cooked long-grain or basmati rice (microwave pouch)",
    "contains": []
+  },
+  "tamarind-paste": {
+   "name": "Tamarind paste (concentrate)",
+   "contains": []
+  },
+  "chiles-dried-red": {
+   "name": "Dried red chiles (Kashmiri or chile de árbol)",
+   "contains": []
+  },
+  "coriander-seed": {
+   "name": "Whole coriander seeds",
+   "contains": []
+  },
+  "cumin-seed": {
+   "name": "Whole cumin seeds",
+   "contains": []
+  },
+  "aleppo-pepper": {
+   "name": "Aleppo pepper flakes",
+   "contains": []
+  },
+  "rice-arborio": {
+   "name": "Arborio rice",
+   "contains": []
+  },
+  "rice-basmati": {
+   "name": "Basmati rice",
+   "contains": []
+  },
+  "saffron": {
+   "name": "Saffron threads",
+   "contains": []
+  },
+  "black-beans-dried": {
+   "name": "Dried black beans",
+   "contains": []
+  },
+  "beef-oxtail": {
+   "name": "Beef oxtail, cut in pieces",
+   "contains": [
+    "meat"
+   ]
+  },
+  "beef-brisket": {
+   "name": "Beef brisket (flat cut)",
+   "contains": [
+    "meat"
+   ]
+  },
+  "beef-bones": {
+   "name": "Beef soup bones (knuckle or marrow bones)",
+   "contains": [
+    "meat"
+   ]
+  },
+  "collard-greens": {
+   "name": "Collard greens",
+   "contains": []
+  },
+  "gruyere": {
+   "name": "Gruyère or Swiss cheese, shredded",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "star-anise": {
+   "name": "Whole star anise",
+   "contains": []
+  },
+  "cinnamon-stick": {
+   "name": "Cinnamon sticks",
+   "contains": []
+  },
+  "cloves-whole": {
+   "name": "Whole cloves",
+   "contains": []
+  },
+  "rice-noodles-pho": {
+   "name": "Flat rice noodles for phở (bánh phở)",
+   "contains": []
+  },
+  "bean-sprouts": {
+   "name": "Bean sprouts",
+   "contains": []
+  },
+  "orange": {
+   "name": "Orange",
+   "contains": []
   }
  },
  "cuisines": {
@@ -23762,22 +24925,31 @@ export const LIBRARY = {
   "antipasto-platter": "D6a",
   "arepas": "D14b",
   "bibimbap": "D4b",
+  "black-bean-soup": "D19a",
   "bo-luc-lac": "D2b",
   "chicken-cacciatore": "D7a",
   "chicken-enchiladas": "D3a",
   "chicken-two-ways": "D10a",
   "chocolate-babka": "D11a",
+  "cilbir": "D17b",
   "duck-breast-cherry": "D8b",
   "ensaladilla-rusa": "D5b",
+  "feijoada": "D19b",
   "flank-steak": "D8a",
+  "french-onion-soup": "D20a",
+  "goan-fish-curry": "D16b",
   "jamaican-beef-patties": "D13b",
   "mezze-spread": "D6b",
   "milk-bread": "D11b",
+  "mushroom-risotto": "D18a",
   "pescado-veracruzana": "D9b",
+  "pho-bo": "D20b",
+  "poached-salmon-dill": "D16a",
   "salade-nicoise": "D4a",
   "spatchcocked-quail": "D10b",
   "spinach-feta-borekas": "D12b",
   "steak-fajitas": "D2a",
+  "tahdig": "D18b",
   "teriyaki-salmon-side": "D9a"
  },
  "dietTags": [
@@ -38994,15 +40166,143 @@ export const LIBRARY = {
      "cuisine": "indian",
      "drill": {
       "title": "Hold a poaching liquid at 170–180°F",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Holding a liquid in a narrow window is the skill behind poaching, custards, and sous vide. You'll hold a pan of water at 170–180°F for 15 minutes using only the burner and a thermometer. Use the court-bouillon pan from this week's recipe, or plain water."
+      ],
+      "steps": [
+       "Fill a wide skillet with 2 inches of water and set the thermometer in it.",
+       "Bring it to 180°F, then turn the burner down.",
+       "Check every minute for 15 minutes. Write each reading and every burner change.",
+       "At minute 8, drop in a cup of cold water to imitate adding cold fish. Time how long it takes to recover to 170°F.",
+       "Graph your readings over time. What burner setting held the window best?"
+      ],
+      "quiz": [
+       {
+        "q": "What did adding cold water do?",
+        "choices": [
+         "Dropped the temperature, which then recovered",
+         "Nothing",
+         "Made it boil"
+        ],
+        "answer": 0,
+        "explain": "So start a little high."
+       },
+       {
+        "q": "Why check every minute?",
+        "choices": [
+         "Small burner changes take a minute or two to show",
+         "It's required",
+         "To stir it"
+        ],
+        "answer": 0,
+        "explain": "Steady, small adjustments."
+       }
+      ]
      },
      "knowledge": {
       "title": "Poaching vs. simmering: the temperatures",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Boiling, simmering, and poaching are the same method at different temperatures, and each suits different food. Water boils at 212°F at sea level: big bubbles break hard across the surface. A simmer is about 185–205°F: small bubbles rise steadily and break gently. Poaching is 160–180°F: the surface barely moves, with only a few small bubbles on the bottom of the pan.",
+       "Delicate proteins need the lowest of these. Fish and eggs set between about 130°F and 160°F; held in 170–180°F liquid, the outside never races far ahead of the center, so the whole piece cooks evenly and stays moist. At a boil, the outer layer overcooks and squeezes out water and white albumin before the center is done, and the agitation breaks flakes apart.",
+       "Bubbles are a rough guide only; altitude, pan, and burner all change them. A thermometer in the liquid is the real control. Because adding cold food drops the temperature, start a few degrees high and adjust the burner as the liquid recovers. A wide pan holds a steady temperature better than a deep pot.",
+       "The liquid matters too. A court-bouillon (water with aromatics and acid) seasons fish from the outside; a curry or stock does the same with more body. Fat-rich liquids like coconut milk can split at a hard boil, another reason to keep poaching gentle.",
+       "This week's Explore dish is from Goa, on India's west coast, where fish curry and rice is the everyday meal. Goan cooking uses coconut in almost everything, sour tamarind or kokum to balance it, dried Kashmiri chiles for color more than heat, and a fresh masala ground for each dish."
+      ],
+      "steps": [
+       "Heat a pan of water and use the thermometer to find the burner settings that hold 212°F, 195°F, and 175°F. Write them down.",
+       "Describe the surface of the water at each temperature.",
+       "List three foods you'd cook at each of the three temperatures, and why."
+      ],
+      "quiz": [
+       {
+        "q": "What temperature range is poaching?",
+        "choices": [
+         "About 160–180°F",
+         "212°F",
+         "120–140°F"
+        ],
+        "answer": 0,
+        "explain": "The surface barely moves."
+       },
+       {
+        "q": "Why poach fish rather than boil it?",
+        "choices": [
+         "The outside doesn't overcook before the center",
+         "It's faster",
+         "It browns"
+        ],
+        "answer": 0,
+        "explain": "Even cooking, moist fish."
+       },
+       {
+        "q": "What's the real control for poaching temperature?",
+        "choices": [
+         "A thermometer in the liquid",
+         "The bubbles",
+         "The timer"
+        ],
+        "answer": 0,
+        "explain": "Bubbles vary by pan and altitude."
+       },
+       {
+        "q": "Why start the liquid a few degrees high?",
+        "choices": [
+         "Cold food drops the temperature",
+         "To kill bacteria",
+         "To reduce it"
+        ],
+        "answer": 0,
+        "explain": "Then adjust the burner."
+       },
+       {
+        "q": "What balances coconut in Goan curry?",
+        "choices": [
+         "Sour tamarind or kokum",
+         "Sugar",
+         "Cream"
+        ],
+        "answer": 0,
+        "explain": "Sour against rich."
+       }
+      ]
      },
      "sabbath": {
       "title": "Make a court-bouillon ahead",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "A court-bouillon takes 15 minutes to simmer, and that's most of the work in poaching fish. Made ahead and kept in the fridge, it turns poached fish into a 15-minute dinner.",
+       "Strain it, cool it quickly, and keep it covered in the fridge for up to 3 days or frozen for 3 months. Reheat it to 180°F before the fish goes in. Used once for fish, it's best thrown away: it carries the fish's proteins and spoils quickly."
+      ],
+      "steps": [
+       "Make a double court-bouillon: water, onion, celery, carrot, lemon, bay leaves, peppercorns, parsley stems, and salt, simmered 15 minutes.",
+       "Strain it, cool it in an ice bath, and pack it into containers. Label and date them.",
+       "Later in the week, reheat one to 180°F and poach fish or eggs in it.",
+       "Write down the time from fridge to table."
+      ],
+      "quiz": [
+       {
+        "q": "How long does court-bouillon keep in the fridge?",
+        "choices": [
+         "Up to 3 days",
+         "2 weeks",
+         "A day"
+        ],
+        "answer": 0,
+        "explain": "Or 3 months frozen."
+       },
+       {
+        "q": "Why not reuse it after poaching fish?",
+        "choices": [
+         "It carries the fish's proteins and spoils quickly",
+         "It's too salty",
+         "It loses its color"
+        ],
+        "answer": 0,
+        "explain": "Use it once."
+       }
+      ]
      }
     },
     {
@@ -39015,15 +40315,145 @@ export const LIBRARY = {
      "cuisine": "turkish",
      "drill": {
       "title": "Poach 8 eggs and hold them in warm water",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Restaurants poach eggs ahead and hold them, so a dozen plates go out at once. You'll poach 8 eggs in two batches and hold them in warm water. Use 8 of the eggs this week's recipe already buys."
+      ],
+      "steps": [
+       "Bring 3 inches of water with a splash of vinegar to 185°F in a wide pot. Fill a bowl with 150°F water for holding, and check it with the thermometer.",
+       "Crack each egg into a cup, then tip it into a slotted spoon for a few seconds to drain the loose white. Wash your hands after cracking.",
+       "Slide in 4 eggs, a few seconds apart, and note the order.",
+       "Lift each at about 3½ minutes, in the same order, when the white is fully set. Move it to the holding bowl.",
+       "Poach the second batch. Then, 15 minutes after the first egg went in, lift one from the holding water and check the yolk.",
+       "Write down which eggs looked best and what you'd change."
+      ],
+      "quiz": [
+       {
+        "q": "Why drain each egg in a slotted spoon?",
+        "choices": [
+         "The thin white drains off, so no wisps",
+         "It cools the egg",
+         "It seasons it"
+        ],
+        "answer": 0,
+        "explain": "The firm white holds."
+       },
+       {
+        "q": "How hot is the holding water?",
+        "choices": [
+         "About 150°F",
+         "185°F",
+         "Ice cold"
+        ],
+        "answer": 0,
+        "explain": "Warm, without cooking further."
+       }
+      ]
      },
      "knowledge": {
       "title": "Hollandaise and egg safety: 160°F or pasteurized eggs",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Hollandaise is an emulsion of egg yolk and butter, thickened by cooking the yolks gently over steam. Its risk is the yolk: raw or undercooked eggs can carry Salmonella, which is most dangerous for young children, older people, pregnant women, and anyone with a weak immune system.",
+       "Two things make it safe. Cook the yolks to 160°F, measured with a thermometer, which kills Salmonella. Or use pasteurized eggs, which are heated in the shell to a temperature that kills bacteria without cooking the egg. This app does both for hollandaise: pasteurized yolks, cooked to 160°F.",
+       "The yolks thicken between about 150°F and 170°F. Above that they scramble. Whisking over barely simmering water, and lifting the bowl off when the edges start to set, keeps them in the window. Lecithin in the yolk then holds the butter in tiny drops; add the butter too fast and the emulsion breaks into grease.",
+       "A broken hollandaise can be rescued: start a fresh yolk (or a tablespoon of warm water) in a clean bowl and whisk the broken sauce into it a little at a time. Hold the finished sauce warm, around 140°F, for up to an hour; too hot and it breaks, too cool and bacteria can grow.",
+       "Soft-poached eggs follow the same rule. For a guest who's young, pregnant, or unwell, use pasteurized eggs, or cook the yolk firm. This week's Explore dish, çılbır, uses pasteurized eggs so the yolks can stay soft.",
+       "This week's Explore dish is Turkish. Turkish breakfasts are long and shared: eggs cooked many ways, thick yogurt, white cheese, olives, tomatoes and cucumbers, bread, and red pepper flakes like Aleppo (pul biber) warmed in butter."
+      ],
+      "steps": [
+       "Read the carton of a brand of pasteurized eggs. How is the egg marked pasteurized?",
+       "Write the steps to rescue a broken hollandaise, in your own words.",
+       "List the people at your table who should have firm-cooked or pasteurized eggs."
+      ],
+      "quiz": [
+       {
+        "q": "What temperature makes egg yolks safe?",
+        "choices": [
+         "160°F",
+         "120°F",
+         "212°F"
+        ],
+        "answer": 0,
+        "explain": "Measured with a thermometer."
+       },
+       {
+        "q": "What are pasteurized eggs?",
+        "choices": [
+         "Heated in the shell to kill bacteria without cooking",
+         "Cooked eggs",
+         "Eggs without yolks"
+        ],
+        "answer": 0,
+        "explain": "Safe for soft yolks."
+       },
+       {
+        "q": "How do you rescue a broken hollandaise?",
+        "choices": [
+         "Whisk it slowly into a fresh yolk or warm water",
+         "Boil it",
+         "Add cold butter fast"
+        ],
+        "answer": 0,
+        "explain": "A little at a time."
+       },
+       {
+        "q": "What holds the butter in the sauce?",
+        "choices": [
+         "Lecithin in the yolk",
+         "Salt",
+         "Lemon"
+        ],
+        "answer": 0,
+        "explain": "It coats the drops of fat."
+       },
+       {
+        "q": "At what temperature is hollandaise held?",
+        "choices": [
+         "About 140°F",
+         "212°F",
+         "Room temperature"
+        ],
+        "answer": 0,
+        "explain": "Too hot breaks it."
+       }
+      ]
      },
      "sabbath": {
       "title": "Poach eggs ahead and reheat them for a crowd",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Poached eggs can be made a day ahead: poach them, plunge them into ice water, and keep them in the fridge in cold water. To serve, lower them into 150°F water for about 3 minutes, until warm through. It's how hotels serve eggs to a crowd.",
+       "Undercook them slightly the first time, since they warm through again. Keep them covered in the fridge and use them within 2 days."
+      ],
+      "steps": [
+       "Poach 6 eggs until the whites are just set, and lower them straight into ice water.",
+       "Keep them in a covered container of cold water in the fridge, labeled with the date.",
+       "Next morning, warm them in 150°F water for 3 minutes, blot them, and serve.",
+       "Compare one with a freshly poached egg and write down any difference."
+      ],
+      "quiz": [
+       {
+        "q": "How do you reheat a poached egg?",
+        "choices": [
+         "In 150°F water for about 3 minutes",
+         "In the microwave on high",
+         "In boiling water"
+        ],
+        "answer": 0,
+        "explain": "Gentle, so the yolk stays soft."
+       },
+       {
+        "q": "How long do poached eggs keep in the fridge?",
+        "choices": [
+         "Up to 2 days",
+         "A week",
+         "A month"
+        ],
+        "answer": 0,
+        "explain": "In cold water, covered."
+       }
+      ]
      }
     },
     {
@@ -39036,15 +40466,144 @@ export const LIBRARY = {
      "cuisine": "persian",
      "drill": {
       "title": "Toast and stir a risotto; cook rice for 12",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Two skills: the risotto stir, and rice for 12. Use the arborio and basmati this week's recipe already buys."
+      ],
+      "steps": [
+       "Make a small risotto: toast ½ cup of arborio in a tablespoon of butter, then add 2 cups of hot broth a ladle at a time, stirring, for 18 minutes. Taste a grain every 3 minutes from minute 12 and write down how the center changes.",
+       "Plan rice for 12 by the pasta method: 4 cups of basmati in 5 quarts of boiling salted water.",
+       "Cook it: boil until just tender, about 9 minutes, drain, and steam it in the covered pot off the heat for 10 minutes.",
+       "Weigh the cooked rice and work out the serving size for 12.",
+       "Cool what you won't eat in a thin layer and refrigerate it within an hour."
+      ],
+      "quiz": [
+       {
+        "q": "How is risotto liquid added?",
+        "choices": [
+         "Hot, a ladle at a time",
+         "Cold, all at once",
+         "Not at all"
+        ],
+        "answer": 0,
+        "explain": "And stirred until nearly absorbed."
+       },
+       {
+        "q": "Why the pasta method for 12?",
+        "choices": [
+         "It cooks evenly at any size",
+         "It's creamier",
+         "It needs less water"
+        ],
+        "answer": 0,
+        "explain": "No ratio to get wrong."
+       }
+      ]
      },
      "knowledge": {
       "title": "Starch: why risotto creams and tahdig crisps",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Rice starch comes in two kinds. Amylose is a straight molecule that sets firm as it cools; amylopectin is branched and makes things sticky and creamy. Long-grain rices like basmati are high in amylose, so they cook up separate and fluffy. Short and medium grains like arborio are high in amylopectin, so they turn creamy and clingy.",
+       "Risotto uses that creaminess on purpose. Arborio's soft outer layer releases amylopectin when the grains are stirred in a little liquid at a time, and that starch thickens the broth into a sauce. Its center stays firm because it's denser. That's why risotto is stirred and never rinsed.",
+       "Tahdig uses the opposite rice and the opposite trick. Basmati is rinsed and soaked to remove surface starch, then parboiled so each grain is separate. In the bottom of the pot, a layer of rice bound with yogurt and fat sits on hot metal: its starches and the yogurt's milk sugars brown and crisp into a golden crust, while the steam above keeps the rest fluffy.",
+       "Cooking rice for a crowd follows the same science. For absorption rice, use a wide pan so the layer stays shallow, or cook several pots; a deep pot cooks unevenly. Or use the pasta method, boiling in plenty of water and draining, which works at any size.",
+       "Cooked rice must cool quickly. Bacillus cereus spores survive cooking and grow in warm rice, making a toxin reheating won't destroy. Spread leftover rice thin and refrigerate it within an hour.",
+       "This week's Explore dish is Persian. Rice is the center of the Persian table: chelow (plain steamed rice) and polow (rice layered with herbs, fruit, or meat), crowned with tahdig and perfumed with saffron. A good tahdig is a point of pride for any Persian cook."
+      ],
+      "steps": [
+       "Cook ¼ cup of arborio and ¼ cup of basmati side by side with the same water. Compare their texture.",
+       "Explain in writing why risotto isn't rinsed and tahdig rice is.",
+       "Plan rice for 12: which method, which pans, and how much rice?"
+      ],
+      "quiz": [
+       {
+        "q": "Which starch makes rice creamy?",
+        "choices": [
+         "Amylopectin",
+         "Amylose",
+         "Fiber"
+        ],
+        "answer": 0,
+        "explain": "Arborio is rich in it."
+       },
+       {
+        "q": "Why is risotto stirred?",
+        "choices": [
+         "To release starch from the grain surface into the sauce",
+         "To cool it",
+         "To brown it"
+        ],
+        "answer": 0,
+        "explain": "That's the creaminess."
+       },
+       {
+        "q": "What forms tahdig's crust?",
+        "choices": [
+         "Rice, yogurt, and fat browning on hot metal",
+         "Burnt sugar",
+         "Flour"
+        ],
+        "answer": 0,
+        "explain": "Steam keeps the rest fluffy."
+       },
+       {
+        "q": "How soon should cooked rice be refrigerated?",
+        "choices": [
+         "Within an hour",
+         "Next day",
+         "Within 6 hours"
+        ],
+        "answer": 0,
+        "explain": "Bacillus cereus grows in warm rice."
+       },
+       {
+        "q": "Best way to cook rice for 12?",
+        "choices": [
+         "Several shallow pots, or the pasta method",
+         "One deep pot",
+         "A microwave"
+        ],
+        "answer": 0,
+        "explain": "Even cooking."
+       }
+      ]
      },
      "sabbath": {
       "title": "Cook grains ahead for a crowd",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Cooking grains ahead for a crowd saves the busiest hour of a big meal. Rice, farro, and bulgur reheat well if they're cooled fast and reheated with steam.",
+       "Spread cooked grains on sheet pans to cool, pack them into shallow containers, and refrigerate within an hour. They keep 4 days. Reheat in a covered baking dish at 350°F with a few tablespoons of water, or covered in the microwave, to 165°F."
+      ],
+      "steps": [
+       "Cook enough rice or another grain for 12, and cool it on sheet pans.",
+       "Pack it in shallow containers, label it, and refrigerate.",
+       "On the day, reheat it covered with a little water to 165°F.",
+       "Write down how much time it saved on the day of the meal."
+      ],
+      "quiz": [
+       {
+        "q": "How do you cool a big batch of grains fast?",
+        "choices": [
+         "Spread them on sheet pans",
+         "Leave the pot on the stove",
+         "Put the hot pot in the fridge"
+        ],
+        "answer": 0,
+        "explain": "Thin layers cool fast."
+       },
+       {
+        "q": "What temperature should reheated grains reach?",
+        "choices": [
+         "165°F",
+         "120°F",
+         "100°F"
+        ],
+        "answer": 0,
+        "explain": "Checked with a thermometer."
+       }
+      ]
      }
     },
     {
@@ -39057,15 +40616,151 @@ export const LIBRARY = {
      "cuisine": "brazilian",
      "drill": {
       "title": "Cost per serving from the receipt",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Work out exactly what this week's recipe cost per serving, from your own receipt."
+      ],
+      "steps": [
+       "Keep the receipt for this week's shopping.",
+       "For each ingredient in the recipe, write the package price and how much of the package the recipe used.",
+       "Multiply to get the cost of what you used. Pantry items (salt, spices, oil) count too: estimate from the jar's price and size.",
+       "Add them up and divide by the number of servings.",
+       "Compare with the price of a similar soup or stew bought ready-made, per serving."
+      ],
+      "quiz": [
+       {
+        "q": "How do you cost a teaspoon of cumin?",
+        "choices": [
+         "The jar's price divided by its teaspoons",
+         "It's free",
+         "The whole jar's price"
+        ],
+        "answer": 0,
+        "explain": "Pantry items count."
+       },
+       {
+        "q": "Why count only what the recipe used?",
+        "choices": [
+         "The rest of the package is still yours to use",
+         "It's simpler",
+         "To make it cheaper"
+        ],
+        "answer": 0,
+        "explain": "That's the true cost."
+       }
+      ]
      },
      "knowledge": {
       "title": "Unit pricing at the store",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Shelf prices can mislead. A big jar may cost more per ounce than a small one, and a sale price may still be higher than the store brand. The unit price, the price per ounce, pound, or count, printed in small type on the shelf tag, is how to compare.",
+       "Shelf tags don't always use the same unit for similar items (per ounce on one, per pound on another), so convert before comparing: 16 ounces to the pound. Also compare what you'll actually use. Cheap produce that spoils before it's eaten costs more than it looks.",
+       "Dried beans are the clearest example. A pound of dried black beans costs about what one 15-ounce can does, yet makes about 6 cups cooked, the same as three to four cans. The trade is time: soaking and simmering, which can be done ahead and frozen.",
+       "Cost per serving is the number that matters for planning: add up what the recipe used of each ingredient and divide by servings. A soup for 8 from dried beans, an onion, a pepper, garlic, and spices often comes to under a dollar a bowl.",
+       "This week's Explore dish is Brazilian. Feijoada is the national dish, a black bean stew served on Saturdays with rice, sautéed greens, orange, and toasted cassava flour. The traditional pot uses many cuts that this app leaves out; the beef-only version keeps the beans, the long simmer, and the sides."
+      ],
+      "steps": [
+       "At the store or online, find the unit price of black beans dried, canned, and in a large can.",
+       "Work out the cost of 6 cups of cooked beans each way.",
+       "Find one item where the bigger package costs more per ounce."
+      ],
+      "watch": [
+       {
+        "name": "Pork",
+        "hides": "The feet, ears, ribs, and sausages in traditional feijoada, and in canned or restaurant feijoada."
+       }
+      ],
+      "quiz": [
+       {
+        "q": "What does a unit price tell you?",
+        "choices": [
+         "The price per ounce, pound, or count",
+         "The sale price",
+         "The total price"
+        ],
+        "answer": 0,
+        "explain": "It's how to compare."
+       },
+       {
+        "q": "About how many cups of cooked beans from a pound of dried?",
+        "choices": [
+         "About 6",
+         "About 1",
+         "About 20"
+        ],
+        "answer": 0,
+        "explain": "Three to four cans' worth."
+       },
+       {
+        "q": "How do you find cost per serving?",
+        "choices": [
+         "Add up what the recipe used and divide by servings",
+         "Divide the receipt by 2",
+         "Count the cans"
+        ],
+        "answer": 0,
+        "explain": "Only what was used."
+       },
+       {
+        "q": "A tag says per pound, another per ounce. What do you do?",
+        "choices": [
+         "Convert: 16 ounces to the pound",
+         "Compare as they are",
+         "Pick the cheaper total"
+        ],
+        "answer": 0,
+        "explain": "Same units first."
+       },
+       {
+        "q": "When can a cheap item cost more?",
+        "choices": [
+         "When it spoils before it's eaten",
+         "When it's on sale",
+         "Never"
+        ],
+        "answer": 0,
+        "explain": "Waste counts."
+       }
+      ]
      },
      "sabbath": {
       "title": "Gleaning and generosity (Leviticus 19:9–10; Deuteronomy 24:19–22)",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "When Israel brought in its harvest, God commanded that some be left: \"When you reap the harvest of your land, you shall not reap your field right up to its edge, neither shall you gather the gleanings after your harvest. And you shall not strip your vineyard bare, neither shall you gather the fallen grapes of your vineyard. You shall leave them for the poor and for the sojourner: I am the LORD your God\" (Leviticus 19:9–10).",
+       "Deuteronomy repeats it with a reason: a forgotten sheaf, the olives left on the branch, and the last grapes were for \"the sojourner, the fatherless, and the widow,\" and Israel was to remember that they had been slaves in Egypt (Deuteronomy 24:19–22).",
+       "The poor weren't handed charity; they were given the right to work the edges of the field. Ruth gathered grain this way in Boaz's field, and he told his workers to leave extra for her (Ruth 2).",
+       "A costed pot of beans is the kitchen's version of a full field: cheap food in plenty, with room at the edges for someone else."
+      ],
+      "steps": [
+       "Read Leviticus 19:9–10, Deuteronomy 24:19–22, and Ruth 2.",
+       "Answer in writing: who were the gleanings for, and why does Deuteronomy say to remember Egypt?",
+       "Answer in writing: how did gleaning let people provide for themselves?",
+       "With your family, plan one way to share this week's food: an extra portion for a neighbor, or a donation to a food pantry."
+      ],
+      "quiz": [
+       {
+        "q": "Who were the gleanings left for?",
+        "choices": [
+         "The poor, the sojourner, the fatherless, and the widow",
+         "The landowner",
+         "The king"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 19:10; Deuteronomy 24:19."
+       },
+       {
+        "q": "Whose field did Ruth glean in?",
+        "choices": [
+         "Boaz's",
+         "Abraham's",
+         "Pharaoh's"
+        ],
+        "answer": 0,
+        "explain": "Ruth 2."
+       }
+      ]
      }
     },
     {
@@ -39080,15 +40775,148 @@ export const LIBRARY = {
      "ownRecipe": true,
      "drill": {
       "title": "Reduce a stock by half and taste the change",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Reduce a stock by half and taste what concentration does. Use the beef broth or stock this week's recipe already buys."
+      ],
+      "steps": [
+       "Measure 4 cups of unsalted stock into a wide skillet. Mark the level on a wooden spoon handle.",
+       "Simmer it uncovered, skimming any fat. Check the level every 5 minutes.",
+       "Pour off ¼ cup at the start, at three-quarters, and at half. Keep them in cups.",
+       "Taste all three warm, then chill them and compare how firmly they set.",
+       "Write down the time it took to reduce by half and what changed at each stage."
+      ],
+      "quiz": [
+       {
+        "q": "How do you know you've reduced by half?",
+        "choices": [
+         "Measure, or mark the level on a spoon",
+         "Guess by color",
+         "After 10 minutes"
+        ],
+        "answer": 0,
+        "explain": "Measure to be sure."
+       },
+       {
+        "q": "Why does the reduced stock set firmer when cold?",
+        "choices": [
+         "Its gelatin is concentrated",
+         "It has more salt",
+         "It's colder"
+        ],
+        "answer": 0,
+        "explain": "Less water, same gelatin."
+       }
+      ]
      },
      "knowledge": {
       "title": "Clear, puréed, and thickened soups; reduction",
-      "minutes": 45
+      "minutes": 45,
+      "body": [
+       "Soups fall into three families by how they get their body. Clear soups (consommé, phở, chicken noodle) are a strong stock with things in it; their quality is the stock's clarity and depth. Puréed soups (black bean, butternut, split pea) are thickened by the vegetables or legumes themselves. Thickened soups get body from a roux, cream, egg, or starch: corn chowder, cream of mushroom, Greek avgolemono.",
+       "Reduction is how a cook controls strength. Simmering uncovered drives off water, so flavor, gelatin, and salt all concentrate. A stock reduced by half has twice the flavor per spoonful, which is why it's reduced before salting. Reduced further, a stock becomes a glaze that sets firm when cold.",
+       "Reduce in a wide pan for speed; the rate depends on surface area, not depth. Keep it at a steady simmer rather than a hard boil, which can turn a meat stock cloudy and greasy. Mark the starting level on a spoon handle, or measure, so you know when you've reached half.",
+       "Beef stock brings one more job: fat. As it simmers, fat rises and collects on top. Ladle it off as you go, and chill the finished stock so the remaining fat sets in a layer you can lift off and throw away (Leviticus 3:17).",
+       "This week's Explore dish is Vietnamese. Phở began in northern Vietnam in the early 1900s and spread south and around the world. Its broth is the whole dish: bones simmered for hours with charred onion and ginger and whole spices, then seasoned with fish sauce, and eaten with herbs, lime, and chile at the table."
+      ],
+      "steps": [
+       "Reduce 2 cups of this week's stock by half in a wide skillet and time it.",
+       "Taste the stock before and after, unsalted, and describe the change.",
+       "Sort ten soups you know into clear, puréed, and thickened."
+      ],
+      "watch": [
+       {
+        "name": "Suet and beef tallow",
+        "hides": "The hard fat of cattle, which Leviticus 3:17 forbids. It rises on beef stock and sets on top when chilled; skim and lift it off."
+       }
+      ],
+      "quiz": [
+       {
+        "q": "Why reduce a stock before salting?",
+        "choices": [
+         "Salt concentrates as water evaporates",
+         "Salt stops the reduction",
+         "It browns faster"
+        ],
+        "answer": 0,
+        "explain": "Season at the end."
+       },
+       {
+        "q": "What speeds a reduction?",
+        "choices": [
+         "A wide pan",
+         "A deep pot",
+         "A lid"
+        ],
+        "answer": 0,
+        "explain": "Surface area."
+       },
+       {
+        "q": "What happens to the beef fat?",
+        "choices": [
+         "It's skimmed and chilled off, then thrown away",
+         "It's stirred back in",
+         "It's strained into the soup"
+        ],
+        "answer": 0,
+        "explain": "Leviticus 3:17."
+       },
+       {
+        "q": "Which family is phở?",
+        "choices": [
+         "Clear",
+         "Puréed",
+         "Thickened"
+        ],
+        "answer": 0,
+        "explain": "Its broth is the dish."
+       },
+       {
+        "q": "Why not reduce at a hard boil?",
+        "choices": [
+         "It can turn the stock cloudy and greasy",
+         "It's too slow",
+         "It burns the pan"
+        ],
+        "answer": 0,
+        "explain": "Keep a steady simmer."
+       }
+      ]
      },
      "sabbath": {
       "title": "Freeze stock and soup in portions",
-      "minutes": 30
+      "minutes": 30,
+      "body": [
+       "Stock and soup are among the best foods to freeze. A day spent on stock gives months of quick soups, sauces, and grains.",
+       "Cool it fast in an ice bath, lift off the fat once it's chilled, and freeze it in measured portions: 1-cup containers for sauces, quarts for soups, and ice cube trays for small amounts. Leave an inch of headspace. Label everything with what it is, how much, and the date. It keeps 3 to 6 months. Thaw in the fridge, and bring it to a full boil before using."
+      ],
+      "steps": [
+       "Freeze the extra stock or soup from this week in measured, labeled portions.",
+       "Freeze some reduced stock in an ice cube tray, then bag the cubes.",
+       "Write a list of meals you could make from what's in the freezer."
+      ],
+      "quiz": [
+       {
+        "q": "Why leave headspace in the container?",
+        "choices": [
+         "Liquid expands as it freezes",
+         "For the label",
+         "To add more later"
+        ],
+        "answer": 0,
+        "explain": "About an inch."
+       },
+       {
+        "q": "How should frozen stock be heated before use?",
+        "choices": [
+         "To a full boil",
+         "Just warm",
+         "Not at all"
+        ],
+        "answer": 0,
+        "explain": "Then use it."
+       }
+      ]
      }
     },
     {
@@ -39956,7 +41784,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-grains"
      ],
-     "minutes": 75,
+     "minutes": 60,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -39998,7 +41826,7 @@ export const LIBRARY = {
       "cooking-legumes",
       "building-soup"
      ],
-     "minutes": 120,
+     "minutes": 150,
      "tags": {
       "protein": "beans-lentils",
       "flavors": [
@@ -40019,7 +41847,7 @@ export const LIBRARY = {
       "cooking-legumes",
       "one-pot-stews"
      ],
-     "minutes": 180,
+     "minutes": 210,
      "tags": {
       "protein": "beef",
       "flavors": [
@@ -40062,7 +41890,7 @@ export const LIBRARY = {
       "making-stock",
       "reducing"
      ],
-     "minutes": 240,
+     "minutes": 270,
      "tags": {
       "protein": "beef",
       "flavors": [

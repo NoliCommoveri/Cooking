@@ -6574,3 +6574,47 @@ owner approves it there.
 - The content check finds no Level 2 writing warnings.
 - No screens changed, so no screenshots.
 - Tests: 402.
+
+## 250. 2026-10-27 — 14g content: Level 4 Unit 5
+
+Owner, 2026-10-27: Level 4 is the last of Unit 5's three Levels (248).
+Reviewed in [14g review: Level 4 Chef, Unit
+5](https://claude.ai/artifact/XbEPhqexrjJ1tWbb6uSAnF); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 4 Unit 5's ten dishes was written for Level 4.
+  Eggs Benedict had no Level 4 version; the other nine were unwritten Level
+  cards. All 15 part pages were blank.
+- **Now:**
+  - **Nine Level-only recipes** in `content/levels/recipes/`, unit 104:
+    Poached salmon with dill sauce (a court-bouillon held at 170–180°F), Goan
+    fish curry (a masala toasted and ground at home), Çılbır (pasteurized
+    eggs poached in batches and held at 150°F), Mushroom risotto, Chelow
+    with tahdig, Puréed black bean soup for 8 (costed from the receipt),
+    Feijoada, beef only (oxtail, chuck, and all-beef sausage, the fat
+    trimmed and skimmed), French onion soup (a stock reduced by half), and
+    Phở bò (blanched bones, charred aromatics, the fat skimmed, simmered
+    brisket only). Their cards' minutes are now the recipes' own, and
+    feijoada's card says beef chuck where it said dried or corned beef.
+  - **Eggs Benedict's Level 4 version:** the beginner tips dropped, the
+    hollandaise steps terser, and a 150°F holding bowl so 12 eggs go out
+    together.
+  - **All 15 part pages:** poaching temperatures, holding a poaching liquid,
+    court-bouillon ahead; hollandaise and egg safety, poaching and holding 8
+    eggs, poaching ahead for a crowd; rice starch, risotto and rice for 12,
+    grains ahead; unit pricing with a Watch for box, cost per serving,
+    gleaning (Leviticus 19:9–10; Deuteronomy 24:19–22); soup families and
+    reduction with a Watch for box, reducing a stock by half, freezing stock.
+    Each Knowledge page closes with the week's cuisine.
+  - **New ingredients (20):** tamarind paste, dried red chiles, whole
+    coriander and cumin seeds, Aleppo pepper, arborio and basmati rice,
+    saffron, dried black beans, beef oxtail, beef brisket, and beef soup
+    bones (each with a note to trim the fat), collard greens, Gruyère, star
+    anise, cinnamon sticks, whole cloves, flat rice noodles, bean sprouts,
+    and oranges.
+- **Missing pictures:** all nine Level-only recipes. Their prompts are
+  already in the Level dish pictures doc, on sheets 55, 56, and 57; until
+  those are made, the recipes show the meal-type drawings.
+- The content check finds no Level 4 writing warnings.
+- No screens changed, so no screenshots.
+- Tests: 402.

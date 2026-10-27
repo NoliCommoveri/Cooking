@@ -1,0 +1,95 @@
+{
+  "id": "pho-bo",
+  "version": 1,
+  "track": "core",
+  "unit": 104,
+  "title": "Phở bò",
+  "image": "meals/soup.svg",
+  "cuisine": "vietnamese",
+  "skill": "A long-simmered stock with charred aromatics",
+  "skills": ["making-stock", "reducing"],
+  "prereqs": [],
+  "servings": 8,
+  "totalMinutes": 270,
+  "scaling": {
+    "mode": "fixed",
+    "multipliers": [1],
+    "notes": { "1": "Fills one stockpot: about 4 quarts of broth, 8 bowls." }
+  },
+  "learn": {
+    "move": {
+      "title": "Blanch, char, simmer, skim",
+      "body": "Phở bò is a Vietnamese beef noodle soup whose broth takes hours: beef bones blanched clean, onion and ginger charred black, and whole spices toasted, all simmered gently with brisket until the broth is clear and fragrant. You'll skim it, season it with fish sauce, slice the brisket thin, and serve it over flat rice noodles with herbs at the table. The beef fat is skimmed and thrown out."
+    },
+    "why": [
+      { "id": "blanch", "title": "Blanch the bones", "body": "Bones boiled hard for 10 minutes release the gray proteins and blood that cloud a broth. Drain, scrub the pot, and start again with clean bones in fresh water." },
+      { "id": "char", "title": "Char the aromatics", "body": "Onion and ginger blackened over a flame or under the broiler turn sweet and smoky, and give the broth its color." },
+      { "id": "simmer", "title": "Bare simmer, skimmed", "body": "At a bare simmer the fat rises to the surface where you can ladle it off; a boil emulsifies it and clouds the broth. Beef fat is skimmed and discarded (Leviticus 3:17)." },
+      { "id": "season", "title": "Season at the end", "body": "Fish sauce, sugar, and salt go in after the broth has reduced, so you can taste and balance them." }
+    ],
+    "wrong": [
+      { "sign": "The broth is cloudy", "fix": "It boiled, or the bones weren't blanched. It still tastes good; strain it through a towel-lined colander." },
+      { "sign": "It tastes weak", "fix": "Reduce it uncovered 20 to 30 minutes more, then season again." },
+      { "sign": "The brisket is tough", "fix": "It needs longer. Return it to the broth and simmer 30 minutes more." }
+    ],
+    "quiz": [
+      { "q": "Why blanch the bones first?", "choices": ["To remove the proteins that cloud the broth", "To cook them through", "To add color"], "answer": 0, "explain": "Then start fresh." },
+      { "q": "Why char the onion and ginger?", "choices": ["Sweet, smoky flavor and color", "To peel them", "To sterilize them"], "answer": 0, "explain": "Black spots are good." },
+      { "q": "What happens to the beef fat?", "choices": ["It's skimmed off and thrown out", "It's stirred back in", "It's fried"], "answer": 0, "explain": "Leviticus 3:17." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "beef-bones", "amount": 4, "unit": "lb", "group": "Broth" },
+    { "ingredient": "beef-brisket", "amount": 1.5, "unit": "lb", "group": "Broth" },
+    { "ingredient": "water", "amount": 20, "unit": "cup", "prep": "for the broth", "group": "Broth" },
+    { "ingredient": "onion-yellow", "amount": 2, "unit": "count", "group": "Broth" },
+    { "ingredient": "ginger-fresh", "amount": 4, "unit": "tbsp", "prep": "a 4-inch piece", "group": "Broth" },
+    { "ingredient": "star-anise", "amount": 5, "unit": "count", "group": "Broth" },
+    { "ingredient": "cinnamon-stick", "amount": 1, "unit": "count", "group": "Broth" },
+    { "ingredient": "cloves-whole", "amount": 0.5, "unit": "tsp", "group": "Broth" },
+    { "ingredient": "coriander-seed", "amount": 1, "unit": "tbsp", "group": "Broth" },
+    { "ingredient": "fish-sauce", "amount": 0.25, "unit": "cup", "group": "Broth" },
+    { "ingredient": "sugar", "amount": 1, "unit": "tbsp", "group": "Broth" },
+    { "ingredient": "salt", "amount": 2, "unit": "tsp", "group": "Broth" },
+    { "ingredient": "rice-noodles-pho", "amount": 1, "unit": "lb", "group": "Bowls" },
+    { "ingredient": "bean-sprouts", "amount": 8, "unit": "oz", "group": "Bowls" },
+    { "ingredient": "basil", "amount": 1, "unit": "cup", "prep": "Thai basil if you can find it", "group": "Bowls" },
+    { "ingredient": "cilantro", "amount": 0.5, "unit": "cup", "group": "Bowls" },
+    { "ingredient": "green-onion", "amount": 4, "unit": "count", "group": "Bowls" },
+    { "ingredient": "lime", "amount": 2, "unit": "count", "group": "Bowls" },
+    { "ingredient": "jalapeno", "amount": 1, "unit": "count", "group": "Bowls" },
+    { "ingredient": "hoisin-sauce", "amount": 0.25, "unit": "cup", "optional": true, "group": "Bowls" }
+  ],
+  "equipment": [
+    "stockpot",
+    "colander",
+    "tongs",
+    "sheet-pan",
+    "oven-mitts",
+    "skillet-nonstick-8",
+    "ladle",
+    "chef-knife",
+    "cutting-board",
+    "pot-large",
+    "thermometer",
+    "mixing-bowl-large",
+    "plate",
+    "spoon"
+  ],
+  "steps": [
+    { "id": "blanch", "text": "Cover the bones with cold water in the stockpot, bring to a hard boil, and boil.", "safety": "solo", "hazard": "Raw beef, boiling water", "handles": ["beef-bones"], "timerSeconds": 600, "timerLabel": "Blanch bones", "why": "blanch" },
+    { "id": "wash", "text": "Wash your hands and the tongs.", "safety": "solo", "type": "wash", "hazard": "Raw beef" },
+    { "id": "rinse", "text": "Drain the bones in the colander, rinse them, and scrub the pot clean.", "safety": "solo", "hazard": "Boiling water, steam" },
+    { "id": "char", "text": "Heat the broiler. Halve the onions and ginger and broil them on the sheet pan, turning once, until blackened in spots.", "safety": "solo", "hazard": "Broiler", "timerSeconds": 900, "timerLabel": "Char", "why": "char" },
+    { "id": "toast", "text": "Toast the star anise, cinnamon, cloves, and coriander in the small dry skillet until fragrant.", "safety": "solo", "hazard": "Hot pan", "timerSeconds": 120, "timerLabel": "Toast spices" },
+    { "id": "simmer", "text": "Trim the fat cap from the brisket. Return the bones to the pot with the broth's water, the brisket, the charred aromatics, and the spices. Bring just to a simmer and skim.", "safety": "solo", "hazard": "Raw beef, hot pot", "handles": ["beef-brisket"] },
+    { "id": "wash-brisket", "text": "Wash your hands and the board.", "safety": "solo", "type": "wash", "hazard": "Raw beef" },
+    { "id": "long", "text": "Keep at a bare simmer, uncovered, skimming fat and foam every 20 minutes.", "safety": "solo", "hazard": "Hot pot", "timerSeconds": 5400, "timerLabel": "Simmer with brisket", "why": "simmer" },
+    { "id": "check", "text": "Lift out the brisket and check it.", "safety": "solo", "type": "doneness", "hazard": "Hot liquid", "target": { "temp": 195, "unit": "F" }, "tip": "It should be tender enough to slice thin; return it 30 minutes if not." },
+    { "id": "brisket", "text": "Wrap the brisket and chill it, so it slices thin. Keep simmering the bones.", "safety": "solo", "hazard": "Hot meat", "timerSeconds": 3600, "timerLabel": "Simmer bones" },
+    { "id": "strain", "text": "Strain the broth into the large pot. Let it settle and ladle off all the fat. Measure: about 4 quarts.", "safety": "solo", "hazard": "Hot liquid", "why": "simmer" },
+    { "id": "season", "text": "Bring it back to a simmer. Season with the fish sauce, sugar, and salt, tasting as you go.", "safety": "solo", "hazard": "Hot pot", "why": "season" },
+    { "id": "noodles", "text": "Soak or cook the noodles as the package says. Slice the brisket thin across the grain. Set out the herbs, sprouts, lime wedges, and sliced jalapeño.", "safety": "solo", "hazard": "Hot water, sharp knife" },
+    { "id": "serve", "text": "Divide the noodles and brisket among bowls and ladle the boiling broth over them. Serve with the herbs at the table.", "safety": "solo", "hazard": "Boiling broth", "look": "Clear, amber broth with no fat floating." }
+  ]
+}

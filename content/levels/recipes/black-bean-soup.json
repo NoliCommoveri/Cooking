@@ -1,0 +1,82 @@
+{
+  "id": "black-bean-soup",
+  "version": 1,
+  "track": "core",
+  "unit": 104,
+  "title": "Puréed black bean soup",
+  "image": "meals/soup.svg",
+  "cuisine": "cuban",
+  "skill": "A costed bean soup for 8",
+  "skills": ["cooking-legumes", "building-soup"],
+  "prereqs": [],
+  "servings": 8,
+  "totalMinutes": 150,
+  "scaling": {
+    "mode": "free",
+    "max": 16,
+    "notes": [{ "from": 9, "text": "Cook in the stockpot; the beans may need 15 minutes more." }]
+  },
+  "learn": {
+    "move": {
+      "title": "Eight bowls, costed",
+      "body": "Cuban black bean soup starts with dried beans and a sofrito of onion, green pepper, and garlic, and is puréed smooth with a splash of vinegar at the end. You'll cook a pound of dried beans for 8, build and season the soup, purée it, and work out exactly what each bowl cost from your receipt."
+    },
+    "why": [
+      { "id": "soak", "title": "Soak, or not", "body": "Black beans cook without soaking, but an overnight soak makes them cook faster and more evenly. Either way, pick them over and rinse." },
+      { "id": "sofrito", "title": "Sofrito into the beans", "body": "Sautéed onion, pepper, and garlic stirred into the half-cooked beans season them as they finish, rather than sitting on top." },
+      { "id": "vinegar", "title": "Vinegar at the end", "body": "A tablespoon or two of vinegar brightens a heavy bean soup. Add it last and taste; acid early slows beans from softening." },
+      { "id": "cost", "title": "Cost per serving", "body": "Divide each item's price by how much of it the recipe used, add them up, and divide by servings. Dried beans make this one of the cheapest meals you'll cook." }
+    ],
+    "wrong": [
+      { "sign": "The beans are still firm after 2 hours", "fix": "Old beans. Keep simmering, adding hot water, and test every 15 minutes." },
+      { "sign": "The purée is too thick", "fix": "Thin it with hot water or broth, ½ cup at a time." },
+      { "sign": "It tastes flat", "fix": "More salt first, then another splash of vinegar." }
+    ],
+    "quiz": [
+      { "q": "Why add the vinegar at the end?", "choices": ["Acid early slows the beans from softening", "It burns", "It thickens"], "answer": 0, "explain": "And it brightens the soup." },
+      { "q": "How do you find cost per serving?", "choices": ["Add up what the recipe used and divide by servings", "Divide the receipt by 2", "Count the beans"], "answer": 0, "explain": "Use the share of each package used." },
+      { "q": "Why pick over dried beans?", "choices": ["To find small stones or debris", "To sort by size", "To remove skins"], "answer": 0, "explain": "Every time." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "black-beans-dried", "amount": 1, "unit": "lb", "group": "Beans" },
+    { "ingredient": "water", "amount": 10, "unit": "cup", "group": "Beans" },
+    { "ingredient": "bay-leaves", "amount": 2, "unit": "count", "group": "Beans" },
+    { "ingredient": "olive-oil", "amount": 3, "unit": "tbsp", "group": "Sofrito" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "group": "Sofrito" },
+    { "ingredient": "bell-pepper-green", "amount": 1, "unit": "count", "group": "Sofrito" },
+    { "ingredient": "garlic", "amount": 5, "unit": "count", "group": "Sofrito" },
+    { "ingredient": "cumin-ground", "amount": 2, "unit": "tsp", "group": "Sofrito" },
+    { "ingredient": "oregano-dried", "amount": 1, "unit": "tsp", "group": "Sofrito" },
+    { "ingredient": "salt", "amount": 2, "unit": "tsp", "group": "To finish" },
+    { "ingredient": "vinegar-red-wine", "amount": 2, "unit": "tbsp", "group": "To finish" },
+    { "ingredient": "black-pepper", "amount": 0.5, "unit": "tsp", "group": "To finish" },
+    { "ingredient": "sour-cream", "amount": 0.5, "unit": "cup", "optional": true, "group": "To finish" },
+    { "ingredient": "onion-red", "amount": 0.5, "unit": "count", "prep": "finely diced", "optional": true, "group": "To finish" }
+  ],
+  "equipment": [
+    "plate",
+    "colander",
+    "stockpot",
+    "skillet-12",
+    "wooden-spoon",
+    "chef-knife",
+    "cutting-board",
+    "immersion-blender",
+    "measuring-cups",
+    "measuring-spoons",
+    "ladle",
+    "spoon"
+  ],
+  "steps": [
+    { "id": "pick", "text": "Spread the beans on the plate and pick out stones and shriveled beans. Rinse them. Soak overnight in cold water if you can, then drain.", "safety": "solo", "why": "soak" },
+    { "id": "simmer", "text": "Cover the beans with the water in the stockpot, add the bay leaves, bring to a boil, then simmer partly covered.", "safety": "solo", "hazard": "Hot pot", "timerSeconds": 3600, "timerLabel": "Simmer beans" },
+    { "id": "sofrito", "text": "Meanwhile, dice the onion and pepper ¼ inch and mince the garlic. Cook them in the oil over medium heat until soft and just golden. Add the cumin and oregano for 30 seconds.", "safety": "solo", "hazard": "Hot oil, sharp knife", "timerSeconds": 600, "timerLabel": "Sofrito", "why": "sofrito" },
+    { "id": "combine", "text": "Stir the sofrito and the salt into the beans and simmer until the beans are creamy throughout.", "safety": "solo", "hazard": "Hot pot", "timerSeconds": 1800, "timerLabel": "Finish beans" },
+    { "id": "check", "text": "Taste five beans.", "safety": "solo", "type": "doneness", "hazard": "Hot pot", "target": { "look": "Five beans in a row creamy all the way through" } },
+    { "id": "puree", "text": "Fish out the bay leaves. Purée with the immersion blender, leaving a little texture. Thin with hot water to a pourable soup.", "safety": "solo", "hazard": "Hot liquid, blender blade", "tip": "Keep the blade under the surface or it spatters." },
+    { "id": "season", "text": "Stir in the vinegar and pepper. Taste and correct the salt and acid.", "safety": "solo", "why": "vinegar" },
+    { "id": "cost", "text": "With your receipt, work out the cost of what you used of each ingredient, add them up, and divide by 8. Write it on the recipe.", "safety": "solo", "why": "cost" },
+    { "id": "serve", "text": "Serve with sour cream and diced red onion.", "safety": "solo", "look": "Smooth, dark, and glossy." }
+  ]
+}
