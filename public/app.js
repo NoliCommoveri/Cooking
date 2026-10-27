@@ -1001,6 +1001,7 @@ const PARENT_PAGES = [
   { key: 'gaps', group: 'owner', label: 'Recipe gaps', owner: true },
   { key: 'reviews', group: 'owner', label: 'Recipe reviews', owner: true },
   { key: 'reports', group: 'owner', label: 'Reported recipes', owner: true },
+  { key: 'testing', group: 'owner', label: 'Test families', owner: true },
 ];
 
 function parentMenu(current) {
@@ -2987,6 +2988,56 @@ const owner = parentOnly(async (flash) => {
     }));
 });
 
+// ---------- owner: Test families ----------
+
+// Pretend families made from a preset, each opened on this device to see the
+// app as that family would (src/worker/testfamilies.js).
+const testFamilies = parentOnly(async (flash) => {
+  if (!me.parent.is_owner) return go('#/parent');
+  const t = await api('GET', '/api/owner/test-families');
+  const again = (msg) => testFamilies(el('p', { class: 'ok flash', role: 'status' }, msg));
+  const open = async (fid) => {
+    await api('POST', `/api/owner/test-families/${fid}/open`);
+    reloadAt('#/');
+  };
+  const add = () => {
+    const opts = el('div', {},
+      el('label', { class: 'f' }, 'Program', el('select', { name: 'program' }, Object.entries(t.programs).map(([v, n]) => el('option', { value: v }, n)))),
+      field('Weeks in', 'weeks', { type: 'number', min: 0, max: t.weeks_max, value: 4, inputmode: 'numeric' }, 'Weeks already cooked. 0 starts this week.'),
+      el('label', { class: 'f' }, 'Mode', el('select', { name: 'mode' }, el('option', { value: 'casual' }, 'Casual'), el('option', { value: 'homeschool' }, 'Homeschool'))));
+    const preview = el('label', { class: 'choice' }, el('input', { type: 'checkbox', name: 'preview', value: '1' }), el('span', {}, 'See the next release (a Level always does)'));
+    const preset = el('select', { name: 'preset', onchange: () => { opts.hidden = preset.value === 'new'; } },
+      Object.entries(t.presets).map(([v, n]) => el('option', { value: v }, n)));
+    opts.hidden = true;
+    let close = () => {};
+    const f = form([
+      el('label', { class: 'f' }, 'Who', preset, el('span', { class: 'hint' }, "New family opens on Chef Ruth's Getting started. The others are set up, with a course and its cooks so far.")),
+      opts, preview,
+    ], 'Make it', async (v) => {
+      const res = await api('POST', '/api/owner/test-families', { preset: v.preset, program: v.program, weeks: Number(v.weeks), mode: v.mode, preview: Boolean(v.preview) });
+      close();
+      if (confirm('Made it. Open it now?')) return open(res.id);
+      again('Test family made.');
+    }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')] });
+    close = modal('Make a test family', f);
+  };
+
+  parentScreen('testing',
+    flash ?? null,
+    el('p', { class: 'mut' }, `Open one to use the app as that family would, on this device. Its parent PIN is ${t.pin}. Back to my account, on the strip along the top, brings you back here.`),
+    addHead('', 'Make a test family', add),
+    el('div', { class: 'card' }, t.families.length ? el('div', { class: 'rows' }, t.families.map((x) => el('div', { class: 'rowi' },
+      el('div', {}, el('b', {}, x.label), el('small', {}, `${x.name || 'Not named yet'} · ${x.profiles} profile${x.profiles === 1 ? '' : 's'} · made ${new Date(x.created_at).toLocaleDateString()}`)),
+      el('div', { class: 'acts' },
+        actBtn('Open', 'pri', () => open(x.id)),
+        actBtn('Remove', 'bad', async () => {
+          if (!confirm(`Remove "${x.label}"? It can be brought back from /ops for 30 days.`)) return;
+          await api('DELETE', `/api/owner/test-families/${x.id}`);
+          again(`Removed "${x.label}".`);
+        })))))
+      : el('p', { class: 'mut', style: 'margin:0' }, 'No test families yet.')));
+});
+
 // ---------- owner: Recipe gaps (§6.21, 11e) ----------
 
 // Which pick-one groups leave families with nothing that fits, or only a poor
@@ -3516,7 +3567,36 @@ async function recipeFlow({ existing, draftKey, cancel, check, save, done, frame
 
 async function refresh() {
   me = await api('GET', '/api/me');
+  testBar();
 }
+
+// A test family the owner opened (Owner → Test families): a strip above every
+// screen says so, with its PIN and the way back.
+const testStrip = el('div', { class: 'testbar', role: 'note', hidden: true });
+document.body.prepend(testStrip);
+function testBar() {
+  const t = me?.testing;
+  testStrip.hidden = !t;
+  document.documentElement.classList.toggle('testing', Boolean(t));
+  if (!t) return testStrip.replaceChildren();
+  testStrip.replaceChildren(
+    el('span', {}, el('b', {}, 'Test family: '), t.label, ` · PIN ${t.pin}`),
+    el('button', { type: 'button', class: 'hbtn', onclick: async () => {
+      await api('POST', '/api/test-family/leave');
+      reloadAt('#/parent/testing');
+    } }, 'Back to my account'));
+  fitTestBar();
+}
+// Switching families starts the page again, so nothing of the last one
+// (Chef Ruth's chat, a dialog, the open kitchen) stays on screen.
+function reloadAt(hash) {
+  store('cpr.profile', null);
+  location.hash = hash;
+  location.reload();
+}
+const fitTestBar = () => document.documentElement.style.setProperty('--tb', `${testStrip.offsetHeight}px`);
+// The strip wraps on a phone, and again once its font loads.
+new ResizeObserver(fitTestBar).observe(testStrip);
 
 // Whether the last screen was a parent screen: leaving them locks the PIN on
 // its own (owner, 2026-10-23), so a kid can't walk back in. It starts true, so
@@ -3586,6 +3666,7 @@ async function route() {
       if (sub === 'owner') return await owner();
       if (sub === 'fixes') return await ownerFixes();
       if (sub === 'gaps') return await recipeGaps();
+      if (sub === 'testing') return await testFamilies();
       if (sub === 'profiles') return await parentProfiles();
       return await parentQueue();
     }

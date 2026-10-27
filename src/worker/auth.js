@@ -14,6 +14,9 @@ export const KID_COOKIE = 'cpr_kid';
 // A kid login lasts 14 days, renewed each time the app is opened (owner,
 // 2026-10-23), so a device left unused logs itself out.
 export const KID_SESSION_DAYS = 14;
+// The owner's own session while the owner looks around a test family
+// (testfamilies.js): Back to my account puts it back.
+export const RETURN_COOKIE = 'cpr_return';
 const KID_SESSION_SECONDS = KID_SESSION_DAYS * 24 * 60 * 60;
 // Browsers cap a cookie's life at 400 days, so kitchen devices stay logged in.
 const SESSION_SECONDS = 400 * 24 * 60 * 60;
@@ -42,14 +45,38 @@ export async function startKidSession(env, login, request) {
   return [setCookie(KID_COOKIE, token, KID_SESSION_SECONDS), clearCookie(SESSION_COOKIE)];
 }
 
+// The owner opens a test family on this device: a session as its parent,
+// with the PIN unlocked, and the owner's own session kept aside for Back to
+// my account.
+export async function startTestSession(env, parent, request) {
+  const [cookie] = await startSession(env, parent);
+  const token = cookie.slice(SESSION_COOKIE.length + 1).split(';')[0];
+  await env.DB.prepare('UPDATE sessions SET pin_until = ? WHERE id = ?')
+    .bind(new Date(Date.now() + PIN_MINUTES * 60 * 1000).toISOString(), await sha256Hex(token)).run();
+  return [cookie, setCookie(RETURN_COOKIE, readCookie(request, SESSION_COOKIE), SESSION_SECONDS)];
+}
+
+// Back to my account: the test family's session ends and the owner's comes
+// back. An owner session that has ended since (a new password) signs out.
+export async function endTestSession(env, request) {
+  await dropToken(env, 'sessions', readCookie(request, SESSION_COOKIE));
+  const back = readCookie(request, RETURN_COOKIE);
+  const ok = back && /^[0-9a-f]{64}$/.test(back) && await env.DB.prepare(
+    'SELECT 1 FROM sessions s JOIN parents p ON p.id = s.parent_id WHERE s.id = ? AND p.is_owner = 1',
+  ).bind(await sha256Hex(back)).first();
+  return [ok ? setCookie(SESSION_COOKIE, back, SESSION_SECONDS) : clearCookie(SESSION_COOKIE), clearCookie(RETURN_COOKIE)];
+}
+
 async function dropToken(env, table, token) {
   if (token) await env.DB.prepare(`DELETE FROM ${table} WHERE id = ?`).bind(await sha256Hex(token)).run();
 }
 
+// Signing out of a test family signs the owner out too.
 export async function endSession(env, request) {
   await dropToken(env, 'sessions', readCookie(request, SESSION_COOKIE));
+  await dropToken(env, 'sessions', readCookie(request, RETURN_COOKIE));
   await dropToken(env, 'kid_sessions', readCookie(request, KID_COOKIE));
-  return [clearCookie(SESSION_COOKIE), clearCookie(KID_COOKIE)];
+  return [clearCookie(SESSION_COOKIE), clearCookie(KID_COOKIE), clearCookie(RETURN_COOKIE)];
 }
 
 // Every device a kid profile is logged in on is logged out (§8.3a).

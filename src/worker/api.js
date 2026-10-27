@@ -30,6 +30,7 @@ import { exportFamily, deleteFamily, eraseAfter } from './backup.js';
 import { releaseFor, releaseOn, familyRelease, LEVELS_RELEASE } from './release.js';
 import { register as registerPicks, relearn } from './picks.js';
 import { register as registerGaps } from './gaps.js';
+import { register as registerTestFamilies, testFamilies, testingFor } from './testfamilies.js';
 import { register as registerVariations, variationChoices, recordVariation, hasVariation, forgetCooks } from './variations.js';
 import { lessonVersion } from '../content/variations.js';
 
@@ -129,6 +130,8 @@ on('GET', '/api/me', async (req, env) => {
   return {
     signed_in: true,
     parent: { email: s.email, is_owner: s.is_owner, test_cook_notice: !s.notice_seen_at },
+    // A test family the owner opened on this device (testfamilies.js).
+    testing: await testingFor(env, req, s.family_id),
     // variations: the version of each lesson the family cooks (§6.21).
     family: { ...familyOut(fam), cooking: await cooking(env, s.family_id), ...(await releaseFor(env.DB, s.family_id)), variations: await variationChoices(env, s.family_id) },
     pin_unlocked_until: pinUnlocked(s) ? s.pin_until : null,
@@ -921,9 +924,13 @@ on('GET', '/api/owner', async (req, env) => {
   return {
     beta_word: await betaWord(env),
     waiting: (await env.DB.prepare('SELECT COUNT(*) AS n FROM signup_verifications WHERE expires_at > ?').bind(now()).first()).n,
-    families: await all(`SELECT f.name, f.created_at, f.last_active_at,
-        (SELECT COUNT(*) FROM profiles p WHERE p.family_id = f.id) AS profiles
-      FROM families f WHERE f.deleted_at IS NULL ORDER BY f.created_at DESC`),
+    // Test families have their own screen.
+    families: await (async () => {
+      const tests = new Set((await testFamilies(env.DB)).map((x) => x.id));
+      return (await all(`SELECT f.id, f.name, f.created_at, f.last_active_at,
+          (SELECT COUNT(*) FROM profiles p WHERE p.family_id = f.id) AS profiles
+        FROM families f WHERE f.deleted_at IS NULL ORDER BY f.created_at DESC`)).filter((f) => !tests.has(f.id)).map(({ id: _, ...f }) => f);
+    })(),
     email_ready: emailReady(env),
   };
 });
@@ -961,6 +968,7 @@ registerTastes(on);
 registerVariations(on);
 registerPicks(on);
 registerGaps(on);
+registerTestFamilies(on);
 
 // ---------- dispatch ----------
 

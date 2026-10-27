@@ -32,6 +32,14 @@ h3{font-size:19px;margin:0 0 6px}
 .small{font-size:14px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
+/* a test family the owner opened (Owner → Test families) */
+.testbar{position:fixed;top:0;left:0;right:0;z-index:90;display:flex;align-items:center;justify-content:space-between;gap:8px 12px;flex-wrap:wrap;padding:8px 16px;background:#F6C945;color:#1F2328;font-size:15px;border-bottom:2px solid #1F2328}
+/* Above everything, even Chef Ruth's Getting started, so there's always a
+   way back; the page and its overlays start below it. */
+html.testing body{padding-top:var(--tb,0)}
+html.testing :is(.ruth-ov,.fixov,.pvov,.drawer,.whyov,.lvlup){top:var(--tb,0)}
+.testbar .hbtn{min-height:40px;padding:4px 14px;background:#fff;color:#1F2328;border-color:#1F2328}
+
 /* top bar */
 .bar{display:flex;align-items:center;gap:12px;margin-bottom:22px;flex-wrap:wrap}
 .bar img{width:56px;height:56px}
@@ -361,7 +369,7 @@ fieldset.psec legend{font-size:13px;letter-spacing:.07em;text-transform:uppercas
 @media print{
   :root{--h-bg:#fff;--h-fg:#000;--h-line:#999;--h-mut:#333}
   body{background:#fff;color:#000}
-  .bar,.tabs,.drawer,.eyebrow,.noprint,.sabbath,.toast,.ruth-fab,#app>h1{display:none!important}
+  .bar,.tabs,.drawer,.eyebrow,.noprint,.sabbath,.toast,.ruth-fab,.testbar,#app>h1{display:none!important}
   .ptable{break-inside:avoid-page}
   .ptable table{font-size:12px}
   .portfolio{break-before:page;border-top:0;margin-top:0}
