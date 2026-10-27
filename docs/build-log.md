@@ -287,7 +287,6 @@ Owner rulings on open questions:
 
 ---
 
-
 ## 14. 2026-10-22 — Dish art gathered
 
 - **The owner supplies the dish illustrations,** made with ChatGPT as sheets
@@ -1264,7 +1263,6 @@ how far through the course they are.
 - Tests: 126. New ones cover the numbering (75 dishes, 59 numbers, letters,
   a reordered plan with removed dishes, a dish added after a plan was saved,
   prerequisite notes), the new linter checks, and migration 0005.
-
 
 ## 51. 2026-10-22 — Steady profile tests
 
@@ -2302,7 +2300,6 @@ Built to §8.3a as settled in 90.
   session unused for 15 days logged out). Checked in a browser at phone width:
   the Adult / Kid choice and Ask an adult to start, with the two-device run
   from 91 passing again.
-
 
 ## 93. 2026-10-23 — Unit 1 finished: lessons 2a through 5
 
@@ -3872,7 +3869,6 @@ Next release switch.
   course started, its card on the queue, the course list, and the edit page
   (no sideways scroll, no errors).
 
-
 ## 155. 2026-10-24 — Plan: Levels 2 and 4, and the week options
 
 The owner's Level 2 Apprentice and Level 4 Chef plans and the week-options
@@ -4176,7 +4172,6 @@ order, so these two recipes were written.
   Level 3 recipe progression review is reviewed and approved. None of it is
   built yet beyond Chicken jambalaya and Butter chicken; the changes go into
   `content/levels/level-3.json`, the lessons, and plan §12.3 and §12.4 next.
-
 
 ## 173. 2026-10-24 — Level 3 review applied; Fish before poultry
 
@@ -6712,7 +6707,28 @@ prod views of what they'd see."
 - Screenshots sent in the session.
 - Tests: 407.
 
-## 254. 2026-10-27 — Which program? and Help me choose: the owner's words; the week's start set from the tastes
+## 254. 2026-10-27 — Demo welcome note: our beliefs
+
+Owner, 2026-10-27: a popup on the demo page that explains the beliefs of the
+app creator's family, which can be brought back from a button once closed.
+
+- **Before:** the demo page opened straight onto its header and tabs.
+- **Now:** a dialog, **Welcome to Clean Plate!**, in the owner's words: the
+  Levitical food laws and Holy Times the app is built on, and the rules the
+  code enforces (clean meats only, with no pork gelatin or casings, blood, or
+  organ fats; no Sabbath schoolwork; Unleavened Bread swaps; what counts as
+  leavening; Scripture in the courses).
+  - It opens on a visitor's first look at `/demo`. Closing it (**Got it**,
+    Esc, or tapping outside) is remembered on that browser, so it doesn't
+    open again on their next visit.
+  - **Our beliefs and the app's rules**, beside Sign up and Log in, opens it
+    again any time.
+  - Two small wording fixes to the owner's text: "defined as in app as"
+    reads "defined in the app as", and the double spaces are gone.
+- Screenshots sent in the session.
+- Tests: 407.
+
+## 255. 2026-10-27 — Which program? and Help me choose: the owner's words; the week's start set from the tastes
 
 Owner, 2026-10-27, from Getting started on a phone: "I rejected this wording
 already. It was supposed to be replaced with what is currently coming through
@@ -6742,7 +6758,7 @@ it in...'" The new lines are the owner's, approved before building.
   dialog, phone width, both themes) sent in the session.
 - Tests: 407.
 
-## 255. 2026-10-27 — Plan: the first standard calendar for Unleavened Bread
+## 256. 2026-10-27 — Plan: the first standard calendar for Unleavened Bread
 
 Owner, 2026-10-27: "This is the date set for first standard calendar", with
 the calculated Biblical calendar's dates (United Church of God, Living Church
@@ -6758,7 +6774,7 @@ April 22, 2027 (from sunset April 21), the last Wednesday, April 28, 2027.
 - No screens changed, so no screenshots.
 - Tests: 407.
 
-## 256. 2026-10-27 — Plan: the bread-week warning on every Level
+## 257. 2026-10-27 — Plan: the bread-week warning on every Level
 
 Owner, 2026-10-27, on the Level 3 setup warning (§6.20): "This should be for
 all levels not just 3".
@@ -6771,7 +6787,7 @@ all levels not just 3".
 - No screens changed, so no screenshots.
 - Tests: 407.
 
-## 257. 2026-10-27 — Plan: courses pause for Unleavened Bread
+## 258. 2026-10-27 — Plan: courses pause for Unleavened Bread
 
 Owner, 2026-10-27, on the recommendation to move leavened lessons past the
 feast (§6.20): "I don't want to pull lessons out of order. Maybe we just put
@@ -6793,7 +6809,7 @@ of our unleavened recipes to cook as a family!"
 - No screens changed, so no screenshots.
 - Tests: 407.
 
-## 258. 2026-10-27 — Plan: a course pauses only at a leavened lesson
+## 259. 2026-10-27 — Plan: a course pauses only at a leavened lesson
 
 Owner, 2026-10-27: "But only if the lesson they'd be cooking in either week
 has leavened. If it's all unleavened they can just proceed with a happy
@@ -6801,7 +6817,7 @@ unleavened bread banner." Then, on Claude's proposal to pause at the first
 leavened lesson: the pause starts on the family's own date, "and yes that
 wording is fine".
 
-- **Before:** the plan (257) paused every course through the unleavened days,
+- **Before:** the plan (258) paused every course through the unleavened days,
   with the week the feast starts in due early.
 - **Now:** through the family's unleavened days (from its own "stop
   suggesting leavened recipes" day), a course runs in order until its next
@@ -6815,14 +6831,14 @@ wording is fine".
 - No screens changed, so no screenshots.
 - Tests: 407.
 
-## 259. 2026-10-27 — Plan: Show me some, on the kitchen's paused notice
+## 260. 2026-10-27 — Plan: Show me some, on the kitchen's paused notice
 
 Owner, 2026-10-27: "Give them an in here, like a 'Show me some', with the U
 prefix lessons first, then the other unleavened options they haven't cooked,
 with pictures and ask to cook for kids. Maybe it's a button that pressing
 links to side quests filtered and sorted."
 
-- **Before:** the plan (258) left open where the kitchen's paused notice
+- **Before:** the plan (259) left open where the kitchen's paused notice
   leads.
 - **Now:** the notice has a **Show me some** button. It opens Side quests
   (More recipes in Chef's Passport) filtered to unleavened recipes: the U
@@ -6833,7 +6849,7 @@ links to side quests filtered and sorted."
 - No screens changed, so no screenshots.
 - Tests: 407.
 
-## 260. 2026-10-27 — Plan: no leavened recipe due during the feast; Ruth asks yearly; no nudge
+## 261. 2026-10-27 — Plan: no leavened recipe due during the feast; Ruth asks yearly; no nudge
 
 Owner, 2026-10-27: "Leavened recipes cannot be added to be due during the
 feast, period. Yes Ruth should ask yearly. No skip the nudge."
@@ -6853,13 +6869,13 @@ feast, period. Yes Ruth should ask yearly. No skip the nudge."
 - No screens changed, so no screenshots.
 - Tests: 407.
 
-## 261. 2026-10-27 — Plan: a leavened recipe can be added for after the feast
+## 262. 2026-10-27 — Plan: a leavened recipe can be added for after the feast
 
 Owner, 2026-10-27: "They can add it with a future date after unleavened bread
 ends, even if they are actually adding during feast. They just can't mark it
 cook on a date in the feast if it's leavened."
 
-- **Before:** the plan (260) left open whether a leavened recipe could be
+- **Before:** the plan (261) left open whether a leavened recipe could be
   added during the feast for afterward.
 - **Now:** it can, at any time; only its date can't fall on an unleavened
   day, so the earliest is the day after the last one. The message for a
@@ -6868,9 +6884,9 @@ cook on a date in the feast if it's leavened."
 - No screens changed, so no screenshots.
 - Tests: 407.
 
-## 262. 2026-10-27 — Plan: the first standard calendar's name
+## 263. 2026-10-27 — Plan: the first standard calendar's name
 
-Owner, 2026-10-27, naming the first standard calendar (255): "Hebrew
+Owner, 2026-10-27, naming the first standard calendar (256): "Hebrew
 lunisolar calendar".
 
 - **Before:** the plan left the first standard calendar's name as families
@@ -6880,14 +6896,14 @@ lunisolar calendar".
 - No screens changed, so no screenshots.
 - Tests: 407.
 
-## 263. 2026-10-27 — Plan: leavened lessons don't play during the feast; unleavened swaps
+## 264. 2026-10-27 — Plan: leavened lessons don't play during the feast; unleavened swaps
 
 Owner, 2026-10-27, asked whether a leavened lesson can be cooked at all
 during the feast when it isn't on the schedule: "No. We should do our best to
 find unleavened swap in ingredients for as many recipes as possible. But if
 the recipe absolutely requires leavening, it doesn't play in the player."
 
-- **Before:** the plan (261) covered only when a leavened recipe could be
+- **Before:** the plan (262) covered only when a leavened recipe could be
   due.
 - **Now:**
   - A leavened lesson doesn't play in the player on a family's unleavened
@@ -6903,7 +6919,7 @@ the recipe absolutely requires leavening, it doesn't play in the player."
 - No screens changed, so no screenshots.
 - Tests: 407.
 
-## 264. 2026-10-27 — Plan: the calendar's years, and the unleavened sorting pass
+## 265. 2026-10-27 — Plan: the calendar's years, and the unleavened sorting pass
 
 Owner, 2026-10-27: "Yes to both", to putting the Hebrew lunisolar calendar's
 first days for 2027 to 2036 in the calendars file, and to the unleavened-swap
@@ -6927,9 +6943,9 @@ approach with a sorting pass first.
 - No screens changed, so no screenshots.
 - Tests: 407.
 
-## 265. 2026-10-27 — The leaven check: baguettes and rolls, and three false alarms
+## 266. 2026-10-27 — The leaven check: baguettes and rolls, and three false alarms
 
-Owner, 2026-10-27, answering the sorting pass's questions (264): "All yours
+Owner, 2026-10-27, answering the sorting pass's questions (265): "All yours
 is fine. The soda isn't really leaven in that case but no one will have the
 soda in their house so leave it out."
 
@@ -6949,5 +6965,21 @@ soda in their house so leave it out."
     needs a version (23 and 18); a gluten-free family's swap is gluten-free
     too; and matzah and matzah meal join the ingredient list with the note
     "Plain matzah: flour and water only."
+- No screens changed, so no screenshots.
+- Tests: 408.
+
+## 267. 2026-10-27 — The unleavened sorting pass, in the repo
+
+Owner, 2026-10-27: "I don't want you to do the swaps now. Just put everything
+in docs."
+
+- **Before:** the sorting pass of the leavened lessons (265) was only in a
+  review page outside the repo.
+- **Now:** it's `docs/unleavened-swaps.md`, with the owner's answers so far
+  and the one wording still to approve (ensaladilla rusa's tip). The plan
+  (§6.20) points to it. No swap is written.
+- This branch was also brought up to date with `main` (PR #56 and the demo
+  welcome note, 254), and its build log entries from this session renumbered
+  255 to 266 after it.
 - No screens changed, so no screenshots.
 - Tests: 408.

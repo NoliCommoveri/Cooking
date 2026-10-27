@@ -75,7 +75,7 @@ function header() {
     <p>Appropriate for kids, teens, and even adults looking to expand to new culinary horizons, Clean Plate Recipes is built to be three things: fun, free, and fundamentally rooted in the dietary laws of the Most High.</p>
     <p>Check out the demo below to see our current build progress. Beta testing is now live. To participate, search Clean Plate Recipe App on Facebook.</p>
     <p class="by">By Immotus Apps</p></section>
-    <div class="d-cta"><a class="hbtn pri" href="/#/signup">Sign up</a><a class="hbtn" href="/#/login">Log in</a></div>
+    <div class="d-cta"><a class="hbtn pri" href="/#/signup">Sign up</a><a class="hbtn" href="/#/login">Log in</a><button type="button" class="hbtn link" data-beliefs>Our beliefs and the app's rules</button></div>
     ${twoTracks ? `<h2 class="d-tracks-h">Two ways to learn</h2>
     <div class="d-tracks">${Object.entries(TRACKS).map(([k, T]) => `<button type="button" class="d-trackbtn" data-pick="${k}" aria-pressed="${V.track === k}" aria-expanded="${V.open === k}" aria-controls="track-info"><b>${esc(T.name)}</b><small>${esc(T.short)}</small><i aria-hidden="true">${V.open === k ? '▴' : '▾'}</i></button>`).join('')}</div>
     ${V.open ? trackInfo(V.open) : ''}` : ''}`;
@@ -335,6 +335,33 @@ function progressView() {
       <p class="small mut">The first two weeks of the pretend learner's transcript.</p></section>`;
 }
 
+// ---------- the welcome note (owner, 2026-10-27) ----------
+// The creator's family's beliefs and the rules the code enforces. It opens on
+// a visitor's first look and comes back from the button under the header. It
+// sits outside the demo's root, so drawing the page leaves it alone.
+const beliefs = document.createElement('dialog');
+beliefs.className = 'd-beliefs';
+beliefs.setAttribute('aria-labelledby', 'beliefs-h');
+beliefs.innerHTML = `<div class="card">
+  <h2 id="beliefs-h" tabindex="-1" autofocus>Welcome to Clean Plate!</h2>
+  <p><b>A quick note on the app:</b></p>
+  <p>Clean Plate was developed with a specific set of dietary beliefs: namely, that the Levitical food laws are still in full effect, and that the Holy Times are mandatory, not suggestions. Though we acknowledge that others believe differently, this app was not built to cater to different beliefs. Therefore, the following rules are enforced within the code:</p>
+  <ul>
+    <li>Only those meats coming from animals identified as “clean” in Leviticus and Deuteronomy are used in Clean Plate recipes. Additionally, non-“meat” products like pork gelatin or pork casings are excluded. Blood and organ fats (rendered or whole) do not appear as ingredients, either. We have a reporting feature and encourage all users to flag if a recipe does not meet these rules.</li>
+    <li>Shabbat/Sabbath is not the time for schoolwork. Therefore, while the recipe player remains open to use for family building, no cooking completed on Saturdays will count towards transcripts or grades, and all weekly scheduled work is Sunday–Friday.</li>
+    <li>Unleavened Bread/Hag HaMatzot is enforced. Since there are multiple calculation methods used today, families are asked to select the specific dates their calendar observes. During those dates, all recipes will swap ingredients that contain leavening with unleavened ones, if possible. Recipes with no unleavened adjustment possible will not be available to cook during the Feast.</li>
+    <li>“Leavening” is defined in the app as “a substance (as yeast) used to produce fermentation in dough or a liquid; or a material (as baking powder) used to produce a gas that lightens dough or batter.”</li>
+    <li>Many of our courses contain readings, quiz questions, and writing prompts that explicitly reference Scripture and encourage learners to read their Bibles to learn what it says about food, feasts, hospitality, and the responsibility of believers to care for the poor. We aim to encourage a proper relationship with food and the Creator who provides it as much as showing how to cook it.</li>
+  </ul>
+  <p>If you have any concerns about this, please feel free to reach out to our Facebook group with a private message. Otherwise, happy cooking!</p>
+  <div class="d-cta"><button type="button" class="hbtn pri" data-close>Got it</button></div>
+</div>`;
+document.body.append(beliefs);
+beliefs.addEventListener('click', (e) => { if (e.target === beliefs || e.target.closest('[data-close]')) beliefs.close(); });
+beliefs.addEventListener('close', () => { try { localStorage.setItem('cpr.demo.beliefs', 'seen'); } catch { /* private mode */ } });
+let seen = false;
+try { seen = localStorage.getItem('cpr.demo.beliefs') === 'seen'; } catch { /* private mode */ }
+
 // ---------- drawing ----------
 const VIEWS = { try: tryView, shop: shopView, course: courseView, skills: skillsView, week: weekView, levels: levelsView, progress: progressView };
 async function draw() {
@@ -355,6 +382,7 @@ async function open(id) {
 
 root.addEventListener('click', (e) => {
   const t = e.target;
+  if (t.closest('[data-beliefs]')) return beliefs.showModal();
   const set = t.closest('[data-set]'), tab = t.closest('[data-tab]'), openBtn = t.closest('[data-open]'), check = t.closest('[data-check]');
   if (set) { V[set.dataset.set] = set.dataset.v; keep(); return draw(); }
   // A track's button picks it and opens its details; tapped again, they close.
@@ -409,3 +437,4 @@ root.addEventListener('change', (e) => {
   draw();
 });
 draw();
+if (!seen) beliefs.showModal();
