@@ -44,6 +44,25 @@ sheet-30-levels-2.png bun-bowl,mini-pita-pizzas,ful-medames,hummus-plate
 sheet-31-levels-3.png chicken-caesar-wraps,chana-chaat,kofte,beef-tacos-seasoning
 sheet-32-levels-4.png keema,fish-sticks,shioyaki,teriyaki-chicken-bites
 sheet-33-levels-5.png welsh-cakes,chocolate-chip-cookies,alfajores,banana-bread
+sheet-34-levels-6.png pan-de-elote,chicken-potstickers,gyeran-jjim,egg-salad-sandwiches
+sheet-35-levels-7.png anda-curry,mexican-rice-chicken,hainanese-chicken-rice,black-bean-tortilla-soup
+sheet-36-levels-8.png egg-drop-soup,pancakes,pajeon,tomato-egg-stir-fry
+sheet-37-levels-9.png zucchini-pasta,tikil-gomen,sloppy-joes,giniling
+sheet-38-levels-10.png lemongrass-chicken,chicken-nachos,miso-salmon,sheet-pan-fajitas
+sheet-39-levels-11.png moroccan-vegetables-couscous,bbq-drumsticks,baked-ziti,filipino-baked-macaroni
+# sheet-34-levels-6.png: white bowls and dishes the tool cut to a floating rim, so cut by hand:
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-34-levels-6.png content/images/dishes/pan-de-elote.png "245,0,768,290;50,190,535,445" all
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-34-levels-6.png content/images/dishes/gyeran-jjim.png "50,530,590,960;462,505,735,730" all
+# sheet-35-levels-7.png: white bowls and dishes the tool cut to a floating rim, so cut by hand:
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-35-levels-7.png content/images/dishes/anda-curry.png "35,50,580,445;462,8,750,245" all
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-35-levels-7.png content/images/dishes/hainanese-chicken-rice.png "20,490,730,960" all
+# sheet-36-levels-8.png: white bowls and dishes the tool cut to a floating rim, so cut by hand:
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-36-levels-8.png content/images/dishes/egg-drop-soup.png "105,30,635,435" all
+# sheet-37-levels-9.png: white bowls and dishes the tool cut to a floating rim, so cut by hand:
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-37-levels-9.png content/images/dishes/tikil-gomen.png "818,85,1370,460;1218,12,1515,245" all
+# sheet-39-levels-11.png: white bowls and dishes the tool cut to a floating rim, so cut by hand:
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-39-levels-11.png content/images/dishes/baked-ziti.png "25,480,615,810;305,700,722,965" all
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-39-levels-11.png content/images/dishes/filipino-baked-macaroni.png "835,540,1510,935" all
 sheet-40-levels-12.png trinidad-curry-chicken,kefta-tagine,tom-kha-gai,bean-quesadillas
 sheet-41-levels-13.png rajma,aglio-e-olio,scallion-oil-noodles,vegetable-lo-mein
 sheet-42-levels-14.png -,-,bean-tostadas
@@ -59,6 +78,30 @@ sheet-51-levels-23.png salade-nicoise,bibimbap,ensaladilla-rusa,antipasto-platte
 sheet-52-levels-24.png mezze-spread,chicken-cacciatore,flank-steak,duck-breast-cherry
 sheet-53-levels-25.png teriyaki-salmon-side,pescado-veracruzana,chicken-two-ways,spatchcocked-quail
 sheet-54-levels-26.png chocolate-babka,milk-bread,spinach-feta-borekas,jamaican-beef-patties
+sheet-55-levels-27.png arepas,poached-salmon-dill,goan-fish-curry,cilbir
+sheet-56-levels-28.png mushroom-risotto,tahdig,black-bean-soup,feijoada
+sheet-57-levels-29.png french-onion-soup,pho-bo,seared-thighs-pan-sauce,kung-pao-chicken
+sheet-58-levels-30.png mapo-tofu,diner-eggs-to-order,tortilla-espanola,chicken-tikka-masala
+sheet-59-levels-31.png thai-green-curry,chicken-a-la-king,korean-fried-chicken,salmon-en-papillote
+sheet-60-levels-32.png samke-harra,bbq-chicken-two-zone,chicken-satay,roast-beef
+sheet-61-levels-33.png roast-leg-of-lamb,beef-lasagna,moussaka,birria-de-chivo
+sheet-62-levels-34.png chicken-chasseur,duck-legs-white-beans,cholent,dafina
+# sheet-55-levels-27.png: white bowls and dishes the tool cut to a floating rim, so cut by hand:
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-55-levels-27.png content/images/dishes/goan-fish-curry.png "25,505,640,990;452,466,760,700" all
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-55-levels-27.png content/images/dishes/cilbir.png "808,525,1448,975;1150,466,1520,760s" all
+# sheet-56-levels-28.png: white bowls and dishes the tool cut to a floating rim, so cut by hand:
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-56-levels-28.png content/images/dishes/black-bean-soup.png "35,485,670,975" all
+# sheet-57-levels-29.png: white bowls and dishes the tool cut to a floating rim, so cut by hand:
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-57-levels-29.png content/images/dishes/french-onion-soup.png "100,40,620,450" all
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-57-levels-29.png content/images/dishes/pho-bo.png "793,75,1270,450;1196,55,1520,305" all
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-57-levels-29.png content/images/dishes/kung-pao-chicken.png "790,580,1270,920;1160,480,1390,660;1265,630,1535,830" all
+# sheet-58-levels-30.png: white bowls and dishes the tool cut to a floating rim, so cut by hand:
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-58-levels-30.png content/images/dishes/mapo-tofu.png "40,15,667,465" all
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-58-levels-30.png content/images/dishes/chicken-tikka-masala.png "770,560,1316,960;1033,475,1305,645;1260,535,1536,820" all
+# sheet-59-levels-31.png: white bowls and dishes the tool cut to a floating rim, so cut by hand:
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-59-levels-31.png content/images/dishes/thai-green-curry.png "20,45,570,450;472,20,768,280" all
+# sheet-61-levels-33.png: white bowls and dishes the tool cut to a floating rim, so cut by hand:
+#   python3 tools/hand-cut-dish.py content/images/source/sheet-61-levels-33.png content/images/dishes/birria-de-chivo.png "768,520,1305,945;1150,495,1522,805" all
 # sheet-42-levels-14.png: ajapsandali and solterito touch, so they're split by hand the same way:
 #   ajapsandali 780,0,1536,476   solterito 780,476,1536,1024
 # Onigiri (sheet 29) and kimbap (sheet 42) have plates whose white rim gaps let the tool's

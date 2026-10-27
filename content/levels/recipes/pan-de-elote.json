@@ -4,7 +4,7 @@
   "track": "core",
   "unit": 102,
   "title": "Pan de elote",
-  "image": "meals/dessert.svg",
+  "image": "dishes/pan-de-elote.png",
   "cuisine": "mexican",
   "skill": "A blender batter baked to doneness",
   "skills": ["muffin-method"],

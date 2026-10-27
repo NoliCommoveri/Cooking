@@ -1480,8 +1480,51 @@
         "veggies": "light"
       }
     },
-    { "id": "arepas", "title": "Arepas with black beans and cheese", "cuisine": "venezuelan", "skills": ["skillet-baking"], "skill": "A corn dough timed with its fillings", "art": "side", "safety": "solo", "minutes": 75, "about": "Venezuelan corn cakes griddled, finished in the oven, split, and filled with black beans and white cheese. No leaven.", "main": ["masarepa", "black beans", "queso blanco", "onion", "cumin"], "method": "stove-oven", "tags": { "protein": "beans-lentils", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "light" } },
-    { "id": "poached-salmon-dill", "title": "Poached salmon with dill sauce", "cuisine": "american", "skills": ["cooking-fish", "simmering"], "skill": "Poaching at a held temperature", "art": "fish", "safety": "solo", "minutes": 60, "estimated": true, "about": "Salmon poached gently in a court-bouillon held at 170–180°F, with a dill and yogurt sauce.", "main": ["salmon fillets", "lemon", "dill", "yogurt", "onion and celery"], "method": "stove", "tags": { "protein": "salmon", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$$$", "familiar": "everyday", "veggies": "light" } },
+    {
+      "id": "arepas",
+      "title": "Arepas with black beans and cheese",
+      "cuisine": "venezuelan",
+      "skills": ["skillet-baking"],
+      "skill": "A corn dough timed with its fillings",
+      "art": "side",
+      "image": "dishes/arepas.png",
+      "safety": "solo",
+      "minutes": 75,
+      "about": "Venezuelan corn cakes griddled, finished in the oven, split, and filled with black beans and white cheese. No leaven.",
+      "main": ["masarepa", "black beans", "queso blanco", "onion", "cumin"],
+      "method": "stove-oven",
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "adventurous",
+        "veggies": "light"
+      }
+    },
+    {
+      "id": "poached-salmon-dill",
+      "title": "Poached salmon with dill sauce",
+      "cuisine": "american",
+      "skills": ["cooking-fish", "simmering"],
+      "skill": "Poaching at a held temperature",
+      "art": "fish",
+      "image": "dishes/poached-salmon-dill.png",
+      "safety": "solo",
+      "minutes": 60,
+      "estimated": true,
+      "about": "Salmon poached gently in a court-bouillon held at 170–180°F, with a dill and yogurt sauce.",
+      "main": ["salmon fillets", "lemon", "dill", "yogurt", "onion and celery"],
+      "method": "stove",
+      "tags": {
+        "protein": "salmon",
+        "flavors": ["herby-lemony"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
     {
       "id": "goan-fish-curry",
       "title": "Goan fish curry",
@@ -1489,6 +1532,7 @@
       "skills": ["cooking-fish", "blooming-spices"],
       "skill": "Poaching fish in a curry",
       "art": "fish",
+      "image": "dishes/goan-fish-curry.png",
       "safety": "solo",
       "minutes": 75,
       "estimated": true,
@@ -1504,10 +1548,32 @@
         "veggies": "light"
       }
     },
-    { "id": "cilbir", "title": "Çılbır", "cuisine": "turkish", "skills": ["poaching-eggs"], "skill": "Poaching eggs for a crowd", "art": "side", "safety": "solo", "minutes": 45, "estimated": true, "about": "Turkish poached eggs on garlic yogurt, with Aleppo pepper butter and dill, and toasted bread.", "main": ["eggs", "yogurt", "garlic", "butter", "Aleppo pepper"], "method": "stove", "tags": { "protein": "eggs", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "light" } },
-    { "id": "mushroom-risotto", "title": "Mushroom risotto", "cuisine": "italian", "skills": ["cooking-grains"], "skill": "A stirred grain", "art": "side", "safety": "solo", "minutes": 75, "estimated": true, "about": "Arborio rice toasted and stirred with hot broth until creamy, with mushrooms and parmesan.", "main": ["arborio rice", "mushrooms", "broth", "parmesan", "butter"], "method": "stove", "tags": { "protein": "none", "flavors": ["creamy-cheesy", "mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "some" } },
-    { "id": "tahdig", "title": "Chelow with tahdig", "cuisine": "persian", "skills": ["cooking-grains"], "skill": "Steamed rice with a crisp bottom", "art": "side", "safety": "solo", "minutes": 120, "estimated": true, "about": "Persian rice parboiled, then steamed over a buttered pot bottom until a golden crust forms, flipped onto a platter.", "main": ["basmati rice", "butter", "saffron", "yogurt"], "method": "stove", "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "light" } },
-    { "id": "black-bean-soup", "title": "Puréed black bean soup", "cuisine": "cuban", "skills": ["cooking-legumes", "building-soup"], "skill": "A costed bean soup for 8", "art": "soup", "safety": "solo", "minutes": 120, "estimated": true, "about": "Dried black beans cooked with sofrito and cumin, puréed smooth, for 8, with the cost per serving worked out.", "main": ["dried black beans", "onion", "bell pepper", "cumin", "garlic"], "method": "stove", "tags": { "protein": "beans-lentils", "flavors": ["warm-spices"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "some" } },
+    { "id": "cilbir", "title": "Çılbır", "cuisine": "turkish", "skills": ["poaching-eggs"], "skill": "Poaching eggs for a crowd", "art": "side", "image": "dishes/cilbir.png", "safety": "solo", "minutes": 45, "estimated": true, "about": "Turkish poached eggs on garlic yogurt, with Aleppo pepper butter and dill, and toasted bread.", "main": ["eggs", "yogurt", "garlic", "butter", "Aleppo pepper"], "method": "stove", "tags": { "protein": "eggs", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "light" } },
+    { "id": "mushroom-risotto", "title": "Mushroom risotto", "cuisine": "italian", "skills": ["cooking-grains"], "skill": "A stirred grain", "art": "side", "image": "dishes/mushroom-risotto.png", "safety": "solo", "minutes": 75, "estimated": true, "about": "Arborio rice toasted and stirred with hot broth until creamy, with mushrooms and parmesan.", "main": ["arborio rice", "mushrooms", "broth", "parmesan", "butter"], "method": "stove", "tags": { "protein": "none", "flavors": ["creamy-cheesy", "mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "some" } },
+    { "id": "tahdig", "title": "Chelow with tahdig", "cuisine": "persian", "skills": ["cooking-grains"], "skill": "Steamed rice with a crisp bottom", "art": "side", "image": "dishes/tahdig.png", "safety": "solo", "minutes": 120, "estimated": true, "about": "Persian rice parboiled, then steamed over a buttered pot bottom until a golden crust forms, flipped onto a platter.", "main": ["basmati rice", "butter", "saffron", "yogurt"], "method": "stove", "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "light" } },
+    {
+      "id": "black-bean-soup",
+      "title": "Puréed black bean soup",
+      "cuisine": "cuban",
+      "skills": ["cooking-legumes", "building-soup"],
+      "skill": "A costed bean soup for 8",
+      "art": "soup",
+      "image": "dishes/black-bean-soup.png",
+      "safety": "solo",
+      "minutes": 120,
+      "estimated": true,
+      "about": "Dried black beans cooked with sofrito and cumin, puréed smooth, for 8, with the cost per serving worked out.",
+      "main": ["dried black beans", "onion", "bell pepper", "cumin", "garlic"],
+      "method": "stove",
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["warm-spices"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "some"
+      }
+    },
     {
       "id": "feijoada",
       "title": "Feijoada, beef only",
@@ -1515,6 +1581,7 @@
       "skills": ["cooking-legumes", "one-pot-stews"],
       "skill": "A bean stew for a crowd",
       "art": "meat",
+      "image": "dishes/feijoada.png",
       "safety": "solo",
       "minutes": 180,
       "estimated": true,
@@ -1530,7 +1597,29 @@
         "veggies": "some"
       }
     },
-    { "id": "french-onion-soup", "title": "French onion soup", "cuisine": "french", "skills": ["reducing", "building-soup"], "skill": "Reducing a stock by half", "art": "soup", "safety": "solo", "minutes": 150, "estimated": true, "about": "Onions caramelized slowly, simmered in a beef stock reduced by half, and topped with toast and broiled cheese.", "main": ["onions", "beef stock", "butter", "baguette", "Gruyère"], "method": "stove-oven", "tags": { "protein": "beef", "flavors": ["mild-buttery", "creamy-cheesy"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } },
+    {
+      "id": "french-onion-soup",
+      "title": "French onion soup",
+      "cuisine": "french",
+      "skills": ["reducing", "building-soup"],
+      "skill": "Reducing a stock by half",
+      "art": "soup",
+      "image": "dishes/french-onion-soup.png",
+      "safety": "solo",
+      "minutes": 150,
+      "estimated": true,
+      "about": "Onions caramelized slowly, simmered in a beef stock reduced by half, and topped with toast and broiled cheese.",
+      "main": ["onions", "beef stock", "butter", "baguette", "Gruyère"],
+      "method": "stove-oven",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["mild-buttery", "creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
     {
       "id": "pho-bo",
       "title": "Phở bò",
@@ -1538,6 +1627,7 @@
       "skills": ["making-stock", "reducing"],
       "skill": "A long-simmered stock with charred aromatics",
       "art": "soup",
+      "image": "dishes/pho-bo.png",
       "safety": "solo",
       "minutes": 240,
       "estimated": true,
@@ -1560,6 +1650,7 @@
       "skills": ["searing", "reducing"],
       "skill": "Searing to doneness and building a pan sauce",
       "art": "poultry",
+      "image": "dishes/seared-thighs-pan-sauce.png",
       "safety": "solo",
       "minutes": 60,
       "estimated": true,
@@ -1583,6 +1674,7 @@
       "skills": ["stir-frying", "timing"],
       "skill": "Three dishes timed in order",
       "art": "poultry",
+      "image": "dishes/kung-pao-chicken.png",
       "safety": "solo",
       "minutes": 75,
       "estimated": true,
@@ -1598,9 +1690,31 @@
         "veggies": "some"
       }
     },
-    { "id": "mapo-tofu", "title": "Mapo tofu", "cuisine": "chinese", "skills": ["stir-frying"], "skill": "Wok heat and a Sichuan sauce", "art": "side", "safety": "solo", "minutes": 45, "estimated": true, "about": "Soft tofu and ground beef in a fiery bean-paste sauce with Sichuan pepper.", "main": ["tofu", "ground beef", "doubanjiang", "Sichuan peppercorns", "green onion"], "method": "stove", "tags": { "protein": "tofu", "flavors": ["chili-heat"], "heat": "spicy", "budget": "$", "familiar": "adventurous", "veggies": "light" } },
-    { "id": "diner-eggs-to-order", "title": "Diner eggs to order with hash browns", "cuisine": "american", "skills": ["heat-control", "poaching-eggs"], "skill": "Eggs to order for 6", "art": "side", "safety": "solo", "minutes": 75, "estimated": true, "about": "Eggs cooked to order for six (sunny-side up, over easy, scrambled, an omelet) with crisp hash browns.", "main": ["eggs", "potatoes", "butter", "bread", "chives"], "method": "stove", "tags": { "protein": "eggs", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
-    { "id": "tortilla-espanola", "title": "Tortilla española", "cuisine": "spanish", "skills": ["heat-control"], "skill": "Low heat, then a flip", "art": "side", "safety": "solo", "minutes": 75, "estimated": true, "about": "A thick Spanish omelet of potatoes and onions cooked slowly in olive oil, set with eggs, and flipped.", "main": ["potatoes", "eggs", "onion", "olive oil"], "method": "stove", "tags": { "protein": "eggs", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
+    { "id": "mapo-tofu", "title": "Mapo tofu", "cuisine": "chinese", "skills": ["stir-frying"], "skill": "Wok heat and a Sichuan sauce", "art": "side", "image": "dishes/mapo-tofu.png", "safety": "solo", "minutes": 45, "estimated": true, "about": "Soft tofu and ground beef in a fiery bean-paste sauce with Sichuan pepper.", "main": ["tofu", "ground beef", "doubanjiang", "Sichuan peppercorns", "green onion"], "method": "stove", "tags": { "protein": "tofu", "flavors": ["chili-heat"], "heat": "spicy", "budget": "$", "familiar": "adventurous", "veggies": "light" } },
+    {
+      "id": "diner-eggs-to-order",
+      "title": "Diner eggs to order with hash browns",
+      "cuisine": "american",
+      "skills": ["heat-control", "poaching-eggs"],
+      "skill": "Eggs to order for 6",
+      "art": "side",
+      "image": "dishes/diner-eggs-to-order.png",
+      "safety": "solo",
+      "minutes": 75,
+      "estimated": true,
+      "about": "Eggs cooked to order for six (sunny-side up, over easy, scrambled, an omelet) with crisp hash browns.",
+      "main": ["eggs", "potatoes", "butter", "bread", "chives"],
+      "method": "stove",
+      "tags": {
+        "protein": "eggs",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
+    { "id": "tortilla-espanola", "title": "Tortilla española", "cuisine": "spanish", "skills": ["heat-control"], "skill": "Low heat, then a flip", "art": "side", "image": "dishes/tortilla-espanola.png", "safety": "solo", "minutes": 75, "estimated": true, "about": "A thick Spanish omelet of potatoes and onions cooked slowly in olive oil, set with eggs, and flipped.", "main": ["potatoes", "eggs", "onion", "olive oil"], "method": "stove", "tags": { "protein": "eggs", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
     {
       "id": "chicken-tikka-masala",
       "title": "Chicken tikka masala",
@@ -1608,6 +1722,7 @@
       "skills": ["blooming-spices", "broiling"],
       "skill": "Garam masala ground at home",
       "art": "poultry",
+      "image": "dishes/chicken-tikka-masala.png",
       "safety": "solo",
       "minutes": 105,
       "estimated": true,
@@ -1631,6 +1746,7 @@
       "skills": ["blooming-spices"],
       "skill": "Pounding a curry paste",
       "art": "poultry",
+      "image": "dishes/thai-green-curry.png",
       "safety": "solo",
       "minutes": 90,
       "estimated": true,
@@ -1646,7 +1762,7 @@
         "veggies": "some"
       }
     },
-    { "id": "chicken-a-la-king", "title": "Chicken à la king", "cuisine": "american", "skills": ["roux"], "skill": "A velouté", "art": "poultry", "safety": "solo", "minutes": 60, "estimated": true, "about": "Chicken with mushrooms, peas, and peppers in a velouté made from chicken stock, over rice.", "main": ["chicken", "mushrooms", "peas", "chicken stock", "butter and flour"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["creamy-cheesy", "mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "some" } },
+    { "id": "chicken-a-la-king", "title": "Chicken à la king", "cuisine": "american", "skills": ["roux"], "skill": "A velouté", "art": "poultry", "image": "dishes/chicken-a-la-king.png", "safety": "solo", "minutes": 60, "estimated": true, "about": "Chicken with mushrooms, peas, and peppers in a velouté made from chicken stock, over rice.", "main": ["chicken", "mushrooms", "peas", "chicken stock", "butter and flour"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["creamy-cheesy", "mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "some" } },
     {
       "id": "korean-fried-chicken",
       "title": "Korean fried chicken",
@@ -1654,6 +1770,7 @@
       "skills": ["deep-frying"],
       "skill": "Double-frying at a held temperature",
       "art": "poultry",
+      "image": "dishes/korean-fried-chicken.png",
       "safety": "adult-nearby",
       "minutes": 120,
       "estimated": true,
@@ -1669,8 +1786,52 @@
         "veggies": "light"
       }
     },
-    { "id": "salmon-en-papillote", "title": "Salmon en papillote", "cuisine": "french", "skills": ["cooking-fish"], "skill": "Fish in parchment for guests", "art": "fish", "safety": "solo", "minutes": 60, "estimated": true, "about": "Salmon for six baked in parchment packets with julienned vegetables, lemon, and dill.", "main": ["salmon fillets", "carrots and zucchini", "lemon", "dill", "parchment"], "method": "oven", "tags": { "protein": "salmon", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$$$", "familiar": "everyday", "veggies": "some" } },
-    { "id": "samke-harra", "title": "Samke harra", "cuisine": "lebanese", "skills": ["cooking-fish", "roasting"], "skill": "Roasting a whole fish", "art": "fish", "safety": "solo", "minutes": 90, "estimated": true, "about": "A whole fish scored, stuffed, and roasted under a spiced pepper, cilantro, and walnut topping, with tahini sauce.", "main": ["whole white fish", "red peppers", "cilantro", "walnuts", "tahini"], "method": "oven", "tags": { "protein": "white-fish", "flavors": ["chili-heat", "herby-lemony"], "heat": "some", "budget": "$$$", "familiar": "adventurous", "veggies": "some" } },
+    {
+      "id": "salmon-en-papillote",
+      "title": "Salmon en papillote",
+      "cuisine": "french",
+      "skills": ["cooking-fish"],
+      "skill": "Fish in parchment for guests",
+      "art": "fish",
+      "image": "dishes/salmon-en-papillote.png",
+      "safety": "solo",
+      "minutes": 60,
+      "estimated": true,
+      "about": "Salmon for six baked in parchment packets with julienned vegetables, lemon, and dill.",
+      "main": ["salmon fillets", "carrots and zucchini", "lemon", "dill", "parchment"],
+      "method": "oven",
+      "tags": {
+        "protein": "salmon",
+        "flavors": ["herby-lemony"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      }
+    },
+    {
+      "id": "samke-harra",
+      "title": "Samke harra",
+      "cuisine": "lebanese",
+      "skills": ["cooking-fish", "roasting"],
+      "skill": "Roasting a whole fish",
+      "art": "fish",
+      "image": "dishes/samke-harra.png",
+      "safety": "solo",
+      "minutes": 90,
+      "estimated": true,
+      "about": "A whole fish scored, stuffed, and roasted under a spiced pepper, cilantro, and walnut topping, with tahini sauce.",
+      "main": ["whole white fish", "red peppers", "cilantro", "walnuts", "tahini"],
+      "method": "oven",
+      "tags": {
+        "protein": "white-fish",
+        "flavors": ["chili-heat", "herby-lemony"],
+        "heat": "some",
+        "budget": "$$$",
+        "familiar": "adventurous",
+        "veggies": "some"
+      }
+    },
     {
       "id": "bbq-chicken-two-zone",
       "title": "Grilled BBQ chicken",
@@ -1678,6 +1839,7 @@
       "skills": ["grilling"],
       "skill": "Two-zone grilling",
       "art": "poultry",
+      "image": "dishes/bbq-chicken-two-zone.png",
       "safety": "adult-nearby",
       "minutes": 90,
       "estimated": true,
@@ -1700,6 +1862,7 @@
       "skills": ["grilling", "marinating"],
       "skill": "Grilling skewers over direct heat",
       "art": "poultry",
+      "image": "dishes/chicken-satay.png",
       "safety": "adult-nearby",
       "minutes": 90,
       "estimated": true,
@@ -1715,10 +1878,98 @@
         "veggies": "light"
       }
     },
-    { "id": "roast-beef", "title": "Roast beef with roasted vegetables", "cuisine": "american", "skills": ["roasting", "gravy"], "skill": "Roasting a large cut and carving it", "art": "meat", "safety": "solo", "minutes": 150, "estimated": true, "about": "A beef roast cooked to doneness and rested, carved thin, with roasted vegetables and a pan jus.", "main": ["beef top round or sirloin roast", "carrots", "potatoes", "onions", "broth"], "method": "oven", "tags": { "protein": "beef", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$$", "familiar": "everyday", "veggies": "some" } },
-    { "id": "roast-leg-of-lamb", "title": "Roast leg of lamb", "cuisine": "greek", "skills": ["roasting"], "skill": "A large roast to doneness, with carryover", "art": "meat", "safety": "solo", "minutes": 180, "estimated": true, "about": "A leg of lamb, the fat cap trimmed off, studded with garlic and rosemary and roasted to doneness. The Appointed Times lamb.", "main": ["leg of lamb", "garlic", "rosemary", "lemon", "potatoes"], "method": "oven", "tags": { "protein": "lamb", "flavors": ["herby-lemony"], "heat": "mild", "budget": "$$$", "familiar": "new-ish", "veggies": "light" } },
-    { "id": "beef-lasagna", "title": "Beef lasagna with béchamel", "cuisine": "italian", "skills": ["layering", "roux"], "skill": "Two large pans in one oven", "art": "meat", "safety": "solo", "minutes": 180, "estimated": true, "about": "Lasagna for 12 layered with beef ragù and béchamel, timed with a second pan in the same oven.", "main": ["lasagna sheets", "ground beef", "tomatoes", "milk, butter, and flour", "parmesan"], "method": "oven", "tags": { "protein": "beef", "flavors": ["rich-tomato", "creamy-cheesy"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" } },
-    { "id": "moussaka", "title": "Moussaka", "cuisine": "greek", "skills": ["layering", "roux"], "skill": "A layered bake for 12", "art": "meat", "safety": "solo", "minutes": 180, "estimated": true, "about": "Greek layers of roasted eggplant and spiced ground lamb in tomato, under a thick béchamel, for 12.", "main": ["eggplant", "ground lamb", "tomatoes", "cinnamon", "milk, butter, and flour"], "method": "oven", "tags": { "protein": "lamb", "flavors": ["warm-spices", "rich-tomato"], "heat": "mild", "budget": "$$$", "familiar": "adventurous", "veggies": "some" } },
+    {
+      "id": "roast-beef",
+      "title": "Roast beef with roasted vegetables",
+      "cuisine": "american",
+      "skills": ["roasting", "gravy"],
+      "skill": "Roasting a large cut and carving it",
+      "art": "meat",
+      "image": "dishes/roast-beef.png",
+      "safety": "solo",
+      "minutes": 150,
+      "estimated": true,
+      "about": "A beef roast cooked to doneness and rested, carved thin, with roasted vegetables and a pan jus.",
+      "main": ["beef top round or sirloin roast", "carrots", "potatoes", "onions", "broth"],
+      "method": "oven",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      }
+    },
+    {
+      "id": "roast-leg-of-lamb",
+      "title": "Roast leg of lamb",
+      "cuisine": "greek",
+      "skills": ["roasting"],
+      "skill": "A large roast to doneness, with carryover",
+      "art": "meat",
+      "image": "dishes/roast-leg-of-lamb.png",
+      "safety": "solo",
+      "minutes": 180,
+      "estimated": true,
+      "about": "A leg of lamb, the fat cap trimmed off, studded with garlic and rosemary and roasted to doneness. The Appointed Times lamb.",
+      "main": ["leg of lamb", "garlic", "rosemary", "lemon", "potatoes"],
+      "method": "oven",
+      "tags": {
+        "protein": "lamb",
+        "flavors": ["herby-lemony"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      }
+    },
+    {
+      "id": "beef-lasagna",
+      "title": "Beef lasagna with béchamel",
+      "cuisine": "italian",
+      "skills": ["layering", "roux"],
+      "skill": "Two large pans in one oven",
+      "art": "meat",
+      "image": "dishes/beef-lasagna.png",
+      "safety": "solo",
+      "minutes": 180,
+      "estimated": true,
+      "about": "Lasagna for 12 layered with beef ragù and béchamel, timed with a second pan in the same oven.",
+      "main": ["lasagna sheets", "ground beef", "tomatoes", "milk, butter, and flour", "parmesan"],
+      "method": "oven",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["rich-tomato", "creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      }
+    },
+    {
+      "id": "moussaka",
+      "title": "Moussaka",
+      "cuisine": "greek",
+      "skills": ["layering", "roux"],
+      "skill": "A layered bake for 12",
+      "art": "meat",
+      "image": "dishes/moussaka.png",
+      "safety": "solo",
+      "minutes": 180,
+      "estimated": true,
+      "about": "Greek layers of roasted eggplant and spiced ground lamb in tomato, under a thick béchamel, for 12.",
+      "main": ["eggplant", "ground lamb", "tomatoes", "cinnamon", "milk, butter, and flour"],
+      "method": "oven",
+      "tags": {
+        "protein": "lamb",
+        "flavors": ["warm-spices", "rich-tomato"],
+        "heat": "mild",
+        "budget": "$$$",
+        "familiar": "adventurous",
+        "veggies": "some"
+      }
+    },
     {
       "id": "birria-de-chivo",
       "title": "Birria de chivo",
@@ -1726,6 +1977,7 @@
       "skills": ["braising"],
       "skill": "Braising, then chilling to lift off the fat",
       "art": "meat",
+      "image": "dishes/birria-de-chivo.png",
       "safety": "solo",
       "minutes": 240,
       "estimated": true,
@@ -1748,6 +2000,7 @@
       "skills": ["braising"],
       "skill": "A braise finished with a reduced sauce",
       "art": "poultry",
+      "image": "dishes/chicken-chasseur.png",
       "safety": "solo",
       "minutes": 90,
       "estimated": true,
@@ -1770,6 +2023,7 @@
       "skills": ["braising"],
       "skill": "Rendering duck legs and saving the fat",
       "art": "poultry",
+      "image": "dishes/duck-legs-white-beans.png",
       "safety": "solo",
       "minutes": 180,
       "estimated": true,
@@ -1785,7 +2039,51 @@
         "veggies": "light"
       }
     },
-    { "id": "cholent", "title": "Cholent", "cuisine": "jewish", "skills": ["one-pot-stews"], "skill": "A stew built to hold safely overnight", "art": "meat", "safety": "solo", "minutes": 150, "estimated": true, "about": "An Ashkenazi Sabbath stew of beef, beans, barley, and potatoes, started before the Sabbath and held hot overnight. Made without kishke.", "main": ["beef chuck", "dried beans", "barley", "potatoes", "onions"], "method": "stove-oven", "tags": { "protein": "beef", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "some" } },
-    { "id": "dafina", "title": "Dafina", "cuisine": "moroccan", "skills": ["one-pot-stews"], "skill": "A stew built to hold safely overnight", "art": "meat", "safety": "solo", "minutes": 180, "estimated": true, "about": "A Moroccan Jewish Sabbath stew of beef, chickpeas, potatoes, wheat berries, and eggs in the shell, held hot overnight.", "main": ["beef", "chickpeas", "potatoes", "wheat berries", "eggs"], "method": "stove-oven", "tags": { "protein": "beef", "flavors": ["warm-spices"], "heat": "mild", "budget": "$$", "familiar": "adventurous", "veggies": "some" } }
+    {
+      "id": "cholent",
+      "title": "Cholent",
+      "cuisine": "jewish",
+      "skills": ["one-pot-stews"],
+      "skill": "A stew built to hold safely overnight",
+      "art": "meat",
+      "image": "dishes/cholent.png",
+      "safety": "solo",
+      "minutes": 150,
+      "estimated": true,
+      "about": "An Ashkenazi Sabbath stew of beef, beans, barley, and potatoes, started before the Sabbath and held hot overnight. Made without kishke.",
+      "main": ["beef chuck", "dried beans", "barley", "potatoes", "onions"],
+      "method": "stove-oven",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      }
+    },
+    {
+      "id": "dafina",
+      "title": "Dafina",
+      "cuisine": "moroccan",
+      "skills": ["one-pot-stews"],
+      "skill": "A stew built to hold safely overnight",
+      "art": "meat",
+      "image": "dishes/dafina.png",
+      "safety": "solo",
+      "minutes": 180,
+      "estimated": true,
+      "about": "A Moroccan Jewish Sabbath stew of beef, chickpeas, potatoes, wheat berries, and eggs in the shell, held hot overnight.",
+      "main": ["beef", "chickpeas", "potatoes", "wheat berries", "eggs"],
+      "method": "stove-oven",
+      "tags": {
+        "protein": "beef",
+        "flavors": ["warm-spices"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "adventurous",
+        "veggies": "some"
+      }
+    }
   ]
 }
