@@ -6491,3 +6491,28 @@ owner approves it there.
 - The content check finds no Level 4 writing warnings.
 - No screens changed, so no screenshots.
 - Tests: 402.
+
+## 248. 2026-10-27 — Level dish pictures: sheets 34–39
+
+Owner, 2026-10-27: "Rest of level two dishes", six ChatGPT sheets from
+[Level dish pictures: ChatGPT
+prompts](https://claude.ai/artifact/PbGHZTt9e78S2SbwtyYVMB), matched to the
+prompt doc's sheets 34–39.
+
+- **Before:** 24 Level 2 recipe cards had only a meal-type drawing, and the
+  written pan de elote recipe showed the dessert drawing (247's missing
+  picture).
+- **Now:**
+  - 24 dish pictures, saved to `content/images/source/` under the doc's
+    names (`sheet-34-levels-6.png` to `sheet-39-levels-11.png`), cropped into
+    `content/images/dishes/<card id>.png`, built to `public/img/dishes/`, and
+    listed in `tools/dish-sheets.txt`. Every sheet cropped cleanly with the
+    tool; no hand cuts.
+  - `"image"` added to the 24 cards in `sp-2.json`; pan de elote's recipe
+    points at its picture.
+  - Checked by eye for unclean foods: none. The potstickers, nachos, and
+    fajitas are chicken; the sloppy joes, giniling, and Filipino baked
+    macaroni are ground beef; the salmon has fins and scales.
+- Every Level 2 recipe card now has a dish picture. Still to come: Level 4's
+  sheets 55–62.
+- Tests: 402.

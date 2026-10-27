@@ -14493,7 +14493,7 @@ export const LIBRARY = {
    "track": "core",
    "unit": 102,
    "title": "Pan de elote",
-   "image": "img/meals/dessert.svg",
+   "image": "img/dishes/pan-de-elote.webp",
    "cuisine": "mexican",
    "skill": "A blender batter baked to doneness",
    "servings": 12,

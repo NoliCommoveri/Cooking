@@ -44,6 +44,12 @@ sheet-30-levels-2.png bun-bowl,mini-pita-pizzas,ful-medames,hummus-plate
 sheet-31-levels-3.png chicken-caesar-wraps,chana-chaat,kofte,beef-tacos-seasoning
 sheet-32-levels-4.png keema,fish-sticks,shioyaki,teriyaki-chicken-bites
 sheet-33-levels-5.png welsh-cakes,chocolate-chip-cookies,alfajores,banana-bread
+sheet-34-levels-6.png pan-de-elote,chicken-potstickers,gyeran-jjim,egg-salad-sandwiches
+sheet-35-levels-7.png anda-curry,mexican-rice-chicken,hainanese-chicken-rice,black-bean-tortilla-soup
+sheet-36-levels-8.png egg-drop-soup,pancakes,pajeon,tomato-egg-stir-fry
+sheet-37-levels-9.png zucchini-pasta,tikil-gomen,sloppy-joes,giniling
+sheet-38-levels-10.png lemongrass-chicken,chicken-nachos,miso-salmon,sheet-pan-fajitas
+sheet-39-levels-11.png moroccan-vegetables-couscous,bbq-drumsticks,baked-ziti,filipino-baked-macaroni
 sheet-40-levels-12.png trinidad-curry-chicken,kefta-tagine,tom-kha-gai,bean-quesadillas
 sheet-41-levels-13.png rajma,aglio-e-olio,scallion-oil-noodles,vegetable-lo-mein
 sheet-42-levels-14.png -,-,bean-tostadas
