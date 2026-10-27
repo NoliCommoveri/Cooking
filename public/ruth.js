@@ -657,6 +657,10 @@ const TOUR = [
   { hash: '#/parent/reports', name: 'Reported recipes', owner: true, what: 'Recipes families have reported.', how: [
     'Hide one to take it out of User-shared recipes, and Unhide to put it back.',
   ] },
+  { hash: '#/parent/testing', name: 'Test families', owner: true, what: 'Pretend families, to see the app the way another family does.', how: [
+    'Make a test family: a new one, which goes through my Getting started, or kids or an adult partway through a course on any program.',
+    'Open one to use the app as them on this device. The yellow strip along the top has its PIN and Back to my account.',
+  ] },
 ];
 
 export const tourStops = (isOwner) => TOUR.filter((t) => !t.owner || isOwner);

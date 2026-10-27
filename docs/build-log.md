@@ -6676,3 +6676,38 @@ owner approves it there.
 - The content check finds no Level 4 writing warnings.
 - No screens changed, so no screenshots.
 - Tests: 402.
+
+## 253. 2026-10-27 — Test families
+
+Owner, 2026-10-27: "Give me a way to simulate an account not mine with
+various setups … a new user (go through Ruth's setup flow), partway through a
+course, an adult learner. I need to be able to set a fake account and get real
+prod views of what they'd see."
+
+- **Before:** the owner could see another family's experience only through
+  Preview as a learner (one lesson, nothing saved) or by signing up a second
+  account by email.
+- **Now:** **Owner → Test families** (`src/worker/testfamilies.js`).
+  - **+ Make a test family** opens a dialog: *New family* (as a fresh sign-up
+    leaves it, so Chef Ruth's Getting started runs), *Kids partway through a
+    course* (Ava and Ben), or *An adult learner* (Jordan), with the program
+    (Cook Around the World or a Level), weeks in (0–30), mode, and whether
+    to see the next release (a Level always does).
+  - A set-up family gets a course started that many weeks ago, its lessons
+    so far cooked (two a week, or one a Level week, on Mondays and
+    Wednesdays) and rated, and each Level week's parts checked off.
+  - **Open** signs this device in as that family's parent with the PIN
+    unlocked, and keeps the owner's own session aside. A yellow strip along
+    the top of every screen, above Chef Ruth and every dialog, names the
+    family, its PIN (1234), and has **Back to my account**. Switching reloads
+    the page so nothing of the other family stays on screen. Signing out
+    inside a test family signs the owner out too.
+  - **Remove** deletes it like Delete our family: /ops can bring it back for
+    30 days.
+  - Which families are test families is kept in `settings`
+    (`test_families`), so no migration. They're left off the owner's
+    Families list. Their parents' emails are `test-<id>@test.invalid`, with a
+    random password nobody holds.
+  - Chef Ruth's Show me around has a stop for it (owner only).
+- Screenshots sent in the session.
+- Tests: 407.

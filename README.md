@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [252. 2026-10-27 — 14g content: Level 4 Unit 5](docs/build-log.md#252-2026-10-27--14g-content-level-4-unit-5)
+**Latest build log entry:** [253. 2026-10-27 — Test families](docs/build-log.md#253-2026-10-27--test-families)
 
 ## Current features
 
@@ -52,6 +52,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Dish cards**: on the queue and course screens, a dish's name opens a card with a line about it, its badges, its main ingredients, how it cooks, and the time.
 - **Kid logins** (`src/worker/kidlogin.js`): a parent gives a kid profile a login (first name and last initial, one of 30 cooking pictures, a password). That kid's device opens only their kitchen; the server refuses everything else. A kid login lasts 14 days, renewed each time the app is opened.
 - **Parent screens**: profiles, family name, default servings, diet filters, voice step control, other parent logins, and the PIN. Each list's add button is at its top right, and adding opens a dialog (a course or recipe opens its own page); long sections fold shut.
+- **Test families** (Owner → Test families, `src/worker/testfamilies.js`): make a pretend family (new, kids partway through a course, or an adult learner, on any program and week) and open it on this device to use the real app as them; a strip along the top has its PIN and Back to my account.
 - **Owner screens**: the beta word, the family list, setting a parent's password, fix requests, recipe reviews, and reported recipes.
 - **Ops page** (`/ops`): migrations (the schema file and release 1's draft, `0002_levels.sql`; Re-apply draft, Restore draft tables, and Finalize when a build has a draft migration), Releases (numbered releases, each launched in order for everyone, with a preview per family and Undo launch of the latest; a release still being built can be previewed but not launched; `src/worker/release.js`). Release 1, the Levels, is being built; the owner flag, whether GitHub is connected for the manager section, backup download and restore, clear everything, remove or restore one family, and Bring back a family its parents deleted, within its 30 days.
 - **Manager section** (`/manage`, `src/worker/manage.js`, `public/manage/`): the owner's own sign-in. Add, rename, reorder, and remove units; add lessons (blank or a copy), move, hide, and unhide them; edit every part of a lesson in a form built from the lesson schema; edit ingredients, tools, skills, kitchen words, cuisines, tastes, and the food rules; tag every dish on the Tags page; upload dish pictures. Checked as you type by the content linter. **Preview as a learner** runs a lesson in either theme, unsaved changes included, with no checklist to tick and nothing saved.

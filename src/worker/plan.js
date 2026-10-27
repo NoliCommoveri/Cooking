@@ -484,6 +484,31 @@ const planStatements = (env, course, plan) => [
     .bind(course.id, course.family_id, x.id, i, x.removed ? REMOVED : KEPT)),
 ];
 
+// A course set up straight from the owner's Test families (testfamilies.js),
+// the way Set up a course saves one: a Level course starts with Familiar,
+// Cook Around the World keeps the best dish of each pick-one group.
+export async function seedCourse(env, fid, { pids, program = null, start, per }) {
+  const course = { id: id(), family_id: fid };
+  await env.DB.batch([
+    env.DB.prepare('INSERT INTO courses (id, family_id, name, start_date, per_week, created_at) VALUES (?, ?, ?, ?, ?, ?)')
+      .bind(course.id, fid, '', start, program ? 1 : per, `${start}T12:00:00.000Z`),
+    ...pids.map((pid) => env.DB.prepare('INSERT INTO course_profiles (course_id, family_id, profile_id) VALUES (?, ?, ?)').bind(course.id, fid, pid)),
+    ...(program
+      ? [env.DB.prepare('INSERT INTO course_programs (course_id, family_id, program, parts, created_at) VALUES (?, ?, ?, NULL, ?)').bind(course.id, fid, program, now()),
+        startStatement(env, course, 'familiar')]
+      : planStatements(env, course, await defaultFor(env, fid, pids))),
+  ]);
+  return course.id;
+}
+
+// The lessons a course's schedule cooks, in order, and each one's Level week.
+export async function courseOrder(env, fid, cid) {
+  const row = await env.DB.prepare('SELECT * FROM courses WHERE id = ? AND family_id = ?').bind(cid, fid).first();
+  const [course] = await withPrograms(env, fid, [row]);
+  const lessons = await courseLessons(env, course, await family(env, fid));
+  return { usable: lessons.usable, weekOf: lessons.weekOf ?? {} };
+}
+
 async function courseProfiles(env, course) {
   const { results } = await env.DB.prepare('SELECT profile_id FROM course_profiles WHERE course_id = ? AND family_id = ?').bind(course.id, course.family_id).all();
   return results.map((r) => r.profile_id);
