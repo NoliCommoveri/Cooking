@@ -6770,3 +6770,25 @@ all levels not just 3".
   phase 13.
 - No screens changed, so no screenshots.
 - Tests: 407.
+
+## 257. 2026-10-27 — Plan: courses pause for Unleavened Bread
+
+Owner, 2026-10-27, on the recommendation to move leavened lessons past the
+feast (§6.20): "I don't want to pull lessons out of order. Maybe we just put
+the course on hold." The week the feast starts in is due the day before it,
+the week it ends in shows once the last day has passed, and the kitchen says:
+"Due to the Holy Time, your regular course is paused. Feel free to select one
+of our unleavened recipes to cook as a family!"
+
+- **Before:** the plan recommended moving a leavened course lesson due on an
+  unleavened day to the week after the feast, filling its place with the next
+  unleavened lesson, and flagging leavened lessons on the Queue with a
+  one-tap swap.
+- **Now:** every course, Cook Around the World and the Levels, pauses
+  through the unleavened days. The week the feast starts in is due the day
+  before it; the week it ends in waits until the last day has passed;
+  nothing counts as behind. The kitchen shows the owner's notice. The
+  questions still open are listed in §6.20. Nothing is built yet: it comes
+  with phase 13.
+- No screens changed, so no screenshots.
+- Tests: 407.
