@@ -1,0 +1,77 @@
+{
+  "id": "gyeran-jjim",
+  "version": 1,
+  "track": "core",
+  "unit": 102,
+  "title": "Gyeran-jjim",
+  "image": "meals/side.svg",
+  "cuisine": "korean",
+  "skill": "Steaming eggs gently",
+  "skills": ["steaming"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 30,
+  "scaling": { "mode": "fixed", "multipliers": [1], "notes": { "1": "One bowl serves 4 as a side with rice." } },
+  "learn": {
+    "move": {
+      "title": "Eggs in the steam",
+      "body": "Gyeran-jjim is Korean steamed eggs: soft, puffy, and silky, eaten with rice. Today you'll whisk eggs with broth, set the bowl in a steamer, and cook them gently with the lid on until they're set."
+    },
+    "why": [
+      { "id": "gentle", "title": "Gentle heat for eggs", "body": "Eggs get rubbery in a hot pan. Steam is gentler, so the eggs set soft and smooth." },
+      { "id": "whisk", "title": "Whisk well", "body": "Whisking mixes the yolk and white all the way. Then the eggs cook to one even color." },
+      { "id": "salt", "title": "Plain salt", "body": "Many Korean cooks season gyeran-jjim with a salty seasoning made from sea creatures the food rules leave out. This recipe uses plain salt instead." },
+      { "id": "set", "title": "Set, not runny", "body": "The eggs are done when the middle jiggles a little but a knife comes out with no runny egg." }
+    ],
+    "wrong": [
+      { "sign": "The top is bubbly and full of holes", "fix": "The water boiled too hard. Turn the heat lower next time." },
+      { "sign": "The middle is still runny", "fix": "Put the lid back on and steam 2 more minutes." },
+      { "sign": "It tastes plain", "fix": "Sprinkle a pinch of salt and a few drops of sesame oil on top." }
+    ],
+    "quiz": [
+      { "q": "Why steam eggs instead of frying them?", "choices": ["Steam is gentle, so they stay soft", "It's faster", "They get crispy"], "answer": 0, "explain": "Hot pans make eggs rubbery." },
+      { "q": "What seasons this gyeran-jjim?", "choices": ["Plain salt", "Fish sauce", "Soy sauce"], "answer": 0, "explain": "It keeps the dish clean and simple." },
+      { "q": "How do you know the eggs are done?", "choices": ["A knife comes out with no runny egg", "They turn brown", "After 1 minute"], "answer": 0, "explain": "The middle can jiggle a little." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "egg", "amount": 4, "unit": "count", "group": "Eggs" },
+    { "ingredient": "broth-chicken", "amount": 1, "unit": "cup", "group": "Eggs" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Eggs" },
+    { "ingredient": "green-onion", "amount": 2, "unit": "count", "group": "Topping" },
+    { "ingredient": "sesame-oil", "amount": 1, "unit": "tsp", "group": "Topping" },
+    { "ingredient": "sesame-seeds", "amount": 1, "unit": "tsp", "optional": true, "group": "Topping" },
+    { "ingredient": "water", "amount": 4, "unit": "cup", "prep": "for the pot", "group": "Steamer" },
+    { "ingredient": "rice-cooked-pouch", "amount": 2, "unit": "count", "group": "Rice" }
+  ],
+  "equipment": [
+    "pot-large",
+    "steamer-basket",
+    "heatproof-bowl",
+    "mixing-bowl-medium",
+    "whisk",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "chef-knife",
+    "cutting-board",
+    "oven-mitts",
+    "table-knife",
+    "microwave",
+    "spoon"
+  ],
+  "steps": [
+    { "id": "steamer", "text": "Put the steamer basket in the pot. Pour in the pot's water below the basket.", "safety": "solo", "look": "Water under the basket, not over it." },
+    { "id": "boil", "text": "Put the lid on. Bring the water to a boil over high heat.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 360, "timerLabel": "To a boil" },
+    { "id": "crack", "text": "Crack the eggs into the medium bowl.", "safety": "solo", "handles": ["egg"], "tip": "Fish out any shell with a bigger piece of shell." },
+    { "id": "wash-eggs", "text": "Wash your hands with soap, and throw away the shells.", "safety": "solo", "type": "wash" },
+    { "id": "whisk", "text": "Add the broth and salt. Whisk until there are no streaks of white.", "safety": "solo", "why": "whisk", "timerSeconds": 60, "timerLabel": "Whisk", "look": "One even yellow color." },
+    { "id": "pour", "text": "Pour the eggs into the heatproof bowl.", "safety": "solo", "look": "The bowl is about three-quarters full." },
+    { "id": "onion", "text": "Slice the green onions thin. Stir half into the eggs.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Keep the rest for the top." },
+    { "id": "in", "text": "With oven mitts, lift the lid, far side first. An adult sets the bowl in the basket.", "safety": "adult-hands-on", "hazard": "Steam", "tip": "Keep your face back from the steam." },
+    { "id": "steam", "text": "Put the lid on. Turn the heat to medium-low, so the water bubbles gently.", "safety": "adult-nearby", "hazard": "Steam", "why": "gentle", "timerSeconds": 720, "timerLabel": "Steam eggs", "look": "Puffed up, and set at the edges." },
+    { "id": "rice", "text": "While the eggs steam, heat the rice pouches in the microwave as the package says.", "safety": "solo", "tip": "Squeeze the pouch first to break up the rice." },
+    { "id": "check", "text": "Lift the lid away from you. Push the butter knife into the middle. It should come out with no runny egg.", "safety": "adult-nearby", "type": "doneness", "hazard": "Steam", "target": { "look": "Set all the way; a knife comes out with no runny egg" }, "why": "set", "tip": "Runny? Lid on, 2 more minutes." },
+    { "id": "out", "text": "Turn off the stove. An adult lifts out the hot bowl with oven mitts.", "safety": "adult-hands-on", "hazard": "Hot bowl, steam" },
+    { "id": "serve", "text": "Drip the sesame oil on top. Scatter the rest of the green onion and the sesame seeds. Serve with the rice.", "safety": "solo", "look": "Puffy, golden, and shiny on top." }
+  ]
+}

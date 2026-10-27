@@ -6536,3 +6536,41 @@ owner approves it there.
   the French omelet now.
 - No screens changed, so no screenshots.
 - Tests: 402.
+
+## 249. 2026-10-27 — 14g content: Level 2 Unit 5
+
+Owner, 2026-10-27: Level 2 is the second of Unit 5's three Levels (248).
+Reviewed in [14g review: Level 2 Apprentice, Unit
+5](https://claude.ai/artifact/HokGLPnrWNN5cpMo8iG9ef); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 2 Unit 5's ten dishes was written for Level 2.
+  Spaghetti marinara and cacio e pepe had no Level 2 version; the other
+  eight were unwritten Level cards. All 15 part pages were blank.
+- **Now:**
+  - **Eight Level-only recipes** in `content/levels/recipes/`, unit 102:
+    Chicken potstickers with broccoli (the broccoli steamed in a basket, the
+    potstickers browned and steamed in a covered pan), Gyeran-jjim (steamed
+    in a bowl, plain salt), Egg salad sandwiches (marked as a variation of
+    Tuna salad sandwiches), Anda curry, Mexican rice with chicken and
+    Hainanese-style chicken rice (rice on the stove at 1½ cups of liquid per
+    cup), Black bean tortilla soup, and Egg drop soup with tofu. Their cards'
+    minutes are now the recipes' own.
+  - **Level 2 versions** of Spaghetti marinara (frozen diced onion and
+    jarred garlic) and Cacio e pepe, every step rewritten short, as the
+    mastery week.
+  - **All 15 part pages:** steam burns and the lid, steaming broccoli, steam
+    vegetables ahead; egg freshness and the float test, soft and hard eggs,
+    boil eggs ahead; the rice ratio, rice by the ratio, feeding the five
+    thousand (John 6:1–13); boil vs. simmer, finding a simmer, freezing soup;
+    pasta shapes, draining pasta safely, and Abraham's guests (Genesis
+    18:1–8).
+  - **New ingredients:** frozen chicken or vegetable potstickers (label note:
+    chicken or vegetable filling only), broccoli crowns, tortilla chips,
+    pouches of cooked long-grain rice.
+- **Missing pictures:** all eight Level-only recipes. Their prompts are
+  already in the Level dish pictures doc, on sheets 34, 35, and 36; until
+  those are made, the recipes show the meal-type drawings.
+- The content check finds no Level 2 writing warnings.
+- No screens changed, so no screenshots.
+- Tests: 402.

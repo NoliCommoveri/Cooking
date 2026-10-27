@@ -73,5 +73,117 @@
     { "id": "into-pan", "text": "Pour about half a cup of pasta water into the skillet with the pepper. Use the tongs to lift the spaghetti straight from the pot into the skillet. Toss it for a minute over medium-low heat.", "safety": "adult-nearby", "hazard": "Hot water, hot pan", "timerSeconds": 60, "timerLabel": "Toss", "tip": "Let each tongful drip over the pot for a second before you carry it over." },
     { "id": "sauce", "text": "Turn off the heat under the skillet, and turn off the pasta pot too. Wait 30 seconds, then add the cheese paste. Toss fast and keep tossing, adding splashes of pasta water, until the sauce is smooth, creamy, and coats every strand.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 30, "timerLabel": "Cool a little", "why": "too-hot", "look": "Glossy and creamy, like thin cream, with no clumps and no puddles of grease." },
     { "id": "serve", "text": "Serve right away, with an extra grind of pepper on top.", "safety": "solo", "tip": "Cacio e pepe thickens as it sits, so eat it hot. A splash of warm water loosens leftovers." }
+  ],
+  "variations": [
+    {
+      "id": "sp-2",
+      "title": "Cacio e pepe",
+      "level": "sp-2",
+      "tags": {
+        "protein": "none",
+        "flavors": ["creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "totalMinutes": 35,
+      "learn": {
+        "move": {
+          "title": "Cheese, pepper, and pasta water",
+          "body": "Cacio e pepe is a Roman pasta: just cheese, black pepper, butter, and the starchy water the pasta cooked in. This is the unit's mastery cook. You'll boil the pasta, save its water, and toss the sauce together with the heat off. An adult is nearby; you run the kitchen."
+        },
+        "wrong": [
+          { "sign": "The cheese clumped into strings", "fix": "The pan was too hot. Add warm pasta water and toss hard with the heat off." },
+          { "sign": "The sauce is thick and pasty", "fix": "Toss in more pasta water, a splash at a time." },
+          { "sign": "It's greasy", "fix": "Add a splash of pasta water and toss fast." }
+        ],
+        "quiz": [
+          { "q": "Why does the cheese go in with the heat off?", "choices": ["Too much heat makes it clump", "So it stays cold", "So the pepper doesn't burn"], "answer": 0, "explain": "Warm pasta melts it smoothly." },
+          { "q": "What holds the sauce together?", "choices": ["Starch from the pasta water", "Salt", "Pepper"], "answer": 0, "explain": "Cloudy water is the glue." },
+          { "q": "Why mash the cheese with a little water first?", "choices": ["It melts smoothly into a paste", "It's faster to clean", "It makes more cheese"], "answer": 0, "explain": "A paste doesn't clump." }
+        ]
+      },
+      "steps": {
+        "change": {
+          "water-on": {
+            "id": "water-on",
+            "text": "Fill the large pot with the water at the sink. Set it on the stove, add the salt, cover it, and heat it on high.",
+            "safety": "adult-nearby",
+            "hazard": "Hot stove",
+            "why": "starch",
+            "tip": "Carry it to the stove while it's still cold."
+          },
+          "cheese": {
+            "id": "cheese",
+            "text": "Put the cheese in the medium bowl. Fluff it with the fork.",
+            "safety": "solo",
+            "why": "fine-cheese",
+            "look": "Fine and powdery, like sand."
+          },
+          "pasta": {
+            "id": "pasta",
+            "text": "When the water boils hard, add the spaghetti. Stir with the tongs for 2 minutes.",
+            "safety": "adult-nearby",
+            "hazard": "Boiling water",
+            "timerSeconds": 420,
+            "timerLabel": "Spaghetti",
+            "look": "Bendy, but still a little firm.",
+            "tip": "It finishes cooking in the sauce."
+          },
+          "pepper": {
+            "id": "pepper",
+            "text": "Melt the butter in the skillet over medium-low heat. Stir in the pepper.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 60,
+            "timerLabel": "Pepper",
+            "why": "pepper",
+            "look": "It smells toasty."
+          },
+          "save-water": {
+            "id": "save-water",
+            "text": "With an oven mitt on, scoop 2 cups of pasta water into the measuring cup.",
+            "safety": "adult-nearby",
+            "hazard": "Boiling water",
+            "look": "Cloudy water.",
+            "tip": "The cup gets very hot."
+          },
+          "paste": {
+            "id": "paste",
+            "text": "Wait 1 minute. Mash a few spoonfuls of the water into the cheese with the fork.",
+            "safety": "solo",
+            "why": "too-hot",
+            "look": "A thick, smooth paste."
+          },
+          "into-pan": {
+            "id": "into-pan",
+            "text": "Pour ½ cup of pasta water into the skillet. Lift the spaghetti in with the tongs.",
+            "safety": "adult-nearby",
+            "hazard": "Hot water, hot pan",
+            "timerSeconds": 60,
+            "timerLabel": "Toss",
+            "tip": "Let each tongful drip over the pot first."
+          },
+          "sauce": {
+            "id": "sauce",
+            "text": "Turn off both burners. Wait 30 seconds. Add the paste and toss fast.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 30,
+            "timerLabel": "Cool a little",
+            "why": "too-hot",
+            "look": "Glossy and creamy, no clumps.",
+            "tip": "Add splashes of pasta water as you toss."
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Serve right away, with more pepper on top.",
+            "safety": "solo",
+            "tip": "It thickens as it sits, so eat it hot."
+          }
+        }
+      }
+    }
   ]
 }

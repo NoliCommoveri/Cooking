@@ -4398,6 +4398,117 @@ export const LIBRARY = {
     "canned tomatoes",
     "garlic",
     "basil"
+   ],
+   "variations": [
+    {
+     "title": "Spaghetti marinara",
+     "image": "img/dishes/spaghetti-marinara.webp",
+     "cuisine": "italian",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, cook the spaghetti in two pots, each with the full amount of water and salt, so the water comes back to a boil quickly, and use your biggest pot for the sauce."
+       }
+      ]
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "onion-diced-frozen"
+      },
+      {
+       "ingredient": "garlic-minced-jarred"
+      },
+      {
+       "ingredient": "chili-flakes",
+       "optional": true
+      },
+      {
+       "ingredient": "oregano-dried"
+      },
+      {
+       "ingredient": "tomatoes-crushed"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "basil"
+      },
+      {
+       "ingredient": "spaghetti"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "parmesan",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "spaghetti",
+       "use": "spaghetti-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "tomatoes"
+      ],
+      "optional": [
+       "sharp-cheese"
+      ]
+     },
+     "tools": [
+      "can-opener",
+      "skillet-12",
+      "wooden-spoon",
+      "measuring-spoons",
+      "measuring-cups",
+      "pot-large",
+      "tongs",
+      "liquid-measuring-cup",
+      "colander",
+      "oven-mitts"
+     ],
+     "skills": [
+      "building-a-sauce",
+      "simmering"
+     ],
+     "method": "stove",
+     "about": "Spaghetti in a simple homemade tomato sauce with garlic and basil.",
+     "main": [
+      "spaghetti",
+      "canned tomatoes",
+      "garlic",
+      "basil"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
+    }
    ]
   },
   {
@@ -6277,6 +6388,98 @@ export const LIBRARY = {
     "spaghetti",
     "pecorino or parmesan",
     "black pepper"
+   ],
+   "variations": [
+    {
+     "title": "Cacio e pepe",
+     "image": "img/dishes/cacio-e-pepe.webp",
+     "cuisine": "italian",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "max": 8,
+      "notes": [
+       {
+        "from": 7,
+        "text": "For 7 or 8, the skillet is very full. Toss slowly, and use the tongs to lift the pasta from the bottom."
+       }
+      ]
+     },
+     "totalMinutes": 35,
+     "ingredients": [
+      {
+       "ingredient": "spaghetti"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "pecorino"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "pecorino",
+       "use": "parmesan",
+       "reason": "availability"
+      },
+      {
+       "for": "spaghetti",
+       "use": "spaghetti-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "sharp-cheese"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "pot-large",
+      "skillet-12",
+      "mixing-bowl-medium",
+      "fork",
+      "liquid-measuring-cup",
+      "measuring-cups",
+      "measuring-spoons",
+      "tongs",
+      "oven-mitts"
+     ],
+     "skills": [
+      "emulsions"
+     ],
+     "method": "stove",
+     "about": "Roman pasta with a creamy sauce made only from cheese, black pepper, and starchy pasta water.",
+     "main": [
+      "spaghetti",
+      "pecorino or parmesan",
+      "black pepper"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
+    }
    ]
   },
   {
@@ -13571,6 +13774,115 @@ export const LIBRARY = {
    "level": "sp-2"
   },
   {
+   "id": "anda-curry",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Anda curry",
+   "image": "img/meals/side.svg",
+   "cuisine": "indian",
+   "skill": "Boiled eggs in a simple curry",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 5,
+      "text": "Use the large pot for the curry, so the eggs fit in one layer."
+     }
+    ]
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "onion-diced-frozen"
+    },
+    {
+     "ingredient": "ginger-minced-jarred"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "turmeric-ground"
+    },
+    {
+     "ingredient": "paprika-sweet"
+    },
+    {
+     "ingredient": "garam-masala"
+    },
+    {
+     "ingredient": "tomato-sauce"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    },
+    {
+     "ingredient": "rice-cooked-pouch-long"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "cilantro"
+    ]
+   },
+   "tools": [
+    "saucepan-medium",
+    "slotted-spoon",
+    "mixing-bowl-large",
+    "table-knife",
+    "plate",
+    "skillet-12",
+    "wooden-spoon",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "small-bowl",
+    "microwave"
+   ],
+   "skills": [
+    "poaching-eggs",
+    "flavor-base"
+   ],
+   "method": "stove",
+   "about": "Hard-boiled eggs in an onion-tomato curry made with frozen diced onion and jarred ginger and garlic, with rice.",
+   "main": [
+    "eggs",
+    "frozen diced onion",
+    "canned tomatoes",
+    "jarred ginger and garlic",
+    "garam masala"
+   ],
+   "level": "sp-2"
+  },
+  {
    "id": "banana-bread",
    "version": 1,
    "track": "core",
@@ -13765,6 +14077,125 @@ export const LIBRARY = {
     "chili powder and cumin",
     "lettuce",
     "cheddar"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "black-bean-tortilla-soup",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Black bean tortilla soup",
+   "image": "img/meals/soup.svg",
+   "cuisine": "tex-mex",
+   "skill": "A soup from boxed broth at a simmer",
+   "servings": 6,
+   "scaling": {
+    "mode": "free",
+    "max": 10,
+    "notes": [
+     {
+      "from": 7,
+      "text": "Use the stockpot, and bring it to a boil a little longer."
+     }
+    ]
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "onion-diced-frozen"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "chili-powder"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "tomatoes-crushed"
+    },
+    {
+     "ingredient": "black-beans"
+    },
+    {
+     "ingredient": "corn-frozen"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "rotisserie-chicken",
+     "optional": true
+    },
+    {
+     "ingredient": "lime"
+    },
+    {
+     "ingredient": "tortilla-chips"
+    },
+    {
+     "ingredient": "avocado"
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    },
+    {
+     "ingredient": "cheddar-shredded",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "tomatoes",
+     "lemon-lime",
+     "avocado"
+    ],
+    "optional": [
+     "cilantro"
+    ]
+   },
+   "tools": [
+    "can-opener",
+    "colander",
+    "pot-large",
+    "wooden-spoon",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "small-bowl",
+    "chef-knife",
+    "cutting-board",
+    "spoon",
+    "thermometer",
+    "ladle"
+   ],
+   "skills": [
+    "simmering",
+    "building-soup"
+   ],
+   "method": "stove",
+   "about": "Boxed broth simmered with canned black beans, tomatoes, and frozen corn, topped with tortilla strips and avocado. Rotisserie chicken is a choice.",
+   "main": [
+    "boxed broth",
+    "canned black beans",
+    "canned tomatoes",
+    "frozen corn",
+    "tortilla chips"
    ],
    "level": "sp-2"
   },
@@ -14178,6 +14609,101 @@ export const LIBRARY = {
    "level": "sp-2"
   },
   {
+   "id": "chicken-potstickers",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Chicken potstickers with broccoli",
+   "image": "img/meals/poultry.svg",
+   "cuisine": "chinese-american",
+   "skill": "Steaming in a basket and in a covered pan",
+   "servings": 4,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes 24 potstickers, enough for 4. One skillet holds them all."
+    }
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "broccoli"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "potstickers-frozen"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "vinegar-rice"
+    },
+    {
+     "ingredient": "sesame-oil"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "soy-sauce",
+     "use": "tamari",
+     "reason": "gluten"
+    }
+   ],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "sesame"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "pot-large",
+    "steamer-basket",
+    "chef-knife",
+    "cutting-board",
+    "oven-mitts",
+    "tongs",
+    "plate",
+    "foil",
+    "skillet-12",
+    "spatula",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "small-bowl",
+    "thermometer"
+   ],
+   "skills": [
+    "steaming"
+   ],
+   "method": "stove",
+   "about": "Frozen chicken or vegetable potstickers browned and steamed in a covered pan, with steamed broccoli and soy dipping sauce. Labels checked for hidden fillings.",
+   "main": [
+    "frozen chicken or vegetable potstickers",
+    "broccoli",
+    "soy sauce",
+    "rice vinegar"
+   ],
+   "level": "sp-2"
+  },
+  {
    "id": "chocolate-chip-cookies",
    "version": 1,
    "track": "core",
@@ -14260,6 +14786,190 @@ export const LIBRARY = {
     "brown sugar",
     "egg",
     "chocolate chips"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "egg-drop-soup",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Egg drop soup with tofu",
+   "image": "img/meals/soup.svg",
+   "cuisine": "chinese",
+   "skill": "Holding a simmer while the egg goes in",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 5,
+      "text": "Pour the eggs in two batches, stirring between them."
+     }
+    ]
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "ginger-minced-jarred"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "tofu-extra-firm"
+    },
+    {
+     "ingredient": "cornstarch"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "black-pepper"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "sesame"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "pot-large",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "small-bowl",
+    "fork",
+    "mixing-bowl-medium",
+    "table-knife",
+    "cutting-board",
+    "chef-knife",
+    "wooden-spoon",
+    "paper-towels",
+    "ladle"
+   ],
+   "skills": [
+    "simmering",
+    "building-soup"
+   ],
+   "method": "stove",
+   "about": "Boxed broth simmered with ginger, thickened lightly, with ribbons of egg and cubes of tofu.",
+   "main": [
+    "boxed broth",
+    "eggs",
+    "tofu",
+    "green onion",
+    "cornstarch"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "egg-salad-sandwiches",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Egg salad sandwiches",
+   "image": "img/meals/side.svg",
+   "cuisine": "american",
+   "skill": "Boiling eggs hard and peeling them",
+   "servings": 4,
+   "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [
+     {
+      "from": 5,
+      "text": "Boil the eggs in the large pot so they sit in one layer."
+     }
+    ]
+   },
+   "totalMinutes": 40,
+   "ingredients": [
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "mayonnaise"
+    },
+    {
+     "ingredient": "mustard-dijon"
+    },
+    {
+     "ingredient": "chives"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "black-pepper"
+    },
+    {
+     "ingredient": "bread-sandwich"
+    },
+    {
+     "ingredient": "lettuce-green-leaf",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "mayonnaise",
+     "mustard"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "saucepan-medium",
+    "slotted-spoon",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "kitchen-shears",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "spoon",
+    "table-knife",
+    "cutting-board"
+   ],
+   "skills": [
+    "poaching-eggs"
+   ],
+   "method": "stove",
+   "about": "Hard-boiled eggs chopped with mayonnaise, mustard, and chives, on soft bread with lettuce.",
+   "main": [
+    "eggs",
+    "mayonnaise",
+    "mustard",
+    "chives",
+    "bread"
    ],
    "level": "sp-2"
   },
@@ -14477,6 +15187,200 @@ export const LIBRARY = {
     "lemon",
     "pita",
     "cucumber and tomato"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "gyeran-jjim",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Gyeran-jjim",
+   "image": "img/meals/side.svg",
+   "cuisine": "korean",
+   "skill": "Steaming eggs gently",
+   "servings": 4,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "One bowl serves 4 as a side with rice."
+    }
+   },
+   "totalMinutes": 30,
+   "ingredients": [
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "sesame-seeds",
+     "optional": true
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "rice-cooked-pouch"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "onions",
+     "sesame"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "pot-large",
+    "steamer-basket",
+    "heatproof-bowl",
+    "mixing-bowl-medium",
+    "whisk",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "chef-knife",
+    "cutting-board",
+    "oven-mitts",
+    "table-knife",
+    "microwave",
+    "spoon"
+   ],
+   "skills": [
+    "steaming"
+   ],
+   "method": "stove",
+   "about": "Korean steamed eggs, puffed and silky, seasoned with salt and green onion, with rice.",
+   "main": [
+    "eggs",
+    "broth",
+    "green onion",
+    "sesame oil",
+    "rice"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "hainanese-chicken-rice",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Hainanese-style chicken rice",
+   "image": "img/meals/poultry.svg",
+   "cuisine": "singaporean",
+   "skill": "Rice by ratio, cooked in broth",
+   "servings": 4,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "One saucepan serves 4. The rice and broth are measured for this size."
+    }
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "ginger-minced-jarred"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "rotisserie-chicken"
+    },
+    {
+     "ingredient": "cucumber"
+    },
+    {
+     "ingredient": "soy-sauce"
+    },
+    {
+     "ingredient": "sesame-oil"
+    },
+    {
+     "ingredient": "ginger-minced-jarred"
+    },
+    {
+     "ingredient": "green-onion"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "salt"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "cucumber",
+     "sesame",
+     "onions"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "colander",
+    "saucepan-medium",
+    "wooden-spoon",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "small-bowl",
+    "chef-knife",
+    "cutting-board",
+    "plate",
+    "microwave",
+    "thermometer",
+    "fork"
+   ],
+   "skills": [
+    "cooking-grains"
+   ],
+   "method": "stove",
+   "about": "Rice cooked in chicken broth with ginger and garlic, with sliced rotisserie chicken, cucumber, and dipping sauces.",
+   "main": [
+    "jasmine rice",
+    "broth",
+    "rotisserie chicken",
+    "jarred ginger and garlic",
+    "cucumber"
    ],
    "level": "sp-2"
   },
@@ -14898,6 +15802,108 @@ export const LIBRARY = {
     "sour cream",
     "green onions",
     "butter"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "mexican-rice-chicken",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Mexican rice with chicken",
+   "image": "img/meals/poultry.svg",
+   "cuisine": "tex-mex",
+   "skill": "White rice by ratio",
+   "servings": 4,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "One saucepan serves 4. The rice and liquid are measured for this size."
+    }
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "rice-white"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "onion-diced-frozen"
+    },
+    {
+     "ingredient": "garlic-minced-jarred"
+    },
+    {
+     "ingredient": "cumin-ground"
+    },
+    {
+     "ingredient": "tomato-sauce"
+    },
+    {
+     "ingredient": "broth-chicken"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "peas-carrots-frozen"
+    },
+    {
+     "ingredient": "rotisserie-chicken"
+    },
+    {
+     "ingredient": "lime",
+     "optional": true
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "chicken",
+   "tags": null,
+   "tasteItems": {
+    "required": [
+     "peas"
+    ],
+    "optional": [
+     "lemon-lime",
+     "cilantro"
+    ]
+   },
+   "tools": [
+    "colander",
+    "saucepan-medium",
+    "wooden-spoon",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "fork",
+    "plate",
+    "microwave",
+    "thermometer",
+    "chef-knife",
+    "cutting-board"
+   ],
+   "skills": [
+    "cooking-grains"
+   ],
+   "method": "stove",
+   "about": "Rice toasted and simmered in tomato and broth with peas and carrots, topped with rotisserie chicken.",
+   "main": [
+    "long-grain rice",
+    "tomato sauce",
+    "broth",
+    "frozen peas and carrots",
+    "rotisserie chicken"
    ],
    "level": "sp-2"
   },
@@ -22603,6 +23609,25 @@ export const LIBRARY = {
     "gluten",
     "egg"
    ]
+  },
+  "potstickers-frozen": {
+   "name": "Frozen chicken or vegetable potstickers",
+   "contains": [
+    "meat",
+    "gluten"
+   ]
+  },
+  "broccoli": {
+   "name": "Broccoli crowns",
+   "contains": []
+  },
+  "tortilla-chips": {
+   "name": "Tortilla chips",
+   "contains": []
+  },
+  "rice-cooked-pouch-long": {
+   "name": "Cooked long-grain or basmati rice (microwave pouch)",
+   "contains": []
   }
  },
  "cuisines": {
@@ -22676,19 +23701,27 @@ export const LIBRARY = {
  },
  "levelLabels": {
   "alfajores": "B14b",
+  "anda-curry": "B17b",
   "banana-bread": "B15a",
   "beef-tacos-seasoning": "B8a",
+  "black-bean-tortilla-soup": "B19a",
   "bun-bowl": "B3b",
   "caprese-sandwiches": "B1a",
   "chana-chaat": "B6b",
   "chicken-caesar-wraps": "B6a",
+  "chicken-potstickers": "B16a",
   "chocolate-chip-cookies": "B14a",
+  "egg-drop-soup": "B19b",
+  "egg-salad-sandwiches": "B17a",
   "fish-sticks": "B9a",
   "ful-medames": "B4b",
+  "gyeran-jjim": "B16b",
+  "hainanese-chicken-rice": "B18b",
   "hummus-plate": "B5b",
   "keema": "B8b",
   "kofte": "B7b",
   "loaded-baked-potatoes": "B3a",
+  "mexican-rice-chicken": "B18a",
   "mini-pita-pizzas": "B4a",
   "molletes": "B2b",
   "onigiri": "B1b",
@@ -27599,15 +28632,146 @@ export const LIBRARY = {
      "explore": "gyeran-jjim",
      "drill": {
       "title": "Set up a steamer basket; steam broccoli",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A steamer basket holds food above boiling water so the steam can cook it. You'll set one up and steam broccoli until it's bright green and just tender. Use the broccoli this week's potstickers already buy; for the gyeran-jjim week, buy one small head. An adult is at the stove with you."
+      ],
+      "steps": [
+       "Put the steamer basket in a pot. Pour in water until it's just below the basket.",
+       "Put the lid on and bring the water to a boil over high heat.",
+       "Cut the broccoli into pieces about the same size.",
+       "With oven mitts, lift the lid far side first. Add the broccoli. Put the lid back on.",
+       "After 3 minutes, lift the lid away from you. Take out one piece with tongs.",
+       "Take out another piece at 4, 5, and 6 minutes. Line them up in order.",
+       "Taste each one after it cools. Which was best? Write down the minute."
+      ],
+      "quiz": [
+       {
+        "q": "Where does the water go?",
+        "choices": [
+         "Just below the basket",
+         "Over the broccoli",
+         "Into the basket"
+        ],
+        "answer": 0,
+        "explain": "The food sits above the water."
+       },
+       {
+        "q": "What does perfect steamed broccoli look like?",
+        "choices": [
+         "Bright green, with a little bite",
+         "Gray and soft",
+         "Raw and hard"
+        ],
+        "answer": 0,
+        "explain": "Too long turns it dull."
+       },
+       {
+        "q": "Why line up the pieces in order?",
+        "choices": [
+         "To see how cooking changes them",
+         "To make a pattern",
+         "To count them"
+        ],
+        "answer": 0,
+        "explain": "You find your best minute."
+       }
+      ]
      },
      "knowledge": {
       "title": "Steam burns: lift a lid away from you",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Steam is the hot cloud that rises from boiling water. It's as hot as the boiling water, about 212°F, and it can burn you just as badly.",
+       "Steam burns happen most when a lid comes off. The steam rushes out all at once, straight up into your face and over your hand.",
+       "So lift a lid by the far side first. The lid tips up like a shield between you and the steam. Wear oven mitts, keep your face back, and never reach across a steaming pot.",
+       "Microwave bowls and bags of steamed vegetables hold steam too. Open them on the side away from you."
+      ],
+      "steps": [
+       "With an adult, practice with a cold pot: put on oven mitts and lift the lid far side first.",
+       "Say out loud where the steam would go.",
+       "Find two things in your kitchen that make steam."
+      ],
+      "quiz": [
+       {
+        "q": "When do most steam burns happen?",
+        "choices": [
+         "When a lid comes off",
+         "When the water is cold",
+         "When you wash up"
+        ],
+        "answer": 0,
+        "explain": "The steam rushes out all at once."
+       },
+       {
+        "q": "Which side of the lid do you lift first?",
+        "choices": [
+         "The far side",
+         "The near side",
+         "Neither"
+        ],
+        "answer": 0,
+        "explain": "The lid shields your face."
+       },
+       {
+        "q": "How do you open a hot microwave bowl?",
+        "choices": [
+         "On the side away from you",
+         "Right next to your face",
+         "With bare hands"
+        ],
+        "answer": 0,
+        "explain": "Steam rushes out."
+       }
+      ]
      },
      "sabbath": {
       "title": "Steam vegetables ahead for the week",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Steamed vegetables keep well in the fridge for 3 to 4 days. Steam a big batch once, and you have a vegetable ready for several meals.",
+       "Stop the steaming a minute early. They'll soften a little more when you warm them up later.",
+       "Cool them fast: spread them on a plate, then put them in a container in the fridge within 2 hours."
+      ],
+      "steps": [
+       "Steam a big batch of broccoli, carrots, or green beans, 1 minute less than you like them.",
+       "Spread them on a plate to cool for 10 minutes.",
+       "Pack them in a container. Label it with the date.",
+       "Later in the week, warm a serving in the microwave, covered, until hot.",
+       "Write down how many meals your batch helped with."
+      ],
+      "quiz": [
+       {
+        "q": "How long do steamed vegetables keep in the fridge?",
+        "choices": [
+         "3 to 4 days",
+         "2 weeks",
+         "1 hour"
+        ],
+        "answer": 0,
+        "explain": "Label the date."
+       },
+       {
+        "q": "Why steam them a minute less?",
+        "choices": [
+         "They soften more when you warm them",
+         "They cook faster",
+         "It saves water"
+        ],
+        "answer": 0,
+        "explain": "Then they aren't mushy later."
+       },
+       {
+        "q": "How soon should they go in the fridge?",
+        "choices": [
+         "Within 2 hours",
+         "The next day",
+         "Any time"
+        ],
+        "answer": 0,
+        "explain": "Cool them fast first."
+       }
+      ]
      }
     },
     {
@@ -27619,15 +28783,147 @@ export const LIBRARY = {
      "explore": "anda-curry",
      "drill": {
       "title": "Boil eggs soft and hard; ice bath and peel",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "You'll boil eggs two ways, soft and hard, and see how time changes them. Use 2 of the eggs this week's recipe already buys. An adult is at the stove with you."
+      ],
+      "steps": [
+       "Put 2 eggs in a small saucepan with the slotted spoon. Cover them with cold water by 1 inch.",
+       "Wash your hands with soap.",
+       "Bring the water to a boil. Turn off the burner and put the lid on.",
+       "At 6 minutes, lift out one egg into a bowl of ice water.",
+       "At 12 minutes, lift out the other egg into the ice water.",
+       "After 5 minutes, tap, roll, and peel both eggs from the wide end.",
+       "Cut each in half. Draw the two yolks. Which is soft? Which is hard?"
+      ],
+      "quiz": [
+       {
+        "q": "What makes a soft-boiled egg?",
+        "choices": [
+         "A shorter time in the hot water",
+         "Colder water",
+         "More salt"
+        ],
+        "answer": 0,
+        "explain": "6 minutes, not 12."
+       },
+       {
+        "q": "Why move the eggs to ice water?",
+        "choices": [
+         "To stop the cooking and help them peel",
+         "To clean them",
+         "To make them bigger"
+        ],
+        "answer": 0,
+        "explain": "No green ring."
+       },
+       {
+        "q": "Where do you start peeling?",
+        "choices": [
+         "The wide end",
+         "The pointy end",
+         "The middle"
+        ],
+        "answer": 0,
+        "explain": "There's an air pocket there."
+       }
+      ]
      },
      "knowledge": {
       "title": "Egg freshness and the float test",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Eggs keep a long time in the fridge, about 3 to 5 weeks. But as they get older, they slowly dry out inside, and a pocket of air at the wide end grows bigger.",
+       "That air pocket gives you a test. Put an egg in a bowl of cold water. A very fresh egg lies flat on the bottom. An older egg tips up on its end. An egg that floats is very old; throw it away.",
+       "Fresh eggs are best for frying and poaching. Eggs that are a week or two old are best for hard-boiling, because they peel more easily.",
+       "Check the date on the carton, keep eggs in the fridge, and throw away any egg that's cracked or smells bad."
+      ],
+      "steps": [
+       "Fill a bowl with cold water.",
+       "Gently lower in the eggs from this week, one at a time.",
+       "Draw how each egg sits: flat, tipped up, or floating.",
+       "Find the date on the carton and write it down."
+      ],
+      "quiz": [
+       {
+        "q": "What does a very fresh egg do in water?",
+        "choices": [
+         "Lies flat on the bottom",
+         "Floats",
+         "Spins"
+        ],
+        "answer": 0,
+        "explain": "Its air pocket is tiny."
+       },
+       {
+        "q": "What do you do with an egg that floats?",
+        "choices": [
+         "Throw it away",
+         "Eat it first",
+         "Freeze it"
+        ],
+        "answer": 0,
+        "explain": "It's very old."
+       },
+       {
+        "q": "Which eggs peel most easily after boiling?",
+        "choices": [
+         "Ones a week or two old",
+         "Eggs laid today",
+         "Frozen eggs"
+        ],
+        "answer": 0,
+        "explain": "Very fresh eggs stick to the shell."
+       }
+      ]
      },
      "sabbath": {
       "title": "Boil eggs ahead for the week",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Hard-boiled eggs are a quick breakfast, snack, or salad topping. Boil a dozen at once, and they're ready all week.",
+       "Keep them in their shells in the fridge, and eat them within 7 days. Peeled eggs keep a little less well, so peel each one when you eat it.",
+       "Write the date on the carton or container, so no one forgets when they were cooked."
+      ],
+      "steps": [
+       "Boil 6 to 12 eggs the hard-boiled way: boil, lid on, heat off, 12 minutes, then ice water.",
+       "Dry them and put them back in the carton or a container. Write \"cooked\" and the date on it.",
+       "Put them in the fridge.",
+       "During the week, peel one each day for a snack or a salad.",
+       "Write down the ways your family used them."
+      ],
+      "quiz": [
+       {
+        "q": "How long do hard-boiled eggs keep in the fridge?",
+        "choices": [
+         "7 days",
+         "1 month",
+         "1 day"
+        ],
+        "answer": 0,
+        "explain": "Keep them in their shells."
+       },
+       {
+        "q": "Why write \"cooked\" on the container?",
+        "choices": [
+         "So no one cracks one by mistake",
+         "For fun",
+         "To count them"
+        ],
+        "answer": 0,
+        "explain": "Raw and cooked eggs look the same."
+       },
+       {
+        "q": "When is the best time to peel them?",
+        "choices": [
+         "When you eat them",
+         "Right away, all at once",
+         "Never"
+        ],
+        "answer": 0,
+        "explain": "Shells help them keep."
+       }
+      ]
      }
     },
     {
@@ -27639,15 +28935,146 @@ export const LIBRARY = {
      "explore": "hainanese-chicken-rice",
      "drill": {
       "title": "Measure rice and water; keep the lid on",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "You'll cook a small pot of rice by the ratio and keep the lid on the whole time. Use the rice this week's recipe already buys. An adult is at the stove with you."
+      ],
+      "steps": [
+       "Measure ½ cup of long-grain rice. Rinse it in a strainer or colander until the water is almost clear.",
+       "Measure ¾ cup of water. Put the rice, water, and a pinch of salt in a small saucepan.",
+       "Bring it to a boil over high heat.",
+       "Put the lid on and turn the heat to low. Set a timer for 18 minutes.",
+       "Don't lift the lid. When the timer rings, turn off the heat and wait 5 more minutes.",
+       "Fluff the rice with a fork. Is it fluffy, crunchy, or mushy? Write it down.",
+       "Eat it with a meal this week, or cool it and keep it in the fridge for up to 4 days."
+      ],
+      "quiz": [
+       {
+        "q": "How much water for ½ cup of rice?",
+        "choices": [
+         "¾ cup",
+         "2 cups",
+         "¼ cup"
+        ],
+        "answer": 0,
+        "explain": "1½ times the rice."
+       },
+       {
+        "q": "When do you turn the heat down?",
+        "choices": [
+         "When it boils, with the lid on",
+         "Right at the start",
+         "Never"
+        ],
+        "answer": 0,
+        "explain": "Then it cooks gently."
+       },
+       {
+        "q": "Why wait 5 minutes before lifting the lid?",
+        "choices": [
+         "The steam keeps cooking it",
+         "To cool it",
+         "To dry the pot"
+        ],
+        "answer": 0,
+        "explain": "It finishes evenly."
+       }
+      ]
      },
      "knowledge": {
       "title": "Why rice needs a set ratio",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Rice cooked on the stove drinks up all its water. Nothing is poured off. So the amount of water has to be just right: this is called a ratio.",
+       "For long-grain white rice, the ratio is 1½ cups of water for every 1 cup of rice. Too little water, and the rice is crunchy. Too much, and it's mushy.",
+       "Keep the lid on. The last bit of water turns to steam, and the steam finishes cooking the rice. Lifting the lid lets the steam escape.",
+       "Different rice needs a different ratio. Brown rice takes about 2 cups of water. Short-grain rice, for sushi, takes a little less than long-grain."
+      ],
+      "steps": [
+       "Write the ratio: 1 cup of rice, 1½ cups of water.",
+       "Work it out: how much water for 2 cups of rice? For ½ cup?",
+       "Look at a bag or box of rice. Find its ratio on the package and write it down."
+      ],
+      "quiz": [
+       {
+        "q": "How much water for 1 cup of long-grain white rice?",
+        "choices": [
+         "1½ cups",
+         "4 cups",
+         "½ cup"
+        ],
+        "answer": 0,
+        "explain": "That's the ratio."
+       },
+       {
+        "q": "How much water for 2 cups of rice?",
+        "choices": [
+         "3 cups",
+         "2 cups",
+         "6 cups"
+        ],
+        "answer": 0,
+        "explain": "Double both."
+       },
+       {
+        "q": "Why keep the lid on?",
+        "choices": [
+         "The steam finishes the rice",
+         "To keep it clean",
+         "To make it brown"
+        ],
+        "answer": 0,
+        "explain": "Lifting it lets steam out."
+       }
+      ]
      },
      "sabbath": {
       "title": "Feeding the five thousand (John 6:1–13)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "A great crowd followed Jesus to a hillside by the Sea of Galilee. They were hungry, and there was nowhere nearby to buy food (John 6:1–5).",
+       "Andrew said, \"There is a boy here who has five barley loaves and two fish, but what are they for so many?\" (John 6:9). There were about five thousand men there.",
+       "Jesus had the people sit down. He took the loaves, gave thanks, and gave them out, and the fish too, \"as much as they wanted\" (John 6:11). Everyone ate until they were full.",
+       "Then Jesus said, \"Gather up the leftover fragments, that nothing may be lost\" (John 6:12). They filled twelve baskets with what was left."
+      ],
+      "steps": [
+       "Read John 6:1–13 with an adult.",
+       "Answer out loud: what did the boy have?",
+       "Answer out loud: what did Jesus do before He gave out the food?",
+       "Jesus didn't waste the leftovers. Plan one way to use this week's leftover rice."
+      ],
+      "quiz": [
+       {
+        "q": "What did the boy have?",
+        "choices": [
+         "Five barley loaves and two fish",
+         "Rice and beans",
+         "Nothing"
+        ],
+        "answer": 0,
+        "explain": "John 6:9."
+       },
+       {
+        "q": "What did Jesus do before giving out the bread?",
+        "choices": [
+         "He gave thanks",
+         "He sold it",
+         "He hid it"
+        ],
+        "answer": 0,
+        "explain": "John 6:11."
+       },
+       {
+        "q": "How many baskets of leftovers were there?",
+        "choices": [
+         "Twelve",
+         "Two",
+         "Five thousand"
+        ],
+        "answer": 0,
+        "explain": "John 6:13."
+       }
+      ]
      }
     },
     {
@@ -27659,15 +29086,147 @@ export const LIBRARY = {
      "explore": "egg-drop-soup",
      "drill": {
       "title": "Bring a pot to a boil, then turn it down to a simmer",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "You'll bring a pot of water to a boil, then turn it down to a simmer and hold it there. Use a pot of plain water. An adult is at the stove with you."
+      ],
+      "steps": [
+       "Fill a saucepan halfway with water. Put it over high heat.",
+       "Watch it. Write down when you see tiny bubbles on the bottom.",
+       "Write down when big bubbles roll all over. That's a boil.",
+       "Turn the heat down to medium-low. Watch the bubbles get smaller.",
+       "Find the setting where small bubbles just break the top. That's a simmer.",
+       "Hold the simmer for 5 minutes. If it starts to boil, turn it down a little.",
+       "Turn off the stove. Write down which setting made a simmer on your stove."
+      ],
+      "quiz": [
+       {
+        "q": "What do you do if a simmer starts to boil?",
+        "choices": [
+         "Turn the heat down a little",
+         "Turn it up",
+         "Add ice"
+        ],
+        "answer": 0,
+        "explain": "Small changes work."
+       },
+       {
+        "q": "Which comes first when you heat water?",
+        "choices": [
+         "Tiny bubbles on the bottom",
+         "Big rolling bubbles",
+         "Steam only"
+        ],
+        "answer": 0,
+        "explain": "Then it boils."
+       },
+       {
+        "q": "Why write down your simmer setting?",
+        "choices": [
+         "Every stove is different",
+         "For a grade",
+         "It never changes"
+        ],
+        "answer": 0,
+        "explain": "Now you know yours."
+       }
+      ]
      },
      "knowledge": {
       "title": "Boil vs. simmer: what the bubbles mean",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Bubbles tell you how hot a pot is. At a boil, big bubbles roll up all over the pot, fast and noisy. Water boils at 212°F.",
+       "At a simmer, small bubbles rise gently and just break the top. It's a little cooler than a boil.",
+       "Most soups and sauces cook at a simmer. A hard boil splashes, sticks to the bottom, breaks up soft food, and makes soup cloudy.",
+       "Cooks often bring a pot to a boil first, because it's fast, then turn it down to a simmer to cook."
+      ],
+      "steps": [
+       "Look at this week's soup at a boil. Describe the bubbles.",
+       "Turn it down to a simmer. Describe the bubbles now.",
+       "Draw both pots: one boiling, one simmering."
+      ],
+      "quiz": [
+       {
+        "q": "What does a boil look like?",
+        "choices": [
+         "Big bubbles rolling all over",
+         "Small bubbles at the top",
+         "No bubbles"
+        ],
+        "answer": 0,
+        "explain": "Fast and noisy."
+       },
+       {
+        "q": "What does a simmer look like?",
+        "choices": [
+         "Small bubbles just breaking the top",
+         "Big rolling bubbles",
+         "Steam only"
+        ],
+        "answer": 0,
+        "explain": "Gentle and quiet."
+       },
+       {
+        "q": "Why cook soup at a simmer?",
+        "choices": [
+         "A hard boil splashes and breaks up food",
+         "It's faster",
+         "It's colder"
+        ],
+        "answer": 0,
+        "explain": "Gentle is better."
+       }
+      ]
      },
      "sabbath": {
       "title": "Freeze soup in portions",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Soup freezes very well. Make a big pot once, and freeze it in portions for easy meals later.",
+       "Cool it first. Put it in the fridge within 2 hours, in shallow containers so it cools fast.",
+       "Freeze it in containers the size of one meal, leaving an inch at the top. Soup grows when it freezes.",
+       "Leave out the toppings, like chips and avocado. Add fresh ones when you eat it."
+      ],
+      "steps": [
+       "Make a double batch of this week's soup, or save what's left.",
+       "Cool it in shallow containers in the fridge.",
+       "Spoon it into freezer containers, leaving an inch at the top.",
+       "Label each with the soup's name and the date. It keeps 3 months.",
+       "To eat, thaw it in the fridge overnight, then heat it until it bubbles."
+      ],
+      "quiz": [
+       {
+        "q": "Why leave an inch at the top?",
+        "choices": [
+         "Soup grows when it freezes",
+         "To add toppings",
+         "It looks nicer"
+        ],
+        "answer": 0,
+        "explain": "The lid could pop off."
+       },
+       {
+        "q": "Should you freeze the chips with the soup?",
+        "choices": [
+         "No, add fresh toppings later",
+         "Yes, always",
+         "Only the avocado"
+        ],
+        "answer": 0,
+        "explain": "They go soggy."
+       },
+       {
+        "q": "How long does frozen soup keep?",
+        "choices": [
+         "About 3 months",
+         "1 day",
+         "Forever"
+        ],
+        "answer": 0,
+        "explain": "Label the date."
+       }
+      ]
      }
     },
     {
@@ -27680,15 +29239,146 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Drain pasta into a colander in the sink, safely",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Draining pasta means pouring a heavy pot of boiling water into a colander. It's the most dangerous part of making pasta, so you'll practice it with plain water first, then with this week's spaghetti. An adult is next to you the whole time."
+      ],
+      "steps": [
+       "Put the colander in the sink. Clear the sink and the counter around it.",
+       "Practice with cold water: fill the pot halfway and carry it to the sink with oven mitts.",
+       "Tip it away from you, slowly, into the colander. Keep your face back.",
+       "Now do it for real with this week's spaghetti. Turn off the burner first.",
+       "With oven mitts, carry the pot to the sink, holding it close to you.",
+       "Pour slowly, tipping the pot away from you.",
+       "Shake the colander gently to drain the last water."
+      ],
+      "quiz": [
+       {
+        "q": "What do you do before carrying the pot?",
+        "choices": [
+         "Clear the sink and turn off the burner",
+         "Run fast",
+         "Add cold water"
+        ],
+        "answer": 0,
+        "explain": "Get the path ready."
+       },
+       {
+        "q": "Which way do you tip the pot?",
+        "choices": [
+         "Away from you",
+         "Toward you",
+         "Straight down"
+        ],
+        "answer": 0,
+        "explain": "The steam goes away from your face."
+       },
+       {
+        "q": "What goes on your hands?",
+        "choices": [
+         "Oven mitts",
+         "Nothing",
+         "Wet towels"
+        ],
+        "answer": 0,
+        "explain": "The pot handles are hot."
+       }
+      ]
      },
      "knowledge": {
       "title": "Pasta shapes and what they're for",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Pasta comes in hundreds of shapes, and each shape holds sauce in its own way.",
+       "Long, thin pasta, like spaghetti, goes with smooth sauces that coat each strand: marinara, or cheese and pepper.",
+       "Tubes, like penne and rigatoni, catch chunky sauces inside. Twists, like rotini and fusilli, trap sauce in their spirals. Little shapes, like elbows and orzo, go in soups and salads.",
+       "Most pasta is made from wheat flour and water, so it has gluten. Gluten-free pasta is made from rice, corn, or beans, and cooks a little differently, so follow its box."
+      ],
+      "steps": [
+       "Find all the pasta shapes in your kitchen or at the store.",
+       "For each one, write a sauce or soup that would go with it.",
+       "Pick your favorite shape and draw it."
+      ],
+      "quiz": [
+       {
+        "q": "Which sauce goes best with spaghetti?",
+        "choices": [
+         "A smooth one that coats each strand",
+         "A very chunky one",
+         "No sauce"
+        ],
+        "answer": 0,
+        "explain": "Like marinara."
+       },
+       {
+        "q": "What do tubes like penne catch?",
+        "choices": [
+         "Chunky sauce inside",
+         "Nothing",
+         "Only cheese"
+        ],
+        "answer": 0,
+        "explain": "Sauce goes inside the tube."
+       },
+       {
+        "q": "Which shape is good in soup?",
+        "choices": [
+         "Little shapes, like elbows",
+         "Lasagna sheets",
+         "Long spaghetti"
+        ],
+        "answer": 0,
+        "explain": "They fit on a spoon."
+       }
+      ]
      },
      "sabbath": {
       "title": "Hospitality: Abraham's guests (Genesis 18:1–8)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "One hot afternoon, Abraham was sitting at the door of his tent. He looked up and saw three men standing nearby (Genesis 18:1–2).",
+       "He ran to meet them and bowed. He asked them to rest under the tree while he brought a little water to wash their feet and \"a morsel of bread\" (Genesis 18:4–5).",
+       "Then he hurried. Sarah baked fresh bread. Abraham chose a tender calf and had it cooked. He brought curds and milk too, and set it all before them. \"And he stood by them under the tree while they ate\" (Genesis 18:6–8).",
+       "Abraham promised a little and gave a feast, and he served his guests first. The guests were the LORD and two angels."
+      ],
+      "steps": [
+       "Read Genesis 18:1–8 with an adult.",
+       "Answer out loud: what did Abraham promise his guests? What did he give them?",
+       "Answer out loud: what did Abraham do while his guests ate?",
+       "Invite someone to share a meal you cooked this unit. Serve them first."
+      ],
+      "quiz": [
+       {
+        "q": "What did Abraham promise his guests?",
+        "choices": [
+         "Water and a morsel of bread",
+         "A feast",
+         "Nothing"
+        ],
+        "answer": 0,
+        "explain": "Genesis 18:4–5."
+       },
+       {
+        "q": "What did he really give them?",
+        "choices": [
+         "Fresh bread, a cooked calf, curds, and milk",
+         "Only water",
+         "Fruit"
+        ],
+        "answer": 0,
+        "explain": "Genesis 18:6–8."
+       },
+       {
+        "q": "What did Abraham do while they ate?",
+        "choices": [
+         "Stood by to serve them",
+         "Ate first",
+         "Left"
+        ],
+        "answer": 0,
+        "explain": "Genesis 18:8."
+       }
+      ]
      }
     },
     {
@@ -28451,7 +30141,7 @@ export const LIBRARY = {
      "skills": [
       "steaming"
      ],
-     "minutes": 30,
+     "minutes": 40,
      "tags": {
       "protein": "chicken",
       "flavors": [
@@ -28471,7 +30161,7 @@ export const LIBRARY = {
      "skills": [
       "steaming"
      ],
-     "minutes": 25,
+     "minutes": 30,
      "tags": {
       "protein": "eggs",
       "flavors": [
@@ -28491,7 +30181,7 @@ export const LIBRARY = {
      "skills": [
       "poaching-eggs"
      ],
-     "minutes": 30,
+     "minutes": 40,
      "tags": {
       "protein": "eggs",
       "flavors": [
@@ -28512,7 +30202,7 @@ export const LIBRARY = {
       "poaching-eggs",
       "flavor-base"
      ],
-     "minutes": 40,
+     "minutes": 50,
      "tags": {
       "protein": "eggs",
       "flavors": [
@@ -28533,7 +30223,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-grains"
      ],
-     "minutes": 45,
+     "minutes": 50,
      "tags": {
       "protein": "chicken",
       "flavors": [
@@ -28553,7 +30243,7 @@ export const LIBRARY = {
      "skills": [
       "cooking-grains"
      ],
-     "minutes": 45,
+     "minutes": 50,
      "tags": {
       "protein": "chicken",
       "flavors": [
@@ -28574,7 +30264,7 @@ export const LIBRARY = {
       "simmering",
       "building-soup"
      ],
-     "minutes": 40,
+     "minutes": 45,
      "tags": {
       "protein": "beans-lentils",
       "flavors": [
@@ -28596,7 +30286,7 @@ export const LIBRARY = {
       "simmering",
       "building-soup"
      ],
-     "minutes": 25,
+     "minutes": 30,
      "tags": {
       "protein": "eggs",
       "flavors": [
