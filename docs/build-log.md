@@ -6832,3 +6832,23 @@ links to side quests filtered and sorted."
   phase 13.
 - No screens changed, so no screenshots.
 - Tests: 407.
+
+## 260. 2026-10-27 — Plan: no leavened recipe due during the feast; Ruth asks yearly; no nudge
+
+Owner, 2026-10-27: "Leavened recipes cannot be added to be due during the
+feast, period. Yes Ruth should ask yearly. No skip the nudge."
+
+- **Before:** the plan recommended that a leavened lesson in the kitchen
+  during the unleavened days show "After Unleavened Bread" and need the
+  parent PIN to start; a yearly ask from January 1; and a "use it up" nudge
+  in the two weeks before.
+- **Now:**
+  - No leavened recipe can be due on a family's unleavened days, whatever
+    adds it (Add a lesson, a kid's request, Cook this, Swap, a course), and
+    nothing overrides that, the PIN included.
+  - Chef Ruth asks for the year's dates every year from January 1 (now a
+    requirement).
+  - The "use it up" nudge is out.
+  - Nothing is built yet: it comes with phase 13.
+- No screens changed, so no screenshots.
+- Tests: 407.
