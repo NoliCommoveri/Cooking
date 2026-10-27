@@ -6867,3 +6867,15 @@ cook on a date in the feast if it's leavened."
   with phase 13.
 - No screens changed, so no screenshots.
 - Tests: 407.
+
+## 262. 2026-10-27 — Plan: the first standard calendar's name
+
+Owner, 2026-10-27, naming the first standard calendar (255): "Hebrew
+lunisolar calendar".
+
+- **Before:** the plan left the first standard calendar's name as families
+  see it for the owner to word.
+- **Now:** it's the Hebrew lunisolar calendar (§6.20). Nothing is built yet:
+  it comes with phase 13.
+- No screens changed, so no screenshots.
+- Tests: 407.
