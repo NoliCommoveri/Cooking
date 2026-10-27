@@ -1,0 +1,119 @@
+{
+  "id": "spaghetti-meatballs",
+  "version": 1,
+  "track": "core",
+  "unit": 103,
+  "title": "Spaghetti and meatballs",
+  "image": "dishes/spaghetti-meatballs.png",
+  "cuisine": "italian",
+  "skill": "Meatballs simmered gently in the sauce",
+  "skills": ["binders", "simmering"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 95,
+  "scaling": {
+    "mode": "free",
+    "max": 10,
+    "notes": [
+      { "from": 7, "text": "Brown the meatballs in three batches, and simmer them in the large pot with the sauce." }
+    ]
+  },
+  "learn": {
+    "move": {
+      "title": "Season it, taste it, simmer it",
+      "body": "This is the unit's mastery cook. You'll build a marinara from scratch, season your own meatball mix and taste a test piece before you roll the rest, brown the meatballs, and finish them at a gentle simmer in the sauce until they reach 160°F, while the spaghetti boils. Every step is one you've done this unit: now it's yours to run."
+    },
+    "callback": {
+      "lesson": "spaghetti-marinara",
+      "body": "This is Spaghetti marinara's sauce, built the same way in layers: onion, then garlic, then tomatoes at a simmer. The meatballs cook in it, so it simmers 20 minutes longer and picks up their flavor."
+    },
+    "why": [
+      { "id": "panade", "title": "Oats soaked in water", "body": "Oats soaked in a little water hold moisture inside the meatballs as they cook, so they stay tender instead of tight. They're unleavened, so the recipe works any week of the year." },
+      { "id": "gentle-mix", "title": "Mix with a light hand", "body": "Squeezing and kneading ground beef makes its proteins bind tightly, and the meatballs turn bouncy and tough. Mix with your fingertips just until everything is spread through." },
+      { "id": "test", "title": "Cook a test piece", "body": "You can't taste raw meat. Fry a teaspoon of the mix until it's cooked through, taste it, and fix the salt, garlic, or herbs before you roll the rest." },
+      { "id": "brown", "title": "Brown, then simmer", "body": "Browning gives the outside a crust and leaves flavor in the skillet. The meatballs finish cooking in the sauce, where gentle heat keeps them moist and their juices season the sauce." },
+      { "id": "gentle-simmer", "title": "A gentle simmer", "body": "At a hard boil, the sauce tumbles the meatballs and breaks them apart. At a gentle simmer, small bubbles, they hold together and cook through evenly." },
+      { "id": "temp-160", "title": "160°F in the middle", "body": "Ground beef is safe at 160°F, because grinding spreads bacteria from the surface all through the meat. Check the biggest meatball in its center." }
+    ],
+    "wrong": [
+      { "sign": "The meatballs fell apart in the sauce", "fix": "The sauce boiled, or they went in before they were browned. Turn the heat down; next time, brown them well and keep the bubbles small." },
+      { "sign": "They're tough and bouncy", "fix": "The mix was worked too hard. Next time, mix with your fingertips just until it comes together." },
+      { "sign": "The test piece tasted flat", "fix": "That's what it's for. Add salt ¼ teaspoon at a time, mix gently, and fry another test piece." },
+      { "sign": "The sauce is too thick", "fix": "Stir in a splash of the pasta water before you turn off the heat." }
+    ],
+    "quiz": [
+      { "q": "Why fry a test piece of the meatball mix?", "choices": ["Raw meat can't be tasted, so you taste a cooked bit and fix the seasoning", "To check the pan is hot", "To make one extra meatball"], "answer": 0, "explain": "Fix it before the rest are rolled." },
+      { "q": "What temperature is a beef meatball safe at?", "choices": ["160°F", "145°F", "120°F"], "answer": 0, "explain": "Grinding spreads bacteria all through the meat." },
+      { "q": "Why do the meatballs finish at a gentle simmer?", "choices": ["A hard boil breaks them apart", "So the sauce stays cold", "It's faster"], "answer": 0, "explain": "Small bubbles cook them evenly." },
+      { "q": "What do the soaked oats do?", "choices": ["Hold moisture in, so the meatballs stay tender", "Make them crunchy", "Nothing"], "answer": 0, "explain": "They're the binder." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "olive-oil", "amount": 3, "unit": "tbsp", "group": "Sauce" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "group": "Sauce" },
+    { "ingredient": "garlic", "amount": 4, "unit": "count", "round": "up", "group": "Sauce" },
+    { "ingredient": "tomatoes-crushed", "amount": 1, "unit": "can", "group": "Sauce" },
+    { "ingredient": "oregano-dried", "amount": 1, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "chili-flakes", "amount": 0.25, "unit": "tsp", "optional": true, "group": "Sauce" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Sauce" },
+    { "ingredient": "basil", "amount": 0.25, "unit": "cup", "prep": "leaves", "group": "Sauce" },
+    { "ingredient": "oats-rolled", "amount": 0.5, "unit": "cup", "group": "Meatballs" },
+    { "ingredient": "water", "amount": 0.33, "unit": "cup", "group": "Meatballs" },
+    { "ingredient": "beef-ground", "amount": 1.5, "unit": "lb", "group": "Meatballs" },
+    { "ingredient": "egg", "amount": 1, "unit": "count", "group": "Meatballs" },
+    { "ingredient": "parmesan", "amount": 0.33, "unit": "cup", "prep": "grated", "group": "Meatballs" },
+    { "ingredient": "garlic", "amount": 2, "unit": "count", "round": "up", "group": "Meatballs" },
+    { "ingredient": "parsley", "amount": 3, "unit": "tbsp", "prep": "chopped", "group": "Meatballs" },
+    { "ingredient": "oregano-dried", "amount": 0.5, "unit": "tsp", "group": "Meatballs" },
+    { "ingredient": "salt", "amount": 1.25, "unit": "tsp", "group": "Meatballs" },
+    { "ingredient": "black-pepper", "amount": 0.5, "unit": "tsp", "group": "Meatballs" },
+    { "ingredient": "vegetable-oil", "amount": 2, "unit": "tbsp", "prep": "for browning", "group": "Meatballs" },
+    { "ingredient": "water", "amount": 16, "unit": "cup", "prep": "for the pasta", "group": "Pasta" },
+    { "ingredient": "salt", "amount": 2, "unit": "tbsp", "group": "Pasta" },
+    { "ingredient": "spaghetti", "amount": 1, "unit": "lb", "group": "Pasta" },
+    { "ingredient": "parmesan", "amount": 0.5, "unit": "cup", "prep": "grated, to serve", "optional": true, "group": "Pasta" }
+  ],
+  "substitutions": [
+    { "for": "spaghetti", "use": "spaghetti-gluten-free", "reason": "gluten" },
+    { "for": "oats-rolled", "use": "oats-gluten-free", "reason": "gluten" }
+  ],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "pot-large",
+    "wooden-spoon",
+    "can-opener",
+    "mixing-bowl-large",
+    "small-bowl",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "fork",
+    "kitchen-scale",
+    "plate",
+    "skillet-12",
+    "tongs",
+    "thermometer",
+    "stockpot",
+    "colander"
+  ],
+  "steps": [
+    { "id": "chop", "text": "Cut the onion into ¼-inch dice. Slice the sauce's 4 garlic cloves thin. Mince the meatballs' 2 cloves fine, and chop the parsley.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "sauce", "text": "Heat the olive oil in the large pot over medium heat. Cook the onion until soft, add the sliced garlic, the sauce's oregano, and the chili flakes, and stir 1 minute. Add the tomatoes and the sauce's salt, bring it to a bubble, and turn it down to a gentle simmer, stirring now and then.", "safety": "adult-nearby", "hazard": "Hot oil, spatters", "timerSeconds": 420, "timerLabel": "Onion and garlic" },
+    { "id": "soak", "text": "Stir the oats and the meatballs' water together in the large bowl and let them sit until soft.", "safety": "solo", "timerSeconds": 300, "timerLabel": "Soak oats", "why": "panade" },
+    { "id": "mix", "text": "Add the egg, parmesan, minced garlic, parsley, the meatballs' oregano, salt, and pepper, and beat them into the oats with the fork. Add the beef and mix it in with your fingertips just until everything is spread evenly.", "safety": "solo", "hazard": "Raw beef, raw egg", "handles": ["beef-ground", "egg"], "why": "gentle-mix" },
+    { "id": "wash-mix", "type": "wash", "text": "Throw away the eggshell and the beef's package, and wash your hands with soap for 20 seconds.", "safety": "solo", "hazard": "Raw beef" },
+    { "id": "test", "text": "Heat 1 teaspoon of the vegetable oil in the skillet over medium heat. Fry a teaspoon of the mix, flattened, until it's brown on both sides and cooked through. Let it cool and taste it. Add salt, garlic, or herbs to the mix if it needs them, and mix gently.", "safety": "adult-nearby", "hazard": "Hot oil, raw beef", "handles": ["beef-ground"], "timerSeconds": 180, "timerLabel": "Test piece", "why": "test" },
+    { "id": "wash-test", "type": "wash", "text": "Wash your hands with soap.", "safety": "solo", "hazard": "Raw beef" },
+    { "id": "roll", "text": "Set the plate on the scale. Roll the mix into balls of 1½ ounces each, about 1½ inches across, with wet hands, and set them on the plate. You should have about 24.", "safety": "solo", "hazard": "Raw beef", "handles": ["beef-ground"], "look": "Smooth balls, all the same size, with no cracks." },
+    { "id": "wash-roll", "type": "wash", "text": "Wash your hands with soap for 20 seconds.", "safety": "solo", "hazard": "Raw beef" },
+    { "id": "pasta-water", "text": "Fill the stockpot with the pasta's water, cover it, and set it over high heat to come to a boil.", "safety": "adult-nearby", "hazard": "Hot stove" },
+    { "id": "brown", "text": "Heat the rest of the vegetable oil in the skillet over medium-high heat until it shimmers. Brown half the meatballs, turning them with the tongs every minute or so, until they're brown on most sides. Lower them into the sauce. Brown the rest the same way.", "safety": "adult-nearby", "hazard": "Hot oil, spatters, raw beef", "handles": ["beef-ground"], "timerSeconds": 720, "timerLabel": "Brown meatballs", "why": "brown", "look": "A dark brown crust on most sides. They aren't cooked through yet." },
+    { "id": "wash-brown", "type": "wash", "text": "Wash the tongs and the plate in hot, soapy water, and wash your hands.", "safety": "solo", "hazard": "Raw beef" },
+    { "id": "simmer", "text": "Spoon sauce over the meatballs, put the lid on slightly open, and simmer gently. Turn them once halfway.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 1200, "timerLabel": "Simmer meatballs", "why": "gentle-simmer", "look": "Small bubbles around the meatballs, not a rolling boil." },
+    { "id": "pasta", "text": "When the water boils hard, add the pasta's salt and the spaghetti. Stir with the clean tongs for the first 2 minutes, then boil until it's tender with a little bite in the middle. Scoop out 1 cup of the pasta water, then drain the spaghetti in the colander, pouring away from you.", "safety": "adult-nearby", "hazard": "Boiling water, steam", "timerSeconds": 600, "timerLabel": "Spaghetti" },
+    { "id": "check", "type": "doneness", "text": "Lift out the biggest meatball and push the thermometer into its center. It needs to read 160°F. If not, put it back and simmer 3 more minutes.", "safety": "adult-nearby", "hazard": "Hot pot", "target": { "temp": 160, "unit": "F" }, "why": "temp-160" },
+    { "id": "finish", "text": "Tear the basil into the sauce. Taste the sauce and fix its salt. If it's too thick, stir in some pasta water.", "safety": "adult-nearby", "hazard": "Hot pot" },
+    { "id": "serve", "text": "Turn off the heat. Serve the spaghetti with the meatballs and sauce on top, and parmesan if you like.", "safety": "adult-nearby", "hazard": "Hot pot" }
+  ]
+}

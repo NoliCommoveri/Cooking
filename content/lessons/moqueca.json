@@ -1,0 +1,198 @@
+{
+  "id": "moqueca",
+  "version": 1,
+  "track": "core",
+  "unit": 3,
+  "title": "Moqueca (Brazilian coconut fish stew)",
+  "image": "dishes/moqueca.png",
+  "cuisine": "brazilian",
+  "skill": "A one-pot coconut stew",
+  "skills": ["one-pot-stews", "flavor-base"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 60,
+  "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [{ "from": 7, "text": "Use the widest pot you have, so the fish fits in one layer." }]
+  },
+  "learn": {
+    "move": {
+      "title": "Peppers, tomatoes, coconut, and fish",
+      "body": "Moqueca is a fish stew from the coast of Brazil, cooked in one pot and brought to the table bubbling. Today you'll soak white fish in lime and garlic, soften onion and peppers into a base, add tomatoes and coconut milk, and lay the fish in to poach gently in the sauce until it flakes, with rice on the side."
+    },
+    "callback": {
+      "lesson": "chicken-tagine",
+      "body": "In chicken tagine, the chicken cooked slowly in its sauce in one pot. Fish is much more delicate, so here it cooks in the sauce for only about 10 minutes, and you don't stir it."
+    },
+    "why": [
+      { "id": "lime", "title": "Lime and garlic first", "body": "Fish soaked for 15 minutes in lime juice, garlic, and salt picks up their flavor all the way through. Longer than about 30 minutes, the acid starts to turn the outside chalky." },
+      { "id": "base", "title": "Soften the base", "body": "Onion and peppers cooked gently in oil turn soft and sweet. The tomatoes cook down into them, and that becomes the stew's flavor before any coconut goes in." },
+      { "id": "coconut", "title": "Coconut milk at a simmer", "body": "Coconut milk makes the sauce rich and silky. At a hard boil it can split and turn grainy, so the stew stays at a gentle simmer." },
+      { "id": "no-stir", "title": "Don't stir the fish", "body": "Cooked fish breaks into flakes, which is how you know it's done, and stirring breaks it apart. Spoon the sauce over it, and give the pot a gentle shake instead." },
+      { "id": "flake", "title": "145°F, and it flakes", "body": "White fish is done when the thickest piece reads 145°F, it's turned from see-through to solid white, and it flakes when pressed with a fork." }
+    ],
+    "wrong": [
+      { "sign": "The fish fell into small pieces", "fix": "It was stirred, or the pieces were cut small. It still tastes right. Next time, cut 2-inch chunks and shake the pot instead of stirring." },
+      { "sign": "The sauce looks grainy or oily", "fix": "The coconut milk boiled too hard. Turn the heat down; it still tastes good." },
+      { "sign": "The sauce is thin", "fix": "Lift out the fish with the slotted spoon, simmer the sauce uncovered 5 minutes, then put the fish back." },
+      { "sign": "It tastes flat", "fix": "Squeeze in more lime and add a pinch of salt, then taste again." }
+    ],
+    "quiz": [
+      { "q": "Why doesn't the fish soak in lime for hours?", "choices": ["The acid starts to make it chalky", "It gets too sour to eat", "It cooks all the way"], "answer": 0, "explain": "15 minutes is plenty." },
+      { "q": "Why do you shake the pot instead of stirring?", "choices": ["Stirring breaks the fish apart", "Shaking cooks it faster", "To cool it"], "answer": 0, "explain": "Cooked fish flakes easily." },
+      { "q": "How hot does the fish need to be?", "choices": ["145°F", "165°F", "120°F"], "answer": 0, "explain": "And it flakes with a fork." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "rice-white", "amount": 1.5, "unit": "cup", "prep": "long-grain", "group": "Rice" },
+    { "ingredient": "water", "amount": 2.25, "unit": "cup", "group": "Rice" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Rice" },
+    { "ingredient": "cod", "amount": 1.5, "unit": "lb", "group": "Fish" },
+    { "ingredient": "lime", "amount": 2, "unit": "count", "group": "Fish" },
+    { "ingredient": "garlic", "amount": 3, "unit": "count", "round": "up", "group": "Fish" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp", "group": "Fish" },
+    { "ingredient": "olive-oil", "amount": 3, "unit": "tbsp", "group": "Stew" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "group": "Stew" },
+    { "ingredient": "bell-pepper-red", "amount": 1, "unit": "count", "group": "Stew" },
+    { "ingredient": "bell-pepper-green", "amount": 1, "unit": "count", "group": "Stew" },
+    { "ingredient": "tomato", "amount": 3, "unit": "count", "group": "Stew" },
+    { "ingredient": "paprika-sweet", "amount": 2, "unit": "tsp", "group": "Stew" },
+    { "ingredient": "coconut-milk", "amount": 1, "unit": "can", "group": "Stew" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Stew" },
+    { "ingredient": "cilantro", "amount": 0.5, "unit": "cup", "prep": "chopped", "group": "Stew" }
+  ],
+  "substitutions": [
+    { "for": "cod", "use": "tilapia", "reason": "availability", "note": "Thinner pieces may be done in 6 minutes." },
+    { "for": "cilantro", "use": "parsley", "reason": "availability" }
+  ],
+  "equipment": [
+    "colander",
+    "saucepan-medium",
+    "paper-towels",
+    "cutting-board",
+    "chef-knife",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "pot-large",
+    "wooden-spoon",
+    "can-opener",
+    "spoon",
+    "oven-mitts",
+    "thermometer",
+    "fork",
+    "slotted-spoon"
+  ],
+  "steps": [
+    { "id": "rinse-rice", "text": "Put the rice in the colander and rinse it under cold water, swishing it with your hand, until the water running out is nearly clear.", "safety": "solo" },
+    { "id": "cook-rice", "text": "Put the rice, the rice's water, and its salt in the saucepan. Bring it to a boil over high heat, then turn the heat to low, put the lid on, and cook without lifting the lid.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 1080, "timerLabel": "Rice", "tip": "When the timer rings, turn off the burner and leave the lid on until the stew is ready." },
+    { "id": "lime-garlic", "text": "Squeeze the juice of one lime into the bowl. Peel the garlic, chop it fine, and add it with the fish's salt.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "fish", "text": "Pat the fish dry with paper towels and cut it into chunks about 2 inches across. Put them in the bowl and turn them in the lime and garlic with the spoon. Cover the bowl and put it in the fridge.", "safety": "adult-nearby", "hazard": "Raw fish, sharp knife", "handles": ["cod"], "timerSeconds": 900, "timerLabel": "Soak fish", "why": "lime", "tip": "Big chunks hold together in the stew." },
+    { "id": "wash-fish", "type": "wash", "text": "Wash the board and knife in hot, soapy water, throw away the paper towels and the fish's package, and wash your hands with soap.", "safety": "solo", "hazard": "Raw fish" },
+    { "id": "slice", "text": "Cut the onion in half and slice it thin. Cut the peppers into thin strips, throwing away the stems and seeds. Cut the tomatoes into small pieces.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "base", "text": "Heat the oil in the large pot over medium heat. Add the onion and peppers and cook, stirring now and then, until they're soft.", "safety": "adult-nearby", "hazard": "Hot oil", "timerSeconds": 420, "timerLabel": "Onion and peppers", "why": "base", "look": "Soft and shiny, not brown." },
+    { "id": "tomatoes", "text": "Add the tomatoes and paprika and cook, stirring, until the tomatoes soften and start to break down.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 300, "timerLabel": "Tomatoes" },
+    { "id": "coconut", "text": "Shake the can of coconut milk, open it, and pour it in with the stew's salt. Bring it to a gentle simmer.", "safety": "adult-nearby", "hazard": "Hot pot", "why": "coconut", "look": "Small bubbles around the edges, not a rolling boil." },
+    { "id": "fish-in", "text": "Lay the fish in the sauce in one layer with the spoon, and pour in the lime juice from the bowl. Spoon some sauce over the top. Put the lid on and simmer gently, without stirring.", "safety": "adult-nearby", "hazard": "Hot pot, steam", "timerSeconds": 600, "timerLabel": "Simmer fish", "why": "no-stir", "tip": "To move things around, hold the handles with oven mitts and give the pot a gentle shake." },
+    { "id": "check", "type": "doneness", "text": "Lift the lid away from you. Slide the thermometer into the side of the thickest chunk. It needs to read 145°F, and flake when you press it with the fork. If not, cover and simmer 2 more minutes.", "safety": "adult-nearby", "hazard": "Steam", "target": { "temp": 145, "unit": "F" }, "why": "flake" },
+    { "id": "finish", "text": "Turn off the heat. Squeeze in the juice of the second lime and scatter the cilantro over the top. Taste the sauce and add a pinch of salt if it needs it.", "safety": "adult-nearby", "hazard": "Hot pot" },
+    { "id": "serve", "text": "Fluff the rice with the fork. Serve the stew in bowls over the rice, lifting the fish out gently with the slotted spoon.", "safety": "adult-nearby", "hazard": "Hot pot" }
+  ],
+  "variations": [
+    {
+      "id": "sp-3",
+      "title": "Moqueca (Brazilian coconut fish stew)",
+      "level": "sp-3",
+      "tags": {
+        "protein": "white-fish",
+        "flavors": ["coconut-tropical", "rich-tomato"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "totalMinutes": 60,
+      "learn": {
+        "move": {
+          "title": "Layered in the pot, tasted at the end",
+          "body": "This is the unit's mastery week, and moqueca puts its skills together: a base sweated soft, a liquid held at a gentle simmer, and fish poached in it to 145°F. You'll cut the fish into even 2-inch pieces by weight, layer the stew in the pot the way cooks in Bahia do, hold it below a boil, and taste and correct the salt and lime at the end."
+        },
+        "why": {
+          "add": [
+            { "id": "even", "title": "Even pieces, even cooking", "body": "Pieces cut to the same size are done at the same moment. A fillet thins at its tail, so fold the thin end under or cut it larger, until every piece is about 1 inch thick." },
+            { "id": "layer", "title": "Layering", "body": "In Bahia, moqueca is built in layers in a clay pot: a softened base, then fish, then raw tomato and pepper on top. The top layer steams over the fish and shields it, and nothing is stirred." },
+            { "id": "correct", "title": "Taste and correct", "body": "Salt and acid are the last things a stew needs. Taste the sauce: flat means it needs salt; heavy means it needs lime. Add a little at a time and taste again." }
+          ]
+        },
+        "wrong": [
+          { "sign": "Some pieces were done before others", "fix": "They weren't the same size. Lift out the done ones and keep simmering the rest; next time, cut and weigh evenly." },
+          { "sign": "The sauce split and looks grainy", "fix": "It boiled after the coconut went in. Turn it down; it still tastes good. Hold it at a gentle simmer next time." },
+          { "sign": "The tomatoes on top are still raw", "fix": "Spoon hot sauce over them, cover, and simmer 2 more minutes." },
+          { "sign": "It tastes flat or heavy", "fix": "Flat needs salt, a pinch at a time. Heavy needs lime. Taste after each." }
+        ],
+        "quiz": [
+          { "q": "Why cut the fish into even pieces?", "choices": ["Same size, done at the same moment", "It looks better", "It soaks up more lime"], "answer": 0, "explain": "Fold the thin tail end under." },
+          { "q": "What does the top layer of tomato and pepper do?", "choices": ["Steams over the fish and shields it", "Thickens the sauce", "Nothing"], "answer": 0, "explain": "And nothing gets stirred." },
+          { "q": "The stew tastes heavy. What do you add?", "choices": ["Lime, a little at a time", "More coconut milk", "Water"], "answer": 0, "explain": "Acid brightens a rich sauce." },
+          { "q": "What does fish need to reach?", "choices": ["145°F, and it flakes", "165°F", "160°F"], "answer": 0, "explain": "Checked in the thickest piece." }
+        ]
+      },
+      "equipment": { "add": ["kitchen-scale"] },
+      "steps": {
+        "change": {
+          "fish": {
+            "id": "fish",
+            "text": "Pat the fish dry and cut it into pieces of about 3 ounces each, 2 inches across and 1 inch thick, folding the thin tail end under. Put them in the bowl and turn them in the lime and garlic. Cover the bowl and put it in the fridge.",
+            "safety": "adult-nearby",
+            "hazard": "Raw fish, sharp knife",
+            "handles": ["cod"],
+            "timerSeconds": 900,
+            "timerLabel": "Soak fish",
+            "why": "even"
+          },
+          "slice": {
+            "id": "slice",
+            "text": "Halve the onion and slice it ⅛ inch thick. Cut the peppers into ¼-inch strips and slice the tomatoes into ¼-inch rounds. Keep a third of the peppers and half the tomatoes apart for the top layer.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife"
+          },
+          "tomatoes": {
+            "id": "tomatoes",
+            "text": "Add the first half of the tomatoes and the paprika and cook, stirring, until the tomatoes break down.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pot",
+            "timerSeconds": 300,
+            "timerLabel": "Tomatoes"
+          },
+          "fish-in": {
+            "id": "fish-in",
+            "text": "Lay the fish in the sauce in one layer, pour in the lime juice from the bowl, and cover it with the tomato rounds and pepper strips you kept back. Put the lid on and hold it at a gentle simmer, without stirring.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pot, steam",
+            "timerSeconds": 600,
+            "timerLabel": "Simmer fish",
+            "why": "layer"
+          },
+          "check": {
+            "id": "check",
+            "type": "doneness",
+            "text": "Lift the lid away from you. Check two pieces, the biggest and one from the middle of the pot: each needs 145°F and to flake when pressed. If not, cover and simmer 2 more minutes.",
+            "safety": "adult-nearby",
+            "hazard": "Steam",
+            "target": { "temp": 145, "unit": "F" },
+            "why": "flake"
+          },
+          "finish": {
+            "id": "finish",
+            "text": "Turn off the heat. Taste the sauce. Correct it with the second lime's juice and salt, a little at a time, tasting after each, then scatter the cilantro over the top.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pot",
+            "why": "correct"
+          }
+        }
+      }
+    }
+  ]
+}

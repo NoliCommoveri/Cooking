@@ -87,5 +87,93 @@
     { "id": "simmer", "text": "Add the lentils, the rice's 2 cups of water, and its salt. Stir in a third of the onions. Bring it to a boil, then turn the heat to your lowest setting, put the lid on, and cook without lifting the lid.", "safety": "adult-nearby", "hazard": "Hot pot, steam", "timerSeconds": 1080, "timerLabel": "Rice & lentils", "why": "lid" },
     { "id": "rest", "text": "Turn off the burner and leave the lid on. Let it rest.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Rest" },
     { "id": "serve", "text": "Fluff it gently with the fork and taste; add a pinch more salt if it needs it. Pile it on a plate, heap the rest of the onions on top, and serve with yogurt if you like.", "safety": "solo", "look": "The rice and lentils are tender and separate, with no water left in the pot.", "tip": "Let the leftover onion oil cool and keep it in a jar in the fridge for up to a week. It's great for frying eggs." }
+  ],
+  "variations": [
+    {
+      "id": "sp-3",
+      "title": "Mujaddara",
+      "level": "sp-3",
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["warm-spices"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "totalMinutes": 80,
+      "learn": {
+        "move": {
+          "title": "No soak, a head start, and two timings",
+          "body": "This week's skill is cooking dried legumes. Brown lentils need no soak, but they take longer than rice, so they get a 12-minute head start and come off while they still have a firm middle. You'll judge that by feel, slice the onions pole to pole so they fry evenly, and fry them dark and crisp in batches while the lentils cook."
+        },
+        "why": {
+          "add": [
+            { "id": "no-soak", "title": "Why lentils skip the soak", "body": "Lentils are small and flat, so water reaches their middles in minutes once they're simmering. Big, round beans like pintos take hours to soak through, which is why they're soaked overnight and lentils aren't. Both still get picked over and rinsed." },
+            { "id": "pole", "title": "Slice pole to pole", "body": "Onion cut from root end to stem end, along its lines, holds its shape as it fries. Slices of the same thickness brown at the same speed, so none burn while others are still pale." }
+          ]
+        },
+        "wrong": [
+          { "sign": "The lentils turned to mush in the finished dish", "fix": "They went past firm before the rice went in. Next time, pinch one at 10 minutes, and drain them as soon as the middle is just firm." },
+          { "sign": "Some onions burned while others are still pale", "fix": "They weren't the same thickness, or the pan was crowded. Lift out the dark ones as they're done, and fry in two batches next time." },
+          { "sign": "The onions went soft after frying", "fix": "They were salted in the pan, or piled up while hot. Spread them in one layer on the paper towels and salt them there." },
+          { "sign": "The rice is crunchy when the timer rings", "fix": "Sprinkle ¼ cup of hot water over the top, put the lid back on, and cook 5 more minutes on the lowest heat." }
+        ],
+        "quiz": [
+          { "q": "Why don't brown lentils need soaking?", "choices": ["They're small and flat, so water reaches the middle quickly", "They're already cooked", "Soaking makes them bitter"], "answer": 0, "explain": "Big beans like pintos do need it." },
+          { "q": "How do you know the lentils are ready to drain?", "choices": ["A cooled one squashes but has a firm middle", "They've split open", "After exactly 25 minutes"], "answer": 0, "explain": "They finish cooking with the rice." },
+          { "q": "Why slice the onions pole to pole?", "choices": ["The slices hold their shape and brown evenly", "It's faster", "They taste sweeter"], "answer": 0, "explain": "Same thickness, same speed." },
+          { "q": "Why fry the onions in two batches?", "choices": ["Crowded onions steam instead of crisping", "To use less oil", "So they cool faster"], "answer": 0, "explain": "Each one needs room in the oil." }
+        ]
+      },
+      "steps": {
+        "change": {
+          "lentils": {
+            "id": "lentils",
+            "text": "Put the lentils and the lentils' {qty:water} of water in the saucepan. Bring them to a boil, then turn the heat down to a steady simmer with the lid off. At 10 minutes, scoop out a lentil, let it cool, and pinch it; drain when it squashes but still has a firm middle, by 12 minutes at the most.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pot",
+            "timerSeconds": 720,
+            "timerLabel": "Lentils",
+            "why": "head-start",
+            "look": "A lentil pressed between your fingers, once it's cool, squashes but still has a little firm middle."
+          },
+          "slice": {
+            "id": "slice",
+            "text": "Cut the onions in half through the root, peel them, and lay each half flat. Slice from the root end to the stem end, along the lines of the onion, into strips ⅛ inch thick.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "look": "Thin slices, all close to the same thickness.",
+            "why": "pole"
+          },
+          "onions": {
+            "id": "onions",
+            "text": "Heat the oil in the skillet over medium heat until it shimmers. Add half the onions and cook, stirring every couple of minutes and more often once they color, until they're deep brown and crisp at the edges. Lift them out with the slotted spoon onto paper towels, spread them out, and fry the second half the same way.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil, spatter",
+            "timerSeconds": 900,
+            "timerLabel": "First batch",
+            "why": "slow-onions",
+            "look": "Dark golden brown all over, and crisp when one cools."
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Fluff it gently with the fork and taste; add a pinch more salt if it needs it. Pile it on a plate, heap the rest of the onions on top, and serve with yogurt if you like.",
+            "safety": "solo",
+            "look": "The rice and lentils are tender and separate, with no water left in the pot."
+          },
+          "onions-out": {
+            "id": "onions-out",
+            "text": "When the second batch is deep brown, turn off the burner. Lift it out onto the paper towels, spread all the onions in one layer, and sprinkle on the onions' salt. Carefully pour the oil left in the skillet into the heatproof bowl.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oil",
+            "why": "salt-after",
+            "tip": "Hold the skillet with both hands and pour slowly, away from you.",
+            "timerSeconds": 900,
+            "timerLabel": "Second batch"
+          }
+        }
+      }
+    }
   ]
 }

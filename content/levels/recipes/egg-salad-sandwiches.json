@@ -1,0 +1,85 @@
+{
+  "id": "egg-salad-sandwiches",
+  "version": 1,
+  "track": "core",
+  "unit": 102,
+  "title": "Egg salad sandwiches",
+  "image": "dishes/egg-salad-sandwiches.png",
+  "cuisine": "american",
+  "skill": "Boiling eggs hard and peeling them",
+  "skills": ["poaching-eggs"],
+  "prereqs": [],
+  "servings": 4,
+  "totalMinutes": 40,
+  "scaling": {
+    "mode": "free",
+    "max": 8,
+    "notes": [{ "from": 5, "text": "Boil the eggs in the large pot so they sit in one layer." }]
+  },
+  "learn": {
+    "move": {
+      "title": "Hard-boil, chill, peel",
+      "body": "Egg salad starts with hard-boiled eggs. Today you'll cook eggs in hot water, cool them in ice water so they peel easily, and chop them into a creamy salad for sandwiches."
+    },
+    "callback": {
+      "lesson": "tuna-salad-sandwiches",
+      "body": "Tuna salad sandwiches mixed tuna with mayonnaise and mustard. Egg salad is the same sandwich with chopped hard-boiled eggs instead of tuna."
+    },
+    "why": [
+      { "id": "off-heat", "title": "Boil, then turn it off", "body": "Eggs cooked at a hard boil turn rubbery. Here the water boils, the heat goes off, and the hot water cooks them gently." },
+      { "id": "ice", "title": "The ice bath", "body": "Ice water stops the cooking, so there's no gray-green ring around the yolk. It also makes the shell easier to peel." },
+      { "id": "peel", "title": "Peel from the wide end", "body": "The wide end has a little air pocket. Start there, and the shell comes off in big pieces." },
+      { "id": "cold", "title": "Keep it cold", "body": "Egg salad has mayonnaise and cooked eggs. Keep it in the fridge, and eat it within 3 days." }
+    ],
+    "wrong": [
+      { "sign": "There's a gray-green ring around the yolk", "fix": "The eggs cooked too long or cooled too slowly. They're fine to eat." },
+      { "sign": "The shell is stuck", "fix": "Peel it under running water. Very fresh eggs are hardest to peel." },
+      { "sign": "The salad is runny", "fix": "Chop one more egg and stir it in." }
+    ],
+    "quiz": [
+      { "q": "Why do the eggs go into ice water?", "choices": ["To stop the cooking and help them peel", "To make them colder to eat", "To clean them"], "answer": 0, "explain": "No green ring, and easier peeling." },
+      { "q": "Where do you start peeling?", "choices": ["The wide end", "The pointy end", "The middle"], "answer": 0, "explain": "There's an air pocket there." },
+      { "q": "How long does egg salad keep in the fridge?", "choices": ["3 days", "2 weeks", "1 hour"], "answer": 0, "explain": "It has mayonnaise and eggs." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "egg", "amount": 6, "unit": "count", "group": "Egg salad" },
+    { "ingredient": "water", "amount": 6, "unit": "cup", "prep": "cold, to cover", "group": "Egg salad" },
+    { "ingredient": "mayonnaise", "amount": 0.33, "unit": "cup", "group": "Egg salad" },
+    { "ingredient": "mustard-dijon", "amount": 1, "unit": "tsp", "group": "Egg salad" },
+    { "ingredient": "chives", "amount": 2, "unit": "tbsp", "prep": "chopped", "group": "Egg salad" },
+    { "ingredient": "salt", "amount": 0.25, "unit": "tsp", "group": "Egg salad" },
+    { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Egg salad" },
+    { "ingredient": "bread-sandwich", "amount": 8, "unit": "count", "group": "Sandwiches" },
+    { "ingredient": "lettuce-green-leaf", "amount": 1, "unit": "count", "optional": true, "group": "Sandwiches" }
+  ],
+  "equipment": [
+    "saucepan-medium",
+    "slotted-spoon",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "kitchen-shears",
+    "fork",
+    "measuring-cups",
+    "measuring-spoons",
+    "spoon",
+    "table-knife",
+    "cutting-board"
+  ],
+  "steps": [
+    { "id": "eggs", "text": "Lower the eggs into the saucepan with the slotted spoon. Add cold water to cover them by 1 inch.", "safety": "solo", "handles": ["egg"], "tip": "Lower them gently so they don't crack." },
+    { "id": "wash", "text": "Wash your hands with soap.", "safety": "solo", "type": "wash" },
+    { "id": "boil", "text": "Bring the water to a boil over high heat, with the lid off.", "safety": "adult-nearby", "hazard": "Hot stove", "timerSeconds": 600, "timerLabel": "To a boil", "look": "Big bubbles all over." },
+    { "id": "sit", "text": "Turn off the burner. Put the lid on and leave the eggs in the hot water.", "safety": "adult-nearby", "hazard": "Hot water", "why": "off-heat", "timerSeconds": 720, "timerLabel": "Eggs sit" },
+    { "id": "ice", "text": "Fill the large bowl with cold water and ice.", "safety": "solo", "look": "More ice than water is fine." },
+    { "id": "chill", "text": "With the slotted spoon, move the eggs into the ice water.", "safety": "adult-nearby", "hazard": "Hot water", "why": "ice", "timerSeconds": 600, "timerLabel": "Chill eggs", "tip": "Lift one at a time." },
+    { "id": "peel", "text": "Tap each egg on the counter and roll it. Peel it from the wide end.", "safety": "solo", "why": "peel", "look": "Smooth white eggs, no bits of shell.", "tip": "Rinse off any little bits of shell." },
+    { "id": "check", "text": "Cut one egg in half. The yolk should be yellow and firm all the way through.", "safety": "adult-nearby", "type": "doneness", "hazard": "Knife", "target": { "look": "Firm yellow yolk, no runny middle" } },
+    { "id": "chives", "text": "Snip the chives into small pieces with the kitchen shears.", "safety": "solo", "look": "Tiny green rings." },
+    { "id": "mash", "text": "Put the eggs in the medium bowl. Chop them up with the side of the fork.", "safety": "solo", "look": "Small pieces, about the size of peas." },
+    { "id": "mix", "text": "Add the mayonnaise, mustard, chives, salt, and pepper. Stir gently.", "safety": "solo", "look": "Creamy, with bits of white and yellow." },
+    { "id": "taste", "text": "Taste a little on a clean spoon. Add a pinch of salt if it needs it.", "safety": "solo", "why": "cold" },
+    { "id": "build", "text": "Lay out 4 slices of bread. Add lettuce if you like. Spread on the egg salad.", "safety": "solo", "tip": "Spread it right to the edges." },
+    { "id": "top", "text": "Top with the other 4 slices. Cut each sandwich in half with the butter knife.", "safety": "solo", "look": "Four sandwiches cut into triangles." }
+  ]
+}

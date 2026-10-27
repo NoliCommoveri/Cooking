@@ -1,0 +1,105 @@
+{
+  "id": "chicken-noodle-soup",
+  "version": 1,
+  "track": "core",
+  "unit": 103,
+  "title": "Chicken noodle soup",
+  "image": "dishes/chicken-noodle-soup.png",
+  "cuisine": "american",
+  "skill": "A soup from homemade stock",
+  "skills": ["making-stock", "building-soup"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 165,
+  "scaling": {
+    "mode": "fixed",
+    "multipliers": [1],
+    "notes": { "1": "Makes about 2 quarts of stock and 6 big bowls of soup. A bigger batch needs a bigger stockpot." }
+  },
+  "learn": {
+    "move": {
+      "title": "Stock first, soup second",
+      "body": "A soup is only as good as the liquid it's made in. Today you'll make chicken stock from wings: cold water, a slow start, a bare simmer for an hour and a half, skimmed and strained. Then you'll poach chicken thighs in it to 165°F, and build the soup from that golden stock with carrots, celery, and wide egg noodles, salting it only at the end."
+    },
+    "why": [
+      { "id": "cold-start", "title": "Start in cold water", "body": "Heated slowly from cold, the chicken lets go of its flavor and its proteins into the water gradually. The proteins clump into foam at the top, where you can skim them off, instead of clouding the stock." },
+      { "id": "bare-simmer", "title": "A bare simmer, never a boil", "body": "A boil churns the fat into tiny drops that hang in the liquid and make stock cloudy and greasy. At a bare simmer, with a bubble breaking now and then, the fat floats to the top and the stock stays clear." },
+      { "id": "wings", "title": "Why wings", "body": "Wings are mostly skin, bone, and joints, and that's what gives stock its body. As they simmer, the connective tissue melts into gelatin, so the cooled stock sets like a soft jelly and the soup feels rich in your mouth." },
+      { "id": "no-salt", "title": "Salt the soup, not the stock", "body": "Stock is often cooked down or used in other dishes, and salt doesn't cook away. Leave it unsalted and season the finished soup, tasting as you go." },
+      { "id": "poach", "title": "Poach the chicken", "body": "Chicken poached in liquid just below a simmer cooks gently and stays moist. Pulled at 165°F, it shreds into tender strands; boiled hard, it turns stringy and dry." },
+      { "id": "noodles-last", "title": "Noodles go in last", "body": "Noodles keep drinking liquid after they're done. Added at the end and served right away, they're tender; left in the pot, they swell and turn soft. Leftover soup stays better with the noodles kept apart." }
+    ],
+    "wrong": [
+      { "sign": "The stock is cloudy", "fix": "It boiled. It still tastes good. Next time, keep the bubbles to one breaking every second or two." },
+      { "sign": "The stock tastes thin", "fix": "Simmer it uncovered 20 to 30 minutes longer to cook some water off, then taste again." },
+      { "sign": "There's a layer of fat on the soup", "fix": "Lay a paper towel flat on the surface for a second and lift it off; it takes the fat with it. Or chill the stock and lift off the hardened fat." },
+      { "sign": "The noodles are soft and swollen", "fix": "They sat in the hot soup. Next time, serve as soon as they're tender, and keep leftover noodles in their own container." }
+    ],
+    "quiz": [
+      { "q": "Why does stock start in cold water?", "choices": ["The proteins clump into foam you can skim off, so it stays clear", "So it boils faster", "To keep the chicken raw"], "answer": 0, "explain": "Heated slowly, the foam rises to the top." },
+      { "q": "What happens if stock boils hard?", "choices": ["The fat churns in and makes it cloudy", "It gets clearer", "Nothing"], "answer": 0, "explain": "Keep it at a bare simmer." },
+      { "q": "What makes cooled stock set like jelly?", "choices": ["Gelatin from the skin and joints", "Too much salt", "The noodles"], "answer": 0, "explain": "That's why wings and backs are used." },
+      { "q": "When is the soup salted?", "choices": ["At the end, tasting as you go", "In the stock at the start", "Never"], "answer": 0, "explain": "Stock stays unsalted so it can be used anywhere." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "chicken-wings", "amount": 3, "unit": "lb", "group": "Stock" },
+    { "ingredient": "water", "amount": 12, "unit": "cup", "prep": "cold", "group": "Stock" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "group": "Stock" },
+    { "ingredient": "carrot", "amount": 1, "unit": "count", "group": "Stock" },
+    { "ingredient": "celery", "amount": 1, "unit": "count", "group": "Stock" },
+    { "ingredient": "bay-leaves", "amount": 2, "unit": "count", "group": "Stock" },
+    { "ingredient": "peppercorns-black", "amount": 1, "unit": "tsp", "group": "Stock" },
+    { "ingredient": "parsley", "amount": 0.5, "unit": "cup", "prep": "stems and leaves, kept apart", "group": "Stock" },
+    { "ingredient": "chicken-thigh", "amount": 1, "unit": "lb", "group": "Soup" },
+    { "ingredient": "butter-unsalted", "amount": 2, "unit": "tbsp", "group": "Soup" },
+    { "ingredient": "onion-yellow", "amount": 1, "unit": "count", "group": "Soup" },
+    { "ingredient": "carrot", "amount": 3, "unit": "count", "group": "Soup" },
+    { "ingredient": "celery", "amount": 3, "unit": "count", "group": "Soup" },
+    { "ingredient": "thyme-dried", "amount": 0.5, "unit": "tsp", "group": "Soup" },
+    { "ingredient": "egg-noodles-wide", "amount": 6, "unit": "oz", "group": "Soup" },
+    { "ingredient": "salt", "amount": 2, "unit": "tsp", "prep": "to taste", "group": "Soup" },
+    { "ingredient": "black-pepper", "amount": 0.25, "unit": "tsp", "group": "Soup" }
+  ],
+  "substitutions": [{ "for": "butter-unsalted", "use": "olive-oil", "reason": "dairy" }],
+  "equipment": [
+    "chef-knife",
+    "cutting-board",
+    "stockpot",
+    "spoon",
+    "ladle",
+    "colander",
+    "mixing-bowl-large",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "measuring-cups",
+    "tongs",
+    "plate",
+    "fork",
+    "thermometer",
+    "pot-large",
+    "wooden-spoon",
+    "paper-towels"
+  ],
+  "steps": [
+    { "id": "stock-veg", "text": "Cut the stock's onion in half through the root, skin and all. Cut the stock's carrot and celery into 3-inch pieces. Cut the stems off the parsley; the stems go in the stock, and the leaves wait in the fridge for the soup.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "wings-in", "text": "Put the wings in the stockpot. Pour in the cold water: it should cover them by about an inch.", "safety": "solo", "hazard": "Raw chicken", "handles": ["chicken-wings"], "why": "wings" },
+    { "id": "wash-wings", "type": "wash", "text": "Throw away the wings' package and wash your hands with soap for 20 seconds.", "safety": "solo", "hazard": "Raw chicken" },
+    { "id": "heat", "text": "Set the pot over medium heat and bring it slowly up to a simmer, without stirring.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 1200, "timerLabel": "Slow heat", "why": "cold-start", "look": "Gray foam gathering on top, and the first small bubbles." },
+    { "id": "skim", "text": "Skim off the foam with the spoon and throw it away. Add the onion, carrot, celery, parsley stems, bay leaves, and peppercorns. Turn the heat down until a bubble breaks the surface every second or two.", "safety": "adult-nearby", "hazard": "Hot pot", "why": "bare-simmer", "look": "A lazy surface, barely moving." },
+    { "id": "simmer", "text": "Simmer the stock uncovered. Skim off any foam that comes up, and check every 20 minutes that it isn't boiling.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 5400, "timerLabel": "Simmer stock", "tip": "Cut the soup's vegetables near the end of the timer." },
+    { "id": "soup-veg", "text": "Cut the soup's onion into ¼-inch dice. Peel the soup's carrots and cut them into ¼-inch coins, and cut the celery into ¼-inch slices. Chop the parsley leaves.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "strain", "text": "Turn off the heat. Set the colander over the large bowl in the sink. An adult ladles and then pours the stock through it, and throws away the wings and vegetables.", "safety": "adult-hands-on", "hazard": "Hot liquid, heavy pot", "tip": "Ladle out most of the stock first, so the pot is light enough to tip." },
+    { "id": "skim-fat", "text": "Let the stock settle for 5 minutes, then skim the layer of fat off the top with the ladle. Measure it: you should have about 8 cups. Rinse out the stockpot.", "safety": "adult-nearby", "hazard": "Hot liquid", "timerSeconds": 300, "timerLabel": "Settle", "look": "Clear and golden, with only a few dots of fat." },
+    { "id": "poach-in", "text": "Pour 4 cups of the stock back into the stockpot and bring it to a simmer over medium heat. Lower in the chicken thighs with the tongs, and turn the heat down so it barely moves.", "safety": "adult-nearby", "hazard": "Hot liquid, raw chicken", "handles": ["chicken-thigh"], "why": "poach" },
+    { "id": "wash-thighs", "type": "wash", "text": "Wash the tongs in hot, soapy water, throw away the thighs' package, and wash your hands with soap.", "safety": "solo", "hazard": "Raw chicken" },
+    { "id": "poach", "text": "Poach the chicken just below a simmer.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 900, "timerLabel": "Poach chicken" },
+    { "id": "check", "type": "doneness", "text": "Lift out the thickest thigh with the clean tongs and push the thermometer into its thickest part. It needs to read 165°F. If not, put it back and poach 3 more minutes.", "safety": "adult-nearby", "hazard": "Hot liquid", "target": { "temp": 165, "unit": "F" }, "why": "poach" },
+    { "id": "shred", "text": "Move the chicken to the plate and let it cool for 5 minutes. Pull it into bite-size shreds with two forks.", "safety": "solo", "timerSeconds": 300, "timerLabel": "Cool chicken" },
+    { "id": "sweat", "text": "Melt the butter in the large pot over medium heat. Add the onion, carrots, celery, and thyme and cook, stirring, until the onion is soft but not brown.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 420, "timerLabel": "Soften vegetables" },
+    { "id": "build", "text": "Pour in all of the stock, the poaching stock too. Bring it to a simmer and cook until the carrots are just tender.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 600, "timerLabel": "Simmer soup" },
+    { "id": "noodles", "text": "Stir in the noodles and simmer until tender, stirring now and then.", "safety": "adult-nearby", "hazard": "Hot pot", "timerSeconds": 420, "timerLabel": "Noodles", "why": "noodles-last" },
+    { "id": "season", "text": "Stir in the chicken and parsley leaves. Taste a spoonful, after letting it cool. Add salt ½ teaspoon at a time, tasting each time, until it tastes bright and full, then add the pepper.", "safety": "adult-nearby", "hazard": "Hot pot", "why": "no-salt", "look": "It tastes of chicken, not of water and not of salt." },
+    { "id": "serve", "text": "Turn off the heat and ladle the soup into bowls right away.", "safety": "adult-nearby", "hazard": "Hot soup" }
+  ]
+}

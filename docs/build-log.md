@@ -6552,4 +6552,127 @@ placeholder photos for recipes and make sure they're swapped".
 - **Unit 4:** all 30 Unit 4 dishes across Levels 2, 3, and 4 now show their
   own dish picture. Pan de elote and arepas were the only ones on a
   placeholder.
+## 250. 2026-10-27 — 14g content: Level 3 Unit 5
+
+Owner, 2026-10-27: "We're gonna do unit 5, ordered levels 3, 2, 4. Put each
+level unit in a review doc for me before starting the next one. Notify me of
+any missing artwork for new recipes." Built on Unit 4's branch (245–247),
+since merged, with main's dish pictures (248–249) merged in. Reviewed in
+[14g review: Level 3 Cook, Unit 5](https://claude.ai/artifact/DECbyfWNNHxqwK7gNYAcvQ); not merged until the
+owner approves it there.
+
+- **Before:** Unit 5, Boiling, simmering, and steaming (weeks 16–20), had
+  only Steamed fish and weeks 17 and 18's pages. Jollof rice and moqueca were
+  planned Cook Around the World cards with no lesson; mujaddara had no Level
+  3 version; the other six dishes were unwritten Level cards. Weeks 16 and
+  19's Drill and Knowledge pages and all of week 20's were blank.
+- **Now:**
+  - **Two new Cook Around the World lessons,** each already planned (§12.4),
+    both in Unit 3: Jollof rice with chicken (the flavor-base group; the
+    chicken roasts while the rice cooks; 90 minutes) and Moqueca (the
+    one-pot-stews group, fish only; 60).
+  - **Level 3 versions** of both and of mujaddara: jollof with its base
+    cooked down to a measured 1½ cups and the rice toasted in it; moqueca as
+    the mastery dish, the fish cut by weight and the stew layered; mujaddara
+    with the lentils judged by feel and the onions sliced pole to pole and
+    fried in two batches.
+  - **Six Level-only recipes** in `content/levels/recipes/`, unit 103:
+    Steamed salmon and vegetables (a steamer basket, densest first), Arroz
+    con pollo (1¾ cups of liquid per cup of rice), Bean and cheese burritos
+    (dried pintos soaked and simmered), Chicken noodle soup (a wing stock,
+    thighs poached in it), Arroz caldo, and Spaghetti and meatballs (marked
+    as a variation of Spaghetti marinara, bound with oats so it's
+    unleavened). Their cards' minutes are now the recipes' own.
+  - **Seven part pages:** how steam cooks and steam burns, steaming
+    vegetables to crisp-tender; stock vs. broth and gelatin, skimming,
+    straining, and cooling a stock fast; soup families, poaching an egg and
+    steaming without a recipe, and Abraham's meal for his guests (Genesis
+    18:1–8; Hebrews 13:2).
+  - **New ingredients:** canned coconut milk, dried pinto beans, chicken
+    wings or backs, wide egg noodles. **New tool:** a folding metal steamer
+    basket.
+- **Pictures:** every dish already has its picture; nothing is missing.
+- The lint test that used mujaddara as a lesson with no Level 3 version uses
+  the French omelet now.
+- No screens changed, so no screenshots.
+- Tests: 402.
+
+## 251. 2026-10-27 — 14g content: Level 2 Unit 5
+
+Owner, 2026-10-27: Level 2 is the second of Unit 5's three Levels (250).
+Reviewed in [14g review: Level 2 Apprentice, Unit
+5](https://claude.ai/artifact/HokGLPnrWNN5cpMo8iG9ef); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 2 Unit 5's ten dishes was written for Level 2.
+  Spaghetti marinara and cacio e pepe had no Level 2 version; the other
+  eight were unwritten Level cards. All 15 part pages were blank.
+- **Now:**
+  - **Eight Level-only recipes** in `content/levels/recipes/`, unit 102:
+    Chicken potstickers with broccoli (the broccoli steamed in a basket, the
+    potstickers browned and steamed in a covered pan), Gyeran-jjim (steamed
+    in a bowl, plain salt), Egg salad sandwiches (marked as a variation of
+    Tuna salad sandwiches), Anda curry, Mexican rice with chicken and
+    Hainanese-style chicken rice (rice on the stove at 1½ cups of liquid per
+    cup), Black bean tortilla soup, and Egg drop soup with tofu. Their cards'
+    minutes are now the recipes' own.
+  - **Level 2 versions** of Spaghetti marinara (frozen diced onion and
+    jarred garlic) and Cacio e pepe, every step rewritten short, as the
+    mastery week.
+  - **All 15 part pages:** steam burns and the lid, steaming broccoli, steam
+    vegetables ahead; egg freshness and the float test, soft and hard eggs,
+    boil eggs ahead; the rice ratio, rice by the ratio, feeding the five
+    thousand (John 6:1–13); boil vs. simmer, finding a simmer, freezing soup;
+    pasta shapes, draining pasta safely, and Abraham's guests (Genesis
+    18:1–8).
+  - **New ingredients:** frozen chicken or vegetable potstickers (label note:
+    chicken or vegetable filling only), broccoli crowns, tortilla chips,
+    pouches of cooked long-grain rice.
+- **Pictures:** all eight Level-only recipes use the dish pictures from
+  sheets 34–36 (248), merged in from main.
+- The content check finds no Level 2 writing warnings.
+- No screens changed, so no screenshots.
+- Tests: 402.
+
+## 252. 2026-10-27 — 14g content: Level 4 Unit 5
+
+Owner, 2026-10-27: Level 4 is the last of Unit 5's three Levels (250).
+Reviewed in [14g review: Level 4 Chef, Unit
+5](https://claude.ai/artifact/XbEPhqexrjJ1tWbb6uSAnF); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 4 Unit 5's ten dishes was written for Level 4.
+  Eggs Benedict had no Level 4 version; the other nine were unwritten Level
+  cards. All 15 part pages were blank.
+- **Now:**
+  - **Nine Level-only recipes** in `content/levels/recipes/`, unit 104:
+    Poached salmon with dill sauce (a court-bouillon held at 170–180°F), Goan
+    fish curry (a masala toasted and ground at home), Çılbır (pasteurized
+    eggs poached in batches and held at 150°F), Mushroom risotto, Chelow
+    with tahdig, Puréed black bean soup for 8 (costed from the receipt),
+    Feijoada, beef only (oxtail, chuck, and all-beef sausage, the fat
+    trimmed and skimmed), French onion soup (a stock reduced by half), and
+    Phở bò (blanched bones, charred aromatics, the fat skimmed, simmered
+    brisket only). Their cards' minutes are now the recipes' own, and
+    feijoada's card says beef chuck where it said dried or corned beef.
+  - **Eggs Benedict's Level 4 version:** the beginner tips dropped, the
+    hollandaise steps terser, and a 150°F holding bowl so 12 eggs go out
+    together.
+  - **All 15 part pages:** poaching temperatures, holding a poaching liquid,
+    court-bouillon ahead; hollandaise and egg safety, poaching and holding 8
+    eggs, poaching ahead for a crowd; rice starch, risotto and rice for 12,
+    grains ahead; unit pricing with a Watch for box, cost per serving,
+    gleaning (Leviticus 19:9–10; Deuteronomy 24:19–22); soup families and
+    reduction with a Watch for box, reducing a stock by half, freezing stock.
+    Each Knowledge page closes with the week's cuisine.
+  - **New ingredients (20):** tamarind paste, dried red chiles, whole
+    coriander and cumin seeds, Aleppo pepper, arborio and basmati rice,
+    saffron, dried black beans, beef oxtail, beef brisket, and beef soup
+    bones (each with a note to trim the fat), collard greens, Gruyère, star
+    anise, cinnamon sticks, whole cloves, flat rice noodles, bean sprouts,
+    and oranges.
+- **Pictures:** all nine Level-only recipes use the dish pictures from
+  sheets 55–57 (249), merged in from main.
+- The content check finds no Level 4 writing warnings.
+- No screens changed, so no screenshots.
 - Tests: 402.
