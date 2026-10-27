@@ -1158,10 +1158,54 @@
       "skill": "steaming",
       "familiar": "steamed-salmon-vegetables",
       "explore": "steamed-fish",
-      "drill": { "title": "Set up a steamer; steam vegetables to crisp-tender", "minutes": 40 },
+      "drill": {
+        "title": "Set up a steamer; steam vegetables to crisp-tender",
+        "minutes": 40,
+        "body": [
+          "Steamed vegetables go from raw to crisp-tender to soft in a few minutes, and the only way to learn where the line is is to taste. You'll set up a steamer basket, steam two vegetables, and pull a piece out every minute to find the moment each one is right.",
+          "Use the carrots and green beans this week's salmon already buys; if you're cooking the steamed fish instead, use 2 carrots and a handful of green beans or a small head of broccoli. An adult is nearby for the stove."
+        ],
+        "steps": [
+          "Open the steamer basket in a large pot. Pour in water to just below the basket, not through the holes. Put the lid on and bring it to a boil over high heat.",
+          "Peel 2 carrots and cut them into ¼-inch coins. Trim a large handful of green beans.",
+          "With oven mitts, lift the lid far edge first, so it shields you from the steam. Spread the carrots in the basket, put the lid back on, and start a timer.",
+          "Every minute, lift the lid away from you, take out one carrot coin with tongs, and set it on a plate in a row, in order. Stop at 8 minutes.",
+          "Do the same with the green beans, one bean a minute, for 7 minutes.",
+          "Let the rows cool for a minute. Taste each piece in order, and press each with a fork. Write down the minute each vegetable turned crisp-tender (bright, with a little bite at the center) and the minute it turned soft and dull.",
+          "Check the water: how far did it drop? Write it down, so you know how long an inch of water lasts on your stove.",
+          "Turn off the burner and leave the lid on until the pot stops steaming. Eat the vegetables, or keep them for the week's meals."
+        ],
+        "quiz": [
+          { "q": "Where does the water sit in a steamer?", "choices": ["Below the basket, not touching the food", "Over the food", "Halfway up the basket"], "answer": 0, "explain": "Food in the water boils instead of steaming." },
+          { "q": "How do you lift a steaming lid?", "choices": ["Far edge first, so the lid shields you", "Near edge first", "Straight up over your face"], "answer": 0, "explain": "The steam goes away from you." },
+          { "q": "What does crisp-tender look like?", "choices": ["Bright color, with a little bite in the center", "Dull and soft", "Raw and hard"], "answer": 0, "explain": "Past it, green vegetables turn olive-gray." },
+          { "q": "Why test a piece every minute instead of trusting a chart?", "choices": ["Sizes and stoves differ, so tasting is the real test", "Charts are always wrong", "To use up the vegetables"], "answer": 0, "explain": "Write down your own times." }
+        ]
+      },
       "knowledge": {
         "title": "How steam cooks: gentle, moist heat; steam burns and lifting a lid away from you",
-        "minutes": 35
+        "minutes": 35,
+        "body": [
+          "Steaming cooks food in the hot vapor above boiling water. The food never touches the water, so it doesn't lose flavor or color into it, and it never gets hotter than about 212°F, so nothing browns, crisps, or burns. That's why steaming is called gentle, moist heat.",
+          "Steam carries more heat than you'd think. To turn water into steam takes a large amount of energy, and the steam gives all of it back the moment it touches something cooler and turns back into water. That's why steam cooks food faster than dry oven air at the same temperature, and why it's so good at cooking delicate fish evenly.",
+          "It's also why steam burns are so serious. Steam that condenses on your skin delivers far more heat than a splash of water at the same temperature, and a cloud of it can scald your face, wrists, or arms before you feel it. Most steaming burns happen at one moment: when a lid comes off.",
+          "So lift a lid by its far edge first, tilting it toward you like a shield, and keep your face back. Use oven mitts on the lid and on metal basket handles, which get as hot as the steam. Open a microwave bowl, a parchment packet, or a bag of steamed vegetables on the side away from you. Don't reach across a steaming pot.",
+          "A steamer needs only three things: water below the food, a way to hold the food above it, and a lid. A folding steamer basket, a bamboo steamer over a wok, or a heatproof plate on three balls of foil all work. The water should boil steadily but not so hard that it splashes up into the food, and it needs checking: an inch lasts about 20 minutes. If it runs low, add hot water from a kettle, not cold, so the steaming doesn't stop.",
+          "Steaming suits foods that are tender to begin with and that you want to taste plainly: fish, vegetables, dumplings, eggs, and buns. Vegetables cooked this way keep more of the vitamins that dissolve in water, like vitamin C, than boiled ones, because they aren't sitting in the water those vitamins leak into.",
+          "Doneness works the same as always. Vegetables are tested with a knife or a taste; fish reads 145°F in the thickest part and flakes; chicken, if you steam it, reads 165°F."
+        ],
+        "steps": [
+          "List three foods you've eaten that were steamed. For each, write what held it above the water.",
+          "Find a steamer basket, a pot that fits it, and its lid in your kitchen. Practise lifting the cold lid far edge first, with mitts on.",
+          "In one sentence, explain to someone at home why steam burns worse than hot water."
+        ],
+        "quiz": [
+          { "q": "What's the hottest steam from boiling water gets in an open pot?", "choices": ["About 212°F", "About 400°F", "About 145°F"], "answer": 0, "explain": "That's why nothing browns." },
+          { "q": "Why does steam cook faster than oven air at the same temperature?", "choices": ["It gives up a lot of heat when it turns back into water", "It's wetter, so it's cooler", "It doesn't"], "answer": 0, "explain": "That same heat is what burns skin." },
+          { "q": "When do most steaming burns happen?", "choices": ["When the lid comes off", "When the water first boils", "When the food is served"], "answer": 0, "explain": "Lift it far edge first." },
+          { "q": "The water is running low mid-steam. What do you add?", "choices": ["Hot water from a kettle", "Ice water", "Nothing; let it boil dry"], "answer": 0, "explain": "Hot water keeps the steam going." },
+          { "q": "Why do steamed vegetables keep more vitamin C than boiled ones?", "choices": ["They don't sit in the water it leaks into", "Steam adds vitamins", "They cook longer"], "answer": 0, "explain": "Water-soluble vitamins leak into cooking water." }
+        ]
       },
       "sabbath": {
         "title": "Make a sauce ahead, finish the fish fresh",
@@ -1342,8 +1386,54 @@
       "familiar": "chicken-noodle-soup",
       "explore": "arroz-caldo",
       "note": "Stock from chicken wings or backs",
-      "drill": { "title": "Skim and strain a stock; cool it fast and lift off the fat", "minutes": 40 },
-      "knowledge": { "title": "Stock vs. broth; why simmer, not boil; gelatin", "minutes": 35 },
+      "drill": {
+        "title": "Skim and strain a stock; cool it fast and lift off the fat",
+        "minutes": 40,
+        "body": [
+          "A stock is only as clear and useful as its finishing: skimmed, strained, cooled fast, and its fat lifted off. You'll do all four, then see the gelatin set.",
+          "Use this week's chicken noodle soup stock: make it as the recipe says with 2 more cups of water, and keep back 2 cups. If you're cooking the arroz caldo instead, make a small stock from 1 pound of chicken wings, a quarter of an onion, a piece of carrot, and 5 cups of cold water, simmered 1½ hours; wash your hands with soap after handling the raw wings. An adult is nearby for the stove and the hot liquid."
+        ],
+        "steps": [
+          "While the stock simmers, skim the gray foam off the top with a spoon every 10 minutes. Put each spoonful in a cup and look at it: it's proteins from the chicken, safe but cloudy.",
+          "Line a colander with a paper towel, wet it, and set it over a bowl. An adult ladles 2 cups of hot stock through it. Look at what the towel catches.",
+          "Fill the sink a few inches deep with cold water and ice. Pour the strained stock into a small metal bowl or a shallow container and set it in the ice water.",
+          "Stir it every few minutes and check it with the thermometer. Write down how long it takes to go from steaming hot to 70°F. It should get there well within 2 hours.",
+          "Cover it, label it with the date, and put it in the fridge overnight.",
+          "The next day, look at the top: the fat has set into a pale layer. Lift it off with a spoon in pieces and keep it in a jar in the fridge for frying, or throw it away.",
+          "Tip the container: does the stock under the fat wobble like jelly? Write down how firm it set. That's the gelatin from the skin and joints.",
+          "Use the stock within 4 days, or freeze it in 1-cup containers for up to 3 months."
+        ],
+        "quiz": [
+          { "q": "Why cool stock in an ice bath instead of leaving it on the counter?", "choices": ["It has to pass through the danger zone fast", "So the fat stays liquid", "It tastes better cold"], "answer": 0, "explain": "From hot to 70°F within 2 hours, then into the fridge." },
+          { "q": "What's the gray foam on simmering stock?", "choices": ["Proteins from the chicken", "Dirt", "Burnt fat"], "answer": 0, "explain": "Skimming it keeps the stock clear." },
+          { "q": "Why chill stock before taking off the fat?", "choices": ["The fat sets into a layer you can lift off", "Cold fat disappears", "It isn't needed"], "answer": 0, "explain": "Warm fat is hard to skim all of." },
+          { "q": "What makes cold stock set like jelly?", "choices": ["Gelatin from skin and joints", "Salt", "Too much fat"], "answer": 0, "explain": "A good set means a rich stock." }
+        ]
+      },
+      "knowledge": {
+        "title": "Stock vs. broth; why simmer, not boil; gelatin",
+        "minutes": 35,
+        "body": [
+          "Stock and broth are both made by simmering in water, and people use the words loosely, but cooks mean different things. A stock is made mostly from bones, skin, and joints, with a few vegetables, and no salt. It's an ingredient, the base for soups, sauces, rice, and braises. A broth is made mostly from meat, is seasoned, and is good enough to drink on its own. \"Bone broth\" on a label is a name for a long-simmered stock.",
+          "What gives a stock its body is gelatin. Bones, skin, and joints are held together by collagen, a tough protein. Held near a simmer for hours, collagen melts into gelatin, which dissolves in the water. A stock rich in gelatin feels silky in your mouth and sets like jelly when cold. Wings, backs, necks, and feet are the best parts for it; a lean breast gives almost none.",
+          "Stocks simmer; they don't boil. A rolling boil churns the fat and the cloudy proteins into the liquid as tiny drops, and they stay there: the stock turns cloudy and tastes greasy. At a bare simmer, with a bubble breaking now and then, the fat rises to the top and the proteins clump into foam you can skim. Starting from cold water helps the same way, because the proteins release slowly.",
+          "How long depends on the bones. Fish bones give their flavor in 30 to 45 minutes and turn bitter after that. Chicken takes 1½ to 3 hours. Beef bones, which are big and dense, take 4 to 6, and are often roasted first for a deep brown stock.",
+          "Stocks aren't salted because they're used in so many ways: cooked down into a sauce, absorbed by rice, reduced for a soup. Salt doesn't cook away, so a salted stock can end up far too salty. Season the dish you make with it.",
+          "Store-bought broth and stock save hours. Their labels vary a lot in salt, so check, and buy low-sodium when you can so you can season it yourself. Read the ingredient list too: bouillon cubes and powders, and some seafood or \"dashi\" bases, can carry ingredients from animals your family doesn't eat."
+        ],
+        "steps": [
+          "Find a carton of broth or stock at home or at the store. Copy its ingredient list and its sodium per cup.",
+          "Compare it with this week's homemade stock: which has more salt? Which set like jelly in the fridge?",
+          "Write the difference between a stock and a broth in your own words."
+        ],
+        "quiz": [
+          { "q": "What's the main difference between a stock and a broth?", "choices": ["Stock is mostly bones and unsalted; broth is mostly meat and seasoned", "Stock is always beef", "There's no difference at all"], "answer": 0, "explain": "Stock is an ingredient; broth can be served alone." },
+          { "q": "Where does gelatin come from?", "choices": ["Collagen in bones, skin, and joints, melted by long simmering", "Added powder", "The vegetables"], "answer": 0, "explain": "Wings and backs give the most." },
+          { "q": "Why does a boiled stock turn cloudy?", "choices": ["The boil churns fat and proteins into tiny drops in the liquid", "Boiling adds starch", "The bones dissolve"], "answer": 0, "explain": "Keep it at a bare simmer." },
+          { "q": "Why isn't stock salted?", "choices": ["It may be cooked down, and salt doesn't cook away", "Salt stops the gelatin", "Salt makes it cloudy"], "answer": 0, "explain": "Season the finished dish." },
+          { "q": "About how long does chicken stock simmer?", "choices": ["1½ to 3 hours", "10 minutes", "2 days"], "answer": 0, "explain": "Fish takes less; beef takes more." }
+        ]
+      },
       "sabbath": {
         "title": "Soup that improves when made ahead; freeze it in portions",
         "minutes": 45,
@@ -1367,7 +1457,85 @@
         ]
       }
     },
-    { "week": 20, "unit": 5, "skill": "building-soup", "mastery": true, "familiar": "spaghetti-meatballs", "explore": "moqueca", "note": "Meatballs bound with oats if the week falls in spring; moqueca with fish only", "drill": { "title": "Poach an egg; steam a vegetable without a recipe", "minutes": 40 }, "knowledge": { "title": "Soup families: clear, thick, puréed", "minutes": 35 }, "sabbath": { "title": "Hospitality: Abraham's meal for his guests (Genesis 18:1–8; Hebrews 13:2)", "minutes": 45 } },
+    {
+      "week": 20,
+      "unit": 5,
+      "skill": "building-soup",
+      "mastery": true,
+      "familiar": "spaghetti-meatballs",
+      "explore": "moqueca",
+      "note": "Meatballs bound with oats if the week falls in spring; moqueca with fish only",
+      "drill": {
+        "title": "Poach an egg; steam a vegetable without a recipe",
+        "minutes": 40,
+        "body": [
+          "Two skills without a recipe in front of you. A poached egg is cooked in water held just below a simmer, and you'll judge it by the thermometer and by the white. Then you'll steam a vegetable from start to finish on your own, using what you learned in week 16.",
+          "Use 4 eggs and one vegetable from this week's shopping: the bell peppers, or a carrot if you have one. An adult is nearby for the stove."
+        ],
+        "steps": [
+          "Fill a wide saucepan with 3 inches of water and heat it over medium. Use the thermometer: hold it at 180 to 190°F, with small bubbles on the bottom and only a few rising.",
+          "Crack one egg into a small cup. Wash your hands with soap.",
+          "Lower the cup to the water and tip the egg in gently. Set a timer for 4 minutes.",
+          "Lift it out with a slotted spoon and press the white with a fingertip: it should be completely set, and the yolk soft but thickened. If the white is still clear anywhere, lower it back for 1 more minute.",
+          "Poach the other 3 eggs, two at a time, and write down your time and water temperature for the best one.",
+          "Now the vegetable: set up the steamer, cut the vegetable into even pieces, and steam it, testing with a fork until it's crisp-tender. Write down your cut size and the time it took.",
+          "Eat the eggs and vegetable while they're hot, and turn off the stove."
+        ],
+        "quiz": [
+          { "q": "What temperature is poaching water held at?", "choices": ["180 to 190°F, below a simmer", "212°F, a rolling boil", "140°F"], "answer": 0, "explain": "A hard boil shreds the white." },
+          { "q": "How do you know a poached egg's white is done?", "choices": ["It's completely set, with no clear parts", "The yolk is hard", "It floats"], "answer": 0, "explain": "Then the yolk is soft but thickened." },
+          { "q": "Why tip the egg in from a cup, close to the water?", "choices": ["It slides in gently and holds together", "It cooks faster", "To keep it cold"], "answer": 0, "explain": "Dropped from high, the white spreads out." },
+          { "q": "What's the test for a steamed vegetable without a recipe?", "choices": ["A fork or taste: bright, with a little bite", "The clock only", "The color of the water"], "answer": 0, "explain": "Your own times from week 16 help." }
+        ]
+      },
+      "knowledge": {
+        "title": "Soup families: clear, thick, puréed",
+        "minutes": 35,
+        "body": [
+          "Most of the world's soups fall into three families, by how they get their body.",
+          "Clear soups are a well-made stock or broth with things cooked in it: chicken noodle soup, Vietnamese phở, egg drop soup, Mexican caldo de res, Greek avgolemono. Everything depends on the stock, so it's skimmed, strained, and kept from boiling.",
+          "Thick soups get their body from a starch or a cream. The starch can be a roux of flour and fat (cream of mushroom, corn chowder), potatoes (potato leek), rice cooked until it breaks down (arroz caldo, congee), or pasta and beans (minestrone, pasta e fagioli). Thick soups need stirring, because starch catches on the bottom, and they keep thickening as they stand.",
+          "Puréed soups are cooked vegetables or legumes blended smooth: butternut squash, tomato, black bean, split pea, red lentil. Most need no flour at all; the vegetable is the thickener. An immersion blender purées right in the pot. A countertop blender works too, filled only halfway with the lid vented and a towel over it, because hot liquid expands and can blow the lid off.",
+          "A stew is not a soup. A stew has more solid food than liquid, cut in bigger pieces, and the liquid is a sauce rather than something you sip. This week's moqueca is a stew; this week's meatballs simmer in a sauce, not a soup.",
+          "Whatever the family, finish a soup by tasting it hot, the way it'll be eaten, and correcting it: salt if it tastes flat, an acid like lemon or vinegar if it tastes heavy, and water or stock if it's grown too thick."
+        ],
+        "steps": [
+          "Write each of these soups under its family: chicken noodle, potato leek, black bean, egg drop, minestrone, butternut squash, arroz caldo, phở.",
+          "For each thick soup, write what thickens it.",
+          "Plan a soup your family would like, name its family, and write its four or five main ingredients."
+        ],
+        "quiz": [
+          { "q": "Which family is chicken noodle soup in?", "choices": ["Clear", "Thick", "Puréed"], "answer": 0, "explain": "A clear stock with things cooked in it." },
+          { "q": "What thickens arroz caldo?", "choices": ["Rice breaking down as it simmers", "Flour", "Cream"], "answer": 0, "explain": "Rice starch, like congee." },
+          { "q": "Why fill a blender only halfway with hot soup?", "choices": ["Hot liquid expands and can blow the lid off", "It blends faster", "To keep it hot"], "answer": 0, "explain": "Vent the lid and hold a towel over it." },
+          { "q": "What's the difference between a stew and a soup?", "choices": ["A stew has more solids than liquid, and the liquid is a sauce", "A stew is always beef", "A stew is cold"], "answer": 0, "explain": "Moqueca is a stew." },
+          { "q": "A finished soup tastes heavy. What do you add?", "choices": ["An acid, like lemon or vinegar", "More cream", "Sugar"], "answer": 0, "explain": "Flat needs salt; heavy needs acid." }
+        ]
+      },
+      "sabbath": {
+        "title": "Hospitality: Abraham's meal for his guests (Genesis 18:1–8; Hebrews 13:2)",
+        "minutes": 45,
+        "body": [
+          "Genesis 18 opens with Abraham sitting at the door of his tent in the heat of the day, by the oaks of Mamre. He looked up and saw three men standing nearby. \"When he saw them, he ran from the tent door to meet them and bowed himself to the earth\" (Genesis 18:2). The chapter tells us that the LORD Himself had come to Abraham, though Abraham hadn't yet been told who his guests were.",
+          "Abraham offered them very little: \"Let a little water be brought, and wash your feet, and rest yourselves under the tree, while I bring a morsel of bread\" (Genesis 18:4–5). Then he hurried. He told Sarah to bake cakes from three seahs of fine flour, about 20 quarts, far more than three guests could eat. He ran to the herd himself, picked a calf \"tender and good,\" and had it prepared quickly. He brought curds and milk with it, \"and he stood by them under the tree while they ate\" (Genesis 18:6–8).",
+          "Look at how he served. He ran, though it was the hottest part of the day and he was an old man. He promised a little and gave a feast. He chose the best of what he had. And he didn't sit down and eat first: he stood by, ready to serve his guests.",
+          "The New Testament points back to this meal: \"Do not neglect to show hospitality to strangers, for thereby some have entertained angels unawares\" (Hebrews 13:2). Hospitality in the Bible isn't a party for friends; it's welcoming whoever comes, and caring for them with your best.",
+          "Soup and stew have always been hospitality food. They stretch to feed one more, they hold warm until a guest arrives, and they can be made ahead with care. This unit's cooking is the kind that welcomes people."
+        ],
+        "steps": [
+          "Read Genesis 18:1–8 and Hebrews 13:2.",
+          "Answer in writing: what did Abraham promise his guests, and what did he give them?",
+          "Answer in writing: name three things Abraham did that showed care for his guests, besides the food.",
+          "With your family, invite someone to a meal: a neighbor, a friend, or someone new. Cook one dish from this unit for them.",
+          "When they come, serve them first, and make sure they have what they need before you sit down."
+        ],
+        "quiz": [
+          { "q": "What did Abraham first offer his guests?", "choices": ["A little water and a morsel of bread", "A feast", "Nothing"], "answer": 0, "explain": "Genesis 18:4–5. Then he gave far more." },
+          { "q": "What did Abraham do while his guests ate?", "choices": ["He stood by them under the tree", "He ate first", "He went to sleep"], "answer": 0, "explain": "Genesis 18:8." },
+          { "q": "What does Hebrews 13:2 say some have done by showing hospitality?", "choices": ["Entertained angels unawares", "Grown rich", "Learned to cook"], "answer": 0, "explain": "Hebrews 13:2." }
+        ]
+      }
+    },
     {
       "week": 21,
       "unit": 6,
@@ -1884,8 +2052,7 @@
       "art": "fish",
       "image": "dishes/steamed-salmon-vegetables.png",
       "safety": "adult-nearby",
-      "minutes": 40,
-      "estimated": true,
+      "minutes": 50,
       "about": "Salmon and vegetables steamed in a basket until just done, with a lemon-dill yogurt sauce.",
       "main": ["salmon fillet", "green beans", "carrots", "baby potatoes", "yogurt"],
       "method": "stove",
@@ -1929,8 +2096,7 @@
       "art": "poultry",
       "image": "dishes/arroz-con-pollo.png",
       "safety": "adult-nearby",
-      "minutes": 75,
-      "estimated": true,
+      "minutes": 85,
       "about": "Chicken thighs browned, then simmered in seasoned yellow rice with peppers and peas until the rice drinks up the broth.",
       "main": ["chicken thighs", "long-grain rice", "bell pepper", "peas", "broth"],
       "method": "stove",
@@ -1952,9 +2118,8 @@
       "art": "side",
       "image": "dishes/pinto-bean-burritos.png",
       "safety": "adult-nearby",
-      "minutes": 60,
-      "estimated": true,
-      "about": "Pinto beans cooked from dried, mashed, and rolled in flour tortillas with cheese and rice. The beans are cooked a day ahead.",
+      "minutes": 150,
+      "about": "Pinto beans soaked overnight, cooked from dried, mashed, and rolled in flour tortillas with cheese and rice.",
       "main": ["dried pinto beans", "flour tortillas", "cheddar", "rice", "salsa"],
       "method": "stove",
       "tags": {
@@ -1975,8 +2140,7 @@
       "art": "soup",
       "image": "dishes/chicken-noodle-soup.png",
       "safety": "adult-nearby",
-      "minutes": 90,
-      "estimated": true,
+      "minutes": 165,
       "about": "Chicken soup with egg noodles, carrots, and celery. Level 3 makes the stock from wings or backs; Level 2 builds it on boxed broth and rotisserie chicken.",
       "main": ["chicken wings or backs", "egg noodles", "carrots", "celery", "onion"],
       "method": "stove",
@@ -1989,29 +2153,7 @@
         "veggies": "some"
       }
     },
-    {
-      "id": "arroz-caldo",
-      "title": "Arroz caldo",
-      "cuisine": "filipino",
-      "skills": ["simmering"],
-      "skill": "Poaching chicken in a rice porridge",
-      "art": "soup",
-      "image": "dishes/arroz-caldo.png",
-      "safety": "adult-nearby",
-      "minutes": 60,
-      "estimated": true,
-      "about": "Filipino chicken and ginger rice porridge, topped with crisp garlic, green onion, a boiled egg, and calamansi or lime.",
-      "main": ["chicken thighs", "rice", "ginger", "garlic", "fish sauce"],
-      "method": "stove",
-      "tags": {
-        "protein": "chicken",
-        "flavors": ["ginger-soy"],
-        "heat": "mild",
-        "budget": "$",
-        "familiar": "new-ish",
-        "veggies": "light"
-      }
-    },
+    { "id": "arroz-caldo", "title": "Arroz caldo", "cuisine": "filipino", "skills": ["simmering"], "skill": "Poaching chicken in a rice porridge", "art": "soup", "image": "dishes/arroz-caldo.png", "safety": "adult-nearby", "minutes": 70, "about": "Filipino chicken and ginger rice porridge, topped with crisp garlic, green onion, a boiled egg, and calamansi or lime.", "main": ["chicken thighs", "rice", "ginger", "garlic", "fish sauce"], "method": "stove", "tags": { "protein": "chicken", "flavors": ["ginger-soy"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
     {
       "id": "spaghetti-meatballs",
       "title": "Spaghetti and meatballs",
@@ -2021,8 +2163,7 @@
       "art": "meat",
       "image": "dishes/spaghetti-meatballs.png",
       "safety": "adult-nearby",
-      "minutes": 75,
-      "estimated": true,
+      "minutes": 95,
       "about": "Beef meatballs simmered in marinara and served over spaghetti. Level 3 seasons its own mix; Level 2 follows a set seasoning.",
       "main": ["ground beef", "breadcrumbs or oats", "egg", "tomatoes", "spaghetti"],
       "method": "stove",

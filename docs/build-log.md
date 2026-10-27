@@ -6491,3 +6491,48 @@ owner approves it there.
 - The content check finds no Level 4 writing warnings.
 - No screens changed, so no screenshots.
 - Tests: 402.
+
+## 248. 2026-10-27 — 14g content: Level 3 Unit 5
+
+Owner, 2026-10-27: "We're gonna do unit 5, ordered levels 3, 2, 4. Put each
+level unit in a review doc for me before starting the next one. Notify me of
+any missing artwork for new recipes." Built on Unit 4's branch (245–247),
+which isn't merged yet. Reviewed in [14g review: Level 3 Cook, Unit
+5](https://claude.ai/artifact/DECbyfWNNHxqwK7gNYAcvQ); not merged until the
+owner approves it there.
+
+- **Before:** Unit 5, Boiling, simmering, and steaming (weeks 16–20), had
+  only Steamed fish and weeks 17 and 18's pages. Jollof rice and moqueca were
+  planned Cook Around the World cards with no lesson; mujaddara had no Level
+  3 version; the other six dishes were unwritten Level cards. Weeks 16 and
+  19's Drill and Knowledge pages and all of week 20's were blank.
+- **Now:**
+  - **Two new Cook Around the World lessons,** each already planned (§12.4),
+    both in Unit 3: Jollof rice with chicken (the flavor-base group; the
+    chicken roasts while the rice cooks; 90 minutes) and Moqueca (the
+    one-pot-stews group, fish only; 60).
+  - **Level 3 versions** of both and of mujaddara: jollof with its base
+    cooked down to a measured 1½ cups and the rice toasted in it; moqueca as
+    the mastery dish, the fish cut by weight and the stew layered; mujaddara
+    with the lentils judged by feel and the onions sliced pole to pole and
+    fried in two batches.
+  - **Six Level-only recipes** in `content/levels/recipes/`, unit 103:
+    Steamed salmon and vegetables (a steamer basket, densest first), Arroz
+    con pollo (1¾ cups of liquid per cup of rice), Bean and cheese burritos
+    (dried pintos soaked and simmered), Chicken noodle soup (a wing stock,
+    thighs poached in it), Arroz caldo, and Spaghetti and meatballs (marked
+    as a variation of Spaghetti marinara, bound with oats so it's
+    unleavened). Their cards' minutes are now the recipes' own.
+  - **Seven part pages:** how steam cooks and steam burns, steaming
+    vegetables to crisp-tender; stock vs. broth and gelatin, skimming,
+    straining, and cooling a stock fast; soup families, poaching an egg and
+    steaming without a recipe, and Abraham's meal for his guests (Genesis
+    18:1–8; Hebrews 13:2).
+  - **New ingredients:** canned coconut milk, dried pinto beans, chicken
+    wings or backs, wide egg noodles. **New tool:** a folding metal steamer
+    basket.
+- **Pictures:** every dish already has its picture; nothing is missing.
+- The lint test that used mujaddara as a lesson with no Level 3 version uses
+  the French omelet now.
+- No screens changed, so no screenshots.
+- Tests: 402.
