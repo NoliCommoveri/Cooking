@@ -6852,3 +6852,18 @@ feast, period. Yes Ruth should ask yearly. No skip the nudge."
   - Nothing is built yet: it comes with phase 13.
 - No screens changed, so no screenshots.
 - Tests: 407.
+
+## 261. 2026-10-27 — Plan: a leavened recipe can be added for after the feast
+
+Owner, 2026-10-27: "They can add it with a future date after unleavened bread
+ends, even if they are actually adding during feast. They just can't mark it
+cook on a date in the feast if it's leavened."
+
+- **Before:** the plan (260) left open whether a leavened recipe could be
+  added during the feast for afterward.
+- **Now:** it can, at any time; only its date can't fall on an unleavened
+  day, so the earliest is the day after the last one. The message for a
+  feast date waits on the owner's wording. Nothing is built yet: it comes
+  with phase 13.
+- No screens changed, so no screenshots.
+- Tests: 407.
