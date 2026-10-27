@@ -76,5 +76,106 @@
     { "id": "cut", "text": "Pat the dough two fingers thick one last time. Press the cutter straight down, lift it straight up, and set each biscuit on the pan with the sides touching.", "safety": "solo", "why": "straight-down", "tip": "Gently press the scraps together to cut the last ones. They won't be quite as tall." },
     { "id": "bake", "text": "Brush the tops with melted butter if you like. Bake until tall and golden brown.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 780, "timerLabel": "Biscuits", "look": "Golden brown on top, and the bottoms are browned too." },
     { "id": "cool", "text": "Use oven mitts to take out the pan. Move the biscuits to the rack and let them cool for a few minutes.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 300, "timerLabel": "Cool biscuits" }
+  ],
+  "variations": [
+    {
+      "id": "sp-2",
+      "title": "Buttermilk biscuits",
+      "level": "sp-2",
+      "tags": {
+        "protein": "none",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "equipment": { "drop": ["box-grater"], "add": ["table-knife", "plate"] },
+      "steps": {
+        "change": {
+          "preheat": {
+            "id": "preheat",
+            "text": "Heat the oven to 450°F. Line the sheet pan with parchment.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oven"
+          },
+          "dry": {
+            "id": "dry",
+            "text": "Spoon and level the flour into the big bowl. Whisk in the baking powder, baking soda, salt, and sugar.",
+            "safety": "solo",
+            "tip": "Spoon the flour into the cup, then scrape it flat. Don't scoop."
+          },
+          "wet": {
+            "id": "wet",
+            "text": "Pour in the buttermilk. Stir with the fork just until no dry flour is left.",
+            "safety": "solo",
+            "why": "gentle",
+            "look": "Lumpy and rough. Stop here.",
+            "tip": "Don't taste the raw dough. Raw flour can make you sick."
+          },
+          "fold": {
+            "id": "fold",
+            "text": "Fold it in thirds like a letter. Pat it out again. Do this 3 times.",
+            "safety": "solo",
+            "why": "folding",
+            "tip": "Each fold stacks more layers."
+          },
+          "cut": {
+            "id": "cut",
+            "text": "Press the cutter straight down and lift straight up. Set the biscuits on the pan, sides touching.",
+            "safety": "solo",
+            "why": "straight-down",
+            "tip": "Don't twist the cutter."
+          },
+          "bake": {
+            "id": "bake",
+            "text": "Bake until tall and golden brown.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oven",
+            "timerSeconds": 780,
+            "timerLabel": "Biscuits",
+            "look": "Tall, and golden brown on top and bottom."
+          },
+          "cool": {
+            "id": "cool",
+            "text": "With an adult and oven mitts, take out the pan. Move the biscuits to the rack to cool.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 300,
+            "timerLabel": "Cool biscuits",
+            "look": "Flaky layers when you pull one apart."
+          }
+        },
+        "drop": ["freeze-butter", "grate-butter"],
+        "add": [
+          { "id": "cube-butter", "text": "Cut the cold butter into small cubes with the butter knife. Put them on the plate in the freezer.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Chill butter", "why": "cold-butter", "tip": "Measure everything else while it chills." },
+          { "id": "cut-in", "text": "Add the cold butter. Press it into the flour with the fork until the pieces are the size of peas.", "safety": "solo", "timerSeconds": 180, "timerLabel": "Cut in butter", "why": "pea-size", "look": "Crumbs with pea-sized bits of butter.", "tip": "Work fast. Warm butter melts into the flour." },
+          { "id": "pat", "text": "Tip the dough onto a floured counter. Pat it into a rectangle about 1 inch thick.", "safety": "solo", "look": "About as thick as two fingers stacked." }
+        ],
+        "order": ["preheat", "+0", "dry", "+1", "wet", "+2", "fold", "cut", "bake", "cool"]
+      },
+      "learn": {
+        "move": {
+          "title": "Cut in the cold butter",
+          "body": "Biscuits get their flaky layers from little pieces of cold butter. This week you'll cut cold butter into flour with a fork until the pieces are the size of peas, stir in buttermilk, and fold the dough to stack the layers."
+        },
+        "wrong": [
+          { "sign": "The dough is too sticky to handle", "fix": "Dust it and your hands with a little flour. Don't knead more flour in." },
+          { "sign": "The butter is getting soft and greasy", "fix": "Slide the whole bowl into the freezer for 10 minutes." },
+          { "sign": "The biscuits came out flat", "fix": "The butter was too warm, or the cutter got twisted. Next time, freeze the butter longer and cut straight down." },
+          { "sign": "The butter turned into a paste", "fix": "It got too warm. Put the bowl in the freezer for 10 minutes, then keep going." }
+        ],
+        "quiz": [
+          { "q": "What makes the flaky layers?", "choices": ["Baking powder", "Steam from cold butter", "Lots of kneading"], "answer": 1, "explain": "Cold butter pieces melt and steam in the hot oven, puffing the layers apart. Baking powder helps the rise, but the layers come from the butter." },
+          { "q": "How big should the butter pieces be?", "choices": ["About the size of peas", "Like sand", "Whole cubes"], "answer": 0, "explain": "Each piece makes a flaky pocket." },
+          { "q": "Why cut the biscuits straight down?", "choices": ["Twisting pinches the edges shut, so they can't rise", "It's faster", "So they're round"], "answer": 0, "explain": "Press straight down, lift straight up." }
+        ],
+        "why": {
+          "add": [
+            { "id": "pea-size", "title": "Pea-sized pieces", "body": "Pressing cold butter into flour with a fork breaks it into small pieces coated in flour. Each piece melts into steam in the oven and leaves a flaky pocket. Pieces the size of peas are just right." }
+          ]
+        }
+      }
+    }
   ]
 }

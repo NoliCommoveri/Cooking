@@ -6399,3 +6399,45 @@ the owner approves it there.
   mujaddara now.
 - No screens changed, so no screenshots.
 - Tests: 402.
+
+## 246. 2026-10-27 — 14g content: Level 2 Unit 4
+
+Owner, 2026-10-27: Level 2 is the second of Unit 4's three Levels (245).
+Reviewed in [14g review: Level 2 Apprentice, Unit
+4](https://claude.ai/artifact/SXA8VrkW4ict39UrkwsxGV); not merged until the
+owner approves it there.
+
+- **Before:** none of Level 2 Unit 4's ten dishes was written for Level 2.
+  Blueberry muffins, pão de queijo, homemade pizza, and skillet naan were
+  planned Cook Around the World cards with no lesson; buttermilk biscuits had
+  no Level 2 version; the other five were unwritten Level cards. All 15 part
+  pages were blank.
+- **Now:**
+  - **Four new Cook Around the World lessons,** each already planned (§12.4),
+    all in Unit 5: Blueberry muffins (45 minutes), Pão de queijo (scalded on
+    the stove; 50), Homemade pizza (the yeast-dough group; 120), and Skillet
+    naan (the flatbreads group; 105).
+  - **Level 2 versions** of those four and of buttermilk biscuits, every step
+    rewritten short: muffins with flour spooned and leveled; pão de queijo
+    blended and baked in a muffin tin, with no stove; biscuits with cubed
+    butter cut in to pea size instead of grated; pizza with an adult at the
+    oven and knife; naan with jarred garlic and the dough divided by hand.
+  - **Five Level-only recipes** in `content/levels/recipes/`, unit 102: Welsh
+    cakes, Chocolate chip cookies (marked as a variation of Brown butter
+    cookies, written as a Level recipe of its own), Alfajores, and week 15's
+    mastery pair, Banana bread and Pan de elote. Their cards' minutes are now
+    the recipes' own.
+  - **All 15 part pages:** leaveners, spooning flour and two pancakes, freezing
+    muffins; cold fat and flaky layers, cutting butter in, manna (Exodus 16);
+    what yeast does, blooming and kneading 5 minutes, chilling dough ahead;
+    why cookies spread, even scoops, freezing dough balls; quick breads around
+    the world, the toothpick test, Elijah and the widow (1 Kings 17:8–16).
+  - **New ingredients:** frozen blueberries, tapioca flour, currants, dulce de
+    leche, shredded coconut, bananas, sweetened condensed milk. **New tool:** a
+    12-cup muffin tin. **New kitchen word:** fold in.
+- **Missing picture:** pan de elote's card never had one. Its recipe shows the
+  dessert drawing (`meals/dessert.svg`) until a dish picture is made; the
+  review doc has a prompt for it.
+- The content check finds no Level 2 writing warnings.
+- No screens changed, so no screenshots.
+- Tests: 402.

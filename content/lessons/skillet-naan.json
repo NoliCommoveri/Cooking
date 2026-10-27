@@ -1,0 +1,258 @@
+{
+  "id": "skillet-naan",
+  "version": 1,
+  "track": "core",
+  "unit": 5,
+  "title": "Skillet naan",
+  "image": "dishes/skillet-naan.png",
+  "cuisine": "indian",
+  "skill": "Yogurt dough, high-heat skillet",
+  "skills": ["flatbreads"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 105,
+  "scaling": {
+    "mode": "fixed",
+    "multipliers": [1, 2],
+    "notes": { "1": "Makes 6 naan.", "2": "Makes 12. Knead the dough in two halves." }
+  },
+  "learn": {
+    "move": {
+      "title": "A soft dough, a very hot pan",
+      "body": "Naan is the soft flatbread served with curries across North India. In a restaurant it bakes stuck to the wall of a clay tandoor oven; at home, a very hot skillet does the job. Today you'll make a soft yeast dough with yogurt, roll it into ovals, and cook each one until it bubbles and gets dark spots, then brush it with garlic butter."
+    },
+    "callback": {
+      "lesson": "pita-bread",
+      "body": "Pita puffed in a very hot oven. Naan cooks on a very hot skillet instead, and the yogurt in the dough makes it softer and a little tangy."
+    },
+    "why": [
+      { "id": "yogurt", "title": "Why yogurt", "body": "Yogurt's fat and acid make the dough tender, so the naan stays soft and bends instead of turning crisp. It also adds a little tang." },
+      { "id": "bloom", "title": "Warm water, not hot", "body": "Yeast wakes up in water at 105 to 110°F. Above about 130°F starts to kill it." },
+      { "id": "hot-pan", "title": "A very hot, dry pan", "body": "High heat turns the water in the dough to steam fast, so big bubbles puff up, and the bottom gets dark spots before the naan dries out. A cooler pan makes it stiff and pale." },
+      { "id": "thin", "title": "Rolled ¼ inch thin", "body": "Thin dough cooks through in the minute or two it takes the outside to brown. A thick one stays doughy in the middle." }
+    ],
+    "wrong": [
+      { "sign": "The naan is stiff and pale", "fix": "The pan wasn't hot enough. Heat it longer before the next one." },
+      { "sign": "It's burnt outside and doughy inside", "fix": "It was rolled too thick, or the pan was too hot. Roll the next one thinner, or turn the heat down a little." },
+      { "sign": "The dough keeps shrinking as you roll", "fix": "Leave it 5 minutes under the towel, then roll again." },
+      { "sign": "The dough is very sticky", "fix": "Dust it and your hands with a little flour. Soft dough makes soft naan." }
+    ],
+    "quiz": [
+      { "q": "What does yogurt do for naan?", "choices": ["Makes it soft and a little tangy", "Makes it rise faster", "Makes it crisp"], "answer": 0, "explain": "Its fat and acid keep the dough tender." },
+      { "q": "Why does the skillet need to be very hot?", "choices": ["So the naan bubbles and browns before it dries out", "So it cooks slower", "So the butter melts"], "answer": 0, "explain": "Steam puffs the bubbles fast." },
+      { "q": "What happens if the naan is rolled too thick?", "choices": ["It burns outside before the middle cooks", "It puffs more", "Nothing"], "answer": 0, "explain": "Roll it about ¼ inch thin." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "water", "amount": 0.5, "unit": "cup", "prep": "warm, 105 to 110°F", "group": "Dough" },
+    { "ingredient": "yeast-active-dry", "amount": 1.5, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "sugar", "amount": 1, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "yogurt-greek", "amount": 0.5, "unit": "cup", "group": "Dough" },
+    { "ingredient": "vegetable-oil", "amount": 2, "unit": "tbsp", "group": "Dough" },
+    { "ingredient": "flour-ap", "amount": 2.5, "unit": "cup", "group": "Dough" },
+    { "ingredient": "flour-ap", "amount": null, "text": "a little more, for rolling", "group": "Dough" },
+    { "ingredient": "salt", "amount": 0.75, "unit": "tsp", "group": "Dough" },
+    { "ingredient": "butter-unsalted", "amount": 3, "unit": "tbsp", "group": "Garlic butter" },
+    { "ingredient": "garlic", "amount": 2, "unit": "count", "group": "Garlic butter" },
+    { "ingredient": "cilantro", "amount": 2, "unit": "tbsp", "prep": "chopped", "optional": true, "group": "Garlic butter" }
+  ],
+  "substitutions": [{ "for": "butter-unsalted", "use": "vegetable-oil", "reason": "dairy" }],
+  "equipment": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "chef-knife",
+    "cutting-board",
+    "rolling-pin",
+    "skillet-12",
+    "tongs",
+    "small-bowl",
+    "pastry-brush",
+    "plate"
+  ],
+  "steps": [
+    { "id": "warm-water", "text": "Warm the water in the measuring cup in the microwave for about 15 seconds. Stir it and check it with the thermometer. It should read 105 to 110°F.", "safety": "solo", "why": "bloom" },
+    { "id": "bloom", "text": "Pour the water into the large bowl. Stir in the sugar, sprinkle the yeast over the top, and leave it to bloom.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Bloom yeast", "look": "A layer of foam on top." },
+    { "id": "mix", "text": "Stir in the yogurt and oil, then the flour and salt, until it's a soft, shaggy dough.", "safety": "solo", "why": "yogurt", "tip": "Don't taste the raw dough. Raw flour can make you sick." },
+    { "id": "knead", "text": "Dust the counter with flour and knead the dough until it's smooth and soft.", "safety": "solo", "timerSeconds": 360, "timerLabel": "Knead", "look": "Smooth, soft, and a little tacky." },
+    { "id": "rise", "text": "Put the dough back in the bowl, cover it with the towel, and let it rise somewhere warm.", "safety": "solo", "timerSeconds": 3600, "timerLabel": "Rise", "look": "Doubled. A floured finger pressed in leaves a dent that stays." },
+    { "id": "garlic", "text": "Peel the garlic and chop it fine. Put it in the small bowl with the butter and microwave until the butter melts. Stir in the cilantro if you're using it.", "safety": "adult-nearby", "hazard": "Sharp knife" },
+    { "id": "divide", "text": "Cut the dough into 6 pieces and roll each into a ball. Cover them with the towel and let them rest.", "safety": "adult-nearby", "hazard": "Sharp knife", "timerSeconds": 600, "timerLabel": "Rest" },
+    { "id": "heat", "text": "Heat the dry skillet over medium-high heat until a drop of water sizzles away at once.", "safety": "adult-nearby", "hazard": "Very hot pan", "why": "hot-pan" },
+    { "id": "roll", "text": "Roll one ball on a floured counter into an oval about ¼ inch thick.", "safety": "solo", "why": "thin" },
+    { "id": "cook", "text": "Lay the naan in the hot skillet. Cook until big bubbles puff up and the bottom has dark spots, then flip it with the tongs and cook the other side.", "safety": "adult-nearby", "hazard": "Very hot pan", "timerSeconds": 150, "timerLabel": "Cook one naan", "look": "Puffed bubbles, with brown and dark spots on both sides." },
+    { "id": "brush", "text": "Move the naan to the plate and brush it with garlic butter. Cover it with the towel to keep it soft.", "safety": "adult-nearby", "hazard": "Hot naan" },
+    { "id": "repeat", "text": "Roll and cook the rest the same way, one at a time. Turn off the stove when the last one is done.", "safety": "adult-nearby", "hazard": "Very hot pan", "tip": "Roll the next one while one cooks, if an adult is watching the pan." }
+  ],
+  "variations": [
+    {
+      "id": "sp-2",
+      "title": "Skillet naan",
+      "level": "sp-2",
+      "tags": {
+        "protein": "none",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "totalMinutes": 110,
+      "ingredients": {
+        "change": {
+          "cilantro@Garlic butter": {
+            "ingredient": "cilantro",
+            "amount": 2,
+            "unit": "tbsp",
+            "prep": "leaves, torn",
+            "optional": true,
+            "group": "Garlic butter"
+          }
+        },
+        "drop": ["garlic@Garlic butter"],
+        "add": [{ "ingredient": "garlic-minced-jarred", "amount": 2, "unit": "tsp", "group": "Garlic butter" }],
+        "order": [
+          "water@Dough",
+          "yeast-active-dry@Dough",
+          "sugar@Dough",
+          "yogurt-greek@Dough",
+          "vegetable-oil@Dough",
+          "flour-ap@Dough",
+          "flour-ap@Dough#2",
+          "salt@Dough",
+          "butter-unsalted@Garlic butter",
+          "+0",
+          "cilantro@Garlic butter"
+        ]
+      },
+      "equipment": { "drop": ["chef-knife", "cutting-board"] },
+      "steps": {
+        "change": {
+          "warm-water": {
+            "id": "warm-water",
+            "text": "Microwave the water for about 15 seconds. Check it with the thermometer: 105 to 110°F.",
+            "safety": "solo",
+            "why": "bloom",
+            "tip": "Too hot? Wait a minute and check again."
+          },
+          "bloom": {
+            "id": "bloom",
+            "text": "Pour it into the large bowl. Stir in the sugar. Sprinkle the yeast on top.",
+            "safety": "solo",
+            "timerSeconds": 600,
+            "timerLabel": "Bloom yeast",
+            "look": "Foam on top."
+          },
+          "mix": {
+            "id": "mix",
+            "text": "Add the flour and salt. Stir with the wooden spoon until shaggy.",
+            "safety": "solo",
+            "tip": "Don't taste the raw dough. Raw flour can make you sick."
+          },
+          "knead": {
+            "id": "knead",
+            "text": "Flour the counter. Knead the dough: push it away, fold it back, and turn it.",
+            "safety": "solo",
+            "timerSeconds": 300,
+            "timerLabel": "Knead",
+            "look": "Smooth and soft."
+          },
+          "rise": {
+            "id": "rise",
+            "text": "Put the dough back in the bowl. Cover it with the towel and let it rise.",
+            "safety": "solo",
+            "timerSeconds": 3600,
+            "timerLabel": "Rise",
+            "look": "Doubled in size."
+          },
+          "divide": {
+            "id": "divide",
+            "text": "Pull the dough into 6 even pieces with your hands. Roll each into a ball. Cover them.",
+            "safety": "solo",
+            "timerSeconds": 600,
+            "timerLabel": "Rest",
+            "look": "Six balls about the same size."
+          },
+          "garlic": {
+            "id": "garlic",
+            "text": "Put the butter and garlic in the small bowl. Microwave until the butter melts. Add the cilantro.",
+            "safety": "solo",
+            "timerSeconds": 30,
+            "timerLabel": "Melt butter"
+          },
+          "heat": {
+            "id": "heat",
+            "text": "Heat the dry skillet over medium-high heat.",
+            "safety": "adult-nearby",
+            "hazard": "Very hot pan",
+            "timerSeconds": 180,
+            "timerLabel": "Heat pan",
+            "why": "hot-pan",
+            "look": "A drop of water sizzles away fast."
+          },
+          "roll": {
+            "id": "roll",
+            "text": "Roll one ball on a floured counter into an oval about ¼ inch thick.",
+            "safety": "solo",
+            "why": "thin",
+            "tip": "Shrinking back? Wait a minute and roll again."
+          },
+          "cook": {
+            "id": "cook",
+            "text": "Lay the naan in the pan. Cook until bubbles puff up and the bottom has dark spots.",
+            "safety": "adult-nearby",
+            "hazard": "Very hot pan",
+            "timerSeconds": 90,
+            "timerLabel": "First side",
+            "look": "Big bubbles on top, dark spots underneath."
+          },
+          "brush": {
+            "id": "brush",
+            "text": "Move it to the plate. Brush it with garlic butter and cover it with the towel.",
+            "safety": "adult-nearby",
+            "hazard": "Hot naan",
+            "tip": "The towel keeps them soft."
+          },
+          "repeat": {
+            "id": "repeat",
+            "text": "Roll and cook the rest, one at a time. Turn off the stove at the end.",
+            "safety": "adult-nearby",
+            "hazard": "Very hot pan",
+            "look": "Six soft, spotty naan."
+          }
+        },
+        "add": [
+          { "id": "wet", "text": "Stir in the yogurt and the oil.", "safety": "solo", "why": "yogurt", "look": "Creamy, with no lumps of yogurt." },
+          { "id": "flip", "text": "Flip it with the tongs. Cook the other side.", "safety": "adult-nearby", "hazard": "Very hot pan", "timerSeconds": 60, "timerLabel": "Second side", "look": "Brown spots on both sides." }
+        ],
+        "order": [
+          "warm-water",
+          "bloom",
+          "+0",
+          "mix",
+          "knead",
+          "rise",
+          "divide",
+          "garlic",
+          "heat",
+          "roll",
+          "cook",
+          "+1",
+          "brush",
+          "repeat"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "A soft dough, a hot pan",
+          "body": "Naan is a soft flatbread from North India. Today you'll make a yeast dough with yogurt, knead it for 5 minutes, and cook each piece in a very hot pan until it puffs and gets dark spots. Garlic butter goes on last."
+        }
+      }
+    }
+  ]
+}

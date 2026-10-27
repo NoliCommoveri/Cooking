@@ -61,6 +61,7 @@
     { "id": "flake", "word": "Flake", "forms": ["flake", "flakes", "flaking"], "means": "When cooked fish is pressed with a fork, it separates into layers called flakes. Flaking is one sign fish is done.", "taughtIn": null, "image": null },
     { "id": "en-papillote", "word": "In parchment", "forms": ["parchment packet", "parchment packets"], "means": "Food sealed in folded parchment and baked, so it steams in its own juices. French cooks call it en papillote.", "taughtIn": null, "image": null },
     { "id": "score", "word": "Score", "forms": ["score", "scored", "scoring"], "means": "Make shallow cuts across the surface of food, often in a crosshatch, without cutting all the way through. It lets fat run out, flavor soak in, or heat reach the middle.", "taughtIn": null, "image": null },
-    { "id": "render", "word": "Render", "forms": ["render", "rendered", "rendering"], "means": "Cook something fatty slowly so its fat melts out and collects in the pan, leaving the skin or meat crisp.", "taughtIn": null, "image": null }
+    { "id": "render", "word": "Render", "forms": ["render", "rendered", "rendering"], "means": "Cook something fatty slowly so its fat melts out and collects in the pan, leaving the skin or meat crisp.", "taughtIn": null, "image": null },
+    { "id": "fold-in", "word": "Fold in", "forms": ["fold in", "folds in", "folded in", "folding in"], "means": "Mix something gently into a batter by scooping the spatula down to the bottom of the bowl and turning the batter over on top, then giving the bowl a quarter turn. It mixes without stirring out the air or crushing soft pieces.", "taughtIn": "blueberry-muffins", "image": null }
   ]
 }

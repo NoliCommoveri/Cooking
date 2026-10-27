@@ -8883,6 +8883,230 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "blueberry-muffins",
+   "version": 1,
+   "track": "core",
+   "unit": 5,
+   "title": "Blueberry muffins",
+   "image": "img/dishes/blueberry-muffins.webp",
+   "cuisine": "american",
+   "skill": "Muffin method, avoiding overmixing",
+   "servings": 12,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes 12 muffins."
+    }
+   },
+   "totalMinutes": 45,
+   "ingredients": [
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "baking-powder"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "vanilla-extract"
+    },
+    {
+     "ingredient": "blueberries-frozen"
+    },
+    {
+     "ingredient": "sugar"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "milk-whole",
+     "use": "milk-oat",
+     "reason": "dairy"
+    },
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "sweet-treats"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "muffin-tin",
+    "pastry-brush",
+    "small-bowl",
+    "microwave",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "whisk",
+    "silicone-spatula",
+    "spoon",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "skills": [
+    "muffin-method"
+   ],
+   "method": "oven",
+   "about": "Tender, sweet muffins full of blueberries. A breakfast bake.",
+   "main": [
+    "blueberries",
+    "milk",
+    "eggs",
+    "butter"
+   ],
+   "variations": [
+    {
+     "title": "Blueberry muffins",
+     "image": "img/dishes/blueberry-muffins.webp",
+     "cuisine": "american",
+     "servings": 12,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes 12 muffins."
+      }
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "baking-powder"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "milk-whole"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "vanilla-extract"
+      },
+      {
+       "ingredient": "blueberries-frozen"
+      },
+      {
+       "ingredient": "sugar"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "milk-whole",
+       "use": "milk-oat",
+       "reason": "dairy"
+      },
+      {
+       "for": "butter-unsalted",
+       "use": "vegetable-oil",
+       "reason": "dairy"
+      }
+     ],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "sweet-treats"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "muffin-tin",
+      "pastry-brush",
+      "small-bowl",
+      "microwave",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "whisk",
+      "silicone-spatula",
+      "spoon",
+      "oven-mitts",
+      "cooling-rack",
+      "table-knife",
+      "plate"
+     ],
+     "skills": [
+      "muffin-method"
+     ],
+     "method": "oven",
+     "about": "Tender, sweet muffins full of blueberries. A breakfast bake.",
+     "main": [
+      "blueberries",
+      "milk",
+      "eggs",
+      "butter"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
+    }
+   ]
+  },
+  {
    "id": "skillet-cornbread",
    "version": 1,
    "track": "core",
@@ -9101,6 +9325,413 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "pao-de-queijo",
+   "version": 1,
+   "track": "core",
+   "unit": 5,
+   "title": "Pão de queijo",
+   "image": "img/dishes/pao-de-queijo.webp",
+   "cuisine": "brazilian",
+   "skill": "Scalded tapioca dough",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes about 20 rolls.",
+     "2": "Makes about 40. Bake them on two sheet pans, swapping the racks halfway."
+    }
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "tapioca-flour"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "parmesan"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": true,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "sharp-cheese"
+    ],
+    "optional": []
+   },
+   "tools": [
+    "saucepan-medium",
+    "liquid-measuring-cup",
+    "measuring-cups",
+    "measuring-spoons",
+    "mixing-bowl-large",
+    "wooden-spoon",
+    "fork",
+    "small-bowl",
+    "sheet-pan",
+    "parchment",
+    "spoon",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "skills": [
+    "scalded-dough"
+   ],
+   "method": "stove-oven",
+   "about": "Brazilian cheese bread: chewy, puffy little rolls made with tapioca flour and cheese.",
+   "main": [
+    "tapioca flour",
+    "milk",
+    "eggs",
+    "parmesan"
+   ],
+   "variations": [
+    {
+     "title": "Pão de queijo",
+     "image": "img/dishes/pao-de-queijo.webp",
+     "cuisine": "brazilian",
+     "servings": 6,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes 12 rolls in a muffin tin."
+      }
+     },
+     "totalMinutes": 35,
+     "ingredients": [
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "milk-whole"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "tapioca-flour"
+      },
+      {
+       "ingredient": "parmesan"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "sharp-cheese"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "muffin-tin",
+      "pastry-brush",
+      "blender",
+      "liquid-measuring-cup",
+      "measuring-cups",
+      "measuring-spoons",
+      "table-knife",
+      "silicone-spatula",
+      "oven-mitts",
+      "cooling-rack"
+     ],
+     "skills": [
+      "scalded-dough"
+     ],
+     "method": "stove-oven",
+     "about": "Brazilian cheese bread: chewy, puffy little rolls made with tapioca flour and cheese.",
+     "main": [
+      "tapioca flour",
+      "milk",
+      "eggs",
+      "parmesan"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
+    }
+   ]
+  },
+  {
+   "id": "skillet-naan",
+   "version": 1,
+   "track": "core",
+   "unit": 5,
+   "title": "Skillet naan",
+   "image": "img/dishes/skillet-naan.webp",
+   "cuisine": "indian",
+   "skill": "Yogurt dough, high-heat skillet",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes 6 naan.",
+     "2": "Makes 12. Knead the dough in two halves."
+    }
+   },
+   "totalMinutes": 105,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "yogurt-greek"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "garlic"
+    },
+    {
+     "ingredient": "cilantro",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "butter-unsalted",
+     "use": "vegetable-oil",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [
+     "sour-cream-yogurt",
+     "garlic"
+    ],
+    "optional": [
+     "cilantro"
+    ]
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "chef-knife",
+    "cutting-board",
+    "rolling-pin",
+    "skillet-12",
+    "tongs",
+    "small-bowl",
+    "pastry-brush",
+    "plate"
+   ],
+   "skills": [
+    "flatbreads"
+   ],
+   "method": "stove",
+   "about": "Soft Indian flatbread made with a yogurt dough and cooked in a very hot skillet.",
+   "main": [
+    "yogurt",
+    "butter",
+    "garlic"
+   ],
+   "variations": [
+    {
+     "title": "Skillet naan",
+     "image": "img/dishes/skillet-naan.webp",
+     "cuisine": "indian",
+     "servings": 6,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1,
+       2
+      ],
+      "notes": {
+       "1": "Makes 6 naan.",
+       "2": "Makes 12. Knead the dough in two halves."
+      }
+     },
+     "totalMinutes": 110,
+     "ingredients": [
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "yeast-active-dry"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "yogurt-greek"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "garlic-minced-jarred"
+      },
+      {
+       "ingredient": "cilantro",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "butter-unsalted",
+       "use": "vegetable-oil",
+       "reason": "dairy"
+      }
+     ],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "sour-cream-yogurt"
+      ],
+      "optional": [
+       "cilantro"
+      ]
+     },
+     "tools": [
+      "liquid-measuring-cup",
+      "thermometer",
+      "microwave",
+      "mixing-bowl-large",
+      "measuring-cups",
+      "measuring-spoons",
+      "wooden-spoon",
+      "kitchen-towel",
+      "rolling-pin",
+      "skillet-12",
+      "tongs",
+      "small-bowl",
+      "pastry-brush",
+      "plate"
+     ],
+     "skills": [
+      "flatbreads"
+     ],
+     "method": "stove",
+     "about": "Soft Indian flatbread made with a yogurt dough and cooked in a very hot skillet.",
+     "main": [
+      "yogurt",
+      "butter",
+      "garlic"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
+    }
+   ]
+  },
+  {
    "id": "pita-bread",
    "version": 1,
    "track": "core",
@@ -9289,6 +9920,103 @@ export const LIBRARY = {
    "main": [
     "butter",
     "buttermilk"
+   ],
+   "variations": [
+    {
+     "title": "Buttermilk biscuits",
+     "image": "img/dishes/buttermilk-biscuits.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       0.5,
+       1,
+       2
+      ],
+      "notes": {
+       "1": "Makes 6 biscuits.",
+       "2": "Makes 12 biscuits. Use two sheet pans and swap their racks halfway through baking.",
+       "0.5": "Makes 3 biscuits. Pat the dough into a smaller rectangle."
+      }
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "baking-powder"
+      },
+      {
+       "ingredient": "baking-soda"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "buttermilk"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "butter-unsalted",
+       "optional": true
+      }
+     ],
+     "substitutions": [],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "mixing-bowl-large",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "whisk",
+      "fork",
+      "biscuit-cutter",
+      "sheet-pan",
+      "parchment",
+      "pastry-brush",
+      "oven-mitts",
+      "cooling-rack",
+      "table-knife",
+      "plate"
+     ],
+     "skills": [
+      "cutting-in-fat",
+      "folding-layers"
+     ],
+     "method": "oven",
+     "about": "Tall, flaky biscuits made with cold butter folded into layers. A breakfast bake.",
+     "main": [
+      "butter",
+      "buttermilk"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
+    }
    ]
   },
   {
@@ -9794,6 +10522,209 @@ export const LIBRARY = {
      ],
      "id": "sp-3",
      "level": "sp-3"
+    }
+   ]
+  },
+  {
+   "id": "homemade-pizza",
+   "version": 1,
+   "track": "core",
+   "unit": 5,
+   "title": "Homemade pizza",
+   "image": "img/dishes/homemade-pizza.webp",
+   "cuisine": "italian",
+   "skill": "Yeast dough: kneading, stretching",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes one sheet-pan pizza, 12 squares."
+    }
+   },
+   "totalMinutes": 120,
+   "ingredients": [
+    {
+     "ingredient": "water"
+    },
+    {
+     "ingredient": "yeast-active-dry"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "olive-oil"
+    },
+    {
+     "ingredient": "pizza-sauce"
+    },
+    {
+     "ingredient": "mozzarella-shredded"
+    },
+    {
+     "ingredient": "oregano-dried"
+    },
+    {
+     "ingredient": "bell-pepper-green",
+     "optional": true
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "rich-tomato",
+     "creamy-cheesy"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "everyday",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "bell-peppers"
+    ]
+   },
+   "tools": [
+    "liquid-measuring-cup",
+    "thermometer",
+    "microwave",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "measuring-spoons",
+    "wooden-spoon",
+    "kitchen-towel",
+    "paring-knife",
+    "cutting-board",
+    "sheet-pan",
+    "spoon",
+    "oven-mitts",
+    "spatula",
+    "chef-knife"
+   ],
+   "skills": [
+    "yeast-dough"
+   ],
+   "method": "oven",
+   "about": "Pizza on a homemade yeast crust, stretched by hand, with tomato sauce and cheese.",
+   "main": [
+    "yeast",
+    "tomato sauce",
+    "mozzarella",
+    "toppings"
+   ],
+   "variations": [
+    {
+     "title": "Homemade pizza",
+     "image": "img/dishes/homemade-pizza.webp",
+     "cuisine": "italian",
+     "servings": 6,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes one sheet-pan pizza, 12 squares."
+      }
+     },
+     "totalMinutes": 115,
+     "ingredients": [
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "yeast-active-dry"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "pizza-sauce"
+      },
+      {
+       "ingredient": "mozzarella-shredded"
+      },
+      {
+       "ingredient": "oregano-dried"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": false,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "rich-tomato",
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "liquid-measuring-cup",
+      "thermometer",
+      "microwave",
+      "mixing-bowl-large",
+      "measuring-cups",
+      "measuring-spoons",
+      "wooden-spoon",
+      "kitchen-towel",
+      "cutting-board",
+      "sheet-pan",
+      "spoon",
+      "oven-mitts",
+      "spatula",
+      "chef-knife"
+     ],
+     "skills": [
+      "yeast-dough"
+     ],
+     "method": "oven",
+     "about": "Pizza on a homemade yeast crust, stretched by hand, with tomato sauce and cheese.",
+     "main": [
+      "yeast",
+      "tomato sauce",
+      "mozzarella",
+      "toppings"
+     ],
+     "id": "sp-2",
+     "level": "sp-2"
     }
    ]
   },
@@ -10614,6 +11545,188 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "alfajores",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Alfajores",
+   "image": "img/dishes/alfajores.webp",
+   "cuisine": "argentine",
+   "skill": "Even cookies, sandwiched",
+   "servings": 12,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes 12 sandwich cookies."
+    }
+   },
+   "totalMinutes": 75,
+   "ingredients": [
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "powdered-sugar"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "vanilla-extract"
+    },
+    {
+     "ingredient": "cornstarch"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "baking-powder"
+    },
+    {
+     "ingredient": "dulce-de-leche"
+    },
+    {
+     "ingredient": "coconut-shredded"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "wooden-spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "whisk",
+    "rolling-pin",
+    "biscuit-cutter",
+    "sheet-pan",
+    "parchment",
+    "oven-mitts",
+    "spatula",
+    "cooling-rack",
+    "table-knife",
+    "plate"
+   ],
+   "skills": [
+    "creaming"
+   ],
+   "method": "oven",
+   "about": "Tender shortbread cookies sandwiched with canned dulce de leche and rolled in coconut.",
+   "main": [
+    "flour",
+    "cornstarch",
+    "butter",
+    "dulce de leche",
+    "coconut"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "banana-bread",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Banana bread",
+   "image": "img/dishes/banana-bread.webp",
+   "cuisine": "american",
+   "skill": "The toothpick test",
+   "servings": 10,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes 1 loaf, about 10 slices."
+    }
+   },
+   "totalMinutes": 85,
+   "ingredients": [
+    {
+     "ingredient": "banana"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "brown-sugar"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "vanilla-extract"
+    },
+    {
+     "ingredient": "baking-soda"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "flour-ap"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "loaf-pan",
+    "pastry-brush",
+    "small-bowl",
+    "microwave",
+    "mixing-bowl-large",
+    "fork",
+    "wooden-spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "table-knife",
+    "foil",
+    "oven-mitts",
+    "cooling-rack"
+   ],
+   "skills": [
+    "muffin-method"
+   ],
+   "method": "oven",
+   "about": "A moist loaf of ripe bananas mixed by the muffin method and baked until a toothpick comes out clean.",
+   "main": [
+    "ripe bananas",
+    "flour",
+    "butter",
+    "egg",
+    "baking soda"
+   ],
+   "level": "sp-2"
+  },
+  {
    "id": "beef-tacos-seasoning",
    "version": 1,
    "track": "core",
@@ -11127,6 +12240,92 @@ export const LIBRARY = {
     "parmesan",
     "mayonnaise",
     "flour tortillas"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "chocolate-chip-cookies",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Chocolate chip cookies",
+   "image": "img/dishes/chocolate-chip-cookies.webp",
+   "cuisine": "american",
+   "skill": "Creaming butter and sugar; even scoops",
+   "servings": 12,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes about 24 cookies."
+    }
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "brown-sugar"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "vanilla-extract"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "baking-soda"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "chocolate-chips"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "sheet-pan",
+    "parchment",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "wooden-spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "whisk",
+    "table-knife",
+    "oven-mitts",
+    "spatula",
+    "cooling-rack"
+   ],
+   "skills": [
+    "creaming"
+   ],
+   "method": "oven",
+   "about": "Classic chocolate chip cookies, scooped even and spaced on the pan.",
+   "main": [
+    "flour",
+    "butter",
+    "brown sugar",
+    "egg",
+    "chocolate chips"
    ],
    "level": "sp-2"
   },
@@ -12026,6 +13225,90 @@ export const LIBRARY = {
    "level": "sp-2"
   },
   {
+   "id": "pan-de-elote",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Pan de elote",
+   "image": "img/meals/dessert.svg",
+   "cuisine": "mexican",
+   "skill": "A blender batter baked to doneness",
+   "servings": 12,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes one 9-by-13-inch pan, 12 squares."
+    }
+   },
+   "totalMinutes": 60,
+   "ingredients": [
+    {
+     "ingredient": "corn-frozen"
+    },
+    {
+     "ingredient": "condensed-milk"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "baking-powder"
+    },
+    {
+     "ingredient": "salt"
+    }
+   ],
+   "substitutions": [],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "baking-dish",
+    "pastry-brush",
+    "small-bowl",
+    "microwave",
+    "blender",
+    "can-opener",
+    "measuring-cups",
+    "measuring-spoons",
+    "silicone-spatula",
+    "foil",
+    "oven-mitts",
+    "cooling-rack",
+    "table-knife"
+   ],
+   "skills": [
+    "muffin-method"
+   ],
+   "method": "oven",
+   "about": "A moist Mexican corn cake mixed in the blender from corn kernels, eggs, and condensed milk.",
+   "main": [
+    "corn",
+    "eggs",
+    "sweetened condensed milk",
+    "butter",
+    "flour"
+   ],
+   "level": "sp-2"
+  },
+  {
    "id": "shioyaki",
    "version": 1,
    "track": "core",
@@ -12209,6 +13492,114 @@ export const LIBRARY = {
     "honey",
     "jarred ginger and garlic",
     "rice"
+   ],
+   "level": "sp-2"
+  },
+  {
+   "id": "welsh-cakes",
+   "version": 1,
+   "track": "core",
+   "unit": 102,
+   "title": "Welsh cakes",
+   "image": "img/dishes/welsh-cakes.webp",
+   "cuisine": "welsh",
+   "skill": "Rubbing cold butter into flour",
+   "servings": 8,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1
+    ],
+    "notes": {
+     "1": "Makes about 16 cakes."
+    }
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "sugar"
+    },
+    {
+     "ingredient": "baking-powder"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "cinnamon-ground"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "butter-unsalted"
+    },
+    {
+     "ingredient": "currants"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "sugar"
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "currants",
+     "use": "raisins",
+     "reason": "availability"
+    },
+    {
+     "for": "milk-whole",
+     "use": "milk-oat",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": false,
+   "feast": false,
+   "protein": "vegetarian",
+   "tags": null,
+   "tasteItems": {
+    "required": [],
+    "optional": []
+   },
+   "tools": [
+    "table-knife",
+    "plate",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "measuring-spoons",
+    "whisk",
+    "small-bowl",
+    "fork",
+    "rolling-pin",
+    "biscuit-cutter",
+    "skillet-12",
+    "paper-towels",
+    "spatula",
+    "cooling-rack"
+   ],
+   "skills": [
+    "cutting-in-fat"
+   ],
+   "method": "stove",
+   "about": "Small griddled cakes from a buttery dough with currants, dusted with sugar. Made with butter.",
+   "main": [
+    "flour",
+    "butter",
+    "currants",
+    "egg",
+    "sugar"
    ],
    "level": "sp-2"
   },
@@ -17863,6 +19254,38 @@ export const LIBRARY = {
   "sugar-pearl": {
    "name": "Pearl sugar",
    "contains": []
+  },
+  "blueberries-frozen": {
+   "name": "Frozen blueberries",
+   "contains": []
+  },
+  "tapioca-flour": {
+   "name": "Tapioca flour (tapioca starch)",
+   "contains": []
+  },
+  "currants": {
+   "name": "Dried currants",
+   "contains": []
+  },
+  "dulce-de-leche": {
+   "name": "Dulce de leche (canned or jarred)",
+   "contains": [
+    "dairy"
+   ]
+  },
+  "coconut-shredded": {
+   "name": "Sweetened shredded coconut",
+   "contains": []
+  },
+  "banana": {
+   "name": "Bananas",
+   "contains": []
+  },
+  "condensed-milk": {
+   "name": "Sweetened condensed milk",
+   "contains": [
+    "dairy"
+   ]
   }
  },
  "cuisines": {
@@ -17935,11 +19358,14 @@ export const LIBRARY = {
   "cottage-cheese-crescents": "U2"
  },
  "levelLabels": {
+  "alfajores": "B14b",
+  "banana-bread": "B15a",
   "beef-tacos-seasoning": "B8a",
   "bun-bowl": "B3b",
   "caprese-sandwiches": "B1a",
   "chana-chaat": "B6b",
   "chicken-caesar-wraps": "B6a",
+  "chocolate-chip-cookies": "B14a",
   "fish-sticks": "B9a",
   "ful-medames": "B4b",
   "hummus-plate": "B5b",
@@ -17949,8 +19375,10 @@ export const LIBRARY = {
   "mini-pita-pizzas": "B4a",
   "molletes": "B2b",
   "onigiri": "B1b",
+  "pan-de-elote": "B15b",
   "shioyaki": "B9b",
   "teriyaki-chicken-bites": "B10a",
+  "welsh-cakes": "B12b",
   "aglio-e-olio": "C2a",
   "ajapsandali": "C4b",
   "apple-galette": "C14a",
@@ -19629,7 +21057,7 @@ export const LIBRARY = {
    "skills": [
     "flatbreads"
    ],
-   "minutes": 60,
+   "minutes": 105,
    "cuisine": "indian",
    "pickOne": "flatbreads",
    "meal": false,
@@ -22094,15 +23522,145 @@ export const LIBRARY = {
      "explore": "pao-de-queijo",
      "drill": {
       "title": "Spoon and level flour; wet into dry, don't overmix",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Two habits make muffins soft: measuring flour the right way, and stirring just enough. You'll practice both with the flour and milk this week's recipe already buys. An adult is at the stove with you."
+      ],
+      "steps": [
+       "Push a measuring cup into the flour bag and level it. Tip it onto a plate.",
+       "Now spoon flour into the cup without pressing, and scrape it flat with a butter knife. Tip it onto a second plate.",
+       "Which pile is bigger? If you have a kitchen scale, weigh them both. The spooned cup is the right one.",
+       "In two small bowls, stir together 3 tablespoons of flour, ½ teaspoon of sugar, and ¼ teaspoon of baking powder.",
+       "Add 2 tablespoons of milk and 1 teaspoon of oil to each bowl.",
+       "Bowl 1: stir 8 times and stop, lumps and all. Bowl 2: stir hard for 1 minute, until smooth.",
+       "With an adult, cook each as a small pancake in an oiled skillet over medium heat. Flip when bubbles cover the top.",
+       "Tear each one open. Which is softer? Which is taller?"
+      ],
+      "quiz": [
+       {
+        "q": "How do you measure flour?",
+        "choices": [
+         "Spoon it into the cup and scrape it flat",
+         "Scoop the cup into the bag",
+         "Press it down hard"
+        ],
+        "answer": 0,
+        "explain": "Scooping packs in too much."
+       },
+       {
+        "q": "Which pancake was softer?",
+        "choices": [
+         "The one stirred 8 times",
+         "The one stirred smooth",
+         "They were the same"
+        ],
+        "answer": 0,
+        "explain": "Lots of stirring makes it tough."
+       },
+       {
+        "q": "What does a lumpy muffin batter mean?",
+        "choices": [
+         "You stopped at the right time",
+         "You need to stir more",
+         "It's ruined"
+        ],
+        "answer": 0,
+        "explain": "Lumps bake away."
+       }
+      ]
      },
      "knowledge": {
       "title": "Baking soda vs. baking powder",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Muffins and quick breads rise without yeast. Baking soda or baking powder makes tiny bubbles of gas in the batter, and the oven sets the batter around them.",
+       "Baking soda needs something sour to work, like buttermilk, yogurt, brown sugar, or bananas. As soon as they meet, it starts to fizz. That's why a soda batter goes into the oven right away.",
+       "Baking powder is baking soda with a dry sour powder already mixed in. It works with plain milk, and it fizzes twice: once when it gets wet, and again when it gets hot. They look alike, so read the box."
+      ],
+      "steps": [
+       "With an adult, put 2 tablespoons of vinegar in a glass. Stir in ¼ teaspoon of baking soda. Watch it fizz.",
+       "Put ¼ cup of warm tap water in a second glass. Stir in ½ teaspoon of baking powder. Does it fizz too?",
+       "Put ¼ cup of plain water in a third glass. Stir in ¼ teaspoon of baking soda. What happens? Why?",
+       "Look at this week's recipe. Which one does it use?"
+      ],
+      "quiz": [
+       {
+        "q": "What does baking soda need to fizz?",
+        "choices": [
+         "Something sour, like buttermilk or vinegar",
+         "Ice",
+         "Salt"
+        ],
+        "answer": 0,
+        "explain": "In plain water, it barely fizzes."
+       },
+       {
+        "q": "What is baking powder?",
+        "choices": [
+         "Baking soda with a sour powder mixed in",
+         "Flour",
+         "Ground yeast"
+        ],
+        "answer": 0,
+        "explain": "So it works with plain milk."
+       },
+       {
+        "q": "Why does a baking soda batter go in the oven right away?",
+        "choices": [
+         "The bubbles start as soon as it's mixed",
+         "So the oven stays hot",
+         "So the butter melts"
+        ],
+        "answer": 0,
+        "explain": "Wait too long and the bubbles escape."
+       }
+      ]
      },
      "sabbath": {
       "title": "Bake muffins ahead and freeze them",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Muffins are best warm, and they freeze well. Bake a batch, freeze what you don't eat, and warm one up any morning in less than a minute."
+      ],
+      "steps": [
+       "Let this week's muffins cool all the way on the rack, about 1 hour.",
+       "Put them in a freezer bag. Press out the air and close it.",
+       "Write the name and the date on the bag. They keep for 3 months.",
+       "To eat one, wrap it in a paper towel and microwave it for 30 seconds.",
+       "Try a warmed frozen muffin. Does it taste fresh?"
+      ],
+      "quiz": [
+       {
+        "q": "Why cool muffins before freezing them?",
+        "choices": [
+         "Warm ones steam in the bag and get soggy",
+         "So they weigh less",
+         "So they shrink"
+        ],
+        "answer": 0,
+        "explain": "The steam turns to ice."
+       },
+       {
+        "q": "How long do muffins keep in the freezer?",
+        "choices": [
+         "3 months",
+         "1 day",
+         "5 years"
+        ],
+        "answer": 0,
+        "explain": "Write the date on the bag."
+       },
+       {
+        "q": "How do you warm a frozen muffin?",
+        "choices": [
+         "In a paper towel in the microwave, about 30 seconds",
+         "In boiling water",
+         "In the fridge"
+        ],
+        "answer": 0,
+        "explain": "It tastes almost fresh."
+       }
+      ]
      }
     },
     {
@@ -22114,15 +23672,144 @@ export const LIBRARY = {
      "explore": "welsh-cakes",
      "drill": {
       "title": "Cut cold butter into flour",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "You'll cut cold butter into flour two ways and see the difference, then bake your practice into four little biscuits. Use the flour, butter, and buttermilk this week's recipe already buys."
+      ],
+      "steps": [
+       "Cut 3 tablespoons of cold butter into small cubes with a butter knife. Chill them 10 minutes.",
+       "Put ½ cup of flour, ½ teaspoon of baking powder, and a pinch of salt in a bowl.",
+       "Add the butter. Press it into the flour with a fork until the pieces are the size of peas.",
+       "Take out 1 spoonful and look. Rub that spoonful between your fingertips until it's like sand. See the difference?",
+       "Put the spoonful back. Stir in 3 tablespoons of buttermilk with the fork, just until it comes together.",
+       "Drop 4 spoonfuls onto a lined sheet pan. With an adult, bake at 425°F for 12 minutes, until golden.",
+       "Pull one apart. Can you see the little pockets where the butter was?"
+      ],
+      "quiz": [
+       {
+        "q": "How big should the butter pieces be for biscuits?",
+        "choices": [
+         "About the size of peas",
+         "Fine like sand",
+         "Whole sticks"
+        ],
+        "answer": 0,
+        "explain": "Each piece makes a pocket."
+       },
+       {
+        "q": "What do you cut the butter in with?",
+        "choices": [
+         "A fork or your fingertips",
+         "A blender",
+         "A whisk"
+        ],
+        "answer": 0,
+        "explain": "Work fast, so it stays cold."
+       },
+       {
+        "q": "Why chill the butter cubes first?",
+        "choices": [
+         "Cold butter stays in pieces",
+         "It's easier to eat",
+         "To make it soft"
+        ],
+        "answer": 0,
+        "explain": "Warm butter smears in."
+       }
+      ]
      },
      "knowledge": {
       "title": "Why cold fat makes flaky layers",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Flaky biscuits and pastry come from little pieces of cold butter. Butter is part water. In a hot oven, that water turns to steam, and the steam pushes the dough up into thin layers.",
+       "If the butter is warm, it smears into the flour, and there's no steam pocket. The biscuits come out flat and dense. So bakers keep the butter cold, work fast, and use their fingertips, which are cooler than their palms.",
+       "Rubbing the butter in very fine, like breadcrumbs, makes something tender but not flaky, like Welsh cakes. Leaving it in pieces the size of peas makes flaky layers, like biscuits."
+      ],
+      "steps": [
+       "Pull apart one of this week's biscuits or Welsh cakes. Look at the inside.",
+       "Do you see layers or a soft crumb? Draw what you see.",
+       "Answer out loud: why does the butter need to stay cold?"
+      ],
+      "quiz": [
+       {
+        "q": "What makes the flaky layers in biscuits?",
+        "choices": [
+         "Steam from cold butter",
+         "Lots of stirring",
+         "Yeast"
+        ],
+        "answer": 0,
+        "explain": "The steam pushes the layers apart."
+       },
+       {
+        "q": "What happens if the butter gets warm?",
+        "choices": [
+         "It smears in and the biscuits come out flat",
+         "They rise higher",
+         "Nothing"
+        ],
+        "answer": 0,
+        "explain": "No steam pockets."
+       },
+       {
+        "q": "Why use your fingertips, not your palms?",
+        "choices": [
+         "Fingertips are cooler",
+         "Palms are too small",
+         "It's faster"
+        ],
+        "answer": 0,
+        "explain": "So the butter stays cold."
+       }
+      ]
      },
      "sabbath": {
       "title": "Manna in the wilderness (Exodus 16)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "When Israel was in the wilderness, they were hungry. God sent bread from heaven, called manna. Every morning it lay on the ground like frost, and the people gathered it (Exodus 16:4, 14–15).",
+       "God gave a rule with it. Each family gathered just what they needed for that day. Manna kept until the next morning went bad. But on the sixth day, they gathered twice as much, and that manna kept for the seventh day, the Sabbath (Exodus 16:16–26).",
+       "Manna taught Israel to trust God for each day's food. It tasted \"like wafers made with honey\" (Exodus 16:31)."
+      ],
+      "steps": [
+       "Read Exodus 16:13–21 with an adult.",
+       "Read Exodus 16:22–26. What was different on the sixth day?",
+       "Read Exodus 16:31. Draw what you think manna looked like.",
+       "Answer out loud: what did gathering manna every morning teach the people?"
+      ],
+      "quiz": [
+       {
+        "q": "What did God send Israel to eat each morning?",
+        "choices": [
+         "Manna",
+         "Biscuits",
+         "Fish"
+        ],
+        "answer": 0,
+        "explain": "Exodus 16:14–15."
+       },
+       {
+        "q": "What happened to manna kept until the next morning?",
+        "choices": [
+         "It went bad, except on the sixth day",
+         "It turned to gold",
+         "It grew"
+        ],
+        "answer": 0,
+        "explain": "Exodus 16:20, 24."
+       },
+       {
+        "q": "What did manna taste like?",
+        "choices": [
+         "Wafers made with honey",
+         "Salt",
+         "Lemons"
+        ],
+        "answer": 0,
+        "explain": "Exodus 16:31."
+       }
+      ]
      }
     },
     {
@@ -22134,15 +23821,146 @@ export const LIBRARY = {
      "explore": "skillet-naan",
      "drill": {
       "title": "Bloom yeast; knead for 5 minutes",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Two yeast skills: blooming the yeast, and kneading for 5 minutes. You'll practice with a small dough from the flour and yeast this week's recipe already buys."
+      ],
+      "steps": [
+       "Fill two cups with ¼ cup of water each: one cold from the tap, one 105 to 110°F. Check with the thermometer.",
+       "Stir a pinch of sugar and ½ teaspoon of yeast into each. Set a timer for 10 minutes.",
+       "Which one foamed? Pour the cold one out.",
+       "Stir ¾ cup of flour and a pinch of salt into the foamy cup's water in a bowl.",
+       "Flour the counter. Knead: push the dough away with the heel of your hand, fold it back, and turn it.",
+       "Set a timer for 5 minutes. Feel the dough at the start, the middle, and the end.",
+       "Is it smoother now? Poke it. Does it spring back?",
+       "Roll it flat and cook it in a dry skillet with an adult, or throw it out."
+      ],
+      "quiz": [
+       {
+        "q": "Which cup of yeast foamed?",
+        "choices": [
+         "The warm one",
+         "The cold one",
+         "Neither"
+        ],
+        "answer": 0,
+        "explain": "Warm water wakes yeast up."
+       },
+       {
+        "q": "How long do you knead at Level 2?",
+        "choices": [
+         "5 minutes",
+         "30 seconds",
+         "1 hour"
+        ],
+        "answer": 0,
+        "explain": "Until it's smooth and springy."
+       },
+       {
+        "q": "How does kneaded dough feel?",
+        "choices": [
+         "Smooth, and a poke springs back",
+         "Lumpy and dry",
+         "Runny"
+        ],
+        "answer": 0,
+        "explain": "That's the stretchy gluten."
+       }
+      ]
      },
      "knowledge": {
       "title": "What yeast does in a dough",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Yeast is alive. It's a tiny living thing, too small to see one at a time. A packet holds millions of them, asleep and dry.",
+       "Warm water wakes them up. Then they eat the sugar in the dough and breathe out a gas called carbon dioxide. The gas makes bubbles, and the bubbles make the dough rise.",
+       "Kneading makes the dough stretchy, like a balloon, so it holds the gas in. Too hot, and the yeast dies. Too cold, and it works very slowly."
+      ],
+      "steps": [
+       "With an adult, put ½ cup of warm water (105 to 110°F) in a small plastic bottle.",
+       "Add 1 teaspoon of sugar and 1 teaspoon of yeast. Swirl it.",
+       "Stretch a balloon over the top of the bottle.",
+       "Wait 20 minutes. What happened to the balloon? Why?"
+      ],
+      "quiz": [
+       {
+        "q": "What is yeast?",
+        "choices": [
+         "A tiny living thing",
+         "A kind of flour",
+         "A spice"
+        ],
+        "answer": 0,
+        "explain": "It wakes up in warm water."
+       },
+       {
+        "q": "What does yeast breathe out?",
+        "choices": [
+         "Carbon dioxide gas",
+         "Water",
+         "Sugar"
+        ],
+        "answer": 0,
+        "explain": "The gas makes bubbles."
+       },
+       {
+        "q": "What happens if the water is too hot?",
+        "choices": [
+         "The yeast dies",
+         "It works faster",
+         "Nothing"
+        ],
+        "answer": 0,
+        "explain": "Keep it at 105 to 110°F."
+       }
+      ]
      },
      "sabbath": {
       "title": "Make dough ahead and chill it",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Pizza and naan dough can be made a day or two ahead and kept in the fridge. The cold slows the yeast way down, so the dough rises very slowly. It even tastes better.",
+       "On baking day, the dough is ready to shape, and you skip the wait."
+      ],
+      "steps": [
+       "Make this week's dough and knead it as the recipe says.",
+       "Rub a little oil in a zip-top bag or a container with a lid. Put the dough in and close it.",
+       "Write the name and the date on it. Put it in the fridge. It keeps 2 days.",
+       "On baking day, take it out 1 hour before you shape it, so it warms up.",
+       "Shape and bake it as the recipe says. Does it taste different?"
+      ],
+      "quiz": [
+       {
+        "q": "What does the fridge do to yeast?",
+        "choices": [
+         "Slows it way down",
+         "Kills it",
+         "Speeds it up"
+        ],
+        "answer": 0,
+        "explain": "The dough rises very slowly."
+       },
+       {
+        "q": "How long does dough keep in the fridge?",
+        "choices": [
+         "2 days",
+         "2 weeks",
+         "2 hours"
+        ],
+        "answer": 0,
+        "explain": "Write the date on it."
+       },
+       {
+        "q": "What do you do 1 hour before shaping?",
+        "choices": [
+         "Take it out to warm up",
+         "Freeze it",
+         "Add more yeast"
+        ],
+        "answer": 0,
+        "explain": "Cold dough is stiff."
+       }
+      ]
      }
     },
     {
@@ -22154,15 +23972,144 @@ export const LIBRARY = {
      "explore": "alfajores",
      "drill": {
       "title": "Scoop even cookies; space them on the pan",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Cookies the same size bake in the same time. You'll scoop this week's cookie dough into even balls and space them so none bake together. Use this week's dough; this drill is part of baking it."
+      ],
+      "steps": [
+       "Line a sheet pan with parchment.",
+       "Scoop a level tablespoon of dough. Scrape the top flat with a butter knife.",
+       "Roll it into a ball between your palms.",
+       "Make 12 balls. Line them up. Are they all the same? Pinch a bit from big ones onto small ones.",
+       "Place them on the pan in 4 rows of 3, about 2 inches apart.",
+       "Bake them as the recipe says. Did any touch? Were any darker than others?"
+      ],
+      "quiz": [
+       {
+        "q": "Why make every cookie the same size?",
+        "choices": [
+         "So they all bake in the same time",
+         "So they look nice",
+         "So there are more"
+        ],
+        "answer": 0,
+        "explain": "Small ones burn while big ones are raw."
+       },
+       {
+        "q": "How far apart do the balls go?",
+        "choices": [
+         "About 2 inches",
+         "Touching",
+         "1 foot"
+        ],
+        "answer": 0,
+        "explain": "They spread in the oven."
+       },
+       {
+        "q": "How many fit on one pan?",
+        "choices": [
+         "12, in 4 rows of 3",
+         "50",
+         "2"
+        ],
+        "answer": 0,
+        "explain": "Room to spread."
+       }
+      ]
      },
      "knowledge": {
       "title": "Why cookies spread",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Some cookies come out thick and soft, and some come out thin and flat. A few things decide which.",
+       "Butter: soft butter beaten with sugar holds air and makes puffy cookies. Melted or very warm butter makes flat ones.",
+       "Flour: too little flour, and they spread. That's why you spoon and level. A warm pan spreads them too, so let the pan cool between batches.",
+       "Cold dough spreads less, because the butter takes longer to melt in the oven."
+      ],
+      "steps": [
+       "Before you bake this week's cookies, put 2 balls of dough in the fridge for 30 minutes.",
+       "Bake 2 balls straight away, and the 2 cold ones beside them.",
+       "Which spread more? Draw them.",
+       "Answer out loud: name two things that make cookies spread."
+      ],
+      "quiz": [
+       {
+        "q": "What makes cookies spread flat?",
+        "choices": [
+         "Melted butter or too little flour",
+         "Cold dough",
+         "Spooned flour"
+        ],
+        "answer": 0,
+        "explain": "The butter melts before the cookie sets."
+       },
+       {
+        "q": "Which spreads less?",
+        "choices": [
+         "Cold dough",
+         "Warm dough",
+         "They're the same"
+        ],
+        "answer": 0,
+        "explain": "Cold butter melts later."
+       },
+       {
+        "q": "Why let the pan cool between batches?",
+        "choices": [
+         "A hot pan makes the next cookies spread",
+         "So it's easier to wash",
+         "To save energy"
+        ],
+        "answer": 0,
+        "explain": "The butter melts too soon."
+       }
+      ]
      },
      "sabbath": {
       "title": "Freeze cookie dough balls",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Cookie dough freezes well in balls. Freeze them once, and you can bake just 2 or 3 fresh cookies any time, right from the freezer."
+      ],
+      "steps": [
+       "Scoop this week's dough into even balls. Set them on a parchment-lined pan or plate, close together but not touching.",
+       "Freeze them until hard, about 1 hour.",
+       "Move the frozen balls into a freezer bag. Write the name, the oven temperature, and the date on it.",
+       "They keep for 3 months.",
+       "To bake, don't thaw them. Set them 2 inches apart and bake 2 minutes longer than the recipe says."
+      ],
+      "quiz": [
+       {
+        "q": "Why freeze the balls on a pan first?",
+        "choices": [
+         "So they don't stick together in the bag",
+         "So they thaw",
+         "To make them bigger"
+        ],
+        "answer": 0,
+        "explain": "Then you take out only what you need."
+       },
+       {
+        "q": "Do you thaw frozen cookie dough before baking?",
+        "choices": [
+         "No, bake it frozen, 2 minutes longer",
+         "Yes, overnight",
+         "Yes, in the microwave"
+        ],
+        "answer": 0,
+        "explain": "It bakes right from the freezer."
+       },
+       {
+        "q": "What goes on the bag?",
+        "choices": [
+         "The name, oven temperature, and date",
+         "Nothing",
+         "Your favorite color"
+        ],
+        "answer": 0,
+        "explain": "So you know how to bake them."
+       }
+      ]
      }
     },
     {
@@ -22175,15 +24122,144 @@ export const LIBRARY = {
      "mastery": true,
      "drill": {
       "title": "Toothpick test for doneness",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "The toothpick test tells you when the middle of a bake is done. You'll try it on this week's loaf before it's ready and again when it is, so you know what both look like."
+      ],
+      "steps": [
+       "10 minutes before the timer ends, have an adult pull out the rack.",
+       "Push a toothpick into the very center and pull it out. Look at it. Draw what you see.",
+       "Close the oven and keep baking.",
+       "When the timer ends, test again in the very center with a new toothpick. Draw it.",
+       "Clean, or a few moist crumbs, means done. Wet batter means 5 more minutes.",
+       "Compare your two drawings."
+      ],
+      "quiz": [
+       {
+        "q": "Where do you push the toothpick?",
+        "choices": [
+         "The very center",
+         "The edge",
+         "The bottom"
+        ],
+        "answer": 0,
+        "explain": "The center bakes last."
+       },
+       {
+        "q": "What does wet batter on the toothpick mean?",
+        "choices": [
+         "It needs more time",
+         "It's done",
+         "It's burnt"
+        ],
+        "answer": 0,
+        "explain": "Bake 5 more minutes and test again."
+       },
+       {
+        "q": "What does a done toothpick look like?",
+        "choices": [
+         "Clean, or a few moist crumbs",
+         "Covered in batter",
+         "Black"
+        ],
+        "answer": 0,
+        "explain": "The middle is set."
+       }
+      ]
      },
      "knowledge": {
       "title": "Quick breads around the world",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Almost every country has a quick bread: a bread raised without yeast, mixed fast, and baked the same day.",
+       "Ireland has soda bread, raised with baking soda and buttermilk. The American South has cornbread, baked in a hot skillet. Banana bread came from American home kitchens. Mexico has pan de elote, a sweet corn cake. Brazil has pão de queijo, made with tapioca flour. Wales has Welsh cakes, cooked on a griddle.",
+       "They're all mixed the same way: dry things in one bowl, wet in another, then stirred together just until mixed."
+      ],
+      "steps": [
+       "Find Ireland, the United States, Mexico, Brazil, and Wales on a map.",
+       "Write each quick bread next to its country.",
+       "Pick one you haven't made. Find out what it's served with."
+      ],
+      "quiz": [
+       {
+        "q": "What is a quick bread?",
+        "choices": [
+         "A bread raised without yeast",
+         "A bread baked in 1 minute",
+         "A bread with no flour"
+        ],
+        "answer": 0,
+        "explain": "Baking soda or powder raises it."
+       },
+       {
+        "q": "Which country is soda bread from?",
+        "choices": [
+         "Ireland",
+         "Brazil",
+         "Mexico"
+        ],
+        "answer": 0,
+        "explain": "It's raised with baking soda and buttermilk."
+       },
+       {
+        "q": "What flour is in pão de queijo?",
+        "choices": [
+         "Tapioca flour",
+         "Cornmeal",
+         "Wheat flour"
+        ],
+        "answer": 0,
+        "explain": "It comes from the cassava root."
+       }
+      ]
      },
      "sabbath": {
       "title": "Elijah and the widow's flour and oil (1 Kings 17:8–16)",
-      "minutes": 20
+      "minutes": 20,
+      "body": [
+       "Elijah was a prophet in a time with no rain, and food had run out. God sent him to a widow in a town called Zarephath (1 Kings 17:8–9).",
+       "She had only a handful of flour and a little oil, just enough for one last small loaf for herself and her son. Elijah asked her to make a little cake for him first, and told her God's promise: the flour and oil would not run out until the rain came (1 Kings 17:12–14).",
+       "She did what he said. \"The jar of flour was not spent, neither did the jug of oil become empty\" (1 Kings 17:16). There was food for many days."
+      ],
+      "steps": [
+       "Read 1 Kings 17:8–16 with an adult.",
+       "What did the widow have left? Measure out a handful of flour and look at how little it is.",
+       "What did Elijah ask her to do first?",
+       "Answer out loud: how did the widow show she trusted God?",
+       "Share a slice of this week's bread with someone."
+      ],
+      "quiz": [
+       {
+        "q": "What did the widow have left?",
+        "choices": [
+         "A handful of flour and a little oil",
+         "A big sack of wheat",
+         "Nothing at all"
+        ],
+        "answer": 0,
+        "explain": "1 Kings 17:12."
+       },
+       {
+        "q": "What did God promise?",
+        "choices": [
+         "The flour and oil wouldn't run out",
+         "It would rain that day",
+         "She'd find gold"
+        ],
+        "answer": 0,
+        "explain": "1 Kings 17:14."
+       },
+       {
+        "q": "Who did the widow make the first cake for?",
+        "choices": [
+         "Elijah",
+         "Herself",
+         "The king"
+        ],
+        "answer": 0,
+        "explain": "1 Kings 17:13, 15."
+       }
+      ]
      }
     },
     {
@@ -22947,7 +25023,7 @@ export const LIBRARY = {
      "skills": [
       "cutting-in-fat"
      ],
-     "minutes": 45,
+     "minutes": 50,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -22967,7 +25043,7 @@ export const LIBRARY = {
      "skills": [
       "creaming"
      ],
-     "minutes": 45,
+     "minutes": 50,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -22987,7 +25063,7 @@ export const LIBRARY = {
      "skills": [
       "creaming"
      ],
-     "minutes": 60,
+     "minutes": 75,
      "tags": {
       "protein": "none",
       "flavors": [
@@ -23007,7 +25083,7 @@ export const LIBRARY = {
      "skills": [
       "muffin-method"
      ],
-     "minutes": 75,
+     "minutes": 85,
      "tags": {
       "protein": "none",
       "flavors": [

@@ -1,0 +1,82 @@
+{
+  "id": "banana-bread",
+  "version": 1,
+  "track": "core",
+  "unit": 102,
+  "title": "Banana bread",
+  "image": "dishes/banana-bread.png",
+  "cuisine": "american",
+  "skill": "The toothpick test",
+  "skills": ["muffin-method"],
+  "prereqs": [],
+  "servings": 10,
+  "totalMinutes": 85,
+  "scaling": { "mode": "fixed", "multipliers": [1], "notes": { "1": "Makes 1 loaf, about 10 slices." } },
+  "learn": {
+    "move": {
+      "title": "Mastery: mash, mix, test",
+      "body": "This is the unit's mastery week. You'll make banana bread while an adult watches but doesn't help: mash ripe bananas, mix the batter just until the flour disappears, and decide for yourself when it's done with a toothpick."
+    },
+    "callback": {
+      "lesson": "blueberry-muffins",
+      "body": "Your muffins were mixed in two bowls and tested with a toothpick. Banana bread uses the same steps in one bowl, and bakes much longer because a loaf is so much thicker."
+    },
+    "why": [
+      { "id": "ripe", "title": "Very ripe bananas", "body": "Bananas with lots of brown spots are sweeter and softer. They mash smooth and make the bread moist and full of flavor." },
+      { "id": "just-mixed", "title": "Mix just until", "body": "Stirring flour builds gluten, which makes quick bread tough. Stop as soon as no dry flour shows." },
+      { "id": "soda", "title": "Baking soda", "body": "Bananas and brown sugar are a little acidic. Baking soda reacts with them and makes bubbles that raise the loaf." },
+      { "id": "toothpick", "title": "The toothpick test", "body": "A loaf bakes from the outside in, so the center is last. A toothpick pushed into the middle that comes out clean, or with a few moist crumbs, means it's done." }
+    ],
+    "wrong": [
+      { "sign": "The top is brown but the toothpick is wet", "fix": "Lay foil loosely over the top and bake 5 more minutes. Test again." },
+      { "sign": "The loaf sank in the middle", "fix": "It came out too soon. Test the very center next time." },
+      { "sign": "It's tough and has tunnels", "fix": "It was stirred too much. Stop as soon as the flour is gone." },
+      { "sign": "It stuck to the pan", "fix": "Run the butter knife around the edges before turning it out." }
+    ],
+    "quiz": [
+      { "q": "Which bananas make the best bread?", "choices": ["Very ripe, with lots of brown spots", "Green ones", "Yellow with no spots"], "answer": 0, "explain": "They're sweeter and mash smooth." },
+      { "q": "Where do you test with the toothpick?", "choices": ["The very center of the loaf", "The edge", "The top crust"], "answer": 0, "explain": "The center bakes last." },
+      { "q": "The toothpick has wet batter. What do you do?", "choices": ["Bake 5 more minutes and test again", "Take it out anyway", "Turn the oven up"], "answer": 0, "explain": "Foil keeps the top from getting too dark." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "banana", "amount": 3, "unit": "count" },
+    { "ingredient": "butter-unsalted", "amount": 6, "unit": "tbsp" },
+    { "ingredient": "butter-unsalted", "amount": null, "text": "a little more, soft, for the pan" },
+    { "ingredient": "brown-sugar", "amount": 0.66, "unit": "cup", "prep": "packed" },
+    { "ingredient": "egg", "amount": 1, "unit": "count" },
+    { "ingredient": "vanilla-extract", "amount": 1, "unit": "tsp" },
+    { "ingredient": "baking-soda", "amount": 1, "unit": "tsp" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp" },
+    { "ingredient": "cinnamon-ground", "amount": 0.5, "unit": "tsp" },
+    { "ingredient": "flour-ap", "amount": 1.5, "unit": "cup" }
+  ],
+  "equipment": [
+    "loaf-pan",
+    "pastry-brush",
+    "small-bowl",
+    "microwave",
+    "mixing-bowl-large",
+    "fork",
+    "wooden-spoon",
+    "measuring-cups",
+    "measuring-spoons",
+    "table-knife",
+    "foil",
+    "oven-mitts",
+    "cooling-rack"
+  ],
+  "steps": [
+    { "id": "oven", "text": "Heat the oven to 350°F. Brush the loaf pan with soft butter.", "safety": "adult-nearby", "hazard": "Hot oven", "look": "The whole pan shiny with butter." },
+    { "id": "melt", "text": "Melt the 6 tablespoons of butter in the small bowl in the microwave.", "safety": "solo", "timerSeconds": 45, "timerLabel": "Melt butter", "tip": "Let it cool while you mash." },
+    { "id": "mash", "text": "Peel the bananas into the large bowl. Mash them with the fork.", "safety": "solo", "why": "ripe", "look": "Mostly smooth, with a few small lumps." },
+    { "id": "wet", "text": "Stir in the melted butter, brown sugar, egg, and vanilla.", "safety": "solo", "handles": ["egg"], "look": "Smooth, with no streaks of egg." },
+    { "id": "wash-egg", "text": "Wash your hands with soap, and throw away the eggshell.", "safety": "solo", "type": "wash" },
+    { "id": "soda", "text": "Sprinkle the baking soda, salt, and cinnamon over the top. Stir them in.", "safety": "solo", "why": "soda", "tip": "Rub the baking soda between your fingers so there are no lumps." },
+    { "id": "flour", "text": "Spoon and level the flour into the bowl. Stir just until no dry flour shows.", "safety": "solo", "why": "just-mixed", "look": "A thick, lumpy batter.", "tip": "Don't taste the raw batter. It has raw egg." },
+    { "id": "pan", "text": "Scrape the batter into the pan and smooth the top.", "safety": "solo", "look": "An even layer, corner to corner." },
+    { "id": "bake", "text": "Bake until the top is deep golden and cracked.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 3300, "timerLabel": "Bake", "look": "Deep golden, with a crack down the middle.", "tip": "Getting too dark? Lay foil loosely on top." },
+    { "id": "check", "text": "With oven mitts, pull out the rack. Push a toothpick into the very center of the loaf.", "safety": "adult-nearby", "type": "doneness", "hazard": "Hot oven and pan", "target": { "look": "A clean toothpick, or a few moist crumbs, from the center" }, "why": "toothpick", "tip": "Wet batter? Bake 5 more minutes and test again." },
+    { "id": "cool", "text": "Turn off the oven. Cool the loaf in the pan 10 minutes. Run the butter knife around it and turn it out.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 600, "timerLabel": "Cool in the pan", "tip": "Let it cool more before slicing." }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "id": "welsh-cakes",
+  "version": 1,
+  "track": "core",
+  "unit": 102,
+  "title": "Welsh cakes",
+  "image": "dishes/welsh-cakes.png",
+  "cuisine": "welsh",
+  "skill": "Rubbing cold butter into flour",
+  "skills": ["cutting-in-fat"],
+  "prereqs": [],
+  "servings": 8,
+  "totalMinutes": 50,
+  "scaling": { "mode": "fixed", "multipliers": [1], "notes": { "1": "Makes about 16 cakes." } },
+  "learn": {
+    "move": {
+      "title": "Rub it in, cook it slow",
+      "body": "Welsh cakes are little sweet cakes from Wales, cooked on a griddle instead of in the oven. Today you'll rub cold butter into flour with your fingertips, roll and cut the dough, and cook the cakes slowly in a skillet until golden on both sides."
+    },
+    "callback": {
+      "lesson": "buttermilk-biscuits",
+      "body": "Biscuits used cold butter in pieces for flaky layers. Welsh cakes rub the butter in smaller, like breadcrumbs, so they come out tender and soft instead of flaky."
+    },
+    "why": [
+      { "id": "rub-in", "title": "Rubbing in", "body": "Rubbing cold butter into flour with your fingertips coats the flour in fat. Coated flour can't make much gluten, so the cakes are tender, not chewy." },
+      { "id": "cold", "title": "Keep it cold", "body": "Cold butter rubs in as crumbs. Warm butter turns greasy and sticky. Use just your fingertips, which are cooler than your palms." },
+      { "id": "low-heat", "title": "Low and slow", "body": "The cakes are thick and full of sugar. On high heat the outside burns before the middle cooks. Medium-low heat browns them gently while the inside cooks through." }
+    ],
+    "wrong": [
+      { "sign": "The crumbs feel greasy", "fix": "The butter got warm. Put the bowl in the fridge for 10 minutes." },
+      { "sign": "The dough is too dry to hold together", "fix": "Add milk a teaspoon at a time." },
+      { "sign": "The outside is dark but the middle is doughy", "fix": "Turn the heat lower and cook the next ones a minute longer on each side." },
+      { "sign": "The cakes are pale", "fix": "Turn the heat up a little and cook 1 more minute." }
+    ],
+    "quiz": [
+      { "q": "What does rubbing butter into flour do?", "choices": ["Coats the flour so the cakes stay tender", "Makes the dough rise", "Melts the butter"], "answer": 0, "explain": "Coated flour makes less gluten." },
+      { "q": "Why use only your fingertips?", "choices": ["They're cooler, so the butter stays cold", "They're stronger", "It's faster"], "answer": 0, "explain": "Warm palms melt the butter." },
+      { "q": "Why cook Welsh cakes on medium-low heat?", "choices": ["So the middle cooks before the outside burns", "So they puff", "So the butter melts"], "answer": 0, "explain": "They're thick and sugary." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "flour-ap", "amount": 2, "unit": "cup" },
+    { "ingredient": "flour-ap", "amount": null, "text": "a little more, for rolling" },
+    { "ingredient": "sugar", "amount": 0.33, "unit": "cup" },
+    { "ingredient": "baking-powder", "amount": 1, "unit": "tsp" },
+    { "ingredient": "salt", "amount": 0.25, "unit": "tsp" },
+    { "ingredient": "cinnamon-ground", "amount": 0.5, "unit": "tsp" },
+    { "ingredient": "butter-unsalted", "amount": 8, "unit": "tbsp", "prep": "cold" },
+    { "ingredient": "butter-unsalted", "amount": null, "text": "a little more, for the pan" },
+    { "ingredient": "currants", "amount": 0.5, "unit": "cup" },
+    { "ingredient": "egg", "amount": 1, "unit": "count" },
+    { "ingredient": "milk-whole", "amount": 2, "unit": "tbsp" },
+    { "ingredient": "sugar", "amount": 2, "unit": "tbsp", "prep": "for dusting" }
+  ],
+  "substitutions": [
+    { "for": "currants", "use": "raisins", "reason": "availability", "note": "Chop big raisins in half with the butter knife." },
+    { "for": "milk-whole", "use": "milk-oat", "reason": "dairy" }
+  ],
+  "equipment": [
+    "table-knife",
+    "plate",
+    "mixing-bowl-large",
+    "measuring-cups",
+    "measuring-spoons",
+    "whisk",
+    "small-bowl",
+    "fork",
+    "rolling-pin",
+    "biscuit-cutter",
+    "skillet-12",
+    "paper-towels",
+    "spatula",
+    "cooling-rack"
+  ],
+  "steps": [
+    { "id": "cube", "text": "Cut the cold butter into small cubes with the butter knife. Put them on the plate in the fridge.", "safety": "solo", "timerSeconds": 600, "timerLabel": "Chill butter", "tip": "Measure everything else while it chills." },
+    { "id": "dry", "text": "Spoon and level the flour into the large bowl. Whisk in the ⅓ cup of sugar, baking powder, salt, and cinnamon.", "safety": "solo", "look": "No streaks of white powder." },
+    { "id": "rub", "text": "Add the butter. Rub it into the flour with your fingertips until it looks like breadcrumbs.", "safety": "solo", "timerSeconds": 240, "timerLabel": "Rub in butter", "why": "rub-in", "look": "Fine crumbs, with no big lumps of butter.", "tip": "Lift the crumbs and let them fall as you rub. It keeps them cool." },
+    { "id": "currants", "text": "Stir in the currants.", "safety": "solo", "look": "Currants spread all through." },
+    { "id": "egg", "text": "Beat the egg and milk in the small bowl with the fork. Pour it into the crumbs and stir.", "safety": "solo", "handles": ["egg"], "look": "A soft dough that holds together.", "tip": "Don't taste the raw dough. It has raw egg." },
+    { "id": "wash-egg", "text": "Wash your hands with soap, and throw away the eggshell.", "safety": "solo", "type": "wash" },
+    { "id": "roll", "text": "Flour the counter. Roll the dough out ¼ inch thick.", "safety": "solo", "tip": "About as thick as two stacked quarters." },
+    { "id": "cut", "text": "Press the cutter straight down to cut rounds. Press the scraps together and roll them once more.", "safety": "solo", "look": "About 16 cakes." },
+    { "id": "heat", "text": "Heat the skillet over medium-low heat. Rub it with a little butter on a paper towel.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 180, "timerLabel": "Heat pan", "why": "low-heat" },
+    { "id": "cook", "text": "Lay 6 cakes in the pan. Cook until the bottoms are golden brown.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 180, "timerLabel": "First side", "look": "Golden brown underneath." },
+    { "id": "flip", "text": "Flip them with the spatula. Cook the other side.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 180, "timerLabel": "Second side", "look": "Golden on both sides." },
+    { "id": "check", "text": "Break the first cake open. It should be cooked through, with no wet dough.", "safety": "adult-nearby", "type": "doneness", "hazard": "Hot cake", "target": { "look": "Cooked through in the middle, golden on both sides" }, "tip": "Doughy? Turn the heat lower and cook the rest longer." },
+    { "id": "dust", "text": "Move the cakes to the rack and sprinkle them with sugar. Cook the rest the same way, then turn off the stove.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "Sugar sticks best while they are warm." }
+  ]
+}

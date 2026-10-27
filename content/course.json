@@ -1339,10 +1339,10 @@
         "veggies": "some"
       }
     },
-    { "id": "blueberry-muffins", "title": "Blueberry muffins", "unit": 5, "cuisine": "american", "skills": ["muffin-method"], "skill": "Muffin method, avoiding overmixing", "image": "dishes/blueberry-muffins.png", "safety": "adult-nearby", "minutes": 45, "estimated": true, "about": "Tender, sweet muffins full of blueberries. A breakfast bake.", "main": ["blueberries", "milk", "eggs", "butter"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
+    { "id": "blueberry-muffins", "title": "Blueberry muffins", "unit": 5, "cuisine": "american", "skills": ["muffin-method"], "skill": "Muffin method, avoiding overmixing", "image": "dishes/blueberry-muffins.png", "safety": "adult-nearby", "minutes": 45, "about": "Tender, sweet muffins full of blueberries. A breakfast bake.", "main": ["blueberries", "milk", "eggs", "butter"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     { "id": "skillet-cornbread", "title": "Skillet cornbread", "unit": 5, "cuisine": "american", "skills": ["skillet-baking", "muffin-method"], "skill": "Preheated skillet", "image": "dishes/skillet-cornbread.png", "safety": "adult-nearby", "minutes": 40, "about": "Golden cornbread baked in a hot skillet for a crispy edge. Pairs with chili.", "main": ["cornmeal", "buttermilk", "eggs", "butter"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
-    { "id": "pao-de-queijo", "title": "Pão de queijo", "unit": 5, "cuisine": "brazilian", "skills": ["scalded-dough"], "skill": "Scalded tapioca dough", "image": "dishes/pao-de-queijo.png", "safety": "adult-nearby", "minutes": 50, "estimated": true, "about": "Brazilian cheese bread: chewy, puffy little rolls made with tapioca flour and cheese.", "main": ["tapioca flour", "milk", "eggs", "parmesan"], "method": "stove-oven", "meal": false, "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
-    { "id": "skillet-naan", "title": "Skillet naan", "unit": 5, "cuisine": "indian", "skills": ["flatbreads"], "skill": "Yogurt dough, high-heat skillet", "image": "dishes/skillet-naan.png", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Soft Indian flatbread made with a yogurt dough and cooked in a very hot skillet.", "main": ["yogurt", "butter", "garlic"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" }, "pickOne": "flatbreads" },
+    { "id": "pao-de-queijo", "title": "Pão de queijo", "unit": 5, "cuisine": "brazilian", "skills": ["scalded-dough"], "skill": "Scalded tapioca dough", "image": "dishes/pao-de-queijo.png", "safety": "adult-nearby", "minutes": 50, "about": "Brazilian cheese bread: chewy, puffy little rolls made with tapioca flour and cheese.", "main": ["tapioca flour", "milk", "eggs", "parmesan"], "method": "stove-oven", "meal": false, "tags": { "protein": "none", "flavors": ["creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" } },
+    { "id": "skillet-naan", "title": "Skillet naan", "unit": 5, "cuisine": "indian", "skills": ["flatbreads"], "skill": "Yogurt dough, high-heat skillet", "image": "dishes/skillet-naan.png", "safety": "adult-nearby", "minutes": 105, "about": "Soft Indian flatbread made with a yogurt dough and cooked in a very hot skillet.", "main": ["yogurt", "butter", "garlic"], "method": "stove", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "new-ish", "veggies": "light" }, "pickOne": "flatbreads" },
     { "id": "pita-bread", "title": "Pita bread", "unit": 5, "cuisine": "lebanese", "skills": ["flatbreads", "yeast-dough"], "skill": "A yeast dough, baking flatbreads that puff", "image": "dishes/pita-bread.png", "safety": "adult-nearby", "minutes": 120, "about": "Soft pita rolled thin and baked on a very hot sheet until each one puffs into a pocket.", "main": ["flour", "yeast", "olive oil"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" }, "pickOne": "flatbreads" },
     { "id": "pupusas", "title": "Pupusas", "unit": 5, "cuisine": "salvadoran", "skills": ["masa-dough"], "skill": "Masa dough, griddle", "image": "dishes/pupusas.png", "safety": "adult-nearby", "minutes": 60, "estimated": true, "about": "Salvadoran stuffed corn cakes filled with cheese and beans, cooked on a griddle, with a tangy cabbage slaw.", "main": ["masa harina", "cheese", "refried beans", "cabbage"], "method": "stove", "tags": { "protein": "beans-lentils", "flavors": ["creamy-cheesy", "tangy"], "heat": "mild", "budget": "$", "familiar": "adventurous", "veggies": "some" } },
     {
@@ -1513,30 +1513,7 @@
       }
     },
     { "id": "challah", "title": "Challah", "unit": 5, "cuisine": "jewish", "skills": ["yeast-dough"], "skill": "Yeast dough: kneading, proofing, braiding", "image": "dishes/challah.png", "safety": "adult-nearby", "minutes": 240, "pickOne": "yeast-dough", "about": "A soft, slightly sweet braided bread made with eggs and honey.", "main": ["yeast", "eggs", "honey", "oil"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["mild-buttery"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
-    {
-      "id": "homemade-pizza",
-      "title": "Homemade pizza",
-      "unit": 5,
-      "cuisine": "italian",
-      "skills": ["yeast-dough"],
-      "skill": "Yeast dough: kneading, stretching",
-      "image": "dishes/homemade-pizza.png",
-      "safety": "adult-nearby",
-      "minutes": 120,
-      "estimated": true,
-      "pickOne": "yeast-dough",
-      "about": "Pizza on a homemade yeast crust, stretched by hand, with tomato sauce and cheese.",
-      "main": ["yeast", "tomato sauce", "mozzarella", "toppings"],
-      "method": "oven",
-      "tags": {
-        "protein": "none",
-        "flavors": ["rich-tomato", "creamy-cheesy"],
-        "heat": "mild",
-        "budget": "$",
-        "familiar": "everyday",
-        "veggies": "light"
-      }
-    },
+    { "id": "homemade-pizza", "title": "Homemade pizza", "unit": 5, "cuisine": "italian", "skills": ["yeast-dough"], "skill": "Yeast dough: kneading, stretching", "image": "dishes/homemade-pizza.png", "safety": "adult-nearby", "minutes": 120, "pickOne": "yeast-dough", "about": "Pizza on a homemade yeast crust, stretched by hand, with tomato sauce and cheese.", "main": ["yeast", "tomato sauce", "mozzarella", "toppings"], "method": "oven", "tags": { "protein": "none", "flavors": ["rich-tomato", "creamy-cheesy"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     { "id": "granola", "title": "Homemade granola", "unit": 6, "cuisine": "american", "skills": ["oven-browning"], "skill": "Oven browning, stirring partway", "image": "dishes/granola.png", "safety": "adult-nearby", "minutes": 50, "estimated": true, "about": "Crunchy oven-toasted oats, nuts, and honey. A breakfast dish.", "main": ["rolled oats", "nuts or seeds", "honey", "oil", "dried fruit"], "method": "oven", "meal": false, "tags": { "protein": "none", "flavors": ["sweet-treats"], "heat": "mild", "budget": "$", "familiar": "everyday", "veggies": "light" } },
     { "id": "meatloaf", "title": "Meatloaf with glaze", "unit": 6, "cuisine": "american", "skills": ["binders", "temping-meat"], "skill": "Binders, thermometer", "image": "dishes/meatloaf.png", "safety": "adult-nearby", "minutes": 90, "about": "A tender beef loaf baked with a sweet tomato glaze, checked with a thermometer.", "main": ["ground beef", "onion", "eggs", "rolled oats", "ketchup"], "method": "oven", "tags": { "protein": "beef", "flavors": ["sweet-savory", "mild-buttery"], "heat": "mild", "budget": "$$", "familiar": "everyday", "veggies": "light" }, "pickOne": "binders" },
     {

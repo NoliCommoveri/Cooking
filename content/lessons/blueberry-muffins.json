@@ -1,0 +1,229 @@
+{
+  "id": "blueberry-muffins",
+  "version": 1,
+  "track": "core",
+  "unit": 5,
+  "title": "Blueberry muffins",
+  "image": "dishes/blueberry-muffins.png",
+  "cuisine": "american",
+  "skill": "Muffin method, avoiding overmixing",
+  "skills": ["muffin-method"],
+  "prereqs": [],
+  "servings": 12,
+  "totalMinutes": 45,
+  "scaling": { "mode": "fixed", "multipliers": [1], "notes": { "1": "Makes 12 muffins." } },
+  "learn": {
+    "move": {
+      "title": "Two bowls, a few strokes",
+      "body": "The muffin method is how most quick breads are mixed: the dry ingredients in one bowl, the wet ones in another, then the two folded together just until the flour disappears. Today you'll fold frozen blueberries into a lumpy batter, fill a muffin tin, and bake until a toothpick comes out clean."
+    },
+    "callback": {
+      "lesson": "buttermilk-biscuits",
+      "body": "Biscuits taught you to stop stirring as soon as the dough comes together. Muffin batter is wetter, but the rule is the same: the fewer strokes, the more tender the muffin."
+    },
+    "why": [
+      { "id": "two-bowls", "title": "Why two bowls", "body": "Whisking the dry ingredients first spreads the baking powder and salt through the flour. Mixing the wet ones first blends the egg and butter. Then the two need only a few strokes to come together." },
+      { "id": "lumpy", "title": "Lumpy is right", "body": "Every stir builds gluten, which makes muffins tough, with long tunnels inside. Stop as soon as no dry flour shows. The lumps disappear in the oven." },
+      { "id": "frozen-berries", "title": "Berries straight from the freezer", "body": "Thawed blueberries bleed and turn the batter purple-gray. Frozen ones stay whole. A spoonful of the flour mix on them keeps them from sinking to the bottom." },
+      { "id": "toothpick", "title": "The toothpick test", "body": "Push a toothpick into the middle of a muffin in the center of the tin, the last ones to bake. Wet batter on it means more time; clean, or a few crumbs, means done. A berry can leave a purple streak; that's fine." }
+    ],
+    "wrong": [
+      { "sign": "The muffins are tough, with tunnels inside", "fix": "The batter was stirred too much. Next time, stop as soon as the flour disappears." },
+      { "sign": "The batter turned purple", "fix": "The berries thawed or were stirred too hard. Fold them in last, straight from the freezer, with just a few strokes." },
+      { "sign": "The berries sank to the bottom", "fix": "Toss them in a spoonful of the flour mix before folding them in." },
+      { "sign": "The toothpick has wet batter", "fix": "Bake 3 more minutes and test again." }
+    ],
+    "quiz": [
+      { "q": "When do you stop stirring muffin batter?", "choices": ["As soon as no dry flour shows, even if it's lumpy", "When it's smooth", "After 2 minutes"], "answer": 0, "explain": "More stirring makes tough muffins with tunnels." },
+      { "q": "Why use the blueberries frozen?", "choices": ["So they stay whole and don't turn the batter purple", "So the muffins bake faster", "Fresh ones are unsafe"], "answer": 0, "explain": "Thawed berries bleed into the batter." },
+      { "q": "How do you know the muffins are done?", "choices": ["A toothpick from the middle comes out clean", "The tops are brown", "They smell good"], "answer": 0, "explain": "Check one from the center of the tin." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "butter-unsalted", "amount": 6, "unit": "tbsp" },
+    { "ingredient": "butter-unsalted", "amount": null, "text": "a little more, soft, for the tin" },
+    { "ingredient": "flour-ap", "amount": 2, "unit": "cup" },
+    { "ingredient": "sugar", "amount": 0.75, "unit": "cup" },
+    { "ingredient": "baking-powder", "amount": 2, "unit": "tsp" },
+    { "ingredient": "salt", "amount": 0.5, "unit": "tsp" },
+    { "ingredient": "milk-whole", "amount": 0.75, "unit": "cup" },
+    { "ingredient": "egg", "amount": 2, "unit": "count" },
+    { "ingredient": "vanilla-extract", "amount": 1, "unit": "tsp" },
+    { "ingredient": "blueberries-frozen", "amount": 1.5, "unit": "cup", "prep": "still frozen" },
+    { "ingredient": "sugar", "amount": 1, "unit": "tbsp", "prep": "for the tops" }
+  ],
+  "substitutions": [
+    { "for": "milk-whole", "use": "milk-oat", "reason": "dairy" },
+    { "for": "butter-unsalted", "use": "vegetable-oil", "reason": "dairy", "note": "Use ½ cup of oil in the batter, and oil the tin." }
+  ],
+  "equipment": [
+    "muffin-tin",
+    "pastry-brush",
+    "small-bowl",
+    "microwave",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "whisk",
+    "silicone-spatula",
+    "spoon",
+    "oven-mitts",
+    "cooling-rack"
+  ],
+  "steps": [
+    { "id": "oven", "text": "Put a rack in the middle of the oven and heat it to 375°F. Brush the 12 muffin cups with soft butter.", "safety": "adult-nearby", "hazard": "Hot oven" },
+    { "id": "melt", "text": "Melt the 6 tablespoons of butter in the small bowl in the microwave. Let it cool while you mix.", "safety": "solo", "timerSeconds": 45, "timerLabel": "Melt butter" },
+    { "id": "dry", "text": "In the large bowl, whisk the flour, the ¾ cup of sugar, the baking powder, and the salt.", "safety": "solo", "why": "two-bowls" },
+    { "id": "berries", "text": "Put the frozen blueberries in the medium bowl and toss them with a spoonful of the flour mix. Tip them onto a plate, and keep the bowl.", "safety": "solo", "why": "frozen-berries" },
+    { "id": "wet", "text": "In the medium bowl, whisk the milk, eggs, melted butter, and vanilla until smooth.", "safety": "solo", "handles": ["egg"] },
+    { "id": "wash-egg", "type": "wash", "text": "Wash your hands with soap, and throw away the eggshells.", "safety": "solo" },
+    { "id": "fold", "text": "Pour the wet mix into the dry mix. Fold with the spatula just until no dry flour shows. Fold in the blueberries with 3 or 4 more strokes.", "safety": "solo", "why": "lumpy", "look": "A thick, lumpy batter with whole berries.", "tip": "Don't taste the raw batter. It has raw egg and raw flour." },
+    { "id": "fill", "text": "Spoon the batter into the 12 cups, filling each about three-quarters full. Sprinkle the tops with the last tablespoon of sugar.", "safety": "solo" },
+    { "id": "bake", "text": "Bake the muffins until they're puffed and golden.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 1320, "timerLabel": "Bake", "look": "Domed and golden, and the tops spring back when touched." },
+    { "id": "check", "type": "doneness", "text": "With oven mitts, pull the rack out partway. Push a toothpick into a muffin in the middle of the tin. If it comes out clean or with a few crumbs, they're done. If not, bake 3 more minutes.", "safety": "adult-nearby", "hazard": "Hot oven and tin", "target": { "look": "A clean toothpick from a middle muffin" }, "why": "toothpick" },
+    { "id": "cool", "text": "Turn off the oven. Set the tin on the cooling rack for 5 minutes, then lift the muffins out onto the rack.", "safety": "adult-nearby", "hazard": "Hot tin", "timerSeconds": 300, "timerLabel": "Cool in the tin", "tip": "Run a butter knife around any that stick." }
+  ],
+  "variations": [
+    {
+      "id": "sp-2",
+      "title": "Blueberry muffins",
+      "level": "sp-2",
+      "tags": {
+        "protein": "none",
+        "flavors": ["sweet-treats"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "totalMinutes": 50,
+      "equipment": { "add": ["table-knife", "plate"] },
+      "steps": {
+        "change": {
+          "oven": {
+            "id": "oven",
+            "text": "Heat the oven to 375°F. Brush the 12 muffin cups with soft butter.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oven",
+            "look": "Every cup is shiny with butter."
+          },
+          "melt": {
+            "id": "melt",
+            "text": "Melt the 6 tablespoons of butter in the small bowl in the microwave.",
+            "safety": "solo",
+            "timerSeconds": 45,
+            "timerLabel": "Melt butter",
+            "tip": "Let it cool while you mix."
+          },
+          "dry": {
+            "id": "dry",
+            "text": "Add the ¾ cup of sugar, the baking powder, and the salt. Whisk for 30 seconds.",
+            "safety": "solo",
+            "look": "No streaks of white powder."
+          },
+          "berries": {
+            "id": "berries",
+            "text": "Put the frozen blueberries on the plate. Toss them with 1 spoonful of the flour mix.",
+            "safety": "solo",
+            "why": "frozen-berries",
+            "tip": "Keep them frozen. Thawed berries turn the batter purple."
+          },
+          "wet": {
+            "id": "wet",
+            "text": "In the medium bowl, whisk the milk, eggs, melted butter, and vanilla.",
+            "safety": "solo",
+            "handles": ["egg"],
+            "look": "Smooth, with no streaks of egg."
+          },
+          "wash-egg": {
+            "id": "wash-egg",
+            "text": "Wash your hands with soap, and throw away the eggshells.",
+            "safety": "solo",
+            "type": "wash"
+          },
+          "fold": {
+            "id": "fold",
+            "text": "Pour the wet bowl into the dry bowl. Fold with the spatula until no dry flour shows.",
+            "safety": "solo",
+            "why": "lumpy",
+            "look": "A lumpy batter. Lumps are good.",
+            "tip": "Don't taste the raw batter. It has raw egg."
+          },
+          "fill": {
+            "id": "fill",
+            "text": "Spoon the batter into the 12 cups, about three-quarters full. Sprinkle the tops with the last tablespoon of sugar.",
+            "safety": "solo",
+            "tip": "A ¼-cup measure makes them even."
+          },
+          "bake": {
+            "id": "bake",
+            "text": "Bake the muffins until they are puffed and golden.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oven",
+            "timerSeconds": 1320,
+            "timerLabel": "Bake",
+            "look": "Domed and golden on top."
+          },
+          "check": {
+            "id": "check",
+            "text": "With an adult and oven mitts, pull out the rack. Push a toothpick into a muffin in the middle.",
+            "safety": "adult-nearby",
+            "type": "doneness",
+            "hazard": "Hot oven and tin",
+            "target": { "look": "A clean toothpick from a middle muffin" },
+            "why": "toothpick",
+            "tip": "Wet batter on it? Bake 3 more minutes and test again."
+          },
+          "cool": {
+            "id": "cool",
+            "text": "Turn off the oven. Let the muffins cool in the tin for 5 minutes, then lift them onto the rack.",
+            "safety": "adult-nearby",
+            "hazard": "Hot tin",
+            "timerSeconds": 300,
+            "timerLabel": "Cool in the tin",
+            "tip": "Stuck? Run the butter knife around the edge."
+          }
+        },
+        "add": [
+          { "id": "measure", "text": "Spoon flour into the measuring cup and scrape it flat with the butter knife. Tip 2 cups into the large bowl.", "safety": "solo", "why": "spoon-level", "tip": "Don't scoop with the cup. It packs in too much flour." },
+          { "id": "add-berries", "text": "Fold in the blueberries with 3 or 4 gentle strokes.", "safety": "solo", "look": "Whole berries, and the batter isn’t purple." }
+        ],
+        "order": [
+          "oven",
+          "melt",
+          "+0",
+          "dry",
+          "berries",
+          "wet",
+          "wash-egg",
+          "fold",
+          "+1",
+          "fill",
+          "bake",
+          "check",
+          "cool"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "Spoon, level, and stop at lumpy",
+          "body": "Muffins are mixed in two bowls: dry in one, wet in the other. Then you fold them together for just a few strokes. Today you'll measure flour the careful way, stop while the batter is lumpy, and test your muffins with a toothpick."
+        },
+        "quiz": [
+          { "q": "When do you stop stirring muffin batter?", "choices": ["As soon as no dry flour shows, even if it's lumpy", "When it's smooth", "After 2 minutes"], "answer": 0, "explain": "More stirring makes tough muffins with tunnels." },
+          { "q": "Why use the blueberries frozen?", "choices": ["So they stay whole and don't turn the batter purple", "So the muffins bake faster", "Fresh ones are unsafe"], "answer": 0, "explain": "Thawed berries bleed into the batter." },
+          { "q": "How do you know the muffins are done?", "choices": ["A toothpick from the middle comes out clean", "The tops are brown", "They smell good"], "answer": 0, "explain": "Check one from the center of the tin." },
+          { "q": "How do you measure flour?", "choices": ["Spoon it into the cup and scrape it flat", "Scoop the cup into the bag", "Pack it down hard"], "answer": 0, "explain": "Scooping packs in too much flour." }
+        ],
+        "why": {
+          "drop": ["two-bowls"],
+          "add": [
+            { "id": "spoon-level", "title": "Spoon and level", "body": "A cup pushed into the flour bag packs it down, and you get too much. Spooning flour into the cup and scraping it flat gives the right amount, so muffins come out soft, not dry." }
+          ]
+        }
+      }
+    }
+  ]
+}
