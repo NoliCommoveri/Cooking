@@ -6792,3 +6792,25 @@ of our unleavened recipes to cook as a family!"
   with phase 13.
 - No screens changed, so no screenshots.
 - Tests: 407.
+
+## 258. 2026-10-27 — Plan: a course pauses only at a leavened lesson
+
+Owner, 2026-10-27: "But only if the lesson they'd be cooking in either week
+has leavened. If it's all unleavened they can just proceed with a happy
+unleavened bread banner." Then, on Claude's proposal to pause at the first
+leavened lesson: the pause starts on the family's own date, "and yes that
+wording is fine".
+
+- **Before:** the plan (257) paused every course through the unleavened days,
+  with the week the feast starts in due early.
+- **Now:** through the family's unleavened days (from its own "stop
+  suggesting leavened recipes" day), a course runs in order until its next
+  lesson is leavened and holds there; the lessons before it are due as
+  usual, and the held one shows again the day after the feast. A Level
+  week's parts wait with their recipe. Nothing counts as behind. The kitchen
+  shows the owner's paused notice, or, with nothing held, "Happy Unleavened
+  Bread! This week's lessons are all unleavened, so cook on as usual." The
+  parent's course card says "Paused for Unleavened Bread until [date]".
+  Nothing is built yet: it comes with phase 13.
+- No screens changed, so no screenshots.
+- Tests: 407.
