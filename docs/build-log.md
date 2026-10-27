@@ -6711,3 +6711,24 @@ prod views of what they'd see."
   - Chef Ruth's Show me around has a stop for it (owner only).
 - Screenshots sent in the session.
 - Tests: 407.
+
+## 254. 2026-10-27 — Demo welcome note: our beliefs
+
+Owner, 2026-10-27: a popup on the demo page that explains the beliefs of the
+app creator's family, which can be brought back from a button once closed.
+
+- **Before:** the demo page opened straight onto its header and tabs.
+- **Now:** a dialog, **Welcome to Clean Plate!**, in the owner's words: the
+  Levitical food laws and Holy Times the app is built on, and the rules the
+  code enforces (clean meats only, with no pork gelatin or casings, blood, or
+  organ fats; no Sabbath schoolwork; Unleavened Bread swaps; what counts as
+  leavening; Scripture in the courses).
+  - It opens on a visitor's first look at `/demo`. Closing it (**Got it**,
+    Esc, or tapping outside) is remembered on that browser, so it doesn't
+    open again on their next visit.
+  - **Our beliefs and the app's rules**, beside Sign up and Log in, opens it
+    again any time.
+  - Two small wording fixes to the owner's text: "defined as in app as"
+    reads "defined in the app as", and the double spaces are gone.
+- Screenshots sent in the session.
+- Tests: 407.
