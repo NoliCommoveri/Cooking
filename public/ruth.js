@@ -6,7 +6,7 @@
 // the same way the pages do.
 import { STARTERS, nextStep } from './lib/getting-started.js';
 import { starRow, ratingSaver } from './tastes.js';
-import { ASSIGN_NOTES } from './lib/levels.js';
+import { ASSIGN_NOTES, READY_FOR, PLACE_QUIZ, PLACE_PARTS, suggestProgram } from './lib/levels.js';
 import { courseNo } from './lib/course.js';
 
 export const RUTH = { name: 'Chef Ruth', photo: 'img/chef-ruth.webp' };
@@ -467,9 +467,13 @@ async function coursePart(ctx, chat, call, { again }) {
 
   // Which program? (§12.4), with the Levels' release: Cook Around the World or a Level.
   let level = null;
+  // Just the recipes, from Help me choose: the Level's parts are turned off.
+  let partsOff = false;
   if (data.levels?.length) {
     chat.say('Which program? Cook Around the World goes a dish at a time, each with its skill. ' + data.levels.map((V) => `${V.name} is ${V.weeks.length} weeks of a reading, a drill, a recipe, and a Beyond the Recipe page each week, about ${V.hours} hours in all.`).join(' '));
-    const pick = await chat.choose([['', 'Cook Around the World'], ...data.levels.map((V) => [V.id, V.name])]);
+    const programs = [['', 'Cook Around the World'], ...data.levels.map((V) => [V.id, V.name])];
+    let pick = await chat.choose([...programs, ['help', 'Help me choose']]);
+    while (pick === 'help') ({ pick, partsOff } = await helpChoose(chat, data.levels, programs));
     level = data.levels.find((V) => V.id === pick) ?? null;
     // Level 4's note for parents (§12.8), before going on.
     if (ASSIGN_NOTES[pick]) {
@@ -512,7 +516,7 @@ async function coursePart(ctx, chat, call, { again }) {
     const starts = await chat.choose(opts.sort(([a]) => (a === preset ? -1 : 1)));
     chat.say(`${level.name} runs one week at a time, Sunday to Friday. A week is done when its recipe is cooked, and one that isn't moves to the next week.`);
     await chat.choose([['go', 'Start the course']]);
-    await call('POST', '/api/courses', { name, start_date: start, per_week: 1, profile_ids: pids, program: level.id, starts });
+    await call('POST', '/api/courses', { name, start_date: start, per_week: 1, profile_ids: pids, program: level.id, starts, ...(partsOff ? { parts: [] } : {}) });
   } else {
     chat.say('How many lessons a week? One or two is a good place to start.');
     await chat.ask([field('Lessons per week', 'per', { type: 'number', min: 1, max: data.per_week_max, value: 1, inputmode: 'numeric', required: true })], 'Start the course', async (v) => {
@@ -527,8 +531,38 @@ async function coursePart(ctx, chat, call, { again }) {
     if (!f.plan_weeks) await call('PUT', '/api/family', { ...f, plan_weeks: true });
     chat.say("I turned on Plan our weeks, so your course loads each week's lessons into the queue.");
   }
-  if (level) chat.say(`You can see its weeks, change who it's for, or pick another start date in Menu → Courses.`);
+  if (level && partsOff) chat.say("I turned off the reading pages and drills, so each week is just its recipe. You can turn them back on, see its weeks, change who it's for, or pick another start date in Menu → Courses.");
+  else if (level) chat.say(`You can see its weeks, change who it's for, or pick another start date in Menu → Courses.`);
   else chat.say("Your course follows our suggested order, and where a skill has a few dishes to choose from, I picked the one that fits them best from Our tastes. You can edit it to change the lesson order, drop lessons, or pick a different dish, in Menu → Courses.");
+}
+
+// Help me choose (owner, 2026-10-27): what each program expects a cook to
+// be ready for, then a short quiz that suggests one. Resolves with
+// { pick, partsOff }: the program picked ('help' to start over), and
+// whether a Level should be just its recipes.
+async function helpChoose(chat, levels, programs) {
+  chat.say(READY_FOR.caw);
+  for (const V of levels) if (READY_FOR[V.id]) chat.say(READY_FOR[V.id]);
+  chat.say(`Want to answer ${PLACE_QUIZ.length + 1} quick questions? I'll suggest where to start. If the course is for more than one cook, answer for the one with the least experience.`);
+  if (await chat.choose([['quiz', 'Take the quiz'], ['pick', "I'll pick"]]) === 'pick') {
+    chat.say('Which program would you like?');
+    return { pick: await chat.choose(programs), partsOff: false };
+  }
+  const answers = [];
+  for (const { q, answers: opts } of PLACE_QUIZ) {
+    chat.say(q);
+    answers.push(await chat.choose(opts.map(([text, n]) => [n, text])));
+  }
+  chat.say(PLACE_PARTS.q);
+  const parts = await chat.choose(PLACE_PARTS.answers);
+  const S = suggestProgram(answers, parts, levels.map((V) => V.id));
+  const L = levels.find((V) => V.id === S.id);
+  if (S.under) chat.say(`Level 1 Helper, for brand-new cooks, is still being written. Until it's ready, start with ${L.name}, with an adult beside them for every step.`);
+  else if (S.caw) chat.say(`They're ready for ${L.name}, or for Cook Around the World. ${L.name}'s reading pages and drills can be turned off, so each week is just its recipe: if you go with it, I'll do that for you.`);
+  else chat.say(`I'd start them on ${L.name}. Levels go by what a cook is ready to learn, so they can move up when they're ready.`);
+  if (S.partsOff && !S.caw) chat.say("Its reading pages and drills can be turned off, so each week is just its recipe. I'll do that for you.");
+  const pick = await chat.choose([[S.id, `Go with ${L.name}`], ...(S.caw ? [['', 'Cook Around the World']] : []), ['help', 'Start over']]);
+  return { pick, partsOff: S.partsOff && pick !== '' };
 }
 
 // No course: a first lesson by hand (owner, 2026-10-23). She offers the first

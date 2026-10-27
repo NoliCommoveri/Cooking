@@ -10,7 +10,7 @@ import { LOGIN_PICTURES } from './lib/login-pictures.js';
 import { MEAL_TYPES, METHODS, METHOD_NAMES } from './lib/recipe.js';
 import { RUBRIC, GRADE_TEXT_MAX } from './lib/grades.js';
 import { findLessons, suggest } from './lib/find.js';
-import { PARTS, plannedMinutes, hoursOf, ASSIGN_NOTES } from './lib/levels.js';
+import { PARTS, plannedMinutes, hoursOf, ASSIGN_NOTES, READY_FOR, PLACE_QUIZ, PLACE_PARTS, suggestProgram } from './lib/levels.js';
 // The longest a writing box takes (14f), as the Worker checks it.
 const WRITING_MAX = 20000;
 import { markTerms, toggleTermCard } from './lib/terms.js';
@@ -1563,6 +1563,39 @@ function modal(title, ...body) {
   return close;
 }
 
+// Help me choose (owner, 2026-10-27), beside Which program? in Set up a
+// course: what each program expects a cook to be ready for, and the quiz
+// Chef Ruth asks, in a dialog. Optional, and it doesn't hold the pick: a
+// parent can open and preview any program. use(id, partsOff) ticks one.
+function helpChoose(levels, use) {
+  const radios = (name, q, answers) => el('fieldset', {}, el('legend', {}, q),
+    answers.map(([text, v]) => el('label', { class: 'choice' }, el('input', { type: 'radio', name, value: v, required: true }), el('span', {}, text))));
+  const result = el('div', { class: 'card notice', role: 'status', hidden: true, style: 'margin:8px 0 0' });
+  const f = el('form', { onsubmit: (ev) => {
+    ev.preventDefault();
+    const v = Object.fromEntries(new FormData(f));
+    const S = suggestProgram(PLACE_QUIZ.map((_, i) => Number(v[`q${i}`])), v.parts, levels.map((V) => V.id));
+    const L = levels.find((V) => V.id === S.id);
+    const pick = (id) => { close(); use(id, S.partsOff); };
+    result.replaceChildren(
+      el('p', { style: 'margin:0' }, S.under ? `Level 1 Helper, for brand-new cooks, is still being written. Until it's ready, start with ${L.name}, with an adult beside them for every step.`
+        : S.caw ? `They're ready for ${L.name}, or for Cook Around the World.` : `We'd start them on ${L.name}.`),
+      S.partsOff ? el('p', { class: 'small', style: 'margin:6px 0 0' }, `${L.name}'s reading pages and drills can be turned off, so each week is just its recipe. Using it here turns them off under Each week's components.`) : null,
+      el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn pri', onclick: () => pick(S.id) }, `Use ${L.name}`),
+        S.caw ? el('button', { type: 'button', class: 'hbtn', onclick: () => pick('') }, 'Use Cook Around the World') : null));
+    result.hidden = false;
+    result.scrollIntoView({ block: 'nearest' });
+  } },
+  el('p', { class: 'small' }, READY_FOR.caw),
+  levels.filter((V) => READY_FOR[V.id]).map((V) => el('p', { class: 'small' }, READY_FOR[V.id])),
+  el('p', { class: 'mut small' }, 'Not sure? Answer these and we\'ll suggest where to start. For more than one cook, answer for the one with the least experience.'),
+  PLACE_QUIZ.map(({ q, answers }, i) => radios(`q${i}`, q, answers)),
+  radios('parts', PLACE_PARTS.q, PLACE_PARTS.answers.map(([v, text]) => [text, v])),
+  el('div', { class: 'acts' }, el('button', { type: 'submit', class: 'hbtn pri' }, 'Suggest a program'), el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Close')),
+  result);
+  const close = modal('Help me choose', f);
+}
+
 // A two-way switch between views of a page; the choice is kept for the visit.
 // options: [[value, label]]
 function viewToggle(key, options, fallback, onPick) {
@@ -2398,12 +2431,25 @@ const courseEditor = parentOnly(async (cid) => {
     drawFinish();
     if (V && !levelFits) loadLevelFits(picked());
   };
+  // Help me choose's pick: the program ticked, and a Level's parts off for
+  // just the recipes. It only fills in the form; the parent can change it.
+  const usePick = (id, partsOff) => {
+    program = id;
+    programSet.querySelector(`input[name="program"][value="${id}"]`).checked = true;
+    if (id && partsOff) {
+      partsOn = [];
+      for (const x of PARTS) partsSet.querySelector(`input[name="${x}"]`).checked = false;
+      drawHours();
+    }
+    drawProgram();
+  };
   const programSet = !existing && levels.length
     ? el('fieldset', { onchange: (ev) => { if (ev.target.name === 'program') { program = ev.target.value; drawProgram(); } } }, el('legend', {}, 'Which program?'),
       el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'program', value: '', checked: true }),
         el('span', {}, 'Cook Around the World', el('em', {}, ' A dish at a time, each with its skill, at your pace'))),
       [...levels].sort((x, y) => x.name.localeCompare(y.name)).map((V) => el('label', { class: 'choice' }, el('input', { type: 'radio', name: 'program', value: V.id }),
         el('span', {}, V.name, el('em', {}, ` ${V.weeks.length} weeks, about ${V.hours} hours: a reading, a drill, a recipe, and a Beyond the Recipe page each week`)))),
+      el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => helpChoose(levels, usePick) }, 'Help me choose')),
       assignBox)
     : existing?.program ? el('p', { class: 'mut small', style: 'margin:0' }, `Program: ${levelOf()?.name ?? 'a Level'}`) : null;
   drawProgram();
