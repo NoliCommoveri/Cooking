@@ -5,7 +5,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { numberCourse, courseEntries, prereqNotes, courseNo } from '../src/content/course.js';
-import { weekLabels, suggestProgram, PLACE_QUIZ, PLACE_PARTS, READY_FOR } from '../src/content/levels.js';
+import { weekLabels, suggestProgram, PLACE_QUIZ, PLACE_PARTS, READY_FOR, bestForLines } from '../src/content/levels.js';
 
 const C = JSON.parse(readFileSync('content/course.json', 'utf8')).dishes;
 
@@ -76,4 +76,8 @@ test("Help me choose suggests by the lowest answer, and Cook Around the World on
   for (const { answers } of PLACE_QUIZ) assert.deepEqual(answers.map(([, n]) => n), [1, 2, 3, 4]);
   assert.deepEqual(PLACE_PARTS.answers.map(([v]) => v), ['parts', 'recipes']);
   assert.deepEqual(Object.keys(READY_FOR), ['caw', 'levels']);
+  // Help me choose: Cook Around the World, each Level offered, then the Levels' line.
+  const lines = bestForLines(['sp-2', 'sp-3', 'sp-4']);
+  assert.deepEqual(lines.map((x) => x.split(':')[0]), ['Cook Around the World', 'Level 2', 'Level 3', 'Level 4', 'All Level courses come with additional reading, quizzes, and drills outside the weekly recipe. These can be turned off by a parent.']);
+  assert.equal(bestForLines(['sp-3']).length, 3, 'only the Levels offered');
 });

@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [254. 2026-10-27 — Demo welcome note: our beliefs](docs/build-log.md#254-2026-10-27--demo-welcome-note-our-beliefs)
+**Latest build log entry:** [267. 2026-10-27 — The unleavened sorting pass, in the repo](docs/build-log.md#267-2026-10-27--the-unleavened-sorting-pass-in-the-repo)
 
 ## Current features
 
@@ -63,8 +63,8 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Theme showcase** (`mockups/quest-showcase/`): every component in both approved themes, Kitchen Quest and Chef's Passport.
 - **Lesson content** (`content/`): 65 lessons (all 13 of Unit 1, all 21 of Unit 2, 29 more, and the 2 Appointed Times lessons), and the ingredient, tool, skill (60), and cuisine lists, as JSON.
 - **The Levels** (release 1, being built, plan §12): Level 2 Apprentice, Level 3 Cook, and Level 4 Chef (`content/levels/sp-2.json` to `sp-4.json`) on the nine shared units in `content/level-units.json`, a Familiar and an Explore dish each week, and their recipe cards; Unit 1 is complete on all three Levels; in all, Level 2 (60 part pages, 29 Level-only recipes, 11 Level versions), Level 3 (68 part pages, 30 Level-only recipes, 12 Level versions), and Level 4 (60 part pages, 29 Level-only recipes, 11 Level versions); Unit 2 is complete on all three Levels too, Unit 3 on all three Levels, Unit 4 on all three Levels, and Unit 5 on all three Levels. Edited on the manager's Level 2, 3, and 4 pages.
-- **Level courses** (release 1, `src/worker/plan.js`): setting up a course asks Which program?, Cook Around the World or a Level, and for a Level, whether each week starts with its Familiar or Explore dish (preset from "how adventurous"); a Level course runs one week a week, its written recipes in week order, and the course card shows "Week 5 of 36 · Starts with Familiar".
-- **Help me choose** (release 1, `src/content/levels.js`): beside Which program?, with Chef Ruth and in Set up a course, a line on Cook Around the World and one on the Levels, and four questions that suggest one; just the recipes offers Cook Around the World beside Level 3 or 4 and turns a Level's parts off.
+- **Level courses** (release 1, `src/worker/plan.js`): setting up a course asks Which program?, Cook Around the World or a Level, and for a Level, whether each week starts with its Familiar or Explore dish (preset from "how adventurous"; Chef Ruth sets it from there and says so); a Level course runs one week a week, its written recipes in week order, and the course card shows "Week 5 of 36 · Starts with Familiar".
+- **Help me choose** (release 1, `src/content/levels.js`): beside Which program?, with Chef Ruth and in Set up a course, who each program and Level is best for, and four questions that suggest one; just the recipes offers Cook Around the World beside Level 3 or 4 and turns a Level's parts off.
 - **Level recipes in Side quests** (release 1): each Level's own written recipes (labeled by Level and week: B1a, C4b, D5a…) in its own unit in the kitchen, cookable and queueable like any lesson.
 - **Label notes**: an ingredient's "check the label" note shows under it on a recipe's prep list and on the shopping list.
 - **Watch for** (release 1): a Level part page can list unclean foods by name, with where they hide, in a box the content check allows; nowhere else may name them.

@@ -1688,7 +1688,7 @@ export const LIBRARY = {
     }
    ],
    "substitutions": [],
-   "unleavened": true,
+   "unleavened": false,
    "feast": false,
    "protein": "vegetarian",
    "tags": {
@@ -1803,7 +1803,7 @@ export const LIBRARY = {
       }
      ],
      "substitutions": [],
-     "unleavened": true,
+     "unleavened": false,
      "protein": "vegetarian",
      "tags": {
       "protein": "none",
@@ -2353,7 +2353,7 @@ export const LIBRARY = {
        "reason": "gluten"
       }
      ],
-     "unleavened": true,
+     "unleavened": false,
      "protein": "chicken",
      "tags": {
       "protein": "chicken",
@@ -14387,7 +14387,7 @@ export const LIBRARY = {
      "reason": "fish"
     }
    ],
-   "unleavened": false,
+   "unleavened": true,
    "feast": false,
    "protein": "chicken",
    "tags": null,
@@ -20375,7 +20375,7 @@ export const LIBRARY = {
     }
    ],
    "substitutions": [],
-   "unleavened": false,
+   "unleavened": true,
    "feast": false,
    "protein": "vegetarian",
    "tags": null,
@@ -21849,7 +21849,7 @@ export const LIBRARY = {
     }
    ],
    "substitutions": [],
-   "unleavened": true,
+   "unleavened": false,
    "feast": false,
    "protein": "beef",
    "tags": null,

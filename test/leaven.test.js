@@ -21,6 +21,17 @@ test('leaven is found in registry ingredients, typed-in names, and step text', (
   assert.deepEqual(leavenIn(recipe([], [{ text: 'This is unleavened bread, made with no yeast.' }]), REG, LV).found, []);
 });
 
+test('baguettes and rolls are bread; a bread knife or a cracker-sized piece is not leaven (owner, 2026-10-27)', () => {
+  for (const id of ['baguette', 'ciabatta-rolls', 'bolillo-rolls']) assert.ok(leavenIn(recipe([{ ingredient: id }]), REG, LV).found.length, id);
+  for (const text of ['Split it with the bread knife.', 'Pieces about the size of a cracker.', 'Rub it in until it looks like breadcrumbs.']) {
+    assert.deepEqual(leavenIn(recipe([], [{ text }]), REG, LV).found, [], text);
+  }
+  const badge = (id) => LIBRARY.lessons.find((L) => L.id === id).unleavened;
+  assert.equal(badge('french-onion-soup'), false);
+  assert.equal(badge('ratatouille'), false, 'an optional baguette is still leaven');
+  assert.equal(badge('arepas'), true);
+});
+
 test("fermented foods that aren't a raising agent aren't leaven (owner, 2026-10-22)", () => {
   for (const name of ['Beer', 'Soy sauce', 'Apple cider vinegar', 'Worcestershire sauce', 'White miso', 'Matzah', 'Corn tortillas']) {
     assert.deepEqual(leavenIn(recipe([{ name }]), REG, LV).found, [], name);
