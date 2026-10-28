@@ -7,7 +7,7 @@ import { SETUP_STEPS, nextStep, mainProtein, starterLessons } from '../src/conte
 import { loadContent } from '../tools/lint-content.js';
 
 test('the parts go in order, and she picks up after the last one finished', () => {
-  assert.deepEqual(SETUP_STEPS, ['family', 'servings', 'diet', 'learners', 'logins', 'tastes', 'mode', 'course']);
+  assert.deepEqual(SETUP_STEPS, ['family', 'servings', 'diet', 'unleavened', 'learners', 'logins', 'tastes', 'mode', 'course']);
   assert.equal(nextStep(null), 'family');
   assert.equal(nextStep('family'), 'servings');
   assert.equal(nextStep('logins'), 'tastes');

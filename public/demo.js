@@ -59,7 +59,7 @@ const TRACKS = {
 };
 const twoTracks = Object.keys(TRACKS).length > 1;
 // What a visitor has chosen. Kept for this tab only.
-let V = { track: 'catw', open: null, theme: 'quest', audience: 'kid', diet: [], tab: 'try', checked: [], shop: { step: 'needs', count: 0, have: [] }, lvWeek: 1, lvPart: 'knowledge', lvDone: [] };
+let V = { track: 'catw', open: null, theme: 'passport', audience: 'kid', diet: [], tab: 'try', checked: [], shop: { step: 'needs', count: 0, have: [] }, lvWeek: 1, lvPart: 'knowledge', lvDone: [] };
 try { V = { ...V, ...JSON.parse(sessionStorage.getItem('cpr.demo')) }; } catch { /* first visit */ }
 V.shop = { step: 'needs', count: 0, have: [], ...(V.shop ?? {}) };
 if (!TRACKS[V.track]?.tabs.some(([k]) => k === V.tab)) V = { ...V, track: 'catw', tab: 'try' };
@@ -104,7 +104,7 @@ function controls() {
   const on = CONTROLS[V.tab] ?? [];
   if (!on.length) return '';
   return `<div class="d-controls card">
-    ${on.includes('theme') ? `<div class="d-row"><b>Theme</b>${seg('theme', V.theme, [['quest', 'Kitchen Quest'], ['passport', "Chef's Passport"]])}</div>` : ''}
+    ${on.includes('theme') ? `<div class="d-row"><b>Theme</b>${seg('theme', V.theme, [['passport', "Chef's Passport"], ['quest', 'Kitchen Quest']])}</div>` : ''}
     ${on.includes('audience') ? `<div class="d-row"><b>Cooking as</b>${seg('audience', V.audience, [['kid', 'A kid'], ['adult', 'An adult']])}</div>` : ''}
     ${on.includes('diet') ? `<div class="d-row"><b>Leave out</b><div class="chips">${Object.entries(DIET).map(([t, label]) => `<label><input type="checkbox" data-diet="${t}" ${V.diet.includes(t) ? 'checked' : ''}>${esc(label)}</label>`).join('')}</div></div>` : ''}
   </div>`;
@@ -328,7 +328,7 @@ function progressView() {
   const lv = demoLevel();
   const rows = LEVEL.weeks.filter((w) => w.week <= 2).flatMap((w) => [['knowledge', w.knowledge], ['drill', w.drill], ['recipe', { title: w.title, minutes: lessons[w.recipe]?.totalMinutes ?? 60 }], ['sabbath', w.sabbath]]
     .map(([k, x]) => `<tr><td>${esc(new Date(`${dayOf(w.week)}T12:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }))}</td><td>Week ${w.week} · ${k === 'recipe' ? 'Recipe' : PART_NAMES[k]}<small>${esc(x.title)}</small></td><td>${(x.minutes / 60).toFixed(1)}</td></tr>`));
-  return `<p class="mut d-lede">What a learner sees on their progress tab, here for a pretend learner in week ${DEMO_NOW} of ${esc(LEVEL.name)}. Switch the theme to see the passport version.</p>
+  return `<p class="mut d-lede">What a learner sees on their progress tab, here for a pretend learner in week ${DEMO_NOW} of ${esc(LEVEL.name)}. Switch the theme to see the quest map version.</p>
     <section class="kitchen qx" data-kt="${V.theme}" id="lvprogress"></section>
     <section class="parent d-transcript"><h3>On the transcript</h3><p class="sub">Each part checked off prints as its own row with its planned hours, beside the recipes cooked, the units mastered, and the Level's total hours. The parent grades the recipes and enters the final grade and credit.</p>
       <table><thead><tr><th>Date</th><th>Work</th><th>Hours</th></tr></thead><tbody>${rows.join('')}</tbody></table>

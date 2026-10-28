@@ -17,6 +17,7 @@ import { markTerms, toggleTermCard } from './lib/terms.js';
 import { progressView, levelProgressView, celebrate } from './rewards.js';
 import { isMuted, setMuted } from './sound.js';
 import { gettingStarted, openRuth, ruthButton } from './ruth.js';
+import { unleavenedFields, feastWords, answerWords, UNLEAVENED_RELEASE } from './unleavened.js';
 import { openIntro } from './intro.js';
 import { starRow, ratingSaver, ratedCount } from './tastes.js';
 
@@ -111,7 +112,7 @@ const HAT = '<path d="M17 22c-4-.7-6-4-5-7.3s5.3-4.3 7.3-3C20 8 22.3 6 24.3 6s4.
 const avatar = (color) => art(`<svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="32" r="21" fill="${COLORS[color] ?? COLORS.slate}" stroke="#1F2328" stroke-width="2.5"/><circle cx="21" cy="33" r="2.6" fill="#1F2328"/><circle cx="35" cy="33" r="2.6" fill="#1F2328"/><path d="M21 41c4 3 10 3 14 0" fill="none" stroke="#1F2328" stroke-width="2.5" stroke-linecap="round"/><g transform="translate(4 -6)">${HAT}</g></svg>`);
 const avatars = (people) => el('span', { class: 'av' }, people.slice(0, 3).map((p) => avatar(p.color)));
 
-const THEMES = { quest: "Kitchen Quest", passport: "Chef's Passport" };
+const THEMES = { passport: "Chef's Passport", quest: "Kitchen Quest" };
 
 // The family's calendar: the queue and schedule work in the device's own days.
 const tz = () => `tz=${new Date().getTimezoneOffset()}`;
@@ -126,6 +127,15 @@ function sabbathBanner() {
   return el('aside', { class: 'card notice sabbath', role: 'note' },
     el('h2', {}, 'Shabbat shalom!'),
     el('p', {}, "While you're welcome to follow the recipe, please note that grading and due dates are not available on the Sabbath. We hope your family enjoys the rest!"));
+}
+// The Unleavened Bread pause (§6.20), in the owner's words (2026-10-27): the
+// course holds at a leavened lesson, or the unleavened days run with nothing held.
+function feastBanner(u) {
+  if (!u) return null;
+  return el('aside', { class: 'card notice feast', role: 'note' },
+    el('p', {}, u.paused
+      ? 'Due to the Holy Time, your regular course is paused. Feel free to select one of our unleavened recipes to cook as a family!'
+      : "Happy Unleavened Bread! This week's lessons are all unleavened, so cook on as usual."));
 }
 // The next release (plan §8.6): a family the owner turned the preview on for
 // sees it before everyone else, and the parent screens say so.
@@ -668,6 +678,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const section = el('section', { class: 'kitchen k-tabbed', 'data-kt': p.theme },
     me.kid ? null : el('a', { class: 'back', href: '#/' }, '← Lockers'),
     sabbathBanner(),
+    feastBanner(mine.unleavened),
     el('div', { class: 'k-head' }, avatars(p.people),
       el('div', { class: 'grow' }, el('h1', {}, quest ? 'Quest board' : 'Recipe box'), el('div', {}, p.name))),
     el('div', { class: 'acts' },
@@ -1110,7 +1121,7 @@ function profileForm(existing, { cancel, done }) {
         radio('audience', 'kid', 'Kid', 'Pick this if any kid shares it', (existing?.audience ?? 'kid') === 'kid'),
         radio('audience', 'adult', 'Adult', null, existing?.audience === 'adult'))),
     el('fieldset', {}, el('legend', {}, 'Theme'),
-      el('div', { class: 'grid2' }, Object.entries(THEMES).map(([k, label]) => radio('theme', k, label, null, (existing?.theme ?? 'quest') === k)))),
+      el('div', { class: 'grid2' }, Object.entries(THEMES).map(([k, label]) => radio('theme', k, label, null, (existing?.theme ?? 'passport') === k)))),
   ], existing ? 'Save' : 'Add profile', async (v) => {
     const body = { name: v.name.trim() || undefined, people: people.map((p) => ({ name: p.name.trim(), color: p.color })), audience: v.audience, theme: v.theme };
     if (body.people.some((p) => !p.name)) throw new Error('Every person needs a name.');
@@ -1296,7 +1307,8 @@ const ourTastes = parentOnly(async (pid) => {
 });
 
 const familySettings = parentOnly(async () => {
-  const f = await api('GET', '/api/family');
+  const [f, feast] = await Promise.all([api('GET', '/api/family'), feastState()]);
+  const feastSaved = el('p', { class: 'ok', hidden: true });
   const saved = el('p', { class: 'ok', hidden: true }, 'Saved.');
   parentScreen('family', form([
     field('Family name', 'name', { value: f.family.name, required: true, maxlength: 60 }),
@@ -1331,6 +1343,10 @@ const familySettings = parentOnly(async () => {
     await refresh();
     saved.hidden = false;
   }, { top: true }),
+  feast ? [el('h2', { id: 'unleavened' }, `Unleavened Bread ${feast.year}`),
+    el('p', { class: 'mut small' }, "During your unleavened days, from the day you stop suggesting leavened recipes to the feast's last day, Swap offers only unleavened recipes."),
+    feastSaved,
+    feastForm(feast, (out) => { feastSaved.textContent = `Saved: ${answerWords(fmtDay, out.dates)}`; feastSaved.hidden = false; })] : null,
   el('h2', {}, 'Leave Clean Plate'),
   el('div', { class: 'card' },
     el('p', { class: 'mut small', style: 'margin:0' }, 'Download our data saves everything about your family as one file. Delete our family removes your family, every parent login, every profile, and all progress.'),
@@ -1454,7 +1470,7 @@ async function previewLesson(lessonId, variation) {
   // A family recipe comes from the API in lesson shape (§6.10).
   const recipe = /^recipe:/.test(lessonId) ? await api('GET', `/api/recipes/${lessonId.slice(7)}`)
     : /^shared:/.test(lessonId) ? await api('GET', `/api/shared/${lessonId.slice(7)}`) : null;
-  const ways = profiles.length ? profiles : [{ id: 'family', name: 'A kid', theme: 'quest', audience: 'kid' }];
+  const ways = profiles.length ? profiles : [{ id: 'family', name: 'A kid', theme: 'passport', audience: 'kid' }];
   let as = ways.find((x) => x.id === sessionGet('cpr.preview.as')) ?? ways[0];
   const mount = el('div');
   const pick = el('div', { class: 'seg', role: 'group', 'aria-label': 'See it as' });
@@ -1628,8 +1644,30 @@ const menu = (label, items) => el('details', { class: 'more', ontoggle: (e) => {
   el('div', { class: 'more-menu' }, items.filter(Boolean).map(([text, fn]) => el('button', { type: 'button', class: 'hbtn link', onclick: (e) => { e.target.closest('details').open = false; Promise.resolve(fn()).catch((err) => showToast(err.message)); } }, text))));
 const plural = (n, word) => `${n} ${word}${n === 1 ? '' : /(s|sh|ch)$/.test(word) ? 'es' : 's'}`;
 
+// The family's Unleavened Bread dates (§6.20), with release 2. Null before it.
+const feastState = () => (me.family.release >= UNLEAVENED_RELEASE ? api('GET', `/api/unleavened?${tz()}`) : Promise.resolve(null));
+function feastForm(st, done, extra = []) {
+  const { nodes, read } = unleavenedFields({ el, fmtDay }, st);
+  return form(nodes, 'Save our dates', async (v) => done(await api('PUT', `/api/unleavened?${tz()}`, read(v))), { extra });
+}
+// Until the year's dates are answered (from January 1), a note on the queue
+// asks the parent to confirm them.
+function feastNote(st, after) {
+  if (!st?.ask) return null;
+  const cal = st.calendars.find((c) => c.id === st.dates?.calendar);
+  const open = () => {
+    let close = () => {};
+    close = modal(`Unleavened Bread ${st.year}`, feastForm(st, (out) => { close(); after(out); },
+      [el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')]));
+  };
+  return el('div', { class: 'card feastnote' },
+    el('p', { style: 'margin:0' }, el('b', {}, `Please confirm your Unleavened Bread dates for ${st.year}.`), ' ',
+      st.dates ? `Until you do, we're using the ${cal?.name ?? 'calendar'}'s: ${feastWords(fmtDay, st.dates)}.` : "Your calendar doesn't have this year's dates yet, so there are no unleavened days until you pick them."),
+    el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn pri', onclick: open }, 'Confirm our dates')));
+}
+
 const parentQueue = parentOnly(async (flash) => {
-  const [q, { profiles }] = await Promise.all([api('GET', `/api/queue?${tz()}`), api('GET', '/api/profiles')]);
+  const [q, { profiles }, feast] = await Promise.all([api('GET', `/api/queue?${tz()}`), api('GET', '/api/profiles'), feastState()]);
   const pname = (id) => profiles.find((p) => p.id === id)?.name ?? 'Someone';
   const names = (ids) => ids.map(pname).join(' & ') || 'Nobody';
   const homeschool = q.mode === 'homeschool';
@@ -1779,6 +1817,8 @@ const parentQueue = parentOnly(async (flash) => {
       c.total ? el('p', { class: 'mut small', style: 'margin:0' },
         c.projected_finish ? `Planned finish: week of ${fmtDay(c.planned_finish)}. ${c.started ? behind : `Starts ${fmtDay(c.start_date)}`}.` : 'Every lesson is cooked.')
         : el('p', { class: 'mut small' }, 'No lessons in this course can be cooked yet.'),
+      // The Unleavened Bread pause (§6.20; owner's wording, 2026-10-27).
+      c.this_week.held ? el('p', { class: 'feastpause', style: 'margin:0' }, el('b', {}, `Paused for Unleavened Bread until ${fmtDay(c.this_week.held_until, { weekday: 'long', month: 'long', day: 'numeric' })}`)) : null,
       c.unwritten ? el('p', { class: 'mut small', style: 'margin:0' }, c.level
         ? `${c.unwritten} week${c.unwritten === 1 ? "'s recipe is" : "s' recipes are"} still being written. ${c.unwritten === 1 ? 'It joins' : 'They join'} the schedule when ${c.unwritten === 1 ? "it's" : "they're"} ready.`
         : `${c.unwritten} more lesson${c.unwritten === 1 ? ' is' : 's are'} still being written. They join the schedule when they're ready.`) : null,
@@ -1844,7 +1884,7 @@ const parentQueue = parentOnly(async (flash) => {
     const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Swap for an Appointed Time meal' },
       el('div', { class: 'card' },
         el('h2', {}, 'Swap for an Appointed Time meal'),
-        el('p', { class: 'mut' }, `Instead of ${title}${d.spring ? '. Spring: unleavened meals only.' : '.'}`),
+        el('p', { class: 'mut' }, `Instead of ${title}${d.spring ? (me.family.release >= UNLEAVENED_RELEASE ? '. This week touches your unleavened days: unleavened meals only.' : '. Spring: unleavened meals only.') : '.'}`),
         groups.length ? groups.map((g) => [el('h3', {}, g), el('div', { class: 'rows' }, d.options.filter((o) => o.group === g).map((o) => el('div', { class: 'rowi with-av' },
           el('img', { src: o.image, alt: '', width: 48, height: 48 }),
           el('div', {}, el('b', {}, el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(o.id) }, `${o.label ? `${o.label} · ` : ''}${o.title}`)),
@@ -1897,6 +1937,7 @@ const parentQueue = parentOnly(async (flash) => {
 
   parentScreen('queue',
     flash ?? null,
+    feastNote(feast, (out) => parentQueue(el('p', { class: 'ok flash', role: 'status' }, `Saved: ${answerWords(fmtDay, out.dates)}`))),
     q.requests.length ? [el('h2', {}, `Requests (${q.requests.length})`), requests] : null,
     el('div', { class: 'pagehead' }, el('h2', {}, 'The queue'),
       el('a', { class: 'hbtn pri', href: '#/parent/queue/add' }, '+ Add a lesson')),

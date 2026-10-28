@@ -6983,3 +6983,140 @@ in docs."
   255 to 266 after it.
 - No screens changed, so no screenshots.
 - Tests: 408.
+
+## 268. 2026-10-27 — Chef's Passport is the default theme
+
+Owner, 2026-10-27: "set the chefs passport as the default … Everywhere that it
+is currently using quest without quest being specifically requested-- through
+ruth, when creating profiles manually, even the demo page."
+
+- **Before:** a profile made without a theme (Chef Ruth's Getting started
+  never asks for one) got Kitchen Quest, the Add a profile form had Kitchen
+  Quest picked, and the demo page and the manager's Preview as a learner
+  opened in Kitchen Quest. Kitchen Quest was listed first in every theme
+  picker.
+- **Now:** all of those start in Chef's Passport, and Chef's Passport is
+  listed first. Profiles that already exist keep the theme they have. The
+  plan (§5.2) records the new default.
+  - The API's default for a new profile without a theme is `passport`
+    (`src/worker/api.js`); the parent form, the lesson preview's stand-in
+    learner when a family has no profiles, the demo, and the manager preview
+    follow it.
+  - The demo's progress tab now says "Switch the theme to see the quest map
+    version", since it opens in the passport.
+  - The database column's own default stays `'quest'`: changing it would mean
+    rebuilding the profiles table, and every insert already names the theme.
+  - The test families on `/ops` keep one Kitchen Quest kid (Ava) on purpose,
+    so both themes can be checked.
+- Screenshots sent: the Profiles page with a profile made the way Chef Ruth makes one,
+  the Add a profile dialog (light and dark), and the demo's
+  theme switch.
+- Tests: 408.
+
+## 269. 2026-10-28 — Unleavened Bread dates, part 1: each family's own dates
+
+Owner, 2026-10-27: "Lets work on the unleavened bread holy time work", then
+picked **dates first** from Claude's three options. Mid-build, owner: "Make
+sure first run flow is accounting for a fall start where first applicable
+unleavened bread is next calendar year."
+
+- **Before:** the `unleavened_dates` table was in the schema but nothing used
+  it. Swap's unleavened-only weeks were a fixed February 1 to May 15 window
+  for every family.
+- **Now (release 2, marked being built, so only preview families see it):**
+  - `content/calendars.json` holds the standard calendars: the **Hebrew
+    lunisolar calendar** with its first days for 2027 to 2036 (plan §6.20).
+    The first calendar is the one a family uses until it picks. The linter
+    checks the file (ids, names, real dates in the right year).
+    `src/content/calendars.js` works out the seven days, the year asked
+    about, and whether a week touches the unleavened days.
+  - The manager section has a **Feast dates** page: each calendar's name, its
+    description, and a date per year, with **+ Add a year** and **+ Add a
+    calendar** in dialogs. Saved like every other content file.
+  - `GET` and `PUT /api/unleavened` (`src/worker/unleavened.js`): the year
+    asked about, the family's dates (its calendar's until it answers), and
+    whether to remind it. A family answers with its calendar, its first day,
+    and when to stop suggesting leavened recipes (on the first day of the
+    feast, or from a date it picks).
+  - **The year asked about** is this year's until its feast is over, then
+    next year's. So a family setting up in October 2026 answers for April
+    2027. The reminders wait for January 1 of that year and never show for a
+    year already answered, so a fall answer isn't asked again in January.
+  - **Getting started** asks it right after diet (a new `unleavened` step,
+    passed over for a family without release 2). **Family settings** has an
+    Unleavened Bread section. **Chef Ruth** offers "When will we keep
+    Unleavened Bread in 2028?" first on her menu from January 1 until it's
+    answered, and "Our Unleavened Bread dates" further down the rest of the
+    time.
+  - **The queue** shows a note from January 1 until the year is confirmed,
+    with Confirm our dates opening the form in a dialog.
+  - **Swap** uses the family's own unleavened days with release 2, and says
+    "This week touches your unleavened days" instead of "Spring".
+- **Claude's drafts, for the owner to approve:** Ruth's lines, the queue
+  note, the calendar's description ("The calculated Biblical calendar, as the
+  United Church of God, the Living Church of God, and similar groups keep it.
+  Each day begins at sunset the evening before."), and two guard rails: a
+  family's own first day must be within a month of its calendar's, and its
+  stop day must be before the feast and in the same year.
+- **Still to build:** the course pause and its kitchen notice, banner, and
+  parent card; no leavened recipe due in the feast; leavened lessons not
+  playing; the unleavened swaps; Level course setup's warning; the fixed
+  window coming out at launch.
+- Screenshots sent: Chef Ruth's question and answer, the queue note and its
+  dialog, Family settings, and the manager's Feast dates page and its Add a
+  year dialog, in light and dark.
+- Tests: 414.
+
+## 270. 2026-10-28 — No calendar description
+
+Owner, 2026-10-28: "No calendar description needed, scrap it."
+
+- **Before:** each standard calendar had a description, shown beside its name
+  where a family picks it and edited on the manager's Feast dates page (269).
+- **Now:** a calendar is its name and its dates. The description is gone from
+  `content/calendars.json`, the form, the API, and the Feast dates page.
+- Screenshots sent: the calendar question and the Feast dates page.
+- Tests: 414.
+
+## 271. 2026-10-28 — Unleavened Bread, part 2: the course pause
+
+Owner, 2026-10-28: "Go ahead and build the course pause." And, for Chef
+Ruth's line before the dates question: "Clean Plate makes observing the Days
+of Unleavened Bread easy! We know that multiple calendar calculations exist;
+please choose the dates your family observes so we can put the right recipes
+in front of you during that time."
+
+- **Before:** a course kept its pace through the feast, leavened lessons
+  included. Ruth's line was Claude's draft (269).
+- **Now (release 2, preview only):**
+  - **The pause** (`src/worker/schedule.js`). A week that touches the
+    family's unleavened days takes the course's lessons in order until the
+    next leavened one, and holds there. Cook Around the World and the Levels
+    work the same way, and a Level week's parts wait with its recipe. Leavened
+    means a library lesson without the Unleavened badge, or a learner's own
+    recipe that fails the leaven check.
+  - A week that touches the days holds from its Sunday, so nothing leavened
+    is due inside the feast. This week stops holding the day after the
+    feast's last day, so the held lesson shows again then (2027: Thursday,
+    April 29, due Friday).
+  - A held place moves back like a swap: the planned finish moves with it,
+    and the pause never counts as behind.
+  - **In the kitchen**, while the course is held: "Due to the Holy Time, your
+    regular course is paused. Feel free to select one of our unleavened
+    recipes to cook as a family!" Through the unleavened days with nothing
+    held: "Happy Unleavened Bread! This week's lessons are all unleavened, so
+    cook on as usual." Both are the owner's words (plan §6.20).
+  - **The parent's course card** says "Paused for Unleavened Bread until
+    Thursday, April 29".
+  - Ruth's line before the dates question is the owner's wording above.
+- **Not built yet:**
+  - The notice's **Show me some** button. Its filter's label and the way
+    back to every recipe are drafted for the owner first (plan §6.20).
+  - A course lesson already **shopped for** stays on the queue while it's
+    held. Keeping leavened recipes from being due in the feast is the next
+    part.
+  - While a Level course is held, its card says how many are cooked instead
+    of "Week 5 of 36".
+- Screenshots sent: the kitchen notice in both kitchen themes, the happy
+  banner, the paused course card, and Ruth's new line, in light and dark.
+- Tests: 420.

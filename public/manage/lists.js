@@ -5,6 +5,7 @@
 import { el, modal } from './dom.js';
 import { field, blank } from './form.js';
 import { S, cur, put, page, pickers, problems, redraw } from './manage.js';
+import { isDay } from '/lib/calendars.js';
 
 const LISTS = {
   'ingredients.json': [['ingredients', 'Ingredients', 'name']],
@@ -154,4 +155,82 @@ export function rulesPage() {
   page(el('h1', {}, 'Food rules'),
     el('p', {}, 'These lists are how the app keeps unclean foods out of every lesson, swap, and family recipe. There is no switch that turns the check off; what it checks against is set here.'),
     checks, RULES.map(card));
+}
+
+// ---------- the feast dates ----------
+
+// The standard calendars' first day of Unleavened Bread by year (§6.20). A
+// family picks one and confirms its dates or changes them; the first calendar
+// is the one a family uses until it picks. Add next years' dates here.
+const FEAST_FILE = 'calendars.json';
+const weekday = (d) => (isDay(d) ? new Date(`${d}T00:00:00Z`).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: 'UTC' }) : '');
+
+export function calendarsPage() {
+  const data = cur(FEAST_FILE) ?? { calendars: [] };
+  const checks = el('div', {}, checksLine());
+  const save = (note) => { put(FEAST_FILE, data, note); checks.replaceChildren(...[checksLine()].filter(Boolean)); };
+  let typing = null;
+  const later = (note) => { clearTimeout(typing); typing = setTimeout(() => save(note), 300); };
+
+  const card = (cal, i) => {
+    const years = Object.keys(cal.firstDays ?? {}).sort();
+    const row = (y) => {
+      const when = el('small', { class: 'mut' }, weekday(cal.firstDays[y]));
+      const input = el('input', { type: 'date', value: cal.firstDays[y], 'aria-label': `${y}'s first day`, oninput: (e) => {
+        cal.firstDays[y] = e.target.value;
+        when.textContent = weekday(e.target.value);
+        later(`Changed ${cal.name}'s ${y} date`);
+      } });
+      return el('li', { class: 'mitem mfeast' }, el('b', {}, y), input, when,
+        el('button', { type: 'button', class: 'hbtn small-btn bad', onclick: () => {
+          const close = modal(`Remove ${y}?`, el('p', {}, `${cal.name} won't have a date for ${y} once you save. Families on it would have no unleavened days that year until they set their own.`),
+            el('div', { class: 'acts' }, el('button', { class: 'hbtn', onclick: () => close() }, 'Keep it'),
+              el('button', { class: 'hbtn bad', onclick: () => { delete cal.firstDays[y]; save(`Removed ${cal.name}'s ${y} date`); close(); redraw(); } }, 'Remove')));
+        } }, 'Remove…'));
+    };
+    const addYear = () => {
+      const next = String(years.length ? Number(years.at(-1)) + 1 : new Date().getFullYear() + 1);
+      const year = el('input', { type: 'number', min: 2000, max: 2200, value: next, required: true, inputmode: 'numeric' });
+      const day = el('input', { type: 'date', required: true });
+      const err = el('p', { class: 'err', hidden: true });
+      const close = modal(`Add a year to ${cal.name}`, el('form', { class: 'stack wide', onsubmit: (e) => {
+        e.preventDefault();
+        const y = String(year.value).trim();
+        const bad = !/^\d{4}$/.test(y) ? 'Type a year, like 2037.' : cal.firstDays?.[y] ? `${y} already has a date. Change it in the list.` : !isDay(day.value) ? 'Pick the first day.' : day.value.slice(0, 4) !== y ? `The first day has to be in ${y}.` : null;
+        if (bad) { err.hidden = false; err.textContent = bad; return; }
+        cal.firstDays = { ...(cal.firstDays ?? {}), [y]: day.value };
+        save(`Added ${cal.name}'s ${y} date`);
+        close();
+        redraw();
+      } }, el('label', { class: 'f' }, 'Year', year), el('label', { class: 'f' }, 'First day of Unleavened Bread', day), err,
+      el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel'), el('button', { class: 'hbtn pri' }, 'Add'))));
+    };
+    const name = el('input', { value: cal.name ?? '', maxlength: 80, oninput: (e) => { cal.name = e.target.value; later(`Renamed a calendar to ${e.target.value}`); } });
+    return el('section', { class: 'card' },
+      el('div', { class: 'mhead' }, el('h2', {}, cal.name || cal.id), i === 0 ? el('small', { class: 'mut' }, 'Used until a family picks') : null),
+      el('label', { class: 'f' }, 'Name families see', name),
+      el('div', { class: 'mhead' }, el('h3', {}, `First day of Unleavened Bread (${years.length} years)`), el('button', { type: 'button', class: 'hbtn small-btn', onclick: addYear }, '+ Add a year')),
+      el('p', { class: 'mut small' }, 'The feast runs seven days from the first day. A family can change the first day to its own.'),
+      el('ol', { class: 'mitems' }, years.map(row)));
+  };
+
+  const addCalendar = () => {
+    const name = el('input', { required: true, maxlength: 80 });
+    const err = el('p', { class: 'err', hidden: true });
+    const close = modal('Add a calendar', el('form', { class: 'stack wide', onsubmit: (e) => {
+      e.preventDefault();
+      const id = slug(name.value);
+      if (!id) { err.hidden = false; err.textContent = 'Give it a name.'; return; }
+      if (data.calendars.some((c) => c.id === id)) { err.hidden = false; err.textContent = `There's already one called "${id}".`; return; }
+      data.calendars.push({ id, name: name.value.trim(), firstDays: {} });
+      save(`Added the ${name.value.trim()}`);
+      close();
+      redraw();
+    } }, el('label', { class: 'f' }, 'Name families see', name), err, el('p', { class: 'mut small' }, 'Add its years once it\'s added.'),
+    el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel'), el('button', { class: 'hbtn pri' }, 'Add'))));
+  };
+
+  page(el('div', { class: 'mhead' }, el('h1', {}, 'Feast dates'), el('button', { type: 'button', class: 'hbtn small-btn', onclick: addCalendar }, '+ Add a calendar')),
+    el('p', { class: 'mut' }, 'The standard calendars families pick from for Unleavened Bread (§6.20), with the first day of the feast each year. A family sees its calendar\'s dates and confirms them or picks its own first day. Add the next years\' dates before they come up.'),
+    checks, data.calendars.map(card));
 }

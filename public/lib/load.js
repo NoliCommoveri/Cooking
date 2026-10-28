@@ -37,6 +37,9 @@ export function contentFromFiles(files, images = null) {
     tastes: tastesOf(all),
     // Lessons the owner hid from every family (§7.5). Their files stay, so unhiding brings them back.
     hidden: files['hidden.json']?.lessons ?? [],
+    // The standard calendars' Unleavened Bread dates (§6.20).
+    calendarsFile: files['calendars.json'] ?? null,
+    calendars: files['calendars.json']?.calendars ?? [],
     rules: {
       cleanSpecies: species.species, fatBlocked: species.fatBlocked, allowedProducts: species.allowedProducts || [],
       blockedWords: r('rules/blocked-words.json').words, allowedPhrases: r('rules/allowed-phrases.json').phrases, leaven: r('rules/leaven.json'),
