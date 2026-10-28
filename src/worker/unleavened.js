@@ -36,7 +36,7 @@ export async function unleavenedState(env, fid, day) {
   return {
     year,
     dates: d,
-    calendars: calendars().map((c) => ({ id: c.id, name: c.name, about: c.about ?? '', first_day: calendarFirstDay(c, year) })),
+    calendars: calendars().map((c) => ({ id: c.id, name: c.name, first_day: calendarFirstDay(c, year) })),
     // From January 1 of the year asked about, until it's answered.
     ask: !d?.confirmed && day >= `${year}-01-01`,
   };

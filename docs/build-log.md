@@ -7066,3 +7066,14 @@ unleavened bread is next calendar year."
   dialog, Family settings, and the manager's Feast dates page and its Add a
   year dialog, in light and dark.
 - Tests: 414.
+
+## 270. 2026-10-28 — No calendar description
+
+Owner, 2026-10-28: "No calendar description needed, scrap it."
+
+- **Before:** each standard calendar had a description, shown beside its name
+  where a family picks it and edited on the manager's Feast dates page (269).
+- **Now:** a calendar is its name and its dates. The description is gone from
+  `content/calendars.json`, the form, the API, and the Feast dates page.
+- Screenshots sent: the calendar question and the Feast dates page.
+- Tests: 414.

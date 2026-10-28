@@ -1,5 +1,5 @@
 {
   "calendars": [
-    { "id": "hebrew-lunisolar", "name": "Hebrew lunisolar calendar", "about": "The calculated Biblical calendar, as the United Church of God, the Living Church of God, and similar groups keep it. Each day begins at sunset the evening before.", "firstDays": { "2027": "2027-04-22", "2028": "2028-04-11", "2029": "2029-03-31", "2030": "2030-04-18", "2031": "2031-04-08", "2032": "2032-03-27", "2033": "2033-04-14", "2034": "2034-04-04", "2035": "2035-04-24", "2036": "2036-04-12" } }
+    { "id": "hebrew-lunisolar", "name": "Hebrew lunisolar calendar", "firstDays": { "2027": "2027-04-22", "2028": "2028-04-11", "2029": "2029-03-31", "2030": "2030-04-18", "2031": "2031-04-08", "2032": "2032-03-27", "2033": "2033-04-14", "2034": "2034-04-04", "2035": "2035-04-24", "2036": "2036-04-12" } }
   ]
 }

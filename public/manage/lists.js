@@ -206,12 +206,9 @@ export function calendarsPage() {
       el('div', { class: 'acts' }, el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel'), el('button', { class: 'hbtn pri' }, 'Add'))));
     };
     const name = el('input', { value: cal.name ?? '', maxlength: 80, oninput: (e) => { cal.name = e.target.value; later(`Renamed a calendar to ${e.target.value}`); } });
-    const about = el('textarea', { rows: 3, maxlength: 400, oninput: (e) => { cal.about = e.target.value; later(`Changed ${cal.name}'s description`); } });
-    about.value = cal.about ?? '';
     return el('section', { class: 'card' },
       el('div', { class: 'mhead' }, el('h2', {}, cal.name || cal.id), i === 0 ? el('small', { class: 'mut' }, 'Used until a family picks') : null),
       el('label', { class: 'f' }, 'Name families see', name),
-      el('label', { class: 'f' }, 'About it', about),
       el('div', { class: 'mhead' }, el('h3', {}, `First day of Unleavened Bread (${years.length} years)`), el('button', { type: 'button', class: 'hbtn small-btn', onclick: addYear }, '+ Add a year')),
       el('p', { class: 'mut small' }, 'The feast runs seven days from the first day. A family can change the first day to its own.'),
       el('ol', { class: 'mitems' }, years.map(row)));
@@ -225,7 +222,7 @@ export function calendarsPage() {
       const id = slug(name.value);
       if (!id) { err.hidden = false; err.textContent = 'Give it a name.'; return; }
       if (data.calendars.some((c) => c.id === id)) { err.hidden = false; err.textContent = `There's already one called "${id}".`; return; }
-      data.calendars.push({ id, name: name.value.trim(), about: '', firstDays: {} });
+      data.calendars.push({ id, name: name.value.trim(), firstDays: {} });
       save(`Added the ${name.value.trim()}`);
       close();
       redraw();

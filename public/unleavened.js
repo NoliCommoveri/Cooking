@@ -46,7 +46,7 @@ export function unleavenedFields({ el, fmtDay }, st) {
         showCal(c.id);
         if (c.first_day) { first.value = c.first_day; showRuns(); }
       } }),
-      el('span', {}, c.name, c.about ? el('em', {}, ` ${c.about}`) : null)))));
+      el('span', {}, c.name)))));
 
   const fromDay = el('input', { type: 'date', name: 'unleavened_from', value: d.unleavened_from && d.unleavened_from !== d.first_day ? d.unleavened_from : '', 'aria-label': 'The day to stop', min: `${st.year}-01-01` });
   const picked = Boolean(d.unleavened_from && d.unleavened_from !== d.first_day);
