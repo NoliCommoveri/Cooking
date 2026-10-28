@@ -7120,3 +7120,47 @@ in front of you during that time."
 - Screenshots sent: the kitchen notice in both kitchen themes, the happy
   banner, the paused course card, and Ruth's new line, in light and dark.
 - Tests: 420.
+
+## 272. 2026-10-28 — Unleavened Bread, part 3: nothing leavened planned in the feast
+
+Owner, 2026-10-28: "fix those two loose ends. Then continue building" (after
+a review of the PR #59 merge).
+
+- **Loose ends from 271:**
+  - The parent's "Paused for Unleavened Bread until…" line had a `feastpause`
+    class that no stylesheet defined. It's gone; the line looks the same.
+  - The `unleavened_dates` comment in `0001_schema.sql` still says nothing
+    uses the table. It stays: the runner checksums each migration, and an
+    edit to an applied one shows as drifted on `/ops`. The plan's schema
+    section describes the table.
+- **Before:** a leavened recipe could be put on a day in the feast by Add a
+  lesson, a planned date change, or approving a request. A course lesson
+  already shopped for kept its old week while the pause held it, so the
+  kitchen still showed it due.
+- **Now (release 2, preview only):**
+  - `feastGuard` (`src/worker/unleavened.js`) refuses a leavened recipe on a
+    day in the family's unleavened days (from its stop day to the feast's
+    last day), or taking a meal's place in a week that touches them. No
+    override, PIN included. A date after the feast, or no date, is fine.
+    Leavened: a library lesson without the Unleavened badge, a family recipe
+    that fails the leaven check, or a shared recipe not marked unleavened.
+  - It runs on Add a lesson, changing a queued lesson's date (servings still
+    change on their own), approving a kid's request for a date, approving
+    one on the spot to cook now, a request that replaces an assigned meal,
+    Put back, and Undo swap. Swap already offers only unleavened recipes in
+    those weeks, and courses pause.
+  - The refusal, Claude's draft for the owner: "Shakshuka has leaven, so it
+    can't be planned during your unleavened days (April 22 to April 28).
+    Pick April 29 or later." For a meal taking another's place in a week
+    that touches the days: "… can't take a meal's place in a week that
+    touches your unleavened days (…). Pick an unleavened recipe for that
+    week."
+  - **A course lesson already shopped for** stays on the queue while the
+    pause holds it, with no week, so it isn't due in the feast. It gets its
+    week back when the course comes to it.
+- **Not built yet:** a hand-queued leavened lesson planned for a day that
+  only later became an unleavened day (the family moved its dates) keeps
+  its date; the "doesn't play" part will stop it being cooked then.
+- Screenshots sent: Add a lesson refusing Shakshuka on April 23, light and
+  dark.
+- Tests: 423.

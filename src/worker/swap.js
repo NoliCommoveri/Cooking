@@ -30,7 +30,7 @@ import { recipeLesson } from '../content/recipe.js';
 import { tasteContext, cookCtx, dishFit } from './picks.js';
 import { better } from '../content/score.js';
 import { UNLEAVENED_RELEASE } from './release.js';
-import { datesFor } from './unleavened.js';
+import { datesFor, feastGuard } from './unleavened.js';
 import { unleavenedWeek } from '../content/calendars.js';
 
 const ACTIVE = ['assigned', 'shopped'];
@@ -156,6 +156,9 @@ export function register(on) {
     const s = await requireParent(env, req);
     const r = await activeRow(env, s.family_id, qid);
     const m = /^(q):([0-9a-f]{16})$|^(c):([0-9a-f]{16}):(.+)$/.exec(r.swap_of ?? '') ?? fail(409, 'not_swap', "That isn't a swap.");
+    // The meal it puts back can't be a leavened one on the unleavened days (§6.20).
+    const back = m[1] ? await env.DB.prepare("SELECT * FROM queue WHERE id = ? AND family_id = ? AND status = 'removed'").bind(m[2], s.family_id).first() : null;
+    if (back) await feastGuard(env, await family(env, s.family_id), back.lesson_id, null, { date: back.planned_date, week: back.week_start });
     const stmts = [
       env.DB.prepare('DELETE FROM queue_profiles WHERE queue_id = ? AND family_id = ?').bind(r.id, s.family_id),
       env.DB.prepare('DELETE FROM queue WHERE id = ? AND family_id = ?').bind(r.id, s.family_id),

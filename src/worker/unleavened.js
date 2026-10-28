@@ -15,7 +15,10 @@ import { requireParent } from './auth.js';
 import { CONTENT } from './content-data.js';
 import { family, today } from './plan.js';
 import { UNLEAVENED_RELEASE } from './release.js';
-import { familyDates, yearFor, isDay, plusDays, calendarFirstDay } from '../content/calendars.js';
+import { familyDates, yearFor, isDay, plusDays, calendarFirstDay, unleavenedOn, unleavenedRange } from '../content/calendars.js';
+import { LIBRARY } from './library-data.js';
+import { RECIPE_ID, SHARED_ID, stored, REGISTRY } from './recipes.js';
+import { unleavened } from '../content/leaven.js';
 
 const calendars = () => CONTENT.calendars;
 
@@ -40,6 +43,47 @@ export async function unleavenedState(env, fid, day) {
     // From January 1 of the year asked about, until it's answered.
     ask: !d?.confirmed && day >= `${year}-01-01`,
   };
+}
+
+// Whether a lesson has leaven: a library lesson without the Unleavened badge,
+// a family recipe that doesn't pass the leaven check, or a shared recipe not
+// marked unleavened.
+const lessonById = Object.fromEntries(LIBRARY.lessons.map((L) => [L.id, L]));
+export async function leavened(env, fid, lid) {
+  if (RECIPE_ID.test(lid)) {
+    const row = await env.DB.prepare('SELECT body_json, version FROM family_recipes WHERE id = ? AND family_id = ?').bind(RECIPE_ID.exec(lid)[1], fid).first();
+    return Boolean(row) && !unleavened(stored(row), REGISTRY, CONTENT.rules.leaven);
+  }
+  if (SHARED_ID.test(lid)) {
+    const row = await env.DB.prepare('SELECT unleavened FROM community_recipes WHERE id = ?').bind(SHARED_ID.exec(lid)[1]).first();
+    return Boolean(row) && !row.unleavened;
+  }
+  return Boolean(lessonById[lid]) && !lessonById[lid].unleavened;
+}
+
+async function titleOf(env, fid, lid) {
+  if (RECIPE_ID.test(lid)) return (await env.DB.prepare('SELECT title FROM family_recipes WHERE id = ? AND family_id = ?').bind(RECIPE_ID.exec(lid)[1], fid).first())?.title ?? 'That recipe';
+  if (SHARED_ID.test(lid)) return (await env.DB.prepare('SELECT title FROM community_recipes WHERE id = ?').bind(SHARED_ID.exec(lid)[1]).first())?.title ?? 'That recipe';
+  return lessonById[lid]?.title ?? 'That lesson';
+}
+
+const words = (day) => new Date(`${day}T00:00:00Z`).toLocaleDateString('en-US', { month: 'long', day: 'numeric', timeZone: 'UTC' });
+
+// No leavened recipe is ever due during the family's unleavened days (§6.20,
+// owner, 2026-10-27: "Leavened recipes cannot be added to be due during the
+// feast, period."). It can be planned for after them. date: a planned day;
+// week: a week's Sunday (a meal that takes another's place in that week).
+// title: the lesson's, looked up when not given. There is no override. The wording is Claude's draft, for the owner.
+export async function feastGuard(env, fam, lid, title, { date = null, week = null } = {}) {
+  if (fam.release < UNLEAVENED_RELEASE || (!date && !week)) return;
+  const dates = await datesFor(env, fam.id);
+  const d = (date && unleavenedOn(date, dates)) || (week && unleavenedRange(week, dates));
+  if (!d || !(await leavened(env, fam.id, lid))) return;
+  title ??= await titleOf(env, fam.id, lid);
+  const span = `${words(d.unleavened_from)} to ${words(d.last_day)}`;
+  fail(409, 'unleavened', date
+    ? `${title} has leaven, so it can't be planned during your unleavened days (${span}). Pick ${words(plusDays(d.last_day, 1))} or later.`
+    : `${title} has leaven, so it can't take a meal's place in a week that touches your unleavened days (${span}). Pick an unleavened recipe for that week.`);
 }
 
 async function onRelease(env, s) {

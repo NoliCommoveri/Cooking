@@ -1818,7 +1818,7 @@ const parentQueue = parentOnly(async (flash) => {
         c.projected_finish ? `Planned finish: week of ${fmtDay(c.planned_finish)}. ${c.started ? behind : `Starts ${fmtDay(c.start_date)}`}.` : 'Every lesson is cooked.')
         : el('p', { class: 'mut small' }, 'No lessons in this course can be cooked yet.'),
       // The Unleavened Bread pause (§6.20; owner's wording, 2026-10-27).
-      c.this_week.held ? el('p', { class: 'feastpause', style: 'margin:0' }, el('b', {}, `Paused for Unleavened Bread until ${fmtDay(c.this_week.held_until, { weekday: 'long', month: 'long', day: 'numeric' })}`)) : null,
+      c.this_week.held ? el('p', { style: 'margin:0' }, el('b', {}, `Paused for Unleavened Bread until ${fmtDay(c.this_week.held_until, { weekday: 'long', month: 'long', day: 'numeric' })}`)) : null,
       c.unwritten ? el('p', { class: 'mut small', style: 'margin:0' }, c.level
         ? `${c.unwritten} week${c.unwritten === 1 ? "'s recipe is" : "s' recipes are"} still being written. ${c.unwritten === 1 ? 'It joins' : 'They join'} the schedule when ${c.unwritten === 1 ? "it's" : "they're"} ready.`
         : `${c.unwritten} more lesson${c.unwritten === 1 ? ' is' : 's are'} still being written. They join the schedule when they're ready.`) : null,
