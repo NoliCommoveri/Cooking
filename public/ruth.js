@@ -8,6 +8,7 @@ import { STARTERS, nextStep } from './lib/getting-started.js';
 import { starRow, ratingSaver } from './tastes.js';
 import { ASSIGN_NOTES, READY_FOR, bestForLines, PLACE_QUIZ, PLACE_PARTS, suggestProgram } from './lib/levels.js';
 import { courseNo } from './lib/course.js';
+import { unleavenedFields, answerWords, UNLEAVENED_RELEASE } from './unleavened.js';
 
 export const RUTH = { name: 'Chef Ruth', photo: 'img/chef-ruth.webp' };
 
@@ -192,7 +193,7 @@ export async function gettingStarted(ctx, { again = false, chat: given = null } 
     await chat.choose([['go', "Sounds great, let's start!"]]);
   }
 
-  const parts = { family: familyPart, servings: servingsPart, diet: dietPart, learners: learnersPart, logins: loginsPart, tastes: tastesPart, mode: modePart, course: coursePart };
+  const parts = { family: familyPart, servings: servingsPart, diet: dietPart, unleavened: unleavenedPart, learners: learnersPart, logins: loginsPart, tastes: tastesPart, mode: modePart, course: coursePart };
   while (at) {
     await parts[at](ctx, chat, call, { again });
     await step(at);
@@ -267,6 +268,34 @@ async function dietPart(ctx, chat, call) {
     return picked.length ? `Leave out: ${picked.map((t) => ctx.DIET[t] ?? t).join(', ')}` : 'None of these';
   });
   chat.say('You can change these in Menu → Family settings.');
+}
+
+// Unleavened Bread dates (§6.20), with release 2: right after allergies and
+// diet. A family starting in the fall answers for the coming spring.
+async function unleavenedPart(ctx, chat, call) {
+  if ((ctx.me().family.release ?? 0) < UNLEAVENED_RELEASE) return;
+  const st = await call('GET', `/api/unleavened?${ctx.tz()}`);
+  chat.say(`Every family keeps Unleavened Bread, so during your unleavened days I'll only suggest unleavened recipes. Which calendar do you keep, and when does the feast start for you in ${st.year}?`);
+  await askUnleavened(ctx, chat, call, st);
+  chat.say("You can change these in Menu → Family settings. I'll ask again each January for the new year.");
+}
+
+async function askUnleavened(ctx, chat, call, st) {
+  const { nodes, read } = unleavenedFields(ctx, st);
+  await chat.ask(nodes, 'Save', async (v) => {
+    const out = await call('PUT', `/api/unleavened?${ctx.tz()}`, read(v));
+    return answerWords(ctx.fmtDay, out.dates);
+  });
+}
+
+// Her yearly task (§6.20, owner, 2026-10-27: "Yes Ruth should ask yearly"):
+// offered first on her menu from January 1 until it's answered.
+async function unleavenedTask(ctx, chat) {
+  const call = caller(ctx, chat);
+  const st = await call('GET', `/api/unleavened?${ctx.tz()}`);
+  chat.say(`Of course! When will your family keep Unleavened Bread ${String(st.year) === ctx.localToday().slice(0, 4) ? 'this year' : `in ${st.year}`}? Here are ${st.dates?.confirmed ? 'the dates you picked' : "your calendar's dates"} for ${st.year}. Change anything that's different for you.`);
+  await askUnleavened(ctx, chat, call, st);
+  chat.say('Saved! You can change these in Menu → Family settings.');
 }
 
 async function learnersPart(ctx, chat, call, { again }) {
@@ -709,14 +738,19 @@ export function openRuth(ctx) {
     // Getting started is a one-time flow (owner, 2026-10-23): once there's a
     // lesson in the queue or a dish cooked, it's off her menu.
     await ctx.refresh().catch(() => {});
+    // The yearly Unleavened Bread question (§6.20) is offered first while
+    // it's waiting for an answer, from January 1.
+    const feast = (ctx.me().family.release ?? 0) >= UNLEAVENED_RELEASE
+      ? await ctx.api('GET', `/api/unleavened?${ctx.tz()}`).catch(() => null) : null;
+    const feastItem = feast && ['unleavened', feast.ask ? `When will we keep Unleavened Bread in ${feast.year}?` : 'Our Unleavened Bread dates'];
     for (;;) {
       chat.say('What can I help with?');
-      const pick = await chat.choose([['tour', 'Show me around'],
-        ['cook', 'What should we cook?'], ['tastes', 'Ask what we like to eat'],
+      const pick = await chat.choose([...(feast?.ask ? [feastItem] : []), ['tour', 'Show me around'],
+        ['cook', 'What should we cook?'], ['tastes', 'Ask what we like to eat'], ...(feast && !feast.ask ? [feastItem] : []),
         ...(ctx.me().family.cooking ? [] : [['setup', 'Getting started (change your setup)']]), ['bye', 'Nothing right now']]);
       if (pick === 'bye') { chat.say('Okay! Tap my button any time.'); return; }
-      if (pick === 'tastes' || pick === 'cook') {
-        await (pick === 'cook' ? whatToCook : rateSome)(ctx, chat);
+      if (pick === 'tastes' || pick === 'cook' || pick === 'unleavened') {
+        await (pick === 'cook' ? whatToCook : pick === 'unleavened' ? unleavenedTask : rateSome)(ctx, chat);
         await chat.choose([['ok', 'Thanks, Chef Ruth!']]);
         chat.close();
         return;

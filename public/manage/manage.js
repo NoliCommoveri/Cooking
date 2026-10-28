@@ -4,7 +4,7 @@
 // commit to the repo, where the publish workflow checks it again and puts it
 // live. Routes live in the hash: #/ (the course), #/lesson/<id>, #/lesson/<id>/v/<variation>,
 // #/try/<id>, #/try/<id>/<variation>, #/saves,
-// #/list/<file>, #/rules, #/fix/<id>, #/tags, #/level/<level>, #/gap/variation/<lesson>?<gap>,
+// #/list/<file>, #/rules, #/calendars, #/fix/<id>, #/tags, #/level/<level>, #/gap/variation/<lesson>?<gap>,
 // #/gap/dish/<pick-one group>?<gap> (Write next, from Recipe gaps).
 import { el, modal } from './dom.js';
 import { field, blank } from './form.js';
@@ -13,7 +13,7 @@ import { contentFromFiles } from '/lib/load.js';
 import { numberCourse, seasonalLabels } from '/lib/course.js';
 import { SAFETY } from '/lib/recipe.js';
 import { lessonPage, previewPage, gapVariation } from './lesson.js';
-import { listPage, rulesPage } from './lists.js';
+import { listPage, rulesPage, calendarsPage } from './lists.js';
 import { fixPage } from './fix.js';
 import { tagsPage, tagFields } from './tags.js';
 import { levelPage } from './level.js';
@@ -298,7 +298,7 @@ function bar() {
         el('button', { class: 'hbtn', onclick: async () => { await api('POST', '/logout'); go('#/login'); } }, 'Sign out'))),
     el('nav', { class: 'mnav', 'aria-label': 'Sections' },
       tab('#/', 'Course'), tab('#/saves', 'Saves'), tab('#/list/ingredients.json', 'Ingredients'), tab('#/list/equipment.json', 'Tools'),
-      tab('#/list/skills.json', 'Skills'), tab('#/list/terms.json', 'Kitchen words'), tab('#/list/cuisines.json', 'Cuisines'), tab('#/list/tastes.json', 'Tastes'), tab('#/tags', 'Tags'), tab('#/level/sp-2', 'Level 2'), tab('#/level/sp-3', 'Level 3'), tab('#/level/sp-4', 'Level 4'), tab('#/rules', 'Food rules')),
+      tab('#/list/skills.json', 'Skills'), tab('#/list/terms.json', 'Kitchen words'), tab('#/list/cuisines.json', 'Cuisines'), tab('#/list/tastes.json', 'Tastes'), tab('#/tags', 'Tags'), tab('#/level/sp-2', 'Level 2'), tab('#/level/sp-3', 'Level 3'), tab('#/level/sp-4', 'Level 4'), tab('#/rules', 'Food rules'), tab('#/calendars', 'Feast dates')),
     S.github ? null : el('p', { class: 'mwarn' }, "GitHub isn't connected yet, so you can look but not save. ", el('a', { href: 'https://github.com/NoliCommoveri/Cooking/blob/main/docs/setup.md#the-manager-section', target: '_blank', rel: 'noopener' }, 'How to connect it')));
 }
 
@@ -640,6 +640,7 @@ route = async () => {
     if (h === '#/saves') return await savesPage();
     if ((m = h.match(/^#\/list\/([a-z]+\.json)$/))) return listPage(m[1]);
     if (h === '#/rules') return rulesPage();
+    if (h === '#/calendars') return calendarsPage();
     if (h === '#/tags') return tagsPage();
     if ((m = h.match(/^#\/level\/([a-z0-9-]+)$/))) return levelPage(m[1]);
     if ((m = h.match(/^#\/fix\/([0-9a-f]{16})$/))) return await fixPage(m[1]);

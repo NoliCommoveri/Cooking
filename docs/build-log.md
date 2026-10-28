@@ -7012,3 +7012,57 @@ ruth, when creating profiles manually, even the demo page."
   the Add a profile dialog (light and dark), and the demo's
   theme switch.
 - Tests: 408.
+
+## 269. 2026-10-28 — Unleavened Bread dates, part 1: each family's own dates
+
+Owner, 2026-10-27: "Lets work on the unleavened bread holy time work", then
+picked **dates first** from Claude's three options. Mid-build, owner: "Make
+sure first run flow is accounting for a fall start where first applicable
+unleavened bread is next calendar year."
+
+- **Before:** the `unleavened_dates` table was in the schema but nothing used
+  it. Swap's unleavened-only weeks were a fixed February 1 to May 15 window
+  for every family.
+- **Now (release 2, marked being built, so only preview families see it):**
+  - `content/calendars.json` holds the standard calendars: the **Hebrew
+    lunisolar calendar** with its first days for 2027 to 2036 (plan §6.20).
+    The first calendar is the one a family uses until it picks. The linter
+    checks the file (ids, names, real dates in the right year).
+    `src/content/calendars.js` works out the seven days, the year asked
+    about, and whether a week touches the unleavened days.
+  - The manager section has a **Feast dates** page: each calendar's name, its
+    description, and a date per year, with **+ Add a year** and **+ Add a
+    calendar** in dialogs. Saved like every other content file.
+  - `GET` and `PUT /api/unleavened` (`src/worker/unleavened.js`): the year
+    asked about, the family's dates (its calendar's until it answers), and
+    whether to remind it. A family answers with its calendar, its first day,
+    and when to stop suggesting leavened recipes (on the first day of the
+    feast, or from a date it picks).
+  - **The year asked about** is this year's until its feast is over, then
+    next year's. So a family setting up in October 2026 answers for April
+    2027. The reminders wait for January 1 of that year and never show for a
+    year already answered, so a fall answer isn't asked again in January.
+  - **Getting started** asks it right after diet (a new `unleavened` step,
+    passed over for a family without release 2). **Family settings** has an
+    Unleavened Bread section. **Chef Ruth** offers "When will we keep
+    Unleavened Bread in 2028?" first on her menu from January 1 until it's
+    answered, and "Our Unleavened Bread dates" further down the rest of the
+    time.
+  - **The queue** shows a note from January 1 until the year is confirmed,
+    with Confirm our dates opening the form in a dialog.
+  - **Swap** uses the family's own unleavened days with release 2, and says
+    "This week touches your unleavened days" instead of "Spring".
+- **Claude's drafts, for the owner to approve:** Ruth's lines, the queue
+  note, the calendar's description ("The calculated Biblical calendar, as the
+  United Church of God, the Living Church of God, and similar groups keep it.
+  Each day begins at sunset the evening before."), and two guard rails: a
+  family's own first day must be within a month of its calendar's, and its
+  stop day must be before the feast and in the same year.
+- **Still to build:** the course pause and its kitchen notice, banner, and
+  parent card; no leavened recipe due in the feast; leavened lessons not
+  playing; the unleavened swaps; Level course setup's warning; the fixed
+  window coming out at launch.
+- Screenshots sent: Chef Ruth's question and answer, the queue note and its
+  dialog, Family settings, and the manager's Feast dates page and its Add a
+  year dialog, in light and dark.
+- Tests: 414.

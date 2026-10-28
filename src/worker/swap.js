@@ -7,7 +7,8 @@
 //   - a lesson queued by hand is taken off the queue.
 // Either way the swap has an Undo.
 //
-// February 1 through May 15, by the week being swapped, the picker offers only
+// During the family's unleavened days (§6.20, release 2; until then February
+// 1 through May 15), by the week being swapped, the picker offers only
 // Unleavened recipes: the Appointed Times lessons, then other library lessons
 // that pass the leaven check, then parent recipes that pass it (the family's
 // own, and the whole directory). The rest of the year it offers the
@@ -28,6 +29,9 @@ import { REGISTRY, stored, rowLesson, recipeVisible, lessonFor } from './recipes
 import { recipeLesson } from '../content/recipe.js';
 import { tasteContext, cookCtx, dishFit } from './picks.js';
 import { better } from '../content/score.js';
+import { UNLEAVENED_RELEASE } from './release.js';
+import { datesFor } from './unleavened.js';
+import { unleavenedWeek } from '../content/calendars.js';
 
 const ACTIVE = ['assigned', 'shopped'];
 const seasonal = new Set(LIBRARY.lessons.filter((L) => LIBRARY.seasonal.includes(L.unit)).map((L) => L.id));
@@ -49,7 +53,8 @@ export function springWeek(sunday) {
 // no tags, keep theirs.
 export async function swapOptions(env, fam, week, pids = []) {
   const filters = JSON.parse(fam.diet_filters);
-  const spring = springWeek(week);
+  // With release 2, the family's own unleavened days (§6.20) instead of the fixed window.
+  const spring = fam.release >= UNLEAVENED_RELEASE ? unleavenedWeek(week, await datesFor(env, fam.id)) : springWeek(week);
   // A Level's own recipes (§12.4) only with the Levels' release.
   const libOk = (L) => levelLessonOn(L, fam.release) && dietView(L, LIBRARY.ingredients, filters).visible;
   const out = [];

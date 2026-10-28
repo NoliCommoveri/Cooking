@@ -11,6 +11,7 @@ import { courseEntries } from './course.js';
 import { METHODS, safeMin } from './recipe.js';
 import { tagProblems, missingTags, meatProtein } from './tastes.js';
 import { applyVariation, changesSomething, staleKeys } from './variations.js';
+import { calendarProblems } from './calendars.js';
 
 // Fields that hold ids or codes, not words a kid reads.
 const CODE_FIELDS = new Set(['id', 'image', 'picture', 'cuisine', 'ingredient', 'use', 'for', 'unit', 'why', 'glyph', 'reason',
@@ -521,6 +522,9 @@ export function lint(c) {
   // hidden lessons (§7.5) name a written lesson or a planned dish
   for (const id of c.hidden || []) if (!byId[id] && !DISH[id]) err('hidden.json', `"${id}" isn't a lesson or a dish in course.json`);
   if (new Set(c.hidden || []).size !== (c.hidden || []).length) err('hidden.json', 'a lesson is listed twice');
+
+  // the standard calendars' Unleavened Bread dates (§6.20)
+  if (c.calendarsFile) errors.push(...calendarProblems(c.calendarsFile));
 
   return { errors, warnings };
 }

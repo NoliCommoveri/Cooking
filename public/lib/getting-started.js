@@ -5,8 +5,9 @@
 
 // The parts, in the order she asks them. A family's progress is the last part
 // it finished (families.setup_step); she picks up at the one after.
-// tastes: Our tastes (§6.21).
-export const SETUP_STEPS = ['family', 'servings', 'diet', 'learners', 'logins', 'tastes', 'mode', 'course'];
+// tastes: Our tastes (§6.21). unleavened: the family's Unleavened Bread dates
+// (§6.20), asked only once its release is on; before that it's passed over.
+export const SETUP_STEPS = ['family', 'servings', 'diet', 'unleavened', 'learners', 'logins', 'tastes', 'mode', 'course'];
 
 // The part after the one finished; null finished = start at the top. After the
 // last part there's none left, so Getting started is done.
