@@ -39,15 +39,23 @@ export function yearFor(day, dates) {
   return !d || day > d.last_day ? y + 1 : y;
 }
 
-// Whether a week (Sunday to Friday) touches any unleavened day. dates(year)
-// gives the family's dates for a year; a week can reach into the next year.
-export function unleavenedWeek(sunday, dates) {
+// The family's dates whose unleavened days a week (Sunday to Friday) touches,
+// or null. dates(year) gives the family's dates for a year; a week can reach
+// into the next year.
+export function unleavenedRange(sunday, dates) {
   const friday = plusDays(sunday, 5);
   for (const y of new Set([sunday.slice(0, 4), friday.slice(0, 4)])) {
     const d = dates(Number(y));
-    if (d && sunday <= d.last_day && friday >= d.unleavened_from) return true;
+    if (d && sunday <= d.last_day && friday >= d.unleavened_from) return d;
   }
-  return false;
+  return null;
+}
+export const unleavenedWeek = (sunday, dates) => Boolean(unleavenedRange(sunday, dates));
+
+// Whether a day is one of the family's unleavened days: its dates for that day.
+export function unleavenedOn(day, dates) {
+  const d = dates(Number(day.slice(0, 4)));
+  return d && day >= d.unleavened_from && day <= d.last_day ? d : null;
 }
 
 // The checks on content/calendars.json, for the linter.

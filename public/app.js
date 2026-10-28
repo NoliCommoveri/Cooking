@@ -128,6 +128,15 @@ function sabbathBanner() {
     el('h2', {}, 'Shabbat shalom!'),
     el('p', {}, "While you're welcome to follow the recipe, please note that grading and due dates are not available on the Sabbath. We hope your family enjoys the rest!"));
 }
+// The Unleavened Bread pause (§6.20), in the owner's words (2026-10-27): the
+// course holds at a leavened lesson, or the unleavened days run with nothing held.
+function feastBanner(u) {
+  if (!u) return null;
+  return el('aside', { class: 'card notice feast', role: 'note' },
+    el('p', {}, u.paused
+      ? 'Due to the Holy Time, your regular course is paused. Feel free to select one of our unleavened recipes to cook as a family!'
+      : "Happy Unleavened Bread! This week's lessons are all unleavened, so cook on as usual."));
+}
 // The next release (plan §8.6): a family the owner turned the preview on for
 // sees it before everyone else, and the parent screens say so.
 function previewNote() {
@@ -669,6 +678,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const section = el('section', { class: 'kitchen k-tabbed', 'data-kt': p.theme },
     me.kid ? null : el('a', { class: 'back', href: '#/' }, '← Lockers'),
     sabbathBanner(),
+    feastBanner(mine.unleavened),
     el('div', { class: 'k-head' }, avatars(p.people),
       el('div', { class: 'grow' }, el('h1', {}, quest ? 'Quest board' : 'Recipe box'), el('div', {}, p.name))),
     el('div', { class: 'acts' },
@@ -1807,6 +1817,8 @@ const parentQueue = parentOnly(async (flash) => {
       c.total ? el('p', { class: 'mut small', style: 'margin:0' },
         c.projected_finish ? `Planned finish: week of ${fmtDay(c.planned_finish)}. ${c.started ? behind : `Starts ${fmtDay(c.start_date)}`}.` : 'Every lesson is cooked.')
         : el('p', { class: 'mut small' }, 'No lessons in this course can be cooked yet.'),
+      // The Unleavened Bread pause (§6.20; owner's wording, 2026-10-27).
+      c.this_week.held ? el('p', { class: 'feastpause', style: 'margin:0' }, el('b', {}, `Paused for Unleavened Bread until ${fmtDay(c.this_week.held_until, { weekday: 'long', month: 'long', day: 'numeric' })}`)) : null,
       c.unwritten ? el('p', { class: 'mut small', style: 'margin:0' }, c.level
         ? `${c.unwritten} week${c.unwritten === 1 ? "'s recipe is" : "s' recipes are"} still being written. ${c.unwritten === 1 ? 'It joins' : 'They join'} the schedule when ${c.unwritten === 1 ? "it's" : "they're"} ready.`
         : `${c.unwritten} more lesson${c.unwritten === 1 ? ' is' : 's are'} still being written. They join the schedule when they're ready.`) : null,

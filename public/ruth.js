@@ -275,7 +275,8 @@ async function dietPart(ctx, chat, call) {
 async function unleavenedPart(ctx, chat, call) {
   if ((ctx.me().family.release ?? 0) < UNLEAVENED_RELEASE) return;
   const st = await call('GET', `/api/unleavened?${ctx.tz()}`);
-  chat.say(`Every family keeps Unleavened Bread, so during your unleavened days I'll only suggest unleavened recipes. Which calendar do you keep, and when does the feast start for you in ${st.year}?`);
+  // Owner's wording, 2026-10-28.
+  chat.say('Clean Plate makes observing the Days of Unleavened Bread easy! We know that multiple calendar calculations exist; please choose the dates your family observes so we can put the right recipes in front of you during that time.');
   await askUnleavened(ctx, chat, call, st);
   chat.say("You can change these in Menu → Family settings. I'll ask again each January for the new year.");
 }

@@ -120,3 +120,51 @@ test('a lesson queued outside the course comes out of its later place, and the r
   assert.deepEqual(ids(r.next_week), ['b', 'd']);
   assert.deepEqual(r.ahead[0].lessons, ['e', 'f']);
 });
+
+// The Unleavened Bread pause (§6.20): 2027's feast is Thursday, April 22 to
+// Wednesday, April 28. The weeks of April 18 and April 25 touch it.
+const FEAST = { year: 2027, first_day: '2027-04-22', last_day: '2027-04-28', unleavened_from: '2027-04-22' };
+const pauseFor = (leavened, d = FEAST) => ({ dates: (y) => (y === 2027 ? d : null), leavened: (id) => leavened.includes(id) });
+const spring = { start_date: '2027-04-04', per_week: 2 };
+const atPace = (upTo) => Object.fromEntries(L.slice(0, upTo).map((id, i) => [id, addDays('2027-04-05', 7 * Math.floor(i / 2))]));
+
+test('a week touching the unleavened days runs in order until the next leavened lesson, and holds there', () => {
+  // Week of April 18: e and f are due; f is leavened, so e is due and f waits.
+  const s = schedule({ course: spring, lessons: L, done: atPace(4), today: '2027-04-19', pause: pauseFor(['f']) });
+  assert.deepEqual(ids(s.this_week).filter((x) => !s.this_week.lessons.find((l) => l.id === x).done), ['e']);
+  assert.equal(s.this_week.held, 'f');
+  assert.equal(s.this_week.held_until, '2027-04-29', 'the day after the last day');
+  assert.deepEqual(ids(s.next_week), [], 'the week of April 25 touches the feast too');
+  assert.equal(s.next_week.held, 'f');
+  assert.equal(s.weeks_behind, 0, 'the pause never counts as behind');
+  assert.equal(s.lessons_behind, 0);
+  assert.equal(s.projected_finish, s.planned_finish);
+  assert.equal(s.planned_finish, '2027-05-02', 'the finish moves back past the feast');
+});
+
+test('an unleavened lesson first in line keeps the course going; nothing leavened, nothing held', () => {
+  const s = schedule({ course: spring, lessons: L, done: atPace(4), today: '2027-04-19', pause: pauseFor([]) });
+  assert.deepEqual(ids(s.this_week).slice(-2), ['e', 'f']);
+  assert.equal(s.this_week.held, null);
+  assert.equal(s.planned_finish, '2027-04-18');
+});
+
+test('the held lesson shows again the day after the last day, and the pause is not behind', () => {
+  const done = { ...atPace(4), e: '2027-04-20' };
+  const during = schedule({ course: spring, lessons: L, done, today: '2027-04-27', pause: pauseFor(['f']) });
+  assert.deepEqual(ids(during.this_week), [], 'held through Wednesday the 28th');
+  assert.equal(during.this_week.held, 'f');
+  assert.equal(during.lessons_behind, 0);
+  const after = schedule({ course: spring, lessons: L, done, today: '2027-04-29', pause: pauseFor(['f']) });
+  assert.deepEqual(ids(after.this_week), ['f']);
+  assert.equal(after.this_week.held, null);
+  assert.equal(after.this_week.lessons[0].overdue, false);
+  assert.equal(after.weeks_behind, 0);
+});
+
+test('a family that stops leaven early pauses from its own day', () => {
+  const early = { ...FEAST, unleavened_from: '2027-04-12' };
+  const s = schedule({ course: spring, lessons: L, done: atPace(2), today: '2027-04-12', pause: pauseFor(['d'], early) });
+  assert.deepEqual(ids(s.this_week), ['c']);
+  assert.equal(s.this_week.held, 'd');
+});

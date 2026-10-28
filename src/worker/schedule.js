@@ -4,6 +4,8 @@
 // the family's own calendar days, 'YYYY-MM-DD'. Weeks run Sunday to Friday,
 // with Saturday the Sabbath (owner, 2026-10-22), and are named by their Sunday.
 
+import { unleavenedRange } from '../content/calendars.js';
+
 const DAY = 24 * 60 * 60 * 1000;
 const toDate = (s) => new Date(`${s}T00:00:00Z`);
 const fromDate = (d) => d.toISOString().slice(0, 10);
@@ -34,12 +36,20 @@ export const DUE_DAY = 5;
 // weeks: { week's Sunday: { skipped, extra, swapped, bumped } }; bumped: the
 //   course lessons swapped out that week, which go first the week after
 // today: the family's calendar day
+// pause (§6.20, release 2): { dates: (year) => the family's Unleavened Bread
+//   dates, leavened: (id) => whether a lesson has leaven }. A week that touches
+//   the family's unleavened days runs in order until the next lesson is
+//   leavened, and holds there (owner, 2026-10-27: "I don't want to pull
+//   lessons out of order"). This week stops holding the day after the feast's
+//   last day. A held place moves back like a swap, so the planned finish moves
+//   with it and the pause never counts as behind.
 //
 // Returns this week and next week ({ week, lessons: [{ id, done, overdue }],
-// skipped, extra }), the weeks after ({ week, lessons: [ids] }), whether next
+// skipped, extra, held, held_until }; held: the leavened lesson a pause holds,
+// shown again from held_until), the weeks after ({ week, lessons: [ids] }), whether next
 // week shows yet, the planned and projected
 // finish weeks, and how many weeks behind the plan the course is.
-export function schedule({ course, lessons, done = {}, free = new Set(), taken = new Set(), weeks = {}, today }) {
+export function schedule({ course, lessons, done = {}, free = new Set(), taken = new Set(), weeks = {}, today, pause = null }) {
   const per = course.per_week;
   const start = weekOf(course.start_date);
   const now = weekOf(today);
@@ -51,26 +61,45 @@ export function schedule({ course, lessons, done = {}, free = new Set(), taken =
   const swapped = (w) => weeks[w]?.swapped ?? 0;
   const capOf = (w) => Math.max(0, per - swapped(w));
 
-  // Every lesson at the pace, from the start, skipping the skipped weeks: the
-  // week the course was set to finish.
-  const finishFrom = (from, count, firstCap) => {
-    let w = from, left = count, cap = firstCap ?? capOf(from);
-    if (left <= 0) return null;
-    for (let guard = 0; guard < 1000; guard++, w = addDays(w, 7), cap = capOf(w)) {
-      if (skipped(w)) continue;
-      left -= Math.max(0, cap);
-      if (left <= 0) return w;
-    }
-    return null;
+  // The Unleavened Bread dates a week's pause comes from, or null.
+  const pauseOf = (w) => {
+    const d = pause && unleavenedRange(w, pause.dates);
+    return d && !(w === now && today > d.last_day) ? d : null;
   };
-  const planned = finishFrom(start, lessons.length);
+  // How many of a list's lessons from `from` a week takes, up to cap: during a
+  // pause, none from the first leavened one on.
+  const take = (w, list, from, cap) => {
+    let n = Math.max(0, Math.min(cap, list.length - from));
+    if (n && pauseOf(w)) {
+      const i = list.slice(from, from + n).findIndex((id) => pause.leavened(id));
+      if (i >= 0) n = i;
+    }
+    return n;
+  };
+  // A list's lessons week by week at the pace, from a week (with firstRoom
+  // places in it), skipping the skipped weeks: the week the last one lands
+  // in, and how many land before this week.
+  const walk = (list, from, firstRoom) => {
+    let w = from, i = 0, before = 0, room = firstRoom ?? capOf(from);
+    if (!list.length) return { finish: null, before };
+    for (let guard = 0; guard < 1000; guard++, w = addDays(w, 7), room = capOf(w)) {
+      if (skipped(w)) continue;
+      const n = take(w, list, i, room);
+      i += n;
+      if (w < now) before += n;
+      if (i >= list.length) return { finish: w, before };
+    }
+    return { finish: null, before };
+  };
+  // Every lesson at the pace, from the start: the week the course was set to
+  // finish, and what was due by now.
+  const plan = walk(lessons, start);
+  const planned = plan.finish;
 
-  // Lessons cooked before this week, and the weeks before this one that weren't
-  // skipped: what was due by now and what got done.
+  // Lessons cooked before this week: what got done by now.
   const doneIds = lessons.filter((id) => done[id]);
   const doneBefore = doneIds.filter((id) => done[id] < now).length;
-  let dueBefore = 0;
-  for (let w = start; w < now; w = addDays(w, 7)) if (!skipped(w)) dueBefore += capOf(w);
+  const dueBefore = plan.before;
   const behindLessons = Math.max(0, Math.min(lessons.length, dueBefore) - doneBefore);
 
   // This week: what was cooked this week, then the next unfinished lessons up
@@ -86,7 +115,10 @@ export function schedule({ course, lessons, done = {}, free = new Set(), taken =
     const room = Math.max(0, cap - cookedHere.length);
     // The ones past the pace are this week's extras (Cook another recipe).
     const paced = skipped(w) ? 0 : Math.max(0, capOf(w) - cookedHere.length);
-    return { list: open.slice(from, from + room), next: from + room, paced };
+    const n = take(w, open, from, room);
+    // A lesson the pause holds: there was room for it.
+    const held = n < Math.min(room, open.length - from) ? open[from + n] : null;
+    return { list: open.slice(from, from + n), next: from + n, paced, held, until: held ? addDays(pauseOf(w).last_day, 1) : null };
   };
   const cookedNow = doneIds.filter((id) => done[id] >= now && done[id] < addDays(now, 7) && !free.has(id));
   const a = fill(now, 0, cookedNow);
@@ -97,14 +129,17 @@ export function schedule({ course, lessons, done = {}, free = new Set(), taken =
   const ahead = [];
   for (let w = addDays(next, 7), from = b.next, guard = 0; from < open.length && guard < 520; w = addDays(w, 7), guard++) {
     if (w < start || skipped(w)) continue;
-    ahead.push({ week: w, lessons: open.slice(from, from + capOf(w)) });
-    from += capOf(w);
+    const n = take(w, open, from, capOf(w));
+    if (n) ahead.push({ week: w, lessons: open.slice(from, from + n) });
+    from += n;
   }
-  const week = (w, list, cooked, overdueCount, paced = list.length) => ({
+  const week = (w, list, cooked, overdueCount, paced = list.length, f = {}) => ({
     week: w,
     skipped: skipped(w),
     extra: extra(w),
     swapped: swapped(w),
+    held: f.held ?? null,
+    held_until: f.until ?? null,
     lessons: [
       ...cooked.map((id) => ({ id, done: true, overdue: false, extra: false })),
       ...list.map((id, i) => ({ id, done: false, overdue: i < overdueCount, extra: i >= paced })),
@@ -116,13 +151,13 @@ export function schedule({ course, lessons, done = {}, free = new Set(), taken =
   if (!open.length) projected = doneIds.length ? weekOf(doneIds.map((id) => done[id]).sort().at(-1)) : null;
   else {
     const thisRoom = now < start || skipped(now) ? 0 : Math.max(0, capOf(now) + extra(now) - cookedNow.length);
-    projected = now < start ? finishFrom(start, open.length) : finishFrom(now, open.length, thisRoom);
+    projected = now < start ? walk(open, start).finish : walk(open, now, thisRoom).finish;
   }
   const weeksBehind = planned && projected && projected > planned ? Math.round((toDate(projected) - toDate(planned)) / (7 * DAY)) : 0;
 
   return {
-    this_week: week(now, now < start ? [] : a.list, cookedNow, now < start ? 0 : behindLessons, a.paced),
-    next_week: week(next, b.list, [], 0),
+    this_week: week(now, now < start ? [] : a.list, cookedNow, now < start ? 0 : behindLessons, a.paced, now < start ? {} : a),
+    next_week: week(next, b.list, [], 0, b.list.length, b),
     ahead,
     started: now >= start,
     planned_finish: planned,

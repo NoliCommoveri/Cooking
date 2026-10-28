@@ -17,10 +17,13 @@ import { dietView } from '../content/diet.js';
 import { servingOptions } from '../content/scale.js';
 import { courseEntries, numberCourse } from '../content/course.js';
 import { schedule, weekOf, addDays, localDay, isDay, isSabbath, DUE_DAY } from './schedule.js';
-import { isRecipeId, lessonFor, recipeNames, recipeVisible, RECIPE_ID, recipeRow, clearedOf, checked, newRecipe, editedRecipe } from './recipes.js';
+import { isRecipeId, lessonFor, recipeNames, recipeVisible, RECIPE_ID, recipeRow, clearedOf, checked, newRecipe, editedRecipe, stored, REGISTRY } from './recipes.js';
 import { tasteContext, versionFor, bestPlan, hatedExtras, versionSummary, levelPlan, levelCandidates, cookedBy } from './picks.js';
 import { variationChoices } from './variations.js';
-import { releaseOn, familyRelease, LEVELS_RELEASE } from './release.js';
+import { releaseOn, familyRelease, LEVELS_RELEASE, UNLEAVENED_RELEASE } from './release.js';
+import { datesFor } from './unleavened.js';
+import { unleavened } from '../content/leaven.js';
+import { unleavenedOn } from '../content/calendars.js';
 import { PARTS, PART_NAMES, coursePartsOf, weekParts, plannedMinutes, hoursOf } from '../content/levels.js';
 
 const id = () => randomHex(8);
@@ -346,10 +349,12 @@ async function levelRecipes(env, course) {
 async function ownRecipes(env, fid, ids) {
   const hexes = [...new Set(ids.map((x) => RECIPE_ID.exec(x)?.[1]).filter(Boolean))];
   if (!hexes.length) return {};
-  const { results } = await env.DB.prepare(`SELECT id, title, total_minutes, meal_type, held, deleted_at FROM family_recipes WHERE family_id = ? AND id IN (${placeholders(hexes)})`)
+  const { results } = await env.DB.prepare(`SELECT id, title, total_minutes, meal_type, held, deleted_at, body_json, version FROM family_recipes WHERE family_id = ? AND id IN (${placeholders(hexes)})`)
     .bind(fid, ...hexes).all();
   return Object.fromEntries(results.map((r) => [`recipe:${r.id}`, {
     title: r.title, minutes: r.total_minutes, image: `img/meals/${r.meal_type}.svg`, held: Boolean(r.held), deleted: Boolean(r.deleted_at),
+    // For the Unleavened Bread pause (§6.20).
+    unleavened: unleavened(stored(r), REGISTRY, CONTENT.rules.leaven),
   }]));
 }
 // A learner's recipe a week can cook: not waiting on a review, not deleted.
@@ -961,6 +966,10 @@ async function courseTaken(env, course, profiles, usable) {
   return new Set(results.map((r) => r.lesson_id).filter((x) => ids.has(x)));
 }
 
+// Whether a course lesson has leaven: a library lesson without the
+// Unleavened badge, or a learner's own recipe that doesn't pass the check.
+const leavenedIn = (lessons) => (id) => (lessons.own?.[id] ? !lessons.own[id].unleavened : lessonById[id] ? !lessonById[id].unleavened : false);
+
 async function courseState(env, course, fam, day, tz) {
   const profiles = await courseProfiles(env, course);
   const lessons = await courseLessons(env, course, fam);
@@ -969,7 +978,9 @@ async function courseState(env, course, fam, day, tz) {
   const taken = await courseTaken(env, course, profiles, lessons.usable);
   const tasks = await levelTasks(env, course, profiles);
   const writing = await levelWriting(env, course, profiles);
-  return { course, profiles, lessons, done, taken, tasks, writing, sched: schedule({ course, lessons: lessons.usable, done, free, taken, weeks, today: day }) };
+  // The Unleavened Bread pause (§6.20), with its release.
+  const pause = fam.release >= UNLEAVENED_RELEASE ? { dates: await datesFor(env, fam.id), leavened: leavenedIn(lessons) } : null;
+  return { course, profiles, lessons, done, taken, tasks, writing, sched: schedule({ course, lessons: lessons.usable, done, free, taken, weeks, today: day, pause }) };
 }
 
 const activeCourses = async (env, fid) => withPrograms(env, fid, (await env.DB.prepare('SELECT * FROM courses WHERE family_id = ? AND archived_at IS NULL ORDER BY created_at, id').bind(fid).all()).results);
@@ -1132,7 +1143,8 @@ function courseOut(st, fam, rowsByLesson, version = () => null) {
       ...(V && week ? weekSwapOut(st, week) : {}),
     };
   };
-  const week = (w) => ({ week: w.week, skipped: w.skipped, extra: w.extra, lessons: w.lessons.map(lessonOut) });
+  // held: the leavened lesson the Unleavened Bread pause holds (§6.20), back from held_until.
+  const week = (w) => ({ week: w.week, skipped: w.skipped, extra: w.extra, held: w.held, held_until: w.held_until, lessons: w.lessons.map(lessonOut) });
   // The Level week the course is on, for "Week 5 of 36", and who has
   // checked off each of its parts, for the parent's Take back (12c).
   const now = V ? levelWeekNow(st) : null;
@@ -1372,10 +1384,19 @@ export function register(on) {
       const out = hatedExtras(tc, versionSummary(lid, v), mine.profiles);
       if (out.length) leaveOut[lid] = out; else delete leaveOut[lid];
     }
+    // The Unleavened Bread pause (§6.20, its release): the course holds at a
+    // leavened lesson, or the unleavened days run with nothing held.
+    let feast = null;
+    if (mine && fam.release >= UNLEAVENED_RELEASE) {
+      const tw = mine.sched.this_week;
+      if (tw.held) feast = { paused: true, until: tw.held_until };
+      else if (unleavenedOn(day, await datesFor(env, fam.id))) feast = { paused: false };
+    }
     return {
       mode: fam.mode,
       versions,
       leave_out: leaveOut,
+      unleavened: feast,
       // A profile on a Level course: its week, parts, and mastery recipes (12c).
       // Its progress view (12e) comes with it.
       level: mine?.lessons.level ? { ...levelFor(mine, pid, day), progress: await levelProgress(env, s.family_id, pid, tzOf(req)) } : null,

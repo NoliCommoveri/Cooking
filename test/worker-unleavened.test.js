@@ -1,7 +1,7 @@
 // Unleavened Bread dates (plan §6.20), release 2.
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
-import { makeEnv, family } from './helpers/worker.js';
+import { makeEnv, family, samplePlan } from './helpers/worker.js';
 import { setPreview } from '../src/worker/release.js';
 import { unleavenedState } from '../src/worker/unleavened.js';
 import { familyDates, yearFor, unleavenedWeek, calendarProblems, lastDay } from '../src/content/calendars.js';
@@ -104,4 +104,46 @@ test('Swap goes unleavened-only on the family\'s own weeks', async (t) => {
   assert.equal(await swapOn('2027-04-14'), false);
   await a.put('/api/unleavened', { year: 2027, calendar: HEBREW, first_day: '2027-04-22', from: 'date', unleavened_from: '2027-04-12' });
   assert.equal(await swapOn('2027-04-14'), true, 'from the family\'s own stop day');
+});
+
+test('a course holds at its first leavened lesson through the feast: the kitchen notice and the parent card say so', async (t) => {
+  on('2027-04-19');
+  t.after(() => mock.timers.reset());
+  const { a, ava } = await setup();
+  await a.put('/api/family', { name: 'Carsons', default_servings: 4, diet_filters: [], plan_weeks: true });
+  const plan = await samplePlan(a);
+  // Shakshuka comes first, and its pita makes it leavened.
+  assert.equal((await a.post('/api/courses', { profile_ids: [ava], start_date: '2027-04-18', per_week: 1, plan })).status, 200);
+  const card = (await a.get('/api/queue?tz=0')).body.courses[0];
+  assert.equal(card.this_week.held, 'shakshuka');
+  assert.equal(card.this_week.held_until, '2027-04-29');
+  assert.deepEqual(card.this_week.lessons, []);
+  assert.equal(card.weeks_behind, 0);
+  const kitchen = (await a.get(`/api/profiles/${ava}/queue?tz=0`)).body;
+  assert.deepEqual(kitchen.unleavened, { paused: true, until: '2027-04-29' });
+  assert.ok(!kitchen.items.some((x) => x.lesson_id === 'shakshuka'), 'not queued while held');
+
+  on('2027-04-29');
+  await a.post('/api/pin/unlock', { pin: '1234' });
+  const after = (await a.get('/api/queue?tz=0')).body.courses[0];
+  assert.equal(after.this_week.held, null);
+  assert.deepEqual(after.this_week.lessons.map((x) => x.lesson_id ?? x.id), ['shakshuka'], 'back the day after the last day');
+  assert.equal((await a.get(`/api/profiles/${ava}/queue?tz=0`)).body.unleavened, null);
+});
+
+test('through the unleavened days with nothing held, the kitchen gets the happy banner; before release 2, nothing', async (t) => {
+  on('2027-04-23');
+  t.after(() => mock.timers.reset());
+  const { a, ava } = await setup();
+  await a.put('/api/family', { name: 'Carsons', default_servings: 4, diet_filters: [], plan_weeks: true });
+  const plan = (await samplePlan(a)).map((x) => ({ ...x, removed: x.id !== 'beef-bulgogi' }));
+  await a.post('/api/courses', { profile_ids: [ava], start_date: '2027-04-18', per_week: 1, plan });
+  assert.deepEqual((await a.get(`/api/profiles/${ava}/queue?tz=0`)).body.unleavened, { paused: false });
+
+  const { a: b, ava: bea } = await setup({ preview: false });
+  await b.put('/api/family', { name: 'Carsons', default_servings: 4, diet_filters: [], plan_weeks: true });
+  await b.post('/api/courses', { profile_ids: [bea], start_date: '2027-04-18', per_week: 1, plan: await samplePlan(b) });
+  const old = (await b.get('/api/queue?tz=0')).body.courses[0];
+  assert.equal(old.this_week.held, null, 'no pause before the release');
+  assert.equal((await b.get(`/api/profiles/${bea}/queue?tz=0`)).body.unleavened, null);
 });

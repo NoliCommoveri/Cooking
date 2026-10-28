@@ -7077,3 +7077,46 @@ Owner, 2026-10-28: "No calendar description needed, scrap it."
   `content/calendars.json`, the form, the API, and the Feast dates page.
 - Screenshots sent: the calendar question and the Feast dates page.
 - Tests: 414.
+
+## 271. 2026-10-28 — Unleavened Bread, part 2: the course pause
+
+Owner, 2026-10-28: "Go ahead and build the course pause." And, for Chef
+Ruth's line before the dates question: "Clean Plate makes observing the Days
+of Unleavened Bread easy! We know that multiple calendar calculations exist;
+please choose the dates your family observes so we can put the right recipes
+in front of you during that time."
+
+- **Before:** a course kept its pace through the feast, leavened lessons
+  included. Ruth's line was Claude's draft (269).
+- **Now (release 2, preview only):**
+  - **The pause** (`src/worker/schedule.js`). A week that touches the
+    family's unleavened days takes the course's lessons in order until the
+    next leavened one, and holds there. Cook Around the World and the Levels
+    work the same way, and a Level week's parts wait with its recipe. Leavened
+    means a library lesson without the Unleavened badge, or a learner's own
+    recipe that fails the leaven check.
+  - A week that touches the days holds from its Sunday, so nothing leavened
+    is due inside the feast. This week stops holding the day after the
+    feast's last day, so the held lesson shows again then (2027: Thursday,
+    April 29, due Friday).
+  - A held place moves back like a swap: the planned finish moves with it,
+    and the pause never counts as behind.
+  - **In the kitchen**, while the course is held: "Due to the Holy Time, your
+    regular course is paused. Feel free to select one of our unleavened
+    recipes to cook as a family!" Through the unleavened days with nothing
+    held: "Happy Unleavened Bread! This week's lessons are all unleavened, so
+    cook on as usual." Both are the owner's words (plan §6.20).
+  - **The parent's course card** says "Paused for Unleavened Bread until
+    Thursday, April 29".
+  - Ruth's line before the dates question is the owner's wording above.
+- **Not built yet:**
+  - The notice's **Show me some** button. Its filter's label and the way
+    back to every recipe are drafted for the owner first (plan §6.20).
+  - A course lesson already **shopped for** stays on the queue while it's
+    held. Keeping leavened recipes from being due in the feast is the next
+    part.
+  - While a Level course is held, its card says how many are cooked instead
+    of "Week 5 of 36".
+- Screenshots sent: the kitchen notice in both kitchen themes, the happy
+  banner, the paused course card, and Ruth's new line, in light and dark.
+- Tests: 420.

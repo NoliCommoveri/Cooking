@@ -4,7 +4,7 @@ A cooking course app for kids: each lesson pairs one skill with one real dish,
 then runs the cook with checklists, step-by-step cook mode, and timers.
 Multi-family, on Cloudflare, at `cleanplate.immotus.app`. Working name: **Clean Plate Recipes**.
 
-**Latest build log entry:** [270. 2026-10-28 — No calendar description](docs/build-log.md#270-2026-10-28--no-calendar-description)
+**Latest build log entry:** [271. 2026-10-28 — Unleavened Bread, part 2: the course pause](docs/build-log.md#271-2026-10-28--unleavened-bread-part-2-the-course-pause)
 
 ## Current features
 
@@ -74,7 +74,7 @@ The plan is in `cooking-class-app-PLAN.md`. Setup steps, all in a browser, are i
 - **Cook this instead** (release 1): the kitchen's week card and the parent's course card show both dishes; a learner or parent swaps the week for the whole course, with Undo (not on the Sabbath); after a shopping list, the preview for the new dish with the old list's items preselected.
 - **Step pictures** (release 1 for the setting): a lesson step can have a picture, shown under the step or behind Show me; each learner on a Level course is set to the Level's way (Level 2 under each step, Level 3 and 4 behind Show me) or the parent's pick.
 - **Level versions** (release 1): a lesson can have a version written for each Level; that Level's course always cooks it (or the lesson itself until it's written), never a taste pick. The linter warns when a Level recipe breaks its Level's writing standard.
-- **Unleavened Bread dates** (release 2, being built; `src/worker/unleavened.js`, `content/calendars.json`): each family's calendar (the Hebrew lunisolar calendar so far), its first day of the feast, and when it stops leavened recipes. Asked in Getting started after diet, in Family settings, and by Chef Ruth each January; a queue note asks until it's confirmed. A fall start answers for the coming spring. Swap goes unleavened-only on the family's own weeks.
+- **Unleavened Bread dates** (release 2, being built; `src/worker/unleavened.js`, `content/calendars.json`): each family's calendar (the Hebrew lunisolar calendar so far), its first day of the feast, and when it stops leavened recipes. Asked in Getting started after diet, in Family settings, and by Chef Ruth each January; a queue note asks until it's confirmed. A fall start answers for the coming spring. Swap goes unleavened-only on the family's own weeks. Through those weeks a course runs in order until its next leavened lesson and holds there until the day after the feast, with a notice in the kitchen and "Paused for Unleavened Bread until…" on the course card.
 - **Level 4's features** (release 1): the owner's note for parents when Level 4 is picked (setup, Chef Ruth, the syllabus); adult-style safety banners when everyone on a cook is an adult or on Level 4; "Have an adult at home" on its deep frying and grilling weeks.
 - **Write my recipe** (release 1): on Level 4's mastery weeks a learner writes its own dish, with every hard-rule check, and it becomes the week's recipe (with Undo); on the capstone weeks, the recipes for its menu.
 - **The Level 4 portfolio** (release 1): writing boxes on the capstone's pages (menu, budget, guest list, prep timeline, reflection essay), kept per learner and printed after the transcript.
