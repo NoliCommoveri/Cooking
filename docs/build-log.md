@@ -7189,3 +7189,41 @@ the way back "← All recipes".
 - Screenshots sent: the notice and the filtered list, in both kitchen
   themes, light and dark.
 - Tests: 423.
+
+## 274. 2026-10-28 — Unleavened Bread, part 5: leavened lessons wait for after the feast
+
+Owner, 2026-10-28, on how these messages are worded: families don't want to
+cook leaven on these days, so the wording isn't "we aren't letting you do
+this"; it's the app helping them plan and making it hard to do by accident.
+The owner then picked from Claude's drafts in that spirit.
+
+- **Before:** the date message (272) was Claude's draft, "… can't be planned
+  during your unleavened days …", shown red like a form mistake. A leavened
+  lesson started and played as usual on the unleavened days.
+- **Now (release 2, preview only):**
+  - **The date message** is the owner's pick: "Shakshuka has leaven, and
+    April 23 is during Unleavened Bread (April 22 to April 28). We check
+    dates so leaven doesn't slip onto your feast days. Pick April 29 or
+    later." (and "… that week is during Unleavened Bread … Pick an
+    unleavened recipe for that week." for a meal in another's place). It
+    shows as a calm note in forms and pop-up messages, not in red: `form()`
+    and `showToast()` style an error with code `unleavened` that way.
+  - **A leavened lesson can be read, not started, on the unleavened days.**
+    `GET /api/profiles/:id/queue` says when today is one (`feast_today`,
+    with the day after the last day), on a course or not. The player's
+    lesson card then shows, where Start is: "Saving this one for after
+    Unleavened Bread: it has leaven. Cook it from April 29. Read it any
+    time." (the owner's pick), with Show me some and a fold-out **Read the
+    recipe** listing its ingredients and steps. A cook already under way
+    waits too. Leavened: a library lesson without the Unleavened badge, or a
+    family or shared recipe that isn't unleavened. "I want to make this" and
+    Cook this still work: they queue it with no date.
+  - The early-lesson note's lock icon gets the same size as the "on your
+    list" line's icon; the new note shares that rule.
+- **Not built yet:** a finished cook isn't refused by the server on a feast
+  day (cooks upload after the fact, so refusing one would lose it; the
+  player stops it from starting instead).
+- Screenshots sent: the calm note in Add a lesson (light and dark), and
+  Shakshuka's card with Read the recipe open, in both kitchen themes, light
+  and dark.
+- Tests: 424.

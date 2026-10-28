@@ -1398,17 +1398,22 @@ export function register(on) {
     }
     // The Unleavened Bread pause (§6.20, its release): the course holds at a
     // leavened lesson, or the unleavened days run with nothing held.
-    let feast = null;
-    if (mine && fam.release >= UNLEAVENED_RELEASE) {
-      const tw = mine.sched.this_week;
-      if (tw.held) feast = { paused: true, until: tw.held_until };
-      else if (unleavenedOn(day, await datesFor(env, fam.id))) feast = { paused: false };
+    let feast = null, feastToday = null;
+    if (fam.release >= UNLEAVENED_RELEASE) {
+      const feastDay = unleavenedOn(day, await datesFor(env, fam.id));
+      const tw = mine?.sched.this_week;
+      if (tw?.held) feast = { paused: true, until: tw.held_until };
+      else if (mine && feastDay) feast = { paused: false };
+      // Today is one of the unleavened days, on a course or not: a leavened
+      // lesson can be read, not started, until the day after (§6.20).
+      if (feastDay) feastToday = { until: addDays(feastDay.last_day, 1) };
     }
     return {
       mode: fam.mode,
       versions,
       leave_out: leaveOut,
       unleavened: feast,
+      feast_today: feastToday,
       // A profile on a Level course: its week, parts, and mastery recipes (12c).
       // Its progress view (12e) comes with it.
       level: mine?.lessons.level ? { ...levelFor(mine, pid, day), progress: await levelProgress(env, s.family_id, pid, tzOf(req)) } : null,

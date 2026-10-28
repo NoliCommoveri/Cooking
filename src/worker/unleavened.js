@@ -73,17 +73,21 @@ const words = (day) => new Date(`${day}T00:00:00Z`).toLocaleDateString('en-US', 
 // owner, 2026-10-27: "Leavened recipes cannot be added to be due during the
 // feast, period."). It can be planned for after them. date: a planned day;
 // week: a week's Sunday (a meal that takes another's place in that week).
-// title: the lesson's, looked up when not given. There is no override. The wording is Claude's draft, for the owner.
+// title: the lesson's, looked up when not given. There is no override. The
+// wording is the owner's pick (2026-10-28): it says why the app checks, as
+// help planning, not as a refusal.
 export async function feastGuard(env, fam, lid, title, { date = null, week = null } = {}) {
   if (fam.release < UNLEAVENED_RELEASE || (!date && !week)) return;
   const dates = await datesFor(env, fam.id);
-  const d = (date && unleavenedOn(date, dates)) || (week && unleavenedRange(week, dates));
+  const onDay = date && unleavenedOn(date, dates);
+  const d = onDay || (week && unleavenedRange(week, dates));
   if (!d || !(await leavened(env, fam.id, lid))) return;
   title ??= await titleOf(env, fam.id, lid);
   const span = `${words(d.unleavened_from)} to ${words(d.last_day)}`;
-  fail(409, 'unleavened', date
-    ? `${title} has leaven, so it can't be planned during your unleavened days (${span}). Pick ${words(plusDays(d.last_day, 1))} or later.`
-    : `${title} has leaven, so it can't take a meal's place in a week that touches your unleavened days (${span}). Pick an unleavened recipe for that week.`);
+  const why = "We check dates so leaven doesn't slip onto your feast days.";
+  fail(409, 'unleavened', onDay
+    ? `${title} has leaven, and ${words(date)} is during Unleavened Bread (${span}). ${why} Pick ${words(plusDays(d.last_day, 1))} or later.`
+    : `${title} has leaven, and that week is during Unleavened Bread (${span}). ${why} Pick an unleavened recipe for that week.`);
 }
 
 async function onRelease(env, s) {

@@ -157,7 +157,7 @@ test('no leavened recipe can be planned on the unleavened days, however it\'s ad
   // Add a lesson: shakshuka (its pita is leaven) can't be on the 23rd; bulgogi can.
   const refused = await add('shakshuka', '2027-04-23');
   assert.equal(refused.status, 409);
-  assert.match(refused.body.message, /April 22 to April 28.*April 29 or later/);
+  assert.match(refused.body.message, /April 23 is during Unleavened Bread \(April 22 to April 28\)\. We check dates so leaven doesn.t slip onto your feast days\. Pick April 29 or later\./);
   assert.equal((await add('shakshuka', '2027-04-29')).status, 200, 'the day after the last day');
   assert.equal((await add('shakshuka', null)).status, 200, 'with no date');
   assert.equal((await add('beef-bulgogi', '2027-04-23')).status, 200, 'an unleavened lesson');
@@ -216,4 +216,18 @@ test('before release 2, a leavened lesson can be planned on any day', async (t) 
   t.after(() => mock.timers.reset());
   const { a, ava } = await setup({ preview: false });
   assert.equal((await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava], planned_date: '2027-04-23' })).status, 200);
+});
+
+test('the kitchen knows when today is an unleavened day, on a course or not, and when it ends', async (t) => {
+  on('2027-04-23');
+  t.after(() => mock.timers.reset());
+  const { a, ava } = await setup();
+  assert.deepEqual((await a.get(`/api/profiles/${ava}/queue?tz=0`)).body.feast_today, { until: '2027-04-29' });
+  on('2027-04-29');
+  await a.post('/api/pin/unlock', { pin: '1234' });
+  assert.equal((await a.get(`/api/profiles/${ava}/queue?tz=0`)).body.feast_today, null, 'the day after the last day');
+
+  const { a: b, ava: bea } = await setup({ preview: false });
+  on('2027-04-23');
+  assert.equal((await b.get(`/api/profiles/${bea}/queue?tz=0`)).body.feast_today, null, 'not before release 2');
 });

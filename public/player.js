@@ -141,7 +141,10 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // and no lesson numbers show, as Cook Around the World's don't fit the course.
 // pictures: how a step's picture shows (14e): 'shown' under the step (a
 // Level 2 course, or a parent's pick), or 'button', behind Show me.
-export async function openLesson(mount, { profile, family, lessonId, variation = null, leaveOut = [], lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, level = null, pictures = 'button', ask = null, seed = null, onDone = null, mastery = false, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
+// resting: { until, show } for a leavened lesson on the family's unleavened
+// days (§6.20): until, the day it can be cooked again, in words; show(),
+// Show me some. It can be read, not started, a cook under way included.
+export async function openLesson(mount, { profile, family, lessonId, variation = null, leaveOut = [], lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, level = null, pictures = 'button', ask = null, seed = null, resting = null, onDone = null, mastery = false, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
   const [published, B] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
   const kept = readState(profile.id, B.id);
   const L = lessonVersion(B, kept?.cookId ? kept.variation ?? null : variation);
@@ -322,6 +325,18 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
   const gateNote = () => (gated()
     ? `<p class="${T.note} earlynote" role="note">${ic('i-lock')}<b>${ask.early ? 'This one is early.' : "This one isn't on your path right now."}</b> ${ask.early ? "It's later on your path." : ''} An adult needs to OK it before you start.</p>`
     : '');
+  // A leavened lesson on the unleavened days (§6.20; owner's wording,
+  // 2026-10-28): set aside so it isn't cooked by accident, and readable here.
+  const restView = () => {
+    const sc = scaled();
+    return `<p class="${T.note} earlynote restnote" role="note">${ic('i-unleavened')}<b>Saving this one for after Unleavened Bread:</b> it has leaven. Cook it from ${esc(resting.until)}. Read it any time.</p>
+      ${resting.show ? `<button type="button" class="${quest ? 'q-btn' : 'p-btn'}" data-act="showme">Show me some</button>` : ''}
+      <details class="readrecipe"><summary>Read the recipe</summary>
+        <h3>Ingredients <small>for ${S.servings}</small></h3><ul>${ingredientsNow().map((i) => `<li>${esc(`${i.line}${i.prep ? `, ${i.prep}` : ''}${i.optional ? ' (optional)' : ''}`)}</li>`).join('')}</ul>
+        <h3>Steps</h3><ol>${sc.steps.map((x) => `<li>${esc(x.text)}</li>`).join('')}</ol></details>`;
+  };
+  const startBtn = (cls, first) => (resting ? restView()
+    : `${gateNote()}<button type="button" class="${cls}" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask an adult to start' : !S.started ? first : 'Keep going'}</button>`);
   function cardView() {
     const cu = R.cuisines[L.cuisine]?.name ?? L.cuisine;
     const sc = scaled();
@@ -350,12 +365,12 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
       ? `<article class="q-panel q-card"><p class="q-kick">${L.recipe ? esc(L.kicker ?? 'Family recipe') : levelKick ? esc(levelKick) : R.seasonal?.includes(L.unit) ? esc(R.units[L.unit]) : `Path ${L.unit}`}${num(L.id) ? ` · Quest ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}` : ''}</p><div class="q-win"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="230" height="230"></div>
           <h2 class="q-title">${esc(L.title)}</h2>${versionOf('q-skill')}<p class="q-skill"><b>${esc(L.skill)}</b></p>
           <dl class="q-stats"><div><dt>Time</dt><dd>${L.totalMinutes} min</dd></div><div><dt>From</dt><dd>${esc(cu)}</dd></div><div><dt>Steps</dt><dd>${L.steps.length}</dd></div></dl>${picker}${who}${swaps}
-          ${gateNote()}<button type="button" class="q-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask an adult to start' : !S.started ? 'Start quest' : 'Keep going'}</button></article>`
+          ${startBtn('q-btn', 'Start quest')}</article>`
       : `<article class="p-card p-main" style="padding:26px 20px 18px;display:grid;gap:8px"><i class="tape t1"></i><i class="tape t2"></i><div class="p-photo"><img src="/img/${esc(L.image.replace(/\.png$/, '.webp'))}" alt="" width="250" height="250"></div>
           ${levelKick && !L.recipe ? `<p class="p-lessonno">${esc(levelKick)}</p>` : ''}${num(L.id) ? `<p class="p-lessonno">Lesson ${num(L.id)}${total && !seasonal(L.id) ? ` of ${total}` : ''}</p>` : ''}<h2 class="p-title">${esc(L.title)}</h2>${versionOf('p-skill')}<p class="p-skill">${esc(L.skill)}</p>
           <div class="p-meta"><span>${L.totalMinutes} min</span><span>${esc(cu)}</span><span>${L.steps.length} steps</span></div>${picker}${who}${swaps}
-          ${gateNote()}<button type="button" class="p-btn" data-act="${gated() ? 'approve' : 'start'}">${gated() ? 'Ask an adult to start' : !S.started ? "Let's cook" : 'Keep going'}</button></article>`;
-    const restart = S.started ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
+          ${startBtn('p-btn', "Let's cook")}</article>`;
+    const restart = S.started && !resting ? `<button type="button" class="${T.back}" data-act="restart">Start over</button>` : '';
     return `${top}${askBox()}${fixNotes()}<div class="${quest ? 'q-nav' : 'p-nav'}" style="margin-top:12px">${restart}${fixBtn(null)}</div>`;
   }
 
@@ -681,7 +696,9 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
           ask.status = st;
           S.stage = learnCards().length ? 'learn' : 'prep'; begin(); save(); sync(); draw();
         }, () => { b.disabled = false; });
-      case 'start': S.stage = S.started ? S.last || 'learn' : learnCards().length ? 'learn' : 'prep'; begin(); break;
+      case 'showme': return resting?.show?.();
+      case 'start': if (resting) return;
+        S.stage = S.started ? S.last || 'learn' : learnCards().length ? 'learn' : 'prep'; begin(); break;
       case 'restart': S = fresh(); break;
       case 'ask':
         b.disabled = true;
