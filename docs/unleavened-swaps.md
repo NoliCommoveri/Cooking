@@ -52,10 +52,12 @@ The steps still work with the swap, the way diet swaps work today.
 - Antipasto platter (L4): matzah in the basket
 - Ratatouille: matzah for the optional baguette, or left out
 
-**Matzah for sandwich bread**
+**Matzah or soft unleavened bread for sandwich bread** (owner, 2026-10-28).
+Soft unleavened bread is the Appointed Times lesson of that name (U3), COGWA's
+recipe baked in a 9-by-13 pan and cut into squares.
 - Tuna salad sandwiches
 - Egg salad sandwiches (L2)
-- Caprese sandwiches (L2): matzah for the ciabatta
+- Caprese sandwiches (L2): for the ciabatta
 
 **Matzah meal for panko**
 - Oven-baked chicken tenders (L3)

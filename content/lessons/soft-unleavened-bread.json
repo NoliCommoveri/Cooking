@@ -1,0 +1,98 @@
+{
+  "id": "soft-unleavened-bread",
+  "version": 1,
+  "track": "core",
+  "unit": 8,
+  "about": "Soft squares of bread made with no yeast or baking powder, baked in one pan and cut for sandwiches during the Feast of Unleavened Bread.",
+  "main": ["flour", "eggs", "milk"],
+  "method": "oven",
+  "tags": {
+    "protein": "none",
+    "flavors": ["mild-buttery"],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+  },
+  "title": "Soft unleavened bread",
+  "image": "dishes/unleavened-flatbread.png",
+  "cuisine": "american",
+  "skill": "A batter bread with no leaven, beaten hard and baked hot",
+  "skills": ["batters", "flatbreads"],
+  "prereqs": [],
+  "servings": 6,
+  "totalMinutes": 50,
+  "scaling": {
+    "mode": "fixed",
+    "multipliers": [1, 2],
+    "notes": {
+      "1": "Makes one 9-by-13-inch pan, cut into 12 squares: enough for 6 sandwiches.",
+      "2": "Makes two pans, 24 squares. Bake them side by side on the middle rack."
+    }
+  },
+  "learn": {
+    "move": {
+      "title": "Soft bread with no leaven",
+      "body": "Flour, eggs, milk, oil, and salt, beaten hard and baked in a very hot oven. Nothing in it is leaven. The eggs set as it bakes and the steam from the milk lifts it a little, so it comes out soft enough to cut and fill."
+    },
+    "callback": {
+      "lesson": "unleavened-flatbread",
+      "body": "The unleavened flatbread was rolled thin and cooked in a dry pan, so it came out crisp. This bread keeps eggs and milk in the batter and bakes in a hot oven, so it comes out soft."
+    },
+    "why": [
+      { "id": "no-leaven", "title": "Why there's no yeast", "body": "During the Feast of Unleavened Bread, no leaven is eaten for seven days (Leviticus 23:6). This bread has no yeast, no baking powder, and no baking soda. It still puffs a little: the eggs hold it together and the water in the milk turns to steam in the hot oven." },
+      { "id": "beat-hard", "title": "Why beat it hard", "body": "Beating the batter for a few minutes works the flour so the bread holds together when you cut it and pile a filling on. It also beats in a little air." },
+      { "id": "hot-oven", "title": "A very hot oven", "body": "At 450°F the outside sets and browns fast, and the water in the batter turns to steam all at once. That's what puffs the bread and keeps the inside soft." },
+      { "id": "grease", "title": "Grease every corner", "body": "Egg batter sticks to a bare pan. A thin coat of oil on the bottom and sides lets the squares lift out in one piece." }
+    ],
+    "wrong": [
+      { "sign": "A big bubble puffs up in the oven", "fix": "With oven mitts, pull the rack out and poke the bubble with a fork. It settles back down." },
+      { "sign": "The middle is wet when you test it", "fix": "Bake it 3 more minutes and test again." },
+      { "sign": "The squares stick to the pan", "fix": "Run a table knife around the edges and under each square. Grease the pan more next time." },
+      { "sign": "The bread is dry and hard", "fix": "It baked too long. Next time, start checking a few minutes early." }
+    ],
+    "quiz": [
+      { "q": "With no yeast or baking powder, what lifts this bread a little?", "choices": ["Eggs and steam from the milk", "Sugar", "Salt"], "answer": 0, "explain": "The eggs hold it together and the water in the milk turns to steam in the hot oven. Nothing in it is leaven." }
+    ]
+  },
+  "ingredients": [
+    { "ingredient": "flour-ap", "amount": 3, "unit": "cup" },
+    { "ingredient": "salt", "amount": 1, "unit": "tsp" },
+    { "ingredient": "egg", "amount": 3, "unit": "count" },
+    { "ingredient": "vegetable-oil", "amount": 2, "unit": "tbsp", "prep": "for the batter" },
+    { "ingredient": "milk-whole", "amount": 1.5, "unit": "cup" },
+    { "ingredient": "vegetable-oil", "amount": null, "text": "a little more, for the pan" },
+    { "ingredient": "sesame-seeds", "amount": null, "text": "for the top, if you like", "optional": true }
+  ],
+  "equipment": [
+    "baking-dish",
+    "pastry-brush",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "whisk",
+    "silicone-spatula",
+    "oven-mitts",
+    "table-knife",
+    "cooling-rack",
+    "cutting-board",
+    "chef-knife"
+  ],
+  "substitutions": [{ "for": "milk-whole", "use": "water", "reason": "dairy" }],
+  "steps": [
+    { "id": "oven", "text": "Put a rack in the middle of the oven. Heat the oven to 450°F.", "safety": "adult-nearby", "hazard": "Hot oven", "why": "hot-oven" },
+    { "id": "grease", "text": "Brush a thin coat of oil over the bottom and sides of the baking dish, into every corner.", "safety": "solo", "why": "grease" },
+    { "id": "dry", "text": "In the large bowl, whisk the flour and salt together.", "safety": "solo" },
+    { "id": "wet", "text": "In the medium bowl, whisk the eggs and the 2 tablespoons of oil together.", "safety": "solo", "handles": ["egg"] },
+    { "id": "wash-egg", "type": "wash", "text": "Wash your hands with soap, and throw away the eggshells.", "safety": "solo" },
+    { "id": "combine", "text": "Pour the egg mix into the flour, then pour in the milk. Stir until you can't see any dry flour.", "safety": "solo", "tip": "Don't taste the raw batter. It has raw egg and raw flour." },
+    { "id": "beat", "text": "Beat the batter hard with the whisk, fast and steady, scraping the sides now and then.", "safety": "solo", "timerSeconds": 150, "timerLabel": "Beat", "why": "beat-hard", "look": "Smooth and thick, with no lumps.", "tip": "Your arm will get tired. Take turns with someone if you need to." },
+    { "id": "pour", "text": "Pour the batter into the baking dish and spread it to the corners with the spatula. Sprinkle sesame seeds over the top, if you're using them.", "safety": "solo" },
+    { "id": "bake", "text": "With oven mitts, set the dish on the middle rack. Bake until the top is golden brown.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 1200, "timerLabel": "Bake", "why": "no-leaven", "look": "Golden brown on top, puffed a little, and pulling away from the sides." },
+    { "id": "check", "type": "doneness", "text": "With oven mitts, pull the rack out partway. Push the table knife into the center and pull it out. If it comes out clean, it's done. If there's wet batter, bake 3 more minutes and test again.", "safety": "adult-nearby", "hazard": "Hot oven and dish", "target": { "look": "Golden brown, and a knife from the center comes out clean" } },
+    { "id": "cool", "text": "Turn off the oven. With oven mitts, set the dish on the cooling rack and let it cool.", "safety": "adult-nearby", "hazard": "Hot dish", "timerSeconds": 600, "timerLabel": "Cool" },
+    { "id": "cut", "text": "Run the table knife around the edges to loosen it. Lift it out in one piece onto the cutting board and cut it into 12 squares with the chef's knife. Use two squares for each sandwich, with the filling between them.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Keep leftover squares covered in the fridge for a few days." }
+  ]
+}

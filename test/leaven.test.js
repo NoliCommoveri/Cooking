@@ -41,6 +41,7 @@ test("fermented foods that aren't a raising agent aren't leaven (owner, 2026-10-
 test('Unleavened: every ingredient from the registry and none of it leaven', () => {
   assert.equal(unleavened(lesson('unleavened-flatbread'), REG, LV), true);
   assert.equal(unleavened(lesson('cottage-cheese-crescents'), REG, LV), true);
+  assert.equal(unleavened(lesson('soft-unleavened-bread'), REG, LV), true, 'eggs and steam, nothing leaven');
   assert.equal(unleavened(lesson('chicken-fajitas'), REG, LV), false, 'flour tortillas');
   assert.equal(unleavened(recipe([{ ingredient: 'flour-ap' }, { name: 'Matzah meal' }]), REG, LV), false, 'a typed-in ingredient waits on a review');
   assert.equal(LIBRARY.lessons.find((L) => L.id === 'unleavened-flatbread').unleavened, true);
@@ -48,7 +49,7 @@ test('Unleavened: every ingredient from the registry and none of it leaven', () 
 });
 
 test('Appointed Times lessons are U1, U2, outside the numbered course', () => {
-  assert.deepEqual(seasonalLabels(CONTENT.units), { 'unleavened-flatbread': 'U1', 'cottage-cheese-crescents': 'U2' });
+  assert.deepEqual(seasonalLabels(CONTENT.units), { 'unleavened-flatbread': 'U1', 'cottage-cheese-crescents': 'U2', 'soft-unleavened-bread': 'U3' });
   assert.equal(LIBRARY.course.some((d) => d.unit === 8), false);
 });
 

@@ -7253,3 +7253,38 @@ and that the fixed window waits for the launch.
   the launch change removes.
 - Screenshots sent: the note on Level 3's setup, light and dark.
 - Tests: 425.
+
+## 276. 2026-10-28 — Soft unleavened bread, an Appointed Times lesson
+
+Owner, 2026-10-28: "Find an unleavened sandwich bread recipe", then pasted
+COGWA's soft unleavened bread: "Use the cogwa version … Write it as
+appointed times. Then the swaps say matza or soft unleavened bread." The
+owner picked a 9-by-13 pan.
+
+- **Before:** the review doc's sandwich swaps (tuna salad, egg salad, and
+  caprese sandwiches) used matzah, and the Appointed Times unit had only the
+  crisp flatbread for bread.
+- **Now:**
+  - **Soft unleavened bread** (`content/lessons/soft-unleavened-bread.json`,
+    U3): COGWA's recipe, 3 cups flour, 1 teaspoon salt, 3 eggs, 2
+    tablespoons oil, 1½ cups milk, beaten hard 2 to 3 minutes and baked at
+    450°F about 20 minutes, in a greased 9-by-13-inch dish, cut into 12
+    squares for 6 sandwiches. Water for the milk for a dairy-free family;
+    sesame seeds on top if you like. Its learn cards say why it's
+    unleavened (eggs and steam, nothing leaven), why it's beaten hard, and
+    why the oven is so hot, with a callback to the flatbread. Claude filled
+    in what the recipe doesn't say: the pan's greasing, the doneness test (a
+    knife from the center comes out clean), cooling, cutting, and the safety
+    levels, the way the skillet cornbread does them.
+  - It passes the leaven check and has the Unleavened badge; a test keeps
+    it so. Its steps don't use the word "bread", which the check reads as
+    leaven (the flatbread's steps avoid it too).
+  - **Hidden until the owner test-cooks it** (`content/hidden.json`):
+    families don't see it yet. Unhide it from the manager section.
+  - It uses the unleavened flatbread's picture until it has its own.
+  - `docs/unleavened-swaps.md`: the sandwich swaps are now matzah or soft
+    unleavened bread. The plan (§6.20) records the owner's answer.
+- Screenshots sent (from a copy with it unhidden, on April 23, 2027): its
+  card in both kitchen themes, light and dark, which can be started during
+  the feast, and its first learn card.
+- Tests: 425.
