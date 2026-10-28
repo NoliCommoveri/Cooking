@@ -7227,3 +7227,29 @@ The owner then picked from Claude's drafts in that spirit.
   Shakshuka's card with Read the recipe open, in both kitchen themes, light
   and dark.
 - Tests: 424.
+
+## 275. 2026-10-28 — Unleavened Bread, part 6: the Level course note; how the app words its rules
+
+Owner, 2026-10-28: "yes add it to CLAUDE.md. do the warning label and
+removing the fixed window." Then, from Claude's drafts, the note's wording,
+and that the fixed window waits for the launch.
+
+- **CLAUDE.md** has a new section, **How the app words its rules**: wording
+  for anything the app checks or holds back is the app helping families
+  plan, not refusing them, shown as a calm note.
+- **Level course setup** (release 2, preview only), for every Level: under
+  the planned finish, a calm note names the first leavened recipe week that
+  would land on the family's unleavened days, walking the weeks from the
+  start date as the pause would (on pace). The owner's wording: "Heads up:
+  Week 15's recipe, Challah, has leaven and would come up during Unleavened
+  Bread (April 22 to April 28). The course will pause there and pick up
+  again April 29, so nothing leavened lands on your feast days." It shows
+  only for a family with dates for the year (`GET /api/unleavened`).
+  A test walks a Level 3 course from January 10, cooking each week on pace,
+  and checks the server pauses at Challah with nothing behind.
+- **The fixed window stays until release 2 launches.** Taking it out now
+  would leave every family without release 2 with no unleavened-only swaps,
+  or move them to the calendar's dates early. The plan (§6.20) lists what
+  the launch change removes.
+- Screenshots sent: the note on Level 3's setup, light and dark.
+- Tests: 425.

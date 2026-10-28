@@ -2194,7 +2194,7 @@ const courseList = parentOnly(async () => {
 });
 
 const courseEditor = parentOnly(async (cid) => {
-  const [data, { profiles }, outline, lib] = await Promise.all([api('GET', '/api/courses'), api('GET', '/api/profiles'), fetch('/content/course.json').then((r) => r.json()), api('GET', '/api/library')]);
+  const [data, { profiles }, outline, lib, feast] = await Promise.all([api('GET', '/api/courses'), api('GET', '/api/profiles'), fetch('/content/course.json').then((r) => r.json()), api('GET', '/api/library'), feastState().catch(() => null)]);
   const existing = cid === 'new' ? null : data.courses.find((c) => c.id === cid);
   if (cid !== 'new' && !existing) return go('#/parent/courses');
   const dish = Object.fromEntries(outline.dishes.map((d) => [d.id, d]));
@@ -2226,6 +2226,28 @@ const courseEditor = parentOnly(async (cid) => {
   const listBox = el('div', { class: 'stack plan' });
   const levelBox = el('div', { class: 'stack plan' });
   const finishBox = el('p', { class: 'mut small', style: 'margin:0' });
+  // A Level course whose leavened recipe week would land on the family's
+  // unleavened days says so (§6.20; owner's wording, 2026-10-28). The course
+  // pauses there, so this walks the weeks as the pause would.
+  const feastBox = el('p', { class: 'note calmnote', role: 'status', hidden: true });
+  const drawFeast = () => {
+    const d = feast?.dates, V = levelOf();
+    feastBox.hidden = true;
+    if (!d || !V) return;
+    const leavened = (rid) => lib.lessons.some((x) => x.id === rid && !x.unleavened);
+    const touches = (w) => w <= d.last_day && addDays(w, 5) >= d.unleavened_from;
+    let c = weekOf(startIn.value || localToday()), held = null;
+    for (const w of levelWeeks().filter((x) => x.id && !x.removed && !x.blocked && written.has(x.id) && !hidden.has(x.id))) {
+      if (c > d.last_day) break;
+      if (touches(c) && leavened(w.id)) { held = w; break; }
+      c = addDays(c, 7);
+    }
+    if (!held) return;
+    const day = (x) => fmtDay(x, { month: 'long', day: 'numeric' });
+    const title = lib.lessons.find((x) => x.id === held.id)?.title ?? V.titles?.[held.id] ?? 'its recipe';
+    feastBox.textContent = `Heads up: Week ${held.week}'s recipe, ${title}, has leaven and would come up during Unleavened Bread (${day(d.unleavened_from)} to ${day(d.last_day)}). The course will pause there and pick up again ${day(addDays(d.last_day, 1))}, so nothing leavened lands on your feast days.`;
+    feastBox.hidden = false;
+  };
   // Which program? (§12.4): Cook Around the World, or a Level with the Levels'
   // release. It's picked when the course is set up and stays.
   const levels = data.levels ?? [];
@@ -2288,8 +2310,10 @@ const courseEditor = parentOnly(async (cid) => {
         : 'None of the weeks\' recipes can be cooked yet.',
       stuck ? ` ${stuck} week${stuck === 1 ? " can't" : "s can't"} be cooked with your settings: see below.` : '');
       drawHours();
+      drawFeast();
       return;
     }
+    feastBox.hidden = true;
     const n = usable(), per = Math.max(1, Number(perIn.value) || 1);
     const kept = plan.filter((x) => !x.removed).length;
     finishBox.replaceChildren(n
@@ -2550,7 +2574,7 @@ const courseEditor = parentOnly(async (cid) => {
       el('div', { class: 'grid2' },
         el('label', { class: 'f' }, 'Start date', el('span', { class: 'hint' }, 'Weeks run Sunday to Friday'), startIn),
         perBox, levelPace),
-      finishBox,
+      finishBox, feastBox,
       startsSet, picsSet, partsSet, planSet, levelSet,
     ], existing ? 'Save course' : 'Start the course', async (v) => {
       // A Level course's plan is its weeks, one a week.

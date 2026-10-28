@@ -6,6 +6,10 @@ import { setPreview } from '../src/worker/release.js';
 import { unleavenedState } from '../src/worker/unleavened.js';
 import { familyDates, yearFor, unleavenedWeek, calendarProblems, lastDay } from '../src/content/calendars.js';
 import { CONTENT } from '../src/worker/content-data.js';
+import { LIBRARY } from '../src/worker/library-data.js';
+import { servingOptions } from '../src/content/scale.js';
+
+const LIB = LIBRARY.lessons;
 
 const CALS = CONTENT.calendars;
 const HEBREW = 'hebrew-lunisolar';
@@ -230,4 +234,30 @@ test('the kitchen knows when today is an unleavened day, on a course or not, and
   const { a: b, ava: bea } = await setup({ preview: false });
   on('2027-04-23');
   assert.equal((await b.get(`/api/profiles/${bea}/queue?tz=0`)).body.feast_today, null, 'not before release 2');
+});
+
+test('a Level course pauses at its bread week in the feast, as its setup note says', async (t) => {
+  on('2027-01-05');
+  t.after(() => mock.timers.reset());
+  const { a, ava } = await setup();
+  await a.put('/api/family', { name: 'Carsons', default_servings: 4, diet_filters: [], plan_weeks: true });
+  const made = await a.post('/api/courses', { profile_ids: [ava], start_date: '2027-01-10', per_week: 1, program: 'sp-3', starts: 'familiar' });
+  assert.equal(made.status, 200, JSON.stringify(made.body));
+  const sizes = (lid) => servingOptions(LIB.find((x) => x.id === lid))[0];
+  // On pace: each week's recipe cooked on its Tuesday, January 10 to April 11.
+  for (let n = 0, w = '2027-01-10'; w < '2027-04-18'; n++, w = new Date(Date.parse(w) + 7 * 864e5).toISOString().slice(0, 10)) {
+    const tue = new Date(Date.parse(w) + 2 * 864e5).toISOString().slice(0, 10);
+    on(tue);
+    await a.post('/api/pin/unlock', { pin: '1234' });
+    const due = (await a.get('/api/queue?tz=0')).body.courses[0].this_week.lessons.find((x) => !x.done);
+    if (!due) continue;
+    const r = await a.put(`/api/attempts/${String(n + 1).padStart(16, '0')}`, { lesson_id: due.lesson_id ?? due.id, servings: sizes(due.lesson_id ?? due.id), profile_ids: [ava], started_at: `${tue}T10:00:00Z`, finished_at: `${tue}T11:00:00Z` });
+    assert.equal(r.status, 200, JSON.stringify(r.body));
+  }
+  on('2027-04-19');
+  await a.post('/api/pin/unlock', { pin: '1234' });
+  const card = (await a.get('/api/queue?tz=0')).body.courses[0];
+  assert.equal(card.weeks_behind, 0);
+  assert.equal(card.this_week.held, 'challah', 'Week 15, as the setup note says');
+  assert.equal(card.this_week.held_until, '2027-04-29');
 });
