@@ -130,12 +130,14 @@ function sabbathBanner() {
 }
 // The Unleavened Bread pause (§6.20), in the owner's words (2026-10-27): the
 // course holds at a leavened lesson, or the unleavened days run with nothing held.
-function feastBanner(u) {
+// show: Show me some, on the notice while paused; btn: the kitchen theme's button.
+function feastBanner(u, show, btn) {
   if (!u) return null;
   return el('aside', { class: 'card notice feast', role: 'note' },
     el('p', {}, u.paused
       ? 'Due to the Holy Time, your regular course is paused. Feel free to select one of our unleavened recipes to cook as a family!'
-      : "Happy Unleavened Bread! This week's lessons are all unleavened, so cook on as usual."));
+      : "Happy Unleavened Bread! This week's lessons are all unleavened, so cook on as usual."),
+    u.paused && show ? el('div', { class: 'acts' }, el('button', { type: 'button', class: btn, onclick: show }, 'Show me some')) : null);
 }
 // The next release (plan §8.6): a family the owner turned the preview on for
 // sees it before everyone else, and the parent screens say so.
@@ -639,7 +641,33 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   // User-shared shelf, each folded shut, with a search over names and ingredients.
   const feastShelf = feastShared.filter((r) => r.visible && !r.mine);
   const ours = recipes.filter((r) => r.visible && !r.held);
+  // Show me some (§6.20): More recipes filtered to unleavened ones, until
+  // "← All recipes" (owner's wording, 2026-10-28). The Appointed Times
+  // lessons first, then the other unleavened lessons and recipes this
+  // profile hasn't cooked.
+  const unlvKey = `cpr.unleavened.${p.id}`;
+  const showUnleavened = (on) => {
+    sessionSet(unlvKey, on ? '1' : '');
+    go(`#/kitchen/${p.id}/@more`);
+  };
+  const unleavenedView = () => {
+    const firsts = lib.lessons.filter((L) => seasonalUnit(L.unit) && L.unleavened).map(lessonBtn);
+    const rest = [
+      ...lib.lessons.filter((L) => !seasonalUnit(L.unit) && L.unleavened && !cooks[L.id]).map(lessonBtn),
+      ...ours.filter((r) => r.unleavened && !cooks[r.id]).map((r) => recipeBtn(r)),
+      ...feastShelf.filter((r) => r.unleavened && !cooks[`shared:${r.id}`]).map((r) => recipeBtn({ ...r, id: `shared:${r.id}` }, 'User-shared recipe')),
+    ];
+    return [
+      el('a', { class: 'back', href: `#/kitchen/${p.id}/@more`, onclick: (e) => { e.preventDefault(); showUnleavened(false); } }, quest ? '← All side quests' : '← All recipes'),
+      el('div', { class: `${quest ? 'q-panel' : 'p-card'} k-unleavened` },
+        el('h2', { class: quest ? 'q-title' : 'p-title' }, 'Unleavened recipes'),
+        el('p', { class: quest ? 'q-skill' : 'p-skill' }, "For the Days of Unleavened Bread. Appointed Times first, then ones you haven't cooked yet.")),
+      firsts.length || rest.length ? el('div', { class: 'k-lib' }, firsts, rest)
+        : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, "No unleavened recipes match this family's diet settings yet."),
+    ];
+  };
   const moreView = () => {
+    if (sessionGet(unlvKey)) return unleavenedView();
     const results = el('div');
     const search = el('input', { type: 'search', class: 'k-search', placeholder: quest ? 'Search quests: a dish or an ingredient' : 'Search: a dish or an ingredient', 'aria-label': 'Search recipes', value: sessionGet(`cpr.search.${p.id}`) ?? '' });
     const shelf = (title, items, open) => (items.length ? el('details', { class: 'k-shelf', open }, el('summary', {}, el('span', {}, title), el('small', {}, String(items.length))), el('div', { class: 'k-lib' }, items)) : null);
@@ -678,7 +706,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const section = el('section', { class: 'kitchen k-tabbed', 'data-kt': p.theme },
     me.kid ? null : el('a', { class: 'back', href: '#/' }, '← Lockers'),
     sabbathBanner(),
-    feastBanner(mine.unleavened),
+    feastBanner(mine.unleavened, current === 'more' && sessionGet(unlvKey) ? null : () => showUnleavened(true), quest ? 'q-btn' : 'p-btn'),
     el('div', { class: 'k-head' }, avatars(p.people),
       el('div', { class: 'grow' }, el('h1', {}, quest ? 'Quest board' : 'Recipe box'), el('div', {}, p.name))),
     el('div', { class: 'acts' },

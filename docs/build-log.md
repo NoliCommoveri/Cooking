@@ -7164,3 +7164,28 @@ a review of the PR #59 merge).
 - Screenshots sent: Add a lesson refusing Shakshuka on April 23, light and
   dark.
 - Tests: 423.
+
+## 273. 2026-10-28 — Unleavened Bread, part 4: Show me some
+
+Owner, 2026-10-28: "Yes do the show me some button", then picked the
+filter's wording from Claude's drafts: the heading "Unleavened recipes" and
+the way back "← All recipes".
+
+- **Before:** the kitchen's paused notice told the family to pick an
+  unleavened recipe but had no way to find them.
+- **Now (release 2, preview only):**
+  - The notice has **Show me some** (the kitchen theme's own button). It
+    opens More recipes (Side quests in Kitchen Quest) filtered to unleavened
+    recipes: "Unleavened recipes", with "For the Days of Unleavened Bread.
+    Appointed Times first, then ones you haven't cooked yet." under it.
+  - The order: the Appointed Times lessons marked Unleavened, then the other
+    unleavened lessons, the family's own unleavened recipes, and unleavened
+    User-shared feast recipes this profile hasn't cooked. Each is the
+    kitchen's usual card, so it opens with the usual ask: "I want to make
+    this" for a kid, Cook this for an adult.
+  - **"← All recipes"** ("← All side quests" in Kitchen Quest) goes back to
+    every recipe. The filter is remembered for the tab, per profile, until
+    then. The button is hidden while the list is showing.
+- Screenshots sent: the notice and the filtered list, in both kitchen
+  themes, light and dark.
+- Tests: 423.

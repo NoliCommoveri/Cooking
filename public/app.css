@@ -562,3 +562,6 @@ a.choice.on{border-color:var(--h-acc);box-shadow:inset 0 0 0 1.5px var(--h-acc)}
 .findcard .acts .hbtn{min-height:44px;padding:8px 14px;font-size:15px;width:auto}
 .tokensearch [hidden]{display:none!important}
 .feastnote{border-left:4px solid var(--h-acc)}
+.kitchen .k-unleavened{padding:16px 18px;margin:6px 0 22px}
+.kitchen .k-unleavened h2{margin:0 0 6px}
+.kitchen .k-unleavened p{margin:0}
