@@ -7288,3 +7288,22 @@ owner picked a 9-by-13 pan.
   card in both kitchen themes, light and dark, which can be started during
   the feast, and its first learn card.
 - Tests: 425.
+
+## 277. 2026-10-28 — Soft unleavened bread is shown to families
+
+Owner, 2026-10-28: "no lessons are supposed to be hidden until testcooked".
+
+- **Before:** soft unleavened bread (276) was in `content/hidden.json`
+  until the owner test-cooked it, and the review doc said the batter
+  recipes' swaps would be marked to be test-cooked before families saw
+  them.
+- **Now:** it's out of `hidden.json`, so it's in every family's library:
+  the kitchen's Appointed Times shelf (U3), Show me some, Swap's
+  unleavened picks, the skill tree's Appointed Times path, and a passport
+  page. Like every lesson, it's covered by the parent screens' notice that
+  not every recipe has been test-cooked. The review doc and the plan say
+  no lesson is hidden until it's test-cooked.
+- The skill tree and passport tests count the three Appointed Times lessons.
+- Screenshots sent: the Appointed Times shelf with it, in both kitchen
+  themes, light and dark.
+- Tests: 425.

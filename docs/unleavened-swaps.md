@@ -83,8 +83,9 @@ version written out in full, the way variations are.
 - Mezze spread (L4): matzah for the pita, and the chickpeas boiled without baking soda, simmered longer (owner, 2026-10-27: "the soda isn't really leaven in that case but no one will have the soda in their house so leave it out")
 
 **Baking powder or soda in a batter.** Made with egg whites whipped for lift
-(the owner's rule allows them) or with no raising agent. They'll be denser,
-so each is marked to be test-cooked before families see it.
+(the owner's rule allows them) or with no raising agent. They'll be denser.
+No lesson is hidden until it's test-cooked (owner, 2026-10-28); the parent
+screens' test-cook notice covers them, as it does every lesson.
 - Skillet cornbread: whipped egg whites
 - Pan de elote (L2): whipped egg whites
 - Banana bread (L2): whipped egg whites

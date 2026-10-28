@@ -13798,6 +13798,106 @@ export const LIBRARY = {
    ]
   },
   {
+   "id": "soft-unleavened-bread",
+   "version": 1,
+   "track": "core",
+   "unit": 8,
+   "title": "Soft unleavened bread",
+   "image": "img/dishes/unleavened-flatbread.webp",
+   "cuisine": "american",
+   "skill": "A batter bread with no leaven, beaten hard and baked hot",
+   "servings": 6,
+   "scaling": {
+    "mode": "fixed",
+    "multipliers": [
+     1,
+     2
+    ],
+    "notes": {
+     "1": "Makes one 9-by-13-inch pan, cut into 12 squares: enough for 6 sandwiches.",
+     "2": "Makes two pans, 24 squares. Bake them side by side on the middle rack."
+    }
+   },
+   "totalMinutes": 50,
+   "ingredients": [
+    {
+     "ingredient": "flour-ap"
+    },
+    {
+     "ingredient": "salt"
+    },
+    {
+     "ingredient": "egg"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "milk-whole"
+    },
+    {
+     "ingredient": "vegetable-oil"
+    },
+    {
+     "ingredient": "sesame-seeds",
+     "optional": true
+    }
+   ],
+   "substitutions": [
+    {
+     "for": "milk-whole",
+     "use": "water",
+     "reason": "dairy"
+    }
+   ],
+   "unleavened": true,
+   "feast": true,
+   "protein": "vegetarian",
+   "tags": {
+    "protein": "none",
+    "flavors": [
+     "mild-buttery"
+    ],
+    "heat": "mild",
+    "budget": "$",
+    "familiar": "new-ish",
+    "veggies": "light"
+   },
+   "tasteItems": {
+    "required": [],
+    "optional": [
+     "sesame"
+    ]
+   },
+   "tools": [
+    "baking-dish",
+    "pastry-brush",
+    "mixing-bowl-large",
+    "mixing-bowl-medium",
+    "measuring-cups",
+    "liquid-measuring-cup",
+    "measuring-spoons",
+    "whisk",
+    "silicone-spatula",
+    "oven-mitts",
+    "table-knife",
+    "cooling-rack",
+    "cutting-board",
+    "chef-knife"
+   ],
+   "skills": [
+    "batters",
+    "flatbreads"
+   ],
+   "method": "oven",
+   "about": "Soft squares of bread made with no yeast or baking powder, baked in one pan and cut for sandwiches during the Feast of Unleavened Bread.",
+   "main": [
+    "flour",
+    "eggs",
+    "milk"
+   ]
+  },
+  {
    "id": "alfajores",
    "version": 1,
    "track": "core",
@@ -24860,7 +24960,8 @@ export const LIBRARY = {
  ],
  "seasonalLabels": {
   "unleavened-flatbread": "U1",
-  "cottage-cheese-crescents": "U2"
+  "cottage-cheese-crescents": "U2",
+  "soft-unleavened-bread": "U3"
  },
  "levelLabels": {
   "alfajores": "B14b",
