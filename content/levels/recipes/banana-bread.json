@@ -78,5 +78,88 @@
     { "id": "bake", "text": "Bake until the top is deep golden and cracked.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 3300, "timerLabel": "Bake", "look": "Deep golden, with a crack down the middle.", "tip": "Getting too dark? Lay foil loosely on top." },
     { "id": "check", "text": "With oven mitts, pull out the rack. Push a toothpick into the very center of the loaf.", "safety": "adult-nearby", "type": "doneness", "hazard": "Hot oven and pan", "target": { "look": "A clean toothpick, or a few moist crumbs, from the center" }, "why": "toothpick", "tip": "Wet batter? Bake 5 more minutes and test again." },
     { "id": "cool", "text": "Turn off the oven. Cool the loaf in the pan 10 minutes. Run the butter knife around it and turn it out.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 600, "timerLabel": "Cool in the pan", "tip": "Let it cool more before slicing." }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "Unleavened banana bread",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "none",
+        "flavors": ["sweet-treats"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "ingredients": {
+        "change": { "egg": { "ingredient": "egg", "amount": 2, "unit": "count" } },
+        "drop": ["baking-soda"]
+      },
+      "equipment": { "add": ["mixing-bowl-medium", "whisk", "silicone-spatula"] },
+      "steps": {
+        "change": {
+          "wet": {
+            "id": "wet",
+            "text": "Separate the eggs: crack each one and pass the yolk back and forth between the half shells over the medium bowl, letting the white drip into the bowl. Drop the yolks into the bananas. Then stir in the melted butter, brown sugar, and vanilla.",
+            "safety": "solo",
+            "handles": ["egg"],
+            "look": "Smooth, with no streaks of egg.",
+            "tip": "Not a speck of yolk can get into the whites, or they won't whip. If a yolk breaks, save that egg for breakfast and use another."
+          },
+          "soda": {
+            "id": "soda",
+            "text": "Sprinkle the salt and cinnamon over the top. Stir them in.",
+            "safety": "solo"
+          },
+          "flour": {
+            "id": "flour",
+            "text": "Spoon and level the flour into the bowl. Stir just until no dry flour shows.",
+            "safety": "solo",
+            "why": "just-mixed",
+            "look": "A thick, lumpy batter."
+          }
+        },
+        "add": [
+          { "id": "whip", "text": "Wash and dry the whisk. Whisk the egg whites in the medium bowl hard and fast until they're white, foamy, and hold soft peaks.", "safety": "solo", "timerSeconds": 180, "timerLabel": "Whip whites", "why": "whites", "look": "When you lift the whisk, the foam stands up in a peak that flops over at the tip.", "tip": "Take turns: it's hard work. An electric hand mixer is faster, if you have one." },
+          { "id": "fold-whites", "text": "Scoop the whites onto the batter in the large bowl. Fold them in gently with the spatula: cut down through the middle, sweep along the bottom, and turn the batter over the top. Turn the bowl and repeat until no white streaks are left.", "safety": "solo", "why": "whites", "look": "A light, fluffy batter with no white streaks.", "tip": "Don't taste the raw batter. It has raw egg and raw flour." }
+        ],
+        "order": [
+          "oven",
+          "melt",
+          "mash",
+          "wet",
+          "wash-egg",
+          "soda",
+          "flour",
+          "+0",
+          "+1",
+          "pan",
+          "bake",
+          "check",
+          "cool"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "Mastery: mash, mix, test",
+          "body": "This is the unit's mastery week. You'll make banana bread while an adult watches but doesn't help: mash ripe bananas, mix the batter just until the flour disappears, fold in whipped egg whites to lift it, and decide for yourself when it's done with a toothpick. With no raising agent, it bakes into a denser, moister loaf."
+        },
+        "wrong": [
+          { "sign": "The top is brown but the toothpick is wet", "fix": "Lay foil loosely over the top and bake 5 more minutes. Test again." },
+          { "sign": "The loaf sank in the middle", "fix": "It came out too soon. Test the very center next time." },
+          { "sign": "It's tough and has tunnels", "fix": "It was stirred too much. Stop as soon as the flour is gone." },
+          { "sign": "It stuck to the pan", "fix": "Run the butter knife around the edges before turning it out." },
+          { "sign": "It's flat and heavy", "fix": "The whites weren't whipped long enough, or they were stirred in instead of folded. Next time, whip to soft peaks and fold gently." }
+        ],
+        "why": {
+          "drop": ["soda"],
+          "add": [
+            { "id": "whites", "title": "Whipped whites lift it", "body": "Egg whites whisked hard trap thousands of tiny air bubbles. Folded gently into the batter, the bubbles swell in the hot oven and lift it a little. Stir hard and they pop, so fold, don't stir. It bakes a little denser than with a raising agent, and that's fine." }
+          ],
+          "order": ["ripe", "just-mixed", "+0", "toothpick"]
+        }
+      }
+    }
   ]
 }

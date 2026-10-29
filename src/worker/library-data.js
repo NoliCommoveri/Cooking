@@ -3533,6 +3533,123 @@ export const LIBRARY = {
      ],
      "id": "sp-2",
      "level": "sp-2"
+    },
+    {
+     "title": "Smash burger lettuce wraps + quick pickles",
+     "image": "img/dishes/smash-burgers.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "Cook 3 patties at a time in a 12-inch skillet. For more than 6, keep going in batches of 3, washing the tongs and your hands after each batch of raw beef."
+       }
+      ]
+     },
+     "totalMinutes": 60,
+     "ingredients": [
+      {
+       "ingredient": "cucumber"
+      },
+      {
+       "ingredient": "vinegar-white"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "beef-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "cheese-sliced",
+       "optional": true
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "ketchup",
+       "optional": true
+      },
+      {
+       "ingredient": "mustard-dijon",
+       "optional": true
+      },
+      {
+       "ingredient": "lettuce-green-leaf"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "beef",
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "cucumber",
+       "onions"
+      ],
+      "optional": [
+       "mustard"
+      ]
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "mixing-bowl-medium",
+      "saucepan-medium",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "wooden-spoon",
+      "plate",
+      "parchment",
+      "skillet-12",
+      "spatula",
+      "tongs",
+      "thermometer",
+      "oven-mitts"
+     ],
+     "skills": [
+      "thin-slicing",
+      "quick-pickling",
+      "searing"
+     ],
+     "method": "stove",
+     "about": "Thin beef patties smashed onto a very hot pan for crispy edges, with quick homemade pickles.",
+     "main": [
+      "ground beef",
+      "cucumbers",
+      "buns",
+      "cheese",
+      "onion"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
     }
    ]
   },
@@ -3852,6 +3969,131 @@ export const LIBRARY = {
      ],
      "id": "sp-2",
      "level": "sp-2"
+    },
+    {
+     "title": "Grilled cheese on soft unleavened bread + tomato soup",
+     "image": "img/dishes/grilled-cheese-tomato-soup.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, the soup needs a very big pot, at least 8 quarts. Cook the sandwiches in two skillets side by side to save time."
+       }
+      ]
+     },
+     "totalMinutes": 55,
+     "ingredients": [
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "tomatoes-crushed"
+      },
+      {
+       "ingredient": "broth-vegetable"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "milk-whole",
+       "optional": true
+      },
+      {
+       "ingredient": "soft-unleavened-bread"
+      },
+      {
+       "ingredient": "cheese-sliced"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "basil",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "soft-unleavened-bread",
+       "use": "matzah",
+       "reason": "egg"
+      },
+      {
+       "for": "soft-unleavened-bread",
+       "use": "matzah-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "creamy-cheesy",
+       "rich-tomato"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "garlic",
+       "tomatoes"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "chef-knife",
+      "cutting-board",
+      "can-opener",
+      "pot-large",
+      "wooden-spoon",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "immersion-blender",
+      "ladle",
+      "table-knife",
+      "plate",
+      "skillet-12",
+      "spatula",
+      "bread-knife"
+     ],
+     "skills": [
+      "heat-control",
+      "simmering"
+     ],
+     "method": "stove",
+     "about": "Crispy, golden grilled cheese sandwiches with a smooth homemade tomato soup for dipping.",
+     "main": [
+      "bread",
+      "cheddar cheese",
+      "canned tomatoes",
+      "onion"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
     }
    ]
   },
@@ -3965,6 +4207,116 @@ export const LIBRARY = {
     "eggs",
     "milk",
     "cinnamon"
+   ],
+   "variations": [
+    {
+     "title": "Matzah brei",
+     "image": "img/dishes/challah-french-toast.webp",
+     "cuisine": "jewish",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, cook in two skillets side by side, or keep the finished cakes warm under foil while you cook more batches."
+       }
+      ]
+     },
+     "totalMinutes": 35,
+     "ingredients": [
+      {
+       "ingredient": "matzah"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "milk-whole"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "vanilla-extract"
+      },
+      {
+       "ingredient": "cinnamon-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "maple-syrup"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "matzah",
+       "use": "matzah-gluten-free",
+       "reason": "gluten"
+      },
+      {
+       "for": "milk-whole",
+       "use": "milk-oat",
+       "reason": "dairy"
+      },
+      {
+       "for": "butter-unsalted",
+       "use": "vegetable-oil",
+       "reason": "dairy"
+      }
+     ],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "eggs",
+      "flavors": [
+       "sweet-treats",
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "colander",
+      "mixing-bowl-large",
+      "shallow-dish",
+      "whisk",
+      "fork",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "skillet-12",
+      "spatula",
+      "plate",
+      "foil",
+      "paper-towels",
+      "thermometer"
+     ],
+     "skills": [
+      "heat-control",
+      "batters"
+     ],
+     "method": "stove",
+     "about": "Thick slices of challah soaked in a sweet egg custard and cooked golden. A breakfast dish.",
+     "main": [
+      "challah bread",
+      "eggs",
+      "milk",
+      "cinnamon"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
    ]
   },
   {
@@ -6464,6 +6816,119 @@ export const LIBRARY = {
     "turkey or beef sausage",
     "cheese",
     "tortillas"
+   ],
+   "variations": [
+    {
+     "title": "Breakfast tacos",
+     "image": "img/dishes/breakfast-burritos.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, cook the potatoes in two batches so they crisp instead of steaming."
+       }
+      ]
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "potato-russet"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "turkey-sausage-bulk"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "tortilla-corn"
+      },
+      {
+       "ingredient": "cheddar-shredded"
+      },
+      {
+       "ingredient": "salsa",
+       "optional": true
+      },
+      {
+       "ingredient": "sour-cream",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "butter-unsalted",
+       "use": "vegetable-oil",
+       "reason": "dairy"
+      }
+     ],
+     "unleavened": true,
+     "protein": "other",
+     "tags": {
+      "protein": "turkey",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": [
+       "sour-cream-yogurt"
+      ]
+     },
+     "tools": [
+      "vegetable-peeler",
+      "chef-knife",
+      "cutting-board",
+      "measuring-spoons",
+      "measuring-cups",
+      "skillet-12",
+      "wooden-spoon",
+      "spatula",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "whisk",
+      "foil",
+      "kitchen-towel",
+      "plate",
+      "microwave",
+      "thermometer"
+     ],
+     "skills": [
+      "timing",
+      "rolling-wrapping"
+     ],
+     "method": "stove",
+     "about": "Flour tortillas rolled around scrambled eggs, crispy potatoes, beef or turkey sausage, and cheese.",
+     "main": [
+      "eggs",
+      "potatoes",
+      "turkey or beef sausage",
+      "cheese",
+      "tortillas"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
    ]
   },
   {
@@ -6881,6 +7346,117 @@ export const LIBRARY = {
      ],
      "id": "sp-4",
      "level": "sp-4"
+    },
+    {
+     "title": "Eggs Benedict on soft unleavened bread",
+     "image": "img/dishes/eggs-benedict.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 9,
+        "text": "For more than 8, poach the eggs in three or four batches, and keep the finished ones in a bowl of warm water while you cook the rest."
+       }
+      ]
+     },
+     "totalMinutes": 60,
+     "ingredients": [
+      {
+       "ingredient": "egg-pasteurized"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "turkey-strips"
+      },
+      {
+       "ingredient": "soft-unleavened-bread"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "vinegar-white"
+      },
+      {
+       "ingredient": "chives",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "turkey-strips",
+       "use": "salmon-smoked",
+       "reason": "meat"
+      },
+      {
+       "for": "soft-unleavened-bread",
+       "use": "matzah-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "other",
+     "tags": {
+      "protein": "turkey",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "lemon-lime"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "saucepan-medium",
+      "heatproof-bowl",
+      "whisk",
+      "small-bowl",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "microwave",
+      "fork",
+      "skillet-12",
+      "tongs",
+      "paper-towels",
+      "plate",
+      "pot-large",
+      "slotted-spoon",
+      "oven-mitts",
+      "chef-knife",
+      "cutting-board",
+      "thermometer"
+     ],
+     "skills": [
+      "poaching-eggs",
+      "emulsions"
+     ],
+     "method": "stove",
+     "about": "Poached eggs on toasted English muffins with turkey bacon or smoked salmon, under a buttery hollandaise sauce.",
+     "main": [
+      "eggs",
+      "English muffins",
+      "turkey bacon or smoked salmon",
+      "butter",
+      "lemon"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
     }
    ]
   },
@@ -10491,6 +11067,110 @@ export const LIBRARY = {
      ],
      "id": "sp-3",
      "level": "sp-3"
+    },
+    {
+     "title": "Unleavened skillet cornbread",
+     "image": "img/dishes/skillet-cornbread.webp",
+     "cuisine": "american",
+     "servings": 8,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes one 10-inch round, cut into 8 wedges."
+      }
+     },
+     "totalMinutes": 40,
+     "ingredients": [
+      {
+       "ingredient": "cornmeal"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "milk-whole"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "honey",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "butter-unsalted",
+       "use": "vegetable-oil",
+       "reason": "dairy"
+      },
+      {
+       "for": "milk-whole",
+       "use": "milk-oat",
+       "reason": "dairy"
+      }
+     ],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "skillet-cast-iron",
+      "oven-mitts",
+      "small-bowl",
+      "microwave",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "whisk",
+      "silicone-spatula",
+      "table-knife",
+      "chef-knife",
+      "cooling-rack"
+     ],
+     "skills": [
+      "skillet-baking",
+      "muffin-method"
+     ],
+     "method": "oven",
+     "about": "Golden cornbread baked in a hot skillet for a crispy edge. Pairs with chili.",
+     "main": [
+      "cornmeal",
+      "buttermilk",
+      "eggs",
+      "butter"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
     }
    ]
   },
@@ -13335,6 +14015,105 @@ export const LIBRARY = {
     "chocolate chips",
     "brown sugar",
     "eggs"
+   ],
+   "variations": [
+    {
+     "title": "Unleavened brown butter chocolate chip cookies",
+     "image": "img/dishes/brown-butter-cookies.webp",
+     "cuisine": "american",
+     "servings": 6,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       0.5,
+       1,
+       2
+      ],
+      "notes": {
+       "1": "Makes 24 cookies. Bake one pan at a time.",
+       "2": "Makes 48 cookies. Bake one pan at a time, and let the pan cool before the next batch.",
+       "0.5": "Makes 12 cookies, one pan."
+      }
+     },
+     "totalMinutes": 75,
+     "ingredients": [
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "brown-sugar"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "vanilla-extract"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "chocolate-chips"
+      },
+      {
+       "ingredient": "flaky-salt",
+       "optional": true
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "sweet-treats",
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "saucepan-light",
+      "silicone-spatula",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "small-bowl",
+      "wooden-spoon",
+      "measuring-cups",
+      "measuring-spoons",
+      "sheet-pan",
+      "parchment",
+      "oven-mitts",
+      "spatula",
+      "cooling-rack"
+     ],
+     "skills": [
+      "browning-butter",
+      "creaming"
+     ],
+     "method": "stove-oven",
+     "about": "Chocolate chip cookies made with browned butter for a toasty, nutty flavor.",
+     "main": [
+      "butter",
+      "chocolate chips",
+      "brown sugar",
+      "eggs"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
    ]
   },
   {
@@ -13579,6 +14358,112 @@ export const LIBRARY = {
      ],
      "id": "sp-4",
      "level": "sp-4"
+    },
+    {
+     "title": "Unleavened malva pudding",
+     "image": "img/dishes/malva-pudding.webp",
+     "cuisine": "south-african",
+     "servings": 12,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes one 9-by-13-inch pudding, 12 squares."
+      }
+     },
+     "totalMinutes": 75,
+     "ingredients": [
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "apricot-jam"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "milk-whole"
+      },
+      {
+       "ingredient": "heavy-cream"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "vanilla-extract"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "sweet-treats"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "adventurous",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "baking-dish",
+      "pastry-brush",
+      "small-bowl",
+      "microwave",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "whisk",
+      "silicone-spatula",
+      "measuring-cups",
+      "liquid-measuring-cup",
+      "measuring-spoons",
+      "saucepan-medium",
+      "fork",
+      "oven-mitts",
+      "cooling-rack"
+     ],
+     "skills": [
+      "batters",
+      "custards"
+     ],
+     "method": "oven",
+     "about": "A soft South African sponge cake with apricot jam, soaked in a warm butter-cream sauce.",
+     "main": [
+      "apricot jam",
+      "milk",
+      "eggs",
+      "butter",
+      "cream"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
     }
    ]
   },
@@ -14187,6 +15072,101 @@ export const LIBRARY = {
     "dulce de leche",
     "coconut"
    ],
+   "variations": [
+    {
+     "title": "Unleavened alfajores",
+     "image": "img/dishes/alfajores.webp",
+     "cuisine": "argentine",
+     "servings": 12,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes 12 sandwich cookies."
+      }
+     },
+     "totalMinutes": 75,
+     "ingredients": [
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "powdered-sugar"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "vanilla-extract"
+      },
+      {
+       "ingredient": "cornstarch"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "dulce-de-leche"
+      },
+      {
+       "ingredient": "coconut-shredded"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "sweet-treats"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "wooden-spoon",
+      "measuring-cups",
+      "measuring-spoons",
+      "whisk",
+      "rolling-pin",
+      "biscuit-cutter",
+      "sheet-pan",
+      "parchment",
+      "oven-mitts",
+      "spatula",
+      "cooling-rack",
+      "table-knife",
+      "plate"
+     ],
+     "skills": [
+      "creaming"
+     ],
+     "method": "oven",
+     "about": "Tender shortbread cookies sandwiched with canned dulce de leche and rolled in coconut.",
+     "main": [
+      "flour",
+      "cornstarch",
+      "butter",
+      "dulce de leche",
+      "coconut"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
+   ],
    "level": "sp-2"
   },
   {
@@ -14385,6 +15365,102 @@ export const LIBRARY = {
     "butter",
     "egg",
     "baking soda"
+   ],
+   "variations": [
+    {
+     "title": "Unleavened banana bread",
+     "image": "img/dishes/banana-bread.webp",
+     "cuisine": "american",
+     "servings": 10,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes 1 loaf, about 10 slices."
+      }
+     },
+     "totalMinutes": 85,
+     "ingredients": [
+      {
+       "ingredient": "banana"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "brown-sugar"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "vanilla-extract"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "cinnamon-ground"
+      },
+      {
+       "ingredient": "flour-ap"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "sweet-treats"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "loaf-pan",
+      "pastry-brush",
+      "small-bowl",
+      "microwave",
+      "mixing-bowl-large",
+      "fork",
+      "wooden-spoon",
+      "measuring-cups",
+      "measuring-spoons",
+      "table-knife",
+      "foil",
+      "oven-mitts",
+      "cooling-rack",
+      "mixing-bowl-medium",
+      "whisk",
+      "silicone-spatula"
+     ],
+     "skills": [
+      "muffin-method"
+     ],
+     "method": "oven",
+     "about": "A moist loaf of ripe bananas mixed by the muffin method and baked until a toothpick comes out clean.",
+     "main": [
+      "ripe bananas",
+      "flour",
+      "butter",
+      "egg",
+      "baking soda"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
    ],
    "level": "sp-2"
   },
@@ -15037,6 +16113,113 @@ export const LIBRARY = {
     "mayonnaise",
     "flour tortillas"
    ],
+   "variations": [
+    {
+     "title": "Chicken Caesar lettuce wraps",
+     "image": "img/dishes/chicken-caesar-wraps.webp",
+     "cuisine": "american",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 7,
+        "text": "Toss the salad in two bowls, with half the dressing in each, so it coats evenly."
+       }
+      ]
+     },
+     "totalMinutes": 30,
+     "ingredients": [
+      {
+       "ingredient": "mayonnaise"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "garlic-minced-jarred"
+      },
+      {
+       "ingredient": "mustard-dijon"
+      },
+      {
+       "ingredient": "worcestershire",
+       "optional": true
+      },
+      {
+       "ingredient": "parmesan"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "rotisserie-chicken"
+      },
+      {
+       "ingredient": "romaine"
+      },
+      {
+       "ingredient": "parmesan"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "mayonnaise",
+       "use": "yogurt-greek",
+       "reason": "egg"
+      }
+     ],
+     "unleavened": true,
+     "protein": "chicken",
+     "tags": {
+      "protein": "chicken",
+      "flavors": [
+       "creamy-cheesy",
+       "tangy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [
+       "mayonnaise",
+       "lemon-lime",
+       "mustard",
+       "sharp-cheese"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "mixing-bowl-large",
+      "small-bowl",
+      "whisk",
+      "measuring-cups",
+      "measuring-spoons",
+      "colander",
+      "kitchen-towel",
+      "cutting-board",
+      "paper-towels",
+      "fork",
+      "plate"
+     ],
+     "skills": [
+      "dressings"
+     ],
+     "method": "no-cook",
+     "about": "Romaine, rotisserie chicken, and parmesan in a mayonnaise-based Caesar dressing with no raw egg, rolled in tortillas.",
+     "main": [
+      "romaine",
+      "rotisserie chicken",
+      "parmesan",
+      "mayonnaise",
+      "flour tortillas"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
+   ],
    "level": "sp-2"
   },
   {
@@ -15217,6 +16400,95 @@ export const LIBRARY = {
     "brown sugar",
     "egg",
     "chocolate chips"
+   ],
+   "variations": [
+    {
+     "title": "Unleavened chocolate chip cookies",
+     "image": "img/dishes/chocolate-chip-cookies.webp",
+     "cuisine": "american",
+     "servings": 12,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes about 24 cookies."
+      }
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "brown-sugar"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "vanilla-extract"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "chocolate-chips"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "sweet-treats"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "sheet-pan",
+      "parchment",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "wooden-spoon",
+      "measuring-cups",
+      "measuring-spoons",
+      "whisk",
+      "table-knife",
+      "oven-mitts",
+      "spatula",
+      "cooling-rack"
+     ],
+     "skills": [
+      "creaming"
+     ],
+     "method": "oven",
+     "about": "Classic chocolate chip cookies, scooped even and spaced on the pan.",
+     "main": [
+      "flour",
+      "butter",
+      "brown sugar",
+      "egg",
+      "chocolate chips"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
    ],
    "level": "sp-2"
   },
@@ -16573,6 +17845,101 @@ export const LIBRARY = {
     "tomatoes",
     "onion"
    ],
+   "variations": [
+    {
+     "title": "Molletes on soft unleavened bread",
+     "image": "img/dishes/molletes.webp",
+     "cuisine": "mexican",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 5,
+        "text": "Use two sheet pans, one on each rack, and swap them halfway through the second bake."
+       }
+      ]
+     },
+     "totalMinutes": 30,
+     "ingredients": [
+      {
+       "ingredient": "soft-unleavened-bread"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "refried-beans"
+      },
+      {
+       "ingredient": "monterey-jack"
+      },
+      {
+       "ingredient": "salsa"
+      },
+      {
+       "ingredient": "cilantro",
+       "optional": true
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "soft-unleavened-bread",
+       "use": "matzah",
+       "reason": "egg"
+      },
+      {
+       "for": "soft-unleavened-bread",
+       "use": "matzah-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "some"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": [
+       "cilantro"
+      ]
+     },
+     "tools": [
+      "oven-mitts",
+      "sheet-pan",
+      "cutting-board",
+      "paper-towels",
+      "table-knife",
+      "can-opener",
+      "small-bowl",
+      "spoon",
+      "measuring-cups",
+      "measuring-spoons"
+     ],
+     "skills": [
+      "heat-control"
+     ],
+     "method": "oven",
+     "about": "Bolillo rolls split and spread with refried beans and cheese, baked until melted, and topped with pico de gallo. The beans are vegetarian, label-checked.",
+     "main": [
+      "bolillo rolls",
+      "vegetarian refried beans",
+      "Monterey Jack",
+      "tomatoes",
+      "onion"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
+   ],
    "level": "sp-2"
   },
   {
@@ -16747,6 +18114,96 @@ export const LIBRARY = {
     "sweetened condensed milk",
     "butter",
     "flour"
+   ],
+   "variations": [
+    {
+     "title": "Unleavened pan de elote",
+     "image": "img/dishes/pan-de-elote.webp",
+     "cuisine": "mexican",
+     "servings": 12,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes one 9-by-13-inch pan, 12 squares."
+      }
+     },
+     "totalMinutes": 60,
+     "ingredients": [
+      {
+       "ingredient": "corn-frozen"
+      },
+      {
+       "ingredient": "condensed-milk"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "salt"
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "sweet-treats"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "new-ish",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "baking-dish",
+      "pastry-brush",
+      "small-bowl",
+      "microwave",
+      "blender",
+      "can-opener",
+      "measuring-cups",
+      "measuring-spoons",
+      "silicone-spatula",
+      "foil",
+      "oven-mitts",
+      "cooling-rack",
+      "table-knife",
+      "mixing-bowl-large",
+      "mixing-bowl-medium",
+      "whisk"
+     ],
+     "skills": [
+      "muffin-method"
+     ],
+     "method": "oven",
+     "about": "A moist Mexican corn cake mixed in the blender from corn kernels, eggs, and condensed milk.",
+     "main": [
+      "corn",
+      "eggs",
+      "sweetened condensed milk",
+      "butter",
+      "flour"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
    ],
    "level": "sp-2"
   },
@@ -17042,6 +18499,117 @@ export const LIBRARY = {
     "currants",
     "egg",
     "sugar"
+   ],
+   "variations": [
+    {
+     "title": "Unleavened Welsh cakes",
+     "image": "img/dishes/welsh-cakes.webp",
+     "cuisine": "welsh",
+     "servings": 8,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Makes about 16 cakes."
+      }
+     },
+     "totalMinutes": 50,
+     "ingredients": [
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "flour-ap"
+      },
+      {
+       "ingredient": "sugar"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "cinnamon-ground"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "currants"
+      },
+      {
+       "ingredient": "egg"
+      },
+      {
+       "ingredient": "milk-whole"
+      },
+      {
+       "ingredient": "sugar"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "currants",
+       "use": "raisins",
+       "reason": "availability"
+      },
+      {
+       "for": "milk-whole",
+       "use": "milk-oat",
+       "reason": "dairy"
+      }
+     ],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "none",
+      "flavors": [
+       "sweet-treats"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "adventurous",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [],
+      "optional": []
+     },
+     "tools": [
+      "table-knife",
+      "plate",
+      "mixing-bowl-large",
+      "measuring-cups",
+      "measuring-spoons",
+      "whisk",
+      "small-bowl",
+      "fork",
+      "rolling-pin",
+      "biscuit-cutter",
+      "skillet-12",
+      "paper-towels",
+      "spatula",
+      "cooling-rack"
+     ],
+     "skills": [
+      "cutting-in-fat"
+     ],
+     "method": "stove",
+     "about": "Small griddled cakes from a buttery dough with currants, dusted with sugar. Made with butter.",
+     "main": [
+      "flour",
+      "butter",
+      "currants",
+      "egg",
+      "sugar"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
    ],
    "level": "sp-2"
   },
@@ -19154,6 +20722,134 @@ export const LIBRARY = {
     "rice",
     "salsa"
    ],
+   "variations": [
+    {
+     "title": "Bean and cheese tacos",
+     "image": "img/dishes/pinto-bean-burritos.webp",
+     "cuisine": "tex-mex",
+     "servings": 6,
+     "scaling": {
+      "mode": "free",
+      "max": 12,
+      "notes": [
+       {
+        "from": 9,
+        "text": "Cook the beans in the stockpot, and toast the burritos in batches."
+       }
+      ]
+     },
+     "totalMinutes": 150,
+     "ingredients": [
+      {
+       "ingredient": "pinto-beans-dried"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "bay-leaves"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "chili-powder"
+      },
+      {
+       "ingredient": "rice-white"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "tortilla-corn"
+      },
+      {
+       "ingredient": "cheddar-shredded"
+      },
+      {
+       "ingredient": "salsa"
+      },
+      {
+       "ingredient": "sour-cream",
+       "optional": true
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "onions",
+       "garlic"
+      ],
+      "optional": [
+       "sour-cream-yogurt"
+      ]
+     },
+     "tools": [
+      "plate",
+      "mixing-bowl-large",
+      "colander",
+      "pot-large",
+      "wooden-spoon",
+      "chef-knife",
+      "cutting-board",
+      "spoon",
+      "saucepan-medium",
+      "liquid-measuring-cup",
+      "measuring-cups",
+      "measuring-spoons",
+      "ladle",
+      "skillet-12",
+      "fork",
+      "spatula",
+      "tongs"
+     ],
+     "skills": [
+      "cooking-legumes"
+     ],
+     "method": "stove",
+     "about": "Pinto beans soaked overnight, cooked from dried, mashed, and rolled in flour tortillas with cheese and rice.",
+     "main": [
+      "dried pinto beans",
+      "flour tortillas",
+      "cheddar",
+      "rice",
+      "salsa"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
+   ],
    "level": "sp-3"
   },
   {
@@ -20467,6 +22163,102 @@ export const LIBRARY = {
     "burger buns",
     "lettuce",
     "tomato"
+   ],
+   "variations": [
+    {
+     "title": "Thick beef burger lettuce wraps",
+     "image": "img/dishes/thick-burgers.webp",
+     "cuisine": "american",
+     "servings": 4,
+     "scaling": {
+      "mode": "free",
+      "max": 8,
+      "notes": [
+       {
+        "from": 5,
+        "text": "Cook 4 patties at a time in a 12-inch skillet. For more than 4, keep the first batch warm on a plate under foil, and wash the tongs and your hands after each batch of raw beef."
+       }
+      ]
+     },
+     "totalMinutes": 40,
+     "ingredients": [
+      {
+       "ingredient": "beef-ground"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "black-pepper"
+      },
+      {
+       "ingredient": "vegetable-oil"
+      },
+      {
+       "ingredient": "cheese-sliced",
+       "optional": true
+      },
+      {
+       "ingredient": "tomato"
+      },
+      {
+       "ingredient": "lettuce-green-leaf"
+      },
+      {
+       "ingredient": "ketchup",
+       "optional": true
+      },
+      {
+       "ingredient": "mustard-dijon",
+       "optional": true
+      }
+     ],
+     "substitutions": [],
+     "unleavened": true,
+     "protein": "beef",
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "mild-buttery"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "tomatoes"
+      ],
+      "optional": [
+       "mustard"
+      ]
+     },
+     "tools": [
+      "cutting-board",
+      "chef-knife",
+      "plate",
+      "measuring-spoons",
+      "skillet-12",
+      "tongs",
+      "spatula",
+      "thermometer"
+     ],
+     "skills": [
+      "temping-meat",
+      "searing"
+     ],
+     "method": "stove",
+     "about": "Thick, juicy beef burgers seared in a skillet and checked with a thermometer until they reach 160°F in the middle, on toasted buns.",
+     "main": [
+      "ground beef",
+      "burger buns",
+      "lettuce",
+      "tomato"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
    ],
    "level": "sp-3"
   },
@@ -22344,6 +24136,110 @@ export const LIBRARY = {
     "baguette",
     "Gruyère"
    ],
+   "variations": [
+    {
+     "title": "French onion soup with matzah",
+     "image": "img/dishes/french-onion-soup.webp",
+     "cuisine": "french",
+     "servings": 6,
+     "scaling": {
+      "mode": "fixed",
+      "multipliers": [
+       1
+      ],
+      "notes": {
+       "1": "Six ovenproof crocks or bowls on a sheet pan."
+      }
+     },
+     "totalMinutes": 150,
+     "ingredients": [
+      {
+       "ingredient": "broth-beef"
+      },
+      {
+       "ingredient": "bay-leaves"
+      },
+      {
+       "ingredient": "thyme-dried"
+      },
+      {
+       "ingredient": "onion-yellow"
+      },
+      {
+       "ingredient": "butter-unsalted"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "water"
+      },
+      {
+       "ingredient": "matzah"
+      },
+      {
+       "ingredient": "gruyere"
+      },
+      {
+       "ingredient": "black-pepper"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "matzah",
+       "use": "matzah-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "beef",
+     "tags": {
+      "protein": "beef",
+      "flavors": [
+       "mild-buttery",
+       "creamy-cheesy"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "everyday",
+      "veggies": "light"
+     },
+     "tasteItems": {
+      "required": [
+       "onions"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "saucepan-medium",
+      "liquid-measuring-cup",
+      "pot-large",
+      "wooden-spoon",
+      "chef-knife",
+      "cutting-board",
+      "sheet-pan",
+      "oven-mitts",
+      "ladle",
+      "measuring-cups",
+      "measuring-spoons"
+     ],
+     "skills": [
+      "reducing",
+      "building-soup"
+     ],
+     "method": "stove-oven",
+     "about": "Onions caramelized slowly, simmered in a beef stock reduced by half, and topped with toast and broiled cheese.",
+     "main": [
+      "onions",
+      "beef stock",
+      "butter",
+      "baguette",
+      "Gruyère"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
+   ],
    "level": "sp-4"
   },
   {
@@ -22756,6 +24652,166 @@ export const LIBRARY = {
     "parsley",
     "labneh",
     "pita"
+   ],
+   "variations": [
+    {
+     "title": "Mezze spread with soft unleavened bread",
+     "image": "img/dishes/mezze-spread.webp",
+     "cuisine": "lebanese",
+     "servings": 8,
+     "scaling": {
+      "mode": "free",
+      "notes": [
+       {
+        "from": 13,
+        "text": "Cook the chickpeas in two pots, and roast the eggplant on two pans so it chars instead of steaming."
+       }
+      ]
+     },
+     "totalMinutes": 210,
+     "ingredients": [
+      {
+       "ingredient": "chickpeas-dried"
+      },
+      {
+       "ingredient": "tahini"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "cumin-ground"
+      },
+      {
+       "ingredient": "eggplant"
+      },
+      {
+       "ingredient": "tahini"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "garlic"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "bulgur-fine"
+      },
+      {
+       "ingredient": "parsley"
+      },
+      {
+       "ingredient": "mint"
+      },
+      {
+       "ingredient": "tomato"
+      },
+      {
+       "ingredient": "green-onion"
+      },
+      {
+       "ingredient": "lemon"
+      },
+      {
+       "ingredient": "salt"
+      },
+      {
+       "ingredient": "labneh"
+      },
+      {
+       "ingredient": "sumac"
+      },
+      {
+       "ingredient": "olive-oil"
+      },
+      {
+       "ingredient": "soft-unleavened-bread"
+      }
+     ],
+     "substitutions": [
+      {
+       "for": "soft-unleavened-bread",
+       "use": "matzah",
+       "reason": "egg"
+      },
+      {
+       "for": "soft-unleavened-bread",
+       "use": "matzah-gluten-free",
+       "reason": "gluten"
+      }
+     ],
+     "unleavened": true,
+     "protein": "vegetarian",
+     "tags": {
+      "protein": "beans-lentils",
+      "flavors": [
+       "herby-lemony"
+      ],
+      "heat": "mild",
+      "budget": "$$",
+      "familiar": "new-ish",
+      "veggies": "lots"
+     },
+     "tasteItems": {
+      "required": [
+       "lemon-lime",
+       "garlic",
+       "eggplant",
+       "mint",
+       "tomatoes",
+       "onions"
+      ],
+      "optional": []
+     },
+     "tools": [
+      "mixing-bowl-large",
+      "pot-large",
+      "colander",
+      "blender",
+      "silicone-spatula",
+      "sheet-pan",
+      "foil",
+      "oven-mitts",
+      "tongs",
+      "chef-knife",
+      "cutting-board",
+      "kitchen-towel",
+      "saucepan-medium",
+      "small-bowl",
+      "mixing-bowl-medium",
+      "fork",
+      "spoon",
+      "measuring-cups",
+      "measuring-spoons",
+      "liquid-measuring-cup",
+      "kitchen-scale",
+      "thermometer"
+     ],
+     "skills": [
+      "cooling-reheating",
+      "cooking-legumes"
+     ],
+     "method": "stove-oven",
+     "about": "Hummus from dried chickpeas, baba ghanoush, tabbouleh, and labneh, with pita, set out for guests.",
+     "main": [
+      "dried chickpeas",
+      "eggplant",
+      "parsley",
+      "labneh",
+      "pita"
+     ],
+     "id": "unleavened",
+     "unleavenedDays": true
+    }
    ],
    "level": "sp-4"
   },

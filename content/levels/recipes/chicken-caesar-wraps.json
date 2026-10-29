@@ -88,5 +88,93 @@
     { "id": "more", "text": "Fill and roll the other three the same way.", "safety": "solo" },
     { "id": "cut", "text": "Lay a damp paper towel under the board. Cut each wrap in half on a slant with the bread knife, sawing gently.", "safety": "adult-nearby", "hazard": "Sharp knife", "tip": "Hold the wrap with the claw grip." },
     { "id": "store", "text": "Eat them right away. Put leftovers in the fridge within 2 hours.", "safety": "solo", "tip": "Mayonnaise and chicken shouldn't sit out." }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "Chicken Caesar lettuce wraps",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "chicken",
+        "flavors": ["creamy-cheesy", "tangy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "substitutions": [
+        { "for": "mayonnaise", "use": "yogurt-greek", "reason": "egg", "note": "Greek yogurt makes a tangier dressing. Taste it before adding all the lemon juice." }
+      ],
+      "ingredients": {
+        "change": {
+          "romaine@Wraps": { "ingredient": "romaine", "amount": 2, "unit": "count", "round": "up", "group": "Wraps" }
+        },
+        "drop": ["tortilla-burrito@Wraps"]
+      },
+      "equipment": { "drop": ["bread-knife"] },
+      "steps": {
+        "change": {
+          "tear": {
+            "id": "tear",
+            "text": "Set aside the 8 biggest leaves whole for wrapping. Tear the rest into bite-size pieces into the large bowl.",
+            "safety": "solo",
+            "tip": "Tearing needs no knife and leaves no brown edges. Keep the wrapping leaves on a dry towel."
+          },
+          "fill": {
+            "id": "fill",
+            "text": "Lay 2 big leaves on a plate, overlapping, rib side down. Pile a quarter of the salad down the middle.",
+            "safety": "solo",
+            "tip": "Leave the leaf tips bare so you can fold them up."
+          },
+          "roll": {
+            "id": "roll",
+            "text": "Fold the sides of the leaves up around the filling, like a taco.",
+            "safety": "solo",
+            "why": "roll",
+            "look": "Salad snug inside the leaves, with nothing spilling out."
+          },
+          "more": { "id": "more", "text": "Fill the other three the same way.", "safety": "solo" },
+          "store": {
+            "id": "store",
+            "text": "Eat them right away, holding the sides up. Put leftovers in the fridge within 2 hours.",
+            "safety": "solo",
+            "tip": "Mayonnaise and chicken shouldn't sit out."
+          }
+        },
+        "drop": ["cut"]
+      },
+      "learn": {
+        "move": {
+          "title": "Whisk, taste, fix, roll",
+          "body": "This is the unit's mastery week: you make it on your own. You'll whisk a creamy Caesar dressing, taste it and fix it, toss it with romaine, rotisserie chicken, and parmesan, and wrap it all in big romaine leaves."
+        },
+        "wrong": [
+          { "sign": "The dressing is too thick", "fix": "Whisk in water, 1 teaspoon at a time, until it drips slowly off the whisk." },
+          { "sign": "The leaf tears when you fold it", "fix": "Fold along the thick middle rib, not across it, and patch the tear with a second leaf." },
+          { "sign": "The wrap falls open", "fix": "Use less filling, overlap two leaves, and hold the sides up as you eat." },
+          { "sign": "The wrap is soggy", "fix": "Dry the lettuce well, and toss and fill right before eating." }
+        ],
+        "quiz": [
+          { "q": "Why is this dressing safe without cooking?", "choices": ["Store mayonnaise is made with pasteurized eggs", "Lemon kills germs", "Parmesan keeps it safe"], "answer": 0, "explain": "Pasteurized eggs are gently heated to kill germs." },
+          { "q": "The dressing tastes flat. What do you add first?", "choices": ["A pinch of salt or a squeeze of lemon", "A cup of mayonnaise", "Water"], "answer": 0, "explain": "Change one thing, then taste again." },
+          { "q": "Where do you taste the dressing?", "choices": ["On a lettuce leaf", "From the jar", "Off the whisk"], "answer": 0, "explain": "That's how you'll eat it." },
+          { "q": "How do you make a lettuce wrap sturdy?", "choices": ["Overlap two big leaves", "Use one small leaf", "Add more dressing"], "answer": 0, "explain": "Two leaves overlapped make a wide wrapper that holds the filling." }
+        ],
+        "why": {
+          "change": {
+            "dry-leaves": {
+              "id": "dry-leaves",
+              "title": "Dry leaves hold the dressing",
+              "body": "Dressing slides off wet lettuce, and the water left on the leaves makes it thin. Lettuce patted dry lets the dressing cling, and the wrapping leaves stay crisp instead of slippery."
+            },
+            "roll": {
+              "id": "roll",
+              "title": "Two leaves, sides up",
+              "body": "One leaf is too narrow to hold much. Two big leaves overlapped make a wide, sturdy wrapper. Folding the sides up around the filling, like a taco, keeps it in while you eat."
+            }
+          }
+        }
+      }
+    }
   ]
 }

@@ -132,6 +132,121 @@
           { "id": "l2-serve", "text": "Cut each sandwich in half with the bread knife. Ladle the soup into bowls on the counter, next to the stove.", "safety": "adult-nearby", "hazard": "Hot soup, sharp knife", "tip": "Fill bowls on the counter, not over the burner." }
         ]
       }
+    },
+    {
+      "id": "unleavened",
+      "title": "Grilled cheese on soft unleavened bread + tomato soup",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "none",
+        "flavors": ["creamy-cheesy", "rich-tomato"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "some"
+      },
+      "substitutions": [
+        { "for": "soft-unleavened-bread", "use": "matzah", "reason": "egg", "note": "Make each sandwich with 2 sheets of matzah, broken to fit the pan. Keep the lid on for both sides so the cheese melts before the matzah gets too dark." },
+        { "for": "soft-unleavened-bread", "use": "matzah-gluten-free", "reason": "gluten", "note": "Make each sandwich with 2 sheets of gluten-free matzah, broken to fit the pan. Keep the lid on for both sides so the cheese melts before the matzah gets too dark." }
+      ],
+      "ingredients": {
+        "drop": ["bread-sandwich@Sandwiches"],
+        "add": [
+          { "ingredient": "soft-unleavened-bread", "amount": 12, "unit": "count", "round": "up", "group": "Sandwiches" }
+        ],
+        "order": [
+          "butter-unsalted@Soup",
+          "olive-oil@Soup",
+          "onion-yellow@Soup",
+          "garlic@Soup",
+          "tomatoes-crushed@Soup",
+          "broth-vegetable@Soup",
+          "sugar@Soup",
+          "salt@Soup",
+          "black-pepper@Soup",
+          "milk-whole@Soup",
+          "+0",
+          "cheese-sliced@Sandwiches",
+          "butter-unsalted@Sandwiches",
+          "basil@To serve"
+        ]
+      },
+      "equipment": { "add": ["bread-knife"] },
+      "steps": {
+        "change": {
+          "build": {
+            "id": "build",
+            "text": "While the soup simmers, make the sandwiches. Split each square of soft unleavened bread through the middle with the bread knife, like opening a book, to make a top and a bottom. Spread a thin layer of soft butter on the outside of each half, all the way to the edges. Lay the bottoms butter side down on a clean plate or the counter, put a slice of cheese on each, folded or torn to fit, and add the tops, butter side up.",
+            "safety": "adult-nearby",
+            "why": "butter-out",
+            "hazard": "Sharp knife",
+            "tip": "Soft unleavened bread is lesson U3. Bake it a day ahead. Saw gently with the knife flat, and keep your other hand flat on top of the square."
+          },
+          "first-side": {
+            "id": "first-side",
+            "text": "Lay 4 sandwiches in the pan. Cover with the lid and cook until the bottoms are golden brown.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 180,
+            "timerLabel": "First side",
+            "why": "lid",
+            "look": "Lift a corner with the spatula: even golden brown, like toast."
+          },
+          "second-side": {
+            "id": "second-side",
+            "text": "Flip each sandwich with the spatula. Leave the lid off and cook until the second side is golden and the cheese is melted.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 150,
+            "timerLabel": "Second side",
+            "look": "Cheese starting to ooze out at the edges."
+          },
+          "more": {
+            "id": "more",
+            "text": "Move the sandwiches to the cutting board and cook the rest the same way, 4 at a time.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "tip": "The pan gets hotter with each batch. If a sandwich browns too fast, turn the heat down a little and check a minute sooner."
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Ladle the soup into bowls, tear a few basil leaves on top if you're using them, and serve 2 little sandwiches each for dipping.",
+            "safety": "adult-nearby",
+            "hazard": "Hot soup",
+            "tip": "Fill bowls on the counter next to the stove, not over the burner."
+          }
+        }
+      },
+      "learn": {
+        "move": {
+          "title": "Golden outside, melted inside",
+          "body": "Heat control means choosing how hot the pan is, and changing it when the food tells you to. Today you'll split squares of soft unleavened bread and grill them with cheese over medium-low heat, so the outsides turn golden just as the cheese melts. A smooth tomato soup simmers on the next burner for dipping."
+        },
+        "wrong": [
+          { "sign": "The outside is dark but the cheese hasn't melted", "fix": "Turn the heat down, flip it, put the lid on, and give it another minute or two. Start the next batch on lower heat." },
+          { "sign": "The outside is pale and soft after the timer", "fix": "Turn the heat up a notch and keep going. Lift a corner every 30 seconds to check." },
+          { "sign": "The soup tastes sour", "fix": "Add another pinch of sugar and a pinch of salt, stir, and taste again." },
+          { "sign": "The soup is too thick", "fix": "Stir in a splash of broth or water until it's how you like it." }
+        ],
+        "quiz": [
+          { "q": "Your grilled cheese is burning on the outside and the cheese is still cold. What went wrong?", "choices": ["The heat was too high", "There wasn't enough cheese", "The squares were too thick"], "answer": 0, "explain": "On high heat the outside browns before the heat reaches the cheese. Medium-low lets them finish together." },
+          { "q": "Why does the soup simmer for 20 minutes?", "choices": ["To soften the sharp taste of the tomatoes", "To make it boil over", "To cool it down"], "answer": 0, "explain": "Gentle simmering mellows the sour taste and blends the flavors." }
+        ],
+        "why": {
+          "change": {
+            "race": {
+              "id": "race",
+              "title": "The outside and the cheese race",
+              "body": "The outside touches the pan, so it browns fast. The cheese in the middle only gets the heat that travels through, so it melts slowly. On high heat the outside wins: black outside, cold cheese inside. On medium-low, they finish together."
+            },
+            "butter-out": {
+              "id": "butter-out",
+              "title": "Butter on the outside",
+              "body": "Butter spread to the edges touches every part of the pan, so the whole outside browns evenly instead of in patches. Soft butter spreads thin without tearing the soft cut side."
+            }
+          }
+        }
+      }
     }
   ],
   "equipment": [

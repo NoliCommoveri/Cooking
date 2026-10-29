@@ -74,5 +74,89 @@
     { "id": "bake", "text": "Bake until the top is golden and the middle is set.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 2400, "timerLabel": "Bake", "why": "condensed", "look": "Golden on top, and the middle doesn’t jiggle." },
     { "id": "check", "text": "With oven mitts, pull out the rack. Push a toothpick into the center.", "safety": "adult-nearby", "type": "doneness", "hazard": "Hot oven and dish", "target": { "look": "A clean toothpick, or a few moist crumbs, from the center" }, "why": "toothpick", "tip": "Wet batter? Bake 5 more minutes and test again." },
     { "id": "cool", "text": "Turn off the oven. Let it cool in the dish, then cut it into 12 squares with the butter knife.", "safety": "adult-nearby", "hazard": "Hot dish", "timerSeconds": 1800, "timerLabel": "Cool", "tip": "It sets as it cools, so wait before cutting." }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "Unleavened pan de elote",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "none",
+        "flavors": ["sweet-treats"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "ingredients": {
+        "change": { "egg": { "ingredient": "egg", "amount": 4, "unit": "count" } },
+        "drop": ["baking-powder"]
+      },
+      "equipment": { "add": ["mixing-bowl-large", "mixing-bowl-medium", "whisk"] },
+      "steps": {
+        "change": {
+          "eggs": {
+            "id": "eggs",
+            "text": "Separate the eggs: crack each one and pass the yolk back and forth between the half shells over the medium bowl, letting the white drip into the bowl. Drop the yolks into the blender.",
+            "safety": "solo",
+            "handles": ["egg"],
+            "tip": "Not a speck of yolk can get into the whites, or they won't whip. If a yolk breaks, save that egg for breakfast and use another."
+          },
+          "flour": {
+            "id": "flour",
+            "text": "Unplug the blender. Add the flour and salt. Pulse 4 or 5 times.",
+            "safety": "adult-nearby",
+            "hazard": "Blender blade",
+            "look": "No dry flour showing.",
+            "tip": "Don't taste the raw batter. It has raw egg."
+          },
+          "pour": { "id": "pour", "text": "Scrape the batter into the large bowl with the spatula.", "safety": "solo" }
+        },
+        "add": [
+          { "id": "whip", "text": "Wash and dry the whisk. Whisk the egg whites in the medium bowl hard and fast until they're white, foamy, and hold soft peaks.", "safety": "solo", "timerSeconds": 180, "timerLabel": "Whip whites", "why": "whites", "look": "When you lift the whisk, the foam stands up in a peak that flops over at the tip.", "tip": "Take turns: it's hard work. An electric hand mixer is faster, if you have one." },
+          { "id": "fold-whites", "text": "Scoop the whites onto the batter in the large bowl. Fold them in gently with the spatula: cut down through the middle, sweep along the bottom, and turn the batter over the top. Turn the bowl and repeat until no white streaks are left.", "safety": "solo", "why": "whites", "look": "A light, fluffy batter with no white streaks.", "tip": "Don't taste the raw batter. It has raw egg and raw flour." },
+          { "id": "into-dish", "text": "Pour the batter into the dish and spread it gently into an even layer.", "safety": "solo", "look": "An even layer in the dish." }
+        ],
+        "order": [
+          "oven",
+          "melt",
+          "eggs",
+          "wash-egg",
+          "blend",
+          "flour",
+          "pour",
+          "+0",
+          "+1",
+          "+2",
+          "bake",
+          "check",
+          "cool"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "Mastery: blend, bake, test",
+          "body": "Pan de elote is a sweet Mexican corn cake, moist like a pudding in the middle. This one is unleavened: whipped egg whites give it its lift. This is the unit's mastery week. You'll blend the batter while an adult watches but doesn't help, fold in the whites, bake it, and decide for yourself when it's done with a toothpick."
+        },
+        "wrong": [
+          { "sign": "The middle is wet and runny", "fix": "Bake 5 more minutes and test again." },
+          { "sign": "The edges got too dark", "fix": "Lay foil loosely over the top for the last part of baking." },
+          { "sign": "The blender won't turn", "fix": "Turn it off and stir with the spatula, then blend again." },
+          { "sign": "It's hard to cut", "fix": "Let it cool longer. It sets as it cools." },
+          { "sign": "It's flat and heavy", "fix": "The whites weren't whipped long enough, or they were stirred in instead of folded. Next time, whip to soft peaks and fold gently." }
+        ],
+        "quiz": [
+          { "q": "Why does the flour go in last?", "choices": ["So it's mixed only a little and stays tender", "So it browns", "It doesn't matter"], "answer": 0, "explain": "More mixing makes it tough." },
+          { "q": "What makes pan de elote so moist?", "choices": ["Sweetened condensed milk and corn", "Lots of flour", "Whipped egg whites"], "answer": 0, "explain": "It needs only a little flour. The whipped whites lift it; they don't make it moist." },
+          { "q": "The toothpick has a few moist crumbs. Is it done?", "choices": ["Yes", "No, bake 20 more minutes", "Only if it's brown"], "answer": 0, "explain": "Wet, runny batter means not done." }
+        ],
+        "why": {
+          "add": [
+            { "id": "whites", "title": "Whipped whites lift it", "body": "Egg whites whisked hard trap thousands of tiny air bubbles. Folded gently into the batter, the bubbles swell in the hot oven and lift it a little. Stir hard and they pop, so fold, don't stir. It bakes a little denser than with a raising agent, and that's fine." }
+          ],
+          "order": ["blender", "condensed", "+0", "toothpick"]
+        }
+      }
+    }
   ]
 }

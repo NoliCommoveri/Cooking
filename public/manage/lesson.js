@@ -65,7 +65,7 @@ export function lessonPage(id, vid = null) {
   const commit = (structural) => {
     giveIds(W);
     if (v) {
-      const now = diffVariation(L, W, { id: v.id, tags: v.tags, level: v.level });
+      const now = diffVariation(L, W, { id: v.id, tags: v.tags, level: v.level, unleavenedDays: v.unleavenedDays });
       for (const k of Object.keys(v)) delete v[k];
       Object.assign(v, now);
       put(path, L, `Edited ${W.title} (a version of ${L.title})`);
@@ -163,7 +163,7 @@ export function lessonPage(id, vid = null) {
     return el('details', { class: 'card msec', 'data-k': 'variations' },
       el('summary', {}, el('h2', {}, `Variations (${list.length})`)),
       el('p', { class: 'mut small' }, "Complete versions of this lesson with a preference built in, like Chimichurri chicken for Chimichurri steak. Each one teaches the same skill and counts as this lesson. Whatever a variation doesn't change stays shared with the lesson, so a fix here reaches it too. Each one is checked like a whole lesson."),
-      list.length ? el('ul', { class: 'mvars' }, list.map((x) => el('li', {}, el('a', { href: `#/lesson/${id}/v/${x.id}` }, x.title), x.level ? el('span', { class: 'mut' }, ` (${levelName(x.level)}'s version)`) : null))) : null,
+      list.length ? el('ul', { class: 'mvars' }, list.map((x) => el('li', {}, el('a', { href: `#/lesson/${id}/v/${x.id}` }, x.title), x.level ? el('span', { class: 'mut' }, ` (${levelName(x.level)}'s version)`) : x.unleavenedDays ? el('span', { class: 'mut' }, ' (for Unleavened Bread)') : null))) : null,
       el('button', { type: 'button', class: 'hbtn small-btn', onclick: () => addVariation(L, dish) }, '+ Add a variation'));
   }
   // A variation's own card: its tags, and taking it out.
@@ -173,6 +173,8 @@ export function lessonPage(id, vid = null) {
       el('p', { class: 'mut small' }, `Its name in the files is "${v.id}". Change anything below that differs from ${L.title}: the protein, amounts, times, doneness target, steps, tools, or Learn cards.`),
       // A Level's version (14e): its Level course always cooks it.
       v.level ? el('p', { class: 'card notice small' }, el('b', {}, `${levelName(v.level)}'s version. `), `A ${levelName(v.level)} course always cooks this version of ${L.title}; it's never offered as a preference. Write it to the Level's standard: the checks below warn when it isn't.`) : null,
+      // The unleavened version (§6.20): cooked on a family's unleavened days.
+      v.unleavenedDays ? el('p', { class: 'card notice small' }, el('b', {}, 'For Unleavened Bread. '), `On a family's unleavened days, this version is cooked in place of ${L.title}; it's never offered as a preference. It has to be unleavened, steps and all: the checks below say if it isn't.`) : null,
       el('fieldset', { class: 'mf-obj' }, el('legend', {}, 'Tags'),
         el('p', { class: 'mut small' }, 'Tagged like a dish, so families can be offered the version that suits them.'),
         tagFields(v, () => onChange(false))),

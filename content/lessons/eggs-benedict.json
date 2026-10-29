@@ -245,6 +245,67 @@
           }
         }
       }
+    },
+    {
+      "id": "unleavened",
+      "title": "Eggs Benedict on soft unleavened bread",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "turkey",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "substitutions": [
+        { "for": "turkey-strips", "use": "salmon-smoked", "reason": "meat", "note": "Lay a folded slice of smoked salmon on each muffin half instead. It doesn't need cooking." },
+        { "for": "soft-unleavened-bread", "use": "matzah-gluten-free", "reason": "gluten", "note": "Lay each egg on half a sheet of gluten-free matzah, straight from the box. It doesn't need warming." }
+      ],
+      "ingredients": {
+        "drop": ["english-muffin@Benedicts"],
+        "add": [
+          { "ingredient": "soft-unleavened-bread", "amount": 12, "unit": "count", "round": "up", "group": "Benedicts" }
+        ],
+        "order": [
+          "egg-pasteurized@Hollandaise",
+          "butter-unsalted@Hollandaise",
+          "lemon@Hollandaise",
+          "salt@Hollandaise",
+          "turkey-strips@Benedicts",
+          "+0",
+          "egg@Benedicts",
+          "vinegar-white@Benedicts",
+          "chives@To serve"
+        ]
+      },
+      "equipment": { "drop": ["toaster"] },
+      "steps": {
+        "change": {
+          "toast": {
+            "id": "toast",
+            "text": "While the eggs poach, wipe out the skillet with a paper towel. Warm the squares of soft unleavened bread in it over medium-low heat until golden underneath, then flip them and warm the other side. Move them to the plates.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 120,
+            "timerLabel": "Warm squares",
+            "tip": "Soft unleavened bread is lesson U3. Bake it a day ahead, cut into 12 squares, and keep it wrapped so it stays soft."
+          },
+          "build": {
+            "id": "build",
+            "text": "Turn off the stove. On each plate, set 2 squares of soft unleavened bread. Top each with a slice of turkey bacon, a poached egg, and a big spoonful of hollandaise. Sprinkle chives on top if you're using them.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pot",
+            "tip": "Stir the hollandaise before you spoon it. If it has thickened, whisk in a teaspoon of warm water."
+          }
+        }
+      },
+      "learn": {
+        "move": {
+          "title": "Two gentle egg moves",
+          "body": "Today you'll poach eggs, cooking them in water that's barely bubbling so the whites set soft around the yolk. And you'll make hollandaise, a warm, lemony butter sauce held together by egg yolks. They go on squares of soft unleavened bread, warmed golden in the pan, with turkey bacon."
+        }
+      }
     }
   ]
 }

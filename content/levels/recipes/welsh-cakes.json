@@ -86,5 +86,46 @@
     { "id": "flip", "text": "Flip them with the spatula. Cook the other side.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 180, "timerLabel": "Second side", "look": "Golden on both sides." },
     { "id": "check", "text": "Break the first cake open. It should be cooked through, with no wet dough.", "safety": "adult-nearby", "type": "doneness", "hazard": "Hot cake", "target": { "look": "Cooked through in the middle, golden on both sides" }, "tip": "Doughy? Turn the heat lower and cook the rest longer." },
     { "id": "dust", "text": "Move the cakes to the rack and sprinkle them with sugar. Cook the rest the same way, then turn off the stove.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "Sugar sticks best while they are warm." }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "Unleavened Welsh cakes",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "none",
+        "flavors": ["sweet-treats"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "adventurous",
+        "veggies": "light"
+      },
+      "ingredients": { "drop": ["baking-powder"] },
+      "steps": {
+        "change": {
+          "dry": {
+            "id": "dry",
+            "text": "Spoon and level the flour into the large bowl. Whisk in the ⅓ cup of sugar, the salt, and the cinnamon.",
+            "safety": "solo",
+            "look": "No streaks of white powder."
+          },
+          "flip": {
+            "id": "flip",
+            "text": "Flip them with the spatula. Cook the other side.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 180,
+            "timerLabel": "Second side",
+            "look": "Golden on both sides. They stay flat: that's right for these."
+          }
+        }
+      },
+      "learn": {
+        "move": {
+          "title": "Rub it in, cook it slow",
+          "body": "Welsh cakes are little sweet cakes from Wales, cooked on a griddle instead of in the oven. These are unleavened, with no raising agent, so they cook up flatter and crisper at the edges, like a griddle shortbread. Today you'll rub cold butter into flour with your fingertips, roll and cut the dough, and cook the cakes slowly in a skillet until golden on both sides."
+        }
+      }
+    }
   ]
 }

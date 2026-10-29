@@ -71,5 +71,74 @@
     { "id": "broil", "text": "Broil until the cheese bubbles and browns in spots.", "safety": "solo", "hazard": "Broiler", "timerSeconds": 180, "timerLabel": "Broil", "why": "broil", "tip": "Stay at the oven; it goes from golden to burnt in seconds." },
     { "id": "check", "text": "Check the soup under the cheese.", "safety": "solo", "type": "doneness", "hazard": "Hot crocks", "target": { "temp": 165, "unit": "F" } },
     { "id": "serve", "text": "Set each crock on a plate to serve. The crocks stay very hot for a long time.", "safety": "solo", "hazard": "Hot crocks" }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "French onion soup with matzah",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "beef",
+        "flavors": ["mild-buttery", "creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "substitutions": [{ "for": "matzah", "use": "matzah-gluten-free", "reason": "gluten" }],
+      "ingredients": {
+        "drop": ["baguette@Gratinée"],
+        "add": [
+          { "ingredient": "matzah", "amount": 3, "unit": "count", "round": "up", "prep": "half a sheet per bowl", "group": "Gratinée" }
+        ],
+        "order": [
+          "broth-beef@Stock",
+          "bay-leaves@Stock",
+          "thyme-dried@Stock",
+          "onion-yellow@Onions",
+          "butter-unsalted@Onions",
+          "salt@Onions",
+          "water@Onions",
+          "+0",
+          "gruyere@Gratinée",
+          "black-pepper@Gratinée"
+        ]
+      },
+      "equipment": { "drop": ["bread-knife"] },
+      "steps": {
+        "change": {
+          "toast": {
+            "id": "toast",
+            "text": "Heat the broiler with a rack 6 inches below. Break the matzah into pieces that fit the crocks and toast them on the sheet pan until golden in spots.",
+            "safety": "solo",
+            "hazard": "Broiler",
+            "timerSeconds": 60,
+            "timerLabel": "Toast matzah",
+            "tip": "Matzah browns in seconds under the broiler. Stay at the oven."
+          },
+          "assemble": {
+            "id": "assemble",
+            "text": "Set the crocks on the sheet pan, ladle in the soup, float the matzah pieces on each, and pile on the cheese.",
+            "safety": "solo",
+            "hazard": "Hot soup"
+          }
+        }
+      },
+      "learn": {
+        "move": {
+          "title": "Reduce, caramelize, gratinée",
+          "body": "French onion soup is two slow reductions: a beef stock cooked down by half until it's deep and full, and onions cooked for an hour until they collapse into a mahogany jam. You'll measure the reduction, deglaze the onions as they brown, combine and simmer, then float toasted matzah and Gruyère on each bowl and broil it."
+        },
+        "why": {
+          "change": {
+            "broil": {
+              "id": "broil",
+              "title": "The gratinée",
+              "body": "Cheese on toasted matzah, floated on the soup and broiled close to the heat, melts and browns in 2 to 4 minutes. Watch it the whole time."
+            }
+          }
+        }
+      }
+    }
   ]
 }

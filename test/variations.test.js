@@ -66,7 +66,9 @@ test('the content editor stores only what differs, and it puts back the same les
 test('the written variations pass, with no warnings of their own', () => {
   const r = lint(base);
   assert.deepEqual(r.errors, []);
-  assert.deepEqual(r.warnings.filter((w) => w.includes(' variation ')), [], 'a label note the lesson already has is not repeated');
+  // An unleavened version's new ingredients (matzah, corn tortillas) carry their own label notes.
+  const own = (w) => / variation "unleavened": uses (matzah|tortilla-corn):/.test(w);
+  assert.deepEqual(r.warnings.filter((w) => w.includes(' variation ') && !own(w)), [], 'a label note the lesson already has is not repeated');
   const titles = base.lessons.flatMap((l) => (l.data.variations ?? []).map((v) => v.title));
   for (const t of ['Chicken bulgogi', 'Steak fajitas', 'Black bean fajitas', 'Spicy chicken fajitas', 'Turkey smash burgers + quick pickles', 'Honey-garlic salmon', 'Honey-garlic tofu', 'Spicy shakshuka']) assert.ok(titles.includes(t), t);
 });

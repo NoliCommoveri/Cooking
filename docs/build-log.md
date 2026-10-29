@@ -7365,3 +7365,64 @@ the swaps. Use the soft bread where appropriate than matzo".
 - Screenshots sent: tuna salad sandwiches on April 23, 2027, its card's
   note and its prep list, in both kitchen themes, light and dark.
 - Tests: 430.
+
+## 279. 2026-10-29 — Unleavened versions of 19 lessons
+
+Owner, 2026-10-29: "go ahead and write the unleavened versions of the
+recipes".
+
+- **Before:** 19 lessons with leaven in a step (toasted buns, a challah
+  soaked in custard, a burrito rolled in a flour tortilla, baking powder or
+  soda in a batter) had no unleavened swap that worked, so on a family's
+  unleavened days they were held back, paused on, and left out of Swap and
+  Show me some. The review doc counted 18; both chocolate chip cookies are on
+  it, so it's 19.
+- **Now (release 2, preview only):**
+  - **Each has an unleavened version**, a variation (§6.21) marked
+    `unleavenedDays`, written out in full: Smash burger lettuce wraps + quick
+    pickles; Thick beef burger lettuce wraps; Eggs Benedict on soft
+    unleavened bread; Matzah brei (for Challah French toast); Grilled cheese
+    on soft unleavened bread + tomato soup; Molletes on soft unleavened bread;
+    French onion soup with matzah; Breakfast tacos; Bean and cheese tacos;
+    Chicken Caesar lettuce wraps; Mezze spread with soft unleavened bread
+    (the chickpeas simmer 90 minutes with no baking soda); unleavened skillet
+    cornbread, pan de elote, and banana bread (whipped egg whites); unleavened
+    malva pudding (its eggs and sugar beaten longer, the only lift); and
+    unleavened alfajores, Welsh cakes, brown butter chocolate chip cookies,
+    and chocolate chip cookies (no raising agent).
+  - **Soft unleavened bread where it's eaten soft** (owner, 2026-10-28), so
+    the grilled cheese, Eggs Benedict, molletes, and mezze use it rather than
+    the matzah the review doc listed; each version's own diet swaps give
+    matzah to an egg-free family and gluten-free matzah to a gluten-free one.
+    Matzah stays where it's toasted crisp (French onion soup) or is the dish
+    (matzah brei).
+  - **On the unleavened days** (`feastCook`, `src/content/leaven.js`): a
+    lesson whose swaps can't make it unleavened plays its unleavened version
+    in the player, whatever version it would otherwise play (the turkey smash
+    burgers too), and its card says "For Unleavened Bread: This is the
+    unleavened version of Smash burgers + quick pickles." `feastOk` counts
+    it, so it can be planned and due, the course doesn't pause on it, and
+    it's in Swap, Show me some, and `/api/library`'s `feast_ok`. A shopping
+    list for a week touching the days buys for the version.
+  - **Never a taste pick:** like a Level's version, it isn't scored, offered
+    in the Version dialog, counted in Recipe gaps, or accepted by
+    `PUT /api/variations`.
+  - **The linter** checks that an unleavened version is unleavened as a whole
+    lesson, steps included, that a lesson has only one, and that it isn't a
+    Level's version too. A Level recipe's variations are now checked the way
+    a course lesson's are.
+  - **The content editor** lists it as "(for Unleavened Bread)" and its page
+    says what it's for.
+  - The tests that used smash burgers, grilled cheese, and Challah French
+    toast as leavened lessons now use skillet naan, buttermilk biscuits, and
+    homemade pizza, which have neither a swap nor a version.
+- **For the owner to confirm:** an unleavened version plays only on the
+  unleavened days (a family can't pick matzah brei in June); malva pudding
+  uses whole eggs beaten longer instead of whipped whites, since its method
+  already beats them; each version uses its lesson's picture until it has
+  its own.
+- Screenshots sent: smash burger lettuce wraps, matzah brei, and the grilled
+  cheese on April 23, 2027, the card and its note, in both kitchen themes,
+  light and dark; the content editor's Variations list and the version's
+  page, light and dark.
+- Tests: 434.

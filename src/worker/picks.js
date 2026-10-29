@@ -104,8 +104,10 @@ export function cookCtx(tc, pids) {
 const dietOk = (tc, x) => dietView(x, LIBRARY.ingredients, tc.filters).visible;
 
 // A lesson's taste versions (§6.21): its variations that aren't a Level's
-// version. A Level's version (14e) plays only on that Level's course.
-export const tasteVersions = (L) => (L?.variations ?? []).filter((v) => !v.level);
+// version or its unleavened version. A Level's version (14e) plays only on
+// that Level's course; the unleavened one (§6.20), only on the family's
+// unleavened days.
+export const tasteVersions = (L) => (L?.variations ?? []).filter((v) => !v.level && !v.unleavenedDays);
 export const levelVersionOf = (lid, level) => (level && lessonById[lid]?.variations?.find((v) => v.level === level)) || null;
 
 // A lesson's versions for the profiles on a cook, best first, each with its
@@ -125,8 +127,8 @@ export function versionOptions(tc, lid, pids) {
 // version, or the lesson itself, never a pick or the best fit.
 export function versionFor(tc, choices, lid, pids, level = null) {
   if (level) return { variation: levelVersionOf(lid, level)?.id ?? '', saved: false, options: null, level: true };
-  // A pick can't be a Level's version (the Version dialog never offers one).
-  if (choices?.[lid] && lessonById[lid]?.variations?.some((v) => v.id === choices[lid] && v.level)) choices = null;
+  // A pick can't be a Level's or the unleavened version (the Version dialog never offers one).
+  if (choices?.[lid] && lessonById[lid]?.variations?.some((v) => v.id === choices[lid] && (v.level || v.unleavenedDays))) choices = null;
   const options = versionOptions(tc, lid, pids);
   if (!options) return { variation: choices?.[lid] ?? '', saved: lid in (choices ?? {}), options: null };
   if (choices && lid in choices) return { variation: choices[lid], saved: true, options };

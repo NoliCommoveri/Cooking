@@ -1,7 +1,8 @@
 // Leaven and the Appointed Times unit (plan §6.19).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { leavenIn, unleavened, feastView, feastOk, withFeast } from '../src/content/leaven.js';
+import { leavenIn, unleavened, feastView, feastOk, withFeast, feastCook, unleavenedVersion } from '../src/content/leaven.js';
+import { lessonVersion } from '../src/content/variations.js';
 import { dietView } from '../src/content/diet.js';
 import { seasonalLabels } from '../src/content/course.js';
 import { lint } from '../src/content/lint.js';
@@ -78,13 +79,54 @@ test('unleavened swaps: soft unleavened bread first, then matzah, then gluten-fr
 
 test('a lesson counts as unleavened on those days only when every leaven ingredient is swapped and no step needs a raising agent', () => {
   assert.equal(feastOk(lesson('shakshuka'), REG, [], LV), true);
-  assert.equal(feastOk(lesson('smash-burgers'), REG, [], LV), false, 'no swap for the toasted buns');
   assert.equal(feastOk(lesson('buttermilk-biscuits'), REG, [], LV), false);
+  assert.equal(feastOk(lesson('skillet-naan'), REG, [], LV), false);
   const soda = { ingredients: [{ ingredient: 'flour-ap' }], steps: [{ text: 'Stir in the baking soda.' }] };
   assert.equal(feastView(soda, REG, [], LV).ok, false);
   // An optional bread with no swap is left out.
   const opt = { ingredients: [{ ingredient: 'baguette', optional: true }], steps: [] };
   assert.deepEqual(feastView(opt, REG, [], LV), { ok: true, applied: [], leftOut: ['baguette'] });
+});
+
+// The unleavened versions (§6.20): written out in full where a swap changes the steps.
+const NEEDS_VERSION = ['smash-burgers', 'thick-burgers', 'eggs-benedict', 'challah-french-toast', 'grilled-cheese-tomato-soup', 'molletes', 'french-onion-soup',
+  'breakfast-burritos', 'pinto-bean-burritos', 'chicken-caesar-wraps', 'mezze-spread', 'skillet-cornbread', 'pan-de-elote', 'banana-bread', 'malva-pudding',
+  'alfajores', 'welsh-cakes', 'brown-butter-cookies', 'chocolate-chip-cookies'];
+
+test('each lesson whose steps need its leaven has an unleavened version, and it is unleavened for every diet', () => {
+  for (const id of NEEDS_VERSION) {
+    const L = anyLesson(id);
+    assert.ok(unleavenedVersion(L), id);
+    assert.equal(feastView(L, REG, [], LV).ok, false, `${id} can't be cooked on those days as it stands`);
+    for (const f of [[], ['gluten'], ['egg'], ['dairy']]) assert.equal(feastOk(L, REG, f, LV), true, `${id} for ${f}`);
+    assert.equal(unleavened(lessonVersion(L, unleavenedVersion(L).id), REG, LV), true, `${id}'s version, steps and all`);
+  }
+});
+
+test('on those days a lesson is cooked as its unleavened version; one its swaps make unleavened keeps its own version', () => {
+  const smash = lesson('smash-burgers');
+  const turkey = lessonVersion(smash, 'turkey');
+  const V = feastCook(smash, turkey, REG, [], LV);
+  assert.equal(V.variation, 'unleavened', 'a taste version with buns gives way too');
+  assert.equal(V.title, 'Smash burger lettuce wraps + quick pickles');
+  assert.equal(V.versionOf, 'Smash burgers + quick pickles');
+  assert.ok(!V.ingredients.some((x) => x.ingredient === 'burger-buns'));
+  assert.ok(!V.steps.some((s) => s.id === 'toast-buns'));
+  const tuna = lesson('tuna-salad-sandwiches');
+  assert.equal(feastCook(tuna, tuna, REG, [], LV), tuna, 'its swaps are enough');
+  const naan = lesson('skillet-naan');
+  assert.equal(feastCook(naan, naan, REG, [], LV), naan, 'no version: it waits for after the feast');
+  // A gluten-free family's grilled cheese is made on gluten-free matzah, by the version's diet swap.
+  const gc = feastCook(lesson('grilled-cheese-tomato-soup'), lesson('grilled-cheese-tomato-soup'), REG, ['gluten'], LV);
+  assert.deepEqual(dietView(gc, REG, ['gluten']).applied.find((x) => x.for === 'soft-unleavened-bread'), { for: 'soft-unleavened-bread', use: 'matzah-gluten-free' });
+});
+
+test('the linter wants an unleavened version to be unleavened, steps and all', () => {
+  const L = structuredClone(lesson('malva-pudding'));
+  const v = unleavenedVersion(L);
+  v.steps.change.bake = { ...v.steps.change.bake, look: 'Springy, though it rises less than with baking soda.' };
+  const lessons = CONTENT.lessons.map((x) => (x.data.id === 'malva-pudding' ? { ...x, data: L } : x));
+  assert.match(lint({ ...CONTENT, lessons }).errors.join('\n'), /malva-pudding.json variation "unleavened": is the unleavened version, but it still has leaven/);
 });
 
 test('unleavened swaps are never diet swaps, and the linter wants them to replace leaven with something that isn\'t', () => {

@@ -12,6 +12,7 @@ import { METHODS, safeMin } from './recipe.js';
 import { tagProblems, missingTags, meatProtein } from './tastes.js';
 import { applyVariation, changesSomething, staleKeys } from './variations.js';
 import { calendarProblems } from './calendars.js';
+import { unleavened, feastView } from './leaven.js';
 
 // Fields that hold ids or codes, not words a kid reads.
 const CODE_FIELDS = new Set(['id', 'image', 'picture', 'cuisine', 'ingredient', 'use', 'for', 'unit', 'why', 'glyph', 'reason',
@@ -247,10 +248,10 @@ export function lint(c) {
       if (tips * 3 > L.steps.length) warn(where, `${tips} of ${L.steps.length} steps have a tip; Level 4 keeps tips few`);
     }
   };
-  for (const L of lessons) {
-    const where = `lessons/${L.id}.json`;
-    checkLesson(L, where);
+  // Each variation, put together and checked as the whole lesson it makes.
+  const checkVariations = (L, where) => {
     const vids = new Set(), levels = new Set();
+    let feastVersions = 0;
     for (const v of L.variations || []) {
       const vw = `${where} variation "${v.id}"`;
       if (vids.has(v.id)) err(vw, 'variation ids must be unique');
@@ -269,7 +270,20 @@ export function lint(c) {
       if (schemaErrs.length) { schemaErrs.forEach(x => err(vw, x)); continue; }
       checkLesson(V, vw, L);
       if (v.level) writing(V, v.level, vw);
+      // The unleavened version (§6.20) is unleavened as written, steps and
+      // all, or once its own unleavened swaps are in.
+      if (v.unleavenedDays) {
+        if (v.level) err(vw, "can't be a Level's version and the unleavened version both");
+        if (++feastVersions > 1) err(vw, 'there\'s already an unleavened version of this lesson');
+        if (rules.leaven && !unleavened(V, ING, rules.leaven) && !feastView(V, ING, [], rules.leaven).ok) err(vw, 'is the unleavened version, but it still has leaven');
+        if (rules.leaven && (unleavened(L, ING, rules.leaven) || feastView(L, ING, [], rules.leaven).ok)) warn(vw, 'is the unleavened version, but the lesson is unleavened already, or its swaps make it so');
+      }
     }
+  };
+  for (const L of lessons) {
+    const where = `lessons/${L.id}.json`;
+    checkLesson(L, where);
+    checkVariations(L, where);
   }
   // a seasonal lesson isn't in course.json, so it carries its own dish card
   for (const L of lessons) if (SEASONAL.has(L.unit)) {
@@ -389,6 +403,7 @@ export function lint(c) {
     if (byId[L.id]) err(where, `"${L.id}" is a lesson in lessons/ too`);
     levelLessons[L.id] = L;
     checkLesson(L, where);
+    checkVariations(L, where);
   }
   const placedLessons = new Set();
   // Every Level's own recipe cards, by id: a week may cook another Level's

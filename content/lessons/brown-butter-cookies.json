@@ -83,5 +83,47 @@
     { "id": "bake", "text": "Bake one pan at a time.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 600, "timerLabel": "Cookies", "why": "pull-early" },
     { "id": "check-cookies", "type": "doneness", "text": "Check the cookies before they come out.", "safety": "adult-nearby", "hazard": "Hot oven", "target": { "look": "Golden-brown edges, and the middles are puffed and no longer shiny." } },
     { "id": "cool", "text": "Use oven mitts to take out the pan. Let the cookies sit on the pan for 5 minutes, then move them to the rack with the spatula. Bake the rest of the dough the same way.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 300, "timerLabel": "Cool on pan" }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "Unleavened brown butter chocolate chip cookies",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "none",
+        "flavors": ["sweet-treats", "mild-buttery"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "ingredients": { "drop": ["baking-soda"] },
+      "steps": {
+        "change": {
+          "dry": {
+            "id": "dry",
+            "text": "Stir in the flour and salt just until no flour shows. Stir in the chocolate chips.",
+            "safety": "solo",
+            "tip": "Don't taste the raw dough. Raw flour and raw egg can make you sick."
+          },
+          "bake": {
+            "id": "bake",
+            "text": "Bake one pan at a time.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oven",
+            "timerSeconds": 600,
+            "timerLabel": "Cookies",
+            "why": "pull-early",
+            "tip": "These stay thicker and a little paler than cookies with a raising agent. Go by the edges and the middles, not the color on top."
+          }
+        }
+      },
+      "learn": {
+        "move": {
+          "title": "Brown it, cool it, cream it",
+          "body": "Cook butter until its milk solids turn toasty brown. Stir the hot, liquid butter over ice water until it thickens into a soft paste, then beat it with sugar. The cookies taste like caramel and toasted nuts. These are unleavened, with no raising agent, so they bake up thicker and chewier, and spread less."
+        }
+      }
+    }
   ]
 }

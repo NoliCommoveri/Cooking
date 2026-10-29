@@ -6,7 +6,9 @@ design is in the plan, §6.20; this is the working list for phase 13. **The
 easy swaps are written** (2026-10-28, build log 278): each lesson below lists
 them as `unleavened` substitutions, soft unleavened bread first where it fits
 (owner, 2026-10-28: "Use the soft bread where appropriate"), then matzah, then
-gluten-free matzah. The other groups aren't written yet.
+gluten-free matzah. **The unleavened versions are written** (2026-10-29, build log
+279): each lesson below that needs one has a variation marked `unleavenedDays`,
+named after the dash.
 
 New ingredients the swaps need: **matzah** and **matzah meal**, with the
 label note "Plain matzah: flour and water only." (owner, 2026-10-27). For a
@@ -69,10 +71,29 @@ recipe baked in a 9-by-13 pan and cut into squares.
 - Oven-baked fish sticks (L2)
 - Jamaican beef patties (L4): in the filling; the pastry has no leaven
 
-## Needs an unleavened version (18)
+## Needs an unleavened version (19, written)
 
 The swap changes what the steps say to do, so each needs an unleavened
-version written out in full, the way variations are.
+version written out in full, the way variations are. The list counted 18; both
+chocolate chip cookies are in it, so it's 19. Soft unleavened bread is used where
+it's eaten soft (owner, 2026-10-28), so Eggs Benedict, the grilled cheese,
+molletes, and the mezze use it, with matzah for an egg-free family and
+gluten-free matzah for a gluten-free one. Written as:
+
+- Smash burger lettuce wraps + quick pickles; Thick beef burger lettuce wraps
+- Eggs Benedict on soft unleavened bread
+- Matzah brei: matzah rinsed, soaked in the custard, and cooked in little cakes
+- Grilled cheese on soft unleavened bread + tomato soup: each square split like a book, 4 small sandwiches a batch
+- Molletes on soft unleavened bread
+- French onion soup with matzah
+- Breakfast tacos; Bean and cheese tacos (corn tortillas, folded, 3 each)
+- Chicken Caesar lettuce wraps
+- Mezze spread with soft unleavened bread: the chickpeas simmer 90 minutes with no baking soda
+- Unleavened skillet cornbread, pan de elote, and banana bread: whipped egg whites
+- Unleavened malva pudding: the eggs and sugar beaten longer, the only lift (whole eggs, not just whites)
+- Unleavened alfajores, Welsh cakes, brown butter chocolate chip cookies, and chocolate chip cookies: no raising agent
+
+The original list:
 
 **The bread is toasted, rolled, or built on**
 - Smash burgers + quick pickles: lettuce wraps (the steps toast the buns)
