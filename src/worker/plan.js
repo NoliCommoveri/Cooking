@@ -21,8 +21,8 @@ import { isRecipeId, lessonFor, recipeNames, recipeVisible, RECIPE_ID, recipeRow
 import { tasteContext, versionFor, bestPlan, hatedExtras, versionSummary, levelPlan, levelCandidates, cookedBy } from './picks.js';
 import { variationChoices } from './variations.js';
 import { releaseOn, familyRelease, LEVELS_RELEASE, UNLEAVENED_RELEASE } from './release.js';
-import { datesFor } from './unleavened.js';
-import { unleavened } from '../content/leaven.js';
+import { datesFor, feastGuard } from './unleavened.js';
+import { unleavened, feastOk } from '../content/leaven.js';
 import { unleavenedOn } from '../content/calendars.js';
 import { PARTS, PART_NAMES, coursePartsOf, weekParts, plannedMinutes, hoursOf } from '../content/levels.js';
 
@@ -190,6 +190,8 @@ async function approveStatements(env, s, fam, { row, L, pid, replace, servings, 
     if (!r.course_id) { week = r.week_start; planned = r.planned_date; }
     servings ??= r.servings;
   }
+  // Never a leavened meal on the family's unleavened days (§6.20).
+  await feastGuard(env, fam, L.id, L.title, { date: planned, week });
   const size = servingsFor(L, servings, fam);
   if (row) {
     stmts.unshift(env.DB.prepare("UPDATE queue SET status = 'assigned', servings = ?, planned_date = ?, week_start = ?, swap_of = ? WHERE id = ? AND family_id = ?")
@@ -966,9 +968,11 @@ async function courseTaken(env, course, profiles, usable) {
   return new Set(results.map((r) => r.lesson_id).filter((x) => ids.has(x)));
 }
 
-// Whether a course lesson has leaven: a library lesson without the
-// Unleavened badge, or a learner's own recipe that doesn't pass the check.
-const leavenedIn = (lessons) => (id) => (lessons.own?.[id] ? !lessons.own[id].unleavened : lessonById[id] ? !lessonById[id].unleavened : false);
+// Whether a course lesson has leaven on the unleavened days: a library lesson
+// that isn't unleavened even with its unleavened swaps (for the family's diet),
+// or a learner's own recipe that doesn't pass the check.
+const leavenedIn = (lessons, filters) => (id) => (lessons.own?.[id] ? !lessons.own[id].unleavened
+  : lessonById[id] ? !feastOk(lessonById[id], LIBRARY.ingredients, filters, CONTENT.rules.leaven) : false);
 
 async function courseState(env, course, fam, day, tz) {
   const profiles = await courseProfiles(env, course);
@@ -979,15 +983,15 @@ async function courseState(env, course, fam, day, tz) {
   const tasks = await levelTasks(env, course, profiles);
   const writing = await levelWriting(env, course, profiles);
   // The Unleavened Bread pause (§6.20), with its release.
-  const pause = fam.release >= UNLEAVENED_RELEASE ? { dates: await datesFor(env, fam.id), leavened: leavenedIn(lessons) } : null;
+  const pause = fam.release >= UNLEAVENED_RELEASE ? { dates: await datesFor(env, fam.id), leavened: leavenedIn(lessons, JSON.parse(fam.diet_filters)) } : null;
   return { course, profiles, lessons, done, taken, tasks, writing, sched: schedule({ course, lessons: lessons.usable, done, free, taken, weeks, today: day, pause }) };
 }
 
 const activeCourses = async (env, fid) => withPrograms(env, fid, (await env.DB.prepare('SELECT * FROM courses WHERE family_id = ? AND archived_at IS NULL ORDER BY created_at, id').bind(fid).all()).results);
 
 // Brings the queue's course rows in line with each schedule: this week's
-// unfinished lessons are queued for the course's profiles (§6.18); a course row that's no longer due goes, unless it was shopped for;
-// a cooked one is marked cooked. Nothing happens while weeks aren't planned.
+// unfinished lessons are queued for the course's profiles (§6.18); a course row that's no longer due goes, unless it was shopped for
+// (one the Unleavened Bread pause holds loses its week until then); a cooked one is marked cooked. Nothing happens while weeks aren't planned.
 export async function syncQueue(env, fam, day, tz) {
   const states = [];
   if (!weeksOn(fam)) return states;
@@ -1009,6 +1013,11 @@ export async function syncQueue(env, fam, day, tz) {
       } else if (r.status === 'assigned') {
         stmts.push(env.DB.prepare('DELETE FROM queue_profiles WHERE queue_id = ? AND family_id = ?').bind(r.id, fam.id));
         stmts.push(env.DB.prepare('DELETE FROM queue WHERE id = ? AND family_id = ?').bind(r.id, fam.id));
+      } else if (st.sched.this_week.held && r.week_start) {
+        // Shopped for, but held by the Unleavened Bread pause (§6.20): it stays
+        // on the queue with no week, so nothing leavened is due in the feast,
+        // and gets its week back when the course comes to it again.
+        stmts.push(env.DB.prepare('UPDATE queue SET week_start = NULL WHERE id = ?').bind(r.id));
       }
     }
     for (const [lid, week] of due) {
@@ -1245,6 +1254,7 @@ export function register(on) {
     const fam = await family(env, s.family_id);
     const L = await queueLesson(env, String(body.lesson_id ?? ''), fam);
     const pids = await familyProfiles(env, s.family_id, body.profile_ids);
+    await feastGuard(env, fam, L.id, L.title, { date: plannedDate(body.planned_date) });
     for (const pid of pids) {
       const n = (await env.DB.prepare(`SELECT COUNT(*) AS n FROM queue q JOIN queue_profiles qp ON qp.queue_id = q.id
           WHERE q.family_id = ? AND qp.profile_id = ? AND q.status IN ('assigned', 'shopped') AND q.course_id IS NULL`).bind(s.family_id, pid).first()).n;
@@ -1267,8 +1277,10 @@ export function register(on) {
     const r = await queueRow(env, s.family_id, qid);
     if (!ACTIVE.includes(r.status)) fail(409, 'closed', 'That lesson is no longer in the queue.');
     const L = lessonById[r.lesson_id] ?? (await lessonFor(env, s.family_id, r.lesson_id))?.lesson ?? fail(409, 'gone', 'That lesson is no longer in the library.');
+    const planned = r.course_id ? null : plannedDate(body.planned_date === undefined ? r.planned_date : body.planned_date);
+    if (planned !== r.planned_date) await feastGuard(env, fam, r.lesson_id, L.title, { date: planned });
     const stmts = [env.DB.prepare('UPDATE queue SET servings = ?, planned_date = ? WHERE id = ? AND family_id = ?')
-      .bind(servingsFor(L, body.servings ?? r.servings, fam), r.course_id ? null : plannedDate(body.planned_date === undefined ? r.planned_date : body.planned_date), r.id, s.family_id)];
+      .bind(servingsFor(L, body.servings ?? r.servings, fam), planned, r.id, s.family_id)];
     if (body.profile_ids !== undefined && !r.course_id) {
       const pids = await familyProfiles(env, s.family_id, body.profile_ids);
       stmts.push(env.DB.prepare('DELETE FROM queue_profiles WHERE queue_id = ? AND family_id = ?').bind(r.id, s.family_id));
@@ -1300,6 +1312,7 @@ export function register(on) {
       await env.DB.batch(stmts);
       return { ok: true };
     }
+    await feastGuard(env, fam, L.id, L.title, { date: plannedDate(body.planned_date) });
     const stmts = [env.DB.prepare("UPDATE queue SET status = 'assigned', servings = ?, planned_date = ? WHERE id = ? AND family_id = ?")
       .bind(servingsFor(L, body.servings ?? r.servings, fam), plannedDate(body.planned_date), r.id, s.family_id)];
     if (body.profile_ids !== undefined) {
@@ -1324,6 +1337,7 @@ export function register(on) {
     const s = await requireParent(env, req);
     const r = await queueRow(env, s.family_id, qid);
     const to = { declined: 'requested', removed: 'assigned' }[r.status] ?? fail(409, 'not_closed', 'That lesson is already in the queue.');
+    if (to === 'assigned') await feastGuard(env, await family(env, s.family_id), r.lesson_id, null, { date: r.planned_date, week: r.week_start });
     await env.DB.prepare('UPDATE queue SET status = ?, closed_at = NULL WHERE id = ? AND family_id = ?').bind(to, r.id, s.family_id).run();
     return { ok: true };
   });
@@ -1386,17 +1400,22 @@ export function register(on) {
     }
     // The Unleavened Bread pause (§6.20, its release): the course holds at a
     // leavened lesson, or the unleavened days run with nothing held.
-    let feast = null;
-    if (mine && fam.release >= UNLEAVENED_RELEASE) {
-      const tw = mine.sched.this_week;
-      if (tw.held) feast = { paused: true, until: tw.held_until };
-      else if (unleavenedOn(day, await datesFor(env, fam.id))) feast = { paused: false };
+    let feast = null, feastToday = null;
+    if (fam.release >= UNLEAVENED_RELEASE) {
+      const feastDay = unleavenedOn(day, await datesFor(env, fam.id));
+      const tw = mine?.sched.this_week;
+      if (tw?.held) feast = { paused: true, until: tw.held_until };
+      else if (mine && feastDay) feast = { paused: false };
+      // Today is one of the unleavened days, on a course or not: a leavened
+      // lesson can be read, not started, until the day after (§6.20).
+      if (feastDay) feastToday = { until: addDays(feastDay.last_day, 1) };
     }
     return {
       mode: fam.mode,
       versions,
       leave_out: leaveOut,
       unleavened: feast,
+      feast_today: feastToday,
       // A profile on a Level course: its week, parts, and mastery recipes (12c).
       // Its progress view (12e) comes with it.
       level: mine?.lessons.level ? { ...levelFor(mine, pid, day), progress: await levelProgress(env, s.family_id, pid, tzOf(req)) } : null,

@@ -42,7 +42,7 @@ test('the skill tree has a path per unit, every planned dish on it, and Appointe
   const planned = r.paths.filter((p) => !p.seasonal).reduce((n, p) => n + p.nodes.length, 0);
   assert.equal(planned, course.dishes.length);
   const feast = r.paths.find((p) => p.seasonal);
-  assert.deepEqual(feast.nodes.map((n) => n.id), ['unleavened-flatbread', 'cottage-cheese-crescents']);
+  assert.deepEqual(feast.nodes.map((n) => n.id), ['unleavened-flatbread', 'cottage-cheese-crescents', 'soft-unleavened-bread']);
   assert.equal(feast.done, 1);
   assert.equal(r.paths.find((p) => p.unit === 1).done, 1);
 });
@@ -50,7 +50,7 @@ test('the skill tree has a path per unit, every planned dish on it, and Appointe
 test('every planned dish has a passport page', () => {
   const r = rewards({}, registry, course);
   const slots = r.regions.reduce((n, x) => n + x.slots.length, 0);
-  assert.equal(slots, course.dishes.length + 2, 'the course and the two Appointed Times lessons');
+  assert.equal(slots, course.dishes.length + 3, 'the course and the three Appointed Times lessons');
 });
 
 test('what\'s new: nothing the first time, then new stamps, skills, and a rank up', () => {

@@ -93,6 +93,9 @@ function form(fields, submitText, fn, { extra = [], top = false } = {}) {
     try {
       await fn(Object.fromEntries(new FormData(f)), f);
     } catch (err) {
+      // A leavened recipe on a feast day (§6.20) is a heads-up, not a mistake.
+      msg.className = err.code === 'unleavened' ? 'note calmnote' : 'err';
+      msg.setAttribute('role', err.code === 'unleavened' ? 'status' : 'alert');
       msg.textContent = err.message;
       msg.hidden = false;
     } finally {
@@ -130,12 +133,14 @@ function sabbathBanner() {
 }
 // The Unleavened Bread pause (§6.20), in the owner's words (2026-10-27): the
 // course holds at a leavened lesson, or the unleavened days run with nothing held.
-function feastBanner(u) {
+// show: Show me some, on the notice while paused; btn: the kitchen theme's button.
+function feastBanner(u, show, btn) {
   if (!u) return null;
   return el('aside', { class: 'card notice feast', role: 'note' },
     el('p', {}, u.paused
       ? 'Due to the Holy Time, your regular course is paused. Feel free to select one of our unleavened recipes to cook as a family!'
-      : "Happy Unleavened Bread! This week's lessons are all unleavened, so cook on as usual."));
+      : "Happy Unleavened Bread! This week's lessons are all unleavened, so cook on as usual."),
+    u.paused && show ? el('div', { class: 'acts' }, el('button', { type: 'button', class: btn, onclick: show }, 'Show me some')) : null);
 }
 // The next release (plan §8.6): a family the owner turned the preview on for
 // sees it before everyone else, and the parent screens say so.
@@ -391,7 +396,7 @@ function setupScreen() {
     ruthButton(ruthCtx(), () => document.querySelector('.ruth-panel button, .ruth-panel input')?.focus()));
   if (setupRunning) return;
   setupRunning = true;
-  gettingStarted(ruthCtx()).catch((err) => showToast(err.message)).finally(() => { setupRunning = false; });
+  gettingStarted(ruthCtx()).catch((err) => showToast(err)).finally(() => { setupRunning = false; });
 }
 
 // Shown once to a parent from before Getting started told them (§6.9).
@@ -556,7 +561,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
       const res = await api('POST', `/api/profiles/${p.id}/${path}?${tz()}`, body);
       showToast(msg(res));
       kitchen(id, current);
-    } catch (err) { showToast(err.message); e.currentTarget.disabled = false; }
+    } catch (err) { showToast(err); e.currentTarget.disabled = false; }
   };
   const choicesView = (w) => {
     const btn = quest ? 'q-btn' : 'p-btn', note = quest ? 'q-swap' : 'p-swap';
@@ -639,7 +644,34 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   // User-shared shelf, each folded shut, with a search over names and ingredients.
   const feastShelf = feastShared.filter((r) => r.visible && !r.mine);
   const ours = recipes.filter((r) => r.visible && !r.held);
+  // Show me some (§6.20): More recipes filtered to unleavened ones, until
+  // "← All recipes" (owner's wording, 2026-10-28). The Appointed Times
+  // lessons first, then the other unleavened lessons and recipes this
+  // profile hasn't cooked.
+  const unlvKey = `cpr.unleavened.${p.id}`;
+  const showUnleavened = (on) => {
+    sessionSet(unlvKey, on ? '1' : '');
+    go(`#/kitchen/${p.id}/@more`);
+  };
+  const unleavenedView = () => {
+    const firsts = lib.lessons.filter((L) => seasonalUnit(L.unit) && L.unleavened).map(lessonBtn);
+    // Then the other unleavened lessons, those made so with their unleavened swaps included.
+    const rest = [
+      ...lib.lessons.filter((L) => !seasonalUnit(L.unit) && (L.unleavened || L.feast_ok) && !cooks[L.id]).map(lessonBtn),
+      ...ours.filter((r) => r.unleavened && !cooks[r.id]).map((r) => recipeBtn(r)),
+      ...feastShelf.filter((r) => r.unleavened && !cooks[`shared:${r.id}`]).map((r) => recipeBtn({ ...r, id: `shared:${r.id}` }, 'User-shared recipe')),
+    ];
+    return [
+      el('a', { class: 'back', href: `#/kitchen/${p.id}/@more`, onclick: (e) => { e.preventDefault(); showUnleavened(false); } }, quest ? '← All side quests' : '← All recipes'),
+      el('div', { class: `${quest ? 'q-panel' : 'p-card'} k-unleavened` },
+        el('h2', { class: quest ? 'q-title' : 'p-title' }, 'Unleavened recipes'),
+        el('p', { class: quest ? 'q-skill' : 'p-skill' }, "For the Days of Unleavened Bread. Appointed Times first, then ones you haven't cooked yet.")),
+      firsts.length || rest.length ? el('div', { class: 'k-lib' }, firsts, rest)
+        : el('div', { class: quest ? 'q-panel k-empty' : 'p-card k-empty' }, "No unleavened recipes match this family's diet settings yet."),
+    ];
+  };
   const moreView = () => {
+    if (sessionGet(unlvKey)) return unleavenedView();
     const results = el('div');
     const search = el('input', { type: 'search', class: 'k-search', placeholder: quest ? 'Search quests: a dish or an ingredient' : 'Search: a dish or an ingredient', 'aria-label': 'Search recipes', value: sessionGet(`cpr.search.${p.id}`) ?? '' });
     const shelf = (title, items, open) => (items.length ? el('details', { class: 'k-shelf', open }, el('summary', {}, el('span', {}, title), el('small', {}, String(items.length))), el('div', { class: 'k-lib' }, items)) : null);
@@ -678,7 +710,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   const section = el('section', { class: 'kitchen k-tabbed', 'data-kt': p.theme },
     me.kid ? null : el('a', { class: 'back', href: '#/' }, '← Lockers'),
     sabbathBanner(),
-    feastBanner(mine.unleavened),
+    feastBanner(mine.unleavened, current === 'more' && sessionGet(unlvKey) ? null : () => showUnleavened(true), quest ? 'q-btn' : 'p-btn'),
     el('div', { class: 'k-head' }, avatars(p.people),
       el('div', { class: 'grow' }, el('h1', {}, quest ? 'Quest board' : 'Recipe box'), el('div', {}, p.name))),
     el('div', { class: 'acts' },
@@ -755,7 +787,7 @@ async function levelPage(profileId, key) {
             x.written = { ...x.written, [b.id]: b.input.value.trim() };
           }
           showToast('Saved to your portfolio.');
-        } catch (err) { showToast(err.message); }
+        } catch (err) { showToast(err); }
         btn.disabled = false;
       } }, 'Save my writing')) : null;
   // Kitchen words on the page are buttons that open their meaning (§6.1).
@@ -793,7 +825,7 @@ async function levelPage(profileId, key) {
       await api('PUT', `/api/profiles/${p.id}/level-tasks?${tz()}`, { week: x.week, part, ...(skip ? { skip: true } : {}) });
       showToast(skip ? `Skipped the ${PART_NAMES[part].replace(/^(Drill|Knowledge)/, (m) => m.toLowerCase())}.` : `${PART_NAMES[part]} done!`);
       back();
-    } catch (err) { showToast(err.message); btn.disabled = false; }
+    } catch (err) { showToast(err); btn.disabled = false; }
   }
 }
 
@@ -819,6 +851,11 @@ async function lesson(profileId, lessonId) {
     level: mine.level ? { name: mine.level.name, week: mine.level.week_of?.[lessonId] ?? null, adultHome: Boolean(mine.level.adult_home?.includes(lessonId)) } : null,
     // Step pictures under each step, or behind Show me (14e).
     pictures: mine.level?.pictures ?? 'button',
+    feastDays: Boolean(mine.feast_today),
+    // A leavened lesson on the unleavened days (§6.20): read, not started.
+    // One its unleavened swaps make unleavened is cooked with them instead (feastDays).
+    resting: mine.feast_today && (recipe ? !recipe.unleavened : lib.lessons.some((x) => x.id === lessonId && !x.unleavened && !x.feast_ok))
+      ? { until: fmtDay(mine.feast_today.until, { month: 'long', day: 'numeric' }), show: () => { sessionSet(`cpr.unleavened.${p.id}`, '1'); go(`#/kitchen/${p.id}/@more`); } } : null,
     // "I want to make this" or "Cook this" (§6.1), and the queued lesson's
     // servings and who it's for, for a fresh cook.
     ask: {
@@ -827,7 +864,7 @@ async function lesson(profileId, lessonId) {
       early: Boolean(mine.order?.includes(lessonId)),
       approve: () => approveNow(p, lessonId, recipe?.lesson?.title ?? lib.lessons.find((x) => x.id === lessonId)?.title ?? 'this'),
       send: async () => {
-        try { return (await api('POST', `/api/profiles/${p.id}/ask`, { lesson_id: lessonId })).status; } catch (err) { showToast(err.message); throw err; }
+        try { return (await api('POST', `/api/profiles/${p.id}/ask`, { lesson_id: lessonId })).status; } catch (err) { showToast(err); throw err; }
       },
     },
     // What the cook earned, shown when it's done (Phase 5).
@@ -917,7 +954,7 @@ function approveNow(profile, lessonId, title) {
         }, { extra: [cancel()] }));
     };
 
-    if (unlocked()) choiceStep().catch((err) => { showToast(err.message); close(null); }); else pinStep();
+    if (unlocked()) choiceStep().catch((err) => { showToast(err); close(null); }); else pinStep();
   });
 }
 
@@ -1216,7 +1253,7 @@ function loginDialog(profile, login, done) {
     close();
     done();
   }, { extra: [el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')] }));
-  draw().catch((err) => showToast(err.message));
+  draw().catch((err) => showToast(err));
 }
 
 // A new password, typed twice, with Show.
@@ -1551,12 +1588,12 @@ function versionDialog(x, done) {
     el('p', { class: 'mut small' }, `Best first, for ${peopleList(v.best_for) || 'your family'}, from what each of you rated in Our tastes. Every version teaches the same skill and counts as this lesson. The lesson and your shopping lists use the one you pick.`), f);
 }
 
-const previewBtn = (lessonId, variation) => el('button', { type: 'button', class: 'hbtn link', onclick: () => previewLesson(lessonId, variation).catch((err) => showToast(err.message)) }, 'Preview as a learner');
+const previewBtn = (lessonId, variation) => el('button', { type: 'button', class: 'hbtn link', onclick: () => previewLesson(lessonId, variation).catch((err) => showToast(err)) }, 'Preview as a learner');
 
 // A button that runs fn, shows its error, and is off while it runs.
 const actBtn = (label, cls, fn) => el('button', { type: 'button', class: `hbtn ${cls}`, onclick: async (e) => {
   e.currentTarget.disabled = true;
-  try { await fn(); } catch (err) { showToast(err.message); e.target.disabled = false; }
+  try { await fn(); } catch (err) { showToast(err); e.target.disabled = false; }
 } }, label);
 
 const servingsPick = (x, onChange) => (x.servings_options?.length
@@ -1641,7 +1678,7 @@ function onScreen(box) {
 }
 const menu = (label, items) => el('details', { class: 'more', ontoggle: (e) => { if (e.target.open) onScreen(e.target.querySelector('.more-menu')); } },
   el('summary', { 'aria-label': label }, '⋯'),
-  el('div', { class: 'more-menu' }, items.filter(Boolean).map(([text, fn]) => el('button', { type: 'button', class: 'hbtn link', onclick: (e) => { e.target.closest('details').open = false; Promise.resolve(fn()).catch((err) => showToast(err.message)); } }, text))));
+  el('div', { class: 'more-menu' }, items.filter(Boolean).map(([text, fn]) => el('button', { type: 'button', class: 'hbtn link', onclick: (e) => { e.target.closest('details').open = false; Promise.resolve(fn()).catch((err) => showToast(err)); } }, text))));
 const plural = (n, word) => `${n} ${word}${n === 1 ? '' : /(s|sh|ch)$/.test(word) ? 'es' : 's'}`;
 
 // The family's Unleavened Bread dates (§6.20), with release 2. Null before it.
@@ -1818,7 +1855,7 @@ const parentQueue = parentOnly(async (flash) => {
         c.projected_finish ? `Planned finish: week of ${fmtDay(c.planned_finish)}. ${c.started ? behind : `Starts ${fmtDay(c.start_date)}`}.` : 'Every lesson is cooked.')
         : el('p', { class: 'mut small' }, 'No lessons in this course can be cooked yet.'),
       // The Unleavened Bread pause (§6.20; owner's wording, 2026-10-27).
-      c.this_week.held ? el('p', { class: 'feastpause', style: 'margin:0' }, el('b', {}, `Paused for Unleavened Bread until ${fmtDay(c.this_week.held_until, { weekday: 'long', month: 'long', day: 'numeric' })}`)) : null,
+      c.this_week.held ? el('p', { style: 'margin:0' }, el('b', {}, `Paused for Unleavened Bread until ${fmtDay(c.this_week.held_until, { weekday: 'long', month: 'long', day: 'numeric' })}`)) : null,
       c.unwritten ? el('p', { class: 'mut small', style: 'margin:0' }, c.level
         ? `${c.unwritten} week${c.unwritten === 1 ? "'s recipe is" : "s' recipes are"} still being written. ${c.unwritten === 1 ? 'It joins' : 'They join'} the schedule when ${c.unwritten === 1 ? "it's" : "they're"} ready.`
         : `${c.unwritten} more lesson${c.unwritten === 1 ? ' is' : 's are'} still being written. They join the schedule when they're ready.`) : null,
@@ -2049,7 +2086,7 @@ const addLesson = parentOnly(async () => {
       el('div', { class: 'acts' },
         el('button', { type: 'button', class: 'hbtn pri', onclick: () => addDialog(L) }, 'Add'),
         el('button', { type: 'button', class: 'hbtn', onclick: () => showDish(L.id) }, 'Main ingredients'),
-        el('button', { type: 'button', class: 'hbtn link', onclick: () => previewLesson(L.id).catch((err) => showToast(err.message)) }, 'Preview as a learner'))));
+        el('button', { type: 'button', class: 'hbtn link', onclick: () => previewLesson(L.id).catch((err) => showToast(err)) }, 'Preview as a learner'))));
 
   function draw() {
     const fitOf = Object.fromEntries((ranked ?? []).map((x) => [x.id, x]));
@@ -2160,7 +2197,7 @@ const courseList = parentOnly(async () => {
 });
 
 const courseEditor = parentOnly(async (cid) => {
-  const [data, { profiles }, outline, lib] = await Promise.all([api('GET', '/api/courses'), api('GET', '/api/profiles'), fetch('/content/course.json').then((r) => r.json()), api('GET', '/api/library')]);
+  const [data, { profiles }, outline, lib, feast] = await Promise.all([api('GET', '/api/courses'), api('GET', '/api/profiles'), fetch('/content/course.json').then((r) => r.json()), api('GET', '/api/library'), feastState().catch(() => null)]);
   const existing = cid === 'new' ? null : data.courses.find((c) => c.id === cid);
   if (cid !== 'new' && !existing) return go('#/parent/courses');
   const dish = Object.fromEntries(outline.dishes.map((d) => [d.id, d]));
@@ -2192,6 +2229,28 @@ const courseEditor = parentOnly(async (cid) => {
   const listBox = el('div', { class: 'stack plan' });
   const levelBox = el('div', { class: 'stack plan' });
   const finishBox = el('p', { class: 'mut small', style: 'margin:0' });
+  // A Level course whose leavened recipe week would land on the family's
+  // unleavened days says so (§6.20; owner's wording, 2026-10-28). The course
+  // pauses there, so this walks the weeks as the pause would.
+  const feastBox = el('p', { class: 'note calmnote', role: 'status', hidden: true });
+  const drawFeast = () => {
+    const d = feast?.dates, V = levelOf();
+    feastBox.hidden = true;
+    if (!d || !V) return;
+    const leavened = (rid) => lib.lessons.some((x) => x.id === rid && !x.unleavened && !x.feast_ok);
+    const touches = (w) => w <= d.last_day && addDays(w, 5) >= d.unleavened_from;
+    let c = weekOf(startIn.value || localToday()), held = null;
+    for (const w of levelWeeks().filter((x) => x.id && !x.removed && !x.blocked && written.has(x.id) && !hidden.has(x.id))) {
+      if (c > d.last_day) break;
+      if (touches(c) && leavened(w.id)) { held = w; break; }
+      c = addDays(c, 7);
+    }
+    if (!held) return;
+    const day = (x) => fmtDay(x, { month: 'long', day: 'numeric' });
+    const title = lib.lessons.find((x) => x.id === held.id)?.title ?? V.titles?.[held.id] ?? 'its recipe';
+    feastBox.textContent = `Heads up: Week ${held.week}'s recipe, ${title}, has leaven and would come up during Unleavened Bread (${day(d.unleavened_from)} to ${day(d.last_day)}). The course will pause there and pick up again ${day(addDays(d.last_day, 1))}, so nothing leavened lands on your feast days.`;
+    feastBox.hidden = false;
+  };
   // Which program? (§12.4): Cook Around the World, or a Level with the Levels'
   // release. It's picked when the course is set up and stays.
   const levels = data.levels ?? [];
@@ -2254,8 +2313,10 @@ const courseEditor = parentOnly(async (cid) => {
         : 'None of the weeks\' recipes can be cooked yet.',
       stuck ? ` ${stuck} week${stuck === 1 ? " can't" : "s can't"} be cooked with your settings: see below.` : '');
       drawHours();
+      drawFeast();
       return;
     }
+    feastBox.hidden = true;
     const n = usable(), per = Math.max(1, Number(perIn.value) || 1);
     const kept = plan.filter((x) => !x.removed).length;
     finishBox.replaceChildren(n
@@ -2301,7 +2362,7 @@ const courseEditor = parentOnly(async (cid) => {
             el('input', { type: 'checkbox', checked: !x.removed, onchange: (ev) => { x.removed = !ev.target.checked; if (e.pickOne) touched = true; drawPlan(); } }),
             el('span', {}, d.title, tag ? el('small', { class: 'mut' }, ` · ${tag}`) : null, fitLine(id))),
           el('span', { class: 'acts' },
-            written.has(id) && !hidden.has(id) ? el('button', { type: 'button', class: 'hbtn link', 'aria-label': `Preview ${d.title} as a learner`, onclick: () => previewLesson(id).catch((err) => showToast(err.message)) }, 'Preview') : null,
+            written.has(id) && !hidden.has(id) ? el('button', { type: 'button', class: 'hbtn link', 'aria-label': `Preview ${d.title} as a learner`, onclick: () => previewLesson(id).catch((err) => showToast(err)) }, 'Preview') : null,
             el('button', { type: 'button', class: 'hbtn link', 'aria-label': `What is ${d.title}?`, onclick: () => showDish(id) }, d.skill ? `${d.skill} ›` : 'What is it? ›')));
       };
       return el('div', { class: `planrow${keptIds.length ? '' : ' out'}` },
@@ -2396,12 +2457,12 @@ const courseEditor = parentOnly(async (cid) => {
                       (levelOf().requested ??= []).push(w.week);
                       showToast(`Requested a replacement for week ${w.week}.`);
                       drawLevel();
-                    } catch (err) { ev.target.disabled = false; showToast(err.message); }
+                    } catch (err) { ev.target.disabled = false; showToast(err); }
                   } }, 'Request a replacement'))) : null,
               // Under the name, so a long one keeps the row's width.
               el('span', { class: 'acts' },
               w.id ? el('button', { type: 'button', class: 'hbtn link', 'aria-label': `Change week ${w.week}'s recipe`, onclick: () => changeWeek(w) }, 'Change') : null,
-              ready ? el('button', { type: 'button', class: 'hbtn link', 'aria-label': `Preview ${title} as a learner`, onclick: () => previewLesson(w.id).catch((err) => showToast(err.message)) }, 'Preview') : null,
+              ready ? el('button', { type: 'button', class: 'hbtn link', 'aria-label': `Preview ${title} as a learner`, onclick: () => previewLesson(w.id).catch((err) => showToast(err)) }, 'Preview') : null,
               ready || dish[w.id] ? el('button', { type: 'button', class: 'hbtn link', 'aria-label': `What is ${title}?`, onclick: () => showDish(w.id) }, 'What is it? ›') : null)));
         })));
     }));
@@ -2516,7 +2577,7 @@ const courseEditor = parentOnly(async (cid) => {
       el('div', { class: 'grid2' },
         el('label', { class: 'f' }, 'Start date', el('span', { class: 'hint' }, 'Weeks run Sunday to Friday'), startIn),
         perBox, levelPace),
-      finishBox,
+      finishBox, feastBox,
       startsSet, picsSet, partsSet, planSet, levelSet,
     ], existing ? 'Save course' : 'Start the course', async (v) => {
       // A Level course's plan is its weeks, one a week.
@@ -2735,7 +2796,7 @@ const shoppingListView = parentOnly(async (lid, flash) => {
         if (on) checked.delete(x.id); else checked.add(x.id);
         b.setAttribute('aria-pressed', String(!on));
         drawCount();
-        showToast(err.message);
+        showToast(err);
       }
     });
     return b;
@@ -3290,7 +3351,7 @@ function shareRecipe(r) {
       const b = el('button', { type: 'button', class: 'hbtn', disabled: sent }, sent ? 'Sent for review' : 'Send for review');
       b.addEventListener('click', async () => {
         b.disabled = true;
-        try { await api('POST', `/api/recipes/${hex}/review`, { reason, kind }); b.textContent = 'Sent for review'; } catch (err) { showToast(err.message); b.disabled = false; }
+        try { await api('POST', `/api/recipes/${hex}/review`, { reason, kind }); b.textContent = 'Sent for review'; } catch (err) { showToast(err); b.disabled = false; }
       });
       return b;
     };
@@ -3735,13 +3796,16 @@ async function start(hash) {
 // A button's failed request shows its message instead of failing silently.
 const toast = el('p', { class: 'toast err', role: 'alert', hidden: true });
 document.body.append(toast);
+// message: words, or an error from api(); a leavened recipe on a feast day
+// (§6.20) shows as a calm heads-up, not a mistake.
 function showToast(message) {
-  toast.textContent = message || 'Something went wrong. Try again.';
+  toast.classList.toggle('calm', message?.code === 'unleavened');
+  toast.textContent = (typeof message === 'string' ? message : message?.message) || 'Something went wrong. Try again.';
   toast.hidden = false;
   clearTimeout(toast.timer);
   toast.timer = setTimeout(() => { toast.hidden = true; }, 6000);
 }
-window.addEventListener('unhandledrejection', (e) => showToast(e.reason?.message));
+window.addEventListener('unhandledrejection', (e) => showToast(e.reason));
 
 window.addEventListener('hashchange', route);
 start();

@@ -22,7 +22,7 @@ import { CONTENT } from './content-data.js';
 import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
 import { servingOptions } from '../content/scale.js';
-import { unleavened } from '../content/leaven.js';
+import { unleavened, feastOk } from '../content/leaven.js';
 import { family, queueProfiles, today, weekFor, replaceStatements, levelLessonOn } from './plan.js';
 import { addDays } from './schedule.js';
 import { REGISTRY, stored, rowLesson, recipeVisible, lessonFor } from './recipes.js';
@@ -30,7 +30,7 @@ import { recipeLesson } from '../content/recipe.js';
 import { tasteContext, cookCtx, dishFit } from './picks.js';
 import { better } from '../content/score.js';
 import { UNLEAVENED_RELEASE } from './release.js';
-import { datesFor } from './unleavened.js';
+import { datesFor, feastGuard } from './unleavened.js';
 import { unleavenedWeek } from '../content/calendars.js';
 
 const ACTIVE = ['assigned', 'shopped'];
@@ -57,10 +57,12 @@ export async function swapOptions(env, fam, week, pids = []) {
   const spring = fam.release >= UNLEAVENED_RELEASE ? unleavenedWeek(week, await datesFor(env, fam.id)) : springWeek(week);
   // A Level's own recipes (§12.4) only with the Levels' release.
   const libOk = (L) => levelLessonOn(L, fam.release) && dietView(L, LIBRARY.ingredients, filters).visible;
+  // With release 2, a lesson its unleavened swaps make unleavened for this family counts too.
+  const unlvOk = (L) => L.unleavened || (fam.release >= UNLEAVENED_RELEASE && feastOk(L, LIBRARY.ingredients, filters, CONTENT.rules.leaven));
   const out = [];
   const lesson = (L, group) => ({ id: L.id, title: L.title, label: LABELS[L.id] ?? null, group, image: L.image, unleavened: Boolean(L.unleavened), feast: Boolean(L.feast) });
   for (const L of LIBRARY.lessons) if (seasonal.has(L.id) && libOk(L) && (!spring || L.unleavened)) out.push(lesson(L, 'Appointed Times lessons'));
-  for (const L of LIBRARY.lessons) if (!seasonal.has(L.id) && libOk(L) && (spring ? L.unleavened : L.feast)) out.push(lesson(L, 'Other lessons'));
+  for (const L of LIBRARY.lessons) if (!seasonal.has(L.id) && libOk(L) && (spring ? unlvOk(L) : L.feast)) out.push(lesson(L, 'Other lessons'));
 
   // Parent recipes: the family's own, then the directory. One the family
   // already added from the directory is offered as its own copy.
@@ -156,6 +158,9 @@ export function register(on) {
     const s = await requireParent(env, req);
     const r = await activeRow(env, s.family_id, qid);
     const m = /^(q):([0-9a-f]{16})$|^(c):([0-9a-f]{16}):(.+)$/.exec(r.swap_of ?? '') ?? fail(409, 'not_swap', "That isn't a swap.");
+    // The meal it puts back can't be a leavened one on the unleavened days (§6.20).
+    const back = m[1] ? await env.DB.prepare("SELECT * FROM queue WHERE id = ? AND family_id = ? AND status = 'removed'").bind(m[2], s.family_id).first() : null;
+    if (back) await feastGuard(env, await family(env, s.family_id), back.lesson_id, null, { date: back.planned_date, week: back.week_start });
     const stmts = [
       env.DB.prepare('DELETE FROM queue_profiles WHERE queue_id = ? AND family_id = ?').bind(r.id, s.family_id),
       env.DB.prepare('DELETE FROM queue WHERE id = ? AND family_id = ?').bind(r.id, s.family_id),

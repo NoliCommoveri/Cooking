@@ -51,7 +51,10 @@
   ],
   "substitutions": [
     { "for": "bread-sandwich", "use": "bread-gluten-free", "reason": "gluten" },
-    { "for": "mayonnaise", "use": "yogurt-greek", "reason": "egg", "note": "Greek yogurt is a little tangier. Taste before adding the lemon juice, and use less if it's sour enough." }
+    { "for": "mayonnaise", "use": "yogurt-greek", "reason": "egg", "note": "Greek yogurt is a little tangier. Taste before adding the lemon juice, and use less if it's sour enough." },
+    { "for": "bread-sandwich", "use": "soft-unleavened-bread", "reason": "unleavened" },
+    { "for": "bread-sandwich", "use": "matzah", "reason": "unleavened", "ratio": 0.5 },
+    { "for": "bread-sandwich", "use": "matzah-gluten-free", "reason": "unleavened", "ratio": 0.5 }
   ],
   "equipment": [
     "can-opener",

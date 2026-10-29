@@ -7120,3 +7120,248 @@ in front of you during that time."
 - Screenshots sent: the kitchen notice in both kitchen themes, the happy
   banner, the paused course card, and Ruth's new line, in light and dark.
 - Tests: 420.
+
+## 272. 2026-10-28 — Unleavened Bread, part 3: nothing leavened planned in the feast
+
+Owner, 2026-10-28: "fix those two loose ends. Then continue building" (after
+a review of the PR #59 merge).
+
+- **Loose ends from 271:**
+  - The parent's "Paused for Unleavened Bread until…" line had a `feastpause`
+    class that no stylesheet defined. It's gone; the line looks the same.
+  - The `unleavened_dates` comment in `0001_schema.sql` still says nothing
+    uses the table. It stays: the runner checksums each migration, and an
+    edit to an applied one shows as drifted on `/ops`. The plan's schema
+    section describes the table.
+- **Before:** a leavened recipe could be put on a day in the feast by Add a
+  lesson, a planned date change, or approving a request. A course lesson
+  already shopped for kept its old week while the pause held it, so the
+  kitchen still showed it due.
+- **Now (release 2, preview only):**
+  - `feastGuard` (`src/worker/unleavened.js`) refuses a leavened recipe on a
+    day in the family's unleavened days (from its stop day to the feast's
+    last day), or taking a meal's place in a week that touches them. No
+    override, PIN included. A date after the feast, or no date, is fine.
+    Leavened: a library lesson without the Unleavened badge, a family recipe
+    that fails the leaven check, or a shared recipe not marked unleavened.
+  - It runs on Add a lesson, changing a queued lesson's date (servings still
+    change on their own), approving a kid's request for a date, approving
+    one on the spot to cook now, a request that replaces an assigned meal,
+    Put back, and Undo swap. Swap already offers only unleavened recipes in
+    those weeks, and courses pause.
+  - The refusal, Claude's draft for the owner: "Shakshuka has leaven, so it
+    can't be planned during your unleavened days (April 22 to April 28).
+    Pick April 29 or later." For a meal taking another's place in a week
+    that touches the days: "… can't take a meal's place in a week that
+    touches your unleavened days (…). Pick an unleavened recipe for that
+    week."
+  - **A course lesson already shopped for** stays on the queue while the
+    pause holds it, with no week, so it isn't due in the feast. It gets its
+    week back when the course comes to it.
+- **Not built yet:** a hand-queued leavened lesson planned for a day that
+  only later became an unleavened day (the family moved its dates) keeps
+  its date; the "doesn't play" part will stop it being cooked then.
+- Screenshots sent: Add a lesson refusing Shakshuka on April 23, light and
+  dark.
+- Tests: 423.
+
+## 273. 2026-10-28 — Unleavened Bread, part 4: Show me some
+
+Owner, 2026-10-28: "Yes do the show me some button", then picked the
+filter's wording from Claude's drafts: the heading "Unleavened recipes" and
+the way back "← All recipes".
+
+- **Before:** the kitchen's paused notice told the family to pick an
+  unleavened recipe but had no way to find them.
+- **Now (release 2, preview only):**
+  - The notice has **Show me some** (the kitchen theme's own button). It
+    opens More recipes (Side quests in Kitchen Quest) filtered to unleavened
+    recipes: "Unleavened recipes", with "For the Days of Unleavened Bread.
+    Appointed Times first, then ones you haven't cooked yet." under it.
+  - The order: the Appointed Times lessons marked Unleavened, then the other
+    unleavened lessons, the family's own unleavened recipes, and unleavened
+    User-shared feast recipes this profile hasn't cooked. Each is the
+    kitchen's usual card, so it opens with the usual ask: "I want to make
+    this" for a kid, Cook this for an adult.
+  - **"← All recipes"** ("← All side quests" in Kitchen Quest) goes back to
+    every recipe. The filter is remembered for the tab, per profile, until
+    then. The button is hidden while the list is showing.
+- Screenshots sent: the notice and the filtered list, in both kitchen
+  themes, light and dark.
+- Tests: 423.
+
+## 274. 2026-10-28 — Unleavened Bread, part 5: leavened lessons wait for after the feast
+
+Owner, 2026-10-28, on how these messages are worded: families don't want to
+cook leaven on these days, so the wording isn't "we aren't letting you do
+this"; it's the app helping them plan and making it hard to do by accident.
+The owner then picked from Claude's drafts in that spirit.
+
+- **Before:** the date message (272) was Claude's draft, "… can't be planned
+  during your unleavened days …", shown red like a form mistake. A leavened
+  lesson started and played as usual on the unleavened days.
+- **Now (release 2, preview only):**
+  - **The date message** is the owner's pick: "Shakshuka has leaven, and
+    April 23 is during Unleavened Bread (April 22 to April 28). We check
+    dates so leaven doesn't slip onto your feast days. Pick April 29 or
+    later." (and "… that week is during Unleavened Bread … Pick an
+    unleavened recipe for that week." for a meal in another's place). It
+    shows as a calm note in forms and pop-up messages, not in red: `form()`
+    and `showToast()` style an error with code `unleavened` that way.
+  - **A leavened lesson can be read, not started, on the unleavened days.**
+    `GET /api/profiles/:id/queue` says when today is one (`feast_today`,
+    with the day after the last day), on a course or not. The player's
+    lesson card then shows, where Start is: "Saving this one for after
+    Unleavened Bread: it has leaven. Cook it from April 29. Read it any
+    time." (the owner's pick), with Show me some and a fold-out **Read the
+    recipe** listing its ingredients and steps. A cook already under way
+    waits too. Leavened: a library lesson without the Unleavened badge, or a
+    family or shared recipe that isn't unleavened. "I want to make this" and
+    Cook this still work: they queue it with no date.
+  - The early-lesson note's lock icon gets the same size as the "on your
+    list" line's icon; the new note shares that rule.
+- **Not built yet:** a finished cook isn't refused by the server on a feast
+  day (cooks upload after the fact, so refusing one would lose it; the
+  player stops it from starting instead).
+- Screenshots sent: the calm note in Add a lesson (light and dark), and
+  Shakshuka's card with Read the recipe open, in both kitchen themes, light
+  and dark.
+- Tests: 424.
+
+## 275. 2026-10-28 — Unleavened Bread, part 6: the Level course note; how the app words its rules
+
+Owner, 2026-10-28: "yes add it to CLAUDE.md. do the warning label and
+removing the fixed window." Then, from Claude's drafts, the note's wording,
+and that the fixed window waits for the launch.
+
+- **CLAUDE.md** has a new section, **How the app words its rules**: wording
+  for anything the app checks or holds back is the app helping families
+  plan, not refusing them, shown as a calm note.
+- **Level course setup** (release 2, preview only), for every Level: under
+  the planned finish, a calm note names the first leavened recipe week that
+  would land on the family's unleavened days, walking the weeks from the
+  start date as the pause would (on pace). The owner's wording: "Heads up:
+  Week 15's recipe, Challah, has leaven and would come up during Unleavened
+  Bread (April 22 to April 28). The course will pause there and pick up
+  again April 29, so nothing leavened lands on your feast days." It shows
+  only for a family with dates for the year (`GET /api/unleavened`).
+  A test walks a Level 3 course from January 10, cooking each week on pace,
+  and checks the server pauses at Challah with nothing behind.
+- **The fixed window stays until release 2 launches.** Taking it out now
+  would leave every family without release 2 with no unleavened-only swaps,
+  or move them to the calendar's dates early. The plan (§6.20) lists what
+  the launch change removes.
+- Screenshots sent: the note on Level 3's setup, light and dark.
+- Tests: 425.
+
+## 276. 2026-10-28 — Soft unleavened bread, an Appointed Times lesson
+
+Owner, 2026-10-28: "Find an unleavened sandwich bread recipe", then pasted
+COGWA's soft unleavened bread: "Use the cogwa version … Write it as
+appointed times. Then the swaps say matza or soft unleavened bread." The
+owner picked a 9-by-13 pan.
+
+- **Before:** the review doc's sandwich swaps (tuna salad, egg salad, and
+  caprese sandwiches) used matzah, and the Appointed Times unit had only the
+  crisp flatbread for bread.
+- **Now:**
+  - **Soft unleavened bread** (`content/lessons/soft-unleavened-bread.json`,
+    U3): COGWA's recipe, 3 cups flour, 1 teaspoon salt, 3 eggs, 2
+    tablespoons oil, 1½ cups milk, beaten hard 2 to 3 minutes and baked at
+    450°F about 20 minutes, in a greased 9-by-13-inch dish, cut into 12
+    squares for 6 sandwiches. Water for the milk for a dairy-free family;
+    sesame seeds on top if you like. Its learn cards say why it's
+    unleavened (eggs and steam, nothing leaven), why it's beaten hard, and
+    why the oven is so hot, with a callback to the flatbread. Claude filled
+    in what the recipe doesn't say: the pan's greasing, the doneness test (a
+    knife from the center comes out clean), cooling, cutting, and the safety
+    levels, the way the skillet cornbread does them.
+  - It passes the leaven check and has the Unleavened badge; a test keeps
+    it so. Its steps don't use the word "bread", which the check reads as
+    leaven (the flatbread's steps avoid it too).
+  - **Hidden until the owner test-cooks it** (`content/hidden.json`):
+    families don't see it yet. Unhide it from the manager section.
+  - It uses the unleavened flatbread's picture until it has its own.
+  - `docs/unleavened-swaps.md`: the sandwich swaps are now matzah or soft
+    unleavened bread. The plan (§6.20) records the owner's answer.
+- Screenshots sent (from a copy with it unhidden, on April 23, 2027): its
+  card in both kitchen themes, light and dark, which can be started during
+  the feast, and its first learn card.
+- Tests: 425.
+
+## 277. 2026-10-28 — Soft unleavened bread is shown to families
+
+Owner, 2026-10-28: "no lessons are supposed to be hidden until testcooked".
+
+- **Before:** soft unleavened bread (276) was in `content/hidden.json`
+  until the owner test-cooked it, and the review doc said the batter
+  recipes' swaps would be marked to be test-cooked before families saw
+  them.
+- **Now:** it's out of `hidden.json`, so it's in every family's library:
+  the kitchen's Appointed Times shelf (U3), Show me some, Swap's
+  unleavened picks, the skill tree's Appointed Times path, and a passport
+  page. Like every lesson, it's covered by the parent screens' notice that
+  not every recipe has been test-cooked. The review doc and the plan say
+  no lesson is hidden until it's test-cooked.
+- The skill tree and passport tests count the three Appointed Times lessons.
+- Screenshots sent: the Appointed Times shelf with it, in both kitchen
+  themes, light and dark.
+- Tests: 425.
+
+## 278. 2026-10-28 — Unleavened swaps for 24 lessons
+
+Owner, 2026-10-28, with ChatGPT's picture of soft unleavened bread: "Now do
+the swaps. Use the soft bread where appropriate than matzo".
+
+- **Soft unleavened bread's own picture:** sheet 65
+  (`content/images/source/sheet-65-soft-unleavened-bread.png`), cropped
+  with `tools/crop-dish-sheet.py`; it replaces the flatbread's picture the
+  lesson borrowed (276).
+- **Before:** the review doc's easy swaps were a list. On the unleavened
+  days every lesson with leaven was held back, paused on, and left out of
+  Swap and Show me some.
+- **Now (release 2, preview only):**
+  - **New ingredients:** matzah, gluten-free matzah, and matzah meal, with
+    the owner's label note "Plain matzah: flour and water only."; and soft
+    unleavened bread (squares, bought as "1 pan, made from lesson U3").
+  - **A new substitution reason, `unleavened`,** with an optional `ratio`
+    (how many of the replacement for one of what it replaces). It's never a
+    diet swap. The linter checks that an unleavened swap replaces leaven
+    with something that isn't.
+  - **The 24 easy swaps are written** (the review doc counted 23; Chicken
+    Caesar is one of 24): corn tortillas for flour tortillas (2 for 1) and
+    for pita as a wrap; matzah for pita toasted crisp (fattoush, pita
+    chips); soft unleavened bread for bread and pita eaten soft (hummus,
+    shakshuka, mini pizzas, Caesar croutons, chermoula, cacciatore, çılbır,
+    antipasto, ratatouille; 6 squares for a baguette, 2 for a pita) and for
+    sandwich bread (a square a slice) and ciabatta (2 a roll); matzah meal
+    for panko. Where soft bread is the swap, matzah comes next and then
+    gluten-free matzah: the first that fits the family's diet is used.
+  - **`feastView`** (`src/content/leaven.js`): after the family's diet
+    swaps, each ingredient that's still leaven takes its first fitting
+    unleavened swap; an optional one with none is left out. A lesson counts
+    as unleavened on those days when nothing leaven is left and no step
+    names a raising agent (a step naming the bread being swapped is fine,
+    the way diet swaps leave steps as written). `feastOk` is that or the
+    Unleavened badge.
+  - **Where it's used:** the course pause doesn't hold at such a lesson;
+    the date check lets it be planned on those days; Swap offers it in
+    those weeks; `/api/library` says `feast_ok`, so the kitchen lets it be
+    started and lists it in Show me some, and Level course setup's note
+    skips it. **In the player,** on those days, the card says "For
+    Unleavened Bread: Use soft unleavened bread instead of sandwich bread.
+    Make it first with lesson U3, Soft unleavened bread." and the prep list
+    says "Use soft unleavened bread instead". **Shopping lists** buy the
+    swaps, by ratio, for a lesson whose week touches the days: its planned
+    week in What you'll need, or on a saved list its queued lesson's week,
+    else the week the list was made.
+  - `public/content/registry.json` carries the leaven list for the player.
+  - The tests that used shakshuka, fajitas, and souvlaki as leavened
+    lessons now use smash burgers, grilled cheese, and challah French toast,
+    which have no swap.
+- **Not built yet:** the 18 lessons that need an unleavened version; a
+  saved list doesn't store each lesson's week, so a course lesson bought
+  ahead without a queued lesson goes by the week the list was made.
+- Screenshots sent: tuna salad sandwiches on April 23, 2027, its card's
+  note and its prep list, in both kitchen themes, light and dark.
+- Tests: 430.

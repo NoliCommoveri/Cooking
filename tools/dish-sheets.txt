@@ -111,3 +111,4 @@ sheet-63-levels-35.png tabbouleh,thick-burgers,baked-salmon,sandwich-loaf
 sheet-64-levels-36.png dinner-rolls,-,beef-picadillo,pan-seared-trout
 # sheet-64-levels-36.png: steamed-fish's rice bowl stands apart from its plate, so it was cut by
 #   hand: everything not white in the box 780,0,1536,500, padded 10px and squared.
+sheet-65-soft-unleavened-bread.png soft-unleavened-bread

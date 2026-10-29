@@ -55,7 +55,9 @@
     { "ingredient": "salt", "amount": 0.5, "unit": "tsp", "group": "Beans" }
   ],
   "substitutions": [
-    { "for": "pita", "use": "tortilla-corn", "reason": "gluten", "note": "Corn tortilla chips bake the same way. Check them at 7 minutes." }
+    { "for": "pita", "use": "tortilla-corn", "reason": "gluten", "note": "Corn tortilla chips bake the same way. Check them at 7 minutes." },
+    { "for": "pita", "use": "matzah", "reason": "unleavened" },
+    { "for": "pita", "use": "matzah-gluten-free", "reason": "unleavened" }
   ],
   "equipment": [
     "sheet-pan",

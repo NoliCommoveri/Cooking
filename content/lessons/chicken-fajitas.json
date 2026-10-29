@@ -58,7 +58,8 @@
     { "ingredient": "cilantro", "amount": 0.25, "unit": "cup", "prep": "chopped", "optional": true, "group": "To serve" }
   ],
   "substitutions": [
-    { "for": "tortilla-flour", "use": "tortilla-corn", "reason": "gluten", "note": "Warm corn tortillas two at a time, and use two per fajita if they tear." }
+    { "for": "tortilla-flour", "use": "tortilla-corn", "reason": "gluten", "note": "Warm corn tortillas two at a time, and use two per fajita if they tear." },
+    { "for": "tortilla-flour", "use": "tortilla-corn", "reason": "unleavened", "ratio": 2 }
   ],
   "equipment": [
     "chef-knife",

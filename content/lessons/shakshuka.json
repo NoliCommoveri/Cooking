@@ -194,5 +194,10 @@
         }
       }
     }
+  ],
+  "substitutions": [
+    { "for": "pita", "use": "soft-unleavened-bread", "reason": "unleavened", "ratio": 2 },
+    { "for": "pita", "use": "matzah", "reason": "unleavened" },
+    { "for": "pita", "use": "matzah-gluten-free", "reason": "unleavened" }
   ]
 }

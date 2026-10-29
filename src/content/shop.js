@@ -3,6 +3,7 @@
 // rounded up to what the store sells, and grouped by store section. Shared by
 // the Worker and the demo page's preview.
 import { dietView } from './diet.js';
+import { feastView, withFeast } from './leaven.js';
 import { scaleLesson } from './scale.js';
 import { family, toBase, formatVolume, formatWeight, formatButter, mixed } from './units.js';
 
@@ -40,8 +41,10 @@ function buyText(ing, base) {
   return `${mixed(packs)} ${packs === 1 ? p.label : p.many}`;
 }
 
-// lessons: [{ lesson, servings, leaveOut? }]. leaveOut: optional ingredient
+// lessons: [{ lesson, servings, leaveOut?, feast? }]. leaveOut: optional ingredient
 //   ids someone on the cook rated 1 star (plan §6.21), left out like a diet's.
+//   feast: it's cooked on the family's unleavened days (§6.20), so its
+//   unleavened swaps are bought instead, by their ratio. leaven: the leaven list.
 // registry: ingredients by id. filters: the family's diet filters.
 // staples: the family's kitchen staples, grouped first as "May already have"
 //   for checking the cupboard (owner, 2026-10-23). A finished list passes none,
@@ -49,11 +52,14 @@ function buyText(ing, base) {
 // skip: ingredient ids to leave out (what the parent said they have on hand).
 // Returns { sections: [{ id, name, items }], may_have: [items] }.
 // An item: { id, name, buy, used, from: [titles], optional, amountless }.
-export function shoppingList({ lessons, registry, filters = [], staples = [], skip = [] }) {
+export function shoppingList({ lessons, registry, filters = [], staples = [], skip = [], leaven = null }) {
   const items = new Map();
   const staple = new Set(staples), skipped = new Set(skip);
-  for (const { lesson: L, servings, leaveOut = [] } of lessons) {
-    const view = dietView(L, registry, filters);
+  for (const { lesson: L, servings, leaveOut = [], feast = false } of lessons) {
+    let view = dietView(L, registry, filters);
+    const fv = feast && leaven ? feastView(L, registry, filters, leaven) : null;
+    if (fv?.ok) view = withFeast(view, fv);
+    const ratio = Object.fromEntries((view.feast ?? []).map((x) => [x.for, x.ratio ?? 1]));
     const swap = Object.fromEntries(view.applied.map((x) => [x.for, x.use]));
     const leftOut = new Set([...view.leftOut, ...leaveOut]);
     const scaled = scaleLesson(L, registry, servings);
@@ -69,10 +75,10 @@ export function shoppingList({ lessons, registry, filters = [], staples = [], sk
       if (!line.optional) it.optional = false;
       if (!it.from.includes(L.title)) it.from.push(L.title);
       if (line.amount == null) { it.texts.push(scaled.ingredients[k].amount); return; }
-      const x = line.scale === false ? line.amount : line.amount * f;
+      const x = (line.scale === false ? line.amount : line.amount * f) * (ratio[line.ingredient] ?? 1);
       // Counts round the way the recipe does (2.4 eggs is 3 eggs in the bowl).
       const fam = family(line.unit);
-      const amount = fam === 'count' || fam === 'package' ? (scaled.ingredients[k].n ?? x) : x;
+      const amount = fam === 'count' || fam === 'package' ? (ratio[line.ingredient] ? Math.ceil(x) : (scaled.ingredients[k].n ?? x)) : x;
       const base = toBase(amount, line.unit, ing) ?? toBase(amount, line.unit, registry[line.ingredient]);
       if (base == null) it.texts.push(scaled.ingredients[k].amount); else it.base += base;
     });

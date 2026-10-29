@@ -301,7 +301,7 @@ select{font:inherit;padding:8px 10px;border-radius:10px;border:1.5px solid var(-
 .rowi.qrow{grid-template-columns:minmax(0,1fr)}
 .rowi.qrow>.acts,.qcard .acts{justify-content:flex-start}
 .qtools .hbtn.link{padding-left:0;padding-right:0}
-.askline .ico{width:1.3em;height:1.3em;vertical-align:-.25em;margin-right:6px}
+.askline .ico,.earlynote .ico,.feastswap .ico{width:1.3em;height:1.3em;vertical-align:-.25em;margin-right:6px}
 .q-back .ico,.p-back .ico{width:22px;height:22px;vertical-align:-.3em;margin-right:6px}
 .kitchen .sabbath,.kitchen .feast{margin:6px 0 14px;background:var(--h-card);color:var(--h-fg)}
 
@@ -562,3 +562,12 @@ a.choice.on{border-color:var(--h-acc);box-shadow:inset 0 0 0 1.5px var(--h-acc)}
 .findcard .acts .hbtn{min-height:44px;padding:8px 14px;font-size:15px;width:auto}
 .tokensearch [hidden]{display:none!important}
 .feastnote{border-left:4px solid var(--h-acc)}
+.kitchen .k-unleavened{padding:16px 18px;margin:6px 0 22px}
+.kitchen .k-unleavened h2{margin:0 0 6px}
+.kitchen .k-unleavened p{margin:0}
+.calmnote{border-left:4px solid var(--h-acc);padding:10px 12px}
+.toast.calm{border-color:var(--h-acc)}
+.readrecipe{margin-top:6px}
+.readrecipe summary{cursor:pointer;font-weight:700;min-height:44px;display:flex;align-items:center}
+.readrecipe h3{font-size:1.05em;margin:12px 0 6px}
+.readrecipe ul,.readrecipe ol{margin:0;padding-left:1.3em;display:grid;gap:6px}

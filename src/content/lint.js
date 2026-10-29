@@ -158,6 +158,14 @@ export function lint(c) {
       if (!u) { e(`substitution uses "${s.use}", which isn't in the registry`); continue; }
       if (uncleanReasons(u, rules).length) e(`substitution uses unclean ingredient "${s.use}"`);
       if (s.reason !== 'availability' && u.contains.includes(s.reason)) e(`substitution for ${s.reason} uses "${s.use}", which still contains ${s.reason}`);
+      // An unleavened swap (§6.20) has to replace leaven with something that isn't.
+      if (s.reason === 'unleavened' && rules.leaven) {
+        const lw = { blockedWords: rules.leaven.words, allowedPhrases: rules.leaven.allowedPhrases };
+        if (blockedWordsIn(`${u.name} ${s.use.replace(/-/g, ' ')}`, lw).length) e(`unleavened substitution uses "${s.use}", which is leaven`);
+        const f = ING[s.for];
+        if (f && !blockedWordsIn(`${f.name} ${s.for.replace(/-/g, ' ')}`, lw).length) w(`unleavened substitution for "${s.for}", which isn't leaven`);
+      }
+      if (s.ratio != null && s.reason !== 'unleavened') e(`substitution for "${s.for}" has a ratio, which only unleavened swaps use`);
     }
 
     // words

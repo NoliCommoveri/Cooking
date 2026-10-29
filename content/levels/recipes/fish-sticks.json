@@ -56,7 +56,8 @@
   ],
   "substitutions": [
     { "for": "panko", "use": "oats-gluten-free", "reason": "gluten", "note": "Chop the oats fine first." },
-    { "for": "flour-ap", "use": "cornstarch", "reason": "gluten" }
+    { "for": "flour-ap", "use": "cornstarch", "reason": "gluten" },
+    { "for": "panko", "use": "matzah-meal", "reason": "unleavened" }
   ],
   "equipment": [
     "sheet-pan",

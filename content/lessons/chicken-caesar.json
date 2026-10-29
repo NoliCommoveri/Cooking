@@ -66,7 +66,10 @@
   ],
   "substitutions": [
     { "for": "baguette", "use": "bread-gluten-free", "reason": "gluten", "note": "Use about 6 slices of gluten-free bread for each baguette. It browns faster, so check it a few minutes early." },
-    { "for": "mayonnaise", "use": "yogurt-greek", "reason": "egg", "note": "Greek yogurt makes a tangier dressing. Taste it before adding all the lemon juice." }
+    { "for": "mayonnaise", "use": "yogurt-greek", "reason": "egg", "note": "Greek yogurt makes a tangier dressing. Taste it before adding all the lemon juice." },
+    { "for": "baguette", "use": "soft-unleavened-bread", "reason": "unleavened", "ratio": 6 },
+    { "for": "baguette", "use": "matzah", "reason": "unleavened", "ratio": 4 },
+    { "for": "baguette", "use": "matzah-gluten-free", "reason": "unleavened", "ratio": 4 }
   ],
   "equipment": [
     "chef-knife",

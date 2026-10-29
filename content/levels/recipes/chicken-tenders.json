@@ -60,7 +60,8 @@
   ],
   "substitutions": [
     { "for": "panko", "use": "oats-gluten-free", "reason": "gluten", "note": "Chop the oats fine and toast them the same way." },
-    { "for": "flour-ap", "use": "cornstarch", "reason": "gluten", "note": "Cornstarch coats the strips the same way, and the egg sticks to it." }
+    { "for": "flour-ap", "use": "cornstarch", "reason": "gluten", "note": "Cornstarch coats the strips the same way, and the egg sticks to it." },
+    { "for": "panko", "use": "matzah-meal", "reason": "unleavened" }
   ],
   "equipment": [
     "sheet-pan",

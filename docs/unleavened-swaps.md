@@ -2,9 +2,11 @@
 
 Claude's sort of every written lesson with leaven (2026-10-27, 59 of 153), by
 what it would take for each to play during a family's unleavened days. The
-design is in the plan, §6.20; this is the working list for phase 13. **No
-swap is written yet** (owner, 2026-10-27: not now). The owner reviews the
-list before any is.
+design is in the plan, §6.20; this is the working list for phase 13. **The
+easy swaps are written** (2026-10-28, build log 278): each lesson below lists
+them as `unleavened` substitutions, soft unleavened bread first where it fits
+(owner, 2026-10-28: "Use the soft bread where appropriate"), then matzah, then
+gluten-free matzah. The other groups aren't written yet.
 
 New ingredients the swaps need: **matzah** and **matzah meal**, with the
 label note "Plain matzah: flour and water only." (owner, 2026-10-27). For a
@@ -24,7 +26,7 @@ lessons.
   served cold with breadsticks or bread." Claude's proposed rewording, not yet
   approved: "In Spain it's served cold, often as a tapa."
 
-## Easy swap: one ingredient for another (23)
+## Easy swap: one ingredient for another (24, written)
 
 The steps still work with the swap, the way diet swaps work today.
 
@@ -39,7 +41,10 @@ The steps still work with the swap, the way diet swaps work today.
 - Lamb kofta with yogurt sauce: also matzah meal for the panko
 - Köfte with tomato-cucumber salad (L2): also matzah meal for the panko
 
-**Matzah for bread or pita on the side**
+**Bread or pita on the side.** Soft unleavened bread where it's eaten soft or
+toasted like bread (hummus, shakshuka, mini pizzas, croutons, chermoula,
+cacciatore, çılbır, antipasto, ratatouille); matzah where it's toasted crisp
+(fattoush, pita chips).
 - Fattoush: toasted broken matzah for the pita squares
 - Ful medames with pita chips (L2): matzah chips
 - Hummus plate (L2): matzah for scooping
@@ -52,10 +57,12 @@ The steps still work with the swap, the way diet swaps work today.
 - Antipasto platter (L4): matzah in the basket
 - Ratatouille: matzah for the optional baguette, or left out
 
-**Matzah for sandwich bread**
+**Matzah or soft unleavened bread for sandwich bread** (owner, 2026-10-28).
+Soft unleavened bread is the Appointed Times lesson of that name (U3), COGWA's
+recipe baked in a 9-by-13 pan and cut into squares.
 - Tuna salad sandwiches
 - Egg salad sandwiches (L2)
-- Caprese sandwiches (L2): matzah for the ciabatta
+- Caprese sandwiches (L2): for the ciabatta
 
 **Matzah meal for panko**
 - Oven-baked chicken tenders (L3)
@@ -81,8 +88,9 @@ version written out in full, the way variations are.
 - Mezze spread (L4): matzah for the pita, and the chickpeas boiled without baking soda, simmered longer (owner, 2026-10-27: "the soda isn't really leaven in that case but no one will have the soda in their house so leave it out")
 
 **Baking powder or soda in a batter.** Made with egg whites whipped for lift
-(the owner's rule allows them) or with no raising agent. They'll be denser,
-so each is marked to be test-cooked before families see it.
+(the owner's rule allows them) or with no raising agent. They'll be denser.
+No lesson is hidden until it's test-cooked (owner, 2026-10-28); the parent
+screens' test-cook notice covers them, as it does every lesson.
 - Skillet cornbread: whipped egg whites
 - Pan de elote (L2): whipped egg whites
 - Banana bread (L2): whipped egg whites

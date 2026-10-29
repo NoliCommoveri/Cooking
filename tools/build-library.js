@@ -117,6 +117,8 @@ export function buildPublic() {
     regions: Object.fromEntries(c.regions.map((x) => [x.id, x])),
     units: Object.fromEntries(c.units.map((u) => [u.number, u.name])),
     seasonal: seasonalUnits(c),
+    // The leaven list (§6.20), for the unleavened swaps on the family's unleavened days.
+    leaven: c.rules.leaven,
     lessons: summary,
     // The Levels' own recipes (§12.4), apart from the course's lessons: the
     // app shows them only to a family with the Levels' release.

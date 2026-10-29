@@ -74,5 +74,10 @@
     { "id": "butter", "text": "Melt the butter over low heat, take it off the heat, and stir in the Aleppo pepper.", "safety": "solo", "hazard": "Hot pan", "timerSeconds": 120, "timerLabel": "Pepper butter", "look": "Brick-red butter, not browned." },
     { "id": "bread", "text": "Slice and toast the bread.", "safety": "solo", "hazard": "Bread knife" },
     { "id": "serve", "text": "Blot each egg on a paper towel and set 2 on each plate of yogurt. Spoon over the pepper butter and scatter the dill.", "safety": "solo", "look": "Glossy red butter running over white eggs and yogurt." }
+  ],
+  "substitutions": [
+    { "for": "baguette", "use": "soft-unleavened-bread", "reason": "unleavened", "ratio": 6 },
+    { "for": "baguette", "use": "matzah", "reason": "unleavened", "ratio": 4 },
+    { "for": "baguette", "use": "matzah-gluten-free", "reason": "unleavened", "ratio": 4 }
   ]
 }

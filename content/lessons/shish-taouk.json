@@ -65,7 +65,10 @@
     { "ingredient": "tomato", "amount": 2, "unit": "count", "round": "up", "group": "To serve" },
     { "ingredient": "pickle-dill", "amount": 3, "unit": "count", "round": "up", "optional": true, "group": "To serve" }
   ],
-  "substitutions": [{ "for": "pita", "use": "tortilla-gluten-free", "reason": "gluten" }],
+  "substitutions": [
+    { "for": "pita", "use": "tortilla-gluten-free", "reason": "gluten" },
+    { "for": "pita", "use": "tortilla-corn", "reason": "unleavened", "ratio": 2 }
+  ],
   "equipment": [
     "skewers",
     "cutting-board",

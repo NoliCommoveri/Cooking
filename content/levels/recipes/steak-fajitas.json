@@ -59,7 +59,8 @@
     { "ingredient": "sour-cream", "amount": 0.5, "unit": "cup", "optional": true, "group": "To serve" }
   ],
   "substitutions": [
-    { "for": "tortilla-flour", "use": "tortilla-corn", "reason": "gluten", "note": "Warm corn tortillas in pairs so they don't crack." }
+    { "for": "tortilla-flour", "use": "tortilla-corn", "reason": "gluten", "note": "Warm corn tortillas in pairs so they don't crack." },
+    { "for": "tortilla-flour", "use": "tortilla-corn", "reason": "unleavened", "ratio": 2 }
   ],
   "equipment": [
     "kitchen-scale",

@@ -33,6 +33,16 @@ lists what counts and the hidden sources to watch for.
 
 ---
 
+## How the app words its rules
+
+Families keep these rules because they want to (owner, 2026-10-28). Wording
+for anything the app checks or holds back (unclean foods, the unleavened
+days, the Sabbath) isn't framed as "we aren't letting you do this". It's the
+app helping them plan, and making it hard to do something by accident
+without meaning to. Show it as a calm note, not a red error.
+
+---
+
 ## Browser-only operations
 
 **The owner has no command line.** Every setup, migration, seed, deploy, and

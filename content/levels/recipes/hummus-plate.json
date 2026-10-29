@@ -55,7 +55,10 @@
     { "ingredient": "pita", "amount": 4, "unit": "count", "group": "Plate" }
   ],
   "substitutions": [
-    { "for": "pita", "use": "bread-gluten-free", "reason": "gluten", "note": "Toast gluten-free bread and cut it into strips for dipping." }
+    { "for": "pita", "use": "bread-gluten-free", "reason": "gluten", "note": "Toast gluten-free bread and cut it into strips for dipping." },
+    { "for": "pita", "use": "soft-unleavened-bread", "reason": "unleavened", "ratio": 2 },
+    { "for": "pita", "use": "matzah", "reason": "unleavened" },
+    { "for": "pita", "use": "matzah-gluten-free", "reason": "unleavened" }
   ],
   "equipment": [
     "can-opener",
