@@ -64,7 +64,9 @@
   "substitutions": [
     { "for": "lamb-ground", "use": "beef-ground", "reason": "availability", "note": "Ground beef costs less and is easier to find. Cook it the same way, to 160°F." },
     { "for": "panko", "use": "oats-gluten-free", "reason": "gluten", "note": "Chop gluten-free rolled oats fine and use the same amount." },
-    { "for": "pita", "use": "tortilla-gluten-free", "reason": "gluten" }
+    { "for": "pita", "use": "tortilla-gluten-free", "reason": "gluten" },
+    { "for": "panko", "use": "matzah-meal", "reason": "unleavened" },
+    { "for": "pita", "use": "tortilla-corn", "reason": "unleavened", "ratio": 2 }
   ],
   "equipment": [
     "box-grater",

@@ -1,7 +1,8 @@
 // Leaven and the Appointed Times unit (plan §6.19).
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { leavenIn, unleavened } from '../src/content/leaven.js';
+import { leavenIn, unleavened, feastView, feastOk, withFeast } from '../src/content/leaven.js';
+import { dietView } from '../src/content/diet.js';
 import { seasonalLabels } from '../src/content/course.js';
 import { lint } from '../src/content/lint.js';
 import { CONTENT } from '../src/worker/content-data.js';
@@ -58,4 +59,39 @@ test('the linter wants every Appointed Times lesson listed, and only those', () 
   const errors = lint({ ...CONTENT, units, registryFiles: {} }).errors.join('\n');
   assert.match(errors, /lessons doesn't list "cottage-cheese-crescents"/);
   assert.match(errors, /lists "shakshuka", which isn't a written lesson in this unit/);
+});
+
+// The unleavened swaps (§6.20): applied on the family's unleavened days.
+const anyLesson = (id) => [...CONTENT.lessons, ...(CONTENT.levelLessons ?? [])].find((x) => x.data.id === id).data;
+
+test('unleavened swaps: soft unleavened bread first, then matzah, then gluten-free matzah, by the family\'s diet', () => {
+  const tuna = lesson('tuna-salad-sandwiches');
+  assert.deepEqual(feastView(tuna, REG, [], LV), { ok: true, applied: [{ for: 'bread-sandwich', use: 'soft-unleavened-bread', ratio: 1 }], leftOut: [] });
+  assert.equal(feastView(tuna, REG, ['egg'], LV).applied[0].use, 'matzah', 'soft unleavened bread has egg');
+  // Gluten-free: the diet swap's gluten-free bread is still bread, so it's swapped again.
+  assert.equal(feastView(tuna, REG, ['gluten'], LV).applied[0].use, 'matzah-gluten-free');
+  assert.deepEqual(withFeast(dietView(tuna, REG, ['gluten']), feastView(tuna, REG, ['gluten'], LV)).applied.find((x) => x.for === 'bread-sandwich'), { for: 'bread-sandwich', use: 'matzah-gluten-free' });
+  // A diet swap that isn't leaven (gluten-free tortillas) needs none.
+  assert.deepEqual(feastView(anyLesson('shish-taouk'), REG, ['gluten'], LV).applied, []);
+  assert.equal(feastView(lesson('chicken-caesar'), REG, [], LV).applied[0].ratio, 6, 'half a pan of squares for a baguette');
+});
+
+test('a lesson counts as unleavened on those days only when every leaven ingredient is swapped and no step needs a raising agent', () => {
+  assert.equal(feastOk(lesson('shakshuka'), REG, [], LV), true);
+  assert.equal(feastOk(lesson('smash-burgers'), REG, [], LV), false, 'no swap for the toasted buns');
+  assert.equal(feastOk(lesson('buttermilk-biscuits'), REG, [], LV), false);
+  const soda = { ingredients: [{ ingredient: 'flour-ap' }], steps: [{ text: 'Stir in the baking soda.' }] };
+  assert.equal(feastView(soda, REG, [], LV).ok, false);
+  // An optional bread with no swap is left out.
+  const opt = { ingredients: [{ ingredient: 'baguette', optional: true }], steps: [] };
+  assert.deepEqual(feastView(opt, REG, [], LV), { ok: true, applied: [], leftOut: ['baguette'] });
+});
+
+test('unleavened swaps are never diet swaps, and the linter wants them to replace leaven with something that isn\'t', () => {
+  const r = { ingredients: [{ ingredient: 'pita' }], substitutions: [{ for: 'pita', use: 'matzah-gluten-free', reason: 'unleavened' }], steps: [] };
+  assert.deepEqual(dietView(r, REG, ['gluten']).blockedBy, ['pita']);
+  const L = lesson('fattoush');
+  const bad = { ...L, substitutions: [...L.substitutions, { for: 'pita', use: 'baguette', reason: 'unleavened' }] };
+  const lessons = CONTENT.lessons.map((x) => (x.data.id === 'fattoush' ? { ...x, data: bad } : x));
+  assert.match(lint({ ...CONTENT, lessons, registryFiles: {} }).errors.join('\n'), /unleavened substitution uses "baguette", which is leaven/);
 });

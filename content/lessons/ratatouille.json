@@ -155,5 +155,10 @@
         }
       }
     }
+  ],
+  "substitutions": [
+    { "for": "baguette", "use": "soft-unleavened-bread", "reason": "unleavened", "ratio": 6 },
+    { "for": "baguette", "use": "matzah", "reason": "unleavened", "ratio": 4 },
+    { "for": "baguette", "use": "matzah-gluten-free", "reason": "unleavened", "ratio": 4 }
   ]
 }

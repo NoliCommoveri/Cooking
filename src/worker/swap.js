@@ -22,7 +22,7 @@ import { CONTENT } from './content-data.js';
 import { LIBRARY } from './library-data.js';
 import { dietView } from '../content/diet.js';
 import { servingOptions } from '../content/scale.js';
-import { unleavened } from '../content/leaven.js';
+import { unleavened, feastOk } from '../content/leaven.js';
 import { family, queueProfiles, today, weekFor, replaceStatements, levelLessonOn } from './plan.js';
 import { addDays } from './schedule.js';
 import { REGISTRY, stored, rowLesson, recipeVisible, lessonFor } from './recipes.js';
@@ -57,10 +57,12 @@ export async function swapOptions(env, fam, week, pids = []) {
   const spring = fam.release >= UNLEAVENED_RELEASE ? unleavenedWeek(week, await datesFor(env, fam.id)) : springWeek(week);
   // A Level's own recipes (§12.4) only with the Levels' release.
   const libOk = (L) => levelLessonOn(L, fam.release) && dietView(L, LIBRARY.ingredients, filters).visible;
+  // With release 2, a lesson its unleavened swaps make unleavened for this family counts too.
+  const unlvOk = (L) => L.unleavened || (fam.release >= UNLEAVENED_RELEASE && feastOk(L, LIBRARY.ingredients, filters, CONTENT.rules.leaven));
   const out = [];
   const lesson = (L, group) => ({ id: L.id, title: L.title, label: LABELS[L.id] ?? null, group, image: L.image, unleavened: Boolean(L.unleavened), feast: Boolean(L.feast) });
   for (const L of LIBRARY.lessons) if (seasonal.has(L.id) && libOk(L) && (!spring || L.unleavened)) out.push(lesson(L, 'Appointed Times lessons'));
-  for (const L of LIBRARY.lessons) if (!seasonal.has(L.id) && libOk(L) && (spring ? L.unleavened : L.feast)) out.push(lesson(L, 'Other lessons'));
+  for (const L of LIBRARY.lessons) if (!seasonal.has(L.id) && libOk(L) && (spring ? unlvOk(L) : L.feast)) out.push(lesson(L, 'Other lessons'));
 
   // Parent recipes: the family's own, then the directory. One the family
   // already added from the directory is offered as its own copy.

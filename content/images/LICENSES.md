@@ -38,6 +38,7 @@ use in this app. Cropped from the source sheets in `source/` with
 | `source/sheet-26-tropical-lamb.png` | `dishes/moqueca.png`, `dishes/coconut-crusted-fish.png`, `dishes/lamb-kofta.png`, `dishes/caribbean-lamb-chops.png` |
 | `source/sheet-27-level-pick-ones-1.png` | `dishes/chopped-salad-vinaigrette.png`, `dishes/vegetable-stir-fry.png`, `dishes/red-lentil-soup.png`, `dishes/beef-stew.png` |
 | `source/sheet-28-level-pick-ones-2.png` | `dishes/shish-taouk.png`, `dishes/beef-ragu.png`, `dishes/mujaddara.png`, `dishes/pita-bread.png` |
+| `source/sheet-65-soft-unleavened-bread.png` | `dishes/soft-unleavened-bread.png` |
 
 `dishes/japchae.png` is a stand-in made from the meal-type drawing `meals/meat.svg` (drawn for this app) until the owner's next sheet.
 

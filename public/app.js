@@ -655,8 +655,9 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
   };
   const unleavenedView = () => {
     const firsts = lib.lessons.filter((L) => seasonalUnit(L.unit) && L.unleavened).map(lessonBtn);
+    // Then the other unleavened lessons, those made so with their unleavened swaps included.
     const rest = [
-      ...lib.lessons.filter((L) => !seasonalUnit(L.unit) && L.unleavened && !cooks[L.id]).map(lessonBtn),
+      ...lib.lessons.filter((L) => !seasonalUnit(L.unit) && (L.unleavened || L.feast_ok) && !cooks[L.id]).map(lessonBtn),
       ...ours.filter((r) => r.unleavened && !cooks[r.id]).map((r) => recipeBtn(r)),
       ...feastShelf.filter((r) => r.unleavened && !cooks[`shared:${r.id}`]).map((r) => recipeBtn({ ...r, id: `shared:${r.id}` }, 'User-shared recipe')),
     ];
@@ -850,8 +851,10 @@ async function lesson(profileId, lessonId) {
     level: mine.level ? { name: mine.level.name, week: mine.level.week_of?.[lessonId] ?? null, adultHome: Boolean(mine.level.adult_home?.includes(lessonId)) } : null,
     // Step pictures under each step, or behind Show me (14e).
     pictures: mine.level?.pictures ?? 'button',
+    feastDays: Boolean(mine.feast_today),
     // A leavened lesson on the unleavened days (§6.20): read, not started.
-    resting: mine.feast_today && (recipe ? !recipe.unleavened : lib.lessons.some((x) => x.id === lessonId && !x.unleavened))
+    // One its unleavened swaps make unleavened is cooked with them instead (feastDays).
+    resting: mine.feast_today && (recipe ? !recipe.unleavened : lib.lessons.some((x) => x.id === lessonId && !x.unleavened && !x.feast_ok))
       ? { until: fmtDay(mine.feast_today.until, { month: 'long', day: 'numeric' }), show: () => { sessionSet(`cpr.unleavened.${p.id}`, '1'); go(`#/kitchen/${p.id}/@more`); } } : null,
     // "I want to make this" or "Cook this" (§6.1), and the queued lesson's
     // servings and who it's for, for a fresh cook.
@@ -2234,7 +2237,7 @@ const courseEditor = parentOnly(async (cid) => {
     const d = feast?.dates, V = levelOf();
     feastBox.hidden = true;
     if (!d || !V) return;
-    const leavened = (rid) => lib.lessons.some((x) => x.id === rid && !x.unleavened);
+    const leavened = (rid) => lib.lessons.some((x) => x.id === rid && !x.unleavened && !x.feast_ok);
     const touches = (w) => w <= d.last_day && addDays(w, 5) >= d.unleavened_from;
     let c = weekOf(startIn.value || localToday()), held = null;
     for (const w of levelWeeks().filter((x) => x.id && !x.removed && !x.blocked && written.has(x.id) && !hidden.has(x.id))) {

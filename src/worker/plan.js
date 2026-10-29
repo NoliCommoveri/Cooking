@@ -22,7 +22,7 @@ import { tasteContext, versionFor, bestPlan, hatedExtras, versionSummary, levelP
 import { variationChoices } from './variations.js';
 import { releaseOn, familyRelease, LEVELS_RELEASE, UNLEAVENED_RELEASE } from './release.js';
 import { datesFor, feastGuard } from './unleavened.js';
-import { unleavened } from '../content/leaven.js';
+import { unleavened, feastOk } from '../content/leaven.js';
 import { unleavenedOn } from '../content/calendars.js';
 import { PARTS, PART_NAMES, coursePartsOf, weekParts, plannedMinutes, hoursOf } from '../content/levels.js';
 
@@ -968,9 +968,11 @@ async function courseTaken(env, course, profiles, usable) {
   return new Set(results.map((r) => r.lesson_id).filter((x) => ids.has(x)));
 }
 
-// Whether a course lesson has leaven: a library lesson without the
-// Unleavened badge, or a learner's own recipe that doesn't pass the check.
-const leavenedIn = (lessons) => (id) => (lessons.own?.[id] ? !lessons.own[id].unleavened : lessonById[id] ? !lessonById[id].unleavened : false);
+// Whether a course lesson has leaven on the unleavened days: a library lesson
+// that isn't unleavened even with its unleavened swaps (for the family's diet),
+// or a learner's own recipe that doesn't pass the check.
+const leavenedIn = (lessons, filters) => (id) => (lessons.own?.[id] ? !lessons.own[id].unleavened
+  : lessonById[id] ? !feastOk(lessonById[id], LIBRARY.ingredients, filters, CONTENT.rules.leaven) : false);
 
 async function courseState(env, course, fam, day, tz) {
   const profiles = await courseProfiles(env, course);
@@ -981,7 +983,7 @@ async function courseState(env, course, fam, day, tz) {
   const tasks = await levelTasks(env, course, profiles);
   const writing = await levelWriting(env, course, profiles);
   // The Unleavened Bread pause (§6.20), with its release.
-  const pause = fam.release >= UNLEAVENED_RELEASE ? { dates: await datesFor(env, fam.id), leavened: leavenedIn(lessons) } : null;
+  const pause = fam.release >= UNLEAVENED_RELEASE ? { dates: await datesFor(env, fam.id), leavened: leavenedIn(lessons, JSON.parse(fam.diet_filters)) } : null;
   return { course, profiles, lessons, done, taken, tasks, writing, sched: schedule({ course, lessons: lessons.usable, done, free, taken, weeks, today: day, pause }) };
 }
 

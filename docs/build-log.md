@@ -7307,3 +7307,61 @@ Owner, 2026-10-28: "no lessons are supposed to be hidden until testcooked".
 - Screenshots sent: the Appointed Times shelf with it, in both kitchen
   themes, light and dark.
 - Tests: 425.
+
+## 278. 2026-10-28 — Unleavened swaps for 24 lessons
+
+Owner, 2026-10-28, with ChatGPT's picture of soft unleavened bread: "Now do
+the swaps. Use the soft bread where appropriate than matzo".
+
+- **Soft unleavened bread's own picture:** sheet 65
+  (`content/images/source/sheet-65-soft-unleavened-bread.png`), cropped
+  with `tools/crop-dish-sheet.py`; it replaces the flatbread's picture the
+  lesson borrowed (276).
+- **Before:** the review doc's easy swaps were a list. On the unleavened
+  days every lesson with leaven was held back, paused on, and left out of
+  Swap and Show me some.
+- **Now (release 2, preview only):**
+  - **New ingredients:** matzah, gluten-free matzah, and matzah meal, with
+    the owner's label note "Plain matzah: flour and water only."; and soft
+    unleavened bread (squares, bought as "1 pan, made from lesson U3").
+  - **A new substitution reason, `unleavened`,** with an optional `ratio`
+    (how many of the replacement for one of what it replaces). It's never a
+    diet swap. The linter checks that an unleavened swap replaces leaven
+    with something that isn't.
+  - **The 24 easy swaps are written** (the review doc counted 23; Chicken
+    Caesar is one of 24): corn tortillas for flour tortillas (2 for 1) and
+    for pita as a wrap; matzah for pita toasted crisp (fattoush, pita
+    chips); soft unleavened bread for bread and pita eaten soft (hummus,
+    shakshuka, mini pizzas, Caesar croutons, chermoula, cacciatore, çılbır,
+    antipasto, ratatouille; 6 squares for a baguette, 2 for a pita) and for
+    sandwich bread (a square a slice) and ciabatta (2 a roll); matzah meal
+    for panko. Where soft bread is the swap, matzah comes next and then
+    gluten-free matzah: the first that fits the family's diet is used.
+  - **`feastView`** (`src/content/leaven.js`): after the family's diet
+    swaps, each ingredient that's still leaven takes its first fitting
+    unleavened swap; an optional one with none is left out. A lesson counts
+    as unleavened on those days when nothing leaven is left and no step
+    names a raising agent (a step naming the bread being swapped is fine,
+    the way diet swaps leave steps as written). `feastOk` is that or the
+    Unleavened badge.
+  - **Where it's used:** the course pause doesn't hold at such a lesson;
+    the date check lets it be planned on those days; Swap offers it in
+    those weeks; `/api/library` says `feast_ok`, so the kitchen lets it be
+    started and lists it in Show me some, and Level course setup's note
+    skips it. **In the player,** on those days, the card says "For
+    Unleavened Bread: Use soft unleavened bread instead of sandwich bread.
+    Make it first with lesson U3, Soft unleavened bread." and the prep list
+    says "Use soft unleavened bread instead". **Shopping lists** buy the
+    swaps, by ratio, for a lesson whose week touches the days: its planned
+    week in What you'll need, or on a saved list its queued lesson's week,
+    else the week the list was made.
+  - `public/content/registry.json` carries the leaven list for the player.
+  - The tests that used shakshuka, fajitas, and souvlaki as leavened
+    lessons now use smash burgers, grilled cheese, and challah French toast,
+    which have no swap.
+- **Not built yet:** the 18 lessons that need an unleavened version; a
+  saved list doesn't store each lesson's week, so a course lesson bought
+  ahead without a queued lesson goes by the week the list was made.
+- Screenshots sent: tuna salad sandwiches on April 23, 2027, its card's
+  note and its prep list, in both kitchen themes, light and dark.
+- Tests: 430.

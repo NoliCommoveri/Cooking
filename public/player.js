@@ -9,6 +9,7 @@ import { scaleLesson, servingOptions } from './lib/scale.js';
 import { findTerms } from './lib/terms.js';
 import { ingredientsInStep } from './lib/amounts.js';
 import { dietView } from './lib/diet.js';
+import { feastView, withFeast } from './lib/leaven.js';
 import { applyPatches, showValue } from './lib/patch.js';
 import { lessonVersion } from './lib/variations.js';
 import { courseNo } from './lib/course.js';
@@ -144,7 +145,9 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 // resting: { until, show } for a leavened lesson on the family's unleavened
 // days (§6.20): until, the day it can be cooked again, in words; show(),
 // Show me some. It can be read, not started, a cook under way included.
-export async function openLesson(mount, { profile, family, lessonId, variation = null, leaveOut = [], lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, level = null, pictures = 'button', ask = null, seed = null, resting = null, onDone = null, mastery = false, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
+// feastDays: today is one of the family's unleavened days (§6.20), so a
+// leavened lesson's unleavened swaps are applied, the way diet swaps are.
+export async function openLesson(mount, { profile, family, lessonId, variation = null, leaveOut = [], lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, level = null, pictures = 'button', ask = null, seed = null, resting = null, feastDays = false, onDone = null, mastery = false, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
   const [published, B] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
   const kept = readState(profile.id, B.id);
   const L = lessonVersion(B, kept?.cookId ? kept.variation ?? null : variation);
@@ -164,7 +167,14 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
   await loadFixes();
   const quest = profile.theme === 'quest';
   const adult = profile.audience === 'adult';
-  const view = dietView(L, ING, family.diet_filters);
+  let view = dietView(L, ING, family.diet_filters);
+  const dietApplied = new Set(view.applied.map((x) => `${x.for}>${x.use}`)), dietLeft = [...view.leftOut];
+  // The unleavened days' swaps (§6.20) on top of the diet's, when they make it unleavened.
+  if (feastDays && !resting && R.leaven) {
+    const fv = feastView(L, ING, family.diet_filters, R.leaven);
+    if (fv.ok && (fv.applied.length || fv.leftOut.length)) view = withFeast(view, fv);
+  }
+  const feastLeft = view.leftOut.filter((id) => !dietLeft.includes(id));
   const options = servingOptions(L);
   const pick = (n) => (options.includes(n) ? n : options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a)));
   const fresh = () => ({
@@ -350,12 +360,18 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
         ? `<div class="p-serve-row"><span class="p-lbl">Serves</span>${options.map((n) => `<button type="button" class="p-step" style="width:auto;padding:0 14px" aria-pressed="${n === S.servings}" data-act="serv-set" data-n="${n}">${n}</button>`).join('')}</div>`
         : `<div class="p-serve-row"><span class="p-lbl">Serves</span><button type="button" class="p-step" data-act="serv" data-i="-1" aria-label="Fewer servings" ${S.servings <= options[0] ? 'disabled' : ''}>−</button><span class="p-num" aria-live="polite">${S.servings}</span><button type="button" class="p-step" data-act="serv" data-i="1" aria-label="More servings" ${S.servings >= options.at(-1) ? 'disabled' : ''}>+</button></div><div class="p-plates" aria-hidden="true">${'<svg viewBox="0 0 100 100"><use href="/icons.svg#plate"/></svg>'.repeat(S.servings)}</div>`}
         <p class="p-small">Your family's usual: ${family.default_servings}</p>${shoppedNote('p-pan')}${sc.note ? `<p class="p-pan">${ic('t-pans')}${esc(sc.note)}</p>` : ''}</div>`;
+    const forFeast = [
+      ...(view.feast ?? []).map((x) => `Use ${esc(name(x.use).toLowerCase())} instead of ${esc(name(x.for).toLowerCase())}.`),
+      ...feastLeft.map((id) => `Leave out the ${esc(name(id).toLowerCase())}.`),
+      ...((view.feast ?? []).some((x) => x.use === 'soft-unleavened-bread') ? ['Make it first with lesson U3, Soft unleavened bread.'] : []),
+    ];
     const changes = [
-      ...view.applied.map((x) => `Use ${esc(name(x.use).toLowerCase())} instead of ${esc(name(x.for).toLowerCase())}.`),
-      ...view.leftOut.map((id) => `Leave out the ${esc(name(id).toLowerCase())}.`),
+      ...view.applied.filter((x) => dietApplied.has(`${x.for}>${x.use}`)).map((x) => `Use ${esc(name(x.use).toLowerCase())} instead of ${esc(name(x.for).toLowerCase())}.`),
+      ...dietLeft.map((id) => `Leave out the ${esc(name(id).toLowerCase())}.`),
       ...hated.map((x) => `Leave out the ${esc(name(x.ingredient).toLowerCase())} (${esc(x.who.join(' and '))} ${x.who.length === 1 ? "doesn't" : "don't"} like it).`),
     ];
     const swaps = (changes.length ? `<p class="${T.note}"><b>For your family:</b> ${changes.join(' ')}</p>` : '')
+      + (forFeast.length ? `<p class="${T.note} feastswap">${ic('i-unleavened')}<b>For Unleavened Bread:</b> ${forFeast.join(' ')}</p>` : '')
       + (mastery ? `<p class="${T.note}"><b>Mastery: cook it on your own.</b> This week checks the skill you've practised. Afterwards, say why it worked.</p>` : '');
     // Profiles cooking together share one cook, and it counts for each of them (§1).
     const who = crew.length

@@ -10,7 +10,10 @@ import { CONTENT } from './content-data.js';
 import { LIBRARY } from './library-data.js';
 import { servingOptions } from '../content/scale.js';
 import { shoppingList, SECTIONS } from '../content/shop.js';
-import { family, syncQueue, queueProfiles, today, tzOf } from './plan.js';
+import { family, syncQueue, queueProfiles, today, tzOf, weekFor } from './plan.js';
+import { UNLEAVENED_RELEASE } from './release.js';
+import { datesFor } from './unleavened.js';
+import { unleavenedWeek } from '../content/calendars.js';
 import { weekOf } from './schedule.js';
 import { isRecipeId, lessonFor, recipeNames, REGISTRY as FULL } from './recipes.js';
 import { variationChoices, versionTitle, listVariations, listVariationRow } from './variations.js';
@@ -84,14 +87,18 @@ const staplesOf = async (env, fid) => (await env.DB.prepare('SELECT ingredient_i
 async function needs(env, fam, entries, { staples = [], skip = [] } = {}) {
   const lessons = [];
   let registry = REGISTRY;
+  // A lesson cooked in a week that touches the family's unleavened days gets
+  // its unleavened swaps (§6.20), with that release. e.week: its week.
+  const dates = fam.release >= UNLEAVENED_RELEASE ? await datesFor(env, fam.id) : null;
   for (const e of entries) {
     // A family recipe's typed-in ingredients sit beside the registry, unmerged.
     const found = await lessonFor(env, fam.id, e.lesson_id, { deleted: true });
     if (!found) continue;
     if (Object.keys(found.extra).length) registry = { ...registry, ...found.extra };
-    lessons.push({ lesson: e.variation ? lessonVersion(found.lesson, e.variation) : found.lesson, servings: e.servings, leaveOut: (e.left_out ?? []).map((x) => x.ingredient) });
+    lessons.push({ lesson: e.variation ? lessonVersion(found.lesson, e.variation) : found.lesson, servings: e.servings, leaveOut: (e.left_out ?? []).map((x) => x.ingredient),
+      feast: Boolean(dates && e.week && unleavenedWeek(e.week, dates)) });
   }
-  return shoppingList({ lessons, registry, filters: JSON.parse(fam.diet_filters), staples, skip });
+  return shoppingList({ lessons, registry, filters: JSON.parse(fam.diet_filters), staples, skip, leaven: CONTENT.rules.leaven });
 }
 
 const ownList = async (env, fid, lid) => (await env.DB.prepare('SELECT * FROM shopping_lists WHERE id = ? AND family_id = ?').bind(lid, fid).first())
@@ -111,7 +118,10 @@ async function listOut(env, fam, list) {
     if (tc && l.queue_id) pids = (await queueProfiles(env, fam.id, [l.queue_id]))[l.queue_id] ?? [];
     if (tc && !pids.length && l.course_id) pids = (await env.DB.prepare('SELECT profile_id FROM course_profiles WHERE course_id = ? AND family_id = ?').bind(l.course_id, fam.id).all()).results.map((r) => r.profile_id);
     const out = pids.length ? hatedExtras(tc, versionSummary(l.lesson_id, l.variation), pids) : [];
-    lessons.push(out.length ? { ...l, left_out: out } : l);
+    // Its week, for the unleavened swaps: its queued lesson's, or the week the list was made.
+    const q = l.queue_id ? await env.DB.prepare('SELECT week_start, planned_date FROM queue WHERE id = ? AND family_id = ?').bind(l.queue_id, fam.id).first() : null;
+    const week = q ? weekFor(q, list.created_at.slice(0, 10)) : weekOf(list.created_at.slice(0, 10));
+    lessons.push({ ...l, week, ...(out.length ? { left_out: out } : {}) });
   }
   const onHand = (await env.DB.prepare('SELECT ingredient_id FROM list_on_hand WHERE list_id = ? AND family_id = ?').bind(list.id, fam.id).all()).results.map((r) => r.ingredient_id);
   const checked = (await env.DB.prepare('SELECT ingredient_id FROM list_checks WHERE list_id = ? AND family_id = ?').bind(list.id, fam.id).all()).results.map((r) => r.ingredient_id);

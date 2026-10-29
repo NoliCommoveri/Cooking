@@ -63,7 +63,8 @@
     { "ingredient": "panko", "amount": 0.33, "unit": "cup", "group": "Filling" }
   ],
   "substitutions": [
-    { "for": "scotch-bonnet", "use": "jalapeno", "reason": "availability", "note": "Milder. Use a whole one, seeded." }
+    { "for": "scotch-bonnet", "use": "jalapeno", "reason": "availability", "note": "Milder. Use a whole one, seeded." },
+    { "for": "panko", "use": "matzah-meal", "reason": "unleavened" }
   ],
   "equipment": [
     "kitchen-scale",

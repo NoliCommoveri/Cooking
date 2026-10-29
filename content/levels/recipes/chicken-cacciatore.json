@@ -93,5 +93,10 @@
     { "id": "braise-breast", "text": "Add the breasts and braise, covered, until the breasts reach temperature.", "safety": "solo", "hazard": "Hot pot", "timerSeconds": 1200, "timerLabel": "With breasts" },
     { "id": "check", "text": "Check a breast and a thigh, away from the bone: both at least 165°F. The thigh should be tender; if not, braise 10 more minutes.", "safety": "solo", "hazard": "Hot pot", "type": "doneness", "target": { "temp": 165, "unit": "F" } },
     { "id": "serve", "text": "Discard the bay leaves, season the sauce to taste, and scatter the parsley. Serve with sliced bread.", "safety": "solo", "hazard": "Hot pot" }
+  ],
+  "substitutions": [
+    { "for": "baguette", "use": "soft-unleavened-bread", "reason": "unleavened", "ratio": 6 },
+    { "for": "baguette", "use": "matzah", "reason": "unleavened", "ratio": 4 },
+    { "for": "baguette", "use": "matzah-gluten-free", "reason": "unleavened", "ratio": 4 }
   ]
 }

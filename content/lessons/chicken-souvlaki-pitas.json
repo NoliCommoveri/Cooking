@@ -59,7 +59,8 @@
     { "ingredient": "onion-red", "amount": 0.5, "unit": "count", "round": "up", "group": "To serve" }
   ],
   "substitutions": [
-    { "for": "pita", "use": "tortilla-corn", "reason": "gluten", "note": "Warm two corn tortillas for each pita." }
+    { "for": "pita", "use": "tortilla-corn", "reason": "gluten", "note": "Warm two corn tortillas for each pita." },
+    { "for": "pita", "use": "tortilla-corn", "reason": "unleavened", "ratio": 2 }
   ],
   "equipment": [
     "box-grater",

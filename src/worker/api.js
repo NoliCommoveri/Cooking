@@ -12,6 +12,8 @@ import { sendEmail, emailReady, resetEmail, signupCodeEmail, fixReportEmail } fr
 import { livePatches, liveLesson, patchProblems } from './lessons.js';
 import { cleanValue, getAt, setAt, patchSpec, showValue } from '../content/patch.js';
 import { LIBRARY } from './library-data.js';
+import { CONTENT } from './content-data.js';
+import { feastView } from '../content/leaven.js';
 import { dietView } from '../content/diet.js';
 import { FREE_MAX, servingOptions } from '../content/scale.js';
 import { numberCourse } from '../content/course.js';
@@ -430,6 +432,8 @@ on('GET', '/api/library', async (req, env) => {
       skill: L.skill, servings: L.servings, totalMinutes: minutes(L),
       substitutions: view.applied.map((x) => ({ for: name(x.for), use: name(x.use) })),
       left_out: view.leftOut.map(name), unleavened: L.unleavened, feast: L.feast,
+      // Leavened, but its unleavened swaps (§6.20) make it so for this family's diet.
+      feast_ok: !L.unleavened && feastView(L, LIBRARY.ingredients, filters, CONTENT.rules.leaven).ok,
       // The kitchen's search (a name or an ingredient), and the pick-one group
       // its path counts once.
       search: [L.title, L.skill, LIBRARY.cuisines[L.cuisine], ...L.ingredients.map((x) => name(x.ingredient))].join(' ').toLowerCase(),

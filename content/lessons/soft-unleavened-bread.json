@@ -15,7 +15,7 @@
     "veggies": "light"
   },
   "title": "Soft unleavened bread",
-  "image": "dishes/unleavened-flatbread.png",
+  "image": "dishes/soft-unleavened-bread.png",
   "cuisine": "american",
   "skill": "A batter bread with no leaven, beaten hard and baked hot",
   "skills": ["batters", "flatbreads"],

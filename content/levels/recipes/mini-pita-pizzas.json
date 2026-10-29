@@ -50,7 +50,10 @@
     { "ingredient": "olive-oil", "amount": 1, "unit": "tbsp", "group": "Toppings" }
   ],
   "substitutions": [
-    { "for": "pita", "use": "bread-gluten-free", "reason": "gluten", "note": "Use gluten-free bread slices, toasted first so they stay crisp." }
+    { "for": "pita", "use": "bread-gluten-free", "reason": "gluten", "note": "Use gluten-free bread slices, toasted first so they stay crisp." },
+    { "for": "pita", "use": "soft-unleavened-bread", "reason": "unleavened", "ratio": 2 },
+    { "for": "pita", "use": "matzah", "reason": "unleavened" },
+    { "for": "pita", "use": "matzah-gluten-free", "reason": "unleavened" }
   ],
   "equipment": [
     "sheet-pan",

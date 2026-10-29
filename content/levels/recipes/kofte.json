@@ -61,7 +61,9 @@
   ],
   "substitutions": [
     { "for": "panko", "use": "oats-gluten-free", "reason": "gluten", "note": "Use the same amount of quick gluten-free oats." },
-    { "for": "pita", "use": "tortilla-gluten-free", "reason": "gluten" }
+    { "for": "pita", "use": "tortilla-gluten-free", "reason": "gluten" },
+    { "for": "panko", "use": "matzah-meal", "reason": "unleavened" },
+    { "for": "pita", "use": "tortilla-corn", "reason": "unleavened", "ratio": 2 }
   ],
   "equipment": [
     "microwave",

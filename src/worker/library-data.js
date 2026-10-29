@@ -210,6 +210,11 @@ export const LIBRARY = {
      "for": "tortilla-flour",
      "use": "tortilla-corn",
      "reason": "gluten"
+    },
+    {
+     "for": "tortilla-flour",
+     "use": "tortilla-corn",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -342,6 +347,11 @@ export const LIBRARY = {
        "for": "tortilla-flour",
        "use": "tortilla-corn",
        "reason": "gluten"
+      },
+      {
+       "for": "tortilla-flour",
+       "use": "tortilla-corn",
+       "reason": "unleavened"
       }
      ],
      "unleavened": false,
@@ -474,6 +484,11 @@ export const LIBRARY = {
        "for": "tortilla-flour",
        "use": "tortilla-corn",
        "reason": "gluten"
+      },
+      {
+       "for": "tortilla-flour",
+       "use": "tortilla-corn",
+       "reason": "unleavened"
       }
      ],
      "unleavened": false,
@@ -612,6 +627,11 @@ export const LIBRARY = {
        "for": "tortilla-flour",
        "use": "tortilla-corn",
        "reason": "gluten"
+      },
+      {
+       "for": "tortilla-flour",
+       "use": "tortilla-corn",
+       "reason": "unleavened"
       }
      ],
      "unleavened": false,
@@ -747,6 +767,11 @@ export const LIBRARY = {
        "for": "tortilla-flour",
        "use": "tortilla-corn",
        "reason": "gluten"
+      },
+      {
+       "for": "tortilla-flour",
+       "use": "tortilla-corn",
+       "reason": "unleavened"
       }
      ],
      "unleavened": false,
@@ -971,6 +996,16 @@ export const LIBRARY = {
      "for": "pita",
      "use": "tortilla-corn",
      "reason": "gluten"
+    },
+    {
+     "for": "pita",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "pita",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -1304,6 +1339,21 @@ export const LIBRARY = {
      "for": "mayonnaise",
      "use": "yogurt-greek",
      "reason": "egg"
+    },
+    {
+     "for": "bread-sandwich",
+     "use": "soft-unleavened-bread",
+     "reason": "unleavened"
+    },
+    {
+     "for": "bread-sandwich",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "bread-sandwich",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -1420,6 +1470,21 @@ export const LIBRARY = {
        "for": "mayonnaise",
        "use": "yogurt-greek",
        "reason": "egg"
+      },
+      {
+       "for": "bread-sandwich",
+       "use": "soft-unleavened-bread",
+       "reason": "unleavened"
+      },
+      {
+       "for": "bread-sandwich",
+       "use": "matzah",
+       "reason": "unleavened"
+      },
+      {
+       "for": "bread-sandwich",
+       "use": "matzah-gluten-free",
+       "reason": "unleavened"
       }
      ],
      "unleavened": false,
@@ -1687,7 +1752,23 @@ export const LIBRARY = {
      "optional": true
     }
    ],
-   "substitutions": [],
+   "substitutions": [
+    {
+     "for": "baguette",
+     "use": "soft-unleavened-bread",
+     "reason": "unleavened"
+    },
+    {
+     "for": "baguette",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "baguette",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
+    }
+   ],
    "unleavened": false,
    "feast": false,
    "protein": "vegetarian",
@@ -1802,7 +1883,23 @@ export const LIBRARY = {
        "optional": true
       }
      ],
-     "substitutions": [],
+     "substitutions": [
+      {
+       "for": "baguette",
+       "use": "soft-unleavened-bread",
+       "reason": "unleavened"
+      },
+      {
+       "for": "baguette",
+       "use": "matzah",
+       "reason": "unleavened"
+      },
+      {
+       "for": "baguette",
+       "use": "matzah-gluten-free",
+       "reason": "unleavened"
+      }
+     ],
      "unleavened": false,
      "protein": "vegetarian",
      "tags": {
@@ -2209,6 +2306,21 @@ export const LIBRARY = {
      "for": "mayonnaise",
      "use": "yogurt-greek",
      "reason": "egg"
+    },
+    {
+     "for": "baguette",
+     "use": "soft-unleavened-bread",
+     "reason": "unleavened"
+    },
+    {
+     "for": "baguette",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "baguette",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -2488,6 +2600,11 @@ export const LIBRARY = {
      "for": "pita",
      "use": "tortilla-corn",
      "reason": "gluten"
+    },
+    {
+     "for": "pita",
+     "use": "tortilla-corn",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -2612,6 +2729,11 @@ export const LIBRARY = {
        "for": "pita",
        "use": "tortilla-corn",
        "reason": "gluten"
+      },
+      {
+       "for": "pita",
+       "use": "tortilla-corn",
+       "reason": "unleavened"
       }
      ],
      "unleavened": false,
@@ -4000,7 +4122,23 @@ export const LIBRARY = {
      "optional": true
     }
    ],
-   "substitutions": [],
+   "substitutions": [
+    {
+     "for": "pita",
+     "use": "soft-unleavened-bread",
+     "reason": "unleavened"
+    },
+    {
+     "for": "pita",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "pita",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
+    }
+   ],
    "unleavened": false,
    "feast": false,
    "protein": "vegetarian",
@@ -4118,7 +4256,23 @@ export const LIBRARY = {
        "optional": true
       }
      ],
-     "substitutions": [],
+     "substitutions": [
+      {
+       "for": "pita",
+       "use": "soft-unleavened-bread",
+       "reason": "unleavened"
+      },
+      {
+       "for": "pita",
+       "use": "matzah",
+       "reason": "unleavened"
+      },
+      {
+       "for": "pita",
+       "use": "matzah-gluten-free",
+       "reason": "unleavened"
+      }
+     ],
      "unleavened": false,
      "protein": "vegetarian",
      "tags": {
@@ -4233,7 +4387,23 @@ export const LIBRARY = {
        "optional": true
       }
      ],
-     "substitutions": [],
+     "substitutions": [
+      {
+       "for": "pita",
+       "use": "soft-unleavened-bread",
+       "reason": "unleavened"
+      },
+      {
+       "for": "pita",
+       "use": "matzah",
+       "reason": "unleavened"
+      },
+      {
+       "for": "pita",
+       "use": "matzah-gluten-free",
+       "reason": "unleavened"
+      }
+     ],
      "unleavened": false,
      "protein": "vegetarian",
      "tags": {
@@ -9434,6 +9604,11 @@ export const LIBRARY = {
      "for": "pita",
      "use": "tortilla-gluten-free",
      "reason": "gluten"
+    },
+    {
+     "for": "pita",
+     "use": "tortilla-corn",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -9568,6 +9743,11 @@ export const LIBRARY = {
        "for": "pita",
        "use": "tortilla-gluten-free",
        "reason": "gluten"
+      },
+      {
+       "for": "pita",
+       "use": "tortilla-corn",
+       "reason": "unleavened"
       }
      ],
      "unleavened": false,
@@ -12306,6 +12486,16 @@ export const LIBRARY = {
      "for": "pita",
      "use": "tortilla-gluten-free",
      "reason": "gluten"
+    },
+    {
+     "for": "panko",
+     "use": "matzah-meal",
+     "reason": "unleavened"
+    },
+    {
+     "for": "pita",
+     "use": "tortilla-corn",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -12449,6 +12639,16 @@ export const LIBRARY = {
        "for": "pita",
        "use": "tortilla-gluten-free",
        "reason": "gluten"
+      },
+      {
+       "for": "panko",
+       "use": "matzah-meal",
+       "reason": "unleavened"
+      },
+      {
+       "for": "pita",
+       "use": "tortilla-corn",
+       "reason": "unleavened"
       }
      ],
      "unleavened": false,
@@ -13803,7 +14003,7 @@ export const LIBRARY = {
    "track": "core",
    "unit": 8,
    "title": "Soft unleavened bread",
-   "image": "img/dishes/unleavened-flatbread.webp",
+   "image": "img/dishes/soft-unleavened-bread.webp",
    "cuisine": "american",
    "skill": "A batter bread with no leaven, beaten hard and baked hot",
    "servings": 6,
@@ -14578,6 +14778,21 @@ export const LIBRARY = {
      "for": "ciabatta-rolls",
      "use": "bread-gluten-free",
      "reason": "gluten"
+    },
+    {
+     "for": "ciabatta-rolls",
+     "use": "soft-unleavened-bread",
+     "reason": "unleavened"
+    },
+    {
+     "for": "ciabatta-rolls",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "ciabatta-rolls",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -15150,7 +15365,23 @@ export const LIBRARY = {
      "optional": true
     }
    ],
-   "substitutions": [],
+   "substitutions": [
+    {
+     "for": "bread-sandwich",
+     "use": "soft-unleavened-bread",
+     "reason": "unleavened"
+    },
+    {
+     "for": "bread-sandwich",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "bread-sandwich",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
+    }
+   ],
    "unleavened": false,
    "feast": false,
    "protein": "vegetarian",
@@ -15254,6 +15485,11 @@ export const LIBRARY = {
      "for": "flour-ap",
      "use": "cornstarch",
      "reason": "gluten"
+    },
+    {
+     "for": "panko",
+     "use": "matzah-meal",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -15361,6 +15597,16 @@ export const LIBRARY = {
      "for": "pita",
      "use": "tortilla-corn",
      "reason": "gluten"
+    },
+    {
+     "for": "pita",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "pita",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -15664,6 +15910,21 @@ export const LIBRARY = {
      "for": "pita",
      "use": "bread-gluten-free",
      "reason": "gluten"
+    },
+    {
+     "for": "pita",
+     "use": "soft-unleavened-bread",
+     "reason": "unleavened"
+    },
+    {
+     "for": "pita",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "pita",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -15888,6 +16149,16 @@ export const LIBRARY = {
      "for": "pita",
      "use": "tortilla-gluten-free",
      "reason": "gluten"
+    },
+    {
+     "for": "panko",
+     "use": "matzah-meal",
+     "reason": "unleavened"
+    },
+    {
+     "for": "pita",
+     "use": "tortilla-corn",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -16171,6 +16442,21 @@ export const LIBRARY = {
      "for": "pita",
      "use": "bread-gluten-free",
      "reason": "gluten"
+    },
+    {
+     "for": "pita",
+     "use": "soft-unleavened-bread",
+     "reason": "unleavened"
+    },
+    {
+     "for": "pita",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "pita",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -17510,6 +17796,11 @@ export const LIBRARY = {
      "for": "tortilla-flour",
      "use": "tortilla-gluten-free",
      "reason": "gluten"
+    },
+    {
+     "for": "tortilla-flour",
+     "use": "tortilla-corn",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -17874,6 +18165,21 @@ export const LIBRARY = {
      "for": "baguette",
      "use": "bread-gluten-free",
      "reason": "gluten"
+    },
+    {
+     "for": "baguette",
+     "use": "soft-unleavened-bread",
+     "reason": "unleavened"
+    },
+    {
+     "for": "baguette",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "baguette",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -18122,6 +18428,11 @@ export const LIBRARY = {
      "for": "flour-ap",
      "use": "cornstarch",
      "reason": "gluten"
+    },
+    {
+     "for": "panko",
+     "use": "matzah-meal",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -20371,6 +20682,21 @@ export const LIBRARY = {
      "for": "baguette",
      "use": "bread-gluten-free",
      "reason": "gluten"
+    },
+    {
+     "for": "baguette",
+     "use": "soft-unleavened-bread",
+     "reason": "unleavened"
+    },
+    {
+     "for": "baguette",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "baguette",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -20971,7 +21297,23 @@ export const LIBRARY = {
      "ingredient": "baguette"
     }
    ],
-   "substitutions": [],
+   "substitutions": [
+    {
+     "for": "baguette",
+     "use": "soft-unleavened-bread",
+     "reason": "unleavened"
+    },
+    {
+     "for": "baguette",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "baguette",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
+    }
+   ],
    "unleavened": false,
    "feast": false,
    "protein": "chicken",
@@ -21427,7 +21769,23 @@ export const LIBRARY = {
      "ingredient": "baguette"
     }
    ],
-   "substitutions": [],
+   "substitutions": [
+    {
+     "for": "baguette",
+     "use": "soft-unleavened-bread",
+     "reason": "unleavened"
+    },
+    {
+     "for": "baguette",
+     "use": "matzah",
+     "reason": "unleavened"
+    },
+    {
+     "for": "baguette",
+     "use": "matzah-gluten-free",
+     "reason": "unleavened"
+    }
+   ],
    "unleavened": false,
    "feast": false,
    "protein": "vegetarian",
@@ -22196,6 +22554,11 @@ export const LIBRARY = {
      "for": "scotch-bonnet",
      "use": "jalapeno",
      "reason": "availability"
+    },
+    {
+     "for": "panko",
+     "use": "matzah-meal",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -23386,6 +23749,11 @@ export const LIBRARY = {
      "for": "tortilla-flour",
      "use": "tortilla-corn",
      "reason": "gluten"
+    },
+    {
+     "for": "tortilla-flour",
+     "use": "tortilla-corn",
+     "reason": "unleavened"
     }
    ],
    "unleavened": false,
@@ -24891,6 +25259,29 @@ export const LIBRARY = {
   "orange": {
    "name": "Orange",
    "contains": []
+  },
+  "matzah": {
+   "name": "Matzah",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "matzah-gluten-free": {
+   "name": "Gluten-free matzah",
+   "contains": []
+  },
+  "matzah-meal": {
+   "name": "Matzah meal",
+   "contains": [
+    "gluten"
+   ]
+  },
+  "soft-unleavened-bread": {
+   "name": "Soft unleavened bread",
+   "contains": [
+    "gluten",
+    "egg"
+   ]
   }
  },
  "cuisines": {

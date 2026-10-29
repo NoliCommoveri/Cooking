@@ -57,7 +57,8 @@
     { "ingredient": "sour-cream", "amount": 0.5, "unit": "cup", "optional": true, "group": "To serve" }
   ],
   "substitutions": [
-    { "for": "tortilla-flour", "use": "tortilla-gluten-free", "reason": "gluten", "note": "Gluten-free tortillas crack when cold. Warm each one in the dry skillet for 10 seconds before you fill and fold it." }
+    { "for": "tortilla-flour", "use": "tortilla-gluten-free", "reason": "gluten", "note": "Gluten-free tortillas crack when cold. Warm each one in the dry skillet for 10 seconds before you fill and fold it." },
+    { "for": "tortilla-flour", "use": "tortilla-corn", "reason": "unleavened", "ratio": 2 }
   ],
   "equipment": [
     "chef-knife",

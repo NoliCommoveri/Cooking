@@ -62,7 +62,10 @@
   ],
   "substitutions": [
     { "for": "cod", "use": "tilapia", "reason": "availability", "note": "Tilapia fillets are thinner, so start checking for 145°F after 10 minutes." },
-    { "for": "baguette", "use": "bread-gluten-free", "reason": "gluten" }
+    { "for": "baguette", "use": "bread-gluten-free", "reason": "gluten" },
+    { "for": "baguette", "use": "soft-unleavened-bread", "reason": "unleavened", "ratio": 6 },
+    { "for": "baguette", "use": "matzah", "reason": "unleavened", "ratio": 4 },
+    { "for": "baguette", "use": "matzah-gluten-free", "reason": "unleavened", "ratio": 4 }
   ],
   "equipment": [
     "cutting-board",

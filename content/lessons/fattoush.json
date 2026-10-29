@@ -59,7 +59,9 @@
   ],
   "substitutions": [
     { "for": "sumac", "use": "lemon", "reason": "availability", "note": "Zest one more lemon into the dressing and add an extra pinch of salt." },
-    { "for": "pita", "use": "tortilla-corn", "reason": "gluten", "note": "Use 2 corn tortillas for each pita. Cut into squares and toasted the same way. They crisp a minute or two sooner." }
+    { "for": "pita", "use": "tortilla-corn", "reason": "gluten", "note": "Use 2 corn tortillas for each pita. Cut into squares and toasted the same way. They crisp a minute or two sooner." },
+    { "for": "pita", "use": "matzah", "reason": "unleavened" },
+    { "for": "pita", "use": "matzah-gluten-free", "reason": "unleavened" }
   ],
   "equipment": [
     "chef-knife",

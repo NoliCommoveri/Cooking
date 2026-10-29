@@ -18,7 +18,7 @@ import { UNLEAVENED_RELEASE } from './release.js';
 import { familyDates, yearFor, isDay, plusDays, calendarFirstDay, unleavenedOn, unleavenedRange } from '../content/calendars.js';
 import { LIBRARY } from './library-data.js';
 import { RECIPE_ID, SHARED_ID, stored, REGISTRY } from './recipes.js';
-import { unleavened } from '../content/leaven.js';
+import { unleavened, feastOk } from '../content/leaven.js';
 
 const calendars = () => CONTENT.calendars;
 
@@ -49,7 +49,7 @@ export async function unleavenedState(env, fid, day) {
 // a family recipe that doesn't pass the leaven check, or a shared recipe not
 // marked unleavened.
 const lessonById = Object.fromEntries(LIBRARY.lessons.map((L) => [L.id, L]));
-export async function leavened(env, fid, lid) {
+export async function leavened(env, fid, lid, filters = []) {
   if (RECIPE_ID.test(lid)) {
     const row = await env.DB.prepare('SELECT body_json, version FROM family_recipes WHERE id = ? AND family_id = ?').bind(RECIPE_ID.exec(lid)[1], fid).first();
     return Boolean(row) && !unleavened(stored(row), REGISTRY, CONTENT.rules.leaven);
@@ -58,7 +58,8 @@ export async function leavened(env, fid, lid) {
     const row = await env.DB.prepare('SELECT unleavened FROM community_recipes WHERE id = ?').bind(SHARED_ID.exec(lid)[1]).first();
     return Boolean(row) && !row.unleavened;
   }
-  return Boolean(lessonById[lid]) && !lessonById[lid].unleavened;
+  // A library lesson its unleavened swaps make unleavened for the family's diet isn't.
+  return Boolean(lessonById[lid]) && !feastOk(lessonById[lid], LIBRARY.ingredients, filters, CONTENT.rules.leaven);
 }
 
 async function titleOf(env, fid, lid) {
@@ -81,7 +82,7 @@ export async function feastGuard(env, fam, lid, title, { date = null, week = nul
   const dates = await datesFor(env, fam.id);
   const onDay = date && unleavenedOn(date, dates);
   const d = onDay || (week && unleavenedRange(week, dates));
-  if (!d || !(await leavened(env, fam.id, lid))) return;
+  if (!d || !(await leavened(env, fam.id, lid, JSON.parse(fam.diet_filters)))) return;
   title ??= await titleOf(env, fam.id, lid);
   const span = `${words(d.unleavened_from)} to ${words(d.last_day)}`;
   const why = "We check dates so leaven doesn't slip onto your feast days.";

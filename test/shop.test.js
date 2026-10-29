@@ -72,3 +72,14 @@ test('water from the tap is never on a shopping list', () => {
   assert.ok(ids.includes('flour-ap'));
   assert.ok(!ids.includes('water'));
 });
+
+test('on the unleavened days a lesson\'s unleavened swaps are bought instead, by their ratio', () => {
+  const tuna = L('tuna-salad-sandwiches');
+  const list = (feast) => shoppingList({ lessons: [{ lesson: tuna, servings: tuna.servings, feast }], registry, leaven: CONTENT.rules.leaven });
+  assert.ok(find(list(false), 'bread-sandwich'));
+  assert.equal(find(list(true), 'bread-sandwich'), undefined);
+  assert.equal(find(list(true), 'soft-unleavened-bread').buy, '1 pan, made from lesson U3', '12 squares for 12 slices');
+  const caesar = L('chicken-caesar');
+  const c = shoppingList({ lessons: [{ lesson: caesar, servings: caesar.servings, feast: true }], registry, leaven: CONTENT.rules.leaven });
+  assert.equal(find(c, 'soft-unleavened-bread').used, '6 squares of soft unleavened bread', 'a baguette is half a pan');
+});

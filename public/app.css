@@ -301,7 +301,7 @@ select{font:inherit;padding:8px 10px;border-radius:10px;border:1.5px solid var(-
 .rowi.qrow{grid-template-columns:minmax(0,1fr)}
 .rowi.qrow>.acts,.qcard .acts{justify-content:flex-start}
 .qtools .hbtn.link{padding-left:0;padding-right:0}
-.askline .ico,.earlynote .ico{width:1.3em;height:1.3em;vertical-align:-.25em;margin-right:6px}
+.askline .ico,.earlynote .ico,.feastswap .ico{width:1.3em;height:1.3em;vertical-align:-.25em;margin-right:6px}
 .q-back .ico,.p-back .ico{width:22px;height:22px;vertical-align:-.3em;margin-right:6px}
 .kitchen .sabbath,.kitchen .feast{margin:6px 0 14px;background:var(--h-card);color:var(--h-fg)}
 
