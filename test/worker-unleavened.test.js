@@ -60,7 +60,7 @@ test('a week touches the unleavened days from the family\'s stop day to the feas
   assert.equal(unleavenedWeek('2027-04-11', early), true, 'stopping leaven from the 12th');
 });
 
-test('before release 2 there are no family dates, and Swap keeps the fixed window', async () => {
+test('before release 2 there are no family dates to set', async () => {
   const { a } = await setup({ preview: false });
   assert.equal((await a.get('/api/unleavened')).status, 404);
 });
@@ -103,7 +103,7 @@ test('Swap goes unleavened-only on the family\'s own weeks', async (t) => {
   const { a, ava } = await setup();
   const queue = async (date) => (await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava], planned_date: date })).body.id;
   const swapOn = async (id) => (await a.get(`/api/queue/${id}/swap`)).body.spring;
-  assert.equal(await swapOn(await queue('2027-03-17')), false, 'inside the old fixed window, but not the family\'s days');
+  assert.equal(await swapOn(await queue('2027-03-17')), false, 'March is not the family\'s days');
   assert.equal(await swapOn(await queue('2027-04-21')), true);
   const mid = await queue('2027-04-14');
   assert.equal(await swapOn(mid), false);

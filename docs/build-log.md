@@ -7426,3 +7426,28 @@ recipes".
   light and dark; the content editor's Variations list and the version's
   page, light and dark.
 - Tests: 434.
+
+## 280. 2026-10-29 — Release 2 ready to launch; the fixed window comes out
+
+Owner, 2026-10-29: "Ok so are we ready to release and remove fixed dates".
+
+- **Before:** release 2 (Unleavened Bread dates) was marked as still being
+  built, so `/ops` could preview it but not launch it. Every family without
+  it had Swap's fixed window, February 1 to May 15, every year.
+- **Now:**
+  - Release 2 is no longer marked as being built, so `/ops` offers
+    **Launch release 2 for everyone** once release 1 is live.
+  - **The fixed window is out** (owner, 2026-10-28: it comes out with the
+    launch): `springWeek` is gone from `src/worker/swap.js`, and Swap goes
+    unleavened-only in a week that touches the family's own unleavened
+    days, or the standard calendar's until the family has answered. The swap
+    dialog's "Spring: unleavened meals only" is gone; it says "This week
+    touches your unleavened days: unleavened meals only."
+  - Its test is gone; the swap tests that used March 17 as a spring date now
+    use April 21, 2027, the week before the feast's first day.
+  - The plan's §6.19 note about the window is out; README updated.
+- **Launching** is the owner's button on `/ops`, after this is merged and
+  deployed. Undo launch still takes release 2 back, but Swap keeps the
+  family's dates either way: the fixed window doesn't come back.
+- Screenshots sent: `/ops`'s Releases with Launch release 2, light and dark.
+- Tests: 433.

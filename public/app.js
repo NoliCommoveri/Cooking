@@ -1921,7 +1921,7 @@ const parentQueue = parentOnly(async (flash) => {
     const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Swap for an Appointed Time meal' },
       el('div', { class: 'card' },
         el('h2', {}, 'Swap for an Appointed Time meal'),
-        el('p', { class: 'mut' }, `Instead of ${title}${d.spring ? (me.family.release >= UNLEAVENED_RELEASE ? '. This week touches your unleavened days: unleavened meals only.' : '. Spring: unleavened meals only.') : '.'}`),
+        el('p', { class: 'mut' }, `Instead of ${title}${d.spring ? '. This week touches your unleavened days: unleavened meals only.' : '.'}`),
         groups.length ? groups.map((g) => [el('h3', {}, g), el('div', { class: 'rows' }, d.options.filter((o) => o.group === g).map((o) => el('div', { class: 'rowi with-av' },
           el('img', { src: o.image, alt: '', width: 48, height: 48 }),
           el('div', {}, el('b', {}, el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(o.id) }, `${o.label ? `${o.label} · ` : ''}${o.title}`)),
