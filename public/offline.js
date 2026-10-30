@@ -142,9 +142,10 @@ export async function completedOffline(ctx, { profile, after }) {
       el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')));
 }
 
-// The row of buttons: Print recipes, Print coursework (a Level course only),
-// and Completed offline. Each print button asks how many weeks first.
-export function offlineButtons(ctx, { profile, level, cls = 'themebtn', after }) {
+// Print recipes, Print coursework (a Level course only), and Completed
+// offline, as [label, action] pairs: a row of buttons on the parent's course
+// card, items in the kitchen's ⋯ menu. Each print asks how many weeks first.
+export function offlineItems(ctx, { profile, level, after }) {
   const { el } = ctx;
   const printAsk = (title, run) => () => {
     const n = weeksPick(ctx);
@@ -158,8 +159,12 @@ export function offlineButtons(ctx, { profile, level, cls = 'themebtn', after })
         } }, 'Print'),
         el('button', { type: 'button', class: 'hbtn', onclick: () => close() }, 'Cancel')));
   };
-  return el('div', { class: 'acts offline' },
-    el('button', { type: 'button', class: cls, onclick: printAsk('Print recipes', (o) => printRecipes(ctx, o)) }, 'Print recipes'),
-    level ? el('button', { type: 'button', class: cls, onclick: printAsk('Print coursework', (o) => printCoursework(ctx, o)) }, 'Print coursework') : null,
-    el('button', { type: 'button', class: cls, onclick: () => completedOffline(ctx, { profile, after }).catch((err) => ctx.showToast(err)) }, 'Completed offline'));
+  return [
+    ['Print recipes', printAsk('Print recipes', (o) => printRecipes(ctx, o))],
+    level ? ['Print coursework', printAsk('Print coursework', (o) => printCoursework(ctx, o))] : null,
+    ['Completed offline', () => completedOffline(ctx, { profile, after }).catch((err) => ctx.showToast(err))],
+  ].filter(Boolean);
 }
+
+export const offlineButtons = (ctx, { cls = 'themebtn', ...o }) => ctx.el('div', { class: 'acts offline' },
+  offlineItems(ctx, o).map(([label, fn]) => ctx.el('button', { type: 'button', class: cls, onclick: fn }, label)));

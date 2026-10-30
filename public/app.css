@@ -185,6 +185,11 @@ legend{font-weight:800;font-size:15px;margin-bottom:6px;padding:0}
 .themebtn{min-height:52px;padding:6px 14px;font-weight:800;font-size:15px;border-radius:10px}
 .kitchen[data-kt="quest"] .themebtn{background:var(--q-panel);border:2px solid var(--q-edge);color:var(--q-text)}
 .kitchen[data-kt="passport"] .themebtn{background:var(--p-paper);border:2.5px solid var(--p-ink);color:var(--p-ink)}
+.k-more summary.themebtn{min-width:64px;font-size:22px;letter-spacing:2px}
+.k-more .more-menu{left:0;right:auto;display:grid;gap:8px;padding:8px;border-radius:12px}
+.k-more .more-menu .themebtn{width:100%;text-align:left}
+.kitchen[data-kt="quest"] .k-more .more-menu{background:var(--q-panel);border:2px solid var(--q-edge)}
+.kitchen[data-kt="passport"] .k-more .more-menu{background:var(--p-paper);border:2.5px solid var(--p-ink)}
 .kitchen .back{display:inline-flex;align-items:center;min-height:52px;font-weight:800;text-decoration:underline;text-underline-offset:3px}
 .kitchen[data-kt="quest"] .back{color:var(--q-dim)}
 .kitchen[data-kt="passport"] .back{color:var(--p-paper)}

@@ -7490,3 +7490,22 @@ parents and kids can both mark; both programs get it.
   saves; Completed offline, before and after Mark done; the parent's course
   card, light and dark.
 - Tests: 437 (four new, `test/worker-offline.test.js`).
+
+## 282. 2026-10-30 — The kitchen's ⋯ menu
+
+Owner, 2026-10-30: "I dont want all those buttons always visible on top of
+kitchen. Hide everything but how it works behind a ..."
+
+- **Before:** the top of every kitchen had How it works, Switch theme, Sound
+  effects, a kid's Log out, and (281) Print recipes, Print coursework, and
+  Completed offline, all as buttons.
+- **Now:** only How it works stays out. A **⋯** button beside it opens a
+  menu in the kitchen's theme with the rest: Switch theme, Sound effects
+  (its label still shows on or off), Print recipes, Print coursework (a Level
+  course), Completed offline (a profile on a course), and Log out (a kid's
+  own login). The print and offline items show on every tab now, not just the
+  main one. `public/offline.js` gives them as `offlineItems`; the parent's
+  course card keeps its row of buttons.
+- Screenshots sent: the kitchen closed and with the menu open, in both
+  kitchen themes, light and dark; Print recipes opened from the menu.
+- Tests: 437.

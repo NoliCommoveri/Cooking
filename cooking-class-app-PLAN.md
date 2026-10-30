@@ -1117,7 +1117,7 @@ A course can be done away from the screen: printed for the coming weeks, then ma
   - **Parents and kids alike** (owner, 2026-10-30), as with Done on a part today; a kid's device marks what the kid did. A parent takes any of it back as today: Didn't make it on Print our progress, and Take back on the course card.
   - **Both programs** (owner, 2026-10-30): Cook Around the World marks recipes; a Level course all four components.
   - **The day:** not a day still to come, and not the Sabbath, since nothing done then counts (§6.18); a leavened recipe can't be marked on the family's unleavened days (§6.20), and one with an unleavened version is marked as that version.
-- **Where:** a row of buttons on the kitchen's main tab, for a profile on a course, and on the parent's course card (as its first learner, with Who did it for the rest).
+- **Where:** the kitchen's ⋯ menu, for a profile on a course (owner, 2026-10-30: only How it works stays out on the kitchen; Switch theme, Sound effects, these three, and a kid's Log out are behind ⋯), and a row of buttons on the parent's course card (as its first learner, with Who did it for the rest).
 - **Built (2026-10-30), release 3 (preview only):** `src/worker/offline.js` (`GET` and `POST /api/profiles/:id/offline`), `public/offline.js`, and the player's `recipeSheet`. No schema change: cooks are `attempts` (marked `offline` in their checklist state), parts are `level_tasks`.
 
 ## 8. Architecture
