@@ -7365,3 +7365,147 @@ the swaps. Use the soft bread where appropriate than matzo".
 - Screenshots sent: tuna salad sandwiches on April 23, 2027, its card's
   note and its prep list, in both kitchen themes, light and dark.
 - Tests: 430.
+
+## 279. 2026-10-29 — Unleavened versions of 19 lessons
+
+Owner, 2026-10-29: "go ahead and write the unleavened versions of the
+recipes".
+
+- **Before:** 19 lessons with leaven in a step (toasted buns, a challah
+  soaked in custard, a burrito rolled in a flour tortilla, baking powder or
+  soda in a batter) had no unleavened swap that worked, so on a family's
+  unleavened days they were held back, paused on, and left out of Swap and
+  Show me some. The review doc counted 18; both chocolate chip cookies are on
+  it, so it's 19.
+- **Now (release 2, preview only):**
+  - **Each has an unleavened version**, a variation (§6.21) marked
+    `unleavenedDays`, written out in full: Smash burger lettuce wraps + quick
+    pickles; Thick beef burger lettuce wraps; Eggs Benedict on soft
+    unleavened bread; Matzah brei (for Challah French toast); Grilled cheese
+    on soft unleavened bread + tomato soup; Molletes on soft unleavened bread;
+    French onion soup with matzah; Breakfast tacos; Bean and cheese tacos;
+    Chicken Caesar lettuce wraps; Mezze spread with soft unleavened bread
+    (the chickpeas simmer 90 minutes with no baking soda); unleavened skillet
+    cornbread, pan de elote, and banana bread (whipped egg whites); unleavened
+    malva pudding (its eggs and sugar beaten longer, the only lift); and
+    unleavened alfajores, Welsh cakes, brown butter chocolate chip cookies,
+    and chocolate chip cookies (no raising agent).
+  - **Soft unleavened bread where it's eaten soft** (owner, 2026-10-28), so
+    the grilled cheese, Eggs Benedict, molletes, and mezze use it rather than
+    the matzah the review doc listed; each version's own diet swaps give
+    matzah to an egg-free family and gluten-free matzah to a gluten-free one.
+    Matzah stays where it's toasted crisp (French onion soup) or is the dish
+    (matzah brei).
+  - **On the unleavened days** (`feastCook`, `src/content/leaven.js`): a
+    lesson whose swaps can't make it unleavened plays its unleavened version
+    in the player, whatever version it would otherwise play (the turkey smash
+    burgers too), and its card says "For Unleavened Bread: This is the
+    unleavened version of Smash burgers + quick pickles." `feastOk` counts
+    it, so it can be planned and due, the course doesn't pause on it, and
+    it's in Swap, Show me some, and `/api/library`'s `feast_ok`. A shopping
+    list for a week touching the days buys for the version.
+  - **Never a taste pick:** like a Level's version, it isn't scored, offered
+    in the Version dialog, counted in Recipe gaps, or accepted by
+    `PUT /api/variations`.
+  - **The linter** checks that an unleavened version is unleavened as a whole
+    lesson, steps included, that a lesson has only one, and that it isn't a
+    Level's version too. A Level recipe's variations are now checked the way
+    a course lesson's are.
+  - **The content editor** lists it as "(for Unleavened Bread)" and its page
+    says what it's for.
+  - The tests that used smash burgers, grilled cheese, and Challah French
+    toast as leavened lessons now use skillet naan, buttermilk biscuits, and
+    homemade pizza, which have neither a swap nor a version.
+- **For the owner to confirm:** an unleavened version plays only on the
+  unleavened days (a family can't pick matzah brei in June); malva pudding
+  uses whole eggs beaten longer instead of whipped whites, since its method
+  already beats them; each version uses its lesson's picture until it has
+  its own.
+- Screenshots sent: smash burger lettuce wraps, matzah brei, and the grilled
+  cheese on April 23, 2027, the card and its note, in both kitchen themes,
+  light and dark; the content editor's Variations list and the version's
+  page, light and dark.
+- Tests: 434.
+
+## 280. 2026-10-29 — Release 2 ready to launch; the fixed window comes out
+
+Owner, 2026-10-29: "Ok so are we ready to release and remove fixed dates".
+
+- **Before:** release 2 (Unleavened Bread dates) was marked as still being
+  built, so `/ops` could preview it but not launch it. Every family without
+  it had Swap's fixed window, February 1 to May 15, every year.
+- **Now:**
+  - Release 2 is no longer marked as being built, so `/ops` offers
+    **Launch release 2 for everyone** once release 1 is live.
+  - **The fixed window is out** (owner, 2026-10-28: it comes out with the
+    launch): `springWeek` is gone from `src/worker/swap.js`, and Swap goes
+    unleavened-only in a week that touches the family's own unleavened
+    days, or the standard calendar's until the family has answered. The swap
+    dialog's "Spring: unleavened meals only" is gone; it says "This week
+    touches your unleavened days: unleavened meals only."
+  - Its test is gone; the swap tests that used March 17 as a spring date now
+    use April 21, 2027, the week before the feast's first day.
+  - The plan's §6.19 note about the window is out; README updated.
+- **Launching** is the owner's button on `/ops`, after this is merged and
+  deployed. Undo launch still takes release 2 back, but Swap keeps the
+  family's dates either way: the fixed window doesn't come back.
+- Screenshots sent: `/ops`'s Releases with Launch release 2, light and dark.
+- Tests: 433.
+
+## 281. 2026-10-30 — Print and complete offline
+
+Owner, 2026-10-30: "I want a 'completed offline' feature paired with a
+'print coursework' and 'print recipes' feature. It should allow parents OR
+kids to trigger a save as pdf window that fills with the selected number of
+weeks, then a way to mark any or all of the four components completed
+including recipe." Asked and answered: a recipe marked done is a full cook;
+parents and kids can both mark; both programs get it.
+
+- **Before:** a course was done in the app: a part was checked off with Done
+  on its page, and a recipe counted only when cooked in the player. Nothing
+  printed but Print our progress and the transcript.
+- **Now (release 3, being built, preview only; plan §6.22):**
+  - **Print recipes** and **Print coursework**, in the kitchen's main tab
+    and on the parent's course card: pick this week and up to 7 more, and
+    the print window opens (print, or save as a PDF). A paper sheet over the
+    page shows the same thing, with Close, for a device whose print window
+    doesn't open. Recipes print as the course plays them, at the family's
+    size, with the diet's changes and, in a week touching the unleavened
+    days, the unleavened swaps or version; a box by each ingredient and step.
+    Coursework is a Level week's Knowledge, Drill, and Beyond the Recipe
+    pages, with the quiz to tick and lines to write on.
+  - **Completed offline:** the weeks, the day it was done (not a day to
+    come, and not the Sabbath), who did it, and a tick for each of the
+    four components with All of it. A recipe ticked is a full cook on that
+    day for everyone ticked, in the version the course plays (its
+    unleavened one on a feast day; a leavened one is refused then); a part
+    is checked off on that day. Done ones show ticked; a second mark adds
+    nothing.
+  - `src/worker/offline.js`: `GET /api/profiles/:id/offline?weeks=n` (the
+    weeks from the schedule, with each Level week's parts and pages) and
+    `POST` to mark them. `plan.js` gains `offlineWeeks`. No schema change.
+  - Release 3 in `src/worker/release.js`, marked as being built.
+- Screenshots sent: the kitchen's buttons in both kitchen themes, light and
+  dark; the print dialog; the coursework and recipe sheets, and the PDF it
+  saves; Completed offline, before and after Mark done; the parent's course
+  card, light and dark.
+- Tests: 437 (four new, `test/worker-offline.test.js`).
+
+## 282. 2026-10-30 — The kitchen's ⋯ menu
+
+Owner, 2026-10-30: "I dont want all those buttons always visible on top of
+kitchen. Hide everything but how it works behind a ..."
+
+- **Before:** the top of every kitchen had How it works, Switch theme, Sound
+  effects, a kid's Log out, and (281) Print recipes, Print coursework, and
+  Completed offline, all as buttons.
+- **Now:** only How it works stays out. A **⋯** button beside it opens a
+  menu in the kitchen's theme with the rest: Switch theme, Sound effects
+  (its label still shows on or off), Print recipes, Print coursework (a Level
+  course), Completed offline (a profile on a course), and Log out (a kid's
+  own login). The print and offline items show on every tab now, not just the
+  main one. `public/offline.js` gives them as `offlineItems`; the parent's
+  course card keeps its row of buttons.
+- Screenshots sent: the kitchen closed and with the menu open, in both
+  kitchen themes, light and dark; Print recipes opened from the menu.
+- Tests: 437.

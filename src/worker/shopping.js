@@ -18,6 +18,7 @@ import { weekOf } from './schedule.js';
 import { isRecipeId, lessonFor, recipeNames, REGISTRY as FULL } from './recipes.js';
 import { variationChoices, versionTitle, listVariations, listVariationRow } from './variations.js';
 import { lessonVersion } from '../content/variations.js';
+import { feastCook } from '../content/leaven.js';
 import { tasteContext, versionFor, hatedExtras, versionSummary } from './picks.js';
 
 const id = () => randomHex(8);
@@ -88,17 +89,20 @@ async function needs(env, fam, entries, { staples = [], skip = [] } = {}) {
   const lessons = [];
   let registry = REGISTRY;
   // A lesson cooked in a week that touches the family's unleavened days gets
-  // its unleavened swaps (§6.20), with that release. e.week: its week.
+  // its unleavened swaps, or its unleavened version (§6.20), with that
+  // release. e.week: its week.
   const dates = fam.release >= UNLEAVENED_RELEASE ? await datesFor(env, fam.id) : null;
+  const filters = JSON.parse(fam.diet_filters);
   for (const e of entries) {
     // A family recipe's typed-in ingredients sit beside the registry, unmerged.
     const found = await lessonFor(env, fam.id, e.lesson_id, { deleted: true });
     if (!found) continue;
     if (Object.keys(found.extra).length) registry = { ...registry, ...found.extra };
-    lessons.push({ lesson: e.variation ? lessonVersion(found.lesson, e.variation) : found.lesson, servings: e.servings, leaveOut: (e.left_out ?? []).map((x) => x.ingredient),
-      feast: Boolean(dates && e.week && unleavenedWeek(e.week, dates)) });
+    const feast = Boolean(dates && e.week && unleavenedWeek(e.week, dates));
+    const L = e.variation ? lessonVersion(found.lesson, e.variation) : found.lesson;
+    lessons.push({ lesson: feast ? feastCook(found.lesson, L, registry, filters, CONTENT.rules.leaven) : L, servings: e.servings, leaveOut: (e.left_out ?? []).map((x) => x.ingredient), feast });
   }
-  return shoppingList({ lessons, registry, filters: JSON.parse(fam.diet_filters), staples, skip, leaven: CONTENT.rules.leaven });
+  return shoppingList({ lessons, registry, filters, staples, skip, leaven: CONTENT.rules.leaven });
 }
 
 const ownList = async (env, fid, lid) => (await env.DB.prepare('SELECT * FROM shopping_lists WHERE id = ? AND family_id = ?').bind(lid, fid).first())

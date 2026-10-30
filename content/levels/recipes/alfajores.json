@@ -82,5 +82,38 @@
     { "id": "cool", "text": "Turn off the oven. Move the cookies to the rack and let them cool all the way.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 1200, "timerLabel": "Cool", "tip": "Warm cookies break when you fill them." },
     { "id": "fill", "text": "Spread a spoonful of dulce de leche on 12 cookies with the butter knife. Top each with another cookie.", "safety": "solo", "look": "12 sandwiches, filling right to the edge." },
     { "id": "coconut", "text": "Pour the coconut onto the plate. Roll the edge of each sandwich in it.", "safety": "solo", "look": "A ring of coconut around each one." }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "Unleavened alfajores",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "none",
+        "flavors": ["sweet-treats"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "light"
+      },
+      "ingredients": { "drop": ["baking-powder"] },
+      "steps": {
+        "change": {
+          "dry": {
+            "id": "dry",
+            "text": "Whisk the cornstarch and flour in the medium bowl.",
+            "safety": "solo",
+            "why": "cornstarch",
+            "look": "All one color."
+          }
+        }
+      },
+      "learn": {
+        "move": {
+          "title": "Tender cookies, a sweet filling",
+          "body": "Alfajores are Argentina's favorite cookie: two tender, crumbly cookies made with cornstarch, stuck together with dulce de leche and rolled in coconut. These are unleavened, with no raising agent: the cornstarch keeps them tender without one. Today you'll cream butter and sugar, roll and cut even rounds, and bake them pale so they stay soft."
+        }
+      }
+    }
   ]
 }

@@ -19,6 +19,7 @@ import { isMuted, setMuted } from './sound.js';
 import { gettingStarted, openRuth, ruthButton } from './ruth.js';
 import { unleavenedFields, feastWords, answerWords, UNLEAVENED_RELEASE } from './unleavened.js';
 import { openIntro } from './intro.js';
+import { offlineButtons, offlineItems, OFFLINE_RELEASE } from './offline.js';
 import { starRow, ratingSaver, ratedCount } from './tastes.js';
 
 const app = document.getElementById('app');
@@ -382,6 +383,17 @@ async function lockers() {
 // ---------- Chef Ruth (§6.8) ----------
 
 // What Chef Ruth needs from the app to build her chat and save answers.
+// The kitchen's ⋯ menu: [label, action(button)] items, in the kitchen's theme.
+const kitchenMenu = (items) => el('details', { class: 'more k-more', ontoggle: (e) => { if (e.target.open) onScreen(e.target.querySelector('.more-menu')); } },
+  el('summary', { class: 'themebtn', 'aria-label': 'More' }, '⋯'),
+  el('div', { class: 'more-menu' }, items.filter(Boolean).map(([text, fn]) => el('button', { type: 'button', class: 'themebtn', onclick: (e) => {
+    const b = e.currentTarget;
+    b.closest('details').open = false;
+    Promise.resolve(fn(b)).catch((err) => showToast(err));
+  } }, text))));
+
+// Print and complete offline (§6.22) gets the app's helpers the same way.
+const offlineCtx = () => ({ el, api, modal, showToast, tz, fmtDay, localToday, family: () => me.family });
 const ruthCtx = () => ({
   el, api, field, go, refresh, me: () => me, modal, familyInitial, pictureGrid, passwordFields, DIET, LOGIN_PICTURES, weekOf, localToday, fmtDay, tz,
 });
@@ -713,25 +725,29 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
     feastBanner(mine.unleavened, current === 'more' && sessionGet(unlvKey) ? null : () => showUnleavened(true), quest ? 'q-btn' : 'p-btn'),
     el('div', { class: 'k-head' }, avatars(p.people),
       el('div', { class: 'grow' }, el('h1', {}, quest ? 'Quest board' : 'Recipe box'), el('div', {}, p.name))),
+    // How it works, and everything else behind ⋯ (owner, 2026-10-30).
     el('div', { class: 'acts' },
       el('button', { class: 'themebtn', type: 'button', onclick: intro }, 'How it works'),
-      el('button', { class: 'themebtn', type: 'button', onclick: async () => {
-        await api('PUT', `/api/profiles/${p.id}/theme`, { theme: other });
-        kitchen(id, current);
-      } }, `Switch to ${THEMES[other]}`),
-      // Sound effects on or off, remembered on this device (§5.5).
-      el('button', { class: 'themebtn', type: 'button', 'aria-pressed': String(!isMuted()), onclick: (e) => {
-        setMuted(!isMuted());
-        e.currentTarget.setAttribute('aria-pressed', String(!isMuted()));
-        e.currentTarget.textContent = isMuted() ? 'Sound effects: off' : 'Sound effects: on';
-      } }, isMuted() ? 'Sound effects: off' : 'Sound effects: on'),
-      // A kid's own login logs out here, no PIN (§8.3a).
-      me.kid ? el('button', { class: 'themebtn', type: 'button', onclick: async () => {
-        if (!confirm('Log out of this device?')) return;
-        await api('POST', '/api/logout');
-        store('cpr.login', 'kid');
-        await start('#/login');
-      } }, 'Log out') : null),
+      kitchenMenu([
+        [`Switch to ${THEMES[other]}`, async () => {
+          await api('PUT', `/api/profiles/${p.id}/theme`, { theme: other });
+          kitchen(id, current);
+        }],
+        // Sound effects on or off, remembered on this device (§5.5).
+        [isMuted() ? 'Sound effects: off' : 'Sound effects: on', (b) => {
+          setMuted(!isMuted());
+          b.textContent = isMuted() ? 'Sound effects: off' : 'Sound effects: on';
+        }],
+        // Print and complete offline (§6.22, release 3), for a profile on a course.
+        ...(mine.order && me.family.release >= OFFLINE_RELEASE ? offlineItems(offlineCtx(), { profile: p, level: Boolean(mine.level), after: () => kitchen(id, current) }) : []),
+        // A kid's own login logs out here, no PIN (§8.3a).
+        me.kid ? ['Log out', async () => {
+          if (!confirm('Log out of this device?')) return;
+          await api('POST', '/api/logout');
+          store('cpr.login', 'kid');
+          await start('#/login');
+        }] : null,
+      ])),
     current === 'more' ? moreView() : current === 'progress' ? (levelPr ? await levelProgressView(p, mine.level, cooks) : await progressView(p, cooks)) : pathView(),
     // Pinned to the bottom, where a thumb is, as in MCCE Kids.
     el('nav', { class: `k-tabs ${quest ? 'q' : 'p'}`, 'aria-label': 'Kitchen' }, tabs.map(([k, label]) => el('a', {
@@ -1851,6 +1867,10 @@ const parentQueue = parentOnly(async (flash) => {
             ? `${names(c.profile_ids)} · ${c.level.name} · ${c.level.week ? `Week ${c.level.week} of ${c.level.weeks}` : `${c.done} of ${c.total} cooked`} · Starts with ${c.level.starts === 'explore' ? 'Explore' : 'Familiar'}`
             : `${names(c.profile_ids)} · ${c.per_week} a week · ${c.done} of ${c.total} cooked`)),
         el('a', { class: 'hbtn', href: `#/parent/courses/${c.id}` }, 'Edit')),
+      // Print and complete offline (§6.22, release 3): as the course's first
+      // learner, with Who did it for the rest.
+      me.family.release >= OFFLINE_RELEASE && c.profile_ids.length
+        ? offlineButtons(offlineCtx(), { profile: { id: c.profile_ids[0], name: names(c.profile_ids) }, level: Boolean(c.level), cls: 'hbtn', after: () => again('Marked done offline.') }) : null,
       c.total ? el('p', { class: 'mut small', style: 'margin:0' },
         c.projected_finish ? `Planned finish: week of ${fmtDay(c.planned_finish)}. ${c.started ? behind : `Starts ${fmtDay(c.start_date)}`}.` : 'Every lesson is cooked.')
         : el('p', { class: 'mut small' }, 'No lessons in this course can be cooked yet.'),
@@ -1921,7 +1941,7 @@ const parentQueue = parentOnly(async (flash) => {
     const ov = el('div', { class: 'fixov', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Swap for an Appointed Time meal' },
       el('div', { class: 'card' },
         el('h2', {}, 'Swap for an Appointed Time meal'),
-        el('p', { class: 'mut' }, `Instead of ${title}${d.spring ? (me.family.release >= UNLEAVENED_RELEASE ? '. This week touches your unleavened days: unleavened meals only.' : '. Spring: unleavened meals only.') : '.'}`),
+        el('p', { class: 'mut' }, `Instead of ${title}${d.spring ? '. This week touches your unleavened days: unleavened meals only.' : '.'}`),
         groups.length ? groups.map((g) => [el('h3', {}, g), el('div', { class: 'rows' }, d.options.filter((o) => o.group === g).map((o) => el('div', { class: 'rowi with-av' },
           el('img', { src: o.image, alt: '', width: 48, height: 48 }),
           el('div', {}, el('b', {}, el('button', { type: 'button', class: 'hbtn link dishlink', onclick: () => showDish(o.id) }, `${o.label ? `${o.label} · ` : ''}${o.title}`)),

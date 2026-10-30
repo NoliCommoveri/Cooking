@@ -96,5 +96,98 @@
     { "id": "fill", "text": "Lay one tortilla flat. In a line just below the middle, put a scoop of potatoes and sausage, a scoop of eggs, and a handful of cheese. Leave about 2 inches empty on each side.", "safety": "solo", "tip": "Share the filling out evenly: look at how much is left, and how many tortillas." },
     { "id": "roll", "text": "Fold the bottom edge up over the filling and tuck it under snugly. Fold both sides toward the middle, then roll away from you, keeping it tight. Set it seam side down. Roll the rest the same way.", "safety": "solo", "tip": "Seam side down keeps it closed while the others get rolled." },
     { "id": "serve", "text": "Serve the burritos warm, with salsa and sour cream on the side if you're using them.", "safety": "solo" }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "Breakfast tacos",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "turkey",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "substitutions": [{ "for": "butter-unsalted", "use": "vegetable-oil", "reason": "dairy" }],
+      "ingredients": {
+        "drop": ["tortilla-burrito@To roll"],
+        "add": [{ "ingredient": "tortilla-corn", "amount": 18, "unit": "count", "round": "up", "group": "To fold" }],
+        "order": [
+          "potato-russet@Potatoes",
+          "vegetable-oil@Potatoes",
+          "salt@Potatoes",
+          "turkey-sausage-bulk@Sausage",
+          "egg@Eggs",
+          "salt@Eggs",
+          "butter-unsalted@Eggs",
+          "+0",
+          "cheddar-shredded@To roll",
+          "salsa@To serve",
+          "sour-cream@To serve"
+        ]
+      },
+      "steps": {
+        "change": {
+          "tortillas": {
+            "id": "tortillas",
+            "text": "Wet a kitchen towel, wring it out, and wrap the stack of corn tortillas in it. Lay it on the plate and microwave until the tortillas are warm and soft.",
+            "safety": "adult-nearby",
+            "hazard": "Hot steam",
+            "timerSeconds": 60,
+            "timerLabel": "Warm tortillas",
+            "why": "warm-tortilla",
+            "tip": "Open the towel away from your face. The steam inside is hot."
+          },
+          "fill": {
+            "id": "fill",
+            "text": "Lay one tortilla flat. Down the middle, put a spoonful of potatoes and sausage, a spoonful of eggs, and a pinch of cheese.",
+            "safety": "solo",
+            "tip": "Share the filling out evenly: 3 tacos each. Look at how much is left, and how many tortillas."
+          },
+          "roll": {
+            "id": "roll",
+            "text": "Fold the tortilla in half over the filling. Stand it on the serving plate, fold side down. Fill and fold the rest the same way, standing them side by side.",
+            "safety": "solo",
+            "tip": "Standing side by side, the tacos lean on each other and stay folded."
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Serve the tacos warm, with salsa and sour cream on the side if you're using them.",
+            "safety": "solo"
+          }
+        }
+      },
+      "learn": {
+        "move": {
+          "title": "Slowest first, fastest last",
+          "body": "Timing a meal means planning which part to start first so everything is hot at the same moment. Today you'll cook crispy potatoes, turkey sausage, and scrambled eggs, one after another in the same pan, then fold them with cheese into warm corn tortillas for breakfast tacos."
+        },
+        "callback": {
+          "lesson": "spring-rolls",
+          "body": "Wrapping works the same with any wrapper: filling kept to a neat line, and not too much of it. Today the wrapper is a small corn tortilla, folded in half around the filling instead of rolled."
+        },
+        "wrong": [
+          { "sign": "The tortilla cracks when you fold it", "fix": "Warm it a little longer, wrapped in a damp towel, so it softens. Or use two tortillas together for each taco." },
+          { "sign": "The taco won't stay folded", "fix": "Use a little less filling, and stand the tacos side by side on the plate so they lean on each other." },
+          { "sign": "The potatoes are still hard in the middle", "fix": "Put the lid back on for 3 more minutes, then uncover and let them crisp again." },
+          { "sign": "The eggs are dry and rubbery", "fix": "The heat was too high. Next time, use medium-low and stir slowly. They're done as soon as no wet egg is left." }
+        ],
+        "quiz": [
+          { "q": "Which part do you cook first?", "choices": ["The potatoes, because they take longest", "The eggs, because they're fastest", "It doesn't matter"], "answer": 0, "explain": "Start with the slowest part so everything finishes together." },
+          { "q": "Why warm the tortillas?", "choices": ["Warm tortillas bend without cracking", "To make them crunchy", "To melt them"], "answer": 0, "explain": "Warmth and a little steam make corn tortillas soft enough to fold." }
+        ],
+        "why": {
+          "change": {
+            "warm-tortilla": {
+              "id": "warm-tortilla",
+              "title": "Warm tortillas bend",
+              "body": "A cold corn tortilla is stiff and cracks when you fold it. A little warmth and steam make it soft and bendy, so it folds around the filling without splitting."
+            }
+          }
+        }
+      }
+    }
   ]
 }

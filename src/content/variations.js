@@ -125,11 +125,13 @@ export function lessonVersion(L, id) {
 }
 
 // The variation that turns lesson L into full: what the content editor stores
-// when the owner edits a copy of the lesson (§7.5). head: { id, tags, level }.
+// when the owner edits a copy of the lesson (§7.5). head: { id, tags, level,
+// unleavenedDays }.
 export function diffVariation(L, full, head) {
   const { variations, ...base } = L;
   const v = { id: head.id, title: full.title };
   if (head.level) v.level = head.level;
+  if (head.unleavenedDays) v.unleavenedDays = true;
   if (head.tags) v.tags = structuredClone(head.tags);
   for (const k of WHOLE) {
     if (same(base[k], full[k])) continue;

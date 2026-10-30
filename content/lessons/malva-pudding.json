@@ -196,6 +196,83 @@
           ]
         }
       }
+    },
+    {
+      "id": "unleavened",
+      "title": "Unleavened malva pudding",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "none",
+        "flavors": ["sweet-treats"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "adventurous",
+        "veggies": "light"
+      },
+      "ingredients": {
+        "change": { "egg@Pudding": { "ingredient": "egg", "amount": 3, "unit": "count", "group": "Pudding" } },
+        "drop": ["baking-soda@Pudding", "vinegar-white@Pudding"]
+      },
+      "steps": {
+        "change": {
+          "melt": {
+            "id": "melt",
+            "text": "Melt the pudding's 2 tablespoons of butter in the small bowl in the microwave. Stir in the milk.",
+            "safety": "solo",
+            "timerSeconds": 30,
+            "timerLabel": "Melt butter"
+          },
+          "beat": {
+            "id": "beat",
+            "text": "Beat the eggs and the pudding's sugar in the large bowl with the whisk until pale and thick. Whisk in the jam.",
+            "safety": "solo",
+            "handles": ["egg"],
+            "timerSeconds": 480,
+            "timerLabel": "Beat",
+            "why": "ribbon",
+            "look": "Pale, thick, and falling from the whisk in a ribbon.",
+            "tip": "Take turns: it's hard work. An electric hand mixer is faster, if you have one. Keep going until it really is thick."
+          },
+          "dry": { "id": "dry", "text": "Whisk the flour and salt in the medium bowl.", "safety": "solo" },
+          "fold": {
+            "id": "fold",
+            "text": "Fold the flour mix and the milk mix into the eggs in turns, a third at a time, gently, just until smooth. Cut down through the middle with the spatula and turn the batter over the top, instead of stirring.",
+            "safety": "solo",
+            "tip": "Don't taste the raw batter. It has raw egg.",
+            "why": "ribbon"
+          },
+          "bake": {
+            "id": "bake",
+            "text": "Scrape the batter into the dish and bake until deep golden brown.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oven",
+            "timerSeconds": 2100,
+            "timerLabel": "Bake",
+            "look": "Deep caramel brown, and springy when touched. It won't rise as high as a boxed cake."
+          }
+        }
+      },
+      "learn": {
+        "move": {
+          "title": "A sponge that drinks its sauce",
+          "body": "Malva pudding is South Africa's favorite dessert: a soft, caramel-colored sponge made with apricot jam, soaked while it's hot in a warm sauce of cream, butter, and sugar. This one is unleavened, so the eggs do all the lifting. Today you'll beat eggs and sugar until very thick, fold in the flour gently, bake the sponge, and pour the sauce over so it soaks all the way through."
+        },
+        "quiz": [
+          { "q": "Why beat the eggs and sugar so long?", "choices": ["To trap air so the sponge is light", "To melt the sugar", "To cook the eggs"], "answer": 0, "explain": "It turns pale and thick." },
+          { "q": "When does the sauce go on?", "choices": ["As soon as the pudding comes out, while it's hot", "After it cools", "Before it bakes"], "answer": 0, "explain": "A hot sponge soaks it up." },
+          { "q": "Why fold the flour in gently?", "choices": ["So the air beaten into the eggs stays in", "So the flour doesn't spill", "To cool the batter"], "answer": 0, "explain": "The air in the eggs is what lifts this sponge." }
+        ],
+        "why": {
+          "change": {
+            "ribbon": {
+              "id": "ribbon",
+              "title": "Beat until thick",
+              "body": "Beating eggs and sugar for several minutes traps air, and the mix turns pale and thick. In this pudding that air is the only thing that lifts the sponge, so beat a little longer than you think, then fold gently so the air stays in."
+            }
+          },
+          "drop": ["vinegar"]
+        }
+      }
     }
   ]
 }

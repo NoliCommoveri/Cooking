@@ -12,8 +12,8 @@ import { servingOptions } from '../src/content/scale.js';
 const LIB = LIBRARY.lessons;
 
 const CALS = CONTENT.calendars;
-// A course of two leavened lessons with no unleavened swaps: smash burgers, then grilled cheese.
-const leavenedPlan = async (c) => (await c.get('/api/courses')).body.default_plan.map((x) => ({ ...x, removed: !['smash-burgers', 'grilled-cheese-tomato-soup'].includes(x.id) }));
+// A course of two leavened lessons with no unleavened swaps or version: skillet naan, then buttermilk biscuits.
+const leavenedPlan = async (c) => (await c.get('/api/courses')).body.default_plan.map((x) => ({ ...x, removed: !['skillet-naan', 'buttermilk-biscuits'].includes(x.id) }));
 const HEBREW = 'hebrew-lunisolar';
 
 // The Worker's clock, set to a day (UTC noon), for one test.
@@ -60,7 +60,7 @@ test('a week touches the unleavened days from the family\'s stop day to the feas
   assert.equal(unleavenedWeek('2027-04-11', early), true, 'stopping leaven from the 12th');
 });
 
-test('before release 2 there are no family dates, and Swap keeps the fixed window', async () => {
+test('before release 2 there are no family dates to set', async () => {
   const { a } = await setup({ preview: false });
   assert.equal((await a.get('/api/unleavened')).status, 404);
 });
@@ -103,7 +103,7 @@ test('Swap goes unleavened-only on the family\'s own weeks', async (t) => {
   const { a, ava } = await setup();
   const queue = async (date) => (await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava], planned_date: date })).body.id;
   const swapOn = async (id) => (await a.get(`/api/queue/${id}/swap`)).body.spring;
-  assert.equal(await swapOn(await queue('2027-03-17')), false, 'inside the old fixed window, but not the family\'s days');
+  assert.equal(await swapOn(await queue('2027-03-17')), false, 'March is not the family\'s days');
   assert.equal(await swapOn(await queue('2027-04-21')), true);
   const mid = await queue('2027-04-14');
   assert.equal(await swapOn(mid), false);
@@ -117,22 +117,22 @@ test('a course holds at its first leavened lesson through the feast: the kitchen
   const { a, ava } = await setup();
   await a.put('/api/family', { name: 'Carsons', default_servings: 4, diet_filters: [], plan_weeks: true });
   const plan = await leavenedPlan(a);
-  // Smash burgers come first: their toasted buns have no unleavened swap.
+  // Skillet naan comes first: its yeast has no unleavened swap.
   assert.equal((await a.post('/api/courses', { profile_ids: [ava], start_date: '2027-04-18', per_week: 1, plan })).status, 200);
   const card = (await a.get('/api/queue?tz=0')).body.courses[0];
-  assert.equal(card.this_week.held, 'smash-burgers');
+  assert.equal(card.this_week.held, 'skillet-naan');
   assert.equal(card.this_week.held_until, '2027-04-29');
   assert.deepEqual(card.this_week.lessons, []);
   assert.equal(card.weeks_behind, 0);
   const kitchen = (await a.get(`/api/profiles/${ava}/queue?tz=0`)).body;
   assert.deepEqual(kitchen.unleavened, { paused: true, until: '2027-04-29' });
-  assert.ok(!kitchen.items.some((x) => x.lesson_id === 'smash-burgers'), 'not queued while held');
+  assert.ok(!kitchen.items.some((x) => x.lesson_id === 'skillet-naan'), 'not queued while held');
 
   on('2027-04-29');
   await a.post('/api/pin/unlock', { pin: '1234' });
   const after = (await a.get('/api/queue?tz=0')).body.courses[0];
   assert.equal(after.this_week.held, null);
-  assert.deepEqual(after.this_week.lessons.map((x) => x.lesson_id ?? x.id), ['smash-burgers'], 'back the day after the last day');
+  assert.deepEqual(after.this_week.lessons.map((x) => x.lesson_id ?? x.id), ['skillet-naan'], 'back the day after the last day');
   assert.equal((await a.get(`/api/profiles/${ava}/queue?tz=0`)).body.unleavened, null);
 });
 
@@ -160,21 +160,21 @@ test('no leavened recipe can be planned on the unleavened days, however it\'s ad
   await a.post('/api/pin/unlock', { pin: '1234' });
   const add = (lesson_id, planned_date) => a.post('/api/queue', { lesson_id, profile_ids: [ava], planned_date });
 
-  // Add a lesson: smash burgers (buns, with no unleavened swap) can't be on the 23rd; bulgogi can.
-  const refused = await add('smash-burgers', '2027-04-23');
+  // Add a lesson: skillet naan (yeast, with no unleavened swap) can't be on the 23rd; bulgogi can.
+  const refused = await add('skillet-naan', '2027-04-23');
   assert.equal(refused.status, 409);
   assert.match(refused.body.message, /April 23 is during Unleavened Bread \(April 22 to April 28\)\. We check dates so leaven doesn.t slip onto your feast days\. Pick April 29 or later\./);
-  assert.equal((await add('smash-burgers', '2027-04-29')).status, 200, 'the day after the last day');
-  assert.equal((await add('smash-burgers', null)).status, 200, 'with no date');
+  assert.equal((await add('skillet-naan', '2027-04-29')).status, 200, 'the day after the last day');
+  assert.equal((await add('skillet-naan', null)).status, 200, 'with no date');
   assert.equal((await add('beef-bulgogi', '2027-04-23')).status, 200, 'an unleavened lesson');
 
   // Changing a queued lesson's date into the days; its servings still change.
-  const sid = (await add('smash-burgers', '2027-04-15')).body.id;
+  const sid = (await add('skillet-naan', '2027-04-15')).body.id;
   assert.equal((await a.put(`/api/queue/${sid}`, { planned_date: '2027-04-25' })).status, 409);
-  assert.equal((await a.put(`/api/queue/${sid}`, { servings: 2 })).status, 200);
+  assert.equal((await a.put(`/api/queue/${sid}`, { servings: 12 })).status, 200);
 
   // A kid's request, approved for a day in the feast.
-  const ask = await a.post(`/api/profiles/${ava}/ask`, { lesson_id: 'grilled-cheese-tomato-soup' });
+  const ask = await a.post(`/api/profiles/${ava}/ask`, { lesson_id: 'buttermilk-biscuits' });
   assert.equal(ask.body.status, 'requested');
   assert.equal((await a.post(`/api/queue/${ask.body.id}/approve`, { planned_date: '2027-04-24' })).status, 409);
   assert.equal((await a.post(`/api/queue/${ask.body.id}/approve`, { planned_date: '2027-05-03' })).status, 200);
@@ -187,7 +187,7 @@ test('no leavened recipe can be planned on the unleavened days, however it\'s ad
   // Cooking it now, on a day in the feast (approved on the spot).
   on('2027-04-23');
   await a.post('/api/pin/unlock', { pin: '1234' });
-  assert.equal((await a.post(`/api/profiles/${ava}/approve`, { lesson_id: 'challah-french-toast' })).status, 409);
+  assert.equal((await a.post(`/api/profiles/${ava}/approve`, { lesson_id: 'homemade-pizza' })).status, 409);
   assert.equal((await a.post(`/api/profiles/${ava}/approve`, { lesson_id: 'minestrone' })).status, 200);
 });
 
@@ -198,17 +198,17 @@ test('a course lesson already shopped for loses its week while the pause holds i
   await a.put('/api/family', { name: 'Carsons', default_servings: 4, diet_filters: [], plan_weeks: true });
   await a.post('/api/courses', { profile_ids: [ava], start_date: '2027-04-11', per_week: 1, plan: await leavenedPlan(a) });
   await a.get('/api/queue?tz=0');
-  const row = () => env.DB.prepare("SELECT * FROM queue WHERE lesson_id = 'smash-burgers' AND course_id IS NOT NULL").first();
+  const row = () => env.DB.prepare("SELECT * FROM queue WHERE lesson_id = 'skillet-naan' AND course_id IS NOT NULL").first();
   assert.equal((await row()).week_start, '2027-04-11');
-  await env.DB.prepare("UPDATE queue SET status = 'shopped' WHERE lesson_id = 'smash-burgers'").run();
+  await env.DB.prepare("UPDATE queue SET status = 'shopped' WHERE lesson_id = 'skillet-naan'").run();
 
   on('2027-04-19');
   await a.post('/api/pin/unlock', { pin: '1234' });
-  assert.equal((await a.get('/api/queue?tz=0')).body.courses[0].this_week.held, 'smash-burgers');
+  assert.equal((await a.get('/api/queue?tz=0')).body.courses[0].this_week.held, 'skillet-naan');
   const held = await row();
   assert.equal(held.status, 'shopped', 'still on the queue');
   assert.equal(held.week_start, null, 'not due in the feast');
-  const item = (await a.get(`/api/profiles/${ava}/queue?tz=0`)).body.items.find((x) => x.lesson_id === 'smash-burgers');
+  const item = (await a.get(`/api/profiles/${ava}/queue?tz=0`)).body.items.find((x) => x.lesson_id === 'skillet-naan');
   assert.equal(item?.due ?? null, null);
 
   on('2027-04-29');
@@ -279,8 +279,32 @@ test('with their unleavened swaps, lessons are cooked in the feast: planned, not
   const id = (await a.post('/api/queue', { lesson_id: 'beef-bulgogi', profile_ids: [ava], planned_date: '2027-04-23' })).body.id;
   const options = (await a.get(`/api/queue/${id}/swap`)).body.options.map((o) => o.id);
   assert.ok(options.includes('tuna-salad-sandwiches'));
-  assert.ok(!options.includes('smash-burgers'));
+  assert.ok(options.includes('smash-burgers'), 'by its unleavened version');
+  assert.ok(!options.includes('skillet-naan'));
   const lib = (await a.get('/api/library')).body.lessons;
   assert.equal(lib.find((x) => x.id === 'tuna-salad-sandwiches').feast_ok, true);
-  assert.equal(lib.find((x) => x.id === 'smash-burgers').feast_ok, false);
+  assert.equal(lib.find((x) => x.id === 'smash-burgers').feast_ok, true, 'by its unleavened version');
+  assert.equal(lib.find((x) => x.id === 'skillet-naan').feast_ok, false);
+});
+
+test('an unleavened version plays on the unleavened days: it can be planned, its week buys for it, and it is never a taste pick', async (t) => {
+  on('2027-04-19');
+  t.after(() => mock.timers.reset());
+  const { a, ava } = await setup();
+  await a.put('/api/family', { name: 'Carsons', default_servings: 6, diet_filters: [], plan_weeks: true });
+  await a.post('/api/pin/unlock', { pin: '1234' });
+  // Smash burgers' toasted buns have no swap, but the lettuce-wrap version has no leaven.
+  assert.equal((await a.post('/api/queue', { lesson_id: 'smash-burgers', profile_ids: [ava], planned_date: '2027-04-23', servings: 6 })).status, 200);
+  const d = (await a.get('/api/shopping')).body;
+  const week = d.weeks.find((w) => w.lessons.some((x) => x.lesson_id === 'smash-burgers'));
+  const ids = [...week.needs.sections.flatMap((s) => s.items), ...(week.needs.may_have ?? [])].map((x) => x.id);
+  assert.ok(ids.includes('lettuce-green-leaf'));
+  assert.ok(!ids.includes('burger-buns'));
+  // Never offered as a version to pick.
+  assert.equal((await a.put('/api/variations/smash-burgers', { variation: 'unleavened' })).status, 400);
+  const row = (await a.get('/api/queue?tz=0')).body;
+  const versions = JSON.stringify(row).match(/"options":\[[^\]]*\]/g) ?? [];
+  assert.ok(versions.every((o) => !o.includes('"id":"unleavened"')), 'not in the Version dialog');
+  // After the feast, the lesson's own version again.
+  assert.equal((await a.post('/api/queue', { lesson_id: 'smash-burgers', profile_ids: [ava], planned_date: '2027-05-04', servings: 6 })).status, 200);
 });

@@ -112,5 +112,76 @@
     { "id": "labneh", "text": "Spread the labneh in a shallow bowl, make a well with the back of a spoon, and fill it with oil. Dust with sumac.", "safety": "solo" },
     { "id": "plate", "text": "Spoon each dip into a small bowl, swirl, and add a thread of oil. Set the bowls in a tray of ice. Warm the pita and cut it into wedges.", "safety": "solo", "hazard": "Hot oven", "why": "hold" },
     { "id": "hold", "text": "Probe a dip every 30 minutes and log it. Refill on clean bowls from the fridge. At 2 hours, or any reading above 41°F, take it all in: refrigerate what held 41°F on ice, and discard the rest.", "safety": "solo", "why": "hold", "timerSeconds": 1800, "timerLabel": "Next check" }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "Mezze spread with soft unleavened bread",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["herby-lemony"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "new-ish",
+        "veggies": "lots"
+      },
+      "totalMinutes": 210,
+      "substitutions": [
+        { "for": "soft-unleavened-bread", "use": "matzah", "reason": "egg", "note": "Break the matzah into pieces for scooping." },
+        { "for": "soft-unleavened-bread", "use": "matzah-gluten-free", "reason": "gluten", "note": "Break the gluten-free matzah into pieces for scooping. Swap the tabbouleh's bulgur for cooked quinoa." }
+      ],
+      "ingredients": {
+        "drop": ["baking-soda@Hummus", "pita@To serve"],
+        "add": [
+          { "ingredient": "soft-unleavened-bread", "amount": 12, "unit": "count", "round": "up", "group": "To serve" }
+        ]
+      },
+      "steps": {
+        "change": {
+          "simmer": {
+            "id": "simmer",
+            "text": "Drain the chickpeas and cover them by 2 inches with fresh water in the pot. Bring to a boil, skim the foam, and simmer partly covered. Add hot water if they poke above it.",
+            "safety": "solo",
+            "hazard": "Boiling water",
+            "why": "soak",
+            "timerSeconds": 5400,
+            "timerLabel": "Chickpeas",
+            "tip": "Plain chickpeas take longer than you might expect. Start them first, and let the rest of the spread happen around them."
+          },
+          "plate": {
+            "id": "plate",
+            "text": "Spoon each dip into a small bowl, swirl, and add a thread of oil. Set the bowls in a tray of ice. Cut each square of soft unleavened bread into 4 triangles for scooping.",
+            "safety": "solo",
+            "hazard": "Sharp knife",
+            "why": "hold",
+            "tip": "Soft unleavened bread is lesson U3. Bake it the day before."
+          }
+        }
+      },
+      "learn": {
+        "wrong": [
+          { "sign": "The chickpeas are still firm after 90 minutes", "fix": "Keep simmering, checking every 10 minutes. Old chickpeas take longer; one should crush to a paste between your fingers." },
+          { "sign": "The hummus is gritty", "fix": "The chickpeas weren't soft enough. Simmer the rest longer next time, and blend at least 3 minutes." },
+          { "sign": "The baba ghanoush is bitter and watery", "fix": "It wasn't drained. Spoon it into a strainer for 10 minutes and stir in another spoon of tahini." },
+          { "sign": "The chickpeas are still warm after 2 hours", "fix": "They were too deep. Spread them thinner and put the pan in the fridge; next time cool them on a sheet pan from the start." }
+        ],
+        "quiz": [
+          { "q": "How do you know the chickpeas are soft enough for hummus?", "choices": ["One crushes to a paste between your fingers", "They float", "The water turns yellow"], "answer": 0, "explain": "Firm chickpeas make gritty hummus. Keep simmering until they crush easily." },
+          { "q": "What is the two-stage cooling rule?", "choices": ["135°F to 70°F in 2 hours, then to 41°F in 4 more", "Cool on the counter overnight", "Straight into the freezer"], "answer": 0, "explain": "Shallow pans make it possible." },
+          { "q": "Why drain roasted eggplant?", "choices": ["Its liquid is bitter and thins the dip", "To cool it", "To save it for soup"], "answer": 0, "explain": "Ten minutes in a colander." },
+          { "q": "How long can the dips sit out off ice?", "choices": ["2 hours", "4 hours", "Until the guests leave"], "answer": 0, "explain": "1 hour above 90°F." }
+        ],
+        "why": {
+          "change": {
+            "soak": {
+              "id": "soak",
+              "title": "Soak, then a long simmer",
+              "body": "An overnight soak lets dried chickpeas absorb water evenly, so they cook through instead of splitting outside while the middles stay hard. Simmered gently until one crushes to a paste between your fingers, they blend into smooth hummus. Firm chickpeas make gritty hummus, so this pot takes its time."
+            }
+          }
+        }
+      }
+    }
   ]
 }

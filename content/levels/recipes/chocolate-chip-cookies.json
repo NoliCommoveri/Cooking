@@ -76,5 +76,48 @@
     { "id": "check", "text": "With an adult and oven mitts, take out the pan. Look at the edges and the middles.", "safety": "adult-nearby", "type": "doneness", "hazard": "Hot pan", "target": { "look": "Golden edges and soft, puffy middles" }, "tip": "Pale edges? Bake 1 more minute." },
     { "id": "cool", "text": "Let them cool on the pan for 5 minutes, then move them to the rack with the spatula.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 300, "timerLabel": "Cool", "tip": "They firm up as they cool." },
     { "id": "again", "text": "Let the pan cool, then scoop and bake the rest the same way. Turn off the oven at the end.", "safety": "adult-nearby", "hazard": "Hot oven", "look": "About 24 cookies, all the same size." }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "Unleavened chocolate chip cookies",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "none",
+        "flavors": ["sweet-treats"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "ingredients": { "drop": ["baking-soda"] },
+      "steps": {
+        "change": {
+          "dry": {
+            "id": "dry",
+            "text": "Spoon and level the flour into the medium bowl. Whisk in the salt.",
+            "safety": "solo",
+            "tip": "Don't scoop with the cup. It packs in too much flour."
+          },
+          "bake": {
+            "id": "bake",
+            "text": "Bake until the edges are golden.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oven",
+            "timerSeconds": 600,
+            "timerLabel": "Bake",
+            "why": "spacing",
+            "look": "Golden edges, and the middles look soft.",
+            "tip": "These stay thicker and a little paler. Go by the golden edges."
+          }
+        }
+      },
+      "learn": {
+        "move": {
+          "title": "Cream it, scoop it even",
+          "body": "Chocolate chip cookies start by creaming: beating soft butter with sugar until it turns pale and fluffy. These are unleavened, with no raising agent, so the air you beat in is all their lift: they bake up thicker and chewier. Today you'll cream by hand, scoop the dough into even balls, and space them on the pan so every cookie bakes the same."
+        }
+      }
+    }
   ]
 }

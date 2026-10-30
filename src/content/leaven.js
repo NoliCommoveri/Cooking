@@ -4,6 +4,7 @@
 // text, the same way the blocked-word scan is (owner, 2026-10-22).
 import { blockedWordsIn } from './rules.js';
 import { dietView } from './diet.js';
+import { applyVariation, lessonVersion } from './variations.js';
 
 const STEP_TEXT = ['text', 'tip', 'look'];
 
@@ -68,9 +69,39 @@ export function feastView(lesson, ingredients, filters, leaven) {
   return out;
 }
 
-// Whether a lesson can be cooked on the unleavened days: it's unleavened, or
-// its unleavened swaps make it so for this family's diet.
-export const feastOk = (lesson, ingredients, filters, leaven) => unleavened(lesson, ingredients, leaven) || feastView(lesson, ingredients, filters, leaven).ok;
+// Whether a lesson as it stands can be cooked on the unleavened days: it's
+// unleavened, or its unleavened swaps make it so for this family's diet.
+const ownOk = (lesson, ingredients, filters, leaven) => unleavened(lesson, ingredients, leaven) || feastView(lesson, ingredients, filters, leaven).ok;
+
+// A lesson's unleavened version (§6.20): a variation marked unleavenedDays,
+// written out in full where a swap changes what the steps say to do (lettuce
+// wraps for toasted buns, matzah brei for French toast). It plays on the
+// family's unleavened days only, never as a taste pick.
+export const unleavenedVersion = (lesson) => (lesson?.variations ?? []).find((v) => v.unleavenedDays) ?? null;
+
+// The unleavened version as a whole lesson. A library summary's variations
+// are whole already (their ingredients are a list); a lesson file's are
+// changes on the lesson.
+const versionLesson = (lesson, v) => (Array.isArray(v.ingredients) ? v : applyVariation(lesson, v));
+
+// Whether a lesson can be cooked on the unleavened days: it can as it
+// stands, or its unleavened version can, for this family's diet.
+export const feastOk = (lesson, ingredients, filters, leaven) => {
+  if (ownOk(lesson, ingredients, filters, leaven)) return true;
+  const v = unleavenedVersion(lesson);
+  return Boolean(v) && ownOk(versionLesson(lesson, v), ingredients, filters, leaven);
+};
+
+// What's cooked on the unleavened days, for lesson B played as L (B itself,
+// or one of its versions): L when it can be as it stands, else B's
+// unleavened version when that can, else L (it waits for after the feast).
+export function feastCook(B, L, ingredients, filters, leaven) {
+  if (ownOk(L, ingredients, filters, leaven)) return L;
+  const v = unleavenedVersion(B);
+  if (!v) return L;
+  const V = lessonVersion(B, v.id);
+  return ownOk(V, ingredients, filters, leaven) ? V : L;
+}
 
 // The diet swaps with the unleavened days' on top, by the lesson's own
 // ingredients: a diet swap's replacement that an unleavened swap replaces

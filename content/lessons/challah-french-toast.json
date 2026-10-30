@@ -83,5 +83,188 @@
     { "id": "more", "text": "Move the slices to the plate and cover them loosely with foil to keep warm. Add another tablespoon of butter and cook the rest of the slices the same way: soak, then cook each side. Check one slice from each batch with the thermometer.", "safety": "adult-nearby", "hazard": "Hot pan", "tip": "Whisk the custard again before each batch. The cinnamon sinks to the bottom." },
     { "id": "wash-end", "type": "wash", "text": "Pour out any leftover custard. Wash the dish and the fork, wipe the counter, and wash your hands with soap.", "safety": "solo", "hazard": "Raw egg" },
     { "id": "serve", "text": "Turn off the stove. Serve the French toast warm with maple syrup.", "safety": "adult-nearby", "hazard": "Hot pan" }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "Matzah brei",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "eggs",
+        "flavors": ["sweet-treats", "mild-buttery"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "totalMinutes": 35,
+      "scaling": {
+        "mode": "free",
+        "notes": [
+          { "from": 9, "text": "For more than 8, cook in two skillets side by side, or keep the finished cakes warm under foil while you cook more batches." }
+        ]
+      },
+      "substitutions": [
+        { "for": "matzah", "use": "matzah-gluten-free", "reason": "gluten" },
+        { "for": "milk-whole", "use": "milk-oat", "reason": "dairy" },
+        { "for": "butter-unsalted", "use": "vegetable-oil", "reason": "dairy", "note": "Use 1 tablespoon of oil in the pan for each batch." }
+      ],
+      "ingredients": {
+        "change": {
+          "milk-whole@Custard": { "ingredient": "milk-whole", "amount": 1, "unit": "cup", "group": "Custard" }
+        },
+        "drop": ["challah@French toast"],
+        "add": [{ "ingredient": "matzah", "amount": 8, "unit": "count", "round": "up", "group": "Matzah brei" }],
+        "order": [
+          "+0",
+          "egg@Custard",
+          "milk-whole@Custard",
+          "sugar@Custard",
+          "vanilla-extract@Custard",
+          "cinnamon-ground@Custard",
+          "salt@Custard",
+          "butter-unsalted@For the pan",
+          "maple-syrup@To serve"
+        ]
+      },
+      "equipment": {
+        "drop": ["chef-knife", "cutting-board"],
+        "add": ["colander", "mixing-bowl-large"],
+        "order": [
+          "+0",
+          "+1",
+          "shallow-dish",
+          "whisk",
+          "fork",
+          "liquid-measuring-cup",
+          "measuring-spoons",
+          "skillet-12",
+          "spatula",
+          "plate",
+          "foil",
+          "paper-towels",
+          "thermometer"
+        ]
+      },
+      "steps": {
+        "change": {
+          "slice": {
+            "id": "slice",
+            "text": "Break the matzah into pieces about the size of a postage stamp, into the colander.",
+            "safety": "solo",
+            "tip": "Crumbs are fine. They soak up custard too."
+          },
+          "soak": {
+            "id": "soak",
+            "text": "Pour the custard over the matzah and stir gently with the fork until every piece is coated. Let it sit while the pan heats.",
+            "safety": "solo",
+            "timerSeconds": 120,
+            "timerLabel": "Soak",
+            "why": "soak",
+            "tip": "Use the fork, not your fingers, so your hands stay clean of raw egg."
+          },
+          "first-side": {
+            "id": "first-side",
+            "text": "Scoop about ⅓ cup of the mixture into the pan for each cake, 3 or 4 at a time, letting the extra custard drip back into the bowl. Press each one flat with the back of the fork. Cook until the bottoms are deep golden brown.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 180,
+            "timerLabel": "First side",
+            "why": "outside-in",
+            "look": "Lift a corner with the spatula: deep golden, not dark brown."
+          },
+          "second-side": {
+            "id": "second-side",
+            "text": "Flip each cake with the spatula and cook the second side the same way.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 180,
+            "timerLabel": "Second side"
+          },
+          "check": {
+            "id": "check",
+            "type": "doneness",
+            "text": "Slide the thermometer into the side of one cake, into the middle. It needs to read at least 160°F. If it doesn't, turn the heat down a little, cook 1 more minute on each side, and check again.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "target": { "temp": 160, "unit": "F" },
+            "look": "The middle springs back when you press it, with no wet custard."
+          },
+          "more": {
+            "id": "more",
+            "text": "Move the cakes to the plate and cover them loosely with foil to keep warm. Add another tablespoon of butter and cook the rest the same way. Check one cake from each batch with the thermometer.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "tip": "Stir the bowl before each batch. The custard sinks to the bottom."
+          },
+          "wash-end": {
+            "id": "wash-end",
+            "type": "wash",
+            "text": "Wash the bowl, the dish, and the fork, wipe the counter, and wash your hands with soap.",
+            "safety": "solo",
+            "hazard": "Raw egg"
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Turn off the stove. Serve the matzah brei warm with maple syrup.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan"
+          }
+        },
+        "add": [
+          { "id": "rinse", "text": "Run cold water over the matzah in the colander for about 15 seconds, tossing it with your hand, just until the pieces bend. Shake off the water and tip them into the large bowl.", "safety": "solo", "why": "soften", "look": "The pieces bend without snapping, but aren't soggy." }
+        ],
+        "order": [
+          "slice",
+          "+0",
+          "crack",
+          "wash-egg",
+          "whisk",
+          "soak",
+          "butter",
+          "first-side",
+          "second-side",
+          "check",
+          "more",
+          "wash-end",
+          "serve"
+        ]
+      },
+      "learn": {
+        "move": {
+          "title": "Low enough to cook the middle",
+          "body": "Heat control means choosing how hot the pan is, and changing it when the food tells you to. Today you'll make matzah brei: matzah softened, soaked in a sweet egg custard, and cooked in little cakes over medium-low heat, so the outside turns golden while the custard inside cooks all the way through."
+        },
+        "wrong": [
+          { "sign": "Dark outside, soggy middle", "fix": "The pan was too hot. Turn the heat down, and give each side another minute. The thermometer tells you when the middle is done." },
+          { "sign": "The cakes fell apart when you flipped them", "fix": "The matzah was rinsed or soaked too long, or the bottom wasn't set yet. Press each cake firmly, and wait until the bottom is golden before you flip." },
+          { "sign": "Pale and soft after the timer", "fix": "Turn the heat up a notch and cook a minute more on each side." },
+          { "sign": "The butter is turning black between batches", "fix": "Wipe the pan with a paper towel, turn the heat down a little, and start the next batch with fresh butter." }
+        ],
+        "quiz": [
+          { "q": "Why cook French toast on medium-low instead of high?", "choices": ["So the middle cooks before the outside burns", "So it cooks faster", "So the butter turns brown"], "answer": 0, "explain": "Thick food needs time for the heat to reach the middle. Lower heat gives it that time." },
+          { "q": "Why rinse the matzah for just a few seconds?", "choices": ["So it softens but still holds together", "To wash off the salt", "To make it crunchy"], "answer": 0, "explain": "A quick rinse lets it drink up the custard. A long one turns it to mush." }
+        ],
+        "why": {
+          "change": {
+            "outside-in": {
+              "id": "outside-in",
+              "title": "Thick food, lower heat",
+              "body": "Heat moves from the pan into the food slowly, from the outside in. A thin egg cooks through in a minute, but a cake of matzah soaked with custard needs time for the heat to reach its middle. Too hot, and the outside burns while the middle is still wet. Medium-low gives the middle time to catch up."
+            },
+            "soak": {
+              "id": "soak",
+              "title": "Soak, then scoop",
+              "body": "A short soak gets custard into every piece. Scooping with a fork and pressing each cake flat leaves the extra custard in the bowl, which keeps puddles of raw egg out of the pan."
+            }
+          },
+          "drop": ["stale"],
+          "add": [
+            { "id": "soften", "title": "A quick rinse, not a bath", "body": "Matzah is dry and crisp, so custard alone barely gets in. A few seconds under the tap softens it just enough that it drinks up the custard like a sponge and still holds its shape in the pan. Too long, and it turns to mush." }
+          ],
+          "order": ["outside-in", "+0", "soak", "butter-heat"]
+        }
+      }
+    }
   ]
 }

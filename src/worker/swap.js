@@ -24,7 +24,6 @@ import { dietView } from '../content/diet.js';
 import { servingOptions } from '../content/scale.js';
 import { unleavened, feastOk } from '../content/leaven.js';
 import { family, queueProfiles, today, weekFor, replaceStatements, levelLessonOn } from './plan.js';
-import { addDays } from './schedule.js';
 import { REGISTRY, stored, rowLesson, recipeVisible, lessonFor } from './recipes.js';
 import { recipeLesson } from '../content/recipe.js';
 import { tasteContext, cookCtx, dishFit } from './picks.js';
@@ -37,24 +36,14 @@ const ACTIVE = ['assigned', 'shopped'];
 const seasonal = new Set(LIBRARY.lessons.filter((L) => LIBRARY.seasonal.includes(L.unit)).map((L) => L.id));
 const LABELS = LIBRARY.seasonalLabels;
 
-// February 1 through May 15, fixed every year (owner, 2026-10-22): any day of
-// the week being swapped, Sunday to Friday, in that window.
-export function springWeek(sunday) {
-  for (let i = 0; i < 6; i++) {
-    const md = addDays(sunday, i).slice(5);
-    if (md >= '02-01' && md <= '05-15') return true;
-  }
-  return false;
-}
-
 // What the picker offers for a week, in order (§6.19). Each library lesson has its fit for the profiles on the cook (pids), and
 // within each part the best fit comes first; ones that don't fit go last
 // (§6.21, 11d2). The parts keep their order, and parent recipes, which have
 // no tags, keep theirs.
 export async function swapOptions(env, fam, week, pids = []) {
   const filters = JSON.parse(fam.diet_filters);
-  // With release 2, the family's own unleavened days (§6.20) instead of the fixed window.
-  const spring = fam.release >= UNLEAVENED_RELEASE ? unleavenedWeek(week, await datesFor(env, fam.id)) : springWeek(week);
+  // A week that touches the family's own unleavened days (§6.20).
+  const spring = unleavenedWeek(week, await datesFor(env, fam.id));
   // A Level's own recipes (§12.4) only with the Levels' release.
   const libOk = (L) => levelLessonOn(L, fam.release) && dietView(L, LIBRARY.ingredients, filters).visible;
   // With release 2, a lesson its unleavened swaps make unleavened for this family counts too.

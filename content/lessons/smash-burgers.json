@@ -626,6 +626,89 @@
           ]
         }
       }
+    },
+    {
+      "id": "unleavened",
+      "title": "Smash burger lettuce wraps + quick pickles",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "beef",
+        "flavors": ["tangy"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "substitutions": null,
+      "ingredients": {
+        "change": {
+          "lettuce-green-leaf@To serve": {
+            "ingredient": "lettuce-green-leaf",
+            "amount": 2,
+            "unit": "count",
+            "round": "up",
+            "prep": "big leaves, for wrapping",
+            "group": "To serve"
+          }
+        },
+        "drop": ["burger-buns@To serve"]
+      },
+      "steps": {
+        "change": {
+          "parchment": {
+            "id": "parchment",
+            "text": "Cut a square of parchment paper for each burger, a little bigger than your spatula. Pull 2 big leaves for each person off the lettuce, rinse them, and pat them dry. Put out the cheese if you're using it.",
+            "safety": "solo",
+            "tip": "Getting everything ready now matters. Once the burgers start, they cook in a few minutes."
+          },
+          "balls": {
+            "id": "balls",
+            "text": "Divide the beef into even pieces, one for each person. Roll each one gently into a loose ball and set them on the plate. Sprinkle them with {qty:black-pepper} pepper and the burgers' salt.",
+            "safety": "solo",
+            "hazard": "Raw meat",
+            "handles": ["beef-ground"],
+            "why": "loose-balls"
+          },
+          "heat": {
+            "id": "heat",
+            "text": "Heat the skillet over high heat. Add the oil and spread it around. Let the pan get very hot.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 180,
+            "timerLabel": "Heat pan",
+            "look": "The oil shimmers and just starts to smoke."
+          },
+          "smash-first": {
+            "id": "smash-first",
+            "text": "Lay a parchment square on one ball. Press down hard with the flat spatula until the patty is very thin, about ¼ inch, then peel off the paper. Smash the others the same way. Scatter a few onion slices on each.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan, spatter",
+            "why": "smash",
+            "tip": "Use both hands on the spatula, and lean on it. Keep your arms out of the way of any spatter."
+          },
+          "plate-first": {
+            "id": "plate-first",
+            "text": "Move each patty to a serving plate with the spatula.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan"
+          },
+          "check-second": {
+            "id": "check-second",
+            "type": "doneness",
+            "text": "Check one patty with the thermometer. It needs to read at least 160°F. Then move them to the plates and turn off the stove.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "target": { "temp": 160, "unit": "F" }
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Lay each burger on 2 overlapping lettuce leaves. Top it with pickles from the bowl, plus ketchup or mustard if you're using them, and fold the leaves up around it.",
+            "safety": "solo",
+            "tip": "Lift the pickles out with a fork and let the brine drip off first. Hold the wrap with both hands: it's juicy."
+          }
+        },
+        "drop": ["toast-buns"]
+      }
     }
   ]
 }

@@ -2,7 +2,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { makeEnv, family, samplePlan } from './helpers/worker.js';
-import { springWeek } from '../src/worker/swap.js';
 import { weekOf } from '../src/worker/schedule.js';
 import { LIBRARY } from '../src/worker/library-data.js';
 
@@ -21,14 +20,6 @@ async function setup() {
 }
 const groupsOf = (opts) => [...new Set(opts.map((o) => o.group))];
 
-test('the spring window runs February 1 through May 15, by the week being swapped', () => {
-  assert.equal(springWeek('2027-01-31'), true, 'a week reaching February 1');
-  assert.equal(springWeek('2027-01-24'), false);
-  assert.equal(springWeek('2027-05-09'), true, 'a week starting before May 15');
-  assert.equal(springWeek('2027-05-16'), false);
-  assert.equal(springWeek('2027-07-04'), false);
-});
-
 test('in spring the picker offers only Unleavened recipes, in order; the rest of the year, the unit and every feast recipe', async () => {
   const { a, b, ava } = await setup();
   const own = (await a.post('/api/recipes', FLAT)).body.id;
@@ -37,7 +28,7 @@ test('in spring the picker offers only Unleavened recipes, in order; the rest of
   const lamb = (await b.post('/api/recipes', LAMB)).body.id;
   await b.post(`/api/recipes/${lamb.slice(7)}/share`, { kind: 'general' });
 
-  const spring = (await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava], planned_date: '2027-03-17' })).body.id;
+  const spring = (await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava], planned_date: '2027-04-21' })).body.id;
   const opts = (await a.get(`/api/queue/${spring}/swap`)).body;
   assert.equal(opts.spring, true);
   assert.deepEqual(groupsOf(opts.options), ['Appointed Times lessons', 'Other lessons', 'Our recipes']);
@@ -64,7 +55,7 @@ test('a course lesson marked Good for Feast Days is offered all year with the ba
     const year = (await a.get(`/api/queue/${summer}/swap`)).body;
     assert.deepEqual(groupsOf(year.options), ['Appointed Times lessons', 'Other lessons']);
     assert.deepEqual(year.options.filter((o) => o.group === 'Other lessons').map((o) => [o.id, o.feast, o.unleavened]), [['fattoush', true, false]]);
-    const spring = (await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava], planned_date: '2027-03-17' })).body.id;
+    const spring = (await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava], planned_date: '2027-04-21' })).body.id;
     assert.ok(!(await a.get(`/api/queue/${spring}/swap`)).body.options.some((o) => o.id === 'fattoush'), 'pita is leaven');
     const kitchen = (await a.get('/api/library')).body;
     assert.equal(kitchen.lessons.find((L) => L.id === 'fattoush')?.feast, true, 'the kitchen card gets the badge');
@@ -76,7 +67,7 @@ test('a course lesson marked Good for Feast Days is offered all year with the ba
 
 test('a lesson queued by hand comes off the queue; Undo puts it back', async () => {
   const { a, ava } = await setup();
-  const qid = (await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava], planned_date: '2027-03-17' })).body.id;
+  const qid = (await a.post('/api/queue', { lesson_id: 'shakshuka', profile_ids: [ava], planned_date: '2027-04-21' })).body.id;
   const res = (await a.post(`/api/queue/${qid}/swap`, { lesson_id: 'unleavened-flatbread' })).body;
   let q = (await a.get('/api/queue')).body;
   assert.deepEqual(q.queued.map((x) => [x.lesson_id, x.swap, x.profile_ids.length]), [['unleavened-flatbread', true, 1]]);
@@ -130,7 +121,7 @@ test('a course lesson swapped this week goes first next week, and the course is 
 test('diet settings apply to the picker, and another family can\'t swap', async () => {
   const { a, b, ava } = await setup();
   await a.put('/api/family', { name: 'Carsons', default_servings: 6, diet_filters: ['dairy'] });
-  const qid = (await a.post('/api/queue', { lesson_id: 'spring-rolls', profile_ids: [ava], planned_date: '2027-03-17' })).body.id;
+  const qid = (await a.post('/api/queue', { lesson_id: 'spring-rolls', profile_ids: [ava], planned_date: '2027-04-21' })).body.id;
   const opts = (await a.get(`/api/queue/${qid}/swap`)).body.options;
   assert.ok(!opts.some((o) => o.id === 'cottage-cheese-crescents'), 'dairy');
   assert.equal((await b.get(`/api/queue/${qid}/swap`)).status, 404);

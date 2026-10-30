@@ -9,7 +9,7 @@ import { scaleLesson, servingOptions } from './lib/scale.js';
 import { findTerms } from './lib/terms.js';
 import { ingredientsInStep } from './lib/amounts.js';
 import { dietView } from './lib/diet.js';
-import { feastView, withFeast } from './lib/leaven.js';
+import { feastView, withFeast, feastCook, unleavenedVersion } from './lib/leaven.js';
 import { applyPatches, showValue } from './lib/patch.js';
 import { lessonVersion } from './lib/variations.js';
 import { courseNo } from './lib/course.js';
@@ -150,11 +150,14 @@ document.addEventListener('visibilitychange', () => { if (wanted && document.vis
 export async function openLesson(mount, { profile, family, lessonId, variation = null, leaveOut = [], lesson = null, extra = {}, onExit, crew = [], onCook = null, onReflect = null, fixes = null, labels = null, total = null, level = null, pictures = 'button', ask = null, seed = null, resting = null, feastDays = false, onDone = null, mastery = false, preview = false, registry = null, exitLabel = 'Back to the lesson' }) {
   const [published, B] = await Promise.all([getRegistry(), lesson ?? getLesson(lessonId)]);
   const kept = readState(profile.id, B.id);
-  const L = lessonVersion(B, kept?.cookId ? kept.variation ?? null : variation);
-  // "A version of Chimichurri steak", under a variation's title.
-  const versionOf = (cls) => (L.versionOf ? `<p class="${cls}">A version of ${esc(L.versionOf)}</p>` : '');
   const R = { ...published, ...registry };
   const ING = { ...R.ingredients, ...extra };
+  let L = lessonVersion(B, kept?.cookId ? kept.variation ?? null : variation);
+  // On the unleavened days, a version with leaven gives way to the lesson's
+  // unleavened version (§6.20), when its swaps alone can't make it unleavened.
+  if (feastDays && !resting && R.leaven) L = feastCook(B, L, ING, family.diet_filters, R.leaven);
+  // "A version of Chimichurri steak", under a variation's title.
+  const versionOf = (cls) => (L.versionOf ? `<p class="${cls}">A version of ${esc(L.versionOf)}</p>` : '');
   // Appointed Times lessons keep their U1, U2 labels whatever the course plan (§6.19).
   const seasonal = (id) => R.seasonal?.includes(R.lessons.find((x) => x.id === id)?.unit);
   // A Cook Around the World lesson says its place in the course: 27 for S27.
@@ -360,10 +363,15 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
         ? `<div class="p-serve-row"><span class="p-lbl">Serves</span>${options.map((n) => `<button type="button" class="p-step" style="width:auto;padding:0 14px" aria-pressed="${n === S.servings}" data-act="serv-set" data-n="${n}">${n}</button>`).join('')}</div>`
         : `<div class="p-serve-row"><span class="p-lbl">Serves</span><button type="button" class="p-step" data-act="serv" data-i="-1" aria-label="Fewer servings" ${S.servings <= options[0] ? 'disabled' : ''}>−</button><span class="p-num" aria-live="polite">${S.servings}</span><button type="button" class="p-step" data-act="serv" data-i="1" aria-label="More servings" ${S.servings >= options.at(-1) ? 'disabled' : ''}>+</button></div><div class="p-plates" aria-hidden="true">${'<svg viewBox="0 0 100 100"><use href="/icons.svg#plate"/></svg>'.repeat(S.servings)}</div>`}
         <p class="p-small">Your family's usual: ${family.default_servings}</p>${shoppedNote('p-pan')}${sc.note ? `<p class="p-pan">${ic('t-pans')}${esc(sc.note)}</p>` : ''}</div>`;
+    // The lesson's unleavened version (§6.20), and the soft unleavened bread it's made with.
+    const feastVersion = L.variation && L.variation === unleavenedVersion(B)?.id;
+    const softBread = (view.feast ?? []).some((x) => x.use === 'soft-unleavened-bread')
+      || (feastVersion && L.ingredients.some((x) => x.ingredient === 'soft-unleavened-bread') && !view.applied.some((x) => x.for === 'soft-unleavened-bread'));
     const forFeast = [
+      ...(feastVersion ? [`This is the unleavened version of ${esc(B.title)}.`] : []),
       ...(view.feast ?? []).map((x) => `Use ${esc(name(x.use).toLowerCase())} instead of ${esc(name(x.for).toLowerCase())}.`),
       ...feastLeft.map((id) => `Leave out the ${esc(name(id).toLowerCase())}.`),
-      ...((view.feast ?? []).some((x) => x.use === 'soft-unleavened-bread') ? ['Make it first with lesson U3, Soft unleavened bread.'] : []),
+      ...(softBread ? ['Make it first with lesson U3, Soft unleavened bread.'] : []),
     ];
     const changes = [
       ...view.applied.filter((x) => dietApplied.has(`${x.for}>${x.use}`)).map((x) => `Use ${esc(name(x.use).toLowerCase())} instead of ${esc(name(x.for).toLowerCase())}.`),
@@ -796,4 +804,51 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
     save();
   });
   draw();
+}
+
+// A lesson as a printed recipe (§6.22): the version cooked, at the family's
+// size, with the diet's changes and, in a week that touches the unleavened
+// days, the unleavened swaps or version (§6.20), as the player would cook it.
+// Returns the HTML of one page.
+export async function recipeSheet({ family, lessonId, variation = null, servings, feastDays = false, kicker = '' }) {
+  const [R, B] = await Promise.all([getRegistry(), getLesson(lessonId)]);
+  const ING = R.ingredients;
+  let L = lessonVersion(B, variation);
+  if (feastDays && R.leaven) L = feastCook(B, L, ING, family.diet_filters, R.leaven);
+  let view = dietView(L, ING, family.diet_filters);
+  const dietApplied = new Set(view.applied.map((x) => `${x.for}>${x.use}`)), dietLeft = [...view.leftOut];
+  if (feastDays && R.leaven) {
+    const fv = feastView(L, ING, family.diet_filters, R.leaven);
+    if (fv.ok && (fv.applied.length || fv.leftOut.length)) view = withFeast(view, fv);
+  }
+  const name = (id) => (ING[id]?.name ?? id).toLowerCase();
+  const options = servingOptions(L);
+  const n = options.reduce((a, b) => (Math.abs(b - servings) < Math.abs(a - servings) ? b : a));
+  const sc = scaleLesson(L, ING, n);
+  const leftOut = new Set(view.leftOut);
+  const notes = [
+    ...view.applied.filter((x) => dietApplied.has(`${x.for}>${x.use}`)).map((x) => `Use ${name(x.use)} instead of ${name(x.for)}.`),
+    ...dietLeft.map((id) => `Leave out the ${name(id)}.`),
+  ];
+  const feast = [
+    ...(L.variation && L.variation === unleavenedVersion(B)?.id ? [`This is the unleavened version of ${B.title}.`] : []),
+    ...(view.feast ?? []).map((x) => `Use ${name(x.use)} instead of ${name(x.for)}.`),
+    ...view.leftOut.filter((id) => !dietLeft.includes(id)).map((id) => `Leave out the ${name(id)}.`),
+  ];
+  const groups = [...new Set(sc.ingredients.map((i) => i.group))];
+  const lines = groups.map((g) => `${g ? `<h4>${esc(g)}</h4>` : ''}<ul class="ps-ings">${sc.ingredients.filter((i) => i.group === g && !leftOut.has(i.id))
+    .map((i) => `<li><span class="ps-box"></span>${esc(i.line)}${i.prep ? `, ${esc(i.prep)}` : ''}${i.optional ? ' <i>(optional)</i>' : ''}</li>`).join('')}</ul>`).join('');
+  const tools = L.equipment.map((id) => R.equipment[id]?.name ?? id);
+  const steps = sc.steps.map((s) => `<li><span class="ps-box"></span><div>${s.hazard ? `<b class="ps-haz">${esc(LVL[s.safety]?.head ?? '')}: ${esc(s.hazard)}.</b> ` : ''}${esc(s.text)}${s.look ? `<br><i>Look for: ${esc(s.look)}</i>` : ''}${s.tip ? `<br><small>Tip: ${esc(s.tip)}</small>` : ''}</div></li>`).join('');
+  return `<article class="ps-page ps-recipe">
+    ${kicker ? `<p class="ps-kick">${esc(kicker)}</p>` : ''}<h2>${esc(L.title)}</h2>${L.versionOf ? `<p class="ps-sub">A version of ${esc(L.versionOf)}</p>` : ''}
+    <p class="ps-meta">${esc(L.skill)} · About ${L.totalMinutes} minutes · Serves ${n}</p>
+    ${notes.length ? `<p class="ps-note"><b>For your family:</b> ${esc(notes.join(' '))}</p>` : ''}
+    ${feast.length ? `<p class="ps-note"><b>For Unleavened Bread:</b> ${esc(feast.join(' '))}</p>` : ''}
+    ${sc.note ? `<p class="ps-note">${esc(sc.note)}</p>` : ''}
+    <h3>Ingredients</h3>${lines}
+    <h3>Tools</h3><p>${esc(tools.join(', '))}</p>
+    <h3>Steps</h3><ol class="ps-steps">${steps}</ol>
+    <p class="ps-done">Cooked on: ____________ &nbsp; By: ________________________</p>
+  </article>`;
 }

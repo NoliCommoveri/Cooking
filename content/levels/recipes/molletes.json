@@ -76,5 +76,89 @@
     { "id": "melt", "text": "Mitts on. Slide the pan back into the oven and bake until the cheese melts.", "safety": "adult-nearby", "hazard": "Hot oven", "timerSeconds": 420, "timerLabel": "Melt cheese", "look": "Cheese melted and bubbling at the edges." },
     { "id": "out-again", "text": "Mitts on. Pull the rack out, lift out the pan, and set it on the stovetop. Turn off the oven.", "safety": "adult-nearby", "hazard": "Hot pan", "why": "hot-pan", "tip": "Tell anyone nearby that the pan is hot." },
     { "id": "serve", "text": "Let them cool for 2 minutes. Top each with a spoonful of salsa and a few cilantro leaves.", "safety": "solo", "look": "Melted cheese, bright salsa on top." }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "Molletes on soft unleavened bread",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "new-ish",
+        "veggies": "some"
+      },
+      "substitutions": [
+        { "for": "soft-unleavened-bread", "use": "matzah", "reason": "egg", "note": "Use a sheet of matzah for each square. Toast it just 3 minutes the first time: matzah is dry already." },
+        { "for": "soft-unleavened-bread", "use": "matzah-gluten-free", "reason": "gluten", "note": "Use a sheet of gluten-free matzah for each square. Toast it just 3 minutes the first time: matzah is dry already." }
+      ],
+      "ingredients": {
+        "drop": ["bolillo-rolls@Molletes"],
+        "add": [
+          { "ingredient": "soft-unleavened-bread", "amount": 8, "unit": "count", "round": "up", "group": "Molletes" }
+        ],
+        "order": [
+          "+0",
+          "butter-unsalted@Molletes",
+          "refried-beans@Molletes",
+          "monterey-jack@Molletes",
+          "salsa@To serve",
+          "cilantro@To serve"
+        ]
+      },
+      "equipment": { "drop": ["bread-knife"] },
+      "steps": {
+        "change": {
+          "spread-butter": {
+            "id": "spread-butter",
+            "text": "Spread a thin layer of butter on top of each square of soft unleavened bread with the table knife. Lay them buttered side up on the sheet pan.",
+            "safety": "solo",
+            "look": "8 squares, buttered side up, not touching.",
+            "tip": "Soft unleavened bread is lesson U3. Bake it a day ahead."
+          },
+          "toast": {
+            "id": "toast",
+            "text": "Open the oven door, slide the pan onto the middle of the rack, and close the door.",
+            "safety": "adult-nearby",
+            "hazard": "Hot oven",
+            "timerSeconds": 360,
+            "timerLabel": "Toast squares",
+            "why": "toast-first",
+            "look": "Edges just turning golden."
+          },
+          "top": {
+            "id": "top",
+            "text": "Spread beans over each square with the spoon. Sprinkle the cheese on top.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "tip": "Don't touch the pan. Work from above the squares."
+          }
+        },
+        "drop": ["split"]
+      },
+      "learn": {
+        "move": {
+          "title": "In and out of a hot oven",
+          "body": "Molletes are a Mexican breakfast: rolls toasted, spread with beans and cheese, and baked until melted, then topped with salsa. This time they're made on squares of soft unleavened bread. They go in and out of the oven twice, so you'll practice mitts on, the rack pulled out, and the hot pan set down safely."
+        },
+        "wrong": [
+          { "sign": "The cheese isn't melted", "fix": "Put the pan back in for 2 more minutes, mitts on." },
+          { "sign": "The squares are soggy", "fix": "Toast them longer the first time, until the edges are golden." },
+          { "sign": "The edges are burned", "fix": "Check a few minutes early next time. Ovens run hot or cold." },
+          { "sign": "The beans are too thick to spread", "fix": "Stir in a spoonful of water until they spread easily." }
+        ],
+        "why": {
+          "change": {
+            "toast-first": {
+              "id": "toast-first",
+              "title": "Toast the squares first",
+              "body": "A quick bake before the toppings go on dries the top of each square, so the beans don't make it soggy."
+            }
+          }
+        }
+      }
+    }
   ]
 }

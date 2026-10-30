@@ -105,7 +105,7 @@ export function buildPublic() {
     // The dish card (queue and course screens): from course.json, or the lesson itself for Appointed Times.
     about: L.about ?? dishes[L.id]?.about, main: L.main ?? dishes[L.id]?.main, method: L.method ?? dishes[L.id]?.method, minutes: L.totalMinutes,
     // Its variations (§6.21), by id and title.
-    ...(L.variations?.length ? { variations: L.variations.map((v) => ({ id: v.id, title: v.title, ...(v.level ? { level: v.level } : {}) })) } : {}),
+    ...(L.variations?.length ? { variations: L.variations.map((v) => ({ id: v.id, title: v.title, ...(v.level ? { level: v.level } : {}), ...(v.unleavenedDays ? { unleavenedDays: true } : {}) })) } : {}),
   });
   const summary = c.lessons.map(({ data: L }) => card(L, labels[L.id])).sort(inCourse(c));
   files['public/content/registry.json'] = JSON.stringify({
@@ -196,7 +196,7 @@ export function buildLibrary() {
     if (L.variations?.length) {
       out.variations = L.variations.map((v) => {
         const { id: _, version, track, unit, skill, feast, ...rest } = summary(applyVariation(L, v));
-        return { ...rest, id: v.id, tags: v.tags ?? null, ...(v.level ? { level: v.level } : {}) };
+        return { ...rest, id: v.id, tags: v.tags ?? null, ...(v.level ? { level: v.level } : {}), ...(v.unleavenedDays ? { unleavenedDays: true } : {}) };
       });
     }
     return out;

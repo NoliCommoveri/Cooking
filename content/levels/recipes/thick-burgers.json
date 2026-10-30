@@ -80,5 +80,90 @@
     { "id": "cheese", "text": "Lay a slice of cheese on each patty if you're using it, and cook 1 more minute.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 60, "timerLabel": "Cheese melts", "look": "The cheese is soft and starting to melt." },
     { "id": "check", "type": "doneness", "text": "Slide the thermometer into the side of each patty so the tip is in the very middle. Each one needs to read at least 160°F. If one doesn't, cook it 1 more minute and check again.", "safety": "adult-nearby", "hazard": "Hot pan", "target": { "temp": 160, "unit": "F" }, "why": "from-side", "tip": "Wipe the thermometer tip between patties." },
     { "id": "serve", "text": "Turn off the stove. Move each patty to a bottom bun with the spatula. Add lettuce and tomato, ketchup or mustard if you're using them, and the top bun.", "safety": "adult-nearby", "hazard": "Hot pan" }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "Thick beef burger lettuce wraps",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "beef",
+        "flavors": ["mild-buttery"],
+        "heat": "mild",
+        "budget": "$$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "substitutions": null,
+      "ingredients": {
+        "change": {
+          "lettuce-green-leaf@To serve": {
+            "ingredient": "lettuce-green-leaf",
+            "amount": 2,
+            "unit": "count",
+            "round": "up",
+            "prep": "big leaves, for wrapping",
+            "group": "To serve"
+          }
+        },
+        "drop": ["burger-buns@To serve"]
+      },
+      "steps": {
+        "change": {
+          "toppings": {
+            "id": "toppings",
+            "text": "Slice the tomato into rounds. Pull 2 big leaves for each person off the lettuce, rinse them, and pat them dry.",
+            "safety": "adult-nearby",
+            "hazard": "Sharp knife",
+            "tip": "Get everything ready now. Once the burgers start, you'll be busy at the stove."
+          },
+          "shape": {
+            "id": "shape",
+            "text": "Divide the beef into even pieces, one for each person. Shape each one into a patty about ¾ inch thick. Press a shallow dent in the middle of each with your thumb. Set them on the plate and sprinkle both sides with {qty:salt} salt and {qty:black-pepper} pepper.",
+            "safety": "solo",
+            "hazard": "Raw meat",
+            "handles": ["beef-ground"],
+            "why": "dimple",
+            "tip": "Handle the beef gently. Pat it into shape instead of squeezing."
+          },
+          "wash-shape": {
+            "id": "wash-shape",
+            "type": "wash",
+            "text": "Wash your hands with soap, and wipe anything the raw beef or its package touched.",
+            "safety": "solo",
+            "hazard": "Raw meat",
+            "tip": "Raw beef can carry germs. Wash before you touch the lettuce or anything else."
+          },
+          "heat": {
+            "id": "heat",
+            "text": "Heat the skillet over medium-high heat. Add the oil and spread it around.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 150,
+            "timerLabel": "Heat pan",
+            "why": "medium-high",
+            "look": "The oil shimmers, but isn't smoking."
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Turn off the stove. Lay 2 lettuce leaves on each plate, overlapping, and move a patty onto them with the spatula. Add tomato, and ketchup or mustard if you're using them, and fold the leaves up around it.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan"
+          }
+        },
+        "drop": ["toast-buns"]
+      },
+      "learn": {
+        "why": {
+          "change": {
+            "dimple": {
+              "id": "dimple",
+              "title": "A dimple in the middle",
+              "body": "As a patty cooks, its edges tighten and push the middle up into a dome. Pressing a shallow dent in the center before cooking means it puffs up flat instead, so it cooks evenly and sits flat in its lettuce."
+            }
+          }
+        }
+      }
+    }
   ]
 }

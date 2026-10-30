@@ -14,13 +14,16 @@ const KEY = 'releases';
 // but not launched, so a half-built one can't go out to everyone.
 export const RELEASES = [
   { n: 1, name: 'The Levels: Level 2 Apprentice, Level 3 Cook, and Level 4 Chef, with a Familiar and an Explore dish each week (plan §12)' },
-  { n: 2, name: 'Unleavened Bread dates: each family\'s own feast dates, from a standard calendar (plan §6.20)', building: true },
+  { n: 2, name: 'Unleavened Bread dates: each family\'s own feast dates, from a standard calendar (plan §6.20)' },
+  { n: 3, name: 'Print and complete offline: print a course\'s coming weeks, then mark what was done away from the app (plan §6.22)', building: true },
 ];
 export const LATEST = RELEASES.at(-1).n;
 // The release the Levels (§12) come with: their courses, recipes, and public pages.
 export const LEVELS_RELEASE = 1;
 // The release each family's own Unleavened Bread dates (§6.20) come with.
 export const UNLEAVENED_RELEASE = 2;
+// The release printing and completing a course offline (§6.22) come with.
+export const OFFLINE_RELEASE = 3;
 
 export async function releaseState(db) {
   try {

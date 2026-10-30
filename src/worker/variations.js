@@ -86,6 +86,8 @@ export function register(on) {
     if (vid !== '' && !hasVariation(lid, vid)) fail(400, 'invalid', `${L.title} has no version called "${vid}".`);
     // A Level's version (14e) plays on its Level's course only, never as a pick.
     if (L.variations.find((v) => v.id === vid)?.level) fail(400, 'invalid', `That version of ${L.title} is for a Level course only.`);
+    // Nor is the unleavened version (§6.20): it plays on the family's unleavened days.
+    if (L.variations.find((v) => v.id === vid)?.unleavenedDays) fail(400, 'invalid', `That version of ${L.title} is cooked on its own during the Days of Unleavened Bread.`);
     await env.DB.prepare(`INSERT INTO variation_choices (family_id, lesson_id, variation, updated_at) VALUES (?, ?, ?, ?)
       ON CONFLICT (family_id, lesson_id) DO UPDATE SET variation = excluded.variation, updated_at = excluded.updated_at`)
       .bind(s.family_id, lid, vid, now()).run();

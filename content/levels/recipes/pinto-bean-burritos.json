@@ -98,5 +98,73 @@
     { "id": "roll", "text": "Lay a tortilla flat. Spread a line of rice, then beans, then cheese and a spoonful of salsa across the lower third, leaving 2 inches bare at each side. Fold the sides in, fold the bottom up over the filling, and roll it away from you tightly.", "safety": "solo", "look": "A tight roll with the sides tucked in and the seam underneath." },
     { "id": "toast", "text": "Set the burritos seam side down in the skillet over medium heat and toast until golden, then turn them with the tongs and toast the other side.", "safety": "adult-nearby", "hazard": "Hot pan", "timerSeconds": 240, "timerLabel": "Toast burritos", "look": "Golden and crisp on both sides, sealed at the seam." },
     { "id": "serve", "text": "Turn off the stove. Serve the burritos with the rest of the salsa, and sour cream if you're using it.", "safety": "adult-nearby", "hazard": "Hot pan" }
+  ],
+  "variations": [
+    {
+      "id": "unleavened",
+      "title": "Bean and cheese tacos",
+      "unleavenedDays": true,
+      "tags": {
+        "protein": "beans-lentils",
+        "flavors": ["creamy-cheesy"],
+        "heat": "mild",
+        "budget": "$",
+        "familiar": "everyday",
+        "veggies": "light"
+      },
+      "ingredients": {
+        "drop": ["tortilla-burrito@Burritos", "cheddar-shredded@Burritos", "salsa@Burritos", "sour-cream@Burritos"],
+        "add": [
+          { "ingredient": "tortilla-corn", "amount": 18, "unit": "count", "group": "Tacos" },
+          { "ingredient": "cheddar-shredded", "amount": 1.5, "unit": "cup", "group": "Tacos" },
+          { "ingredient": "salsa", "amount": 0.75, "unit": "cup", "group": "Tacos" },
+          { "ingredient": "sour-cream", "amount": 0.5, "unit": "cup", "optional": true, "group": "Tacos" }
+        ]
+      },
+      "steps": {
+        "change": {
+          "warm": {
+            "id": "warm",
+            "text": "Warm each corn tortilla in the dry skillet over medium heat, 20 seconds a side, and stack them under a towel or a plate.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "tip": "Warm corn tortillas bend. Cold ones crack when you fold them."
+          },
+          "roll": {
+            "id": "roll",
+            "text": "Lay a tortilla flat. Spread a spoonful of beans down the middle, then a little rice, cheese, and salsa. Fold it in half over the filling. Fill and fold the rest the same way.",
+            "safety": "solo",
+            "look": "A neat half-moon, with the filling inside and not spilling out the edges."
+          },
+          "toast": {
+            "id": "toast",
+            "text": "Set the tacos flat in the skillet over medium heat, as many as fit, and toast until golden, then turn them with the tongs and toast the other side. Toast the rest the same way.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan",
+            "timerSeconds": 240,
+            "timerLabel": "Toast tacos",
+            "look": "Golden and crisp on both sides, with the cheese melted inside."
+          },
+          "serve": {
+            "id": "serve",
+            "text": "Turn off the stove. Serve the tacos with the rest of the salsa, and sour cream if you're using it.",
+            "safety": "adult-nearby",
+            "hazard": "Hot pan"
+          }
+        }
+      },
+      "learn": {
+        "move": {
+          "title": "From a bag of dried beans",
+          "body": "A pound of dried pinto beans costs about what one can does and makes three times as much. Today you'll pick over and soak the beans the night before, simmer them gently until they're creamy all the way through, then mash them in a skillet with onion and cumin. Folded into corn tortillas with rice and cheese and toasted, they're bean and cheese tacos, from scratch."
+        },
+        "wrong": [
+          { "sign": "The beans are still hard after 90 minutes", "fix": "Old beans take longer. Keep simmering and check every 15 minutes, adding hot water so they stay covered. Buy beans from a store that sells a lot of them." },
+          { "sign": "The skins split and the beans fell apart", "fix": "The pot boiled too hard. They're perfect for mashing. Next time, keep the bubbles small." },
+          { "sign": "The mashed beans are dry and stiff", "fix": "Stir in the bean liquid a few tablespoons at a time. They thicken as they cool, so stop while they're a little loose." },
+          { "sign": "The tortilla split when you folded it", "fix": "The tortilla was cold or overfilled. Warm it until it bends easily, and keep the filling to a line down the middle." }
+        ]
+      }
+    }
   ]
 }

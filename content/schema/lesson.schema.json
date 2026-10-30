@@ -30,6 +30,7 @@
       "properties": {
         "id": { "$ref": "#/$defs/id" }, "title": { "$ref": "#/$defs/text" }, "tags": { "$ref": "#/$defs/tags" },
         "level": { "type": "string", "pattern": "^sp-[0-9]+$", "description": "A Level's version of the lesson (14e): its Level course always plays it, and it's never a taste pick." },
+        "unleavenedDays": { "const": true, "description": "The lesson's unleavened version (§6.20): it plays on the family's unleavened days, in place of a version with leaven, and it's never a taste pick." },
         "image": { "$ref": "#/$defs/text" }, "servings": { "type": "integer", "minimum": 1 }, "totalMinutes": { "type": "integer", "minimum": 1 },
         "scaling": { "type": "object" }, "substitutions": { "type": ["array", "null"] }, "intro": { "type": ["object", "null"] },
         "learn": { "type": "object", "additionalProperties": false, "properties": {
