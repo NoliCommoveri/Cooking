@@ -19,6 +19,7 @@ import { isMuted, setMuted } from './sound.js';
 import { gettingStarted, openRuth, ruthButton } from './ruth.js';
 import { unleavenedFields, feastWords, answerWords, UNLEAVENED_RELEASE } from './unleavened.js';
 import { openIntro } from './intro.js';
+import { offlineButtons, OFFLINE_RELEASE } from './offline.js';
 import { starRow, ratingSaver, ratedCount } from './tastes.js';
 
 const app = document.getElementById('app');
@@ -382,6 +383,8 @@ async function lockers() {
 // ---------- Chef Ruth (§6.8) ----------
 
 // What Chef Ruth needs from the app to build her chat and save answers.
+// Print and complete offline (§6.22) gets the app's helpers the same way.
+const offlineCtx = () => ({ el, api, modal, showToast, tz, fmtDay, localToday, family: () => me.family });
 const ruthCtx = () => ({
   el, api, field, go, refresh, me: () => me, modal, familyInitial, pictureGrid, passwordFields, DIET, LOGIN_PICTURES, weekOf, localToday, fmtDay, tz,
 });
@@ -732,6 +735,9 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
         store('cpr.login', 'kid');
         await start('#/login');
       } }, 'Log out') : null),
+    // Print and complete offline (§6.22, release 3), for a profile on a course.
+    current === 'path' && mine.order && me.family.release >= OFFLINE_RELEASE
+      ? offlineButtons(offlineCtx(), { profile: p, level: Boolean(mine.level), after: () => kitchen(id, current) }) : null,
     current === 'more' ? moreView() : current === 'progress' ? (levelPr ? await levelProgressView(p, mine.level, cooks) : await progressView(p, cooks)) : pathView(),
     // Pinned to the bottom, where a thumb is, as in MCCE Kids.
     el('nav', { class: `k-tabs ${quest ? 'q' : 'p'}`, 'aria-label': 'Kitchen' }, tabs.map(([k, label]) => el('a', {
@@ -1851,6 +1857,10 @@ const parentQueue = parentOnly(async (flash) => {
             ? `${names(c.profile_ids)} · ${c.level.name} · ${c.level.week ? `Week ${c.level.week} of ${c.level.weeks}` : `${c.done} of ${c.total} cooked`} · Starts with ${c.level.starts === 'explore' ? 'Explore' : 'Familiar'}`
             : `${names(c.profile_ids)} · ${c.per_week} a week · ${c.done} of ${c.total} cooked`)),
         el('a', { class: 'hbtn', href: `#/parent/courses/${c.id}` }, 'Edit')),
+      // Print and complete offline (§6.22, release 3): as the course's first
+      // learner, with Who did it for the rest.
+      me.family.release >= OFFLINE_RELEASE && c.profile_ids.length
+        ? offlineButtons(offlineCtx(), { profile: { id: c.profile_ids[0], name: names(c.profile_ids) }, level: Boolean(c.level), cls: 'hbtn', after: () => again('Marked done offline.') }) : null,
       c.total ? el('p', { class: 'mut small', style: 'margin:0' },
         c.projected_finish ? `Planned finish: week of ${fmtDay(c.planned_finish)}. ${c.started ? behind : `Starts ${fmtDay(c.start_date)}`}.` : 'Every lesson is cooked.')
         : el('p', { class: 'mut small' }, 'No lessons in this course can be cooked yet.'),

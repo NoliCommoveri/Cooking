@@ -7451,3 +7451,42 @@ Owner, 2026-10-29: "Ok so are we ready to release and remove fixed dates".
   family's dates either way: the fixed window doesn't come back.
 - Screenshots sent: `/ops`'s Releases with Launch release 2, light and dark.
 - Tests: 433.
+
+## 281. 2026-10-30 — Print and complete offline
+
+Owner, 2026-10-30: "I want a 'completed offline' feature paired with a
+'print coursework' and 'print recipes' feature. It should allow parents OR
+kids to trigger a save as pdf window that fills with the selected number of
+weeks, then a way to mark any or all of the four components completed
+including recipe." Asked and answered: a recipe marked done is a full cook;
+parents and kids can both mark; both programs get it.
+
+- **Before:** a course was done in the app: a part was checked off with Done
+  on its page, and a recipe counted only when cooked in the player. Nothing
+  printed but Print our progress and the transcript.
+- **Now (release 3, being built, preview only; plan §6.22):**
+  - **Print recipes** and **Print coursework**, in the kitchen's main tab
+    and on the parent's course card: pick this week and up to 7 more, and
+    the print window opens (print, or save as a PDF). A paper sheet over the
+    page shows the same thing, with Close, for a device whose print window
+    doesn't open. Recipes print as the course plays them, at the family's
+    size, with the diet's changes and, in a week touching the unleavened
+    days, the unleavened swaps or version; a box by each ingredient and step.
+    Coursework is a Level week's Knowledge, Drill, and Beyond the Recipe
+    pages, with the quiz to tick and lines to write on.
+  - **Completed offline:** the weeks, the day it was done (not a day to
+    come, and not the Sabbath), who did it, and a tick for each of the
+    four components with All of it. A recipe ticked is a full cook on that
+    day for everyone ticked, in the version the course plays (its
+    unleavened one on a feast day; a leavened one is refused then); a part
+    is checked off on that day. Done ones show ticked; a second mark adds
+    nothing.
+  - `src/worker/offline.js`: `GET /api/profiles/:id/offline?weeks=n` (the
+    weeks from the schedule, with each Level week's parts and pages) and
+    `POST` to mark them. `plan.js` gains `offlineWeeks`. No schema change.
+  - Release 3 in `src/worker/release.js`, marked as being built.
+- Screenshots sent: the kitchen's buttons in both kitchen themes, light and
+  dark; the print dialog; the coursework and recipe sheets, and the PDF it
+  saves; Completed offline, before and after Mark done; the parent's course
+  card, light and dark.
+- Tests: 437 (four new, `test/worker-offline.test.js`).

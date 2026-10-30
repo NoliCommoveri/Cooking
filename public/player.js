@@ -805,3 +805,50 @@ export async function openLesson(mount, { profile, family, lessonId, variation =
   });
   draw();
 }
+
+// A lesson as a printed recipe (§6.22): the version cooked, at the family's
+// size, with the diet's changes and, in a week that touches the unleavened
+// days, the unleavened swaps or version (§6.20), as the player would cook it.
+// Returns the HTML of one page.
+export async function recipeSheet({ family, lessonId, variation = null, servings, feastDays = false, kicker = '' }) {
+  const [R, B] = await Promise.all([getRegistry(), getLesson(lessonId)]);
+  const ING = R.ingredients;
+  let L = lessonVersion(B, variation);
+  if (feastDays && R.leaven) L = feastCook(B, L, ING, family.diet_filters, R.leaven);
+  let view = dietView(L, ING, family.diet_filters);
+  const dietApplied = new Set(view.applied.map((x) => `${x.for}>${x.use}`)), dietLeft = [...view.leftOut];
+  if (feastDays && R.leaven) {
+    const fv = feastView(L, ING, family.diet_filters, R.leaven);
+    if (fv.ok && (fv.applied.length || fv.leftOut.length)) view = withFeast(view, fv);
+  }
+  const name = (id) => (ING[id]?.name ?? id).toLowerCase();
+  const options = servingOptions(L);
+  const n = options.reduce((a, b) => (Math.abs(b - servings) < Math.abs(a - servings) ? b : a));
+  const sc = scaleLesson(L, ING, n);
+  const leftOut = new Set(view.leftOut);
+  const notes = [
+    ...view.applied.filter((x) => dietApplied.has(`${x.for}>${x.use}`)).map((x) => `Use ${name(x.use)} instead of ${name(x.for)}.`),
+    ...dietLeft.map((id) => `Leave out the ${name(id)}.`),
+  ];
+  const feast = [
+    ...(L.variation && L.variation === unleavenedVersion(B)?.id ? [`This is the unleavened version of ${B.title}.`] : []),
+    ...(view.feast ?? []).map((x) => `Use ${name(x.use)} instead of ${name(x.for)}.`),
+    ...view.leftOut.filter((id) => !dietLeft.includes(id)).map((id) => `Leave out the ${name(id)}.`),
+  ];
+  const groups = [...new Set(sc.ingredients.map((i) => i.group))];
+  const lines = groups.map((g) => `${g ? `<h4>${esc(g)}</h4>` : ''}<ul class="ps-ings">${sc.ingredients.filter((i) => i.group === g && !leftOut.has(i.id))
+    .map((i) => `<li><span class="ps-box"></span>${esc(i.line)}${i.prep ? `, ${esc(i.prep)}` : ''}${i.optional ? ' <i>(optional)</i>' : ''}</li>`).join('')}</ul>`).join('');
+  const tools = L.equipment.map((id) => R.equipment[id]?.name ?? id);
+  const steps = sc.steps.map((s) => `<li><span class="ps-box"></span><div>${s.hazard ? `<b class="ps-haz">${esc(LVL[s.safety]?.head ?? '')}: ${esc(s.hazard)}.</b> ` : ''}${esc(s.text)}${s.look ? `<br><i>Look for: ${esc(s.look)}</i>` : ''}${s.tip ? `<br><small>Tip: ${esc(s.tip)}</small>` : ''}</div></li>`).join('');
+  return `<article class="ps-page ps-recipe">
+    ${kicker ? `<p class="ps-kick">${esc(kicker)}</p>` : ''}<h2>${esc(L.title)}</h2>${L.versionOf ? `<p class="ps-sub">A version of ${esc(L.versionOf)}</p>` : ''}
+    <p class="ps-meta">${esc(L.skill)} · About ${L.totalMinutes} minutes · Serves ${n}</p>
+    ${notes.length ? `<p class="ps-note"><b>For your family:</b> ${esc(notes.join(' '))}</p>` : ''}
+    ${feast.length ? `<p class="ps-note"><b>For Unleavened Bread:</b> ${esc(feast.join(' '))}</p>` : ''}
+    ${sc.note ? `<p class="ps-note">${esc(sc.note)}</p>` : ''}
+    <h3>Ingredients</h3>${lines}
+    <h3>Tools</h3><p>${esc(tools.join(', '))}</p>
+    <h3>Steps</h3><ol class="ps-steps">${steps}</ol>
+    <p class="ps-done">Cooked on: ____________ &nbsp; By: ________________________</p>
+  </article>`;
+}

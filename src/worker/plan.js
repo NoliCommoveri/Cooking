@@ -23,7 +23,7 @@ import { variationChoices } from './variations.js';
 import { releaseOn, familyRelease, LEVELS_RELEASE, UNLEAVENED_RELEASE } from './release.js';
 import { datesFor, feastGuard } from './unleavened.js';
 import { unleavened, feastOk } from '../content/leaven.js';
-import { unleavenedOn } from '../content/calendars.js';
+import { unleavenedOn, unleavenedWeek } from '../content/calendars.js';
 import { PARTS, PART_NAMES, coursePartsOf, weekParts, plannedMinutes, hoursOf } from '../content/levels.js';
 
 const id = () => randomHex(8);
@@ -97,7 +97,7 @@ const nearestSize = (L, n) => {
   return options.includes(n) ? n : options.reduce((a, b) => (Math.abs(b - n) < Math.abs(a - n) ? b : a));
 };
 // A lesson's or a family recipe's nearest size: a recipe scales freely, 1 to 12.
-const sizeFor = (lid, n) => nearestSize(lessonById[lid] ?? { scaling: { mode: 'free', min: 1, max: 12 } }, n);
+export const sizeFor = (lid, n) => nearestSize(lessonById[lid] ?? { scaling: { mode: 'free', min: 1, max: 12 } }, n);
 
 // The family's calendar day, from the browser's offset (?tz=300). A missing or
 // odd offset counts as UTC.
@@ -742,6 +742,39 @@ const levelWeekNow = (st) => {
   return at ? st.lessons.weekOf[at.id] ?? null : null;
 };
 
+// A Level week's part for a profile: its page, and whether it's checked off or skipped.
+function levelPartOut(st, pid, w, part) {
+  const t = st.tasks[`${w.week}:${part}:${pid}`];
+  // A page's writing boxes come with what this profile typed in them (14f).
+  const written = w[part].write ? Object.fromEntries(w[part].write.map((x) => [x.id, st.writing?.[`${w.week}:${x.id}:${pid}`] ?? ''])) : undefined;
+  return { week: w.week, part, ...w[part], ...(written ? { written } : {}), done_at: doneAt(t), skipped: Boolean(t?.skipped) };
+}
+
+// The course weeks a profile prints or marks done offline (§6.22): this week
+// and the ones after it at the pace, up to n weeks with something in them.
+// Each has its recipes (the version the course plays, from version(id)) and,
+// on a Level course, the parts it keeps on with their pages. dates: the
+// family's Unleavened Bread dates, or null.
+export function offlineWeeks(st, pid, n, version, dates = null) {
+  const V = st.lessons.level;
+  const on = st.course.parts ?? PARTS;
+  const ids = (x) => x.lessons.map((y) => (typeof y === 'string' ? y : y.id));
+  const all = [st.sched.this_week, st.sched.next_week, ...st.sched.ahead].map((x) => ({ week: x.week, ids: ids(x) })).filter((x) => x.ids.length).slice(0, n);
+  return all.map((x) => ({
+    week_start: x.week,
+    feast: Boolean(dates && unleavenedWeek(x.week, dates)),
+    entries: x.ids.map((id) => {
+      const lw = V ? V.weeks.find((w) => w.week === st.lessons.weekOf[id]) : null;
+      const written = Boolean(lessonById[id] || (V && ownReady(st.lessons.own, id)));
+      return {
+        id, title: V ? titleOfLevel(V, id, st.lessons.own) : lessonById[id]?.title ?? id, written, library: Boolean(lessonById[id]),
+        variation: lessonById[id] ? version(id) || null : null, done: Boolean(st.done[id]),
+        ...(lw ? { level_week: lw.week, parts: weekParts(lw, on).map((part) => levelPartOut(st, pid, lw, part)) } : {}),
+      };
+    }),
+  }));
+}
+
 // What a profile's kitchen shows of its Level course (12c): this week with
 // its recipe and three parts, and the parts still open from weeks already
 // reached (their recipe cooked). A part not checked off never holds the
@@ -750,12 +783,7 @@ function levelFor(st, pid, day) {
   const V = st.lessons.level, now = levelWeekNow(st);
   const unitName = Object.fromEntries(V.units.map((u) => [u.number, u.name]));
   const on = st.course.parts ?? PARTS;
-  const partOut = (w, part) => {
-    const t = st.tasks[`${w.week}:${part}:${pid}`];
-    // A page's writing boxes come with what this profile typed in them (14f).
-    const written = w[part].write ? Object.fromEntries(w[part].write.map((x) => [x.id, st.writing?.[`${w.week}:${x.id}:${pid}`] ?? ''])) : undefined;
-    return { week: w.week, part, ...w[part], ...(written ? { written } : {}), done_at: doneAt(t), skipped: Boolean(t?.skipped) };
-  };
+  const partOut = (w, part) => levelPartOut(st, pid, w, part);
   const weekOut = (w) => {
     const id = st.lessons.idOf[w.week] ?? null;
     return {

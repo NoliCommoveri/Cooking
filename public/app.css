@@ -366,6 +366,48 @@ fieldset.psec legend{font-size:13px;letter-spacing:.07em;text-transform:uppercas
 .pf-piece h3{margin:0}
 .pf-piece .mut{margin:2px 0 8px}
 .pf-body{white-space:pre-wrap;line-height:1.5}
+/* Print recipes and Print coursework (§6.22): a paper sheet over the page,
+   always black on white; printing shows it alone. */
+.printsheet{position:fixed;inset:0;z-index:80;overflow:auto;background:#fff;color:#111;padding:16px;font-family:var(--h-font,system-ui),system-ui,sans-serif}
+.printsheet .acts{position:sticky;top:0;background:#fff;padding-bottom:10px;z-index:1}
+.printsheet .hbtn{color:#111;background:#fff;border-color:#999}
+.printsheet .hbtn.pri{background:#1f6b55;color:#fff;border-color:#1f6b55}
+body.printing{overflow:hidden}
+.ps-body{max-width:720px;margin:0 auto;line-height:1.45}
+.ps-head h1{margin:0;font-size:24px}
+.ps-head p{margin:2px 0 12px;color:#444;font-size:13px}
+.ps-page{border-top:2px solid #999;padding-top:12px;margin-top:18px}
+.ps-page h2{margin:2px 0;font-size:22px}
+.ps-page h3{margin:14px 0 4px;font-size:16px}
+.ps-page h4{margin:8px 0 2px;font-size:14px}
+.ps-kick{margin:0;text-transform:uppercase;letter-spacing:.06em;font-size:12px;font-weight:700;color:#444}
+.ps-sub,.ps-meta{margin:2px 0;color:#444}
+.ps-note{border-left:3px solid #999;padding:2px 0 2px 10px;margin:8px 0}
+.ps-ings,.ps-choices{list-style:none;padding:0;margin:0}
+.ps-ings li,.ps-choices li{display:flex;gap:8px;align-items:flex-start;margin:3px 0}
+.ps-steps{list-style:none;padding:0;counter-reset:st}
+.ps-steps li{display:flex;gap:8px;margin:8px 0;counter-increment:st}
+.ps-steps li>div::before{content:counter(st) ". ";font-weight:700}
+.ps-box{flex:none;width:13px;height:13px;border:1.5px solid #333;border-radius:2px;margin-top:4px}
+.ps-haz{font-weight:700}
+.ps-quiz>li{margin:8px 0}
+.ps-write{margin:12px 0}
+.ps-write small{display:block;color:#444}
+.ps-lines{height:150px;background:repeating-linear-gradient(#fff 0 27px,#999 27px 28px)}
+.ps-typed{white-space:pre-wrap;border:1px solid #999;padding:8px}
+.ps-done{margin-top:16px;color:#333}
+.offweek{border:1px solid var(--h-line);border-radius:10px;padding:8px 12px;margin:8px 0;display:grid;gap:2px}
+.offweek legend{font-weight:800;padding:0 4px}
+.offwho{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:center}
+.offitem{display:flex;gap:10px;align-items:flex-start;min-height:40px;padding:4px 0;font-weight:600;cursor:pointer}
+.offitem input{flex:none;width:22px;height:22px;margin:2px 0 0;accent-color:var(--h-acc)}
+@media print{
+  body.printing>*:not(.printsheet){display:none!important}
+  body.printing .printsheet{position:static;overflow:visible;padding:0}
+  .ps-page{break-before:page;border-top:0;margin-top:0}
+  .ps-head+.ps-page{break-before:auto}
+  .ps-steps li,.ps-quiz>li,.ps-write{break-inside:avoid}
+}
 @media print{
   :root{--h-bg:#fff;--h-fg:#000;--h-line:#999;--h-mut:#333}
   body{background:#fff;color:#000}
