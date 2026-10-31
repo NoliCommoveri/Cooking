@@ -7509,3 +7509,18 @@ kitchen. Hide everything but how it works behind a ..."
 - Screenshots sent: the kitchen closed and with the menu open, in both
   kitchen themes, light and dark; Print recipes opened from the menu.
 - Tests: 437.
+
+## 283. 2026-10-31 — Print and complete offline join release 2
+
+Owner, 2026-10-31: "Fold the print into the unleavened bread release, not
+make it release 3".
+
+- **Before:** Print recipes, Print coursework, and Completed offline (281,
+  282) were release 3, marked as being built, so only preview families saw
+  them and release 3 couldn't launch.
+- **Now:** they're part of release 2, with the Unleavened Bread dates.
+  Release 3 is gone from `src/worker/release.js`; `OFFLINE_RELEASE` is
+  release 2's number, and release 2's name on `/ops` says it includes them.
+  **Launch release 2 for everyone** on `/ops` launches both. Nothing else
+  changed.
+- Tests: 437.

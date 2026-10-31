@@ -1,4 +1,4 @@
-// Print and complete offline (plan §6.22, release 3): Print recipes and Print
+// Print and complete offline (plan §6.22, release 2): Print recipes and Print
 // coursework fill the browser's print window (where it can be saved as a PDF)
 // with a course's coming weeks, and Completed offline marks what was done
 // away from the app: any of a week's four parts, the recipe included. For a
@@ -12,7 +12,7 @@ const ORDER = ['knowledge', 'drill', 'recipe', 'sabbath'];
 const NAMES = { ...PART_NAMES, recipe: 'Recipe' };
 const MAX_WEEKS = 8;
 // The release this comes with (src/worker/release.js).
-export const OFFLINE_RELEASE = 3;
+export const OFFLINE_RELEASE = 2;
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
 const load = (ctx, pid, n) => ctx.api('GET', `/api/profiles/${pid}/offline?weeks=${n}&${ctx.tz()}`);
