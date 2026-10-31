@@ -738,7 +738,7 @@ async function kitchen(id, tab = sessionGet(`cpr.tab.${id}`) ?? 'path') {
           setMuted(!isMuted());
           b.textContent = isMuted() ? 'Sound effects: off' : 'Sound effects: on';
         }],
-        // Print and complete offline (§6.22, release 3), for a profile on a course.
+        // Print and complete offline (§6.22, release 2), for a profile on a course.
         ...(mine.order && me.family.release >= OFFLINE_RELEASE ? offlineItems(offlineCtx(), { profile: p, level: Boolean(mine.level), after: () => kitchen(id, current) }) : []),
         // A kid's own login logs out here, no PIN (§8.3a).
         me.kid ? ['Log out', async () => {
@@ -1867,7 +1867,7 @@ const parentQueue = parentOnly(async (flash) => {
             ? `${names(c.profile_ids)} · ${c.level.name} · ${c.level.week ? `Week ${c.level.week} of ${c.level.weeks}` : `${c.done} of ${c.total} cooked`} · Starts with ${c.level.starts === 'explore' ? 'Explore' : 'Familiar'}`
             : `${names(c.profile_ids)} · ${c.per_week} a week · ${c.done} of ${c.total} cooked`)),
         el('a', { class: 'hbtn', href: `#/parent/courses/${c.id}` }, 'Edit')),
-      // Print and complete offline (§6.22, release 3): as the course's first
+      // Print and complete offline (§6.22, release 2): as the course's first
       // learner, with Who did it for the rest.
       me.family.release >= OFFLINE_RELEASE && c.profile_ids.length
         ? offlineButtons(offlineCtx(), { profile: { id: c.profile_ids[0], name: names(c.profile_ids) }, level: Boolean(c.level), cls: 'hbtn', after: () => again('Marked done offline.') }) : null,

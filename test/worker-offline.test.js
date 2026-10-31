@@ -1,4 +1,4 @@
-// Print and complete offline (plan §6.22), release 3: the weeks to print, and
+// Print and complete offline (plan §6.22), release 2: the weeks to print, and
 // marking a week's parts and recipe done away from the app.
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
@@ -90,7 +90,7 @@ test('completed offline refuses the Sabbath, a day still to come, and a recipe o
   assert.equal((await mark({ date: '2027-01-12', recipes: [] })).status, 400, 'nothing ticked');
 });
 
-test('Cook Around the World prints and marks recipes only; a kid marks their own; it all waits for release 3', async (t) => {
+test('Cook Around the World prints and marks recipes only; a kid marks their own; it all waits for release 2', async (t) => {
   on('2027-01-14');
   t.after(() => mock.timers.reset());
   const { a, ava } = await setup();

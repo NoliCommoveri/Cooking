@@ -1,4 +1,4 @@
-// Print and complete offline (plan §6.22, release 3). A learner or a parent
+// Print and complete offline (plan §6.22, release 2). A learner or a parent
 // prints the next weeks of a course (its recipes, and on a Level course its
 // Knowledge, Drill, and Beyond the Recipe pages), and afterwards marks what was
 // done away from the app: any of a week's four parts, the recipe included. A
